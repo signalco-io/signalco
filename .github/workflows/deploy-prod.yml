@@ -30,8 +30,6 @@ jobs:
     - name: Vercel Action
       uses: amondnet/vercel-action@v19.0.1+1
       with:
-        # Vercel token
-        vercel-token: 
-        # 
-        zeit-token: 
-        # 
+        vercel-project-id: ${{secrets.VERCEL_PROJECTID}}
+        vercel-org-id: ${{secrets.VERCEL_ORGID}}
+        vercel-token: ${{secrets.VERCEL_TOKEN}}
