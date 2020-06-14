@@ -7,6 +7,7 @@ import {
   CardContent,
   CardActions,
   CardHeader,
+  Box,
 } from "@material-ui/core";
 import { useAuth } from "react-use-auth";
 
@@ -37,15 +38,17 @@ const Login = () => {
         </Grid>
       </Grid>
       <Grid item>
-        <Button
-          onClick={login}
-          variant="contained"
-          color="primary"
-          size="large"
-          fullWidth
-        >
-          Login
-        </Button>
+        <Box width={235}>
+          <Button
+            onClick={login}
+            variant="outlined"
+            color="primary"
+            size="large"
+            fullWidth
+          >
+            Login
+          </Button>
+        </Box>
       </Grid>
     </Grid>
   );
