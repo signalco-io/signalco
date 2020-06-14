@@ -20,6 +20,8 @@ function MyApp(props) {
     }
   }, []);
 
+  const Layout = Component.layout;
+
   return (
     <React.Fragment>
       <Head>
@@ -37,7 +39,13 @@ function MyApp(props) {
             auth0_domain="dfnoise.eu.auth0.com"
             auth0_client_id="TpdYqotCp3E7VS4HFUnWKIXfRnfPpfeV"
           >
-            <Component {...pageProps} />
+            {Layout ? (
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            ) : (
+              <Component {...pageProps} />
+            )}
           </AuthProvider>
         </StylesProvider>
       </ThemeProvider>
