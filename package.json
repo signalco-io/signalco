@@ -13,6 +13,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "clsx": "1.1.1",
     "next": "9.4.4",
+    "nextjs-progressbar": "^0.0.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-use-auth": "^0.7.5",

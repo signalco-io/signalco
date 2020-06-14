@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import App from "next/app";
 import { AuthProvider } from "react-use-auth";
 import "../styles/global.scss";
+import NextNprogress from "nextjs-progressbar";
 
 function MyApp(props) {
   const { Component, pageProps } = props;
@@ -40,13 +41,21 @@ function MyApp(props) {
             auth0_domain="dfnoise.eu.auth0.com"
             auth0_client_id="TpdYqotCp3E7VS4HFUnWKIXfRnfPpfeV"
           >
-            {Layout ? (
-              <Layout>
+            <>
+              {Layout ? (
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              ) : (
                 <Component {...pageProps} />
-              </Layout>
-            ) : (
-              <Component {...pageProps} />
-            )}
+              )}
+              <NextNprogress
+                color="#fff"
+                startPosition={0.3}
+                stopDelayMs={200}
+                height="2"
+              />
+            </>
           </AuthProvider>
         </StylesProvider>
       </ThemeProvider>
