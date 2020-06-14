@@ -1,4 +1,4 @@
-![Logo](/public/images/icon-72x72.png)
+![Logo](/public/images/icon-light-72x72.png)
 
 # Signal
 
