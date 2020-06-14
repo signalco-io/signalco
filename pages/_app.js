@@ -7,6 +7,7 @@ import theme from "../src/theme";
 import { useRouter } from "next/router";
 import App from "next/app";
 import { AuthProvider } from "react-use-auth";
+import "../styles/global.scss";
 
 function MyApp(props) {
   const { Component, pageProps } = props;

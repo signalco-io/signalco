@@ -9,7 +9,6 @@ import {
   CardHeader,
 } from "@material-ui/core";
 import { useAuth } from "react-use-auth";
-import styles from "./Login.module.scss";
 
 const Login = () => {
   const { login } = useAuth();
@@ -17,7 +16,7 @@ const Login = () => {
   return (
     <Grid
       container
-      className={styles.root}
+      className="login__root"
       spacing={4}
       alignItems="center"
       direction="column"
