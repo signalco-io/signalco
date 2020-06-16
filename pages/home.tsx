@@ -1,8 +1,27 @@
-import { Typography } from "@material-ui/core";
+import {
+  Typography,
+  Card,
+  CardHeader,
+  CardContent,
+  Box,
+  Grid,
+} from "@material-ui/core";
 import AppLayout from "../components/AppLayout";
+import StorageList from "../components/management/storage/StorageList";
 
 const Home = () => {
-  return <Typography variant="h1">Home</Typography>;
+  return (
+    <Grid container>
+      <Grid item xs={3}>
+        <Card>
+          <CardHeader title="Storage Tables" />
+          <CardContent>
+            <StorageList />
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
+  );
 };
 
 Home.layout = AppLayout;
