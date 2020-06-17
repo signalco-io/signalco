@@ -1,26 +1,30 @@
-import {
-  Typography,
-  Card,
-  CardHeader,
-  CardContent,
-  Box,
-  Grid,
-} from "@material-ui/core";
+import { Typography, Box, Grid, Paper } from "@material-ui/core";
 import AppLayout from "../components/AppLayout";
-import StorageList from "../components/management/storage/StorageList";
+import StorageListTables from "../components/management/storage/StorageListTables";
+import StorageListQueues from "../components/management/storage/StorageListQueues";
 
 const Home = () => {
   return (
-    <Grid container>
-      <Grid item xs={3}>
-        <Card>
-          <CardHeader title="Storage Tables" />
-          <CardContent>
-            <StorageList />
-          </CardContent>
-        </Card>
+    <Box p={2}>
+      <Grid container spacing={2}>
+        <Grid item xs={3}>
+          <Paper>
+            <Box pt={2} px={2}>
+              <Typography variant="h4">Storage Tables</Typography>
+            </Box>
+            <StorageListTables />
+          </Paper>
+        </Grid>
+        <Grid item xs={3}>
+          <Paper>
+            <Box pt={2} px={2}>
+              <Typography variant="h4">Storage Queues</Typography>
+            </Box>
+            <StorageListQueues />
+          </Paper>
+        </Grid>
       </Grid>
-    </Grid>
+    </Box>
   );
 };
 
