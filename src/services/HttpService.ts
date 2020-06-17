@@ -4,7 +4,10 @@ import { trimStartChar } from "../helpers/StringHelpers";
 
 export default class HttpService {
   public static token: string | null = null;
-  private static getBearerToken = () => `Bearer ${HttpService.token}`;
+  private static getBearerToken = () => {
+    if (HttpService.token == null) throw new Error("Not logged in.");
+    return `Bearer ${HttpService.token}`;
+  };
 
   public static async getAsync(url: string): Promise<any> {
     console.log("Sending request to", url);

@@ -5,14 +5,12 @@ import {
   TableCell,
   TableBody,
   Link,
-  Typography,
-  Box,
 } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
 import StorageRepository from "../../../src/management/storage/StorageRepository";
-import styles from "./StorageListQueues.module.scss";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
+import Alert from "@material-ui/lab/Alert";
 
 const StorageListQueues = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -68,7 +66,9 @@ const StorageListQueues = () => {
         ) : error ? (
           <TableRow>
             <TableCell colSpan={2}>
-              {(error || "Unknown error").toString()}
+              <Alert severity="error">
+                {(error || "Unknown error").toString()}
+              </Alert>
             </TableCell>
           </TableRow>
         ) : (

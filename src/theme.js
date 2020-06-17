@@ -19,7 +19,6 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontSize: 12,
     h1: {
       fontSize: "3rem",
       fontFamily: "Raleway",
