@@ -13,7 +13,7 @@ const AUTHCallback = () => {
 
     const token = parsedHash.get("access_token");
     if (token != null && typeof localStorage !== "undefined") {
-      localStorage.setItem("auth:token", token);
+      localStorage.setItem("auth:token", JSON.stringify(token));
       HttpService.token = token;
     }
 

@@ -7,13 +7,15 @@ import { useEffect } from "react";
 const Layout = (props: { children: React.ReactNode }) => {
   const { isAuthenticated, authResult } = useAuth();
 
-  useEffect(() => {
-    const token = localStorage.getItem("auth:token");
-    if (HttpService.token == null && token != null) {
-      HttpService.token = token;
-      console.log("Layout Token", token);
+  if (HttpService.token == null && typeof window !== "undefined") {
+    const tokenRaw = localStorage.getItem("auth:token");
+    if (tokenRaw) {
+      const token = JSON.parse(tokenRaw.toString());
+      if (token != null) {
+        HttpService.token = token;
+      }
     }
-  }, []);
+  }
 
   return (
     <Grid container direction="column">
