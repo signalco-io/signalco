@@ -35,7 +35,7 @@ const NavProfile = () => {
             )}
           </Grid>
           <Grid item>
-            <IconButton onClick={logout} color="primary" title="Logout">
+            <IconButton onClick={() => logout()} color="primary" title="Logout">
               <ExitToAppIcon />
             </IconButton>
           </Grid>
