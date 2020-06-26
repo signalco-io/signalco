@@ -4,15 +4,19 @@ import Head from "next/head";
 import { ThemeProvider, StylesProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
-import { useRouter } from "next/router";
 import App from "next/app";
-import { AuthProvider } from "react-use-auth";
+import { Auth0Provider } from "@auth0/auth0-react";
 import "../styles/global.scss";
 import NextNprogress from "nextjs-progressbar";
+import Router from "next/router";
+
+const onRedirectCallback = (appState) => {
+  // Use Next.js's Router.replace method to replace the url
+  Router.replace(appState?.returnTo || "/");
+};
 
 function MyApp(props) {
   const { Component, pageProps } = props;
-  const router = useRouter();
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.
@@ -36,10 +40,13 @@ function MyApp(props) {
       <ThemeProvider theme={theme}>
         <StylesProvider injectFirst>
           <CssBaseline />
-          <AuthProvider
-            navigate={router.push}
-            auth0_domain="dfnoise.eu.auth0.com"
-            auth0_client_id="TpdYqotCp3E7VS4HFUnWKIXfRnfPpfeV"
+          <Auth0Provider
+            redirectUri={
+              typeof window !== "undefined" && window.location.origin
+            }
+            onRedirectCallback={onRedirectCallback}
+            domain="dfnoise.eu.auth0.com"
+            clientId="TpdYqotCp3E7VS4HFUnWKIXfRnfPpfeV"
           >
             <>
               {Layout ? (
@@ -56,7 +63,7 @@ function MyApp(props) {
                 height="2"
               />
             </>
-          </AuthProvider>
+          </Auth0Provider>
         </StylesProvider>
       </ThemeProvider>
     </React.Fragment>

@@ -1,18 +1,17 @@
-import { useAuth } from "react-use-auth";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/router";
 import Login from "../components/Login";
-import { useState, useEffect } from "react";
 
 export default function Index() {
-  const { isAuthenticated } = useAuth();
-  const [isLoading, setIsLoading] = useState(true);
+  const { isAuthenticated, isLoading, error } = useAuth0();
   const router = useRouter();
 
-  useEffect(() => setIsLoading(false), []);
-
   if (isLoading) return null;
+  if (error) {
+    return <div>{error.message}</div>;
+  }
 
-  if (isAuthenticated()) {
+  if (isAuthenticated) {
     router.push("/home", "/home");
     return null;
   } else {

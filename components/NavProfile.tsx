@@ -1,5 +1,5 @@
 import Button from "@material-ui/core/Button";
-import { useAuth } from "react-use-auth";
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   Grid,
   Avatar,
@@ -12,7 +12,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 const NavProfile = () => {
-  const { logout, user } = useAuth();
+  const { logout, user } = useAuth0();
 
   return (
     <AppBar position="static" color="transparent">

@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^1.0.0",
     "@material-ui/core": "4.10.2",
     "@material-ui/icons": "4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
@@ -17,7 +18,6 @@
     "nextjs-progressbar": "^0.0.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-use-auth": "^0.7.5",
     "sass": "^1.26.8"
   },
   "devDependencies": {

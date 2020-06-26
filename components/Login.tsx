@@ -9,10 +9,10 @@ import {
   CardHeader,
   Box,
 } from "@material-ui/core";
-import { useAuth } from "react-use-auth";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = () => {
-  const { login } = useAuth();
+  const { loginWithRedirect } = useAuth0();
 
   return (
     <Grid
@@ -40,7 +40,7 @@ const Login = () => {
       <Grid item>
         <Box width={235}>
           <Button
-            onClick={login}
+            onClick={() => loginWithRedirect()}
             variant="outlined"
             color="primary"
             size="large"

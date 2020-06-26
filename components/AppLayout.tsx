@@ -1,20 +1,26 @@
 import { Grid } from "@material-ui/core";
 import NavProfile from "./NavProfile";
-import { useAuth } from "react-use-auth";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import { useEffect, useState } from "react";
 import HttpService from "../src/services/HttpService";
-import { useEffect } from "react";
 
 const Layout = (props: { children: React.ReactNode }) => {
-  const { isAuthenticated, authResult } = useAuth();
+  const { getAccessTokenSilently } = useAuth0();
+  const [isLoading, setIsLoading] = useState(true);
 
-  if (HttpService.token == null && typeof window !== "undefined") {
-    const tokenRaw = localStorage.getItem("auth:token");
-    if (tokenRaw) {
-      const token = JSON.parse(tokenRaw.toString());
-      if (token != null) {
-        HttpService.token = token;
-      }
-    }
+  useEffect(() => {
+    const setAccessTokenAsync = async (): Promise<void> => {
+      const token = await getAccessTokenSilently();
+      HttpService.token = token;
+      console.log("Set token", token);
+      setIsLoading(false);
+    };
+
+    setAccessTokenAsync();
+  }, []);
+
+  if (isLoading) {
+    return <>Logging in...</>;
   }
 
   return (
@@ -27,4 +33,4 @@ const Layout = (props: { children: React.ReactNode }) => {
   );
 };
 
-export default Layout;
+export default withAuthenticationRequired(Layout);
