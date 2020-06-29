@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 import HttpService from "../src/services/HttpService";
 
 const Layout = (props: { children: React.ReactNode }) => {
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, user } = useAuth0();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const setAccessTokenAsync = async (): Promise<void> => {
       const token = await getAccessTokenSilently();
+      console.log("User", user);
+
       HttpService.token = token;
       console.log("Set token", token);
       setIsLoading(false);

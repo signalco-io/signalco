@@ -47,6 +47,7 @@ function MyApp(props) {
             onRedirectCallback={onRedirectCallback}
             domain="dfnoise.eu.auth0.com"
             clientId="TpdYqotCp3E7VS4HFUnWKIXfRnfPpfeV"
+            audience="https://api.signal.dfnoise.com"
           >
             <>
               {Layout ? (
