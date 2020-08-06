@@ -9,22 +9,28 @@ import {
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
-import { camelToSentenceCase, isUrl } from "../../../src/helpers/StringHelpers";
+import {
+  camelToSentenceCase,
+  isAbsoluteUrl,
+} from "../../../src/helpers/StringHelpers";
+import IErrorProps from "../interfaces/IErrorProps";
+import ResultsPlaceholder from "../indicators/ResultsPlaceholder";
 
-interface IAutoTableProps extends IAutoTableErrorProps {
-  items: Array<object> | null;
+export interface IAutoTableItem {
+  id: string;
+  [key: string]: any;
+}
+
+export interface IAutoTableProps<T extends IAutoTableItem> extends IErrorProps {
+  items: Array<T> | null;
   isLoading: boolean;
 }
 
-interface IAutoTableErrorProps {
-  error: string | null;
+export interface IAutoTableCellRendererProps {
+  value: any;
 }
 
-interface IAutoTableCellRendererProps {
-  value: any | null;
-}
-
-const ErrorRow = (props: IAutoTableErrorProps) => {
+const ErrorRow = (props: IErrorProps) => {
   return (
     <TableRow>
       <TableCell>
@@ -36,8 +42,8 @@ const ErrorRow = (props: IAutoTableErrorProps) => {
   );
 };
 
-const CellRenderer = (props: IAutoTableCellRendererProps) => {
-  if (isUrl(props.value))
+function CellRenderer(props: IAutoTableCellRendererProps) {
+  if (typeof props.value === "string" && isAbsoluteUrl(props.value as string))
     return (
       <TableCell title={props.value}>
         <Link href={props.value} rel="noopener" target="_blank">
@@ -47,14 +53,17 @@ const CellRenderer = (props: IAutoTableCellRendererProps) => {
     );
 
   return <TableCell>{props.value}</TableCell>;
-};
+}
 
-const AutoTable = (props: IAutoTableProps) => {
+function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
   const headers =
     props.items &&
     props.items.length > 0 &&
-    typeof props.items[0] === "object" &&
-    Object.keys(props.items[0]).map((ik) => camelToSentenceCase(ik));
+    Object.keys(props.items[0])
+      .filter((ik) => ik !== "id")
+      .map((ik) => {
+        return { id: ik, value: camelToSentenceCase(ik) };
+      });
 
   return (
     <Table>
@@ -66,7 +75,7 @@ const AutoTable = (props: IAutoTableProps) => {
           <TableHead>
             <TableRow>
               {headers ? (
-                headers.map((h) => <TableCell>{h}</TableCell>)
+                headers.map((h) => <TableCell key={h.id}>{h.value}</TableCell>)
               ) : (
                 <TableCell></TableCell>
               )}
@@ -86,19 +95,19 @@ const AutoTable = (props: IAutoTableProps) => {
             {props.items &&
               props.items.length > 0 &&
               props.items.map((item) => (
-                <TableRow>
-                  {typeof item === "object" ? (
-                    Object.values(item).map((itemValue) => (
-                      <CellRenderer value={itemValue} />
-                    ))
-                  ) : (
-                    <CellRenderer value={item} />
-                  )}
+                <TableRow key={item.id}>
+                  {Object.keys(item)
+                    .filter((ik) => ik !== "id")
+                    .map((itemKey) => (
+                      <CellRenderer value={item[itemKey]} key={itemKey} />
+                    ))}
                 </TableRow>
               ))}
-            {props.items && props.items.length <= 0 && (
+            {(!!!props.items || props.items.length <= 0) && (
               <TableRow>
-                <TableCell>No results</TableCell>
+                <TableCell>
+                  <ResultsPlaceholder />
+                </TableCell>
               </TableRow>
             )}
           </>
@@ -106,6 +115,6 @@ const AutoTable = (props: IAutoTableProps) => {
       </TableBody>
     </Table>
   );
-};
+}
 
 export default AutoTable;

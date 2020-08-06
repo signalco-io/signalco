@@ -1,10 +1,11 @@
 import StorageRepository from "../../../src/management/storage/StorageRepository";
-import AutoTable from "../../shared/table/AutoTable";
+import AutoTable, { IAutoTableItem } from "../../shared/table/AutoTable";
 import useAutoTable from "../../shared/table/useAutoTable";
 
 const StorageListTables = () => {
   const transformItem = (item: string) => {
     return {
+      id: item,
       name: item.substring(item.lastIndexOf("/")),
       url: item,
     };
@@ -13,7 +14,13 @@ const StorageListTables = () => {
     StorageRepository.getTablesAsync,
     transformItem
   );
-  return <AutoTable items={items} isLoading={isLoading} error={error} />;
+  return (
+    <AutoTable
+      items={items as IAutoTableItem[]}
+      isLoading={isLoading}
+      error={error}
+    />
+  );
 };
 
 export default StorageListTables;

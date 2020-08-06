@@ -1,6 +1,6 @@
 import axios from "axios";
 import AppSettingsProvider from "./AppSettingsProvider";
-import { trimStartChar } from "../helpers/StringHelpers";
+import { trimStartChar, isAbsoluteUrl } from "../helpers/StringHelpers";
 
 export default class HttpService {
   public static token: string | null = null;
@@ -10,8 +10,18 @@ export default class HttpService {
   };
 
   public static async getAsync(url: string): Promise<any> {
-    console.log("Sending request to", url);
-    const response = await axios.get(HttpService.getApiUrl(url), {
+    return this.requestAsync(url, "get", null);
+  }
+
+  public static async requestAsync(
+    url: string,
+    method: "get" | "post" | "put" | "delete",
+    data?: any
+  ) {
+    const response = await axios.request({
+      url: isAbsoluteUrl(url) ? url : HttpService.getApiUrl(url),
+      method: method,
+      data: data,
       headers: {
         Authorization: HttpService.getBearerToken(),
       },
