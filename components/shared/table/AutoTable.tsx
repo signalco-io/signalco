@@ -6,6 +6,7 @@ import {
   TableBody,
   Link,
   LinearProgress,
+  Typography,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
@@ -52,7 +53,11 @@ function CellRenderer(props: IAutoTableCellRendererProps) {
       </TableCell>
     );
 
-  return <TableCell>{props.value}</TableCell>;
+  return (
+    <TableCell>
+      <Typography variant="body2">{props.value}</Typography>
+    </TableCell>
+  );
 }
 
 function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {

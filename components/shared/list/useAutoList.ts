@@ -1,10 +1,11 @@
 import useLoadingAndError from "../../../src/hooks/useLoadingAndError";
+import { IAutoListItem } from "./AutoList";
 
-const useAutoList = <TIn, TOut>(
+const useAutoList = <TIn>(
   loadData: () => Promise<Array<TIn>>,
-  transformItem: null | ((item: TIn) => TOut) = null
+  transformItem: (item: TIn) => IAutoListItem
 ) => {
-  return useLoadingAndError<TIn, TOut>(loadData, transformItem);
+  return useLoadingAndError<TIn, IAutoListItem>(loadData, transformItem);
 };
 
 export default useAutoList;

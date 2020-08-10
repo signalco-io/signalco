@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 
 const useLoadingAndError = <TIn, TOut>(
   loadData: () => Promise<TIn[]>,
-  transformItem: null | ((item: TIn) => TOut) = null
-): [Array<TIn | TOut> | null, boolean, string | null] => {
+  transformItem: (item: TIn) => TOut
+): [Array<TOut> | undefined, boolean, string | undefined] => {
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [items, setItems] = useState<Array<TIn | TOut> | null>(null);
+  const [error, setError] = useState<string | undefined>(undefined);
+  const [items, setItems] = useState<Array<TOut> | undefined>(undefined);
 
   const loadDataAsync = async () => {
     try {
       const items = await loadData();
-      setItems(transformItem ? items.map(transformItem) : items);
+      setItems(items.map(transformItem));
     } catch (err) {
       setItems([]);
       setError(err);

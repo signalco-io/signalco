@@ -7,16 +7,8 @@ const StorageListQueues = () => {
   const transformItem = (item: string) => {
     return {
       id: item,
-      value: item,
+      value: item.substring(item.lastIndexOf("/")),
       icon: OpenInNewIcon,
-      actions: [
-        {
-          id: "1",
-          label: "test",
-          url: "http://google.com",
-          method: "get",
-        },
-      ],
     };
   };
   const [items, isLoading, error] = useAutoTable(

@@ -9,8 +9,6 @@ export interface IAutoActionButtonProps {
 
 export default function AutoActionButton(props: IAutoActionButtonProps) {
   const { action } = props;
-  const isHref = action.url && action.method == null;
-
   const [isExecuting, setIsExecuting] = useState(false);
 
   const triggerAction = async (action: IAutoAction) => {
@@ -29,53 +27,33 @@ export default function AutoActionButton(props: IAutoActionButtonProps) {
       if (action.actionCallback) action.actionCallback(response, action);
     } catch (err) {
       // TODO: Dispatch notification
+      console.error("Failed to execute AutoAction action", err);
     } finally {
       setIsExecuting(false);
     }
   };
 
+  const isHref = action.url && action.method == null;
+
   const handleClick = () => {
     if (action.onClick) action.onClick(action);
-    if (action.method) triggerAction(action);
+    if (!isHref) triggerAction(action);
   };
 
-  if (isHref) {
-    return action.icon ? (
-      <IconButton
-        aria-label={action.label}
-        title={action.label}
-        href={action.url}
-        target="_blank"
-        onClick={handleClick}
-        disabled={isExecuting}
-      >
-        {action.icon}
-      </IconButton>
-    ) : (
-      <Button
-        variant="text"
-        href={action.url}
-        target="_blank"
-        onClick={handleClick}
-        disabled={isExecuting}
-      >
-        {action.label}
-      </Button>
-    );
-  } else {
-    return action.icon ? (
-      <IconButton
-        aria-label={action.label}
-        title={action.label}
-        onClick={handleClick}
-        disabled={isExecuting}
-      >
-        {action.icon}
-      </IconButton>
-    ) : (
-      <Button variant="text" disabled={isExecuting} onClick={handleClick}>
-        {action.label}
-      </Button>
-    );
-  }
+  const commonProps = {
+    href: isHref ? action.url : "",
+    target: isHref ? "_blank" : undefined,
+    onClick: handleClick,
+    disabled: isExecuting,
+  };
+
+  return action.icon ? (
+    <IconButton title={action.label} aria-label={action.label} {...commonProps}>
+      {action.icon}
+    </IconButton>
+  ) : (
+    <Button variant="text" {...commonProps}>
+      {action.label}
+    </Button>
+  );
 }

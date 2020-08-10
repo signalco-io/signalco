@@ -7,12 +7,14 @@ import {
   ListItemSecondaryAction,
   SvgIconTypeMap,
   Box,
+  Typography,
 } from "@material-ui/core";
 import IErrorProps from "../interfaces/IErrorProps";
 import ResultsPlaceholder from "../indicators/ResultsPlaceholder";
 import IAutoAction from "../interfaces/IAutoAction";
 import AutoActionButton from "../action/AutoActionButton";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
+import Alert from "@material-ui/lab/Alert";
 
 export interface IAutoListItem {
   id: string;
@@ -37,10 +39,12 @@ const ItemRenderer = (props: IItemRendererProps) => {
     <ListItem>
       {IconComponent && (
         <ListItemIcon>
-          <IconComponent />
+          <IconComponent fontSize="small" />
         </ListItemIcon>
       )}
-      <ListItemText>{props.item.value}</ListItemText>
+      <ListItemText>
+        <Typography variant="body2">{props.item.value}</Typography>
+      </ListItemText>
       {props.item.actions &&
         props.item.actions.map((action) => (
           <ListItemSecondaryAction key={action.id}>
@@ -58,16 +62,22 @@ function AutoList<T extends IAutoListItem>(props: IAutoListProps<T>) {
     </Box>
   ) : (
     <List>
-      <>
-        {props.items &&
-          props.items.length > 0 &&
-          props.items.map((i) => <ItemRenderer key={i.id} item={i} />)}
-        {(!!!props.items || props.items.length <= 0) && (
-          <ListItem>
-            <ResultsPlaceholder />
-          </ListItem>
-        )}
-      </>
+      {props.error ? (
+        <Alert severity="error">
+          {(props.error || "Unknown error").toString()}
+        </Alert>
+      ) : (
+        <>
+          {props.items &&
+            props.items.length > 0 &&
+            props.items.map((i) => <ItemRenderer key={i.id} item={i} />)}
+          {(!!!props.items || props.items.length <= 0) && (
+            <ListItem>
+              <ResultsPlaceholder />
+            </ListItem>
+          )}
+        </>
+      )}
     </List>
   );
 }
