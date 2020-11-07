@@ -4,7 +4,7 @@ import WbIncandescentOutlinedIcon from '@material-ui/icons/WbIncandescentOutline
 import React from "react";
 
 export interface ILightProps {
-    inline: bool
+    inline: boolean
 }
 
 const Light = (props: ILightProps) => {
