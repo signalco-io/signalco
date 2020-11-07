@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Head from "next/head";
-import { ThemeProvider, StylesProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import theme from "../src/theme";
-import App from "next/app";
 import { Auth0Provider } from "@auth0/auth0-react";
-import "../styles/global.scss";
-import NextNprogress from "nextjs-progressbar";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
+import App from "next/app";
+import Head from "next/head";
 import Router from "next/router";
+import NextNprogress from "nextjs-progressbar";
+import PropTypes from "prop-types";
+import React from "react";
+import theme from "../src/theme";
+import "../styles/global.scss";
 
 const onRedirectCallback = (appState) => {
   // Use Next.js's Router.replace method to replace the url
@@ -31,6 +31,8 @@ function MyApp(props) {
   return (
     <React.Fragment>
       <Head>
+        <meta name="msapplication-TileColor" content="#000000"></meta>
+        <meta name="theme-color" content="#000000"></meta>
         <title>Signal</title>
         <meta
           name="viewport"
@@ -67,8 +69,7 @@ function MyApp(props) {
           </Auth0Provider>
         </StylesProvider>
       </ThemeProvider>
-    </React.Fragment>
-  );
+    </React.Fragment>);
 }
 
 MyApp.propTypes = {

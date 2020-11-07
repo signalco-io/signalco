@@ -1,8 +1,8 @@
-import { Grid } from "@material-ui/core";
-import NavProfile from "./NavProfile";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import { Grid } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import HttpService from "../src/services/HttpService";
+import NavProfile from "./NavProfile";
 
 const Layout = (props: { children: React.ReactNode }) => {
   const { getAccessTokenSilently, user } = useAuth0();
@@ -11,10 +11,7 @@ const Layout = (props: { children: React.ReactNode }) => {
   useEffect(() => {
     const setAccessTokenAsync = async (): Promise<void> => {
       const token = await getAccessTokenSilently();
-      console.log("User", user);
-
       HttpService.token = token;
-      console.log("Set token", token);
       setIsLoading(false);
     };
 

@@ -1,14 +1,14 @@
-import { Typography, Box, Grid, Paper } from "@material-ui/core";
+import { Box, Grid, Paper, Typography } from "@material-ui/core";
 import AppLayout from "../components/AppLayout";
-import StorageListTables from "../components/management/storage/StorageListTables";
-import StorageListQueues from "../components/management/storage/StorageListQueues";
 import ApiExplorer from "../components/explorer/ApiExplorer";
+import StorageListQueues from "../components/management/storage/StorageListQueues";
+import StorageListTables from "../components/management/storage/StorageListTables";
 
 const Home = () => {
   return (
     <Box p={2}>
       <Grid container spacing={2}>
-        <Grid item xs={3}>
+        <Grid item xs={6} sm={4} md={3}>
           <Paper>
             <Box pt={2} px={2}>
               <Typography variant="h4">Storage Tables</Typography>
@@ -16,7 +16,7 @@ const Home = () => {
             <StorageListTables />
           </Paper>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6} sm={4} md={3}>
           <Paper>
             <Box pt={2} px={2}>
               <Typography variant="h4">Storage Queues</Typography>
@@ -24,7 +24,7 @@ const Home = () => {
             <StorageListQueues />
           </Paper>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6} sm={4} md={3}>
           <Paper>
             <Box pt={2} px={2}>
               <Typography variant="h4">API</Typography>

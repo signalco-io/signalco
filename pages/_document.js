@@ -1,18 +1,13 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
-import React from "react";
 import { ServerStyleSheets } from "@material-ui/core/styles";
-import theme from "../src/theme";
+import Document, { Html, Main, NextScript } from "next/document";
+import Head from "next/head";
+import React from "react";
 
 class MyDocument extends Document {
   render() {
     return (
       <Html>
         <Head>
-          <meta
-            key="viewport"
-            name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width"
-          />
           <link
             href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap"
             rel="stylesheet"
@@ -40,8 +35,6 @@ class MyDocument extends Document {
             href="/safari-pinned-tab.svg"
             color="#000000"
           ></link>
-          <meta name="msapplication-TileColor" content="#000000"></meta>
-          <meta name="theme-color" content="#000000"></meta>
         </Head>
         <body>
           <Main />

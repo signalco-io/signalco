@@ -1,12 +1,8 @@
-import Button from "@material-ui/core/Button";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
-  Grid,
-  Avatar,
-  Typography,
+  AppBar, Avatar, Grid,
   IconButton,
-  AppBar,
-  Toolbar,
+  Toolbar, Typography
 } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Skeleton from "@material-ui/lab/Skeleton";
@@ -17,12 +13,12 @@ const NavProfile = () => {
   return (
     <AppBar position="static" color="transparent">
       <Toolbar variant="dense">
-        <Grid container spacing={1} alignItems="center" justify="flex-end">
+        <Grid container spacing={1} alignItems="center" justifyContent="flex-end">
           <Grid item>
             {user.picture ? (
               <Avatar src={user.picture} />
             ) : (
-              <Skeleton variant="circle">
+              <Skeleton variant="circular">
                 <Avatar />
               </Skeleton>
             )}

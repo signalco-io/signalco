@@ -1,10 +1,10 @@
-import { createMuiTheme } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 // Create a theme instance.
 const theme = createMuiTheme({
   palette: {
-    type: "dark",
+    mode: "dark",
     primary: {
       main: "#fff",
     },
@@ -44,7 +44,7 @@ const theme = createMuiTheme({
       fontFamily: "Raleway",
       fontWeight: 400,
     },
-    h5: {
+    h6: {
       fontSize: "1rem",
       fontFamily: "Raleway",
       fontWeight: 400,

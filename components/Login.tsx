@@ -1,15 +1,7 @@
-import {
-  Typography,
-  Grid,
-  Paper,
-  Button,
-  Card,
-  CardContent,
-  CardActions,
-  CardHeader,
-  Box,
-} from "@material-ui/core";
 import { useAuth0 } from "@auth0/auth0-react";
+import {
+  Box, Button, Grid, Typography
+} from "@material-ui/core";
 
 const Login = () => {
   const { loginWithRedirect } = useAuth0();
