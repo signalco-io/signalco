@@ -22,9 +22,9 @@ const Light = (props) => {
                 </Grid>
                 <Grid item>
                     <Box p={1}>
-                    <IconButton aria-label="change device state">
-                        <PowerSettingsNewIcon />
-                    </IconButton>
+                        <IconButton aria-label="change device state">
+                            <PowerSettingsNewIcon />
+                        </IconButton>
                     </Box>
                 </Grid>
             </Grid>
