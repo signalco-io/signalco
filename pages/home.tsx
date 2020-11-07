@@ -1,6 +1,8 @@
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
+import React from "react";
 import AppLayout from "../components/AppLayout";
 import ApiExplorer from "../components/explorer/ApiExplorer";
+import HomeOverview from "../components/home/HomeOverview";
 import StorageListQueues from "../components/management/storage/StorageListQueues";
 import StorageListTables from "../components/management/storage/StorageListTables";
 
@@ -32,6 +34,7 @@ const Home = () => {
             <ApiExplorer />
           </Paper>
         </Grid>
+        <HomeOverview />
       </Grid>
     </Box>
   );
