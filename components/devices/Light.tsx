@@ -4,27 +4,28 @@ import WbIncandescentOutlinedIcon from '@material-ui/icons/WbIncandescentOutline
 import React from "react";
 
 export interface ILightProps {
+    name?: string,
     inline?: boolean
 }
 
 const Light = (props: ILightProps) => {
     return (
-        <Box minWidth={200}>
-            <Grid container direction="row" justifyContent="space-between" alignItems="flex-start">
+        <Box minWidth={220}>
+            <Grid container direction="row" justifyContent="space-between" alignItems={props.inline ? "center" : "flex-start"}>
                 <Grid item>
-                    <Box p={2}>
-                        <Grid container direction={props.inline ? "row" : "column"} spacing={1}>
+                    <Box p={props.inline ? 1 : 2}>
+                        <Grid container direction={props.inline ? "row" : "column"} alignItems={props.inline ? "center" : "flex-start"} spacing={1}>
                             <Grid item>
-                                <WbIncandescentOutlinedIcon fontSize="large" />
+                                <WbIncandescentOutlinedIcon fontSize={props.inline ? "default" : "large"} />
                             </Grid>
                             <Grid item>
-                                    <Typography variant="h4">Name</Typography>
+                                    <Typography variant={props.inline ? "h5" : "h4"}>{props.name || "Unknown"}</Typography>
                             </Grid>
                         </Grid>
                     </Box>
                 </Grid>
                 <Grid item>
-                    <Box p={1}>
+                    <Box p={props.inline ? 0 : 1}>
                         <IconButton aria-label="change device state">
                             <PowerSettingsNewIcon />
                         </IconButton>

@@ -1,4 +1,4 @@
-import { Paper } from "@material-ui/core";
+import { Box, Paper, Typography } from "@material-ui/core";
 import Light from "../devices/Light";
 
 const HomeOverview = () => {
@@ -9,6 +9,15 @@ const HomeOverview = () => {
             </span>
             <Paper>
                 <Light />
+            </Paper>
+            <br />
+            <Paper>
+                <Box p={2}>
+                <Typography variant="h4">Room</Typography>
+                </Box>
+                <Light inline />
+                <Light inline />
+                <Light inline />
             </Paper>
         </div>
     );
