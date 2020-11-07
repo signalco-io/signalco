@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const useLoadingAndError = <TIn, TOut>(
   loadData: () => Promise<TIn[]>,
-  transformItem: (item: TIn) => TOut
+  transformItem?: (item: TIn) => TOut
 ): [Array<TOut> | undefined, boolean, string | undefined] => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | undefined>(undefined);
@@ -11,7 +11,7 @@ const useLoadingAndError = <TIn, TOut>(
   const loadDataAsync = async () => {
     try {
       const items = await loadData();
-      setItems(items.map(transformItem));
+      setItems(transformItem ? items.map(transformItem) : undefined);
     } catch (err) {
       setItems([]);
       setError(err);
