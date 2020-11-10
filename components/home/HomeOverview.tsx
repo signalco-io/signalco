@@ -1,7 +1,7 @@
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import DevicesLocalRepository from "../../src/devices/DevicesLocalRepository";
-import Device from "../devices/Device";
+import Device, { IDeviceConfiguration } from "../devices/Device";
 
 const HomeOverview = () => {
     const [devices, setDevices] = useState([]);
@@ -15,7 +15,7 @@ const HomeOverview = () => {
         loadDevices();
     }, []);
 
-    const renderDevice = (device) => (
+    const renderDevice = (device: IDeviceConfiguration) => (
         <Grid item>
             <Paper key={device.identifier}>
                 <Device deviceConfiguration={device} />
