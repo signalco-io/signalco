@@ -10,6 +10,9 @@ const Home = () => {
   return (
     <Box p={2}>
       <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <HomeOverview />
+        </Grid>
         <Grid item xs={6} sm={4} md={3}>
           <Paper>
             <Box pt={2} px={2}>
@@ -34,7 +37,6 @@ const Home = () => {
             <ApiExplorer />
           </Paper>
         </Grid>
-        <HomeOverview />
       </Grid>
     </Box>
   );
