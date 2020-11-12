@@ -71,7 +71,7 @@ const Device = (props: IDeviceProps) => {
             masterEndpoint[0].inputs?.filter(ci => ci.dataType === "double" && ci.name === "power").length) {
             setInterval(async () => {
                 const contactName = "power";
-                const startTimeStamp = new Date(new Date().setDate(new Date().getHours()-1));
+                const startTimeStamp = new Date(new Date().getTime() - 60*60*1000);
                 var data = (await HttpService.getAsync(`https://192.168.0.8:5004/beacon/device-state-history?identifier=${props.deviceConfiguration?.identifier}&contact=${contactName}&startTimeStamp=${startTimeStamp.toISOString()}&endTimeStamp=${new Date().toISOString()}`)) as IHistoricalValue[];
                 if (data) {
                     setHistoricalData(data.map(d => {return { timeStamp: d.timeStamp, value: d.value / 10 };}));
@@ -140,8 +140,8 @@ const Device = (props: IDeviceProps) => {
                     </Box>
                 </Grid>
                 <Grid item>
-                    <AreaChart width={220} height={50} data={historicalData} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
-                        <Area type="basis" dataKey="value" dot={false} fill="#ffffff" fillOpacity={0.1} stroke="#dedede" />
+                    <AreaChart width={220} height={40} data={historicalData} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+                        <Area type="basis" dataKey="value" dot={false} fill="#ffffff" fillOpacity={0.1} stroke="#aeaeae" strokeWidth={2} />
                     </AreaChart>
                 </Grid>
             </Grid>
