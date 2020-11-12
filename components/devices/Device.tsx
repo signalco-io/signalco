@@ -3,6 +3,7 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 import WbIncandescentOutlinedIcon from '@material-ui/icons/WbIncandescentOutlined';
 import React, { useEffect, useState } from "react";
+import { Area, AreaChart } from "recharts";
 import HttpService from "../../src/services/HttpService";
 
 export interface IDeviceContact {
@@ -32,8 +33,14 @@ export interface IDeviceContactValue {
     value?: any
 }
 
+export interface IHistoricalValue {
+    timeStamp: Date;
+    value?: any;
+}
+
 const Device = (props: IDeviceProps) => {
     const [inputs, setInputs] = useState<IDeviceContactValue[]>([]);
+    const [historicalData, setHistoricalData] = useState<IHistoricalValue[]>([]);
 
     let boolOutputContacts: IDeviceContact[] | undefined = [];
     let boolInputContacts: IDeviceContact[] | undefined = [];
@@ -59,8 +66,23 @@ const Device = (props: IDeviceProps) => {
         }
     }
 
+    const loadHistoricalDataAsync = async() => {
+        if (masterEndpoint?.length &&
+            masterEndpoint[0].inputs?.filter(ci => ci.dataType === "double" && ci.name === "power").length) {
+            setInterval(async () => {
+                const contactName = "power";
+                const startTimeStamp = new Date(new Date().setDate(new Date().getHours()-1));
+                var data = (await HttpService.getAsync(`https://192.168.0.8:5004/beacon/device-state-history?identifier=${props.deviceConfiguration?.identifier}&contact=${contactName}&startTimeStamp=${startTimeStamp.toISOString()}&endTimeStamp=${new Date().toISOString()}`)) as IHistoricalValue[];
+                if (data) {
+                    setHistoricalData(data.map(d => {return { timeStamp: d.timeStamp, value: d.value / 10 };}));
+                }
+            }, 10000);
+        }
+    };
+
     useEffect(() => {
         loadInputsAsync();
+        loadHistoricalDataAsync();
     }, []);
 
     const contactValue = (contact: IDeviceContact) => {
@@ -116,6 +138,11 @@ const Device = (props: IDeviceProps) => {
                             </IconButton>
                         ))}
                     </Box>
+                </Grid>
+                <Grid item>
+                    <AreaChart width={220} height={50} data={historicalData} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+                        <Area type="basis" dataKey="value" dot={false} fill="#ffffff" fillOpacity={0.1} stroke="#dedede" />
+                    </AreaChart>
                 </Grid>
             </Grid>
         </Box>
