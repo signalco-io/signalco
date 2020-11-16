@@ -8,18 +8,20 @@ const HomeOverview = () => {
 
     useEffect(() => {
         const loadDevices = async () => {
-            const availableDevices = await DevicesLocalRepository.getDevicesAsync();
-            setDevices(availableDevices);
+            try {
+                const availableDevices = await DevicesLocalRepository.getDevicesAsync();
+                setDevices(availableDevices);
+            } catch(error) {
+                console.warn("Failed to load devices from Beacon");
+            }
         }
 
         loadDevices();
     }, []);
 
     const renderDevice = (device: IDeviceConfiguration) => (
-        <Grid item>
-            <Paper key={device.identifier}>
-                <Device deviceConfiguration={device} />
-            </Paper>
+        <Grid item key={device.identifier}>
+            <Device deviceConfiguration={device} />
         </Grid>
     );
 

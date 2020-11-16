@@ -6,7 +6,7 @@ import HomeOverview from "../components/home/HomeOverview";
 import StorageListQueues from "../components/management/storage/StorageListQueues";
 import StorageListTables from "../components/management/storage/StorageListTables";
 
-const Home = () => {
+const Dashboard = () => {
   return (
     <Box p={2}>
       <Grid container spacing={2}>
@@ -42,6 +42,6 @@ const Home = () => {
   );
 };
 
-Home.layout = AppLayout;
+Dashboard.layout = AppLayout;
 
-export default Home;
+export default Dashboard;
