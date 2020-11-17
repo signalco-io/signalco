@@ -16,7 +16,7 @@ const NavProfile = () => {
         <Grid container spacing={1} alignItems="center" justifyContent="flex-end">
           <Grid item>
             {user.picture ? (
-              <Avatar src={user.picture} />
+              <Avatar src={user.picture} alt="User profile image" />
             ) : (
               <Skeleton variant="circular">
                 <Avatar />

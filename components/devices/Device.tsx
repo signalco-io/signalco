@@ -2,12 +2,16 @@ import { Box, ButtonBase, Grid, Paper, Typography } from "@material-ui/core";
 import BorderAllIcon from '@material-ui/icons/BorderAll';
 import BorderVerticalIcon from '@material-ui/icons/BorderVertical';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
-import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import HelpIcon from '@material-ui/icons/Help';
+import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
+import LockIcon from '@material-ui/icons/Lock';
 import PowerIcon from '@material-ui/icons/Power';
 import PowerOffOutlinedIcon from '@material-ui/icons/PowerOffOutlined';
+import TouchAppIcon from '@material-ui/icons/TouchApp';
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 import WbIncandescentOutlinedIcon from '@material-ui/icons/WbIncandescentOutlined';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import TimeAgo from 'react-timeago';
 import { Area, AreaChart } from "recharts";
 import HttpService from "../../src/services/HttpService";
 
@@ -45,10 +49,14 @@ export interface IHistoricalValue {
 }
 
 export interface IDeviceWidgetConfig {
-    icon?: "light" | "socket" | "motion" | "window" | "doors"
+    room?: string;
+    icon?: "light" | "socket" | "motion" | "window" | "doors" | "switch" | "airquality"
     displayName?: string;
     activeContactName?: string;
+    activeContactNegated: boolean;
     actionContactName?: string;
+    lastActivity: boolean;
+    displayValues?: IDeviceWidgetValueDisplayConfig[];
 }
 
 function colorTemperatureToRGB(kelvin: number) {
@@ -58,7 +66,6 @@ function colorTemperatureToRGB(kelvin: number) {
         red = 255;
         green = temp;
         green = 99.4708025861 * Math.log(green) - 161.1195681661;
-
         if (temp <= 19) {
             blue = 0;
         } else {
@@ -66,13 +73,10 @@ function colorTemperatureToRGB(kelvin: number) {
             blue = 138.5177312231 * Math.log(blue) - 305.0447927307;
         }
     } else {
-
         red = temp - 60;
         red = 329.698727446 * Math.pow(red, -0.1332047592);
-
         green = temp - 60;
         green = 288.1221695283 * Math.pow(green, -0.0755148492);
-
         blue = 255;
     }
 
@@ -89,31 +93,6 @@ function clamp(x: number, min: number, max: number) {
     return x;
 }
 
-function defaultDisplay(config?: IDeviceConfiguration) {
-    const displayConfig: IDeviceWidgetConfig = {};
-
-    if (config && config.alias) {
-        const lightMatch = config.alias.match(/light/i);
-        if (lightMatch && lightMatch.length >= 0) {
-            displayConfig.icon = "light";
-        }
-
-        const motionMatch = config.alias.match(/motion/i);
-        if (motionMatch && motionMatch.length >= 0) {
-            displayConfig.icon = "motion";
-        }
-    }
-
-    if (displayConfig.icon === "light") {
-        displayConfig.actionContactName = "state";
-        displayConfig.activeContactName = "state";
-    } else if (displayConfig.icon === "motion") {
-        displayConfig.activeContactName = "occupancy"
-    }
-
-    return displayConfig;
-}
-
 async function getDeviceStateAsync(deviceIdentifier: string, contact: IDeviceContact) {
     return await HttpService.getAsync(`http://192.168.0.20:5000/beacon/device-state?identifier=${deviceIdentifier}&contact=${contact.name}`)
         .then<IDeviceContactValue>(v => {
@@ -124,33 +103,97 @@ async function getDeviceStateAsync(deviceIdentifier: string, contact: IDeviceCon
         });
 }
 
+export interface IDeviceWidgetValueDisplayConfig {
+    contactName: string;
+    units?: string;
+}
+
+export interface IDeviceWidgetValueDisplayProps {
+    deviceIdentifier: string;
+    config: IDeviceWidgetValueDisplayConfig;
+}
+
+const DeviceWidgetValueDisplay = (props: IDeviceWidgetValueDisplayProps) => {
+    const { contactName, units } = props.config;
+    const { deviceIdentifier } = props;
+    const [isLoading, setIsLoading] = useState(true);
+    const [displayValue, setDisplayValue] = useState<any>(undefined);
+    const displayValueRef = useRef(displayValue);
+    displayValueRef.current = displayValue;
+
+    const refreshDisplayValueAsync = async () => {
+        try {
+            const state = await getDeviceStateAsync(deviceIdentifier, { name: contactName });
+
+            let newState = state.value;
+            if (newState === displayValueRef.current) return;
+
+            setDisplayValue(newState);
+
+            console.log('Device state change', deviceIdentifier, state.contact.name, state.contact.dataType, "Value: ", state.value, `(${typeof state.value})`)
+        } finally {
+            setIsLoading(false);
+            setTimeout(refreshDisplayValueAsync, 2000);
+        }
+    };
+
+    useEffect(() => {
+        if (isLoading) {
+            setTimeout(() => {
+                refreshDisplayValueAsync();
+            }, 100);
+        }
+    }, []);
+
+    return (
+        <Box sx={{ px: 1 }}>
+            <Typography variant="caption" color="textSecondary">{`${(displayValue || "Unknown")}${units || ""}`}</Typography>
+        </Box>
+    );
+};
+
 const Device = (props: IDeviceProps) => {
     const [historicalData, setHistoricalData] = useState<IHistoricalValue[]>([]);
-    const [isActive, setIsActive] = useState<boolean>(false);
 
-    const displayConfig = props.displayConfig || defaultDisplay(props.deviceConfiguration);
+    const [isActive, setIsActive] = useState<boolean>(false);
+    const isActiveRef = useRef(isActive);
+    isActiveRef.current = isActive;
+
+    const [lastActivityTimeStamp, setLastActivityTimeStamp] = useState<Date | undefined>(undefined);
+
+    const displayConfig = props.displayConfig;
 
     const masterEndpoint = props.deviceConfiguration?.endpoints?.filter(e => e.channel === "main");
 
+    const refreshActionTimeoutClearRef = useRef<NodeJS.Timeout>();
+
     const refreshActiveAsync = async () => {
-        if (typeof displayConfig.activeContactName === "undefined")
+        if (!props.deviceConfiguration?.identifier ||
+            typeof displayConfig.activeContactName === "undefined")
             return;
 
-        const state = await getDeviceStateAsync(props.deviceConfiguration?.identifier, { name: displayConfig.activeContactName });
+        try {
+            const state = await getDeviceStateAsync(props.deviceConfiguration.identifier, { name: displayConfig.activeContactName });
 
-        let newState = isActive;
-        if (typeof state.value === "boolean") {
-            newState = !!state.value;
+            let newState = isActiveRef.current;
+            if (typeof state.value === "boolean") {
+                newState = !!state.value;
+            }
+            else if (typeof state.value === "string") {
+                newState = state.value === "ON";
+            }
+
+            if (displayConfig.activeContactNegated)
+                newState = !newState;
+
+            if (newState === isActiveRef.current) return;
+            setIsActive(newState);
+            setLastActivityTimeStamp(new Date());
+
+            console.log('Device state change', props.deviceConfiguration?.alias, props.deviceConfiguration?.identifier, state.contact.name, state.contact.dataType, "Value: ", state.value, `(${typeof state.value})`)
+        } finally {
+            refreshActionTimeoutClearRef.current = setTimeout(refreshActiveAsync, 2000);
         }
-        else if (typeof state.value === "string") {
-            newState = state.value === "ON";
-        }
-
-        if (newState === isActive) return;
-        console.debug(newState, isActive, typeof newState, typeof isActive);
-        setIsActive(newState);
-
-        console.log('Device state change', props.deviceConfiguration?.alias,props.deviceConfiguration?.identifier, state.contact.name, state.contact.dataType, "Value: ", state.value, `(${typeof state.value})`)
     };
 
     const loadHistoricalDataAsync = async () => {
@@ -177,8 +220,12 @@ const Device = (props: IDeviceProps) => {
         refreshActiveAsync();
         // loadHistoricalDataAsync();
 
-        const interval = setInterval(refreshActiveAsync, 3000);
-        return () => clearInterval(interval);
+        return () => {
+            if (refreshActionTimeoutClearRef.current) {
+                console.log("cleared timeout ref", refreshActionTimeoutClearRef.current);
+                clearTimeout(refreshActionTimeoutClearRef.current);
+            }
+        }
     }, []);
 
     const handleOutputContact = () => {
@@ -200,11 +247,13 @@ const Device = (props: IDeviceProps) => {
         "socket": [PowerOffOutlinedIcon, PowerIcon],
         "motion": [DirectionsRunIcon, DirectionsRunIcon],
         "window": [BorderVerticalIcon, BorderAllIcon],
-        "doors": [BorderVerticalIcon, MeetingRoomIcon],
-        "none": []
+        "doors": [BorderVerticalIcon, LockIcon],
+        "switch": [TouchAppIcon, TouchAppIcon],
+        "airquality": [LocalFloristIcon, LocalFloristIcon],
+        "unknown": [HelpIcon, HelpIcon]
     }
 
-    const IconComponent = iconsMap[displayConfig.icon || "none"][isActive ? 1 : 0];
+    const IconComponent = iconsMap[displayConfig.icon || "unknown"][isActive ? 1 : 0];
     const displayName = displayConfig?.displayName || props.deviceConfiguration?.alias;
     const ActionComponent = typeof displayConfig.actionContactName !== "undefined" ? ButtonBase : React.Fragment;
     const actionComponentProps = typeof displayConfig.actionContactName !== "undefined" ? { onClick: () => handleOutputContact() } : {};
@@ -226,18 +275,35 @@ const Device = (props: IDeviceProps) => {
     return (
         <Paper style={{ backgroundColor: backgroundColor, color: color }}>
             <ActionComponent {...actionComponentProps}>
-                <Box width={220}>
+                <Box sx={{ width: 220 }}>
                     <Grid container direction="row" justifyContent="space-between" alignItems={props.inline ? "center" : "flex-start"}>
-                        <Grid item zeroMinWidth>
-                            <Box p={2} display="flex" alignItems="center">
+                        <Grid item xs={12} zeroMinWidth>
+                            <Box sx={{ py: 1, pr: 2, pl: 1, display: "flex", alignItems: "center" }}>
                                 {IconComponent && (
-                                    <Box mr={1} height={35}>
+                                    <Box sx={{ mr: 1, height: 35 }}>
                                         <IconComponent fontSize="large" />
                                     </Box>
                                 )}
                                 <Typography variant="body2" noWrap>{displayName || "Unknown"}</Typography>
                             </Box>
                         </Grid>
+                        {displayConfig.displayValues && displayConfig.displayValues.map(dvconfig => (
+                            <Grid item xs={12} key={`displayValue-${props.deviceConfiguration?.identifier}-${dvconfig.contactName}`}>
+                                <DeviceWidgetValueDisplay config={dvconfig} deviceIdentifier={props.deviceConfiguration!.identifier!} />
+                            </Grid>
+                        ))}
+                        {displayConfig.lastActivity &&
+                            <Grid item>
+                                <Box sx={{ px: 1 }}>
+                                    <Typography variant="caption" style={{ color: color, opacity: 0.7 }}>
+                                        {"Last activity "}
+                                        {lastActivityTimeStamp
+                                            ? <TimeAgo date={lastActivityTimeStamp} live />
+                                            : "not recorded"}
+
+                                    </Typography>
+                                </Box>
+                            </Grid>}
                         {showDiagram && (
                             <Grid item>
                                 <AreaChart width={220} height={40} data={historicalData} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>

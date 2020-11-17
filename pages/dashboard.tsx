@@ -8,14 +8,14 @@ import StorageListTables from "../components/management/storage/StorageListTable
 
 const Dashboard = () => {
   return (
-    <Box p={2}>
+    <Box sx={{ p: 2 }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <HomeOverview />
         </Grid>
         <Grid item xs={6} sm={4} md={3}>
           <Paper>
-            <Box pt={2} px={2}>
+            <Box sx={{ pt: 2, px: 2 }}>
               <Typography variant="h4">Storage Tables</Typography>
             </Box>
             <StorageListTables />
@@ -23,7 +23,7 @@ const Dashboard = () => {
         </Grid>
         <Grid item xs={6} sm={4} md={3}>
           <Paper>
-            <Box pt={2} px={2}>
+            <Box sx={{ pt: 2, px: 2 }}>
               <Typography variant="h4">Storage Queues</Typography>
             </Box>
             <StorageListQueues />
@@ -31,7 +31,7 @@ const Dashboard = () => {
         </Grid>
         <Grid item xs={6} sm={4} md={3}>
           <Paper>
-            <Box pt={2} px={2}>
+            <Box sx={{ pt: 2, px: 2 }}>
               <Typography variant="h4">API</Typography>
             </Box>
             <ApiExplorer />
