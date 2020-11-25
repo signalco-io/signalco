@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box, LinearProgress, List,
   ListItem,
 
@@ -11,7 +12,7 @@ import {
   Typography
 } from "@material-ui/core";
 import { OverridableComponent } from "@material-ui/core/OverridableComponent";
-import Alert from "@material-ui/lab/Alert";
+import React from "react";
 import AutoActionButton from "../action/AutoActionButton";
 import ResultsPlaceholder from "../indicators/ResultsPlaceholder";
 import IAutoAction from "../interfaces/IAutoAction";

@@ -1,21 +1,25 @@
 import {
-  Table,
-  TableHead,
+  Alert,
+  LinearProgress, Link, Table,
+
+
+
+  TableBody, TableCell, TableHead,
   TableRow,
-  TableCell,
-  TableBody,
-  Link,
-  LinearProgress,
-  Typography,
+
+
+
+
+  Typography
 } from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
+import React from "react";
 import {
   camelToSentenceCase,
-  isAbsoluteUrl,
+  isAbsoluteUrl
 } from "../../../src/helpers/StringHelpers";
-import IErrorProps from "../interfaces/IErrorProps";
 import ResultsPlaceholder from "../indicators/ResultsPlaceholder";
+import IErrorProps from "../interfaces/IErrorProps";
 
 export interface IAutoTableItem {
   id: string;

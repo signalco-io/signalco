@@ -260,7 +260,7 @@ const Device = (props: IDeviceProps) => {
 
     let backgroundColor = undefined;
     let color = undefined;
-    if ((displayConfig.icon === "light" || displayConfig.icon === "motion") && isActive) {
+    if (isActive) {
         backgroundColor = "rgba(255, 187, 109, 1)"; // 3000K temp default
         color = "#333";
         // const colorTempK = contactValue({ name: "color_temp", dataType: "double" });
