@@ -12,7 +12,7 @@ function defaultDisplay(config?: IDeviceConfiguration) {
     if (config && config.alias) {
         displayConfig.room = config.alias.split(" ")[0];
 
-        const lightMatch = config.alias.match(/light/i);
+        const lightMatch = config.alias.match(/light|lamp/i);
         if (lightMatch && lightMatch.length >= 0) {
             displayConfig.icon = "light";
         }

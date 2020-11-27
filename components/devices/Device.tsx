@@ -235,7 +235,7 @@ const Device = (props: IDeviceProps) => {
                 channel: "main",
                 contact: displayConfig.actionContactName
             },
-            value: isActive ? "OFF" : "ON"
+            value: (!isActive).toString()
         });
         for (let index = 0; index < 5; index++) {
             setTimeout(() => refreshActiveAsync(), (index + 1) * 200);
