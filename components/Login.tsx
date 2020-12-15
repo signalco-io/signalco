@@ -3,14 +3,18 @@ import {
   Box, Button, Grid, Typography
 } from "@material-ui/core";
 import { useEffect, useRef } from "react";
-import RippleIndicator from "./shared/indicators/RippleIndicator";
+import RippleIndicator, { IRippleIndicatorRef } from "./shared/indicators/RippleIndicator";
 
 const Login = () => {
   const { loginWithRedirect } = useAuth0();
-  const rippleTriggerRef = useRef();
+  const rippleTriggerRef = useRef<IRippleIndicatorRef>();
 
   useEffect(() => {
-    const rippleIntervalClear = setInterval(() => new Date().getMilliseconds() && rippleTriggerRef.current.trigger(), 2500);
+    const rippleIntervalClear = setInterval(() => {
+      if (typeof rippleTriggerRef.current !== 'undefined') {
+        rippleTriggerRef.current.trigger();
+      }
+    }, 2500);
     return () => clearInterval(rippleIntervalClear);
   }, [])
 

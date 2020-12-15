@@ -16,14 +16,18 @@ export interface IRippleIndicatorProps {
     size?: number
 }
 
-const RippleIndicator = forwardRef((props : IRippleIndicatorProps, ref) => {
+export interface IRippleIndicatorRef {
+    trigger: () => void
+}
+
+const RippleIndicator = forwardRef((props : IRippleIndicatorProps, ref: React.ForwardedRef<IRippleIndicatorRef | undefined>) => {
     const [refresh, setRefresh] = useState<number>(0);
     useImperativeHandle(ref, () => ({trigger() { setRefresh(Date.now()); }}));
 
     const {size = 42} = props;
     
     const styles = [{
-        key: refresh,
+        key: refresh.toString(),
         style: {
             opacity: spring(1),
             scale: spring(0),

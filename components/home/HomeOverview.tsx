@@ -37,7 +37,7 @@ function defaultDisplay(config?: IDeviceConfiguration) {
             displayConfig.icon = "doors";
         }
 
-        const switchMatch = config.alias.match(/switch/i);
+        const switchMatch = config.alias.match(/switch|fan/i);
         if (switchMatch && switchMatch.length >= 0) {
             displayConfig.icon = "switch";
         }
