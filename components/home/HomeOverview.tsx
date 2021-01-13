@@ -107,7 +107,7 @@ export interface IDeviceConfigWithDisplayConfig {
 
 const HomeOverview = () => {
     const [devices, setDevices] = useState<IDeviceConfigWithDisplayConfig[]>([]);
-    const [layout, setLayout] = useState([]);
+    const [layout, setLayout] = useState<RGL.Layout[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -149,7 +149,7 @@ const HomeOverview = () => {
     return (
         <SizeMe>
             {({ size }) => {
-                
+
                 return (
                     <>
                         {isLoading && <LinearProgress />}
@@ -159,9 +159,7 @@ const HomeOverview = () => {
                             width={size.width || (typeof window !== 'undefined' ? window.innerWidth : 1024)}
                             rowHeight={51}
                             cols={Math.floor((size.width || 1024) / 220 * 2)}
-                            // breakpoints={{ x3l: 1920, xxl: 1600, xl: 1400, lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-                            // cols={{ x3l: 14, xxl: 10, xl: 8, lg: 6, md: 5, sm: 4, xs: 3, xxs: 2 }}
-                            >
+                        >
                             {devices.map(d => renderDevice(d))}
                         </RGL>
                     </>
