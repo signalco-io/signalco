@@ -148,10 +148,6 @@ const Device = (props: IDeviceProps) => {
 
     const displayConfig = props.displayConfig;
 
-    const masterEndpoint = props.deviceModel?.endpoints?.filter(e => e.channel === "main");
-
-    const refreshActionTimeoutClearRef = useRef<NodeJS.Timeout>();
-
     const refreshActiveAsync = async () => {
         console.log(!props.deviceModel?.identifier, displayConfig.activeContactName, displayConfig.activeChannelName)
         if (!props.deviceModel?.identifier ||

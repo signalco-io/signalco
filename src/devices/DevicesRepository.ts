@@ -14,7 +14,7 @@ class SignalDeviceDto {
             throw Error("Invalid SignalDeviceDto - missing required properties.");
         }
 
-        return new DeviceModel(dto.id, dto.alias, dto.deviceIdentifier, dto.endpoints?.map(SignalDeviceEndpointDto.FromDto), dto.states?.map(SignalDeviceContactStateDto.FromDto) ?? []);
+        return new DeviceModel(dto.id, dto.alias, dto.deviceIdentifier, dto.endpoints?.map(SignalDeviceEndpointDto.FromDto) ?? [], dto.states?.map(SignalDeviceContactStateDto.FromDto) ?? []);
     }
 }
 
