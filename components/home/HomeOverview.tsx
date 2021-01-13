@@ -76,6 +76,9 @@ function defaultDisplay(config?: IDeviceModel) {
         ]
     }
 
+    if (typeof displayConfig.actionContactName !== 'undefined')
+        displayConfig.activeChannelName = config?.endpoints[0]?.channel;
+
     return displayConfig;
 }
 
@@ -97,7 +100,7 @@ const HomeOverview = () => {
                 }));
                 setIsLoading(false);
             } catch (error) {
-                console.warn("Failed to load devices from Beacon");
+                console.warn("Failed to load devices from Beacon", error);
             }
         }
 

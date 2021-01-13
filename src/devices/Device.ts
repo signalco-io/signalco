@@ -32,6 +32,7 @@ export interface IDeviceModel {
     alias: string;
     identifier: string;
     endpoints: IDeviceEndpoint[]
+    states: IDeviceContactState[];
 }
 
 export class DeviceModel implements IDeviceModel {

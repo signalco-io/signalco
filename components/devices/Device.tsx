@@ -31,6 +31,7 @@ export interface IDeviceWidgetConfig {
     room?: string;
     icon?: "light" | "socket" | "motion" | "window" | "doors" | "switch" | "airquality"
     displayName?: string;
+    activeChannelName?: string;
     activeContactName?: string;
     activeContactNegated: boolean;
     actionContactName?: string;
@@ -151,34 +152,40 @@ const Device = (props: IDeviceProps) => {
 
     const refreshActionTimeoutClearRef = useRef<NodeJS.Timeout>();
 
-    // const refreshActiveAsync = async () => {
-    //     if (!props.deviceModel?.identifier ||
-    //         typeof displayConfig.activeContactName === "undefined")
-    //         return;
+    const refreshActiveAsync = async () => {
+        console.log(!props.deviceModel?.identifier, displayConfig.activeContactName, displayConfig.activeChannelName)
+        if (!props.deviceModel?.identifier ||
+            typeof displayConfig.activeContactName === "undefined" ||
+            typeof displayConfig.activeChannelName === "undefined")
+            return;
 
-    //     try {
-    //         const state = await getDeviceStateAsync(props.deviceModel.identifier, { name: displayConfig.activeContactName });
+        try {
+            const state = props.deviceModel.states.filter(s => 
+                s.channel === displayConfig.activeChannelName && 
+                s.name === displayConfig.activeContactName)[0];
+            const contact = props.deviceModel.endpoints
+                .filter(e => e.channel === displayConfig.activeChannelName)[0]
+                .contacts.filter(c => c.name === displayConfig.activeContactName)[0];
 
-    //         let newState = isActiveRef.current;
-    //         if (typeof state.value === "boolean") {
-    //             newState = !!state.value;
-    //         }
-    //         else if (typeof state.value === "string") {
-    //             newState = state.value === "ON";
-    //         }
+            console.log(props.deviceModel.alias, props.deviceModel.states, state, contact);
 
-    //         if (displayConfig.activeContactNegated)
-    //             newState = !newState;
+            let newState = isActiveRef.current;
+            if (contact.dataType === "bool") {
+                newState = `${state.value}`.toLowerCase() === 'true';
+            }
 
-    //         if (newState === isActiveRef.current) return;
-    //         setIsActive(newState);
-    //         setLastActivityTimeStamp(new Date());
+            if (displayConfig.activeContactNegated)
+                newState = !newState;
 
-    //         console.log('Device state change', props.deviceModel?.alias, props.deviceModel?.identifier, state.contact.name, state.contact.dataType, "Value: ", state.value, `(${typeof state.value})`)
-    //     } finally {
-    //         refreshActionTimeoutClearRef.current = setTimeout(refreshActiveAsync, 2000);
-    //     }
-    // };
+            // if (newState === isActiveRef.current) return;
+            setIsActive(newState);
+            setLastActivityTimeStamp(state.timeStamp);
+
+            console.log('Device state change', props.deviceModel?.alias, props.deviceModel?.identifier, state.name, contact.dataType, "Value: ", state.value, `(${typeof state.value})`)
+        } catch(error) {
+            console.warn(error);
+        }
+    };
 
     // const loadHistoricalDataAsync = async () => {
     //     if (masterEndpoint?.length) {
@@ -201,7 +208,7 @@ const Device = (props: IDeviceProps) => {
     // };
 
     useEffect(() => {
-        // refreshActiveAsync();
+        refreshActiveAsync();
         // loadHistoricalDataAsync();
 
         // return () => {
