@@ -1,4 +1,4 @@
-const ApiProductionUrl: string = "https://api.signal.dfnoise.com/api/";
+const ApiProductionUrl: string = "https://signal-api.azurewebsites.net/api/";
 
 class AppSettingsProvider {
   public authToken: string | null = null;

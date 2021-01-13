@@ -9,7 +9,7 @@ export default class HttpService {
     return `Bearer ${HttpService.token}`;
   };
 
-  public static async getAsync(url: string): Promise<any> {
+  public static async getAsync<T>(url: string): Promise<T> {
     return this.requestAsync(url, "get", null);
   }
 

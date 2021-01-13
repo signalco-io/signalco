@@ -13,34 +13,13 @@ import WbIncandescentOutlinedIcon from '@material-ui/icons/WbIncandescentOutline
 import React, { useEffect, useRef, useState } from "react";
 import TimeAgo from 'react-timeago';
 import { Area, AreaChart } from "recharts";
+import { IDeviceContact, IDeviceContactState, IDeviceModel } from "../../src/devices/Device";
 import HttpService from "../../src/services/HttpService";
 
-export interface IDeviceContact {
-    name?: string;
-    dataType?: string;
-}
-
-export interface IDeviceEndpoint {
-    channel?: string;
-    inputs?: IDeviceContact[];
-    outputs?: IDeviceContact[];
-}
-
-export interface IDeviceConfiguration {
-    alias?: string;
-    identifier?: string;
-    endpoints?: IDeviceEndpoint[]
-}
-
 export interface IDeviceProps {
-    deviceConfiguration?: IDeviceConfiguration,
+    deviceModel?: IDeviceModel,
     inline?: boolean,
     displayConfig: IDeviceWidgetConfig
-}
-
-export interface IDeviceContactValue {
-    contact: IDeviceContact;
-    value?: any
 }
 
 export interface IHistoricalValue {
@@ -94,13 +73,18 @@ function clamp(x: number, min: number, max: number) {
 }
 
 async function getDeviceStateAsync(deviceIdentifier: string, contact: IDeviceContact) {
-    return await HttpService.getAsync(`http://192.168.0.20:5000/beacon/device-state?identifier=${deviceIdentifier}&contact=${contact.name}`)
-        .then<IDeviceContactValue>(v => {
-            return {
-                contact: contact,
-                value: v
-            };
-        });
+    return {
+        contact: contact,
+        value: null
+    };
+    // TODO: Implement
+    // return await HttpService.getAsync(`http://192.168.0.20:5000/beacon/device-state?identifier=${deviceIdentifier}&contact=${contact.name}`)
+    //     .then<IDeviceContactState>(v => {
+    //         return {
+    //             contact: contact,
+    //             value: v
+    //         };
+    //     });
 }
 
 export interface IDeviceWidgetValueDisplayConfig {
@@ -121,28 +105,28 @@ const DeviceWidgetValueDisplay = (props: IDeviceWidgetValueDisplayProps) => {
     const displayValueRef = useRef(displayValue);
     displayValueRef.current = displayValue;
 
-    const refreshDisplayValueAsync = async () => {
-        try {
-            const state = await getDeviceStateAsync(deviceIdentifier, { name: contactName });
+    // const refreshDisplayValueAsync = async () => {
+    //     try {
+    //         const state = await getDeviceStateAsync(deviceIdentifier, { name: contactName });
 
-            let newState = state.value;
-            if (newState === displayValueRef.current) return;
+    //         let newState = state.value;
+    //         if (newState === displayValueRef.current) return;
 
-            setDisplayValue(newState);
+    //         setDisplayValue(newState);
 
-            console.log('Device state change', deviceIdentifier, state.contact.name, state.contact.dataType, "Value: ", state.value, `(${typeof state.value})`)
-        } finally {
-            setIsLoading(false);
-            setTimeout(refreshDisplayValueAsync, 2000);
-        }
-    };
+    //         console.log('Device state change', deviceIdentifier, state.contact.name, state.contact.dataType, "Value: ", state.value, `(${typeof state.value})`)
+    //     } finally {
+    //         setIsLoading(false);
+    //         setTimeout(refreshDisplayValueAsync, 2000);
+    //     }
+    // };
 
     useEffect(() => {
-        if (isLoading) {
-            setTimeout(() => {
-                refreshDisplayValueAsync();
-            }, 100);
-        }
+        // if (isLoading) {
+        //     setTimeout(() => {
+        //         refreshDisplayValueAsync();
+        //     }, 100);
+        // }
     }, []);
 
     return (
@@ -163,83 +147,84 @@ const Device = (props: IDeviceProps) => {
 
     const displayConfig = props.displayConfig;
 
-    const masterEndpoint = props.deviceConfiguration?.endpoints?.filter(e => e.channel === "main");
+    const masterEndpoint = props.deviceModel?.endpoints?.filter(e => e.channel === "main");
 
     const refreshActionTimeoutClearRef = useRef<NodeJS.Timeout>();
 
-    const refreshActiveAsync = async () => {
-        if (!props.deviceConfiguration?.identifier ||
-            typeof displayConfig.activeContactName === "undefined")
-            return;
+    // const refreshActiveAsync = async () => {
+    //     if (!props.deviceModel?.identifier ||
+    //         typeof displayConfig.activeContactName === "undefined")
+    //         return;
 
-        try {
-            const state = await getDeviceStateAsync(props.deviceConfiguration.identifier, { name: displayConfig.activeContactName });
+    //     try {
+    //         const state = await getDeviceStateAsync(props.deviceModel.identifier, { name: displayConfig.activeContactName });
 
-            let newState = isActiveRef.current;
-            if (typeof state.value === "boolean") {
-                newState = !!state.value;
-            }
-            else if (typeof state.value === "string") {
-                newState = state.value === "ON";
-            }
+    //         let newState = isActiveRef.current;
+    //         if (typeof state.value === "boolean") {
+    //             newState = !!state.value;
+    //         }
+    //         else if (typeof state.value === "string") {
+    //             newState = state.value === "ON";
+    //         }
 
-            if (displayConfig.activeContactNegated)
-                newState = !newState;
+    //         if (displayConfig.activeContactNegated)
+    //             newState = !newState;
 
-            if (newState === isActiveRef.current) return;
-            setIsActive(newState);
-            setLastActivityTimeStamp(new Date());
+    //         if (newState === isActiveRef.current) return;
+    //         setIsActive(newState);
+    //         setLastActivityTimeStamp(new Date());
 
-            console.log('Device state change', props.deviceConfiguration?.alias, props.deviceConfiguration?.identifier, state.contact.name, state.contact.dataType, "Value: ", state.value, `(${typeof state.value})`)
-        } finally {
-            refreshActionTimeoutClearRef.current = setTimeout(refreshActiveAsync, 2000);
-        }
-    };
+    //         console.log('Device state change', props.deviceModel?.alias, props.deviceModel?.identifier, state.contact.name, state.contact.dataType, "Value: ", state.value, `(${typeof state.value})`)
+    //     } finally {
+    //         refreshActionTimeoutClearRef.current = setTimeout(refreshActiveAsync, 2000);
+    //     }
+    // };
 
-    const loadHistoricalDataAsync = async () => {
-        if (masterEndpoint?.length) {
-            const doubleContacts = masterEndpoint[0].inputs?.filter(ci => ci.dataType === "double" && ci.name !== "battery" && ci.name !== "linkquality");
-            if (doubleContacts?.length) {
-                setInterval(async () => {
-                    try {
-                        const contactName = doubleContacts[0].name;
-                        const startTimeStamp = new Date(new Date().getTime() - 60 * 60 * 1000);
-                        var data = (await HttpService.getAsync(`http://192.168.0.20:5000/beacon/device-state-history?identifier=${props.deviceConfiguration?.identifier}&contact=${contactName}&startTimeStamp=${startTimeStamp.toISOString()}&endTimeStamp=${new Date().toISOString()}`)) as IHistoricalValue[];
-                        if (data) {
-                            setHistoricalData(data.map(d => { return { timeStamp: d.timeStamp, value: d.value / 10 }; }));
-                        }
-                    } catch (error) {
-                        console.warn("Failed to load historical data for device ", props.deviceConfiguration?.identifier);
-                    }
-                }, 10000);
-            }
-        }
-    };
+    // const loadHistoricalDataAsync = async () => {
+    //     if (masterEndpoint?.length) {
+    //         const doubleContacts = masterEndpoint[0].inputs?.filter(ci => ci.dataType === "double" && ci.name !== "battery" && ci.name !== "linkquality");
+    //         if (doubleContacts?.length) {
+    //             setInterval(async () => {
+    //                 try {
+    //                     const contactName = doubleContacts[0].name;
+    //                     const startTimeStamp = new Date(new Date().getTime() - 60 * 60 * 1000);
+    //                     var data = (await HttpService.getAsync(`http://192.168.0.20:5000/beacon/device-state-history?identifier=${props.deviceConfiguration?.identifier}&contact=${contactName}&startTimeStamp=${startTimeStamp.toISOString()}&endTimeStamp=${new Date().toISOString()}`)) as IHistoricalValue[];
+    //                     if (data) {
+    //                         setHistoricalData(data.map(d => { return { timeStamp: d.timeStamp, value: d.value / 10 }; }));
+    //                     }
+    //                 } catch (error) {
+    //                     console.warn("Failed to load historical data for device ", props.deviceModel?.identifier);
+    //                 }
+    //             }, 10000);
+    //         }
+    //     }
+    // };
 
     useEffect(() => {
-        refreshActiveAsync();
+        // refreshActiveAsync();
         // loadHistoricalDataAsync();
 
-        return () => {
-            if (refreshActionTimeoutClearRef.current) {
-                console.log("cleared timeout ref", refreshActionTimeoutClearRef.current);
-                clearTimeout(refreshActionTimeoutClearRef.current);
-            }
-        }
+        // return () => {
+        //     if (refreshActionTimeoutClearRef.current) {
+        //         console.log("cleared timeout ref", refreshActionTimeoutClearRef.current);
+        //         clearTimeout(refreshActionTimeoutClearRef.current);
+        //     }
+        // }
     }, []);
 
     const handleOutputContact = () => {
-        HttpService.requestAsync("http://192.168.0.20:5000/beacon/conduct", "post", {
-            target: {
-                identifier: props.deviceConfiguration?.identifier,
-                channel: "main",
-                contact: displayConfig.actionContactName
-            },
-            value: (!isActive).toString()
-        });
-        for (let index = 0; index < 5; index++) {
-            setTimeout(() => refreshActiveAsync(), (index + 1) * 200);
-        }
+        console.warn("output contact conduct triggering not implemented");
+        // HttpService.requestAsync("http://192.168.0.20:5000/beacon/conduct", "post", {
+        //     target: {
+        //         identifier: props.deviceModel?.identifier,
+        //         channel: "main",
+        //         contact: displayConfig.actionContactName
+        //     },
+        //     value: (!isActive).toString()
+        // });
+        // for (let index = 0; index < 5; index++) {
+        //     setTimeout(() => refreshActiveAsync(), (index + 1) * 200);
+        // }
     };
 
     const iconsMap = {
@@ -254,7 +239,7 @@ const Device = (props: IDeviceProps) => {
     }
 
     const IconComponent = iconsMap[displayConfig.icon || "unknown"][isActive ? 1 : 0];
-    const displayName = displayConfig?.displayName || props.deviceConfiguration?.alias;
+    const displayName = displayConfig?.displayName || props.deviceModel?.alias;
     const ActionComponent = typeof displayConfig.actionContactName !== "undefined" ? ButtonBase : React.Fragment;
     const actionComponentProps = typeof displayConfig.actionContactName !== "undefined" ? { onClick: () => handleOutputContact() } : {};
 
@@ -288,8 +273,8 @@ const Device = (props: IDeviceProps) => {
                             </Box>
                         </Grid>
                         {displayConfig.displayValues && displayConfig.displayValues.map(dvconfig => (
-                            <Grid item xs={12} key={`displayValue-${props.deviceConfiguration?.identifier}-${dvconfig.contactName}`}>
-                                <DeviceWidgetValueDisplay config={dvconfig} deviceIdentifier={props.deviceConfiguration!.identifier!} />
+                            <Grid item xs={12} key={`displayValue-${props.deviceModel?.identifier}-${dvconfig.contactName}`}>
+                                <DeviceWidgetValueDisplay config={dvconfig} deviceIdentifier={props.deviceModel!.identifier!} />
                             </Grid>
                         ))}
                         {displayConfig.lastActivity &&

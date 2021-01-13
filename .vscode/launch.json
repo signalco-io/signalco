@@ -7,8 +7,8 @@
         {
             "type": "pwa-msedge",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:8080",
+            "name": "Launch Edge against localhost",
+            "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}"
         }
     ]

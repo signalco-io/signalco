@@ -1,9 +1,10 @@
 import { Grid, LinearProgress } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import DevicesLocalRepository from "../../src/devices/DevicesLocalRepository";
-import Device, { IDeviceConfiguration, IDeviceWidgetConfig } from "../devices/Device";
+import { IDeviceModel } from "../../src/devices/Device";
+import DevicesRepository from "../../src/devices/DevicesRepository";
+import Device, { IDeviceWidgetConfig } from "../devices/Device";
 
-function defaultDisplay(config?: IDeviceConfiguration) {
+function defaultDisplay(config?: IDeviceModel) {
     const displayConfig: IDeviceWidgetConfig = {
         activeContactNegated: false,
         lastActivity: false
@@ -79,7 +80,7 @@ function defaultDisplay(config?: IDeviceConfiguration) {
 }
 
 export interface IDeviceConfigWithDisplayConfig {
-    deviceConfig: IDeviceConfiguration;
+    deviceModel: IDeviceModel;
     displayConfig: IDeviceWidgetConfig;
 }
 
@@ -90,9 +91,9 @@ const HomeOverview = () => {
     useEffect(() => {
         const loadDevices = async () => {
             try {
-                const availableDevices = await DevicesLocalRepository.getDevicesAsync();
+                const availableDevices = await DevicesRepository.getDevicesAsync();
                 setDevices(availableDevices.map(d => {
-                    return { deviceConfig: d, displayConfig: defaultDisplay(d) }
+                    return { deviceModel: d, displayConfig: defaultDisplay(d) }
                 }));
                 setIsLoading(false);
             } catch (error) {
@@ -104,8 +105,8 @@ const HomeOverview = () => {
     }, []);
 
     const renderDevice = (device: IDeviceConfigWithDisplayConfig) => (
-        <Grid item key={device.deviceConfig.identifier}>
-            <Device deviceConfiguration={device.deviceConfig} displayConfig={device.displayConfig} />
+        <Grid item key={device.deviceModel.identifier}>
+            <Device deviceModel={device.deviceModel} displayConfig={device.displayConfig} />
         </Grid>
     );
 
