@@ -13,6 +13,7 @@ import WbIncandescentOutlinedIcon from '@material-ui/icons/WbIncandescentOutline
 import React, { useEffect, useRef, useState } from "react";
 import TimeAgo from 'react-timeago';
 import { Area, AreaChart } from "recharts";
+import ConductsService from "../../src/conducts/ConductsService";
 import { IDeviceContact, IDeviceContactState, IDeviceModel } from "../../src/devices/Device";
 import HttpService from "../../src/services/HttpService";
 
@@ -35,6 +36,7 @@ export interface IDeviceWidgetConfig {
     activeContactName?: string;
     activeContactNegated: boolean;
     actionContactName?: string;
+    actionChannelName?: string;
     lastActivity: boolean;
     displayValues?: IDeviceWidgetValueDisplayConfig[];
 }
@@ -139,33 +141,35 @@ const DeviceWidgetValueDisplay = (props: IDeviceWidgetValueDisplayProps) => {
 
 const Device = (props: IDeviceProps) => {
     const [historicalData, setHistoricalData] = useState<IHistoricalValue[]>([]);
-
     const [isActive, setIsActive] = useState<boolean>(false);
-    const isActiveRef = useRef(isActive);
-    isActiveRef.current = isActive;
-
     const [lastActivityTimeStamp, setLastActivityTimeStamp] = useState<Date | undefined>(undefined);
 
     const displayConfig = props.displayConfig;
 
+    const getState = (channel: string, contact: string) => {
+        return props.deviceModel?.states.filter(s => 
+            s.channel === channel && s.name === contact)[0];
+    }
+
     const refreshActiveAsync = async () => {
-        console.log(!props.deviceModel?.identifier, displayConfig.activeContactName, displayConfig.activeChannelName)
         if (!props.deviceModel?.identifier ||
             typeof displayConfig.activeContactName === "undefined" ||
             typeof displayConfig.activeChannelName === "undefined")
             return;
 
         try {
-            const state = props.deviceModel.states.filter(s => 
-                s.channel === displayConfig.activeChannelName && 
-                s.name === displayConfig.activeContactName)[0];
+            const state = getState(displayConfig.activeChannelName, displayConfig.activeContactName);
             const contact = props.deviceModel.endpoints
                 .filter(e => e.channel === displayConfig.activeChannelName)[0]
                 .contacts.filter(c => c.name === displayConfig.activeContactName)[0];
+            if (state == null || contact == null) {
+                // console.warn("State not found for", props.deviceModel.alias, displayConfig.activeChannelName, displayConfig.activeContactName, props.deviceModel.states);
+                return;
+            }
 
             console.log(props.deviceModel.alias, props.deviceModel.states, state, contact);
 
-            let newState = isActiveRef.current;
+            let newState = false;
             if (contact.dataType === "bool") {
                 newState = `${state.value}`.toLowerCase() === 'true';
             }
@@ -177,7 +181,7 @@ const Device = (props: IDeviceProps) => {
             setIsActive(newState);
             setLastActivityTimeStamp(state.timeStamp);
 
-            console.log('Device state change', props.deviceModel?.alias, props.deviceModel?.identifier, state.name, contact.dataType, "Value: ", state.value, `(${typeof state.value})`)
+            // console.log('Device state change', props.deviceModel?.alias, props.deviceModel?.identifier, state.name, contact.dataType, "Value: ", state.value, `(${typeof state.value})`)
         } catch(error) {
             console.warn(error);
         }
@@ -215,19 +219,22 @@ const Device = (props: IDeviceProps) => {
         // }
     }, []);
 
-    const handleOutputContact = () => {
-        console.warn("output contact conduct triggering not implemented");
-        // HttpService.requestAsync("http://192.168.0.20:5000/beacon/conduct", "post", {
-        //     target: {
-        //         identifier: props.deviceModel?.identifier,
-        //         channel: "main",
-        //         contact: displayConfig.actionContactName
-        //     },
-        //     value: (!isActive).toString()
-        // });
-        // for (let index = 0; index < 5; index++) {
-        //     setTimeout(() => refreshActiveAsync(), (index + 1) * 200);
-        // }
+    const handleOutputContact = async () => {
+        if (typeof displayConfig.actionChannelName === 'undefined' ||
+            typeof displayConfig.actionContactName === 'undefined' ||
+            typeof props.deviceModel?.id === 'undefined')
+            return;
+
+        // Retrieve current boolean state
+        const currentState = getState(displayConfig.actionChannelName, displayConfig.actionContactName);
+        if (typeof currentState === 'undefined') 
+            return;
+
+        await ConductsService.RequestConductAsync({
+            deviceId: props.deviceModel.id,
+            channelName: displayConfig.actionChannelName,
+            contactName: displayConfig.actionContactName
+        }, !(`${currentState.value}`.toLowerCase() === 'true'));
     };
 
     const iconsMap = {

@@ -42,7 +42,7 @@ class SignalDeviceEndpointContactDto {
             throw Error("Invalid SignalDeviceEndpointContactDto - missing required properties.");
         }
 
-        return new DeviceContact(dto.name, dto.dataType);
+        return new DeviceContact(dto.name, dto.dataType, dto.access ?? 0);
     }
 }
 

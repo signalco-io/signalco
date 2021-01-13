@@ -1,15 +1,18 @@
 export interface IDeviceContact {
     name: string;
     dataType: string;
+    access: number;
 }
 
 export class DeviceContact implements IDeviceContact {
     name: string;
     dataType: string;
+    access: number;
 
-    constructor(name: string, dataType: string)  {
+    constructor(name: string, dataType: string, access: number)  {
         this.name = name;
         this.dataType = dataType;
+        this.access = access;
     }
 }
 
@@ -29,6 +32,7 @@ export class DeviceEndpoint implements IDeviceEndpoint {
 }
 
 export interface IDeviceModel {
+    id: string;
     alias: string;
     identifier: string;
     endpoints: IDeviceEndpoint[]
@@ -70,4 +74,10 @@ export class DeviceContactState implements IDeviceContactState {
         this.value = value;
         this.timeStamp = timeStamp;
     }
+}
+
+export interface IDeviceTarget {
+    deviceId: string;
+    channelName: string;
+    contactName: string;
 }

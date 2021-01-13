@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { IDeviceModel } from "../../src/devices/Device";
 import DevicesRepository from "../../src/devices/DevicesRepository";
 import Device, { IDeviceWidgetConfig } from "../devices/Device";
+import RGL from 'react-grid-layout';
+import { SizeMe } from 'react-sizeme';
 
 function defaultDisplay(config?: IDeviceModel) {
     const displayConfig: IDeviceWidgetConfig = {
@@ -49,35 +51,51 @@ function defaultDisplay(config?: IDeviceModel) {
         }
     }
 
-    if (displayConfig.icon === "light") {
-        displayConfig.actionContactName = "state";
-        displayConfig.activeContactName = "state";
-    } else if (displayConfig.icon === "motion") {
-        displayConfig.activeContactName = "occupancy";
-        displayConfig.lastActivity = true;
-    } else if (displayConfig.icon === "socket") {
-        displayConfig.actionContactName = "state";
-        displayConfig.activeContactName = "state";
-    } else if (displayConfig.icon === "window" || displayConfig.icon === "doors") {
-        displayConfig.activeContactName = "contact";
-        displayConfig.activeContactNegated = true;
-    } else if (displayConfig.icon === "switch") {
-        displayConfig.actionContactName = "state";
-        displayConfig.activeContactName = "state";
-    } else if (displayConfig.icon === "airquality") {
-        displayConfig.displayValues = [
-            {
-                contactName: "temperature",
-                units: "°C"
-            },
-            {
-                contactName: "humidity"
-            }
-        ]
-    }
+    // if (displayConfig.icon === "light") {
+    //     displayConfig.actionContactName = "state";
+    //     displayConfig.activeContactName = "state";
+    // } else if (displayConfig.icon === "motion") {
+    //     displayConfig.activeContactName = "occupancy";
+    //     displayConfig.lastActivity = true;
+    // } else if (displayConfig.icon === "socket") {
+    //     displayConfig.actionContactName = "state";
+    //     displayConfig.activeContactName = "state";
+    // } else if (displayConfig.icon === "window" || displayConfig.icon === "doors") {
+    //     displayConfig.activeContactName = "contact";
+    //     displayConfig.activeContactNegated = true;
+    // } else if (displayConfig.icon === "switch") {
+    //     displayConfig.actionContactName = "state";
+    //     displayConfig.activeContactName = "state";
+    // } else if (displayConfig.icon === "airquality") {
+    //     displayConfig.displayValues = [
+    //         {
+    //             contactName: "temperature",
+    //             units: "°C"
+    //         },
+    //         {
+    //             contactName: "humidity"
+    //         }
+    //     ]
+    // }
 
-    if (typeof displayConfig.actionContactName !== 'undefined')
-        displayConfig.activeChannelName = config?.endpoints[0]?.channel;
+    const endpoint = config?.endpoints[0];
+    const booleanContacts = endpoint?.contacts.filter(c => c.dataType === 'bool');
+    if (booleanContacts && booleanContacts.length > 0) {
+        if (booleanContacts.length === 1) {
+            // console.log('using contact ', config?.alias, booleanContacts[0]);
+            displayConfig.activeContactName = booleanContacts[0].name;
+            displayConfig.activeChannelName = endpoint?.channel;
+
+            if (booleanContacts[0].access & 2) {
+                displayConfig.actionContactName = booleanContacts[0].name;
+                displayConfig.actionChannelName = endpoint?.channel;
+            }
+        } else {
+            // console.warn("finding best match...", config?.alias, booleanContacts);
+        }
+    } else {
+        // console.warn("needs something else", config?.alias);
+    }
 
     return displayConfig;
 }
@@ -89,18 +107,33 @@ export interface IDeviceConfigWithDisplayConfig {
 
 const HomeOverview = () => {
     const [devices, setDevices] = useState<IDeviceConfigWithDisplayConfig[]>([]);
+    const [layout, setLayout] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const loadDevices = async () => {
             try {
                 const availableDevices = await DevicesRepository.getDevicesAsync();
-                setDevices(availableDevices.map(d => {
+                const updatedDevices = availableDevices.map(d => {
                     return { deviceModel: d, displayConfig: defaultDisplay(d) }
-                }));
-                setIsLoading(false);
+                });
+
+                const updatedLayout = updatedDevices.map((dev, index) => {
+                    return {
+                        i: dev.deviceModel.identifier,
+                        x: (index * 2) % 12,
+                        y: 0,
+                        w: 2,
+                        h: 1
+                    }
+                });
+
+                setDevices(updatedDevices);
+                setLayout(updatedLayout);
             } catch (error) {
                 console.warn("Failed to load devices from Beacon", error);
+            } finally {
+                setIsLoading(false);
             }
         }
 
@@ -108,21 +141,33 @@ const HomeOverview = () => {
     }, []);
 
     const renderDevice = (device: IDeviceConfigWithDisplayConfig) => (
-        <Grid item key={device.deviceModel.identifier}>
+        <div key={device.deviceModel.identifier}>
             <Device deviceModel={device.deviceModel} displayConfig={device.displayConfig} />
-        </Grid>
+        </div>
     );
 
-    if (isLoading) {
-        return (
-            <LinearProgress />
-        );
-    }
-
     return (
-        <Grid container spacing={1}>
-            {devices.map(d => renderDevice(d))}
-        </Grid>
+        <SizeMe>
+            {({ size }) => {
+                
+                return (
+                    <>
+                        {isLoading && <LinearProgress />}
+                        <RGL
+                            layout={layout}
+                            isBounded={true}
+                            width={size.width || (typeof window !== 'undefined' ? window.innerWidth : 1024)}
+                            rowHeight={51}
+                            cols={Math.floor((size.width || 1024) / 220 * 2)}
+                            // breakpoints={{ x3l: 1920, xxl: 1600, xl: 1400, lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+                            // cols={{ x3l: 14, xxl: 10, xl: 8, lg: 6, md: 5, sm: 4, xs: 3, xxs: 2 }}
+                            >
+                            {devices.map(d => renderDevice(d))}
+                        </RGL>
+                    </>
+                );
+            }}
+        </SizeMe>
     );
 };
 
