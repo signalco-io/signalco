@@ -230,11 +230,15 @@ const Device = (props: IDeviceProps) => {
         if (typeof currentState === 'undefined') 
             return;
 
+        var newState = !(`${currentState.value}`.toLowerCase() === 'true');
         await ConductsService.RequestConductAsync({
             deviceId: props.deviceModel.id,
             channelName: displayConfig.actionChannelName,
             contactName: displayConfig.actionContactName
-        }, !(`${currentState.value}`.toLowerCase() === 'true'));
+        }, newState);
+
+        currentState.value = newState.toString();
+        refreshActiveAsync();
     };
 
     const iconsMap = {

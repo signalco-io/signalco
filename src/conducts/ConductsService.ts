@@ -4,7 +4,9 @@ import HttpService from "../services/HttpService";
 export default class ConductsService {
     static async RequestConductAsync(target: IDeviceTarget, value?: any) {
         await HttpService.requestAsync("/conducts/request", "post", {
-            target: target,
+            deviceId: target.deviceId,
+            channelName: target.channelName,
+            contactName: target.contactName,
             valueSerialized: typeof value === 'string' ? value : JSON.stringify(value)
         });
     }

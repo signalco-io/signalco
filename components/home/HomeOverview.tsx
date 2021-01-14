@@ -121,8 +121,8 @@ const HomeOverview = () => {
                 const updatedLayout = updatedDevices.map((dev, index) => {
                     return {
                         i: dev.deviceModel.identifier,
-                        x: (index * 2) % 12,
-                        y: 0,
+                        x: (index * 2) % 10,
+                        y: Math.floor((index * 2) / 10),
                         w: 2,
                         h: 1
                     }
