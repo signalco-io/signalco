@@ -5,8 +5,8 @@ import HomeOverview from "../components/home/HomeOverview";
 
 const Dashboard = () => {
   return (
-    <Box sx={{ p: 2 }}>
-      <Grid container spacing={2}>
+    <Box sx={{ p: 1 }}>
+      <Grid container spacing={1}>
         <Grid item xs={12}>
           <HomeOverview />
         </Grid>
