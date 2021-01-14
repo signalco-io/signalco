@@ -156,6 +156,7 @@ const HomeOverview = () => {
                         <RGL
                             layout={layout}
                             isBounded={true}
+                            isDraggable={false}
                             width={size.width || (typeof window !== 'undefined' ? window.innerWidth : 1024)}
                             rowHeight={51}
                             cols={Math.floor((size.width || 1024) / 220 * 2)}
