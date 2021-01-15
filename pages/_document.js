@@ -38,7 +38,7 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <script> </script>
+          <script src="/viewport-adjust.js"></script>
         </body>
       </Html>
     );

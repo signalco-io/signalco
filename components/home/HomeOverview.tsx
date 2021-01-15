@@ -1,10 +1,11 @@
-import { Grid, LinearProgress } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { Alert, Box, Button, Grid, LinearProgress, Paper } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
 import { IDeviceModel } from "../../src/devices/Device";
 import DevicesRepository from "../../src/devices/DevicesRepository";
 import Device, { IDeviceWidgetConfig } from "../devices/Device";
 import RGL from 'react-grid-layout';
 import { SizeMe } from 'react-sizeme';
+import EditSharpIcon from '@material-ui/icons/EditSharp';
 
 function defaultDisplay(config?: IDeviceModel) {
     const displayConfig: IDeviceWidgetConfig = {
@@ -103,33 +104,70 @@ function defaultDisplay(config?: IDeviceModel) {
 export interface IDeviceConfigWithDisplayConfig {
     deviceModel: IDeviceModel;
     displayConfig: IDeviceWidgetConfig;
+    position: RGL.Layout;
 }
 
 const HomeOverview = () => {
     const [devices, setDevices] = useState<IDeviceConfigWithDisplayConfig[]>([]);
-    const [layout, setLayout] = useState<RGL.Layout[]>([]);
+    const [editedConfig, setEditedConfig] = useState<IDeviceConfigWithDisplayConfig[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isEditing, setIsEditing] = useState(false);
 
-    useEffect(() => {
-        const loadDevices = async () => {
-            try {
-                const availableDevices = await DevicesRepository.getDevicesAsync();
-                const updatedDevices = availableDevices.map(d => {
-                    return { deviceModel: d, displayConfig: defaultDisplay(d) }
-                });
+    const generateDashboardAsync = async () => {
+        try {
+            const screenSize = typeof window !== 'undefined' ? window.innerWidth : 1024;
+            const columnsCount = screenSize / 220;
 
-                const updatedLayout = updatedDevices.map((dev, index) => {
-                    return {
-                        i: dev.deviceModel.identifier,
-                        x: (index * 2) % 2,
-                        y: Math.floor((index * 2) / 2),
+            const availableDevices = await DevicesRepository.getDevicesAsync();
+            const updatedDevices = availableDevices.map((d, index) => {
+                return {
+                    deviceModel: d, displayConfig: defaultDisplay(d), position: {
+                        i: d.identifier,
+                        x: (index * 2) % columnsCount,
+                        y: Math.floor((index * 2) / columnsCount),
                         w: 2,
                         h: 1
                     }
-                });
+                }
+            });
 
-                setDevices(updatedDevices);
-                setLayout(updatedLayout);
+            const config = JSON.stringify(updatedDevices);
+            localStorage.setItem('dashboard-config', config);
+            return config;
+        } catch (error) {
+            console.warn("Failed to load devices from Beacon", error);
+            return "";
+        }
+    }
+
+    const handleEdit = () => {
+        setEditedConfig(devices);
+        setIsEditing(true);
+    }
+
+    const handleLayoutChange = (layouts: RGL.Layout[]) => {
+        if (!isEditing) return;
+
+        const configWithUpdatedLayout = editedConfig;
+        // Update layouts
+        layouts.forEach(l => {
+            const existingLayout = configWithUpdatedLayout.filter(c => c.position.i == l.i)[0];
+            if (typeof existingLayout !== 'undefined') {
+                existingLayout.position = l;
+            } else console.warn("Layout for item not found", l.i);
+        });
+        setEditedConfig(configWithUpdatedLayout);
+    };
+
+    const handleEditComplete = () => {
+        localStorage.setItem('dashboard-config', JSON.stringify(editedConfig));
+        setIsEditing(false);
+    };
+
+    useEffect(() => {
+        const loadAsync = async () => {
+            try {
+                setDevices(JSON.parse(localStorage.getItem('dashboard-config') ?? await generateDashboardAsync()));
             } catch (error) {
                 console.warn("Failed to load devices from Beacon", error);
             } finally {
@@ -137,36 +175,54 @@ const HomeOverview = () => {
             }
         }
 
-        loadDevices();
+        loadAsync();
     }, []);
 
     const renderDevice = (device: IDeviceConfigWithDisplayConfig) => (
-        <div key={device.deviceModel.identifier}>
+        <div key={device.deviceModel.identifier} data-grid={device.position}>
             <Device deviceModel={device.deviceModel} displayConfig={device.displayConfig} />
         </div>
     );
 
     return (
-        <SizeMe>
-            {({ size }) => {
-
-                return (
-                    <>
-                        {isLoading && <LinearProgress />}
-                        <RGL
-                            layout={layout}
-                            isBounded={true}
-                            isDraggable={false}
-                            width={size.width || (typeof window !== 'undefined' ? window.innerWidth : 1024)}
-                            rowHeight={51}
-                            cols={Math.floor((size.width || 1024) / 220 * 2)}
-                        >
-                            {devices.map(d => renderDevice(d))}
-                        </RGL>
-                    </>
-                );
-            }}
-        </SizeMe>
+        <Grid container direction="column" spacing={1} wrap="nowrap">
+            <Grid item>
+                {isEditing ? (
+                    <Alert
+                        severity="info"
+                        variant="filled"
+                        action={<Button variant="contained" size="small" onClick={handleEditComplete}>Done editing</Button>}>
+                        Add, move, resize your items.
+                    </Alert>
+                ) : (
+                        <Box sx={{ px: 2, py: 1 }}>
+                            <Button size="small" disabled={isLoading} startIcon={<EditSharpIcon />} onClick={handleEdit}>Edit</Button>
+                        </Box>
+                    )
+                }
+            </Grid>
+            <Grid item>
+                <SizeMe>
+                    {({ size }) => {
+                        return (
+                            <>
+                                {isLoading && <LinearProgress />}
+                                <RGL
+                                    isBounded={true}
+                                    isDraggable={isEditing}
+                                    onLayoutChange={handleLayoutChange}
+                                    width={size.width || (typeof window !== 'undefined' ? window.innerWidth : 1024)}
+                                    rowHeight={51}
+                                    cols={Math.floor((size.width || 1024) / 220 * 2)}
+                                >
+                                    {devices.map(d => renderDevice(d))}
+                                </RGL>
+                            </>
+                        );
+                    }}
+                </SizeMe>
+            </Grid>
+        </Grid>
     );
 };
 

@@ -49,7 +49,7 @@ const theme = createMuiTheme({
       fontFamily: "Raleway",
       fontWeight: 400,
     },
-  },
+  }
 });
 
 export default theme;
