@@ -116,7 +116,7 @@ const HomeOverview = () => {
     const generateDashboardAsync = async () => {
         try {
             const screenSize = typeof window !== 'undefined' ? window.innerWidth : 1024;
-            const columnsCount = screenSize / 220;
+            const columnsCount = Math.floor(screenSize / 220 * 2);
 
             const availableDevices = await DevicesRepository.getDevicesAsync();
             const updatedDevices = availableDevices.map((d, index) => {
