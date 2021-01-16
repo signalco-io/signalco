@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Grid, LinearProgress, Paper } from "@material-ui/core";
+import { Alert, Box, Button, Grid, LinearProgress, Paper, Tab, Tabs } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { IDeviceModel } from "../../src/devices/Device";
 import DevicesRepository from "../../src/devices/DevicesRepository";
@@ -6,11 +6,13 @@ import Device, { IDeviceWidgetConfig } from "../devices/Device";
 import RGL from 'react-grid-layout';
 import { SizeMe } from 'react-sizeme';
 import EditSharpIcon from '@material-ui/icons/EditSharp';
+import { TabContext, TabList, TabPanel } from "@material-ui/lab";
 
 function defaultDisplay(config?: IDeviceModel) {
     const displayConfig: IDeviceWidgetConfig = {
         activeContactNegated: false,
-        lastActivity: false
+        lastActivity: false,
+        showDiagram: false
     };
 
     if (config && config.alias) {
@@ -112,6 +114,8 @@ const HomeOverview = () => {
     const [editedConfig, setEditedConfig] = useState<IDeviceConfigWithDisplayConfig[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
+    const [widgetEditorIdentifier, setWidgetEditorIdentifier] = useState<string | undefined>();
+    const [value, setValue] = React.useState("1");
 
     const generateDashboardAsync = async () => {
         try {
@@ -126,7 +130,7 @@ const HomeOverview = () => {
                         x: (index * 2) % columnsCount,
                         y: Math.floor((index * 2) / columnsCount),
                         w: 2,
-                        h: 1
+                        h: d.endpoints[0]?.contacts.filter(c => c.dataType === "bool").length > 1 ? 2 : 1
                     }
                 }
             });
@@ -178,14 +182,69 @@ const HomeOverview = () => {
         loadAsync();
     }, []);
 
-    const renderDevice = (device: IDeviceConfigWithDisplayConfig) => (
-        <div key={device.deviceModel.identifier} data-grid={device.position}>
-            <Device deviceModel={device.deviceModel} displayConfig={device.displayConfig} />
-        </div>
-    );
+    const handleWidgetEdit = (deviceIdentifier: string) => {
+        var widget = editedConfig.filter(d => d.position.i === deviceIdentifier)[0];
+        if (typeof widget === 'undefined') {
+            console.warn("Widget not found. Edit not handled.")
+            return;
+        }
+
+        setWidgetEditorIdentifier(deviceIdentifier);
+    }
+
+    const handleReset = async () => {
+        setDevices(JSON.parse(await generateDashboardAsync()));
+    }
+
+    const renderDevice = (device: IDeviceConfigWithDisplayConfig) => {
+        return typeof widgetEditorIdentifier !== 'undefined' && widgetEditorIdentifier === device.deviceModel.identifier
+            ? (<div key={`edit-${device.deviceModel.identifier}`} data-grid={{
+                i: device.position.i,
+                x: device.position.x,
+                y: device.position.y,
+                w: Math.max(device.position.w, 4),
+                h: device.position.h + 6
+            }}>
+                <Paper style={{ height: '100%', width: '100%' }}>
+                    <Grid container direction="column" alignItems="stretch">
+                        <Grid item>
+                            <Box sx={{ py: 1 }}>
+                                <Device isEditing={isEditing} deviceModel={device.deviceModel} displayConfig={device.displayConfig} onEdit={handleWidgetEdit} />
+                            </Box>
+                        </Grid>
+                        <Grid item>
+                            <TabContext value={value}>
+                                <TabList variant="fullWidth" onChange={(e, v) => setValue(v)}>
+                                    <Tab value="1" label="Styles" style={{minWidth: 120}} />
+                                    <Tab value="2" label="Options" style={{minWidth: 120}} />
+                                    <Tab value="3" label="Other" style={{minWidth: 120}} />
+                                </TabList>
+                                <TabPanel value="1">
+                                    Styles
+                                </TabPanel>
+                                <TabPanel value="2">
+                                    Options
+                                </TabPanel>
+                                <TabPanel value="3">
+                                    Other
+                                </TabPanel>
+                            </TabContext>
+                        </Grid>
+                    </Grid>
+                </Paper>
+            </div>)
+            : (<div key={device.deviceModel.identifier} data-grid={device.position}>
+                <Device isEditing={isEditing} deviceModel={device.deviceModel} displayConfig={device.displayConfig} onEdit={handleWidgetEdit} />
+            </div>);
+    }
 
     return (
         <Grid container direction="column" spacing={1} wrap="nowrap">
+            {isLoading && (
+                <Grid item>
+                    <LinearProgress />
+                </Grid>
+            )}
             <Grid item>
                 {isEditing ? (
                     <Alert
@@ -197,29 +256,25 @@ const HomeOverview = () => {
                 ) : (
                         <Box sx={{ px: 2, py: 1 }}>
                             <Button size="small" disabled={isLoading} startIcon={<EditSharpIcon />} onClick={handleEdit}>Edit</Button>
+                            <Button size="small" disabled={isLoading} onClick={handleReset}>Reset</Button>
                         </Box>
                     )
                 }
             </Grid>
             <Grid item>
                 <SizeMe>
-                    {({ size }) => {
-                        return (
-                            <>
-                                {isLoading && <LinearProgress />}
-                                <RGL
-                                    isBounded={true}
-                                    isDraggable={isEditing}
-                                    onLayoutChange={handleLayoutChange}
-                                    width={size.width || (typeof window !== 'undefined' ? window.innerWidth : 1024)}
-                                    rowHeight={51}
-                                    cols={Math.floor((size.width || 1024) / 220 * 2)}
-                                >
-                                    {devices.map(d => renderDevice(d))}
-                                </RGL>
-                            </>
-                        );
-                    }}
+                    {({ size }) => (
+                        <RGL
+                            isDraggable={isEditing}
+                            compactType={null}
+                            onLayoutChange={handleLayoutChange}
+                            width={size.width || (typeof window !== 'undefined' ? window.innerWidth : 1024)}
+                            rowHeight={51}
+                            cols={Math.floor((size.width || 1024) / 220 * 2)}
+                        >
+                            {devices.map(d => renderDevice(d))}
+                        </RGL>
+                    )}
                 </SizeMe>
             </Grid>
         </Grid>

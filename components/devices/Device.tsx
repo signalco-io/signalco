@@ -1,4 +1,4 @@
-import { Box, ButtonBase, Grid, Paper, Typography } from "@material-ui/core";
+import { Badge, Box, Button, ButtonBase, Grid, IconButton, Paper, Typography } from "@material-ui/core";
 import BorderAllIcon from '@material-ui/icons/BorderAll';
 import BorderVerticalIcon from '@material-ui/icons/BorderVertical';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
@@ -16,12 +16,15 @@ import { Area, AreaChart } from "recharts";
 import ConductsService from "../../src/conducts/ConductsService";
 import { IDeviceContact, IDeviceContactState, IDeviceModel } from "../../src/devices/Device";
 import DevicesRepository from "../../src/devices/DevicesRepository";
-import HttpService from "../../src/services/HttpService";
+import EditSharpIcon from '@material-ui/icons/EditSharp';
+
 
 export interface IDeviceProps {
-    deviceModel?: IDeviceModel,
     inline?: boolean,
-    displayConfig: IDeviceWidgetConfig
+    isEditing: boolean,
+    deviceModel?: IDeviceModel,
+    displayConfig: IDeviceWidgetConfig,
+    onEdit: (deviceIdentifier: string) => void
 }
 
 export interface IHistoricalValue {
@@ -40,6 +43,8 @@ export interface IDeviceWidgetConfig {
     actionChannelName?: string;
     lastActivity: boolean;
     displayValues?: IDeviceWidgetValueDisplayConfig[];
+
+    showDiagram: boolean;
 }
 
 function colorTemperatureToRGB(kelvin: number) {
@@ -147,6 +152,12 @@ const Device = (props: IDeviceProps) => {
     const [deviceModel, setDeviceModel] = useState<IDeviceModel>();
 
     const displayConfig = props.displayConfig;
+    const hasAction =
+        typeof displayConfig.actionChannelName !== "undefined" &&
+        typeof displayConfig.actionContactName !== "undefined";
+    const hasActive =
+        typeof displayConfig.activeChannelName !== "undefined" &&
+        typeof displayConfig.activeContactName !== "undefined";
 
     const getState = (channel: string, contact: string) => {
         return deviceModel?.states.filter(s =>
@@ -154,9 +165,10 @@ const Device = (props: IDeviceProps) => {
     }
 
     const refreshActiveAsync = async () => {
-        if (!deviceModel?.identifier ||
-            typeof displayConfig.activeContactName === "undefined" ||
-            typeof displayConfig.activeChannelName === "undefined")
+        if (!deviceModel?.identifier || 
+            !hasActive ||
+            typeof displayConfig.activeChannelName === 'undefined' ||
+            typeof displayConfig.activeContactName === 'undefined')
             return;
 
         try {
@@ -252,6 +264,12 @@ const Device = (props: IDeviceProps) => {
     }, [deviceModel])
 
     const handleOutputContact = async () => {
+        if (props.isEditing) {
+            if (typeof props.deviceModel !== 'undefined')
+                props.onEdit(props.deviceModel?.identifier);
+            return;
+        }
+
         if (typeof displayConfig.actionChannelName === 'undefined' ||
             typeof displayConfig.actionContactName === 'undefined' ||
             typeof props.deviceModel?.id === 'undefined')
@@ -287,7 +305,9 @@ const Device = (props: IDeviceProps) => {
     const IconComponent = iconsMap[displayConfig.icon || "unknown"][isActive ? 1 : 0];
     const displayName = displayConfig?.displayName || props.deviceModel?.alias;
     const ActionComponent = typeof displayConfig.actionContactName !== "undefined" ? ButtonBase : React.Fragment;
-    const actionComponentProps = typeof displayConfig.actionContactName !== "undefined" ? { onClick: () => handleOutputContact() } : {};
+    const actionComponentProps = typeof displayConfig.actionContactName !== "undefined"
+        ? { onClick: () => handleOutputContact(), style: { height: '100%' } }
+        : {};
 
     let backgroundColor = undefined;
     let color = undefined;
@@ -301,10 +321,23 @@ const Device = (props: IDeviceProps) => {
         // }
     }
 
-    const showDiagram = false;
+    const handleOutputClick = async (name: string) => {
+        if (typeof deviceModel === 'undefined' ||
+            typeof deviceModel?.endpoints[0] === 'undefined')
+            return;
+
+        await ConductsService.RequestConductAsync({
+            deviceId: deviceModel.id,
+            channelName: deviceModel?.endpoints[0]?.channel,
+            contactName: name
+        }, "1");
+    }
+
+    const showDiagram = props.displayConfig.showDiagram;
+    const outputs = deviceModel?.endpoints[0]?.contacts.filter(c => c.dataType === "bool" && (c.access & 2) > 0 && c.name !== props.displayConfig.actionContactName);
 
     return (
-        <Paper style={{ backgroundColor: backgroundColor, color: color }}>
+        <Paper variant={hasAction ? "outlined" : "elevation"} style={{ height: '100%', backgroundColor: backgroundColor, color: color, transition: 'all 0.5s ease', transitionProperty: 'background-color, color' }}>
             <ActionComponent {...actionComponentProps}>
                 <Box sx={{ width: 220 }}>
                     <Grid container direction="row" justifyContent="space-between" alignItems={props.inline ? "center" : "flex-start"}>
@@ -319,8 +352,8 @@ const Device = (props: IDeviceProps) => {
                             </Box>
                         </Grid>
                         {displayConfig.displayValues && displayConfig.displayValues.map(dvconfig => (
-                            <Grid item xs={12} key={`displayValue-${props.deviceModel?.identifier}-${dvconfig.contactName}`}>
-                                <DeviceWidgetValueDisplay config={dvconfig} deviceIdentifier={props.deviceModel!.identifier!} />
+                            <Grid item xs={12} key={`displayValue-${deviceModel?.identifier}-${dvconfig.contactName}`}>
+                                <DeviceWidgetValueDisplay config={dvconfig} deviceIdentifier={deviceModel!.identifier!} />
                             </Grid>
                         ))}
                         {displayConfig.lastActivity &&
@@ -335,16 +368,23 @@ const Device = (props: IDeviceProps) => {
                                     </Typography>
                                 </Box>
                             </Grid>}
-                        {showDiagram && (
-                            <Grid item>
-                                <AreaChart width={220} height={40} data={historicalData} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
-                                    <Area type="basis" dataKey="value" dot={false} fill="#ffffff" fillOpacity={0.1} stroke="#aeaeae" strokeWidth={2} />
-                                </AreaChart>
-                            </Grid>
-                        )}
                     </Grid>
                 </Box>
             </ActionComponent>
+            <Grid container direction="row">
+                {outputs && outputs.map(o => (
+                    <Grid item>
+                        <Button variant="outlined" size="small" onClick={() => handleOutputClick(o.name)}>{o.name}</Button>
+                    </Grid>
+                ))}
+            </Grid>
+            {showDiagram && (
+                <Grid item>
+                    <AreaChart width={220} height={40} data={historicalData} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+                        <Area type="basis" dataKey="value" dot={false} fill="#ffffff" fillOpacity={0.1} stroke="#aeaeae" strokeWidth={2} />
+                    </AreaChart>
+                </Grid>
+            )}
         </Paper>
     );
 };
