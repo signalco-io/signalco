@@ -252,8 +252,8 @@ const Device = (props: IDeviceProps) => {
             const doFunc = async () => {
                 await HttpService.requestAsync("/conducts/request", "post", {
                     deviceId: conductReq.di,
-                    channelName: conductReq.ch,
-                    contactName: conductReq.cn,
+                    channelName: deviceModel?.endpoints[0].channel,
+                    contactName: conductReq.c,
                     valueSerialized: "1"
                 });
                 window.location.href = window.location.origin + window.location.pathname;
