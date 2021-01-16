@@ -248,9 +248,14 @@ const Device = (props: IDeviceProps) => {
         if (window.location.search.startsWith('?conduct=')) {
             const conductRaw = decodeURIComponent(window.location.search.substring(9));
             const conductReq = JSON.parse(conductRaw);
-            
+            console.log(conductReq)
             const doFunc = async () => {
-                await HttpService.requestAsync("/conducts/request", "post", conductReq);
+                await HttpService.requestAsync("/conducts/request", "post", {
+                    deviceId: conductReq.di,
+                    channelName: conductReq.ch,
+                    contactName: conductReq.cn,
+                    valueSerialized: "1"
+                });
                 window.location.href = window.location.origin + window.location.pathname;
             }
             doFunc();
