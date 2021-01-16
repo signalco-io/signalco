@@ -17,6 +17,7 @@ import ConductsService from "../../src/conducts/ConductsService";
 import { IDeviceContact, IDeviceContactState, IDeviceModel } from "../../src/devices/Device";
 import DevicesRepository from "../../src/devices/DevicesRepository";
 import EditSharpIcon from '@material-ui/icons/EditSharp';
+import HttpService from "../../src/services/HttpService";
 
 
 export interface IDeviceProps {
@@ -242,6 +243,17 @@ const Device = (props: IDeviceProps) => {
 
             // Set device
             setDeviceModel(device);
+        }
+
+        if (window.location.search.startsWith('?conduct=')) {
+            const conductRaw = decodeURIComponent(window.location.search.substring(9));
+            const conductReq = JSON.parse(conductRaw);
+            
+            const doFunc = async () => {
+                await HttpService.requestAsync("/conducts/request", "post", conductReq);
+                window.location.href = window.location.origin + window.location.pathname;
+            }
+            doFunc();
         }
 
         loadDevice();
