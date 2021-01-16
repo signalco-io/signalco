@@ -3,7 +3,7 @@ import AppSettingsProvider from "./AppSettingsProvider";
 import { trimStartChar, isAbsoluteUrl } from "../helpers/StringHelpers";
 
 export default class HttpService {
-  public static token: string | null = null;
+  public static token?: string;
   private static getBearerToken = () => {
     if (HttpService.token == null) throw new Error("Not logged in.");
     return `Bearer ${HttpService.token}`;

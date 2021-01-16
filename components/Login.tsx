@@ -35,7 +35,7 @@ const Login = () => {
             <Typography variant="h1">Signal</Typography>
           </Grid>
           <Grid item>
-            <Box width={72} height={72}></Box>
+            <Box sx={{width: 72, height: 72}}></Box>
           </Grid>
         </Grid>
       </Grid>

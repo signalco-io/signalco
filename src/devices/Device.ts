@@ -37,6 +37,8 @@ export interface IDeviceModel {
     identifier: string;
     endpoints: IDeviceEndpoint[]
     states: IDeviceContactState[];
+
+    updateState(channelName: string, contactName: string, valueSerialized: string|undefined, timeStamp: Date): void;
 }
 
 export class DeviceModel implements IDeviceModel {
@@ -53,26 +55,51 @@ export class DeviceModel implements IDeviceModel {
         this.endpoints = endpoints;
         this.states = states;
     }
+
+    updateState(channelName: string, contactName: string, valueSerialized: string|undefined, timeStamp: Date) {
+        const state = this.states.filter(s => s.channel === channelName && s.name === contactName)[0];
+        if (state) {
+            state.updateState(valueSerialized, timeStamp);
+        }
+    }
 }
 
 export interface IDeviceContactState {
     name: string;
     channel: string;
-    value?: any
+    valueSerialized?: any
     timeStamp: Date;
+
+    updateState(valueSerialized: string|undefined, timeStamp: Date): void;
+    onChanged(callback: Function): void;
 }
 
 export class DeviceContactState implements IDeviceContactState {
     name: string;
     channel: string;
-    value?: any;
+    valueSerialized?: any;
     timeStamp: Date;
 
-    constructor(name: string, channel: string, value: any, timeStamp: Date) {
+    _changedListeners: Function[] = [];
+
+    constructor(name: string, channel: string, valueSerialized: string|undefined, timeStamp: Date) {
         this.name = name;
         this.channel = channel;
-        this.value = value;
+        this.valueSerialized = valueSerialized;
         this.timeStamp = timeStamp;
+    }
+
+    updateState(valueSerialized: string|undefined, timeStamp: Date) {
+        this.valueSerialized = valueSerialized;
+        this.timeStamp = timeStamp;
+        
+        this._changedListeners.forEach(listener => {
+            listener();
+        });
+    }
+
+    onChanged(callback: Function) {
+        this._changedListeners.push(callback);
     }
 }
 
@@ -80,4 +107,25 @@ export interface IDeviceTarget {
     deviceId: string;
     channelName: string;
     contactName: string;
+}
+
+export interface IDeviceStatePublish extends IDeviceTarget {
+    valueSerialized?: string;
+    timeStamp: Date;
+}
+
+export class DeviceStatePublish implements IDeviceStatePublish {
+    deviceId: string;
+    channelName: string;
+    contactName: string;
+    valueSerialized?: string;
+    timeStamp: Date;
+
+    constructor(deviceId: string, channelName: string, contactName: string, valueSerialized: string|undefined, timeStamp: Date) {
+        this.deviceId = deviceId;
+        this.contactName = contactName;
+        this.channelName = channelName;
+        this.valueSerialized = valueSerialized;
+        this.timeStamp = timeStamp;
+    }
 }

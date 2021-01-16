@@ -15,6 +15,7 @@ import TimeAgo from 'react-timeago';
 import { Area, AreaChart } from "recharts";
 import ConductsService from "../../src/conducts/ConductsService";
 import { IDeviceContact, IDeviceContactState, IDeviceModel } from "../../src/devices/Device";
+import DevicesRepository from "../../src/devices/DevicesRepository";
 import HttpService from "../../src/services/HttpService";
 
 export interface IDeviceProps {
@@ -143,46 +144,44 @@ const Device = (props: IDeviceProps) => {
     const [historicalData, setHistoricalData] = useState<IHistoricalValue[]>([]);
     const [isActive, setIsActive] = useState<boolean>(false);
     const [lastActivityTimeStamp, setLastActivityTimeStamp] = useState<Date | undefined>(undefined);
+    const [deviceModel, setDeviceModel] = useState<IDeviceModel>();
 
     const displayConfig = props.displayConfig;
 
     const getState = (channel: string, contact: string) => {
-        return props.deviceModel?.states.filter(s => 
+        return deviceModel?.states.filter(s =>
             s.channel === channel && s.name === contact)[0];
     }
 
     const refreshActiveAsync = async () => {
-        if (!props.deviceModel?.identifier ||
+        if (!deviceModel?.identifier ||
             typeof displayConfig.activeContactName === "undefined" ||
             typeof displayConfig.activeChannelName === "undefined")
             return;
 
         try {
             const state = getState(displayConfig.activeChannelName, displayConfig.activeContactName);
-            const contact = props.deviceModel.endpoints
+            const contact = deviceModel.endpoints
                 .filter(e => e.channel === displayConfig.activeChannelName)[0]
                 .contacts.filter(c => c.name === displayConfig.activeContactName)[0];
             if (state == null || contact == null) {
-                // console.warn("State not found for", props.deviceModel.alias, displayConfig.activeChannelName, displayConfig.activeContactName, props.deviceModel.states);
+                console.warn("State not found for", deviceModel.alias, displayConfig.activeChannelName, displayConfig.activeContactName, deviceModel.states);
                 return;
             }
 
-            console.log(props.deviceModel.alias, props.deviceModel.states, state, contact);
+            console.log("Refreshing state for", deviceModel.alias, contact.name, state.valueSerialized, state.timeStamp);
 
             let newState = false;
             if (contact.dataType === "bool") {
-                newState = `${state.value}`.toLowerCase() === 'true';
+                newState = `${state.valueSerialized}`.toLowerCase() === 'true';
             }
 
             if (displayConfig.activeContactNegated)
                 newState = !newState;
 
-            // if (newState === isActiveRef.current) return;
             setIsActive(newState);
             setLastActivityTimeStamp(state.timeStamp);
-
-            // console.log('Device state change', props.deviceModel?.alias, props.deviceModel?.identifier, state.name, contact.dataType, "Value: ", state.value, `(${typeof state.value})`)
-        } catch(error) {
+        } catch (error) {
             console.warn(error);
         }
     };
@@ -208,7 +207,6 @@ const Device = (props: IDeviceProps) => {
     // };
 
     useEffect(() => {
-        refreshActiveAsync();
         // loadHistoricalDataAsync();
 
         // return () => {
@@ -217,7 +215,41 @@ const Device = (props: IDeviceProps) => {
         //         clearTimeout(refreshActionTimeoutClearRef.current);
         //     }
         // }
+
+        const loadDevice = async () => {
+            if (typeof props.deviceModel === 'undefined') {
+                console.warn("Unable to load device, provided device model is undefined.");
+                return;
+            }
+
+            const device = await DevicesRepository.getDeviceAsync(props.deviceModel.id);
+            if (typeof device === 'undefined') {
+                console.warn("Failed to retrieve device with id", props.deviceModel.id)
+                return;
+            }
+
+            // Set device
+            setDeviceModel(device);
+        }
+
+        loadDevice();
     }, []);
+
+    useEffect(() => {
+        if (typeof deviceModel === 'undefined') return;
+
+        // Attach to contact changes
+        if (typeof displayConfig.activeChannelName !== 'undefined' &&
+            typeof displayConfig.activeContactName !== 'undefined') {
+            const contact = deviceModel?.states.filter(s => s.channel === displayConfig.activeChannelName &&
+                s.name === displayConfig.activeContactName)[0];
+            if (contact) {
+                contact.onChanged(refreshActiveAsync);
+            }
+        }
+
+        refreshActiveAsync();
+    }, [deviceModel])
 
     const handleOutputContact = async () => {
         if (typeof displayConfig.actionChannelName === 'undefined' ||
@@ -227,17 +259,17 @@ const Device = (props: IDeviceProps) => {
 
         // Retrieve current boolean state
         const currentState = getState(displayConfig.actionChannelName, displayConfig.actionContactName);
-        if (typeof currentState === 'undefined') 
+        if (typeof currentState === 'undefined')
             return;
 
-        var newState = !(`${currentState.value}`.toLowerCase() === 'true');
+        var newState = !(`${currentState.valueSerialized}`.toLowerCase() === 'true');
         await ConductsService.RequestConductAsync({
             deviceId: props.deviceModel.id,
             channelName: displayConfig.actionChannelName,
             contactName: displayConfig.actionContactName
         }, newState);
 
-        currentState.value = newState.toString();
+        currentState.valueSerialized = newState.toString();
         refreshActiveAsync();
     };
 
