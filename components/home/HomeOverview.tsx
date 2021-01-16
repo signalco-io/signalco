@@ -7,6 +7,7 @@ import RGL from 'react-grid-layout';
 import { SizeMe } from 'react-sizeme';
 import EditSharpIcon from '@material-ui/icons/EditSharp';
 import { TabContext, TabList, TabPanel } from "@material-ui/lab";
+import HttpService from "../../src/services/HttpService";
 
 function defaultDisplay(config?: IDeviceModel) {
     const displayConfig: IDeviceWidgetConfig = {
@@ -177,6 +178,22 @@ const HomeOverview = () => {
             } finally {
                 setIsLoading(false);
             }
+        }
+
+        if (window.location.search.startsWith('?conduct=')) {
+            const conductRaw = decodeURIComponent(window.location.search.substring(9));
+            const conductReq = JSON.parse(conductRaw);
+            console.log(conductReq)
+            const doFunc = async () => {
+                await HttpService.requestAsync("/conducts/request", "post", {
+                    deviceId: conductReq.di,
+                    channelName: "signal",
+                    contactName: conductReq.c,
+                    valueSerialized: "1"
+                });
+                window.location.href = window.location.origin + window.location.pathname;
+            }
+            doFunc();
         }
 
         loadAsync();
