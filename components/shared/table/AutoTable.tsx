@@ -1,18 +1,11 @@
 import {
   Alert,
   LinearProgress, Link, Table,
-
-
-
-  TableBody, TableCell, TableHead,
-  TableRow,
-
-
-
-
+  TableBody, TableCell, TableHead, TableRow,
   Typography
 } from "@material-ui/core";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
+import { observer } from "mobx-react-lite";
 import React from "react";
 import {
   camelToSentenceCase,
@@ -27,8 +20,9 @@ export interface IAutoTableItem {
 }
 
 export interface IAutoTableProps<T extends IAutoTableItem> extends IErrorProps {
-  items: Array<T> | null;
+  items: Array<T> | undefined;
   isLoading: boolean;
+  onRowClick?: (item: IAutoTableItem) => void;
 }
 
 export interface IAutoTableCellRendererProps {
@@ -47,7 +41,7 @@ const ErrorRow = (props: IErrorProps) => {
   );
 };
 
-function CellRenderer(props: IAutoTableCellRendererProps) {
+const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
   if (typeof props.value === "string" && isAbsoluteUrl(props.value as string))
     return (
       <TableCell title={props.value}>
@@ -62,20 +56,35 @@ function CellRenderer(props: IAutoTableCellRendererProps) {
       <Typography variant="body2">{props.value}</Typography>
     </TableCell>
   );
-}
+});
+
+const RowRenderer = observer(({ item, onRowClick }: { item: IAutoTableItem, onRowClick?: (item: IAutoTableItem) => void }) => {
+  return (
+    <TableRow
+      key={item.id}
+      hover={typeof onRowClick !== 'undefined'}
+      onClick={() => onRowClick && onRowClick(item)}>
+      {Object.keys(item)
+        .filter((ik) => ik !== "id" && !ik.startsWith("_"))
+        .map((itemKey) => (
+          <CellRenderer value={item[itemKey]} key={itemKey} />
+        ))}
+    </TableRow>
+  )
+});
 
 function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
   const headers =
     props.items &&
     props.items.length > 0 &&
     Object.keys(props.items[0])
-      .filter((ik) => ik !== "id")
+      .filter((ik) => ik !== "id" && !ik.startsWith("_"))
       .map((ik) => {
         return { id: ik, value: camelToSentenceCase(ik) };
       });
 
   return (
-    <Table>
+    <Table stickyHeader>
       {!props.isLoading &&
         !!!props.error &&
         headers &&
@@ -86,8 +95,8 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
               {headers ? (
                 headers.map((h) => <TableCell key={h.id}>{h.value}</TableCell>)
               ) : (
-                <TableCell></TableCell>
-              )}
+                  <TableCell></TableCell>
+                )}
             </TableRow>
           </TableHead>
         )}
@@ -99,28 +108,20 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
             </TableCell>
           </TableRow>
         ) : (
-          <>
-            {props.error && <ErrorRow error={props.error} />}
-            {props.items &&
-              props.items.length > 0 &&
-              props.items.map((item) => (
-                <TableRow key={item.id}>
-                  {Object.keys(item)
-                    .filter((ik) => ik !== "id")
-                    .map((itemKey) => (
-                      <CellRenderer value={item[itemKey]} key={itemKey} />
-                    ))}
+            <>
+              {props.error && <ErrorRow error={props.error} />}
+              {props.items &&
+                props.items.length > 0 &&
+                props.items.map(item => <RowRenderer item={item} onRowClick={props.onRowClick} />)}
+              {(!!!props.items || props.items.length <= 0) && (
+                <TableRow>
+                  <TableCell>
+                    <ResultsPlaceholder />
+                  </TableCell>
                 </TableRow>
-              ))}
-            {(!!!props.items || props.items.length <= 0) && (
-              <TableRow>
-                <TableCell>
-                  <ResultsPlaceholder />
-                </TableCell>
-              </TableRow>
-            )}
-          </>
-        )}
+              )}
+            </>
+          )}
       </TableBody>
     </Table>
   );

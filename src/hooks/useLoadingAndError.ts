@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const useLoadingAndError = <TIn, TOut>(
   loadData: () => Promise<TIn[]>,
   transformItem?: (item: TIn) => TOut
-): [Array<TOut> | undefined, boolean, string | undefined] => {
+): [Array<TOut>, boolean, string | undefined] => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | undefined>(undefined);
   const [items, setItems] = useState<Array<TOut> | undefined>(undefined);
@@ -24,7 +24,7 @@ const useLoadingAndError = <TIn, TOut>(
     loadDataAsync();
   }, []);
 
-  return [items, isLoading, error];
+  return [items ?? [], isLoading, error];
 };
 
 export default useLoadingAndError;

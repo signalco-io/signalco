@@ -55,14 +55,14 @@ class SignalDeviceContactStateDto {
     name?: string;
     channel?: string;
     valueSerialized?: string;
-    timeStamp?: Date;
+    timeStamp?: string;
 
     static FromDto(dto: SignalDeviceContactStateDto): IDeviceContactState {
         if (dto.name == null || dto.channel == null || dto.timeStamp == null) {
             throw Error("Invalid SignalDeviceContactStateDto - missing required properties.");
         }
 
-        return new DeviceContactState(dto.name, dto.channel, dto.valueSerialized, dto.timeStamp);
+        return new DeviceContactState(dto.name, dto.channel, dto.valueSerialized, new Date(dto.timeStamp));
     }
 }
 
@@ -71,14 +71,14 @@ export class SignalDeviceStatePublishDto {
     ChannelName?: string;
     ContactName?: string;
     ValueSerialized?: string;
-    TimeStamp?: Date;
+    TimeStamp?: string;
 
     static FromDto(dto: SignalDeviceStatePublishDto): IDeviceStatePublish {
         if (dto.DeviceId == null || dto.ChannelName == null || dto.ContactName == null || dto.TimeStamp == null) {
             throw Error("Invalid SignalDeviceStatePublishDto - missing required properties.");
         }
 
-        return new DeviceStatePublish(dto.DeviceId, dto.ChannelName, dto.ContactName, dto.ValueSerialized, dto.TimeStamp);
+        return new DeviceStatePublish(dto.DeviceId, dto.ChannelName, dto.ContactName, dto.ValueSerialized, new Date(dto.TimeStamp));
     }
 }
 

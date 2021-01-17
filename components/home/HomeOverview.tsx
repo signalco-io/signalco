@@ -213,6 +213,38 @@ const HomeOverview = () => {
         setDevices(JSON.parse(await generateDashboardAsync()));
     }
 
+    const renderDeviceEditor = (device: IDeviceConfigWithDisplayConfig) => {
+        return (
+            <Paper style={{ height: '100%', width: '100%' }}>
+                <Grid container direction="column" alignItems="stretch">
+                    <Grid item>
+                        <Box sx={{ py: 1 }}>
+                            <Device isEditingWidget deviceModel={device.deviceModel} displayConfig={device.displayConfig} onEdit={handleWidgetEdit} />
+                        </Box>
+                    </Grid>
+                    <Grid item>
+                        <TabContext value={value}>
+                            <TabList variant="fullWidth" onChange={(e, v) => setValue(v)}>
+                                <Tab value="1" label="Styles" style={{ minWidth: 120 }} />
+                                <Tab value="2" label="Options" style={{ minWidth: 120 }} />
+                                <Tab value="3" label="Other" style={{ minWidth: 120 }} />
+                            </TabList>
+                            <TabPanel value="1">
+                                Styles
+                                </TabPanel>
+                            <TabPanel value="2">
+                                Options
+                                </TabPanel>
+                            <TabPanel value="3">
+                                Other
+                                </TabPanel>
+                        </TabContext>
+                    </Grid>
+                </Grid>
+            </Paper>
+        );
+    };
+
     const renderDevice = (device: IDeviceConfigWithDisplayConfig) => {
         return typeof widgetEditorIdentifier !== 'undefined' && widgetEditorIdentifier === device.deviceModel.identifier
             ? (<div key={`edit-${device.deviceModel.identifier}`} data-grid={{
@@ -220,38 +252,12 @@ const HomeOverview = () => {
                 x: device.position.x,
                 y: device.position.y,
                 w: Math.max(device.position.w, 4),
-                h: device.position.h + 6
+                h: device.position.h + 8
             }}>
-                <Paper style={{ height: '100%', width: '100%' }}>
-                    <Grid container direction="column" alignItems="stretch">
-                        <Grid item>
-                            <Box sx={{ py: 1 }}>
-                                <Device isEditing={isEditing} deviceModel={device.deviceModel} displayConfig={device.displayConfig} onEdit={handleWidgetEdit} />
-                            </Box>
-                        </Grid>
-                        <Grid item>
-                            <TabContext value={value}>
-                                <TabList variant="fullWidth" onChange={(e, v) => setValue(v)}>
-                                    <Tab value="1" label="Styles" style={{minWidth: 120}} />
-                                    <Tab value="2" label="Options" style={{minWidth: 120}} />
-                                    <Tab value="3" label="Other" style={{minWidth: 120}} />
-                                </TabList>
-                                <TabPanel value="1">
-                                    Styles
-                                </TabPanel>
-                                <TabPanel value="2">
-                                    Options
-                                </TabPanel>
-                                <TabPanel value="3">
-                                    Other
-                                </TabPanel>
-                            </TabContext>
-                        </Grid>
-                    </Grid>
-                </Paper>
+                {renderDeviceEditor(device)}
             </div>)
             : (<div key={device.deviceModel.identifier} data-grid={device.position}>
-                <Device isEditing={isEditing} deviceModel={device.deviceModel} displayConfig={device.displayConfig} onEdit={handleWidgetEdit} />
+                <Device isEditingDashboard={isEditing} deviceModel={device.deviceModel} displayConfig={device.displayConfig} onEdit={handleWidgetEdit} />
             </div>);
     }
 
@@ -267,13 +273,20 @@ const HomeOverview = () => {
                     <Alert
                         severity="info"
                         variant="filled"
+                        style={{ borderRadius: 0 }}
                         action={<Button variant="contained" size="small" onClick={handleEditComplete}>Done editing</Button>}>
                         Add, move, resize your items.
                     </Alert>
                 ) : (
-                        <Box sx={{ px: 2, py: 1 }}>
-                            <Button size="small" disabled={isLoading} startIcon={<EditSharpIcon />} onClick={handleEdit}>Edit</Button>
-                            <Button size="small" disabled={isLoading} onClick={handleReset}>Reset</Button>
+                        <Box sx={{ px: 2 }}>
+                            <Grid container spacing={1} justifyContent="flex-end">
+                                <Grid item>
+                                    <Button disabled={isLoading} startIcon={<EditSharpIcon />} onClick={handleEdit}>Edit</Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button disabled={isLoading} onClick={handleReset}>Reset</Button>
+                                </Grid>
+                            </Grid>
                         </Box>
                     )
                 }

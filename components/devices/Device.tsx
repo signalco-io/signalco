@@ -17,12 +17,12 @@ import ConductsService from "../../src/conducts/ConductsService";
 import { IDeviceContact, IDeviceContactState, IDeviceModel } from "../../src/devices/Device";
 import DevicesRepository from "../../src/devices/DevicesRepository";
 import EditSharpIcon from '@material-ui/icons/EditSharp';
-import HttpService from "../../src/services/HttpService";
+import DoneSharpIcon from '@material-ui/icons/DoneSharp';
 
 
 export interface IDeviceProps {
-    inline?: boolean,
-    isEditing: boolean,
+    isEditingDashboard?: boolean,
+    isEditingWidget?: boolean,
     deviceModel?: IDeviceModel,
     displayConfig: IDeviceWidgetConfig,
     onEdit: (deviceIdentifier: string) => void
@@ -166,7 +166,7 @@ const Device = (props: IDeviceProps) => {
     }
 
     const refreshActiveAsync = async () => {
-        if (!deviceModel?.identifier || 
+        if (!deviceModel?.identifier ||
             !hasActive ||
             typeof displayConfig.activeChannelName === 'undefined' ||
             typeof displayConfig.activeContactName === 'undefined')
@@ -265,12 +265,6 @@ const Device = (props: IDeviceProps) => {
     }, [deviceModel])
 
     const handleOutputContact = async () => {
-        if (props.isEditing) {
-            if (typeof props.deviceModel !== 'undefined')
-                props.onEdit(props.deviceModel?.identifier);
-            return;
-        }
-
         if (typeof displayConfig.actionChannelName === 'undefined' ||
             typeof displayConfig.actionContactName === 'undefined' ||
             typeof props.deviceModel?.id === 'undefined')
@@ -305,7 +299,7 @@ const Device = (props: IDeviceProps) => {
 
     const IconComponent = iconsMap[displayConfig.icon || "unknown"][isActive ? 1 : 0];
     const displayName = displayConfig?.displayName || props.deviceModel?.alias;
-    const ActionComponent = typeof displayConfig.actionContactName !== "undefined" ? ButtonBase : React.Fragment;
+    const ActionComponent = !props.isEditingDashboard && !props.isEditingWidget && typeof displayConfig.actionContactName !== "undefined" ? ButtonBase : React.Fragment;
     const actionComponentProps = typeof displayConfig.actionContactName !== "undefined"
         ? { onClick: () => handleOutputContact(), style: { height: '100%' } }
         : {};
@@ -338,39 +332,55 @@ const Device = (props: IDeviceProps) => {
     const outputs = deviceModel?.endpoints[0]?.contacts.filter(c => c.dataType === "bool" && (c.access & 2) > 0 && c.name !== props.displayConfig.actionContactName);
 
     return (
-        <Paper variant={hasAction ? "outlined" : "elevation"} style={{ height: '100%', backgroundColor: backgroundColor, color: color, transition: 'all 0.5s ease', transitionProperty: 'background-color, color' }}>
+        <Paper
+            variant={hasAction ? "outlined" : "elevation"}
+            style={{ height: '100%', backgroundColor: backgroundColor, color: color, transition: 'all 0.5s ease', transitionProperty: 'background-color, color' }}>
             <ActionComponent {...actionComponentProps}>
-                <Box sx={{ width: 220 }}>
-                    <Grid container direction="row" justifyContent="space-between" alignItems={props.inline ? "center" : "flex-start"}>
-                        <Grid item xs={12} zeroMinWidth>
-                            <Box sx={{ py: 1, pr: 2, pl: 1, display: "flex", alignItems: "center" }}>
-                                {IconComponent && (
-                                    <Box sx={{ mr: 1, height: 35 }}>
-                                        <IconComponent fontSize="large" />
-                                    </Box>
-                                )}
-                                <Typography variant="body2" noWrap>{displayName || "Unknown"}</Typography>
-                            </Box>
-                        </Grid>
-                        {displayConfig.displayValues && displayConfig.displayValues.map(dvconfig => (
-                            <Grid item xs={12} key={`displayValue-${deviceModel?.identifier}-${dvconfig.contactName}`}>
-                                <DeviceWidgetValueDisplay config={dvconfig} deviceIdentifier={deviceModel!.identifier!} />
-                            </Grid>
-                        ))}
-                        {displayConfig.lastActivity &&
-                            <Grid item>
-                                <Box sx={{ px: 1 }}>
-                                    <Typography variant="caption" style={{ color: color, opacity: 0.7 }}>
-                                        {"Last activity "}
-                                        {lastActivityTimeStamp
-                                            ? <TimeAgo date={lastActivityTimeStamp} live />
-                                            : "not recorded"}
-
-                                    </Typography>
+                <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                    <Grid item xs={12} zeroMinWidth>
+                        <Grid container direction="row" alignItems="center" justifyContent="space-between" wrap="nowrap">
+                            <Grid item zeroMinWidth>
+                                <Box sx={{ py: 1, pr: props.isEditingDashboard || props.isEditingWidget ? 0 : 2, pl: 1, display: "flex", alignItems: "center" }}>
+                                    {IconComponent && (
+                                        <Box sx={{ mr: 1, height: 35 }}>
+                                            <IconComponent fontSize="large" />
+                                        </Box>
+                                    )}
+                                    <Typography variant="body2" noWrap>{displayName || "Unknown"}</Typography>
                                 </Box>
-                            </Grid>}
+                            </Grid>
+                            {props.isEditingDashboard || props.isEditingWidget && (
+                                <Grid item>
+                                    <Box sx={{ pr: 1 }}>
+                                        <IconButton size="small" onClick={() => deviceModel && props.onEdit(deviceModel.identifier)}>
+                                            {props.isEditingWidget
+                                                ? <DoneSharpIcon />
+                                                : <EditSharpIcon />
+                                            }
+                                        </IconButton>
+                                    </Box>
+                                </Grid>
+                            )}
+                        </Grid>
                     </Grid>
-                </Box>
+                    {displayConfig.displayValues && displayConfig.displayValues.map(dvconfig => (
+                        <Grid item xs={12} key={`displayValue-${deviceModel?.identifier}-${dvconfig.contactName}`}>
+                            <DeviceWidgetValueDisplay config={dvconfig} deviceIdentifier={deviceModel!.identifier!} />
+                        </Grid>
+                    ))}
+                    {displayConfig.lastActivity &&
+                        <Grid item>
+                            <Box sx={{ px: 1 }}>
+                                <Typography variant="caption" style={{ color: color, opacity: 0.7 }}>
+                                    {"Last activity "}
+                                    {lastActivityTimeStamp
+                                        ? <TimeAgo date={lastActivityTimeStamp} live />
+                                        : "not recorded"}
+
+                                </Typography>
+                            </Box>
+                        </Grid>}
+                </Grid>
             </ActionComponent>
             <Grid container direction="row">
                 {outputs && outputs.map(o => (

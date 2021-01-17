@@ -53,7 +53,7 @@ const Layout = (props: { children: React.ReactNode }) => {
               state.ChannelName,
               state.ContactName,
               state.ValueSerialized,
-              state.TimeStamp
+              new Date(state.TimeStamp)
             );
         });
       } catch (err) {

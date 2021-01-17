@@ -1,4 +1,5 @@
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
+import { observer } from "mobx-react-lite";
 import React from "react";
 import AppLayout from "../components/AppLayout";
 import HomeOverview from "../components/home/HomeOverview";
@@ -15,4 +16,4 @@ const Dashboard = () => {
 
 Dashboard.layout = AppLayout;
 
-export default Dashboard;
+export default observer(Dashboard);

@@ -1,3 +1,5 @@
+import { makeAutoObservable, makeObservable } from "mobx";
+
 export interface IDeviceContact {
     name: string;
     dataType: string;
@@ -83,6 +85,8 @@ export class DeviceContactState implements IDeviceContactState {
     _changedListeners: Function[] = [];
 
     constructor(name: string, channel: string, valueSerialized: string|undefined, timeStamp: Date) {
+        makeAutoObservable(this);
+
         this.name = name;
         this.channel = channel;
         this.valueSerialized = valueSerialized;
@@ -93,6 +97,7 @@ export class DeviceContactState implements IDeviceContactState {
         this.valueSerialized = valueSerialized;
         this.timeStamp = timeStamp;
         
+        console.log('state changes, broadcasting...', this);
         this._changedListeners.forEach(listener => {
             listener();
         });
@@ -122,6 +127,8 @@ export class DeviceStatePublish implements IDeviceStatePublish {
     timeStamp: Date;
 
     constructor(deviceId: string, channelName: string, contactName: string, valueSerialized: string|undefined, timeStamp: Date) {
+        makeAutoObservable(this);
+
         this.deviceId = deviceId;
         this.contactName = contactName;
         this.channelName = channelName;
