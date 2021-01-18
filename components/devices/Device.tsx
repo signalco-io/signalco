@@ -25,7 +25,8 @@ import { reaction } from "mobx";
 export interface IDeviceProps {
     isEditingDashboard?: boolean,
     isEditingWidget?: boolean,
-    deviceModel?: IDeviceModel,
+    deviceId: string,
+    deviceAlias?: string,
     displayConfig: IDeviceWidgetConfig,
     onEdit: (deviceIdentifier: string) => void
 }
@@ -138,7 +139,8 @@ const Device = (props: IDeviceProps) => {
     const [lastActivityTimeStamp, setLastActivityTimeStamp] = useState<Date | undefined>(undefined);
     const [deviceModel, setDeviceModel] = useState<IDeviceModel>();
 
-    const deviceId = props.deviceModel.id;
+    const deviceId = props.deviceId;
+    const deviceAlias = props.deviceAlias ?? deviceId;
     const displayConfig = props.displayConfig;
     const hasAction =
         typeof displayConfig.actionChannelName !== "undefined" &&
@@ -215,11 +217,6 @@ const Device = (props: IDeviceProps) => {
         // }
 
         const loadDevice = async () => {
-            if (typeof props.deviceModel === 'undefined') {
-                console.warn("Unable to load device, provided device model is undefined.");
-                return;
-            }
-
             const device = await DevicesRepository.getDeviceAsync(deviceId);
             if (typeof device === 'undefined') {
                 console.warn("Failed to retrieve device with id", deviceId)
@@ -249,8 +246,7 @@ const Device = (props: IDeviceProps) => {
 
     const handleOutputContact = async () => {
         if (typeof displayConfig.actionChannelName === 'undefined' ||
-            typeof displayConfig.actionContactName === 'undefined' ||
-            typeof props.deviceModel?.id === 'undefined')
+            typeof displayConfig.actionContactName === 'undefined')
             return;
 
         // Retrieve current boolean state
@@ -281,7 +277,7 @@ const Device = (props: IDeviceProps) => {
     }
 
     const IconComponent = iconsMap[displayConfig.icon || "unknown"][isActive ? 1 : 0];
-    const displayName = displayConfig?.displayName || props.deviceModel?.alias;
+    const displayName = displayConfig?.displayName || deviceAlias;
     const ActionComponent = !props.isEditingDashboard && !props.isEditingWidget && typeof displayConfig.actionContactName !== "undefined" ? ButtonBase : React.Fragment;
     const actionComponentProps = !props.isEditingDashboard && !props.isEditingWidget && typeof displayConfig.actionContactName !== "undefined"
         ? { onClick: () => handleOutputContact(), style: { height: '100%' } }

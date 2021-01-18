@@ -102,8 +102,7 @@ function defaultDisplay(config?: IDeviceModel) {
         // console.warn("needs something else", config?.alias);
     }
 
-    const valueContacts = endpoint?.contacts.filter(c => (c.dataType === 'double' || c.dataType === 'string') && (c.access & 1 || c.access & 4));
-    valueContacts && valueContacts.forEach(valueContact => {
+    endpoint?.contacts.filter(c => (c.dataType === 'double' || c.dataType === 'string') && (c.access & 1 || c.access & 4)).forEach(valueContact => {
         if (typeof displayConfig.displayValues === 'undefined')
             displayConfig.displayValues = [];
         displayConfig.displayValues.push({
@@ -230,7 +229,12 @@ const HomeOverview = () => {
                 <Grid container direction="column" alignItems="stretch">
                     <Grid item>
                         <Box sx={{ py: 1 }}>
-                            <Device isEditingWidget deviceModel={device.deviceModel} displayConfig={device.displayConfig} onEdit={handleWidgetEdit} />
+                            <Device
+                                isEditingWidget
+                                deviceId={device.deviceModel.id}
+                                deviceAlias={device.deviceModel.alias}
+                                displayConfig={device.displayConfig}
+                                onEdit={handleWidgetEdit} />
                         </Box>
                     </Grid>
                     <Grid item>
@@ -268,7 +272,12 @@ const HomeOverview = () => {
                 {renderDeviceEditor(device)}
             </div>)
             : (<div key={device.deviceModel.identifier} data-grid={device.position}>
-                <Device isEditingDashboard={isEditing} deviceModel={device.deviceModel} displayConfig={device.displayConfig} onEdit={handleWidgetEdit} />
+                <Device
+                    isEditingDashboard={isEditing}
+                    deviceId={device.deviceModel.id}
+                    deviceAlias={device.deviceModel.alias}
+                    displayConfig={device.displayConfig}
+                    onEdit={handleWidgetEdit} />
             </div>);
     }
 
