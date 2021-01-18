@@ -94,6 +94,7 @@ export interface IDeviceWidgetValueDisplayConfig {
 export interface IDeviceWidgetValueDisplayProps {
     deviceId: string;
     config: IDeviceWidgetValueDisplayConfig;
+    color?: string;
 }
 
 const DeviceWidgetValueDisplay = (props: IDeviceWidgetValueDisplayProps) => {
@@ -128,7 +129,7 @@ const DeviceWidgetValueDisplay = (props: IDeviceWidgetValueDisplayProps) => {
 
     return (
         <Box sx={{ px: 1 }}>
-            <Typography variant="caption" color="textSecondary">{`${contactName} ${(displayValue || "Unknown")}${units || ""}`}</Typography>
+            <Typography variant="caption" color="textSecondary" style={{color: props.color}}>{`${contactName} ${(displayValue || "Unknown")}${units || ""}`}</Typography>
         </Box>
     );
 };
@@ -280,7 +281,7 @@ const Device = (props: IDeviceProps) => {
     const displayName = displayConfig?.displayName || deviceAlias;
     const ActionComponent = !props.isEditingDashboard && !props.isEditingWidget && typeof displayConfig.actionContactName !== "undefined" ? ButtonBase : React.Fragment;
     const actionComponentProps = !props.isEditingDashboard && !props.isEditingWidget && typeof displayConfig.actionContactName !== "undefined"
-        ? { onClick: () => handleOutputContact(), style: { height: '100%' } }
+        ? { onClick: () => handleOutputContact(), style: { width: '100%' } }
         : {};
 
     let backgroundColor = undefined;
@@ -344,7 +345,7 @@ const Device = (props: IDeviceProps) => {
                     </Grid>
                     {displayConfig.displayValues && displayConfig.displayValues.map(dvconfig => (
                         <Grid item xs={12} key={`displayValue-${dvconfig.channelName}-${dvconfig.contactName}`}>
-                            <DeviceWidgetValueDisplay config={dvconfig} deviceId={deviceId} />
+                            <DeviceWidgetValueDisplay config={dvconfig} deviceId={deviceId} color={color} />
                         </Grid>
                     ))}
                     {displayConfig.lastActivity &&

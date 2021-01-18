@@ -86,20 +86,17 @@ function defaultDisplay(config?: IDeviceModel) {
     const endpoint = config?.endpoints[0];
     const booleanContacts = endpoint?.contacts.filter(c => c.dataType === 'bool');
     if (booleanContacts && booleanContacts.length > 0) {
-        if (booleanContacts.length === 1) {
-            // console.log('using contact ', config?.alias, booleanContacts[0]);
-            displayConfig.activeContactName = booleanContacts[0].name;
+        const getReadContacts = booleanContacts.filter(c => c.access & 1 || c.access & 4);
+        if (getReadContacts.length > 0) {
+            displayConfig.activeContactName = getReadContacts[0].name;
             displayConfig.activeChannelName = endpoint?.channel;
-
-            if (booleanContacts[0].access & 2) {
-                displayConfig.actionContactName = booleanContacts[0].name;
-                displayConfig.actionChannelName = endpoint?.channel;
-            }
-        } else {
-            // console.warn("finding best match...", config?.alias, booleanContacts);
         }
-    } else {
-        // console.warn("needs something else", config?.alias);
+
+        const writeContacts = booleanContacts.filter(c => c.access & 2);
+        if (writeContacts.length > 0) {
+            displayConfig.actionContactName = writeContacts[0].name;
+            displayConfig.actionChannelName = endpoint?.channel;
+        }
     }
 
     endpoint?.contacts.filter(c => (c.dataType === 'double' || c.dataType === 'string') && (c.access & 1 || c.access & 4)).forEach(valueContact => {
