@@ -84,66 +84,50 @@ function clamp(x: number, min: number, max: number) {
     return x;
 }
 
-async function getDeviceStateAsync(deviceIdentifier: string, contact: IDeviceContact) {
-    return {
-        contact: contact,
-        value: null
-    };
-    // TODO: Implement
-    // return await HttpService.getAsync(`http://192.168.0.20:5000/beacon/device-state?identifier=${deviceIdentifier}&contact=${contact.name}`)
-    //     .then<IDeviceContactState>(v => {
-    //         return {
-    //             contact: contact,
-    //             value: v
-    //         };
-    //     });
-}
-
 export interface IDeviceWidgetValueDisplayConfig {
     contactName: string;
+    channelName: string;
     units?: string;
 }
 
 export interface IDeviceWidgetValueDisplayProps {
-    deviceIdentifier: string;
+    deviceId: string;
     config: IDeviceWidgetValueDisplayConfig;
 }
 
 const DeviceWidgetValueDisplay = (props: IDeviceWidgetValueDisplayProps) => {
-    const { contactName, units } = props.config;
-    const { deviceIdentifier } = props;
+    const { channelName, contactName, units } = props.config;
+    const { deviceId } = props;
     const [isLoading, setIsLoading] = useState(true);
     const [displayValue, setDisplayValue] = useState<any>(undefined);
     const displayValueRef = useRef(displayValue);
     displayValueRef.current = displayValue;
 
-    // const refreshDisplayValueAsync = async () => {
-    //     try {
-    //         const state = await getDeviceStateAsync(deviceIdentifier, { name: contactName });
+    const loadDisplayValue = async () => {
+        try {
+            const device = await DevicesRepository.getDeviceAsync(deviceId);
+            const state = device?.states.filter(s => s.channel === channelName && s.name === contactName)[0];
 
-    //         let newState = state.value;
-    //         if (newState === displayValueRef.current) return;
+            if (typeof state !== 'undefined') {
+                reaction(() => state.timeStamp, () => loadDisplayValue());
+            }
 
-    //         setDisplayValue(newState);
+            let newState = state?.valueSerialized;
+            if (newState === displayValueRef.current) return;
 
-    //         console.log('Device state change', deviceIdentifier, state.contact.name, state.contact.dataType, "Value: ", state.value, `(${typeof state.value})`)
-    //     } finally {
-    //         setIsLoading(false);
-    //         setTimeout(refreshDisplayValueAsync, 2000);
-    //     }
-    // };
+            setDisplayValue(newState);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     useEffect(() => {
-        // if (isLoading) {
-        //     setTimeout(() => {
-        //         refreshDisplayValueAsync();
-        //     }, 100);
-        // }
-    }, []);
+        loadDisplayValue();
+    }, [deviceId]);
 
     return (
         <Box sx={{ px: 1 }}>
-            <Typography variant="caption" color="textSecondary">{`${(displayValue || "Unknown")}${units || ""}`}</Typography>
+            <Typography variant="caption" color="textSecondary">{`${contactName} ${(displayValue || "Unknown")}${units || ""}`}</Typography>
         </Box>
     );
 };
@@ -154,6 +138,7 @@ const Device = (props: IDeviceProps) => {
     const [lastActivityTimeStamp, setLastActivityTimeStamp] = useState<Date | undefined>(undefined);
     const [deviceModel, setDeviceModel] = useState<IDeviceModel>();
 
+    const deviceId = props.deviceModel.id;
     const displayConfig = props.displayConfig;
     const hasAction =
         typeof displayConfig.actionChannelName !== "undefined" &&
@@ -183,8 +168,6 @@ const Device = (props: IDeviceProps) => {
                 console.warn("State not found for", deviceModel.alias, displayConfig.activeChannelName, displayConfig.activeContactName, deviceModel.states);
                 return;
             }
-
-            console.log("Refreshing state for", deviceModel.alias, contact.name, state.valueSerialized, state.timeStamp);
 
             let newState = false;
             if (contact.dataType === "bool") {
@@ -237,14 +220,18 @@ const Device = (props: IDeviceProps) => {
                 return;
             }
 
-            const device = await DevicesRepository.getDeviceAsync(props.deviceModel.id);
+            const device = await DevicesRepository.getDeviceAsync(deviceId);
             if (typeof device === 'undefined') {
-                console.warn("Failed to retrieve device with id", props.deviceModel.id)
+                console.warn("Failed to retrieve device with id", deviceId)
                 return;
             }
 
             device.states.forEach(s => {
-                reaction(() => s.timeStamp, () => refreshActiveAsync());
+                if (hasActive &&
+                    displayConfig.activeChannelName === s.channel &&
+                    displayConfig.activeContactName === s.name) {
+                    reaction(() => s.timeStamp, () => refreshActiveAsync());
+                }
             });
 
             // Set device
@@ -273,7 +260,7 @@ const Device = (props: IDeviceProps) => {
 
         var newState = !(`${currentState.valueSerialized}`.toLowerCase() === 'true');
         await ConductsService.RequestConductAsync({
-            deviceId: props.deviceModel.id,
+            deviceId: deviceId,
             channelName: displayConfig.actionChannelName,
             contactName: displayConfig.actionContactName
         }, newState);
@@ -360,8 +347,8 @@ const Device = (props: IDeviceProps) => {
                         </Grid>
                     </Grid>
                     {displayConfig.displayValues && displayConfig.displayValues.map(dvconfig => (
-                        <Grid item xs={12} key={`displayValue-${deviceModel?.identifier}-${dvconfig.contactName}`}>
-                            <DeviceWidgetValueDisplay config={dvconfig} deviceIdentifier={deviceModel!.identifier!} />
+                        <Grid item xs={12} key={`displayValue-${dvconfig.channelName}-${dvconfig.contactName}`}>
+                            <DeviceWidgetValueDisplay config={dvconfig} deviceId={deviceId} />
                         </Grid>
                     ))}
                     {displayConfig.lastActivity &&

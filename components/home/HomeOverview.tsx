@@ -102,6 +102,16 @@ function defaultDisplay(config?: IDeviceModel) {
         // console.warn("needs something else", config?.alias);
     }
 
+    const valueContacts = endpoint?.contacts.filter(c => (c.dataType === 'double' || c.dataType === 'string') && (c.access & 1 || c.access & 4));
+    valueContacts && valueContacts.forEach(valueContact => {
+        if (typeof displayConfig.displayValues === 'undefined')
+            displayConfig.displayValues = [];
+        displayConfig.displayValues.push({
+            channelName: endpoint?.channel,
+            contactName: valueContact.name
+        })
+    });
+
     return displayConfig;
 }
 
@@ -121,7 +131,7 @@ const HomeOverview = () => {
 
     const generateDashboardAsync = async () => {
         try {
-            const screenSize = typeof window !== 'undefined' ? window.innerWidth : 1024;
+            const screenSize = typeof window !== 'undefined' ? window.innerWidth : 1280;
             const columnsCount = Math.floor(screenSize / 220 * 2);
 
             const availableDevices = await DevicesRepository.getDevicesAsync();
@@ -132,7 +142,7 @@ const HomeOverview = () => {
                         x: (index * 2) % columnsCount,
                         y: Math.floor((index * 2) / columnsCount),
                         w: 2,
-                        h: d.endpoints[0]?.contacts.filter(c => c.dataType === "bool").length > 1 ? 2 : 1
+                        h: 1 + Math.ceil((d.endpoints[0]?.contacts.length || 0) / 2)
                     }
                 }
             });
