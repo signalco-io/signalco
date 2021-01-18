@@ -14,7 +14,7 @@ function deviceModelToTableItem(device: IDeviceModel): IAutoTableItem {
         id: device.id,
         name: device.alias,
         identifier: device.identifier,
-        lastActivity: <ReactTimeago date={device.states.map(s => s.timeStamp).sort()[0]} />
+        lastActivity: device.states?.length > 0 ? <ReactTimeago date={device.states.map(s => s.timeStamp).sort()[0]} /> : 'Never'
     };
 }
 

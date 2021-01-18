@@ -48,13 +48,15 @@ const Layout = (props: { children: React.ReactNode }) => {
           }
 
           const device = await DevicesRepository.getDeviceAsync(state.DeviceId);
-          if (device)
+          if (typeof device !== 'undefined') {
+            console.debug("SignalR - device state updated", device.id, device.identifier, device.alias, state.ChannelName, state.ContactName, state.ValueSerialized, state.TimeStamp);
             device.updateState(
               state.ChannelName,
               state.ContactName,
               state.ValueSerialized,
               new Date(state.TimeStamp)
             );
+          }
         });
       } catch (err) {
         console.log(err)

@@ -18,6 +18,8 @@ import { IDeviceContact, IDeviceContactState, IDeviceModel } from "../../src/dev
 import DevicesRepository from "../../src/devices/DevicesRepository";
 import EditSharpIcon from '@material-ui/icons/EditSharp';
 import DoneSharpIcon from '@material-ui/icons/DoneSharp';
+import { observer } from "mobx-react-lite";
+import { reaction } from "mobx";
 
 
 export interface IDeviceProps {
@@ -241,6 +243,10 @@ const Device = (props: IDeviceProps) => {
                 return;
             }
 
+            device.states.forEach(s => {
+                reaction(() => s.timeStamp, () => refreshActiveAsync());
+            });
+
             // Set device
             setDeviceModel(device);
         }
@@ -250,16 +256,6 @@ const Device = (props: IDeviceProps) => {
 
     useEffect(() => {
         if (typeof deviceModel === 'undefined') return;
-
-        // Attach to contact changes
-        if (typeof displayConfig.activeChannelName !== 'undefined' &&
-            typeof displayConfig.activeContactName !== 'undefined') {
-            const contact = deviceModel?.states.filter(s => s.channel === displayConfig.activeChannelName &&
-                s.name === displayConfig.activeContactName)[0];
-            if (contact) {
-                contact.onChanged(refreshActiveAsync);
-            }
-        }
 
         refreshActiveAsync();
     }, [deviceModel])
@@ -300,7 +296,7 @@ const Device = (props: IDeviceProps) => {
     const IconComponent = iconsMap[displayConfig.icon || "unknown"][isActive ? 1 : 0];
     const displayName = displayConfig?.displayName || props.deviceModel?.alias;
     const ActionComponent = !props.isEditingDashboard && !props.isEditingWidget && typeof displayConfig.actionContactName !== "undefined" ? ButtonBase : React.Fragment;
-    const actionComponentProps = typeof displayConfig.actionContactName !== "undefined"
+    const actionComponentProps = !props.isEditingDashboard && !props.isEditingWidget && typeof displayConfig.actionContactName !== "undefined"
         ? { onClick: () => handleOutputContact(), style: { height: '100%' } }
         : {};
 
@@ -384,7 +380,7 @@ const Device = (props: IDeviceProps) => {
             </ActionComponent>
             <Grid container direction="row">
                 {outputs && outputs.map(o => (
-                    <Grid item>
+                    <Grid item key={o.name}>
                         <Button variant="outlined" size="small" onClick={() => handleOutputClick(o.name)}>{o.name}</Button>
                     </Grid>
                 ))}
@@ -400,4 +396,4 @@ const Device = (props: IDeviceProps) => {
     );
 };
 
-export default Device;
+export default observer(Device);

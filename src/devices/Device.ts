@@ -73,7 +73,6 @@ export interface IDeviceContactState {
     timeStamp: Date;
 
     updateState(valueSerialized: string|undefined, timeStamp: Date): void;
-    onChanged(callback: Function): void;
 }
 
 export class DeviceContactState implements IDeviceContactState {
@@ -85,26 +84,16 @@ export class DeviceContactState implements IDeviceContactState {
     _changedListeners: Function[] = [];
 
     constructor(name: string, channel: string, valueSerialized: string|undefined, timeStamp: Date) {
-        makeAutoObservable(this);
-
         this.name = name;
         this.channel = channel;
         this.valueSerialized = valueSerialized;
         this.timeStamp = timeStamp;
+        makeAutoObservable(this);
     }
 
     updateState(valueSerialized: string|undefined, timeStamp: Date) {
         this.valueSerialized = valueSerialized;
         this.timeStamp = timeStamp;
-        
-        console.log('state changes, broadcasting...', this);
-        this._changedListeners.forEach(listener => {
-            listener();
-        });
-    }
-
-    onChanged(callback: Function) {
-        this._changedListeners.push(callback);
     }
 }
 
@@ -127,12 +116,11 @@ export class DeviceStatePublish implements IDeviceStatePublish {
     timeStamp: Date;
 
     constructor(deviceId: string, channelName: string, contactName: string, valueSerialized: string|undefined, timeStamp: Date) {
-        makeAutoObservable(this);
-
         this.deviceId = deviceId;
         this.contactName = contactName;
         this.channelName = channelName;
         this.valueSerialized = valueSerialized;
         this.timeStamp = timeStamp;
+        makeAutoObservable(this);
     }
 }

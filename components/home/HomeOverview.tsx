@@ -8,6 +8,7 @@ import { SizeMe } from 'react-sizeme';
 import EditSharpIcon from '@material-ui/icons/EditSharp';
 import { TabContext, TabList, TabPanel } from "@material-ui/lab";
 import HttpService from "../../src/services/HttpService";
+import { observer } from "mobx-react-lite";
 
 function defaultDisplay(config?: IDeviceModel) {
     const displayConfig: IDeviceWidgetConfig = {
@@ -292,7 +293,7 @@ const HomeOverview = () => {
                 }
             </Grid>
             <Grid item>
-                <SizeMe>
+                <SizeMe noPlaceholder>
                     {({ size }) => (
                         <RGL
                             isDraggable={isEditing}
@@ -311,4 +312,4 @@ const HomeOverview = () => {
     );
 };
 
-export default HomeOverview;
+export default observer(HomeOverview);
