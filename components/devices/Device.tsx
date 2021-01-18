@@ -129,7 +129,7 @@ const DeviceWidgetValueDisplay = (props: IDeviceWidgetValueDisplayProps) => {
 
     return (
         <Box sx={{ px: 1 }}>
-            <Typography variant="caption" color="textSecondary" style={{color: props.color}}>{`${contactName} ${(displayValue || "Unknown")}${units || ""}`}</Typography>
+            <Typography variant="caption" color="textSecondary" style={{ color: props.color }}>{`${contactName} ${(displayValue || "Unknown")}${units || ""}`}</Typography>
         </Box>
     );
 };
@@ -285,7 +285,7 @@ const Device = (props: IDeviceProps) => {
         : {};
 
     let backgroundColor = undefined;
-    let color = undefined;
+    let color: string | undefined = undefined;
     if (isActive) {
         backgroundColor = "rgba(255, 187, 109, 1)"; // 3000K temp default
         color = "#333";
