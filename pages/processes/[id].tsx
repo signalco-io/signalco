@@ -78,18 +78,18 @@ function parseProcessConfiguration(configJson: string | undefined) {
 
     const triggers = typeof config.Triggers !== 'undefined' && Array.isArray(config.Triggers)
         ? config.Triggers.map((t: any) => parseTrigger(t)) as IDeviceStateTrigger[]
-        : new Array<IDeviceStateTrigger | undefined>();
+        : new Array<IDeviceStateTrigger>();
     const condition = typeof config.Condition !== 'undefined'
         ? parseCondition(config.Condition) as ICondition
         : {} as ICondition | undefined;
     const conducts = typeof config.Conducts !== 'undefined' && Array.isArray(config.Conducts)
         ? config.Conducts.map((t: any) => parseConduct(t)) as IConduct[]
-        : new Array<IConduct | undefined>();
+        : new Array<IConduct>();
 
     const configMapped = {
-        triggers: triggers,
+        triggers: triggers.filter(t => typeof t !== undefined),
         condition: condition,
-        conducts: conducts
+        conducts: conducts.filter(c => typeof c !== undefined)
     }
 
     console.log(configMapped)
@@ -225,15 +225,21 @@ const ProcessDetails = () => {
                                     <Grid container direction="column" spacing={2}>
                                         <Grid item>
                                             <Typography>Triggers</Typography>
-                                            {config.triggers.map(t => <DisplayDeviceTarget target={t} />)}
+                                            {config && config.triggers?.length 
+                                                ? config.triggers.map(t => <DisplayDeviceTarget target={t} />)
+                                                : <span>No triggers</span>}
                                         </Grid>
                                         <Grid item>
                                             <Typography>Conditions</Typography>
-                                            <DisplayCondition condition={config?.condition} />
+                                            {config?.condition
+                                                ? <DisplayCondition condition={config.condition} />
+                                                : <span>No condition</span>}
                                         </Grid>
                                         <Grid item>
                                             <Typography>Conducts</Typography>
-                                            {config.conducts.map(c => <DisplayDeviceStateValue target={c?.Target} value={c?.Value} />)}
+                                            {config && config.conducts?.length 
+                                                ? config.conducts.map(c => <DisplayDeviceStateValue target={c.Target} value={c.Value} />)
+                                                : <span>No conducts</span>}
                                         </Grid>
                                     </Grid>
                                 )}
