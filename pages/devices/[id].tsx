@@ -19,9 +19,7 @@ const DeviceDetails = () => {
     const loadDeviceAsync = async () => {
         if (typeof id !== "object" &&
             typeof id !== 'undefined') {
-            console.log('loading device...');
             const loadedDevice = await DevicesRepository.getDeviceAsync(id);
-            console.log(loadedDevice);
             setDevice(loadedDevice);
             setIsLoading(false);
         }
@@ -30,10 +28,6 @@ const DeviceDetails = () => {
     useEffect(() => {
         loadDeviceAsync();
     }, [id]);
-
-    const handleRefresh = () => {
-        loadDeviceAsync();
-    };
 
     const stateTableItems = device?.states.map(s => {
         return {
@@ -56,11 +50,7 @@ const DeviceDetails = () => {
                     <Grid container>
                         <Grid item>
                             <Card>
-                                <CardHeader title="States" action={
-                                    <IconButton onClick={handleRefresh}>
-                                        <RefreshSharpIcon />
-                                    </IconButton>
-                                } />
+                                <CardHeader title="States" />
                                 <CardContent style={{ padding: 0 }}>
                                     <AutoTable error={error} isLoading={isLoading} items={stateTableItems} />
                                 </CardContent>
