@@ -9,17 +9,11 @@ export default function Index() {
 
   useEffect(() => {
     if (isAuthenticated)
-      router.push("/dashboard", "/dashboard");
+      router.push("/dashboard");
   }, [isAuthenticated]);
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) {
-    return <div>{error.message}</div>;
-  }
-
-  if (!isAuthenticated) {
-    return <Login />;
-  }
-  
+  if (error) return <div>{error.message}</div>;
+  if (!isAuthenticated) return <Login />;
   return <div>Redirecting...</div>;
 }
