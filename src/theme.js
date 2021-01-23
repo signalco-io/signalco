@@ -21,32 +21,32 @@ const theme = createMuiTheme({
   typography: {
     h1: {
       fontSize: "3rem",
-      fontFamily: "Open Sans, Raleway",
+      fontFamily: "Raleway, Open Sans, sans-serif",
       fontWeight: 400,
     },
     h2: {
       fontSize: "2rem",
-      fontFamily: "Open Sans, Raleway",
+      fontFamily: "Raleway, Open Sans, sans-serif",
       fontWeight: 400,
     },
     h3: {
       fontSize: "1.6rem",
-      fontFamily: "Open Sans, Raleway",
+      fontFamily: "Raleway, Open Sans, sans-serif",
       fontWeight: 400,
     },
     h4: {
       fontSize: "1.2rem",
-      fontFamily: "Open Sans, Raleway",
+      fontFamily: "Raleway, Open Sans, sans-serif",
       fontWeight: 400,
     },
     h5: {
       fontSize: "1.1rem",
-      fontFamily: "Open Sans, Raleway",
+      fontFamily: "Raleway, Open Sans, sans-serif",
       fontWeight: 400,
     },
     h6: {
       fontSize: "1rem",
-      fontFamily: "Open Sans, Raleway",
+      fontFamily: "Raleway, Open Sans, sans-serif",
       fontWeight: 400,
     },
   }
