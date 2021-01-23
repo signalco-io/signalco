@@ -15,6 +15,12 @@ const Login = () => {
         rippleTriggerRef.current.trigger();
       }
     }, 2500);
+
+    // Trigger immediately
+    if (typeof rippleTriggerRef.current !== 'undefined') {
+      rippleTriggerRef.current.trigger();
+    }
+
     return () => clearInterval(rippleIntervalClear);
   }, [])
 
@@ -35,7 +41,7 @@ const Login = () => {
             <Typography variant="h1">Signal</Typography>
           </Grid>
           <Grid item>
-            <Box sx={{width: 72, height: 72}}></Box>
+            <Box sx={{ width: 72, height: 72 }}></Box>
           </Grid>
         </Grid>
       </Grid>
