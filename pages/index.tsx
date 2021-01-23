@@ -3,6 +3,12 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Login from "../components/Login";
 
+const Onboarding = () => {
+  return (
+    
+  );
+};
+
 export default function Index() {
   const { isAuthenticated, isLoading, error } = useAuth0();
   const router = useRouter();
