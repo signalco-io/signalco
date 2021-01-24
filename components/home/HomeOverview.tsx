@@ -313,7 +313,7 @@ const HomeOverview = () => {
                     {({ size }) => (
                         <RGL
                             isDraggable={isEditing}
-                            compactType={null}
+                            // compactType={null}
                             onLayoutChange={handleLayoutChange}
                             width={size.width || (typeof window !== 'undefined' ? window.innerWidth : 1024)}
                             rowHeight={51}

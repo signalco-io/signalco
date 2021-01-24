@@ -44,6 +44,12 @@
       "purpose": "any"
     },
     {
+      "src": "https://signal.dfnoise.com/images/icon_x512.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
       "src": "https://signal.dfnoise.com/images/icon_x1.png",
       "sizes": "572x572",
       "type": "image/png",
