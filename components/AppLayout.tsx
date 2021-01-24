@@ -1,5 +1,5 @@
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import { Grid } from "@material-ui/core";
+import { Alert, Grid } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
@@ -7,15 +7,23 @@ import { HubConnection, HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
 import DevicesRepository, { SignalDeviceStatePublishDto } from "../src/devices/DevicesRepository";
 
 const Layout = (props: { children: React.ReactNode }) => {
-  const { getAccessTokenSilently, user } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | undefined>();
   const [devicesHub, setDevicesHub] = useState<HubConnection>();
 
   useEffect(() => {
     const setAccessTokenAsync = async (): Promise<void> => {
-      const token = await getAccessTokenSilently();
-      HttpService.token = token;
-      setIsLoading(false);
+      try {
+        const token = await getAccessTokenSilently();
+        HttpService.token = token;
+      } catch (err) {
+        console.warn("Auth0 error.", err);
+        setError(err.toString());
+      }
+      finally {
+        setIsLoading(false);
+      }
     };
 
     setAccessTokenAsync();
@@ -70,6 +78,9 @@ const Layout = (props: { children: React.ReactNode }) => {
 
   if (isLoading) {
     return <>Logging in...</>;
+  }
+  if (error) {
+    return <Alert color="error" variant="filled">{error}</Alert>
   }
 
   return (

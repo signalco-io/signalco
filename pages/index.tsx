@@ -14,6 +14,9 @@ export default function Index() {
   const { isAuthenticated, isLoading, error } = useAuth0();
   const router = useRouter();
 
+  if (isAuthenticated)
+    router.push("/dashboard");
+
   useEffect(() => {
     if (isAuthenticated)
       router.push("/dashboard");
