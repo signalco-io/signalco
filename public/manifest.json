@@ -3,7 +3,7 @@
   "short_name": "Signal",
   "theme_color": "#000000",
   "background_color": "#000000",
-  "display": "fullscreen",
+  "display": "standalone",
   "Scope": "/",
   "start_url": "/",
   "icons": [
@@ -104,6 +104,18 @@
           "type": "image/png"
         }
       ]
+    }
+  ],
+  "screenshots" : [
+    {
+      "src": "https://signal.dfnoise.com/images/screenshot_dashboard.webp",
+      "sizes": "2560x1440",
+      "type": "image/png"
+    },
+    {
+      "src": "https://signal.dfnoise.com/images/screenshot_login.webp",
+      "sizes": "2560x1440",
+      "type": "image/png"
     }
   ]
 }
