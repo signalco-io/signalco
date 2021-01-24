@@ -365,7 +365,7 @@ const Device = (props: IDeviceProps) => {
             <Grid container direction="row">
                 {outputs && outputs.map(o => (
                     <Grid item key={o.name}>
-                        <Button variant="outlined" size="small" onClick={() => handleOutputClick(o.name)}>{o.name}</Button>
+                        <Button variant="outlined" size="small" style={{color: color, borderColor: color}} onClick={() => handleOutputClick(o.name)}>{o.name}</Button>
                     </Grid>
                 ))}
             </Grid>

@@ -30,3 +30,8 @@ yarn-error.log*
 .env.production.local
 
 .vercel
+
+## PWA
+**/public/workbox-*.js
+**/public/sw.js
+**/public/worker-*.js
