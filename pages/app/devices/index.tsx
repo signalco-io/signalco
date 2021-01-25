@@ -1,11 +1,11 @@
 import React from "react";
 import { useRouter } from 'next/router';
 import { Box, Card, CardContent, CardHeader } from "@material-ui/core";
-import AppLayout from "../../components/AppLayout";
-import AutoTable, { IAutoTableItem } from "../../components/shared/table/AutoTable";
-import useAutoTable from "../../components/shared/table/useAutoTable";
-import { IDeviceModel } from "../../src/devices/Device";
-import DevicesRepository from "../../src/devices/DevicesRepository";
+import AppLayout from "../../../components/AppLayout";
+import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
+import useAutoTable from "../../../components/shared/table/useAutoTable";
+import { IDeviceModel } from "../../../src/devices/Device";
+import DevicesRepository from "../../../src/devices/DevicesRepository";
 import ReactTimeago from "react-timeago";
 import { observer } from "mobx-react-lite";
 

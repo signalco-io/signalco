@@ -2,7 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import {
   AppBar, Avatar, Button, Grid,
   IconButton,
-  Toolbar, Typography
+  Toolbar
 } from "@material-ui/core";
 import Link from 'next/link';
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -23,22 +23,22 @@ const NavProfile = () => {
           <Grid item style={{ flexGrow: 1 }}>
             <Grid container>
               <Grid item>
-                <Link href="/dashboard" passHref>
+                <Link href="/app" passHref>
                   <Button startIcon={<DashboardSharpIcon />} style={{ height: '100%', borderRadius: 0 }}>Dashboard</Button>
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/devices" passHref>
+                <Link href="/app/devices" passHref>
                   <Button startIcon={<DevicesOtherSharpIcon />} style={{ height: '100%', borderRadius: 0 }}>Devices</Button>
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/processes" passHref>
+                <Link href="/app/processes" passHref>
                   <Button startIcon={<AccountTreeSharpIcon />} style={{ height: '100%', borderRadius: 0 }}>Processes</Button>
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/beacons" passHref>
+                <Link href="/app/beacons" passHref>
                   <Button startIcon={<DeviceHubSharpIcon />} style={{ height: '100%', borderRadius: 0 }}>Beacons</Button>
                 </Link>
               </Grid>
@@ -48,7 +48,7 @@ const NavProfile = () => {
             <Grid container spacing={1} alignItems="center">
               <Grid item>
                 {user.picture ? (
-                  <Avatar src={user.picture} alt="User profile image" />
+                  <Avatar imgProps={{ width: 40, height: 40 }} src={user.picture} alt="User profile image" />
                 ) : (
                     <Skeleton variant="circular">
                       <Avatar>{user.given_name && user.family_name ? `${user.given_name[0]}${user.family_name[0]}` : user.email[0]}</Avatar>

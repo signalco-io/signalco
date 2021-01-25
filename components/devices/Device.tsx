@@ -1,4 +1,4 @@
-import { Badge, Box, Button, ButtonBase, Grid, IconButton, Paper, Typography } from "@material-ui/core";
+import { Alert, Box, Button, ButtonBase, Grid, IconButton, Paper, Typography } from "@material-ui/core";
 import BorderAllIcon from '@material-ui/icons/BorderAll';
 import BorderVerticalIcon from '@material-ui/icons/BorderVertical';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
@@ -14,7 +14,7 @@ import React, { useEffect, useRef, useState } from "react";
 import TimeAgo from 'react-timeago';
 import { Area, AreaChart } from "recharts";
 import ConductsService from "../../src/conducts/ConductsService";
-import { IDeviceContact, IDeviceContactState, IDeviceModel } from "../../src/devices/Device";
+import { IDeviceModel } from "../../src/devices/Device";
 import DevicesRepository from "../../src/devices/DevicesRepository";
 import EditSharpIcon from '@material-ui/icons/EditSharp';
 import DoneSharpIcon from '@material-ui/icons/DoneSharp';
@@ -51,39 +51,39 @@ export interface IDeviceWidgetConfig {
     showDiagram: boolean;
 }
 
-function colorTemperatureToRGB(kelvin: number) {
-    var temp = kelvin / 100;
-    var red, green, blue;
-    if (temp <= 66) {
-        red = 255;
-        green = temp;
-        green = 99.4708025861 * Math.log(green) - 161.1195681661;
-        if (temp <= 19) {
-            blue = 0;
-        } else {
-            blue = temp - 10;
-            blue = 138.5177312231 * Math.log(blue) - 305.0447927307;
-        }
-    } else {
-        red = temp - 60;
-        red = 329.698727446 * Math.pow(red, -0.1332047592);
-        green = temp - 60;
-        green = 288.1221695283 * Math.pow(green, -0.0755148492);
-        blue = 255;
-    }
+// function colorTemperatureToRGB(kelvin: number) {
+//     var temp = kelvin / 100;
+//     var red, green, blue;
+//     if (temp <= 66) {
+//         red = 255;
+//         green = temp;
+//         green = 99.4708025861 * Math.log(green) - 161.1195681661;
+//         if (temp <= 19) {
+//             blue = 0;
+//         } else {
+//             blue = temp - 10;
+//             blue = 138.5177312231 * Math.log(blue) - 305.0447927307;
+//         }
+//     } else {
+//         red = temp - 60;
+//         red = 329.698727446 * Math.pow(red, -0.1332047592);
+//         green = temp - 60;
+//         green = 288.1221695283 * Math.pow(green, -0.0755148492);
+//         blue = 255;
+//     }
 
-    return {
-        r: clamp(red, 0, 255),
-        g: clamp(green, 0, 255),
-        b: clamp(blue, 0, 255)
-    }
-}
+//     return {
+//         r: clamp(red, 0, 255),
+//         g: clamp(green, 0, 255),
+//         b: clamp(blue, 0, 255)
+//     }
+// }
 
-function clamp(x: number, min: number, max: number) {
-    if (x < min) { return min; }
-    if (x > max) { return max; }
-    return x;
-}
+// function clamp(x: number, min: number, max: number) {
+//     if (x < min) { return min; }
+//     if (x > max) { return max; }
+//     return x;
+// }
 
 export interface IDeviceWidgetValueDisplayConfig {
     contactName: string;
@@ -101,6 +101,7 @@ const DeviceWidgetValueDisplay = (props: IDeviceWidgetValueDisplayProps) => {
     const { channelName, contactName, units } = props.config;
     const { deviceId } = props;
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string|undefined>();
     const [displayValue, setDisplayValue] = useState<any>(undefined);
     const displayValueRef = useRef(displayValue);
     displayValueRef.current = displayValue;
@@ -118,6 +119,8 @@ const DeviceWidgetValueDisplay = (props: IDeviceWidgetValueDisplayProps) => {
             if (newState === displayValueRef.current) return;
 
             setDisplayValue(newState);
+        } catch(err) {
+            setError(err);
         } finally {
             setIsLoading(false);
         }
@@ -125,7 +128,10 @@ const DeviceWidgetValueDisplay = (props: IDeviceWidgetValueDisplayProps) => {
 
     useEffect(() => {
         loadDisplayValue();
-    }, [deviceId]);
+    }, []);
+
+    if (isLoading) return <div>Loading...</div>
+    if (error) return <Alert severity="error">{error}</Alert>
 
     return (
         <Box sx={{ px: 1 }}>
@@ -135,7 +141,7 @@ const DeviceWidgetValueDisplay = (props: IDeviceWidgetValueDisplayProps) => {
 };
 
 const Device = (props: IDeviceProps) => {
-    const [historicalData, setHistoricalData] = useState<IHistoricalValue[]>([]);
+    const [historicalData] = useState<IHistoricalValue[]>([]);
     const [isActive, setIsActive] = useState<boolean>(false);
     const [lastActivityTimeStamp, setLastActivityTimeStamp] = useState<Date | undefined>(undefined);
     const [deviceModel, setDeviceModel] = useState<IDeviceModel>();
@@ -356,7 +362,6 @@ const Device = (props: IDeviceProps) => {
                                     {lastActivityTimeStamp
                                         ? <TimeAgo date={lastActivityTimeStamp} live />
                                         : "not recorded"}
-
                                 </Typography>
                             </Box>
                         </Grid>}
@@ -365,7 +370,7 @@ const Device = (props: IDeviceProps) => {
             <Grid container direction="row">
                 {outputs && outputs.map(o => (
                     <Grid item key={o.name}>
-                        <Button variant="outlined" size="small" style={{color: color, borderColor: color}} onClick={() => handleOutputClick(o.name)}>{o.name}</Button>
+                        <Button variant="outlined" size="small" style={{ color: color, borderColor: color }} onClick={() => handleOutputClick(o.name)}>{o.name}</Button>
                     </Grid>
                 ))}
             </Grid>

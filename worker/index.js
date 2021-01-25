@@ -8,7 +8,7 @@
 
 const util = require('./util')
 
-util()
+util();
 
 // listen to message event from window
 self.addEventListener('message', event => {
@@ -17,5 +17,5 @@ self.addEventListener('message', event => {
   //     window.navigator.serviceWorker.controller.postMessage({command: 'log', message: 'hello world'})
   // OR use next-pwa injected workbox object
   //     window.workbox.messageSW({command: 'log', message: 'hello world'})
-  console.log(event.data)
+  // console.log(event.data)
 })

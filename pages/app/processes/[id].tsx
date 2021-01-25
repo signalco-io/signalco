@@ -1,16 +1,9 @@
-import { Badge, Box, Chip, Divider, Grid, LinearProgress, Paper, Typography } from '@material-ui/core';
+import { Box, Chip, Divider, Grid, LinearProgress, Paper, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
-import AppLayout from "../../components/AppLayout";
+import AppLayout from "../../../components/AppLayout";
 import { observer } from 'mobx-react-lite';
-import ProcessesRepository, { IProcessModel } from '../../src/processes/ProcessesRepository';
-import { values } from 'mobx';
-import CheckSharpIcon from '@material-ui/icons/CheckSharp';
-import BlockSharpIcon from '@material-ui/icons/BlockSharp';
-
-interface ITrigger {
-
-}
+import ProcessesRepository, { IProcessModel } from '../../../src/processes/ProcessesRepository';
 
 interface IDeviceStateTarget {
     Channel: string;
@@ -197,10 +190,15 @@ const ProcessDetails = () => {
     const [process, setProcess] = useState<IProcessModel | undefined>();
 
     const loadDeviceAsync = async () => {
-        if (typeof id !== "object" &&
-            typeof id !== 'undefined') {
-            const loadedProcess = await ProcessesRepository.getProcessAsync(id);
-            setProcess(loadedProcess);
+        try {
+            if (typeof id !== "object" &&
+                typeof id !== 'undefined') {
+                const loadedProcess = await ProcessesRepository.getProcessAsync(id);
+                setProcess(loadedProcess);
+            }
+        } catch (err) {
+            setError(err.toString());
+        } finally {
             setIsLoading(false);
         }
     };
@@ -208,6 +206,10 @@ const ProcessDetails = () => {
     useEffect(() => {
         loadDeviceAsync();
     }, [id]);
+
+    if (error) {
+        return <div>Error {error}</div>
+    }
 
     const config = !isLoading ? parseProcessConfiguration(process?.configurationSerialized) : undefined;
 
@@ -225,7 +227,7 @@ const ProcessDetails = () => {
                                     <Grid container direction="column" spacing={2}>
                                         <Grid item>
                                             <Typography>Triggers</Typography>
-                                            {config && config.triggers?.length 
+                                            {config && config.triggers?.length
                                                 ? config.triggers.map(t => <DisplayDeviceTarget target={t} />)
                                                 : <span>No triggers</span>}
                                         </Grid>
@@ -237,7 +239,7 @@ const ProcessDetails = () => {
                                         </Grid>
                                         <Grid item>
                                             <Typography>Conducts</Typography>
-                                            {config && config.conducts?.length 
+                                            {config && config.conducts?.length
                                                 ? config.conducts.map(c => <DisplayDeviceStateValue target={c.Target} value={c.Value} />)
                                                 : <span>No conducts</span>}
                                         </Grid>

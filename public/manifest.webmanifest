@@ -4,8 +4,8 @@
   "theme_color": "#000000",
   "background_color": "#000000",
   "display": "standalone",
-  "Scope": "/",
-  "start_url": "/",
+  "Scope": "/app",
+  "start_url": "/app",
   "icons": [
     {
       "src": "https://signal.dfnoise.com/images/maskable_icon_x72.png",
@@ -72,7 +72,7 @@
     {
       "name": "Open dashboard",
       "short_name": "Dashboard",
-      "url": "/dashboard",
+      "url": "/app",
       "icons": [
         {
           "src": "/assets/dashboard_x192.png",
@@ -84,7 +84,7 @@
     {
       "name": "Open devices",
       "short_name": "Devices",
-      "url": "/devices",
+      "url": "/app/devices",
       "icons": [
         {
           "src": "/assets/devices_x192.png",
@@ -96,7 +96,7 @@
     {
       "name": "Open processes",
       "short_name": "Processes",
-      "url": "/processes",
+      "url": "/app/processes",
       "icons": [
         {
           "src": "/assets/processes_x192.png",

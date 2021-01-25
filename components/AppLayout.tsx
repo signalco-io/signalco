@@ -1,38 +1,47 @@
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Alert, Grid } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
 import DevicesRepository, { SignalDeviceStatePublishDto } from "../src/devices/DevicesRepository";
 
 const Layout = (props: { children: React.ReactNode }) => {
-  const { getAccessTokenSilently } = useAuth0();
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | undefined>();
-  const [devicesHub, setDevicesHub] = useState<HubConnection>();
+  const { isAuthenticated, isLoading, error, getAccessTokenSilently, loginWithRedirect } = useAuth0();
+  const [pageError, setPageError] = useState<string | undefined>();
+  const [isPageLoading, setPageLoading] = useState<boolean>(true);
+  const [devicesHub, setDevicesHub] = useState<HubConnection | undefined>();
 
-  useEffect(() => {
-    const setAccessTokenAsync = async (): Promise<void> => {
-      try {
-        const token = await getAccessTokenSilently();
-        HttpService.token = token;
-      } catch (err) {
-        console.warn("Auth0 error.", err);
-        setError(err.toString());
-      }
-      finally {
-        setIsLoading(false);
-      }
-    };
-
-    setAccessTokenAsync();
-  }, []);
+  const setAccessTokenAsync = async (): Promise<void> => {
+    try {
+      const token = await getAccessTokenSilently();
+      HttpService.token = token;
+    } catch (err) {
+      console.warn("Auth0 error.", err);
+      setPageError(err.toString());
+    }
+    finally {
+      setPageLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (isLoading) return;
 
+    if (!isAuthenticated) {
+      loginWithRedirect();
+    }
+    else {
+      setAccessTokenAsync();
+    }
+  }, [isLoading, isAuthenticated])
+
+  useEffect(() => {
+    if (isPageLoading || isLoading) return;
+
     const createHubConnection = async () => {
+      if (typeof devicesHub !== undefined) return;
+
       const hub = new HubConnectionBuilder()
         .withUrl(HttpService.getApiUrl('/signalr/devices'), {
           accessTokenFactory: () => {
@@ -74,12 +83,12 @@ const Layout = (props: { children: React.ReactNode }) => {
     }
 
     createHubConnection();
-  }, [isLoading])
+  }, [isPageLoading])
 
-  if (isLoading) {
-    return <>Logging in...</>;
-  }
-  if (error) {
+  // if (isLoading) {
+  //   return <>Logging in...</>;
+  // }
+  if (pageError) {
     return <Alert color="error" variant="filled">{error}</Alert>
   }
 

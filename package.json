@@ -10,9 +10,10 @@
   "dependencies": {
     "@aspnet/signalr": "^1.1.4",
     "@auth0/auth0-react": "^1.1.0",
-    "@emotion/core": "^11.0.0",
-    "@emotion/react": "^11.1.0",
-    "@emotion/styled": "^11.0.0",
+    "@emotion/cache": "latest",
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@emotion/server": "latest",
     "@material-ui/core": "^5.0.0-alpha.15",
     "@material-ui/icons": "^5.0.0-alpha.15",
     "@material-ui/lab": "^5.0.0-alpha.15",

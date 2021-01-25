@@ -1,29 +1,40 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import Login from "../components/Login";
+import { Button, Grid, Typography } from "@material-ui/core";
+import Link from "next/link";
 
 const Onboarding = () => {
   return (
     <>
+      <Typography variant="h1">Welcome</Typography>
     </>
   );
 };
 
-export default function Index() {
-  const { isAuthenticated, isLoading, error } = useAuth0();
-  const router = useRouter();
+const Index = () => (
+  <Grid container direction="column">
+    <Grid item>
+      <Link href="/app" passHref>
+        <Button>Login</Button>
+      </Link>
+    </Grid>
+    <Grid item>
+      <Onboarding />
+    </Grid>
+  </Grid>
+  
+  // const router = useRouter();
 
-  if (isAuthenticated)
-    router.push("/dashboard");
+  // if (isAuthenticated)
+  //   router.push("/dashboard");
 
-  useEffect(() => {
-    if (isAuthenticated)
-      router.push("/dashboard");
-  }, [isAuthenticated]);
+  // useEffect(() => {
+  //   if (isAuthenticated)
+  //     router.push("/dashboard");
+  // }, [isAuthenticated]);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error.message}</div>;
-  if (!isAuthenticated) return <Login />;
-  return <div>Redirecting...</div>;
-}
+  // if (isLoading) return <div>Loading...</div>;
+  // if (error) return <div>{error.message}</div>;
+  // if (!isAuthenticated) return <Login />;
+  // return <div>Redirecting...</div>;
+);
+
+export default Index;

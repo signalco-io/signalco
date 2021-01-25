@@ -1,11 +1,11 @@
 import React from "react";
 import { useRouter } from 'next/router';
 import { Box, Card, CardContent, CardHeader } from "@material-ui/core";
-import AppLayout from "../../components/AppLayout";
-import AutoTable, { IAutoTableItem } from "../../components/shared/table/AutoTable";
-import useAutoTable from "../../components/shared/table/useAutoTable";
+import AppLayout from "../../../components/AppLayout";
+import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
+import useAutoTable from "../../../components/shared/table/useAutoTable";
 import { observer } from "mobx-react-lite";
-import ProcessesRepository, { IProcessModel } from "../../src/processes/ProcessesRepository";
+import ProcessesRepository, { IProcessModel } from "../../../src/processes/ProcessesRepository";
 import CheckSharpIcon from '@material-ui/icons/CheckSharp';
 import BlockSharpIcon from '@material-ui/icons/BlockSharp';
 

@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Grid, LinearProgress, Paper, Tab, Tabs } from "@material-ui/core";
+import { Alert, Box, Button, Grid, LinearProgress, Paper, Tab } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { IDeviceModel } from "../../src/devices/Device";
 import DevicesRepository from "../../src/devices/DevicesRepository";
@@ -236,7 +236,7 @@ const HomeOverview = () => {
                     </Grid>
                     <Grid item>
                         <TabContext value={value}>
-                            <TabList variant="fullWidth" onChange={(e, v) => setValue(v)}>
+                            <TabList variant="fullWidth" onChange={(_, v) => setValue(v)}>
                                 <Tab value="1" label="Styles" style={{ minWidth: 120 }} />
                                 <Tab value="2" label="Options" style={{ minWidth: 120 }} />
                                 <Tab value="3" label="Other" style={{ minWidth: 120 }} />

@@ -1,4 +1,3 @@
-import Device from "../../components/devices/Device";
 import HttpService from "../services/HttpService";
 import { IDeviceModel, DeviceModel, IDeviceContactState, DeviceContactState, IDeviceContact, DeviceContact, IDeviceEndpoint, DeviceEndpoint, IDeviceStatePublish, DeviceStatePublish } from "./Device";
 
