@@ -9,12 +9,13 @@ import "../styles/global.scss";
 import createCache from '@emotion/cache';
 import { CacheProvider } from "@emotion/react";
 import { Auth0Provider } from "@auth0/auth0-react";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 
 export const cache = createCache({ key: 'css', prepend: true });
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
+  const [isOnline, setIsOnline] = React.useState(true)
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.
@@ -22,7 +23,36 @@ export default function App(props: AppProps) {
     if (jssStyles) {
       jssStyles.parentElement!.removeChild(jssStyles);
     }
+
+    // Handle 'cache on fe nav'
+    // Source: https://github.com/shadowwalker/next-pwa/blob/master/examples/cache-on-front-end-nav/pages/_app.js
+    if (typeof window !== 'undefined' && 'ononline' in window && 'onoffline' in window) {
+      setIsOnline(window.navigator.onLine)
+      if (!window.ononline) {
+        window.addEventListener('online', () => {
+          setIsOnline(true);
+        })
+      }
+      if (!window.onoffline) {
+        window.addEventListener('offline', () => {
+          setIsOnline(false);
+        })
+      }
+    }
   }, []);
+
+  const router = useRouter();
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && 'serviceWorker' in navigator && typeof (window as any).workbox !== 'undefined' && isOnline) {
+      // skip index route, because it's already cached under `start-url` caching object
+      if (router.route !== '/app') {
+        const wb = (window as any).workbox
+        wb.active.then(() => {
+          wb.messageSW({ action: 'CACHE_NEW_ROUTE' })
+        })
+      }
+    }
+  }, [isOnline, router.route])
 
   const Layout = typeof (Component as any).layout !== undefined
     ? (Component as any).layout

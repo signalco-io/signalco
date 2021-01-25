@@ -27,11 +27,10 @@ const Layout = (props: { children: React.ReactNode }) => {
   useEffect(() => {
     if (isLoading) return;
 
-    if (!isAuthenticated) {
+    setAccessTokenAsync();
+    if (HttpService.isOnline && !isAuthenticated) {
+      console.log("Login redirecting... Online: ", HttpService.isOnline)
       loginWithRedirect();
-    }
-    else {
-      setAccessTokenAsync();
     }
   }, [isLoading, isAuthenticated])
 
