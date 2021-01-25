@@ -21,7 +21,7 @@ precacheAndRoute(WB_MANIFEST)
 
 cleanupOutdatedCaches()
 registerRoute(
-  '/',
+  '/app',
   new NetworkFirst({
     cacheName: 'start-url',
     plugins: [new ExpirationPlugin({ maxEntries: 1, maxAgeSeconds: 86400, purgeOnQuotaError: !0 })]

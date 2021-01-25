@@ -3,31 +3,14 @@ import AppSettingsProvider from "./AppSettingsProvider";
 import { trimStartChar, isAbsoluteUrl } from "../helpers/StringHelpers";
 
 export default class HttpService {
-  public static token?: string;
-
-  private static _getTokenOrWait() {
-    return new Promise<void>(resolve => {
-      if (!HttpService.token == null) {
-        setTimeout(resolve, 1);
-      }
-      resolve();
-    });
-  }
+  public static tokenFactory?: () => Promise<string>;
 
   private static async _getBearerTokenAsync() {
-    return await new Promise<string>(async (resolve, reject) => {
-      let retryCounter = 0;
-      while (HttpService.token == null) {
-        await HttpService._getTokenOrWait();
-        retryCounter++;
-        if (retryCounter > 10000) {
-          reject("Not logged in. Please refresh this page.");
-          return;
-        }
-      }
+    let token: string|undefined = undefined;
+    if (typeof HttpService.tokenFactory !== 'undefined')
+      token = await HttpService.tokenFactory();
 
-      resolve(`Bearer ${HttpService.token}`);
-    });
+    return `Bearer ${token}`;
   };
 
   public static async getAsync<T>(url: string): Promise<T> {

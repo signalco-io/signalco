@@ -14,8 +14,7 @@ const Layout = (props: { children: React.ReactNode }) => {
 
   const setAccessTokenAsync = async (): Promise<void> => {
     try {
-      const token = await getAccessTokenSilently();
-      HttpService.token = token;
+      HttpService.tokenFactory = getAccessTokenSilently;
     } catch (err) {
       console.warn("Auth0 error.", err);
       setPageError(err.toString());
@@ -44,10 +43,10 @@ const Layout = (props: { children: React.ReactNode }) => {
 
       const hub = new HubConnectionBuilder()
         .withUrl(HttpService.getApiUrl('/signalr/devices'), {
-          accessTokenFactory: () => {
-            if (HttpService.token == null)
-              throw Error("Token not present. Unable to authorize SignalR client.");
-            return HttpService.token;
+          accessTokenFactory: async () => {
+            if (typeof HttpService.tokenFactory === 'undefined')
+              throw Error("TokenFactory not present. Unable to authorize SignalR client.");
+            return await HttpService.tokenFactory();
           }
         })
         .configureLogging(LogLevel.Information)
