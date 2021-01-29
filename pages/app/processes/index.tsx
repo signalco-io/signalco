@@ -22,7 +22,7 @@ const Processes = () => {
     const [items, isLoading, error] = useAutoTable(ProcessesRepository.getProcessesAsync, deviceModelToTableItem);
 
     const handleRowClick = (item: IAutoTableItem) => {
-        router.push(`/processes/${item.id}`);
+        router.push(`/app/processes/${item.id}`);
     };
 
     return (
