@@ -61,7 +61,6 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
 const RowRenderer = observer(({ item, onRowClick }: { item: IAutoTableItem, onRowClick?: (item: IAutoTableItem) => void }) => {
   return (
     <TableRow
-      key={item.id}
       hover={typeof onRowClick !== 'undefined'}
       onClick={() => onRowClick && onRowClick(item)}>
       {Object.keys(item)
@@ -112,7 +111,7 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
               {props.error && <ErrorRow error={props.error} />}
               {props.items &&
                 props.items.length > 0 &&
-                props.items.map(item => <RowRenderer item={item} onRowClick={props.onRowClick} />)}
+                props.items.map(item => <RowRenderer key={item.id} item={item} onRowClick={props.onRowClick} />)}
               {(!!!props.items || props.items.length <= 0) && (
                 <TableRow>
                   <TableCell>

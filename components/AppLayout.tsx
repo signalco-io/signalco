@@ -12,26 +12,24 @@ const Layout = (props: { children: React.ReactNode }) => {
   const [isPageLoading, setPageLoading] = useState<boolean>(true);
   const [devicesHub, setDevicesHub] = useState<HubConnection | undefined>();
 
-  const setAccessTokenAsync = async (): Promise<void> => {
-    try {
-      HttpService.tokenFactory = getAccessTokenSilently;
-    } catch (err) {
-      console.warn("Auth0 error.", err);
-      setPageError(err.toString());
-    }
-    finally {
-      setPageLoading(false);
-    }
+  const setAccessTokenFactory = () => {
+    HttpService.tokenFactory = getAccessTokenSilently;
   };
+
+  if (typeof HttpService.tokenFactory === 'undefined' &&
+    typeof getAccessTokenSilently !== 'undefined') {
+    setAccessTokenFactory();
+  }
 
   useEffect(() => {
     if (isLoading) return;
 
-    setAccessTokenAsync();
     if (HttpService.isOnline && !isAuthenticated) {
       console.log("Login redirecting... Online: ", HttpService.isOnline)
       loginWithRedirect();
     }
+
+    setPageLoading(false);
   }, [isLoading, isAuthenticated])
 
   useEffect(() => {

@@ -26,6 +26,7 @@ export default class HttpService {
     if (typeof token === 'undefined' &&
       typeof HttpService.tokenFactory !== 'undefined') {
       token = await HttpService.tokenFactory();
+      console.log("Used token factory")
     }
 
     // Cache token and return if available
@@ -34,6 +35,7 @@ export default class HttpService {
       return `Bearer ${token}`;
     }
 
+    console.warn("Token is undefined")
     throw new Error("Login failed.");
   };
 

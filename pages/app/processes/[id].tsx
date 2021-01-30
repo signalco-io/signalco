@@ -1,14 +1,24 @@
-import { Box, Chip, Divider, Grid, LinearProgress, Paper, Typography } from '@material-ui/core';
+import { Accordion, AccordionActions, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Divider, Grid, IconButton, LinearProgress, Menu, MenuItem, Paper, Skeleton, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import AppLayout from "../../../components/AppLayout";
 import { observer } from 'mobx-react-lite';
 import ProcessesRepository, { IProcessModel } from '../../../src/processes/ProcessesRepository';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import NoDataPlaceholder from '../../../components/shared/indicators/NoDataPlaceholder';
+import AddSharpIcon from '@material-ui/icons/AddSharp';
+import { makeAutoObservable } from 'mobx';
+import { IDeviceModel } from '../../../src/devices/Device';
+import DevicesRepository from '../../../src/devices/DevicesRepository';
+import { selectMany } from '../../../src/helpers/ArrayHelpers';
 
-interface IDeviceStateTarget {
-    Channel: string;
-    Identifier: string;
-    Contact: string;
+interface IDeviceContactTarget {
+    Channel: string | undefined;
+    Contact: string | undefined;
+}
+
+interface IDeviceStateTarget extends IDeviceContactTarget {
+    Identifier: string | undefined;
 }
 
 interface IDeviceStateValue {
@@ -48,7 +58,6 @@ interface IConduct extends IDeviceTargetState {
 }
 
 function parseTrigger(trigger: any): IDeviceStateTrigger | undefined {
-    //{ "Channel": "zigbee2mqtt", "Identifier": "zigbee2mqtt/0x00158d000478fe4e", "Contact": "action" }
     if (typeof trigger.Channel === 'undefined' ||
         typeof trigger.Identifier === 'undefined' ||
         typeof trigger.Contact === 'undefined') {
@@ -79,35 +88,202 @@ function parseProcessConfiguration(configJson: string | undefined) {
         ? config.Conducts.map((t: any) => parseConduct(t)) as IConduct[]
         : new Array<IConduct>();
 
-    const configMapped = {
+    const configMapped = makeAutoObservable({
         triggers: triggers.filter(t => typeof t !== undefined),
         condition: condition,
         conducts: conducts.filter(c => typeof c !== undefined)
-    }
+    });
 
     console.log(configMapped)
 
     return configMapped;
 }
 
-const DisplayDeviceTarget = (props: { target: IDeviceStateTarget }) => (
-    <Grid container>
-        <Grid item>
-            <Chip label={(
-                <>
-                    <span>{props.target.Identifier}</span>
-                    <Divider orientation="vertical" flexItem />
-                    <span>{props.target.Channel}</span>
-                </>)} />
-        </Grid>
-        <Grid item>
-            <Chip label={props.target.Contact} />
-        </Grid>
-    </Grid>
-);
+const DisplayDeviceTarget = observer((props: { target: IDeviceStateTarget, onChanged: (updated: IDeviceStateTarget) => void }) => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [device, setDevice] = useState<IDeviceModel | undefined>(undefined);
+    const [contactMenuAnchorEl, setContactMenuAnchorEl] = useState<null | HTMLElement>(null);
+    const [devicesMenuAnchorEl, setDevicesMenuAnchorEl] = useState<null | HTMLElement>(null);
 
-const DisplayValue = (props: { value: any | undefined }) => {
-    let label: string | React.ReactNode = "?";
+    useEffect(() => {
+        (async () => {
+            try {
+                setIsLoading(true);
+                const devices = await DevicesRepository.getDevicesAsync();
+                const device = devices.filter(d => d.identifier === props.target.Identifier)[0];
+                setDevice(device);
+            }
+            catch (err) {
+                console.warn("Failed to load device target", props.target);
+            }
+            finally {
+                setIsLoading(false);
+            }
+        })();
+    }, [props.target.Identifier]);
+
+    const DeviceSelection = ({ onSelected }: { onSelected: (device: IDeviceModel | undefined) => void }) => {
+        const [devices, setDevices] = useState<IDeviceModel[] | undefined>();
+
+        useEffect(() => {
+            (async () => {
+                try {
+                    const devices = await DevicesRepository.getDevicesAsync();
+                    setDevices(devices);
+                } catch (err) {
+                    console.warn("Failed to load device selection devices.");
+                } finally {
+                    // TODO: Set loading false
+                }
+            })();
+        }, []);
+
+        if (typeof devices === 'undefined')
+            return <>
+                <MenuItem disabled>Loading...</MenuItem>
+            </>;
+
+        return (
+            <>
+                <MenuItem onClick={() => onSelected(undefined)} selected={typeof props.target.Identifier === 'undefined'}>None</MenuItem>
+                {devices.map(d =>
+                    <MenuItem
+                        key={d.identifier}
+                        onClick={() => onSelected(d)}
+                        selected={props.target.Identifier === d.identifier}>
+                        {`${d.alias}`}
+                    </MenuItem>)}
+            </>
+        );
+    };
+
+    const ContactSelection = ({ onSelected }: { onSelected: (contact: IDeviceContactTarget | undefined) => void }) => {
+        if (typeof device === 'undefined')
+            return <>
+                <MenuItem disabled>Select device first</MenuItem>
+            </>;
+
+        const items = selectMany(device.endpoints, e => e.contacts.map(c => {
+            return {
+                Contact: c.name,
+                Channel: e.channel
+            } as IDeviceContactTarget
+        }));
+
+        return (
+            <>
+                <MenuItem onClick={() => onSelected(undefined)} selected={typeof props.target.Channel === 'undefined' || typeof props.target.Contact === 'undefined'}>None</MenuItem>
+                {items.map(i =>
+                    <MenuItem
+                        key={`${i.Channel}-${i.Contact}`}
+                        onClick={() => onSelected(i)}
+                        selected={props.target.Contact === i.Contact && props.target.Channel === i.Channel}>
+                        {`${i.Contact} (${i.Channel})`}
+                    </MenuItem>)}
+            </>
+        );
+    }
+
+    const handleDevicesSelection = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setDevicesMenuAnchorEl(event.currentTarget);
+    }
+
+    const handleDevicesSelected = (device: IDeviceModel | undefined) => {
+        // Retrieve available contact, set undefined if no matching
+        let channel = props.target.Channel;
+        let contact = props.target.Contact;
+        if (typeof device?.endpoints.filter(e => e.channel === channel)[0]?.contacts.filter(c => c.name === contact) === 'undefined') {
+            channel = undefined;
+            contact = undefined;
+        }
+
+        props.onChanged({
+            Identifier: device?.identifier,
+            Channel: channel,
+            Contact: contact
+        });
+        handleDevicesSelectionClosed();
+    }
+
+    const handleDevicesSelectionClosed = () => {
+        setDevicesMenuAnchorEl(null);
+    }
+
+    const handleContactSelection = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setContactMenuAnchorEl(event.currentTarget);
+    }
+
+    const handleContactSelected = (contact: IDeviceContactTarget | undefined) => {
+        props.onChanged({
+            Identifier: props.target.Identifier,
+            Channel: contact?.Channel,
+            Contact: contact?.Contact
+        });
+        handleContactSelectionClosed();
+    }
+
+    const handleContactSelectionClosed = () => {
+        setContactMenuAnchorEl(null);
+    }
+
+    const ITEM_HEIGHT = 48;
+
+    return (
+        <Grid container>
+            <Grid item>
+                <ButtonBase onClick={handleDevicesSelection} aria-controls="devicetarget-devices-select-menu" aria-haspopup="true">
+                    <Chip label={isLoading ? <Skeleton width={160} variant="text" /> : ((device?.alias ?? props.target.Identifier) ?? "None")} title={props.target.Identifier} />
+                </ButtonBase>
+                {Boolean(devicesMenuAnchorEl) &&
+                    <Menu
+                        id="devicetarget-devices-select-menu"
+                        open={Boolean(devicesMenuAnchorEl)}
+                        anchorEl={devicesMenuAnchorEl}
+                        keepMounted
+                        onClose={handleDevicesSelectionClosed}
+                        PaperProps={{
+                            style: {
+                                maxHeight: ITEM_HEIGHT * 6.5,
+                                width: '30ch',
+                            },
+                        }}>
+                        <DeviceSelection onSelected={handleDevicesSelected} />
+                    </Menu>}
+            </Grid>
+            <Grid item>
+                <ButtonBase onClick={handleContactSelection} aria-controls="devicetarget-contact-select-menu" aria-haspopup="true">
+                    <Chip label={props.target.Contact ?? "None"} title={`${props.target.Channel} | ${props.target.Contact}`} />
+                </ButtonBase>
+                {Boolean(contactMenuAnchorEl) &&
+                    <Menu
+                        id="devicetarget-contact-select-menu"
+                        open={Boolean(contactMenuAnchorEl)}
+                        anchorEl={contactMenuAnchorEl}
+                        keepMounted
+                        onClose={handleContactSelectionClosed}>
+                        <ContactSelection onSelected={handleContactSelected} />
+                    </Menu>}
+            </Grid>
+        </Grid>
+    );
+});
+
+const DisplayValue = observer((props: { value: any | undefined, onHandleChanged: (value: any | undefined) => void }) => {
+    const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
+    const handleValueClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setMenuAnchorEl(event.currentTarget)
+    };
+
+    const handleEditOptionSelected = (value: boolean | undefined) => {
+        props.onHandleChanged(value);
+        handleClosed();
+    };
+
+    const handleClosed = () => {
+        setMenuAnchorEl(null);
+    };
+
+    let label: string | React.ReactNode = "None";
     const valueType = typeof props.value;
     if (valueType === 'boolean') {
         label = props.value.toString();
@@ -118,9 +294,19 @@ const DisplayValue = (props: { value: any | undefined }) => {
     }
 
     return (
-        <Chip label={label} />
+        <>
+            <ButtonBase onClick={handleValueClick} aria-controls="displayvalue-select-menu" aria-haspopup="true">
+                <Chip label={label} />
+            </ButtonBase>
+            {Boolean(menuAnchorEl) &&
+                <Menu id="displayvalue-select-menu" open={Boolean(menuAnchorEl)} anchorEl={menuAnchorEl} keepMounted onClose={handleClosed}>
+                    <MenuItem onClick={() => handleEditOptionSelected(true)}>true</MenuItem>
+                    <MenuItem onClick={() => handleEditOptionSelected(false)}>false</MenuItem>
+                    <MenuItem onClick={() => handleEditOptionSelected(undefined)}>None</MenuItem>
+                </Menu>}
+        </>
     );
-};
+});
 
 const DisplayConditionValueComparison = (props: { comparison: IConditionValueComparison }) => (
     <Grid container alignItems="center" spacing={1}>
@@ -151,6 +337,23 @@ const DisplayConditionValueComparison = (props: { comparison: IConditionValueCom
     </Grid>
 );
 
+const DisplayItemPlaceholder = () => (
+    <Grid container direction="row" spacing={1}>
+        <Grid item>
+            <Skeleton variant="text" width={120} height={40} />
+        </Grid>
+        <Grid item>
+            <Skeleton variant="text" width={40} height={40} />
+        </Grid>
+        <Grid item>
+            <Skeleton variant="text" width={180} height={40} />
+        </Grid>
+        <Grid item>
+            <Skeleton variant="text" width={30} height={40} />
+        </Grid>
+    </Grid>
+);
+
 const DisplayCondition = (props: { condition: ICondition }) => (
     <Grid container>
         {props.condition.Operation &&
@@ -168,19 +371,29 @@ const DisplayCondition = (props: { condition: ICondition }) => (
     </Grid>
 );
 
-const DisplayDeviceStateValue = (props: { target: IDeviceStateTarget, value: any | undefined }) => (
+const DisplayDeviceStateValue = observer((props: { target: IDeviceStateTarget, value: any | undefined, onChanged: (updated: IDeviceTargetState) => void }) => (
     <Grid container alignItems="center" spacing={1}>
         <Grid item>
-            <DisplayDeviceTarget target={props.target} />
+            <DisplayDeviceTarget target={props.target} onChanged={(value) => {
+                props.onChanged({
+                    Target: value,
+                    Value: typeof value.Contact !== 'undefined' ? props.value : undefined
+                });
+            }} />
         </Grid>
         <Grid item>
             <span>set</span>
         </Grid>
         <Grid item>
-            <DisplayValue value={props.value} />
+            <DisplayValue value={props.value} onHandleChanged={(value) => {
+                props.onChanged({
+                    Target: props.target,
+                    Value: typeof props.target.Contact !== 'undefined' ? value : undefined
+                });
+            }} />
         </Grid>
     </Grid>
-);
+));
 
 const ProcessDetails = () => {
     const router = useRouter();
@@ -188,6 +401,7 @@ const ProcessDetails = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState();
     const [process, setProcess] = useState<IProcessModel | undefined>();
+    const [processConfig, setProcessConfig] = useState<any | undefined>(undefined);
 
     const loadDeviceAsync = async () => {
         try {
@@ -195,6 +409,7 @@ const ProcessDetails = () => {
                 typeof id !== 'undefined') {
                 const loadedProcess = await ProcessesRepository.getProcessAsync(id);
                 setProcess(loadedProcess);
+                setProcessConfig(parseProcessConfiguration(loadedProcess.configurationSerialized));
             }
         } catch (err) {
             setError(err.toString());
@@ -207,50 +422,91 @@ const ProcessDetails = () => {
         loadDeviceAsync();
     }, [id]);
 
-    if (error) {
-        return <div>Error {error}</div>
-    }
+    const handleValueChanged = (updated: IDeviceTargetState, index: number) => {
+        // TODO: Use action to change state
+        processConfig.conducts[index] = updated;
+        // (processConfig.conducts[index] as IConduct).Value = updated.Value;
+        // (processConfig.conducts[index] as IConduct).Target.Identifier = updated.Target.Identifier;
+        // (processConfig.conducts[index] as IConduct).Target.Contact = updated.Target.Contact;
+        // (processConfig.conducts[index] as IConduct).Target.Channel = updated.Target.Channel;
 
-    const config = !isLoading ? parseProcessConfiguration(process?.configurationSerialized) : undefined;
+        // TODO: Persist updated process
+    };
 
     return (
-        <Box sx={{ px: { sm: 2 }, py: 2 }}>
-            <Grid container spacing={2} direction="column" wrap="nowrap">
-                <Grid item>
-                    <Typography variant="h1">{process?.alias ?? "No name"}</Typography>
-                </Grid>
-                <Grid item>
-                    <Grid container>
-                        <Grid item>
-                            <Paper variant="elevation">
-                                {isLoading ? <LinearProgress /> : (
-                                    <Grid container direction="column" spacing={2}>
-                                        <Grid item>
-                                            <Typography>Triggers</Typography>
-                                            {config && config.triggers?.length
-                                                ? config.triggers.map(t => <DisplayDeviceTarget target={t} />)
-                                                : <span>No triggers</span>}
+        <>
+            {error && <Alert severity="error">{error}</Alert>}
+            <Box sx={{ px: { sm: 2 }, py: 2 }}>
+                <Grid container spacing={2} direction="column" wrap="nowrap">
+                    <Grid item>
+                        {isLoading ?
+                            <Skeleton variant="text" width={260} height={60} /> :
+                            <Typography variant="h1">{process?.alias ?? "Unknown"}</Typography>}
+                    </Grid>
+                    <Grid item>
+                        <Grid container direction="row">
+                            <Grid item xs={12} md={6}>
+                                <Accordion defaultExpanded>
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panelTriggers-content"
+                                        id="panelTriggers-header"
+                                    >
+                                        <Typography>Triggers</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        {isLoading && <DisplayItemPlaceholder />}
+                                        {!isLoading &&
+                                            (processConfig?.triggers?.length
+                                                ? processConfig.triggers.map(t => <DisplayDeviceTarget target={t} />)
+                                                : <NoDataPlaceholder content="No triggers" />)}
+                                    </AccordionDetails>
+                                </Accordion>
+                                <Accordion defaultExpanded>
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panelConditions-content"
+                                        id="panelConditions-header"
+                                    >
+                                        <Typography>Conditions</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        {isLoading && <><DisplayItemPlaceholder /><DisplayItemPlaceholder /><DisplayItemPlaceholder /></>}
+                                        {!isLoading &&
+                                            (typeof processConfig?.condition !== 'undefined'
+                                                ? <DisplayCondition condition={processConfig.condition} />
+                                                : <NoDataPlaceholder content="No condition" />)}
+                                    </AccordionDetails>
+                                </Accordion>
+                                <Accordion defaultExpanded>
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panelConducts-content"
+                                        id="panelConducts-header"
+                                    >
+                                        <Typography>Conducts</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        {isLoading && <><DisplayItemPlaceholder /><DisplayItemPlaceholder /></>}
+                                        <Grid container spacing={1} direction="column">
+                                            <Grid item>
+                                                {!isLoading &&
+                                                    (processConfig?.conducts?.length
+                                                        ? processConfig.conducts.map((c, i) => <DisplayDeviceStateValue target={c.Target} value={c.Value} onChanged={(u) => handleValueChanged(u, i)} />)
+                                                        : <NoDataPlaceholder content="No conducts" />)}
+                                            </Grid>
+                                            <Grid item>
+                                                <Button fullWidth startIcon={<AddSharpIcon />} disabled={isLoading}>Add conduct</Button>
+                                            </Grid>
                                         </Grid>
-                                        <Grid item>
-                                            <Typography>Conditions</Typography>
-                                            {config?.condition
-                                                ? <DisplayCondition condition={config.condition} />
-                                                : <span>No condition</span>}
-                                        </Grid>
-                                        <Grid item>
-                                            <Typography>Conducts</Typography>
-                                            {config && config.conducts?.length
-                                                ? config.conducts.map(c => <DisplayDeviceStateValue target={c.Target} value={c.Value} />)
-                                                : <span>No conducts</span>}
-                                        </Grid>
-                                    </Grid>
-                                )}
-                            </Paper>
+                                    </AccordionDetails>
+                                </Accordion>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-        </Box>
+            </Box >
+        </>
     );
 }
 

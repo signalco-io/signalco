@@ -23,7 +23,7 @@ const Devices = () => {
     const [items, isLoading, error] = useAutoTable(DevicesRepository.getDevicesAsync, deviceModelToTableItem);
 
     const handleRowClick = (item: IAutoTableItem) => {
-        router.push(`/devices/${item.id}`);
+        router.push(`/app/devices/${item.id}`);
     };
 
     return (

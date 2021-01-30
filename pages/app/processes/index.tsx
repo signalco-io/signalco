@@ -9,11 +9,11 @@ import ProcessesRepository, { IProcessModel } from "../../../src/processes/Proce
 import CheckSharpIcon from '@material-ui/icons/CheckSharp';
 import BlockSharpIcon from '@material-ui/icons/BlockSharp';
 
-function deviceModelToTableItem(device: IProcessModel): IAutoTableItem {
+function deviceModelToTableItem(process: IProcessModel): IAutoTableItem {
     return {
-        id: device.id,
-        name: device.alias,
-        enabled: !device.isDisabled ? <CheckSharpIcon /> : <BlockSharpIcon />
+        id: process.id,
+        name: process.alias,
+        enabled: !process.isDisabled ? <CheckSharpIcon /> : <BlockSharpIcon />
     };
 }
 

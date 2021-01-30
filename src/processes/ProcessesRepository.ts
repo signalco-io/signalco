@@ -71,6 +71,7 @@ export default class ProcessesRepository {
                 if (ProcessesRepository.processesCacheKeyed)
                     ProcessesRepository.processesCacheKeyed[process.id] = process;
             });
+            ProcessesRepository.processesCache.sort((a, b) => a.alias < b.alias ? -1 : (a.alias > b.alias ? 1 : 0));
             ProcessesRepository.isLoading = false;
         }
 
