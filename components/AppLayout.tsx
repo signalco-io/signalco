@@ -8,7 +8,7 @@ import DevicesRepository, { SignalDeviceStatePublishDto } from "../src/devices/D
 
 const Layout = (props: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading, error, getAccessTokenSilently, loginWithRedirect } = useAuth0();
-  const [pageError, setPageError] = useState<string | undefined>();
+  const [pageError] = useState<string | undefined>();
   const [isPageLoading, setPageLoading] = useState<boolean>(true);
   const [devicesHub, setDevicesHub] = useState<HubConnection | undefined>();
 
