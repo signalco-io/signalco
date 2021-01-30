@@ -1,4 +1,4 @@
-import { Accordion, AccordionActions, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Divider, Grid, IconButton, LinearProgress, Menu, MenuItem, Paper, Skeleton, Typography } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Grid, Menu, MenuItem, Skeleton, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import AppLayout from "../../../components/AppLayout";
@@ -30,8 +30,9 @@ interface IDeviceTargetState {
     Value: any | undefined;
 }
 
-const isIDeviceStateValue = (arg: any): arg is IDeviceStateValue => arg.Value !== undefined;
-const isIConditionDeviceStateTarget = (arg: any): arg is IConditionDeviceStateTarget => arg.Target !== undefined;
+const isIDeviceStateValue = (arg: any): arg is IDeviceStateValue => arg?.Value !== undefined;
+const isIConditionDeviceStateTarget = (arg: any): arg is IConditionDeviceStateTarget => arg?.Target !== undefined;
+const isIDeviceStateTarget = (arg: any): arg is IDeviceStateTarget => arg?.Identifier !== undefined && typeof arg?.Contact !== 'undefined' && typeof arg?.Channel !== 'undefined';
 
 interface IDeviceStateTrigger extends IDeviceStateTarget { }
 
@@ -41,9 +42,9 @@ interface IConditionDeviceStateTarget {
 
 interface IConditionValueComparison {
     Operation?: string,
-    Left: IDeviceStateTarget | IDeviceStateValue,
+    Left: IDeviceStateValue | IConditionDeviceStateTarget | undefined,
     ValueOperation?: string,
-    Right: IDeviceStateTarget | IDeviceStateValue,
+    Right: IDeviceStateValue | IConditionDeviceStateTarget | undefined,
 }
 
 interface ICondition {
@@ -93,8 +94,6 @@ function parseProcessConfiguration(configJson: string | undefined) {
         condition: condition,
         conducts: conducts.filter(c => typeof c !== undefined)
     });
-
-    console.log(configMapped)
 
     return configMapped;
 }
@@ -250,32 +249,34 @@ const DisplayDeviceTarget = observer((props: { target: IDeviceStateTarget, onCha
                         <DeviceSelection onSelected={handleDevicesSelected} />
                     </Menu>}
             </Grid>
-            <Grid item>
-                <ButtonBase onClick={handleContactSelection} aria-controls="devicetarget-contact-select-menu" aria-haspopup="true">
-                    <Chip label={props.target.Contact ?? "None"} title={`${props.target.Channel} | ${props.target.Contact}`} />
-                </ButtonBase>
-                {Boolean(contactMenuAnchorEl) &&
-                    <Menu
-                        id="devicetarget-contact-select-menu"
-                        open={Boolean(contactMenuAnchorEl)}
-                        anchorEl={contactMenuAnchorEl}
-                        keepMounted
-                        onClose={handleContactSelectionClosed}>
-                        <ContactSelection onSelected={handleContactSelected} />
-                    </Menu>}
-            </Grid>
+            {props.target.Identifier !== undefined && (
+                <Grid item>
+                    <ButtonBase onClick={handleContactSelection} aria-controls="devicetarget-contact-select-menu" aria-haspopup="true">
+                        <Chip label={props.target.Contact ?? "None"} title={`${props.target.Channel} | ${props.target.Contact}`} />
+                    </ButtonBase>
+                    {Boolean(contactMenuAnchorEl) &&
+                        <Menu
+                            id="devicetarget-contact-select-menu"
+                            open={Boolean(contactMenuAnchorEl)}
+                            anchorEl={contactMenuAnchorEl}
+                            keepMounted
+                            onClose={handleContactSelectionClosed}>
+                            <ContactSelection onSelected={handleContactSelected} />
+                        </Menu>}
+                </Grid>
+            )}
         </Grid>
     );
 });
 
-const DisplayValue = observer((props: { value: any | undefined, onHandleChanged: (value: any | undefined) => void }) => {
+const DisplayValue = observer((props: { value: any | undefined, onChanged: (value: any | undefined) => void }) => {
     const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
     const handleValueClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setMenuAnchorEl(event.currentTarget)
     };
 
     const handleEditOptionSelected = (value: boolean | undefined) => {
-        props.onHandleChanged(value);
+        props.onChanged(value);
         handleClosed();
     };
 
@@ -308,34 +309,52 @@ const DisplayValue = observer((props: { value: any | undefined, onHandleChanged:
     );
 });
 
-const DisplayConditionValueComparison = (props: { comparison: IConditionValueComparison }) => (
-    <Grid container alignItems="center" spacing={1}>
-        <Grid item>
-            <div>{props.comparison.Operation?.toString() ?? ""}</div>
+const DisplayConditionValueComparison = (props: { comparison: IConditionValueComparison, onChanged: (updated: IConditionValueComparison) => void }) => {
+    const handleChanged = (side: "left" | "right", updated: IDeviceStateTarget | any | undefined) => {
+        const stateValue = isIDeviceStateValue(updated) ? updated : undefined;
+        const deviceTarget = isIDeviceStateTarget(updated) ? updated : undefined;
+        let conditionDeviceStateTarget: IConditionDeviceStateTarget | undefined = undefined;
+        if (deviceTarget !== undefined)
+            conditionDeviceStateTarget = { Target: deviceTarget };
+
+        props.onChanged({
+            Left: side === "left" ? (stateValue ?? conditionDeviceStateTarget) : props.comparison.Left,
+            Right: side === "right" ? updated : props.comparison.Right,
+            Operation: props.comparison.Operation,
+            ValueOperation: props.comparison.ValueOperation
+        });
+    };
+
+    return (
+        <Grid container alignItems="center" spacing={1}>
+            {typeof props.comparison.Operation !== 'undefined' &&
+                <Grid item>
+                    <div>{props.comparison.Operation}</div>
+                </Grid>}
+            <Grid item>
+                {
+                    isIDeviceStateValue(props.comparison.Left)
+                        ? <DisplayValue value={props.comparison.Left.Value} onChanged={(updated) => handleChanged("left", updated)} />
+                        : (isIConditionDeviceStateTarget(props.comparison.Left)
+                            ? <DisplayDeviceTarget target={props.comparison.Left.Target} onChanged={(updated) => handleChanged("left", updated)} />
+                            : <span>Unknown</span>)
+                }
+            </Grid>
+            <Grid item>
+                <div>{props.comparison.ValueOperation?.toString() ?? "equals"}</div>
+            </Grid>
+            <Grid item>
+                {
+                    isIDeviceStateValue(props.comparison.Right)
+                        ? <DisplayValue value={props.comparison.Right.Value} onChanged={(updated) => handleChanged("right", updated)} />
+                        : (isIConditionDeviceStateTarget(props.comparison.Right)
+                            ? <DisplayDeviceTarget target={props.comparison.Right.Target} onChanged={(updated) => handleChanged("right", updated)} />
+                            : <span>Unknown</span>)
+                }
+            </Grid>
         </Grid>
-        <Grid item>
-            {
-                isIDeviceStateValue(props.comparison.Left)
-                    ? <DisplayValue value={props.comparison.Left.Value} />
-                    : (isIConditionDeviceStateTarget(props.comparison.Left)
-                        ? <DisplayDeviceTarget target={props.comparison.Left.Target} />
-                        : <span>Unknown</span>)
-            }
-        </Grid>
-        <Grid item>
-            <div>{props.comparison.ValueOperation?.toString() ?? "equals"}</div>
-        </Grid>
-        <Grid item>
-            {
-                isIDeviceStateValue(props.comparison.Right)
-                    ? <DisplayValue value={props.comparison.Right.Value} />
-                    : (isIConditionDeviceStateTarget(props.comparison.Right)
-                        ? <DisplayDeviceTarget target={props.comparison.Right.Target} />
-                        : <span>Unknown</span>)
-            }
-        </Grid>
-    </Grid>
-);
+    );
+}
 
 const DisplayItemPlaceholder = () => (
     <Grid container direction="row" spacing={1}>
@@ -354,18 +373,32 @@ const DisplayItemPlaceholder = () => (
     </Grid>
 );
 
-const DisplayCondition = (props: { condition: ICondition }) => (
+const DisplayCondition = (props: { condition: ICondition, onChanged: (updated: ICondition) => void }) => (
     <Grid container>
         {props.condition.Operation &&
             <Grid item>
                 {props.condition.Operation?.toString()}
             </Grid>
         }
-        {props.condition.Operations.map(op => {
+        {props.condition.Operations.map((op, i) => {
             if (isICondition(op))
-                return <DisplayCondition condition={op} />
+                return <DisplayCondition condition={op} onChanged={(updated) => {
+                    const updatedOperations = [...props.condition.Operations];
+                    updatedOperations[i] = updated;
+                    props.onChanged({
+                        Operation: props.condition.Operation,
+                        Operations: updatedOperations
+                    })
+                }} />
             else if (isIConditionValueComparison(op))
-                return <DisplayConditionValueComparison comparison={op as IConditionValueComparison} />
+                return <DisplayConditionValueComparison comparison={op as IConditionValueComparison} onChanged={(updated) => {
+                    const updatedOperations = [...props.condition.Operations];
+                    updatedOperations[i] = updated;
+                    props.onChanged({
+                        Operation: props.condition.Operation,
+                        Operations: updatedOperations
+                    })
+                }} />
             else return (<span>Unknown</span>);
         })}
     </Grid>
@@ -385,7 +418,7 @@ const DisplayDeviceStateValue = observer((props: { target: IDeviceStateTarget, v
             <span>set</span>
         </Grid>
         <Grid item>
-            <DisplayValue value={props.value} onHandleChanged={(value) => {
+            <DisplayValue value={props.value} onChanged={(value) => {
                 props.onChanged({
                     Target: props.target,
                     Value: typeof props.target.Contact !== 'undefined' ? value : undefined
@@ -401,7 +434,11 @@ const ProcessDetails = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState();
     const [process, setProcess] = useState<IProcessModel | undefined>();
-    const [processConfig, setProcessConfig] = useState<any | undefined>(undefined);
+    const [processConfig, setProcessConfig] = useState<{
+        triggers: IDeviceStateTrigger[],
+        condition: ICondition | undefined,
+        conducts: IConduct[]
+    } | undefined>(undefined);
 
     const loadDeviceAsync = async () => {
         try {
@@ -409,7 +446,9 @@ const ProcessDetails = () => {
                 typeof id !== 'undefined') {
                 const loadedProcess = await ProcessesRepository.getProcessAsync(id);
                 setProcess(loadedProcess);
-                setProcessConfig(parseProcessConfiguration(loadedProcess.configurationSerialized));
+                if (loadedProcess) {
+                    setProcessConfig(parseProcessConfiguration(loadedProcess.configurationSerialized));
+                }
             }
         } catch (err) {
             setError(err.toString());
@@ -422,15 +461,33 @@ const ProcessDetails = () => {
         loadDeviceAsync();
     }, [id]);
 
+    const persistProcessAsync = () => {
+        console.log("Persist TBD");
+    };
+
+    const handleTriggerChange = (updated: IDeviceStateTrigger, index: number) => {
+        // TODO: Use action to change state
+        if (processConfig)
+            processConfig.triggers[index] = updated;
+
+        persistProcessAsync();
+    }
+
+    const handleConditionChange = (updated: ICondition) => {
+        // TODO: Use action to change state
+        console.log(updated);
+        if (processConfig)
+            processConfig.condition = updated;
+
+        persistProcessAsync();
+    };
+
     const handleValueChanged = (updated: IDeviceTargetState, index: number) => {
         // TODO: Use action to change state
-        processConfig.conducts[index] = updated;
-        // (processConfig.conducts[index] as IConduct).Value = updated.Value;
-        // (processConfig.conducts[index] as IConduct).Target.Identifier = updated.Target.Identifier;
-        // (processConfig.conducts[index] as IConduct).Target.Contact = updated.Target.Contact;
-        // (processConfig.conducts[index] as IConduct).Target.Channel = updated.Target.Channel;
+        if (processConfig)
+            processConfig.conducts[index] = updated;
 
-        // TODO: Persist updated process
+        persistProcessAsync();
     };
 
     return (
@@ -458,7 +515,7 @@ const ProcessDetails = () => {
                                         {isLoading && <DisplayItemPlaceholder />}
                                         {!isLoading &&
                                             (processConfig?.triggers?.length
-                                                ? processConfig.triggers.map(t => <DisplayDeviceTarget target={t} />)
+                                                ? processConfig.triggers.map((t, i) => <DisplayDeviceTarget target={t} onChanged={(updated) => handleTriggerChange(updated, i)} />)
                                                 : <NoDataPlaceholder content="No triggers" />)}
                                     </AccordionDetails>
                                 </Accordion>
@@ -474,7 +531,7 @@ const ProcessDetails = () => {
                                         {isLoading && <><DisplayItemPlaceholder /><DisplayItemPlaceholder /><DisplayItemPlaceholder /></>}
                                         {!isLoading &&
                                             (typeof processConfig?.condition !== 'undefined'
-                                                ? <DisplayCondition condition={processConfig.condition} />
+                                                ? <DisplayCondition condition={processConfig.condition} onChanged={handleConditionChange} />
                                                 : <NoDataPlaceholder content="No condition" />)}
                                     </AccordionDetails>
                                 </Accordion>
