@@ -310,18 +310,23 @@ const HomeOverview = () => {
             </Grid>
             <Grid item>
                 <SizeMe noPlaceholder>
-                    {({ size }) => (
-                        <RGL
-                            isDraggable={isEditing}
-                            // compactType={null}
-                            onLayoutChange={handleLayoutChange}
-                            width={size.width || (typeof window !== 'undefined' ? window.innerWidth : 1024)}
-                            rowHeight={51}
-                            cols={Math.floor((size.width || 1024) / 220 * 2)}
-                        >
-                            {devices.map(d => renderDevice(d))}
-                        </RGL>
-                    )}
+                    {({ size }) => {
+                        console.log("Size", size);
+                        if (size.width) {
+                            return (
+                                <RGL
+                                    isDraggable={isEditing}
+                                    // compactType={null}
+                                    onLayoutChange={handleLayoutChange}
+                                    width={size.width || (typeof window !== 'undefined' ? window.innerWidth : 1820)}
+                                    rowHeight={51}
+                                    cols={Math.floor((size.width || 1820) / 220 * 2)}
+                                >
+                                    {devices.map(d => renderDevice(d))}
+                                </RGL>
+                            );
+                        } return <div></div>
+                    }}
                 </SizeMe>
             </Grid>
         </Grid>
