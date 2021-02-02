@@ -9,6 +9,7 @@ import EditSharpIcon from '@material-ui/icons/EditSharp';
 import { TabContext, TabList, TabPanel } from "@material-ui/lab";
 import HttpService from "../../src/services/HttpService";
 import { observer } from "mobx-react-lite";
+import Widget, { IWidgetPart } from "../devices/Widget";
 
 function defaultDisplay(config?: IDeviceModel) {
     const displayConfig: IDeviceWidgetConfig = {
@@ -278,6 +279,17 @@ const HomeOverview = () => {
             </div>);
     }
 
+    const widgetParts: IWidgetPart[] = [
+        {
+            type: "inlineLabel",
+            config: {
+                label: "test",
+                icon: "lock"
+            }
+        }
+    ];
+
+
     return (
         <Grid container direction="column" spacing={1} wrap="nowrap">
             {isLoading && (
@@ -314,16 +326,19 @@ const HomeOverview = () => {
                         console.log("Size", size);
                         if (size.width) {
                             return (
-                                <RGL
-                                    isDraggable={isEditing}
-                                    // compactType={null}
-                                    onLayoutChange={handleLayoutChange}
-                                    width={size.width || (typeof window !== 'undefined' ? window.innerWidth : 1820)}
-                                    rowHeight={51}
-                                    cols={Math.floor((size.width || 1820) / 220 * 2)}
-                                >
-                                    {devices.map(d => renderDevice(d))}
-                                </RGL>
+                                <>
+                                    <Widget parts={widgetParts} onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />
+                                    <RGL
+                                        isDraggable={isEditing}
+                                        // compactType={null}
+                                        onLayoutChange={handleLayoutChange}
+                                        width={size.width || (typeof window !== 'undefined' ? window.innerWidth : 1820)}
+                                        rowHeight={51}
+                                        cols={Math.floor((size.width || 1820) / 220 * 2)}
+                                    >
+                                        {devices.map(d => renderDevice(d))}
+                                    </RGL>
+                                </>
                             );
                         } return <div></div>
                     }}
