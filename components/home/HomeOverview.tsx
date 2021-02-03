@@ -284,7 +284,7 @@ const HomeOverview = () => {
             type: "inlineLabel",
             config: {
                 label: "Living room",
-                icon: "motion",
+                icon: "livingroom",
                 size: "large"
             },
             size: "1"
@@ -334,21 +334,54 @@ const HomeOverview = () => {
             dense: true
         },
         {
+            type: "inlineLabel",
+            config: {
+                label: "",
+            },
+            size: "1",
+            dense: true
+        },
+        {
             type: "button",
             config: {
-                icon: "onoff"
+                icon: "onoff",
+                small: true
             },
-            size: "1/6"
+            size: "1/6",
+            dense: true
         },
         {
             type: "inlineLabel",
             config: {
                 label: "Couch socket",
-                value: "123",
-                units: "W"
             },
-            size: "5/6"
+            size: "5/6",
+            dense: true
         }, 
+        {
+            type: "inlineLabel",
+            config: {
+                label: "Consumption",
+                icon: "empty",
+                value: "123",
+                units: "W",
+                size: "small"
+            },
+            size: "1",
+            dense: true
+        },
+        {
+            type: "inlineLabel",
+            config: {
+                label: "Average",
+                icon: "empty",
+                value: "1.5",
+                units: "kW",
+                size: "small"
+            },
+            size: "1",
+            dense: true
+        },
         {
             type: "graph",
             config: {
@@ -457,7 +490,7 @@ const HomeOverview = () => {
                             return (
                                 <>
                                     <Box m={1}>
-                                        <Widget columnWidth={220} columns={1} rows={8} parts={widgetParts} onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />
+                                        <Widget columnWidth={220} columns={1} rows={9} parts={widgetParts} onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />
                                     </Box>
                                     <RGL
                                         isDraggable={isEditing}

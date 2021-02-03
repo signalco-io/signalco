@@ -10,9 +10,10 @@ import TouchAppIcon from '@material-ui/icons/TouchApp';
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 import WbIncandescentOutlinedIcon from '@material-ui/icons/WbIncandescentOutlined';
 import PowerSettingsNewSharpIcon from '@material-ui/icons/PowerSettingsNewSharp';
+import WeekendSharpIcon from '@material-ui/icons/WeekendSharp';
 import { createSvgIcon } from '@material-ui/core';
 
-export type availableIcons = "empty" | "questionmark" | "lock" | "power" | "touch" | "light" | "flower" | "motion" | "window" | "door" | "onoff";
+export type availableIcons = "empty" | "livingroom" | "questionmark" | "lock" | "power" | "touch" | "light" | "flower" | "motion" | "window" | "door" | "onoff";
 
 const map = (
     icon: availableIcons,
@@ -27,6 +28,7 @@ const map = (
         case "power": return switched ? PowerOffOutlinedIcon : PowerIcon;
         case "touch": return TouchAppIcon;
         case "onoff": return PowerSettingsNewSharpIcon;
+        case "livingroom": return WeekendSharpIcon;
         case "empty": return createSvgIcon(<path></path>, "Empty");
         case "questionmark":
         default: return HelpIcon;

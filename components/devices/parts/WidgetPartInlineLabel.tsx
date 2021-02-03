@@ -30,12 +30,12 @@ const WidgetPartInlineLabel = ({ config }: { config: IWidgetPartInlineLabelConfi
             <Box px={1} py={sizeToPadding(config.size)}>
                 <Grid container alignItems="center" spacing={1} wrap="nowrap">
                     {IconComponent &&
-                        <Grid item sx={{ minWidth: 35, marginTop: config.size === "small" ? '6px' : 0 }}>
+                        <Grid item sx={{ minWidth: 35, marginTop: config.size !== "large" ? '6px' : 0 }}>
                             <IconComponent fontSize={sizeToFontSize(config.size)} />
                         </Grid>}
                     {config.label &&
                         <Grid item style={{ flexGrow: 1 }} zeroMinWidth>
-                            <Typography noWrap variant={sizeToTypographyVariant(config.size)}>{config.label}</Typography>
+                            <Typography noWrap variant={sizeToTypographyVariant(config.size)} color={config.size === "small" ? "textSecondary" : "textPrimary"}>{config.label}</Typography>
                         </Grid>}
                     {config.value &&
                         <Grid item>
