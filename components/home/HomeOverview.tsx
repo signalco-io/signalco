@@ -283,9 +283,138 @@ const HomeOverview = () => {
         {
             type: "inlineLabel",
             config: {
-                label: "test",
-                icon: "lock"
-            }
+                label: "Living room",
+                icon: "motion",
+                size: "large"
+            },
+            size: "1"
+        },
+        {
+            type: "button",
+            config: {
+                icon: "light"
+            },
+            size: "1/3"
+        },
+        {
+            type: "button",
+            config: {
+                icon: "light"
+            },
+            size: "1/3"
+        },
+        {
+            type: "button",
+            config: {
+                icon: "light"
+            },
+            size: "1/3"
+        },
+        {
+            type: "inlineLabel",
+            config: {
+                label: "Temperature",
+                icon: "flower",
+                size: "normal",
+                value: "23.5",
+                units: "°C"
+            },
+            size: "1",
+            dense: true
+        },
+        {
+            type: "inlineLabel",
+            config: {
+                label: "Humidity",
+                icon: "flower",
+                value: "35",
+                units: "%"
+            },
+            size: "1",
+            dense: true
+        },
+        {
+            type: "button",
+            config: {
+                icon: "onoff"
+            },
+            size: "1/6"
+        },
+        {
+            type: "inlineLabel",
+            config: {
+                label: "Couch socket",
+                value: "123",
+                units: "W"
+            },
+            size: "5/6"
+        }, 
+        {
+            type: "graph",
+            config: {
+                columnWidth: 220,
+                columns: 1,
+                rows: 1
+            },
+            size: "1"
+        },
+        {
+            type: "inlineLabel",
+            config: {
+                label: "",
+            },
+            size: "1",
+            dense: true
+        },
+        {
+            type: "button",
+            config: {
+                icon: "onoff",
+                small: true
+            },
+            size: "1/6",
+            dense: true
+        },
+        {
+            type: "inlineLabel",
+            config: {
+                label: "Doors socket"
+            },
+            size: "5/6",
+            dense: true
+        },
+        {
+            type: "inlineLabel",
+            config: {
+                label: "Consumption",
+                icon: "empty",
+                value: "123",
+                units: "W",
+                size: "small"
+            },
+            size: "1",
+            dense: true
+        },
+        {
+            type: "inlineLabel",
+            config: {
+                label: "Average",
+                icon: "empty",
+                value: "1.5",
+                units: "kW",
+                size: "small"
+            },
+            size: "1",
+            dense: true
+        },
+        {
+            type: "graph",
+            config: {
+                columnWidth: 220,
+                columns: 1,
+                rows: 1
+            },
+            size: "1"
         }
     ];
 
@@ -327,7 +456,9 @@ const HomeOverview = () => {
                         if (size.width) {
                             return (
                                 <>
-                                    <Widget parts={widgetParts} onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />
+                                    <Box m={1}>
+                                        <Widget columnWidth={220} columns={1} rows={8} parts={widgetParts} onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />
+                                    </Box>
                                     <RGL
                                         isDraggable={isEditing}
                                         // compactType={null}
