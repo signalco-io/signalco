@@ -69,10 +69,10 @@ export default function App(props: AppProps) {
   return (
     <CacheProvider value={cache}>
       <Head>
-        <link
+        {/* <link
           href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap"
           rel="stylesheet"
-        ></link>
+        ></link> */}
         <link rel="manifest" href="/manifest.webmanifest"></link>
         <link
           rel="apple-touch-icon"

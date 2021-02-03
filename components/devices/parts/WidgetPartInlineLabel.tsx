@@ -1,10 +1,10 @@
 import { Box, Grid, Typography } from "@material-ui/core"
 import React from "react"
-import IconResolver from '../../icons/IconResolver';
+import IconResolver, { availableIcons } from '../../icons/IconResolver';
 
 export interface IWidgetPartInlineLabelConfig {
     label?: string,
-    icon?: "questionmark" | "lock" | "power" | "touch" | "light" | "flower" | "motion" | "window" | "door",
+    icon?: availableIcons,
     size?: "small" | "normal" | "large",
     value?: string,
     units?: string

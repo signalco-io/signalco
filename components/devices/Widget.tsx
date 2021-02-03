@@ -1,8 +1,8 @@
-import { Alert, Box, Grid, Paper } from "@material-ui/core";
+import { Alert, Grid, Paper } from "@material-ui/core";
 import React from "react";
 import { rowHeight } from "./parts/Shared";
 import WidgetPartButton, { IWidgetPartButtonConfig } from "./parts/WidgetPartButton";
-import WidgetPartGraph from "./parts/WidgetPartGraph";
+import WidgetPartGraph, { IWidgetPartGraphConfig } from "./parts/WidgetPartGraph";
 import WidgetPartInlineLabel, { IWidgetPartInlineLabelConfig } from "./parts/WidgetPartInlineLabel";
 
 export interface IWidgetProps {
@@ -44,14 +44,14 @@ const resolveSize = (size: widgetSize) => {
     }
 }
 
-const PartResolved = ({ part }: { part: IWidgetPart }) => {
+const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidgetPart }) => {
     switch (part.type) {
         case "inlineLabel":
-            return <WidgetPartInlineLabel config={part.config} />
+            return <WidgetPartInlineLabel config={part.config as IWidgetPartInlineLabelConfig} />
         case "button":
-            return <WidgetPartButton config={part.config} />
+            return <WidgetPartButton config={part.config as IWidgetPartButtonConfig} />
         case "graph":
-            return <WidgetPartGraph config={part.config} />
+            return <WidgetPartGraph columnWidth={columnWidth} config={part.config as IWidgetPartGraphConfig} />
         default:
             return <Alert severity="warning">Unkwnown widget part '{part.type}'</Alert>
     }
@@ -63,7 +63,7 @@ const Widget = (props: IWidgetProps) => {
             <Grid container justifyContent="space-around" alignItems="center">
                 {props.parts.map(p => (
                     <Grid item xs={resolveSize(p.size)} sx={{ height: p.dense ? rowHeight/2 : rowHeight, flexGrow: p.size === "grow" ? 1 : 0 }} zeroMinWidth>
-                        <PartResolved part={p} />
+                        <PartResolved part={p} columnWidth={props.columnWidth} />
                     </Grid>))}
             </Grid>
         </Paper>
