@@ -61,8 +61,13 @@ const Widget = (props: IWidgetProps) => {
     return (
         <Paper sx={{ width: props.columnWidth * props.columns, height: props.rows * rowHeight }}>
             <Grid container justifyContent="space-around" alignItems="center">
-                {props.parts.map(p => (
-                    <Grid item xs={resolveSize(p.size)} sx={{ height: p.dense ? rowHeight/2 : rowHeight, flexGrow: p.size === "grow" ? 1 : 0 }} zeroMinWidth>
+                {props.parts.map((p, index) => (
+                    <Grid
+                        key={index}
+                        item
+                        xs={resolveSize(p.size)}
+                        sx={{ height: p.dense ? rowHeight / 2 : rowHeight, flexGrow: p.size === "grow" ? 1 : 0 }}
+                        zeroMinWidth>
                         <PartResolved part={p} columnWidth={props.columnWidth} />
                     </Grid>))}
             </Grid>

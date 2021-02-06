@@ -19,7 +19,7 @@ const sizeToFontSize = (size?: "small" | "normal" | "large") => {
 }
 
 const sizeToPadding = (size?: "small" | "normal" | "large") => {
-    return size === "large" ? 1.5 : (size === "small" ? 0 : 0.5);
+    return size === "large" ? 2 : (size === "small" ? 0 : 1);
 }
 
 const WidgetPartInlineLabel = ({ config }: { config: IWidgetPartInlineLabelConfig }) => {
@@ -27,7 +27,7 @@ const WidgetPartInlineLabel = ({ config }: { config: IWidgetPartInlineLabelConfi
 
     return (
         <Grid container direction="column" style={{ height: '100%' }} justifyContent="center">
-            <Box px={1} py={sizeToPadding(config.size)}>
+            <Box px={1.5} py={sizeToPadding(config.size)}>
                 <Grid container alignItems="center" spacing={1} wrap="nowrap">
                     {IconComponent &&
                         <Grid item sx={{ minWidth: 35, marginTop: config.size !== "large" ? '6px' : 0 }}>

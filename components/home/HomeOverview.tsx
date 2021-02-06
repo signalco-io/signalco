@@ -1,15 +1,15 @@
 import { Alert, Box, Button, Grid, LinearProgress } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IDeviceModel } from "../../src/devices/Device";
 import DevicesRepository from "../../src/devices/DevicesRepository";
 import { IDeviceWidgetConfig } from "../devices/Device";
 import RGL from 'react-grid-layout';
-import { SizeMe } from 'react-sizeme';
 import EditSharpIcon from '@material-ui/icons/EditSharp';
 // import { TabContext, TabList, TabPanel } from "@material-ui/lab";
 import HttpService from "../../src/services/HttpService";
 import { observer } from "mobx-react-lite";
 import Widget, { IWidgetPart } from "../devices/Widget";
+import { useResizeDetector } from 'react-resize-detector';
 
 function defaultDisplay(config?: IDeviceModel) {
     const displayConfig: IDeviceWidgetConfig = {
@@ -393,27 +393,16 @@ const HomeOverview = () => {
         {
             type: "inlineLabel",
             config: {
-                label: "",
+                label: "Doors socket"
             },
-            size: "1",
-            dense: true
+            size: "3/4"
         },
         {
             type: "button",
             config: {
-                icon: "onoff",
-                small: true
+                icon: "onoff"
             },
-            size: "1/6",
-            dense: true
-        },
-        {
-            type: "inlineLabel",
-            config: {
-                label: "Doors socket"
-            },
-            size: "5/6",
-            dense: true
+            size: "1/4"
         },
         {
             type: "inlineLabel",
@@ -449,6 +438,21 @@ const HomeOverview = () => {
         }
     ];
 
+    const RenderDashboard = () => {
+        const { width, ref } = useResizeDetector({handleHeight: false, handleWidth: true});
+        const castedRef = ref as React.MutableRefObject<HTMLDivElement | null>; // Workaround from: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/35572
+
+        if (typeof width === 'undefined')
+            return <div ref={castedRef}></div>;
+
+        const columnWidth = width && width < 400 ? width / 2 : width / Math.max(Math.floor(width / 220), 2);
+        return (
+            <div ref={castedRef}>
+                <Box m={1}>
+                    <Widget columnWidth={columnWidth} columns={1} rows={9} parts={widgetParts} onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />
+                </Box>
+            </div>);
+    };
 
     return (
         <Grid container direction="column" spacing={1} wrap="nowrap">
@@ -481,23 +485,7 @@ const HomeOverview = () => {
                 }
             </Grid>
             <Grid item>
-                <SizeMe noPlaceholder>
-                    {({ size }) => {
-                        if (size.width) {
-                            const columnWidth = size.width < 400 ? size.width / 2 : size.width / Math.max(Math.floor(size.width / 220), 2);
-
-                            return (
-                                <>
-                                    <Box m={1}>
-                                        <Widget columnWidth={columnWidth} columns={1} rows={9} parts={widgetParts} onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />
-                                    </Box>
-                                </>
-                            );
-                        }
-
-                        return <div></div>;
-                    }}
-                </SizeMe>
+                <RenderDashboard />
             </Grid>
         </Grid>
     );

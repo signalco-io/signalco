@@ -11,8 +11,8 @@ const WidgetPartButton = ({ config }: { config: IWidgetPartButtonConfig }) => {
     const IconResolved = IconResolver(config.icon);
 
     return (
-        <Box px={1}>
-            <Grid container justifyContent="center">
+        <Box px={1} sx={{height: '100%'}}>
+            <Grid container justifyContent="center" alignItems="center" sx={{height: '100%'}}>
                 <IconButton size={config.small ? "small" : "medium"}><IconResolved fontSize={config.small ? "small" : "medium"} /></IconButton>
             </Grid>
         </Box>

@@ -48,7 +48,9 @@ const NavProfile = () => {
             <Grid container spacing={1} alignItems="center">
               <Grid item>
                 {user.picture ? (
-                  <Avatar imgProps={{ width: 40, height: 40 }} src={user.picture} alt="User profile image" />
+                  <Avatar imgProps={{ width: 40, height: 40 }} src={user.picture} alt="User profile image">
+                    {user.given_name && user.family_name ? `${user.given_name[0]}${user.family_name[0]}` : user.email[0]}
+                  </Avatar>
                 ) : (
                     <Skeleton variant="circular">
                       <Avatar>{user.given_name && user.family_name ? `${user.given_name[0]}${user.family_name[0]}` : user.email[0]}</Avatar>
