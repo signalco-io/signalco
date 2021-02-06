@@ -83,7 +83,7 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
       });
 
   return (
-    <Table stickyHeader>
+    <Table stickyHeader style={{ height: '100%', overflow: 'auto' }}>
       {!props.isLoading &&
         !!!props.error &&
         headers &&

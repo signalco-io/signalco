@@ -3,7 +3,7 @@ import { Alert, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
-import { HubConnection, HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
+import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import DevicesRepository, { SignalDeviceStatePublishDto } from "../src/devices/DevicesRepository";
 
 const Layout = (props: { children: React.ReactNode }) => {
@@ -89,11 +89,11 @@ const Layout = (props: { children: React.ReactNode }) => {
   }
 
   return (
-    <Grid container direction="column">
-      <Grid item>
+    <Grid container direction="row" sx={{ height: '100%', width: '100%' }}>
+      <Grid item sx={{ height: '100%' }}>
         <NavProfile />
       </Grid>
-      <Grid item>{props.children}</Grid>
+      <Grid sx={{ height: '100%', flexGrow: 1 }} item>{props.children}</Grid>
     </Grid>
   );
 };
