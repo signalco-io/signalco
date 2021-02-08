@@ -89,7 +89,7 @@ const Layout = (props: { children: React.ReactNode }) => {
   }
 
   return (
-    <Grid container direction="row" sx={{ height: '100%', width: '100%' }}>
+    <Grid container direction="row" sx={{ height: '100%', width: '100%' }} wrap="nowrap">
       <Grid item sx={{ height: '100%' }}>
         <NavProfile />
       </Grid>

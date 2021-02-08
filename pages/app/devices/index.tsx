@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from 'next/router';
-import { Card, CardHeader, CardMedia, Grid } from "@material-ui/core";
+import { Box, Card, CardHeader, CardMedia, Grid, Typography } from "@material-ui/core";
 import AppLayout from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
@@ -26,16 +26,16 @@ const Devices = () => {
     };
 
     return (
-        <Grid container sx={{ height: '100%' }}>
-            <Grid item sm={12} md={8} lg={6} sx={{ height: '100%' }}>
-                <Card style={{ background: 'transparent', height: '100%', overflow: 'hidden' }}>
-                    <CardHeader title="Devices" />
-                    <CardMedia style={{ height: '100%' }}>
+        <div style={{ margin: '24px', overflow: 'hidden', position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}>
+            <Box sx={{ backgroundColor: '#333', maxWidth: '680px', height: '100%' }}>
+                <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                    <Typography variant="h2" sx={{ p: 2 }}>Devices</Typography>
+                    <Box sx={{ position: 'relative', flexGrow: 1, overflow: 'hidden' }}>
                         <AutoTable items={items} isLoading={isLoading} error={error} onRowClick={handleRowClick} />
-                    </CardMedia>
-                </Card>
-            </Grid>
-        </Grid>
+                    </Box>
+                </Box>
+            </Box>
+        </div>
     )
 };
 

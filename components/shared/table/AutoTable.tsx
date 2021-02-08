@@ -1,5 +1,6 @@
 import {
   Alert,
+  Box,
   LinearProgress, Link, Table,
   TableBody, TableCell, TableHead, TableRow,
   Typography
@@ -17,6 +18,7 @@ import IErrorProps from "../interfaces/IErrorProps";
 export interface IAutoTableItem {
   id: string;
   [key: string]: any;
+  _opacity?: number
 }
 
 export interface IAutoTableProps<T extends IAutoTableItem> extends IErrorProps {
@@ -27,49 +29,36 @@ export interface IAutoTableProps<T extends IAutoTableItem> extends IErrorProps {
 
 export interface IAutoTableCellRendererProps {
   value: any;
+  style?: React.CSSProperties
 }
 
 const ErrorRow = (props: IErrorProps) => {
   return (
-    <TableRow>
-      <TableCell>
+    <div>
+      <div>
         <Alert severity="error">
           {(props.error || "Unknown error").toString()}
         </Alert>
-      </TableCell>
-    </TableRow>
+      </div>
+    </div>
   );
 };
 
 const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
   if (typeof props.value === "string" && isAbsoluteUrl(props.value as string))
     return (
-      <TableCell title={props.value}>
+      <div title={props.value}>
         <Link href={props.value} rel="noopener" target="_blank">
-          <OpenInNewIcon fontSize="small" />
+          <OpenInNewIcon style={props.style} fontSize="small" />
         </Link>
-      </TableCell>
+      </div>
     );
 
   return (
-    <TableCell>
-      <Typography variant="body2">{props.value}</Typography>
-    </TableCell>
+    <Box display="inline-block" sx={{ gridRow: props.row, gridColumn: props.column }}>
+      <Typography variant="body2" style={props.style}>{props.value}</Typography>
+    </Box>
   );
-});
-
-const RowRenderer = observer(({ item, onRowClick }: { item: IAutoTableItem, onRowClick?: (item: IAutoTableItem) => void }) => {
-  return (
-    <TableRow
-      hover={typeof onRowClick !== 'undefined'}
-      onClick={() => onRowClick && onRowClick(item)}>
-      {Object.keys(item)
-        .filter((ik) => ik !== "id" && !ik.startsWith("_"))
-        .map((itemKey) => (
-          <CellRenderer value={item[itemKey]} key={itemKey} />
-        ))}
-    </TableRow>
-  )
 });
 
 function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
@@ -83,46 +72,21 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
       });
 
   return (
-    <Table stickyHeader style={{ height: '100%', overflow: 'auto' }}>
-      {!props.isLoading &&
-        !!!props.error &&
-        headers &&
-        headers != null &&
-        headers.length > 0 && (
-          <TableHead>
-            <TableRow>
-              {headers ? (
-                headers.map((h) => <TableCell key={h.id}>{h.value}</TableCell>)
-              ) : (
-                  <TableCell></TableCell>
-                )}
-            </TableRow>
-          </TableHead>
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ overflow: 'auto', flexGrow: 1, display: 'grid' }}>
+        {props.error && <ErrorRow error={props.error} />}
+        {props.items?.length && props.items.map((item, rowIndex) => {
+          Object.keys(item)
+          .filter((ik) => ik !== "id" && !ik.startsWith("_"))
+          .map((itemKey, index) => (
+            <CellRenderer value={item[itemKey]} key={itemKey} row={rowIndex} column={index + 1} style={{ opacity: item._opacity ? item._opacity : 1 }} />
+          ))
+        })}
+        {(!(props.items?.length)) && (
+          <ResultsPlaceholder />
         )}
-      <TableBody>
-        {props.isLoading ? (
-          <TableRow>
-            <TableCell>
-              <LinearProgress />
-            </TableCell>
-          </TableRow>
-        ) : (
-            <>
-              {props.error && <ErrorRow error={props.error} />}
-              {props.items &&
-                props.items.length > 0 &&
-                props.items.map(item => <RowRenderer key={item.id} item={item} onRowClick={props.onRowClick} />)}
-              {(!!!props.items || props.items.length <= 0) && (
-                <TableRow>
-                  <TableCell>
-                    <ResultsPlaceholder />
-                  </TableCell>
-                </TableRow>
-              )}
-            </>
-          )}
-      </TableBody>
-    </Table>
+      </div>
+    </div>
   );
 }
 

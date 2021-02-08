@@ -20,20 +20,20 @@ import { SvgIconComponent } from "@material-ui/icons";
 import GradientIcon from "./icons/GradientIcon";
 
 const navItems = [
-  { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon, htmlColor: ['#42a5f5', '#283593'] },
-  { label: 'Devices', path: '/app/devices', icon: DevicesOtherSharpIcon, htmlColor: ['#fff', '#ccc'] },
-  { label: 'Processes', path: '/app/processes', icon: AccountTreeSharpIcon, htmlColor: ['#fff', '#ccc'] },
-  { label: 'Beacons', path: '/app/beacons', icon: DeviceHubSharpIcon, htmlColor: ['#fff', '#ccc'] }
+  { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon, htmlColor: ['#42a5f5', '#42a5f5'] },
+  { label: 'Devices', path: '/app/devices', icon: DevicesOtherSharpIcon, htmlColor: ['#aaa', '#777'] },
+  { label: 'Processes', path: '/app/processes', icon: AccountTreeSharpIcon, htmlColor: ['#aaa', '#777'] },
+  { label: 'Beacons', path: '/app/beacons', icon: DeviceHubSharpIcon, htmlColor: ['#A65BA6', '#A65BA6'] }
 ];
 
 const NavProfile = () => {
   const { logout, user } = useAuth0();
   const router = useRouter();
 
-  const NavLink = ({ path, icon, active }: { path: string, icon: SvgIconComponent, active: boolean }) => (
+  const NavLink = ({ path, icon, active, gradient }: { path: string, icon: SvgIconComponent, active: boolean, gradient: string[] }) => (
     <Link href={path} passHref>
       <IconButton disabled={active}>
-        <GradientIcon icon={icon} gradient={!active ? ['#fff', '#ddd'] : undefined} />
+        <GradientIcon icon={icon} gradient={!active ? ['#fff', '#ddd'] : gradient} />
       </IconButton>
     </Link>
   );
@@ -46,19 +46,13 @@ const NavProfile = () => {
       <Grid container direction="column" alignItems="center" sx={{ height: '100%', borderRight: '1px solid transparent', borderImageSlice: 1, borderImageSource: `linear-gradient(${activeNavItem.htmlColor[0]}, ${activeNavItem.htmlColor[1]})` }}>
         <Grid item style={{ flexGrow: 1 }}>
           <Grid container direction="column">
-            {navItems.map((ni, index) => <NavLink key={index + 1} path={ni.path} icon={ni.icon} active={ni === activeNavItem} />)}
+            {navItems.map((ni, index) =>
+              <NavLink key={index + 1} path={ni.path} icon={ni.icon} active={ni === activeNavItem} gradient={ni.htmlColor} />)}
           </Grid>
         </Grid>
         <Grid item>
-          <Box sx={{ width: '160px', transform: 'rotate(-90deg)', transformOrigin: 'top', position: 'absolute', left: '-68px', top: '50%' }}>
-            <Grid container direction="row" justifyContent="center" spacing={1}>
-              <Grid item>
-                <GradientIcon fontSize="small" icon={activeNavItem.icon} gradient={activeNavItem.htmlColor} />
-              </Grid>
-              <Grid item>
-                <Typography sx={{ textTransform: 'uppercase' }} variant="subtitle2" color="textSecondary">{activeNavItem.label}</Typography>
-              </Grid>
-            </Grid>
+          <Box sx={{ width: '160px', transform: 'rotate(-90deg)', transformOrigin: 'top', position: 'absolute', left: '-66px', top: '50%' }}>
+            <Typography sx={{ textTransform: 'uppercase' }} variant="subtitle2" color="textSecondary">{activeNavItem.label}</Typography>
           </Box>
         </Grid>
         <Grid item>

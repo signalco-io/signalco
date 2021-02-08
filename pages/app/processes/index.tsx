@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from 'next/router';
-import { Card, CardContent, CardHeader, Grid } from "@material-ui/core";
+import { Card, CardContent, CardHeader, CardMedia, Grid } from "@material-ui/core";
 import AppLayout from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
@@ -13,7 +13,8 @@ function deviceModelToTableItem(process: IProcessModel): IAutoTableItem {
     return {
         id: process.id,
         name: process.alias,
-        enabled: !process.isDisabled ? <CheckSharpIcon /> : <BlockSharpIcon />
+        enabled: !process.isDisabled ? <CheckSharpIcon /> : <BlockSharpIcon />,
+        _opacity: process.isDisabled ? 0.5 : 1
     };
 }
 
@@ -26,13 +27,13 @@ const Processes = () => {
     };
 
     return (
-        <Grid container>
-            <Grid item sm={12} md={8} lg={6}>
-                <Card style={{ background: 'transparent', height: '100%' }}>
+        <Grid container direction="row">
+            <Grid item xs={12} md={8} lg={6} sx={{height: '100%'}}>
+                <Card style={{ background: 'transparent', height: '100%', width: '100%' }}>
                     <CardHeader title="Processes" />
-                    <CardContent style={{ padding: 0, height: 'calc(100% - 55px)', overflowY: 'auto' }}>
+                    <CardMedia>
                         <AutoTable items={items} isLoading={isLoading} error={error} onRowClick={handleRowClick} />
-                    </CardContent>
+                    </CardMedia>
                 </Card>
             </Grid>
         </Grid>
