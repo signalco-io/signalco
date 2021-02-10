@@ -29,7 +29,9 @@ export interface IAutoTableProps<T extends IAutoTableItem> extends IErrorProps {
 
 export interface IAutoTableCellRendererProps {
   value: any;
-  style?: React.CSSProperties
+  style?: React.CSSProperties,
+  row: number,
+  column: number
 }
 
 const ErrorRow = (props: IErrorProps) => {
@@ -45,6 +47,8 @@ const ErrorRow = (props: IErrorProps) => {
 };
 
 const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
+  console.log("cell", props);
+
   if (typeof props.value === "string" && isAbsoluteUrl(props.value as string))
     return (
       <div title={props.value}>
@@ -55,32 +59,48 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
     );
 
   return (
-    <Box display="inline-block" sx={{ gridRow: props.row, gridColumn: props.column }}>
+    <Box display="inline-block" sx={{ gridRow: props.row, gridColumn: props.column, px: 2, py: 1.5, borderBottom: '1px solid rgba(128,128,128,0.6)', display: 'flex', alignItems: 'center' }}>
       <Typography variant="body2" style={props.style}>{props.value}</Typography>
     </Box>
   );
 });
 
+const filterItemKey = (ik: string) => ik !== "id" && !ik.startsWith("_");
+
 function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
-  const headers =
+
+  const headersKeys =
     props.items &&
-    props.items.length > 0 &&
-    Object.keys(props.items[0])
-      .filter((ik) => ik !== "id" && !ik.startsWith("_"))
-      .map((ik) => {
-        return { id: ik, value: camelToSentenceCase(ik) };
-      });
+      props.items.length > 0 ?
+      Object.keys(props.items[0])
+        .filter(filterItemKey)
+      : undefined;
+
+  const headerRow: { id: string, [key: string]: string } = { id: 'headers' };
+  const header = headersKeys?.reduce((prev, curr) => {
+    prev[curr] = camelToSentenceCase(curr);
+    return prev;
+  }, headerRow);
+
+  const cells = header && props.items ? [header, ...props.items] : [];
 
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <div style={{ overflow: 'auto', flexGrow: 1, display: 'grid' }}>
         {props.error && <ErrorRow error={props.error} />}
-        {props.items?.length && props.items.map((item, rowIndex) => {
-          Object.keys(item)
-          .filter((ik) => ik !== "id" && !ik.startsWith("_"))
-          .map((itemKey, index) => (
-            <CellRenderer value={item[itemKey]} key={itemKey} row={rowIndex} column={index + 1} style={{ opacity: item._opacity ? item._opacity : 1 }} />
-          ))
+        {cells?.length > 0 && cells.map((item, rowIndex) => {
+          return Object.keys(item)
+            .filter(filterItemKey)
+            .map((itemKey, index) => {
+              return (
+                <CellRenderer
+                  key={itemKey}
+                  value={item[itemKey]}
+                  row={rowIndex + 1}
+                  column={index + 1}
+                  style={{ opacity: item._opacity ? item._opacity : 1 }} />
+              );
+            })
         })}
         {(!(props.items?.length)) && (
           <ResultsPlaceholder />

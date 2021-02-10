@@ -93,7 +93,7 @@ const Layout = (props: { children: React.ReactNode }) => {
       <Grid item sx={{ height: '100%' }}>
         <NavProfile />
       </Grid>
-      <Grid sx={{ height: '100%', flexGrow: 1 }} item>{props.children}</Grid>
+      <Grid sx={{ height: '100%', flexGrow: 1, position: 'relative' }} item>{props.children}</Grid>
     </Grid>
   );
 };
