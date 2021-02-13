@@ -81,9 +81,6 @@ const Layout = (props: { children: React.ReactNode }) => {
     createHubConnection();
   }, [isPageLoading])
 
-  // if (isLoading) {
-  //   return <>Logging in...</>;
-  // }
   if (pageError) {
     return <Alert color="error" variant="filled">{error}</Alert>
   }

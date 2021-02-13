@@ -20,6 +20,7 @@ const HomeOverview = () => {
     const [editedConfig, setEditedConfig] = useState<IDeviceConfigWithDisplayConfig[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
+    const [executedConduct, setExecutedConduct] = useState(false);
 
     const handleEdit = () => {
         setEditedConfig(devices);
@@ -42,24 +43,30 @@ const HomeOverview = () => {
             }
         }
 
-        if (window.location.search.startsWith('?conduct=')) {
+        loadAsync();
+    }, []);
+
+    useEffect(() => {
+        if (window.location.search.startsWith('?do=')) {
             const conductRaw = decodeURIComponent(window.location.search.substring(9));
             const conductReq = JSON.parse(conductRaw);
-            console.log(conductReq)
-            const doFunc = async () => {
+            (async () => {
                 await HttpService.requestAsync("/conducts/request", "post", {
                     deviceId: conductReq.di,
                     channelName: "signal",
                     contactName: conductReq.c,
                     valueSerialized: "1"
                 });
-                window.location.href = window.location.origin + window.location.pathname;
-            }
-            doFunc();
+                setExecutedConduct(true);
+            })();
         }
-
-        loadAsync();
     }, []);
+
+    if (window.location.search.startsWith("?do=")) {
+        if (executedConduct)
+            return <div>Done</div>
+        return <div>Doing...</div>
+    }
 
     // const renderDevice = (device: IDeviceConfigWithDisplayConfig) => {
     //     return typeof widgetEditorIdentifier !== 'undefined' && widgetEditorIdentifier === device.deviceModel.identifier
