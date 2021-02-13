@@ -68,27 +68,6 @@ const HomeOverview = () => {
         return <div>Doing...</div>
     }
 
-    // const renderDevice = (device: IDeviceConfigWithDisplayConfig) => {
-    //     return typeof widgetEditorIdentifier !== 'undefined' && widgetEditorIdentifier === device.deviceModel.identifier
-    //         ? (<div key={`edit-${device.deviceModel.identifier}`} data-grid={{
-    //             i: device.position.i,
-    //             x: device.position.x,
-    //             y: device.position.y,
-    //             w: Math.max(device.position.w, 4),
-    //             h: device.position.h + 8
-    //         }}>
-    //             {renderDeviceEditor(device)}
-    //         </div>)
-    //         : (<div key={device.deviceModel.identifier} data-grid={device.position}>
-    //             <Device
-    //                 isEditingDashboard={isEditing}
-    //                 deviceId={device.deviceModel.id}
-    //                 deviceAlias={device.deviceModel.alias}
-    //                 displayConfig={device.displayConfig}
-    //                 onEdit={handleWidgetEdit} />
-    //         </div>);
-    // }
-
     const widgetParts: IWidgetPart[] = [
         {
             type: "inlineLabel",

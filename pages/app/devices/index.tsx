@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from 'next/router';
-import { Box, Card, CardHeader, CardMedia, Grid, Paper, Typography } from "@material-ui/core";
+import { Box, Paper, Typography } from "@material-ui/core";
 import AppLayout from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";

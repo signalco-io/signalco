@@ -1,6 +1,5 @@
 import { Box, Grid, Typography } from "@material-ui/core"
 import React from "react"
-import GradientIcon from "../../icons/GradientIcon";
 import IconResolver, { availableIcons } from '../../icons/IconResolver';
 
 export interface IWidgetPartInlineLabelConfig {
@@ -24,13 +23,14 @@ const sizeToPadding = (size?: "small" | "normal" | "large") => {
 }
 
 const WidgetPartInlineLabel = ({ config }: { config: IWidgetPartInlineLabelConfig }) => {
+    const Icon = IconResolver(config.icon);
     return (
         <Grid container direction="column" style={{ height: '100%' }} justifyContent="center">
             <Box px={1.5} py={sizeToPadding(config.size)}>
                 <Grid container alignItems="center" spacing={1} wrap="nowrap">
                     {config.icon &&
                         <Grid item sx={{ minWidth: 35, marginTop: config.size !== "large" ? '6px' : 0 }}>
-                            <GradientIcon icon={IconResolver(config.icon)} fontSize={sizeToFontSize(config.size)} gradient={['#fff', '#ddd']} />
+                            <Icon fontSize={sizeToFontSize(config.size)} />
                         </Grid>}
                     {config.label &&
                         <Grid item style={{ flexGrow: 1 }} zeroMinWidth>

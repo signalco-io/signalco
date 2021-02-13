@@ -1,8 +1,7 @@
 import {
   Alert,
   Box,
-  LinearProgress, Link, Table,
-  TableBody, TableCell, TableHead, TableRow,
+  LinearProgress, Link,
   Typography
 } from "@material-ui/core";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
@@ -87,6 +86,7 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <div style={{ overflow: 'auto', flexGrow: 1, display: 'grid' }}>
+        {props.isLoading && <LinearProgress />}
         {props.error && <ErrorRow error={props.error} />}
         {cells?.length > 0 && cells.map((item, rowIndex) => {
           return Object.keys(item)
@@ -102,7 +102,7 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
               );
             })
         })}
-        {(!(props.items?.length)) && (
+        {(!props.isLoading && !(props.items?.length)) && (
           <ResultsPlaceholder />
         )}
       </div>

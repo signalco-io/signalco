@@ -17,25 +17,26 @@ import React from "react";
 import { useRouter } from "next/router";
 import { orderBy } from "../src/helpers/ArrayHelpers";
 import { SvgIconComponent } from "@material-ui/icons";
-import GradientIcon from "./icons/GradientIcon";
 
 const navItems = [
-  { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon, htmlColor: ['#42a5f5', '#42a5f5'] },
-  { label: 'Devices', path: '/app/devices', icon: DevicesOtherSharpIcon, htmlColor: ['#aaa', '#777'] },
-  { label: 'Processes', path: '/app/processes', icon: AccountTreeSharpIcon, htmlColor: ['#aaa', '#777'] },
-  { label: 'Beacons', path: '/app/beacons', icon: DeviceHubSharpIcon, htmlColor: ['#A65BA6', '#A65BA6'] }
+  { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon },
+  { label: 'Devices', path: '/app/devices', icon: DevicesOtherSharpIcon },
+  { label: 'Processes', path: '/app/processes', icon: AccountTreeSharpIcon },
+  { label: 'Beacons', path: '/app/beacons', icon: DeviceHubSharpIcon }
 ];
 
 const NavProfile = () => {
   const { logout, user } = useAuth0();
   const router = useRouter();
 
-  const NavLink = ({ path, icon, active, gradient }: { path: string, icon: SvgIconComponent, active: boolean, gradient: string[] }) => (
-    <Link href={path} passHref>
-      <IconButton disabled={active}>
-        <GradientIcon icon={icon} gradient={!active ? ['#fff', '#ddd'] : gradient} />
-      </IconButton>
-    </Link>
+  const NavLink = ({ path, Icon, active }: { path: string, Icon: SvgIconComponent, active: boolean }) => (
+    <Box borderRight={active ? "3px solid white" : undefined}>
+      <Link href={path} passHref>
+        <IconButton disabled={active}>
+          <Icon />
+        </IconButton>
+      </Link>
+    </Box>
   );
 
   const activeNavItem = orderBy(navItems.filter(ni => router.pathname.startsWith(ni.path)), ni => 0 - ni.path.length)[0];
@@ -43,11 +44,11 @@ const NavProfile = () => {
 
   return (
     <>
-      <Grid container direction="column" alignItems="center" sx={{ height: '100%', borderRight: '1px solid transparent', borderImageSlice: 1, borderImageSource: `linear-gradient(${activeNavItem.htmlColor[0]}, ${activeNavItem.htmlColor[1]})` }}>
+      <Grid container direction="column" alignItems="center" sx={{ height: '100%', borderRight: '1px solid gray' }}>
         <Grid item style={{ flexGrow: 1 }}>
           <Grid container direction="column">
             {navItems.map((ni, index) =>
-              <NavLink key={index + 1} path={ni.path} icon={ni.icon} active={ni === activeNavItem} gradient={ni.htmlColor} />)}
+              <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} />)}
           </Grid>
         </Grid>
         <Grid item>

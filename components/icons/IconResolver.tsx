@@ -16,7 +16,7 @@ import { createSvgIcon } from '@material-ui/core';
 export type availableIcons = "empty" | "livingroom" | "questionmark" | "lock" | "power" | "touch" | "light" | "flower" | "motion" | "window" | "door" | "onoff";
 
 const map = (
-    icon: availableIcons,
+    icon?: availableIcons,
     switched: boolean = false) => {
     switch (icon) {
         case "door":
