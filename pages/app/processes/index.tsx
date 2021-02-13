@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from 'next/router';
-import { Card, CardContent, CardHeader, CardMedia, Grid } from "@material-ui/core";
+import { Box, Paper, Typography } from "@material-ui/core";
 import AppLayout from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
@@ -27,16 +27,16 @@ const Processes = () => {
     };
 
     return (
-        <Grid container direction="row">
-            <Grid item xs={12} md={8} lg={6} sx={{height: '100%'}}>
-                <Card style={{ background: 'transparent', height: '100%', width: '100%' }}>
-                    <CardHeader title="Processes" />
-                    <CardMedia>
+        <Box p={4} height="100%">
+            <Paper sx={{ maxWidth: '680px', height: '100%' }}>
+                <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                    <Typography variant="h2" sx={{ p: 2 }}>Processes</Typography>
+                    <Box sx={{ position: 'relative', overflow: 'hidden' }}>
                         <AutoTable items={items} isLoading={isLoading} error={error} onRowClick={handleRowClick} />
-                    </CardMedia>
-                </Card>
-            </Grid>
-        </Grid>
+                    </Box>
+                </Box>
+            </Paper>
+        </Box>
     )
 };
 
