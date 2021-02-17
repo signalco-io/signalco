@@ -12,7 +12,6 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head />
         <body>
-          <script src="/viewport-adjust.js"></script>
           <Main />
           <NextScript />
         </body>

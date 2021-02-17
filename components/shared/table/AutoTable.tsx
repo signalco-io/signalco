@@ -1,7 +1,7 @@
 import {
   Alert,
-  LinearProgress, Link, Table,
-  TableBody, TableCell, TableHead, TableRow,
+  Box,
+  LinearProgress, Link,
   Typography
 } from "@material-ui/core";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
@@ -17,6 +17,7 @@ import IErrorProps from "../interfaces/IErrorProps";
 export interface IAutoTableItem {
   id: string;
   [key: string]: any;
+  _opacity?: number
 }
 
 export interface IAutoTableProps<T extends IAutoTableItem> extends IErrorProps {
@@ -27,102 +28,85 @@ export interface IAutoTableProps<T extends IAutoTableItem> extends IErrorProps {
 
 export interface IAutoTableCellRendererProps {
   value: any;
+  style?: React.CSSProperties,
+  row: number,
+  column: number
 }
 
 const ErrorRow = (props: IErrorProps) => {
   return (
-    <TableRow>
-      <TableCell>
+    <div>
+      <div>
         <Alert severity="error">
           {(props.error || "Unknown error").toString()}
         </Alert>
-      </TableCell>
-    </TableRow>
+      </div>
+    </div>
   );
 };
 
 const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
+  console.log("cell", props);
+
   if (typeof props.value === "string" && isAbsoluteUrl(props.value as string))
     return (
-      <TableCell title={props.value}>
+      <div title={props.value}>
         <Link href={props.value} rel="noopener" target="_blank">
-          <OpenInNewIcon fontSize="small" />
+          <OpenInNewIcon style={props.style} fontSize="small" />
         </Link>
-      </TableCell>
+      </div>
     );
 
   return (
-    <TableCell>
-      <Typography variant="body2">{props.value}</Typography>
-    </TableCell>
+    <Box display="inline-block" sx={{ gridRow: props.row, gridColumn: props.column, px: 2, py: 1.5, borderBottom: '1px solid rgba(128,128,128,0.6)', display: 'flex', alignItems: 'center' }}>
+      <Typography variant="body2" style={props.style}>{props.value}</Typography>
+    </Box>
   );
 });
 
-const RowRenderer = observer(({ item, onRowClick }: { item: IAutoTableItem, onRowClick?: (item: IAutoTableItem) => void }) => {
-  return (
-    <TableRow
-      hover={typeof onRowClick !== 'undefined'}
-      onClick={() => onRowClick && onRowClick(item)}>
-      {Object.keys(item)
-        .filter((ik) => ik !== "id" && !ik.startsWith("_"))
-        .map((itemKey) => (
-          <CellRenderer value={item[itemKey]} key={itemKey} />
-        ))}
-    </TableRow>
-  )
-});
+const filterItemKey = (ik: string) => ik !== "id" && !ik.startsWith("_");
 
 function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
-  const headers =
+
+  const headersKeys =
     props.items &&
-    props.items.length > 0 &&
-    Object.keys(props.items[0])
-      .filter((ik) => ik !== "id" && !ik.startsWith("_"))
-      .map((ik) => {
-        return { id: ik, value: camelToSentenceCase(ik) };
-      });
+      props.items.length > 0 ?
+      Object.keys(props.items[0])
+        .filter(filterItemKey)
+      : undefined;
+
+  const headerRow: { id: string, [key: string]: string } = { id: 'headers' };
+  const header = headersKeys?.reduce((prev, curr) => {
+    prev[curr] = camelToSentenceCase(curr);
+    return prev;
+  }, headerRow);
+
+  const cells = header && props.items ? [header, ...props.items] : [];
 
   return (
-    <Table stickyHeader>
-      {!props.isLoading &&
-        !!!props.error &&
-        headers &&
-        headers != null &&
-        headers.length > 0 && (
-          <TableHead>
-            <TableRow>
-              {headers ? (
-                headers.map((h) => <TableCell key={h.id}>{h.value}</TableCell>)
-              ) : (
-                  <TableCell></TableCell>
-                )}
-            </TableRow>
-          </TableHead>
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ overflow: 'auto', flexGrow: 1, display: 'grid' }}>
+        {props.isLoading && <LinearProgress />}
+        {props.error && <ErrorRow error={props.error} />}
+        {cells?.length > 0 && cells.map((item, rowIndex) => {
+          return Object.keys(item)
+            .filter(filterItemKey)
+            .map((itemKey, index) => {
+              return (
+                <CellRenderer
+                  key={itemKey}
+                  value={item[itemKey]}
+                  row={rowIndex + 1}
+                  column={index + 1}
+                  style={{ opacity: item._opacity ? item._opacity : 1 }} />
+              );
+            })
+        })}
+        {(!props.isLoading && !(props.items?.length)) && (
+          <ResultsPlaceholder />
         )}
-      <TableBody>
-        {props.isLoading ? (
-          <TableRow>
-            <TableCell>
-              <LinearProgress />
-            </TableCell>
-          </TableRow>
-        ) : (
-            <>
-              {props.error && <ErrorRow error={props.error} />}
-              {props.items &&
-                props.items.length > 0 &&
-                props.items.map(item => <RowRenderer key={item.id} item={item} onRowClick={props.onRowClick} />)}
-              {(!!!props.items || props.items.length <= 0) && (
-                <TableRow>
-                  <TableCell>
-                    <ResultsPlaceholder />
-                  </TableCell>
-                </TableRow>
-              )}
-            </>
-          )}
-      </TableBody>
-    </Table>
+      </div>
+    </div>
   );
 }
 

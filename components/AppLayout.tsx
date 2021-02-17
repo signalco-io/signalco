@@ -1,9 +1,9 @@
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import { Alert, Grid } from "@material-ui/core";
+import { Alert, Box, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
-import { HubConnection, HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
+import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import DevicesRepository, { SignalDeviceStatePublishDto } from "../src/devices/DevicesRepository";
 
 const Layout = (props: { children: React.ReactNode }) => {
@@ -81,19 +81,20 @@ const Layout = (props: { children: React.ReactNode }) => {
     createHubConnection();
   }, [isPageLoading])
 
-  // if (isLoading) {
-  //   return <>Logging in...</>;
-  // }
   if (pageError) {
     return <Alert color="error" variant="filled">{error}</Alert>
   }
 
   return (
-    <Grid container direction="column">
-      <Grid item>
+    <Grid container direction="row" sx={{ height: '100%', width: '100%' }} wrap="nowrap">
+      <Grid item sx={{ height: '100%' }}>
         <NavProfile />
       </Grid>
-      <Grid item>{props.children}</Grid>
+      <Grid sx={{ height: '100%', flexGrow: 1, position: 'relative' }} item>
+        <Box sx={{ overflow: 'hidden', position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}>
+          {props.children}
+        </Box>
+      </Grid>
     </Grid>
   );
 };
