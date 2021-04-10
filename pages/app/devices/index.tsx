@@ -26,7 +26,7 @@ const Devices = () => {
     };
 
     return (
-        <Box p={4} height="100%">
+        <Box sx={{ p: { sm: 0, md: 4 } }} height="100%">
             <Paper sx={{ maxWidth: '680px', height: '100%' }}>
                 <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                     <Typography variant="h2" sx={{ p: 2 }}>Devices</Typography>

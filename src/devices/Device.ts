@@ -40,6 +40,7 @@ export interface IDeviceModel {
     endpoints: IDeviceEndpoint[]
     states: IDeviceContactState[];
 
+    getState(target: IDeviceTarget): IDeviceContactState;
     updateState(channelName: string, contactName: string, valueSerialized: string|undefined, timeStamp: Date): void;
 }
 
@@ -56,6 +57,11 @@ export class DeviceModel implements IDeviceModel {
         this.identifier = identifier;
         this.endpoints = endpoints;
         this.states = states;
+    }
+
+    getState(target: IDeviceTarget) {
+        return this.states.filter(s =>
+            s.channel === target.channelName && s.name === target.contactName)[0];
     }
 
     updateState(channelName: string, contactName: string, valueSerialized: string|undefined, timeStamp: Date) {
@@ -101,6 +107,10 @@ export interface IDeviceTarget {
     deviceId: string;
     channelName: string;
     contactName: string;
+}
+
+export interface IDeviceTargetWithValueFallback extends IDeviceTarget {
+    valueSerialized?: string
 }
 
 export interface IDeviceStatePublish extends IDeviceTarget {

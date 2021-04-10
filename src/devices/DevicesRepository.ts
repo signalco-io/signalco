@@ -1,5 +1,6 @@
+import { IHistoricalValue } from "../../components/devices/Device";
 import HttpService from "../services/HttpService";
-import { IDeviceModel, DeviceModel, IDeviceContactState, DeviceContactState, IDeviceContact, DeviceContact, IDeviceEndpoint, DeviceEndpoint, IDeviceStatePublish, DeviceStatePublish } from "./Device";
+import { IDeviceModel, DeviceModel, IDeviceContactState, DeviceContactState, IDeviceContact, DeviceContact, IDeviceEndpoint, DeviceEndpoint, IDeviceStatePublish, DeviceStatePublish, IDeviceTarget } from "./Device";
 
 class SignalDeviceDto {
     id?: string;
@@ -65,6 +66,10 @@ class SignalDeviceContactStateDto {
     }
 }
 
+class SignalDeviceStateHistoryDto {
+    values?: IHistoricalValue[];
+}
+
 export class SignalDeviceStatePublishDto {
     DeviceId?: string;
     ChannelName?: string;
@@ -85,6 +90,10 @@ export default class DevicesRepository {
     static devicesCache?: IDeviceModel[];
     static devicesCacheKeyed?: { [id: string]: IDeviceModel };
     static isLoading: boolean;
+
+    static async getDeviceStateHistoryAsync(target: IDeviceTarget, duration: string = "1.00:00:00"): Promise<IHistoricalValue[] | undefined> {
+        return (await HttpService.getAsync<SignalDeviceStateHistoryDto>('/devices/state-history', { ...target, duration })).values;
+    }
 
     static async getDeviceAsync(deviceId: string): Promise<IDeviceModel | undefined> {
         await DevicesRepository._cacheDevicesAsync();

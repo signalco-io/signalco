@@ -1,5 +1,7 @@
 import { Alert, Grid, Paper } from "@material-ui/core";
 import React from "react";
+import ConductsService from "../../src/conducts/ConductsService";
+import DevicesRepository from "../../src/devices/DevicesRepository";
 import { rowHeight } from "./parts/Shared";
 import WidgetPartButton, { IWidgetPartButtonConfig } from "./parts/WidgetPartButton";
 import WidgetPartGraph, { IWidgetPartGraphConfig } from "./parts/WidgetPartGraph";
@@ -47,11 +49,66 @@ const resolveSize = (size: widgetSize) => {
 const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidgetPart }) => {
     switch (part.type) {
         case "inlineLabel":
-            return <WidgetPartInlineLabel config={part.config as IWidgetPartInlineLabelConfig} />
+            var inlineLabelConfig = part.config as IWidgetPartInlineLabelConfig;
+            if (inlineLabelConfig.valueSource != undefined) {
+                inlineLabelConfig.value = new Promise(async resolve => {
+                    if (inlineLabelConfig.valueSource != undefined) {
+                        const device = await DevicesRepository.getDeviceAsync(inlineLabelConfig.valueSource.deviceId)
+                        const state = device?.getState(inlineLabelConfig.valueSource);
+                        resolve(state?.valueSerialized);
+                    } else {
+                        resolve('Invalid source');
+                    }
+                });
+            }
+            return <WidgetPartInlineLabel config={inlineLabelConfig} />
         case "button":
+            var buttonConfig = part.config as IWidgetPartButtonConfig;
+            if (buttonConfig.actionSource != undefined) {
+                buttonConfig.action = async () => {
+                    if (typeof buttonConfig.actionSource.deviceId === 'undefined' ||
+                        typeof buttonConfig.actionSource.channelName === 'undefined' ||
+                        typeof buttonConfig.actionSource.contactName === 'undefined') {
+                        console.warn('Invalid button action source', buttonConfig.actionSource)
+                        return;
+                    }
+
+                    // Retrieve current boolean state
+                    const device = await DevicesRepository.getDeviceAsync(buttonConfig.actionSource.deviceId)
+                    const currentState = device?.getState(buttonConfig.actionSource);
+                    if (typeof currentState === 'undefined' && typeof buttonConfig.actionSource.valueSerialized === 'undefined') {
+                        console.warn('Failed to retrieve button action source state', buttonConfig.actionSource)
+                        return;
+                    }
+
+                    // Negate current state
+                    var newState = typeof currentState === 'undefined'
+                        ? buttonConfig.actionSource.valueSerialized
+                        : !(`${currentState.valueSerialized}`.toLowerCase() === 'true');
+                    await ConductsService.RequestConductAsync(buttonConfig.actionSource, newState);
+
+                    // Set local value state
+                    if (typeof currentState !== 'undefined') {
+                        currentState.valueSerialized = newState?.toString();
+                    }
+                };
+            }
             return <WidgetPartButton config={part.config as IWidgetPartButtonConfig} />
         case "graph":
-            return <WidgetPartGraph columnWidth={columnWidth} config={part.config as IWidgetPartGraphConfig} />
+            const graphConfig = part.config as IWidgetPartGraphConfig;
+            if (graphConfig.valueSource != undefined) {
+                graphConfig.value = async () => {
+                    if (typeof graphConfig.valueSource.deviceId === 'undefined' ||
+                        typeof graphConfig.valueSource.channelName === 'undefined' ||
+                        typeof graphConfig.valueSource.contactName === 'undefined') {
+                        console.warn('Invalid graph value source', graphConfig.valueSource)
+                        return [];
+                    }
+
+                    return await DevicesRepository.getDeviceStateHistoryAsync(graphConfig.valueSource, graphConfig.duration) ?? [];
+                };
+            }
+            return <WidgetPartGraph columnWidth={columnWidth} config={graphConfig} />
         default:
             return <Alert severity="warning">Unkwnown widget part '{part.type}'</Alert>
     }

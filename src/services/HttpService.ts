@@ -19,14 +19,14 @@ export default class HttpService {
       typeof cachedToken !== 'undefined' &&
       cachedToken != null) {
       token = cachedToken;
-      console.log('Using cached token because we are offline.');
+      console.debug('Using cached token because we are offline.');
     }
 
     // If unable to use cached token, ask factory for one
     if (typeof token === 'undefined' &&
       typeof HttpService.tokenFactory !== 'undefined') {
       token = await HttpService.tokenFactory();
-      console.log("Used token factory")
+      console.debug("Used token factory")
     }
 
     // Cache token and return if available
@@ -39,8 +39,8 @@ export default class HttpService {
     throw new Error("Login failed.");
   };
 
-  public static async getAsync<T>(url: string): Promise<T> {
-    return this.requestAsync(url, "get", null);
+  public static async getAsync<T>(url: string, data?: any): Promise<T> {
+    return this.requestAsync(url, "get", data);
   }
 
   public static async requestAsync(
@@ -52,9 +52,11 @@ export default class HttpService {
     const response = await axios.request({
       url: isAbsoluteUrl(url) ? url : HttpService.getApiUrl(url),
       method: method,
-      data: data,
+      data: method !== "get" ? data : undefined,
+      params: method === "get" ? data : undefined,
       headers: {
         Authorization: token,
+        "Content-Type": "application/json"
       },
     });
     return response.data;

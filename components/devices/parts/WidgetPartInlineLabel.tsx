@@ -1,13 +1,16 @@
 import { Box, Grid, Typography } from "@material-ui/core"
-import React from "react"
+import { observer } from "mobx-react-lite";
+import React, { useState } from "react"
+import { IDeviceTarget } from "../../../src/devices/Device";
 import IconResolver, { availableIcons } from '../../icons/IconResolver';
 
 export interface IWidgetPartInlineLabelConfig {
     label?: string,
     icon?: availableIcons,
     size?: "small" | "normal" | "large",
-    value?: string,
+    value?: string | Promise<string | undefined | null>,
     units?: string
+    valueSource?: IDeviceTarget
 }
 
 const sizeToTypographyVariant = (size?: "small" | "normal" | "large") => {
@@ -23,7 +26,14 @@ const sizeToPadding = (size?: "small" | "normal" | "large") => {
 }
 
 const WidgetPartInlineLabel = ({ config }: { config: IWidgetPartInlineLabelConfig }) => {
-    const Icon = IconResolver(config.icon);
+    const [value, setValue] = useState<string | undefined | null>('')
+
+    const isBool = value === "true" || value === "false";
+    const switched = isBool ? value === "true" : false;
+    const Icon = IconResolver(config.icon, switched);
+
+    Promise.resolve(config.value).then(v => setValue(v));
+
     return (
         <Grid container direction="column" style={{ height: '100%' }} justifyContent="center">
             <Box px={1.5} py={sizeToPadding(config.size)}>
@@ -36,9 +46,9 @@ const WidgetPartInlineLabel = ({ config }: { config: IWidgetPartInlineLabelConfi
                         <Grid item style={{ flexGrow: 1 }} zeroMinWidth>
                             <Typography noWrap variant={sizeToTypographyVariant(config.size)} color={config.size === "small" ? "textSecondary" : "textPrimary"}>{config.label}</Typography>
                         </Grid>}
-                    {config.value &&
+                    {value &&
                         <Grid item>
-                            <Typography variant={sizeToTypographyVariant(config.size)}>{`${config.value}${config.units ? config.units : ''}`}</Typography>
+                            <Typography variant={sizeToTypographyVariant(config.size)}>{`${isBool && !config.units ? '' : value}${config.units ? config.units : ''}`}</Typography>
                         </Grid>}
                 </Grid>
             </Box>
@@ -46,4 +56,4 @@ const WidgetPartInlineLabel = ({ config }: { config: IWidgetPartInlineLabelConfi
     );
 }
 
-export default WidgetPartInlineLabel;
+export default observer(WidgetPartInlineLabel);

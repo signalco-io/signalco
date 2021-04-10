@@ -33,7 +33,7 @@ export interface IDeviceProps {
 
 export interface IHistoricalValue {
     timeStamp: Date;
-    value?: any;
+    valueSerialized?: any;
 }
 
 export interface IDeviceWidgetConfig {
@@ -101,7 +101,7 @@ const DeviceWidgetValueDisplay = (props: IDeviceWidgetValueDisplayProps) => {
     const { channelName, contactName, units } = props.config;
     const { deviceId } = props;
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string|undefined>();
+    const [error, setError] = useState<string | undefined>();
     const [displayValue, setDisplayValue] = useState<any>(undefined);
     const displayValueRef = useRef(displayValue);
     displayValueRef.current = displayValue;
@@ -119,7 +119,7 @@ const DeviceWidgetValueDisplay = (props: IDeviceWidgetValueDisplayProps) => {
             if (newState === displayValueRef.current) return;
 
             setDisplayValue(newState);
-        } catch(err) {
+        } catch (err) {
             setError(err);
         } finally {
             setIsLoading(false);

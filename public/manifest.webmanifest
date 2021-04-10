@@ -108,12 +108,12 @@
   ],
   "screenshots": [
     {
-      "src": "https://signal.dfnoise.com/images/screenshot_dashboard.webp",
+      "src": "https://signal.dfnoise.com/images/screenshot_dashboard.png",
       "sizes": "2560x1440",
       "type": "image/png"
     },
     {
-      "src": "https://signal.dfnoise.com/images/screenshot_login.webp",
+      "src": "https://signal.dfnoise.com/images/screenshot_login.png",
       "sizes": "2560x1440",
       "type": "image/png"
     }
