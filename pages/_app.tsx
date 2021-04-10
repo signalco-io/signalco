@@ -69,10 +69,7 @@ export default function App(props: AppProps) {
   return (
     <CacheProvider value={cache}>
       <Head>
-        {/* <link
-          href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap"
-          rel="stylesheet"
-        ></link> */}
+        <meta charSet="utf-8"></meta>
         <link rel="manifest" href="/manifest.webmanifest"></link>
         <link
           rel="apple-touch-icon"
@@ -122,8 +119,8 @@ export default function App(props: AppProps) {
                 <Component {...pageProps} />
               </Layout>
             ) : (
-                <Component {...pageProps} />
-              )}
+              <Component {...pageProps} />
+            )}
           </Auth0Provider>
           <NextNprogress
             color="#fff"

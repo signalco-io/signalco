@@ -4,7 +4,6 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Typography,
 } from "@material-ui/core";
 import Link from 'next/link';
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -29,10 +28,10 @@ const NavProfile = () => {
   const { logout, user } = useAuth0();
   const router = useRouter();
 
-  const NavLink = ({ path, Icon, active }: { path: string, Icon: SvgIconComponent, active: boolean }) => (
-    <Box borderRight={active ? "3px solid white" : undefined}>
+  const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconComponent, active: boolean, label: string }) => (
+    <Box borderBottom={active ? "3px solid white" : undefined}>
       <Link href={path} passHref>
-        <IconButton disabled={active}>
+        <IconButton disabled={active} aria-label={label} title={label}>
           <Icon />
         </IconButton>
       </Link>
@@ -44,17 +43,12 @@ const NavProfile = () => {
 
   return (
     <>
-      <Grid container direction="column" alignItems="center" sx={{ height: '100%', borderRight: '1px solid gray' }}>
+      <Grid container alignItems="center" sx={{ width: '100%', borderBottom: '1px solid gray' }}>
         <Grid item style={{ flexGrow: 1 }}>
-          <Grid container direction="column">
+          <Grid container>
             {navItems.map((ni, index) =>
-              <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} />)}
+              <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={ni.label} />)}
           </Grid>
-        </Grid>
-        <Grid item>
-          <Box sx={{ width: '160px', transform: 'rotate(-90deg)', transformOrigin: 'top', position: 'absolute', left: '-66px', top: '50%' }}>
-            <Typography sx={{ textTransform: 'uppercase' }} variant="subtitle2" color="textSecondary">{activeNavItem.label}</Typography>
-          </Box>
         </Grid>
         <Grid item>
           {user.picture ? (
@@ -62,10 +56,10 @@ const NavProfile = () => {
               {userNameInitials}
             </Avatar>
           ) : (
-              <Skeleton variant="circular">
-                <Avatar>{userNameInitials}</Avatar>
-              </Skeleton>
-            )}
+            <Skeleton variant="circular">
+              <Avatar>{userNameInitials}</Avatar>
+            </Skeleton>
+          )}
           <Menu open={false}>
             <MenuItem>
               <IconButton onClick={() => logout()} color="primary" title="Logout">

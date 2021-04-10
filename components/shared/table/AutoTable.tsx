@@ -30,7 +30,9 @@ export interface IAutoTableCellRendererProps {
   value: any;
   style?: React.CSSProperties,
   row: number,
-  column: number
+  column: number,
+  hasClick: boolean,
+  onClick: () => void
 }
 
 const ErrorRow = (props: IErrorProps) => {
@@ -46,19 +48,20 @@ const ErrorRow = (props: IErrorProps) => {
 };
 
 const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
-  console.log("cell", props);
-
   if (typeof props.value === "string" && isAbsoluteUrl(props.value as string))
     return (
-      <div title={props.value}>
+      <Box title={props.value} onClick={props.hasClick ? props.onClick : undefined} sx={{ cursor: props.hasClick ? 'pointer' : 'default' }}>
         <Link href={props.value} rel="noopener" target="_blank">
           <OpenInNewIcon style={props.style} fontSize="small" />
         </Link>
-      </div>
+      </Box>
     );
 
   return (
-    <Box display="inline-block" sx={{ gridRow: props.row, gridColumn: props.column, px: 2, py: 1.5, borderBottom: '1px solid rgba(128,128,128,0.6)', display: 'flex', alignItems: 'center' }}>
+    <Box
+      display="inline-block"
+      onClick={props.hasClick ? props.onClick : undefined}
+      sx={{ cursor: props.hasClick ? 'pointer' : 'default', gridRow: props.row, gridColumn: props.column, px: 2, py: 1.5, borderBottom: '1px solid rgba(128,128,128,0.6)', display: 'flex', alignItems: 'center' }}>
       <Typography variant="body2" style={props.style}>{props.value}</Typography>
     </Box>
   );
@@ -98,7 +101,9 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
                   value={item[itemKey]}
                   row={rowIndex + 1}
                   column={index + 1}
-                  style={{ opacity: item._opacity ? item._opacity : 1 }} />
+                  style={{ opacity: item._opacity ? item._opacity : 1 }}
+                  hasClick={typeof props.onRowClick !== 'undefined'}
+                  onClick={() => props.onRowClick && props.onRowClick(item)} />
               );
             })
         })}
