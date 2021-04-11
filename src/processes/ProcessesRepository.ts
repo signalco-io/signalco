@@ -45,22 +45,22 @@ export default class ProcessesRepository {
     static processesCacheKeyed?: { [id: string]: IProcessModel };
     static isLoading: boolean;
 
-    static async getProcessAsync(deviceId: string): Promise<IProcessModel | undefined> {
-        await ProcessesRepository._cacheDevicesAsync();
+    static async getProcessAsync(id: string): Promise<IProcessModel | undefined> {
+        await ProcessesRepository._cacheProcessesAsync();
         if (typeof ProcessesRepository.processesCacheKeyed !== 'undefined') {
-            if (typeof ProcessesRepository.processesCacheKeyed[deviceId] === "undefined")
+            if (typeof ProcessesRepository.processesCacheKeyed[id] === "undefined")
                 return undefined;
-            return ProcessesRepository.processesCacheKeyed[deviceId];
+            return ProcessesRepository.processesCacheKeyed[id];
         }
         return undefined;
     }
 
     static async getProcessesAsync(): Promise<IProcessModel[]> {
-        await ProcessesRepository._cacheDevicesAsync();
+        await ProcessesRepository._cacheProcessesAsync();
         return ProcessesRepository.processesCache ?? [];
     }
 
-    static async _cacheDevicesAsync() {
+    static async _cacheProcessesAsync() {
         // TODO: Invalidate cache after some period        
         if (!ProcessesRepository.isLoading &&
             !ProcessesRepository.processesCache) {
