@@ -5,6 +5,11 @@ import HttpService from "../../src/services/HttpService";
 import { observer } from "mobx-react-lite";
 import Widget, { IWidgetPart } from "../devices/Widget";
 import { useResizeDetector } from 'react-resize-detector';
+import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
+import Tab from '@material-ui/core/Tab';
+import TabContext from '@material-ui/lab/TabContext';
+import TabList from '@material-ui/lab/TabList';
+import TabPanel from '@material-ui/lab/TabPanel';
 
 interface IWidget {
     columns: number,
@@ -22,7 +27,12 @@ const HomeOverview = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
     const [executedConduct, setExecutedConduct] = useState(false);
-    const [dashboards, setDashboards] = useState([]);
+    const [dashboards, setDashboards] = useState<IDashboard[]>([]);
+    const [dashboardIndex, setDashboardIndex] = React.useState('0');
+
+    const handleDashboardChange = (_event: React.SyntheticEvent, newValue: string) => {
+        setDashboardIndex(newValue);
+    };
 
     const handleEdit = () => {
 
@@ -76,24 +86,23 @@ const HomeOverview = () => {
         if (typeof width === 'undefined')
             return <div ref={castedRef}></div>;
 
-        const columnWidth = width && width < 400 ? width / 2 : width / Math.max(Math.floor(width / 220), 2);
+        // When width is less than 400, set to single column
+        const columnWidth = width && width < 400 ? width - 16 : (width - 24 - 12) / Math.max(Math.floor(width / 220), 2);
         return (
-            <Box sx={{ m: { sm: 0, md: 2 } }}>
-                <Grid container
-                    spacing={0}
-                    ref={castedRef}>
-                    {dashboard.widgets.map((widget, index) => (
-                        <Grid item key={index}>
-                            <Widget
-                                columnWidth={columnWidth}
-                                columns={widget.columns}
-                                rows={widget.rows}
-                                parts={widget.parts}
-                                onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />
-                        </Grid>
-                    ))}
-                </Grid>
-            </Box>
+            <Grid container
+                spacing={2}
+                ref={castedRef}>
+                {dashboard.widgets.map((widget, index) => (
+                    <Grid item key={index}>
+                        <Widget
+                            columnWidth={columnWidth}
+                            columns={widget.columns}
+                            rows={widget.rows}
+                            parts={widget.parts}
+                            onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />
+                    </Grid>
+                ))}
+            </Grid>
         );
     };
 
@@ -104,7 +113,7 @@ const HomeOverview = () => {
                     <LinearProgress />
                 </Grid>
             ) : (
-                <>
+                <TabContext value={dashboardIndex}>
                     <Grid item>
                         {isEditing ? (
                             <Alert
@@ -115,20 +124,35 @@ const HomeOverview = () => {
                                 Add, move, resize your items.
                             </Alert>
                         ) : (
-                            <Box sx={{ px: 2 }}>
-                                <Grid container spacing={1} justifyContent="flex-end">
-                                    <Grid item>
-                                        <Button disabled={isLoading} startIcon={<EditSharpIcon />} onClick={handleEdit}>Edit</Button>
-                                    </Grid>
+                            <Grid container spacing={2}>
+                                <Grid item>
+                                    <TabList onChange={handleDashboardChange} aria-label="Dashboard tabs">
+                                        {dashboards.length && dashboards.map((d, index) => (
+                                            <Tab key={index.toString()} label={d.name} value={index.toString()} />
+                                        ))}
+                                    </TabList>
                                 </Grid>
-                            </Box>
+                                <Grid item sx={{ flexGrow: 1, textAlign: "end", px: 2 }}>
+                                    <Button disabled={isLoading} startIcon={<EditSharpIcon />} onClick={handleEdit}>Edit</Button>
+                                </Grid>
+                            </Grid>
                         )
                         }
                     </Grid>
                     <Grid item>
-                        <RenderDashboard dashboard={dashboards[0]} />
+                        {dashboards.length ?
+                            dashboards.map((d, index) => (
+                                <TabPanel value={index.toString()} key={index.toString()}>
+                                    <RenderDashboard dashboard={d} />
+                                </TabPanel>
+                            ))
+                            : (
+                                <Box textAlign="center" sx={{ m: 2 }}>
+                                    <NoDataPlaceholder content="No dashboards available" />
+                                </Box>
+                            )}
                     </Grid>
-                </>
+                </TabContext>
             )}
         </Grid>
     );
