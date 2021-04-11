@@ -1,5 +1,5 @@
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import { Alert, Box, Grid } from "@material-ui/core";
+import { Alert, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";

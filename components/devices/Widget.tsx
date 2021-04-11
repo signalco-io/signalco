@@ -102,7 +102,7 @@ const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidge
                         }
 
                         // Negate current state
-                        await ConductsService.RequestConductAsync(action, newState);
+                        await ConductsService.RequestConductAsync(action, newState, action.delay ?? 0);
 
                         // Set local value state
                         device?.updateState(
