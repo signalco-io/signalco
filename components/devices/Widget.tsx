@@ -1,4 +1,5 @@
 import { Alert, Grid, Paper } from "@material-ui/core";
+import { observer } from "mobx-react-lite";
 import React from "react";
 import ConductsService from "../../src/conducts/ConductsService";
 import DevicesRepository from "../../src/devices/DevicesRepository";
@@ -66,30 +67,41 @@ const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidge
             var buttonConfig = part.config as IWidgetPartButtonConfig;
             if (buttonConfig.actionSource != undefined) {
                 buttonConfig.action = async () => {
-                    if (typeof buttonConfig.actionSource.deviceId === 'undefined' ||
-                        typeof buttonConfig.actionSource.channelName === 'undefined' ||
-                        typeof buttonConfig.actionSource.contactName === 'undefined') {
-                        console.warn('Invalid button action source', buttonConfig.actionSource)
-                        return;
+                    // Wrap in array if single object
+                    let actions = [];
+                    if (!Array.isArray(buttonConfig.actionSource)) {
+                        actions.push(buttonConfig.actionSource);
+                    } else {
+                        actions.push(...buttonConfig.actionSource);
                     }
 
-                    // Retrieve current boolean state
-                    const device = await DevicesRepository.getDeviceAsync(buttonConfig.actionSource.deviceId)
-                    const currentState = device?.getState(buttonConfig.actionSource);
-                    if (typeof currentState === 'undefined' && typeof buttonConfig.actionSource.valueSerialized === 'undefined') {
-                        console.warn('Failed to retrieve button action source state', buttonConfig.actionSource)
-                        return;
-                    }
+                    // Execute all actions
+                    for (const action of actions) {
+                        if (typeof action.deviceId === 'undefined' ||
+                            typeof action.channelName === 'undefined' ||
+                            typeof action.contactName === 'undefined') {
+                            console.warn('Invalid button action source', action)
+                            return;
+                        }
 
-                    // Negate current state
-                    var newState = typeof currentState === 'undefined'
-                        ? buttonConfig.actionSource.valueSerialized
-                        : !(`${currentState.valueSerialized}`.toLowerCase() === 'true');
-                    await ConductsService.RequestConductAsync(buttonConfig.actionSource, newState);
+                        // Retrieve current boolean state
+                        const device = await DevicesRepository.getDeviceAsync(action.deviceId)
+                        const currentState = device?.getState(action);
+                        if (typeof currentState === 'undefined' && typeof action.valueSerialized === 'undefined') {
+                            console.warn('Failed to retrieve button action source state', action)
+                            return;
+                        }
 
-                    // Set local value state
-                    if (typeof currentState !== 'undefined') {
-                        currentState.valueSerialized = newState?.toString();
+                        // Negate current state
+                        var newState = typeof currentState === 'undefined'
+                            ? action.valueSerialized
+                            : !(`${currentState.valueSerialized}`.toLowerCase() === 'true');
+                        await ConductsService.RequestConductAsync(action, newState);
+
+                        // Set local value state
+                        if (typeof currentState !== 'undefined') {
+                            currentState.valueSerialized = newState?.toString();
+                        }
                     }
                 };
             }
@@ -132,4 +144,4 @@ const Widget = (props: IWidgetProps) => {
     )
 };
 
-export default Widget;
+export default observer(Widget);
