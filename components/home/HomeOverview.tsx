@@ -10,6 +10,7 @@ import Tab from '@material-ui/core/Tab';
 import TabContext from '@material-ui/lab/TabContext';
 import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
+import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
 
 interface IWidget {
     columns: number,
@@ -28,6 +29,7 @@ const HomeOverview = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [executedConduct, setExecutedConduct] = useState(false);
     const [dashboards, setDashboards] = useState<IDashboard[]>([]);
+    // const [remoteDashboards, setRemoteDashboards] = useState<IDashboard[]>([]);
     const [dashboardIndex, setDashboardIndex] = React.useState('0');
 
     const handleDashboardChange = (_event: React.SyntheticEvent, newValue: string) => {
@@ -43,18 +45,35 @@ const HomeOverview = () => {
     };
 
     useEffect(() => {
-        const loadAsync = async () => {
+        // const loadLocalAsync = async () => {
+        //     try {
+        //         setDashboards(JSON.parse(localStorage.getItem('dashboards') ?? '{}'));
+        //     } catch (error) {
+        //         // TODO: Notify user
+        //         console.warn("Failed to load local dashboards", error);
+        //     } finally {
+        //         setIsLoading(false);
+        //     }
+        // };
+
+        const loadRemoteAsync = async () => {
             try {
-                setDashboards(JSON.parse(localStorage.getItem('dashboards') ?? '{}'));
+                const dashboards = await DashboardsRepository.getDashboardsAsync();
+                setDashboards(dashboards.map(d => ({
+                    id: d.id,
+                    name: d.name,
+                    widgets: typeof d.configurationSerialized !== 'undefined' ? JSON.parse(d.configurationSerialized).widgets : []
+                })));
             } catch (error) {
                 // TODO: Notify user
-                console.warn("Failed to load dashboards", error);
+                console.warn("Failed to load remote dashboards", error);
             } finally {
                 setIsLoading(false);
             }
-        }
+        };
 
-        loadAsync();
+        // loadLocalAsync();
+        loadRemoteAsync();
     }, []);
 
     useEffect(() => {

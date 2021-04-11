@@ -2,41 +2,33 @@ import HttpService from "../services/HttpService";
 
 export interface IDashboardModel {
     configurationSerialized: string | undefined;
-    isDisabled: boolean;
-    alias: string;
+    name: string;
     id: string;
-    type: string;
 }
 
 class DashboardModel implements IDashboardModel {
     configurationSerialized: string | undefined;
-    isDisabled: boolean;
-    alias: string;
+    name: string;
     id: string;
-    type: string;
 
-    constructor(type: string, id: string, alias: string, isDisabled: boolean, configurationSerialized?: string) {
-        this.type = type;
+    constructor(id: string, name: string, configurationSerialized?: string) {
         this.id = id;
-        this.alias = alias;
-        this.isDisabled = isDisabled;
+        this.name = name;
         this.configurationSerialized = configurationSerialized;
     }
 }
 
 class SignalDashboardDto {
-    type?: string;
     id?: string;
-    alias?: string;
-    isDisabled?: boolean;
+    name?: string;
     configurationSerialized?: string;
 
     static FromDto(dto: SignalDashboardDto): IDashboardModel {
-        if (dto.type == null || dto.id == null || dto.alias == null) {
-            throw Error("Invalid SignalProcessDto - missing required properties.");
+        if (dto.id == null || dto.name == null) {
+            throw Error("Invalid SignalDashboardDto - missing required properties.");
         }
 
-        return new DashboardModel(dto.type, dto.id, dto.alias, dto.isDisabled ?? false, dto.configurationSerialized);
+        return new DashboardModel(dto.id, dto.name, dto.configurationSerialized);
     }
 }
 
@@ -71,7 +63,7 @@ export default class DashboardsRepository {
                 if (DashboardsRepository.dashboardsCacheKeyed)
                 DashboardsRepository.dashboardsCacheKeyed[process.id] = process;
             });
-            DashboardsRepository.dashboardsCache.sort((a, b) => a.alias < b.alias ? -1 : (a.alias > b.alias ? 1 : 0));
+            DashboardsRepository.dashboardsCache.sort((a, b) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0));
             DashboardsRepository.isLoading = false;
         }
 
