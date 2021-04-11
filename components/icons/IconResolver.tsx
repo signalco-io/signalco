@@ -28,14 +28,16 @@ import LightSharpIcon from '@material-ui/icons/LightSharp';
 import RestaurantSharpIcon from '@material-ui/icons/RestaurantSharp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import AirIcon from '@material-ui/icons/Air';
 import { createSvgIcon } from '@material-ui/core';
 
-export type availableIcons = "empty" | "up" | "down" | "restaurant" | "ceilinglight" | "tv" | "wc" | "movie" | "moon" | "bed" | "work" | "bathtub" | "exit" | "key" | "livingroom" | "questionmark" | "lock" | "power" | "touch" | "light" | "droplet" | "sun" | "flower" | "motion" | "window" | "door" | "onoff";
+export type availableIcons = "empty" | "wind" | "up" | "down" | "restaurant" | "ceilinglight" | "tv" | "wc" | "movie" | "moon" | "bed" | "work" | "bathtub" | "exit" | "key" | "livingroom" | "questionmark" | "lock" | "power" | "touch" | "light" | "droplet" | "sun" | "flower" | "motion" | "window" | "door" | "onoff";
 
 const map = (
     icon?: availableIcons,
     switched: boolean = false) => {
     switch (icon) {
+        case "wind": return AirIcon;
         case "up": return KeyboardArrowUpIcon;
         case "down": return KeyboardArrowDownIcon;
         case "tv": return TvSharpIcon;
