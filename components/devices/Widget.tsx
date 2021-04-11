@@ -85,23 +85,32 @@ const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidge
                         }
 
                         // Retrieve current boolean state
+                        let newState = null;
                         const device = await DevicesRepository.getDeviceAsync(action.deviceId)
-                        const currentState = device?.getState(action);
-                        if (typeof currentState === 'undefined' && typeof action.valueSerialized === 'undefined') {
-                            console.warn('Failed to retrieve button action source state', action)
-                            return;
+                        if (typeof action.valueSerialized === 'undefined') {
+                            const currentState = device?.getState(action);
+                            if (typeof currentState === 'undefined') {
+                                console.warn('Failed to retrieve button action source state', action)
+                                return;
+                            }
+
+                            newState = typeof currentState === 'undefined'
+                                ? action.valueSerialized
+                                : !(`${currentState.valueSerialized}`.toLowerCase() === 'true');
+                        } else {
+                            newState = action.valueSerialized;
                         }
 
                         // Negate current state
-                        var newState = typeof currentState === 'undefined'
-                            ? action.valueSerialized
-                            : !(`${currentState.valueSerialized}`.toLowerCase() === 'true');
                         await ConductsService.RequestConductAsync(action, newState);
 
                         // Set local value state
-                        if (typeof currentState !== 'undefined') {
-                            currentState.valueSerialized = newState?.toString();
-                        }
+                        device?.updateState(
+                            action.channelName,
+                            action.contactName,
+                            newState?.toString(),
+                            new Date()
+                        );
                     }
                 };
             }

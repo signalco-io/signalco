@@ -26,15 +26,17 @@ const Devices = () => {
     };
 
     return (
-        <Box sx={{ p: { sm: 0, md: 4 } }} height="100%">
-            <Paper sx={{ maxWidth: '680px', height: '100%' }}>
-                <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                    <Typography variant="h2" sx={{ p: 2 }}>Devices</Typography>
-                    <Box sx={{ position: 'relative', flexGrow: 1, overflow: 'hidden' }}>
-                        <AutoTable items={items} isLoading={isLoading} error={error} onRowClick={handleRowClick} />
+        <Box sx={{ overflow: 'hidden', position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}>
+            <Box sx={{ p: { sm: 0, md: 4 } }} height="100%">
+                <Paper sx={{ maxWidth: '680px', height: '100%' }}>
+                    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                        <Typography variant="h2" sx={{ p: 2 }}>Devices</Typography>
+                        <Box sx={{ position: 'relative', flexGrow: 1, overflow: 'hidden' }}>
+                            <AutoTable items={items} isLoading={isLoading} error={error} onRowClick={handleRowClick} />
+                        </Box>
                     </Box>
-                </Box>
-            </Paper>
+                </Paper>
+            </Box>
         </Box>
     )
 };

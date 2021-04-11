@@ -91,9 +91,7 @@ const Layout = (props: { children: React.ReactNode }) => {
         <NavProfile />
       </Grid>
       <Grid sx={{ height: '100%', flexGrow: 1, position: 'relative' }} item>
-        <Box sx={{ overflow: 'hidden', position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}>
-          {props.children}
-        </Box>
+        {props.children}
       </Grid>
     </Grid>
   );

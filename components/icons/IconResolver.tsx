@@ -51,7 +51,7 @@ const map = (
         case "lock": return LockIcon;
         case "motion": return DirectionsRunIcon;
         case "key": return VpnKeySharpIcon;
-        case "power": return switched ? PowerOffOutlinedIcon : PowerIcon;
+        case "power": return switched ? PowerIcon : PowerOffOutlinedIcon;
         case "touch": return TouchAppIcon;
         case "exit": return ExitToAppSharpIcon;
         case "onoff": return PowerSettingsNewSharpIcon;
