@@ -127,9 +127,9 @@ const HomeOverview = () => {
                             <Grid container spacing={2}>
                                 <Grid item>
                                     <TabList onChange={handleDashboardChange} aria-label="Dashboard tabs">
-                                        {dashboards.length && dashboards.map((d, index) => (
+                                        {dashboards.length ? dashboards.map((d, index) => (
                                             <Tab key={index.toString()} label={d.name} value={index.toString()} />
-                                        ))}
+                                        )) : undefined}
                                     </TabList>
                                 </Grid>
                                 <Grid item sx={{ flexGrow: 1, textAlign: "end", px: 2 }}>
