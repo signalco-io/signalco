@@ -133,7 +133,7 @@ const Footer = () => (
                 <Typography variant="subtitle2" color="textSecondary">Copyright © {new Date().getFullYear()} Aleksandar Toplek. All rights reserved.</Typography>
               </Grid>
               <Grid item>
-                <Link href="https://github.com/AleksandarDev/signalapp" passHref>
+                <Link href="https://github.com/AleksandarDev/signalapp">
                   <IconButton>
                     <GitHubIcon />
                   </IconButton>

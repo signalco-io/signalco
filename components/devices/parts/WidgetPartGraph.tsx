@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Area, AreaChart } from "recharts";
 import { IDeviceTarget } from "../../../src/devices/Device";
-import PageNotificationService from "../../../src/notifications/PageNotificationService";
 import { IHistoricalValue } from "../Device";
 import { rowHeight } from "./Shared";
 
