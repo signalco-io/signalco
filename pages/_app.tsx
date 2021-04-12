@@ -11,6 +11,7 @@ import { CacheProvider } from "@emotion/react";
 import { Auth0Provider } from "@auth0/auth0-react";
 import Router, { useRouter } from "next/router";
 import { initSentry } from "../src/errors/SentryUtil";
+import { SnackbarProvider } from 'notistack';
 
 initSentry();
 
@@ -18,7 +19,7 @@ export const cache = createCache({ key: 'css', prepend: true });
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
-  const [isOnline, setIsOnline] = React.useState(true)
+  const [isOnline, setIsOnline] = React.useState(true);
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.
@@ -102,33 +103,36 @@ export default function App(props: AppProps) {
         />
       </Head>
       <ThemeProvider theme={theme}>
-        <StylesProvider injectFirst>
-          <CssBaseline />
-          <Auth0Provider
-            redirectUri={redirectUri}
-            onRedirectCallback={(appState) => {
-              // Use Next.js's Router.replace method to replace the url
-              Router.replace(appState?.returnTo || "/");
-            }}
-            domain="dfnoise.eu.auth0.com"
-            clientId="TpdYqotCp3E7VS4HFUnWKIXfRnfPpfeV"
-            audience="https://api.signal.dfnoise.com"
-          >
-            {typeof Layout === "function" ? (
-              <Layout>
+        <SnackbarProvider maxSnack={3}>
+          <StylesProvider injectFirst>
+            <CssBaseline />
+            <Auth0Provider
+              redirectUri={redirectUri}
+              onRedirectCallback={(appState) => {
+                // Use Next.js's Router.replace method to replace the url
+                Router.replace(appState?.returnTo || "/");
+              }}
+              domain="dfnoise.eu.auth0.com"
+              clientId="TpdYqotCp3E7VS4HFUnWKIXfRnfPpfeV"
+              audience="https://api.signal.dfnoise.com"
+            >
+              {typeof Layout === "function" ? (
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              ) : (
                 <Component {...pageProps} />
-              </Layout>
-            ) : (
-              <Component {...pageProps} />
-            )}
-          </Auth0Provider>
-          <NextNprogress
-            color="#fff"
-            startPosition={0.3}
-            stopDelayMs={200}
-            height={2}
-          />
-        </StylesProvider>
+              )}
+            </Auth0Provider>
+            <NextNprogress
+              color="#fff"
+              startPosition={0.3}
+              stopDelayMs={200}
+              height={2}
+            />
+
+          </StylesProvider>
+        </SnackbarProvider>
       </ThemeProvider>
     </CacheProvider>);
 }

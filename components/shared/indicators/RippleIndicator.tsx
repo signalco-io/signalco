@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { spring, TransitionMotion } from 'react-motion';
 
 const leavingSpringConfig = { stiffness: 60, damping: 15 };
@@ -13,19 +13,30 @@ const willLeave = (styleCell: any) => {
 };
 
 export interface IRippleIndicatorProps {
-    size?: number
+    size?: number,
+    interval?: number
 }
 
 export interface IRippleIndicatorRef {
     trigger: () => void
 }
 
-const RippleIndicator = forwardRef((props : IRippleIndicatorProps, ref: React.ForwardedRef<IRippleIndicatorRef | undefined>) => {
+const RippleIndicator = forwardRef((props: IRippleIndicatorProps, ref: React.ForwardedRef<IRippleIndicatorRef | undefined>) => {
     const [refresh, setRefresh] = useState<number>(0);
-    useImperativeHandle(ref, () => ({trigger() { setRefresh(Date.now()); }}));
+    useImperativeHandle(ref, () => ({ trigger() { setRefresh(Date.now()); } }));
 
-    const {size = 42} = props;
-    
+    useEffect(() => {
+        if (props.interval != null && props.interval > 0) {
+            const token = setInterval(() => {
+                setRefresh(Date.now());
+            }, props.interval);
+
+            return () => clearInterval(token);
+        }
+    }, [props.interval]);
+
+    const { size = 42 } = props;
+
     const styles = [{
         key: refresh.toString(),
         style: {

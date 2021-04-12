@@ -25,22 +25,22 @@ const theme = createMuiTheme({
       fontWeight: 400,
     },
     h2: {
-      fontSize: "1.6rem",
-      fontFamily: "Raleway, Open Sans, sans-serif",
-      fontWeight: 400,
-    },
-    h3: {
-      fontSize: "1.4rem",
-      fontFamily: "Raleway, Open Sans, sans-serif",
-      fontWeight: 400,
-    },
-    h4: {
       fontSize: "1.2rem",
       fontFamily: "Raleway, Open Sans, sans-serif",
       fontWeight: 400,
     },
+    h3: {
+      fontSize: "1rem",
+      fontFamily: "Raleway, Open Sans, sans-serif",
+      fontWeight: 400,
+    },
+    h4: {
+      fontSize: "1rem",
+      fontFamily: "Raleway, Open Sans, sans-serif",
+      fontWeight: 400,
+    },
     h5: {
-      fontSize: "1.1rem",
+      fontSize: "1rem",
       fontFamily: "Raleway, Open Sans, sans-serif",
       fontWeight: 400,
     },

@@ -5,12 +5,18 @@ import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import DevicesRepository, { SignalDeviceStatePublishDto } from "../src/devices/DevicesRepository";
+import { useSnackbar } from 'notistack';
+import PageNotificationService from "../src/notifications/PageNotificationService";
 
 const Layout = (props: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading, error, getAccessTokenSilently, loginWithRedirect } = useAuth0();
   const [pageError] = useState<string | undefined>();
   const [isPageLoading, setPageLoading] = useState<boolean>(true);
   const [devicesHub, setDevicesHub] = useState<HubConnection | undefined>();
+
+  // Configure page notifications via snackbar
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  PageNotificationService.setSnackbar(enqueueSnackbar, closeSnackbar);
 
   const setAccessTokenFactory = () => {
     HttpService.tokenFactory = getAccessTokenSilently;

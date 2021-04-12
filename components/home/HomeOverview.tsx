@@ -65,7 +65,7 @@ const HomeOverview = () => {
                     widgets: typeof d.configurationSerialized !== 'undefined' ? JSON.parse(d.configurationSerialized).widgets : []
                 })));
             } catch (error) {
-                // TODO: Notify user
+                // TODO: Display error message
                 console.warn("Failed to load remote dashboards", error);
             } finally {
                 setIsLoading(false);

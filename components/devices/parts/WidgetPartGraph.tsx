@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Area, AreaChart } from "recharts";
 import { IDeviceTarget } from "../../../src/devices/Device";
+import PageNotificationService from "../../../src/notifications/PageNotificationService";
 import { IHistoricalValue } from "../Device";
 import { rowHeight } from "./Shared";
 
@@ -34,7 +35,7 @@ const WidgetPartGraph = ({ columnWidth, config }: { columnWidth: number, config:
                 setStateHistory(mappedData);
 
             } catch (err) {
-                // TODO: Notify user
+                // TODO: Show error message
                 console.warn('Failed to load history data', err, config)
             } finally {
                 // setIsLoading(false);
