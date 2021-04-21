@@ -64,8 +64,8 @@ export default function App(props: AppProps) {
     : undefined;
 
   const redirectUri = typeof window !== "undefined"
-    ? window.location.origin
-    : 'https://signal.dfnoise.com';
+    ? `${window.location.origin}`
+    : 'https://signal.dfnoise.com/app';
 
   return (
     <CacheProvider value={cache}>

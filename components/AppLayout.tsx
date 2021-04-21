@@ -13,20 +13,18 @@ const Layout = (props: { children: React.ReactNode }) => {
   const [pageError] = useState<string | undefined>();
   const [isPageLoading, setPageLoading] = useState<boolean>(true);
   const [devicesHub, setDevicesHub] = useState<HubConnection | undefined>();
-
-  // Configure page notifications via snackbar
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  // Set snackbar functions
   PageNotificationService.setSnackbar(enqueueSnackbar, closeSnackbar);
 
-  const setAccessTokenFactory = () => {
-    HttpService.tokenFactory = getAccessTokenSilently;
-  };
-
+  // Set Auth0 token factory
   if (typeof HttpService.tokenFactory === 'undefined' &&
     typeof getAccessTokenSilently !== 'undefined') {
-    setAccessTokenFactory();
+    HttpService.tokenFactory = getAccessTokenSilently;
   }
 
+  // Refirect to login if not authenticated
   useEffect(() => {
     if (isLoading) return;
 
@@ -38,6 +36,7 @@ const Layout = (props: { children: React.ReactNode }) => {
     setPageLoading(false);
   }, [isLoading, isAuthenticated])
 
+  // Initiate SignalR communication
   useEffect(() => {
     if (isPageLoading || isLoading) return;
 

@@ -1,9 +1,10 @@
-import { Box, Button, Card, CardHeader, Container, Divider, Grid, IconButton, Link, makeStyles, Typography } from "@material-ui/core";
+import { Box, Button, Card, CardHeader, CardMedia, Container, Divider, Grid, IconButton, Link, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import GitHubIcon from '@material-ui/icons/GitHub';
 import RippleIndicator from "../components/shared/indicators/RippleIndicator";
 import { SxProps } from '@material-ui/system';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
+import { Cloud, Help, WifiLock } from "@material-ui/icons";
 
 const footerStyles = makeStyles({
   root: {
@@ -147,9 +148,14 @@ const Footer = () => (
   </Box>
 );
 
-const IntegrationCard = (props: { name: string }) => (
-  <Card sx={{ minWidth: '220px', minHeight: '160px' }} variant="elevation">
+const IntegrationCard = (props: { name: string, via: string[] }) => (
+  <Card sx={{ minWidth: '220px', minHeight: '160px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} variant="outlined">
     <CardHeader title={props.name} />
+    <CardMedia>
+      <Grid container spacing={1} sx={{ px: 2, py: 1, opacity: 0.6 }}>
+        {props.via.map(viaItem => <Grid item>{viaItem === 'cloud' ? <Cloud /> : (viaItem === 'direct' ? <WifiLock /> : <Help />)}</Grid>)}
+      </Grid>
+    </CardMedia>
   </Card>
 );
 
@@ -164,23 +170,33 @@ const Index = () => (
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} md={4}>
               <IntegrationCard
-                name="Zigbee2Mqtt" />
+                name="Tuya"
+                via={["z2m"]} />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <IntegrationCard
-                name="Philips Hue" />
+                name="Ikea"
+                via={["z2m"]} />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <IntegrationCard
-                name="Samsung Smart TV's" />
+                name="Philips Hue"
+                via={["z2m", 'direct', 'cloud']} />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <IntegrationCard
-                name="Broadlink" />
+                name="Samsung Smart TV's"
+                via={["direct"]} />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <IntegrationCard
-                name="Mi Home" />
+                name="Broadlink"
+                via={["direct"]} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <IntegrationCard
+                name="Mi Home"
+                via={["direct", 'cloud']} />
             </Grid>
           </Grid>
         </Container>
