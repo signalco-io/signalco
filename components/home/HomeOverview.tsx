@@ -106,19 +106,22 @@ const HomeOverview = () => {
             return <div ref={castedRef}></div>;
 
         // When width is less than 400, set to single column
-        const columnWidth = width && width < 400 ? width - 16 : (width - 24 - 12) / Math.max(Math.floor(width / 220), 2);
+        const mobileWidth = width - 16;
+        const columnWidth = width && width < 500 ? mobileWidth : (width - 8) / Math.max(Math.floor(width / 250), 2);
         return (
             <Grid container
                 spacing={2}
                 ref={castedRef}>
                 {dashboard.widgets.map((widget, index) => (
                     <Grid item key={index}>
-                        <Widget
-                            columnWidth={columnWidth}
-                            columns={widget.columns}
-                            rows={widget.rows}
-                            parts={widget.parts}
-                            onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />
+                        <Box>
+                            <Widget
+                                columnWidth={columnWidth}
+                                columns={widget.columns}
+                                rows={widget.rows}
+                                parts={widget.parts}
+                                onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />
+                        </Box>
                     </Grid>
                 ))}
             </Grid>

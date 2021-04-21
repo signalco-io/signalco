@@ -31,7 +31,7 @@ const NavProfile = () => {
   const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconComponent, active: boolean, label: string }) => (
     <Box borderBottom={active ? "3px solid white" : undefined}>
       <Link href={path} passHref>
-        <IconButton disabled={active} aria-label={label} title={label}>
+        <IconButton sx={{ opacity: active ? 0.6 : 1 }} aria-label={label} title={label}>
           <Icon />
         </IconButton>
       </Link>
