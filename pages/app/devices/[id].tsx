@@ -51,12 +51,20 @@ const DeviceDetails = () => {
                     <Typography variant="subtitle2" style={{ opacity: 0.6 }}>{device?.identifier}</Typography>
                 </Grid>
                 <Grid item>
-                    <Grid container>
+                    <Grid container spacing={2}>
                         <Grid item>
                             <Card>
                                 <CardHeader title="States" />
                                 <CardContent style={{ padding: 0 }}>
                                     <AutoTable error={error} isLoading={isLoading} items={stateTableItems} />
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item>
+                            <Card>
+                                <CardHeader title="Shared with" />
+                                <CardContent style={{ padding: 0 }}>
+                                    <AutoTable error={""} isLoading={false} items={device?.sharedWith.map(u => ({ id: u.id, name: u.fullName ?? u.email }))} />
                                 </CardContent>
                             </Card>
                         </Grid>

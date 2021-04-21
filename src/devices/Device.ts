@@ -1,5 +1,24 @@
 import { makeAutoObservable } from "mobx";
 
+
+export interface IUser {
+    id: string;
+    email: string;
+    fullName?: string;
+}
+
+export class User implements IUser {
+    id: string;
+    email: string;
+    fullName?: string | undefined;
+
+    constructor(id: string, email: string, fullName?: string) {
+        this.id = id;
+        this.email = email;
+        this.fullName = fullName;
+    }
+}
+
 export interface IDeviceContact {
     name: string;
     dataType: string;
@@ -39,6 +58,7 @@ export interface IDeviceModel {
     identifier: string;
     endpoints: IDeviceEndpoint[]
     states: IDeviceContactState[];
+    sharedWith: IUser[];
 
     getState(target: IDeviceTarget): IDeviceContactState;
     updateState(channelName: string, contactName: string, valueSerialized: string|undefined, timeStamp: Date): void;
@@ -50,13 +70,15 @@ export class DeviceModel implements IDeviceModel {
     identifier: string;
     endpoints: IDeviceEndpoint[];
     states: IDeviceContactState[];
+    sharedWith: IUser[];
 
-    constructor(id: string, alias: string, identifier: string, endpoints: IDeviceEndpoint[], states: IDeviceContactState[]) {
+    constructor(id: string, alias: string, identifier: string, endpoints: IDeviceEndpoint[], states: IDeviceContactState[], sharedWith: IUser[]) {
         this.id = id;
         this.alias = alias;
         this.identifier = identifier;
         this.endpoints = endpoints;
         this.states = states;
+        this.sharedWith = sharedWith;
     }
 
     getState(target: IDeviceTarget) {

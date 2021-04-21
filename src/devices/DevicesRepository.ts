@@ -1,6 +1,6 @@
 import { IHistoricalValue } from "../../components/devices/Device";
 import HttpService from "../services/HttpService";
-import { IDeviceModel, DeviceModel, IDeviceContactState, DeviceContactState, IDeviceContact, DeviceContact, IDeviceEndpoint, DeviceEndpoint, IDeviceStatePublish, DeviceStatePublish, IDeviceTarget } from "./Device";
+import { IDeviceModel, DeviceModel, IDeviceContactState, DeviceContactState, IDeviceContact, DeviceContact, IDeviceEndpoint, DeviceEndpoint, IDeviceStatePublish, DeviceStatePublish, IDeviceTarget, User, IUser } from "./Device";
 
 class SignalDeviceDto {
     id?: string;
@@ -8,6 +8,7 @@ class SignalDeviceDto {
     deviceIdentifier?: string;
     endpoints?: SignalDeviceEndpointDto[];
     states?: SignalDeviceContactStateDto[];
+    sharedWith?: SignalUserDto[];
 
     static FromDto(dto: SignalDeviceDto): IDeviceModel {
         if (dto.id == null || dto.alias == null || dto.deviceIdentifier == null) {
@@ -19,7 +20,22 @@ class SignalDeviceDto {
             dto.alias,
             dto.deviceIdentifier,
             dto.endpoints?.map(SignalDeviceEndpointDto.FromDto) ?? [],
-            dto.states?.map(SignalDeviceContactStateDto.FromDto) ?? []);
+            dto.states?.map(SignalDeviceContactStateDto.FromDto) ?? [],
+            dto.sharedWith?.map(SignalUserDto.FromDto) ?? []);
+    }
+}
+
+class SignalUserDto {
+    id?: string;
+    email?: string;
+    fullName?: string;
+
+    static FromDto(dto: SignalUserDto): IUser {
+        if (dto.id == null || dto.email == null) {
+            throw Error("Invalid SignalUserDto - missing required properties.");
+        }
+
+        return new User(dto.id, dto.email, dto.fullName);
     }
 }
 
