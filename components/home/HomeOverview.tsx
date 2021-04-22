@@ -107,7 +107,9 @@ const HomeOverview = () => {
 
         // When width is less than 400, set to single column
         const mobileWidth = width - 16;
-        const columnWidth = width && width < 500 ? mobileWidth : (width - 8) / Math.max(Math.floor(width / 250), 2);
+        const numberOfColumns = Math.floor(width / (250 + 16));
+        const desktopWidth = Math.max((width - (numberOfColumns * 2 * 8)) / numberOfColumns, 2);
+        const columnWidth = width && width < 500 ? mobileWidth : desktopWidth;
         return (
             <Grid container
                 spacing={2}
