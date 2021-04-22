@@ -31,7 +31,6 @@ const WidgetPartGraph = ({ columnWidth, config }: { columnWidth: number, config:
                 (parseInt(durationRegexMatch[2], 10) || 0) * 60 * 60 * 1000 +
                 (parseInt(durationRegexMatch[3], 10) || 0) * 60 * 1000 +
                 (parseInt(durationRegexMatch[4], 10) || 0) * 1000;
-            console.log(durationRegexMatch, durationMs)
         }
     }
 
