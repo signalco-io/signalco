@@ -62,7 +62,7 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
       display="inline-block"
       onClick={props.hasClick ? props.onClick : undefined}
       sx={{ cursor: props.hasClick ? 'pointer' : 'default', gridRow: props.row, gridColumn: props.column, px: 2, py: 1.5, borderBottom: '1px solid rgba(128,128,128,0.6)', display: 'flex', alignItems: 'center' }}>
-      <Typography variant="body2" style={props.style}>{props.value}</Typography>
+      <Typography variant="body2" style={props.style} component="div">{props.value}</Typography>
     </Box>
   );
 });
