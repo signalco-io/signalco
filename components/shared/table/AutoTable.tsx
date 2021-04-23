@@ -88,7 +88,7 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
 
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ overflow: 'auto', flexGrow: 1, display: 'grid' }}>
+      <div style={{ overflow: 'auto', display: 'grid' }}>
         {props.isLoading && <LinearProgress />}
         {props.error && <ErrorRow error={props.error} />}
         {cells?.length > 0 && cells.map((item, rowIndex) => {

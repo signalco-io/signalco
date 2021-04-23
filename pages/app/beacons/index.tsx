@@ -10,6 +10,7 @@ import BeaconsRepository, { IBeaconModel } from "../../../src/beacons/BeaconsRep
 function beaconModelToTableItem(beacon: IBeaconModel): IAutoTableItem {
     return {
         id: beacon.id,
+        name: beacon.id,
         registeredDate: <ReactTimeago date={beacon.registeredTimeStamp} />
     };
 }
