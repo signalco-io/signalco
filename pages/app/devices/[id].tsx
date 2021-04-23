@@ -64,7 +64,7 @@ const DeviceDetails = () => {
                             <Card>
                                 <CardHeader title="Shared with" />
                                 <CardContent style={{ padding: 0 }}>
-                                    <AutoTable error={""} isLoading={false} items={device?.sharedWith.map(u => ({ id: u.id, name: u.fullName ?? u.email }))} />
+                                    <AutoTable error={""} isLoading={isLoading} items={device?.sharedWith.map(u => ({ id: u.id, name: u.fullName ?? u.email }))} />
                                 </CardContent>
                             </Card>
                         </Grid>
