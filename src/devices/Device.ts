@@ -59,6 +59,8 @@ export interface IDeviceModel {
     endpoints: IDeviceEndpoint[]
     states: IDeviceContactState[];
     sharedWith: IUser[];
+    manufacturer?: string;
+    model?: string;
 
     getState(target: IDeviceTarget): IDeviceContactState;
     updateState(channelName: string, contactName: string, valueSerialized: string|undefined, timeStamp: Date): void;
@@ -71,14 +73,18 @@ export class DeviceModel implements IDeviceModel {
     endpoints: IDeviceEndpoint[];
     states: IDeviceContactState[];
     sharedWith: IUser[];
+    manufacturer?: string;
+    model?: string;
 
-    constructor(id: string, alias: string, identifier: string, endpoints: IDeviceEndpoint[], states: IDeviceContactState[], sharedWith: IUser[]) {
+    constructor(id: string, alias: string, identifier: string, endpoints: IDeviceEndpoint[], states: IDeviceContactState[], sharedWith: IUser[], manufacturer?: string, model?: string) {
         this.id = id;
         this.alias = alias;
         this.identifier = identifier;
         this.endpoints = endpoints;
         this.states = states;
         this.sharedWith = sharedWith;
+        this.manufacturer = manufacturer;
+        this.model = model;
     }
 
     getState(target: IDeviceTarget) {

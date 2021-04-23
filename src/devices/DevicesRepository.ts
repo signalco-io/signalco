@@ -9,6 +9,8 @@ class SignalDeviceDto {
     endpoints?: SignalDeviceEndpointDto[];
     states?: SignalDeviceContactStateDto[];
     sharedWith?: SignalUserDto[];
+    manufacturer?: string;
+    model?: string;
 
     static FromDto(dto: SignalDeviceDto): IDeviceModel {
         if (dto.id == null || dto.alias == null || dto.deviceIdentifier == null) {
@@ -21,7 +23,9 @@ class SignalDeviceDto {
             dto.deviceIdentifier,
             dto.endpoints?.map(SignalDeviceEndpointDto.FromDto) ?? [],
             dto.states?.map(SignalDeviceContactStateDto.FromDto) ?? [],
-            dto.sharedWith?.map(SignalUserDto.FromDto) ?? []);
+            dto.sharedWith?.map(SignalUserDto.FromDto) ?? [],
+            dto.manufacturer,
+            dto.model);
     }
 }
 

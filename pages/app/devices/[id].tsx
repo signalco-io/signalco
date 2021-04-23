@@ -52,7 +52,22 @@ const DeviceDetails = () => {
                 </Grid>
                 <Grid item>
                     <Grid container spacing={2}>
-                        <Grid item>
+                        <Grid item xs={12} sm={6} md={4}>
+                            <Card>
+                                <CardHeader title="Information" />
+                                <CardContent>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={6}><span>Model</span></Grid>
+                                        <Grid item xs={6}><Typography>{device?.model}</Typography></Grid>
+                                    </Grid>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={6}><span>Manufacturer</span></Grid>
+                                        <Grid item xs={6}><Typography>{device?.manufacturer}</Typography></Grid>
+                                    </Grid>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
                             <Card>
                                 <CardHeader title="States" />
                                 <CardContent style={{ padding: 0 }}>
@@ -60,7 +75,7 @@ const DeviceDetails = () => {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={12} sm={6}>
                             <Card>
                                 <CardHeader title="Shared with" />
                                 <CardContent style={{ padding: 0 }}>
