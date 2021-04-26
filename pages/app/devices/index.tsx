@@ -14,7 +14,7 @@ function deviceModelToTableItem(device: IDeviceModel): IAutoTableItem {
     return {
         id: device.id,
         name: device.alias,
-        lastActivity: device.states.length > 0 ? <ReactTimeago date={device.states.map(s => s.timeStamp).sort()[0]} /> : 'Never',
+        lastActivity: device.states.length > 0 ? <ReactTimeago date={device.states.map(s => s.timeStamp.getTime()).sort().pop()} /> : 'Never',
         shared: device.sharedWith.length > 1 && <Chip icon={<PeopleAltSharpIcon fontSize="small" />} label={device.sharedWith.length} />
     };
 }
