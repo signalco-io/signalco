@@ -41,25 +41,25 @@ const useGraph = (value: () => Promise<IHistoricalValue[]>, duration?: string) =
     const ticksHours = timeHour.every(1);
     const ticks = ticksHours && domainGraph.ticks(ticksHours).map(i => i.toString());
 
+    const loadData = async () => {
+        try {
+            const data = await value();
+
+            var mappedData = data.map(i => ({
+                timeStamp: domainGraph(new Date(i.timeStamp).getTime()),
+                value: Number.parseFloat(i.valueSerialized)
+            }));
+
+            setData(mappedData);
+        } catch (err) {
+            // TODO: Show error message
+            console.warn('Failed to load history data', err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const loadData = async () => {
-            try {
-                const data = await value();
-
-                var mappedData = data.map(i => ({
-                    timeStamp: domainGraph(new Date(i.timeStamp).getTime()),
-                    value: Number.parseFloat(i.valueSerialized)
-                }));
-
-                setData(mappedData);
-            } catch (err) {
-                // TODO: Show error message
-                console.warn('Failed to load history data', err);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
         loadData();
     }, []);
 

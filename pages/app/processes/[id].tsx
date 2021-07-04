@@ -515,7 +515,7 @@ const ProcessDetails = () => {
                                         {isLoading && <DisplayItemPlaceholder />}
                                         {!isLoading &&
                                             (processConfig?.triggers?.length
-                                                ? processConfig.triggers.map((t, i) => <DisplayDeviceTarget target={t} onChanged={(updated) => handleTriggerChange(updated, i)} />)
+                                                ? processConfig.triggers.map((t, i) => <DisplayDeviceTarget key={`trigger${i}`} target={t} onChanged={(updated) => handleTriggerChange(updated, i)} />)
                                                 : <NoDataPlaceholder content="No triggers" />)}
                                     </AccordionDetails>
                                 </Accordion>
@@ -549,7 +549,7 @@ const ProcessDetails = () => {
                                             <Grid item>
                                                 {!isLoading &&
                                                     (processConfig?.conducts?.length
-                                                        ? processConfig.conducts.map((c, i) => <DisplayDeviceStateValue target={c.Target} value={c.Value} onChanged={(u) => handleValueChanged(u, i)} />)
+                                                        ? processConfig.conducts.map((c, i) => <DisplayDeviceStateValue key={`value${i}`} target={c.Target} value={c.Value} onChanged={(u) => handleValueChanged(u, i)} />)
                                                         : <NoDataPlaceholder content="No conducts" />)}
                                             </Grid>
                                             <Grid item>

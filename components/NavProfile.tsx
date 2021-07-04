@@ -16,6 +16,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { orderBy } from "../src/helpers/ArrayHelpers";
 import { SvgIconComponent } from "@material-ui/icons";
+import { User } from '@auth0/auth0-spa-js';
 
 const navItems = [
   { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon },
@@ -23,6 +24,32 @@ const navItems = [
   { label: 'Processes', path: '/app/processes', icon: AccountTreeSharpIcon },
   { label: 'Beacons', path: '/app/beacons', icon: DeviceHubSharpIcon }
 ];
+
+const UserAvatar = ({ user }: { user: User | undefined }) => {
+  if (user === undefined) {
+    return (<Avatar variant="circular" />);
+  }
+
+  let userNameInitials = "";
+  if (user.given_name && user.family_name) {
+    userNameInitials = `${user.given_name[0]}${user.family_name[0]}`;
+  }
+  if (userNameInitials === '' && user.email) {
+    userNameInitials = user.email[0];
+  }
+
+  if (user.picture) {
+    return (<Avatar imgProps={{ width: 40, height: 40 }} src={user.picture} alt="User profile image">
+      {userNameInitials}
+    </Avatar>);
+  }
+
+  return (
+    <Skeleton variant="circular">
+      <Avatar>{userNameInitials}</Avatar>
+    </Skeleton>
+  );
+};
 
 const NavProfile = () => {
   const { logout, user } = useAuth0();
@@ -39,7 +66,6 @@ const NavProfile = () => {
   );
 
   const activeNavItem = orderBy(navItems.filter(ni => router.pathname.startsWith(ni.path)), ni => 0 - ni.path.length)[0];
-  const userNameInitials = user.given_name && user.family_name ? `${user.given_name[0]}${user.family_name[0]}` : user.email[0];
 
   return (
     <>
@@ -51,15 +77,7 @@ const NavProfile = () => {
           </Grid>
         </Grid>
         <Grid item>
-          {user.picture ? (
-            <Avatar imgProps={{ width: 40, height: 40 }} src={user.picture} alt="User profile image">
-              {userNameInitials}
-            </Avatar>
-          ) : (
-            <Skeleton variant="circular">
-              <Avatar>{userNameInitials}</Avatar>
-            </Skeleton>
-          )}
+          <UserAvatar user={user} />
           <Menu open={false}>
             <MenuItem>
               <IconButton onClick={() => logout()} color="primary" title="Logout">
