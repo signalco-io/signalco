@@ -4,7 +4,7 @@ import { Area, AreaChart, XAxis, YAxis, Tooltip } from "recharts";
 import { IDeviceTarget } from "../../../src/devices/Device";
 import { IHistoricalValue } from "../Device";
 import { rowHeight } from "./Shared";
-import * as d3 from "d3";
+import { scaleTime, timeHour } from 'd3';
 import ReactTimeago from "react-timeago";
 
 export interface IWidgetPartGraphConfig {
@@ -37,8 +37,8 @@ const useGraph = (value: () => Promise<IHistoricalValue[]>, duration?: string) =
     const now = new Date();
     const past = new Date();
     past.setTime(now.getTime() - durationMs);
-    const domainGraph = d3.scaleTime().domain([past, now]);
-    const ticksHours = d3.timeHour.every(1);
+    const domainGraph = scaleTime().domain([past, now]);
+    const ticksHours = timeHour.every(1);
     const ticks = ticksHours && domainGraph.ticks(ticksHours).map(i => i.toString());
 
     useEffect(() => {

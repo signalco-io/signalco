@@ -1,6 +1,6 @@
 import * as React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import NextNprogress from "nextjs-progressbar";
@@ -104,34 +104,31 @@ export default function App(props: AppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <SnackbarProvider maxSnack={3}>
-          <StylesProvider injectFirst>
-            <CssBaseline />
-            <Auth0Provider
-              redirectUri={redirectUri}
-              onRedirectCallback={(appState) => {
-                // Use Next.js's Router.replace method to replace the url
-                Router.replace(appState?.returnTo || "/");
-              }}
-              domain="dfnoise.eu.auth0.com"
-              clientId="TpdYqotCp3E7VS4HFUnWKIXfRnfPpfeV"
-              audience="https://api.signal.dfnoise.com"
-            >
-              {typeof Layout === "function" ? (
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-              ) : (
+          <CssBaseline />
+          <Auth0Provider
+            redirectUri={redirectUri}
+            onRedirectCallback={(appState) => {
+              // Use Next.js's Router.replace method to replace the url
+              Router.replace(appState?.returnTo || "/");
+            }}
+            domain="dfnoise.eu.auth0.com"
+            clientId="TpdYqotCp3E7VS4HFUnWKIXfRnfPpfeV"
+            audience="https://api.signal.dfnoise.com"
+          >
+            {typeof Layout === "function" ? (
+              <Layout>
                 <Component {...pageProps} />
-              )}
-            </Auth0Provider>
-            <NextNprogress
-              color="#fff"
-              startPosition={0.3}
-              stopDelayMs={200}
-              height={2}
-            />
-
-          </StylesProvider>
+              </Layout>
+            ) : (
+              <Component {...pageProps} />
+            )}
+          </Auth0Provider>
+          <NextNprogress
+            color="#fff"
+            startPosition={0.3}
+            stopDelayMs={200}
+            height={2}
+          />
         </SnackbarProvider>
       </ThemeProvider>
     </CacheProvider>);

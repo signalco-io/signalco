@@ -92,7 +92,8 @@ const HomeOverview = () => {
         }
     }, []);
 
-    if (window.location.search.startsWith("?do=")) {
+    if (typeof window !== 'undefined' &&
+        window.location.search.startsWith("?do=")) {
         if (executedConduct)
             return <div>Done</div>
         return <div>Doing...</div>

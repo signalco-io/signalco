@@ -1,41 +1,34 @@
-import { Box, Button, Card, CardHeader, CardMedia, Container, Divider, Grid, IconButton, Link, makeStyles, Typography } from "@material-ui/core";
+import { Box, Button, Card, CardHeader, CardMedia, Container, Divider, Grid, IconButton, Link, Typography } from "@material-ui/core";
 import React from "react";
 import GitHubIcon from '@material-ui/icons/GitHub';
 import RippleIndicator from "../components/shared/indicators/RippleIndicator";
 import { SxProps } from '@material-ui/system';
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
+import { Theme } from '@material-ui/core/styles'
 import { Cloud, Help, WifiLock } from "@material-ui/icons";
 
-const footerStyles = makeStyles({
-  root: {
-    backgroundColor: "rgba(125,125,125,0.2)",
+// const footerStyles = makeStyles({
+//   root: {
+//     '& ul': {
 
-    '& footer': {
-      padding: "64px 0"
-    },
 
-    '& ul': {
-      padding: 0,
-      paddingRight: '32px',
+//       '&  li': {
+//         listStyleType: 'none',
+//         padding: '8px 0',
 
-      '&  li': {
-        listStyleType: 'none',
-        padding: '8px 0',
+//         '& a': {
+//           textDecoration: 'none',
+//           outline: 'none',
+//           color: 'rgba(255, 255, 255, 0.6)',
+//           transition: 'color .1s ease',
 
-        '& a': {
-          textDecoration: 'none',
-          outline: 'none',
-          color: 'rgba(255, 255, 255, 0.6)',
-          transition: 'color .1s ease',
-
-          '&:hover, &:active': {
-            color: 'rgba(255, 255, 255, 0.9)',
-          }
-        }
-      }
-    }
-  }
-});
+//           '&:hover, &:active': {
+//             color: 'rgba(255, 255, 255, 0.9)',
+//           }
+//         }
+//       }
+//     }
+//   }
+// });
 
 const Pitch = (props: { sx?: SxProps<Theme>, heading: string, children: React.ReactChild }) => (
   <Box component="section" sx={{ textAlign: 'center', ...props.sx }}>
@@ -84,10 +77,10 @@ const Onboarding = () => {
 };
 
 const Footer = () => (
-  <Box className={footerStyles().root}>
+  <Box sx={{ backgroundColor: "rgba(125,125,125,0.2)" }}>
     <Divider />
     <Container>
-      <Box component="footer">
+      <Box component="footer" sx={{ padding: "64px 0" }}>
         <Grid container direction="column" spacing={4}>
           <Grid item>
             <Grid container justifyContent="space-between" spacing={2}>
@@ -148,12 +141,20 @@ const Footer = () => (
   </Box>
 );
 
+const IntegrationViaIcon = ({ viaItem }: { viaItem: string }) => {
+  return viaItem === 'cloud' ? (<Cloud />) : (viaItem === 'direct' ? <WifiLock /> : <Help />)
+};
+
 const IntegrationCard = (props: { name: string, via: string[] }) => (
   <Card sx={{ minWidth: '220px', minHeight: '160px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} variant="outlined">
     <CardHeader title={props.name} />
     <CardMedia>
       <Grid container spacing={1} sx={{ px: 2, py: 1, opacity: 0.6 }}>
-        {props.via.map(viaItem => <Grid item>{viaItem === 'cloud' ? <Cloud /> : (viaItem === 'direct' ? <WifiLock /> : <Help />)}</Grid>)}
+        {props.via.map(viaItem =>
+          <Grid item key={`viaItem-${viaItem}`}>
+            <IntegrationViaIcon viaItem={viaItem} />
+          </Grid>
+        )}
       </Grid>
     </CardMedia>
   </Card>

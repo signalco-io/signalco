@@ -131,7 +131,7 @@ const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidge
             }
             return <WidgetPartGraph columnWidth={columnWidth} config={graphConfig} />
         default:
-            return <Alert severity="warning">Unkwnown widget part '{part.type}'</Alert>
+            return <Alert severity="warning">Unkwnown widget part &apos;{part.type}&apos;</Alert>
     }
 }
 
