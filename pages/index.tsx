@@ -1,34 +1,11 @@
-import { Box, Button, Card, CardHeader, CardMedia, Container, Divider, Grid, IconButton, Link, Typography } from "@material-ui/core";
+import { Box, Button, Card, CardHeader, CardMedia, Container, Divider, Grid, IconButton, Link, Stack, Typography } from "@material-ui/core";
 import React from "react";
 import GitHubIcon from '@material-ui/icons/GitHub';
 import RippleIndicator from "../components/shared/indicators/RippleIndicator";
 import { SxProps } from '@material-ui/system';
 import { Theme } from '@material-ui/core/styles'
 import { Cloud, Help, WifiLock } from "@material-ui/icons";
-
-// const footerStyles = makeStyles({
-//   root: {
-//     '& ul': {
-
-
-//       '&  li': {
-//         listStyleType: 'none',
-//         padding: '8px 0',
-
-//         '& a': {
-//           textDecoration: 'none',
-//           outline: 'none',
-//           color: 'rgba(255, 255, 255, 0.6)',
-//           transition: 'color .1s ease',
-
-//           '&:hover, &:active': {
-//             color: 'rgba(255, 255, 255, 0.9)',
-//           }
-//         }
-//       }
-//     }
-//   }
-// });
+import ZigbeeLogoIcon from "../components/icons/ZigbeeLogoIcon";
 
 const Pitch = (props: { sx?: SxProps<Theme>, heading: string, children: React.ReactChild }) => (
   <Box component="section" sx={{ textAlign: 'center', ...props.sx }}>
@@ -85,29 +62,29 @@ const Footer = () => (
           <Grid item>
             <Grid container justifyContent="space-between" spacing={2}>
               <Grid item>
-                <Typography variant="h2">Projects</Typography>
-                <ul>
-                  <li><Link href="https://github.com/AleksandarDev/signalapp">Website</Link></li>
-                  <li><Link href="https://github.com/AleksandarDev/signalapi">API</Link></li>
-                  <li><Link href="https://github.com/AleksandarDev/beacon">Beacon</Link></li>
-                </ul>
+                <Typography variant="h2" sx={{ pb: 2 }}>Projects</Typography>
+                <Stack>
+                  <Link href="https://github.com/AleksandarDev/signalapp">Website</Link>
+                  <Link href="https://github.com/AleksandarDev/signalapi">API</Link>
+                  <Link href="https://github.com/AleksandarDev/beacon">Beacon</Link>
+                </Stack>
               </Grid>
               <Grid item>
-                <Typography variant="h2">Community</Typography>
-
+                <Typography variant="h2" sx={{ pb: 2 }}>Community</Typography>
+                <Typography variant="caption" color="textSecondary">Coming soon...</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="h2">Resources</Typography>
-
+                <Typography variant="h2" sx={{ pb: 2 }}>Resources</Typography>
+                <Typography variant="caption" color="textSecondary">Coming soon...</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="h2">Legal</Typography>
-                <ul>
-                  <li><Link href="/legal/privacy-policy">Privacy Policy</Link></li>
-                  <li><Link href="/legal/terms-of-service">Terms of Service</Link></li>
-                  <li><Link href="/legal/dpa">DPA</Link></li>
-                  <li><Link href="/legal/sla">SLA</Link></li>
-                </ul>
+                <Typography variant="h2" sx={{ pb: 2 }}>Legal</Typography>
+                <Stack>
+                  <Link href="/legal/privacy-policy">Privacy Policy</Link>
+                  <Link href="/legal/terms-of-service">Terms of Service</Link>
+                  <Link href="/legal/dpa">DPA</Link>
+                  <Link href="/legal/sla">SLA</Link>
+                </Stack>
               </Grid>
             </Grid>
           </Grid>
@@ -142,7 +119,13 @@ const Footer = () => (
 );
 
 const IntegrationViaIcon = ({ viaItem }: { viaItem: string }) => {
-  return viaItem === 'cloud' ? (<Cloud />) : (viaItem === 'direct' ? <WifiLock /> : <Help />)
+  if (viaItem === "z2m")
+    return <span title="Zigbee2MQTT"><ZigbeeLogoIcon /></span>;
+  else if (viaItem === "cloud")
+    return <span title="Cloud"><Cloud /></span>;
+  else if (viaItem === 'direct')
+    return <span title="Direct"><WifiLock /></span>;
+  return <Help />;
 };
 
 const IntegrationCard = (props: { name: string, via: string[] }) => (
@@ -160,6 +143,15 @@ const IntegrationCard = (props: { name: string, via: string[] }) => (
   </Card>
 );
 
+const integrations = [
+  { name: "Tuya", channels: ["z2m"] },
+  { name: "Ikea", channels: ["z2m"] },
+  { name: "Philips Hue", channels: ["z2m", 'direct', 'cloud'] },
+  { name: "Samsung Smart TV's", channels: ["direct"] },
+  { name: "Broadlink", channels: ["z2m"] },
+  { name: "Mi Home", channels: ["direct", "cloud"] }
+];
+
 const Index = () => (
   <Grid container direction="column">
     <Grid item>
@@ -169,36 +161,13 @@ const Index = () => (
       <Pitch heading="Works with">
         <Container>
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} md={4}>
-              <IntegrationCard
-                name="Tuya"
-                via={["z2m"]} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <IntegrationCard
-                name="Ikea"
-                via={["z2m"]} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <IntegrationCard
-                name="Philips Hue"
-                via={["z2m", 'direct', 'cloud']} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <IntegrationCard
-                name="Samsung Smart TV's"
-                via={["direct"]} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <IntegrationCard
-                name="Broadlink"
-                via={["direct"]} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <IntegrationCard
-                name="Mi Home"
-                via={["direct", 'cloud']} />
-            </Grid>
+            {integrations.map(i => (
+              <Grid item xs={12} sm={6} md={4} key={`integration-${i.name}`}>
+                <IntegrationCard
+                  name={i.name}
+                  via={i.channels} />
+              </Grid>
+            ))}
           </Grid>
         </Container>
       </Pitch>

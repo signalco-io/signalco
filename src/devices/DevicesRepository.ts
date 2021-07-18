@@ -1,4 +1,4 @@
-import { IHistoricalValue } from "../../components/devices/Device";
+import { IHistoricalValue } from "../../components/devices/parts/WidgetPartGraph";
 import HttpService from "../services/HttpService";
 import { IDeviceModel, DeviceModel, IDeviceContactState, DeviceContactState, IDeviceContact, DeviceContact, IDeviceEndpoint, DeviceEndpoint, IDeviceStatePublish, DeviceStatePublish, IDeviceTarget, User, IUser } from "./Device";
 
@@ -115,6 +115,19 @@ export default class DevicesRepository {
         return (await HttpService.getAsync<SignalDeviceStateHistoryDto>('/devices/state-history', { ...target, duration })).values;
     }
 
+    static async getDeviceByIdentifierAsync(identifier: string): Promise<IDeviceModel | undefined> {
+        await DevicesRepository._cacheDevicesAsync();
+        if (typeof DevicesRepository.devicesCacheKeyed !== 'undefined') {
+            const matchedDevices = DevicesRepository.devicesCache?.filter(d => d.identifier === identifier);
+            if (typeof matchedDevices === "undefined" ||
+                matchedDevices.length <= 0 ||
+                typeof matchedDevices[0] === 'undefined')
+                return undefined;
+
+            return matchedDevices[0];
+        }
+    }
+
     static async getDeviceAsync(deviceId: string): Promise<IDeviceModel | undefined> {
         await DevicesRepository._cacheDevicesAsync();
         if (typeof DevicesRepository.devicesCacheKeyed !== 'undefined') {
@@ -125,7 +138,12 @@ export default class DevicesRepository {
         return undefined;
     }
 
-    static async _cacheDevicesAsync() {
+    static async getDevicesAsync(): Promise<IDeviceModel[]> {
+        await DevicesRepository._cacheDevicesAsync();
+        return DevicesRepository.devicesCache ?? [];
+    }
+
+    private static async _cacheDevicesAsync() {
         // TODO: Invalidate cache after some period        
         if (!DevicesRepository.isLoading &&
             !DevicesRepository.devicesCache) {
@@ -145,10 +163,5 @@ export default class DevicesRepository {
         while (DevicesRepository.isLoading) {
             await new Promise(r => setTimeout(r, 10));
         }
-    }
-
-    static async getDevicesAsync(): Promise<IDeviceModel[]> {
-        await DevicesRepository._cacheDevicesAsync();
-        return DevicesRepository.devicesCache ?? [];
     }
 };

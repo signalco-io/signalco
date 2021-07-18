@@ -65,6 +65,20 @@ const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidge
             return <WidgetPartInlineLabel config={inlineLabelConfig} />
         case "button":
             var buttonConfig = part.config as IWidgetPartButtonConfig;
+            if (buttonConfig.stateSource != undefined) {
+                buttonConfig.state = new Promise(async resolve => {
+                    if (buttonConfig.stateSource != undefined) {
+                        const device = await DevicesRepository.getDeviceAsync(buttonConfig.stateSource.deviceId)
+                        const state = device?.getState(buttonConfig.stateSource);
+
+                        resolve(state);
+                    } else {
+                        console.debug("Failed to resolve button state because stateSource is not defined.");
+                        resolve(null);
+                    }
+                });
+            }
+
             if (buttonConfig.actionSource != undefined) {
                 buttonConfig.action = async () => {
                     // Wrap in array if single object
@@ -84,9 +98,10 @@ const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidge
                             return;
                         }
 
+                        const device = await DevicesRepository.getDeviceAsync(action.deviceId)
+
                         // Retrieve current boolean state
                         let newState = null;
-                        const device = await DevicesRepository.getDeviceAsync(action.deviceId)
                         if (typeof action.valueSerialized === 'undefined') {
                             const currentState = device?.getState(action);
                             if (typeof currentState === 'undefined') {

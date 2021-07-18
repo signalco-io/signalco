@@ -1,6 +1,7 @@
 import { Box, Grid, IconButton } from "@material-ui/core";
-import React from "react";
-import { IDeviceTargetWithValueFallback } from "../../../src/devices/Device";
+import { observer } from "mobx-react-lite";
+import React, { useEffect, useState } from "react";
+import { IDeviceContactState, IDeviceTarget, IDeviceTargetWithValueFallback } from "../../../src/devices/Device";
 import IconResolver, { availableIcons } from '../../icons/IconResolver';
 
 export interface IWidgetPartButtonConfig {
@@ -8,15 +9,25 @@ export interface IWidgetPartButtonConfig {
     label: string,
     small?: boolean,
     actionSource: IDeviceTargetWithValueFallback,
-    action: () => Promise<void>
+    action: () => Promise<void>,
+    stateSource?: IDeviceTarget
+    state?: Promise<IDeviceContactState | undefined | null>
 }
 
 const WidgetPartButton = ({ config }: { config: IWidgetPartButtonConfig }) => {
+    const [buttonState, setButtonState] = useState<IDeviceContactState | null | undefined>(null);
+
     const Icon = IconResolver(config.icon);
 
     const handleClick = async () => {
         await config.action();
     };
+
+    useEffect(() => {
+        if (config.state != undefined) {
+            Promise.resolve(config.state).then((val) => setButtonState(val));
+        }
+    }, [config.state]);
 
     return (
         <Box px={1.5} sx={{ height: '100%' }}>
@@ -26,6 +37,7 @@ const WidgetPartButton = ({ config }: { config: IWidgetPartButtonConfig }) => {
                     size={config.small ? "small" : "medium"}
                     aria-label={config.label}
                     title={config.label}
+                    color={buttonState?.valueSerialized === 'true' ? 'warning' : 'default'}
                     onClick={handleClick}>
                     <Icon fontSize={config.small ? "small" : "medium"} />
                 </IconButton>
@@ -34,4 +46,4 @@ const WidgetPartButton = ({ config }: { config: IWidgetPartButtonConfig }) => {
     );
 };
 
-export default WidgetPartButton;
+export default observer(WidgetPartButton);

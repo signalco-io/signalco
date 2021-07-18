@@ -108,9 +108,14 @@ const DisplayDeviceTarget = observer((props: { target: IDeviceStateTarget, onCha
         (async () => {
             try {
                 setIsLoading(true);
-                const devices = await DevicesRepository.getDevicesAsync();
-                const device = devices.filter(d => d.identifier === props.target.Identifier)[0];
-                setDevice(device);
+                if (props.target.Identifier) {
+                    const device = await DevicesRepository.getDeviceByIdentifierAsync(props.target.Identifier);
+                    if (device) {
+                        setDevice(device);
+                    }
+                } else {
+                    console.debug("No device to load. Target identifier: ", props.target.Identifier);
+                }
             }
             catch (err) {
                 console.warn("Failed to load device target", props.target);
@@ -119,7 +124,7 @@ const DisplayDeviceTarget = observer((props: { target: IDeviceStateTarget, onCha
                 setIsLoading(false);
             }
         })();
-    }, [props.target.Identifier]);
+    }, [props.target, props.target.Identifier]);
 
     const DeviceSelection = ({ onSelected }: { onSelected: (device: IDeviceModel | undefined) => void }) => {
         const [devices, setDevices] = useState<IDeviceModel[] | undefined>();
@@ -440,24 +445,24 @@ const ProcessDetails = () => {
         conducts: IConduct[]
     } | undefined>(undefined);
 
-    const loadDeviceAsync = async () => {
-        try {
-            if (typeof id !== "object" &&
-                typeof id !== 'undefined') {
-                const loadedProcess = await ProcessesRepository.getProcessAsync(id);
-                setProcess(loadedProcess);
-                if (loadedProcess) {
-                    setProcessConfig(parseProcessConfiguration(loadedProcess.configurationSerialized));
-                }
-            }
-        } catch (err) {
-            setError(err.toString());
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
     useEffect(() => {
+        const loadDeviceAsync = async () => {
+            try {
+                if (typeof id !== "object" &&
+                    typeof id !== 'undefined') {
+                    const loadedProcess = await ProcessesRepository.getProcessAsync(id);
+                    setProcess(loadedProcess);
+                    if (loadedProcess) {
+                        setProcessConfig(parseProcessConfiguration(loadedProcess.configurationSerialized));
+                    }
+                }
+            } catch (err) {
+                setError(err.toString());
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
         loadDeviceAsync();
     }, [id]);
 

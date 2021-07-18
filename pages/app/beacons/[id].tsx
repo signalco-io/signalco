@@ -13,21 +13,21 @@ const BeaconDetails = () => {
     const [error, setError] = useState<string | undefined>();
     const [beacon, setBeacon] = useState<IBeaconModel | undefined>();
 
-    const loadBeaconAsync = async () => {
-        try {
-            if (typeof id !== "object" &&
-                typeof id !== 'undefined') {
-                const loadedBeacon = await BeaconsRepository.getBeaconAsync(id);
-                setBeacon(loadedBeacon);
-            }
-        } catch (err) {
-            setError(err.toString());
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
     useEffect(() => {
+        const loadBeaconAsync = async () => {
+            try {
+                if (typeof id !== "object" &&
+                    typeof id !== 'undefined') {
+                    const loadedBeacon = await BeaconsRepository.getBeaconAsync(id);
+                    setBeacon(loadedBeacon);
+                }
+            } catch (err) {
+                setError(err.toString());
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
         loadBeaconAsync();
     }, [id]);
 

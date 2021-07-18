@@ -2,7 +2,6 @@ import { Box, LinearProgress, Paper, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Area, AreaChart, XAxis, YAxis, Tooltip } from "recharts";
 import { IDeviceTarget } from "../../../src/devices/Device";
-import { IHistoricalValue } from "../Device";
 import { rowHeight } from "./Shared";
 import { scaleTime, timeHour } from 'd3';
 import ReactTimeago from "react-timeago";
@@ -14,6 +13,11 @@ export interface IWidgetPartGraphConfig {
     valueSource: IDeviceTarget,
     duration?: string,
     units?: string
+}
+
+export interface IHistoricalValue {
+    timeStamp: Date;
+    valueSerialized?: any;
 }
 
 const useGraph = (value: () => Promise<IHistoricalValue[]>, duration?: string) => {
@@ -38,28 +42,28 @@ const useGraph = (value: () => Promise<IHistoricalValue[]>, duration?: string) =
     const past = new Date();
     past.setTime(now.getTime() - durationMs);
     const domainGraph = scaleTime().domain([past, now]);
-    const ticksHours = timeHour.every(1);
-    const ticks = ticksHours && domainGraph.ticks(ticksHours).map(i => i.toString());
-
-    const loadData = async () => {
-        try {
-            const data = await value();
-
-            var mappedData = data.map(i => ({
-                timeStamp: domainGraph(new Date(i.timeStamp).getTime()),
-                value: Number.parseFloat(i.valueSerialized)
-            }));
-
-            setData(mappedData);
-        } catch (err) {
-            // TODO: Show error message
-            console.warn('Failed to load history data', err);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    const ticksHours = timeHour.every(1)!;
+    const ticks = domainGraph.ticks(ticksHours).map(i => i.toString());
 
     useEffect(() => {
+        const loadData = async () => {
+            try {
+                const data = await value();
+
+                var mappedData = data.map(i => ({
+                    timeStamp: domainGraph(new Date(i.timeStamp).getTime()),
+                    value: Number.parseFloat(i.valueSerialized)
+                }));
+
+                setData(mappedData);
+            } catch (err) {
+                // TODO: Show error message
+                console.warn('Failed to load history data', err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
         loadData();
     }, []);
 

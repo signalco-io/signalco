@@ -34,14 +34,15 @@ const Layout = (props: { children: React.ReactNode }) => {
     }
 
     setPageLoading(false);
-  }, [isLoading, isAuthenticated])
+  }, [loginWithRedirect, isLoading, isAuthenticated])
 
   // Initiate SignalR communication
   useEffect(() => {
     if (isPageLoading || isLoading) return;
 
     const createHubConnection = async () => {
-      if (typeof devicesHub !== undefined) return;
+      if (devicesHub != null) return;
+      console.debug("Connecting to SignalR...");
 
       const hub = new HubConnectionBuilder()
         .withUrl(HttpService.getApiUrl('/signalr/devices'), {
@@ -67,7 +68,6 @@ const Layout = (props: { children: React.ReactNode }) => {
 
           const device = await DevicesRepository.getDeviceAsync(state.DeviceId);
           if (typeof device !== 'undefined') {
-            console.debug("SignalR - device state updated", device.id, device.identifier, device.alias, state.ChannelName, state.ContactName, state.ValueSerialized, state.TimeStamp);
             device.updateState(
               state.ChannelName,
               state.ContactName,
@@ -77,14 +77,14 @@ const Layout = (props: { children: React.ReactNode }) => {
           }
         });
       } catch (err) {
-        console.log(err)
+        console.log('Failed to start SignalR hub connection', err);
       }
 
       setDevicesHub(hub);
     }
 
     createHubConnection();
-  }, [isPageLoading])
+  }, [isLoading, devicesHub, isPageLoading])
 
   if (pageError) {
     return <Alert color="error" variant="filled">{error}</Alert>
