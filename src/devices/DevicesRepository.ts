@@ -154,7 +154,7 @@ export default class DevicesRepository {
                 if (DevicesRepository.devicesCacheKeyed)
                     DevicesRepository.devicesCacheKeyed[device.id] = device;
             });
-            DevicesRepository.devicesCache.sort((a, b) => a.alias < b.alias ? -1 : (a.alias > b.alias ? 1 : 0));
+            DevicesRepository.devicesCache.sort((a, b) => a.alias.toLowerCase() < b.alias.toLowerCase() ? -1 : (a.alias.toLowerCase() > b.alias.toLowerCase() ? 1 : 0));
 
             DevicesRepository.isLoading = false;
         }

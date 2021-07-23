@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Grid, Menu, MenuItem, Skeleton, Typography } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Grid, Menu, MenuItem, Skeleton, Stack, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import AppLayout from "../../../components/AppLayout";
@@ -21,6 +21,18 @@ interface IDeviceStateTarget extends IDeviceContactTarget {
     Identifier: string | undefined;
 }
 
+class DeviceStateTarget implements IDeviceStateTarget {
+    Identifier: string | undefined;
+    Channel: string | undefined;
+    Contact: string | undefined;
+
+    constructor(identifier?: string, channel?: string, contact?: string) {
+        this.Identifier = identifier;
+        this.Channel = channel;
+        this.Contact = contact;
+    }
+}
+
 interface IDeviceStateValue {
     Value?: any
 }
@@ -35,6 +47,12 @@ const isIConditionDeviceStateTarget = (arg: any): arg is IConditionDeviceStateTa
 const isIDeviceStateTarget = (arg: any): arg is IDeviceStateTarget => arg?.Identifier !== undefined && typeof arg?.Contact !== 'undefined' && typeof arg?.Channel !== 'undefined';
 
 interface IDeviceStateTrigger extends IDeviceStateTarget { }
+
+class DeviceStateTrigger implements IDeviceStateTrigger {
+    Identifier: string | undefined;
+    Channel: string | undefined;
+    Contact: string | undefined;
+}
 
 interface IConditionDeviceStateTarget {
     Target: IDeviceStateTarget;
@@ -52,10 +70,27 @@ interface ICondition {
     Operations: Array<IConditionValueComparison | ICondition>
 }
 
+class Condition implements ICondition {
+    Operation?: string | undefined;
+    Operations: (IConditionValueComparison | ICondition)[] = [];
+}
+
 const isIConditionValueComparison = (arg: any): arg is IConditionValueComparison => arg.Left !== undefined && arg.Right !== undefined;
 const isICondition = (arg: any): arg is ICondition => arg.Operations !== undefined;
 
 interface IConduct extends IDeviceTargetState {
+}
+
+class Conduct implements IConduct {
+    Target: IDeviceStateTarget;
+    Value: any;
+
+    constructor(target?: IDeviceStateTarget, value?: any) {
+        this.Target = target || new DeviceStateTarget();
+        this.Value = value;
+
+        makeAutoObservable(this);
+    }
 }
 
 function parseTrigger(trigger: any): IDeviceStateTrigger | undefined {
@@ -90,9 +125,9 @@ function parseProcessConfiguration(configJson: string | undefined) {
         : new Array<IConduct>();
 
     const configMapped = makeAutoObservable({
-        triggers: triggers.filter(t => typeof t !== undefined),
-        condition: condition,
-        conducts: conducts.filter(c => typeof c !== undefined)
+        Triggers: triggers.filter(t => typeof t !== undefined),
+        Condition: condition,
+        Conducts: conducts.filter(c => typeof c !== undefined)
     });
 
     return configMapped;
@@ -378,7 +413,7 @@ const DisplayItemPlaceholder = () => (
     </Grid>
 );
 
-const DisplayCondition = (props: { condition: ICondition, onChanged: (updated: ICondition) => void }) => (
+const DisplayCondition = observer((props: { condition: ICondition, onChanged: (updated: ICondition) => void }) => (
     <Grid container>
         {props.condition.Operation &&
             <Grid item>
@@ -387,7 +422,7 @@ const DisplayCondition = (props: { condition: ICondition, onChanged: (updated: I
         }
         {props.condition.Operations.map((op, i) => {
             if (isICondition(op))
-                return <DisplayCondition condition={op} onChanged={(updated) => {
+                return <DisplayCondition key={i} condition={op} onChanged={(updated) => {
                     const updatedOperations = [...props.condition.Operations];
                     updatedOperations[i] = updated;
                     props.onChanged({
@@ -396,7 +431,7 @@ const DisplayCondition = (props: { condition: ICondition, onChanged: (updated: I
                     })
                 }} />
             else if (isIConditionValueComparison(op))
-                return <DisplayConditionValueComparison comparison={op as IConditionValueComparison} onChanged={(updated) => {
+                return <DisplayConditionValueComparison key={i} comparison={op as IConditionValueComparison} onChanged={(updated) => {
                     const updatedOperations = [...props.condition.Operations];
                     updatedOperations[i] = updated;
                     props.onChanged({
@@ -407,7 +442,7 @@ const DisplayCondition = (props: { condition: ICondition, onChanged: (updated: I
             else return (<span>Unknown</span>);
         })}
     </Grid>
-);
+));
 
 const DisplayDeviceStateValue = observer((props: { target: IDeviceStateTarget, value: any | undefined, onChanged: (updated: IDeviceTargetState) => void }) => (
     <Grid container alignItems="center" spacing={1}>
@@ -440,9 +475,9 @@ const ProcessDetails = () => {
     const [error, setError] = useState();
     const [process, setProcess] = useState<IProcessModel | undefined>();
     const [processConfig, setProcessConfig] = useState<{
-        triggers: IDeviceStateTrigger[],
-        condition: ICondition | undefined,
-        conducts: IConduct[]
+        Triggers: IDeviceStateTrigger[],
+        Condition: ICondition | undefined,
+        Conducts: IConduct[]
     } | undefined>(undefined);
 
     useEffect(() => {
@@ -467,13 +502,20 @@ const ProcessDetails = () => {
     }, [id]);
 
     const persistProcessAsync = () => {
-        console.log("Persist TBD");
+        if (process == null) {
+            console.error("Can't persist null process.");
+            return;
+        }
+
+        const configSerialized = JSON.stringify(processConfig);
+
+        ProcessesRepository.saveProcessConfigurationAsync(process?.id, configSerialized);
     };
 
     const handleTriggerChange = (updated: IDeviceStateTrigger, index: number) => {
         // TODO: Use action to change state
         if (processConfig)
-            processConfig.triggers[index] = updated;
+            processConfig.Triggers[index] = updated;
 
         persistProcessAsync();
     }
@@ -482,18 +524,40 @@ const ProcessDetails = () => {
         // TODO: Use action to change state
         console.log(updated);
         if (processConfig)
-            processConfig.condition = updated;
+            processConfig.Condition = updated;
 
         persistProcessAsync();
     };
 
     const handleValueChanged = (updated: IDeviceTargetState, index: number) => {
         // TODO: Use action to change state
-        if (processConfig)
-            processConfig.conducts[index] = updated;
+        if (processConfig) {
+            processConfig.Conducts[index].Value = updated.Value;
+            processConfig.Conducts[index].Target.Channel = updated.Target.Channel;
+            processConfig.Conducts[index].Target.Contact = updated.Target.Contact;
+            processConfig.Conducts[index].Target.Identifier = updated.Target.Identifier;
+        }
 
         persistProcessAsync();
     };
+
+    const handleAddConduct = () => {
+        if (processConfig)
+            processConfig.Conducts.push(new Conduct());
+    };
+
+    const handleAddTrigger = () => {
+        if (processConfig)
+            processConfig.Triggers.push(new DeviceStateTrigger());
+    }
+
+    const handleAddCondition = () => {
+        if (processConfig) {
+            const condition = processConfig.Condition;
+            if (condition)
+                condition.Operations.push(new Condition());
+        }
+    }
 
     return (
         <>
@@ -517,11 +581,14 @@ const ProcessDetails = () => {
                                         <Typography>Triggers</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        {isLoading && <DisplayItemPlaceholder />}
-                                        {!isLoading &&
-                                            (processConfig?.triggers?.length
-                                                ? processConfig.triggers.map((t, i) => <DisplayDeviceTarget key={`trigger${i}`} target={t} onChanged={(updated) => handleTriggerChange(updated, i)} />)
-                                                : <NoDataPlaceholder content="No triggers" />)}
+                                        <Stack spacing={1}>
+                                            {isLoading && <DisplayItemPlaceholder />}
+                                            {!isLoading &&
+                                                (processConfig?.Triggers?.length
+                                                    ? processConfig.Triggers.map((t, i) => <DisplayDeviceTarget key={`trigger${i}`} target={t} onChanged={(updated) => handleTriggerChange(updated, i)} />)
+                                                    : <NoDataPlaceholder content="No triggers" />)}
+                                            <Button fullWidth startIcon={<AddSharpIcon />} disabled={isLoading} onClick={handleAddTrigger}>Add trigger</Button>
+                                        </Stack>
                                     </AccordionDetails>
                                 </Accordion>
                                 <Accordion defaultExpanded>
@@ -533,11 +600,14 @@ const ProcessDetails = () => {
                                         <Typography>Conditions</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        {isLoading && <><DisplayItemPlaceholder /><DisplayItemPlaceholder /><DisplayItemPlaceholder /></>}
-                                        {!isLoading &&
-                                            (typeof processConfig?.condition !== 'undefined'
-                                                ? <DisplayCondition condition={processConfig.condition} onChanged={handleConditionChange} />
-                                                : <NoDataPlaceholder content="No condition" />)}
+                                        <Stack spacing={1}>
+                                            {isLoading && <><DisplayItemPlaceholder /><DisplayItemPlaceholder /><DisplayItemPlaceholder /></>}
+                                            {!isLoading &&
+                                                (typeof processConfig?.Condition !== 'undefined'
+                                                    ? <DisplayCondition condition={processConfig.Condition} onChanged={handleConditionChange} />
+                                                    : <NoDataPlaceholder content="No condition" />)}
+                                            <Button fullWidth startIcon={<AddSharpIcon />} disabled={isLoading} onClick={handleAddCondition}>Add condition</Button>
+                                        </Stack>
                                     </AccordionDetails>
                                 </Accordion>
                                 <Accordion defaultExpanded>
@@ -549,18 +619,14 @@ const ProcessDetails = () => {
                                         <Typography>Conducts</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        {isLoading && <><DisplayItemPlaceholder /><DisplayItemPlaceholder /></>}
-                                        <Grid container spacing={1} direction="column">
-                                            <Grid item>
-                                                {!isLoading &&
-                                                    (processConfig?.conducts?.length
-                                                        ? processConfig.conducts.map((c, i) => <DisplayDeviceStateValue key={`value${i}`} target={c.Target} value={c.Value} onChanged={(u) => handleValueChanged(u, i)} />)
-                                                        : <NoDataPlaceholder content="No conducts" />)}
-                                            </Grid>
-                                            <Grid item>
-                                                <Button fullWidth startIcon={<AddSharpIcon />} disabled={isLoading}>Add conduct</Button>
-                                            </Grid>
-                                        </Grid>
+                                        <Stack spacing={1}>
+                                            {isLoading && <><DisplayItemPlaceholder /><DisplayItemPlaceholder /></>}
+                                            {!isLoading &&
+                                                (processConfig?.Conducts?.length
+                                                    ? processConfig.Conducts.map((c, i) => <DisplayDeviceStateValue key={`value${i}`} target={c.Target} value={c.Value} onChanged={(u) => handleValueChanged(u, i)} />)
+                                                    : <NoDataPlaceholder content="No conducts" />)}
+                                            <Button fullWidth startIcon={<AddSharpIcon />} disabled={isLoading} onClick={handleAddConduct}>Add conduct</Button>
+                                        </Stack>
                                     </AccordionDetails>
                                 </Accordion>
                             </Grid>

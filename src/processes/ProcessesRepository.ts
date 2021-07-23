@@ -1,3 +1,4 @@
+import { makeAutoObservable } from "mobx";
 import HttpService from "../services/HttpService";
 
 export interface IProcessModel {
@@ -6,6 +7,8 @@ export interface IProcessModel {
     alias: string;
     id: string;
     type: string;
+    
+    setConfiguration(configurationSerialized: string) : void;
 }
 
 class ProcessModel implements IProcessModel {
@@ -20,6 +23,12 @@ class ProcessModel implements IProcessModel {
         this.id = id;
         this.alias = alias;
         this.isDisabled = isDisabled;
+        this.configurationSerialized = configurationSerialized;
+
+        makeAutoObservable(this);
+    }
+
+    setConfiguration(configurationSerialized: string) {
         this.configurationSerialized = configurationSerialized;
     }
 }
@@ -41,9 +50,21 @@ class SignalProcessDto {
 }
 
 export default class ProcessesRepository {
-    static processesCache?: IProcessModel[];
-    static processesCacheKeyed?: { [id: string]: IProcessModel };
-    static isLoading: boolean;
+    private static processesCache?: IProcessModel[];
+    private static processesCacheKeyed?: { [id: string]: IProcessModel };
+    private static isLoading: boolean;
+
+    static async saveProcessConfigurationAsync(id: string, configurationSerialized: string) {
+        const process = await this.getProcessAsync(id);
+        if (process == null)
+            throw new Error("Invalid process identifier.");
+
+        process.setConfiguration(configurationSerialized);
+
+        const response = await HttpService.requestAsync("/processes/set", "post", process);
+        if (response.id !== id)
+            throw new Error("Not matching identifier received.");
+    }
 
     static async getProcessAsync(id: string): Promise<IProcessModel | undefined> {
         await ProcessesRepository._cacheProcessesAsync();
@@ -60,7 +81,7 @@ export default class ProcessesRepository {
         return ProcessesRepository.processesCache ?? [];
     }
 
-    static async _cacheProcessesAsync() {
+    private static async _cacheProcessesAsync() {
         // TODO: Invalidate cache after some period        
         if (!ProcessesRepository.isLoading &&
             !ProcessesRepository.processesCache) {
@@ -71,7 +92,7 @@ export default class ProcessesRepository {
                 if (ProcessesRepository.processesCacheKeyed)
                     ProcessesRepository.processesCacheKeyed[process.id] = process;
             });
-            ProcessesRepository.processesCache.sort((a, b) => a.alias < b.alias ? -1 : (a.alias > b.alias ? 1 : 0));
+            ProcessesRepository.processesCache.sort((a, b) => a.alias.toLowerCase() < b.alias.toLowerCase() ? -1 : (a.alias.toLowerCase() > b.alias.toLowerCase() ? 1 : 0));
             ProcessesRepository.isLoading = false;
         }
 
