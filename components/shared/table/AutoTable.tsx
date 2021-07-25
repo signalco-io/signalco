@@ -108,7 +108,9 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
             })
         })}
         {(!props.isLoading && !(props.items?.length)) && (
-          <ResultsPlaceholder />
+          <Box p={2}>
+            <ResultsPlaceholder />
+          </Box>
         )}
       </div>
     </div>

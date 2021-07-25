@@ -115,7 +115,7 @@ function parseProcessConfiguration(configJson: string | undefined) {
     const config = JSON.parse(configJson ?? "");
 
     const triggers = typeof config.Triggers !== 'undefined' && Array.isArray(config.Triggers)
-        ? config.Triggers.map((t: any) => parseTrigger(t)) as IDeviceStateTrigger[]
+        ? (config.Triggers.map((t: any) => parseTrigger(t)) as IDeviceStateTrigger[])
         : new Array<IDeviceStateTrigger>();
     const condition = typeof config.Condition !== 'undefined'
         ? parseCondition(config.Condition) as ICondition
@@ -133,7 +133,7 @@ function parseProcessConfiguration(configJson: string | undefined) {
     return configMapped;
 }
 
-const DisplayDeviceTarget = observer((props: { target: IDeviceStateTarget, onChanged: (updated: IDeviceStateTarget) => void }) => {
+const DisplayDeviceTarget = observer((props: { target?: IDeviceStateTarget, onChanged: (updated: IDeviceStateTarget) => void }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [device, setDevice] = useState<IDeviceModel | undefined>(undefined);
     const [contactMenuAnchorEl, setContactMenuAnchorEl] = useState<null | HTMLElement>(null);
@@ -143,13 +143,13 @@ const DisplayDeviceTarget = observer((props: { target: IDeviceStateTarget, onCha
         (async () => {
             try {
                 setIsLoading(true);
-                if (props.target.Identifier) {
+                if (props.target?.Identifier) {
                     const device = await DevicesRepository.getDeviceByIdentifierAsync(props.target.Identifier);
                     if (device) {
                         setDevice(device);
                     }
                 } else {
-                    console.debug("No device to load. Target identifier: ", props.target.Identifier);
+                    console.debug("No device to load. Target identifier: ", props.target?.Identifier);
                 }
             }
             catch (err) {
@@ -159,7 +159,7 @@ const DisplayDeviceTarget = observer((props: { target: IDeviceStateTarget, onCha
                 setIsLoading(false);
             }
         })();
-    }, [props.target, props.target.Identifier]);
+    }, [props.target, props.target?.Identifier]);
 
     const DeviceSelection = ({ onSelected }: { onSelected: (device: IDeviceModel | undefined) => void }) => {
         const [devices, setDevices] = useState<IDeviceModel[] | undefined>();
@@ -184,12 +184,12 @@ const DisplayDeviceTarget = observer((props: { target: IDeviceStateTarget, onCha
 
         return (
             <>
-                <MenuItem onClick={() => onSelected(undefined)} selected={typeof props.target.Identifier === 'undefined'}>None</MenuItem>
+                <MenuItem onClick={() => onSelected(undefined)} selected={typeof props.target?.Identifier === 'undefined'}>None</MenuItem>
                 {devices.map(d =>
                     <MenuItem
                         key={d.identifier}
                         onClick={() => onSelected(d)}
-                        selected={props.target.Identifier === d.identifier}>
+                        selected={props.target?.Identifier === d.identifier}>
                         {`${d.alias}`}
                     </MenuItem>)}
             </>
@@ -211,12 +211,12 @@ const DisplayDeviceTarget = observer((props: { target: IDeviceStateTarget, onCha
 
         return (
             <>
-                <MenuItem onClick={() => onSelected(undefined)} selected={typeof props.target.Channel === 'undefined' || typeof props.target.Contact === 'undefined'}>None</MenuItem>
+                <MenuItem onClick={() => onSelected(undefined)} selected={typeof props.target?.Channel === 'undefined' || typeof props.target?.Contact === 'undefined'}>None</MenuItem>
                 {items.map(i =>
                     <MenuItem
                         key={`${i.Channel}-${i.Contact}`}
                         onClick={() => onSelected(i)}
-                        selected={props.target.Contact === i.Contact && props.target.Channel === i.Channel}>
+                        selected={props.target?.Contact === i.Contact && props.target?.Channel === i.Channel}>
                         {`${i.Contact} (${i.Channel})`}
                     </MenuItem>)}
             </>
@@ -229,8 +229,8 @@ const DisplayDeviceTarget = observer((props: { target: IDeviceStateTarget, onCha
 
     const handleDevicesSelected = (device: IDeviceModel | undefined) => {
         // Retrieve available contact, set undefined if no matching
-        let channel = props.target.Channel;
-        let contact = props.target.Contact;
+        let channel = props.target?.Channel;
+        let contact = props.target?.Contact;
         if (typeof device?.endpoints.filter(e => e.channel === channel)[0]?.contacts.filter(c => c.name === contact) === 'undefined') {
             channel = undefined;
             contact = undefined;
@@ -254,7 +254,7 @@ const DisplayDeviceTarget = observer((props: { target: IDeviceStateTarget, onCha
 
     const handleContactSelected = (contact: IDeviceContactTarget | undefined) => {
         props.onChanged({
-            Identifier: props.target.Identifier,
+            Identifier: props.target?.Identifier,
             Channel: contact?.Channel,
             Contact: contact?.Contact
         });
@@ -268,44 +268,44 @@ const DisplayDeviceTarget = observer((props: { target: IDeviceStateTarget, onCha
     const ITEM_HEIGHT = 48;
 
     return (
-        <Grid container>
-            <Grid item>
-                <ButtonBase onClick={handleDevicesSelection} aria-controls="devicetarget-devices-select-menu" aria-haspopup="true">
-                    <Chip label={isLoading ? <Skeleton width={160} variant="text" /> : ((device?.alias ?? props.target.Identifier) ?? "None")} title={props.target.Identifier} />
-                </ButtonBase>
-                {Boolean(devicesMenuAnchorEl) &&
-                    <Menu
-                        id="devicetarget-devices-select-menu"
-                        open={Boolean(devicesMenuAnchorEl)}
-                        anchorEl={devicesMenuAnchorEl}
-                        keepMounted
-                        onClose={handleDevicesSelectionClosed}
-                        PaperProps={{
-                            style: {
-                                maxHeight: ITEM_HEIGHT * 6.5,
-                                width: '30ch',
-                            },
-                        }}>
-                        <DeviceSelection onSelected={handleDevicesSelected} />
-                    </Menu>}
-            </Grid>
-            {props.target.Identifier !== undefined && (
-                <Grid item>
+        <Stack direction="row" spacing={1}>
+            <ButtonBase onClick={handleDevicesSelection} aria-controls="devicetarget-devices-select-menu" aria-haspopup="true">
+                <Chip label={isLoading ? <Skeleton width={160} variant="text" /> : ((device?.alias ?? props.target?.Identifier) ?? "None")} title={props.target?.Identifier} />
+            </ButtonBase>
+            {Boolean(devicesMenuAnchorEl) &&
+                <Menu
+                    id="devicetarget-devices-select-menu"
+                    open={Boolean(devicesMenuAnchorEl)}
+                    anchorEl={devicesMenuAnchorEl}
+                    keepMounted
+                    onClose={handleDevicesSelectionClosed}
+                    PaperProps={{
+                        style: {
+                            maxHeight: ITEM_HEIGHT * 6.5,
+                            width: '30ch',
+                        },
+                    }}>
+                    <DeviceSelection onSelected={handleDevicesSelected} />
+                </Menu>}
+            {props.target?.Identifier !== undefined && (
+                <>
                     <ButtonBase onClick={handleContactSelection} aria-controls="devicetarget-contact-select-menu" aria-haspopup="true">
                         <Chip label={props.target.Contact ?? "None"} title={`${props.target.Channel} | ${props.target.Contact}`} />
                     </ButtonBase>
-                    {Boolean(contactMenuAnchorEl) &&
-                        <Menu
-                            id="devicetarget-contact-select-menu"
-                            open={Boolean(contactMenuAnchorEl)}
-                            anchorEl={contactMenuAnchorEl}
-                            keepMounted
-                            onClose={handleContactSelectionClosed}>
-                            <ContactSelection onSelected={handleContactSelected} />
-                        </Menu>}
-                </Grid>
+                    <>
+                        {Boolean(contactMenuAnchorEl) &&
+                            <Menu
+                                id="devicetarget-contact-select-menu"
+                                open={Boolean(contactMenuAnchorEl)}
+                                anchorEl={contactMenuAnchorEl}
+                                keepMounted
+                                onClose={handleContactSelectionClosed}>
+                                <ContactSelection onSelected={handleContactSelected} />
+                            </Menu>}
+                    </>
+                </>
             )}
-        </Grid>
+        </Stack>
     );
 });
 
@@ -349,6 +349,20 @@ const DisplayValue = observer((props: { value: any | undefined, onChanged: (valu
     );
 });
 
+const DisplayConditionComparisonValueOperation = (props: { valueOperation?: string }) => {
+    let sign = "=";
+    switch (props.valueOperation) {
+        case "EqualOrNull": sign = "?="; break;
+        case "GreaterThan": sign = ">"; break;
+        case "LessThan": sign = "<"; break;
+        default: break;
+    }
+
+    return (
+        <div>{sign}</div>
+    );
+};
+
 const DisplayConditionValueComparison = (props: { comparison: IConditionValueComparison, onChanged: (updated: IConditionValueComparison) => void }) => {
     const handleChanged = (side: "left" | "right", updated: IDeviceStateTarget | any | undefined) => {
         const stateValue = isIDeviceStateValue(updated) ? updated : undefined;
@@ -366,33 +380,25 @@ const DisplayConditionValueComparison = (props: { comparison: IConditionValueCom
     };
 
     return (
-        <Grid container alignItems="center" spacing={1}>
-            {typeof props.comparison.Operation !== 'undefined' &&
-                <Grid item>
-                    <div>{props.comparison.Operation}</div>
-                </Grid>}
-            <Grid item>
-                {
-                    isIDeviceStateValue(props.comparison.Left)
-                        ? <DisplayValue value={props.comparison.Left.Value} onChanged={(updated) => handleChanged("left", updated)} />
-                        : (isIConditionDeviceStateTarget(props.comparison.Left)
-                            ? <DisplayDeviceTarget target={props.comparison.Left.Target} onChanged={(updated) => handleChanged("left", updated)} />
-                            : <span>Unknown</span>)
-                }
-            </Grid>
-            <Grid item>
-                <div>{props.comparison.ValueOperation?.toString() ?? "equals"}</div>
-            </Grid>
-            <Grid item>
-                {
-                    isIDeviceStateValue(props.comparison.Right)
-                        ? <DisplayValue value={props.comparison.Right.Value} onChanged={(updated) => handleChanged("right", updated)} />
-                        : (isIConditionDeviceStateTarget(props.comparison.Right)
-                            ? <DisplayDeviceTarget target={props.comparison.Right.Target} onChanged={(updated) => handleChanged("right", updated)} />
-                            : <span>Unknown</span>)
-                }
-            </Grid>
-        </Grid>
+        <Stack alignItems="center" spacing={1} direction="row">
+            {props.comparison.Operation &&
+                <div>{props.comparison.Operation}</div>}
+            {
+                isIDeviceStateValue(props.comparison.Left)
+                    ? <DisplayValue value={props.comparison.Left.Value} onChanged={(updated) => handleChanged("left", updated)} />
+                    : (isIConditionDeviceStateTarget(props.comparison.Left)
+                        ? <DisplayDeviceTarget target={props.comparison.Left.Target} onChanged={(updated) => handleChanged("left", updated)} />
+                        : <span>Unknown</span>)
+            }
+            <DisplayConditionComparisonValueOperation valueOperation={props.comparison.ValueOperation} />
+            {
+                isIDeviceStateValue(props.comparison.Right)
+                    ? <DisplayValue value={props.comparison.Right.Value} onChanged={(updated) => handleChanged("right", updated)} />
+                    : (isIConditionDeviceStateTarget(props.comparison.Right)
+                        ? <DisplayDeviceTarget target={props.comparison.Right.Target} onChanged={(updated) => handleChanged("right", updated)} />
+                        : <span>Unknown</span>)
+            }
+        </Stack>
     );
 }
 
@@ -413,36 +419,45 @@ const DisplayItemPlaceholder = () => (
     </Grid>
 );
 
-const DisplayCondition = observer((props: { condition: ICondition, onChanged: (updated: ICondition) => void }) => (
-    <Grid container>
-        {props.condition.Operation &&
-            <Grid item>
-                {props.condition.Operation?.toString()}
-            </Grid>
-        }
-        {props.condition.Operations.map((op, i) => {
-            if (isICondition(op))
-                return <DisplayCondition key={i} condition={op} onChanged={(updated) => {
-                    const updatedOperations = [...props.condition.Operations];
-                    updatedOperations[i] = updated;
-                    props.onChanged({
-                        Operation: props.condition.Operation,
-                        Operations: updatedOperations
-                    })
-                }} />
-            else if (isIConditionValueComparison(op))
-                return <DisplayConditionValueComparison key={i} comparison={op as IConditionValueComparison} onChanged={(updated) => {
-                    const updatedOperations = [...props.condition.Operations];
-                    updatedOperations[i] = updated;
-                    props.onChanged({
-                        Operation: props.condition.Operation,
-                        Operations: updatedOperations
-                    })
-                }} />
-            else return (<span>Unknown</span>);
-        })}
-    </Grid>
-));
+const DisplayCondition = observer((props: { condition: ICondition, onChanged: (updated: ICondition) => void, isTopLevel: boolean }) => {
+    const handleConditionOperationSelection = () => {
+
+    };
+
+    return (
+        <Stack direction="row">
+            {!props.isTopLevel && (
+                <ButtonBase onClick={handleConditionOperationSelection} aria-controls="condition-operation-select-menu" aria-haspopup="true">
+                    <Chip label={props.condition.Operation?.toString() ?? "None"} title={`${props.condition.Operation}`} />
+                </ButtonBase>
+            )}
+            <Stack>
+                {props.condition.Operations.map((op, i) => {
+                    if (isICondition(op))
+                        return <DisplayCondition key={i} condition={op} isTopLevel={false} onChanged={(updated) => {
+                            const updatedOperations = [...props.condition.Operations];
+                            updatedOperations[i] = updated;
+                            props.onChanged({
+                                Operation: props.condition.Operation,
+                                Operations: updatedOperations
+                            });
+                        }} />;
+                    else if (isIConditionValueComparison(op))
+                        return <DisplayConditionValueComparison key={i} comparison={op as IConditionValueComparison} onChanged={(updated) => {
+                            const updatedOperations = [...props.condition.Operations];
+                            updatedOperations[i] = updated;
+                            props.onChanged({
+                                Operation: props.condition.Operation,
+                                Operations: updatedOperations
+                            });
+                        }} />;
+                    else
+                        return (<span>Unknown</span>);
+                })}
+            </Stack>
+        </Stack>
+    );
+});
 
 const DisplayDeviceStateValue = observer((props: { target: IDeviceStateTarget, value: any | undefined, onChanged: (updated: IDeviceTargetState) => void }) => (
     <Grid container alignItems="center" spacing={1}>
@@ -604,7 +619,7 @@ const ProcessDetails = () => {
                                             {isLoading && <><DisplayItemPlaceholder /><DisplayItemPlaceholder /><DisplayItemPlaceholder /></>}
                                             {!isLoading &&
                                                 (typeof processConfig?.Condition !== 'undefined'
-                                                    ? <DisplayCondition condition={processConfig.Condition} onChanged={handleConditionChange} />
+                                                    ? <DisplayCondition isTopLevel condition={processConfig.Condition} onChanged={handleConditionChange} />
                                                     : <NoDataPlaceholder content="No condition" />)}
                                             <Button fullWidth startIcon={<AddSharpIcon />} disabled={isLoading} onClick={handleAddCondition}>Add condition</Button>
                                         </Stack>

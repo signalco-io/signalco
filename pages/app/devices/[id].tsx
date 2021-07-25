@@ -1,14 +1,50 @@
-import { Box, Card, CardContent, CardHeader, Grid, IconButton, Slide, Stack, TextField, Typography } from '@material-ui/core';
+import { Box, Button, Card, CardContent, CardHeader, Grid, IconButton, Slide, Stack, Switch, TextField, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
 import AppLayout from "../../../components/AppLayout";
-import AutoTable from '../../../components/shared/table/AutoTable';
-import { IDeviceModel } from '../../../src/devices/Device';
+import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
+import { IDeviceContact, IDeviceContactState, IDeviceModel } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import { observer } from 'mobx-react-lite';
 import { Clear as ClearIcon, Send as SendIcon, Share as ShareIcon } from '@material-ui/icons';
 import HttpService from '../../../src/services/HttpService';
+import ConductsService from '../../../src/conducts/ConductsService';
+
+interface IStateTableItem extends IAutoTableItem {
+    name: string,
+    value?: string,
+    lastUpdate?: string | JSX.Element
+}
+
+interface IActionTableItem extends IAutoTableItem {
+    name: string,
+    action: () => Promise<void>
+}
+
+const DeviceContactAction = observer((props: { deviceId: string, state?: IDeviceContactState, contact: IDeviceContact, channel: string }) => {
+    const handleBooleanClick = async () => {
+        console.log("Do action for ", props.contact, props.state);
+
+        await ConductsService.RequestConductAsync({
+            channelName: props.channel,
+            contactName: props.contact.name,
+            deviceId: props.deviceId
+        }, props.state?.valueSerialized === 'true' ? false : true);
+    };
+
+    const handleActionClick = () => {
+        console.log("Do action for ", props.contact, props.state);
+    };
+
+    if (props.contact.dataType === 'bool') {
+        return <Switch onChange={handleBooleanClick} checked={props.state?.valueSerialized === "true"} color="warning" />
+    } else if (props.contact.dataType === 'action') {
+        return <Button onClick={handleActionClick}>Do</Button>
+    } else {
+        return <Typography color="textSecondary" variant="caption">Action for this contact not supported yet.</Typography>
+    }
+});
 
 const DeviceDetails = () => {
     const router = useRouter();
@@ -16,6 +52,8 @@ const DeviceDetails = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | undefined>();
     const [device, setDevice] = useState<IDeviceModel | undefined>();
+    const [stateTableItems, setStateTableItems] = useState<IStateTableItem[] | undefined>();
+    const [actionTableItems, setActionTableItems] = useState<IActionTableItem[] | undefined>();
 
     useEffect(() => {
         const loadDeviceAsync = async () => {
@@ -27,13 +65,50 @@ const DeviceDetails = () => {
                 }
             } catch (err) {
                 setError(err.toString());
-            } finally {
-                setIsLoading(false);
             }
         };
 
         loadDeviceAsync();
     }, [id]);
+
+    useEffect(() => {
+        try {
+            if (device?.endpoints) {
+                const stateItems: IStateTableItem[] = [];
+                const actionItems: IActionTableItem[] = [];
+                for (const endpoint of device.endpoints) {
+                    // Process state items
+                    Array.prototype.push.apply(stateItems, endpoint.contacts.filter(contact => contact.access & 0x5).map(contact => {
+                        const state = device?.states.find(state => state.channel === endpoint.channel && state.name === contact.name);
+
+                        return {
+                            id: `${endpoint.channel}-${contact.name}`,
+                            name: contact.name,
+                            value: state?.valueSerialized,
+                            lastUpdate: state ? <ReactTimeago date={state.timeStamp} live /> : "Unknown"
+                        };
+                    }));
+
+                    // Process action items
+                    Array.prototype.push.apply(actionItems, endpoint.contacts.filter(contact => contact.access & 0x2).map(contact => {
+                        const state = device?.states.find(state => state.channel === endpoint.channel && state.name === contact.name);
+
+                        return {
+                            id: `${endpoint.channel}-${contact.name}`,
+                            name: contact.name,
+                            action: <DeviceContactAction deviceId={device.id} channel={endpoint.channel} contact={contact} state={state} />
+                        };
+                    }));
+                }
+                setStateTableItems(stateItems);
+                setActionTableItems(actionItems);
+            }
+        } catch (err) {
+            setError(err.toString());
+        } finally {
+            setIsLoading(false);
+        }
+    }, [device]);
 
     const [isShareWithNewOpen, setIsShareWithNewOpen] = useState(false);
     const [shareWithNewEmail, setShareWithNewEmail] = useState('');
@@ -54,16 +129,6 @@ const DeviceDetails = () => {
         setShareWithNewEmail('');
         setIsShareWithNewOpen(false);
     };
-
-    const stateTableItems = device?.states.map(s => {
-        return {
-            id: `${s.channel}-${s.name}`,
-            channel: s.channel,
-            name: s.name,
-            value: s.valueSerialized,
-            lastUpdate: <ReactTimeago date={s.timeStamp} live />
-        }
-    });
 
     return (
         <Box sx={{ px: { sm: 2 }, py: 2 }}>
@@ -94,6 +159,14 @@ const DeviceDetails = () => {
                                 <CardHeader title="States" />
                                 <CardContent style={{ padding: 0 }}>
                                     <AutoTable error={error} isLoading={isLoading} items={stateTableItems} />
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Card>
+                                <CardHeader title="Actions" />
+                                <CardContent style={{ padding: 0 }}>
+                                    <AutoTable error={error} isLoading={isLoading} items={actionTableItems} />
                                 </CardContent>
                             </Card>
                         </Grid>
