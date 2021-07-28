@@ -117,4 +117,4 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
   );
 }
 
-export default AutoTable;
+export default observer(AutoTable);

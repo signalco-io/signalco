@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, CardHeader, Grid, IconButton, Slide, Stack, Switch, TextField, Typography } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardHeader, Grid, IconButton, Paper, Skeleton, Slide, Stack, Switch, TextField, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
@@ -7,9 +7,11 @@ import AutoTable, { IAutoTableItem } from '../../../components/shared/table/Auto
 import { IDeviceContact, IDeviceContactState, IDeviceModel } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import { observer } from 'mobx-react-lite';
-import { Clear as ClearIcon, Send as SendIcon, Share as ShareIcon } from '@material-ui/icons';
+import { Clear as ClearIcon, ExpandMore as ExpandMoreIcon, PlayArrow as PlayArrowIcon, Send as SendIcon, Share as ShareIcon } from '@material-ui/icons';
 import HttpService from '../../../src/services/HttpService';
 import ConductsService from '../../../src/conducts/ConductsService';
+import ResultsPlaceholder from '../../../components/shared/indicators/ResultsPlaceholder';
+import CopyToClipboardInput from '../../../components/shared/form/CopyToClipboardInput';
 
 interface IStateTableItem extends IAutoTableItem {
     name: string,
@@ -17,9 +19,11 @@ interface IStateTableItem extends IAutoTableItem {
     lastUpdate?: string | JSX.Element
 }
 
-interface IActionTableItem extends IAutoTableItem {
+interface IActionTableItem {
     name: string,
-    action: () => Promise<void>
+    contact: IDeviceContact,
+    state?: IDeviceContactState,
+    channel: string
 }
 
 const DeviceContactAction = observer((props: { deviceId: string, state?: IDeviceContactState, contact: IDeviceContact, channel: string }) => {
@@ -40,11 +44,23 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
     if (props.contact.dataType === 'bool') {
         return <Switch onChange={handleBooleanClick} checked={props.state?.valueSerialized === "true"} color="warning" />
     } else if (props.contact.dataType === 'action') {
-        return <Button onClick={handleActionClick}>Do</Button>
+        return <IconButton onClick={handleActionClick}><PlayArrowIcon /></IconButton>
     } else {
         return <Typography color="textSecondary" variant="caption">Action for this contact not supported yet.</Typography>
     }
 });
+
+const ContactStateLastUpdatedDisplay = observer((props: { state?: IDeviceContactState }) => (
+    <>
+        {props.state ? <ReactTimeago date={props.state.timeStamp} live /> : "Unknown"}
+    </>
+));
+
+const ContactStateValueDisplay = observer((props: { state?: IDeviceContactState }) => (
+    <>
+        {props.state?.valueSerialized}
+    </>
+));
 
 const DeviceDetails = () => {
     const router = useRouter();
@@ -84,8 +100,8 @@ const DeviceDetails = () => {
                         return {
                             id: `${endpoint.channel}-${contact.name}`,
                             name: contact.name,
-                            value: state?.valueSerialized,
-                            lastUpdate: state ? <ReactTimeago date={state.timeStamp} live /> : "Unknown"
+                            value: <ContactStateValueDisplay state={state} />,
+                            lastUpdate: <ContactStateLastUpdatedDisplay state={state} />
                         };
                     }));
 
@@ -96,8 +112,10 @@ const DeviceDetails = () => {
                         return {
                             id: `${endpoint.channel}-${contact.name}`,
                             name: contact.name,
-                            action: <DeviceContactAction deviceId={device.id} channel={endpoint.channel} contact={contact} state={state} />
-                        };
+                            contact: contact,
+                            state: state,
+                            channel: endpoint.channel
+                        } as IActionTableItem;
                     }));
                 }
                 setStateTableItems(stateItems);
@@ -135,7 +153,6 @@ const DeviceDetails = () => {
             <Grid container spacing={2} direction="column" wrap="nowrap">
                 <Grid item>
                     <Typography variant="h1">{device?.alias}</Typography>
-                    <Typography variant="subtitle2" style={{ opacity: 0.6 }}>{device?.identifier}</Typography>
                 </Grid>
                 <Grid item>
                     <Grid container spacing={2}>
@@ -143,18 +160,75 @@ const DeviceDetails = () => {
                             <Card>
                                 <CardHeader title="Information" />
                                 <CardContent>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={6}><span>Model</span></Grid>
-                                        <Grid item xs={6}><Typography>{device?.model}</Typography></Grid>
-                                    </Grid>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={6}><span>Manufacturer</span></Grid>
-                                        <Grid item xs={6}><Typography>{device?.manufacturer}</Typography></Grid>
-                                    </Grid>
+                                    <Accordion elevation={3} defaultExpanded>
+                                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                            <Typography>General</Typography>
+                                        </AccordionSummary>
+                                        <AccordionDetails>
+                                            <Stack spacing={1} >
+                                                <Stack direction="row" justifyContent="space-between" spacing={2}>
+                                                    <span>Model</span>
+                                                    <Typography>{device?.model}</Typography>
+                                                </Stack>
+                                                <Stack direction="row" justifyContent="space-between" spacing={2}>
+                                                    <span>Manufacturer</span>
+                                                    <Typography>{device?.manufacturer}</Typography>
+                                                </Stack>
+                                            </Stack>
+                                        </AccordionDetails>
+                                    </Accordion>
+                                    <Accordion elevation={3}>
+                                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                            <Typography>Advanced</Typography>
+                                        </AccordionSummary>
+                                        <AccordionDetails>
+                                            <Grid container spacing={2} alignItems="center">
+                                                <Grid item xs={3}>
+                                                    <span>ID</span>
+                                                </Grid>
+                                                <Grid item xs={9}>
+                                                    <CopyToClipboardInput readOnly fullWidth size="small" value={device?.id} />
+                                                </Grid>
+                                                <Grid item xs={3}>
+                                                    <span>Identifier</span>
+                                                </Grid>
+                                                <Grid item xs={9}>
+                                                    <CopyToClipboardInput readOnly fullWidth size="small" value={device?.identifier} />
+                                                </Grid>
+                                            </Grid>
+                                        </AccordionDetails>
+                                    </Accordion>
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={6} md={4}>
+                            <Card>
+                                <CardHeader title="Actions" />
+                                <CardContent>
+                                    <Stack spacing={1}>
+                                        {typeof actionTableItems === 'undefined' && (
+                                            <Skeleton width="100%" height={90} />
+                                        )}
+                                        {typeof actionTableItems !== 'undefined' && actionTableItems?.length <= 0 && (
+                                            <ResultsPlaceholder />
+                                        )}
+                                        {actionTableItems?.map(item => (
+                                            <Paper elevation={0} key={`action-item-${item.name}`} sx={{ p: 2 }}>
+                                                <Grid container direction="row" alignItems="center" justifyContent="space-between" spacing={2} wrap="nowrap">
+                                                    <Grid item>
+                                                        <Typography>{item.name}</Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        {device && <DeviceContactAction deviceId={device.id} channel={item.channel} contact={item.contact} state={item.state} />}
+                                                    </Grid>
+                                                </Grid>
+                                            </Paper>
+                                        ))}
+                                    </Stack>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={4}>
                             <Card>
                                 <CardHeader title="States" />
                                 <CardContent style={{ padding: 0 }}>
@@ -162,15 +236,7 @@ const DeviceDetails = () => {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <Card>
-                                <CardHeader title="Actions" />
-                                <CardContent style={{ padding: 0 }}>
-                                    <AutoTable error={error} isLoading={isLoading} items={actionTableItems} />
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={6} md={4}>
                             <Card>
                                 <CardHeader
                                     title={`Shared with (${device?.sharedWith?.length || 1})`}
@@ -196,7 +262,7 @@ const DeviceDetails = () => {
                     </Grid>
                 </Grid>
             </Grid>
-        </Box>
+        </Box >
     );
 }
 
