@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardHeader, Grid, IconButton, Paper, Skeleton, Slide, Stack, Switch, TextField, Typography } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardHeader, Grid, IconButton, Paper, Skeleton, Slide, Slider, Stack, Switch, TextField, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
@@ -12,6 +12,10 @@ import HttpService from '../../../src/services/HttpService';
 import ConductsService from '../../../src/conducts/ConductsService';
 import ResultsPlaceholder from '../../../components/shared/indicators/ResultsPlaceholder';
 import CopyToClipboardInput from '../../../components/shared/form/CopyToClipboardInput';
+import throttle from '../../../src/helpers/Throttle';
+import { useMemo } from 'react';
+import { useCallback } from 'react';
+import blendColors from '../../../src/helpers/BlendColors';
 
 interface IStateTableItem extends IAutoTableItem {
     name: string,
@@ -27,6 +31,16 @@ interface IActionTableItem {
 }
 
 const DeviceContactAction = observer((props: { deviceId: string, state?: IDeviceContactState, contact: IDeviceContact, channel: string }) => {
+    const [sliderValue, setSliderValue] = useState<number | number[] | undefined>();
+    const [sliderColor, setSliderColor] = useState<string | undefined>();
+    const requestDoubleChangeMemoized = useCallback(throttle(async (value: number | number[]) => {
+        await ConductsService.RequestConductAsync({
+            channelName: props.channel,
+            contactName: props.contact.name,
+            deviceId: props.deviceId
+        }, value);
+    }, 500), []);
+
     const handleBooleanClick = async () => {
         console.log("Do action for ", props.contact, props.state);
 
@@ -41,10 +55,53 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
         console.log("Do action for ", props.contact, props.state);
     };
 
+    const handleDoubleChange = (_: Event | React.SyntheticEvent, value: number | number[]) => {
+        setSliderValue(value);
+        requestDoubleChangeMemoized(value);
+    };
+
+    const handleColorTemperatureChange = (_: Event | React.SyntheticEvent, value: number | number[]) => {
+        setSliderValue(value);
+        requestDoubleChangeMemoized(value);
+    };
+
+    useEffect(() => {
+        if ((props.contact.dataType === 'colortemp' ||
+            props.contact.dataType === 'double') &&
+            typeof sliderValue === 'number') {
+            if (props.contact.dataType === 'colortemp') {
+                setSliderColor(blendColors('#ffffff', '#C47A10', sliderValue));
+            }
+            if (Math.abs(props.state?.valueSerialized - sliderValue) < 0.01) {
+                setSliderValue(undefined);
+            }
+        }
+    }, [props.state?.valueSerialized, props.contact.dataType, sliderValue]);
+
     if (props.contact.dataType === 'bool') {
         return <Switch onChange={handleBooleanClick} checked={props.state?.valueSerialized === "true"} color="warning" />
     } else if (props.contact.dataType === 'action') {
         return <IconButton onClick={handleActionClick}><PlayArrowIcon /></IconButton>
+    } else if (props.contact.dataType === 'double') {
+        return <Slider
+            step={0.01}
+            sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={sliderValue ?? props.state?.valueSerialized}
+            marks={[
+                { label: "Low", value: 0 },
+                { label: "High", value: 1 }
+            ]}
+            onChange={handleDoubleChange}
+            onChangeCommitted={handleDoubleChange} />
+    } else if (props.contact.dataType === 'colortemp') {
+        return <Slider
+            step={0.01}
+            sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={sliderValue ?? props.state?.valueSerialized}
+            marks={[
+                { label: "Cold", value: 0 },
+                { label: "Warm", value: 1 }
+            ]}
+            onChange={handleColorTemperatureChange}
+            onChangeCommitted={handleColorTemperatureChange} />
     } else {
         return <Typography color="textSecondary" variant="caption">Action for this contact not supported yet.</Typography>
     }
