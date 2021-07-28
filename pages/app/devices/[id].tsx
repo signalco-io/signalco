@@ -167,6 +167,10 @@ const DeviceDetails = () => {
                                         <AccordionDetails>
                                             <Stack spacing={1} >
                                                 <Stack direction="row" justifyContent="space-between" spacing={2}>
+                                                    <span>Last activity</span>
+                                                    {device ? <ReactTimeago date={device?.getLastActivity()} /> : "Unknown"}
+                                                </Stack>
+                                                <Stack direction="row" justifyContent="space-between" spacing={2}>
                                                     <span>Model</span>
                                                     <Typography>{device?.model}</Typography>
                                                 </Stack>

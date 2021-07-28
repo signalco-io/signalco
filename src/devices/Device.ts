@@ -62,6 +62,7 @@ export interface IDeviceModel {
     manufacturer?: string;
     model?: string;
 
+    getLastActivity(): Date | -1;
     getState(target: IDeviceTarget): IDeviceContactState;
     updateState(channelName: string, contactName: string, valueSerialized: string|undefined, timeStamp: Date): void;
 }
@@ -85,6 +86,10 @@ export class DeviceModel implements IDeviceModel {
         this.sharedWith = sharedWith;
         this.manufacturer = manufacturer;
         this.model = model;
+    }
+
+    getLastActivity() {
+        return this.states.map(s => s.timeStamp).sort((a, b) => a.getTime() - b.getTime()).pop() || -1;
     }
 
     getState(target: IDeviceTarget) {

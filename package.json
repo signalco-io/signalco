@@ -14,15 +14,16 @@
     "@emotion/react": "^11.4.0",
     "@emotion/server": "11.4.0",
     "@emotion/styled": "^11.3.0",
-    "@material-ui/core": "^5.0.0-beta.0",
-    "@material-ui/icons": "^5.0.0-beta.0",
-    "@material-ui/lab": "^5.0.0-alpha.39",
+    "@material-ui/core": "^5.0.0-beta.2",
+    "@material-ui/icons": "^5.0.0-beta.1",
+    "@material-ui/lab": "^5.0.0-alpha.41",
     "@microsoft/signalr": "^5.0.8",
     "@sentry/react": "^6.9.0",
     "@sentry/tracing": "^6.9.0",
     "@types/react-grid-layout": "^1.1.2",
     "axios": "^0.21.1",
     "clsx": "^1.1.1",
+    "material-ui-popup-state": "^1.9.0",
     "mobx": "^6.3.2",
     "mobx-react-lite": "^3.2.0",
     "next": "^11.0.1",
@@ -35,9 +36,7 @@
     "react-motion": "^0.5.2",
     "react-resize-detector": "^6.7.4",
     "react-timeago": "^6.2.1",
-    "recharts": "^2.0.10",
-    "sass": "^1.35.2",
-    "webpack": "^5.44.0"
+    "recharts": "^2.0.10"
   },
   "devDependencies": {
     "@babel/core": "7.14.6",
@@ -49,8 +48,9 @@
     "d3": "^6.7.0",
     "eslint": "^7.30.0",
     "eslint-config-next": "^11.0.1",
-    "material-ui-popup-state": "^1.9.0",
     "prop-types": "15.7.2",
-    "typescript": "^4.3.5"
+    "sass": "^1.35.2",
+    "typescript": "^4.3.5",
+    "webpack": "^5.44.0"
   }
 }
