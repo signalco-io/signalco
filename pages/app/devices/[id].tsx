@@ -13,7 +13,6 @@ import ConductsService from '../../../src/conducts/ConductsService';
 import ResultsPlaceholder from '../../../components/shared/indicators/ResultsPlaceholder';
 import CopyToClipboardInput from '../../../components/shared/form/CopyToClipboardInput';
 import throttle from '../../../src/helpers/Throttle';
-import { useMemo } from 'react';
 import { useCallback } from 'react';
 import blendColors from '../../../src/helpers/BlendColors';
 
