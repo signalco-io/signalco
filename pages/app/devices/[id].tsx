@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardHeader, Grid, IconButton, MenuItem, Paper, Select, Skeleton, Slide, Slider, Stack, Switch, TextField, Typography } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardHeader, Checkbox, Chip, FormControl, Grid, IconButton, ListItemText, MenuItem, Paper, Select, SelectChangeEvent, Skeleton, Slide, Slider, Stack, Switch, TextField, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
@@ -29,10 +29,57 @@ interface IActionTableItem {
     channel: string
 }
 
+const SelectItems = (props: { multiple?: boolean, value: string[], items: { value: string, label?: string }[], onChange: (values: string[]) => void }) => {
+    const {
+        value,
+        items,
+        multiple = false,
+        onChange
+    } = props;
+
+    const handleOnChange = (event: SelectChangeEvent<typeof value>) => {
+        const newValue = event.target.value;
+
+        // On autofill we get a the stringified value.
+        onChange(typeof newValue === 'string' ? newValue.split(',') : newValue);
+    };
+
+    return (
+        <FormControl>
+            <Select
+                value={value}
+                multiple={multiple}
+                onChange={handleOnChange}
+                renderValue={(selected) => {
+                    if (multiple)
+                        return (
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                                {selected.map((value) => (
+                                    <Chip key={value} label={items.find(i => i.value === value)?.label ?? value} sx={{ m: '2px' }} />
+                                ))}
+                            </Box>
+                        );
+                    else return items.find(i => i.value === value[0])?.label ?? value;
+                }}
+            >{items.map(item => (
+                <MenuItem
+                    value={item.value}
+                    key={item.value}>
+                    {multiple && <Checkbox checked={value.indexOf(item.value) > -1} />}
+                    <ListItemText primary={item.label ?? item.value} />
+                </MenuItem>)
+            )}</Select>
+        </FormControl>
+    );
+};
+
 const DeviceContactAction = observer((props: { deviceId: string, state?: IDeviceContactState, contact: IDeviceContact, channel: string }) => {
     const [sliderValue, setSliderValue] = useState<number | number[] | undefined>();
     const [sliderColor, setSliderColor] = useState<string | undefined>();
+    const [dataValuesSelected, setDataValueSelected] = useState<string[]>(props.contact.dataValues ? [props.contact.dataValues[0].value] : []);
     const requestDoubleChangeMemoized = useCallback(throttle(async (value: number | number[]) => {
+        console.log('Do double change', 'contact:', props.contact, 'state:', props.state, 'value:', value);
+
         await ConductsService.RequestConductAsync({
             channelName: props.channel,
             contactName: props.contact.name,
@@ -41,23 +88,25 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
     }, 500), []);
 
     const handleBooleanClick = async () => {
-        console.log("Do action for ", props.contact, props.state);
+        const newState = props.state?.valueSerialized === 'true' ? false : true;
+
+        console.log("Do boolean", 'contact:', props.contact, 'state:', props.state, 'new state:', newState);
 
         await ConductsService.RequestConductAsync({
             channelName: props.channel,
             contactName: props.contact.name,
             deviceId: props.deviceId
-        }, props.state?.valueSerialized === 'true' ? false : true);
+        }, newState);
     };
 
     const handleActionClick = async () => {
-        console.log("Do action for ", props.contact, props.state);
+        console.log("Do action", 'contact:', props.contact, 'state:', props.state, 'dataValuesSelected:', dataValuesSelected);
 
         await ConductsService.RequestConductAsync({
             channelName: props.channel,
             contactName: props.contact.name,
             deviceId: props.deviceId
-        }, null);
+        }, dataValuesSelected);
     };
 
     const handleDoubleChange = (_: Event | React.SyntheticEvent, value: number | number[]) => {
@@ -69,6 +118,11 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
         setSliderValue(value);
         requestDoubleChangeMemoized(value);
     };
+
+    const handleDataValuesChanged = (values: string[]) => {
+        console.log('selected', values)
+        setDataValueSelected(values);
+    }
 
     useEffect(() => {
         if ((props.contact.dataType === 'colortemp' ||
@@ -86,12 +140,11 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
     if (props.contact.dataType === 'bool') {
         return <Switch onChange={handleBooleanClick} checked={props.state?.valueSerialized === "true"} color="warning" />
     } else if (props.contact.dataType === 'action') {
-        return <>
-            {(props.contact.dataValues) &&
-                <Select>{props.contact.dataValues.map(dv => <MenuItem value={dv.value} key={dv.value}>{dv.label ?? dv.value}</MenuItem>)}</Select>
-            }
-            <IconButton onClick={handleActionClick}><PlayArrowIcon /></IconButton>
-        </>
+        return (
+            <Stack alignItems="center" direction="row">
+                {props.contact.dataValues && <SelectItems value={dataValuesSelected} items={props.contact.dataValues} onChange={handleDataValuesChanged} />}
+                <IconButton onClick={handleActionClick}><PlayArrowIcon /></IconButton>
+            </Stack>)
     } else if (props.contact.dataType === 'double') {
         return <Slider
             step={0.01}

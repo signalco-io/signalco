@@ -3,6 +3,8 @@ import { observer } from "mobx-react-lite";
 import React, { useState } from "react"
 import { IDeviceTarget } from "../../../src/devices/Device";
 import IconResolver, { availableIcons } from '../../icons/IconResolver';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 export interface IWidgetPartInlineLabelConfig {
     label?: string,
@@ -48,6 +50,7 @@ const WidgetPartInlineLabel = ({ config }: { config: IWidgetPartInlineLabelConfi
                         </Grid>}
                     {value &&
                         <Grid item>
+                            {(isBool && config.units === '') && (value === 'true' ? <CheckCircleIcon color="success" sx={{ mt: 1 }} /> : <CancelIcon color="error" sx={{ mt: 1 }} />)}
                             <Typography variant={sizeToTypographyVariant(config.size)}>{`${isBool && !config.units ? '' : value}${config.units ? config.units : ''}`}</Typography>
                         </Grid>}
                 </Grid>
