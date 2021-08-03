@@ -19,21 +19,39 @@ export class User implements IUser {
     }
 }
 
+export interface IDeviceContactDataValue {
+    value: string;
+    label?: string;
+}
+
+export class DeviceContactDataValue implements IDeviceContactDataValue {
+    value: string;
+    label?: string;
+
+    constructor(value: string, label?: string) {
+        this.value = value;
+        this.label = label;
+    }
+}
+
 export interface IDeviceContact {
     name: string;
     dataType: string;
     access: number;
+    dataValues?: IDeviceContactDataValue[];
 }
 
 export class DeviceContact implements IDeviceContact {
     name: string;
     dataType: string;
     access: number;
+    dataValues?: IDeviceContactDataValue[];
 
-    constructor(name: string, dataType: string, access: number)  {
+    constructor(name: string, dataType: string, access: number, dataValues?: IDeviceContactDataValue[])  {
         this.name = name;
         this.dataType = dataType;
         this.access = access;
+        this.dataValues = dataValues;
     }
 }
 

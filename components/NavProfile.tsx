@@ -1,7 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import {
-  Avatar, Box, Grid,
+  Avatar, Box, ButtonBase, Grid,
   IconButton,
+  ListItemIcon,
+  ListItemText,
   Menu,
   MenuItem,
 } from "@material-ui/core";
@@ -17,6 +19,11 @@ import { useRouter } from "next/router";
 import { orderBy } from "../src/helpers/ArrayHelpers";
 import { SvgIconComponent } from "@material-ui/icons";
 import { User } from '@auth0/auth0-spa-js';
+import {
+  usePopupState,
+  bindTrigger,
+  bindMenu,
+} from 'material-ui-popup-state/hooks'
 
 const navItems = [
   { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon },
@@ -54,6 +61,7 @@ const UserAvatar = ({ user }: { user: User | undefined }) => {
 const NavProfile = () => {
   const { logout, user } = useAuth0();
   const router = useRouter();
+  const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' })
 
   const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconComponent, active: boolean, label: string }) => (
     <Box borderBottom={active ? "3px solid white" : undefined}>
@@ -77,12 +85,15 @@ const NavProfile = () => {
           </Grid>
         </Grid>
         <Grid item>
-          <UserAvatar user={user} />
-          <Menu open={false}>
-            <MenuItem>
-              <IconButton onClick={() => logout()} color="primary" title="Logout">
+          <ButtonBase {...bindTrigger(popupState)}>
+            <UserAvatar user={user} />
+          </ButtonBase>
+          <Menu {...bindMenu(popupState)}>
+            <MenuItem onClick={() => logout()}>
+              <ListItemIcon>
                 <ExitToAppIcon />
-              </IconButton>
+              </ListItemIcon>
+              <ListItemText>Logout</ListItemText>
             </MenuItem>
           </Menu>
         </Grid>

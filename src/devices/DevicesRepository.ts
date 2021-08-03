@@ -1,6 +1,6 @@
 import { IHistoricalValue } from "../../components/devices/parts/WidgetPartGraph";
 import HttpService from "../services/HttpService";
-import { IDeviceModel, DeviceModel, IDeviceContactState, DeviceContactState, IDeviceContact, DeviceContact, IDeviceEndpoint, DeviceEndpoint, IDeviceStatePublish, DeviceStatePublish, IDeviceTarget, User, IUser } from "./Device";
+import { IDeviceModel, DeviceModel, IDeviceContactState, DeviceContactState, IDeviceContact, DeviceContact, IDeviceEndpoint, DeviceEndpoint, IDeviceStatePublish, DeviceStatePublish, IDeviceTarget, User, IUser, IDeviceContactDataValue, DeviceContactDataValue } from "./Device";
 
 class SignalDeviceDto {
     id?: string;
@@ -56,18 +56,32 @@ class SignalDeviceEndpointDto {
     }
 }
 
+class SignalDeviceEndpointContactDataValueDto {
+    value?: string;
+    label?: string;
+
+    static FromDto(dto: SignalDeviceEndpointContactDataValueDto): IDeviceContactDataValue {
+        if (dto.value == null) {
+            throw Error("Invalid SignalDeviceEndpointContactDataValueDto - missing required properties.");
+        }
+
+        return new DeviceContactDataValue(dto.value, dto.label);
+    }
+}
+
 class SignalDeviceEndpointContactDto {
     name?: string;
     dataType?: string;
     access?: number;
     noiseReductionDelta?: number;
+    dataValues?: SignalDeviceEndpointContactDataValueDto[];
 
     static FromDto(dto: SignalDeviceEndpointContactDto): IDeviceContact {
         if (dto.name == null || dto.dataType == null) {
             throw Error("Invalid SignalDeviceEndpointContactDto - missing required properties.");
         }
 
-        return new DeviceContact(dto.name, dto.dataType, dto.access ?? 0);
+        return new DeviceContact(dto.name, dto.dataType, dto.access ?? 0, dto.dataValues?.map(SignalDeviceEndpointContactDataValueDto.FromDto));
     }
 }
 

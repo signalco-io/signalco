@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardHeader, Grid, IconButton, Paper, Skeleton, Slide, Slider, Stack, Switch, TextField, Typography } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardHeader, Grid, IconButton, MenuItem, Paper, Select, Skeleton, Slide, Slider, Stack, Switch, TextField, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
@@ -50,8 +50,14 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
         }, props.state?.valueSerialized === 'true' ? false : true);
     };
 
-    const handleActionClick = () => {
+    const handleActionClick = async () => {
         console.log("Do action for ", props.contact, props.state);
+
+        await ConductsService.RequestConductAsync({
+            channelName: props.channel,
+            contactName: props.contact.name,
+            deviceId: props.deviceId
+        }, null);
     };
 
     const handleDoubleChange = (_: Event | React.SyntheticEvent, value: number | number[]) => {
@@ -80,7 +86,12 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
     if (props.contact.dataType === 'bool') {
         return <Switch onChange={handleBooleanClick} checked={props.state?.valueSerialized === "true"} color="warning" />
     } else if (props.contact.dataType === 'action') {
-        return <IconButton onClick={handleActionClick}><PlayArrowIcon /></IconButton>
+        return <>
+            {(props.contact.dataValues) &&
+                <Select>{props.contact.dataValues.map(dv => <MenuItem value={dv.value} key={dv.value}>{dv.label ?? dv.value}</MenuItem>)}</Select>
+            }
+            <IconButton onClick={handleActionClick}><PlayArrowIcon /></IconButton>
+        </>
     } else if (props.contact.dataType === 'double') {
         return <Slider
             step={0.01}
@@ -247,13 +258,13 @@ const DeviceDetails = () => {
                                                     <span>ID</span>
                                                 </Grid>
                                                 <Grid item xs={9}>
-                                                    <CopyToClipboardInput readOnly fullWidth size="small" value={device?.id} />
+                                                    <CopyToClipboardInput readOnly fullWidth size="small" value={device?.id ?? ''} />
                                                 </Grid>
                                                 <Grid item xs={3}>
                                                     <span>Identifier</span>
                                                 </Grid>
                                                 <Grid item xs={9}>
-                                                    <CopyToClipboardInput readOnly fullWidth size="small" value={device?.identifier} />
+                                                    <CopyToClipboardInput readOnly fullWidth size="small" value={device?.identifier ?? ''} />
                                                 </Grid>
                                             </Grid>
                                         </AccordionDetails>
