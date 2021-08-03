@@ -39,6 +39,7 @@ export interface IDeviceContact {
     dataType: string;
     access: number;
     dataValues?: IDeviceContactDataValue[];
+    dataValuesMultiple: boolean;
 }
 
 export class DeviceContact implements IDeviceContact {
@@ -46,12 +47,14 @@ export class DeviceContact implements IDeviceContact {
     dataType: string;
     access: number;
     dataValues?: IDeviceContactDataValue[];
+    dataValuesMultiple: boolean;
 
-    constructor(name: string, dataType: string, access: number, dataValues?: IDeviceContactDataValue[])  {
+    constructor(name: string, dataType: string, access: number, dataValuesMultiple: boolean, dataValues?: IDeviceContactDataValue[])  {
         this.name = name;
         this.dataType = dataType;
         this.access = access;
         this.dataValues = dataValues;
+        this.dataValuesMultiple = dataValuesMultiple;
     }
 }
 

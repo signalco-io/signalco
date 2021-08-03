@@ -76,7 +76,7 @@ const SelectItems = (props: { multiple?: boolean, value: string[], items: { valu
 const DeviceContactAction = observer((props: { deviceId: string, state?: IDeviceContactState, contact: IDeviceContact, channel: string }) => {
     const [sliderValue, setSliderValue] = useState<number | number[] | undefined>();
     const [sliderColor, setSliderColor] = useState<string | undefined>();
-    const [dataValuesSelected, setDataValueSelected] = useState<string[]>(props.contact.dataValues ? [props.contact.dataValues[0].value] : []);
+    const [dataValuesSelected, setDataValueSelected] = useState<string[]>(props.contact.dataValues ? [props.state?.valueSerialized ?? props.contact.dataValues[0].value] : []);
     const requestDoubleChangeMemoized = useCallback(throttle(async (value: number | number[]) => {
         console.log('Do double change', 'contact:', props.contact, 'state:', props.state, 'value:', value);
 
@@ -106,7 +106,7 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
             channelName: props.channel,
             contactName: props.contact.name,
             deviceId: props.deviceId
-        }, dataValuesSelected);
+        }, props.contact.dataValuesMultiple ? dataValuesSelected : dataValuesSelected[0]);
     };
 
     const handleDoubleChange = (_: Event | React.SyntheticEvent, value: number | number[]) => {
@@ -139,10 +139,10 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
 
     if (props.contact.dataType === 'bool') {
         return <Switch onChange={handleBooleanClick} checked={props.state?.valueSerialized === "true"} color="warning" />
-    } else if (props.contact.dataType === 'action') {
+    } else if (props.contact.dataType === 'action' || props.contact.dataType === 'enum') {
         return (
             <Stack alignItems="center" direction="row">
-                {props.contact.dataValues && <SelectItems value={dataValuesSelected} items={props.contact.dataValues} onChange={handleDataValuesChanged} />}
+                {props.contact.dataValues && <SelectItems value={dataValuesSelected} items={props.contact.dataValues} multiple={props.contact.dataValuesMultiple} onChange={handleDataValuesChanged} />}
                 <IconButton onClick={handleActionClick}><PlayArrowIcon /></IconButton>
             </Stack>)
     } else if (props.contact.dataType === 'double') {

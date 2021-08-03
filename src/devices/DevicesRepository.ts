@@ -75,13 +75,14 @@ class SignalDeviceEndpointContactDto {
     access?: number;
     noiseReductionDelta?: number;
     dataValues?: SignalDeviceEndpointContactDataValueDto[];
+    dataValuesMultiple?: boolean;
 
     static FromDto(dto: SignalDeviceEndpointContactDto): IDeviceContact {
         if (dto.name == null || dto.dataType == null) {
             throw Error("Invalid SignalDeviceEndpointContactDto - missing required properties.");
         }
 
-        return new DeviceContact(dto.name, dto.dataType, dto.access ?? 0, dto.dataValues?.map(SignalDeviceEndpointContactDataValueDto.FromDto));
+        return new DeviceContact(dto.name, dto.dataType, dto.access ?? 0, dto.dataValuesMultiple ?? false, dto.dataValues?.map(SignalDeviceEndpointContactDataValueDto.FromDto));
     }
 }
 
