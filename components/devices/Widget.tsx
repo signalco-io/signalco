@@ -1,4 +1,4 @@
-import { Alert, Grid, Paper, Box } from "@material-ui/core";
+import { Alert, Grid, Paper } from "@material-ui/core";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import ConductsService from "../../src/conducts/ConductsService";
