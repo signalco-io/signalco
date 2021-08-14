@@ -24,7 +24,7 @@ const sizeToFontSize = (size?: "small" | "normal" | "large") => {
 }
 
 const sizeToPadding = (size?: "small" | "normal" | "large") => {
-    return size === "large" ? 2 : (size === "small" ? 0 : 1);
+    return size === "large" ? 2 : (size === "small" ? 0 : 0);
 }
 
 const WidgetPartInlineLabel = ({ config }: { config: IWidgetPartInlineLabelConfig }) => {
@@ -37,25 +37,28 @@ const WidgetPartInlineLabel = ({ config }: { config: IWidgetPartInlineLabelConfi
     Promise.resolve(config.value).then(v => setValue(v));
 
     return (
-        <Grid container direction="column" style={{ height: '100%' }} justifyContent="center">
-            <Box px={1.5} py={sizeToPadding(config.size)}>
-                <Grid container alignItems="center" spacing={1} wrap="nowrap">
-                    {config.icon &&
-                        <Grid item sx={{ minWidth: 35, marginTop: config.size !== "large" ? '6px' : 0 }}>
-                            <Icon fontSize={sizeToFontSize(config.size)} />
-                        </Grid>}
-                    {config.label &&
-                        <Grid item style={{ flexGrow: 1 }} zeroMinWidth>
-                            <Typography noWrap variant={sizeToTypographyVariant(config.size)} color={config.size === "small" ? "textSecondary" : "textPrimary"}>{config.label}</Typography>
-                        </Grid>}
-                    {value &&
-                        <Grid item>
-                            {(isBool && config.units === '') && (value === 'true' ? <CheckCircleIcon color="success" sx={{ mt: 1 }} /> : <CancelIcon color="error" sx={{ mt: 1 }} />)}
-                            <Typography variant={sizeToTypographyVariant(config.size)}>{`${isBool && !config.units ? '' : value}${config.units ? config.units : ''}`}</Typography>
-                        </Grid>}
-                </Grid>
-            </Box>
-        </Grid>
+        <Box display="flex" justifyContent="center" px={2} py={sizeToPadding(config.size)} sx={{ height: '100%', width: '100%' }}>
+            <Grid container alignItems="center" justifyContent="center" spacing={1} wrap="nowrap">
+                {config.icon &&
+                    <Grid item sx={{ minWidth: 35, marginTop: config.size !== "large" ? 1 : 0 }}>
+                        <Icon fontSize={sizeToFontSize(config.size)} />
+                    </Grid>}
+                {config.label &&
+                    <Grid item style={{ flexGrow: 1 }} zeroMinWidth>
+                        <Typography
+                            noWrap
+                            variant={sizeToTypographyVariant(config.size)}
+                            color={config.size === "small" ? "textSecondary" : "textPrimary"}>
+                            {config.label}
+                        </Typography>
+                    </Grid>}
+                {value &&
+                    <Grid item>
+                        {(isBool && config.units === '') && (value === 'true' ? <CheckCircleIcon color="success" sx={{ mt: 1 }} /> : <CancelIcon color="error" sx={{ mt: 1 }} />)}
+                        <Typography variant={sizeToTypographyVariant(config.size)}>{`${isBool && !config.units ? '' : value}${config.units ? config.units : ''}`}</Typography>
+                    </Grid>}
+            </Grid>
+        </Box>
     );
 }
 

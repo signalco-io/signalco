@@ -1,16 +1,17 @@
-import { Box, Button, Checkbox, Container, Grid, List, MenuItem, Paper, Select, Typography } from "@material-ui/core";
+import { Box, Button, Card, CardActionArea, CardContent, Checkbox, Container, Grid, List, Paper, Typography } from "@material-ui/core";
 import Stack from "@material-ui/core/Stack";
-import ListItem from '@material-ui/core/ListItem';
 import ListItemButton from '@material-ui/core/ListItemButton';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import React from "react";
-import { ArrowDownward as ArrowDownwardIcon, Cancel as CancelIcon, Check, CheckCircle } from "@material-ui/icons";
+import { ArrowDownward as ArrowDownwardIcon, Cancel as CancelIcon, CheckCircle } from "@material-ui/icons";
 import Image from 'next/image';
 import { amber, green, grey } from "@material-ui/core/colors";
 import LaunchIcon from '@material-ui/icons/Launch';
 import SelectItems from "../../components/shared/form/SelectItems";
 import { useState } from "react";
+import WatchLaterIcon from '@material-ui/icons/WatchLater';
+import contentData from './content.json';
 
 const FilterList = (props: { header: string, items: { id: string, label: string }[], truncate: number }) => {
     const {
@@ -84,7 +85,7 @@ const StoreStockStatusBadge = (props: { status: number }) => {
             color = grey[400];
             break;
         case 3:
-            Icon = CheckCircle;
+            Icon = WatchLaterIcon;
             opacity = 1;
             text = "On backorder";
             color = amber[400];
@@ -93,45 +94,46 @@ const StoreStockStatusBadge = (props: { status: number }) => {
 
     return (
         <Stack direction="row" justifyItems="center" alignItems="center" sx={{ opacity: opacity }}>
-            <Icon sx={{ fontSize: '1.3em', color: color }} />
+            <Icon sx={{ fontSize: '1.3rem', color: color }} />
             &nbsp;
-            <Typography variant="subtitle2" sx={{ color: color }}>{text}</Typography>
+            <Typography fontSize="0.8rem" sx={{ color: color }}>{text}</Typography>
         </Stack>
     );
 }
 
 const StoreItemThumb = (props: { id: string, name: string, imageSrc: string, price: number, stockStatus: number }) => {
     return (
-        <Paper variant="elevation" elevation={6} sx={{ p: 3 }}>
-            <Stack spacing={4}>
-                <Image src={props.imageSrc} alt={`${props.name} image`} width={180} height={180} />
-                <Stack spacing={1}>
-                    <Typography>{props.name}</Typography>
-                    <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
-                        <Typography fontSize="1.2em" fontWeight="bold">€&nbsp;{props.price}</Typography>
-                        <StoreStockStatusBadge status={props.stockStatus} />
+        <Card variant="elevation" elevation={6}>
+            <CardActionArea>
+                <CardContent>
+                    <Stack spacing={2}>
+                        <Image src={props.imageSrc} alt={`${props.name} image`} width={180} height={180} objectFit="contain" />
+                        <Stack spacing={1}>
+                            <Typography fontWeight="bold" sx={{ opacity: 0.9 }}>{props.name}</Typography>
+                            <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
+                                <Typography fontSize="1.2rem" fontWeight="bold">€&nbsp;{props.price}</Typography>
+                                <StoreStockStatusBadge status={props.stockStatus} />
+                            </Stack>
+                        </Stack>
                     </Stack>
-                </Stack>
-            </Stack>
-        </Paper>
+                </CardContent>
+            </CardActionArea>
+        </Card>
     );
 };
 
-const StoreIndex = () => {
-    const categories = [
-        { id: 'lights', label: "Lights" }
-    ];
-    const brands = [
-        { id: 'philips', label: "Philips" },
-        { id: 'philips', label: "Philips" },
-        { id: 'philips', label: "Philips" },
-        { id: 'philips', label: "Philips" },
-        { id: 'philips', label: "Philips" },
-        { id: 'philips', label: "Philips" },
-        { id: 'philips', label: "Philips" },
-        { id: 'philips', label: "Philips" },
-        { id: 'philips', label: "Philips" }
-    ];
+export async function getStaticProps() {
+    return {
+        props: {
+            categories: Array.from(new Set(contentData.items.flatMap(i => i.categories))),
+            brands: Array.from(new Set(contentData.items.map(i => i.manufacturer)))
+        }
+    };
+}
+
+const StoreIndex = (props: { categories: string[], brands: string[] }) => {
+    const categories = props.categories.map(c => ({ id: c, label: c }));
+    const brands = props.brands.map(b => ({ id: b, label: b }));
     const communication = [
         { id: 'zigbee', label: "Zigbee" },
         { id: 'bluetooth', label: "Bluetooth" },
@@ -171,9 +173,8 @@ const StoreIndex = () => {
                     top: 0
                 }}></Box>
                 <Box sx={{
-                    backdropFilter: 'blur(2px)',
-                    background: 'linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);',
-                    height: '75%',
+                    background: 'linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70vh, rgba(0,0,0,0) 100%);',
+                    height: '80vh',
                     width: '100%',
                     position: 'absolute',
                     bottom: 0
@@ -181,7 +182,7 @@ const StoreIndex = () => {
             </Box>
             <Container sx={{ py: 8 }}>
                 <Stack direction="row" spacing={4}>
-                    <Paper variant="elevation" elevation={6} sx={{ padding: 4, width: '100%', maxWidth: 360 }}>
+                    <Paper variant="elevation" elevation={6} sx={{ padding: 2, width: '100%', maxWidth: 360 }}>
                         <Stack spacing={4}>
                             <FilterList header="Categories" items={categories} truncate={6} />
                             <FilterList header="Brands" items={brands} truncate={6} />
@@ -194,9 +195,9 @@ const StoreIndex = () => {
                             <SelectItems value={selectedOrderByItems} items={orderByItems} onChange={handleOrderByItemsChange} />
                         </Stack>
                         <div>
-                            <Grid container spacing={4} alignContent="flex-start">
+                            <Grid container spacing={3} alignContent="flex-start">
                                 {items.map(item => (
-                                    <Grid item key={item.id}>
+                                    <Grid item key={item.id} sx={{ width: '252px' }}>
                                         <StoreItemThumb {...item} />
                                     </Grid>
                                 ))}

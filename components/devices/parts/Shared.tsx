@@ -1,1 +1,1 @@
-export const rowHeight = 62;
+export const rowHeight = 72;

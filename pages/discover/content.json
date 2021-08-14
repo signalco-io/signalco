@@ -1,0 +1,17 @@
+{
+    "items": [
+        {
+            "id": "5bfa7597-cdf1-4f28-9585-4f07389edd08",
+            "name": "Philips Hue E26 White Ambience",
+            "manufacturer": "Philips",
+            "categories": [
+                "Lights"
+            ],
+            "communication": [
+                "zigbee",
+                "bluetooth"
+            ],
+            "officialWebsite": "https://www.philips-hue.com/en-us/p/hue-white-ambiance-1-pack-e26/046677548490"
+        }
+    ]
+}

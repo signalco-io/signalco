@@ -30,7 +30,7 @@ const WidgetPartButton = ({ config }: { config: IWidgetPartButtonConfig }) => {
     }, [config.state]);
 
     return (
-        <Box px={1.5} sx={{ height: '100%' }}>
+        <Box px={2} sx={{ height: '100%' }}>
             <Grid container justifyContent="center" alignItems="center" sx={{ height: '100%' }}>
                 <IconButton
                     disabled={typeof config.action === 'undefined'}

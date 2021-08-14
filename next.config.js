@@ -1,6 +1,8 @@
 // const withPWA = require('next-pwa')
 
 module.exports = {
+    // Prefer loading of ES Modules over CommonJS
+    experimental: { esmExternals: true }
 }
 
 // module.exports = withPWA({

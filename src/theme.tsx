@@ -18,6 +18,15 @@ const theme = createTheme({
       default: "#000"
     },
   },
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px'
+        }
+      }
+    }
+  },
   typography: {
     h1: {
       fontSize: "2rem",
