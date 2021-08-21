@@ -1,5 +1,6 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { spring, TransitionMotion } from 'react-motion';
+import { useTheme } from '@material-ui/core/styles';
 
 const leavingSpringConfig = { stiffness: 60, damping: 15 };
 const leavingSpringBackgroundConfig = { stiffness: 140, damping: 20 };
@@ -22,6 +23,7 @@ export interface IRippleIndicatorRef {
 }
 
 const RippleIndicator = forwardRef((props: IRippleIndicatorProps, ref: React.ForwardedRef<IRippleIndicatorRef | undefined>) => {
+    const theme = useTheme();
     const [refresh, setRefresh] = useState<number>(0);
     useImperativeHandle(ref, () => ({ trigger() { setRefresh(Date.now()); } }));
 
@@ -60,8 +62,8 @@ const RippleIndicator = forwardRef((props: IRippleIndicatorProps, ref: React.For
                                 left: `${size / 4}px`,
                                 borderRadius: `${size - 1}px`,
                                 position: "absolute",
-                                border: "1px solid white",
-                                backgroundColor: `rgba(255,255,255,${background})`,
+                                border: theme.palette.mode === 'dark' ? "1px solid white" : "1px solid black",
+                                backgroundColor: theme.palette.mode === 'dark' ? `rgba(255,255,255,${background})` : `rgba(0,0,0,${background})`,
                                 opacity: opacity,
                                 scale: scale,
                                 transform: `scale(${scale})`,

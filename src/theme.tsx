@@ -4,18 +4,18 @@ import { createTheme } from "@material-ui/core/styles";
 // Create a theme instance.
 const theme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
     primary: {
-      main: "#fff",
+      main: "#000",//"#fff",
     },
     secondary: {
-      main: "#000",
+      main: "#fff",//"#000",
     },
     error: {
       main: red.A400,
     },
     background: {
-      default: "#000"
+      default: "#fff",//"#000"
     },
   },
   components: {

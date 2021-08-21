@@ -23,7 +23,8 @@ import {
   usePopupState,
   bindTrigger,
   bindMenu,
-} from 'material-ui-popup-state/hooks'
+} from 'material-ui-popup-state/hooks';
+import { useTheme } from "@material-ui/core";
 
 const navItems = [
   { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon },
@@ -60,13 +61,14 @@ const UserAvatar = ({ user }: { user: User | undefined }) => {
 
 const NavProfile = () => {
   const { logout, user } = useAuth0();
+  const theme = useTheme();
   const router = useRouter();
   const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' })
 
   const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconComponent, active: boolean, label: string }) => (
-    <Box borderBottom={active ? "3px solid white" : undefined}>
+    <Box borderBottom={active ? (theme.palette.mode === 'dark' ? "3px solid white" : "3px solid black") : undefined}>
       <Link href={path} passHref>
-        <IconButton sx={{ opacity: active ? 0.6 : 1 }} aria-label={label} title={label}>
+        <IconButton sx={{ opacity: theme.palette.mode === 'dark' ? (active ? 0.6 : 1) : (active ? 1 : 0.6) }} aria-label={label} title={label}>
           <Icon />
         </IconButton>
       </Link>

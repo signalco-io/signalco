@@ -159,50 +159,34 @@ const StoreIndex = (props: { categories: string[], brands: string[] }) => {
 
     return (<>
         <Stack>
-            <Box sx={{ zIndex: -1 }}>
-                <Box sx={{ display: 'block', height: '30vh' }}></Box>
-                <Box sx={{
-                    background: 'url(/store/a8180d61445001.5a6f32ba4b7a4.jpg)',
-                    backgroundSize: 'cover',
-                    backgroundPositionY: '90%',
-                    backgroundPositionX: '50%',
-                    height: "30vh",
-                    width: '100%',
-                    display: 'block',
-                    position: 'fixed',
-                    top: 0
-                }}></Box>
-                <Box sx={{
-                    background: 'linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70vh, rgba(0,0,0,0) 100%);',
-                    height: '80vh',
-                    width: '100%',
-                    position: 'absolute',
-                    bottom: 0
-                }}></Box>
-            </Box>
             <Container sx={{ py: 8 }}>
-                <Stack direction="row" spacing={4}>
-                    <Paper variant="elevation" elevation={6} sx={{ padding: 2, width: '100%', maxWidth: 360 }}>
+                <Stack spacing={8}>
+                    <Box sx={{ zIndex: -1 }}>
+                        <Typography variant="h1">Discover your new smart home</Typography>
+                    </Box>
+                    <Stack direction="row" spacing={4}>
+                        <Paper variant="elevation" elevation={6} sx={{ padding: 2, width: '100%', maxWidth: 360 }}>
+                            <Stack spacing={4}>
+                                <FilterList header="Categories" items={categories} truncate={6} />
+                                <FilterList header="Brands" items={brands} truncate={6} />
+                                <FilterList header="Communication" items={communication} truncate={999} />
+                            </Stack>
+                        </Paper>
                         <Stack spacing={4}>
-                            <FilterList header="Categories" items={categories} truncate={6} />
-                            <FilterList header="Brands" items={brands} truncate={6} />
-                            <FilterList header="Communication" items={communication} truncate={999} />
+                            <Stack direction="row" justifyContent="space-between">
+                                <Typography gutterBottom variant="h1">Found {items.length} products</Typography>
+                                <SelectItems value={selectedOrderByItems} items={orderByItems} onChange={handleOrderByItemsChange} />
+                            </Stack>
+                            <div>
+                                <Grid container spacing={3} alignContent="flex-start">
+                                    {items.map(item => (
+                                        <Grid item key={item.id} sx={{ width: '252px' }}>
+                                            <StoreItemThumb {...item} />
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            </div>
                         </Stack>
-                    </Paper>
-                    <Stack spacing={4}>
-                        <Stack direction="row" justifyContent="space-between">
-                            <Typography gutterBottom variant="h1">Found {items.length} products</Typography>
-                            <SelectItems value={selectedOrderByItems} items={orderByItems} onChange={handleOrderByItemsChange} />
-                        </Stack>
-                        <div>
-                            <Grid container spacing={3} alignContent="flex-start">
-                                {items.map(item => (
-                                    <Grid item key={item.id} sx={{ width: '252px' }}>
-                                        <StoreItemThumb {...item} />
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </div>
                     </Stack>
                 </Stack>
             </Container>
