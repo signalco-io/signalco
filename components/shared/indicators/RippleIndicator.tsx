@@ -26,7 +26,6 @@ const RippleIndicator = forwardRef((props: IRippleIndicatorProps, ref: React.For
     const theme = useTheme();
     const [refresh, setRefresh] = useState<number>(0);
     useImperativeHandle(ref, () => ({ trigger() { setRefresh(Date.now()); } }));
-
     useEffect(() => {
         if (props.interval != null && props.interval > 0) {
             const token = setInterval(() => {

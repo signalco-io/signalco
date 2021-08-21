@@ -12,6 +12,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import Router, { useRouter } from "next/router";
 import { initSentry } from "../src/errors/SentryUtil";
 import { SnackbarProvider } from 'notistack';
+import { ThemeProvider as NextThemesThemeProvider, useTheme } from 'next-themes'
 
 initSentry();
 
@@ -68,68 +69,71 @@ export default function App(props: AppProps) {
     : 'https://signal.dfnoise.com/app';
 
   return (
-    <CacheProvider value={cache}>
-      <Head>
-        <meta charSet="utf-8"></meta>
-        <link rel="manifest" href="/manifest.webmanifest"></link>
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        ></link>
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        ></link>
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        ></link>
-        <link
-          rel="mask-icon"
-          href="/safari-pinned-tab.svg"
-          color="#000000"
-        ></link>
-        <meta name="msapplication-TileColor" content="#000000"></meta>
-        <meta name="theme-color" content="#000000"></meta>
-        <title>Signal</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
-      </Head>
-      <ThemeProvider theme={theme}>
-        <SnackbarProvider maxSnack={3}>
-          <CssBaseline />
-          <Auth0Provider
-            redirectUri={redirectUri}
-            onRedirectCallback={(appState) => {
-              // Use Next.js's Router.replace method to replace the url
-              Router.replace(appState?.returnTo || "/");
-            }}
-            domain="dfnoise.eu.auth0.com"
-            clientId="TpdYqotCp3E7VS4HFUnWKIXfRnfPpfeV"
-            audience="https://api.signal.dfnoise.com"
-          >
-            {typeof Layout === "function" ? (
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            ) : (
-              <Component {...pageProps} />
-            )}
-          </Auth0Provider>
-          <NextNprogress
-            color="#fff"
-            startPosition={0.3}
-            stopDelayMs={200}
-            height={2}
+    <NextThemesThemeProvider enableSystem={true} defaultTheme="system">
+      <CacheProvider value={cache}>
+        <Head>
+          <meta charSet="utf-8"></meta>
+          <link rel="manifest" href="/manifest.webmanifest"></link>
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+          ></link>
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+          ></link>
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+          ></link>
+          <link
+            rel="mask-icon"
+            href="/safari-pinned-tab.svg"
+            color="#000000"
+          ></link>
+          <meta name="msapplication-TileColor" content="#000000"></meta>
+          <meta name="theme-color" content="#000000"></meta>
+          <title>Signal</title>
+          <meta
+            name="viewport"
+            content="minimum-scale=1, initial-scale=1, width=device-width"
           />
-        </SnackbarProvider>
-      </ThemeProvider>
-    </CacheProvider>);
+        </Head>
+        <ThemeProvider theme={theme(useTheme().theme === "dark")}>
+          <SnackbarProvider maxSnack={3}>
+            <CssBaseline />
+            <Auth0Provider
+              redirectUri={redirectUri}
+              onRedirectCallback={(appState) => {
+                // Use Next.js's Router.replace method to replace the url
+                Router.replace(appState?.returnTo || "/");
+              }}
+              domain="dfnoise.eu.auth0.com"
+              clientId="TpdYqotCp3E7VS4HFUnWKIXfRnfPpfeV"
+              audience="https://api.signal.dfnoise.com"
+            >
+              {typeof Layout === "function" ? (
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              ) : (
+                <Component {...pageProps} />
+              )}
+            </Auth0Provider>
+            <NextNprogress
+              color="#fff"
+              startPosition={0.3}
+              stopDelayMs={200}
+              height={2}
+            />
+          </SnackbarProvider>
+        </ThemeProvider>
+      </CacheProvider>
+    </NextThemesThemeProvider>
+  );
 }
