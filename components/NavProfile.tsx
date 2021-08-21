@@ -79,7 +79,7 @@ const NavProfile = () => {
 
   return (
     <>
-      <Grid container alignItems="center" sx={{ width: '100%', borderBottom: '1px solid gray' }}>
+      <Grid container alignItems="center" sx={{ width: '100%' }}>
         <Grid item style={{ flexGrow: 1 }}>
           <Grid container>
             {navItems.map((ni, index) =>

@@ -41,7 +41,7 @@ const WidgetPartInlineLabel = ({ config }: { config: IWidgetPartInlineLabelConfi
             <Grid container alignItems="center" justifyContent="center" spacing={1} wrap="nowrap">
                 {config.icon &&
                     <Grid item sx={{ minWidth: 35, marginTop: config.size !== "large" ? 1 : 0 }}>
-                        <Icon fontSize={sizeToFontSize(config.size)} />
+                        <Icon fontSize={sizeToFontSize(config.size)} sx={{ opacity: 0.8 }} />
                     </Grid>}
                 {config.label &&
                     <Grid item style={{ flexGrow: 1 }} zeroMinWidth>
