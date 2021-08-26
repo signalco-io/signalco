@@ -21,8 +21,8 @@ const BeaconDetails = () => {
                     const loadedBeacon = await BeaconsRepository.getBeaconAsync(id);
                     setBeacon(loadedBeacon);
                 }
-            } catch (err) {
-                setError(err.toString());
+            } catch (err: any) {
+                setError(err?.toString());
             } finally {
                 setIsLoading(false);
             }
