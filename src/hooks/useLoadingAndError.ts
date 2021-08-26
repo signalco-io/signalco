@@ -12,9 +12,9 @@ const useLoadingAndError = <TIn, TOut>(
     try {
       const items = await loadData();
       setItems(transformItem ? items.map(transformItem) : undefined);
-    } catch (err) {
+    } catch (err: any) {
       setItems([]);
-      setError(err);
+      setError(err?.toString());
     } finally {
       setIsLoading(false);
     }
