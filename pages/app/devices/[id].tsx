@@ -198,8 +198,8 @@ const DeviceDetails = () => {
                 setStateTableItems(stateItems);
                 setActionTableItems(actionItems);
             }
-        } catch (err) {
-            setError(err.toString());
+        } catch (err: any) {
+            setError(err?.toString());
         } finally {
             setIsLoading(false);
         }
