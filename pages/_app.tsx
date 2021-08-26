@@ -12,7 +12,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import Router, { useRouter } from "next/router";
 import { initSentry } from "../src/errors/SentryUtil";
 import { SnackbarProvider } from 'notistack';
-import { ThemeProvider as NextThemesThemeProvider, useTheme } from 'next-themes'
+import { ThemeProvider as NextThemesThemeProvider, useTheme } from 'next-themes';
 
 initSentry();
 
@@ -69,7 +69,7 @@ export default function App(props: AppProps) {
     : 'https://signal.dfnoise.com/app';
 
   return (
-    <NextThemesThemeProvider enableSystem={true} defaultTheme="system">
+    <NextThemesThemeProvider attribute="class" enableSystem={true} defaultTheme="system">
       <CacheProvider value={cache}>
         <Head>
           <meta charSet="utf-8"></meta>
