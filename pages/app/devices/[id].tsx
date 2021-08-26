@@ -156,8 +156,8 @@ const DeviceDetails = () => {
                     const loadedDevice = await DevicesRepository.getDeviceAsync(id);
                     setDevice(loadedDevice);
                 }
-            } catch (err) {
-                setError(err.toString());
+            } catch (err: any) {
+                setError(err?.toString());
             }
         };
 
