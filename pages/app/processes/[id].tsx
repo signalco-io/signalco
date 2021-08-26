@@ -152,8 +152,8 @@ const DisplayDeviceTarget = observer((props: { target?: IDeviceStateTarget, onCh
                     console.debug("No device to load. Target identifier: ", props.target?.Identifier);
                 }
             }
-            catch (err) {
-                console.warn("Failed to load device target", props.target);
+            catch (err: any) {
+                console.warn("Failed to load device target", props.target, err);
             }
             finally {
                 setIsLoading(false);
@@ -169,8 +169,8 @@ const DisplayDeviceTarget = observer((props: { target?: IDeviceStateTarget, onCh
                 try {
                     const devices = await DevicesRepository.getDevicesAsync();
                     setDevices(devices);
-                } catch (err) {
-                    console.warn("Failed to load device selection devices.");
+                } catch (err: any) {
+                    console.warn("Failed to load device selection devices.", err);
                 } finally {
                     // TODO: Set loading false
                 }
@@ -506,8 +506,8 @@ const ProcessDetails = () => {
                         setProcessConfig(parseProcessConfiguration(loadedProcess.configurationSerialized));
                     }
                 }
-            } catch (err) {
-                setError(err.toString());
+            } catch (err: any) {
+                setError(err?.toString());
             } finally {
                 setIsLoading(false);
             }
