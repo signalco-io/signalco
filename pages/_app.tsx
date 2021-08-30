@@ -113,7 +113,8 @@ export default function App(props: AppProps) {
                 // Use Next.js's Router.replace method to replace the url
                 const pageMatch = appState?.returnTo?.match(/(.*)\?.*/);
                 const pageMatchPart = pageMatch && pageMatch.length > 1 ? pageMatch[1] : "/"
-                Router.replace(pageMatchPart);
+                //Router.replace(pageMatchPart);
+                Router.push(pageMatchPart);
               }}
               domain="dfnoise.eu.auth0.com"
               clientId="nl7QIQD7Kw3ZHt45qHHAZG0MEILSFa7U"
