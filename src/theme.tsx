@@ -7,12 +7,12 @@ const theme = (isDark: boolean) => {
     palette: {
       mode: isDark ? "dark" : "light",
       primary: {
-        main: "#000",
+        main: isDark ? "#fff" : "#000",
         light: "#000",
         dark: "#fff"
       },
       secondary: {
-        main: "#fff",
+        main: isDark ? "#000" : "#fff",
         light: "#fff",
         dark: "#000"
       },
