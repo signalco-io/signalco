@@ -1,12 +1,10 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import {
-  Box, Button, Grid, Typography
+  Box, Grid, Typography
 } from "@material-ui/core";
 import { useEffect, useRef } from "react";
 import RippleIndicator, { IRippleIndicatorRef } from "./shared/indicators/RippleIndicator";
 
 const Login = () => {
-  const { loginWithRedirect } = useAuth0();
   const rippleTriggerRef = useRef<IRippleIndicatorRef>();
 
   useEffect(() => {
