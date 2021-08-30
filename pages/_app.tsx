@@ -111,8 +111,9 @@ export default function App(props: AppProps) {
               redirectUri={redirectUri}
               onRedirectCallback={(appState) => {
                 // Use Next.js's Router.replace method to replace the url
-                console.log('redirect callback. return to: ', appState?.returnTo)
-                Router.replace(appState?.returnTo || "/");
+                const pageMatch = appState?.returnTo?.match(/(.*)\?.*/);
+                const pageMatchPart = pageMatch && pageMatch.length > 1 ? pageMatch[1] : "/"
+                Router.replace(pageMatchPart);
               }}
               domain="dfnoise.eu.auth0.com"
               clientId="nl7QIQD7Kw3ZHt45qHHAZG0MEILSFa7U"
