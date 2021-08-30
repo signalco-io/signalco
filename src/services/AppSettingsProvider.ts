@@ -1,4 +1,4 @@
-const ApiProductionUrl: string = "https://signal-api.azurewebsites.net/api/";
+const ApiProductionUrl: string = "https://api.signalco.io/api/";
 
 class AppSettingsProvider {
   public authToken: string | null = null;
