@@ -64,8 +64,8 @@ export default function App(props: AppProps) {
     ? (Component as any).layout
     : undefined;
 
-  const redirectUri = typeof window !== "undefined"
-    ? `${window.location.origin}`
+  const redirectUri = typeof window !== "undefined" && window.location.origin.indexOf('localhost:3000') > 0
+    ? `${window.location.origin}/app`
     : 'https://www.signalco.io/app';
 
   return (
