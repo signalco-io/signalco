@@ -4683,11 +4683,6 @@ next-pwa@^5.3.1:
     workbox-webpack-plugin "^6.2.4"
     workbox-window "^6.2.4"
 
-next-themes@^0.0.16-beta.1:
-  version "0.0.16-beta.1"
-  resolved "https://registry.yarnpkg.com/next-themes/-/next-themes-0.0.16-beta.1.tgz#62dcaa8f81d5c68cfc4262e08518f7f7444eb6a4"
-  integrity sha512-e7XfoA+C5mxIWcbyQYziM7dYE29G09mM1XPd6LBP767MVgLRwlRaeIrpyxgK8iQB4443q22saebT7+ZAnexbCA==
-
 next@^11.1.0:
   version "11.1.0"
   resolved "https://registry.yarnpkg.com/next/-/next-11.1.0.tgz#767d4c4fa0b9b0c768cdbd6c9f03dd86b5d701c0"

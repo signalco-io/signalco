@@ -45,19 +45,6 @@ const Login = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item>
-        <Box sx={{ width: 315, pt: 4 }}>
-          <Button
-            onClick={() => loginWithRedirect()}
-            variant="outlined"
-            color="primary"
-            size="large"
-            fullWidth
-          >
-            Login
-          </Button>
-        </Box>
-      </Grid>
     </Grid>
   );
 };
