@@ -38,7 +38,7 @@ const Login = () => {
             <RippleIndicator size={72} ref={rippleTriggerRef} />
           </Grid>
           <Grid item>
-            <Typography variant="h1">Signal</Typography>
+            <Typography variant="h1">Signalco</Typography>
           </Grid>
           <Grid item>
             <Box sx={{ width: 72, height: 72 }}></Box>

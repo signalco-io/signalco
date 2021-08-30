@@ -66,7 +66,7 @@ export default function App(props: AppProps) {
 
   const redirectUri = typeof window !== "undefined"
     ? `${window.location.origin}`
-    : 'https://signal.dfnoise.com/app';
+    : 'https://www.signalco.io/app';
 
   return (
     <NextThemesThemeProvider attribute="class" enableSystem={true} defaultTheme="system">
@@ -98,7 +98,7 @@ export default function App(props: AppProps) {
           ></link>
           <meta name="msapplication-TileColor" content="#000000"></meta>
           <meta name="theme-color" content="#000000"></meta>
-          <title>Signal</title>
+          <title>Signalco</title>
           <meta
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width"
@@ -114,8 +114,8 @@ export default function App(props: AppProps) {
                 Router.replace(appState?.returnTo || "/");
               }}
               domain="dfnoise.eu.auth0.com"
-              clientId="TpdYqotCp3E7VS4HFUnWKIXfRnfPpfeV"
-              audience="https://api.signal.dfnoise.com"
+              clientId="nl7QIQD7Kw3ZHt45qHHAZG0MEILSFa7U"
+              audience="https://api.signalco.io"
             >
               {typeof Layout === "function" ? (
                 <Layout>
