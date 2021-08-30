@@ -27,7 +27,7 @@ const Onboarding = () => {
                 <RippleIndicator size={72} interval={1200} />
               </Grid>
               <Grid item>
-                <Typography variant="h1">Signal</Typography>
+                <Typography variant="h1">Signalco</Typography>
               </Grid>
               <Grid item>
                 <Box sx={{ width: '72px', height: '72px' }} />
@@ -64,9 +64,9 @@ const Footer = () => (
               <Grid item>
                 <Typography variant="h2" sx={{ pb: 2 }}>Projects</Typography>
                 <Stack>
-                  <Link href="https://github.com/AleksandarDev/signalapp">Website</Link>
-                  <Link href="https://github.com/AleksandarDev/signalapi">API</Link>
-                  <Link href="https://github.com/AleksandarDev/beacon">Beacon</Link>
+                  <Link href="https://github.com/signalco-io/signalco">Website</Link>
+                  <Link href="https://github.com/signalco-io/cloud">Cloud</Link>
+                  <Link href="https://github.com/signalco-io/station">Station</Link>
                 </Stack>
               </Grid>
               <Grid item>
@@ -75,7 +75,9 @@ const Footer = () => (
               </Grid>
               <Grid item>
                 <Typography variant="h2" sx={{ pb: 2 }}>Resources</Typography>
-                <Typography variant="caption" color="textSecondary">Coming soon...</Typography>
+                <Stack>
+                  <Link href="https://status.signalco.io">Status</Link>
+                </Stack>
               </Grid>
               <Grid item>
                 <Typography variant="h2" sx={{ pb: 2 }}>Legal</Typography>
@@ -94,17 +96,17 @@ const Footer = () => (
                 <RippleIndicator size={52} interval={800} />
               </Grid>
               <Grid item>
-                <Typography variant="h1" component="span" color="textSecondary">Signal</Typography>
+                <Typography variant="h1" component="span" color="textSecondary">Signalco</Typography>
               </Grid>
             </Grid>
           </Grid>
           <Grid item>
             <Grid container spacing={2} alignItems="flex-end" justifyContent="space-between">
               <Grid item>
-                <Typography variant="subtitle2" color="textSecondary">Copyright © {new Date().getFullYear()} Aleksandar Toplek. All rights reserved.</Typography>
+                <Typography variant="subtitle2" color="textSecondary">Copyright © {new Date().getFullYear()} Signalco. All rights reserved.</Typography>
               </Grid>
               <Grid item>
-                <Link href="https://github.com/AleksandarDev/signalapp">
+                <Link href="https://github.com/signalco-io/signalco">
                   <IconButton>
                     <GitHubIcon />
                   </IconButton>
