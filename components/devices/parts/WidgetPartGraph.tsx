@@ -4,6 +4,7 @@ import { Area, AreaChart, XAxis, YAxis, Tooltip } from "recharts";
 import { IDeviceTarget } from "../../../src/devices/Device";
 import { rowHeight } from "./Shared";
 import { scaleTime, timeHour } from 'd3';
+import { useTheme } from "@material-ui/core";
 import ReactTimeago from "react-timeago";
 
 export interface IWidgetPartGraphConfig {
@@ -72,6 +73,7 @@ const useGraph = (value: () => Promise<IHistoricalValue[]>, duration?: string) =
 
 const WidgetPartGraph = ({ columnWidth, config }: { columnWidth: number, config: IWidgetPartGraphConfig }) => {
     const graph = useGraph(config.value, config.duration);
+    const theme = useTheme();
 
     const CustomTooltip = ({ active, payload }: { active?: boolean, payload?: any }) => {
         if (active && payload && payload.length) {
@@ -101,7 +103,7 @@ const WidgetPartGraph = ({ columnWidth, config }: { columnWidth: number, config:
                 <Area
                     type="basis"
                     dataKey="value"
-                    fill="#ffffff"
+                    fill={theme.palette.mode === "dark" ? "#ffffff" : "#000000"}
                     fillOpacity={0.1}
                     stroke="#aeaeae"
                     strokeWidth={2} />

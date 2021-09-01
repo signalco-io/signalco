@@ -1,6 +1,7 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { spring, TransitionMotion } from 'react-motion';
 import { useTheme } from '@material-ui/core/styles';
+import { NoSsr } from '@material-ui/core';
 
 const leavingSpringConfig = { stiffness: 60, damping: 15 };
 const leavingSpringBackgroundConfig = { stiffness: 140, damping: 20 };
@@ -48,30 +49,32 @@ const RippleIndicator = forwardRef((props: IRippleIndicatorProps, ref: React.For
     }];
 
     return (
-        <TransitionMotion willLeave={willLeave} styles={styles}>
-            {circles =>
-                <div style={{ position: "relative", width: `${size}px`, height: `${size}px` }}>
-                    {circles.map(({ key, style: { opacity, scale, background } }) =>
-                        <div
-                            key={key}
-                            style={{
-                                width: `${size / 2}px`,
-                                height: `${size / 2}px`,
-                                top: `${size / 4}px`,
-                                left: `${size / 4}px`,
-                                borderRadius: `${size - 1}px`,
-                                position: "absolute",
-                                border: theme.palette.mode === 'dark' ? "1px solid white" : "1px solid black",
-                                backgroundColor: theme.palette.mode === 'dark' ? `rgba(255,255,255,${background})` : `rgba(0,0,0,${background})`,
-                                opacity: opacity,
-                                scale: scale,
-                                transform: `scale(${scale})`,
-                                WebkitTransform: `scale(${scale})`,
-                            }} />
-                    )}
-                </div>
-            }
-        </TransitionMotion>
+        <NoSsr>
+            <TransitionMotion willLeave={willLeave} styles={styles}>
+                {circles =>
+                    <div style={{ position: "relative", width: `${size}px`, height: `${size}px` }}>
+                        {circles.map(({ key, style: { opacity, scale, background } }) =>
+                            <div
+                                key={key}
+                                style={{
+                                    width: `${size / 2}px`,
+                                    height: `${size / 2}px`,
+                                    top: `${size / 4}px`,
+                                    left: `${size / 4}px`,
+                                    borderRadius: `${size - 1}px`,
+                                    position: "absolute",
+                                    border: theme.palette.mode === 'dark' ? "1px solid white" : "1px solid black",
+                                    backgroundColor: theme.palette.mode === 'dark' ? `rgba(255,255,255,${background})` : `rgba(0,0,0,${background})`,
+                                    opacity: opacity,
+                                    scale: scale,
+                                    transform: `scale(${scale})`,
+                                    WebkitTransform: `scale(${scale})`,
+                                }} />
+                        )}
+                    </div>
+                }
+            </TransitionMotion>
+        </NoSsr>
     );
 });
 
