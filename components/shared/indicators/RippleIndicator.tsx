@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { spring, TransitionMotion } from 'react-motion';
-import { useTheme } from '@material-ui/core/styles';
-import { NoSsr } from '@material-ui/core';
+import { useTheme } from '@mui/material/styles';
+import { NoSsr } from '@mui/material';
 
 const leavingSpringConfig = { stiffness: 60, damping: 15 };
 const leavingSpringBackgroundConfig = { stiffness: 140, damping: 20 };

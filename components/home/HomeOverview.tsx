@@ -1,15 +1,15 @@
-import { Alert, Box, Button, Grid, LinearProgress } from "@material-ui/core";
+import { Alert, Box, Button, Grid, LinearProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import EditSharpIcon from '@material-ui/icons/EditSharp';
+import EditSharpIcon from '@mui/icons-material/EditSharp';
 import HttpService from "../../src/services/HttpService";
 import { observer } from "mobx-react-lite";
 import Widget, { IWidgetPart } from "../devices/Widget";
 import { useResizeDetector } from 'react-resize-detector';
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
-import Tab from '@material-ui/core/Tab';
-import TabContext from '@material-ui/lab/TabContext';
-import TabList from '@material-ui/lab/TabList';
-import TabPanel from '@material-ui/lab/TabPanel';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
 
 interface IWidget {

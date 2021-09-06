@@ -1,4 +1,4 @@
-import { Box, Grid, IconButton } from "@material-ui/core";
+import { Box, Grid, IconButton } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { IDeviceContactState, IDeviceTarget, IDeviceTargetWithValueFallback } from "../../../src/devices/Device";

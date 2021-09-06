@@ -1,4 +1,4 @@
-import { Alert, Grid, Paper } from "@material-ui/core";
+import { Alert, Grid, Paper } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import ConductsService from "../../src/conducts/ConductsService";
@@ -141,7 +141,7 @@ const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidge
                         return [];
                     }
 
-                    return await DevicesRepository.getDeviceStateHistoryAsync(graphConfig.valueSource, graphConfig.duration) ?? [];
+                    return (await DevicesRepository.getDeviceStateHistoryAsync(graphConfig.valueSource, graphConfig.duration)) ?? [];
                 };
             }
             return <WidgetPartGraph columnWidth={columnWidth} config={graphConfig} />

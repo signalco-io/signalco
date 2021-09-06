@@ -1,6 +1,6 @@
 import {
   Box, Grid, Typography
-} from "@material-ui/core";
+} from "@mui/material";
 import { useEffect, useRef } from "react";
 import RippleIndicator, { IRippleIndicatorRef } from "./shared/indicators/RippleIndicator";
 

@@ -10,8 +10,8 @@ import {
   SvgIconTypeMap,
 
   Typography
-} from "@material-ui/core";
-import { OverridableComponent } from "@material-ui/core/OverridableComponent";
+} from "@mui/material";
+import { OverridableComponent } from "@mui/material/OverridableComponent";
 import React from "react";
 import AutoActionButton from "../action/AutoActionButton";
 import ResultsPlaceholder from "../indicators/ResultsPlaceholder";

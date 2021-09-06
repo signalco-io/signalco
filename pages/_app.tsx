@@ -1,29 +1,31 @@
 import * as React from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import NextNprogress from "nextjs-progressbar";
 import theme from "../src/theme";
 import "../styles/global.scss";
-import createCache from '@emotion/cache';
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { Auth0Provider } from "@auth0/auth0-react";
 import Router, { useRouter } from "next/router";
 import { initSentry } from "../src/errors/SentryUtil";
-import { SnackbarProvider } from 'notistack';
+import createEmotionCache from '../src/createEmotionCache';
+import { useEffect } from "react";
+// import { SnackbarProvider } from 'notistack';
+
+const clientSideEmotionCache = createEmotionCache();
 
 initSentry();
-
-export const cache = createCache({ key: 'css' });
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
 
 export default function App(props: MyAppProps) {
-  const { Component, pageProps, emotionCache = cache } = props;
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const [isOnline, setIsOnline] = React.useState(true);
+  const [isLight, setIsLight] = React.useState(true);
 
   React.useEffect(() => {
     // Handle 'cache on fe nav'
@@ -43,16 +45,22 @@ export default function App(props: MyAppProps) {
     }
   }, []);
 
-  // Determine theme (light on server, take from local storage if available or detect via browser)
-  let themeVariant = "light";
-  if (typeof window !== 'undefined') {
-    themeVariant = window.localStorage?.getItem("theme") ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
-  }
+  useEffect(() => {
+    // Determine theme (light on server, take from local storage if available or detect via browser)
+    let themeVariant = "light";
+    if (typeof window !== 'undefined') {
+      themeVariant = window.localStorage?.getItem("theme") ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
+    }
 
-  // Apply theme to document
-  if (typeof document !== 'undefined') {
-    document.documentElement.style.setProperty("color-scheme", themeVariant);
-  }
+    // Apply theme to document
+    if (typeof document !== 'undefined') {
+      document.documentElement.style.setProperty("color-scheme", themeVariant);
+    }
+
+    if (themeVariant !== 'light') {
+      setIsLight(false);
+    }
+  }, []);
 
   // PWA 
   const router = useRouter();
@@ -72,9 +80,12 @@ export default function App(props: MyAppProps) {
     ? (Component as any).layout
     : undefined;
 
-  const redirectUri = typeof window !== "undefined" && window.location.origin.indexOf('localhost:3000') > 0
-    ? `${window.location.origin}/login-return`
-    : 'https://www.signalco.io/login-return';
+  let redirectUri = 'https://www.signalco.io/login-return';
+  if (typeof window !== "undefined" && window.location.origin.indexOf('localhost:3000') > 0) {
+    redirectUri = `${window.location.origin}/login-return`;
+  } else if (typeof window !== "undefined" && window.location.origin.indexOf('next.signalco.io') > 0) {
+    redirectUri = `https://next.signalco.io/login-return`;
+  }
 
   return (
     <CacheProvider value={emotionCache}>
@@ -111,35 +122,37 @@ export default function App(props: MyAppProps) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <ThemeProvider theme={theme(themeVariant === "dark")}>
-        <SnackbarProvider maxSnack={3}>
-          <CssBaseline />
-          <Auth0Provider
-            redirectUri={redirectUri}
-            onRedirectCallback={(appState) => {
-              // Use Next.js's Router.replace method to replace the url
-              Router.replace(appState?.returnTo || "/");
-            }}
-            domain="dfnoise.eu.auth0.com"
-            clientId="nl7QIQD7Kw3ZHt45qHHAZG0MEILSFa7U"
-            audience="https://api.signalco.io"
-          >
-            {typeof Layout === "function" ? (
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            ) : (
+      {/* <StyledEngineProvider injectFirst> */}
+      <ThemeProvider theme={theme(!isLight)}>
+        {/* <SnackbarProvider maxSnack={3}> */}
+        <CssBaseline />
+        <Auth0Provider
+          redirectUri={redirectUri}
+          onRedirectCallback={(appState) => {
+            // Use Next.js's Router.replace method to replace the url
+            Router.replace(appState?.returnTo || "/");
+          }}
+          domain="dfnoise.eu.auth0.com"
+          clientId="nl7QIQD7Kw3ZHt45qHHAZG0MEILSFa7U"
+          audience="https://api.signalco.io"
+        >
+          {typeof Layout === "function" ? (
+            <Layout>
               <Component {...pageProps} />
-            )}
-          </Auth0Provider>
-          <NextNprogress
-            color="#fff"
-            startPosition={0.3}
-            stopDelayMs={200}
-            height={2}
-          />
-        </SnackbarProvider>
+            </Layout>
+          ) : (
+            <Component {...pageProps} />
+          )}
+        </Auth0Provider>
+        <NextNprogress
+          color="#fff"
+          startPosition={0.3}
+          stopDelayMs={200}
+          height={2}
+        />
+        {/* </SnackbarProvider> */}
       </ThemeProvider>
+      {/* </StyledEngineProvider> */}
     </CacheProvider>
   );
 }

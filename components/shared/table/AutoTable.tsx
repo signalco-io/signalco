@@ -3,8 +3,8 @@ import {
   Box,
   LinearProgress, Link,
   Typography
-} from "@material-ui/core";
-import OpenInNewIcon from "@material-ui/icons/OpenInNew";
+} from "@mui/material";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import {
