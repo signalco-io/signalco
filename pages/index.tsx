@@ -1,10 +1,10 @@
-import { Box, Button, Card, CardHeader, CardMedia, Container, Divider, Grid, IconButton, Link, Stack, Typography } from "@material-ui/core";
+import { Box, Button, Card, CardHeader, CardMedia, Container, Divider, Grid, IconButton, Link, Stack, Typography } from "@mui/material";
 import React from "react";
-import GitHubIcon from '@material-ui/icons/GitHub';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import RippleIndicator from "../components/shared/indicators/RippleIndicator";
-import { SxProps } from '@material-ui/system';
-import { Theme } from '@material-ui/core/styles'
-import { Cloud, Help, WifiLock } from "@material-ui/icons";
+import { SxProps } from '@mui/system';
+import { Theme } from '@mui/material/styles'
+import { Cloud, Help, WifiLock } from "@mui/icons-material";
 import ZigbeeLogoIcon from "../components/icons/ZigbeeLogoIcon";
 
 const Pitch = (props: { sx?: SxProps<Theme>, heading: string, children: React.ReactChild }) => (
@@ -107,7 +107,7 @@ const Footer = () => (
               </Grid>
               <Grid item>
                 <Link href="https://github.com/signalco-io/signalco">
-                  <IconButton>
+                  <IconButton size="large">
                     <GitHubIcon />
                   </IconButton>
                 </Link>

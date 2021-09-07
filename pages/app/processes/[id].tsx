@@ -1,12 +1,12 @@
-import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Grid, Menu, MenuItem, Skeleton, Stack, Typography } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Grid, Menu, MenuItem, Skeleton, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import AppLayout from "../../../components/AppLayout";
 import { observer } from 'mobx-react-lite';
 import ProcessesRepository, { IProcessModel } from '../../../src/processes/ProcessesRepository';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import NoDataPlaceholder from '../../../components/shared/indicators/NoDataPlaceholder';
-import AddSharpIcon from '@material-ui/icons/AddSharp';
+import AddSharpIcon from '@mui/icons-material/AddSharp';
 import { makeAutoObservable } from 'mobx';
 import { IDeviceModel } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';

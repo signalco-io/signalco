@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardHeader, Grid, IconButton, Paper, Skeleton, Slide, Slider, Stack, Switch, TextField, Typography } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardHeader, Grid, IconButton, Paper, Skeleton, Slide, Slider, Stack, Switch, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
@@ -7,7 +7,7 @@ import AutoTable, { IAutoTableItem } from '../../../components/shared/table/Auto
 import { IDeviceContact, IDeviceContactState, IDeviceModel } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import { observer } from 'mobx-react-lite';
-import { Clear as ClearIcon, ExpandMore as ExpandMoreIcon, PlayArrow as PlayArrowIcon, Send as SendIcon, Share as ShareIcon } from '@material-ui/icons';
+import { Clear as ClearIcon, ExpandMore as ExpandMoreIcon, PlayArrow as PlayArrowIcon, Send as SendIcon, Share as ShareIcon } from '@mui/icons-material';
 import HttpService from '../../../src/services/HttpService';
 import ConductsService from '../../../src/conducts/ConductsService';
 import ResultsPlaceholder from '../../../components/shared/indicators/ResultsPlaceholder';
@@ -100,8 +100,9 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
         return (
             <Stack alignItems="center" direction="row">
                 {props.contact.dataValues && <SelectItems value={dataValuesSelected} items={props.contact.dataValues} multiple={props.contact.dataValuesMultiple} onChange={handleDataValuesChanged} />}
-                <IconButton onClick={handleActionClick}><PlayArrowIcon /></IconButton>
-            </Stack>)
+                <IconButton onClick={handleActionClick} size="large"><PlayArrowIcon /></IconButton>
+            </Stack>
+        );
     } else if (props.contact.dataType === 'double') {
         return <Slider
             step={0.01}
@@ -322,7 +323,7 @@ const DeviceDetails = () => {
                                 <CardHeader
                                     title={`Shared with (${device?.sharedWith?.length || 1})`}
                                     action={(
-                                        <IconButton onClick={handleShareWithUser}>
+                                        <IconButton onClick={handleShareWithUser} size="large">
                                             <ShareIcon />
                                         </IconButton>
                                     )} />

@@ -1,20 +1,18 @@
 import * as React from 'react';
-import { CacheProvider } from '@emotion/react';
-import createCache from '@emotion/cache';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
-
-function getCache() {
-  const cache = createCache({ key: 'css', prepend: true });
-  cache.compat = true;
-  return cache;
-}
+import createEmotionCache from '../src/createEmotionCache';
 
 class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
@@ -27,18 +25,16 @@ class MyDocument extends Document {
 MyDocument.getInitialProps = async (ctx) => {
   const originalRenderPage = ctx.renderPage;
 
-  const cache = getCache();
+  const cache = createEmotionCache();
   const { extractCriticalToChunks } = createEmotionServer(cache);
 
   ctx.renderPage = () =>
     originalRenderPage({
       // Take precedence over the CacheProvider in our custom _app.js
       // eslint-disable-next-line react/display-name
-      enhanceComponent: (Component) => (props) =>
+      enhanceComponent: (App: any) => (props) =>
       (
-        <CacheProvider value={cache}>
-          <Component {...props} />
-        </CacheProvider>
+        <App emotionCache={cache} {...props} />
       ),
     });
 

@@ -1,16 +1,16 @@
-import { Box, Button, Card, CardActionArea, CardContent, Checkbox, Container, Grid, List, Paper, Typography } from "@material-ui/core";
-import Stack from "@material-ui/core/Stack";
-import ListItemButton from '@material-ui/core/ListItemButton';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import { Box, Button, Card, CardActionArea, CardContent, Checkbox, Container, Grid, List, Paper, Typography } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 import React from "react";
-import { ArrowDownward as ArrowDownwardIcon, Cancel as CancelIcon, CheckCircle } from "@material-ui/icons";
+import { ArrowDownward as ArrowDownwardIcon, Cancel as CancelIcon, CheckCircle } from "@mui/icons-material";
 import Image from 'next/image';
-import { amber, green, grey } from "@material-ui/core/colors";
-import LaunchIcon from '@material-ui/icons/Launch';
+import { amber, green, grey } from "@mui/material/colors";
+import LaunchIcon from '@mui/icons-material/Launch';
 import SelectItems from "../../components/shared/form/SelectItems";
 import { useState } from "react";
-import WatchLaterIcon from '@material-ui/icons/WatchLater';
+import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import contentData from './content.json';
 
 const FilterList = (props: { header: string, items: { id: string, label: string }[], truncate: number }) => {

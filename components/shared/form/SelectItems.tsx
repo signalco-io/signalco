@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Checkbox, Chip, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@material-ui/core";
+import { Box, Checkbox, Chip, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 
 const SelectItems = (props: { multiple?: boolean, value: string[], items: { value: string, label?: string }[], onChange: (values: string[]) => void }) => {
     const {

@@ -1,7 +1,7 @@
-import { Fade, IconButton, InputAdornment, OutlinedInput, OutlinedInputProps, Paper, Stack, Typography } from "@material-ui/core";
-import { ContentCopy as ContentCopyIcon, Warning } from "@material-ui/icons";
+import { Fade, IconButton, InputAdornment, OutlinedInput, OutlinedInputProps, Paper, Stack, Typography } from "@mui/material";
+import { ContentCopy as ContentCopyIcon, Warning } from "@mui/icons-material";
 import React, { MouseEvent, useState } from "react";
-import Popper from '@material-ui/core/Popper'
+import Popper from '@mui/material/Popper'
 import {
     usePopupState,
     bindPopper,

@@ -6,25 +6,25 @@ import {
   ListItemText,
   Menu,
   MenuItem,
-} from "@material-ui/core";
+} from "@mui/material";
 import Link from 'next/link';
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import Skeleton from "@material-ui/lab/Skeleton";
-import DashboardSharpIcon from '@material-ui/icons/DashboardSharp';
-import AccountTreeSharpIcon from '@material-ui/icons/AccountTreeSharp';
-import DevicesOtherSharpIcon from '@material-ui/icons/DevicesOtherSharp';
-import DeviceHubSharpIcon from '@material-ui/icons/DeviceHubSharp';
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import Skeleton from '@mui/material/Skeleton';
+import DashboardSharpIcon from '@mui/icons-material/DashboardSharp';
+import AccountTreeSharpIcon from '@mui/icons-material/AccountTreeSharp';
+import DevicesOtherSharpIcon from '@mui/icons-material/DevicesOtherSharp';
+import DeviceHubSharpIcon from '@mui/icons-material/DeviceHubSharp';
 import React from "react";
 import { useRouter } from "next/router";
 import { orderBy } from "../src/helpers/ArrayHelpers";
-import { SvgIconComponent } from "@material-ui/icons";
+import { SvgIconComponent } from "@mui/icons-material";
 import { User } from '@auth0/auth0-spa-js';
 import {
   usePopupState,
   bindTrigger,
   bindMenu,
 } from 'material-ui-popup-state/hooks';
-import { useTheme } from "@material-ui/core";
+import { useTheme } from "@mui/material";
 
 const navItems = [
   { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon },
@@ -68,7 +68,11 @@ const NavProfile = () => {
   const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconComponent, active: boolean, label: string }) => (
     <Box borderBottom={active ? (theme.palette.mode === 'dark' ? "3px solid white" : "3px solid black") : undefined}>
       <Link href={path} passHref>
-        <IconButton sx={{ opacity: theme.palette.mode === 'dark' ? (active ? 0.6 : 1) : (active ? 1 : 0.6) }} aria-label={label} title={label}>
+        <IconButton
+          sx={{ opacity: theme.palette.mode === 'dark' ? (active ? 0.6 : 1) : (active ? 1 : 0.6) }}
+          aria-label={label}
+          title={label}
+          size="large">
           <Icon />
         </IconButton>
       </Link>

@@ -1,10 +1,10 @@
-import { Box, Grid, Typography } from "@material-ui/core"
+import { Box, Grid, Typography } from "@mui/material"
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react"
 import { IDeviceTarget } from "../../../src/devices/Device";
 import IconResolver, { availableIcons } from '../../icons/IconResolver';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import CancelIcon from '@material-ui/icons/Cancel';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 export interface IWidgetPartInlineLabelConfig {
     label?: string,

@@ -1,4 +1,4 @@
-import { IconButton, Button } from "@material-ui/core";
+import { IconButton, Button } from "@mui/material";
 import IAutoAction from "../interfaces/IAutoAction";
 import { useState } from "react";
 import HttpService from "../../../src/services/HttpService";
@@ -49,7 +49,11 @@ export default function AutoActionButton(props: IAutoActionButtonProps) {
   };
 
   return action.icon ? (
-    <IconButton title={action.label} aria-label={action.label} {...commonProps}>
+    <IconButton
+      title={action.label}
+      aria-label={action.label}
+      {...commonProps}
+      size="large">
       {action.icon}
     </IconButton>
   ) : (

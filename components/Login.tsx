@@ -1,12 +1,10 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import {
-  Box, Button, Grid, Typography
-} from "@material-ui/core";
+  Box, Grid, Typography
+} from "@mui/material";
 import { useEffect, useRef } from "react";
 import RippleIndicator, { IRippleIndicatorRef } from "./shared/indicators/RippleIndicator";
 
 const Login = () => {
-  const { loginWithRedirect } = useAuth0();
   const rippleTriggerRef = useRef<IRippleIndicatorRef>();
 
   useEffect(() => {
@@ -44,19 +42,6 @@ const Login = () => {
             <Box sx={{ width: 72, height: 72 }}></Box>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid item>
-        <Box sx={{ width: 315, pt: 4 }}>
-          <Button
-            onClick={() => loginWithRedirect()}
-            variant="outlined"
-            color="primary"
-            size="large"
-            fullWidth
-          >
-            Login
-          </Button>
-        </Box>
       </Grid>
     </Grid>
   );

@@ -1,5 +1,5 @@
-import { red } from "@material-ui/core/colors";
-import { createTheme } from "@material-ui/core/styles";
+import { red } from "@mui/material/colors";
+import { createTheme } from "@mui/material/styles";
 
 // Create a theme instance.
 const theme = (isDark: boolean) => {
@@ -7,12 +7,12 @@ const theme = (isDark: boolean) => {
     palette: {
       mode: isDark ? "dark" : "light",
       primary: {
-        main: "#000",
+        main: isDark ? "#fff" : "#000",
         light: "#000",
         dark: "#fff"
       },
       secondary: {
-        main: "#fff",
+        main: isDark ? "#000" : "#fff",
         light: "#fff",
         dark: "#000"
       },

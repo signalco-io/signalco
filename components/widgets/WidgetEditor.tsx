@@ -1,9 +1,9 @@
-import { Box, Grid, Paper, Slider, Tab, TextField, Typography } from "@material-ui/core";
+import { Box, Grid, Paper, Slider, Tab, TextField, Typography } from "@mui/material";
 import React, { useMemo } from "react";
 import { observer } from "mobx-react-lite";
 import Widget, { IWidgetPart } from "../devices/Widget";
 import { makeAutoObservable } from "mobx";
-import { TabContext, TabList, TabPanel } from "@material-ui/lab";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 
 class WidgetPartsBuilder {
     parts: IWidgetPart[] = [];

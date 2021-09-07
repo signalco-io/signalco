@@ -1,4 +1,4 @@
-import { Box, Paper, Typography } from "@material-ui/core";
+import { Box, Paper, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
 import ReactTimeago from "react-timeago";
