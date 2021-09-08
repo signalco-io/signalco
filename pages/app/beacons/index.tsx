@@ -11,6 +11,7 @@ function beaconModelToTableItem(beacon: IBeaconModel): IAutoTableItem {
     return {
         id: beacon.id,
         name: beacon.id,
+        version: beacon.version,
         registeredDate: <ReactTimeago date={beacon.registeredTimeStamp} />
     };
 }
