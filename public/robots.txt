@@ -1,7 +1,8 @@
 User-agent: *
-Disallow: /dashboard
-Disallow: /processes
-Disallow: /devices
-Disallow: /channels
-Disallow: /beacons
-Disallow: /profile
+Disallow: /app
+Disallow: /app/dashboard
+Disallow: /app/processes
+Disallow: /app/devices
+Disallow: /app/channels
+Disallow: /app/beacons
+Disallow: /app/profile
