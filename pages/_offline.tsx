@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 
-const OfflinePage = (
+const OfflinePage = () => (
     <Grid
         container
         className="login__root"
