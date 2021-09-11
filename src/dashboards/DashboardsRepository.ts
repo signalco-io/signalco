@@ -34,17 +34,12 @@ class SignalDashboardDto {
 
 export default class DashboardsRepository {
     static dashboardsCache?: IDashboardModel[];
-    static dashboardsCacheKeyed?: { [id: string]: IDashboardModel };
     static isLoading: boolean;
+    static isUpdateAvailable: boolean;
 
     static async getDashboardAsync(id: string): Promise<IDashboardModel | undefined> {
         await DashboardsRepository._cacheDashboardsAsync();
-        if (typeof DashboardsRepository.dashboardsCacheKeyed !== 'undefined') {
-            if (typeof DashboardsRepository.dashboardsCacheKeyed[id] === "undefined")
-                return undefined;
-            return DashboardsRepository.dashboardsCacheKeyed[id];
-        }
-        return undefined;
+        return DashboardsRepository.dashboardsCache?.find(i => i.id === id);
     }
 
     static async getDashboardsAsync(): Promise<IDashboardModel[]> {
@@ -53,18 +48,32 @@ export default class DashboardsRepository {
     }
 
     static async _cacheDashboardsAsync() {
+        // Try to load from local storage
+        if (!DashboardsRepository.isLoading && 
+            !DashboardsRepository.dashboardsCache &&
+            typeof localStorage !== 'undefined' &&
+            localStorage.getItem('signalco-cache-dashboards') !== null) {
+            DashboardsRepository.isLoading = true;
+
+            // Load from local storage
+            DashboardsRepository.dashboardsCache = JSON.parse(localStorage.getItem('signalco-cache-dashboards') ?? "[]") as IDashboardModel[];
+            DashboardsRepository.isLoading = false;
+        }
+
         // TODO: Invalidate cache after some period        
         if (!DashboardsRepository.isLoading &&
             !DashboardsRepository.dashboardsCache) {
-                DashboardsRepository.isLoading = true;
-                DashboardsRepository.dashboardsCache = (await HttpService.getAsync<SignalDashboardDto[]>("/dashboards")).map(SignalDashboardDto.FromDto);
-                DashboardsRepository.dashboardsCacheKeyed = {};
-                DashboardsRepository.dashboardsCache.forEach(process => {
-                if (DashboardsRepository.dashboardsCacheKeyed)
-                DashboardsRepository.dashboardsCacheKeyed[process.id] = process;
-            });
+            DashboardsRepository.isLoading = true;
+
+            // Download cache
+            DashboardsRepository.dashboardsCache = (await HttpService.getAsync<SignalDashboardDto[]>("/dashboards")).map(SignalDashboardDto.FromDto);            
             DashboardsRepository.dashboardsCache.sort((a, b) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0));
             DashboardsRepository.isLoading = false;
+
+            // Persist dashboards locally
+            if (typeof localStorage !== 'undefined') {
+                localStorage.setItem('signalco-cache-dashboards', JSON.stringify(DashboardsRepository.dashboardsCache));
+            }
         }
 
         // Wait to load

@@ -2,29 +2,37 @@ import HttpService from "../services/HttpService";
 
 export interface IBeaconModel {
     id: string;
+    version?: string;
+    stateTimeStamp?: Date;
     registeredTimeStamp: Date;
 }
 
 class BeaconModel implements IBeaconModel {
     id: string;
+    version?: string;
+    stateTimeStamp?: Date;
     registeredTimeStamp: Date;
 
-    constructor(id: string, registeredTimeStamp: Date) {
+    constructor(id: string, registeredTimeStamp: Date, version?: string, stateTimeStamp?: Date) {
         this.id = id;
         this.registeredTimeStamp = registeredTimeStamp;
+        this.version = version;
+        this.stateTimeStamp = stateTimeStamp;
     }
 }
 
 class SignalBeaconDto {
     id?: string;
     registeredTimeStamp?: string;
+    version?: string;
+    stateTimeStamp?: Date;
 
     static FromDto(dto: SignalBeaconDto): IBeaconModel {
         if (dto.id == null || dto.registeredTimeStamp == null) {
             throw Error("Invalid SignalBeaconDto - missing required properties.");
         }
 
-        return new BeaconModel(dto.id, new Date(dto.registeredTimeStamp));
+        return new BeaconModel(dto.id, new Date(dto.registeredTimeStamp), dto.version, dto.stateTimeStamp);
     }
 }
 

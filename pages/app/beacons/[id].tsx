@@ -44,8 +44,21 @@ const BeaconDetails = () => {
                                 <CardHeader title="Information" />
                                 <CardContent>
                                     <Grid container spacing={2}>
-                                        <Grid item><span>Registered date</span></Grid>
-                                        <Grid item>
+                                        <Grid item xs={4}><span>Version</span></Grid>
+                                        <Grid item xs={8}>
+                                            {beacon?.version
+                                                ? <span>{beacon.version}</span>
+                                                : <span>Unknown</span>}
+                                        </Grid>
+                                        <Grid item xs={4}><span>Last activity</span></Grid>
+                                        <Grid item xs={8}>
+                                            {beacon?.stateTimeStamp
+                                                ? <ReactTimeago date={beacon?.stateTimeStamp} />
+                                                : <span>Never</span>
+                                            }
+                                        </Grid>
+                                        <Grid item xs={4}><span>Registered date</span></Grid>
+                                        <Grid item xs={8}>
                                             {isLoading && <LinearProgress />}
                                             {error && <Alert color="error">Failed to load Beacon information: {error}</Alert>}
                                             {beacon?.registeredTimeStamp &&

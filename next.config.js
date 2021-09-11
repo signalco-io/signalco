@@ -1,14 +1,11 @@
-// const withPWA = require('next-pwa')
+const withPWA = require('next-pwa')
 
-module.exports = {
-    // Prefer loading of ES Modules over CommonJS
-    experimental: { esmExternals: true }
-}
-
-// module.exports = withPWA({
-//     pwa: {
-//         dest: 'public',
-//         scope: '/app',
-//         // swSrc: 'src/service-worker.js'
-//     }
-// });
+module.exports = withPWA({
+    experimental: { esmExternals: true },
+    pwa: {
+        dest: 'public',
+        scope: '/app',
+        //disable: process.env.NODE_ENV === 'development',
+        swSrc: 'src/service-worker.js'
+    }
+});
