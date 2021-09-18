@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Grid, Menu, MenuItem, Skeleton, Stack, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Grid, Menu, MenuItem, OutlinedInput, Paper, Popover, Skeleton, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import AppLayout from "../../../components/AppLayout";
@@ -8,7 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import NoDataPlaceholder from '../../../components/shared/indicators/NoDataPlaceholder';
 import AddSharpIcon from '@mui/icons-material/AddSharp';
 import { makeAutoObservable } from 'mobx';
-import { IDeviceModel } from '../../../src/devices/Device';
+import { DeviceModel, IDeviceModel } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import { selectMany } from '../../../src/helpers/ArrayHelpers';
 
@@ -309,14 +309,32 @@ const DisplayDeviceTarget = observer((props: { target?: IDeviceStateTarget, onCh
     );
 });
 
-const DisplayValue = observer((props: { value: any | undefined, onChanged: (value: any | undefined) => void }) => {
+const DisplayValue = observer((props: { value: any | undefined, dataType: string, onChanged: (value: any | undefined) => void }) => {
     const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
+    const [dataType, setDataType] = useState(props.dataType);
+    const [value, setValue] = useState<string>(props.value || "");
+
+    useEffect(() => {
+        if (!dataType) {
+            setDataType(props.dataType);
+        }
+    }, [dataType, props.dataType]);
+
     const handleValueClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setMenuAnchorEl(event.currentTarget)
     };
 
-    const handleEditOptionSelected = (value: boolean | undefined) => {
+    const handleEditOptionSelected = (value: boolean | string | number | undefined) => {
         props.onChanged(value);
+        handleClosed();
+    };
+
+    const handleClosedApplyValue = () => {
+        let submitValue: any = value;
+        if (dataType === 'double' || dataType === 'colortemp') {
+            submitValue = parseFloat(value) || 0;
+        }
+        handleEditOptionSelected(submitValue);
         handleClosed();
     };
 
@@ -325,12 +343,11 @@ const DisplayValue = observer((props: { value: any | undefined, onChanged: (valu
     };
 
     let label: string | React.ReactNode = "None";
-    const valueType = typeof props.value;
-    if (valueType === 'boolean') {
+    if (dataType === 'bool' || dataType === "any") {
         label = props.value.toString();
-    } else if (valueType === 'string') {
+    } else if (dataType === 'string') {
         label = `"${props.value}"`;
-    } else if (valueType === 'number') {
+    } else if (dataType === 'double' || dataType === 'colortemp') {
         label = props.value;
     }
 
@@ -339,12 +356,30 @@ const DisplayValue = observer((props: { value: any | undefined, onChanged: (valu
             <ButtonBase onClick={handleValueClick} aria-controls="displayvalue-select-menu" aria-haspopup="true">
                 <Chip label={label} />
             </ButtonBase>
-            {Boolean(menuAnchorEl) &&
+            {(dataType === 'bool' && Boolean(menuAnchorEl)) &&
                 <Menu id="displayvalue-select-menu" open={Boolean(menuAnchorEl)} anchorEl={menuAnchorEl} keepMounted onClose={handleClosed}>
                     <MenuItem onClick={() => handleEditOptionSelected(true)}>true</MenuItem>
                     <MenuItem onClick={() => handleEditOptionSelected(false)}>false</MenuItem>
                     <MenuItem onClick={() => handleEditOptionSelected(undefined)}>None</MenuItem>
                 </Menu>}
+            {(dataType === 'string' && Boolean(menuAnchorEl)) &&
+                <Popover open={true} anchorEl={menuAnchorEl} onClose={handleClosedApplyValue}>
+                    <Paper sx={{ p: 2 }}>
+                        <Stack spacing={1}>
+                            <Typography>String</Typography>
+                            <OutlinedInput size="small" value={value} onChange={(e) => setValue(e.target.value)} />
+                        </Stack>
+                    </Paper>
+                </Popover>}
+            {((dataType === 'double' || dataType === 'colortemp') && Boolean(menuAnchorEl)) &&
+                <Popover open={true} anchorEl={menuAnchorEl} onClose={handleClosedApplyValue}>
+                    <Paper sx={{ p: 2 }}>
+                        <Stack spacing={1}>
+                            <Typography>{dataType === 'double' ? 'Value' : 'Color temperature'}</Typography>
+                            <OutlinedInput size="small" value={value} onChange={(e) => setValue(e.target.value)} />
+                        </Stack>
+                    </Paper>
+                </Popover>}
         </>
     );
 });
@@ -385,7 +420,7 @@ const DisplayConditionValueComparison = (props: { comparison: IConditionValueCom
                 <div>{props.comparison.Operation}</div>}
             {
                 isIDeviceStateValue(props.comparison.Left)
-                    ? <DisplayValue value={props.comparison.Left.Value} onChanged={(updated) => handleChanged("left", updated)} />
+                    ? <DisplayValue dataType="any" value={props.comparison.Left.Value} onChanged={(updated) => handleChanged("left", updated)} />
                     : (isIConditionDeviceStateTarget(props.comparison.Left)
                         ? <DisplayDeviceTarget target={props.comparison.Left.Target} onChanged={(updated) => handleChanged("left", updated)} />
                         : <span>Unknown</span>)
@@ -393,7 +428,7 @@ const DisplayConditionValueComparison = (props: { comparison: IConditionValueCom
             <DisplayConditionComparisonValueOperation valueOperation={props.comparison.ValueOperation} />
             {
                 isIDeviceStateValue(props.comparison.Right)
-                    ? <DisplayValue value={props.comparison.Right.Value} onChanged={(updated) => handleChanged("right", updated)} />
+                    ? <DisplayValue dataType="any" value={props.comparison.Right.Value} onChanged={(updated) => handleChanged("right", updated)} />
                     : (isIConditionDeviceStateTarget(props.comparison.Right)
                         ? <DisplayDeviceTarget target={props.comparison.Right.Target} onChanged={(updated) => handleChanged("right", updated)} />
                         : <span>Unknown</span>)
@@ -459,29 +494,55 @@ const DisplayCondition = observer((props: { condition: ICondition, onChanged: (u
     );
 });
 
-const DisplayDeviceStateValue = observer((props: { target: IDeviceStateTarget, value: any | undefined, onChanged: (updated: IDeviceTargetState) => void }) => (
-    <Grid container alignItems="center" spacing={1}>
-        <Grid item>
-            <DisplayDeviceTarget target={props.target} onChanged={(value) => {
-                props.onChanged({
-                    Target: value,
-                    Value: typeof value.Contact !== 'undefined' ? props.value : undefined
-                });
-            }} />
+const DisplayDeviceStateValue = observer((props: { target: IDeviceStateTarget, value: any | undefined, onChanged: (updated: IDeviceTargetState) => void }) => {
+    const [device, setDevice] = useState<DeviceModel | undefined>();
+
+    useEffect(() => {
+        const loadDevice = async () => {
+            if (props.target.Identifier) {
+                setDevice(await DevicesRepository.getDeviceByIdentifierAsync(props.target.Identifier));
+            } else {
+                // TODO: Display error if device identifier is not provided
+            }
+        };
+
+        loadDevice();
+    }, [props.target.Identifier]);
+
+    const contact = props.target.Contact && props.target.Channel
+        ? device?.getContact({
+            contactName: props.target.Contact,
+            channelName: props.target.Channel,
+            deviceId: device.id
+        })
+        : null;
+
+    return (
+        <Grid container alignItems="center" spacing={1}>
+            <Grid item>
+                <DisplayDeviceTarget target={props.target} onChanged={(value) => {
+                    props.onChanged({
+                        Target: value,
+                        Value: typeof value.Contact !== 'undefined' ? props.value : undefined
+                    });
+                }} />
+            </Grid>
+            <Grid item>
+                <span>set</span>
+            </Grid>
+            <Grid item>
+                {contact ?
+                    <DisplayValue dataType={contact.dataType} value={props.value} onChanged={(value) => {
+                        props.onChanged({
+                            Target: props.target,
+                            Value: typeof props.target.Contact !== 'undefined' ? value : undefined
+                        });
+                    }} />
+                    : <Skeleton />}
+            </Grid>
         </Grid>
-        <Grid item>
-            <span>set</span>
-        </Grid>
-        <Grid item>
-            <DisplayValue value={props.value} onChanged={(value) => {
-                props.onChanged({
-                    Target: props.target,
-                    Value: typeof props.target.Contact !== 'undefined' ? value : undefined
-                });
-            }} />
-        </Grid>
-    </Grid>
-));
+    );
+});
 
 const ProcessDetails = () => {
     const router = useRouter();
