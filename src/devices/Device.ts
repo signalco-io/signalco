@@ -85,6 +85,7 @@ export interface IDeviceModel {
 
     getLastActivity(): Date | -1;
     getState(target: IDeviceTarget): IDeviceContactState;
+    getContact(target: IDeviceTarget): IDeviceContact;
     updateState(channelName: string, contactName: string, valueSerialized: string|undefined, timeStamp: Date): void;
 }
 
@@ -111,6 +112,13 @@ export class DeviceModel implements IDeviceModel {
 
     getLastActivity() {
         return this.states.map(s => s.timeStamp).sort((a, b) => a.getTime() - b.getTime()).pop() || -1;
+    }
+
+    getContact(target: IDeviceTarget) {
+        return this.endpoints
+            .filter(e => e.channel === target.channelName)
+            .flatMap(i => i.contacts)
+            .filter(i => i.name === target.contactName)[0];
     }
 
     getState(target: IDeviceTarget) {
