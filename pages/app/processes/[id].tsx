@@ -330,9 +330,9 @@ const DisplayValue = observer((props: { value: any | undefined, dataType: string
     };
 
     const handleClosedApplyValue = () => {
-        let submitValue = value;
+        let submitValue: any = value;
         if (dataType === 'double' || dataType === 'colortemp') {
-            submitValue = parseFloat(value, 10) || 0;
+            submitValue = parseFloat(value) || 0;
         }
         handleEditOptionSelected(submitValue);
         handleClosed();
