@@ -1,4 +1,4 @@
-import { Alert, Box, Card, CardContent, CardHeader, Grid, LinearProgress, Typography } from '@mui/material';
+import { Alert, Box, Button, Card, CardContent, CardHeader, Grid, LinearProgress, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
@@ -31,6 +31,17 @@ const BeaconDetails = () => {
         loadBeaconAsync();
     }, [id]);
 
+    const handleUpdate = async () => {
+        try {
+            if (id == null)
+                throw Error("Unable to resolve station id from query. Can't update");
+            await BeaconsRepository.updateBeaconAsync(id);
+        }
+        catch (err) {
+            console.error("Station update request failed", err);
+        }
+    };
+
     return (
         <Box sx={{ px: { sm: 2 }, py: 2 }}>
             <Grid container spacing={2} direction="column" wrap="nowrap">
@@ -46,9 +57,12 @@ const BeaconDetails = () => {
                                     <Grid container spacing={2}>
                                         <Grid item xs={4}><span>Version</span></Grid>
                                         <Grid item xs={8}>
-                                            {beacon?.version
-                                                ? <span>{beacon.version}</span>
-                                                : <span>Unknown</span>}
+                                            <Stack direction="row">
+                                                {beacon?.version
+                                                    ? <span>{beacon.version}</span>
+                                                    : <span>Unknown</span>}
+                                                <Button variant="outlined" disabled={!beacon?.version} onClick={handleUpdate}>Update</Button>
+                                            </Stack>
                                         </Grid>
                                         <Grid item xs={4}><span>Last activity</span></Grid>
                                         <Grid item xs={8}>

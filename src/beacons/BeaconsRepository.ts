@@ -1,3 +1,4 @@
+import ConductsService from "../conducts/ConductsService";
 import HttpService from "../services/HttpService";
 
 export interface IBeaconModel {
@@ -40,6 +41,10 @@ export default class BeaconsRepository {
     static beaconsCache?: IBeaconModel[];
     static beaconsCacheKeyed?: { [id: string]: IBeaconModel };
     static isLoading: boolean;
+
+    static async updateBeaconAsync(id: string): Promise<void> {
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "update"});
+    }
 
     static async getBeaconAsync(id: string): Promise<IBeaconModel | undefined> {
         await BeaconsRepository._cacheBeaconsAsync();
