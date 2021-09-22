@@ -33,7 +33,8 @@ const BeaconDetails = () => {
 
     const handleUpdate = async () => {
         try {
-            if (id == null)
+            if (id == null ||
+                typeof id !== 'string')
                 throw Error("Unable to resolve station id from query. Can't update");
             await BeaconsRepository.updateBeaconAsync(id);
         }
