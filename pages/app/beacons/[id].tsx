@@ -5,6 +5,9 @@ import ReactTimeago from 'react-timeago';
 import AppLayout from "../../../components/AppLayout";
 import { observer } from 'mobx-react-lite';
 import BeaconsRepository, { IBeaconModel } from '../../../src/beacons/BeaconsRepository';
+import UploadIcon from '@mui/icons-material/Upload';
+import CheckIcon from '@mui/icons-material/Check';
+import compareVersions from 'compare-versions';
 
 const BeaconDetails = () => {
     const router = useRouter();
@@ -12,6 +15,7 @@ const BeaconDetails = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | undefined>();
     const [beacon, setBeacon] = useState<IBeaconModel | undefined>();
+    const [latestAvailableVersion, setLatestAvailableVersion] = useState<string | undefined>();
 
     useEffect(() => {
         const loadBeaconAsync = async () => {
@@ -28,7 +32,18 @@ const BeaconDetails = () => {
             }
         };
 
+        const loadLatestAvailableVersionAsync = async () => {
+            try {
+                const latestAvailable = await (await fetch("https://api.github.com/repos/signalco-io/station/releases/latest")).json();
+                setLatestAvailableVersion(latestAvailable?.name?.replace("v", ""));
+            }
+            catch (err) {
+                console.warn("Failed to retrieve latest available version", err);
+            }
+        };
+
         loadBeaconAsync();
+        loadLatestAvailableVersionAsync();
     }, [id]);
 
     const handleUpdate = async () => {
@@ -43,6 +58,10 @@ const BeaconDetails = () => {
         }
     };
 
+    const canUpdate = (latestAvailableVersion && beacon?.version)
+        ? compareVersions(latestAvailableVersion, beacon.version)
+        : false;
+
     return (
         <Box sx={{ px: { sm: 2 }, py: 2 }}>
             <Grid container spacing={2} direction="column" wrap="nowrap">
@@ -55,15 +74,17 @@ const BeaconDetails = () => {
                             <Card>
                                 <CardHeader title="Information" />
                                 <CardContent>
-                                    <Grid container spacing={2}>
+                                    <Grid container spacing={2} alignItems="center">
                                         <Grid item xs={4}><span>Version</span></Grid>
-                                        <Grid item xs={8}>
+                                        <Grid item xs={4}>
                                             <Stack direction="row">
                                                 {beacon?.version
                                                     ? <span>{beacon.version}</span>
                                                     : <span>Unknown</span>}
-                                                <Button variant="outlined" disabled={!beacon?.version} onClick={handleUpdate}>Update</Button>
                                             </Stack>
+                                        </Grid>
+                                        <Grid item xs={4} sx={{ textAlign: 'end' }}>
+                                            <Button startIcon={canUpdate ? <UploadIcon /> : <CheckIcon />} variant="outlined" disabled={!canUpdate} onClick={handleUpdate}>{canUpdate ? `Update to ${latestAvailableVersion}` : 'Up to date'}</Button>
                                         </Grid>
                                         <Grid item xs={4}><span>Last activity</span></Grid>
                                         <Grid item xs={8}>

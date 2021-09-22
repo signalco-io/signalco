@@ -29,8 +29,8 @@ const HomeOverview = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [executedConduct, setExecutedConduct] = useState(false);
     const [dashboards, setDashboards] = useState<IDashboard[]>([]);
-    // const [remoteDashboards, setRemoteDashboards] = useState<IDashboard[]>([]);
     const [dashboardIndex, setDashboardIndex] = React.useState('0');
+    const [dashboardsUpdateAvailable, setDashboardsUpdateAvailable] = useState(false);
 
     const handleDashboardChange = (_event: React.SyntheticEvent, newValue: string) => {
         setDashboardIndex(newValue);
@@ -44,36 +44,43 @@ const HomeOverview = () => {
         setIsEditing(false);
     };
 
+    const loadDashboardsAsync = async () => {
+        try {
+            const dashboards = await DashboardsRepository.getDashboardsAsync();
+            setDashboards(dashboards.map(d => ({
+                id: d.id,
+                name: d.name,
+                widgets: typeof d.configurationSerialized !== 'undefined' ? JSON.parse(d.configurationSerialized).widgets : []
+            })));
+        } catch (error) {
+            // TODO: Display error message
+            console.warn("Failed to load dashboards", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleApplyDashboardsUpdate = async () => {
+        setDashboardsUpdateAvailable(false);
+        await DashboardsRepository.applyDashboardsUpdateAsync();
+        await loadDashboardsAsync();
+    };
+
+    const checkDashboardUpdateAsync = async () => {
+        try {
+            setDashboardsUpdateAvailable(await DashboardsRepository.isUpdateAvailableAsync());
+        } catch (err) {
+            console.warn("Failed to check dashboards update", err);
+        }
+    };
+
     useEffect(() => {
-        // const loadLocalAsync = async () => {
-        //     try {
-        //         setDashboards(JSON.parse(localStorage.getItem('dashboards') ?? '{}'));
-        //     } catch (error) {
-        //         // TODO: Notify user
-        //         console.warn("Failed to load local dashboards", error);
-        //     } finally {
-        //         setIsLoading(false);
-        //     }
-        // };
+        loadDashboardsAsync();
 
-        const loadRemoteAsync = async () => {
-            try {
-                const dashboards = await DashboardsRepository.getDashboardsAsync();
-                setDashboards(dashboards.map(d => ({
-                    id: d.id,
-                    name: d.name,
-                    widgets: typeof d.configurationSerialized !== 'undefined' ? JSON.parse(d.configurationSerialized).widgets : []
-                })));
-            } catch (error) {
-                // TODO: Display error message
-                console.warn("Failed to load remote dashboards", error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        // loadLocalAsync();
-        loadRemoteAsync();
+        // Set interval for checking dashboard updates
+        const token = setInterval(checkDashboardUpdateAsync, 60000);
+        checkDashboardUpdateAsync();
+        return () => clearInterval(token);
     }, []);
 
     useEffect(() => {
@@ -139,6 +146,17 @@ const HomeOverview = () => {
                 </Grid>
             ) : (
                 <TabContext value={dashboardIndex}>
+                    {dashboardsUpdateAvailable && (
+                        <Grid item>
+                            <Alert
+                                severity="info"
+                                variant="filled"
+                                style={{ borderRadius: 0 }}
+                                action={<Button variant="contained" size="small" onClick={handleApplyDashboardsUpdate}>Apply update</Button>}>
+                                New version of dashboards are available.
+                            </Alert>
+                        </Grid>
+                    )}
                     <Grid item>
                         {isEditing ? (
                             <Alert
