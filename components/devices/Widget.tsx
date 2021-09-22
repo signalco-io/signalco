@@ -100,18 +100,24 @@ const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidge
 
                         const device = await DevicesRepository.getDeviceAsync(action.deviceId)
 
+                        const isAction = device
+                            ?.getContact({ channelName: action.channelName, deviceId: device.id, contactName: action.contactName })
+                            ?.dataType === 'action' ?? false;
+
                         // Retrieve current boolean state
                         let newState = null;
                         if (typeof action.valueSerialized === 'undefined') {
-                            const currentState = device?.getState(action);
-                            if (typeof currentState === 'undefined') {
-                                console.warn('Failed to retrieve button action source state', action)
-                                return;
-                            }
+                            if (!isAction) {
+                                const currentState = device?.getState(action);
+                                if (typeof currentState === 'undefined') {
+                                    console.warn('Failed to retrieve button action source state', action)
+                                    return;
+                                }
 
-                            newState = typeof currentState === 'undefined'
-                                ? action.valueSerialized
-                                : !(`${currentState.valueSerialized}`.toLowerCase() === 'true');
+                                newState = typeof currentState === 'undefined'
+                                    ? action.valueSerialized
+                                    : !(`${currentState.valueSerialized}`.toLowerCase() === 'true');
+                            }
                         } else {
                             newState = action.valueSerialized;
                         }

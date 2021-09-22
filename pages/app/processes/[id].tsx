@@ -344,7 +344,7 @@ const DisplayValue = observer((props: { value: any | undefined, dataType: string
 
     let label: string | React.ReactNode = "None";
     if (dataType === 'bool' || dataType === "any") {
-        label = props.value.toString();
+        label = props.value?.toString() || "Unknown";
     } else if (dataType === 'string') {
         label = `"${props.value}"`;
     } else if (dataType === 'double' || dataType === 'colortemp') {
