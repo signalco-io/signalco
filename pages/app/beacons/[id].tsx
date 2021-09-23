@@ -46,6 +46,18 @@ const BeaconDetails = () => {
         loadLatestAvailableVersionAsync();
     }, [id]);
 
+    const handleUpdateSystem = async () => {
+        try {
+            if (id == null ||
+                typeof id !== 'string')
+                throw Error("Unable to resolve station id from query. Can't update system");
+            await BeaconsRepository.updateSystemAsync(id);
+        }
+        catch (err) {
+            console.error("Station system update request failed", err);
+        }
+    };
+
     const handleUpdate = async () => {
         try {
             if (id == null ||
@@ -55,6 +67,30 @@ const BeaconDetails = () => {
         }
         catch (err) {
             console.error("Station update request failed", err);
+        }
+    };
+
+    const handleShutdownSystem = async () => {
+        try {
+            if (id == null ||
+                typeof id !== 'string')
+                throw Error("Unable to resolve station id from query. Can't shutdown system");
+            await BeaconsRepository.shutdownSystemAsync(id);
+        }
+        catch (err) {
+            console.error("Station system shutdown request failed", err);
+        }
+    };
+
+    const handleRestartStation = async () => {
+        try {
+            if (id == null ||
+                typeof id !== 'string')
+                throw Error("Unable to resolve station id from query. Can't restart station");
+            await BeaconsRepository.restartStationAsync(id);
+        }
+        catch (err) {
+            console.error("Station restart request failed", err);
         }
     };
 
@@ -100,6 +136,13 @@ const BeaconDetails = () => {
                                             {beacon?.registeredTimeStamp &&
                                                 <ReactTimeago date={beacon?.registeredTimeStamp} />
                                             }
+                                        </Grid>
+                                        <Grid item xs={8}>
+                                            <Stack direction="row">
+                                                <Button onClick={handleRestartStation}>Restart station</Button>
+                                                <Button onClick={handleUpdateSystem}>Update system</Button>
+                                                <Button onClick={handleShutdownSystem}>Shutdown system</Button>
+                                            </Stack>
                                         </Grid>
                                     </Grid>
                                 </CardContent>

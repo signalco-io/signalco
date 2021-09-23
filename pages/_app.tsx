@@ -116,6 +116,7 @@ export default function App(props: MyAppProps) {
         ></link>
         <meta name="msapplication-TileColor" content="#000000"></meta>
         <meta name="theme-color" content="#000000"></meta>
+        <meta name="description" content="Automate your life" />
         <title>Signalco</title>
         <meta
           name="viewport"

@@ -46,6 +46,18 @@ export default class BeaconsRepository {
         await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "update"});
     }
 
+    static async updateSystemAsync(id: string): Promise<void> {
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "updateSystem"});
+    }
+
+    static async shutdownSystemAsync(id: string): Promise<void> {
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "shutdownSystem"});
+    }
+
+    static async restartStationAsync(id: string): Promise<void> {
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "restartStation"});
+    }
+
     static async getBeaconAsync(id: string): Promise<IBeaconModel | undefined> {
         await BeaconsRepository._cacheBeaconsAsync();
         if (typeof BeaconsRepository.beaconsCacheKeyed !== 'undefined') {
