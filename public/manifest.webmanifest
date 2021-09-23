@@ -6,7 +6,7 @@
   "display": "standalone",
   "Scope": "/app",
   "start_url": "/app",
-  "prefer_related_applications": "false",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "https://www.signalco.io/images/maskable_icon_x72.png",
