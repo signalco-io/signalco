@@ -70,6 +70,18 @@ const BeaconDetails = () => {
         }
     };
 
+    const handleRestartSystem = async () => {
+        try {
+            if (id == null ||
+                typeof id !== 'string')
+                throw Error("Unable to resolve station id from query. Can't restart system");
+            await BeaconsRepository.restartSystemAsync(id);
+        }
+        catch (err) {
+            console.error("Station system shutdown request failed", err);
+        }
+    };
+
     const handleShutdownSystem = async () => {
         try {
             if (id == null ||
@@ -141,6 +153,7 @@ const BeaconDetails = () => {
                                             <Stack direction="row">
                                                 <Button onClick={handleRestartStation}>Restart station</Button>
                                                 <Button onClick={handleUpdateSystem}>Update system</Button>
+                                                <Button onClick={handleRestartSystem}>Restart system</Button>
                                                 <Button onClick={handleShutdownSystem}>Shutdown system</Button>
                                             </Stack>
                                         </Grid>

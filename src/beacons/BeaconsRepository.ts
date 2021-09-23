@@ -50,6 +50,10 @@ export default class BeaconsRepository {
         await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "updateSystem"});
     }
 
+    static async restartSystemAsync(id: string): Promise<void> {
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "restartSystem"});
+    }
+
     static async shutdownSystemAsync(id: string): Promise<void> {
         await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "shutdownSystem"});
     }
