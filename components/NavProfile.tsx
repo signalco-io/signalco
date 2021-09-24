@@ -17,7 +17,7 @@ import DeviceHubSharpIcon from '@mui/icons-material/DeviceHubSharp';
 import React from "react";
 import { useRouter } from "next/router";
 import { orderBy } from "../src/helpers/ArrayHelpers";
-import { SvgIconComponent } from "@mui/icons-material";
+import { Settings as SettingsIcon, SvgIconComponent } from "@mui/icons-material";
 import { User } from '@auth0/auth0-spa-js';
 import {
   usePopupState,
@@ -95,6 +95,12 @@ const NavProfile = () => {
             <UserAvatar user={user} />
           </ButtonBase>
           <Menu {...bindMenu(popupState)}>
+            <MenuItem onClick={() => { router.push('/app/settings'); popupState.close(); }}>
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+              <ListItemText>Settings</ListItemText>
+            </MenuItem>
             <MenuItem onClick={() => logout()}>
               <ListItemIcon>
                 <ExitToAppIcon />

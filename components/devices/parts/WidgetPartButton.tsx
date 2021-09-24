@@ -35,7 +35,7 @@ const WidgetPartButton = ({ config }: { config: IWidgetPartButtonConfig }) => {
                 <IconButton
                     disabled={typeof config.action === 'undefined'}
                     size={config.small ? "small" : "medium"}
-                    aria-label={config.label}
+                    aria-label={config.label ?? "Action button"}
                     title={config.label}
                     color={buttonState?.valueSerialized === 'true' ? 'warning' : 'default'}
                     onClick={handleClick}>

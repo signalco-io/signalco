@@ -5,4 +5,7 @@ Disallow: /app/processes
 Disallow: /app/devices
 Disallow: /app/channels
 Disallow: /app/beacons
+Disallow: /app/stations
 Disallow: /app/profile
+Disallow: /app/settings
+Disallow: /app/*
