@@ -4,7 +4,7 @@
   "theme_color": "#000000",
   "background_color": "#000000",
   "display": "standalone",
-  "Scope": "/app",
+  "scope": "/",
   "start_url": "/app",
   "prefer_related_applications": false,
   "icons": [

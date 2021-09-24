@@ -67,7 +67,7 @@ export default function App(props: MyAppProps) {
   React.useEffect(() => {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator && typeof (window as any).workbox !== 'undefined' && isOnline) {
       // skip index route, because it's already cached under `start-url` caching object
-      if (router.route !== '/app') {
+      if (router.route !== '/') {
         const wb = (window as any).workbox
         wb.active.then(() => {
           wb.messageSW({ action: 'CACHE_NEW_ROUTE' })
