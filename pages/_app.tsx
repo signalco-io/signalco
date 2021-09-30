@@ -14,7 +14,7 @@ import createEmotionCache from '../src/createEmotionCache';
 // import { SnackbarProvider } from 'notistack';
 
 const clientSideEmotionCache = createEmotionCache();
-const isLight = typeof window !== 'undefined' && (window.localStorage?.getItem("theme") ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light")) !== 'dark';
+const isLight = (typeof window !== 'undefined' && (window.localStorage?.getItem("theme") ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light"))) !== 'dark';
 
 initSentry();
 
