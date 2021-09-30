@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardHeader, Grid, IconButton, Paper, Skeleton, Slide, Slider, Stack, Switch, TextField, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardHeader, CardMedia, Grid, IconButton, Paper, Skeleton, Slide, Slider, Stack, Switch, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
@@ -16,6 +16,8 @@ import throttle from '../../../src/helpers/Throttle';
 import { useCallback } from 'react';
 import blendColors from '../../../src/helpers/BlendColors';
 import SelectItems from '../../../components/shared/form/SelectItems';
+import { IHistoricalValue } from '../../../components/devices/parts/WidgetPartGraph';
+import useAutoTable from '../../../components/shared/table/useAutoTable';
 
 interface IStateTableItem extends IAutoTableItem {
     name: string,
@@ -139,6 +141,34 @@ const ContactStateValueDisplay = observer((props: { state?: IDeviceContactState 
         {props.state?.valueSerialized}
     </>
 ));
+
+function historicalValueToTableItem(value: IHistoricalValue): IAutoTableItem {
+    return {
+        id: value.timeStamp.toString(),
+        time: <ReactTimeago date={value.timeStamp} />,
+        value: value.valueSerialized,
+    };
+}
+
+const DeviceContactHistory = (props: { deviceId: string, channelName: string, contactName: string }) => {
+    const loadContactHistory =
+        async () => await DevicesRepository.getDeviceStateHistoryAsync({
+            deviceId: props.deviceId,
+            channelName: props.channelName,
+            contactName: props.contactName
+        }) || [];
+
+    const [stateItems, isLoadingStateItems, errorStateItems] = useAutoTable(loadContactHistory, historicalValueToTableItem);
+
+    return (
+        <Card>
+            <CardHeader title="State" />
+            <CardMedia>
+                <AutoTable items={stateItems} isLoading={isLoadingStateItems} error={errorStateItems} />
+            </CardMedia>
+        </Card>
+    );
+};
 
 const DeviceDetails = () => {
     const router = useRouter();
@@ -341,6 +371,11 @@ const DeviceDetails = () => {
                                 </CardContent>
                             </Card>
                         </Grid>
+                        {device && (
+                            <Grid item>
+                                <DeviceContactHistory deviceId={device.id} channelName="signal" contactName="locked" />
+                            </Grid>
+                        )}
                     </Grid>
                 </Grid>
             </Grid>

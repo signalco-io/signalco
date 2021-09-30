@@ -11,6 +11,8 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
+import Masonry from '@mui/lab/Masonry';
+import MasonryItem from '@mui/lab/MasonryItem';
 
 interface IWidget {
     columns: number,
@@ -119,22 +121,21 @@ const HomeOverview = () => {
         const desktopWidth = Math.max((width - (numberOfColumns * 2 * 8)) / numberOfColumns, 2);
         const columnWidth = width && width < 500 ? mobileWidth : desktopWidth;
         return (
-            <Grid container
+            <Masonry
+                columns={numberOfColumns}
                 spacing={2}
                 ref={castedRef}>
                 {dashboard.widgets.map((widget, index) => (
-                    <Grid item key={index}>
-                        <Box>
-                            <Widget
-                                columnWidth={columnWidth}
-                                columns={widget.columns}
-                                rows={widget.rows}
-                                parts={widget.parts}
-                                onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />
-                        </Box>
-                    </Grid>
+                    <MasonryItem key={index}>
+                        <Widget
+                            columnWidth={columnWidth}
+                            columns={widget.columns}
+                            rows={widget.rows}
+                            parts={widget.parts}
+                            onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />
+                    </MasonryItem>
                 ))}
-            </Grid>
+            </Masonry>
         );
     };
 

@@ -149,12 +149,18 @@ const BeaconDetails = () => {
                                                 <ReactTimeago date={beacon?.registeredTimeStamp} />
                                             }
                                         </Grid>
+                                        <Grid item xs={4}><span>Station operations</span></Grid>
                                         <Grid item xs={8}>
-                                            <Stack direction="row">
-                                                <Button onClick={handleRestartStation}>Restart station</Button>
-                                                <Button onClick={handleUpdateSystem}>Update system</Button>
-                                                <Button onClick={handleRestartSystem}>Restart system</Button>
-                                                <Button onClick={handleShutdownSystem}>Shutdown system</Button>
+                                            <Stack direction="row" alignItems="center" spacing={1}>
+                                                <Button variant="outlined" onClick={handleRestartStation}>Restart station</Button>
+                                            </Stack>
+                                        </Grid>
+                                        <Grid item xs={4}><span>System operations</span></Grid>
+                                        <Grid item xs={8}>
+                                            <Stack direction="row" alignItems="center" spacing={1}>
+                                                <Button variant="outlined" onClick={handleUpdateSystem}>Update system</Button>
+                                                <Button variant="outlined" onClick={handleRestartSystem}>Restart system</Button>
+                                                <Button variant="outlined" onClick={handleShutdownSystem}>Shutdown system</Button>
                                             </Stack>
                                         </Grid>
                                     </Grid>
