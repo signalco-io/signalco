@@ -11,10 +11,10 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import Router, { useRouter } from "next/router";
 import { initSentry } from "../src/errors/SentryUtil";
 import createEmotionCache from '../src/createEmotionCache';
-import { useEffect } from "react";
 // import { SnackbarProvider } from 'notistack';
 
 const clientSideEmotionCache = createEmotionCache();
+const isLight = typeof window !== 'undefined' && (window.localStorage?.getItem("theme") ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light")) !== 'dark';
 
 initSentry();
 
@@ -25,13 +25,14 @@ interface MyAppProps extends AppProps {
 export default function App(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const [isOnline, setIsOnline] = React.useState(true);
-  const [isLight, setIsLight] = React.useState(true);
 
   React.useEffect(() => {
     // Handle 'cache on fe nav'
     // Source: https://github.com/shadowwalker/next-pwa/blob/master/examples/cache-on-front-end-nav/pages/_app.js
     if (typeof window !== 'undefined' && 'ononline' in window && 'onoffline' in window) {
-      setIsOnline(window.navigator.onLine)
+      if (!window.navigator.onLine) {
+        setIsOnline(false);
+      }
       if (!window.ononline) {
         window.addEventListener('online', () => {
           setIsOnline(true);
@@ -43,22 +44,10 @@ export default function App(props: MyAppProps) {
         })
       }
     }
-  }, []);
-
-  useEffect(() => {
-    // Determine theme (light on server, take from local storage if available or detect via browser)
-    let themeVariant = "light";
-    if (typeof window !== 'undefined') {
-      themeVariant = window.localStorage?.getItem("theme") ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
-    }
 
     // Apply theme to document
     if (typeof document !== 'undefined') {
-      document.documentElement.style.setProperty("color-scheme", themeVariant);
-    }
-
-    if (themeVariant !== 'light') {
-      setIsLight(false);
+      document.documentElement.style.setProperty("color-scheme", isLight ? 'light' : 'dark');
     }
   }, []);
 
@@ -86,6 +75,8 @@ export default function App(props: MyAppProps) {
   } else if (typeof window !== "undefined" && window.location.origin.indexOf('next.signalco.io') > 0) {
     redirectUri = `https://next.signalco.io/login-return`;
   }
+
+  console.debug('Rendered app')
 
   return (
     <CacheProvider value={emotionCache}>

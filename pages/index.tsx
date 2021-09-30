@@ -18,38 +18,20 @@ const Pitch = (props: { sx?: SxProps<Theme>, heading: string, children: React.Re
 
 const Onboarding = () => {
   return (
-    <>
-      <Container>
-        <Grid container alignItems="center" justifyContent="center" direction="column" spacing={10} wrap="nowrap" sx={{ pt: 24 }}>
-          <Grid item>
-            <Grid container alignItems="center" spacing={3} wrap="nowrap">
-              <Grid item>
-                <RippleIndicator size={72} interval={1200} />
-              </Grid>
-              <Grid item>
-                <Typography variant="h1">Signalco</Typography>
-              </Grid>
-              <Grid item>
-                <Box sx={{ width: '72px', height: '72px' }} />
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid container spacing={4} justifyContent="center">
-              <Grid item>
-                <Button href="/app" size="large" variant="contained">Automate</Button>
-              </Grid>
-              <Grid item>
-                <Button href="#" size="large" variant="outlined">Learn More</Button>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <div>{/* image */}</div>
-          </Grid>
-        </Grid>
-      </Container>
-    </>
+    <Container>
+      <Stack alignItems="center" justifyContent="center" spacing={10} sx={{ pt: 24 }}>
+        <Stack direction="row" alignItems="center" spacing={3}>
+          <RippleIndicator size={72} interval={1200} />
+          <Typography variant="h1">Signalco</Typography>
+          <Box sx={{ width: '72px', height: '72px' }} />
+        </Stack>
+        <Stack spacing={4} justifyContent="center" direction="row">
+          <Button href="/app" size="large" variant="contained">Automate</Button>
+          <Button href="#" size="large" variant="outlined">Learn More</Button>
+        </Stack>
+        <div>{/* image */}</div>
+      </Stack>
+    </Container>
   );
 };
 
@@ -134,13 +116,11 @@ const IntegrationCard = (props: { name: string, via: string[] }) => (
   <Card sx={{ minWidth: '220px', minHeight: '160px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }} variant="outlined">
     <CardHeader title={props.name} />
     <CardMedia>
-      <Grid container spacing={1} sx={{ px: 2, py: 1, opacity: 0.6 }}>
+      <Stack direction="row" spacing={1} sx={{ px: 2, py: 1, opacity: 0.6 }}>
         {props.via.map(viaItem =>
-          <Grid item key={`viaItem-${viaItem}`}>
-            <IntegrationViaIcon viaItem={viaItem} />
-          </Grid>
+          <IntegrationViaIcon key={`viaItem-${viaItem}`} viaItem={viaItem} />
         )}
-      </Grid>
+      </Stack>
     </CardMedia>
   </Card>
 );
