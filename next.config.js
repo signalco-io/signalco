@@ -23,11 +23,11 @@ module.exports = withPWA({
                 mediaSrc: "'self'",
                 prefetchSrc: "'self'",
                 childSrc: "'self'",
-                frameSrc: ["'self'", "dfnoise.eu.auth0.com"], 
+                frameSrc: ["'self'", "https://dfnoise.eu.auth0.com"], 
                 workerSrc: "'self'",
                 imgSrc: ["'self'", "https://www.signalco.io"],
                 formAction: "'self'",
-                connectSrc: ["'self'", "https://www.signalco.io", "https://api.signalco.io", "https://o513630.ingest.sentry.io", "https://fonts.gstatic.com"],
+                connectSrc: ["'self'", "https://www.signalco.io", "https://api.signalco.io", "https://o513630.ingest.sentry.io", "https://fonts.gstatic.com", "https://dfnoise.eu.auth0.com"],
                 baseURI: ['https://www.signalco.io', 'https://next.signalco.io'],
                 reportURI: 'https://o513630.ingest.sentry.io/api/5615895/security/?sentry_key=2a04f9a742e74740952dcebf06313840',
                 "frame-ancestors": "'none'"
