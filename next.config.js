@@ -16,7 +16,7 @@ module.exports = withPWA({
                 defaultSrc: "'self'",
                 scriptSrc: "'self'",
                 objectSrc: "'self'",
-                styleSrc: ["'self'", "https://fonts.googleapis.com", "unsafe-inline"],
+                styleSrc: ["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
                 childSrc: "'self'",
                 frameSrc: "'self'",
                 workerSrc: "'self'",
