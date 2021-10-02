@@ -14,7 +14,7 @@ module.exports = withPWA({
             contentSecurityPolicy: {
               directives: {
                 defaultSrc: "'self'",
-                styleSrc: ["'self'", "https://stackpath.bootstrapcdn.com"],
+                styleSrc: ["'self'", "https://fonts.googleapis.com"],
               },
             },
             forceHTTPSRedirect: [true, { maxAge: 60 * 60 * 24 * 4, includeSubDomains: true }],
