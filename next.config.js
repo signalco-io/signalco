@@ -30,8 +30,7 @@ module.exports = withPWA({
                 connectSrc: ["'self'", "https://api.signalco.io", "https://*.sentry.io"],
                 baseURI: ['https://www.signalco.io', 'https://next.signalco.io'],
                 reportURI: 'https://o513630.ingest.sentry.io/api/5615895/security/?sentry_key=2a04f9a742e74740952dcebf06313840',
-                "frame-ancestors": "none",
-                "upgrade-insecure-requests": '1'
+                "frame-ancestors": "none"
               },
               reportURI: 'https://o513630.ingest.sentry.io/api/5615895/security/?sentry_key=2a04f9a742e74740952dcebf06313840',
             },
