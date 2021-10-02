@@ -8,6 +8,9 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <meta charSet="utf-8"></meta>
+          <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
+
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"

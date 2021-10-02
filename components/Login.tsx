@@ -1,49 +1,20 @@
 import {
-  Box, Grid, Typography
+  Box, Stack, Typography
 } from "@mui/material";
-import { useEffect, useRef } from "react";
-import RippleIndicator, { IRippleIndicatorRef } from "./shared/indicators/RippleIndicator";
+import React from "react";
+import RippleIndicator from "./shared/indicators/RippleIndicator";
 
 const Login = () => {
-  const rippleTriggerRef = useRef<IRippleIndicatorRef>();
-
-  useEffect(() => {
-    const rippleIntervalClear = setInterval(() => {
-      if (typeof rippleTriggerRef.current !== 'undefined') {
-        rippleTriggerRef.current.trigger();
-      }
-    }, 2500);
-
-    // Trigger immediately
-    if (typeof rippleTriggerRef.current !== 'undefined') {
-      rippleTriggerRef.current.trigger();
-    }
-
-    return () => clearInterval(rippleIntervalClear);
-  }, [])
-
   return (
-    <Grid
-      container
-      className="login__root"
-      wrap="nowrap"
-      alignItems="center"
-      direction="column"
-    >
-      <Grid item>
-        <Grid container direction="row" spacing={2} alignItems="center">
-          <Grid item>
-            <RippleIndicator size={72} ref={rippleTriggerRef} />
-          </Grid>
-          <Grid item>
-            <Typography variant="h1">Signalco</Typography>
-          </Grid>
-          <Grid item>
-            <Box sx={{ width: 72, height: 72 }}></Box>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Grid>
+    <Stack direction="row" spacing={2} alignItems="center" sx={{
+      position: 'absolute',
+      top: 'calc(50% - 36px)',
+      left: 'calc(50% - 150px)'
+    }}>
+      <RippleIndicator size={72} />
+      <Typography variant="h1">Signalco</Typography>
+      <Box sx={{ width: 72, height: 72 }}></Box>
+    </Stack>
   );
 };
 
