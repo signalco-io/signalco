@@ -81,7 +81,6 @@ export default function App(props: MyAppProps) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <meta charSet="utf-8"></meta>
         <link rel="manifest" href="/manifest.webmanifest"></link>
         <link
           rel="apple-touch-icon"
