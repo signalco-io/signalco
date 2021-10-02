@@ -23,7 +23,7 @@ module.exports = withPWA({
                 mediaSrc: "'self'",
                 prefetchSrc: "'self'",
                 childSrc: "'self'",
-                frameSrc: "'self'",
+                frameSrc: ["'self'", "dfnoise.eu.auth0.com"], 
                 workerSrc: "'self'",
                 imgSrc: ["'self'", "https://www.signalco.io"],
                 formAction: "'self'",
