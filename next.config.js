@@ -16,7 +16,7 @@ module.exports = withPWA({
               directives: {
                 defaultSrc: "'self'",
                 scriptSrc: "'self'",
-                objectSrc: "'self'",
+                objectSrc: "'none'",
                 styleSrc: ["'self'", "'unsafe-inline'"],
                 fontSrc: ["'self'", "https://fonts.gstatic.com"],
                 manifestSrc: "'self'",
