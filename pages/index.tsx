@@ -85,11 +85,11 @@ const Footer = () => (
           <Grid item>
             <Grid container spacing={2} alignItems="flex-end" justifyContent="space-between">
               <Grid item>
-                <Typography variant="subtitle2" color="textSecondary">Copyright © {new Date().getFullYear()} Signalco. All rights reserved.</Typography>
+                <Typography variant="subtitle2" component="span" color="textSecondary">Copyright © {new Date().getFullYear()} Signalco. All rights reserved.</Typography>
               </Grid>
               <Grid item>
                 <Link href="https://github.com/signalco-io/signalco">
-                  <IconButton size="large">
+                  <IconButton size="large" aria-label="GitHub link">
                     <GitHubIcon />
                   </IconButton>
                 </Link>
