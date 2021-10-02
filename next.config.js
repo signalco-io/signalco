@@ -14,9 +14,18 @@ module.exports = withPWA({
             contentSecurityPolicy: {
               directives: {
                 defaultSrc: "'self'",
+                scriptSrc: "'self'",
+                objectSrc: "'self'",
                 styleSrc: ["'self'", "https://fonts.googleapis.com", "unsafe-inline"],
+                childSrc: "'self'",
+                frameSrc: "'self'",
+                workerSrc: "'self'",
+                imgSrc: "'self'",
+                connectSrc: "'self'",
               },
+              reportURI: 'https://o513630.ingest.sentry.io/api/5615895/security/?sentry_key=2a04f9a742e74740952dcebf06313840'
             },
+            xssProtection: "block-rendering",
             forceHTTPSRedirect: [true, { maxAge: 60 * 60 * 24 * 4, includeSubDomains: true }],
             referrerPolicy: "same-origin",
             expectCT: [true,{
