@@ -26,7 +26,8 @@ module.exports = withPWA({
                 workerSrc: "'self'",
                 imgSrc: "'self'",
                 connectSrc: "'self'",
-                baseURI: 'https://*.signalco.io'
+                baseURI: 'https://*.signalco.io',
+                reportURI: 'https://o513630.ingest.sentry.io/api/5615895/security/?sentry_key=2a04f9a742e74740952dcebf06313840'
               },
               reportURI: 'https://o513630.ingest.sentry.io/api/5615895/security/?sentry_key=2a04f9a742e74740952dcebf06313840'
             },
