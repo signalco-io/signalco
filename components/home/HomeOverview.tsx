@@ -4,7 +4,6 @@ import EditSharpIcon from '@mui/icons-material/EditSharp';
 import HttpService from "../../src/services/HttpService";
 import { observer } from "mobx-react-lite";
 import Widget, { IWidgetPart } from "../devices/Widget";
-import { useResizeDetector } from 'react-resize-detector';
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -13,6 +12,8 @@ import TabPanel from '@mui/lab/TabPanel';
 import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
 import Masonry from '@mui/lab/Masonry';
 import MasonryItem from '@mui/lab/MasonryItem';
+
+const isServerSide = typeof window === 'undefined';
 
 interface IWidget {
     columns: number,
@@ -101,7 +102,7 @@ const HomeOverview = () => {
         }
     }, []);
 
-    if (typeof window !== 'undefined' &&
+    if (!isServerSide &&
         window.location.search.startsWith("?do=")) {
         if (executedConduct)
             return <div>Done</div>
@@ -109,22 +110,17 @@ const HomeOverview = () => {
     }
 
     const RenderDashboard = ({ dashboard }: { dashboard: IDashboard }) => {
-        const { width, ref } = useResizeDetector({ handleHeight: false, handleWidth: true });
-        const castedRef = ref as React.MutableRefObject<HTMLDivElement | null>; // Workaround from: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/35572
-
-        if (typeof width === 'undefined')
-            return <div ref={castedRef}></div>;
-
         // When width is less than 400, set to single column
+        const width = isServerSide ? 420 : window.innerWidth;
         const mobileWidth = width - 16;
         const numberOfColumns = Math.floor(width / (250 + 16));
         const desktopWidth = Math.max((width - (numberOfColumns * 2 * 8)) / numberOfColumns, 2);
         const columnWidth = width && width < 500 ? mobileWidth : desktopWidth;
+
         return (
             <Masonry
                 columns={numberOfColumns}
-                spacing={2}
-                ref={castedRef}>
+                spacing={2}>
                 {dashboard.widgets.map((widget, index) => (
                     <MasonryItem key={index}>
                         <Widget

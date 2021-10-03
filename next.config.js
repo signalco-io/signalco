@@ -1,6 +1,8 @@
 const withPWA = require('next-pwa')
 const { createSecureHeaders } = require("next-secure-headers")
 
+const isDevelopment = true;
+
 module.exports = withPWA({
     experimental: { esmExternals: true },
     pwa: {
@@ -15,9 +17,9 @@ module.exports = withPWA({
             contentSecurityPolicy: {
               directives: {
                 defaultSrc: "'self'",
-                scriptSrc: "'self'",
+                scriptSrc: ["'self'", isDevelopment ? "'unsafe-eval'" : undefined],
                 objectSrc: "'none'",
-                styleSrc: ["'self'", "'unsafe-inline'"],
+                styleSrc: ["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
                 fontSrc: ["'self'", "https://fonts.gstatic.com"],
                 manifestSrc: "'self'",
                 mediaSrc: "'self'",
