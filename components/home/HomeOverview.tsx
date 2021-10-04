@@ -80,8 +80,8 @@ const HomeOverview = () => {
     useEffect(() => {
         loadDashboardsAsync();
 
-        // Set interval for checking dashboard updates
-        const token = setInterval(checkDashboardUpdateAsync, 60000);
+        // Set interval for checking dashboard updates (30min)
+        const token = setInterval(checkDashboardUpdateAsync, 30 * 60000);
         checkDashboardUpdateAsync();
         return () => clearInterval(token);
     }, []);
