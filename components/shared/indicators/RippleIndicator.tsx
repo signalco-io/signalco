@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import classes from './RippleIndicator.module.scss';
 
 export interface IRippleIndicatorProps {
     size?: number,
@@ -16,7 +15,7 @@ const RippleIndicator = (props: IRippleIndicatorProps) => {
 
     return (
         <Box position="relative" sx={{ width: `${size}px`, height: `${size}px` }}>
-            <Box className={classes.rim} />
+            <Box className="ripple-indicator rim" />
         </Box>
     );
 }

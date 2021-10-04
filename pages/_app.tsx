@@ -6,6 +6,7 @@ import Head from "next/head";
 import NextNprogress from "nextjs-progressbar";
 import theme from "../src/theme";
 import "../styles/global.scss";
+import "../components/shared/indicators/RippleIndicator.scss"
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { Auth0Provider } from "@auth0/auth0-react";
 import Router, { useRouter } from "next/router";
