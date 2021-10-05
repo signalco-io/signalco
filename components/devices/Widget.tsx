@@ -90,6 +90,7 @@ const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidge
                     }
 
                     // Execute all actions
+                    const conducts = [];
                     for (const action of actions) {
                         if (typeof action.deviceId === 'undefined' ||
                             typeof action.channelName === 'undefined' ||
@@ -122,17 +123,21 @@ const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidge
                             newState = action.valueSerialized;
                         }
 
-                        // Negate current state
-                        await ConductsService.RequestConductAsync(action, newState, action.delay ?? 0);
+                        conducts.push({ target: action, value: newState, delay: action.delay ?? 0, device: device });
+                    }
 
-                        // Set local value state
-                        device?.updateState(
-                            action.channelName,
-                            action.contactName,
-                            newState?.toString(),
+                    // Negate current state
+                    await ConductsService.RequestMultipleConductAsync(conducts);
+
+                    // Set local value state
+                    conducts.forEach(conduct => {
+                        conduct.device?.updateState(
+                            conduct.target.channelName,
+                            conduct.target.contactName,
+                            conduct.value?.toString(),
                             new Date()
                         );
-                    }
+                    });
                 };
             }
             return <WidgetPartButton config={part.config as IWidgetPartButtonConfig} />
