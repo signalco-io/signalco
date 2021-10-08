@@ -42,7 +42,8 @@ const Layout = (props: { children: React.ReactNode }) => {
 
     const createHubConnection = async () => {
       if (devicesHub != null) return;
-      console.debug("Connecting to SignalR...");
+
+      console.debug("Configuring SignalR...");
 
       const hub = new HubConnectionBuilder()
         .withUrl(HttpService.getApiUrl('/signalr/devices'), {
@@ -54,34 +55,54 @@ const Layout = (props: { children: React.ReactNode }) => {
         })
         .configureLogging(LogLevel.Information)
         .build();
-
-      try {
-        await hub.start();
-        hub.on("devicestate", async (state: SignalDeviceStatePublishDto) => {
-          if (typeof state.DeviceId === 'undefined' ||
-            typeof state.ChannelName === 'undefined' ||
-            typeof state.ContactName === 'undefined' ||
-            typeof state.TimeStamp === 'undefined') {
-            console.warn("Got device state with invalid values", state);
-            return;
-          }
-
-          const device = await DevicesRepository.getDeviceAsync(state.DeviceId);
-          if (typeof device !== 'undefined') {
-            device.updateState(
-              state.ChannelName,
-              state.ContactName,
-              state.ValueSerialized,
-              new Date(state.TimeStamp)
-            );
-          }
-        });
-      } catch (err) {
-        console.log('Failed to start SignalR hub connection', err);
-      }
-
       setDevicesHub(hub);
-    }
+
+      const hubStartWithRetry = async (retryCount: number) => {
+        try {
+          console.debug("Connecting to SignalR...");
+
+          await hub.start();
+          hub.on("devicestate", async (state: SignalDeviceStatePublishDto) => {
+            if (typeof state.DeviceId === 'undefined' ||
+              typeof state.ChannelName === 'undefined' ||
+              typeof state.ContactName === 'undefined' ||
+              typeof state.TimeStamp === 'undefined') {
+              console.warn("Got device state with invalid values", state);
+              return;
+            }
+
+            const device = await DevicesRepository.getDeviceAsync(state.DeviceId);
+            if (typeof device !== 'undefined') {
+              device.updateState(
+                state.ChannelName,
+                state.ContactName,
+                state.ValueSerialized,
+                new Date(state.TimeStamp)
+              );
+            }
+          });
+          hub.onclose((err) => {
+            console.log("SignalR connection closed. Reconnecting with delay...");
+            console.debug("SignalR connection closes reason:", err);
+            hubStartWithRetry(0);
+          });
+          hub.onreconnecting((err) => {
+            console.log("Signalr reconnecting...");
+            console.debug("Signalr reconnection reason:", err);
+          });
+          hub.onreconnected(() => {
+            console.log("Signalr reconnected");
+          });
+        } catch (err) {
+          console.warn('Failed to start SignalR hub connection', err);
+          setTimeout(() => {
+            hubStartWithRetry(retryCount + 1);
+          }, (retryCount + 1) * 1000);
+        }
+      };
+
+      hubStartWithRetry(0);
+    };
 
     createHubConnection();
   }, [isLoading, devicesHub, isPageLoading])
