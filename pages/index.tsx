@@ -19,14 +19,14 @@ const Pitch = (props: { sx?: SxProps<Theme>, heading: string, children: React.Re
 const Onboarding = () => {
   return (
     <Container>
-      <Stack alignItems="center" justifyContent="center" spacing={10} sx={{ pt: 24 }}>
+      <Stack alignItems="center" justifyContent="center" sx={{ pt: 24 }}>
         <Stack direction="row" alignItems="center" spacing={3}>
           <RippleIndicator size={72} interval={1200} />
           <Typography variant="h1">Signalco</Typography>
           <Box sx={{ width: '72px', height: '72px' }} />
         </Stack>
-        <Stack spacing={4} justifyContent="center" direction="row">
-          <Button href="/app" size="large" variant="contained">Automate</Button>
+        <Stack justifyContent="center" direction="row" sx={{ pt: 10 }}>
+          <Button href="/app" size="large" variant="contained" sx={{ mr: 4 }}>Automate</Button>
           <Button href="#" size="large" variant="outlined">Learn More</Button>
         </Stack>
         <div>{/* image */}</div>

@@ -13,8 +13,8 @@ import { initSentry } from "../src/errors/SentryUtil";
 import createEmotionCache from '../src/createEmotionCache';
 // import { SnackbarProvider } from 'notistack';
 
+const isServerSide = typeof window === 'undefined';
 const clientSideEmotionCache = createEmotionCache();
-const isLight = (typeof window !== 'undefined' && (window.localStorage?.getItem("theme") ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light"))) !== 'dark';
 
 initSentry();
 
@@ -25,6 +25,7 @@ interface MyAppProps extends AppProps {
 export default function App(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const [isOnline, setIsOnline] = React.useState(true);
+  const [isLight, setIsLight] = React.useState(true);
 
   React.useEffect(() => {
     // Handle 'cache on fe nav'
@@ -46,8 +47,12 @@ export default function App(props: MyAppProps) {
     }
 
     // Apply theme to document
-    if (typeof document !== 'undefined') {
-      document.documentElement.style.setProperty("color-scheme", isLight ? 'light' : 'dark');
+    if (!isServerSide) {
+      const themeMode = window.localStorage.getItem("theme") ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
+      document.documentElement.style.setProperty("color-scheme", themeMode);
+      if (themeMode !== 'light') {
+        setIsLight(false);
+      }
     }
   }, []);
 
@@ -75,8 +80,6 @@ export default function App(props: MyAppProps) {
   } else if (typeof window !== "undefined" && window.location.origin.indexOf('next.signalco.io') > 0) {
     redirectUri = `https://next.signalco.io/login-return`;
   }
-
-  console.debug('Rendered app')
 
   return (
     <CacheProvider value={emotionCache}>
