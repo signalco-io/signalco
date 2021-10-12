@@ -31,6 +31,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import AirIcon from '@mui/icons-material/Air';
 import StopIcon from '@mui/icons-material/Stop';
 import { createSvgIcon } from '@mui/material';
+import Image from 'next/image';
 
 export type availableIcons = "empty" | "stop" | "wind" | "up" | "down" | "restaurant" | "ceilinglight" | "tv" | "wc" | "movie" | "moon" | "bed" | "work" | "bathtub" | "exit" | "key" | "livingroom" | "questionmark" | "lock" | "power" | "touch" | "light" | "droplet" | "sun" | "flower" | "motion" | "window" | "door" | "onoff";
 

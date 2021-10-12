@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="103" height="77" fill="none" viewBox="0 0 103 77">
+  <g class="Theme=Dark, State=On">
+    <path fill="#fff" d="M19 14h65v40.524H19z" class="Edge"/>
+    <path fill="#000" fill-opacity=".12" d="M19 14h33.621v40.524H19z" class="EdgeShadow"/>
+    <path fill="#fff" d="M39.172 54.524h24.655v3.286H39.172z" class="BaseStand"/>
+    <path fill="#000" fill-opacity=".12" d="M39.172 54.524H52.62v3.286H39.172z" class="BaseStandShadow"/>
+    <path fill="#fff" d="M32.448 57.809h38.103v2.19H32.448z" class="Base"/>
+    <path fill="#000" fill-opacity=".12" d="M32.448 57.809H52.62v2.19H32.448z" class="BaseShadow"/>
+    <g class="Screen" filter="url(#filter0_d)">
+      <path fill="#378DBD" d="M22.362 18.381h58.276v31.762H22.362z"/>
+    </g>
+    <path fill="#121212" fill-opacity=".12" d="M22.362 18.381h30.259v31.762H22.362z" class="ScreenShadow"/>
+  </g>
+  <defs>
+    <filter id="filter0_d" width="102.276" height="75.762" x=".362" y=".381" class="filter0_d" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="effect1_dropShadow"/>
+      <feOffset dy="4"/>
+      <feGaussianBlur stdDeviation="10"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix values="0 0 0 0 0.553125 0 0 0 0 0.880083 0 0 0 0 0.983333 0 0 0 0.5 0"/>
+      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+  </defs>
+</svg>

@@ -110,22 +110,22 @@ const HomeOverview = () => {
     }
 
     const RenderDashboard = ({ dashboard }: { dashboard: IDashboard }) => {
-        // When width is less than 400, set to single column
+        // When width is less than 400, set to quad column
         const width = isServerSide ? 420 : window.innerWidth;
-        const mobileWidth = width - 16;
-        const numberOfColumns = Math.floor(width / (250 + 16));
+        const mobileWidth = (width - 16) / 4;
+        const numberOfColumns = Math.floor(width / (78 + 16));
         const desktopWidth = Math.max((width - (numberOfColumns * 2 * 8)) / numberOfColumns, 2);
         const columnWidth = width && width < 500 ? mobileWidth : desktopWidth;
 
         return (
             <Masonry
                 columns={numberOfColumns}
-                spacing={2}>
+                spacing={1}>
                 {dashboard.widgets.map((widget, index) => (
                     <MasonryItem key={index}>
                         <Widget
                             columnWidth={columnWidth}
-                            columns={widget.columns}
+                            columns={widget.columns * 4}
                             rows={widget.rows}
                             parts={widget.parts}
                             onEditConfirmed={handleEditComplete} isEditingDashboard={isEditing} />

@@ -7,6 +7,7 @@ import { rowHeight } from "./parts/Shared";
 import WidgetPartButton, { IWidgetPartButtonConfig } from "./parts/WidgetPartButton";
 import WidgetPartGraph, { IWidgetPartGraphConfig } from "./parts/WidgetPartGraph";
 import WidgetPartInlineLabel, { IWidgetPartInlineLabelConfig } from "./parts/WidgetPartInlineLabel";
+import WidgetState from "./parts/WidgetState";
 
 export interface IWidgetProps {
     isEditingDashboard?: boolean,
@@ -162,21 +163,23 @@ const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidge
 }
 
 const Widget = (props: IWidgetProps) => {
-    return (
-        <Paper sx={{ width: props.columnWidth * props.columns, height: props.rows * rowHeight }}>
-            <Grid container justifyContent="space-around" alignItems="center">
-                {props.parts.map((p, index) => (
-                    <Grid
-                        key={index}
-                        item
-                        xs={resolveSize(p.size)}
-                        sx={{ height: p.dense ? rowHeight / 2 : rowHeight, flexGrow: p.size === "grow" ? 1 : 0 }}
-                        zeroMinWidth>
-                        <PartResolved part={p} columnWidth={props.columnWidth} />
-                    </Grid>))}
-            </Grid>
-        </Paper>
-    )
+    return <WidgetState width={props.columns} height={props.rows} />
+
+    // return (
+    //     <Paper sx={{ width: props.columnWidth * props.columns, height: props.rows * rowHeight }}>
+    //         <Grid container justifyContent="space-around" alignItems="center">
+    //             {props.parts.map((p, index) => (
+    //                 <Grid
+    //                     key={index}
+    //                     item
+    //                     xs={resolveSize(p.size)}
+    //                     sx={{ height: p.dense ? rowHeight / 2 : rowHeight, flexGrow: p.size === "grow" ? 1 : 0 }}
+    //                     zeroMinWidth>
+    //                     <PartResolved part={p} columnWidth={props.columnWidth} />
+    //                 </Grid>))}
+    //         </Grid>
+    //     </Paper>
+    // )
 };
 
 export default observer(Widget);

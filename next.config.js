@@ -27,7 +27,7 @@ module.exports = withPWA({
                 childSrc: "'self'",
                 frameSrc: ["'self'", "https://dfnoise.eu.auth0.com"], 
                 workerSrc: "'self'",
-                imgSrc: ["'self'", "https://www.signalco.io", "https://lh3.googleusercontent.com"],
+                imgSrc: ["'self'", "data:", "https://www.signalco.io", "https://lh3.googleusercontent.com", "https://dfnoise.eu.auth0.com"],
                 formAction: "'self'",
                 connectSrc: ["'self'", "https://www.signalco.io", "https://api.signalco.io", "https://signalhub.service.signalr.net", "https://api.github.com", "https://o513630.ingest.sentry.io", "https://fonts.gstatic.com", "https://dfnoise.eu.auth0.com", "wss://signalhub.service.signalr.net", "https://lh3.googleusercontent.com"],
                 baseURI: ['https://www.signalco.io', 'https://next.signalco.io'],
