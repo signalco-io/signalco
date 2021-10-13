@@ -18,6 +18,10 @@ const Layout = (props: { children: React.ReactNode }) => {
   // Set snackbar functions
   // PageNotificationService.setSnackbar(enqueueSnackbar, closeSnackbar);
 
+  console.log('isAuthenticated', isAuthenticated)
+  console.log('error', error)
+  console.log('isloading', isLoading)
+
   // Set Auth0 token factory
   if (typeof HttpService.tokenFactory === 'undefined' &&
     typeof getAccessTokenSilently !== 'undefined') {
