@@ -13,3 +13,7 @@ export function initSentry() {
         tracesSampleRate: 1.0,
     });
 }
+
+export function setUser(userId: string) {
+    Sentry.setUser({id: userId})
+}
