@@ -9,19 +9,17 @@ import { setSentryUser } from "../src/errors/SentryUtil";
 import { useSnackbar } from 'notistack';
 import PageNotificationService from "../src/notifications/PageNotificationService";
 
+let devicesHub: HubConnection | undefined;
+
 const Layout = (props: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading, error, user, getAccessTokenSilently, loginWithRedirect } = useAuth0();
   const [pageError] = useState<string | undefined>();
-  const [isPageLoading, setPageLoading] = useState<boolean>(true);
-  const [devicesHub, setDevicesHub] = useState<HubConnection | undefined>();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  console.debug("AppLayout rendering");
 
   // Set snackbar functions
   PageNotificationService.setSnackbar(enqueueSnackbar, closeSnackbar);
-
-  console.log('isAuthenticated', isAuthenticated)
-  console.log('error', error)
-  console.log('isloading', isLoading)
 
   // Set Auth0 token factory
   if (typeof HttpService.tokenFactory === 'undefined' &&
@@ -37,19 +35,17 @@ const Layout = (props: { children: React.ReactNode }) => {
       console.log("Login redirecting... Online: ", HttpService.isOnline)
       loginWithRedirect();
     }
-
-    setPageLoading(false);
   }, [loginWithRedirect, isLoading, isAuthenticated])
 
   useEffect(() => {
-    if (isPageLoading || isLoading || !isAuthenticated || !user) return;
+    if (isLoading || !isAuthenticated || !user) return;
 
     setSentryUser(user.email);
-  }, [isPageLoading, isLoading, isAuthenticated, user]);
+  }, [isLoading, isAuthenticated, user]);
 
   // Initiate SignalR communication
   useEffect(() => {
-    if (isPageLoading || isLoading) return;
+    if (isLoading) return;
 
     const createHubConnection = async () => {
       if (devicesHub != null) return;
@@ -66,7 +62,7 @@ const Layout = (props: { children: React.ReactNode }) => {
         })
         .configureLogging(LogLevel.Information)
         .build();
-      setDevicesHub(hub);
+      devicesHub = hub;
 
       const hubStartWithRetry = async (retryCount: number) => {
         try {
@@ -120,7 +116,7 @@ const Layout = (props: { children: React.ReactNode }) => {
     };
 
     createHubConnection();
-  }, [isLoading, devicesHub, isPageLoading])
+  }, [isLoading])
 
   if (pageError) {
     return <Alert color="error" variant="filled">{error}</Alert>
