@@ -2,17 +2,20 @@ import {
   Alert,
   Box,
   LinearProgress, Link,
+  OutlinedInput,
+  Stack,
   Typography
 } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useState } from "react";
 import {
   camelToSentenceCase,
   isAbsoluteUrl
 } from "../../../src/helpers/StringHelpers";
 import ResultsPlaceholder from "../indicators/ResultsPlaceholder";
 import IErrorProps from "../interfaces/IErrorProps";
+import { useEffect } from "react-transition-group/node_modules/@types/react";
 
 export interface IAutoTableItem {
   id: string;
@@ -70,6 +73,7 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
 const filterItemKey = (ik: string) => ik !== "id" && !ik.startsWith("_");
 
 function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
+  const [searchText, setSearchText] = useState<string>('');
 
   const headersKeys =
     props.items &&
@@ -84,36 +88,41 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
     return prev;
   }, headerRow);
 
-  const cells = header && props.items ? [header, ...props.items] : [];
+  const filteredItems = searchText ? (props.items || []).filter(i => Object.keys(i).filter(ik => typeof i[ik] === 'string' && i[ik].toString().toLowerCase().indexOf(searchText.toLowerCase()) >= 0).length) : props.items || [];
+
+  const cells = header && props.items ? [header, ...filteredItems] : [];
 
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ overflow: 'auto', display: 'grid' }}>
-        {props.isLoading && <LinearProgress />}
-        {props.error && <ErrorRow error={props.error} />}
-        {cells?.length > 0 && cells.map((item, rowIndex) => {
-          return Object.keys(item)
-            .filter(filterItemKey)
-            .map((itemKey, index) => {
-              return (
-                <CellRenderer
-                  key={itemKey}
-                  value={item[itemKey]}
-                  row={rowIndex + 1}
-                  column={index + 1}
-                  style={{ opacity: item._opacity ? item._opacity : 1 }}
-                  hasClick={typeof props.onRowClick !== 'undefined'}
-                  onClick={() => props.onRowClick && props.onRowClick(item)} />
-              );
-            })
-        })}
-        {(!props.isLoading && !(props.items?.length)) && (
-          <Box p={2}>
-            <ResultsPlaceholder />
-          </Box>
-        )}
+    <Stack spacing={1}>
+      <OutlinedInput placeholder="Search..." sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+      <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ overflow: 'auto', display: 'grid' }}>
+          {props.isLoading && <LinearProgress />}
+          {props.error && <ErrorRow error={props.error} />}
+          {cells?.length > 0 && cells.map((item, rowIndex) => {
+            return Object.keys(item)
+              .filter(filterItemKey)
+              .map((itemKey, index) => {
+                return (
+                  <CellRenderer
+                    key={itemKey}
+                    value={item[itemKey]}
+                    row={rowIndex + 1}
+                    column={index + 1}
+                    style={{ opacity: item._opacity ? item._opacity : 1 }}
+                    hasClick={typeof props.onRowClick !== 'undefined'}
+                    onClick={() => props.onRowClick && props.onRowClick(item)} />
+                );
+              })
+          })}
+          {(!props.isLoading && !(props.items?.length)) && (
+            <Box p={2}>
+              <ResultsPlaceholder />
+            </Box>
+          )}
+        </div>
       </div>
-    </div>
+    </Stack>
   );
 }
 
