@@ -16,7 +16,7 @@ import throttle from '../../../src/helpers/Throttle';
 import { useCallback } from 'react';
 import blendColors from '../../../src/helpers/BlendColors';
 import SelectItems from '../../../components/shared/form/SelectItems';
-import { IHistoricalValue } from '../../../components/devices/parts/WidgetPartGraph';
+import WidgetPartGraph, { IHistoricalValue } from '../../../components/devices/parts/WidgetPartGraph';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 
 interface IStateTableItem extends IAutoTableItem {
@@ -164,7 +164,8 @@ const DeviceContactHistory = (props: { deviceId: string, channelName: string, co
         <Card>
             <CardHeader title="State" />
             <CardMedia>
-                <AutoTable items={stateItems} isLoading={isLoadingStateItems} error={errorStateItems} />
+                {/* <AutoTable items={stateItems} isLoading={isLoadingStateItems} error={errorStateItems} /> */}
+                <WidgetPartGraph columnWidth={120} config={{ columns: 4, rows: 2, value: loadContactHistory, valueSource: { channelName: props.channelName, contactName: props.contactName, deviceId: props.deviceId } }} />
             </CardMedia>
         </Card>
     );
@@ -373,7 +374,7 @@ const DeviceDetails = () => {
                         </Grid>
                         {device && (
                             <Grid item>
-                                <DeviceContactHistory deviceId={device.id} channelName="signal" contactName="locked" />
+                                <DeviceContactHistory deviceId={device.id} channelName="zigbee2mqtt" contactName="linkquality" />
                             </Grid>
                         )}
                     </Grid>

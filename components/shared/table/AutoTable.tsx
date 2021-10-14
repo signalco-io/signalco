@@ -88,13 +88,14 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
     return prev;
   }, headerRow);
 
-  const filteredItems = searchText ? (props.items || []).filter(i => Object.keys(i).filter(ik => typeof i[ik] === 'string' && i[ik].toString().toLowerCase().indexOf(searchText.toLowerCase()) >= 0).length) : props.items || [];
+  const showSearchFilter = (props.items?.length ?? 0) > 10;
+  const filteredItems = showSearchFilter && searchText ? (props.items || []).filter(i => Object.keys(i).filter(ik => typeof i[ik] === 'string' && i[ik].toString().toLowerCase().indexOf(searchText.toLowerCase()) >= 0).length) : props.items || [];
 
   const cells = header && props.items ? [header, ...filteredItems] : [];
 
   return (
-    <Stack spacing={1}>
-      <OutlinedInput placeholder="Search..." sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+    <Stack spacing={1} sx={{ height: '100%' }}>
+      {showSearchFilter && <OutlinedInput placeholder="Search..." sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => setSearchText(e.target.value)} />}
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ overflow: 'auto', display: 'grid' }}>
           {props.isLoading && <LinearProgress />}
