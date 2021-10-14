@@ -11,7 +11,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import Router, { useRouter } from "next/router";
 import { initSentry } from "../src/errors/SentryUtil";
 import createEmotionCache from '../src/createEmotionCache';
-// import { SnackbarProvider } from 'notistack';
+import { SnackbarProvider } from 'notistack';
 
 const isServerSide = typeof window === 'undefined';
 const clientSideEmotionCache = createEmotionCache();
@@ -118,33 +118,33 @@ export default function App(props: MyAppProps) {
       </Head>
       {/* <StyledEngineProvider injectFirst> */}
       <ThemeProvider theme={theme(!isLight)}>
-        {/* <SnackbarProvider maxSnack={3}> */}
-        <CssBaseline />
-        <Auth0Provider
-          redirectUri={redirectUri}
-          onRedirectCallback={(appState) => {
-            // Use Next.js's Router.replace method to replace the url
-            Router.replace(appState?.returnTo || "/");
-          }}
-          domain="dfnoise.eu.auth0.com"
-          clientId="nl7QIQD7Kw3ZHt45qHHAZG0MEILSFa7U"
-          audience="https://api.signalco.io"
-        >
-          {typeof Layout === "function" ? (
-            <Layout>
+        <SnackbarProvider maxSnack={3}>
+          <CssBaseline />
+          <Auth0Provider
+            redirectUri={redirectUri}
+            onRedirectCallback={(appState) => {
+              // Use Next.js's Router.replace method to replace the url
+              Router.replace(appState?.returnTo || "/");
+            }}
+            domain="dfnoise.eu.auth0.com"
+            clientId="nl7QIQD7Kw3ZHt45qHHAZG0MEILSFa7U"
+            audience="https://api.signalco.io"
+          >
+            {typeof Layout === "function" ? (
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            ) : (
               <Component {...pageProps} />
-            </Layout>
-          ) : (
-            <Component {...pageProps} />
-          )}
-        </Auth0Provider>
-        <NextNprogress
-          color="#fff"
-          startPosition={0.3}
-          stopDelayMs={200}
-          height={2}
-        />
-        {/* </SnackbarProvider> */}
+            )}
+          </Auth0Provider>
+          <NextNprogress
+            color="#fff"
+            startPosition={0.3}
+            stopDelayMs={200}
+            height={2}
+          />
+        </SnackbarProvider>
       </ThemeProvider>
       {/* </StyledEngineProvider> */}
     </CacheProvider>

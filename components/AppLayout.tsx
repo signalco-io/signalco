@@ -6,18 +6,18 @@ import NavProfile from "./NavProfile";
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import DevicesRepository, { SignalDeviceStatePublishDto } from "../src/devices/DevicesRepository";
 import { setSentryUser } from "../src/errors/SentryUtil";
-// import { useSnackbar } from 'notistack';
-// import PageNotificationService from "../src/notifications/PageNotificationService";
+import { useSnackbar } from 'notistack';
+import PageNotificationService from "../src/notifications/PageNotificationService";
 
 const Layout = (props: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading, error, user, getAccessTokenSilently, loginWithRedirect } = useAuth0();
   const [pageError] = useState<string | undefined>();
   const [isPageLoading, setPageLoading] = useState<boolean>(true);
   const [devicesHub, setDevicesHub] = useState<HubConnection | undefined>();
-  // const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   // Set snackbar functions
-  // PageNotificationService.setSnackbar(enqueueSnackbar, closeSnackbar);
+  PageNotificationService.setSnackbar(enqueueSnackbar, closeSnackbar);
 
   console.log('isAuthenticated', isAuthenticated)
   console.log('error', error)
@@ -103,12 +103,16 @@ const Layout = (props: { children: React.ReactNode }) => {
           });
           hub.onreconnected(() => {
             console.log("Signalr reconnected");
+            PageNotificationService.show("Realtime connection to cloud established.", "success");
           });
         } catch (err) {
-          console.warn('Failed to start SignalR hub connection', err);
+          const delay = retryCount + 1;
+
+          console.warn(`Failed to start SignalR hub connection. Reconnecting in ${delay}s`, err);
+          PageNotificationService.show(`Realtime connection to cloud lost. Reconnecting in ${delay}s...`, "warning");
           setTimeout(() => {
-            hubStartWithRetry(retryCount + 1);
-          }, (retryCount + 1) * 1000);
+            hubStartWithRetry(delay);
+          }, (delay) * 1000);
         }
       };
 
