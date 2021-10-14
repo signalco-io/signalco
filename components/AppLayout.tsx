@@ -5,11 +5,12 @@ import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import DevicesRepository, { SignalDeviceStatePublishDto } from "../src/devices/DevicesRepository";
+import { setSentryUser } from "../src/errors/SentryUtil";
 // import { useSnackbar } from 'notistack';
 // import PageNotificationService from "../src/notifications/PageNotificationService";
 
 const Layout = (props: { children: React.ReactNode }) => {
-  const { isAuthenticated, isLoading, error, getAccessTokenSilently, loginWithRedirect } = useAuth0();
+  const { isAuthenticated, isLoading, error, user, getAccessTokenSilently, loginWithRedirect } = useAuth0();
   const [pageError] = useState<string | undefined>();
   const [isPageLoading, setPageLoading] = useState<boolean>(true);
   const [devicesHub, setDevicesHub] = useState<HubConnection | undefined>();
@@ -39,6 +40,12 @@ const Layout = (props: { children: React.ReactNode }) => {
 
     setPageLoading(false);
   }, [loginWithRedirect, isLoading, isAuthenticated])
+
+  useEffect(() => {
+    if (isPageLoading || isLoading || !isAuthenticated || !user) return;
+
+    setSentryUser(user.email);
+  }, [isPageLoading, isLoading, isAuthenticated, user]);
 
   // Initiate SignalR communication
   useEffect(() => {

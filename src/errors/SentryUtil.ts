@@ -14,7 +14,7 @@ export function initSentry() {
     });
 }
 
-export function setSentryUser(userEmail: string) {
+export function setSentryUser(userEmail?: string) {
     if (userEmail) {
         Sentry.setUser({email: userEmail});
     }
