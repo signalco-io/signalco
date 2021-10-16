@@ -175,21 +175,6 @@ const Widget = (props: IWidgetProps) => {
         <WidgetCard width={2} height={1} state={false} >
             <Alert severity="error" sx={{ height: "100%" }}>Unknown widget</Alert>
         </WidgetCard >);
-    // return (
-    //     <Paper sx={{ width: props.columnWidth * props.columns, height: props.rows * rowHeight }}>
-    //         <Grid container justifyContent="space-around" alignItems="center">
-    //             {props.parts.map((p, index) => (
-    //                 <Grid
-    //                     key={index}
-    //                     item
-    //                     xs={resolveSize(p.size)}
-    //                     sx={{ height: p.dense ? rowHeight / 2 : rowHeight, flexGrow: p.size === "grow" ? 1 : 0 }}
-    //                     zeroMinWidth>
-    //                     <PartResolved part={p} columnWidth={props.columnWidth} />
-    //                 </Grid>))}
-    //         </Grid>
-    //     </Paper>
-    // )
 };
 
 export default observer(Widget);

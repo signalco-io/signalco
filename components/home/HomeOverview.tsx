@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Dialog, DialogContent, DialogTitle, Grid, IconButton, LinearProgress, OutlinedInput, Stack, Typography } from "@mui/material";
+import { Alert, Box, Button, Dialog, DialogContent, DialogTitle, Grid, IconButton, LinearProgress, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import EditSharpIcon from '@mui/icons-material/EditSharp';
 import HttpService from "../../src/services/HttpService";
@@ -12,9 +12,8 @@ import TabPanel from '@mui/lab/TabPanel';
 import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
 import Masonry from '@mui/lab/Masonry';
 import MasonryItem from '@mui/lab/MasonryItem';
-import { AddOutlined, Check, SaveOutlined } from "@mui/icons-material";
-import Image from 'next/image';
-import useSearch, { filterFuncObjectStringProps } from "../../src/hooks/useSearch";
+import { AddOutlined, Close, SaveOutlined } from "@mui/icons-material";
+import WidgetStore from "../devices/WidgetStore";
 
 const isServerSide = typeof window === 'undefined';
 
@@ -135,80 +134,7 @@ const HomeOverview = () => {
         setIsAddWidgetOpen(false);
     };
 
-    const availableWidgets = [
-        {
-            type: 'state',
-            name: 'State widget',
-            description: 'Control and see state of any integrated entity.',
-            preview: '/assets/widget-previews/WidgetStatePreview_dark.svg'
-        },
-        {
-            type: 'shades',
-            name: 'Shades widget',
-            description: 'Control and see state of window shades.',
-            preview: '/assets/widget-previews/WidgetShadesPreview_dark.svg',
-            previewWidth: 300
-        },
-        {
-            type: 'vacuum',
-            name: 'Vacuum widget',
-            description: 'Control and see state of your robot vacuum.',
-            preview: '/assets/widget-previews/WidgetVacuumPreview_dark.svg',
-            previewWidth: 200,
-            previewHeight: 200
-        }
-    ];
-
-    const WidgetStore = (props: { isOpen: boolean }) => {
-        const [filteredAvailableWidgetsItems, showAvailableWidgetsSearch, searchAvailableWidgetsText, handleSearchAvailableWidgetsTextChange] =
-            useSearch(availableWidgets, filterFuncObjectStringProps, 6);
-
-        const isMobile = typeof window !== 'undefined' && window.innerWidth < 760;
-
-        return (
-            <Dialog open={props.isOpen} maxWidth="lg" fullScreen={isMobile}>
-                <DialogTitle>Add widget</DialogTitle>
-                <DialogContent>
-                    <Stack spacing={2}>
-                        {showAvailableWidgetsSearch && <OutlinedInput placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />}
-                        <Stack direction="row">
-                            <Typography color="text.secondary">{filteredAvailableWidgetsItems.length} widget{filteredAvailableWidgetsItems.length > 1 ? 's' : ''} available</Typography>
-                        </Stack>
-                        <div>
-                            <Grid container spacing={1}>
-                                {filteredAvailableWidgetsItems.map((availableWidget, index) => (
-                                    <Grid item key={`${availableWidget.type}-${index}`}>
-                                        <Card sx={{ minWidth: '320px' }}>
-                                            <CardHeader title={availableWidget.name} />
-                                            <CardMedia>
-                                                <Box sx={{ width: '100%', height: '230px', background: 'black', display: 'flex', 'justifyContent': 'center' }}>
-                                                    <Image
-                                                        src={availableWidget.preview}
-                                                        alt={`${availableWidget.name} Preview`}
-                                                        width={availableWidget.previewWidth || 165}
-                                                        height={availableWidget.previewHeight || 165} />
-                                                </Box>
-                                            </CardMedia>
-                                            <CardContent>
-                                                <Typography variant="body2" color="text.secondary">
-                                                    {availableWidget.description}
-                                                </Typography>
-                                            </CardContent>
-                                            <CardActions>
-                                                <IconButton aria-label="Add to dashboard" onClick={() => handleWidgetAdd(availableWidget.type)}>
-                                                    <AddOutlined />
-                                                </IconButton>
-                                            </CardActions>
-                                        </Card>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </div>
-                    </Stack>
-                </DialogContent>
-            </Dialog>
-        );
-    };
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 760;
 
     if (!isServerSide &&
         window.location.search.startsWith("?do=")) {
@@ -252,7 +178,19 @@ const HomeOverview = () => {
                                         </Stack>}>
                                     In editing mode... Add, move, resize your items.
                                 </Alert>
-                                <WidgetStore isOpen={isAddWidgetOpen} />
+                                <Dialog open={isAddWidgetOpen} maxWidth="lg" fullScreen={isMobile} scroll="paper" sx={{ minWidth: '320px' }}>
+                                    <DialogTitle>
+                                        <Stack direction="row" justifyContent="space-between">
+                                            <Typography variant="h2">Widget store</Typography>
+                                            <IconButton title="Close" onClick={() => setIsAddWidgetOpen(false)}>
+                                                <Close />
+                                            </IconButton>
+                                        </Stack>
+                                    </DialogTitle>
+                                    <DialogContent>
+                                        <WidgetStore onAddWidget={handleWidgetAdd} />
+                                    </DialogContent>
+                                </Dialog>
                             </>
                         ) : (
                             <Grid container spacing={2}>
