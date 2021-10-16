@@ -277,7 +277,7 @@ const DeviceDetails = () => {
                                             <Stack spacing={1} >
                                                 <Stack direction="row" justifyContent="space-between" spacing={2}>
                                                     <span>Last activity</span>
-                                                    {device ? <ReactTimeago date={device?.getLastActivity()} /> : "Unknown"}
+                                                    {device && device?.getLastActivity() > 0 ? <ReactTimeago date={device?.getLastActivity()} /> : "Never"}
                                                 </Stack>
                                                 <Stack direction="row" justifyContent="space-between" spacing={2}>
                                                     <span>Model</span>
