@@ -16,6 +16,7 @@ import {
 import ResultsPlaceholder from "../indicators/ResultsPlaceholder";
 import IErrorProps from "../interfaces/IErrorProps";
 import { useEffect } from "react-transition-group/node_modules/@types/react";
+import useSearch, { filterFuncObjectStringProps } from "../../../src/hooks/useSearch";
 
 export interface IAutoTableItem {
   id: string;
@@ -73,7 +74,7 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
 const filterItemKey = (ik: string) => ik !== "id" && !ik.startsWith("_");
 
 function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
-  const [searchText, setSearchText] = useState<string>('');
+  const [filteredItems, showSearch, searchText, handleSearchTextChange] = useSearch(props.items, filterFuncObjectStringProps);
 
   const headersKeys =
     props.items &&
@@ -88,14 +89,11 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
     return prev;
   }, headerRow);
 
-  const showSearchFilter = (props.items?.length ?? 0) > 10;
-  const filteredItems = showSearchFilter && searchText ? (props.items || []).filter(i => Object.keys(i).filter(ik => typeof i[ik] === 'string' && i[ik].toString().toLowerCase().indexOf(searchText.toLowerCase()) >= 0).length) : props.items || [];
-
   const cells = header && props.items ? [header, ...filteredItems] : [];
 
   return (
     <Stack spacing={1} sx={{ height: '100%' }}>
-      {showSearchFilter && <OutlinedInput placeholder="Search..." sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => setSearchText(e.target.value)} />}
+      {showSearch && <OutlinedInput placeholder="Search..." sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ overflow: 'auto', display: 'grid' }}>
           {props.isLoading && <LinearProgress />}

@@ -1,22 +1,20 @@
-import { Alert, Grid, Paper } from "@mui/material";
+import { Alert, Grid, Paper, Stack, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import ConductsService from "../../src/conducts/ConductsService";
 import DevicesRepository from "../../src/devices/DevicesRepository";
 import { rowHeight } from "./parts/Shared";
+import WidgetCard from "./parts/WidgetCard";
 import WidgetPartButton, { IWidgetPartButtonConfig } from "./parts/WidgetPartButton";
 import WidgetPartGraph, { IWidgetPartGraphConfig } from "./parts/WidgetPartGraph";
 import WidgetPartInlineLabel, { IWidgetPartInlineLabelConfig } from "./parts/WidgetPartInlineLabel";
-import WidgetState from "./parts/WidgetState";
+import WidgetState, { WidgetShades, WidgetVacuum } from "./parts/WidgetState";
+
+export type widgetType = "state" | "vacuum" | "shades";
 
 export interface IWidgetProps {
-    isEditingDashboard?: boolean,
-    isEditingWidget?: boolean,
-    onEditConfirmed: () => void,
-    parts: IWidgetPart[],
-    columns: number,
-    rows: number,
-    columnWidth: number
+    type: widgetType,
+    config?: object
 }
 
 export type widgetSize = "auto" | "grow" | "1/12" | "1/6" | "1/4" | "1/3" | "5/12" | "1/2" | "7/12" | "2/3" | "3/4" | "5/6" | "11/12" | "1";
@@ -163,8 +161,20 @@ const PartResolved = ({ columnWidth, part }: { columnWidth: number, part: IWidge
 }
 
 const Widget = (props: IWidgetProps) => {
-    return <WidgetState width={props.columns} height={props.rows} />
+    if (props.type === "state") {
+        return <WidgetState config={props.config} />
+    } else if (props.type === 'shades') {
+        return <WidgetShades config={props.config} />
+    } else if (props.type === 'vacuum') {
+        return <WidgetVacuum config={props.config} />
+    }
 
+    console.warn("Unable to resolve widget. Type: ", props.type);
+
+    return (
+        <WidgetCard width={2} height={1} state={false} >
+            <Alert severity="error" sx={{ height: "100%" }}>Unknown widget</Alert>
+        </WidgetCard >);
     // return (
     //     <Paper sx={{ width: props.columnWidth * props.columns, height: props.rows * rowHeight }}>
     //         <Grid container justifyContent="space-around" alignItems="center">
