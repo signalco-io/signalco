@@ -1,6 +1,6 @@
 import { ArrowDownward, ArrowUpward, Stop } from '@mui/icons-material';
 import BatteryCharging20OutlinedIcon from '@mui/icons-material/BatteryCharging20Outlined';
-import { Grid, Stack, Typography, Button, ButtonBase } from "@mui/material";
+import { Grid, Stack, Typography, Button, ButtonBase, Select } from "@mui/material";
 import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from "react";
 import { IDeviceModel } from '../../../src/devices/Device';
@@ -8,6 +8,7 @@ import DevicesRepository from '../../../src/devices/DevicesRepository';
 import LightBulbVisual from '../../icons/LightBulbVisual';
 import TvVisual from "../../icons/TvVisual";
 import WindowVisual from '../../icons/WindowVisual';
+import SelectItems from '../../shared/form/SelectItems';
 import WidgetCard from './WidgetCard';
 
 export const WidgetVacuum = (props: { config?: any }) => {
@@ -37,7 +38,7 @@ export const WidgetShades = (props: { config: any }) => {
     const label = props.config?.label || '';
 
     // TODO: Calc from source value
-    const shadePerc = 1;
+    const shadePerc = 0.3;
 
     const state = shadePerc < 1;
 
@@ -92,5 +93,17 @@ const WidgetState = (props: { config: any }) => {
         </WidgetCard>
     );
 };
+
+// const WidgetState.Config = () => {
+//     const [selectedVisual, setSelectedVisual] = useState(null);
+//     const visuals = [{ value: 'tv', label: "TV" }, { value: "lightbulb", label: "Light Bulb" }];
+
+//     return (
+//         <Stack spacing={1}>
+//             <OutlinedInput placeholder="Label" />
+//             <SelectItems items={visuals} value={selectedVisual} onChange={(selected) => setSelectedVisual(selected)} />
+//         </Stack>
+//     )
+// };
 
 export default observer(WidgetState);

@@ -31,7 +31,7 @@ var skySunnyGrads = [
 const WindowVisual = (props: { shadePerc: number, theme: "dark" | "light", size: number }) => {
     const perc = props.shadePerc;
 
-    const hours = (new Date().getHours() + 3) % 24;
+    const hours = (new Date().getHours()) % 24;
     const gradData = skySunnyGrads[hours];
     const cssSkyGradStops = gradData.map((stop, index) => <stop key={index} offset={stop.position / 100} stopColor={`#${stop.color}`} />)
     const castColor = hexToRgb(gradData[gradData.length - 1].color);
