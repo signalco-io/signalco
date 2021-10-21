@@ -2,7 +2,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
 import ReactTimeago from "react-timeago";
-import AppLayout from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
 import BeaconsRepository, { IBeaconModel } from "../../../src/beacons/BeaconsRepository";
@@ -40,6 +40,6 @@ const Beacons = () => {
     )
 }
 
-Beacons.layout = AppLayout;
+Beacons.layout = AppLayoutWithAuth;
 
 export default Beacons;

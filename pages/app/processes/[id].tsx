@@ -1,7 +1,7 @@
 import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Grid, Menu, MenuItem, OutlinedInput, Paper, Popover, Skeleton, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
-import AppLayout from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import { observer } from 'mobx-react-lite';
 import ProcessesRepository, { IProcessModel } from '../../../src/processes/ProcessesRepository';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -714,6 +714,6 @@ const ProcessDetails = () => {
     );
 }
 
-ProcessDetails.layout = AppLayout;
+ProcessDetails.layout = AppLayoutWithAuth;
 
 export default observer(ProcessDetails);

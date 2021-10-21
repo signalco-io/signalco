@@ -6,7 +6,6 @@ import { rowHeight } from "./Shared";
 import { scaleTime, timeHour } from 'd3';
 import { useTheme } from "@mui/material";
 import ReactTimeago from "react-timeago";
-import { PinDropSharp } from "@mui/icons-material";
 
 export interface IWidgetPartGraphConfig {
     columns: number,

@@ -2,7 +2,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, 
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
-import AppLayout from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
 import { IDeviceContact, IDeviceContactState, IDeviceModel } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
@@ -164,7 +164,7 @@ const DeviceContactHistory = (props: { deviceId: string, channelName: string, co
         <Card>
             <CardHeader title="State" />
             <CardMedia>
-                {/* <AutoTable items={stateItems} isLoading={isLoadingStateItems} error={errorStateItems} /> */}
+                <AutoTable items={stateItems} isLoading={isLoadingStateItems} error={errorStateItems} />
                 <WidgetPartGraph columnWidth={120} config={{ columns: 4, rows: 2, value: loadContactHistory, valueSource: { channelName: props.channelName, contactName: props.contactName, deviceId: props.deviceId } }} />
             </CardMedia>
         </Card>
@@ -384,6 +384,6 @@ const DeviceDetails = () => {
     );
 }
 
-DeviceDetails.layout = AppLayout;
+DeviceDetails.layout = AppLayoutWithAuth;
 
 export default observer(DeviceDetails);

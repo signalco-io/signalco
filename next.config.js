@@ -1,9 +1,13 @@
-const withPWA = require('next-pwa')
-const { createSecureHeaders } = require("next-secure-headers")
+// const { withPlugins } = require('next-compose-plugins');
+const withPWA = require('next-pwa');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+const { createSecureHeaders } = require("next-secure-headers");
 
-const isDevelopment = true;
+const isDevelopment = process.env.NODE_ENV === "development";
 
-module.exports = withPWA({
+module.exports = withBundleAnalyzer(withPWA({
     experimental: { esmExternals: true },
     pwa: {
         dest: 'public',
@@ -45,4 +49,4 @@ module.exports = withPWA({
           })
         }];
       },
-});
+}));

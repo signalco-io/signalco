@@ -1,17 +1,14 @@
 import { ArrowDownward, ArrowUpward, Stop } from '@mui/icons-material';
 import BatteryCharging20OutlinedIcon from '@mui/icons-material/BatteryCharging20Outlined';
-import { Grid, Stack, Typography, Button, ButtonBase, Select } from "@mui/material";
+import { Grid, Stack, Typography, Button, ButtonBase } from "@mui/material";
 import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from "react";
 import { IDeviceModel } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
-import LightBulbVisual from '../../icons/LightBulbVisual';
-import TvVisual from "../../icons/TvVisual";
-import WindowVisual from '../../icons/WindowVisual';
-import SelectItems from '../../shared/form/SelectItems';
 import WidgetCard from './WidgetCard';
+import dynamic from 'next/dynamic'
 
-export const WidgetVacuum = (props: { config?: any }) => {
+export const WidgetVacuum = (/*props: { config?: any }*/) => {
     const width = 4;
     const height = 4;
     const state = false;
@@ -25,7 +22,7 @@ export const WidgetVacuum = (props: { config?: any }) => {
                     <Typography>{batteryPerc}%</Typography>
                     <BatteryCharging20OutlinedIcon />
                 </Stack>
-                <TvVisual state={state} theme="dark" size={52} />
+
                 <Typography>{label}</Typography>
             </Stack>
         </WidgetCard>
@@ -41,6 +38,8 @@ export const WidgetShades = (props: { config: any }) => {
     const shadePerc = 0.3;
 
     const state = shadePerc < 1;
+
+    const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
     return (
         <WidgetCard width={width} height={height} state={state}>
@@ -80,7 +79,7 @@ const WidgetState = (props: { config: any }) => {
     }, []);
 
     const label = props.config?.label || device?.alias || '';
-    const Visual = props.config?.visual === 'tv' ? TvVisual : LightBulbVisual;
+    const Visual = props.config?.visual === 'tv' ? dynamic(() => import("../../icons/TvVisual")) : dynamic(() => import("../../icons/LightBulbVisual"));
 
     return (
         <WidgetCard width={width} height={height} state={state}>

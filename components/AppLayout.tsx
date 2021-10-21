@@ -1,15 +1,19 @@
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import { Alert, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import React, { useEffect } from "react";
 import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
-import { setSentryUser } from "../src/errors/SentryUtil";
 import { useSnackbar } from 'notistack';
 import PageNotificationService from "../src/notifications/PageNotificationService";
 import RealtimeService from '../src/realtime/realtimeService';
+import { Auth0Provider } from "@auth0/auth0-react";
+import Router from "next/router";
+import * as Sentry from '@sentry/nextjs';
 
-const Layout = (props: { children: React.ReactNode }) => {
-  const { isAuthenticated, isLoading, error, user, getAccessTokenSilently, loginWithRedirect } = useAuth0();
+const AppLayout = (props: { children?: React.ReactNode }) => {
+  const {
+    children
+  } = props;
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   console.debug("AppLayout rendering");
@@ -17,40 +21,10 @@ const Layout = (props: { children: React.ReactNode }) => {
   // Set snackbar functions
   PageNotificationService.setSnackbar(enqueueSnackbar, closeSnackbar);
 
-  // Set Auth0 token factory
-  if (typeof HttpService.tokenFactory === 'undefined' &&
-    typeof getAccessTokenSilently !== 'undefined') {
-    HttpService.tokenFactory = getAccessTokenSilently;
-  }
-
-  // Refirect to login if not authenticated
-  useEffect(() => {
-    if (isLoading) return;
-
-    if (HttpService.isOnline && !isAuthenticated) {
-      console.log("Login redirecting... Online: ", HttpService.isOnline)
-      loginWithRedirect();
-    }
-  }, [loginWithRedirect, isLoading, isAuthenticated])
-
-  // Set sentry user
-  useEffect(() => {
-    if (isLoading || !isAuthenticated || !user) return;
-
-    setSentryUser(user.email);
-  }, [isLoading, isAuthenticated, user]);
-
   // Initiate SignalR communication
   useEffect(() => {
-    if (!isLoading) {
-      RealtimeService.startAsync();
-    }
-  }, [isLoading]);
-
-  // Show error if available
-  if (error) {
-    PageNotificationService.show(error.message, "error");
-  }
+    RealtimeService.startAsync();
+  }, []);
 
   return (
     <Grid container direction="column" sx={{ height: '100%', width: '100%' }} wrap="nowrap">
@@ -58,10 +32,97 @@ const Layout = (props: { children: React.ReactNode }) => {
         <NavProfile />
       </Grid>
       <Grid sx={{ height: '100%', flexGrow: 1, position: 'relative' }} item>
-        {props.children}
+        {children}
       </Grid>
     </Grid>
   );
 };
 
-export default withAuthenticationRequired(Layout);
+const EmptyLayout = (props: { children?: React.ReactNode }) => {
+  const {
+    children
+  } = props;
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  console.debug("EmptyLayout rendering");
+
+  // Set snackbar functions
+  PageNotificationService.setSnackbar(enqueueSnackbar, closeSnackbar);
+
+  return (
+    <Box sx={{ height: '100%', position: 'relative' }}>
+      {children}
+    </Box>
+  );
+};
+
+const Auth0Wrapper = (props: { children?: React.ReactNode }) => {
+  const {
+    children
+  } = props;
+
+  console.debug('Auth0Wrapper rendering');
+
+  let redirectUri = 'https://www.signalco.io/login-return';
+  if (typeof window !== "undefined" && window.location.origin.indexOf('localhost:3000') > 0) {
+    redirectUri = `${window.location.origin}/login-return`;
+  } else if (typeof window !== "undefined" && window.location.origin.indexOf('next.signalco.io') > 0) {
+    redirectUri = `https://next.signalco.io/login-return`;
+  }
+
+  return (
+    <Auth0Provider
+      redirectUri={redirectUri}
+      onRedirectCallback={(appState) => {
+        // Use Next.js's Router.replace method to replace the url
+        const returnTo = appState?.returnTo || "/";
+        Router.replace(returnTo);
+      }}
+      domain="dfnoise.eu.auth0.com"
+      clientId="nl7QIQD7Kw3ZHt45qHHAZG0MEILSFa7U"
+      audience="https://api.signalco.io"
+    >
+      {children}
+    </Auth0Provider>
+  );
+};
+
+const LayoutWithAuth = (props: { LayoutComponent: React.ComponentType, children?: React.ReactNode }) => {
+  const {
+    children,
+    LayoutComponent
+  } = props;
+  const { error, user, getAccessTokenSilently } = useAuth0();
+
+  console.debug('LayoutWithAuth rendering');
+
+  HttpService.tokenFactory = getAccessTokenSilently;
+
+  // Set sentry user
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    // Set sentry user
+    Sentry.configureScope(scope => {
+      scope.setUser({ email: user.email });
+    });
+  }, [user]);
+
+  // Show error if available
+  if (error) {
+    console.error(error);
+    PageNotificationService.show(error.message, "error");
+  }
+
+  return <LayoutComponent>{children}</LayoutComponent>;
+};
+
+export const AppLayoutWithAuth = (props: { children: React.ReactNode }) => (
+  <Auth0Wrapper><LayoutWithAuth LayoutComponent={withAuthenticationRequired(AppLayout)}>{props.children}</LayoutWithAuth></Auth0Wrapper>
+);
+
+export const EmptyLayoutWithAuth = (props: { children: React.ReactNode }) => (
+  <Auth0Wrapper><LayoutWithAuth LayoutComponent={EmptyLayout}>{props.children}</LayoutWithAuth></Auth0Wrapper>
+);

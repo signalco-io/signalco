@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from 'next/router';
 import { Box, Paper, Typography } from "@mui/material";
-import AppLayout from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
 import { observer } from "mobx-react-lite";
@@ -42,6 +42,6 @@ const Processes = () => {
     )
 };
 
-Processes.layout = AppLayout;
+Processes.layout = AppLayoutWithAuth;
 
 export default observer(Processes);

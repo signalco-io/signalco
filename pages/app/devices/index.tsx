@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from 'next/router';
 import { Box, Chip, Paper, Typography } from "@mui/material";
-import AppLayout from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
 import { IDeviceModel } from "../../../src/devices/Device";
@@ -43,6 +43,6 @@ const Devices = () => {
     )
 };
 
-Devices.layout = AppLayout;
+Devices.layout = AppLayoutWithAuth;
 
 export default observer(Devices);

@@ -8,14 +8,13 @@ import {
 } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { observer } from "mobx-react-lite";
-import React, { useState } from "react";
+import React from "react";
 import {
   camelToSentenceCase,
   isAbsoluteUrl
 } from "../../../src/helpers/StringHelpers";
 import ResultsPlaceholder from "../indicators/ResultsPlaceholder";
 import IErrorProps from "../interfaces/IErrorProps";
-import { useEffect } from "react-transition-group/node_modules/@types/react";
 import useSearch, { filterFuncObjectStringProps } from "../../../src/hooks/useSearch";
 
 export interface IAutoTableItem {

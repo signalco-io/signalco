@@ -2,7 +2,7 @@ import { Alert, Box, Button, Card, CardContent, CardHeader, Grid, LinearProgress
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
-import AppLayout from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import { observer } from 'mobx-react-lite';
 import BeaconsRepository, { IBeaconModel } from '../../../src/beacons/BeaconsRepository';
 import UploadIcon from '@mui/icons-material/Upload';
@@ -174,6 +174,6 @@ const BeaconDetails = () => {
     );
 }
 
-BeaconDetails.layout = AppLayout;
+BeaconDetails.layout = AppLayoutWithAuth;
 
 export default observer(BeaconDetails);
