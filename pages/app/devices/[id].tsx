@@ -151,12 +151,13 @@ function historicalValueToTableItem(value: IHistoricalValue): IAutoTableItem {
 }
 
 const DeviceContactHistory = (props: { deviceId: string, channelName: string, contactName: string }) => {
-    const loadContactHistory =
+    const loadContactHistory = useCallback(
         async () => await DevicesRepository.getDeviceStateHistoryAsync({
             deviceId: props.deviceId,
             channelName: props.channelName,
             contactName: props.contactName
-        }) || [];
+        }) || [],
+        [props.deviceId, props.channelName, props.contactName]);
 
     const stateItemsTable = useAutoTable(loadContactHistory, historicalValueToTableItem);
 
