@@ -13,7 +13,8 @@ export type widgetType = "state" | "vacuum" | "shades";
 
 export interface IWidgetProps {
     type: widgetType,
-    config?: object
+    config?: object,
+    setConfig: (config: object) => Promise<void>
 }
 
 export type widgetSize = "auto" | "grow" | "1/12" | "1/6" | "1/4" | "1/3" | "5/12" | "1/2" | "7/12" | "2/3" | "3/4" | "5/6" | "11/12" | "1";
@@ -160,18 +161,23 @@ export interface IWidgetPart {
 // }
 
 const Widget = (props: IWidgetProps) => {
+    const widgetSharedProps = {
+        config: props.config,
+        setConfig: props.setConfig
+    };
+
     if (props.type === "state") {
-        return <WidgetState config={props.config} />
+        return <WidgetState {...widgetSharedProps} />
     } else if (props.type === 'shades') {
-        return <WidgetShades config={props.config} />
+        return <WidgetShades {...widgetSharedProps} />
     } else if (props.type === 'vacuum') {
-        return <WidgetVacuum />
+        return <WidgetVacuum /*{...widgetSharedProps}*/ />
     }
 
     console.warn("Unable to resolve widget. Type: ", props.type);
 
     return (
-        <WidgetCard width={2} height={1} state={false} >
+        <WidgetCard width={2} height={1} state={false} needsConfiguration={false} onConfigure={() => { }} >
             <Alert severity="error" sx={{ height: "100%" }}>Unknown widget</Alert>
         </WidgetCard >);
 };

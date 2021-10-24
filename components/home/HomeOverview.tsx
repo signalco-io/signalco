@@ -9,10 +9,10 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
+import DashboardsRepository, { DashboardSetModel, IDashboardModel } from "../../src/dashboards/DashboardsRepository";
 import Masonry from '@mui/lab/Masonry';
 import MasonryItem from '@mui/lab/MasonryItem';
-import { AddOutlined, Close, SaveOutlined } from "@mui/icons-material";
+import { Add, AddOutlined, Close, PlusOneSharp, SaveOutlined } from "@mui/icons-material";
 import WidgetStore from "../devices/WidgetStore";
 
 const isServerSide = typeof window === 'undefined';
@@ -23,7 +23,8 @@ interface IWidget {
 }
 
 interface IDashboard {
-    id: string,
+    source?: IDashboardModel,
+    id?: string,
     name: string,
     widgets: IWidget[]
 }
@@ -35,18 +36,30 @@ const HomeOverview = () => {
     const [dashboards, setDashboards] = useState<IDashboard[]>([]);
     const [dashboardIndex, setDashboardIndex] = React.useState('0');
     const [dashboardsUpdateAvailable, setDashboardsUpdateAvailable] = useState(false);
-    const [isAddWidgetOpen, setIsAddWidgetOpen] = useState<boolean>(false);
+    const [isWidgetStoreOpen, setIsWidgetStoreOpen] = useState<boolean>(false);
 
     const handleDashboardChange = (_event: React.SyntheticEvent, newValue: string) => {
         setDashboardIndex(newValue);
+    };
+
+    const handleAddDashboard = () => {
+        const newDashboard = { name: 'New dashboard', widgets: [] };
+        setDashboards([...dashboards, newDashboard]);
     };
 
     const handleEdit = () => {
         setIsEditing(true);
     }
 
-    const handleEditComplete = () => {
-        // TODO: Persist dashboard config
+    const handleEditComplete = async () => {
+        // Persist dashboard config
+        const currentDashboard = dashboards[Number.parseInt(dashboardIndex, 10) || 0];
+        const dashboardSet = new DashboardSetModel(currentDashboard.name);
+        dashboardSet.id = currentDashboard.id;
+        dashboardSet.configurationSerialized = JSON.stringify({
+            widgets: currentDashboard.widgets
+        });
+        await DashboardsRepository.saveDashboardAsync(dashboardSet);
         setIsEditing(false);
     };
 
@@ -54,6 +67,7 @@ const HomeOverview = () => {
         try {
             const dashboards = await DashboardsRepository.getDashboardsAsync();
             setDashboards(dashboards.map(d => ({
+                source: d,
                 id: d.id,
                 name: d.name,
                 widgets: typeof d.configurationSerialized !== 'undefined' ? JSON.parse(d.configurationSerialized).widgets : []
@@ -105,6 +119,12 @@ const HomeOverview = () => {
         }
     }, []);
 
+    const handleWidgetSetConfig = async (dashboard: IDashboard, widget: IWidget, config: object) => {
+        widget.config = config;
+        setDashboards([...dashboards]);
+        console.log('updated widgets', dashboard);
+    };
+
     const RenderDashboard = ({ dashboard }: { dashboard: IDashboard }) => {
         // When width is less than 400, set to quad column
         const width = isServerSide ? 420 : window.innerWidth;
@@ -116,22 +136,22 @@ const HomeOverview = () => {
                 spacing={1}>
                 {dashboard.widgets.map((widget, index) => (
                     <MasonryItem key={index} columnSpan={2}>
-                        <Widget type={widget.type} config={widget.config} />
+                        <Widget type={widget.type} config={widget.config} setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
                     </MasonryItem>
                 ))}
             </Masonry>
         );
     };
 
-    const handleAddWidget = () => {
-        setIsAddWidgetOpen(true);
+    const handleOpenWidgetStore = () => {
+        setIsWidgetStoreOpen(true);
     }
 
     const handleWidgetAdd = (type: widgetType) => {
         const currentDashboard = dashboards[Number.parseInt(dashboardIndex, 10) || 0];
         currentDashboard.widgets.push({ type: type });
         setDashboards([...dashboards]);
-        setIsAddWidgetOpen(false);
+        setIsWidgetStoreOpen(false);
     };
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 760;
@@ -169,7 +189,7 @@ const HomeOverview = () => {
                                     style={{ borderRadius: 0 }}
                                     action={
                                         <Stack spacing={1} direction="row">
-                                            <IconButton size="small" onClick={handleAddWidget}>
+                                            <IconButton size="small" onClick={handleOpenWidgetStore}>
                                                 <AddOutlined />
                                             </IconButton>
                                             <IconButton size="small" onClick={handleEditComplete} title="Confirm edit">
@@ -178,11 +198,11 @@ const HomeOverview = () => {
                                         </Stack>}>
                                     In editing mode... Add, move, resize your items.
                                 </Alert>
-                                <Dialog open={isAddWidgetOpen} maxWidth="lg" fullScreen={isMobile} scroll="paper" sx={{ minWidth: '320px' }}>
+                                <Dialog open={isWidgetStoreOpen} maxWidth="lg" fullScreen={isMobile} scroll="paper" sx={{ minWidth: '320px' }}>
                                     <DialogTitle>
                                         <Stack direction="row" justifyContent="space-between">
                                             <Typography variant="h2">Widget store</Typography>
-                                            <IconButton title="Close" onClick={() => setIsAddWidgetOpen(false)}>
+                                            <IconButton title="Close" onClick={() => setIsWidgetStoreOpen(false)}>
                                                 <Close />
                                             </IconButton>
                                         </Stack>
@@ -199,6 +219,7 @@ const HomeOverview = () => {
                                         {dashboards.length ? dashboards.map((d, index) => (
                                             <Tab key={index.toString()} label={d.name} value={index.toString()} />
                                         )) : undefined}
+                                        <Tab key={(dashboards.length || 0).toString()} icon={<Add />} value={(dashboards.length || 0).toString()} />
                                     </TabList>
                                 </Grid>
                                 <Grid item sx={{ flexGrow: 1, textAlign: "end", px: 2 }}>
