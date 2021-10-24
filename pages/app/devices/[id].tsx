@@ -158,13 +158,13 @@ const DeviceContactHistory = (props: { deviceId: string, channelName: string, co
             contactName: props.contactName
         }) || [];
 
-    const [stateItems, isLoadingStateItems, errorStateItems] = useAutoTable(loadContactHistory, historicalValueToTableItem);
+    const stateItemsTable = useAutoTable(loadContactHistory, historicalValueToTableItem);
 
     return (
         <Card>
             <CardHeader title="State" />
             <CardMedia>
-                <AutoTable items={stateItems} isLoading={isLoadingStateItems} error={errorStateItems} />
+                <AutoTable {...stateItemsTable} />
                 <WidgetPartGraph columnWidth={120} config={{ columns: 4, rows: 2, value: loadContactHistory, valueSource: { channelName: props.channelName, contactName: props.contactName, deviceId: props.deviceId } }} />
             </CardMedia>
         </Card>

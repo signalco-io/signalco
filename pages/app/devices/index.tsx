@@ -21,7 +21,7 @@ function deviceModelToTableItem(device: IDeviceModel): IAutoTableItem {
 
 const Devices = () => {
     const router = useRouter();
-    const [items, isLoading, error] = useAutoTable(DevicesRepository.getDevicesAsync, deviceModelToTableItem);
+    const itemsTable = useAutoTable(DevicesRepository.getDevicesAsync, deviceModelToTableItem);
 
     const handleRowClick = (item: IAutoTableItem) => {
         router.push(`/app/devices/${item.id}`);
@@ -34,7 +34,7 @@ const Devices = () => {
                     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                         <Typography variant="h2" sx={{ p: 2 }}>Devices</Typography>
                         <Box sx={{ position: 'relative', flexGrow: 1, overflow: 'hidden' }}>
-                            <AutoTable items={items} isLoading={isLoading} error={error} onRowClick={handleRowClick} />
+                            <AutoTable {...itemsTable} onRowClick={handleRowClick} />
                         </Box>
                     </Box>
                 </Paper>

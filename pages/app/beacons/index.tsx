@@ -18,7 +18,7 @@ function beaconModelToTableItem(beacon: IBeaconModel): IAutoTableItem {
 
 const Beacons = () => {
     const router = useRouter();
-    const [items, isLoading, error] = useAutoTable(BeaconsRepository.getBeaconsAsync, beaconModelToTableItem);
+    const beaconsTable = useAutoTable(BeaconsRepository.getBeaconsAsync, beaconModelToTableItem);
 
     const handleRowClick = (item: IAutoTableItem) => {
         router.push(`/app/beacons/${item.id}`);
@@ -31,7 +31,7 @@ const Beacons = () => {
                     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                         <Typography variant="h2" sx={{ p: 2 }}>Beacons</Typography>
                         <Box sx={{ position: 'relative', flexGrow: 1, overflow: 'hidden' }}>
-                            <AutoTable items={items} isLoading={isLoading} error={error} onRowClick={handleRowClick} />
+                            <AutoTable {...beaconsTable} onRowClick={handleRowClick} />
                         </Box>
                     </Box>
                 </Paper>

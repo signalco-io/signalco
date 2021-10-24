@@ -1,12 +1,13 @@
 import { ArrowDownward, ArrowUpward, Stop } from '@mui/icons-material';
 import BatteryCharging20OutlinedIcon from '@mui/icons-material/BatteryCharging20Outlined';
-import { Grid, Stack, Typography, Button, ButtonBase } from "@mui/material";
+import { Grid, Stack, Typography, Button, ButtonBase, Dialog, DialogActions, DialogContent } from "@mui/material";
 import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from "react";
-import { IDeviceModel } from '../../../src/devices/Device';
+import { IDeviceModel, IDeviceTargetIncomplete } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import WidgetCard from './WidgetCard';
 import dynamic from 'next/dynamic'
+import DisplayDeviceTarget from '../../shared/entity/DisplayDeviceTarget';
 
 export const WidgetVacuum = (/*props: { config?: any }*/) => {
     const width = 4;
@@ -62,34 +63,73 @@ export const WidgetShades = (props: { config: any }) => {
     );
 };
 
+const TvVisual = dynamic(() => import("../../icons/TvVisual"));
+const LightBulbVisual = dynamic(() => import("../../icons/LightBulbVisual"));
+
 const WidgetState = (props: { config: any }) => {
+    const { config } = props;
     const [device, setDevice] = useState<IDeviceModel | undefined>(undefined);
+
+    const needsConfiguration =
+        !config?.target?.channelName ||
+        !config?.target?.contactName ||
+        !config?.target?.deviceId;
 
     const width = 2;
     const height = 2;
 
     // Calc state from source value
-    const contactState = device?.getState({ channelName: 'philipshue', contactName: 'on', deviceId: device.id });
+    const channelName = config?.target?.channelName;
+    const contactName = config?.target?.contactName;
+    const contactState = device?.getState({ channelName: channelName, contactName: contactName, deviceId: device.id });
     const state = contactState?.valueSerialized === 'true';
 
     useEffect(() => {
         (async () => {
-            setDevice(await DevicesRepository.getDeviceAsync('f9983f10-4a69-4f5a-b113-32b541e3c536'));
+            const deviceId = config?.target?.deviceId;
+            if (deviceId) {
+                setDevice(await DevicesRepository.getDeviceAsync(deviceId));
+            }
         })();
-    }, []);
+    }, [config]);
+
+    const [isConfigureOpen, setIsConfigureOpen] = useState(false);
+    const handleConfigure = () => {
+        setIsConfigureOpen(true);
+    };
+
+    const handleSaveConfiguration = () => {
+        setIsConfigureOpen(false);
+    }
 
     const label = props.config?.label || device?.alias || '';
-    const Visual = props.config?.visual === 'tv' ? dynamic(() => import("../../icons/TvVisual")) : dynamic(() => import("../../icons/LightBulbVisual"));
+    const Visual = props.config?.visual === 'tv' ? TvVisual : LightBulbVisual;
+
+    const [target, setTarget] = useState<IDeviceTargetIncomplete | undefined>();
 
     return (
-        <WidgetCard width={width} height={height} state={state}>
-            <ButtonBase sx={{ height: '100%', width: '100%', justifyContent: 'flex-start' }} >
-                <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent="space-evenly">
-                    <Visual state={state} theme="dark" size={68} />
-                    <Typography sx={{ display: 'flex' }} fontWeight="light">{label}</Typography>
-                </Stack>
-            </ButtonBase>
-        </WidgetCard>
+        <>
+            <WidgetCard width={width} height={height} state={state} needsConfiguration={needsConfiguration} onConfigure={handleConfigure}>
+                <ButtonBase sx={{ height: '100%', width: '100%', justifyContent: 'flex-start' }} >
+                    <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent="space-evenly">
+                        <Visual state={state} theme="dark" size={68} />
+                        <Typography sx={{ display: 'flex' }} fontWeight="light">{label}</Typography>
+                    </Stack>
+                </ButtonBase>
+            </WidgetCard>
+            <Dialog open={isConfigureOpen} onClose={() => setIsConfigureOpen(false)}>
+                <DialogContent>
+                    <div>
+                        <div>Target</div>
+                        <DisplayDeviceTarget target={target} onChanged={t => setTarget(t)} />
+                    </div>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setIsConfigureOpen(false)}>Cancel</Button>
+                    <Button autoFocus onClick={handleSaveConfiguration}>Save changes</Button>
+                </DialogActions>
+            </Dialog>
+        </>
     );
 };
 
