@@ -1,5 +1,5 @@
 import { Alert, Box, Button, Dialog, DialogContent, DialogTitle, Grid, IconButton, LinearProgress, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import EditSharpIcon from '@mui/icons-material/EditSharp';
 import HttpService from "../../src/services/HttpService";
 import { observer } from "mobx-react-lite";
@@ -11,9 +11,9 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import DashboardsRepository, { DashboardSetModel, IDashboardModel } from "../../src/dashboards/DashboardsRepository";
 import Masonry from '@mui/lab/Masonry';
-import MasonryItem from '@mui/lab/MasonryItem';
-import { Add, AddOutlined, Close, PlusOneSharp, SaveOutlined } from "@mui/icons-material";
+import { Add, AddOutlined, Close, SaveOutlined } from "@mui/icons-material";
 import WidgetStore from "../devices/WidgetStore";
+import PageNotificationService from "../../src/notifications/PageNotificationService";
 
 const isServerSide = typeof window === 'undefined';
 
@@ -37,6 +37,7 @@ const HomeOverview = () => {
     const [dashboardIndex, setDashboardIndex] = React.useState('0');
     const [dashboardsUpdateAvailable, setDashboardsUpdateAvailable] = useState(false);
     const [isWidgetStoreOpen, setIsWidgetStoreOpen] = useState<boolean>(false);
+    const [editingDashboard, setEditingDashboard] = useState<IDashboard | undefined>();
 
     const handleDashboardChange = (_event: React.SyntheticEvent, newValue: string) => {
         setDashboardIndex(newValue);
@@ -48,12 +49,20 @@ const HomeOverview = () => {
     };
 
     const handleEdit = () => {
+        setEditingDashboard(dashboards[Number.parseInt(dashboardIndex, 10) || 0]);
         setIsEditing(true);
     }
 
     const handleEditComplete = async () => {
+        if (!editingDashboard) return;
+        const index = Number.parseInt(dashboardIndex, 10) || 0;
+
+        // Replace dashboard with edited version
+        dashboards.splice(index, 1, editingDashboard);
+        setEditingDashboard(undefined);
+
         // Persist dashboard config
-        const currentDashboard = dashboards[Number.parseInt(dashboardIndex, 10) || 0];
+        const currentDashboard = dashboards[index];
         const dashboardSet = new DashboardSetModel(currentDashboard.name);
         dashboardSet.id = currentDashboard.id;
         dashboardSet.configurationSerialized = JSON.stringify({
@@ -73,8 +82,8 @@ const HomeOverview = () => {
                 widgets: typeof d.configurationSerialized !== 'undefined' ? JSON.parse(d.configurationSerialized).widgets : []
             })));
         } catch (error) {
-            // TODO: Display error message
             console.warn("Failed to load dashboards", error);
+            PageNotificationService.show("Failed to load dashboards. Please try again.", "error");
         } finally {
             setIsLoading(false);
         }
@@ -125,19 +134,51 @@ const HomeOverview = () => {
         console.log('updated widgets', dashboard);
     };
 
+    const handleWidgetRemove = (widget: IWidget) => {
+        if (!editingDashboard) return;
+
+        const widgetIndex = editingDashboard.widgets.indexOf(widget);
+        if (widgetIndex < 0) {
+            return;
+        }
+
+        editingDashboard.widgets.splice(widgetIndex, 1);
+        setEditingDashboard({ ...editingDashboard });
+        setIsWidgetStoreOpen(false);
+    }
+
     const RenderDashboard = ({ dashboard }: { dashboard: IDashboard }) => {
-        // When width is less than 400, set to quad column
-        const width = isServerSide ? 420 : window.innerWidth;
-        const numberOfColumns = Math.floor(width / (78 + 16));
+        const [numberOfColumns, setNumberOfColumns] = useState(4);
+        const widgetSpacing = 1;
+        const widgetSize = 78 + widgetSpacing * 8;
+        const dashbaordPadding = 48;
+
+        useLayoutEffect(() => {
+            function updateNumberOfColumns() {
+                // When width is less than 400, set to quad column
+                const width = window.innerWidth - dashbaordPadding;
+                const numberOfColumns = Math.max(4, Math.floor(width / widgetSize));
+
+                setNumberOfColumns(numberOfColumns);
+            }
+            window.addEventListener('resize', updateNumberOfColumns);
+            updateNumberOfColumns();
+            return () => window.removeEventListener('resize', updateNumberOfColumns);
+        }, [widgetSize]);
 
         return (
             <Masonry
                 columns={numberOfColumns}
-                spacing={1}>
+                spacing={widgetSpacing}
+                sx={{ width: `${widgetSize * numberOfColumns - widgetSpacing * 8}px` }}>
                 {dashboard.widgets.map((widget, index) => (
-                    <MasonryItem key={index} columnSpan={2}>
-                        <Widget type={widget.type} config={widget.config} setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
-                    </MasonryItem>
+                    <Widget
+                        key={index}
+                        onRemove={() => handleWidgetRemove(widget)}
+                        isEditMode={isEditing}
+                        type={widget.type}
+                        config={widget.config}
+                        setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
                 ))}
             </Masonry>
         );
@@ -148,9 +189,10 @@ const HomeOverview = () => {
     }
 
     const handleWidgetAdd = (type: widgetType) => {
-        const currentDashboard = dashboards[Number.parseInt(dashboardIndex, 10) || 0];
-        currentDashboard.widgets.push({ type: type });
-        setDashboards([...dashboards]);
+        if (!editingDashboard) return;
+
+        editingDashboard.widgets.push({ type: type });
+        setEditingDashboard({ ...editingDashboard });
         setIsWidgetStoreOpen(false);
     };
 
@@ -198,7 +240,7 @@ const HomeOverview = () => {
                                         </Stack>}>
                                     In editing mode... Add, move, resize your items.
                                 </Alert>
-                                <Dialog open={isWidgetStoreOpen} maxWidth="lg" fullScreen={isMobile} scroll="paper" sx={{ minWidth: '320px' }}>
+                                <Dialog open={isWidgetStoreOpen} maxWidth="lg" fullWidth fullScreen={isMobile} scroll="paper">
                                     <DialogTitle>
                                         <Stack direction="row" justifyContent="space-between">
                                             <Typography variant="h2">Widget store</Typography>
@@ -215,7 +257,7 @@ const HomeOverview = () => {
                         ) : (
                             <Grid container spacing={2}>
                                 <Grid item>
-                                    <TabList onChange={handleDashboardChange} aria-label="Dashboard tabs">
+                                    <TabList selectionFollowsFocus scrollButtons="auto" variant="scrollable" onChange={handleDashboardChange} aria-label="Dashboard tabs">
                                         {dashboards.length ? dashboards.map((d, index) => (
                                             <Tab key={index.toString()} label={d.name} value={index.toString()} />
                                         )) : undefined}
@@ -233,7 +275,7 @@ const HomeOverview = () => {
                         {dashboards.length ?
                             dashboards.map((d, index) => (
                                 <TabPanel value={index.toString()} key={index.toString()}>
-                                    <RenderDashboard dashboard={d} />
+                                    <RenderDashboard dashboard={editingDashboard || d} />
                                 </TabPanel>
                             ))
                             : (

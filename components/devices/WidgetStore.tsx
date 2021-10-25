@@ -40,7 +40,7 @@ const WidgetStore = (props: { onAddWidget: (widgetType: widgetType) => void }) =
                 <Typography variant="body2" color="text.secondary">{filteredAvailableWidgetsItems.length} widget{filteredAvailableWidgetsItems.length > 1 ? 's' : ''} available</Typography>
             </Stack>
             <div>
-                <Grid container spacing={1}>
+                <Grid container spacing={1} justifyContent="center">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (
                         <Grid item key={`${availableWidget.type}-${index}`}>
                             <Card sx={{ minWidth: '320px' }}>

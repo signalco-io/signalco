@@ -1,3 +1,4 @@
+import MasonryItem from "@mui/lab/MasonryItem";
 import { Alert } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import React from "react";
@@ -7,14 +8,18 @@ import WidgetCard from "./parts/WidgetCard";
 import { IWidgetPartButtonConfig } from "./parts/WidgetPartButton";
 import { IWidgetPartGraphConfig } from "./parts/WidgetPartGraph";
 import { IWidgetPartInlineLabelConfig } from "./parts/WidgetPartInlineLabel";
-import WidgetState, { WidgetShades, WidgetVacuum } from "./parts/WidgetState";
+import WidgetShades from "./parts/WidgetShades";
+import WidgetState from "./parts/WidgetState";
+import WidgetVacuum from "./parts/WidgetVacuum";
 
 export type widgetType = "state" | "vacuum" | "shades";
 
 export interface IWidgetProps {
+    isEditMode: boolean,
     type: widgetType,
     config?: object,
-    setConfig: (config: object) => Promise<void>
+    setConfig: (config: object) => Promise<void>,
+    onRemove: () => void
 }
 
 export type widgetSize = "auto" | "grow" | "1/12" | "1/6" | "1/4" | "1/3" | "5/12" | "1/2" | "7/12" | "2/3" | "3/4" | "5/6" | "11/12" | "1";
@@ -160,26 +165,43 @@ export interface IWidgetPart {
 //     }
 // }
 
+interface IWidgetSharedProps {
+    isEditMode: boolean,
+    config: any,
+    setConfig: (config: object) => Promise<void>,
+    onRemove: () => void
+}
+
+const UnresolvedWidget = (props: IWidgetSharedProps) => (
+    <WidgetCard width={2} height={1} state={false} needsConfiguration={false} isEditMode={props.isEditMode} onRemove={props.onRemove}>
+        <Alert severity="error" sx={{ height: "100%" }}>Unknown widget</Alert>
+    </WidgetCard>
+);
+
 const Widget = (props: IWidgetProps) => {
     const widgetSharedProps = {
+        isEditMode: props.isEditMode,
         config: props.config,
-        setConfig: props.setConfig
+        setConfig: props.setConfig,
+        onRemove: props.onRemove
     };
 
+    let WidgetResolved = UnresolvedWidget;
     if (props.type === "state") {
-        return <WidgetState {...widgetSharedProps} />
+        WidgetResolved = WidgetState;
     } else if (props.type === 'shades') {
-        return <WidgetShades {...widgetSharedProps} />
+        WidgetResolved = WidgetShades;
     } else if (props.type === 'vacuum') {
-        return <WidgetVacuum /*{...widgetSharedProps}*/ />
+        WidgetResolved = WidgetVacuum;
     }
 
-    console.warn("Unable to resolve widget. Type: ", props.type);
+    const colSpan = (WidgetResolved as any).columns || 2;
 
     return (
-        <WidgetCard width={2} height={1} state={false} needsConfiguration={false} onConfigure={() => { }} >
-            <Alert severity="error" sx={{ height: "100%" }}>Unknown widget</Alert>
-        </WidgetCard >);
+        <MasonryItem columnSpan={colSpan}>
+            <WidgetResolved {...widgetSharedProps} />
+        </MasonryItem>
+    );
 };
 
 export default observer(Widget);
