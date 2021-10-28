@@ -2,14 +2,14 @@ import { Alert, Box, Button, FormGroup, Grid, IconButton, LinearProgress, ListIt
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import HttpService from "../../src/services/HttpService";
 import { observer } from "mobx-react-lite";
-import Widget, { DragableWidget, widgetType } from "../devices/Widget";
+import Widget, { IWidgetProps, widgetType } from "../devices/Widget";
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import DashboardsRepository, { DashboardSetModel, IDashboardModel } from "../../src/dashboards/DashboardsRepository";
-import { Add, AddOutlined, DashboardSharp, Delete, MoreHorizSharp, SaveOutlined, Settings } from "@mui/icons-material";
+import { Add, AddOutlined, DashboardSharp, MoreHorizSharp, SaveOutlined, Settings } from "@mui/icons-material";
 import WidgetStore from "../devices/WidgetStore";
 import PageNotificationService from "../../src/notifications/PageNotificationService";
 import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
@@ -18,8 +18,9 @@ import {
     bindTrigger,
     bindMenu,
 } from 'material-ui-popup-state/hooks';
-import { DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { rectSortingStrategy, SortableContext, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import { DndContext, DragOverEvent, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 const isServerSide = typeof window === 'undefined';
 
@@ -199,6 +200,7 @@ const HomeOverview = () => {
         const widgetSpacing = 1;
         const widgetSize = 78 + widgetSpacing * 8;
         const dashbaordPadding = 48;
+        const [widgetsOrder, setWidgetsOrder] = useState(dashboard.widgets.map(w => w.id));
 
         useLayoutEffect(() => {
             function updateNumberOfColumns() {
@@ -220,6 +222,60 @@ const HomeOverview = () => {
             })
         );
 
+        function handleDragOver(event: DragOverEvent) {
+            const { active, over } = event;
+
+            if (over && active.id !== over.id) {
+                setWidgetsOrder((items) => {
+                    const oldIndex = widgetsOrder.indexOf(active.id);
+                    const newIndex = widgetsOrder.indexOf(over.id);
+                    return arrayMove(items, oldIndex, newIndex);
+                });
+            }
+        }
+
+        function handleDragEnd() {
+        }
+
+        interface IDragableWidgetProps extends IWidgetProps {
+            id: string
+        }
+
+        const DragableWidget = (props: IDragableWidgetProps) => {
+            const {
+                isDragging,
+                attributes,
+                listeners,
+                setNodeRef,
+                transform,
+                transition,
+            } = useSortable({ id: props.id, disabled: !props.isEditMode });
+
+            const colSpan = (props.config as any)?.columns || 2;
+            const rowSpan = (props.config as any)?.rows || 2;
+
+            let customTransform = undefined;
+            if (transform) {
+                customTransform = {
+                    scaleX: isDragging ? 1.1 : 1,
+                    scaleY: isDragging ? 1.1 : 1,
+                    x: transform.x,
+                    y: transform.y
+                };
+            }
+
+            return (
+                <Box ref={setNodeRef} style={{
+                    transform: customTransform ? CSS.Transform.toString(customTransform) : undefined,
+                    transition,
+                    gridRowStart: `span ${rowSpan}`,
+                    gridColumnStart: `span ${colSpan}`,
+                }} {...attributes} {...listeners}>
+                    <Widget {...props} />
+                </Box>
+            );
+        };
+
         return (
             <Box sx={{
                 display: 'grid',
@@ -227,16 +283,24 @@ const HomeOverview = () => {
                 gap: widgetSpacing,
                 width: `${widgetSize * numberOfColumns - widgetSpacing * 8}px`
             }}>
-                <DndContext sensors={sensors}>
-                    <SortableContext items={dashboard.widgets.map(w => w.id)} strategy={rectSortingStrategy}>
-                        {dashboard.widgets.map((widget, index) => (
+                <DndContext
+                    sensors={sensors}
+                    onDragOver={handleDragOver}
+                    onDragEnd={handleDragEnd}
+                    onDragCancel={handleDragEnd}>
+                    <SortableContext items={widgetsOrder} strategy={undefined}>
+                        {dashboard.widgets.sort((a, b) => {
+                            const oldIndex = widgetsOrder.indexOf(a.id);
+                            const newIndex = widgetsOrder.indexOf(b.id);
+                            return oldIndex - newIndex;
+                        }).map((widget) => (
                             <DragableWidget
-                                key={index}
                                 id={widget.id}
+                                key={`widget-${widget.id.toString()}`}
                                 onRemove={() => handleWidgetRemove(widget)}
                                 isEditMode={isEditing}
                                 type={widget.type}
-                                config={{ ...widget.config, columns: widget.type === "shades" ? 4 : 2, rows: 2 }}
+                                config={widget.config}
                                 setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
                         ))}
                     </SortableContext>

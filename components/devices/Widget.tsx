@@ -1,5 +1,5 @@
 
-import { Alert, Box } from "@mui/material";
+import { Alert } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import React from "react";
 // import ConductsService from "../../src/conducts/ConductsService";
@@ -11,13 +11,10 @@ import { IWidgetPartInlineLabelConfig } from "./parts/WidgetPartInlineLabel";
 import WidgetShades from "./parts/WidgetShades";
 import WidgetState from "./parts/WidgetState";
 import WidgetVacuum from "./parts/WidgetVacuum";
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 
 export type widgetType = "state" | "vacuum" | "shades";
 
 export interface IWidgetProps {
-    id: string,
     isEditMode: boolean,
     type: widgetType,
     config?: object,
@@ -180,35 +177,6 @@ const UnresolvedWidget = (props: IWidgetSharedProps) => (
         <Alert severity="error" sx={{ height: "100%" }}>Unknown widget</Alert>
     </WidgetCard>
 );
-
-export const DragableWidget = (props) => {
-    const {
-        attributes,
-        listeners,
-        setNodeRef,
-        transform,
-        transition,
-    } = useSortable({ id: props.id });
-
-    const colSpan = props.config.columns || 2;
-    const rowSpan = props.config.rows || 2;
-    // const width = colSpan * 78 + (8 * (colSpan - 1));
-    // const height = rowSpan * 78 + (8 * (rowSpan - 1));
-
-    const style = {
-        transform: CSS.Transform.toString(transform),
-        transition,
-        gridRowStart: `span ${rowSpan}`,
-        gridColumnStart: `span ${colSpan}`,
-        display: 'flex'
-    };
-
-    return (
-        <Box ref={setNodeRef} style={style} {...attributes} {...listeners}>
-            <Widget {...props} />
-        </Box>
-    );
-};
 
 const Widget = (props: IWidgetProps) => {
     const widgetSharedProps = {

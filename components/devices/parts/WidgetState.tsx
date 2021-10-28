@@ -1,6 +1,6 @@
 import { Stack, Typography, ButtonBase } from "@mui/material";
 import { observer } from 'mobx-react-lite';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { IDeviceModel } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import WidgetCard from './WidgetCard';
@@ -81,8 +81,13 @@ const WidgetState = (props: { isEditMode: boolean, config: any, setConfig: (conf
     const contactState = device?.getState({ channelName: config?.target?.channelName, contactName: config?.target?.contactName, deviceId: device.id });
     const state = contactState?.valueSerialized === 'true';
 
+    if (config.target.deviceId === 'ff048017-7ce5-4867-9744-bbfd069dcd31')
+        console.log(config, contactState?.valueSerialized)
+    if (!config)
+        console.log('config null')
+
     const label = props.config?.label || device?.alias || '';
-    const Visual = props.config?.visual === 'tv' ? TvVisual : LightBulbVisual;
+    const Visual = useMemo(() => props.config?.visual === 'tv' ? TvVisual : LightBulbVisual, [props.config]);
 
     useEffect(() => {
         (async () => {
@@ -124,7 +129,7 @@ const WidgetState = (props: { isEditMode: boolean, config: any, setConfig: (conf
             onRemove={onRemove}
             options={stateOptions}
             config={config}>
-            <ButtonBase sx={{ height: '100%', width: '100%', display: 'block', textAlign: 'left' }} onClick={handleStateChangeRequest} >
+            <ButtonBase sx={{ height: '100%', width: '100%', display: 'block', textAlign: 'left', borderRadius: 2 }} onClick={handleStateChangeRequest} >
                 <Stack sx={{ height: '100%', py: 2 }}>
                     <Box sx={{ px: 2.5 }}>
                         <Visual state={state} theme="dark" size={68} />

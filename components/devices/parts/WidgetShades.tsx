@@ -1,17 +1,17 @@
 import { ArrowUpward, Stop, ArrowDownward } from '@mui/icons-material';
 import { Button, Grid, Stack, Typography } from '@mui/material';
 import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import WidgetCard from './WidgetCard';
 import { IWidgetConfigurationOption } from './WidgetConfiguration';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
-const WidgetShades = (props: { config: any }) => {
+const WidgetShades = (props: { config: any, setConfig: (config: object) => Promise<void> }) => {
     const [config, setConfig] = useState({});
 
-    const width = 4;
-    const height = 2;
+    const width = (config as any)?.columns || 2;
+    const height = (config as any)?.rows || 2;
     const label = props.config?.label || '';
 
     // TODO: Calc from source value
@@ -22,6 +22,16 @@ const WidgetShades = (props: { config: any }) => {
     const needsConfiguration = true;
     const isEditMode = false;
     const stateOptions: IWidgetConfigurationOption[] = [];
+
+    useEffect(() => {
+        console.log(config);
+        if (props.config?.columns === undefined) {
+            props.setConfig({
+                columns: 4,
+                rows: 2
+            });
+        }
+    });
 
     return (
         <WidgetCard
