@@ -43,10 +43,10 @@ const HomeOverview = () => {
         setDashboardIndex(newValue);
     };
 
-    const handleAddDashboard = () => {
-        const newDashboard = { name: 'New dashboard', widgets: [] };
-        setDashboards([...dashboards, newDashboard]);
-    };
+    // const handleAddDashboard = () => {
+    //     const newDashboard = { name: 'New dashboard', widgets: [] };
+    //     setDashboards([...dashboards, newDashboard]);
+    // };
 
     const handleEdit = () => {
         setEditingDashboard(dashboards[Number.parseInt(dashboardIndex, 10) || 0]);

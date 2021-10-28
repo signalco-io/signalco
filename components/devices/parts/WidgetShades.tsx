@@ -53,6 +53,5 @@ const WidgetShades = (props: { config: any }) => {
 };
 
 WidgetShades.columns = 4;
-WidgetShades.rows = 2;
 
 export default WidgetShades;

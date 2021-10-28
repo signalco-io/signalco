@@ -1,5 +1,6 @@
-import MasonryItem from "@mui/lab/MasonryItem";
+
 import { Alert } from "@mui/material";
+import { Box } from "@mui/system";
 import { observer } from "mobx-react-lite";
 import React from "react";
 // import ConductsService from "../../src/conducts/ConductsService";
@@ -196,11 +197,10 @@ const Widget = (props: IWidgetProps) => {
     }
 
     const colSpan = (WidgetResolved as any).columns || 2;
+    console.log(colSpan)
 
     return (
-        <MasonryItem columnSpan={colSpan}>
-            <WidgetResolved {...widgetSharedProps} />
-        </MasonryItem>
+        <WidgetResolved {...widgetSharedProps} />
     );
 };
 

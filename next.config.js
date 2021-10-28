@@ -8,7 +8,7 @@ const { createSecureHeaders } = require("next-secure-headers");
 const isDevelopment = process.env.NODE_ENV === "development";
 
 module.exports = withBundleAnalyzer(withPWA({
-    experimental: { esmExternals: true },
+    swcMinify: true,
     pwa: {
         dest: 'public',
         disable: process.env.NODE_ENV === 'development'
