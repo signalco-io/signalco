@@ -39,13 +39,20 @@ const HomeOverview = () => {
     const [editingDashboard, setEditingDashboard] = useState<IDashboard | undefined>();
 
     const handleDashboardChange = (_event: React.SyntheticEvent, newValue: string) => {
+        if (newValue === dashboards.length.toString()) {
+            handleAddDashboard();
+        }
+
         setDashboardIndex(newValue);
+        console.debug('Switched to dashboard', newValue);
     };
 
-    // const handleAddDashboard = () => {
-    //     const newDashboard = { name: 'New dashboard', widgets: [] };
-    //     setDashboards([...dashboards, newDashboard]);
-    // };
+    const handleAddDashboard = () => {
+        console.log("Adding new dashboard...");
+
+        const newDashboard = { name: 'New dashboard', widgets: [] };
+        setDashboards([...dashboards, newDashboard]);
+    };
 
     const handleEdit = () => {
         setEditingDashboard(dashboards[Number.parseInt(dashboardIndex, 10) || 0]);

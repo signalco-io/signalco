@@ -98,7 +98,6 @@ const WidgetState = (props: { isEditMode: boolean, config: any, setConfig: (conf
         })();
     }, [config]);
 
-    console.log(config);
     const needsConfiguration =
         !config?.target?.channelName ||
         !config?.target?.contactName ||

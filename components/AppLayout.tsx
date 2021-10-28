@@ -7,7 +7,7 @@ import { useSnackbar } from 'notistack';
 import PageNotificationService from "../src/notifications/PageNotificationService";
 import RealtimeService from '../src/realtime/realtimeService';
 import { Auth0Provider } from "@auth0/auth0-react";
-import Router from "next/router";
+import { useRouter } from 'next/router';
 import * as Sentry from '@sentry/nextjs';
 
 const AppLayout = (props: { children?: React.ReactNode }) => {
@@ -60,6 +60,7 @@ const Auth0Wrapper = (props: { children?: React.ReactNode }) => {
   const {
     children
   } = props;
+  const router = useRouter();
 
   console.debug('Auth0Wrapper rendering');
 
@@ -76,7 +77,7 @@ const Auth0Wrapper = (props: { children?: React.ReactNode }) => {
       onRedirectCallback={(appState) => {
         // Use Next.js's Router.replace method to replace the url
         const returnTo = appState?.returnTo || "/";
-        Router.replace(returnTo);
+        router.replace(returnTo);
       }}
       domain="dfnoise.eu.auth0.com"
       clientId="nl7QIQD7Kw3ZHt45qHHAZG0MEILSFa7U"
