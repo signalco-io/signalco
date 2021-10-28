@@ -181,6 +181,35 @@ const UnresolvedWidget = (props: IWidgetSharedProps) => (
     </WidgetCard>
 );
 
+export const DragableWidget = (props) => {
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+    } = useSortable({ id: props.id });
+
+    const colSpan = props.config.columns || 2;
+    const rowSpan = props.config.rows || 2;
+    // const width = colSpan * 78 + (8 * (colSpan - 1));
+    // const height = rowSpan * 78 + (8 * (rowSpan - 1));
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+        gridRowStart: `span ${rowSpan}`,
+        gridColumnStart: `span ${colSpan}`,
+        display: 'flex'
+    };
+
+    return (
+        <Box ref={setNodeRef} style={style} {...attributes} {...listeners}>
+            <Widget {...props} />
+        </Box>
+    );
+};
+
 const Widget = (props: IWidgetProps) => {
     const widgetSharedProps = {
         isEditMode: props.isEditMode,
@@ -198,31 +227,8 @@ const Widget = (props: IWidgetProps) => {
         WidgetResolved = WidgetVacuum;
     }
 
-    const colSpan = (WidgetResolved as any).columns || 2;
-    const rowSpan = (WidgetResolved as any).rows || 2;
-    const width = colSpan * 78 + (8 * (colSpan - 1));
-    const height = rowSpan * 78 + (8 * (rowSpan - 1));
-
-    const {
-        attributes,
-        listeners,
-        setNodeRef,
-        transform,
-        transition,
-    } = useSortable({ id: props.id });
-
-    const style = {
-        transform: CSS.Transform.toString(transform),
-        transition,
-        gridRowStart: `span ${rowSpan}`,
-        gridColumnStart: `span ${colSpan}`,
-        display: 'flex'
-    };
-
     return (
-        <Box ref={setNodeRef} style={style} {...attributes} {...listeners}>
-            <WidgetResolved {...widgetSharedProps} />
-        </Box>
+        <WidgetResolved {...widgetSharedProps} />
     );
 };
 

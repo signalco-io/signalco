@@ -2,7 +2,7 @@ import { Alert, Box, Button, FormGroup, Grid, IconButton, LinearProgress, ListIt
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import HttpService from "../../src/services/HttpService";
 import { observer } from "mobx-react-lite";
-import Widget, { widgetType } from "../devices/Widget";
+import Widget, { DragableWidget, widgetType } from "../devices/Widget";
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -230,34 +230,18 @@ const HomeOverview = () => {
                 <DndContext sensors={sensors}>
                     <SortableContext items={dashboard.widgets.map(w => w.id)} strategy={rectSortingStrategy}>
                         {dashboard.widgets.map((widget, index) => (
-                            <Widget
+                            <DragableWidget
                                 key={index}
                                 id={widget.id}
                                 onRemove={() => handleWidgetRemove(widget)}
                                 isEditMode={isEditing}
                                 type={widget.type}
-                                config={widget.config}
+                                config={{ ...widget.config, columns: widget.type === "shades" ? 4 : 2, rows: 2 }}
                                 setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
                         ))}
                     </SortableContext>
                 </DndContext>
             </Box>
-            // <Box sx={{
-            //     display: 'grid',
-            //     gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`,
-            //     gap: widgetSpacing,
-            //     width: `${widgetSize * numberOfColumns - widgetSpacing * 8}px`
-            // }}>
-            //     {dashboard.widgets.map((widget, index) => (
-            //         <Widget
-            //             key={index}
-            //             onRemove={() => handleWidgetRemove(widget)}
-            //             isEditMode={isEditing}
-            //             type={widget.type}
-            //             config={widget.config}
-            //             setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
-            //     ))}
-            // </Box>
         );
     };
 
