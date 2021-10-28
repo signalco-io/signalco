@@ -11,10 +11,13 @@ import { IWidgetPartInlineLabelConfig } from "./parts/WidgetPartInlineLabel";
 import WidgetShades from "./parts/WidgetShades";
 import WidgetState from "./parts/WidgetState";
 import WidgetVacuum from "./parts/WidgetVacuum";
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 export type widgetType = "state" | "vacuum" | "shades";
 
 export interface IWidgetProps {
+    id: string,
     isEditMode: boolean,
     type: widgetType,
     config?: object,
@@ -196,13 +199,28 @@ const Widget = (props: IWidgetProps) => {
     }
 
     const colSpan = (WidgetResolved as any).columns || 2;
-    const rowSpan = (WidgetResolved as any).rows || 1;
+    const rowSpan = (WidgetResolved as any).rows || 2;
+    const width = colSpan * 78 + (8 * (colSpan - 1));
+    const height = rowSpan * 78 + (8 * (rowSpan - 1));
+
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+    } = useSortable({ id: props.id });
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+        gridRowStart: `span ${rowSpan}`,
+        gridColumnStart: `span ${colSpan}`,
+        display: 'flex'
+    };
 
     return (
-        <Box sx={{
-            gridColumn: `span ${colSpan}`,
-            gridRow: `span ${rowSpan}`
-        }}>
+        <Box ref={setNodeRef} style={style} {...attributes} {...listeners}>
             <WidgetResolved {...widgetSharedProps} />
         </Box>
     );

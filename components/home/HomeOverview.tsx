@@ -1,6 +1,5 @@
-import { Alert, Box, Button, Dialog, DialogContent, DialogTitle, Grid, IconButton, LinearProgress, Stack, Typography } from "@mui/material";
+import { Alert, Box, Button, FormGroup, Grid, IconButton, LinearProgress, ListItemIcon, ListItemText, Menu, MenuItem, Stack, TextField } from "@mui/material";
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import EditSharpIcon from '@mui/icons-material/EditSharp';
 import HttpService from "../../src/services/HttpService";
 import { observer } from "mobx-react-lite";
 import Widget, { widgetType } from "../devices/Widget";
@@ -10,13 +9,22 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import DashboardsRepository, { DashboardSetModel, IDashboardModel } from "../../src/dashboards/DashboardsRepository";
-import { Add, AddOutlined, Close, SaveOutlined } from "@mui/icons-material";
+import { Add, AddOutlined, DashboardSharp, Delete, MoreHorizSharp, SaveOutlined, Settings } from "@mui/icons-material";
 import WidgetStore from "../devices/WidgetStore";
 import PageNotificationService from "../../src/notifications/PageNotificationService";
+import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
+import {
+    usePopupState,
+    bindTrigger,
+    bindMenu,
+} from 'material-ui-popup-state/hooks';
+import { DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { rectSortingStrategy, SortableContext, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
 const isServerSide = typeof window === 'undefined';
 
 interface IWidget {
+    id: string,
     type: widgetType,
     config?: object
 }
@@ -27,6 +35,35 @@ interface IDashboard {
     name: string,
     widgets: IWidget[]
 }
+
+const DashboardSettings = (props: { dashboard: IDashboard, onClose: () => void, onChange: (dashboard: IDashboard) => void }) => {
+    const { dashboard, onClose, onChange } = props;
+    const [name, setName] = useState(dashboard.name);
+
+    const handleSave = () => {
+        onChange({
+            ...dashboard,
+            name: name
+        });
+    }
+
+    return (
+        <ConfigurationDialog
+            isOpen
+            title={`Dashboard settings`}
+            onClose={onClose}
+            actions={(
+                <>
+                    <Button onClick={onClose}>Cancel</Button>
+                    <Button autoFocus onClick={handleSave}>Save changes</Button>
+                </>
+            )}>
+            <FormGroup>
+                <TextField label="Name" value={name} onChange={(e) => setName(e.target.value || "")} />
+            </FormGroup>
+        </ConfigurationDialog>
+    );
+};
 
 const HomeOverview = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -59,13 +96,11 @@ const HomeOverview = () => {
         setIsEditing(true);
     }
 
-    const handleEditComplete = async () => {
-        if (!editingDashboard) return;
+    const saveDashboardEditAsync = async (updatedDashboard: IDashboard) => {
         const index = Number.parseInt(dashboardIndex, 10) || 0;
 
         // Replace dashboard with edited version
-        dashboards.splice(index, 1, editingDashboard);
-        setEditingDashboard(undefined);
+        dashboards.splice(index, 1, updatedDashboard);
 
         // Persist dashboard config
         const currentDashboard = dashboards[index];
@@ -75,6 +110,12 @@ const HomeOverview = () => {
             widgets: currentDashboard.widgets
         });
         await DashboardsRepository.saveDashboardAsync(dashboardSet);
+    }
+
+    const handleEditComplete = async () => {
+        if (!editingDashboard) return;
+        await saveDashboardEditAsync(editingDashboard);
+        setEditingDashboard(undefined);
         setIsEditing(false);
     };
 
@@ -85,7 +126,7 @@ const HomeOverview = () => {
                 source: d,
                 id: d.id,
                 name: d.name,
-                widgets: typeof d.configurationSerialized !== 'undefined' ? JSON.parse(d.configurationSerialized).widgets : []
+                widgets: (typeof d.configurationSerialized !== 'undefined' ? JSON.parse(d.configurationSerialized).widgets as Array<IWidget> : []).map((w, i) => ({ ...w, id: i.toString() }))
             })));
         } catch (error) {
             console.warn("Failed to load dashboards", error);
@@ -172,6 +213,13 @@ const HomeOverview = () => {
             return () => window.removeEventListener('resize', updateNumberOfColumns);
         }, [widgetSize]);
 
+        const sensors = useSensors(
+            useSensor(PointerSensor),
+            useSensor(KeyboardSensor, {
+                coordinateGetter: sortableKeyboardCoordinates,
+            })
+        );
+
         return (
             <Box sx={{
                 display: 'grid',
@@ -179,16 +227,37 @@ const HomeOverview = () => {
                 gap: widgetSpacing,
                 width: `${widgetSize * numberOfColumns - widgetSpacing * 8}px`
             }}>
-                {dashboard.widgets.map((widget, index) => (
-                    <Widget
-                        key={index}
-                        onRemove={() => handleWidgetRemove(widget)}
-                        isEditMode={isEditing}
-                        type={widget.type}
-                        config={widget.config}
-                        setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
-                ))}
+                <DndContext sensors={sensors}>
+                    <SortableContext items={dashboard.widgets.map(w => w.id)} strategy={rectSortingStrategy}>
+                        {dashboard.widgets.map((widget, index) => (
+                            <Widget
+                                key={index}
+                                id={widget.id}
+                                onRemove={() => handleWidgetRemove(widget)}
+                                isEditMode={isEditing}
+                                type={widget.type}
+                                config={widget.config}
+                                setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
+                        ))}
+                    </SortableContext>
+                </DndContext>
             </Box>
+            // <Box sx={{
+            //     display: 'grid',
+            //     gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`,
+            //     gap: widgetSpacing,
+            //     width: `${widgetSize * numberOfColumns - widgetSpacing * 8}px`
+            // }}>
+            //     {dashboard.widgets.map((widget, index) => (
+            //         <Widget
+            //             key={index}
+            //             onRemove={() => handleWidgetRemove(widget)}
+            //             isEditMode={isEditing}
+            //             type={widget.type}
+            //             config={widget.config}
+            //             setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
+            //     ))}
+            // </Box>
         );
     };
 
@@ -199,12 +268,18 @@ const HomeOverview = () => {
     const handleWidgetAdd = (type: widgetType) => {
         if (!editingDashboard) return;
 
-        editingDashboard.widgets.push({ type: type });
+        editingDashboard.widgets.push({ id: editingDashboard.widgets.length.toString(), type: type });
         setEditingDashboard({ ...editingDashboard });
         setIsWidgetStoreOpen(false);
     };
 
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 760;
+    const dashboardOptions = usePopupState({ variant: 'popover', popupId: 'dashboardMenu' })
+
+    const [isConfiguringDashboard, setIsConfiguringDashboard] = useState<boolean>(false);
+
+    const handleConfigureDashboard = () => {
+        setIsConfiguringDashboard(true);
+    };
 
     if (!isServerSide &&
         window.location.search.startsWith("?do=")) {
@@ -248,19 +323,13 @@ const HomeOverview = () => {
                                         </Stack>}>
                                     In editing mode... Add, move, resize your items.
                                 </Alert>
-                                <Dialog open={isWidgetStoreOpen} maxWidth="lg" fullWidth fullScreen={isMobile} scroll="paper">
-                                    <DialogTitle>
-                                        <Stack direction="row" justifyContent="space-between">
-                                            <Typography variant="h2">Widget store</Typography>
-                                            <IconButton title="Close" onClick={() => setIsWidgetStoreOpen(false)}>
-                                                <Close />
-                                            </IconButton>
-                                        </Stack>
-                                    </DialogTitle>
-                                    <DialogContent>
-                                        <WidgetStore onAddWidget={handleWidgetAdd} />
-                                    </DialogContent>
-                                </Dialog>
+                                <ConfigurationDialog
+                                    isOpen={isWidgetStoreOpen}
+                                    title="Widget store"
+                                    onClose={() => setIsWidgetStoreOpen(false)}
+                                    maxWidth="lg">
+                                    <WidgetStore onAddWidget={handleWidgetAdd} />
+                                </ConfigurationDialog>
                             </>
                         ) : (
                             <Grid container spacing={2}>
@@ -273,7 +342,29 @@ const HomeOverview = () => {
                                     </TabList>
                                 </Grid>
                                 <Grid item sx={{ flexGrow: 1, textAlign: "end", px: 2 }}>
-                                    <Button disabled={isLoading} startIcon={<EditSharpIcon />} onClick={handleEdit}>Edit</Button>
+                                    <IconButton {...bindTrigger(dashboardOptions)}>
+                                        <MoreHorizSharp />
+                                    </IconButton>
+                                    <Menu {...bindMenu(dashboardOptions)}>
+                                        <MenuItem onClick={handleEdit}>
+                                            <ListItemIcon>
+                                                <DashboardSharp />
+                                            </ListItemIcon>
+                                            <ListItemText>Edit widgets</ListItemText>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleConfigureDashboard}>
+                                            <ListItemIcon>
+                                                <Settings />
+                                            </ListItemIcon>
+                                            <ListItemText>Configure...</ListItemText>
+                                        </MenuItem>
+                                    </Menu>
+                                    {isConfiguringDashboard && (
+                                        <DashboardSettings
+                                            dashboard={dashboards[Number.parseInt(dashboardIndex, 10) || 0]}
+                                            onChange={(d) => saveDashboardEditAsync(d)}
+                                            onClose={() => setIsConfiguringDashboard(false)} />
+                                    )}
                                 </Grid>
                             </Grid>
                         )

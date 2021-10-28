@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "1.8.0",
+    "@dnd-kit/core": "^4.0.1",
+    "@dnd-kit/sortable": "^5.0.0",
     "@emotion/cache": "11.5.0",
     "@emotion/react": "11.5.0",
     "@emotion/server": "11.4.0",

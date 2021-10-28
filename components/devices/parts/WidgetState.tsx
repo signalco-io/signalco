@@ -77,13 +77,8 @@ const WidgetState = (props: { isEditMode: boolean, config: any, setConfig: (conf
     const { config, setConfig, isEditMode, onRemove } = props;
     const [device, setDevice] = useState<IDeviceModel | undefined>(undefined);
 
-    const width = 2;
-    const height = 2;
-
     // Calc state from source value
-    const channelName = config?.target?.channelName;
-    const contactName = config?.target?.contactName;
-    const contactState = device?.getState({ channelName: channelName, contactName: contactName, deviceId: device.id });
+    const contactState = device?.getState({ channelName: config?.target?.channelName, contactName: config?.target?.contactName, deviceId: device.id });
     const state = contactState?.valueSerialized === 'true';
 
     const label = props.config?.label || device?.alias || '';
@@ -115,13 +110,13 @@ const WidgetState = (props: { isEditMode: boolean, config: any, setConfig: (conf
             return;
         }
 
-        executeStateAction(device, channelName, contactName);
+        executeStateAction(device, config?.target?.channelName, config?.target?.contactName);
     };
 
     return (
         <WidgetCard
-            width={width}
-            height={height}
+            width={2}
+            height={2}
             state={state}
             needsConfiguration={needsConfiguration}
             isEditMode={isEditMode}

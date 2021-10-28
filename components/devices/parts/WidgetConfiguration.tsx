@@ -1,5 +1,6 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
+import ConfigurationDialog from "../../shared/dialog/ConfigurationDialog";
 import DisplayDeviceTarget from "../../shared/entity/DisplayDeviceTarget";
 import SelectItems from "../../shared/form/SelectItems";
 
@@ -74,29 +75,29 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
 const WidgetConfiguration = (props: IWidgetConfigurationProps) => {
     const configProps = useWidgetConfiguration(props.options, props.config, props.onConfiguration)
 
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 760;
-
     return (
-        <Dialog open={props.isOpen} onClose={configProps.onClose} maxWidth="sm" fullScreen={isMobile} fullWidth scroll="paper">
-            <DialogTitle>Configure widget</DialogTitle>
-            <DialogContent>
-                <Stack spacing={2}>
-                    {configProps.options.map(opt => (
-                        <Box key={opt.name}>
-                            <Typography>{opt.label}</Typography>
-                            <WidgetConfigurationOption
-                                option={opt}
-                                value={configProps.values[opt.name] || opt.default}
-                                onChange={(value) => configProps.setValue(opt.name, value)} />
-                        </Box>
-                    ))}
-                </Stack>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={configProps.onCancel}>Cancel</Button>
-                <Button autoFocus onClick={configProps.onSave}>Save changes</Button>
-            </DialogActions>
-        </Dialog>
+        <ConfigurationDialog
+            title="Configure widget"
+            isOpen={props.isOpen}
+            onClose={configProps.onClose}
+            actions={(
+                <>
+                    <Button onClick={configProps.onCancel}>Cancel</Button>
+                    <Button autoFocus onClick={configProps.onSave}>Save changes</Button>
+                </>
+            )}>
+            <Stack spacing={2}>
+                {configProps.options.map(opt => (
+                    <Box key={opt.name}>
+                        <Typography>{opt.label}</Typography>
+                        <WidgetConfigurationOption
+                            option={opt}
+                            value={configProps.values[opt.name] || opt.default}
+                            onChange={(value) => configProps.setValue(opt.name, value)} />
+                    </Box>
+                ))}
+            </Stack>
+        </ConfigurationDialog>
     );
 };
 
