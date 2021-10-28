@@ -37,7 +37,7 @@ class SignalBeaconDto {
             throw Error("Invalid SignalBeaconDto - missing required properties.");
         }
 
-        const model = new BeaconModel(dto.id, new Date(dto.registeredTimeStamp + "Z"));
+        const model = new BeaconModel(dto.id, new Date(dto.registeredTimeStamp));
         model.version = dto.version;
         model.stateTimeStamp = dto.stateTimeStamp;
         model.availableWorkerServices = dto.availableWorkerServices;

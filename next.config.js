@@ -13,6 +13,9 @@ module.exports = withBundleAnalyzer(withPWA({
         dest: 'public',
         disable: process.env.NODE_ENV === 'development'
     },
+    images: {
+      formats: ['image/avif', 'image/webp']
+    },
     async headers() {
         return [{
           source: "/(.*)",

@@ -10,7 +10,6 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import DashboardsRepository, { DashboardSetModel, IDashboardModel } from "../../src/dashboards/DashboardsRepository";
-import Masonry from '@mui/lab/Masonry';
 import { Add, AddOutlined, Close, SaveOutlined } from "@mui/icons-material";
 import WidgetStore from "../devices/WidgetStore";
 import PageNotificationService from "../../src/notifications/PageNotificationService";
@@ -167,10 +166,12 @@ const HomeOverview = () => {
         }, [widgetSize]);
 
         return (
-            <Masonry
-                columns={numberOfColumns}
-                spacing={widgetSpacing}
-                sx={{ width: `${widgetSize * numberOfColumns - widgetSpacing * 8}px` }}>
+            <Box sx={{
+                display: 'grid',
+                gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`,
+                gap: widgetSpacing,
+                width: `${widgetSize * numberOfColumns - widgetSpacing * 8}px`
+            }}>
                 {dashboard.widgets.map((widget, index) => (
                     <Widget
                         key={index}
@@ -180,7 +181,7 @@ const HomeOverview = () => {
                         config={widget.config}
                         setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
                 ))}
-            </Masonry>
+            </Box>
         );
     };
 

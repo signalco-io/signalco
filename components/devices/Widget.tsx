@@ -1,6 +1,5 @@
 
-import { Alert } from "@mui/material";
-import { Box } from "@mui/system";
+import { Alert, Box } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import React from "react";
 // import ConductsService from "../../src/conducts/ConductsService";
@@ -197,10 +196,15 @@ const Widget = (props: IWidgetProps) => {
     }
 
     const colSpan = (WidgetResolved as any).columns || 2;
-    console.log(colSpan)
+    const rowSpan = (WidgetResolved as any).rows || 1;
 
     return (
-        <WidgetResolved {...widgetSharedProps} />
+        <Box sx={{
+            gridColumn: `span ${colSpan}`,
+            gridRow: `span ${rowSpan}`
+        }}>
+            <WidgetResolved {...widgetSharedProps} />
+        </Box>
     );
 };
 

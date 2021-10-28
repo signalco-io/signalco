@@ -35,16 +35,17 @@ interface IActionTableItem {
 const DeviceContactAction = observer((props: { deviceId: string, state?: IDeviceContactState, contact: IDeviceContact, channel: string }) => {
     const [sliderValue, setSliderValue] = useState<number | number[] | undefined>();
     const [sliderColor, setSliderColor] = useState<string | undefined>();
-    const [dataValuesSelected, setDataValueSelected] = useState<string[]>(props.contact.dataValues ? [props.state?.valueSerialized ?? props.contact.dataValues[0].value] : []);
-    const requestDoubleChangeMemoized = useCallback(throttle(async (value: number | number[]) => {
-        console.log('Do double change', 'contact:', props.contact, 'state:', props.state, 'value:', value);
-
-        await ConductsService.RequestConductAsync({
-            channelName: props.channel,
-            contactName: props.contact.name,
-            deviceId: props.deviceId
-        }, value);
-    }, 500), []);
+    const [dataValuesSelected, setDataValueSelected] = useState<string[]>(props.contact.dataValues && props.contact.dataValues.length ? [props.state?.valueSerialized ?? props.contact.dataValues[0].value] : []);
+    const requestDoubleChangeMemoized = useCallback((value: number | number[]) => {
+        return throttle(async () => {
+            console.log('Do double change', 'contact:', props.contact, 'state:', props.state, 'value:', value);
+            await ConductsService.RequestConductAsync({
+                channelName: props.channel,
+                contactName: props.contact.name,
+                deviceId: props.deviceId
+            }, value);
+        }, 500);
+    }, [props.channel, props.contact, props.state, props.deviceId]);
 
     const handleBooleanClick = async () => {
         const newState = props.state?.valueSerialized === 'true' ? false : true;
@@ -247,10 +248,13 @@ const DeviceDetails = () => {
     const handleSubmitShareWithNew = async () => {
         // TODO: Add success/error indicator
         await HttpService.requestAsync("/share/entity", "post", {
-            type: 0, // 0 - Device
+            type: 1, // 1 - Device
             entityId: device?.id,
             userEmails: [shareWithNewEmail]
         });
+
+        device?.sharedWith.push({ id: '', email: shareWithNewEmail });
+        setIsShareWithNewOpen(false);
     };
 
     const handleCancelShareWithNew = () => {
@@ -375,7 +379,7 @@ const DeviceDetails = () => {
                         </Grid>
                         {device && (
                             <Grid item>
-                                <DeviceContactHistory deviceId={device.id} channelName="zigbee2mqtt" contactName="linkquality" />
+                                <DeviceContactHistory deviceId={device.id} channelName="zigbee2mqtt" contactName="power" />
                             </Grid>
                         )}
                     </Grid>
