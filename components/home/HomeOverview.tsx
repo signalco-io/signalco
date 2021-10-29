@@ -213,11 +213,12 @@ const HomeOverview = () => {
         console.debug('Switched to dashboard', newValue);
     };
 
-    const handleAddDashboard = () => {
+    const handleAddDashboard = async () => {
         console.log("Adding new dashboard...");
 
         const newDashboard = { name: 'New dashboard', widgets: [] };
         setDashboards([...dashboards, newDashboard]);
+        await saveDashboardEditAsync(newDashboard);
     };
 
     const handleEdit = () => {
