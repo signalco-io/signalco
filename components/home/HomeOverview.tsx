@@ -18,7 +18,7 @@ import {
     bindTrigger,
     bindMenu,
 } from 'material-ui-popup-state/hooks';
-import { DndContext, DragEndEvent, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DndContext, DragEndEvent, KeyboardSensor, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { snapCenterToCursor } from "@dnd-kit/modifiers";
@@ -79,8 +79,8 @@ const DragableWidget = (props: IDragableWidgetProps) => {
     );
 };
 
-const DashboardSettings = (props: { dashboard: IDashboard, onClose: () => void, onChange: (dashboard: IDashboard) => void }) => {
-    const { dashboard, onClose, onChange } = props;
+const DashboardSettings = (props: { isOpen: boolean, dashboard: IDashboard, onClose: () => void, onChange: (dashboard: IDashboard) => void }) => {
+    const { isOpen, dashboard, onClose, onChange } = props;
     const [name, setName] = useState(dashboard.name);
 
     const handleSave = () => {
@@ -92,7 +92,7 @@ const DashboardSettings = (props: { dashboard: IDashboard, onClose: () => void, 
 
     return (
         <ConfigurationDialog
-            isOpen
+            isOpen={isOpen}
             title={`Dashboard settings`}
             onClose={onClose}
             actions={(
@@ -130,7 +130,18 @@ const RenderDashboard = (props: { dashboard: IDashboard, isEditing: boolean, han
     }, [widgetSize]);
 
     const sensors = useSensors(
-        useSensor(PointerSensor),
+        useSensor(TouchSensor, {
+            activationConstraint: {
+                delay: 100,
+                tolerance: 5
+            }
+        }),
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                delay: 100,
+                tolerance: 5
+            }
+        }),
         useSensor(KeyboardSensor, {
             coordinateGetter: sortableKeyboardCoordinates,
         }),
@@ -190,6 +201,8 @@ const HomeOverview = () => {
     const [dashboardsUpdateAvailable, setDashboardsUpdateAvailable] = useState(false);
     const [isWidgetStoreOpen, setIsWidgetStoreOpen] = useState<boolean>(false);
     const [editingDashboard, setEditingDashboard] = useState<IDashboard | undefined>();
+    const dashboardOptions = usePopupState({ variant: 'popover', popupId: 'dashboardMenu' });
+    const [isConfiguringDashboard, setIsConfiguringDashboard] = useState<boolean>(false);
 
     const handleDashboardChange = (_event: React.SyntheticEvent, newValue: string) => {
         if (newValue === dashboards.length.toString()) {
@@ -210,6 +223,7 @@ const HomeOverview = () => {
     const handleEdit = () => {
         setEditingDashboard(dashboards[Number.parseInt(dashboardIndex, 10) || 0]);
         setIsEditing(true);
+        dashboardOptions.close();
     }
 
     const saveDashboardEditAsync = async (updatedDashboard: IDashboard) => {
@@ -233,6 +247,9 @@ const HomeOverview = () => {
         await saveDashboardEditAsync(editingDashboard);
         setEditingDashboard(undefined);
         setIsEditing(false);
+        await DashboardsRepository.isUpdateAvailableAsync();
+        await DashboardsRepository.applyDashboardsUpdateAsync();
+        await loadDashboardsAsync();
     };
 
     const loadDashboardsAsync = async () => {
@@ -322,12 +339,9 @@ const HomeOverview = () => {
         setIsWidgetStoreOpen(false);
     };
 
-    const dashboardOptions = usePopupState({ variant: 'popover', popupId: 'dashboardMenu' })
-
-    const [isConfiguringDashboard, setIsConfiguringDashboard] = useState<boolean>(false);
-
     const handleConfigureDashboard = () => {
         setIsConfiguringDashboard(true);
+        dashboardOptions.close();
     };
 
     if (!isServerSide &&
@@ -356,7 +370,41 @@ const HomeOverview = () => {
                         </Grid>
                     )}
                     <Grid item>
-                        {isEditing ? (
+                        <Grid container spacing={2}>
+                            <Grid item>
+                                <TabList selectionFollowsFocus scrollButtons="auto" variant="scrollable" onChange={handleDashboardChange} aria-label="Dashboard tabs">
+                                    {dashboards.length ? dashboards.map((d, index) => (
+                                        <Tab key={index.toString()} label={d.name} value={index.toString()} />
+                                    )) : undefined}
+                                    <Tab key={(dashboards.length || 0).toString()} icon={<Add />} value={(dashboards.length || 0).toString()} />
+                                </TabList>
+                            </Grid>
+                            <Grid item sx={{ flexGrow: 1, textAlign: "end", px: 2 }}>
+                                <IconButton {...bindTrigger(dashboardOptions)}>
+                                    <MoreHorizSharp />
+                                </IconButton>
+                                <Menu {...bindMenu(dashboardOptions)}>
+                                    <MenuItem onClick={handleEdit}>
+                                        <ListItemIcon>
+                                            <DashboardSharp />
+                                        </ListItemIcon>
+                                        <ListItemText>Edit widgets</ListItemText>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleConfigureDashboard}>
+                                        <ListItemIcon>
+                                            <Settings />
+                                        </ListItemIcon>
+                                        <ListItemText>Configure...</ListItemText>
+                                    </MenuItem>
+                                </Menu>
+                                <DashboardSettings
+                                    isOpen={isConfiguringDashboard}
+                                    dashboard={dashboards[Number.parseInt(dashboardIndex, 10) || 0]}
+                                    onChange={(d) => saveDashboardEditAsync(d)}
+                                    onClose={() => setIsConfiguringDashboard(false)} />
+                            </Grid>
+                        </Grid>
+                        {isEditing && (
                             <>
                                 <Alert
                                     severity="info"
@@ -380,44 +428,7 @@ const HomeOverview = () => {
                                     <WidgetStore onAddWidget={handleWidgetAdd} />
                                 </ConfigurationDialog>
                             </>
-                        ) : (
-                            <Grid container spacing={2}>
-                                <Grid item>
-                                    <TabList selectionFollowsFocus scrollButtons="auto" variant="scrollable" onChange={handleDashboardChange} aria-label="Dashboard tabs">
-                                        {dashboards.length ? dashboards.map((d, index) => (
-                                            <Tab key={index.toString()} label={d.name} value={index.toString()} />
-                                        )) : undefined}
-                                        <Tab key={(dashboards.length || 0).toString()} icon={<Add />} value={(dashboards.length || 0).toString()} />
-                                    </TabList>
-                                </Grid>
-                                <Grid item sx={{ flexGrow: 1, textAlign: "end", px: 2 }}>
-                                    <IconButton {...bindTrigger(dashboardOptions)}>
-                                        <MoreHorizSharp />
-                                    </IconButton>
-                                    <Menu {...bindMenu(dashboardOptions)}>
-                                        <MenuItem onClick={handleEdit}>
-                                            <ListItemIcon>
-                                                <DashboardSharp />
-                                            </ListItemIcon>
-                                            <ListItemText>Edit widgets</ListItemText>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleConfigureDashboard}>
-                                            <ListItemIcon>
-                                                <Settings />
-                                            </ListItemIcon>
-                                            <ListItemText>Configure...</ListItemText>
-                                        </MenuItem>
-                                    </Menu>
-                                    {isConfiguringDashboard && (
-                                        <DashboardSettings
-                                            dashboard={dashboards[Number.parseInt(dashboardIndex, 10) || 0]}
-                                            onChange={(d) => saveDashboardEditAsync(d)}
-                                            onClose={() => setIsConfiguringDashboard(false)} />
-                                    )}
-                                </Grid>
-                            </Grid>
-                        )
-                        }
+                        )}
                     </Grid>
                     <Grid item>
                         {dashboards.length ?
