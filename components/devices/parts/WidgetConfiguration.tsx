@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import ConfigurationDialog from "../../shared/dialog/ConfigurationDialog";
 import DisplayDeviceTarget from "../../shared/entity/DisplayDeviceTarget";
