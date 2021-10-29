@@ -2,7 +2,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
 import ReactTimeago from "react-timeago";
-import AppLayout from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
 import BeaconsRepository, { IBeaconModel } from "../../../src/beacons/BeaconsRepository";
@@ -18,7 +18,7 @@ function beaconModelToTableItem(beacon: IBeaconModel): IAutoTableItem {
 
 const Beacons = () => {
     const router = useRouter();
-    const [items, isLoading, error] = useAutoTable(BeaconsRepository.getBeaconsAsync, beaconModelToTableItem);
+    const beaconsTable = useAutoTable(BeaconsRepository.getBeaconsAsync, beaconModelToTableItem);
 
     const handleRowClick = (item: IAutoTableItem) => {
         router.push(`/app/beacons/${item.id}`);
@@ -31,7 +31,7 @@ const Beacons = () => {
                     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                         <Typography variant="h2" sx={{ p: 2 }}>Beacons</Typography>
                         <Box sx={{ position: 'relative', flexGrow: 1, overflow: 'hidden' }}>
-                            <AutoTable items={items} isLoading={isLoading} error={error} onRowClick={handleRowClick} />
+                            <AutoTable {...beaconsTable} onRowClick={handleRowClick} />
                         </Box>
                     </Box>
                 </Paper>
@@ -40,6 +40,6 @@ const Beacons = () => {
     )
 }
 
-Beacons.layout = AppLayout;
+Beacons.layout = AppLayoutWithAuth;
 
 export default Beacons;

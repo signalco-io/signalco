@@ -2,7 +2,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, 
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
-import AppLayout from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
 import { IDeviceContact, IDeviceContactState, IDeviceModel } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
@@ -16,7 +16,7 @@ import throttle from '../../../src/helpers/Throttle';
 import { useCallback } from 'react';
 import blendColors from '../../../src/helpers/BlendColors';
 import SelectItems from '../../../components/shared/form/SelectItems';
-import { IHistoricalValue } from '../../../components/devices/parts/WidgetPartGraph';
+import WidgetPartGraph, { IHistoricalValue } from '../../../components/devices/parts/WidgetPartGraph';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 
 interface IStateTableItem extends IAutoTableItem {
@@ -35,16 +35,17 @@ interface IActionTableItem {
 const DeviceContactAction = observer((props: { deviceId: string, state?: IDeviceContactState, contact: IDeviceContact, channel: string }) => {
     const [sliderValue, setSliderValue] = useState<number | number[] | undefined>();
     const [sliderColor, setSliderColor] = useState<string | undefined>();
-    const [dataValuesSelected, setDataValueSelected] = useState<string[]>(props.contact.dataValues ? [props.state?.valueSerialized ?? props.contact.dataValues[0].value] : []);
-    const requestDoubleChangeMemoized = useCallback(throttle(async (value: number | number[]) => {
-        console.log('Do double change', 'contact:', props.contact, 'state:', props.state, 'value:', value);
-
-        await ConductsService.RequestConductAsync({
-            channelName: props.channel,
-            contactName: props.contact.name,
-            deviceId: props.deviceId
-        }, value);
-    }, 500), []);
+    const [dataValuesSelected, setDataValueSelected] = useState<string[]>(props.contact.dataValues && props.contact.dataValues.length ? [props.state?.valueSerialized ?? props.contact.dataValues[0].value] : []);
+    const requestDoubleChangeMemoized = useCallback((value: number | number[]) => {
+        return throttle(async () => {
+            console.log('Do double change', 'contact:', props.contact, 'state:', props.state, 'value:', value);
+            await ConductsService.RequestConductAsync({
+                channelName: props.channel,
+                contactName: props.contact.name,
+                deviceId: props.deviceId
+            }, value);
+        }, 500);
+    }, [props.channel, props.contact, props.state, props.deviceId]);
 
     const handleBooleanClick = async () => {
         const newState = props.state?.valueSerialized === 'true' ? false : true;
@@ -151,20 +152,22 @@ function historicalValueToTableItem(value: IHistoricalValue): IAutoTableItem {
 }
 
 const DeviceContactHistory = (props: { deviceId: string, channelName: string, contactName: string }) => {
-    const loadContactHistory =
+    const loadContactHistory = useCallback(
         async () => await DevicesRepository.getDeviceStateHistoryAsync({
             deviceId: props.deviceId,
             channelName: props.channelName,
             contactName: props.contactName
-        }) || [];
+        }) || [],
+        [props.deviceId, props.channelName, props.contactName]);
 
-    const [stateItems, isLoadingStateItems, errorStateItems] = useAutoTable(loadContactHistory, historicalValueToTableItem);
+    const stateItemsTable = useAutoTable(loadContactHistory, historicalValueToTableItem);
 
     return (
         <Card>
             <CardHeader title="State" />
             <CardMedia>
-                <AutoTable items={stateItems} isLoading={isLoadingStateItems} error={errorStateItems} />
+                <AutoTable {...stateItemsTable} />
+                <WidgetPartGraph columnWidth={120} config={{ columns: 4, rows: 2, value: loadContactHistory, valueSource: { channelName: props.channelName, contactName: props.contactName, deviceId: props.deviceId } }} />
             </CardMedia>
         </Card>
     );
@@ -245,10 +248,13 @@ const DeviceDetails = () => {
     const handleSubmitShareWithNew = async () => {
         // TODO: Add success/error indicator
         await HttpService.requestAsync("/share/entity", "post", {
-            type: 0, // 0 - Device
+            type: 1, // 1 - Device
             entityId: device?.id,
             userEmails: [shareWithNewEmail]
         });
+
+        device?.sharedWith.push({ id: '', email: shareWithNewEmail });
+        setIsShareWithNewOpen(false);
     };
 
     const handleCancelShareWithNew = () => {
@@ -276,7 +282,7 @@ const DeviceDetails = () => {
                                             <Stack spacing={1} >
                                                 <Stack direction="row" justifyContent="space-between" spacing={2}>
                                                     <span>Last activity</span>
-                                                    {device ? <ReactTimeago date={device?.getLastActivity()} /> : "Unknown"}
+                                                    {device && device?.getLastActivity() > 0 ? <ReactTimeago date={device?.getLastActivity()} /> : "Never"}
                                                 </Stack>
                                                 <Stack direction="row" justifyContent="space-between" spacing={2}>
                                                     <span>Model</span>
@@ -373,7 +379,7 @@ const DeviceDetails = () => {
                         </Grid>
                         {device && (
                             <Grid item>
-                                <DeviceContactHistory deviceId={device.id} channelName="signal" contactName="locked" />
+                                <DeviceContactHistory deviceId={device.id} channelName="zigbee2mqtt" contactName="power" />
                             </Grid>
                         )}
                     </Grid>
@@ -383,6 +389,6 @@ const DeviceDetails = () => {
     );
 }
 
-DeviceDetails.layout = AppLayout;
+DeviceDetails.layout = AppLayoutWithAuth;
 
 export default observer(DeviceDetails);

@@ -168,6 +168,12 @@ export class DeviceContactState implements IDeviceContactState {
     }
 }
 
+export interface IDeviceTargetIncomplete {
+    deviceId: string;
+    channelName?: string;
+    contactName?: string;
+}
+
 export interface IDeviceTarget {
     deviceId: string;
     channelName: string;

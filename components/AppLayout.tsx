@@ -1,115 +1,30 @@
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import { Alert, Grid } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Box, Grid } from "@mui/material";
+import React, { useEffect } from "react";
 import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
-import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-import DevicesRepository, { SignalDeviceStatePublishDto } from "../src/devices/DevicesRepository";
-// import { useSnackbar } from 'notistack';
-// import PageNotificationService from "../src/notifications/PageNotificationService";
+import { useSnackbar } from 'notistack';
+import PageNotificationService from "../src/notifications/PageNotificationService";
+import RealtimeService from '../src/realtime/realtimeService';
+import { Auth0Provider } from "@auth0/auth0-react";
+import { useRouter } from 'next/router';
+import * as Sentry from '@sentry/nextjs';
 
-const Layout = (props: { children: React.ReactNode }) => {
-  const { isAuthenticated, isLoading, error, getAccessTokenSilently, loginWithRedirect } = useAuth0();
-  const [pageError] = useState<string | undefined>();
-  const [isPageLoading, setPageLoading] = useState<boolean>(true);
-  const [devicesHub, setDevicesHub] = useState<HubConnection | undefined>();
-  // const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+const AppLayout = (props: { children?: React.ReactNode }) => {
+  const {
+    children
+  } = props;
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  console.debug("AppLayout rendering");
 
   // Set snackbar functions
-  // PageNotificationService.setSnackbar(enqueueSnackbar, closeSnackbar);
-
-  // Set Auth0 token factory
-  if (typeof HttpService.tokenFactory === 'undefined' &&
-    typeof getAccessTokenSilently !== 'undefined') {
-    HttpService.tokenFactory = getAccessTokenSilently;
-  }
-
-  // Refirect to login if not authenticated
-  useEffect(() => {
-    if (isLoading) return;
-
-    if (HttpService.isOnline && !isAuthenticated) {
-      console.log("Login redirecting... Online: ", HttpService.isOnline)
-      loginWithRedirect();
-    }
-
-    setPageLoading(false);
-  }, [loginWithRedirect, isLoading, isAuthenticated])
+  PageNotificationService.setSnackbar(enqueueSnackbar, closeSnackbar);
 
   // Initiate SignalR communication
   useEffect(() => {
-    if (isPageLoading || isLoading) return;
-
-    const createHubConnection = async () => {
-      if (devicesHub != null) return;
-
-      console.debug("Configuring SignalR...");
-
-      const hub = new HubConnectionBuilder()
-        .withUrl(HttpService.getApiUrl('/signalr/devices'), {
-          accessTokenFactory: async () => {
-            if (typeof HttpService.tokenFactory === 'undefined')
-              throw Error("TokenFactory not present. Unable to authorize SignalR client.");
-            return await HttpService.tokenFactory();
-          }
-        })
-        .configureLogging(LogLevel.Information)
-        .build();
-      setDevicesHub(hub);
-
-      const hubStartWithRetry = async (retryCount: number) => {
-        try {
-          console.debug("Connecting to SignalR...");
-
-          await hub.start();
-          hub.on("devicestate", async (state: SignalDeviceStatePublishDto) => {
-            if (typeof state.DeviceId === 'undefined' ||
-              typeof state.ChannelName === 'undefined' ||
-              typeof state.ContactName === 'undefined' ||
-              typeof state.TimeStamp === 'undefined') {
-              console.warn("Got device state with invalid values", state);
-              return;
-            }
-
-            const device = await DevicesRepository.getDeviceAsync(state.DeviceId);
-            if (typeof device !== 'undefined') {
-              device.updateState(
-                state.ChannelName,
-                state.ContactName,
-                state.ValueSerialized,
-                new Date(state.TimeStamp)
-              );
-            }
-          });
-          hub.onclose((err) => {
-            console.log("SignalR connection closed. Reconnecting with delay...");
-            console.debug("SignalR connection closes reason:", err);
-            hubStartWithRetry(0);
-          });
-          hub.onreconnecting((err) => {
-            console.log("Signalr reconnecting...");
-            console.debug("Signalr reconnection reason:", err);
-          });
-          hub.onreconnected(() => {
-            console.log("Signalr reconnected");
-          });
-        } catch (err) {
-          console.warn('Failed to start SignalR hub connection', err);
-          setTimeout(() => {
-            hubStartWithRetry(retryCount + 1);
-          }, (retryCount + 1) * 1000);
-        }
-      };
-
-      hubStartWithRetry(0);
-    };
-
-    createHubConnection();
-  }, [isLoading, devicesHub, isPageLoading])
-
-  if (pageError) {
-    return <Alert color="error" variant="filled">{error}</Alert>
-  }
+    RealtimeService.startAsync();
+  }, []);
 
   return (
     <Grid container direction="column" sx={{ height: '100%', width: '100%' }} wrap="nowrap">
@@ -117,10 +32,98 @@ const Layout = (props: { children: React.ReactNode }) => {
         <NavProfile />
       </Grid>
       <Grid sx={{ height: '100%', flexGrow: 1, position: 'relative' }} item>
-        {props.children}
+        {children}
       </Grid>
     </Grid>
   );
 };
 
-export default withAuthenticationRequired(Layout);
+const EmptyLayout = (props: { children?: React.ReactNode }) => {
+  const {
+    children
+  } = props;
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  console.debug("EmptyLayout rendering");
+
+  // Set snackbar functions
+  PageNotificationService.setSnackbar(enqueueSnackbar, closeSnackbar);
+
+  return (
+    <Box sx={{ height: '100%', position: 'relative' }}>
+      {children}
+    </Box>
+  );
+};
+
+const Auth0Wrapper = (props: { children?: React.ReactNode }) => {
+  const {
+    children
+  } = props;
+  const router = useRouter();
+
+  console.debug('Auth0Wrapper rendering');
+
+  let redirectUri = 'https://www.signalco.io/login-return';
+  if (typeof window !== "undefined" && window.location.origin.indexOf('localhost:3000') > 0) {
+    redirectUri = `${window.location.origin}/login-return`;
+  } else if (typeof window !== "undefined" && window.location.origin.indexOf('next.signalco.io') > 0) {
+    redirectUri = `https://next.signalco.io/login-return`;
+  }
+
+  return (
+    <Auth0Provider
+      redirectUri={redirectUri}
+      onRedirectCallback={(appState) => {
+        // Use Next.js's Router.replace method to replace the url
+        const returnTo = appState?.returnTo || "/";
+        router.replace(returnTo);
+      }}
+      domain="dfnoise.eu.auth0.com"
+      clientId="nl7QIQD7Kw3ZHt45qHHAZG0MEILSFa7U"
+      audience="https://api.signalco.io"
+    >
+      {children}
+    </Auth0Provider>
+  );
+};
+
+const LayoutWithAuth = (props: { LayoutComponent: React.ComponentType, children?: React.ReactNode }) => {
+  const {
+    children,
+    LayoutComponent
+  } = props;
+  const { error, user, getAccessTokenSilently } = useAuth0();
+
+  console.debug('LayoutWithAuth rendering');
+
+  HttpService.tokenFactory = getAccessTokenSilently;
+
+  // Set sentry user
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    // Set sentry user
+    Sentry.configureScope(scope => {
+      scope.setUser({ email: user.email });
+    });
+  }, [user]);
+
+  // Show error if available
+  if (error) {
+    console.error(error);
+    PageNotificationService.show(error.message, "error");
+  }
+
+  return <LayoutComponent>{children}</LayoutComponent>;
+};
+
+export const AppLayoutWithAuth = (props: { children: React.ReactNode }) => (
+  <Auth0Wrapper><LayoutWithAuth LayoutComponent={withAuthenticationRequired(AppLayout)}>{props.children}</LayoutWithAuth></Auth0Wrapper>
+);
+
+export const EmptyLayoutWithAuth = (props: { children: React.ReactNode }) => (
+  <Auth0Wrapper><LayoutWithAuth LayoutComponent={EmptyLayout}>{props.children}</LayoutWithAuth></Auth0Wrapper>
+);

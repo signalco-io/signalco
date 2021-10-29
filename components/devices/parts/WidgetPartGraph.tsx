@@ -13,12 +13,21 @@ export interface IWidgetPartGraphConfig {
     value: () => Promise<IHistoricalValue[]>
     valueSource: IDeviceTarget,
     duration?: string,
-    units?: string
+    units?: string,
+    type?: "step" | "basis"
 }
 
 export interface IHistoricalValue {
     timeStamp: Date;
     valueSerialized?: any;
+}
+
+const valueSerializedToFloat = (valueSerialized?: string) => {
+    if (typeof valueSerialized === 'string') {
+        if (valueSerialized.toLowerCase() === 'true') return 1;
+        if (valueSerialized.toLowerCase() === 'false') return 0;
+        return Number.parseFloat(valueSerialized);
+    }
 }
 
 const useGraph = (value: () => Promise<IHistoricalValue[]>, duration?: string) => {
@@ -53,7 +62,7 @@ const useGraph = (value: () => Promise<IHistoricalValue[]>, duration?: string) =
 
                 var mappedData = data.map(i => ({
                     timeStamp: domainGraph(new Date(i.timeStamp).getTime()),
-                    value: Number.parseFloat(i.valueSerialized)
+                    value: valueSerializedToFloat(i.valueSerialized)
                 }));
 
                 setData(mappedData);
@@ -101,7 +110,7 @@ const WidgetPartGraph = ({ columnWidth, config }: { columnWidth: number, config:
                 <YAxis domain={["auto", "auto"]} hide />
                 <Tooltip content={<CustomTooltip />} />
                 <Area
-                    type="basis"
+                    type={config.type ?? "basis"}
                     dataKey="value"
                     fill={theme.palette.mode === "dark" ? "#ffffff" : "#000000"}
                     fillOpacity={0.1}

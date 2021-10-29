@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import AppLayout from "../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../components/AppLayout";
 import HomeOverview from "../../components/home/HomeOverview";
 
 const Dashboard = () => {
@@ -14,6 +14,6 @@ const Dashboard = () => {
   );
 };
 
-Dashboard.layout = AppLayout;
+Dashboard.layout = AppLayoutWithAuth;
 
 export default observer(Dashboard);

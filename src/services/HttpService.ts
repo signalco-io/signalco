@@ -40,7 +40,7 @@ export default class HttpService {
   };
 
   public static async getAsync<T>(url: string, data?: any): Promise<T> {
-    return this.requestAsync(url, "get", data);
+    return await this.requestAsync(url, "get", data) as T;
   }
 
   public static async requestAsync(

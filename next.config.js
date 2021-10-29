@@ -1,13 +1,20 @@
-const withPWA = require('next-pwa')
-const { createSecureHeaders } = require("next-secure-headers")
+// const { withPlugins } = require('next-compose-plugins');
+const withPWA = require('next-pwa');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+const { createSecureHeaders } = require("next-secure-headers");
 
-const isDevelopment = true;
+const isDevelopment = process.env.NODE_ENV === "development";
 
-module.exports = withPWA({
-    experimental: { esmExternals: true },
+module.exports = withBundleAnalyzer(withPWA({
+    swcMinify: true,
     pwa: {
         dest: 'public',
         disable: process.env.NODE_ENV === 'development'
+    },
+    images: {
+      formats: ['image/avif', 'image/webp']
     },
     async headers() {
         return [{
@@ -27,7 +34,7 @@ module.exports = withPWA({
                 childSrc: "'self'",
                 frameSrc: ["'self'", "https://dfnoise.eu.auth0.com"], 
                 workerSrc: "'self'",
-                imgSrc: ["'self'", "https://www.signalco.io", "https://lh3.googleusercontent.com"],
+                imgSrc: ["'self'", "data:", "https://www.signalco.io", "https://lh3.googleusercontent.com", "https://dfnoise.eu.auth0.com"],
                 formAction: "'self'",
                 connectSrc: ["'self'", "https://www.signalco.io", "https://api.signalco.io", "https://signalhub.service.signalr.net", "https://api.github.com", "https://o513630.ingest.sentry.io", "https://fonts.gstatic.com", "https://dfnoise.eu.auth0.com", "wss://signalhub.service.signalr.net", "https://lh3.googleusercontent.com"],
                 baseURI: ['https://www.signalco.io', 'https://next.signalco.io'],
@@ -45,4 +52,4 @@ module.exports = withPWA({
           })
         }];
       },
-});
+}));

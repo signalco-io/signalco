@@ -1,5 +1,11 @@
 import HttpService from "../services/HttpService";
 
+export interface IDashboardSetModel {
+    configurationSerialized?: string;
+    name: string;
+    id?: string;
+}
+
 export interface IDashboardModel {
     configurationSerialized?: string;
     name: string;
@@ -21,6 +27,37 @@ class DashboardModel implements IDashboardModel {
     }
 }
 
+export class DashboardSetModel implements IDashboardSetModel {
+    configurationSerialized?: string | undefined;
+    name: string;
+    id?: string | undefined;
+
+    constructor(name: string) {
+        this.name = name;
+    }
+}
+
+class SignalDashboardSetDto {
+    id?: string;
+    name: string;
+    configurationSerialized?: string;
+    
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    static ToDto(model: IDashboardSetModel) {
+        if (typeof model.name !== 'string' || model.name.length <= 0) {
+            throw Error("Invalid SignalDashboardSetDto - must have name.");
+        }
+
+        const dto = new SignalDashboardSetDto(model.name);
+        dto.id = model.id;
+        dto.configurationSerialized = model.configurationSerialized;
+        return dto;
+    }
+}
+
 class SignalDashboardDto {
     id?: string;
     name?: string;
@@ -32,7 +69,7 @@ class SignalDashboardDto {
             throw Error("Invalid SignalDashboardDto - missing required properties.");
         }
 
-        return new DashboardModel(dto.id, dto.name, dto.configurationSerialized, dto.timeStamp ? new Date(dto.timeStamp) : undefined);
+        return new DashboardModel(dto.id, dto.name, dto.configurationSerialized, dto.timeStamp ? new Date(dto.timeStamp + "Z") : undefined);
     }
 }
 
@@ -49,6 +86,11 @@ export default class DashboardsRepository {
     static async getDashboardsAsync(): Promise<IDashboardModel[]> {
         await DashboardsRepository._cacheDashboardsAsync();
         return DashboardsRepository.dashboardsCache ?? [];
+    }
+
+    static async saveDashboardAsync(dashboard: IDashboardSetModel) {
+        await DashboardsRepository._cacheDashboardsAsync();
+        await DashboardsRepository._setRemoteDashboardAsync(dashboard);
     }
 
     static async isUpdateAvailableAsync() {
@@ -70,6 +112,7 @@ export default class DashboardsRepository {
 
             // Load from local storage
             DashboardsRepository.dashboardsCache = JSON.parse(localStorage.getItem('signalco-cache-dashboards') ?? "[]") as IDashboardModel[];
+            DashboardsRepository.dashboardsCache.forEach(d => d.timeStamp = d.timeStamp ? new Date(d.timeStamp) : undefined);
             DashboardsRepository.isLoading = false;
         }
 
@@ -111,6 +154,10 @@ export default class DashboardsRepository {
         if (typeof localStorage !== 'undefined') {
             localStorage.setItem('signalco-cache-dashboards', JSON.stringify(DashboardsRepository.dashboardsCache));
         }
+    }
+
+    private static async _setRemoteDashboardAsync(dashboard: IDashboardSetModel) {
+        await HttpService.requestAsync("/dashboards/set", "post", SignalDashboardSetDto.ToDto(dashboard));
     }
 
     private static async _getRemoteDahboardsAsync() {
