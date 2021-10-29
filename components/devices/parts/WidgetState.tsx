@@ -81,11 +81,6 @@ const WidgetState = (props: { isEditMode: boolean, config: any, setConfig: (conf
     const contactState = device?.getState({ channelName: config?.target?.channelName, contactName: config?.target?.contactName, deviceId: device.id });
     const state = contactState?.valueSerialized === 'true';
 
-    if (config.target.deviceId === 'ff048017-7ce5-4867-9744-bbfd069dcd31')
-        console.log(config, contactState?.valueSerialized)
-    if (!config)
-        console.log('config null')
-
     const label = props.config?.label || device?.alias || '';
     const Visual = useMemo(() => props.config?.visual === 'tv' ? TvVisual : LightBulbVisual, [props.config]);
 

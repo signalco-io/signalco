@@ -67,26 +67,24 @@ const WidgetCard = (props: IWidgetCardProps) => {
                 )}
             </Paper >
             {options && <WidgetConfiguration onConfiguration={handleOnConfiguration} options={options} config={config} isOpen={isConfiguring} />}
-            {isEditMode && (
-                <Menu {...bindMenu(popupState)}>
-                    {options && (
-                        <MenuItem onClick={handleOnConfigureClicked}>
-                            <ListItemIcon>
-                                <Settings />
-                            </ListItemIcon>
-                            <ListItemText>Configure</ListItemText>
-                        </MenuItem>
-                    )}
-                    {onRemove && (
-                        <MenuItem onClick={onRemove}>
-                            <ListItemIcon>
-                                <Delete />
-                            </ListItemIcon>
-                            <ListItemText>Remove</ListItemText>
-                        </MenuItem>
-                    )}
-                </Menu>
-            )}
+            <Menu {...bindMenu(popupState)}>
+                {options && (
+                    <MenuItem onClick={handleOnConfigureClicked}>
+                        <ListItemIcon>
+                            <Settings />
+                        </ListItemIcon>
+                        <ListItemText>Configure</ListItemText>
+                    </MenuItem>
+                )}
+                {onRemove && (
+                    <MenuItem onClick={onRemove}>
+                        <ListItemIcon>
+                            <Delete />
+                        </ListItemIcon>
+                        <ListItemText>Remove</ListItemText>
+                    </MenuItem>
+                )}
+            </Menu>
         </>
     );
 }
