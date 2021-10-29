@@ -18,9 +18,10 @@ import {
     bindTrigger,
     bindMenu,
 } from 'material-ui-popup-state/hooks';
-import { DndContext, DragOverEvent, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DndContext, DragEndEvent, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { snapCenterToCursor } from "@dnd-kit/modifiers";
 
 const isServerSide = typeof window === 'undefined';
 
@@ -36,6 +37,47 @@ interface IDashboard {
     name: string,
     widgets: IWidget[]
 }
+
+interface IDragableWidgetProps extends IWidgetProps {
+    id: string
+}
+
+const DragableWidget = (props: IDragableWidgetProps) => {
+    const {
+        isDragging,
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+    } = useSortable({ id: props.id, disabled: !props.isEditMode });
+
+    const colSpan = (props.config as any)?.columns || 2;
+    const rowSpan = (props.config as any)?.rows || 2;
+
+    let customTransform = undefined;
+    if (transform) {
+        customTransform = {
+            scaleX: isDragging ? 1.1 : 1,
+            scaleY: isDragging ? 1.1 : 1,
+            x: transform.x,
+            y: transform.y
+        };
+    }
+
+    listeners
+
+    return (
+        <Box ref={setNodeRef} style={{
+            transform: customTransform ? CSS.Transform.toString(customTransform) : undefined,
+            transition,
+            gridRowStart: `span ${rowSpan}`,
+            gridColumnStart: `span ${colSpan}`,
+        }} {...attributes} {...listeners}>
+            <Widget {...props} />
+        </Box>
+    );
+};
 
 const DashboardSettings = (props: { dashboard: IDashboard, onClose: () => void, onChange: (dashboard: IDashboard) => void }) => {
     const { dashboard, onClose, onChange } = props;
@@ -63,6 +105,79 @@ const DashboardSettings = (props: { dashboard: IDashboard, onClose: () => void, 
                 <TextField label="Name" value={name} onChange={(e) => setName(e.target.value || "")} />
             </FormGroup>
         </ConfigurationDialog>
+    );
+};
+
+const RenderDashboard = (props: { dashboard: IDashboard, isEditing: boolean, handleWidgetRemove: (widget: IWidget) => void, handleWidgetSetConfig: (dashboard: IDashboard, widget: IWidget, config: object) => void }) => {
+    const { dashboard, isEditing, handleWidgetRemove, handleWidgetSetConfig } = props;
+    const [numberOfColumns, setNumberOfColumns] = useState(4);
+    const widgetSpacing = 1;
+    const widgetSize = 78 + widgetSpacing * 8;
+    const dashbaordPadding = 48;
+    const [widgetsOrder, setWidgetsOrder] = useState(dashboard.widgets.map(w => w.id));
+
+    useLayoutEffect(() => {
+        function updateNumberOfColumns() {
+            // When width is less than 400, set to quad column
+            const width = window.innerWidth - dashbaordPadding;
+            const numberOfColumns = Math.max(4, Math.floor(width / widgetSize));
+
+            setNumberOfColumns(numberOfColumns);
+        }
+        window.addEventListener('resize', updateNumberOfColumns);
+        updateNumberOfColumns();
+        return () => window.removeEventListener('resize', updateNumberOfColumns);
+    }, [widgetSize]);
+
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        }),
+    );
+
+    function handleDragEnd(event: DragEndEvent) {
+        const { active, over } = event;
+
+        if (over && active.id !== over.id) {
+            setWidgetsOrder((items) => {
+                const oldIndex = items.indexOf(active.id);
+                const newIndex = items.indexOf(over.id);
+                return arrayMove(items, oldIndex, newIndex);
+            });
+        }
+    }
+
+    return (
+        <Box sx={{
+            display: 'grid',
+            gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`,
+            gap: widgetSpacing,
+            width: `${widgetSize * numberOfColumns - widgetSpacing * 8}px`
+        }}>
+            <DndContext
+                sensors={sensors}
+                modifiers={[snapCenterToCursor]}
+                onDragEnd={handleDragEnd}
+                onDragCancel={handleDragEnd}>
+                <SortableContext items={widgetsOrder} strategy={undefined}>
+                    {dashboard.widgets.sort((a, b) => {
+                        const oldIndex = widgetsOrder.indexOf(a.id);
+                        const newIndex = widgetsOrder.indexOf(b.id);
+                        return oldIndex - newIndex;
+                    }).map((widget) => (
+                        <DragableWidget
+                            id={widget.id}
+                            key={`widget-${widget.id.toString()}`}
+                            onRemove={() => handleWidgetRemove(widget)}
+                            isEditMode={isEditing}
+                            type={widget.type}
+                            config={widget.config}
+                            setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
+                    ))}
+                </SortableContext>
+            </DndContext>
+        </Box >
     );
 };
 
@@ -176,7 +291,7 @@ const HomeOverview = () => {
         }
     }, []);
 
-    const handleWidgetSetConfig = async (dashboard: IDashboard, widget: IWidget, config: object) => {
+    const handleWidgetSetConfig = (dashboard: IDashboard, widget: IWidget, config: object) => {
         widget.config = config;
         setDashboards([...dashboards]);
         console.log('updated widgets', dashboard);
@@ -194,120 +309,6 @@ const HomeOverview = () => {
         setEditingDashboard({ ...editingDashboard });
         setIsWidgetStoreOpen(false);
     }
-
-    const RenderDashboard = ({ dashboard }: { dashboard: IDashboard }) => {
-        const [numberOfColumns, setNumberOfColumns] = useState(4);
-        const widgetSpacing = 1;
-        const widgetSize = 78 + widgetSpacing * 8;
-        const dashbaordPadding = 48;
-        const [widgetsOrder, setWidgetsOrder] = useState(dashboard.widgets.map(w => w.id));
-
-        useLayoutEffect(() => {
-            function updateNumberOfColumns() {
-                // When width is less than 400, set to quad column
-                const width = window.innerWidth - dashbaordPadding;
-                const numberOfColumns = Math.max(4, Math.floor(width / widgetSize));
-
-                setNumberOfColumns(numberOfColumns);
-            }
-            window.addEventListener('resize', updateNumberOfColumns);
-            updateNumberOfColumns();
-            return () => window.removeEventListener('resize', updateNumberOfColumns);
-        }, [widgetSize]);
-
-        const sensors = useSensors(
-            useSensor(PointerSensor),
-            useSensor(KeyboardSensor, {
-                coordinateGetter: sortableKeyboardCoordinates,
-            })
-        );
-
-        function handleDragOver(event: DragOverEvent) {
-            const { active, over } = event;
-
-            if (over && active.id !== over.id) {
-                setWidgetsOrder((items) => {
-                    const oldIndex = widgetsOrder.indexOf(active.id);
-                    const newIndex = widgetsOrder.indexOf(over.id);
-                    return arrayMove(items, oldIndex, newIndex);
-                });
-            }
-        }
-
-        function handleDragEnd() {
-        }
-
-        interface IDragableWidgetProps extends IWidgetProps {
-            id: string
-        }
-
-        const DragableWidget = (props: IDragableWidgetProps) => {
-            const {
-                isDragging,
-                attributes,
-                listeners,
-                setNodeRef,
-                transform,
-                transition,
-            } = useSortable({ id: props.id, disabled: !props.isEditMode });
-
-            const colSpan = (props.config as any)?.columns || 2;
-            const rowSpan = (props.config as any)?.rows || 2;
-
-            let customTransform = undefined;
-            if (transform) {
-                customTransform = {
-                    scaleX: isDragging ? 1.1 : 1,
-                    scaleY: isDragging ? 1.1 : 1,
-                    x: transform.x,
-                    y: transform.y
-                };
-            }
-
-            return (
-                <Box ref={setNodeRef} style={{
-                    transform: customTransform ? CSS.Transform.toString(customTransform) : undefined,
-                    transition,
-                    gridRowStart: `span ${rowSpan}`,
-                    gridColumnStart: `span ${colSpan}`,
-                }} {...attributes} {...listeners}>
-                    <Widget {...props} />
-                </Box>
-            );
-        };
-
-        return (
-            <Box sx={{
-                display: 'grid',
-                gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`,
-                gap: widgetSpacing,
-                width: `${widgetSize * numberOfColumns - widgetSpacing * 8}px`
-            }}>
-                <DndContext
-                    sensors={sensors}
-                    onDragOver={handleDragOver}
-                    onDragEnd={handleDragEnd}
-                    onDragCancel={handleDragEnd}>
-                    <SortableContext items={widgetsOrder} strategy={undefined}>
-                        {dashboard.widgets.sort((a, b) => {
-                            const oldIndex = widgetsOrder.indexOf(a.id);
-                            const newIndex = widgetsOrder.indexOf(b.id);
-                            return oldIndex - newIndex;
-                        }).map((widget) => (
-                            <DragableWidget
-                                id={widget.id}
-                                key={`widget-${widget.id.toString()}`}
-                                onRemove={() => handleWidgetRemove(widget)}
-                                isEditMode={isEditing}
-                                type={widget.type}
-                                config={widget.config}
-                                setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
-                        ))}
-                    </SortableContext>
-                </DndContext>
-            </Box>
-        );
-    };
 
     const handleOpenWidgetStore = () => {
         setIsWidgetStoreOpen(true);
@@ -422,7 +423,10 @@ const HomeOverview = () => {
                         {dashboards.length ?
                             dashboards.map((d, index) => (
                                 <TabPanel value={index.toString()} key={index.toString()}>
-                                    <RenderDashboard dashboard={editingDashboard || d} />
+                                    <RenderDashboard dashboard={editingDashboard || d}
+                                        isEditing={isEditing}
+                                        handleWidgetRemove={handleWidgetRemove}
+                                        handleWidgetSetConfig={handleWidgetSetConfig} />
                                 </TabPanel>
                             ))
                             : (

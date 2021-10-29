@@ -18,7 +18,7 @@ export interface IWidgetProps {
     isEditMode: boolean,
     type: widgetType,
     config?: object,
-    setConfig: (config: object) => Promise<void>,
+    setConfig: (config: object) => void,
     onRemove: () => void
 }
 
@@ -168,7 +168,7 @@ export interface IWidgetPart {
 interface IWidgetSharedProps {
     isEditMode: boolean,
     config: any,
-    setConfig: (config: object) => Promise<void>,
+    setConfig: (config: object) => void,
     onRemove: () => void
 }
 

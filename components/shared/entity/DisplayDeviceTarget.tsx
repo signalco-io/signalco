@@ -77,7 +77,7 @@ const ContactSelection = (props: { device?: IDeviceModel, target?: IDeviceTarget
     );
 }
 
-const DisplayDeviceTarget = observer((props: { target?: IDeviceTargetIncomplete, onChanged: (updated?: IDeviceTargetIncomplete) => void }) => {
+const DisplayDeviceTarget = observer((props: { target?: IDeviceTargetIncomplete, hideDevice?: boolean, hideContact?: boolean, onChanged: (updated?: IDeviceTargetIncomplete) => void }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [device, setDevice] = useState<IDeviceModel | undefined>(undefined);
     const [contactMenuAnchorEl, setContactMenuAnchorEl] = useState<null | HTMLElement>(null);
@@ -152,25 +152,29 @@ const DisplayDeviceTarget = observer((props: { target?: IDeviceTargetIncomplete,
 
     return (
         <Stack direction="row" spacing={1}>
-            <ButtonBase onClick={handleDevicesSelection} aria-controls="devicetarget-devices-select-menu" aria-haspopup="true">
-                <Chip label={isLoading ? <Skeleton width={160} variant="text" /> : deviceDisplayName} title={deviceDisplayName} />
-            </ButtonBase>
-            {Boolean(devicesMenuAnchorEl) &&
-                <Menu
-                    id="devicetarget-devices-select-menu"
-                    open={Boolean(devicesMenuAnchorEl)}
-                    anchorEl={devicesMenuAnchorEl}
-                    keepMounted
-                    onClose={handleDevicesSelectionClosed}
-                    PaperProps={{
-                        style: {
-                            maxHeight: ITEM_HEIGHT * 6.5,
-                            width: '30ch',
-                        },
-                    }}>
-                    <DeviceSelection target={props.target} onSelected={handleDevicesSelected} />
-                </Menu>}
-            {props.target?.deviceId && (
+            {(!props.hideDevice) && (
+                <>
+                    <ButtonBase onClick={handleDevicesSelection} aria-controls="devicetarget-devices-select-menu" aria-haspopup="true">
+                        <Chip label={isLoading ? <Skeleton width={160} variant="text" /> : deviceDisplayName} title={deviceDisplayName} />
+                    </ButtonBase>
+                    {Boolean(devicesMenuAnchorEl) &&
+                        <Menu
+                            id="devicetarget-devices-select-menu"
+                            open={Boolean(devicesMenuAnchorEl)}
+                            anchorEl={devicesMenuAnchorEl}
+                            keepMounted
+                            onClose={handleDevicesSelectionClosed}
+                            PaperProps={{
+                                style: {
+                                    maxHeight: ITEM_HEIGHT * 6.5,
+                                    width: '30ch',
+                                },
+                            }}>
+                            <DeviceSelection target={props.target} onSelected={handleDevicesSelected} />
+                        </Menu>}
+                </>
+            )}
+            {(props.target?.deviceId && !props.hideContact) && (
                 <>
                     <ButtonBase onClick={handleContactSelection} aria-controls="devicetarget-contact-select-menu" aria-haspopup="true">
                         <Chip label={props.target.contactName ?? "None"} title={`${props.target.channelName} | ${props.target.contactName}`} />

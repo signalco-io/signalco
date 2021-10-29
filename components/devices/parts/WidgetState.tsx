@@ -12,13 +12,13 @@ import { Box } from '@mui/system';
 const TvVisual = dynamic(() => import("../../icons/TvVisual"));
 const LightBulbVisual = dynamic(() => import("../../icons/LightBulbVisual"));
 
-const executeStateAction = async (device: IDeviceModel, channelName: string, contactName: string) => {
+export const executeStateAction = async (device: IDeviceModel, channelName: string, contactName: string, value?: string) => {
     const actions = [];
     actions.push({
         deviceId: device.id,
         channelName: channelName,
         contactName: contactName,
-        valueSerialized: undefined,
+        valueSerialized: value,
         delay: 0
     });
 
@@ -73,7 +73,7 @@ const executeStateAction = async (device: IDeviceModel, channelName: string, con
     });
 };
 
-const WidgetState = (props: { isEditMode: boolean, config: any, setConfig: (config: object) => Promise<void>, onRemove: () => void }) => {
+const WidgetState = (props: { isEditMode: boolean, config: any, setConfig: (config: object) => void, onRemove: () => void }) => {
     const { config, setConfig, isEditMode, onRemove } = props;
     const [device, setDevice] = useState<IDeviceModel | undefined>(undefined);
 
@@ -104,7 +104,7 @@ const WidgetState = (props: { isEditMode: boolean, config: any, setConfig: (conf
         !config?.target?.deviceId ||
         !config?.visual;
     const stateOptions = [
-        { name: 'target', label: 'Target', type: 'deviceTarget' },
+        { name: 'target', label: 'Target', type: 'deviceContactTarget' },
         { name: 'visual', label: 'Visual', type: 'select', default: 'lightbulb', data: [{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }] }
     ];
 

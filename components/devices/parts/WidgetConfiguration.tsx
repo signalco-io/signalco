@@ -29,7 +29,7 @@ export interface IWidgetConfigurationProps {
 }
 
 const useWidgetConfiguration = (options: IWidgetConfigurationOption[], config: object | undefined, onConfiguration: (config: any) => void) => {
-    const [configurationValues, setConfigurationValues] = useState<object>(config || {});
+    const [configurationValues, setConfigurationValues] = useState<{ [key: string]: any }>(config || {});
 
     const setValue = (name: string, value: any) => {
         const newValues: { [key: string]: any } = {
@@ -44,6 +44,14 @@ const useWidgetConfiguration = (options: IWidgetConfigurationOption[], config: o
     };
 
     const handleSaveConfiguration = () => {
+        // Include default values
+        options.filter(o => o.default).forEach(defaultOpt => {
+            if (Object.keys(configurationValues).indexOf(defaultOpt.name) < 0) {
+                configurationValues[defaultOpt.name] = defaultOpt.default;
+            }
+        })
+
+        // Submit
         onConfiguration(configurationValues);
     }
 
@@ -58,8 +66,12 @@ const useWidgetConfiguration = (options: IWidgetConfigurationOption[], config: o
 };
 
 const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, value: any, onChange: (value: any) => void }) => {
-    if (props.option.type === 'deviceTarget') {
+    if (props.option.type === 'deviceContactTarget') {
         return <DisplayDeviceTarget target={props.value} onChanged={t => props.onChange(t)} />
+    } else if (props.option.type === 'deviceTarget') {
+        return <DisplayDeviceTarget target={props.value} hideContact onChanged={t => props.onChange(t)} />
+    } else if (props.option.type === 'contactTarget') {
+        return <DisplayDeviceTarget target={{ ...props.value, deviceId: props.option.data }} hideDevice onChanged={t => props.onChange(t)} />
     } else if (props.option.type === 'select') {
         return <SelectItems
             value={props.value}
@@ -67,6 +79,8 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
             placeholder={props.option.label}
             fullWidth
             onChange={(item) => item && item.length && props.onChange(item[0])} />
+    } else if (props.option.type === 'static') {
+        return <Typography>{props.value}</Typography>
     }
 
     return <Typography>Unknown option type</Typography>;
