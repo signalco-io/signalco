@@ -7,7 +7,7 @@ import DevicesRepository from '../../../src/devices/DevicesRepository';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import WidgetCard from './WidgetCard';
 import { IWidgetConfigurationOption } from './WidgetConfiguration';
-import { executeStateAction } from './WidgetState';
+import { executeStateActions, StateAction } from './WidgetState';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
@@ -45,6 +45,7 @@ const WidgetShades = (props: { config: any, isEditMode: boolean, setConfig: (con
         { name: 'target', label: 'Target', type: 'deviceTarget' },
         { name: 'targetContactUp', label: 'Up button', type: 'contactTarget', data: device?.id },
         { name: 'targetContactDown', label: 'Down button', type: 'contactTarget', data: device?.id },
+        { name: 'stopAfter', label: 'Stop after', type: 'number', dataUnit: 'seconds', data: device?.id, optional: true },
         { name: 'columns', label: 'Width', type: 'static', default: 4 }
     ];
 
@@ -55,19 +56,43 @@ const WidgetShades = (props: { config: any, isEditMode: boolean, setConfig: (con
             return;
         }
 
+        const stopActions = (delay: number = 0) => {
+            return [
+                { deviceId: device.id, channelName: config?.targetContactDown?.channelName, contactName: config?.targetContactDown?.contactName, valueSerialized: 'false', delay },
+                { deviceId: device.id, channelName: config?.targetContactUp?.channelName, contactName: config?.targetContactUp?.contactName, valueSerialized: 'false', delay },
+            ];
+        }
+
+        const actions: StateAction[] = [];
         switch (direction) {
             case "up":
-                executeStateAction(device, config?.targetContactUp?.channelName, config?.targetContactUp?.contactName, 'true');
+                actions.push({
+                    deviceId: device.id,
+                    channelName: config?.targetContactUp?.channelName,
+                    contactName: config?.targetContactUp?.contactName,
+                    valueSerialized: 'true'
+                })
+                if (config.stopAfter) {
+                    actions.push.apply(actions, stopActions((Number.parseFloat(config.stopAfter) || 0) * 1000));
+                }
                 break;
             case "down":
-                executeStateAction(device, config?.targetContactDown?.channelName, config?.targetContactDown?.contactName, 'true');
+                actions.push({
+                    deviceId: device.id,
+                    channelName: config?.targetContactDown?.channelName,
+                    contactName: config?.targetContactDown?.contactName,
+                    valueSerialized: 'true'
+                })
+                if (config.stopAfter) {
+                    actions.push.apply(actions, stopActions((Number.parseFloat(config.stopAfter) || 0) * 1000));
+                }
                 break;
             default:
             case "stop":
-                executeStateAction(device, config?.targetContactDown?.channelName, config?.targetContactDown?.contactName, 'false');
-                executeStateAction(device, config?.targetContactUp?.channelName, config?.targetContactUp?.contactName, 'false');
+                actions.push.apply(actions, stopActions());
                 break;
         }
+        executeStateActions(actions);
     };
 
     return (

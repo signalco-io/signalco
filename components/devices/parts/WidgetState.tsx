@@ -12,16 +12,25 @@ import { Box } from '@mui/system';
 const TvVisual = dynamic(() => import("../../icons/TvVisual"));
 const LightBulbVisual = dynamic(() => import("../../icons/LightBulbVisual"));
 
-export const executeStateAction = async (device: IDeviceModel, channelName: string, contactName: string, value?: string) => {
-    const actions = [];
-    actions.push({
-        deviceId: device.id,
+export type StateAction = {
+    deviceId: string,
+    channelName: string,
+    contactName: string,
+    valueSerialized?: string,
+    delay?: number
+};
+
+export const executeStateAction = async (deviceId: string, channelName: string, contactName: string, valueSerialized?: string, delay?: number) => {
+    return await executeStateActions([{
+        deviceId: deviceId,
         channelName: channelName,
         contactName: contactName,
-        valueSerialized: value,
-        delay: 0
-    });
+        valueSerialized: valueSerialized,
+        delay: delay
+    }]);
+}
 
+export const executeStateActions = async (actions: StateAction[]) => {
     // Execute all actions
     const conducts = [];
     for (const action of actions) {
@@ -110,7 +119,7 @@ const WidgetState = (props: { isEditMode: boolean, config: any, setConfig: (conf
             return;
         }
 
-        executeStateAction(device, config?.target?.channelName, config?.target?.contactName);
+        executeStateAction(device.id, config?.target?.channelName, config?.target?.contactName);
     };
 
     return (

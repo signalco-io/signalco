@@ -50,7 +50,15 @@ const WidgetCard = (props: IWidgetCardProps) => {
 
     const handleOnConfigureClicked = () => {
         setIsConfiguring(true);
+        popupState.close();
     };
+
+    const handleOnRemove = () => {
+        popupState.close();
+        if (onRemove) {
+            onRemove();
+        }
+    }
 
     return (
         <>
@@ -77,7 +85,7 @@ const WidgetCard = (props: IWidgetCardProps) => {
                     </MenuItem>
                 )}
                 {onRemove && (
-                    <MenuItem onClick={onRemove}>
+                    <MenuItem onClick={handleOnRemove}>
                         <ListItemIcon>
                             <Delete />
                         </ListItemIcon>

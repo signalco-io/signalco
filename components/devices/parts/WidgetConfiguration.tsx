@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import ConfigurationDialog from "../../shared/dialog/ConfigurationDialog";
 import DisplayDeviceTarget from "../../shared/entity/DisplayDeviceTarget";
@@ -9,7 +9,9 @@ export interface IWidgetConfigurationOption {
     label: string,
     type: string,
     default?: any,
-    data?: any
+    dataUnit?: string,
+    data?: any,
+    optional?: boolean
 }
 
 interface IWidgetConfigurationDialogProps {
@@ -81,6 +83,12 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
             onChange={(item) => item && item.length && props.onChange(item[0])} />
     } else if (props.option.type === 'static') {
         return <Typography>{props.value}</Typography>
+    } else if (props.option.type === 'number') {
+        return <OutlinedInput
+            value={props.value}
+            placeholder="Never"
+            onChange={e => props.onChange(e.target.value)}
+            endAdornment={props.option.dataUnit && (<InputAdornment position="end">{props.option.dataUnit}</InputAdornment>)} />
     }
 
     return <Typography>Unknown option type</Typography>;
@@ -103,7 +111,7 @@ const WidgetConfiguration = (props: IWidgetConfigurationProps) => {
             <Stack spacing={2}>
                 {configProps.options.map(opt => (
                     <Box key={opt.name}>
-                        <Typography>{opt.label}</Typography>
+                        <Typography>{opt.label}{opt.optional && " (optional)"}</Typography>
                         <WidgetConfigurationOption
                             option={opt}
                             value={configProps.values[opt.name] || opt.default}
