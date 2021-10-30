@@ -1,4 +1,19 @@
 /*
+    convert a Number to a two character hex string
+    must round, or we will end up with more digits than expected (2)
+    note: can also result in single digit, which will need to be padded with a 0 to the left
+    @param: num         => the number to conver to hex
+    @returns: string    => the hex representation of the provided number
+*/
+function int_to_hex(num: number)
+{
+    var hex = Math.round(num).toString(16);
+    if (hex.length == 1)
+        hex = '0' + hex;
+    return hex;
+}
+
+/*
     blend two colors to create the color that is at the percentage away from the first color
     this is a 5 step process
         1: validate input
@@ -53,19 +68,4 @@ export default function blendColors(color1: string, color2: string, percentage: 
 
     // 5: convert to hex
     return '#' + int_to_hex(color3[0]) + int_to_hex(color3[1]) + int_to_hex(color3[2]);
-}
-
-/*
-    convert a Number to a two character hex string
-    must round, or we will end up with more digits than expected (2)
-    note: can also result in single digit, which will need to be padded with a 0 to the left
-    @param: num         => the number to conver to hex
-    @returns: string    => the hex representation of the provided number
-*/
-function int_to_hex(num: number)
-{
-    var hex = Math.round(num).toString(16);
-    if (hex.length == 1)
-        hex = '0' + hex;
-    return hex;
 }

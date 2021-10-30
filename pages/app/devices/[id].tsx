@@ -84,8 +84,7 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
     }
 
     useEffect(() => {
-        if ((props.contact.dataType === 'colortemp' ||
-            props.contact.dataType === 'double') &&
+        if ((props.contact.dataType === 'colortemp' || props.contact.dataType === 'double') &&
             typeof sliderValue === 'number') {
             if (props.contact.dataType === 'colortemp') {
                 setSliderColor(blendColors('#ffffff', '#C47A10', sliderValue));
