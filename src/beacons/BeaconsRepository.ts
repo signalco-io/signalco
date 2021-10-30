@@ -6,6 +6,8 @@ export interface IBeaconModel {
     version?: string;
     stateTimeStamp?: Date;
     registeredTimeStamp: Date;
+    availableWorkerServices?: string[];
+    runningWorkerServices?: string[];
 }
 
 class BeaconModel implements IBeaconModel {
@@ -13,12 +15,12 @@ class BeaconModel implements IBeaconModel {
     version?: string;
     stateTimeStamp?: Date;
     registeredTimeStamp: Date;
+    availableWorkerServices?: string[];
+    runningWorkerServices?: string[];
 
-    constructor(id: string, registeredTimeStamp: Date, version?: string, stateTimeStamp?: Date) {
+    constructor(id: string, registeredTimeStamp: Date) {
         this.id = id;
         this.registeredTimeStamp = registeredTimeStamp;
-        this.version = version;
-        this.stateTimeStamp = stateTimeStamp;
     }
 }
 
@@ -27,13 +29,20 @@ class SignalBeaconDto {
     registeredTimeStamp?: string;
     version?: string;
     stateTimeStamp?: Date;
+    availableWorkerServices?: string[];
+    runningWorkerServices?: string[];
 
     static FromDto(dto: SignalBeaconDto): IBeaconModel {
         if (dto.id == null || dto.registeredTimeStamp == null) {
             throw Error("Invalid SignalBeaconDto - missing required properties.");
         }
 
-        return new BeaconModel(dto.id, new Date(dto.registeredTimeStamp), dto.version, dto.stateTimeStamp);
+        const model = new BeaconModel(dto.id, new Date(dto.registeredTimeStamp));
+        model.version = dto.version;
+        model.stateTimeStamp = dto.stateTimeStamp;
+        model.availableWorkerServices = dto.availableWorkerServices;
+        model.runningWorkerServices = dto.runningWorkerServices;
+        return model;
     }
 }
 
@@ -60,6 +69,18 @@ export default class BeaconsRepository {
 
     static async restartStationAsync(id: string): Promise<void> {
         await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "restartStation"});
+    }
+
+    static async startWorkerServiceAsync(id: string, workerServiceName: string): Promise<void> {
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "workerService:start"}, workerServiceName);
+    }
+
+    static async stopWorkerServiceAsync(id: string, workerServiceName: string): Promise<void> {
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "workerService:stop"}, workerServiceName);
+    }
+
+    static async beginDiscoveryAsync(id: string): Promise<void> {
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "beginDiscovery"});
     }
 
     static async getBeaconAsync(id: string): Promise<IBeaconModel | undefined> {

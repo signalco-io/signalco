@@ -1,102 +1,85 @@
 import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Grid, Menu, MenuItem, OutlinedInput, Paper, Popover, Skeleton, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
-import AppLayout from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import { observer } from 'mobx-react-lite';
 import ProcessesRepository, { IProcessModel } from '../../../src/processes/ProcessesRepository';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import NoDataPlaceholder from '../../../components/shared/indicators/NoDataPlaceholder';
 import AddSharpIcon from '@mui/icons-material/AddSharp';
 import { makeAutoObservable } from 'mobx';
-import { DeviceModel, IDeviceModel } from '../../../src/devices/Device';
+import { DeviceModel, IDeviceTargetIncomplete } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
-import { selectMany } from '../../../src/helpers/ArrayHelpers';
-
-interface IDeviceContactTarget {
-    Channel: string | undefined;
-    Contact: string | undefined;
-}
-
-interface IDeviceStateTarget extends IDeviceContactTarget {
-    Identifier: string | undefined;
-}
-
-class DeviceStateTarget implements IDeviceStateTarget {
-    Identifier: string | undefined;
-    Channel: string | undefined;
-    Contact: string | undefined;
-
-    constructor(identifier?: string, channel?: string, contact?: string) {
-        this.Identifier = identifier;
-        this.Channel = channel;
-        this.Contact = contact;
-    }
-}
+import DisplayDeviceTarget from '../../../components/shared/entity/DisplayDeviceTarget';
 
 interface IDeviceStateValue {
-    Value?: any
+    value?: any
 }
 
 interface IDeviceTargetState {
-    Target: IDeviceStateTarget;
-    Value: any | undefined;
+    target?: IDeviceTargetIncomplete;
+    value?: any;
 }
 
-const isIDeviceStateValue = (arg: any): arg is IDeviceStateValue => arg?.Value !== undefined;
-const isIConditionDeviceStateTarget = (arg: any): arg is IConditionDeviceStateTarget => arg?.Target !== undefined;
-const isIDeviceStateTarget = (arg: any): arg is IDeviceStateTarget => arg?.Identifier !== undefined && typeof arg?.Contact !== 'undefined' && typeof arg?.Channel !== 'undefined';
+const isIDeviceStateValue = (arg: any): arg is IDeviceStateValue => arg?.value !== undefined;
+const isIConditionDeviceStateTarget = (arg: any): arg is IConditionDeviceStateTarget => arg?.target !== undefined;
+const isIDeviceStateTarget = (arg: any): arg is IDeviceTargetIncomplete => arg?.deviceId !== undefined && typeof arg?.contact !== 'undefined' && typeof arg?.channel !== 'undefined';
 
-interface IDeviceStateTrigger extends IDeviceStateTarget { }
+interface IDeviceStateTrigger {
+    deviceId?: string;
+    channelName?: string;
+    contactName?: string;
+}
 
 class DeviceStateTrigger implements IDeviceStateTrigger {
-    Identifier: string | undefined;
-    Channel: string | undefined;
-    Contact: string | undefined;
+    deviceId?: string;
+    channelName?: string;
+    contactName?: string;
 }
 
 interface IConditionDeviceStateTarget {
-    Target: IDeviceStateTarget;
+    target: IDeviceTargetIncomplete;
 }
 
 interface IConditionValueComparison {
-    Operation?: string,
-    Left: IDeviceStateValue | IConditionDeviceStateTarget | undefined,
-    ValueOperation?: string,
-    Right: IDeviceStateValue | IConditionDeviceStateTarget | undefined,
+    operation?: string,
+    left: IDeviceStateValue | IConditionDeviceStateTarget | undefined,
+    valueOperation?: string,
+    right: IDeviceStateValue | IConditionDeviceStateTarget | undefined,
 }
 
 interface ICondition {
-    Operation?: string,
-    Operations: Array<IConditionValueComparison | ICondition>
+    operation?: string,
+    operations: Array<IConditionValueComparison | ICondition>
 }
 
 class Condition implements ICondition {
-    Operation?: string | undefined;
-    Operations: (IConditionValueComparison | ICondition)[] = [];
+    operation?: string | undefined;
+    operations: (IConditionValueComparison | ICondition)[] = [];
 }
 
 const isIConditionValueComparison = (arg: any): arg is IConditionValueComparison => arg.Left !== undefined && arg.Right !== undefined;
-const isICondition = (arg: any): arg is ICondition => arg.Operations !== undefined;
+const isICondition = (arg: any): arg is ICondition => arg.operations !== undefined;
 
 interface IConduct extends IDeviceTargetState {
 }
 
 class Conduct implements IConduct {
-    Target: IDeviceStateTarget;
-    Value: any;
+    target?: IDeviceTargetIncomplete;
+    value: any;
 
-    constructor(target?: IDeviceStateTarget, value?: any) {
-        this.Target = target || new DeviceStateTarget();
-        this.Value = value;
+    constructor(target?: IDeviceTargetIncomplete, value?: any) {
+        this.target = target;
+        this.value = value;
 
         makeAutoObservable(this);
     }
 }
 
 function parseTrigger(trigger: any): IDeviceStateTrigger | undefined {
-    if (typeof trigger.Channel === 'undefined' ||
-        typeof trigger.Identifier === 'undefined' ||
-        typeof trigger.Contact === 'undefined') {
+    if (typeof trigger.channel === 'undefined' ||
+        typeof trigger.deviceId === 'undefined' ||
+        typeof trigger.contact === 'undefined') {
         return undefined;
     }
 
@@ -114,200 +97,24 @@ function parseConduct(conduct: any): IConduct | undefined {
 function parseProcessConfiguration(configJson: string | undefined) {
     const config = JSON.parse(configJson ?? "");
 
-    const triggers = typeof config.Triggers !== 'undefined' && Array.isArray(config.Triggers)
-        ? (config.Triggers.map((t: any) => parseTrigger(t)) as IDeviceStateTrigger[])
+    const triggers = typeof config.triggers !== 'undefined' && Array.isArray(config.triggers)
+        ? (config.triggers.map((t: any) => parseTrigger(t)) as IDeviceStateTrigger[])
         : new Array<IDeviceStateTrigger>();
-    const condition = typeof config.Condition !== 'undefined'
-        ? parseCondition(config.Condition) as ICondition
+    const condition = typeof config.condition !== 'undefined'
+        ? parseCondition(config.condition) as ICondition
         : {} as ICondition | undefined;
-    const conducts = typeof config.Conducts !== 'undefined' && Array.isArray(config.Conducts)
-        ? config.Conducts.map((t: any) => parseConduct(t)) as IConduct[]
+    const conducts = typeof config.conducts !== 'undefined' && Array.isArray(config.conducts)
+        ? config.conducts.map((t: any) => parseConduct(t)) as IConduct[]
         : new Array<IConduct>();
 
     const configMapped = makeAutoObservable({
-        Triggers: triggers.filter(t => typeof t !== undefined),
-        Condition: condition,
-        Conducts: conducts.filter(c => typeof c !== undefined)
+        triggers: triggers.filter(t => typeof t !== undefined),
+        condition: condition,
+        conducts: conducts.filter(c => typeof c !== undefined)
     });
 
     return configMapped;
 }
-
-const DisplayDeviceTarget = observer((props: { target?: IDeviceStateTarget, onChanged: (updated: IDeviceStateTarget) => void }) => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [device, setDevice] = useState<IDeviceModel | undefined>(undefined);
-    const [contactMenuAnchorEl, setContactMenuAnchorEl] = useState<null | HTMLElement>(null);
-    const [devicesMenuAnchorEl, setDevicesMenuAnchorEl] = useState<null | HTMLElement>(null);
-
-    useEffect(() => {
-        (async () => {
-            try {
-                setIsLoading(true);
-                if (props.target?.Identifier) {
-                    const device = await DevicesRepository.getDeviceByIdentifierAsync(props.target.Identifier);
-                    if (device) {
-                        setDevice(device);
-                    }
-                } else {
-                    console.debug("No device to load. Target identifier: ", props.target?.Identifier);
-                }
-            }
-            catch (err: any) {
-                console.warn("Failed to load device target", props.target, err);
-            }
-            finally {
-                setIsLoading(false);
-            }
-        })();
-    }, [props.target, props.target?.Identifier]);
-
-    const DeviceSelection = ({ onSelected }: { onSelected: (device: IDeviceModel | undefined) => void }) => {
-        const [devices, setDevices] = useState<IDeviceModel[] | undefined>();
-
-        useEffect(() => {
-            (async () => {
-                try {
-                    const devices = await DevicesRepository.getDevicesAsync();
-                    setDevices(devices);
-                } catch (err: any) {
-                    console.warn("Failed to load device selection devices.", err);
-                } finally {
-                    // TODO: Set loading false
-                }
-            })();
-        }, []);
-
-        if (typeof devices === 'undefined')
-            return <>
-                <MenuItem disabled>Loading...</MenuItem>
-            </>;
-
-        return (
-            <>
-                <MenuItem onClick={() => onSelected(undefined)} selected={typeof props.target?.Identifier === 'undefined'}>None</MenuItem>
-                {devices.map(d =>
-                    <MenuItem
-                        key={d.identifier}
-                        onClick={() => onSelected(d)}
-                        selected={props.target?.Identifier === d.identifier}>
-                        {`${d.alias}`}
-                    </MenuItem>)}
-            </>
-        );
-    };
-
-    const ContactSelection = ({ onSelected }: { onSelected: (contact: IDeviceContactTarget | undefined) => void }) => {
-        if (typeof device === 'undefined')
-            return <>
-                <MenuItem disabled>Select device first</MenuItem>
-            </>;
-
-        const items = selectMany(device.endpoints, e => e.contacts.map(c => {
-            return {
-                Contact: c.name,
-                Channel: e.channel
-            } as IDeviceContactTarget
-        }));
-
-        return (
-            <>
-                <MenuItem onClick={() => onSelected(undefined)} selected={typeof props.target?.Channel === 'undefined' || typeof props.target?.Contact === 'undefined'}>None</MenuItem>
-                {items.map(i =>
-                    <MenuItem
-                        key={`${i.Channel}-${i.Contact}`}
-                        onClick={() => onSelected(i)}
-                        selected={props.target?.Contact === i.Contact && props.target?.Channel === i.Channel}>
-                        {`${i.Contact} (${i.Channel})`}
-                    </MenuItem>)}
-            </>
-        );
-    }
-
-    const handleDevicesSelection = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setDevicesMenuAnchorEl(event.currentTarget);
-    }
-
-    const handleDevicesSelected = (device: IDeviceModel | undefined) => {
-        // Retrieve available contact, set undefined if no matching
-        let channel = props.target?.Channel;
-        let contact = props.target?.Contact;
-        if (typeof device?.endpoints.filter(e => e.channel === channel)[0]?.contacts.filter(c => c.name === contact) === 'undefined') {
-            channel = undefined;
-            contact = undefined;
-        }
-
-        props.onChanged({
-            Identifier: device?.identifier,
-            Channel: channel,
-            Contact: contact
-        });
-        handleDevicesSelectionClosed();
-    }
-
-    const handleDevicesSelectionClosed = () => {
-        setDevicesMenuAnchorEl(null);
-    }
-
-    const handleContactSelection = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setContactMenuAnchorEl(event.currentTarget);
-    }
-
-    const handleContactSelected = (contact: IDeviceContactTarget | undefined) => {
-        props.onChanged({
-            Identifier: props.target?.Identifier,
-            Channel: contact?.Channel,
-            Contact: contact?.Contact
-        });
-        handleContactSelectionClosed();
-    }
-
-    const handleContactSelectionClosed = () => {
-        setContactMenuAnchorEl(null);
-    }
-
-    const ITEM_HEIGHT = 48;
-
-    return (
-        <Stack direction="row" spacing={1}>
-            <ButtonBase onClick={handleDevicesSelection} aria-controls="devicetarget-devices-select-menu" aria-haspopup="true">
-                <Chip label={isLoading ? <Skeleton width={160} variant="text" /> : ((device?.alias ?? props.target?.Identifier) ?? "None")} title={props.target?.Identifier} />
-            </ButtonBase>
-            {Boolean(devicesMenuAnchorEl) &&
-                <Menu
-                    id="devicetarget-devices-select-menu"
-                    open={Boolean(devicesMenuAnchorEl)}
-                    anchorEl={devicesMenuAnchorEl}
-                    keepMounted
-                    onClose={handleDevicesSelectionClosed}
-                    PaperProps={{
-                        style: {
-                            maxHeight: ITEM_HEIGHT * 6.5,
-                            width: '30ch',
-                        },
-                    }}>
-                    <DeviceSelection onSelected={handleDevicesSelected} />
-                </Menu>}
-            {props.target?.Identifier !== undefined && (
-                <>
-                    <ButtonBase onClick={handleContactSelection} aria-controls="devicetarget-contact-select-menu" aria-haspopup="true">
-                        <Chip label={props.target.Contact ?? "None"} title={`${props.target.Channel} | ${props.target.Contact}`} />
-                    </ButtonBase>
-                    <>
-                        {Boolean(contactMenuAnchorEl) &&
-                            <Menu
-                                id="devicetarget-contact-select-menu"
-                                open={Boolean(contactMenuAnchorEl)}
-                                anchorEl={contactMenuAnchorEl}
-                                keepMounted
-                                onClose={handleContactSelectionClosed}>
-                                <ContactSelection onSelected={handleContactSelected} />
-                            </Menu>}
-                    </>
-                </>
-            )}
-        </Stack>
-    );
-});
 
 const DisplayValue = observer((props: { value: any | undefined, dataType: string, onChanged: (value: any | undefined) => void }) => {
     const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
@@ -330,11 +137,11 @@ const DisplayValue = observer((props: { value: any | undefined, dataType: string
     };
 
     const handleClosedApplyValue = () => {
-        let submitValue: any = value;
+        let submitvalue: any = value;
         if (dataType === 'double' || dataType === 'colortemp') {
-            submitValue = parseFloat(value) || 0;
+            submitvalue = parseFloat(value) || 0;
         }
-        handleEditOptionSelected(submitValue);
+        handleEditOptionSelected(submitvalue);
         handleClosed();
     };
 
@@ -399,38 +206,38 @@ const DisplayConditionComparisonValueOperation = (props: { valueOperation?: stri
 };
 
 const DisplayConditionValueComparison = (props: { comparison: IConditionValueComparison, onChanged: (updated: IConditionValueComparison) => void }) => {
-    const handleChanged = (side: "left" | "right", updated: IDeviceStateTarget | any | undefined) => {
+    const handleChanged = (side: "left" | "right", updated?: IDeviceTargetIncomplete | any | undefined) => {
         const stateValue = isIDeviceStateValue(updated) ? updated : undefined;
         const deviceTarget = isIDeviceStateTarget(updated) ? updated : undefined;
-        let conditionDeviceStateTarget: IConditionDeviceStateTarget | undefined = undefined;
+        let conditionDeviceStatetarget: IConditionDeviceStateTarget | undefined = undefined;
         if (deviceTarget !== undefined)
-            conditionDeviceStateTarget = { Target: deviceTarget };
+            conditionDeviceStatetarget = { target: deviceTarget };
 
         props.onChanged({
-            Left: side === "left" ? (stateValue ?? conditionDeviceStateTarget) : props.comparison.Left,
-            Right: side === "right" ? updated : props.comparison.Right,
-            Operation: props.comparison.Operation,
-            ValueOperation: props.comparison.ValueOperation
+            left: side === "left" ? (stateValue ?? conditionDeviceStatetarget) : props.comparison.left,
+            right: side === "right" ? updated : props.comparison.right,
+            operation: props.comparison.operation,
+            valueOperation: props.comparison.valueOperation
         });
     };
 
     return (
         <Stack alignItems="center" spacing={1} direction="row">
-            {props.comparison.Operation &&
-                <div>{props.comparison.Operation}</div>}
+            {props.comparison.operation &&
+                <div>{props.comparison.operation}</div>}
             {
-                isIDeviceStateValue(props.comparison.Left)
-                    ? <DisplayValue dataType="any" value={props.comparison.Left.Value} onChanged={(updated) => handleChanged("left", updated)} />
-                    : (isIConditionDeviceStateTarget(props.comparison.Left)
-                        ? <DisplayDeviceTarget target={props.comparison.Left.Target} onChanged={(updated) => handleChanged("left", updated)} />
+                isIDeviceStateValue(props.comparison.left)
+                    ? <DisplayValue dataType="any" value={props.comparison.left.value} onChanged={(updated) => handleChanged("left", updated)} />
+                    : (isIConditionDeviceStateTarget(props.comparison.left)
+                        ? <DisplayDeviceTarget target={props.comparison.left.target} onChanged={(updated) => handleChanged("left", updated)} />
                         : <span>Unknown</span>)
             }
-            <DisplayConditionComparisonValueOperation valueOperation={props.comparison.ValueOperation} />
+            <DisplayConditionComparisonValueOperation valueOperation={props.comparison.valueOperation} />
             {
-                isIDeviceStateValue(props.comparison.Right)
-                    ? <DisplayValue dataType="any" value={props.comparison.Right.Value} onChanged={(updated) => handleChanged("right", updated)} />
-                    : (isIConditionDeviceStateTarget(props.comparison.Right)
-                        ? <DisplayDeviceTarget target={props.comparison.Right.Target} onChanged={(updated) => handleChanged("right", updated)} />
+                isIDeviceStateValue(props.comparison.right)
+                    ? <DisplayValue dataType="any" value={props.comparison.right.value} onChanged={(updated) => handleChanged("right", updated)} />
+                    : (isIConditionDeviceStateTarget(props.comparison.right)
+                        ? <DisplayDeviceTarget target={props.comparison.right.target} onChanged={(updated) => handleChanged("right", updated)} />
                         : <span>Unknown</span>)
             }
         </Stack>
@@ -463,27 +270,27 @@ const DisplayCondition = observer((props: { condition: ICondition, onChanged: (u
         <Stack direction="row">
             {!props.isTopLevel && (
                 <ButtonBase onClick={handleConditionOperationSelection} aria-controls="condition-operation-select-menu" aria-haspopup="true">
-                    <Chip label={props.condition.Operation?.toString() ?? "None"} title={`${props.condition.Operation}`} />
+                    <Chip label={props.condition.operation?.toString() ?? "None"} title={`${props.condition.operation}`} />
                 </ButtonBase>
             )}
             <Stack>
-                {props.condition.Operations.map((op, i) => {
+                {props.condition.operations.map((op, i) => {
                     if (isICondition(op))
                         return <DisplayCondition key={i} condition={op} isTopLevel={false} onChanged={(updated) => {
-                            const updatedOperations = [...props.condition.Operations];
+                            const updatedOperations = [...props.condition.operations];
                             updatedOperations[i] = updated;
                             props.onChanged({
-                                Operation: props.condition.Operation,
-                                Operations: updatedOperations
+                                operation: props.condition.operation,
+                                operations: updatedOperations
                             });
                         }} />;
                     else if (isIConditionValueComparison(op))
                         return <DisplayConditionValueComparison key={i} comparison={op as IConditionValueComparison} onChanged={(updated) => {
-                            const updatedOperations = [...props.condition.Operations];
+                            const updatedOperations = [...props.condition.operations];
                             updatedOperations[i] = updated;
                             props.onChanged({
-                                Operation: props.condition.Operation,
-                                Operations: updatedOperations
+                                operation: props.condition.operation,
+                                operations: updatedOperations
                             });
                         }} />;
                     else
@@ -494,25 +301,28 @@ const DisplayCondition = observer((props: { condition: ICondition, onChanged: (u
     );
 });
 
-const DisplayDeviceStateValue = observer((props: { target: IDeviceStateTarget, value: any | undefined, onChanged: (updated: IDeviceTargetState) => void }) => {
+const DisplayDeviceStateValue = observer((props: { target?: IDeviceTargetIncomplete, value: any | undefined, onChanged: (updated?: IDeviceTargetState) => void }) => {
     const [device, setDevice] = useState<DeviceModel | undefined>();
+    const {
+        target
+    } = props;
 
     useEffect(() => {
         const loadDevice = async () => {
-            if (props.target.Identifier) {
-                setDevice(await DevicesRepository.getDeviceByIdentifierAsync(props.target.Identifier));
+            if (target?.deviceId) {
+                setDevice(await DevicesRepository.getDeviceByIdentifierAsync(target.deviceId));
             } else {
                 // TODO: Display error if device identifier is not provided
             }
         };
 
         loadDevice();
-    }, [props.target.Identifier]);
+    }, [target?.deviceId]);
 
-    const contact = props.target.Contact && props.target.Channel
+    const contact = target?.channelName && target?.contactName
         ? device?.getContact({
-            contactName: props.target.Contact,
-            channelName: props.target.Channel,
+            contactName: target?.contactName,
+            channelName: target?.channelName,
             deviceId: device.id
         })
         : null;
@@ -520,10 +330,10 @@ const DisplayDeviceStateValue = observer((props: { target: IDeviceStateTarget, v
     return (
         <Grid container alignItems="center" spacing={1}>
             <Grid item>
-                <DisplayDeviceTarget target={props.target} onChanged={(value) => {
+                <DisplayDeviceTarget target={target} onChanged={(value) => {
                     props.onChanged({
-                        Target: value,
-                        Value: typeof value.Contact !== 'undefined' ? props.value : undefined
+                        target: value,
+                        value: typeof value?.contactName !== 'undefined' ? props.value : undefined
                     });
                 }} />
             </Grid>
@@ -534,8 +344,8 @@ const DisplayDeviceStateValue = observer((props: { target: IDeviceStateTarget, v
                 {contact ?
                     <DisplayValue dataType={contact.dataType} value={props.value} onChanged={(value) => {
                         props.onChanged({
-                            Target: props.target,
-                            Value: typeof props.target.Contact !== 'undefined' ? value : undefined
+                            target: target,
+                            value: typeof target?.contactName !== 'undefined' ? value : undefined
                         });
                     }} />
                     : <Skeleton />}
@@ -551,9 +361,9 @@ const ProcessDetails = () => {
     const [error, setError] = useState();
     const [process, setProcess] = useState<IProcessModel | undefined>();
     const [processConfig, setProcessConfig] = useState<{
-        Triggers: IDeviceStateTrigger[],
-        Condition: ICondition | undefined,
-        Conducts: IConduct[]
+        triggers: IDeviceStateTrigger[],
+        condition: ICondition | undefined,
+        conducts: IConduct[]
     } | undefined>(undefined);
 
     useEffect(() => {
@@ -588,10 +398,13 @@ const ProcessDetails = () => {
         ProcessesRepository.saveProcessConfigurationAsync(process?.id, configSerialized);
     };
 
-    const handleTriggerChange = (updated: IDeviceStateTrigger, index: number) => {
+    const handleTriggerChange = (index: number, updated?: IDeviceStateTrigger) => {
         // TODO: Use action to change state
-        if (processConfig)
-            processConfig.Triggers[index] = updated;
+        if (processConfig) {
+            if (updated)
+                processConfig.triggers[index] = updated;
+            else processConfig.triggers.splice(index, 1);
+        }
 
         persistProcessAsync();
     }
@@ -600,18 +413,28 @@ const ProcessDetails = () => {
         // TODO: Use action to change state
         console.log(updated);
         if (processConfig)
-            processConfig.Condition = updated;
+            processConfig.condition = updated;
 
         persistProcessAsync();
     };
 
-    const handleValueChanged = (updated: IDeviceTargetState, index: number) => {
+    const handleValueChanged = (index: number, updated?: IDeviceTargetState) => {
         // TODO: Use action to change state
         if (processConfig) {
-            processConfig.Conducts[index].Value = updated.Value;
-            processConfig.Conducts[index].Target.Channel = updated.Target.Channel;
-            processConfig.Conducts[index].Target.Contact = updated.Target.Contact;
-            processConfig.Conducts[index].Target.Identifier = updated.Target.Identifier;
+            processConfig.conducts[index].value = updated?.value;
+            const target = processConfig.conducts[index].target;
+            if (typeof target !== 'undefined' &&
+                updated?.target?.deviceId) {
+                target.channelName = updated.target.channelName;
+                target.contactName = updated.target.contactName;
+                target.deviceId = updated.target.deviceId;
+            } else if (updated?.target?.deviceId) {
+                processConfig.conducts[index].target = {
+                    channelName: updated.target?.channelName,
+                    contactName: updated.target?.contactName,
+                    deviceId: updated.target?.deviceId,
+                }
+            }
         }
 
         persistProcessAsync();
@@ -619,19 +442,19 @@ const ProcessDetails = () => {
 
     const handleAddConduct = () => {
         if (processConfig)
-            processConfig.Conducts.push(new Conduct());
+            processConfig.conducts.push(new Conduct());
     };
 
     const handleAddTrigger = () => {
         if (processConfig)
-            processConfig.Triggers.push(new DeviceStateTrigger());
+            processConfig.triggers.push(new DeviceStateTrigger());
     }
 
     const handleAddCondition = () => {
         if (processConfig) {
-            const condition = processConfig.Condition;
+            const condition = processConfig.condition;
             if (condition)
-                condition.Operations.push(new Condition());
+                condition.operations.push(new Condition());
         }
     }
 
@@ -660,8 +483,8 @@ const ProcessDetails = () => {
                                         <Stack spacing={1}>
                                             {isLoading && <DisplayItemPlaceholder />}
                                             {!isLoading &&
-                                                (processConfig?.Triggers?.length
-                                                    ? processConfig.Triggers.map((t, i) => <DisplayDeviceTarget key={`trigger${i}`} target={t} onChanged={(updated) => handleTriggerChange(updated, i)} />)
+                                                (processConfig?.triggers?.length
+                                                    ? processConfig.triggers.map((t, i) => <DisplayDeviceTarget key={`trigger${i}`} target={t.deviceId ? { deviceId: t.deviceId, contactName: t.contactName, channelName: t.channelName } : undefined} onChanged={(updated) => handleTriggerChange(i, updated)} />)
                                                     : <NoDataPlaceholder content="No triggers" />)}
                                             <Button fullWidth startIcon={<AddSharpIcon />} disabled={isLoading} onClick={handleAddTrigger}>Add trigger</Button>
                                         </Stack>
@@ -679,8 +502,8 @@ const ProcessDetails = () => {
                                         <Stack spacing={1}>
                                             {isLoading && <><DisplayItemPlaceholder /><DisplayItemPlaceholder /><DisplayItemPlaceholder /></>}
                                             {!isLoading &&
-                                                (typeof processConfig?.Condition !== 'undefined'
-                                                    ? <DisplayCondition isTopLevel condition={processConfig.Condition} onChanged={handleConditionChange} />
+                                                (typeof processConfig?.condition !== 'undefined'
+                                                    ? <DisplayCondition isTopLevel condition={processConfig.condition} onChanged={handleConditionChange} />
                                                     : <NoDataPlaceholder content="No condition" />)}
                                             <Button fullWidth startIcon={<AddSharpIcon />} disabled={isLoading} onClick={handleAddCondition}>Add condition</Button>
                                         </Stack>
@@ -698,8 +521,8 @@ const ProcessDetails = () => {
                                         <Stack spacing={1}>
                                             {isLoading && <><DisplayItemPlaceholder /><DisplayItemPlaceholder /></>}
                                             {!isLoading &&
-                                                (processConfig?.Conducts?.length
-                                                    ? processConfig.Conducts.map((c, i) => <DisplayDeviceStateValue key={`value${i}`} target={c.Target} value={c.Value} onChanged={(u) => handleValueChanged(u, i)} />)
+                                                (processConfig?.conducts?.length
+                                                    ? processConfig.conducts.map((c, i) => <DisplayDeviceStateValue key={`value${i}`} target={c.target} value={c.value} onChanged={(u) => handleValueChanged(i, u)} />)
                                                     : <NoDataPlaceholder content="No conducts" />)}
                                             <Button fullWidth startIcon={<AddSharpIcon />} disabled={isLoading} onClick={handleAddConduct}>Add conduct</Button>
                                         </Stack>
@@ -714,6 +537,6 @@ const ProcessDetails = () => {
     );
 }
 
-ProcessDetails.layout = AppLayout;
+ProcessDetails.layout = AppLayoutWithAuth;
 
 export default observer(ProcessDetails);

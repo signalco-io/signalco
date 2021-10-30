@@ -33,7 +33,7 @@ const navItems = [
   { label: 'Beacons', path: '/app/beacons', icon: DeviceHubSharpIcon }
 ];
 
-const UserAvatar = ({ user }: { user: User | undefined }) => {
+const UserAvatar = ({ user }: { user?: User }) => {
   if (user === undefined) {
     return (<Avatar variant="circular" />);
   }

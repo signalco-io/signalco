@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 const useLoadingAndError = <TIn, TOut>(
-  loadData?: () => Promise<TIn[]>,
+  loadData?: (() => Promise<TIn[]>) | Promise<TIn[]>,
   transformItem?: (item: TIn) => TOut
-): [Array<TOut>, boolean, string | undefined] => {
+): {items: Array<TOut>, isLoading: boolean, error: string | undefined} => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | undefined>(undefined);
   const [items, setItems] = useState<Array<TOut> | undefined>(undefined);
@@ -13,7 +13,8 @@ const useLoadingAndError = <TIn, TOut>(
       try {
         if (!loadData) 
           return;
-        const items = await loadData();
+        console.debug("Loading table data...")
+        const items = typeof loadData === 'function' ? await loadData() : await loadData;
         setItems(transformItem ? items.map(transformItem) : undefined);
       } catch (err: any) {
         setItems([]);
@@ -24,9 +25,9 @@ const useLoadingAndError = <TIn, TOut>(
     };
 
     loadDataAsync();
-  }, []);
+  }, [loadData, transformItem]);
 
-  return [items ?? [], isLoading, error];
+  return {items: items ?? Array<TOut>(), isLoading, error};
 };
 
 export default useLoadingAndError;

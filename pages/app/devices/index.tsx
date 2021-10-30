@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from 'next/router';
 import { Box, Chip, Paper, Typography } from "@mui/material";
-import AppLayout from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
 import { IDeviceModel } from "../../../src/devices/Device";
@@ -21,7 +21,7 @@ function deviceModelToTableItem(device: IDeviceModel): IAutoTableItem {
 
 const Devices = () => {
     const router = useRouter();
-    const [items, isLoading, error] = useAutoTable(DevicesRepository.getDevicesAsync, deviceModelToTableItem);
+    const itemsTable = useAutoTable(DevicesRepository.getDevicesAsync, deviceModelToTableItem);
 
     const handleRowClick = (item: IAutoTableItem) => {
         router.push(`/app/devices/${item.id}`);
@@ -34,7 +34,7 @@ const Devices = () => {
                     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                         <Typography variant="h2" sx={{ p: 2 }}>Devices</Typography>
                         <Box sx={{ position: 'relative', flexGrow: 1, overflow: 'hidden' }}>
-                            <AutoTable items={items} isLoading={isLoading} error={error} onRowClick={handleRowClick} />
+                            <AutoTable {...itemsTable} onRowClick={handleRowClick} />
                         </Box>
                     </Box>
                 </Paper>
@@ -43,6 +43,6 @@ const Devices = () => {
     )
 };
 
-Devices.layout = AppLayout;
+Devices.layout = AppLayoutWithAuth;
 
 export default observer(Devices);

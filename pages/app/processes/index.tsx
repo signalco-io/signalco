@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from 'next/router';
 import { Box, Paper, Typography } from "@mui/material";
-import AppLayout from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
 import { observer } from "mobx-react-lite";
@@ -20,7 +20,7 @@ function deviceModelToTableItem(process: IProcessModel): IAutoTableItem {
 
 const Processes = () => {
     const router = useRouter();
-    const [items, isLoading, error] = useAutoTable(ProcessesRepository.getProcessesAsync, deviceModelToTableItem);
+    const itemsTable = useAutoTable(ProcessesRepository.getProcessesAsync, deviceModelToTableItem);
 
     const handleRowClick = (item: IAutoTableItem) => {
         router.push(`/app/processes/${item.id}`);
@@ -33,7 +33,7 @@ const Processes = () => {
                     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                         <Typography variant="h2" sx={{ p: 2 }}>Processes</Typography>
                         <Box sx={{ position: 'relative', overflow: 'hidden' }}>
-                            <AutoTable items={items} isLoading={isLoading} error={error} onRowClick={handleRowClick} />
+                            <AutoTable {...itemsTable} onRowClick={handleRowClick} />
                         </Box>
                     </Box>
                 </Paper>
@@ -42,6 +42,6 @@ const Processes = () => {
     )
 };
 
-Processes.layout = AppLayout;
+Processes.layout = AppLayoutWithAuth;
 
 export default observer(Processes);

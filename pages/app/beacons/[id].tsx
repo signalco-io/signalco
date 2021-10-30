@@ -1,13 +1,16 @@
-import { Alert, Box, Button, Card, CardContent, CardHeader, Grid, LinearProgress, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, LinearProgress, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
-import AppLayout from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import { observer } from 'mobx-react-lite';
 import BeaconsRepository, { IBeaconModel } from '../../../src/beacons/BeaconsRepository';
 import UploadIcon from '@mui/icons-material/Upload';
 import CheckIcon from '@mui/icons-material/Check';
 import compareVersions from 'compare-versions';
+import AutoTable from '../../../components/shared/table/AutoTable';
+import useAutoTable from '../../../components/shared/table/useAutoTable';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const BeaconDetails = () => {
     const router = useRouter();
@@ -106,9 +109,38 @@ const BeaconDetails = () => {
         }
     };
 
+    const handleBeginDiscovery = async () => {
+        try {
+            if (id == null ||
+                typeof id !== 'string')
+                throw Error("Unable to resolve station id from query. Can't begin discovery");
+            await BeaconsRepository.beginDiscoveryAsync(id);
+        }
+        catch (err) {
+            console.error("Station restart request failed", err);
+        }
+    };
+
     const canUpdate = (latestAvailableVersion && beacon?.version)
         ? compareVersions(latestAvailableVersion, beacon.version)
         : false;
+
+    const workerServicesTableTransformItems = useCallback((i: string) => {
+        const isRunning = (beacon?.runningWorkerServices?.findIndex(rws => rws === i) ?? -1) >= 0;
+        const startStopAction = isRunning ? BeaconsRepository.stopWorkerServiceAsync : BeaconsRepository.startWorkerServiceAsync;
+        return (
+            {
+                id: i,
+                name: i,
+                running: isRunning ? "Running" : "Stopped",
+                actions: (
+                    <LoadingButton disabled={!beacon} onClick={() => beacon && startStopAction(beacon.id, i)}>{isRunning ? "Stop" : "Start"}</LoadingButton>
+                )
+            }
+        );
+    }, [beacon]);
+    const workerServicesTableLoadItems = useCallback(() => Promise.resolve(beacon?.availableWorkerServices || []), [beacon])
+    const workerServicesTable = useAutoTable(workerServicesTableLoadItems, workerServicesTableTransformItems);
 
     return (
         <Box sx={{ px: { sm: 2 }, py: 2 }}>
@@ -163,8 +195,24 @@ const BeaconDetails = () => {
                                                 <Button variant="outlined" onClick={handleShutdownSystem}>Shutdown system</Button>
                                             </Stack>
                                         </Grid>
+                                        <Grid item xs={4}><span>Channels</span></Grid>
+                                        <Grid item xs={8}>
+                                            <Stack direction="row" alignItems="center" spacing={1}>
+                                                <Button variant="outlined" onClick={handleBeginDiscovery}>Begin discovery</Button>
+                                            </Stack>
+                                        </Grid>
                                     </Grid>
                                 </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item>
+                            <Card>
+                                <CardHeader title="Channels" />
+                                <CardMedia>
+                                    {isLoading ? "Loading..." : (
+                                        <AutoTable {...workerServicesTable} />
+                                    )}
+                                </CardMedia>
                             </Card>
                         </Grid>
                     </Grid>
@@ -174,6 +222,6 @@ const BeaconDetails = () => {
     );
 }
 
-BeaconDetails.layout = AppLayout;
+BeaconDetails.layout = AppLayoutWithAuth;
 
 export default observer(BeaconDetails);

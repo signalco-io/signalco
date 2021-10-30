@@ -61,8 +61,8 @@ export default class ProcessesRepository {
 
         process.setConfiguration(configurationSerialized);
 
-        const response = await HttpService.requestAsync("/processes/set", "post", process);
-        if (response.id !== id)
+        const response = await HttpService.requestAsync("/processes/set", "post", process) as {id: string} | undefined;
+        if (response?.id !== id)
             throw new Error("Not matching identifier received.");
     }
 

@@ -1,11 +1,22 @@
 import React from "react";
 import { Box, Checkbox, Chip, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 
-const SelectItems = (props: { multiple?: boolean, value: string[], items: { value: string, label?: string }[], onChange: (values: string[]) => void }) => {
+export interface ISelectItemsProps {
+    multiple?: boolean,
+    value: string[],
+    items: { value: string, label?: string }[],
+    onChange: (values: string[]) => void,
+    placeholder?: string,
+    fullWidth?: boolean
+}
+
+const SelectItems = (props: ISelectItemsProps) => {
     const {
         value,
         items,
         multiple = false,
+        placeholder,
+        fullWidth,
         onChange
     } = props;
 
@@ -17,11 +28,13 @@ const SelectItems = (props: { multiple?: boolean, value: string[], items: { valu
     };
 
     return (
-        <FormControl>
+        <FormControl fullWidth={fullWidth}>
             <Select
                 value={value}
                 multiple={multiple}
+                placeholder={placeholder}
                 onChange={handleOnChange}
+                fullWidth={fullWidth}
                 renderValue={(selected) => {
                     if (multiple)
                         return (
@@ -31,7 +44,9 @@ const SelectItems = (props: { multiple?: boolean, value: string[], items: { valu
                                 ))}
                             </Box>
                         );
-                    else return items.find(i => i.value === value[0])?.label ?? value;
+                    else {
+                        return items.find(i => i.value === (Array.isArray(selected) ? value[0] : selected))?.label ?? value;
+                    }
                 }}
             >{items.map(item => (
                 <MenuItem

@@ -1,6 +1,6 @@
 import { Container, FormControlLabel, FormGroup, Paper, Switch } from '@mui/material';
 import React, { useState } from 'react';
-import AppLayout from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayout";
 
 const SettingsIndex = () => {
     const [isDarkMode, setIsDarkMode] = useState((typeof window !== 'undefined' && window.localStorage?.getItem('theme') === 'dark') ? true : false);
@@ -29,6 +29,6 @@ const SettingsIndex = () => {
     );
 };
 
-SettingsIndex.layout = AppLayout;
+SettingsIndex.layout = AppLayoutWithAuth;
 
 export default SettingsIndex;

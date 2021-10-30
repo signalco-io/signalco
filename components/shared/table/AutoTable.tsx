@@ -2,6 +2,8 @@ import {
   Alert,
   Box,
   LinearProgress, Link,
+  OutlinedInput,
+  Stack,
   Typography
 } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -13,6 +15,7 @@ import {
 } from "../../../src/helpers/StringHelpers";
 import ResultsPlaceholder from "../indicators/ResultsPlaceholder";
 import IErrorProps from "../interfaces/IErrorProps";
+import useSearch, { filterFuncObjectStringProps } from "../../../src/hooks/useSearch";
 
 export interface IAutoTableItem {
   id: string;
@@ -70,6 +73,7 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
 const filterItemKey = (ik: string) => ik !== "id" && !ik.startsWith("_");
 
 function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
+  const [filteredItems, showSearch, searchText, handleSearchTextChange] = useSearch(props.items, filterFuncObjectStringProps);
 
   const headersKeys =
     props.items &&
@@ -84,36 +88,39 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
     return prev;
   }, headerRow);
 
-  const cells = header && props.items ? [header, ...props.items] : [];
+  const cells = header && props.items ? [header, ...filteredItems] : [];
 
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ overflow: 'auto', display: 'grid' }}>
-        {props.isLoading && <LinearProgress />}
-        {props.error && <ErrorRow error={props.error} />}
-        {cells?.length > 0 && cells.map((item, rowIndex) => {
-          return Object.keys(item)
-            .filter(filterItemKey)
-            .map((itemKey, index) => {
-              return (
-                <CellRenderer
-                  key={itemKey}
-                  value={item[itemKey]}
-                  row={rowIndex + 1}
-                  column={index + 1}
-                  style={{ opacity: item._opacity ? item._opacity : 1 }}
-                  hasClick={typeof props.onRowClick !== 'undefined'}
-                  onClick={() => props.onRowClick && props.onRowClick(item)} />
-              );
-            })
-        })}
-        {(!props.isLoading && !(props.items?.length)) && (
-          <Box p={2}>
-            <ResultsPlaceholder />
-          </Box>
-        )}
+    <Stack spacing={1} sx={{ height: '100%' }}>
+      {showSearch && <OutlinedInput placeholder="Search..." sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
+      <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ overflow: 'auto', display: 'grid' }}>
+          {props.isLoading && <LinearProgress />}
+          {props.error && <ErrorRow error={props.error} />}
+          {cells?.length > 0 && cells.map((item, rowIndex) => {
+            return Object.keys(item)
+              .filter(filterItemKey)
+              .map((itemKey, index) => {
+                return (
+                  <CellRenderer
+                    key={itemKey}
+                    value={item[itemKey]}
+                    row={rowIndex + 1}
+                    column={index + 1}
+                    style={{ opacity: item._opacity ? item._opacity : 1 }}
+                    hasClick={typeof props.onRowClick !== 'undefined'}
+                    onClick={() => props.onRowClick && props.onRowClick(item)} />
+                );
+              })
+          })}
+          {(!props.isLoading && !(props.items?.length)) && (
+            <Box p={2}>
+              <ResultsPlaceholder />
+            </Box>
+          )}
+        </div>
       </div>
-    </div>
+    </Stack>
   );
 }
 
