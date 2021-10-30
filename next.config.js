@@ -56,4 +56,6 @@ module.exports = withSentryConfig(withBundleAnalyzer(withPWA({
           })
         }];
       },
-})));
+})), {
+  org: "dfnoise"
+});
