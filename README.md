@@ -35,6 +35,10 @@ The Signalco community of developers can be found on [GitHub Discussions](https:
 
 Our [Code of Conduct](https://github.com/signalco-io/signalco/blob/main/CODE_OF_CONDUCT.md) applies to all Signalco community channels.
 
+## Contributing
+
+Please see our [contributing.md](/contributing.md).
+
 ## Related
 
 - [🌐 Website](https://www.signalco.io)
