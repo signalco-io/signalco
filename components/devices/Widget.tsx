@@ -5,6 +5,7 @@ import React from "react";
 // import ConductsService from "../../src/conducts/ConductsService";
 // import DevicesRepository from "../../src/devices/DevicesRepository";
 import WidgetCard from "./parts/WidgetCard";
+import WidgetIndicator from "./parts/WidgetIndicator";
 import { IWidgetPartButtonConfig } from "./parts/WidgetPartButton";
 import { IWidgetPartGraphConfig } from "./parts/WidgetPartGraph";
 import { IWidgetPartInlineLabelConfig } from "./parts/WidgetPartInlineLabel";
@@ -193,6 +194,8 @@ const Widget = (props: IWidgetProps) => {
         WidgetResolved = WidgetShades;
     } else if (props.type === 'vacuum') {
         WidgetResolved = WidgetVacuum;
+    } else if (props.type === 'indicator') {
+        WidgetResolved = WidgetIndicator;
     }
 
     return (

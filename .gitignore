@@ -36,3 +36,6 @@ yarn-error.log*
 **/public/sw.js
 **/public/fallback-*.js
 **/public/worker-*.js
+
+# Sentry
+.sentryclirc

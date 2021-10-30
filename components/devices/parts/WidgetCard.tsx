@@ -50,14 +50,22 @@ const WidgetCard = (props: IWidgetCardProps) => {
 
     const handleOnConfigureClicked = () => {
         setIsConfiguring(true);
+        popupState.close();
     };
+
+    const handleOnRemove = () => {
+        popupState.close();
+        if (onRemove) {
+            onRemove();
+        }
+    }
 
     return (
         <>
             <Paper sx={{ position: 'relative', borderRadius: 2, width: sizeWidth, height: sizeHeight, display: "block" }} variant="elevation" elevation={state ? 1 : 0}>
                 {needsConfiguration ? (
                     <Stack justifyContent="stretch" sx={{ height: '100%' }}>
-                        <Button size="large" sx={{ height: '100%' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
+                        <Button disabled={!isEditMode} size="large" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
                     </Stack>
                 ) : (<>{children}</>)}
                 {isEditMode && (
@@ -77,7 +85,7 @@ const WidgetCard = (props: IWidgetCardProps) => {
                     </MenuItem>
                 )}
                 {onRemove && (
-                    <MenuItem onClick={onRemove}>
+                    <MenuItem onClick={handleOnRemove}>
                         <ListItemIcon>
                             <Delete />
                         </ListItemIcon>

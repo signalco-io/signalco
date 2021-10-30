@@ -16,10 +16,11 @@ const clientSideEmotionCache = createEmotionCache();
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
+  err: any;
 }
 
 export default function App(props: MyAppProps) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const { Component, emotionCache = clientSideEmotionCache, pageProps, err } = props;
   const [isLight, setIsLight] = React.useState(true);
 
   console.debug("App rendering");
@@ -95,10 +96,10 @@ export default function App(props: MyAppProps) {
             <>
               {typeof Layout === "function" ? (
                 <Layout>
-                  <Component {...pageProps} />
+                  <Component {...pageProps} err={err} />
                 </Layout>
               ) : (
-                <Component {...pageProps} />
+                <Component {...pageProps} err={err} />
               )}
               <NextNprogress
                 color="#fff"
