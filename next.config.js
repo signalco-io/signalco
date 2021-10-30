@@ -15,7 +15,7 @@ module.exports = withSentryConfig(withBundleAnalyzer(withPWA({
         dest: 'public',
         disable: process.env.NODE_ENV === 'development',
         runtimeCaching,
-        buildExcludes: [/middleware-manifest.json$/]
+        buildExcludes: [/middleware-manifest.json$/],
     },
     images: {
       formats: ['image/avif', 'image/webp']
