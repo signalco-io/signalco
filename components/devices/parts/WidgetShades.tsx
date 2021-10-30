@@ -85,7 +85,7 @@ const WidgetShades = (props: { config: any, isEditMode: boolean, setConfig: (con
                 <Grid item xs={6}>
                     <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent="space-between">
                         <WindowVisual shadePerc={shadePerc} theme="dark" size={68} />
-                        <Typography fontWeight="light">{label}</Typography>
+                        <Typography fontWeight="light" noWrap>{label}</Typography>
                     </Stack>
                 </Grid>
                 <Grid item xs={6} sx={{ background: '#121212', borderLeft: "1px solid rgba(255,255,255,0.12)" }}>
