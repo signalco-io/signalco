@@ -7,6 +7,6 @@
   signalco.io
 </h1>
 
-- [signalco.io](https://www.signalco.io)
+- [Website](https://www.signalco.io)
 - [Status page](https://status.signalco.io)
 - [Figma files](https://www.figma.com/file/8cMJOfjFdQBiGdWTvr2SB1/Signalco.io-Design?node-id=78%3A684)
