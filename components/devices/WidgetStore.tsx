@@ -26,6 +26,14 @@ const availableWidgets = [
         preview: '/assets/widget-previews/WidgetVacuumPreview_dark.svg',
         previewWidth: 200,
         previewHeight: 200
+    },
+    {
+        type: 'indicator',
+        name: 'Indicator widget',
+        description: 'See state of anything.',
+        preview: '/assets/widget-previews/WidgetIndicatorPreview_dark.png',
+        previewHeight: 400,
+        previewWidth: 106
     }
 ];
 
