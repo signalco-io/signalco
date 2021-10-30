@@ -10,6 +10,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import compareVersions from 'compare-versions';
 import AutoTable from '../../../components/shared/table/AutoTable';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const BeaconDetails = () => {
     const router = useRouter();
@@ -124,13 +125,20 @@ const BeaconDetails = () => {
         ? compareVersions(latestAvailableVersion, beacon.version)
         : false;
 
-    const workerServicesTableTransformItems = useCallback((i: string) => (
-        {
-            id: i,
-            name: i,
-            running: (beacon?.runningWorkerServices?.findIndex(rws => rws === i) ?? -1) >= 0 ? "Running" : "Stopped"
-        }
-    ), [beacon]);
+    const workerServicesTableTransformItems = useCallback((i: string) => {
+        const isRunning = (beacon?.runningWorkerServices?.findIndex(rws => rws === i) ?? -1) >= 0;
+        const startStopAction = isRunning ? BeaconsRepository.stopWorkerServiceAsync : BeaconsRepository.startWorkerServiceAsync;
+        return (
+            {
+                id: i,
+                name: i,
+                running: isRunning ? "Running" : "Stopped",
+                actions: (
+                    <LoadingButton disabled={!beacon} onClick={() => beacon && startStopAction(beacon.id, i)}>{isRunning ? "Stop" : "Start"}</LoadingButton>
+                )
+            }
+        );
+    }, [beacon]);
     const workerServicesTableLoadItems = useCallback(() => Promise.resolve(beacon?.availableWorkerServices || []), [beacon])
     const workerServicesTable = useAutoTable(workerServicesTableLoadItems, workerServicesTableTransformItems);
 

@@ -36,16 +36,14 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
     const [sliderValue, setSliderValue] = useState<number | number[] | undefined>();
     const [sliderColor, setSliderColor] = useState<string | undefined>();
     const [dataValuesSelected, setDataValueSelected] = useState<string[]>(props.contact.dataValues && props.contact.dataValues.length ? [props.state?.valueSerialized ?? props.contact.dataValues[0].value] : []);
-    const requestDoubleChangeMemoized = useCallback((value: number | number[]) => {
-        return throttle(async () => {
-            console.log('Do double change', 'contact:', props.contact, 'state:', props.state, 'value:', value);
-            await ConductsService.RequestConductAsync({
-                channelName: props.channel,
-                contactName: props.contact.name,
-                deviceId: props.deviceId
-            }, value);
-        }, 500);
-    }, [props.channel, props.contact, props.state, props.deviceId]);
+    const requestDoubleChangeMemoized = useCallback(throttle(async (value) => {
+        console.log('Do double change', 'contact:', props.contact, 'state:', props.state, 'value:', value);
+        await ConductsService.RequestConductAsync({
+            channelName: props.channel,
+            contactName: props.contact.name,
+            deviceId: props.deviceId
+        }, value);
+    }, 500), []);
 
     const handleBooleanClick = async () => {
         const newState = props.state?.valueSerialized === 'true' ? false : true;
@@ -70,6 +68,7 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
     };
 
     const handleDoubleChange = (_: Event | React.SyntheticEvent, value: number | number[]) => {
+        console.log('double changed', value)
         setSliderValue(value);
         requestDoubleChangeMemoized(value);
     };
@@ -107,9 +106,10 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
             </Stack>
         );
     } else if (props.contact.dataType === 'double') {
+        const resolvedSliderValue = sliderValue ?? (Number.parseFloat(props.state?.valueSerialized) || undefined);
         return <Slider
             step={0.01}
-            sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={sliderValue ?? props.state?.valueSerialized}
+            sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
             marks={[
                 { label: "Low", value: 0 },
                 { label: "High", value: 1 }
@@ -117,9 +117,10 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
             onChange={handleDoubleChange}
             onChangeCommitted={handleDoubleChange} />
     } else if (props.contact.dataType === 'colortemp') {
+        const resolvedSliderValue = sliderValue ?? (Number.parseFloat(props.state?.valueSerialized) || undefined);
         return <Slider
             step={0.01}
-            sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={sliderValue ?? props.state?.valueSerialized}
+            sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
             marks={[
                 { label: "Cold", value: 0 },
                 { label: "Warm", value: 1 }
