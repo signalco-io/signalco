@@ -16,7 +16,7 @@ import throttle from '../../../src/helpers/Throttle';
 import { useCallback } from 'react';
 import blendColors from '../../../src/helpers/BlendColors';
 import SelectItems from '../../../components/shared/form/SelectItems';
-import WidgetPartGraph, { IHistoricalValue } from '../../../components/devices/parts/WidgetPartGraph';
+import { IHistoricalValue } from '../../../components/devices/parts/WidgetPartGraph';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 
 interface IStateTableItem extends IAutoTableItem {
@@ -167,7 +167,7 @@ const DeviceContactHistory = (props: { deviceId: string, channelName: string, co
             <CardHeader title="State" />
             <CardMedia>
                 <AutoTable {...stateItemsTable} />
-                <WidgetPartGraph columnWidth={120} config={{ columns: 4, rows: 2, value: loadContactHistory, valueSource: { channelName: props.channelName, contactName: props.contactName, deviceId: props.deviceId } }} />
+                {/* <WidgetPartGraph columnWidth={120} config={{ columns: 4, rows: 2, value: loadContactHistory, valueSource: { channelName: props.channelName, contactName: props.contactName, deviceId: props.deviceId } }} /> */}
             </CardMedia>
         </Card>
     );
