@@ -5,10 +5,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 const { createSecureHeaders } = require("next-secure-headers");
+const { withSentryConfig } = require('@sentry/nextjs')
 
 const isDevelopment = process.env.NODE_ENV === "development";
 
-module.exports = withBundleAnalyzer(withPWA({
+module.exports = withSentryConfig(withBundleAnalyzer(withPWA({
     swcMinify: true,
     pwa: {
         dest: 'public',
@@ -55,4 +56,4 @@ module.exports = withBundleAnalyzer(withPWA({
           })
         }];
       },
-}));
+})));
