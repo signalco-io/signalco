@@ -1,6 +1,6 @@
 <p align="center">
   <a href="#">
-    <img height="128" width="128" src="https://raw.githubusercontent.com/signalco-io/signalco/main/public/images/icon-ghtheme-72x72.png">
+    <img height="128" width="455" src="https://raw.githubusercontent.com/signalco-io/signalco/main/public/images/logo-ghtheme-128x455.png">
   </a>
 </p>
 <h1 align="center">
