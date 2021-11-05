@@ -18,8 +18,8 @@ import {
     bindTrigger,
     bindMenu,
 } from 'material-ui-popup-state/hooks';
-import { DndContext, DragEndEvent, KeyboardSensor, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
+import { DndContext, DragEndEvent, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { snapCenterToCursor } from "@dnd-kit/modifiers";
 
@@ -141,10 +141,7 @@ const RenderDashboard = (props: { dashboard: IDashboard, isEditing: boolean, han
                 delay: 100,
                 tolerance: 5
             }
-        }),
-        // useSensor(KeyboardSensor, {
-        //     coordinateGetter: sortableKeyboardCoordinates,
-        // }),
+        })
     );
 
     function handleDragEnd(event: DragEndEvent) {
