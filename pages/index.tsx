@@ -1,7 +1,6 @@
 import { Box, Button, Card, CardHeader, CardMedia, Container, Divider, Grid, IconButton, Link, Stack, Typography } from "@mui/material";
 import React from "react";
 import GitHubIcon from '@mui/icons-material/GitHub';
-import RippleIndicator from "../components/shared/indicators/RippleIndicator";
 import { SxProps } from '@mui/system';
 import { Theme } from '@mui/material/styles'
 import { Cloud, Help, WifiLock } from "@mui/icons-material";
