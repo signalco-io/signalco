@@ -1,9 +1,10 @@
-import { Box, Grid, Icon, Stack, Typography } from '@mui/material';
+import { Box, Icon, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import useDevice from '../../../src/hooks/useDevice';
 import WidgetCard from './WidgetCard';
 import { IWidgetConfigurationOption } from './WidgetConfiguration';
+import { CircleSlider } from "react-circle-slider";
 
 const stateOptions: IWidgetConfigurationOption[] = [
     { name: 'targetTemperature', label: 'Temperature', type: 'deviceContactTarget' },
@@ -66,32 +67,44 @@ const WidgetTermostat = (props: { config: any, isEditMode: boolean, setConfig: (
             onConfigured={setConfig}
             options={stateOptions}
             config={config}>
-            <Grid container wrap="nowrap" sx={{ height: '100%' }} alignItems="center">
-                <Grid item xs={12}>
-                    <Box sx={{ width: '100%', height: '100%' }}>
-                        <Stack alignItems="center" justifyContent="center">
-                            <Stack direction="row" sx={{ height: '100%' }}>
-                                <Stack sx={{ height: '100%' }} justifyContent="center" alignItems="center">
-                                    <Typography fontWeight={100} fontSize={64}>{degreesWhole}</Typography>
-                                </Stack>
-                                <Stack justifyContent="space-between" sx={{ my: 2, pl: 1 }}>
-                                    <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>&#176;C</Typography>
-                                    <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>.{degreesDecimal}</Typography>
-                                </Stack>
-                            </Stack>
-                            <Typography sx={{ opacity: 0.5 }}>{config.label}</Typography>
-                            <Stack direction="row" spacing={2} sx={{ mt: 5 }}>
-                                {config.targetCooling &&
-                                    <SmallIndicator isActive={false} label="Cooling" icon="ac_unit" activeBackgroundColor="#445D79" />
-                                }
-                                {config.targetHeating &&
-                                    <SmallIndicator isActive={heatingActive} label="Heating" icon="whatshot" activeBackgroundColor="#A14D4D" />
-                                }
-                            </Stack>
-                        </Stack>
+            <Box sx={{ width: '100%', height: '100%' }}>
+                <Stack alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
+                    <Box sx={{ height: '111px', overflow: 'hidden', position: 'absolute', top: '20px' }}>
+                        <CircleSlider
+                            value={degrees}
+                            size={222}
+                            stepSize={0.1}
+                            min={10}
+                            max={34}
+                            shadow={false}
+                            knobRadius={15}
+                            progressWidth={4}
+                            circleWidth={15}
+                            circleColor="#666"
+                            progressColor={heatingActive ? "#DC5151" : 'transparent'}
+                            onChange={() => { }}
+                        />
                     </Box>
-                </Grid>
-            </Grid>
+                    <Stack direction="row" sx={{ mt: 13 }}>
+                        <Stack sx={{ height: '100%' }} justifyContent="center" alignItems="center">
+                            <Typography fontWeight={100} fontSize={64}>{degreesWhole}</Typography>
+                        </Stack>
+                        <Stack justifyContent="space-between">
+                            <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>&#176;C</Typography>
+                            <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>.{degreesDecimal}</Typography>
+                        </Stack>
+                    </Stack>
+                    <Typography fontWeight="light" sx={{ pt: 1, opacity: 0.5, lineHeight: 1 }}>{config.label}</Typography>
+                    <Stack direction="row" spacing={2} sx={{ mt: 4 }}>
+                        {config.targetCooling &&
+                            <SmallIndicator isActive={false} label="Cooling" icon="ac_unit" activeBackgroundColor="#445D79" />
+                        }
+                        {config.targetHeating &&
+                            <SmallIndicator isActive={heatingActive} label="Heating" icon="whatshot" activeBackgroundColor="#A14D4D" />
+                        }
+                    </Stack>
+                </Stack>
+            </Box>
         </WidgetCard>
     );
 };
