@@ -40,7 +40,7 @@ module.exports = withSentryConfig(withBundleAnalyzer(withPWA({
                 workerSrc: "'self'",
                 imgSrc: ["'self'", "data:", "https://www.signalco.io", "https://lh3.googleusercontent.com", "https://dfnoise.eu.auth0.com"],
                 formAction: "'self'",
-                connectSrc: ["'self'", "https://www.signalco.io", "https://api.signalco.io", "https://signalhub.service.signalr.net", "https://api.github.com", "https://o513630.ingest.sentry.io", "https://fonts.gstatic.com", "https://dfnoise.eu.auth0.com", "wss://signalhub.service.signalr.net", "https://lh3.googleusercontent.com"],
+                connectSrc: ["'self'", "https://www.signalco.io", "https://api.signalco.io", "https://signalhub.service.signalr.net", "https://api.github.com", "https://o513630.ingest.sentry.io", "https://fonts.gstatic.com", "https://dfnoise.eu.auth0.com", "wss://signalhub.service.signalr.net", "https://lh3.googleusercontent.com", "https://fonts.googleapis.com"],
                 baseURI: ['https://www.signalco.io', 'https://next.signalco.io'],
                 reportURI: 'https://o513630.ingest.sentry.io/api/5615895/security/?sentry_key=2a04f9a742e74740952dcebf06313840',
                 "frame-ancestors": "'none'"
