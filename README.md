@@ -50,3 +50,9 @@ Please see our [contributing.md](/contributing.md).
 ## License
 
 [GNU General Public License v3.0](LICENSE)
+
+## Sponsors ✨
+
+Many thanks to our sponsors!
+
+![JetBrains](/docs/jb_beam.png)
