@@ -6,6 +6,8 @@ import { SxProps } from '@mui/system';
 import { Theme } from '@mui/material/styles'
 import { Cloud, Help, WifiLock } from "@mui/icons-material";
 import ZigbeeLogoIcon from "../components/icons/ZigbeeLogoIcon";
+import Image from 'next/image';
+import { AppContext } from "./_app";
 
 const Pitch = (props: { sx?: SxProps<Theme>, heading: string, children: React.ReactChild }) => (
   <Box component="section" sx={{ textAlign: 'center', ...props.sx }}>
@@ -18,88 +20,86 @@ const Pitch = (props: { sx?: SxProps<Theme>, heading: string, children: React.Re
 
 const Onboarding = () => {
   return (
-    <Container>
-      <Stack alignItems="center" justifyContent="center" sx={{ pt: 24 }}>
-        <Stack direction="row" alignItems="center" spacing={3}>
-          <RippleIndicator size={72} interval={1200} />
-          <Typography variant="h1">Signalco</Typography>
-          <Box sx={{ width: '72px', height: '72px' }} />
-        </Stack>
-        <Stack justifyContent="center" direction="row" sx={{ pt: 10 }}>
-          <Button href="/app" size="large" variant="contained" sx={{ mr: 4 }}>Automate</Button>
-          <Button href="#" size="large" variant="outlined">Learn More</Button>
-        </Stack>
-        <div>{/* image */}</div>
-      </Stack>
-    </Container>
+    <AppContext.Consumer>
+      {appState => (
+        <Container>
+          <Stack>
+            <Stack sx={{ pt: 24 }}>
+              <Image src={appState.theme === 'light' ? "/images/icon-light-512x512.png" : "/images/icon-dark-512x144.png"} alt="Signalco logo" layout="fixed" width={512} height={144} />
+              <Typography fontFamily="Raleway" fontWeight={200} fontSize={41}>Automate your life</Typography>
+            </Stack>
+            <Stack justifyContent="center" direction="row" sx={{ pt: 10 }}>
+              <Button href="/app" size="large" variant="text" sx={{ mr: 4 }}>Automate</Button>
+              <Button href="#" size="large" variant="text">Explore</Button>
+              <Button href="#" size="large" variant="text">Community</Button>
+            </Stack>
+          </Stack>
+        </Container>
+      )}
+    </AppContext.Consumer>
   );
 };
 
 const Footer = () => (
-  <Box sx={{ backgroundColor: "rgba(125,125,125,0.2)" }}>
-    <Divider />
-    <Container>
-      <Box component="footer" sx={{ padding: "64px 0" }}>
-        <Grid container direction="column" spacing={4}>
-          <Grid item>
-            <Grid container justifyContent="space-between" spacing={2}>
+  <AppContext.Consumer>
+    {appState => (
+      <Box sx={{ backgroundColor: appState.theme === 'light' ? "rgba(0,0,0,0.06)" : "rgba(125,125,125,0.2)" }}>
+        <Divider />
+        <Container>
+          <Box component="footer" sx={{ padding: "64px 0" }}>
+            <Grid container direction="column" spacing={4}>
               <Grid item>
-                <Typography variant="h2" sx={{ pb: 2 }}>Projects</Typography>
-                <Stack>
-                  <Link href="https://github.com/signalco-io/signalco">Website</Link>
-                  <Link href="https://github.com/signalco-io/cloud">Cloud</Link>
-                  <Link href="https://github.com/signalco-io/station">Station</Link>
-                </Stack>
+                <Grid container justifyContent="space-between" spacing={2}>
+                  <Grid item>
+                    <Typography variant="h2" sx={{ pb: 2 }}>Projects</Typography>
+                    <Stack>
+                      <Link href="https://github.com/signalco-io/signalco">Website</Link>
+                      <Link href="https://github.com/signalco-io/cloud">Cloud</Link>
+                      <Link href="https://github.com/signalco-io/station">Station</Link>
+                    </Stack>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="h2" sx={{ pb: 2 }}>Community</Typography>
+                    <Typography variant="caption" color="textSecondary">Coming soon...</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="h2" sx={{ pb: 2 }}>Resources</Typography>
+                    <Stack>
+                      <Link href="https://status.signalco.io">Status</Link>
+                    </Stack>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="h2" sx={{ pb: 2 }}>Legal</Typography>
+                    <Stack>
+                      <Link href="/legal/privacy-policy">Privacy Policy</Link>
+                      <Link href="/legal/terms-of-service">Terms of Service</Link>
+                      <Link href="/legal/dpa">DPA</Link>
+                      <Link href="/legal/sla">SLA</Link>
+                    </Stack>
+                  </Grid>
+                </Grid>
               </Grid>
               <Grid item>
-                <Typography variant="h2" sx={{ pb: 2 }}>Community</Typography>
-                <Typography variant="caption" color="textSecondary">Coming soon...</Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant="h2" sx={{ pb: 2 }}>Resources</Typography>
-                <Stack>
-                  <Link href="https://status.signalco.io">Status</Link>
-                </Stack>
-              </Grid>
-              <Grid item>
-                <Typography variant="h2" sx={{ pb: 2 }}>Legal</Typography>
-                <Stack>
-                  <Link href="/legal/privacy-policy">Privacy Policy</Link>
-                  <Link href="/legal/terms-of-service">Terms of Service</Link>
-                  <Link href="/legal/dpa">DPA</Link>
-                  <Link href="/legal/sla">SLA</Link>
-                </Stack>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid container alignItems="center" spacing={2}>
-              <Grid item>
-                <RippleIndicator size={52} interval={800} />
-              </Grid>
-              <Grid item>
-                <Typography variant="h1" component="span" color="textSecondary">Signalco</Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid container spacing={2} alignItems="flex-end" justifyContent="space-between">
-              <Grid item>
-                <Typography variant="subtitle2" component="span" color="textSecondary">Copyright © {new Date().getFullYear()} Signalco. All rights reserved.</Typography>
-              </Grid>
-              <Grid item>
-                <Link href="https://github.com/signalco-io/signalco">
-                  <IconButton size="large" aria-label="GitHub link">
-                    <GitHubIcon />
-                  </IconButton>
-                </Link>
+                <Image src={appState.theme === 'light' ? "/images/icon-light-512x512.png" : "/images/icon-dark-512x144.png"} alt="Signalco logo" layout="fixed" width={239.37} height={68} />
+                <Grid container alignItems="center" justifyContent="space-between">
+                  <Grid item>
+                    <Typography variant="subtitle2" fontWeight={400} component="span" color="textSecondary">Copyright © {new Date().getFullYear()} signalco. All rights reserved.</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Link href="https://github.com/signalco-io/signalco">
+                      <IconButton size="large" aria-label="GitHub link">
+                        <GitHubIcon />
+                      </IconButton>
+                    </Link>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Grid>
+          </Box>
+        </Container>
       </Box>
-    </Container>
-  </Box>
+    )}
+  </AppContext.Consumer>
 );
 
 const IntegrationViaIcon = ({ viaItem }: { viaItem: string }) => {

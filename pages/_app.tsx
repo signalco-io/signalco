@@ -19,9 +19,15 @@ interface MyAppProps extends AppProps {
   err: any;
 }
 
+export interface IAppContext {
+  theme: string
+}
+
+export const AppContext = React.createContext<IAppContext>({ theme: 'light' });
+
 export default function App(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps, err } = props;
-  const [isLight, setIsLight] = React.useState(true);
+  const [appContextState, setAppContext] = React.useState({ theme: 'light' });
 
   console.debug("App rendering");
 
@@ -31,9 +37,10 @@ export default function App(props: MyAppProps) {
       const themeMode = window.localStorage.getItem("theme") ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
       document.documentElement.style.setProperty("color-scheme", themeMode);
       if (themeMode !== 'light') {
-        setIsLight(false);
+        setAppContext({ ...appContextState, theme: 'dark' });
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // PWA 
@@ -90,17 +97,19 @@ export default function App(props: MyAppProps) {
         />
       </Head>
       <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme(!isLight)}>
+        <ThemeProvider theme={theme(appContextState.theme === 'dark')}>
           <SnackbarProvider maxSnack={3}>
             <CssBaseline />
             <>
-              {typeof Layout === "function" ? (
-                <Layout>
+              <AppContext.Provider value={appContextState}>
+                {typeof Layout === "function" ? (
+                  <Layout>
+                    <Component {...pageProps} err={err} />
+                  </Layout>
+                ) : (
                   <Component {...pageProps} err={err} />
-                </Layout>
-              ) : (
-                <Component {...pageProps} err={err} />
-              )}
+                )}
+              </AppContext.Provider>
               <NextNprogress
                 color="#fff"
                 startPosition={0.3}
