@@ -69,7 +69,7 @@ const WidgetTermostat = (props: { config: any, isEditMode: boolean, setConfig: (
             config={config}>
             <Box sx={{ width: '100%', height: '100%' }}>
                 <Stack alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
-                    <Box sx={{ height: '111px', overflow: 'hidden', position: 'absolute', top: '20px' }}>
+                    <Box sx={{ height: '111px', overflow: 'hidden', position: 'absolute', top: '24px' }}>
                         <CircleSlider
                             value={degrees}
                             size={222}
@@ -85,16 +85,16 @@ const WidgetTermostat = (props: { config: any, isEditMode: boolean, setConfig: (
                             onChange={() => { }}
                         />
                     </Box>
-                    <Stack direction="row" sx={{ mt: 13 }}>
+                    <Stack direction="row" sx={{ mt: 9 }}>
                         <Stack sx={{ height: '100%' }} justifyContent="center" alignItems="center">
-                            <Typography fontWeight={100} fontSize={64}>{degreesWhole}</Typography>
+                            <Typography fontWeight={100} fontSize={64} sx={{ lineHeight: 1 }}>{degreesWhole}</Typography>
                         </Stack>
                         <Stack justifyContent="space-between">
                             <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>&#176;C</Typography>
                             <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>.{degreesDecimal}</Typography>
                         </Stack>
                     </Stack>
-                    <Typography fontWeight="light" sx={{ pt: 1, opacity: 0.5, lineHeight: 1 }}>{config.label}</Typography>
+                    <Typography fontWeight="light" sx={{ opacity: 0.5 }}>{config.label}</Typography>
                     <Stack direction="row" spacing={2} sx={{ mt: 4 }}>
                         {config.targetCooling &&
                             <SmallIndicator isActive={false} label="Cooling" icon="ac_unit" activeBackgroundColor="#445D79" />
@@ -105,7 +105,7 @@ const WidgetTermostat = (props: { config: any, isEditMode: boolean, setConfig: (
                     </Stack>
                 </Stack>
             </Box>
-        </WidgetCard>
+        </WidgetCard >
     );
 };
 
