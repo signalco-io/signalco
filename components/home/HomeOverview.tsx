@@ -142,9 +142,9 @@ const RenderDashboard = (props: { dashboard: IDashboard, isEditing: boolean, han
                 tolerance: 5
             }
         }),
-        useSensor(KeyboardSensor, {
-            coordinateGetter: sortableKeyboardCoordinates,
-        }),
+        // useSensor(KeyboardSensor, {
+        //     coordinateGetter: sortableKeyboardCoordinates,
+        // }),
     );
 
     function handleDragEnd(event: DragEndEvent) {
