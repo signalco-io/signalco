@@ -18,7 +18,7 @@
 
 ## Getting Started
 
-Visit <a aria-label="Signalco learn" href="https://www.signalco.io/learn">https://www.signalco.io/learn</a> to get started with Signalco.
+Visit [https://www.signalco.io/learn](https://www.signalco.io/learn) to get started with Signalco.
 
 ## Key Features
 
