@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import WidgetCard from "./WidgetCard";
 import { IWidgetConfigurationOption } from "./WidgetConfiguration";
 
+const stateOptions: IWidgetConfigurationOption[] = [];
+
 const WidgetVacuum = (/*props: { config?: any }*/) => {
     const [config, setConfig] = useState({});
 
@@ -15,7 +17,6 @@ const WidgetVacuum = (/*props: { config?: any }*/) => {
 
     const needsConfiguration = true;
     const isEditMode = false;
-    const stateOptions: IWidgetConfigurationOption[] = [];
 
     return (
         <WidgetCard

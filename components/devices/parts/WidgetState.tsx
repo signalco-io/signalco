@@ -1,13 +1,18 @@
 import { Stack, Typography, ButtonBase } from "@mui/material";
 import { observer } from 'mobx-react-lite';
-import React, { useState, useEffect, useMemo } from "react";
-import { IDeviceModel } from '../../../src/devices/Device';
+import React, { useMemo } from "react";
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import WidgetCard from './WidgetCard';
 import dynamic from 'next/dynamic'
 import ConductsService from '../../../src/conducts/ConductsService';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import { Box } from '@mui/system';
+import useDevice from "../../../src/hooks/useDevice";
+
+const stateOptions = [
+    { name: 'target', label: 'Target', type: 'deviceContactTarget' },
+    { name: 'visual', label: 'Visual', type: 'select', default: 'lightbulb', data: [{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }] }
+];
 
 const TvVisual = dynamic(() => import("../../icons/TvVisual"));
 const LightBulbVisual = dynamic(() => import("../../icons/LightBulbVisual"));
@@ -84,7 +89,7 @@ export const executeStateActions = async (actions: StateAction[]) => {
 
 const WidgetState = (props: { isEditMode: boolean, config: any, setConfig: (config: object) => void, onRemove: () => void }) => {
     const { config, setConfig, isEditMode, onRemove } = props;
-    const [device, setDevice] = useState<IDeviceModel | undefined>(undefined);
+    const device = useDevice(config?.target?.deviceId);
 
     // Calc state from source value
     const contactState = device?.getState({ channelName: config?.target?.channelName, contactName: config?.target?.contactName, deviceId: device.id });
@@ -93,24 +98,11 @@ const WidgetState = (props: { isEditMode: boolean, config: any, setConfig: (conf
     const label = props.config?.label || device?.alias || '';
     const Visual = useMemo(() => props.config?.visual === 'tv' ? TvVisual : LightBulbVisual, [props.config]);
 
-    useEffect(() => {
-        (async () => {
-            const deviceId = config?.target?.deviceId;
-            if (deviceId) {
-                setDevice(await DevicesRepository.getDeviceAsync(deviceId));
-            }
-        })();
-    }, [config]);
-
     const needsConfiguration =
         !config?.target?.channelName ||
         !config?.target?.contactName ||
         !config?.target?.deviceId ||
         !config?.visual;
-    const stateOptions = [
-        { name: 'target', label: 'Target', type: 'deviceContactTarget' },
-        { name: 'visual', label: 'Visual', type: 'select', default: 'lightbulb', data: [{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }] }
-    ];
 
     const handleStateChangeRequest = () => {
         if (typeof device === 'undefined') {

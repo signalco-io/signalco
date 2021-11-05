@@ -1,9 +1,8 @@
 import { ArrowUpward, Stop, ArrowDownward } from '@mui/icons-material';
 import { Button, Grid, Stack, Typography } from '@mui/material';
 import dynamic from 'next/dynamic';
-import React, { useEffect, useState } from 'react';
-import { IDeviceModel } from '../../../src/devices/Device';
-import DevicesRepository from '../../../src/devices/DevicesRepository';
+import React from 'react';
+import useDevice from '../../../src/hooks/useDevice';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import WidgetCard from './WidgetCard';
 import { IWidgetConfigurationOption } from './WidgetConfiguration';
@@ -13,18 +12,9 @@ const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
 const WidgetShades = (props: { config: any, isEditMode: boolean, setConfig: (config: object) => void, onRemove: () => void }) => {
     const { config, setConfig, isEditMode, onRemove } = props;
-    const [device, setDevice] = useState<IDeviceModel | undefined>(undefined);
+    const device = useDevice(config?.target?.deviceId);
 
     const label = props.config?.label || device?.alias || '';
-
-    useEffect(() => {
-        (async () => {
-            const deviceId = config?.target?.deviceId;
-            if (deviceId) {
-                setDevice(await DevicesRepository.getDeviceAsync(deviceId));
-            }
-        })();
-    }, [config]);
 
     const width = (config as any)?.columns || 4;
     const height = (config as any)?.rows || 2;
@@ -41,6 +31,8 @@ const WidgetShades = (props: { config: any, isEditMode: boolean, setConfig: (con
         !config?.targetContactDown?.deviceId ||
         !config?.targetContactDown?.contactName ||
         !config?.targetContactDown?.channelName;
+
+    // TODO: Move outside of component
     const stateOptions: IWidgetConfigurationOption[] = [
         { name: 'target', label: 'Target', type: 'deviceTarget' },
         { name: 'targetContactUp', label: 'Up button', type: 'contactTarget', data: device?.id },

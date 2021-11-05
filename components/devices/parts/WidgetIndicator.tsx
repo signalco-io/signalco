@@ -1,18 +1,17 @@
 import { ButtonBase, Stack } from "@mui/material";
 import { observer } from 'mobx-react-lite';
-import React, { useState, useEffect } from "react";
-import { IDeviceModel } from '../../../src/devices/Device';
-import DevicesRepository from '../../../src/devices/DevicesRepository';
+import React from "react";
 import WidgetCard from './WidgetCard';
 import { Box } from '@mui/system';
 import Image from 'next/image';
 import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVerySatisfiedOutlined';
 import SentimentDissatisfiedOutlinedIcon from '@mui/icons-material/SentimentDissatisfiedOutlined';
 import { useRouter } from "next/router";
+import useDevice from "../../../src/hooks/useDevice";
 
 const WidgetIndicator = (props: { isEditMode: boolean, config: any, setConfig: (config: object) => void, onRemove: () => void }) => {
     const { config, setConfig, isEditMode, onRemove } = props;
-    const [device, setDevice] = useState<IDeviceModel | undefined>(undefined);
+    const device = useDevice(config?.target?.deviceId);
     const router = useRouter();
 
     // Calc state from source value
@@ -24,15 +23,6 @@ const WidgetIndicator = (props: { isEditMode: boolean, config: any, setConfig: (
     const statusColor = isLow ? 'rgba(252, 245, 85, 0.53)' : 'rgba(158, 227, 134, 0.33)';
     const iconColor = isLow ? '#fad63f' : "#a2db79";
     const Icon = isLow ? SentimentDissatisfiedOutlinedIcon : SentimentVerySatisfiedOutlinedIcon;
-
-    useEffect(() => {
-        (async () => {
-            const deviceId = config?.target?.deviceId;
-            if (deviceId) {
-                setDevice(await DevicesRepository.getDeviceAsync(deviceId));
-            }
-        })();
-    }, [config]);
 
     const needsConfiguration =
         !config?.target?.channelName ||

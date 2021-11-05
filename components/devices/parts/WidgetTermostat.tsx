@@ -1,10 +1,17 @@
 import { Box, Grid, Icon, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
-import React, { useEffect, useState } from 'react';
-import { IDeviceModel } from '../../../src/devices/Device';
-import DevicesRepository from '../../../src/devices/DevicesRepository';
+import React from 'react';
+import useDevice from '../../../src/hooks/useDevice';
 import WidgetCard from './WidgetCard';
 import { IWidgetConfigurationOption } from './WidgetConfiguration';
+
+const stateOptions: IWidgetConfigurationOption[] = [
+    { name: 'targetTemperature', label: 'Temperature', type: 'deviceContactTarget' },
+    { name: 'label', label: 'Label', type: 'string' },
+    { name: 'targetHeating', label: 'Heating', type: 'deviceContactTarget' },
+    { name: 'columns', label: 'Width', type: 'static', default: 4 },
+    { name: 'rows', label: 'Height', type: 'static', default: 4 }
+];
 
 const SmallIndicator = observer((props: { isActive: boolean, icon: string, label: string, activeBackgroundColor: string }) => (
     <Box sx={{ width: '52px', height: '82px', backgroundColor: props.isActive ? props.activeBackgroundColor : 'transparent', borderRadius: 1 }}>
@@ -14,18 +21,6 @@ const SmallIndicator = observer((props: { isActive: boolean, icon: string, label
         </Stack>
     </Box>
 ));
-
-const useDevice = (deviceId: string) => {
-    const [device, setDevice] = useState<IDeviceModel | undefined>(undefined);
-    useEffect(() => {
-        (async () => {
-            if (deviceId) {
-                setDevice(await DevicesRepository.getDeviceAsync(deviceId));
-            }
-        })();
-    }, [deviceId]);
-    return device;
-};
 
 const WidgetTermostat = (props: { config: any, isEditMode: boolean, setConfig: (config: object) => void, onRemove: () => void }) => {
     const { config, setConfig, isEditMode, onRemove } = props;
@@ -42,13 +37,6 @@ const WidgetTermostat = (props: { config: any, isEditMode: boolean, setConfig: (
         !config?.targetTemperature?.deviceId ||
         !config?.targetTemperature?.contactName ||
         !config?.targetTemperature?.channelName;
-    const stateOptions: IWidgetConfigurationOption[] = [
-        { name: 'targetTemperature', label: 'Temperature', type: 'deviceContactTarget' },
-        { name: 'label', label: 'Label', type: 'string' },
-        { name: 'targetHeating', label: 'Heating', type: 'deviceContactTarget' },
-        { name: 'columns', label: 'Width', type: 'static', default: 4 },
-        { name: 'rows', label: 'Height', type: 'static', default: 4 }
-    ];
 
     const temperatureContact = temperatureDevice?.getState({
         channelName: config?.targetTemperature?.channelName,
