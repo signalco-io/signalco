@@ -11,6 +11,7 @@ import { IWidgetPartGraphConfig } from "./parts/WidgetPartGraph";
 import { IWidgetPartInlineLabelConfig } from "./parts/WidgetPartInlineLabel";
 import WidgetShades from "./parts/WidgetShades";
 import WidgetState from "./parts/WidgetState";
+import WidgetTermostat from "./parts/WidgetTermostat";
 import WidgetVacuum from "./parts/WidgetVacuum";
 
 export type widgetType = "state" | "vacuum" | "shades";
@@ -174,7 +175,7 @@ interface IWidgetSharedProps {
 }
 
 const UnresolvedWidget = (props: IWidgetSharedProps) => (
-    <WidgetCard width={2} height={1} state={false} needsConfiguration={false} isEditMode={props.isEditMode} onRemove={props.onRemove}>
+    <WidgetCard width={props.config?.columns || 2} height={props.config?.rows || 1} state={false} needsConfiguration={false} isEditMode={props.isEditMode} onRemove={props.onRemove}>
         <Alert severity="error" sx={{ height: "100%" }}>Unknown widget</Alert>
     </WidgetCard>
 );
@@ -196,6 +197,8 @@ const Widget = (props: IWidgetProps) => {
         WidgetResolved = WidgetVacuum;
     } else if (props.type === 'indicator') {
         WidgetResolved = WidgetIndicator;
+    } else if (props.type === 'termostat') {
+        WidgetResolved = WidgetTermostat;
     }
 
     return (

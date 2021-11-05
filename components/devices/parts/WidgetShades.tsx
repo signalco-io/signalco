@@ -26,7 +26,7 @@ const WidgetShades = (props: { config: any, isEditMode: boolean, setConfig: (con
         })();
     }, [config]);
 
-    const width = (config as any)?.columns || 2;
+    const width = (config as any)?.columns || 4;
     const height = (config as any)?.rows || 2;
 
     // TODO: Calc from source value
