@@ -1,28 +1,102 @@
-import { Box, Button, Container, Divider, Grid, IconButton, Link, Stack, Typography } from "@mui/material";
+import { Box, Container, Divider, Grid, IconButton, Link, Stack, Typography } from "@mui/material";
 import React from "react";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import Image from 'next/image';
 import { AppContext } from "./_app";
 
-const Onboarding = () => {
-  return (
-    <AppContext.Consumer>
-      {appState => (
-        <Stack>
-          <Stack sx={{ pt: 24, pb: 12 }}>
-            <Image src={appState.theme === 'light' ? "/images/icon-light-512x512.png" : "/images/icon-dark-512x144.png"} alt="Signalco logo" layout="fixed" width={512} height={144} />
-            <Typography fontFamily="Raleway" fontWeight={200} fontSize={41}>Automate your life</Typography>
-          </Stack>
-          <Stack justifyContent="center" direction="row" sx={{ pt: 10 }}>
-            <Button href="/app" size="large" variant="text" sx={{ width: '150px' }}>Automate</Button>
-            <Button href="#" size="large" variant="text" sx={{ width: '150px' }}>Explore</Button>
-            <Button href="#" size="large" variant="text" sx={{ width: '150px' }}>Community</Button>
-          </Stack>
+const Cover = () => (
+  <AppContext.Consumer>
+    {appState => (
+      <Stack>
+        <Stack sx={{ py: '20vh', px: '10%' }}>
+          <Image src={appState.theme === 'light' ? "/images/icon-light-512x512.png" : "/images/icon-dark-512x144.png"} alt="Signalco logo" layout="fixed" width={512} height={144} />
+          <Typography fontFamily="Raleway" fontWeight={200} fontSize={41}>Automate your life</Typography>
         </Stack>
-      )}
-    </AppContext.Consumer>
-  );
-};
+      </Stack>
+    )}
+  </AppContext.Consumer>
+);
+
+const Nav = () => (
+  <Stack justifyContent="center" direction="row" sx={{ pt: 10 }} spacing={8}>
+    <Link href="/app" sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
+      <Typography fontSize={24} fontWeight={300}>Automate</Typography>
+    </Link>
+    <Link href="#" sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
+      <Typography fontSize={24} fontWeight={300}>Explore</Typography>
+    </Link>
+    <Link href="#" sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
+      <Typography fontSize={24} fontWeight={300}>Community</Typography>
+    </Link>
+  </Stack>
+);
+
+const CounterIndicator = (props: { count: number, hideAfter?: boolean }) => (
+  <AppContext.Consumer>
+    {appState => (
+      <Box sx={{ display: 'flex', width: '42px', height: props.hideAfter ? '106px' : '170px', alignItems: props.hideAfter ? 'end' : 'center' }}>
+        <Box sx={{
+          pt: 0.5,
+          width: '42px',
+          height: '42px',
+          borderRadius: '21px',
+          color: 'background.default',
+          backgroundColor: 'text.primary',
+          position: 'relative',
+          '&::before': {
+            content: '""',
+            display: 'block',
+            height: '64px',
+            width: '1px',
+            background: `linear-gradient(180deg, ${appState.theme === 'dark' ? '#ffffff' : '#000000'} 67.19%, rgba(255, 255, 255, 0) 100%)`,
+            position: 'absolute',
+            left: '20px',
+            top: '-64px',
+            transform: 'rotate(-180deg)'
+          },
+          '&::after': !props.hideAfter ? {
+            content: '""',
+            display: 'block',
+            height: '64px',
+            width: '1px',
+            background: `linear-gradient(180deg, ${appState.theme === 'dark' ? '#ffffff' : '#000000'} 67.19%, rgba(255, 255, 255, 0) 100%)`,
+            position: 'absolute',
+            left: '20px',
+            top: '42px',
+          } : undefined
+        }}>
+          <Typography textAlign="center" fontSize={24} fontWeight={600}>{props.count}</Typography>
+        </Box>
+      </Box>
+    )}
+  </AppContext.Consumer>
+);
+
+const FeatureDescription = () => (
+  <Stack spacing={2}>
+    <Typography fontWeight={600} fontSize={24}>Feature</Typography>
+    <Typography sx={{ opacity: 0.6 }}>Description duis fermentum facilisis libero, in elementum ante sodales at. Mauris viverra, eros a efficitur posuere, est augue laoreet arcu, vitae varius ex ipsum at lectus.</Typography>
+  </Stack>
+);
+
+const StepContent = () => (
+  <Container>
+    <Stack spacing={12} p={8}>
+      <Stack spacing={4}>
+        <Typography fontWeight={600} fontSize={52} textAlign="center">Title</Typography>
+        <Typography fontSize={18} textAlign="center" sx={{ opacity: 0.6 }}>Brief description nullam ligula leo, cursus eu condimentum quis, egestas nec dolor. Etiam faucibus, neque in tincidunt rhoncus, lacus diam aliquet diam, vitae imperdiet nisi augue non nulla.</Typography>
+      </Stack>
+      <Stack position="relative" direction="row" spacing={8}>
+        <Box width="100%" sx={{ backgroundColor: "rgba(128,128,128,0.2)" }}>
+        </Box>
+        <Stack width="100%" spacing={4}>
+          <FeatureDescription />
+          <FeatureDescription />
+        </Stack>
+      </Stack>
+    </Stack>
+  </Container>
+);
 
 const Footer = () => (
   <AppContext.Consumer>
@@ -30,7 +104,7 @@ const Footer = () => (
       <Box sx={{ backgroundColor: appState.theme === 'light' ? "rgba(0,0,0,0.06)" : "rgba(125,125,125,0.2)" }}>
         <Divider />
         <Container>
-          <Box component="footer" sx={{ padding: "64px 0" }}>
+          <Box component="footer" sx={{ padding: "64px 0 32px 0" }}>
             <Grid container direction="column" spacing={4}>
               <Grid item>
                 <Grid container justifyContent="space-between" spacing={2}>
@@ -88,9 +162,24 @@ const Footer = () => (
 
 const Index = () => (
   <Stack>
-    <Onboarding />
+    <Cover />
+    <Box m={8}>
+      <Nav />
+    </Box>
+    <Box sx={{ margin: 'auto' }}>
+      <CounterIndicator count={1} />
+    </Box>
+    <StepContent />
+    <Box sx={{ margin: 'auto' }}>
+      <CounterIndicator count={2} />
+    </Box>
+    <StepContent />
+    <Box sx={{ margin: 'auto' }}>
+      <CounterIndicator count={3} hideAfter />
+    </Box>
+    <StepContent />
     <Footer />
-  </Stack>
+  </Stack >
 );
 
 export default Index;
