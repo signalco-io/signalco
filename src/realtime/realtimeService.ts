@@ -51,7 +51,10 @@ private async HandleDeviceStateAsync(state: SignalDeviceStatePublishDto) {
             const delay = Math.min((retryCount + 1) * 2, 180);
 
             console.warn(`Failed to start SignalR hub connection. Reconnecting in ${delay}s`, err);
+
+            // TODO: Replace with page indicator
             PageNotificationService.show(`Realtime connection to cloud lost. Reconnecting in ${delay}s...`, "warning");
+
             setTimeout(() => {
                 this.hubStartWithRetryAsync(delay);
             }, (delay) * 1000);
