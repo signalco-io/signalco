@@ -16,6 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     # Job steps
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
       # 👇 Checks if the branch is not main and runs Chromatic
       - name: Publish to Chromatic
         if: github.ref != 'refs/heads/main'
