@@ -2,7 +2,7 @@ import { Alert, Box, Button, FormGroup, Grid, IconButton, LinearProgress, ListIt
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import HttpService from "../../src/services/HttpService";
 import { observer } from "mobx-react-lite";
-import Widget, { IWidgetProps, widgetType } from "../devices/Widget";
+import Widget, { IWidgetProps, widgetType } from "../widgets/Widget";
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -10,7 +10,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import DashboardsRepository, { DashboardSetModel, IDashboardModel } from "../../src/dashboards/DashboardsRepository";
 import { Add, AddOutlined, DashboardSharp, MoreHorizSharp, SaveOutlined, Settings } from "@mui/icons-material";
-import WidgetStore from "../devices/WidgetStore";
+import WidgetStore from "../widgets/WidgetStore";
 import PageNotificationService from "../../src/notifications/PageNotificationService";
 import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
 import {

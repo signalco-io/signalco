@@ -16,7 +16,7 @@ import throttle from '../../../src/helpers/Throttle';
 import { useCallback } from 'react';
 import blendColors from '../../../src/helpers/BlendColors';
 import SelectItems from '../../../components/shared/form/SelectItems';
-import { IHistoricalValue } from '../../../components/devices/parts/WidgetPartGraph';
+import { IHistoricalValue } from '../../../components/widgets/parts/WidgetPartGraph';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 import useDevice from '../../../src/hooks/useDevice';
 
