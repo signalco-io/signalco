@@ -26,8 +26,8 @@ export type StateAction = {
     delay?: number
 };
 
-export const executeStateAction = async (deviceId: string, channelName: string, contactName: string, valueSerialized?: string, delay?: number) => {
-    return await executeStateActions([{
+export const executeStateActionAsync = (deviceId: string, channelName: string, contactName: string, valueSerialized?: string, delay?: number) => {
+    return executeStateActionsAsync([{
         deviceId: deviceId,
         channelName: channelName,
         contactName: contactName,
@@ -36,7 +36,7 @@ export const executeStateAction = async (deviceId: string, channelName: string, 
     }]);
 }
 
-export const executeStateActions = async (actions: StateAction[]) => {
+export const executeStateActionsAsync = async (actions: StateAction[]) => {
     // Execute all actions
     const conducts = [];
     for (const action of actions) {
@@ -112,7 +112,7 @@ const WidgetState = (props: IWidgetSharedProps) => {
             return;
         }
 
-        executeStateAction(device.id, config?.target?.channelName, config?.target?.contactName);
+        executeStateActionAsync(device.id, config?.target?.channelName, config?.target?.contactName);
     };
 
     return (

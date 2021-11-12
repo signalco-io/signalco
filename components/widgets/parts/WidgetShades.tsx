@@ -7,7 +7,7 @@ import PageNotificationService from '../../../src/notifications/PageNotification
 import { IWidgetSharedProps } from '../Widget';
 import WidgetCard from './WidgetCard';
 import { IWidgetConfigurationOption } from './WidgetConfiguration';
-import { executeStateActions, StateAction } from './WidgetState';
+import { executeStateActionsAsync, StateAction } from './WidgetState';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
@@ -85,7 +85,7 @@ const WidgetShades = (props: IWidgetSharedProps) => {
                 actions.push.apply(actions, stopActions());
                 break;
         }
-        executeStateActions(actions);
+        executeStateActionsAsync(actions);
     };
 
     return (
