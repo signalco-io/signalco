@@ -5,6 +5,7 @@ import useDevice from '../../../src/hooks/useDevice';
 import WidgetCard from './WidgetCard';
 import { IWidgetConfigurationOption } from './WidgetConfiguration';
 import { CircleSlider } from "react-circle-slider";
+import { IWidgetSharedProps } from '../Widget';
 
 const stateOptions: IWidgetConfigurationOption[] = [
     { name: 'targetTemperature', label: 'Temperature', type: 'deviceContactTarget' },
@@ -23,7 +24,7 @@ const SmallIndicator = observer((props: { isActive: boolean, icon: string, label
     </Box>
 ));
 
-const WidgetTermostat = (props: { config: any, isEditMode: boolean, setConfig: (config: object) => void, onRemove: () => void }) => {
+const WidgetTermostat = (props: IWidgetSharedProps) => {
     const { config, setConfig, isEditMode, onRemove } = props;
     const temperatureDevice = useDevice(config?.targetTemperature?.deviceId);
     const heatingDevice = useDevice(config?.targetHeating?.deviceId);

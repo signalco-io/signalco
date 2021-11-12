@@ -8,6 +8,7 @@ import ConductsService from '../../../src/conducts/ConductsService';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import { Box } from '@mui/system';
 import useDevice from "../../../src/hooks/useDevice";
+import { IWidgetSharedProps } from "../Widget";
 
 const stateOptions = [
     { name: 'target', label: 'Target', type: 'deviceContactTarget' },
@@ -87,7 +88,7 @@ export const executeStateActions = async (actions: StateAction[]) => {
     });
 };
 
-const WidgetState = (props: { isEditMode: boolean, config: any, setConfig: (config: object) => void, onRemove: () => void }) => {
+const WidgetState = (props: IWidgetSharedProps) => {
     const { config, setConfig, isEditMode, onRemove } = props;
     const device = useDevice(config?.target?.deviceId);
 

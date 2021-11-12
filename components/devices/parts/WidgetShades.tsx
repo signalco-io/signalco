@@ -4,13 +4,14 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import useDevice from '../../../src/hooks/useDevice';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
+import { IWidgetSharedProps } from '../Widget';
 import WidgetCard from './WidgetCard';
 import { IWidgetConfigurationOption } from './WidgetConfiguration';
 import { executeStateActions, StateAction } from './WidgetState';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
-const WidgetShades = (props: { config: any, isEditMode: boolean, setConfig: (config: object) => void, onRemove: () => void }) => {
+const WidgetShades = (props: IWidgetSharedProps) => {
     const { config, setConfig, isEditMode, onRemove } = props;
     const device = useDevice(config?.target?.deviceId);
 

@@ -8,8 +8,9 @@ import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVer
 import SentimentDissatisfiedOutlinedIcon from '@mui/icons-material/SentimentDissatisfiedOutlined';
 import { useRouter } from "next/router";
 import useDevice from "../../../src/hooks/useDevice";
+import { IWidgetSharedProps } from "../Widget";
 
-const WidgetIndicator = (props: { isEditMode: boolean, config: any, setConfig: (config: object) => void, onRemove: () => void }) => {
+const WidgetIndicator = (props: IWidgetSharedProps) => {
     const { config, setConfig, isEditMode, onRemove } = props;
     const device = useDevice(config?.target?.deviceId);
     const router = useRouter();
