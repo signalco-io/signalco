@@ -1,19 +1,16 @@
 <p align="center">
   <a href="#">
-    <img height="128" width="455" src="https://raw.githubusercontent.com/signalco-io/signalco/main/public/images/logo-ghtheme-128x455.png">
+    <img height="128" width="455" alt="signalco" src="https://raw.githubusercontent.com/signalco-io/signalco/main/public/images/logo-ghtheme-128x455.png">
   </a>
 </p>
-<h1 align="center">
-  Signalco
-</h1>
 <h4 align="center">Automate your life.</h4>
 
 <p align="center">
   <a href="#getting-started">Getting Started</a> •
   <a href="#key-features">Key Features</a> •
   <a href="#community">Community</a> •
-  <a href="#related">Related</a> •
-  <a href="#license">License</a>
+  <a href="#contributing">Contributing</a> •
+  <a href="#development">Development</a>
 </p>
 
 ## Getting Started
@@ -38,6 +35,13 @@ Our [Code of Conduct](https://github.com/signalco-io/signalco/blob/main/CODE_OF_
 ## Contributing
 
 Please see our [contributing.md](/contributing.md).
+
+## Development
+
+Code
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/8f6479343e1e51f2a2d1/maintainability)](https://codeclimate.com/github/signalco-io/signalco/maintainability)
+[![CodeFactor](https://www.codefactor.io/repository/github/signalco-io/signalco/badge)](https://www.codefactor.io/repository/github/signalco-io/signalco)
 
 ## Related
 
