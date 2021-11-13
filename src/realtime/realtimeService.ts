@@ -6,25 +6,25 @@ import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signal
 class RealtimeService {
     private devicesHub?: HubConnection;
 
-private async HandleDeviceStateAsync(state: SignalDeviceStatePublishDto) {
-    if (typeof state.DeviceId === 'undefined' ||
-    typeof state.ChannelName === 'undefined' ||
-    typeof state.ContactName === 'undefined' ||
-    typeof state.TimeStamp === 'undefined') {
-    console.warn("Got device state with invalid values", state);
-    return;
-    }
+    private async HandleDeviceStateAsync(state: SignalDeviceStatePublishDto) {
+        if (typeof state.DeviceId === 'undefined' ||
+        typeof state.ChannelName === 'undefined' ||
+        typeof state.ContactName === 'undefined' ||
+        typeof state.TimeStamp === 'undefined') {
+        console.warn("Got device state with invalid values", state);
+        return;
+        }
 
-    const device = await DevicesRepository.getDeviceAsync(state.DeviceId);
-    if (typeof device !== 'undefined') {
-    device.updateState(
-        state.ChannelName,
-        state.ContactName,
-        state.ValueSerialized,
-        new Date(state.TimeStamp)
-    );
+        const device = await DevicesRepository.getDeviceAsync(state.DeviceId);
+        if (typeof device !== 'undefined') {
+        device.updateState(
+            state.ChannelName,
+            state.ContactName,
+            state.ValueSerialized,
+            new Date(state.TimeStamp)
+        );
+        }
     }
-}
 
     private async hubStartWithRetryAsync(retryCount: number) {
         try {
