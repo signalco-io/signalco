@@ -1,4 +1,4 @@
-import { IHistoricalValue } from "../../components/devices/parts/WidgetPartGraph";
+import { IHistoricalValue } from "../../components/widgets/parts/WidgetPartGraph";
 import HttpService from "../services/HttpService";
 import { IDeviceModel, DeviceModel, IDeviceContactState, DeviceContactState, IDeviceContact, DeviceContact, IDeviceEndpoint, DeviceEndpoint, IDeviceStatePublish, DeviceStatePublish, IDeviceTarget, User, IUser, IDeviceContactDataValue, DeviceContactDataValue } from "./Device";
 

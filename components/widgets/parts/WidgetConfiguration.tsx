@@ -89,6 +89,12 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
             placeholder="Never"
             onChange={e => props.onChange(e.target.value)}
             endAdornment={props.option.dataUnit && (<InputAdornment position="end">{props.option.dataUnit}</InputAdornment>)} />
+    } else if (props.option.type === 'string') {
+        return <OutlinedInput
+            value={props.value}
+            placeholder="No label"
+            onChange={e => props.onChange(e.target.value)}
+            endAdornment={props.option.dataUnit && (<InputAdornment position="end">{props.option.dataUnit}</InputAdornment>)} />
     }
 
     return <Typography>Unknown option type</Typography>;

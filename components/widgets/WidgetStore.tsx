@@ -34,6 +34,13 @@ const availableWidgets = [
         preview: '/assets/widget-previews/WidgetIndicatorPreview_dark.png',
         previewHeight: 400,
         previewWidth: 106
+    },
+    {
+        type: 'termostat',
+        name: 'Termostat widget',
+        description: 'Monitor and Control temperature.',
+        preview: '/assets/widget-previews/WidgetTermostatPreview_dark.png',
+        previewWidth: 230
     }
 ];
 

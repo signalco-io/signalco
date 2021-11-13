@@ -2,10 +2,11 @@ import { Box, LinearProgress, Paper, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Area, AreaChart, XAxis, YAxis, Tooltip } from "recharts";
 import { IDeviceTarget } from "../../../src/devices/Device";
-import { rowHeight } from "./Shared";
 import { scaleTime, timeHour } from 'd3';
 import { useTheme } from "@mui/material";
 import ReactTimeago from "react-timeago";
+
+const rowHeight = 72;
 
 export interface IWidgetPartGraphConfig {
     columns: number,

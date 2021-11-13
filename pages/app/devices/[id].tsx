@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
-import { IDeviceContact, IDeviceContactState, IDeviceModel } from '../../../src/devices/Device';
+import { IDeviceContact, IDeviceContactState } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import { observer } from 'mobx-react-lite';
 import { Clear as ClearIcon, ExpandMore as ExpandMoreIcon, PlayArrow as PlayArrowIcon, Send as SendIcon, Share as ShareIcon } from '@mui/icons-material';
@@ -16,8 +16,9 @@ import throttle from '../../../src/helpers/Throttle';
 import { useCallback } from 'react';
 import blendColors from '../../../src/helpers/BlendColors';
 import SelectItems from '../../../components/shared/form/SelectItems';
-import { IHistoricalValue } from '../../../components/devices/parts/WidgetPartGraph';
+import { IHistoricalValue } from '../../../components/widgets/parts/WidgetPartGraph';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
+import useDevice from '../../../src/hooks/useDevice';
 
 interface IStateTableItem extends IAutoTableItem {
     name: string,
@@ -178,25 +179,9 @@ const DeviceDetails = () => {
     const { id } = router.query;
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | undefined>();
-    const [device, setDevice] = useState<IDeviceModel | undefined>();
+    const device = useDevice(typeof id !== "object" && typeof id !== 'undefined' ? id : undefined);
     const [stateTableItems, setStateTableItems] = useState<IStateTableItem[] | undefined>();
     const [actionTableItems, setActionTableItems] = useState<IActionTableItem[] | undefined>();
-
-    useEffect(() => {
-        const loadDeviceAsync = async () => {
-            try {
-                if (typeof id !== "object" &&
-                    typeof id !== 'undefined') {
-                    const loadedDevice = await DevicesRepository.getDeviceAsync(id);
-                    setDevice(loadedDevice);
-                }
-            } catch (err: any) {
-                setError(err?.toString());
-            }
-        };
-
-        loadDeviceAsync();
-    }, [id]);
 
     useEffect(() => {
         try {

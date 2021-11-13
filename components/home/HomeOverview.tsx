@@ -2,7 +2,7 @@ import { Alert, Box, Button, FormGroup, Grid, IconButton, LinearProgress, ListIt
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import HttpService from "../../src/services/HttpService";
 import { observer } from "mobx-react-lite";
-import Widget, { IWidgetProps, widgetType } from "../devices/Widget";
+import Widget, { IWidgetProps, widgetType } from "../widgets/Widget";
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -10,7 +10,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import DashboardsRepository, { DashboardSetModel, IDashboardModel } from "../../src/dashboards/DashboardsRepository";
 import { Add, AddOutlined, DashboardSharp, MoreHorizSharp, SaveOutlined, Settings } from "@mui/icons-material";
-import WidgetStore from "../devices/WidgetStore";
+import WidgetStore from "../widgets/WidgetStore";
 import PageNotificationService from "../../src/notifications/PageNotificationService";
 import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
 import {
@@ -18,8 +18,8 @@ import {
     bindTrigger,
     bindMenu,
 } from 'material-ui-popup-state/hooks';
-import { DndContext, DragEndEvent, KeyboardSensor, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
+import { DndContext, DragEndEvent, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { snapCenterToCursor } from "@dnd-kit/modifiers";
 
@@ -141,10 +141,7 @@ const RenderDashboard = (props: { dashboard: IDashboard, isEditing: boolean, han
                 delay: 100,
                 tolerance: 5
             }
-        }),
-        useSensor(KeyboardSensor, {
-            coordinateGetter: sortableKeyboardCoordinates,
-        }),
+        })
     );
 
     function handleDragEnd(event: DragEndEvent) {
