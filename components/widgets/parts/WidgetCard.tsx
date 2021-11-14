@@ -62,6 +62,13 @@ const WidgetCard = (props: IWidgetCardProps) => {
         }
     }
 
+    let bgColor = undefined;
+    if (appContext.theme === 'dark') {
+        bgColor = state ? 'action.selected' : undefined;
+    } else {
+        bgColor = state ? 'background.default' : undefined
+    }
+
     return (
         <>
             <Paper
@@ -71,10 +78,9 @@ const WidgetCard = (props: IWidgetCardProps) => {
                     width: sizeWidth,
                     height: sizeHeight,
                     display: "block",
-                    bgcolor: appContext.theme !== 'dark' && state ? 'background.default' : undefined
+                    bgcolor: bgColor
                 }}
-                variant={appContext.theme === 'dark' ? "elevation" : 'outlined'}
-                elevation={appContext.theme === 'dark' && state ? 1 : 0}>
+                variant='outlined'>
                 {needsConfiguration ? (
                     <Stack justifyContent="stretch" sx={{ height: '100%' }}>
                         <Button disabled={!isEditMode} size="large" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
