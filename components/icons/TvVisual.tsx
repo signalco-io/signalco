@@ -1,10 +1,14 @@
+import { useContext } from 'react';
+import { AppContext } from '../../pages/_app';
 import styles from './TvVisual.module.scss';
 
-const TvVisual = (props: { state: boolean, theme: "dark" | "light", size: number }) => {
+const TvVisual = (props: { state: boolean, size: number }) => {
+    const appContext = useContext(AppContext);
+
     const isActive = props.state;
     const screenColor = isActive ? "#378DBD" : "#333";
-    const edgeColor = props.theme === 'dark' ? "#fff" : "#000";
-    const shadowColor = props.theme === 'dark' ? "#000" : "#fff";
+    const edgeColor = appContext.theme === 'dark' ? "#fff" : "#000";
+    const shadowColor = appContext.theme === 'dark' ? "#000" : "#fff";
 
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className={styles.root} width={props.size * 1.6} height={props.size * 1.6} fill="none" viewBox="0 0 103 77">

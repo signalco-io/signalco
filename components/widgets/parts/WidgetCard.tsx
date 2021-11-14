@@ -1,5 +1,5 @@
 import { Box, Button, ListItemIcon, ListItemText, Menu, MenuItem, Paper, Stack } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import WidgetConfiguration, { IWidgetConfigurationOption } from "./WidgetConfiguration";
 import MoreHorizSharpIcon from '@mui/icons-material/MoreHorizSharp';
 import { Delete, Settings } from "@mui/icons-material";
@@ -8,6 +8,7 @@ import {
     bindTrigger,
     bindMenu,
 } from 'material-ui-popup-state/hooks';
+import { AppContext } from "../../../pages/_app";
 
 interface IWidgetCardProps {
     children: JSX.Element,
@@ -35,6 +36,7 @@ const WidgetCard = (props: IWidgetCardProps) => {
         onConfigured,
         onRemove
     } = props;
+    const appContext = useContext(AppContext);
     const sizeWidth = width * 78 + (width - 1) * 8;
     const sizeHeight = height * 78 + (height - 1) * 8;
 
@@ -62,7 +64,17 @@ const WidgetCard = (props: IWidgetCardProps) => {
 
     return (
         <>
-            <Paper sx={{ position: 'relative', borderRadius: 2, width: sizeWidth, height: sizeHeight, display: "block" }} variant="elevation" elevation={state ? 1 : 0}>
+            <Paper
+                sx={{
+                    position: 'relative',
+                    borderRadius: 2,
+                    width: sizeWidth,
+                    height: sizeHeight,
+                    display: "block",
+                    bgcolor: appContext.theme !== 'dark' && state ? 'background.default' : undefined
+                }}
+                variant={appContext.theme === 'dark' ? "elevation" : 'outlined'}
+                elevation={appContext.theme === 'dark' && state ? 1 : 0}>
                 {needsConfiguration ? (
                     <Stack justifyContent="stretch" sx={{ height: '100%' }}>
                         <Button disabled={!isEditMode} size="large" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>

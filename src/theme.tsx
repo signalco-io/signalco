@@ -12,7 +12,7 @@ const theme = (isDark: boolean) => {
         dark: "#fff"
       },
       secondary: {
-        main: isDark ? "#000" : "#fff",
+        main: isDark ? "#000" : "#cccccc",
         light: "#fff",
         dark: "#000"
       },
@@ -20,7 +20,8 @@ const theme = (isDark: boolean) => {
         main: red.A400,
       },
       background: {
-        default: isDark ? "#000" : "#fff"
+        default: isDark ? "#000" : "#fff",
+        paper: isDark ? "#121212" : "#eee"
       },
     },
     components: {

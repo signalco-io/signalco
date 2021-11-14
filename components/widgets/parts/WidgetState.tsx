@@ -129,7 +129,7 @@ const WidgetState = (props: IWidgetSharedProps) => {
             <ButtonBase sx={{ height: '100%', width: '100%', display: 'block', textAlign: 'left', borderRadius: 2 }} onClick={handleStateChangeRequest} >
                 <Stack sx={{ height: '100%', py: 2 }}>
                     <Box sx={{ px: 2.5 }}>
-                        <Visual state={state} theme="dark" size={68} />
+                        <Visual state={state} size={68} />
                     </Box>
                     <Box sx={{ px: 2.5 }}>
                         <Typography fontWeight="light" noWrap>{label}</Typography>

@@ -1,15 +1,16 @@
 import { Container, FormControlLabel, FormGroup, Paper, Switch } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
+import { AppContext } from '../../_app';
 
 const SettingsIndex = () => {
-    const [isDarkMode, setIsDarkMode] = useState((typeof window !== 'undefined' && window.localStorage?.getItem('theme') === 'dark') ? true : false);
+    const appContext = useContext(AppContext);
+    const isDarkMode = appContext.theme === 'dark';
 
     const handleDarkModeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const isDark = event?.target.checked;
-        window.localStorage.setItem("theme", isDark ? "dark" : "light");
-        setIsDarkMode(isDark);
-        window.location.reload();
+        const newIsDarkMode = event?.target.checked;
+        if (appContext.setTheme)
+            appContext.setTheme(newIsDarkMode ? "dark" : 'light');
     };
 
     return (
