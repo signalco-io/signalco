@@ -106,7 +106,7 @@ const WidgetShades = (props: IWidgetSharedProps) => {
                         <Typography fontWeight="light" noWrap>{label}</Typography>
                     </Stack>
                 </Grid>
-                <Grid item xs={6} sx={{ bgcolor: 'background.paper', borderLeft: "1px solid", borderColor: 'divider' }}>
+                <Grid item xs={6} sx={{ bgcolor: 'background.paper', borderLeft: "1px solid", borderColor: 'divider', borderRadius: 2 }}>
                     <Stack sx={{ height: '100%' }} justifyContent="stretch">
                         <Button onClick={() => handleStateChangeRequest('up')} sx={{ flexGrow: 1, borderBottom: '1px solid', borderColor: 'divider' }}><ArrowUpward /></Button>
                         <Button onClick={() => handleStateChangeRequest('stop')} sx={{ flexGrow: 1 }}><Stop /></Button>
