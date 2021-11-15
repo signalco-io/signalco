@@ -1,4 +1,4 @@
-import { IWidgetConfigurationOption } from "./IWidgetConfigurationOption";
+import IWidgetConfigurationOption from "./IWidgetConfigurationOption";
 
 export const IsConfigurationValid = (config: any, options: IWidgetConfigurationOption[]) => {
     if (!config) return false;
