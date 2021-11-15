@@ -3,11 +3,10 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import useDevice from '../../../src/hooks/useDevice';
 import WidgetCard from './WidgetCard';
-import { IWidgetConfigurationOption } from './WidgetConfiguration';
 import { CircleSlider } from "react-circle-slider";
 import { IWidgetSharedProps } from '../Widget';
 
-const stateOptions: IWidgetConfigurationOption[] = [
+const stateOptions = [
     { name: 'targetTemperature', label: 'Temperature', type: 'deviceContactTarget' },
     { name: 'label', label: 'Label', type: 'string' },
     { name: 'targetHeating', label: 'Heating', type: 'deviceContactTarget' },
