@@ -7,26 +7,50 @@ import { AppContext } from "./_app";
 const Cover = () => (
   <AppContext.Consumer>
     {appState => (
-      <Stack>
-        <Stack sx={{ py: '20vh', px: '10%' }}>
-          <Image src={appState.theme === 'light' ? "/images/icon-light-512x512.png" : "/images/icon-dark-512x144.png"} alt="Signalco logo" layout="fixed" width={512} height={144} />
-          <Typography fontFamily="Raleway" fontWeight={200} fontSize={41}>Automate your life</Typography>
-        </Stack>
-      </Stack>
+      <>
+        <Box sx={
+          {
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            content: '""',
+            display: 'block',
+            width: '100%',
+            height: '100%',
+            background: 'radial-gradient(at top right, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0) 70%)',
+            backgroundPosition: 'right top'
+          }
+        }>
+        </Box>
+        <Box sx={{
+          height: '80vh', display: 'flex', alignItems: 'center', px: '10%', pt: '10vh'
+        }}>
+          <Stack>
+            <Box sx={{ pr: '30%' }}>
+              <Image
+                src={appState.theme === 'light' ? "/images/icon-light-512x512.png" : "/images/icon-dark-512x144.png"}
+                alt="signalco"
+                width={512}
+                height={144} />
+            </Box>
+            <Typography fontFamily="Raleway" fontWeight={200} fontSize={{ xs: '1.4rem', sm: '2rem', md: '2.5rem' }}>Automate your life</Typography>
+          </Stack>
+        </Box>
+      </>
     )}
-  </AppContext.Consumer>
+  </AppContext.Consumer >
 );
 
 const Nav = () => (
-  <Stack justifyContent="center" direction="row" sx={{ pt: 10 }} spacing={8}>
+  <Stack justifyContent="center" direction="row" spacing={{ xs: 4, md: 8 }}>
     <Link href="/app" sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
-      <Typography fontSize={24} fontWeight={300}>Automate</Typography>
+      <Typography variant="h2">Automate</Typography>
     </Link>
     <Link href="#" sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
-      <Typography fontSize={24} fontWeight={300}>Explore</Typography>
+      <Typography variant="h2">Explore</Typography>
     </Link>
     <Link href="#" sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
-      <Typography fontSize={24} fontWeight={300}>Community</Typography>
+      <Typography variant="h2">Community</Typography>
     </Link>
   </Stack>
 );
@@ -72,27 +96,30 @@ const CounterIndicator = (props: { count: number, hideAfter?: boolean }) => (
   </AppContext.Consumer>
 );
 
-const FeatureDescription = () => (
+const FeatureDescription = (props: { title: string, content: string }) => (
   <Stack spacing={2}>
-    <Typography fontWeight={600} fontSize={24}>Feature</Typography>
-    <Typography sx={{ opacity: 0.6 }}>Description duis fermentum facilisis libero, in elementum ante sodales at. Mauris viverra, eros a efficitur posuere, est augue laoreet arcu, vitae varius ex ipsum at lectus.</Typography>
+    <Typography fontWeight={600} fontSize={24}>{props.title}</Typography>
+    <Typography sx={{ opacity: 0.6 }}>{props.content}</Typography>
   </Stack>
 );
 
-const StepContent = () => (
+const StepContent = (props: { title: string, subtitle?: string, imageSrc?: string, children?: React.ReactElement | React.ReactElement[] }) => (
   <Container>
     <Stack spacing={12} p={8}>
       <Stack spacing={4}>
-        <Typography fontWeight={600} fontSize={52} textAlign="center">Title</Typography>
-        <Typography fontSize={18} textAlign="center" sx={{ opacity: 0.6 }}>Brief description nullam ligula leo, cursus eu condimentum quis, egestas nec dolor. Etiam faucibus, neque in tincidunt rhoncus, lacus diam aliquet diam, vitae imperdiet nisi augue non nulla.</Typography>
+        <Typography fontWeight={600} fontSize={52} textAlign="center">{props.title}</Typography>
+        {props.subtitle && <Typography fontSize={18} textAlign="center" sx={{ opacity: 0.6 }}>{props.subtitle}</Typography>}
       </Stack>
       <Stack position="relative" direction="row" spacing={8}>
-        <Box width="100%" sx={{ backgroundColor: "rgba(128,128,128,0.2)" }}>
-        </Box>
-        <Stack width="100%" spacing={4}>
-          <FeatureDescription />
-          <FeatureDescription />
-        </Stack>
+        {props.imageSrc && (
+          <Box width="100%">
+          </Box>
+        )}
+        {props.children && (
+          <Stack width="100%" spacing={4}>
+            {props.children}
+          </Stack>
+        )}
       </Stack>
     </Stack>
   </Container>
@@ -169,15 +196,26 @@ const Index = () => (
     <Box sx={{ margin: 'auto' }}>
       <CounterIndicator count={1} />
     </Box>
-    <StepContent />
+    <StepContent title="Discover">
+      <FeatureDescription
+        title="Integrations"
+        content="Infinite possibilities. Check out many of our integrations." />
+      <FeatureDescription
+        title="Inpiration"
+        content="" />
+    </StepContent>
     <Box sx={{ margin: 'auto' }}>
       <CounterIndicator count={2} />
     </Box>
-    <StepContent />
+    <StepContent title="Play" />
     <Box sx={{ margin: 'auto' }}>
       <CounterIndicator count={3} hideAfter />
     </Box>
-    <StepContent />
+    <StepContent title="Enjoy">
+      <FeatureDescription
+        title="Anywhere you are"
+        content="Access signalco from anywhere in the world and control all your devices and services from one app." />
+    </StepContent>
     <Footer />
   </Stack >
 );

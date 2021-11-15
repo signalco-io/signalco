@@ -131,33 +131,35 @@ export async function getStaticProps() {
     };
 }
 
+const communication = [
+    { id: 'zigbee', label: "Zigbee" },
+    { id: 'bluetooth', label: "Bluetooth" },
+    { id: 'wifi', label: "Wi-Fi" },
+    { id: 'radio', label: "Radio (433/868 MHz)" },
+    { id: 'ir', label: "Infrared" }
+];
+
+const items = [
+    { id: 'item1', name: 'Item 1', imageSrc: '/images/icon-light-512x512.png', price: 100, stockStatus: 0 },
+    { id: 'item2', name: 'Item 2', imageSrc: '/images/icon-light-512x512.png', price: 29, stockStatus: 1 },
+    { id: 'item3', name: 'Item 3', imageSrc: '/images/icon-light-512x512.png', price: 29, stockStatus: 2 },
+    { id: 'item4', name: 'Item 4', imageSrc: '/images/icon-light-512x512.png', price: 1945, stockStatus: 3 }
+];
+
+const orderByItems = [
+    { value: "0", label: "Popularity" },
+    { value: "1", label: "Price low > high" },
+    { value: "2", label: "Price high > low" }
+];
+
 const StoreIndex = (props: { categories: string[], brands: string[] }) => {
     const categories = props.categories.map(c => ({ id: c, label: c }));
     const brands = props.brands.map(b => ({ id: b, label: b }));
-    const communication = [
-        { id: 'zigbee', label: "Zigbee" },
-        { id: 'bluetooth', label: "Bluetooth" },
-        { id: 'wifi', label: "Wi-Fi" },
-        { id: 'radio', label: "Radio (433/868 MHz)" },
-        { id: 'ir', label: "Infrared" }
-    ];
-
-    const items = [
-        { id: 'item1', name: 'Item 1', imageSrc: '/images/icon-light-512x512.png', price: 100, stockStatus: 0 },
-        { id: 'item2', name: 'Item 2', imageSrc: '/images/icon-light-512x512.png', price: 29, stockStatus: 1 },
-        { id: 'item3', name: 'Item 3', imageSrc: '/images/icon-light-512x512.png', price: 29, stockStatus: 2 },
-        { id: 'item4', name: 'Item 4', imageSrc: '/images/icon-light-512x512.png', price: 1945, stockStatus: 3 }
-    ];
 
     const [selectedOrderByItems, setSelectedOrderByItems] = useState<string[]>(["0"]);
     const handleOrderByItemsChange = (values: string[]) => setSelectedOrderByItems(values);
-    const orderByItems = [
-        { value: "0", label: "Popularity" },
-        { value: "1", label: "Price low > high" },
-        { value: "2", label: "Price high > low" }
-    ];
 
-    return (<>
+    return (
         <Stack>
             <Container sx={{ py: 8 }}>
                 <Stack spacing={8}>
@@ -191,7 +193,6 @@ const StoreIndex = (props: { categories: string[], brands: string[] }) => {
                 </Stack>
             </Container>
         </Stack>
-    </>
     );
 };
 

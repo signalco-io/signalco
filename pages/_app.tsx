@@ -20,14 +20,30 @@ interface MyAppProps extends AppProps {
 }
 
 export interface IAppContext {
-  theme: string
+  theme: string,
+  setTheme?: (theme: string) => void;
 }
 
-export const AppContext = React.createContext<IAppContext>({ theme: 'light' });
+const appContextDefaultState = {
+  theme: 'light'
+};
+
+export const AppContext = React.createContext<IAppContext>(appContextDefaultState);
 
 export default function App(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps, err } = props;
-  const [appContextState, setAppContext] = React.useState({ theme: 'light' });
+  const handleThemeChange = (theme: string) => {
+    window.localStorage.setItem("theme", theme);
+    setAppContext({
+      ...appContextState,
+      theme: theme
+    });
+  };
+
+  const [appContextState, setAppContext] = React.useState<IAppContext>({
+    ...appContextDefaultState,
+    setTheme: handleThemeChange
+  });
 
   console.debug("App rendering");
 

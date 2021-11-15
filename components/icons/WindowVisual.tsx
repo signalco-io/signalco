@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { AppContext } from '../../pages/_app';
 import { hexToRgb } from '../../src/helpers/StringHelpers';
 import styles from './WindowVisual.module.scss';
 
@@ -29,6 +31,8 @@ var skySunnyGrads = [
 ];
 
 const WindowVisual = (props: { shadePerc: number, theme: "dark" | "light", size: number }) => {
+    const appContext = useContext(AppContext);
+
     const perc = props.shadePerc;
 
     const hours = (new Date().getHours()) % 24;
@@ -42,7 +46,7 @@ const WindowVisual = (props: { shadePerc: number, theme: "dark" | "light", size:
 
     const shadePosition = 1 + (perc * 64);
 
-    const edgeColor = props.theme === 'dark' ? "#fff" : "#000";
+    const edgeColor = appContext.theme === 'dark' ? "#fff" : "#000";
 
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className={styles.root} width={props.size * 1.4} height={props.size * 1.4} fill="none" viewBox="0 0 81 104">

@@ -6,6 +6,7 @@ import {
   ListItemText,
   Menu,
   MenuItem,
+  Stack,
 } from "@mui/material";
 import Link from 'next/link';
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -82,35 +83,33 @@ const NavProfile = () => {
   const activeNavItem = orderBy(navItems.filter(ni => router.pathname.startsWith(ni.path)), ni => 0 - ni.path.length)[0];
 
   return (
-    <>
-      <Grid container alignItems="center" sx={{ width: '100%' }}>
-        <Grid item style={{ flexGrow: 1 }}>
-          <Grid container>
-            {navItems.map((ni, index) =>
-              <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={ni.label} />)}
-          </Grid>
-        </Grid>
-        <Grid item>
-          <ButtonBase {...bindTrigger(popupState)}>
-            <UserAvatar user={user} />
-          </ButtonBase>
-          <Menu {...bindMenu(popupState)}>
-            <MenuItem onClick={() => { router.push('/app/settings'); popupState.close(); }}>
-              <ListItemIcon>
-                <SettingsIcon />
-              </ListItemIcon>
-              <ListItemText>Settings</ListItemText>
-            </MenuItem>
-            <MenuItem onClick={() => logout()}>
-              <ListItemIcon>
-                <ExitToAppIcon />
-              </ListItemIcon>
-              <ListItemText>Logout</ListItemText>
-            </MenuItem>
-          </Menu>
-        </Grid>
+    <Grid container alignItems="center" sx={{ width: '100%' }}>
+      <Grid item style={{ flexGrow: 1 }}>
+        <Stack direction="row">
+          {navItems.map((ni, index) =>
+            <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={ni.label} />)}
+        </Stack>
       </Grid>
-    </>
+      <Grid item>
+        <ButtonBase {...bindTrigger(popupState)}>
+          <UserAvatar user={user} />
+        </ButtonBase>
+        <Menu {...bindMenu(popupState)}>
+          <MenuItem onClick={() => { router.push('/app/settings'); popupState.close(); }}>
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText>Settings</ListItemText>
+          </MenuItem>
+          <MenuItem onClick={() => logout()}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText>Logout</ListItemText>
+          </MenuItem>
+        </Menu>
+      </Grid>
+    </Grid>
   );
 };
 

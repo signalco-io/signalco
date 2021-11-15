@@ -1,5 +1,5 @@
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import { Box, Grid } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import React, { useEffect } from "react";
 import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
@@ -27,14 +27,12 @@ const AppLayout = (props: { children?: React.ReactNode }) => {
   }, []);
 
   return (
-    <Grid container direction="column" sx={{ height: '100%', width: '100%' }} wrap="nowrap">
-      <Grid item>
-        <NavProfile />
-      </Grid>
-      <Grid sx={{ height: '100%', flexGrow: 1, position: 'relative' }} item>
+    <Stack sx={{ height: '100%', width: '100%' }}>
+      <NavProfile />
+      <Box sx={{ height: '100%', flexGrow: 1, position: 'relative' }}>
         {children}
-      </Grid>
-    </Grid>
+      </Box>
+    </Stack>
   );
 };
 
