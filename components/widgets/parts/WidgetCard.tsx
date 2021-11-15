@@ -1,6 +1,6 @@
 import { Box, Button, ListItemIcon, ListItemText, Menu, MenuItem, Paper, Stack } from "@mui/material";
 import React, { useState, useContext } from "react";
-import WidgetConfiguration, { IWidgetConfigurationOption } from "./WidgetConfiguration";
+import WidgetConfiguration from "./WidgetConfiguration";
 import MoreHorizSharpIcon from '@mui/icons-material/MoreHorizSharp';
 import { Delete, Settings } from "@mui/icons-material";
 import {
@@ -9,6 +9,7 @@ import {
     bindMenu,
 } from 'material-ui-popup-state/hooks';
 import { AppContext } from "../../../pages/_app";
+import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
 
 interface IWidgetCardProps {
     children: JSX.Element,

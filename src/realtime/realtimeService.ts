@@ -17,12 +17,12 @@ class RealtimeService {
 
         const device = await DevicesRepository.getDeviceAsync(state.DeviceId);
         if (typeof device !== 'undefined') {
-        device.updateState(
-            state.ChannelName,
-            state.ContactName,
-            state.ValueSerialized,
-            new Date(state.TimeStamp)
-        );
+            device.updateState(
+                state.ChannelName,
+                state.ContactName,
+                state.ValueSerialized,
+                new Date(state.TimeStamp)
+            );
         }
     }
 
@@ -73,7 +73,7 @@ class RealtimeService {
             accessTokenFactory: async () => {
               if (typeof HttpService.tokenFactory === 'undefined')
                 throw Error("TokenFactory not present. Unable to authorize SignalR client.");
-              return await HttpService.tokenFactory();
+              return HttpService.tokenFactory();
             }
           })
           .configureLogging(LogLevel.Information)

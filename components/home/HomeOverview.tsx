@@ -53,7 +53,7 @@ const DragableWidget = (props: IDragableWidgetProps) => {
         transition,
     } = useSortable({ id: props.id, disabled: !props.isEditMode });
 
-    let customTransform = undefined;
+    let customTransform;
     if (transform) {
         customTransform = {
             scaleX: isDragging ? 1.1 : 1,

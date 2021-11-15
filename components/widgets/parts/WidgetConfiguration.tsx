@@ -1,18 +1,9 @@
 import { Box, Button, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
+import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
 import ConfigurationDialog from "../../shared/dialog/ConfigurationDialog";
 import DisplayDeviceTarget from "../../shared/entity/DisplayDeviceTarget";
 import SelectItems from "../../shared/form/SelectItems";
-
-export interface IWidgetConfigurationOption {
-    name: string,
-    label: string,
-    type: string,
-    default?: any,
-    dataUnit?: string,
-    data?: any,
-    optional?: boolean
-}
 
 interface IWidgetConfigurationDialogProps {
     options: IWidgetConfigurationOption[],

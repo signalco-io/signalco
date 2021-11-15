@@ -1,9 +1,9 @@
 import { BatteryCharging20Outlined } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import React from "react";
+import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
 import { IWidgetSharedProps } from "../Widget";
 import WidgetCard from "./WidgetCard";
-import { IWidgetConfigurationOption } from "./WidgetConfiguration";
 
 const stateOptions: IWidgetConfigurationOption[] = [];
 

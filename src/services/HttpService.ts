@@ -11,7 +11,7 @@ export default class HttpService {
   } 
 
   private static async _getBearerTokenAsync() {
-    let token: string | undefined = undefined;
+    let token: string | undefined;
 
     // Try to use cached token (for offline access)
     const cachedToken = localStorage.getItem('signalauth0keycache');

@@ -4,9 +4,10 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import useDevice from '../../../src/hooks/useDevice';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
+import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
+import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IWidgetSharedProps } from '../Widget';
 import WidgetCard from './WidgetCard';
-import { IWidgetConfigurationOption } from './WidgetConfiguration';
 import { executeStateActionsAsync, StateAction } from './WidgetState';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
@@ -24,15 +25,6 @@ const WidgetShades = (props: IWidgetSharedProps) => {
     const shadePerc = 0.3;
     const state = shadePerc < 1;
 
-    const needsConfiguration =
-        !config?.target?.deviceId ||
-        !config?.targetContactUp?.deviceId ||
-        !config?.targetContactUp?.contactName ||
-        !config?.targetContactUp?.channelName ||
-        !config?.targetContactDown?.deviceId ||
-        !config?.targetContactDown?.contactName ||
-        !config?.targetContactDown?.channelName;
-
     // TODO: Move outside of component
     const stateOptions: IWidgetConfigurationOption[] = [
         { name: 'target', label: 'Target', type: 'deviceTarget' },
@@ -41,6 +33,8 @@ const WidgetShades = (props: IWidgetSharedProps) => {
         { name: 'stopAfter', label: 'Stop after', type: 'number', dataUnit: 'seconds', data: device?.id, optional: true },
         { name: 'columns', label: 'Width', type: 'static', default: 4 }
     ];
+
+    const needsConfiguration = !IsConfigurationValid(config, stateOptions);
 
     const handleStateChangeRequest = (direction: "up" | "down" | "stop") => {
         if (typeof device === 'undefined') {
@@ -57,6 +51,7 @@ const WidgetShades = (props: IWidgetSharedProps) => {
         }
 
         const actions: StateAction[] = [];
+        const stopAfterDelay = config.stopAfter ? (Number.parseFloat(config.stopAfter) || 0) * 1000 : 0;
         switch (direction) {
             case "up":
                 actions.push({
@@ -65,9 +60,6 @@ const WidgetShades = (props: IWidgetSharedProps) => {
                     contactName: config?.targetContactUp?.contactName,
                     valueSerialized: 'true'
                 })
-                if (config.stopAfter) {
-                    actions.push.apply(actions, stopActions((Number.parseFloat(config.stopAfter) || 0) * 1000));
-                }
                 break;
             case "down":
                 actions.push({
@@ -76,15 +68,18 @@ const WidgetShades = (props: IWidgetSharedProps) => {
                     contactName: config?.targetContactDown?.contactName,
                     valueSerialized: 'true'
                 })
-                if (config.stopAfter) {
-                    actions.push.apply(actions, stopActions((Number.parseFloat(config.stopAfter) || 0) * 1000));
-                }
                 break;
             default:
             case "stop":
                 actions.push.apply(actions, stopActions());
                 break;
         }
+
+        // Trigger stop if requested in fonfig
+        if (direction !== 'stop' && config.stopAfter) {
+            actions.push.apply(actions, stopActions(stopAfterDelay));
+        }
+
         executeStateActionsAsync(actions);
     };
 
