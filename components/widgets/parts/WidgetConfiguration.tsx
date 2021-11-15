@@ -18,7 +18,6 @@ interface IWidgetConfigurationDialogProps {
     options: IWidgetConfigurationOption[],
     values: { [key: string]: any },
     setValue: (name: string, value: any) => void,
-    onClose: () => void,
     onCancel: () => void,
     onSave: (config: object) => void,
 }
@@ -58,7 +57,6 @@ const useWidgetConfiguration = (options: IWidgetConfigurationOption[], config: o
     }
 
     return {
-        onClose: handleCancelConfiguration,
         onCancel: handleCancelConfiguration,
         onSave: handleSaveConfiguration,
         options,
@@ -81,20 +79,15 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
             placeholder={props.option.label}
             fullWidth
             onChange={(item) => item && item.length && props.onChange(item[0])} />
+    } else if (
+        props.option.type === 'number' ||
+        props.option.type === 'string') {
+        return <OutlinedInput
+            value={props.value}
+            onChange={e => props.onChange(e.target.value)}
+            endAdornment={props.option.dataUnit && (<InputAdornment position="end">{props.option.dataUnit}</InputAdornment>)} />
     } else if (props.option.type === 'static') {
         return <Typography>{props.value}</Typography>
-    } else if (props.option.type === 'number') {
-        return <OutlinedInput
-            value={props.value}
-            placeholder="Never"
-            onChange={e => props.onChange(e.target.value)}
-            endAdornment={props.option.dataUnit && (<InputAdornment position="end">{props.option.dataUnit}</InputAdornment>)} />
-    } else if (props.option.type === 'string') {
-        return <OutlinedInput
-            value={props.value}
-            placeholder="No label"
-            onChange={e => props.onChange(e.target.value)}
-            endAdornment={props.option.dataUnit && (<InputAdornment position="end">{props.option.dataUnit}</InputAdornment>)} />
     }
 
     return <Typography>Unknown option type</Typography>;
@@ -107,7 +100,7 @@ const WidgetConfiguration = (props: IWidgetConfigurationProps) => {
         <ConfigurationDialog
             title="Configure widget"
             isOpen={props.isOpen}
-            onClose={configProps.onClose}
+            onClose={configProps.onCancel}
             actions={(
                 <>
                     <Button onClick={configProps.onCancel}>Cancel</Button>

@@ -1,4 +1,4 @@
-import { Alert, Box, Button, FormGroup, Grid, IconButton, LinearProgress, ListItemIcon, ListItemText, Menu, MenuItem, Stack, TextField } from "@mui/material";
+import { Alert, Box, Button, FormGroup, IconButton, LinearProgress, ListItemIcon, ListItemText, Menu, MenuItem, Stack, TextField } from "@mui/material";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import HttpService from "../../src/services/HttpService";
 import { observer } from "mobx-react-lite";
@@ -22,6 +22,7 @@ import { DndContext, DragEndEvent, PointerSensor, TouchSensor, useSensor, useSen
 import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { snapCenterToCursor } from "@dnd-kit/modifiers";
+import useWindowWidth from "../../src/hooks/useWindowWidth";
 
 const isServerSide = typeof window === 'undefined';
 
@@ -52,9 +53,6 @@ const DragableWidget = (props: IDragableWidgetProps) => {
         transition,
     } = useSortable({ id: props.id, disabled: !props.isEditMode });
 
-    const colSpan = (props.config as any)?.columns || 2;
-    const rowSpan = (props.config as any)?.rows || 2;
-
     let customTransform = undefined;
     if (transform) {
         customTransform = {
@@ -65,7 +63,8 @@ const DragableWidget = (props: IDragableWidgetProps) => {
         };
     }
 
-    listeners
+    const colSpan = (props.config as any)?.columns || 2;
+    const rowSpan = (props.config as any)?.rows || 2;
 
     return (
         <Box ref={setNodeRef} style={{
@@ -116,18 +115,14 @@ const RenderDashboard = (props: { dashboard: IDashboard, isEditing: boolean, han
     const dashbaordPadding = 48;
     const [widgetsOrder, setWidgetsOrder] = useState(dashboard.widgets.map(w => w.id));
 
-    useLayoutEffect(() => {
-        function updateNumberOfColumns() {
-            // When width is less than 400, set to quad column
-            const width = window.innerWidth - dashbaordPadding;
-            const numberOfColumns = Math.max(4, Math.floor(width / widgetSize));
+    const windowWidth = useWindowWidth();
+    useEffect(() => {
+        // When width is less than 400, set to quad column
+        const width = window.innerWidth - dashbaordPadding;
+        const numberOfColumns = Math.max(4, Math.floor(width / widgetSize));
 
-            setNumberOfColumns(numberOfColumns);
-        }
-        window.addEventListener('resize', updateNumberOfColumns);
-        updateNumberOfColumns();
-        return () => window.removeEventListener('resize', updateNumberOfColumns);
-    }, [widgetSize]);
+        setNumberOfColumns(numberOfColumns);
+    }, [widgetSize, windowWidth])
 
     const sensors = useSensors(
         useSensor(TouchSensor, {
@@ -350,58 +345,50 @@ const HomeOverview = () => {
     }
 
     return (
-        <Grid container direction="column" spacing={1} wrap="nowrap">
+        <Stack spacing={1}>
             {isLoading ? (
-                <Grid item>
-                    <LinearProgress />
-                </Grid>
+                <LinearProgress />
             ) : (
                 <TabContext value={dashboardIndex}>
                     {dashboardsUpdateAvailable && (
-                        <Grid item>
-                            <Alert
-                                severity="info"
-                                style={{ borderRadius: 0 }}
-                                action={<Button variant="contained" size="small" onClick={handleApplyDashboardsUpdate}>Apply update</Button>}>
-                                New version of dashboards are available.
-                            </Alert>
-                        </Grid>
+                        <Alert
+                            severity="info"
+                            style={{ borderRadius: 0 }}
+                            action={<Button variant="contained" size="small" onClick={handleApplyDashboardsUpdate}>Apply update</Button>}>
+                            New version of dashboards are available.
+                        </Alert>
                     )}
-                    <Grid item>
-                        <Grid container spacing={2}>
-                            <Grid item>
-                                <TabList selectionFollowsFocus scrollButtons="auto" variant="scrollable" onChange={handleDashboardChange} aria-label="Dashboard tabs">
-                                    {dashboards.length ? dashboards.map((d, index) => (
-                                        <Tab key={index.toString()} label={d.name} value={index.toString()} />
-                                    )) : undefined}
-                                    <Tab key={(dashboards.length || 0).toString()} icon={<Add />} value={(dashboards.length || 0).toString()} />
-                                </TabList>
-                            </Grid>
-                            <Grid item sx={{ flexGrow: 1, textAlign: "end", px: 2 }}>
-                                <IconButton {...bindTrigger(dashboardOptions)}>
-                                    <MoreHorizSharp />
-                                </IconButton>
-                                <Menu {...bindMenu(dashboardOptions)}>
-                                    <MenuItem onClick={handleEdit}>
-                                        <ListItemIcon>
-                                            <DashboardSharp />
-                                        </ListItemIcon>
-                                        <ListItemText>Edit widgets</ListItemText>
-                                    </MenuItem>
-                                    <MenuItem onClick={handleConfigureDashboard}>
-                                        <ListItemIcon>
-                                            <Settings />
-                                        </ListItemIcon>
-                                        <ListItemText>Configure...</ListItemText>
-                                    </MenuItem>
-                                </Menu>
-                                <DashboardSettings
-                                    isOpen={isConfiguringDashboard}
-                                    dashboard={dashboards[Number.parseInt(dashboardIndex, 10) || 0]}
-                                    onChange={(d) => saveDashboardEditAsync(d)}
-                                    onClose={() => setIsConfiguringDashboard(false)} />
-                            </Grid>
-                        </Grid>
+                    <Stack direction="row" spacing={2}>
+                        <TabList selectionFollowsFocus scrollButtons="auto" variant="scrollable" onChange={handleDashboardChange} aria-label="Dashboard tabs">
+                            {dashboards.length ? dashboards.map((d, index) => (
+                                <Tab key={index.toString()} label={d.name} value={index.toString()} />
+                            )) : undefined}
+                            <Tab key={(dashboards.length || 0).toString()} icon={<Add />} value={(dashboards.length || 0).toString()} />
+                        </TabList>
+                        <Box sx={{ flexGrow: 1, textAlign: "end", px: 2 }}>
+                            <IconButton {...bindTrigger(dashboardOptions)}>
+                                <MoreHorizSharp />
+                            </IconButton>
+                            <Menu {...bindMenu(dashboardOptions)}>
+                                <MenuItem onClick={handleEdit}>
+                                    <ListItemIcon>
+                                        <DashboardSharp />
+                                    </ListItemIcon>
+                                    <ListItemText>Edit widgets</ListItemText>
+                                </MenuItem>
+                                <MenuItem onClick={handleConfigureDashboard}>
+                                    <ListItemIcon>
+                                        <Settings />
+                                    </ListItemIcon>
+                                    <ListItemText>Configure...</ListItemText>
+                                </MenuItem>
+                            </Menu>
+                            <DashboardSettings
+                                isOpen={isConfiguringDashboard}
+                                dashboard={dashboards[Number.parseInt(dashboardIndex, 10) || 0]}
+                                onChange={(d) => saveDashboardEditAsync(d)}
+                                onClose={() => setIsConfiguringDashboard(false)} />
+                        </Box>
                         {isEditing && (
                             <>
                                 <Alert
@@ -427,26 +414,24 @@ const HomeOverview = () => {
                                 </ConfigurationDialog>
                             </>
                         )}
-                    </Grid>
-                    <Grid item>
-                        {dashboards.length ?
-                            dashboards.map((d, index) => (
-                                <TabPanel value={index.toString()} key={index.toString()}>
-                                    <RenderDashboard dashboard={editingDashboard || d}
-                                        isEditing={isEditing}
-                                        handleWidgetRemove={handleWidgetRemove}
-                                        handleWidgetSetConfig={handleWidgetSetConfig} />
-                                </TabPanel>
-                            ))
-                            : (
-                                <Box textAlign="center" sx={{ m: 2 }}>
-                                    <NoDataPlaceholder content="No dashboards available" />
-                                </Box>
-                            )}
-                    </Grid>
+                    </Stack>
+                    {dashboards.length ?
+                        dashboards.map((d, index) => (
+                            <TabPanel value={index.toString()} key={index.toString()}>
+                                <RenderDashboard dashboard={editingDashboard || d}
+                                    isEditing={isEditing}
+                                    handleWidgetRemove={handleWidgetRemove}
+                                    handleWidgetSetConfig={handleWidgetSetConfig} />
+                            </TabPanel>
+                        ))
+                        : (
+                            <Box textAlign="center" sx={{ m: 2 }}>
+                                <NoDataPlaceholder content="No dashboards available" />
+                            </Box>
+                        )}
                 </TabContext>
             )}
-        </Grid>
+        </Stack>
     );
 };
 

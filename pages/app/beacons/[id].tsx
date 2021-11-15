@@ -144,80 +144,76 @@ const BeaconDetails = () => {
 
     return (
         <Box sx={{ px: { sm: 2 }, py: 2 }}>
-            <Grid container spacing={2} direction="column" wrap="nowrap">
-                <Grid item>
-                    <Typography variant="h1">{beacon?.id}</Typography>
-                </Grid>
-                <Grid item>
-                    <Grid container spacing={2}>
-                        <Grid item>
-                            <Card>
-                                <CardHeader title="Information" />
-                                <CardContent>
-                                    <Grid container spacing={2} alignItems="center">
-                                        <Grid item xs={4}><span>Version</span></Grid>
-                                        <Grid item xs={4}>
-                                            <Stack direction="row">
-                                                {beacon?.version
-                                                    ? <span>{beacon.version}</span>
-                                                    : <span>Unknown</span>}
-                                            </Stack>
-                                        </Grid>
-                                        <Grid item xs={4} sx={{ textAlign: 'end' }}>
-                                            <Button startIcon={canUpdate ? <UploadIcon /> : <CheckIcon />} variant="outlined" disabled={!canUpdate} onClick={handleUpdate}>{canUpdate ? `Update to ${latestAvailableVersion}` : 'Up to date'}</Button>
-                                        </Grid>
-                                        <Grid item xs={4}><span>Last activity</span></Grid>
-                                        <Grid item xs={8}>
-                                            {beacon?.stateTimeStamp
-                                                ? <ReactTimeago date={beacon?.stateTimeStamp} />
-                                                : <span>Never</span>
-                                            }
-                                        </Grid>
-                                        <Grid item xs={4}><span>Registered date</span></Grid>
-                                        <Grid item xs={8}>
-                                            {isLoading && <LinearProgress />}
-                                            {error && <Alert color="error">Failed to load Beacon information: {error}</Alert>}
-                                            {beacon?.registeredTimeStamp &&
-                                                <ReactTimeago date={beacon?.registeredTimeStamp} />
-                                            }
-                                        </Grid>
-                                        <Grid item xs={4}><span>Station operations</span></Grid>
-                                        <Grid item xs={8}>
-                                            <Stack direction="row" alignItems="center" spacing={1}>
-                                                <Button variant="outlined" onClick={handleRestartStation}>Restart station</Button>
-                                            </Stack>
-                                        </Grid>
-                                        <Grid item xs={4}><span>System operations</span></Grid>
-                                        <Grid item xs={8}>
-                                            <Stack direction="row" alignItems="center" spacing={1}>
-                                                <Button variant="outlined" onClick={handleUpdateSystem}>Update system</Button>
-                                                <Button variant="outlined" onClick={handleRestartSystem}>Restart system</Button>
-                                                <Button variant="outlined" onClick={handleShutdownSystem}>Shutdown system</Button>
-                                            </Stack>
-                                        </Grid>
-                                        <Grid item xs={4}><span>Channels</span></Grid>
-                                        <Grid item xs={8}>
-                                            <Stack direction="row" alignItems="center" spacing={1}>
-                                                <Button variant="outlined" onClick={handleBeginDiscovery}>Begin discovery</Button>
-                                            </Stack>
-                                        </Grid>
+            <Stack spacing={2}>
+                <Typography variant="h1">{beacon?.id}</Typography>
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <Card>
+                            <CardHeader title="Information" />
+                            <CardContent>
+                                <Grid container spacing={2} alignItems="center">
+                                    <Grid item xs={4}><span>Version</span></Grid>
+                                    <Grid item xs={4}>
+                                        <Stack direction="row">
+                                            {beacon?.version
+                                                ? <span>{beacon.version}</span>
+                                                : <span>Unknown</span>}
+                                        </Stack>
                                     </Grid>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item>
-                            <Card>
-                                <CardHeader title="Channels" />
-                                <CardMedia>
-                                    {isLoading ? "Loading..." : (
-                                        <AutoTable {...workerServicesTable} />
-                                    )}
-                                </CardMedia>
-                            </Card>
-                        </Grid>
+                                    <Grid item xs={4} sx={{ textAlign: 'end' }}>
+                                        <Button startIcon={canUpdate ? <UploadIcon /> : <CheckIcon />} variant="outlined" disabled={!canUpdate} onClick={handleUpdate}>{canUpdate ? `Update to ${latestAvailableVersion}` : 'Up to date'}</Button>
+                                    </Grid>
+                                    <Grid item xs={4}><span>Last activity</span></Grid>
+                                    <Grid item xs={8}>
+                                        {beacon?.stateTimeStamp
+                                            ? <ReactTimeago date={beacon?.stateTimeStamp} />
+                                            : <span>Never</span>
+                                        }
+                                    </Grid>
+                                    <Grid item xs={4}><span>Registered date</span></Grid>
+                                    <Grid item xs={8}>
+                                        {isLoading && <LinearProgress />}
+                                        {error && <Alert color="error">Failed to load Beacon information: {error}</Alert>}
+                                        {beacon?.registeredTimeStamp &&
+                                            <ReactTimeago date={beacon?.registeredTimeStamp} />
+                                        }
+                                    </Grid>
+                                    <Grid item xs={4}><span>Station operations</span></Grid>
+                                    <Grid item xs={8}>
+                                        <Stack direction="row" alignItems="center" spacing={1}>
+                                            <Button variant="outlined" onClick={handleRestartStation}>Restart station</Button>
+                                        </Stack>
+                                    </Grid>
+                                    <Grid item xs={4}><span>System operations</span></Grid>
+                                    <Grid item xs={8}>
+                                        <Stack direction="row" alignItems="center" spacing={1}>
+                                            <Button variant="outlined" onClick={handleUpdateSystem}>Update system</Button>
+                                            <Button variant="outlined" onClick={handleRestartSystem}>Restart system</Button>
+                                            <Button variant="outlined" onClick={handleShutdownSystem}>Shutdown system</Button>
+                                        </Stack>
+                                    </Grid>
+                                    <Grid item xs={4}><span>Channels</span></Grid>
+                                    <Grid item xs={8}>
+                                        <Stack direction="row" alignItems="center" spacing={1}>
+                                            <Button variant="outlined" onClick={handleBeginDiscovery}>Begin discovery</Button>
+                                        </Stack>
+                                    </Grid>
+                                </Grid>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item>
+                        <Card>
+                            <CardHeader title="Channels" />
+                            <CardMedia>
+                                {isLoading ? "Loading..." : (
+                                    <AutoTable {...workerServicesTable} />
+                                )}
+                            </CardMedia>
+                        </Card>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Stack>
         </Box>
     );
 }
