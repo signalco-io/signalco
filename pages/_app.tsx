@@ -59,7 +59,7 @@ export default function App(props: MyAppProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // PWA 
+  // PWA
   const router = useRouter();
   React.useEffect(() => {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator && typeof (window as any).workbox !== 'undefined') {
