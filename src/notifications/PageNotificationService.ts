@@ -12,6 +12,10 @@ class PageNotificationService {
     }
 
     show(text: string, variant: "info" | "warning" | "error" | "success" | "default" = "default") {
+        if(variant === "warning" || variant === "error") {
+            (variant === 'error' ? console.error : console.warn)(`User presented with ${variant}: ${text}`);
+        }
+        
         if (this._enqueue) {
             return this._enqueue(text, { 
                 variant: variant, 

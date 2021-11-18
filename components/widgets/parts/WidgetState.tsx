@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import WidgetCard from './WidgetCard';
 import dynamic from 'next/dynamic'
-import ConductsService from '../../../src/conducts/ConductsService';
+import ConductsService, { IConduct } from '../../../src/conducts/ConductsService';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import { Box } from '@mui/system';
 import useDevice from "../../../src/hooks/useDevice";
@@ -36,56 +36,65 @@ export const executeStateActionAsync = (deviceId: string, channelName: string, c
     }]);
 }
 
-export const executeStateActionsAsync = async (actions: StateAction[]) => {
-    // Execute all actions
-    const conducts = [];
-    for (const action of actions) {
-        if (typeof action.deviceId === 'undefined' ||
-            typeof action.channelName === 'undefined' ||
-            typeof action.contactName === 'undefined') {
-            console.warn('Invalid button action source', action)
-            return;
-        }
-
-        const device = await DevicesRepository.getDeviceAsync(action.deviceId)
-
-        const isAction = device
-            ?.getContact({ channelName: action.channelName, deviceId: device.id, contactName: action.contactName })
-            ?.dataType === 'action' ?? false;
-
-        // Retrieve current boolean state
-        let newState = null;
-        if (typeof action.valueSerialized === 'undefined') {
-            if (!isAction) {
-                const currentState = device?.getState(action);
-                if (typeof currentState === 'undefined') {
-                    console.warn('Failed to retrieve button action source state', action)
-                    return;
-                }
-
-                newState = typeof currentState === 'undefined'
-                    ? action.valueSerialized
-                    : !(`${currentState.valueSerialized}`.toLowerCase() === 'true');
-            }
-        } else {
-            newState = action.valueSerialized;
-        }
-
-        conducts.push({ target: action, value: newState, delay: action.delay ?? 0, device: device });
-    }
-
+const executeConductsAsync = async (conducts: IConduct[]) => {
     // Negate current state
     await ConductsService.RequestMultipleConductAsync(conducts);
 
     // Set local value state
-    conducts.forEach(conduct => {
-        conduct.device?.updateState(
+    for (let index = 0; index < conducts.length; index++) {
+        const conduct = conducts[index];
+        const device = await DevicesRepository.getDeviceAsync(conduct.target.deviceId);
+        device?.updateState(
             conduct.target.channelName,
             conduct.target.contactName,
             conduct.value?.toString(),
             new Date()
         );
-    });
+    }
+};
+
+const determineActionValueAsync = async (action: StateAction) => {
+    if (typeof action.valueSerialized === 'undefined') {
+        // Retrieve device and determine whether contact is action contact
+        const device = await DevicesRepository.getDeviceAsync(action.deviceId);
+        const isAction = device
+            ?.getContact({ channelName: action.channelName, deviceId: device.id, contactName: action.contactName })
+            ?.dataType === 'action' ?? false;
+
+        if (!isAction) {
+            const currentState = device?.getState(action);
+            if (typeof currentState === 'undefined') {
+                console.warn('Failed to retrieve button action source state', action)
+                PageNotificationService.show("Conduct action new value can't be determined.", "warning");
+                return null;
+            }
+
+            // TODO: Only use boolean resolved when contact is boolean
+            // Set negated boolean value
+            return !(`${currentState.valueSerialized}`.toLowerCase() === 'true');
+        }
+    } else {
+        return action.valueSerialized;
+    }
+};
+
+export const executeStateActionsAsync = async (actions: StateAction[]) => {
+    const conducts = [];
+    for (const action of actions) {
+        if (typeof action.deviceId === 'undefined' ||
+            typeof action.channelName === 'undefined' ||
+            typeof action.contactName === 'undefined') {
+            console.warn('Action has invalid target', action)
+            PageNotificationService.show("Conduct has missing target data.", "warning");
+            continue;
+        }
+
+        const newValue = await determineActionValueAsync(action);
+
+        conducts.push({ target: action, value: newValue, delay: action.delay ?? 0 });
+    }
+
+    await executeConductsAsync(conducts);
 };
 
 const WidgetState = (props: IWidgetSharedProps) => {

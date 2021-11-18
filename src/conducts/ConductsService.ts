@@ -1,6 +1,12 @@
 import { IDeviceTarget } from "../devices/Device";
 import HttpService from "../services/HttpService";
 
+export interface IConduct {
+    target: IDeviceTarget,
+    value?: any,
+    delay: number
+}
+
 export default class ConductsService {
     static async RequestConductAsync(target: IDeviceTarget, value?: any, delay?: number) {
         await HttpService.requestAsync("/conducts/request", "post", {
@@ -12,7 +18,7 @@ export default class ConductsService {
         });
     }
 
-    static async RequestMultipleConductAsync(conducts: {target: IDeviceTarget, value?: any, delay: number}[]) {
+    static async RequestMultipleConductAsync(conducts: IConduct[]) {
         const conductsDtos = conducts.map(conduct => ({
             deviceId: conduct.target.deviceId,
             channelName: conduct.target.channelName,
