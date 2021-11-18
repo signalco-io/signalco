@@ -2,8 +2,8 @@ import { IDeviceTarget } from "../devices/Device";
 import HttpService from "../services/HttpService";
 
 export interface IConduct {
-    target: IDeviceTarget, 
-    value?: any, 
+    target: IDeviceTarget,
+    value?: any,
     delay: number
 }
 
