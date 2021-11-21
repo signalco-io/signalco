@@ -23,7 +23,12 @@ export interface IWidgetSharedProps {
 }
 
 const UnresolvedWidget = (props: IWidgetSharedProps) => (
-    <WidgetCard width={props.config?.columns || 2} height={props.config?.rows || 1} state={false} needsConfiguration={false} isEditMode={props.isEditMode} onRemove={props.onRemove}>
+    <WidgetCard
+        width={props.config?.columns || 2}
+        height={props.config?.rows || 1}
+        state={false}
+        isEditMode={props.isEditMode}
+        onRemove={props.onRemove}>
         <Alert severity="error" sx={{ height: "100%" }}>Unknown widget</Alert>
     </WidgetCard>
 );
