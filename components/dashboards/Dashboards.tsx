@@ -1,19 +1,13 @@
-import { Box, Button, LinearProgress, Paper, Popover, Stack, Typography } from "@mui/material";
+import { Box, LinearProgress, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { widgetType } from "../widgets/Widget";
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
 import DashboardsRepository, { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
 import PageNotificationService from "../../src/notifications/PageNotificationService";
-import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
-import {
-    usePopupState,
-    bindTrigger,
-    bindMenu,
-} from 'material-ui-popup-state/hooks';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import DashboardsUpdateChecker from "./DashboardsUpdateChecked";
 import DashboardView from "./DashboardView";
+import DashboardSelector from "./DashboardSelector";
 
 export interface IWidget {
     id: string,
@@ -61,11 +55,11 @@ const Dashboards = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isEditing/*, setIsEditing*/] = useState(false);
     const [dashboards, setDashboards] = useState<IDashboard[]>([]);
-    const [dashboardIndex, setDashboardIndex] = React.useState('0');
+    const [dashboardIndex, setDashboardIndex] = React.useState(0);
     //const [isWidgetStoreOpen, setIsWidgetStoreOpen] = useState<boolean>(false);
-    //const [editingDashboard, setEditingDashboard] = useState<IDashboard | undefined>();
-    const dashboardOptions = usePopupState({ variant: 'popover', popupId: 'dashboardMenu' });
-    const [isConfiguringDashboard, setIsConfiguringDashboard] = useState<boolean>(false);
+    const [editingDashboard, setEditingDashboard] = useState<IDashboard | undefined>();
+    //const dashboardOptions = usePopupState({ variant: 'popover', popupId: 'dashboardMenu' });
+    //const [isConfiguringDashboard, setIsConfiguringDashboard] = useState<boolean>(false);
 
     const handleDashboardChange = (newValue: number) => {
         setDashboardIndex(newValue);
@@ -100,15 +94,15 @@ const Dashboards = () => {
     //     await DashboardsRepository.saveDashboardAsync(dashboardSet);
     // }
 
-    const handleEditComplete = async () => {
-        if (!editingDashboard) return;
-        await saveDashboardEditAsync(editingDashboard);
-        setEditingDashboard(undefined);
-        setIsEditing(false);
-        await DashboardsRepository.isUpdateAvailableAsync();
-        await DashboardsRepository.applyDashboardsUpdateAsync();
-        await loadDashboardsAsync();
-    };
+    // const handleEditComplete = async () => {
+    //     if (!editingDashboard) return;
+    //     await saveDashboardEditAsync(editingDashboard);
+    //     setEditingDashboard(undefined);
+    //     setIsEditing(false);
+    //     await DashboardsRepository.isUpdateAvailableAsync();
+    //     await DashboardsRepository.applyDashboardsUpdateAsync();
+    //     await loadDashboardsAsync();
+    // };
 
     const loadDashboardsAsync = async () => {
         try {
@@ -127,27 +121,8 @@ const Dashboards = () => {
         }
     };
 
-    const handleApplyDashboardsUpdate = async () => {
-        setDashboardsUpdateAvailable(false);
-        await DashboardsRepository.applyDashboardsUpdateAsync();
-        await loadDashboardsAsync();
-    };
-
-    const checkDashboardUpdateAsync = async () => {
-        try {
-            setDashboardsUpdateAvailable(await DashboardsRepository.isUpdateAvailableAsync());
-        } catch (err) {
-            console.warn("Failed to check dashboards update", err);
-        }
-    };
-
     useEffect(() => {
         loadDashboardsAsync();
-
-        // Set interval for checking dashboard updates (30min)
-        const token = setInterval(checkDashboardUpdateAsync, 30 * 60000);
-        checkDashboardUpdateAsync();
-        return () => clearInterval(token);
     }, []);
 
     const handleWidgetSetConfig = (dashboard: IDashboard, widget: IWidget, config: object) => {
@@ -166,74 +141,32 @@ const Dashboards = () => {
 
         editingDashboard.widgets.splice(widgetIndex, 1);
         setEditingDashboard({ ...editingDashboard });
-        setIsWidgetStoreOpen(false);
+        //setIsWidgetStoreOpen(false);
     }
 
-    const handleOpenWidgetStore = () => {
-        setIsWidgetStoreOpen(true);
-    }
+    // const handleOpenWidgetStore = () => {
+    //     setIsWidgetStoreOpen(true);
+    // }
 
-    const handleWidgetAdd = (type: widgetType) => {
-        if (!editingDashboard) return;
+    // const handleWidgetAdd = (type: widgetType) => {
+    //     if (!editingDashboard) return;
 
-        editingDashboard.widgets.push({ id: editingDashboard.widgets.length.toString(), type: type });
-        setEditingDashboard({ ...editingDashboard });
-        setIsWidgetStoreOpen(false);
-    };
+    //     editingDashboard.widgets.push({ id: editingDashboard.widgets.length.toString(), type: type });
+    //     setEditingDashboard({ ...editingDashboard });
+    //     setIsWidgetStoreOpen(false);
+    // };
 
-    const handleConfigureDashboard = () => {
-        setIsConfiguringDashboard(true);
-        dashboardOptions.close();
-    };
-
-    const DashboardSelector = (props: { onSelection: (index: number) => void }) => {
-        const popupState = usePopupState({ variant: 'popover', popupId: 'dashboardsMenu' });
-
-        const currentName = dashboards[dashboardIndex]?.name;
-
-        const handleDashboardSelected = (index: number) => {
-            props.onSelection(index);
-        };
-
-        return (
-            <>
-                <Button
-                    {...bindTrigger(popupState)}
-                    sx={{
-                        textTransform: 'none'
-                    }}>
-                    <Stack spacing={1} sx={{ pl: 1 }} direction="row" alignItems="center">
-                        <Typography variant="h2" fontWeight={500} fontSize={{ mobile: 18, tablet: 24 }}>{currentName}</Typography>
-                        <KeyboardArrowDownIcon sx={{ fontSize: { mobile: "32px", tablet: "large" } }} />
-                    </Stack>
-                </Button>
-                <Popover
-                    {...bindPopover(popupState)}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                    }}>
-                    <Paper sx={{ minWidth: 220 }}>
-                        <Stack>
-                            {dashboards.map((d, i) =>
-                                <Button key={d.id} disabled={i === dashboardIndex} size="large" onClick={() => handleDashboardSelected(i)}>{d.name}</Button>)}
-                        </Stack>
-                    </Paper>
-                </Popover>
-            </>
-        );
-    };
+    // const handleConfigureDashboard = () => {
+    //     setIsConfiguringDashboard(true);
+    //     dashboardOptions.close();
+    // };
 
     return (
         <>
             <DashboardsUpdateChecker onReload={loadDashboardsAsync} />
             <Stack spacing={{ mobile: 1, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
                 <div>
-                    <DashboardSelector onSelection={handleDashboardChange} />
+                    <DashboardSelector dashboards={dashboards} dashboardIndex={dashboardIndex} onSelection={handleDashboardChange} />
                 </div>
                 {isLoading ?
                     <LinearProgress /> : (
@@ -243,16 +176,15 @@ const Dashboards = () => {
                                     isEditing={isEditing}
                                     handleWidgetRemove={handleWidgetRemove}
                                     handleWidgetSetConfig={handleWidgetSetConfig} />
-                            </TabPanel>
-                    ))
-                : (
-                <Box textAlign="center" sx={{ m: 2 }}>
-                    <NoDataPlaceholder content="No dashboards available" />
-                </Box>
-                        )}
-            </TabContext>
-            )}
-        </Stack>
+                                : (
+                                    <Box textAlign="center" sx={{ m: 2 }}>
+                                        <NoDataPlaceholder content="No dashboards available" />
+                                    </Box>
+                                )}
+                        </Box>
+                    )}
+            </Stack>
+        </>
     );
 };
 
