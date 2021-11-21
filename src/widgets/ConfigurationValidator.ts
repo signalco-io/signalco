@@ -1,4 +1,10 @@
+import { IDeviceTargetIncomplete } from "../devices/Device";
 import IWidgetConfigurationOption from "./IWidgetConfigurationOption";
+
+const isInvalidateDeviceContactTarget = (value: IDeviceTargetIncomplete) =>
+    !value.deviceId ||
+    !value.contactName ||
+    !value.channelName;
 
 export const IsConfigurationValid = (config: any, options: IWidgetConfigurationOption[]) => {
     if (!config) return false;
@@ -10,14 +16,21 @@ export const IsConfigurationValid = (config: any, options: IWidgetConfigurationO
         if (typeof value === 'undefined' || value == null)
             return false;
 
+        if (opt.multiple && (!Array.isArray(value) || !value.length))
+            return false;
+
         switch (opt.type) {
             case 'deviceTarget':
                 if (!value.deviceId) return false;
                 break;
             case 'deviceContactTarget':
-                if (!value.deviceId ||
-                    !value.contactName ||
-                    !value.channelName) return false;
+                if (opt.multiple){
+                    if ((value as IDeviceTargetIncomplete[]).filter(v => isInvalidateDeviceContactTarget(v)).length) {
+                        return false;
+                    }
+                } else if (isInvalidateDeviceContactTarget(value)) {
+                    return false;
+                }
                 break;
         }
     }

@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import useDevice from '../../../src/hooks/useDevice';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
-import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IWidgetSharedProps } from '../Widget';
 import WidgetCard from './WidgetCard';
@@ -33,8 +32,6 @@ const WidgetShades = (props: IWidgetSharedProps) => {
         { name: 'stopAfter', label: 'Stop after', type: 'number', dataUnit: 'seconds', data: device?.id, optional: true },
         { name: 'columns', label: 'Width', type: 'static', default: 4 }
     ];
-
-    const needsConfiguration = !IsConfigurationValid(config, stateOptions);
 
     const handleStateChangeRequest = (direction: "up" | "down" | "stop") => {
         if (typeof device === 'undefined') {
@@ -88,7 +85,6 @@ const WidgetShades = (props: IWidgetSharedProps) => {
             width={width}
             height={height}
             state={state}
-            needsConfiguration={needsConfiguration}
             isEditMode={isEditMode}
             onRemove={onRemove}
             onConfigured={setConfig}

@@ -58,6 +58,26 @@ const useWidgetConfiguration = (options: IWidgetConfigurationOption[], config: o
 
 const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, value: any, onChange: (value: any) => void }) => {
     if (props.option.type === 'deviceContactTarget') {
+        // Handle multi-contact target
+        if (props.option.multiple) {
+            console.log('options multiple')
+            const valueItems = typeof props.value === 'undefined' ? [] : (Array.isArray(props.value) ? props.value : [props.value]);
+            const elements = [];
+            console.log('multiple value', valueItems)
+            for (let i = 0; i <= valueItems.length; i++) {
+                const value = valueItems[i];
+                console.log('multiple value', value)
+                elements.push(<DisplayDeviceTarget key={`option-${i}`} target={value} onChanged={t => {
+                    const newValues = [...valueItems];
+                    newValues[i] = t;
+                    return props.onChange(newValues.filter(i => typeof i !== 'undefined'));
+                }} />);
+            }
+
+            return <>{elements}</>;
+        }
+
+        // Handle single-contact target
         return <DisplayDeviceTarget target={props.value} onChanged={t => props.onChange(t)} />
     } else if (props.option.type === 'deviceTarget') {
         return <DisplayDeviceTarget target={props.value} hideContact onChanged={t => props.onChange(t)} />
