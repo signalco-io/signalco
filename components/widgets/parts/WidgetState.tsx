@@ -101,15 +101,15 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
 
 const WidgetState = (props: IWidgetSharedProps) => {
     const { config, setConfig, isEditMode, onRemove } = props;
-    const deviceIds = useMemo(() => (config?.target as IDeviceTarget[]).map(i => i.deviceId), [config?.target]);
+    const deviceIds = useMemo(() => (Array.isArray(config?.target) ? config.target as IDeviceTarget[] : undefined)?.map(i => i.deviceId), [config?.target]);
     const devices = useDevices(deviceIds);
 
     // Calc state from source value
     // If atleast one contact is true, this widget will set it's state to true
     let state = false;
-    if (devices && config?.target) {
+    if (devices) {
         for (let i = 0; i < devices.length; i++) {
-            const target = config?.target[i];
+            const target = config.target[i];
             const device = devices[i];
             const contactState = device?.getState({ channelName: target.channelName, contactName: target.contactName, deviceId: device.id });
             if (contactState?.valueSerialized === 'true') {

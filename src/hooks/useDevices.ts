@@ -3,7 +3,7 @@ import { IDeviceModel } from "../devices/Device";
 import DevicesRepository from "../devices/DevicesRepository";
 
 const useDevices = (deviceIds?: string[]) => {
-    const [devices, setDevices] = useState<IDeviceModel[] | undefined>(undefined);
+    const [devices, setDevices] = useState<(IDeviceModel | undefined)[] | undefined>(undefined);
     useEffect(() => {
         (async () => {
             if (deviceIds) {
@@ -11,8 +11,7 @@ const useDevices = (deviceIds?: string[]) => {
                 for (let i = 0; i < deviceIds.length; i++) {
                     const deviceId = deviceIds[i];
                     const device = await DevicesRepository.getDeviceAsync(deviceId)
-                    if (device)
-                        newDevices.push(device);
+                    newDevices.push(device);
                 }
                 setDevices(newDevices);
             }
