@@ -127,7 +127,7 @@ const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconCom
       <Button
         sx={{
           textTransform: "none",
-          py: isMobile ? 2 : 4,
+          py: isMobile ? 2 : 3,
           px: 2
         }}
         aria-label={label}
@@ -136,7 +136,7 @@ const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconCom
         <Stack direction="row" sx={{ width: isNotDesktop ? '100%' : '128px' }} alignItems="center" spacing={isMobile ? 1 : 0}>
           <Icon sx={{ opacity: active ? 1 : 0.6, mr: { mobile: 0, desktop: 2 }, fontSize: { mobile: '26px', desktop: '17px' } }} />
           {(isMobile || !isNotDesktop) &&
-            <Typography variant="h3" fontWeight={600} sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
+            <Typography variant="h3" fontWeight={500} sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
           }
         </Stack>
       </Button>
@@ -166,7 +166,7 @@ const NavProfile = () => {
       alignItems="center">
       <UserProfileAvatar />
       {!mobileMenuOpen &&
-        <Stack spacing={1} sx={{ width: { mobile: undefined, desktop: '100%' } }}>
+        <Stack sx={{ width: { mobile: undefined, desktop: '100%' } }}>
           {navItems.filter(ni => isMobile ? ni === activeNavItem : true).map((ni, index) =>
             <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={ni.label} />)}
         </Stack>
