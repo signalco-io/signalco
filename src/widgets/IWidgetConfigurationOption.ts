@@ -5,5 +5,6 @@ export default interface IWidgetConfigurationOption {
     default?: any,
     dataUnit?: string,
     data?: any,
-    optional?: boolean
+    optional?: boolean,
+    multiple?: boolean
 }

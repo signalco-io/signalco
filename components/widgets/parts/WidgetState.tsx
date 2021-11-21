@@ -7,12 +7,14 @@ import dynamic from 'next/dynamic'
 import ConductsService, { IConduct } from '../../../src/conducts/ConductsService';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import { Box } from '@mui/system';
-import useDevice from "../../../src/hooks/useDevice";
 import { IWidgetSharedProps } from "../Widget";
+import useDevices from "../../../src/hooks/useDevices";
+import { IDeviceTarget } from "../../../src/devices/Device";
 
 const stateOptions = [
-    { name: 'target', label: 'Target', type: 'deviceContactTarget' },
-    { name: 'visual', label: 'Visual', type: 'select', default: 'lightbulb', data: [{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }] }
+    { name: 'target', label: 'Target', type: 'deviceContactTarget', multiple: true },
+    { name: 'visual', label: 'Visual', type: 'select', default: 'lightbulb', data: [{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }] },
+    { name: 'label', label: 'Label', type: 'string', optional: true }
 ];
 
 const TvVisual = dynamic(() => import("../../icons/TvVisual"));
@@ -99,29 +101,40 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
 
 const WidgetState = (props: IWidgetSharedProps) => {
     const { config, setConfig, isEditMode, onRemove } = props;
-    const device = useDevice(config?.target?.deviceId);
+    const deviceIds = useMemo(() => (config?.target as IDeviceTarget[]).map(i => i.deviceId), [config?.target]);
+    const devices = useDevices(deviceIds);
 
     // Calc state from source value
-    const contactState = device?.getState({ channelName: config?.target?.channelName, contactName: config?.target?.contactName, deviceId: device.id });
-    const state = contactState?.valueSerialized === 'true';
+    // If atleast one contact is true, this widget will set it's state to true
+    let state = false;
+    if (devices && config?.target) {
+        for (let i = 0; i < devices.length; i++) {
+            const target = config?.target[i];
+            const device = devices[i];
+            const contactState = device?.getState({ channelName: target.channelName, contactName: target.contactName, deviceId: device.id });
+            if (contactState?.valueSerialized === 'true') {
+                state = true;
+                break;
+            }
+        }
+    }
 
-    const label = props.config?.label || device?.alias || '';
+    const label = props.config?.label || (typeof devices !== 'undefined' ? devices[0]?.alias : '');
     const Visual = useMemo(() => props.config?.visual === 'tv' ? TvVisual : LightBulbVisual, [props.config]);
 
-    const needsConfiguration =
-        !config?.target?.channelName ||
-        !config?.target?.contactName ||
-        !config?.target?.deviceId ||
-        !config?.visual;
-
     const handleStateChangeRequest = () => {
-        if (typeof device === 'undefined') {
+        if (typeof devices === 'undefined') {
             console.warn('State change requested but device is undefined.');
             PageNotificationService.show("Can't execute action, widget is not loaded yet.", "warning");
             return;
         }
 
-        executeStateActionAsync(device.id, config?.target?.channelName, config?.target?.contactName);
+        executeStateActionsAsync((config.target as IDeviceTarget[]).map(d => ({
+            deviceId: d.deviceId,
+            channelName: d.channelName,
+            contactName: d.contactName,
+            valueSerialized: state ? 'false' : 'true',
+        })));
     };
 
     return (
@@ -129,7 +142,6 @@ const WidgetState = (props: IWidgetSharedProps) => {
             width={2}
             height={2}
             state={state}
-            needsConfiguration={needsConfiguration}
             isEditMode={isEditMode}
             onConfigured={setConfig}
             onRemove={onRemove}

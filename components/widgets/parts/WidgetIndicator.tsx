@@ -10,6 +10,11 @@ import { useRouter } from "next/router";
 import useDevice from "../../../src/hooks/useDevice";
 import { IWidgetSharedProps } from "../Widget";
 
+const stateOptions = [
+    { name: 'target', label: 'Target', type: 'deviceContactTarget' },
+    { name: 'columns', label: 'Width', type: 'static', default: 1 }
+];
+
 const WidgetIndicator = (props: IWidgetSharedProps) => {
     const { config, setConfig, isEditMode, onRemove } = props;
     const device = useDevice(config?.target?.deviceId);
@@ -25,15 +30,6 @@ const WidgetIndicator = (props: IWidgetSharedProps) => {
     const iconColor = isLow ? '#fad63f' : "#a2db79";
     const Icon = isLow ? SentimentDissatisfiedOutlinedIcon : SentimentVerySatisfiedOutlinedIcon;
 
-    const needsConfiguration =
-        !config?.target?.channelName ||
-        !config?.target?.contactName ||
-        !config?.target?.deviceId;
-    const stateOptions = [
-        { name: 'target', label: 'Target', type: 'deviceContactTarget' },
-        { name: 'columns', label: 'Width', type: 'static', default: 1 }
-    ];
-
     const handleSelected = () => {
         if (device)
             router.push(`/app/devices/${device.id}`)
@@ -44,7 +40,6 @@ const WidgetIndicator = (props: IWidgetSharedProps) => {
             width={1}
             height={2}
             state={true}
-            needsConfiguration={needsConfiguration}
             isEditMode={isEditMode}
             onConfigured={setConfig}
             onRemove={onRemove}

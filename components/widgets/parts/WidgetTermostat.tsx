@@ -34,11 +34,6 @@ const WidgetTermostat = (props: IWidgetSharedProps) => {
     // TODO: Calc from heating/cooling contact states
     const state = false;
 
-    const needsConfiguration =
-        !config?.targetTemperature?.deviceId ||
-        !config?.targetTemperature?.contactName ||
-        !config?.targetTemperature?.channelName;
-
     const temperatureContact = temperatureDevice?.getState({
         channelName: config?.targetTemperature?.channelName,
         contactName: config?.targetTemperature?.contactName,
@@ -61,7 +56,6 @@ const WidgetTermostat = (props: IWidgetSharedProps) => {
             width={width}
             height={height}
             state={state}
-            needsConfiguration={needsConfiguration}
             isEditMode={isEditMode}
             onRemove={onRemove}
             onConfigured={setConfig}

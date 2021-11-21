@@ -10,13 +10,13 @@ import {
 } from 'material-ui-popup-state/hooks';
 import { AppContext } from "../../../pages/_app";
 import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
+import { IsConfigurationValid } from "../../../src/widgets/ConfigurationValidator";
 
 interface IWidgetCardProps {
     children: JSX.Element,
     width: number,
     height: number,
     state: boolean,
-    needsConfiguration?: boolean,
     isEditMode?: boolean
     config?: any,
     options?: IWidgetConfigurationOption[],
@@ -30,7 +30,6 @@ const WidgetCard = (props: IWidgetCardProps) => {
         width,
         height,
         state,
-        needsConfiguration,
         isEditMode,
         config,
         options,
@@ -40,6 +39,8 @@ const WidgetCard = (props: IWidgetCardProps) => {
     const appContext = useContext(AppContext);
     const sizeWidth = width * 78 + (width - 1) * 8;
     const sizeHeight = height * 78 + (height - 1) * 8;
+
+    const needsConfiguration = !options || !IsConfigurationValid(config, options);
 
     const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' })
 

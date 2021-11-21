@@ -14,14 +14,11 @@ const WidgetVacuum = (props: IWidgetSharedProps) => {
     const label = "Vacuum robot";
     const batteryPerc = 20;
 
-    const needsConfiguration = true;
-
     return (
         <WidgetCard
             width={width}
             height={height}
             state={state}
-            needsConfiguration={needsConfiguration}
             isEditMode={props.isEditMode}
             onConfigured={props.setConfig}
             options={stateOptions}
