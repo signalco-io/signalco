@@ -101,7 +101,7 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
 
 const WidgetState = (props: IWidgetSharedProps) => {
     const { config, setConfig, isEditMode, onRemove } = props;
-    const deviceIds = useMemo(() => (config?.target as IDeviceTarget[]).map(i => i.deviceId), [config?.target]);
+    const deviceIds = useMemo(() => (config?.target as IDeviceTarget[])?.map(i => i.deviceId), [config?.target]);
     const devices = useDevices(deviceIds);
 
     // Calc state from source value
