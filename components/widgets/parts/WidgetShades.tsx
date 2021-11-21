@@ -5,6 +5,7 @@ import React from 'react';
 import useDevice from '../../../src/hooks/useDevice';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import { DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import { IWidgetSharedProps } from '../Widget';
 import WidgetCard from './WidgetCard';
 import { executeStateActionsAsync, StateAction } from './WidgetState';
@@ -17,9 +18,6 @@ const WidgetShades = (props: IWidgetSharedProps) => {
 
     const label = props.config?.label || device?.alias || '';
 
-    const width = (config as any)?.columns || 4;
-    const height = (config as any)?.rows || 2;
-
     // TODO: Calc from source value
     const shadePerc = 0.3;
     const state = shadePerc < 1;
@@ -30,7 +28,7 @@ const WidgetShades = (props: IWidgetSharedProps) => {
         { name: 'targetContactUp', label: 'Up button', type: 'contactTarget', data: device?.id },
         { name: 'targetContactDown', label: 'Down button', type: 'contactTarget', data: device?.id },
         { name: 'stopAfter', label: 'Stop after', type: 'number', dataUnit: 'seconds', data: device?.id, optional: true },
-        { name: 'columns', label: 'Width', type: 'static', default: 4 }
+        DefaultWidth(4)
     ];
 
     const handleStateChangeRequest = (direction: "up" | "down" | "stop") => {
@@ -82,8 +80,6 @@ const WidgetShades = (props: IWidgetSharedProps) => {
 
     return (
         <WidgetCard
-            width={width}
-            height={height}
             state={state}
             isEditMode={isEditMode}
             onRemove={onRemove}

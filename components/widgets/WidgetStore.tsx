@@ -36,10 +36,10 @@ const availableWidgets = [
         previewWidth: 106
     },
     {
-        type: 'termostat',
-        name: 'Termostat widget',
-        description: 'Monitor and Control temperature.',
-        preview: '/assets/widget-previews/WidgetTermostatPreview_dark.png',
+        type: ['termostat', 'airconditioning'],
+        name: 'Air conditioning widget',
+        description: 'Monitor and Control temperature of your space.',
+        preview: '/assets/widget-previews/WidgetAirConditionPreview_dark.png',
         previewWidth: 230
     }
 ];
