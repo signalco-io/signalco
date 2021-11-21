@@ -107,9 +107,9 @@ const WidgetState = (props: IWidgetSharedProps) => {
     // Calc state from source value
     // If atleast one contact is true, this widget will set it's state to true
     let state = false;
-    if (devices && config?.target) {
+    if (devices) {
         for (let i = 0; i < devices.length; i++) {
-            const target = config?.target[i];
+            const target = config.target[i];
             const device = devices[i];
             const contactState = device?.getState({ channelName: target.channelName, contactName: target.contactName, deviceId: device.id });
             if (contactState?.valueSerialized === 'true') {
