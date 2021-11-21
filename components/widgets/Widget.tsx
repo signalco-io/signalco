@@ -1,15 +1,16 @@
 
 import { Alert } from "@mui/material";
 import { observer } from "mobx-react-lite";
+import dynamic from 'next/dynamic';
 import React from "react";
 import WidgetCard from "./parts/WidgetCard";
-import WidgetIndicator from "./parts/WidgetIndicator";
-import WidgetShades from "./parts/WidgetShades";
-import WidgetState from "./parts/WidgetState";
-import WidgetTermostat from "./parts/WidgetTermostat";
-import WidgetVacuum from "./parts/WidgetVacuum";
+const WidgetIndicator = dynamic(() => import("./parts/WidgetIndicator"));
+const WidgetShades = dynamic(() => import("./parts/WidgetShades"));
+const WidgetState = dynamic(() => import("./parts/WidgetState"));
+const WidgetAirConditioning = dynamic(() => import("./parts/WidgetAirConditioning"));
+const WidgetVacuum = dynamic(() => import("./parts/WidgetVacuum"));
 
-export type widgetType = "state" | "vacuum" | "shades" | 'indicator' | "termostat";
+export type widgetType = "state" | "vacuum" | "shades" | 'indicator' | "airconditioning" | "termostat";
 
 export interface IWidgetProps extends IWidgetSharedProps {
     type: widgetType,
@@ -24,8 +25,6 @@ export interface IWidgetSharedProps {
 
 const UnresolvedWidget = (props: IWidgetSharedProps) => (
     <WidgetCard
-        width={props.config?.columns || 2}
-        height={props.config?.rows || 1}
         state={false}
         isEditMode={props.isEditMode}
         onRemove={props.onRemove}>
@@ -41,7 +40,7 @@ const Widget = (props: IWidgetProps) => {
         onRemove: props.onRemove
     };
 
-    let WidgetResolved = UnresolvedWidget;
+    let WidgetResolved: React.ComponentType<any> | React.ReactElement | null | undefined = UnresolvedWidget;
     if (props.type === "state") {
         WidgetResolved = WidgetState;
     } else if (props.type === 'shades') {
@@ -51,7 +50,7 @@ const Widget = (props: IWidgetProps) => {
     } else if (props.type === 'indicator') {
         WidgetResolved = WidgetIndicator;
     } else if (props.type === 'termostat') {
-        WidgetResolved = WidgetTermostat;
+        WidgetResolved = WidgetAirConditioning;
     }
 
     return (

@@ -10,11 +10,12 @@ import { Box } from '@mui/system';
 import { IWidgetSharedProps } from "../Widget";
 import useDevices from "../../../src/hooks/useDevices";
 import { IDeviceTarget } from "../../../src/devices/Device";
+import { DefaultLabel } from "../../../src/widgets/WidgetConfigurationOptions";
 
 const stateOptions = [
+    DefaultLabel,
     { name: 'target', label: 'Target', type: 'deviceContactTarget', multiple: true },
     { name: 'visual', label: 'Visual', type: 'select', default: 'lightbulb', data: [{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }] },
-    { name: 'label', label: 'Label', type: 'string', optional: true }
 ];
 
 const TvVisual = dynamic(() => import("../../icons/TvVisual"));
@@ -139,8 +140,6 @@ const WidgetState = (props: IWidgetSharedProps) => {
 
     return (
         <WidgetCard
-            width={2}
-            height={2}
             state={state}
             isEditMode={isEditMode}
             onConfigured={setConfig}

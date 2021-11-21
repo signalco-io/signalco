@@ -2,22 +2,23 @@ import { BatteryCharging20Outlined } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import React from "react";
 import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
+import { DefaultHeight, DefaultLabel, DefaultWidth } from "../../../src/widgets/WidgetConfigurationOptions";
 import { IWidgetSharedProps } from "../Widget";
 import WidgetCard from "./WidgetCard";
 
-const stateOptions: IWidgetConfigurationOption[] = [];
+const stateOptions: IWidgetConfigurationOption[] = [
+    DefaultLabel,
+    DefaultWidth(4),
+    DefaultHeight(4),
+];
 
 const WidgetVacuum = (props: IWidgetSharedProps) => {
-    const width = 4;
-    const height = 4;
     const state = false;
-    const label = "Vacuum robot";
-    const batteryPerc = 20;
+    const label = props.config?.label ?? '';
+    const batteryPerc = 100;
 
     return (
         <WidgetCard
-            width={width}
-            height={height}
             state={state}
             isEditMode={props.isEditMode}
             onConfigured={props.setConfig}

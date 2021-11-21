@@ -14,8 +14,6 @@ import { IsConfigurationValid } from "../../../src/widgets/ConfigurationValidato
 
 interface IWidgetCardProps {
     children: JSX.Element,
-    width: number,
-    height: number,
     state: boolean,
     isEditMode?: boolean
     config?: any,
@@ -27,8 +25,6 @@ interface IWidgetCardProps {
 const WidgetCard = (props: IWidgetCardProps) => {
     const {
         children,
-        width,
-        height,
         state,
         isEditMode,
         config,
@@ -36,7 +32,11 @@ const WidgetCard = (props: IWidgetCardProps) => {
         onConfigured,
         onRemove
     } = props;
+
     const appContext = useContext(AppContext);
+
+    const width = (config as any)?.columns || 2;
+    const height = (config as any)?.rows || 2;
     const sizeWidth = width * 78 + (width - 1) * 8;
     const sizeHeight = height * 78 + (height - 1) * 8;
 

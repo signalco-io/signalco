@@ -5,13 +5,16 @@ import useDevice from '../../../src/hooks/useDevice';
 import WidgetCard from './WidgetCard';
 import { CircleSlider } from "react-circle-slider";
 import { IWidgetSharedProps } from '../Widget';
+import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 
-const stateOptions = [
+const stateOptions: IWidgetConfigurationOption[] = [
+    DefaultLabel,
     { name: 'targetTemperature', label: 'Temperature', type: 'deviceContactTarget' },
-    { name: 'label', label: 'Label', type: 'string' },
-    { name: 'targetHeating', label: 'Heating', type: 'deviceContactTarget' },
-    { name: 'columns', label: 'Width', type: 'static', default: 4 },
-    { name: 'rows', label: 'Height', type: 'static', default: 4 }
+    { name: 'targetHeating', label: 'Heating', type: 'deviceContactTarget', optional: true },
+    { name: 'targetCooling', label: 'Cooling', type: 'deviceContactTarget', optional: true },
+    DefaultWidth(4),
+    DefaultHeight(4)
 ];
 
 const SmallIndicator = observer((props: { isActive: boolean, icon: string, label: string, activeBackgroundColor: string }) => (
@@ -23,13 +26,10 @@ const SmallIndicator = observer((props: { isActive: boolean, icon: string, label
     </Box>
 ));
 
-const WidgetTermostat = (props: IWidgetSharedProps) => {
+const WidgetAirConditioning = (props: IWidgetSharedProps) => {
     const { config, setConfig, isEditMode, onRemove } = props;
     const temperatureDevice = useDevice(config?.targetTemperature?.deviceId);
     const heatingDevice = useDevice(config?.targetHeating?.deviceId);
-
-    const width = (config as any)?.columns || 4;
-    const height = (config as any)?.rows || 4;
 
     // TODO: Calc from heating/cooling contact states
     const state = false;
@@ -53,8 +53,6 @@ const WidgetTermostat = (props: IWidgetSharedProps) => {
 
     return (
         <WidgetCard
-            width={width}
-            height={height}
             state={state}
             isEditMode={isEditMode}
             onRemove={onRemove}
@@ -103,7 +101,7 @@ const WidgetTermostat = (props: IWidgetSharedProps) => {
     );
 };
 
-WidgetTermostat.columns = 4;
-WidgetTermostat.rows = 4;
+WidgetAirConditioning.columns = 4;
+WidgetAirConditioning.rows = 4;
 
-export default observer(WidgetTermostat);
+export default observer(WidgetAirConditioning);

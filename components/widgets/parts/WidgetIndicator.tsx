@@ -9,10 +9,11 @@ import SentimentDissatisfiedOutlinedIcon from '@mui/icons-material/SentimentDiss
 import { useRouter } from "next/router";
 import useDevice from "../../../src/hooks/useDevice";
 import { IWidgetSharedProps } from "../Widget";
+import { DefaultTarget, DefaultWidth } from "../../../src/widgets/WidgetConfigurationOptions";
 
 const stateOptions = [
-    { name: 'target', label: 'Target', type: 'deviceContactTarget' },
-    { name: 'columns', label: 'Width', type: 'static', default: 1 }
+    DefaultTarget,
+    DefaultWidth(1)
 ];
 
 const WidgetIndicator = (props: IWidgetSharedProps) => {
@@ -37,8 +38,6 @@ const WidgetIndicator = (props: IWidgetSharedProps) => {
 
     return (
         <WidgetCard
-            width={1}
-            height={2}
             state={true}
             isEditMode={isEditMode}
             onConfigured={setConfig}

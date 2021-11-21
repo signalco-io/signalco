@@ -21,7 +21,7 @@ const Beacons = () => {
     const beaconsTable = useAutoTable(BeaconsRepository.getBeaconsAsync, beaconModelToTableItem);
 
     const handleRowClick = (item: IAutoTableItem) => {
-        router.push(`/app/beacons/${item.id}`);
+        router.push(`/app/stations/${item.id}`);
     };
 
     return (
