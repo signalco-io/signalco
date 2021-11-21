@@ -36,7 +36,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const navItems = [
   { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon },
-  { label: 'Devices', path: '/app/devices', icon: DevicesOtherSharpIcon },
+  { label: 'Entities', path: '/app/entities', icon: DevicesOtherSharpIcon },
   { label: 'Processes', path: '/app/processes', icon: AccountTreeSharpIcon },
   { label: 'Stations', path: '/app/stations', icon: DeviceHubSharpIcon }
 ];

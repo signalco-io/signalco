@@ -83,12 +83,12 @@
       ]
     },
     {
-      "name": "Open devices",
-      "short_name": "Devices",
-      "url": "/app/devices",
+      "name": "Open entities",
+      "short_name": "Entities",
+      "url": "/app/entities",
       "icons": [
         {
-          "src": "/assets/devices_x192.png",
+          "src": "/assets/entities_x192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
