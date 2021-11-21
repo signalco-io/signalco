@@ -47,6 +47,13 @@ const theme = (isDark: boolean) => {
       },
     },
     components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            textTransform: 'none'
+          }
+        }
+      },
       MuiPaper: {
         defaultProps: {
           variant: "outlined"
