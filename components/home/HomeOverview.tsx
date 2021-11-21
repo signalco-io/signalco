@@ -1,4 +1,4 @@
-import { Alert, Box, Button, FormGroup, IconButton, LinearProgress, ListItemIcon, ListItemText, Menu, MenuItem, Stack, TextField } from "@mui/material";
+import { Alert, Box, Button, FormGroup, IconButton, LinearProgress, ListItemIcon, ListItemText, Menu, MenuItem, Stack, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import HttpService from "../../src/services/HttpService";
 import { observer } from "mobx-react-lite";
@@ -24,6 +24,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { snapCenterToCursor } from "@dnd-kit/modifiers";
 import useWindowWidth from "../../src/hooks/useWindowWidth";
 import { useNavWidth } from "../NavProfile";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const isServerSide = typeof window === 'undefined';
 
@@ -193,15 +194,14 @@ const HomeOverview = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [executedConduct, setExecutedConduct] = useState(false);
     const [dashboards, setDashboards] = useState<IDashboard[]>([]);
-    const [dashboardIndex, setDashboardIndex] = React.useState('0');
-    const [dashboardsUpdateAvailable, setDashboardsUpdateAvailable] = useState(false);
+    const [dashboardIndex, setDashboardIndex] = React.useState(0);
     const [isWidgetStoreOpen, setIsWidgetStoreOpen] = useState<boolean>(false);
     const [editingDashboard, setEditingDashboard] = useState<IDashboard | undefined>();
     const dashboardOptions = usePopupState({ variant: 'popover', popupId: 'dashboardMenu' });
     const [isConfiguringDashboard, setIsConfiguringDashboard] = useState<boolean>(false);
 
-    const handleDashboardChange = (_event: React.SyntheticEvent, newValue: string) => {
-        if (newValue === dashboards.length.toString()) {
+    const handleDashboardChange = (_event: React.SyntheticEvent, newValue: number) => {
+        if (newValue === dashboards.length) {
             handleAddDashboard();
         }
 
@@ -218,19 +218,17 @@ const HomeOverview = () => {
     };
 
     const handleEdit = () => {
-        setEditingDashboard(dashboards[Number.parseInt(dashboardIndex, 10) || 0]);
+        setEditingDashboard(dashboards[dashboardIndex]);
         setIsEditing(true);
         dashboardOptions.close();
     }
 
     const saveDashboardEditAsync = async (updatedDashboard: IDashboard) => {
-        const index = Number.parseInt(dashboardIndex, 10) || 0;
-
         // Replace dashboard with edited version
-        dashboards.splice(index, 1, updatedDashboard);
+        dashboards.splice(dashboardIndex, 1, updatedDashboard);
 
         // Persist dashboard config
-        const currentDashboard = dashboards[index];
+        const currentDashboard = dashboards[dashboardIndex];
         const dashboardSet = new DashboardSetModel(currentDashboard.name);
         dashboardSet.id = currentDashboard.id;
         dashboardSet.configurationSerialized = JSON.stringify({
@@ -266,27 +264,8 @@ const HomeOverview = () => {
         }
     };
 
-    const handleApplyDashboardsUpdate = async () => {
-        setDashboardsUpdateAvailable(false);
-        await DashboardsRepository.applyDashboardsUpdateAsync();
-        await loadDashboardsAsync();
-    };
-
-    const checkDashboardUpdateAsync = async () => {
-        try {
-            setDashboardsUpdateAvailable(await DashboardsRepository.isUpdateAvailableAsync());
-        } catch (err) {
-            console.warn("Failed to check dashboards update", err);
-        }
-    };
-
     useEffect(() => {
         loadDashboardsAsync();
-
-        // Set interval for checking dashboard updates (30min)
-        const token = setInterval(checkDashboardUpdateAsync, 30 * 60000);
-        checkDashboardUpdateAsync();
-        return () => clearInterval(token);
     }, []);
 
     useEffect(() => {
@@ -348,95 +327,166 @@ const HomeOverview = () => {
         return <div>Doing...</div>
     }
 
+    const DashboardUpdateChecker = () => {
+        const [dashboardsUpdateAvailable, setDashboardsUpdateAvailable] = useState(false);
+
+        const handleApplyDashboardsUpdate = async () => {
+            setDashboardsUpdateAvailable(false);
+            await DashboardsRepository.applyDashboardsUpdateAsync();
+            await loadDashboardsAsync();
+        };
+
+        const checkDashboardUpdateAsync = async () => {
+            try {
+                setDashboardsUpdateAvailable(await DashboardsRepository.isUpdateAvailableAsync());
+            } catch (err) {
+                console.warn("Failed to check dashboards update", err);
+            }
+        };
+
+        useEffect(() => {
+            // Set interval for checking dashboard updates (30min)
+            const token = setInterval(checkDashboardUpdateAsync, 30 * 60000);
+            checkDashboardUpdateAsync();
+            return () => clearInterval(token);
+        }, []);
+
+        if (!dashboardsUpdateAvailable)
+            return <></>;
+
+        return (
+            <Box pr={2} pl={{ mobile: 2, tablet: 0 }} pt={2}>
+                <Alert
+                    severity="info"
+                    action={<Button variant="contained" size="small" onClick={handleApplyDashboardsUpdate}>Apply update</Button>}>
+                    New version of dashboards are available.
+                </Alert>
+            </Box>
+        );
+    };
+
     return (
-        <Stack spacing={1}>
-            {isLoading ? (
-                <LinearProgress />
-            ) : (
-                <TabContext value={dashboardIndex}>
-                    {dashboardsUpdateAvailable && (
-                        <Alert
-                            severity="info"
-                            style={{ borderRadius: 0 }}
-                            action={<Button variant="contained" size="small" onClick={handleApplyDashboardsUpdate}>Apply update</Button>}>
-                            New version of dashboards are available.
-                        </Alert>
-                    )}
-                    <Stack direction="row" spacing={2}>
-                        <TabList selectionFollowsFocus scrollButtons="auto" variant="scrollable" onChange={handleDashboardChange} aria-label="Dashboard tabs">
-                            {dashboards.length ? dashboards.map((d, index) => (
-                                <Tab key={index.toString()} label={d.name} value={index.toString()} />
-                            )) : undefined}
-                            <Tab key={(dashboards.length || 0).toString()} icon={<Add />} value={(dashboards.length || 0).toString()} />
-                        </TabList>
-                        <Box sx={{ flexGrow: 1, textAlign: "end", px: 2 }}>
-                            <IconButton {...bindTrigger(dashboardOptions)}>
-                                <MoreHorizSharp />
-                            </IconButton>
-                            <Menu {...bindMenu(dashboardOptions)}>
-                                <MenuItem onClick={handleEdit}>
-                                    <ListItemIcon>
-                                        <DashboardSharp />
-                                    </ListItemIcon>
-                                    <ListItemText>Edit widgets</ListItemText>
-                                </MenuItem>
-                                <MenuItem onClick={handleConfigureDashboard}>
-                                    <ListItemIcon>
-                                        <Settings />
-                                    </ListItemIcon>
-                                    <ListItemText>Configure...</ListItemText>
-                                </MenuItem>
-                            </Menu>
-                            <DashboardSettings
-                                isOpen={isConfiguringDashboard}
-                                dashboard={dashboards[Number.parseInt(dashboardIndex, 10) || 0]}
-                                onChange={(d) => saveDashboardEditAsync(d)}
-                                onClose={() => setIsConfiguringDashboard(false)} />
-                        </Box>
-                        {isEditing && (
-                            <>
-                                <Alert
-                                    severity="info"
-                                    style={{ borderRadius: 0 }}
-                                    action={
-                                        <Stack spacing={1} direction="row">
-                                            <IconButton size="small" onClick={handleOpenWidgetStore}>
-                                                <AddOutlined />
-                                            </IconButton>
-                                            <IconButton size="small" onClick={handleEditComplete} title="Confirm edit">
-                                                <SaveOutlined />
-                                            </IconButton>
-                                        </Stack>}>
-                                    In editing mode... Add, move, resize your items.
-                                </Alert>
-                                <ConfigurationDialog
-                                    isOpen={isWidgetStoreOpen}
-                                    title="Widget store"
-                                    onClose={() => setIsWidgetStoreOpen(false)}
-                                    maxWidth="tablet">
-                                    <WidgetStore onAddWidget={handleWidgetAdd} />
-                                </ConfigurationDialog>
-                            </>
-                        )}
-                    </Stack>
-                    {dashboards.length ?
-                        dashboards.map((d, index) => (
-                            <TabPanel value={index.toString()} key={index.toString()}>
-                                <RenderDashboard dashboard={editingDashboard || d}
+        <>
+            <DashboardUpdateChecker />
+            <Stack spacing={4} sx={{ pt: 4 }}>
+                <div>
+                    <Button sx={{
+                        textTransform: 'none'
+                    }}>
+                        <Stack spacing={1} sx={{ pl: 1 }} direction="row" alignItems="center">
+                            <Typography variant="h2" fontSize={24}>{dashboards[dashboardIndex]?.name}</Typography>
+                            <KeyboardArrowDownIcon fontSize="large" />
+                        </Stack>
+                    </Button>
+                </div>
+                {isLoading ?
+                    <LinearProgress /> : (
+                        <Box>
+                            {dashboards.length ?
+                                <RenderDashboard dashboard={editingDashboard || dashboards[dashboardIndex]}
                                     isEditing={isEditing}
                                     handleWidgetRemove={handleWidgetRemove}
                                     handleWidgetSetConfig={handleWidgetSetConfig} />
-                            </TabPanel>
-                        ))
-                        : (
-                            <Box textAlign="center" sx={{ m: 2 }}>
-                                <NoDataPlaceholder content="No dashboards available" />
-                            </Box>
-                        )}
-                </TabContext>
-            )}
-        </Stack>
+                                : (
+                                    <Box textAlign="center" sx={{ m: 2 }}>
+                                        <NoDataPlaceholder content="No dashboards available" />
+                                    </Box>
+                                )}
+                        </Box>
+                    )}
+            </Stack>
+        </>
     );
+
+    // return (
+    //     <Stack spacing={1}>
+    //         {isLoading ? (
+    //             <LinearProgress />
+    //         ) : (
+    //             <TabContext value={dashboardIndex}>
+    //                 {dashboardsUpdateAvailable && (
+    //                     <Alert
+    //                         severity="info"
+    //                         style={{ borderRadius: 0 }}
+    //                         action={<Button variant="contained" size="small" onClick={handleApplyDashboardsUpdate}>Apply update</Button>}>
+    //                         New version of dashboards are available.
+    //                     </Alert>
+    //                 )}
+    //                 <Stack direction="row" spacing={2}>
+    //                     <TabList selectionFollowsFocus scrollButtons="auto" variant="scrollable" onChange={handleDashboardChange} aria-label="Dashboard tabs">
+    //                         {dashboards.length ? dashboards.map((d, index) => (
+    //                             <Tab key={index.toString()} label={d.name} value={index.toString()} />
+    //                         )) : undefined}
+    //                         <Tab key={(dashboards.length || 0).toString()} icon={<Add />} value={(dashboards.length || 0).toString()} />
+    //                     </TabList>
+    //                     <Box sx={{ flexGrow: 1, textAlign: "end", px: 2 }}>
+    //                         <IconButton {...bindTrigger(dashboardOptions)}>
+    //                             <MoreHorizSharp />
+    //                         </IconButton>
+    //                         <Menu {...bindMenu(dashboardOptions)}>
+    //                             <MenuItem onClick={handleEdit}>
+    //                                 <ListItemIcon>
+    //                                     <DashboardSharp />
+    //                                 </ListItemIcon>
+    //                                 <ListItemText>Edit widgets</ListItemText>
+    //                             </MenuItem>
+    //                             <MenuItem onClick={handleConfigureDashboard}>
+    //                                 <ListItemIcon>
+    //                                     <Settings />
+    //                                 </ListItemIcon>
+    //                                 <ListItemText>Configure...</ListItemText>
+    //                             </MenuItem>
+    //                         </Menu>
+    //                         <DashboardSettings
+    //                             isOpen={isConfiguringDashboard}
+    //                             dashboard={dashboards[Number.parseInt(dashboardIndex, 10) || 0]}
+    //                             onChange={(d) => saveDashboardEditAsync(d)}
+    //                             onClose={() => setIsConfiguringDashboard(false)} />
+    //                     </Box>
+    //                     {isEditing && (
+    //                         <>
+    //                             <Alert
+    //                                 severity="info"
+    //                                 style={{ borderRadius: 0 }}
+    //                                 action={
+    //                                     <Stack spacing={1} direction="row">
+    //                                         <IconButton size="small" onClick={handleOpenWidgetStore}>
+    //                                             <AddOutlined />
+    //                                         </IconButton>
+    //                                         <IconButton size="small" onClick={handleEditComplete} title="Confirm edit">
+    //                                             <SaveOutlined />
+    //                                         </IconButton>
+    //                                     </Stack>}>
+    //                                 In editing mode... Add, move, resize your items.
+    //                             </Alert>
+    //                             <ConfigurationDialog
+    //                                 isOpen={isWidgetStoreOpen}
+    //                                 title="Widget store"
+    //                                 onClose={() => setIsWidgetStoreOpen(false)}
+    //                                 maxWidth="tablet">
+    //                                 <WidgetStore onAddWidget={handleWidgetAdd} />
+    //                             </ConfigurationDialog>
+    //                         </>
+    //                     )}
+    //                 </Stack>
+    //                 {dashboards.length ?
+    //                     dashboards.map((d, index) => (
+    //                         <TabPanel value={index.toString()} key={index.toString()}>
+    //                             <RenderDashboard dashboard={editingDashboard || d}
+    //                                 isEditing={isEditing}
+    //                                 handleWidgetRemove={handleWidgetRemove}
+    //                                 handleWidgetSetConfig={handleWidgetSetConfig} />
+    //                         </TabPanel>
+    //                     ))
+    //                     : (
+    //                         <Box textAlign="center" sx={{ m: 2 }}>
+    //                             <NoDataPlaceholder content="No dashboards available" />
+    //                         </Box>
+    //                     )}
+    //             </TabContext>
+    //         )}
+    //     </Stack>
+    // );
 };
 
 export default observer(HomeOverview);
