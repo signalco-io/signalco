@@ -38,8 +38,6 @@ const WidgetIndicator = (props: IWidgetSharedProps) => {
 
     return (
         <WidgetCard
-            width={1}
-            height={2}
             state={true}
             isEditMode={isEditMode}
             onConfigured={setConfig}

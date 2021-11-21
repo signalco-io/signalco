@@ -23,6 +23,7 @@ import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { snapCenterToCursor } from "@dnd-kit/modifiers";
 import useWindowWidth from "../../src/hooks/useWindowWidth";
+import { useNavWidth } from "../NavProfile";
 
 const isServerSide = typeof window === 'undefined';
 
@@ -112,7 +113,10 @@ const RenderDashboard = (props: { dashboard: IDashboard, isEditing: boolean, han
     const [numberOfColumns, setNumberOfColumns] = useState(4);
     const widgetSpacing = 1;
     const widgetSize = 78 + widgetSpacing * 8;
-    const dashbaordPadding = 48;
+
+    const navWidth = useNavWidth();
+
+    const dashbaordPadding = 48 + navWidth;
     const [widgetsOrder, setWidgetsOrder] = useState(dashboard.widgets.map(w => w.id));
 
     const windowWidth = useWindowWidth();
@@ -122,7 +126,7 @@ const RenderDashboard = (props: { dashboard: IDashboard, isEditing: boolean, han
         const numberOfColumns = Math.max(4, Math.floor(width / widgetSize));
 
         setNumberOfColumns(numberOfColumns);
-    }, [widgetSize, windowWidth])
+    }, [widgetSize, windowWidth, dashbaordPadding])
 
     const sensors = useSensors(
         useSensor(TouchSensor, {
@@ -409,7 +413,7 @@ const HomeOverview = () => {
                                     isOpen={isWidgetStoreOpen}
                                     title="Widget store"
                                     onClose={() => setIsWidgetStoreOpen(false)}
-                                    maxWidth="lg">
+                                    maxWidth="tablet">
                                     <WidgetStore onAddWidget={handleWidgetAdd} />
                                 </ConfigurationDialog>
                             </>

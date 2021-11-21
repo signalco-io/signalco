@@ -1,5 +1,5 @@
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, useMediaQuery, useTheme } from "@mui/material";
 import React, { useEffect } from "react";
 import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
@@ -15,6 +15,8 @@ const AppLayout = (props: { children?: React.ReactNode }) => {
     children
   } = props;
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
 
   console.debug("AppLayout rendering");
 
@@ -27,9 +29,9 @@ const AppLayout = (props: { children?: React.ReactNode }) => {
   }, []);
 
   return (
-    <Stack sx={{ height: '100%', width: '100%' }}>
+    <Stack direction={isMobile ? 'column' : 'row'} sx={{ height: '100%', width: '100%' }}>
       <NavProfile />
-      <Box sx={{ height: '100%', flexGrow: 1, position: 'relative' }}>
+      <Box sx={{ height: '100%', width: '100%', flexGrow: 1, position: 'relative' }}>
         {children}
       </Box>
     </Stack>

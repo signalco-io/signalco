@@ -99,7 +99,7 @@ export default class BeaconsRepository {
     }
 
     static async _cacheBeaconsAsync() {
-        // TODO: Invalidate cache after some period        
+        // TODO: Invalidate cache after some period
         if (!BeaconsRepository.isLoading &&
             !BeaconsRepository.beaconsCache) {
             BeaconsRepository.isLoading = true;
