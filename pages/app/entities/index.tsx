@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from 'next/router';
-import { Box, Chip, Paper, Typography } from "@mui/material";
+import { Box, Chip, Paper, Stack, Typography } from "@mui/material";
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
@@ -19,7 +19,7 @@ function deviceModelToTableItem(device: IDeviceModel): IAutoTableItem {
     };
 }
 
-const Devices = () => {
+const Entities = () => {
     const router = useRouter();
     const itemsTable = useAutoTable(DevicesRepository.getDevicesAsync, deviceModelToTableItem);
 
@@ -28,21 +28,15 @@ const Devices = () => {
     };
 
     return (
-        <Box sx={{ overflow: 'hidden', position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}>
-            <Box sx={{ p: { sm: 0, md: 4 } }} height="100%">
-                <Paper sx={{ maxWidth: '680px', height: '100%' }}>
-                    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                        <Typography variant="h2" sx={{ p: 2 }}>Entities</Typography>
-                        <Box sx={{ position: 'relative', flexGrow: 1, overflow: 'hidden' }}>
-                            <AutoTable {...itemsTable} onRowClick={handleRowClick} />
-                        </Box>
-                    </Box>
-                </Paper>
-            </Box>
-        </Box>
+        <Paper sx={{ height: '100%', overflow: 'hidden' }}>
+            <Stack>
+                <Typography variant="h2" sx={{ p: 2 }}>Entities</Typography>
+                <AutoTable {...itemsTable} onRowClick={handleRowClick} />
+            </Stack>
+        </Paper>
     )
 };
 
-Devices.layout = AppLayoutWithAuth;
+Entities.layout = AppLayoutWithAuth;
 
-export default observer(Devices);
+export default observer(Entities);
