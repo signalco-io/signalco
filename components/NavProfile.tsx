@@ -36,7 +36,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const navItems = [
   { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon },
-  { label: 'Devices', path: '/app/devices', icon: DevicesOtherSharpIcon },
+  { label: 'Entities', path: '/app/entities', icon: DevicesOtherSharpIcon },
   { label: 'Processes', path: '/app/processes', icon: AccountTreeSharpIcon },
   { label: 'Stations', path: '/app/stations', icon: DeviceHubSharpIcon }
 ];
@@ -127,7 +127,7 @@ const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconCom
       <Button
         sx={{
           textTransform: "none",
-          py: isMobile ? 2 : 3,
+          py: { mobile: 2, desktop: 3 },
           px: 2
         }}
         aria-label={label}

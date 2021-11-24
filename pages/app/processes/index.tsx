@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from 'next/router';
-import { Box, Paper, Typography } from "@mui/material";
+import { Paper, Stack, Typography } from "@mui/material";
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
@@ -27,18 +27,12 @@ const Processes = () => {
     };
 
     return (
-        <Box sx={{ overflow: 'hidden', position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}>
-            <Box sx={{ p: { sm: 0, md: 4 } }} height="100%">
-                <Paper sx={{ maxWidth: '680px', height: '100%' }}>
-                    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                        <Typography variant="h2" sx={{ p: 2 }}>Processes</Typography>
-                        <Box sx={{ position: 'relative', overflow: 'hidden' }}>
-                            <AutoTable {...itemsTable} onRowClick={handleRowClick} />
-                        </Box>
-                    </Box>
-                </Paper>
-            </Box>
-        </Box>
+        <Paper sx={{ height: '100%', overflow: 'hidden' }}>
+            <Stack sx={{ height: '100%' }}>
+                <Typography variant="h2" sx={{ p: 2 }}>Processes</Typography>
+                <AutoTable {...itemsTable} onRowClick={handleRowClick} />
+            </Stack>
+        </Paper>
     )
 };
 
