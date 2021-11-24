@@ -132,7 +132,7 @@ const Footer = () => (
     {appState => (
       <Box sx={{ backgroundColor: appState.theme === 'light' ? "rgba(0,0,0,0.06)" : "rgba(125,125,125,0.2)" }}>
         <Divider />
-        <Container>
+        <Container maxWidth="desktop">
           <Box component="footer" sx={{ padding: "64px 0 32px 0" }}>
             <Grid container direction="column" spacing={4}>
               <Grid item>
