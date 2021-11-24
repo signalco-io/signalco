@@ -12,6 +12,19 @@ import AutoTable from '../../../components/shared/table/AutoTable';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 import LoadingButton from '@mui/lab/LoadingButton';
 
+const stationCommandAsync = async (stationId: string | string[] | undefined, command: (id: string) => Promise<void>, commandDescription: string) => {
+    try {
+        if (stationId == null ||
+            typeof stationId !== 'string')
+            throw Error("Station identifier not available. Can't " + commandDescription);
+
+        await command(stationId);
+    }
+    catch (err) {
+        console.error("Station command execution error", err);
+    }
+}
+
 const BeaconDetails = () => {
     const router = useRouter();
     const { id } = router.query;
@@ -49,77 +62,12 @@ const BeaconDetails = () => {
         loadLatestAvailableVersionAsync();
     }, [id]);
 
-    const handleUpdateSystem = async () => {
-        try {
-            if (id == null ||
-                typeof id !== 'string')
-                throw Error("Unable to resolve station id from query. Can't update system");
-            await BeaconsRepository.updateSystemAsync(id);
-        }
-        catch (err) {
-            console.error("Station system update request failed", err);
-        }
-    };
-
-    const handleUpdate = async () => {
-        try {
-            if (id == null ||
-                typeof id !== 'string')
-                throw Error("Unable to resolve station id from query. Can't update");
-            await BeaconsRepository.updateBeaconAsync(id);
-        }
-        catch (err) {
-            console.error("Station update request failed", err);
-        }
-    };
-
-    const handleRestartSystem = async () => {
-        try {
-            if (id == null ||
-                typeof id !== 'string')
-                throw Error("Unable to resolve station id from query. Can't restart system");
-            await BeaconsRepository.restartSystemAsync(id);
-        }
-        catch (err) {
-            console.error("Station system shutdown request failed", err);
-        }
-    };
-
-    const handleShutdownSystem = async () => {
-        try {
-            if (id == null ||
-                typeof id !== 'string')
-                throw Error("Unable to resolve station id from query. Can't shutdown system");
-            await BeaconsRepository.shutdownSystemAsync(id);
-        }
-        catch (err) {
-            console.error("Station system shutdown request failed", err);
-        }
-    };
-
-    const handleRestartStation = async () => {
-        try {
-            if (id == null ||
-                typeof id !== 'string')
-                throw Error("Unable to resolve station id from query. Can't restart station");
-            await BeaconsRepository.restartStationAsync(id);
-        }
-        catch (err) {
-            console.error("Station restart request failed", err);
-        }
-    };
-
-    const handleBeginDiscovery = async () => {
-        try {
-            if (id == null ||
-                typeof id !== 'string')
-                throw Error("Unable to resolve station id from query. Can't begin discovery");
-            await BeaconsRepository.beginDiscoveryAsync(id);
-        }
-        catch (err) {
-            console.error("Station restart request failed", err);
-        }
-    };
+    const handleUpdateSystem = () => stationCommandAsync(id, BeaconsRepository.updateSystemAsync, "update system");
+    const handleUpdate = () => stationCommandAsync(id, BeaconsRepository.updateBeaconAsync, "update station");
+    const handleRestartSystem = () => stationCommandAsync(id, BeaconsRepository.restartSystemAsync, "restart system");
+    const handleShutdownSystem = () => stationCommandAsync(id, BeaconsRepository.shutdownSystemAsync, "shutdown system");
+    const handleRestartStation = () => stationCommandAsync(id, BeaconsRepository.restartStationAsync, "restart station");
+    const handleBeginDiscovery = () => stationCommandAsync(id, BeaconsRepository.beginDiscoveryAsync, "begin discovery");
 
     const canUpdate = (latestAvailableVersion && beacon?.version)
         ? compareVersions(latestAvailableVersion, beacon.version)
