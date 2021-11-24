@@ -1,4 +1,4 @@
-import { Box, Paper, Typography } from "@mui/material";
+import { Paper, Typography, Stack } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
 import ReactTimeago from "react-timeago";
@@ -25,18 +25,12 @@ const Beacons = () => {
     };
 
     return (
-        <Box sx={{ overflow: 'hidden', position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}>
-            <Box sx={{ p: { sm: 0, md: 4 } }} height="100%">
-                <Paper sx={{ maxWidth: '680px', height: '100%' }}>
-                    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                        <Typography variant="h2" sx={{ p: 2 }}>Beacons</Typography>
-                        <Box sx={{ position: 'relative', flexGrow: 1, overflow: 'hidden' }}>
-                            <AutoTable {...beaconsTable} onRowClick={handleRowClick} />
-                        </Box>
-                    </Box>
-                </Paper>
-            </Box>
-        </Box>
+        <Paper sx={{ height: '100%', overflow: 'hidden' }}>
+            <Stack sx={{ height: '100%' }}>
+                <Typography variant="h2" sx={{ p: 2 }}>Beacons</Typography>
+                <AutoTable {...beaconsTable} onRowClick={handleRowClick} />
+            </Stack>
+        </Paper>
     )
 }
 
