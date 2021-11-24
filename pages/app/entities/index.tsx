@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from 'next/router';
-import { Box, Chip, Paper, Stack, Typography } from "@mui/material";
+import { Chip, Paper, Stack, Typography } from "@mui/material";
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
@@ -29,7 +29,7 @@ const Entities = () => {
 
     return (
         <Paper sx={{ height: '100%', overflow: 'hidden' }}>
-            <Stack>
+            <Stack sx={{ height: '100%' }}>
                 <Typography variant="h2" sx={{ p: 2 }}>Entities</Typography>
                 <AutoTable {...itemsTable} onRowClick={handleRowClick} />
             </Stack>

@@ -127,7 +127,7 @@ const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconCom
       <Button
         sx={{
           textTransform: "none",
-          py: isMobile ? 2 : 3,
+          py: { mobile: 2, desktop: 3 },
           px: 2
         }}
         aria-label={label}
