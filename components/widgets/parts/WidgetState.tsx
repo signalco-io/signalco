@@ -112,6 +112,11 @@ const WidgetState = (props: IWidgetSharedProps) => {
         for (let i = 0; i < devices.length; i++) {
             const target = config.target[i];
             const device = devices[i];
+
+            if (typeof target === 'undefined' ||
+                typeof device === 'undefined')
+                continue;
+
             const contactState = device?.getState({ channelName: target.channelName, contactName: target.contactName, deviceId: device.id });
             if (contactState?.valueSerialized === 'true') {
                 state = true;

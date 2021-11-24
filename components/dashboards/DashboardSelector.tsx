@@ -1,11 +1,47 @@
-import { Button, Paper, Popover, Stack, Typography } from "@mui/material";
+import { Button, Divider, Paper, Popover, Stack, Typography } from "@mui/material";
 import { bindPopover, bindTrigger, usePopupState } from "material-ui-popup-state/hooks";
 import React from "react";
 import { IDashboard } from "./Dashboards";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { AddSharp } from "@mui/icons-material";
 
-const DashboardSelector = (props: { dashboards: IDashboard[], dashboardIndex: number, onSelection: (index: number) => void }) => {
-    const { dashboards, dashboardIndex, onSelection } = props;
+interface IDashboardSelectorMenuProps {
+    dashboardIndex: number,
+    dashboards: IDashboard[],
+    onSelection: (index: number) => void,
+    onNewDashboard: () => void;
+}
+
+const DashboardSelectorMenu = (props: IDashboardSelectorMenuProps) => {
+    const { dashboardIndex, dashboards, onSelection, onNewDashboard } = props;
+    const handleDashboardSelected = onSelection;
+
+    const currentName = dashboards[dashboardIndex]?.name;
+
+    return (
+        <Paper sx={{ minWidth: 320 }}>
+            <Stack>
+                {dashboards.map((d, i) =>
+                    <Button key={d.id} disabled={i === dashboardIndex} size="large" onClick={() => handleDashboardSelected(i)}>{d.name}</Button>)}
+                <Button onClick={onNewDashboard} size="large" startIcon={<AddSharp />}>New dashboard...</Button>
+                <Divider />
+                <Typography variant="subtitle1" color="textSecondary" sx={{ p: 2 }}>Dashboard {currentName}</Typography>
+                <Button size="large">Settings...</Button>
+                <Button size="large">Edit widgets...</Button>
+            </Stack>
+        </Paper>
+    );
+};
+
+export interface IDashboardSelectorProps {
+    dashboards: IDashboard[],
+    dashboardIndex: number,
+    onSelection: (index: number) => void,
+    onNewDashboard: () => void
+}
+
+const DashboardSelector = (props: IDashboardSelectorProps) => {
+    const { dashboards, dashboardIndex, onSelection, onNewDashboard } = props;
     const popupState = usePopupState({ variant: 'popover', popupId: 'dashboardsMenu' });
 
     const currentName = dashboards[dashboardIndex]?.name;
@@ -14,6 +50,11 @@ const DashboardSelector = (props: { dashboards: IDashboard[], dashboardIndex: nu
         onSelection(index);
         popupState.close();
     };
+
+    const handleNewDashboard = () => {
+        onNewDashboard();
+        popupState.close();
+    }
 
     return (
         <>
@@ -37,12 +78,11 @@ const DashboardSelector = (props: { dashboards: IDashboard[], dashboardIndex: nu
                     vertical: 'top',
                     horizontal: 'left',
                 }}>
-                <Paper sx={{ minWidth: 220 }}>
-                    <Stack>
-                        {dashboards.map((d, i) =>
-                            <Button key={d.id} disabled={i === dashboardIndex} size="large" onClick={() => handleDashboardSelected(i)}>{d.name}</Button>)}
-                    </Stack>
-                </Paper>
+                <DashboardSelectorMenu
+                    dashboardIndex={dashboardIndex}
+                    dashboards={dashboards}
+                    onSelection={handleDashboardSelected}
+                    onNewDashboard={handleNewDashboard} />
             </Popover>
         </>
     );
