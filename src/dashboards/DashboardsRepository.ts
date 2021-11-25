@@ -41,7 +41,7 @@ class SignalDashboardSetDto {
     id?: string;
     name: string;
     configurationSerialized?: string;
-    
+
     constructor(name: string) {
         this.name = name;
     }
@@ -89,8 +89,7 @@ export default class DashboardsRepository {
     }
 
     static async saveDashboardAsync(dashboard: IDashboardSetModel) {
-        await DashboardsRepository._cacheDashboardsAsync();
-        await DashboardsRepository._setRemoteDashboardAsync(dashboard);
+        return await DashboardsRepository._setRemoteDashboardAsync(dashboard);
     }
 
     static async isUpdateAvailableAsync() {
@@ -104,7 +103,7 @@ export default class DashboardsRepository {
 
     private static async _cacheDashboardsAsync() {
         // Try to load from local storage
-        if (!DashboardsRepository.isLoading && 
+        if (!DashboardsRepository.isLoading &&
             !DashboardsRepository.dashboardsCache &&
             typeof localStorage !== 'undefined' &&
             localStorage.getItem('signalco-cache-dashboards') !== null) {
@@ -116,7 +115,7 @@ export default class DashboardsRepository {
             DashboardsRepository.isLoading = false;
         }
 
-        // TODO: Invalidate cache after some period        
+        // TODO: Invalidate cache after some period
         if (!DashboardsRepository.isLoading &&
             !DashboardsRepository.dashboardsCache) {
             await DashboardsRepository._applyRemoteDashboardsAsync();
@@ -132,7 +131,7 @@ export default class DashboardsRepository {
         const remoteDashboards = await DashboardsRepository._getRemoteDahboardsAsync();
         remoteDashboards.forEach(remoteDashboard => {
             const localDashboard = DashboardsRepository.dashboardsCache?.find(d => d.id == remoteDashboard.id);
-            if (localDashboard == null || 
+            if (localDashboard == null ||
                 remoteDashboard.timeStamp == null ||
                 localDashboard.timeStamp == null ||
                 localDashboard.timeStamp < remoteDashboard.timeStamp) {
@@ -146,7 +145,7 @@ export default class DashboardsRepository {
         DashboardsRepository.isLoading = true;
 
         // Download cache
-        DashboardsRepository.dashboardsCache = await DashboardsRepository._getRemoteDahboardsAsync();;            
+        DashboardsRepository.dashboardsCache = await DashboardsRepository._getRemoteDahboardsAsync();
         DashboardsRepository.dashboardsCache.sort((a, b) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0));
         DashboardsRepository.isLoading = false;
 
@@ -156,8 +155,9 @@ export default class DashboardsRepository {
         }
     }
 
-    private static async _setRemoteDashboardAsync(dashboard: IDashboardSetModel) {
-        await HttpService.requestAsync("/dashboards/set", "post", SignalDashboardSetDto.ToDto(dashboard));
+    private static async _setRemoteDashboardAsync(dashboard: IDashboardSetModel): Promise<string> {
+        const response = await HttpService.requestAsync("/dashboards/set", "post", SignalDashboardSetDto.ToDto(dashboard));
+        return response.id;
     }
 
     private static async _getRemoteDahboardsAsync() {

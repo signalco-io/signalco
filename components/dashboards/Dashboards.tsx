@@ -8,6 +8,7 @@ import PageNotificationService from "../../src/notifications/PageNotificationSer
 import DashboardsUpdateChecker from "./DashboardsUpdateChecked";
 import DashboardView from "./DashboardView";
 import DashboardSelector from "./DashboardSelector";
+import { useRouter } from "next/router";
 
 export interface IWidget {
     id: string,
@@ -58,21 +59,26 @@ const Dashboards = () => {
     const [dashboardIndex, setDashboardIndex] = React.useState(0);
     //const [isWidgetStoreOpen, setIsWidgetStoreOpen] = useState<boolean>(false);
     const [editingDashboard, setEditingDashboard] = useState<IDashboard | undefined>();
+
+    const router = useRouter();
     //const dashboardOptions = usePopupState({ variant: 'popover', popupId: 'dashboardMenu' });
     //const [isConfiguringDashboard, setIsConfiguringDashboard] = useState<boolean>(false);
 
     const handleDashboardChange = (newValue: number) => {
-        setDashboardIndex(newValue);
-        console.debug('Switched to dashboard', newValue);
+        router.push({ hash: dashboards[newValue]?.id });
     };
 
-    // const handleAddDashboard = async () => {
-    //     console.log("Adding new dashboard...");
+    const handleNewDashboard = async () => {
+        console.debug("Adding new dashboard...");
 
-    //     const newDashboard = { name: 'New dashboard', widgets: [] };
-    //     setDashboards([...dashboards, newDashboard]);
-    //     await saveDashboardEditAsync(newDashboard);
-    // };
+        const newDashboard = { name: 'New dashboard', widgets: [] };
+
+        const newDashboardId = await DashboardsRepository.saveDashboardAsync(newDashboard);
+        await DashboardsRepository.applyDashboardsUpdateAsync();
+        await loadDashboardsAsync();
+
+        router.push({ hash: newDashboardId });
+    };
 
     // const handleEdit = () => {
     //     setEditingDashboard(dashboards[Number.parseInt(dashboardIndex, 10) || 0]);
@@ -111,7 +117,7 @@ const Dashboards = () => {
                 source: d,
                 id: d.id,
                 name: d.name,
-                widgets: (typeof d.configurationSerialized !== 'undefined' ? JSON.parse(d.configurationSerialized).widgets as Array<IWidget> : []).map((w, i) => ({ ...w, id: i.toString() }))
+                widgets: (typeof d.configurationSerialized !== 'undefined' && d.configurationSerialized != null ? JSON.parse(d.configurationSerialized).widgets as Array<IWidget> : []).map((w, i) => ({ ...w, id: i.toString() }))
             })));
         } catch (error) {
             console.warn("Failed to load dashboards", error);
@@ -123,7 +129,29 @@ const Dashboards = () => {
 
     useEffect(() => {
         loadDashboardsAsync();
+
+        const onHashChanged = () => {
+            console.debug('Hash changed', location.hash);
+
+            const matchingDashboardIndex = dashboards.findIndex(d => `#${d.id}` === location.hash);
+            if (matchingDashboardIndex >= 0 && dashboardIndex !== matchingDashboardIndex) {
+                setDashboardIndex(matchingDashboardIndex);
+            }
+        };
+
+        window.addEventListener("hashchange", onHashChanged);
+
+        return () => {
+            window.removeEventListener("hashchange", onHashChanged);
+        };
     }, []);
+
+    useEffect(() => {
+        const matchingDashboardIndex = dashboards.findIndex(d => `#${d.id}` === location.hash);
+        if (matchingDashboardIndex >= 0 && dashboardIndex !== matchingDashboardIndex) {
+            setDashboardIndex(matchingDashboardIndex);
+        }
+    }, [dashboards, dashboardIndex]);
 
     const handleWidgetSetConfig = (dashboard: IDashboard, widget: IWidget, config: object) => {
         widget.config = config;
@@ -166,7 +194,11 @@ const Dashboards = () => {
             <DashboardsUpdateChecker onReload={loadDashboardsAsync} />
             <Stack spacing={{ mobile: 1, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
                 <div>
-                    <DashboardSelector dashboards={dashboards} dashboardIndex={dashboardIndex} onSelection={handleDashboardChange} />
+                    <DashboardSelector
+                        dashboards={dashboards}
+                        dashboardIndex={dashboardIndex}
+                        onSelection={handleDashboardChange}
+                        onNewDashboard={handleNewDashboard} />
                 </div>
                 {isLoading ?
                     <LinearProgress /> : (
