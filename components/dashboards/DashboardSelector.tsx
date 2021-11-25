@@ -21,8 +21,10 @@ const DashboardSelectorMenu = (props: IDashboardSelectorMenuProps) => {
     return (
         <Paper sx={{ minWidth: 320 }}>
             <Stack>
-                {dashboards.map((d, i) =>
-                    <Button key={d.id} disabled={i === dashboardIndex} size="large" onClick={() => handleDashboardSelected(i)}>{d.name}</Button>)}
+                <Stack sx={{ maxHeight: '50vh', overflow: 'auto' }}>
+                    {dashboards.map((d, i) =>
+                        <Button key={d.id} disabled={i === dashboardIndex} size="large" onClick={() => handleDashboardSelected(i)}>{d.name}</Button>)}
+                </Stack>
                 <Button onClick={onNewDashboard} size="large" startIcon={<AddSharp />}>New dashboard...</Button>
                 <Divider />
                 <Typography variant="subtitle1" color="textSecondary" sx={{ p: 2 }}>Dashboard {currentName}</Typography>
