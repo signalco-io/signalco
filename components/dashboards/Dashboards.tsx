@@ -9,6 +9,7 @@ import DashboardsUpdateChecker from "./DashboardsUpdateChecked";
 import DashboardView from "./DashboardView";
 import DashboardSelector from "./DashboardSelector";
 import { useRouter } from "next/router";
+import useHashParam from "../../src/hooks/useHashParam";
 
 export interface IWidget {
     id: string,
@@ -61,6 +62,7 @@ const Dashboards = () => {
     const [editingDashboard, setEditingDashboard] = useState<IDashboard | undefined>();
 
     const router = useRouter();
+    const hashParam = useHashParam();
     //const dashboardOptions = usePopupState({ variant: 'popover', popupId: 'dashboardMenu' });
     //const [isConfiguringDashboard, setIsConfiguringDashboard] = useState<boolean>(false);
 
@@ -128,30 +130,15 @@ const Dashboards = () => {
     };
 
     useEffect(() => {
-        loadDashboardsAsync();
-
-        const onHashChanged = () => {
-            console.debug('Hash changed', location.hash);
-
-            const matchingDashboardIndex = dashboards.findIndex(d => `#${d.id}` === location.hash);
-            if (matchingDashboardIndex >= 0 && dashboardIndex !== matchingDashboardIndex) {
-                setDashboardIndex(matchingDashboardIndex);
-            }
-        };
-
-        window.addEventListener("hashchange", onHashChanged);
-
-        return () => {
-            window.removeEventListener("hashchange", onHashChanged);
-        };
-    }, []);
-
-    useEffect(() => {
-        const matchingDashboardIndex = dashboards.findIndex(d => `#${d.id}` === location.hash);
+        const matchingDashboardIndex = dashboards.findIndex(d => `#${d.id}` === hashParam);
         if (matchingDashboardIndex >= 0 && dashboardIndex !== matchingDashboardIndex) {
             setDashboardIndex(matchingDashboardIndex);
         }
-    }, [dashboards, dashboardIndex]);
+    }, [hashParam, dashboardIndex, dashboards]);
+
+    useEffect(() => {
+        loadDashboardsAsync();
+    }, []);
 
     const handleWidgetSetConfig = (dashboard: IDashboard, widget: IWidget, config: object) => {
         widget.config = config;
