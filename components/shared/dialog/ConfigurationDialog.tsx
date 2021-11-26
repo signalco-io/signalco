@@ -12,7 +12,7 @@ interface IConfigurationDialogProps {
 }
 
 const ConfigurationDialog = (props: IConfigurationDialogProps) => {
-    const { children, title, isOpen, onClose, maxWidth = "mobile", actions } = props;
+    const { children, title, isOpen, onClose, maxWidth = "tablet", actions } = props;
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 760;
 

@@ -10,6 +10,7 @@ import DashboardView from "./DashboardView";
 import DashboardSelector from "./DashboardSelector";
 import { useRouter } from "next/router";
 import useHashParam from "../../src/hooks/useHashParam";
+import DashboardSettings from "./DashboardSettings";
 
 export interface IWidget {
     id: string,
@@ -24,35 +25,6 @@ export interface IDashboard {
     widgets: IWidget[]
 }
 
-// const DashboardSettings = (props: { isOpen: boolean, dashboard: IDashboard, onClose: () => void, onChange: (dashboard: IDashboard) => void }) => {
-//     const { isOpen, dashboard, onClose, onChange } = props;
-//     const [name, setName] = useState(dashboard.name);
-
-//     const handleSave = () => {
-//         onChange({
-//             ...dashboard,
-//             name: name
-//         });
-//     }
-
-//     return (
-//         <ConfigurationDialog
-//             isOpen={isOpen}
-//             title={`Dashboard settings`}
-//             onClose={onClose}
-//             actions={(
-//                 <>
-//                     <Button onClick={onClose}>Cancel</Button>
-//                     <Button autoFocus onClick={handleSave}>Save changes</Button>
-//                 </>
-//             )}>
-//             <FormGroup>
-//                 <TextField label="Name" value={name} onChange={(e) => setName(e.target.value || "")} />
-//             </FormGroup>
-//         </ConfigurationDialog>
-//     );
-// };
-
 const Dashboards = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isEditing/*, setIsEditing*/] = useState(false);
@@ -64,7 +36,7 @@ const Dashboards = () => {
     const router = useRouter();
     const hashParam = useHashParam();
     //const dashboardOptions = usePopupState({ variant: 'popover', popupId: 'dashboardMenu' });
-    //const [isConfiguringDashboard, setIsConfiguringDashboard] = useState<boolean>(false);
+    const [isConfiguringDashboard, setIsConfiguringDashboard] = useState<boolean>(false);
 
     const handleDashboardChange = (newValue: number) => {
         router.push({ hash: dashboards[newValue]?.id });
@@ -156,25 +128,19 @@ const Dashboards = () => {
 
         editingDashboard.widgets.splice(widgetIndex, 1);
         setEditingDashboard({ ...editingDashboard });
-        //setIsWidgetStoreOpen(false);
     }
 
-    // const handleOpenWidgetStore = () => {
-    //     setIsWidgetStoreOpen(true);
-    // }
+    const handleEditWidgets = () => {
 
-    // const handleWidgetAdd = (type: widgetType) => {
-    //     if (!editingDashboard) return;
+    };
 
-    //     editingDashboard.widgets.push({ id: editingDashboard.widgets.length.toString(), type: type });
-    //     setEditingDashboard({ ...editingDashboard });
-    //     setIsWidgetStoreOpen(false);
-    // };
+    const handleSettings = () => {
+        setIsConfiguringDashboard(true);
+    };
 
-    // const handleConfigureDashboard = () => {
-    //     setIsConfiguringDashboard(true);
-    //     dashboardOptions.close();
-    // };
+    const handleDashboardSettingsChanged = () => {
+        setIsConfiguringDashboard(false);
+    };
 
     return (
         <>
@@ -185,7 +151,9 @@ const Dashboards = () => {
                         dashboards={dashboards}
                         dashboardIndex={dashboardIndex}
                         onSelection={handleDashboardChange}
-                        onNewDashboard={handleNewDashboard} />
+                        onNewDashboard={handleNewDashboard}
+                        onEditWidgets={handleEditWidgets}
+                        onSettings={handleSettings} />
                 </div>
                 {isLoading ?
                     <LinearProgress /> : (
@@ -203,6 +171,11 @@ const Dashboards = () => {
                         </Box>
                     )}
             </Stack>
+            <DashboardSettings
+                dashboard={dashboards[dashboardIndex]}
+                isOpen={isConfiguringDashboard}
+                onClose={() => setIsConfiguringDashboard(false)}
+                onChange={handleDashboardSettingsChanged} />
         </>
     );
 };

@@ -9,11 +9,13 @@ interface IDashboardSelectorMenuProps {
     dashboardIndex: number,
     dashboards: IDashboard[],
     onSelection: (index: number) => void,
-    onNewDashboard: () => void;
+    onNewDashboard: () => void,
+    onEditWidgets: () => void,
+    onSettings: () => void
 }
 
 const DashboardSelectorMenu = (props: IDashboardSelectorMenuProps) => {
-    const { dashboardIndex, dashboards, onSelection, onNewDashboard } = props;
+    const { dashboardIndex, dashboards, onSelection, onNewDashboard, onEditWidgets, onSettings } = props;
     const handleDashboardSelected = onSelection;
 
     const currentName = dashboards[dashboardIndex]?.name;
@@ -28,8 +30,8 @@ const DashboardSelectorMenu = (props: IDashboardSelectorMenuProps) => {
                 <Button onClick={onNewDashboard} size="large" startIcon={<AddSharp />}>New dashboard...</Button>
                 <Divider />
                 <Typography variant="subtitle1" color="textSecondary" sx={{ p: 2 }}>Dashboard {currentName}</Typography>
-                <Button size="large">Settings...</Button>
-                <Button size="large">Edit widgets...</Button>
+                <Button size="large" onClick={onSettings}>Settings...</Button>
+                <Button size="large" onClick={onEditWidgets}>Edit widgets...</Button>
             </Stack>
         </Paper>
     );
@@ -39,11 +41,13 @@ export interface IDashboardSelectorProps {
     dashboards: IDashboard[],
     dashboardIndex: number,
     onSelection: (index: number) => void,
-    onNewDashboard: () => void
+    onNewDashboard: () => void,
+    onEditWidgets: () => void,
+    onSettings: () => void
 }
 
 const DashboardSelector = (props: IDashboardSelectorProps) => {
-    const { dashboards, dashboardIndex, onSelection, onNewDashboard } = props;
+    const { dashboards, dashboardIndex, onSelection, onNewDashboard, onEditWidgets, onSettings } = props;
     const popupState = usePopupState({ variant: 'popover', popupId: 'dashboardsMenu' });
 
     const currentName = dashboards[dashboardIndex]?.name;
@@ -84,7 +88,9 @@ const DashboardSelector = (props: IDashboardSelectorProps) => {
                     dashboardIndex={dashboardIndex}
                     dashboards={dashboards}
                     onSelection={handleDashboardSelected}
-                    onNewDashboard={handleNewDashboard} />
+                    onNewDashboard={handleNewDashboard}
+                    onEditWidgets={onEditWidgets}
+                    onSettings={onSettings} />
             </Popover>
         </>
     );
