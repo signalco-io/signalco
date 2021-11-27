@@ -1,56 +1,67 @@
 import { Button, Divider, Paper, Popover, Stack, Tab, Tabs, Typography } from "@mui/material";
-import { bindPopover, bindTrigger, usePopupState } from "material-ui-popup-state/hooks";
+import { bindPopover, bindTrigger, PopupState, usePopupState } from "material-ui-popup-state/hooks";
 import React from "react";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { AddSharp } from "@mui/icons-material";
 import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import PushPinSharpIcon from '@mui/icons-material/PushPinSharp';
-import DashboardsRepository, { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
+import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
 import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router";
 
 interface IDashboardSelectorMenuProps {
-    dashboardIndex: number,
-    dashboards: IDashboardModel[],
-    onSelection: (index: number) => void,
-    onNewDashboard: () => void,
+    selectedId: string,
+    popupState: PopupState,
+    onSelection: (id: string) => void,
     onEditWidgets: () => void,
     onSettings: () => void
 }
 
 const DashboardSelectorMenu = observer((props: IDashboardSelectorMenuProps) => {
-    const { dashboardIndex, dashboards, onSelection, onNewDashboard, onEditWidgets, onSettings } = props;
+    const { selectedId, popupState, onSelection, onEditWidgets, onSettings } = props;
+    const router = useRouter();
     const handleDashboardSelected = onSelection;
 
-    const dashboard = dashboards[dashboardIndex];
-    const currentName = dashboard?.name;
+    const handleNewDashboard = async () => {
+        const newDashboardId = await DashboardsRepository.saveDashboardAsync({
+            name: 'New dashboard'
+        });
+        router.push({ hash: newDashboardId });
+        popupState.close();
+    };
 
-    const handleToggleFavorite = async (index: number) => {
-        await DashboardsRepository.favoriteSetAsync(dashboards[index].id, !dashboards[index].isFavorite);
+    const handleToggleFavorite = async (id: string) => {
+        const dashboard = DashboardsRepository.dashboards.find(d => d.id === id);
+        if (dashboard) {
+            await DashboardsRepository.favoriteSetAsync(dashboard.id, !dashboard.isFavorite);
+        }
     }
+
+    const dashboards = DashboardsRepository.dashboards;
 
     return (
         <Paper sx={{ minWidth: 320 }}>
             <Stack>
                 <Stack sx={{ maxHeight: '50vh', overflow: 'auto' }}>
-                    {dashboards.map((d, i) => (
+                    {dashboards.map((d) => (
                         <Stack key={d.id} direction="row" sx={{ width: '100%', position: 'relative' }}>
                             <Button
-                                disabled={i === dashboardIndex}
+                                disabled={d.id === selectedId}
                                 size="large"
-                                onClick={() => handleDashboardSelected(i)}
+                                onClick={() => handleDashboardSelected(d.id)}
                                 sx={{ flexGrow: 1, py: 2 }}
                             >
                                 <Typography>{d.name}</Typography>
                             </Button>
-                            <Button sx={{ position: 'absolute', right: 0, height: '100%' }} onClick={() => handleToggleFavorite(i)}>
+                            <Button sx={{ position: 'absolute', right: 0, height: '100%' }} onClick={() => handleToggleFavorite(d.id)}>
                                 {d.isFavorite ? <PushPinSharpIcon /> : <PushPinOutlinedIcon />}
                             </Button>
                         </Stack>
                     ))}
                 </Stack>
-                <Button onClick={onNewDashboard} size="large" startIcon={<AddSharp />} sx={{ py: 2 }}>New dashboard...</Button>
+                <Button onClick={handleNewDashboard} size="large" startIcon={<AddSharp />} sx={{ py: 2 }}>New dashboard...</Button>
                 <Divider />
-                <Typography variant="subtitle1" color="textSecondary" sx={{ p: 2 }}>Dashboard {currentName}</Typography>
+                <Typography variant="subtitle1" color="textSecondary" sx={{ p: 2 }}>Dashboard</Typography>
                 <Button size="large" onClick={onSettings}>Settings...</Button>
                 <Button size="large" onClick={onEditWidgets}>Edit widgets...</Button>
             </Stack>
@@ -59,29 +70,25 @@ const DashboardSelectorMenu = observer((props: IDashboardSelectorMenuProps) => {
 });
 
 export interface IDashboardSelectorProps {
-    dashboards: IDashboardModel[],
-    dashboardIndex: number,
+    selectedId: string,
     onSelection: (index: number) => void,
-    onNewDashboard: () => void,
     onEditWidgets: () => void,
     onSettings: () => void
 }
 
 const DashboardSelector = observer((props: IDashboardSelectorProps) => {
-    const { dashboards, dashboardIndex, onSelection, onNewDashboard, onEditWidgets, onSettings } = props;
+    const { selectedId, onSelection, onEditWidgets, onSettings } = props;
     const popupState = usePopupState({ variant: 'popover', popupId: 'dashboardsMenu' });
 
-    const currentName = dashboards[dashboardIndex]?.name;
+    const dashboards = DashboardsRepository.dashboards;
+    const currentName = dashboards.find(d => d.id == selectedId)?.name;
 
     const handleDashboardSelected = (index: number) => {
         onSelection(index);
         popupState.close();
     };
 
-    const handleNewDashboard = () => {
-        onNewDashboard();
-        popupState.close();
-    }
+    console.debug("Rendering DashboardSelector");
 
     return (
         <>
@@ -134,10 +141,9 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
                     horizontal: 'left',
                 }}>
                 <DashboardSelectorMenu
-                    dashboardIndex={dashboardIndex}
-                    dashboards={dashboards}
+                    selectedId={selectedId}
+                    popupState={popupState}
                     onSelection={handleDashboardSelected}
-                    onNewDashboard={handleNewDashboard}
                     onEditWidgets={onEditWidgets}
                     onSettings={onSettings} />
             </Popover>

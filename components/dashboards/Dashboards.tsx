@@ -23,29 +23,11 @@ const Dashboards = () => {
     const [isEditing/*, setIsEditing*/] = useState(false);
     const [dashboards, setDashboards] = useState<IDashboardModel[]>([]);
     const [dashboardIndex, setDashboardIndex] = React.useState(0);
-    //const [isWidgetStoreOpen, setIsWidgetStoreOpen] = useState<boolean>(false);
     const [editingDashboard, setEditingDashboard] = useState<IDashboardModel | undefined>();
 
     const router = useRouter();
     const hashParam = useHashParam();
-    //const dashboardOptions = usePopupState({ variant: 'popover', popupId: 'dashboardMenu' });
     const [isConfiguringDashboard, setIsConfiguringDashboard] = useState<boolean>(false);
-
-    const handleDashboardChange = (newValue: number) => {
-        router.push({ hash: dashboards[newValue]?.id });
-    };
-
-    const handleNewDashboard = async () => {
-        console.debug("Adding new dashboard...");
-
-        const newDashboard = { name: 'New dashboard', widgets: [] };
-
-        const newDashboardId = await DashboardsRepository.saveDashboardAsync(newDashboard);
-        await DashboardsRepository.applyDashboardsUpdateAsync();
-        await loadDashboardsAsync();
-
-        router.push({ hash: newDashboardId });
-    };
 
     // const handleEdit = () => {
     //     setEditingDashboard(dashboards[Number.parseInt(dashboardIndex, 10) || 0]);
@@ -79,14 +61,17 @@ const Dashboards = () => {
 
     const loadDashboardsAsync = async () => {
         try {
-            const dashboards = await DashboardsRepository.getDashboardsAsync();
-            setDashboards(dashboards);
+            setDashboards(await DashboardsRepository.dashboards);
         } catch (error) {
             console.warn("Failed to load dashboards", error);
             PageNotificationService.show("Failed to load dashboards. Please try again.", "error");
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const handleDashboardChange = (newValue: number) => {
+        router.push({ hash: dashboards[newValue]?.id });
     };
 
     useEffect(() => {
@@ -101,47 +86,28 @@ const Dashboards = () => {
     }, []);
 
     const handleWidgetSetConfig = (dashboard: IDashboardModel, widget: IWidget, config: object) => {
-        widget.config = config;
-        setDashboards([...dashboards]);
-        console.log('updated widgets', dashboard);
+        // widget.config = config;
+        // setDashboards([...dashboards]);
+        // console.log('updated widgets', dashboard);
     };
 
     const handleWidgetRemove = (widget: IWidget) => {
-        if (!editingDashboard) return;
+        // if (!editingDashboard) return;
 
-        const widgetIndex = editingDashboard.widgets.indexOf(widget);
-        if (widgetIndex < 0) {
-            return;
-        }
+        // const widgetIndex = editingDashboard.widgets.indexOf(widget);
+        // if (widgetIndex < 0) {
+        //     return;
+        // }
 
-        editingDashboard.widgets.splice(widgetIndex, 1);
-        setEditingDashboard({ ...editingDashboard });
+        // editingDashboard.widgets.splice(widgetIndex, 1);
+        // setEditingDashboard({ ...editingDashboard });
     }
 
     const handleEditWidgets = () => {
 
     };
 
-    const handleSettings = () => {
-        setIsConfiguringDashboard(true);
-    };
-
-    const handleDashboardSettingsChanged = () => {
-        setIsConfiguringDashboard(false);
-    };
-
-    const handleDashboardDelete = async () => {
-        console.debug("Deleting dashboard...", dashboards[dashboardIndex]);
-
-        const dashboardIdToDelete = dashboards[dashboardIndex].id;
-        await DashboardsRepository.deleteDashboardAsync(dashboardIdToDelete);
-        await DashboardsRepository.applyDashboardsUpdateAsync();
-        await loadDashboardsAsync();
-
-        if (dashboards.length > 0) {
-            router.push({ hash: dashboards[0].id });
-        }
-    };
+    console.debug("Rendering Dashboards");
 
     return (
         <>
@@ -149,12 +115,10 @@ const Dashboards = () => {
             <Stack spacing={{ mobile: 1, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
                 <div>
                     <DashboardSelector
-                        dashboards={dashboards}
                         dashboardIndex={dashboardIndex}
                         onSelection={handleDashboardChange}
-                        onNewDashboard={handleNewDashboard}
                         onEditWidgets={handleEditWidgets}
-                        onSettings={handleSettings} />
+                        onSettings={() => setIsConfiguringDashboard(true)} />
                 </div>
                 {isLoading ?
                     <LinearProgress /> : (
@@ -175,9 +139,7 @@ const Dashboards = () => {
             <DashboardSettings
                 dashboard={dashboards[dashboardIndex]}
                 isOpen={isConfiguringDashboard}
-                onClose={() => setIsConfiguringDashboard(false)}
-                onChange={handleDashboardSettingsChanged}
-                onDeleteConfirmed={handleDashboardDelete} />
+                onClose={() => setIsConfiguringDashboard(false)} />
         </>
     );
 };

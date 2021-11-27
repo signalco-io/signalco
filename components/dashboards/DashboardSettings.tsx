@@ -1,26 +1,34 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
+import DashboardsRepository, { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
 import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
 import ConfirmDeleteButton from "../shared/dialog/ConfirmDeleteButton";
 
 interface IDashboardSettingsProps {
     isOpen: boolean,
-    dashboard: IDashboardModel,
+    dashboard?: IDashboardModel,
     onClose: () => void,
-    onChange: (dashboard: IDashboardModel) => void,
-    onDeleteConfirmed: () => void
 }
 
 const DashboardSettings = (props: IDashboardSettingsProps) => {
-    const { isOpen, dashboard, onClose, onChange, onDeleteConfirmed } = props;
+    const { isOpen, dashboard, onClose } = props;
     const [name, setName] = useState(dashboard?.name || '');
 
-    const handleSave = () => {
-        onChange({
-            ...dashboard,
-            name: name
-        });
+    const handleSave = async () => {
+        await DashboardsRepository.saveDashboardAsync(
+            {
+                ...dashboard,
+                name: name
+            }
+        );
+        onClose();
+    }
+
+    const handleDashboardDelete = async () => {
+        if (dashboard) {
+            await DashboardsRepository.deleteDashboardAsync(dashboard?.id);
+        }
+        onClose();
     }
 
     useEffect(() => {
@@ -28,6 +36,12 @@ const DashboardSettings = (props: IDashboardSettingsProps) => {
             setName(dashboard.name);
         }
     }, [dashboard])
+
+    useEffect(() => {
+        if (dashboard) {
+            dashboard.name = name;
+        }
+    }, [dashboard, name]);
 
     return (
         <ConfigurationDialog
@@ -48,7 +62,7 @@ const DashboardSettings = (props: IDashboardSettingsProps) => {
                         buttonLabel="Delete dashboard..."
                         title="Delete dashboard"
                         expectedConfirmText={name}
-                        onConfirm={onDeleteConfirmed} />
+                        onConfirm={handleDashboardDelete} />
                 </Stack>
             </Stack>
         </ConfigurationDialog>
