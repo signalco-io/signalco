@@ -1,4 +1,4 @@
-import { Button, Divider, Paper, Popover, Stack, Typography } from "@mui/material";
+import { Box, Button, buttonUnstyledClasses, Divider, Paper, Popover, Stack, styled, Tab, TabPanelUnstyled, Tabs, TabsListUnstyled, TabsUnstyled, TabUnstyled, tabUnstyledClasses, Typography } from "@mui/material";
 import { bindPopover, bindTrigger, usePopupState } from "material-ui-popup-state/hooks";
 import React from "react";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -85,22 +85,43 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
 
     return (
         <>
-            <Stack direction="row" spacing={0}>
-                <Button
-                    {...bindTrigger(popupState)}
-                    sx={{
-                        textTransform: 'none'
-                    }}>
-                    <Stack spacing={1} sx={{ pl: 1 }} direction="row" alignItems="center">
-                        <Typography variant="h2" fontWeight={500} fontSize={{ mobile: 18, tablet: 24 }}>{currentName}</Typography>
-                        <KeyboardArrowDownIcon sx={{ fontSize: { mobile: "28px", tablet: "32px" } }} />
-                    </Stack>
-                </Button>
-                {dashboards.filter(d => d.isFavorite).map(fd => (
-                    <Button key={fd.id} onClick={() => handleDashboardSelected(dashboards.indexOf(fd))} sx={{ px: 2 }}>
-                        <Typography variant="h3" fontWeight={400} fontSize={20} sx={{ opacity: 0.6 }}>{fd.name}</Typography>
+            <Stack spacing={{ mobile: 0, tablet: 2 }} direction="row">
+                <div>
+                    <Button
+                        {...bindTrigger(popupState)}>
+                        <Stack spacing={1} sx={{ pl: 1 }} direction="row" alignItems="center">
+                            <Typography variant="h2" fontWeight={500} fontSize={{ mobile: 18, tablet: 24 }}>{currentName}</Typography>
+                            <KeyboardArrowDownIcon sx={{ fontSize: { mobile: "28px", tablet: "32px" } }} />
+                        </Stack>
                     </Button>
-                ))}
+                </div>
+                <Tabs
+                    value={-1}
+                    variant="scrollable"
+                    scrollButtons="auto"
+                    aria-label="pinned dashboards"
+                    sx={{
+                        ".MuiTabScrollButton-root": {
+                            display: 'none'
+                        }
+                    }}
+                >
+                    {dashboards.filter(d => d.isFavorite).map(fd => (
+                        <Tab
+                            key={fd.id}
+                            sx={{
+                                px: { mobile: 0, tablet: 2 },
+                                minHeight: { mobile: 40, tablet: 48 },
+                                minWidth: 80
+                            }}
+                            onClick={() => handleDashboardSelected(dashboards.indexOf(fd))}
+                            label={<Typography
+                                variant="h3"
+                                fontWeight={400}
+                                fontSize={{ mobile: 16, tablet: 20 }}
+                                sx={{ opacity: 0.6, textTransform: 'none' }}>{fd.name}</Typography>} />
+                    ))}
+                </Tabs>
             </Stack>
             <Popover
                 {...bindPopover(popupState)}
