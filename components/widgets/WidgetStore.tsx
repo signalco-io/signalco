@@ -1,4 +1,4 @@
-import { CardHeader, Grid, OutlinedInput, Stack, Box, Card, Typography, CardActions, CardMedia, CardContent, IconButton } from "@mui/material";
+import { CardHeader, Grid, Stack, Box, Card, Typography, CardActions, CardMedia, CardContent, IconButton, TextField } from "@mui/material";
 import React from "react";
 import Image from 'next/image';
 import useSearch, { filterFuncObjectStringProps } from "../../src/hooks/useSearch";
@@ -50,7 +50,7 @@ const WidgetStore = (props: { onAddWidget: (widgetType: widgetType) => void }) =
 
     return (
         <Stack spacing={2}>
-            {showAvailableWidgetsSearch && <OutlinedInput placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />}
+            {showAvailableWidgetsSearch && <TextField placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />}
             <Stack direction="row">
                 <Typography variant="body2" color="text.secondary">{filteredAvailableWidgetsItems.length} widget{filteredAvailableWidgetsItems.length > 1 ? 's' : ''} available</Typography>
             </Stack>

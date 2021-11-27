@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Grid, Menu, MenuItem, OutlinedInput, Paper, Popover, Skeleton, Stack, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Grid, Menu, MenuItem, Paper, Popover, Skeleton, Stack, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
@@ -174,7 +174,7 @@ const DisplayValue = observer((props: { value: any | undefined, dataType: string
                     <Paper sx={{ p: 2 }}>
                         <Stack spacing={1}>
                             <Typography>String</Typography>
-                            <OutlinedInput size="small" value={value} onChange={(e) => setValue(e.target.value)} />
+                            <TextField size="small" value={value} onChange={(e) => setValue(e.target.value)} />
                         </Stack>
                     </Paper>
                 </Popover>}
@@ -183,7 +183,7 @@ const DisplayValue = observer((props: { value: any | undefined, dataType: string
                     <Paper sx={{ p: 2 }}>
                         <Stack spacing={1}>
                             <Typography>{dataType === 'double' ? 'Value' : 'Color temperature'}</Typography>
-                            <OutlinedInput size="small" value={value} onChange={(e) => setValue(e.target.value)} />
+                            <TextField size="small" value={value} onChange={(e) => setValue(e.target.value)} />
                         </Stack>
                     </Paper>
                 </Popover>}

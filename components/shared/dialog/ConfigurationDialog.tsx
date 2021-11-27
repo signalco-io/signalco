@@ -2,7 +2,7 @@ import { Close } from "@mui/icons-material";
 import { Breakpoint, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, Typography } from "@mui/material";
 import React from "react";
 
-interface IConfigurationDialogProps {
+export interface IConfigurationDialogProps {
     isOpen: boolean,
     title: React.ReactNode,
     onClose: () => void,

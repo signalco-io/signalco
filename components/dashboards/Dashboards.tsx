@@ -20,7 +20,7 @@ export interface IWidget {
 
 export interface IDashboard {
     source?: IDashboardModel,
-    id?: string,
+    id: string,
     name: string,
     widgets: IWidget[]
 }
@@ -142,6 +142,19 @@ const Dashboards = () => {
         setIsConfiguringDashboard(false);
     };
 
+    const handleDashboardDelete = async () => {
+        console.debug("Deleting dashboard...", dashboards[dashboardIndex]);
+
+        const dashboardIdToDelete = dashboards[dashboardIndex].id;
+        await DashboardsRepository.deleteDashboardAsync(dashboardIdToDelete);
+        await DashboardsRepository.applyDashboardsUpdateAsync();
+        await loadDashboardsAsync();
+
+        if (dashboards.length > 0) {
+            router.push({ hash: dashboards[0].id });
+        }
+    };
+
     return (
         <>
             <DashboardsUpdateChecker onReload={loadDashboardsAsync} />
@@ -175,7 +188,8 @@ const Dashboards = () => {
                 dashboard={dashboards[dashboardIndex]}
                 isOpen={isConfiguringDashboard}
                 onClose={() => setIsConfiguringDashboard(false)}
-                onChange={handleDashboardSettingsChanged} />
+                onChange={handleDashboardSettingsChanged}
+                onDeleteConfirmed={handleDashboardDelete} />
         </>
     );
 };

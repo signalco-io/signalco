@@ -54,6 +54,11 @@ const theme = (isDark: boolean) => {
           }
         }
       },
+      MuiTextField: {
+        defaultProps: {
+          variant: "outlined"
+        }
+      },
       MuiPaper: {
         defaultProps: {
           variant: "outlined"

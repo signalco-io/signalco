@@ -92,6 +92,10 @@ export default class DashboardsRepository {
         return await DashboardsRepository._setRemoteDashboardAsync(dashboard);
     }
 
+    static async deleteDashboardAsync(id: string) {
+        await HttpService.requestAsync("/entity/delete", "delete", {id: id, entityType: 3});
+    }
+
     static async isUpdateAvailableAsync() {
         await DashboardsRepository._checkUpdatesAvailableAsync();
         return DashboardsRepository.isUpdateAvailable;

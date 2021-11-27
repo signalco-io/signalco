@@ -2,8 +2,8 @@ import {
   Alert,
   Box,
   LinearProgress, Link,
-  OutlinedInput,
   Stack,
+  TextField,
   Typography
 } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -92,7 +92,7 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
 
   return (
     <Stack spacing={1} sx={{ height: '100%' }}>
-      {showSearch && <OutlinedInput placeholder="Search..." sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
+      {showSearch && <TextField label="Search..." sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ overflow: 'auto', display: 'grid' }}>
           {props.isLoading && <LinearProgress />}
