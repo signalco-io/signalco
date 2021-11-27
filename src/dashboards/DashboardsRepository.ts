@@ -1,4 +1,7 @@
+import { makeAutoObservable } from "mobx";
+import { IWidget } from "../../components/dashboards/Dashboards";
 import HttpService from "../services/HttpService";
+import LocalStorageService from "../services/LocalStorageService";
 
 export interface IDashboardSetModel {
     configurationSerialized?: string;
@@ -11,6 +14,8 @@ export interface IDashboardModel {
     name: string;
     id: string;
     timeStamp?: Date;
+    isFavorite: boolean;
+    widgets: IWidget[];
 }
 
 class DashboardModel implements IDashboardModel {
@@ -18,12 +23,18 @@ class DashboardModel implements IDashboardModel {
     name: string;
     id: string;
     timeStamp?: Date;
+    isFavorite: boolean;
+    widgets: IWidget[];
 
     constructor(id: string, name: string, configurationSerialized?: string, timeStamp?: Date) {
         this.id = id;
         this.name = name;
         this.configurationSerialized = configurationSerialized;
         this.timeStamp = timeStamp;
+        this.isFavorite = false;
+        this.widgets = [];
+
+        makeAutoObservable(this);
     }
 }
 
@@ -73,6 +84,8 @@ class SignalDashboardDto {
     }
 }
 
+const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';
+
 export default class DashboardsRepository {
     static dashboardsCache?: IDashboardModel[];
     static isLoading: boolean;
@@ -88,8 +101,28 @@ export default class DashboardsRepository {
         return DashboardsRepository.dashboardsCache ?? [];
     }
 
-    static async saveDashboardAsync(dashboard: IDashboardSetModel) {
-        return await DashboardsRepository._setRemoteDashboardAsync(dashboard);
+    static async favoriteSetAsync(id: string, newIsFavorite: boolean) {
+        const currentFavorites = LocalStorageService.getItem<string[]>(DashboardsFavoritesLocalStorageKey, []);
+        const isCurrentlyFavorite = currentFavorites.indexOf(id) >= 0;
+
+        console.log(!isCurrentlyFavorite, newIsFavorite)
+        if (!isCurrentlyFavorite && newIsFavorite) {
+            console.log('will set item', [...currentFavorites, id])
+            LocalStorageService.setItem(DashboardsFavoritesLocalStorageKey, [...currentFavorites, id]);
+        } else if (isCurrentlyFavorite && !newIsFavorite) {
+            console.log('will remove item', [...currentFavorites, id])
+            LocalStorageService.setItem(DashboardsFavoritesLocalStorageKey, currentFavorites.splice(currentFavorites.indexOf(id), 1));
+        }
+
+        // Mark favorite locally
+        const favoritedDashboard = DashboardsRepository.dashboardsCache?.find(d => d.id === id);
+        if (favoritedDashboard) {
+            favoritedDashboard.isFavorite = newIsFavorite;
+        }
+    }
+
+    static saveDashboardAsync(dashboard: IDashboardSetModel) {
+        return DashboardsRepository._setRemoteDashboardAsync(dashboard);
     }
 
     static async deleteDashboardAsync(id: string) {
@@ -110,12 +143,29 @@ export default class DashboardsRepository {
         if (!DashboardsRepository.isLoading &&
             !DashboardsRepository.dashboardsCache &&
             typeof localStorage !== 'undefined' &&
-            localStorage.getItem('signalco-cache-dashboards') !== null) {
+            LocalStorageService.getItem('signalco-cache-dashboards') !== null) {
             DashboardsRepository.isLoading = true;
 
+            const favorites = LocalStorageService.getItem<string[]>(DashboardsFavoritesLocalStorageKey, []);
+
             // Load from local storage
-            DashboardsRepository.dashboardsCache = JSON.parse(localStorage.getItem('signalco-cache-dashboards') ?? "[]") as IDashboardModel[];
-            DashboardsRepository.dashboardsCache.forEach(d => d.timeStamp = d.timeStamp ? new Date(d.timeStamp) : undefined);
+            try {
+                DashboardsRepository.dashboardsCache = LocalStorageService
+                    .getItem<IDashboardModel[]>('signalco-cache-dashboards', [])
+                    .map(d => {
+                        d.timeStamp = d.timeStamp ? new Date(d.timeStamp) : undefined;
+                        d.isFavorite = favorites.indexOf(d.id) >= 0;
+                        d.widgets = (typeof d.configurationSerialized !== 'undefined' && d.configurationSerialized != null
+                                ? JSON.parse(d.configurationSerialized).widgets as Array<IWidget>
+                                : [])
+                            .map((w, i) => ({ ...w, id: i.toString() }));
+                        return makeAutoObservable(d);
+                    });
+            }
+            catch (err) {
+                console.error("Failed to load dashboards from local storage", err);
+            }
+
             DashboardsRepository.isLoading = false;
         }
 
@@ -166,7 +216,7 @@ export default class DashboardsRepository {
 
         // Persist dashboards locally
         if (typeof localStorage !== 'undefined') {
-            localStorage.setItem('signalco-cache-dashboards', JSON.stringify(DashboardsRepository.dashboardsCache));
+            LocalStorageService.setItem('signalco-cache-dashboards', DashboardsRepository.dashboardsCache);
         }
     }
 

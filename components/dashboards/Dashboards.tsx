@@ -18,20 +18,13 @@ export interface IWidget {
     config?: object
 }
 
-export interface IDashboard {
-    source?: IDashboardModel,
-    id: string,
-    name: string,
-    widgets: IWidget[]
-}
-
 const Dashboards = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isEditing/*, setIsEditing*/] = useState(false);
-    const [dashboards, setDashboards] = useState<IDashboard[]>([]);
+    const [dashboards, setDashboards] = useState<IDashboardModel[]>([]);
     const [dashboardIndex, setDashboardIndex] = React.useState(0);
     //const [isWidgetStoreOpen, setIsWidgetStoreOpen] = useState<boolean>(false);
-    const [editingDashboard, setEditingDashboard] = useState<IDashboard | undefined>();
+    const [editingDashboard, setEditingDashboard] = useState<IDashboardModel | undefined>();
 
     const router = useRouter();
     const hashParam = useHashParam();
@@ -87,12 +80,7 @@ const Dashboards = () => {
     const loadDashboardsAsync = async () => {
         try {
             const dashboards = await DashboardsRepository.getDashboardsAsync();
-            setDashboards(dashboards.map(d => ({
-                source: d,
-                id: d.id,
-                name: d.name,
-                widgets: (typeof d.configurationSerialized !== 'undefined' && d.configurationSerialized != null ? JSON.parse(d.configurationSerialized).widgets as Array<IWidget> : []).map((w, i) => ({ ...w, id: i.toString() }))
-            })));
+            setDashboards(dashboards);
         } catch (error) {
             console.warn("Failed to load dashboards", error);
             PageNotificationService.show("Failed to load dashboards. Please try again.", "error");
@@ -112,7 +100,7 @@ const Dashboards = () => {
         loadDashboardsAsync();
     }, []);
 
-    const handleWidgetSetConfig = (dashboard: IDashboard, widget: IWidget, config: object) => {
+    const handleWidgetSetConfig = (dashboard: IDashboardModel, widget: IWidget, config: object) => {
         widget.config = config;
         setDashboards([...dashboards]);
         console.log('updated widgets', dashboard);

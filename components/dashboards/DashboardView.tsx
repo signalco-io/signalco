@@ -5,9 +5,10 @@ import React, { useEffect, useState } from "react";
 import useWindowWidth from "../../src/hooks/useWindowWidth";
 import { useNavWidth } from "../NavProfile";
 import Widget, { IWidgetProps } from "../widgets/Widget";
-import { IDashboard, IWidget } from "./Dashboards";
+import { IWidget } from "./Dashboards";
 import { CSS } from '@dnd-kit/utilities';
 import { snapCenterToCursor } from "@dnd-kit/modifiers";
+import { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
 
 interface IDragableWidgetProps extends IWidgetProps {
     id: string
@@ -48,7 +49,7 @@ const DragableWidget = (props: IDragableWidgetProps) => {
     );
 };
 
-const DashboardView = (props: { dashboard: IDashboard, isEditing: boolean, handleWidgetRemove: (widget: IWidget) => void, handleWidgetSetConfig: (dashboard: IDashboard, widget: IWidget, config: object) => void }) => {
+const DashboardView = (props: { dashboard: IDashboardModel, isEditing: boolean, handleWidgetRemove: (widget: IWidget) => void, handleWidgetSetConfig: (dashboard: IDashboardModel, widget: IWidget, config: object) => void }) => {
     const { dashboard, isEditing, handleWidgetRemove, handleWidgetSetConfig } = props;
     const [numberOfColumns, setNumberOfColumns] = useState(4);
     const widgetSpacing = 1;

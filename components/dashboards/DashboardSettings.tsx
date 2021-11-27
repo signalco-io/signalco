@@ -1,14 +1,14 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
 import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
 import ConfirmDeleteButton from "../shared/dialog/ConfirmDeleteButton";
-import { IDashboard } from "./Dashboards";
 
 interface IDashboardSettingsProps {
     isOpen: boolean,
-    dashboard: IDashboard,
+    dashboard: IDashboardModel,
     onClose: () => void,
-    onChange: (dashboard: IDashboard) => void,
+    onChange: (dashboard: IDashboardModel) => void,
     onDeleteConfirmed: () => void
 }
 
