@@ -1,4 +1,4 @@
-import { Breakpoint, Button, Divider, Stack, TextField, Typography } from "@mui/material";
+import { Breakpoint, Button, Stack, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
 import { IDashboard } from "./Dashboards";
