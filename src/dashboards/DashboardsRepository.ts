@@ -133,6 +133,8 @@ export default class DashboardsRepository {
 
     private static async _checkUpdatesAvailableAsync() {
         const remoteDashboards = await DashboardsRepository._getRemoteDahboardsAsync();
+
+        // Check added or updated dashboards
         remoteDashboards.forEach(remoteDashboard => {
             const localDashboard = DashboardsRepository.dashboardsCache?.find(d => d.id == remoteDashboard.id);
             if (localDashboard == null ||
@@ -141,6 +143,15 @@ export default class DashboardsRepository {
                 localDashboard.timeStamp < remoteDashboard.timeStamp) {
                 DashboardsRepository.isUpdateAvailable = true;
                 console.debug("Dashboard update available. Dashboard: ", remoteDashboard.name, localDashboard?.timeStamp, "<", remoteDashboard.timeStamp)
+            }
+        });
+
+        // Check deleted dashboards
+        DashboardsRepository.dashboardsCache?.forEach(localDashboard => {
+            const remoteDashboard = remoteDashboards.find(d => d.id === localDashboard.id);
+            if (remoteDashboard == null) {
+                DashboardsRepository.isUpdateAvailable = true;
+                console.debug("Dashboard update available. Dashboard doesn't exist on remote: ", localDashboard.id, localDashboard.name);
             }
         });
     }
