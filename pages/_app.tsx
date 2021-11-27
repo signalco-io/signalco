@@ -10,6 +10,7 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import { useRouter } from "next/router";
 import createEmotionCache from '../src/createEmotionCache';
 import { SnackbarProvider } from 'notistack';
+import LocalStorageService from "../src/services/LocalStorageService";
 
 const isServerSide = typeof window === 'undefined';
 const clientSideEmotionCache = createEmotionCache();
@@ -33,7 +34,7 @@ export const AppContext = React.createContext<IAppContext>(appContextDefaultStat
 export default function App(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps, err } = props;
   const handleThemeChange = (theme: string) => {
-    window.localStorage.setItem("theme", theme);
+    LocalStorageService.setItem("theme", theme);
     setAppContext({
       ...appContextState,
       theme: theme
@@ -50,7 +51,7 @@ export default function App(props: MyAppProps) {
   React.useEffect(() => {
     // Apply theme to document
     if (!isServerSide) {
-      const themeMode = window.localStorage.getItem("theme") ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
+      const themeMode = LocalStorageService.getItem("theme", window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
       document.documentElement.style.setProperty("color-scheme", themeMode);
       if (themeMode !== 'light') {
         setAppContext({ ...appContextState, theme: 'dark' });

@@ -1,6 +1,7 @@
 import axios from "axios";
 import AppSettingsProvider from "./AppSettingsProvider";
 import { trimStartChar, isAbsoluteUrl } from "../helpers/StringHelpers";
+import LocalStorageService from "./LocalStorageService";
 
 export default class HttpService {
   public static tokenFactory?: () => Promise<string>;
@@ -8,13 +9,13 @@ export default class HttpService {
     if (typeof window !== 'undefined' && 'onLine' in navigator)
       return navigator.onLine;
     return true;
-  } 
+  }
 
   private static async _getBearerTokenAsync() {
     let token: string | undefined;
 
     // Try to use cached token (for offline access)
-    const cachedToken = localStorage.getItem('signalauth0keycache');
+    const cachedToken = LocalStorageService.getItem<string>('signalauth0keycache');
     if (!HttpService.isOnline &&
       typeof cachedToken !== 'undefined' &&
       cachedToken != null) {
@@ -31,7 +32,7 @@ export default class HttpService {
 
     // Cache token and return if available
     if (typeof token !== 'undefined') {
-      localStorage.setItem('signalauth0keycache', token);
+      LocalStorageService.setItem('signalauth0keycache', token);
       return `Bearer ${token}`;
     }
 

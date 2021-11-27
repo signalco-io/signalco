@@ -17,6 +17,7 @@ const Cover = () => (
             display: 'block',
             width: '100%',
             height: '100%',
+            pointerEvents: 'none',
             background: 'radial-gradient(at top right, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0) 70%)',
             backgroundPosition: 'right top'
           }
@@ -33,7 +34,7 @@ const Cover = () => (
                 width={512}
                 height={144} />
             </Box>
-            <Typography fontFamily="Raleway" fontWeight={200} fontSize={{ xs: '1.4rem', sm: '2rem', md: '2.5rem' }}>Automate your life</Typography>
+            <Typography fontFamily="Raleway" fontWeight={200} fontSize={{ mobile: '1.4rem', tablet: '2rem', desktop: '2.5rem' }}>Automate your life</Typography>
           </Stack>
         </Box>
       </>
@@ -67,6 +68,7 @@ const CounterIndicator = (props: { count: number, hideAfter?: boolean }) => (
           color: 'background.default',
           backgroundColor: 'text.primary',
           position: 'relative',
+          userSelect: 'none',
           '&::before': {
             content: '""',
             display: 'block',
@@ -130,7 +132,7 @@ const Footer = () => (
     {appState => (
       <Box sx={{ backgroundColor: appState.theme === 'light' ? "rgba(0,0,0,0.06)" : "rgba(125,125,125,0.2)" }}>
         <Divider />
-        <Container>
+        <Container maxWidth="desktop">
           <Box component="footer" sx={{ padding: "64px 0 32px 0" }}>
             <Grid container direction="column" spacing={4}>
               <Grid item>

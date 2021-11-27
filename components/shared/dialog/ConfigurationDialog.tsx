@@ -2,7 +2,7 @@ import { Close } from "@mui/icons-material";
 import { Breakpoint, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, Typography } from "@mui/material";
 import React from "react";
 
-interface IConfigurationDialogProps {
+export interface IConfigurationDialogProps {
     isOpen: boolean,
     title: React.ReactNode,
     onClose: () => void,
@@ -12,7 +12,7 @@ interface IConfigurationDialogProps {
 }
 
 const ConfigurationDialog = (props: IConfigurationDialogProps) => {
-    const { children, title, isOpen, onClose, maxWidth = "mobile", actions } = props;
+    const { children, title, isOpen, onClose, maxWidth = "tablet", actions } = props;
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 760;
 

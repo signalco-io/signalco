@@ -351,7 +351,7 @@ const DeviceDetails = () => {
                                 <CardContent style={{ padding: 0 }}>
                                     <Slide in={isShareWithNewOpen} direction="down" mountOnEnter unmountOnExit>
                                         <Stack direction="row" spacing={2} alignItems="center" sx={{ pb: 1, px: 2 }}>
-                                            <TextField label="Email address" type="email" variant="outlined" fullWidth onChange={(e) => setShareWithNewEmail(e.target.value)} />
+                                            <TextField label="Email address" type="email" fullWidth onChange={(e) => setShareWithNewEmail(e.target.value)} />
                                             <Stack direction="row">
                                                 <IconButton onClick={handleSubmitShareWithNew} size="large" title="Send invitation"><SendIcon /></IconButton>
                                                 <IconButton onClick={handleCancelShareWithNew} size="large" title="Cancel"><ClearIcon /></IconButton>
