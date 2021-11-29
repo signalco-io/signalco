@@ -10,7 +10,7 @@ import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 
 interface IDashboardSelectorMenuProps {
-    selectedId: string,
+    selectedId: string | undefined,
     popupState: PopupState,
     onSelection: (id: string) => void,
     onEditWidgets: () => void,
@@ -70,7 +70,7 @@ const DashboardSelectorMenu = observer((props: IDashboardSelectorMenuProps) => {
 });
 
 export interface IDashboardSelectorProps {
-    selectedId: string,
+    selectedId: string | undefined,
     onSelection: (id: string) => void,
     onEditWidgets: () => void,
     onSettings: () => void
@@ -103,7 +103,7 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
                     </Button>
                 </div>
                 <Tabs
-                    value={-1}
+                    value={undefined}
                     variant="scrollable"
                     scrollButtons="auto"
                     aria-label="pinned dashboards"

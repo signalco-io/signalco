@@ -97,6 +97,11 @@ export default class DashboardsRepository {
         return DashboardsRepository._dashboardsCache;
     };
 
+    static async getAsync(id: string) {
+        await DashboardsRepository._cacheDashboardsAsync();
+        return DashboardsRepository._dashboardsCache.find(d => d.id === id);
+    }
+
     static async favoriteSetAsync(id: string, newIsFavorite: boolean) {
         const currentFavorites = LocalStorageService.getItem<string[]>(DashboardsFavoritesLocalStorageKey, []);
         const isCurrentlyFavorite = currentFavorites.indexOf(id) >= 0;
