@@ -71,7 +71,7 @@ const DashboardSelectorMenu = observer((props: IDashboardSelectorMenuProps) => {
 
 export interface IDashboardSelectorProps {
     selectedId: string,
-    onSelection: (index: number) => void,
+    onSelection: (id: string) => void,
     onEditWidgets: () => void,
     onSettings: () => void
 }
@@ -83,8 +83,8 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
     const dashboards = DashboardsRepository.dashboards;
     const currentName = dashboards.find(d => d.id == selectedId)?.name;
 
-    const handleDashboardSelected = (index: number) => {
-        onSelection(index);
+    const handleDashboardSelected = (id: string) => {
+        onSelection(id);
         popupState.close();
     };
 
@@ -121,7 +121,7 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
                                 minHeight: { mobile: 40, tablet: 48 },
                                 minWidth: 80
                             }}
-                            onClick={() => handleDashboardSelected(dashboards.indexOf(fd))}
+                            onClick={() => handleDashboardSelected(fd.id)}
                             label={<Typography
                                 variant="h3"
                                 fontWeight={400}

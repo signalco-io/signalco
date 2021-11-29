@@ -22,8 +22,7 @@ const Dashboards = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isEditing/*, setIsEditing*/] = useState(false);
     const [dashboards, setDashboards] = useState<IDashboardModel[]>([]);
-    const [dashboardIndex, setDashboardIndex] = React.useState(0);
-    const [editingDashboard, setEditingDashboard] = useState<IDashboardModel | undefined>();
+    const [selectedId, setSelectedId] = React.useState<string | undefined>(undefined);
 
     const router = useRouter();
     const hashParam = useHashParam();
@@ -70,16 +69,16 @@ const Dashboards = () => {
         }
     };
 
-    const handleDashboardChange = (newValue: number) => {
-        router.push({ hash: dashboards[newValue]?.id });
+    const handleDashboardChange = (id: string) => {
+        router.push({ hash: id });
     };
 
     useEffect(() => {
-        const matchingDashboardIndex = dashboards.findIndex(d => `#${d.id}` === hashParam);
-        if (matchingDashboardIndex >= 0 && dashboardIndex !== matchingDashboardIndex) {
-            setDashboardIndex(matchingDashboardIndex);
+        const hashParamId = hashParam?.replace("#", "");
+        if (hashParamId !== selectedId) {
+            setSelectedId(hashParamId);
         }
-    }, [hashParam, dashboardIndex, dashboards]);
+    }, [hashParam, selectedId]);
 
     useEffect(() => {
         loadDashboardsAsync();
@@ -109,13 +108,15 @@ const Dashboards = () => {
 
     console.debug("Rendering Dashboards");
 
+    const selectedDashboard = dashboards.find(d => d.id === selectedId);
+
     return (
         <>
             <DashboardsUpdateChecker onReload={loadDashboardsAsync} />
             <Stack spacing={{ mobile: 1, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
                 <div>
                     <DashboardSelector
-                        dashboardIndex={dashboardIndex}
+                        selectedId={selectedId}
                         onSelection={handleDashboardChange}
                         onEditWidgets={handleEditWidgets}
                         onSettings={() => setIsConfiguringDashboard(true)} />
@@ -124,7 +125,7 @@ const Dashboards = () => {
                     <LinearProgress /> : (
                         <Box sx={{ px: { mobile: 2, tablet: 0 } }}>
                             {dashboards.length ?
-                                <DashboardView dashboard={editingDashboard || dashboards[dashboardIndex]}
+                                <DashboardView dashboard={selectedDashboard}
                                     isEditing={isEditing}
                                     handleWidgetRemove={handleWidgetRemove}
                                     handleWidgetSetConfig={handleWidgetSetConfig} />
