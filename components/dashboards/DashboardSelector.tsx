@@ -1,6 +1,6 @@
 import { Button, Divider, Paper, Popover, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { bindPopover, bindTrigger, PopupState, usePopupState } from "material-ui-popup-state/hooks";
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { AddSharp } from "@mui/icons-material";
 import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
@@ -8,6 +8,7 @@ import PushPinSharpIcon from '@mui/icons-material/PushPinSharp';
 import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
+import useHashParam from "../../src/hooks/useHashParam";
 
 interface IDashboardSelectorMenuProps {
     selectedId: string | undefined,
@@ -59,7 +60,7 @@ const DashboardSelectorMenu = observer((props: IDashboardSelectorMenuProps) => {
                         </Stack>
                     ))}
                 </Stack>
-                <Button onClick={handleNewDashboard} size="large" startIcon={<AddSharp />} sx={{ py: 2 }}>New dashboard...</Button>
+                <Button onClick={handleNewDashboard} size="large" startIcon={<AddSharp />} sx={{ py: 2 }}>New dashboard</Button>
                 <Divider />
                 <Typography variant="subtitle1" color="textSecondary" sx={{ p: 2 }}>Dashboard</Typography>
                 <Button size="large" onClick={onSettings}>Settings...</Button>
@@ -79,14 +80,28 @@ export interface IDashboardSelectorProps {
 const DashboardSelector = observer((props: IDashboardSelectorProps) => {
     const { selectedId, onSelection, onEditWidgets, onSettings } = props;
     const popupState = usePopupState({ variant: 'popover', popupId: 'dashboardsMenu' });
+    const router = useRouter();
+    const hashParam = useHashParam();
 
     const dashboards = DashboardsRepository.dashboards;
-    const currentName = dashboards.find(d => d.id == selectedId)?.name;
+    const currentName = useMemo(() => dashboards.find(d => d.id == selectedId)?.name, [dashboards, selectedId]);
 
     const handleDashboardSelected = (id: string) => {
-        onSelection(id);
+        //onSelection(id);
         popupState.close();
     };
+
+    useEffect(() => {
+        // Set initial selection
+        if (!hashParam && dashboards.length) {
+            router.push({ hash: dashboards[0].id });
+        } else if (hashParam) {
+            const hashParamId = hashParam?.replace("#", "");
+            if (hashParamId && hashParamId !== selectedId) {
+                onSelection(hashParamId);
+            }
+        }
+    }, [hashParam, dashboards, selectedId, router, onSelection]);
 
     console.debug("Rendering DashboardSelector");
 

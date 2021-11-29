@@ -8,8 +8,6 @@ import PageNotificationService from "../../src/notifications/PageNotificationSer
 import DashboardsUpdateChecker from "./DashboardsUpdateChecked";
 import DashboardView from "./DashboardView";
 import DashboardSelector from "./DashboardSelector";
-import { useRouter } from "next/router";
-import useHashParam from "../../src/hooks/useHashParam";
 import DashboardSettings from "./DashboardSettings";
 
 export interface IWidget {
@@ -25,20 +23,7 @@ const Dashboards = () => {
     const [selectedId, setSelectedId] = React.useState<string | undefined>(undefined);
     const [selectedDashboard, setSelectedDashboard] = React.useState<IDashboardModel | undefined>(undefined);
 
-    const router = useRouter();
-    const hashParam = useHashParam();
     const [isDashboardSettingsOpen, setIsDashboardSettingsOpen] = useState<boolean>(false);
-
-    const handleDashboardChange = (id: string) => {
-        router.push({ hash: id });
-    };
-
-    useEffect(() => {
-        const hashParamId = hashParam?.replace("#", "");
-        if (hashParamId !== selectedId) {
-            setSelectedId(hashParamId);
-        }
-    }, [hashParam, selectedId]);
 
     useEffect(() => {
         const loadSelectedDashboard = async (id: string) => {
@@ -89,7 +74,7 @@ const Dashboards = () => {
                 <div>
                     <DashboardSelector
                         selectedId={selectedId}
-                        onSelection={handleDashboardChange}
+                        onSelection={setSelectedId}
                         onEditWidgets={handleEditWidgets}
                         onSettings={() => setIsDashboardSettingsOpen(true)} />
                 </div>
