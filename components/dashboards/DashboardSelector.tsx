@@ -105,6 +105,8 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
 
     console.debug("Rendering DashboardSelector");
 
+    const favoriteDashboards = dashboards.filter(d => d.isFavorite);
+
     return (
         <>
             <Stack spacing={{ mobile: 0, tablet: 2 }} direction="row">
@@ -117,33 +119,41 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
                         </Stack>
                     </Button>
                 </div>
-                <Tabs
-                    value={undefined}
-                    variant="scrollable"
-                    scrollButtons="auto"
-                    aria-label="pinned dashboards"
-                    sx={{
-                        ".MuiTabScrollButton-root": {
-                            display: 'none'
-                        }
-                    }}
-                >
-                    {dashboards.filter(d => d.isFavorite).map(fd => (
-                        <Tab
-                            key={fd.id}
-                            sx={{
-                                px: { mobile: 0, tablet: 2 },
-                                minHeight: { mobile: 40, tablet: 48 },
-                                minWidth: 80
-                            }}
-                            onClick={() => handleDashboardSelected(fd.id)}
-                            label={<Typography
-                                variant="h3"
-                                fontWeight={400}
-                                fontSize={{ mobile: 16, tablet: 20 }}
-                                sx={{ opacity: 0.6, textTransform: 'none' }}>{fd.name}</Typography>} />
-                    ))}
-                </Tabs>
+                {favoriteDashboards?.length && (
+                    <Tabs
+                        value={0}
+                        variant="scrollable"
+                        scrollButtons="auto"
+                        aria-label="pinned dashboards"
+                        sx={{
+                            ".MuiTabScrollButton-root": {
+                                display: 'none'
+                            },
+                            ".MuiTabs-indicator": {
+                                backgroundColor: 'transparent'
+                            },
+                            ".Mui-selected": {
+                                color: 'initial'
+                            }
+                        }}
+                    >
+                        {favoriteDashboards.map(fd => (
+                            <Tab
+                                key={fd.id}
+                                sx={{
+                                    px: { mobile: 0, tablet: 2 },
+                                    minHeight: { mobile: 40, tablet: 48 },
+                                    minWidth: 80
+                                }}
+                                onClick={() => handleDashboardSelected(fd.id)}
+                                label={<Typography
+                                    variant="h3"
+                                    fontWeight={400}
+                                    fontSize={{ mobile: 16, tablet: 20 }}
+                                    sx={{ opacity: 0.6, textTransform: 'none' }}>{fd.name}</Typography>} />
+                        ))}
+                    </Tabs>
+                )}
             </Stack>
             <Popover
                 {...bindPopover(popupState)}

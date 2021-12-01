@@ -39,6 +39,7 @@ const Dashboards = () => {
         }
 
         if (selectedId) {
+            console.debug("Switching to dashboard: ", selectedId);
             loadSelectedDashboard(selectedId);
         }
     }, [selectedId]);
