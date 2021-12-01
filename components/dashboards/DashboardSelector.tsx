@@ -87,7 +87,7 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
     const currentName = useMemo(() => dashboards.find(d => d.id == selectedId)?.name, [dashboards, selectedId]);
 
     const handleDashboardSelected = (id: string) => {
-        //onSelection(id);
+        onSelection(id);
         popupState.close();
     };
 
