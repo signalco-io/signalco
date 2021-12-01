@@ -43,13 +43,13 @@ const Dashboards = () => {
         }
     }, [selectedId]);
 
-    const handleWidgetSetConfig = (dashboard: IDashboardModel, widget: IWidget, config: object) => {
+    const handleWidgetSetConfig = (/*dashboard: IDashboardModel, widget: IWidget, config: object*/) => {
         // widget.config = config;
         // setDashboards([...dashboards]);
         // console.log('updated widgets', dashboard);
     };
 
-    const handleWidgetRemove = (widget: IWidget) => {
+    const handleWidgetRemove = (/*widget: IWidget*/) => {
         // if (!editingDashboard) return;
 
         // const widgetIndex = editingDashboard.widgets.indexOf(widget);
