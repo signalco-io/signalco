@@ -100,6 +100,8 @@ const DashboardView = (props: { dashboard: IDashboardModel, isEditing: boolean, 
         }
     }
 
+    console.debug("Rendering DashboardView")
+
     return (
         <Box sx={{
             display: 'grid',

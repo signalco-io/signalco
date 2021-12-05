@@ -5,7 +5,7 @@ import { widgetType } from "../widgets/Widget";
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
 import DashboardsRepository, { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
 import PageNotificationService from "../../src/notifications/PageNotificationService";
-import DashboardsUpdateChecker from "./DashboardsUpdateChecked";
+import DashboardsUpdateChecker from "./DashboardsUpdateChecker";
 import DashboardView from "./DashboardView";
 import DashboardSelector from "./DashboardSelector";
 import DashboardSettings from "./DashboardSettings";

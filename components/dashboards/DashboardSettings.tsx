@@ -35,13 +35,7 @@ const DashboardSettings = (props: IDashboardSettingsProps) => {
         if (dashboard) {
             setName(dashboard.name);
         }
-    }, [dashboard])
-
-    useEffect(() => {
-        if (dashboard) {
-            dashboard.name = name;
-        }
-    }, [dashboard, name]);
+    }, [dashboard]);
 
     return (
         <ConfigurationDialog

@@ -1,4 +1,4 @@
-import { IObservableArray, makeAutoObservable, observable } from "mobx";
+import { IObservableArray, isObservable, makeAutoObservable, observable } from "mobx";
 import { IWidget } from "../../components/dashboards/Dashboards";
 import HttpService from "../services/HttpService";
 import LocalStorageService from "../services/LocalStorageService";
@@ -157,22 +157,10 @@ export default class DashboardsRepository {
                     LocalStorageService.getItem('signalco-cache-dashboards') !== null) {
                     DashboardsRepository.isLoading = true;
 
-                    const favorites = LocalStorageService.getItem<string[]>(DashboardsFavoritesLocalStorageKey, []);
-
                     // Load from local storage
                     try {
-                        DashboardsRepository._dashboardsCache.replace(LocalStorageService
-                            .getItem<IDashboardModel[]>('signalco-cache-dashboards', [])
-                            .map(d => {
-                                d.timeStamp = d.timeStamp ? new Date(d.timeStamp) : undefined;
-                                d.isFavorite = favorites.indexOf(d.id) >= 0;
-                                d.widgets = (typeof d.configurationSerialized !== 'undefined' && d.configurationSerialized != null
-                                        ? JSON.parse(d.configurationSerialized).widgets as Array<IWidget>
-                                        : [])
-                                    .map((w, i) => ({ ...w, id: i.toString() }));
-                                return makeAutoObservable(d);
-                            }));
-
+                        const localDashboards = LocalStorageService.getItem<IDashboardModel[]>('signalco-cache-dashboards', []);
+                        DashboardsRepository._mapAndApplyDashboards(localDashboards);
                         DashboardsRepository.isLoading = false;
                         DashboardsRepository.isLoaded = true;
                     }
@@ -229,13 +217,26 @@ export default class DashboardsRepository {
         // Download cache
         const newDashboards = await DashboardsRepository._getRemoteDahboardsAsync();
         newDashboards.sort((a, b) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0));
-        DashboardsRepository._dashboardsCache.replace(newDashboards);
+        DashboardsRepository._mapAndApplyDashboards(newDashboards);
         DashboardsRepository.isLoading = false;
 
         // Persist dashboards locally
         if (typeof localStorage !== 'undefined') {
             LocalStorageService.setItem('signalco-cache-dashboards', DashboardsRepository._dashboardsCache);
         }
+    }
+
+    private static async _mapAndApplyDashboards(dashboards: IDashboardModel[]) {
+        const favorites = LocalStorageService.getItem<string[]>(DashboardsFavoritesLocalStorageKey, []);
+        DashboardsRepository._dashboardsCache.replace(dashboards.map(d => {
+            d.timeStamp = d.timeStamp ? (typeof d.timeStamp === 'string' ? new Date(d.timeStamp) : d.timeStamp) : undefined;
+            d.isFavorite = favorites.indexOf(d.id) >= 0;
+            d.widgets = (typeof d.configurationSerialized !== 'undefined' && d.configurationSerialized != null
+                    ? JSON.parse(d.configurationSerialized).widgets as Array<IWidget>
+                    : [])
+                .map((w, i) => ({ ...w, id: i.toString() }));
+            return isObservable(d) ? d : makeAutoObservable(d);
+        }));
     }
 
     private static async _setRemoteDashboardAsync(dashboard: IDashboardSetModel): Promise<string> {

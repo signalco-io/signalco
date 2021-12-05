@@ -21,15 +21,20 @@ interface IDashboardSelectorMenuProps {
 const DashboardSelectorMenu = observer((props: IDashboardSelectorMenuProps) => {
     const { selectedId, popupState, onSelection, onEditWidgets, onSettings } = props;
     const router = useRouter();
-    const handleDashboardSelected = onSelection;
 
-    const handleNewDashboard = async () => {
+    const handleAndClose = (callback: (...params: any[]) => void) => {
+        return (...params: any[]) => {
+            callback(...params);
+            popupState.close();
+        };
+    }
+
+    const handleNewDashboard = handleAndClose(async () => {
         const newDashboardId = await DashboardsRepository.saveDashboardAsync({
             name: 'New dashboard'
         });
         router.push({ hash: newDashboardId });
-        popupState.close();
-    };
+    });
 
     const handleToggleFavorite = async (id: string) => {
         const dashboard = DashboardsRepository.dashboards.find(d => d.id === id);
@@ -49,7 +54,7 @@ const DashboardSelectorMenu = observer((props: IDashboardSelectorMenuProps) => {
                             <Button
                                 disabled={d.id === selectedId}
                                 size="large"
-                                onClick={() => handleDashboardSelected(d.id)}
+                                onClick={() => handleAndClose(onSelection)(d.id)}
                                 sx={{ flexGrow: 1, py: 2 }}
                             >
                                 <Typography>{d.name}</Typography>
@@ -63,8 +68,8 @@ const DashboardSelectorMenu = observer((props: IDashboardSelectorMenuProps) => {
                 <Button onClick={handleNewDashboard} size="large" startIcon={<AddSharp />} sx={{ py: 2 }}>New dashboard</Button>
                 <Divider />
                 <Typography variant="subtitle1" color="textSecondary" sx={{ p: 2 }}>Dashboard</Typography>
-                <Button size="large" onClick={onSettings}>Settings...</Button>
-                <Button size="large" onClick={onEditWidgets}>Edit widgets...</Button>
+                <Button size="large" onClick={handleAndClose(onSettings)}>Settings...</Button>
+                <Button size="large" onClick={handleAndClose(onEditWidgets)}>Edit widgets...</Button>
             </Stack>
         </Paper>
     );
@@ -84,24 +89,27 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
     const hashParam = useHashParam();
 
     const dashboards = DashboardsRepository.dashboards;
-    const currentName = useMemo(() => dashboards.find(d => d.id == selectedId)?.name, [dashboards, selectedId]);
-
-    const handleDashboardSelected = (id: string) => {
-        onSelection(id);
-        popupState.close();
-    };
+    const currentDashboard = dashboards.find(d => d.id == selectedId);
+    const currentName = useMemo(() => currentDashboard?.name, [currentDashboard]);
 
     useEffect(() => {
         // Set initial selection
         if (!hashParam && dashboards.length) {
             router.push({ hash: dashboards[0].id });
-        } else if (hashParam) {
+        }
+    }, [hashParam, dashboards, router]);
+
+    useEffect(() => {
+        if (hashParam) {
             const hashParamId = hashParam?.replace("#", "");
             if (hashParamId && hashParamId !== selectedId) {
+                console.debug("Hash changed. Switching dashboard to", hashParamId);
                 onSelection(hashParamId);
             }
         }
-    }, [hashParam, dashboards, selectedId, router, onSelection]);
+        // Ignoring warning because we only want to track hashParam
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [hashParam]);
 
     console.debug("Rendering DashboardSelector");
 
@@ -119,7 +127,7 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
                         </Stack>
                     </Button>
                 </div>
-                {favoriteDashboards?.length && (
+                {favoriteDashboards.length && (
                     <Tabs
                         value={0}
                         variant="scrollable"
@@ -132,8 +140,8 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
                             ".MuiTabs-indicator": {
                                 backgroundColor: 'transparent'
                             },
-                            ".Mui-selected": {
-                                color: 'initial'
+                            ".Mui-selected > h3": {
+                                color: 'text.secondary'
                             }
                         }}
                     >
@@ -145,7 +153,7 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
                                     minHeight: { mobile: 40, tablet: 48 },
                                     minWidth: 80
                                 }}
-                                onClick={() => handleDashboardSelected(fd.id)}
+                                onClick={() => onSelection(fd.id)}
                                 label={<Typography
                                     variant="h3"
                                     fontWeight={400}
@@ -168,7 +176,7 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
                 <DashboardSelectorMenu
                     selectedId={selectedId}
                     popupState={popupState}
-                    onSelection={handleDashboardSelected}
+                    onSelection={onSelection}
                     onEditWidgets={onEditWidgets}
                     onSettings={onSettings} />
             </Popover>
