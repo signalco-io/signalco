@@ -1,4 +1,4 @@
-import { IObservableArray, isObservable, makeAutoObservable, observable } from "mobx";
+import { IObservableArray, isObservable, makeAutoObservable, observable, runInAction } from "mobx";
 import { widgetType } from "../../components/widgets/Widget";
 import HttpService from "../services/HttpService";
 import LocalStorageService from "../services/LocalStorageService";
@@ -98,7 +98,15 @@ export default class DashboardsRepository {
     private static isLoaded: boolean;
 
     static isLoading: boolean;
-    static isUpdateAvailable: boolean;
+    private static _isUpdateAvailable: {state: boolean} = observable({state: false});
+    static get isUpdateAvailable() {
+        return DashboardsRepository._isUpdateAvailable.state;
+    };
+    private static set isUpdateAvailable(state: boolean) {
+        runInAction(()=> {
+            DashboardsRepository._isUpdateAvailable.state = state;
+        });
+    }
     static get dashboards() {
         DashboardsRepository._cacheDashboardsAsync();
         return DashboardsRepository._dashboardsCache;
@@ -194,6 +202,8 @@ export default class DashboardsRepository {
     }
 
     private static async _checkUpdatesAvailableAsync() {
+        console.debug("Checking for dashboard updates...");
+
         const remoteDashboards = await DashboardsRepository._getRemoteDahboardsAsync();
 
         // Check added or updated dashboards

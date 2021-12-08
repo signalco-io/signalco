@@ -1,32 +1,29 @@
 import { Alert, Box, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
+import React, { useEffect } from "react";
 import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
 
-const DashboardsUpdateChecker = (props: { onReload: () => void }) => {
-    const [dashboardsUpdateAvailable, setDashboardsUpdateAvailable] = useState(false);
-
+const DashboardsUpdateChecker = () => {
     const handleApplyDashboardsUpdate = async () => {
-        setDashboardsUpdateAvailable(false);
         await DashboardsRepository.applyDashboardsUpdateAsync();
-        props.onReload();
     };
 
     const checkDashboardUpdateAsync = async () => {
         try {
-            setDashboardsUpdateAvailable(await DashboardsRepository.isUpdateAvailableAsync());
+            await DashboardsRepository.isUpdateAvailableAsync();
         } catch (err) {
             console.warn("Failed to check dashboards update", err);
         }
     };
 
     useEffect(() => {
-        // Set interval for checking dashboard updates (30min)
+        // Set interval for checking dashboard updates (30min) or on refresh
         const token = setInterval(checkDashboardUpdateAsync, 30 * 60000);
         checkDashboardUpdateAsync();
         return () => clearInterval(token);
     }, []);
 
-    if (!dashboardsUpdateAvailable)
+    if (!DashboardsRepository.isUpdateAvailable)
         return <></>;
 
     return (
@@ -40,4 +37,4 @@ const DashboardsUpdateChecker = (props: { onReload: () => void }) => {
     );
 };
 
-export default DashboardsUpdateChecker;
+export default observer(DashboardsUpdateChecker);

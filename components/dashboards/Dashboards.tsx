@@ -2,7 +2,7 @@ import { Box, LinearProgress, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
-import DashboardsRepository, { IDashboardModel, IWidget } from "../../src/dashboards/DashboardsRepository";
+import DashboardsRepository, { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
 import PageNotificationService from "../../src/notifications/PageNotificationService";
 import DashboardsUpdateChecker from "./DashboardsUpdateChecker";
 import DashboardView from "./DashboardView";
@@ -37,18 +37,6 @@ const Dashboards = () => {
         }
     }, [selectedId]);
 
-    const handleWidgetRemove = (/*widget: IWidget*/) => {
-        // if (!editingDashboard) return;
-
-        // const widgetIndex = editingDashboard.widgets.indexOf(widget);
-        // if (widgetIndex < 0) {
-        //     return;
-        // }
-
-        // editingDashboard.widgets.splice(widgetIndex, 1);
-        // setEditingDashboard({ ...editingDashboard });
-    }
-
     const handleEditWidgets = () => {
         setIsEditing(true);
     };
@@ -57,11 +45,10 @@ const Dashboards = () => {
 
     return (
         <>
-            <DashboardsUpdateChecker onReload={() => { }} />
+            <DashboardsUpdateChecker />
             <Stack spacing={{ mobile: 1, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
                 <div>
                     <DashboardSelector
-                        selectedId={selectedId}
                         onSelection={setSelectedId}
                         onEditWidgets={handleEditWidgets}
                         onSettings={() => setIsDashboardSettingsOpen(true)} />
@@ -72,8 +59,7 @@ const Dashboards = () => {
                             {selectedDashboard ?
                                 <DashboardView
                                     dashboard={selectedDashboard}
-                                    isEditing={isEditing}
-                                    handleWidgetRemove={handleWidgetRemove} />
+                                    isEditing={isEditing} />
                                 : (
                                     <Box textAlign="center" sx={{ m: 2 }}>
                                         <NoDataPlaceholder content="No dashboards available" />

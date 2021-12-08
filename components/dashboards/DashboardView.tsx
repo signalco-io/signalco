@@ -5,10 +5,10 @@ import React, { useEffect, useState } from "react";
 import useWindowWidth from "../../src/hooks/useWindowWidth";
 import { useNavWidth } from "../NavProfile";
 import Widget, { IWidgetProps } from "../widgets/Widget";
-import { IWidget } from "./Dashboards";
 import { CSS } from '@dnd-kit/utilities';
 import { snapCenterToCursor } from "@dnd-kit/modifiers";
 import { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
+import { observer } from "mobx-react-lite";
 
 interface IDragableWidgetProps extends IWidgetProps {
     id: string
@@ -49,8 +49,8 @@ function DragableWidget(props: IDragableWidgetProps) {
     );
 }
 
-export default function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, handleWidgetRemove: (widget: IWidget) => void }) {
-    const { dashboard, isEditing, handleWidgetRemove } = props;
+function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean }) {
+    const { dashboard, isEditing } = props;
     const [numberOfColumns, setNumberOfColumns] = useState(4);
     const [widgetsOrder, setWidgetsOrder] = useState(dashboard.widgets.map(w => w.id));
 
@@ -88,7 +88,11 @@ export default function DashboardView(props: { dashboard: IDashboardModel, isEdi
     );
 
     const handleSetWidgetConfig = (widgetId: string, config: object | undefined) => {
-        // TODO: Set config to widget
+        dashboard.widgets.find(w => w.id === widgetId)?.setConfig(config);
+    }
+
+    const handleRemoveWidget = (widgetId: string) => {
+        dashboard.widgets.splice(dashboard.widgets.findIndex(w => w.id === widgetId), 1);
     }
 
     function handleDragEnd(event: DragEndEvent) {
@@ -118,7 +122,7 @@ export default function DashboardView(props: { dashboard: IDashboardModel, isEdi
                 onDragEnd={handleDragEnd}
                 onDragCancel={handleDragEnd}>
                 <SortableContext items={widgetsOrder} strategy={undefined}>
-                    {dashboard.widgets.sort((a, b) => {
+                    {dashboard.widgets.slice().sort((a, b) => {
                         const oldIndex = widgetsOrder.indexOf(a.id);
                         const newIndex = widgetsOrder.indexOf(b.id);
                         return oldIndex - newIndex;
@@ -126,7 +130,7 @@ export default function DashboardView(props: { dashboard: IDashboardModel, isEdi
                         <DragableWidget
                             id={widget.id}
                             key={`widget-${widget.id.toString()}`}
-                            onRemove={() => handleWidgetRemove(widget)}
+                            onRemove={() => handleRemoveWidget(widget.id)}
                             isEditMode={isEditing}
                             type={widget.type}
                             config={widget.config}
@@ -137,3 +141,5 @@ export default function DashboardView(props: { dashboard: IDashboardModel, isEdi
         </Box >
     );
 }
+
+export default observer(DashboardView);
