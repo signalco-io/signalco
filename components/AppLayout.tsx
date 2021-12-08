@@ -93,7 +93,7 @@ const LayoutWithAuth = (props: { LayoutComponent: React.ComponentType, children?
     children,
     LayoutComponent
   } = props;
-  const { error, user, getAccessTokenSilently } = useAuth0();
+  const { error, isLoading, user, getAccessTokenSilently } = useAuth0();
 
   console.debug('LayoutWithAuth rendering');
 
@@ -112,7 +112,7 @@ const LayoutWithAuth = (props: { LayoutComponent: React.ComponentType, children?
   }, [user]);
 
   // Show error if available
-  if (error) {
+  if (!isLoading && error) {
     console.error(error);
     PageNotificationService.show(error.message, "error");
   }

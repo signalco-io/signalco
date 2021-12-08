@@ -22,9 +22,14 @@ const Login = () => {
         <Stack sx={{
           position: 'absolute',
           top: 'calc(50% - 72px)',
-          left: 'calc(50% - 256px)'
+          left: 'calc(50% - 256px)',
+          px: '20%'
         }} spacing={2}>
-          <Image src={appState.theme === 'light' ? "/images/icon-light-512x512.png" : "/images/icon-dark-512x144.png"} alt="Signalco logo" layout="fixed" width={512} height={144} />
+          <Image
+            src={appState.theme === 'light' ? "/images/icon-light-512x512.png" : "/images/icon-dark-512x144.png"}
+            alt="Signalco logo"
+            width={512}
+            height={144} />
           {isLong
             ? <Stack spacing={2}>
               <Typography variant="subtitle2" color="textSecondary" fontWeight="light">Redirecting is taking a bit longer...</Typography>

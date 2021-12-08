@@ -25,7 +25,7 @@ const ConfirmDeleteDialog = (props: IConfirmDeleteDialogProps) => {
                 <Typography>Deleted item can not be restored. Please confirm you are deleting correct item by entering &quot;<code>{expectedConfirmText}</code>&quot; bellow.</Typography>
                 <TextField label="Confirm" onChange={(e) => setConfirmText(e.target.value)} />
                 <Button variant="contained" color="error" disabled={confirmText !== expectedConfirmText} onClick={onConfirm}>
-                    Delete &quot;{confirmText}&quot;
+                    Delete &quot;{expectedConfirmText}&quot;
                 </Button>
             </Stack>
         </ConfigurationDialog>

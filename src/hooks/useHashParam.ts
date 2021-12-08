@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useHashParam = () => {
-    const [lastHash, setLastHash] = useState<string | undefined>(undefined);
+    const [lastHash, setLastHash] = useState<string | undefined>(location.hash);
 
     useEffect(() => {
         const onHashChanged = () => {

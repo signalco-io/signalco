@@ -60,6 +60,10 @@ const DashboardView = (props: { dashboard: IDashboardModel, isEditing: boolean, 
     const dashbaordPadding = 48 + navWidth;
     const [widgetsOrder, setWidgetsOrder] = useState(dashboard.widgets.map(w => w.id));
 
+    useEffect(() => {
+        setWidgetsOrder(dashboard.widgets.map(w => w.id));
+    }, [dashboard]);
+
     const windowWidth = useWindowWidth();
     useEffect(() => {
         // When width is less than 400, set to quad column
@@ -95,6 +99,8 @@ const DashboardView = (props: { dashboard: IDashboardModel, isEditing: boolean, 
             });
         }
     }
+
+    console.debug("Rendering DashboardView")
 
     return (
         <Box sx={{

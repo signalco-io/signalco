@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { IObservableArray, isObservable, makeAutoObservable, observable } from "mobx";
 import { IWidget } from "../../components/dashboards/Dashboards";
 import HttpService from "../services/HttpService";
 import LocalStorageService from "../services/LocalStorageService";
@@ -87,46 +87,48 @@ class SignalDashboardDto {
 const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';
 
 export default class DashboardsRepository {
-    static dashboardsCache?: IDashboardModel[];
+    private static _dashboardsCache: IObservableArray<IDashboardModel> = observable.array([]);
+    private static isLoaded: boolean;
+
     static isLoading: boolean;
     static isUpdateAvailable: boolean;
+    static get dashboards() {
+        DashboardsRepository._cacheDashboardsAsync();
+        return DashboardsRepository._dashboardsCache;
+    };
 
-    static async getDashboardAsync(id: string): Promise<IDashboardModel | undefined> {
+    static async getAsync(id: string) {
         await DashboardsRepository._cacheDashboardsAsync();
-        return DashboardsRepository.dashboardsCache?.find(i => i.id === id);
-    }
-
-    static async getDashboardsAsync(): Promise<IDashboardModel[]> {
-        await DashboardsRepository._cacheDashboardsAsync();
-        return DashboardsRepository.dashboardsCache ?? [];
+        return DashboardsRepository._dashboardsCache.find(d => d.id === id);
     }
 
     static async favoriteSetAsync(id: string, newIsFavorite: boolean) {
         const currentFavorites = LocalStorageService.getItem<string[]>(DashboardsFavoritesLocalStorageKey, []);
         const isCurrentlyFavorite = currentFavorites.indexOf(id) >= 0;
 
-        console.log(!isCurrentlyFavorite, newIsFavorite)
+        // Set or remove
         if (!isCurrentlyFavorite && newIsFavorite) {
-            console.log('will set item', [...currentFavorites, id])
             LocalStorageService.setItem(DashboardsFavoritesLocalStorageKey, [...currentFavorites, id]);
         } else if (isCurrentlyFavorite && !newIsFavorite) {
-            console.log('will remove item', [...currentFavorites, id])
             LocalStorageService.setItem(DashboardsFavoritesLocalStorageKey, currentFavorites.splice(currentFavorites.indexOf(id), 1));
         }
 
         // Mark favorite locally
-        const favoritedDashboard = DashboardsRepository.dashboardsCache?.find(d => d.id === id);
+        const favoritedDashboard = DashboardsRepository._dashboardsCache.find(d => d.id === id);
         if (favoritedDashboard) {
             favoritedDashboard.isFavorite = newIsFavorite;
         }
     }
 
-    static saveDashboardAsync(dashboard: IDashboardSetModel) {
-        return DashboardsRepository._setRemoteDashboardAsync(dashboard);
+    static async saveDashboardAsync(dashboard: IDashboardSetModel) {
+        const dashboardId = await DashboardsRepository._setRemoteDashboardAsync(dashboard);
+        await DashboardsRepository._applyRemoteDashboardsAsync();
+        return dashboardId;
     }
 
     static async deleteDashboardAsync(id: string) {
         await HttpService.requestAsync("/entity/delete", "delete", {id: id, entityType: 3});
+        await DashboardsRepository._applyRemoteDashboardsAsync();
     }
 
     static async isUpdateAvailableAsync() {
@@ -138,46 +140,49 @@ export default class DashboardsRepository {
         await DashboardsRepository._applyRemoteDashboardsAsync();
     }
 
+    private static _cacheLock = false;
+
     private static async _cacheDashboardsAsync() {
-        // Try to load from local storage
-        if (!DashboardsRepository.isLoading &&
-            !DashboardsRepository.dashboardsCache &&
-            typeof localStorage !== 'undefined' &&
-            LocalStorageService.getItem('signalco-cache-dashboards') !== null) {
-            DashboardsRepository.isLoading = true;
+        if (DashboardsRepository.isLoaded) return;
 
-            const favorites = LocalStorageService.getItem<string[]>(DashboardsFavoritesLocalStorageKey, []);
+        try {
+            if (!DashboardsRepository._cacheLock) {
+                DashboardsRepository._cacheLock = true;
 
-            // Load from local storage
-            try {
-                DashboardsRepository.dashboardsCache = LocalStorageService
-                    .getItem<IDashboardModel[]>('signalco-cache-dashboards', [])
-                    .map(d => {
-                        d.timeStamp = d.timeStamp ? new Date(d.timeStamp) : undefined;
-                        d.isFavorite = favorites.indexOf(d.id) >= 0;
-                        d.widgets = (typeof d.configurationSerialized !== 'undefined' && d.configurationSerialized != null
-                                ? JSON.parse(d.configurationSerialized).widgets as Array<IWidget>
-                                : [])
-                            .map((w, i) => ({ ...w, id: i.toString() }));
-                        return makeAutoObservable(d);
-                    });
+                console.debug('Loading dashboards...');
+
+                // Try to load from local storage
+                if (!DashboardsRepository.isLoading &&
+                    typeof localStorage !== 'undefined' &&
+                    LocalStorageService.getItem('signalco-cache-dashboards') !== null) {
+                    DashboardsRepository.isLoading = true;
+
+                    // Load from local storage
+                    try {
+                        const localDashboards = LocalStorageService.getItem<IDashboardModel[]>('signalco-cache-dashboards', []);
+                        DashboardsRepository._mapAndApplyDashboards(localDashboards);
+                        DashboardsRepository.isLoading = false;
+                        DashboardsRepository.isLoaded = true;
+                    }
+                    catch (err) {
+                        console.error("Failed to load dashboards from local storage", err);
+                    }
+                }
+
+                // TODO: Invalidate cache after some period
+                if (DashboardsRepository.isLoading &&
+                    !DashboardsRepository.isLoaded) {
+                    await DashboardsRepository._applyRemoteDashboardsAsync();
+                }
+            } else {
+                // Wait to load
+                while (DashboardsRepository.isLoading) {
+                    await new Promise(r => setTimeout(r, 10));
+                }
             }
-            catch (err) {
-                console.error("Failed to load dashboards from local storage", err);
-            }
-
-            DashboardsRepository.isLoading = false;
         }
-
-        // TODO: Invalidate cache after some period
-        if (!DashboardsRepository.isLoading &&
-            !DashboardsRepository.dashboardsCache) {
-            await DashboardsRepository._applyRemoteDashboardsAsync();
-        }
-
-        // Wait to load
-        while (DashboardsRepository.isLoading) {
-            await new Promise(r => setTimeout(r, 10));
+        finally {
+            DashboardsRepository._cacheLock = false;
         }
     }
 
@@ -186,7 +191,7 @@ export default class DashboardsRepository {
 
         // Check added or updated dashboards
         remoteDashboards.forEach(remoteDashboard => {
-            const localDashboard = DashboardsRepository.dashboardsCache?.find(d => d.id == remoteDashboard.id);
+            const localDashboard = DashboardsRepository._dashboardsCache.find(d => d.id == remoteDashboard.id);
             if (localDashboard == null ||
                 remoteDashboard.timeStamp == null ||
                 localDashboard.timeStamp == null ||
@@ -197,7 +202,7 @@ export default class DashboardsRepository {
         });
 
         // Check deleted dashboards
-        DashboardsRepository.dashboardsCache?.forEach(localDashboard => {
+        DashboardsRepository._dashboardsCache.forEach(localDashboard => {
             const remoteDashboard = remoteDashboards.find(d => d.id === localDashboard.id);
             if (remoteDashboard == null) {
                 DashboardsRepository.isUpdateAvailable = true;
@@ -210,14 +215,28 @@ export default class DashboardsRepository {
         DashboardsRepository.isLoading = true;
 
         // Download cache
-        DashboardsRepository.dashboardsCache = await DashboardsRepository._getRemoteDahboardsAsync();
-        DashboardsRepository.dashboardsCache.sort((a, b) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0));
+        const newDashboards = await DashboardsRepository._getRemoteDahboardsAsync();
+        newDashboards.sort((a, b) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0));
+        DashboardsRepository._mapAndApplyDashboards(newDashboards);
         DashboardsRepository.isLoading = false;
 
         // Persist dashboards locally
         if (typeof localStorage !== 'undefined') {
-            LocalStorageService.setItem('signalco-cache-dashboards', DashboardsRepository.dashboardsCache);
+            LocalStorageService.setItem('signalco-cache-dashboards', DashboardsRepository._dashboardsCache);
         }
+    }
+
+    private static async _mapAndApplyDashboards(dashboards: IDashboardModel[]) {
+        const favorites = LocalStorageService.getItem<string[]>(DashboardsFavoritesLocalStorageKey, []);
+        DashboardsRepository._dashboardsCache.replace(dashboards.map(d => {
+            d.timeStamp = d.timeStamp ? (typeof d.timeStamp === 'string' ? new Date(d.timeStamp) : d.timeStamp) : undefined;
+            d.isFavorite = favorites.indexOf(d.id) >= 0;
+            d.widgets = (typeof d.configurationSerialized !== 'undefined' && d.configurationSerialized != null
+                    ? JSON.parse(d.configurationSerialized).widgets as Array<IWidget>
+                    : [])
+                .map((w, i) => ({ ...w, id: i.toString() }));
+            return isObservable(d) ? d : makeAutoObservable(d);
+        }));
     }
 
     private static async _setRemoteDashboardAsync(dashboard: IDashboardSetModel): Promise<string> {
