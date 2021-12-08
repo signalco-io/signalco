@@ -113,8 +113,7 @@ const LayoutWithAuth = (props: { LayoutComponent: React.ComponentType, children?
 
   // Show error if available
   if (!isLoading && error) {
-    console.error(error);
-    PageNotificationService.show(error.message, "error");
+    console.warn('Layout auth error', error);
   }
 
   return <LayoutComponent>{children}</LayoutComponent>;

@@ -7,7 +7,6 @@ import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import PushPinSharpIcon from '@mui/icons-material/PushPinSharp';
 import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
 import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
 import useHashParam from "../../src/hooks/useHashParam";
 
 interface IDashboardSelectorMenuProps {
@@ -20,7 +19,7 @@ interface IDashboardSelectorMenuProps {
 
 const DashboardSelectorMenu = observer((props: IDashboardSelectorMenuProps) => {
     const { selectedId, popupState, onSelection, onEditWidgets, onSettings } = props;
-    const router = useRouter();
+    const [_, setDashboardIdHash] = useHashParam('dashboard');
 
     const handleAndClose = (callback: (...params: any[]) => void) => {
         return (...params: any[]) => {
@@ -33,7 +32,7 @@ const DashboardSelectorMenu = observer((props: IDashboardSelectorMenuProps) => {
         const newDashboardId = await DashboardsRepository.saveDashboardAsync({
             name: 'New dashboard'
         });
-        router.push({ hash: newDashboardId });
+        setDashboardIdHash(newDashboardId);
     });
 
     const handleToggleFavorite = async (id: string) => {
@@ -76,44 +75,34 @@ const DashboardSelectorMenu = observer((props: IDashboardSelectorMenuProps) => {
 });
 
 export interface IDashboardSelectorProps {
-    selectedId: string | undefined,
     onSelection: (id: string) => void,
     onEditWidgets: () => void,
     onSettings: () => void
 }
 
-const DashboardSelector = observer((props: IDashboardSelectorProps) => {
-    const { selectedId, onSelection, onEditWidgets, onSettings } = props;
+function DashboardSelector(props: IDashboardSelectorProps) {
+    const { onSelection, onEditWidgets, onSettings } = props;
     const popupState = usePopupState({ variant: 'popover', popupId: 'dashboardsMenu' });
-    const router = useRouter();
-    const hashParam = useHashParam();
+    const [selectedId, setSelectedIdHash] = useHashParam('dashboard');
 
     const dashboards = DashboardsRepository.dashboards;
     const currentDashboard = dashboards.find(d => d.id == selectedId);
     const currentName = useMemo(() => currentDashboard?.name, [currentDashboard]);
+    const favoriteDashboards = useMemo(() => dashboards.filter(d => d.isFavorite), [dashboards]);
+
+    // Set initial selection on component and dashboards load
+    useEffect(() => {
+        if (!selectedId && dashboards.length) {
+            setSelectedIdHash(dashboards[0].id);
+        }
+    }, [selectedId, dashboards, setSelectedIdHash]);
 
     useEffect(() => {
-        // Set initial selection
-        if (!hashParam && dashboards.length) {
-            router.push({ hash: dashboards[0].id });
-        }
-    }, [hashParam, dashboards, router]);
-
-    useEffect(() => {
-        if (hashParam) {
-            const hashParamId = hashParam?.replace("#", "");
-            if (hashParamId && hashParamId !== selectedId) {
-                console.debug("Hash changed. Switching dashboard to", hashParamId);
-                onSelection(hashParamId);
-            }
-        }
-        // Ignoring warning because we only want to track hashParam
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [hashParam]);
+        if (selectedId)
+            onSelection(selectedId);
+    }, [selectedId, onSelection]);
 
     console.debug("Rendering DashboardSelector");
-
-    const favoriteDashboards = dashboards.filter(d => d.isFavorite);
 
     return (
         <>
@@ -153,7 +142,7 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
                                     minHeight: { mobile: 40, tablet: 48 },
                                     minWidth: 80
                                 }}
-                                onClick={() => onSelection(fd.id)}
+                                onClick={() => setSelectedIdHash(fd.id)}
                                 label={<Typography
                                     variant="h3"
                                     fontWeight={400}
@@ -176,12 +165,12 @@ const DashboardSelector = observer((props: IDashboardSelectorProps) => {
                 <DashboardSelectorMenu
                     selectedId={selectedId}
                     popupState={popupState}
-                    onSelection={onSelection}
+                    onSelection={setSelectedIdHash}
                     onEditWidgets={onEditWidgets}
                     onSettings={onSettings} />
             </Popover>
         </>
     );
-});
+}
 
-export default DashboardSelector;
+export default observer(DashboardSelector);

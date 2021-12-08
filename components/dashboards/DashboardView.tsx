@@ -5,16 +5,16 @@ import React, { useEffect, useState } from "react";
 import useWindowWidth from "../../src/hooks/useWindowWidth";
 import { useNavWidth } from "../NavProfile";
 import Widget, { IWidgetProps } from "../widgets/Widget";
-import { IWidget } from "./Dashboards";
 import { CSS } from '@dnd-kit/utilities';
 import { snapCenterToCursor } from "@dnd-kit/modifiers";
 import { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
+import { observer } from "mobx-react-lite";
 
 interface IDragableWidgetProps extends IWidgetProps {
     id: string
 }
 
-const DragableWidget = (props: IDragableWidgetProps) => {
+function DragableWidget(props: IDragableWidgetProps) {
     const {
         isDragging,
         attributes,
@@ -47,24 +47,23 @@ const DragableWidget = (props: IDragableWidgetProps) => {
             <Widget {...props} />
         </Box>
     );
-};
+}
 
-const DashboardView = (props: { dashboard: IDashboardModel, isEditing: boolean, handleWidgetRemove: (widget: IWidget) => void, handleWidgetSetConfig: (dashboard: IDashboardModel, widget: IWidget, config: object) => void }) => {
-    const { dashboard, isEditing, handleWidgetRemove, handleWidgetSetConfig } = props;
+function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean }) {
+    const { dashboard, isEditing } = props;
     const [numberOfColumns, setNumberOfColumns] = useState(4);
+    const [widgetsOrder, setWidgetsOrder] = useState(dashboard.widgets.map(w => w.id));
+
     const widgetSpacing = 1;
     const widgetSize = 78 + widgetSpacing * 8;
-
     const navWidth = useNavWidth();
-
+    const windowWidth = useWindowWidth();
     const dashbaordPadding = 48 + navWidth;
-    const [widgetsOrder, setWidgetsOrder] = useState(dashboard.widgets.map(w => w.id));
 
     useEffect(() => {
         setWidgetsOrder(dashboard.widgets.map(w => w.id));
     }, [dashboard]);
 
-    const windowWidth = useWindowWidth();
     useEffect(() => {
         // When width is less than 400, set to quad column
         const width = window.innerWidth - dashbaordPadding;
@@ -87,6 +86,14 @@ const DashboardView = (props: { dashboard: IDashboardModel, isEditing: boolean, 
             }
         })
     );
+
+    const handleSetWidgetConfig = (widgetId: string, config: object | undefined) => {
+        dashboard.widgets.find(w => w.id === widgetId)?.setConfig(config);
+    }
+
+    const handleRemoveWidget = (widgetId: string) => {
+        dashboard.widgets.splice(dashboard.widgets.findIndex(w => w.id === widgetId), 1);
+    }
 
     function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;
@@ -115,7 +122,7 @@ const DashboardView = (props: { dashboard: IDashboardModel, isEditing: boolean, 
                 onDragEnd={handleDragEnd}
                 onDragCancel={handleDragEnd}>
                 <SortableContext items={widgetsOrder} strategy={undefined}>
-                    {dashboard.widgets.sort((a, b) => {
+                    {dashboard.widgets.slice().sort((a, b) => {
                         const oldIndex = widgetsOrder.indexOf(a.id);
                         const newIndex = widgetsOrder.indexOf(b.id);
                         return oldIndex - newIndex;
@@ -123,16 +130,16 @@ const DashboardView = (props: { dashboard: IDashboardModel, isEditing: boolean, 
                         <DragableWidget
                             id={widget.id}
                             key={`widget-${widget.id.toString()}`}
-                            onRemove={() => handleWidgetRemove(widget)}
+                            onRemove={() => handleRemoveWidget(widget.id)}
                             isEditMode={isEditing}
                             type={widget.type}
                             config={widget.config}
-                            setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
+                            setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
                     ))}
                 </SortableContext>
             </DndContext>
         </Box >
     );
-};
+}
 
-export default DashboardView;
+export default observer(DashboardView);

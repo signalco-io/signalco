@@ -1,25 +1,46 @@
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useState } from "react";
 
-const useHashParam = () => {
-    const [lastHash, setLastHash] = useState<string | undefined>(location.hash);
+function parseHash() {
+    return new URLSearchParams(
+        window.location.hash.substr(1) // skip the first char (#)
+    );
+}
+
+function parseHashParam(paramName: string) {
+    return Object.fromEntries(parseHash())[paramName];
+}
+
+const useHashParam = (parameterName: string): [string | undefined, (value: string| undefined) => void] => {
+    const [lastHash, setLastHash] = useState<string | undefined>(parseHashParam(parameterName));
+    const router = useRouter();
+
+    const onHashChanged = useCallback(() => {
+        setLastHash(parseHashParam(parameterName));
+    }, [parameterName]);
+
+    const setHash = (value: string | undefined) => {
+        const hash = parseHash();
+        if (typeof value === 'undefined' || value.length <= 0)
+          hash.delete(parameterName);
+        else hash.set(parameterName, value);
+
+        router.push({hash: hash.toString()})
+    }
 
     useEffect(() => {
-        const onHashChanged = () => {
-            setLastHash(location.hash);
-        };
-
         window.addEventListener("hashchange", onHashChanged);
 
         if (lastHash !== location.hash) {
-            setLastHash(location.hash);
+            onHashChanged();
         }
 
         return () => {
             window.removeEventListener("hashchange", onHashChanged);
         };
-    }, [lastHash]);
+    }, [lastHash, onHashChanged]);
 
-    return lastHash;
+    return [lastHash, setHash];
 };
 
 export default useHashParam;

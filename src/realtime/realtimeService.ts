@@ -26,7 +26,7 @@ class RealtimeService {
         }
     }
 
-    private async hubStartWithRetryAsync(retryCount: number) {
+    private async _hubStartWithRetryAsync(retryCount: number) {
         try {
             if (this.devicesHub == null) return;
 
@@ -37,7 +37,7 @@ class RealtimeService {
             this.devicesHub.onclose((err) => {
                 console.log("SignalR connection closed. Reconnecting with delay...");
                 console.debug("SignalR connection closes reason:", err);
-                this.hubStartWithRetryAsync(0);
+                this._hubStartWithRetryAsync(0);
             });
             this.devicesHub.onreconnecting((err) => {
                 console.log("Signalr reconnecting...");
@@ -58,16 +58,16 @@ class RealtimeService {
             }
 
             setTimeout(() => {
-                this.hubStartWithRetryAsync(delay);
+                this._hubStartWithRetryAsync(delay);
             }, (delay) * 1000);
         }
     };
 
     async startAsync() {
         if (this.devicesHub != null) return;
-  
+
         console.debug("Configuring SignalR...");
-  
+
         this.devicesHub = new HubConnectionBuilder()
           .withUrl(HttpService.getApiUrl('/signalr/devices'), {
             accessTokenFactory: async () => {
@@ -78,8 +78,8 @@ class RealtimeService {
           })
           .configureLogging(LogLevel.Information)
           .build();
-    
-        this.hubStartWithRetryAsync(0);
+
+        this._hubStartWithRetryAsync(0);
     };
 }
 
