@@ -1,5 +1,5 @@
 import { IObservableArray, isObservable, makeAutoObservable, observable } from "mobx";
-import { IWidget } from "../../components/dashboards/Dashboards";
+import { widgetType } from "../../components/widgets/Widget";
 import HttpService from "../services/HttpService";
 import LocalStorageService from "../services/LocalStorageService";
 
@@ -7,6 +7,13 @@ export interface IDashboardSetModel {
     configurationSerialized?: string;
     name: string;
     id?: string;
+}
+
+export interface IWidget {
+    id: string,
+    type: widgetType,
+    config?: object,
+    setConfig: (newConfig: object | undefined) => void
 }
 
 export interface IDashboardModel {

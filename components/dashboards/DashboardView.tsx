@@ -14,7 +14,7 @@ interface IDragableWidgetProps extends IWidgetProps {
     id: string
 }
 
-const DragableWidget = (props: IDragableWidgetProps) => {
+function DragableWidget(props: IDragableWidgetProps) {
     const {
         isDragging,
         attributes,
@@ -47,24 +47,23 @@ const DragableWidget = (props: IDragableWidgetProps) => {
             <Widget {...props} />
         </Box>
     );
-};
+}
 
-const DashboardView = (props: { dashboard: IDashboardModel, isEditing: boolean, handleWidgetRemove: (widget: IWidget) => void, handleWidgetSetConfig: (dashboard: IDashboardModel, widget: IWidget, config: object) => void }) => {
-    const { dashboard, isEditing, handleWidgetRemove, handleWidgetSetConfig } = props;
+export default function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, handleWidgetRemove: (widget: IWidget) => void }) {
+    const { dashboard, isEditing, handleWidgetRemove } = props;
     const [numberOfColumns, setNumberOfColumns] = useState(4);
+    const [widgetsOrder, setWidgetsOrder] = useState(dashboard.widgets.map(w => w.id));
+
     const widgetSpacing = 1;
     const widgetSize = 78 + widgetSpacing * 8;
-
     const navWidth = useNavWidth();
-
+    const windowWidth = useWindowWidth();
     const dashbaordPadding = 48 + navWidth;
-    const [widgetsOrder, setWidgetsOrder] = useState(dashboard.widgets.map(w => w.id));
 
     useEffect(() => {
         setWidgetsOrder(dashboard.widgets.map(w => w.id));
     }, [dashboard]);
 
-    const windowWidth = useWindowWidth();
     useEffect(() => {
         // When width is less than 400, set to quad column
         const width = window.innerWidth - dashbaordPadding;
@@ -87,6 +86,10 @@ const DashboardView = (props: { dashboard: IDashboardModel, isEditing: boolean, 
             }
         })
     );
+
+    const handleSetWidgetConfig = (widgetId: string, config: object | undefined) => {
+        // TODO: Set config to widget
+    }
 
     function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;
@@ -127,12 +130,10 @@ const DashboardView = (props: { dashboard: IDashboardModel, isEditing: boolean, 
                             isEditMode={isEditing}
                             type={widget.type}
                             config={widget.config}
-                            setConfig={(config) => handleWidgetSetConfig(dashboard, widget, config)} />
+                            setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
                     ))}
                 </SortableContext>
             </DndContext>
         </Box >
     );
-};
-
-export default DashboardView;
+}

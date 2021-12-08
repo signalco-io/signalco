@@ -1,24 +1,17 @@
 import { Box, LinearProgress, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { widgetType } from "../widgets/Widget";
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
-import DashboardsRepository, { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
+import DashboardsRepository, { IDashboardModel, IWidget } from "../../src/dashboards/DashboardsRepository";
 import PageNotificationService from "../../src/notifications/PageNotificationService";
 import DashboardsUpdateChecker from "./DashboardsUpdateChecker";
 import DashboardView from "./DashboardView";
 import DashboardSelector from "./DashboardSelector";
 import DashboardSettings from "./DashboardSettings";
 
-export interface IWidget {
-    id: string,
-    type: widgetType,
-    config?: object
-}
-
 const Dashboards = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [isEditing/*, setIsEditing*/] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
 
     const [selectedId, setSelectedId] = React.useState<string | undefined>(undefined);
     const [selectedDashboard, setSelectedDashboard] = React.useState<IDashboardModel | undefined>(undefined);
@@ -44,12 +37,6 @@ const Dashboards = () => {
         }
     }, [selectedId]);
 
-    const handleWidgetSetConfig = (/*dashboard: IDashboardModel, widget: IWidget, config: object*/) => {
-        // widget.config = config;
-        // setDashboards([...dashboards]);
-        // console.log('updated widgets', dashboard);
-    };
-
     const handleWidgetRemove = (/*widget: IWidget*/) => {
         // if (!editingDashboard) return;
 
@@ -63,7 +50,7 @@ const Dashboards = () => {
     }
 
     const handleEditWidgets = () => {
-
+        setIsEditing(true);
     };
 
     console.debug("Rendering Dashboards");
@@ -86,8 +73,7 @@ const Dashboards = () => {
                                 <DashboardView
                                     dashboard={selectedDashboard}
                                     isEditing={isEditing}
-                                    handleWidgetRemove={handleWidgetRemove}
-                                    handleWidgetSetConfig={handleWidgetSetConfig} />
+                                    handleWidgetRemove={handleWidgetRemove} />
                                 : (
                                     <Box textAlign="center" sx={{ m: 2 }}>
                                         <NoDataPlaceholder content="No dashboards available" />
