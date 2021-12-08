@@ -126,7 +126,6 @@ const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconCom
     <Link href={path} passHref>
       <Button
         sx={{
-          textTransform: "none",
           py: { mobile: 2, desktop: 3 },
           px: 2
         }}
