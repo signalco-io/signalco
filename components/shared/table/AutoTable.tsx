@@ -26,7 +26,7 @@ export interface IAutoTableItem {
 export interface IAutoTableProps<T extends IAutoTableItem> extends IErrorProps {
   items: Array<T> | undefined;
   isLoading: boolean;
-  onRowClick?: (item: IAutoTableItem) => void;
+  onRowClick?: (item: T) => void;
 }
 
 export interface IAutoTableCellRendererProps {

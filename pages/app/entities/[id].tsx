@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, CardHeader, CardMedia, Grid, IconButton, Paper, Skeleton, Slide, Slider, Stack, Switch, TextField, Typography } from '@mui/material';
+import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, CardMedia, Grid, IconButton, Paper, Skeleton, Slide, Slider, Stack, Switch, Tab, Tabs, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
@@ -19,11 +19,38 @@ import SelectItems from '../../../components/shared/form/SelectItems';
 import { IHistoricalValue } from '../../../components/widgets/parts/WidgetPartGraph';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 import useDevice from '../../../src/hooks/useDevice';
+import useHashParam from '../../../src/hooks/useHashParam';
+
+interface TabPanelProps {
+    children?: React.ReactNode;
+    index: number;
+    value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`tabpanel-${index}`}
+            aria-labelledby={`tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box>{children}</Box>
+            )}
+        </div>
+    );
+}
 
 interface IStateTableItem extends IAutoTableItem {
     name: string,
     value?: string,
-    lastUpdate?: string | JSX.Element
+    lastUpdate?: string | JSX.Element,
+    _contactName: string,
+    _channelName: string
 }
 
 interface IActionTableItem {
@@ -152,23 +179,49 @@ function historicalValueToTableItem(value: IHistoricalValue): IAutoTableItem {
     };
 }
 
-const DeviceContactHistory = (props: { deviceId: string, channelName: string, contactName: string }) => {
+const DeviceContactHistory = (props: { deviceId: string }) => {
+    const [contactName] = useHashParam('contact');
+    const [channelName] = useHashParam('channel');
     const loadContactHistory = useCallback(
-        async () => await DevicesRepository.getDeviceStateHistoryAsync({
-            deviceId: props.deviceId,
-            channelName: props.channelName,
-            contactName: props.contactName
-        }) || [],
-        [props.deviceId, props.channelName, props.contactName]);
+        async () => {
+            if (channelName && contactName) {
+                return await DevicesRepository.getDeviceStateHistoryAsync({
+                    deviceId: props.deviceId,
+                    channelName: channelName,
+                    contactName: contactName
+                }) || [];
+            } else return [];
+        },
+        [props.deviceId, channelName, contactName]);
 
     const stateItemsTable = useAutoTable(loadContactHistory, historicalValueToTableItem);
+
+    const [selectedTab, setSelectedTab] = useState(0);
+    const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
+        setSelectedTab(newValue);
+    };
+
+    function a11yProps(index: number) {
+        return {
+            id: `tab-${index}`,
+            'aria-controls': `tabpanel-${index}`,
+        };
+    }
 
     return (
         <Card>
             <CardHeader title="State" />
             <CardMedia>
-                <AutoTable {...stateItemsTable} />
-                {/* <WidgetPartGraph columnWidth={120} config={{ columns: 4, rows: 2, value: loadContactHistory, valueSource: { channelName: props.channelName, contactName: props.contactName, deviceId: props.deviceId } }} /> */}
+                <Tabs value={selectedTab} onChange={handleTabChange}>
+                    <Tab label="Table" {...a11yProps(0)} />
+                    <Tab label="Graph" {...a11yProps(1)} />
+                </Tabs>
+                <TabPanel value={selectedTab} index={0}>
+                    <AutoTable {...stateItemsTable} />
+                </TabPanel>
+                <TabPanel value={selectedTab} index={1}>
+                    <div>Graph</div>
+                </TabPanel>
             </CardMedia>
         </Card>
     );
@@ -195,6 +248,8 @@ const DeviceDetails = () => {
 
                         return {
                             id: `${endpoint.channel}-${contact.name}`,
+                            _channelName: endpoint.channel,
+                            _contactName: contact.name,
                             name: contact.name,
                             value: <ContactStateValueDisplay state={state} />,
                             lastUpdate: <ContactStateLastUpdatedDisplay state={state} />
@@ -247,130 +302,153 @@ const DeviceDetails = () => {
         setIsShareWithNewOpen(false);
     };
 
-    return (
-        <Box sx={{ px: { sm: 2 }, py: 2 }}>
-            <Grid container spacing={2} direction="column" wrap="nowrap">
-                <Grid item>
-                    <Typography variant="h1">{device?.alias}</Typography>
-                </Grid>
-                <Grid item>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Card>
-                                <CardHeader title="Information" />
-                                <CardContent>
-                                    <Accordion elevation={3} defaultExpanded>
-                                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                            <Typography>General</Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <Stack spacing={1} >
-                                                <Stack direction="row" justifyContent="space-between" spacing={2}>
-                                                    <span>Last activity</span>
-                                                    {device && device?.getLastActivity() > 0 ? <ReactTimeago date={device?.getLastActivity()} /> : "Never"}
-                                                </Stack>
-                                                <Stack direction="row" justifyContent="space-between" spacing={2}>
-                                                    <span>Model</span>
-                                                    <Typography>{device?.model}</Typography>
-                                                </Stack>
-                                                <Stack direction="row" justifyContent="space-between" spacing={2}>
-                                                    <span>Manufacturer</span>
-                                                    <Typography>{device?.manufacturer}</Typography>
-                                                </Stack>
-                                            </Stack>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                    <Accordion elevation={3}>
-                                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                            <Typography>Advanced</Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <Grid container spacing={2} alignItems="center">
-                                                <Grid item xs={3}>
-                                                    <span>ID</span>
-                                                </Grid>
-                                                <Grid item xs={9}>
-                                                    <CopyToClipboardInput readOnly fullWidth size="small" value={device?.id ?? ''} />
-                                                </Grid>
-                                                <Grid item xs={3}>
-                                                    <span>Identifier</span>
-                                                </Grid>
-                                                <Grid item xs={9}>
-                                                    <CopyToClipboardInput readOnly fullWidth size="small" value={device?.identifier ?? ''} />
-                                                </Grid>
-                                            </Grid>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Card>
-                                <CardHeader title="Actions" />
-                                <CardContent>
-                                    <Stack spacing={1}>
-                                        {typeof actionTableItems === 'undefined' && (
-                                            <Skeleton width="100%" height={90} />
-                                        )}
-                                        {typeof actionTableItems !== 'undefined' && actionTableItems?.length <= 0 && (
-                                            <ResultsPlaceholder />
-                                        )}
-                                        {actionTableItems?.map(item => (
-                                            <Paper elevation={0} key={`action-item-${item.name}`} sx={{ p: 2 }}>
-                                                <Grid container direction="row" alignItems="center" justifyContent="space-between" spacing={2} wrap="nowrap">
-                                                    <Grid item>
-                                                        <Typography>{item.name}</Typography>
-                                                    </Grid>
-                                                    <Grid item>
-                                                        {device && <DeviceContactAction deviceId={device.id} channel={item.channel} contact={item.contact} state={item.state} />}
-                                                    </Grid>
-                                                </Grid>
-                                            </Paper>
-                                        ))}
-                                    </Stack>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Card>
-                                <CardHeader title="States" />
-                                <CardContent style={{ padding: 0 }}>
-                                    <AutoTable error={error} isLoading={isLoading} items={stateTableItems} />
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Card>
-                                <CardHeader
-                                    title={`Shared with (${device?.sharedWith?.length || 1})`}
-                                    action={(
-                                        <IconButton onClick={handleShareWithUser} size="large">
-                                            <ShareIcon />
-                                        </IconButton>
-                                    )} />
-                                <CardContent style={{ padding: 0 }}>
-                                    <Slide in={isShareWithNewOpen} direction="down" mountOnEnter unmountOnExit>
-                                        <Stack direction="row" spacing={2} alignItems="center" sx={{ pb: 1, px: 2 }}>
-                                            <TextField label="Email address" type="email" fullWidth onChange={(e) => setShareWithNewEmail(e.target.value)} />
-                                            <Stack direction="row">
-                                                <IconButton onClick={handleSubmitShareWithNew} size="large" title="Send invitation"><SendIcon /></IconButton>
-                                                <IconButton onClick={handleCancelShareWithNew} size="large" title="Cancel"><ClearIcon /></IconButton>
-                                            </Stack>
-                                        </Stack>
-                                    </Slide>
-                                    <AutoTable error={""} isLoading={isLoading} items={device?.sharedWith.map(u => ({ id: u.id, name: u.fullName ?? u.email, email: u.email }))} />
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        {device && (
-                            <Grid item>
-                                <DeviceContactHistory deviceId={device.id} channelName="zigbee2mqtt" contactName="power" />
+    const EntityInformation = () => (
+        <Card>
+            <CardHeader title="Information" />
+            <CardContent>
+                <Accordion elevation={3} defaultExpanded>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography>General</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Stack spacing={1} >
+                            <Stack direction="row" justifyContent="space-between" spacing={2}>
+                                <span>Last activity</span>
+                                {device && device?.getLastActivity() > 0 ? <ReactTimeago date={device?.getLastActivity()} /> : "Never"}
+                            </Stack>
+                            <Stack direction="row" justifyContent="space-between" spacing={2}>
+                                <span>Model</span>
+                                <Typography>{device?.model}</Typography>
+                            </Stack>
+                            <Stack direction="row" justifyContent="space-between" spacing={2}>
+                                <span>Manufacturer</span>
+                                <Typography>{device?.manufacturer}</Typography>
+                            </Stack>
+                        </Stack>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion elevation={3}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography>Advanced</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Grid container spacing={2} alignItems="center">
+                            <Grid item xs={3}>
+                                <span>ID</span>
                             </Grid>
-                        )}
+                            <Grid item xs={9}>
+                                <CopyToClipboardInput readOnly fullWidth size="small" value={device?.id ?? ''} />
+                            </Grid>
+                            <Grid item xs={3}>
+                                <span>Identifier</span>
+                            </Grid>
+                            <Grid item xs={9}>
+                                <CopyToClipboardInput readOnly fullWidth size="small" value={device?.identifier ?? ''} />
+                            </Grid>
+                        </Grid>
+                    </AccordionDetails>
+                </Accordion>
+            </CardContent>
+        </Card>
+    );
+
+    const EntityActions = () => (
+        <Card>
+            <CardHeader title="Actions" />
+            <CardContent>
+                <Stack spacing={1}>
+                    {typeof actionTableItems === 'undefined' && (
+                        <Skeleton width="100%" height={90} />
+                    )}
+                    {typeof actionTableItems !== 'undefined' && actionTableItems?.length <= 0 && (
+                        <ResultsPlaceholder />
+                    )}
+                    {actionTableItems?.map(item => (
+                        <Paper elevation={0} key={`action-item-${item.name}`} sx={{ p: 2 }}>
+                            <Grid container direction="row" alignItems="center" justifyContent="space-between" spacing={2} wrap="nowrap">
+                                <Grid item>
+                                    <Typography>{item.name}</Typography>
+                                </Grid>
+                                <Grid item>
+                                    {device && <DeviceContactAction deviceId={device.id} channel={item.channel} contact={item.contact} state={item.state} />}
+                                </Grid>
+                            </Grid>
+                        </Paper>
+                    ))}
+                </Stack>
+            </CardContent>
+        </Card>
+    );
+
+    const EntityStates = () => {
+        const [_1, setContactNameHash] = useHashParam('contact');
+        const [_2, setChannelNameHash] = useHashParam('channel');
+        const handleStateSelected = async (row: IStateTableItem) => {
+            await setChannelNameHash(row._channelName);
+            await setContactNameHash(row._contactName);
+        };
+
+        return (
+            <Card>
+                <CardHeader title="States" />
+                <CardContent style={{ padding: 0 }}>
+                    <AutoTable error={error} isLoading={isLoading} items={stateTableItems} onRowClick={handleStateSelected} />
+                </CardContent>
+            </Card>
+        );
+    };
+
+    const EntityShare = () => (
+        <Card>
+            <CardHeader
+                title={`Shared with (${device?.sharedWith?.length || 1})`}
+                action={(
+                    <IconButton onClick={handleShareWithUser} size="large">
+                        <ShareIcon />
+                    </IconButton>
+                )} />
+            <CardContent style={{ padding: 0 }}>
+                <Slide in={isShareWithNewOpen} direction="down" mountOnEnter unmountOnExit>
+                    <Stack direction="row" spacing={2} alignItems="center" sx={{ pb: 1, px: 2 }}>
+                        <TextField label="Email address" type="email" fullWidth onChange={(e) => setShareWithNewEmail(e.target.value)} />
+                        <Stack direction="row">
+                            <IconButton onClick={handleSubmitShareWithNew} size="large" title="Send invitation"><SendIcon /></IconButton>
+                            <IconButton onClick={handleCancelShareWithNew} size="large" title="Cancel"><ClearIcon /></IconButton>
+                        </Stack>
+                    </Stack>
+                </Slide>
+                <AutoTable error={""} isLoading={isLoading} items={device?.sharedWith.map(u => ({ id: u.id, name: u.fullName ?? u.email, email: u.email }))} />
+            </CardContent>
+        </Card>
+    );
+
+    return (
+        <Stack spacing={{ mobile: 1, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
+            <Stack>
+                <Typography variant="h2" fontWeight={500} fontSize={{ mobile: 18, tablet: 24 }} noWrap>{device?.alias}</Typography>
+            </Stack>
+            <div>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6} md={4}>
+                        <EntityInformation />
                     </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                        <EntityActions />
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                        <EntityStates />
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                        <EntityShare />
+                    </Grid>
+                    {device && (
+                        <Grid item>
+                            <DeviceContactHistory deviceId={device.id} />
+                        </Grid>
+                    )}
                 </Grid>
-            </Grid>
-        </Box >
+            </div>
+        </Stack>
     );
 }
 
