@@ -19,13 +19,17 @@ const useHashParam = (parameterName: string): [string | undefined, (value: strin
         setLastHash(parseHashParam(parameterName));
     }, [parameterName]);
 
-    const setHash = (value: string | undefined) => {
+    const setHashAsync = async (value: string | undefined) => {
         const hash = parseHash();
         if (typeof value === 'undefined' || value.length <= 0)
           hash.delete(parameterName);
         else hash.set(parameterName, value);
 
-        router.push({hash: hash.toString()})
+        try {
+            await router.push({hash: hash.toString()})
+        } catch(err) {
+            console.warn(err, typeof err);
+        }
     }
 
     useEffect(() => {
@@ -40,7 +44,7 @@ const useHashParam = (parameterName: string): [string | undefined, (value: strin
         };
     }, [lastHash, onHashChanged]);
 
-    return [lastHash, setHash];
+    return [lastHash, setHashAsync];
 };
 
 export default useHashParam;

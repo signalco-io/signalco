@@ -1,4 +1,5 @@
 import { IDeviceTarget } from "../devices/Device";
+import DevicesRepository from "../devices/DevicesRepository";
 import HttpService from "../services/HttpService";
 
 export interface IConduct {
@@ -8,6 +9,16 @@ export interface IConduct {
 }
 
 export default class ConductsService {
+    private static async _updateLocalStateAsync(conduct: IConduct) {
+        const device = await DevicesRepository.getDeviceAsync(conduct.target.deviceId);
+        device?.updateState(
+            conduct.target.channelName,
+            conduct.target.contactName,
+            conduct.value?.toString(),
+            new Date()
+        );
+    }
+
     static async RequestConductAsync(target: IDeviceTarget, value?: any, delay?: number) {
         await HttpService.requestAsync("/conducts/request", "post", {
             deviceId: target.deviceId,
@@ -15,6 +26,12 @@ export default class ConductsService {
             contactName: target.contactName,
             valueSerialized: typeof value === 'string' ? value : JSON.stringify(value),
             delay: delay || 0
+        });
+
+        ConductsService._updateLocalStateAsync({
+            delay: delay || 0,
+            value: value,
+            target: target
         });
     }
 
@@ -27,5 +44,10 @@ export default class ConductsService {
             delay: conduct.delay || 0
         }));
         await HttpService.requestAsync("/conducts/request-multiple", "post", conductsDtos);
+
+        // Set local value state
+        for (let index = 0; index < conducts.length; index++) {
+            ConductsService._updateLocalStateAsync(conducts[index]);
+        }
     }
 }

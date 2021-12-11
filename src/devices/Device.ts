@@ -130,7 +130,6 @@ export class DeviceModel implements IDeviceModel {
         const state = this.states.filter(s => s.channel === channelName && s.name === contactName)[0];
         if (state) {
             state.updateState(valueSerialized, timeStamp);
-
             console.debug('Device ', this.id, this.alias, 'state updated', state, valueSerialized, timeStamp);
         }
     }

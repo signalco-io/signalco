@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import WidgetCard from './WidgetCard';
 import dynamic from 'next/dynamic'
-import ConductsService, { IConduct } from '../../../src/conducts/ConductsService';
+import ConductsService from '../../../src/conducts/ConductsService';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import { Box } from '@mui/system';
 import { IWidgetSharedProps } from "../Widget";
@@ -27,33 +27,6 @@ export type StateAction = {
     contactName: string,
     valueSerialized?: string,
     delay?: number
-};
-
-export const executeStateActionAsync = (deviceId: string, channelName: string, contactName: string, valueSerialized?: string, delay?: number) => {
-    return executeStateActionsAsync([{
-        deviceId: deviceId,
-        channelName: channelName,
-        contactName: contactName,
-        valueSerialized: valueSerialized,
-        delay: delay
-    }]);
-}
-
-const executeConductsAsync = async (conducts: IConduct[]) => {
-    // Negate current state
-    await ConductsService.RequestMultipleConductAsync(conducts);
-
-    // Set local value state
-    for (let index = 0; index < conducts.length; index++) {
-        const conduct = conducts[index];
-        const device = await DevicesRepository.getDeviceAsync(conduct.target.deviceId);
-        device?.updateState(
-            conduct.target.channelName,
-            conduct.target.contactName,
-            conduct.value?.toString(),
-            new Date()
-        );
-    }
 };
 
 const determineActionValueAsync = async (action: StateAction) => {
@@ -97,7 +70,7 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
         conducts.push({ target: action, value: newValue, delay: action.delay ?? 0 });
     }
 
-    await executeConductsAsync(conducts);
+    await ConductsService.RequestMultipleConductAsync(conducts);
 };
 
 const WidgetState = (props: IWidgetSharedProps) => {

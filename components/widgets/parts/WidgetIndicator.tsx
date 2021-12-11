@@ -33,7 +33,7 @@ const WidgetIndicator = (props: IWidgetSharedProps) => {
 
     const handleSelected = () => {
         if (device)
-            router.push(`/app/devices/${device.id}`)
+            router.push(`/app/entities/${device.id}`)
     }
 
     return (
