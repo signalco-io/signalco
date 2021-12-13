@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, makeObservable, observable } from "mobx";
 
 
 export interface IUser {
@@ -91,7 +91,7 @@ export interface IDeviceModel {
 
 export class DeviceModel implements IDeviceModel {
     id: string;
-    alias: string;
+    alias: string
     identifier: string;
     endpoints: IDeviceEndpoint[];
     states: IDeviceContactState[];
@@ -108,6 +108,12 @@ export class DeviceModel implements IDeviceModel {
         this.sharedWith = sharedWith;
         this.manufacturer = manufacturer;
         this.model = model;
+
+        makeObservable(this, {
+            manufacturer: observable,
+            alias: observable,
+            model: observable
+        })
     }
 
     getLastActivity() {
@@ -181,26 +187,4 @@ export interface IDeviceTarget {
 
 export interface IDeviceTargetWithValueFallback extends IDeviceTarget {
     valueSerialized?: string
-}
-
-export interface IDeviceStatePublish extends IDeviceTarget {
-    valueSerialized?: string;
-    timeStamp: Date;
-}
-
-export class DeviceStatePublish implements IDeviceStatePublish {
-    deviceId: string;
-    channelName: string;
-    contactName: string;
-    valueSerialized?: string;
-    timeStamp: Date;
-
-    constructor(deviceId: string, channelName: string, contactName: string, valueSerialized: string|undefined, timeStamp: Date) {
-        this.deviceId = deviceId;
-        this.contactName = contactName;
-        this.channelName = channelName;
-        this.valueSerialized = valueSerialized;
-        this.timeStamp = timeStamp;
-        makeAutoObservable(this);
-    }
 }
