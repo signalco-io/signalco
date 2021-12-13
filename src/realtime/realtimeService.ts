@@ -1,16 +1,24 @@
-import DevicesRepository, { SignalDeviceStatePublishDto } from "../devices/DevicesRepository";
+import DevicesRepository from "../devices/DevicesRepository";
 import PageNotificationService from "../notifications/PageNotificationService";
 import HttpService from "../services/HttpService";
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
+class SignalSignalRDeviceStateDto {
+    DeviceId?: string;
+    ChannelName?: string;
+    ContactName?: string;
+    ValueSerialized?: string;
+    TimeStamp?: string;
+}
+
 class RealtimeService {
     private devicesHub?: HubConnection;
 
-    private async HandleDeviceStateAsync(state: SignalDeviceStatePublishDto) {
+    private async HandleDeviceStateAsync(state: SignalSignalRDeviceStateDto) {
         if (typeof state.DeviceId === 'undefined' ||
-        typeof state.ChannelName === 'undefined' ||
-        typeof state.ContactName === 'undefined' ||
-        typeof state.TimeStamp === 'undefined') {
+            typeof state.ChannelName === 'undefined' ||
+            typeof state.ContactName === 'undefined' ||
+            typeof state.TimeStamp === 'undefined') {
         console.warn("Got device state with invalid values", state);
         return;
         }
