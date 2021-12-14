@@ -20,6 +20,7 @@ import { IHistoricalValue } from '../../../components/widgets/parts/WidgetPartGr
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 import useDevice from '../../../src/hooks/useDevice';
 import useHashParam from '../../../src/hooks/useHashParam';
+import EditableInput from '../../../components/shared/form/EditableInput';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -422,10 +423,23 @@ const DeviceDetails = () => {
         </Card>
     );
 
+    const handleRename = async (newAlias: string) => {
+        if (device) {
+            await DevicesRepository.renameAsync(device.id, newAlias);
+        }
+    }
+
     return (
         <Stack spacing={{ mobile: 1, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
             <Stack>
-                <Typography variant="h2" fontWeight={500} fontSize={{ mobile: 18, tablet: 24 }} noWrap>{device?.alias}</Typography>
+                <EditableInput
+                    sx={{
+                        fontWeight: 300,
+                        fontSize: { mobile: 18, tablet: 24 }
+                    }}
+                    text={device?.alias || ''}
+                    noWrap
+                    onChange={handleRename} />
             </Stack>
             <div>
                 <Grid container spacing={2}>

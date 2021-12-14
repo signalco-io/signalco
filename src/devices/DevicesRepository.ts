@@ -1,6 +1,20 @@
 import { IHistoricalValue } from "../../components/widgets/parts/WidgetPartGraph";
 import HttpService from "../services/HttpService";
-import { IDeviceModel, DeviceModel, IDeviceContactState, DeviceContactState, IDeviceContact, DeviceContact, IDeviceEndpoint, DeviceEndpoint, IDeviceStatePublish, DeviceStatePublish, IDeviceTarget, User, IUser, IDeviceContactDataValue, DeviceContactDataValue } from "./Device";
+import {
+    IDeviceModel,
+    DeviceModel,
+    IDeviceContactState,
+    DeviceContactState,
+    IDeviceContact,
+    DeviceContact,
+    IDeviceEndpoint,
+    DeviceEndpoint,
+    IDeviceTarget,
+    User,
+    IUser,
+    IDeviceContactDataValue,
+    DeviceContactDataValue
+} from "./Device";
 
 class SignalDeviceDto {
     id?: string;
@@ -105,26 +119,36 @@ class SignalDeviceStateHistoryDto {
     values?: IHistoricalValue[];
 }
 
-export class SignalDeviceStatePublishDto {
-    DeviceId?: string;
-    ChannelName?: string;
-    ContactName?: string;
-    ValueSerialized?: string;
-    TimeStamp?: string;
-
-    static FromDto(dto: SignalDeviceStatePublishDto): IDeviceStatePublish {
-        if (dto.DeviceId == null || dto.ChannelName == null || dto.ContactName == null || dto.TimeStamp == null) {
-            throw Error("Invalid SignalDeviceStatePublishDto - missing required properties.");
-        }
-
-        return new DeviceStatePublish(dto.DeviceId, dto.ChannelName, dto.ContactName, dto.ValueSerialized, new Date(dto.TimeStamp));
-    }
+interface ISignalDeviceInfoUpdateDto {
+    DeviceId: string;
+    Alias: string | undefined;
+    Manufacturer: string | undefined;
+    Model: string | undefined;
 }
 
 export default class DevicesRepository {
     static devicesCache?: IDeviceModel[];
     static devicesCacheKeyed?: { [id: string]: IDeviceModel };
     static isLoading: boolean;
+
+    static async renameAsync(deviceId: string, alias: string | undefined) {
+        await DevicesRepository._cacheDevicesAsync();
+        const device = await DevicesRepository.getDeviceAsync(deviceId);
+        if (device == null)
+            throw new Error("Unknown device.");
+
+        const aliasTrimmed = alias?.trim();
+        const data: ISignalDeviceInfoUpdateDto = {
+            DeviceId: device.id,
+            Alias: aliasTrimmed,
+            Manufacturer: device.manufacturer,
+            Model: device.model
+        };
+        await HttpService.requestAsync("/devices/info/update", "post", data);
+
+        // Update local info
+        device.alias = aliasTrimmed || '';
+    }
 
     static async getDeviceStateHistoryAsync(target: IDeviceTarget, duration: string = "1.00:00:00"): Promise<IHistoricalValue[] | undefined> {
         return (await HttpService.getAsync<SignalDeviceStateHistoryDto>('/devices/state-history', { ...target, duration })).values;
@@ -159,7 +183,7 @@ export default class DevicesRepository {
     }
 
     private static async _cacheDevicesAsync() {
-        // TODO: Invalidate cache after some period        
+        // TODO: Invalidate cache after some period
         if (!DevicesRepository.isLoading &&
             !DevicesRepository.devicesCache) {
             DevicesRepository.isLoading = true;
