@@ -27,7 +27,7 @@ const Beacons = () => {
     return (
         <Paper sx={{ height: '100%', overflow: 'hidden' }}>
             <Stack sx={{ height: '100%' }}>
-                <Typography variant="h2" sx={{ p: 2 }}>Beacons</Typography>
+                <Typography variant="h2" sx={{ p: 2 }}>Stations</Typography>
                 <AutoTable {...beaconsTable} onRowClick={handleRowClick} />
             </Stack>
         </Paper>

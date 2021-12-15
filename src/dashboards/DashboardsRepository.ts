@@ -1,5 +1,6 @@
 import { IObservableArray, isObservable, makeAutoObservable, observable, runInAction } from "mobx";
 import { widgetType } from "../../components/widgets/Widget";
+import EntityRepository from "../entity/EntityRepository";
 import HttpService from "../services/HttpService";
 import LocalStorageService from "../services/LocalStorageService";
 
@@ -142,7 +143,7 @@ export default class DashboardsRepository {
     }
 
     static async deleteDashboardAsync(id: string) {
-        await HttpService.requestAsync("/entity/delete", "delete", {id: id, entityType: 3});
+        await EntityRepository.deleteAsync(id, 3);
         await DashboardsRepository._applyRemoteDashboardsAsync();
     }
 
