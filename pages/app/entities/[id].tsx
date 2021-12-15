@@ -21,6 +21,7 @@ import useAutoTable from '../../../components/shared/table/useAutoTable';
 import useDevice from '../../../src/hooks/useDevice';
 import useHashParam from '../../../src/hooks/useHashParam';
 import EditableInput from '../../../components/shared/form/EditableInput';
+import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -303,6 +304,13 @@ const DeviceDetails = () => {
         setIsShareWithNewOpen(false);
     };
 
+    const handleDelete = async () => {
+        if (device) {
+            await DevicesRepository.deleteAsync(device.id)
+            router.push('/app/entities');
+        }
+    };
+
     const EntityInformation = () => (
         <Card>
             <CardHeader title="Information" />
@@ -345,6 +353,15 @@ const DeviceDetails = () => {
                             </Grid>
                             <Grid item xs={9}>
                                 <CopyToClipboardInput readOnly fullWidth size="small" value={device?.identifier ?? ''} />
+                            </Grid>
+                            <Grid item>
+                                {device && (
+                                    <ConfirmDeleteButton
+                                        buttonLabel="Delete..."
+                                        title="Delete"
+                                        expectedConfirmText={device.alias}
+                                        onConfirm={handleDelete} />
+                                )}
                             </Grid>
                         </Grid>
                     </AccordionDetails>

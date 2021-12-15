@@ -1,4 +1,5 @@
 import { IHistoricalValue } from "../../components/widgets/parts/WidgetPartGraph";
+import EntityRepository from "../entity/EntityRepository";
 import HttpService from "../services/HttpService";
 import {
     IDeviceModel,
@@ -130,6 +131,12 @@ export default class DevicesRepository {
     static devicesCache?: IDeviceModel[];
     static devicesCacheKeyed?: { [id: string]: IDeviceModel };
     static isLoading: boolean;
+
+    static async deleteAsync(deviceId: string) {
+        await DevicesRepository._cacheDevicesAsync();
+        await EntityRepository.deleteAsync(deviceId, 1);
+        // TODO: Remove from local
+    }
 
     static async renameAsync(deviceId: string, alias: string | undefined) {
         await DevicesRepository._cacheDevicesAsync();
