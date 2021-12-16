@@ -28,7 +28,7 @@ const useHashParam = (parameterName: string): [string | undefined, (value: strin
         try {
             await router.push({hash: hash.toString()})
         } catch(err) {
-            console.warn(err, typeof err);
+            console.warn(`Failed to set new hash code to "${hash}"`);
         }
     }
 
