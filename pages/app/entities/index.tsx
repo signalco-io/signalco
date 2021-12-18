@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouter } from 'next/router';
 import { Chip, Paper, Stack, Typography } from "@mui/material";
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
@@ -15,23 +14,19 @@ function deviceModelToTableItem(device: IDeviceModel): IAutoTableItem {
         id: device.id,
         name: device.alias,
         lastActivity: device.states.length > 0 ? <ReactTimeago date={device.getLastActivity()} /> : 'Never',
-        shared: device.sharedWith.length > 1 && <Chip icon={<PeopleAltSharpIcon fontSize="small" />} label={device.sharedWith.length} />
+        shared: device.sharedWith.length > 1 && <Chip icon={<PeopleAltSharpIcon fontSize="small" />} label={device.sharedWith.length} />,
+        _link: `/app/entities/${device.id}`
     };
 }
 
 const Entities = () => {
-    const router = useRouter();
     const itemsTable = useAutoTable(DevicesRepository.getDevicesAsync, deviceModelToTableItem);
-
-    const handleRowClick = (item: IAutoTableItem) => {
-        router.push(`/app/entities/${item.id}`);
-    };
 
     return (
         <Paper sx={{ height: '100%', overflow: 'hidden' }}>
             <Stack sx={{ height: '100%' }}>
                 <Typography variant="h2" sx={{ p: 2 }}>Entities</Typography>
-                <AutoTable {...itemsTable} onRowClick={handleRowClick} />
+                <AutoTable {...itemsTable} />
             </Stack>
         </Paper>
     )

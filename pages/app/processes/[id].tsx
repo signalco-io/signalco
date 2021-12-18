@@ -102,7 +102,7 @@ function parseProcessConfiguration(configJson: string | undefined) {
         : new Array<IDeviceStateTrigger>();
     const condition = typeof config.condition !== 'undefined'
         ? parseCondition(config.condition) as ICondition
-        : {} as ICondition | undefined;
+        : new Condition();
     const conducts = typeof config.conducts !== 'undefined' && Array.isArray(config.conducts)
         ? config.conducts.map((t: any) => parseConduct(t)) as IConduct[]
         : new Array<IConduct>();
@@ -457,6 +457,8 @@ const ProcessDetails = () => {
                 condition.operations.push(new Condition());
         }
     }
+
+    console.log(processConfig)
 
     return (
         <>
