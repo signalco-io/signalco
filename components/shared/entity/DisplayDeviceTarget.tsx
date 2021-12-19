@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { IDeviceModel, IDeviceTarget, IDeviceTargetIncomplete } from "../../../src/devices/Device";
 import DevicesRepository from "../../../src/devices/DevicesRepository";
 import { selectMany } from '../../../src/helpers/ArrayHelpers';
+import useDevice from "../../../src/hooks/useDevice";
 
 const DeviceSelection = (props: { target?: IDeviceTargetIncomplete, onSelected: (device: IDeviceModel | undefined) => void }) => {
     const {
@@ -78,32 +79,11 @@ const ContactSelection = (props: { device?: IDeviceModel, target?: IDeviceTarget
 }
 
 const DisplayDeviceTarget = observer((props: { target?: IDeviceTargetIncomplete, hideDevice?: boolean, hideContact?: boolean, onChanged: (updated?: IDeviceTargetIncomplete) => void }) => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [device, setDevice] = useState<IDeviceModel | undefined>(undefined);
     const [contactMenuAnchorEl, setContactMenuAnchorEl] = useState<null | HTMLElement>(null);
     const [devicesMenuAnchorEl, setDevicesMenuAnchorEl] = useState<null | HTMLElement>(null);
+    const device = useDevice(props.target?.deviceId);
 
-    useEffect(() => {
-        (async () => {
-            try {
-                setIsLoading(true);
-                if (props.target?.deviceId) {
-                    const device = await DevicesRepository.getDeviceAsync(props.target.deviceId);
-                    if (device) {
-                        setDevice(device);
-                    }
-                } else {
-                    console.debug("No device to load. Target id: ", props.target?.deviceId);
-                }
-            }
-            catch (err: any) {
-                console.warn("Failed to load device target", props.target, err);
-            }
-            finally {
-                setIsLoading(false);
-            }
-        })();
-    }, [props.target, props.target?.deviceId]);
+    const isLoading = typeof device === 'undefined';
 
     const handleDevicesSelection = (event: React.MouseEvent<HTMLButtonElement>) => {
         setDevicesMenuAnchorEl(event.currentTarget);

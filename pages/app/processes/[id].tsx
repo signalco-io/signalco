@@ -11,6 +11,7 @@ import { makeAutoObservable } from 'mobx';
 import { DeviceModel, IDeviceTargetIncomplete } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import DisplayDeviceTarget from '../../../components/shared/entity/DisplayDeviceTarget';
+import useDevice from '../../../src/hooks/useDevice';
 
 interface IDeviceStateValue {
     value?: any
@@ -53,12 +54,75 @@ interface ICondition {
     operations: Array<IConditionValueComparison | ICondition>
 }
 
+async function mapArrayAsync(obj: ({ [key: string]: any } | any), funcAsync: (key: string, value: any) => Promise<[key: string, value: any]>) {
+    const newArray = [];
+    for (let i = 0; i < obj.length; i++) {
+        const element = obj[i];
+        newArray.push(await mapObjectAsync(element, funcAsync));
+    }
+    return newArray;
+}
+
+async function mapObjectAsync(obj: ({ [key: string]: any } | any), funcAsync: (key: string, value: any) => Promise<[key: string, value: any]>) {
+    if (typeof obj === 'undefined' || obj == null) return obj;
+    if (Array.isArray(obj)) {
+        return await mapArrayAsync(obj, funcAsync);
+    }
+    if (typeof obj !== 'object') return obj;
+
+    const newObj: { [key: string]: any } = {};
+    const keys = Object.keys(obj);
+    for (let ki = 0; ki < keys.length; ki++) {
+        const key = keys[ki];
+        let [newKey, newValue] = await Promise.resolve(funcAsync(key, obj[key]));
+        if (typeof newValue === 'object') {
+            newValue = await mapObjectAsync(newValue, funcAsync);
+        }
+        newObj[newKey] = newValue;
+    }
+    return newObj;
+}
+
+type MapModifier = (key: string, value: any) => Promise<[key: string, value: any]> | ([key: string, value: any]) | undefined;
+
+const toLowerCaseKeysModifier: MapModifier = (key, value) => [`${key[0].toLowerCase()}${key.substring(1)}`, value];
+
+const identifierToDeviceIdModifier: MapModifier = async (key, value) => {
+    if (key !== 'identifier') return;
+    return ['deviceId', (await DevicesRepository.getDeviceByIdentifierAsync(value))?.id];
+};
+
+const contactToContactNameModifier: MapModifier = (key, value) => {
+    if (key !== 'contact') return;
+    return ['contactName', value];
+};
+
+const channelToChannelNameModifier: MapModifier = (key, value) => {
+    if (key !== 'channel') return;
+    return ['channelName', value];
+};
+
+async function mapWithModifiersAsync(obj: { [key: string]: any }, modifiers: MapModifier[]) {
+    return await mapObjectAsync(obj, async (key, value) => {
+        let newKey = key;
+        let newValue = value;
+        for (let i = 0; i < modifiers.length; i++) {
+            const modifier = modifiers[i];
+            const result = await Promise.resolve(modifier(newKey, newValue));
+            if (result) {
+                [newKey, newValue] = result;
+            }
+        }
+        return [newKey, newValue];
+    });
+}
+
 class Condition implements ICondition {
     operation?: string | undefined;
     operations: (IConditionValueComparison | ICondition)[] = [];
 }
 
-const isIConditionValueComparison = (arg: any): arg is IConditionValueComparison => arg.Left !== undefined && arg.Right !== undefined;
+const isIConditionValueComparison = (arg: any): arg is IConditionValueComparison => arg.left !== undefined && arg.right !== undefined;
 const isICondition = (arg: any): arg is ICondition => arg.operations !== undefined;
 
 interface IConduct extends IDeviceTargetState {
@@ -76,36 +140,24 @@ class Conduct implements IConduct {
     }
 }
 
-function parseTrigger(trigger: any): IDeviceStateTrigger | undefined {
-    if (typeof trigger.channel === 'undefined' ||
-        typeof trigger.deviceId === 'undefined' ||
-        typeof trigger.contact === 'undefined') {
-        return undefined;
-    }
-
-    return trigger;
-}
-
-function parseCondition(condition: any): ICondition | undefined {
-    return condition;
-}
-
-function parseConduct(conduct: any): IConduct | undefined {
-    return conduct;
-}
-
-function parseProcessConfiguration(configJson: string | undefined) {
+async function parseProcessConfigurationAsync(configJson: string | undefined) {
     const config = JSON.parse(configJson ?? "");
 
-    const triggers = typeof config.triggers !== 'undefined' && Array.isArray(config.triggers)
-        ? (config.triggers.map((t: any) => parseTrigger(t)) as IDeviceStateTrigger[])
-        : new Array<IDeviceStateTrigger>();
-    const condition = typeof config.condition !== 'undefined'
-        ? parseCondition(config.condition) as ICondition
-        : new Condition();
-    const conducts = typeof config.conducts !== 'undefined' && Array.isArray(config.conducts)
-        ? config.conducts.map((t: any) => parseConduct(t)) as IConduct[]
-        : new Array<IConduct>();
+    console.log('Parsing config...', config);
+
+    // Migrate to V2
+    if (config.Triggers || config.Condition || config.Conducts) {
+        config.triggers = config.Triggers;
+        config.condition = config.Condition;
+        config.conducts = config.Conducts;
+    }
+    const modifiers = [toLowerCaseKeysModifier, identifierToDeviceIdModifier, contactToContactNameModifier, channelToChannelNameModifier];
+
+    const triggers = await mapWithModifiersAsync(config.triggers, modifiers) as IDeviceStateTrigger[];
+    const condition = await mapWithModifiersAsync(config.condition, modifiers) as ICondition;
+    const conducts = await mapWithModifiersAsync(config.conducts, modifiers) as IConduct[];
+
+    console.log('new config', triggers, condition, conducts);
 
     const configMapped = makeAutoObservable({
         triggers: triggers.filter(t => typeof t !== undefined),
@@ -302,22 +354,10 @@ const DisplayCondition = observer((props: { condition: ICondition, onChanged: (u
 });
 
 const DisplayDeviceStateValue = observer((props: { target?: IDeviceTargetIncomplete, value: any | undefined, onChanged: (updated?: IDeviceTargetState) => void }) => {
-    const [device, setDevice] = useState<DeviceModel | undefined>();
     const {
         target
     } = props;
-
-    useEffect(() => {
-        const loadDevice = async () => {
-            if (target?.deviceId) {
-                setDevice(await DevicesRepository.getDeviceByIdentifierAsync(target.deviceId));
-            } else {
-                // TODO: Display error if device identifier is not provided
-            }
-        };
-
-        loadDevice();
-    }, [target?.deviceId]);
+    const device = useDevice(target?.deviceId);
 
     const contact = target?.channelName && target?.contactName
         ? device?.getContact({
@@ -367,24 +407,26 @@ const ProcessDetails = () => {
     } | undefined>(undefined);
 
     useEffect(() => {
-        const loadDeviceAsync = async () => {
+        const loadProcessAsync = async () => {
             try {
                 if (typeof id !== "object" &&
                     typeof id !== 'undefined') {
                     const loadedProcess = await ProcessesRepository.getProcessAsync(id);
                     setProcess(loadedProcess);
                     if (loadedProcess) {
-                        setProcessConfig(parseProcessConfiguration(loadedProcess.configurationSerialized));
+                        const mappedConfig = await parseProcessConfigurationAsync(loadedProcess.configurationSerialized)
+                        setProcessConfig(mappedConfig);
                     }
                 }
             } catch (err: any) {
+                console.error(err, "Failed to load process");
                 setError(err?.toString());
             } finally {
                 setIsLoading(false);
             }
         };
 
-        loadDeviceAsync();
+        loadProcessAsync();
     }, [id]);
 
     const persistProcessAsync = () => {
@@ -411,7 +453,6 @@ const ProcessDetails = () => {
 
     const handleConditionChange = (updated: ICondition) => {
         // TODO: Use action to change state
-        console.log(updated);
         if (processConfig)
             processConfig.condition = updated;
 
@@ -457,8 +498,6 @@ const ProcessDetails = () => {
                 condition.operations.push(new Condition());
         }
     }
-
-    console.log(processConfig)
 
     return (
         <>
