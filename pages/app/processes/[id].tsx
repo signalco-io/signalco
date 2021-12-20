@@ -91,6 +91,23 @@ type MapModifier = (key: string, value: any) => Promise<[key: string, value: any
 
 const toLowerCaseKeysModifier: MapModifier = (key, value) => [`${key[0].toLowerCase()}${key.substring(1)}`, value];
 
+const deviceToIdentifierModifier: MapModifier = async (key, value) => {
+    if (key !== 'deviceId') return;
+    const device = await DevicesRepository.getDeviceAsync(value);
+    if (!device) return;
+    return ['identifier', device.identifier];
+};
+
+const contactNameToContactModifier: MapModifier = (key, value) => {
+    if (key !== 'contactName') return;
+    return ['contact', value];
+};
+
+const channelNameToChannelModifier: MapModifier = (key, value) => {
+    if (key !== 'channelName') return;
+    return ['channel', value];
+};
+
 const identifierToDeviceIdModifier: MapModifier = async (key, value) => {
     if (key !== 'identifier') return;
     const device = await DevicesRepository.getDeviceByIdentifierAsync(value);
@@ -400,17 +417,19 @@ const DisplayDeviceStateValue = observer((props: { target?: IDeviceTargetIncompl
     );
 });
 
+interface IProcessConfiguration {
+    triggers: IDeviceStateTrigger[],
+    condition: ICondition | undefined,
+    conducts: IConduct[]
+}
+
 const ProcessDetails = () => {
     const router = useRouter();
     const { id } = router.query;
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState();
     const [process, setProcess] = useState<IProcessModel | undefined>();
-    const [processConfig, setProcessConfig] = useState<{
-        triggers: IDeviceStateTrigger[],
-        condition: ICondition | undefined,
-        conducts: IConduct[]
-    } | undefined>(undefined);
+    const [processConfig, setProcessConfig] = useState<IProcessConfiguration | undefined>(undefined);
 
     useEffect(() => {
         const loadProcessAsync = async () => {
@@ -435,16 +454,22 @@ const ProcessDetails = () => {
         loadProcessAsync();
     }, [id]);
 
-    const persistProcessAsync = () => {
+    const persistProcessAsync = async () => {
         if (process == null) {
             console.error("Can't persist null process.");
             return;
         }
 
-        const configSerialized = JSON.stringify(processConfig);
+        const mappedConfig = await mapWithModifiersAsync(processConfig as KeyedObjectOrAny, [
+            deviceToIdentifierModifier,
+            contactNameToContactModifier,
+            channelNameToChannelModifier
+        ]);
+
+        const configSerialized = JSON.stringify(mappedConfig);
 
         console.log('TODO: Persist process', configSerialized);
-        //ProcessesRepository.saveProcessConfigurationAsync(process?.id, configSerialized);
+        //await ProcessesRepository.saveProcessConfigurationAsync(process?.id, configSerialized);
     };
 
     const handleTriggerChange = (index: number, updated?: IDeviceStateTrigger) => {
