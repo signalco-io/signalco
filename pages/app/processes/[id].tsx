@@ -8,7 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import NoDataPlaceholder from '../../../components/shared/indicators/NoDataPlaceholder';
 import AddSharpIcon from '@mui/icons-material/AddSharp';
 import { makeAutoObservable } from 'mobx';
-import { DeviceModel, IDeviceTargetIncomplete } from '../../../src/devices/Device';
+import { IDeviceTargetIncomplete } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import DisplayDeviceTarget from '../../../components/shared/entity/DisplayDeviceTarget';
 import useDevice from '../../../src/hooks/useDevice';
@@ -54,7 +54,11 @@ interface ICondition {
     operations: Array<IConditionValueComparison | ICondition>
 }
 
-async function mapArrayAsync(obj: ({ [key: string]: any } | any), funcAsync: (key: string, value: any) => Promise<[key: string, value: any]>) {
+type KeyedObjectOrAny = { [key: string]: any } | any;
+
+type ModifierFunc = (key: string, value: any) => Promise<[key: string, value: any]>;
+
+async function mapArrayAsync(obj: KeyedObjectOrAny, funcAsync: ModifierFunc) {
     const newArray = [];
     for (let i = 0; i < obj.length; i++) {
         const element = obj[i];
@@ -63,7 +67,7 @@ async function mapArrayAsync(obj: ({ [key: string]: any } | any), funcAsync: (ke
     return newArray;
 }
 
-async function mapObjectAsync(obj: ({ [key: string]: any } | any), funcAsync: (key: string, value: any) => Promise<[key: string, value: any]>) {
+async function mapObjectAsync(obj: KeyedObjectOrAny, funcAsync: ModifierFunc): Promise<any> {
     if (typeof obj === 'undefined' || obj == null) return obj;
     if (Array.isArray(obj)) {
         return await mapArrayAsync(obj, funcAsync);
@@ -83,13 +87,15 @@ async function mapObjectAsync(obj: ({ [key: string]: any } | any), funcAsync: (k
     return newObj;
 }
 
-type MapModifier = (key: string, value: any) => Promise<[key: string, value: any]> | ([key: string, value: any]) | undefined;
+type MapModifier = (key: string, value: any) => Promise<[key: string, value: any] | undefined> | ([key: string, value: any]) | undefined;
 
 const toLowerCaseKeysModifier: MapModifier = (key, value) => [`${key[0].toLowerCase()}${key.substring(1)}`, value];
 
 const identifierToDeviceIdModifier: MapModifier = async (key, value) => {
     if (key !== 'identifier') return;
-    return ['deviceId', (await DevicesRepository.getDeviceByIdentifierAsync(value))?.id];
+    const device = await DevicesRepository.getDeviceByIdentifierAsync(value);
+    if (!device) return;
+    return ['deviceId', device.id];
 };
 
 const contactToContactNameModifier: MapModifier = (key, value) => {
@@ -437,7 +443,8 @@ const ProcessDetails = () => {
 
         const configSerialized = JSON.stringify(processConfig);
 
-        ProcessesRepository.saveProcessConfigurationAsync(process?.id, configSerialized);
+        console.log('TODO: Persist process', configSerialized);
+        //ProcessesRepository.saveProcessConfigurationAsync(process?.id, configSerialized);
     };
 
     const handleTriggerChange = (index: number, updated?: IDeviceStateTrigger) => {

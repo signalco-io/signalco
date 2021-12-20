@@ -21,7 +21,7 @@ export interface IAutoTableItem {
   id: string;
   [key: string]: any;
   _opacity?: number,
-  _link: string
+  _link?: string
 }
 
 export interface IAutoTableProps<T extends IAutoTableItem> extends IErrorProps {
@@ -62,10 +62,10 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
       </Box>
     );
 
-  let Wrapper = ({children}: {children: React.ReactNode}) => <>{children}</>;
+  let Wrapper = ({ children }: { children: React.ReactNode }) => <>{children}</>;
 
   if (props.link) {
-    Wrapper = function LinkWrapper({children}: {children: React.ReactNode}) { return <Link href={props.link}>{children}</Link>}
+    Wrapper = function LinkWrapper({ children }: { children: React.ReactNode }) { return <Link href={props.link}>{children}</Link> }
   }
 
   return (
