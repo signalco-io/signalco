@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
@@ -22,12 +22,10 @@ const Processes = () => {
     const itemsTable = useAutoTable(ProcessesRepository.getProcessesAsync, deviceModelToTableItem);
 
     return (
-        <Paper sx={{ height: '100%', overflow: 'hidden' }}>
-            <Stack sx={{ height: '100%' }}>
-                <Typography variant="h2" sx={{ p: 2 }}>Processes</Typography>
-                <AutoTable {...itemsTable} />
-            </Stack>
-        </Paper>
+        <Stack spacing={{ mobile: 0, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
+            <Typography variant="h2" sx={{ visibility: { mobile: 'hidden', tablet: 'visible' } }}>Processes</Typography>
+            <AutoTable {...itemsTable} />
+        </Stack>
     )
 };
 

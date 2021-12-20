@@ -9,6 +9,7 @@ import {
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { observer } from "mobx-react-lite";
 import React from "react";
+import NextLink from 'next/link';
 import {
   camelToSentenceCase,
   isAbsoluteUrl
@@ -65,15 +66,28 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
   let Wrapper = ({ children }: { children: React.ReactNode }) => <>{children}</>;
 
   if (props.link) {
-    Wrapper = function LinkWrapper({ children }: { children: React.ReactNode }) { return <Link href={props.link}>{children}</Link> }
+    Wrapper = function LinkWrapper({ children }: { children: React.ReactNode }) {
+      return <Box>
+        <NextLink passHref href={props.link}>{children}</NextLink>
+      </Box>
+    }
   }
 
   return (
     <Wrapper>
       <Box
-        display="inline-block"
         onClick={props.hasClick ? props.onClick : undefined}
-        sx={{ cursor: props.hasClick ? 'pointer' : 'default', gridRow: props.row, gridColumn: props.column, px: 2, py: 1.5, borderBottom: '1px solid rgba(128,128,128,0.6)', display: 'flex', alignItems: 'center' }}>
+        sx={{
+          cursor: props.hasClick || props.link ? 'pointer' : 'default',
+          gridRow: props.row,
+          gridColumn: props.column,
+          px: 2,
+          py: 1.5,
+          borderBottom: '1px solid rgba(128,128,128,0.6)',
+          display: 'flex',
+          alignItems: 'center',
+          height: '100%'
+        }}>
         <Typography variant="body2" style={props.style} component="div">{props.value}</Typography>
       </Box>
     </Wrapper>

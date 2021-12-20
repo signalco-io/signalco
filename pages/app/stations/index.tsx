@@ -1,4 +1,4 @@
-import { Paper, Typography, Stack } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
 import ReactTimeago from "react-timeago";
@@ -25,12 +25,10 @@ const Beacons = () => {
     };
 
     return (
-        <Paper sx={{ height: '100%', overflow: 'hidden' }}>
-            <Stack sx={{ height: '100%' }}>
-                <Typography variant="h2" sx={{ p: 2 }}>Stations</Typography>
-                <AutoTable {...beaconsTable} onRowClick={handleRowClick} />
-            </Stack>
-        </Paper>
+        <Stack spacing={{ mobile: 0, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
+            <Typography variant="h2" sx={{ visibility: { mobile: 'hidden', tablet: 'visible' } }}>Stations</Typography>
+            <AutoTable {...beaconsTable} onRowClick={handleRowClick} />
+        </Stack>
     )
 }
 
