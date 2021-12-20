@@ -7,7 +7,7 @@ export interface IProcessModel {
     alias: string;
     id: string;
     type: string;
-    
+
     setConfiguration(configurationSerialized: string) : void;
 }
 
@@ -82,7 +82,7 @@ export default class ProcessesRepository {
     }
 
     private static async _cacheProcessesAsync() {
-        // TODO: Invalidate cache after some period        
+        // TODO: Invalidate cache after some period
         if (!ProcessesRepository.isLoading &&
             !ProcessesRepository.processesCache) {
             ProcessesRepository.isLoading = true;

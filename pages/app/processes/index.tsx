@@ -1,6 +1,5 @@
 import React from "react";
-import { useRouter } from 'next/router';
-import { Paper, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
@@ -14,25 +13,19 @@ function deviceModelToTableItem(process: IProcessModel): IAutoTableItem {
         id: process.id,
         name: process.alias,
         enabled: !process.isDisabled ? <CheckSharpIcon /> : <BlockSharpIcon />,
+        _link: `/app/processes/${process.id}`,
         _opacity: process.isDisabled ? 0.5 : 1
     };
 }
 
 const Processes = () => {
-    const router = useRouter();
     const itemsTable = useAutoTable(ProcessesRepository.getProcessesAsync, deviceModelToTableItem);
 
-    const handleRowClick = (item: IAutoTableItem) => {
-        router.push(`/app/processes/${item.id}`);
-    };
-
     return (
-        <Paper sx={{ height: '100%', overflow: 'hidden' }}>
-            <Stack sx={{ height: '100%' }}>
-                <Typography variant="h2" sx={{ p: 2 }}>Processes</Typography>
-                <AutoTable {...itemsTable} onRowClick={handleRowClick} />
-            </Stack>
-        </Paper>
+        <Stack spacing={{ mobile: 0, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
+            <Typography variant="h2" sx={{ visibility: { mobile: 'hidden', tablet: 'visible' } }}>Processes</Typography>
+            <AutoTable {...itemsTable} />
+        </Stack>
     )
 };
 

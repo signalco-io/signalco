@@ -170,7 +170,7 @@ const NavProfile = () => {
             <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={ni.label} />)}
         </Stack>
       }
-      {mobileMenuOpen && <Typography sx={{ opacity: 0.6 }}>Menu</Typography>}
+      {(isMobile && mobileMenuOpen) && <Typography sx={{ opacity: 0.6 }}>Menu</Typography>}
       {isMobile &&
         <>
           <IconButton size="large" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
