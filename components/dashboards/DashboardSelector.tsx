@@ -48,7 +48,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                         </Stack>
                     </Button>
                 </Box>
-                {favoriteDashboards.length && (
+                {favoriteDashboards.length > 0 && (
                     <Tabs
                         value={0}
                         variant="scrollable"
