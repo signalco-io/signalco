@@ -12,6 +12,8 @@ import { IDeviceTargetIncomplete } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import DisplayDeviceTarget from '../../../components/shared/entity/DisplayDeviceTarget';
 import useDevice from '../../../src/hooks/useDevice';
+import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
+import EntityRepository from '../../../src/entity/EntityRepository';
 
 interface IDeviceStateValue {
     value?: any
@@ -531,6 +533,13 @@ const ProcessDetails = () => {
         }
     }
 
+    const handleDelete = async () => {
+        if (process) {
+            await EntityRepository.deleteAsync(process?.id, 2);
+            router.push('/app/processes');
+        }
+    }
+
     return (
         <>
             {error && <Alert severity="error">{error}</Alert>}
@@ -540,6 +549,11 @@ const ProcessDetails = () => {
                         {isLoading ?
                             <Skeleton variant="text" width={260} height={60} /> :
                             <Typography variant="h1">{process?.alias ?? "Unknown"}</Typography>}
+                        <ConfirmDeleteButton
+                            buttonLabel="Delete..."
+                            title="Delete process"
+                            expectedConfirmText={process?.alias || 'confirm'}
+                            onConfirm={handleDelete} />
                     </Grid>
                     <Grid item>
                         <Grid container direction="row">
