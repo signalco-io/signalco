@@ -1,4 +1,4 @@
-import { Container, FormControlLabel, FormGroup, Paper, Switch } from '@mui/material';
+import { Container, FormControlLabel, FormGroup, Stack, Switch, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import { AppContext } from '../../_app';
@@ -14,8 +14,9 @@ const SettingsIndex = () => {
     };
 
     return (
-        <Container>
-            <Paper>
+        <Container sx={{ p: 2 }}>
+            <Stack spacing={2}>
+                <Typography variant="h2" sx={{ pt: { mobile: 0, tablet: 2 } }}>Look and feel</Typography>
                 <FormGroup>
                     <FormControlLabel
                         control={
@@ -25,7 +26,7 @@ const SettingsIndex = () => {
                                 inputProps={{ 'aria-label': 'Dark mode switch' }} />}
                         label="Dark mode" />
                 </FormGroup>
-            </Paper>
+            </Stack>
         </Container>
     );
 };

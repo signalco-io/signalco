@@ -21,10 +21,11 @@ import DashboardSharpIcon from '@mui/icons-material/DashboardSharp';
 import AccountTreeSharpIcon from '@mui/icons-material/AccountTreeSharp';
 import DevicesOtherSharpIcon from '@mui/icons-material/DevicesOtherSharp';
 import DeviceHubSharpIcon from '@mui/icons-material/DeviceHubSharp';
+import SettingsIcon from '@mui/icons-material/Settings';
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { orderBy } from "../src/helpers/ArrayHelpers";
-import { Settings as SettingsIcon, SvgIconComponent } from "@mui/icons-material";
+import { SvgIconComponent } from "@mui/icons-material";
 import { User } from '@auth0/auth0-spa-js';
 import {
   usePopupState,
@@ -38,7 +39,8 @@ const navItems = [
   { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon },
   { label: 'Entities', path: '/app/entities', icon: DevicesOtherSharpIcon },
   { label: 'Processes', path: '/app/processes', icon: AccountTreeSharpIcon },
-  { label: 'Stations', path: '/app/stations', icon: DeviceHubSharpIcon }
+  { label: 'Stations', path: '/app/stations', icon: DeviceHubSharpIcon },
+  { label: 'Settings', path: '/app/settings', icon: SettingsIcon }
 ];
 
 const UserAvatar = ({ user }: { user?: User }) => {
@@ -71,7 +73,6 @@ const UserAvatar = ({ user }: { user?: User }) => {
 
 const UserProfileAvatar = () => {
   const { logout, user } = useAuth0();
-  const router = useRouter();
   const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' });
   const navWidth = useNavWidth();
   const maxWidth = navWidth - 16;
@@ -90,12 +91,6 @@ const UserProfileAvatar = () => {
         </Stack>
       </ButtonBase>
       <Menu {...bindMenu(popupState)}>
-        <MenuItem onClick={() => { router.push('/app/settings'); popupState.close(); }}>
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText>Settings</ListItemText>
-        </MenuItem>
         <MenuItem onClick={() => logout()}>
           <ListItemIcon>
             <ExitToAppIcon />
@@ -187,7 +182,7 @@ const NavProfile = () => {
           }}>
             <Stack>
               {navItems.map((ni, index) =>
-                <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={true} label={ni.label} />)}
+                <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={ni.label} />)}
             </Stack>
           </Box>
         </>

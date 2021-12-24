@@ -342,16 +342,16 @@ const DeviceDetails = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Grid container spacing={2} alignItems="center">
-                            <Grid item xs={3}>
+                            <Grid item mobile={3}>
                                 <span>ID</span>
                             </Grid>
-                            <Grid item xs={9}>
+                            <Grid item mobile={9}>
                                 <CopyToClipboardInput readOnly fullWidth size="small" value={device?.id ?? ''} />
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid item mobile={3}>
                                 <span>Identifier</span>
                             </Grid>
-                            <Grid item xs={9}>
+                            <Grid item mobile={9}>
                                 <CopyToClipboardInput readOnly fullWidth size="small" value={device?.identifier ?? ''} />
                             </Grid>
                             <Grid item>
@@ -448,7 +448,7 @@ const DeviceDetails = () => {
 
     return (
         <Stack spacing={{ mobile: 1, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
-            <Stack>
+            <Stack sx={{ px: 2 }}>
                 <EditableInput
                     sx={{
                         fontWeight: 300,
@@ -460,16 +460,16 @@ const DeviceDetails = () => {
             </Stack>
             <div>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6} md={4}>
+                    <Grid item mobile={12} tablet={6} laptop={4}>
                         <EntityInformation />
                     </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
+                    <Grid item mobile={12} tablet={6} laptop={4}>
                         <EntityActions />
                     </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
+                    <Grid item mobile={12} tablet={6} laptop={4}>
                         <EntityStates />
                     </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
+                    <Grid item mobile={12} tablet={6} laptop={4}>
                         <EntityShare />
                     </Grid>
                     {device && (
