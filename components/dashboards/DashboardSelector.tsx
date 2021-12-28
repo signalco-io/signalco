@@ -39,12 +39,12 @@ function DashboardSelector(props: IDashboardSelectorProps) {
 
     return (
         <>
-            <Stack spacing={{ mobile: 0, tablet: 2 }} direction="row">
+            <Stack spacing={{ xs: 0, sm: 2 }} direction="row">
                 <Box>
                     <Button {...bindTrigger(popupState)}>
                         <Stack spacing={1} sx={{ pl: 1 }} direction="row" alignItems="center">
-                            <Typography variant="h2" fontWeight={500} fontSize={{ mobile: 18, tablet: 24 }} noWrap>{currentName}</Typography>
-                            <KeyboardArrowDownIcon sx={{ fontSize: { mobile: "28px", tablet: "32px" } }} />
+                            <Typography variant="h2" fontWeight={500} fontSize={{ xs: 18, sm: 24 }} noWrap>{currentName}</Typography>
+                            <KeyboardArrowDownIcon sx={{ fontSize: { xs: "28px", sm: "32px" } }} />
                         </Stack>
                     </Button>
                 </Box>
@@ -70,15 +70,15 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                             <Tab
                                 key={fd.id}
                                 sx={{
-                                    px: { mobile: 0, tablet: 2 },
-                                    minHeight: { mobile: 40, tablet: 48 },
+                                    px: { xs: 0, sm: 2 },
+                                    minHeight: { xs: 40, sm: 48 },
                                     minWidth: 80
                                 }}
                                 onClick={() => setSelectedIdHash(fd.id)}
                                 label={<Typography
                                     variant="h3"
                                     fontWeight={400}
-                                    fontSize={{ mobile: 16, tablet: 20 }}
+                                    fontSize={{ xs: 16, sm: 20 }}
                                     sx={{ opacity: 0.6, textTransform: 'none' }}>{fd.name}</Typography>} />
                         ))}
                     </Tabs>

@@ -16,7 +16,7 @@ const SettingsIndex = () => {
     return (
         <Container sx={{ p: 2 }}>
             <Stack spacing={2}>
-                <Typography variant="h2" sx={{ pt: { mobile: 0, tablet: 2 } }}>Look and feel</Typography>
+                <Typography variant="h2" sx={{ pt: { xs: 0, sm: 2 } }}>Look and feel</Typography>
                 <FormGroup>
                     <FormControlLabel
                         control={
