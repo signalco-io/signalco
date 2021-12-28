@@ -23,8 +23,8 @@ const Entities = () => {
     const itemsTable = useAutoTable(DevicesRepository.getDevicesAsync, deviceModelToTableItem);
 
     return (
-        <Stack spacing={{ mobile: 0, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
-            <Typography variant="h2" sx={{ visibility: { mobile: 'hidden', tablet: 'visible' } }}>Entities</Typography>
+        <Stack spacing={{ xs: 0, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
+            <Typography variant="h2" sx={{ visibility: { xs: 'hidden', sm: 'visible' } }}>Entities</Typography>
             <AutoTable {...itemsTable} />
         </Stack>
     )

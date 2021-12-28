@@ -447,12 +447,12 @@ const DeviceDetails = () => {
     }
 
     return (
-        <Stack spacing={{ mobile: 1, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
-            <Stack>
+        <Stack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
+            <Stack sx={{ px: 2 }}>
                 <EditableInput
                     sx={{
                         fontWeight: 300,
-                        fontSize: { mobile: 18, tablet: 24 }
+                        fontSize: { xs: 18, sm: 24 }
                     }}
                     text={device?.alias || ''}
                     noWrap
