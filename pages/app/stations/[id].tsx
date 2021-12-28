@@ -82,7 +82,7 @@ const BeaconDetails = () => {
                 name: i,
                 running: isRunning ? "Running" : "Stopped",
                 actions: (
-                    <LoadingButton disabled={!beacon} onClick={() => beacon && startStopAction(beacon.id, i)}>{isRunning ? "Stop" : "Start"}</LoadingButton>
+                    <LoadingButton color={isRunning ? "error" : "success"} disabled={!beacon} onClick={() => beacon && startStopAction(beacon.id, i)}>{isRunning ? "Stop" : "Start"}</LoadingButton>
                 )
             }
         );

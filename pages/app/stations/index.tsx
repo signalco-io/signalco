@@ -1,5 +1,4 @@
 import { Typography, Stack } from "@mui/material";
-import { useRouter } from "next/router";
 import React from "react";
 import ReactTimeago from "react-timeago";
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
@@ -7,27 +6,24 @@ import AutoTable, { IAutoTableItem } from "../../../components/shared/table/Auto
 import useAutoTable from "../../../components/shared/table/useAutoTable";
 import BeaconsRepository, { IBeaconModel } from "../../../src/beacons/BeaconsRepository";
 
-function beaconModelToTableItem(beacon: IBeaconModel): IAutoTableItem {
+function beaconModelToTableItem(station: IBeaconModel): IAutoTableItem {
     return {
-        id: beacon.id,
-        name: beacon.id,
-        version: beacon.version ?? "Unknown",
-        registeredDate: <ReactTimeago date={beacon.registeredTimeStamp} />
+        id: station.id,
+        name: station.id,
+        version: station.version ?? "Unknown",
+        lastActivity: station.stateTimeStamp ? <ReactTimeago date={station.stateTimeStamp} /> : "Unknown",
+        registeredDate: <ReactTimeago date={station.registeredTimeStamp} />,
+        _link: `/app/stations/${station.id}`
     };
 }
 
 const Beacons = () => {
-    const router = useRouter();
     const beaconsTable = useAutoTable(BeaconsRepository.getBeaconsAsync, beaconModelToTableItem);
 
-    const handleRowClick = (item: IAutoTableItem) => {
-        router.push(`/app/stations/${item.id}`);
-    };
-
     return (
-        <Stack spacing={{ mobile: 0, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
-            <Typography variant="h2" sx={{ visibility: { mobile: 'hidden', tablet: 'visible' } }}>Stations</Typography>
-            <AutoTable {...beaconsTable} onRowClick={handleRowClick} />
+        <Stack spacing={{ xs: 0, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
+            <Typography variant="h2" sx={{ visibility: { xs: 'hidden', sm: 'visible' } }}>Stations</Typography>
+            <AutoTable {...beaconsTable} />
         </Stack>
     )
 }

@@ -16,7 +16,7 @@ const AppLayout = (props: { children?: React.ReactNode }) => {
   } = props;
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   console.debug("AppLayout rendering");
 

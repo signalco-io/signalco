@@ -27,7 +27,7 @@ const DashboardsUpdateChecker = () => {
         return <></>;
 
     return (
-        <Box pr={2} pl={{ mobile: 2, tablet: 0 }} pt={2}>
+        <Box pr={2} pl={{ xs: 2, sm: 0 }} pt={2}>
             <Alert
                 severity="info"
                 action={<Button variant="contained" size="small" onClick={handleApplyDashboardsUpdate}>Apply update</Button>}>

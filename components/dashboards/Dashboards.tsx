@@ -46,7 +46,7 @@ const Dashboards = () => {
     return (
         <>
             <DashboardsUpdateChecker />
-            <Stack spacing={{ mobile: 1, tablet: 4 }} sx={{ pt: { mobile: 0, tablet: 4 } }}>
+            <Stack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
                 <div>
                     <DashboardSelector
                         onSelection={setSelectedId}
@@ -55,7 +55,7 @@ const Dashboards = () => {
                 </div>
                 {isLoading ?
                     <LinearProgress /> : (
-                        <Box sx={{ px: { mobile: 2, tablet: 0 } }}>
+                        <Box sx={{ px: { xs: 2, sm: 0 } }}>
                             {selectedDashboard ?
                                 <DashboardView
                                     dashboard={selectedDashboard}

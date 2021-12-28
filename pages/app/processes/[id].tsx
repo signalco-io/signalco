@@ -557,7 +557,7 @@ const ProcessDetails = () => {
                     </Grid>
                     <Grid item>
                         <Grid container direction="row">
-                            <Grid item mobile={12} tablet={6}>
+                            <Grid item xs={12} sm={6}>
                                 <Accordion defaultExpanded>
                                     <AccordionSummary
                                         expandIcon={<ExpandMoreIcon />}
