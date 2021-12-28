@@ -34,7 +34,7 @@ const Cover = () => (
                 width={512}
                 height={144} />
             </Box>
-            <Typography fontFamily="Raleway" fontWeight={200} fontSize={{ mobile: '1.4rem', tablet: '2rem', desktop: '2.5rem' }}>Automate your life</Typography>
+            <Typography fontFamily="Raleway" fontWeight={200} fontSize={{ xs: '1.4rem', sm: '2rem', lg: '2.5rem' }}>Automate your life</Typography>
           </Stack>
         </Box>
       </>
@@ -132,7 +132,7 @@ const Footer = () => (
     {appState => (
       <Box sx={{ backgroundColor: appState.theme === 'light' ? "rgba(0,0,0,0.06)" : "rgba(125,125,125,0.2)" }}>
         <Divider />
-        <Container maxWidth="desktop">
+        <Container maxWidth="lg">
           <Box component="footer" sx={{ padding: "64px 0 32px 0" }}>
             <Grid container direction="column" spacing={4}>
               <Grid item>

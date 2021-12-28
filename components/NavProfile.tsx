@@ -56,7 +56,7 @@ const UserAvatar = ({ user }: { user?: User }) => {
     userNameInitials = user.email[0];
   }
 
-  const size = { mobile: '36px', tablet: '42px', desktop: '58px' };
+  const size = { xs: '36px', sm: '42px', lg: '58px' };
 
   if (user.picture) {
     return (<Avatar sx={{ width: size, height: size }} src={user.picture} alt="User profile image">
@@ -78,11 +78,11 @@ const UserProfileAvatar = () => {
   const maxWidth = navWidth - 16;
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <>
-      <ButtonBase {...bindTrigger(popupState)} sx={{ width: { mobile: undefined, tablet: '100%' }, py: 1 }}>
+      <ButtonBase {...bindTrigger(popupState)} sx={{ width: { xs: undefined, sm: '100%' }, py: 1 }}>
         <Stack alignItems="center" spacing={2}>
           <UserAvatar user={user} />
           {!isMobile &&
@@ -104,8 +104,8 @@ const UserProfileAvatar = () => {
 
 export const useNavWidth = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
-  const isLaptopOrTablet = useMediaQuery(theme.breakpoints.between('tablet', 'desktop'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isLaptopOrTablet = useMediaQuery(theme.breakpoints.between('sm', 'lg'));
 
   if (isMobile)
     return 0;
@@ -114,21 +114,21 @@ export const useNavWidth = () => {
 
 const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconComponent, active: boolean, label: string }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
-  const isNotDesktop = useMediaQuery(theme.breakpoints.down('desktop'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isNotDesktop = useMediaQuery(theme.breakpoints.down('lg'));
 
   return (
     <Link href={path} passHref>
       <Button
         sx={{
-          py: { mobile: 2, desktop: 3 },
+          py: { xs: 2, lg: 3 },
           px: 2
         }}
         aria-label={label}
         title={label}
         size="large">
         <Stack direction="row" sx={{ width: isNotDesktop ? '100%' : '128px' }} alignItems="center" spacing={isMobile ? 1 : 0}>
-          <Icon sx={{ opacity: active ? 1 : 0.6, mr: { mobile: 0, desktop: 2 }, fontSize: { mobile: '26px', desktop: '17px' } }} />
+          <Icon sx={{ opacity: active ? 1 : 0.6, mr: { xs: 0, lg: 2 }, fontSize: { xs: '26px', lg: '17px' } }} />
           {(isMobile || !isNotDesktop) &&
             <Typography variant="h3" fontWeight={500} sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
           }
@@ -144,7 +144,7 @@ const NavProfile = () => {
   const navWidth = useNavWidth();
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
   useEffect(() => {
@@ -155,12 +155,12 @@ const NavProfile = () => {
     <Stack
       direction={isMobile ? 'row' : 'column'}
       spacing={isMobile ? 0 : 4}
-      sx={{ px: { mobile: 2, tablet: 0 }, pt: { mobile: 0, tablet: 4 }, minWidth: `${navWidth}px`, minHeight: { mobile: '60px', tablet: undefined } }}
+      sx={{ px: { xs: 2, sm: 0 }, pt: { xs: 0, sm: 4 }, minWidth: `${navWidth}px`, minHeight: { xs: '60px', sm: undefined } }}
       justifyContent={isMobile ? "space-between" : undefined}
       alignItems="center">
       <UserProfileAvatar />
       {!mobileMenuOpen &&
-        <Stack sx={{ width: { mobile: undefined, desktop: '100%' } }}>
+        <Stack sx={{ width: { xs: undefined, lg: '100%' } }}>
           {navItems.filter(ni => isMobile ? ni === activeNavItem : true).map((ni, index) =>
             <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={ni.label} />)}
         </Stack>
