@@ -24,6 +24,42 @@ class BeaconModel implements IBeaconModel {
     }
 }
 
+class StationBlobInfoDto {
+    name?: string;
+    createdTimeStamp?: string;
+    modifiedTimeStamp?: string;
+    size?: number;
+
+    static FromDto(dto: StationBlobInfoDto): IBlobInfoModel {
+        if (dto.name == null || dto.createdTimeStamp == null || dto.size == null) {
+            throw Error("Invalid StationBlobInfoDto - missing required properties.");
+        }
+
+        return new BlobInfoModel(dto.name, new Date(dto.createdTimeStamp), dto.modifiedTimeStamp ? new Date(dto.modifiedTimeStamp) : undefined, dto.size);
+    }
+}
+
+export interface IBlobInfoModel {
+    name: string;
+    createdTimeStamp: Date;
+    modifiedTimeStamp?: Date;
+    size: number;
+}
+
+class BlobInfoModel implements IBlobInfoModel {
+    name: string;
+    createdTimeStamp: Date;
+    modifiedTimeStamp?: Date;
+    size: number;
+
+    constructor(name: string, createdTimeStamp: Date, modifiedTimeStamp: Date | undefined, size: number) {
+        this.name = name;
+        this.createdTimeStamp = createdTimeStamp;
+        this.modifiedTimeStamp = modifiedTimeStamp;
+        this.size = size;
+    }
+}
+
 class SignalBeaconDto {
     id?: string;
     registeredTimeStamp?: string;
@@ -81,6 +117,10 @@ export default class BeaconsRepository {
 
     static async beginDiscoveryAsync(id: string): Promise<void> {
         await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "beginDiscovery"});
+    }
+
+    static async getLogsAsync(id: string) {
+        return (await HttpService.getAsync<StationBlobInfoDto[]>(`/stations/logging/list?stationId=${id}`)).map(StationBlobInfoDto.FromDto);
     }
 
     static async getBeaconAsync(id: string): Promise<IBeaconModel | undefined> {
