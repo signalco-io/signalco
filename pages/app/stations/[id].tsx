@@ -12,6 +12,7 @@ import AutoTable from '../../../components/shared/table/AutoTable';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 import LoadingButton from '@mui/lab/LoadingButton';
 import HttpService from '../../../src/services/HttpService';
+import { LazyLog } from 'react-lazylog';
 
 const stationCommandAsync = async (stationId: string | string[] | undefined, command: (id: string) => Promise<void>, commandDescription: string) => {
     try {
@@ -201,9 +202,9 @@ const BeaconDetails = () => {
                         <Grid item xs={12}>
                             <Card>
                                 <CardHeader title="Log viewer" />
-                                <CardContent>
-                                    <pre>{logContent}</pre>
-                                </CardContent>
+                                <CardMedia>
+                                    <LogViewer text={logContent} height={500} />
+                                </CardMedia>
                             </Card>
                         </Grid>
                     )}
@@ -212,6 +213,35 @@ const BeaconDetails = () => {
         </Box>
     );
 }
+
+interface ILogViewerProps {
+    text: string;
+    height: number;
+}
+
+interface ILogViewerLineProps {
+    number: number;
+    data: any;
+}
+
+const LogViewerLine = (props: ILogViewerLineProps) => {
+    const { number, data } = props;
+    return (
+        <div>
+            <span style={{ paddingLeft: '8px', minWidth: '60px', display: 'inline-block' }}>{number}</span>
+            <div style={{ opacity: 0.8, display: 'inline-block', height: '1.3rem' }}>{data}</div>
+        </div>
+    )
+};
+
+const LogViewer = (props: ILogViewerProps) => {
+    const { text, height } = props;
+    return (
+        <div style={{ height: height, overflow: 'auto', fontFamily: '"Monaco", monospace', fontSize: '12px', whiteSpace: 'pre' }}>
+            {text.split('\n').map((lineText, i) => <LogViewerLine key={i} number={i} data={lineText} />)}
+        </div>
+    );
+};
 
 BeaconDetails.layout = AppLayoutWithAuth;
 
