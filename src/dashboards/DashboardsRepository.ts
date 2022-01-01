@@ -120,13 +120,16 @@ export default class DashboardsRepository {
 
     static async favoriteSetAsync(id: string, newIsFavorite: boolean) {
         const currentFavorites = LocalStorageService.getItem<string[]>(DashboardsFavoritesLocalStorageKey, []);
-        const isCurrentlyFavorite = currentFavorites.indexOf(id) >= 0;
+        const currentFavoriteIndex = currentFavorites.indexOf(id);
+        const isCurrentlyFavorite = currentFavoriteIndex >= 0;
 
         // Set or remove
         if (!isCurrentlyFavorite && newIsFavorite) {
             LocalStorageService.setItem(DashboardsFavoritesLocalStorageKey, [...currentFavorites, id]);
         } else if (isCurrentlyFavorite && !newIsFavorite) {
-            LocalStorageService.setItem(DashboardsFavoritesLocalStorageKey, currentFavorites.splice(currentFavorites.indexOf(id), 1));
+            let newFavorites = [...currentFavorites];
+            newFavorites.splice(currentFavoriteIndex, 1)
+            LocalStorageService.setItem(DashboardsFavoritesLocalStorageKey, newFavorites);
         }
 
         // Mark favorite locally

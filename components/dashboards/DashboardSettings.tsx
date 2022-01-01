@@ -1,4 +1,5 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import DashboardsRepository, { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
 import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
@@ -12,6 +13,7 @@ interface IDashboardSettingsProps {
 
 const DashboardSettings = (props: IDashboardSettingsProps) => {
     const { isOpen, dashboard, onClose } = props;
+    const router = useRouter();
     const [name, setName] = useState(dashboard?.name || '');
 
     const handleSave = async () => {
@@ -27,6 +29,7 @@ const DashboardSettings = (props: IDashboardSettingsProps) => {
     const handleDashboardDelete = async () => {
         if (dashboard) {
             await DashboardsRepository.deleteDashboardAsync(dashboard?.id);
+            router.push({ hash: undefined });
         }
         onClose();
     }
