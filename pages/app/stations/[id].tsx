@@ -79,7 +79,6 @@ const BeaconDetails = () => {
         const isRunning = (beacon?.runningWorkerServices?.findIndex(rws => rws === i) ?? -1) >= 0;
         const startStopAction = isRunning ? BeaconsRepository.stopWorkerServiceAsync : BeaconsRepository.startWorkerServiceAsync;
         const nameMatch = new RegExp(/(\w*\d*)\.(\w*\d*)\.(\w*\d*)\.(\w*\d*)\.*(\w*\d*)/g).exec(i);
-        console.log(nameMatch)
         return (
             {
                 id: i,
@@ -241,16 +240,29 @@ interface ILogViewerLineProps {
     data: any;
 }
 
-const logLineRegex = new RegExp(/\[(.*)\] \((\w+)\) (.*)\r*\n*\r*/g);
+const logLineRegex = new RegExp(/\[(.*)\]\s\((\w+)\)\s(.*)/);
+
+const LogLevelBadge = ({ level }: { level: string }) => {
+    let color = "gray";
+    switch (level) {
+        case "Information": color = 'DodgerBlue'; break;
+        case "Warning": color = 'DarkOrange'; break;
+        case "Fatal":
+        case "Error": color = 'DarkRed'; break;
+    }
+
+    return <span style={{ backgroundColor: color, padding: '2px', paddingLeft: '6px', paddingRight: '6px', borderRadius: 4, marginRight: '8px', fontSize: '10px', textTransform: 'uppercase' }}>{level.substring(0, 3)}</span>
+};
 
 const LogViewerLine = (props: ILogViewerLineProps) => {
     const { number, data } = props;
     const matches = logLineRegex.exec(data);
     if (!matches)
-        console.log(data);
+        console.log(typeof data);
     return (
         <div>
             <span style={{ paddingLeft: '8px', minWidth: '60px', display: 'inline-block' }}>{number}</span>
+            {matches && <LogLevelBadge level={matches[2]} />}
             <div style={{ opacity: 0.8, display: 'inline-block', height: '1.3rem' }}>{matches ? matches[3] : data}</div>
         </div>
     )
