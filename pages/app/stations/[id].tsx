@@ -12,6 +12,7 @@ import AutoTable from '../../../components/shared/table/AutoTable';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 import LoadingButton from '@mui/lab/LoadingButton';
 import HttpService from '../../../src/services/HttpService';
+import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
 
 const stationCommandAsync = async (stationId: string | string[] | undefined, command: (id: string) => Promise<void>, commandDescription: string) => {
     try {
@@ -117,6 +118,13 @@ const BeaconDetails = () => {
     const logsLoadItems = useCallback(() => Promise.resolve(beacon ? BeaconsRepository.getLogsAsync(beacon.id) : []), [beacon]);
     const logsTable = useAutoTable(logsLoadItems, logsAutoTableItemTransform);
 
+    const handleDelete = async () => {
+        if (!beacon) return;
+
+        await BeaconsRepository.deleteAsync(beacon.id);
+        router.push('/app/stations');
+    };
+
     return (
         <Box sx={{ px: { sm: 2 }, py: 2 }}>
             <Stack spacing={2}>
@@ -171,6 +179,16 @@ const BeaconDetails = () => {
                                     <Grid item xs={8}>
                                         <Stack direction="row" alignItems="center" spacing={1}>
                                             <Button variant="outlined" onClick={handleBeginDiscovery}>Begin discovery</Button>
+                                        </Stack>
+                                    </Grid>
+                                    <Grid item xs={4}><span>Advanced</span></Grid>
+                                    <Grid item xs={8}>
+                                        <Stack direction="row" alignItems="center" spacing={1}>
+                                            <ConfirmDeleteButton
+                                                title="Delete station"
+                                                buttonLabel='Delete...'
+                                                expectedConfirmText={beacon?.id || "confirm"}
+                                                onConfirm={handleDelete} />
                                         </Stack>
                                     </Grid>
                                 </Grid>
