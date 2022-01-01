@@ -12,7 +12,6 @@ import AutoTable from '../../../components/shared/table/AutoTable';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 import LoadingButton from '@mui/lab/LoadingButton';
 import HttpService from '../../../src/services/HttpService';
-import { LazyLog } from 'react-lazylog';
 
 const stationCommandAsync = async (stationId: string | string[] | undefined, command: (id: string) => Promise<void>, commandDescription: string) => {
     try {
@@ -224,12 +223,17 @@ interface ILogViewerLineProps {
     data: any;
 }
 
+const logLineRegex = new RegExp(/\[(.*)\] \((\w+)\) (.*)\r*\n*\r*/g);
+
 const LogViewerLine = (props: ILogViewerLineProps) => {
     const { number, data } = props;
+    const matches = logLineRegex.exec(data);
+    if (!matches)
+        console.log(data);
     return (
         <div>
             <span style={{ paddingLeft: '8px', minWidth: '60px', display: 'inline-block' }}>{number}</span>
-            <div style={{ opacity: 0.8, display: 'inline-block', height: '1.3rem' }}>{data}</div>
+            <div style={{ opacity: 0.8, display: 'inline-block', height: '1.3rem' }}>{matches ? matches[3] : data}</div>
         </div>
     )
 };
