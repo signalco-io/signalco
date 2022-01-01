@@ -3,7 +3,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import NextNprogress from "nextjs-progressbar";
 import theme from "../src/theme";
 import "../styles/global.scss";
 import { CacheProvider, EmotionCache } from "@emotion/react";
@@ -117,23 +116,15 @@ export default function App(props: MyAppProps) {
         <ThemeProvider theme={theme(appContextState.theme === 'dark')}>
           <SnackbarProvider maxSnack={3}>
             <CssBaseline />
-            <>
-              <AppContext.Provider value={appContextState}>
-                {typeof Layout === "function" ? (
-                  <Layout>
-                    <Component {...pageProps} err={err} />
-                  </Layout>
-                ) : (
+            <AppContext.Provider value={appContextState}>
+              {typeof Layout === "function" ? (
+                <Layout>
                   <Component {...pageProps} err={err} />
-                )}
-              </AppContext.Provider>
-              <NextNprogress
-                color="#fff"
-                startPosition={0.3}
-                stopDelayMs={200}
-                height={2}
-              />
-            </>
+                </Layout>
+              ) : (
+                <Component {...pageProps} err={err} />
+              )}
+            </AppContext.Provider>
           </SnackbarProvider>
         </ThemeProvider>
       </StyledEngineProvider>
