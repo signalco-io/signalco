@@ -226,6 +226,7 @@ export default class DashboardsRepository {
             if (localDashboard == null ||
                 remoteDashboard.timeStamp == null ||
                 localDashboard.timeStamp == null ||
+                remoteDashboard.sharedWith.map(u => u.id).filter(i => !(localDashboard.sharedWith?.map(u => u.id).includes(i) ?? false)).length !== 0 ||
                 localDashboard.timeStamp < remoteDashboard.timeStamp) {
                 DashboardsRepository.isUpdateAvailable = true;
                 console.debug("Dashboard update available. Dashboard: ", remoteDashboard.name, localDashboard?.timeStamp, "<", remoteDashboard.timeStamp)
@@ -250,6 +251,7 @@ export default class DashboardsRepository {
         newDashboards.sort((a, b) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0));
         DashboardsRepository._mapAndApplyDashboards(newDashboards);
         DashboardsRepository.isLoading = false;
+        DashboardsRepository.isUpdateAvailable = false;
 
         // Persist dashboards locally
         if (typeof localStorage !== 'undefined') {
