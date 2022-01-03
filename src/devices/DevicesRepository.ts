@@ -11,10 +11,9 @@ import {
     IDeviceEndpoint,
     DeviceEndpoint,
     IDeviceTarget,
-    User,
-    IUser,
     IDeviceContactDataValue,
-    DeviceContactDataValue
+    DeviceContactDataValue,
+    SignalUserDto
 } from "./Device";
 
 class SignalDeviceDto {
@@ -41,20 +40,6 @@ class SignalDeviceDto {
             dto.sharedWith?.map(SignalUserDto.FromDto) ?? [],
             dto.manufacturer,
             dto.model);
-    }
-}
-
-class SignalUserDto {
-    id?: string;
-    email?: string;
-    fullName?: string;
-
-    static FromDto(dto: SignalUserDto): IUser {
-        if (dto.id == null || dto.email == null) {
-            throw Error("Invalid SignalUserDto - missing required properties.");
-        }
-
-        return new User(dto.id, dto.email, dto.fullName);
     }
 }
 

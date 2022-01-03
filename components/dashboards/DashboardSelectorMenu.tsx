@@ -1,4 +1,4 @@
-import { Button, Divider, Paper, Stack, Typography } from "@mui/material";
+import { Button, Chip, Divider, Stack, Typography } from "@mui/material";
 import { PopupState } from "material-ui-popup-state/hooks";
 import React from "react";
 import { AddSharp } from "@mui/icons-material";
@@ -7,6 +7,7 @@ import PushPinSharpIcon from '@mui/icons-material/PushPinSharp';
 import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
 import { observer } from "mobx-react-lite";
 import useHashParam from "../../src/hooks/useHashParam";
+import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
 
 interface IDashboardSelectorMenuProps {
     selectedId: string | undefined,
@@ -67,7 +68,10 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
             </Stack>
             <Button onClick={handleNewDashboard} size="large" startIcon={<AddSharp />} sx={{ py: 2 }}>New dashboard</Button>
             <Divider />
-            <Typography variant="subtitle1" color="textSecondary" sx={{ p: 2 }}>Dashboard</Typography>
+            <Stack direction="row" alignItems="center" sx={{ p: 2 }}>
+                <Typography variant="subtitle1" color="textSecondary" sx={{ flexGrow: 1 }}>Dashboard</Typography>
+                <Chip icon={<PeopleAltSharpIcon fontSize="small" />} label={dashboards.find(d => d.id === selectedId)?.sharedWith?.length ?? 0} />
+            </Stack>
             <Button size="large" onClick={handleAndClose(onFullscreen)}>Toggle fullscreen</Button>
             <Button size="large" onClick={handleAndClose(onSettings)}>Settings...</Button>
             <Button size="large" onClick={handleAndClose(onEditWidgets)}>Edit widgets...</Button>
