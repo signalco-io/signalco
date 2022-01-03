@@ -1,5 +1,5 @@
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import { Box, Fab, IconButton, Stack, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Fab, Stack, useMediaQuery, useTheme } from "@mui/material";
 import React, { useEffect } from "react";
 import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
