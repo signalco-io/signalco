@@ -47,33 +47,31 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const dashboards = DashboardsRepository.dashboards;
 
     return (
-        <Paper sx={{ minWidth: 320 }}>
-            <Stack>
-                <Stack sx={{ maxHeight: '50vh', overflow: 'auto' }}>
-                    {dashboards.map((d) => (
-                        <Stack key={d.id} direction="row" sx={{ width: '100%', position: 'relative' }}>
-                            <Button
-                                disabled={d.id === selectedId}
-                                size="large"
-                                onClick={() => handleAndClose(onSelection)(d.id)}
-                                sx={{ flexGrow: 1, py: 2 }}
-                            >
-                                <Typography>{d.name}</Typography>
-                            </Button>
-                            <Button sx={{ position: 'absolute', right: 0, height: '100%' }} onClick={() => handleToggleFavorite(d.id)}>
-                                {d.isFavorite ? <PushPinSharpIcon /> : <PushPinOutlinedIcon />}
-                            </Button>
-                        </Stack>
-                    ))}
-                </Stack>
-                <Button onClick={handleNewDashboard} size="large" startIcon={<AddSharp />} sx={{ py: 2 }}>New dashboard</Button>
-                <Divider />
-                <Typography variant="subtitle1" color="textSecondary" sx={{ p: 2 }}>Dashboard</Typography>
-                <Button size="large" onClick={handleAndClose(onFullscreen)}>Toggle fullscreen</Button>
-                <Button size="large" onClick={handleAndClose(onSettings)}>Settings...</Button>
-                <Button size="large" onClick={handleAndClose(onEditWidgets)}>Edit widgets...</Button>
+        <Stack sx={{ minWidth: 330 }}>
+            <Stack sx={{ maxHeight: '50vh', overflow: 'auto' }}>
+                {dashboards.map((d) => (
+                    <Stack key={d.id} direction="row" sx={{ width: '100%', position: 'relative' }}>
+                        <Button
+                            disabled={d.id === selectedId}
+                            size="large"
+                            onClick={() => handleAndClose(onSelection)(d.id)}
+                            sx={{ flexGrow: 1, py: 2 }}
+                        >
+                            <Typography>{d.name}</Typography>
+                        </Button>
+                        <Button sx={{ position: 'absolute', right: 0, height: '100%' }} onClick={() => handleToggleFavorite(d.id)}>
+                            {d.isFavorite ? <PushPinSharpIcon /> : <PushPinOutlinedIcon />}
+                        </Button>
+                    </Stack>
+                ))}
             </Stack>
-        </Paper>
+            <Button onClick={handleNewDashboard} size="large" startIcon={<AddSharp />} sx={{ py: 2 }}>New dashboard</Button>
+            <Divider />
+            <Typography variant="subtitle1" color="textSecondary" sx={{ p: 2 }}>Dashboard</Typography>
+            <Button size="large" onClick={handleAndClose(onFullscreen)}>Toggle fullscreen</Button>
+            <Button size="large" onClick={handleAndClose(onSettings)}>Settings...</Button>
+            <Button size="large" onClick={handleAndClose(onEditWidgets)}>Edit widgets...</Button>
+        </Stack>
     );
 }
 

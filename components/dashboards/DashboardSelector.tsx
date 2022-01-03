@@ -93,7 +93,8 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                 transformOrigin={{
                     vertical: 'top',
                     horizontal: 'left',
-                }}>
+                }}
+                PaperProps={{ elevation: 8, variant: 'elevation' }}>
                 <DashboardSelectorMenu
                     selectedId={selectedId}
                     popupState={popupState}
