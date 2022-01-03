@@ -19,6 +19,7 @@ interface IDashboardSelectorMenuProps {
 function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const { selectedId, popupState, onSelection, onEditWidgets, onSettings } = props;
     const [_, setDashboardIdHash] = useHashParam('dashboard');
+    const [isFullScreen, setFullScreenHash] = useHashParam('fullscreen');
 
     const handleAndClose = (callback: (...params: any[]) => void) => {
         return (...params: any[]) => {
@@ -40,6 +41,8 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
             await DashboardsRepository.favoriteSetAsync(dashboard.id, !dashboard.isFavorite);
         }
     }
+
+    const onFullscreen = () => setFullScreenHash(isFullScreen === 'on' ? undefined : 'on');
 
     const dashboards = DashboardsRepository.dashboards;
 
@@ -66,6 +69,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
                 <Button onClick={handleNewDashboard} size="large" startIcon={<AddSharp />} sx={{ py: 2 }}>New dashboard</Button>
                 <Divider />
                 <Typography variant="subtitle1" color="textSecondary" sx={{ p: 2 }}>Dashboard</Typography>
+                <Button size="large" onClick={handleAndClose(onFullscreen)}>Toggle fullscreen</Button>
                 <Button size="large" onClick={handleAndClose(onSettings)}>Settings...</Button>
                 <Button size="large" onClick={handleAndClose(onEditWidgets)}>Edit widgets...</Button>
             </Stack>

@@ -1,5 +1,5 @@
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import { Box, Stack, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Fab, IconButton, Stack, useMediaQuery, useTheme } from "@mui/material";
 import React, { useEffect } from "react";
 import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
@@ -9,6 +9,8 @@ import RealtimeService from '../src/realtime/realtimeService';
 import { Auth0Provider } from "@auth0/auth0-react";
 import { useRouter } from 'next/router';
 import * as Sentry from '@sentry/nextjs';
+import useHashParam from "../src/hooks/useHashParam";
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 
 const AppLayout = (props: { children?: React.ReactNode }) => {
   const {
@@ -17,6 +19,7 @@ const AppLayout = (props: { children?: React.ReactNode }) => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [isFullScreen, setFullScreenHash] = useHashParam('fullscreen');
 
   console.debug("AppLayout rendering");
 
@@ -29,12 +32,24 @@ const AppLayout = (props: { children?: React.ReactNode }) => {
   }, []);
 
   return (
-    <Stack direction={isMobile ? 'column' : 'row'} sx={{ height: '100%', width: '100%' }}>
-      <NavProfile />
-      <Box sx={{ height: '100%', width: '100%', flexGrow: 1, position: 'relative' }}>
-        {children}
-      </Box>
-    </Stack>
+    <>
+      <Stack direction={isMobile ? 'column' : 'row'} sx={{ height: '100%', width: '100%' }}>
+        {isFullScreen !== 'on' && <NavProfile />}
+        <Box sx={{ height: '100%', width: '100%', flexGrow: 1, position: 'relative' }}>
+          {children}
+        </Box>
+      </Stack>
+      {isFullScreen && (
+        <Fab
+          size="small"
+          aria-label="Exit fullscreen"
+          title="Exit fullscreen"
+          sx={{ position: 'fixed', bottom: '12px', right: '12px' }}
+          onClick={() => setFullScreenHash(undefined)}>
+          <FullscreenExitIcon fontSize="medium" />
+        </Fab>
+      )}
+    </>
   );
 };
 
