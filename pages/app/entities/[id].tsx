@@ -1,4 +1,4 @@
-import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, CardMedia, Grid, IconButton, Paper, Skeleton, Slide, Slider, Stack, Switch, Tab, Tabs, TextField, Typography } from '@mui/material';
+import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, CardMedia, Grid, IconButton, Paper, Skeleton, Slider, Stack, Switch, Tab, Tabs, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
@@ -7,8 +7,7 @@ import AutoTable, { IAutoTableItem } from '../../../components/shared/table/Auto
 import { IDeviceContact, IDeviceContactState } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import { observer } from 'mobx-react-lite';
-import { Clear as ClearIcon, ExpandMore as ExpandMoreIcon, PlayArrow as PlayArrowIcon, Send as SendIcon, Share as ShareIcon } from '@mui/icons-material';
-import HttpService from '../../../src/services/HttpService';
+import { ExpandMore as ExpandMoreIcon, PlayArrow as PlayArrowIcon } from '@mui/icons-material';
 import ConductsService from '../../../src/conducts/ConductsService';
 import ResultsPlaceholder from '../../../components/shared/indicators/ResultsPlaceholder';
 import CopyToClipboardInput from '../../../components/shared/form/CopyToClipboardInput';
@@ -25,6 +24,7 @@ import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDelete
 import { Area, AreaChart, XAxis, YAxis } from 'recharts';
 import { useTheme } from '@mui/system';
 import { scaleTime, timeHour } from 'd3';
+import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -347,29 +347,6 @@ const DeviceDetails = () => {
         }
     }, [device]);
 
-    const [isShareWithNewOpen, setIsShareWithNewOpen] = useState(false);
-    const [shareWithNewEmail, setShareWithNewEmail] = useState('');
-    const handleShareWithUser = () => {
-        setIsShareWithNewOpen(true);
-    };
-
-    const handleSubmitShareWithNew = async () => {
-        // TODO: Add success/error indicator
-        await HttpService.requestAsync("/share/entity", "post", {
-            type: 1, // 1 - Device
-            entityId: device?.id,
-            userEmails: [shareWithNewEmail]
-        });
-
-        device?.sharedWith.push({ id: '', email: shareWithNewEmail });
-        setIsShareWithNewOpen(false);
-    };
-
-    const handleCancelShareWithNew = () => {
-        setShareWithNewEmail('');
-        setIsShareWithNewOpen(false);
-    };
-
     const handleDelete = async () => {
         if (device) {
             await DevicesRepository.deleteAsync(device.id)
@@ -482,30 +459,6 @@ const DeviceDetails = () => {
         );
     };
 
-    const EntityShare = () => (
-        <Card>
-            <CardHeader
-                title={`Shared with (${device?.sharedWith?.length || 1})`}
-                action={(
-                    <IconButton onClick={handleShareWithUser} size="large">
-                        <ShareIcon />
-                    </IconButton>
-                )} />
-            <CardContent style={{ padding: 0 }}>
-                <Slide in={isShareWithNewOpen} direction="down" mountOnEnter unmountOnExit>
-                    <Stack direction="row" spacing={2} alignItems="center" sx={{ pb: 1, px: 2 }}>
-                        <TextField label="Email address" type="email" fullWidth onChange={(e) => setShareWithNewEmail(e.target.value)} />
-                        <Stack direction="row">
-                            <IconButton onClick={handleSubmitShareWithNew} size="large" title="Send invitation"><SendIcon /></IconButton>
-                            <IconButton onClick={handleCancelShareWithNew} size="large" title="Cancel"><ClearIcon /></IconButton>
-                        </Stack>
-                    </Stack>
-                </Slide>
-                <AutoTable error={""} isLoading={isLoading} items={device?.sharedWith.map(u => ({ id: u.id, name: u.fullName ?? u.email, email: u.email }))} />
-            </CardContent>
-        </Card>
-    );
-
     const handleRename = async (newAlias: string) => {
         if (device) {
             await DevicesRepository.renameAsync(device.id, newAlias);
@@ -514,7 +467,7 @@ const DeviceDetails = () => {
 
     return (
         <Stack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
-            <Stack sx={{ px: 2 }}>
+            <Stack sx={{ px: 2 }} spacing={1}>
                 <EditableInput
                     sx={{
                         fontWeight: 300,
@@ -523,6 +476,9 @@ const DeviceDetails = () => {
                     text={device?.alias || ''}
                     noWrap
                     onChange={handleRename} />
+                <Stack direction="row">
+                    <ShareEntityChip entity={device} entityType={1} />
+                </Stack>
             </Stack>
             <div>
                 <Grid container spacing={2}>
@@ -534,9 +490,6 @@ const DeviceDetails = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
                         <EntityStates />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
-                        <EntityShare />
                     </Grid>
                     {device && (
                         <Grid item>
