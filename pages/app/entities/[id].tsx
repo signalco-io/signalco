@@ -15,7 +15,6 @@ import throttle from '../../../src/helpers/Throttle';
 import { useCallback } from 'react';
 import blendColors from '../../../src/helpers/BlendColors';
 import SelectItems from '../../../components/shared/form/SelectItems';
-import { IHistoricalValue } from '../../../components/widgets/parts/WidgetPartGraph';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 import useDevice from '../../../src/hooks/useDevice';
 import useHashParam from '../../../src/hooks/useHashParam';
@@ -25,6 +24,7 @@ import { Area, AreaChart, XAxis, YAxis } from 'recharts';
 import { useTheme } from '@mui/system';
 import { scaleTime, timeHour } from 'd3';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
+import { IHistoricalValue } from '../../../src/entity/IHistoricalValue';
 
 interface TabPanelProps {
     children?: React.ReactNode;

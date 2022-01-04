@@ -1,5 +1,5 @@
-import { IHistoricalValue } from "../../components/widgets/parts/WidgetPartGraph";
 import EntityRepository from "../entity/EntityRepository";
+import { IHistoricalValue } from "../entity/IHistoricalValue";
 import HttpService from "../services/HttpService";
 import {
     IDeviceModel,
