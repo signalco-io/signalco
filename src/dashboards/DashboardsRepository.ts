@@ -1,5 +1,6 @@
 import { IObservableArray, isObservable, makeAutoObservable, observable, runInAction } from "mobx";
 import { widgetType } from "../../components/widgets/Widget";
+import { IUser, SignalUserDto } from "../devices/Device";
 import EntityRepository from "../entity/EntityRepository";
 import HttpService from "../services/HttpService";
 import LocalStorageService from "../services/LocalStorageService";
@@ -24,6 +25,7 @@ export interface IDashboardModel {
     timeStamp?: Date;
     isFavorite: boolean;
     widgets: IWidget[];
+    sharedWith: IUser[];
 }
 
 class DashboardModel implements IDashboardModel {
@@ -33,14 +35,16 @@ class DashboardModel implements IDashboardModel {
     timeStamp?: Date;
     isFavorite: boolean;
     widgets: IWidget[];
+    sharedWith: IUser[];
 
-    constructor(id: string, name: string, configurationSerialized?: string, timeStamp?: Date) {
+    constructor(id: string, name: string, configurationSerialized: string | undefined, sharedWith: IUser[], timeStamp: Date | undefined) {
         this.id = id;
         this.name = name;
         this.configurationSerialized = configurationSerialized;
         this.timeStamp = timeStamp;
         this.isFavorite = false;
         this.widgets = [];
+        this.sharedWith = sharedWith;
 
         makeAutoObservable(this);
     }
@@ -81,6 +85,7 @@ class SignalDashboardDto {
     id?: string;
     name?: string;
     configurationSerialized?: string;
+    sharedWith?: SignalUserDto[];
     timeStamp?: string;
 
     static FromDto(dto: SignalDashboardDto): IDashboardModel {
@@ -88,7 +93,12 @@ class SignalDashboardDto {
             throw Error("Invalid SignalDashboardDto - missing required properties.");
         }
 
-        return new DashboardModel(dto.id, dto.name, dto.configurationSerialized, dto.timeStamp ? new Date(dto.timeStamp + "Z") : undefined);
+        return new DashboardModel(
+            dto.id,
+            dto.name,
+            dto.configurationSerialized,
+            dto.sharedWith?.map(SignalUserDto.FromDto) ?? [],
+            dto.timeStamp ? new Date(dto.timeStamp + "Z") : undefined);
     }
 }
 
@@ -216,6 +226,7 @@ export default class DashboardsRepository {
             if (localDashboard == null ||
                 remoteDashboard.timeStamp == null ||
                 localDashboard.timeStamp == null ||
+                remoteDashboard.sharedWith.map(u => u.id).filter(i => !(localDashboard.sharedWith?.map(u => u.id).includes(i) ?? false)).length !== 0 ||
                 localDashboard.timeStamp < remoteDashboard.timeStamp) {
                 DashboardsRepository.isUpdateAvailable = true;
                 console.debug("Dashboard update available. Dashboard: ", remoteDashboard.name, localDashboard?.timeStamp, "<", remoteDashboard.timeStamp)
@@ -240,6 +251,7 @@ export default class DashboardsRepository {
         newDashboards.sort((a, b) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0));
         DashboardsRepository._mapAndApplyDashboards(newDashboards);
         DashboardsRepository.isLoading = false;
+        DashboardsRepository.isUpdateAvailable = false;
 
         // Persist dashboards locally
         if (typeof localStorage !== 'undefined') {

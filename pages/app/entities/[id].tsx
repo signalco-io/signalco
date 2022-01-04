@@ -1,4 +1,4 @@
-import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, CardMedia, Grid, IconButton, Paper, Skeleton, Slide, Slider, Stack, Switch, Tab, Tabs, TextField, Typography } from '@mui/material';
+import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, CardMedia, Grid, IconButton, Paper, Skeleton, Slider, Stack, Switch, Tab, Tabs, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
@@ -7,8 +7,7 @@ import AutoTable, { IAutoTableItem } from '../../../components/shared/table/Auto
 import { IDeviceContact, IDeviceContactState } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import { observer } from 'mobx-react-lite';
-import { Clear as ClearIcon, ExpandMore as ExpandMoreIcon, PlayArrow as PlayArrowIcon, Send as SendIcon, Share as ShareIcon } from '@mui/icons-material';
-import HttpService from '../../../src/services/HttpService';
+import { ExpandMore as ExpandMoreIcon, PlayArrow as PlayArrowIcon } from '@mui/icons-material';
 import ConductsService from '../../../src/conducts/ConductsService';
 import ResultsPlaceholder from '../../../components/shared/indicators/ResultsPlaceholder';
 import CopyToClipboardInput from '../../../components/shared/form/CopyToClipboardInput';
@@ -16,12 +15,16 @@ import throttle from '../../../src/helpers/Throttle';
 import { useCallback } from 'react';
 import blendColors from '../../../src/helpers/BlendColors';
 import SelectItems from '../../../components/shared/form/SelectItems';
-import { IHistoricalValue } from '../../../components/widgets/parts/WidgetPartGraph';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 import useDevice from '../../../src/hooks/useDevice';
 import useHashParam from '../../../src/hooks/useHashParam';
 import EditableInput from '../../../components/shared/form/EditableInput';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
+import { Area, AreaChart, XAxis, YAxis } from 'recharts';
+import { useTheme } from '@mui/system';
+import { scaleTime, timeHour } from 'd3';
+import ShareEntityChip from '../../../components/entity/ShareEntityChip';
+import { IHistoricalValue } from '../../../src/entity/IHistoricalValue';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -181,6 +184,69 @@ function historicalValueToTableItem(value: IHistoricalValue): IAutoTableItem {
     };
 }
 
+// const ChartGenericTooltip = ({ active, payload }: { active?: boolean, payload?: any }) => {
+//     if (active && payload && payload.length) {
+//         const dateTime = graph.domain.invert(payload[0].payload.timeStamp) as Date;
+//         return (
+//             <Paper sx={{ p: 2, px: 3, maxWidth: '180px' }} variant="outlined">
+//                 <Typography>{`${payload[0].value}${config.units || ''}`}</Typography>
+//                 <ReactTimeago date={dateTime} />
+//                 <Typography variant="caption" color="textSecondary" component="div">{`${dateTime.getFullYear()}-${dateTime.getMonth().toString().padStart(2, '0')}-${dateTime.getDate().toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`}</Typography>
+//             </Paper>
+//         );
+//     }
+
+//     return null;
+// };
+
+interface IGraphProps {
+    data: any[];
+}
+
+const Graph = (props: IGraphProps) => {
+    const { data } = props;
+
+    const yKey = "value";
+    const xKey = "key";
+    const theme = useTheme();
+    const width = 400;
+    const height = 200;
+    const durationMs = 24 * 60 * 60 * 1000;
+
+    const now = new Date();
+    const past = new Date();
+    past.setTime(now.getTime() - durationMs);
+    const domainGraph = scaleTime().domain([past, now]);
+    const ticksHours = timeHour.every(1)!;
+    const ticks = domainGraph.ticks(ticksHours).map(i => i.toString());
+
+    const isBoolean = data?.length && (data[0].value === 'true' || data[0].value === 'false');
+    const transformedData = data.map(d => ({ key: domainGraph(new Date(d.id).getTime()), value: isBoolean ? (d.value === 'true' ? 1 : 0) : d.value }));
+
+    console.log(transformedData);
+
+    return (
+        <div>
+            <AreaChart
+                width={width}
+                height={height}
+                data={transformedData}
+                margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+                <XAxis domain={[0, 1]} ticks={ticks || []} hide dataKey={xKey} type="number" />
+                <YAxis domain={["auto", "auto"]} hide />
+                {/* <Tooltip content={<ChartGenericTooltip />} /> */}
+                <Area
+                    type={isBoolean ? 'step' : "basis"}
+                    dataKey={yKey}
+                    fill={theme.palette.mode === "dark" ? "#ffffff" : "#000000"}
+                    fillOpacity={0.1}
+                    stroke="#aeaeae"
+                    strokeWidth={1} />
+            </AreaChart>
+        </div>
+    );
+};
+
 const DeviceContactHistory = (props: { deviceId: string }) => {
     const [contactName] = useHashParam('contact');
     const [channelName] = useHashParam('channel');
@@ -222,7 +288,7 @@ const DeviceContactHistory = (props: { deviceId: string }) => {
                     <AutoTable {...stateItemsTable} />
                 </TabPanel>
                 <TabPanel value={selectedTab} index={1}>
-                    <div>Graph</div>
+                    <Graph data={stateItemsTable.items} />
                 </TabPanel>
             </CardMedia>
         </Card>
@@ -280,29 +346,6 @@ const DeviceDetails = () => {
             setIsLoading(false);
         }
     }, [device]);
-
-    const [isShareWithNewOpen, setIsShareWithNewOpen] = useState(false);
-    const [shareWithNewEmail, setShareWithNewEmail] = useState('');
-    const handleShareWithUser = () => {
-        setIsShareWithNewOpen(true);
-    };
-
-    const handleSubmitShareWithNew = async () => {
-        // TODO: Add success/error indicator
-        await HttpService.requestAsync("/share/entity", "post", {
-            type: 1, // 1 - Device
-            entityId: device?.id,
-            userEmails: [shareWithNewEmail]
-        });
-
-        device?.sharedWith.push({ id: '', email: shareWithNewEmail });
-        setIsShareWithNewOpen(false);
-    };
-
-    const handleCancelShareWithNew = () => {
-        setShareWithNewEmail('');
-        setIsShareWithNewOpen(false);
-    };
 
     const handleDelete = async () => {
         if (device) {
@@ -416,30 +459,6 @@ const DeviceDetails = () => {
         );
     };
 
-    const EntityShare = () => (
-        <Card>
-            <CardHeader
-                title={`Shared with (${device?.sharedWith?.length || 1})`}
-                action={(
-                    <IconButton onClick={handleShareWithUser} size="large">
-                        <ShareIcon />
-                    </IconButton>
-                )} />
-            <CardContent style={{ padding: 0 }}>
-                <Slide in={isShareWithNewOpen} direction="down" mountOnEnter unmountOnExit>
-                    <Stack direction="row" spacing={2} alignItems="center" sx={{ pb: 1, px: 2 }}>
-                        <TextField label="Email address" type="email" fullWidth onChange={(e) => setShareWithNewEmail(e.target.value)} />
-                        <Stack direction="row">
-                            <IconButton onClick={handleSubmitShareWithNew} size="large" title="Send invitation"><SendIcon /></IconButton>
-                            <IconButton onClick={handleCancelShareWithNew} size="large" title="Cancel"><ClearIcon /></IconButton>
-                        </Stack>
-                    </Stack>
-                </Slide>
-                <AutoTable error={""} isLoading={isLoading} items={device?.sharedWith.map(u => ({ id: u.id, name: u.fullName ?? u.email, email: u.email }))} />
-            </CardContent>
-        </Card>
-    );
-
     const handleRename = async (newAlias: string) => {
         if (device) {
             await DevicesRepository.renameAsync(device.id, newAlias);
@@ -448,7 +467,7 @@ const DeviceDetails = () => {
 
     return (
         <Stack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
-            <Stack sx={{ px: 2 }}>
+            <Stack sx={{ px: 2 }} spacing={1}>
                 <EditableInput
                     sx={{
                         fontWeight: 300,
@@ -457,6 +476,9 @@ const DeviceDetails = () => {
                     text={device?.alias || ''}
                     noWrap
                     onChange={handleRename} />
+                <Stack direction="row">
+                    <ShareEntityChip entity={device} entityType={1} />
+                </Stack>
             </Stack>
             <div>
                 <Grid container spacing={2}>
@@ -468,9 +490,6 @@ const DeviceDetails = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} md={4}>
                         <EntityStates />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
-                        <EntityShare />
                     </Grid>
                     {device && (
                         <Grid item>

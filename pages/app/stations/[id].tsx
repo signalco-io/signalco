@@ -94,6 +94,7 @@ const BeaconDetails = () => {
     const workerServicesTable = useAutoTable(workerServicesTableLoadItems, workerServicesTableTransformItems);
 
     const [logContent, setLogContent] = useState('');
+    const [loadingLog, setLoadingLog] = useState<string | undefined>(undefined);
 
     const logsAutoTableItemTransform = useCallback((i: IBlobInfoModel) => {
         var nameMatch = new RegExp(/.*\/(.*).txt/g).exec(i.name);
@@ -104,16 +105,25 @@ const BeaconDetails = () => {
             modified: i.modifiedTimeStamp ? <ReactTimeago date={i.modifiedTimeStamp} /> : "Never",
             size: i.size,
             actions: (
-                <Button onClick={async () => {
+                <LoadingButton disabled={!!loadingLog && loadingLog !== i.name} loading={loadingLog === i.name} onClick={async () => {
                     if (beacon) {
-                        const response = await HttpService.getAsync(`/stations/logging/download?stationId=${beacon.id}&blobName=${i.name}`) as { fileContents: string };
-                        const contentBuffer = Buffer.from(response.fileContents, 'base64');
-                        setLogContent(contentBuffer.toString('utf8'));
+                        try {
+                            console.log(`Downloading ${i.name}...`);
+                            setLoadingLog(i.name);
+                            const response = await HttpService.getAsync(`/stations/logging/download?stationId=${beacon.id}&blobName=${i.name}`) as { fileContents: string };
+                            console.log(`Reading ${i.name}...`);
+                            const contentBuffer = Buffer.from(response.fileContents, 'base64');
+                            setLogContent(contentBuffer.toString('utf8'));
+                            console.log(`Done ${i.name}...`);
+                        }
+                        finally {
+                            setLoadingLog(undefined);
+                        }
                     }
-                }}>View</Button>
+                }}>View</LoadingButton>
             )
         });
-    }, [beacon]);
+    }, [beacon, loadingLog]);
     const logsLoadItems = useCallback(() => Promise.resolve(beacon ? BeaconsRepository.getLogsAsync(beacon.id) : []), [beacon]);
     const logsTable = useAutoTable(logsLoadItems, logsAutoTableItemTransform);
 
@@ -238,6 +248,7 @@ interface ILogViewerProps {
 interface ILogViewerLineProps {
     number: number;
     data: any;
+    lineHeight: number;
 }
 
 const logLineRegex = new RegExp(/\[(.*)\]\s\((\w+)\)\s(.*)/);
@@ -255,13 +266,13 @@ const LogLevelBadge = ({ level }: { level: string }) => {
 };
 
 const LogViewerLine = (props: ILogViewerLineProps) => {
-    const { number, data } = props;
+    const { number, data, lineHeight } = props;
     const matches = logLineRegex.exec(data);
-    if (!matches)
-        console.log(typeof data);
+    const timeStamp = matches ? new Date(matches[1]) : new Date(0);
     return (
-        <div>
+        <div style={{ top: `${number * lineHeight}px`, position: 'absolute' }}>
             <span style={{ paddingLeft: '8px', minWidth: '60px', display: 'inline-block' }}>{number}</span>
+            {matches && <span style={{ marginRight: '8px' }}>{timeStamp.getUTCHours().toString().padStart(2, '0')}:{timeStamp.getUTCMinutes().toString().padStart(2, '0')}:{timeStamp.getUTCSeconds().toString().padStart(2, '0')}.{timeStamp.getMilliseconds().toString().padEnd(3, '0')}</span>}
             {matches && <LogLevelBadge level={matches[2]} />}
             <div style={{ opacity: 0.8, display: 'inline-block', height: '1.3rem' }}>{matches ? matches[3] : data}</div>
         </div>
@@ -270,9 +281,34 @@ const LogViewerLine = (props: ILogViewerLineProps) => {
 
 const LogViewer = (props: ILogViewerProps) => {
     const { text, height } = props;
+    const lineHeight = 20.8;
+    const overscan = 20;
+    // const reverse = true;
+
+    const [scrollPosition, setScrollPosition] = useState(0);
+
+    const numberOfLinesInView = Math.ceil(height / lineHeight);
+
+    const lines = text.split('\n');
+    // if (reverse) lines.reverse();
+
+    const linesCount = lines.length;
+
+    // Calcualte view
+    const firstVisibleLine = Math.floor(scrollPosition / lineHeight);
+    const startLine = Math.max(firstVisibleLine - overscan, 0);
+    const endLine = Math.min(firstVisibleLine + numberOfLinesInView + overscan, linesCount);
+    const linesInView = lines.slice(startLine, endLine);
+
+    const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+        setScrollPosition(e.currentTarget.scrollTop);
+    };
+
     return (
-        <div style={{ height: height, overflow: 'auto', fontFamily: '"Monaco", monospace', fontSize: '12px', whiteSpace: 'pre' }}>
-            {text.split('\n').map((lineText, i) => <LogViewerLine key={i} number={i} data={lineText} />)}
+        <div onScroll={handleScroll} style={{ position: 'relative', height: height, overflow: 'scroll', fontFamily: '"Monaco", monospace', fontSize: '12px', whiteSpace: 'pre' }}>
+            <div style={{ height: `${linesCount * lineHeight}px` }}>
+                {linesInView.map((lineText, i) => <LogViewerLine key={i} number={startLine + i} lineHeight={lineHeight} data={lineText} />)}
+            </div>
         </div>
     );
 };
