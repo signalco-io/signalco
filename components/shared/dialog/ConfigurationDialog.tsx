@@ -5,7 +5,7 @@ import React from "react";
 export interface IConfigurationDialogProps {
     isOpen: boolean,
     title: React.ReactNode,
-    titleActions: React.ReactNode,
+    titleActions?: React.ReactNode,
     onClose: () => void,
     noPadding?: boolean,
     children: React.ReactNode,
