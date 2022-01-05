@@ -28,8 +28,17 @@ const theme = (isDark: boolean) => {
       MuiButton: {
         styleOverrides: {
           root: {
-            textTransform: 'none'
-          }
+            textTransform: 'none',
+            fontWeight: 400,
+            "&.MuiButton-outlined": {
+              backgroundColor: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)',
+              border: isDark ? '1px solid rgba(255,255,255,0.05)' : '1px solid rgba(0,0,0,0.04)'
+            },
+            "&.MuiButton-outlined:hover": {
+              backgroundColor: isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.12)',
+              border: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)'
+            }
+          },
         }
       },
       MuiTextField: {

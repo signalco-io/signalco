@@ -1,4 +1,4 @@
-import { Box, LinearProgress, Stack } from "@mui/material";
+import { Box, Button, LinearProgress, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
@@ -8,6 +8,7 @@ import DashboardsUpdateChecker from "./DashboardsUpdateChecker";
 import DashboardView from "./DashboardView";
 import DashboardSelector from "./DashboardSelector";
 import DashboardSettings from "./DashboardSettings";
+import { LoadingButton } from "@mui/lab";
 
 const Dashboards = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -37,8 +38,33 @@ const Dashboards = () => {
         }
     }, [selectedId]);
 
-    const handleEditWidgets = () => {
-        setIsEditing(true);
+    const [isSavingEdit, setIsSavingEdit] = useState(false);
+    const handleEditDone = async () => {
+        try {
+            setIsSavingEdit(true);
+            const updatedDashboards = [];
+            for (let i = 0; i < DashboardsRepository.dashboards.length; i++) {
+                const dashboard = DashboardsRepository.dashboards[i];
+                updatedDashboards.push({
+                    ...dashboard,
+                    configurationSerialized: JSON.stringify({
+                        widgets: dashboard.widgets
+                    })
+                });
+            }
+            console.debug("Saving dashboards...", updatedDashboards);
+            await DashboardsRepository.saveDashboardsAsync(updatedDashboards);
+        } catch (err) {
+            console.error('Failed to save dashboards', err);
+            PageNotificationService.show('There was an error while saving dashboards. Please try again or refresh the page.', "error");
+        } finally {
+            setIsEditing(false);
+            setIsSavingEdit(false);
+        }
+    };
+
+    const handleAddWidget = async () => {
+
     };
 
     console.debug("Rendering Dashboards");
@@ -46,16 +72,24 @@ const Dashboards = () => {
     return (
         <>
             <DashboardsUpdateChecker />
-            <Stack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
-                <div>
+            <Stack spacing={{ xs: 1, sm: 2 }} sx={{ pt: { xs: 0, sm: 2 } }}>
+                <Stack spacing={1} direction={{ xs: "column-reverse", md: "row" }} justifyContent="space-between" alignItems="stretch">
                     <DashboardSelector
                         onSelection={setSelectedId}
-                        onEditWidgets={handleEditWidgets}
+                        onEditWidgets={() => setIsEditing(true)}
                         onSettings={() => setIsDashboardSettingsOpen(true)} />
-                </div>
+                    {isEditing && (
+                        <Box sx={{ px: 2, width: { md: "auto", xs: '100%' } }}>
+                            <Stack direction="row" spacing={1}>
+                                <Button variant="outlined" size="large" onClick={handleAddWidget} sx={{ width: '250px' }}>Add widget...</Button>
+                                <LoadingButton loading={isSavingEdit} variant="outlined" size="large" onClick={handleEditDone} fullWidth>Done editing</LoadingButton>
+                            </Stack>
+                        </Box>
+                    )}
+                </Stack>
                 {isLoading ?
                     <LinearProgress /> : (
-                        <Box sx={{ px: { xs: 2, sm: 0 } }}>
+                        <Box sx={{ px: 2 }}>
                             {selectedDashboard ?
                                 <DashboardView
                                     dashboard={selectedDashboard}
