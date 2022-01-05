@@ -57,7 +57,7 @@
     "cross-env": "7.0.3",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.7",
-    "prop-types": "15.8.0",
+    "prop-types": "15.8.1",
     "rimraf": "3.0.2",
     "sass": "1.45.2",
     "typescript": "4.5.4",
