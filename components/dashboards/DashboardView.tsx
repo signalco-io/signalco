@@ -9,6 +9,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { snapCenterToCursor } from "@dnd-kit/modifiers";
 import { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
 import { observer } from "mobx-react-lite";
+import { runInAction } from "mobx";
 
 interface IDragableWidgetProps extends IWidgetProps {
     id: string
@@ -52,7 +53,6 @@ function DragableWidget(props: IDragableWidgetProps) {
 function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean }) {
     const { dashboard, isEditing } = props;
     const [numberOfColumns, setNumberOfColumns] = useState(4);
-    const [widgetsOrder, setWidgetsOrder] = useState(dashboard.widgets.map(w => w.id));
 
     const widgetSpacing = 1;
     const widgetSize = 78 + widgetSpacing * 8;
@@ -60,9 +60,8 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean }
     const windowWidth = useWindowWidth();
     const dashbaordPadding = 48 + navWidth;
 
-    useEffect(() => {
-        setWidgetsOrder(dashboard.widgets.map(w => w.id));
-    }, [dashboard]);
+    const widgetsOrder = dashboard.widgets.slice().sort((a, b) => a.order - b.order).map(w => w.id);
+    const widgets = widgetsOrder.map(wo => dashboard.widgets.find(w => wo === w.id)!);
 
     useEffect(() => {
         // When width is less than 400, set to quad column
@@ -99,11 +98,15 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean }
         const { active, over } = event;
 
         if (over && active.id !== over.id) {
-            setWidgetsOrder((items) => {
-                const oldIndex = items.indexOf(active.id);
-                const newIndex = items.indexOf(over.id);
-                return arrayMove(items, oldIndex, newIndex);
-            });
+            const oldIndex = widgetsOrder.indexOf(active.id);
+            const newIndex = widgetsOrder.indexOf(over.id);
+            const newOrderedWidgets = arrayMove(widgets, oldIndex, newIndex);;
+            for (let i = 0; i < newOrderedWidgets.length; i++) {
+                runInAction(() => {
+                    newOrderedWidgets[i].order = i;
+                })
+            }
+            console.log('new ordered widgets', newOrderedWidgets)
         }
     }
 
@@ -122,11 +125,7 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean }
                 onDragEnd={handleDragEnd}
                 onDragCancel={handleDragEnd}>
                 <SortableContext items={widgetsOrder} strategy={undefined}>
-                    {dashboard.widgets.slice().sort((a, b) => {
-                        const oldIndex = widgetsOrder.indexOf(a.id);
-                        const newIndex = widgetsOrder.indexOf(b.id);
-                        return oldIndex - newIndex;
-                    }).map((widget) => (
+                    {widgets.map((widget) => (
                         <DragableWidget
                             id={widget.id}
                             key={`widget-${widget.id.toString()}`}
