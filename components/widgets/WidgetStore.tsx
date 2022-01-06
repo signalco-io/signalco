@@ -1,10 +1,9 @@
 import { CardHeader, Grid, Stack, Box, Card, Typography, CardActions, CardMedia, CardContent, IconButton, TextField, Divider } from "@mui/material";
-import React, { useContext } from "react";
+import React from "react";
 import Image from 'next/image';
 import useSearch, { filterFuncObjectStringProps } from "../../src/hooks/useSearch";
 import { AddOutlined } from "@mui/icons-material";
 import { widgetType } from "./Widget";
-import { AppContext } from "../../pages/_app";
 
 const availableWidgets = [
     {
