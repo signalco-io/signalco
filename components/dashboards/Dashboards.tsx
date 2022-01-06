@@ -2,13 +2,15 @@ import { Box, Button, LinearProgress, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
-import DashboardsRepository, { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
+import DashboardsRepository, { IDashboardModel, WidgetModel } from "../../src/dashboards/DashboardsRepository";
 import PageNotificationService from "../../src/notifications/PageNotificationService";
 import DashboardsUpdateChecker from "./DashboardsUpdateChecker";
 import DashboardView from "./DashboardView";
 import DashboardSelector from "./DashboardSelector";
 import DashboardSettings from "./DashboardSettings";
 import { LoadingButton } from "@mui/lab";
+import WidgetStore from "../widgets/WidgetStore";
+import { widgetType } from "../widgets/Widget";
 
 const Dashboards = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -63,8 +65,10 @@ const Dashboards = () => {
         }
     };
 
-    const handleAddWidget = async () => {
-
+    const [showWidgetStore, setShowWidgetStore] = useState(false);
+    const handleAddWidget = (widgetType: widgetType) => {
+        selectedDashboard?.widgets.push(new WidgetModel('new-widget', selectedDashboard.widgets.length, widgetType));
+        setShowWidgetStore(false);
     };
 
     console.debug("Rendering Dashboards");
@@ -81,7 +85,7 @@ const Dashboards = () => {
                     {isEditing && (
                         <Box sx={{ px: 2, width: { md: "auto", xs: '100%' } }}>
                             <Stack direction="row" spacing={1}>
-                                <Button variant="outlined" size="large" onClick={handleAddWidget} sx={{ width: '250px' }}>Add widget...</Button>
+                                <Button variant="outlined" size="large" onClick={() => setShowWidgetStore(true)} sx={{ width: '250px' }}>Add widget...</Button>
                                 <LoadingButton loading={isSavingEdit} variant="outlined" size="large" onClick={handleEditDone} fullWidth>Done editing</LoadingButton>
                             </Stack>
                         </Box>
@@ -106,6 +110,9 @@ const Dashboards = () => {
                 dashboard={selectedDashboard}
                 isOpen={isDashboardSettingsOpen}
                 onClose={() => setIsDashboardSettingsOpen(false)} />
+            {showWidgetStore && (
+                <WidgetStore onAddWidget={handleAddWidget} />
+            )}
         </>
     );
 };

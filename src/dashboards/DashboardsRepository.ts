@@ -20,6 +20,25 @@ export interface IWidget {
     setConfig: (newConfig: object | undefined) => void
 }
 
+export class WidgetModel implements IWidget {
+    id: string;
+    order: number;
+    type: widgetType;
+    config?: object | undefined;
+
+    constructor(id: string, order: number, type: widgetType, config?: object | undefined) {
+        this.id = id;
+        this.order = order;
+        this.type = type;
+        this.config = config;
+        makeAutoObservable(this);
+    }
+
+    setConfig(newConfig: object | undefined) {
+        this.config = newConfig;
+    }
+}
+
 export interface IDashboardModel {
     configurationSerialized?: string;
     name: string;
@@ -315,9 +334,14 @@ export default class DashboardsRepository {
                 d.timeStamp = d.timeStamp ? (typeof d.timeStamp === 'string' ? new Date(d.timeStamp) : d.timeStamp) : undefined;
                 d.isFavorite = favorites.indexOf(d.id) >= 0;
                 d.widgets = (typeof d.configurationSerialized !== 'undefined' && d.configurationSerialized != null
-                        ? ((JSON.parse(d.configurationSerialized).widgets ?? []) as Array<IWidget>).map(i => makeAutoObservable(i))
+                        ? ((JSON.parse(d.configurationSerialized).widgets ?? []) as Array<IWidget>).map(i => {
+                            return new WidgetModel(i.id, i.order, i.type, i.config);
+                        })
                         : [])
-                    .map((w, i) => ({ ...w, id: i.toString() }));
+                    .map((w, i) => {
+                        w.id = i.toString();
+                        return w;
+                    });
 
                 // Apply widget order
                 let maxOrder = 0;
