@@ -48,7 +48,6 @@ const availableWidgets = [
 const WidgetStore = (props: { onAddWidget: (widgetType: widgetType) => void }) => {
     const [filteredAvailableWidgetsItems, showAvailableWidgetsSearch, searchAvailableWidgetsText, handleSearchAvailableWidgetsTextChange] =
         useSearch(availableWidgets, filterFuncObjectStringProps, 6);
-    const context = useContext(AppContext);
 
     return (
         <Stack spacing={2}>
