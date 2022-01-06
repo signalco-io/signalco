@@ -1,9 +1,10 @@
-import { CardHeader, Grid, Stack, Box, Card, Typography, CardActions, CardMedia, CardContent, IconButton, TextField } from "@mui/material";
-import React from "react";
+import { CardHeader, Grid, Stack, Box, Card, Typography, CardActions, CardMedia, CardContent, IconButton, TextField, Divider } from "@mui/material";
+import React, { useContext } from "react";
 import Image from 'next/image';
 import useSearch, { filterFuncObjectStringProps } from "../../src/hooks/useSearch";
 import { AddOutlined } from "@mui/icons-material";
 import { widgetType } from "./Widget";
+import { AppContext } from "../../pages/_app";
 
 const availableWidgets = [
     {
@@ -47,6 +48,7 @@ const availableWidgets = [
 const WidgetStore = (props: { onAddWidget: (widgetType: widgetType) => void }) => {
     const [filteredAvailableWidgetsItems, showAvailableWidgetsSearch, searchAvailableWidgetsText, handleSearchAvailableWidgetsTextChange] =
         useSearch(availableWidgets, filterFuncObjectStringProps, 6);
+    const context = useContext(AppContext);
 
     return (
         <Stack spacing={2}>
@@ -58,7 +60,7 @@ const WidgetStore = (props: { onAddWidget: (widgetType: widgetType) => void }) =
                 <Grid container spacing={1} justifyContent="center">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (
                         <Grid item key={`${availableWidget.type}-${index}`}>
-                            <Card sx={{ minWidth: '320px' }}>
+                            <Card sx={{ minWidth: '320px' }} variant="elevation" elevation={4}>
                                 <CardHeader title={availableWidget.name} />
                                 <CardMedia>
                                     <Box sx={{ width: '100%', height: '230px', background: 'black', display: 'flex', 'justifyContent': 'center' }}>
@@ -74,7 +76,8 @@ const WidgetStore = (props: { onAddWidget: (widgetType: widgetType) => void }) =
                                         {availableWidget.description}
                                     </Typography>
                                 </CardContent>
-                                <CardActions sx={{ justifyContent: 'flex-end', background: 'rgba(0,0,0,0.6)', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+                                <Divider />
+                                <CardActions sx={{ justifyContent: 'flex-end' }}>
                                     <IconButton aria-label="Add to dashboard" onClick={() => props.onAddWidget(availableWidget.type)}>
                                         <AddOutlined />
                                     </IconButton>
