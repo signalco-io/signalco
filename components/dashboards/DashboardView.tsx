@@ -106,7 +106,6 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean }
                     newOrderedWidgets[i].order = i;
                 })
             }
-            console.log('new ordered widgets', newOrderedWidgets)
         }
     }
 

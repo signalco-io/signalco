@@ -2,7 +2,7 @@ import { IObservableArray, isObservable, makeAutoObservable, observable, runInAc
 import { widgetType } from "../../components/widgets/Widget";
 import { IUser, SignalUserDto } from "../devices/Device";
 import EntityRepository from "../entity/EntityRepository";
-import { orderBy, sequenceEqual } from "../helpers/ArrayHelpers";
+import { arrayMax, orderBy, sequenceEqual } from "../helpers/ArrayHelpers";
 import HttpService from "../services/HttpService";
 import LocalStorageService from "../services/LocalStorageService";
 
@@ -47,6 +47,7 @@ export interface IDashboardModel {
     isFavorite: boolean;
     widgets: IWidget[];
     sharedWith: IUser[];
+    order: number;
 }
 
 class DashboardModel implements IDashboardModel {
@@ -57,8 +58,9 @@ class DashboardModel implements IDashboardModel {
     isFavorite: boolean;
     widgets: IWidget[];
     sharedWith: IUser[];
+    order: number;
 
-    constructor(id: string, name: string, configurationSerialized: string | undefined, sharedWith: IUser[], timeStamp: Date | undefined) {
+    constructor(id: string, name: string, configurationSerialized: string | undefined, sharedWith: IUser[], timeStamp: Date | undefined, order: number) {
         this.id = id;
         this.name = name;
         this.configurationSerialized = configurationSerialized;
@@ -66,6 +68,7 @@ class DashboardModel implements IDashboardModel {
         this.isFavorite = false;
         this.widgets = [];
         this.sharedWith = sharedWith;
+        this.order = order;
 
         makeAutoObservable(this);
     }
@@ -109,7 +112,7 @@ class SignalDashboardDto {
     sharedWith?: SignalUserDto[];
     timeStamp?: string;
 
-    static FromDto(dto: SignalDashboardDto): IDashboardModel {
+    static FromDto(dto: SignalDashboardDto, order: number): IDashboardModel {
         if (dto.id == null || dto.name == null) {
             throw Error("Invalid SignalDashboardDto - missing required properties.");
         }
@@ -119,7 +122,8 @@ class SignalDashboardDto {
             dto.name,
             dto.configurationSerialized,
             dto.sharedWith?.map(SignalUserDto.FromDto) ?? [],
-            dto.timeStamp ? new Date(dto.timeStamp + "Z") : undefined);
+            dto.timeStamp ? new Date(dto.timeStamp + "Z") : undefined,
+            order);
 
         dashboard.widgets = (typeof dashboard.configurationSerialized !== 'undefined' && dashboard.configurationSerialized != null
                 ? ((JSON.parse(dashboard.configurationSerialized).widgets ?? []) as Array<IWidget>).map(i => makeAutoObservable(i))
@@ -142,6 +146,7 @@ class SignalDashboardDto {
 }
 
 const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';
+const DashboardsOrderLocalStorageKey = 'dashboards-order';
 
 export default class DashboardsRepository {
     private static _dashboardsCache: IObservableArray<IDashboardModel> = observable.array([]);
@@ -186,6 +191,10 @@ export default class DashboardsRepository {
         if (favoritedDashboard) {
             favoritedDashboard.isFavorite = newIsFavorite;
         }
+    }
+
+    static async dashboardsOrderSetAsync(ordered: string[]) {
+        LocalStorageService.setItem(DashboardsOrderLocalStorageKey, ordered);
     }
 
     static async saveDashboardsAsync(dashboards: IDashboardSetModel[]) {
@@ -329,8 +338,14 @@ export default class DashboardsRepository {
 
     private static async _mapAndApplyDashboards(dashboards: IDashboardModel[]) {
         const favorites = LocalStorageService.getItem<string[]>(DashboardsFavoritesLocalStorageKey, []);
+        const dashboardsOrder = LocalStorageService.getItem<string[]>(DashboardsOrderLocalStorageKey, [])
         runInAction(() => {
-            DashboardsRepository._dashboardsCache.replace(dashboards.map(d => {
+            DashboardsRepository._dashboardsCache.replace(dashboards.map((d, di) => {
+                d.order = dashboardsOrder.indexOf(d.id);
+                if (d.order < 0) {
+                    d.order = Math.max(arrayMax(dashboards, d => d.order), di) + 1;
+                }
+
                 d.timeStamp = d.timeStamp ? (typeof d.timeStamp === 'string' ? new Date(d.timeStamp) : d.timeStamp) : undefined;
                 d.isFavorite = favorites.indexOf(d.id) >= 0;
                 d.widgets = (typeof d.configurationSerialized !== 'undefined' && d.configurationSerialized != null
