@@ -9,3 +9,33 @@ export const orderBy = <T>(array: T[], compareFn?: (a: T, b: T) => number) => {
     copy.sort(compareFn);
     return copy;
 }
+
+export const arrayMax = <T>(array: T[], compareFn: (i: T) => number) => {
+    if (!Array.isArray(array))
+        throw new Error('Not an array: ' + typeof array);
+
+    let currentMax = compareFn(array[0]);
+    for (let i = 1; i < array.length; i++) {
+        const curr = compareFn(array[i]);
+        if (curr > currentMax) {
+            currentMax = curr;
+        }
+    }
+
+    return currentMax;
+}
+
+export const sequenceEqual = <TA, TB>(arrayA: TA[], arrayB: TB[], compareFn: (a: TA, b: TB) => boolean) => {
+    if (!arrayA || !arrayB) return false;
+    if (arrayA.length !== arrayB.length) return false;
+
+    for (let i = 0; i < arrayA.length; i++) {
+        const a = arrayA[i];
+        const b = arrayB[i];
+        if (!compareFn(a, b)) {
+            return false;
+        }
+    }
+
+    return true;
+}

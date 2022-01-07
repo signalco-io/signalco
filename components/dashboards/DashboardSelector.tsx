@@ -1,6 +1,6 @@
 import { Box, Button, Popover, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { bindPopover, bindTrigger, usePopupState } from "material-ui-popup-state/hooks";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
 import { observer } from "mobx-react-lite";
@@ -20,8 +20,8 @@ function DashboardSelector(props: IDashboardSelectorProps) {
 
     const dashboards = DashboardsRepository.dashboards;
     const currentDashboard = dashboards.find(d => d.id == selectedId);
-    const currentName = useMemo(() => currentDashboard?.name, [currentDashboard]);
-    const favoriteDashboards = useMemo(() => dashboards.filter(d => d.isFavorite), [dashboards]);
+    const currentName = currentDashboard?.name;
+    const favoriteDashboards = dashboards.filter(d => d.isFavorite);
 
     // Set initial selection on component and dashboards load
     useEffect(() => {

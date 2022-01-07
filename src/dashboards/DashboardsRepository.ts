@@ -2,6 +2,7 @@ import { IObservableArray, isObservable, makeAutoObservable, observable, runInAc
 import { widgetType } from "../../components/widgets/Widget";
 import { IUser, SignalUserDto } from "../devices/Device";
 import EntityRepository from "../entity/EntityRepository";
+import { arrayMax, orderBy, sequenceEqual } from "../helpers/ArrayHelpers";
 import HttpService from "../services/HttpService";
 import LocalStorageService from "../services/LocalStorageService";
 
@@ -13,9 +14,29 @@ export interface IDashboardSetModel {
 
 export interface IWidget {
     id: string,
+    order: number,
     type: widgetType,
     config?: object,
     setConfig: (newConfig: object | undefined) => void
+}
+
+export class WidgetModel implements IWidget {
+    id: string;
+    order: number;
+    type: widgetType;
+    config?: object | undefined;
+
+    constructor(id: string, order: number, type: widgetType, config?: object | undefined) {
+        this.id = id;
+        this.order = order;
+        this.type = type;
+        this.config = config;
+        makeAutoObservable(this);
+    }
+
+    setConfig(newConfig: object | undefined) {
+        this.config = newConfig;
+    }
 }
 
 export interface IDashboardModel {
@@ -26,6 +47,7 @@ export interface IDashboardModel {
     isFavorite: boolean;
     widgets: IWidget[];
     sharedWith: IUser[];
+    order: number;
 }
 
 class DashboardModel implements IDashboardModel {
@@ -36,8 +58,9 @@ class DashboardModel implements IDashboardModel {
     isFavorite: boolean;
     widgets: IWidget[];
     sharedWith: IUser[];
+    order: number;
 
-    constructor(id: string, name: string, configurationSerialized: string | undefined, sharedWith: IUser[], timeStamp: Date | undefined) {
+    constructor(id: string, name: string, configurationSerialized: string | undefined, sharedWith: IUser[], timeStamp: Date | undefined, order: number) {
         this.id = id;
         this.name = name;
         this.configurationSerialized = configurationSerialized;
@@ -45,6 +68,7 @@ class DashboardModel implements IDashboardModel {
         this.isFavorite = false;
         this.widgets = [];
         this.sharedWith = sharedWith;
+        this.order = order;
 
         makeAutoObservable(this);
     }
@@ -88,21 +112,41 @@ class SignalDashboardDto {
     sharedWith?: SignalUserDto[];
     timeStamp?: string;
 
-    static FromDto(dto: SignalDashboardDto): IDashboardModel {
+    static FromDto(dto: SignalDashboardDto, order: number): IDashboardModel {
         if (dto.id == null || dto.name == null) {
             throw Error("Invalid SignalDashboardDto - missing required properties.");
         }
 
-        return new DashboardModel(
+        const dashboard = new DashboardModel(
             dto.id,
             dto.name,
             dto.configurationSerialized,
             dto.sharedWith?.map(SignalUserDto.FromDto) ?? [],
-            dto.timeStamp ? new Date(dto.timeStamp + "Z") : undefined);
+            dto.timeStamp ? new Date(dto.timeStamp + "Z") : undefined,
+            order);
+
+        dashboard.widgets = (typeof dashboard.configurationSerialized !== 'undefined' && dashboard.configurationSerialized != null
+                ? ((JSON.parse(dashboard.configurationSerialized).widgets ?? []) as Array<IWidget>).map(i => makeAutoObservable(i))
+                : [])
+            .map((w, i) => ({ ...w, id: i.toString() }));
+
+        // Apply widget order
+        let maxOrder = 0;
+        for (let i = 0; i < dashboard.widgets.length; i++) {
+            const w = dashboard.widgets[i];
+            maxOrder = Math.max(maxOrder, w.order);
+            if (typeof w.order === 'undefined'){
+                console.debug('Widget has no order, applying default...');
+                w.order = i;
+            }
+        }
+
+        return dashboard;
     }
 }
 
 const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';
+const DashboardsOrderLocalStorageKey = 'dashboards-order';
 
 export default class DashboardsRepository {
     private static _dashboardsCache: IObservableArray<IDashboardModel> = observable.array([]);
@@ -143,10 +187,23 @@ export default class DashboardsRepository {
         }
 
         // Mark favorite locally
-        const favoritedDashboard = DashboardsRepository._dashboardsCache.find(d => d.id === id);
+        const favoritedDashboard = DashboardsRepository.dashboards.find(d => d.id === id);
         if (favoritedDashboard) {
-            favoritedDashboard.isFavorite = newIsFavorite;
+            runInAction(() => {
+                favoritedDashboard.isFavorite = newIsFavorite;
+            });
         }
+    }
+
+    static async dashboardsOrderSetAsync(ordered: string[]) {
+        LocalStorageService.setItem(DashboardsOrderLocalStorageKey, ordered);
+    }
+
+    static async saveDashboardsAsync(dashboards: IDashboardSetModel[]) {
+        for (let i = 0; i < dashboards.length; i++) {
+            await DashboardsRepository._setRemoteDashboardAsync(dashboards[i]);
+        }
+        await DashboardsRepository._applyRemoteDashboardsAsync();
     }
 
     static async saveDashboardAsync(dashboard: IDashboardSetModel) {
@@ -220,16 +277,38 @@ export default class DashboardsRepository {
 
         const remoteDashboards = await DashboardsRepository._getRemoteDahboardsAsync();
 
+        const widgetEquals = (a: IWidget, b: IWidget) => {
+            const isEqual = a.order === b.order &&
+                a.id === b.id &&
+                JSON.stringify(a.config) === JSON.stringify(b.config) &&
+                a.type === b.type;
+            if (!isEqual)
+                console.log(isEqual, a, b);
+            return isEqual;
+        };
+
+        const userOrder = (a: IUser, b: IUser) => a.id < b.id ? -1 : (a.id > b.id ? 1 : 0);
+        const userEquals = (a: IUser, b: IUser) => a.id === b.id;
+
         // Check added or updated dashboards
         remoteDashboards.forEach(remoteDashboard => {
             const localDashboard = DashboardsRepository._dashboardsCache.find(d => d.id == remoteDashboard.id);
+            const sharedEqual = localDashboard != null && sequenceEqual(orderBy(remoteDashboard.sharedWith, userOrder), orderBy(localDashboard.sharedWith, userOrder), userEquals);
+            const widgetsEqual = localDashboard != null && sequenceEqual(remoteDashboard.widgets, localDashboard.widgets, widgetEquals);
             if (localDashboard == null ||
                 remoteDashboard.timeStamp == null ||
                 localDashboard.timeStamp == null ||
-                remoteDashboard.sharedWith.map(u => u.id).filter(i => !(localDashboard.sharedWith?.map(u => u.id).includes(i) ?? false)).length !== 0 ||
+                !sharedEqual ||
+                !widgetsEqual ||
                 localDashboard.timeStamp < remoteDashboard.timeStamp) {
                 DashboardsRepository.isUpdateAvailable = true;
-                console.debug("Dashboard update available. Dashboard: ", remoteDashboard.name, localDashboard?.timeStamp, "<", remoteDashboard.timeStamp)
+
+                // Log difference
+                const dashboardId = (localDashboard || remoteDashboard).id;
+                console.info("Dashboard update available.", dashboardId);
+                console.debug("shareEqual", sharedEqual, dashboardId);
+                console.debug("widgetsEqual", widgetsEqual, dashboardId);
+                console.debug("timeStamp", localDashboard?.timeStamp, '<', remoteDashboard.timeStamp, dashboardId);
             }
         });
 
@@ -261,15 +340,40 @@ export default class DashboardsRepository {
 
     private static async _mapAndApplyDashboards(dashboards: IDashboardModel[]) {
         const favorites = LocalStorageService.getItem<string[]>(DashboardsFavoritesLocalStorageKey, []);
-        DashboardsRepository._dashboardsCache.replace(dashboards.map(d => {
-            d.timeStamp = d.timeStamp ? (typeof d.timeStamp === 'string' ? new Date(d.timeStamp) : d.timeStamp) : undefined;
-            d.isFavorite = favorites.indexOf(d.id) >= 0;
-            d.widgets = (typeof d.configurationSerialized !== 'undefined' && d.configurationSerialized != null
-                    ? JSON.parse(d.configurationSerialized).widgets as Array<IWidget>
-                    : [])
-                .map((w, i) => ({ ...w, id: i.toString() }));
-            return isObservable(d) ? d : makeAutoObservable(d);
-        }));
+        const dashboardsOrder = LocalStorageService.getItem<string[]>(DashboardsOrderLocalStorageKey, [])
+        runInAction(() => {
+            DashboardsRepository._dashboardsCache.replace(dashboards.map((d, di) => {
+                d.order = dashboardsOrder.indexOf(d.id);
+                if (d.order < 0) {
+                    d.order = Math.max(arrayMax(dashboards, d => d.order), di) + 1;
+                }
+
+                d.timeStamp = d.timeStamp ? (typeof d.timeStamp === 'string' ? new Date(d.timeStamp) : d.timeStamp) : undefined;
+                d.isFavorite = favorites.indexOf(d.id) >= 0;
+                d.widgets = (typeof d.configurationSerialized !== 'undefined' && d.configurationSerialized != null
+                        ? ((JSON.parse(d.configurationSerialized).widgets ?? []) as Array<IWidget>).map(i => {
+                            return new WidgetModel(i.id, i.order, i.type, i.config);
+                        })
+                        : [])
+                    .map((w, i) => {
+                        w.id = i.toString();
+                        return w;
+                    });
+
+                // Apply widget order
+                let maxOrder = 0;
+                for (let i = 0; i < d.widgets.length; i++) {
+                    const w = d.widgets[i];
+                    maxOrder = Math.max(maxOrder, w.order);
+                    if (typeof w.order === 'undefined'){
+                        console.debug('Widget has no order, applying default...');
+                        w.order = i;
+                    }
+                }
+
+                return isObservable(d) ? d : makeAutoObservable(d);
+            }));
+        });
     }
 
     private static async _setRemoteDashboardAsync(dashboard: IDashboardSetModel): Promise<string> {
