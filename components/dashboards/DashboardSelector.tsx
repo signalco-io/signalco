@@ -20,8 +20,8 @@ function DashboardSelector(props: IDashboardSelectorProps) {
 
     const dashboards = DashboardsRepository.dashboards;
     const currentDashboard = dashboards.find(d => d.id == selectedId);
-    const currentName = useMemo(() => currentDashboard?.name, [currentDashboard]);
-    const favoriteDashboards = useMemo(() => dashboards.filter(d => d.isFavorite), [dashboards]);
+    const currentName = currentDashboard?.name;
+    const favoriteDashboards = dashboards.filter(d => d.isFavorite);
 
     // Set initial selection on component and dashboards load
     useEffect(() => {

@@ -187,9 +187,11 @@ export default class DashboardsRepository {
         }
 
         // Mark favorite locally
-        const favoritedDashboard = DashboardsRepository._dashboardsCache.find(d => d.id === id);
+        const favoritedDashboard = DashboardsRepository.dashboards.find(d => d.id === id);
         if (favoritedDashboard) {
-            favoritedDashboard.isFavorite = newIsFavorite;
+            runInAction(() => {
+                favoritedDashboard.isFavorite = newIsFavorite;
+            });
         }
     }
 

@@ -9,8 +9,8 @@ import { observer } from "mobx-react-lite";
 import useHashParam from "../../src/hooks/useHashParam";
 import ShareEntityChip from "../entity/ShareEntityChip";
 import { CSS } from '@dnd-kit/utilities';
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
-import { arrayMove, SortableContext, useSortable } from "@dnd-kit/sortable";
+import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
 import { runInAction } from "mobx";
 
 interface IDashboardSelectorMenuProps {
@@ -28,7 +28,7 @@ interface IDashboardSortableItemProps {
     onFavorite: (id: string) => void;
 }
 
-function DashboardSortableItem(props: IDashboardSortableItemProps) {
+const DashboardSortableItem = observer((props: IDashboardSortableItemProps) => {
     const {
         attributes,
         listeners,
@@ -60,7 +60,7 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
             </Stack>
         </div>
     );
-}
+});
 
 function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const { selectedId, popupState, onSelection, onEditWidgets, onSettings } = props;
@@ -86,7 +86,8 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     });
 
     const handleToggleFavorite = async (id: string) => {
-        const dashboard = DashboardsRepository.dashboards.find(d => d.id === id);
+        const dashboard = dashboards.find(d => d.id === id);
+        console.log('toggling favorite', dashboard, dashboard?.isFavorite)
         if (dashboard) {
             await DashboardsRepository.favoriteSetAsync(dashboard.id, !dashboard.isFavorite);
         }
@@ -111,12 +112,31 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
         }
     }
 
+    const sensors = useSensors(
+        useSensor(MouseSensor, {
+            // Require the mouse to move by 10 pixels before activating
+            activationConstraint: {
+                distance: 10,
+            },
+        }),
+        useSensor(TouchSensor, {
+            // Press delay of 250ms, with tolerance of 5px of movement
+            activationConstraint: {
+                delay: 250,
+                tolerance: 5,
+            },
+        }),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
+    );
+
     console.debug('Rendering DashboardSelectorMenu')
 
     return (
         <Stack sx={{ minWidth: 330 }}>
             <Stack sx={{ maxHeight: '50vh', overflow: 'auto' }}>
-                <DndContext onDragEnd={handleDragEnd}>
+                <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
                     <SortableContext items={orderedDashboardIds}>
                         {orderedDashboards.map((d) => (
                             <DashboardSortableItem
