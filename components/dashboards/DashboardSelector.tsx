@@ -1,6 +1,6 @@
 import { Box, Button, Popover, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { bindPopover, bindTrigger, usePopupState } from "material-ui-popup-state/hooks";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
 import { observer } from "mobx-react-lite";
