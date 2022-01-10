@@ -28,7 +28,7 @@
     "axios": "0.24.0",
     "clsx": "1.1.1",
     "compare-versions": "4.1.2",
-    "d3": "7.2.1",
+    "d3": "7.3.0",
     "material-ui-popup-state": "2.0.0",
     "mobx": "6.3.12",
     "mobx-react-lite": "3.2.3",
