@@ -10,13 +10,25 @@ export const orderBy = <T>(array: T[], compareFn?: (a: T, b: T) => number) => {
     return copy;
 }
 
-export const arrayMax = <T>(array: T[], compareFn: (i: T) => number) => {
+export const arraySum = <T>(array: T[], selectorFunc: (i: T, index: number) => number) => {
+    if (!Array.isArray(array))
+    throw new Error('Not an array: ' + typeof array);
+
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+        sum += selectorFunc(array[i], i);
+    }
+
+    return sum;
+}
+
+export const arrayMax = <T>(array: T[], compareFn: (i: T, index: number) => number) => {
     if (!Array.isArray(array))
         throw new Error('Not an array: ' + typeof array);
 
-    let currentMax = compareFn(array[0]);
+    let currentMax = compareFn(array[0], 0);
     for (let i = 1; i < array.length; i++) {
-        const curr = compareFn(array[i]);
+        const curr = compareFn(array[i], i);
         if (curr > currentMax) {
             currentMax = curr;
         }

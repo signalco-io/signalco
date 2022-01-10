@@ -20,11 +20,12 @@ import useDevice from '../../../src/hooks/useDevice';
 import useHashParam from '../../../src/hooks/useHashParam';
 import EditableInput from '../../../components/shared/form/EditableInput';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
-import { Area, AreaChart, XAxis, YAxis } from 'recharts';
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from 'recharts';
 import { useTheme } from '@mui/system';
 import { scaleTime, timeHour } from 'd3';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import { IHistoricalValue } from '../../../src/entity/IHistoricalValue';
+import { arraySum } from '../../../src/helpers/ArrayHelpers';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -199,6 +200,111 @@ function historicalValueToTableItem(value: IHistoricalValue): IAutoTableItem {
 //     return null;
 // };
 
+const renderCustomizedTimeLineLabel = (props) => {
+    const { x, y, width, value } = props;
+    const radius = 10;
+
+    if (width > 10) {
+        return (
+            <g>
+                <text
+                    x={x + width / 2}
+                    y={y + radius}
+                    fill="#fff"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                >
+                    {value?.toString().toUpperCase()[0]}
+                </text>
+            </g>
+        );
+    }
+    return null;
+};
+
+const GraphTimeLine = (props: IGraphProps) => {
+    const { data } = props;
+
+    const theme = useTheme();
+    const width = 600;
+    const height = 70;
+    const durationMs = 24 * 60 * 60 * 1000;
+
+    const now = new Date();
+    const past = new Date();
+    past.setTime(now.getTime() - durationMs);
+    const domainGraph = scaleTime().domain([past, now]);
+    const ticksHours = timeHour.every(1)!;
+    // const ticks = domainGraph.ticks(ticksHours).map(i => i.toString());
+    // const ticks = domainGraph.ticks(ticksHours).map(i => `${i.getHours()}:${i.getMinutes()}`);
+    const ticks = domainGraph.ticks(ticksHours).map((t, i) => t.getHours().toString());
+
+    const reversedData = [...data].reverse();
+
+    const transformedItems = [];
+    const transformedDataItem = {};
+    transformedDataItem[`t0`] = domainGraph(new Date(reversedData[0].id).getTime()) - domainGraph(domainGraph.ticks(ticksHours)![0].getTime());
+    transformedDataItem[`v0`] = transformedDataItem[`v0`] = reversedData[0].value === 'true' ? 'false' : 'true';;
+
+    for (let i = 1; i < reversedData.length - 1; i++) {
+        const currentElement = reversedData[i];
+        const previousElement = reversedData[i - 1];
+        transformedDataItem[`t${i}`] = domainGraph(new Date(currentElement.id).getTime()) - domainGraph(new Date(previousElement.id).getTime());
+        transformedDataItem[`v${i}`] = previousElement.value;
+    }
+
+    transformedDataItem[`t${reversedData.length - 1}`] = domainGraph(now.getTime()) - domainGraph(new Date(reversedData[reversedData.length - 1].id).getTime());
+    transformedDataItem[`v${reversedData.length - 1}`] = reversedData[reversedData.length - 1].value;
+    transformedItems.push(transformedDataItem);
+
+    let sum = arraySum(reversedData, (item, i) => transformedDataItem[`t${i}`]);
+
+    console.log(domainGraph(domainGraph.ticks(ticksHours)!.at(-1)!.getTime()), domainGraph.ticks(ticksHours)!.at(-1))
+    console.log(domainGraph(new Date(reversedData[reversedData.length - 1].id).getTime()), reversedData[reversedData.length - 1].id)
+
+    console.log('invert', domainGraph.invert(sum));
+    console.log('sum', sum);
+
+    console.log('ticks', ticks);
+    console.log('data', transformedDataItem);
+
+    return (
+        <BarChart
+            width={width}
+            height={height}
+            data={transformedItems}
+            layout="vertical"
+            barSize={20}
+            maxBarSize={20}
+            barGap={0}
+        >
+            <CartesianGrid />
+            <XAxis type="number" axisLine={false} interval="preserveStartEnd" tickSize={3} tickFormatter={(v, i) => {
+                var date = domainGraph.invert(v);
+                return `${date.getHours()}:${date.getMinutes()}`
+            }} />
+            <YAxis type="category" domain={[0]} hide />
+            {reversedData.map((di, i) => {
+                return (
+                    <Bar
+                        key={`t${i}`}
+                        dataKey={`t${i}`}
+                        stackId="0"
+                        barSize={20}
+                        maxBarSize={20}
+                        fill={transformedItems[0][`v${i}`] === 'true' ? "#0392cf" : "#f37736"}
+                    >
+                        <LabelList
+                            dataKey={`v${i}`}
+                            content={renderCustomizedTimeLineLabel}
+                        />
+                    </Bar>
+                );
+            })}
+        </BarChart>
+    );
+}
+
 interface IGraphProps {
     data: any[];
 }
@@ -223,7 +329,9 @@ const Graph = (props: IGraphProps) => {
     const isBoolean = data?.length && (data[0].value === 'true' || data[0].value === 'false');
     const transformedData = data.map(d => ({ key: domainGraph(new Date(d.id).getTime()), value: isBoolean ? (d.value === 'true' ? 1 : 0) : d.value }));
 
-    console.log(transformedData);
+    if (isBoolean) {
+        return <GraphTimeLine data={data} />;
+    }
 
     return (
         <div>
