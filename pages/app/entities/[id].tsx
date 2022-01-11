@@ -1,6 +1,6 @@
 import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, CardMedia, Grid, IconButton, Paper, Skeleton, Slider, Stack, Switch, Tab, Tabs, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
@@ -20,13 +20,11 @@ import useDevice from '../../../src/hooks/useDevice';
 import useHashParam from '../../../src/hooks/useHashParam';
 import EditableInput from '../../../components/shared/form/EditableInput';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
-import { Area, AreaChart, Bar, BarChart, LabelList, XAxis, YAxis } from 'recharts';
-import { useTheme } from '@mui/system';
-import { scaleTime, timeHour } from 'd3';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import { IHistoricalValue } from '../../../src/entity/IHistoricalValue';
-import { deepOrange, lightBlue } from '@mui/material/colors';
-import { AppContext } from '../../_app';
+import dynamic from 'next/dynamic';
+
+const DynamicGraph = dynamic(() => import('../../../components/graphs/Graph'));
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -178,174 +176,13 @@ const ContactStateValueDisplay = observer((props: { state?: IDeviceContactState 
     </>
 ));
 
-function historicalValueToTableItem(value: IHistoricalValue): IAutoTableItem {
+function historicalValueToTableItem(value: IHistoricalValue) {
     return {
         id: value.timeStamp.toString(),
         time: <ReactTimeago date={value.timeStamp} />,
         value: value.valueSerialized,
     };
 }
-
-// const ChartGenericTooltip = ({ active, payload }: { active?: boolean, payload?: any }) => {
-//     if (active && payload && payload.length) {
-//         const dateTime = graph.domain.invert(payload[0].payload.timeStamp) as Date;
-//         return (
-//             <Paper sx={{ p: 2, px: 3, maxWidth: '180px' }} variant="outlined">
-//                 <Typography>{`${payload[0].value}${config.units || ''}`}</Typography>
-//                 <ReactTimeago date={dateTime} />
-//                 <Typography variant="caption" color="textSecondary" component="div">{`${dateTime.getFullYear()}-${dateTime.getMonth().toString().padStart(2, '0')}-${dateTime.getDate().toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`}</Typography>
-//             </Paper>
-//         );
-//     }
-
-//     return null;
-// };
-
-const renderCustomizedTimeLineLabel = (props: any) => {
-    const { x, y, width, value } = props;
-    const radius = 10;
-
-    if (width > 10) {
-        return (
-            <g>
-                <text
-                    x={x + width / 2}
-                    y={y + radius}
-                    fill="#fff"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                >
-                    {value?.toString().toUpperCase()[0]}
-                </text>
-            </g>
-        );
-    }
-    return null;
-};
-
-const GraphTimeLine = (props: IGraphProps) => {
-    const { data } = props;
-    const [contactName] = useHashParam('contact');
-    const appContext = useContext(AppContext);
-
-    const width = 400;
-    const height = 60;
-    const durationMs = 24 * 60 * 60 * 1000;
-
-    const now = new Date();
-    const past = new Date();
-    past.setTime(now.getTime() - durationMs);
-    const domainGraph = scaleTime().domain([past, now]);
-
-    const reversedData = [...data].reverse();
-
-    const transformedDataItem: { [key: string]: any } = {};
-    transformedDataItem[`t0`] = domainGraph(new Date(reversedData[0].id).getTime()) - domainGraph(past.getTime());
-    transformedDataItem[`v0`] = reversedData[0].value === 'true' ? 'false' : 'true';;
-
-    for (let i = 1; i < reversedData.length; i++) {
-        const currentElement = reversedData[i];
-        const previousElement = reversedData[i - 1];
-        transformedDataItem[`t${i}`] = domainGraph(new Date(currentElement.id).getTime()) - domainGraph(new Date(previousElement.id).getTime());
-        transformedDataItem[`v${i}`] = previousElement.value;
-    }
-
-    transformedDataItem[`t${reversedData.length}`] = domainGraph(now.getTime()) - domainGraph(new Date(reversedData.at(-1).id).getTime());
-    transformedDataItem[`v${reversedData.length}`] = reversedData.at(-1).value;
-
-    return (
-        <Box p={2}>
-            <Stack direction="row" spacing={2}>
-                <Box pt="2px">
-                    <Typography>{contactName}</Typography>
-                </Box>
-                <BarChart
-                    width={width}
-                    height={height}
-                    data={[transformedDataItem]}
-                    layout="vertical"
-                    barSize={20}
-                    maxBarSize={20}
-                    barGap={0}
-                >
-                    {/* <CartesianGrid /> */}
-                    <XAxis type="number" axisLine={false} interval="preserveStartEnd" tickFormatter={(v) => {
-                        var date = domainGraph.invert(v);
-                        return `${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}`
-                    }} />
-                    <YAxis type="category" domain={[0]} hide />
-                    {new Array(reversedData.length + 1).fill(0).map((_, i) => {
-                        return (
-                            <Bar
-                                key={`t${i}`}
-                                dataKey={`t${i}`}
-                                stackId="0"
-                                barSize={20}
-                                maxBarSize={20}
-                                fill={transformedDataItem[`v${i}`] === 'true' ? lightBlue[appContext.theme === 'dark' ? 900 : 500] : deepOrange[appContext.theme === 'dark' ? 800 : 400]}
-                            >
-                                <LabelList
-                                    dataKey={`v${i}`}
-                                    content={renderCustomizedTimeLineLabel}
-                                />
-                            </Bar>
-                        );
-                    })}
-                </BarChart>
-            </Stack>
-        </Box>
-    );
-}
-
-interface IGraphProps {
-    data: any[];
-}
-
-const Graph = (props: IGraphProps) => {
-    const { data } = props;
-
-    const yKey = "value";
-    const xKey = "key";
-    const theme = useTheme();
-    const width = 400;
-    const height = 200;
-    const durationMs = 24 * 60 * 60 * 1000;
-
-    const now = new Date();
-    const past = new Date();
-    past.setTime(now.getTime() - durationMs);
-    const domainGraph = scaleTime().domain([past, now]);
-    const ticksHours = timeHour.every(1)!;
-    const ticks = domainGraph.ticks(ticksHours).map(i => i.toString());
-
-    const isBoolean = data?.length && (data[0].value === 'true' || data[0].value === 'false');
-    const transformedData = data.map(d => ({ key: domainGraph(new Date(d.id).getTime()), value: isBoolean ? (d.value === 'true' ? 1 : 0) : d.value }));
-
-    if (isBoolean) {
-        return <GraphTimeLine data={data} />;
-    }
-
-    return (
-        <div>
-            <AreaChart
-                width={width}
-                height={height}
-                data={transformedData}
-                margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
-                <XAxis domain={[0, 1]} ticks={ticks || []} hide dataKey={xKey} type="number" />
-                <YAxis domain={["auto", "auto"]} hide />
-                {/* <Tooltip content={<ChartGenericTooltip />} /> */}
-                <Area
-                    type={isBoolean ? 'step' : "basis"}
-                    dataKey={yKey}
-                    fill={theme.palette.mode === "dark" ? "#ffffff" : "#000000"}
-                    fillOpacity={0.1}
-                    stroke="#aeaeae"
-                    strokeWidth={1} />
-            </AreaChart>
-        </div>
-    );
-};
 
 const DeviceContactHistory = (props: { deviceId: string }) => {
     const [contactName] = useHashParam('contact');
@@ -388,7 +225,7 @@ const DeviceContactHistory = (props: { deviceId: string }) => {
                     <AutoTable {...stateItemsTable} />
                 </TabPanel>
                 <TabPanel value={selectedTab} index={1}>
-                    <Graph data={stateItemsTable.items} />
+                    <DynamicGraph data={stateItemsTable.items} height={200} width={400} durationMs={1 * 24 * 60 * 60 * 1000} />
                 </TabPanel>
             </CardMedia>
         </Card>

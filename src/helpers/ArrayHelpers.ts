@@ -22,6 +22,21 @@ export const arraySum = <T>(array: T[], selectorFunc: (i: T, index: number) => n
     return sum;
 }
 
+export const arrayMin = <T>(array: T[], compareFn: (i: T, index: number) => number) => {
+    if (!Array.isArray(array))
+        throw new Error('Not an array: ' + typeof array);
+
+    let currentMin = compareFn(array[0], 0);
+    for (let i = 1; i < array.length; i++) {
+        const curr = compareFn(array[i], i);
+        if (curr < currentMin) {
+            currentMin = curr;
+        }
+    }
+
+    return currentMin;
+}
+
 export const arrayMax = <T>(array: T[], compareFn: (i: T, index: number) => number) => {
     if (!Array.isArray(array))
         throw new Error('Not an array: ' + typeof array);
