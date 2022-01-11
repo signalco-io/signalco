@@ -20,11 +20,11 @@ import useDevice from '../../../src/hooks/useDevice';
 import useHashParam from '../../../src/hooks/useHashParam';
 import EditableInput from '../../../components/shared/form/EditableInput';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
-import { Area, AreaChart, XAxis, YAxis } from 'recharts';
-import { useTheme } from '@mui/system';
-import { scaleTime, timeHour } from 'd3';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import { IHistoricalValue } from '../../../src/entity/IHistoricalValue';
+import dynamic from 'next/dynamic';
+
+const DynamicGraph = dynamic(() => import('../../../components/graphs/Graph'));
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -176,76 +176,13 @@ const ContactStateValueDisplay = observer((props: { state?: IDeviceContactState 
     </>
 ));
 
-function historicalValueToTableItem(value: IHistoricalValue): IAutoTableItem {
+function historicalValueToTableItem(value: IHistoricalValue) {
     return {
         id: value.timeStamp.toString(),
         time: <ReactTimeago date={value.timeStamp} />,
         value: value.valueSerialized,
     };
 }
-
-// const ChartGenericTooltip = ({ active, payload }: { active?: boolean, payload?: any }) => {
-//     if (active && payload && payload.length) {
-//         const dateTime = graph.domain.invert(payload[0].payload.timeStamp) as Date;
-//         return (
-//             <Paper sx={{ p: 2, px: 3, maxWidth: '180px' }} variant="outlined">
-//                 <Typography>{`${payload[0].value}${config.units || ''}`}</Typography>
-//                 <ReactTimeago date={dateTime} />
-//                 <Typography variant="caption" color="textSecondary" component="div">{`${dateTime.getFullYear()}-${dateTime.getMonth().toString().padStart(2, '0')}-${dateTime.getDate().toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`}</Typography>
-//             </Paper>
-//         );
-//     }
-
-//     return null;
-// };
-
-interface IGraphProps {
-    data: any[];
-}
-
-const Graph = (props: IGraphProps) => {
-    const { data } = props;
-
-    const yKey = "value";
-    const xKey = "key";
-    const theme = useTheme();
-    const width = 400;
-    const height = 200;
-    const durationMs = 24 * 60 * 60 * 1000;
-
-    const now = new Date();
-    const past = new Date();
-    past.setTime(now.getTime() - durationMs);
-    const domainGraph = scaleTime().domain([past, now]);
-    const ticksHours = timeHour.every(1)!;
-    const ticks = domainGraph.ticks(ticksHours).map(i => i.toString());
-
-    const isBoolean = data?.length && (data[0].value === 'true' || data[0].value === 'false');
-    const transformedData = data.map(d => ({ key: domainGraph(new Date(d.id).getTime()), value: isBoolean ? (d.value === 'true' ? 1 : 0) : d.value }));
-
-    console.log(transformedData);
-
-    return (
-        <div>
-            <AreaChart
-                width={width}
-                height={height}
-                data={transformedData}
-                margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
-                <XAxis domain={[0, 1]} ticks={ticks || []} hide dataKey={xKey} type="number" />
-                <YAxis domain={["auto", "auto"]} hide />
-                {/* <Tooltip content={<ChartGenericTooltip />} /> */}
-                <Area
-                    type={isBoolean ? 'step' : "basis"}
-                    dataKey={yKey}
-                    fill={theme.palette.mode === "dark" ? "#ffffff" : "#000000"}
-                    fillOpacity={0.1}
-                    stroke="#aeaeae"
-                    strokeWidth={1} />
-            </AreaChart>
-        </div>
-    );
-};
 
 const DeviceContactHistory = (props: { deviceId: string }) => {
     const [contactName] = useHashParam('contact');
@@ -288,7 +225,7 @@ const DeviceContactHistory = (props: { deviceId: string }) => {
                     <AutoTable {...stateItemsTable} />
                 </TabPanel>
                 <TabPanel value={selectedTab} index={1}>
-                    <Graph data={stateItemsTable.items} />
+                    <DynamicGraph data={stateItemsTable.items} height={200} width={400} durationMs={1 * 24 * 60 * 60 * 1000} />
                 </TabPanel>
             </CardMedia>
         </Card>

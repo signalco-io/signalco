@@ -1,0 +1,1 @@
+export type ValueOrFuncGeneric<T> = T extends any ? (T | (() => T)) : never;
