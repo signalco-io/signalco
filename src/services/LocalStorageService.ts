@@ -1,7 +1,27 @@
 import { ValueOrFuncGeneric } from "../ValueOrFuncGeneric";
 
 class LocalStorageService {
-    getItem<T>(key: string, defaultValue?: ValueOrFuncGeneric<T>, skipDeseriaalization?: boolean): T | undefined {
+    getItem<T>(key: string, skipDeseriaalization?: boolean): T | undefined {
+        if (typeof window === 'undefined' || !window?.localStorage) {
+            return undefined;
+        }
+
+        const value = window.localStorage.getItem(key);
+        if (typeof value !== 'undefined' && value != null) {
+            try {
+                if (skipDeseriaalization) {
+                    return value as unknown as T;
+                }
+                return JSON.parse(value);
+            }
+            catch {
+                return value as unknown as T;
+            }
+        }
+        return undefined;
+    }
+
+    getItemOrDefault<T>(key: string, defaultValue: ValueOrFuncGeneric<T>, skipDeseriaalization?: boolean): T {
         if (typeof window === 'undefined' || !window?.localStorage) {
             return typeof defaultValue === 'function' ? defaultValue() : defaultValue;
         }

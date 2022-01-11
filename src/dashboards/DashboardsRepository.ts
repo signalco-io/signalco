@@ -173,7 +173,7 @@ export default class DashboardsRepository {
     }
 
     static async favoriteSetAsync(id: string, newIsFavorite: boolean) {
-        const currentFavorites = LocalStorageService.getItem<string[]>(DashboardsFavoritesLocalStorageKey, []);
+        const currentFavorites = LocalStorageService.getItemOrDefault<string[]>(DashboardsFavoritesLocalStorageKey, []);
         const currentFavoriteIndex = currentFavorites.indexOf(id);
         const isCurrentlyFavorite = currentFavoriteIndex >= 0;
 
@@ -245,7 +245,7 @@ export default class DashboardsRepository {
 
                     // Load from local storage
                     try {
-                        const localDashboards = LocalStorageService.getItem<IDashboardModel[]>('signalco-cache-dashboards', []);
+                        const localDashboards = LocalStorageService.getItemOrDefault<IDashboardModel[]>('signalco-cache-dashboards', []);
                         DashboardsRepository._mapAndApplyDashboards(localDashboards);
                         DashboardsRepository.isLoading = false;
                         DashboardsRepository.isLoaded = true;
@@ -339,13 +339,13 @@ export default class DashboardsRepository {
     }
 
     private static async _mapAndApplyDashboards(dashboards: IDashboardModel[]) {
-        const favorites = LocalStorageService.getItem<string[]>(DashboardsFavoritesLocalStorageKey, []);
-        const dashboardsOrder = LocalStorageService.getItem<string[]>(DashboardsOrderLocalStorageKey, [])
+        const favorites = LocalStorageService.getItemOrDefault<string[]>(DashboardsFavoritesLocalStorageKey, []);
+        const dashboardsOrder = LocalStorageService.getItemOrDefault<string[]>(DashboardsOrderLocalStorageKey, [])
         runInAction(() => {
             DashboardsRepository._dashboardsCache.replace(dashboards.map((d, di) => {
                 d.order = dashboardsOrder.indexOf(d.id);
                 if (d.order < 0) {
-                    d.order = Math.max(arrayMax(dashboards, d => d.order), di) + 1;
+                    d.order = Math.max(arrayMax(dashboards, d => d.order) || di, di) + 1;
                 }
 
                 d.timeStamp = d.timeStamp ? (typeof d.timeStamp === 'string' ? new Date(d.timeStamp) : d.timeStamp) : undefined;

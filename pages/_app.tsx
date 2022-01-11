@@ -50,7 +50,7 @@ export default function App(props: MyAppProps) {
   React.useEffect(() => {
     // Apply theme to document
     if (!isServerSide) {
-      const themeMode = LocalStorageService.getItem("theme", window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
+      const themeMode = LocalStorageService.getItemOrDefault("theme", window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
       document.documentElement.style.setProperty("color-scheme", themeMode);
       if (themeMode !== 'light') {
         setAppContext({ ...appContextState, theme: 'dark' });

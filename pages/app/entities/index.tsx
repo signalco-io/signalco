@@ -23,7 +23,7 @@ import useSearch, { filterFuncObjectStringProps } from "../../../src/hooks/useSe
 import useUserSetting from "../../../src/hooks/useUserSetting";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
 import DevicesRepository from "../../../src/devices/DevicesRepository";
-import AutoTable from "../../../components/shared/table/AutoTable";
+import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import ViewListIcon from '@mui/icons-material/ViewList';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 
