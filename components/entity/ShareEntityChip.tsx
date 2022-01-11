@@ -13,6 +13,7 @@ import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
 interface IShareEntityChipProps {
     entity?: { id: string, sharedWith?: IUser[] },
     entityType: number,
+    disableAction?: boolean
 }
 
 interface IShareEntityModalProps {
@@ -73,7 +74,7 @@ function ShareEntityModal(props: IShareEntityModalProps) {
 }
 
 function ShareEntityChip(props: IShareEntityChipProps) {
-    const { entity, entityType } = props;
+    const { entity, entityType, disableAction } = props;
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleChipClick = () => {
@@ -82,7 +83,7 @@ function ShareEntityChip(props: IShareEntityChipProps) {
 
     return (
         <>
-            <Chip onClick={handleChipClick} icon={<PeopleAltSharpIcon fontSize="small" />} label={entity?.sharedWith?.length ?? 0} />
+            <Chip onClick={disableAction ? undefined : handleChipClick} icon={<PeopleAltSharpIcon fontSize="small" />} label={entity?.sharedWith?.length ?? 0} />
             {(isModalOpen && entity) && <ShareEntityModal entity={entity} entityType={entityType} onClose={() => setIsModalOpen(false)} />}
         </>
     );

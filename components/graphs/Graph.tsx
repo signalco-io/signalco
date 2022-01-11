@@ -147,13 +147,13 @@ const GraphArea = (props: IGraphProps) => {
 
     const transformedData = data.map(d => ({ key: domainGraph(new Date(d.id).getTime()), value: d.value }));
 
-    const firstDataPoint = data.at(-1)!;
+    const firstDataPoint = data.at(-1);
     const lastDataPoint = data[0];
 
     const min = arrayMin(transformedData, d => parseFloat(d.value) || 0);
     const max = arrayMax(transformedData, d => parseFloat(d.value) || 0);
-    const dMin = Math.floor(min * 0.98);
-    const dMax = Math.ceil(max * 1.05);
+    const dMin = Math.floor((min || 0) * 0.98);
+    const dMax = Math.ceil((max || 0) * 1.05);
 
     return (
         <ComposedChart
@@ -163,10 +163,12 @@ const GraphArea = (props: IGraphProps) => {
             margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
             <XAxis domain={[0, 1]} ticks={ticks || []} dataKey={xKey} type="number" hide />
             <YAxis allowDecimals={false} domain={[dMin, dMax]} tickSize={0} tickMargin={4} interval="preserveStartEnd" minTickGap={32} width={28} />
-            <Line type="monotone" dot={false} data={[
-                { key: domainGraph(past.getTime()), value: firstDataPoint.value },
-                { key: domainGraph(new Date(firstDataPoint.id).getTime()), value: firstDataPoint.value }
-            ]} dataKey="value" stroke="#aeaeae" strokeDasharray="4" />
+            {(typeof firstDataPoint !== 'undefined') && (
+                <Line type="monotone" dot={false} data={[
+                    { key: domainGraph(past.getTime()), value: firstDataPoint.value },
+                    { key: domainGraph(new Date(firstDataPoint.id).getTime()), value: firstDataPoint.value }
+                ]} dataKey="value" stroke="#aeaeae" strokeDasharray="4" />
+            )}
             <Area
                 type="basis"
                 dataKey={yKey}
@@ -174,10 +176,12 @@ const GraphArea = (props: IGraphProps) => {
                 fillOpacity={0.1}
                 stroke="#aeaeae"
                 strokeWidth={1} />
-            <Line type="monotone" dot={false} data={[
-                { key: domainGraph(new Date(lastDataPoint.id).getTime()), value: lastDataPoint.value },
-                { key: domainGraph(now.getTime()), value: lastDataPoint.value }
-            ]} dataKey="value" stroke="#aeaeae" strokeDasharray="5 3" />
+            {lastDataPoint && (
+                <Line type="monotone" dot={false} data={[
+                    { key: domainGraph(new Date(lastDataPoint.id).getTime()), value: lastDataPoint.value },
+                    { key: domainGraph(now.getTime()), value: lastDataPoint.value }
+                ]} dataKey="value" stroke="#aeaeae" strokeDasharray="5 3" />
+            )}
             <Tooltip content={<ChartGenericTooltip domain={domainGraph} />} />
         </ComposedChart>
     );

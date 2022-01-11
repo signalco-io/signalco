@@ -1,7 +1,7 @@
-type ValueOrFuncGeneric<T> = T extends any ? (T | (() => T)) : never;
+import { ValueOrFuncGeneric } from "../ValueOrFuncGeneric";
 
 class LocalStorageService {
-    getItem<T>(key: string, defaultValue?: ValueOrFuncGeneric<T>, skipDeseriaalization?: boolean): T {
+    getItem<T>(key: string, defaultValue?: ValueOrFuncGeneric<T>, skipDeseriaalization?: boolean): T | undefined {
         if (typeof window === 'undefined' || !window?.localStorage) {
             return typeof defaultValue === 'function' ? defaultValue() : defaultValue;
         }
@@ -21,7 +21,7 @@ class LocalStorageService {
         return typeof defaultValue === 'function' ? defaultValue() : defaultValue;
     }
 
-    setItem<T>(key: string, value: T) {
+    setItem<T>(key: string, value: T | undefined) {
         if (typeof window === 'undefined' || !(window?.localStorage)) {
             throw new Error("Local storage is not available at this moment.");
         }

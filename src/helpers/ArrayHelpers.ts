@@ -26,6 +26,9 @@ export const arrayMin = <T>(array: T[], compareFn: (i: T, index: number) => numb
     if (!Array.isArray(array))
         throw new Error('Not an array: ' + typeof array);
 
+    if (array.length <= 0)
+        return undefined;
+
     let currentMin = compareFn(array[0], 0);
     for (let i = 1; i < array.length; i++) {
         const curr = compareFn(array[i], i);
@@ -40,6 +43,9 @@ export const arrayMin = <T>(array: T[], compareFn: (i: T, index: number) => numb
 export const arrayMax = <T>(array: T[], compareFn: (i: T, index: number) => number) => {
     if (!Array.isArray(array))
         throw new Error('Not an array: ' + typeof array);
+
+    if (array.length <= 0)
+        return undefined;
 
     let currentMax = compareFn(array[0], 0);
     for (let i = 1; i < array.length; i++) {

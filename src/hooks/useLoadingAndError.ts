@@ -11,11 +11,12 @@ const useLoadingAndError = <TIn, TOut>(
   useEffect(() => {
     const loadDataAsync = async () => {
       try {
-        if (!loadData) 
+        if (!loadData) {
           return;
-        console.debug("Loading table data...")
+        }
+        console.debug("Loading data...")
         const items = typeof loadData === 'function' ? await loadData() : await loadData;
-        setItems(transformItem ? items.map(transformItem) : undefined);
+        setItems(transformItem ? items.map(transformItem) : items.map(i => i as unknown as TOut));
       } catch (err: any) {
         setItems([]);
         setError(err?.toString());
