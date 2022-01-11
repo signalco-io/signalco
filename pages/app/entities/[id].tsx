@@ -1,6 +1,6 @@
 import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, CardMedia, Grid, IconButton, Paper, Skeleton, Slider, Stack, Switch, Tab, Tabs, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
@@ -20,12 +20,13 @@ import useDevice from '../../../src/hooks/useDevice';
 import useHashParam from '../../../src/hooks/useHashParam';
 import EditableInput from '../../../components/shared/form/EditableInput';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from 'recharts';
+import { Area, AreaChart, Bar, BarChart, LabelList, XAxis, YAxis } from 'recharts';
 import { useTheme } from '@mui/system';
 import { scaleTime, timeHour } from 'd3';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import { IHistoricalValue } from '../../../src/entity/IHistoricalValue';
-import { arraySum } from '../../../src/helpers/ArrayHelpers';
+import { deepOrange, lightBlue } from '@mui/material/colors';
+import { AppContext } from '../../_app';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -200,7 +201,7 @@ function historicalValueToTableItem(value: IHistoricalValue): IAutoTableItem {
 //     return null;
 // };
 
-const renderCustomizedTimeLineLabel = (props) => {
+const renderCustomizedTimeLineLabel = (props: any) => {
     const { x, y, width, value } = props;
     const radius = 10;
 
@@ -224,84 +225,74 @@ const renderCustomizedTimeLineLabel = (props) => {
 
 const GraphTimeLine = (props: IGraphProps) => {
     const { data } = props;
+    const appContext = useContext(AppContext);
 
-    const theme = useTheme();
-    const width = 600;
-    const height = 70;
+    const width = 400;
+    const height = 60;
     const durationMs = 24 * 60 * 60 * 1000;
 
     const now = new Date();
     const past = new Date();
     past.setTime(now.getTime() - durationMs);
     const domainGraph = scaleTime().domain([past, now]);
-    const ticksHours = timeHour.every(1)!;
-    // const ticks = domainGraph.ticks(ticksHours).map(i => i.toString());
-    // const ticks = domainGraph.ticks(ticksHours).map(i => `${i.getHours()}:${i.getMinutes()}`);
-    const ticks = domainGraph.ticks(ticksHours).map((t, i) => t.getHours().toString());
 
     const reversedData = [...data].reverse();
 
-    const transformedItems = [];
-    const transformedDataItem = {};
-    transformedDataItem[`t0`] = domainGraph(new Date(reversedData[0].id).getTime()) - domainGraph(domainGraph.ticks(ticksHours)![0].getTime());
-    transformedDataItem[`v0`] = transformedDataItem[`v0`] = reversedData[0].value === 'true' ? 'false' : 'true';;
+    const transformedDataItem: { [key: string]: any } = {};
+    transformedDataItem[`t0`] = domainGraph(new Date(reversedData[0].id).getTime()) - domainGraph(past.getTime());
+    transformedDataItem[`v0`] = reversedData[0].value === 'true' ? 'false' : 'true';;
 
-    for (let i = 1; i < reversedData.length - 1; i++) {
+    for (let i = 1; i < reversedData.length; i++) {
         const currentElement = reversedData[i];
         const previousElement = reversedData[i - 1];
         transformedDataItem[`t${i}`] = domainGraph(new Date(currentElement.id).getTime()) - domainGraph(new Date(previousElement.id).getTime());
         transformedDataItem[`v${i}`] = previousElement.value;
     }
 
-    transformedDataItem[`t${reversedData.length - 1}`] = domainGraph(now.getTime()) - domainGraph(new Date(reversedData[reversedData.length - 1].id).getTime());
-    transformedDataItem[`v${reversedData.length - 1}`] = reversedData[reversedData.length - 1].value;
-    transformedItems.push(transformedDataItem);
-
-    let sum = arraySum(reversedData, (item, i) => transformedDataItem[`t${i}`]);
-
-    console.log(domainGraph(domainGraph.ticks(ticksHours)!.at(-1)!.getTime()), domainGraph.ticks(ticksHours)!.at(-1))
-    console.log(domainGraph(new Date(reversedData[reversedData.length - 1].id).getTime()), reversedData[reversedData.length - 1].id)
-
-    console.log('invert', domainGraph.invert(sum));
-    console.log('sum', sum);
-
-    console.log('ticks', ticks);
-    console.log('data', transformedDataItem);
+    transformedDataItem[`t${reversedData.length}`] = domainGraph(now.getTime()) - domainGraph(new Date(reversedData.at(-1).id).getTime());
+    transformedDataItem[`v${reversedData.length}`] = reversedData.at(-1).value;
 
     return (
-        <BarChart
-            width={width}
-            height={height}
-            data={transformedItems}
-            layout="vertical"
-            barSize={20}
-            maxBarSize={20}
-            barGap={0}
-        >
-            <CartesianGrid />
-            <XAxis type="number" axisLine={false} interval="preserveStartEnd" tickSize={3} tickFormatter={(v, i) => {
-                var date = domainGraph.invert(v);
-                return `${date.getHours()}:${date.getMinutes()}`
-            }} />
-            <YAxis type="category" domain={[0]} hide />
-            {reversedData.map((di, i) => {
-                return (
-                    <Bar
-                        key={`t${i}`}
-                        dataKey={`t${i}`}
-                        stackId="0"
-                        barSize={20}
-                        maxBarSize={20}
-                        fill={transformedItems[0][`v${i}`] === 'true' ? "#0392cf" : "#f37736"}
-                    >
-                        <LabelList
-                            dataKey={`v${i}`}
-                            content={renderCustomizedTimeLineLabel}
-                        />
-                    </Bar>
-                );
-            })}
-        </BarChart>
+        <Box p={2}>
+            <Stack direction="row" spacing={2}>
+                <Box pt="2px">
+                    <Typography>contact</Typography>
+                </Box>
+                <BarChart
+                    width={width}
+                    height={height}
+                    data={[transformedDataItem]}
+                    layout="vertical"
+                    barSize={20}
+                    maxBarSize={20}
+                    barGap={0}
+                >
+                    {/* <CartesianGrid /> */}
+                    <XAxis type="number" axisLine={false} interval="preserveStartEnd" tickFormatter={(v) => {
+                        var date = domainGraph.invert(v);
+                        return `${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}`
+                    }} />
+                    <YAxis type="category" domain={[0]} hide />
+                    {new Array(reversedData.length + 1).fill(0).map((_, i) => {
+                        return (
+                            <Bar
+                                key={`t${i}`}
+                                dataKey={`t${i}`}
+                                stackId="0"
+                                barSize={20}
+                                maxBarSize={20}
+                                fill={transformedDataItem[`v${i}`] === 'true' ? lightBlue[appContext.theme === 'dark' ? 900 : 500] : deepOrange[appContext.theme === 'dark' ? 800 : 400]}
+                            >
+                                <LabelList
+                                    dataKey={`v${i}`}
+                                    content={renderCustomizedTimeLineLabel}
+                                />
+                            </Bar>
+                        );
+                    })}
+                </BarChart>
+            </Stack>
+        </Box>
     );
 }
 
