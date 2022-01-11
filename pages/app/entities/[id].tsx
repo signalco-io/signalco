@@ -225,6 +225,7 @@ const renderCustomizedTimeLineLabel = (props: any) => {
 
 const GraphTimeLine = (props: IGraphProps) => {
     const { data } = props;
+    const [contactName] = useHashParam('contact');
     const appContext = useContext(AppContext);
 
     const width = 400;
@@ -256,7 +257,7 @@ const GraphTimeLine = (props: IGraphProps) => {
         <Box p={2}>
             <Stack direction="row" spacing={2}>
                 <Box pt="2px">
-                    <Typography>contact</Typography>
+                    <Typography>{contactName}</Typography>
                 </Box>
                 <BarChart
                     width={width}
