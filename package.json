@@ -55,7 +55,7 @@
     "babel-loader": "8.2.3",
     "cross-env": "7.0.3",
     "eslint": "8.6.0",
-    "eslint-config-next": "12.0.7",
+    "eslint-config-next": "12.0.8",
     "prop-types": "15.8.1",
     "rimraf": "3.0.2",
     "sass": "1.47.0",
