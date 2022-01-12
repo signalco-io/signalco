@@ -21,8 +21,6 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import Link from "next/link";
 import useSearch, { filterFuncObjectStringProps } from "../../../src/hooks/useSearch";
 import useUserSetting from "../../../src/hooks/useUserSetting";
-import useAutoTable from "../../../components/shared/table/useAutoTable";
-import DevicesRepository from "../../../src/devices/DevicesRepository";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import ViewListIcon from '@mui/icons-material/ViewList';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
@@ -66,14 +64,14 @@ const EntityCard = (props: { entity: IDeviceModel }) => {
         <Grid item xs={6} sm={4} lg={3}>
             <Link href={`/app/entities/${entity.id}`} passHref>
                 <ButtonBase sx={{ width: '100%', borderRadius: 2 }}>
-                    <Paper sx={{ width: '100%' }}>
+                    <Paper sx={{ width: '100%', bgcolor: 'background.default' }}>
                         <Box p={2}>
                             <Stack spacing={2}>
                                 <Stack direction="row" spacing={2} alignItems="center">
                                     <Avatar variant="circular">
                                         <Icon />
                                     </Avatar>
-                                    <Typography noWrap sx={{ opacity: 0.8 }}>{entity.alias}</Typography>
+                                    <Typography noWrap sx={{ opacity: 0.9 }}>{entity.alias}</Typography>
                                 </Stack>
                                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                                     <ShareEntityChip entityType={2} entity={entity} disableAction />
@@ -92,51 +90,49 @@ const EntityTableName = (props: { entity: IDeviceModel }) => {
     const { entity } = props;
     const Icon = EntityIcon(entity);
     return (
-        <Stack direction="row" spacing={1} alignItems="center"><Icon /><span>{entity.alias}</span></Stack>
+        <Stack direction="row" spacing={1} alignItems="center">
+            <Avatar><Icon /></Avatar>
+            <Typography noWrap sx={{ opacity: 0.9 }}>{entity.alias}</Typography>
+        </Stack>
     );
 };
 
-function deviceModelToTableItem(device: IDeviceModel): IAutoTableItem {
+function deviceModelToTableItem(entity: IDeviceModel): IAutoTableItem {
     return {
-        id: device.id,
-        name: <EntityTableName entity={device} />,
-        lastActivity: device.states.length > 0 ? <ReactTimeago date={device.getLastActivity()} /> : 'Never',
-        shared: <ShareEntityChip entity={device} entityType={1} />,
-        _link: `/app/entities/${device.id}`
+        id: entity.id,
+        name: <EntityTableName entity={entity} />,
+        shared: <ShareEntityChip entity={entity} entityType={1} />,
+        lastActivity: <Box style={{ opacity: 0.8 }}>{entity.states.length > 0 ? <ReactTimeago date={entity.getLastActivity()} /> : 'Never'}</Box>,
+        _link: `/app/entities/${entity.id}`
     };
 }
 
 const Entities = () => {
     const entities = useAllEntities();
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
-
-    // Card view
     const [filteredItems, showSearch, searchText, handleSearchTextChange] = useSearch(entities.items, filterFuncObjectStringProps);
 
-    // Table view
-    const itemsTable = useAutoTable(DevicesRepository.getDevicesAsync, deviceModelToTableItem);
-
     return (
-        <Stack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 }, px: 2 }}>
-            <Stack direction="row" alignItems="center" justifyContent="space-between">
+        <Stack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
+            <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 2 }}>
                 <Typography variant="h2" sx={{ display: { xs: 'none', sm: 'inline-block' } }}>Entities</Typography>
-                <Stack direction="row" spacing={1}>
-                    <ToggleButtonGroup exclusive value={entityListViewType} onChange={(_, value) => setEntityListViewType(value)}>
-                        <ToggleButton value="table" size="small"><ViewListIcon /></ToggleButton>
-                        <ToggleButton value="cards" size="small"><ViewModuleIcon /></ToggleButton>
-                    </ToggleButtonGroup>
-                    {(entityListViewType !== 'table' && showSearch) && <TextField
+                <Stack direction="row" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="flex-end">
+                    {showSearch && <TextField
                         label="Search..."
                         size="small"
                         value={searchText}
                         onChange={(e) => handleSearchTextChange(e.target.value)}
                         sx={{ width: { xs: '100%', sm: 'initial' } }} />}
+                    <ToggleButtonGroup exclusive value={entityListViewType} onChange={(_, value) => setEntityListViewType(value)}>
+                        <ToggleButton value="table" size="small" title="List view"><ViewListIcon /></ToggleButton>
+                        <ToggleButton value="cards" size="small" title="Card view"><ViewModuleIcon /></ToggleButton>
+                    </ToggleButtonGroup>
                 </Stack>
             </Stack>
             {entityListViewType === 'table' ? (
-                <AutoTable {...itemsTable} />
+                <AutoTable hideSearch items={filteredItems.map(deviceModelToTableItem)} isLoading={entities.isLoading} error={entities.error} />
             ) : (
-                <Box>
+                <Box sx={{ px: 2 }}>
                     <Grid container spacing={2}>
                         {filteredItems.map(entity => (
                             <EntityCard key={entity.id} entity={entity} />

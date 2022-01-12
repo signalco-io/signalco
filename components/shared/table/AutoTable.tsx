@@ -29,6 +29,7 @@ export interface IAutoTableProps<T extends IAutoTableItem> extends IErrorProps {
   items: Array<T> | undefined;
   isLoading: boolean;
   onRowClick?: (item: T) => void;
+  hideSearch?: boolean;
 }
 
 export interface IAutoTableCellRendererProps {
@@ -82,7 +83,7 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
           gridRow: props.row,
           gridColumn: props.column,
           px: 2,
-          py: 1.5,
+          py: 1,
           borderBottom: '1px solid rgba(128,128,128,0.6)',
           display: 'flex',
           alignItems: 'center',
@@ -116,7 +117,7 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
 
   return (
     <Stack spacing={1} sx={{ height: '100%' }}>
-      {showSearch && <TextField label="Search..." sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
+      {!props.hideSearch && showSearch && <TextField label="Search..." sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ overflow: 'auto', display: 'grid' }}>
           {props.isLoading && <LinearProgress />}

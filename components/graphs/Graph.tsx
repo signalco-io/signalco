@@ -167,7 +167,7 @@ const GraphArea = (props: IGraphProps) => {
                 <Line type="monotone" dot={false} data={[
                     { key: domainGraph(past.getTime()), value: firstDataPoint.value },
                     { key: domainGraph(new Date(firstDataPoint.id).getTime()), value: firstDataPoint.value }
-                ]} dataKey="value" stroke="#aeaeae" strokeDasharray="4" />
+                ]} dataKey="value" stroke="#aeaeae" strokeDasharray="5 3" />
             )}
             <Area
                 type="basis"
