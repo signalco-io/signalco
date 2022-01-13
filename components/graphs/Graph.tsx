@@ -145,10 +145,10 @@ const GraphArea = (props: IGraphProps) => {
     const ticksHours = timeHour.every(1)!;
     const ticks = domainGraph.ticks(ticksHours).map(i => i.toString());
 
-    const transformedData = data.map(d => ({ key: domainGraph(new Date(d.id).getTime()), value: d.value }));
+    const transformedData = data?.map(d => ({ key: domainGraph(new Date(d.id).getTime()), value: d.value })) ?? [];
 
-    const firstDataPoint = data.at(-1);
-    const lastDataPoint = data[0];
+    const firstDataPoint = data?.at(-1);
+    const lastDataPoint = data ? data[0] : undefined;
 
     const min = arrayMin(transformedData, d => parseFloat(d.value) || 0);
     const max = arrayMax(transformedData, d => parseFloat(d.value) || 0);

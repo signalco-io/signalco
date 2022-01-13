@@ -4,6 +4,7 @@ import theme from '../src/theme';
 import '../styles/global.scss';
 import * as NextImage from 'next/image';
 import { themes } from '@storybook/theming';
+import { AppContext } from '../pages/_app';
 
 // Fix for getting next/image to work with Storybook
 // Source link https://dev.to/jonasmerlin/how-to-use-the-next-js-image-component-in-storybook-1415
@@ -22,7 +23,9 @@ export const decorators = [
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme(true)}>
         <CssBaseline />
-        <Story />
+        <AppContext.Provider value={{ theme: 'dark' }}>
+          <Story />
+        </AppContext.Provider>
       </ThemeProvider>
     </StyledEngineProvider>
   )
