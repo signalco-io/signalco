@@ -26,9 +26,6 @@ const theme = (isDark: boolean) => {
     },
     components: {
       MuiButton: {
-        defaultProps: {
-          variant: 'outlined'
-        },
         styleOverrides: {
           root: {
             textTransform: 'none',
