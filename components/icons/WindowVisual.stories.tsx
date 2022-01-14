@@ -3,7 +3,10 @@ import WindowVisual from "./WindowVisual";
 
 export default {
     title: 'Visuals/WindowVisual',
-    component: WindowVisual
+    component: WindowVisual,
+    args: {
+        dateAndTime: new Date(2022, 2, 22, 12, 22, 22)
+    }
 } as ComponentMeta<typeof WindowVisual>;
 
 const Template: ComponentStory<typeof WindowVisual> = (args) => <WindowVisual {...args} />;

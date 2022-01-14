@@ -14,6 +14,7 @@ export interface IGraphProps {
     durationMs: number;
     width: number;
     height: number;
+    startDateTime?: Date;
 }
 
 const renderCustomizedTimeLineLabel = (props: any) => {
@@ -39,15 +40,15 @@ const renderCustomizedTimeLineLabel = (props: any) => {
 };
 
 const GraphTimeLine = (props: IGraphProps) => {
-    const { label, data, durationMs, width } = props;
+    const { label, data, durationMs, width, startDateTime } = props;
     const appContext = useContext(AppContext);
 
     const isDarkTheme = appContext.theme === 'dark';
     const accentTrue = lightBlue[isDarkTheme ? 900 : 500];
     const accentFalse = deepOrange[isDarkTheme ? 800 : 400];
 
-    const now = new Date();
-    const past = new Date();
+    const now = startDateTime ?? new Date();
+    const past = startDateTime ?? new Date();
     past.setTime(now.getTime() - durationMs);
     const domainGraph = scaleTime().domain([past, now]);
 
@@ -133,14 +134,14 @@ const ChartGenericTooltip = ({ active, payload, domain, units }: { active?: bool
 };
 
 const GraphArea = (props: IGraphProps) => {
-    const { data, durationMs, width, height } = props;
+    const { data, durationMs, width, height, startDateTime } = props;
     const appContext = useContext(AppContext);
 
     const yKey = "value";
     const xKey = "key";
 
-    const now = new Date();
-    const past = new Date();
+    const now = startDateTime ?? new Date();
+    const past = startDateTime ?? new Date();
     past.setTime(now.getTime() - durationMs);
     const domainGraph = scaleTime().domain([past, now]);
     const ticksHours = timeHour.every(1)!;
