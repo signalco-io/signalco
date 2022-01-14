@@ -60,6 +60,34 @@ SecondaryContained.args = {
   variant: 'contained'
 };
 
+export const ErrorContained = Template.bind({});
+ErrorContained.args = {
+  children: 'Button',
+  color: 'error',
+  variant: 'contained'
+};
+
+export const WarningContained = Template.bind({});
+WarningContained.args = {
+  children: 'Button',
+  color: 'warning',
+  variant: 'contained'
+};
+
+export const SuccessContained = Template.bind({});
+SuccessContained.args = {
+  children: 'Button',
+  color: 'success',
+  variant: 'contained'
+};
+
+export const InfoContained = Template.bind({});
+InfoContained.args = {
+  children: 'Button',
+  color: 'info',
+  variant: 'contained'
+};
+
 export const Large = Template.bind({});
 Large.args = {
   ...PrimaryOutlined.args,
