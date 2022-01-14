@@ -89,7 +89,7 @@ const WidgetShades = (props: IWidgetSharedProps) => {
             <Grid container wrap="nowrap" sx={{ height: '100%' }}>
                 <Grid item xs={6}>
                     <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent="space-between">
-                        <WindowVisual shadePerc={shadePerc} theme="dark" size={68} />
+                        <WindowVisual shadePerc={shadePerc} size={68} />
                         <Typography fontWeight="light" noWrap>{label}</Typography>
                     </Stack>
                 </Grid>

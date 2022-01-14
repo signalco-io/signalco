@@ -6,6 +6,7 @@ import ReactTimeago from "react-timeago";
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from "recharts";
 import { AppContext } from "../../pages/_app";
 import { arrayMax, arrayMin } from "../../src/helpers/ArrayHelpers";
+import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
 
 export interface IGraphProps {
     label?: string;
@@ -13,6 +14,7 @@ export interface IGraphProps {
     durationMs: number;
     width: number;
     height: number;
+    startDateTime?: Date;
 }
 
 const renderCustomizedTimeLineLabel = (props: any) => {
@@ -38,15 +40,15 @@ const renderCustomizedTimeLineLabel = (props: any) => {
 };
 
 const GraphTimeLine = (props: IGraphProps) => {
-    const { label, data, durationMs, width } = props;
+    const { label, data, durationMs, width, startDateTime } = props;
     const appContext = useContext(AppContext);
 
     const isDarkTheme = appContext.theme === 'dark';
     const accentTrue = lightBlue[isDarkTheme ? 900 : 500];
     const accentFalse = deepOrange[isDarkTheme ? 800 : 400];
 
-    const now = new Date();
-    const past = new Date();
+    const now = startDateTime ?? new Date();
+    const past = startDateTime ?? new Date();
     past.setTime(now.getTime() - durationMs);
     const domainGraph = scaleTime().domain([past, now]);
 
@@ -132,23 +134,23 @@ const ChartGenericTooltip = ({ active, payload, domain, units }: { active?: bool
 };
 
 const GraphArea = (props: IGraphProps) => {
-    const { data, durationMs, width, height } = props;
+    const { data, durationMs, width, height, startDateTime } = props;
     const appContext = useContext(AppContext);
 
     const yKey = "value";
     const xKey = "key";
 
-    const now = new Date();
-    const past = new Date();
+    const now = startDateTime ?? new Date();
+    const past = startDateTime ?? new Date();
     past.setTime(now.getTime() - durationMs);
     const domainGraph = scaleTime().domain([past, now]);
     const ticksHours = timeHour.every(1)!;
     const ticks = domainGraph.ticks(ticksHours).map(i => i.toString());
 
-    const transformedData = data.map(d => ({ key: domainGraph(new Date(d.id).getTime()), value: d.value }));
+    const transformedData = data?.map(d => ({ key: domainGraph(new Date(d.id).getTime()), value: d.value })) ?? [];
 
-    const firstDataPoint = data.at(-1);
-    const lastDataPoint = data[0];
+    const firstDataPoint = data?.at(-1);
+    const lastDataPoint = data ? data[0] : undefined;
 
     const min = arrayMin(transformedData, d => parseFloat(d.value) || 0);
     const max = arrayMax(transformedData, d => parseFloat(d.value) || 0);
@@ -167,7 +169,7 @@ const GraphArea = (props: IGraphProps) => {
                 <Line type="monotone" dot={false} data={[
                     { key: domainGraph(past.getTime()), value: firstDataPoint.value },
                     { key: domainGraph(new Date(firstDataPoint.id).getTime()), value: firstDataPoint.value }
-                ]} dataKey="value" stroke="#aeaeae" strokeDasharray="4" />
+                ]} dataKey="value" stroke="#aeaeae" strokeDasharray="5 3" />
             )}
             <Area
                 type="basis"
@@ -189,6 +191,10 @@ const GraphArea = (props: IGraphProps) => {
 
 const Graph = (props: IGraphProps) => {
     const { data } = props;
+
+    if (!data || data.length <= 0) {
+        return <NoDataPlaceholder content="No data to show" />
+    }
 
     const isBoolean = data?.length && (data[0].value === 'true' || data[0].value === 'false');
     if (isBoolean) {

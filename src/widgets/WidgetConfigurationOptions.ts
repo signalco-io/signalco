@@ -9,3 +9,5 @@ export const DefaultHeight: (height: number) => IWidgetConfigurationOption =
 export const DefaultLabel: IWidgetConfigurationOption = { name: 'label', label: 'Label', type: 'string', optional: true };
 
 export const DefaultTarget: IWidgetConfigurationOption = { name: 'target', label: 'Target', type: 'deviceContactTarget' };
+
+export const DefaultTargetMultiple: IWidgetConfigurationOption = { name: 'target', label: 'Target', type: 'deviceContactTarget', multiple: true };

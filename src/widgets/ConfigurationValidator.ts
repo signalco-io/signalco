@@ -13,15 +13,19 @@ export const IsConfigurationValid = (config: any, options: IWidgetConfigurationO
         if (opt.optional) continue;
 
         const value = config[opt.name];
-        if (typeof value === 'undefined' || value == null)
+        if (typeof value === 'undefined' || value == null) {
             return false;
+        }
 
-        if (opt.multiple && (!Array.isArray(value) || !value.length))
+        if (opt.multiple && (!Array.isArray(value) || !value.length)) {
             return false;
+        }
 
         switch (opt.type) {
             case 'deviceTarget':
-                if (!value.deviceId) return false;
+                if (!value.deviceId) {
+                    return false;
+                }
                 break;
             case 'deviceContactTarget':
                 if (opt.multiple){
