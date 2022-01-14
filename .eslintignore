@@ -1,0 +1,18 @@
+# next.js
+.next/*
+dist/*
+out/*
+
+# dependencies
+node_modules/*
+package.json
+yarn.lock
+
+# storybook
+storybook-static/*
+
+# other
+README.md
+.babelrc
+.eslintrc
+.gitignore

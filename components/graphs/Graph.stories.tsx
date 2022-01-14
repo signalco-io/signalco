@@ -1,17 +1,9 @@
-import { Container } from "@mui/material";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Graph from "./Graph";
 
 export default {
     title: 'Components/Graph',
     component: Graph,
-    decorators: [
-        Story => (
-            <Container maxWidth='lg'>
-                <Story />
-            </Container>
-        )
-    ],
     args: {
         width: 400,
         height: 200
@@ -20,14 +12,22 @@ export default {
 
 const Template: ComponentStory<typeof Graph> = (args) => <Graph {...args} />;
 
+const now = new Date();
+const t1 = new Date(now.getTime());
+t1.setTime(now.getTime() - 15 * 60 * 1000);
+const t2 = new Date(now.getTime());
+t2.setTime(now.getTime() - 60 * 60 * 1000);
+const t3 = new Date(now.getTime());
+t3.setTime(now.getTime() - 170 * 60 * 1000);
+
 export const Empty = Template.bind({});
 
 export const TimeLine = Template.bind({});
 TimeLine.args = {
     data: [
-        { id: '2022-01-13T10:35:00.0Z', value: 'true' },
-        { id: '2022-01-13T11:35:00.0Z', value: 'false' },
-        { id: '2022-01-13T12:55:00.0Z', value: 'true' },
+        { id: t1.toISOString(), value: 'true' },
+        { id: t2.toISOString(), value: 'false' },
+        { id: t3.toISOString(), value: 'true' },
     ],
     durationMs: 3 * 60 * 60 * 1000,
     label: 'Sample'
@@ -36,9 +36,9 @@ TimeLine.args = {
 export const Area = Template.bind({});
 Area.args = {
     data: [
-        { id: '2022-01-13T10:35:00.0Z', value: '15.5' },
-        { id: '2022-01-13T11:35:00.0Z', value: '18' },
-        { id: '2022-01-13T12:55:00.0Z', value: '16.7' },
+        { id: t1.toISOString(), value: '15.5' },
+        { id: t2.toISOString(), value: '18' },
+        { id: t3.toISOString(), value: '16.7' },
     ],
     durationMs: 3 * 60 * 60 * 1000
 }
