@@ -41,6 +41,13 @@ const availableWidgets = [
         description: 'Monitor and Control temperature of your space.',
         preview: '/assets/widget-previews/WidgetAirConditionPreview_dark.png',
         previewWidth: 230
+    },
+    {
+        type: 'time',
+        name: 'Time widget',
+        description: 'Displays current time.',
+        preview: '/assets/widget-previews/WidgetTimePreview_dark.png',
+        previewWidth: 230
     }
 ];
 

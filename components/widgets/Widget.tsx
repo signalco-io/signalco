@@ -5,12 +5,13 @@ import dynamic from 'next/dynamic';
 import React from "react";
 import WidgetCard from "./parts/WidgetCard";
 const WidgetIndicator = dynamic(() => import("./parts/WidgetIndicator"));
+const WidgetTime = dynamic(() => import("./parts/WidgetTime"));
 const WidgetShades = dynamic(() => import("./parts/WidgetShades"));
 const WidgetState = dynamic(() => import("./parts/WidgetState"));
 const WidgetAirConditioning = dynamic(() => import("./parts/WidgetAirConditioning"));
 const WidgetVacuum = dynamic(() => import("./parts/WidgetVacuum"));
 
-export type widgetType = "state" | "vacuum" | "shades" | 'indicator' | "airconditioning" | "termostat";
+export type widgetType = "state" | "vacuum" | "shades" | 'indicator' | "airconditioning" | "termostat" | "time";
 
 export interface IWidgetProps extends IWidgetSharedProps {
     type: widgetType,
@@ -51,6 +52,8 @@ const Widget = (props: IWidgetProps) => {
         WidgetResolved = WidgetIndicator;
     } else if (props.type === 'termostat') {
         WidgetResolved = WidgetAirConditioning;
+    } else if (props.type === 'time') {
+        WidgetResolved = WidgetTime;
     }
 
     return (

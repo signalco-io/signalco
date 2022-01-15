@@ -22,25 +22,39 @@ interface IWidgetCardProps {
     onRemove?: () => void
 }
 
+function applyStaticToConfig(config: any | undefined, options: IWidgetConfigurationOption[] | undefined) {
+    const staticConfigs: { [key: string]: any } = {};
+    if (options) {
+        options.filter(o => o.type === 'static').forEach(o => {
+            staticConfigs[o.name] = o.default;
+        });
+    }
+
+    return {
+        ...staticConfigs,
+        ...config
+    };
+}
+
 const WidgetCard = (props: IWidgetCardProps) => {
     const {
         children,
         state,
         isEditMode,
-        config,
         options,
         onConfigured,
         onRemove
     } = props;
 
     const appContext = useContext(AppContext);
+    const configWithStatic = applyStaticToConfig(props.config, options);
 
-    const width = (config as any)?.columns || 2;
-    const height = (config as any)?.rows || 2;
+    const width = (configWithStatic as any)?.columns || 2;
+    const height = (configWithStatic as any)?.rows || 2;
     const sizeWidth = width * 78 + (width - 1) * 8;
     const sizeHeight = height * 78 + (height - 1) * 8;
 
-    const needsConfiguration = !options || !IsConfigurationValid(config, options);
+    const needsConfiguration = !options || !IsConfigurationValid(configWithStatic, options);
 
     const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' })
 
@@ -94,7 +108,7 @@ const WidgetCard = (props: IWidgetCardProps) => {
                     </Box>
                 )}
             </Paper >
-            {options && <WidgetConfiguration onConfiguration={handleOnConfiguration} options={options} config={config} isOpen={isConfiguring} />}
+            {options && <WidgetConfiguration onConfiguration={handleOnConfiguration} options={options} config={configWithStatic} isOpen={isConfiguring} />}
             <Menu {...bindMenu(popupState)}>
                 {options && (
                     <MenuItem onClick={handleOnConfigureClicked}>

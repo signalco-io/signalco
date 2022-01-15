@@ -74,3 +74,12 @@ WidgetTermostat.args = {
         rows: 4
     }
 };
+
+export const WidgetTime = Template.bind({});
+WidgetTime.args = {
+    type: 'time',
+    config: {
+        columns: 2,
+        rows: 1
+    }
+};
