@@ -34,6 +34,7 @@ import {
 } from 'material-ui-popup-state/hooks';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import useLocale from "../src/hooks/useLocale";
 
 const navItems = [
   { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon },
@@ -142,6 +143,7 @@ const NavProfile = () => {
   const router = useRouter();
   const activeNavItem = orderBy(navItems.filter(ni => router.pathname.startsWith(ni.path)), ni => 0 - ni.path.length)[0];
   const navWidth = useNavWidth();
+  const { t } = useLocale("App", "Nav");
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -162,7 +164,7 @@ const NavProfile = () => {
       {!mobileMenuOpen &&
         <Stack sx={{ width: { xs: undefined, lg: '100%' } }}>
           {navItems.filter(ni => isMobile ? ni === activeNavItem : true).map((ni, index) =>
-            <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={ni.label} />)}
+            <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} />)}
         </Stack>
       }
       {(isMobile && mobileMenuOpen) && <Typography sx={{ opacity: 0.6 }}>Menu</Typography>}
@@ -182,7 +184,7 @@ const NavProfile = () => {
           }}>
             <Stack>
               {navItems.map((ni, index) =>
-                <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={ni.label} />)}
+                <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} />)}
             </Stack>
           </Box>
         </>

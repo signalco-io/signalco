@@ -1,0 +1,11 @@
+{
+    "App": {
+        "Nav": {
+            "Dashboard": "Dashboard",
+            "Entities": "Entities",
+            "Processes": "Processes",
+            "Stations": "Stations",
+            "Settings": "Settings"
+        }
+    }
+}
