@@ -14,6 +14,7 @@ import DisplayDeviceTarget from '../../../components/shared/entity/DisplayDevice
 import useDevice from '../../../src/hooks/useDevice';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
 import EntityRepository from '../../../src/entity/EntityRepository';
+import { ObjectDictAny } from '../../../src/sharedTypes';
 
 interface IDeviceStateValue {
     value?: any
@@ -56,7 +57,7 @@ interface ICondition {
     operations: Array<IConditionValueComparison | ICondition>
 }
 
-type KeyedObjectOrAny = { [key: string]: any } | any;
+type KeyedObjectOrAny = ObjectDictAny | any;
 
 type ModifierFunc = (key: string, value: any) => Promise<[key: string, value: any]>;
 
@@ -76,7 +77,7 @@ async function mapObjectAsync(obj: KeyedObjectOrAny, funcAsync: ModifierFunc): P
     }
     if (typeof obj !== 'object') return obj;
 
-    const newObj: { [key: string]: any } = {};
+    const newObj: ObjectDictAny = {};
     const keys = Object.keys(obj);
     for (let ki = 0; ki < keys.length; ki++) {
         const key = keys[ki];
@@ -127,7 +128,7 @@ const channelToChannelNameModifier: MapModifier = (key, value) => {
     return ['channelName', value];
 };
 
-async function mapWithModifiersAsync(obj: { [key: string]: any }, modifiers: MapModifier[]) {
+async function mapWithModifiersAsync(obj: ObjectDictAny, modifiers: MapModifier[]) {
     return await mapObjectAsync(obj, async (key, value) => {
         let newKey = key;
         let newValue = value;

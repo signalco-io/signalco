@@ -1,5 +1,6 @@
-import { Box, Button, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
+import { Box, Button, Checkbox, FormControlLabel, FormGroup, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { ObjectDictAny } from "../../../src/sharedTypes";
 import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
 import ConfigurationDialog from "../../shared/dialog/ConfigurationDialog";
 import DisplayDeviceTarget from "../../shared/entity/DisplayDeviceTarget";
@@ -7,7 +8,7 @@ import SelectItems from "../../shared/form/SelectItems";
 
 interface IWidgetConfigurationDialogProps {
     options: IWidgetConfigurationOption[],
-    values: { [key: string]: any },
+    values: ObjectDictAny,
     setValue: (name: string, value: any) => void,
     onCancel: () => void,
     onSave: (config: object) => void,
@@ -21,10 +22,10 @@ export interface IWidgetConfigurationProps {
 }
 
 const useWidgetConfiguration = (options: IWidgetConfigurationOption[], config: object | undefined, onConfiguration: (config: any) => void) => {
-    const [configurationValues, setConfigurationValues] = useState<{ [key: string]: any }>(config || {});
+    const [configurationValues, setConfigurationValues] = useState<ObjectDictAny>(config || {});
 
     const setValue = (name: string, value: any) => {
-        const newValues: { [key: string]: any } = {
+        const newValues: ObjectDictAny = {
             ...configurationValues,
         };
         newValues[name] = value;
@@ -90,6 +91,12 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
             placeholder={props.option.label}
             fullWidth
             onChange={(item) => item && item.length && props.onChange(item[0])} />
+    } else if (props.option.type === 'yesno') {
+        return <FormGroup>
+            <FormControlLabel
+                control={<Checkbox checked={props.value} onChange={(e) => props.onChange(e.currentTarget.checked)} />}
+                label={props.option.label} />
+        </FormGroup>
     } else if (
         props.option.type === 'number' ||
         props.option.type === 'string') {

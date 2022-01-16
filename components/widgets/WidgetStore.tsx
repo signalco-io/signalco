@@ -8,20 +8,20 @@ import { widgetType } from "./Widget";
 const availableWidgets = [
     {
         type: 'state',
-        name: 'State widget',
+        name: 'State',
         description: 'Control and see state of any integrated entity.',
         preview: '/assets/widget-previews/WidgetStatePreview_dark.svg'
     },
     {
         type: 'shades',
-        name: 'Shades widget',
+        name: 'Shades',
         description: 'Control and see state of window shades.',
         preview: '/assets/widget-previews/WidgetShadesPreview_dark.svg',
         previewWidth: 300
     },
     {
         type: 'vacuum',
-        name: 'Vacuum widget',
+        name: 'Vacuum',
         description: 'Control and see state of your robot vacuum.',
         preview: '/assets/widget-previews/WidgetVacuumPreview_dark.svg',
         previewWidth: 200,
@@ -29,7 +29,7 @@ const availableWidgets = [
     },
     {
         type: 'indicator',
-        name: 'Indicator widget',
+        name: 'Indicator',
         description: 'See state of anything.',
         preview: '/assets/widget-previews/WidgetIndicatorPreview_dark.png',
         previewHeight: 400,
@@ -37,16 +37,23 @@ const availableWidgets = [
     },
     {
         type: ['termostat', 'airconditioning'],
-        name: 'Air conditioning widget',
+        name: 'Air conditioning',
         description: 'Monitor and Control temperature of your space.',
         preview: '/assets/widget-previews/WidgetAirConditionPreview_dark.png',
         previewWidth: 230
     },
     {
         type: 'time',
-        name: 'Time widget',
+        name: 'Time',
         description: 'Displays current time.',
         preview: '/assets/widget-previews/WidgetTimePreview_dark.png',
+        previewWidth: 230
+    },
+    {
+        type: 'checklist',
+        name: 'Checklist',
+        description: 'Keep track of your tasks.',
+        preview: '/assets/widget-previews/WidgetChecklistPreview_dark.png',
         previewWidth: 230
     }
 ];

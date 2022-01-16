@@ -11,6 +11,7 @@ import {
 import { AppContext } from "../../../pages/_app";
 import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
 import { IsConfigurationValid } from "../../../src/widgets/ConfigurationValidator";
+import { ObjectDictAny } from "../../../src/sharedTypes";
 
 interface IWidgetCardProps {
     children: JSX.Element,
@@ -23,7 +24,7 @@ interface IWidgetCardProps {
 }
 
 function applyStaticToConfig(config: any | undefined, options: IWidgetConfigurationOption[] | undefined) {
-    const staticConfigs: { [key: string]: any } = {};
+    const staticConfigs: ObjectDictAny = {};
     if (options) {
         options.filter(o => o.type === 'static').forEach(o => {
             staticConfigs[o.name] = o.default;

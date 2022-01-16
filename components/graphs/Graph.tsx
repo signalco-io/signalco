@@ -6,6 +6,7 @@ import ReactTimeago from "react-timeago";
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from "recharts";
 import { AppContext } from "../../pages/_app";
 import { arrayMax, arrayMin } from "../../src/helpers/ArrayHelpers";
+import { ObjectDictAny } from "../../src/sharedTypes";
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
 
 export interface IGraphProps {
@@ -57,7 +58,7 @@ const GraphTimeLine = (props: IGraphProps) => {
     const lastEntry = reversedData.at(-1);
     const entriesCount = reversedData.length;
 
-    const transformedDataItem: { [key: string]: any } = {};
+    const transformedDataItem: ObjectDictAny = {};
 
     // From start of graph to first entry
     transformedDataItem[`t0`] = domainGraph(new Date(firstEntry.id).getTime()) - domainGraph(past.getTime());

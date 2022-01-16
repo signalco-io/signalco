@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import LocalStorageService from "../services/LocalStorageService";
-import { ValueOrFuncGeneric } from "../ValueOrFuncGeneric";
+import { ValueOrFuncGeneric } from "../sharedTypes";
 
 const useUserSetting = <T>(key: string, defaultValue: ValueOrFuncGeneric<T>): [T | undefined, (value: T | undefined) => void] => {
     const [value, setValue] = useState<T | undefined>(LocalStorageService.getItemOrDefault<T>(key, defaultValue));

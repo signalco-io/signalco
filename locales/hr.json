@@ -1,0 +1,11 @@
+{
+    "App": {
+        "Nav": {
+            "Dashboard": "Kontrolna ploča",
+            "Entities": "Entiteti",
+            "Processes": "Procesi",
+            "Stations": "Stanice",
+            "Settings": "Postavke"
+        }
+    }
+}
