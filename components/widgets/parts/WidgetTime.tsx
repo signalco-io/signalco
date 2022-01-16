@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import WidgetCard from './WidgetCard';
 import { IWidgetSharedProps } from "../Widget";
 import { DefaultHeight, DefaultWidth } from "../../../src/widgets/WidgetConfigurationOptions";
@@ -17,14 +17,17 @@ const WidgetTime = (props: IWidgetSharedProps) => {
 
     const showSeconds = config?.showSeconds ?? false;
 
-    useEffect(() => {
-        const token = setInterval(() => {
-            const now = new Date();
-            setTime(`${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`);
-            setSeconds(now.getSeconds().toString().padStart(2, '0'));
-        }, 1000);
-        return () => clearInterval(token);
+    const updateTime = useCallback(() => {
+        const now = new Date();
+        setTime(`${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`);
+        setSeconds(now.getSeconds().toString().padStart(2, '0'));
     }, []);
+
+    useEffect(() => {
+        const token = setInterval(updateTime, 1000);
+        updateTime();
+        return () => clearInterval(token);
+    }, [updateTime]);
 
     return (
         <WidgetCard
