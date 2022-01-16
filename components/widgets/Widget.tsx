@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import dynamic from 'next/dynamic';
 import React from "react";
 import WidgetCard from "./parts/WidgetCard";
+import WidgetChecklist from "./parts/WidgetChecklist";
 const WidgetIndicator = dynamic(() => import("./parts/WidgetIndicator"));
 const WidgetTime = dynamic(() => import("./parts/WidgetTime"));
 const WidgetShades = dynamic(() => import("./parts/WidgetShades"));
@@ -11,13 +12,14 @@ const WidgetState = dynamic(() => import("./parts/WidgetState"));
 const WidgetAirConditioning = dynamic(() => import("./parts/WidgetAirConditioning"));
 const WidgetVacuum = dynamic(() => import("./parts/WidgetVacuum"));
 
-export type widgetType = "state" | "vacuum" | "shades" | 'indicator' | "airconditioning" | "termostat" | "time";
+export type widgetType = "state" | "vacuum" | "shades" | 'indicator' | "airconditioning" | "termostat" | "time" | "checklist";
 
 export interface IWidgetProps extends IWidgetSharedProps {
     type: widgetType,
 }
 
 export interface IWidgetSharedProps {
+    id: string,
     isEditMode: boolean,
     config: any,
     setConfig: (config: object) => void,
@@ -35,6 +37,7 @@ const UnresolvedWidget = (props: IWidgetSharedProps) => (
 
 const Widget = (props: IWidgetProps) => {
     const widgetSharedProps = {
+        id: props.id,
         isEditMode: props.isEditMode,
         config: props.config,
         setConfig: props.setConfig,
@@ -54,6 +57,8 @@ const Widget = (props: IWidgetProps) => {
         WidgetResolved = WidgetAirConditioning;
     } else if (props.type === 'time') {
         WidgetResolved = WidgetTime;
+    } else if (props.type === 'checklist') {
+        WidgetResolved = WidgetChecklist;
     }
 
     return (

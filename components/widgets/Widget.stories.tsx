@@ -83,3 +83,13 @@ WidgetTime.args = {
         rows: 1
     }
 };
+
+export const WidgetChecklist = Template.bind({});
+WidgetChecklist.args = {
+    type: 'checklist',
+    config: {
+        label: 'Checklist widget',
+        columns: 4,
+        rows: 4
+    }
+};
