@@ -17,8 +17,8 @@ const WidgetTime = (props: IWidgetSharedProps) => {
     useEffect(() => {
         const token = setInterval(() => {
             const now = new Date();
-            setTime(`${now.getHours()}:${now.getMinutes()}`);
-            setSeconds(now.getSeconds().toString());
+            setTime(`${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`);
+            setSeconds(now.getSeconds().toString().padStart(2, '0'));
         }, 1000);
         return () => clearInterval(token);
     }, []);
