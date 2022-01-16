@@ -1,4 +1,4 @@
-import { ValueOrFuncGeneric } from "../ValueOrFuncGeneric";
+import { ValueOrFuncGeneric } from "../sharedTypes";
 
 class LocalStorageService {
     getItem<T>(key: string, skipDeseriaalization?: boolean): T | undefined {

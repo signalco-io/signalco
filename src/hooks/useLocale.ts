@@ -1,7 +1,6 @@
 import en from '../../locales/en.json';
 import hr from '../../locales/hr.json';
-
-type ObjectDictAny = { [key: string]: any | undefined };
+import { ObjectDictAny } from '../sharedTypes';
 
 function resolvePathDot(data: ObjectDictAny, path: string) {
     return resolvePathSplit(data, path.split('.'));
