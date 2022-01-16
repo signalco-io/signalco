@@ -1,4 +1,4 @@
-import { Box, Button, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
+import { Box, Button, Checkbox, FormControlLabel, FormGroup, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
 import ConfigurationDialog from "../../shared/dialog/ConfigurationDialog";
@@ -90,6 +90,12 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
             placeholder={props.option.label}
             fullWidth
             onChange={(item) => item && item.length && props.onChange(item[0])} />
+    } else if (props.option.type === 'yesno') {
+        return <FormGroup>
+            <FormControlLabel
+                control={<Checkbox checked={props.value} onChange={(e) => props.onChange(e.currentTarget.checked)} />}
+                label={props.option.label} />
+        </FormGroup>
     } else if (
         props.option.type === 'number' ||
         props.option.type === 'string') {

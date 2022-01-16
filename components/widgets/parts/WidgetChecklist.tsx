@@ -107,16 +107,16 @@ const WidgetChecklist = (props: IWidgetSharedProps) => {
             onRemove={onRemove}
             options={stateOptions}
             config={config}>
-            <Stack sx={{ height: '100%' }} spacing={2} py={4}>
-                <Typography fontSize={24} sx={{ px: 3 }}>{label}</Typography>
+            <Stack sx={{ height: '100%' }} spacing={2} pt={2} pb={3}>
+                <Typography fontSize={24} sx={{ px: 2 }}>{label}</Typography>
                 <Box sx={{ flexGrow: 1, overflow: 'auto', overflowX: 'hidden' }}>
-                    <Stack sx={{ height: '100%', pl: 3, pr: 4 }}>
+                    <Stack sx={{ height: '100%', pl: 2, pr: 3 }}>
                         {items.length
                             ? items.map(item => <ChecklistItem key={item.id} item={item} onChange={handleItemChanged} onRemove={handleItemRemoved} />)
                             : <Box display="flex" height="100%" alignItems="center" justifyContent="center"><NoDataPlaceholder content="No items :)" /></Box>}
                     </Stack>
                 </Box>
-                <Box sx={{ px: 3 }}>
+                <Box sx={{ px: 2 }}>
                     {isAddingItem
                         ? <form onSubmit={handleNewItem}>
                             <Input
