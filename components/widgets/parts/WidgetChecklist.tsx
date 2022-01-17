@@ -101,7 +101,7 @@ const WidgetChecklist = (props: IWidgetSharedProps) => {
 
     return (
         <WidgetCard
-            state={true}
+            state={items.length > 0}
             isEditMode={isEditMode}
             onConfigured={setConfig}
             onRemove={onRemove}
