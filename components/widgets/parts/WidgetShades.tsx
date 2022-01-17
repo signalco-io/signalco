@@ -1,35 +1,38 @@
 import { ArrowUpward, Stop, ArrowDownward } from '@mui/icons-material';
 import { Button, Grid, Stack, Typography } from '@mui/material';
 import dynamic from 'next/dynamic';
-import React from 'react';
+import React, { useMemo } from 'react';
 import useDevice from '../../../src/hooks/useDevice';
+import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
+import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import { IWidgetSharedProps } from '../Widget';
-import WidgetCard from './WidgetCard';
 import { executeStateActionsAsync, StateAction } from './WidgetState';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
 const WidgetShades = (props: IWidgetSharedProps) => {
-    const { config, setConfig, isEditMode, onRemove } = props;
+    const { config } = props;
     const device = useDevice(config?.target?.deviceId);
 
     const label = props.config?.label || device?.alias || '';
 
     // TODO: Calc from source value
     const shadePerc = 0.3;
-    const state = shadePerc < 1;
 
     // TODO: Move outside of component
-    const stateOptions: IWidgetConfigurationOption[] = [
+    const stateOptions: IWidgetConfigurationOption[] = useMemo(() => [
         { name: 'target', label: 'Target', type: 'deviceTarget' },
         { name: 'targetContactUp', label: 'Up button', type: 'contactTarget', data: device?.id },
         { name: 'targetContactDown', label: 'Down button', type: 'contactTarget', data: device?.id },
         { name: 'stopAfter', label: 'Stop after', type: 'number', dataUnit: 'seconds', data: device?.id, optional: true },
         DefaultWidth(4)
-    ];
+    ], [device]);
+
+    useWidgetOptions(stateOptions, props);
+    useWidgetActive(true, props);
 
     const handleStateChangeRequest = (direction: "up" | "down" | "stop") => {
         if (typeof device === 'undefined') {
@@ -79,29 +82,21 @@ const WidgetShades = (props: IWidgetSharedProps) => {
     };
 
     return (
-        <WidgetCard
-            state={state}
-            isEditMode={isEditMode}
-            onRemove={onRemove}
-            onConfigured={setConfig}
-            options={stateOptions}
-            config={config}>
-            <Grid container wrap="nowrap" sx={{ height: '100%' }}>
-                <Grid item xs={6}>
-                    <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent="space-between">
-                        <WindowVisual shadePerc={shadePerc} size={68} />
-                        <Typography fontWeight="light" noWrap>{label}</Typography>
-                    </Stack>
-                </Grid>
-                <Grid item xs={6} sx={{ flexGrow: 1, bgcolor: 'background.paper', borderLeft: "1px solid", borderColor: 'divider', borderRadius: 2 }}>
-                    <Stack sx={{ height: '100%' }} justifyContent="stretch">
-                        <Button onClick={() => handleStateChangeRequest('up')} sx={{ flexGrow: 1, borderBottom: '1px solid', borderColor: 'divider' }}><ArrowUpward /></Button>
-                        <Button onClick={() => handleStateChangeRequest('stop')} sx={{ flexGrow: 1 }}><Stop /></Button>
-                        <Button onClick={() => handleStateChangeRequest('down')} sx={{ flexGrow: 1, borderTop: '1px solid', borderColor: 'divider' }}><ArrowDownward /></Button>
-                    </Stack>
-                </Grid>
+        <Grid container wrap="nowrap" sx={{ height: '100%' }}>
+            <Grid item xs={6}>
+                <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent="space-between">
+                    <WindowVisual shadePerc={shadePerc} size={68} />
+                    <Typography fontWeight="light" noWrap>{label}</Typography>
+                </Stack>
             </Grid>
-        </WidgetCard>
+            <Grid item xs={6} sx={{ flexGrow: 1, bgcolor: 'background.paper', borderLeft: "1px solid", borderColor: 'divider', borderRadius: 2 }}>
+                <Stack sx={{ height: '100%' }} justifyContent="stretch">
+                    <Button onClick={() => handleStateChangeRequest('up')} sx={{ flexGrow: 1, borderBottom: '1px solid', borderColor: 'divider' }}><ArrowUpward /></Button>
+                    <Button onClick={() => handleStateChangeRequest('stop')} sx={{ flexGrow: 1 }}><Stop /></Button>
+                    <Button onClick={() => handleStateChangeRequest('down')} sx={{ flexGrow: 1, borderTop: '1px solid', borderColor: 'divider' }}><ArrowDownward /></Button>
+                </Stack>
+            </Grid>
+        </Grid>
     );
 };
 

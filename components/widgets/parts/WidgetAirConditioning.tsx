@@ -2,11 +2,11 @@ import { Box, Icon, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import useDevice from '../../../src/hooks/useDevice';
-import WidgetCard from './WidgetCard';
 import { CircleSlider } from "react-circle-slider";
 import { IWidgetSharedProps } from '../Widget';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 
 const stateOptions: IWidgetConfigurationOption[] = [
     DefaultLabel,
@@ -27,12 +27,10 @@ const SmallIndicator = observer((props: { isActive: boolean, icon: string, label
 ));
 
 const WidgetAirConditioning = (props: IWidgetSharedProps) => {
-    const { config, setConfig, isEditMode, onRemove } = props;
+    const { config } = props;
+    useWidgetOptions(stateOptions, props);
     const temperatureDevice = useDevice(config?.targetTemperature?.deviceId);
     const heatingDevice = useDevice(config?.targetHeating?.deviceId);
-
-    // TODO: Calc from heating/cooling contact states
-    const state = false;
 
     const temperatureContact = temperatureDevice?.getState({
         channelName: config?.targetTemperature?.channelName,
@@ -52,52 +50,44 @@ const WidgetAirConditioning = (props: IWidgetSharedProps) => {
     const heatingActive = heatingContact?.valueSerialized === 'true';
 
     return (
-        <WidgetCard
-            state={state}
-            isEditMode={isEditMode}
-            onRemove={onRemove}
-            onConfigured={setConfig}
-            options={stateOptions}
-            config={config}>
-            <Box sx={{ width: '100%', height: '100%' }}>
-                <Stack alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
-                    <Box sx={{ height: '111px', overflow: 'hidden', position: 'absolute', top: '24px' }}>
-                        <CircleSlider
-                            value={degrees}
-                            size={222}
-                            stepSize={0.1}
-                            min={10}
-                            max={34}
-                            shadow={false}
-                            knobRadius={15}
-                            progressWidth={4}
-                            circleWidth={15}
-                            circleColor="#666"
-                            progressColor={heatingActive ? "#DC5151" : 'transparent'}
-                            onChange={() => { }}
-                        />
-                    </Box>
-                    <Stack direction="row" sx={{ mt: 9 }}>
-                        <Stack sx={{ height: '100%' }} justifyContent="center" alignItems="center">
-                            <Typography fontWeight={100} fontSize={64} sx={{ lineHeight: 1 }}>{degreesWhole}</Typography>
-                        </Stack>
-                        <Stack justifyContent="space-between">
-                            <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>&#176;C</Typography>
-                            <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>.{degreesDecimal}</Typography>
-                        </Stack>
+        <Box sx={{ width: '100%', height: '100%' }}>
+            <Stack alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
+                <Box sx={{ height: '111px', overflow: 'hidden', position: 'absolute', top: '24px' }}>
+                    <CircleSlider
+                        value={degrees}
+                        size={222}
+                        stepSize={0.1}
+                        min={10}
+                        max={34}
+                        shadow={false}
+                        knobRadius={15}
+                        progressWidth={4}
+                        circleWidth={15}
+                        circleColor="#666"
+                        progressColor={heatingActive ? "#DC5151" : 'transparent'}
+                        onChange={() => { }}
+                    />
+                </Box>
+                <Stack direction="row" sx={{ mt: 9 }}>
+                    <Stack sx={{ height: '100%' }} justifyContent="center" alignItems="center">
+                        <Typography fontWeight={100} fontSize={64} sx={{ lineHeight: 1 }}>{degreesWhole}</Typography>
                     </Stack>
-                    <Typography fontWeight="light" sx={{ opacity: 0.5 }}>{config.label}</Typography>
-                    <Stack direction="row" spacing={2} sx={{ mt: 4 }}>
-                        {config.targetCooling &&
-                            <SmallIndicator isActive={false} label="Cooling" icon="ac_unit" activeBackgroundColor="#445D79" />
-                        }
-                        {config.targetHeating &&
-                            <SmallIndicator isActive={heatingActive} label="Heating" icon="whatshot" activeBackgroundColor="#A14D4D" />
-                        }
+                    <Stack justifyContent="space-between">
+                        <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>&#176;C</Typography>
+                        <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>.{degreesDecimal}</Typography>
                     </Stack>
                 </Stack>
-            </Box>
-        </WidgetCard >
+                <Typography fontWeight="light" sx={{ opacity: 0.5 }}>{config.label}</Typography>
+                <Stack direction="row" spacing={2} sx={{ mt: 4 }}>
+                    {config.targetCooling &&
+                        <SmallIndicator isActive={false} label="Cooling" icon="ac_unit" activeBackgroundColor="#445D79" />
+                    }
+                    {config.targetHeating &&
+                        <SmallIndicator isActive={heatingActive} label="Heating" icon="whatshot" activeBackgroundColor="#A14D4D" />
+                    }
+                </Stack>
+            </Stack>
+        </Box>
     );
 };
 

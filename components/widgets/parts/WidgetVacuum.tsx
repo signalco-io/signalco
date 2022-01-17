@@ -1,10 +1,10 @@
 import { BatteryCharging20Outlined } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
 import React from "react";
+import useWidgetOptions from "../../../src/hooks/widgets/useWidgetOptions";
 import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
 import { DefaultHeight, DefaultLabel, DefaultWidth } from "../../../src/widgets/WidgetConfigurationOptions";
 import { IWidgetSharedProps } from "../Widget";
-import WidgetCard from "./WidgetCard";
 
 const stateOptions: IWidgetConfigurationOption[] = [
     DefaultLabel,
@@ -13,25 +13,19 @@ const stateOptions: IWidgetConfigurationOption[] = [
 ];
 
 const WidgetVacuum = (props: IWidgetSharedProps) => {
-    const state = false;
     const label = props.config?.label ?? '';
     const batteryPerc = 100;
 
+    useWidgetOptions(stateOptions, props);
+
     return (
-        <WidgetCard
-            state={state}
-            isEditMode={props.isEditMode}
-            onConfigured={props.setConfig}
-            options={stateOptions}
-            config={props.config}>
+        <Stack>
             <Stack>
-                <Stack>
-                    <Typography>{batteryPerc}%</Typography>
-                    <BatteryCharging20Outlined />
-                </Stack>
-                <Typography>{label}</Typography>
+                <Typography>{batteryPerc}%</Typography>
+                <BatteryCharging20Outlined />
             </Stack>
-        </WidgetCard>
+            <Typography>{label}</Typography>
+        </Stack>
     );
 };
 

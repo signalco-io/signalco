@@ -1,4 +1,3 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import {
   Avatar,
   Box,
@@ -9,6 +8,7 @@ import {
   ListItemText,
   Menu,
   MenuItem,
+  NoSsr,
   Stack,
   Typography,
   useMediaQuery,
@@ -26,7 +26,6 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { orderBy } from "../src/helpers/ArrayHelpers";
 import { SvgIconComponent } from "@mui/icons-material";
-import { User } from '@auth0/auth0-spa-js';
 import {
   usePopupState,
   bindTrigger,
@@ -35,6 +34,8 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import useLocale from "../src/hooks/useLocale";
+import CurrentUserProvider from "../src/services/CurrentUserProvider";
+import LocalStorageService from "../src/services/LocalStorageService";
 
 const navItems = [
   { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon },
@@ -44,7 +45,9 @@ const navItems = [
   { label: 'Settings', path: '/app/settings', icon: SettingsIcon }
 ];
 
-const UserAvatar = ({ user }: { user?: User }) => {
+const UserAvatar = () => {
+  const user = CurrentUserProvider.getCurrentUser();
+
   if (user === undefined) {
     return (<Avatar variant="circular" />);
   }
@@ -73,26 +76,34 @@ const UserAvatar = ({ user }: { user?: User }) => {
 };
 
 const UserProfileAvatar = () => {
-  const { logout, user } = useAuth0();
   const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' });
   const navWidth = useNavWidth();
   const maxWidth = navWidth - 16;
+  const router = useRouter();
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const user = CurrentUserProvider.getCurrentUser();
+
+  const logout = () => {
+    LocalStorageService.setItem('token', undefined);
+    CurrentUserProvider.setToken(undefined);
+    router.push('/');
+  }
 
   return (
     <>
       <ButtonBase {...bindTrigger(popupState)} sx={{ width: { xs: undefined, sm: '100%' }, py: 1 }}>
         <Stack alignItems="center" spacing={2}>
-          <UserAvatar user={user} />
+          <UserAvatar />
           {!isMobile &&
             <Typography variant="h3" fontWeight={600} sx={{ maxWidth: `${maxWidth}px` }}>{user?.name}</Typography>
           }
         </Stack>
       </ButtonBase>
       <Menu {...bindMenu(popupState)}>
-        <MenuItem onClick={() => logout()}>
+        <MenuItem onClick={logout}>
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
@@ -155,12 +166,14 @@ const NavProfile = () => {
 
   return (
     <Stack
-      direction={isMobile ? 'row' : 'column'}
-      spacing={isMobile ? 0 : 4}
+      direction={{ xs: 'row', sm: 'column' }}
+      spacing={{ xs: 0, sm: 4 }}
       sx={{ px: { xs: 2, sm: 0 }, pt: { xs: 0, sm: 4 }, minWidth: `${navWidth}px`, minHeight: { xs: '60px', sm: undefined } }}
       justifyContent={isMobile ? "space-between" : undefined}
       alignItems="center">
-      <UserProfileAvatar />
+      <NoSsr>
+        <UserProfileAvatar />
+      </NoSsr>
       {!mobileMenuOpen &&
         <Stack sx={{ width: { xs: undefined, lg: '100%' } }}>
           {navItems.filter(ni => isMobile ? ni === activeNavItem : true).map((ni, index) =>

@@ -2,8 +2,12 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 
 function parseHash() {
+    if (typeof window === 'undefined') {
+        return new URLSearchParams();
+    }
+
     return new URLSearchParams(
-        window.location.hash.substr(1) // skip the first char (#)
+        window.location.hash.substring(1) // skip the first char (#)
     );
 }
 
@@ -16,8 +20,11 @@ const useHashParam = (parameterName: string): [string | undefined, (value: strin
     const router = useRouter();
 
     const onHashChanged = useCallback(() => {
-        setLastHash(parseHashParam(parameterName));
-    }, [parameterName]);
+        const newHash = parseHashParam(parameterName);
+        if (newHash !== lastHash) {
+            setLastHash(newHash);
+        }
+    }, [parameterName, lastHash]);
 
     const setHashAsync = async (value: string | undefined) => {
         const hash = parseHash();
@@ -33,16 +40,10 @@ const useHashParam = (parameterName: string): [string | undefined, (value: strin
     }
 
     useEffect(() => {
-        window.addEventListener("hashchange", onHashChanged);
-
-        if (lastHash !== location.hash) {
+        if (router.asPath) {
             onHashChanged();
         }
-
-        return () => {
-            window.removeEventListener("hashchange", onHashChanged);
-        };
-    }, [lastHash, onHashChanged]);
+    }, [router.asPath, onHashChanged])
 
     return [lastHash, setHashAsync];
 };

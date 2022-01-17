@@ -1,6 +1,5 @@
 import { Button, Checkbox, FormControlLabel, FormGroup, IconButton, Input, InputAdornment, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Typography } from "@mui/material";
 import React, { useCallback, useState } from "react";
-import WidgetCard from './WidgetCard';
 import { Box } from '@mui/system';
 import { IWidgetSharedProps } from "../Widget";
 import { DefaultHeight, DefaultLabel, DefaultWidth } from "../../../src/widgets/WidgetConfigurationOptions";
@@ -14,6 +13,8 @@ import LocalStorageService from "../../../src/services/LocalStorageService";
 import CheckIcon from "@mui/icons-material/Check";
 import { v4 as uuidv4 } from 'uuid';
 import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
+import useWidgetOptions from "../../../src/hooks/widgets/useWidgetOptions";
+import useWidgetActive from "../../../src/hooks/widgets/useWidgetActive";
 
 const stateOptions: IWidgetConfigurationOption[] = [
     DefaultLabel,
@@ -56,7 +57,7 @@ const ChecklistItem = observer((props: { item: IChecklistItem, onChange: (id: st
 });
 
 const WidgetChecklist = (props: IWidgetSharedProps) => {
-    const { id, config, setConfig, isEditMode, onRemove } = props;
+    const { id, config } = props;
     const [items] = useState(observable(LocalStorageService.getItemOrDefault<IChecklistItem[]>(`checklist-${id}`, [])));
     const [isAddingItem, setIsAddingItem] = useState(false);
     const [newItemText, setNewItemText] = useState('');
@@ -99,42 +100,38 @@ const WidgetChecklist = (props: IWidgetSharedProps) => {
         });
     };
 
+    // Configure widget
+    useWidgetOptions(stateOptions, props);
+    useWidgetActive(items.length > 0, props);
+
     return (
-        <WidgetCard
-            state={true}
-            isEditMode={isEditMode}
-            onConfigured={setConfig}
-            onRemove={onRemove}
-            options={stateOptions}
-            config={config}>
-            <Stack sx={{ height: '100%' }} spacing={2} pt={2} pb={3}>
-                <Typography fontSize={24} sx={{ px: 2 }}>{label}</Typography>
-                <Box sx={{ flexGrow: 1, overflow: 'auto', overflowX: 'hidden' }}>
-                    <Stack sx={{ height: '100%', pl: 2, pr: 3 }}>
-                        {items.length
-                            ? items.map(item => <ChecklistItem key={item.id} item={item} onChange={handleItemChanged} onRemove={handleItemRemoved} />)
-                            : <Box display="flex" height="100%" alignItems="center" justifyContent="center"><NoDataPlaceholder content="No items :)" /></Box>}
-                    </Stack>
-                </Box>
-                <Box sx={{ px: 2 }}>
-                    {isAddingItem
-                        ? <form onSubmit={handleNewItem}>
-                            <Input
-                                autoFocus
-                                size="small"
-                                value={newItemText}
-                                onChange={(e) => setNewItemText(e.currentTarget.value)}
-                                fullWidth
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton type="submit" edge="end"><CheckIcon /></IconButton>
-                                    </InputAdornment>
-                                } />
-                        </form>
-                        : <Button variant="outlined" fullWidth onClick={() => setIsAddingItem(true)}>Add item</Button>}
-                </Box>
-            </Stack>
-        </WidgetCard>
+        <Stack sx={{ height: '100%' }} spacing={2} pt={2} pb={3}>
+            <Typography fontSize={24} sx={{ px: 2 }}>{label}</Typography>
+            <Box sx={{ flexGrow: 1, overflow: 'auto', overflowX: 'hidden' }}>
+                <Stack sx={{ height: '100%', pl: 2, pr: 3 }}>
+                    {items.length
+                        ? items.map(item => <ChecklistItem key={item.id} item={item} onChange={handleItemChanged} onRemove={handleItemRemoved} />)
+                        : <Box display="flex" height="100%" alignItems="center" justifyContent="center"><NoDataPlaceholder content="No items :)" /></Box>}
+                </Stack>
+            </Box>
+            <Box sx={{ px: 2 }}>
+                {isAddingItem
+                    ? <form onSubmit={handleNewItem}>
+                        <Input
+                            autoFocus
+                            size="small"
+                            value={newItemText}
+                            onChange={(e) => setNewItemText(e.currentTarget.value)}
+                            fullWidth
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton type="submit" edge="end"><CheckIcon /></IconButton>
+                                </InputAdornment>
+                            } />
+                    </form>
+                    : <Button variant="outlined" fullWidth onClick={() => setIsAddingItem(true)}>Add item</Button>}
+            </Box>
+        </Stack>
     );
 };
 

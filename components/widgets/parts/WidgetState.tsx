@@ -2,7 +2,6 @@ import { Stack, Typography, ButtonBase } from "@mui/material";
 import { observer } from 'mobx-react-lite';
 import React, { useMemo } from "react";
 import DevicesRepository from '../../../src/devices/DevicesRepository';
-import WidgetCard from './WidgetCard';
 import dynamic from 'next/dynamic'
 import ConductsService from '../../../src/conducts/ConductsService';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
@@ -11,6 +10,8 @@ import { IWidgetSharedProps } from "../Widget";
 import useDevices from "../../../src/hooks/useDevices";
 import { IDeviceTarget } from "../../../src/devices/Device";
 import { DefaultLabel, DefaultTargetMultiple } from "../../../src/widgets/WidgetConfigurationOptions";
+import useWidgetOptions from "../../../src/hooks/widgets/useWidgetOptions";
+import useWidgetActive from "../../../src/hooks/widgets/useWidgetActive";
 
 const stateOptions = [
     DefaultLabel,
@@ -74,7 +75,7 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
 };
 
 const WidgetState = (props: IWidgetSharedProps) => {
-    const { config, setConfig, isEditMode, onRemove } = props;
+    const { config } = props;
     const deviceIds = useMemo(() => (Array.isArray(config?.target) ? config.target as IDeviceTarget[] : undefined)?.map(i => i.deviceId), [config?.target]);
     const devices = useDevices(deviceIds);
 
@@ -116,25 +117,21 @@ const WidgetState = (props: IWidgetSharedProps) => {
         })));
     };
 
+    // Configure widget
+    useWidgetOptions(stateOptions, props);
+    useWidgetActive(state, props);
+
     return (
-        <WidgetCard
-            state={state}
-            isEditMode={isEditMode}
-            onConfigured={setConfig}
-            onRemove={onRemove}
-            options={stateOptions}
-            config={config}>
-            <ButtonBase sx={{ height: '100%', width: '100%', display: 'block', textAlign: 'left', borderRadius: 2 }} onClick={handleStateChangeRequest} >
-                <Stack sx={{ height: '100%', py: 2 }}>
-                    <Box sx={{ px: 2.5 }}>
-                        <Visual state={state} size={68} />
-                    </Box>
-                    <Box sx={{ px: 2.5 }}>
-                        <Typography fontWeight="light" noWrap>{label}</Typography>
-                    </Box>
-                </Stack>
-            </ButtonBase>
-        </WidgetCard>
+        <ButtonBase sx={{ height: '100%', width: '100%', display: 'block', textAlign: 'left', borderRadius: 2 }} onClick={handleStateChangeRequest} >
+            <Stack sx={{ height: '100%', py: 2 }}>
+                <Box sx={{ px: 2.5 }}>
+                    <Visual state={state} size={68} />
+                </Box>
+                <Box sx={{ px: 2.5 }}>
+                    <Typography fontWeight="light" noWrap>{label}</Typography>
+                </Box>
+            </Stack>
+        </ButtonBase>
     );
 };
 

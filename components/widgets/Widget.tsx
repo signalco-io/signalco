@@ -2,9 +2,10 @@
 import { Alert } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import dynamic from 'next/dynamic';
-import React from "react";
+import React, { useCallback, useState } from "react";
+import IWidgetConfigurationOption from "../../src/widgets/IWidgetConfigurationOption";
 import WidgetCard from "./parts/WidgetCard";
-import WidgetChecklist from "./parts/WidgetChecklist";
+const WidgetChecklist = dynamic(() => import("./parts/WidgetChecklist"));
 const WidgetIndicator = dynamic(() => import("./parts/WidgetIndicator"));
 const WidgetTime = dynamic(() => import("./parts/WidgetTime"));
 const WidgetShades = dynamic(() => import("./parts/WidgetShades"));
@@ -14,34 +15,47 @@ const WidgetVacuum = dynamic(() => import("./parts/WidgetVacuum"));
 
 export type widgetType = "state" | "vacuum" | "shades" | 'indicator' | "airconditioning" | "termostat" | "time" | "checklist";
 
-export interface IWidgetProps extends IWidgetSharedProps {
+export interface IWidgetProps extends IWidgetSpecifigProps {
     type: widgetType,
+    setConfig: (config: object) => void,
+    onRemove: () => void
 }
 
 export interface IWidgetSharedProps {
     id: string,
     isEditMode: boolean,
     config: any,
-    setConfig: (config: object) => void,
-    onRemove: () => void
+    onOptions: (opts: IWidgetConfigurationOption[]) => void,
+    onActive: (active: boolean) => void
 }
 
-const UnresolvedWidget = (props: IWidgetSharedProps) => (
-    <WidgetCard
-        state={false}
-        isEditMode={props.isEditMode}
-        onRemove={props.onRemove}>
-        <Alert severity="error" sx={{ height: "100%" }}>Unknown widget</Alert>
-    </WidgetCard>
+export interface IWidgetSpecifigProps {
+    id: string,
+    isEditMode: boolean,
+    config: any,
+}
+
+const UnresolvedWidget = () => (
+    <Alert severity="error" sx={{ height: "100%" }}>Unknown widget</Alert>
 );
 
 const Widget = (props: IWidgetProps) => {
+    const [options, setOptions] = useState<IWidgetConfigurationOption[] | undefined>(undefined);
+    const [active, setActive] = useState(false);
+
+    const handleOptions = useCallback((opts: IWidgetConfigurationOption[]) => setOptions(opts), []);
+    const handleAction = useCallback((newActive: boolean) => {
+        if (active !== newActive) {
+            return setActive(newActive);
+        }
+    }, [active]);
+
     const widgetSharedProps = {
         id: props.id,
         isEditMode: props.isEditMode,
         config: props.config,
-        setConfig: props.setConfig,
-        onRemove: props.onRemove
+        onOptions: handleOptions,
+        onActive: handleAction
     };
 
     let WidgetResolved: React.ComponentType<any> | React.ReactElement | null | undefined = UnresolvedWidget;
@@ -62,7 +76,15 @@ const Widget = (props: IWidgetProps) => {
     }
 
     return (
-        <WidgetResolved {...widgetSharedProps} />
+        <WidgetCard
+            state={active}
+            isEditMode={props.isEditMode}
+            onConfigured={props.setConfig}
+            onRemove={props.onRemove}
+            options={options}
+            config={props.config}>
+            <WidgetResolved {...widgetSharedProps} />
+        </WidgetCard>
     );
 };
 
