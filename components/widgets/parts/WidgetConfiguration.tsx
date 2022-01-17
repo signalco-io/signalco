@@ -114,31 +114,35 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
 const WidgetConfiguration = (props: IWidgetConfigurationProps) => {
     const configProps = useWidgetConfiguration(props.options, props.config, props.onConfiguration)
 
-    return props.isOpen && (
-        <ConfigurationDialog
-            title="Configure widget"
-            isOpen={props.isOpen}
-            onClose={configProps.onCancel}
-            actions={(
-                <>
-                    <Button onClick={configProps.onCancel}>Cancel</Button>
-                    <Button autoFocus onClick={configProps.onSave}>Save changes</Button>
-                </>
-            )}>
-            <Stack spacing={2}>
-                {configProps.options.map(opt => {
-                    return (
-                        <Box key={opt.name}>
-                            <Typography>{opt.label}{opt.optional && " (optional)"}</Typography>
-                            <WidgetConfigurationOption
-                                option={opt}
-                                value={configProps.values[opt.name] ?? opt.default}
-                                onChange={(value) => configProps.setValue(opt.name, value)} />
-                        </Box>
-                    );
-                })}
-            </Stack>
-        </ConfigurationDialog>
+    return (
+        <>
+            {props.isOpen && (
+                <ConfigurationDialog
+                    title="Configure widget"
+                    isOpen={props.isOpen}
+                    onClose={configProps.onCancel}
+                    actions={(
+                        <>
+                            <Button onClick={configProps.onCancel}>Cancel</Button>
+                            <Button autoFocus onClick={configProps.onSave}>Save changes</Button>
+                        </>
+                    )}>
+                    <Stack spacing={2}>
+                        {configProps.options.map(opt => {
+                            return (
+                                <Box key={opt.name}>
+                                    <Typography>{opt.label}{opt.optional && " (optional)"}</Typography>
+                                    <WidgetConfigurationOption
+                                        option={opt}
+                                        value={configProps.values[opt.name] ?? opt.default}
+                                        onChange={(value) => configProps.setValue(opt.name, value)} />
+                                </Box>
+                            );
+                        })}
+                    </Stack>
+                </ConfigurationDialog>
+            )}
+        </>
     );
 };
 

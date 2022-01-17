@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import dynamic from 'next/dynamic';
 import React from "react";
 import WidgetCard from "./parts/WidgetCard";
-import WidgetChecklist from "./parts/WidgetChecklist";
+const WidgetChecklist = dynamic(() => import("./parts/WidgetChecklist"));
 const WidgetIndicator = dynamic(() => import("./parts/WidgetIndicator"));
 const WidgetTime = dynamic(() => import("./parts/WidgetTime"));
 const WidgetShades = dynamic(() => import("./parts/WidgetShades"));

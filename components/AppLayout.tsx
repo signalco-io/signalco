@@ -1,5 +1,5 @@
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import { Box, Fab, Stack, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Fab, Stack } from "@mui/material";
 import React, { useEffect } from "react";
 import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
@@ -11,14 +11,13 @@ import { useRouter } from 'next/router';
 import * as Sentry from '@sentry/nextjs';
 import useHashParam from "../src/hooks/useHashParam";
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
+import CurrentUserProvider from "../src/services/CurrentUserProvider";
 
 const AppLayout = (props: { children?: React.ReactNode }) => {
   const {
     children
   } = props;
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [isFullScreen, setFullScreenHash] = useHashParam('fullscreen');
 
   console.debug("AppLayout rendering");
@@ -33,7 +32,7 @@ const AppLayout = (props: { children?: React.ReactNode }) => {
 
   return (
     <>
-      <Stack direction={isMobile ? 'column' : 'row'} sx={{ height: '100%', width: '100%' }}>
+      <Stack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100%', width: '100%' }}>
         {isFullScreen !== 'on' && <NavProfile />}
         <Box sx={{ height: '100%', width: '100%', flexGrow: 1, position: 'relative' }}>
           {children}
@@ -120,6 +119,8 @@ const LayoutWithAuth = (props: { LayoutComponent: React.ComponentType, children?
       return;
     }
 
+    CurrentUserProvider.setCurrentUser(user);
+
     // Set sentry user
     Sentry.configureScope(scope => {
       scope.setUser({ email: user.email });
@@ -134,10 +135,30 @@ const LayoutWithAuth = (props: { LayoutComponent: React.ComponentType, children?
   return <LayoutComponent>{children}</LayoutComponent>;
 };
 
-export const AppLayoutWithAuth = (props: { children: React.ReactNode }) => (
-  <Auth0Wrapper><LayoutWithAuth LayoutComponent={withAuthenticationRequired(AppLayout)}>{props.children}</LayoutWithAuth></Auth0Wrapper>
-);
+export const AppLayoutWithAuth = (props: { children: React.ReactNode }) => {
+  if (CurrentUserProvider.isLoggedIn() || typeof window === 'undefined') {
+    return (<AppLayout>
+      {props.children}
+    </AppLayout>);
+  }
 
-export const EmptyLayoutWithAuth = (props: { children: React.ReactNode }) => (
-  <Auth0Wrapper><LayoutWithAuth LayoutComponent={EmptyLayout}>{props.children}</LayoutWithAuth></Auth0Wrapper>
-);
+  console.debug("Not logged in. Wrapping with Auth0");
+
+  return (
+    <Auth0Wrapper><LayoutWithAuth LayoutComponent={withAuthenticationRequired(AppLayout)}>{props.children}</LayoutWithAuth></Auth0Wrapper>
+  );
+};
+
+export const EmptyLayoutWithAuth = (props: { children: React.ReactNode }) => {
+  if (CurrentUserProvider.isLoggedIn() || typeof window === 'undefined') {
+    return <EmptyLayout>
+      props.children
+    </EmptyLayout>;
+  }
+
+  console.debug("Not logged in. Wrapping with Auth0");
+
+  return (
+    <Auth0Wrapper><LayoutWithAuth LayoutComponent={EmptyLayout}>{props.children}</LayoutWithAuth></Auth0Wrapper>
+  );
+};

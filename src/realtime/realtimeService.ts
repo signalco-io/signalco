@@ -2,6 +2,7 @@ import DevicesRepository from "../devices/DevicesRepository";
 import PageNotificationService from "../notifications/PageNotificationService";
 import HttpService from "../services/HttpService";
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import CurrentUserProvider from "../services/CurrentUserProvider";
 
 class SignalSignalRDeviceStateDto {
     DeviceId?: string;
@@ -78,10 +79,11 @@ class RealtimeService {
 
         this.devicesHub = new HubConnectionBuilder()
           .withUrl(HttpService.getApiUrl('/signalr/devices'), {
-            accessTokenFactory: async () => {
-              if (typeof HttpService.tokenFactory === 'undefined')
-                throw Error("TokenFactory not present. Unable to authorize SignalR client.");
-              return HttpService.tokenFactory();
+            accessTokenFactory: () => {
+                const token = CurrentUserProvider.getToken();
+                if (token === 'undefined')
+                    throw Error("TokenFactory not present. Unable to authorize SignalR client.");
+                return token!;
             }
           })
           .configureLogging(LogLevel.Information)

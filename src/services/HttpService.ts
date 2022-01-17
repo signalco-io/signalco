@@ -1,7 +1,8 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import AppSettingsProvider from "./AppSettingsProvider";
 import { trimStartChar, isAbsoluteUrl } from "../helpers/StringHelpers";
-import LocalStorageService from "./LocalStorageService";
+import CurrentUserProvider from "./CurrentUserProvider";
+import Router from "next/router";
 
 export default class HttpService {
   public static tokenFactory?: () => Promise<string>;
@@ -15,28 +16,26 @@ export default class HttpService {
     let token: string | undefined;
 
     // Try to use cached token (for offline access)
-    const cachedToken = LocalStorageService.getItem<string>('signalauth0keycache');
-    if (!HttpService.isOnline &&
-      typeof cachedToken !== 'undefined' &&
-      cachedToken != null) {
+    const cachedToken = CurrentUserProvider.getToken();
+    if (cachedToken != null) {
       token = cachedToken;
-      console.debug('Using cached token because we are offline.');
+      console.debug('Using cached token.');
     }
 
     // If unable to use cached token, ask factory for one
-    if (typeof token === 'undefined' &&
+    if (token == null &&
       typeof HttpService.tokenFactory !== 'undefined') {
       token = await HttpService.tokenFactory();
+      CurrentUserProvider.setToken(token);
       console.debug("Used token factory")
     }
 
     // Cache token and return if available
     if (typeof token !== 'undefined') {
-      LocalStorageService.setItem('signalauth0keycache', token);
       return `Bearer ${token}`;
     }
 
-    console.warn("Token is undefined")
+    console.warn("Token is undefined");
     throw new Error("Login failed.");
   };
 
@@ -50,6 +49,7 @@ export default class HttpService {
     data?: any
   ) {
     const token = await HttpService._getBearerTokenAsync()
+    try {
     const response = await axios.request({
       url: isAbsoluteUrl(url) ? url : HttpService.getApiUrl(url),
       method: method,
@@ -61,6 +61,21 @@ export default class HttpService {
       },
     });
     return response.data;
+    } catch(err) {
+      if (typeof err === 'object' && Object.keys(err as object).find(key => key === 'isAxiosError')) {
+        const axiosError = err as AxiosError;
+        if (axiosError.response?.status === 403) {
+          console.warn('Token expired.');
+          CurrentUserProvider.setToken(undefined);
+          Router.push('/app');
+        }
+        console.warn(`API (${axiosError.response?.status}) - ${axiosError.message}`)
+      } else {
+        console.error('API error', err);
+      }
+
+      throw err;
+    }
   }
 
   public static getApiUrl(url: string): string {
