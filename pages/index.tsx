@@ -3,6 +3,8 @@ import React from "react";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import Image from 'next/image';
 import { AppContext } from "./_app";
+import logoLight from '../public/images/icon-light-512x512.png';
+import logoDark from '../public/images/icon-dark-512x144.png';
 
 const Cover = () => (
   <AppContext.Consumer>
@@ -29,10 +31,9 @@ const Cover = () => (
           <Stack>
             <Box sx={{ pr: '30%' }}>
               <Image
-                src={appState.theme === 'light' ? "/images/icon-light-512x512.png" : "/images/icon-dark-512x144.png"}
+                src={appState.theme === 'light' ? logoLight : logoDark}
                 alt="signalco"
-                width={512}
-                height={144} />
+                priority />
             </Box>
             <Typography fontFamily="Raleway" fontWeight={200} fontSize={{ xs: '1.4rem', sm: '2rem', lg: '2.5rem' }}>Automate your life</Typography>
           </Stack>
@@ -153,6 +154,7 @@ const Footer = () => (
                     <Typography variant="h2" sx={{ pb: 2 }}>Resources</Typography>
                     <Stack>
                       <Link href="https://status.signalco.io">Status</Link>
+                      <Link href="https://storybook.dev.signalco.io">Storybook</Link>
                     </Stack>
                   </Grid>
                   <Grid item>
