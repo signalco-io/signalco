@@ -55,9 +55,10 @@ const WidgetCard = (props: IWidgetCardProps) => {
     const sizeWidth = width * 78 + (width - 1) * 8;
     const sizeHeight = height * 78 + (height - 1) * 8;
 
-    const needsConfiguration = !options || !IsConfigurationValid(configWithStatic, options);
+    const isLoading = typeof options === 'undefined';
+    const needsConfiguration = typeof options === 'undefined' || options == null || !IsConfigurationValid(configWithStatic, options);
 
-    const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' })
+    const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' });
 
     const [isConfiguring, setIsConfiguring] = useState<boolean>(false);
     const handleOnConfiguration = (config: object) => {
@@ -98,7 +99,7 @@ const WidgetCard = (props: IWidgetCardProps) => {
                     bgcolor: bgColor
                 }}
                 variant='outlined'>
-                {needsConfiguration ? (
+                {(!isLoading && needsConfiguration) ? (
                     <Stack justifyContent="stretch" sx={{ height: '100%' }}>
                         <Button disabled={!isEditMode} size="large" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
                     </Stack>

@@ -1,8 +1,9 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
-import WidgetCard from './WidgetCard';
 import { IWidgetSharedProps } from "../Widget";
 import { DefaultHeight, DefaultWidth } from "../../../src/widgets/WidgetConfigurationOptions";
+import useWidgetOptions from "../../../src/hooks/widgets/useWidgetOptions";
+import useWidgetActive from "../../../src/hooks/widgets/useWidgetActive";
 
 const stateOptions = [
     { label: 'Show seconds', name: 'showSeconds', type: 'yesno', default: false, optional: true },
@@ -11,7 +12,7 @@ const stateOptions = [
 ];
 
 const WidgetTime = (props: IWidgetSharedProps) => {
-    const { config, setConfig, isEditMode, onRemove } = props;
+    const { config } = props;
     const [time, setTime] = useState('');
     const [seconds, setSeconds] = useState('');
 
@@ -23,6 +24,8 @@ const WidgetTime = (props: IWidgetSharedProps) => {
         setSeconds(now.getSeconds().toString().padStart(2, '0'));
     }, []);
 
+    useWidgetOptions(stateOptions, props);
+    useWidgetActive(true, props);
     useEffect(() => {
         const token = setInterval(updateTime, 1000);
         updateTime();
@@ -30,24 +33,16 @@ const WidgetTime = (props: IWidgetSharedProps) => {
     }, [updateTime]);
 
     return (
-        <WidgetCard
-            state={true}
-            isEditMode={isEditMode}
-            onConfigured={setConfig}
-            onRemove={onRemove}
-            options={stateOptions}
-            config={config}>
-            <Box sx={{ height: '100%' }}>
-                <Stack sx={{ height: '100%' }} alignItems="center" justifyContent="center">
-                    <Typography fontSize={36} fontWeight={200} sx={{ margin: 0, padding: 0 }}>{time}</Typography>
-                </Stack>
-                {showSeconds && (
-                    <Box sx={{ position: 'absolute', top: 19, left: '80%', opacity: 0.4 }}>
-                        <Typography>{seconds}</Typography>
-                    </Box>
-                )}
-            </Box>
-        </WidgetCard>
+        <Box sx={{ height: '100%' }}>
+            <Stack sx={{ height: '100%' }} alignItems="center" justifyContent="center">
+                <Typography fontSize={36} fontWeight={200} sx={{ margin: 0, padding: 0 }}>{time}</Typography>
+            </Stack>
+            {showSeconds && (
+                <Box sx={{ position: 'absolute', top: 19, left: '80%', opacity: 0.4 }}>
+                    <Typography>{seconds}</Typography>
+                </Box>
+            )}
+        </Box>
     );
 };
 
