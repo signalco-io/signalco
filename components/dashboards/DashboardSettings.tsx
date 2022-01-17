@@ -52,7 +52,7 @@ const DashboardSettings = (props: IDashboardSettingsProps) => {
                 </>
             )}>
             <Stack spacing={4} sx={{ py: 1 }}>
-                <TextField label="Name" value={name} onChange={(e) => setName(e.target.value || "")} />
+                <TextField label="Name" value={name} onChange={(e) => setName(e.target.value ?? "")} />
                 <Stack spacing={2}>
                     <Typography sx={{ opacity: 0.6 }} variant="subtitle2">Advanced</Typography>
                     <ConfirmDeleteButton

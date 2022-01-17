@@ -1,4 +1,4 @@
-import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, CardMedia, Grid, IconButton, Paper, Skeleton, Slider, Stack, Switch, Tab, Tabs, Typography } from '@mui/material';
+import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, Grid, IconButton, Paper, Skeleton, Slider, Stack, Switch, Tab, Tabs, Typography, CardMedia } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
@@ -23,6 +23,7 @@ import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDelete
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import { IHistoricalValue } from '../../../src/entity/IHistoricalValue';
 import dynamic from 'next/dynamic';
+import CloseIcon from '@mui/icons-material/Close';
 
 const DynamicGraph = dynamic(() => import('../../../components/graphs/Graph'));
 
@@ -170,11 +171,20 @@ const ContactStateLastUpdatedDisplay = observer((props: { state?: IDeviceContact
     </>
 ));
 
-const ContactStateValueDisplay = observer((props: { state?: IDeviceContactState }) => (
-    <>
-        {props.state?.valueSerialized}
-    </>
-));
+const ContactStateValueDisplay = observer((props: { contact?: IDeviceContact, state?: IDeviceContactState }) => {
+    const { contact, state } = props;
+
+    let value = state?.valueSerialized;
+    if (contact?.dataType === 'double' ||
+        contact?.dataType === 'colortemp')
+        value = (parseFloat(value) || 0).toFixed(2);
+
+    return (
+        <span title={state?.valueSerialized}>
+            {value}
+        </span>
+    );
+});
 
 function historicalValueToTableItem(value: IHistoricalValue) {
     return {
@@ -185,8 +195,8 @@ function historicalValueToTableItem(value: IHistoricalValue) {
 }
 
 const DeviceContactHistory = (props: { deviceId: string }) => {
-    const [contactName] = useHashParam('contact');
-    const [channelName] = useHashParam('channel');
+    const [contactName, setContactName] = useHashParam('contact');
+    const [channelName, setChannelName] = useHashParam('channel');
     const loadContactHistory = useCallback(
         async () => {
             if (channelName && contactName) {
@@ -214,21 +224,24 @@ const DeviceContactHistory = (props: { deviceId: string }) => {
     }
 
     return (
-        <Card>
-            <CardHeader title="State" />
-            <CardMedia>
-                <Tabs value={selectedTab} onChange={handleTabChange}>
-                    <Tab label="Table" {...a11yProps(0)} />
-                    <Tab label="Graph" {...a11yProps(1)} />
-                </Tabs>
-                <TabPanel value={selectedTab} index={0}>
-                    <AutoTable {...stateItemsTable} />
-                </TabPanel>
-                <TabPanel value={selectedTab} index={1}>
-                    <DynamicGraph data={stateItemsTable.items} height={200} width={400} durationMs={1 * 24 * 60 * 60 * 1000} />
-                </TabPanel>
-            </CardMedia>
-        </Card>
+        <Stack spacing={2}>
+            <Box px={2}>
+                <Stack direction="row" justifyContent="space-between" alignItems="center">
+                    <Typography variant="h3">{contactName} history</Typography>
+                    <IconButton onClick={() => { setContactName(undefined); setChannelName(undefined); }}><CloseIcon /></IconButton>
+                </Stack>
+            </Box>
+            <Tabs value={selectedTab} onChange={handleTabChange}>
+                <Tab label="Table" {...a11yProps(0)} />
+                <Tab label="Graph" {...a11yProps(1)} />
+            </Tabs>
+            <TabPanel value={selectedTab} index={0}>
+                <AutoTable {...stateItemsTable} />
+            </TabPanel>
+            <TabPanel value={selectedTab} index={1}>
+                <DynamicGraph data={stateItemsTable.items} height={200} width={400} durationMs={1 * 24 * 60 * 60 * 1000} />
+            </TabPanel>
+        </Stack>
     );
 };
 
@@ -256,7 +269,7 @@ const DeviceDetails = () => {
                             _channelName: endpoint.channel,
                             _contactName: contact.name,
                             name: contact.name,
-                            value: <ContactStateValueDisplay state={state} />,
+                            value: <ContactStateValueDisplay contact={contact} state={state} />,
                             lastUpdate: <ContactStateLastUpdatedDisplay state={state} />
                         };
                     }));
@@ -379,8 +392,8 @@ const DeviceDetails = () => {
     );
 
     const EntityStates = () => {
-        const [_1, setContactNameHash] = useHashParam('contact');
-        const [_2, setChannelNameHash] = useHashParam('channel');
+        const [contactNameHash, setContactNameHash] = useHashParam('contact');
+        const [channelNameHash, setChannelNameHash] = useHashParam('channel');
         const handleStateSelected = async (row: IStateTableItem) => {
             await setChannelNameHash(row._channelName);
             await setContactNameHash(row._contactName);
@@ -389,9 +402,14 @@ const DeviceDetails = () => {
         return (
             <Card>
                 <CardHeader title="States" />
-                <CardContent style={{ padding: 0 }}>
-                    <AutoTable error={error} isLoading={isLoading} items={stateTableItems} onRowClick={handleStateSelected} />
-                </CardContent>
+                <CardMedia>
+                    <Stack spacing={4}>
+                        <AutoTable error={error} isLoading={isLoading} items={stateTableItems} onRowClick={handleStateSelected} />
+                        {device && contactNameHash && channelNameHash && (
+                            <DeviceContactHistory deviceId={device.id} />
+                        )}
+                    </Stack>
+                </CardMedia>
             </Card>
         );
     };
@@ -417,7 +435,7 @@ const DeviceDetails = () => {
                     <ShareEntityChip entity={device} entityType={1} />
                 </Stack>
             </Stack>
-            <div>
+            <Box sx={{ px: { xs: 1, sm: 2 } }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6} md={4}>
                         <EntityInformation />
@@ -428,13 +446,8 @@ const DeviceDetails = () => {
                     <Grid item xs={12} sm={6} md={4}>
                         <EntityStates />
                     </Grid>
-                    {device && (
-                        <Grid item>
-                            <DeviceContactHistory deviceId={device.id} />
-                        </Grid>
-                    )}
                 </Grid>
-            </div>
+            </Box>
         </Stack>
     );
 }

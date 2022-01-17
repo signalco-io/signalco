@@ -278,13 +278,10 @@ export default class DashboardsRepository {
         const remoteDashboards = await DashboardsRepository._getRemoteDahboardsAsync();
 
         const widgetEquals = (a: IWidget, b: IWidget) => {
-            const isEqual = a.order === b.order &&
+            return a.order === b.order &&
                 a.id === b.id &&
                 JSON.stringify(a.config) === JSON.stringify(b.config) &&
                 a.type === b.type;
-            if (!isEqual)
-                console.log(isEqual, a, b);
-            return isEqual;
         };
 
         const userOrder = (a: IUser, b: IUser) => a.id < b.id ? -1 : (a.id > b.id ? 1 : 0);
