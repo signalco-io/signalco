@@ -60,6 +60,7 @@ const WidgetChecklist = (props: IWidgetSharedProps) => {
     const { id, config } = props;
     const [items] = useState(observable(LocalStorageService.getItemOrDefault<IChecklistItem[]>(`checklist-${id}`, [])));
     const [newItemText, setNewItemText] = useState('');
+    const [isInputFocusedOrFilled, setIsInputFocusedOrFilled] = useState(false);
 
     const removeOnDoneDelay = 500;
     const label = config?.label ?? "Checklist";
@@ -70,9 +71,14 @@ const WidgetChecklist = (props: IWidgetSharedProps) => {
     }, [id]);
 
     const handleNewItem = () => {
-        items.push({ id: uuidv4(), text: newItemText });
-        saveItems(items);
-        setNewItemText('');
+        if (newItemText.trim().length <= 0)
+            return;
+
+        runInAction(() => {
+            items.push({ id: uuidv4(), text: newItemText });
+            saveItems(items);
+            setNewItemText('');
+        })
     }
 
     const handleItemChanged = (id: string, done: boolean) => {
@@ -119,7 +125,13 @@ const WidgetChecklist = (props: IWidgetSharedProps) => {
                         hiddenLabel
                         placeholder="Add an item"
                         fullWidth
-                        endAdornment={
+                        onFocus={() => setIsInputFocusedOrFilled(true)}
+                        onBlur={() => {
+                            if (newItemText.length <= 0) {
+                                setIsInputFocusedOrFilled(false);
+                            }
+                        }}
+                        endAdornment={isInputFocusedOrFilled &&
                             <InputAdornment position="end">
                                 <IconButton type="submit" edge="end"><CheckIcon /></IconButton>
                             </InputAdornment>
