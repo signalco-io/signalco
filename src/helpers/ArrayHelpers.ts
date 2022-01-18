@@ -22,7 +22,7 @@ export const arraySum = <T>(array: T[], selectorFunc: (i: T, index: number) => n
     return sum;
 }
 
-export const arrayMin = <T>(array: T[], compareFn: (i: T, index: number) => number) => {
+const arrayPick = <T>(array: T[], compareFn: (i: T, index: number) => number, pickFn: (a: number, b: number) => boolean) => {
     if (!Array.isArray(array))
         throw new Error('Not an array: ' + typeof array);
 
@@ -32,7 +32,7 @@ export const arrayMin = <T>(array: T[], compareFn: (i: T, index: number) => numb
     let currentMin = compareFn(array[0], 0);
     for (let i = 1; i < array.length; i++) {
         const curr = compareFn(array[i], i);
-        if (curr < currentMin) {
+        if (pickFn(curr, currentMin)) {
             currentMin = curr;
         }
     }
@@ -40,32 +40,15 @@ export const arrayMin = <T>(array: T[], compareFn: (i: T, index: number) => numb
     return currentMin;
 }
 
-export const arrayMax = <T>(array: T[], compareFn: (i: T, index: number) => number) => {
-    if (!Array.isArray(array))
-        throw new Error('Not an array: ' + typeof array);
-
-    if (array.length <= 0)
-        return undefined;
-
-    let currentMax = compareFn(array[0], 0);
-    for (let i = 1; i < array.length; i++) {
-        const curr = compareFn(array[i], i);
-        if (curr > currentMax) {
-            currentMax = curr;
-        }
-    }
-
-    return currentMax;
-}
+export const arrayMin = <T>(array: T[], compareFn: (i: T, index: number) => number) => arrayPick(array, compareFn, (a, b) => a < b)
+export const arrayMax = <T>(array: T[], compareFn: (i: T, index: number) => number) => arrayPick(array, compareFn, (a, b) => a > b)
 
 export const sequenceEqual = <TA, TB>(arrayA: TA[], arrayB: TB[], compareFn: (a: TA, b: TB) => boolean) => {
     if (!arrayA || !arrayB) return false;
     if (arrayA.length !== arrayB.length) return false;
 
     for (let i = 0; i < arrayA.length; i++) {
-        const a = arrayA[i];
-        const b = arrayB[i];
-        if (!compareFn(a, b)) {
+        if (!compareFn(arrayA[i], arrayB[i])) {
             return false;
         }
     }
