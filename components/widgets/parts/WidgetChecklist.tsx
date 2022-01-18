@@ -1,4 +1,4 @@
-import { Button, Checkbox, FormControlLabel, FormGroup, IconButton, Input, InputAdornment, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Typography } from "@mui/material";
+import { Checkbox, FilledInput, FormControlLabel, FormGroup, IconButton, InputAdornment, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Typography } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import { Box } from '@mui/system';
 import { IWidgetSharedProps } from "../Widget";
@@ -59,7 +59,6 @@ const ChecklistItem = observer((props: { item: IChecklistItem, onChange: (id: st
 const WidgetChecklist = (props: IWidgetSharedProps) => {
     const { id, config } = props;
     const [items] = useState(observable(LocalStorageService.getItemOrDefault<IChecklistItem[]>(`checklist-${id}`, [])));
-    const [isAddingItem, setIsAddingItem] = useState(false);
     const [newItemText, setNewItemText] = useState('');
 
     const removeOnDoneDelay = 500;
@@ -73,7 +72,6 @@ const WidgetChecklist = (props: IWidgetSharedProps) => {
     const handleNewItem = () => {
         items.push({ id: uuidv4(), text: newItemText });
         saveItems(items);
-        setIsAddingItem(false);
         setNewItemText('');
     }
 
@@ -115,21 +113,20 @@ const WidgetChecklist = (props: IWidgetSharedProps) => {
                 </Stack>
             </Box>
             <Box sx={{ px: 2 }}>
-                {isAddingItem
-                    ? <form onSubmit={handleNewItem}>
-                        <Input
-                            autoFocus
-                            size="small"
-                            value={newItemText}
-                            onChange={(e) => setNewItemText(e.currentTarget.value)}
-                            fullWidth
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton type="submit" edge="end"><CheckIcon /></IconButton>
-                                </InputAdornment>
-                            } />
-                    </form>
-                    : <Button variant="outlined" fullWidth onClick={() => setIsAddingItem(true)}>Add item</Button>}
+                <form onSubmit={handleNewItem}>
+                    <FilledInput
+                        disableUnderline
+                        hiddenLabel
+                        placeholder="Add an item"
+                        fullWidth
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton type="submit" edge="end"><CheckIcon /></IconButton>
+                            </InputAdornment>
+                        }
+                        value={newItemText}
+                        onChange={(e) => setNewItemText(e.currentTarget.value)} />
+                </form>
             </Box>
         </Stack>
     );
