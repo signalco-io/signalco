@@ -68,7 +68,7 @@
     "@types/recharts": "1.8.23",
     "@types/uuid": "^8.3.4",
     "babel-loader": "8.2.3",
-    "chromatic": "^6.4.0",
+    "chromatic": "^6.4.1",
     "cross-env": "7.0.3",
     "eslint": "8.7.0",
     "eslint-config-next": "12.0.8",
