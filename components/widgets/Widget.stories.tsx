@@ -51,6 +51,9 @@ WidgetShades.args = {
         columns: 4
     }
 };
+WidgetShades.parameters = {
+    chromatic: { disableSnapshot: true }
+};
 
 export const WidgetVacuum = Template.bind({});
 WidgetVacuum.args = {
@@ -82,6 +85,9 @@ WidgetTime.args = {
         columns: 2,
         rows: 1
     }
+};
+WidgetTime.parameters = {
+    chromatic: { disableSnapshot: true }
 };
 
 export const WidgetChecklist = Template.bind({});
