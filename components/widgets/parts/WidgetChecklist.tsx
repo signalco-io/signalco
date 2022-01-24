@@ -121,8 +121,6 @@ const WidgetChecklist = (props: IWidgetSharedProps) => {
             <Box sx={{ px: 2 }}>
                 <form onSubmit={handleNewItem}>
                     <FilledInput
-                        disableUnderline
-                        hiddenLabel
                         placeholder="Add an item"
                         fullWidth
                         onFocus={() => setIsInputFocusedOrFilled(true)}

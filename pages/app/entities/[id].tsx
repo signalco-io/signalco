@@ -1,4 +1,4 @@
-import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, Grid, IconButton, Paper, Skeleton, Slider, Stack, Switch, Tab, Tabs, Typography, CardMedia, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, Grid, IconButton, Paper, Skeleton, Slider, Stack, Switch, Tab, Tabs, Typography, CardMedia, FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
