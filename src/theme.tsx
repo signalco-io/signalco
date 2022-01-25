@@ -46,6 +46,16 @@ const theme = (isDark: boolean) => {
           variant: "outlined"
         }
       },
+      MuiFilledInput: {
+        defaultProps: {
+          disableUnderline: true
+        },
+        styleOverrides: {
+          root: {
+            borderRadius: '4px'
+          }
+        }
+      },
       MuiPaper: {
         defaultProps: {
           variant: "outlined"

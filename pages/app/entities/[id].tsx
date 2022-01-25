@@ -1,4 +1,4 @@
-import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, Grid, IconButton, Paper, Skeleton, Slider, Stack, Switch, Tab, Tabs, Typography, CardMedia } from '@mui/material';
+import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, Grid, IconButton, Paper, Skeleton, Slider, Stack, Switch, Tab, Tabs, Typography, CardMedia, FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
@@ -197,6 +197,7 @@ function historicalValueToTableItem(value: IHistoricalValue) {
 const DeviceContactHistory = (props: { deviceId: string }) => {
     const [contactName, setContactName] = useHashParam('contact');
     const [channelName, setChannelName] = useHashParam('channel');
+    const [period, setPeriod] = useState('1.00:00:00');
     const loadContactHistory = useCallback(
         async () => {
             if (channelName && contactName) {
@@ -204,10 +205,10 @@ const DeviceContactHistory = (props: { deviceId: string }) => {
                     deviceId: props.deviceId,
                     channelName: channelName,
                     contactName: contactName
-                }) || [];
+                }, period) || [];
             } else return [];
         },
-        [props.deviceId, channelName, contactName]);
+        [props.deviceId, channelName, contactName, period]);
 
     const stateItemsTable = useAutoTable(loadContactHistory, historicalValueToTableItem);
 
@@ -223,12 +224,28 @@ const DeviceContactHistory = (props: { deviceId: string }) => {
         };
     }
 
+    const handlePeriod = (e: SelectChangeEvent<string>) => {
+        setPeriod(e.target.value);
+    }
+
     return (
         <Stack spacing={2}>
             <Box px={2}>
                 <Stack direction="row" justifyContent="space-between" alignItems="center">
                     <Typography variant="h3">{contactName} history</Typography>
-                    <IconButton onClick={() => { setContactName(undefined); setChannelName(undefined); }}><CloseIcon /></IconButton>
+                    <Stack direction="row" alignItems="center" spacing={1}>
+                        <FormControl variant="filled" hiddenLabel>
+                            <Select labelId="history-period-select" label="Period" onChange={handlePeriod} value={period} size="small">
+                                <MenuItem value={'01:00:00'}>Last hour</MenuItem>
+                                <MenuItem value={'12:00:00'}>Last 12 hours</MenuItem>
+                                <MenuItem value={'1.00:00:00'}>1 day</MenuItem>
+                                <MenuItem value={'3.00:00:00'}>3 days</MenuItem>
+                                <MenuItem value={'7.00:00:00'}>7 days</MenuItem>
+                                <MenuItem value={'31.00:00:00'}>1 month</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <IconButton onClick={() => { setContactName(undefined); setChannelName(undefined); }}><CloseIcon /></IconButton>
+                    </Stack>
                 </Stack>
             </Box>
             <Tabs value={selectedTab} onChange={handleTabChange}>
@@ -239,7 +256,7 @@ const DeviceContactHistory = (props: { deviceId: string }) => {
                 <AutoTable {...stateItemsTable} />
             </TabPanel>
             <TabPanel value={selectedTab} index={1}>
-                <DynamicGraph data={stateItemsTable.items} height={200} width={400} durationMs={1 * 24 * 60 * 60 * 1000} />
+                <DynamicGraph data={stateItemsTable.items} label={contactName} height={200} width={400} durationMs={1 * 24 * 60 * 60 * 1000} />
             </TabPanel>
         </Stack>
     );

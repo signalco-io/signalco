@@ -1,10 +1,9 @@
-import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, ButtonBase, Chip, Grid, Menu, MenuItem, Paper, Popover, Skeleton, Stack, TextField, Typography } from '@mui/material';
+import { Alert, Box, ButtonBase, Chip, Collapse, Container, Grid, IconButton, Menu, MenuItem, Paper, Popover, Skeleton, Stack, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import { observer } from 'mobx-react-lite';
 import ProcessesRepository, { IProcessModel } from '../../../src/processes/ProcessesRepository';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import NoDataPlaceholder from '../../../components/shared/indicators/NoDataPlaceholder';
 import AddSharpIcon from '@mui/icons-material/AddSharp';
 import { makeAutoObservable } from 'mobx';
@@ -15,6 +14,7 @@ import useDevice from '../../../src/hooks/useDevice';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
 import EntityRepository from '../../../src/entity/EntityRepository';
 import { ObjectDictAny } from '../../../src/sharedTypes';
+import { TransitionGroup } from 'react-transition-group';
 
 interface IDeviceStateValue {
     value?: any
@@ -426,6 +426,21 @@ interface IProcessConfiguration {
     conducts: IConduct[]
 }
 
+const ProcessItem = (props: { children: React.ReactNode, in?: boolean }) => (
+    <Collapse in={props.in} sx={{ pb: 1 }}>
+        <Paper sx={{ p: 2 }} variant="elevation" elevation={0}>
+            {props.children}
+        </Paper>
+    </Collapse>
+);
+
+const ProcessSection = (props: { header: string, isLoading: boolean, onAdd: () => void, addTitle: string }) => (
+    <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+        <Typography>{props.header}</Typography>
+        <IconButton disabled={props.isLoading} onClick={props.onAdd} title={props.addTitle}><AddSharpIcon /></IconButton>
+    </Stack>
+)
+
 const ProcessDetails = () => {
     const router = useRouter();
     const { id } = router.query;
@@ -544,83 +559,43 @@ const ProcessDetails = () => {
     return (
         <>
             {error && <Alert severity="error">{error}</Alert>}
-            <Box sx={{ px: { sm: 2 }, py: 2 }}>
-                <Grid container spacing={2} direction="column" wrap="nowrap">
-                    <Grid item>
+            <Container sx={{ pt: { xs: 0, sm: 4 } }}>
+                <Stack spacing={2}>
+                    <Stack spacing={2}>
                         {isLoading ?
-                            <Skeleton variant="text" width={260} height={60} /> :
-                            <Typography variant="h1">{process?.alias ?? "Unknown"}</Typography>}
-                        <ConfirmDeleteButton
-                            buttonLabel="Delete..."
-                            title="Delete process"
-                            expectedConfirmText={process?.alias || 'confirm'}
-                            onConfirm={handleDelete} />
-                    </Grid>
-                    <Grid item>
-                        <Grid container direction="row">
-                            <Grid item xs={12} sm={6}>
-                                <Accordion defaultExpanded>
-                                    <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panelTriggers-content"
-                                        id="panelTriggers-header"
-                                    >
-                                        <Typography>Triggers</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <Stack spacing={1}>
-                                            {isLoading && <DisplayItemPlaceholder />}
-                                            {!isLoading &&
-                                                (processConfig?.triggers?.length
-                                                    ? processConfig.triggers.map((t, i) => <DisplayDeviceTarget key={`trigger${i}`} target={t.deviceId ? { deviceId: t.deviceId, contactName: t.contactName, channelName: t.channelName } : undefined} onChanged={(updated) => handleTriggerChange(i, updated)} />)
-                                                    : <NoDataPlaceholder content="No triggers" />)}
-                                            <Button fullWidth startIcon={<AddSharpIcon />} disabled={isLoading} onClick={handleAddTrigger}>Add trigger</Button>
-                                        </Stack>
-                                    </AccordionDetails>
-                                </Accordion>
-                                <Accordion defaultExpanded>
-                                    <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panelConditions-content"
-                                        id="panelConditions-header"
-                                    >
-                                        <Typography>Conditions</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <Stack spacing={1}>
-                                            {isLoading && <><DisplayItemPlaceholder /><DisplayItemPlaceholder /><DisplayItemPlaceholder /></>}
-                                            {!isLoading &&
-                                                (typeof processConfig?.condition !== 'undefined'
-                                                    ? <DisplayCondition isTopLevel condition={processConfig.condition} onChanged={handleConditionChange} />
-                                                    : <NoDataPlaceholder content="No condition" />)}
-                                            <Button fullWidth startIcon={<AddSharpIcon />} disabled={isLoading} onClick={handleAddCondition}>Add condition</Button>
-                                        </Stack>
-                                    </AccordionDetails>
-                                </Accordion>
-                                <Accordion defaultExpanded>
-                                    <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panelConducts-content"
-                                        id="panelConducts-header"
-                                    >
-                                        <Typography>Conducts</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <Stack spacing={1}>
-                                            {isLoading && <><DisplayItemPlaceholder /><DisplayItemPlaceholder /></>}
-                                            {!isLoading &&
-                                                (processConfig?.conducts?.length
-                                                    ? processConfig.conducts.map((c, i) => <DisplayDeviceStateValue key={`value${i}`} target={c.target} value={c.value} onChanged={(u) => handleValueChanged(i, u)} />)
-                                                    : <NoDataPlaceholder content="No conducts" />)}
-                                            <Button fullWidth startIcon={<AddSharpIcon />} disabled={isLoading} onClick={handleAddConduct}>Add conduct</Button>
-                                        </Stack>
-                                    </AccordionDetails>
-                                </Accordion>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Box >
+                            <Skeleton variant="text" width={260} height={38} /> :
+                            <Typography variant="h2">{process?.alias ?? "Unknown"}</Typography>}
+                        <Box>
+                            <ConfirmDeleteButton
+                                buttonLabel="Delete..."
+                                title="Delete process"
+                                expectedConfirmText={process?.alias || 'confirm'}
+                                onConfirm={handleDelete} />
+                        </Box>
+                    </Stack>
+                    <Stack spacing={3}>
+                        <Stack spacing={1}>
+                            <ProcessSection header="Triggers" isLoading={isLoading} onAdd={handleAddTrigger} addTitle="Add trigger" />
+                            <TransitionGroup>{processConfig?.triggers?.map((t, i) => <ProcessItem key={`trigger${i}`}><DisplayDeviceTarget target={t.deviceId ? { deviceId: t.deviceId, contactName: t.contactName, channelName: t.channelName } : undefined} onChanged={(updated) => handleTriggerChange(i, updated)} /></ProcessItem>)}</TransitionGroup>
+                            {isLoading ? <DisplayItemPlaceholder /> :
+                                ((processConfig?.triggers?.length ?? 0) <= 0 && <NoDataPlaceholder content="No triggers" />)}
+                        </Stack>
+                        <Stack spacing={1}>
+                            <ProcessSection header="Conditions" isLoading={isLoading} onAdd={handleAddCondition} addTitle="Add condition" />
+                            {isLoading ? <><DisplayItemPlaceholder /><DisplayItemPlaceholder /><DisplayItemPlaceholder /></> :
+                                (processConfig?.condition
+                                    ? <ProcessItem in><DisplayCondition isTopLevel condition={processConfig.condition} onChanged={handleConditionChange} /></ProcessItem>
+                                    : <NoDataPlaceholder content="No condition" />)}
+                        </Stack>
+                        <Stack spacing={1}>
+                            <ProcessSection header="Conducts" isLoading={isLoading} onAdd={handleAddConduct} addTitle="Add conduct" />
+                            <TransitionGroup>{processConfig?.conducts?.map((c, i) => <ProcessItem key={`value${i}`}><DisplayDeviceStateValue target={c.target} value={c.value} onChanged={(u) => handleValueChanged(i, u)} /></ProcessItem>)}</TransitionGroup>
+                            {isLoading ? <><DisplayItemPlaceholder /><DisplayItemPlaceholder /></> :
+                                ((processConfig?.conducts?.length ?? 0) <= 0 && <NoDataPlaceholder content="No conducts" />)}
+                        </Stack>
+                    </Stack>
+                </Stack>
+            </Container>
         </>
     );
 }

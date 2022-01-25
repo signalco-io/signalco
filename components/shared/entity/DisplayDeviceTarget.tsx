@@ -1,40 +1,30 @@
 import { ButtonBase, Chip, Menu, MenuItem, Skeleton, Stack } from "@mui/material";
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
+import React, { } from "react";
 import { IDeviceModel, IDeviceTarget, IDeviceTargetIncomplete } from "../../../src/devices/Device";
-import DevicesRepository from "../../../src/devices/DevicesRepository";
 import { selectMany } from '../../../src/helpers/ArrayHelpers';
 import useDevice from "../../../src/hooks/useDevice";
+import {
+    usePopupState,
+    bindTrigger,
+    bindMenu,
+} from 'material-ui-popup-state/hooks';
+import useAllEntities from "../../../src/hooks/useAllEntities";
 
-const DeviceSelection = (props: { target?: IDeviceTargetIncomplete, onSelected: (device: IDeviceModel | undefined) => void }) => {
+const DeviceSelectionMenuItem = (props: { target?: IDeviceTargetIncomplete, onSelected: (device: IDeviceModel | undefined) => void }) => {
     const {
         target,
         onSelected
     } = props;
-    const [devices, setDevices] = useState<IDeviceModel[] | undefined>();
+    const entities = useAllEntities();
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const devices = await DevicesRepository.getDevicesAsync();
-                setDevices(devices);
-            } catch (err: any) {
-                console.warn("Failed to load device selection devices.", err);
-            } finally {
-                // TODO: Set loading false
-            }
-        })();
-    }, []);
-
-    if (typeof devices === 'undefined')
-        return <>
-            <MenuItem disabled>Loading...</MenuItem>
-        </>;
+    if (entities.isLoading)
+        return <MenuItem disabled>Loading...</MenuItem>;
 
     return (
         <>
             <MenuItem onClick={() => onSelected(undefined)} selected={typeof target?.deviceId === 'undefined'}>None</MenuItem>
-            {devices.map(d =>
+            {entities.items.map(d =>
                 <MenuItem
                     key={d.id}
                     onClick={() => onSelected(d)}
@@ -79,15 +69,11 @@ const ContactSelection = (props: { device?: IDeviceModel, target?: IDeviceTarget
 }
 
 const DisplayDeviceTarget = observer((props: { target?: IDeviceTargetIncomplete, hideDevice?: boolean, hideContact?: boolean, onChanged: (updated?: IDeviceTargetIncomplete) => void }) => {
-    const [contactMenuAnchorEl, setContactMenuAnchorEl] = useState<null | HTMLElement>(null);
-    const [devicesMenuAnchorEl, setDevicesMenuAnchorEl] = useState<null | HTMLElement>(null);
     const device = useDevice(props.target?.deviceId);
+    const deviceMenu = usePopupState({ variant: 'popover', popupId: 'devicetarget-device-menu' });
+    const contactMenu = usePopupState({ variant: 'popover', popupId: 'devicetarget-device-contact-menu' });
 
     const isLoading = typeof device === 'undefined';
-
-    const handleDevicesSelection = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setDevicesMenuAnchorEl(event.currentTarget);
-    }
 
     const handleDevicesSelected = (device: IDeviceModel | undefined) => {
         // Retrieve available contact, set undefined if no matching
@@ -103,15 +89,7 @@ const DisplayDeviceTarget = observer((props: { target?: IDeviceTargetIncomplete,
             channelName: channel,
             contactName: contact
         } : undefined);
-        handleDevicesSelectionClosed();
-    }
-
-    const handleDevicesSelectionClosed = () => {
-        setDevicesMenuAnchorEl(null);
-    }
-
-    const handleContactSelection = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setContactMenuAnchorEl(event.currentTarget);
+        deviceMenu.close();
     }
 
     const handleContactSelected = (contact?: IDeviceTarget) => {
@@ -120,11 +98,7 @@ const DisplayDeviceTarget = observer((props: { target?: IDeviceTargetIncomplete,
             channelName: contact?.channelName,
             contactName: contact?.contactName
         } : undefined);
-        handleContactSelectionClosed();
-    }
-
-    const handleContactSelectionClosed = () => {
-        setContactMenuAnchorEl(null);
+        contactMenu.close();
     }
 
     const ITEM_HEIGHT = 48;
@@ -134,42 +108,28 @@ const DisplayDeviceTarget = observer((props: { target?: IDeviceTargetIncomplete,
         <Stack direction="row" spacing={1}>
             {(!props.hideDevice) && (
                 <>
-                    <ButtonBase onClick={handleDevicesSelection} aria-controls="devicetarget-devices-select-menu" aria-haspopup="true">
+                    <ButtonBase {...bindTrigger(deviceMenu)}>
                         <Chip label={isLoading ? <Skeleton width={160} variant="text" /> : deviceDisplayName} title={deviceDisplayName} />
                     </ButtonBase>
-                    {Boolean(devicesMenuAnchorEl) &&
-                        <Menu
-                            id="devicetarget-devices-select-menu"
-                            open={Boolean(devicesMenuAnchorEl)}
-                            anchorEl={devicesMenuAnchorEl}
-                            keepMounted
-                            onClose={handleDevicesSelectionClosed}
-                            PaperProps={{
-                                style: {
-                                    maxHeight: ITEM_HEIGHT * 6.5,
-                                    width: '30ch',
-                                },
-                            }}>
-                            <DeviceSelection target={props.target} onSelected={handleDevicesSelected} />
-                        </Menu>}
+                    <Menu {...bindMenu(deviceMenu)}
+                        PaperProps={{
+                            style: {
+                                maxHeight: ITEM_HEIGHT * 6.5,
+                                width: '30ch',
+                            },
+                        }}>
+                        <DeviceSelectionMenuItem target={props.target} onSelected={handleDevicesSelected} />
+                    </Menu>
                 </>
             )}
             {(props.target?.deviceId && !props.hideContact) && (
                 <>
-                    <ButtonBase onClick={handleContactSelection} aria-controls="devicetarget-contact-select-menu" aria-haspopup="true">
+                    <ButtonBase {...bindTrigger(contactMenu)}>
                         <Chip label={props.target.contactName ?? "None"} title={`${props.target.channelName} | ${props.target.contactName}`} />
                     </ButtonBase>
-                    <>
-                        {Boolean(contactMenuAnchorEl) &&
-                            <Menu
-                                id="devicetarget-contact-select-menu"
-                                open={Boolean(contactMenuAnchorEl)}
-                                anchorEl={contactMenuAnchorEl}
-                                keepMounted
-                                onClose={handleContactSelectionClosed}>
-                                <ContactSelection device={device} target={props.target} onSelected={handleContactSelected} />
-                            </Menu>}
-                    </>
+                    <Menu {...bindMenu(contactMenu)}>
+                        <ContactSelection device={device} target={props.target} onSelected={handleContactSelected} />
+                    </Menu>
                 </>
             )}
         </Stack>
