@@ -8,6 +8,7 @@ export default {
     component: DashboardSettings,
     subcomponents: { ConfigurationDialog, ConfirmDeleteButton },
     args: {
+        isOpen: false,
         onClose: () => { }
     }
 } as ComponentMeta<typeof DashboardSettings>;
