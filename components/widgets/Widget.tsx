@@ -41,7 +41,9 @@ function applyStaticToConfig(config: any | undefined, options: IWidgetConfigurat
     const staticConfigs: ObjectDictAny = {};
     if (options) {
         options.filter(o => o.type === 'static').forEach(o => {
-            staticConfigs[o.name] = o.default;
+            if (typeof staticConfigs[o.name] === 'undefined') {
+                staticConfigs[o.name] = o.default;
+            }
         });
     }
 
