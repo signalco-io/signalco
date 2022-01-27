@@ -1,5 +1,5 @@
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import { Box, Fab, Stack } from "@mui/material";
+import { Box, Button, ButtonBase, Container, Fab, Stack } from "@mui/material";
 import React, { useEffect } from "react";
 import HttpService from "../src/services/HttpService";
 import NavProfile from "./NavProfile";
@@ -12,8 +12,14 @@ import * as Sentry from '@sentry/nextjs';
 import useHashParam from "../src/hooks/useHashParam";
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import CurrentUserProvider from "../src/services/CurrentUserProvider";
+import { ChildrenProps } from "../src/sharedTypes";
+import Footer from "./pages/Footer";
+import SignalcoLogo from "./icons/SignalcoLogo";
+import useWindowRect from "../src/hooks/useWindowRect";
+import Link from "next/link";
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
-const AppLayout = (props: { children?: React.ReactNode }) => {
+const AppLayout = (props: ChildrenProps) => {
   const {
     children
   } = props;
@@ -52,7 +58,51 @@ const AppLayout = (props: { children?: React.ReactNode }) => {
   );
 };
 
-const EmptyLayout = (props: { children?: React.ReactNode }) => {
+const PageNav = () => {
+  var rect = useWindowRect();
+  const isScrolled = rect?.scrollY;
+
+  console.log('isScrolled', isScrolled, rect);
+
+  return (
+    <Box sx={{
+      borderBottom: '1px solid',
+      borderColor: isScrolled ? 'divider' : 'transparent',
+      transition: 'all 0.2s',
+      py: 2,
+      position: 'sticky',
+      top: 0,
+      backdropFilter: 'saturate(180%) blur(10px)',
+      zIndex: 101
+    }}>
+      <Container>
+        <Stack component="header" direction="row" justifyContent="space-between" alignItems="center">
+          <Link href="/" passHref><ButtonBase disableRipple><SignalcoLogo priority height={42} /></ButtonBase></Link>
+          <Stack direction="row" alignItems="center" spacing={2}>
+            <Link href="/app" passHref>
+              <Button variant="contained" endIcon={<KeyboardArrowRightIcon />}>App</Button>
+            </Link>
+          </Stack>
+        </Stack>
+      </Container>
+    </Box>
+  );
+};
+
+export function PageLayout(props: ChildrenProps) {
+  return (
+    <Stack spacing={4}>
+      <PageNav />
+      <Box>
+        <Container>
+          {props.children}
+        </Container>
+      </Box>
+      <Footer />
+    </Stack>);
+};
+
+const EmptyLayout = (props: ChildrenProps) => {
   const {
     children
   } = props;
@@ -70,7 +120,7 @@ const EmptyLayout = (props: { children?: React.ReactNode }) => {
   );
 };
 
-const Auth0Wrapper = (props: { children?: React.ReactNode }) => {
+const Auth0Wrapper = (props: ChildrenProps) => {
   const {
     children
   } = props;
@@ -135,7 +185,7 @@ const LayoutWithAuth = (props: { LayoutComponent: React.ComponentType, children?
   return <LayoutComponent>{children}</LayoutComponent>;
 };
 
-export const AppLayoutWithAuth = (props: { children: React.ReactNode }) => {
+export const AppLayoutWithAuth = (props: ChildrenProps) => {
   if (CurrentUserProvider.isLoggedIn() || typeof window === 'undefined') {
     return (<AppLayout>
       {props.children}
@@ -149,7 +199,7 @@ export const AppLayoutWithAuth = (props: { children: React.ReactNode }) => {
   );
 };
 
-export const EmptyLayoutWithAuth = (props: { children: React.ReactNode }) => {
+export const EmptyLayoutWithAuth = (props: ChildrenProps) => {
   if (CurrentUserProvider.isLoggedIn() || typeof window === 'undefined') {
     return <EmptyLayout>
       props.children

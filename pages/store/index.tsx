@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActionArea, CardContent, Checkbox, Container, Grid, List, Paper, Typography } from "@mui/material";
+import { Box, Button, Card, CardActionArea, CardContent, Checkbox, Grid, List, Paper, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -12,6 +12,7 @@ import SelectItems from "../../components/shared/form/SelectItems";
 import { useState } from "react";
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import contentData from './content.json';
+import { PageLayout } from "../../components/AppLayout";
 
 const FilterList = (props: { header: string, items: { id: string, label: string }[], truncate: number }) => {
     const {
@@ -160,40 +161,38 @@ const StoreIndex = (props: { categories: string[], brands: string[] }) => {
     const handleOrderByItemsChange = (values: string[]) => setSelectedOrderByItems(values);
 
     return (
-        <Stack>
-            <Container sx={{ py: 8 }}>
-                <Stack spacing={8}>
-                    <Box sx={{ zIndex: -1 }}>
-                        <Typography variant="h1">Discover your new smart home</Typography>
-                    </Box>
-                    <Stack direction="row" spacing={4}>
-                        <Paper variant="elevation" elevation={6} sx={{ padding: 2, width: '100%', maxWidth: 360 }}>
-                            <Stack spacing={4}>
-                                <FilterList header="Categories" items={categories} truncate={6} />
-                                <FilterList header="Brands" items={brands} truncate={6} />
-                                <FilterList header="Communication" items={communication} truncate={999} />
-                            </Stack>
-                        </Paper>
-                        <Stack spacing={4}>
-                            <Stack direction="row" justifyContent="space-between">
-                                <Typography gutterBottom variant="h1">Found {items.length} products</Typography>
-                                <SelectItems value={selectedOrderByItems} items={orderByItems} onChange={handleOrderByItemsChange} />
-                            </Stack>
-                            <div>
-                                <Grid container spacing={3} alignContent="flex-start">
-                                    {items.map(item => (
-                                        <Grid item key={item.id} sx={{ width: '252px' }}>
-                                            <StoreItemThumb {...item} />
-                                        </Grid>
-                                    ))}
-                                </Grid>
-                            </div>
-                        </Stack>
+        <Stack spacing={8}>
+            <Box sx={{ zIndex: -1 }}>
+                <Typography variant="h1">Discover your new smart home</Typography>
+            </Box>
+            <Stack direction="row" spacing={4}>
+                <Paper variant="elevation" elevation={6} sx={{ padding: 2, width: '100%', maxWidth: 360 }}>
+                    <Stack spacing={4}>
+                        <FilterList header="Categories" items={categories} truncate={6} />
+                        <FilterList header="Brands" items={brands} truncate={6} />
+                        <FilterList header="Communication" items={communication} truncate={999} />
                     </Stack>
+                </Paper>
+                <Stack spacing={4}>
+                    <Stack direction="row" justifyContent="space-between">
+                        <Typography gutterBottom variant="h1">Found {items.length} products</Typography>
+                        <SelectItems value={selectedOrderByItems} items={orderByItems} onChange={handleOrderByItemsChange} />
+                    </Stack>
+                    <div>
+                        <Grid container spacing={3} alignContent="flex-start">
+                            {items.map(item => (
+                                <Grid item key={item.id} sx={{ width: '252px' }}>
+                                    <StoreItemThumb {...item} />
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </div>
                 </Stack>
-            </Container>
+            </Stack>
         </Stack>
     );
 };
+
+StoreIndex.layout = PageLayout;
 
 export default StoreIndex;
