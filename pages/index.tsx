@@ -1,10 +1,11 @@
-import { Box, Container, Divider, Grid, IconButton, Link, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Divider, Grid, IconButton, Stack, Typography } from "@mui/material";
 import React from "react";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import Image from 'next/image';
 import { AppContext } from "./_app";
 import logoLight from '../public/images/icon-light-512x512.png';
 import logoDark from '../public/images/icon-dark-512x144.png';
+import Link from "next/link";
 
 const Cover = () => (
   <AppContext.Consumer>
@@ -45,15 +46,27 @@ const Cover = () => (
 
 const Nav = () => (
   <Stack justifyContent="center" direction="row" spacing={{ xs: 4, md: 8 }}>
-    <Link href="/app" sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
-      <Typography variant="h2">Automate</Typography>
-    </Link>
-    <Link href="#" sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
-      <Typography variant="h2">Explore</Typography>
-    </Link>
-    <Link href="#" sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
-      <Typography variant="h2">Community</Typography>
-    </Link>
+    <Box sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
+      <Link passHref href="/app">
+        <Button size="large">
+          <Typography variant="h2">Automate</Typography>
+        </Button>
+      </Link>
+    </Box>
+    <Box sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
+      <Link passHref href="#">
+        <Button size="large">
+          <Typography variant="h2">Explore</Typography>
+        </Button>
+      </Link>
+    </Box>
+    <Box sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
+      <Link passHref href="#">
+        <Button size="large">
+          <Typography variant="h2">Community</Typography>
+        </Button>
+      </Link>
+    </Box>
   </Stack>
 );
 
@@ -92,17 +105,24 @@ const CounterIndicator = (props: { count: number, hideAfter?: boolean }) => (
             top: '42px',
           } : undefined
         }}>
-          <Typography textAlign="center" fontSize={24} fontWeight={600}>{props.count}</Typography>
+          <Typography textAlign="center" fontSize={23} fontWeight={600}>{props.count}</Typography>
         </Box>
       </Box>
     )}
   </AppContext.Consumer>
 );
 
-const FeatureDescription = (props: { title: string, content: string }) => (
+const FeatureDescription = (props: { title: string, content: string, link?: string }) => (
   <Stack spacing={2}>
-    <Typography fontWeight={600} fontSize={24}>{props.title}</Typography>
+    <Typography fontWeight={600} variant="h2">{props.title}</Typography>
     <Typography sx={{ opacity: 0.6 }}>{props.content}</Typography>
+    <Box>
+      {props.link && (
+        <Link passHref href={props.link}>
+          <Button variant="outlined">Read more</Button>
+        </Link>
+      )}
+    </Box>
   </Stack>
 );
 
@@ -111,7 +131,7 @@ const StepContent = (props: { title: string, subtitle?: string, imageSrc?: strin
     <Stack spacing={12} p={8}>
       <Stack spacing={4}>
         <Typography fontWeight={600} fontSize={52} textAlign="center">{props.title}</Typography>
-        {props.subtitle && <Typography fontSize={18} textAlign="center" sx={{ opacity: 0.6 }}>{props.subtitle}</Typography>}
+        {props.subtitle && <Typography textAlign="center" sx={{ opacity: 0.6 }}>{props.subtitle}</Typography>}
       </Stack>
       <Stack position="relative" direction="row" spacing={8}>
         {props.imageSrc && (
@@ -139,7 +159,7 @@ const Footer = () => (
               <Grid item>
                 <Grid container justifyContent="space-between" spacing={2}>
                   <Grid item>
-                    <Typography variant="h2" sx={{ pb: 2 }}>Projects</Typography>
+                    <Typography variant="h4" sx={{ pb: 2 }}>Projects</Typography>
                     <Stack>
                       <Link href="https://github.com/signalco-io/signalco">Website</Link>
                       <Link href="https://github.com/signalco-io/cloud">Cloud</Link>
@@ -147,18 +167,18 @@ const Footer = () => (
                     </Stack>
                   </Grid>
                   <Grid item>
-                    <Typography variant="h2" sx={{ pb: 2 }}>Community</Typography>
+                    <Typography variant="h4" sx={{ pb: 2 }}>Community</Typography>
                     <Typography variant="caption" color="textSecondary">Coming soon...</Typography>
                   </Grid>
                   <Grid item>
-                    <Typography variant="h2" sx={{ pb: 2 }}>Resources</Typography>
+                    <Typography variant="h4" sx={{ pb: 2 }}>Resources</Typography>
                     <Stack>
                       <Link href="https://status.signalco.io">Status</Link>
                       <Link href="https://storybook.dev.signalco.io">Storybook</Link>
                     </Stack>
                   </Grid>
                   <Grid item>
-                    <Typography variant="h2" sx={{ pb: 2 }}>Legal</Typography>
+                    <Typography variant="h4" sx={{ pb: 2 }}>Legal</Typography>
                     <Stack>
                       <Link href="/legal/privacy-policy">Privacy Policy</Link>
                       <Link href="/legal/terms-of-service">Terms of Service</Link>
@@ -175,7 +195,7 @@ const Footer = () => (
                     <Typography variant="subtitle2" fontWeight={400} component="span" color="textSecondary">Copyright © {new Date().getFullYear()} signalco. All rights reserved.</Typography>
                   </Grid>
                   <Grid item>
-                    <Link href="https://github.com/signalco-io/signalco">
+                    <Link href="https://github.com/signalco-io/signalco" passHref>
                       <IconButton size="large" aria-label="GitHub link">
                         <GitHubIcon />
                       </IconButton>
@@ -205,13 +225,18 @@ const Index = () => (
         title="Integrations"
         content="Infinite possibilities. Check out many of our integrations." />
       <FeatureDescription
-        title="Inpiration"
+        title="Inspiration"
         content="" />
     </StepContent>
     <Box sx={{ margin: 'auto' }}>
       <CounterIndicator count={2} />
     </Box>
-    <StepContent title="Play" />
+    <StepContent title="Play" subtitle="test123">
+      <FeatureDescription
+        title="Visualize"
+        content=""
+        link="/features/dashboards" />
+    </StepContent>
     <Box sx={{ margin: 'auto' }}>
       <CounterIndicator count={3} hideAfter />
     </Box>

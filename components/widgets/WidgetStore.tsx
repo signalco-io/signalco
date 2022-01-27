@@ -50,7 +50,7 @@ const availableWidgets = [
     }
 ];
 
-const WidgetStore = (props: { onAddWidget: (widgetType: widgetType) => void }) => {
+const WidgetStore = (props: { onAddWidget?: (widgetType: widgetType) => void }) => {
     const [filteredAvailableWidgetsItems, showAvailableWidgetsSearch, searchAvailableWidgetsText, handleSearchAvailableWidgetsTextChange] =
         useSearch(availableWidgets, filterFuncObjectStringProps, 6);
 
@@ -70,7 +70,7 @@ const WidgetStore = (props: { onAddWidget: (widgetType: widgetType) => void }) =
                                     subheader={availableWidget.description}
                                     subheaderTypographyProps={{ variant: "body2", color: "text.secondary", pt: 1 }} />
                                 <CardMedia>
-                                    <Box sx={{ width: '100%', height: '370px', background: 'black', display: 'flex', 'justifyContent': 'center' }}>
+                                    <Box sx={{ width: '100%', height: '370px', display: 'flex', 'justifyContent': 'center' }}>
                                         <Image
                                             src={availableWidget.preview}
                                             alt={`${availableWidget.name} Preview`}
@@ -80,7 +80,7 @@ const WidgetStore = (props: { onAddWidget: (widgetType: widgetType) => void }) =
                                 </CardMedia>
                                 <Divider />
                                 <CardActions sx={{ justifyContent: 'flex-end' }}>
-                                    <IconButton aria-label="Add to dashboard" onClick={() => props.onAddWidget(availableWidget.type)}>
+                                    <IconButton disabled={props.onAddWidget == null} aria-label="Add to dashboard" onClick={() => props.onAddWidget && props.onAddWidget(availableWidget.type)}>
                                         <AddOutlined />
                                     </IconButton>
                                 </CardActions>
