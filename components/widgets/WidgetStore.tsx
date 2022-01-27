@@ -1,4 +1,4 @@
-import { CardHeader, Grid, Stack, Box, Card, Typography, CardActions, CardMedia, CardContent, IconButton, TextField, Divider } from "@mui/material";
+import { CardHeader, Grid, Stack, Box, Card, Typography, CardActions, CardMedia, IconButton, TextField, Divider } from "@mui/material";
 import React from "react";
 import Image from 'next/image';
 import useSearch, { filterFuncObjectStringProps } from "../../src/hooks/useSearch";
@@ -10,51 +10,43 @@ const availableWidgets = [
         type: 'state',
         name: 'State',
         description: 'Control and see state of any integrated entity.',
-        preview: '/assets/widget-previews/WidgetStatePreview_dark.svg'
+        preview: '/assets/widget-previews/Components_Widgets_Widget_Widget State.png'
     },
     {
         type: 'shades',
         name: 'Shades',
         description: 'Control and see state of window shades.',
-        preview: '/assets/widget-previews/WidgetShadesPreview_dark.svg',
-        previewWidth: 300
+        preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Shades.png',
     },
     {
         type: 'vacuum',
         name: 'Vacuum',
         description: 'Control and see state of your robot vacuum.',
-        preview: '/assets/widget-previews/WidgetVacuumPreview_dark.svg',
-        previewWidth: 200,
-        previewHeight: 200
+        preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Vacuum.png',
     },
     {
         type: 'indicator',
         name: 'Indicator',
         description: 'See state of anything.',
-        preview: '/assets/widget-previews/WidgetIndicatorPreview_dark.png',
-        previewHeight: 400,
-        previewWidth: 106
+        preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Idicator.png',
     },
     {
         type: ['termostat', 'airconditioning'],
         name: 'Air conditioning',
         description: 'Monitor and Control temperature of your space.',
-        preview: '/assets/widget-previews/WidgetAirConditionPreview_dark.png',
-        previewWidth: 230
+        preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Termostat.png',
     },
     {
         type: 'time',
         name: 'Time',
         description: 'Displays current time.',
-        preview: '/assets/widget-previews/WidgetTimePreview_dark.png',
-        previewWidth: 230
+        preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Time.png',
     },
     {
         type: 'checklist',
         name: 'Checklist',
         description: 'Keep track of your tasks.',
-        preview: '/assets/widget-previews/WidgetChecklistPreview_dark.png',
-        previewWidth: 230
+        preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Checklist.png',
     }
 ];
 
@@ -69,25 +61,23 @@ const WidgetStore = (props: { onAddWidget: (widgetType: widgetType) => void }) =
                 <Typography variant="body2" color="text.secondary">{filteredAvailableWidgetsItems.length} widget{filteredAvailableWidgetsItems.length > 1 ? 's' : ''} available</Typography>
             </Stack>
             <div>
-                <Grid container spacing={1} justifyContent="center">
+                <Grid container spacing={2} justifyContent="center">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (
                         <Grid item key={`${availableWidget.type}-${index}`}>
-                            <Card sx={{ minWidth: '320px' }} variant="elevation" elevation={4}>
-                                <CardHeader title={availableWidget.name} />
+                            <Card>
+                                <CardHeader
+                                    title={availableWidget.name}
+                                    subheader={availableWidget.description}
+                                    subheaderTypographyProps={{ variant: "body2", color: "text.secondary", pt: 1 }} />
                                 <CardMedia>
-                                    <Box sx={{ width: '100%', height: '230px', background: 'black', display: 'flex', 'justifyContent': 'center' }}>
+                                    <Box sx={{ width: '100%', height: '370px', background: 'black', display: 'flex', 'justifyContent': 'center' }}>
                                         <Image
                                             src={availableWidget.preview}
                                             alt={`${availableWidget.name} Preview`}
-                                            width={availableWidget.previewWidth || 165}
-                                            height={availableWidget.previewHeight || 165} />
+                                            width={availableWidget.previewWidth || 370}
+                                            height={availableWidget.previewHeight || 370} />
                                     </Box>
                                 </CardMedia>
-                                <CardContent>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {availableWidget.description}
-                                    </Typography>
-                                </CardContent>
                                 <Divider />
                                 <CardActions sx={{ justifyContent: 'flex-end' }}>
                                     <IconButton aria-label="Add to dashboard" onClick={() => props.onAddWidget(availableWidget.type)}>
