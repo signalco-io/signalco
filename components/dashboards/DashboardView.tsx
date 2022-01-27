@@ -25,6 +25,11 @@ function DragableWidget(props: IDragableWidgetProps) {
         transition,
     } = useSortable({ id: props.id, disabled: !props.isEditMode });
 
+    const [span, setSpan] = useState(({
+        colSpan: (props.config as any)?.columns || 2,
+        rowSpan: (props.config as any)?.columns || 2
+    }));
+
     let customTransform;
     if (transform) {
         customTransform = {
@@ -35,17 +40,14 @@ function DragableWidget(props: IDragableWidgetProps) {
         };
     }
 
-    const colSpan = (props.config as any)?.columns || 2;
-    const rowSpan = (props.config as any)?.rows || 2;
-
     return (
         <Box ref={setNodeRef} style={{
             transform: customTransform ? CSS.Transform.toString(customTransform) : undefined,
             transition,
-            gridRowStart: `span ${rowSpan}`,
-            gridColumnStart: `span ${colSpan}`,
+            gridRowStart: `span ${span.rowSpan}`,
+            gridColumnStart: `span ${span.colSpan}`,
         }} {...attributes} {...listeners}>
-            <Widget {...props} />
+            <Widget {...props} onResize={(r, c) => setSpan({ rowSpan: r, colSpan: c })} />
         </Box>
     );
 }
