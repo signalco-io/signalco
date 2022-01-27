@@ -1,4 +1,4 @@
-import { Box, Icon, Stack, Typography } from '@mui/material';
+import { Box, ButtonBase, Icon, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import useDevice from '../../../src/hooks/useDevice';
@@ -7,6 +7,7 @@ import { IWidgetSharedProps } from '../Widget';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import Link from 'next/link';
 
 const stateOptions: IWidgetConfigurationOption[] = [
     DefaultLabel,
@@ -68,15 +69,21 @@ const WidgetAirConditioning = (props: IWidgetSharedProps) => {
                         onChange={() => { }}
                     />
                 </Box>
-                <Stack direction="row" sx={{ mt: 9 }}>
-                    <Stack sx={{ height: '100%' }} justifyContent="center" alignItems="center">
-                        <Typography fontWeight={100} fontSize={64} sx={{ lineHeight: 1 }}>{degreesWhole}</Typography>
-                    </Stack>
-                    <Stack justifyContent="space-between">
-                        <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>&#176;C</Typography>
-                        <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>.{degreesDecimal}</Typography>
-                    </Stack>
-                </Stack>
+                <Box sx={{ mt: 9 }}>
+                    <Link href={`/app/entities/${temperatureDevice?.id}`} passHref>
+                        <ButtonBase>
+                            <Stack direction="row">
+                                <Stack sx={{ height: '100%' }} justifyContent="center" alignItems="center">
+                                    <Typography fontWeight={100} fontSize={64} sx={{ lineHeight: 1 }}>{degreesWhole}</Typography>
+                                </Stack>
+                                <Stack justifyContent="space-between">
+                                    <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>&#176;C</Typography>
+                                    <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>.{degreesDecimal}</Typography>
+                                </Stack>
+                            </Stack>
+                        </ButtonBase>
+                    </Link>
+                </Box>
                 <Typography fontWeight="light" sx={{ opacity: 0.5 }}>{config.label}</Typography>
                 <Stack direction="row" spacing={2} sx={{ mt: 4 }}>
                     {config.targetCooling &&

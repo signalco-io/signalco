@@ -12,14 +12,35 @@ export default {
     }
 } as ComponentMeta<typeof Widget>;
 
+// Screenshot
+const screenshotSkipParams = {
+    screenshot: {
+        skip: true
+    }
+}
+const screenshotParams = {
+    screenshot: {
+        viewport: { width: 362, height: 370 }
+    }
+}
+// TODO: Uncomment when needed, this is for widgets larger than 4x4
+// const screenshotParamsMax = {
+//     ...screenshotParams,
+//     screenshot: {
+//         viewport: { width: 702, height: 702 }
+//     }
+// }
+
 const Template: ComponentStory<typeof Widget> = (args) => <Widget {...args} />;
 
 export const Empty = Template.bind({});
+Empty.parameters = screenshotSkipParams;
 
 export const EditMode = Template.bind({});
 EditMode.args = {
     isEditMode: true,
 };
+EditMode.parameters = screenshotSkipParams;
 
 export const WidgetState = Template.bind({});
 WidgetState.args = {
@@ -30,6 +51,7 @@ WidgetState.args = {
         visual: 'lightbulb'
     }
 };
+WidgetState.parameters = screenshotParams;
 
 export const WidgetIdicator = Template.bind({});
 WidgetIdicator.args = {
@@ -39,6 +61,7 @@ WidgetIdicator.args = {
         columns: 1
     }
 };
+WidgetIdicator.parameters = screenshotParams;
 
 export const WidgetShades = Template.bind({});
 WidgetShades.args = {
@@ -52,7 +75,8 @@ WidgetShades.args = {
     }
 };
 WidgetShades.parameters = {
-    chromatic: { disableSnapshot: true }
+    chromatic: { disableSnapshot: true },
+    ...screenshotParams
 };
 
 export const WidgetVacuum = Template.bind({});
@@ -64,6 +88,7 @@ WidgetVacuum.args = {
         rows: 4
     }
 };
+WidgetVacuum.parameters = screenshotParams;
 
 export const WidgetTermostat = Template.bind({});
 WidgetTermostat.args = {
@@ -77,6 +102,7 @@ WidgetTermostat.args = {
         rows: 4
     }
 };
+WidgetTermostat.parameters = screenshotParams;
 
 export const WidgetTime = Template.bind({});
 WidgetTime.args = {
@@ -87,7 +113,8 @@ WidgetTime.args = {
     }
 };
 WidgetTime.parameters = {
-    chromatic: { disableSnapshot: true }
+    chromatic: { disableSnapshot: true },
+    ...screenshotParams
 };
 
 export const WidgetChecklist = Template.bind({});
@@ -99,3 +126,4 @@ WidgetChecklist.args = {
         rows: 4
     }
 };
+WidgetChecklist.parameters = screenshotParams;

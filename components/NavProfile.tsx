@@ -98,7 +98,7 @@ const UserProfileAvatar = () => {
         <Stack alignItems="center" spacing={2}>
           <UserAvatar />
           {!isMobile &&
-            <Typography variant="h3" fontWeight={600} sx={{ maxWidth: `${maxWidth}px` }}>{user?.name}</Typography>
+            <Typography variant="h5" fontWeight={500} sx={{ maxWidth: `${maxWidth}px` }}>{user?.name}</Typography>
           }
         </Stack>
       </ButtonBase>
@@ -142,7 +142,7 @@ const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconCom
         <Stack direction="row" sx={{ width: isNotDesktop ? '100%' : '128px' }} alignItems="center" spacing={isMobile ? 1 : 0}>
           <Icon sx={{ opacity: active ? 1 : 0.6, mr: { xs: 0, lg: 2 }, fontSize: { xs: '26px', lg: '17px' } }} />
           {(isMobile || !isNotDesktop) &&
-            <Typography variant="h3" fontWeight={500} sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
+            <Typography variant="h5" fontWeight={500} sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
           }
         </Stack>
       </Button>

@@ -5,6 +5,7 @@ import '../styles/global.scss';
 import * as NextImage from 'next/image';
 import { themes } from '@storybook/theming';
 import { AppContext } from '../pages/_app';
+import { withScreenshot } from 'storycap';
 
 // Fix for getting next/image to work with Storybook
 // Source link https://dev.to/jonasmerlin/how-to-use-the-next-js-image-component-in-storybook-1415
@@ -19,6 +20,7 @@ Object.defineProperty(NextImage, 'default', {
 
 // Integrating with the MUI by defining a global decorator
 export const decorators = [
+  withScreenshot,
   Story => (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme(true)}>
@@ -42,5 +44,9 @@ export const parameters = {
   layout: 'centered',
   docs: {
     theme: themes.dark
+  },
+  screenshot: {
+    // Put global screenshot parameters(e.g. viewport). See: https://github.com/reg-viz/storycap
+    delay: 500
   }
 }

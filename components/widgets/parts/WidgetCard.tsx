@@ -11,7 +11,6 @@ import {
 import { AppContext } from "../../../pages/_app";
 import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
 import { IsConfigurationValid } from "../../../src/widgets/ConfigurationValidator";
-import { ObjectDictAny } from "../../../src/sharedTypes";
 
 interface IWidgetCardProps {
     children: JSX.Element,
@@ -23,47 +22,33 @@ interface IWidgetCardProps {
     onRemove?: () => void
 }
 
-function applyStaticToConfig(config: any | undefined, options: IWidgetConfigurationOption[] | undefined) {
-    const staticConfigs: ObjectDictAny = {};
-    if (options) {
-        options.filter(o => o.type === 'static').forEach(o => {
-            staticConfigs[o.name] = o.default;
-        });
-    }
-
-    return {
-        ...staticConfigs,
-        ...config
-    };
-}
-
 const WidgetCard = (props: IWidgetCardProps) => {
     const {
         children,
         state,
         isEditMode,
         options,
+        config,
         onConfigured,
         onRemove
     } = props;
 
     const appContext = useContext(AppContext);
-    const configWithStatic = applyStaticToConfig(props.config, options);
 
-    const width = (configWithStatic as any)?.columns || 2;
-    const height = (configWithStatic as any)?.rows || 2;
+    const width = (config as any)?.columns || 2;
+    const height = (config as any)?.rows || 2;
     const sizeWidth = width * 78 + (width - 1) * 8;
     const sizeHeight = height * 78 + (height - 1) * 8;
 
     const isLoading = typeof options === 'undefined';
-    const needsConfiguration = typeof options === 'undefined' || options == null || !IsConfigurationValid(configWithStatic, options);
+    const needsConfiguration = typeof options === 'undefined' || options == null || !IsConfigurationValid(config, options);
 
     const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' });
 
     const [isConfiguring, setIsConfiguring] = useState<boolean>(false);
-    const handleOnConfiguration = (config: object) => {
+    const handleOnConfiguration = (newConfig: object) => {
         if (onConfigured) {
-            onConfigured(config);
+            onConfigured(newConfig);
         }
         setIsConfiguring(false);
     }
@@ -110,7 +95,7 @@ const WidgetCard = (props: IWidgetCardProps) => {
                     </Box>
                 )}
             </Paper >
-            {options && <WidgetConfiguration onConfiguration={handleOnConfiguration} options={options} config={configWithStatic} isOpen={isConfiguring} />}
+            {options && <WidgetConfiguration onConfiguration={handleOnConfiguration} options={options} config={config} isOpen={isConfiguring} />}
             <Menu {...bindMenu(popupState)}>
                 {options && (
                     <MenuItem onClick={handleOnConfigureClicked}>

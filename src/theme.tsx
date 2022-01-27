@@ -79,28 +79,23 @@ const theme = (isDark: boolean) => {
         fontWeight: 400,
       },
       h2: {
-        fontSize: "1.2rem",
-        fontFamily: "Raleway, Open Sans, sans-serif",
+        fontSize: "1.4rem",
         fontWeight: 400,
       },
       h3: {
-        fontSize: "1rem",
-        fontFamily: "Raleway, Open Sans, sans-serif",
+        fontSize: "1.3rem",
         fontWeight: 400,
       },
       h4: {
-        fontSize: "1rem",
-        fontFamily: "Raleway, Open Sans, sans-serif",
+        fontSize: "1.2rem",
         fontWeight: 400,
       },
       h5: {
-        fontSize: "1rem",
-        fontFamily: "Raleway, Open Sans, sans-serif",
+        fontSize: "1.1rem",
         fontWeight: 400,
       },
       h6: {
         fontSize: "1rem",
-        fontFamily: "Raleway, Open Sans, sans-serif",
         fontWeight: 400,
       },
     }
