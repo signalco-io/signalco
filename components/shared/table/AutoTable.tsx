@@ -17,6 +17,7 @@ import {
 import ResultsPlaceholder from "../indicators/ResultsPlaceholder";
 import IErrorProps from "../interfaces/IErrorProps";
 import useSearch, { filterFuncObjectStringProps } from "../../../src/hooks/useSearch";
+import { ChildrenProps } from "../../../src/sharedTypes";
 
 export interface IAutoTableItem {
   id: string;
@@ -64,10 +65,10 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
       </Box>
     );
 
-  let Wrapper = ({ children }: { children: React.ReactNode }) => <>{children}</>;
+  let Wrapper = ({ children }: ChildrenProps) => <>{children}</>;
 
   if (props.link) {
-    Wrapper = function LinkWrapper({ children }: { children: React.ReactNode }) {
+    Wrapper = function LinkWrapper({ children }: ChildrenProps) {
       return <Box>
         <NextLink passHref href={props.link}>{children}</NextLink>
       </Box>

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../pages/_app';
 import { hexToRgb } from '../../src/helpers/StringHelpers';
 import styles from './WindowVisual.module.scss';
@@ -32,10 +32,18 @@ var skySunnyGrads = [
 
 const WindowVisual = (props: { shadePerc: number, size: number, dateAndTime?: Date }) => {
     const appContext = useContext(AppContext);
+    const [hours, setHours] = useState(((props.dateAndTime ?? new Date()).getHours()) % 24);
+
+    // Update hours every minute
+    useEffect(() => {
+        const token = setInterval(() => {
+            setHours(((props.dateAndTime ?? new Date()).getHours()) % 24);
+        }, 60 * 1000);
+        return () => clearInterval(token);
+    })
 
     const perc = Math.max(0, Math.min(props.shadePerc || 0, 1));
 
-    const hours = ((props.dateAndTime ?? new Date()).getHours()) % 24;
     const gradData = skySunnyGrads[hours];
     const cssSkyGradStops = gradData.map((stop, index) => <stop key={index} offset={stop.position / 100} stopColor={`#${stop.color}`} />)
     const castColor = hexToRgb(gradData[gradData.length - 1].color);
