@@ -35,7 +35,7 @@ const Cover = () => {
               alt="signalco"
               priority />
           </Box>
-          <Typography fontFamily="Raleway" fontWeight={200} fontSize={{ xs: '1.4rem', sm: '2rem', lg: '2.5rem' }}>Automate your life</Typography>
+          <Typography component="h2" fontFamily="Raleway" fontWeight={200} fontSize={{ xs: '1.4rem', sm: '2rem', lg: '2.5rem' }}>Automate your life</Typography>
         </Stack>
       </Box>
     </>
