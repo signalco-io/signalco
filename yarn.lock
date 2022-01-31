@@ -1510,6 +1510,11 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
+"@hcaptcha/react-hcaptcha@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@hcaptcha/react-hcaptcha/-/react-hcaptcha-1.1.0.tgz#ca770c9fc1f456e3c6b057bedf01a94693b2ec96"
+  integrity sha512-+0JYxSFkZaHMOJ91YD9PUNiCUZhG5d9BzVAIye4vAWMyXzfD4b8Dx7EwAVUf1qfbf8KVCa33QwoTRt6EKfDDSA==
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.2"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.2.tgz#68be55c737023009dfc5fe245d51181bb6476914"
