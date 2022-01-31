@@ -1,4 +1,4 @@
-import { Box, Button, Container, FilledInput, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, FilledInput, Stack, Typography } from "@mui/material";
 import React, { SyntheticEvent, useContext } from "react";
 import Image from 'next/image';
 import { AppContext } from "./_app";
@@ -7,7 +7,6 @@ import logoDark from '../public/images/icon-dark-512x144.png';
 import Link from "next/link";
 import Footer from "../components/pages/Footer";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
-import { useEffect } from "react";
 import { LoadingButton } from "@mui/lab";
 
 const Cover = () => {
