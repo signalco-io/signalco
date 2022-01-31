@@ -60,9 +60,7 @@ const AppLayout = (props: ChildrenProps) => {
 
 const PageNav = () => {
   var rect = useWindowRect();
-  const isScrolled = rect?.scrollY;
-
-  console.log('isScrolled', isScrolled, rect);
+  const isScrolled = rect?.scrollY ?? 0;
 
   return (
     <Box sx={{
