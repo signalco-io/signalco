@@ -13,6 +13,7 @@ const Image404 = () => {
             src={appContext.theme === 'dark' ? '/images/404-dark.png' : '/images/404-light.png'}
             width={256 * scale}
             height={256 * scale}
+            alt="404 image"
             priority />
     );
 }
