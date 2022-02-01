@@ -30,7 +30,7 @@ const NotFound = () => (
                         <Typography variant="h1" fontSize="4em">404</Typography>
                         <Typography variant="h2" component="p">Page not found</Typography>
                     </Stack>
-                    <Typography sx={{ opacity: 0.6 }}>Can't find find what you're looking for...</Typography>
+                    <Typography sx={{ opacity: 0.6 }}>{"Can't find find what you're looking for..."}</Typography>
                     <Link href="/" passHref>
                         <Button variant="outlined">signalco home</Button>
                     </Link>
