@@ -28,21 +28,23 @@ export function getWindowClientRect(element: typeof window): ClientRect {
 export default function useWindowRect(element: typeof window | null = typeof window !== 'undefined' ? window : null) {
   const [rect, setRect] = useState<ClientRect | undefined>(element ? getWindowClientRect(element) : undefined);
 
-  useLayoutEffect(() => {
-      function updateNumberOfColumns() {
-        if (element) {
-          setRect(getWindowClientRect(element));
+  if (element) {
+    useLayoutEffect(() => {
+        function updateNumberOfColumns() {
+          if (element) {
+            setRect(getWindowClientRect(element));
+          }
         }
-      }
 
-      window.addEventListener('resize', updateNumberOfColumns);
-      window.addEventListener('scroll', updateNumberOfColumns);
-      updateNumberOfColumns();
-      return () => {
-        window.removeEventListener('resize', updateNumberOfColumns);
-        window.removeEventListener('scroll', updateNumberOfColumns);
-      }
-  }, [element]);
+        window.addEventListener('resize', updateNumberOfColumns);
+        window.addEventListener('scroll', updateNumberOfColumns);
+        updateNumberOfColumns();
+        return () => {
+          window.removeEventListener('resize', updateNumberOfColumns);
+          window.removeEventListener('scroll', updateNumberOfColumns);
+        }
+    }, [element]);
+  }
 
   return rect;
 }

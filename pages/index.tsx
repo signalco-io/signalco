@@ -1,11 +1,13 @@
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import { Box, Button, Container, FilledInput, Stack, Typography } from "@mui/material";
+import React, { SyntheticEvent, useContext } from "react";
 import Image from 'next/image';
 import { AppContext } from "./_app";
 import logoLight from '../public/images/icon-light-512x512.png';
 import logoDark from '../public/images/icon-dark-512x144.png';
 import Link from "next/link";
 import Footer from "../components/pages/Footer";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { LoadingButton } from "@mui/lab";
 
 const Cover = () => {
   const appContext = useContext(AppContext);
@@ -35,7 +37,7 @@ const Cover = () => {
               alt="signalco"
               priority />
           </Box>
-          <Typography fontFamily="Raleway" fontWeight={200} fontSize={{ xs: '1.4rem', sm: '2rem', lg: '2.5rem' }}>Automate your life</Typography>
+          <Typography component="h2" fontFamily="Raleway" fontWeight={200} fontSize={{ xs: '1.4rem', sm: '2rem', lg: '2.5rem' }}>Automate your life</Typography>
         </Stack>
       </Box>
     </>
@@ -146,6 +148,69 @@ const StepContent = (props: { title: string, subtitle?: string, imageSrc?: strin
   </Container>
 );
 
+const Newsletter = () => {
+  const appContext = useContext(AppContext);
+  const [email, setEmail] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
+  const hcaptchaRef = React.createRef<HCaptcha>();
+
+  const handleSubmit = (event: SyntheticEvent) => {
+    event.preventDefault();
+
+    setIsLoading(true);
+
+    // Execute the reCAPTCHA when the form is submitted
+    hcaptchaRef.current?.execute();
+  };
+
+  const onHCaptchaChange = (token: string | undefined) => {
+    try {
+      // If the HCAPTCHA code is null or undefined indicating that
+      // the HCAPTCHA was expired then return early
+      if (!token) {
+        return;
+      }
+
+      // TODO: Submit request
+
+      // Reset the HCAPTCHA so that it can be executed again if user
+      // submits another email.
+      hcaptchaRef.current?.resetCaptcha();
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  // Retrieve key, if not available don't show the component
+  const key = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
+  if (typeof key === 'undefined') return <></>;
+
+  return (
+    <Container>
+      <Box p={8}>
+        <form onSubmit={handleSubmit}>
+          <HCaptcha
+            ref={hcaptchaRef}
+            size="invisible"
+            theme={appContext.theme === 'dark' ? 'dark' : 'light'}
+            sitekey={key}
+            onVerify={onHCaptchaChange}
+            onClose={() => onHCaptchaChange(undefined)}
+          />
+          <Stack spacing={1}>
+            <Typography variant="h2">Subscribe</Typography>
+            <Typography sx={{ opacity: 0.6 }}>{"We'll get back to you with awesome news and updates."}</Typography>
+            <Stack direction="row" alignItems="stretch">
+              <FilledInput disabled={isLoading} type="email" placeholder="example@example.com" hiddenLabel fullWidth required sx={{ borderRadius: '8px 0 0 8px' }} value={email} onChange={(e) => setEmail(e.target.value)} />
+              <LoadingButton loading={isLoading} type="submit" variant="outlined" size="large" sx={{ borderRadius: '0 8px 8px 0' }} disableElevation>Subscribe</LoadingButton>
+            </Stack>
+          </Stack>
+        </form>
+      </Box>
+    </Container>
+  );
+};
+
 const Index = () => (
   <Stack>
     <Cover />
@@ -180,6 +245,7 @@ const Index = () => (
         title="Anywhere you are"
         content="Access signalco from anywhere in the world and control all your devices and services from one app." />
     </StepContent>
+    <Newsletter />
     <Footer />
   </Stack >
 );
