@@ -200,7 +200,7 @@ export const AppLayoutWithAuth = (props: ChildrenProps) => {
 export const EmptyLayoutWithAuth = (props: ChildrenProps) => {
   if (CurrentUserProvider.isLoggedIn() || typeof window === 'undefined') {
     return <EmptyLayout>
-      props.children
+      {props.children}
     </EmptyLayout>;
   }
 
