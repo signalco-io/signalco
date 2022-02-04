@@ -1,14 +1,12 @@
 import {
   Button, Stack, Typography
 } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from 'next/link';
-import { AppContext } from "../pages/_app";
 import SignalcoLogo from "./icons/SignalcoLogo";
 
 const Login = () => {
   const [isLong, setIsLong] = useState(false);
-  const appState = useContext(AppContext);
   useEffect(() => {
     const token = setTimeout(() => {
       setIsLong(true);
