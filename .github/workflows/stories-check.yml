@@ -19,5 +19,4 @@ jobs:
         env:
           CI: "true"
         with:
-          node-version: "16.x"
           args: yarn stories-check
