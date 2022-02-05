@@ -65,8 +65,6 @@ const run = (
             if (!approvedFiles.includes(possibleNew)) {
                 logProcess('\t\tApproving the file because it does not exist in the approved...', () => fs.renameSync(pendingFile, possibleNew));
             } else {
-                console.log('\t\tFile already exists in the approved folder. Checking if they are the same...');
-
                 const pendingFileBytes = fs.readFileSync(pendingFile);
                 const approvedFileBytes = fs.readFileSync(possibleNew);
 
