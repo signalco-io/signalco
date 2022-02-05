@@ -19,4 +19,4 @@ jobs:
         env:
           CI: "true"
         with:
-          args: yarn stories-check
+          args: yarn install && yarn stories-check
