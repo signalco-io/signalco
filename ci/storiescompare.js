@@ -9,7 +9,7 @@ const PENDING_DIR_NAME = '.stories-pending';
 const APPROVED_STORYCAPS = path.join(__dirname, `../${APPROVED_DIR_NAME}`);
 const PENDING_STORYCAPS = path.join(__dirname, `../${PENDING_DIR_NAME}`);
 
-let hasChanges = false;
+let numberOfChanges = false;
 try {
     // Get all the approved files.
     const approvedFiles = logProcess('Fetching approved files...', () => getFilesRecursively(APPROVED_STORYCAPS));
@@ -25,7 +25,7 @@ try {
         // delete it from the approved folder.
         if (!pendingFiles.includes(possiblePending)) {
             logProcess(`\t[${chalk.red('-')}] ${approvedFile.substring(possiblePending.indexOf(APPROVED_DIR_NAME) + APPROVED_DIR_NAME.length + 1)}`, () => fs.unlinkSync(approvedFile));
-            hasChanges = true;
+            numberOfChanges++;
         }
     });
 
@@ -38,7 +38,7 @@ try {
         // move it to the approved folder.
         if (!approvedFiles.includes(possibleNew)) {
             logProcess(`\t[${chalk.green("+")}] ${possibleNewShortPath}`, () => fs.renameSync(pendingFile, possibleNew));
-            hasChanges = true;
+            numberOfChanges++;
         } else {
             const pendingFileBytes = fs.readFileSync(pendingFile);
             const approvedFileBytes = fs.readFileSync(possibleNew);
@@ -46,7 +46,7 @@ try {
             // If the files are not the same, overwrite it.
             if (!pendingFileBytes.equals(approvedFileBytes)) {
                 logProcess(`\t[${chalk.yellow('~')}] ${possibleNewShortPath}`, () => fs.renameSync(pendingFile, possibleNew));
-                hasChanges = true;
+                numberOfChanges++;
             } else {
                 console.log(`\t[${chalk.white('=')}] ${possibleNewShortPath}`);
             }
@@ -54,13 +54,13 @@ try {
     });
 } catch (error) {
     console.log();
-    console.error(chalk.red('(2) Error occurred while running the script:'));
+    console.error(chalk.red('(error 2) Error occurred while running the script:'));
     console.error(chalk.red(error));
     process.exit(2);
 }
 
-if (hasChanges) {
+if (numberOfChanges) {
     console.log();
-    console.error(chalk.red('(1) Detected changes'));
+    console.error(chalk.red(`(error 1) Detected ${numberOfChanges} changes`));
     process.exit(1);
 }
