@@ -7,7 +7,7 @@ jobs:
     name: Install Dependencies
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@2
+      - uses: actions/checkout@v2
       - name: Install Dependencies
         uses: actions/setup-node@v2
         env:
@@ -15,7 +15,7 @@ jobs:
         with:
           args: install
       - name: Run stories-check
-        uses: mujo-code/puppeteer-headful@v12
+        uses: mujo-code/puppeteer-headful@v2
         env:
           CI: "true"
         with:
