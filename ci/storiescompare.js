@@ -41,13 +41,13 @@ const run = (
             // If the approved file is an old one (does not exist in the pending folder)
             // delete it from the approved folder.
             if (!pendingFiles.includes(possiblePending)) {
-                logProcess(`\t[${chalk.red('-')}] ${approvedFile.replace(APPROVED_DIR_NAME, '')}`, () => fs.unlinkSync(approvedFile));
+                logProcess(`\t[${chalk.red('-')}] ${approvedFile.substring(pendingFile.indexOf(APPROVED_DIR_NAME) + APPROVED_DIR_NAME.length + 1)}`, () => fs.unlinkSync(approvedFile));
             }
         });
 
         // Iterate all the files that are pending for approval.
         pendingFiles.forEach((pendingFile) => {
-            const possibleNewShortPath = pendingFile.replace(PENDING_DIR_NAME, '');
+            const possibleNewShortPath = pendingFile.substring(pendingFile.indexOf(PENDING_DIR_NAME) + PENDING_DIR_NAME.length + 1);
             const possibleNew = pendingFile.replace(pendingDirName, approvedDirName);
 
             // If the pending file is a new one (does not exist in the approved folder)

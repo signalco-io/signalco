@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const { stdout } = require('process');
+const chalk = require('chalk');
 
 /**
  * Removes folder and all its contents on the provided path.
@@ -47,11 +48,11 @@ module.exports.logProcess = (message, taskToRun) => {
     try {
         stdout.write(message);
         const valueToReturn = taskToRun();
-        stdout.write(' DONE ✔\n');
+        stdout.write(chalk.green(' DONE ✔') + '\n');
 
         return valueToReturn;
     } catch (error) {
-        stdout.write(' ERROR X\n');
+        stdout.write(chalk.red(' ERROR X') + '\n');
 
         throw error;
     }
