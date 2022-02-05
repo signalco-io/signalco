@@ -9,9 +9,11 @@ import DashboardView from "./DashboardView";
 import DashboardSelector from "./DashboardSelector";
 import DashboardSettings from "./DashboardSettings";
 import { LoadingButton } from "@mui/lab";
-import WidgetStore from "../widgets/WidgetStore";
 import { widgetType } from "../widgets/Widget";
 import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
+import dynamic from "next/dynamic";
+
+const WidgetStoreDynamic = dynamic(() => import("../widgets/WidgetStore"));
 
 const Dashboards = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -112,7 +114,7 @@ const Dashboards = () => {
                 isOpen={isDashboardSettingsOpen}
                 onClose={() => setIsDashboardSettingsOpen(false)} />
             <ConfigurationDialog isOpen={showWidgetStore} onClose={() => setShowWidgetStore(false)} title="Add widget" maxWidth="lg" >
-                <WidgetStore onAddWidget={handleAddWidget} />
+                <WidgetStoreDynamic onAddWidget={handleAddWidget} />
             </ConfigurationDialog>
         </>
     );
