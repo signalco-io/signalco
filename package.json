@@ -13,7 +13,7 @@
     "build-storybook": "build-storybook",
     "update-widget-images": "cross-env WIDGET_IMAGES=true npx storycap --outDir \"public/assets/widget-previews\" --flat --include \"Components/Widgets/**\" --serverTimeout 180000 http://localhost:9009 --serverCmd \"start-storybook -p 9009\"",
     "stories-approve": "rimraf ./.stories-approved && storycap --serverCmd \"start-storybook --no-open -p 6006\" --serverTimeout 180000 -o .stories-approved http://localhost:6006",
-    "stories-check": "rimraf ./.stories-pending && storycap --serverCmd \"start-storybook --no-open -p 6006\" --serverTimeout 180000 -o .stories-pending http://localhost:6006 && node -e require('./ci/storiescompare').run()"
+    "stories-check": "rimraf ./.stories-pending && storycap --serverCmd \"start-storybook --no-open -p 6006\" --serverTimeout 180000 -o .stories-pending http://localhost:6006 && node ./ci/storiescompare.js"
   },
   "dependencies": {
     "@auth0/auth0-react": "1.9.0",
