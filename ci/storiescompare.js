@@ -1,4 +1,5 @@
 // General imports
+const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
 
@@ -33,47 +34,35 @@ const run = (
         // Get all the pending files.
         const pendingFiles = logProcess('Fetching pending files...', () => getFilesRecursively(pendingStorycaps));
 
-        console.log();
-
-        console.log('Cleaning the approved files:');
         // Iterate all the approved files.
         approvedFiles.forEach((approvedFile) => {
-            console.log(`\t${approvedFile}`);
-
             const possiblePending = approvedFile.replace(approvedDirName, pendingDirName);
 
             // If the approved file is an old one (does not exist in the pending folder)
             // delete it from the approved folder.
             if (!pendingFiles.includes(possiblePending)) {
-                logProcess('\t\tDeleting the file because it does not exist in the pendings...', () => fs.unlinkSync(approvedFile));
-            } else {
-                console.log('\t\tFile still OK ✔');
+                logProcess(`\t[${chalk.red('-')}] ${approvedFile.replace(APPROVED_DIR_NAME, '')}`, () => fs.unlinkSync(approvedFile));
             }
         });
 
-        console.log();
-
-        console.log('Checking the pending files:');
         // Iterate all the files that are pending for approval.
         pendingFiles.forEach((pendingFile) => {
-            console.log(`\t${pendingFile}`);
-
+            const possibleNewShortPath = pendingFile.replace(PENDING_DIR_NAME, '');
             const possibleNew = pendingFile.replace(pendingDirName, approvedDirName);
 
             // If the pending file is a new one (does not exist in the approved folder)
             // move it to the approved folder.
             if (!approvedFiles.includes(possibleNew)) {
-                logProcess('\t\tApproving the file because it does not exist in the approved...', () => fs.renameSync(pendingFile, possibleNew));
+                logProcess(`\t[${chalk.green("+")}] ${possibleNewShortPath}`, () => fs.renameSync(pendingFile, possibleNew));
             } else {
                 const pendingFileBytes = fs.readFileSync(pendingFile);
                 const approvedFileBytes = fs.readFileSync(possibleNew);
 
                 // If the files are not the same, overwrite it.
                 if (!pendingFileBytes.equals(approvedFileBytes)) {
-                    console.log('\t\tFiles are not the same X');
-                    logProcess('\t\tOverwriting the approved one...', () => fs.renameSync(pendingFile, possibleNew));
+                    logProcess(`\t[${chalk.yellow('~')}] ${possibleNewShortPath}`, () => fs.renameSync(pendingFile, possibleNew));
                 } else {
-                    console.log('\t\tFiles are the same ✔');
+                    console.log(`\t[${chalk.white('=')}] ${possibleNewShortPath}`);
                 }
             }
         });
