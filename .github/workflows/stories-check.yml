@@ -1,0 +1,41 @@
+name: "stories-check"
+on:
+  pull_request:
+    branches: [next, main]
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.x"
+      - run: npm install yarn --global
+      - run: yarn
+      - name: Run stories-check
+        id: runStoriesCheck
+        uses: mujo-code/puppeteer-headful@v2
+        env:
+          CI: "true"
+        with:
+          args: yarn stories-check
+      - name: PR changes
+        id: cpr
+        if: failure() && steps.runStoriesCheck.outcome == 'failure'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          #token: ATGITHUBACCESSTOKEN
+          add-paths: ".stories-approved/**/*"
+          commit-message: "[stories-check] Automated stories change"
+          base: ${{ github.head_ref }}
+          branch: "stories-check/change"
+          delete-branch: true
+          branch-suffix: short-commit-hash
+          title: "[stories-check] Automated stories change"
+      - name: Check outputs
+        if: failure() && steps.runStoriesCheck.outcome == 'failure'
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"

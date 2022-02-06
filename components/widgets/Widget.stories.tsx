@@ -74,10 +74,9 @@ WidgetShades.args = {
         columns: 4
     }
 };
-WidgetShades.parameters = {
-    chromatic: { disableSnapshot: true },
+WidgetShades.parameters = process.env.WIDGET_IMAGES ? {
     ...screenshotParams
-};
+} : { ...screenshotSkipParams };
 
 export const WidgetVacuum = Template.bind({});
 WidgetVacuum.args = {
@@ -112,10 +111,9 @@ WidgetTime.args = {
         rows: 1
     }
 };
-WidgetTime.parameters = {
-    chromatic: { disableSnapshot: true },
+WidgetTime.parameters = process.env.WIDGET_IMAGES ? {
     ...screenshotParams
-};
+} : { ...screenshotSkipParams };
 
 export const WidgetChecklist = Template.bind({});
 WidgetChecklist.args = {

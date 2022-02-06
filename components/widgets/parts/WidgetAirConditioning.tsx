@@ -18,13 +18,17 @@ const stateOptions: IWidgetConfigurationOption[] = [
     DefaultHeight(4)
 ];
 
-const SmallIndicator = observer((props: { isActive: boolean, icon: string, label: string, activeBackgroundColor: string }) => (
-    <Box sx={{ width: '52px', height: '82px', backgroundColor: props.isActive ? props.activeBackgroundColor : 'transparent', borderRadius: 1 }}>
-        <Stack alignItems="center" justifyContent="center" height="100%" spacing={1}>
-            <Icon sx={{ fontSize: 28, opacity: props.isActive ? 1 : 0.6, }}>{props.icon}</Icon>
-            <Typography fontWeight={100} fontSize={12}>{props.label}</Typography>
-        </Stack>
-    </Box>
+const SmallIndicator = observer((props: { isActive: boolean, icon: string, label: string, activeBackgroundColor: string, href: string }) => (
+    <Link href={props.href} passHref>
+        <ButtonBase>
+            <Box sx={{ width: '52px', height: '82px', backgroundColor: props.isActive ? props.activeBackgroundColor : 'transparent', borderRadius: 1 }}>
+                <Stack alignItems="center" justifyContent="center" height="100%" spacing={1}>
+                    <Icon sx={{ fontSize: 28, opacity: props.isActive ? 1 : 0.6, }}>{props.icon}</Icon>
+                    <Typography fontWeight={100} fontSize={12}>{props.label}</Typography>
+                </Stack>
+            </Box>
+        </ButtonBase>
+    </Link>
 ));
 
 const WidgetAirConditioning = (props: IWidgetSharedProps) => {
@@ -86,11 +90,11 @@ const WidgetAirConditioning = (props: IWidgetSharedProps) => {
                 </Box>
                 <Typography fontWeight="light" sx={{ opacity: 0.5 }}>{config.label}</Typography>
                 <Stack direction="row" spacing={2} sx={{ mt: 4 }}>
-                    {config.targetCooling &&
+                    {/* {config.targetCooling &&
                         <SmallIndicator isActive={false} label="Cooling" icon="ac_unit" activeBackgroundColor="#445D79" />
-                    }
+                    } */}
                     {config.targetHeating &&
-                        <SmallIndicator isActive={heatingActive} label="Heating" icon="whatshot" activeBackgroundColor="#A14D4D" />
+                        <SmallIndicator isActive={heatingActive} label="Heating" icon="whatshot" activeBackgroundColor="#A14D4D" href={`/app/entities/${heatingDevice?.id}`} />
                     }
                 </Stack>
             </Stack>

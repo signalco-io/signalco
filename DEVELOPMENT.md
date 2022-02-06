@@ -1,0 +1,69 @@
+# Development
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/8f6479343e1e51f2a2d1/maintainability)](https://codeclimate.com/github/signalco-io/signalco/maintainability)
+[![CodeFactor](https://www.codefactor.io/repository/github/signalco-io/signalco/badge)](https://www.codefactor.io/repository/github/signalco-io/signalco)
+
+## Table of contents
+
+- [Getting Started](#getting-started)
+- [Configure env variables](#configure-env-variables)
+- [Deploy](#deploy)
+  - [Links](#links)
+- [More info](#more-info)
+  - [Next.js](#nextjs)
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+yarn install
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Configure env variables
+
+`.env.local` example:
+
+```raw
+NEXT_PUBLIC_HCAPTCHA_SITE_KEY=435dd50a-4830-483a-862c-d6faa6dacea7
+HCAPTCHA_SECRET_KEY=0x67207bf1a725c630e590ee15ef2a099ab7272d54
+```
+
+| Variable | Development | Production |
+|----------|-------------|------------|
+| `NEXT_PUBLIC_HCAPTCHA_SITE_KEY` | Optional | Required |
+| `HCAPTCHA_SECRET_KEY` | Optional | Required |
+
+## Deploy
+
+Apps from this repository are deployed on Vercel.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+### Links
+
+Staging (branch `next`):
+
+- [next.signalco.io](https://next.signalco.io)
+- [next.storybook.dev.signalco.io](https://next.storybook.dev.signalco.io)
+
+Production (branch `main`):
+
+- [signalco.io](https://www.signalco.io)
+- [storybook.dev.signalco.io](https://storybook.dev.signalco.io)
+
+## More info
+
+### Next.js
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
