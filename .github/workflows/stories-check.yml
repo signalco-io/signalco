@@ -29,6 +29,7 @@ jobs:
           #token: ATGITHUBACCESSTOKEN
           add-paths: ".stories-approved/**/*"
           commit-message: "[stories-check] Automated stories change"
+          base: ${{ github.head_ref }}
           branch: "stories-check/change"
           delete-branch: true
           branch-suffix: short-commit-hash
