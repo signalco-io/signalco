@@ -16,7 +16,7 @@ jobs:
       - run: yarn
       - name: Run stories-check
         id: runStoriesCheck
-        uses: mujo-code/puppeteer-headful@v2
+        uses: mujo-code/puppeteer-headful@12.3.1
         env:
           CI: "true"
         with:
