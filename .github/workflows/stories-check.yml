@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: "16.x"
       - run: npm install yarn --global
-      - run: yarn
+      - run: yarn install
       - name: Run stories-check
         id: runStoriesCheck
         uses: mujo-code/puppeteer-headful@v2
