@@ -3,6 +3,7 @@ import AppSettingsProvider from "./AppSettingsProvider";
 import { trimStartChar, isAbsoluteUrl } from "../helpers/StringHelpers";
 import CurrentUserProvider from "./CurrentUserProvider";
 import Router from "next/router";
+import { ObjectDictAny } from "../sharedTypes";
 
 export default class HttpService {
   public static tokenFactory?: () => Promise<string>;
@@ -46,9 +47,11 @@ export default class HttpService {
   public static async requestAsync(
     url: string,
     method: "get" | "post" | "put" | "delete",
-    data?: any
+    data?: any,
+    headers?: ObjectDictAny,
+    skipAuth?: boolean
   ) {
-    const token = await HttpService._getBearerTokenAsync()
+    const token = skipAuth ? false : await HttpService._getBearerTokenAsync()
     try {
     const response = await axios.request({
       url: isAbsoluteUrl(url) ? url : HttpService.getApiUrl(url),
@@ -57,7 +60,8 @@ export default class HttpService {
       params: method === "get" ? data : undefined,
       headers: {
         Authorization: token,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        ...headers
       },
     });
     return response.data;
