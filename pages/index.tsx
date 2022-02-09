@@ -8,6 +8,7 @@ import Link from "next/link";
 import Footer from "../components/pages/Footer";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { LoadingButton } from "@mui/lab";
+import HttpService from "../src/services/HttpService";
 
 const Cover = () => {
   const appContext = useContext(AppContext);
@@ -163,7 +164,7 @@ const Newsletter = () => {
     hcaptchaRef.current?.execute();
   };
 
-  const onHCaptchaChange = (token: string | undefined) => {
+  const onHCaptchaChange = async (token: string | undefined) => {
     try {
       // If the HCAPTCHA code is null or undefined indicating that
       // the HCAPTCHA was expired then return early
@@ -171,7 +172,22 @@ const Newsletter = () => {
         return;
       }
 
+      console.log(token);
+
       // TODO: Submit request
+      try {
+        await HttpService.requestAsync(
+          "/website/newsletter-subscribe",
+          "post",
+          { email: email },
+          {
+            "HCAPTCHA-RESPONSE": token
+          },
+          true
+        );
+      } catch (err) {
+        console.error('Failed to subscribe to newsletter', err);
+      }
 
       // Reset the HCAPTCHA so that it can be executed again if user
       // submits another email.
@@ -187,7 +203,7 @@ const Newsletter = () => {
 
   return (
     <Container>
-      <Box p={8}>
+      <Box p={{ xs: 2, sm: 8 }}>
         <form onSubmit={handleSubmit}>
           <HCaptcha
             ref={hcaptchaRef}
@@ -197,12 +213,14 @@ const Newsletter = () => {
             onVerify={onHCaptchaChange}
             onClose={() => onHCaptchaChange(undefined)}
           />
-          <Stack spacing={1}>
+          <Stack spacing={4}>
             <Typography variant="h2">Subscribe</Typography>
-            <Typography sx={{ opacity: 0.6 }}>{"We'll get back to you with awesome news and updates."}</Typography>
-            <Stack direction="row" alignItems="stretch">
-              <FilledInput disabled={isLoading} type="email" placeholder="example@example.com" hiddenLabel fullWidth required sx={{ borderRadius: '8px 0 0 8px' }} value={email} onChange={(e) => setEmail(e.target.value)} />
-              <LoadingButton loading={isLoading} type="submit" variant="outlined" size="large" sx={{ borderRadius: '0 8px 8px 0' }} disableElevation>Subscribe</LoadingButton>
+            <Stack spacing={1}>
+              <Typography sx={{ opacity: 0.6 }}>{"We'll get back to you with awesome news and updates."}</Typography>
+              <Stack direction="row" alignItems="stretch">
+                <FilledInput disabled={isLoading} type="email" placeholder="example@example.com" hiddenLabel fullWidth required sx={{ borderRadius: '8px 0 0 8px' }} value={email} onChange={(e) => setEmail(e.target.value)} />
+                <LoadingButton loading={isLoading} type="submit" variant="outlined" size="large" sx={{ borderRadius: '0 8px 8px 0' }} disableElevation>Subscribe</LoadingButton>
+              </Stack>
             </Stack>
           </Stack>
         </form>
@@ -245,7 +263,9 @@ const Index = () => (
         title="Anywhere you are"
         content="Access signalco from anywhere in the world and control all your devices and services from one app." />
     </StepContent>
-    <Newsletter />
+    <Box py={8}>
+      <Newsletter />
+    </Box>
     <Footer />
   </Stack >
 );
