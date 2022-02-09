@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Container, Fade, FilledInput, Slide, Stack, Typography } from "@mui/material";
+import { Alert, Box, Button, Collapse, Container, Fade, FilledInput, Slide, Stack, Typography } from "@mui/material";
 import React, { ChangeEvent, SyntheticEvent, useContext } from "react";
 import Image from 'next/image';
 import { AppContext } from "./_app";
@@ -226,7 +226,7 @@ const Newsletter = () => {
             <Typography variant="h2">Subscribe</Typography>
             <Stack spacing={1} ref={errorContainerRef}>
               <Typography sx={{ opacity: 0.6 }}>{"We'll get back to you with awesome news and updates."}</Typography>
-              <Fade in={!showSuccess}>
+              <Collapse unmountOnExit in={!showSuccess}>
                 <Stack direction="row" alignItems="stretch">
                   <FilledInput
                     disabled={isLoading}
@@ -240,11 +240,11 @@ const Newsletter = () => {
                     onChange={handleOnEmail} />
                   <LoadingButton loading={isLoading} type="submit" variant="outlined" size="large" sx={{ borderRadius: '0 8px 8px 0' }} disableElevation>Subscribe</LoadingButton>
                 </Stack>
-              </Fade>
-              <Slide in={error != null} direction="down" container={errorContainerRef.current}>
+              </Collapse>
+              <Slide unmountOnExit in={error != null} direction="down" container={errorContainerRef.current}>
                 <Alert severity="error" variant="outlined">{error}</Alert>
               </Slide>
-              <Fade in={showSuccess}>
+              <Fade unmountOnExit in={showSuccess}>
                 <Alert severity="success">You are our favorite subscriber</Alert>
               </Fade>
             </Stack>
