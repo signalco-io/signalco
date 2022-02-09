@@ -9,7 +9,6 @@ import Footer from "../components/pages/Footer";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { LoadingButton } from "@mui/lab";
 import HttpService from "../src/services/HttpService";
-import { blue } from "@mui/material/colors";
 
 const Cover = () => {
   const appContext = useContext(AppContext);
