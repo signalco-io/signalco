@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Collapse, Container, Fade, FilledInput, Grid, NoSsr, Slide, Stack, Typography } from "@mui/material";
+import { Alert, Box, Button, Collapse, Container, Fade, FilledInput, Grid, NoSsr, OutlinedInput, Slide, Stack, Typography } from "@mui/material";
 import React, { ChangeEvent, SyntheticEvent, useContext, useEffect } from "react";
 import Image from 'next/image';
 import { AppContext } from "./_app";
@@ -106,7 +106,7 @@ const CounterIndicator = (props: { count: number, hideAfter?: boolean }) => {
           width: '1px',
           background: `linear-gradient(180deg, ${appContext.theme === 'dark' ? '#ffffff' : '#000000'} 67.19%, rgba(255, 255, 255, 0) 100%)`,
           position: 'absolute',
-          left: '20px',
+          left: '21px',
           top: '42px',
         } : undefined
       }}>
@@ -116,15 +116,15 @@ const CounterIndicator = (props: { count: number, hideAfter?: boolean }) => {
   );
 };
 
-const FeatureDescription = (props: { title: string, content: string, link?: string }) => (
+const FeatureDescription = (props: { title: string, content: string, link?: string, linkText?: string }) => (
   <Box>
     <Stack spacing={2}>
       <Typography fontWeight={600} variant="h2">{props.title}</Typography>
-      <Typography sx={{ opacity: 0.6 }}>{props.content}</Typography>
+      <Typography sx={{ opacity: 0.8 }}>{props.content}</Typography>
       <Box>
         {props.link && (
           <Link passHref href={props.link}>
-            <Button variant="outlined">Read more</Button>
+            <Button variant="outlined">{props.linkText ?? "Read more"}</Button>
           </Link>
         )}
       </Box>
@@ -230,14 +230,13 @@ const Newsletter = () => {
           <Stack spacing={4}>
             <Typography variant="h2">{"What's new?"}</Typography>
             <Stack spacing={1} ref={errorContainerRef}>
-              <Typography sx={{ opacity: 0.6 }}>{"We'll get back to you with awesome news and updates."}</Typography>
+              <Typography sx={{ opacity: 0.9 }}>{"We'll get back to you with awesome news and updates."}</Typography>
               <Collapse unmountOnExit in={!showSuccess}>
                 <Stack direction="row" alignItems="stretch">
-                  <FilledInput
+                  <OutlinedInput
                     disabled={isLoading}
                     type="email"
                     placeholder="you@email.com"
-                    hiddenLabel
                     fullWidth
                     required
                     sx={{ borderRadius: '8px 0 0 8px', maxWidth: '400px' }}
@@ -352,11 +351,13 @@ const Index = () => {
         <FeatureDescription
           title="Dashboards"
           content="Make it yours. Visualize everything that matters to you in one place."
-          link="/features/dashboards" />
+          link="/features/dashboards"
+          linkText="See dashboards" />
         <FeatureDescription
           title="Processes"
           content=""
-          link="/features/processes" />
+          link="/features/processes"
+          linkText="Explore automation processes" />
       </StepContent>
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={3} hideAfter />
