@@ -179,10 +179,8 @@ const Newsletter = () => {
         await HttpService.requestAsync(
           "/website/newsletter-subscribe",
           "post",
-          { email: email },
-          {
-            "HCAPTCHA-RESPONSE": token
-          },
+          { email: email, response: token },
+          {},
           true
         );
       } catch (err) {
