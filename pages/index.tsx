@@ -1,5 +1,5 @@
-import { Box, Button, Container, FilledInput, Stack, Typography } from "@mui/material";
-import React, { SyntheticEvent, useContext } from "react";
+import { Alert, Box, Button, Container, Fade, FilledInput, Slide, Stack, Typography } from "@mui/material";
+import React, { ChangeEvent, SyntheticEvent, useContext } from "react";
 import Image from 'next/image';
 import { AppContext } from "./_app";
 import logoLight from '../public/images/icon-light-512x512.png';
@@ -9,6 +9,7 @@ import Footer from "../components/pages/Footer";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { LoadingButton } from "@mui/lab";
 import HttpService from "../src/services/HttpService";
+import { blue } from "@mui/material/colors";
 
 const Cover = () => {
   const appContext = useContext(AppContext);
@@ -152,7 +153,10 @@ const StepContent = (props: { title: string, subtitle?: string, imageSrc?: strin
 const Newsletter = () => {
   const appContext = useContext(AppContext);
   const [email, setEmail] = React.useState("");
+  const [showSuccess, setShowSuccess] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+  const errorContainerRef = React.useRef<Element>(null);
+  const [error, setError] = React.useState<string | undefined>(undefined);
   const hcaptchaRef = React.createRef<HCaptcha>();
 
   const handleSubmit = (event: SyntheticEvent) => {
@@ -172,19 +176,22 @@ const Newsletter = () => {
         return;
       }
 
-      console.log(token);
-
       // TODO: Submit request
       try {
         await HttpService.requestAsync(
           "/website/newsletter-subscribe",
           "post",
-          { email: email, response: token },
-          {},
+          { email: email },
+          {
+            "HCAPTCHA-RESPONSE": token
+          },
           true
         );
+
+        setShowSuccess(true);
       } catch (err) {
         console.error('Failed to subscribe to newsletter', err);
+        setError('Failed to subscribe to newsletter');
       }
 
       // Reset the HCAPTCHA so that it can be executed again if user
@@ -193,6 +200,11 @@ const Newsletter = () => {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  const handleOnEmail = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+    setError(undefined);
   }
 
   // Retrieve key, if not available don't show the component
@@ -213,12 +225,29 @@ const Newsletter = () => {
           />
           <Stack spacing={4}>
             <Typography variant="h2">Subscribe</Typography>
-            <Stack spacing={1}>
+            <Stack spacing={1} ref={errorContainerRef}>
               <Typography sx={{ opacity: 0.6 }}>{"We'll get back to you with awesome news and updates."}</Typography>
-              <Stack direction="row" alignItems="stretch">
-                <FilledInput disabled={isLoading} type="email" placeholder="example@example.com" hiddenLabel fullWidth required sx={{ borderRadius: '8px 0 0 8px' }} value={email} onChange={(e) => setEmail(e.target.value)} />
-                <LoadingButton loading={isLoading} type="submit" variant="outlined" size="large" sx={{ borderRadius: '0 8px 8px 0' }} disableElevation>Subscribe</LoadingButton>
-              </Stack>
+              <Fade in={!showSuccess}>
+                <Stack direction="row" alignItems="stretch">
+                  <FilledInput
+                    disabled={isLoading}
+                    type="email"
+                    placeholder="example@example.com"
+                    hiddenLabel
+                    fullWidth
+                    required
+                    sx={{ borderRadius: '8px 0 0 8px' }}
+                    value={email}
+                    onChange={handleOnEmail} />
+                  <LoadingButton loading={isLoading} type="submit" variant="outlined" size="large" sx={{ borderRadius: '0 8px 8px 0' }} disableElevation>Subscribe</LoadingButton>
+                </Stack>
+              </Fade>
+              <Slide in={error != null} direction="down" container={errorContainerRef.current}>
+                <Alert severity="error" variant="outlined">{error}</Alert>
+              </Slide>
+              <Fade in={showSuccess}>
+                <Alert severity="success">You are our favorite subscriber</Alert>
+              </Fade>
             </Stack>
           </Stack>
         </form>
