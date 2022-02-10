@@ -1,7 +1,7 @@
-import { useWindowRect } from "@dnd-kit/core/dist/hooks/utilities";
 import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../../pages/_app";
 import createGlobe from "cobe";
+import useWindowRect from "../../../src/hooks/useWindowRect";
 
 function Globe() {
     const canvasRef = React.useRef(null);

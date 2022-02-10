@@ -275,28 +275,42 @@ const Index = () => {
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={1} />
       </Box>
-      <StepContent title="Discover">
-        <FeatureDescription
-          title="Integrations"
-          content="Infinite possibilities. We are connected with wide range of devices and service from many fields. Smart Home and IoT devices to productivity tools and social apps." />
+      <StepContent title="Discover" imageSrc="/android-chrome-192x192.png">
         <FeatureDescription
           title="Inspiration"
-          content="" />
+          content="Infinite possibilities." />
+        <FeatureDescription
+          title="Inspiration"
+          content="Infinite possibilities." />
+        <FeatureDescription
+          title="Integrations"
+          content="Connect a wide range of devices and services, from Smart Home and IoT devices to productivity tools and social apps." />
       </StepContent>
+      <SectionCenter>
+        <Stack spacing={4} alignItems="center">
+          <Typography variant="overline" fontSize="1em">Connected to 8 services</Typography>
+          {/* <Stack direction="row" alignItems="center" justifyContent="space-evenly">
+            <div>integration logo 1</div>
+            <div>integration logo 2</div>
+            <div>integration logo 3</div>
+            <div>integration logo 4</div>
+            <div>integration logo 5</div>
+          </Stack> */}
+        </Stack>
+      </SectionCenter>
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={2} />
       </Box>
-      <StepContent title="Play">
+      <StepContent title="Play" imageSrc="/android-chrome-192x192.png">
         <FeatureDescription
           title="Dashboards"
-          content="Make it yours. Visualize everything that matters to you in one place."
-          link="/features/dashboards"
-          linkText="See dashboards" />
+          content="Make it yours. Feature-rich widgets combined with elegant design will become your playground." />
         <FeatureDescription
           title="Processes"
-          content=""
-          link="/features/processes"
-          linkText="Explore automation processes" />
+          content="Automate the smart way." />
+        <FeatureDescription
+          title="Entities"
+          content="Stay organized and regain control with entities." />
       </StepContent>
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={3} hideAfter />
@@ -306,12 +320,12 @@ const Index = () => {
           <Grid item xs={12} md={4}>
             <FeatureDescription
               title="Anywhere you are"
-              content="Access all features wherever you are. Controling devices in your home from other side of the world or room :) has never been simpler." />
+              content="Access all features wherever you are. Controlling devices in your home from other side of the world or room :) has never been simpler." />
           </Grid>
           <Grid item xs={12} md={4}>
             <FeatureDescription
               title="Share"
-              content="Not just for you. Share dashboards, devices, media, everything connected, with anyone on signalco or publically. Invite with friends, family and coworkers. You are in full control over what others can see and do." />
+              content="Not just for you. Share dashboards, devices, media, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
           </Grid>
           <Grid item xs={12} md={4}>
             <FeatureDescription
@@ -323,7 +337,7 @@ const Index = () => {
       <GlobeSection />
       <Divider />
       <SectionCenter narrow sx={{ bgcolor: 'background.paper' }}>
-        <Stack spacing={8} alignItems="center" direction={{ xs: "column", md: "row" }} justifyContent={{ xs: "space-between" }}>
+        <Stack spacing={{ xs: 6, md: 8 }} alignItems="center" direction={{ xs: "column", md: "row" }} justifyContent={{ xs: "space-between" }}>
           <DataPart value="8" subtitle="Integrations" />
           <DataPart value="500+" subtitle="Automations per day" />
           <DataPart value="2000+" subtitle="Supported devices" />
@@ -334,14 +348,14 @@ const Index = () => {
         <Newsletter />
       </SectionCenter>
       <Footer />
-    </Stack>
+    </Stack >
   );
 };
 
 const DataPart = (props: { value: string, subtitle: string }) => (
   <Stack alignItems="center" spacing={1}>
-    <Typography variant="body2" fontWeight={600} fontSize={52} lineHeight={1}>{props.value}</Typography>
-    <Typography variant="overline" fontSize={18} color="textSecondary" lineHeight={1}>{props.subtitle}</Typography>
+    <Typography variant="body2" fontWeight={600} fontSize={{ xs: 38, md: 52 }} lineHeight={1}>{props.value}</Typography>
+    <Typography variant="overline" fontSize={{ xs: 14, md: 18 }} color="textSecondary" lineHeight={1}>{props.subtitle}</Typography>
   </Stack>
 );
 
