@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Collapse, Container, Fade, Grid, NoSsr, OutlinedInput, Slide, Stack, Typography } from "@mui/material";
+import { Alert, Box, Button, Collapse, Container, Divider, Fade, FilledInput, Grid, NoSsr, Slide, Stack, SxProps, Theme, Typography } from "@mui/material";
 import React, { ChangeEvent, SyntheticEvent, useContext, useEffect } from "react";
 import Image from 'next/image';
 import { AppContext } from "./_app";
@@ -11,7 +11,6 @@ import { LoadingButton } from "@mui/lab";
 import HttpService from "../src/services/HttpService";
 import createGlobe from "cobe";
 import useWindowRect from "../src/hooks/useWindowRect";
-import { grey } from "@mui/material/colors";
 
 const Cover = () => {
   const appContext = useContext(AppContext);
@@ -132,11 +131,11 @@ const FeatureDescription = (props: { title: string, content: string, link?: stri
   </Box>
 );
 
-const StepContent = (props: { title: string, subtitle?: string, imageSrc?: string, children?: React.ReactElement | React.ReactElement[], horizontal?: boolean }) => (
-  <Container>
-    <Stack spacing={12} p={8}>
+const StepContent = (props: { title: string, subtitle?: string, imageSrc?: string, children?: React.ReactElement | React.ReactElement[] }) => (
+  <SectionCenter>
+    <Stack spacing={12}>
       <Stack spacing={4}>
-        <Typography fontWeight={600} fontSize={52} textAlign="center">{props.title}</Typography>
+        <Typography fontWeight={600} fontSize={{ xs: 42, md: 52 }} textAlign="center">{props.title}</Typography>
         {props.subtitle && <Typography textAlign="center" sx={{ opacity: 0.6 }}>{props.subtitle}</Typography>}
       </Stack>
       <Stack position="relative" direction="row" spacing={8}>
@@ -145,13 +144,23 @@ const StepContent = (props: { title: string, subtitle?: string, imageSrc?: strin
           </Box>
         )}
         {props.children && (
-          <Stack width="100%" spacing={4} justifyContent="space-evenly" direction={props.horizontal ? "row" : "column"}>
+          <Stack width="100%" spacing={4} justifyContent="space-evenly">
             {props.children}
           </Stack>
         )}
       </Stack>
     </Stack>
-  </Container>
+  </SectionCenter>
+);
+
+const SectionCenter = (props: { children: React.ReactElement, sx?: SxProps<Theme> | undefined, narrow?: boolean }) => (
+  <Box sx={props.sx}>
+    <Container>
+      <Box sx={{ px: { xs: 2, sm: 4, md: 8 }, py: { xs: props.narrow ? 4 : 8, sm: props.narrow ? 4 : 12 } }}>
+        {props.children}
+      </Box>
+    </Container>
+  </Box>
 );
 
 const Newsletter = () => {
@@ -216,46 +225,44 @@ const Newsletter = () => {
   if (typeof key === 'undefined') return <></>;
 
   return (
-    <Container>
-      <Box p={{ xs: 2, sm: 8 }}>
-        <form onSubmit={handleSubmit}>
-          <HCaptcha
-            ref={hcaptchaRef}
-            size="invisible"
-            theme={appContext.theme === 'dark' ? 'dark' : 'light'}
-            sitekey={key}
-            onVerify={onHCaptchaChange}
-            onClose={() => onHCaptchaChange(undefined)}
-          />
-          <Stack spacing={4}>
-            <Typography variant="h2">{"What's new?"}</Typography>
-            <Stack spacing={1} ref={errorContainerRef}>
-              <Typography sx={{ opacity: 0.9 }}>{"We'll get back to you with awesome news and updates."}</Typography>
-              <Collapse unmountOnExit in={!showSuccess}>
-                <Stack direction="row" alignItems="stretch">
-                  <OutlinedInput
-                    disabled={isLoading}
-                    type="email"
-                    placeholder="you@email.com"
-                    fullWidth
-                    required
-                    sx={{ borderRadius: '8px 0 0 8px', maxWidth: '400px' }}
-                    value={email}
-                    onChange={handleOnEmail} />
-                  <LoadingButton loading={isLoading} type="submit" variant="outlined" size="large" sx={{ borderRadius: '0 8px 8px 0' }} disableElevation>Subscribe</LoadingButton>
-                </Stack>
-              </Collapse>
-              <Slide unmountOnExit in={error != null} direction="down" container={errorContainerRef.current}>
-                <Alert severity="error" variant="outlined">{error}</Alert>
-              </Slide>
-              <Fade unmountOnExit in={showSuccess}>
-                <Alert severity="success" variant="outlined">You are our new favorite subscriber</Alert>
-              </Fade>
+
+    <form onSubmit={handleSubmit}>
+      <HCaptcha
+        ref={hcaptchaRef}
+        size="invisible"
+        theme={appContext.theme === 'dark' ? 'dark' : 'light'}
+        sitekey={key}
+        onVerify={onHCaptchaChange}
+        onClose={() => onHCaptchaChange(undefined)}
+      />
+      <Stack spacing={4}>
+        <Typography variant="h2">{"What's new?"}</Typography>
+        <Stack spacing={1} ref={errorContainerRef}>
+          <Typography sx={{ opacity: 0.9 }}>{"We'll get back to you with awesome news and updates."}</Typography>
+          <Collapse unmountOnExit in={!showSuccess}>
+            <Stack direction="row" alignItems="stretch">
+              <FilledInput
+                disabled={isLoading}
+                type="email"
+                placeholder="you@email.com"
+                hiddenLabel
+                fullWidth
+                required
+                sx={{ borderRadius: '8px 0 0 8px', maxWidth: '400px' }}
+                value={email}
+                onChange={handleOnEmail} />
+              <LoadingButton loading={isLoading} type="submit" variant="outlined" size="large" sx={{ borderRadius: '0 8px 8px 0' }} disableElevation>Subscribe</LoadingButton>
             </Stack>
-          </Stack>
-        </form>
-      </Box>
-    </Container>
+          </Collapse>
+          <Slide unmountOnExit in={error != null} direction="down" container={errorContainerRef.current}>
+            <Alert severity="error" variant="outlined">{error}</Alert>
+          </Slide>
+          <Fade unmountOnExit in={showSuccess}>
+            <Alert severity="success" variant="outlined">You are our new favorite subscriber</Alert>
+          </Fade>
+        </Stack>
+      </Stack>
+    </form>
   );
 };
 
@@ -325,8 +332,6 @@ const Globe = () => {
 };
 
 const Index = () => {
-  const appContext = useContext(AppContext);
-
   return (
     <Stack>
       <Cover />
@@ -362,19 +367,19 @@ const Index = () => {
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={3} hideAfter />
       </Box>
-      <StepContent title="Enjoy" horizontal>
-        <Grid container spacing={4} wrap="nowrap">
-          <Grid item xs={4}>
+      <StepContent title="Enjoy">
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={4}>
             <FeatureDescription
               title="Anywhere you are"
               content="Access all features wherever you are. Controling devices in your home from other side of the world or room :) has never been simpler." />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} md={4}>
             <FeatureDescription
               title="Share"
               content="Not just for you. Share dashboards, devices, media, everything connected, with anyone on signalco or publically. Invite with friends, family and coworkers. You are in full control over what others can see and do." />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} md={4}>
             <FeatureDescription
               title="Relax"
               content="Enjoy the automated life. Use gained free time doing what you love. Relax in nature, hobbies, family... or automate one more thing." />
@@ -384,12 +389,28 @@ const Index = () => {
       <NoSsr>
         <Globe />
       </NoSsr>
-      <Box py={8} sx={{ backgroundColor: grey[appContext.theme === 'dark' ? '900' : '300'] }}>
+      <Divider />
+      <SectionCenter narrow sx={{ bgcolor: 'background.paper' }}>
+        <Stack spacing={8} alignItems="center" direction={{ xs: "column", md: "row" }} justifyContent={{ xs: "space-between" }}>
+          <DataPart value="8" subtitle="Integrations" />
+          <DataPart value="500+" subtitle="Automations per day" />
+          <DataPart value="2000+" subtitle="Supported devices" />
+        </Stack>
+      </SectionCenter>
+      <Divider />
+      <SectionCenter>
         <Newsletter />
-      </Box>
+      </SectionCenter>
       <Footer />
     </Stack>
   );
 };
+
+const DataPart = (props: { value: string, subtitle: string }) => (
+  <Stack alignItems="center" spacing={1}>
+    <Typography variant="body2" fontWeight={600} fontSize={52} lineHeight={1}>{props.value}</Typography>
+    <Typography variant="overline" fontSize={18} color="textSecondary" lineHeight={1}>{props.subtitle}</Typography>
+  </Stack>
+);
 
 export default Index;
