@@ -1,5 +1,5 @@
-import { Alert, Box, Button, Collapse, Container, Divider, Fade, FilledInput, Grid, NoSsr, Slide, Stack, SxProps, Theme, Typography } from "@mui/material";
-import React, { ChangeEvent, SyntheticEvent, useContext, useEffect } from "react";
+import { Alert, Box, Button, Collapse, Container, Divider, Fade, FilledInput, Grid, Slide, Stack, SxProps, Theme, Typography } from "@mui/material";
+import React, { ChangeEvent, SyntheticEvent, useContext } from "react";
 import Image from 'next/image';
 import { AppContext } from "./_app";
 import logoLight from '../public/images/icon-light-512x512.png';
@@ -9,8 +9,7 @@ import Footer from "../components/pages/Footer";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { LoadingButton } from "@mui/lab";
 import HttpService from "../src/services/HttpService";
-import createGlobe from "cobe";
-import useWindowRect from "../src/hooks/useWindowRect";
+import GlobeSection from "../components/pages/landing/GlobeSection";
 
 const Cover = () => {
   const appContext = useContext(AppContext);
@@ -266,71 +265,6 @@ const Newsletter = () => {
   );
 };
 
-const Globe = () => {
-  const canvasRef = React.useRef(null);
-  const appContext = useContext(AppContext);
-  const rect = useWindowRect(typeof window !== 'undefined' ? window : null);
-  const width = Math.min(1100, rect?.width ?? 0);
-  const height = width;
-  const isDark = appContext.theme === 'dark';
-
-  useEffect(() => {
-    let phi = 4.1;
-
-    if (!width || !height) return;
-
-    const globe = createGlobe(canvasRef.current, {
-      devicePixelRatio: 2,
-      width: width * 2,
-      height: height * 2,
-      phi: phi,
-      theta: 0.1,
-      dark: isDark ? 1 : 0,
-      diffuse: 1.1,
-      mapSamples: 16000,
-      mapBrightness: 6,
-      baseColor: isDark ? [0.6, 0.6, 0.6] : [1, 1, 1],
-      markerColor: [0.1, 0.8, 1],
-      glowColor: isDark ? [0, 0, 0] : [1, 1, 1],
-      markers: [],
-      onRender: (state: any) => {
-        state.phi = phi;
-        phi += 0.0005;
-      }
-    });
-
-    return () => {
-      globe.destroy();
-    };
-  }, [width, height, isDark]);
-
-  return (
-    <Container>
-      <Box sx={{
-        overflow: 'hidden',
-      }}>
-        <Box sx={{
-          minHeight: { xs: '12vh', sm: '20vh', md: '380px' },
-          display: 'flex',
-          justifyContent: 'center',
-          position: 'relative'
-        }}>
-          <Box sx={{
-            position: 'absolute',
-            transform: 'translateY(-8%)',
-            width: '1100px',
-            height: '1100px',
-            maxWidth: '100vw!important',
-            maxHeight: '100vw!important'
-          }}>
-            <canvas ref={canvasRef} style={{ width: width, height: width }}></canvas>
-          </Box>
-        </Box>
-      </Box>
-    </Container>
-  );
-};
-
 const Index = () => {
   return (
     <Stack>
@@ -386,9 +320,7 @@ const Index = () => {
           </Grid>
         </Grid>
       </StepContent>
-      <NoSsr>
-        <Globe />
-      </NoSsr>
+      <GlobeSection />
       <Divider />
       <SectionCenter narrow sx={{ bgcolor: 'background.paper' }}>
         <Stack spacing={8} alignItems="center" direction={{ xs: "column", md: "row" }} justifyContent={{ xs: "space-between" }}>
