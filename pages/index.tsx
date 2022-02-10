@@ -289,13 +289,13 @@ const Index = () => {
       <SectionCenter>
         <Stack spacing={4} alignItems="center">
           <Typography variant="overline" fontSize="1em">Connected to 8 services</Typography>
-          {/* <Stack direction="row" alignItems="center" justifyContent="space-evenly">
+          <Stack direction="row" alignItems="center" justifyContent="space-evenly">
             <div>integration logo 1</div>
             <div>integration logo 2</div>
             <div>integration logo 3</div>
             <div>integration logo 4</div>
             <div>integration logo 5</div>
-          </Stack> */}
+          </Stack>
         </Stack>
       </SectionCenter>
       <Box sx={{ margin: 'auto' }}>

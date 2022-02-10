@@ -58,39 +58,42 @@ const AppLayout = (props: ChildrenProps) => {
   );
 };
 
+const PageNavSsr = (props: { isScrolled?: boolean }) => (
+  <Box sx={{
+    borderBottom: '1px solid transparent',
+    borderColor: (props.isScrolled ?? false) ? 'divider' : 'transparent',
+    transition: 'all 0.2s',
+    py: 2,
+    position: 'sticky',
+    top: 0,
+    height: '75px',
+    backdropFilter: 'saturate(180%) blur(10px)',
+    zIndex: 101
+  }}>
+    <Container>
+      <Stack component="header" direction="row" justifyContent="space-between" alignItems="center">
+        <Link href="/" passHref><ButtonBase disableRipple><SignalcoLogo priority height={42} /></ButtonBase></Link>
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <Link href="/app" passHref>
+            <Button variant="contained" endIcon={<KeyboardArrowRightIcon />}>App</Button>
+          </Link>
+        </Stack>
+      </Stack>
+    </Container>
+  </Box>
+);
+
 const PageNav = () => {
   var rect = useWindowRect();
-  const isScrolled = rect?.scrollY ?? 0;
-
-  return (
-    <Box sx={{
-      borderBottom: '1px solid',
-      borderColor: isScrolled ? 'divider' : 'transparent',
-      transition: 'all 0.2s',
-      py: 2,
-      position: 'sticky',
-      top: 0,
-      backdropFilter: 'saturate(180%) blur(10px)',
-      zIndex: 101
-    }}>
-      <Container>
-        <Stack component="header" direction="row" justifyContent="space-between" alignItems="center">
-          <Link href="/" passHref><ButtonBase disableRipple><SignalcoLogo priority height={42} /></ButtonBase></Link>
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <Link href="/app" passHref>
-              <Button variant="contained" endIcon={<KeyboardArrowRightIcon />}>App</Button>
-            </Link>
-          </Stack>
-        </Stack>
-      </Container>
-    </Box>
-  );
+  return <PageNavSsr isScrolled={(rect?.scrollY ?? 0) > 0} />
 };
 
 export function PageLayout(props: ChildrenProps) {
+  const Nav = typeof window !== 'undefined' ? PageNav : PageNavSsr;
+
   return (
     <Stack spacing={4}>
-      <PageNav />
+      <Nav />
       <Box>
         <Container>
           {props.children}
