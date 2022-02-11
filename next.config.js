@@ -28,19 +28,19 @@ module.exports = withSentryConfig(withBundleAnalyzer(withPWA({
         contentSecurityPolicy: {
           directives: {
             defaultSrc: "'self'",
-            scriptSrc: ["'self'", "https://js.hcaptcha.com", isDevelopment ? "'unsafe-eval'" : undefined],
+            scriptSrc: ["'self'", "https://hcaptcha.com", "https://*.hcaptcha.com", isDevelopment ? "'unsafe-eval'" : undefined],
             objectSrc: "'none'",
-            styleSrc: ["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
+            styleSrc: ["'self'", "https://fonts.googleapis.com", "https://hcaptcha.com", "https://*.hcaptcha.com", "'unsafe-inline'"],
             fontSrc: ["'self'", "https://fonts.gstatic.com"],
             manifestSrc: "'self'",
             mediaSrc: "'self'",
             prefetchSrc: "'self'",
             childSrc: "'self'",
-            frameSrc: ["'self'", "https://dfnoise.eu.auth0.com", "https://newassets.hcaptcha.com"],
+            frameSrc: ["'self'", "https://dfnoise.eu.auth0.com", "https://hcaptcha.com", "https://*.hcaptcha.com"],
             workerSrc: "'self'",
             imgSrc: ["'self'", "data:", "https://www.signalco.io", "https://lh3.googleusercontent.com", "https://dfnoise.eu.auth0.com"],
             formAction: "'self'",
-            connectSrc: ["'self'", "https://www.signalco.io", "https://api.signalco.io", "https://signalhub.service.signalr.net", "https://api.github.com", "https://o513630.ingest.sentry.io", "https://fonts.gstatic.com", "https://dfnoise.eu.auth0.com", "wss://signalhub.service.signalr.net", "https://lh3.googleusercontent.com", "https://fonts.googleapis.com", "https://js.hcaptcha.com", "https://newassets.hcaptcha.com"],
+            connectSrc: ["'self'", "https://www.signalco.io", "https://api.signalco.io", "https://signalhub.service.signalr.net", "https://api.github.com", "https://o513630.ingest.sentry.io", "https://fonts.gstatic.com", "https://dfnoise.eu.auth0.com", "wss://signalhub.service.signalr.net", "https://lh3.googleusercontent.com", "https://fonts.googleapis.com", "https://hcaptcha.com", "https://*.hcaptcha.com"],
             baseURI: ['https://www.signalco.io', 'https://next.signalco.io'],
             reportURI: 'https://o513630.ingest.sentry.io/api/5615895/security/?sentry_key=2a04f9a742e74740952dcebf06313840',
             "frame-ancestors": "'none'"
