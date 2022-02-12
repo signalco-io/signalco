@@ -4,6 +4,10 @@
             "hr": "Croatian",
             "en": "English"
         },
+        "Account": {
+            "Logout": "Logout",
+            "UserProfileImageAlt": "User profile image"
+        },
         "Nav": {
             "Dashboard": "Dashboard",
             "Entities": "Entities",
@@ -21,6 +25,17 @@
             },
             "Language": "Language",
             "SelectLanguage": "Select language"
+        },
+        "Placeholders": {
+            "NoData": "No data to show",
+            "NoItems": "No items",
+            "NoDashboardsAvailable": "No dashboards available"
+        },
+        "Widgets": {
+            "WidgetChecklist": {
+                "Checklist": "Checklist",
+                "AddItem": "Add an item"
+            }
         }
     }
 }

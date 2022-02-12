@@ -12,10 +12,12 @@ import { LoadingButton } from "@mui/lab";
 import { widgetType } from "../widgets/Widget";
 import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
 import dynamic from "next/dynamic";
+import useLocale from "../../src/hooks/useLocale";
 
 const WidgetStoreDynamic = dynamic(() => import("../widgets/WidgetStore"));
 
 const Dashboards = () => {
+    const placeholders = useLocale("App", "Placeholders");
     const [isLoading, setIsLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -103,7 +105,7 @@ const Dashboards = () => {
                                     isEditing={isEditing} />
                                 : (
                                     <Box textAlign="center" sx={{ m: 2 }}>
-                                        <NoDataPlaceholder content="No dashboards available" />
+                                        <NoDataPlaceholder content={placeholders.t("NoDashboardsAvailable")} />
                                     </Box>
                                 )}
                         </Box>

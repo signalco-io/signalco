@@ -4,6 +4,10 @@
             "hr": "Hrvatski",
             "en": "Engleski"
         },
+        "Account": {
+            "Logout": "Odjava",
+            "UserProfileImageAlt": "Slika korisničkog profila"
+        },
         "Nav": {
             "Dashboard": "Kontrolna ploča",
             "Entities": "Entiteti",
@@ -21,6 +25,17 @@
             },
             "Language": "Jezik",
             "SelectLanguage": "Odabir jezika"
+        },
+        "Placeholders": {
+            "NoData": "Nema podataka za prikaz",
+            "NoItems": "Nema stavki",
+            "NoDashboardsAvailable": "Nema dostupnih kontrolnih ploča"
+        },
+        "Widgets": {
+            "WidgetChecklist": {
+                "Checklist": "Popis",
+                "AddItem": "Dodaj stavku"
+            }
         }
     }
 }

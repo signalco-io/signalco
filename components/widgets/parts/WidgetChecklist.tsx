@@ -15,6 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
 import useWidgetOptions from "../../../src/hooks/widgets/useWidgetOptions";
 import useWidgetActive from "../../../src/hooks/widgets/useWidgetActive";
+import useLocale from "../../../src/hooks/useLocale";
 
 const stateOptions: IWidgetConfigurationOption[] = [
     DefaultLabel,
@@ -58,12 +59,14 @@ const ChecklistItem = observer((props: { item: IChecklistItem, onChange: (id: st
 
 const WidgetChecklist = (props: IWidgetSharedProps) => {
     const { id, config } = props;
+    const placeholders = useLocale("App", "Placeholders");
+    const { t } = useLocale("App", "Widgets", "WidgetChecklist");
     const [items] = useState(observable(LocalStorageService.getItemOrDefault<IChecklistItem[]>(`checklist-${id}`, [])));
     const [newItemText, setNewItemText] = useState('');
     const [isInputFocusedOrFilled, setIsInputFocusedOrFilled] = useState(false);
 
     const removeOnDoneDelay = 500;
-    const label = config?.label ?? "Checklist";
+    const label = config?.label ?? t("Checklist");
     const removeOnDone = config?.removeOnDone ?? true;
 
     const saveItems = useCallback((items: IChecklistItem[]) => {
@@ -115,14 +118,16 @@ const WidgetChecklist = (props: IWidgetSharedProps) => {
                 <Stack sx={{ height: '100%', pl: 2, pr: 3 }}>
                     {items.length
                         ? items.map(item => <ChecklistItem key={item.id} item={item} onChange={handleItemChanged} onRemove={handleItemRemoved} />)
-                        : <Box display="flex" height="100%" alignItems="center" justifyContent="center"><NoDataPlaceholder content="No items :)" /></Box>}
+                        : <Box display="flex" height="100%" alignItems="center" justifyContent="center">
+                            <NoDataPlaceholder content={placeholders.t("NoItems")} />
+                        </Box>}
                 </Stack>
             </Box>
             <Box sx={{ px: 2 }}>
                 <form onSubmit={handleNewItem}>
                     <FilledInput
                         hiddenLabel
-                        placeholder="Add an item"
+                        placeholder={t("AddItem")}
                         fullWidth
                         onFocus={() => setIsInputFocusedOrFilled(true)}
                         onBlur={() => {
