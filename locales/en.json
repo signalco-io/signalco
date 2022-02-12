@@ -1,11 +1,26 @@
 {
     "App": {
+        "Locales": {
+            "hr": "Croatian",
+            "en": "English"
+        },
         "Nav": {
             "Dashboard": "Dashboard",
             "Entities": "Entities",
             "Processes": "Processes",
             "Stations": "Stations",
             "Settings": "Settings"
+        },
+        "Settings": {
+            "General": "General",
+            "LookAndFeel": "Look and feel",
+            "Theme": "Theme",
+            "Themes": {
+                "Dark": "Dark",
+                "Light": "Light"
+            },
+            "Language": "Language",
+            "SelectLanguage": "Select language"
         }
     }
 }

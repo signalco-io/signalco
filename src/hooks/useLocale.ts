@@ -1,6 +1,7 @@
 import en from '../../locales/en.json';
 import hr from '../../locales/hr.json';
 import { ObjectDictAny } from '../sharedTypes';
+import useUserSetting from './useUserSetting';
 
 function resolvePathDot(data: ObjectDictAny, path: string) {
     return resolvePathSplit(data, path.split('.'));
@@ -26,16 +27,17 @@ function formatString(text: string, data?: object) {
         if (innerArgs[5]) return "{";
         if (innerArgs[6]) return "}";
         const path = innerArgs[2];
+        console.log(resolvePathDot(data as ObjectDictAny, path))
         return resolvePathDot(data as ObjectDictAny, path)?.toString() ?? `{${path}}`;
     });
 }
 
-const useLocale = (...namespace: string[]) => {
-    const locale = 'en';
+export const availableLocales = ["hr", "en"];
 
-    let namespaceKeys = resolvePathSplit(locale === 'en' ? en : hr, namespace);
+export default function useLocale(...namespace: string[]) {
+    const [userLocale] = useUserSetting('locale', 'en');
 
-    return { t: (key: string, data?: object) => {return namespaceKeys ? formatString(namespaceKeys[key], data) : `{${key}}`;}}
-};
+    let namespaceKeys = resolvePathSplit(userLocale === 'en' ? en : hr, namespace);
 
-export default useLocale;
+    return { t: (key: string, data?: object) => { return namespaceKeys && namespaceKeys[key] ? formatString(namespaceKeys[key], data) : `{${key}}`; } };
+}

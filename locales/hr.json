@@ -1,11 +1,26 @@
 {
     "App": {
+        "Locales": {
+            "hr": "Hrvatski",
+            "en": "Engleski"
+        },
         "Nav": {
             "Dashboard": "Kontrolna ploča",
             "Entities": "Entiteti",
             "Processes": "Procesi",
             "Stations": "Stanice",
             "Settings": "Postavke"
+        },
+        "Settings": {
+            "General": "Generalno",
+            "LookAndFeel": "Izgled",
+            "Theme": "Teme",
+            "Themes": {
+                "Dark": "Tamna",
+                "Light": "Svijetla"
+            },
+            "Language": "Jezik",
+            "SelectLanguage": "Odabir jezika"
         }
     }
 }
