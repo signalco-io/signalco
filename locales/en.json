@@ -15,6 +15,13 @@
             "Stations": "Stations",
             "Settings": "Settings"
         },
+        "Stations": {
+            "Stations": "Stations",
+            "Name": "Name",
+            "Version": "Version",
+            "LastActivity": "Last Activity",
+            "RegisteredDate": "RegisteredDate"
+        },
         "Settings": {
             "General": "General",
             "LookAndFeel": "Look and feel",

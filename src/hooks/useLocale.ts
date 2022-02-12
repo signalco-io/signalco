@@ -3,6 +3,8 @@ import hr from '../../locales/hr.json';
 import { ObjectDictAny } from '../sharedTypes';
 import useUserSetting from './useUserSetting';
 
+export type LocalizeFunc = (key: string, data?: object | undefined) => string;
+
 function resolvePathDot(data: ObjectDictAny, path: string) {
     return resolvePathSplit(data, path.split('.'));
 }
@@ -34,7 +36,7 @@ function formatString(text: string, data?: object) {
 
 export const availableLocales = ["hr", "en"];
 
-export default function useLocale(...namespace: string[]) {
+export default function useLocale(...namespace: string[]): {t: LocalizeFunc} {
     const [userLocale] = useUserSetting('locale', 'en');
 
     let namespaceKeys = resolvePathSplit(userLocale === 'en' ? en : hr, namespace);

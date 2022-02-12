@@ -15,6 +15,14 @@
             "Stations": "Stanice",
             "Settings": "Postavke"
         },
+        "Stations": {
+            "Stations": "Stanice",
+            "Search": "Pretraga...",
+            "name": "Naziv",
+            "version": "Verzija",
+            "lastActivity": "Zadnja aktivnost",
+            "registeredDate": "Datum registracije"
+        },
         "Settings": {
             "General": "Generalno",
             "LookAndFeel": "Izgled",

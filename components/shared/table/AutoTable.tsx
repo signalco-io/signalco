@@ -18,6 +18,7 @@ import ResultsPlaceholder from "../indicators/ResultsPlaceholder";
 import IErrorProps from "../interfaces/IErrorProps";
 import useSearch, { filterFuncObjectStringProps } from "../../../src/hooks/useSearch";
 import { ChildrenProps } from "../../../src/sharedTypes";
+import { LocalizeFunc } from "../../../src/hooks/useLocale";
 
 export interface IAutoTableItem {
   id: string;
@@ -31,6 +32,7 @@ export interface IAutoTableProps<T extends IAutoTableItem> extends IErrorProps {
   isLoading: boolean;
   onRowClick?: (item: T) => void;
   hideSearch?: boolean;
+  localize?: LocalizeFunc;
 }
 
 export interface IAutoTableCellRendererProps {
@@ -110,7 +112,7 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
 
   const headerRow: { id: string, [key: string]: string } = { id: 'headers' };
   const header = headersKeys?.reduce((prev, curr) => {
-    prev[curr] = camelToSentenceCase(curr);
+    prev[curr] = props.localize ? props.localize(curr) : camelToSentenceCase(curr);
     return prev;
   }, headerRow);
 
@@ -118,7 +120,7 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
 
   return (
     <Stack spacing={1} sx={{ height: '100%' }}>
-      {!props.hideSearch && showSearch && <TextField label="Search..." sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
+      {!props.hideSearch && showSearch && <TextField label={props.localize ? props.localize("Search") : "Search..."} sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ overflow: 'auto', display: 'grid' }}>
           {props.isLoading && <LinearProgress />}

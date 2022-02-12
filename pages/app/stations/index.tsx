@@ -5,6 +5,7 @@ import { AppLayoutWithAuth } from "../../../components/AppLayout";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
 import BeaconsRepository, { IBeaconModel } from "../../../src/beacons/BeaconsRepository";
+import useLocale from "../../../src/hooks/useLocale";
 
 function beaconModelToTableItem(station: IBeaconModel): IAutoTableItem {
     return {
@@ -18,7 +19,8 @@ function beaconModelToTableItem(station: IBeaconModel): IAutoTableItem {
 }
 
 const Beacons = () => {
-    const beaconsTable = useAutoTable(BeaconsRepository.getBeaconsAsync, beaconModelToTableItem);
+    const { t } = useLocale("App", "Stations");
+    const beaconsTable = useAutoTable(BeaconsRepository.getBeaconsAsync, beaconModelToTableItem, t);
 
     return (
         <Stack spacing={{ xs: 0, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
