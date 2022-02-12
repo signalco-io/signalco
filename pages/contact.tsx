@@ -6,7 +6,8 @@ const ContactPage = () => (
         <Stack>
             <Typography>Social</Typography>
             <ul>
-                <li><a href="https://twitter.com/signalco_io">@signalco_io</a></li>
+                <li><a href="https://twitter.com/signalco_io">@signalco_io</a> at Twitter</li>
+                <li><a href="https://github.com/signalco-io">@signalco-io</a> at GitHub</li>
             </ul>
         </Stack>
         <Stack>
