@@ -1,12 +1,14 @@
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { LoadingButton } from "@mui/lab";
 import { Stack, Typography, Collapse, FilledInput, Slide, Alert, Fade } from "@mui/material";
-import { useContext, useState, useRef, createRef, SyntheticEvent, ChangeEvent } from "react";
-import { AppContext } from "../../../pages/_app";
+import { useState, useRef, createRef, SyntheticEvent, ChangeEvent } from "react";
 import HttpService from "../../../src/services/HttpService";
 
+// function useHCaptcha() {
+
+// }
+
 function Newsletter() {
-    const appContext = useContext(AppContext);
     const [email, setEmail] = useState("");
     const [showSuccess, setShowSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -73,7 +75,6 @@ function Newsletter() {
             <HCaptcha
                 ref={hcaptchaRef}
                 size="invisible"
-                theme={appContext.theme === 'dark' ? 'dark' : 'light'}
                 sitekey={key}
                 onVerify={onHCaptchaChange}
                 onClose={() => onHCaptchaChange(undefined)} />
