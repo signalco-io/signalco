@@ -4,6 +4,7 @@ import React from "react";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import SignalcoLogo from "../icons/SignalcoLogo";
+import RedditIcon from "@mui/icons-material/Reddit";
 
 const SLink = ({ href, children }: { href: string, children: React.ReactElement | string }) => (
     <NextLink href={href} passHref>
@@ -63,6 +64,11 @@ const Footer = () => (
                                 <SLink href="https://twitter.com/signalco_io">
                                     <IconButton size="large" aria-label="Twitter link">
                                         <TwitterIcon />
+                                    </IconButton>
+                                </SLink>
+                                <SLink href="https://www.reddit.com/r/signalco/">
+                                    <IconButton size="large" aria-label="reddit link">
+                                        <RedditIcon />
                                     </IconButton>
                                 </SLink>
                                 <SLink href="https://github.com/signalco-io/signalco">

@@ -8,6 +8,7 @@ const ContactPage = () => (
             <ul>
                 <li><a href="https://twitter.com/signalco_io">@signalco_io</a> at Twitter</li>
                 <li><a href="https://github.com/signalco-io">@signalco-io</a> at GitHub</li>
+                <li><a href="https://www.reddit.com/r/signalco/">r/signalco</a> at reddit</li>
             </ul>
         </Stack>
         <Stack>

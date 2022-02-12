@@ -18,7 +18,7 @@ function beaconModelToTableItem(station: IBeaconModel): IAutoTableItem {
     };
 }
 
-const Beacons = () => {
+const StationsPage = () => {
     const { t } = useLocale("App", "Stations");
     const beaconsTable = useAutoTable(BeaconsRepository.getBeaconsAsync, beaconModelToTableItem, t);
 
@@ -30,6 +30,6 @@ const Beacons = () => {
     )
 }
 
-Beacons.layout = AppLayoutWithAuth;
+StationsPage.layout = AppLayoutWithAuth;
 
-export default Beacons;
+export default StationsPage;
