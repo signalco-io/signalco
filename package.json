@@ -28,7 +28,7 @@
     "@hcaptcha/react-hcaptcha": "1.1.0",
     "@microsoft/signalr": "6.0.2",
     "@mui/icons-material": "5.4.2",
-    "@mui/lab": "5.0.0-alpha.68",
+    "@mui/lab": "5.0.0-alpha.69",
     "@mui/material": "5.4.2",
     "@sentry/nextjs": "6.17.9",
     "@types/react-grid-layout": "1.3.1",
