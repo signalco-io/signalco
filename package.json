@@ -39,7 +39,7 @@
     "d3": "7.3.0",
     "eslint-plugin-storybook": "0.5.7",
     "material-ui-popup-state": "2.0.0",
-    "mobx": "6.3.13",
+    "mobx": "6.4.0",
     "mobx-react-lite": "3.2.3",
     "next": "12.1.0",
     "next-pwa": "5.4.4",
