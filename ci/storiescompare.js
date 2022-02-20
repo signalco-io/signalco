@@ -1,12 +1,7 @@
-import chalk from 'chalk';
-import { unlinkSync, renameSync, readFileSync, readdirSync, lstatSync } from 'fs';
-import { join, dirname } from 'path';
-import { stdout } from 'process';
-import { fileURLToPath } from 'url';
-
-// ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const chalk = require('chalk');
+const { unlinkSync, renameSync, readFileSync, readdirSync, lstatSync } = require('fs');
+const { join } = require('path');
+const { stdout } = require('process');
 
 // Directory paths
 const APPROVED_DIR_NAME = '.stories-approved';
