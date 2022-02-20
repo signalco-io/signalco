@@ -1,11 +1,48 @@
 {
     "App": {
+        "Locales": {
+            "hr": "Croatian",
+            "en": "English"
+        },
+        "Account": {
+            "Logout": "Logout",
+            "UserProfileImageAlt": "User profile image"
+        },
         "Nav": {
             "Dashboard": "Dashboard",
             "Entities": "Entities",
             "Processes": "Processes",
             "Stations": "Stations",
             "Settings": "Settings"
+        },
+        "Stations": {
+            "Stations": "Stations",
+            "Name": "Name",
+            "Version": "Version",
+            "LastActivity": "Last Activity",
+            "RegisteredDate": "RegisteredDate"
+        },
+        "Settings": {
+            "General": "General",
+            "LookAndFeel": "Look and feel",
+            "Theme": "Theme",
+            "Themes": {
+                "Dark": "Dark",
+                "Light": "Light"
+            },
+            "Language": "Language",
+            "SelectLanguage": "Select language"
+        },
+        "Placeholders": {
+            "NoData": "No data to show",
+            "NoItems": "No items",
+            "NoDashboardsAvailable": "No dashboards available"
+        },
+        "Widgets": {
+            "WidgetChecklist": {
+                "Checklist": "Checklist",
+                "AddItem": "Add an item"
+            }
         }
     }
 }

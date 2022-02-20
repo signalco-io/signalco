@@ -2,7 +2,9 @@ import { Box, Divider, Container, Grid, Typography, Stack, IconButton, Link } fr
 import NextLink from "next/link";
 import React from "react";
 import GitHubIcon from '@mui/icons-material/GitHub';
+import TwitterIcon from '@mui/icons-material/Twitter';
 import SignalcoLogo from "../icons/SignalcoLogo";
+import RedditIcon from "@mui/icons-material/Reddit";
 
 const SLink = ({ href, children }: { href: string, children: React.ReactElement | string }) => (
     <NextLink href={href} passHref>
@@ -58,11 +60,23 @@ const Footer = () => (
                         <SignalcoLogo height={68} />
                         <Stack alignItems="center" justifyContent="space-between" direction="row">
                             <Typography variant="subtitle2" fontWeight={400} component="span" color="textSecondary">Copyright © {new Date().getFullYear()} signalco. All rights reserved.</Typography>
-                            <SLink href="https://github.com/signalco-io/signalco">
-                                <IconButton size="large" aria-label="GitHub link">
-                                    <GitHubIcon />
-                                </IconButton>
-                            </SLink>
+                            <Stack direction="row" spacing={1} alignItems="center">
+                                <SLink href="https://twitter.com/signalco_io">
+                                    <IconButton size="large" aria-label="Twitter link">
+                                        <TwitterIcon />
+                                    </IconButton>
+                                </SLink>
+                                <SLink href="https://www.reddit.com/r/signalco/">
+                                    <IconButton size="large" aria-label="reddit link">
+                                        <RedditIcon />
+                                    </IconButton>
+                                </SLink>
+                                <SLink href="https://github.com/signalco-io/signalco">
+                                    <IconButton size="large" aria-label="GitHub link">
+                                        <GitHubIcon />
+                                    </IconButton>
+                                </SLink>
+                            </Stack>
                         </Stack>
                     </Grid>
                 </Grid>

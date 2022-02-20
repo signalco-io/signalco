@@ -1,15 +1,14 @@
-import { Alert, Box, Button, Collapse, Container, Divider, Fade, FilledInput, Grid, Slide, Stack, SxProps, Theme, Typography } from "@mui/material";
-import React, { ChangeEvent, SyntheticEvent, useContext } from "react";
+import { Box, Button, Container, Divider, Grid, Stack, SxProps, Theme, Typography } from "@mui/material";
+import React, { useContext } from "react";
 import Image from 'next/image';
 import { AppContext } from "./_app";
 import logoLight from '../public/images/icon-light-512x512.png';
 import logoDark from '../public/images/icon-dark-512x144.png';
 import Link from "next/link";
 import Footer from "../components/pages/Footer";
-import HCaptcha from "@hcaptcha/react-hcaptcha";
-import { LoadingButton } from "@mui/lab";
-import HttpService from "../src/services/HttpService";
 import GlobeSection from "../components/pages/landing/GlobeSection";
+import Newsletter from "../components/pages/landing/Newsletter";
+import CounterIndicator from "../components/pages/landing/CounterIndicator";
 
 const Cover = () => {
   const appContext = useContext(AppContext);
@@ -72,48 +71,6 @@ const Nav = () => (
   </Stack>
 );
 
-const CounterIndicator = (props: { count: number, hideAfter?: boolean }) => {
-  const appContext = useContext(AppContext);
-
-  return (
-    <Box sx={{ display: 'flex', width: '42px', height: props.hideAfter ? '106px' : '170px', alignItems: props.hideAfter ? 'end' : 'center' }}>
-      <Box sx={{
-        pt: 0.5,
-        width: '42px',
-        height: '42px',
-        borderRadius: '21px',
-        color: 'background.default',
-        backgroundColor: 'text.primary',
-        position: 'relative',
-        userSelect: 'none',
-        '&::before': {
-          content: '""',
-          display: 'block',
-          height: '64px',
-          width: '1px',
-          background: `linear-gradient(180deg, ${appContext.theme === 'dark' ? '#ffffff' : '#000000'} 67.19%, rgba(255, 255, 255, 0) 100%)`,
-          position: 'absolute',
-          left: '20px',
-          top: '-64px',
-          transform: 'rotate(-180deg)'
-        },
-        '&::after': !props.hideAfter ? {
-          content: '""',
-          display: 'block',
-          height: '64px',
-          width: '1px',
-          background: `linear-gradient(180deg, ${appContext.theme === 'dark' ? '#ffffff' : '#000000'} 67.19%, rgba(255, 255, 255, 0) 100%)`,
-          position: 'absolute',
-          left: '21px',
-          top: '42px',
-        } : undefined
-      }}>
-        <Typography textAlign="center" fontSize={23} fontWeight={600}>{props.count}</Typography>
-      </Box>
-    </Box>
-  );
-};
-
 const FeatureDescription = (props: { title: string, content: string, link?: string, linkText?: string }) => (
   <Box>
     <Stack spacing={2}>
@@ -161,109 +118,6 @@ const SectionCenter = (props: { children: React.ReactElement, sx?: SxProps<Theme
     </Container>
   </Box>
 );
-
-const Newsletter = () => {
-  const appContext = useContext(AppContext);
-  const [email, setEmail] = React.useState("");
-  const [showSuccess, setShowSuccess] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const errorContainerRef = React.useRef<Element>(null);
-  const [error, setError] = React.useState<string | undefined>(undefined);
-  const hcaptchaRef = React.createRef<HCaptcha>();
-
-  const handleSubmit = (event: SyntheticEvent) => {
-    event.preventDefault();
-
-    setIsLoading(true);
-
-    // Execute the reCAPTCHA when the form is submitted
-    hcaptchaRef.current?.execute();
-  };
-
-  const onHCaptchaChange = async (token: string | undefined) => {
-    try {
-      // If the HCAPTCHA code is null or undefined indicating that
-      // the HCAPTCHA was expired then return early
-      if (!token) {
-        return;
-      }
-
-      // TODO: Submit request
-      try {
-        await HttpService.requestAsync(
-          "/website/newsletter-subscribe",
-          "post",
-          { email: email },
-          {
-            "HCAPTCHA-RESPONSE": token
-          },
-          true
-        );
-
-        setShowSuccess(true);
-      } catch (err) {
-        console.error('Failed to subscribe to newsletter', err);
-        setError('Failed to subscribe to newsletter');
-      }
-
-      // Reset the HCAPTCHA so that it can be executed again if user
-      // submits another email.
-      hcaptchaRef.current?.resetCaptcha();
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  const handleOnEmail = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-    setError(undefined);
-  }
-
-  // Retrieve key, if not available don't show the component
-  const key = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
-  if (typeof key === 'undefined') return <></>;
-
-  return (
-
-    <form onSubmit={handleSubmit}>
-      <HCaptcha
-        ref={hcaptchaRef}
-        size="invisible"
-        theme={appContext.theme === 'dark' ? 'dark' : 'light'}
-        sitekey={key}
-        onVerify={onHCaptchaChange}
-        onClose={() => onHCaptchaChange(undefined)}
-      />
-      <Stack spacing={4}>
-        <Typography variant="h2">{"What's new?"}</Typography>
-        <Stack spacing={1} ref={errorContainerRef}>
-          <Typography sx={{ opacity: 0.9 }}>{"We'll get back to you with awesome news and updates."}</Typography>
-          <Collapse unmountOnExit in={!showSuccess}>
-            <Stack direction="row" alignItems="stretch">
-              <FilledInput
-                disabled={isLoading}
-                type="email"
-                placeholder="you@email.com"
-                hiddenLabel
-                fullWidth
-                required
-                sx={{ borderRadius: '8px 0 0 8px', maxWidth: '400px' }}
-                value={email}
-                onChange={handleOnEmail} />
-              <LoadingButton loading={isLoading} type="submit" variant="outlined" size="large" sx={{ borderRadius: '0 8px 8px 0' }} disableElevation>Subscribe</LoadingButton>
-            </Stack>
-          </Collapse>
-          <Slide unmountOnExit in={error != null} direction="down" container={errorContainerRef.current}>
-            <Alert severity="error" variant="outlined">{error}</Alert>
-          </Slide>
-          <Fade unmountOnExit in={showSuccess}>
-            <Alert severity="success" variant="outlined">You are our new favorite subscriber</Alert>
-          </Fade>
-        </Stack>
-      </Stack>
-    </form>
-  );
-};
 
 const Index = () => {
   return (

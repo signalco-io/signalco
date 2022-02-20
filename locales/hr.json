@@ -1,11 +1,49 @@
 {
     "App": {
+        "Locales": {
+            "hr": "Hrvatski",
+            "en": "Engleski"
+        },
+        "Account": {
+            "Logout": "Odjava",
+            "UserProfileImageAlt": "Slika korisničkog profila"
+        },
         "Nav": {
             "Dashboard": "Kontrolna ploča",
             "Entities": "Entiteti",
             "Processes": "Procesi",
             "Stations": "Stanice",
             "Settings": "Postavke"
+        },
+        "Stations": {
+            "Stations": "Stanice",
+            "Search": "Pretraga...",
+            "name": "Naziv",
+            "version": "Verzija",
+            "lastActivity": "Zadnja aktivnost",
+            "registeredDate": "Datum registracije"
+        },
+        "Settings": {
+            "General": "Generalno",
+            "LookAndFeel": "Izgled",
+            "Theme": "Teme",
+            "Themes": {
+                "Dark": "Tamna",
+                "Light": "Svijetla"
+            },
+            "Language": "Jezik",
+            "SelectLanguage": "Odabir jezika"
+        },
+        "Placeholders": {
+            "NoData": "Nema podataka za prikaz",
+            "NoItems": "Nema stavki",
+            "NoDashboardsAvailable": "Nema dostupnih kontrolnih ploča"
+        },
+        "Widgets": {
+            "WidgetChecklist": {
+                "Checklist": "Popis",
+                "AddItem": "Dodaj stavku"
+            }
         }
     }
 }

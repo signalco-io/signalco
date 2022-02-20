@@ -6,6 +6,7 @@ import ReactTimeago from "react-timeago";
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from "recharts";
 import { AppContext } from "../../pages/_app";
 import { arrayMax, arrayMin } from "../../src/helpers/ArrayHelpers";
+import useLocale from "../../src/hooks/useLocale";
 import { ObjectDictAny } from "../../src/sharedTypes";
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
 
@@ -192,9 +193,10 @@ const GraphArea = (props: IGraphProps) => {
 
 const Graph = (props: IGraphProps) => {
     const { data } = props;
+    const { t } = useLocale("App", "Placeholders");
 
     if (!data || data.length <= 0) {
-        return <NoDataPlaceholder content="No data to show" />
+        return <NoDataPlaceholder content={t("NoData")} />
     }
 
     const isBoolean = data?.length && (data[0].value === 'true' || data[0].value === 'false');

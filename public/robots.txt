@@ -1,11 +1,10 @@
+# *
 User-agent: *
-Disallow: /app
-Disallow: /app/dashboard
-Disallow: /app/processes
-Disallow: /app/devices
-Disallow: /app/channels
-Disallow: /app/stations
-Disallow: /app/stations
-Disallow: /app/profile
-Disallow: /app/settings
-Disallow: /app/*
+Allow: /
+
+# Host
+Host: https://www.signalco.io
+
+# Sitemaps
+Sitemap: https://www.signalco.io/sitemap.xml
+Sitemap: https://www.signalco.io/sitemap-0.xml

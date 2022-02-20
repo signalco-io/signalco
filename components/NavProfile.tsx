@@ -46,6 +46,7 @@ const navItems = [
 ];
 
 const UserAvatar = () => {
+  const { t } = useLocale("App", "Account");
   const user = CurrentUserProvider.getCurrentUser();
 
   if (user === undefined) {
@@ -63,7 +64,7 @@ const UserAvatar = () => {
   const size = { xs: '36px', sm: '42px', lg: '58px' };
 
   if (user.picture) {
-    return (<Avatar sx={{ width: size, height: size }} src={user.picture} alt="User profile image">
+    return (<Avatar sx={{ width: size, height: size }} src={user.picture} alt={t("UserProfileImageAlt")}>
       {userNameInitials}
     </Avatar>);
   }
@@ -76,6 +77,7 @@ const UserAvatar = () => {
 };
 
 const UserProfileAvatar = () => {
+  const { t } = useLocale("App", "Account");
   const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' });
   const navWidth = useNavWidth();
   const maxWidth = navWidth - 16;
@@ -107,7 +109,7 @@ const UserProfileAvatar = () => {
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
-          <ListItemText>Logout</ListItemText>
+          <ListItemText>{t("Logout")}</ListItemText>
         </MenuItem>
       </Menu>
     </>
