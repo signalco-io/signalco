@@ -24,7 +24,7 @@
     "@emotion/cache": "11.7.1",
     "@emotion/react": "11.7.1",
     "@emotion/server": "11.4.0",
-    "@emotion/styled": "11.6.0",
+    "@emotion/styled": "11.8.1",
     "@hcaptcha/react-hcaptcha": "1.1.0",
     "@microsoft/signalr": "6.0.2",
     "@mui/icons-material": "5.4.2",
