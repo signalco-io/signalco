@@ -34,9 +34,9 @@ Our [Code of Conduct](https://github.com/signalco-io/signalco/blob/main/CODE_OF_
 
 ## Contributing
 
-Please see our [contributing.md](/contributing.md).
+Please see our [contributing.md](/CONTRIBUTING.md).
 
-More info on development can be found in [Development](/development.md) document.
+More info on development can be found in [Development](/DEVELOPMENT.md) document.
 
 ## Related
 
