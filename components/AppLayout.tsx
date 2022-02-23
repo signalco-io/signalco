@@ -88,6 +88,19 @@ const PageNav = () => {
   return <PageNavSsr isScrolled={(rect?.scrollY ?? 0) > 0} />
 };
 
+export function PageFullLayout(props: ChildrenProps) {
+  const Nav = typeof window !== 'undefined' ? PageNav : PageNavSsr;
+
+  return (
+    <Stack>
+      <Nav />
+      <Box>
+          {props.children}
+      </Box>
+      <Footer />
+    </Stack>);
+};
+
 export function PageLayout(props: ChildrenProps) {
   const Nav = typeof window !== 'undefined' ? PageNav : PageNavSsr;
 
