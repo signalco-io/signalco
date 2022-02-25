@@ -57,7 +57,7 @@ const Footer = () => (
                         </Grid>
                     </Grid>
                     <Grid item>
-                        <SignalcoLogo height={68} />
+                        <SignalcoLogo priority height={68} />
                         <Stack alignItems="center" justifyContent="space-between" direction="row">
                             <Typography variant="subtitle2" fontWeight={400} component="span" color="textSecondary">Copyright © {new Date().getFullYear()} signalco. All rights reserved.</Typography>
                             <Stack direction="row" spacing={1} alignItems="center">

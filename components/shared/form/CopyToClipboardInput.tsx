@@ -1,4 +1,4 @@
-import { Fade, IconButton, InputAdornment, OutlinedInput, OutlinedInputProps, Paper, Stack, Typography } from "@mui/material";
+import { Fade, FilledInput, FilledInputProps, FormControl, IconButton, InputAdornment, InputLabel, Paper, Stack, Typography } from "@mui/material";
 import { ContentCopy as ContentCopyIcon, Warning } from "@mui/icons-material";
 import React, { MouseEvent, useState } from "react";
 import Popper from '@mui/material/Popper'
@@ -7,9 +7,24 @@ import {
     bindPopper,
 } from 'material-ui-popup-state/hooks';
 
-export type CopyToClipboardInputProps = OutlinedInputProps;
+export interface CopyToClipboardInputProps extends FilledInputProps {
+    label?: string | undefined
+};
+
+export const LabelWrapper = (props: { children: React.ReactNode, variant: 'standard' | 'outlined' | 'filled', options: CopyToClipboardInputProps }) => {
+    if (props.options.label) {
+        return (
+            <FormControl fullWidth variant={props.variant}>
+                <InputLabel id={`${props.options.id}-label`}>Base address</InputLabel>
+                {props.children}
+            </FormControl>
+        );
+    }
+    return <>{props.children}</>;
+}
 
 const CopyToClipboardInput = (props: CopyToClipboardInputProps) => {
+    if (!props.id) throw 'CopyToClipboardInput required id';
     const popupState = usePopupState({ variant: 'popper', popupId: `copytoclipboard-input-${props.id}` });
     const [error, setError] = useState<boolean>(false);
 
@@ -37,19 +52,21 @@ const CopyToClipboardInput = (props: CopyToClipboardInputProps) => {
 
     return (
         <>
-            <OutlinedInput
-                endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton
-                            size="small"
-                            edge="end"
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowCopyToClipboard}
-                            onMouseDown={handleMouseDownCopyToClipboard}>
-                            <ContentCopyIcon />
-                        </IconButton>
-                    </InputAdornment>
-                } {...props}></OutlinedInput>
+            <LabelWrapper variant="filled" options={props}>
+                <FilledInput
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                size="small"
+                                edge="end"
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowCopyToClipboard}
+                                onMouseDown={handleMouseDownCopyToClipboard}>
+                                <ContentCopyIcon fontSize={props.size} />
+                            </IconButton>
+                        </InputAdornment>
+                    } {...props} />
+            </LabelWrapper>
             <Popper {...bindPopper(popupState)} transition>
                 {({ TransitionProps }) => (
                     <Fade {...TransitionProps} timeout={350}>
