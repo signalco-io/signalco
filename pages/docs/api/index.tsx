@@ -1,11 +1,11 @@
 import { TreeItem, TreeView } from "@mui/lab";
-import { Link as MuiLink, Alert, AlertTitle, Box, Button, Chip, Divider, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Paper, Select, Skeleton, Stack, TextField, Tooltip, Typography } from "@mui/material";
+import { Link as MuiLink, Alert, AlertTitle, Box, Chip, FormControl, Grid, InputLabel, MenuItem, Select, Skeleton, Stack, TextField, Typography, Paper, Divider, Badge } from "@mui/material";
 import { red } from "@mui/material/colors";
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { PageFullLayout } from "../../../components/AppLayout";
-import { OpenAPI, OpenAPIV3 } from "openapi-types";
-import useLoadingAndError, { useLoadAndError } from "../../../src/hooks/useLoadingAndError";
+import { OpenAPIV3 } from "openapi-types";
+import { useLoadAndError } from "../../../src/hooks/useLoadingAndError";
 import Link from "next/link";
 import useHashParam from "../../../src/hooks/useHashParam";
 import CopyToClipboardInput from "../../../components/shared/form/CopyToClipboardInput";
@@ -14,69 +14,30 @@ import React from "react";
 import OpenInNewSharpIcon from '@mui/icons-material/OpenInNewSharp';
 import { camelToSentenceCase } from "../../../src/helpers/StringHelpers";
 import SecurityIcon from '@mui/icons-material/Security';
-
-const DataInput = (props: DataInputProps) => {
-    const { dataType, value, onChange } = props;
-
-    switch (dataType) {
-        case 'string':
-            return <OutlinedInput sx={{ minWidth: 210 }} size="small" value={value} onChange={(e) => onChange(e.target.value)} />
-        case 'number':
-        case 'double':
-        case 'integer':
-            return <OutlinedInput sx={{ minWidth: 210 }} size="small" type={'number'} value={value} onChange={(e) => onChange(e.target.value)} />
-        default:
-            return <Typography color={red[400]} fontWeight="bold" variant="overline">{"Not supported data type \"" + dataType + "\""}</Typography>
-    }
-};
-
-const ApiParam = (props: ApiParamInfo) => (
-    <Stack sx={{ px: 2, py: 2 }} direction="row" alignItems="center" justifyContent="space-between" spacing={2}>
-        <Stack>
-            <Stack direction="row" alignItems="end" spacing={1}>
-                <Typography fontWeight="bold">{props.name}</Typography>
-                <Typography variant="caption" color="textSecondary">{props.dataType}</Typography>
-            </Stack>
-            {(props.description?.length ?? 0) > 0 && <Typography color="textSecondary">{props.description}</Typography>}
-        </Stack>
-        <DataInput dataType={props.dataType} value={undefined} onChange={() => { }} />
-    </Stack>
-);
-
-const ApiParamsList = (props: { header: string, params: ApiParamInfo[] }) => (
-    <Stack spacing={1}>
-        <Typography variant="overline">{props.header}</Typography>
-        <Paper variant="outlined">
-            <Stack>
-                {props.params.map((param, i) => (
-                    <>
-                        <ApiParam key={param.name} {...param} />
-                        {i !== props.params.length - 1 && <Divider key={`divider-${param.name}`} />}
-                    </>
-                ))}
-            </Stack>
-        </Paper>
-    </Stack>
-);
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { setTag } from "@sentry/nextjs";
 
 type ChipColors = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
 
-const OperationChip = (props: { operation?: string | undefined }) => {
+const OperationChip = (props: { operation?: string | undefined, small?: boolean }) => {
     const color = ({
         "get": "success",
         "post": "info",
         "put": "warning",
         "delete": "error"
-    }[props.operation ?? ''] ?? "default") as ChipColors;
+    }[props.operation?.toLowerCase() ?? ''] ?? "default") as ChipColors;
 
-    return <Chip color={color} sx={{ fontWeight: 'bold' }} label={props.operation?.toUpperCase()} />;
+    return <Chip color={color} size={props.small ? "small" : "medium"} sx={{ fontWeight: 'bold' }} label={props.operation?.toUpperCase()} />;
 };
 
 type ApiOperationProps = { path: string, operation: OpenAPIV3.HttpMethods, info: OpenAPIV3.OperationObject };
 
 const ApiOperation = (props: ApiOperationProps) => {
+    const api = useContext(ApiContext);
+    if (!api) throw "Api undefined";
     const { path, operation, info } = props;
-    const { description, summary, externalDocs, deprecated, tags, security } = info;
+    const { description, summary, externalDocs, deprecated, tags, security, responses } = info;
 
     return (
         <Stack spacing={4}>
@@ -108,42 +69,74 @@ const ApiOperation = (props: ApiOperationProps) => {
                     </Link>
                 </Stack>
             )}
-            {/* <ApiParams header="Headers" params={[{name: 'email', dataType: 'string', description: undefined}, {name: 'email', dataType: 'string', description: undefined}]} /> */}
-            {/* <ApiParams header="Query" /> */}
-            {/* <ApiParams header="Body" /> */}
-            {/* <ApiParams header="Responses" /> */}
-            {/* {route?.query && <ApiParamsList header="Query" params={route?.query} />} */}
-            {/* {route?.requestBody && <ApiParamsList header="Body" params={route?.requestBody} />} */}
+            <Stack spacing={1}>
+                <Typography variant="overline">Responses</Typography>
+                <Paper variant="outlined">
+                    {Object.keys(responses).map((responseCode, i) => {
+                        const responseCodeNumber = parseInt(responseCode, 10) || 0;
+                        const responseObj = resolveRef<OpenAPIV3.ResponseObject>(api, responses[responseCode]);
+                        if (!responseObj) return undefined;
+                        return (
+                            <>
+                                <Stack key={responseCode} sx={{ p: 2 }}>
+                                    <Badge variant="dot" color={responseCodeNumber < 300 ? 'success' : (responseCodeNumber < 500 ? 'warning' : 'error')}>
+                                        <Typography>{responseCode}</Typography>
+                                    </Badge>
+                                    <Typography variant="body2">{responseObj.description}</Typography>
+                                </Stack>
+                                {i != Object.keys(responses).length && <Divider />}
+                            </>
+                        );
+                    })}
+                </Paper>
+            </Stack>
         </Stack>
     );
 };
 
+function extractTags(api: OpenAPIV3.Document): string[] {
+    const allTags = getOperations(api).flatMap(op => op?.operation?.tags).filter(i => typeof i === 'string') as string[];
+    return allTags.filter((v, i, s) => s.indexOf(v) === i);
+}
+
 const Nav = () => {
     const api = useContext(ApiContext);
+    const [tagName, setTagName] = useHashParam('tag');
 
     if (!api) throw 'API undefined';
     const { info } = api;
 
-    return (<Stack spacing={2}>
-        <Stack>
+    const tags = api.tags?.map(t => t.name) ?? extractTags(api);
+    const operations = getOperations(api);
+
+    const handleItemSelected = (event: React.SyntheticEvent, newValue: string) => {
+        if (tagName !== newValue) event.preventDefault();
+        setTagName(newValue);
+    }
+
+    return (
+        <Stack spacing={2}>
             <Typography component="div">{info.title} <Chip label={info.version} size="small" /> {info.license && <Chip label={info.license.name} size="small" />}</Typography>
+            <TreeView
+                onNodeSelect={handleItemSelected}
+                defaultCollapseIcon={<ExpandMoreIcon />}
+                defaultExpandIcon={<ChevronRightIcon />}
+                sx={{ overflowY: 'auto' }}>
+                {tags.map(t => (
+                    <TreeItem key={t} nodeId={`tag-${t}`} label={t}>
+                        {operations.filter(op => (op.operation.tags?.indexOf(t) ?? -1) >= 0).map(op => (
+                            <TreeItem key={`nav-route-${op.pathName}-${op.operationName}`} nodeId={`${op.pathName}-${op.operationName}`} label={(
+                                <Stack sx={{ py: 0.5 }} direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+                                    <Typography noWrap variant="body2">{op.pathName}</Typography>
+                                    <OperationChip operation={op.operationName} small />
+                                </Stack>
+                            )} />
+                        ))}
+                    </TreeItem>
+                ))}
+            </TreeView>
         </Stack>
-        <Box>
-            {/* {api.api?.paths && Object.keys(api.api.paths).map(path => (
-            <div>{api.api.paths[path].}</div>
-        ))} */}
-            {/* <TreeView onNodeSelect={handleRouteSelect}>
-            {api.routes?.map(route => (
-                <TreeItem key={route.id} nodeId={route.id} label={(
-                    <Stack sx={{ py: 0.5 }} direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
-                        <Typography noWrap variant="body2">{route?.path}</Typography>
-                        <OperationChip operation={route?.operation} />
-                    </Stack>
-                )} />
-            ))}
-        </TreeView> */}
-        </Box>
-    </Stack>);
+    );
 };
 
 const NavSkeleton = () => (
@@ -169,37 +162,46 @@ function resolveRef<T>(api: OpenAPIV3.Document, obj: T | OpenAPIV3.ReferenceObje
     return curr as unknown as T;
 }
 
+type GetOperationResult = { pathName: string, operationName: string, httpOperation: OpenAPIV3.HttpMethods, operation: OpenAPIV3.OperationObject }
+
+function getOperations(api: OpenAPIV3.Document): Array<GetOperationResult> {
+    return Object.keys(api.paths).flatMap(pathName => {
+        const path = api.paths[pathName];
+        if (!path) return Array<OpenAPIV3.OperationObject>();
+        return enumKeys(OpenAPIV3.HttpMethods).map(opName => {
+            const httpOperation = OpenAPIV3.HttpMethods[opName] as OpenAPIV3.HttpMethods;
+            const pathOperation = path[httpOperation] as OpenAPIV3.OperationObject;
+            if (!pathOperation) return undefined;
+
+            return { pathName: pathName, operationName: opName, httpOperation: httpOperation, operation: pathOperation };
+        });
+    }).filter(i => typeof i !== 'undefined') as GetOperationResult[];
+}
+
 const Route = () => {
     const api = useContext(ApiContext);
-    const [pathName] = useHashParam('path');
-    const [operation] = useHashParam('op');
-    const httpOperation = operation as (OpenAPIV3.HttpMethods | undefined);
+    const [tagName] = useHashParam('tag');
+    // const [pathName] = useHashParam('path');
+    // const [operation] = useHashParam('op');
 
-    if (api?.paths == null)
+    if (api == null)
         return <Typography>Select action from navigation bar</Typography>
+
+    const pathOperations = getOperations(api)
+        .filter(i => typeof tagName === 'undefined' || (i.operation.tags?.map(i => i.toLowerCase()).indexOf(tagName.toLowerCase()) ?? -1) >= 0);
 
     return (
         <>
-            {Object.keys(api.paths).flatMap(pathName => {
-                const path = api.paths[pathName];
-                if (!path) return [];
-                return enumKeys(OpenAPIV3.HttpMethods).map(opName => {
-                    const httpOperation = OpenAPIV3.HttpMethods[opName] as OpenAPIV3.HttpMethods;
-                    const pathOperation = path[httpOperation];
-                    if (!pathOperation) return null;
-
-                    return (
-                        <Grid container key={`path-${pathName}-${opName}`}>
-                            <Grid item xs={6} sx={{ p: 4 }}>
-                                <ApiOperation path={pathName} operation={httpOperation} info={pathOperation} />
-                            </Grid>
-                            <Grid item xs={6} sx={{ borderLeft: "1px solid", borderColor: 'divider', p: 2 }}>
-                                <Actions path={pathName} operation={httpOperation} info={pathOperation} />
-                            </Grid>
-                        </Grid>
-                    );
-                })
-            })}
+            {pathOperations.map(({ pathName, operationName, httpOperation, operation }) => (
+                <Grid container key={`path-${pathName}-${operationName}`}>
+                    <Grid item xs={6} sx={{ p: 4 }}>
+                        <ApiOperation path={pathName} operation={httpOperation} info={operation} />
+                    </Grid>
+                    <Grid item xs={6} sx={{ borderLeft: "1px solid", borderColor: 'divider', p: 2 }}>
+                        <Actions path={pathName} operation={httpOperation} info={operation} />
+                    </Grid>
+                </Grid>
+            ))}
         </>
     );
 };
@@ -315,7 +317,6 @@ const ApiContext = React.createContext<OpenAPIV3.Document | undefined>(undefined
 
 const DocsApiPage = () => {
     const url = "https://api.signalco.io/api/swagger.json";
-    //const url = "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/uspto.json";
     const apiRequest = useCallback(() => getOpenApiDoc(url), [url]);
     const { item: api, isLoading, error } = useLoadAndError<OpenAPIV3.Document>(apiRequest);
 
