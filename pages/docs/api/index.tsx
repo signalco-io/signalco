@@ -1,5 +1,5 @@
 import { TreeItem, TreeView } from "@mui/lab";
-import { Link as MuiLink, Alert, AlertTitle, Box, Chip, FormControl, Grid, InputLabel, MenuItem, Select, Skeleton, Stack, TextField, Typography, Paper, Divider, Badge } from "@mui/material";
+import { Link as MuiLink, Alert, AlertTitle, Chip, FormControl, Grid, InputLabel, MenuItem, Select, Skeleton, Stack, TextField, Typography, Paper, Divider, Badge } from "@mui/material";
 import { red } from "@mui/material/colors";
 import axios from "axios";
 import { useCallback } from "react";
@@ -16,7 +16,6 @@ import { camelToSentenceCase } from "../../../src/helpers/StringHelpers";
 import SecurityIcon from '@mui/icons-material/Security';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { setTag } from "@sentry/nextjs";
 
 type ChipColors = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
 
@@ -165,9 +164,9 @@ function resolveRef<T>(api: OpenAPIV3.Document, obj: T | OpenAPIV3.ReferenceObje
 type GetOperationResult = { pathName: string, operationName: string, httpOperation: OpenAPIV3.HttpMethods, operation: OpenAPIV3.OperationObject }
 
 function getOperations(api: OpenAPIV3.Document): Array<GetOperationResult> {
-    return Object.keys(api.paths).flatMap(pathName => {
+    return Object.keys(api.paths).flatMap((pathName) => {
         const path = api.paths[pathName];
-        if (!path) return Array<OpenAPIV3.OperationObject>();
+        if (!path) return Array<GetOperationResult>();
         return enumKeys(OpenAPIV3.HttpMethods).map(opName => {
             const httpOperation = OpenAPIV3.HttpMethods[opName] as OpenAPIV3.HttpMethods;
             const pathOperation = path[httpOperation] as OpenAPIV3.OperationObject;

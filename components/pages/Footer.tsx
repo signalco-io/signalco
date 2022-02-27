@@ -18,6 +18,41 @@ const SLink = ({ href, children }: { href: string, children: React.ReactElement 
     </NextLink>
 )
 
+const footerLinks = [
+    {
+        header: 'Projects',
+        links: [
+            { name: "Website", href: "https://github.com/signalco-io/signalco" },
+            { name: "Cloud", href: "https://github.com/signalco-io/cloud" },
+            { name: "Station", href: "https://github.com/signalco-io/station" },
+            { name: "Companion", href: "https://github.com/signalco-io/companion" },
+        ]
+    },
+    {
+        header: 'Community',
+        links: [
+            { name: "Coming soon...", href: "#" },
+        ]
+    },
+    {
+        header: 'Resources',
+        links: [
+            { name: "Website", href: "https://status.signalco.io" },
+            { name: "API", href: "/docs/api" },
+            { name: "Storybook", href: "https://storybook.dev.signalco.io" },
+        ]
+    },
+    {
+        header: 'Legal',
+        links: [
+            { name: "Privacy Policy", href: "/legal/privacy-policy" },
+            { name: "Terms of Service", href: "/legal/terms-of-service" },
+            { name: "DPA", href: "/legal/dpa" },
+            { name: "SLA", href: "/legal/sla" },
+        ]
+    }
+];
+
 const Footer = () => (
     <Box sx={{ bgcolor: 'background.paper' }}>
         <Divider />
@@ -26,34 +61,16 @@ const Footer = () => (
                 <Grid container direction="column" spacing={4}>
                     <Grid item>
                         <Grid container justifyContent="space-between" spacing={2}>
-                            <Grid item>
-                                <Typography variant="h4" sx={{ pb: 2 }}>Projects</Typography>
-                                <Stack spacing={1}>
-                                    <SLink href="https://github.com/signalco-io/signalco">Website</SLink>
-                                    <SLink href="https://github.com/signalco-io/cloud">Cloud</SLink>
-                                    <SLink href="https://github.com/signalco-io/station">Station</SLink>
-                                </Stack>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="h4" sx={{ pb: 2 }}>Community</Typography>
-                                <Typography variant="caption" color="textSecondary">Coming soon...</Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="h4" sx={{ pb: 2 }}>Resources</Typography>
-                                <Stack spacing={1}>
-                                    <SLink href="https://status.signalco.io">Status</SLink>
-                                    <SLink href="https://storybook.dev.signalco.io">Storybook</SLink>
-                                </Stack>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="h4" sx={{ pb: 2 }}>Legal</Typography>
-                                <Stack spacing={1}>
-                                    <SLink href="/legal/privacy-policy">Privacy Policy</SLink>
-                                    <SLink href="/legal/terms-of-service">Terms of Service</SLink>
-                                    <SLink href="/legal/dpa">DPA</SLink>
-                                    <SLink href="/legal/sla">SLA</SLink>
-                                </Stack>
-                            </Grid>
+                            {footerLinks.map(section => (
+                                <Grid item key={section.header}>
+                                    <Typography variant="h4" sx={{ pb: 2 }}>{section.header}</Typography>
+                                    <Stack spacing={1}>
+                                        {section.links.map(link => (
+                                            <SLink key={link.name} href={link.href}>{link.name}</SLink>
+                                        ))}
+                                    </Stack>
+                                </Grid>
+                            ))}
                         </Grid>
                     </Grid>
                     <Grid item>
