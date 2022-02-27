@@ -30,6 +30,7 @@ jobs:
         if: failure() && steps.runStoriesCheck.outcome == 'failure'
         uses: peter-evans/create-pull-request@v3
         with:
+          token: ATGITHUBACCESSTOKEN
           add-paths: ".stories-approved/**/*"
           commit-message: "[stories-check] Automated stories change"
           base: ${{ github.head_ref }}
