@@ -1,5 +1,5 @@
 import { TreeItem, TreeView } from "@mui/lab";
-import { Link as MuiLink, Alert, AlertTitle, Chip, FormControl, Grid, InputLabel, MenuItem, Select, Skeleton, Stack, TextField, Typography, Paper, Divider, Badge } from "@mui/material";
+import { Link as MuiLink, Alert, AlertTitle, Chip, FormControl, Grid, InputLabel, MenuItem, Select, Skeleton, Stack, TextField, Typography, Paper, Divider, Badge, Box } from "@mui/material";
 import { red } from "@mui/material/colors";
 import axios from "axios";
 import { useCallback } from "react";
@@ -32,11 +32,51 @@ const OperationChip = (props: { operation?: string | undefined, small?: boolean 
 
 type ApiOperationProps = { path: string, operation: OpenAPIV3.HttpMethods, info: OpenAPIV3.OperationObject };
 
+const NonArraySchema = (props: { name: string, schema: OpenAPIV3.NonArraySchemaObject }) => {
+    const propertyNames = props.schema.properties && Object.keys(props.schema.properties);
+    const properties = typeof props.schema.properties !== 'undefined' && propertyNames
+        ? propertyNames.map(pn => ({ name: pn, prop: props.schema.properties![pn] }))
+        : [];
+
+    return (
+        <div>
+            {properties && properties.map(prop =>
+                <Schema key={prop.name} name={prop.name} schema={prop.prop} />)}
+        </div>
+    );
+};
+const ArraySchema = (props: { name: string, schema: OpenAPIV3.ArraySchemaObject }) =>
+    <Typography key={props.name} color={red[400]} fontWeight="bold" variant="overline">{"Not supported property type \"array\""}</Typography>
+
+const Schema = (props: { name: string, schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | undefined }) => {
+    const api = useContext(ApiContext);
+    if (!api) throw 'API is undefined';
+
+    const schemaResolved = resolveRef(api, props.schema);
+
+    return (
+        <div>
+            <Stack spacing={1} direction="row" alignItems="center">
+                <Typography>{props.name}</Typography>
+                <Typography variant="body2" color="textSecondary">{schemaResolved?.type}</Typography>
+            </Stack>
+            <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', px: 2 }}>
+                {schemaResolved?.type === "array"
+                    ? <ArraySchema name={props.name} schema={schemaResolved as OpenAPIV3.ArraySchemaObject} />
+                    : <NonArraySchema name={props.name} schema={schemaResolved as OpenAPIV3.NonArraySchemaObject} />}
+            </Box>
+        </div>
+    );
+}
+
 const ApiOperation = (props: ApiOperationProps) => {
     const api = useContext(ApiContext);
     if (!api) throw "Api undefined";
     const { path, operation, info } = props;
-    const { description, summary, externalDocs, deprecated, tags, security, responses } = info;
+    const { description, summary, externalDocs, deprecated, tags, security, parameters, requestBody, responses } = info;
+
+    const requestBodyResolved = requestBody && resolveRef(api, requestBody);
+    const parametersResolved = parameters && parameters.map(param => resolveRef(api, param)).filter(p => typeof p !== 'undefined') as OpenAPIV3.ParameterObject[];
 
     return (
         <Stack spacing={4}>
@@ -66,6 +106,58 @@ const ApiOperation = (props: ApiOperationProps) => {
                             </Stack>
                         </MuiLink>
                     </Link>
+                </Stack>
+            )}
+            {parametersResolved && (
+                <Stack spacing={1}>
+                    <Typography variant="overline">Parameters</Typography>
+                    <Paper variant="outlined">
+                        {parametersResolved.map((parameter, i) => (
+                            <>
+                                <Stack key={parameter.name} sx={{ p: 2 }}>
+                                    <Stack direction="row" alignItems="center" spacing={1} justifyContent="space-between">
+                                        <Typography textTransform="uppercase" fontWeight={400}>{parameter.name}</Typography>
+                                        <Stack direction="row" alignItems="center" spacing="4px">
+                                            <Typography variant="body2" color="textSecondary">in</Typography>
+                                            <Typography variant="body2" textTransform="uppercase">{parameter.in}</Typography>
+                                        </Stack>
+                                    </Stack>
+                                    {parameter.description && <Typography variant="body2" color="textSecondary">{parameter.description}</Typography>}
+                                </Stack>
+                                {i != Object.keys(parametersResolved).length && <Divider />}
+                            </>
+                        ))}
+                    </Paper>
+                </Stack>
+            )}
+            {requestBodyResolved && (
+                <Stack spacing={1}>
+                    <Typography variant="overline">Request body</Typography>
+                    {requestBodyResolved.description && <Typography variant="body2" color="textSecondary">{requestBodyResolved.description}</Typography>}
+                    <Paper variant="outlined">
+                        <Stack sx={{ p: 2 }}>
+                            {Object.keys(requestBodyResolved.content).map(contentType => (
+                                <>
+                                    {requestBodyResolved.content[contentType].schema && <Schema name={contentType} schema={requestBodyResolved.content[contentType].schema} />}
+                                </>
+                            ))}
+                        </Stack>
+                    </Paper>
+                </Stack>
+            )}
+            {requestBodyResolved && (
+                <Stack spacing={1}>
+                    <Typography variant="overline">Request body</Typography>
+                    {requestBodyResolved.description && <Typography variant="body2" color="textSecondary">{requestBodyResolved.description}</Typography>}
+                    <Paper variant="outlined">
+                        <Stack sx={{ p: 2 }}>
+                            {Object.keys(requestBodyResolved.content).map(contentType => (
+                                <>
+                                    {requestBodyResolved.content[contentType].schema && <Schema name={contentType} schema={requestBodyResolved.content[contentType].schema} />}
+                                </>
+                            ))}
+                        </Stack>
+                    </Paper>
                 </Stack>
             )}
             <Stack spacing={1}>
