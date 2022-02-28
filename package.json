@@ -79,6 +79,7 @@
     "cross-env": "7.0.3",
     "eslint": "8.9.0",
     "eslint-config-next": "12.1.0",
+    "openapi-types": "^10.0.0",
     "next-sitemap": "^2.5.1",
     "prop-types": "15.8.1",
     "puppeteer": "13.4.0",

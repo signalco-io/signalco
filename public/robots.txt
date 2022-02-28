@@ -7,4 +7,3 @@ Host: https://www.signalco.io
 
 # Sitemaps
 Sitemap: https://www.signalco.io/sitemap.xml
-Sitemap: https://www.signalco.io/sitemap-0.xml
