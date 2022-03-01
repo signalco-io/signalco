@@ -2,7 +2,7 @@ import { TreeItem, TreeView } from "@mui/lab";
 import { Link as MuiLink, Alert, AlertTitle, Chip, FormControl, Grid, InputLabel, MenuItem, Select, Skeleton, Stack, TextField, Typography, Paper, Divider, Badge, Box } from "@mui/material";
 import { red } from "@mui/material/colors";
 import axios from "axios";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { PageFullLayout } from "../../../components/AppLayout";
 import { OpenAPIV3 } from "openapi-types";
 import { useLoadAndError } from "../../../src/hooks/useLoadingAndError";
@@ -16,6 +16,11 @@ import { camelToSentenceCase } from "../../../src/helpers/StringHelpers";
 import SecurityIcon from '@mui/icons-material/Security';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { ObjectDictAny } from "../../../src/sharedTypes";
+import Editor, { loader } from "@monaco-editor/react";
+import { AppContext } from "../../_app";
+
+loader.config({ paths: { vs: "/vs" } });
 
 type ChipColors = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
 
@@ -31,6 +36,32 @@ const OperationChip = (props: { operation?: string | undefined, small?: boolean 
 };
 
 type ApiOperationProps = { path: string, operation: OpenAPIV3.HttpMethods, info: OpenAPIV3.OperationObject };
+
+function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | undefined): any | undefined {
+    const schemaObj = resolveRef(api, schema);
+    if (typeof schemaObj === 'undefined') return undefined;
+
+    switch (schemaObj.type) {
+        case "string":
+            return "";
+        case "boolean": return true;
+        case "number":
+        case "integer": return 0;
+        case "object":
+            if (typeof schemaObj.properties === 'undefined') return {};
+            let curr: ObjectDictAny = {};
+            Object.keys(schemaObj.properties).forEach(prop => {
+                if (schemaObj.properties) {
+                    curr[prop] = schemaToJson(api, schemaObj.properties[prop]);
+                }
+            });
+            return curr;
+        case "array":
+            const arraySchema = schemaObj as OpenAPIV3.ArraySchemaObject;
+            return [schemaToJson(api, arraySchema.items)];
+        default: return undefined;
+    }
+};
 
 const NonArraySchema = (props: { name: string, schema: OpenAPIV3.NonArraySchemaObject }) => {
     const propertyNames = props.schema.properties && Object.keys(props.schema.properties);
@@ -94,7 +125,7 @@ const ApiOperation = (props: ApiOperationProps) => {
                 </Stack>
             </Stack>
             {summary && <Typography variant="body1">{summary}</Typography>}
-            <Typography variant="body2">{description}</Typography>
+            {description && <Typography variant="body2">{description}</Typography>}
             {externalDocs && (
                 <Stack>
                     {externalDocs.description && <Typography>{externalDocs.description}</Typography>}
@@ -113,8 +144,8 @@ const ApiOperation = (props: ApiOperationProps) => {
                     <Typography variant="overline">Parameters</Typography>
                     <Paper variant="outlined">
                         {parametersResolved.map((parameter, i) => (
-                            <>
-                                <Stack key={parameter.name} sx={{ p: 2 }}>
+                            <React.Fragment key={parameter.name}>
+                                <Stack sx={{ p: 2 }}>
                                     <Stack direction="row" alignItems="center" spacing={1} justifyContent="space-between">
                                         <Typography textTransform="uppercase" fontWeight={400}>{parameter.name}</Typography>
                                         <Stack direction="row" alignItems="center" spacing="4px">
@@ -125,7 +156,7 @@ const ApiOperation = (props: ApiOperationProps) => {
                                     {parameter.description && <Typography variant="body2" color="textSecondary">{parameter.description}</Typography>}
                                 </Stack>
                                 {i != Object.keys(parametersResolved).length && <Divider />}
-                            </>
+                            </React.Fragment>
                         ))}
                     </Paper>
                 </Stack>
@@ -137,9 +168,10 @@ const ApiOperation = (props: ApiOperationProps) => {
                     <Paper variant="outlined">
                         <Stack sx={{ p: 2 }}>
                             {Object.keys(requestBodyResolved.content).map(contentType => (
-                                <>
-                                    {requestBodyResolved.content[contentType].schema && <Schema name={contentType} schema={requestBodyResolved.content[contentType].schema} />}
-                                </>
+                                <React.Fragment key={contentType}>
+                                    {requestBodyResolved.content[contentType].schema &&
+                                        <Schema name={contentType} schema={requestBodyResolved.content[contentType].schema} />}
+                                </React.Fragment>
                             ))}
                         </Stack>
                     </Paper>
@@ -153,15 +185,15 @@ const ApiOperation = (props: ApiOperationProps) => {
                         const responseObj = resolveRef<OpenAPIV3.ResponseObject>(api, responses[responseCode]);
                         if (!responseObj) return undefined;
                         return (
-                            <>
-                                <Stack key={responseCode} sx={{ p: 2 }}>
+                            <React.Fragment key={responseCode}>
+                                <Stack sx={{ p: 2 }}>
                                     <Badge variant="dot" color={responseCodeNumber < 300 ? 'success' : (responseCodeNumber < 500 ? 'warning' : 'error')}>
                                         <Typography>{responseCode}</Typography>
                                     </Badge>
                                     <Typography variant="body2">{responseObj.description}</Typography>
                                 </Stack>
                                 {i != Object.keys(responses).length && <Divider />}
-                            </>
+                            </React.Fragment>
                         );
                     })}
                 </Paper>
@@ -187,17 +219,20 @@ const Nav = () => {
     const tags = api.tags?.map(t => t.name) ?? extractTags(api);
     const operations = getOperations(api);
 
-    const handleItemSelected = (event: React.SyntheticEvent, newValue: string) => {
+    const handleItemSelected = async (_: React.SyntheticEvent, newValue: string) => {
         const newTagName = newValue.startsWith('tag-') ? newValue.substring(4) : undefined;
         if (tagName !== newTagName) {
-            event.preventDefault();
-            setTagName(newTagName);
+            await setTagName(newTagName);
         }
 
         const newPath = newValue.startsWith('path-') ? newValue.substring(5, newValue.lastIndexOf('-')) : undefined;
         if (pathName !== newPath) {
-            event.preventDefault();
-            setPathName(newPath);
+            await setPathName(newPath);
+        }
+
+        const newOperation = newValue.startsWith('path-') ? newValue.substring(newValue.lastIndexOf('-') + 1) : undefined;
+        if (operationName !== newOperation) {
+            await setOperationName(newOperation);
         }
     }
 
@@ -269,14 +304,15 @@ const Route = () => {
     const api = useContext(ApiContext);
     const [tagName] = useHashParam('tag');
     const [pathName] = useHashParam('path');
-    // const [operation] = useHashParam('op');
+    const [operation] = useHashParam('op');
 
     if (api == null)
         return <Typography>Select action from navigation bar</Typography>
 
     const pathOperations = getOperations(api)
         .filter(i => typeof tagName === 'undefined' || (i.operation.tags?.map(i => i.toLowerCase()).indexOf(tagName.toLowerCase()) ?? -1) >= 0)
-        .filter(i => typeof pathName === 'undefined' || (i.operationName.toLowerCase() === pathName.toLowerCase()));
+        .filter(i => typeof pathName === 'undefined' || (i.pathName.toLowerCase() === pathName.toLowerCase()))
+        .filter(i => typeof operation === 'undefined' || (i.operationName.toLowerCase() === operation.toLowerCase()));
 
     return (
         <>
@@ -355,12 +391,15 @@ const Actions = (props: ActionsProps) => {
     const { info } = props;
     const api = useContext(ApiContext);
     const [selectedServer, setSelectedServer] = useHashParam('server');
+    const appContext = useContext(AppContext);
 
     if (!api) throw 'API undefined';
     const { servers } = api;
     const selectedServerUrl = selectedServer ?? (servers && servers.length > 0 ? servers[0].url : 'https://example.com');
 
-    const { security } = info;
+    const { requestBody, security } = info;
+    const requestBodyResolved = requestBody && resolveRef(api, requestBody);
+    const [requestBodyValue, setRequestBodyValue] = useState(requestBodyResolved ? JSON.stringify(schemaToJson(api, requestBodyResolved.content["application/json"].schema), undefined, 2) : '');
 
     return (
         <Stack spacing={2}>
@@ -390,6 +429,26 @@ const Actions = (props: ActionsProps) => {
                     <Typography variant="overline">Authentication</Typography>
                     <Stack>
                         {security.map((securityVariant, i) => <SecurityInput key={i} security={securityVariant} />)}
+                    </Stack>
+                </Stack>
+            )}
+            {requestBodyResolved && (
+                <Stack spacing={1}>
+                    <Typography variant="overline">Body</Typography>
+                    <Stack>
+                        <Typography textAlign="right" variant="caption">application/json</Typography>
+                        <Paper variant="outlined">
+                            <Editor
+                                height="300px"
+                                language="json"
+                                theme={appContext.theme === 'dark' ? "vs-dark" : 'light'}
+                                options={{
+                                    lineNumbers: "off",
+                                    minimap: { enabled: false }
+                                }}
+                                value={requestBodyValue}
+                                onChange={(value) => setRequestBodyValue(value || '')} />
+                        </Paper>
                     </Stack>
                 </Stack>
             )}

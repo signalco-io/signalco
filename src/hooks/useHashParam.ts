@@ -15,7 +15,7 @@ function parseHashParam(paramName: string) {
     return Object.fromEntries(parseHash())[paramName];
 }
 
-const useHashParam = (parameterName: string): [string | undefined, (value: string| undefined) => void] => {
+const useHashParam = (parameterName: string): [string | undefined, (value: string| undefined) => Promise<void>] => {
     const [lastHash, setLastHash] = useState<string | undefined>(parseHashParam(parameterName));
     const router = useRouter();
 
@@ -33,8 +33,8 @@ const useHashParam = (parameterName: string): [string | undefined, (value: strin
         else hash.set(parameterName, value);
 
         try {
-            await router.push({hash: hash.toString()})
-        } catch(err) {
+            await router.push({ hash: hash.toString() }, undefined, { shallow: true });
+        } catch (err) {
             console.warn(`Failed to set new hash code to "${hash}"`);
         }
     }
