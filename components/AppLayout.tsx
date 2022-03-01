@@ -58,7 +58,7 @@ const AppLayout = (props: ChildrenProps) => {
   );
 };
 
-const PageNavSsr = (props: { isScrolled?: boolean }) => (
+const PageNavSsr = (props: { fullWidth?: boolean | undefined, isScrolled?: boolean }) => (
   <Box sx={{
     borderBottom: '1px solid transparent',
     borderColor: (props.isScrolled ?? false) ? 'divider' : 'transparent',
@@ -70,7 +70,7 @@ const PageNavSsr = (props: { isScrolled?: boolean }) => (
     backdropFilter: 'saturate(180%) blur(10px)',
     zIndex: 101
   }}>
-    <Container>
+    <Container maxWidth={props.fullWidth ? false : 'lg'}>
       <Stack component="header" direction="row" justifyContent="space-between" alignItems="center">
         <Link href="/" passHref><ButtonBase disableRipple><SignalcoLogo priority height={42} /></ButtonBase></Link>
         <Stack direction="row" alignItems="center" spacing={2}>
@@ -83,9 +83,9 @@ const PageNavSsr = (props: { isScrolled?: boolean }) => (
   </Box>
 );
 
-const PageNav = () => {
+const PageNav = (props: { fullWidth?: boolean | undefined }) => {
   var rect = useWindowRect();
-  return <PageNavSsr isScrolled={(rect?.scrollY ?? 0) > 0} />
+  return <PageNavSsr fullWidth={props.fullWidth} isScrolled={(rect?.scrollY ?? 0) > 0} />
 };
 
 export function PageFullLayout(props: ChildrenProps) {
@@ -93,9 +93,9 @@ export function PageFullLayout(props: ChildrenProps) {
 
   return (
     <Stack>
-      <Nav />
+      <Nav fullWidth />
       <Box>
-          {props.children}
+        {props.children}
       </Box>
       <Footer />
     </Stack>);

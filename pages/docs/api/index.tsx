@@ -145,21 +145,6 @@ const ApiOperation = (props: ApiOperationProps) => {
                     </Paper>
                 </Stack>
             )}
-            {requestBodyResolved && (
-                <Stack spacing={1}>
-                    <Typography variant="overline">Request body</Typography>
-                    {requestBodyResolved.description && <Typography variant="body2" color="textSecondary">{requestBodyResolved.description}</Typography>}
-                    <Paper variant="outlined">
-                        <Stack sx={{ p: 2 }}>
-                            {Object.keys(requestBodyResolved.content).map(contentType => (
-                                <>
-                                    {requestBodyResolved.content[contentType].schema && <Schema name={contentType} schema={requestBodyResolved.content[contentType].schema} />}
-                                </>
-                            ))}
-                        </Stack>
-                    </Paper>
-                </Stack>
-            )}
             <Stack spacing={1}>
                 <Typography variant="overline">Responses</Typography>
                 <Paper variant="outlined">
@@ -193,6 +178,8 @@ function extractTags(api: OpenAPIV3.Document): string[] {
 const Nav = () => {
     const api = useContext(ApiContext);
     const [tagName, setTagName] = useHashParam('tag');
+    const [pathName, setPathName] = useHashParam('path');
+    const [operationName, setOperationName] = useHashParam('op');
 
     if (!api) throw 'API undefined';
     const { info } = api;
@@ -201,8 +188,17 @@ const Nav = () => {
     const operations = getOperations(api);
 
     const handleItemSelected = (event: React.SyntheticEvent, newValue: string) => {
-        if (tagName !== newValue) event.preventDefault();
-        setTagName(newValue);
+        const newTagName = newValue.startsWith('tag-') ? newValue.substring(4) : undefined;
+        if (tagName !== newTagName) {
+            event.preventDefault();
+            setTagName(newTagName);
+        }
+
+        const newPath = newValue.startsWith('path-') ? newValue.substring(5, newValue.lastIndexOf('-')) : undefined;
+        if (pathName !== newPath) {
+            event.preventDefault();
+            setPathName(newPath);
+        }
     }
 
     return (
@@ -216,7 +212,7 @@ const Nav = () => {
                 {tags.map(t => (
                     <TreeItem key={t} nodeId={`tag-${t}`} label={t}>
                         {operations.filter(op => (op.operation.tags?.indexOf(t) ?? -1) >= 0).map(op => (
-                            <TreeItem key={`nav-route-${op.pathName}-${op.operationName}`} nodeId={`${op.pathName}-${op.operationName}`} label={(
+                            <TreeItem key={`nav-route-${op.pathName}-${op.operationName}`} nodeId={`path-${op.pathName}-${op.operationName}`} label={(
                                 <Stack sx={{ py: 0.5 }} direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
                                     <Typography noWrap variant="body2">{op.pathName}</Typography>
                                     <OperationChip operation={op.operationName} small />
@@ -272,14 +268,15 @@ function getOperations(api: OpenAPIV3.Document): Array<GetOperationResult> {
 const Route = () => {
     const api = useContext(ApiContext);
     const [tagName] = useHashParam('tag');
-    // const [pathName] = useHashParam('path');
+    const [pathName] = useHashParam('path');
     // const [operation] = useHashParam('op');
 
     if (api == null)
         return <Typography>Select action from navigation bar</Typography>
 
     const pathOperations = getOperations(api)
-        .filter(i => typeof tagName === 'undefined' || (i.operation.tags?.map(i => i.toLowerCase()).indexOf(tagName.toLowerCase()) ?? -1) >= 0);
+        .filter(i => typeof tagName === 'undefined' || (i.operation.tags?.map(i => i.toLowerCase()).indexOf(tagName.toLowerCase()) ?? -1) >= 0)
+        .filter(i => typeof pathName === 'undefined' || (i.operationName.toLowerCase() === pathName.toLowerCase()));
 
     return (
         <>
@@ -387,7 +384,7 @@ const Actions = (props: ActionsProps) => {
                         ))}
                     </Select>
                 </FormControl>}
-            <CopyToClipboardInput id="base-address" label="Base address" readOnly fullWidth sx={{ fontFamily: "Consolas", fontSize: '0.8em' }} value={selectedServerUrl} />
+            <CopyToClipboardInput id="base-address" label="Base address" readOnly fullWidth sx={{ fontFamily: "Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace", fontSize: '0.8em' }} value={selectedServerUrl} />
             {security && (
                 <Stack spacing={1}>
                     <Typography variant="overline">Authentication</Typography>
@@ -415,6 +412,7 @@ const DocsApiPage = () => {
 
     return (
         <ApiContext.Provider value={api}>
+            <Divider />
             <Stack>
                 {error && (
                     <Alert severity="error" variant="filled" sx={{ borderRadius: 0 }}>
@@ -422,14 +420,15 @@ const DocsApiPage = () => {
                         {error}
                     </Alert>
                 )}
-                <Grid container>
-                    <Grid item xs={3} sx={{ borderRight: "1px solid", borderColor: 'divider', px: 2, py: 4 }}>
+                <Stack direction="row" alignItems="stretch">
+                    <Box sx={{ minWidth: { xs: '230px', md: '320px' }, px: 2, py: 4 }}>
                         {isLoading || !api ? <NavSkeleton /> : <Nav />}
-                    </Grid>
-                    <Grid item xs={9}>
+                    </Box>
+                    <Divider orientation="vertical" flexItem />
+                    <Box flexGrow={1}>
                         <Route />
-                    </Grid>
-                </Grid>
+                    </Box>
+                </Stack>
             </Stack>
         </ApiContext.Provider>
     );
