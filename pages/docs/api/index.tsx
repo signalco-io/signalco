@@ -1,7 +1,7 @@
 import { TreeItem, TreeView } from "@mui/lab";
-import { Link as MuiLink, Alert, AlertTitle, Chip, FormControl, Grid, InputLabel, MenuItem, Select, Skeleton, Stack, TextField, Typography, Paper, Divider, Badge, Box } from "@mui/material";
+import { Link as MuiLink, Alert, AlertTitle, Chip, FormControl, Grid, InputLabel, MenuItem, Select, Skeleton, Stack, TextField, Typography, Paper, Divider, Badge, Box, Button } from "@mui/material";
 import { red } from "@mui/material/colors";
-import axios from "axios";
+import axios, { AxiosError, Method } from "axios";
 import { useCallback, useState } from "react";
 import { PageFullLayout } from "../../../components/AppLayout";
 import { OpenAPIV3 } from "openapi-types";
@@ -19,8 +19,29 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { ObjectDictAny } from "../../../src/sharedTypes";
 import Editor, { loader } from "@monaco-editor/react";
 import { AppContext } from "../../_app";
+import SendIcon from '@mui/icons-material/Send';
 
 loader.config({ paths: { vs: "/vs" } });
+if (typeof window !== 'undefined') {
+    loader.init().then(monaco => {
+        monaco.editor.defineTheme("signalco-dark", {
+            base: "vs-dark",
+            colors: {
+                "editor.background": '#121212'
+            },
+            inherit: true,
+            rules: []
+        });
+        monaco.editor.defineTheme("signalco-light", {
+            base: "vs-dark",
+            colors: {
+                "editor.background": '#eeeeee'
+            },
+            inherit: true,
+            rules: []
+        })
+    });
+}
 
 type ChipColors = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
 
@@ -187,9 +208,7 @@ const ApiOperation = (props: ApiOperationProps) => {
                         return (
                             <React.Fragment key={responseCode}>
                                 <Stack sx={{ p: 2 }}>
-                                    <Badge variant="dot" color={responseCodeNumber < 300 ? 'success' : (responseCodeNumber < 500 ? 'warning' : 'error')}>
-                                        <Typography>{responseCode}</Typography>
-                                    </Badge>
+                                    <ResponseStatusCode statusCode={responseCodeNumber} />
                                     <Typography variant="body2">{responseObj.description}</Typography>
                                 </Stack>
                                 {i != Object.keys(responses).length && <Divider />}
@@ -201,6 +220,14 @@ const ApiOperation = (props: ApiOperationProps) => {
         </Stack>
     );
 };
+
+function ResponseStatusCode(props: { statusCode: number }) {
+    return (
+        <Badge variant="dot" color={props.statusCode < 300 ? 'success' : (props.statusCode < 500 ? 'warning' : 'error')}>
+            <Typography sx={{ pr: 1 }}>{props.statusCode}</Typography>
+        </Badge>
+    );
+}
 
 function extractTags(api: OpenAPIV3.Document): string[] {
     const allTags = getOperations(api).flatMap(op => op?.operation?.tags).filter(i => typeof i === 'string') as string[];
@@ -401,6 +428,37 @@ const Actions = (props: ActionsProps) => {
     const requestBodyResolved = requestBody && resolveRef(api, requestBody);
     const [requestBodyValue, setRequestBodyValue] = useState(requestBodyResolved ? JSON.stringify(schemaToJson(api, requestBodyResolved.content["application/json"].schema), undefined, 2) : '');
 
+    const [response, setResponse] = useState('');
+    const [responseStatusCode, setResponseStatusCode] = useState<number | undefined>(undefined);
+    const requestUrl = selectedServerUrl + props.path;
+    const handleExecuteAction = async () => {
+        try {
+            const response = await axios.request({
+                url: requestUrl,
+                method: props.operation.toString() as Method,
+                data: props.operation !== "get" ? requestBodyValue : undefined,
+                // params: props.operation === "get" ? data : undefined,
+                headers: {
+                    //   Authorization: token,
+                    //   "Content-Type": "application/json",
+                    //   ...headers
+                },
+            });
+            setResponseStatusCode(response.status);
+            setResponse(JSON.stringify(response.data, undefined, 2));
+        } catch (err) {
+            if (typeof err === 'object' && Object.keys(err as object).find(key => key === 'isAxiosError')) {
+                const axiosError = err as AxiosError;
+                console.log(axiosError.response?.status, axiosError.response?.data)
+                setResponseStatusCode(axiosError.response?.status);
+                setResponse(JSON.stringify(axiosError.response?.data, undefined, 2));
+            } else {
+                setResponseStatusCode(999);
+                setResponse('Unknown error');
+            }
+        }
+    };
+
     return (
         <Stack spacing={2}>
             {servers && servers.length > 1 &&
@@ -441,7 +499,7 @@ const Actions = (props: ActionsProps) => {
                             <Editor
                                 height="300px"
                                 language="json"
-                                theme={appContext.theme === 'dark' ? "vs-dark" : 'light'}
+                                theme={appContext.theme === 'dark' ? "signalco-dark" : 'signalco-light'}
                                 options={{
                                     lineNumbers: "off",
                                     minimap: { enabled: false }
@@ -450,6 +508,28 @@ const Actions = (props: ActionsProps) => {
                                 onChange={(value) => setRequestBodyValue(value || '')} />
                         </Paper>
                     </Stack>
+                </Stack>
+            )}
+            <Button variant="outlined" startIcon={<SendIcon />} onClick={handleExecuteAction}>Run</Button>
+            {responseStatusCode && (
+                <Stack spacing={1}>
+                    <Stack direction="row" alignItems="center" justifyContent="space-between">
+                        <Typography variant="overline">Response</Typography>
+                        <ResponseStatusCode statusCode={responseStatusCode} />
+                    </Stack>
+                    <Paper variant="outlined">
+                        <Editor
+                            height="200px"
+                            language="json"
+                            theme={appContext.theme === 'dark' ? "signalco-dark" : 'signalco-light'}
+                            options={{
+                                lineNumbers: "off",
+                                minimap: { enabled: false },
+                                renderValidationDecorations: "off",
+                                readOnly: true
+                            }}
+                            value={response || 'Empty response'} />
+                    </Paper>
                 </Stack>
             )}
         </Stack>
