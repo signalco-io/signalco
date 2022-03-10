@@ -444,6 +444,9 @@ yarn-error.log*
 **/public/fallback-*.js
 **/public/worker-*.js
 
+# Monaco (NOTE: Only needed for workaround https://github.com/signalco-io/signalco/issues/436)
+**/public/vs
+
 # Sentry
 .sentryclirc
 

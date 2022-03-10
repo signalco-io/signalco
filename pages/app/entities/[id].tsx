@@ -356,13 +356,13 @@ const DeviceDetails = () => {
                                 <span>ID</span>
                             </Grid>
                             <Grid item xs={9}>
-                                <CopyToClipboardInput readOnly fullWidth size="small" value={device?.id ?? ''} />
+                                <CopyToClipboardInput id="device-id" readOnly fullWidth size="small" value={device?.id ?? ''} />
                             </Grid>
                             <Grid item xs={3}>
                                 <span>Identifier</span>
                             </Grid>
                             <Grid item xs={9}>
-                                <CopyToClipboardInput readOnly fullWidth size="small" value={device?.identifier ?? ''} />
+                                <CopyToClipboardInput id="device-identifier" readOnly fullWidth size="small" value={device?.identifier ?? ''} />
                             </Grid>
                             <Grid item>
                                 {device && (

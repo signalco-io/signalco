@@ -1,9 +1,9 @@
 import { red } from "@mui/material/colors";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
 // Create a theme instance.
 const theme = (isDark: boolean) => {
-  return createTheme({
+  return responsiveFontSizes(createTheme({
     palette: {
       mode: isDark ? "dark" : "light",
       primary: {
@@ -97,9 +97,9 @@ const theme = (isDark: boolean) => {
       h6: {
         fontSize: "1rem",
         fontWeight: 400,
-      },
+      }
     }
-  });
+  }));
 };
 
 export default theme;
