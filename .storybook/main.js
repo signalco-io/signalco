@@ -10,7 +10,8 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     "@storybook/addon-storysource",
-    "storycap"
+    "storycap",
+    "storybook-addon-performance/register"
   ],
   framework: "@storybook/react",
   core: {

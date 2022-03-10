@@ -60,9 +60,9 @@ const Footer = () => (
             <Box component="footer" sx={{ padding: "64px 0 32px 0" }}>
                 <Grid container direction="column" spacing={4}>
                     <Grid item>
-                        <Grid container justifyContent="space-between" spacing={2}>
+                        <Grid container justifyContent="space-between" spacing={4}>
                             {footerLinks.map(section => (
-                                <Grid item key={section.header}>
+                                <Grid item key={section.header} xs={12} sm={6} md={3} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
                                     <Typography variant="h4" sx={{ pb: 2 }}>{section.header}</Typography>
                                     <Stack spacing={1}>
                                         {section.links.map(link => (
@@ -74,25 +74,27 @@ const Footer = () => (
                         </Grid>
                     </Grid>
                     <Grid item>
-                        <SignalcoLogo priority height={68} />
-                        <Stack alignItems="center" justifyContent="space-between" direction="row">
-                            <Typography variant="subtitle2" fontWeight={400} component="span" color="textSecondary">Copyright © {new Date().getFullYear()} signalco. All rights reserved.</Typography>
-                            <Stack direction="row" spacing={1} alignItems="center">
-                                <SLink href="https://twitter.com/signalco_io">
-                                    <IconButton size="large" aria-label="Twitter link">
-                                        <TwitterIcon />
-                                    </IconButton>
-                                </SLink>
-                                <SLink href="https://www.reddit.com/r/signalco/">
-                                    <IconButton size="large" aria-label="reddit link">
-                                        <RedditIcon />
-                                    </IconButton>
-                                </SLink>
-                                <SLink href="https://github.com/signalco-io/signalco">
-                                    <IconButton size="large" aria-label="GitHub link">
-                                        <GitHubIcon />
-                                    </IconButton>
-                                </SLink>
+                        <Stack alignItems={{ xs: "center", sm: 'stretch' }}>
+                            <SignalcoLogo height={68} />
+                            <Stack alignItems="center" justifyContent="space-between" direction={{ xs: "column-reverse", sm: "row" }}>
+                                <Typography textAlign={{ xs: 'center', sm: 'left' }} variant="subtitle2" fontWeight={400} component="span" color="textSecondary">Copyright © {new Date().getFullYear()} signalco. All rights reserved.</Typography>
+                                <Stack direction="row" spacing={1} alignItems={{ xs: "center", sm: 'start' }}>
+                                    <SLink href="https://twitter.com/signalco_io">
+                                        <IconButton size="large" aria-label="Twitter link">
+                                            <TwitterIcon />
+                                        </IconButton>
+                                    </SLink>
+                                    <SLink href="https://www.reddit.com/r/signalco/">
+                                        <IconButton size="large" aria-label="reddit link">
+                                            <RedditIcon />
+                                        </IconButton>
+                                    </SLink>
+                                    <SLink href="https://github.com/signalco-io/signalco">
+                                        <IconButton size="large" aria-label="GitHub link">
+                                            <GitHubIcon />
+                                        </IconButton>
+                                    </SLink>
+                                </Stack>
                             </Stack>
                         </Stack>
                     </Grid>
