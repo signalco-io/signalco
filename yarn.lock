@@ -10911,10 +10911,10 @@ puppeteer-core@^9.0.0:
     unbzip2-stream "^1.3.3"
     ws "^7.2.3"
 
-puppeteer@13.5.0:
-  version "13.5.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-13.5.0.tgz#fd30692fbed18bd4964dce3517cc952af9b45d7d"
-  integrity sha512-raPr2YZ3RZLboGwt7jJgusJTBRDaVEUiPOSOWWFLV1oj07xqT5UqqbjmNXFXlMlkhF/NwmcEInW64VhvyllVdw==
+puppeteer@13.5.1:
+  version "13.5.1"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-13.5.1.tgz#d0f751bf36120efc2ebf74c7562a204a84e500e9"
+  integrity sha512-wWxO//vMiqxlvuzHMAJ0pRJeDHvDtM7DQpW1GKdStz2nZo2G42kOXBDgkmQ+zqjwMCFofKGesBeeKxIkX9BO+w==
   dependencies:
     cross-fetch "3.1.5"
     debug "4.3.3"
