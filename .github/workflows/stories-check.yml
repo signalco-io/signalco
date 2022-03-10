@@ -30,8 +30,9 @@ jobs:
         if: failure() && steps.runStoriesCheck.outcome == 'failure'
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ATGITHUBACCESSTOKEN
+          token: AT_GH_CD_REPO_PAT
           add-paths: ".stories-approved/**/*"
+          committer: Signalco Automated <automated@signalco.io>
           commit-message: "[stories-check] Automated stories change"
           base: ${{ github.head_ref }}
           branch: "stories-check/change"
