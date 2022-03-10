@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const { unlinkSync, renameSync, readFileSync, readdirSync, lstatSync } = require('fs');
+const { unlinkSync, renameSync, readFileSync, readdirSync, lstatSync, mkdirSync } = require('fs');
 const { join } = require('path');
 const { stdout } = require('process');
 
@@ -82,6 +82,7 @@ try {
         // If the pending file is a new one (does not exist in the approved folder)
         // move it to the approved folder.
         if (!approvedFiles.includes(possibleNew)) {
+            mkdirSync(path.dirname(possibleNew), { recursive: true });
             logProcess(`\t[${chalk.green("+")}] ${possibleNewShortPath}`, () => renameSync(pendingFile, possibleNew));
             numberOfChanges++;
         } else {
