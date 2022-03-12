@@ -1,13 +1,12 @@
 import { Box, Button, Container, Divider, Grid, Stack, SxProps, Theme, Typography } from "@mui/material";
 import React from "react";
 import Link from "next/link";
-import Footer from "../components/pages/Footer";
 import GlobeSection from "../components/pages/landing/GlobeSection";
 import Newsletter from "../components/pages/landing/Newsletter";
 import CounterIndicator from "../components/pages/landing/CounterIndicator";
 import Cover from "../components/pages/landing/Cover";
-import CoverNav from "../components/pages/landing/CoverNav";
 import LinkImage from "../components/shared/ImageLink";
+import { PageFullLayout } from "../components/AppLayout";
 
 const FeatureDescription = (props: { title: string, content: string, link?: string, linkText?: string }) => (
   <Stack spacing={2}>
@@ -90,9 +89,8 @@ const FeaturedIntegrationsSection = () => (
 const Index = () => {
   return (
     <Stack>
-      <Cover />
       <Box m={8}>
-        <CoverNav />
+        <Cover />
       </Box>
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={1} />
@@ -148,7 +146,11 @@ const Index = () => {
       <GlobeSection />
       <Divider />
       <SectionCenter narrow sx={{ bgcolor: 'background.paper' }}>
-        <Stack spacing={{ xs: 6, md: 8 }} alignItems="center" direction={{ xs: "column", md: "row" }} justifyContent={{ xs: "space-between" }}>
+        <Stack
+          spacing={{ xs: 6, md: 8 }}
+          alignItems="center"
+          direction={{ xs: "column", md: "row" }}
+          justifyContent={{ xs: "space-between" }}>
           <DataPart value="8" subtitle="Integrations" />
           <DataPart value="500+" subtitle="Automations per day" />
           <DataPart value="2000+" subtitle="Supported devices" />
@@ -158,7 +160,6 @@ const Index = () => {
       <SectionCenter>
         <Newsletter />
       </SectionCenter>
-      <Footer />
     </Stack >
   );
 };
@@ -169,5 +170,7 @@ const DataPart = (props: { value: string, subtitle: string }) => (
     <Typography variant="overline" fontSize={{ xs: 14, md: 18 }} color="textSecondary" lineHeight={1}>{props.subtitle}</Typography>
   </Stack>
 );
+
+Index.layout = PageFullLayout;
 
 export default Index;
