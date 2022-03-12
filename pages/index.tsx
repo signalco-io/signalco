@@ -1,10 +1,11 @@
 import { Box, Button, Container, Divider, Grid, Stack, SxProps, Theme, Typography } from "@mui/material";
 import React, { useContext } from "react";
-import Image from 'next/image';
+import Image, { ImageProps } from 'next/image';
 import { AppContext } from "./_app";
 import logoLight from '../public/images/icon-light-512x512.png';
 import logoDark from '../public/images/icon-dark-512x144.png';
 import Link from "next/link";
+import MuiLink from '@mui/material/Link';
 import Footer from "../components/pages/Footer";
 import GlobeSection from "../components/pages/landing/GlobeSection";
 import Newsletter from "../components/pages/landing/Newsletter";
@@ -119,6 +120,44 @@ const SectionCenter = (props: { children: React.ReactElement, sx?: SxProps<Theme
   </Box>
 );
 
+const LinkImage = (props: { href: string, imageProps: ImageProps }) => (
+  <Link href={props.href} passHref>
+    <MuiLink>
+      <Image alt={props.imageProps.alt} {...props.imageProps} />
+    </MuiLink>
+  </Link>
+);
+
+const integrationsList = [
+  { name: "Samsung", img: "/assets/logos/samsunglogo.png", imgRatio: 3.5, page: '/channels/samsung' },
+  { name: "Xiaomi", img: "/assets/logos/xiaomilogo.png", imgRatio: 1, page: '/channels/xiaomi' },
+  { name: "Philips Hue", img: "/assets/logos/huelogo.png", imgRatio: 1.8, page: '/channels/philips-hue' },
+  // { name: "Zigbee2MQTT", img: "/assets/logos/z2mlogo.png", imgRatio: 1, page: '/channels/zigbee2mqtt' },
+  { name: "iRobot", img: "/assets/logos/irobotlogo.png", imgRatio: 2.5, page: '/channels/irobot' },
+  { name: "GitHub", img: "/assets/logos/githublogo.png", imgRatio: 2, page: '/channels/github-app' },
+  // { name: "Tasmota", img: "/assets/logos/tasmotalogo.png", imgRatio: 1, page: '/channels/tasmota' },
+]
+
+const integrationsLogoSize = 60;
+
+const FeaturedIntegrationsSection = () => (
+  <SectionCenter>
+    <Stack spacing={4} alignItems="stretch">
+      <Typography variant="overline" textAlign="center" fontSize="1em">Featured integrations</Typography>
+      <Stack direction="row" spacing={4} alignItems="center" justifyContent="space-between">
+        {integrationsList.map(channel => (
+          <LinkImage key={channel.name} href={channel.page} imageProps={{
+            alt: channel.name,
+            src: channel.img,
+            width: integrationsLogoSize * channel.imgRatio,
+            height: integrationsLogoSize * channel.imgRatio
+          }} />
+        ))}
+      </Stack>
+    </Stack>
+  </SectionCenter>
+);
+
 const Index = () => {
   return (
     <Stack>
@@ -140,18 +179,7 @@ const Index = () => {
           title="Integrations"
           content="Connect a wide range of devices and services, from Smart Home and IoT devices to productivity tools and social apps." />
       </StepContent>
-      <SectionCenter>
-        <Stack spacing={4} alignItems="center">
-          <Typography variant="overline" fontSize="1em">Connected to 8 services</Typography>
-          <Stack direction="row" alignItems="center" justifyContent="space-evenly">
-            <div>integration logo 1</div>
-            <div>integration logo 2</div>
-            <div>integration logo 3</div>
-            <div>integration logo 4</div>
-            <div>integration logo 5</div>
-          </Stack>
-        </Stack>
-      </SectionCenter>
+      <FeaturedIntegrationsSection />
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={2} />
       </Box>

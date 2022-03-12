@@ -63,7 +63,7 @@ const Footer = () => (
                         <Grid container justifyContent="space-between" spacing={4}>
                             {footerLinks.map(section => (
                                 <Grid item key={section.header} xs={12} sm={6} md={3} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-                                    <Typography variant="h4" sx={{ pb: 2 }}>{section.header}</Typography>
+                                    <Typography variant="h4" color="textSecondary" sx={{ pb: 2 }}>{section.header}</Typography>
                                     <Stack spacing={1}>
                                         {section.links.map(link => (
                                             <SLink key={link.name} href={link.href}>{link.name}</SLink>
