@@ -88,7 +88,7 @@ const FeaturedIntegrationsSection = () => (
 
 const Index = () => {
   return (
-    <Stack>
+    <Stack sx={{ overflowX: 'hidden' }}>
       <Box m={8}>
         <Cover />
       </Box>
