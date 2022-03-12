@@ -1,90 +1,25 @@
 import { Box, Button, Container, Divider, Grid, Stack, SxProps, Theme, Typography } from "@mui/material";
-import React, { useContext } from "react";
-import Image from 'next/image';
-import { AppContext } from "./_app";
-import logoLight from '../public/images/icon-light-512x512.png';
-import logoDark from '../public/images/icon-dark-512x144.png';
+import React from "react";
 import Link from "next/link";
-import Footer from "../components/pages/Footer";
 import GlobeSection from "../components/pages/landing/GlobeSection";
 import Newsletter from "../components/pages/landing/Newsletter";
 import CounterIndicator from "../components/pages/landing/CounterIndicator";
-
-const Cover = () => {
-  const appContext = useContext(AppContext);
-
-  return (
-    <>
-      <Box sx={{
-        position: 'absolute',
-        right: 0,
-        top: 0,
-        content: '""',
-        display: 'block',
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        background: 'radial-gradient(at top right, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0) 70%)',
-        backgroundPosition: 'right top'
-      }}>
-      </Box>
-      <Box sx={{
-        height: '80vh', display: 'flex', alignItems: 'center', px: '10%', pt: '10vh'
-      }}>
-        <Stack>
-          <Box sx={{ pr: '30%' }}>
-            <Image
-              src={appContext.theme === 'light' ? logoLight : logoDark}
-              alt="signalco"
-              priority />
-          </Box>
-          <Typography component="h2" fontFamily="Raleway" fontWeight={200} fontSize={{ xs: '1.4rem', sm: '2rem', lg: '2.5rem' }}>Automate your life</Typography>
-        </Stack>
-      </Box>
-    </>
-  );
-};
-
-const Nav = () => (
-  <Stack justifyContent="center" direction="row" spacing={{ xs: 4, md: 8 }}>
-    <Box sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
-      <Link passHref href="/app">
-        <Button size="large">
-          <Typography variant="h2">Automate</Typography>
-        </Button>
-      </Link>
-    </Box>
-    <Box sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
-      <Link passHref href="#">
-        <Button size="large">
-          <Typography variant="h2">Explore</Typography>
-        </Button>
-      </Link>
-    </Box>
-    <Box sx={{ width: '150px', textAlign: 'center', textDecoration: 'none' }}>
-      <Link passHref href="#">
-        <Button size="large">
-          <Typography variant="h2">Community</Typography>
-        </Button>
-      </Link>
-    </Box>
-  </Stack>
-);
+import Cover from "../components/pages/landing/Cover";
+import LinkImage from "../components/shared/ImageLink";
+import { PageFullLayout } from "../components/AppLayout";
 
 const FeatureDescription = (props: { title: string, content: string, link?: string, linkText?: string }) => (
-  <Box>
-    <Stack spacing={2}>
-      <Typography fontWeight={600} variant="h2">{props.title}</Typography>
-      <Typography sx={{ opacity: 0.8 }}>{props.content}</Typography>
-      <Box>
-        {props.link && (
-          <Link passHref href={props.link}>
-            <Button variant="outlined">{props.linkText ?? "Read more"}</Button>
-          </Link>
-        )}
-      </Box>
-    </Stack>
-  </Box>
+  <Stack spacing={2}>
+    <Typography fontWeight={600} variant="h2">{props.title}</Typography>
+    <Typography color="textSecondary">{props.content}</Typography>
+    <Box>
+      {props.link && (
+        <Link passHref href={props.link}>
+          <Button variant="outlined">{props.linkText ?? "Read more"}</Button>
+        </Link>
+      )}
+    </Box>
+  </Stack>
 );
 
 const StepContent = (props: { title: string, subtitle?: string, imageSrc?: string, children?: React.ReactElement | React.ReactElement[] }) => (
@@ -92,9 +27,9 @@ const StepContent = (props: { title: string, subtitle?: string, imageSrc?: strin
     <Stack spacing={12}>
       <Stack spacing={4}>
         <Typography fontWeight={600} fontSize={{ xs: 42, md: 52 }} textAlign="center">{props.title}</Typography>
-        {props.subtitle && <Typography textAlign="center" sx={{ opacity: 0.6 }}>{props.subtitle}</Typography>}
+        {props.subtitle && <Typography variant="subtitle1" textAlign="center" color="textSecondary">{props.subtitle}</Typography>}
       </Stack>
-      <Stack position="relative" direction="row" spacing={8}>
+      <Stack position="relative" direction={{ xs: 'column', sm: 'row' }} spacing={8}>
         {props.imageSrc && (
           <Box width="100%">
           </Box>
@@ -112,59 +47,79 @@ const StepContent = (props: { title: string, subtitle?: string, imageSrc?: strin
 const SectionCenter = (props: { children: React.ReactElement, sx?: SxProps<Theme> | undefined, narrow?: boolean }) => (
   <Box sx={props.sx}>
     <Container>
-      <Box sx={{ px: { xs: 2, sm: 4, md: 8 }, py: { xs: props.narrow ? 4 : 8, sm: props.narrow ? 4 : 12 } }}>
+      <Box sx={{ px: { xs: 1, sm: 4, md: 8 }, py: { xs: props.narrow ? 4 : 8, sm: props.narrow ? 4 : 12 } }}>
         {props.children}
       </Box>
     </Container>
   </Box>
 );
 
+const integrationsList = [
+  { name: "Samsung", img: "/assets/logos/samsunglogo.png", imgRatio: 3.5, page: '/channels/samsung' },
+  { name: "Xiaomi", img: "/assets/logos/xiaomilogo.png", imgRatio: 1, page: '/channels/xiaomi' },
+  { name: "Philips Hue", img: "/assets/logos/huelogo.png", imgRatio: 1.6, page: '/channels/philips-hue' },
+  // { name: "Zigbee2MQTT", img: "/assets/logos/z2mlogo.png", imgRatio: 1, page: '/channels/zigbee2mqtt' },
+  { name: "iRobot", img: "/assets/logos/irobotlogo.png", imgRatio: 2.5, page: '/channels/irobot' },
+  { name: "GitHub", img: "/assets/logos/githublogo.png", imgRatio: 2, page: '/channels/github-app' },
+  // { name: "Tasmota", img: "/assets/logos/tasmotalogo.png", imgRatio: 1, page: '/channels/tasmota' },
+]
+
+const integrationsLogoSize = 60;
+
+const FeaturedIntegrationsSection = () => (
+  <SectionCenter>
+    <Stack spacing={4}>
+      <Typography variant="overline" textAlign="center" fontSize="1em">Featured integrations</Typography>
+      <Grid container alignItems="center" justifyContent="center">
+        {integrationsList.map(channel => (
+          <Grid item key={channel.name} xs={6} md={12 / integrationsList.length} textAlign="center" sx={{ p: 1 }}>
+            <LinkImage href={channel.page} imageProps={{
+              alt: channel.name,
+              src: channel.img,
+              width: `${integrationsLogoSize * channel.imgRatio}`,
+              height: `${integrationsLogoSize * channel.imgRatio}`
+            }} />
+          </Grid>
+        ))}
+      </Grid>
+    </Stack>
+  </SectionCenter >
+);
+
 const Index = () => {
   return (
-    <Stack>
-      <Cover />
+    <Stack sx={{ overflowX: 'hidden' }}>
       <Box m={8}>
-        <Nav />
+        <Cover />
       </Box>
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={1} />
       </Box>
       <StepContent title="Discover" imageSrc="/android-chrome-192x192.png">
         <FeatureDescription
-          title="Inspiration"
-          content="Infinite possibilities." />
+          title="Automation"
+          content="Maybe you don't need to do it once again. Automate so you can focus on things that interest you." />
         <FeatureDescription
-          title="Inspiration"
-          content="Infinite possibilities." />
-        <FeatureDescription
-          title="Integrations"
+          title="Connected"
           content="Connect a wide range of devices and services, from Smart Home and IoT devices to productivity tools and social apps." />
       </StepContent>
-      <SectionCenter>
-        <Stack spacing={4} alignItems="center">
-          <Typography variant="overline" fontSize="1em">Connected to 8 services</Typography>
-          <Stack direction="row" alignItems="center" justifyContent="space-evenly">
-            <div>integration logo 1</div>
-            <div>integration logo 2</div>
-            <div>integration logo 3</div>
-            <div>integration logo 4</div>
-            <div>integration logo 5</div>
-          </Stack>
-        </Stack>
-      </SectionCenter>
+      <FeaturedIntegrationsSection />
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={2} />
       </Box>
-      <StepContent title="Play" imageSrc="/android-chrome-192x192.png">
+      <StepContent title="Play" subtitle="Here are some of our favorite ways you can automate your life" imageSrc="/android-chrome-192x192.png">
         <FeatureDescription
-          title="Dashboards"
-          content="Make it yours. Feature-rich widgets combined with elegant design will become your playground." />
+          title="Morning coffee"
+          content="Raise the shades, play your favorite energizing morning beat and turn on the coffee maker." />
         <FeatureDescription
-          title="Processes"
-          content="Automate the smart way." />
+          title="Busywork"
+          content="Create a list of Trello cards and GitHub tasks that need your attention today. Maybe you can automate some of them too." />
         <FeatureDescription
-          title="Entities"
-          content="Stay organized and regain control with entities." />
+          title="TV time"
+          content="Dim the lights, switch the TV to Netflix, and turn on do-not-disturb on your phone. Now is You time." />
+        <FeatureDescription
+          title="Rain alert"
+          content="Notify me if today's forecast shows rain and windows are open. Ease your mind knowing you will get notified on time" />
       </StepContent>
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={3} hideAfter />
@@ -174,12 +129,12 @@ const Index = () => {
           <Grid item xs={12} md={4}>
             <FeatureDescription
               title="Anywhere you are"
-              content="Access all features wherever you are. Controlling devices in your home from other side of the world or room :) has never been simpler." />
+              content="Access all features wherever you are. Controlling devices in your home from other side of the world or room&nbsp;:) has never been simpler." />
           </Grid>
           <Grid item xs={12} md={4}>
             <FeatureDescription
               title="Share"
-              content="Not just for you. Share dashboards, devices, media, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
+              content="Share devices, media, dashboards, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
           </Grid>
           <Grid item xs={12} md={4}>
             <FeatureDescription
@@ -191,7 +146,11 @@ const Index = () => {
       <GlobeSection />
       <Divider />
       <SectionCenter narrow sx={{ bgcolor: 'background.paper' }}>
-        <Stack spacing={{ xs: 6, md: 8 }} alignItems="center" direction={{ xs: "column", md: "row" }} justifyContent={{ xs: "space-between" }}>
+        <Stack
+          spacing={{ xs: 6, md: 8 }}
+          alignItems="center"
+          direction={{ xs: "column", md: "row" }}
+          justifyContent={{ xs: "space-between" }}>
           <DataPart value="8" subtitle="Integrations" />
           <DataPart value="500+" subtitle="Automations per day" />
           <DataPart value="2000+" subtitle="Supported devices" />
@@ -201,7 +160,6 @@ const Index = () => {
       <SectionCenter>
         <Newsletter />
       </SectionCenter>
-      <Footer />
     </Stack >
   );
 };
@@ -212,5 +170,7 @@ const DataPart = (props: { value: string, subtitle: string }) => (
     <Typography variant="overline" fontSize={{ xs: 14, md: 18 }} color="textSecondary" lineHeight={1}>{props.subtitle}</Typography>
   </Stack>
 );
+
+Index.layout = PageFullLayout;
 
 export default Index;

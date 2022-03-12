@@ -45,8 +45,6 @@ export default function App(props: MyAppProps) {
     setTheme: handleThemeChange
   });
 
-  console.debug("App rendering");
-
   React.useEffect(() => {
     // Apply theme to document
     if (!isServerSide) {
