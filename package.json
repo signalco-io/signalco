@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "1.9.0",
-    "@dnd-kit/core": "5.0.1",
+    "@dnd-kit/core": "5.0.2",
     "@dnd-kit/modifiers": "5.0.0",
     "@dnd-kit/sortable": "6.0.0",
     "@emotion/cache": "11.7.1",
@@ -44,7 +44,7 @@
     "mobx-react-lite": "3.3.0",
     "monaco-editor": "^0.32.1",
     "next": "12.1.0",
-    "next-pwa": "5.4.5",
+    "next-pwa": "5.4.6",
     "next-secure-headers": "2.2.0",
     "notistack": "2.0.3",
     "react": "17.0.2",
