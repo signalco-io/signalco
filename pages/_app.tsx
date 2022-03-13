@@ -110,22 +110,20 @@ export default function App(props: MyAppProps) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme(appContextState.theme === 'dark')}>
-          <SnackbarProvider maxSnack={3}>
-            <CssBaseline />
-            <AppContext.Provider value={appContextState}>
-              {typeof Layout === "function" ? (
-                <Layout>
-                  <Component {...pageProps} err={err} />
-                </Layout>
-              ) : (
+      <ThemeProvider theme={theme(appContextState.theme === 'dark')}>
+        <SnackbarProvider maxSnack={3}>
+          <CssBaseline />
+          <AppContext.Provider value={appContextState}>
+            {typeof Layout === "function" ? (
+              <Layout>
                 <Component {...pageProps} err={err} />
-              )}
-            </AppContext.Provider>
-          </SnackbarProvider>
-        </ThemeProvider>
-      </StyledEngineProvider>
+              </Layout>
+            ) : (
+              <Component {...pageProps} err={err} />
+            )}
+          </AppContext.Provider>
+        </SnackbarProvider>
+      </ThemeProvider>
     </CacheProvider>
   );
 }
