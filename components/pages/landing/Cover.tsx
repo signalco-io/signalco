@@ -63,7 +63,7 @@ function RingLogo(props: { ringRadius: number, degrees: number, imageProps: Imag
             top: `${top}px`,
             left: `${left}px`
         }}>
-            <Image priority alt={props.imageProps.alt} {...props.imageProps} />
+            <Image alt={props.imageProps.alt} {...props.imageProps} />
         </Box>
     );
 }
