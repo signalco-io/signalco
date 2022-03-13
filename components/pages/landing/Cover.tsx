@@ -7,27 +7,32 @@ const ringConfig = [
         radius: 500,
         logos: [
             { angle: -30, alt: 'Xiaomi', src: "/assets/logos/xiaomilogo.png", width: 40, height: 40 },
-            { angle: 60, alt: 'Zigbee2MQTT', src: "/assets/logos/z2mlogo.png", width: 60, height: 60 }
+            { angle: 50, alt: 'Zigbee2MQTT', src: "/assets/logos/z2mlogo.png", width: 60, height: 60 }
         ]
     },
     {
         radius: 900,
         logos: [
-            { angle: -65, alt: 'Philips Hue', src: "/assets/logos/huelogo.png", width: 60, height: 60 },
+            { angle: -60, alt: 'Philips Hue', src: "/assets/logos/huelogo.png", width: 60, height: 60 },
             { angle: 15, alt: 'Samsung', src: "/assets/logos/samsunglogo.png", width: 90, height: 90 }
         ]
     },
     {
         radius: 1300,
         logos: [
+            { angle: -10, alt: 'iRobot', src: "/assets/logos/irobotlogo.png", width: 70, height: 70 },
             { angle: -45, alt: 'GitHub', src: "/assets/logos/githublogo.png", width: 70, height: 70 }
         ]
     },
     {
         radius: 1700,
         logos: [
-            { angle: 60, alt: 'iRobot', src: "/assets/logos/irobotlogo.png", width: 70, height: 70 },
             { angle: -65, alt: 'Tasmota', src: "/assets/logos/tasmotalogo.png", width: 40, height: 40 }
+        ]
+    },
+    {
+        radius: 2100,
+        logos: [
         ]
     }
 ];
