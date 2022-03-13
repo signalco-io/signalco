@@ -94,7 +94,7 @@ function Ring(props: { size: number, logos: RingLogoInfo[] }) {
 
 export default function Cover() {
     return (
-        <Box sx={{ height: '70vh' }}>
+        <Box sx={{ height: '60vh' }}>
             <Stack alignItems="center" justifyContent="end" sx={{ height: '100%', pb: 8 }}>
                 <Box sx={{ position: 'relative' }}>
                     <SignalcoLogo priority width={250} />
