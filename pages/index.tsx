@@ -1,5 +1,5 @@
 import { Box, Button, Container, Divider, Grid, Stack, SxProps, Theme, Typography } from "@mui/material";
-import React, { ForwardedRef, forwardRef } from "react";
+import React from "react";
 import Link from "next/link";
 import GlobeSection from "../components/pages/landing/GlobeSection";
 import Newsletter from "../components/pages/landing/Newsletter";
