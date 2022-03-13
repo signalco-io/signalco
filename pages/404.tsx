@@ -2,7 +2,7 @@ import { Box, Button, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext } from 'react';
-import { PageLayout } from '../components/AppLayout';
+import { PageLayout } from "../components/PageLayout";
 import { AppContext } from './_app';
 
 const Image404 = () => {

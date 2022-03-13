@@ -1,4 +1,4 @@
-import { EmptyLayoutWithAuth } from "../components/AppLayout";
+import { EmptyLayoutWithAuth } from "../components/EmptyLayoutWithAuth";
 import Login from "../components/Login";
 import { useRouter } from "next/router";
 import { useAuth0 } from "@auth0/auth0-react";

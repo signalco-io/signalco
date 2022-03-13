@@ -1,7 +1,7 @@
 import { Typography, Stack } from "@mui/material";
 import React from "react";
 import ReactTimeago from "react-timeago";
-import { AppLayoutWithAuth } from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayoutWithAuth";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
 import BeaconsRepository, { IBeaconModel } from "../../../src/beacons/BeaconsRepository";

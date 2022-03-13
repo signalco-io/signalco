@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import { PageLayout } from "../components/AppLayout";
+import { PageLayout } from "../components/PageLayout";
 
 const ContactPage = () => (
     <Stack spacing={4}>

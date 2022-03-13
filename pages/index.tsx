@@ -5,7 +5,7 @@ import GlobeSection from "../components/pages/landing/GlobeSection";
 import CounterIndicator from "../components/pages/landing/CounterIndicator";
 import Cover from "../components/pages/landing/Cover";
 import LinkImage from "../components/shared/ImageLink";
-import { PageFullLayout } from "../components/AppLayout";
+import { PageFullLayout } from "../components/PageFullLayout";
 import useInView from "react-cool-inview";
 import dynamic from "next/dynamic";
 

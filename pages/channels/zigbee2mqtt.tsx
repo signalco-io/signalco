@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { PageLayout } from "../../components/AppLayout";
+import { PageLayout } from "../../components/PageLayout";
 
 const Zigbee2MQTTPage = () => (
     <Typography>Zigbee2MQTT</Typography>

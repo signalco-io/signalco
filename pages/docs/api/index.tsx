@@ -3,7 +3,7 @@ import { Link as MuiLink, Alert, AlertTitle, Chip, FormControl, Grid, InputLabel
 import { red } from "@mui/material/colors";
 import axios, { AxiosError, Method } from "axios";
 import { useCallback, useState } from "react";
-import { PageFullLayout } from "../../../components/AppLayout";
+import { PageFullLayout } from "../../../components/PageFullLayout";
 import { OpenAPIV3 } from "openapi-types";
 import { useLoadAndError } from "../../../src/hooks/useLoadingAndError";
 import Link from "next/link";

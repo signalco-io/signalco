@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { AppLayoutWithAuth } from "../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../components/AppLayoutWithAuth";
 import Dashboards from "../../components/dashboards/Dashboards";
 
 const Dashboard = () => {

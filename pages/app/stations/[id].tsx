@@ -2,7 +2,7 @@ import { Alert, Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Lin
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
-import { AppLayoutWithAuth } from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayoutWithAuth";
 import { observer } from 'mobx-react-lite';
 import BeaconsRepository, { IBeaconModel, IBlobInfoModel } from '../../../src/beacons/BeaconsRepository';
 import UploadIcon from '@mui/icons-material/Upload';
