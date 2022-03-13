@@ -438,7 +438,10 @@ yarn-error.log*
 
 .vercel
 
-## PWA
+# Sitemap
+**/public/sitemap*
+
+# PWA
 **/public/workbox-*.js
 **/public/sw.js
 **/public/fallback-*.js
