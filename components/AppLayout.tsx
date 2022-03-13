@@ -66,8 +66,8 @@ function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?: boole
   return (
     <Box sx={{
       borderBottom: '1px solid transparent',
-      borderColor: (props.isScrolled ?? false) ? 'divider' : 'transparent',
-      transition: 'all 0.2s',
+      borderColor: props.isScrolled ? 'divider' : 'transparent',
+      transition: 'borderColor 0.2s, filter 0.5s',
       py: 2,
       position: 'sticky',
       top: 0,
@@ -79,8 +79,8 @@ function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?: boole
         <Stack component="header" direction="row" justifyContent="space-between" alignItems="center">
           <Link href="/" passHref><ButtonBase disableRipple onContextMenu={handleButtonAuxClick} onAuxClick={handleButtonAuxClick}><SignalcoLogo priority height={42} /></ButtonBase></Link>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Link href="/app" passHref prefetch>
-              <Button variant="contained" endIcon={<KeyboardArrowRightIcon />}>App</Button>
+            <Link href="/app" passHref>
+              <Button variant="contained" endIcon={<KeyboardArrowRightIcon fontSize="small" />}>App</Button>
             </Link>
           </Stack>
         </Stack>
@@ -91,7 +91,7 @@ function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?: boole
 
 function PageNav(props: { fullWidth?: boolean | undefined; }) {
   var rect = useWindowRect();
-  return <PageNavSsr fullWidth={props.fullWidth} isScrolled={(rect?.scrollY ?? 0) > 0} />;
+  return <PageNavSsr fullWidth={props.fullWidth} isScrolled={(rect?.scrollY || 0) > 0} />;
 }
 
 function EmptyLayout(props: ChildrenProps) {

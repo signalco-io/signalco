@@ -69,8 +69,11 @@ function RingLogo(props: { ringRadius: number, degrees: number, imageProps: Imag
 }
 
 function Ring(props: { size: number, logos: RingLogoInfo[] }) {
+    const offsetX = -100;
+    const offsetY = -40;
+
     return (
-        <Box sx={{ width: props.size, position: 'absolute', left: `calc(50% - ${props.size / 2}px + 154px)`, bottom: `-${props.size / 2 - 60}px` }}>
+        <Box sx={{ width: props.size, position: 'absolute', left: `calc(50% - ${props.size / 2 + offsetX}px)`, bottom: `-${props.size / 2 + offsetY}px` }}>
             <Box sx={{
                 borderRadius: '50%',
                 background: 'linear-gradient(200deg, rgba(127,127,127,1) 40%, rgba(0,0,0,0) 60%)',
@@ -91,15 +94,17 @@ function Ring(props: { size: number, logos: RingLogoInfo[] }) {
 
 export default function Cover() {
     return (
-        <Box sx={{ height: '50vh' }}>
-            <Stack alignItems="stretch" justifyContent="end" sx={{ height: '100%', pb: 8 }}>
-                <Box sx={{ position: 'relative', textAlign: 'center' }}>
-                    <SignalcoLogo priority width={400} />
-                    {ringConfig.map(ring => (
-                        <Ring key={ring.radius} size={ring.radius} logos={ring.logos} />
-                    ))}
+        <Box sx={{ height: '70vh' }}>
+            <Stack alignItems="center" justifyContent="end" sx={{ height: '100%', pb: 8 }}>
+                <Box sx={{ position: 'relative' }}>
+                    <SignalcoLogo priority width={250} />
+                    <Box sx={{ transform: { xs: 'scale(50%)', sm: 'scale(80%)', md: 'scale(1)' }, transformOrigin: { xs: '200px -40px', sm: 'center' } }}>
+                        {ringConfig.map(ring => (
+                            <Ring key={ring.radius} size={ring.radius} logos={ring.logos} />
+                        ))}
+                    </Box>
                 </Box>
-                <Typography component="h1" fontFamily="Raleway" fontWeight={200} textAlign="center" fontSize={{ xs: '1.4rem', sm: '2rem', lg: '2.5rem' }}>Automate your life</Typography>
+                <Typography component="h1" fontFamily="Raleway" fontWeight={200} fontSize={{ xs: '1.3rem', sm: '1.7rem', lg: '2rem' }}>Automate your life</Typography>
             </Stack>
         </Box>
     );
