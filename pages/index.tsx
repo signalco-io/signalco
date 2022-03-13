@@ -1,5 +1,5 @@
 import { Box, Button, Container, Divider, Grid, Stack, SxProps, Theme, Typography } from "@mui/material";
-import React from "react";
+import React, { ForwardedRef, forwardRef } from "react";
 import Link from "next/link";
 import GlobeSection from "../components/pages/landing/GlobeSection";
 import Newsletter from "../components/pages/landing/Newsletter";
@@ -7,6 +7,7 @@ import CounterIndicator from "../components/pages/landing/CounterIndicator";
 import Cover from "../components/pages/landing/Cover";
 import LinkImage from "../components/shared/ImageLink";
 import { PageFullLayout } from "../components/AppLayout";
+import useInView from "react-cool-inview";
 
 const FeatureDescription = (props: { title: string, content: string, link?: string, linkText?: string }) => (
   <Stack spacing={2}>
@@ -22,27 +23,29 @@ const FeatureDescription = (props: { title: string, content: string, link?: stri
   </Stack>
 );
 
-const StepContent = (props: { title: string, subtitle?: string, imageSrc?: string, children?: React.ReactElement | React.ReactElement[] }) => (
-  <SectionCenter>
-    <Stack spacing={12}>
-      <Stack spacing={4}>
-        <Typography fontWeight={600} fontSize={{ xs: 42, md: 52 }} textAlign="center">{props.title}</Typography>
-        {props.subtitle && <Typography variant="subtitle1" textAlign="center" color="textSecondary">{props.subtitle}</Typography>}
+function StepContent(props: { title: string; subtitle?: string; imageSrc?: string; children?: React.ReactElement | React.ReactElement[]; }) {
+  return (
+    <SectionCenter>
+      <Stack spacing={12}>
+        <Stack spacing={4}>
+          <Typography fontWeight={600} fontSize={{ xs: 42, md: 52 }} textAlign="center">{props.title}</Typography>
+          {props.subtitle && <Typography variant="subtitle1" textAlign="center" color="textSecondary">{props.subtitle}</Typography>}
+        </Stack>
+        <Stack position="relative" direction={{ xs: 'column', sm: 'row' }} spacing={8}>
+          {props.imageSrc && (
+            <Box width="100%">
+            </Box>
+          )}
+          {props.children && (
+            <Stack width="100%" spacing={4} justifyContent="space-evenly">
+              {props.children}
+            </Stack>
+          )}
+        </Stack>
       </Stack>
-      <Stack position="relative" direction={{ xs: 'column', sm: 'row' }} spacing={8}>
-        {props.imageSrc && (
-          <Box width="100%">
-          </Box>
-        )}
-        {props.children && (
-          <Stack width="100%" spacing={4} justifyContent="space-evenly">
-            {props.children}
-          </Stack>
-        )}
-      </Stack>
-    </Stack>
-  </SectionCenter>
-);
+    </SectionCenter>
+  );
+}
 
 const SectionCenter = (props: { children: React.ReactElement, sx?: SxProps<Theme> | undefined, narrow?: boolean }) => (
   <Box sx={props.sx}>
@@ -87,9 +90,13 @@ const FeaturedIntegrationsSection = () => (
 );
 
 const Index = () => {
+  const { observe, inView } = useInView({
+    onEnter: ({ unobserve }) => unobserve(), // only run once
+  });
+
   return (
     <Stack sx={{ overflowX: 'hidden' }}>
-      <Box m={8}>
+      <Box my={8}>
         <Cover />
       </Box>
       <Box sx={{ margin: 'auto' }}>
@@ -143,7 +150,9 @@ const Index = () => {
           </Grid>
         </Grid>
       </StepContent>
-      <GlobeSection />
+      <div ref={observe}>
+        {inView && <GlobeSection />}
+      </div>
       <Divider />
       <SectionCenter narrow sx={{ bgcolor: 'background.paper' }}>
         <Stack
