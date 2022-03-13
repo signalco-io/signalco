@@ -2,12 +2,14 @@ import { Box, Button, Container, Divider, Grid, Stack, SxProps, Theme, Typograph
 import React from "react";
 import Link from "next/link";
 import GlobeSection from "../components/pages/landing/GlobeSection";
-import Newsletter from "../components/pages/landing/Newsletter";
 import CounterIndicator from "../components/pages/landing/CounterIndicator";
 import Cover from "../components/pages/landing/Cover";
 import LinkImage from "../components/shared/ImageLink";
 import { PageFullLayout } from "../components/AppLayout";
 import useInView from "react-cool-inview";
+import dynamic from "next/dynamic";
+
+const Newsletter = dynamic(() => import('../components/pages/landing/Newsletter'));
 
 const FeatureDescription = (props: { title: string, content: string, link?: string, linkText?: string }) => (
   <Stack spacing={2}>
@@ -23,7 +25,7 @@ const FeatureDescription = (props: { title: string, content: string, link?: stri
   </Stack>
 );
 
-function StepContent(props: { title: string; subtitle?: string; imageSrc?: string; children?: React.ReactElement | React.ReactElement[]; }) {
+function StepContent(props: { title: string; subtitle?: string; imageSrc?: string; children?: React.ReactNode | React.ReactNode[]; }) {
   return (
     <SectionCenter>
       <Stack spacing={12}>
@@ -47,7 +49,7 @@ function StepContent(props: { title: string; subtitle?: string; imageSrc?: strin
   );
 }
 
-const SectionCenter = (props: { children: React.ReactElement, sx?: SxProps<Theme> | undefined, narrow?: boolean }) => (
+const SectionCenter = (props: { children?: React.ReactNode | undefined, sx?: SxProps<Theme> | undefined, narrow?: boolean }) => (
   <Box sx={props.sx}>
     <Container>
       <Box sx={{ px: { xs: 1, sm: 4, md: 8 }, py: { xs: props.narrow ? 4 : 8, sm: props.narrow ? 4 : 12 } }}>
@@ -88,6 +90,20 @@ const FeaturedIntegrationsSection = () => (
     </Stack>
   </SectionCenter >
 );
+
+const NewsletterSection = () => {
+  const { observe, inView } = useInView({
+    onEnter: ({ unobserve }) => unobserve(), // only run once
+  });
+
+  return (
+    <div ref={observe}>
+      <SectionCenter>
+        {inView && <Newsletter />}
+      </SectionCenter>
+    </div>
+  );
+};
 
 const Index = () => {
   const { observe, inView } = useInView({
@@ -166,9 +182,7 @@ const Index = () => {
         </Stack>
       </SectionCenter>
       <Divider />
-      <SectionCenter>
-        <Newsletter />
-      </SectionCenter>
+      <NewsletterSection />
     </Stack >
   );
 };
