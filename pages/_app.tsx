@@ -1,6 +1,6 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import theme from "../src/theme";
