@@ -1,6 +1,6 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import theme from "../src/theme";
@@ -110,22 +110,20 @@ export default function App(props: MyAppProps) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme(appContextState.theme === 'dark')}>
-          <SnackbarProvider maxSnack={3}>
-            <CssBaseline />
-            <AppContext.Provider value={appContextState}>
-              {typeof Layout === "function" ? (
-                <Layout>
-                  <Component {...pageProps} err={err} />
-                </Layout>
-              ) : (
+      <ThemeProvider theme={theme(appContextState.theme === 'dark')}>
+        <SnackbarProvider maxSnack={3}>
+          <CssBaseline />
+          <AppContext.Provider value={appContextState}>
+            {typeof Layout === "function" ? (
+              <Layout>
                 <Component {...pageProps} err={err} />
-              )}
-            </AppContext.Provider>
-          </SnackbarProvider>
-        </ThemeProvider>
-      </StyledEngineProvider>
+              </Layout>
+            ) : (
+              <Component {...pageProps} err={err} />
+            )}
+          </AppContext.Provider>
+        </SnackbarProvider>
+      </ThemeProvider>
     </CacheProvider>
   );
 }

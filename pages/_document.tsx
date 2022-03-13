@@ -5,7 +5,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
 import createEmotionCache from '../src/createEmotionCache';
 
-class MyDocument extends Document {
+export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
@@ -16,6 +16,8 @@ class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,700;1,400&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;400;500;600;700;900&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet" />
+          {/* Inject MUI styles first to match with the prepend: true configuration. */}
+          {(this.props as any).emotionStyleTags}
         </Head>
         <body>
           <Main />
@@ -76,9 +78,6 @@ MyDocument.getInitialProps = async (ctx) => {
 
   return {
     ...initialProps,
-    // Styles fragment is rendered after the app and page rendering finish.
-    styles: [...React.Children.toArray(initialProps.styles), ...emotionStyleTags],
+    emotionStyleTags
   };
 };
-
-export default MyDocument;

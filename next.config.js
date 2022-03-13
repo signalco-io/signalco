@@ -10,6 +10,7 @@ const { withSentryConfig } = require('@sentry/nextjs')
 const isDevelopment = process.env.NODE_ENV === "development";
 
 module.exports = withSentryConfig(withBundleAnalyzer(withPWA({
+  reactStrictMode: true,
   swcMinify: true,
   pwa: {
     dest: 'public',
