@@ -2,7 +2,7 @@ import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, 
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
-import { AppLayoutWithAuth } from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayoutWithAuth";
 import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
 import { IDeviceContact, IDeviceContactState } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';

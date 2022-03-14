@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import { PageLayout } from "../../components/AppLayout";
+import { PageLayout } from "../../components/PageLayout";
 import WidgetStore from "../../components/widgets/WidgetStore";
 
 const FeatureDashboardsPage = () => (

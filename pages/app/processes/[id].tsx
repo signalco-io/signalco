@@ -1,7 +1,7 @@
 import { Alert, Box, ButtonBase, Chip, Collapse, Container, Grid, IconButton, Menu, MenuItem, Paper, Popover, Skeleton, Stack, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
-import { AppLayoutWithAuth } from "../../../components/AppLayout";
+import { AppLayoutWithAuth } from "../../../components/AppLayoutWithAuth";
 import { observer } from 'mobx-react-lite';
 import ProcessesRepository, { IProcessModel } from '../../../src/processes/ProcessesRepository';
 import NoDataPlaceholder from '../../../components/shared/indicators/NoDataPlaceholder';

@@ -1,4 +1,4 @@
-import { PageLayout } from "../../components/AppLayout";
+import { PageLayout } from "../../components/PageLayout";
 
 const DPA = () => "Work in progress...";
 

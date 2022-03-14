@@ -6,7 +6,6 @@ import Head from "next/head";
 import theme from "../src/theme";
 import "../styles/global.scss";
 import { CacheProvider, EmotionCache } from "@emotion/react";
-import { useRouter } from "next/router";
 import createEmotionCache from '../src/createEmotionCache';
 import { SnackbarProvider } from 'notistack';
 import LocalStorageService from "../src/services/LocalStorageService";
@@ -14,7 +13,7 @@ import LocalStorageService from "../src/services/LocalStorageService";
 const isServerSide = typeof window === 'undefined';
 const clientSideEmotionCache = createEmotionCache();
 
-interface MyAppProps extends AppProps {
+interface CustomAppProps extends AppProps {
   emotionCache?: EmotionCache;
   err: any;
 }
@@ -30,7 +29,7 @@ const appContextDefaultState = {
 
 export const AppContext = React.createContext<IAppContext>(appContextDefaultState);
 
-export default function App(props: MyAppProps) {
+export default function App(props: CustomAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps, err } = props;
   const handleThemeChange = (theme: string) => {
     LocalStorageService.setItem("theme", theme);
@@ -56,20 +55,6 @@ export default function App(props: MyAppProps) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // PWA
-  const router = useRouter();
-  React.useEffect(() => {
-    if (typeof window !== 'undefined' && 'serviceWorker' in navigator && typeof (window as any).workbox !== 'undefined') {
-      // skip index route, because it's already cached under `start-url` caching object
-      if (router.route !== '/') {
-        const wb = (window as any).workbox
-        wb.active.then(() => {
-          wb.messageSW({ action: 'CACHE_NEW_ROUTE' })
-        })
-      }
-    }
-  }, [router.route])
 
   const Layout = typeof (Component as any).layout !== undefined
     ? (Component as any).layout
