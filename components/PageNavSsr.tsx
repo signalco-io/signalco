@@ -5,7 +5,6 @@ import SignalcoLogo from "./icons/SignalcoLogo";
 import Link from "next/link";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
-
 export function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?: boolean; }) {
     const router = useRouter();
 
@@ -15,7 +14,7 @@ export function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?
     };
 
     return (
-        <Box sx={{
+        <Box component="nav" sx={{
             borderBottom: '1px solid transparent',
             borderColor: props.isScrolled ? 'divider' : 'transparent',
             transition: 'borderColor 0.2s, filter 0.5s',

@@ -56,9 +56,7 @@ export default function App(props: CustomAppProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const Layout = typeof (Component as any).layout !== undefined
-    ? (Component as any).layout
-    : undefined;
+  const Layout = (Component as any).layout;
 
   return (
     <CacheProvider value={emotionCache}>
@@ -99,13 +97,9 @@ export default function App(props: CustomAppProps) {
         <SnackbarProvider maxSnack={3}>
           <CssBaseline />
           <AppContext.Provider value={appContextState}>
-            {typeof Layout === "function" ? (
-              <Layout>
-                <Component {...pageProps} err={err} />
-              </Layout>
-            ) : (
+            <Layout>
               <Component {...pageProps} err={err} />
-            )}
+            </Layout>
           </AppContext.Provider>
         </SnackbarProvider>
       </ThemeProvider>

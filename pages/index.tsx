@@ -1,7 +1,6 @@
 import { Box, Button, Container, Divider, Grid, Stack, SxProps, Theme, Typography } from "@mui/material";
 import React from "react";
 import Link from "next/link";
-import GlobeSection from "../components/pages/landing/GlobeSection";
 import CounterIndicator from "../components/pages/landing/CounterIndicator";
 import Cover from "../components/pages/landing/Cover";
 import LinkImage from "../components/shared/ImageLink";
@@ -10,6 +9,7 @@ import useInView from "react-cool-inview";
 import dynamic from "next/dynamic";
 
 const Newsletter = dynamic(() => import('../components/pages/landing/Newsletter'));
+const GlobeSection = dynamic(() => import('../components/pages/landing/GlobeSection'));
 
 const FeatureDescription = (props: { title: string, content: string, link?: string, linkText?: string }) => (
   <Stack spacing={2}>
@@ -166,9 +166,9 @@ const Index = () => {
           </Grid>
         </Grid>
       </StepContent>
-      <div ref={observe}>
+      <Box ref={observe} sx={{ minHeight: { xs: '12vh', sm: '20vh', md: '380px' }, }}>
         {inView && <GlobeSection />}
-      </div>
+      </Box>
       <Divider />
       <SectionCenter narrow sx={{ bgcolor: 'background.paper' }}>
         <Stack

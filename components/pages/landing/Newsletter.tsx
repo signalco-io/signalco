@@ -4,10 +4,6 @@ import { Stack, Typography, Collapse, FilledInput, Slide, Alert, Fade } from "@m
 import { useState, useRef, createRef, SyntheticEvent, ChangeEvent } from "react";
 import HttpService from "../../../src/services/HttpService";
 
-// function useHCaptcha() {
-
-// }
-
 function Newsletter() {
     const [email, setEmail] = useState("");
     const [showSuccess, setShowSuccess] = useState(false);
@@ -70,7 +66,6 @@ function Newsletter() {
         return <></>;
 
     return (
-
         <form onSubmit={handleSubmit}>
             <HCaptcha
                 ref={hcaptchaRef}
