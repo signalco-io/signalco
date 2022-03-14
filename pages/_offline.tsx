@@ -1,28 +1,23 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import React from "react";
+import SignalcoLogo from "../components/icons/SignalcoLogo";
+import { PageFullLayout } from "../components/PageFullLayout";
 
 const OfflinePage = () => (
-    <Grid
-        container
-        className="login__root"
-        wrap="nowrap"
+    <Stack
+        sx={{
+            my: '20vh'
+        }}
         alignItems="center"
-        direction="column"
+        spacing={4}
     >
-        <Grid item>
-            <Grid container direction="row" spacing={2} alignItems="center">
-                <Grid item>
-                    <Typography variant="h1">Signalco</Typography>
-                </Grid>
-                <Grid item>
-                    <Box sx={{ width: 72, height: 72 }}></Box>
-                </Grid>
-            </Grid>
-        </Grid>
-        <Grid item>
-            <Typography>You are offline</Typography>
-        </Grid>
-    </Grid>
+        <div>
+            <SignalcoLogo priority width={230} />
+        </div>
+        <Typography variant="h1" fontWeight={300} color="textSecondary">You are offline...</Typography>
+    </Stack>
 );
+
+OfflinePage.layout = PageFullLayout;
 
 export default OfflinePage;
