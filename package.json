@@ -42,7 +42,7 @@
     "material-ui-popup-state": "2.0.0",
     "mobx": "6.4.2",
     "mobx-react-lite": "3.3.0",
-    "monaco-editor": "^0.32.1",
+    "monaco-editor": "^0.33.0",
     "next": "12.1.0",
     "next-pwa": "5.4.6",
     "next-secure-headers": "2.2.0",
