@@ -49,6 +49,6 @@ export const parameters = {
   },
   screenshot: {
     // Put global screenshot parameters(e.g. viewport). See: https://github.com/reg-viz/storycap
-    delay: 500
+    delay: 1000
   }
 }
