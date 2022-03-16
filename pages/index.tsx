@@ -7,6 +7,7 @@ import LinkImage from "../components/shared/ImageLink";
 import { PageFullLayout } from "../components/PageFullLayout";
 import useInView from "react-cool-inview";
 import dynamic from "next/dynamic";
+import DiscoverVisual from "../components/pages/landing/visuals/DiscoverVisual";
 
 const Newsletter = dynamic(() => import('../components/pages/landing/Newsletter'));
 const GlobeSection = dynamic(() => import('../components/pages/landing/GlobeSection'));
@@ -25,25 +26,32 @@ const FeatureDescription = (props: { title: string, content: string, link?: stri
   </Stack>
 );
 
-function StepContent(props: { title: string; subtitle?: string; imageSrc?: string; children?: React.ReactNode | React.ReactNode[]; }) {
+function StepContent(props: { title: string; subtitle?: string; image?: React.ReactNode, imageContainerStyles?: SxProps | undefined, children?: React.ReactNode | React.ReactNode[]; }) {
   return (
     <SectionCenter>
-      <Stack spacing={12}>
-        <Stack spacing={4}>
+      <Stack spacing={{ xs: 6, md: 12 }}>
+        <Stack spacing={{ xs: 2, md: 4 }}>
           <Typography fontWeight={600} fontSize={{ xs: 42, md: 52 }} textAlign="center">{props.title}</Typography>
           {props.subtitle && <Typography variant="subtitle1" textAlign="center" color="textSecondary">{props.subtitle}</Typography>}
         </Stack>
-        <Stack position="relative" direction={{ xs: 'column', sm: 'row' }} spacing={8}>
-          {props.imageSrc && (
-            <Box width="100%">
-            </Box>
-          )}
-          {props.children && (
-            <Stack width="100%" spacing={4} justifyContent="space-evenly">
-              {props.children}
-            </Stack>
-          )}
-        </Stack>
+        <Box>
+          <Grid container spacing={8}>
+            {props.image && (
+              <Grid item xs={12} md={6} sx={{ position: 'relative', height: '420px' }}>
+                <Box sx={props.imageContainerStyles}>
+                  {props.image}
+                </Box>
+              </Grid>
+            )}
+            {props.children && (
+              <Grid item xs={12} md={props.image ? 6 : 12}>
+                <Stack width="100%" spacing={4} justifyContent="space-evenly">
+                  {props.children}
+                </Stack>
+              </Grid>
+            )}
+          </Grid>
+        </Box>
       </Stack>
     </SectionCenter>
   );
@@ -118,19 +126,22 @@ const Index = () => {
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={1} />
       </Box>
-      <StepContent title="Discover" imageSrc="/android-chrome-192x192.png">
+      <StepContent title="Discover" image={<DiscoverVisual />} imageContainerStyles={{ position: 'absolute', top: '-92px', right: 0, zIndex: -1 }}>
         <FeatureDescription
-          title="Automation"
-          content="Maybe you don't need to do it once again. Automate so you can focus on things that interest you." />
+          title="Bring together"
+          content="Every service and device is useful by itself, but the real magic happens when you bring them all together." />
         <FeatureDescription
           title="Connected"
           content="Connect a wide range of devices and services, from Smart Home and IoT devices to productivity tools and social apps." />
+        <FeatureDescription
+          title="Automation"
+          content="Repetitive tasks are boring. Automate so you can focus on things that matter to you." />
       </StepContent>
       <FeaturedIntegrationsSection />
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={2} />
       </Box>
-      <StepContent title="Play" subtitle="Here are some of our favorite ways you can automate your life" imageSrc="/android-chrome-192x192.png">
+      <StepContent title="Play" subtitle="Here are some of our favorite ways you can automate your life">
         <FeatureDescription
           title="Morning coffee"
           content="Raise the shades, play your favorite energizing morning beat and turn on the coffee maker." />
