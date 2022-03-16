@@ -8,9 +8,12 @@ import { PageFullLayout } from "../components/PageFullLayout";
 import useInView from "react-cool-inview";
 import dynamic from "next/dynamic";
 import DiscoverVisual from "../components/pages/landing/visuals/DiscoverVisual";
+import Image from "next/image";
+import { useContext } from "react";
+import { AppContext } from "./_app";
 
 const Newsletter = dynamic(() => import('../components/pages/landing/Newsletter'));
-const GlobeSection = dynamic(() => import('../components/pages/landing/GlobeSection'));
+const GlobePart = dynamic(() => import('../components/pages/landing/GlobeSection'));
 
 const FeatureDescription = (props: { title: string, content: string, link?: string, linkText?: string }) => (
   <Stack spacing={2}>
@@ -26,7 +29,7 @@ const FeatureDescription = (props: { title: string, content: string, link?: stri
   </Stack>
 );
 
-function StepContent(props: { title: string; subtitle?: string; image?: React.ReactNode, imageContainerStyles?: SxProps | undefined, children?: React.ReactNode | React.ReactNode[]; }) {
+function StepContent(props: { title: string; subtitle?: string; image?: React.ReactNode, imageContainerHeight?: number, imageContainerStyles?: SxProps | undefined, children?: React.ReactNode | React.ReactNode[]; }) {
   return (
     <SectionCenter>
       <Stack spacing={{ xs: 6, md: 12 }}>
@@ -35,9 +38,9 @@ function StepContent(props: { title: string; subtitle?: string; image?: React.Re
           {props.subtitle && <Typography variant="subtitle1" textAlign="center" color="textSecondary">{props.subtitle}</Typography>}
         </Stack>
         <Box>
-          <Grid container spacing={8}>
+          <Grid container spacing={8} alignItems="center">
             {props.image && (
-              <Grid item xs={12} md={6} sx={{ position: 'relative', height: '420px' }}>
+              <Grid item xs={12} md={6} sx={{ position: 'relative', height: props.imageContainerHeight }}>
                 <Box sx={props.imageContainerStyles}>
                   {props.image}
                 </Box>
@@ -96,7 +99,7 @@ const FeaturedIntegrationsSection = () => (
         ))}
       </Grid>
     </Stack>
-  </SectionCenter >
+  </SectionCenter>
 );
 
 const NewsletterSection = () => {
@@ -113,11 +116,43 @@ const NewsletterSection = () => {
   );
 };
 
-const Index = () => {
+const GlobeSection = () => {
   const { observe, inView } = useInView({
     onEnter: ({ unobserve }) => unobserve(), // only run once
   });
 
+  return (
+    <Box ref={observe} sx={{ minHeight: { xs: '12vh', sm: '20vh', md: '380px' }, }}>
+      {inView && <GlobePart />}
+    </Box>
+  );
+};
+
+const PlaySection = () => {
+  const appContext = useContext(AppContext);
+
+  return (
+    <StepContent title="Play" subtitle="Here are some of our favorite ways you can automate your life"
+      image={<Image src={appContext.theme === 'dark' ? "/images/playpitch-dark.png" : "/images/playpitch.png"} alt="Play" quality={100} width={511} height={684} />}
+      imageContainerHeight={684 + 32}
+      imageContainerStyles={{ position: 'absolute', top: 0, right: 0, width: '511px', height: '684px', marginTop: '64px' }}>
+      <FeatureDescription
+        title="Morning coffee"
+        content="Raise the shades, play your favorite energizing morning beat and turn on the coffee maker." />
+      <FeatureDescription
+        title="Busywork"
+        content="Create a list of Trello cards and GitHub tasks that need your attention today. Maybe you can automate some of them too." />
+      <FeatureDescription
+        title="TV time"
+        content="Dim the lights, switch the TV to Netflix, and turn on do-not-disturb on your phone. Now is You time." />
+      <FeatureDescription
+        title="Rain alert"
+        content="Notify me if today's forecast shows rain and windows are open. Ease your mind knowing you will get notified on time" />
+    </StepContent>
+  );
+};
+
+const Index = () => {
   return (
     <Stack sx={{ overflowX: 'hidden' }}>
       <Box my={8}>
@@ -126,7 +161,7 @@ const Index = () => {
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={1} />
       </Box>
-      <StepContent title="Discover" image={<DiscoverVisual />} imageContainerStyles={{ position: 'absolute', top: '-92px', right: 0, zIndex: -1 }}>
+      <StepContent title="Discover" image={<DiscoverVisual />} imageContainerHeight={420} imageContainerStyles={{ position: 'absolute', top: '-92px', right: 0, zIndex: -1 }}>
         <FeatureDescription
           title="Bring together"
           content="Every service and device is useful by itself, but the real magic happens when you bring them all together." />
@@ -141,20 +176,7 @@ const Index = () => {
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={2} />
       </Box>
-      <StepContent title="Play" subtitle="Here are some of our favorite ways you can automate your life">
-        <FeatureDescription
-          title="Morning coffee"
-          content="Raise the shades, play your favorite energizing morning beat and turn on the coffee maker." />
-        <FeatureDescription
-          title="Busywork"
-          content="Create a list of Trello cards and GitHub tasks that need your attention today. Maybe you can automate some of them too." />
-        <FeatureDescription
-          title="TV time"
-          content="Dim the lights, switch the TV to Netflix, and turn on do-not-disturb on your phone. Now is You time." />
-        <FeatureDescription
-          title="Rain alert"
-          content="Notify me if today's forecast shows rain and windows are open. Ease your mind knowing you will get notified on time" />
-      </StepContent>
+      <PlaySection />
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={3} hideAfter />
       </Box>
@@ -177,9 +199,7 @@ const Index = () => {
           </Grid>
         </Grid>
       </StepContent>
-      <Box ref={observe} sx={{ minHeight: { xs: '12vh', sm: '20vh', md: '380px' }, }}>
-        {inView && <GlobeSection />}
-      </Box>
+      <GlobeSection />
       <Divider />
       <SectionCenter narrow sx={{ bgcolor: 'background.paper' }}>
         <Stack
