@@ -28,7 +28,7 @@
     "@hcaptcha/react-hcaptcha": "1.1.1",
     "@microsoft/signalr": "6.0.3",
     "@monaco-editor/react": "^4.3.1",
-    "@mui/icons-material": "5.5.0",
+    "@mui/icons-material": "5.5.1",
     "@mui/lab": "5.0.0-alpha.73",
     "@mui/material": "5.5.0",
     "@sentry/nextjs": "6.18.2",
