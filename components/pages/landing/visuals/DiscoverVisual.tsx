@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { AppContext } from '../../../../pages/_app';
-import styles from './DiscoverVisual.module.scss';
 
 const DiscoverVisual = () => {
     const appContext = useContext(AppContext);
@@ -13,7 +12,7 @@ const DiscoverVisual = () => {
 
     return (
         <svg width="616" height="616" viewBox="0 0 616 616" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g className={styles.root}>
+            <g>
                 <line x1="458.428" y1="145.742" x2="555.428" y2="306.742" stroke={connectionsColor} />
                 <line x1="355.192" y1="223.538" x2="555.192" y2="306.538" stroke={connectionsColor} />
                 <line x1="430.651" y1="427.642" x2="554.651" y2="306.642" stroke={connectionsColor} />
