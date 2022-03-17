@@ -25,7 +25,7 @@ const footerLinks = [
     {
         header: 'Resources',
         links: [
-            { name: "Website", href: "https://status.signalco.io" },
+            { name: "Status", href: "https://status.signalco.io" },
             { name: "API", href: "/docs/api" },
             { name: "Storybook", href: "https://storybook.dev.signalco.io" },
         ]
