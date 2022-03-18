@@ -25,22 +25,12 @@ jobs:
       - run: yarn install --network-timeout 1000000
       - run: yarn stories-check
         id: runStoriesCheck
-      - name: PR changes
-        id: cpr
-        if: failure() && steps.runStoriesCheck.outcome == 'failure'
-        uses: peter-evans/create-pull-request@v3
+      - name: Commit changes
+        id: ccc
+        if: steps.runStoriesCheck.outcome == 'failure'
+        uses: EndBug/add-and-commit@v8
         with:
-          token: ${{ secrets.AT_GH_CD_REPO_PAT }}
-          add-paths: ".stories-approved/**/*"
-          committer: Signalco Automated <automated@signalco.io>
-          commit-message: "[stories-check] Automated stories change"
-          base: ${{ github.head_ref }}
-          branch: "stories-check/change"
-          delete-branch: true
-          branch-suffix: short-commit-hash
-          title: "[stories-check] Automated stories change"
-      - name: Check outputs
-        if: failure() && steps.runStoriesCheck.outcome == 'failure'
-        run: |
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+          add: '.cypress-approved'
+          message: '[skip ci] [stories-check] Automated stories changes'
+          new_branch: ${{ github.head_ref }}
+          default_author: github_actions
