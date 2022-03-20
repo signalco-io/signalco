@@ -9,6 +9,9 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from '../src/createEmotionCache';
 import { SnackbarProvider } from 'notistack';
 import LocalStorageService from "../src/services/LocalStorageService";
+import { MDXProvider } from '@mdx-js/react';
+import { ChildrenProps } from "../src/sharedTypes";
+import components from '../components/mdxComponents';
 
 const isServerSide = typeof window === 'undefined';
 const clientSideEmotionCache = createEmotionCache();
@@ -56,7 +59,7 @@ export default function App(props: CustomAppProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const Layout = (Component as any).layout;
+  const Layout = (Component as any).layout ?? ((props: ChildrenProps) => <>{props.children}</>);
 
   return (
     <CacheProvider value={emotionCache}>
@@ -98,7 +101,9 @@ export default function App(props: CustomAppProps) {
           <CssBaseline />
           <AppContext.Provider value={appContextState}>
             <Layout>
-              <Component {...pageProps} err={err} />
+              <MDXProvider components={components}>
+                <Component {...pageProps} err={err} />
+              </MDXProvider>
             </Layout>
           </AppContext.Provider>
         </SnackbarProvider>

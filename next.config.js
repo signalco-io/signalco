@@ -9,9 +9,19 @@ const { withSentryConfig } = require('@sentry/nextjs')
 
 const isDevelopment = process.env.NODE_ENV === "development";
 
-module.exports = withSentryConfig(withBundleAnalyzer(withPWA({
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+    providerImportSource: "@mdx-js/react",
+  },
+});
+
+module.exports = withSentryConfig(withBundleAnalyzer(withPWA(withMDX({
   reactStrictMode: true,
   swcMinify: true,
+  pageExtensions: ['tsx', 'mdx'],
   pwa: {
     dest: 'public',
     disable: process.env.NODE_ENV === 'development',
@@ -74,4 +84,4 @@ module.exports = withSentryConfig(withBundleAnalyzer(withPWA({
       })
     }];
   },
-})));
+}))));
