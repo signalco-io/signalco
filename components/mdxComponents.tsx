@@ -9,7 +9,7 @@ const headingBottomSpacing = 2;
 const components = {
     a: Link,
     p: (() => {
-        const P = (props: any) => <Typography sx={{ pb: 2 }} gutterBottom {...props} />;
+        const P = (props: any) => <Typography sx={{ py: 1 }} gutterBottom {...props} />;
         return memo(P);
     })(),
     h1: (() => {
