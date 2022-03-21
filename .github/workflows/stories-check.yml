@@ -25,6 +25,7 @@ jobs:
       - run: yarn install --network-timeout 1000000
       - run: yarn stories-check
         id: runStoriesCheck
+        continue-on-error: true
       - name: Commit changes
         id: ccc
         if: steps.runStoriesCheck.outcome == 'failure'
