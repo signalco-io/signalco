@@ -37,8 +37,7 @@ const footerLinks = [
             { name: "Terms of Service", href: "/legal/terms-of-service" },
             { name: "Cookie Policy", href: "/legal/cookie-policy" },
             { name: "Acceptable Use Policy", href: "/legal/acceptable-use-policy" },
-            // { name: "DPA", href: "/legal/dpa" },
-            // { name: "SLA", href: "/legal/sla" },
+            { name: "SLA", href: "/legal/sla" },
         ]
     }
 ];
