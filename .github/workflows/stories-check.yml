@@ -31,7 +31,7 @@ jobs:
         if: steps.runStoriesCheck.outcome == 'failure'
         uses: EndBug/add-and-commit@v9
         with:
-          add: '.cypress-approved'
-          message: '[skip ci] [stories-check] Automated stories changes'
+          add: ".stories-approved"
+          message: "[skip ci] [stories-check] Automated stories changes"
           new_branch: ${{ github.head_ref }}
           default_author: github_actions
