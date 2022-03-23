@@ -7,14 +7,14 @@
     "dev": "next",
     "build": "next build",
     "build:analyze": "cross-env ANALYZE=true yarn build",
-    "postinstall": "cp -R ./node_modules/monaco-editor/min/vs ./public/vs",
+    "postinstall": "node ./tools/post-install.js",
     "postbuild": "next-sitemap --config next-sitemap.config.js",
     "start": "next start",
     "lint": "next lint",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "update-widget-images": "cross-env WIDGET_IMAGES=true npx storycap --outDir \"public/assets/widget-previews\" --flat --include \"Components/Widgets/**\" --serverTimeout 180000 http://localhost:9009 --serverCmd \"start-storybook -p 9009\"",
-    "stories-check": "rimraf ./.stories-pending && storycap --serverCmd \"start-storybook --no-open -p 6006\" --serverTimeout 180000 -o .stories-pending http://localhost:6006 && node ./ci/storiescompare.js"
+    "stories-check": "rimraf ./.stories-pending && storycap --serverCmd \"start-storybook --no-open -p 6006\" --serverTimeout 180000 -o .stories-pending http://localhost:6006 && node ./tools/storiescompare.js"
   },
   "dependencies": {
     "@auth0/auth0-react": "1.9.0",
@@ -27,6 +27,7 @@
     "@emotion/styled": "11.8.1",
     "@hcaptcha/react-hcaptcha": "1.1.1",
     "@mdx-js/loader": "^2.1.0",
+    "@mdx-js/react": "^2.1.0",
     "@microsoft/signalr": "6.0.3",
     "@monaco-editor/react": "^4.3.1",
     "@mui/icons-material": "5.5.1",
@@ -88,6 +89,7 @@
     "cross-env": "7.0.3",
     "eslint": "8.11.0",
     "eslint-config-next": "12.1.0",
+    "fs-extra": "^10.0.1",
     "next-sitemap": "^2.5.13",
     "openapi-types": "^10.0.0",
     "prop-types": "15.8.1",
