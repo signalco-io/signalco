@@ -4,10 +4,10 @@ import ReactTimeago from "react-timeago";
 import { AppLayoutWithAuth } from "../../../components/AppLayoutWithAuth";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
-import BeaconsRepository, { IBeaconModel } from "../../../src/beacons/BeaconsRepository";
+import StationsRepository, { IStationModel } from "../../../src/stations/StationsRepository";
 import useLocale from "../../../src/hooks/useLocale";
 
-function beaconModelToTableItem(station: IBeaconModel): IAutoTableItem {
+function stationModelToTableItem(station: IStationModel): IAutoTableItem {
     return {
         id: station.id,
         name: station.id,
@@ -20,12 +20,12 @@ function beaconModelToTableItem(station: IBeaconModel): IAutoTableItem {
 
 const StationsPage = () => {
     const { t } = useLocale("App", "Stations");
-    const beaconsTable = useAutoTable(BeaconsRepository.getBeaconsAsync, beaconModelToTableItem, t);
+    const stationsTable = useAutoTable(StationsRepository.getStationsAsync, stationModelToTableItem, t);
 
     return (
         <Stack spacing={{ xs: 0, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
             <Typography variant="h2" sx={{ visibility: { xs: 'hidden', sm: 'visible' } }}>Stations</Typography>
-            <AutoTable {...beaconsTable} />
+            <AutoTable {...stationsTable} />
         </Stack>
     )
 }

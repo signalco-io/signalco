@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
 import { AppLayoutWithAuth } from "../../../components/AppLayoutWithAuth";
 import { observer } from 'mobx-react-lite';
-import BeaconsRepository, { IBeaconModel, IBlobInfoModel } from '../../../src/beacons/BeaconsRepository';
+import StationsRepository, { IStationModel, IBlobInfoModel } from '../../../src/stations/StationsRepository';
 import UploadIcon from '@mui/icons-material/Upload';
 import CheckIcon from '@mui/icons-material/Check';
 import compareVersions from 'compare-versions';
@@ -27,21 +27,21 @@ const stationCommandAsync = async (stationId: string | string[] | undefined, com
     }
 }
 
-const BeaconDetails = () => {
+const StationDetails = () => {
     const router = useRouter();
     const { id } = router.query;
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | undefined>();
-    const [beacon, setBeacon] = useState<IBeaconModel | undefined>();
+    const [station, setStation] = useState<IStationModel | undefined>();
     const [latestAvailableVersion, setLatestAvailableVersion] = useState<string | undefined>();
 
     useEffect(() => {
-        const loadBeaconAsync = async () => {
+        const loadStationAsync = async () => {
             try {
                 if (typeof id !== "object" &&
                     typeof id !== 'undefined') {
-                    const loadedBeacon = await BeaconsRepository.getBeaconAsync(id);
-                    setBeacon(loadedBeacon);
+                    const loadedStation = await StationsRepository.getStationAsync(id);
+                    setStation(loadedStation);
                 }
             } catch (err: any) {
                 setError(err?.toString());
@@ -60,24 +60,24 @@ const BeaconDetails = () => {
             }
         };
 
-        loadBeaconAsync();
+        loadStationAsync();
         loadLatestAvailableVersionAsync();
     }, [id]);
 
-    const handleUpdateSystem = () => stationCommandAsync(id, BeaconsRepository.updateSystemAsync, "update system");
-    const handleUpdate = () => stationCommandAsync(id, BeaconsRepository.updateBeaconAsync, "update station");
-    const handleRestartSystem = () => stationCommandAsync(id, BeaconsRepository.restartSystemAsync, "restart system");
-    const handleShutdownSystem = () => stationCommandAsync(id, BeaconsRepository.shutdownSystemAsync, "shutdown system");
-    const handleRestartStation = () => stationCommandAsync(id, BeaconsRepository.restartStationAsync, "restart station");
-    const handleBeginDiscovery = () => stationCommandAsync(id, BeaconsRepository.beginDiscoveryAsync, "begin discovery");
+    const handleUpdateSystem = () => stationCommandAsync(id, StationsRepository.updateSystemAsync, "update system");
+    const handleUpdate = () => stationCommandAsync(id, StationsRepository.updateStationAsync, "update station");
+    const handleRestartSystem = () => stationCommandAsync(id, StationsRepository.restartSystemAsync, "restart system");
+    const handleShutdownSystem = () => stationCommandAsync(id, StationsRepository.shutdownSystemAsync, "shutdown system");
+    const handleRestartStation = () => stationCommandAsync(id, StationsRepository.restartStationAsync, "restart station");
+    const handleBeginDiscovery = () => stationCommandAsync(id, StationsRepository.beginDiscoveryAsync, "begin discovery");
 
-    const canUpdate = (latestAvailableVersion && beacon?.version)
-        ? compareVersions(latestAvailableVersion, beacon.version)
+    const canUpdate = (latestAvailableVersion && station?.version)
+        ? compareVersions(latestAvailableVersion, station.version)
         : false;
 
     const workerServicesTableTransformItems = useCallback((i: string) => {
-        const isRunning = (beacon?.runningWorkerServices?.findIndex(rws => rws === i) ?? -1) >= 0;
-        const startStopAction = isRunning ? BeaconsRepository.stopWorkerServiceAsync : BeaconsRepository.startWorkerServiceAsync;
+        const isRunning = (station?.runningWorkerServices?.findIndex(rws => rws === i) ?? -1) >= 0;
+        const startStopAction = isRunning ? StationsRepository.stopWorkerServiceAsync : StationsRepository.startWorkerServiceAsync;
         const nameMatch = new RegExp(/(\w*\d*)\.(\w*\d*)\.(\w*\d*)\.(\w*\d*)\.*(\w*\d*)/g).exec(i);
         return (
             {
@@ -85,12 +85,12 @@ const BeaconDetails = () => {
                 name: nameMatch && nameMatch[5] ? nameMatch[4] : (nameMatch ? nameMatch[3] : i),
                 running: isRunning ? "Running" : "Stopped",
                 actions: (
-                    <LoadingButton color={isRunning ? "error" : "success"} disabled={!beacon} onClick={() => beacon && startStopAction(beacon.id, i)}>{isRunning ? "Stop" : "Start"}</LoadingButton>
+                    <LoadingButton color={isRunning ? "error" : "success"} disabled={!station} onClick={() => station && startStopAction(station.id, i)}>{isRunning ? "Stop" : "Start"}</LoadingButton>
                 )
             }
         );
-    }, [beacon]);
-    const workerServicesTableLoadItems = useCallback(() => Promise.resolve(beacon?.availableWorkerServices || []), [beacon])
+    }, [station]);
+    const workerServicesTableLoadItems = useCallback(() => Promise.resolve(station?.availableWorkerServices || []), [station])
     const workerServicesTable = useAutoTable(workerServicesTableLoadItems, workerServicesTableTransformItems);
 
     const [logContent, setLogContent] = useState('');
@@ -106,11 +106,11 @@ const BeaconDetails = () => {
             size: i.size,
             actions: (
                 <LoadingButton disabled={!!loadingLog && loadingLog !== i.name} loading={loadingLog === i.name} onClick={async () => {
-                    if (beacon) {
+                    if (station) {
                         try {
                             console.log(`Downloading ${i.name}...`);
                             setLoadingLog(i.name);
-                            const response = await HttpService.getAsync(`/stations/logging/download?stationId=${beacon.id}&blobName=${i.name}`) as { fileContents: string };
+                            const response = await HttpService.getAsync(`/stations/logging/download?stationId=${station.id}&blobName=${i.name}`) as { fileContents: string };
                             console.log(`Reading ${i.name}...`);
                             const contentBuffer = Buffer.from(response.fileContents, 'base64');
                             setLogContent(contentBuffer.toString('utf8'));
@@ -123,21 +123,21 @@ const BeaconDetails = () => {
                 }}>View</LoadingButton>
             )
         });
-    }, [beacon, loadingLog]);
-    const logsLoadItems = useCallback(() => Promise.resolve(beacon ? BeaconsRepository.getLogsAsync(beacon.id) : []), [beacon]);
+    }, [station, loadingLog]);
+    const logsLoadItems = useCallback(() => Promise.resolve(station ? StationsRepository.getLogsAsync(station.id) : []), [station]);
     const logsTable = useAutoTable(logsLoadItems, logsAutoTableItemTransform);
 
     const handleDelete = async () => {
-        if (!beacon) return;
+        if (!station) return;
 
-        await BeaconsRepository.deleteAsync(beacon.id);
+        await StationsRepository.deleteAsync(station.id);
         router.push('/app/stations');
     };
 
     return (
         <Box sx={{ px: { sm: 2 }, py: 2 }}>
             <Stack spacing={2}>
-                <Typography variant="h1">{beacon?.id}</Typography>
+                <Typography variant="h1">{station?.id}</Typography>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <Card>
@@ -147,8 +147,8 @@ const BeaconDetails = () => {
                                     <Grid item xs={4}><span>Version</span></Grid>
                                     <Grid item xs={4}>
                                         <Stack direction="row">
-                                            {beacon?.version
-                                                ? <span>{beacon.version}</span>
+                                            {station?.version
+                                                ? <span>{station.version}</span>
                                                 : <span>Unknown</span>}
                                         </Stack>
                                     </Grid>
@@ -157,17 +157,17 @@ const BeaconDetails = () => {
                                     </Grid>
                                     <Grid item xs={4}><span>Last activity</span></Grid>
                                     <Grid item xs={8}>
-                                        {beacon?.stateTimeStamp
-                                            ? <ReactTimeago date={beacon?.stateTimeStamp} />
+                                        {station?.stateTimeStamp
+                                            ? <ReactTimeago date={station?.stateTimeStamp} />
                                             : <span>Never</span>
                                         }
                                     </Grid>
                                     <Grid item xs={4}><span>Registered date</span></Grid>
                                     <Grid item xs={8}>
                                         {isLoading && <LinearProgress />}
-                                        {error && <Alert color="error">Failed to load Beacon information: {error}</Alert>}
-                                        {beacon?.registeredTimeStamp &&
-                                            <ReactTimeago date={beacon?.registeredTimeStamp} />
+                                        {error && <Alert color="error">Failed to load Station information: {error}</Alert>}
+                                        {station?.registeredTimeStamp &&
+                                            <ReactTimeago date={station?.registeredTimeStamp} />
                                         }
                                     </Grid>
                                     <Grid item xs={4}><span>Station operations</span></Grid>
@@ -196,7 +196,7 @@ const BeaconDetails = () => {
                                             <ConfirmDeleteButton
                                                 title="Delete station"
                                                 buttonLabel='Delete...'
-                                                expectedConfirmText={beacon?.id || "confirm"}
+                                                expectedConfirmText={station?.id || "confirm"}
                                                 onConfirm={handleDelete} />
                                         </Stack>
                                     </Grid>
@@ -313,6 +313,6 @@ const LogViewer = (props: ILogViewerProps) => {
     );
 };
 
-BeaconDetails.layout = AppLayoutWithAuth;
+StationDetails.layout = AppLayoutWithAuth;
 
-export default observer(BeaconDetails);
+export default observer(StationDetails);
