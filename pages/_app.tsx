@@ -21,6 +21,10 @@ interface CustomAppProps extends AppProps {
   err: any;
 }
 
+interface PageWithMetadata extends React.FunctionComponent {
+  layout: React.FunctionComponent | undefined
+};
+
 export interface IAppContext {
   theme: string,
   setTheme?: (theme: string) => void;
@@ -59,7 +63,7 @@ export default function App(props: CustomAppProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const Layout = (Component as any).layout ?? ((props: ChildrenProps) => <>{props.children}</>);
+  const Layout = (Component as PageWithMetadata).layout ?? ((props?: ChildrenProps) => <>{props?.children}</>);
 
   return (
     <CacheProvider value={emotionCache}>
