@@ -1502,6 +1502,16 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
+"@enterwell/react-form-builder@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@enterwell/react-form-builder/-/react-form-builder-0.1.0.tgz#06eddeefffd1357468490f12df5179952e2084cb"
+  integrity sha512-k83TPdUh9ZXxxYg77TP5jlThMM5foHsKUYiVD00iUYPG+Bcb6h7g6xrkJh0cNqN9ED9OjOf+tuHoBLJHjxRs5g==
+
+"@enterwell/react-form-validation@^1.1.9":
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/@enterwell/react-form-validation/-/react-form-validation-1.1.9.tgz#5bcf13333a23cb3be9c81e6649920bb2217bd78d"
+  integrity sha512-aVRnEqkLmahr1kVLWBqKOR5R1sKdke8QweYgsr7u4kmOGonM6vqQZ2pSaHzoQ96lu6Eipa0oMBnRnjqv6KZNSw==
+
 "@eslint/eslintrc@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-1.2.1.tgz#8b5e1c49f4077235516bc9ec7d41378c0f69b8c6"

@@ -11,7 +11,9 @@ import { SnackbarProvider } from 'notistack';
 import LocalStorageService from "../src/services/LocalStorageService";
 import { MDXProvider } from '@mdx-js/react';
 import { ChildrenProps } from "../src/sharedTypes";
-import components from '../components/mdxComponents';
+import mdxComponents from '../components/mdxComponents';
+import formComponents from '../components/formComponents';
+import { FormBuilderProvider } from "@enterwell/react-form-builder";
 
 const isServerSide = typeof window === 'undefined';
 const clientSideEmotionCache = createEmotionCache();
@@ -103,13 +105,15 @@ export default function App(props: CustomAppProps) {
       <ThemeProvider theme={theme(appContextState.theme === 'dark')}>
         <SnackbarProvider maxSnack={3}>
           <CssBaseline />
-          <AppContext.Provider value={appContextState}>
-            <Layout>
-              <MDXProvider components={components}>
-                <Component {...pageProps} err={err} />
-              </MDXProvider>
-            </Layout>
-          </AppContext.Provider>
+          <FormBuilderProvider components={formComponents}>
+            <AppContext.Provider value={appContextState}>
+              <Layout>
+                <MDXProvider components={mdxComponents}>
+                  <Component {...pageProps} err={err} />
+                </MDXProvider>
+              </Layout>
+            </AppContext.Provider>
+          </FormBuilderProvider>
         </SnackbarProvider>
       </ThemeProvider>
     </CacheProvider>
