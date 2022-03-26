@@ -10,7 +10,7 @@ export function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?
 
     const handleButtonAuxClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        router.push('/brand');
+        router.push('/design');
     };
 
     return (
