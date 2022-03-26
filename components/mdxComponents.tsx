@@ -6,7 +6,7 @@ import { PageLayout } from './PageLayout';
 const headingTopSpacing = 4;
 const headingBottomSpacing = 2;
 
-const components = {
+const components: any = {
     a: Link,
     p: (() => {
         const P = (props: any) => <Typography sx={{ py: 1 }} gutterBottom {...props} />;
