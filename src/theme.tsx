@@ -1,6 +1,22 @@
 import { red } from "@mui/material/colors";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
+const componentsTopLevelBorder = {
+  styleOverrides: {
+    root: {
+      borderRadius: '8px'
+    }
+  }
+}
+
+const componentInPageBorder = {
+  styleOverrides: {
+    root: {
+      borderRadius: '4px'
+    }
+  }
+}
+
 // Create a theme instance.
 const theme = (isDark: boolean) => {
   return responsiveFontSizes(createTheme({
@@ -50,26 +66,19 @@ const theme = (isDark: boolean) => {
         defaultProps: {
           disableUnderline: true
         },
-        styleOverrides: {
-          root: {
-            borderRadius: '4px'
-          }
-        }
+        ...componentInPageBorder
       },
       MuiPaper: {
         defaultProps: {
           variant: "outlined"
         },
-        styleOverrides: {
-          root: {
-            borderRadius: '8px'
-          }
-        }
+        ...componentsTopLevelBorder
       },
       MuiCard: {
         defaultProps: {
           variant: "outlined"
-        }
+        },
+        ...componentsTopLevelBorder
       }
     },
     typography: {
