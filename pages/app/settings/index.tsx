@@ -1,9 +1,11 @@
+import { FormBuilder, useFormField } from '@enterwell/react-form-builder';
 import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import React, { ReactNode, useContext } from 'react';
-import { AppLayoutWithAuth } from "../../../components/AppLayoutWithAuth";
+import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import { AppContext } from '../../_app';
+import { isNotEmptyString } from '@enterwell/react-form-validation';
 
 const AppThemeVisual = (props: { label: string, theme: string, selected?: boolean | undefined, onSelected: (theme: string) => void }) => {
     const { label, theme, selected, onSelected } = props;
@@ -69,6 +71,10 @@ const SettingsIndex = () => {
         window.location.reload();
     };
 
+    const userSettingsForm = {
+        nickname: useFormField('', isNotEmptyString, 'string', 'Nickname')
+    };
+
     return (
         <Container sx={{ p: 2 }}>
             <Stack spacing={4}>
@@ -90,6 +96,11 @@ const SettingsIndex = () => {
                             <AppThemeVisual label={themes.t("Dark")} theme="dark" selected={isDarkMode} onSelected={handleDarkModeChange} />
                             <AppThemeVisual label={themes.t("Light")} theme="light" selected={!isDarkMode} onSelected={handleDarkModeChange} />
                         </Stack>
+                    </SettingsItem>
+                </SettingsSection>
+                <SettingsSection header="Profile">
+                    <SettingsItem label="Nickname">
+                        <FormBuilder form={userSettingsForm} onSubmit={() => { }} />
                     </SettingsItem>
                 </SettingsSection>
             </Stack>

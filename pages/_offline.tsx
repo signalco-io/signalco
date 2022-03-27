@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import React from "react";
 import SignalcoLogo from "../components/icons/SignalcoLogo";
-import { PageFullLayout } from "../components/PageFullLayout";
+import { PageFullLayout } from "../components/layouts/PageFullLayout";
 
 const OfflinePage = () => (
     <Stack

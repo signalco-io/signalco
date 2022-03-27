@@ -1,12 +1,12 @@
 import React, { memo } from 'react';
 import Link from 'next/link';
 import { Checkbox, Paper, Typography, TableBody, TableCell, TableHead, TableRow, Divider } from '@mui/material';
-import { PageLayout } from './PageLayout';
+import MdxPageLayout from './MdxPageLayout';
 
 const headingTopSpacing = 4;
 const headingBottomSpacing = 2;
 
-const components = {
+const components: any = {
     a: Link,
     p: (() => {
         const P = (props: any) => <Typography sx={{ py: 1 }} gutterBottom {...props} />;
@@ -94,7 +94,7 @@ const components = {
         return memo(Input);
     })(),
     wrapper: (() => {
-        const Wrapper = (props: any) => <PageLayout maxWidth="md" {...props} />;
+        const Wrapper = (props: any) => <MdxPageLayout maxWidth="md" {...props} />;
         return memo(Wrapper);
     })(),
 };

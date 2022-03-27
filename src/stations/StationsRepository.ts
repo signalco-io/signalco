@@ -2,7 +2,7 @@ import ConductsService from "../conducts/ConductsService";
 import EntityRepository from "../entity/EntityRepository";
 import HttpService from "../services/HttpService";
 
-export interface IBeaconModel {
+export interface IStationModel {
     id: string;
     version?: string;
     stateTimeStamp?: Date;
@@ -11,7 +11,7 @@ export interface IBeaconModel {
     runningWorkerServices?: string[];
 }
 
-class BeaconModel implements IBeaconModel {
+class StationModel implements IStationModel {
     id: string;
     version?: string;
     stateTimeStamp?: Date;
@@ -61,7 +61,7 @@ class BlobInfoModel implements IBlobInfoModel {
     }
 }
 
-class SignalBeaconDto {
+class SignalStationDto {
     id?: string;
     registeredTimeStamp?: string;
     version?: string;
@@ -69,12 +69,12 @@ class SignalBeaconDto {
     availableWorkerServices?: string[];
     runningWorkerServices?: string[];
 
-    static FromDto(dto: SignalBeaconDto): IBeaconModel {
+    static FromDto(dto: SignalStationDto): IStationModel {
         if (dto.id == null || dto.registeredTimeStamp == null) {
             throw Error("Invalid SignalBeaconDto - missing required properties.");
         }
 
-        const model = new BeaconModel(dto.id, new Date(dto.registeredTimeStamp));
+        const model = new StationModel(dto.id, new Date(dto.registeredTimeStamp));
         model.version = dto.version;
         model.stateTimeStamp = dto.stateTimeStamp;
         model.availableWorkerServices = dto.availableWorkerServices;
@@ -83,9 +83,9 @@ class SignalBeaconDto {
     }
 }
 
-export default class BeaconsRepository {
-    static beaconsCache?: IBeaconModel[];
-    static beaconsCacheKeyed?: { [id: string]: IBeaconModel };
+export default class StationsRepository {
+    static stationsCache?: IStationModel[];
+    static stationsCacheKeyed?: { [id: string]: IStationModel };
     static isLoading: boolean;
 
     static async deleteAsync(id: string) {
@@ -93,7 +93,7 @@ export default class BeaconsRepository {
         // TODO: Reload cache or remove item from local cache
     }
 
-    static async updateBeaconAsync(id: string): Promise<void> {
+    static async updateStationAsync(id: string): Promise<void> {
         await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "update"});
     }
 
@@ -129,38 +129,38 @@ export default class BeaconsRepository {
         return (await HttpService.getAsync<StationBlobInfoDto[]>(`/stations/logging/list?stationId=${id}`)).map(StationBlobInfoDto.FromDto);
     }
 
-    static async getBeaconAsync(id: string): Promise<IBeaconModel | undefined> {
-        await BeaconsRepository._cacheBeaconsAsync();
-        if (typeof BeaconsRepository.beaconsCacheKeyed !== 'undefined') {
-            if (typeof BeaconsRepository.beaconsCacheKeyed[id] === "undefined")
+    static async getStationAsync(id: string): Promise<IStationModel | undefined> {
+        await StationsRepository._cacheStationsAsync();
+        if (typeof StationsRepository.stationsCacheKeyed !== 'undefined') {
+            if (typeof StationsRepository.stationsCacheKeyed[id] === "undefined")
                 return undefined;
-            return BeaconsRepository.beaconsCacheKeyed[id];
+            return StationsRepository.stationsCacheKeyed[id];
         }
         return undefined;
     }
 
-    static async getBeaconsAsync(): Promise<IBeaconModel[]> {
-        await BeaconsRepository._cacheBeaconsAsync();
-        return BeaconsRepository.beaconsCache ?? [];
+    static async getStationsAsync(): Promise<IStationModel[]> {
+        await StationsRepository._cacheStationsAsync();
+        return StationsRepository.stationsCache ?? [];
     }
 
-    static async _cacheBeaconsAsync() {
+    static async _cacheStationsAsync() {
         // TODO: Invalidate cache after some period
-        if (!BeaconsRepository.isLoading &&
-            !BeaconsRepository.beaconsCache) {
-            BeaconsRepository.isLoading = true;
-            BeaconsRepository.beaconsCache = (await HttpService.getAsync<SignalBeaconDto[]>("/beacons")).map(SignalBeaconDto.FromDto);
-            BeaconsRepository.beaconsCacheKeyed = {};
-            BeaconsRepository.beaconsCache.forEach(process => {
-                if (BeaconsRepository.beaconsCacheKeyed)
-                    BeaconsRepository.beaconsCacheKeyed[process.id] = process;
+        if (!StationsRepository.isLoading &&
+            !StationsRepository.stationsCache) {
+            StationsRepository.isLoading = true;
+            StationsRepository.stationsCache = (await HttpService.getAsync<SignalStationDto[]>("/beacons")).map(SignalStationDto.FromDto);
+            StationsRepository.stationsCacheKeyed = {};
+            StationsRepository.stationsCache.forEach(process => {
+                if (StationsRepository.stationsCacheKeyed)
+                    StationsRepository.stationsCacheKeyed[process.id] = process;
             });
-            BeaconsRepository.beaconsCache.sort((a, b) => a.id < b.id ? -1 : (a.id > b.id ? 1 : 0));
-            BeaconsRepository.isLoading = false;
+            StationsRepository.stationsCache.sort((a, b) => a.id < b.id ? -1 : (a.id > b.id ? 1 : 0));
+            StationsRepository.isLoading = false;
         }
 
         // Wait to load
-        while (BeaconsRepository.isLoading) {
+        while (StationsRepository.isLoading) {
             await new Promise(r => setTimeout(r, 10));
         }
     }

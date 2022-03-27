@@ -1,6 +1,6 @@
 import React from "react";
 import { Stack, Typography } from "@mui/material";
-import { AppLayoutWithAuth } from "../../../components/AppLayoutWithAuth";
+import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
 import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
 import useAutoTable from "../../../components/shared/table/useAutoTable";
 import { observer } from "mobx-react-lite";

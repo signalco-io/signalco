@@ -1,8 +1,8 @@
-import { EmptyLayoutWithAuth } from "../components/EmptyLayoutWithAuth";
 import Login from "../components/Login";
 import { useRouter } from "next/router";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
+import { EmptyLayoutWithAuth } from "../components/layouts/EmptyLayoutWithAuth";
 
 const LoginReturnPage = () => {
     const { isAuthenticated } = useAuth0();

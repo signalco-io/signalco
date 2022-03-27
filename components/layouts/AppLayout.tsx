@@ -1,12 +1,12 @@
 import { Box, Fab, Stack } from "@mui/material";
 import React, { useEffect } from "react";
-import NavProfile from "./NavProfile";
+import NavProfile from "../NavProfile";
 import { useSnackbar } from 'notistack';
-import PageNotificationService from "../src/notifications/PageNotificationService";
-import RealtimeService from '../src/realtime/realtimeService';
-import useHashParam from "../src/hooks/useHashParam";
+import PageNotificationService from "../../src/notifications/PageNotificationService";
+import RealtimeService from '../../src/realtime/realtimeService';
+import useHashParam from "../../src/hooks/useHashParam";
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
-import { ChildrenProps } from "../src/sharedTypes";
+import { ChildrenProps } from "../../src/sharedTypes";
 
 
 export function AppLayout(props: ChildrenProps) {

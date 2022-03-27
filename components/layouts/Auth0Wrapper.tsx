@@ -1,8 +1,7 @@
 import React from "react";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { useRouter } from 'next/router';
-import { ChildrenProps } from "../src/sharedTypes";
-
+import { ChildrenProps } from "../../src/sharedTypes";
 
 export function Auth0Wrapper(props: ChildrenProps) {
     const {
