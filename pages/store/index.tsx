@@ -12,7 +12,7 @@ import SelectItems from "../../components/shared/form/SelectItems";
 import { useState } from "react";
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import contentData from './content.json';
-import { PageLayout } from "../../components/PageLayout";
+import { PageLayout } from "../../components/layouts/PageLayout";
 
 const FilterList = (props: { header: string, items: { id: string, label: string }[], truncate: number }) => {
     const {

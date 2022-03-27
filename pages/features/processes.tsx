@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import { PageLayout } from "../../components/PageLayout";
+import { PageLayout } from "../../components/layouts/PageLayout";
 
 const FeatureProcessesPage = () => (
     <Stack spacing={4}>

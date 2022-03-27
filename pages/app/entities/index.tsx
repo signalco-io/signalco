@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, Box, ButtonBase, Grid, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
-import { AppLayoutWithAuth } from "../../../components/AppLayoutWithAuth";
+import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
 import { IDeviceModel } from "../../../src/devices/Device";
 import ReactTimeago from "react-timeago";
 import { observer } from "mobx-react-lite";

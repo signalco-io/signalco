@@ -1,7 +1,7 @@
 import { FormBuilder, useFormField } from '@enterwell/react-form-builder';
 import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import React, { ReactNode, useContext } from 'react';
-import { AppLayoutWithAuth } from "../../../components/AppLayoutWithAuth";
+import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import { AppContext } from '../../_app';

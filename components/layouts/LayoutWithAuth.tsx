@@ -1,8 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect } from "react";
-import HttpService from "../src/services/HttpService";
 import * as Sentry from '@sentry/nextjs';
-import CurrentUserProvider from "../src/services/CurrentUserProvider";
+import CurrentUserProvider from "../../src/services/CurrentUserProvider";
+import HttpService from "../../src/services/HttpService";
 
 
 export function LayoutWithAuth(props: { LayoutComponent: React.ComponentType; children?: React.ReactNode; }) {

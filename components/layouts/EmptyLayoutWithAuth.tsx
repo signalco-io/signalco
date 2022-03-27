@@ -1,9 +1,9 @@
 import React from "react";
-import CurrentUserProvider from "../src/services/CurrentUserProvider";
-import { ChildrenProps } from "../src/sharedTypes";
 import { EmptyLayout } from "./EmptyLayout";
 import { Auth0Wrapper } from "./Auth0Wrapper";
 import { LayoutWithAuth } from "./LayoutWithAuth";
+import CurrentUserProvider from "../../src/services/CurrentUserProvider";
+import { ChildrenProps } from "../../src/sharedTypes";
 
 
 export function EmptyLayoutWithAuth(props: ChildrenProps) {

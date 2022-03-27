@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { PageLayout } from "../../components/PageLayout";
+import { PageLayout } from "../../components/layouts/PageLayout";
 
 const DesignPage = () => {
     return (

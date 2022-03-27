@@ -8,7 +8,7 @@ export default {
   component: Button
 } as ComponentMeta<typeof Button>;
 
-export const Colors = (
+export const Colors = () => (
   <Stack spacing={1}>
     <Button color="primary">Primary</Button>
     <Button color="secondary">Secondary</Button>
@@ -20,7 +20,7 @@ export const Colors = (
   </Stack>
 );
 
-export const Primary = (
+export const Primary = () => (
   <Stack spacing={1}>
     <Button color="primary" variant="outlined">Button</Button>
   </Stack>
