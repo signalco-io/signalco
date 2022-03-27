@@ -1502,10 +1502,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@enterwell/react-form-builder@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@enterwell/react-form-builder/-/react-form-builder-0.1.0.tgz#06eddeefffd1357468490f12df5179952e2084cb"
-  integrity sha512-k83TPdUh9ZXxxYg77TP5jlThMM5foHsKUYiVD00iUYPG+Bcb6h7g6xrkJh0cNqN9ED9OjOf+tuHoBLJHjxRs5g==
+"@enterwell/react-form-builder@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@enterwell/react-form-builder/-/react-form-builder-0.1.1.tgz#3dc17109dc01d13881c043f0326267ae342ef9ab"
+  integrity sha512-CJyhc/E/8tt8Mw5JI7vmQI1PIuN3jBbkNLgZVN2SHRldf6lQhWZ3DBgDFDEGr5snYrlZiHChEJaSmU+yvjRdBQ==
 
 "@enterwell/react-form-validation@^1.1.9":
   version "1.1.9"
