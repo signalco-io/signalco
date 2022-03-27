@@ -3,7 +3,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Link from 'next/link';
-import SignalcoLogo from "./icons/SignalcoLogo";
+import SignalcoLogotype from "./icons/SignalcoLogotype";
 
 const Login = () => {
   const [isLong, setIsLong] = useState(false);
@@ -18,7 +18,7 @@ const Login = () => {
   return (
     <Stack justifyContent="center" direction="row" sx={{ height: '100%' }}>
       <Stack sx={{ px: '20%' }} spacing={2} justifyContent="center" alignItems="center">
-        <SignalcoLogo priority width={256} />
+        <SignalcoLogotype priority width={256} />
         {isLong
           ? <Stack spacing={2}>
             <Typography variant="subtitle2" color="textSecondary" fontWeight="light">Redirecting is taking a bit longer...</Typography>

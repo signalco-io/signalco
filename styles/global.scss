@@ -119,6 +119,10 @@
     url('/assets/fonts/MaterialIcons-Regular.woff') format('woff');
 }
 
+:root {
+  --primary: #000000;
+}
+
 html, body, #__next {
   height: 100%;
   width: 100%;
