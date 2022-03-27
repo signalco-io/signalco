@@ -1,6 +1,5 @@
-import { useContext } from "react";
-import { AppContext } from "../../pages/_app";
 import Image from 'next/image';
+import logotypeImage from '../../public/images/logotype.svg';
 
 export default function SignalcoLogo({ priority, width, height }: { priority?: boolean, width?: number, height?: number }) {
     if (typeof width === 'undefined' &&
@@ -8,14 +7,12 @@ export default function SignalcoLogo({ priority, width, height }: { priority?: b
         throw new Error("Either height or width must be provided to SignalcoLogo.");
     }
 
-    const appContext = useContext(AppContext);
-
-    const fixedWidth = width ?? (512 / 144) * (height ?? 0);
-    const fixedHeight = height ?? (144 / 512) * (width ?? 0);
+    const fixedWidth = width ?? (2810 / 666) * (height ?? 0);
+    const fixedHeight = height ?? (666 / 2810) * (width ?? 0);
 
     return (
         <Image
-            src={appContext.theme === 'light' ? "/images/icon-light-512x512.png" : "/images/icon-dark-512x144.png"}
+            src={logotypeImage}
             alt="Signalco logo"
             layout="fixed"
             quality={100}
