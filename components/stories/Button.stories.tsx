@@ -1,8 +1,7 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { Button, Stack, Table, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import { camelToSentenceCase } from '../../src/helpers/StringHelpers';
-import { Box } from '@mui/system';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
