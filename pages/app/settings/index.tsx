@@ -1,11 +1,13 @@
-import { FormBuilder, useFormField } from '@enterwell/react-form-builder';
+import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
 import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import React, { ReactNode, useContext } from 'react';
 import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import { AppContext } from '../../_app';
-import { isNotEmptyString } from '@enterwell/react-form-validation';
+import { isNonEmptyString } from '@enterwell/react-form-validation';
+import generalFormComponents from '../../../components/forms/generalFormComponents';
+import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 
 const AppThemeVisual = (props: { label: string, theme: string, selected?: boolean | undefined, onSelected: (theme: string) => void }) => {
     const { label, theme, selected, onSelected } = props;
@@ -35,9 +37,9 @@ const AppThemeVisual = (props: { label: string, theme: string, selected?: boolea
     );
 };
 
-const SettingsItem = (props: { children: ReactNode, label: string }) => (
+const SettingsItem = (props: { children: ReactNode, label?: string | undefined }) => (
     <Stack spacing={1}>
-        <Typography>{props.label}</Typography>
+        {props.label && <Typography>{props.label}</Typography>}
         {props.children}
     </Stack>
 );
@@ -72,39 +74,43 @@ const SettingsIndex = () => {
     };
 
     const userSettingsForm = {
-        nickname: useFormField('', isNotEmptyString, 'string')
+        nickname: useFormField('', isNonEmptyString, 'string', t("Nickname"))
+    };
+
+    const settingsFormComponents: FormBuilderComponents = {
+        fieldWrapper: (props) => <SettingsItem {...props} />
     };
 
     return (
-        <Container sx={{ p: 2 }}>
-            <Stack spacing={4}>
-                <SettingsSection header={t("General")}>
-                    <SettingsItem label={t("Language")}>
-                        <FormControl variant="filled" sx={{ maxWidth: 320 }}>
-                            <InputLabel id="app-settings-locale-select-label">{t("SelectLanguage")}</InputLabel>
-                            <Select variant="filled" labelId="app-settings-locale-select-label" value={userLocale} onChange={handleLocaleChange}>
-                                {availableLocales.map(l => (
-                                    <MenuItem key={l} value={l} selected={userLocale === l}>{locales.t(l)}</MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </SettingsItem>
-                </SettingsSection>
-                <SettingsSection header={t("LookAndFeel")}>
-                    <SettingsItem label={t("Theme")}>
-                        <Stack spacing={1} direction="row">
-                            <AppThemeVisual label={themes.t("Dark")} theme="dark" selected={isDarkMode} onSelected={handleDarkModeChange} />
-                            <AppThemeVisual label={themes.t("Light")} theme="light" selected={!isDarkMode} onSelected={handleDarkModeChange} />
-                        </Stack>
-                    </SettingsItem>
-                </SettingsSection>
-                <SettingsSection header="Profile">
-                    <SettingsItem label="Nickname">
-                        <FormBuilder form={userSettingsForm} onSubmit={() => { }} />
-                    </SettingsItem>
-                </SettingsSection>
-            </Stack>
-        </Container >
+        <FormBuilderProvider components={{ ...generalFormComponents, ...settingsFormComponents }}>
+            <Container sx={{ p: 2 }}>
+                <Stack spacing={4}>
+                    <SettingsSection header={t("General")}>
+                        <SettingsItem label={t("Language")}>
+                            <FormControl variant="filled" sx={{ maxWidth: 320 }}>
+                                <InputLabel id="app-settings-locale-select-label">{t("SelectLanguage")}</InputLabel>
+                                <Select variant="filled" labelId="app-settings-locale-select-label" value={userLocale} onChange={handleLocaleChange}>
+                                    {availableLocales.map(l => (
+                                        <MenuItem key={l} value={l} selected={userLocale === l}>{locales.t(l)}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </SettingsItem>
+                    </SettingsSection>
+                    <SettingsSection header={t("LookAndFeel")}>
+                        <SettingsItem label={t("Theme")}>
+                            <Stack spacing={1} direction="row">
+                                <AppThemeVisual label={themes.t("Dark")} theme="dark" selected={isDarkMode} onSelected={handleDarkModeChange} />
+                                <AppThemeVisual label={themes.t("Light")} theme="light" selected={!isDarkMode} onSelected={handleDarkModeChange} />
+                            </Stack>
+                        </SettingsItem>
+                    </SettingsSection>
+                    <SettingsSection header={t("Profile")}>
+                        <FormBuilder form={userSettingsForm} />
+                    </SettingsSection>
+                </Stack>
+            </Container>
+        </FormBuilderProvider>
     );
 };
 

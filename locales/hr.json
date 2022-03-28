@@ -32,7 +32,9 @@
                 "Light": "Svijetla"
             },
             "Language": "Jezik",
-            "SelectLanguage": "Odabir jezika"
+            "SelectLanguage": "Odabir jezika",
+            "Nickname": "Nadimak",
+            "Profile": "Profil"
         },
         "Placeholders": {
             "NoData": "Nema podataka za prikaz",

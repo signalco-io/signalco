@@ -31,7 +31,9 @@
                 "Light": "Light"
             },
             "Language": "Language",
-            "SelectLanguage": "Select language"
+            "SelectLanguage": "Select language",
+            "Nickname": "Nickname",
+            "Profile": "Profile"
         },
         "Placeholders": {
             "NoData": "No data to show",
