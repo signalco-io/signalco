@@ -72,7 +72,7 @@ const SettingsIndex = () => {
     };
 
     const userSettingsForm = {
-        nickname: useFormField('', isNotEmptyString, 'string', 'Nickname')
+        nickname: useFormField('', isNotEmptyString, 'string')
     };
 
     return (
