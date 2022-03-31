@@ -67,7 +67,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.17.8",
-    "@next/bundle-analyzer": "12.1.2",
+    "@next/bundle-analyzer": "12.1.4",
     "@storybook/addon-a11y": "6.4.19",
     "@storybook/addon-actions": "6.4.19",
     "@storybook/addon-essentials": "6.4.19",
@@ -95,7 +95,7 @@
     "next-sitemap": "^2.5.15",
     "openapi-types": "^10.0.0",
     "prop-types": "15.8.1",
-    "puppeteer": "13.5.1",
+    "puppeteer": "13.5.2",
     "react-is": "^17.0.2",
     "rimraf": "3.0.2",
     "sass": "1.49.9",
