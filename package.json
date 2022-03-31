@@ -67,7 +67,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.17.8",
-    "@next/bundle-analyzer": "12.1.2",
+    "@next/bundle-analyzer": "12.1.4",
     "@storybook/addon-a11y": "6.4.19",
     "@storybook/addon-actions": "6.4.19",
     "@storybook/addon-essentials": "6.4.19",
@@ -90,7 +90,7 @@
     "chalk": "4.1.2",
     "cross-env": "7.0.3",
     "eslint": "8.12.0",
-    "eslint-config-next": "12.1.2",
+    "eslint-config-next": "12.1.4",
     "fs-extra": "^10.0.1",
     "next-sitemap": "^2.5.15",
     "openapi-types": "^10.0.0",
