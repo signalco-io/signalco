@@ -28,7 +28,7 @@
     "@enterwell/react-form-builder": "^0.1.1",
     "@enterwell/react-form-validation": "^1.1.12",
     "@hcaptcha/react-hcaptcha": "1.1.1",
-    "@mdx-js/loader": "^2.1.0",
+    "@mdx-js/loader": "^2.1.1",
     "@mdx-js/react": "^2.1.0",
     "@microsoft/signalr": "6.0.3",
     "@monaco-editor/react": "^4.4.1",
@@ -69,12 +69,12 @@
     "@babel/core": "7.17.8",
     "@next/bundle-analyzer": "12.1.4",
     "@storybook/addon-a11y": "6.4.20",
-    "@storybook/addon-actions": "6.4.19",
+    "@storybook/addon-actions": "6.4.20",
     "@storybook/addon-essentials": "6.4.20",
-    "@storybook/addon-links": "6.4.19",
+    "@storybook/addon-links": "6.4.20",
     "@storybook/addon-storysource": "6.4.19",
     "@storybook/builder-webpack5": "6.4.20",
-    "@storybook/manager-webpack5": "6.4.19",
+    "@storybook/manager-webpack5": "6.4.20",
     "@storybook/react": "6.4.20",
     "@storybook/theming": "6.4.20",
     "@types/d3": "7.1.0",
@@ -102,6 +102,6 @@
     "storybook-addon-performance": "^0.16.1",
     "storycap": "3.1.7",
     "typescript": "4.6.3",
-    "webpack": "5.70.0"
+    "webpack": "5.71.0"
   }
 }
