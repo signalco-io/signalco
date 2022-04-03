@@ -102,6 +102,6 @@
     "storybook-addon-performance": "^0.16.1",
     "storycap": "3.1.7",
     "typescript": "4.6.3",
-    "webpack": "5.70.0"
+    "webpack": "5.71.0"
   }
 }
