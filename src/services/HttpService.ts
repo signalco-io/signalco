@@ -2,7 +2,6 @@ import axios, { AxiosError } from "axios";
 import AppSettingsProvider from "./AppSettingsProvider";
 import { trimStartChar, isAbsoluteUrl } from "../helpers/StringHelpers";
 import CurrentUserProvider from "./CurrentUserProvider";
-import Router from "next/router";
 import { ObjectDictAny } from "../sharedTypes";
 
 export default class HttpService {
