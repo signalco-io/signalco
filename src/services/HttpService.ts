@@ -2,7 +2,6 @@ import axios, { AxiosError } from "axios";
 import AppSettingsProvider from "./AppSettingsProvider";
 import { trimStartChar, isAbsoluteUrl } from "../helpers/StringHelpers";
 import CurrentUserProvider from "./CurrentUserProvider";
-import Router from "next/router";
 import { ObjectDictAny } from "../sharedTypes";
 
 export default class HttpService {
@@ -70,8 +69,8 @@ export default class HttpService {
         const axiosError = err as AxiosError;
         if (axiosError.response?.status === 403) {
           console.warn('Token expired.');
-          CurrentUserProvider.setToken(undefined);
-          Router.push('/app');
+          // CurrentUserProvider.setToken(undefined);
+          // Router.push('/app');
         }
         console.warn(`API (${axiosError.response?.status}) - ${axiosError.message}`)
       } else {
