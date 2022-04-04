@@ -3,18 +3,19 @@
   "description": "Automate your life",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "yarn@3.2.0",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "build:analyze": "cross-env ANALYZE=true yarn build",
-    "postinstall": "node ./tools/post-install.js",
+    "postinstall": "yarn node ./tools/post-install.js",
     "postbuild": "next-sitemap --config next-sitemap.config.js",
     "start": "next start",
     "lint": "next lint",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "update-widget-images": "cross-env WIDGET_IMAGES=true npx storycap --outDir \"public/assets/widget-previews\" --flat --include \"Components/Widgets/**\" --serverTimeout 180000 http://localhost:9009 --serverCmd \"start-storybook -p 9009\"",
-    "stories-check": "rimraf ./.stories-pending && storycap --serverCmd \"start-storybook --no-open -p 6006\" --serverTimeout 180000 -o .stories-pending http://localhost:6006 && node ./tools/storiescompare.js"
+    "stories-check": "rimraf ./.stories-pending && storycap --serverCmd \"start-storybook --no-open -p 6006\" --serverTimeout 180000 -o .stories-pending http://localhost:6006 && yarn node ./tools/storiescompare.js"
   },
   "dependencies": {
     "@auth0/auth0-react": "1.9.0",
