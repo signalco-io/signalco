@@ -3,7 +3,7 @@
   "description": "Automate your life",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "yarn@3.2.0",
+  "packageManager": "yarn@1.22.18",
   "scripts": {
     "dev": "next",
     "build": "next build",
