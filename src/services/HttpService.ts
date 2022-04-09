@@ -3,6 +3,7 @@ import AppSettingsProvider from "./AppSettingsProvider";
 import { trimStartChar, isAbsoluteUrl } from "../helpers/StringHelpers";
 import CurrentUserProvider from "./CurrentUserProvider";
 import { ObjectDictAny } from "../sharedTypes";
+import Router from "next/router";
 
 export default class HttpService {
   public static tokenFactory?: () => Promise<string>;
@@ -69,8 +70,10 @@ export default class HttpService {
         const axiosError = err as AxiosError;
         if (axiosError.response?.status === 403) {
           console.warn('Token expired.');
-          // CurrentUserProvider.setToken(undefined);
-          // Router.push('/app');
+
+          // TODO: Handle this smart, this can cause infinite loops when API always responds with 403
+          CurrentUserProvider.setToken(undefined);
+          Router.push('/app');
         }
         console.warn(`API (${axiosError.response?.status}) - ${axiosError.message}`)
       } else {

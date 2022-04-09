@@ -1,4 +1,5 @@
-const ApiProductionUrl: string = "https://api.signalco.io/api/";
+const ApiProductionUrl = "https://api.signalco.io/api/";
+const ApiDevelopmentUrl = "https://api.signlco.dev/api/"
 
 class AppSettingsProvider {
   public authToken: string | null = null;
@@ -6,7 +7,9 @@ class AppSettingsProvider {
   public apiAddress: string;
 
   constructor() {
-    this.apiAddress = ApiProductionUrl;
+    this.apiAddress = process.env.VERCEL_ENV === 'production'
+    ? ApiProductionUrl
+    : ApiDevelopmentUrl;
   }
 }
 
