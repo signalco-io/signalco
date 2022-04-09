@@ -179,7 +179,7 @@ export default class DevicesRepository {
         if (!DevicesRepository.isLoading &&
             !DevicesRepository.devicesCache) {
             DevicesRepository.isLoading = true;
-            DevicesRepository.devicesCache = (await HttpService.getAsync<SignalDeviceDto[]>("/devices")).map(SignalDeviceDto.FromDto);
+            DevicesRepository.devicesCache = (await HttpService.getAsync<SignalDeviceDto[]>("/devices"))?.map(SignalDeviceDto.FromDto) ?? [];
             DevicesRepository.devicesCacheKeyed = {};
             DevicesRepository.devicesCache.forEach(device => {
                 if (DevicesRepository.devicesCacheKeyed)
