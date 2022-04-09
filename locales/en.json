@@ -33,7 +33,9 @@
             "Language": "Language",
             "SelectLanguage": "Select language",
             "Nickname": "Nickname",
-            "Profile": "Profile"
+            "Profile": "Profile",
+            "Developer": "Developer",
+            "ApiEndpoint": "API Endpoint"
         },
         "Placeholders": {
             "NoData": "No data to show",

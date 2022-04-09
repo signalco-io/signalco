@@ -34,7 +34,9 @@
             "Language": "Jezik",
             "SelectLanguage": "Odabir jezika",
             "Nickname": "Nadimak",
-            "Profile": "Profil"
+            "Profile": "Profil",
+            "Developer": "Developer",
+            "ApiEndpoint": "API Endpoint"
         },
         "Placeholders": {
             "NoData": "Nema podataka za prikaz",
