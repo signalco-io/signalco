@@ -1,5 +1,5 @@
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
-import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
+import { Box, Button, Chip, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import React, { ReactNode, useContext } from 'react';
 import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
@@ -8,6 +8,8 @@ import { AppContext } from '../../_app';
 import { isNonEmptyString } from '@enterwell/react-form-validation';
 import generalFormComponents from '../../../components/forms/generalFormComponents';
 import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
+import appSettingsProvider, { ApiDevelopmentUrl, ApiProductionUrl } from '../../../src/services/AppSettingsProvider';
+import { useEffect } from 'react';
 
 const AppThemeVisual = (props: { label: string, theme: string, selected?: boolean | undefined, onSelected: (theme: string) => void }) => {
     const { label, theme, selected, onSelected } = props;
@@ -77,9 +79,41 @@ const SettingsIndex = () => {
         nickname: useFormField('', isNonEmptyString, 'string', t("Nickname"))
     };
 
-    const settingsFormComponents: FormBuilderComponents = {
-        fieldWrapper: (props) => <SettingsItem {...props} />
+    const developerSettingsForm = {
+        apiEndpoint: useFormField(appSettingsProvider.apiAddress, isNonEmptyString, 'selectApiEndpoint', t("ApiEndpoint"), { receiveEvent: false })
     };
+
+    const settingsFormComponents: FormBuilderComponents = {
+        fieldWrapper: (props) => <SettingsItem {...props} />,
+        selectApiEndpoint: ({ onChange, label, helperText, error, ...rest }) => (
+            <FormControl variant="filled" error={error}>
+                <InputLabel>{label}</InputLabel>
+                <Select onChange={(e) => onChange && onChange(e.target.value)} {...rest}>
+                    <MenuItem value={ApiProductionUrl}>
+                        <Stack direction="row" alignItems="center" spacing={1}>
+                            <Chip color="info" label="prod" size="small" />
+                            <Typography>{ApiProductionUrl}</Typography>
+                        </Stack>
+                    </MenuItem>
+                    <MenuItem value={ApiDevelopmentUrl}>
+                        <Stack direction="row" alignItems="center" spacing={1}>
+                            <Chip color="warning" label="dev" size="small" />
+                            <Typography>{ApiDevelopmentUrl}</Typography>
+                        </Stack>
+                    </MenuItem>
+                </Select>
+                <FormHelperText error={error}>{helperText}</FormHelperText>
+            </FormControl >
+        ),
+    };
+
+    useEffect(() => {
+        if (!developerSettingsForm.apiEndpoint.error &&
+            developerSettingsForm.apiEndpoint.value !== appSettingsProvider.apiAddress) {
+            appSettingsProvider.setApiEndpoint(developerSettingsForm.apiEndpoint.value);
+            window.location.reload();
+        }
+    }, [developerSettingsForm.apiEndpoint]);
 
     return (
         <FormBuilderProvider components={{ ...generalFormComponents, ...settingsFormComponents }}>
@@ -107,6 +141,9 @@ const SettingsIndex = () => {
                     </SettingsSection>
                     <SettingsSection header={t("Profile")}>
                         <FormBuilder form={userSettingsForm} />
+                    </SettingsSection>
+                    <SettingsSection header={t("Developer")}>
+                        <FormBuilder form={developerSettingsForm} />
                     </SettingsSection>
                 </Stack>
             </Container>
