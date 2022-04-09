@@ -9,7 +9,6 @@ import { isNonEmptyString } from '@enterwell/react-form-validation';
 import generalFormComponents from '../../../components/forms/generalFormComponents';
 import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import appSettingsProvider, { ApiDevelopmentUrl, ApiProductionUrl } from '../../../src/services/AppSettingsProvider';
-import { validateFields } from '@enterwell/react-form-validation';
 import { useEffect } from 'react';
 
 const AppThemeVisual = (props: { label: string, theme: string, selected?: boolean | undefined, onSelected: (theme: string) => void }) => {
