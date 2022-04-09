@@ -5,7 +5,7 @@ import CounterIndicator from "../components/pages/landing/CounterIndicator";
 import Cover from "../components/pages/landing/Cover";
 import LinkImage from "../components/shared/ImageLink";
 import { PageFullLayout } from "../components/layouts/PageFullLayout";
-import useInView from "react-cool-inview";
+import { useInView } from "react-cool-inview";
 import dynamic from "next/dynamic";
 import DiscoverVisual from "../components/pages/landing/visuals/DiscoverVisual";
 import Image from "next/image";
