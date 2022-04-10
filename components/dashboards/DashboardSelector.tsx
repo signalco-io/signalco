@@ -40,14 +40,16 @@ function DashboardSelector(props: IDashboardSelectorProps) {
     return (
         <>
             <Stack spacing={{ xs: 0, sm: 2 }} direction="row">
-                <Box>
-                    <Button {...bindTrigger(popupState)}>
-                        <Stack spacing={1} sx={{ pl: 1 }} direction="row" alignItems="center">
-                            <Typography variant="h2" fontWeight={500} fontSize={{ xs: 18, sm: 24 }} noWrap>{currentName}</Typography>
-                            <KeyboardArrowDownIcon sx={{ fontSize: { xs: "28px", sm: "32px" } }} />
-                        </Stack>
-                    </Button>
-                </Box>
+                {dashboards.length > 0 && (
+                    <Box>
+                        <Button {...bindTrigger(popupState)}>
+                            <Stack spacing={1} sx={{ pl: 1 }} direction="row" alignItems="center">
+                                <Typography variant="h2" fontWeight={500} fontSize={{ xs: 18, sm: 24 }} noWrap>{currentName}</Typography>
+                                <KeyboardArrowDownIcon sx={{ fontSize: { xs: "28px", sm: "32px" } }} />
+                            </Stack>
+                        </Button>
+                    </Box>
+                )}
                 {favoriteDashboards.length > 0 && (
                     <Tabs
                         value={0}

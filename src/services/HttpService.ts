@@ -3,6 +3,9 @@ import AppSettingsProvider from "./AppSettingsProvider";
 import { trimStartChar, isAbsoluteUrl } from "../helpers/StringHelpers";
 import CurrentUserProvider from "./CurrentUserProvider";
 import { ObjectDictAny } from "../sharedTypes";
+import Router from "next/router";
+import { parseHash, parseHashParam } from "../hooks/useHashParam";
+import PageNotificationService from "../notifications/PageNotificationService";
 
 export default class HttpService {
   public static tokenFactory?: () => Promise<string>;
@@ -68,9 +71,27 @@ export default class HttpService {
       if (typeof err === 'object' && Object.keys(err as object).find(key => key === 'isAxiosError')) {
         const axiosError = err as AxiosError;
         if (axiosError.response?.status === 403) {
-          console.warn('Token expired.');
-          // CurrentUserProvider.setToken(undefined);
-          // Router.push('/app');
+          console.warn('Token expired.', err);
+          CurrentUserProvider.setToken(undefined);
+
+          // Check if we are already reloading to authenticate
+          const isAuthReload = parseHashParam('authReload');
+          if (isAuthReload === 'true') {
+              // Show notification to manually reload the app
+              PageNotificationService.prompt(
+                  'Authorization failed. Please reload the app to continue...',
+                  "error",
+                  "Reload",
+                  () => {
+                      window.location.replace('/app');
+                  });
+              return;
+          }
+
+          // Reload with auth reload flag
+          const hash = parseHash();
+          hash.set('authReload', 'true');
+          Router.push({ hash: hash.toString() }, undefined, {shallow: false});
         }
         console.warn(`API (${axiosError.response?.status}) - ${axiosError.message}`)
       } else {

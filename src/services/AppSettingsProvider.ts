@@ -1,4 +1,7 @@
-const ApiProductionUrl: string = "https://api.signalco.io/api/";
+import UserSettingsProvider from "./UserSettingsProvider";
+
+export const ApiProductionUrl = "https://api.signalco.io/api/";
+export const ApiDevelopmentUrl = "https://api.signalco.dev/api/"
 
 class AppSettingsProvider {
   public authToken: string | null = null;
@@ -6,7 +9,15 @@ class AppSettingsProvider {
   public apiAddress: string;
 
   constructor() {
-    this.apiAddress = ApiProductionUrl;
+    this.apiAddress = UserSettingsProvider.value(
+        'dev:apiEndpoint',
+        process.env.VERCEL_ENV === 'production'
+            ? ApiProductionUrl
+            : ApiDevelopmentUrl);
+  }
+
+  setApiEndpoint(value: string) {
+    UserSettingsProvider.set('dev:apiEndpoint', value);
   }
 }
 
