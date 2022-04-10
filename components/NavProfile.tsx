@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   ButtonBase,
+  Chip,
   IconButton,
   ListItemIcon,
   ListItemText,
@@ -50,7 +51,11 @@ const UserAvatar = () => {
   const user = CurrentUserProvider.getCurrentUser();
 
   if (user === undefined) {
-    return (<Avatar variant="circular" />);
+    return (
+      <Skeleton variant="circular">
+        <Avatar variant="circular" />
+      </Skeleton>
+    );
   }
 
   let userNameInitials = "";
@@ -64,15 +69,13 @@ const UserAvatar = () => {
   const size = { xs: '36px', sm: '42px', lg: '58px' };
 
   if (user.picture) {
-    return (<Avatar sx={{ width: size, height: size }} src={user.picture} alt={t("UserProfileImageAlt")}>
+    return (<Avatar sx={{ width: size, height: size }} variant="circular" src={user.picture} alt={t("UserProfileImageAlt")}>
       {userNameInitials}
     </Avatar>);
   }
 
   return (
-    <Skeleton variant="circular">
-      <Avatar sx={{ width: size, height: size }}>{userNameInitials}</Avatar>
-    </Skeleton>
+    <Avatar sx={{ width: size, height: size }}>{userNameInitials}</Avatar>
   );
 };
 
@@ -97,11 +100,12 @@ const UserProfileAvatar = () => {
   return (
     <>
       <ButtonBase {...bindTrigger(popupState)} sx={{ width: { xs: undefined, sm: '100%' }, py: 1 }}>
-        <Stack alignItems="center" spacing={2}>
+        <Stack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
           <UserAvatar />
           {!isMobile &&
             <Typography variant="h5" fontWeight={500} sx={{ maxWidth: `${maxWidth}px` }}>{user?.name}</Typography>
           }
+          <Chip color="warning" label="dev" size="small" />
         </Stack>
       </ButtonBase>
       <Menu {...bindMenu(popupState)}>
