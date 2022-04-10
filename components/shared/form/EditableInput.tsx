@@ -38,6 +38,11 @@ function EditableInput(props: IEditableInputProps) {
         setIsEditing(false);
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') handleConfirm();
+        else if (e.key === 'Escape') handleCancel();
+    };
+
     return (
         isEditing
             ? <Input
@@ -49,6 +54,7 @@ function EditableInput(props: IEditableInputProps) {
                 value={editingText}
                 autoFocus
                 onChange={(e) => setEditingText(e.target.value)}
+                onKeyDown={handleKeyDown}
                 endAdornment={
                     <InputAdornment position="end">
                         <IconButton
