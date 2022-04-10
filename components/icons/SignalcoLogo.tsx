@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { AppContext } from '../../pages/_app';
 
-export default function SignalcoLogo({ priority, width, height }: { priority?: boolean, width?: number, height?: number }) {
+export default function SignalcoLogo({ width, height }: { width?: number, height?: number }) {
     if (typeof width === 'undefined' &&
         typeof height === 'undefined') {
         throw new Error("Either height or width must be provided to SignalcoLogo.");

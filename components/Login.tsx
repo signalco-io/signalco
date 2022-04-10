@@ -18,7 +18,7 @@ const Login = () => {
   return (
     <Stack justifyContent="center" direction="row" sx={{ height: '100%' }}>
       <Stack sx={{ px: '20%' }} spacing={2} justifyContent="center" alignItems="center">
-        <SignalcoLogo priority width={256} />
+        <SignalcoLogo width={256} />
         {isLong
           ? <Stack spacing={2}>
             <Typography variant="subtitle2" color="textSecondary" fontWeight="light">Redirecting is taking a bit longer...</Typography>
