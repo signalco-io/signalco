@@ -167,7 +167,10 @@ export default class DashboardsRepository {
         return DashboardsRepository._dashboardsCache;
     };
 
-    static async getAsync(id: string) {
+    static async getAsync(id: string | undefined) {
+        if (typeof id === 'undefined')
+            return undefined;
+
         await DashboardsRepository._cacheDashboardsAsync();
         return DashboardsRepository._dashboardsCache.find(d => d.id === id);
     }
@@ -263,7 +266,7 @@ export default class DashboardsRepository {
             } else {
                 // Wait to load
                 while (DashboardsRepository.isLoading) {
-                    await new Promise(r => setTimeout(r, 10));
+                    await new Promise(r => setTimeout(r, 100));
                 }
             }
         }
