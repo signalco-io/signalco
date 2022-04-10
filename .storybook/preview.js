@@ -25,9 +25,9 @@ export const decorators = [
     withScreenshot,
     Story => (
         <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={theme('dark')}>
+            <ThemeProvider theme={theme('light')}>
                 <CssBaseline />
-                <AppContext.Provider value={{ theme: 'dark' }}>
+                <AppContext.Provider value={{ theme: 'light' }}>
                     <Story />
                 </AppContext.Provider>
             </ThemeProvider>
