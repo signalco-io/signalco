@@ -5,8 +5,15 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import SignalcoLogo from "../icons/SignalcoLogo";
 import RedditIcon from "@mui/icons-material/Reddit";
+import appSettingsProvider from "../../src/services/AppSettingsProvider";
 
-const footerLinks = [
+type FooterSectionType = {
+    header: string,
+    links: { name: string, href: string, developerOnly?: boolean }[]
+    developerOnly?: boolean
+}
+
+const footerLinks: FooterSectionType[] = [
     {
         header: 'Projects',
         links: [
@@ -14,7 +21,8 @@ const footerLinks = [
             { name: "Cloud", href: "https://github.com/signalco-io/cloud" },
             { name: "Station", href: "https://github.com/signalco-io/station" },
             { name: "Companion", href: "https://github.com/signalco-io/companion" },
-        ]
+        ],
+        developerOnly: true
     },
     {
         header: 'Community',
@@ -27,8 +35,9 @@ const footerLinks = [
         links: [
             { name: "Status", href: "https://status.signalco.io" },
             { name: "Design", href: "/design" },
-            { name: "API", href: "/docs/api" },
-            { name: "Storybook", href: "https://storybook.dev.signalco.io" },
+            { name: "API", href: "/docs/api", developerOnly: true },
+            { name: "Storybook", href: "https://storybook.signalco.dev", developerOnly: true },
+            { name: "Storybook (next)", href: "https://next.storybook.signalco.dev", developerOnly: true },
         ]
     },
     {
@@ -66,11 +75,11 @@ export default function Footer() {
                     <Grid container direction="column" spacing={4}>
                         <Grid item>
                             <Grid container justifyContent="space-between" spacing={4}>
-                                {footerLinks.map(section => (
+                                {footerLinks.filter(i => appSettingsProvider.isDeveloper ? true : !i.developerOnly).map(section => (
                                     <Grid item key={section.header} xs={12} sm={6} md={3} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
                                         <Typography variant="h4" color="textSecondary" sx={{ pb: 2 }}>{section.header}</Typography>
                                         <Stack spacing={1}>
-                                            {section.links.map(link => (
+                                            {section.links.filter(l => appSettingsProvider.isDeveloper ? true : !l.developerOnly).map(link => (
                                                 <SLink key={link.name} href={link.href}>{link.name}</SLink>
                                             ))}
                                         </Stack>

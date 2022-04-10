@@ -13,42 +13,46 @@ import { withPerformance } from 'storybook-addon-performance';
 const OriginalNextImage = NextImage.default;
 
 Object.defineProperty(NextImage, 'default', {
-  configurable: true,
-  value: (props) => (
-    <OriginalNextImage {...props} unoptimized />
-  )
+    configurable: true,
+    value: (props) => (
+        <OriginalNextImage {...props} unoptimized />
+    )
 });
 
 // Integrating with the MUI by defining a global decorator
 export const decorators = [
-  withPerformance,
-  withScreenshot,
-  Story => (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme(true)}>
-        <CssBaseline />
-        <AppContext.Provider value={{ theme: 'dark' }}>
-          <Story />
-        </AppContext.Provider>
-      </ThemeProvider>
-    </StyledEngineProvider>
-  )
+    withPerformance,
+    withScreenshot,
+    Story => (
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme('dark')}>
+                <CssBaseline />
+                <AppContext.Provider value={{
+                    theme: 'dark',
+                    setTheme: () => { },
+                    isDark: true
+                }}>
+                    <Story />
+                </AppContext.Provider>
+            </ThemeProvider>
+        </StyledEngineProvider>
+    )
 ];
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
+    actions: { argTypesRegex: "^on[A-Z].*" },
+    controls: {
+        matchers: {
+            color: /(background|color)$/i,
+            date: /Date$/,
+        },
     },
-  },
-  layout: 'fullscreen',
-  docs: {
-    theme: themes.dark
-  },
-  screenshot: {
-    // Put global screenshot parameters(e.g. viewport). See: https://github.com/reg-viz/storycap
-    delay: 1000
-  }
+    layout: 'fullscreen',
+    docs: {
+        theme: themes.dark
+    },
+    screenshot: {
+        // Put global screenshot parameters(e.g. viewport). See: https://github.com/reg-viz/storycap
+        delay: 1000
+    }
 }

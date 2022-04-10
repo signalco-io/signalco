@@ -102,7 +102,7 @@ export default function Cover() {
         <Box sx={{ height: '60vh' }}>
             <Stack alignItems="center" justifyContent="end" sx={{ height: '100%', pb: 8 }}>
                 <Box sx={{ position: 'relative' }}>
-                    <SignalcoLogo priority width={250} />
+                    <SignalcoLogo width={250} />
                     <Box sx={{ transform: { xs: 'scale(50%)', sm: 'scale(80%)', md: 'scale(1)' }, transformOrigin: { xs: '200px -40px', sm: 'center' } }}>
                         {ringConfig.map(ring => (
                             <Ring key={ring.radius} size={ring.radius} logos={ring.logos} />

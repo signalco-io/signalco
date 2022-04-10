@@ -66,7 +66,7 @@ const WidgetCard = (props: IWidgetCardProps) => {
     }
 
     let bgColor;
-    if (appContext.theme === 'dark') {
+    if (appContext.isDark) {
         bgColor = state ? 'action.selected' : undefined;
     } else {
         bgColor = state ? 'background.default' : undefined

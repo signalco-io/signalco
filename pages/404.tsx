@@ -10,7 +10,7 @@ const Image404 = () => {
     const scale = 0.6;
     return (
         <Image
-            src={appContext.theme === 'dark' ? '/images/404-dark.png' : '/images/404-light.png'}
+            src={appContext.isDark ? '/images/404-dark.png' : '/images/404-light.png'}
             width={256 * scale}
             height={256 * scale}
             alt="404 image"

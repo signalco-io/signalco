@@ -12,7 +12,7 @@ const OfflinePage = () => (
         spacing={4}
     >
         <div>
-            <SignalcoLogo priority width={230} />
+            <SignalcoLogo width={230} />
         </div>
         <Typography variant="h1" fontWeight={300} color="textSecondary">You are offline...</Typography>
     </Stack>

@@ -21,7 +21,7 @@ const withMDX = require('@next/mdx')({
 module.exports = withSentryConfig(withBundleAnalyzer(withPWA(withMDX({
     reactStrictMode: true,
     swcMinify: true,
-    pageExtensions: ['tsx', 'mdx'],
+    pageExtensions: ['tsx'],
     pwa: {
         dest: 'public',
         disable: process.env.NODE_ENV === 'development',

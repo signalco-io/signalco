@@ -10,6 +10,8 @@ import { snapCenterToCursor } from "@dnd-kit/modifiers";
 import { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
 import { observer } from "mobx-react-lite";
 import { runInAction } from "mobx";
+import { Button, Stack, Typography } from "@mui/material";
+import Image from 'next/image';
 
 interface IDragableWidgetProps extends IWidgetProps {
     id: string
@@ -52,8 +54,8 @@ function DragableWidget(props: IDragableWidgetProps) {
     );
 }
 
-function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean }) {
-    const { dashboard, isEditing } = props;
+function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, onAddWidget: () => void }) {
+    const { dashboard, isEditing, onAddWidget } = props;
     const [numberOfColumns, setNumberOfColumns] = useState(4);
 
     const widgetSpacing = 1;
@@ -112,6 +114,21 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean }
     }
 
     console.debug("Rendering DashboardView")
+
+    if (widgets.length <= 0) {
+        return (
+            <Stack alignItems="center" justifyContent="center">
+                <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
+                    <Stack maxWidth={320} spacing={4} alignItems="center" justifyContent="center">
+                        <Image priority width={280} height={213} alt="No Dashboards placeholder" src="/assets/placeholders/placeholder-no-widgets.svg" />
+                        <Typography variant="h1">No Widgets</Typography>
+                        <Typography textAlign="center" color="textSecondary">Dashboard is a bit empty.<br />Start by adding a widget from widget store.</Typography>
+                        <Button variant="contained" onClick={onAddWidget}>Add Widget</Button>
+                    </Stack>
+                </Stack>
+            </Stack>
+        );
+    }
 
     return (
         <Box sx={{

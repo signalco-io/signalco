@@ -67,6 +67,11 @@ const Dashboards = () => {
         setShowWidgetStore(false);
     };
 
+    const handleAddWidgetPlaceholder = () => {
+        setIsEditing(true);
+        setShowWidgetStore(true);
+    }
+
     console.debug("Rendering Dashboards");
 
     return (
@@ -94,12 +99,13 @@ const Dashboards = () => {
                                 ? (
                                     <DashboardView
                                         dashboard={selectedDashboard.item}
-                                        isEditing={isEditing} />
+                                        isEditing={isEditing}
+                                        onAddWidget={handleAddWidgetPlaceholder} />
                                 ) : (
                                     <Stack alignItems="center" justifyContent="center">
                                         <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
                                             <Stack maxWidth={280} spacing={4} alignItems="center" justifyContent="center">
-                                                <Image width={160} height={140} alt="No Dashboards placeholder" src="/assets/placeholders/placeholder-no-dashboards.svg" />
+                                                <Image priority width={280} height={213} alt="No Dashboards placeholder" src="/assets/placeholders/placeholder-no-dashboards.svg" />
                                                 <Typography variant="h1">No Dashboards</Typography>
                                                 <Typography textAlign="center" color="textSecondary">You don’t have any dashboards. Create a dashboard to get started.</Typography>
                                                 <Button variant="contained" onClick={handleNewDashboard}>New Dashboard</Button>

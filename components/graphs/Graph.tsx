@@ -45,7 +45,7 @@ const GraphTimeLine = (props: IGraphProps) => {
     const { label, data, durationMs, width, startDateTime } = props;
     const appContext = useContext(AppContext);
 
-    const isDarkTheme = appContext.theme === 'dark';
+    const isDarkTheme = appContext.isDark;
     const accentTrue = lightBlue[isDarkTheme ? 900 : 500];
     const accentFalse = deepOrange[isDarkTheme ? 800 : 400];
 
@@ -176,7 +176,7 @@ const GraphArea = (props: IGraphProps) => {
             <Area
                 type="basis"
                 dataKey={yKey}
-                fill={appContext.theme === "dark" ? "#ffffff" : "#000000"}
+                fill={appContext.isDark ? "#ffffff" : "#000000"}
                 fillOpacity={0.1}
                 stroke="#aeaeae"
                 strokeWidth={1} />

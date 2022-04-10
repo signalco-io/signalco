@@ -7,8 +7,8 @@ const LightBulbVisual = (props: { state: boolean, size: number }) => {
 
     const isActive = props.state;
     const bulbColor = isActive ? "#FFDD66" : "#c4c4c4";
-    const edgeColor = appContext.theme === 'dark' ? "#fff" : "#333";
-    const glossColor = appContext.theme === 'dark' ? "#000" : "#fff";
+    const edgeColor = appContext.isDark ? "#fff" : "#333";
+    const glossColor = appContext.isDark ? "#000" : "#fff";
 
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className={styles.root} width={props.size * 1.4} height={props.size * 1.4} fill="none" viewBox="0 0 78 94">
