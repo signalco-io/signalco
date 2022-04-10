@@ -24,20 +24,18 @@ export const decorators = [
     withPerformance,
     withScreenshot,
     Story => (
-        <AppContext.Provider value={{
-            theme: 'dark',
-            setTheme: () => { },
-            isDark: true
-        }}>
-            <StyledEngineProvider injectFirst>
-                <ThemeProvider theme={theme('dark')}>
-                    <CssBaseline />
-                    <AppContext.Provider value={{ theme: 'dark' }}>
-                        <Story />
-                    </AppContext.Provider>
-                </ThemeProvider>
-            </StyledEngineProvider>
-        </AppContext.Provider>
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme('dark')}>
+                <CssBaseline />
+                <AppContext.Provider value={{
+                    theme: 'dark',
+                    setTheme: () => { },
+                    isDark: true
+                }}>
+                    <Story />
+                </AppContext.Provider>
+            </ThemeProvider>
+        </StyledEngineProvider>
     )
 ];
 
