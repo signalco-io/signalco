@@ -1,13 +1,19 @@
 import React, { memo } from 'react';
-import Link from 'next/link';
-import { Checkbox, Paper, Typography, TableBody, TableCell, TableHead, TableRow, Divider } from '@mui/material';
+import NextLink from 'next/link';
+import { Checkbox, Paper, Typography, TableBody, TableCell, TableHead, TableRow, Divider, Link } from '@mui/material';
 import MdxPageLayout from './MdxPageLayout';
 
 const headingTopSpacing = 4;
 const headingBottomSpacing = 2;
 
 const components: any = {
-    a: Link,
+    a: (() => {
+        const A = (props: any) => (
+            <NextLink href={props.href} passHref>
+                <Link >{props.children}</Link>
+            </NextLink>);
+        return memo(A);
+    })(),
     p: (() => {
         const P = (props: any) => <Typography sx={{ py: 1 }} gutterBottom {...props} />;
         return memo(P);

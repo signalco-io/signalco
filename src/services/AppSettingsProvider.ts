@@ -8,12 +8,15 @@ class AppSettingsProvider {
 
   public apiAddress: string;
 
+  public isDeveloper: boolean;
+
   constructor() {
+    this.isDeveloper = process.env.VERCEL_ENV !== 'production';
     this.apiAddress = UserSettingsProvider.value(
         'dev:apiEndpoint',
-        process.env.VERCEL_ENV === 'production'
-            ? ApiProductionUrl
-            : ApiDevelopmentUrl);
+        this.isDeveloper
+            ? ApiDevelopmentUrl
+            : ApiProductionUrl);
   }
 
   setApiEndpoint(value: string) {
