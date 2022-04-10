@@ -53,6 +53,9 @@ const theme = (isDark: boolean) => {
             "&.MuiButton-outlined:hover": {
               backgroundColor: isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.12)',
               border: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)'
+            },
+            "&.MuiButton-contained:hover": {
+              backgroundColor: isDark ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.7)'
             }
           },
         }
