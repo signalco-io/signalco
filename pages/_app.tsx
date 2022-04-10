@@ -8,9 +8,9 @@ import "../styles/global.scss";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from '../src/createEmotionCache';
 import { SnackbarProvider } from 'notistack';
-import LocalStorageService from "../src/services/LocalStorageService";
 import { ChildrenProps } from "../src/sharedTypes";
 import IAppContext from "../src/appContext/IAppContext";
+import UserSettingsProvider from "../src/services/UserSettingsProvider";
 
 const isServerSide = typeof window === 'undefined';
 const clientSideEmotionCache = createEmotionCache();
@@ -26,7 +26,8 @@ interface PageWithMetadata extends React.FunctionComponent {
 
 const appContextDefaultState: IAppContext = {
   theme: 'light',
-  setTheme: () => { }
+  setTheme: () => { },
+  isDark: false
 };
 
 export const AppContext = React.createContext<IAppContext>(appContextDefaultState);
@@ -34,10 +35,11 @@ export const AppContext = React.createContext<IAppContext>(appContextDefaultStat
 export default function App(props: CustomAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps, err } = props;
   const handleThemeChange = (theme: AppTheme) => {
-    LocalStorageService.setItem("theme", theme);
+    UserSettingsProvider.set("theme", theme);
     setAppContext({
       ...appContextState,
-      theme: theme
+      theme: theme,
+      isDark: theme === 'dark' || theme === 'darkDimmed'
     });
   };
 
@@ -49,10 +51,10 @@ export default function App(props: CustomAppProps) {
   React.useEffect(() => {
     // Apply theme to document
     if (!isServerSide) {
-      const themeMode = LocalStorageService.getItemOrDefault("theme", window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
+      const themeMode = UserSettingsProvider.value<AppTheme>("theme", window.matchMedia('(prefers-color-scheme: dark)').matches ? "darkDimmed" : "light");
       document.documentElement.style.setProperty("color-scheme", themeMode);
       if (themeMode !== 'light') {
-        setAppContext({ ...appContextState, theme: 'dark' });
+        handleThemeChange(themeMode);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -95,7 +97,7 @@ export default function App(props: CustomAppProps) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <ThemeProvider theme={theme(appContextState.theme === 'dark')}>
+      <ThemeProvider theme={theme(appContextState.theme)}>
         <SnackbarProvider maxSnack={3}>
           <CssBaseline />
           <AppContext.Provider value={appContextState}>

@@ -4,11 +4,11 @@ import { AppContext } from '../../../../pages/_app';
 const DiscoverVisual = () => {
     const appContext = useContext(AppContext);
 
-    const connectionsColor = appContext.theme === 'dark' ? "#555" : "#CECECE";
-    const pointsColor = appContext.theme === 'dark' ? "#777" : "#999";
-    const successPointColor = appContext.theme === 'dark' ? "#537B63" : "#AEFCCD";
-    const successIconColor = appContext.theme === 'dark' ? "#26E773" : "#1FC160";
-    const backgroundColor = appContext.theme === 'dark' ? '#000' : "#fff";
+    const connectionsColor = appContext.isDark ? "#555" : "#CECECE";
+    const pointsColor = appContext.isDark ? "#777" : "#999";
+    const successPointColor = appContext.isDark ? "#537B63" : "#AEFCCD";
+    const successIconColor = appContext.isDark ? "#26E773" : "#1FC160";
+    const backgroundColor = appContext.isDark ? '#000' : "#fff";
 
     return (
         <svg width="616" height="616" viewBox="0 0 616 616" fill="none" xmlns="http://www.w3.org/2000/svg">

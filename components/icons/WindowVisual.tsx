@@ -54,7 +54,7 @@ const WindowVisual = (props: { shadePerc: number, size: number, dateAndTime?: Da
 
     const shadePosition = 1 + (perc * 64);
 
-    const edgeColor = appContext.theme === 'dark' ? "#fff" : "#000";
+    const edgeColor = appContext.isDark ? "#fff" : "#000";
 
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className={styles.root} width={props.size * 1.4} height={props.size * 1.4} fill="none" viewBox="0 0 81 104">

@@ -9,7 +9,7 @@ function Globe() {
     const rect = useWindowRect(typeof window !== 'undefined' ? window : null);
     const width = Math.min(1100, rect?.width ?? 0);
     const height = width;
-    const isDark = appContext.theme === 'dark';
+    const isDark = appContext.isDark;
 
     useEffect(() => {
         let phi = 4.1;
