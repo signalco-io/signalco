@@ -1,6 +1,8 @@
 import { red } from "@mui/material/colors";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
+export type AppTheme = "dark" | "light";
+
 const componentsTopLevelBorder = {
   styleOverrides: {
     root: {
@@ -93,15 +95,12 @@ const theme = (isDark: boolean) => {
       },
       h3: {
         fontSize: "1.3rem",
-        fontWeight: 400,
       },
       h4: {
         fontSize: "1.2rem",
-        fontWeight: 400,
       },
       h5: {
         fontSize: "1.1rem",
-        fontWeight: 400,
       },
       h6: {
         fontSize: "1rem",

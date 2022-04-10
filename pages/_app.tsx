@@ -3,13 +3,14 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import theme from "../src/theme";
+import theme, { AppTheme } from "../src/theme";
 import "../styles/global.scss";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from '../src/createEmotionCache';
 import { SnackbarProvider } from 'notistack';
 import LocalStorageService from "../src/services/LocalStorageService";
 import { ChildrenProps } from "../src/sharedTypes";
+import IAppContext from "../src/appContext/IAppContext";
 
 const isServerSide = typeof window === 'undefined';
 const clientSideEmotionCache = createEmotionCache();
@@ -23,20 +24,16 @@ interface PageWithMetadata extends React.FunctionComponent {
   layout: React.FunctionComponent | undefined
 };
 
-export interface IAppContext {
-  theme: string,
-  setTheme?: (theme: string) => void;
-}
-
-const appContextDefaultState = {
-  theme: 'light'
+const appContextDefaultState: IAppContext = {
+  theme: 'light',
+  setTheme: () => { }
 };
 
 export const AppContext = React.createContext<IAppContext>(appContextDefaultState);
 
 export default function App(props: CustomAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps, err } = props;
-  const handleThemeChange = (theme: string) => {
+  const handleThemeChange = (theme: AppTheme) => {
     LocalStorageService.setItem("theme", theme);
     setAppContext({
       ...appContextState,
