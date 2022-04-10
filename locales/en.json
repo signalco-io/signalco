@@ -28,6 +28,7 @@
             "Theme": "Theme",
             "Themes": {
                 "Dark": "Dark",
+                "DarkDimmed": "Dark Dimmed",
                 "Light": "Light"
             },
             "Language": "Language",

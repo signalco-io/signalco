@@ -120,7 +120,7 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
             <Stack alignItems="center" justifyContent="center">
                 <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
                     <Stack maxWidth={320} spacing={4} alignItems="center" justifyContent="center">
-                        <Image width={280} height={213} alt="No Dashboards placeholder" src="/assets/placeholders/placeholder-no-widgets.svg" />
+                        <Image priority width={280} height={213} alt="No Dashboards placeholder" src="/assets/placeholders/placeholder-no-widgets.svg" />
                         <Typography variant="h1">No Widgets</Typography>
                         <Typography textAlign="center" color="textSecondary">Dashboard is a bit empty.<br />Start by adding a widget from widget store.</Typography>
                         <Button variant="contained" onClick={onAddWidget}>Add Widget</Button>

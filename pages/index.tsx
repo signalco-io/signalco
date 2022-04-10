@@ -133,7 +133,7 @@ const PlaySection = () => {
 
   return (
     <StepContent title="Play" subtitle="Here are some of our favorite ways you can automate your life"
-      image={<Image layout='fixed' src={appContext.theme === 'dark' ? "/images/playpitch-dark.png" : "/images/playpitch.png"} alt="Play" quality={100} width={511} height={684} />}
+      image={<Image layout='fixed' src={appContext.isDark ? "/images/playpitch-dark.png" : "/images/playpitch.png"} alt="Play" quality={100} width={511} height={684} />}
       imageContainerHeight={684 + 64}
       imageContainerStyles={{ position: 'absolute', top: 0, right: 0, width: '511px', height: '684px', marginTop: '64px' }}>
       <FeatureDescription

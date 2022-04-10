@@ -10,11 +10,27 @@ import generalFormComponents from '../../../components/forms/generalFormComponen
 import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import appSettingsProvider, { ApiDevelopmentUrl, ApiProductionUrl } from '../../../src/services/AppSettingsProvider';
 import { useEffect } from 'react';
+import { AppTheme } from '../../../src/theme';
 
-const AppThemeVisual = (props: { label: string, theme: string, selected?: boolean | undefined, onSelected: (theme: string) => void }) => {
+const AppThemeVisual = (props: { label: string, theme: AppTheme, selected?: boolean | undefined, onSelected: (theme: AppTheme) => void }) => {
     const { label, theme, selected, onSelected } = props;
-    const backgroundColor = theme === 'dark' ? 'black' : 'white';
-    const textColor = theme === 'dark' ? 'white' : 'black';
+
+    let textColor;
+    let backgroundColor;
+    switch (theme) {
+        case 'dark':
+            backgroundColor = 'black';
+            textColor = 'white';
+            break;
+        case 'darkDimmed':
+            backgroundColor = 'rgba(32, 31, 30, 1)'
+            textColor = 'white';
+            break;
+        default:
+            backgroundColor = 'white';
+            textColor = 'black';
+            break;
+    }
 
     return (
         <Button sx={{ bgcolor: selected ? 'action.selected' : undefined }} onClick={() => onSelected(theme)}>
@@ -60,14 +76,10 @@ const SettingsIndex = () => {
     const { t } = useLocale("App", "Settings");
     const themes = useLocale("App", "Settings", "Themes");
     const locales = useLocale("App", "Locales");
-    const isDarkMode = appContext.theme === 'dark';
     const [userLocale, setUserLocale] = useUserSetting<string>("locale", "en");
 
-    const handleDarkModeChange = (theme: string) => {
-        const newIsDarkMode = theme === 'dark';
-        if (appContext.setTheme) {
-            appContext.setTheme(newIsDarkMode ? "dark" : 'light');
-        }
+    const handleDarkModeChange = (theme: AppTheme) => {
+        appContext.setTheme(theme);
     };
 
     const handleLocaleChange = (event: SelectChangeEvent) => {
@@ -134,8 +146,9 @@ const SettingsIndex = () => {
                     <SettingsSection header={t("LookAndFeel")}>
                         <SettingsItem label={t("Theme")}>
                             <Stack spacing={1} direction="row">
-                                <AppThemeVisual label={themes.t("Dark")} theme="dark" selected={isDarkMode} onSelected={handleDarkModeChange} />
-                                <AppThemeVisual label={themes.t("Light")} theme="light" selected={!isDarkMode} onSelected={handleDarkModeChange} />
+                                <AppThemeVisual label={themes.t("Dark")} theme="dark" selected={appContext.theme === 'dark'} onSelected={handleDarkModeChange} />
+                                <AppThemeVisual label={themes.t("DarkDimmed")} theme="darkDimmed" selected={appContext.theme === 'darkDimmed'} onSelected={handleDarkModeChange} />
+                                <AppThemeVisual label={themes.t("Light")} theme="light" selected={appContext.theme === 'light'} onSelected={handleDarkModeChange} />
                             </Stack>
                         </SettingsItem>
                     </SettingsSection>

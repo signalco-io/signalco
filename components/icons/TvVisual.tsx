@@ -7,8 +7,8 @@ const TvVisual = (props: { state: boolean, size: number }) => {
 
     const isActive = props.state;
     const screenColor = isActive ? "#378DBD" : "#333";
-    const edgeColor = appContext.theme === 'dark' ? "#fff" : "#000";
-    const shadowColor = appContext.theme === 'dark' ? "#000" : "#fff";
+    const edgeColor = appContext.isDark ? "#fff" : "#000";
+    const shadowColor = appContext.isDark ? "#000" : "#fff";
 
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className={styles.root} width={props.size * 1.6} height={props.size * 1.6} fill="none" viewBox="0 0 103 77">

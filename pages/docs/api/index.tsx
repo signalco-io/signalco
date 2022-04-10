@@ -499,7 +499,7 @@ const Actions = (props: ActionsProps) => {
                             <Editor
                                 height="300px"
                                 language="json"
-                                theme={appContext.theme === 'dark' ? "signalco-dark" : 'signalco-light'}
+                                theme={appContext.isDark ? "signalco-dark" : 'signalco-light'}
                                 options={{
                                     lineNumbers: "off",
                                     minimap: { enabled: false }
@@ -521,7 +521,7 @@ const Actions = (props: ActionsProps) => {
                         <Editor
                             height="200px"
                             language="json"
-                            theme={appContext.theme === 'dark' ? "signalco-dark" : 'signalco-light'}
+                            theme={appContext.isDark ? "signalco-dark" : 'signalco-light'}
                             options={{
                                 lineNumbers: "off",
                                 minimap: { enabled: false },
