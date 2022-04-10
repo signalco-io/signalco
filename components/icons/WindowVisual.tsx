@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../pages/_app';
-import { hexToRgb } from '../../src/helpers/StringHelpers';
+import { colorToRgb } from '../../src/helpers/StringHelpers';
 import styles from './WindowVisual.module.scss';
 
 var skySunnyGrads = [
@@ -46,7 +46,7 @@ const WindowVisual = (props: { shadePerc: number, size: number, dateAndTime?: Da
 
     const gradData = skySunnyGrads[hours];
     const cssSkyGradStops = gradData.map((stop, index) => <stop key={index} offset={stop.position / 100} stopColor={`#${stop.color}`} />)
-    const castColor = hexToRgb(gradData[gradData.length - 1].color);
+    const castColor = colorToRgb(gradData[gradData.length - 1].color);
     const castR = (castColor?.r || 0) / 255;
     const castG = (castColor?.g || 0) / 255;
     const castB = (castColor?.b || 0) / 255;

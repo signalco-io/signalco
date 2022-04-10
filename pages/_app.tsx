@@ -51,7 +51,7 @@ export default function App(props: CustomAppProps) {
   React.useEffect(() => {
     // Apply theme to document
     if (!isServerSide) {
-      const themeMode = UserSettingsProvider.value<AppTheme>("theme", window.matchMedia('(prefers-color-scheme: dark)').matches ? "darkDimmed" : "light");
+      const themeMode = UserSettingsProvider.value<AppTheme>("theme", window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
       document.documentElement.style.setProperty("color-scheme", themeMode);
       if (themeMode !== 'light') {
         handleThemeChange(themeMode);
