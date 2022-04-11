@@ -50,7 +50,7 @@
         "mobx-react-lite": "3.3.0",
         "monaco-editor": "^0.33.0",
         "next": "12.1.4",
-        "next-pwa": "5.4.7",
+        "next-pwa": "5.5.0",
         "next-secure-headers": "2.2.0",
         "notistack": "2.0.3",
         "react": "17.0.2",
