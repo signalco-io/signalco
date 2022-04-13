@@ -30,12 +30,14 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ```raw
 NEXT_PUBLIC_HCAPTCHA_SITE_KEY=435dd50a-4830-483a-862c-d6faa6dacea7
 HCAPTCHA_SECRET_KEY=0x67207bf1a725c630e590ee15ef2a099ab7272d54
+NEXT_PUBLIC_APP_ENV=development
 ```
 
 | Variable | Development | Production |
 |----------|-------------|------------|
 | `NEXT_PUBLIC_HCAPTCHA_SITE_KEY` | Optional | Required |
 | `HCAPTCHA_SECRET_KEY` | Optional | Required |
+| `NEXT_PUBLIC_APP_ENV` | Optional | Required `production` |
 
 ## Deploy
 
@@ -47,13 +49,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 Staging (branch `next`):
 
-- [next.signalco.io](https://next.signalco.io)
-- [next.storybook.dev.signalco.io](https://next.storybook.dev.signalco.io)
+- [signalco.dev](https://next.signalco.io)
+- [next.storybook.signalco.dev](https://next.storybook.dev.signalco.io)
 
 Production (branch `main`):
 
 - [signalco.io](https://www.signalco.io)
-- [storybook.dev.signalco.io](https://storybook.dev.signalco.io)
+- [storybook.signalco.dev](https://storybook.dev.signalco.io)
 
 ## More info
 
