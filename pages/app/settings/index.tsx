@@ -1,16 +1,17 @@
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
 import { Box, Button, Chip, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
-import React, { ReactNode, useContext } from 'react';
+import React, { ReactNode, useContext, useMemo } from 'react';
 import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import { AppContext } from '../../_app';
-import { isNonEmptyString } from '@enterwell/react-form-validation';
+import { isNonEmptyString, isNotNull } from '@enterwell/react-form-validation';
 import generalFormComponents from '../../../components/forms/generalFormComponents';
 import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import appSettingsProvider, { ApiDevelopmentUrl, ApiProductionUrl } from '../../../src/services/AppSettingsProvider';
 import { useEffect } from 'react';
 import { AppTheme } from '../../../src/theme';
+import CurrentUserProvider from '../../../src/services/CurrentUserProvider';
 
 const AppThemeVisual = (props: { label: string, theme: AppTheme, selected?: boolean | undefined, onSelected: (theme: AppTheme) => void }) => {
     const { label, theme, selected, onSelected } = props;
@@ -71,12 +72,49 @@ const SettingsSection = (props: { children: ReactNode, header: string }) => (
     </Stack>
 );
 
+const settingsFormComponents: FormBuilderComponents = {
+    fieldWrapper: (props) => <SettingsItem {...props} />,
+    selectApiEndpoint: ({ onChange, label, helperText, error, ...rest }) => (
+        <FormControl variant="filled" error={error}>
+            <InputLabel>{label}</InputLabel>
+            <Select onChange={(e) => onChange && onChange(e.target.value)} {...rest}>
+                <MenuItem value={ApiProductionUrl}>
+                    <Stack direction="row" alignItems="center" spacing={1}>
+                        <Chip color="info" label="prod" size="small" />
+                        <Typography>{ApiProductionUrl}</Typography>
+                    </Stack>
+                </MenuItem>
+                <MenuItem value={ApiDevelopmentUrl}>
+                    <Stack direction="row" alignItems="center" spacing={1}>
+                        <Chip color="warning" label="dev" size="small" />
+                        <Typography>{ApiDevelopmentUrl}</Typography>
+                    </Stack>
+                </MenuItem>
+            </Select>
+            <FormHelperText error={error}>{helperText}</FormHelperText>
+        </FormControl>
+    ),
+    selectTimeFormat: ({ onChange, label, helperText, error, ...rest }) => (
+        // <EwSelect variant="filled" label="Time format" fullWidth options={[{ value: 0, label: '12h' }, { value: 1, label: '24h' }]} />
+        <FormControl variant="filled" error={error}>
+            <InputLabel>{label}</InputLabel>
+            <Select onChange={(e) => onChange && onChange(e.target.value)} {...rest}>
+                <MenuItem value={'0'}>12-hour</MenuItem>
+                <MenuItem value={'1'}>24-hour</MenuItem>
+            </Select>
+            <FormHelperText error={error}>{helperText}</FormHelperText>
+        </FormControl>
+    )
+};
+
 const SettingsIndex = () => {
     const appContext = useContext(AppContext);
     const { t } = useLocale("App", "Settings");
     const themes = useLocale("App", "Settings", "Themes");
     const locales = useLocale("App", "Locales");
     const [userLocale, setUserLocale] = useUserSetting<string>("locale", "en");
+    const [userNickName, setUserNickName] = useUserSetting<string>('nickname', CurrentUserProvider.getCurrentUser()?.name ?? '');
+    const [userTimeFormat, setUserTimeFormat] = useUserSetting<string>('timeFormat', '1');
 
     const handleDarkModeChange = (theme: AppTheme) => {
         appContext.setTheme(theme);
@@ -88,35 +126,12 @@ const SettingsIndex = () => {
     };
 
     const userSettingsForm = {
-        nickname: useFormField('', isNonEmptyString, 'string', t("Nickname"))
+        nickname: useFormField(userNickName, isNonEmptyString, 'string', t("Nickname")),
+        timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', "Time format", { receiveEvent: false })
     };
 
     const developerSettingsForm = {
         apiEndpoint: useFormField(appSettingsProvider.apiAddress, isNonEmptyString, 'selectApiEndpoint', t("ApiEndpoint"), { receiveEvent: false })
-    };
-
-    const settingsFormComponents: FormBuilderComponents = {
-        fieldWrapper: (props) => <SettingsItem {...props} />,
-        selectApiEndpoint: ({ onChange, label, helperText, error, ...rest }) => (
-            <FormControl variant="filled" error={error}>
-                <InputLabel>{label}</InputLabel>
-                <Select onChange={(e) => onChange && onChange(e.target.value)} {...rest}>
-                    <MenuItem value={ApiProductionUrl}>
-                        <Stack direction="row" alignItems="center" spacing={1}>
-                            <Chip color="info" label="prod" size="small" />
-                            <Typography>{ApiProductionUrl}</Typography>
-                        </Stack>
-                    </MenuItem>
-                    <MenuItem value={ApiDevelopmentUrl}>
-                        <Stack direction="row" alignItems="center" spacing={1}>
-                            <Chip color="warning" label="dev" size="small" />
-                            <Typography>{ApiDevelopmentUrl}</Typography>
-                        </Stack>
-                    </MenuItem>
-                </Select>
-                <FormHelperText error={error}>{helperText}</FormHelperText>
-            </FormControl >
-        ),
     };
 
     useEffect(() => {
@@ -127,8 +142,22 @@ const SettingsIndex = () => {
         }
     }, [developerSettingsForm.apiEndpoint]);
 
+    useEffect(() => {
+        if (!userSettingsForm.nickname.error) {
+            setUserNickName(userSettingsForm.nickname.value?.trim() || undefined);
+        }
+    }, [setUserNickName, userSettingsForm.nickname]);
+
+    useEffect(() => {
+        if (!userSettingsForm.timeFromat.error) {
+            setUserTimeFormat(userSettingsForm.timeFromat.value?.trim() || undefined);
+        }
+    }, [setUserTimeFormat, userSettingsForm.timeFromat]);
+
+    const components = useMemo(() => ({ ...generalFormComponents, ...settingsFormComponents }), []);
+
     return (
-        <FormBuilderProvider components={{ ...generalFormComponents, ...settingsFormComponents }}>
+        <FormBuilderProvider components={components}>
             <Container sx={{ p: 2 }}>
                 <Stack spacing={4}>
                     <SettingsSection header={t("General")}>

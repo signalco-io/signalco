@@ -37,6 +37,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import useLocale from "../src/hooks/useLocale";
 import CurrentUserProvider from "../src/services/CurrentUserProvider";
 import LocalStorageService from "../src/services/LocalStorageService";
+import appSettingsProvider from "../src/services/AppSettingsProvider";
+import useUserSetting from "../src/hooks/useUserSetting";
 
 const navItems = [
   { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon },
@@ -90,6 +92,7 @@ const UserProfileAvatar = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const user = CurrentUserProvider.getCurrentUser();
+  const [userNickName] = useUserSetting<string>('nickname', user?.name ?? '');
 
   const logout = () => {
     LocalStorageService.setItem('token', undefined);
@@ -103,9 +106,9 @@ const UserProfileAvatar = () => {
         <Stack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
           <UserAvatar />
           {!isMobile &&
-            <Typography variant="h5" fontWeight={500} sx={{ maxWidth: `${maxWidth}px` }}>{user?.name}</Typography>
+            <Typography variant="h5" fontWeight={500} sx={{ maxWidth: `${maxWidth}px` }}>{userNickName}</Typography>
           }
-          <Chip color="warning" label="dev" size="small" />
+          {appSettingsProvider.isDeveloper && <Chip color="warning" label="dev" size="small" />}
         </Stack>
       </ButtonBase>
       <Menu {...bindMenu(popupState)}>
