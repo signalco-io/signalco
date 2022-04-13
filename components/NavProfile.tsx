@@ -37,6 +37,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import useLocale from "../src/hooks/useLocale";
 import CurrentUserProvider from "../src/services/CurrentUserProvider";
 import LocalStorageService from "../src/services/LocalStorageService";
+import appSettingsProvider from "../src/services/AppSettingsProvider";
 
 const navItems = [
   { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon },
@@ -105,7 +106,7 @@ const UserProfileAvatar = () => {
           {!isMobile &&
             <Typography variant="h5" fontWeight={500} sx={{ maxWidth: `${maxWidth}px` }}>{user?.name}</Typography>
           }
-          <Chip color="warning" label="dev" size="small" />
+          {appSettingsProvider.isDeveloper && <Chip color="warning" label="dev" size="small" />}
         </Stack>
       </ButtonBase>
       <Menu {...bindMenu(popupState)}>
