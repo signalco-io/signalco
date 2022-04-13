@@ -3,7 +3,7 @@ import UserSettingsProvider from "./UserSettingsProvider";
 export const ApiProductionUrl = "https://api.signalco.io/api/";
 export const ApiDevelopmentUrl = "https://api.signalco.dev/api/"
 
-const ENV = process.env.VERCEL_ENV;
+const ENV = process.env.NEXT_PUBLIC_APP_ENV;
 
 class AppSettingsProvider {
   public authToken: string | null = null;
