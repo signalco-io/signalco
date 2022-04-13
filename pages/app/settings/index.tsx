@@ -5,7 +5,7 @@ import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import { AppContext } from '../../_app';
-import { isNonEmptyString } from '@enterwell/react-form-validation';
+import { isNonEmptyString, isNotNull } from '@enterwell/react-form-validation';
 import generalFormComponents from '../../../components/forms/generalFormComponents';
 import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import appSettingsProvider, { ApiDevelopmentUrl, ApiProductionUrl } from '../../../src/services/AppSettingsProvider';
@@ -92,8 +92,19 @@ const settingsFormComponents: FormBuilderComponents = {
                 </MenuItem>
             </Select>
             <FormHelperText error={error}>{helperText}</FormHelperText>
-        </FormControl >
+        </FormControl>
     ),
+    selectTimeFormat: ({ onChange, label, helperText, error, ...rest }) => (
+        // <EwSelect variant="filled" label="Time format" fullWidth options={[{ value: 0, label: '12h' }, { value: 1, label: '24h' }]} />
+        <FormControl variant="filled" error={error}>
+            <InputLabel>{label}</InputLabel>
+            <Select onChange={(e) => onChange && onChange(e.target.value)} {...rest}>
+                <MenuItem value={'0'}>12-hour</MenuItem>
+                <MenuItem value={'1'}>24-hour</MenuItem>
+            </Select>
+            <FormHelperText error={error}>{helperText}</FormHelperText>
+        </FormControl>
+    )
 };
 
 const SettingsIndex = () => {
@@ -103,6 +114,7 @@ const SettingsIndex = () => {
     const locales = useLocale("App", "Locales");
     const [userLocale, setUserLocale] = useUserSetting<string>("locale", "en");
     const [userNickName, setUserNickName] = useUserSetting<string>('nickname', CurrentUserProvider.getCurrentUser()?.name ?? '');
+    const [userTimeFormat, setUserTimeFormat] = useUserSetting<string>('timeFormat', '1');
 
     const handleDarkModeChange = (theme: AppTheme) => {
         appContext.setTheme(theme);
@@ -114,7 +126,8 @@ const SettingsIndex = () => {
     };
 
     const userSettingsForm = {
-        nickname: useFormField(userNickName, isNonEmptyString, 'string', t("Nickname"))
+        nickname: useFormField(userNickName, isNonEmptyString, 'string', t("Nickname")),
+        timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', "Time format", { receiveEvent: false })
     };
 
     const developerSettingsForm = {
@@ -134,6 +147,12 @@ const SettingsIndex = () => {
             setUserNickName(userSettingsForm.nickname.value?.trim() || undefined);
         }
     }, [setUserNickName, userSettingsForm.nickname]);
+
+    useEffect(() => {
+        if (!userSettingsForm.timeFromat.error) {
+            setUserTimeFormat(userSettingsForm.timeFromat.value?.trim() || undefined);
+        }
+    }, [setUserTimeFormat, userSettingsForm.timeFromat]);
 
     const components = useMemo(() => ({ ...generalFormComponents, ...settingsFormComponents }), []);
 
