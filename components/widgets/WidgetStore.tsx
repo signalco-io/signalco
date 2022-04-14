@@ -47,6 +47,12 @@ const availableWidgets = [
         name: 'Checklist',
         description: 'Keep track of your tasks.',
         preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Checklist.png',
+    },
+    {
+        type: 'button',
+        name: 'Button',
+        description: 'Execute the action.',
+        preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Button.png',
     }
 ];
 

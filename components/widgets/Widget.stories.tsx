@@ -125,3 +125,13 @@ WidgetChecklist.args = {
     }
 };
 WidgetChecklist.parameters = screenshotParams;
+
+export const WidgetButton = Template.bind({});
+WidgetButton.args = {
+    type: 'button',
+    config: {
+        columns: 1,
+        rows: 1
+    }
+};
+WidgetButton.parameters = screenshotParams;
