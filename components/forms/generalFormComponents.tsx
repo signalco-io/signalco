@@ -2,7 +2,6 @@ import { FormBuilderComponents } from "@enterwell/react-form-builder/lib/esm/For
 import { Checkbox, FormControlLabel, FormGroup, TextField } from "@mui/material";
 
 const components: FormBuilderComponents = {
-    string: (props) => <TextField variant="filled" hiddenLabel={!props.label} {...props} />,
     number: (props) => <TextField type="number" variant="filled" hiddenLabel={!props.label} {...props} />,
     yesno: (props) => (
         <FormGroup>
@@ -10,7 +9,9 @@ const components: FormBuilderComponents = {
                 control={<Checkbox checked={props.value} onChange={(e) => props.onChange && props.onChange(e.target.checked)} />}
                 label={props.label} />
         </FormGroup>
-    )
+    ),
+    string: (props) => <TextField variant="filled" fullWidth hiddenLabel={!props.label} {...props} />,
+    stringReadonly: (props) => <TextField variant="filled" fullWidth hiddenLabel={!props.label} {...props} onChange={() => { }} />
 };
 
 export default components;
