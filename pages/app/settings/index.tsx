@@ -12,6 +12,7 @@ import appSettingsProvider, { ApiDevelopmentUrl, ApiProductionUrl } from '../../
 import { useEffect } from 'react';
 import { AppTheme } from '../../../src/theme';
 import CurrentUserProvider from '../../../src/services/CurrentUserProvider';
+import { getTimeZones } from '@vvo/tzdb';
 
 const AppThemeVisual = (props: { label: string, theme: AppTheme, selected?: boolean | undefined, onSelected: (theme: AppTheme) => void }) => {
     const { label, theme, selected, onSelected } = props;
@@ -104,7 +105,22 @@ const settingsFormComponents: FormBuilderComponents = {
             </Select>
             <FormHelperText error={error}>{helperText}</FormHelperText>
         </FormControl>
-    )
+    ),
+    selectTimeZone: ({ onChange, label, helperText, error, ...rest }) => {
+        const timeZones = getTimeZones();
+        return (
+            <FormControl variant="filled" error={error}>
+                <InputLabel>{label}</InputLabel>
+                <Select onChange={(e) => onChange && onChange(e.target.value)} {...rest}>
+                    <MenuItem value={'0'} disabled>+00:00 UTC</MenuItem>
+                    {timeZones.map(tz => (
+                        <MenuItem key={tz.name} value={tz.name}>{tz.currentTimeFormat}</MenuItem>
+                    ))}
+                </Select>
+                <FormHelperText error={error}>{helperText}</FormHelperText>
+            </FormControl>
+        );
+    }
 };
 
 const SettingsIndex = () => {
@@ -115,6 +131,7 @@ const SettingsIndex = () => {
     const [userLocale, setUserLocale] = useUserSetting<string>("locale", "en");
     const [userNickName, setUserNickName] = useUserSetting<string>('nickname', CurrentUserProvider.getCurrentUser()?.name ?? '');
     const [userTimeFormat, setUserTimeFormat] = useUserSetting<string>('timeFormat', '1');
+    const [userTimeZone, setUserTimeZone] = useUserSetting<string>('timeZone', '0');
 
     const handleDarkModeChange = (theme: AppTheme) => {
         appContext.setTheme(theme);
@@ -127,7 +144,8 @@ const SettingsIndex = () => {
 
     const userSettingsForm = {
         nickname: useFormField(userNickName, isNonEmptyString, 'string', t("Nickname")),
-        timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', "Time format", { receiveEvent: false })
+        timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', "Time format", { receiveEvent: false }),
+        timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', "Time zone", { receiveEvent: false })
     };
 
     const developerSettingsForm = {
@@ -153,6 +171,12 @@ const SettingsIndex = () => {
             setUserTimeFormat(userSettingsForm.timeFromat.value?.trim() || undefined);
         }
     }, [setUserTimeFormat, userSettingsForm.timeFromat]);
+
+    useEffect(() => {
+        if (!userSettingsForm.timeZone.error) {
+            setUserTimeZone(userSettingsForm.timeZone.value?.trim() || undefined);
+        }
+    }, [setUserTimeZone, userSettingsForm.timeZone]);
 
     const components = useMemo(() => ({ ...generalFormComponents, ...settingsFormComponents }), []);
 
