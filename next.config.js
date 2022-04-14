@@ -51,7 +51,13 @@ module.exports = withSentryConfig(withBundleAnalyzer(withPWA(withMDX({
                         childSrc: "'self'",
                         frameSrc: ["'self'", "https://dfnoise.eu.auth0.com", "https://hcaptcha.com", "https://*.hcaptcha.com"],
                         workerSrc: "'self'",
-                        imgSrc: ["'self'", "data:", "https://www.signalco.io", "https://www.signalco.dev", "https://lh3.googleusercontent.com", "https://dfnoise.eu.auth0.com"],
+                        imgSrc: [
+                            "'self'", "data:",
+                            "https://www.signalco.io", "https://www.signalco.dev",
+                            "https://lh3.googleusercontent.com",
+                            "https://dfnoise.eu.auth0.com",
+                            "https://api.mapbox.com"
+                        ],
                         formAction: "'self'",
                         connectSrc: ["'self'",
                             "https://www.signalco.io", "https://api.signalco.io",
@@ -71,7 +77,10 @@ module.exports = withSentryConfig(withBundleAnalyzer(withPWA(withMDX({
                             "https://lh3.googleusercontent.com",
 
                             // hcaptcha
-                            "https://hcaptcha.com", "https://*.hcaptcha.com"
+                            "https://hcaptcha.com", "https://*.hcaptcha.com",
+
+                            // MapBox
+                            "https://api.mapbox.com"
                         ],
                         baseURI: ['https://www.signalco.io', 'https://www.signalco.dev'],
                         reportURI: 'https://o513630.ingest.sentry.io/api/5615895/security/?sentry_key=2a04f9a742e74740952dcebf06313840',

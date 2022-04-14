@@ -13,6 +13,8 @@ import { useEffect } from 'react';
 import { AppTheme } from '../../../src/theme';
 import CurrentUserProvider from '../../../src/services/CurrentUserProvider';
 import { getTimeZones } from '@vvo/tzdb';
+import LocationMapPicker from '../../../components/forms/LocationMapPicker/LocationMapPicker';
+import { isTrue } from '@enterwell/react-form-validation';
 
 const AppThemeVisual = (props: { label: string, theme: AppTheme, selected?: boolean | undefined, onSelected: (theme: AppTheme) => void }) => {
     const { label, theme, selected, onSelected } = props;
@@ -120,7 +122,8 @@ const settingsFormComponents: FormBuilderComponents = {
                 <FormHelperText error={error}>{helperText}</FormHelperText>
             </FormControl>
         );
-    }
+    },
+    locationMap: (props) => <LocationMapPicker {...props} />
 };
 
 const SettingsIndex = () => {
@@ -132,6 +135,7 @@ const SettingsIndex = () => {
     const [userNickName, setUserNickName] = useUserSetting<string>('nickname', CurrentUserProvider.getCurrentUser()?.name ?? '');
     const [userTimeFormat, setUserTimeFormat] = useUserSetting<string>('timeFormat', '1');
     const [userTimeZone, setUserTimeZone] = useUserSetting<string>('timeZone', '0');
+    const [userLocation, setUserLocation] = useUserSetting<[number, number] | undefined>('location', undefined);
 
     const handleDarkModeChange = (theme: AppTheme) => {
         appContext.setTheme(theme);
@@ -145,7 +149,8 @@ const SettingsIndex = () => {
     const userSettingsForm = {
         nickname: useFormField(userNickName, isNonEmptyString, 'string', t("Nickname")),
         timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', "Time format", { receiveEvent: false }),
-        timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', "Time zone", { receiveEvent: false })
+        timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', "Time zone", { receiveEvent: false }),
+        location: useFormField(userLocation, isTrue, 'locationMap', "Location", { receiveEvent: false })
     };
 
     const developerSettingsForm = {
@@ -177,6 +182,13 @@ const SettingsIndex = () => {
             setUserTimeZone(userSettingsForm.timeZone.value?.trim() || undefined);
         }
     }, [setUserTimeZone, userSettingsForm.timeZone]);
+
+    useEffect(() => {
+        console.log('location updated', userSettingsForm.location)
+        if (!userSettingsForm.location.error) {
+            setUserLocation(userSettingsForm.location.value);
+        }
+    }, [setUserLocation, userSettingsForm.location]);
 
     const components = useMemo(() => ({ ...generalFormComponents, ...settingsFormComponents }), []);
 
