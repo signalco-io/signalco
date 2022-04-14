@@ -1,6 +1,6 @@
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
 import { Box, Button, Chip, Container, FormControl, FormHelperText, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
-import React, { ReactNode, useContext, useMemo } from 'react';
+import React, { ReactNode, useContext } from 'react';
 import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
 import useUserSetting from '../../../src/hooks/useUserSetting';
