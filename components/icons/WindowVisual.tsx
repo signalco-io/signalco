@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../pages/_app';
 import { colorToRgb } from '../../src/helpers/StringHelpers';
+import DateTimeProvider from '../../src/services/DateTimeProvider';
 import styles from './WindowVisual.module.scss';
 
 var skySunnyGrads = [
@@ -32,12 +33,12 @@ var skySunnyGrads = [
 
 const WindowVisual = (props: { shadePerc: number, size: number, dateAndTime?: Date }) => {
     const appContext = useContext(AppContext);
-    const [hours, setHours] = useState(((props.dateAndTime ?? new Date()).getHours()) % 24);
+    const [hours, setHours] = useState(((props.dateAndTime ?? DateTimeProvider.now()).getHours()) % 24);
 
     // Update hours every minute
     useEffect(() => {
         const token = setInterval(() => {
-            setHours(((props.dateAndTime ?? new Date()).getHours()) % 24);
+            setHours(((props.dateAndTime ?? DateTimeProvider.now()).getHours()) % 24);
         }, 60 * 1000);
         return () => clearInterval(token);
     })

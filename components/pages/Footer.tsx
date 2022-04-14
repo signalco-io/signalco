@@ -6,6 +6,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import SignalcoLogo from "../icons/SignalcoLogo";
 import RedditIcon from "@mui/icons-material/Reddit";
 import appSettingsProvider from "../../src/services/AppSettingsProvider";
+import DateTimeProvider from "../../src/services/DateTimeProvider";
 
 type FooterSectionType = {
     header: string,
@@ -91,7 +92,7 @@ export default function Footer() {
                             <Stack alignItems={{ xs: "center", sm: 'stretch' }}>
                                 <SignalcoLogo height={68} />
                                 <Stack alignItems="center" justifyContent="space-between" direction={{ xs: "column-reverse", sm: "row" }}>
-                                    <Typography textAlign={{ xs: 'center', sm: 'left' }} variant="subtitle2" fontWeight={400} component="span" color="textSecondary">Copyright © {new Date().getFullYear()} signalco. All rights reserved.</Typography>
+                                    <Typography textAlign={{ xs: 'center', sm: 'left' }} variant="subtitle2" fontWeight={400} component="span" color="textSecondary">Copyright © {DateTimeProvider.now().getFullYear()} signalco. All rights reserved.</Typography>
                                     <Stack direction="row" spacing={1} alignItems={{ xs: "center", sm: 'start' }}>
                                         <SLink href="https://twitter.com/signalco_io">
                                             <IconButton size="large" aria-label="Twitter link">

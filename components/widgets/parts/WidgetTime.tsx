@@ -4,6 +4,7 @@ import { IWidgetSharedProps } from "../Widget";
 import { DefaultHeight, DefaultWidth } from "../../../src/widgets/WidgetConfigurationOptions";
 import useWidgetOptions from "../../../src/hooks/widgets/useWidgetOptions";
 import useWidgetActive from "../../../src/hooks/widgets/useWidgetActive";
+import DateTimeProvider from "../../../src/services/DateTimeProvider";
 
 const stateOptions = [
     { label: 'Show seconds', name: 'showSeconds', type: 'yesno', default: false, optional: true },
@@ -19,7 +20,7 @@ const WidgetTime = (props: IWidgetSharedProps) => {
     const showSeconds = config?.showSeconds ?? false;
 
     const updateTime = useCallback(() => {
-        const now = new Date();
+        const now = DateTimeProvider.now();
         setTime(`${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`);
         setSeconds(now.getSeconds().toString().padStart(2, '0'));
     }, []);

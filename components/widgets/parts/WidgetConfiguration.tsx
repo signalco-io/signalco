@@ -80,6 +80,23 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
 
         // Handle single-contact target
         return <DisplayDeviceTarget target={props.value} onChanged={t => props.onChange(t)} />
+    } else if (props.option.type === 'deviceContactTargetWithValue') {
+        return <Stack direction="row" spacing={1}>
+            <WidgetConfigurationOption
+                option={{ name: 'contact', label: 'Contact', type: 'deviceContactTarget' }}
+                value={props.value}
+                onChange={(t => {
+                    const newValue = { ...props.value, ...t };
+                    console.log('new value', newValue);
+                    return props.onChange(newValue);
+                })} />
+            <WidgetConfigurationOption
+                option={{ name: 'value', label: 'Value', type: 'string' }}
+                value={props.value?.valueSerialized}
+                onChange={(t => {
+                    return props.onChange({ ...props.value, valueSerialized: t });
+                })} />
+        </Stack>
     } else if (props.option.type === 'deviceTarget') {
         return <DisplayDeviceTarget target={props.value} hideContact onChanged={t => props.onChange(t)} />
     } else if (props.option.type === 'contactTarget') {
@@ -108,7 +125,7 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
         return <Typography>{props.value}</Typography>
     }
 
-    return <Typography>Unknown option type</Typography>;
+    return <Typography>{`Unknown option type \"${props.option.type}\"`}</Typography>;
 };
 
 const WidgetConfiguration = (props: IWidgetConfigurationProps) => {

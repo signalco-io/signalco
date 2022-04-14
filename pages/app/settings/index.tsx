@@ -1,60 +1,37 @@
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
-import { Box, Button, Chip, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
-import React, { ReactNode, useContext, useMemo } from 'react';
+import { Chip, Container, FormControl, FormHelperText, InputLabel, MenuItem, NoSsr, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
+import React, { ReactNode } from 'react';
 import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
 import useUserSetting from '../../../src/hooks/useUserSetting';
-import { AppContext } from '../../_app';
 import { isNonEmptyString, isNotNull } from '@enterwell/react-form-validation';
 import generalFormComponents from '../../../components/forms/generalFormComponents';
 import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import appSettingsProvider, { ApiDevelopmentUrl, ApiProductionUrl } from '../../../src/services/AppSettingsProvider';
 import { useEffect } from 'react';
-import { AppTheme } from '../../../src/theme';
 import CurrentUserProvider from '../../../src/services/CurrentUserProvider';
+import { getTimeZones } from '@vvo/tzdb';
+import LocationMapPicker from '../../../components/forms/LocationMapPicker/LocationMapPicker';
+import { isTrue } from '@enterwell/react-form-validation';
+import GoogleIcon from '@mui/icons-material/Google';
+import AppThemePicker from '../../../components/settings/AppThemePicker';
 
-const AppThemeVisual = (props: { label: string, theme: AppTheme, selected?: boolean | undefined, onSelected: (theme: AppTheme) => void }) => {
-    const { label, theme, selected, onSelected } = props;
-
-    let textColor;
-    let backgroundColor;
-    switch (theme) {
-        case 'dark':
-            backgroundColor = 'black';
-            textColor = 'white';
-            break;
-        case 'darkDimmed':
-            backgroundColor = 'rgba(32, 31, 30, 1)'
-            textColor = 'white';
-            break;
-        default:
-            backgroundColor = 'white';
-            textColor = 'black';
-            break;
-    }
-
+function ConnectedService() {
     return (
-        <Button sx={{ bgcolor: selected ? 'action.selected' : undefined }} onClick={() => onSelected(theme)}>
-            <Stack alignItems="center">
-                <Box sx={{
-                    position: 'relative',
-                    width: 80,
-                    height: 60,
-                    backgroundColor: backgroundColor,
-                    border: '1px solid gray',
-                    borderTop: '4px solid gray',
-                    borderRadius: 1
-                }}>
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 4, left: 4 }} />
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 18, height: 5, top: 12, left: 4 }} />
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 22, height: 5, top: 20, left: 4 }} />
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 28, left: 4 }} />
-                </Box>
-                <Typography variant="body2">{label}</Typography>
+        <Paper variant="outlined" sx={{ p: 2, backgroundColor: 'background.default' }}>
+            <Stack direction="row" alignItems="center" justifyContent="space-between">
+                <Stack direction="row" alignItems="center" spacing={2}>
+                    <GoogleIcon fontSize="large" />
+                    <Stack>
+                        <Typography>Google</Typography>
+                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>{CurrentUserProvider.getCurrentUser()?.name} ({CurrentUserProvider.getCurrentUser()?.email})</Typography>
+                    </Stack>
+                </Stack>
+                <Typography sx={{ color: 'text.secondary' }}>Connected</Typography>
             </Stack>
-        </Button>
-    );
-};
+        </Paper>
+    )
+}
 
 const SettingsItem = (props: { children: ReactNode, label?: string | undefined }) => (
     <Stack spacing={1}>
@@ -104,30 +81,49 @@ const settingsFormComponents: FormBuilderComponents = {
             </Select>
             <FormHelperText error={error}>{helperText}</FormHelperText>
         </FormControl>
-    )
+    ),
+    selectTimeZone: ({ onChange, label, helperText, error, ...rest }) => {
+        const timeZones = getTimeZones();
+        return (
+            <FormControl variant="filled" error={error}>
+                <InputLabel>{label}</InputLabel>
+                <Select onChange={(e) => onChange && onChange(e.target.value)} {...rest}>
+                    <MenuItem value={'0'} disabled>+00:00 UTC</MenuItem>
+                    {timeZones.map(tz => (
+                        <MenuItem key={tz.name} value={tz.name}>{tz.currentTimeFormat}</MenuItem>
+                    ))}
+                </Select>
+                <FormHelperText error={error}>{helperText}</FormHelperText>
+            </FormControl>
+        );
+    },
+    locationMap: (props) => <LocationMapPicker {...props} />
 };
 
+const components = { ...generalFormComponents, ...settingsFormComponents };
+
 const SettingsIndex = () => {
-    const appContext = useContext(AppContext);
     const { t } = useLocale("App", "Settings");
-    const themes = useLocale("App", "Settings", "Themes");
     const locales = useLocale("App", "Locales");
     const [userLocale, setUserLocale] = useUserSetting<string>("locale", "en");
     const [userNickName, setUserNickName] = useUserSetting<string>('nickname', CurrentUserProvider.getCurrentUser()?.name ?? '');
     const [userTimeFormat, setUserTimeFormat] = useUserSetting<string>('timeFormat', '1');
-
-    const handleDarkModeChange = (theme: AppTheme) => {
-        appContext.setTheme(theme);
-    };
+    const [userTimeZone, setUserTimeZone] = useUserSetting<string>('timeZone', '0');
+    const [userLocation, setUserLocation] = useUserSetting<[number, number] | undefined>('location', undefined);
 
     const handleLocaleChange = (event: SelectChangeEvent) => {
         setUserLocale(event.target.value);
         window.location.reload();
     };
 
-    const userSettingsForm = {
+    const profileForm = {
         nickname: useFormField(userNickName, isNonEmptyString, 'string', t("Nickname")),
-        timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', "Time format", { receiveEvent: false })
+    }
+
+    const timeLocationForm = {
+        timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', "Time format", { receiveEvent: false }),
+        timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', "Time zone", { receiveEvent: false }),
+        location: useFormField(userLocation, isTrue, 'locationMap', "Location", { receiveEvent: false })
     };
 
     const developerSettingsForm = {
@@ -143,18 +139,28 @@ const SettingsIndex = () => {
     }, [developerSettingsForm.apiEndpoint]);
 
     useEffect(() => {
-        if (!userSettingsForm.nickname.error) {
-            setUserNickName(userSettingsForm.nickname.value?.trim() || undefined);
+        if (!profileForm.nickname.error) {
+            setUserNickName(profileForm.nickname.value?.trim() || undefined);
         }
-    }, [setUserNickName, userSettingsForm.nickname]);
+    }, [setUserNickName, profileForm.nickname]);
 
     useEffect(() => {
-        if (!userSettingsForm.timeFromat.error) {
-            setUserTimeFormat(userSettingsForm.timeFromat.value?.trim() || undefined);
+        if (!timeLocationForm.timeFromat.error) {
+            setUserTimeFormat(timeLocationForm.timeFromat.value?.trim() || undefined);
         }
-    }, [setUserTimeFormat, userSettingsForm.timeFromat]);
+    }, [setUserTimeFormat, timeLocationForm.timeFromat]);
 
-    const components = useMemo(() => ({ ...generalFormComponents, ...settingsFormComponents }), []);
+    useEffect(() => {
+        if (!timeLocationForm.timeZone.error) {
+            setUserTimeZone(timeLocationForm.timeZone.value?.trim() || undefined);
+        }
+    }, [setUserTimeZone, timeLocationForm.timeZone]);
+
+    useEffect(() => {
+        if (!timeLocationForm.location.error) {
+            setUserLocation(timeLocationForm.location.value);
+        }
+    }, [setUserLocation, timeLocationForm.location]);
 
     return (
         <FormBuilderProvider components={components}>
@@ -174,18 +180,24 @@ const SettingsIndex = () => {
                     </SettingsSection>
                     <SettingsSection header={t("LookAndFeel")}>
                         <SettingsItem label={t("Theme")}>
-                            <Stack spacing={1} direction="row">
-                                <AppThemeVisual label={themes.t("Dark")} theme="dark" selected={appContext.theme === 'dark'} onSelected={handleDarkModeChange} />
-                                <AppThemeVisual label={themes.t("DarkDimmed")} theme="darkDimmed" selected={appContext.theme === 'darkDimmed'} onSelected={handleDarkModeChange} />
-                                <AppThemeVisual label={themes.t("Light")} theme="light" selected={appContext.theme === 'light'} onSelected={handleDarkModeChange} />
-                            </Stack>
+                            <AppThemePicker />
                         </SettingsItem>
                     </SettingsSection>
                     <SettingsSection header={t("Profile")}>
-                        <FormBuilder form={userSettingsForm} />
+                        <NoSsr>
+                            <FormBuilder form={profileForm} />
+                            <ConnectedService />
+                        </NoSsr>
+                    </SettingsSection>
+                    <SettingsSection header={t("LocationAndTime")}>
+                        <NoSsr>
+                            <FormBuilder form={timeLocationForm} />
+                        </NoSsr>
                     </SettingsSection>
                     <SettingsSection header={t("Developer")}>
-                        <FormBuilder form={developerSettingsForm} />
+                        <NoSsr>
+                            <FormBuilder form={developerSettingsForm} />
+                        </NoSsr>
                     </SettingsSection>
                 </Stack>
             </Container>
