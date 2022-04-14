@@ -30,12 +30,14 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ```raw
 NEXT_PUBLIC_HCAPTCHA_SITE_KEY=435dd50a-4830-483a-862c-d6faa6dacea7
 NEXT_PUBLIC_APP_ENV=development
+NEXT_PUBLIC_MAPBOX_TOKEN=pk.eyJ1IjoiYWxla3NhbmRhcnRvcGxlbGNvIiwiYSI6ImNsMXpiYzhwejBrNHczaW10cGpwdn.lgCHgLs6qBDqbpA-1g
 ```
 
 | Variable | Development | Production |
 |----------|-------------|------------|
 | `NEXT_PUBLIC_HCAPTCHA_SITE_KEY` | Optional | Required |
 | `NEXT_PUBLIC_APP_ENV` | Optional | Required `production` |
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | Optional | Required `production` |
 
 ## Deploy
 
