@@ -123,6 +123,8 @@ const settingsFormComponents: FormBuilderComponents = {
     }
 };
 
+const components = { ...generalFormComponents, ...settingsFormComponents };
+
 const SettingsIndex = () => {
     const appContext = useContext(AppContext);
     const { t } = useLocale("App", "Settings");
@@ -177,8 +179,6 @@ const SettingsIndex = () => {
             setUserTimeZone(userSettingsForm.timeZone.value?.trim() || undefined);
         }
     }, [setUserTimeZone, userSettingsForm.timeZone]);
-
-    const components = useMemo(() => ({ ...generalFormComponents, ...settingsFormComponents }), []);
 
     return (
         <FormBuilderProvider components={components}>
