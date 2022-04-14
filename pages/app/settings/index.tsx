@@ -1,5 +1,5 @@
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
-import { Box, Button, Chip, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
+import { Box, Button, Chip, Container, FormControl, FormHelperText, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import React, { ReactNode, useContext, useMemo } from 'react';
 import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
@@ -15,6 +15,7 @@ import CurrentUserProvider from '../../../src/services/CurrentUserProvider';
 import { getTimeZones } from '@vvo/tzdb';
 import LocationMapPicker from '../../../components/forms/LocationMapPicker/LocationMapPicker';
 import { isTrue } from '@enterwell/react-form-validation';
+import GoogleIcon from '@mui/icons-material/Google';
 
 const AppThemeVisual = (props: { label: string, theme: AppTheme, selected?: boolean | undefined, onSelected: (theme: AppTheme) => void }) => {
     const { label, theme, selected, onSelected } = props;
@@ -148,8 +149,11 @@ const SettingsIndex = () => {
         window.location.reload();
     };
 
-    const userSettingsForm = {
+    const profileForm = {
         nickname: useFormField(userNickName, isNonEmptyString, 'string', t("Nickname")),
+    }
+
+    const timeLocationForm = {
         timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', "Time format", { receiveEvent: false }),
         timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', "Time zone", { receiveEvent: false }),
         location: useFormField(userLocation, isTrue, 'locationMap', "Location", { receiveEvent: false })
@@ -168,29 +172,29 @@ const SettingsIndex = () => {
     }, [developerSettingsForm.apiEndpoint]);
 
     useEffect(() => {
-        if (!userSettingsForm.nickname.error) {
-            setUserNickName(userSettingsForm.nickname.value?.trim() || undefined);
+        if (!profileForm.nickname.error) {
+            setUserNickName(profileForm.nickname.value?.trim() || undefined);
         }
-    }, [setUserNickName, userSettingsForm.nickname]);
+    }, [setUserNickName, profileForm.nickname]);
 
     useEffect(() => {
-        if (!userSettingsForm.timeFromat.error) {
-            setUserTimeFormat(userSettingsForm.timeFromat.value?.trim() || undefined);
+        if (!timeLocationForm.timeFromat.error) {
+            setUserTimeFormat(timeLocationForm.timeFromat.value?.trim() || undefined);
         }
-    }, [setUserTimeFormat, userSettingsForm.timeFromat]);
+    }, [setUserTimeFormat, timeLocationForm.timeFromat]);
 
     useEffect(() => {
-        if (!userSettingsForm.timeZone.error) {
-            setUserTimeZone(userSettingsForm.timeZone.value?.trim() || undefined);
+        if (!timeLocationForm.timeZone.error) {
+            setUserTimeZone(timeLocationForm.timeZone.value?.trim() || undefined);
         }
-    }, [setUserTimeZone, userSettingsForm.timeZone]);
+    }, [setUserTimeZone, timeLocationForm.timeZone]);
 
     useEffect(() => {
-        console.log('location updated', userSettingsForm.location)
-        if (!userSettingsForm.location.error) {
-            setUserLocation(userSettingsForm.location.value);
+        console.log('location updated', timeLocationForm.location)
+        if (!timeLocationForm.location.error) {
+            setUserLocation(timeLocationForm.location.value);
         }
-    }, [setUserLocation, userSettingsForm.location]);
+    }, [setUserLocation, timeLocationForm.location]);
 
     return (
         <FormBuilderProvider components={components}>
@@ -218,7 +222,22 @@ const SettingsIndex = () => {
                         </SettingsItem>
                     </SettingsSection>
                     <SettingsSection header={t("Profile")}>
-                        <FormBuilder form={userSettingsForm} />
+                        <FormBuilder form={profileForm} />
+                        <Paper variant="outlined" sx={{ p: 2, backgroundColor: 'background.default' }}>
+                            <Stack direction="row" alignItems="center" justifyContent="space-between">
+                                <Stack direction="row" alignItems="center" spacing={2}>
+                                    <GoogleIcon fontSize="large" />
+                                    <Stack>
+                                        <Typography>Google</Typography>
+                                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>{CurrentUserProvider.getCurrentUser()?.name} ({CurrentUserProvider.getCurrentUser()?.email})</Typography>
+                                    </Stack>
+                                </Stack>
+                                <Typography sx={{ color: 'text.secondary' }}>Connected</Typography>
+                            </Stack>
+                        </Paper>
+                    </SettingsSection>
+                    <SettingsSection header={t("Location and time")}>
+                        <FormBuilder form={timeLocationForm} />
                     </SettingsSection>
                     <SettingsSection header={t("Developer")}>
                         <FormBuilder form={developerSettingsForm} />
