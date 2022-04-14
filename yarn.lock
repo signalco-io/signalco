@@ -4023,6 +4023,11 @@
     "@typescript-eslint/types" "5.17.0"
     eslint-visitor-keys "^3.0.0"
 
+"@vvo/tzdb@^6.49.0":
+  version "6.49.0"
+  resolved "https://registry.yarnpkg.com/@vvo/tzdb/-/tzdb-6.49.0.tgz#ca76cddf8a21f9c432c4f4f62f66042f8aca6314"
+  integrity sha512-DNBZ3xpQhN0oYn8zWGixfYUbJakfBQEJiUehEcIORYU6265VWtzUDQ5XDwpCMZh+TiMH2FzwFGFk0+VHnAViAw==
+
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.11.1.tgz#2bfd767eae1a6996f432ff7e8d7fc75679c0b6a7"
