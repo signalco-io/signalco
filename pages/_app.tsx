@@ -36,14 +36,14 @@ export const AppContext = React.createContext<IAppContext>(appContextDefaultStat
 
 export default function App(props: CustomAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps, err } = props;
-  const [themeMode, setThemeMode] = useUserSetting<string>('themeMode', 'manual');
-  const [theme, setTheme] = useUserSetting<string>('theme', 'light');
-  const handleThemeChange = (theme: AppTheme) => {
-    UserSettingsProvider.set("theme", theme);
+  const [themeMode] = useUserSetting<string>('themeMode', 'manual');
+  const [theme, setTheme] = useUserSetting<AppTheme>('theme', 'light');
+  const handleThemeChange = (newTheme: AppTheme) => {
+    setTheme(newTheme);
     setAppContext({
       ...appContextState,
-      theme: theme,
-      isDark: theme === 'dark' || theme === 'darkDimmed'
+      theme: newTheme,
+      isDark: newTheme === 'dark' || newTheme === 'darkDimmed'
     });
   };
 
