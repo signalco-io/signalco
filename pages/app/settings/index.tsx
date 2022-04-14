@@ -112,6 +112,7 @@ const settingsFormComponents: FormBuilderComponents = {
             <FormControl variant="filled" error={error}>
                 <InputLabel>{label}</InputLabel>
                 <Select onChange={(e) => onChange && onChange(e.target.value)} {...rest}>
+                    <MenuItem value={'0'} disabled>+00:00 UTC</MenuItem>
                     {timeZones.map(tz => (
                         <MenuItem key={tz.name} value={tz.name}>{tz.currentTimeFormat}</MenuItem>
                     ))}
@@ -130,7 +131,7 @@ const SettingsIndex = () => {
     const [userLocale, setUserLocale] = useUserSetting<string>("locale", "en");
     const [userNickName, setUserNickName] = useUserSetting<string>('nickname', CurrentUserProvider.getCurrentUser()?.name ?? '');
     const [userTimeFormat, setUserTimeFormat] = useUserSetting<string>('timeFormat', '1');
-    const [userTimeZone, setUserTimeZone] = useUserSetting<string>('timeZone', 'Etc/UTC');
+    const [userTimeZone, setUserTimeZone] = useUserSetting<string>('timeZone', '0');
 
     const handleDarkModeChange = (theme: AppTheme) => {
         appContext.setTheme(theme);
