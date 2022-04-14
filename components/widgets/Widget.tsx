@@ -13,8 +13,9 @@ const WidgetShades = dynamic(() => import("./parts/WidgetShades"));
 const WidgetState = dynamic(() => import("./parts/WidgetState"));
 const WidgetAirConditioning = dynamic(() => import("./parts/WidgetAirConditioning"));
 const WidgetVacuum = dynamic(() => import("./parts/WidgetVacuum"));
+const WidgetButton = dynamic(() => import("./parts/WidgetButton"));
 
-export type widgetType = "state" | "vacuum" | "shades" | 'indicator' | "airconditioning" | "termostat" | "time" | "checklist";
+export type widgetType = "button" | "state" | "vacuum" | "shades" | 'indicator' | "airconditioning" | "termostat" | "time" | "checklist";
 
 export interface IWidgetProps extends IWidgetSpecifigProps {
     type: widgetType,
@@ -104,6 +105,8 @@ const Widget = (props: IWidgetProps) => {
         WidgetResolved = WidgetTime;
     } else if (props.type === 'checklist') {
         WidgetResolved = WidgetChecklist;
+    } else if (props.type === 'button') {
+        WidgetResolved = WidgetButton;
     }
 
     return (
