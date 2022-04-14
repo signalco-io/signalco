@@ -3,7 +3,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import theme, { AppTheme } from "../src/theme";
+import appTheme, { AppTheme } from "../src/theme";
 import "../styles/global.scss";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from '../src/createEmotionCache';
@@ -11,6 +11,8 @@ import { SnackbarProvider } from 'notistack';
 import { ChildrenProps } from "../src/sharedTypes";
 import IAppContext from "../src/appContext/IAppContext";
 import UserSettingsProvider from "../src/services/UserSettingsProvider";
+import useUserSetting from "../src/hooks/useUserSetting";
+import SunHelper from "../src/helpers/SunHelper";
 
 const isServerSide = typeof window === 'undefined';
 const clientSideEmotionCache = createEmotionCache();
@@ -34,12 +36,14 @@ export const AppContext = React.createContext<IAppContext>(appContextDefaultStat
 
 export default function App(props: CustomAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps, err } = props;
-  const handleThemeChange = (theme: AppTheme) => {
-    UserSettingsProvider.set("theme", theme);
+  const [themeMode] = useUserSetting<string>('themeMode', 'manual');
+  const [theme, setTheme] = useUserSetting<AppTheme>('theme', 'light');
+  const handleThemeChange = (newTheme: AppTheme) => {
+    setTheme(newTheme);
     setAppContext({
       ...appContextState,
-      theme: theme,
-      isDark: theme === 'dark' || theme === 'darkDimmed'
+      theme: newTheme,
+      isDark: newTheme === 'dark' || newTheme === 'darkDimmed'
     });
   };
 
@@ -51,12 +55,45 @@ export default function App(props: CustomAppProps) {
   React.useEffect(() => {
     // Apply theme to document
     if (!isServerSide) {
-      const themeMode = UserSettingsProvider.value<AppTheme>("theme", window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
-      document.documentElement.style.setProperty("color-scheme", themeMode);
-      if (themeMode !== 'light') {
-        handleThemeChange(themeMode);
+      const theme = UserSettingsProvider.value<AppTheme>("theme", window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
+      document.documentElement.style.setProperty("color-scheme", theme);
+      if (theme !== 'light') {
+        handleThemeChange(theme);
       }
     }
+
+    const applyThemeMode = () => {
+      console.info('appy theme')
+      const isDay = SunHelper.isDay();
+      if (isDay && theme !== 'light') {
+        setAppContext({
+          ...appContextState,
+          theme: 'light',
+          isDark: false
+        });
+      } else if (!isDay && theme === 'light') {
+        setAppContext({
+          ...appContextState,
+          theme: theme,
+          isDark: true
+        });
+      }
+    }
+
+    // Apply theme mode
+    let themeModeInterval: NodeJS.Timer;
+    if (themeMode === 'sunriseSunset') {
+      themeModeInterval = setInterval(applyThemeMode, 60000);
+      applyThemeMode();
+    }
+
+    // Dispose
+    return () => {
+      if (themeModeInterval) {
+        clearInterval(themeModeInterval);
+      }
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -97,7 +134,7 @@ export default function App(props: CustomAppProps) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <ThemeProvider theme={theme(appContextState.theme)}>
+      <ThemeProvider theme={appTheme(appContextState.theme)}>
         <SnackbarProvider maxSnack={3}>
           <CssBaseline />
           <AppContext.Provider value={appContextState}>

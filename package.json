@@ -66,6 +66,7 @@
         "recharts": "2.1.9",
         "sass-loader": "12.6.0",
         "sharp": "0.30.3",
+        "suncalc": "^1.9.0",
         "uuid": "8.3.2"
     },
     "devDependencies": {
@@ -89,6 +90,7 @@
         "@types/react-syntax-highlighter": "^13.5.2",
         "@types/react-timeago": "4.1.3",
         "@types/recharts": "1.8.23",
+        "@types/suncalc": "^1.8.1",
         "@types/uuid": "8.3.4",
         "babel-loader": "8.2.4",
         "chalk": "4.1.2",

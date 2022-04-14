@@ -11,7 +11,7 @@ const components: FormBuilderComponents = {
         </FormGroup>
     ),
     string: (props) => <TextField variant="filled" fullWidth hiddenLabel={!props.label} {...props} />,
-    stringReadonly: (props) => <TextField variant="filled" fullWidth hiddenLabel={!props.label} {...props} onChange={() => { }} />
+    stringReadonly: ({ value, ...props }) => <TextField variant="filled" fullWidth hiddenLabel={!props.label} defaultValue={value} {...props} onChange={() => { }} />
 };
 
 export default components;

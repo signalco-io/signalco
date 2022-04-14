@@ -7,6 +7,7 @@ import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YA
 import { AppContext } from "../../pages/_app";
 import { arrayMax, arrayMin } from "../../src/helpers/ArrayHelpers";
 import useLocale from "../../src/hooks/useLocale";
+import DateTimeProvider from "../../src/services/DateTimeProvider";
 import { ObjectDictAny } from "../../src/sharedTypes";
 import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
 
@@ -49,8 +50,8 @@ const GraphTimeLine = (props: IGraphProps) => {
     const accentTrue = lightBlue[isDarkTheme ? 900 : 500];
     const accentFalse = deepOrange[isDarkTheme ? 800 : 400];
 
-    const now = startDateTime ?? new Date();
-    const past = startDateTime ?? new Date();
+    const now = startDateTime ?? DateTimeProvider.now();
+    const past = startDateTime ?? DateTimeProvider.now();
     past.setTime(now.getTime() - durationMs);
     const domainGraph = scaleTime().domain([past, now]);
 
@@ -142,8 +143,8 @@ const GraphArea = (props: IGraphProps) => {
     const yKey = "value";
     const xKey = "key";
 
-    const now = startDateTime ?? new Date();
-    const past = startDateTime ?? new Date();
+    const now = startDateTime ?? DateTimeProvider.now();
+    const past = startDateTime ?? DateTimeProvider.now();
     past.setTime(now.getTime() - durationMs);
     const domainGraph = scaleTime().domain([past, now]);
     const ticksHours = timeHour.every(1)!;
