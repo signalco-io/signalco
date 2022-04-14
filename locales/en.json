@@ -31,10 +31,17 @@
                 "DarkDimmed": "Dark Dimmed",
                 "Light": "Light"
             },
+            "ThemeModes": {
+                "Manual": "Manual",
+                "SunriseSunset": "Sunrise/Sunset",
+                "TimeRange": "Time range",
+                "LightSensor": "Light sensor"
+            },
             "Language": "Language",
             "SelectLanguage": "Select language",
             "Nickname": "Nickname",
             "Profile": "Profile",
+            "LocationAndTime": "Time and location",
             "Developer": "Developer",
             "ApiEndpoint": "API Endpoint"
         },

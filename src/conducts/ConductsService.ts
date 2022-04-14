@@ -1,5 +1,6 @@
 import { IDeviceTarget } from "../devices/Device";
 import DevicesRepository from "../devices/DevicesRepository";
+import DateTimeProvider from "../services/DateTimeProvider";
 import HttpService from "../services/HttpService";
 
 export interface IConduct {
@@ -15,7 +16,7 @@ export default class ConductsService {
             conduct.target.channelName,
             conduct.target.contactName,
             conduct.value?.toString(),
-            new Date()
+            DateTimeProvider.now()
         );
     }
 
