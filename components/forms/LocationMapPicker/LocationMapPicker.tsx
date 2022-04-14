@@ -63,7 +63,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
     };
 
     return (
-        <Accordion expanded={expanded} onChange={(ev, expanded) => setExpanded(expanded)} variant="elevation">
+        <Accordion expanded={expanded} onChange={(_e, expanded) => setExpanded(expanded)} variant="elevation">
             <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ '.MuiAccordionSummary-content': { marginY: 1 } }}>
                 {expanded
                     ? <Typography>Pick position on map</Typography>
