@@ -1,5 +1,5 @@
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
-import { Chip, Container, FormControl, FormHelperText, InputLabel, MenuItem, NoSsr, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
+import { Button, Chip, Container, FormControl, FormHelperText, InputLabel, MenuItem, NoSsr, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import React, { ReactNode } from 'react';
 import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
@@ -15,6 +15,7 @@ import LocationMapPicker from '../../../components/forms/LocationMapPicker/Locat
 import { isTrue } from '@enterwell/react-form-validation';
 import GoogleIcon from '@mui/icons-material/Google';
 import AppThemePicker from '../../../components/settings/AppThemePicker';
+import PageNotificationService from '../../../src/notifications/PageNotificationService';
 
 function ConnectedService() {
     return (
@@ -162,6 +163,24 @@ const SettingsIndex = () => {
         }
     }, [setUserLocation, timeLocationForm.location]);
 
+    const handleLightSensorCheck = () => {
+        if ('AmbientLightSensor' in window) {
+            PageNotificationService.show('light sensor available');
+            const sensor = new (window as unknown as any).AmbientLightSensor();
+            sensor.addEventListener('reading', (_event: any) => {
+                console.log('Current light level:', sensor.illuminance);
+                PageNotificationService.show('light level: ' + sensor.illuminance);
+            });
+            sensor.addEventListener('error', (event: { error: { name: string, message: string } }) => {
+                console.log(event.error.name, event.error.message);
+                PageNotificationService.show('light error: ' + event.error.name + " - " + event.error.message);
+            });
+            sensor.start();
+        } else {
+            PageNotificationService.show('light sensor unavailable', 'error');
+        }
+    }
+
     return (
         <FormBuilderProvider components={components}>
             <Container sx={{ p: 2 }}>
@@ -198,6 +217,7 @@ const SettingsIndex = () => {
                         <NoSsr>
                             <FormBuilder form={developerSettingsForm} />
                         </NoSsr>
+                        <Button onClick={handleLightSensorCheck}>Check light sensor</Button>
                     </SettingsSection>
                 </Stack>
             </Container>
