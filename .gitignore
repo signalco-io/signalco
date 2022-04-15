@@ -450,9 +450,6 @@ yarn-error.log*
 # Monaco (NOTE: Only needed for workaround https://github.com/signalco-io/signalco/issues/436)
 **/public/vs
 
-# Sentry
-.sentryclirc
-
 # storybook
 storybook-static/*
 build-storybook.log
