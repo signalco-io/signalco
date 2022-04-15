@@ -97,7 +97,6 @@ export default function AppThemePicker() {
                     <ToggleButton value="manual">{themeModes.t('Manual')}</ToggleButton>
                     <ToggleButton disabled={(userLocation?.length ?? 0) <= 0} value="sunriseSunset">{themeModes.t('SunriseSunset')}</ToggleButton>
                     <ToggleButton value="timeRange">{themeModes.t('TimeRange')}</ToggleButton>
-                    <ToggleButton disabled value="sensor">{themeModes.t('LightSensor')}</ToggleButton>
                 </ToggleButtonGroup>
                 {themeMode === 'timeRange' && (
                     <Stack spacing={1}>
