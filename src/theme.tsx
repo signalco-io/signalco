@@ -1,7 +1,7 @@
 import { red } from "@mui/material/colors";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
-export type AppThemeMode = 'manual' | 'sunriseSunset' | 'timeRange' | 'lightSensor';
+export type AppThemeMode = 'manual' | 'sunriseSunset' | 'timeRange';
 
 export type AppTheme = "dark" | "darkDimmed" | "light";
 
