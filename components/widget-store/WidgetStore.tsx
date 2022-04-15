@@ -3,7 +3,7 @@ import React from "react";
 import Image from 'next/image';
 import useSearch, { filterFuncObjectStringProps } from "../../src/hooks/useSearch";
 import { AddOutlined } from "@mui/icons-material";
-import { widgetType } from "./Widget";
+import { widgetType } from "../widgets/Widget";
 
 const availableWidgets = [
     {

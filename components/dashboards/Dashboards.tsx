@@ -15,7 +15,7 @@ import { useLoadAndError } from "../../src/hooks/useLoadingAndError";
 import Image from "next/image";
 import useHashParam from "../../src/hooks/useHashParam";
 
-const WidgetStoreDynamic = dynamic(() => import("../widgets/WidgetStore"));
+const WidgetStoreDynamic = dynamic(() => import("../widget-store/WidgetStore"));
 
 const Dashboards = () => {
     const [selectedId, setSelectedId] = React.useState<string | undefined>(undefined);
