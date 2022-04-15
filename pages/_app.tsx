@@ -3,7 +3,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import appTheme, { AppTheme } from "../src/theme";
+import appTheme, { AppTheme, AppThemeMode } from "../src/theme";
 import "../styles/global.scss";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from '../src/createEmotionCache';
@@ -13,6 +13,10 @@ import IAppContext from "../src/appContext/IAppContext";
 import UserSettingsProvider from "../src/services/UserSettingsProvider";
 import useUserSetting from "../src/hooks/useUserSetting";
 import SunHelper from "../src/helpers/SunHelper";
+import PageNotificationService from "../src/notifications/PageNotificationService";
+import useLocale from "../src/hooks/useLocale";
+import { useCallback } from "react";
+import DateTimeProvider from "../src/services/DateTimeProvider";
 
 const isServerSide = typeof window === 'undefined';
 const clientSideEmotionCache = createEmotionCache();
@@ -28,7 +32,6 @@ interface PageWithMetadata extends React.FunctionComponent {
 
 const appContextDefaultState: IAppContext = {
   theme: 'light',
-  setTheme: () => { },
   isDark: false
 };
 
@@ -36,66 +39,55 @@ export const AppContext = React.createContext<IAppContext>(appContextDefaultStat
 
 export default function App(props: CustomAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps, err } = props;
-  const [themeMode] = useUserSetting<string>('themeMode', 'manual');
-  const [theme, setTheme] = useUserSetting<AppTheme>('theme', 'light');
-  const handleThemeChange = (newTheme: AppTheme) => {
-    setTheme(newTheme);
-    setAppContext({
-      ...appContextState,
-      theme: newTheme,
-      isDark: newTheme === 'dark' || newTheme === 'darkDimmed'
-    });
-  };
 
-  const [appContextState, setAppContext] = React.useState<IAppContext>({
-    ...appContextDefaultState,
-    setTheme: handleThemeChange
-  });
+  const [appContextState, setAppContext] = React.useState<IAppContext>(appContextDefaultState);
+
+  // Theme
+  const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
+  const [themeTimeRange] = useUserSetting<[string, string] | undefined>('themeTimeRange', undefined);
+  const themes = useLocale("App", "Settings", "Themes");
+
+  const applyThemeMode = useCallback((hideNotification?: boolean) => {
+    let themeOrPrefered = UserSettingsProvider.value<AppTheme>("theme", () => window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
+    const activeTheme = appContextState.theme;
+
+    if (themeMode === 'sunriseSunset' && SunHelper.isDay()) {
+      themeOrPrefered = 'light';
+    } else if (themeMode === 'timeRange' && themeTimeRange?.length === 2) {
+      const now = DateTimeProvider.now();
+      const dayTime = DateTimeProvider.fromDuration(now, themeTimeRange[0]);
+      const nightTime = DateTimeProvider.fromDuration(now, themeTimeRange[1]);
+      console.log('now', now, 'day', dayTime, 'night', nightTime, themeTimeRange);
+      if (dayTime && nightTime && now >= dayTime && now < nightTime) {
+        themeOrPrefered = 'light';
+      }
+    }
+
+    if (activeTheme !== themeOrPrefered) {
+      document.documentElement.style.setProperty("color-scheme", themeOrPrefered === 'light' ? 'light' : 'dark');
+      setAppContext({
+        theme: themeOrPrefered,
+        isDark: themeOrPrefered === 'dark' || themeOrPrefered === 'darkDimmed'
+      });
+      if (!hideNotification) {
+        PageNotificationService.show(`Switched to ${themes.t(themeOrPrefered)} theme.`);
+      }
+    }
+  }, [appContextState.theme, themeMode, themeTimeRange, themes]);
 
   React.useEffect(() => {
     // Apply theme to document
-    if (!isServerSide) {
-      const theme = UserSettingsProvider.value<AppTheme>("theme", window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
-      document.documentElement.style.setProperty("color-scheme", theme);
-      if (theme !== 'light') {
-        handleThemeChange(theme);
-      }
-    }
-
-    const applyThemeMode = () => {
-      console.info('appy theme')
-      const isDay = SunHelper.isDay();
-      if (isDay && theme !== 'light') {
-        setAppContext({
-          ...appContextState,
-          theme: 'light',
-          isDark: false
-        });
-      } else if (!isDay && theme === 'light') {
-        setAppContext({
-          ...appContextState,
-          theme: theme,
-          isDark: true
-        });
-      }
+    if (isServerSide) {
+      return;
     }
 
     // Apply theme mode
-    let themeModeInterval: NodeJS.Timer;
-    if (themeMode === 'sunriseSunset') {
-      themeModeInterval = setInterval(applyThemeMode, 60000);
-      applyThemeMode();
-    }
+    let themeModeInterval = setInterval(applyThemeMode, 60000);
+    applyThemeMode(true);
 
     // Dispose
-    return () => {
-      if (themeModeInterval) {
-        clearInterval(themeModeInterval);
-      }
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    return () => clearInterval(themeModeInterval);
+  }, [applyThemeMode]);
 
   const Layout = (Component as PageWithMetadata).layout ?? ((props?: ChildrenProps) => <>{props?.children}</>);
 
