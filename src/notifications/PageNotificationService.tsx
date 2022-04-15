@@ -20,7 +20,7 @@ class PageNotificationService {
         if (this._enqueue) {
             return this._enqueue(text, {
                 variant: variant,
-                preventDuplicate: true
+                autoHideDuration: 5000
             });
         }
     }

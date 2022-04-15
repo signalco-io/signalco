@@ -7,7 +7,7 @@ class LocalStorageService {
 
     getItemOrDefault<T>(key: string, defaultValue: ValueOrFuncGeneric<T>, skipDeseriaalization?: boolean): T {
         if (typeof window === 'undefined' || !window?.localStorage) {
-            return typeof defaultValue === 'function'
+            return defaultValue instanceof Function
                 ? defaultValue()
                 : defaultValue;
         }
@@ -24,7 +24,7 @@ class LocalStorageService {
             }
         }
 
-        return typeof defaultValue === 'function'
+        return defaultValue instanceof Function
             ? defaultValue()
             : defaultValue;
     }
