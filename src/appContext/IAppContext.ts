@@ -1,4 +1,4 @@
-import { AppTheme } from "../theme";
+import { AppTheme } from '../theme';
 
 export default interface IAppContext {
     theme: AppTheme,

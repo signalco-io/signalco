@@ -31,6 +31,9 @@ module.exports = withBundleAnalyzer(withPWA(withMDX({
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;'
     },
+    eslint: {
+        dirs: ['worker', 'tools', 'src', 'pages', 'locales', 'docs', 'components', '.storybook']
+    },
     async headers() {
         return [{
             source: '/(.*)',

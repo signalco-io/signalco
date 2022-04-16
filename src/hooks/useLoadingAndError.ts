@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export type useLoadAndErrorResult<T> = {
   item?: T | undefined,
