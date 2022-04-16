@@ -3,7 +3,6 @@ import React, { useCallback, useState } from "react";
 import { observer } from "mobx-react-lite";
 import DashboardsRepository, { WidgetModel } from "../../src/dashboards/DashboardsRepository";
 import PageNotificationService from "../../src/notifications/PageNotificationService";
-import DashboardsUpdateChecker from "./DashboardsUpdateChecker";
 import DashboardView from "./DashboardView";
 import DashboardSelector from "./DashboardSelector";
 import DashboardSettings from "./DashboardSettings";
@@ -14,6 +13,7 @@ import dynamic from "next/dynamic";
 import { useLoadAndError } from "../../src/hooks/useLoadingAndError";
 import Image from "next/image";
 import useHashParam from "../../src/hooks/useHashParam";
+import useDashboardsUpdateChecker from "./useDashboardsUpdateChecker";
 
 const WidgetStoreDynamic = dynamic(() => import("../widget-store/WidgetStore"));
 
@@ -25,6 +25,7 @@ const Dashboards = () => {
     }, [selectedId]);
     const selectedDashboard = useLoadAndError(retrieveDashbaord);
 
+    useDashboardsUpdateChecker();
     const [isDashboardSettingsOpen, setIsDashboardSettingsOpen] = useState<boolean>(false);
 
     const [isEditing, setIsEditing] = useState(false);
@@ -76,7 +77,6 @@ const Dashboards = () => {
 
     return (
         <>
-            <DashboardsUpdateChecker />
             <Stack spacing={{ xs: 1, sm: 2 }} sx={{ pt: { xs: 0, sm: 2 } }}>
                 <Stack spacing={1} direction={{ xs: "column-reverse", md: "row" }} justifyContent="space-between" alignItems="stretch">
                     <DashboardSelector

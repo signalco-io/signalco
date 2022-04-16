@@ -48,6 +48,12 @@
             "Developer": "Developer",
             "ApiEndpoint": "API Endpoint"
         },
+        "Dashboards": {
+            "UpdateChecker": {
+                "UpdateApplied": "Dashboard update applied.",
+                "UpdateError": "New version of dashboard is available. Refresh to see the changes."
+            }
+        },
         "Placeholders": {
             "NoData": "No data to show",
             "NoItems": "No items",
