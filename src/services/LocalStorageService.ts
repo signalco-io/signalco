@@ -1,4 +1,4 @@
-import { ValueOrFuncGeneric } from "../sharedTypes";
+import { ValueOrFuncGeneric } from '../sharedTypes';
 
 class LocalStorageService {
     getItem<T>(key: string, skipDeseriaalization?: boolean): T | undefined {
@@ -31,7 +31,7 @@ class LocalStorageService {
 
     setItem<T>(key: string, value: T | undefined) {
         if (typeof window === 'undefined' || !(window?.localStorage)) {
-            throw new Error("Local storage is not available at this moment.");
+            throw new Error('Local storage is not available at this moment.');
         }
 
         if (typeof value === 'undefined' || value == null) {
@@ -44,7 +44,7 @@ class LocalStorageService {
 
     removeItem(key: string) {
         if (typeof window === 'undefined' || !window?.localStorage) {
-            throw new Error("Local storage is not available at this moment.");
+            throw new Error('Local storage is not available at this moment.');
         }
 
         window.localStorage.removeItem(key);
