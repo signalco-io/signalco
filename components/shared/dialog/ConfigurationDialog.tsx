@@ -1,6 +1,6 @@
-import CloseIcon from "@mui/icons-material/Close";
-import { Breakpoint, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, Typography } from "@mui/material";
-import React from "react";
+import CloseIcon from '@mui/icons-material/Close';
+import { Breakpoint, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, Typography } from '@mui/material';
+import React from 'react';
 
 export interface IConfigurationDialogProps {
     isOpen: boolean,
@@ -14,18 +14,18 @@ export interface IConfigurationDialogProps {
 }
 
 const ConfigurationDialog = (props: IConfigurationDialogProps) => {
-    const { children, title, titleActions, isOpen, onClose, maxWidth = "sm", noPadding, actions } = props;
+    const { children, title, titleActions, isOpen, onClose, maxWidth = 'sm', noPadding, actions } = props;
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 760;
 
     return (
-        <Dialog open={isOpen} maxWidth={maxWidth} fullWidth fullScreen={isMobile} scroll="paper">
+        <Dialog open={isOpen} maxWidth={maxWidth} fullWidth fullScreen={isMobile} scroll="paper" onClose={onClose}>
             <DialogTitle>
                 <Stack direction="row" justifyContent="space-between" alignItems="center">
                     <Typography variant="h2">{title}</Typography>
                     <Stack direction="row" spacing={1}>
                         {titleActions}
-                        <IconButton size="large" title="Close" onClick={() => onClose()}>
+                        <IconButton size="large" title="Close" onClick={onClose}>
                             <CloseIcon />
                         </IconButton>
                     </Stack>

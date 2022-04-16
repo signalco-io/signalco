@@ -1,6 +1,6 @@
-import EntityRepository from "../entity/EntityRepository";
-import { IHistoricalValue } from "../entity/IHistoricalValue";
-import HttpService from "../services/HttpService";
+import EntityRepository from '../entity/EntityRepository';
+import { IHistoricalValue } from '../entity/IHistoricalValue';
+import HttpService from '../services/HttpService';
 import {
     IDeviceModel,
     DeviceModel,
@@ -14,7 +14,7 @@ import {
     IDeviceContactDataValue,
     DeviceContactDataValue,
     SignalUserDto
-} from "./Device";
+} from './Device';
 
 class SignalDeviceDto {
     id?: string;
@@ -28,7 +28,7 @@ class SignalDeviceDto {
 
     static FromDto(dto: SignalDeviceDto): IDeviceModel {
         if (dto.id == null || dto.alias == null || dto.deviceIdentifier == null) {
-            throw Error("Invalid SignalDeviceDto - missing required properties.");
+            throw Error('Invalid SignalDeviceDto - missing required properties.');
         }
 
         return new DeviceModel(
@@ -49,7 +49,7 @@ class SignalDeviceEndpointDto {
 
     static FromDto(dto: SignalDeviceEndpointDto): IDeviceEndpoint {
         if (dto.channel == null || dto.contacts == null) {
-            throw Error("Invalid SignalDeviceEndpointDto - missing required properties.");
+            throw Error('Invalid SignalDeviceEndpointDto - missing required properties.');
         }
 
         return new DeviceEndpoint(dto.channel, dto.contacts?.map(SignalDeviceEndpointContactDto.FromDto));
@@ -62,7 +62,7 @@ class SignalDeviceEndpointContactDataValueDto {
 
     static FromDto(dto: SignalDeviceEndpointContactDataValueDto): IDeviceContactDataValue {
         if (dto.value == null) {
-            throw Error("Invalid SignalDeviceEndpointContactDataValueDto - missing required properties.");
+            throw Error('Invalid SignalDeviceEndpointContactDataValueDto - missing required properties.');
         }
 
         return new DeviceContactDataValue(dto.value, dto.label);
@@ -79,7 +79,7 @@ class SignalDeviceEndpointContactDto {
 
     static FromDto(dto: SignalDeviceEndpointContactDto): IDeviceContact {
         if (dto.name == null || dto.dataType == null) {
-            throw Error("Invalid SignalDeviceEndpointContactDto - missing required properties.");
+            throw Error('Invalid SignalDeviceEndpointContactDto - missing required properties.');
         }
 
         return new DeviceContact(dto.name, dto.dataType, dto.access ?? 0, dto.dataValuesMultiple ?? false, dto.dataValues?.map(SignalDeviceEndpointContactDataValueDto.FromDto));
@@ -94,7 +94,7 @@ class SignalDeviceContactStateDto {
 
     static FromDto(dto: SignalDeviceContactStateDto): IDeviceContactState {
         if (dto.name == null || dto.channel == null || dto.timeStamp == null) {
-            throw Error("Invalid SignalDeviceContactStateDto - missing required properties.");
+            throw Error('Invalid SignalDeviceContactStateDto - missing required properties.');
         }
 
         return new DeviceContactState(dto.name, dto.channel, dto.valueSerialized, new Date(dto.timeStamp));
@@ -127,7 +127,7 @@ export default class DevicesRepository {
         await DevicesRepository._cacheDevicesAsync();
         const device = await DevicesRepository.getDeviceAsync(deviceId);
         if (device == null)
-            throw new Error("Unknown device.");
+            throw new Error('Unknown device.');
 
         const aliasTrimmed = alias?.trim();
         const data: ISignalDeviceInfoUpdateDto = {
@@ -136,13 +136,13 @@ export default class DevicesRepository {
             Manufacturer: device.manufacturer,
             Model: device.model
         };
-        await HttpService.requestAsync("/devices/info/update", "post", data);
+        await HttpService.requestAsync('/devices/info/update', 'post', data);
 
         // Update local info
         device.alias = aliasTrimmed || '';
     }
 
-    static async getDeviceStateHistoryAsync(target: IDeviceTarget, duration: string = "1.00:00:00"): Promise<IHistoricalValue[] | undefined> {
+    static async getDeviceStateHistoryAsync(target: IDeviceTarget, duration: string = '1.00:00:00'): Promise<IHistoricalValue[] | undefined> {
         return (await HttpService.getAsync<SignalDeviceStateHistoryDto>('/devices/state-history', { ...target, duration })).values;
     }
 
@@ -150,7 +150,7 @@ export default class DevicesRepository {
         await DevicesRepository._cacheDevicesAsync();
         if (typeof DevicesRepository.devicesCacheKeyed !== 'undefined') {
             const matchedDevices = DevicesRepository.devicesCache?.filter(d => d.identifier === identifier);
-            if (typeof matchedDevices === "undefined" ||
+            if (typeof matchedDevices === 'undefined' ||
                 matchedDevices.length <= 0 ||
                 typeof matchedDevices[0] === 'undefined')
                 return undefined;
@@ -162,7 +162,7 @@ export default class DevicesRepository {
     static async getDeviceAsync(deviceId: string): Promise<IDeviceModel | undefined> {
         await DevicesRepository._cacheDevicesAsync();
         if (typeof DevicesRepository.devicesCacheKeyed !== 'undefined') {
-            if (typeof DevicesRepository.devicesCacheKeyed[deviceId] === "undefined")
+            if (typeof DevicesRepository.devicesCacheKeyed[deviceId] === 'undefined')
                 return undefined;
             return DevicesRepository.devicesCacheKeyed[deviceId];
         }
@@ -179,7 +179,7 @@ export default class DevicesRepository {
         if (!DevicesRepository.isLoading &&
             !DevicesRepository.devicesCache) {
             DevicesRepository.isLoading = true;
-            DevicesRepository.devicesCache = (await HttpService.getAsync<SignalDeviceDto[]>("/devices")).map(SignalDeviceDto.FromDto);
+            DevicesRepository.devicesCache = (await HttpService.getAsync<SignalDeviceDto[]>('/devices'))?.map(SignalDeviceDto.FromDto) ?? [];
             DevicesRepository.devicesCacheKeyed = {};
             DevicesRepository.devicesCache.forEach(device => {
                 if (DevicesRepository.devicesCacheKeyed)

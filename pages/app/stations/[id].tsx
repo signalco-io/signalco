@@ -2,7 +2,7 @@ import { Alert, Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Lin
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
-import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
+import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import { observer } from 'mobx-react-lite';
 import StationsRepository, { IStationModel, IBlobInfoModel } from '../../../src/stations/StationsRepository';
 import UploadIcon from '@mui/icons-material/Upload';
@@ -18,12 +18,12 @@ const stationCommandAsync = async (stationId: string | string[] | undefined, com
     try {
         if (stationId == null ||
             typeof stationId !== 'string')
-            throw Error("Station identifier not available. Can't " + commandDescription);
+            throw Error('Station identifier not available. Can\'t ' + commandDescription);
 
         await command(stationId);
     }
     catch (err) {
-        console.error("Station command execution error", err);
+        console.error('Station command execution error', err);
     }
 }
 
@@ -38,7 +38,7 @@ const StationDetails = () => {
     useEffect(() => {
         const loadStationAsync = async () => {
             try {
-                if (typeof id !== "object" &&
+                if (typeof id !== 'object' &&
                     typeof id !== 'undefined') {
                     const loadedStation = await StationsRepository.getStationAsync(id);
                     setStation(loadedStation);
@@ -52,11 +52,11 @@ const StationDetails = () => {
 
         const loadLatestAvailableVersionAsync = async () => {
             try {
-                const latestAvailable = await (await fetch("https://api.github.com/repos/signalco-io/station/releases/latest")).json();
-                setLatestAvailableVersion(latestAvailable?.name?.replace("v", ""));
+                const latestAvailable = await (await fetch('https://api.github.com/repos/signalco-io/station/releases/latest')).json();
+                setLatestAvailableVersion(latestAvailable?.name?.replace('v', ''));
             }
             catch (err) {
-                console.warn("Failed to retrieve latest available version", err);
+                console.warn('Failed to retrieve latest available version', err);
             }
         };
 
@@ -64,12 +64,12 @@ const StationDetails = () => {
         loadLatestAvailableVersionAsync();
     }, [id]);
 
-    const handleUpdateSystem = () => stationCommandAsync(id, StationsRepository.updateSystemAsync, "update system");
-    const handleUpdate = () => stationCommandAsync(id, StationsRepository.updateStationAsync, "update station");
-    const handleRestartSystem = () => stationCommandAsync(id, StationsRepository.restartSystemAsync, "restart system");
-    const handleShutdownSystem = () => stationCommandAsync(id, StationsRepository.shutdownSystemAsync, "shutdown system");
-    const handleRestartStation = () => stationCommandAsync(id, StationsRepository.restartStationAsync, "restart station");
-    const handleBeginDiscovery = () => stationCommandAsync(id, StationsRepository.beginDiscoveryAsync, "begin discovery");
+    const handleUpdateSystem = () => stationCommandAsync(id, StationsRepository.updateSystemAsync, 'update system');
+    const handleUpdate = () => stationCommandAsync(id, StationsRepository.updateStationAsync, 'update station');
+    const handleRestartSystem = () => stationCommandAsync(id, StationsRepository.restartSystemAsync, 'restart system');
+    const handleShutdownSystem = () => stationCommandAsync(id, StationsRepository.shutdownSystemAsync, 'shutdown system');
+    const handleRestartStation = () => stationCommandAsync(id, StationsRepository.restartStationAsync, 'restart station');
+    const handleBeginDiscovery = () => stationCommandAsync(id, StationsRepository.beginDiscoveryAsync, 'begin discovery');
 
     const canUpdate = (latestAvailableVersion && station?.version)
         ? compareVersions(latestAvailableVersion, station.version)
@@ -83,9 +83,9 @@ const StationDetails = () => {
             {
                 id: i,
                 name: nameMatch && nameMatch[5] ? nameMatch[4] : (nameMatch ? nameMatch[3] : i),
-                running: isRunning ? "Running" : "Stopped",
+                running: isRunning ? 'Running' : 'Stopped',
                 actions: (
-                    <LoadingButton color={isRunning ? "error" : "success"} disabled={!station} onClick={() => station && startStopAction(station.id, i)}>{isRunning ? "Stop" : "Start"}</LoadingButton>
+                    <LoadingButton color={isRunning ? 'error' : 'success'} disabled={!station} onClick={() => station && startStopAction(station.id, i)}>{isRunning ? 'Stop' : 'Start'}</LoadingButton>
                 )
             }
         );
@@ -102,7 +102,7 @@ const StationDetails = () => {
             id: i.name,
             name: nameMatch ? nameMatch[1] : i.name,
             created: <ReactTimeago date={i.createdTimeStamp} />,
-            modified: i.modifiedTimeStamp ? <ReactTimeago date={i.modifiedTimeStamp} /> : "Never",
+            modified: i.modifiedTimeStamp ? <ReactTimeago date={i.modifiedTimeStamp} /> : 'Never',
             size: i.size,
             actions: (
                 <LoadingButton disabled={!!loadingLog && loadingLog !== i.name} loading={loadingLog === i.name} onClick={async () => {
@@ -195,8 +195,8 @@ const StationDetails = () => {
                                         <Stack direction="row" alignItems="center" spacing={1}>
                                             <ConfirmDeleteButton
                                                 title="Delete station"
-                                                buttonLabel='Delete...'
-                                                expectedConfirmText={station?.id || "confirm"}
+                                                buttonLabel="Delete..."
+                                                expectedConfirmText={station?.id || 'confirm'}
                                                 onConfirm={handleDelete} />
                                         </Stack>
                                     </Grid>
@@ -208,7 +208,7 @@ const StationDetails = () => {
                         <Card>
                             <CardHeader title="Channels" />
                             <CardMedia>
-                                {isLoading ? "Loading..." : (
+                                {isLoading ? 'Loading...' : (
                                     <AutoTable {...workerServicesTable} />
                                 )}
                             </CardMedia>
@@ -218,7 +218,7 @@ const StationDetails = () => {
                         <Card>
                             <CardHeader title="Logs" />
                             <CardMedia>
-                                {isLoading ? "Loading..." : (
+                                {isLoading ? 'Loading...' : (
                                     <AutoTable {...logsTable} />
                                 )}
                             </CardMedia>
@@ -254,12 +254,12 @@ interface ILogViewerLineProps {
 const logLineRegex = new RegExp(/\[(.*)\]\s\((\w+)\)\s(.*)/);
 
 const LogLevelBadge = ({ level }: { level: string }) => {
-    let color = "gray";
+    let color = 'gray';
     switch (level) {
-        case "Information": color = 'DodgerBlue'; break;
-        case "Warning": color = 'DarkOrange'; break;
-        case "Fatal":
-        case "Error": color = 'DarkRed'; break;
+        case 'Information': color = 'DodgerBlue'; break;
+        case 'Warning': color = 'DarkOrange'; break;
+        case 'Fatal':
+        case 'Error': color = 'DarkRed'; break;
     }
 
     return <span style={{ backgroundColor: color, padding: '2px', paddingLeft: '6px', paddingRight: '6px', borderRadius: 4, marginRight: '8px', fontSize: '10px', textTransform: 'uppercase' }}>{level.substring(0, 3)}</span>

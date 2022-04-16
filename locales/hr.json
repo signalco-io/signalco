@@ -9,7 +9,7 @@
             "UserProfileImageAlt": "Slika korisničkog profila"
         },
         "Nav": {
-            "Dashboard": "Kontrolna ploča",
+            "Dashboards": "Kontrolne ploče",
             "Entities": "Entiteti",
             "Processes": "Procesi",
             "Stations": "Stanice",
@@ -32,7 +32,11 @@
                 "Light": "Svijetla"
             },
             "Language": "Jezik",
-            "SelectLanguage": "Odabir jezika"
+            "SelectLanguage": "Odabir jezika",
+            "Nickname": "Nadimak",
+            "Profile": "Profil",
+            "Developer": "Developer",
+            "ApiEndpoint": "API Endpoint"
         },
         "Placeholders": {
             "NoData": "Nema podataka za prikaz",

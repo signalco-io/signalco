@@ -1,8 +1,8 @@
-import DevicesRepository from "../devices/DevicesRepository";
-import PageNotificationService from "../notifications/PageNotificationService";
-import HttpService from "../services/HttpService";
+import DevicesRepository from '../devices/DevicesRepository';
+import PageNotificationService from '../notifications/PageNotificationService';
+import HttpService from '../services/HttpService';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-import CurrentUserProvider from "../services/CurrentUserProvider";
+import CurrentUserProvider from '../services/CurrentUserProvider';
 
 class SignalSignalRDeviceStateDto {
     DeviceId?: string;
@@ -20,7 +20,7 @@ class RealtimeService {
             typeof state.ChannelName === 'undefined' ||
             typeof state.ContactName === 'undefined' ||
             typeof state.TimeStamp === 'undefined') {
-        console.warn("Got device state with invalid values", state);
+        console.warn('Got device state with invalid values', state);
         return;
         }
 
@@ -39,22 +39,22 @@ class RealtimeService {
         try {
             if (this.devicesHub == null) return;
 
-            console.debug("Connecting to SignalR...");
+            console.debug('Connecting to SignalR...');
 
             await this.devicesHub.start();
-            this.devicesHub.on("devicestate", this.HandleDeviceStateAsync);
+            this.devicesHub.on('devicestate', this.HandleDeviceStateAsync);
             this.devicesHub.onclose((err) => {
-                console.log("SignalR connection closed. Reconnecting with delay...");
-                console.debug("SignalR connection closes reason:", err);
+                console.log('SignalR connection closed. Reconnecting with delay...');
+                console.debug('SignalR connection closes reason:', err);
                 this._hubStartWithRetryAsync(0);
             });
             this.devicesHub.onreconnecting((err) => {
-                console.log("Signalr reconnecting...");
-                console.debug("Signalr reconnection reason:", err);
+                console.log('Signalr reconnecting...');
+                console.debug('Signalr reconnection reason:', err);
             });
             this.devicesHub.onreconnected(() => {
-                console.log("Signalr reconnected");
-                PageNotificationService.show("Realtime connection to cloud established.", "success");
+                console.log('Signalr reconnected');
+                PageNotificationService.show('Realtime connection to cloud established.', 'success');
             });
             } catch (err) {
             const delay = Math.min((retryCount + 1) * 2, 180);
@@ -63,7 +63,7 @@ class RealtimeService {
 
             // TODO: Replace with page indicator
             if (delay > 10) {
-                PageNotificationService.show(`Realtime connection to cloud lost. Reconnecting in ${delay}s...`, "warning");
+                PageNotificationService.show(`Realtime connection to cloud lost. Reconnecting in ${delay}s...`, 'warning');
             }
 
             setTimeout(() => {
@@ -75,14 +75,14 @@ class RealtimeService {
     async startAsync() {
         if (this.devicesHub != null) return;
 
-        console.debug("Configuring SignalR...");
+        console.debug('Configuring SignalR...');
 
         this.devicesHub = new HubConnectionBuilder()
           .withUrl(HttpService.getApiUrl('/signalr/devices'), {
             accessTokenFactory: () => {
                 const token = CurrentUserProvider.getToken();
                 if (token === 'undefined')
-                    throw Error("TokenFactory not present. Unable to authorize SignalR client.");
+                    throw Error('TokenFactory not present. Unable to authorize SignalR client.');
                 return token!;
             }
           })

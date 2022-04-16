@@ -6,14 +6,14 @@ const LightBulbVisual = (props: { state: boolean, size: number }) => {
     const appContext = useContext(AppContext);
 
     const isActive = props.state;
-    const bulbColor = isActive ? "#FFDD66" : "#c4c4c4";
-    const edgeColor = appContext.theme === 'dark' ? "#fff" : "#333";
-    const glossColor = appContext.theme === 'dark' ? "#000" : "#fff";
+    const bulbColor = isActive ? '#FFDD66' : '#c4c4c4';
+    const edgeColor = appContext.isDark ? '#fff' : '#333';
+    const glossColor = appContext.isDark ? '#000' : '#fff';
 
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className={styles.root} width={props.size * 1.4} height={props.size * 1.4} fill="none" viewBox="0 0 78 94">
             <g className="Theme=Light, State=On">
-                <g className="GlassCircle" filter={isActive ? "url(#lightbulbfilter0_d_11:221)" : ''}>
+                <g className="GlassCircle" filter={isActive ? 'url(#lightbulbfilter0_d_11:221)' : ''}>
                     <circle cx="39" cy="53" r="15" fill={bulbColor} />
                 </g>
                 <path fill={bulbColor} d="M25 52.036c0-9.36 5.026-9.805 5.026-19.016 0-9.21 18.235-9.508 18.523 0C48.836 42.528 53 42.825 53 52.036c0 9.21-28 9.36-28 0z" className="GlassCurve" />

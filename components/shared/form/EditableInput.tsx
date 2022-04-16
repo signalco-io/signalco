@@ -1,8 +1,8 @@
-import { Close, Edit, Save } from "@mui/icons-material";
-import { Theme, Typography, Box, Input, InputAdornment, IconButton } from "@mui/material";
-import { SystemStyleObject } from "@mui/system";
-import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
+import { Close, Edit, Save } from '@mui/icons-material';
+import { Theme, Typography, Box, Input, InputAdornment, IconButton } from '@mui/material';
+import { SystemStyleObject } from '@mui/system';
+import { observer } from 'mobx-react-lite';
+import React, { useEffect, useState } from 'react';
 
 interface IEditableInputProps {
     text: string,
@@ -38,17 +38,23 @@ function EditableInput(props: IEditableInputProps) {
         setIsEditing(false);
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') handleConfirm();
+        else if (e.key === 'Escape') handleCancel();
+    };
+
     return (
         isEditing
             ? <Input
                 sx={{
-                    "& input": {
+                    '& input': {
                         ...(sxInput || sx)
                     }
                 }}
                 value={editingText}
                 autoFocus
                 onChange={(e) => setEditingText(e.target.value)}
+                onKeyDown={handleKeyDown}
                 endAdornment={
                     <InputAdornment position="end">
                         <IconButton
@@ -66,8 +72,8 @@ function EditableInput(props: IEditableInputProps) {
             />
             : <Box sx={{ py: '4px', cursor: 'pointer' }} onClick={() => setIsEditing(true)}>
                 <Typography sx={{
-                    "& > .editIndicator": { visibility: 'hidden' },
-                    "&:hover": { "& > .editIndicator": { visibility: 'visible' } },
+                    '& > .editIndicator': { visibility: 'hidden' },
+                    '&:hover': { '& > .editIndicator': { visibility: 'visible' } },
                     ...sx
                 }} noWrap={noWrap}>{text}<span className="editIndicator"><Edit sx={{ ml: 1, verticalAlign: 'middle' }} /></span></Typography>
             </Box>

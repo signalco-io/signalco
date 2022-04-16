@@ -1,11 +1,11 @@
-import { Box, Button, Popover, Stack, Tab, Tabs, Typography } from "@mui/material";
-import { bindPopover, bindTrigger, usePopupState } from "material-ui-popup-state/hooks";
-import React, { useEffect } from "react";
+import { Box, Button, Popover, Stack, Tab, Tabs, Typography } from '@mui/material';
+import { bindPopover, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
+import React, { useEffect } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
-import { observer } from "mobx-react-lite";
-import useHashParam from "../../src/hooks/useHashParam";
-import DashboardSelectorMenu from "./DashboardSelectorMenu";
+import DashboardsRepository from '../../src/dashboards/DashboardsRepository';
+import { observer } from 'mobx-react-lite';
+import useHashParam from '../../src/hooks/useHashParam';
+import DashboardSelectorMenu from './DashboardSelectorMenu';
 
 export interface IDashboardSelectorProps {
     onSelection: (id: string) => void,
@@ -35,19 +35,21 @@ function DashboardSelector(props: IDashboardSelectorProps) {
             onSelection(selectedId);
     }, [selectedId, onSelection]);
 
-    console.debug("Rendering DashboardSelector");
+    console.debug('Rendering DashboardSelector');
 
     return (
         <>
             <Stack spacing={{ xs: 0, sm: 2 }} direction="row">
-                <Box>
-                    <Button {...bindTrigger(popupState)}>
-                        <Stack spacing={1} sx={{ pl: 1 }} direction="row" alignItems="center">
-                            <Typography variant="h2" fontWeight={500} fontSize={{ xs: 18, sm: 24 }} noWrap>{currentName}</Typography>
-                            <KeyboardArrowDownIcon sx={{ fontSize: { xs: "28px", sm: "32px" } }} />
-                        </Stack>
-                    </Button>
-                </Box>
+                {dashboards.length > 0 && (
+                    <Box>
+                        <Button {...bindTrigger(popupState)}>
+                            <Stack spacing={1} sx={{ pl: 1 }} direction="row" alignItems="center">
+                                <Typography variant="h2" fontWeight={500} fontSize={{ xs: 18, sm: 24 }} noWrap>{currentName}</Typography>
+                                <KeyboardArrowDownIcon sx={{ fontSize: { xs: '28px', sm: '32px' } }} />
+                            </Stack>
+                        </Button>
+                    </Box>
+                )}
                 {favoriteDashboards.length > 0 && (
                     <Tabs
                         value={0}
@@ -55,13 +57,13 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                         scrollButtons="auto"
                         aria-label="pinned dashboards"
                         sx={{
-                            ".MuiTabScrollButton-root": {
+                            '.MuiTabScrollButton-root': {
                                 display: 'none'
                             },
-                            ".MuiTabs-indicator": {
+                            '.MuiTabs-indicator': {
                                 backgroundColor: 'transparent'
                             },
-                            ".Mui-selected > h3": {
+                            '.Mui-selected > h3': {
                                 color: 'text.secondary'
                             }
                         }}

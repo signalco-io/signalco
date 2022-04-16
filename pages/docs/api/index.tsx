@@ -1,41 +1,41 @@
-import { TreeItem, TreeView } from "@mui/lab";
-import { Link as MuiLink, Alert, AlertTitle, Chip, FormControl, Grid, InputLabel, MenuItem, Select, Skeleton, Stack, TextField, Typography, Paper, Divider, Badge, Box, Button } from "@mui/material";
-import { red } from "@mui/material/colors";
-import axios, { AxiosError, Method } from "axios";
-import { useCallback, useState } from "react";
-import { PageFullLayout } from "../../../components/layouts/PageFullLayout";
-import { OpenAPIV3 } from "openapi-types";
-import { useLoadAndError } from "../../../src/hooks/useLoadingAndError";
-import Link from "next/link";
-import useHashParam from "../../../src/hooks/useHashParam";
-import CopyToClipboardInput from "../../../components/shared/form/CopyToClipboardInput";
-import { useContext } from "react";
-import React from "react";
+import { TreeItem, TreeView } from '@mui/lab';
+import { Link as MuiLink, Alert, AlertTitle, Chip, FormControl, Grid, InputLabel, MenuItem, Select, Skeleton, Stack, TextField, Typography, Paper, Divider, Badge, Box, Button } from '@mui/material';
+import { red } from '@mui/material/colors';
+import axios, { AxiosError, Method } from 'axios';
+import { useCallback, useState } from 'react';
+import { PageFullLayout } from '../../../components/layouts/PageFullLayout';
+import { OpenAPIV3 } from 'openapi-types';
+import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
+import Link from 'next/link';
+import useHashParam from '../../../src/hooks/useHashParam';
+import CopyToClipboardInput from '../../../components/shared/form/CopyToClipboardInput';
+import { useContext } from 'react';
+import React from 'react';
 import OpenInNewSharpIcon from '@mui/icons-material/OpenInNewSharp';
-import { camelToSentenceCase } from "../../../src/helpers/StringHelpers";
+import { camelToSentenceCase } from '../../../src/helpers/StringHelpers';
 import SecurityIcon from '@mui/icons-material/Security';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { ObjectDictAny } from "../../../src/sharedTypes";
-import Editor, { loader } from "@monaco-editor/react";
-import { AppContext } from "../../_app";
+import { ObjectDictAny } from '../../../src/sharedTypes';
+import Editor, { loader } from '@monaco-editor/react';
+import { AppContext } from '../../_app';
 import SendIcon from '@mui/icons-material/Send';
 
-loader.config({ paths: { vs: "/vs" } });
+loader.config({ paths: { vs: '/vs' } });
 if (typeof window !== 'undefined') {
     loader.init().then(monaco => {
-        monaco.editor.defineTheme("signalco-dark", {
-            base: "vs-dark",
+        monaco.editor.defineTheme('signalco-dark', {
+            base: 'vs-dark',
             colors: {
-                "editor.background": '#121212'
+                'editor.background': '#121212'
             },
             inherit: true,
             rules: []
         });
-        monaco.editor.defineTheme("signalco-light", {
-            base: "vs-dark",
+        monaco.editor.defineTheme('signalco-light', {
+            base: 'vs-dark',
             colors: {
-                "editor.background": '#eeeeee'
+                'editor.background': '#eeeeee'
             },
             inherit: true,
             rules: []
@@ -47,13 +47,13 @@ type ChipColors = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'succ
 
 const OperationChip = (props: { operation?: string | undefined, small?: boolean }) => {
     const color = ({
-        "get": "success",
-        "post": "info",
-        "put": "warning",
-        "delete": "error"
-    }[props.operation?.toLowerCase() ?? ''] ?? "default") as ChipColors;
+        'get': 'success',
+        'post': 'info',
+        'put': 'warning',
+        'delete': 'error'
+    }[props.operation?.toLowerCase() ?? ''] ?? 'default') as ChipColors;
 
-    return <Chip color={color} size={props.small ? "small" : "medium"} sx={{ fontWeight: 'bold' }} label={props.operation?.toUpperCase()} />;
+    return <Chip color={color} size={props.small ? 'small' : 'medium'} sx={{ fontWeight: 'bold' }} label={props.operation?.toUpperCase()} />;
 };
 
 type ApiOperationProps = { path: string, operation: OpenAPIV3.HttpMethods, info: OpenAPIV3.OperationObject };
@@ -63,12 +63,12 @@ function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject
     if (typeof schemaObj === 'undefined') return undefined;
 
     switch (schemaObj.type) {
-        case "string":
-            return "";
-        case "boolean": return true;
-        case "number":
-        case "integer": return 0;
-        case "object":
+        case 'string':
+            return '';
+        case 'boolean': return true;
+        case 'number':
+        case 'integer': return 0;
+        case 'object':
             if (typeof schemaObj.properties === 'undefined') return {};
             let curr: ObjectDictAny = {};
             Object.keys(schemaObj.properties).forEach(prop => {
@@ -77,7 +77,7 @@ function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject
                 }
             });
             return curr;
-        case "array":
+        case 'array':
             const arraySchema = schemaObj as OpenAPIV3.ArraySchemaObject;
             return [schemaToJson(api, arraySchema.items)];
         default: return undefined;
@@ -98,7 +98,7 @@ const NonArraySchema = (props: { name: string, schema: OpenAPIV3.NonArraySchemaO
     );
 };
 const ArraySchema = (props: { name: string, schema: OpenAPIV3.ArraySchemaObject }) =>
-    <Typography key={props.name} color={red[400]} fontWeight="bold" variant="overline">{"Not supported property type \"array\""}</Typography>
+    <Typography key={props.name} color={red[400]} fontWeight="bold" variant="overline">{'Not supported property type "array"'}</Typography>
 
 const Schema = (props: { name: string, schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | undefined }) => {
     const api = useContext(ApiContext);
@@ -113,7 +113,7 @@ const Schema = (props: { name: string, schema: OpenAPIV3.ReferenceObject | OpenA
                 <Typography variant="body2" color="textSecondary">{schemaResolved?.type}</Typography>
             </Stack>
             <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', px: 2 }}>
-                {schemaResolved?.type === "array"
+                {schemaResolved?.type === 'array'
                     ? <ArraySchema name={props.name} schema={schemaResolved as OpenAPIV3.ArraySchemaObject} />
                     : <NonArraySchema name={props.name} schema={schemaResolved as OpenAPIV3.NonArraySchemaObject} />}
             </Box>
@@ -123,7 +123,7 @@ const Schema = (props: { name: string, schema: OpenAPIV3.ReferenceObject | OpenA
 
 const ApiOperation = (props: ApiOperationProps) => {
     const api = useContext(ApiContext);
-    if (!api) throw "Api undefined";
+    if (!api) throw 'Api undefined';
     const { path, operation, info } = props;
     const { description, summary, externalDocs, deprecated, tags, security, parameters, requestBody, responses } = info;
 
@@ -137,8 +137,8 @@ const ApiOperation = (props: ApiOperationProps) => {
                     <OperationChip operation={operation} />
                     <Typography
                         variant="h2"
-                        sx={{ textDecoration: deprecated ? "line-through" : undefined }}
-                        title={deprecated ? "Deprecated" : undefined}>{path}</Typography>
+                        sx={{ textDecoration: deprecated ? 'line-through' : undefined }}
+                        title={deprecated ? 'Deprecated' : undefined}>{path}</Typography>
                 </Stack>
                 <Stack spacing={1} direction="row" alignItems="center">
                     {security && security.map((securityVariant, i) => <SecurityBadge key={i} security={securityVariant} />)}
@@ -348,7 +348,7 @@ const Route = () => {
                     <Grid item xs={6} sx={{ p: 4 }}>
                         <ApiOperation path={pathName} operation={httpOperation} info={operation} />
                     </Grid>
-                    <Grid item xs={6} sx={{ borderLeft: "1px solid", borderColor: 'divider', p: 2 }}>
+                    <Grid item xs={6} sx={{ borderLeft: '1px solid', borderColor: 'divider', p: 2 }}>
                         <Actions path={pathName} operation={httpOperation} info={operation} />
                     </Grid>
                 </Grid>
@@ -374,7 +374,7 @@ const SecurityInput = (props: { security: OpenAPIV3.SecurityRequirementObject })
     return (
         <>
             {info.map(source => {
-                if (source && source.type === "http") {
+                if (source && source.type === 'http') {
                     const httpSource = source as OpenAPIV3.HttpSecurityScheme;
                     return (
                         <Stack key={httpSource.scheme}>
@@ -386,7 +386,7 @@ const SecurityInput = (props: { security: OpenAPIV3.SecurityRequirementObject })
                         </Stack>
                     );
                 } else if (source) {
-                    return <Typography key={source.type} color={red[400]} fontWeight="bold" variant="overline">{"Not supported security type \"" + source.type + "\""}</Typography>
+                    return <Typography key={source.type} color={red[400]} fontWeight="bold" variant="overline">{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
                     return <Typography key="unknown" color={red[400]} fontWeight="bold" variant="overline">Security not defined</Typography>
                 }
@@ -401,11 +401,11 @@ const SecurityBadge = (props: { security: OpenAPIV3.SecurityRequirementObject })
     return (
         <>
             {info.map(source => {
-                if (source && source.type === "http") {
+                if (source && source.type === 'http') {
                     const httpSource = source as OpenAPIV3.HttpSecurityScheme;
                     return <Chip variant="outlined" icon={<SecurityIcon fontSize="small" />} key={httpSource.scheme} label={camelToSentenceCase(httpSource.scheme)} />;
                 } else if (source) {
-                    return <Typography key={source.type} color={red[400]} fontWeight="bold" variant="overline">{"Not supported security type \"" + source.type + "\""}</Typography>
+                    return <Typography key={source.type} color={red[400]} fontWeight="bold" variant="overline">{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
                     return <Typography key="unknown" color={red[400]} fontWeight="bold" variant="overline">Security not defined</Typography>
                 }
@@ -426,7 +426,7 @@ const Actions = (props: ActionsProps) => {
 
     const { requestBody, security } = info;
     const requestBodyResolved = requestBody && resolveRef(api, requestBody);
-    const [requestBodyValue, setRequestBodyValue] = useState(requestBodyResolved ? JSON.stringify(schemaToJson(api, requestBodyResolved.content["application/json"].schema), undefined, 2) : '');
+    const [requestBodyValue, setRequestBodyValue] = useState(requestBodyResolved ? JSON.stringify(schemaToJson(api, requestBodyResolved.content['application/json'].schema), undefined, 2) : '');
 
     const [response, setResponse] = useState('');
     const [responseStatusCode, setResponseStatusCode] = useState<number | undefined>(undefined);
@@ -436,7 +436,7 @@ const Actions = (props: ActionsProps) => {
             const response = await axios.request({
                 url: requestUrl,
                 method: props.operation.toString() as Method,
-                data: props.operation !== "get" ? requestBodyValue : undefined,
+                data: props.operation !== 'get' ? requestBodyValue : undefined,
                 // params: props.operation === "get" ? data : undefined,
                 headers: {
                     //   Authorization: token,
@@ -481,7 +481,7 @@ const Actions = (props: ActionsProps) => {
                         ))}
                     </Select>
                 </FormControl>}
-            <CopyToClipboardInput id="base-address" label="Base address" readOnly fullWidth sx={{ fontFamily: "Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace", fontSize: '0.8em' }} value={selectedServerUrl} />
+            <CopyToClipboardInput id="base-address" label="Base address" readOnly fullWidth sx={{ fontFamily: 'Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace', fontSize: '0.8em' }} value={selectedServerUrl} />
             {security && (
                 <Stack spacing={1}>
                     <Typography variant="overline">Authentication</Typography>
@@ -499,9 +499,9 @@ const Actions = (props: ActionsProps) => {
                             <Editor
                                 height="300px"
                                 language="json"
-                                theme={appContext.theme === 'dark' ? "signalco-dark" : 'signalco-light'}
+                                theme={appContext.isDark ? 'signalco-dark' : 'signalco-light'}
                                 options={{
-                                    lineNumbers: "off",
+                                    lineNumbers: 'off',
                                     minimap: { enabled: false }
                                 }}
                                 value={requestBodyValue}
@@ -521,11 +521,11 @@ const Actions = (props: ActionsProps) => {
                         <Editor
                             height="200px"
                             language="json"
-                            theme={appContext.theme === 'dark' ? "signalco-dark" : 'signalco-light'}
+                            theme={appContext.isDark ? 'signalco-dark' : 'signalco-light'}
                             options={{
-                                lineNumbers: "off",
+                                lineNumbers: 'off',
                                 minimap: { enabled: false },
-                                renderValidationDecorations: "off",
+                                renderValidationDecorations: 'off',
                                 readOnly: true
                             }}
                             value={response || 'Empty response'} />
@@ -543,11 +543,11 @@ async function getOpenApiDoc(url: string) {
 const ApiContext = React.createContext<OpenAPIV3.Document | undefined>(undefined);
 
 const DocsApiPage = () => {
-    const url = "https://api.signalco.io/api/swagger.json";
+    const url = 'https://api.signalco.io/api/swagger.json';
     const apiRequest = useCallback(() => getOpenApiDoc(url), [url]);
     const { item: api, isLoading, error } = useLoadAndError<OpenAPIV3.Document>(apiRequest);
 
-    console.info("OpenAPI scheme: ", api);
+    console.info('OpenAPI scheme: ', api);
 
     return (
         <ApiContext.Provider value={api}>
@@ -555,7 +555,7 @@ const DocsApiPage = () => {
             <Stack>
                 {error && (
                     <Alert severity="error" variant="filled" sx={{ borderRadius: 0 }}>
-                        <AlertTitle>{"Couldn't load OpenAPI docs"}</AlertTitle>
+                        <AlertTitle>{'Couldn\'t load OpenAPI docs'}</AlertTitle>
                         {error}
                     </Alert>
                 )}

@@ -1,5 +1,5 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import WindowVisual from "./WindowVisual";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import WindowVisual from './WindowVisual';
 
 export default {
     title: 'Visuals/WindowVisual',

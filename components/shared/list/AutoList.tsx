@@ -10,13 +10,13 @@ import {
   SvgIconTypeMap,
 
   Typography
-} from "@mui/material";
-import { OverridableComponent } from "@mui/material/OverridableComponent";
-import React from "react";
-import AutoActionButton from "../action/AutoActionButton";
-import ResultsPlaceholder from "../indicators/ResultsPlaceholder";
-import IAutoAction from "../interfaces/IAutoAction";
-import IErrorProps from "../interfaces/IErrorProps";
+} from '@mui/material';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
+import React from 'react';
+import AutoActionButton from '../action/AutoActionButton';
+import ResultsPlaceholder from '../indicators/ResultsPlaceholder';
+import IAutoAction from '../interfaces/IAutoAction';
+import IErrorProps from '../interfaces/IErrorProps';
 
 export interface IAutoListItem {
   id: string;
@@ -66,7 +66,7 @@ function AutoList<T extends IAutoListItem>(props: IAutoListProps<T>) {
       <List>
         {props.error ? (
           <Alert severity="error">
-            {(props.error || "Unknown error").toString()}
+            {(props.error || 'Unknown error').toString()}
           </Alert>
         ) : (
             <>

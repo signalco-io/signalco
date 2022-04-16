@@ -34,10 +34,10 @@ const WidgetShades = (props: IWidgetSharedProps) => {
     useWidgetOptions(stateOptions, props);
     useWidgetActive(true, props);
 
-    const handleStateChangeRequest = (direction: "up" | "down" | "stop") => {
+    const handleStateChangeRequest = (direction: 'up' | 'down' | 'stop') => {
         if (typeof device === 'undefined') {
             console.warn('State change requested but device is undefined.');
-            PageNotificationService.show("Can't execute action, widget is not loaded yet.", "warning");
+            PageNotificationService.show('Can\'t execute action, widget is not loaded yet.', 'warning');
             return;
         }
 
@@ -51,7 +51,7 @@ const WidgetShades = (props: IWidgetSharedProps) => {
         const actions: StateAction[] = [];
         const stopAfterDelay = config.stopAfter ? (Number.parseFloat(config.stopAfter) || 0) * 1000 : 0;
         switch (direction) {
-            case "up":
+            case 'up':
                 actions.push({
                     deviceId: device.id,
                     channelName: config?.targetContactUp?.channelName,
@@ -59,7 +59,7 @@ const WidgetShades = (props: IWidgetSharedProps) => {
                     valueSerialized: 'true'
                 })
                 break;
-            case "down":
+            case 'down':
                 actions.push({
                     deviceId: device.id,
                     channelName: config?.targetContactDown?.channelName,
@@ -68,7 +68,7 @@ const WidgetShades = (props: IWidgetSharedProps) => {
                 })
                 break;
             default:
-            case "stop":
+            case 'stop':
                 actions.push.apply(actions, stopActions());
                 break;
         }
@@ -89,7 +89,7 @@ const WidgetShades = (props: IWidgetSharedProps) => {
                     <Typography fontWeight="light" noWrap>{label}</Typography>
                 </Stack>
             </Grid>
-            <Grid item xs={6} sx={{ flexGrow: 1, bgcolor: 'background.paper', borderLeft: "1px solid", borderColor: 'divider', borderRadius: 2 }}>
+            <Grid item xs={6} sx={{ flexGrow: 1, bgcolor: 'background.paper', borderLeft: '1px solid', borderColor: 'divider', borderRadius: 2 }}>
                 <Stack sx={{ height: '100%' }} justifyContent="stretch">
                     <Button onClick={() => handleStateChangeRequest('up')} sx={{ flexGrow: 1, borderBottom: '1px solid', borderColor: 'divider' }}><ArrowUpward /></Button>
                     <Button onClick={() => handleStateChangeRequest('stop')} sx={{ flexGrow: 1 }}><Stop /></Button>

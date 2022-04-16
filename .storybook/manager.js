@@ -3,4 +3,4 @@ import signalcoTheme from './signalco-theme';
 
 addons.setConfig({
     theme: signalcoTheme,
-}); 
+});

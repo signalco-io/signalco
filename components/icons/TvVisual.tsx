@@ -6,9 +6,9 @@ const TvVisual = (props: { state: boolean, size: number }) => {
     const appContext = useContext(AppContext);
 
     const isActive = props.state;
-    const screenColor = isActive ? "#378DBD" : "#333";
-    const edgeColor = appContext.theme === 'dark' ? "#fff" : "#000";
-    const shadowColor = appContext.theme === 'dark' ? "#000" : "#fff";
+    const screenColor = isActive ? '#378DBD' : '#333';
+    const edgeColor = appContext.isDark ? '#fff' : '#000';
+    const shadowColor = appContext.isDark ? '#000' : '#fff';
 
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className={styles.root} width={props.size * 1.6} height={props.size * 1.6} fill="none" viewBox="0 0 103 77">
@@ -19,10 +19,10 @@ const TvVisual = (props: { state: boolean, size: number }) => {
                 <path fill={shadowColor} fillOpacity=".12" d="M39.172 54.524H52.62v3.286H39.172z" className="BaseStandShadow" />
                 <path fill={edgeColor} d="M32.448 57.809h38.103v2.19H32.448z" className="Base" />
                 <path fill={shadowColor} fillOpacity=".12" d="M32.448 57.809H52.62v2.19H32.448z" className="BaseShadow" />
-                <g className="Screen" filter={isActive ? "url(#tvvisualfilter0_d)" : ''}>
+                <g className="Screen" filter={isActive ? 'url(#tvvisualfilter0_d)' : ''}>
                     <path fill={screenColor} d="M22.362 18.381h58.276v31.762H22.362z" />
                 </g>
-                <path fill="#121212" floodOpacity=".12" opacity={isActive ? "0" : "1"} d="M22.362 18.381h30.259v31.762H22.362z" className="ScreenShadow" />
+                <path fill="#121212" floodOpacity=".12" opacity={isActive ? '0' : '1'} d="M22.362 18.381h30.259v31.762H22.362z" className="ScreenShadow" />
             </g>
             <defs>
                 <filter id="tvvisualfilter0_d" width="102.276" height="75.762" x=".362" y=".381" className="tvvisualfilter0_d" colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse">

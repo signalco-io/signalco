@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useState } from 'react';
 
-function parseHash() {
+export function parseHash() {
     if (typeof window === 'undefined') {
         return new URLSearchParams();
     }
@@ -11,7 +11,7 @@ function parseHash() {
     );
 }
 
-function parseHashParam(paramName: string) {
+export function parseHashParam(paramName: string) {
     return Object.fromEntries(parseHash())[paramName];
 }
 

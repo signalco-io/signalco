@@ -1,7 +1,7 @@
 import { Alert, Box, ButtonBase, Chip, Collapse, Container, Grid, IconButton, Menu, MenuItem, Paper, Popover, Skeleton, Stack, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
-import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
+import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import { observer } from 'mobx-react-lite';
 import ProcessesRepository, { IProcessModel } from '../../../src/processes/ProcessesRepository';
 import NoDataPlaceholder from '../../../components/shared/indicators/NoDataPlaceholder';
@@ -167,7 +167,7 @@ class Conduct implements IConduct {
 }
 
 async function parseProcessConfigurationAsync(configJson: string | undefined) {
-    const config = JSON.parse(configJson ?? "");
+    const config = JSON.parse(configJson ?? '');
 
     console.log('Parsing config...', config);
 
@@ -197,7 +197,7 @@ async function parseProcessConfigurationAsync(configJson: string | undefined) {
 const DisplayValue = observer((props: { value: any | undefined, dataType: string, onChanged: (value: any | undefined) => void }) => {
     const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
     const [dataType, setDataType] = useState(props.dataType);
-    const [value, setValue] = useState<string>(props.value || "");
+    const [value, setValue] = useState<string>(props.value || '');
 
     useEffect(() => {
         if (!dataType) {
@@ -227,9 +227,9 @@ const DisplayValue = observer((props: { value: any | undefined, dataType: string
         setMenuAnchorEl(null);
     };
 
-    let label: string | React.ReactNode = "None";
-    if (dataType === 'bool' || dataType === "any") {
-        label = props.value?.toString() || "Unknown";
+    let label: string | React.ReactNode = 'None';
+    if (dataType === 'bool' || dataType === 'any') {
+        label = props.value?.toString() || 'Unknown';
     } else if (dataType === 'string') {
         label = `"${props.value}"`;
     } else if (dataType === 'double' || dataType === 'colortemp') {
@@ -270,11 +270,11 @@ const DisplayValue = observer((props: { value: any | undefined, dataType: string
 });
 
 const DisplayConditionComparisonValueOperation = (props: { valueOperation?: string }) => {
-    let sign = "=";
+    let sign = '=';
     switch (props.valueOperation) {
-        case "EqualOrNull": sign = "?="; break;
-        case "GreaterThan": sign = ">"; break;
-        case "LessThan": sign = "<"; break;
+        case 'EqualOrNull': sign = '?='; break;
+        case 'GreaterThan': sign = '>'; break;
+        case 'LessThan': sign = '<'; break;
         default: break;
     }
 
@@ -284,7 +284,7 @@ const DisplayConditionComparisonValueOperation = (props: { valueOperation?: stri
 };
 
 const DisplayConditionValueComparison = (props: { comparison: IConditionValueComparison, onChanged: (updated: IConditionValueComparison) => void }) => {
-    const handleChanged = (side: "left" | "right", updated?: IDeviceTargetIncomplete | any | undefined) => {
+    const handleChanged = (side: 'left' | 'right', updated?: IDeviceTargetIncomplete | any | undefined) => {
         const stateValue = isIDeviceStateValue(updated) ? updated : undefined;
         const deviceTarget = isIDeviceStateTarget(updated) ? updated : undefined;
         let conditionDeviceStatetarget: IConditionDeviceStateTarget | undefined = undefined;
@@ -292,8 +292,8 @@ const DisplayConditionValueComparison = (props: { comparison: IConditionValueCom
             conditionDeviceStatetarget = { target: deviceTarget };
 
         props.onChanged({
-            left: side === "left" ? (stateValue ?? conditionDeviceStatetarget) : props.comparison.left,
-            right: side === "right" ? updated : props.comparison.right,
+            left: side === 'left' ? (stateValue ?? conditionDeviceStatetarget) : props.comparison.left,
+            right: side === 'right' ? updated : props.comparison.right,
             operation: props.comparison.operation,
             valueOperation: props.comparison.valueOperation
         });
@@ -305,17 +305,17 @@ const DisplayConditionValueComparison = (props: { comparison: IConditionValueCom
                 <div>{props.comparison.operation}</div>}
             {
                 isIDeviceStateValue(props.comparison.left)
-                    ? <DisplayValue dataType="any" value={props.comparison.left.value} onChanged={(updated) => handleChanged("left", updated)} />
+                    ? <DisplayValue dataType="any" value={props.comparison.left.value} onChanged={(updated) => handleChanged('left', updated)} />
                     : (isIConditionDeviceStateTarget(props.comparison.left)
-                        ? <DisplayDeviceTarget target={props.comparison.left.target} onChanged={(updated) => handleChanged("left", updated)} />
+                        ? <DisplayDeviceTarget target={props.comparison.left.target} onChanged={(updated) => handleChanged('left', updated)} />
                         : <span>Unknown</span>)
             }
             <DisplayConditionComparisonValueOperation valueOperation={props.comparison.valueOperation} />
             {
                 isIDeviceStateValue(props.comparison.right)
-                    ? <DisplayValue dataType="any" value={props.comparison.right.value} onChanged={(updated) => handleChanged("right", updated)} />
+                    ? <DisplayValue dataType="any" value={props.comparison.right.value} onChanged={(updated) => handleChanged('right', updated)} />
                     : (isIConditionDeviceStateTarget(props.comparison.right)
-                        ? <DisplayDeviceTarget target={props.comparison.right.target} onChanged={(updated) => handleChanged("right", updated)} />
+                        ? <DisplayDeviceTarget target={props.comparison.right.target} onChanged={(updated) => handleChanged('right', updated)} />
                         : <span>Unknown</span>)
             }
         </Stack>
@@ -348,7 +348,7 @@ const DisplayCondition = observer((props: { condition: ICondition, onChanged: (u
         <Stack direction="row">
             {!props.isTopLevel && (
                 <ButtonBase onClick={handleConditionOperationSelection} aria-controls="condition-operation-select-menu" aria-haspopup="true">
-                    <Chip label={props.condition.operation?.toString() ?? "None"} title={`${props.condition.operation}`} />
+                    <Chip label={props.condition.operation?.toString() ?? 'None'} title={`${props.condition.operation}`} />
                 </ButtonBase>
             )}
             <Stack>
@@ -452,7 +452,7 @@ const ProcessDetails = () => {
     useEffect(() => {
         const loadProcessAsync = async () => {
             try {
-                if (typeof id !== "object" &&
+                if (typeof id !== 'object' &&
                     typeof id !== 'undefined') {
                     const loadedProcess = await ProcessesRepository.getProcessAsync(id);
                     setProcess(loadedProcess);
@@ -462,7 +462,7 @@ const ProcessDetails = () => {
                     }
                 }
             } catch (err: any) {
-                console.error(err, "Failed to load process");
+                console.error(err, 'Failed to load process');
                 setError(err?.toString());
             } finally {
                 setIsLoading(false);
@@ -474,7 +474,7 @@ const ProcessDetails = () => {
 
     const persistProcessAsync = async () => {
         if (process == null) {
-            console.error("Can't persist null process.");
+            console.error('Can\'t persist null process.');
             return;
         }
 
@@ -564,7 +564,7 @@ const ProcessDetails = () => {
                     <Stack spacing={2}>
                         {isLoading ?
                             <Skeleton variant="text" width={260} height={38} /> :
-                            <Typography variant="h2">{process?.alias ?? "Unknown"}</Typography>}
+                            <Typography variant="h2">{process?.alias ?? 'Unknown'}</Typography>}
                         <Box>
                             <ConfirmDeleteButton
                                 buttonLabel="Delete..."

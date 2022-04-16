@@ -1,8 +1,8 @@
-import { IconButton, Button } from "@mui/material";
-import IAutoAction from "../interfaces/IAutoAction";
-import { useState } from "react";
-import HttpService from "../../../src/services/HttpService";
-import PageNotificationService from "../../../src/notifications/PageNotificationService";
+import { IconButton, Button } from '@mui/material';
+import IAutoAction from '../interfaces/IAutoAction';
+import { useState } from 'react';
+import HttpService from '../../../src/services/HttpService';
+import PageNotificationService from '../../../src/notifications/PageNotificationService';
 
 export interface IAutoActionButtonProps {
   action: IAutoAction;
@@ -14,7 +14,7 @@ export default function AutoActionButton(props: IAutoActionButtonProps) {
 
   const triggerAction = async (action: IAutoAction) => {
     if (action.method == null)
-      throw new Error("Method is required for triggering action via request.");
+      throw new Error('Method is required for triggering action via request.');
 
     setIsExecuting(true);
 
@@ -27,8 +27,8 @@ export default function AutoActionButton(props: IAutoActionButtonProps) {
 
       if (action.actionCallback) action.actionCallback(response, action);
     } catch (err) {
-      PageNotificationService.show('Failed to execute action. Please try again.', "error");
-      console.error("Failed to execute AutoAction action", err);
+      PageNotificationService.show('Failed to execute action. Please try again.', 'error');
+      console.error('Failed to execute AutoAction action', err);
     } finally {
       setIsExecuting(false);
     }
@@ -42,8 +42,8 @@ export default function AutoActionButton(props: IAutoActionButtonProps) {
   };
 
   const commonProps = {
-    href: isHref ? action.url : "",
-    target: isHref ? "_blank" : undefined,
+    href: isHref ? action.url : '',
+    target: isHref ? '_blank' : undefined,
     onClick: handleClick,
     disabled: isExecuting,
   };

@@ -1,5 +1,5 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import TvVisual from "./TvVisual";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import TvVisual from './TvVisual';
 
 export default {
     title: 'Visuals/TvVisual',

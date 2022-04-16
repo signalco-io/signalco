@@ -1,14 +1,15 @@
-import { Box, Paper, Stack, Typography } from "@mui/material";
-import { deepOrange, lightBlue } from "@mui/material/colors";
-import { ScaleTime, scaleTime, timeHour } from "d3";
-import { useContext } from "react";
-import ReactTimeago from "react-timeago";
-import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from "recharts";
-import { AppContext } from "../../pages/_app";
-import { arrayMax, arrayMin } from "../../src/helpers/ArrayHelpers";
-import useLocale from "../../src/hooks/useLocale";
-import { ObjectDictAny } from "../../src/sharedTypes";
-import NoDataPlaceholder from "../shared/indicators/NoDataPlaceholder";
+import { Box, Paper, Stack, Typography } from '@mui/material';
+import { deepOrange, lightBlue } from '@mui/material/colors';
+import { ScaleTime, scaleTime, timeHour } from 'd3';
+import { useContext } from 'react';
+import ReactTimeago from 'react-timeago';
+import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
+import { AppContext } from '../../pages/_app';
+import { arrayMax, arrayMin } from '../../src/helpers/ArrayHelpers';
+import useLocale from '../../src/hooks/useLocale';
+import DateTimeProvider from '../../src/services/DateTimeProvider';
+import { ObjectDictAny } from '../../src/sharedTypes';
+import NoDataPlaceholder from '../shared/indicators/NoDataPlaceholder';
 
 export interface IGraphProps {
     label?: string;
@@ -45,12 +46,12 @@ const GraphTimeLine = (props: IGraphProps) => {
     const { label, data, durationMs, width, startDateTime } = props;
     const appContext = useContext(AppContext);
 
-    const isDarkTheme = appContext.theme === 'dark';
+    const isDarkTheme = appContext.isDark;
     const accentTrue = lightBlue[isDarkTheme ? 900 : 500];
     const accentFalse = deepOrange[isDarkTheme ? 800 : 400];
 
-    const now = startDateTime ?? new Date();
-    const past = startDateTime ?? new Date();
+    const now = startDateTime ?? DateTimeProvider.now();
+    const past = startDateTime ?? DateTimeProvider.now();
     past.setTime(now.getTime() - durationMs);
     const domainGraph = scaleTime().domain([past, now]);
 
@@ -62,8 +63,8 @@ const GraphTimeLine = (props: IGraphProps) => {
     const transformedDataItem: ObjectDictAny = {};
 
     // From start of graph to first entry
-    transformedDataItem[`t0`] = domainGraph(new Date(firstEntry.id).getTime()) - domainGraph(past.getTime());
-    transformedDataItem[`v0`] = firstEntry.value === 'true' ? 'false' : 'true';;
+    transformedDataItem['t0'] = domainGraph(new Date(firstEntry.id).getTime()) - domainGraph(past.getTime());
+    transformedDataItem['v0'] = firstEntry.value === 'true' ? 'false' : 'true';;
 
     // From first entry to last entry
     for (let i = 1; i < reversedData.length; i++) {
@@ -139,11 +140,11 @@ const GraphArea = (props: IGraphProps) => {
     const { data, durationMs, width, height, startDateTime } = props;
     const appContext = useContext(AppContext);
 
-    const yKey = "value";
-    const xKey = "key";
+    const yKey = 'value';
+    const xKey = 'key';
 
-    const now = startDateTime ?? new Date();
-    const past = startDateTime ?? new Date();
+    const now = startDateTime ?? DateTimeProvider.now();
+    const past = startDateTime ?? DateTimeProvider.now();
     past.setTime(now.getTime() - durationMs);
     const domainGraph = scaleTime().domain([past, now]);
     const ticksHours = timeHour.every(1)!;
@@ -176,7 +177,7 @@ const GraphArea = (props: IGraphProps) => {
             <Area
                 type="basis"
                 dataKey={yKey}
-                fill={appContext.theme === "dark" ? "#ffffff" : "#000000"}
+                fill={appContext.isDark ? '#ffffff' : '#000000'}
                 fillOpacity={0.1}
                 stroke="#aeaeae"
                 strokeWidth={1} />
@@ -193,10 +194,10 @@ const GraphArea = (props: IGraphProps) => {
 
 const Graph = (props: IGraphProps) => {
     const { data } = props;
-    const { t } = useLocale("App", "Placeholders");
+    const { t } = useLocale('App', 'Placeholders');
 
     if (!data || data.length <= 0) {
-        return <NoDataPlaceholder content={t("NoData")} />
+        return <NoDataPlaceholder content={t('NoData')} />
     }
 
     const isBoolean = data?.length && (data[0].value === 'true' || data[0].value === 'false');

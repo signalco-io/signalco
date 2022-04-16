@@ -19,6 +19,7 @@ const screenshotSkipParams = {
     }
 }
 const screenshotParams = {
+    layout: 'centered',
     screenshot: {
         viewport: { width: 362, height: 370 }
     }
@@ -34,13 +35,13 @@ const screenshotParams = {
 const Template: ComponentStory<typeof Widget> = (args) => <Widget {...args} />;
 
 export const Empty = Template.bind({});
-Empty.parameters = screenshotSkipParams;
+Empty.parameters = process.env.WIDGET_IMAGES ? screenshotSkipParams : screenshotParams;
 
 export const EditMode = Template.bind({});
 EditMode.args = {
     isEditMode: true,
 };
-EditMode.parameters = screenshotSkipParams;
+EditMode.parameters = process.env.WIDGET_IMAGES ? screenshotSkipParams : screenshotParams;
 
 export const WidgetState = Template.bind({});
 WidgetState.args = {
@@ -74,9 +75,7 @@ WidgetShades.args = {
         columns: 4
     }
 };
-WidgetShades.parameters = process.env.WIDGET_IMAGES ? {
-    ...screenshotParams
-} : { ...screenshotSkipParams };
+WidgetShades.parameters = screenshotParams;
 
 export const WidgetVacuum = Template.bind({});
 WidgetVacuum.args = {
@@ -111,9 +110,7 @@ WidgetTime.args = {
         rows: 1
     }
 };
-WidgetTime.parameters = process.env.WIDGET_IMAGES ? {
-    ...screenshotParams
-} : { ...screenshotSkipParams };
+WidgetTime.parameters = screenshotParams;
 
 export const WidgetChecklist = Template.bind({});
 WidgetChecklist.args = {
@@ -125,3 +122,13 @@ WidgetChecklist.args = {
     }
 };
 WidgetChecklist.parameters = screenshotParams;
+
+export const WidgetButton = Template.bind({});
+WidgetButton.args = {
+    type: 'button',
+    config: {
+        columns: 1,
+        rows: 1
+    }
+};
+WidgetButton.parameters = screenshotParams;

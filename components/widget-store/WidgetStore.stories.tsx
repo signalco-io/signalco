@@ -1,10 +1,10 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Widget from './Widget';
 import WidgetStore from './WidgetStore';
+import Widget from '../widgets/Widget';
 
 export default {
-    title: 'Components/Widgets/Store',
+    title: 'Components/Store/Widgets',
     component: WidgetStore,
 } as ComponentMeta<typeof WidgetStore>;
 

@@ -1,4 +1,4 @@
-import IWidgetConfigurationOption from "./IWidgetConfigurationOption";
+import IWidgetConfigurationOption from './IWidgetConfigurationOption';
 
 export const DefaultWidth: (width: number) => IWidgetConfigurationOption =
     (width?: number) => ({ name: 'columns', label: 'Width', type: 'static', default: width });
@@ -11,3 +11,5 @@ export const DefaultLabel: IWidgetConfigurationOption = { name: 'label', label: 
 export const DefaultTarget: IWidgetConfigurationOption = { name: 'target', label: 'Target', type: 'deviceContactTarget' };
 
 export const DefaultTargetMultiple: IWidgetConfigurationOption = { name: 'target', label: 'Target', type: 'deviceContactTarget', multiple: true };
+
+export const DefaultTargetWithValue: IWidgetConfigurationOption = { name: 'target', label: 'Target', type: 'deviceContactTargetWithValue' };

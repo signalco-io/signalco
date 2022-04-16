@@ -9,7 +9,7 @@
             "UserProfileImageAlt": "User profile image"
         },
         "Nav": {
-            "Dashboard": "Dashboard",
+            "Dashboards": "Dashboards",
             "Entities": "Entities",
             "Processes": "Processes",
             "Stations": "Stations",
@@ -28,10 +28,31 @@
             "Theme": "Theme",
             "Themes": {
                 "Dark": "Dark",
-                "Light": "Light"
+                "DarkDimmed": "Dark Dimmed",
+                "Light": "Light",
+                "dark": "Dark",
+                "darkDimmed": "Dark Dimmed",
+                "light": "Light"
+            },
+            "ThemeModes": {
+                "Manual": "Manual",
+                "SunriseSunset": "Sunrise/Sunset",
+                "TimeRange": "Time range",
+                "LightSensor": "Light sensor"
             },
             "Language": "Language",
-            "SelectLanguage": "Select language"
+            "SelectLanguage": "Select language",
+            "Nickname": "Nickname",
+            "Profile": "Profile",
+            "LocationAndTime": "Time and location",
+            "Developer": "Developer",
+            "ApiEndpoint": "API Endpoint"
+        },
+        "Dashboards": {
+            "UpdateChecker": {
+                "UpdateApplied": "Dashboard update applied.",
+                "UpdateError": "New version of dashboard is available. Refresh to see the changes."
+            }
         },
         "Placeholders": {
             "NoData": "No data to show",

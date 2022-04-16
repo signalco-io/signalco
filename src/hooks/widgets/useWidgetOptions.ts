@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { IWidgetSharedProps } from "../../../components/widgets/Widget";
-import IWidgetConfigurationOption from "../../widgets/IWidgetConfigurationOption";
+import { useEffect } from 'react';
+import { IWidgetSharedProps } from '../../../components/widgets/Widget';
+import IWidgetConfigurationOption from '../../widgets/IWidgetConfigurationOption';
 
 const useWidgetOptions = (options: IWidgetConfigurationOption[], props: IWidgetSharedProps) => {
     useEffect(() => {

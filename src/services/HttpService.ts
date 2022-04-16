@@ -1,9 +1,11 @@
-import axios, { AxiosError } from "axios";
-import AppSettingsProvider from "./AppSettingsProvider";
-import { trimStartChar, isAbsoluteUrl } from "../helpers/StringHelpers";
-import CurrentUserProvider from "./CurrentUserProvider";
-import Router from "next/router";
-import { ObjectDictAny } from "../sharedTypes";
+import axios, { AxiosError } from 'axios';
+import AppSettingsProvider from './AppSettingsProvider';
+import { trimStartChar, isAbsoluteUrl } from '../helpers/StringHelpers';
+import CurrentUserProvider from './CurrentUserProvider';
+import { ObjectDictAny } from '../sharedTypes';
+import Router from 'next/router';
+import { parseHash, parseHashParam } from '../hooks/useHashParam';
+import PageNotificationService from '../notifications/PageNotificationService';
 
 export default class HttpService {
   public static tokenFactory?: () => Promise<string>;
@@ -28,7 +30,7 @@ export default class HttpService {
       typeof HttpService.tokenFactory !== 'undefined') {
       token = await HttpService.tokenFactory();
       CurrentUserProvider.setToken(token);
-      console.debug("Used token factory")
+      console.debug('Used token factory')
     }
 
     // Cache token and return if available
@@ -36,17 +38,17 @@ export default class HttpService {
       return `Bearer ${token}`;
     }
 
-    console.warn("Token is undefined");
-    throw new Error("Login failed.");
+    console.warn('Token is undefined');
+    throw new Error('Login failed.');
   };
 
   public static async getAsync<T>(url: string, data?: any): Promise<T> {
-    return await this.requestAsync(url, "get", data) as T;
+    return await this.requestAsync(url, 'get', data) as T;
   }
 
   public static async requestAsync(
     url: string,
-    method: "get" | "post" | "put" | "delete",
+    method: 'get' | 'post' | 'put' | 'delete',
     data?: any,
     headers?: ObjectDictAny,
     skipAuth?: boolean
@@ -56,11 +58,11 @@ export default class HttpService {
     const response = await axios.request({
       url: isAbsoluteUrl(url) ? url : HttpService.getApiUrl(url),
       method: method,
-      data: method !== "get" ? data : undefined,
-      params: method === "get" ? data : undefined,
+      data: method !== 'get' ? data : undefined,
+      params: method === 'get' ? data : undefined,
       headers: {
         Authorization: token,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         ...headers
       },
     });
@@ -69,9 +71,27 @@ export default class HttpService {
       if (typeof err === 'object' && Object.keys(err as object).find(key => key === 'isAxiosError')) {
         const axiosError = err as AxiosError;
         if (axiosError.response?.status === 403) {
-          console.warn('Token expired.');
+          console.warn('Token expired.', err);
           CurrentUserProvider.setToken(undefined);
-          Router.push('/app');
+
+          // Check if we are already reloading to authenticate
+          const isAuthReload = parseHashParam('authReload');
+          if (isAuthReload === 'true') {
+              // Show notification to manually reload the app
+              PageNotificationService.prompt(
+                  'Authorization failed. Please reload the app to continue...',
+                  'error',
+                  'Reload',
+                  () => {
+                      window.location.replace('/app');
+                  });
+              return;
+          }
+
+          // Reload with auth reload flag
+          const hash = parseHash();
+          hash.set('authReload', 'true');
+          Router.push({ hash: hash.toString() }, undefined, {shallow: false});
         }
         console.warn(`API (${axiosError.response?.status}) - ${axiosError.message}`)
       } else {
@@ -83,6 +103,6 @@ export default class HttpService {
   }
 
   public static getApiUrl(url: string): string {
-    return AppSettingsProvider.apiAddress + trimStartChar(url, "/");
+    return AppSettingsProvider.apiAddress + trimStartChar(url, '/');
   }
 }

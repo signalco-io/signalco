@@ -1,16 +1,16 @@
-import { Box, Button, ListItemIcon, ListItemText, Menu, MenuItem, Paper, Stack } from "@mui/material";
-import React, { useState, useContext } from "react";
-import WidgetConfiguration from "./WidgetConfiguration";
+import { Box, Button, ListItemIcon, ListItemText, Menu, MenuItem, Paper, Stack } from '@mui/material';
+import React, { useState, useContext } from 'react';
+import WidgetConfiguration from './WidgetConfiguration';
 import MoreHorizSharpIcon from '@mui/icons-material/MoreHorizSharp';
-import { Delete, Settings } from "@mui/icons-material";
+import { Delete, Settings } from '@mui/icons-material';
 import {
     usePopupState,
     bindTrigger,
     bindMenu,
 } from 'material-ui-popup-state/hooks';
-import { AppContext } from "../../../pages/_app";
-import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
-import { IsConfigurationValid } from "../../../src/widgets/ConfigurationValidator";
+import { AppContext } from '../../../pages/_app';
+import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
 
 interface IWidgetCardProps {
     children: JSX.Element,
@@ -66,7 +66,7 @@ const WidgetCard = (props: IWidgetCardProps) => {
     }
 
     let bgColor;
-    if (appContext.theme === 'dark') {
+    if (appContext.isDark) {
         bgColor = state ? 'action.selected' : undefined;
     } else {
         bgColor = state ? 'background.default' : undefined
@@ -80,10 +80,10 @@ const WidgetCard = (props: IWidgetCardProps) => {
                     borderRadius: 2,
                     width: sizeWidth,
                     height: sizeHeight,
-                    display: "block",
+                    display: 'block',
                     bgcolor: bgColor
                 }}
-                variant='outlined'>
+                variant="outlined">
                 {(!isLoading && needsConfiguration) ? (
                     <Stack justifyContent="stretch" sx={{ height: '100%' }}>
                         <Button disabled={!isEditMode} size="large" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>

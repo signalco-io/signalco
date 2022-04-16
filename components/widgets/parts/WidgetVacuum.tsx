@@ -1,10 +1,10 @@
-import { BatteryCharging20Outlined } from "@mui/icons-material";
-import { Stack, Typography } from "@mui/material";
-import React from "react";
-import useWidgetOptions from "../../../src/hooks/widgets/useWidgetOptions";
-import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
-import { DefaultHeight, DefaultLabel, DefaultWidth } from "../../../src/widgets/WidgetConfigurationOptions";
-import { IWidgetSharedProps } from "../Widget";
+import { BatteryCharging20Outlined } from '@mui/icons-material';
+import { Stack, Typography } from '@mui/material';
+import React from 'react';
+import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import { IWidgetSharedProps } from '../Widget';
 
 const stateOptions: IWidgetConfigurationOption[] = [
     DefaultLabel,

@@ -1,5 +1,5 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Graph from "./Graph";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import Graph from './Graph';
 
 export default {
     title: 'Components/Graph',
