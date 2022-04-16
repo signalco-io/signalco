@@ -328,9 +328,9 @@ export default class DashboardsRepository {
         // Download cache
         const newDashboards = await DashboardsRepository._getRemoteDahboardsAsync();
         newDashboards.sort((a, b) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0));
+        DashboardsRepository.isUpdateAvailable = false;
         DashboardsRepository._mapAndApplyDashboards(newDashboards);
         DashboardsRepository.isLoading = false;
-        DashboardsRepository.isUpdateAvailable = false;
 
         // Persist dashboards locally
         if (typeof localStorage !== 'undefined') {
@@ -338,41 +338,64 @@ export default class DashboardsRepository {
         }
     }
 
-    private static async _mapAndApplyDashboards(dashboards: IDashboardModel[]) {
+    private static _mapDashboardModelToCache(d: IDashboardModel, di: number, existingMaxOrder: number | undefined) {
         const favorites = LocalStorageService.getItemOrDefault<string[]>(DashboardsFavoritesLocalStorageKey, []);
         const dashboardsOrder = LocalStorageService.getItemOrDefault<string[]>(DashboardsOrderLocalStorageKey, [])
+
+        d.order = dashboardsOrder.indexOf(d.id);
+        if (d.order < 0) {
+            d.order = Math.max(existingMaxOrder || di, di) + 1;
+        }
+
+        d.timeStamp = d.timeStamp ? (typeof d.timeStamp === 'string' ? new Date(d.timeStamp) : d.timeStamp) : undefined;
+        d.isFavorite = favorites.indexOf(d.id) >= 0;
+        d.widgets = (typeof d.configurationSerialized !== 'undefined' && d.configurationSerialized != null
+                ? ((JSON.parse(d.configurationSerialized).widgets ?? []) as Array<IWidget>).map(i => {
+                    return new WidgetModel(i.id, i.order, i.type, i.config);
+                })
+                : [])
+            .map((w, i) => {
+                w.id = i.toString();
+                return w;
+            });
+
+        // Apply widget order
+        let maxOrder = 0;
+        for (let i = 0; i < d.widgets.length; i++) {
+            const w = d.widgets[i];
+            maxOrder = Math.max(maxOrder, w.order);
+            if (typeof w.order === 'undefined'){
+                console.debug('Widget has no order, applying default...');
+                w.order = i;
+            }
+        }
+
+        return isObservable(d) ? d : makeAutoObservable(d);
+    }
+
+    private static async _mapAndApplyDashboards(updatedDashboards: IDashboardModel[]) {
         runInAction(() => {
-            DashboardsRepository._dashboardsCache.replace(dashboards.map((d, di) => {
-                d.order = dashboardsOrder.indexOf(d.id);
-                if (d.order < 0) {
-                    d.order = Math.max(arrayMax(dashboards, d => d.order) || di, di) + 1;
-                }
+            const maxOrder = arrayMax(updatedDashboards, d => d.order);
 
-                d.timeStamp = d.timeStamp ? (typeof d.timeStamp === 'string' ? new Date(d.timeStamp) : d.timeStamp) : undefined;
-                d.isFavorite = favorites.indexOf(d.id) >= 0;
-                d.widgets = (typeof d.configurationSerialized !== 'undefined' && d.configurationSerialized != null
-                        ? ((JSON.parse(d.configurationSerialized).widgets ?? []) as Array<IWidget>).map(i => {
-                            return new WidgetModel(i.id, i.order, i.type, i.config);
-                        })
-                        : [])
-                    .map((w, i) => {
-                        w.id = i.toString();
-                        return w;
-                    });
+            const mappedUpdatedDashboards = updatedDashboards.map((d, di) => DashboardsRepository._mapDashboardModelToCache(d, di, maxOrder));
 
-                // Apply widget order
-                let maxOrder = 0;
-                for (let i = 0; i < d.widgets.length; i++) {
-                    const w = d.widgets[i];
-                    maxOrder = Math.max(maxOrder, w.order);
-                    if (typeof w.order === 'undefined'){
-                        console.debug('Widget has no order, applying default...');
-                        w.order = i;
-                    }
-                }
+            // Add new dashboards
+            mappedUpdatedDashboards.filter(d => !DashboardsRepository._dashboardsCache.find(ed => ed.id === d.id)).forEach(d =>
+                DashboardsRepository._dashboardsCache.push(d));
 
-                return isObservable(d) ? d : makeAutoObservable(d);
-            }));
+            // Remove non existing dashboards
+            DashboardsRepository._dashboardsCache.filter(cd => !mappedUpdatedDashboards.find(ud => ud.id === cd.id)).forEach(cd =>
+                DashboardsRepository._dashboardsCache.remove(cd));
+
+            // Remap existing values
+            mappedUpdatedDashboards.forEach((ud: any) => {
+                const cachedDashboard: any = DashboardsRepository._dashboardsCache.find(cd => cd.id === ud.id);
+                if (!cachedDashboard) return;
+
+                Object.keys(ud).forEach(udk => cachedDashboard[udk] = ud[udk]);
+            })
+
+            //DashboardsRepository._dashboardsCache.replace(updatedDashboards.map((d, di) => DashboardsRepository._mapDashboardModelToCache(d, di, maxOrder)));
         });
     }
 
