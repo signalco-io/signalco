@@ -1,22 +1,22 @@
-import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
-import { AppProps } from "next/app";
-import Head from "next/head";
-import appTheme, { AppTheme, AppThemeMode } from "../src/theme";
-import "../styles/global.scss";
-import { CacheProvider, EmotionCache } from "@emotion/react";
+import * as React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import { AppProps } from 'next/app';
+import Head from 'next/head';
+import appTheme, { AppTheme, AppThemeMode } from '../src/theme';
+import '../styles/global.scss';
+import { CacheProvider, EmotionCache } from '@emotion/react';
 import createEmotionCache from '../src/createEmotionCache';
 import { SnackbarProvider } from 'notistack';
-import { ChildrenProps } from "../src/sharedTypes";
-import IAppContext from "../src/appContext/IAppContext";
-import UserSettingsProvider from "../src/services/UserSettingsProvider";
-import useUserSetting from "../src/hooks/useUserSetting";
-import SunHelper from "../src/helpers/SunHelper";
-import PageNotificationService from "../src/notifications/PageNotificationService";
-import useLocale from "../src/hooks/useLocale";
-import { useCallback } from "react";
-import DateTimeProvider from "../src/services/DateTimeProvider";
+import { ChildrenProps } from '../src/sharedTypes';
+import IAppContext from '../src/appContext/IAppContext';
+import UserSettingsProvider from '../src/services/UserSettingsProvider';
+import useUserSetting from '../src/hooks/useUserSetting';
+import SunHelper from '../src/helpers/SunHelper';
+import PageNotificationService from '../src/notifications/PageNotificationService';
+import useLocale from '../src/hooks/useLocale';
+import { useCallback } from 'react';
+import DateTimeProvider from '../src/services/DateTimeProvider';
 
 const isServerSide = typeof window === 'undefined';
 const clientSideEmotionCache = createEmotionCache();
@@ -45,10 +45,10 @@ export default function App(props: CustomAppProps) {
   // Theme
   const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
   const [themeTimeRange] = useUserSetting<[string, string] | undefined>('themeTimeRange', undefined);
-  const themes = useLocale("App", "Settings", "Themes");
+  const themes = useLocale('App', 'Settings', 'Themes');
 
   const applyThemeMode = useCallback((hideNotification?: boolean) => {
-    let themeOrPrefered = UserSettingsProvider.value<AppTheme>("theme", () => window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
+    let themeOrPrefered = UserSettingsProvider.value<AppTheme>('theme', () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     const activeTheme = appContextState.theme;
 
     if (themeMode === 'sunriseSunset' && SunHelper.isDay()) {
@@ -63,7 +63,7 @@ export default function App(props: CustomAppProps) {
     }
 
     if (activeTheme !== themeOrPrefered) {
-      document.documentElement.style.setProperty("color-scheme", themeOrPrefered === 'light' ? 'light' : 'dark');
+      document.documentElement.style.setProperty('color-scheme', themeOrPrefered === 'light' ? 'light' : 'dark');
       setAppContext({
         theme: themeOrPrefered,
         isDark: themeOrPrefered === 'dark' || themeOrPrefered === 'darkDimmed'

@@ -5,6 +5,7 @@ import EntityRepository from "../entity/EntityRepository";
 import { arrayMax, orderBy, sequenceEqual } from "../helpers/ArrayHelpers";
 import HttpService from "../services/HttpService";
 import LocalStorageService from "../services/LocalStorageService";
+import UserSettingsProvider from "../services/UserSettingsProvider";
 
 export interface IDashboardSetModel {
     configurationSerialized?: string;
@@ -147,6 +148,7 @@ class SignalDashboardDto {
 
 const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';
 const DashboardsOrderLocalStorageKey = 'dashboards-order';
+const DashboardsCacheLocalStorageKey = 'signalco-cache-dashboards';
 
 export default class DashboardsRepository {
     private static _dashboardsCache: IObservableArray<IDashboardModel> = observable.array([]);
@@ -176,17 +178,17 @@ export default class DashboardsRepository {
     }
 
     static async favoriteSetAsync(id: string, newIsFavorite: boolean) {
-        const currentFavorites = LocalStorageService.getItemOrDefault<string[]>(DashboardsFavoritesLocalStorageKey, []);
+        const currentFavorites = UserSettingsProvider.value<string[]>(DashboardsFavoritesLocalStorageKey, []);
         const currentFavoriteIndex = currentFavorites.indexOf(id);
         const isCurrentlyFavorite = currentFavoriteIndex >= 0;
 
         // Set or remove
         if (!isCurrentlyFavorite && newIsFavorite) {
-            LocalStorageService.setItem(DashboardsFavoritesLocalStorageKey, [...currentFavorites, id]);
+            UserSettingsProvider.set(DashboardsFavoritesLocalStorageKey, [...currentFavorites, id]);
         } else if (isCurrentlyFavorite && !newIsFavorite) {
             let newFavorites = [...currentFavorites];
             newFavorites.splice(currentFavoriteIndex, 1)
-            LocalStorageService.setItem(DashboardsFavoritesLocalStorageKey, newFavorites);
+            UserSettingsProvider.set(DashboardsFavoritesLocalStorageKey, newFavorites);
         }
 
         // Mark favorite locally
@@ -199,7 +201,7 @@ export default class DashboardsRepository {
     }
 
     static async dashboardsOrderSetAsync(ordered: string[]) {
-        LocalStorageService.setItem(DashboardsOrderLocalStorageKey, ordered);
+        UserSettingsProvider.set(DashboardsOrderLocalStorageKey, ordered);
     }
 
     static async saveDashboardsAsync(dashboards: IDashboardSetModel[]) {
@@ -243,12 +245,12 @@ export default class DashboardsRepository {
                 // Try to load from local storage
                 if (!DashboardsRepository.isLoading &&
                     typeof localStorage !== 'undefined' &&
-                    LocalStorageService.getItem('signalco-cache-dashboards') !== null) {
+                    LocalStorageService.getItem(DashboardsCacheLocalStorageKey) !== null) {
                     DashboardsRepository.isLoading = true;
 
                     // Load from local storage
                     try {
-                        const localDashboards = LocalStorageService.getItemOrDefault<IDashboardModel[]>('signalco-cache-dashboards', []);
+                        const localDashboards = LocalStorageService.getItemOrDefault<IDashboardModel[]>(DashboardsCacheLocalStorageKey, []);
                         DashboardsRepository._mapAndApplyDashboards(localDashboards);
                         DashboardsRepository.isLoading = false;
                         DashboardsRepository.isLoaded = true;
@@ -334,13 +336,13 @@ export default class DashboardsRepository {
 
         // Persist dashboards locally
         if (typeof localStorage !== 'undefined') {
-            LocalStorageService.setItem('signalco-cache-dashboards', DashboardsRepository._dashboardsCache);
+            LocalStorageService.setItem(DashboardsCacheLocalStorageKey, DashboardsRepository._dashboardsCache);
         }
     }
 
     private static _mapDashboardModelToCache(d: IDashboardModel, di: number, existingMaxOrder: number | undefined) {
-        const favorites = LocalStorageService.getItemOrDefault<string[]>(DashboardsFavoritesLocalStorageKey, []);
-        const dashboardsOrder = LocalStorageService.getItemOrDefault<string[]>(DashboardsOrderLocalStorageKey, [])
+        const favorites = UserSettingsProvider.value<string[]>(DashboardsFavoritesLocalStorageKey, []);
+        const dashboardsOrder = UserSettingsProvider.value<string[]>(DashboardsOrderLocalStorageKey, [])
 
         d.order = dashboardsOrder.indexOf(d.id);
         if (d.order < 0) {

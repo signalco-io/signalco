@@ -1,9 +1,9 @@
-import React from "react";
-import { EmptyLayout } from "./EmptyLayout";
-import { Auth0Wrapper } from "./Auth0Wrapper";
-import { LayoutWithAuth } from "./LayoutWithAuth";
-import CurrentUserProvider from "../../src/services/CurrentUserProvider";
-import { ChildrenProps } from "../../src/sharedTypes";
+import React from 'react';
+import { EmptyLayout } from './EmptyLayout';
+import { Auth0Wrapper } from './Auth0Wrapper';
+import { LayoutWithAuth } from './LayoutWithAuth';
+import CurrentUserProvider from '../../src/services/CurrentUserProvider';
+import { ChildrenProps } from '../../src/sharedTypes';
 
 
 export function EmptyLayoutWithAuth(props: ChildrenProps) {
@@ -13,7 +13,7 @@ export function EmptyLayoutWithAuth(props: ChildrenProps) {
         </EmptyLayout>;
     }
 
-    console.debug("Not logged in. Wrapping with Auth0");
+    console.debug('Not logged in. Wrapping with Auth0');
 
     return (
         <Auth0Wrapper><LayoutWithAuth LayoutComponent={EmptyLayout}>{props.children}</LayoutWithAuth></Auth0Wrapper>

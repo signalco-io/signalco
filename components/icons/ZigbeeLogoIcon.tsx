@@ -1,4 +1,4 @@
-import { SvgIcon } from "@mui/material"
+import { SvgIcon } from '@mui/material'
 
 const ZigbeeLogoIcon = (props: any) => {
     return (

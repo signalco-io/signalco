@@ -1,18 +1,18 @@
-import { Box, Button, Card, CardActionArea, CardContent, Checkbox, Grid, List, Paper, Typography } from "@mui/material";
-import Stack from "@mui/material/Stack";
+import { Box, Button, Card, CardActionArea, CardContent, Checkbox, Grid, List, Paper, Typography } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import React from "react";
-import { ArrowDownward as ArrowDownwardIcon, Cancel as CancelIcon, CheckCircle } from "@mui/icons-material";
+import React from 'react';
+import { ArrowDownward as ArrowDownwardIcon, Cancel as CancelIcon, CheckCircle } from '@mui/icons-material';
 import Image from 'next/image';
-import { amber, green, grey } from "@mui/material/colors";
+import { amber, green, grey } from '@mui/material/colors';
 import LaunchIcon from '@mui/icons-material/Launch';
-import SelectItems from "../../components/shared/form/SelectItems";
-import { useState } from "react";
+import SelectItems from '../../components/shared/form/SelectItems';
+import { useState } from 'react';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import contentData from './content.json';
-import { PageLayout } from "../../components/layouts/PageLayout";
+import { PageLayout } from '../../components/layouts/PageLayout';
 
 const FilterList = (props: { header: string, items: { id: string, label: string }[], truncate: number }) => {
     const {
@@ -67,7 +67,7 @@ const FilterList = (props: { header: string, items: { id: string, label: string 
 const StoreStockStatusBadge = (props: { status: number }) => {
     let Icon = CancelIcon;
     let opacity = 0.6;
-    let text = "Out of stock";
+    let text = 'Out of stock';
     let color: string = grey[400];
     switch (props.status) {
         default:
@@ -76,19 +76,19 @@ const StoreStockStatusBadge = (props: { status: number }) => {
         case 1:
             Icon = CheckCircle;
             opacity = 1;
-            text = "In stock";
+            text = 'In stock';
             color = green[400];
             break;
         case 2:
             Icon = LaunchIcon;
             opacity = 1;
-            text = "Sold elsewhere";
+            text = 'Sold elsewhere';
             color = grey[400];
             break;
         case 3:
             Icon = WatchLaterIcon;
             opacity = 1;
-            text = "On backorder";
+            text = 'On backorder';
             color = amber[400];
             break;
     }
@@ -133,11 +133,11 @@ export async function getStaticProps() {
 }
 
 const communication = [
-    { id: 'zigbee', label: "Zigbee" },
-    { id: 'bluetooth', label: "Bluetooth" },
-    { id: 'wifi', label: "Wi-Fi" },
-    { id: 'radio', label: "Radio (433/868 MHz)" },
-    { id: 'ir', label: "Infrared" }
+    { id: 'zigbee', label: 'Zigbee' },
+    { id: 'bluetooth', label: 'Bluetooth' },
+    { id: 'wifi', label: 'Wi-Fi' },
+    { id: 'radio', label: 'Radio (433/868 MHz)' },
+    { id: 'ir', label: 'Infrared' }
 ];
 
 const items = [
@@ -148,16 +148,16 @@ const items = [
 ];
 
 const orderByItems = [
-    { value: "0", label: "Popularity" },
-    { value: "1", label: "Price low > high" },
-    { value: "2", label: "Price high > low" }
+    { value: '0', label: 'Popularity' },
+    { value: '1', label: 'Price low > high' },
+    { value: '2', label: 'Price high > low' }
 ];
 
 const StoreIndex = (props: { categories: string[], brands: string[] }) => {
     const categories = props.categories.map(c => ({ id: c, label: c }));
     const brands = props.brands.map(b => ({ id: b, label: b }));
 
-    const [selectedOrderByItems, setSelectedOrderByItems] = useState<string[]>(["0"]);
+    const [selectedOrderByItems, setSelectedOrderByItems] = useState<string[]>(['0']);
     const handleOrderByItemsChange = (values: string[]) => setSelectedOrderByItems(values);
 
     return (

@@ -1,10 +1,10 @@
-import React from "react";
-import { Stack, Typography } from "@mui/material";
-import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
-import AutoTable, { IAutoTableItem } from "../../../components/shared/table/AutoTable";
-import useAutoTable from "../../../components/shared/table/useAutoTable";
-import { observer } from "mobx-react-lite";
-import ProcessesRepository, { IProcessModel } from "../../../src/processes/ProcessesRepository";
+import React from 'react';
+import { Stack, Typography } from '@mui/material';
+import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
+import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
+import useAutoTable from '../../../components/shared/table/useAutoTable';
+import { observer } from 'mobx-react-lite';
+import ProcessesRepository, { IProcessModel } from '../../../src/processes/ProcessesRepository';
 import CheckSharpIcon from '@mui/icons-material/CheckSharp';
 import BlockSharpIcon from '@mui/icons-material/BlockSharp';
 

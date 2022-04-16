@@ -1,21 +1,21 @@
-import { Checkbox, FilledInput, FormControlLabel, FormGroup, IconButton, InputAdornment, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Typography } from "@mui/material";
-import React, { useCallback, useState } from "react";
+import { Checkbox, FilledInput, FormControlLabel, FormGroup, IconButton, InputAdornment, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Typography } from '@mui/material';
+import React, { useCallback, useState } from 'react';
 import { Box } from '@mui/system';
-import { IWidgetSharedProps } from "../Widget";
-import { DefaultHeight, DefaultLabel, DefaultWidth } from "../../../src/widgets/WidgetConfigurationOptions";
+import { IWidgetSharedProps } from '../Widget';
+import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { observable, runInAction } from "mobx";
-import { observer } from "mobx-react-lite";
-import { bindMenu, bindTrigger, usePopupState } from "material-ui-popup-state/hooks";
+import { observable, runInAction } from 'mobx';
+import { observer } from 'mobx-react-lite';
+import { bindMenu, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import DeleteIcon from '@mui/icons-material/Delete';
-import NoDataPlaceholder from "../../shared/indicators/NoDataPlaceholder";
-import LocalStorageService from "../../../src/services/LocalStorageService";
-import CheckIcon from "@mui/icons-material/Check";
+import NoDataPlaceholder from '../../shared/indicators/NoDataPlaceholder';
+import LocalStorageService from '../../../src/services/LocalStorageService';
+import CheckIcon from '@mui/icons-material/Check';
 import { v4 as uuidv4 } from 'uuid';
-import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
-import useWidgetOptions from "../../../src/hooks/widgets/useWidgetOptions";
-import useWidgetActive from "../../../src/hooks/widgets/useWidgetActive";
-import useLocale from "../../../src/hooks/useLocale";
+import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
+import useLocale from '../../../src/hooks/useLocale';
 
 const stateOptions: IWidgetConfigurationOption[] = [
     DefaultLabel,
@@ -59,14 +59,14 @@ const ChecklistItem = observer((props: { item: IChecklistItem, onChange: (id: st
 
 const WidgetChecklist = (props: IWidgetSharedProps) => {
     const { id, config } = props;
-    const placeholders = useLocale("App", "Placeholders");
-    const { t } = useLocale("App", "Widgets", "WidgetChecklist");
+    const placeholders = useLocale('App', 'Placeholders');
+    const { t } = useLocale('App', 'Widgets', 'WidgetChecklist');
     const [items] = useState(observable(LocalStorageService.getItemOrDefault<IChecklistItem[]>(`checklist-${id}`, [])));
     const [newItemText, setNewItemText] = useState('');
     const [isInputFocusedOrFilled, setIsInputFocusedOrFilled] = useState(false);
 
     const removeOnDoneDelay = 500;
-    const label = config?.label ?? t("Checklist");
+    const label = config?.label ?? t('Checklist');
     const removeOnDone = config?.removeOnDone ?? true;
 
     const saveItems = useCallback((items: IChecklistItem[]) => {
@@ -119,7 +119,7 @@ const WidgetChecklist = (props: IWidgetSharedProps) => {
                     {items.length
                         ? items.map(item => <ChecklistItem key={item.id} item={item} onChange={handleItemChanged} onRemove={handleItemRemoved} />)
                         : <Box display="flex" height="100%" alignItems="center" justifyContent="center">
-                            <NoDataPlaceholder content={placeholders.t("NoItems")} />
+                            <NoDataPlaceholder content={placeholders.t('NoItems')} />
                         </Box>}
                 </Stack>
             </Box>
@@ -127,7 +127,7 @@ const WidgetChecklist = (props: IWidgetSharedProps) => {
                 <form onSubmit={handleNewItem}>
                     <FilledInput
                         hiddenLabel
-                        placeholder={t("AddItem")}
+                        placeholder={t('AddItem')}
                         fullWidth
                         onFocus={() => setIsInputFocusedOrFilled(true)}
                         onBlur={() => {

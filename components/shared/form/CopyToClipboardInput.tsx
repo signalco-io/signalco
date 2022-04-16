@@ -1,6 +1,6 @@
-import { Fade, FilledInput, FilledInputProps, FormControl, IconButton, InputAdornment, InputLabel, Paper, Stack, Typography } from "@mui/material";
-import { ContentCopy as ContentCopyIcon, Warning } from "@mui/icons-material";
-import React, { MouseEvent, useState } from "react";
+import { Fade, FilledInput, FilledInputProps, FormControl, IconButton, InputAdornment, InputLabel, Paper, Stack, Typography } from '@mui/material';
+import { ContentCopy as ContentCopyIcon, Warning } from '@mui/icons-material';
+import React, { MouseEvent, useState } from 'react';
 import Popper from '@mui/material/Popper'
 import {
     usePopupState,
@@ -36,7 +36,7 @@ const CopyToClipboardInput = (props: CopyToClipboardInputProps) => {
                 setError(false);
             }
         } catch (error) {
-            console.warn("Failed to copy to clipboard", error);
+            console.warn('Failed to copy to clipboard', error);
             setError(true);
         } finally {
             if (event.target) {
@@ -74,7 +74,7 @@ const CopyToClipboardInput = (props: CopyToClipboardInputProps) => {
                             <Stack direction="row" spacing={1} alignItems="center">
                                 {error && <Warning color="warning" />}
                                 <Typography>
-                                    {!error ? "Copied to clipboard" : "Failed to copy to clipboard"}
+                                    {!error ? 'Copied to clipboard' : 'Failed to copy to clipboard'}
                                 </Typography>
                             </Stack>
                         </Paper>

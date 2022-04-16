@@ -1,10 +1,10 @@
-import { useEffect } from "react";
-import DashboardsRepository from "../../src/dashboards/DashboardsRepository";
-import useLocale from "../../src/hooks/useLocale";
-import PageNotificationService from "../../src/notifications/PageNotificationService";
+import { useEffect } from 'react';
+import DashboardsRepository from '../../src/dashboards/DashboardsRepository';
+import useLocale from '../../src/hooks/useLocale';
+import PageNotificationService from '../../src/notifications/PageNotificationService';
 
 export default function useDashboardsUpdateChecker() {
-    const { t } = useLocale("App", "Dashboards", "UpdateChecker");
+    const { t } = useLocale('App', 'Dashboards', 'UpdateChecker');
 
     useEffect(() => {
         const checkDashboardUpdateAsync = async () => {
@@ -15,7 +15,7 @@ export default function useDashboardsUpdateChecker() {
                     PageNotificationService.show(t('UpdateApplied'));
                 }
             } catch (err) {
-                console.warn("Failed to check and apply dashboards update", err);
+                console.warn('Failed to check and apply dashboards update', err);
                 PageNotificationService.show(t('UpdateError'), 'info');
             }
         };

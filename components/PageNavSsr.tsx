@@ -1,8 +1,8 @@
-import { Box, Button, ButtonBase, Container, Stack } from "@mui/material";
-import React from "react";
+import { Box, Button, ButtonBase, Container, Stack } from '@mui/material';
+import React from 'react';
 import { useRouter } from 'next/router';
-import SignalcoLogo from "./icons/SignalcoLogo";
-import Link from "next/link";
+import SignalcoLogo from './icons/SignalcoLogo';
+import Link from 'next/link';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 export function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?: boolean; }) {

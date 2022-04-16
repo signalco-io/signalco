@@ -2,7 +2,7 @@ import { Box, ButtonBase, Icon, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import useDevice from '../../../src/hooks/useDevice';
-import { CircleSlider } from "react-circle-slider";
+import { CircleSlider } from 'react-circle-slider';
 import { IWidgetSharedProps } from '../Widget';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -69,7 +69,7 @@ const WidgetAirConditioning = (props: IWidgetSharedProps) => {
                         progressWidth={4}
                         circleWidth={15}
                         circleColor="#666"
-                        progressColor={heatingActive ? "#DC5151" : 'transparent'}
+                        progressColor={heatingActive ? '#DC5151' : 'transparent'}
                         onChange={() => { }}
                     />
                 </Box>

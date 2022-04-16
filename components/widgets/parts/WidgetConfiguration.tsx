@@ -1,10 +1,10 @@
-import { Box, Button, Checkbox, FormControlLabel, FormGroup, InputAdornment, OutlinedInput, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { ObjectDictAny } from "../../../src/sharedTypes";
-import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
-import ConfigurationDialog from "../../shared/dialog/ConfigurationDialog";
-import DisplayDeviceTarget from "../../shared/entity/DisplayDeviceTarget";
-import SelectItems from "../../shared/form/SelectItems";
+import { Box, Button, Checkbox, FormControlLabel, FormGroup, InputAdornment, OutlinedInput, Stack, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { ObjectDictAny } from '../../../src/sharedTypes';
+import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
+import DisplayDeviceTarget from '../../shared/entity/DisplayDeviceTarget';
+import SelectItems from '../../shared/form/SelectItems';
 
 interface IWidgetConfigurationDialogProps {
     options: IWidgetConfigurationOption[],
@@ -148,7 +148,7 @@ const WidgetConfiguration = (props: IWidgetConfigurationProps) => {
                         {configProps.options.map(opt => {
                             return (
                                 <Box key={opt.name}>
-                                    <Typography>{opt.label}{opt.optional && " (optional)"}</Typography>
+                                    <Typography>{opt.label}{opt.optional && ' (optional)'}</Typography>
                                     <WidgetConfigurationOption
                                         option={opt}
                                         value={configProps.values[opt.name] ?? opt.default}

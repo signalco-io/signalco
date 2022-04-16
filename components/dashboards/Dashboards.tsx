@@ -1,21 +1,21 @@
-import { Box, Button, LinearProgress, Stack, Typography } from "@mui/material";
-import React, { useCallback, useState } from "react";
-import { observer } from "mobx-react-lite";
-import DashboardsRepository, { WidgetModel } from "../../src/dashboards/DashboardsRepository";
-import PageNotificationService from "../../src/notifications/PageNotificationService";
-import DashboardView from "./DashboardView";
-import DashboardSelector from "./DashboardSelector";
-import DashboardSettings from "./DashboardSettings";
-import { LoadingButton } from "@mui/lab";
-import { widgetType } from "../widgets/Widget";
-import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
-import dynamic from "next/dynamic";
-import { useLoadAndError } from "../../src/hooks/useLoadingAndError";
-import Image from "next/image";
-import useHashParam from "../../src/hooks/useHashParam";
-import useDashboardsUpdateChecker from "./useDashboardsUpdateChecker";
+import { Box, Button, LinearProgress, Stack, Typography } from '@mui/material';
+import React, { useCallback, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import DashboardsRepository, { WidgetModel } from '../../src/dashboards/DashboardsRepository';
+import PageNotificationService from '../../src/notifications/PageNotificationService';
+import DashboardView from './DashboardView';
+import DashboardSelector from './DashboardSelector';
+import DashboardSettings from './DashboardSettings';
+import { LoadingButton } from '@mui/lab';
+import { widgetType } from '../widgets/Widget';
+import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
+import dynamic from 'next/dynamic';
+import { useLoadAndError } from '../../src/hooks/useLoadingAndError';
+import Image from 'next/image';
+import useHashParam from '../../src/hooks/useHashParam';
+import useDashboardsUpdateChecker from './useDashboardsUpdateChecker';
 
-const WidgetStoreDynamic = dynamic(() => import("../widget-store/WidgetStore"));
+const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 
 const Dashboards = () => {
     const [selectedId, setSelectedId] = React.useState<string | undefined>(undefined);
@@ -43,11 +43,11 @@ const Dashboards = () => {
                     })
                 });
             }
-            console.debug("Saving dashboards...", updatedDashboards);
+            console.debug('Saving dashboards...', updatedDashboards);
             await DashboardsRepository.saveDashboardsAsync(updatedDashboards);
         } catch (err) {
             console.error('Failed to save dashboards', err);
-            PageNotificationService.show('There was an error while saving dashboards. Please try again or refresh the page.', "error");
+            PageNotificationService.show('There was an error while saving dashboards. Please try again or refresh the page.', 'error');
         } finally {
             setIsEditing(false);
             setIsSavingEdit(false);
@@ -73,18 +73,18 @@ const Dashboards = () => {
         setShowWidgetStore(true);
     }
 
-    console.debug("Rendering Dashboards");
+    console.debug('Rendering Dashboards');
 
     return (
         <>
             <Stack spacing={{ xs: 1, sm: 2 }} sx={{ pt: { xs: 0, sm: 2 } }}>
-                <Stack spacing={1} direction={{ xs: "column-reverse", md: "row" }} justifyContent="space-between" alignItems="stretch">
+                <Stack spacing={1} direction={{ xs: 'column-reverse', md: 'row' }} justifyContent="space-between" alignItems="stretch">
                     <DashboardSelector
                         onSelection={setSelectedId}
                         onEditWidgets={() => setIsEditing(true)}
                         onSettings={() => setIsDashboardSettingsOpen(true)} />
                     {isEditing && (
-                        <Box sx={{ px: 2, width: { md: "auto", xs: '100%' } }}>
+                        <Box sx={{ px: 2, width: { md: 'auto', xs: '100%' } }}>
                             <Stack direction="row" spacing={1}>
                                 <Button variant="outlined" size="large" onClick={() => setShowWidgetStore(true)} sx={{ width: '250px' }}>Add widget...</Button>
                                 <LoadingButton loading={isSavingEdit} variant="outlined" size="large" onClick={handleEditDone} fullWidth>Done editing</LoadingButton>

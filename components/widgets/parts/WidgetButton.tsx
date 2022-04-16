@@ -1,11 +1,11 @@
-import { ButtonBase, Icon, Stack } from "@mui/material";
-import { IDeviceTargetWithValueFallback } from "../../../src/devices/Device";
-import useWidgetActive from "../../../src/hooks/widgets/useWidgetActive";
-import useWidgetOptions from "../../../src/hooks/widgets/useWidgetOptions";
-import IWidgetConfigurationOption from "../../../src/widgets/IWidgetConfigurationOption";
-import { DefaultHeight, DefaultTargetWithValue, DefaultWidth } from "../../../src/widgets/WidgetConfigurationOptions";
-import { IWidgetSharedProps } from "../Widget";
-import { executeStateActionsAsync } from "./WidgetState";
+import { ButtonBase, Icon, Stack } from '@mui/material';
+import { IDeviceTargetWithValueFallback } from '../../../src/devices/Device';
+import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
+import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import { DefaultHeight, DefaultTargetWithValue, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import { IWidgetSharedProps } from '../Widget';
+import { executeStateActionsAsync } from './WidgetState';
 
 const stateOptions: IWidgetConfigurationOption[] = [
     { label: 'Icon', name: 'icon', type: 'string', optional: true },

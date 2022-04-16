@@ -1,12 +1,12 @@
-import { TimePicker } from "@mui/lab";
-import { Stack, Box, Typography, NoSsr, ToggleButtonGroup, ToggleButton, TextField } from "@mui/material";
-import useLocale from "../../src/hooks/useLocale";
-import useUserSetting from "../../src/hooks/useUserSetting";
-import DateTimeProvider from "../../src/services/DateTimeProvider";
-import { AppTheme, AppThemeMode } from "../../src/theme";
+import { TimePicker } from '@mui/lab';
+import { Stack, Box, Typography, NoSsr, ToggleButtonGroup, ToggleButton, TextField } from '@mui/material';
+import useLocale from '../../src/hooks/useLocale';
+import useUserSetting from '../../src/hooks/useUserSetting';
+import DateTimeProvider from '../../src/services/DateTimeProvider';
+import { AppTheme, AppThemeMode } from '../../src/theme';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { useState } from "react";
+import { useState } from 'react';
 
 const AppThemeVisual = (props: { label: string, theme: AppTheme, disabled?: boolean }) => {
     const { label, theme, disabled } = props;
@@ -50,8 +50,8 @@ const AppThemeVisual = (props: { label: string, theme: AppTheme, disabled?: bool
 };
 
 export default function AppThemePicker() {
-    const themes = useLocale("App", "Settings", "Themes");
-    const themeModes = useLocale("App", "Settings", "ThemeModes");
+    const themes = useLocale('App', 'Settings', 'Themes');
+    const themeModes = useLocale('App', 'Settings', 'ThemeModes');
     const [userTimeFormat] = useUserSetting<string>('timeFormat', '1');
 
     const [activeTheme, setSelectedTheme] = useUserSetting<AppTheme>('theme', 'light');
@@ -71,7 +71,7 @@ export default function AppThemePicker() {
         }
     };
 
-    const [timeRange, setTimeRange] = useUserSetting<[string, string]>('themeTimeRange', ["PT8H", "PT20H"]);
+    const [timeRange, setTimeRange] = useUserSetting<[string, string]>('themeTimeRange', ['PT8H', 'PT20H']);
     const [dayTime, setDayTime] = useState<Date | null | undefined>(timeRange ? DateTimeProvider.fromDuration(DateTimeProvider.now(), timeRange[0]) : DateTimeProvider.todayAt(8));
     const [nightTime, setNightTime] = useState<Date | null | undefined>(timeRange ? DateTimeProvider.fromDuration(DateTimeProvider.now(), timeRange[1]) : DateTimeProvider.todayAt(20));
     const setThemeTimeRangeValues = (start: Date, end: Date) => {
@@ -122,9 +122,9 @@ export default function AppThemePicker() {
                 <Stack spacing={1}>
                     {themeMode !== 'manual' && <Typography variant="body2" sx={{ color: 'text.secondary' }}>Pick night theme</Typography>}
                     <ToggleButtonGroup exclusive color="primary" value={activeTheme} onChange={(_e, value) => handleThemeSelect(value)}>
-                        {themeMode === 'manual' && <ToggleButton value="light"><AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t("Light")} theme="light" /></ToggleButton>}
-                        <ToggleButton value="darkDimmed"><AppThemeVisual label={themes.t("DarkDimmed")} theme="darkDimmed" /></ToggleButton>
-                        <ToggleButton value="dark"><AppThemeVisual label={themes.t("Dark")} theme="dark" /></ToggleButton>
+                        {themeMode === 'manual' && <ToggleButton value="light"><AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" /></ToggleButton>}
+                        <ToggleButton value="darkDimmed"><AppThemeVisual label={themes.t('DarkDimmed')} theme="darkDimmed" /></ToggleButton>
+                        <ToggleButton value="dark"><AppThemeVisual label={themes.t('Dark')} theme="dark" /></ToggleButton>
                     </ToggleButtonGroup>
                 </Stack>
             </Stack>
