@@ -41,7 +41,7 @@ import appSettingsProvider from "../src/services/AppSettingsProvider";
 import useUserSetting from "../src/hooks/useUserSetting";
 
 const navItems = [
-  { label: 'Dashboard', path: '/app', icon: DashboardSharpIcon },
+  { label: 'Dashboards', path: '/app', icon: DashboardSharpIcon },
   { label: 'Entities', path: '/app/entities', icon: DevicesOtherSharpIcon },
   { label: 'Processes', path: '/app/processes', icon: AccountTreeSharpIcon },
   { label: 'Stations', path: '/app/stations', icon: DeviceHubSharpIcon },
