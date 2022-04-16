@@ -20,7 +20,17 @@
             "Name": "Name",
             "Version": "Version",
             "LastActivity": "Last Activity",
-            "RegisteredDate": "RegisteredDate"
+            "RegisteredDate": "RegisteredDate",
+            "StationCommandError": "Failed to execute station command.",
+            "UpdateStationUpToDate": "Up to date",
+            "UpdateStationVersion": "Update to {version}",
+            "Start": "Start",
+            "Stop": "Stop",
+            "Running": "Running",
+            "Stopped": "Stopped",
+            "Never": "Never",
+            "Unknown": "Unknown",
+            "Information": "Information"
         },
         "Settings": {
             "General": "General",
