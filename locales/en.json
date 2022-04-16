@@ -9,7 +9,7 @@
             "UserProfileImageAlt": "User profile image"
         },
         "Nav": {
-            "Dashboard": "Dashboard",
+            "Dashboards": "Dashboards",
             "Entities": "Entities",
             "Processes": "Processes",
             "Stations": "Stations",
@@ -47,6 +47,12 @@
             "LocationAndTime": "Time and location",
             "Developer": "Developer",
             "ApiEndpoint": "API Endpoint"
+        },
+        "Dashboards": {
+            "UpdateChecker": {
+                "UpdateApplied": "Dashboard update applied.",
+                "UpdateError": "New version of dashboard is available. Refresh to see the changes."
+            }
         },
         "Placeholders": {
             "NoData": "No data to show",
