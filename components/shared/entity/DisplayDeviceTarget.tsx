@@ -1,15 +1,15 @@
-import { ButtonBase, Chip, Menu, MenuItem, Skeleton, Stack } from "@mui/material";
-import { observer } from "mobx-react-lite";
-import React, { } from "react";
-import { IDeviceModel, IDeviceTarget, IDeviceTargetIncomplete } from "../../../src/devices/Device";
+import { ButtonBase, Chip, Menu, MenuItem, Skeleton, Stack } from '@mui/material';
+import { observer } from 'mobx-react-lite';
+import React, { } from 'react';
+import { IDeviceModel, IDeviceTarget, IDeviceTargetIncomplete } from '../../../src/devices/Device';
 import { selectMany } from '../../../src/helpers/ArrayHelpers';
-import useDevice from "../../../src/hooks/useDevice";
+import useDevice from '../../../src/hooks/useDevice';
 import {
     usePopupState,
     bindTrigger,
     bindMenu,
 } from 'material-ui-popup-state/hooks';
-import useAllEntities from "../../../src/hooks/useAllEntities";
+import useAllEntities from '../../../src/hooks/useAllEntities';
 
 const DeviceSelectionMenuItem = (props: { target?: IDeviceTargetIncomplete, onSelected: (device: IDeviceModel | undefined) => void }) => {
     const {
@@ -102,7 +102,7 @@ const DisplayDeviceTarget = observer((props: { target?: IDeviceTargetIncomplete,
     }
 
     const ITEM_HEIGHT = 48;
-    const deviceDisplayName = (device?.alias ?? props.target?.deviceId) ?? "None";
+    const deviceDisplayName = (device?.alias ?? props.target?.deviceId) ?? 'None';
 
     return (
         <Stack direction="row" spacing={1}>
@@ -125,7 +125,7 @@ const DisplayDeviceTarget = observer((props: { target?: IDeviceTargetIncomplete,
             {(props.target?.deviceId && !props.hideContact) && (
                 <>
                     <ButtonBase {...bindTrigger(contactMenu)}>
-                        <Chip label={props.target.contactName ?? "None"} title={`${props.target.channelName} | ${props.target.contactName}`} />
+                        <Chip label={props.target.contactName ?? 'None'} title={`${props.target.channelName} | ${props.target.contactName}`} />
                     </ButtonBase>
                     <Menu {...bindMenu(contactMenu)}>
                         <ContactSelection device={device} target={props.target} onSelected={handleContactSelected} />

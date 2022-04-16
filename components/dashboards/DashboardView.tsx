@@ -1,16 +1,16 @@
-import { DndContext, DragEndEvent, PointerSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
-import { arrayMove, SortableContext, useSortable } from "@dnd-kit/sortable";
-import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import useWindowWidth from "../../src/hooks/useWindowWidth";
-import { useNavWidth } from "../NavProfile";
-import Widget, { IWidgetProps } from "../widgets/Widget";
+import { DndContext, DragEndEvent, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
+import { Box } from '@mui/system';
+import React, { useEffect, useState } from 'react';
+import useWindowWidth from '../../src/hooks/useWindowWidth';
+import { useNavWidth } from '../NavProfile';
+import Widget, { IWidgetProps } from '../widgets/Widget';
 import { CSS } from '@dnd-kit/utilities';
-import { snapCenterToCursor } from "@dnd-kit/modifiers";
-import { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
-import { observer } from "mobx-react-lite";
-import { runInAction } from "mobx";
-import { Button, Stack, Typography } from "@mui/material";
+import { snapCenterToCursor } from '@dnd-kit/modifiers';
+import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
+import { observer } from 'mobx-react-lite';
+import { runInAction } from 'mobx';
+import { Button, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 
 interface IDragableWidgetProps extends IWidgetProps {
@@ -113,7 +113,7 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
         }
     }
 
-    console.debug("Rendering DashboardView")
+    console.debug('Rendering DashboardView')
 
     if (widgets.length <= 0) {
         return (

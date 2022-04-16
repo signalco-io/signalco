@@ -14,19 +14,19 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from "@mui/material";
+} from '@mui/material';
 import Link from 'next/link';
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import Skeleton from '@mui/material/Skeleton';
 import DashboardSharpIcon from '@mui/icons-material/DashboardSharp';
 import AccountTreeSharpIcon from '@mui/icons-material/AccountTreeSharp';
 import DevicesOtherSharpIcon from '@mui/icons-material/DevicesOtherSharp';
 import DeviceHubSharpIcon from '@mui/icons-material/DeviceHubSharp';
 import SettingsIcon from '@mui/icons-material/Settings';
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { orderBy } from "../src/helpers/ArrayHelpers";
-import { SvgIconComponent } from "@mui/icons-material";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { orderBy } from '../src/helpers/ArrayHelpers';
+import { SvgIconComponent } from '@mui/icons-material';
 import {
   usePopupState,
   bindTrigger,
@@ -34,11 +34,11 @@ import {
 } from 'material-ui-popup-state/hooks';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import useLocale from "../src/hooks/useLocale";
-import CurrentUserProvider from "../src/services/CurrentUserProvider";
-import LocalStorageService from "../src/services/LocalStorageService";
-import appSettingsProvider from "../src/services/AppSettingsProvider";
-import useUserSetting from "../src/hooks/useUserSetting";
+import useLocale from '../src/hooks/useLocale';
+import CurrentUserProvider from '../src/services/CurrentUserProvider';
+import LocalStorageService from '../src/services/LocalStorageService';
+import appSettingsProvider from '../src/services/AppSettingsProvider';
+import useUserSetting from '../src/hooks/useUserSetting';
 
 const navItems = [
   { label: 'Dashboards', path: '/app', icon: DashboardSharpIcon },
@@ -49,7 +49,7 @@ const navItems = [
 ];
 
 const UserAvatar = () => {
-  const { t } = useLocale("App", "Account");
+  const { t } = useLocale('App', 'Account');
   const user = CurrentUserProvider.getCurrentUser();
 
   if (user === undefined) {
@@ -60,7 +60,7 @@ const UserAvatar = () => {
     );
   }
 
-  let userNameInitials = "";
+  let userNameInitials = '';
   if (user.given_name && user.family_name) {
     userNameInitials = `${user.given_name[0]}${user.family_name[0]}`;
   }
@@ -71,7 +71,7 @@ const UserAvatar = () => {
   const size = { xs: '36px', sm: '42px', lg: '58px' };
 
   if (user.picture) {
-    return (<Avatar sx={{ width: size, height: size }} variant="circular" src={user.picture} alt={t("UserProfileImageAlt")}>
+    return (<Avatar sx={{ width: size, height: size }} variant="circular" src={user.picture} alt={t('UserProfileImageAlt')}>
       {userNameInitials}
     </Avatar>);
   }
@@ -82,7 +82,7 @@ const UserAvatar = () => {
 };
 
 const UserProfileAvatar = () => {
-  const { t } = useLocale("App", "Account");
+  const { t } = useLocale('App', 'Account');
   const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' });
   const navWidth = useNavWidth();
   const maxWidth = navWidth - 16;
@@ -116,7 +116,7 @@ const UserProfileAvatar = () => {
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
-          <ListItemText>{t("Logout")}</ListItemText>
+          <ListItemText>{t('Logout')}</ListItemText>
         </MenuItem>
       </Menu>
     </>
@@ -164,7 +164,7 @@ const NavProfile = () => {
   const router = useRouter();
   const activeNavItem = orderBy(navItems.filter(ni => router.pathname.startsWith(ni.path)), ni => 0 - ni.path.length)[0];
   const navWidth = useNavWidth();
-  const { t } = useLocale("App", "Nav");
+  const { t } = useLocale('App', 'Nav');
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -179,7 +179,7 @@ const NavProfile = () => {
       direction={{ xs: 'row', sm: 'column' }}
       spacing={{ xs: 0, sm: 4 }}
       sx={{ px: { xs: 2, sm: 0 }, pt: { xs: 0, sm: 4 }, minWidth: `${navWidth}px`, minHeight: { xs: '60px', sm: undefined } }}
-      justifyContent={isMobile ? "space-between" : undefined}
+      justifyContent={isMobile ? 'space-between' : undefined}
       alignItems="center">
       <NoSsr>
         <UserProfileAvatar />

@@ -2,7 +2,7 @@ import { Box, Button, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext } from 'react';
-import { PageLayout } from "../components/layouts/PageLayout";
+import { PageLayout } from '../components/layouts/PageLayout';
 import { AppContext } from './_app';
 
 const Image404 = () => {
@@ -22,7 +22,7 @@ const NotFound = () => (
     <Stack alignItems="center" justifyContent="center" sx={{ minHeight: '50vh' }}>
         <Stack direction="row" alignItems="center" justifyContent="center">
             <Stack direction="row" justifyContent="center" spacing={{ xs: 2, sm: 4, md: 8 }} alignItems="center">
-                <Box display={{ xs: "none", sm: "inline-block" }}>
+                <Box display={{ xs: 'none', sm: 'inline-block' }}>
                     <Image404 />
                 </Box>
                 <Stack spacing={2} alignItems="start">
@@ -30,7 +30,7 @@ const NotFound = () => (
                         <Typography variant="h1" fontSize="4em">404</Typography>
                         <Typography variant="h2" component="p">Page not found</Typography>
                     </Stack>
-                    <Typography sx={{ opacity: 0.6 }}>{"Can't find find what you're looking for..."}</Typography>
+                    <Typography sx={{ opacity: 0.6 }}>{'Can\'t find find what you\'re looking for...'}</Typography>
                     <Link href="/" passHref>
                         <Button variant="outlined">signalco home</Button>
                     </Link>

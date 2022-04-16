@@ -2,7 +2,7 @@ import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, 
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
 import ReactTimeago from 'react-timeago';
-import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
+import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
 import { IDeviceContact, IDeviceContactState } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
@@ -82,7 +82,7 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
     const handleBooleanClick = async () => {
         const newState = props.state?.valueSerialized === 'true' ? false : true;
 
-        console.log("Do boolean", 'contact:', props.contact, 'state:', props.state, 'new state:', newState);
+        console.log('Do boolean', 'contact:', props.contact, 'state:', props.state, 'new state:', newState);
 
         await ConductsService.RequestConductAsync({
             channelName: props.channel,
@@ -92,7 +92,7 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
     };
 
     const handleActionClick = async () => {
-        console.log("Do action", 'contact:', props.contact, 'state:', props.state, 'dataValuesSelected:', dataValuesSelected);
+        console.log('Do action', 'contact:', props.contact, 'state:', props.state, 'dataValuesSelected:', dataValuesSelected);
 
         await ConductsService.RequestConductAsync({
             channelName: props.channel,
@@ -130,7 +130,7 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
     }, [props.state?.valueSerialized, props.contact.dataType, sliderValue]);
 
     if (props.contact.dataType === 'bool') {
-        return <Switch onChange={handleBooleanClick} checked={props.state?.valueSerialized === "true"} color="warning" />
+        return <Switch onChange={handleBooleanClick} checked={props.state?.valueSerialized === 'true'} color="warning" />
     } else if (props.contact.dataType === 'action' || props.contact.dataType === 'enum') {
         return (
             <Stack alignItems="center" direction="row">
@@ -144,8 +144,8 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
             step={0.01}
             sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
             marks={[
-                { label: "Low", value: 0 },
-                { label: "High", value: 1 }
+                { label: 'Low', value: 0 },
+                { label: 'High', value: 1 }
             ]}
             onChange={handleDoubleChange}
             onChangeCommitted={handleDoubleChange} />
@@ -155,8 +155,8 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
             step={0.01}
             sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
             marks={[
-                { label: "Cold", value: 0 },
-                { label: "Warm", value: 1 }
+                { label: 'Cold', value: 0 },
+                { label: 'Warm', value: 1 }
             ]}
             onChange={handleColorTemperatureChange}
             onChangeCommitted={handleColorTemperatureChange} />
@@ -167,7 +167,7 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
 
 const ContactStateLastUpdatedDisplay = observer((props: { state?: IDeviceContactState }) => (
     <>
-        {props.state ? <ReactTimeago date={props.state.timeStamp} live /> : "Unknown"}
+        {props.state ? <ReactTimeago date={props.state.timeStamp} live /> : 'Unknown'}
     </>
 ));
 
@@ -267,7 +267,7 @@ const DeviceDetails = () => {
     const { id } = router.query;
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | undefined>();
-    const device = useDevice(typeof id !== "object" && typeof id !== 'undefined' ? id : undefined);
+    const device = useDevice(typeof id !== 'object' && typeof id !== 'undefined' ? id : undefined);
     const [stateTableItems, setStateTableItems] = useState<IStateTableItem[] | undefined>();
     const [actionTableItems, setActionTableItems] = useState<IActionTableItem[] | undefined>();
 
@@ -333,7 +333,7 @@ const DeviceDetails = () => {
                         <Stack spacing={1} >
                             <Stack direction="row" justifyContent="space-between" spacing={2}>
                                 <span>Last activity</span>
-                                {device && device?.getLastActivity() > 0 ? <ReactTimeago date={device?.getLastActivity()} /> : "Never"}
+                                {device && device?.getLastActivity() > 0 ? <ReactTimeago date={device?.getLastActivity()} /> : 'Never'}
                             </Stack>
                             <Stack direction="row" justifyContent="space-between" spacing={2}>
                                 <span>Model</span>

@@ -1,9 +1,9 @@
-import { CardHeader, Grid, Stack, Box, Card, Typography, CardActions, CardMedia, IconButton, TextField, Divider } from "@mui/material";
-import React from "react";
+import { CardHeader, Grid, Stack, Box, Card, Typography, CardActions, CardMedia, IconButton, TextField, Divider } from '@mui/material';
+import React from 'react';
 import Image from 'next/image';
-import useSearch, { filterFuncObjectStringProps } from "../../src/hooks/useSearch";
-import { AddOutlined } from "@mui/icons-material";
-import { widgetType } from "../widgets/Widget";
+import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
+import { AddOutlined } from '@mui/icons-material';
+import { widgetType } from '../widgets/Widget';
 
 const availableWidgets = [
     {
@@ -74,7 +74,7 @@ const WidgetStore = (props: { onAddWidget?: (widgetType: widgetType) => void }) 
                                 <CardHeader
                                     title={availableWidget.name}
                                     subheader={availableWidget.description}
-                                    subheaderTypographyProps={{ variant: "body2", color: "text.secondary", pt: 1 }} />
+                                    subheaderTypographyProps={{ variant: 'body2', color: 'text.secondary', pt: 1 }} />
                                 <CardMedia>
                                     <Box sx={{ width: '100%', height: '370px', display: 'flex', 'justifyContent': 'center' }}>
                                         <Image

@@ -1,12 +1,12 @@
-import { Box, Divider, Container, Grid, Typography, Stack, IconButton, Link } from "@mui/material";
-import NextLink from "next/link";
-import React from "react";
+import { Box, Divider, Container, Grid, Typography, Stack, IconButton, Link } from '@mui/material';
+import NextLink from 'next/link';
+import React from 'react';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import SignalcoLogo from "../icons/SignalcoLogo";
-import RedditIcon from "@mui/icons-material/Reddit";
-import appSettingsProvider from "../../src/services/AppSettingsProvider";
-import DateTimeProvider from "../../src/services/DateTimeProvider";
+import SignalcoLogo from '../icons/SignalcoLogo';
+import RedditIcon from '@mui/icons-material/Reddit';
+import appSettingsProvider from '../../src/services/AppSettingsProvider';
+import DateTimeProvider from '../../src/services/DateTimeProvider';
 
 type FooterSectionType = {
     header: string,
@@ -18,37 +18,37 @@ const footerLinks: FooterSectionType[] = [
     {
         header: 'Projects',
         links: [
-            { name: "Website", href: "https://github.com/signalco-io/signalco" },
-            { name: "Cloud", href: "https://github.com/signalco-io/cloud" },
-            { name: "Station", href: "https://github.com/signalco-io/station" },
-            { name: "Companion", href: "https://github.com/signalco-io/companion" },
+            { name: 'Website', href: 'https://github.com/signalco-io/signalco' },
+            { name: 'Cloud', href: 'https://github.com/signalco-io/cloud' },
+            { name: 'Station', href: 'https://github.com/signalco-io/station' },
+            { name: 'Companion', href: 'https://github.com/signalco-io/companion' },
         ],
         developerOnly: true
     },
     {
         header: 'Community',
         links: [
-            { name: "Coming soon...", href: "#" },
+            { name: 'Coming soon...', href: '#' },
         ]
     },
     {
         header: 'Resources',
         links: [
-            { name: "Status", href: "https://status.signalco.io" },
-            { name: "Design", href: "/design" },
-            { name: "API", href: "/docs/api", developerOnly: true },
-            { name: "Storybook", href: "https://storybook.signalco.dev", developerOnly: true },
-            { name: "Storybook (next)", href: "https://next.storybook.signalco.dev", developerOnly: true },
+            { name: 'Status', href: 'https://status.signalco.io' },
+            { name: 'Design', href: '/design' },
+            { name: 'API', href: '/docs/api', developerOnly: true },
+            { name: 'Storybook', href: 'https://storybook.signalco.dev', developerOnly: true },
+            { name: 'Storybook (next)', href: 'https://next.storybook.signalco.dev', developerOnly: true },
         ]
     },
     {
         header: 'Legal',
         links: [
-            { name: "Privacy Policy", href: "/legal/privacy-policy" },
-            { name: "Terms of Service", href: "/legal/terms-of-service" },
-            { name: "Cookie Policy", href: "/legal/cookie-policy" },
-            { name: "Acceptable Use Policy", href: "/legal/acceptable-use-policy" },
-            { name: "SLA", href: "/legal/sla" },
+            { name: 'Privacy Policy', href: '/legal/privacy-policy' },
+            { name: 'Terms of Service', href: '/legal/terms-of-service' },
+            { name: 'Cookie Policy', href: '/legal/cookie-policy' },
+            { name: 'Acceptable Use Policy', href: '/legal/acceptable-use-policy' },
+            { name: 'SLA', href: '/legal/sla' },
         ]
     }
 ];
@@ -72,7 +72,7 @@ export default function Footer() {
         <Box sx={{ bgcolor: 'background.paper' }}>
             <Divider />
             <Container maxWidth="lg">
-                <Box component="footer" sx={{ padding: "64px 0 32px 0" }}>
+                <Box component="footer" sx={{ padding: '64px 0 32px 0' }}>
                     <Grid container direction="column" spacing={4}>
                         <Grid item>
                             <Grid container justifyContent="space-between" spacing={4}>
@@ -89,11 +89,11 @@ export default function Footer() {
                             </Grid>
                         </Grid>
                         <Grid item>
-                            <Stack alignItems={{ xs: "center", sm: 'stretch' }}>
+                            <Stack alignItems={{ xs: 'center', sm: 'stretch' }}>
                                 <SignalcoLogo height={68} />
-                                <Stack alignItems="center" justifyContent="space-between" direction={{ xs: "column-reverse", sm: "row" }}>
+                                <Stack alignItems="center" justifyContent="space-between" direction={{ xs: 'column-reverse', sm: 'row' }}>
                                     <Typography textAlign={{ xs: 'center', sm: 'left' }} variant="subtitle2" fontWeight={400} component="span" color="textSecondary">Copyright © {DateTimeProvider.now().getFullYear()} signalco. All rights reserved.</Typography>
-                                    <Stack direction="row" spacing={1} alignItems={{ xs: "center", sm: 'start' }}>
+                                    <Stack direction="row" spacing={1} alignItems={{ xs: 'center', sm: 'start' }}>
                                         <SLink href="https://twitter.com/signalco_io">
                                             <IconButton size="large" aria-label="Twitter link">
                                                 <TwitterIcon />

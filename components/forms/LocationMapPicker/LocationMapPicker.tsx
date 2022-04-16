@@ -1,11 +1,11 @@
-import { Map, Marker, Draggable } from "pigeon-maps"
+import { Map, Marker, Draggable } from 'pigeon-maps'
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
-import React, { useCallback, useContext, useState } from "react";
-import { AppContext } from "../../../pages/_app";
-import { FormBuilderField } from "@enterwell/react-form-builder";
-import { Stack, IconButton, Box, Accordion, AccordionSummary, AccordionDetails, Typography, Skeleton } from "@mui/material";
-import { useLoadAndError } from "../../../src/hooks/useLoadingAndError";
+import React, { useCallback, useContext, useState } from 'react';
+import { AppContext } from '../../../pages/_app';
+import { FormBuilderField } from '@enterwell/react-form-builder';
+import { Stack, IconButton, Box, Accordion, AccordionSummary, AccordionDetails, Typography, Skeleton } from '@mui/material';
+import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const mapBoxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -55,7 +55,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
             setLatLng && setLatLng([position.coords.latitude, position.coords.longitude]);
             setZoom(15);
         }, () => {
-            PageNotificationService.show('Failed to retrieve your location. Make sure access to location is not blocked.', "warning")
+            PageNotificationService.show('Failed to retrieve your location. Make sure access to location is not blocked.', 'warning')
         }, {
             enableHighAccuracy: true,
             timeout: 10000
@@ -107,7 +107,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
                                 <Marker
                                     width={50}
                                     anchor={latLng}
-                                    color='black'
+                                    color="black"
                                 />
                             </Draggable>
                         </Map>

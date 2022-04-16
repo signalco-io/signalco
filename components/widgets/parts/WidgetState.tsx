@@ -1,17 +1,17 @@
-import { Stack, Typography, ButtonBase } from "@mui/material";
+import { Stack, Typography, ButtonBase } from '@mui/material';
 import { observer } from 'mobx-react-lite';
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import dynamic from 'next/dynamic'
 import ConductsService from '../../../src/conducts/ConductsService';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import { Box } from '@mui/system';
-import { IWidgetSharedProps } from "../Widget";
-import useDevices from "../../../src/hooks/useDevices";
-import { IDeviceTarget } from "../../../src/devices/Device";
-import { DefaultLabel, DefaultTargetMultiple } from "../../../src/widgets/WidgetConfigurationOptions";
-import useWidgetOptions from "../../../src/hooks/widgets/useWidgetOptions";
-import useWidgetActive from "../../../src/hooks/widgets/useWidgetActive";
+import { IWidgetSharedProps } from '../Widget';
+import useDevices from '../../../src/hooks/useDevices';
+import { IDeviceTarget } from '../../../src/devices/Device';
+import { DefaultLabel, DefaultTargetMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
+import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
 
 const stateOptions = [
     DefaultLabel,
@@ -19,8 +19,8 @@ const stateOptions = [
     { name: 'visual', label: 'Visual', type: 'select', default: 'lightbulb', data: [{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }] },
 ];
 
-const TvVisual = dynamic(() => import("../../icons/TvVisual"));
-const LightBulbVisual = dynamic(() => import("../../icons/LightBulbVisual"));
+const TvVisual = dynamic(() => import('../../icons/TvVisual'));
+const LightBulbVisual = dynamic(() => import('../../icons/LightBulbVisual'));
 
 export type StateAction = {
     deviceId: string,
@@ -42,7 +42,7 @@ const determineActionValueAsync = async (action: StateAction) => {
             const currentState = device?.getState(action);
             if (typeof currentState === 'undefined') {
                 console.warn('Failed to retrieve button action source state', action)
-                PageNotificationService.show("Conduct action new value can't be determined.", "warning");
+                PageNotificationService.show('Conduct action new value can\'t be determined.', 'warning');
                 return null;
             }
 
@@ -62,7 +62,7 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
             typeof action.channelName === 'undefined' ||
             typeof action.contactName === 'undefined') {
             console.warn('Action has invalid target', action)
-            PageNotificationService.show("Conduct has missing target data.", "warning");
+            PageNotificationService.show('Conduct has missing target data.', 'warning');
             continue;
         }
 
@@ -105,7 +105,7 @@ const WidgetState = (props: IWidgetSharedProps) => {
     const handleStateChangeRequest = () => {
         if (typeof devices === 'undefined') {
             console.warn('State change requested but device is undefined.');
-            PageNotificationService.show("Can't execute action, widget is not loaded yet.", "warning");
+            PageNotificationService.show('Can\'t execute action, widget is not loaded yet.', 'warning');
             return;
         }
 

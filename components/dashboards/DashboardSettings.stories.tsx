@@ -1,7 +1,7 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
-import ConfirmDeleteButton from "../shared/dialog/ConfirmDeleteButton";
-import DashboardSettings from "./DashboardSettings";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
+import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
+import DashboardSettings from './DashboardSettings';
 
 export default {
     title: 'Components/Dashboards/Dashboard Settings',

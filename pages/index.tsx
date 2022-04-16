@@ -1,16 +1,16 @@
-import { Box, Button, Container, Divider, Grid, Stack, SxProps, Theme, Typography } from "@mui/material";
-import React from "react";
-import Link from "next/link";
-import CounterIndicator from "../components/pages/landing/CounterIndicator";
-import Cover from "../components/pages/landing/Cover";
-import LinkImage from "../components/shared/ImageLink";
-import { PageFullLayout } from "../components/layouts/PageFullLayout";
-import { useInView } from "react-cool-inview";
-import dynamic from "next/dynamic";
-import DiscoverVisual from "../components/pages/landing/visuals/DiscoverVisual";
-import Image from "next/image";
-import { useContext } from "react";
-import { AppContext } from "./_app";
+import { Box, Button, Container, Divider, Grid, Stack, SxProps, Theme, Typography } from '@mui/material';
+import React from 'react';
+import Link from 'next/link';
+import CounterIndicator from '../components/pages/landing/CounterIndicator';
+import Cover from '../components/pages/landing/Cover';
+import LinkImage from '../components/shared/ImageLink';
+import { PageFullLayout } from '../components/layouts/PageFullLayout';
+import { useInView } from 'react-cool-inview';
+import dynamic from 'next/dynamic';
+import DiscoverVisual from '../components/pages/landing/visuals/DiscoverVisual';
+import Image from 'next/image';
+import { useContext } from 'react';
+import { AppContext } from './_app';
 
 const Newsletter = dynamic(() => import('../components/pages/landing/Newsletter'));
 const GlobePart = dynamic(() => import('../components/pages/landing/GlobeSection'));
@@ -22,7 +22,7 @@ const FeatureDescription = (props: { title: string, content: string, link?: stri
     <Box>
       {props.link && (
         <Link passHref href={props.link}>
-          <Button variant="outlined">{props.linkText ?? "Read more"}</Button>
+          <Button variant="outlined">{props.linkText ?? 'Read more'}</Button>
         </Link>
       )}
     </Box>
@@ -71,12 +71,12 @@ const SectionCenter = (props: { children?: React.ReactNode | undefined, sx?: SxP
 );
 
 const integrationsList = [
-  { name: "Samsung", img: "/assets/logos/samsunglogo.png", imgRatio: 3.5, page: '/channels/samsung' },
-  { name: "Xiaomi", img: "/assets/logos/xiaomilogo.png", imgRatio: 1, page: '/channels/xiaomi' },
-  { name: "Philips Hue", img: "/assets/logos/huelogo.png", imgRatio: 1.6, page: '/channels/philips-hue' },
+  { name: 'Samsung', img: '/assets/logos/samsunglogo.png', imgRatio: 3.5, page: '/channels/samsung' },
+  { name: 'Xiaomi', img: '/assets/logos/xiaomilogo.png', imgRatio: 1, page: '/channels/xiaomi' },
+  { name: 'Philips Hue', img: '/assets/logos/huelogo.png', imgRatio: 1.6, page: '/channels/philips-hue' },
   // { name: "Zigbee2MQTT", img: "/assets/logos/z2mlogo.png", imgRatio: 1, page: '/channels/zigbee2mqtt' },
-  { name: "iRobot", img: "/assets/logos/irobotlogo.png", imgRatio: 2.5, page: '/channels/irobot' },
-  { name: "GitHub", img: "/assets/logos/githublogo.png", imgRatio: 2, page: '/channels/github-app' },
+  { name: 'iRobot', img: '/assets/logos/irobotlogo.png', imgRatio: 2.5, page: '/channels/irobot' },
+  { name: 'GitHub', img: '/assets/logos/githublogo.png', imgRatio: 2, page: '/channels/github-app' },
   // { name: "Tasmota", img: "/assets/logos/tasmotalogo.png", imgRatio: 1, page: '/channels/tasmota' },
 ]
 
@@ -133,7 +133,7 @@ const PlaySection = () => {
 
   return (
     <StepContent title="Play" subtitle="Here are some of our favorite ways you can automate your life"
-      image={<Image layout='fixed' src={appContext.isDark ? "/images/playpitch-dark.png" : "/images/playpitch.png"} alt="Play" quality={100} width={511} height={684} />}
+      image={<Image layout="fixed" src={appContext.isDark ? '/images/playpitch-dark.png' : '/images/playpitch.png'} alt="Play" quality={100} width={511} height={684} />}
       imageContainerHeight={684 + 64}
       imageContainerStyles={{ position: 'absolute', top: 0, right: 0, width: '511px', height: '684px', marginTop: '64px' }}>
       <FeatureDescription
@@ -205,8 +205,8 @@ const Index = () => {
         <Stack
           spacing={{ xs: 6, md: 8 }}
           alignItems="center"
-          direction={{ xs: "column", md: "row" }}
-          justifyContent={{ xs: "space-between" }}>
+          direction={{ xs: 'column', md: 'row' }}
+          justifyContent={{ xs: 'space-between' }}>
           <DataPart value="8" subtitle="Integrations" />
           <DataPart value="500+" subtitle="Automations per day" />
           <DataPart value="2000+" subtitle="Supported devices" />

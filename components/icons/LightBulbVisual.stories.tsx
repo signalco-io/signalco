@@ -1,5 +1,5 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import LightBulbVisual from "./LightBulbVisual";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import LightBulbVisual from './LightBulbVisual';
 
 export default {
     title: 'Visuals/LightBulbVisual',

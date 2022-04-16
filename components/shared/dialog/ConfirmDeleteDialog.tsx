@@ -1,6 +1,6 @@
-import { Breakpoint, Button, Stack, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
-import ConfigurationDialog from "./ConfigurationDialog";
+import { Breakpoint, Button, Stack, TextField, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import ConfigurationDialog from './ConfigurationDialog';
 
 export interface IConfirmDeleteDialogProps {
     isOpen: boolean,

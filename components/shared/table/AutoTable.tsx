@@ -5,20 +5,20 @@ import {
   Stack,
   TextField,
   Typography
-} from "@mui/material";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import { observer } from "mobx-react-lite";
-import React from "react";
+} from '@mui/material';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { observer } from 'mobx-react-lite';
+import React from 'react';
 import NextLink from 'next/link';
 import {
   camelToSentenceCase,
   isAbsoluteUrl
-} from "../../../src/helpers/StringHelpers";
-import ResultsPlaceholder from "../indicators/ResultsPlaceholder";
-import IErrorProps from "../interfaces/IErrorProps";
-import useSearch, { filterFuncObjectStringProps } from "../../../src/hooks/useSearch";
-import { ChildrenProps } from "../../../src/sharedTypes";
-import { LocalizeFunc } from "../../../src/hooks/useLocale";
+} from '../../../src/helpers/StringHelpers';
+import ResultsPlaceholder from '../indicators/ResultsPlaceholder';
+import IErrorProps from '../interfaces/IErrorProps';
+import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
+import { ChildrenProps } from '../../../src/sharedTypes';
+import { LocalizeFunc } from '../../../src/hooks/useLocale';
 
 export interface IAutoTableItem {
   id: string;
@@ -50,7 +50,7 @@ const ErrorRow = (props: IErrorProps) => {
     <div>
       <div>
         <Alert severity="error">
-          {(props.error || "Unknown error").toString()}
+          {(props.error || 'Unknown error').toString()}
         </Alert>
       </div>
     </div>
@@ -58,7 +58,7 @@ const ErrorRow = (props: IErrorProps) => {
 };
 
 const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
-  if (typeof props.value === "string" && isAbsoluteUrl(props.value as string))
+  if (typeof props.value === 'string' && isAbsoluteUrl(props.value as string))
     return (
       <Box title={props.link || props.value} onClick={props.hasClick ? props.onClick : undefined} sx={{ cursor: props.hasClick ? 'pointer' : 'default' }}>
         <Link href={props.link || props.value} rel="noopener" target="_blank">
@@ -98,7 +98,7 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
   );
 });
 
-const filterItemKey = (ik: string) => ik !== "id" && !ik.startsWith("_");
+const filterItemKey = (ik: string) => ik !== 'id' && !ik.startsWith('_');
 
 function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
   const [filteredItems, showSearch, searchText, handleSearchTextChange] = useSearch(props.items, filterFuncObjectStringProps);
@@ -120,7 +120,7 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
 
   return (
     <Stack spacing={1} sx={{ height: '100%' }}>
-      {!props.hideSearch && showSearch && <TextField label={props.localize ? props.localize("Search") : "Search..."} sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
+      {!props.hideSearch && showSearch && <TextField label={props.localize ? props.localize('Search') : 'Search...'} sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ overflow: 'auto', display: 'grid' }}>
           {props.isLoading && <LinearProgress />}
