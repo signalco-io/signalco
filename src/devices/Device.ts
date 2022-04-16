@@ -1,4 +1,4 @@
-import { makeAutoObservable, makeObservable, observable } from "mobx";
+import { makeAutoObservable, makeObservable, observable } from 'mobx';
 
 export class SignalUserDto {
     id?: string;
@@ -7,7 +7,7 @@ export class SignalUserDto {
 
     static FromDto(dto: SignalUserDto): IUser {
         if (dto.id == null || dto.email == null) {
-            throw Error("Invalid SignalUserDto - missing required properties.");
+            throw Error('Invalid SignalUserDto - missing required properties.');
         }
 
         return new User(dto.id, dto.email, dto.fullName);

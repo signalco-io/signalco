@@ -8,7 +8,7 @@ export const trimStartChar = (value: string, char: string): string => {
 };
 
 export const camelToSentenceCase = (value: string): string => {
-  const result = value.replace(/([A-Z])/g, " $1");
+  const result = value.replace(/([A-Z])/g, ' $1');
   return result.charAt(0).toUpperCase() + result.slice(1);
 };
 

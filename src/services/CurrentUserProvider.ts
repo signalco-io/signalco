@@ -1,5 +1,5 @@
-import { User } from "@auth0/auth0-spa-js";
-import LocalStorageService from "./LocalStorageService";
+import { User } from '@auth0/auth0-spa-js';
+import LocalStorageService from './LocalStorageService';
 
 class CurrentUserProvider {
     getCurrentUser() {

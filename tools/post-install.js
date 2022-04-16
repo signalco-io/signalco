@@ -1,6 +1,6 @@
 'use strict'
 
-var fs = require("fs-extra");
+var fs = require('fs-extra');
 
 fs.copy('./node_modules/monaco-editor/min/vs', './public/vs', function (err) {
     if (err) {

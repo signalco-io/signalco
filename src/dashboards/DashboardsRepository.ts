@@ -1,11 +1,11 @@
-import { IObservableArray, isObservable, makeAutoObservable, observable, runInAction } from "mobx";
-import { widgetType } from "../../components/widgets/Widget";
-import { IUser, SignalUserDto } from "../devices/Device";
-import EntityRepository from "../entity/EntityRepository";
-import { arrayMax, orderBy, sequenceEqual } from "../helpers/ArrayHelpers";
-import HttpService from "../services/HttpService";
-import LocalStorageService from "../services/LocalStorageService";
-import UserSettingsProvider from "../services/UserSettingsProvider";
+import { IObservableArray, isObservable, makeAutoObservable, observable, runInAction } from 'mobx';
+import { widgetType } from '../../components/widgets/Widget';
+import { IUser, SignalUserDto } from '../devices/Device';
+import EntityRepository from '../entity/EntityRepository';
+import { arrayMax, orderBy, sequenceEqual } from '../helpers/ArrayHelpers';
+import HttpService from '../services/HttpService';
+import LocalStorageService from '../services/LocalStorageService';
+import UserSettingsProvider from '../services/UserSettingsProvider';
 
 export interface IDashboardSetModel {
     configurationSerialized?: string;
@@ -96,7 +96,7 @@ class SignalDashboardSetDto {
 
     static ToDto(model: IDashboardSetModel) {
         if (typeof model.name !== 'string' || model.name.length <= 0) {
-            throw Error("Invalid SignalDashboardSetDto - must have name.");
+            throw Error('Invalid SignalDashboardSetDto - must have name.');
         }
 
         const dto = new SignalDashboardSetDto(model.name);
@@ -115,7 +115,7 @@ class SignalDashboardDto {
 
     static FromDto(dto: SignalDashboardDto, order: number): IDashboardModel {
         if (dto.id == null || dto.name == null) {
-            throw Error("Invalid SignalDashboardDto - missing required properties.");
+            throw Error('Invalid SignalDashboardDto - missing required properties.');
         }
 
         const dashboard = new DashboardModel(
@@ -123,7 +123,7 @@ class SignalDashboardDto {
             dto.name,
             dto.configurationSerialized,
             dto.sharedWith?.map(SignalUserDto.FromDto) ?? [],
-            dto.timeStamp ? new Date(dto.timeStamp + "Z") : undefined,
+            dto.timeStamp ? new Date(dto.timeStamp + 'Z') : undefined,
             order);
 
         dashboard.widgets = (typeof dashboard.configurationSerialized !== 'undefined' && dashboard.configurationSerialized != null
@@ -256,7 +256,7 @@ export default class DashboardsRepository {
                         DashboardsRepository.isLoaded = true;
                     }
                     catch (err) {
-                        console.error("Failed to load dashboards from local storage", err);
+                        console.error('Failed to load dashboards from local storage', err);
                     }
                 }
 
@@ -278,7 +278,7 @@ export default class DashboardsRepository {
     }
 
     private static async _checkUpdatesAvailableAsync() {
-        console.debug("Checking for dashboard updates...");
+        console.debug('Checking for dashboard updates...');
 
         const remoteDashboards = await DashboardsRepository._getRemoteDahboardsAsync();
 
@@ -307,10 +307,10 @@ export default class DashboardsRepository {
 
                 // Log difference
                 const dashboardId = (localDashboard || remoteDashboard).id;
-                console.info("Dashboard update available.", dashboardId);
-                console.debug("shareEqual", sharedEqual, dashboardId);
-                console.debug("widgetsEqual", widgetsEqual, dashboardId);
-                console.debug("timeStamp", localDashboard?.timeStamp, '<', remoteDashboard.timeStamp, dashboardId);
+                console.info('Dashboard update available.', dashboardId);
+                console.debug('shareEqual', sharedEqual, dashboardId);
+                console.debug('widgetsEqual', widgetsEqual, dashboardId);
+                console.debug('timeStamp', localDashboard?.timeStamp, '<', remoteDashboard.timeStamp, dashboardId);
             }
         });
 
@@ -319,7 +319,7 @@ export default class DashboardsRepository {
             const remoteDashboard = remoteDashboards.find(d => d.id === localDashboard.id);
             if (remoteDashboard == null) {
                 DashboardsRepository.isUpdateAvailable = true;
-                console.debug("Dashboard update available. Dashboard doesn't exist on remote: ", localDashboard.id, localDashboard.name);
+                console.debug('Dashboard update available. Dashboard doesn\'t exist on remote: ', localDashboard.id, localDashboard.name);
             }
         });
     }
@@ -402,11 +402,11 @@ export default class DashboardsRepository {
     }
 
     private static async _setRemoteDashboardAsync(dashboard: IDashboardSetModel): Promise<string> {
-        const response = await HttpService.requestAsync("/dashboards/set", "post", SignalDashboardSetDto.ToDto(dashboard));
+        const response = await HttpService.requestAsync('/dashboards/set', 'post', SignalDashboardSetDto.ToDto(dashboard));
         return response.id;
     }
 
     private static async _getRemoteDahboardsAsync() {
-        return (await HttpService.getAsync<SignalDashboardDto[]>("/dashboards")).map(SignalDashboardDto.FromDto);
+        return (await HttpService.getAsync<SignalDashboardDto[]>('/dashboards')).map(SignalDashboardDto.FromDto);
     }
 }

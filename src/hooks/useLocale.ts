@@ -26,15 +26,15 @@ function resolvePathSplit(data: ObjectDictAny, pathParts: string[]) {
 function formatString(text: string, data?: object) {
     return text.replace(/\{((\d+|[a-zA-Z_$]\w*(?:\.[a-zA-Z_$]\w*|\[\d+\])*)(?:\,(-?\d*))?(?:\:([^\}]*(?:(?:\}\})+[^\}]+)*))?)\}|(\{\{)|(\}\})/g, function () {
         var innerArgs = arguments;
-        if (innerArgs[5]) return "{";
-        if (innerArgs[6]) return "}";
+        if (innerArgs[5]) return '{';
+        if (innerArgs[6]) return '}';
         const path = innerArgs[2];
         console.log(resolvePathDot(data as ObjectDictAny, path))
         return resolvePathDot(data as ObjectDictAny, path)?.toString() ?? `{${path}}`;
     });
 }
 
-export const availableLocales = ["hr", "en"];
+export const availableLocales = ['hr', 'en'];
 
 export default function useLocale(...namespace: string[]): {t: LocalizeFunc} {
     const [userLocale] = useUserSetting('locale', 'en');
