@@ -133,7 +133,7 @@ export const useNavWidth = () => {
   return isLaptopOrTablet ? 109 : 228;
 };
 
-const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconComponent, active: boolean, label: string }) => {
+const NavLink = ({ path, Icon, active, label, onClick }: { path: string, Icon: SvgIconComponent, active: boolean, label: string, onClick?: () => void }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isNotDesktop = useMediaQuery(theme.breakpoints.down('lg'));
@@ -147,7 +147,8 @@ const NavLink = ({ path, Icon, active, label }: { path: string, Icon: SvgIconCom
         }}
         aria-label={label}
         title={label}
-        size="large">
+        size="large"
+        onClick={onClick}>
         <Stack direction="row" sx={{ width: isNotDesktop ? '100%' : '128px' }} alignItems="center" spacing={isMobile ? 1 : 0}>
           <Icon sx={{ opacity: active ? 1 : 0.6, mr: { xs: 0, lg: 2 }, fontSize: { xs: '26px', lg: '17px' } }} />
           {(isMobile || !isNotDesktop) &&
@@ -206,7 +207,7 @@ const NavProfile = () => {
           }}>
             <Stack>
               {navItems.map((ni, index) =>
-                <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} />)}
+                <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} onClick={() => setMobileMenuOpen(false)} />)}
             </Stack>
           </Box>
         </>

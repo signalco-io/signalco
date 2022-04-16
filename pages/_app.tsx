@@ -57,7 +57,6 @@ export default function App(props: CustomAppProps) {
       const now = DateTimeProvider.now();
       const dayTime = DateTimeProvider.fromDuration(now, themeTimeRange[0]);
       const nightTime = DateTimeProvider.fromDuration(now, themeTimeRange[1]);
-      console.log('now', now, 'day', dayTime, 'night', nightTime, themeTimeRange);
       if (dayTime && nightTime && now >= dayTime && now < nightTime) {
         themeOrPrefered = 'light';
       }
