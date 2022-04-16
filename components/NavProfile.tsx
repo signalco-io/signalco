@@ -203,7 +203,7 @@ const NavProfile = () => {
             left: 0,
             right: 0,
             background: theme.palette.background.default,
-            zIndex: 1
+            zIndex: 999
           }}>
             <Stack>
               {navItems.map((ni, index) =>
