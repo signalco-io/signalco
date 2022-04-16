@@ -1,7 +1,7 @@
 import { Box, Button, ButtonBase, Container, Stack } from '@mui/material';
 import React from 'react';
 import { useRouter } from 'next/router';
-import Link from "next/link";
+import Link from 'next/link';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 

@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import SignalcoLogotype from "./icons/SignalcoLogotype";
+import SignalcoLogotype from './icons/SignalcoLogotype';
 
 const Login = () => {
   const [isLong, setIsLong] = useState(false);

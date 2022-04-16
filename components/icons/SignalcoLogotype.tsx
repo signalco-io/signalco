@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { AppContext } from '../../pages/_app';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
 
-export default function SignalcoLogotype({ width, height }: { width?: number, height?: number }) {
+export default function SignalcoLogotype({ width, height, theme, hideBadge }: { width?: number, height?: number, theme?: 'auto' | 'dark' | 'light', hideBadge?: boolean }) {
     if (typeof width === 'undefined' &&
         typeof height === 'undefined') {
         throw new Error('Either height or width must be provided to SignalcoLogo.');
@@ -13,12 +13,12 @@ export default function SignalcoLogotype({ width, height }: { width?: number, he
     const fixedHeight = height ?? (666 / 2810) * (width ?? 0);
 
     return (
-        <Box sx={{ display: 'flex', position: 'relative', gap: 1 }}>
+        <Box sx={{ display: hideBadge ? 'block' : 'flex', position: 'relative', gap: 1 }}>
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                 width={fixedWidth} height={fixedHeight} viewBox="0 0 2810.000000 666.000000"
                 preserveAspectRatio="xMidYMid meet">
                 <g transform="translate(0.000000,666.000000) scale(0.100000,-0.100000)"
-                    fill={appContext.isDark ? '#ffffff' : '#000000'} stroke="none">
+                    fill={theme === 'dark' || ((theme === 'auto' || !theme) && appContext.isDark) ? '#ffffff' : '#000000'} stroke="none">
                     <path d="M4427 6389 c-94 -22 -182 -96 -225 -187 -36 -75 -38 -193 -5 -263 80 -175 285 -253 459 -174 73 33 129 87 166 162 27 55 32 76 32 141 1 65 -4 86 -27 134 -72 146 -240 225 -400 187z" />
                     <path d="M18900 3955 l0 -2445 235 0 235 0 0 2445 0 2445 -235 0 -235 0 0 -2445z" />
                     <path d="M25505 6320 c-413 -37 -785 -140 -1130 -313 -281 -140 -551 -329 -752 -524 -65 -63 -82 -87 -93 -125 -33 -122 46 -244 172 -264 63 -11 114 12 200 89 363 323 713 522 1117 633 845 233 1749 45 2417 -505 60 -49 127 -108 149 -131 56 -59 108 -84 175 -84 157 -1 257 171 177 305 -14 24 -70 83 -124 131 -485 430 -1061 694 -1693 773 -152 19 -478 27 -615 15z" />
@@ -33,7 +33,7 @@ export default function SignalcoLogotype({ width, height }: { width?: number, he
                     <path d="M14598 3113 c7 -3 16 -2 19 1 4 3 -2 6 -13 5 -11 0 -14 -3 -6 -6z" />
                 </g>
             </svg>
-            {appSettingsProvider.isDeveloper && (
+            {(!hideBadge && appSettingsProvider.isDeveloper) && (
                 <Box>
                     <Chip sx={{ position: 'absolute', top: fixedHeight - 24 - fixedHeight * 0.18 }} label="dev" color="warning" size="small" />
                 </Box>
