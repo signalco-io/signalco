@@ -55,4 +55,5 @@ More info on development can be found in [Development](/DEVELOPMENT.md) document
 
 Many thanks to our sponsors!
 
+![Microsoft for Startups](/docs/ms_startups.png)
 ![JetBrains](/docs/jb_beam.png)

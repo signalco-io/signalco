@@ -1,7 +1,7 @@
 import en from '../../locales/en.json';
 import hr from '../../locales/hr.json';
+import UserSettingsProvider from '../services/UserSettingsProvider';
 import { ObjectDictAny } from '../sharedTypes';
-import useUserSetting from './useUserSetting';
 
 export type LocalizeFunc = (key: string, data?: object | undefined) => string;
 
@@ -36,10 +36,14 @@ function formatString(text: string, data?: object) {
 
 export const availableLocales = ['hr', 'en'];
 
-export default function useLocale(...namespace: string[]): {t: LocalizeFunc} {
-    const [userLocale] = useUserSetting('locale', 'en');
+export function localizer(...namespace: string[]): LocalizeFunc {
+    const userLocale = UserSettingsProvider.value('locale', 'en');
 
     let namespaceKeys = resolvePathSplit(userLocale === 'en' ? en : hr, namespace);
 
-    return { t: (key: string, data?: object) => { return namespaceKeys && namespaceKeys[key] ? formatString(namespaceKeys[key], data) : `{${key}}`; } };
+    return (key: string, data?: object) => { return namespaceKeys && namespaceKeys[key] ? formatString(namespaceKeys[key], data) : `{${key}}`; };
+}
+
+export default function useLocale(...namespace: string[]): {t: LocalizeFunc} {
+    return { t: localizer(...namespace) };
 }
