@@ -5,12 +5,13 @@ const useWindowWidth = () => {
 
     useLayoutEffect(() => {
         function updateNumberOfColumns() {
-            setWidth(window.innerWidth);
+            if (width !== window.innerWidth)
+                setWidth(window.innerWidth);
         }
         window.addEventListener('resize', updateNumberOfColumns);
         updateNumberOfColumns();
         return () => window.removeEventListener('resize', updateNumberOfColumns);
-    }, []);
+    }, [width]);
 
     return width;
 };

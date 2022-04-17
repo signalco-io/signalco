@@ -1,16 +1,16 @@
 import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../../../pages/_app';
 import createGlobe from 'cobe';
-import useWindowRect from '../../../src/hooks/useWindowRect';
 import theme from '../../../src/theme';
 import { colorToRgb } from '../../../src/helpers/StringHelpers';
 import Color from 'color';
+import useWindowWidth from '../../../src/hooks/useWindowWidth';
 
 function Globe() {
     const canvasRef = React.useRef(null);
     const appContext = useContext(AppContext);
-    const rect = useWindowRect(typeof window !== 'undefined' ? window : null);
-    const width = Math.min(1100, rect?.width ?? 0);
+    const rectWidth = useWindowWidth();
+    const width = Math.min(1100, rectWidth ?? 0);
     const height = width;
     const isDark = appContext.isDark;
 
