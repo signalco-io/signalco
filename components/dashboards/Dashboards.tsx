@@ -59,7 +59,7 @@ const Dashboards = () => {
         const newDashboardId = await DashboardsRepository.saveDashboardAsync({
             name: 'New dashboard'
         });
-        await setDashboardIdHash(newDashboardId);
+        setDashboardIdHash(newDashboardId);
     };
 
     const [showWidgetStore, setShowWidgetStore] = useState(false);
