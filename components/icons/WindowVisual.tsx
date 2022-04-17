@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AppContext } from '../../pages/_app';
 import { colorToRgb } from '../../src/helpers/StringHelpers';
+import useInterval from '../../src/hooks/useInterval';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
 import styles from './WindowVisual.module.scss';
 
@@ -36,12 +37,7 @@ const WindowVisual = (props: { shadePerc: number, size: number, dateAndTime?: Da
     const [hours, setHours] = useState(((props.dateAndTime ?? DateTimeProvider.now()).getHours()) % 24);
 
     // Update hours every minute
-    useEffect(() => {
-        const token = setInterval(() => {
-            setHours(((props.dateAndTime ?? DateTimeProvider.now()).getHours()) % 24);
-        }, 60 * 1000);
-        return () => clearInterval(token);
-    })
+    useInterval(() => setHours(((props.dateAndTime ?? DateTimeProvider.now()).getHours()) % 24), 60 * 1000);
 
     const perc = Math.max(0, Math.min(props.shadePerc || 0, 1));
 

@@ -18,18 +18,17 @@ import useDashboardsUpdateChecker from './useDashboardsUpdateChecker';
 const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 
 const Dashboards = () => {
-    const [selectedId, setSelectedId] = React.useState<string | undefined>(undefined);
+    const [selectedId, setDashboardIdHash] = useHashParam('dashboard');
     const retrieveDashbaord = useCallback(() => {
-        console.log('revalidated current dashboard retrieve function')
         return DashboardsRepository.getAsync(selectedId);
     }, [selectedId]);
     const selectedDashboard = useLoadAndError(retrieveDashbaord);
 
     useDashboardsUpdateChecker();
-    const [isDashboardSettingsOpen, setIsDashboardSettingsOpen] = useState<boolean>(false);
 
     const [isEditing, setIsEditing] = useState(false);
     const [isSavingEdit, setIsSavingEdit] = useState(false);
+    const handleEditWidgets = useCallback(() => setIsEditing(true), []);
     const handleEditDone = async () => {
         try {
             setIsSavingEdit(true);
@@ -54,7 +53,6 @@ const Dashboards = () => {
         }
     };
 
-    const [_, setDashboardIdHash] = useHashParam('dashboard');
     const handleNewDashboard = async () => {
         const newDashboardId = await DashboardsRepository.saveDashboardAsync({
             name: 'New dashboard'
@@ -63,15 +61,18 @@ const Dashboards = () => {
     };
 
     const [showWidgetStore, setShowWidgetStore] = useState(false);
-    const handleAddWidget = (widgetType: widgetType) => {
+    const handleAddWidget = useCallback((widgetType: widgetType) => {
         selectedDashboard.item?.widgets.push(new WidgetModel('new-widget', selectedDashboard.item.widgets.length, widgetType));
         setShowWidgetStore(false);
-    };
+    }, [selectedDashboard.item?.widgets]);
 
     const handleAddWidgetPlaceholder = () => {
         setIsEditing(true);
         setShowWidgetStore(true);
     }
+
+    const [isDashboardSettingsOpen, setIsDashboardSettingsOpen] = useState<boolean>(false);
+    const handleSettings = useCallback(() => setIsDashboardSettingsOpen(true), []);
 
     console.debug('Rendering Dashboards');
 
@@ -80,9 +81,8 @@ const Dashboards = () => {
             <Stack spacing={{ xs: 1, sm: 2 }} sx={{ pt: { xs: 0, sm: 2 } }}>
                 <Stack spacing={1} direction={{ xs: 'column-reverse', md: 'row' }} justifyContent="space-between" alignItems="stretch">
                     <DashboardSelector
-                        onSelection={setSelectedId}
-                        onEditWidgets={() => setIsEditing(true)}
-                        onSettings={() => setIsDashboardSettingsOpen(true)} />
+                        onEditWidgets={handleEditWidgets}
+                        onSettings={handleSettings} />
                     {isEditing && (
                         <Box sx={{ px: 2, width: { md: 'auto', xs: '100%' } }}>
                             <Stack direction="row" spacing={1}>
@@ -116,13 +116,17 @@ const Dashboards = () => {
                         </Box>
                     )}
             </Stack>
-            <DashboardSettings
-                dashboard={selectedDashboard.item}
-                isOpen={isDashboardSettingsOpen}
-                onClose={() => setIsDashboardSettingsOpen(false)} />
-            <ConfigurationDialog isOpen={showWidgetStore} onClose={() => setShowWidgetStore(false)} title="Add widget" maxWidth="lg" >
-                <WidgetStoreDynamic onAddWidget={handleAddWidget} />
-            </ConfigurationDialog>
+            {isDashboardSettingsOpen && (
+                <DashboardSettings
+                    dashboard={selectedDashboard.item}
+                    isOpen={isDashboardSettingsOpen}
+                    onClose={() => setIsDashboardSettingsOpen(false)} />
+            )}
+            {showWidgetStore && (
+                <ConfigurationDialog isOpen={showWidgetStore} onClose={() => setShowWidgetStore(false)} title="Add widget" maxWidth="lg" >
+                    <WidgetStoreDynamic onAddWidget={handleAddWidget} />
+                </ConfigurationDialog>
+            )}
         </>
     );
 };

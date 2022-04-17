@@ -11,12 +11,9 @@ import { observer } from 'mobx-react-lite';
 import { runInAction } from 'mobx';
 import { Button, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
+import { ChildrenProps } from '../../src/sharedTypes';
 
-interface IDragableWidgetProps extends IWidgetProps {
-    id: string
-}
-
-function DragableWidget(props: IDragableWidgetProps) {
+function DragableWidget(props: IWidgetProps) {
     const {
         isDragging,
         attributes,
@@ -48,6 +45,22 @@ function DragableWidget(props: IDragableWidgetProps) {
             gridRowStart: `span ${span.rowSpan}`,
             gridColumnStart: `span ${span.colSpan}`,
         }} {...attributes} {...listeners}>
+            <Widget {...props} onResize={(r, c) => setSpan({ rowSpan: r, colSpan: c })} />
+        </Box>
+    );
+}
+
+function DisplayWidget(props: IWidgetProps) {
+    const [span, setSpan] = useState(({
+        colSpan: (props.config as any)?.columns || 2,
+        rowSpan: (props.config as any)?.columns || 2
+    }));
+
+    return (
+        <Box style={{
+            gridRowStart: `span ${span.rowSpan}`,
+            gridColumnStart: `span ${span.colSpan}`,
+        }}>
             <Widget {...props} onResize={(r, c) => setSpan({ rowSpan: r, colSpan: c })} />
         </Box>
     );
@@ -119,6 +132,22 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
         );
     }
 
+    const GridWrapper = (props: ChildrenProps) => {
+        if (isEditing) {
+            return (
+                <DndContext
+                    sensors={sensors}
+                    modifiers={[snapCenterToCursor]}
+                    onDragEnd={handleDragEnd}
+                    onDragCancel={handleDragEnd}>
+                    <SortableContext items={widgetsOrder} strategy={undefined}>
+                        {props.children}
+                    </SortableContext>
+                </DndContext>
+            );
+        } else return <>{props.children}</>
+    };
+
     return (
         <Box sx={{
             display: 'grid',
@@ -126,24 +155,31 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
             gap: 1,
             width: `${widgetSize * numberOfColumns - 8}px`
         }}>
-            <DndContext
-                sensors={sensors}
-                modifiers={[snapCenterToCursor]}
-                onDragEnd={handleDragEnd}
-                onDragCancel={handleDragEnd}>
-                <SortableContext items={widgetsOrder} strategy={undefined}>
-                    {widgets.map((widget) => (
-                        <DragableWidget
-                            id={widget.id}
-                            key={`widget-${widget.id.toString()}`}
-                            onRemove={() => handleRemoveWidget(widget.id)}
-                            isEditMode={isEditing}
-                            type={widget.type}
-                            config={widget.config}
-                            setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
-                    ))}
-                </SortableContext>
-            </DndContext>
+            <GridWrapper>
+                {widgets.map((widget) => (
+                    <>
+                        {isEditing ? (
+                            <DragableWidget
+                                id={widget.id}
+                                key={`widget-${widget.id.toString()}`}
+                                onRemove={() => handleRemoveWidget(widget.id)}
+                                isEditMode={isEditing}
+                                type={widget.type}
+                                config={widget.config}
+                                setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
+                        ) : (
+                            <DisplayWidget
+                                id={widget.id}
+                                key={`widget-${widget.id.toString()}`}
+                                onRemove={() => handleRemoveWidget(widget.id)}
+                                isEditMode={isEditing}
+                                type={widget.type}
+                                config={widget.config}
+                                setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
+                        )}
+                    </>
+                ))}
+            </GridWrapper>
         </Box >
     );
 }

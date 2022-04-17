@@ -1,19 +1,14 @@
 import {
   Button, Stack, Typography
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import SignalcoLogotype from './icons/SignalcoLogotype';
+import useTimeout from '../src/hooks/useTimeout';
 
 const Login = () => {
   const [isLong, setIsLong] = useState(false);
-  useEffect(() => {
-    const token = setTimeout(() => {
-      setIsLong(true);
-    }, 3000);
-
-    return () => clearTimeout(token);
-  }, []);
+  useTimeout(() => setIsLong(true), 3000);
 
   return (
     <Stack justifyContent="center" direction="row" sx={{ height: '100%' }}>

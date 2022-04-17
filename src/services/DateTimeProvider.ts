@@ -1,14 +1,27 @@
 import UserSettingsProvider from './UserSettingsProvider';
-import { getTimeZones } from '@vvo/tzdb';
+import { getTimeZones, TimeZone } from '@vvo/tzdb';
+import { ObjectDict } from '../sharedTypes';
 
 var durationRegex = /P((([0-9]*\.?[0-9]*)Y)?(([0-9]*\.?[0-9]*)M)?(([0-9]*\.?[0-9]*)W)?(([0-9]*\.?[0-9]*)D)?)?(T(([0-9]*\.?[0-9]*)H)?(([0-9]*\.?[0-9]*)M)?(([0-9]*\.?[0-9]*)S)?)?/
 
 export class DateTimeProvider {
     static staticDateTime: Date | undefined = undefined;
 
+    static timeZonesCache: ObjectDict<TimeZone> = {};
+
+    private getTimeZoneByName(name: string | undefined) {
+        if (!name) return undefined;
+
+        if (!DateTimeProvider.timeZonesCache[name]) {
+            DateTimeProvider.timeZonesCache[name] = getTimeZones().find(tz => tz.name === name);
+        }
+
+        return DateTimeProvider.timeZonesCache[name];
+    }
+
     now() {
-        const timeZoneName = UserSettingsProvider.value('timeZone', undefined);
-        const timeZone = getTimeZones().find(tz => tz.name === timeZoneName);
+        const timeZoneName = UserSettingsProvider.value<string | undefined>('timeZone', undefined);
+        const timeZone = this.getTimeZoneByName(timeZoneName);
         const _now = DateTimeProvider.staticDateTime ?? new Date();
         return new Date(
             _now.getUTCFullYear(),

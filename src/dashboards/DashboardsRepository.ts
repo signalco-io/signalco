@@ -165,7 +165,7 @@ export default class DashboardsRepository {
         });
     }
     static get dashboards() {
-        DashboardsRepository._cacheDashboardsAsync();
+        setTimeout(() => DashboardsRepository._cacheDashboardsAsync(), 0);
         return DashboardsRepository._dashboardsCache;
     };
 
@@ -234,7 +234,9 @@ export default class DashboardsRepository {
     private static _cacheLock = false;
 
     private static async _cacheDashboardsAsync() {
-        if (DashboardsRepository.isLoaded) return;
+        if (DashboardsRepository.isLoaded) {
+            return;
+        }
 
         try {
             if (!DashboardsRepository._cacheLock) {
@@ -268,7 +270,7 @@ export default class DashboardsRepository {
             } else {
                 // Wait to load
                 while (DashboardsRepository.isLoading) {
-                    await new Promise(r => setTimeout(r, 100));
+                    await new Promise(r => setTimeout(r, 10));
                 }
             }
         }
