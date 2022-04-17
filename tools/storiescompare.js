@@ -83,7 +83,7 @@ try {
         // move it to the approved folder.
         if (!approvedFiles.includes(possibleNew)) {
             mkdirSync(dirname(possibleNew), { recursive: true });
-            logProcess(`\t[${chalk.green("+")}] ${possibleNewShortPath}`, () => renameSync(pendingFile, possibleNew));
+            logProcess(`\t[${chalk.green('+')}] ${possibleNewShortPath}`, () => renameSync(pendingFile, possibleNew));
             numberOfChanges++;
         } else {
             const pendingFileBytes = readFileSync(pendingFile);

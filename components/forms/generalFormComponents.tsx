@@ -1,5 +1,5 @@
-import { FormBuilderComponents } from "@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types";
-import { Checkbox, FormControlLabel, FormGroup, TextField } from "@mui/material";
+import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
+import { Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
 
 const components: FormBuilderComponents = {
     number: (props) => <TextField type="number" variant="filled" hiddenLabel={!props.label} {...props} />,

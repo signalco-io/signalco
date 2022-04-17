@@ -1,14 +1,14 @@
-import { Chip, IconButton, Slide, Stack, TextField } from "@mui/material";
-import { observer } from "mobx-react-lite";
+import { Chip, IconButton, Slide, Stack, TextField } from '@mui/material';
+import { observer } from 'mobx-react-lite';
 import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
-import { IUser } from "../../src/devices/Device";
-import { useState } from "react";
-import HttpService from "../../src/services/HttpService";
+import { IUser } from '../../src/devices/Device';
+import { useState } from 'react';
+import HttpService from '../../src/services/HttpService';
 import ShareIcon from '@mui/icons-material/Share';
-import AutoTable from "../shared/table/AutoTable";
+import AutoTable from '../shared/table/AutoTable';
 import ClearIcon from '@mui/icons-material/Clear';
 import SendIcon from '@mui/icons-material/Send';
-import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
+import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 
 interface IShareEntityChipProps {
     entity?: { id: string, sharedWith?: IUser[] },
@@ -32,7 +32,7 @@ function ShareEntityModal(props: IShareEntityModalProps) {
 
     const handleSubmitShareWithNew = async () => {
         // TODO: Add success/error indicator
-        await HttpService.requestAsync("/share/entity", "post", {
+        await HttpService.requestAsync('/share/entity', 'post', {
             type: entityType, // 1 - Device
             entityId: entity.id,
             userEmails: [shareWithNewEmail]
@@ -68,7 +68,7 @@ function ShareEntityModal(props: IShareEntityModalProps) {
                     </Stack>
                 </Stack>
             </Slide>
-            <AutoTable error={""} isLoading={false} items={entity.sharedWith?.map(u => ({ id: u.id, name: u.fullName ?? u.email, email: u.email }))} />
+            <AutoTable error={''} isLoading={false} items={entity.sharedWith?.map(u => ({ id: u.id, name: u.fullName ?? u.email, email: u.email }))} />
         </ConfigurationDialog>
     );
 }

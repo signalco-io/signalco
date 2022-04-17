@@ -1,17 +1,17 @@
-import { Button, Divider, Stack, Typography } from "@mui/material";
-import { PopupState } from "material-ui-popup-state/hooks";
-import React from "react";
-import { AddSharp } from "@mui/icons-material";
+import { Button, Divider, Stack, Typography } from '@mui/material';
+import { PopupState } from 'material-ui-popup-state/hooks';
+import React from 'react';
+import { AddSharp } from '@mui/icons-material';
 import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import PushPinSharpIcon from '@mui/icons-material/PushPinSharp';
-import DashboardsRepository, { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
-import { observer } from "mobx-react-lite";
-import useHashParam from "../../src/hooks/useHashParam";
-import ShareEntityChip from "../entity/ShareEntityChip";
+import DashboardsRepository, { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
+import { observer } from 'mobx-react-lite';
+import useHashParam from '../../src/hooks/useHashParam';
+import ShareEntityChip from '../entity/ShareEntityChip';
 import { CSS } from '@dnd-kit/utilities';
-import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from "@dnd-kit/sortable";
-import { runInAction } from "mobx";
+import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
+import { runInAction } from 'mobx';
 
 interface IDashboardSelectorMenuProps {
     selectedId: string | undefined,

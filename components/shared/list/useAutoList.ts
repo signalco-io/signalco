@@ -1,5 +1,5 @@
-import useLoadingAndError from "../../../src/hooks/useLoadingAndError";
-import { IAutoListItem } from "./AutoList";
+import useLoadingAndError from '../../../src/hooks/useLoadingAndError';
+import { IAutoListItem } from './AutoList';
 
 const useAutoList = <TIn>(
   loadData: () => Promise<Array<TIn>>,

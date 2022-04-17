@@ -1,7 +1,7 @@
-import { IDeviceTarget } from "../devices/Device";
-import DevicesRepository from "../devices/DevicesRepository";
-import DateTimeProvider from "../services/DateTimeProvider";
-import HttpService from "../services/HttpService";
+import { IDeviceTarget } from '../devices/Device';
+import DevicesRepository from '../devices/DevicesRepository';
+import DateTimeProvider from '../services/DateTimeProvider';
+import HttpService from '../services/HttpService';
 
 export interface IConduct {
     target: IDeviceTarget,
@@ -21,7 +21,7 @@ export default class ConductsService {
     }
 
     static async RequestConductAsync(target: IDeviceTarget, value?: any, delay?: number) {
-        await HttpService.requestAsync("/conducts/request", "post", {
+        await HttpService.requestAsync('/conducts/request', 'post', {
             deviceId: target.deviceId,
             channelName: target.channelName,
             contactName: target.contactName,
@@ -44,7 +44,7 @@ export default class ConductsService {
             valueSerialized: typeof conduct.value === 'string' ? conduct.value : JSON.stringify(conduct.value),
             delay: conduct.delay || 0
         }));
-        await HttpService.requestAsync("/conducts/request-multiple", "post", conductsDtos);
+        await HttpService.requestAsync('/conducts/request-multiple', 'post', conductsDtos);
 
         // Set local value state
         for (let index = 0; index < conducts.length; index++) {

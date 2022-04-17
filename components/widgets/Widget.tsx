@@ -1,21 +1,21 @@
 
-import { Alert } from "@mui/material";
-import { observer } from "mobx-react-lite";
+import { Alert } from '@mui/material';
+import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
-import React, { useCallback, useEffect, useState } from "react";
-import { ObjectDictAny } from "../../src/sharedTypes";
-import IWidgetConfigurationOption from "../../src/widgets/IWidgetConfigurationOption";
-import WidgetCard from "./parts/WidgetCard";
-const WidgetChecklist = dynamic(() => import("./parts/WidgetChecklist"));
-const WidgetIndicator = dynamic(() => import("./parts/WidgetIndicator"));
-const WidgetTime = dynamic(() => import("./parts/WidgetTime"));
-const WidgetShades = dynamic(() => import("./parts/WidgetShades"));
-const WidgetState = dynamic(() => import("./parts/WidgetState"));
-const WidgetAirConditioning = dynamic(() => import("./parts/WidgetAirConditioning"));
-const WidgetVacuum = dynamic(() => import("./parts/WidgetVacuum"));
-const WidgetButton = dynamic(() => import("./parts/WidgetButton"));
+import React, { useCallback, useEffect, useState } from 'react';
+import { ObjectDictAny } from '../../src/sharedTypes';
+import IWidgetConfigurationOption from '../../src/widgets/IWidgetConfigurationOption';
+import WidgetCard from './parts/WidgetCard';
+const WidgetChecklist = dynamic(() => import('./parts/WidgetChecklist'));
+const WidgetIndicator = dynamic(() => import('./parts/WidgetIndicator'));
+const WidgetTime = dynamic(() => import('./parts/WidgetTime'));
+const WidgetShades = dynamic(() => import('./parts/WidgetShades'));
+const WidgetState = dynamic(() => import('./parts/WidgetState'));
+const WidgetAirConditioning = dynamic(() => import('./parts/WidgetAirConditioning'));
+const WidgetVacuum = dynamic(() => import('./parts/WidgetVacuum'));
+const WidgetButton = dynamic(() => import('./parts/WidgetButton'));
 
-export type widgetType = "button" | "state" | "vacuum" | "shades" | 'indicator' | "airconditioning" | "termostat" | "time" | "checklist";
+export type widgetType = 'button' | 'state' | 'vacuum' | 'shades' | 'indicator' | 'airconditioning' | 'termostat' | 'time' | 'checklist';
 
 export interface IWidgetProps extends IWidgetSpecifigProps {
     type: widgetType,
@@ -55,7 +55,7 @@ function applyStaticToConfig(config: any | undefined, options: IWidgetConfigurat
 }
 
 const UnresolvedWidget = () => (
-    <Alert severity="error" sx={{ height: "100%" }}>Unknown widget</Alert>
+    <Alert severity="error" sx={{ height: '100%' }}>Unknown widget</Alert>
 );
 
 const Widget = (props: IWidgetProps) => {
@@ -91,7 +91,7 @@ const Widget = (props: IWidgetProps) => {
     };
 
     let WidgetResolved: React.ComponentType<any> | React.ReactElement | null | undefined = UnresolvedWidget;
-    if (props.type === "state") {
+    if (props.type === 'state') {
         WidgetResolved = WidgetState;
     } else if (props.type === 'shades') {
         WidgetResolved = WidgetShades;

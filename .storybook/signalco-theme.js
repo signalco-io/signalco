@@ -34,4 +34,4 @@ export default create({
     brandTitle: 'signalco',
     brandUrl: 'https://www.signalco.io',
     brandImage: 'https://www.signalco.io/images/icon-dark-512x144.png',
-}); 
+});

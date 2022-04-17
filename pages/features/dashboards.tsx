@@ -1,6 +1,6 @@
-import { Stack, Typography } from "@mui/material";
-import { PageLayout } from "../../components/layouts/PageLayout";
-import WidgetStore from "../../components/widget-store/WidgetStore";
+import { Stack, Typography } from '@mui/material';
+import { PageLayout } from '../../components/layouts/PageLayout';
+import WidgetStore from '../../components/widget-store/WidgetStore';
 
 const FeatureDashboardsPage = () => (
     <Stack spacing={4}>

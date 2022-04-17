@@ -1,5 +1,5 @@
-import DateTimeProvider from "../services/DateTimeProvider";
-import UserSettingsProvider from "../services/UserSettingsProvider";
+import DateTimeProvider from '../services/DateTimeProvider';
+import UserSettingsProvider from '../services/UserSettingsProvider';
 import SunCalc from 'suncalc';
 
 class SunHelper {

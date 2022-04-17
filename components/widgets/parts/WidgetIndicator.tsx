@@ -1,16 +1,16 @@
-import { ButtonBase, Stack } from "@mui/material";
+import { ButtonBase, Stack } from '@mui/material';
 import { observer } from 'mobx-react-lite';
-import React from "react";
+import React from 'react';
 import { Box } from '@mui/system';
 import Image from 'next/image';
 import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVerySatisfiedOutlined';
 import SentimentDissatisfiedOutlinedIcon from '@mui/icons-material/SentimentDissatisfiedOutlined';
-import { useRouter } from "next/router";
-import useDevice from "../../../src/hooks/useDevice";
-import { IWidgetSharedProps } from "../Widget";
-import { DefaultTarget, DefaultWidth } from "../../../src/widgets/WidgetConfigurationOptions";
-import useWidgetOptions from "../../../src/hooks/widgets/useWidgetOptions";
-import useWidgetActive from "../../../src/hooks/widgets/useWidgetActive";
+import { useRouter } from 'next/router';
+import useDevice from '../../../src/hooks/useDevice';
+import { IWidgetSharedProps } from '../Widget';
+import { DefaultTarget, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
 
 const stateOptions = [
     DefaultTarget,
@@ -29,7 +29,7 @@ const WidgetIndicator = (props: IWidgetSharedProps) => {
     const isLow = value < 10;
 
     const statusColor = isLow ? 'rgba(252, 245, 85, 0.53)' : 'rgba(158, 227, 134, 0.33)';
-    const iconColor = isLow ? '#fad63f' : "#a2db79";
+    const iconColor = isLow ? '#fad63f' : '#a2db79';
     const Icon = isLow ? SentimentDissatisfiedOutlinedIcon : SentimentVerySatisfiedOutlinedIcon;
 
     const handleSelected = () => {

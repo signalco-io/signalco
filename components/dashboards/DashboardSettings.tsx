@@ -1,9 +1,9 @@
-import { Button, Stack, TextField, Typography } from "@mui/material";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import DashboardsRepository, { IDashboardModel } from "../../src/dashboards/DashboardsRepository";
-import ConfigurationDialog from "../shared/dialog/ConfigurationDialog";
-import ConfirmDeleteButton from "../shared/dialog/ConfirmDeleteButton";
+import { Button, Stack, TextField, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import DashboardsRepository, { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
+import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
+import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
 
 interface IDashboardSettingsProps {
     isOpen: boolean,
@@ -43,7 +43,7 @@ const DashboardSettings = (props: IDashboardSettingsProps) => {
     return (
         <ConfigurationDialog
             isOpen={isOpen}
-            title={`Dashboard settings`}
+            title={'Dashboard settings'}
             onClose={onClose}
             actions={(
                 <>
@@ -52,7 +52,7 @@ const DashboardSettings = (props: IDashboardSettingsProps) => {
                 </>
             )}>
             <Stack spacing={4} sx={{ py: 1 }}>
-                <TextField label="Name" value={name} onChange={(e) => setName(e.target.value ?? "")} />
+                <TextField label="Name" value={name} onChange={(e) => setName(e.target.value ?? '')} />
                 <Stack spacing={2}>
                     <Typography sx={{ opacity: 0.6 }} variant="subtitle2">Advanced</Typography>
                     <ConfirmDeleteButton

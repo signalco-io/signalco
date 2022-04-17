@@ -1,6 +1,6 @@
-import ConductsService from "../conducts/ConductsService";
-import EntityRepository from "../entity/EntityRepository";
-import HttpService from "../services/HttpService";
+import ConductsService from '../conducts/ConductsService';
+import EntityRepository from '../entity/EntityRepository';
+import HttpService from '../services/HttpService';
 
 export interface IStationModel {
     id: string;
@@ -33,7 +33,7 @@ class StationBlobInfoDto {
 
     static FromDto(dto: StationBlobInfoDto): IBlobInfoModel {
         if (dto.name == null || dto.createdTimeStamp == null || dto.size == null) {
-            throw Error("Invalid StationBlobInfoDto - missing required properties.");
+            throw Error('Invalid StationBlobInfoDto - missing required properties.');
         }
 
         return new BlobInfoModel(dto.name, new Date(dto.createdTimeStamp), dto.modifiedTimeStamp ? new Date(dto.modifiedTimeStamp) : undefined, dto.size);
@@ -71,7 +71,7 @@ class SignalStationDto {
 
     static FromDto(dto: SignalStationDto): IStationModel {
         if (dto.id == null || dto.registeredTimeStamp == null) {
-            throw Error("Invalid SignalBeaconDto - missing required properties.");
+            throw Error('Invalid SignalBeaconDto - missing required properties.');
         }
 
         const model = new StationModel(dto.id, new Date(dto.registeredTimeStamp));
@@ -94,35 +94,35 @@ export default class StationsRepository {
     }
 
     static async updateStationAsync(id: string): Promise<void> {
-        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "update"});
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: 'station', contactName: 'update'});
     }
 
     static async updateSystemAsync(id: string): Promise<void> {
-        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "updateSystem"});
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: 'station', contactName: 'updateSystem'});
     }
 
     static async restartSystemAsync(id: string): Promise<void> {
-        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "restartSystem"});
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: 'station', contactName: 'restartSystem'});
     }
 
     static async shutdownSystemAsync(id: string): Promise<void> {
-        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "shutdownSystem"});
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: 'station', contactName: 'shutdownSystem'});
     }
 
     static async restartStationAsync(id: string): Promise<void> {
-        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "restartStation"});
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: 'station', contactName: 'restartStation'});
     }
 
     static async startWorkerServiceAsync(id: string, workerServiceName: string): Promise<void> {
-        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "workerService:start"}, workerServiceName);
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: 'station', contactName: 'workerService:start'}, workerServiceName);
     }
 
     static async stopWorkerServiceAsync(id: string, workerServiceName: string): Promise<void> {
-        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "workerService:stop"}, workerServiceName);
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: 'station', contactName: 'workerService:stop'}, workerServiceName);
     }
 
     static async beginDiscoveryAsync(id: string): Promise<void> {
-        await ConductsService.RequestConductAsync({deviceId: id, channelName: "station", contactName: "beginDiscovery"});
+        await ConductsService.RequestConductAsync({deviceId: id, channelName: 'station', contactName: 'beginDiscovery'});
     }
 
     static async getLogsAsync(id: string) {
@@ -132,7 +132,7 @@ export default class StationsRepository {
     static async getStationAsync(id: string): Promise<IStationModel | undefined> {
         await StationsRepository._cacheStationsAsync();
         if (typeof StationsRepository.stationsCacheKeyed !== 'undefined') {
-            if (typeof StationsRepository.stationsCacheKeyed[id] === "undefined")
+            if (typeof StationsRepository.stationsCacheKeyed[id] === 'undefined')
                 return undefined;
             return StationsRepository.stationsCacheKeyed[id];
         }
@@ -149,7 +149,7 @@ export default class StationsRepository {
         if (!StationsRepository.isLoading &&
             !StationsRepository.stationsCache) {
             StationsRepository.isLoading = true;
-            StationsRepository.stationsCache = (await HttpService.getAsync<SignalStationDto[]>("/beacons")).map(SignalStationDto.FromDto);
+            StationsRepository.stationsCache = (await HttpService.getAsync<SignalStationDto[]>('/beacons')).map(SignalStationDto.FromDto);
             StationsRepository.stationsCacheKeyed = {};
             StationsRepository.stationsCache.forEach(process => {
                 if (StationsRepository.stationsCacheKeyed)

@@ -5,10 +5,10 @@ import theme from '../../../../src/theme';
 const DiscoverVisual = () => {
     const appContext = useContext(AppContext);
 
-    const connectionsColor = appContext.isDark ? "#555" : "#CECECE";
-    const pointsColor = appContext.isDark ? "#777" : "#999";
-    const successPointColor = appContext.isDark ? "#537B63" : "#AEFCCD";
-    const successIconColor = appContext.isDark ? "#26E773" : "#1FC160";
+    const connectionsColor = appContext.isDark ? '#555' : '#CECECE';
+    const pointsColor = appContext.isDark ? '#777' : '#999';
+    const successPointColor = appContext.isDark ? '#537B63' : '#AEFCCD';
+    const successIconColor = appContext.isDark ? '#26E773' : '#1FC160';
     const backgroundColor = theme(appContext.theme).palette.background.default;
 
     return (

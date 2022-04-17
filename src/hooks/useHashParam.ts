@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useState } from 'react';
 
 export function parseHash() {
     if (typeof window === 'undefined') {

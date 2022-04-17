@@ -1,6 +1,6 @@
-import CloseIcon from "@mui/icons-material/Close";
-import { Breakpoint, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, Typography } from "@mui/material";
-import React from "react";
+import CloseIcon from '@mui/icons-material/Close';
+import { Breakpoint, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, Typography } from '@mui/material';
+import React from 'react';
 
 export interface IConfigurationDialogProps {
     isOpen: boolean,
@@ -14,7 +14,7 @@ export interface IConfigurationDialogProps {
 }
 
 const ConfigurationDialog = (props: IConfigurationDialogProps) => {
-    const { children, title, titleActions, isOpen, onClose, maxWidth = "sm", noPadding, actions } = props;
+    const { children, title, titleActions, isOpen, onClose, maxWidth = 'sm', noPadding, actions } = props;
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 760;
 

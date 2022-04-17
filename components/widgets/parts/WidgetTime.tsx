@@ -1,10 +1,10 @@
-import { Box, Stack, Typography } from "@mui/material";
-import React, { useCallback, useEffect, useState } from "react";
-import { IWidgetSharedProps } from "../Widget";
-import { DefaultHeight, DefaultWidth } from "../../../src/widgets/WidgetConfigurationOptions";
-import useWidgetOptions from "../../../src/hooks/widgets/useWidgetOptions";
-import useWidgetActive from "../../../src/hooks/widgets/useWidgetActive";
-import DateTimeProvider from "../../../src/services/DateTimeProvider";
+import { Box, Stack, Typography } from '@mui/material';
+import React, { useCallback, useEffect, useState } from 'react';
+import { IWidgetSharedProps } from '../Widget';
+import { DefaultHeight, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
+import DateTimeProvider from '../../../src/services/DateTimeProvider';
 
 const stateOptions = [
     { label: 'Show seconds', name: 'showSeconds', type: 'yesno', default: false, optional: true },

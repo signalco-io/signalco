@@ -1,6 +1,6 @@
-import { Box, Typography } from "@mui/material";
-import { useContext } from "react";
-import { AppContext } from "../../../pages/_app";
+import { Box, Typography } from '@mui/material';
+import { useContext } from 'react';
+import { AppContext } from '../../../pages/_app';
 
 const CounterIndicator = (props: { count: number, hideAfter?: boolean }) => {
     const appContext = useContext(AppContext);

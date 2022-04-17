@@ -1,9 +1,9 @@
 import {
   Button, Stack, Typography
-} from "@mui/material";
-import React, { useEffect, useState } from "react";
+} from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import SignalcoLogo from "./icons/SignalcoLogo";
+import SignalcoLogo from './icons/SignalcoLogo';
 
 const Login = () => {
   const [isLong, setIsLong] = useState(false);

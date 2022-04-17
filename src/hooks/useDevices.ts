@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { IDeviceModel } from "../devices/Device";
-import DevicesRepository from "../devices/DevicesRepository";
+import { useEffect, useState } from 'react';
+import { IDeviceModel } from '../devices/Device';
+import DevicesRepository from '../devices/DevicesRepository';
 
 const useDevices = (deviceIds?: string[]) => {
     const [devices, setDevices] = useState<(IDeviceModel | undefined)[] | undefined>(undefined);

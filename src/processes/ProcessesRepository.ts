@@ -1,5 +1,5 @@
-import { makeAutoObservable } from "mobx";
-import HttpService from "../services/HttpService";
+import { makeAutoObservable } from 'mobx';
+import HttpService from '../services/HttpService';
 
 export interface IProcessModel {
     configurationSerialized: string | undefined;
@@ -42,7 +42,7 @@ class SignalProcessDto {
 
     static FromDto(dto: SignalProcessDto): IProcessModel {
         if (dto.type == null || dto.id == null || dto.alias == null) {
-            throw Error("Invalid SignalProcessDto - missing required properties.");
+            throw Error('Invalid SignalProcessDto - missing required properties.');
         }
 
         return new ProcessModel(dto.type, dto.id, dto.alias, dto.isDisabled ?? false, dto.configurationSerialized);
@@ -57,19 +57,19 @@ export default class ProcessesRepository {
     static async saveProcessConfigurationAsync(id: string, configurationSerialized: string) {
         const process = await this.getProcessAsync(id);
         if (process == null)
-            throw new Error("Invalid process identifier.");
+            throw new Error('Invalid process identifier.');
 
         process.setConfiguration(configurationSerialized);
 
-        const response = await HttpService.requestAsync("/processes/set", "post", process) as {id: string} | undefined;
+        const response = await HttpService.requestAsync('/processes/set', 'post', process) as {id: string} | undefined;
         if (response?.id !== id)
-            throw new Error("Not matching identifier received.");
+            throw new Error('Not matching identifier received.');
     }
 
     static async getProcessAsync(id: string): Promise<IProcessModel | undefined> {
         await ProcessesRepository._cacheProcessesAsync();
         if (typeof ProcessesRepository.processesCacheKeyed !== 'undefined') {
-            if (typeof ProcessesRepository.processesCacheKeyed[id] === "undefined")
+            if (typeof ProcessesRepository.processesCacheKeyed[id] === 'undefined')
                 return undefined;
             return ProcessesRepository.processesCacheKeyed[id];
         }
@@ -86,7 +86,7 @@ export default class ProcessesRepository {
         if (!ProcessesRepository.isLoading &&
             !ProcessesRepository.processesCache) {
             ProcessesRepository.isLoading = true;
-            ProcessesRepository.processesCache = (await HttpService.getAsync<SignalProcessDto[]>("/processes")).map(SignalProcessDto.FromDto);
+            ProcessesRepository.processesCache = (await HttpService.getAsync<SignalProcessDto[]>('/processes')).map(SignalProcessDto.FromDto);
             ProcessesRepository.processesCacheKeyed = {};
             ProcessesRepository.processesCache.forEach(process => {
                 if (ProcessesRepository.processesCacheKeyed)

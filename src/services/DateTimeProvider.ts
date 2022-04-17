@@ -1,5 +1,5 @@
-import UserSettingsProvider from "./UserSettingsProvider";
-import { getTimeZones } from "@vvo/tzdb";
+import UserSettingsProvider from './UserSettingsProvider';
+import { getTimeZones } from '@vvo/tzdb';
 
 var durationRegex = /P((([0-9]*\.?[0-9]*)Y)?(([0-9]*\.?[0-9]*)M)?(([0-9]*\.?[0-9]*)W)?(([0-9]*\.?[0-9]*)D)?)?(T(([0-9]*\.?[0-9]*)H)?(([0-9]*\.?[0-9]*)M)?(([0-9]*\.?[0-9]*)S)?)?/
 

@@ -12,8 +12,8 @@ class PageNotificationService {
         this._close = close;
     }
 
-    show(text: string, variant: VariantType = "default") {
-        if (variant === "warning" || variant === "error") {
+    show(text: string, variant: VariantType = 'default') {
+        if (variant === 'warning' || variant === 'error') {
             (variant === 'error' ? console.error : console.warn)(`User presented with ${variant}: ${text}`);
         }
 
@@ -25,7 +25,7 @@ class PageNotificationService {
         }
     }
 
-    prompt(text: string, variant: VariantType = "default", actionLabel: string, actionCallback: () => void) {
+    prompt(text: string, variant: VariantType = 'default', actionLabel: string, actionCallback: () => void) {
         if (this._enqueue) {
             return this._enqueue(text, {
                 variant: variant,

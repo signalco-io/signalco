@@ -1,7 +1,7 @@
-import { Button } from "@mui/material";
-import { Breakpoint } from "@mui/system";
-import React, { useState } from "react";
-import ConfirmDeleteDialog from "./ConfirmDeleteDialog";
+import { Button } from '@mui/material';
+import { Breakpoint } from '@mui/system';
+import React, { useState } from 'react';
+import ConfirmDeleteDialog from './ConfirmDeleteDialog';
 
 export interface IConfirmDeleteButtonDialogProps {
     title: React.ReactNode,

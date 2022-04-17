@@ -1,5 +1,5 @@
-import { IDeviceTargetIncomplete } from "../devices/Device";
-import IWidgetConfigurationOption from "./IWidgetConfigurationOption";
+import { IDeviceTargetIncomplete } from '../devices/Device';
+import IWidgetConfigurationOption from './IWidgetConfigurationOption';
 
 const isInvalidateDeviceContactTarget = (value: IDeviceTargetIncomplete) =>
     !value.deviceId ||

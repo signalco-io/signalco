@@ -1,11 +1,11 @@
-import HCaptcha from "@hcaptcha/react-hcaptcha";
-import { LoadingButton } from "@mui/lab";
-import { Stack, Typography, Collapse, FilledInput, Slide, Alert, Fade } from "@mui/material";
-import { useState, useRef, createRef, SyntheticEvent, ChangeEvent } from "react";
-import HttpService from "../../../src/services/HttpService";
+import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { LoadingButton } from '@mui/lab';
+import { Stack, Typography, Collapse, FilledInput, Slide, Alert, Fade } from '@mui/material';
+import { useState, useRef, createRef, SyntheticEvent, ChangeEvent } from 'react';
+import HttpService from '../../../src/services/HttpService';
 
 function Newsletter() {
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState('');
     const [showSuccess, setShowSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const errorContainerRef = useRef<Element>(null);
@@ -32,11 +32,11 @@ function Newsletter() {
             // TODO: Submit request
             try {
                 await HttpService.requestAsync(
-                    "/website/newsletter-subscribe",
-                    "post",
+                    '/website/newsletter-subscribe',
+                    'post',
                     { email: email },
                     {
-                        "HCAPTCHA-RESPONSE": token
+                        'HCAPTCHA-RESPONSE': token
                     },
                     true
                 );
@@ -74,9 +74,9 @@ function Newsletter() {
                 onVerify={onHCaptchaChange}
                 onClose={() => onHCaptchaChange(undefined)} />
             <Stack spacing={4}>
-                <Typography variant="h2">{"What's new?"}</Typography>
+                <Typography variant="h2">{'What\'s new?'}</Typography>
                 <Stack spacing={1} ref={errorContainerRef}>
-                    <Typography sx={{ opacity: 0.9 }}>{"We'll get back to you with awesome news and updates."}</Typography>
+                    <Typography sx={{ opacity: 0.9 }}>{'We\'ll get back to you with awesome news and updates.'}</Typography>
                     <Collapse unmountOnExit in={!showSuccess}>
                         <Stack direction="row" alignItems="stretch">
                             <FilledInput

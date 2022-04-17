@@ -1,7 +1,7 @@
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
 import { Button, Chip, Container, FormControl, FormHelperText, InputLabel, MenuItem, NoSsr, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import React, { ReactNode } from 'react';
-import { AppLayoutWithAuth } from "../../../components/layouts/AppLayoutWithAuth";
+import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import { isNonEmptyString, isNotNull } from '@enterwell/react-form-validation';
@@ -104,9 +104,9 @@ const settingsFormComponents: FormBuilderComponents = {
 const components = { ...generalFormComponents, ...settingsFormComponents };
 
 const SettingsIndex = () => {
-    const { t } = useLocale("App", "Settings");
-    const locales = useLocale("App", "Locales");
-    const [userLocale, setUserLocale] = useUserSetting<string>("locale", "en");
+    const { t } = useLocale('App', 'Settings');
+    const locales = useLocale('App', 'Locales');
+    const [userLocale, setUserLocale] = useUserSetting<string>('locale', 'en');
     const [userNickName, setUserNickName] = useUserSetting<string>('nickname', CurrentUserProvider.getCurrentUser()?.name ?? '');
     const [userTimeFormat, setUserTimeFormat] = useUserSetting<string>('timeFormat', '1');
     const [userTimeZone, setUserTimeZone] = useUserSetting<string>('timeZone', '0');
@@ -118,17 +118,17 @@ const SettingsIndex = () => {
     };
 
     const profileForm = {
-        nickname: useFormField(userNickName, isNonEmptyString, 'string', t("Nickname")),
+        nickname: useFormField(userNickName, isNonEmptyString, 'string', t('Nickname')),
     }
 
     const timeLocationForm = {
-        timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', "Time format", { receiveEvent: false }),
-        timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', "Time zone", { receiveEvent: false }),
-        location: useFormField(userLocation, isTrue, 'locationMap', "Location", { receiveEvent: false })
+        timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', 'Time format', { receiveEvent: false }),
+        timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', 'Time zone', { receiveEvent: false }),
+        location: useFormField(userLocation, isTrue, 'locationMap', 'Location', { receiveEvent: false })
     };
 
     const developerSettingsForm = {
-        apiEndpoint: useFormField(appSettingsProvider.apiAddress, isNonEmptyString, 'selectApiEndpoint', t("ApiEndpoint"), { receiveEvent: false })
+        apiEndpoint: useFormField(appSettingsProvider.apiAddress, isNonEmptyString, 'selectApiEndpoint', t('ApiEndpoint'), { receiveEvent: false })
     };
 
     useEffect(() => {
@@ -173,7 +173,7 @@ const SettingsIndex = () => {
             });
             sensor.addEventListener('error', (event: { error: { name: string, message: string } }) => {
                 console.log(event.error.name, event.error.message);
-                PageNotificationService.show('light error: ' + event.error.name + " - " + event.error.message);
+                PageNotificationService.show('light error: ' + event.error.name + ' - ' + event.error.message);
             });
             sensor.start();
         } else {
@@ -185,10 +185,10 @@ const SettingsIndex = () => {
         <FormBuilderProvider components={components}>
             <Container sx={{ p: 2 }}>
                 <Stack spacing={4}>
-                    <SettingsSection header={t("General")}>
-                        <SettingsItem label={t("Language")}>
+                    <SettingsSection header={t('General')}>
+                        <SettingsItem label={t('Language')}>
                             <FormControl variant="filled" sx={{ maxWidth: 320 }}>
-                                <InputLabel id="app-settings-locale-select-label">{t("SelectLanguage")}</InputLabel>
+                                <InputLabel id="app-settings-locale-select-label">{t('SelectLanguage')}</InputLabel>
                                 <Select variant="filled" labelId="app-settings-locale-select-label" value={userLocale} onChange={handleLocaleChange}>
                                     {availableLocales.map(l => (
                                         <MenuItem key={l} value={l} selected={userLocale === l}>{locales.t(l)}</MenuItem>
@@ -197,23 +197,23 @@ const SettingsIndex = () => {
                             </FormControl>
                         </SettingsItem>
                     </SettingsSection>
-                    <SettingsSection header={t("LookAndFeel")}>
-                        <SettingsItem label={t("Theme")}>
+                    <SettingsSection header={t('LookAndFeel')}>
+                        <SettingsItem label={t('Theme')}>
                             <AppThemePicker />
                         </SettingsItem>
                     </SettingsSection>
-                    <SettingsSection header={t("Profile")}>
+                    <SettingsSection header={t('Profile')}>
                         <NoSsr>
                             <FormBuilder form={profileForm} />
                             <ConnectedService />
                         </NoSsr>
                     </SettingsSection>
-                    <SettingsSection header={t("LocationAndTime")}>
+                    <SettingsSection header={t('LocationAndTime')}>
                         <NoSsr>
                             <FormBuilder form={timeLocationForm} />
                         </NoSsr>
                     </SettingsSection>
-                    <SettingsSection header={t("Developer")}>
+                    <SettingsSection header={t('Developer')}>
                         <NoSsr>
                             <FormBuilder form={developerSettingsForm} />
                         </NoSsr>

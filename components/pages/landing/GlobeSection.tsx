@@ -1,5 +1,5 @@
-import { Container, Box, NoSsr } from "@mui/material";
-import dynamic from "next/dynamic";
+import { Container, Box, NoSsr } from '@mui/material';
+import dynamic from 'next/dynamic';
 const Globe = dynamic(() => import('./Globe'));
 
 function GlobeSection() {
