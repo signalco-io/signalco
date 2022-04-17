@@ -1,8 +1,7 @@
 import { DndContext, DragEndEvent, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
 import { Box } from '@mui/system';
-import React, { useEffect, useState } from 'react';
-import useWindowWidth from '../../src/hooks/useWindowWidth';
+import React, { useState } from 'react';
 import { useNavWidth } from '../NavProfile';
 import Widget, { IWidgetProps } from '../widgets/Widget';
 import { CSS } from '@dnd-kit/utilities';
@@ -56,24 +55,13 @@ function DragableWidget(props: IDragableWidgetProps) {
 
 function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, onAddWidget: () => void }) {
     const { dashboard, isEditing, onAddWidget } = props;
-    const [numberOfColumns, setNumberOfColumns] = useState(4);
 
-    const widgetSpacing = 1;
-    const widgetSize = 78 + widgetSpacing * 8;
-    const navWidth = useNavWidth();
-    const windowWidth = useWindowWidth();
-    const dashbaordPadding = 48 + navWidth;
+    const widgetSize = 78 + 8; // Widget is 76x76 + 2px for border + 8 spacing between widgets (2x4px)
+    const dashbaordPadding = 48 + useNavWidth(); // Has 24 x padding
+    const numberOfColumns = Math.max(4, Math.floor((window.innerWidth - dashbaordPadding) / widgetSize)); // When width is less than 400, set to quad column
 
     const widgetsOrder = dashboard.widgets.slice().sort((a, b) => a.order - b.order).map(w => w.id);
     const widgets = widgetsOrder.map(wo => dashboard.widgets.find(w => wo === w.id)!);
-
-    useEffect(() => {
-        // When width is less than 400, set to quad column
-        const width = window.innerWidth - dashbaordPadding;
-        const numberOfColumns = Math.max(4, Math.floor(width / widgetSize));
-
-        setNumberOfColumns(numberOfColumns);
-    }, [widgetSize, windowWidth, dashbaordPadding])
 
     const sensors = useSensors(
         useSensor(TouchSensor, {
@@ -90,11 +78,11 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
         })
     );
 
-    const handleSetWidgetConfig = (widgetId: string, config: object | undefined) => {
+    function handleSetWidgetConfig(widgetId: string, config: object | undefined) {
         dashboard.widgets.find(w => w.id === widgetId)?.setConfig(config);
     }
 
-    const handleRemoveWidget = (widgetId: string) => {
+    function handleRemoveWidget(widgetId: string) {
         dashboard.widgets.splice(dashboard.widgets.findIndex(w => w.id === widgetId), 1);
     }
 
@@ -115,6 +103,7 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
 
     console.debug('Rendering DashboardView')
 
+    // Render placeholder when there is no widgets
     if (widgets.length <= 0) {
         return (
             <Stack alignItems="center" justifyContent="center">
@@ -134,8 +123,8 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
         <Box sx={{
             display: 'grid',
             gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`,
-            gap: widgetSpacing,
-            width: `${widgetSize * numberOfColumns - widgetSpacing * 8}px`
+            gap: 1,
+            width: `${widgetSize * numberOfColumns - 8}px`
         }}>
             <DndContext
                 sensors={sensors}
