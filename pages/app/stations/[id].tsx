@@ -1,10 +1,10 @@
 import { Alert, Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, LinearProgress, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import ReactTimeago from 'react-timeago';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import { observer } from 'mobx-react-lite';
-import StationsRepository, { IStationModel, IBlobInfoModel } from '../../../src/stations/StationsRepository';
+import StationsRepository, { IBlobInfoModel } from '../../../src/stations/StationsRepository';
 import UploadIcon from '@mui/icons-material/Upload';
 import CheckIcon from '@mui/icons-material/Check';
 import compareVersions from 'compare-versions';
@@ -13,6 +13,9 @@ import useAutoTable from '../../../components/shared/table/useAutoTable';
 import LoadingButton from '@mui/lab/LoadingButton';
 import HttpService from '../../../src/services/HttpService';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
+import PageNotificationService from '../../../src/notifications/PageNotificationService';
+import useLocale, { localizer } from '../../../src/hooks/useLocale';
+import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
 
 const stationCommandAsync = async (stationId: string | string[] | undefined, command: (id: string) => Promise<void>, commandDescription: string) => {
     try {
@@ -24,46 +27,44 @@ const stationCommandAsync = async (stationId: string | string[] | undefined, com
     }
     catch (err) {
         console.error('Station command execution error', err);
+        PageNotificationService.show(localizer('App', 'Stations')('StationCommandError'), 'error');
     }
 }
 
+async function loadLatestAvailableVersion() {
+    try {
+        return await (await fetch('https://api.github.com/repos/signalco-io/station/releases/latest')).json();
+    }
+    catch (err) {
+        console.warn('Failed to retrieve latest available version', err);
+        throw err;
+    }
+}
+
+async function loadStation(id: string | undefined) {
+    if (typeof id !== 'object' &&
+        typeof id !== 'undefined') {
+        return await StationsRepository.getStationAsync(id);
+    }
+};
+
 const StationDetails = () => {
     const router = useRouter();
+
+    const { t } = useLocale('App', 'Stations');
+
+    // Load station
     const { id } = router.query;
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | undefined>();
-    const [station, setStation] = useState<IStationModel | undefined>();
-    const [latestAvailableVersion, setLatestAvailableVersion] = useState<string | undefined>();
+    const loadStationCallback = useCallback(() => loadStation(id?.toString()), [id]);
+    const station = useLoadAndError(loadStationCallback);
 
-    useEffect(() => {
-        const loadStationAsync = async () => {
-            try {
-                if (typeof id !== 'object' &&
-                    typeof id !== 'undefined') {
-                    const loadedStation = await StationsRepository.getStationAsync(id);
-                    setStation(loadedStation);
-                }
-            } catch (err: any) {
-                setError(err?.toString());
-            } finally {
-                setIsLoading(false);
-            }
-        };
+    // Load latest available version
+    const latestAvailableVersion = useLoadAndError(loadLatestAvailableVersion);
+    const canUpdate = (!latestAvailableVersion.isLoading && !latestAvailableVersion.error && station.item?.version)
+        ? compareVersions(latestAvailableVersion.item, station.item?.version)
+        : false;
 
-        const loadLatestAvailableVersionAsync = async () => {
-            try {
-                const latestAvailable = await (await fetch('https://api.github.com/repos/signalco-io/station/releases/latest')).json();
-                setLatestAvailableVersion(latestAvailable?.name?.replace('v', ''));
-            }
-            catch (err) {
-                console.warn('Failed to retrieve latest available version', err);
-            }
-        };
-
-        loadStationAsync();
-        loadLatestAvailableVersionAsync();
-    }, [id]);
-
+    // Station actions
     const handleUpdateSystem = () => stationCommandAsync(id, StationsRepository.updateSystemAsync, 'update system');
     const handleUpdate = () => stationCommandAsync(id, StationsRepository.updateStationAsync, 'update station');
     const handleRestartSystem = () => stationCommandAsync(id, StationsRepository.restartSystemAsync, 'restart system');
@@ -71,26 +72,22 @@ const StationDetails = () => {
     const handleRestartStation = () => stationCommandAsync(id, StationsRepository.restartStationAsync, 'restart station');
     const handleBeginDiscovery = () => stationCommandAsync(id, StationsRepository.beginDiscoveryAsync, 'begin discovery');
 
-    const canUpdate = (latestAvailableVersion && station?.version)
-        ? compareVersions(latestAvailableVersion, station.version)
-        : false;
-
     const workerServicesTableTransformItems = useCallback((i: string) => {
-        const isRunning = (station?.runningWorkerServices?.findIndex(rws => rws === i) ?? -1) >= 0;
+        const isRunning = (station.item?.runningWorkerServices?.findIndex(rws => rws === i) ?? -1) >= 0;
         const startStopAction = isRunning ? StationsRepository.stopWorkerServiceAsync : StationsRepository.startWorkerServiceAsync;
         const nameMatch = new RegExp(/(\w*\d*)\.(\w*\d*)\.(\w*\d*)\.(\w*\d*)\.*(\w*\d*)/g).exec(i);
         return (
             {
                 id: i,
                 name: nameMatch && nameMatch[5] ? nameMatch[4] : (nameMatch ? nameMatch[3] : i),
-                running: isRunning ? 'Running' : 'Stopped',
+                running: isRunning ? t('Running') : t('Stopped'),
                 actions: (
-                    <LoadingButton color={isRunning ? 'error' : 'success'} disabled={!station} onClick={() => station && startStopAction(station.id, i)}>{isRunning ? 'Stop' : 'Start'}</LoadingButton>
+                    <LoadingButton color={isRunning ? 'error' : 'success'} disabled={!station} onClick={() => station.item && startStopAction(station.item.id, i)}>{isRunning ? t('Stop') : t('Start')}</LoadingButton>
                 )
             }
         );
-    }, [station]);
-    const workerServicesTableLoadItems = useCallback(() => Promise.resolve(station?.availableWorkerServices || []), [station])
+    }, [station, t]);
+    const workerServicesTableLoadItems = useCallback(() => Promise.resolve(station.item?.availableWorkerServices || []), [station])
     const workerServicesTable = useAutoTable(workerServicesTableLoadItems, workerServicesTableTransformItems);
 
     const [logContent, setLogContent] = useState('');
@@ -106,11 +103,11 @@ const StationDetails = () => {
             size: i.size,
             actions: (
                 <LoadingButton disabled={!!loadingLog && loadingLog !== i.name} loading={loadingLog === i.name} onClick={async () => {
-                    if (station) {
+                    if (station.item) {
                         try {
                             console.log(`Downloading ${i.name}...`);
                             setLoadingLog(i.name);
-                            const response = await HttpService.getAsync(`/stations/logging/download?stationId=${station.id}&blobName=${i.name}`) as { fileContents: string };
+                            const response = await HttpService.getAsync(`/stations/logging/download?stationId=${station.item?.id}&blobName=${i.name}`) as { fileContents: string };
                             console.log(`Reading ${i.name}...`);
                             const contentBuffer = Buffer.from(response.fileContents, 'base64');
                             setLogContent(contentBuffer.toString('utf8'));
@@ -124,50 +121,50 @@ const StationDetails = () => {
             )
         });
     }, [station, loadingLog]);
-    const logsLoadItems = useCallback(() => Promise.resolve(station ? StationsRepository.getLogsAsync(station.id) : []), [station]);
+    const logsLoadItems = useCallback(() => Promise.resolve(station.item ? StationsRepository.getLogsAsync(station.item.id) : []), [station]);
     const logsTable = useAutoTable(logsLoadItems, logsAutoTableItemTransform);
 
     const handleDelete = async () => {
-        if (!station) return;
+        if (!station.item) return;
 
-        await StationsRepository.deleteAsync(station.id);
+        await StationsRepository.deleteAsync(station.item.id);
         router.push('/app/stations');
     };
 
     return (
         <Box sx={{ px: { sm: 2 }, py: 2 }}>
             <Stack spacing={2}>
-                <Typography variant="h1">{station?.id}</Typography>
+                <Typography variant="h1">{station.item?.id}</Typography>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <Card>
-                            <CardHeader title="Information" />
+                            <CardHeader title={t('Information')} />
                             <CardContent>
                                 <Grid container spacing={2} alignItems="center">
-                                    <Grid item xs={4}><span>Version</span></Grid>
+                                    <Grid item xs={4}><span>{t('Version')}</span></Grid>
                                     <Grid item xs={4}>
                                         <Stack direction="row">
-                                            {station?.version
-                                                ? <span>{station.version}</span>
-                                                : <span>Unknown</span>}
+                                            {station.item?.version
+                                                ? <span>{station.item.version}</span>
+                                                : <span>{t('Unknown')}</span>}
                                         </Stack>
                                     </Grid>
                                     <Grid item xs={4} sx={{ textAlign: 'end' }}>
-                                        <Button startIcon={canUpdate ? <UploadIcon /> : <CheckIcon />} variant="outlined" disabled={!canUpdate} onClick={handleUpdate}>{canUpdate ? `Update to ${latestAvailableVersion}` : 'Up to date'}</Button>
+                                        <Button startIcon={canUpdate ? <UploadIcon /> : <CheckIcon />} variant="outlined" disabled={!canUpdate} onClick={handleUpdate}>{canUpdate ? t('UpdateStationVersion', { version: latestAvailableVersion.item }) : t('UpdateStationUpToDate')}</Button>
                                     </Grid>
-                                    <Grid item xs={4}><span>Last activity</span></Grid>
+                                    <Grid item xs={4}><span>{t('LastActivity')}</span></Grid>
                                     <Grid item xs={8}>
-                                        {station?.stateTimeStamp
-                                            ? <ReactTimeago date={station?.stateTimeStamp} />
-                                            : <span>Never</span>
+                                        {station.item?.stateTimeStamp
+                                            ? <ReactTimeago date={station.item.stateTimeStamp} />
+                                            : <span>{t('Never')}</span>
                                         }
                                     </Grid>
-                                    <Grid item xs={4}><span>Registered date</span></Grid>
+                                    <Grid item xs={4}><span>{t('RegisteredDate')}</span></Grid>
                                     <Grid item xs={8}>
-                                        {isLoading && <LinearProgress />}
-                                        {error && <Alert color="error">Failed to load Station information: {error}</Alert>}
-                                        {station?.registeredTimeStamp &&
-                                            <ReactTimeago date={station?.registeredTimeStamp} />
+                                        {station.isLoading && <LinearProgress />}
+                                        {station.error && <Alert color="error">Failed to load Station information: {station.error}</Alert>}
+                                        {station.item?.registeredTimeStamp &&
+                                            <ReactTimeago date={station.item.registeredTimeStamp} />
                                         }
                                     </Grid>
                                     <Grid item xs={4}><span>Station operations</span></Grid>
@@ -196,7 +193,7 @@ const StationDetails = () => {
                                             <ConfirmDeleteButton
                                                 title="Delete station"
                                                 buttonLabel="Delete..."
-                                                expectedConfirmText={station?.id || 'confirm'}
+                                                expectedConfirmText={station.item?.id || 'confirm'}
                                                 onConfirm={handleDelete} />
                                         </Stack>
                                     </Grid>
@@ -208,7 +205,7 @@ const StationDetails = () => {
                         <Card>
                             <CardHeader title="Channels" />
                             <CardMedia>
-                                {isLoading ? 'Loading...' : (
+                                {station.isLoading ? 'Loading...' : (
                                     <AutoTable {...workerServicesTable} />
                                 )}
                             </CardMedia>
@@ -218,7 +215,7 @@ const StationDetails = () => {
                         <Card>
                             <CardHeader title="Logs" />
                             <CardMedia>
-                                {isLoading ? 'Loading...' : (
+                                {station.isLoading ? 'Loading...' : (
                                     <AutoTable {...logsTable} />
                                 )}
                             </CardMedia>

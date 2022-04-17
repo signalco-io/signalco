@@ -1,9 +1,9 @@
 import { Box, Button, ButtonBase, Container, Stack } from '@mui/material';
 import React from 'react';
 import { useRouter } from 'next/router';
-import SignalcoLogo from './icons/SignalcoLogo';
 import Link from 'next/link';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import SignalcoLogotype from './icons/SignalcoLogotype';
 
 export function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?: boolean; }) {
     const router = useRouter();
@@ -29,7 +29,7 @@ export function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?
                 <Stack component="header" direction="row" justifyContent="space-between" alignItems="center">
                     <Link href="/" passHref>
                         <ButtonBase disableRipple onContextMenu={handleButtonAuxClick} onAuxClick={handleButtonAuxClick}>
-                            <SignalcoLogo height={42} />
+                            <SignalcoLogotype height={42} />
                         </ButtonBase>
                     </Link>
                     <Stack direction="row" alignItems="center" spacing={2}>

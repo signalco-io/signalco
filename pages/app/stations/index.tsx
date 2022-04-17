@@ -24,7 +24,7 @@ const StationsPage = () => {
 
     return (
         <Stack spacing={{ xs: 0, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
-            <Typography variant="h2" sx={{ visibility: { xs: 'hidden', sm: 'visible' } }}>Stations</Typography>
+            <Typography variant="h2" sx={{ visibility: { xs: 'hidden', sm: 'visible' } }}>{t('Stations')}</Typography>
             <AutoTable {...stationsTable} />
         </Stack>
     )
