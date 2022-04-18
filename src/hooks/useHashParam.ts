@@ -26,7 +26,8 @@ const useHashParam = (parameterName: string): [string | undefined, (value: strin
         }
     }, [parameterName, lastHash]);
 
-    const setHashAsync = async (value: string | undefined) => {
+    const setHashAsync = useCallback(async (value: string | undefined) => {
+        // Update current hash with new value
         const hash = parseHash();
         if (typeof value === 'undefined' || value.length <= 0)
           hash.delete(parameterName);
@@ -37,7 +38,7 @@ const useHashParam = (parameterName: string): [string | undefined, (value: strin
         } catch (err) {
             console.warn(`Failed to set new hash code to "${hash}"`);
         }
-    }
+    }, [parameterName, router]);
 
     useEffect(() => {
         if (router.asPath) {

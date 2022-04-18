@@ -1,10 +1,11 @@
 import { Box, Stack, Typography } from '@mui/material';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { IWidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
 import DateTimeProvider from '../../../src/services/DateTimeProvider';
+import useInterval from '../../../src/hooks/useInterval';
 
 const stateOptions = [
     { label: 'Show seconds', name: 'showSeconds', type: 'yesno', default: false, optional: true },
@@ -27,11 +28,7 @@ const WidgetTime = (props: IWidgetSharedProps) => {
 
     useWidgetOptions(stateOptions, props);
     useWidgetActive(true, props);
-    useEffect(() => {
-        const token = setInterval(updateTime, 1000);
-        updateTime();
-        return () => clearInterval(token);
-    }, [updateTime]);
+    useInterval(updateTime, 1000);
 
     return (
         <Box sx={{ height: '100%' }}>

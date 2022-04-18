@@ -4,6 +4,8 @@ import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';
 import Dashboards from '../../components/dashboards/Dashboards';
 
 const Dashboard = () => {
+  console.debug('Page Dashboard');
+
   return (
     <Dashboards />
   );

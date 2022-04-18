@@ -10,9 +10,9 @@ export function PageFullLayout(props: ChildrenProps) {
     return (
         <div>
             <Nav fullWidth />
-            <div>
+            <>
                 {props.children}
-            </div>
+            </>
             <Footer />
         </div>);
 }

@@ -8,13 +8,12 @@ import useHashParam from '../../src/hooks/useHashParam';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
 
 export interface IDashboardSelectorProps {
-    onSelection: (id: string) => void,
     onEditWidgets: () => void,
     onSettings: () => void
 }
 
 function DashboardSelector(props: IDashboardSelectorProps) {
-    const { onSelection, onEditWidgets, onSettings } = props;
+    const { onEditWidgets, onSettings } = props;
     const popupState = usePopupState({ variant: 'popover', popupId: 'dashboardsMenu' });
     const [selectedId, setSelectedIdHash] = useHashParam('dashboard');
 
@@ -26,14 +25,10 @@ function DashboardSelector(props: IDashboardSelectorProps) {
     // Set initial selection on component and dashboards load
     useEffect(() => {
         if (!selectedId && dashboards.length) {
+            console.log('Selecting first available dashboard');
             setSelectedIdHash(dashboards[0].id);
         }
     }, [selectedId, dashboards, setSelectedIdHash]);
-
-    useEffect(() => {
-        if (selectedId)
-            onSelection(selectedId);
-    }, [selectedId, onSelection]);
 
     console.debug('Rendering DashboardSelector');
 

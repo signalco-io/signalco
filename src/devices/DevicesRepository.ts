@@ -148,25 +148,22 @@ export default class DevicesRepository {
 
     static async getDeviceByIdentifierAsync(identifier: string): Promise<IDeviceModel | undefined> {
         await DevicesRepository._cacheDevicesAsync();
-        if (typeof DevicesRepository.devicesCacheKeyed !== 'undefined') {
-            const matchedDevices = DevicesRepository.devicesCache?.filter(d => d.identifier === identifier);
-            if (typeof matchedDevices === 'undefined' ||
-                matchedDevices.length <= 0 ||
-                typeof matchedDevices[0] === 'undefined')
-                return undefined;
+        if (!DevicesRepository.devicesCacheKeyed) return undefined;
 
-            return matchedDevices[0];
-        }
+        const matchedDevices = DevicesRepository.devicesCache?.filter(d => d.identifier === identifier);
+        if (typeof matchedDevices === 'undefined' ||
+            matchedDevices.length <= 0 ||
+            typeof matchedDevices[0] === 'undefined')
+            return undefined;
+
+        return matchedDevices[0];
     }
 
     static async getDeviceAsync(deviceId: string): Promise<IDeviceModel | undefined> {
         await DevicesRepository._cacheDevicesAsync();
-        if (typeof DevicesRepository.devicesCacheKeyed !== 'undefined') {
-            if (typeof DevicesRepository.devicesCacheKeyed[deviceId] === 'undefined')
-                return undefined;
-            return DevicesRepository.devicesCacheKeyed[deviceId];
-        }
-        return undefined;
+        if (!DevicesRepository.devicesCacheKeyed || typeof DevicesRepository.devicesCacheKeyed[deviceId] === 'undefined')
+            return undefined;
+        return DevicesRepository.devicesCacheKeyed[deviceId];
     }
 
     static async getDevicesAsync(): Promise<IDeviceModel[]> {
@@ -178,16 +175,18 @@ export default class DevicesRepository {
         // TODO: Invalidate cache after some period
         if (!DevicesRepository.isLoading &&
             !DevicesRepository.devicesCache) {
-            DevicesRepository.isLoading = true;
-            DevicesRepository.devicesCache = (await HttpService.getAsync<SignalDeviceDto[]>('/devices'))?.map(SignalDeviceDto.FromDto) ?? [];
-            DevicesRepository.devicesCacheKeyed = {};
-            DevicesRepository.devicesCache.forEach(device => {
-                if (DevicesRepository.devicesCacheKeyed)
-                    DevicesRepository.devicesCacheKeyed[device.id] = device;
-            });
-            DevicesRepository.devicesCache.sort((a, b) => a.alias.toLowerCase() < b.alias.toLowerCase() ? -1 : (a.alias.toLowerCase() > b.alias.toLowerCase() ? 1 : 0));
-
-            DevicesRepository.isLoading = false;
+            try {
+                DevicesRepository.isLoading = true;
+                DevicesRepository.devicesCache = (await HttpService.getAsync<SignalDeviceDto[]>('/devices'))?.map(SignalDeviceDto.FromDto) ?? [];
+                DevicesRepository.devicesCacheKeyed = {};
+                DevicesRepository.devicesCache.forEach(device => {
+                    if (DevicesRepository.devicesCacheKeyed)
+                        DevicesRepository.devicesCacheKeyed[device.id] = device;
+                });
+                DevicesRepository.devicesCache.sort((a, b) => a.alias.toLowerCase() < b.alias.toLowerCase() ? -1 : (a.alias.toLowerCase() > b.alias.toLowerCase() ? 1 : 0));
+            } finally {
+                DevicesRepository.isLoading = false;
+            }
         }
 
         // Wait to load

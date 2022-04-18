@@ -17,13 +17,13 @@ import PageNotificationService from '../src/notifications/PageNotificationServic
 import useLocale from '../src/hooks/useLocale';
 import { useCallback } from 'react';
 import DateTimeProvider from '../src/services/DateTimeProvider';
+import useInterval from '../src/hooks/useInterval';
+import useIsomorphicLayoutEffect from '../src/hooks/useIsomorphicLayoutEffect';
 
-const isServerSide = typeof window === 'undefined';
 const clientSideEmotionCache = createEmotionCache();
 
 interface CustomAppProps extends AppProps {
   emotionCache?: EmotionCache;
-  err: any;
 }
 
 interface PageWithMetadata extends React.FunctionComponent {
@@ -38,7 +38,7 @@ const appContextDefaultState: IAppContext = {
 export const AppContext = React.createContext<IAppContext>(appContextDefaultState);
 
 export default function App(props: CustomAppProps) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps, err } = props;
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   const [appContextState, setAppContext] = React.useState<IAppContext>(appContextDefaultState);
 
@@ -74,19 +74,9 @@ export default function App(props: CustomAppProps) {
     }
   }, [appContextState.theme, themeMode, themeTimeRange, themes]);
 
-  React.useEffect(() => {
-    // Apply theme to document
-    if (isServerSide) {
-      return;
-    }
-
-    // Apply theme mode
-    let themeModeInterval = setInterval(applyThemeMode, 60000);
-    applyThemeMode(true);
-
-    // Dispose
-    return () => clearInterval(themeModeInterval);
-  }, [applyThemeMode]);
+  // Apply theme mode every minute (and on first paint)
+  useInterval(applyThemeMode, 60000);
+  useIsomorphicLayoutEffect(() => applyThemeMode(true));
 
   const Layout = (Component as PageWithMetadata).layout ?? ((props?: ChildrenProps) => <>{props?.children}</>);
 
@@ -126,14 +116,14 @@ export default function App(props: CustomAppProps) {
         />
       </Head>
       <ThemeProvider theme={appTheme(appContextState.theme)}>
-        <SnackbarProvider maxSnack={3}>
-          <CssBaseline />
-          <AppContext.Provider value={appContextState}>
+        <AppContext.Provider value={appContextState}>
+          <SnackbarProvider maxSnack={3}>
+            <CssBaseline />
             <Layout>
-              <Component {...pageProps} err={err} />
+              <Component {...pageProps} />
             </Layout>
-          </AppContext.Provider>
-        </SnackbarProvider>
+          </SnackbarProvider>
+        </AppContext.Provider>
       </ThemeProvider>
     </CacheProvider>
   );
