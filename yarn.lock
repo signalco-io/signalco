@@ -18,14 +18,14 @@
     jsonpointer "^5.0.0"
     leven "^3.1.0"
 
-"@auth0/auth0-react@1.9.0":
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/@auth0/auth0-react/-/auth0-react-1.9.0.tgz#957041fa9756a5cf20412116f19f2d1367aa66b6"
-  integrity sha512-VkovI2i7dI1dkIJAdS51O9XMq6vlcHJn9DL+if4rSxt+sNocFd1i4q0j07a9XbafBj4/WEkSbOiX93z2ZXqdAA==
+"@auth0/auth0-react@1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@auth0/auth0-react/-/auth0-react-1.10.0.tgz#2f680abda61784908256299fb3cd211a4922c83a"
+  integrity sha512-bYiCaguJL0pkAX9U0xiC0979JIuATVLe7vAvW5Qsagh031JVXy5wNaIOobVrqVzH1WERuGenYUF21owv8R7q4w==
   dependencies:
-    "@auth0/auth0-spa-js" "^1.19.3"
+    "@auth0/auth0-spa-js" "^1.21.0"
 
-"@auth0/auth0-spa-js@^1.19.3":
+"@auth0/auth0-spa-js@^1.21.0":
   version "1.21.0"
   resolved "https://registry.yarnpkg.com/@auth0/auth0-spa-js/-/auth0-spa-js-1.21.0.tgz#9c6df09e8af817fbb890f9773ff478c5ca581aaa"
   integrity sha512-a+8+onJdOIUSEEjdIzP/BGd731DZjBn2Q0tH+v7H+bN9ldeuBOifnjPbFwQAriL+94SwkaqhoFx3L6uGDk3+vg==
@@ -1698,10 +1698,10 @@
     prop-types "^15.7.2"
     react-is "^17.0.2"
 
-"@mui/icons-material@5.6.1", "@mui/icons-material@^5.0.0":
-  version "5.6.1"
-  resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.6.1.tgz#421e2b73992349abb07f8f03074d7e56e20bf7ba"
-  integrity sha512-I1x8u+FRLOmoJpRJASMx9UG+jZrSkNLyRQmBXivQQwXu3m3iasMoaKYhhI0J18t8+FWktbkNTp63oEUHE9Gw0Q==
+"@mui/icons-material@5.6.2", "@mui/icons-material@^5.0.0":
+  version "5.6.2"
+  resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.6.2.tgz#239c40fc5841dc7c6af7d00e4e988550de170fcd"
+  integrity sha512-9QdI7axKuBAyaGz4mtdi7Uy1j73/thqFmEuxpJHxNC7O8ADEK1Da3t2veK2tgmsXsUlAHcAG63gg+GvWWeQNqQ==
   dependencies:
     "@babel/runtime" "^7.17.2"
 
@@ -3555,10 +3555,10 @@
     "@types/node" "*"
     form-data "^3.0.0"
 
-"@types/node@*", "@types/node@17.0.24":
-  version "17.0.24"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.24.tgz#20ba1bf69c1b4ab405c7a01e950c4f446b05029f"
-  integrity sha512-aveCYRQbgTH9Pssp1voEP7HiuWlD2jW2BO56w+bVrJn04i61yh6mRfoKO6hEYQD9vF+W8Chkwc6j1M36uPkx4g==
+"@types/node@*", "@types/node@17.0.25":
+  version "17.0.25"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.25.tgz#527051f3c2f77aa52e5dc74e45a3da5fb2301448"
+  integrity sha512-wANk6fBrUwdpY4isjWrKTufkrXdu1D2YHCot2fD/DfWxF5sMrVSA+KN7ydckvaTCh0HiqX9IVl0L5/ZoXg5M7w==
 
 "@types/node@^14.0.10":
   version "14.18.12"
@@ -3624,10 +3624,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-motion@0.0.32":
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/@types/react-motion/-/react-motion-0.0.32.tgz#c7355cca054664f1aeadd7388f6890e9355e1783"
-  integrity sha512-xePjDdhy6/6AX3CUQCeQ2GSF0RwF+lXSpUSrm8tmdUXRf5Ps/dULwouTJ8YHhDvX7WlwYRKZjHXatadz/x3HXA==
+"@types/react-motion@0.0.33":
+  version "0.0.33"
+  resolved "https://registry.yarnpkg.com/@types/react-motion/-/react-motion-0.0.33.tgz#c156c400ace995584990344cc0239e41f411f425"
+  integrity sha512-R9grd4EwdDBcKKq7Zhszd8ukyy2BLKN6ooNI0V39nUl/sui+m7VI94cdebYemBteoPHmO7J7BZk+cIf+Xnk4TA==
   dependencies:
     "@types/react" "*"
 
@@ -3901,10 +3901,10 @@
     "@typescript-eslint/types" "5.17.0"
     eslint-visitor-keys "^3.0.0"
 
-"@vvo/tzdb@^6.49.0":
-  version "6.49.0"
-  resolved "https://registry.yarnpkg.com/@vvo/tzdb/-/tzdb-6.49.0.tgz#ca76cddf8a21f9c432c4f4f62f66042f8aca6314"
-  integrity sha512-DNBZ3xpQhN0oYn8zWGixfYUbJakfBQEJiUehEcIORYU6265VWtzUDQ5XDwpCMZh+TiMH2FzwFGFk0+VHnAViAw==
+"@vvo/tzdb@^6.50.0":
+  version "6.50.0"
+  resolved "https://registry.yarnpkg.com/@vvo/tzdb/-/tzdb-6.50.0.tgz#d5d9ad9294879bc5c299e511d5f354bcc70e4b4c"
+  integrity sha512-Qhz+bCCIO8OhriKIhCJ4EHYRiZliY1gmitIxcxgFO4VGOujKG5WWQUs6ecIXBbF0YRYnkbG97TTE6A8uu2f8cg==
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
@@ -4640,10 +4640,10 @@ axobject-query@^2.2.0:
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.2.0.tgz#943d47e10c0b704aa42275e20edf3722648989be"
   integrity sha512-Td525n+iPOOyUQIeBfcASuG6uJsDOITl7Mds5gFyerkWiX7qhUTdYUBlSgNMyVqtSJqwpt1kXGLdUt6SykLMRA==
 
-babel-loader@8.2.4, babel-loader@^8.0.0, babel-loader@^8.2.4:
-  version "8.2.4"
-  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.2.4.tgz#95f5023c791b2e9e2ca6f67b0984f39c82ff384b"
-  integrity sha512-8dytA3gcvPPPv4Grjhnt8b5IIiTcq/zeXOPk4iTYI0SVXcsmuGg7JtBRDp8S9X+gJfhQ8ektjXZlDu1Bb33U8A==
+babel-loader@8.2.5, babel-loader@^8.0.0, babel-loader@^8.2.4:
+  version "8.2.5"
+  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.2.5.tgz#d45f585e654d5a5d90f5350a779d7647c5ed512e"
+  integrity sha512-OSiFfH89LrEMiWd4pLNqGz4CwJDtbs2ZVc+iGu2HrkRfPxId9F2anQj38IxWpmRfsUY0aBZYi1EFcd3mhtRMLQ==
   dependencies:
     find-cache-dir "^3.3.1"
     loader-utils "^2.0.0"
