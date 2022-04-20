@@ -157,11 +157,10 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
         }}>
             <GridWrapper>
                 {widgets.map((widget) => (
-                    <>
+                    <React.Fragment key={`widget-${widget.id.toString()}`}>
                         {isEditing ? (
                             <DragableWidget
                                 id={widget.id}
-                                key={`widget-${widget.id.toString()}`}
                                 onRemove={() => handleRemoveWidget(widget.id)}
                                 isEditMode={isEditing}
                                 type={widget.type}
@@ -170,14 +169,13 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
                         ) : (
                             <DisplayWidget
                                 id={widget.id}
-                                key={`widget-${widget.id.toString()}`}
                                 onRemove={() => handleRemoveWidget(widget.id)}
                                 isEditMode={isEditing}
                                 type={widget.type}
                                 config={widget.config}
                                 setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
                         )}
-                    </>
+                    </React.Fragment>
                 ))}
             </GridWrapper>
         </Box >

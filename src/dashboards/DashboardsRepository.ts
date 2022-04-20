@@ -1,4 +1,4 @@
-import { IObservableArray, isObservable, makeAutoObservable, observable, runInAction } from 'mobx';
+import { computed, IObservableArray, isObservable, makeAutoObservable, makeObservable, observable, onBecomeObserved, runInAction } from 'mobx';
 import { widgetType } from '../../components/widgets/Widget';
 import { IUser, SignalUserDto } from '../devices/Device';
 import EntityRepository from '../entity/EntityRepository';
@@ -150,34 +150,34 @@ const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';
 const DashboardsOrderLocalStorageKey = 'dashboards-order';
 const DashboardsCacheLocalStorageKey = 'signalco-cache-dashboards';
 
-export default class DashboardsRepository {
-    private static _dashboardsCache: IObservableArray<IDashboardModel> = observable.array([]);
-    private static isLoaded: boolean;
+class DashboardsRepository {
+    dashboards: IDashboardModel[] = [];
+    isLoaded: boolean = false;
+    isLoading: boolean = false;
+    isUpdateAvailable: boolean = false;
 
-    static isLoading: boolean;
-    private static _isUpdateAvailable: {state: boolean} = observable({state: false});
-    static get isUpdateAvailable() {
-        return DashboardsRepository._isUpdateAvailable.state;
-    };
-    private static set isUpdateAvailable(state: boolean) {
-        runInAction(()=> {
-            DashboardsRepository._isUpdateAvailable.state = state;
+
+    constructor() {
+        this._cacheDashboardsAsync = this._cacheDashboardsAsync.bind(this);
+        makeObservable(this, {
+            isUpdateAvailable: observable,
+            isLoading: observable,
+            dashboards: observable,
         });
-    }
-    static get dashboards() {
-        setTimeout(() => DashboardsRepository._cacheDashboardsAsync(), 0);
-        return DashboardsRepository._dashboardsCache;
-    };
 
-    static async getAsync(id: string | undefined) {
+        onBecomeObserved(this, 'dashboards', this._cacheDashboardsAsync);
+    }
+
+
+    async getAsync(id: string | undefined) {
         if (typeof id === 'undefined')
             return undefined;
 
-        await DashboardsRepository._cacheDashboardsAsync();
-        return DashboardsRepository._dashboardsCache.find(d => d.id === id);
+        await this._cacheDashboardsAsync();
+        return this.dashboards.find(d => d.id === id);
     }
 
-    static async favoriteSetAsync(id: string, newIsFavorite: boolean) {
+    async favoriteSetAsync(id: string, newIsFavorite: boolean) {
         const currentFavorites = UserSettingsProvider.value<string[]>(DashboardsFavoritesLocalStorageKey, []);
         const currentFavoriteIndex = currentFavorites.indexOf(id);
         const isCurrentlyFavorite = currentFavoriteIndex >= 0;
@@ -192,7 +192,7 @@ export default class DashboardsRepository {
         }
 
         // Mark favorite locally
-        const favoritedDashboard = DashboardsRepository.dashboards.find(d => d.id === id);
+        const favoritedDashboard = this.dashboards.find(d => d.id === id);
         if (favoritedDashboard) {
             runInAction(() => {
                 favoritedDashboard.isFavorite = newIsFavorite;
@@ -200,62 +200,62 @@ export default class DashboardsRepository {
         }
     }
 
-    static async dashboardsOrderSetAsync(ordered: string[]) {
+    async dashboardsOrderSetAsync(ordered: string[]) {
         UserSettingsProvider.set(DashboardsOrderLocalStorageKey, ordered);
     }
 
-    static async saveDashboardsAsync(dashboards: IDashboardSetModel[]) {
+    async saveDashboardsAsync(dashboards: IDashboardSetModel[]) {
         for (let i = 0; i < dashboards.length; i++) {
-            await DashboardsRepository._setRemoteDashboardAsync(dashboards[i]);
+            await this._setRemoteDashboardAsync(dashboards[i]);
         }
-        await DashboardsRepository._applyRemoteDashboardsAsync();
+        await this._applyRemoteDashboardsAsync();
     }
 
-    static async saveDashboardAsync(dashboard: IDashboardSetModel) {
-        const dashboardId = await DashboardsRepository._setRemoteDashboardAsync(dashboard);
-        await DashboardsRepository._applyRemoteDashboardsAsync();
+    async saveDashboardAsync(dashboard: IDashboardSetModel) {
+        const dashboardId = await this._setRemoteDashboardAsync(dashboard);
+        await this._applyRemoteDashboardsAsync();
         return dashboardId;
     }
 
-    static async deleteDashboardAsync(id: string) {
+    async deleteDashboardAsync(id: string) {
         await EntityRepository.deleteAsync(id, 3);
-        await DashboardsRepository._applyRemoteDashboardsAsync();
+        await this._applyRemoteDashboardsAsync();
     }
 
-    static async isUpdateAvailableAsync() {
-        await DashboardsRepository._checkUpdatesAvailableAsync();
-        return DashboardsRepository.isUpdateAvailable;
+    async isUpdateAvailableAsync() {
+        await this._checkUpdatesAvailableAsync();
+        return this.isUpdateAvailable;
     }
 
-    static async applyDashboardsUpdateAsync() {
-        await DashboardsRepository._applyRemoteDashboardsAsync();
+    async applyDashboardsUpdateAsync() {
+        await this._applyRemoteDashboardsAsync();
     }
 
-    private static _cacheLock = false;
+    private _cacheLock = false;
 
-    private static async _cacheDashboardsAsync() {
-        if (DashboardsRepository.isLoaded) {
+    private async _cacheDashboardsAsync() {
+        if (this.isLoaded) {
             return;
         }
 
         try {
-            if (!DashboardsRepository._cacheLock) {
-                DashboardsRepository._cacheLock = true;
+            if (!this._cacheLock) {
+                this._cacheLock = true;
 
                 console.debug('Loading dashboards...');
 
                 // Try to load from local storage
-                if (!DashboardsRepository.isLoading &&
+                if (!this.isLoading &&
                     typeof localStorage !== 'undefined' &&
                     LocalStorageService.getItem(DashboardsCacheLocalStorageKey) !== null) {
-                    DashboardsRepository.isLoading = true;
+                    this.isLoading = true;
 
                     // Load from local storage
                     try {
                         const localDashboards = LocalStorageService.getItemOrDefault<IDashboardModel[]>(DashboardsCacheLocalStorageKey, []);
-                        DashboardsRepository._mapAndApplyDashboards(localDashboards);
-                        DashboardsRepository.isLoading = false;
-                        DashboardsRepository.isLoaded = true;
+                        this._mapAndApplyDashboards(localDashboards);
+                        this.isLoading = false;
+                        this.isLoaded = true;
                     }
                     catch (err) {
                         console.error('Failed to load dashboards from local storage', err);
@@ -263,26 +263,26 @@ export default class DashboardsRepository {
                 }
 
                 // TODO: Invalidate cache after some period
-                if (DashboardsRepository.isLoading &&
-                    !DashboardsRepository.isLoaded) {
-                    await DashboardsRepository._applyRemoteDashboardsAsync();
+                if (this.isLoading &&
+                    !this.isLoaded) {
+                    await this._applyRemoteDashboardsAsync();
                 }
             } else {
                 // Wait to load
-                while (DashboardsRepository.isLoading) {
+                while (this.isLoading) {
                     await new Promise(r => setTimeout(r, 10));
                 }
             }
         }
         finally {
-            DashboardsRepository._cacheLock = false;
+            this._cacheLock = false;
         }
     }
 
-    private static async _checkUpdatesAvailableAsync() {
+    private async _checkUpdatesAvailableAsync() {
         console.debug('Checking for dashboard updates...');
 
-        const remoteDashboards = await DashboardsRepository._getRemoteDahboardsAsync();
+        const remoteDashboards = await this._getRemoteDahboardsAsync();
 
         const widgetEquals = (a: IWidget, b: IWidget) => {
             return a.order === b.order &&
@@ -296,7 +296,7 @@ export default class DashboardsRepository {
 
         // Check added or updated dashboards
         remoteDashboards.forEach(remoteDashboard => {
-            const localDashboard = DashboardsRepository._dashboardsCache.find(d => d.id == remoteDashboard.id);
+            const localDashboard = this.dashboards.find(d => d.id == remoteDashboard.id);
             const sharedEqual = localDashboard != null && sequenceEqual(orderBy(remoteDashboard.sharedWith, userOrder), orderBy(localDashboard.sharedWith, userOrder), userEquals);
             const widgetsEqual = localDashboard != null && sequenceEqual(remoteDashboard.widgets, localDashboard.widgets, widgetEquals);
             if (localDashboard == null ||
@@ -305,7 +305,7 @@ export default class DashboardsRepository {
                 !sharedEqual ||
                 !widgetsEqual ||
                 localDashboard.timeStamp < remoteDashboard.timeStamp) {
-                DashboardsRepository.isUpdateAvailable = true;
+                this.isUpdateAvailable = true;
 
                 // Log difference
                 const dashboardId = (localDashboard || remoteDashboard).id;
@@ -317,32 +317,32 @@ export default class DashboardsRepository {
         });
 
         // Check deleted dashboards
-        DashboardsRepository._dashboardsCache.forEach(localDashboard => {
+        this.dashboards.forEach(localDashboard => {
             const remoteDashboard = remoteDashboards.find(d => d.id === localDashboard.id);
             if (remoteDashboard == null) {
-                DashboardsRepository.isUpdateAvailable = true;
+                this.isUpdateAvailable = true;
                 console.debug('Dashboard update available. Dashboard doesn\'t exist on remote: ', localDashboard.id, localDashboard.name);
             }
         });
     }
 
-    private static async _applyRemoteDashboardsAsync() {
-        DashboardsRepository.isLoading = true;
+    private async _applyRemoteDashboardsAsync() {
+        this.isLoading = true;
 
         // Download cache
-        const newDashboards = await DashboardsRepository._getRemoteDahboardsAsync();
+        const newDashboards = await this._getRemoteDahboardsAsync();
         newDashboards.sort((a, b) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0));
-        DashboardsRepository.isUpdateAvailable = false;
-        DashboardsRepository._mapAndApplyDashboards(newDashboards);
-        DashboardsRepository.isLoading = false;
+        this.isUpdateAvailable = false;
+        this._mapAndApplyDashboards(newDashboards);
+        this.isLoading = false;
 
         // Persist dashboards locally
         if (typeof localStorage !== 'undefined') {
-            LocalStorageService.setItem(DashboardsCacheLocalStorageKey, DashboardsRepository._dashboardsCache);
+            LocalStorageService.setItem(DashboardsCacheLocalStorageKey, this.dashboards);
         }
     }
 
-    private static _mapDashboardModelToCache(d: IDashboardModel, di: number, existingMaxOrder: number | undefined) {
+    private _mapDashboardModelToCache(d: IDashboardModel, di: number, existingMaxOrder: number | undefined) {
         const favorites = UserSettingsProvider.value<string[]>(DashboardsFavoritesLocalStorageKey, []);
         const dashboardsOrder = UserSettingsProvider.value<string[]>(DashboardsOrderLocalStorageKey, [])
 
@@ -377,38 +377,44 @@ export default class DashboardsRepository {
         return isObservable(d) ? d : makeAutoObservable(d);
     }
 
-    private static async _mapAndApplyDashboards(updatedDashboards: IDashboardModel[]) {
+    private async _mapAndApplyDashboards(updatedDashboards: IDashboardModel[]) {
         runInAction(() => {
             const maxOrder = arrayMax(updatedDashboards, d => d.order);
 
-            const mappedUpdatedDashboards = updatedDashboards.map((d, di) => DashboardsRepository._mapDashboardModelToCache(d, di, maxOrder));
+            const mappedUpdatedDashboards = updatedDashboards.map((d, di) => this._mapDashboardModelToCache(d, di, maxOrder));
 
             // Add new dashboards
-            mappedUpdatedDashboards.filter(d => !DashboardsRepository._dashboardsCache.find(ed => ed.id === d.id)).forEach(d =>
-                DashboardsRepository._dashboardsCache.push(d));
+            mappedUpdatedDashboards.filter(d => !this.dashboards.find(ed => ed.id === d.id)).forEach(d =>
+                this.dashboards.push(d));
 
             // Remove non existing dashboards
-            DashboardsRepository._dashboardsCache.filter(cd => !mappedUpdatedDashboards.find(ud => ud.id === cd.id)).forEach(cd =>
-                DashboardsRepository._dashboardsCache.remove(cd));
+            this.dashboards.filter(cd => !mappedUpdatedDashboards.find(ud => ud.id === cd.id)).forEach(cd =>
+                this.dashboards.splice(this.dashboards.indexOf(cd), 1));
 
             // Remap existing values
             mappedUpdatedDashboards.forEach((ud: any) => {
-                const cachedDashboard: any = DashboardsRepository._dashboardsCache.find(cd => cd.id === ud.id);
+                const cachedDashboard: any = this.dashboards.find(cd => cd.id === ud.id);
                 if (!cachedDashboard) return;
 
                 Object.keys(ud).forEach(udk => cachedDashboard[udk] = ud[udk]);
-            })
+            });
 
-            //DashboardsRepository._dashboardsCache.replace(updatedDashboards.map((d, di) => DashboardsRepository._mapDashboardModelToCache(d, di, maxOrder)));
+            console.debug('Dashboards applied');
+
+            //this._dashboardsCache.replace(updatedDashboards.map((d, di) => this._mapDashboardModelToCache(d, di, maxOrder)));
         });
     }
 
-    private static async _setRemoteDashboardAsync(dashboard: IDashboardSetModel): Promise<string> {
+    private async _setRemoteDashboardAsync(dashboard: IDashboardSetModel): Promise<string> {
         const response = await HttpService.requestAsync('/dashboards/set', 'post', SignalDashboardSetDto.ToDto(dashboard));
         return response.id;
     }
 
-    private static async _getRemoteDahboardsAsync() {
+    private async _getRemoteDahboardsAsync() {
         return (await HttpService.getAsync<SignalDashboardDto[]>('/dashboards')).map(SignalDashboardDto.FromDto);
     }
 }
+
+const instance = new DashboardsRepository();
+
+export default instance;
