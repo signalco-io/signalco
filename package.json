@@ -96,7 +96,7 @@
         "@types/recharts": "1.8.23",
         "@types/suncalc": "^1.8.1",
         "@types/uuid": "8.3.4",
-        "babel-loader": "8.2.4",
+        "babel-loader": "8.2.5",
         "chalk": "4.1.2",
         "cross-env": "7.0.3",
         "eslint": "8.13.0",
