@@ -61,10 +61,7 @@ class RealtimeService {
 
             console.warn(`Failed to start SignalR hub connection. Reconnecting in ${delay}s`, err);
 
-            // TODO: Replace with page indicator
-            if (delay > 10) {
-                PageNotificationService.show(`Realtime connection to cloud lost. Reconnecting in ${delay}s...`, 'warning');
-            }
+            // TODO: Some kind of indicator we are offline
 
             setTimeout(() => {
                 this._hubStartWithRetryAsync(delay);
