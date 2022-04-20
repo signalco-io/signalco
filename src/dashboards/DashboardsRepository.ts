@@ -1,4 +1,4 @@
-import { computed, IObservableArray, isObservable, makeAutoObservable, makeObservable, observable, onBecomeObserved, runInAction } from 'mobx';
+import { action, isObservable, makeAutoObservable, makeObservable, observable, onBecomeObserved, runInAction } from 'mobx';
 import { widgetType } from '../../components/widgets/Widget';
 import { IUser, SignalUserDto } from '../devices/Device';
 import EntityRepository from '../entity/EntityRepository';
@@ -163,6 +163,7 @@ class DashboardsRepository {
             isUpdateAvailable: observable,
             isLoading: observable,
             dashboards: observable,
+            _mapAndApplyDashboards: action.bound
         });
 
         onBecomeObserved(this, 'dashboards', this._cacheDashboardsAsync);
@@ -377,8 +378,7 @@ class DashboardsRepository {
         return isObservable(d) ? d : makeAutoObservable(d);
     }
 
-    private async _mapAndApplyDashboards(updatedDashboards: IDashboardModel[]) {
-        runInAction(() => {
+    async _mapAndApplyDashboards(updatedDashboards: IDashboardModel[]) {
             const maxOrder = arrayMax(updatedDashboards, d => d.order);
 
             const mappedUpdatedDashboards = updatedDashboards.map((d, di) => this._mapDashboardModelToCache(d, di, maxOrder));
@@ -402,7 +402,6 @@ class DashboardsRepository {
             console.debug('Dashboards applied');
 
             //this._dashboardsCache.replace(updatedDashboards.map((d, di) => this._mapDashboardModelToCache(d, di, maxOrder)));
-        });
     }
 
     private async _setRemoteDashboardAsync(dashboard: IDashboardSetModel): Promise<string> {
