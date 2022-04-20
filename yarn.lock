@@ -1445,10 +1445,10 @@
   resolved "https://registry.yarnpkg.com/@enterwell/react-form-builder/-/react-form-builder-0.1.3.tgz#90517aa249cc4ee59521cd9b15d86f125237370c"
   integrity sha512-w2mnaourrf0SC/wcXKGvFiOPdwkr1LXWggHRdtpa5P4Lw+294lz6e9ceP4PwuhxCsUTrAsVUeGoAKxtAhcndkQ==
 
-"@enterwell/react-form-validation@^1.1.12":
-  version "1.1.12"
-  resolved "https://registry.yarnpkg.com/@enterwell/react-form-validation/-/react-form-validation-1.1.12.tgz#437d8d3f779e6a61172e3d3f8f1d90ac02cbb313"
-  integrity sha512-BRVOLUp4R4B5xSLHbYCrznD7XD3/ug3lLcilPKeUc9X4m7kPOI4P75v/Y62KVQZD93R766VZ9EhO1GEdlTRt+g==
+"@enterwell/react-form-validation@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@enterwell/react-form-validation/-/react-form-validation-1.2.3.tgz#f949b1f80c621430174898c2a5988ffea935afc5"
+  integrity sha512-Ujo6+hN26WlM6CPg/aiTHAkr+NHgV/UWdaZkOqAliP47+qrXM9y4LccL+tqfWl5OqgTNLTDxL5KaQXzenLtSQw==
 
 "@eslint/eslintrc@^1.2.1":
   version "1.2.1"
@@ -6476,10 +6476,10 @@ devtools-protocol@0.0.869402:
   resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.869402.tgz#03ade701761742e43ae4de5dc188bcd80f156d8d"
   integrity sha512-VvlVYY+VDJe639yHs5PHISzdWTLL3Aw8rO4cvUtwvoxFd6FHbE4OpHHcde52M6096uYYazAmd4l0o5VuFRO2WA==
 
-devtools-protocol@0.0.969999:
-  version "0.0.969999"
-  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.969999.tgz#3d6be0a126b3607bb399ae2719b471dda71f3478"
-  integrity sha512-6GfzuDWU0OFAuOvBokXpXPLxjOJ5DZ157Ue3sGQQM3LgAamb8m0R0ruSfN0DDu+XG5XJgT50i6zZ/0o8RglreQ==
+devtools-protocol@0.0.981744:
+  version "0.0.981744"
+  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.981744.tgz#9960da0370284577d46c28979a0b32651022bacf"
+  integrity sha512-0cuGS8+jhR67Fy7qG3i3Pc7Aw494sb9yG9QgpG97SFVWwolgYjlhJg7n+UaHxOQT30d1TYu/EYe9k01ivLErIg==
 
 diff-sequences@^27.5.1:
   version "27.5.1"
@@ -11625,14 +11625,14 @@ puppeteer-core@^9.0.0:
     unbzip2-stream "^1.3.3"
     ws "^7.2.3"
 
-puppeteer@13.5.2:
-  version "13.5.2"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-13.5.2.tgz#73ae84969cbf514aeee871a05ec4549d67f6abee"
-  integrity sha512-DJAyXODBikZ3xPs8C35CtExEw78LZR9RyelGDAs0tX1dERv3OfW7qpQ9VPBgsfz+hG2HiMTO/Tyf7BuMVWsrxg==
+puppeteer@13.6.0:
+  version "13.6.0"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-13.6.0.tgz#3583fc60c1af59af838d65a09680f2d07f3608f9"
+  integrity sha512-EJXhTyY5bXNPLFXPGcY9JaF6EKJIX8ll8cGG3WUK+553Jx96oDf1cB+lkFOro9p0X16tY+9xx7zYWl+vnWgW2g==
   dependencies:
     cross-fetch "3.1.5"
     debug "4.3.4"
-    devtools-protocol "0.0.969999"
+    devtools-protocol "0.0.981744"
     extract-zip "2.0.1"
     https-proxy-agent "5.0.0"
     pkg-dir "4.2.0"
@@ -12571,10 +12571,10 @@ sass-loader@12.6.0, sass-loader@^12.4.0:
     klona "^2.0.4"
     neo-async "^2.6.2"
 
-sass@1.50.0:
-  version "1.50.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.50.0.tgz#3e407e2ebc53b12f1e35ce45efb226ea6063c7c8"
-  integrity sha512-cLsD6MEZ5URXHStxApajEh7gW189kkjn4Rc8DQweMyF+o5HF5nfEz8QYLMlPsTOD88DknatTmBWkOcw5/LnJLQ==
+sass@1.50.1:
+  version "1.50.1"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.50.1.tgz#e9b078a1748863013c4712d2466ce8ca4e4ed292"
+  integrity sha512-noTnY41KnlW2A9P8sdwESpDmo+KBNkukI1i8+hOK3footBUcohNHtdOJbckp46XO95nuvcHDDZ+4tmOnpK3hjw==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
