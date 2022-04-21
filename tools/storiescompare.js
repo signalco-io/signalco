@@ -40,11 +40,15 @@ function getFilesRecursively(directory) {
  * @param {Function} taskToRun Function to invoke.
  * @returns Value that the function returns
  */
-function logProcess(message, taskToRun) {
+function logProcess(message, taskToRun, silent) {
     try {
-        stdout.write(message);
+        if (!silent) {
+            stdout.write(message);
+        }
         const valueToReturn = taskToRun();
-        stdout.write(chalk.green(' DONE ✔') + '\n');
+        if (!silent) {
+            stdout.write(chalk.green(' DONE ✔') + '\n');
+        }
 
         return valueToReturn;
     } catch (error) {
@@ -57,10 +61,10 @@ function logProcess(message, taskToRun) {
 let numberOfChanges = false;
 try {
     // Get all the approved files.
-    const approvedFiles = logProcess('Fetching approved files...', () => getFilesRecursively(APPROVED_STORYCAPS));
+    const approvedFiles = logProcess('Fetching approved files...', () => getFilesRecursively(APPROVED_STORYCAPS), true);
 
     // Get all the pending files.
-    const pendingFiles = logProcess('Fetching pending files...', () => getFilesRecursively(PENDING_STORYCAPS));
+    const pendingFiles = logProcess('Fetching pending files...', () => getFilesRecursively(PENDING_STORYCAPS), true);
 
     // Iterate all the approved files.
     approvedFiles.forEach((approvedFile) => {
@@ -83,7 +87,7 @@ try {
         // move it to the approved folder.
         if (!approvedFiles.includes(possibleNew)) {
             mkdirSync(dirname(possibleNew), { recursive: true });
-            logProcess(`\t[${chalk.green('+')}] ${possibleNewShortPath}`, () => renameSync(pendingFile, possibleNew));
+            logProcess(`[${chalk.green('+')}] ${possibleNewShortPath}`, () => renameSync(pendingFile, possibleNew));
             numberOfChanges++;
         } else {
             const pendingFileBytes = readFileSync(pendingFile);
@@ -91,10 +95,8 @@ try {
 
             // If the files are not the same, overwrite it.
             if (!pendingFileBytes.equals(approvedFileBytes)) {
-                logProcess(`\t[${chalk.yellow('~')}] ${possibleNewShortPath}`, () => renameSync(pendingFile, possibleNew));
+                logProcess(`[${chalk.yellow('~')}] ${possibleNewShortPath}`, () => renameSync(pendingFile, possibleNew));
                 numberOfChanges++;
-            } else {
-                console.log(`\t[${chalk.white('=')}] ${possibleNewShortPath}`);
             }
         }
     });
