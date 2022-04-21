@@ -14,10 +14,12 @@ import { useLoadAndError } from '../../src/hooks/useLoadingAndError';
 import Image from 'next/image';
 import useHashParam from '../../src/hooks/useHashParam';
 import useDashboardsUpdateChecker from './useDashboardsUpdateChecker';
+import useLocale from '../../src/hooks/useLocale';
 
 const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 
 const Dashboards = () => {
+    const { t } = useLocale('App', 'Dashboards');
     const [selectedId, setDashboardIdHash] = useHashParam('dashboard');
     const retrieveDashbaord = useCallback(() => {
         return DashboardsRepository.getAsync(selectedId);
@@ -46,7 +48,7 @@ const Dashboards = () => {
             await DashboardsRepository.saveDashboardsAsync(updatedDashboards);
         } catch (err) {
             console.error('Failed to save dashboards', err);
-            PageNotificationService.show('There was an error while saving dashboards. Please try again or refresh the page.', 'error');
+            PageNotificationService.show(t('SaveFailedNotification'), 'error');
         } finally {
             setIsEditing(false);
             setIsSavingEdit(false);
@@ -86,8 +88,8 @@ const Dashboards = () => {
                     {isEditing && (
                         <Box sx={{ px: 2, width: { md: 'auto', xs: '100%' } }}>
                             <Stack direction="row" spacing={1}>
-                                <Button variant="outlined" size="large" onClick={() => setShowWidgetStore(true)} sx={{ width: '250px' }}>Add widget...</Button>
-                                <LoadingButton loading={isSavingEdit} variant="outlined" size="large" onClick={handleEditDone} fullWidth>Done editing</LoadingButton>
+                                <Button variant="outlined" size="large" onClick={() => setShowWidgetStore(true)} sx={{ width: '250px' }}>{t('AddWidget')}</Button>
+                                <LoadingButton loading={isSavingEdit} variant="outlined" size="large" onClick={handleEditDone} fullWidth>{t('Save')}</LoadingButton>
                             </Stack>
                         </Box>
                     )}
@@ -105,10 +107,10 @@ const Dashboards = () => {
                                     <Stack alignItems="center" justifyContent="center">
                                         <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
                                             <Stack maxWidth={280} spacing={4} alignItems="center" justifyContent="center">
-                                                <Image priority width={280} height={213} alt="No Dashboards placeholder" src="/assets/placeholders/placeholder-no-dashboards.svg" />
-                                                <Typography variant="h1">No Dashboards</Typography>
-                                                <Typography textAlign="center" color="textSecondary">You don’t have any dashboards. Create a dashboard to get started.</Typography>
-                                                <Button variant="contained" onClick={handleNewDashboard}>New Dashboard</Button>
+                                                <Image priority width={280} height={213} alt={t('NoDashboardsPlaceholder')} src="/assets/placeholders/placeholder-no-dashboards.svg" />
+                                                <Typography variant="h1">{t('NoDashboardsPlaceholder')}</Typography>
+                                                <Typography textAlign="center" color="textSecondary">{t('NoDashboardsHelpText')}</Typography>
+                                                <Button variant="contained" onClick={handleNewDashboard}>{t('NewDahsboard')}</Button>
                                             </Stack>
                                         </Stack>
                                     </Stack>
@@ -123,7 +125,7 @@ const Dashboards = () => {
                     onClose={() => setIsDashboardSettingsOpen(false)} />
             )}
             {showWidgetStore && (
-                <ConfigurationDialog isOpen={showWidgetStore} onClose={() => setShowWidgetStore(false)} title="Add widget" maxWidth="lg" >
+                <ConfigurationDialog isOpen={showWidgetStore} onClose={() => setShowWidgetStore(false)} title={t('AddWidget')} maxWidth="lg" >
                     <WidgetStoreDynamic onAddWidget={handleAddWidget} />
                 </ConfigurationDialog>
             )}
