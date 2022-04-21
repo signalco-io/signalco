@@ -1,1 +1,1 @@
-export default const useIsServer = typeof window === 'undefined';
+export default function useIsServer() { return typeof window === 'undefined'; }

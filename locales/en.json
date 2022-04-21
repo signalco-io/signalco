@@ -124,6 +124,27 @@
             "Location": "Location"
         },
         "Dashboards": {
+            "SaveFailedNotification": "There was an error while saving dashboards. Please try again or refresh the page.",
+            "AddWidget": "Add widget...",
+            "Save": "Save",
+            "NoDashboardsPlaceholder": "No Dashboards",
+            "NoDashboardsHelpText": "You don't have any dashboards. Create a dashboard to get started.",
+            "NewDashboard": "New Dashboard",
+            "Dashboard": "Dashboard",
+            "ToggleFullscreen": "Toggle fullscreen",
+            "Settings": "Settings",
+            "EditWidgets": "Edit widgets...",
+            "NoWidgets": "No Widgets",
+            "NoWidgetsHelpTextFirstLine": "Dashboard is a bit empty.",
+            "NoWidgetsHelpTextSecondLine": "Start by adding a widget from widget store.",
+            "DashboardSettings": "Dashboard settings",
+            "Cancel": "Cancel",
+            "SaveChanges": "Save changes",
+            "Advanced": "Advanced",
+            "DeleteButtonLabel": "Delete...",
+            "DeleteTitle": "Delete dashboard",
+            "ConfirmDialogExpectedText": "confirm",
+            "DashboardSettingName": "Name",
             "UpdateChecker": {
                 "UpdateApplied": "Dashboard update applied.",
                 "UpdateError": "New version of dashboard is available. Refresh to see the changes."

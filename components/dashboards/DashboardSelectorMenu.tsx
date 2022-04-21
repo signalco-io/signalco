@@ -12,6 +12,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { runInAction } from 'mobx';
+import useLocale from '../../src/hooks/useLocale';
 
 interface IDashboardSelectorMenuProps {
     selectedId: string | undefined,
@@ -64,6 +65,7 @@ const DashboardSortableItem = observer((props: IDashboardSortableItemProps) => {
 
 function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const { selectedId, popupState, onSelection, onEditWidgets, onSettings } = props;
+    const { t } = useLocale('App', 'Dashboards');
     const [_, setDashboardIdHash] = useHashParam('dashboard');
     const [isFullScreen, setFullScreenHash] = useHashParam('fullscreen');
 
@@ -80,14 +82,13 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
 
     const handleNewDashboard = handleAndClose(async () => {
         const newDashboardId = await DashboardsRepository.saveDashboardAsync({
-            name: 'New dashboard'
+            name: t('NewDashboard')
         });
         setDashboardIdHash(newDashboardId);
     });
 
     const handleToggleFavorite = async (id: string) => {
         const dashboard = dashboards.find(d => d.id === id);
-        console.log('toggling favorite', dashboard, dashboard?.isFavorite)
         if (dashboard) {
             await DashboardsRepository.favoriteSetAsync(dashboard.id, !dashboard.isFavorite);
         }
@@ -149,15 +150,15 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
                     </SortableContext>
                 </DndContext>
             </Stack>
-            <Button onClick={handleNewDashboard} size="large" startIcon={<AddSharp />} sx={{ py: 2 }}>New dashboard</Button>
+            <Button onClick={handleNewDashboard} size="large" startIcon={<AddSharp />} sx={{ py: 2 }}>{t('NewDashboard')}</Button>
             <Divider />
             <Stack direction="row" alignItems="center" sx={{ p: 2 }}>
-                <Typography variant="subtitle1" color="textSecondary" sx={{ flexGrow: 1 }}>Dashboard</Typography>
+                <Typography variant="subtitle1" color="textSecondary" sx={{ flexGrow: 1 }}>{t('Dashboard')}</Typography>
                 <ShareEntityChip entity={dashboards.find(d => d.id === selectedId)} entityType={3} />
             </Stack>
-            <Button size="large" onClick={handleAndClose(onFullscreen)}>Toggle fullscreen</Button>
-            <Button size="large" onClick={handleAndClose(onSettings)}>Settings...</Button>
-            <Button size="large" onClick={handleAndClose(onEditWidgets)}>Edit widgets...</Button>
+            <Button size="large" onClick={handleAndClose(onFullscreen)}>{t('ToggleFullscreen')}</Button>
+            <Button size="large" onClick={handleAndClose(onSettings)}>{t('Settings')}</Button>
+            <Button size="large" onClick={handleAndClose(onEditWidgets)}>{t('EditWidgets')}</Button>
         </Stack>
     );
 }
