@@ -1,5 +1,6 @@
 import { Breakpoint, Button, Stack, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import useLocale from '../../../src/hooks/useLocale';
 import ConfigurationDialog from './ConfigurationDialog';
 
 export interface IConfirmDeleteDialogProps {
@@ -13,6 +14,7 @@ export interface IConfirmDeleteDialogProps {
 
 const ConfirmDeleteDialog = (props: IConfirmDeleteDialogProps) => {
     const { isOpen, title, expectedConfirmText, onClose, onConfirm, maxWidth } = props;
+    const { t } = useLocale('App', 'Dialogs');
     const [confirmText, setConfirmText] = useState('');
 
     return (
@@ -22,10 +24,10 @@ const ConfirmDeleteDialog = (props: IConfirmDeleteDialogProps) => {
             onClose={onClose}
             maxWidth={maxWidth}>
             <Stack spacing={4}>
-                <Typography>Deleted item can not be restored. Please confirm you are deleting correct item by entering &quot;<code>{expectedConfirmText}</code>&quot; bellow.</Typography>
+                <Typography>{t('ConfirmDeleteBody', { code: expectedConfirmText })}</Typography>
                 <TextField label="Confirm" onChange={(e) => setConfirmText(e.target.value)} />
                 <Button variant="contained" color="error" disabled={confirmText !== expectedConfirmText} onClick={onConfirm}>
-                    Delete &quot;{expectedConfirmText}&quot;
+                    {`${t('ConfirmDeleteButton')}&quot;{expectedConfirmText}&quot;`}
                 </Button>
             </Stack>
         </ConfigurationDialog>
