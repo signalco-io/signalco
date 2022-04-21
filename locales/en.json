@@ -75,7 +75,13 @@
             "Profile": "Profile",
             "LocationAndTime": "Time and location",
             "Developer": "Developer",
-            "ApiEndpoint": "API Endpoint"
+            "ApiEndpoint": "API Endpoint",
+            "Connected": "Connected",
+            "TimeFormat12Hour": "12-hour",
+            "TimeFormat24Hour": "24-hour",
+            "TimeFormat": "Time format",
+            "TimeZone": "Time zone",
+            "Location": "Location"
         },
         "Dashboards": {
             "UpdateChecker": {

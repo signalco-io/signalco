@@ -7,6 +7,7 @@ import { FormBuilderField } from '@enterwell/react-form-builder';
 import { Stack, IconButton, Box, Accordion, AccordionSummary, AccordionDetails, Typography, Skeleton } from '@mui/material';
 import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { FieldConfig } from '@enterwell/react-form-builder/lib/esm/index.types';
 
 const mapBoxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -21,8 +22,8 @@ export interface LocationMapPickerProps {
     value?: [number, number],
     error?: boolean,
     helperText?: string,
-    onKeyPress?: React.KeyboardEventHandler<HTMLDivElement>,
-    onChange?: (value: [number, number]) => void
+    onKeyPress: React.KeyboardEventHandler<HTMLDivElement>,
+    onChange: (value: [number, number], config: FieldConfig) => void
 }
 
 async function latLngToAddress(latLng?: [number, number]) {
@@ -47,12 +48,12 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
 
     const handleMove = ({ center, zoom }: { center: [number, number], zoom: number }) => {
         setZoom(zoom);
-        setLatLng && setLatLng([center[0], center[1]]);
+        setLatLng([center[0], center[1]], { receiveEvent: false });
     }
 
     const handleGetLocation = () => {
         navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => {
-            setLatLng && setLatLng([position.coords.latitude, position.coords.longitude]);
+            setLatLng([position.coords.latitude, position.coords.longitude], { receiveEvent: false });
             setZoom(15);
         }, () => {
             PageNotificationService.show('Failed to retrieve your location. Make sure access to location is not blocked.', 'warning')
@@ -103,7 +104,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
                             attribution={false}
                             onBoundsChanged={handleMove}
                         >
-                            <Draggable offset={[0, 50]} anchor={latLng} onDragEnd={setLatLng}>
+                            <Draggable offset={[0, 50]} anchor={latLng} onDragEnd={(point) => setLatLng(point, { receiveEvent: false })}>
                                 <Marker
                                     width={50}
                                     anchor={latLng}
