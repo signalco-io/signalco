@@ -1,4 +1,4 @@
-export type ChildrenProps = { children?: React.ReactElement | undefined };
+export type ChildrenProps = { children?: React.ReactNode | undefined };
 
 export type ObjectDictAny = { [key: string]: any | undefined };
 
