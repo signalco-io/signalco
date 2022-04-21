@@ -18,9 +18,13 @@
         "Stations": {
             "Stations": "Stations",
             "Name": "Name",
+            "name": "Name",
             "Version": "Version",
+            "version": "Version",
             "LastActivity": "Last Activity",
+            "lastActivity": "Last Activity",
             "RegisteredDate": "RegisteredDate",
+            "registeredDate": "RegisteredDate",
             "StationCommandError": "Failed to execute station command.",
             "UpdateStationUpToDate": "Up to date",
             "UpdateStationVersion": "Update to {version}",
@@ -30,7 +34,22 @@
             "Stopped": "Stopped",
             "Never": "Never",
             "Unknown": "Unknown",
-            "Information": "Information"
+            "Information": "Information",
+            "StationOperations": "Station operations",
+            "SystemOperations": "System operations",
+            "Channels": "Channels",
+            "RestartStation": "Restart station",
+            "UpdateSystem": "Update system",
+            "RestartSystem": "Restart system",
+            "ShutdownSystem": "Shutdown system",
+            "BeginDiscovery": "Begin discovery",
+            "DeleteStation": "Delete station",
+            "DeleteStationLabel": "Delete...",
+            "Advanced": "Advanced",
+            "ConfirmDialogExpectedText": "confirm",
+            "Logs": "Logs",
+            "LogViewer": "Log viewer",
+            "LogView": "View"
         },
         "Settings": {
             "General": "General",
@@ -67,13 +86,19 @@
         "Placeholders": {
             "NoData": "No data to show",
             "NoItems": "No items",
-            "NoDashboardsAvailable": "No dashboards available"
+            "NoDashboardsAvailable": "No dashboards available",
+            "Loading": "Loading...",
+            "Never": "Never"
         },
         "Widgets": {
             "WidgetChecklist": {
                 "Checklist": "Checklist",
                 "AddItem": "Add an item"
             }
+        },
+        "Dialogs": {
+            "ConfirmDeleteBody": "Deleted item can not be restored. Please confirm you are deleting correct item by entering \"{code}\" bellow.",
+            "ConfirmDeleteButton": "Delete"
         }
     }
 }

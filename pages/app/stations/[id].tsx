@@ -1,13 +1,11 @@
-import { Alert, Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, LinearProgress, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useCallback, useState } from 'react';
 import ReactTimeago from 'react-timeago';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import { observer } from 'mobx-react-lite';
 import StationsRepository, { IBlobInfoModel } from '../../../src/stations/StationsRepository';
-import UploadIcon from '@mui/icons-material/Upload';
-import CheckIcon from '@mui/icons-material/Check';
-import compareVersions from 'compare-versions';
+
 import AutoTable from '../../../components/shared/table/AutoTable';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -16,8 +14,11 @@ import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDelete
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import useLocale, { localizer } from '../../../src/hooks/useLocale';
 import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
+import LoadableText from '../../../components/shared/Loadable/LoadableText';
+import Loadable from '../../../components/shared/Loadable/Loadable';
+import StationCheckUpdate from '../../../components/station/StationCheckUpdate';
 
-const stationCommandAsync = async (stationId: string | string[] | undefined, command: (id: string) => Promise<void>, commandDescription: string) => {
+export const stationCommandAsync = async (stationId: string | string[] | undefined, command: (id: string) => Promise<void>, commandDescription: string) => {
     try {
         if (stationId == null ||
             typeof stationId !== 'string')
@@ -28,16 +29,6 @@ const stationCommandAsync = async (stationId: string | string[] | undefined, com
     catch (err) {
         console.error('Station command execution error', err);
         PageNotificationService.show(localizer('App', 'Stations')('StationCommandError'), 'error');
-    }
-}
-
-async function loadLatestAvailableVersion() {
-    try {
-        return await (await fetch('https://api.github.com/repos/signalco-io/station/releases/latest')).json();
-    }
-    catch (err) {
-        console.warn('Failed to retrieve latest available version', err);
-        throw err;
     }
 }
 
@@ -52,21 +43,15 @@ const StationDetails = () => {
     const router = useRouter();
 
     const { t } = useLocale('App', 'Stations');
+    const { t: tPlaceholders } = useLocale('App', 'Placeholders');
 
     // Load station
     const { id } = router.query;
     const loadStationCallback = useCallback(() => loadStation(id?.toString()), [id]);
     const station = useLoadAndError(loadStationCallback);
 
-    // Load latest available version
-    const latestAvailableVersion = useLoadAndError(loadLatestAvailableVersion);
-    const canUpdate = (!latestAvailableVersion.isLoading && !latestAvailableVersion.error && station.item?.version)
-        ? compareVersions(latestAvailableVersion.item, station.item?.version)
-        : false;
-
     // Station actions
     const handleUpdateSystem = () => stationCommandAsync(id, StationsRepository.updateSystemAsync, 'update system');
-    const handleUpdate = () => stationCommandAsync(id, StationsRepository.updateStationAsync, 'update station');
     const handleRestartSystem = () => stationCommandAsync(id, StationsRepository.restartSystemAsync, 'restart system');
     const handleShutdownSystem = () => stationCommandAsync(id, StationsRepository.shutdownSystemAsync, 'shutdown system');
     const handleRestartStation = () => stationCommandAsync(id, StationsRepository.restartStationAsync, 'restart station');
@@ -88,7 +73,7 @@ const StationDetails = () => {
         );
     }, [station, t]);
     const workerServicesTableLoadItems = useCallback(() => Promise.resolve(station.item?.availableWorkerServices || []), [station])
-    const workerServicesTable = useAutoTable(workerServicesTableLoadItems, workerServicesTableTransformItems);
+    const workerServicesTable = useAutoTable(workerServicesTableLoadItems, workerServicesTableTransformItems, t);
 
     const [logContent, setLogContent] = useState('');
     const [loadingLog, setLoadingLog] = useState<string | undefined>(undefined);
@@ -99,7 +84,7 @@ const StationDetails = () => {
             id: i.name,
             name: nameMatch ? nameMatch[1] : i.name,
             created: <ReactTimeago date={i.createdTimeStamp} />,
-            modified: i.modifiedTimeStamp ? <ReactTimeago date={i.modifiedTimeStamp} /> : 'Never',
+            modified: i.modifiedTimeStamp ? <ReactTimeago date={i.modifiedTimeStamp} /> : tPlaceholders('Never'),
             size: i.size,
             actions: (
                 <LoadingButton disabled={!!loadingLog && loadingLog !== i.name} loading={loadingLog === i.name} onClick={async () => {
@@ -117,12 +102,12 @@ const StationDetails = () => {
                             setLoadingLog(undefined);
                         }
                     }
-                }}>View</LoadingButton>
+                }}>{t('LogView')}</LoadingButton>
             )
         });
-    }, [station, loadingLog]);
+    }, [loadingLog, station.item, t, tPlaceholders]);
     const logsLoadItems = useCallback(() => Promise.resolve(station.item ? StationsRepository.getLogsAsync(station.item.id) : []), [station]);
-    const logsTable = useAutoTable(logsLoadItems, logsAutoTableItemTransform);
+    const logsTable = useAutoTable(logsLoadItems, logsAutoTableItemTransform, t);
 
     const handleDelete = async () => {
         if (!station.item) return;
@@ -130,6 +115,8 @@ const StationDetails = () => {
         await StationsRepository.deleteAsync(station.item.id);
         router.push('/app/stations');
     };
+
+    console.debug('Page Station Details');
 
     return (
         <Box sx={{ px: { sm: 2 }, py: 2 }}>
@@ -150,7 +137,7 @@ const StationDetails = () => {
                                         </Stack>
                                     </Grid>
                                     <Grid item xs={4} sx={{ textAlign: 'end' }}>
-                                        <Button startIcon={canUpdate ? <UploadIcon /> : <CheckIcon />} variant="outlined" disabled={!canUpdate} onClick={handleUpdate}>{canUpdate ? t('UpdateStationVersion', { version: latestAvailableVersion.item }) : t('UpdateStationUpToDate')}</Button>
+                                        <StationCheckUpdate stationId={id} stationVersion={station.item?.version} />
                                     </Grid>
                                     <Grid item xs={4}><span>{t('LastActivity')}</span></Grid>
                                     <Grid item xs={8}>
@@ -161,39 +148,40 @@ const StationDetails = () => {
                                     </Grid>
                                     <Grid item xs={4}><span>{t('RegisteredDate')}</span></Grid>
                                     <Grid item xs={8}>
-                                        {station.isLoading && <LinearProgress />}
-                                        {station.error && <Alert color="error">Failed to load Station information: {station.error}</Alert>}
-                                        {station.item?.registeredTimeStamp &&
-                                            <ReactTimeago date={station.item.registeredTimeStamp} />
-                                        }
+                                        <LoadableText isLoading={station.isLoading} error={station.error}>
+                                            {station.item?.registeredTimeStamp
+                                                ? <ReactTimeago date={station.item.registeredTimeStamp} />
+                                                : <span>{t('Never')}</span>
+                                            }
+                                        </LoadableText>
                                     </Grid>
-                                    <Grid item xs={4}><span>Station operations</span></Grid>
+                                    <Grid item xs={4}><span>{t('StationOperations')}</span></Grid>
                                     <Grid item xs={8}>
                                         <Stack direction="row" alignItems="center" spacing={1}>
-                                            <Button variant="outlined" onClick={handleRestartStation}>Restart station</Button>
+                                            <Button variant="outlined" onClick={handleRestartStation}>{t('RestartStation')}</Button>
                                         </Stack>
                                     </Grid>
-                                    <Grid item xs={4}><span>System operations</span></Grid>
+                                    <Grid item xs={4}><span>{t('SystemOperations')}</span></Grid>
                                     <Grid item xs={8}>
                                         <Stack direction="row" alignItems="center" spacing={1}>
-                                            <Button variant="outlined" onClick={handleUpdateSystem}>Update system</Button>
-                                            <Button variant="outlined" onClick={handleRestartSystem}>Restart system</Button>
-                                            <Button variant="outlined" onClick={handleShutdownSystem}>Shutdown system</Button>
+                                            <Button variant="outlined" onClick={handleUpdateSystem}>{t('UpdateSystem')}</Button>
+                                            <Button variant="outlined" onClick={handleRestartSystem}>{t('RestartSystem')}</Button>
+                                            <Button variant="outlined" onClick={handleShutdownSystem}>{t('ShutdownSystem')}</Button>
                                         </Stack>
                                     </Grid>
-                                    <Grid item xs={4}><span>Channels</span></Grid>
+                                    <Grid item xs={4}><span>{t('Channels')}</span></Grid>
                                     <Grid item xs={8}>
                                         <Stack direction="row" alignItems="center" spacing={1}>
-                                            <Button variant="outlined" onClick={handleBeginDiscovery}>Begin discovery</Button>
+                                            <Button variant="outlined" onClick={handleBeginDiscovery}>{t('BeginDiscovery')}</Button>
                                         </Stack>
                                     </Grid>
-                                    <Grid item xs={4}><span>Advanced</span></Grid>
+                                    <Grid item xs={4}><span>{t('Advanced')}</span></Grid>
                                     <Grid item xs={8}>
                                         <Stack direction="row" alignItems="center" spacing={1}>
                                             <ConfirmDeleteButton
-                                                title="Delete station"
-                                                buttonLabel="Delete..."
-                                                expectedConfirmText={station.item?.id || 'confirm'}
+                                                title={t('DeleteStation')}
+                                                buttonLabel={t('DeleteStationLabel')}
+                                                expectedConfirmText={station.item?.id || t('ConfirmDialogExpectedText')}
                                                 onConfirm={handleDelete} />
                                         </Stack>
                                     </Grid>
@@ -203,28 +191,28 @@ const StationDetails = () => {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Card>
-                            <CardHeader title="Channels" />
+                            <CardHeader title={t('Channels')} />
                             <CardMedia>
-                                {station.isLoading ? 'Loading...' : (
+                                <Loadable isLoading={station.isLoading} error={station.error} placeholder="linear">
                                     <AutoTable {...workerServicesTable} />
-                                )}
+                                </Loadable>
                             </CardMedia>
                         </Card>
                     </Grid>
                     <Grid item xs={12} sm={12} md={8} lg={6}>
                         <Card>
-                            <CardHeader title="Logs" />
+                            <CardHeader title={t('Logs')} />
                             <CardMedia>
-                                {station.isLoading ? 'Loading...' : (
+                                <Loadable isLoading={station.isLoading} error={station.error} placeholder="linear">
                                     <AutoTable {...logsTable} />
-                                )}
+                                </Loadable>
                             </CardMedia>
                         </Card>
                     </Grid>
                     {logContent && (
                         <Grid item xs={12}>
                             <Card>
-                                <CardHeader title="Log viewer" />
+                                <CardHeader title={t('LogViewer')} />
                                 <CardMedia>
                                     <LogViewer text={logContent} height={500} />
                                 </CardMedia>

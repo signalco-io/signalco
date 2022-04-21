@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import en from '../../locales/en.json';
 import hr from '../../locales/hr.json';
 import UserSettingsProvider from '../services/UserSettingsProvider';
@@ -29,7 +30,6 @@ function formatString(text: string, data?: object) {
         if (innerArgs[5]) return '{';
         if (innerArgs[6]) return '}';
         const path = innerArgs[2];
-        console.log(resolvePathDot(data as ObjectDictAny, path))
         return resolvePathDot(data as ObjectDictAny, path)?.toString() ?? `{${path}}`;
     });
 }
@@ -45,5 +45,7 @@ export function localizer(...namespace: string[]): LocalizeFunc {
 }
 
 export default function useLocale(...namespace: string[]): {t: LocalizeFunc} {
-    return { t: localizer(...namespace) };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const t = useMemo(() => localizer(...namespace), [...namespace]);
+    return { t: t };
 }
