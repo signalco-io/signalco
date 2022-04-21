@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Box, ButtonBase, Grid, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { Avatar, Box, ButtonBase, Grid, NoSsr, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import { IDeviceModel } from '../../../src/devices/Device';
 import ReactTimeago from 'react-timeago';
@@ -24,6 +24,8 @@ import useUserSetting from '../../../src/hooks/useUserSetting';
 import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import useLocale from '../../../src/hooks/useLocale';
+import Loadable from '../../../components/shared/Loadable/Loadable';
 
 const EntityIcon = (entity: IDeviceModel) => {
     let Icon = DevicesOtherIcon;
@@ -109,37 +111,43 @@ function deviceModelToTableItem(entity: IDeviceModel): IAutoTableItem {
 
 const Entities = () => {
     const entities = useAllEntities();
+    const { t } = useLocale('App', 'Entities');
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
     const [filteredItems, showSearch, searchText, handleSearchTextChange] = useSearch(entities.items, filterFuncObjectStringProps);
 
     return (
         <Stack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
             <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 2 }}>
-                <Typography variant="h2" sx={{ display: { xs: 'none', sm: 'inline-block' } }}>Entities</Typography>
+                <Typography variant="h2" sx={{ display: { xs: 'none', sm: 'inline-block' } }}>{t('Entities')}</Typography>
                 <Stack direction="row" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="flex-end">
                     {showSearch && <TextField
-                        label="Search..."
+                        label={t('SearchLabel')}
                         size="small"
                         value={searchText}
+                        variant="filled"
                         onChange={(e) => handleSearchTextChange(e.target.value)}
                         sx={{ width: { xs: '100%', sm: 'initial' } }} />}
-                    <ToggleButtonGroup exclusive value={entityListViewType} onChange={(_, value) => setEntityListViewType(value)}>
-                        <ToggleButton value="table" size="small" title="List view"><ViewListIcon /></ToggleButton>
-                        <ToggleButton value="cards" size="small" title="Card view"><ViewModuleIcon /></ToggleButton>
-                    </ToggleButtonGroup>
+                    <NoSsr>
+                        <ToggleButtonGroup exclusive value={entityListViewType} color="primary" onChange={(_, value) => setEntityListViewType(value)}>
+                            <ToggleButton value="table" size="small" title="List view"><ViewListIcon /></ToggleButton>
+                            <ToggleButton value="cards" size="small" title="Card view"><ViewModuleIcon /></ToggleButton>
+                        </ToggleButtonGroup>
+                    </NoSsr>
                 </Stack>
             </Stack>
-            {entityListViewType === 'table' ? (
-                <AutoTable hideSearch items={filteredItems.map(deviceModelToTableItem)} isLoading={entities.isLoading} error={entities.error} />
-            ) : (
-                <Box sx={{ px: 2 }}>
-                    <Grid container spacing={2}>
-                        {filteredItems.map(entity => (
-                            <EntityCard key={entity.id} entity={entity} />
-                        ))}
-                    </Grid>
-                </Box>
-            )}
+            <Loadable isLoading={entities.isLoading} error={entities.error} placeholder="linear">
+                {entityListViewType === 'table' ? (
+                    <AutoTable hideSearch items={filteredItems.map(deviceModelToTableItem)} isLoading={entities.isLoading} error={entities.error} localize={t} />
+                ) : (
+                    <Box sx={{ px: 2 }}>
+                        <Grid container spacing={2}>
+                            {!entities.isLoading && filteredItems.map(entity => (
+                                <EntityCard key={entity.id} entity={entity} />
+                            ))}
+                        </Grid>
+                    </Box>
+                )}
+            </Loadable>
         </Stack>
     );
 };
