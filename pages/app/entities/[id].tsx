@@ -24,6 +24,7 @@ import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import { IHistoricalValue } from '../../../src/entity/IHistoricalValue';
 import dynamic from 'next/dynamic';
 import CloseIcon from '@mui/icons-material/Close';
+import useLocale from '../../../src/hooks/useLocale';
 
 const DynamicGraph = dynamic(() => import('../../../components/graphs/Graph'));
 
@@ -195,6 +196,7 @@ function historicalValueToTableItem(value: IHistoricalValue) {
 }
 
 const DeviceContactHistory = (props: { deviceId: string }) => {
+    const { t } = useLocale('App', 'Entities')
     const [contactName, setContactName] = useHashParam('contact');
     const [channelName, setChannelName] = useHashParam('channel');
     const [period, setPeriod] = useState('1.00:00:00');
@@ -210,7 +212,7 @@ const DeviceContactHistory = (props: { deviceId: string }) => {
         },
         [props.deviceId, channelName, contactName, period]);
 
-    const stateItemsTable = useAutoTable(loadContactHistory, historicalValueToTableItem);
+    const stateItemsTable = useAutoTable(loadContactHistory, historicalValueToTableItem, t);
 
     const [selectedTab, setSelectedTab] = useState(0);
     const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -232,7 +234,7 @@ const DeviceContactHistory = (props: { deviceId: string }) => {
         <Stack spacing={2}>
             <Box px={2}>
                 <Stack direction="row" justifyContent="space-between" alignItems="center">
-                    <Typography variant="h3">{contactName} history</Typography>
+                    <Typography variant="h3">{contactName} {t('history')}</Typography>
                     <Stack direction="row" alignItems="center" spacing={1}>
                         <FormControl variant="filled" hiddenLabel>
                             <Select labelId="history-period-select" label="Period" onChange={handlePeriod} value={period} size="small">
@@ -249,8 +251,8 @@ const DeviceContactHistory = (props: { deviceId: string }) => {
                 </Stack>
             </Box>
             <Tabs value={selectedTab} onChange={handleTabChange}>
-                <Tab label="Table" {...a11yProps(0)} />
-                <Tab label="Graph" {...a11yProps(1)} />
+                <Tab label={t('Table')} {...a11yProps(0)} />
+                <Tab label={t('Graph')} {...a11yProps(1)} />
             </Tabs>
             <TabPanel value={selectedTab} index={0}>
                 <AutoTable {...stateItemsTable} />
@@ -265,6 +267,7 @@ const DeviceContactHistory = (props: { deviceId: string }) => {
 const DeviceDetails = () => {
     const router = useRouter();
     const { id } = router.query;
+    const { t } = useLocale('App', 'Entities');
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | undefined>();
     const device = useDevice(typeof id !== 'object' && typeof id !== 'undefined' ? id : undefined);
@@ -323,24 +326,24 @@ const DeviceDetails = () => {
 
     const EntityInformation = () => (
         <Card>
-            <CardHeader title="Information" />
+            <CardHeader title={t('Information')} />
             <CardContent>
                 <Accordion elevation={3} defaultExpanded>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>General</Typography>
+                        <Typography>{t('General')}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Stack spacing={1} >
                             <Stack direction="row" justifyContent="space-between" spacing={2}>
-                                <span>Last activity</span>
+                                <span>{t('LastActivity')}</span>
                                 {device && device?.getLastActivity() > 0 ? <ReactTimeago date={device?.getLastActivity()} /> : 'Never'}
                             </Stack>
                             <Stack direction="row" justifyContent="space-between" spacing={2}>
-                                <span>Model</span>
+                                <span>{t('Model')}</span>
                                 <Typography>{device?.model}</Typography>
                             </Stack>
                             <Stack direction="row" justifyContent="space-between" spacing={2}>
-                                <span>Manufacturer</span>
+                                <span>{t('Manufacturer')}</span>
                                 <Typography>{device?.manufacturer}</Typography>
                             </Stack>
                         </Stack>
@@ -348,18 +351,18 @@ const DeviceDetails = () => {
                 </Accordion>
                 <Accordion elevation={3}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>Advanced</Typography>
+                        <Typography>{t('Advanced')}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Grid container spacing={2} alignItems="center">
                             <Grid item xs={3}>
-                                <span>ID</span>
+                                <span>{t('ID')}</span>
                             </Grid>
                             <Grid item xs={9}>
                                 <CopyToClipboardInput id="device-id" readOnly fullWidth size="small" value={device?.id ?? ''} />
                             </Grid>
                             <Grid item xs={3}>
-                                <span>Identifier</span>
+                                <span>{t('Identifier')}</span>
                             </Grid>
                             <Grid item xs={9}>
                                 <CopyToClipboardInput id="device-identifier" readOnly fullWidth size="small" value={device?.identifier ?? ''} />
@@ -367,8 +370,8 @@ const DeviceDetails = () => {
                             <Grid item>
                                 {device && (
                                     <ConfirmDeleteButton
-                                        buttonLabel="Delete..."
-                                        title="Delete"
+                                        buttonLabel={t('DeleteButtonLabel')}
+                                        title={t('DeleteTitle')}
                                         expectedConfirmText={device.alias}
                                         onConfirm={handleDelete} />
                                 )}
@@ -382,7 +385,7 @@ const DeviceDetails = () => {
 
     const EntityActions = () => (
         <Card>
-            <CardHeader title="Actions" />
+            <CardHeader title={t('Actions')} />
             <CardContent>
                 <Stack spacing={1}>
                     {typeof actionTableItems === 'undefined' && (
@@ -418,10 +421,10 @@ const DeviceDetails = () => {
 
         return (
             <Card>
-                <CardHeader title="States" />
+                <CardHeader title={t('States')} />
                 <CardMedia>
                     <Stack spacing={4}>
-                        <AutoTable error={error} isLoading={isLoading} items={stateTableItems} onRowClick={handleStateSelected} />
+                        <AutoTable error={error} isLoading={isLoading} items={stateTableItems} onRowClick={handleStateSelected} localize={t} />
                         {device && contactNameHash && channelNameHash && (
                             <DeviceContactHistory deviceId={device.id} />
                         )}

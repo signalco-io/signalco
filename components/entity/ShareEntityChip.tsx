@@ -9,6 +9,7 @@ import AutoTable from '../shared/table/AutoTable';
 import ClearIcon from '@mui/icons-material/Clear';
 import SendIcon from '@mui/icons-material/Send';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
+import useLocale from '../../src/hooks/useLocale';
 
 interface IShareEntityChipProps {
     entity?: { id: string, sharedWith?: IUser[] },
@@ -24,6 +25,7 @@ interface IShareEntityModalProps {
 
 function ShareEntityModal(props: IShareEntityModalProps) {
     const { entity, entityType, onClose } = props;
+    const { t } = useLocale('App', 'Components', 'ShareEntityModal');
     const [isShareWithNewOpen, setIsShareWithNewOpen] = useState(false);
     const [shareWithNewEmail, setShareWithNewEmail] = useState('');
     const handleShareWithUser = () => {
@@ -50,7 +52,7 @@ function ShareEntityModal(props: IShareEntityModalProps) {
     return (
         <ConfigurationDialog
             isOpen
-            title={`Shared with (${entity?.sharedWith?.length || 1})`}
+            title={`${t('ShareWith')} (${entity?.sharedWith?.length || 1})`}
             titleActions={(
                 <IconButton onClick={handleShareWithUser} size="large">
                     <ShareIcon />
@@ -61,10 +63,10 @@ function ShareEntityModal(props: IShareEntityModalProps) {
         >
             <Slide in={isShareWithNewOpen} direction="down" mountOnEnter unmountOnExit>
                 <Stack direction="row" spacing={2} alignItems="center" sx={{ pb: 1, px: 2 }}>
-                    <TextField label="Email address" type="email" fullWidth onChange={(e) => setShareWithNewEmail(e.target.value)} />
+                    <TextField label={t('EmailAddress')} type="email" fullWidth onChange={(e) => setShareWithNewEmail(e.target.value)} />
                     <Stack direction="row">
-                        <IconButton onClick={handleSubmitShareWithNew} size="large" title="Send invitation"><SendIcon /></IconButton>
-                        <IconButton onClick={handleCancelShareWithNew} size="large" title="Cancel"><ClearIcon /></IconButton>
+                        <IconButton onClick={handleSubmitShareWithNew} size="large" title={t('SendInvitation')}><SendIcon /></IconButton>
+                        <IconButton onClick={handleCancelShareWithNew} size="large" title={t('Cancel')}><ClearIcon /></IconButton>
                     </Stack>
                 </Stack>
             </Slide>

@@ -25,9 +25,9 @@ const ConfirmDeleteDialog = (props: IConfirmDeleteDialogProps) => {
             maxWidth={maxWidth}>
             <Stack spacing={4}>
                 <Typography>{t('ConfirmDeleteBody', { code: expectedConfirmText })}</Typography>
-                <TextField label="Confirm" onChange={(e) => setConfirmText(e.target.value)} />
+                <TextField label={t('Confirm')} onChange={(e) => setConfirmText(e.target.value)} />
                 <Button variant="contained" color="error" disabled={confirmText !== expectedConfirmText} onClick={onConfirm}>
-                    {`${t('ConfirmDeleteButton')}&quot;{expectedConfirmText}&quot;`}
+                    {`${t('ConfirmDeleteButton')} "${expectedConfirmText}"`}
                 </Button>
             </Stack>
         </ConfigurationDialog>
