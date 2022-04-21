@@ -15,6 +15,22 @@
             "Stations": "Stations",
             "Settings": "Settings"
         },
+        "Processes": {
+            "name": "Name",
+            "enabled": "Enabled",
+            "DeleteProcessButtonLabel": "Delete...",
+            "DeleteProcessTitle": "Delete process",
+            "ConfirmDialogExpectedText": "confirm",
+            "Triggers": "Triggers",
+            "AddTrigger": "Add trigger",
+            "NoTriggers": "No triggers",
+            "Conditions": "Conditions",
+            "AddCondition": "Add condition",
+            "NoConditions": "No conditions - process will execute on every trigger",
+            "Conducts": "Conducts",
+            "AddConduct": "Add conduct",
+            "NoConducts": "No conducts"
+        },
         "Stations": {
             "Stations": "Stations",
             "Name": "Name",
@@ -25,7 +41,7 @@
             "lastActivity": "Last Activity",
             "RegisteredDate": "RegisteredDate",
             "registeredDate": "RegisteredDate",
-            "StationCommandError": "Failed to execute station command.",
+            "StationCommandError": "Failed to execute station command",
             "UpdateStationUpToDate": "Up to date",
             "UpdateStationVersion": "Update to {version}",
             "Start": "Start",

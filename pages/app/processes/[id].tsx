@@ -1,9 +1,9 @@
 import { Alert, Box, ButtonBase, Chip, Collapse, Container, Grid, IconButton, Menu, MenuItem, Paper, Popover, Skeleton, Stack, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import { observer } from 'mobx-react-lite';
-import ProcessesRepository, { IProcessModel } from '../../../src/processes/ProcessesRepository';
+import ProcessesRepository from '../../../src/processes/ProcessesRepository';
 import NoDataPlaceholder from '../../../components/shared/indicators/NoDataPlaceholder';
 import AddSharpIcon from '@mui/icons-material/AddSharp';
 import { makeAutoObservable } from 'mobx';
@@ -15,6 +15,8 @@ import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDelete
 import EntityRepository from '../../../src/entity/EntityRepository';
 import { ObjectDictAny } from '../../../src/sharedTypes';
 import { TransitionGroup } from 'react-transition-group';
+import useLocale from '../../../src/hooks/useLocale';
+import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
 
 interface IDeviceStateValue {
     value?: any
@@ -420,12 +422,6 @@ const DisplayDeviceStateValue = observer((props: { target?: IDeviceTargetIncompl
     );
 });
 
-interface IProcessConfiguration {
-    triggers: IDeviceStateTrigger[],
-    condition: ICondition | undefined,
-    conducts: IConduct[]
-}
-
 const ProcessItem = (props: { children: React.ReactNode, in?: boolean }) => (
     <Collapse in={props.in} sx={{ pb: 1 }}>
         <Paper sx={{ p: 2 }} variant="elevation" elevation={0}>
@@ -444,33 +440,19 @@ const ProcessSection = (props: { header: string, isLoading: boolean, onAdd: () =
 const ProcessDetails = () => {
     const router = useRouter();
     const { id } = router.query;
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState();
-    const [process, setProcess] = useState<IProcessModel | undefined>();
-    const [processConfig, setProcessConfig] = useState<IProcessConfiguration | undefined>(undefined);
+    const { t } = useLocale('App', 'Processes');
 
-    useEffect(() => {
-        const loadProcessAsync = async () => {
-            try {
-                if (typeof id !== 'object' &&
-                    typeof id !== 'undefined') {
-                    const loadedProcess = await ProcessesRepository.getProcessAsync(id);
-                    setProcess(loadedProcess);
-                    if (loadedProcess) {
-                        const mappedConfig = await parseProcessConfigurationAsync(loadedProcess.configurationSerialized)
-                        setProcessConfig(mappedConfig);
-                    }
-                }
-            } catch (err: any) {
-                console.error(err, 'Failed to load process');
-                setError(err?.toString());
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        loadProcessAsync();
+    const loadProcess = useCallback(async () => {
+        if (typeof id !== 'undefined' && typeof id !== 'object')
+            return await ProcessesRepository.getProcessAsync(id)
     }, [id]);
+    const process = useLoadAndError(loadProcess);
+
+    const loadProcessConfig = useCallback(async () => {
+        if (process.item)
+            return await parseProcessConfigurationAsync(process.item.configurationSerialized)
+    }, [process.item]);
+    const processConfig = useLoadAndError(loadProcessConfig);
 
     const persistProcessAsync = async () => {
         if (process == null) {
@@ -492,10 +474,10 @@ const ProcessDetails = () => {
 
     const handleTriggerChange = (index: number, updated?: IDeviceStateTrigger) => {
         // TODO: Use action to change state
-        if (processConfig) {
+        if (processConfig.item) {
             if (updated)
-                processConfig.triggers[index] = updated;
-            else processConfig.triggers.splice(index, 1);
+                processConfig.item.triggers[index] = updated;
+            else processConfig.item.triggers.splice(index, 1);
         }
 
         persistProcessAsync();
@@ -503,24 +485,24 @@ const ProcessDetails = () => {
 
     const handleConditionChange = (updated: ICondition) => {
         // TODO: Use action to change state
-        if (processConfig)
-            processConfig.condition = updated;
+        if (processConfig.item)
+            processConfig.item.condition = updated;
 
         persistProcessAsync();
     };
 
     const handleValueChanged = (index: number, updated?: IDeviceTargetState) => {
         // TODO: Use action to change state
-        if (processConfig) {
-            processConfig.conducts[index].value = updated?.value;
-            const target = processConfig.conducts[index].target;
+        if (processConfig.item) {
+            processConfig.item.conducts[index].value = updated?.value;
+            const target = processConfig.item.conducts[index].target;
             if (typeof target !== 'undefined' &&
                 updated?.target?.deviceId) {
                 target.channelName = updated.target.channelName;
                 target.contactName = updated.target.contactName;
                 target.deviceId = updated.target.deviceId;
             } else if (updated?.target?.deviceId) {
-                processConfig.conducts[index].target = {
+                processConfig.item.conducts[index].target = {
                     channelName: updated.target?.channelName,
                     contactName: updated.target?.contactName,
                     deviceId: updated.target?.deviceId,
@@ -532,66 +514,66 @@ const ProcessDetails = () => {
     };
 
     const handleAddConduct = () => {
-        if (processConfig)
-            processConfig.conducts.push(new Conduct());
+        if (processConfig.item)
+            processConfig.item.conducts.push(new Conduct());
     };
 
     const handleAddTrigger = () => {
-        if (processConfig)
-            processConfig.triggers.push(new DeviceStateTrigger());
+        if (processConfig.item)
+            processConfig.item.triggers.push(new DeviceStateTrigger());
     }
 
     const handleAddCondition = () => {
-        if (processConfig) {
-            const condition = processConfig.condition;
+        if (processConfig.item) {
+            const condition = processConfig.item.condition;
             if (condition)
                 condition.operations.push(new Condition());
         }
     }
 
     const handleDelete = async () => {
-        if (process) {
-            await EntityRepository.deleteAsync(process?.id, 2);
+        if (process.item) {
+            await EntityRepository.deleteAsync(process.item.id, 2);
             router.push('/app/processes');
         }
     }
 
     return (
         <>
-            {error && <Alert severity="error">{error}</Alert>}
+            {process.error && <Alert severity="error">{process.error}</Alert>}
             <Container sx={{ pt: { xs: 0, sm: 4 } }}>
                 <Stack spacing={2}>
                     <Stack spacing={2}>
-                        {isLoading ?
+                        {process.isLoading ?
                             <Skeleton variant="text" width={260} height={38} /> :
-                            <Typography variant="h2">{process?.alias ?? 'Unknown'}</Typography>}
+                            <Typography variant="h2">{process.item?.alias ?? 'Unknown'}</Typography>}
                         <Box>
                             <ConfirmDeleteButton
-                                buttonLabel="Delete..."
-                                title="Delete process"
-                                expectedConfirmText={process?.alias || 'confirm'}
+                                buttonLabel={t('DeleteProcessButtonLabel')}
+                                title={t('DeleteProcessTitle')}
+                                expectedConfirmText={process.item?.alias || t('ConfirmDialogExpectedText')}
                                 onConfirm={handleDelete} />
                         </Box>
                     </Stack>
                     <Stack spacing={3}>
                         <Stack spacing={1}>
-                            <ProcessSection header="Triggers" isLoading={isLoading} onAdd={handleAddTrigger} addTitle="Add trigger" />
-                            <TransitionGroup>{processConfig?.triggers?.map((t, i) => <ProcessItem key={`trigger${i}`}><DisplayDeviceTarget target={t.deviceId ? { deviceId: t.deviceId, contactName: t.contactName, channelName: t.channelName } : undefined} onChanged={(updated) => handleTriggerChange(i, updated)} /></ProcessItem>)}</TransitionGroup>
-                            {isLoading ? <DisplayItemPlaceholder /> :
-                                ((processConfig?.triggers?.length ?? 0) <= 0 && <NoDataPlaceholder content="No triggers" />)}
+                            <ProcessSection header={t('Triggers')} isLoading={processConfig.isLoading} onAdd={handleAddTrigger} addTitle={t('AddTrigger')} />
+                            <TransitionGroup>{processConfig.item?.triggers?.map((t, i) => <ProcessItem key={`trigger${i}`}><DisplayDeviceTarget target={t.deviceId ? { deviceId: t.deviceId, contactName: t.contactName, channelName: t.channelName } : undefined} onChanged={(updated) => handleTriggerChange(i, updated)} /></ProcessItem>)}</TransitionGroup>
+                            {processConfig.isLoading ? <DisplayItemPlaceholder /> :
+                                ((processConfig.item?.triggers?.length ?? 0) <= 0 && <NoDataPlaceholder content={t('NoTriggers')} />)}
                         </Stack>
                         <Stack spacing={1}>
-                            <ProcessSection header="Conditions" isLoading={isLoading} onAdd={handleAddCondition} addTitle="Add condition" />
-                            {isLoading ? <><DisplayItemPlaceholder /><DisplayItemPlaceholder /><DisplayItemPlaceholder /></> :
-                                (processConfig?.condition
-                                    ? <ProcessItem in><DisplayCondition isTopLevel condition={processConfig.condition} onChanged={handleConditionChange} /></ProcessItem>
-                                    : <NoDataPlaceholder content="No condition" />)}
+                            <ProcessSection header={t('Conditions')} isLoading={processConfig.isLoading} onAdd={handleAddCondition} addTitle={t('AddCondition')} />
+                            {processConfig.isLoading ? <><DisplayItemPlaceholder /><DisplayItemPlaceholder /><DisplayItemPlaceholder /></> :
+                                (processConfig.item?.condition
+                                    ? <ProcessItem in><DisplayCondition isTopLevel condition={processConfig.item.condition} onChanged={handleConditionChange} /></ProcessItem>
+                                    : <NoDataPlaceholder content={t('NoConductions')} />)}
                         </Stack>
                         <Stack spacing={1}>
-                            <ProcessSection header="Conducts" isLoading={isLoading} onAdd={handleAddConduct} addTitle="Add conduct" />
-                            <TransitionGroup>{processConfig?.conducts?.map((c, i) => <ProcessItem key={`value${i}`}><DisplayDeviceStateValue target={c.target} value={c.value} onChanged={(u) => handleValueChanged(i, u)} /></ProcessItem>)}</TransitionGroup>
-                            {isLoading ? <><DisplayItemPlaceholder /><DisplayItemPlaceholder /></> :
-                                ((processConfig?.conducts?.length ?? 0) <= 0 && <NoDataPlaceholder content="No conducts" />)}
+                            <ProcessSection header={t('Conducts')} isLoading={processConfig.isLoading} onAdd={handleAddConduct} addTitle={t('AddConduct')} />
+                            <TransitionGroup>{processConfig.item?.conducts?.map((c, i) => <ProcessItem key={`value${i}`}><DisplayDeviceStateValue target={c.target} value={c.value} onChanged={(u) => handleValueChanged(i, u)} /></ProcessItem>)}</TransitionGroup>
+                            {processConfig.isLoading ? <><DisplayItemPlaceholder /><DisplayItemPlaceholder /></> :
+                                ((processConfig.item?.conducts?.length ?? 0) <= 0 && <NoDataPlaceholder content={t('NoConducts')} />)}
                         </Stack>
                     </Stack>
                 </Stack>
