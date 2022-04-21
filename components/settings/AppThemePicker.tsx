@@ -52,6 +52,7 @@ const AppThemeVisual = (props: { label: string, theme: AppTheme, disabled?: bool
 export default function AppThemePicker() {
     const themes = useLocale('App', 'Settings', 'Themes');
     const themeModes = useLocale('App', 'Settings', 'ThemeModes');
+    const picker = useLocale('App', 'Components', 'AppThemePicker');
     const [userTimeFormat] = useUserSetting<string>('timeFormat', '1');
 
     const [activeTheme, setSelectedTheme] = useUserSetting<AppTheme>('theme', 'light');
@@ -100,17 +101,17 @@ export default function AppThemePicker() {
                 </ToggleButtonGroup>
                 {themeMode === 'timeRange' && (
                     <Stack spacing={1}>
-                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>Pick day and night times</Typography>
+                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>{picker.t('PickDayNightTimes')}</Typography>
                         <Stack direction="row" spacing={1}>
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <TimePicker label="Day time" onChange={handleDayTimeChange} value={dayTime}
+                                <TimePicker label={picker.t('DayTime')} onChange={handleDayTimeChange} value={dayTime}
                                     ampm={userTimeFormat === '0'}
                                     ampmInClock={userTimeFormat === '0'}
                                     renderInput={(params) => <TextField variant="filled" {...params} />}
                                 />
                             </LocalizationProvider>
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <TimePicker label="Night time" onChange={handleNightTimeChange} value={nightTime}
+                                <TimePicker label={picker.t('NightTime')} onChange={handleNightTimeChange} value={nightTime}
                                     ampm={userTimeFormat === '0'}
                                     ampmInClock={userTimeFormat === '0'}
                                     renderInput={(params) => <TextField variant="filled" {...params} />}
@@ -120,7 +121,7 @@ export default function AppThemePicker() {
                     </Stack>
                 )}
                 <Stack spacing={1}>
-                    {themeMode !== 'manual' && <Typography variant="body2" sx={{ color: 'text.secondary' }}>Pick night theme</Typography>}
+                    {themeMode !== 'manual' && <Typography variant="body2" sx={{ color: 'text.secondary' }}>{picker.t('PickNightTheme')}</Typography>}
                     <ToggleButtonGroup exclusive color="primary" value={activeTheme} onChange={(_e, value) => handleThemeSelect(value)}>
                         {themeMode === 'manual' && <ToggleButton value="light"><AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" /></ToggleButton>}
                         <ToggleButton value="darkDimmed"><AppThemeVisual label={themes.t('DarkDimmed')} theme="darkDimmed" /></ToggleButton>
