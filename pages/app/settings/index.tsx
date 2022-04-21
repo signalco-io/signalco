@@ -6,7 +6,7 @@ import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import { isNonEmptyString, isNotNull } from '@enterwell/react-form-validation';
 import generalFormComponents from '../../../components/forms/generalFormComponents';
-import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
+import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import appSettingsProvider, { ApiDevelopmentUrl, ApiProductionUrl } from '../../../src/services/AppSettingsProvider';
 import { useEffect } from 'react';
 import CurrentUserProvider from '../../../src/services/CurrentUserProvider';
@@ -18,6 +18,8 @@ import AppThemePicker from '../../../components/settings/AppThemePicker';
 import { ChildrenProps } from '../../../src/sharedTypes';
 
 function ConnectedService() {
+    const { t } = useLocale('App', 'Settings');
+
     return (
         <Paper variant="outlined" sx={{ p: 2, backgroundColor: 'background.default' }}>
             <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -28,7 +30,7 @@ function ConnectedService() {
                         <Typography variant="body2" sx={{ color: 'text.secondary' }}>{CurrentUserProvider.getCurrentUser()?.name} ({CurrentUserProvider.getCurrentUser()?.email})</Typography>
                     </Stack>
                 </Stack>
-                <Typography sx={{ color: 'text.secondary' }}>Connected</Typography>
+                <Typography sx={{ color: 'text.secondary' }}>{t('Connected')}</Typography>
             </Stack>
         </Paper>
     )
@@ -50,12 +52,28 @@ const SettingsSection = (props: { children: ReactNode, header: string }) => (
     </Stack>
 );
 
+const SelectTimeZone: FormBuilderComponent = ({ onChange, label, helperText, error, ...rest }) => {
+    const { t } = useLocale('App', 'Settings');
+
+    // <EwSelect variant="filled" label="Time format" fullWidth options={[{ value: 0, label: '12h' }, { value: 1, label: '24h' }]} />
+    return (
+        <FormControl variant="filled" error={error}>
+            <InputLabel>{label}</InputLabel>
+            <Select onChange={(e) => onChange(e.target.value, { receiveEvent: false })} {...rest}>
+                <MenuItem value={'0'}>{t('TimeFormat12Hour')}</MenuItem>
+                <MenuItem value={'1'}>{t('TimeFormat24Hour')}</MenuItem>
+            </Select>
+            <FormHelperText error={error}>{helperText}</FormHelperText>
+        </FormControl>
+    );
+};
+
 const settingsFormComponents: FormBuilderComponents = {
     fieldWrapper: (props) => <SettingsItem {...props} />,
     selectApiEndpoint: ({ onChange, label, helperText, error, ...rest }) => (
         <FormControl variant="filled" error={error}>
             <InputLabel>{label}</InputLabel>
-            <Select onChange={(e) => onChange && onChange(e.target.value)} {...rest}>
+            <Select onChange={(e) => onChange(e.target.value, { receiveEvent: false })} {...rest}>
                 <MenuItem value={ApiProductionUrl}>
                     <Stack direction="row" alignItems="center" spacing={1}>
                         <Chip color="info" label="prod" size="small" />
@@ -72,23 +90,13 @@ const settingsFormComponents: FormBuilderComponents = {
             <FormHelperText error={error}>{helperText}</FormHelperText>
         </FormControl>
     ),
-    selectTimeFormat: ({ onChange, label, helperText, error, ...rest }) => (
-        // <EwSelect variant="filled" label="Time format" fullWidth options={[{ value: 0, label: '12h' }, { value: 1, label: '24h' }]} />
-        <FormControl variant="filled" error={error}>
-            <InputLabel>{label}</InputLabel>
-            <Select onChange={(e) => onChange && onChange(e.target.value)} {...rest}>
-                <MenuItem value={'0'}>12-hour</MenuItem>
-                <MenuItem value={'1'}>24-hour</MenuItem>
-            </Select>
-            <FormHelperText error={error}>{helperText}</FormHelperText>
-        </FormControl>
-    ),
+    selectTimeFormat: (props) => <SelectTimeZone {...props} />,
     selectTimeZone: ({ onChange, label, helperText, error, ...rest }) => {
         const timeZones = getTimeZones();
         return (
             <FormControl variant="filled" error={error}>
                 <InputLabel>{label}</InputLabel>
-                <Select onChange={(e) => onChange && onChange(e.target.value)} {...rest}>
+                <Select onChange={(e) => onChange && onChange(e.target.value, { receiveEvent: false })} {...rest}>
                     <MenuItem value={'0'} disabled>+00:00 UTC</MenuItem>
                     {timeZones.map(tz => (
                         <MenuItem key={tz.name} value={tz.name}>{tz.currentTimeFormat}</MenuItem>
@@ -126,13 +134,13 @@ const SettingsIndex = () => {
     }
 
     const timeLocationForm = {
-        timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', 'Time format', { receiveEvent: false }),
-        timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', 'Time zone', { receiveEvent: false }),
-        location: useFormField(userLocation, isTrue, 'locationMap', 'Location', { receiveEvent: false })
+        timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', t('TimeFormat')),
+        timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', t('TimeZone')),
+        location: useFormField(userLocation, isTrue, 'locationMap', t('Location'))
     };
 
     const developerSettingsForm = {
-        apiEndpoint: useFormField(appSettingsProvider.apiAddress, isNonEmptyString, 'selectApiEndpoint', t('ApiEndpoint'), { receiveEvent: false })
+        apiEndpoint: useFormField(appSettingsProvider.apiAddress, isNonEmptyString, 'selectApiEndpoint', t('ApiEndpoint'))
     };
 
     useEffect(() => {

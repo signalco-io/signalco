@@ -2,6 +2,7 @@ import { Button, Stack, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import DashboardsRepository, { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
+import useLocale from '../../src/hooks/useLocale';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
 
@@ -13,6 +14,7 @@ interface IDashboardSettingsProps {
 
 const DashboardSettings = (props: IDashboardSettingsProps) => {
     const { isOpen, dashboard, onClose } = props;
+    const { t } = useLocale('App', 'Dashboards');
     const router = useRouter();
     const [name, setName] = useState(dashboard?.name || '');
 
@@ -43,22 +45,22 @@ const DashboardSettings = (props: IDashboardSettingsProps) => {
     return (
         <ConfigurationDialog
             isOpen={isOpen}
-            title={'Dashboard settings'}
+            title={t('DashboardSettings')}
             onClose={onClose}
             actions={(
                 <>
-                    <Button onClick={onClose}>Cancel</Button>
-                    <Button autoFocus onClick={handleSave}>Save changes</Button>
+                    <Button onClick={onClose}>{t('Cancel')}</Button>
+                    <Button autoFocus onClick={handleSave}>{t('SaveChanges')}</Button>
                 </>
             )}>
             <Stack spacing={4} sx={{ py: 1 }}>
-                <TextField label="Name" value={name} onChange={(e) => setName(e.target.value ?? '')} />
+                <TextField label={t('DashboardSettingName')} value={name} onChange={(e) => setName(e.target.value ?? '')} />
                 <Stack spacing={2}>
-                    <Typography sx={{ opacity: 0.6 }} variant="subtitle2">Advanced</Typography>
+                    <Typography sx={{ opacity: 0.6 }} variant="subtitle2">{t('Advanced')}</Typography>
                     <ConfirmDeleteButton
-                        buttonLabel="Delete dashboard..."
-                        title="Delete dashboard"
-                        expectedConfirmText={name || 'confirm'}
+                        buttonLabel={t('DeleteButtonLabel')}
+                        title={t('DeleteTitle')}
+                        expectedConfirmText={name || t('ConfirmDialogExpectedText')}
                         onConfirm={handleDashboardDelete} />
                 </Stack>
             </Stack>

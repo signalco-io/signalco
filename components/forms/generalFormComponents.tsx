@@ -6,7 +6,7 @@ const components: FormBuilderComponents = {
     yesno: (props) => (
         <FormGroup>
             <FormControlLabel
-                control={<Checkbox checked={props.value} onChange={(e) => props.onChange && props.onChange(e.target.checked)} />}
+                control={<Checkbox checked={props.value} onChange={(e) => props.onChange(e.target.checked)} />}
                 label={props.label} />
         </FormGroup>
     ),

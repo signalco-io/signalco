@@ -12,6 +12,7 @@ import { runInAction } from 'mobx';
 import { Button, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import { ChildrenProps } from '../../src/sharedTypes';
+import useLocale from '../../src/hooks/useLocale';
 
 function DragableWidget(props: IWidgetProps) {
     const {
@@ -69,6 +70,8 @@ function DisplayWidget(props: IWidgetProps) {
 function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, onAddWidget: () => void }) {
     const { dashboard, isEditing, onAddWidget } = props;
 
+    const { t } = useLocale('App', 'Dashboards');
+
     const widgetSize = 78 + 8; // Widget is 76x76 + 2px for border + 8 spacing between widgets (2x4px)
     const dashbaordPadding = 48 + useNavWidth(); // Has 24 x padding
     const numberOfColumns = Math.max(4, Math.floor((window.innerWidth - dashbaordPadding) / widgetSize)); // When width is less than 400, set to quad column
@@ -122,10 +125,10 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
             <Stack alignItems="center" justifyContent="center">
                 <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
                     <Stack maxWidth={320} spacing={4} alignItems="center" justifyContent="center">
-                        <Image priority width={280} height={213} alt="No Dashboards placeholder" src="/assets/placeholders/placeholder-no-widgets.svg" />
-                        <Typography variant="h1">No Widgets</Typography>
-                        <Typography textAlign="center" color="textSecondary">Dashboard is a bit empty.<br />Start by adding a widget from widget store.</Typography>
-                        <Button variant="contained" onClick={onAddWidget}>Add Widget</Button>
+                        <Image priority width={280} height={213} alt="No Widgets" src="/assets/placeholders/placeholder-no-widgets.svg" />
+                        <Typography variant="h1">{t('NoWidgets')}</Typography>
+                        <Typography textAlign="center" color="textSecondary">{t('NoWidgetsHelpTextFirstLine')}<br />{t('NoWidgetsHelpTextSecondLine')}</Typography>
+                        <Button variant="contained" onClick={onAddWidget}>{t('AddWidget')}</Button>
                     </Stack>
                 </Stack>
             </Stack>

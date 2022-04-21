@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 import ProcessesRepository, { IProcessModel } from '../../../src/processes/ProcessesRepository';
 import CheckSharpIcon from '@mui/icons-material/CheckSharp';
 import BlockSharpIcon from '@mui/icons-material/BlockSharp';
+import useLocale from '../../../src/hooks/useLocale';
 
 function deviceModelToTableItem(process: IProcessModel): IAutoTableItem {
     return {
@@ -19,7 +20,8 @@ function deviceModelToTableItem(process: IProcessModel): IAutoTableItem {
 }
 
 const Processes = () => {
-    const itemsTable = useAutoTable(ProcessesRepository.getProcessesAsync, deviceModelToTableItem);
+    const { t } = useLocale('App', 'Processes');
+    const itemsTable = useAutoTable(ProcessesRepository.getProcessesAsync, deviceModelToTableItem, t);
 
     return (
         <Stack spacing={{ xs: 0, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
