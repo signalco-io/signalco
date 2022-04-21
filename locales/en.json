@@ -75,7 +75,13 @@
             "Profile": "Profile",
             "LocationAndTime": "Time and location",
             "Developer": "Developer",
-            "ApiEndpoint": "API Endpoint"
+            "ApiEndpoint": "API Endpoint",
+            "Connected": "Connected",
+            "TimeFormat12Hour": "12-hour",
+            "TimeFormat24Hour": "24-hour",
+            "TimeFormat": "Time format",
+            "TimeZone": "Time zone",
+            "Location": "Location"
         },
         "Dashboards": {
             "UpdateChecker": {
@@ -99,6 +105,14 @@
         "Dialogs": {
             "ConfirmDeleteBody": "Deleted item can not be restored. Please confirm you are deleting correct item by entering \"{code}\" bellow.",
             "ConfirmDeleteButton": "Delete"
+        },
+        "Components": {
+            "AppThemePicker": {
+                "PickDayNightTimes": "Pick day and night times",
+                "DayTime": "Day time",
+                "NightTime": "Night time",
+                "PickNightTheme": "Pick night theme"
+            }
         }
     }
 }
