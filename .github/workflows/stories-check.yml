@@ -1,31 +1,44 @@
 name: "stories-check"
 on:
-  pull_request:
-    branches: [next, main]
+    pull_request:
+        branches: [next, main]
 jobs:
-  check:
-    name: Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "16.x"
-          cache: "yarn"
-      - uses: actions/cache@v3
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - run: yarn install --network-timeout 1000000
-      - run: yarn stories-check
-        id: runStoriesCheck
-        continue-on-error: true
-      - name: Commit changes
-        id: ccc
-        if: steps.runStoriesCheck.outcome == 'failure'
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: ".stories-approved"
-          message: "[skip ci] [stories-check] Automated stories changes"
-          new_branch: ${{ github.head_ref }}
-          default_author: github_actions
+    check:
+        name: Check
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: "16.x"
+                  cache: "yarn"
+            - uses: actions/cache@v3
+              with:
+                  path: "**/node_modules"
+                  key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+            - run: yarn install --network-timeout 1000000
+            - run: |
+                  echo "::set-output name=changes::$(yarn stories-check)\n"
+              id: runStoriesCheck
+              continue-on-error: true
+            - name: Commit changes
+              id: ccc
+              if: steps.runStoriesCheck.outcome == 'failure'
+              uses: EndBug/add-and-commit@v9
+              with:
+                  add: ".stories-approved"
+                  message: "[skip ci] [stories-check] Automated stories changes"
+                  new_branch: ${{ github.head_ref }}
+                  default_author: github_actions
+            - name: Create comment about stories changes
+              uses: actions/github-script@v5
+              if: steps.runStoriesCheck.outcome == 'failure'
+              with:
+                  github-token: ${{secrets.GITHUB_TOKEN}}
+                  script: |
+                      github.rest.issues.createComment({
+                          issue_number: context.issue.number,
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          body: 'Some stories were changed:\n\n```${{ steps.runStoriesCheck.outputs.changes }}```'
+                      })

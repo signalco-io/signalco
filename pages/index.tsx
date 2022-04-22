@@ -11,11 +11,12 @@ import DiscoverVisual from '../components/pages/landing/visuals/DiscoverVisual';
 import Image from 'next/image';
 import { useContext } from 'react';
 import { AppContext } from './_app';
+import { GitHub, KeyboardArrowRight } from '@mui/icons-material';
 
 const Newsletter = dynamic(() => import('../components/pages/landing/Newsletter'));
 const GlobePart = dynamic(() => import('../components/pages/landing/GlobeSection'));
 
-const FeatureDescription = (props: { title: string, content: string, link?: string, linkText?: string }) => (
+const FeatureDescription = (props: { title: string, content: string | React.ReactElement, link?: string, linkText?: string }) => (
   <Stack spacing={2}>
     <Typography fontWeight={600} variant="h2">{props.title}</Typography>
     <Typography color="textSecondary">{props.content}</Typography>
@@ -158,6 +159,14 @@ const Index = () => {
       <Box my={8}>
         <Cover />
       </Box>
+      <Box sx={{ margin: 'auto' }}>
+        <CounterIndicator count={0} />
+      </Box>
+      <StepContent title="Developers" subtitle="Signalco is free and open source project run by small team of enthusiasts.">
+        <Stack alignItems="center">
+          <Button variant="outlined" startIcon={<GitHub />} endIcon={<KeyboardArrowRight />} href="https://github.com/signalco-io" size="large">Signalco on GitHub</Button>
+        </Stack>
+      </StepContent>
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={1} />
       </Box>
