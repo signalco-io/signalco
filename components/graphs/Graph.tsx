@@ -2,7 +2,6 @@ import { Box, Paper, Stack, Typography } from '@mui/material';
 import { deepOrange, lightBlue } from '@mui/material/colors';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
 import { useContext } from 'react';
-import ReactTimeago from 'react-timeago';
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
 import { AppContext } from '../../pages/_app';
 import { arrayMax, arrayMin } from '../../src/helpers/ArrayHelpers';
@@ -10,6 +9,7 @@ import useLocale from '../../src/hooks/useLocale';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
 import { ObjectDictAny } from '../../src/sharedTypes';
 import NoDataPlaceholder from '../shared/indicators/NoDataPlaceholder';
+import Timeago from '../shared/time/Timeago';
 
 export interface IGraphProps {
     label?: string;
@@ -127,7 +127,7 @@ const ChartGenericTooltip = ({ active, payload, domain, units }: { active?: bool
         return (
             <Paper sx={{ p: 2, px: 3, maxWidth: '180px' }} variant="elevation" elevation={4}>
                 <Typography>{`${payload[0].value}${units || ''}`}</Typography>
-                <ReactTimeago date={dateTime} />
+                <Timeago date={dateTime} />
                 <Typography variant="caption" color="textSecondary" component="div">{`${dateTime.getFullYear()}-${dateTime.getMonth().toString().padStart(2, '0')}-${dateTime.getDate().toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`}</Typography>
             </Paper>
         );
