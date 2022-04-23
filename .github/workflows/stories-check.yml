@@ -31,7 +31,7 @@ jobs:
                   new_branch: ${{ github.head_ref }}
                   default_author: github_actions
             - name: Create comment about stories changes
-              uses: actions/github-script@v5
+              uses: actions/github-script@v6
               if: steps.runStoriesCheck.outcome == 'failure'
               with:
                   github-token: ${{secrets.GITHUB_TOKEN}}
