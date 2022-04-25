@@ -44,5 +44,5 @@ jobs:
                           issue_number: context.issue.number,
                           owner: context.repo.owner,
                           repo: context.repo.repo,
-                          body: 'Some stories were changed:\n\n```${{ steps.runStoriesCheck.outputs.changes }}```'
+                          body: 'Some stories were changed:\n\n${{ steps.runStoriesCheck.outputs.changes }}'
                       })
