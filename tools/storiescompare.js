@@ -106,9 +106,3 @@ try {
     console.error(chalk.red(error));
     process.exit(2);
 }
-
-if (numberOfChanges) {
-    console.log();
-    console.error(chalk.red(`(error 1) Detected ${numberOfChanges} changes`));
-    process.exit(1);
-}
