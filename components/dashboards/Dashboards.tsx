@@ -18,7 +18,7 @@ import useLocale from '../../src/hooks/useLocale';
 
 const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 
-const Dashboards = () => {
+const Dashboards = observer(() => {
     const { t } = useLocale('App', 'Dashboards');
     const [selectedId, setDashboardIdHash] = useHashParam('dashboard');
     const retrieveDashbaord = useCallback(() => {
@@ -131,6 +131,6 @@ const Dashboards = () => {
             )}
         </>
     );
-};
+});
 
-export default observer(Dashboards);
+export default Dashboards;
