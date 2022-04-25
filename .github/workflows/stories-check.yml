@@ -18,7 +18,8 @@ jobs:
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
             - run: yarn install --network-timeout 1000000
             - run: |
-                  echo "::set-output name=changes::$(yarn stories-check)\n"
+                  CHECK_RESULT = $(yarn stories-check)
+                  echo "::set-output name=changes::${CHECK_RESULT}\n"
               id: runStoriesCheck
               continue-on-error: true
             - name: Commit changes
