@@ -109,7 +109,7 @@
         "puppeteer": "13.6.0",
         "react-is": "^18.0.0",
         "rimraf": "3.0.2",
-        "sass": "1.50.1",
+        "sass": "1.51.0",
         "storybook-addon-next": "^1.6.2",
         "storybook-addon-performance": "^0.16.1",
         "storycap": "3.1.7",
