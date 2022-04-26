@@ -68,7 +68,10 @@ export default class HttpService {
     });
     return response.data;
     } catch(err) {
-      if (typeof err === 'object' && Object.keys(err as object).find(key => key === 'isAxiosError')) {
+      if (typeof err !== 'undefined' &&
+        typeof err === 'object' &&
+        err !== null &&
+        Object.values(err).find(errv => errv === 'AxiosError')) {
         const axiosError = err as AxiosError;
         if (axiosError.response?.status === 403) {
           console.warn('Token expired.', err);

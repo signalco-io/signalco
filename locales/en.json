@@ -180,6 +180,9 @@
                 "Email": "Email address",
                 "SendInvitation": "Send invitation",
                 "Cancel": "Cancel"
+            },
+            "Timeago": {
+                "Never": "Never"
             }
         }
     }
