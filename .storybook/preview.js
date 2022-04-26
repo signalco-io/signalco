@@ -5,7 +5,6 @@ import '../styles/global.scss';
 import { themes } from '@storybook/theming';
 import { AppContext } from '../pages/_app';
 import { withScreenshot } from 'storycap';
-import { withPerformance } from 'storybook-addon-performance';
 import { DateTimeProvider } from '../src/services/DateTimeProvider';
 
 const newStaticDate = new Date();
@@ -20,7 +19,6 @@ DateTimeProvider.staticDateTime = newStaticDate;
 
 // Integrating with the MUI by defining a global decorator
 export const decorators = [
-    withPerformance,
     withScreenshot,
     Story => (
         <StyledEngineProvider injectFirst>
