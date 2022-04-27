@@ -28,7 +28,7 @@
         "@emotion/styled": "11.8.1",
         "@enterwell/react-form-builder": "^0.1.7",
         "@enterwell/react-form-validation": "^1.2.4",
-        "@hcaptcha/react-hcaptcha": "1.1.1",
+        "@hcaptcha/react-hcaptcha": "1.2.0",
         "@mdx-js/loader": "^2.1.1",
         "@mdx-js/react": "^2.1.1",
         "@microsoft/signalr": "6.0.4",
