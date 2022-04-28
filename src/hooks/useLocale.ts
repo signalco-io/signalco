@@ -45,6 +45,10 @@ export function localizer(...namespace: string[]): LocalizeFunc {
     return (key: string, data?: object) => { return namespaceKeys && namespaceKeys[key] ? formatString(namespaceKeys[key], data) : `{${key}}`; };
 }
 
+export function useLocalePlaceholders() {
+    return useLocale('App', 'Placeholders');
+}
+
 export default function useLocale(...namespace: string[]): {t: LocalizeFunc} {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const t = useMemo(() => localizer(...namespace), [...namespace]);

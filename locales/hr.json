@@ -1,186 +1,188 @@
 {
-  "App": {
-    "Account": {
-      "Logout": "Odjava",
-      "UserProfileImageAlt": "Slika korisničkog profila"
-    },
-    "Components": {
-      "AppThemePicker": {
-        "DayTime": "Vrijeme dana",
-        "NightTime": "Noć",
-        "PickDayNightTimes": "Odaberite vremena za dan i noć",
-        "PickNightTheme": "Odaberite noćnu temu"
-      },
-      "ShareEntityChip": {
-        "Cancel": "Otkaži",
-        "Email": "Email adresa",
-        "SendInvitation": "Pošalji pozivnicu",
-        "ShareWith": "Dijeljenje sa"
-      }
-    },
-    "Dashboards": {
-      "AddWidget": "Dodaj widget",
-      "Advanced": "Napredno",
-      "Cancel": "Otkaži",
-      "ConfirmDialogExpectedText": "potvrdi",
-      "Dashboard": "Nadzorna ploča",
-      "DashboardSettingName": "Naziv",
-      "DashboardSettings": "Postavke nadzorne ploče",
-      "DeleteButtonLabel": "Izbriši...",
-      "DeleteTitle": "Izbriši nadzornu ploču",
-      "EditWidgets": "Uredi widgete...",
-      "NewDashboard": "Nova nadzorna ploča",
-      "NoDashboardsHelpText": "Nemate nadzorne ploče. Stvorite nadzornu ploču da biste započeli.",
-      "NoDashboardsPlaceholder": "Nema nadzornih ploča",
-      "NoWidgets": "Nema Widgeta",
-      "NoWidgetsHelpTextFirstLine": "Nadzorna ploča je malo prazna.",
-      "NoWidgetsHelpTextSecondLine": "Započnite dodavanjem widgeta iz trgovine widgetima.",
-      "Save": "Spremi",
-      "SaveChanges": "Spremi promjene",
-      "SaveFailedNotification": "Došlo je do pogreške prilikom spremanja nadzornih ploča. Pokušajte ponovo ili osvježite stranicu.",
-      "Settings": "Postavke",
-      "ToggleFullscreen": "Primjeni preko cijelog zaslona",
-      "UpdateChecker": {
-        "UpdateApplied": "Ažuriranje nadzorne ploče primijenjeno.",
-        "UpdateError": "Dostupna je nova verzija nadzorne ploče. Osvježite se da biste vidjeli promjene."
-      }
-    },
-    "Dialogs": {
-      "ConfirmButton": "Potvrdi",
-      "ConfirmDeleteBody": "Izbrisana stavka ne može se vratiti. Molimo potvrdite da brišete ispravnu stavku unosom \"{code}\" ispod.",
-      "ConfirmDeleteButton": "Izbriši"
-    },
-    "Entities": {
-      "Actions": "Akcije",
-      "Advanced": "Napredno",
-      "DeleteButtonLabel": "Izbriši...",
-      "DeleteTitle": "Izbriši entitet",
-      "Entities": "Entiteti",
-      "General": "Općenito",
-      "Graph": "Graf",
-      "ID": "ID",
-      "Identifier": "Identifikator",
-      "Information": "Informacije",
-      "LastActivity": "Posljednja aktivnost",
-      "Manufacturer": "Proizvođač",
-      "Model": "Model",
-      "SearchLabel": "Pretražite…",
-      "States": "Stanja",
-      "Table": "Tablica",
-      "history": "povijest",
-      "lastActivity": "Posljednja aktivnost",
-      "lastUpdate": "Zadnja promjena",
-      "name": "Naziv",
-      "shared": "Dijeljeno",
-      "value": "Vrijednost"
-    },
-    "Locales": {
-      "en": "Engleski",
-      "hr": "Hrvatski"
-    },
-    "Nav": {
-      "Dashboards": "Nadzorne ploče",
-      "Entities": "Entiteti",
-      "Processes": "Procesi",
-      "Settings": "Postavke",
-      "Stations": "Stanice"
-    },
-    "Placeholders": {
-      "Loading": "Učitavanje…",
-      "Never": "Nikad",
-      "NoDashboardsAvailable": "Nema dostupnih nadzornih ploča",
-      "NoData": "Nema podataka za prikazivanje",
-      "NoItems": "Nema stavki"
-    },
-    "Processes": {
-      "AddCondition": "Dodaj uvjet",
-      "AddConduct": "Dodaj ponašanje",
-      "AddTrigger": "Dodaj okidač",
-      "Conditions": "Uvjeti",
-      "Conducts": "Ponašanje",
-      "ConfirmDialogExpectedText": "potvrdi",
-      "DeleteProcessButtonLabel": "Izbriši...",
-      "DeleteProcessTitle": "Izbriši proces",
-      "NoConditions": "Nema uvjeta - proces će se izvršiti za svaki okidač",
-      "NoConducts": "Nema ponašanja",
-      "NoTriggers": "Nema okidača",
-      "Triggers": "Okidači",
-      "enabled": "Omogućen",
-      "name": "Naziv"
-    },
-    "Settings": {
-      "ApiEndpoint": "API endpoint",
-      "Connected": "Povezano",
-      "Developer": "Developer",
-      "General": "Općenito",
-      "Language": "Jezik",
-      "Location": "Lokacija",
-      "LocationAndTime": "Vrijeme i lokacija",
-      "LookAndFeel": "Izgled",
-      "Nickname": "Nadimak",
-      "Profile": "Profil",
-      "SelectLanguage": "Izaberi jezik",
-      "Theme": "Tema",
-      "ThemeModes": {
-        "LightSensor": "Senzor svjetla",
-        "Manual": "Ručno",
-        "SunriseSunset": "Izlazak/zalazak sunca",
-        "TimeRange": "Vremenski raspon"
-      },
-      "Themes": {
-        "Dark": "Tamno",
-        "DarkDimmed": "Tamno zatamnjena",
-        "Light": "Svijetlo",
-        "dark": "Tamno",
-        "darkDimmed": "Tamno zatamnjena",
-        "light": "Svijetlo"
-      },
-      "TimeFormat": "Format vremena",
-      "TimeFormat12Hour": "12-satni",
-      "TimeFormat24Hour": "24-satni",
-      "TimeZone": "Vremenska zona"
-    },
-    "Stations": {
-      "Advanced": "Napredno",
-      "BeginDiscovery": "Započnite otkrivanje",
-      "Channels": "Kanali",
-      "ConfirmDialogExpectedText": "potvrdi",
-      "DeleteStation": "Izbriši stanicu",
-      "DeleteStationLabel": "Izbriši...",
-      "Information": "Informacije",
-      "LastActivity": "Posljednja aktivnost",
-      "LogView": "Prikaži",
-      "LogViewer": "Pregled logova",
-      "Logs": "Logovi",
-      "Name": "Naziv",
-      "Never": "Nikad",
-      "RegisteredDate": "Datum registracije",
-      "RestartStation": "Restart stanica",
-      "RestartSystem": "Ponovno pokretanje sustava",
-      "Running": "Pokrenuto",
-      "ShutdownSystem": "Isključi sustav",
-      "Start": "Pokreni",
-      "StationCommandError": "Neuspjelo izvršavanje naredbe stanice",
-      "StationOperations": "Operacije stanice",
-      "Stations": "Stanice",
-      "Stop": "Zaustavi",
-      "Stopped": "Zaustavljen",
-      "SystemOperations": "Operacije sustava",
-      "Unknown": "Nepoznato",
-      "UpdateStationUpToDate": "Ažurirano",
-      "UpdateStationVersion": "Ažuriraj na {version}",
-      "UpdateSystem": "Ažuriraj sustav",
-      "Version": "Verzija",
-      "lastActivity": "Posljednja aktivnost",
-      "name": "Naziv",
-      "registeredDate": "Datum registracije",
-      "version": "Verzija"
-    },
-    "Widgets": {
-      "WidgetChecklist": {
-        "AddItem": "Dodaj stavku",
-        "Checklist": "Popis"
-      }
+    "App": {
+        "Account": {
+            "Logout": "Odjava",
+            "UserProfileImageAlt": "Slika korisničkog profila"
+        },
+        "Components": {
+            "AppThemePicker": {
+                "DayTime": "Vrijeme dana",
+                "NightTime": "Noć",
+                "PickDayNightTimes": "Odaberite vremena za dan i noć",
+                "PickNightTheme": "Odaberite noćnu temu"
+            },
+            "ShareEntityChip": {
+                "Cancel": "Otkaži",
+                "Email": "Email adresa",
+                "SendInvitation": "Pošalji pozivnicu",
+                "ShareWith": "Dijeljenje sa"
+            }
+        },
+        "Dashboards": {
+            "AddWidget": "Dodaj widget",
+            "Advanced": "Napredno",
+            "Cancel": "Otkaži",
+            "ConfirmDialogExpectedText": "potvrdi",
+            "Dashboard": "Nadzorna ploča",
+            "DashboardSettingName": "Naziv",
+            "DashboardSettings": "Postavke nadzorne ploče",
+            "DeleteButtonLabel": "Izbriši...",
+            "DeleteTitle": "Izbriši nadzornu ploču",
+            "EditWidgets": "Uredi widgete...",
+            "NewDashboard": "Nova nadzorna ploča",
+            "NoDashboardsHelpText": "Nemate nadzorne ploče. Stvorite nadzornu ploču da biste započeli.",
+            "NoDashboardsPlaceholder": "Nema nadzornih ploča",
+            "NoWidgets": "Nema Widgeta",
+            "NoWidgetsHelpTextFirstLine": "Nadzorna ploča je malo prazna.",
+            "NoWidgetsHelpTextSecondLine": "Započnite dodavanjem widgeta iz trgovine widgetima.",
+            "Save": "Spremi",
+            "SaveChanges": "Spremi promjene",
+            "SaveFailedNotification": "Došlo je do pogreške prilikom spremanja nadzornih ploča. Pokušajte ponovo ili osvježite stranicu.",
+            "Settings": "Postavke",
+            "ToggleFullscreen": "Primjeni preko cijelog zaslona",
+            "UpdateChecker": {
+                "UpdateApplied": "Ažuriranje nadzorne ploče primijenjeno.",
+                "UpdateError": "Dostupna je nova verzija nadzorne ploče. Osvježite se da biste vidjeli promjene."
+            }
+        },
+        "Dialogs": {
+            "ConfirmButton": "Potvrdi",
+            "ConfirmDeleteBody": "Izbrisana stavka ne može se vratiti. Molimo potvrdite da brišete ispravnu stavku unosom \"{code}\" ispod.",
+            "ConfirmDeleteButton": "Izbriši",
+            "Confirm": "Potvrdi"
+        },
+        "Entities": {
+            "Actions": "Akcije",
+            "Advanced": "Napredno",
+            "DeleteButtonLabel": "Izbriši...",
+            "DeleteTitle": "Izbriši entitet",
+            "Entities": "Entiteti",
+            "General": "Općenito",
+            "Graph": "Graf",
+            "ID": "ID",
+            "Identifier": "Identifikator",
+            "Information": "Informacije",
+            "LastActivity": "Posljednja aktivnost",
+            "Manufacturer": "Proizvođač",
+            "Model": "Model",
+            "SearchLabel": "Pretražite…",
+            "States": "Stanja",
+            "Table": "Tablica",
+            "history": "povijest",
+            "lastActivity": "Posljednja aktivnost",
+            "lastUpdate": "Zadnja promjena",
+            "name": "Naziv",
+            "shared": "Dijeljeno",
+            "value": "Vrijednost"
+        },
+        "Locales": {
+            "en": "Engleski",
+            "hr": "Hrvatski"
+        },
+        "Nav": {
+            "Dashboards": "Nadzorne ploče",
+            "Entities": "Entiteti",
+            "Processes": "Procesi",
+            "Settings": "Postavke",
+            "Stations": "Stanice"
+        },
+        "Placeholders": {
+            "Loading": "Učitavanje…",
+            "Never": "Nikad",
+            "NoDashboardsAvailable": "Nema dostupnih nadzornih ploča",
+            "NoData": "Nema podataka za prikazivanje",
+            "NoItems": "Nema stavki",
+            "Unknown": "Nepoznato"
+        },
+        "Processes": {
+            "AddCondition": "Dodaj uvjet",
+            "AddConduct": "Dodaj ponašanje",
+            "AddTrigger": "Dodaj okidač",
+            "Conditions": "Uvjeti",
+            "Conducts": "Ponašanje",
+            "ConfirmDialogExpectedText": "potvrdi",
+            "DeleteProcessButtonLabel": "Izbriši...",
+            "DeleteProcessTitle": "Izbriši proces",
+            "NoConditions": "Nema uvjeta - proces će se izvršiti za svaki okidač",
+            "NoConducts": "Nema ponašanja",
+            "NoTriggers": "Nema okidača",
+            "Triggers": "Okidači",
+            "enabled": "Omogućen",
+            "name": "Naziv"
+        },
+        "Settings": {
+            "ApiEndpoint": "API endpoint",
+            "Connected": "Povezano",
+            "Developer": "Developer",
+            "General": "Općenito",
+            "Language": "Jezik",
+            "Location": "Lokacija",
+            "LocationAndTime": "Vrijeme i lokacija",
+            "LookAndFeel": "Izgled",
+            "Nickname": "Nadimak",
+            "Profile": "Profil",
+            "SelectLanguage": "Izaberi jezik",
+            "Theme": "Tema",
+            "ThemeModes": {
+                "LightSensor": "Senzor svjetla",
+                "Manual": "Ručno",
+                "SunriseSunset": "Izlazak/zalazak sunca",
+                "TimeRange": "Vremenski raspon"
+            },
+            "Themes": {
+                "Dark": "Tamno",
+                "DarkDimmed": "Tamno zatamnjena",
+                "Light": "Svijetlo",
+                "dark": "Tamno",
+                "darkDimmed": "Tamno zatamnjena",
+                "light": "Svijetlo"
+            },
+            "TimeFormat": "Format vremena",
+            "TimeFormat12Hour": "12-satni",
+            "TimeFormat24Hour": "24-satni",
+            "TimeZone": "Vremenska zona"
+        },
+        "Stations": {
+            "Advanced": "Napredno",
+            "BeginDiscovery": "Započnite otkrivanje",
+            "Channels": "Kanali",
+            "ConfirmDialogExpectedText": "potvrdi",
+            "DeleteStation": "Izbriši stanicu",
+            "DeleteStationLabel": "Izbriši...",
+            "Information": "Informacije",
+            "LastActivity": "Posljednja aktivnost",
+            "LogView": "Prikaži",
+            "LogViewer": "Pregled logova",
+            "Logs": "Logovi",
+            "Name": "Naziv",
+            "Never": "Nikad",
+            "RegisteredDate": "Datum registracije",
+            "RestartStation": "Restart stanica",
+            "RestartSystem": "Ponovno pokretanje sustava",
+            "Running": "Pokrenuto",
+            "ShutdownSystem": "Isključi sustav",
+            "Start": "Pokreni",
+            "StationCommandError": "Neuspjelo izvršavanje naredbe stanice",
+            "StationOperations": "Operacije stanice",
+            "Stations": "Stanice",
+            "Stop": "Zaustavi",
+            "Stopped": "Zaustavljen",
+            "SystemOperations": "Operacije sustava",
+            "Unknown": "Nepoznato",
+            "UpdateStationUpToDate": "Ažurirano",
+            "UpdateStationVersion": "Ažuriraj na {version}",
+            "UpdateSystem": "Ažuriraj sustav",
+            "Version": "Verzija",
+            "lastActivity": "Posljednja aktivnost",
+            "name": "Naziv",
+            "registeredDate": "Datum registracije",
+            "version": "Verzija"
+        },
+        "Widgets": {
+            "WidgetChecklist": {
+                "AddItem": "Dodaj stavku",
+                "Checklist": "Popis"
+            }
+        }
     }
-  }
 }
