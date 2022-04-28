@@ -107,7 +107,7 @@
         "openapi-types": "^11.0.0",
         "prop-types": "15.8.1",
         "puppeteer": "13.6.0",
-        "react-is": "^18.0.0",
+        "react-is": "^18.1.0",
         "rimraf": "3.0.2",
         "sass": "1.51.0",
         "storybook-addon-next": "^1.6.2",
