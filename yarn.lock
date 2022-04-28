@@ -2220,16 +2220,16 @@
     regenerator-runtime "^0.13.7"
     ts-dedent "^2.0.0"
 
-"@storybook/addon-links@6.5.0-beta.0":
-  version "6.5.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-6.5.0-beta.0.tgz#24d7a437199b696a0a7979b8ab5a6341b9152524"
-  integrity sha512-GxgreiogiTGMapZPzUR5edEGUygAlX8h7If/9pcxUEVimCTIBFk38TJT/UE+97LTTdqS8sFUW1s0+AbX1TjPQA==
+"@storybook/addon-links@6.5.0-beta.1":
+  version "6.5.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-6.5.0-beta.1.tgz#8feb7a9c53c1fcaafb5ac16609e81cec1370e8cd"
+  integrity sha512-2NYHinKeIEfLobKHWIDW5GPdi8Rfe1UpUeb9RJs1xAp+/twbxv2ogNW3rTo7obLAKuw87DNa460tx6ikl61b7A==
   dependencies:
-    "@storybook/addons" "6.5.0-beta.0"
-    "@storybook/client-logger" "6.5.0-beta.0"
-    "@storybook/core-events" "6.5.0-beta.0"
-    "@storybook/csf" "0.0.2--canary.7c6c115.0"
-    "@storybook/router" "6.5.0-beta.0"
+    "@storybook/addons" "6.5.0-beta.1"
+    "@storybook/client-logger" "6.5.0-beta.1"
+    "@storybook/core-events" "6.5.0-beta.1"
+    "@storybook/csf" "0.0.2--canary.4566f4d.1"
+    "@storybook/router" "6.5.0-beta.1"
     "@types/qs" "^6.9.5"
     core-js "^3.8.2"
     global "^4.4.0"
