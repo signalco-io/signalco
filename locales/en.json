@@ -155,7 +155,8 @@
             "NoItems": "No items",
             "NoDashboardsAvailable": "No dashboards available",
             "Loading": "Loading...",
-            "Never": "Never"
+            "Never": "Never",
+            "Unknown": "Unknown"
         },
         "Widgets": {
             "WidgetChecklist": {
@@ -166,7 +167,8 @@
         "Dialogs": {
             "ConfirmDeleteBody": "Deleted item can not be restored. Please confirm you are deleting correct item by entering \"{code}\" bellow.",
             "ConfirmDeleteButton": "Delete",
-            "ConfirmButton": "Confirm"
+            "ConfirmButton": "Confirm",
+            "Confirm": "Confirm"
         },
         "Components": {
             "AppThemePicker": {
@@ -180,9 +182,6 @@
                 "Email": "Email address",
                 "SendInvitation": "Send invitation",
                 "Cancel": "Cancel"
-            },
-            "Timeago": {
-                "Never": "Never"
             }
         }
     }

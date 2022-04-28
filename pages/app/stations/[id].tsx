@@ -11,7 +11,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import HttpService from '../../../src/services/HttpService';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
-import useLocale, { localizer } from '../../../src/hooks/useLocale';
+import useLocale, { localizer, useLocalePlaceholders } from '../../../src/hooks/useLocale';
 import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
 import LoadableText from '../../../components/shared/Loadable/LoadableText';
 import Loadable from '../../../components/shared/Loadable/Loadable';
@@ -43,7 +43,7 @@ const StationDetails = () => {
     const router = useRouter();
 
     const { t } = useLocale('App', 'Stations');
-    const { t: tPlaceholders } = useLocale('App', 'Placeholders');
+    const { t: tPlaceholders } = useLocalePlaceholders();
 
     // Load station
     const { id } = router.query;
@@ -133,7 +133,7 @@ const StationDetails = () => {
                                         <Stack direction="row">
                                             {station.item?.version
                                                 ? <span>{station.item.version}</span>
-                                                : <span>{t('Unknown')}</span>}
+                                                : <span>{tPlaceholders('Unknown')}</span>}
                                         </Stack>
                                     </Grid>
                                     <Grid item xs={4} sx={{ textAlign: 'end' }}>

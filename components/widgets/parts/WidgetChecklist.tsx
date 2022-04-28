@@ -15,7 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
-import useLocale from '../../../src/hooks/useLocale';
+import useLocale, { useLocalePlaceholders } from '../../../src/hooks/useLocale';
 
 const stateOptions: IWidgetConfigurationOption[] = [
     DefaultLabel,
@@ -59,7 +59,7 @@ const ChecklistItem = observer((props: { item: IChecklistItem, onChange: (id: st
 
 const WidgetChecklist = (props: IWidgetSharedProps) => {
     const { id, config } = props;
-    const placeholders = useLocale('App', 'Placeholders');
+    const placeholders = useLocalePlaceholders();
     const { t } = useLocale('App', 'Widgets', 'WidgetChecklist');
     const [items] = useState(observable(LocalStorageService.getItemOrDefault<IChecklistItem[]>(`checklist-${id}`, [])));
     const [newItemText, setNewItemText] = useState('');

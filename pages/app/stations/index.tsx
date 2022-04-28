@@ -11,7 +11,7 @@ function stationModelToTableItem(station: IStationModel): IAutoTableItem {
     return {
         id: station.id,
         name: station.id,
-        version: station.version ?? 'Unknown',
+        version: station.version ?? '-',
         lastActivity: <Timeago date={station.stateTimeStamp} />,
         registeredDate: <Timeago date={station.registeredTimeStamp} />,
         _link: `/app/stations/${station.id}`
