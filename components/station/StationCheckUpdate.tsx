@@ -28,8 +28,6 @@ export default function StationCheckUpdate(props: { stationId: string[] | string
 
     const handleUpdate = () => stationCommandAsync(props.stationId, StationsRepository.updateStationAsync, 'update station');
 
-    console.log(latestAvailableVersion)
-
     return (
         <Button startIcon={canUpdate ? <UploadIcon /> : <CheckIcon />}
             variant="outlined"

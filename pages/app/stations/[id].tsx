@@ -105,7 +105,7 @@ const StationDetails = () => {
                 }}>{t('LogView')}</LoadingButton>
             )
         });
-    }, [loadingLog, station.item, t, tPlaceholders]);
+    }, [loadingLog, station.item, t]);
     const logsLoadItems = useCallback(() => Promise.resolve(station.item ? StationsRepository.getLogsAsync(station.item.id) : []), [station]);
     const logsTable = useAutoTable(logsLoadItems, logsAutoTableItemTransform, t);
 
