@@ -33,7 +33,7 @@ if (typeof window !== 'undefined') {
             rules: []
         });
         monaco.editor.defineTheme('signalco-light', {
-            base: 'vs-dark',
+            base: 'vs-light',
             colors: {
                 'editor.background': '#eeeeee'
             },

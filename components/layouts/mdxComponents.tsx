@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import NextLink from 'next/link';
 import { Checkbox, Paper, Typography, TableBody, TableCell, TableHead, TableRow, Divider, Link, Stack } from '@mui/material';
 import MdxPageLayout from './MdxPageLayout';
@@ -7,6 +7,10 @@ import { ChildrenProps } from '../../src/sharedTypes';
 import { useLocaleHelpers } from '../../src/hooks/useLocale';
 import IconButtonCopyToClipboard from '../shared/form/IconButtonCopyToClipboard';
 import useIsClient from '../../src/hooks/useIsClient';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { a11yDark as dark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import { a11yLight as light } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import { AppContext } from '../../pages/_app';
 
 const headingTopSpacing = 4;
 const headingBottomSpacing = 4;
@@ -150,6 +154,16 @@ const components: any = {
     thead: (() => {
         const THead = (props: any) => <TableHead {...props} />;
         return memo(THead);
+    })(),
+    code: (() => {
+        const Code = ({ className, ...props }) => {
+            const appContext = useContext(AppContext);
+            const match = /language-(\w+)/.exec(className || '')
+            return match
+                ? <SyntaxHighlighter style={appContext.isDark ? dark : light} language={match[1]} PreTag="div" {...props} />
+                : <code className={className} {...props} />
+        };
+        return memo(Code);
     })(),
     hr: Divider,
     input: (() => {
