@@ -17,6 +17,8 @@ import LoadableText from '../../../components/shared/Loadable/LoadableText';
 import Loadable from '../../../components/shared/Loadable/Loadable';
 import StationCheckUpdate from '../../../components/station/StationCheckUpdate';
 import Timeago from '../../../components/shared/time/Timeago';
+import LogViewer from '../../../components/logging/LogViewer';
+import { formatBytes } from '../../../src/helpers/StringHelpers';
 
 export const stationCommandAsync = async (stationId: string | string[] | undefined, command: (id: string) => Promise<void>, commandDescription: string) => {
     try {
@@ -85,7 +87,7 @@ const StationDetails = () => {
             name: nameMatch ? nameMatch[1] : i.name,
             created: <Timeago date={i.createdTimeStamp} />,
             modified: <Timeago date={i.modifiedTimeStamp} />,
-            size: i.size,
+            size: formatBytes(i.size),
             actions: (
                 <LoadingButton disabled={!!loadingLog && loadingLog !== i.name} loading={loadingLog === i.name} onClick={async () => {
                     if (station.item) {
@@ -219,7 +221,7 @@ const StationDetails = () => {
     );
 }
 
-interface ILogViewerProps {
+export interface ILogViewerProps {
     text: string;
     height: number;
 }
@@ -244,7 +246,7 @@ const LogLevelBadge = ({ level }: { level: string }) => {
     return <span style={{ backgroundColor: color, padding: '2px', paddingLeft: '6px', paddingRight: '6px', borderRadius: 4, marginRight: '8px', fontSize: '10px', textTransform: 'uppercase' }}>{level.substring(0, 3)}</span>
 };
 
-const LogViewerLine = (props: ILogViewerLineProps) => {
+export const LogViewerLine = (props: ILogViewerLineProps) => {
     const { number, data, lineHeight } = props;
     const matches = logLineRegex.exec(data);
     const timeStamp = matches ? new Date(matches[1]) : new Date(0);
@@ -256,40 +258,6 @@ const LogViewerLine = (props: ILogViewerLineProps) => {
             <div style={{ opacity: 0.8, display: 'inline-block', height: '1.3rem' }}>{matches ? matches[3] : data}</div>
         </div>
     )
-};
-
-const LogViewer = (props: ILogViewerProps) => {
-    const { text, height } = props;
-    const lineHeight = 20.8;
-    const overscan = 20;
-    // const reverse = true;
-
-    const [scrollPosition, setScrollPosition] = useState(0);
-
-    const numberOfLinesInView = Math.ceil(height / lineHeight);
-
-    const lines = text.split('\n');
-    // if (reverse) lines.reverse();
-
-    const linesCount = lines.length;
-
-    // Calcualte view
-    const firstVisibleLine = Math.floor(scrollPosition / lineHeight);
-    const startLine = Math.max(firstVisibleLine - overscan, 0);
-    const endLine = Math.min(firstVisibleLine + numberOfLinesInView + overscan, linesCount);
-    const linesInView = lines.slice(startLine, endLine);
-
-    const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-        setScrollPosition(e.currentTarget.scrollTop);
-    };
-
-    return (
-        <div onScroll={handleScroll} style={{ position: 'relative', height: height, overflow: 'scroll', fontFamily: '"Monaco", monospace', fontSize: '12px', whiteSpace: 'pre' }}>
-            <div style={{ height: `${linesCount * lineHeight}px` }}>
-                {linesInView.map((lineText, i) => <LogViewerLine key={i} number={startLine + i} lineHeight={lineHeight} data={lineText} />)}
-            </div>
-        </div>
-    );
 };
 
 StationDetails.layout = AppLayoutWithAuth;
