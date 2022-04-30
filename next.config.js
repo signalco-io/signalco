@@ -38,7 +38,6 @@ module.exports = withBundleAnalyzer(withPWA(withMDX({
         return [{
             source: '/(.*)',
             headers: createSecureHeaders({
-                frameGuard: 'deny',
                 contentSecurityPolicy: {
                     directives: {
                         defaultSrc: '\'self\'',

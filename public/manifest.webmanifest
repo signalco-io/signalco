@@ -57,8 +57,6 @@
       "purpose": "maskable"
     }
   ],
-  "splash_pages": null,
-  "url": "https://www.signalco.io",
   "lang": "English",
   "orientation": "any",
   "description": "Automate your life",
@@ -71,8 +69,8 @@
   ],
   "shortcuts": [
     {
-      "name": "Open dashboard",
-      "short_name": "Dashboard",
+      "name": "Open dashboards",
+      "short_name": "Dashboards",
       "url": "/app",
       "icons": [
         {

@@ -10,8 +10,34 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta charSet="utf-8"></meta>
-
+          <link rel="manifest" href="/manifest.webmanifest"></link>
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+          ></link>
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+          ></link>
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+          ></link>
+          <link
+            rel="mask-icon"
+            href="/safari-pinned-tab.svg"
+            color="#000000"
+          ></link>
+          <meta name="msapplication-TileColor" content="#000000"></meta>
+          <meta name="theme-color" content="#000000"></meta>
+          <meta name="theme-color" media="(prefers-color-scheme: light)" content="#000000"></meta>
+          <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#FFFFFF"></meta>
+          <meta name="description" content="Automate your life" />
           {/* Inject MUI styles first to match with the prepend: true configuration. */}
           {(this.props as any).emotionStyleTags}
         </Head>
