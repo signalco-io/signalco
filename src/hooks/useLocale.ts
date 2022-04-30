@@ -49,6 +49,10 @@ export function useLocalePlaceholders() {
     return useLocale('App', 'Placeholders');
 }
 
+export function useLocaleHelpers() {
+    return useLocale('Helpers');
+}
+
 export default function useLocale(...namespace: string[]): {t: LocalizeFunc} {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const t = useMemo(() => localizer(...namespace), [...namespace]);

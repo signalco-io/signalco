@@ -1,10 +1,31 @@
 import React, { memo } from 'react';
 import NextLink from 'next/link';
-import { Checkbox, Paper, Typography, TableBody, TableCell, TableHead, TableRow, Divider, Link } from '@mui/material';
+import { Checkbox, Paper, Typography, TableBody, TableCell, TableHead, TableRow, Divider, Link, Stack, IconButton, Tooltip, NoSsr } from '@mui/material';
 import MdxPageLayout from './MdxPageLayout';
+import LinkIcon from '@mui/icons-material/Link';
+import { ChildrenProps } from '../../src/sharedTypes';
+import { useLocaleHelpers } from '../../src/hooks/useLocale';
+import IconButtonCopyToClipboard from '../shared/form/IconButtonCopyToClipboard';
+import useIsClient from '../../src/hooks/useIsClient';
 
 const headingTopSpacing = 4;
-const headingBottomSpacing = 2;
+const headingBottomSpacing = 4;
+
+function LinkedHeader(props: ChildrenProps & { id: string | undefined }) {
+    const { t } = useLocaleHelpers();
+    const isClient = useIsClient();
+
+    return (
+        <Stack spacing={1} direction="row" alignItems="center" sx={{ '&>.mdxHeaderLinkButton': { visibility: 'hidden' }, '&:hover': { '&>.mdxHeaderLinkButton': { visibility: 'visible' } } }}>
+            {props.children}
+            {(props.id && isClient) &&
+                <IconButtonCopyToClipboard id={props.id} title={t('CopyLinkToClipboard')} value={`${window.location.origin}${window.location.pathname}#${props.id}`} className="mdxHeaderLinkButton">
+                    <LinkIcon />
+                </IconButtonCopyToClipboard>
+            }
+        </Stack>
+    );
+}
 
 const components: any = {
     a: (() => {
@@ -15,31 +36,73 @@ const components: any = {
         return memo(A);
     })(),
     p: (() => {
-        const P = (props: any) => <Typography sx={{ py: 1 }} gutterBottom {...props} />;
+        const P = (props: any) => <Typography sx={{ py: 1 }} gutterBottom color="textSecondary" {...props} />;
         return memo(P);
     })(),
     h1: (() => {
-        const H1 = (props: any) => <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} gutterBottom {...props} color="textSecondary" variant="h1" id={typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined} />;
+        const H1 = (props: any) => {
+            const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
+            return (
+                <LinkedHeader id={id}>
+                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h1" id={id} />
+                </LinkedHeader>
+            );
+        };
         return memo(H1);
     })(),
     h2: (() => {
-        const H2 = (props: any) => <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} gutterBottom {...props} color="textSecondary" variant="h2" id={typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined} />;
+        const H2 = (props: any) => {
+            const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
+            return (
+                <LinkedHeader id={id}>
+                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h2" id={id} />
+                </LinkedHeader>
+            );
+        };
         return memo(H2);
     })(),
     h3: (() => {
-        const H3 = (props: any) => <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} gutterBottom {...props} color="textSecondary" variant="h3" id={typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined} />;
+        const H3 = (props: any) => {
+            const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
+            return (
+                <LinkedHeader id={id}>
+                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h3" id={id} />
+                </LinkedHeader>
+            );
+        };
         return memo(H3);
     })(),
     h4: (() => {
-        const H4 = (props: any) => <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} gutterBottom {...props} color="textSecondary" variant="h4" />;
+        const H4 = (props: any) => {
+            const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
+            return (
+                <LinkedHeader id={id}>
+                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h4" id={id} />
+                </LinkedHeader>
+            );
+        };
         return memo(H4);
     })(),
     h5: (() => {
-        const H5 = (props: any) => <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} gutterBottom {...props} color="textSecondary" variant="h5" />;
+        const H5 = (props: any) => {
+            const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
+            return (
+                <LinkedHeader id={id}>
+                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h5" id={id} />
+                </LinkedHeader>
+            );
+        };
         return memo(H5);
     })(),
     h6: (() => {
-        const H6 = (props: any) => <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} gutterBottom {...props} color="textSecondary" variant="h6" />;
+        const H6 = (props: any) => {
+            const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
+            return (
+                <LinkedHeader id={id}>
+                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h6" id={id} />
+                </LinkedHeader>
+            );
+        };
         return memo(H6);
     })(),
     blockquote: (() => {
@@ -49,15 +112,15 @@ const components: any = {
         return memo(Blockquote);
     })(),
     ul: (() => {
-        const Ul = (props: any) => <Typography {...props} component="ul" />;
+        const Ul = (props: any) => <Typography {...props} component="ul" color="textSecondary" />;
         return memo(Ul);
     })(),
     ol: (() => {
-        const Ol = (props: any) => <Typography {...props} component="ol" />;
+        const Ol = (props: any) => <Typography {...props} component="ol" color="textSecondary" />;
         return memo(Ol);
     })(),
     li: (() => {
-        const Li = (props: any) => <Typography {...props} component="li" />;
+        const Li = (props: any) => <Typography {...props} component="li" color="textSecondary" />;
         return memo(Li);
     })(),
     table: (() => {

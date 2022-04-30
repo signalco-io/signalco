@@ -1,4 +1,10 @@
 {
+    "Helpers": {
+        "CopyToClipboard": "Kopiraj u clipboard",
+        "CopyLinkToClipboard": "Kopiraj link u clipboard",
+        "CopyToClipboardSuccess": "Kopirano u clipboard",
+        "CopyToClipboardError": "Greška kopiranja u clipboard"
+    },
     "App": {
         "Account": {
             "Logout": "Odjava",

@@ -1,4 +1,10 @@
 {
+    "Helpers": {
+        "CopyToClipboard": "Copy to clipboard",
+        "CopyLinkToClipboard": "Copy link to clipboard",
+        "CopyToClipboardSuccess": "Copied to clipboard",
+        "CopyToClipboardError": "Failed to copy to clipboard"
+    },
     "App": {
         "Locales": {
             "hr": "Croatian",
