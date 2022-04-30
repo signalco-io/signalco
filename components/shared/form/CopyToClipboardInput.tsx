@@ -28,7 +28,7 @@ const CopyToClipboardInput = (props: CopyToClipboardInputProps) => {
                 <FilledInput
                     endAdornment={
                         <InputAdornment position="end">
-                            <IconButtonCopyToClipboard id={props.id} title="Copy to clipboard" value={props.value} defaultValue={props.defaultValue}>
+                            <IconButtonCopyToClipboard edge id={props.id} title="Copy to clipboard" value={props.value} defaultValue={props.defaultValue}>
                                 <ContentCopyIcon fontSize={props.size} />
                             </IconButtonCopyToClipboard>
                         </InputAdornment>
