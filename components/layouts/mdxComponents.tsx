@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useId } from 'react';
 import NextLink from 'next/link';
 import { Checkbox, Paper, Typography, TableBody, TableCell, TableHead, TableRow, Divider, Link, Stack } from '@mui/material';
 import MdxPageLayout from './MdxPageLayout';
@@ -159,6 +159,7 @@ const components: any = {
     code: (() => {
         const Code = ({ className, ...props }: { children: string | string[], className?: string | undefined }) => {
             const appContext = useContext(AppContext);
+            const id = useId();
             const { t } = useLocalePlaceholders();
             const match = /language-(\w+)/.exec(className || '')
             return match
@@ -169,7 +170,7 @@ const components: any = {
                             <SyntaxHighlighter customStyle={{ background: 'transparent', fontSize: '0.9em' }} showLineNumbers style={appContext.isDark ? dark : light} language={match[1]} PreTag="div" {...props} />
                         </Paper>
                         <Stack direction="row" justifyContent="end">
-                            <IconButtonCopyToClipboard id={'mdx-code'} title={t('CopyCodeToClipboard')} value={props.children}>
+                            <IconButtonCopyToClipboard id={id} title={t('CopyCodeToClipboard')} value={props.children}>
                                 <ContentCopyIcon fontSize="small" />
                             </IconButtonCopyToClipboard>
                         </Stack>
