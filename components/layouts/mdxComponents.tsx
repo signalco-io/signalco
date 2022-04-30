@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import NextLink from 'next/link';
-import { Checkbox, Paper, Typography, TableBody, TableCell, TableHead, TableRow, Divider, Link, Stack, IconButton, Tooltip, NoSsr } from '@mui/material';
+import { Checkbox, Paper, Typography, TableBody, TableCell, TableHead, TableRow, Divider, Link, Stack, Tooltip, NoSsr } from '@mui/material';
 import MdxPageLayout from './MdxPageLayout';
 import LinkIcon from '@mui/icons-material/Link';
 import { ChildrenProps } from '../../src/sharedTypes';
