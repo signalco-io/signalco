@@ -38,8 +38,8 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.AT_GH_CD_REPO_PAT }}
             - name: Create comment about stories changes
-              uses: actions/github-script@v5
-              if: contains(steps.runStoriesCheck.outputs.changes, '[+]') || contains(steps.runStoriesCheck.outputs.changes, '[-]') || contains(steps.runStoriesCheck.outputs.changes, '[~]')
+              uses: actions/github-script@v6
+              if: steps.runStoriesCheck.outcome == 'failure'
               with:
                   github-token: ${{secrets.GITHUB_TOKEN}}
                   script: |
