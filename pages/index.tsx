@@ -156,7 +156,7 @@ const PlaySection = () => {
 const Index = () => {
   return (
     <Stack sx={{ overflowX: 'hidden' }}>
-      <Box my={8}>
+      <Box my={2}>
         <Cover />
       </Box>
       <Box sx={{ margin: 'auto' }}>
