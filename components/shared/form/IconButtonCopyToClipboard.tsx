@@ -9,11 +9,20 @@ import {
 import { ChildrenProps } from '../../../src/sharedTypes';
 import { useLocaleHelpers } from '../../../src/hooks/useLocale';
 
-export default function IconButtonCopyToClipboard(props: ChildrenProps & { id: string; title: string; value?: unknown; defaultValue?: unknown; className?: string | undefined }) {
+export type IconButtonCopyToClipboardProps = ChildrenProps & {
+    id: string;
+    title: string;
+    value?: unknown;
+    defaultValue?: unknown;
+    className?: string | undefined;
+    edge?: boolean | 'start' | 'end' | undefined;
+};
+
+export default function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps) {
     if (!props.id)
         throw 'CopyToClipboardInput requires id';
     const { t } = useLocaleHelpers();
-    const popupState = usePopupState({ variant: 'popper', popupId: `copytoclipboard-input-${props.id}` });
+    const popupState = usePopupState({ variant: 'popper', popupId: `copytoclipboard-button-${props.id}` });
     const [error, setError] = useState<boolean>(false);
 
     const handleClickShowCopyToClipboard = (event: MouseEvent<HTMLButtonElement>) => {
@@ -42,8 +51,8 @@ export default function IconButtonCopyToClipboard(props: ChildrenProps & { id: s
         <>
             <Tooltip title={props.title} className={props.className}>
                 <IconButton
-                    size="small"
-                    edge="end"
+                    size="medium"
+                    edge={props.edge === true ? 'end' : props.edge}
                     aria-label={props.title}
                     onClick={handleClickShowCopyToClipboard}
                     onMouseDown={handleMouseDownCopyToClipboard}>

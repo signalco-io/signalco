@@ -4,13 +4,14 @@ import { Checkbox, Paper, Typography, TableBody, TableCell, TableHead, TableRow,
 import MdxPageLayout from './MdxPageLayout';
 import LinkIcon from '@mui/icons-material/Link';
 import { ChildrenProps } from '../../src/sharedTypes';
-import { useLocaleHelpers } from '../../src/hooks/useLocale';
+import { useLocaleHelpers, useLocalePlaceholders } from '../../src/hooks/useLocale';
 import IconButtonCopyToClipboard from '../shared/form/IconButtonCopyToClipboard';
 import useIsClient from '../../src/hooks/useIsClient';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { a11yDark as dark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import { a11yLight as light } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import { AppContext } from '../../pages/_app';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const headingTopSpacing = 4;
 const headingBottomSpacing = 4;
@@ -158,9 +159,21 @@ const components: any = {
     code: (() => {
         const Code = ({ className, ...props }: { children: string | string[], className?: string | undefined }) => {
             const appContext = useContext(AppContext);
+            const { t } = useLocalePlaceholders();
             const match = /language-(\w+)/.exec(className || '')
             return match
-                ? <SyntaxHighlighter style={appContext.isDark ? dark : light} language={match[1]} PreTag="div" {...props} />
+                ? (
+                    <Stack spacing={1}>
+                        <Paper sx={{ py: 1, px: 2, position: 'relative' }}>
+                            <Typography sx={{ position: 'absolute', right: 12, top: 12, userSelect: 'none' }} color="textSecondary" variant="caption">{match[1]?.toUpperCase()}</Typography>
+                            <SyntaxHighlighter customStyle={{ background: 'transparent', fontSize: '0.9em' }} showLineNumbers style={appContext.isDark ? dark : light} language={match[1]} PreTag="div" {...props} />
+                        </Paper>
+                        <Stack direction="row" justifyContent="end">
+                            <IconButtonCopyToClipboard id={'mdx-code'} title={t('CopyCodeToClipboard')} value={props.children}>
+                                <ContentCopyIcon fontSize="small" />
+                            </IconButtonCopyToClipboard>
+                        </Stack>
+                    </Stack>)
                 : <code className={className} {...props} />
         };
         return memo(Code);

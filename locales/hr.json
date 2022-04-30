@@ -2,6 +2,7 @@
     "Helpers": {
         "CopyToClipboard": "Kopiraj u clipboard",
         "CopyLinkToClipboard": "Kopiraj link u clipboard",
+        "CopyCodeToClipboard": "Kopiraj kod u clipboard",
         "CopyToClipboardSuccess": "Kopirano u clipboard",
         "CopyToClipboardError": "Greška kopiranja u clipboard"
     },
