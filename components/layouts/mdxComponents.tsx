@@ -13,8 +13,8 @@ import { a11yLight as light } from 'react-syntax-highlighter/dist/cjs/styles/hlj
 import { AppContext } from '../../pages/_app';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
-const headingTopSpacing = 4;
-const headingBottomSpacing = 4;
+const headingTopSpacing = 2;
+const headingBottomSpacing = 2;
 
 function LinkedHeader(props: ChildrenProps & { id: string | undefined }) {
     const { t } = useLocaleHelpers();
