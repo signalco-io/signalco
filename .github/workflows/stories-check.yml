@@ -17,7 +17,7 @@ jobs:
                   path: "**/node_modules"
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
             - run: yarn install --network-timeout 1000000
-            - name: Run storiesCheck
+            - name: Run stories-check
               run: |
                   CHECK_RESULT=$(yarn stories-check)
                   CHECK_RESULT="${CHECK_RESULT//'%'/'%25'}"
