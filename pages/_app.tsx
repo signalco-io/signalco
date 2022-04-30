@@ -3,22 +3,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import appTheme, { AppTheme, AppThemeMode } from '../src/theme';
+import appTheme from '../src/theme';
 import '../styles/global.scss';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import createEmotionCache from '../src/createEmotionCache';
 import { SnackbarProvider } from 'notistack';
 import { ChildrenProps } from '../src/sharedTypes';
 import IAppContext from '../src/appContext/IAppContext';
-import UserSettingsProvider from '../src/services/UserSettingsProvider';
-import useUserSetting from '../src/hooks/useUserSetting';
-import SunHelper from '../src/helpers/SunHelper';
-import PageNotificationService from '../src/notifications/PageNotificationService';
-import useLocale from '../src/hooks/useLocale';
-import { useCallback } from 'react';
-import DateTimeProvider from '../src/services/DateTimeProvider';
-import useInterval from '../src/hooks/useInterval';
-import useIsomorphicLayoutEffect from '../src/hooks/useIsomorphicLayoutEffect';
+import useAppTheme from '../src/hooks/useAppTheme';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -27,7 +19,7 @@ interface CustomAppProps extends AppProps {
 }
 
 interface PageWithMetadata extends React.FunctionComponent {
-  layout: React.FunctionComponent | undefined
+  layout?: React.FunctionComponent | undefined
 };
 
 const appContextDefaultState: IAppContext = {
@@ -40,80 +32,19 @@ export const AppContext = React.createContext<IAppContext>(appContextDefaultStat
 export default function App(props: CustomAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  const [appContextState, setAppContext] = React.useState<IAppContext>(appContextDefaultState);
-
-  // Theme
-  const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
-  const [themeTimeRange] = useUserSetting<[string, string] | undefined>('themeTimeRange', undefined);
-  const themes = useLocale('App', 'Settings', 'Themes');
-
-  const applyThemeMode = useCallback((hideNotification?: boolean) => {
-    let themeOrPrefered = UserSettingsProvider.value<AppTheme>('theme', () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    const activeTheme = appContextState.theme;
-
-    if (themeMode === 'sunriseSunset' && SunHelper.isDay()) {
-      themeOrPrefered = 'light';
-    } else if (themeMode === 'timeRange' && themeTimeRange?.length === 2) {
-      const now = DateTimeProvider.now();
-      const dayTime = DateTimeProvider.fromDuration(now, themeTimeRange[0]);
-      const nightTime = DateTimeProvider.fromDuration(now, themeTimeRange[1]);
-      if (dayTime && nightTime && now >= dayTime && now < nightTime) {
-        themeOrPrefered = 'light';
-      }
-    }
-
-    if (activeTheme !== themeOrPrefered) {
-      document.documentElement.style.setProperty('color-scheme', themeOrPrefered === 'light' ? 'light' : 'dark');
-      setAppContext({
-        theme: themeOrPrefered,
-        isDark: themeOrPrefered === 'dark' || themeOrPrefered === 'darkDimmed'
-      });
-      if (!hideNotification) {
-        PageNotificationService.show(`Switched to ${themes.t(themeOrPrefered)} theme.`);
-      }
-    }
-  }, [appContextState.theme, themeMode, themeTimeRange, themes]);
-
-  // Apply theme mode every minute (and on first paint)
-  useInterval(applyThemeMode, 60000);
-  useIsomorphicLayoutEffect(() => applyThemeMode(true));
+  const [appContextState, setAppContextState] = React.useState<IAppContext>(appContextDefaultState);
+  useAppTheme(appContextState, setAppContextState);
 
   const Layout = (Component as PageWithMetadata).layout ?? ((props?: ChildrenProps) => <>{props?.children}</>);
 
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <link rel="manifest" href="/manifest.webmanifest"></link>
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        ></link>
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        ></link>
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        ></link>
-        <link
-          rel="mask-icon"
-          href="/safari-pinned-tab.svg"
-          color="#000000"
-        ></link>
-        <meta name="msapplication-TileColor" content="#000000"></meta>
-        <meta name="theme-color" content="#000000"></meta>
-        <meta name="description" content="Automate your life" />
-        <title>Signalco</title>
         <meta
           name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
+          content="initial-scale=1, width=device-width"
         />
+        <title>Signalco</title>
       </Head>
       <ThemeProvider theme={appTheme(appContextState.theme)}>
         <AppContext.Provider value={appContextState}>
