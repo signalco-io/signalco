@@ -17,31 +17,8 @@ import SecurityIcon from '@mui/icons-material/Security';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { ObjectDictAny } from '../../../src/sharedTypes';
-import Editor, { loader } from '@monaco-editor/react';
-import { AppContext } from '../../_app';
 import SendIcon from '@mui/icons-material/Send';
-
-loader.config({ paths: { vs: '/vs' } });
-if (typeof window !== 'undefined') {
-    loader.init().then(monaco => {
-        monaco.editor.defineTheme('signalco-dark', {
-            base: 'vs-dark',
-            colors: {
-                'editor.background': '#121212'
-            },
-            inherit: true,
-            rules: []
-        });
-        monaco.editor.defineTheme('signalco-light', {
-            base: 'vs-dark',
-            colors: {
-                'editor.background': '#eeeeee'
-            },
-            inherit: true,
-            rules: []
-        })
-    });
-}
+import CodeEditor from '../../../components/code/CodeEditor';
 
 type ChipColors = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
 
@@ -418,7 +395,6 @@ const Actions = (props: ActionsProps) => {
     const { info } = props;
     const api = useContext(ApiContext);
     const [selectedServer, setSelectedServer] = useHashParam('server');
-    const appContext = useContext(AppContext);
 
     if (!api) throw 'API undefined';
     const { servers } = api;
@@ -496,16 +472,7 @@ const Actions = (props: ActionsProps) => {
                     <Stack>
                         <Typography textAlign="right" variant="caption">application/json</Typography>
                         <Paper variant="outlined">
-                            <Editor
-                                height="300px"
-                                language="json"
-                                theme={appContext.isDark ? 'signalco-dark' : 'signalco-light'}
-                                options={{
-                                    lineNumbers: 'off',
-                                    minimap: { enabled: false }
-                                }}
-                                value={requestBodyValue}
-                                onChange={(value) => setRequestBodyValue(value || '')} />
+                            <CodeEditor language="json" code={requestBodyValue} setCode={setRequestBodyValue} height={300} />
                         </Paper>
                     </Stack>
                 </Stack>
@@ -518,17 +485,7 @@ const Actions = (props: ActionsProps) => {
                         <ResponseStatusCode statusCode={responseStatusCode} />
                     </Stack>
                     <Paper variant="outlined">
-                        <Editor
-                            height="200px"
-                            language="json"
-                            theme={appContext.isDark ? 'signalco-dark' : 'signalco-light'}
-                            options={{
-                                lineNumbers: 'off',
-                                minimap: { enabled: false },
-                                renderValidationDecorations: 'off',
-                                readOnly: true
-                            }}
-                            value={response || 'Empty response'} />
+                        <CodeEditor language="json" code={response || 'Empty response'} height={200} readonly />
                     </Paper>
                 </Stack>
             )}

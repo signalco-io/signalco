@@ -1,7 +1,6 @@
 import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, Grid, IconButton, Paper, Skeleton, Slider, Stack, Switch, Tab, Tabs, Typography, CardMedia, FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react';
-import ReactTimeago from 'react-timeago';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
 import { IDeviceContact, IDeviceContactState } from '../../../src/devices/Device';
@@ -25,6 +24,7 @@ import { IHistoricalValue } from '../../../src/entity/IHistoricalValue';
 import dynamic from 'next/dynamic';
 import CloseIcon from '@mui/icons-material/Close';
 import useLocale from '../../../src/hooks/useLocale';
+import Timeago from '../../../components/shared/time/Timeago';
 
 const DynamicGraph = dynamic(() => import('../../../components/graphs/Graph'));
 
@@ -167,9 +167,7 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
 });
 
 const ContactStateLastUpdatedDisplay = observer((props: { state?: IDeviceContactState }) => (
-    <>
-        {props.state ? <ReactTimeago date={props.state.timeStamp} live /> : 'Unknown'}
-    </>
+    <Timeago date={props.state?.timeStamp} live />
 ));
 
 const ContactStateValueDisplay = observer((props: { contact?: IDeviceContact, state?: IDeviceContactState }) => {
@@ -190,7 +188,7 @@ const ContactStateValueDisplay = observer((props: { contact?: IDeviceContact, st
 function historicalValueToTableItem(value: IHistoricalValue) {
     return {
         id: value.timeStamp.toString(),
-        time: <ReactTimeago date={value.timeStamp} />,
+        time: <Timeago date={value.timeStamp} />,
         value: value.valueSerialized,
     };
 }
@@ -336,7 +334,7 @@ const DeviceDetails = () => {
                         <Stack spacing={1} >
                             <Stack direction="row" justifyContent="space-between" spacing={2}>
                                 <span>{t('LastActivity')}</span>
-                                {device && device?.getLastActivity() > 0 ? <ReactTimeago date={device?.getLastActivity()} /> : 'Never'}
+                                <Timeago date={device?.getLastActivity()} />
                             </Stack>
                             <Stack direction="row" justifyContent="space-between" spacing={2}>
                                 <span>{t('Model')}</span>

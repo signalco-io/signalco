@@ -2,7 +2,6 @@ import React from 'react';
 import { Avatar, Box, ButtonBase, Grid, NoSsr, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import { IDeviceModel } from '../../../src/devices/Device';
-import ReactTimeago from 'react-timeago';
 import { observer } from 'mobx-react-lite';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import useAllEntities from '../../../src/hooks/useAllEntities';
@@ -26,6 +25,7 @@ import ViewListIcon from '@mui/icons-material/ViewList';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import useLocale from '../../../src/hooks/useLocale';
 import Loadable from '../../../components/shared/Loadable/Loadable';
+import Timeago from '../../../components/shared/time/Timeago';
 
 const EntityIcon = (entity: IDeviceModel) => {
     let Icon = DevicesOtherIcon;
@@ -77,7 +77,7 @@ const EntityCard = (props: { entity: IDeviceModel }) => {
                                 </Stack>
                                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                                     <ShareEntityChip entityType={2} entity={entity} disableAction />
-                                    <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>{entity.states.length > 0 ? <ReactTimeago date={entity.getLastActivity()} /> : 'Never'}</Box>
+                                    <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}><Timeago date={entity.getLastActivity()} /></Box>
                                 </Stack>
                             </Stack>
                         </Box>
@@ -104,7 +104,7 @@ function deviceModelToTableItem(entity: IDeviceModel): IAutoTableItem {
         id: entity.id,
         name: <EntityTableName entity={entity} />,
         shared: <ShareEntityChip entity={entity} entityType={1} />,
-        lastActivity: <Box style={{ opacity: 0.8 }}>{entity.states.length > 0 ? <ReactTimeago date={entity.getLastActivity()} /> : 'Never'}</Box>,
+        lastActivity: <Box style={{ opacity: 0.8 }}><Timeago date={entity.getLastActivity()} /></Box>,
         _link: `/app/entities/${entity.id}`
     };
 }

@@ -3,6 +3,7 @@ import en from '../../locales/en.json';
 import hr from '../../locales/hr.json';
 import UserSettingsProvider from '../services/UserSettingsProvider';
 import { ObjectDictAny } from '../sharedTypes';
+import useIsClient from './useIsClient';
 
 export type LocalizeFunc = (key: string, data?: object | undefined) => string;
 
@@ -44,8 +45,18 @@ export function localizer(...namespace: string[]): LocalizeFunc {
     return (key: string, data?: object) => { return namespaceKeys && namespaceKeys[key] ? formatString(namespaceKeys[key], data) : `{${key}}`; };
 }
 
+export function useLocalePlaceholders() {
+    return useLocale('App', 'Placeholders');
+}
+
+export function useLocaleHelpers() {
+    return useLocale('Helpers');
+}
+
 export default function useLocale(...namespace: string[]): {t: LocalizeFunc} {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const t = useMemo(() => localizer(...namespace), [...namespace]);
-    return { t: t };
+    const isClient = useIsClient();
+
+    return { t: isClient ? t : () => '' };
 }

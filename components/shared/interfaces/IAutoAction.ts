@@ -1,7 +1,7 @@
 export default interface IAutoAction {
   id: string;
   label: string;
-  icon?: React.Component;
+  icon?: React.ReactNode;
   url: string;
   method?: 'get' | 'post' | 'put' | 'delete';
   data?: string | object;

@@ -9,7 +9,6 @@ module.exports = {
         '@storybook/addon-a11y',
         '@storybook/addon-storysource',
         'storycap',
-        'storybook-addon-performance/register',
         'storybook-addon-next'
     ],
     framework: '@storybook/react',

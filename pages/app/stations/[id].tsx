@@ -1,7 +1,6 @@
 import { Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
 import React, { useCallback, useState } from 'react';
-import ReactTimeago from 'react-timeago';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import { observer } from 'mobx-react-lite';
 import StationsRepository, { IBlobInfoModel } from '../../../src/stations/StationsRepository';
@@ -12,11 +11,12 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import HttpService from '../../../src/services/HttpService';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
-import useLocale, { localizer } from '../../../src/hooks/useLocale';
+import useLocale, { localizer, useLocalePlaceholders } from '../../../src/hooks/useLocale';
 import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
 import LoadableText from '../../../components/shared/Loadable/LoadableText';
 import Loadable from '../../../components/shared/Loadable/Loadable';
 import StationCheckUpdate from '../../../components/station/StationCheckUpdate';
+import Timeago from '../../../components/shared/time/Timeago';
 
 export const stationCommandAsync = async (stationId: string | string[] | undefined, command: (id: string) => Promise<void>, commandDescription: string) => {
     try {
@@ -43,7 +43,7 @@ const StationDetails = () => {
     const router = useRouter();
 
     const { t } = useLocale('App', 'Stations');
-    const { t: tPlaceholders } = useLocale('App', 'Placeholders');
+    const { t: tPlaceholders } = useLocalePlaceholders();
 
     // Load station
     const { id } = router.query;
@@ -83,8 +83,8 @@ const StationDetails = () => {
         return ({
             id: i.name,
             name: nameMatch ? nameMatch[1] : i.name,
-            created: <ReactTimeago date={i.createdTimeStamp} />,
-            modified: i.modifiedTimeStamp ? <ReactTimeago date={i.modifiedTimeStamp} /> : tPlaceholders('Never'),
+            created: <Timeago date={i.createdTimeStamp} />,
+            modified: <Timeago date={i.modifiedTimeStamp} />,
             size: i.size,
             actions: (
                 <LoadingButton disabled={!!loadingLog && loadingLog !== i.name} loading={loadingLog === i.name} onClick={async () => {
@@ -105,7 +105,7 @@ const StationDetails = () => {
                 }}>{t('LogView')}</LoadingButton>
             )
         });
-    }, [loadingLog, station.item, t, tPlaceholders]);
+    }, [loadingLog, station.item, t]);
     const logsLoadItems = useCallback(() => Promise.resolve(station.item ? StationsRepository.getLogsAsync(station.item.id) : []), [station]);
     const logsTable = useAutoTable(logsLoadItems, logsAutoTableItemTransform, t);
 
@@ -133,7 +133,7 @@ const StationDetails = () => {
                                         <Stack direction="row">
                                             {station.item?.version
                                                 ? <span>{station.item.version}</span>
-                                                : <span>{t('Unknown')}</span>}
+                                                : <span>{tPlaceholders('Unknown')}</span>}
                                         </Stack>
                                     </Grid>
                                     <Grid item xs={4} sx={{ textAlign: 'end' }}>
@@ -141,18 +141,12 @@ const StationDetails = () => {
                                     </Grid>
                                     <Grid item xs={4}><span>{t('LastActivity')}</span></Grid>
                                     <Grid item xs={8}>
-                                        {station.item?.stateTimeStamp
-                                            ? <ReactTimeago date={station.item.stateTimeStamp} />
-                                            : <span>{t('Never')}</span>
-                                        }
+                                        <Timeago date={station.item?.stateTimeStamp} />
                                     </Grid>
                                     <Grid item xs={4}><span>{t('RegisteredDate')}</span></Grid>
                                     <Grid item xs={8}>
                                         <LoadableText isLoading={station.isLoading} error={station.error}>
-                                            {station.item?.registeredTimeStamp
-                                                ? <ReactTimeago date={station.item.registeredTimeStamp} />
-                                                : <span>{t('Never')}</span>
-                                            }
+                                            <Timeago date={station.item?.registeredTimeStamp} />
                                         </LoadableText>
                                     </Grid>
                                     <Grid item xs={4}><span>{t('StationOperations')}</span></Grid>

@@ -23,6 +23,7 @@ const componentInPageBorder = {
 
 // Create a theme instance.
 const theme = (theme: AppTheme) => {
+  const responsiveFont = true;
   const isDark = theme === 'dark' || theme === 'darkDimmed';
 
   let primaryDark;
@@ -56,7 +57,7 @@ const theme = (theme: AppTheme) => {
   const primary = isDark ? primaryDark : primaryLight;
   const secondary = isDark ? secondaryDark : secondaryLight;
 
-  return responsiveFontSizes(createTheme({
+  const createdTheme = createTheme({
     palette: {
       mode: isDark ? 'dark' : 'light',
       primary: {
@@ -145,7 +146,13 @@ const theme = (theme: AppTheme) => {
         fontWeight: 400,
       }
     }
-  }));
+  });
+
+  if (responsiveFont) {
+    return responsiveFontSizes(createdTheme);
+  }
+
+  return createdTheme;
 };
 
 export default theme;

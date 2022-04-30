@@ -1,4 +1,11 @@
 {
+    "Helpers": {
+        "CopyToClipboard": "Copy to clipboard",
+        "CopyLinkToClipboard": "Copy link to clipboard",
+        "CopyCodeToClipboard": "Copy code to clipboard",
+        "CopyToClipboardSuccess": "Copied to clipboard",
+        "CopyToClipboardError": "Failed to copy to clipboard"
+    },
     "App": {
         "Locales": {
             "hr": "Croatian",
@@ -155,7 +162,8 @@
             "NoItems": "No items",
             "NoDashboardsAvailable": "No dashboards available",
             "Loading": "Loading...",
-            "Never": "Never"
+            "Never": "Never",
+            "Unknown": "Unknown"
         },
         "Widgets": {
             "WidgetChecklist": {
@@ -166,7 +174,8 @@
         "Dialogs": {
             "ConfirmDeleteBody": "Deleted item can not be restored. Please confirm you are deleting correct item by entering \"{code}\" bellow.",
             "ConfirmDeleteButton": "Delete",
-            "ConfirmButton": "Confirm"
+            "ConfirmButton": "Confirm",
+            "Confirm": "Confirm"
         },
         "Components": {
             "AppThemePicker": {

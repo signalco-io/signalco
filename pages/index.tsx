@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { useContext } from 'react';
 import { AppContext } from './_app';
 import { GitHub, KeyboardArrowRight } from '@mui/icons-material';
+import AppSettingsProvider from '../src/services/AppSettingsProvider';
 
 const Newsletter = dynamic(() => import('../components/pages/landing/Newsletter'));
 const GlobePart = dynamic(() => import('../components/pages/landing/GlobeSection'));
@@ -156,17 +157,19 @@ const PlaySection = () => {
 const Index = () => {
   return (
     <Stack sx={{ overflowX: 'hidden' }}>
-      <Box my={8}>
+      <Box my={2}>
         <Cover />
       </Box>
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={0} />
       </Box>
-      <StepContent title="Developers" subtitle="Signalco is free and open source project run by small team of enthusiasts.">
-        <Stack alignItems="center">
-          <Button variant="outlined" startIcon={<GitHub />} endIcon={<KeyboardArrowRight />} href="https://github.com/signalco-io" size="large">Signalco on GitHub</Button>
-        </Stack>
-      </StepContent>
+      {AppSettingsProvider.isDeveloper && (
+        <StepContent title="Developers" subtitle="Signalco is free and open source project run by small team of enthusiasts.">
+          <Stack alignItems="center">
+            <Button variant="outlined" startIcon={<GitHub />} endIcon={<KeyboardArrowRight />} href="https://github.com/signalco-io" size="large">Signalco on GitHub</Button>
+          </Stack>
+        </StepContent>
+      )}
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={1} />
       </Box>

@@ -1,6 +1,6 @@
 import compareVersions from 'compare-versions';
 import { useLoadAndError } from '../../src/hooks/useLoadingAndError';
-import useLocale from '../../src/hooks/useLocale';
+import useLocale, { useLocalePlaceholders } from '../../src/hooks/useLocale';
 import StationsRepository from '../../src/stations/StationsRepository';
 import UploadIcon from '@mui/icons-material/Upload';
 import CheckIcon from '@mui/icons-material/Check';
@@ -19,6 +19,7 @@ async function loadLatestAvailableVersion() {
 
 export default function StationCheckUpdate(props: { stationId: string[] | string | undefined, stationVersion: string | undefined }) {
     const { t } = useLocale('App', 'Stations');
+    const { t: tPlaceholder } = useLocalePlaceholders();
 
     const latestAvailableVersion = useLoadAndError(loadLatestAvailableVersion);
     const canUpdate = (!latestAvailableVersion.isLoading && !latestAvailableVersion.error && props.stationVersion)
@@ -32,8 +33,8 @@ export default function StationCheckUpdate(props: { stationId: string[] | string
             variant="outlined"
             disabled={!canUpdate}
             onClick={handleUpdate}>
-            {canUpdate
-                ? t('UpdateStationVersion', { version: latestAvailableVersion.item })
+            {canUpdate && latestAvailableVersion
+                ? t('UpdateStationVersion', { version: latestAvailableVersion.item.name ?? tPlaceholder('Unknown') })
                 : t('UpdateStationUpToDate')}
         </Button>
     );

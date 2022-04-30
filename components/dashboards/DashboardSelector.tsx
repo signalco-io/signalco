@@ -1,4 +1,4 @@
-import { Box, Button, Popover, Stack, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Button, NoSsr, Popover, Stack, Tab, Tabs, Typography } from '@mui/material';
 import { bindPopover, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import React, { useEffect } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -33,7 +33,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
     console.debug('Rendering DashboardSelector');
 
     return (
-        <>
+        <NoSsr>
             <Stack spacing={{ xs: 0, sm: 2 }} direction="row">
                 {dashboards.length > 0 && (
                     <Box>
@@ -99,7 +99,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                     onEditWidgets={onEditWidgets}
                     onSettings={onSettings} />
             </Popover>
-        </>
+        </NoSsr>
     );
 }
 

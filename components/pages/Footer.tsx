@@ -20,7 +20,7 @@ const footerLinks: FooterSectionType[] = [
         links: [
             { name: 'Website', href: 'https://github.com/signalco-io/signalco' },
             { name: 'Cloud', href: 'https://github.com/signalco-io/cloud' },
-            { name: 'Station', href: 'https://github.com/signalco-io/station' },
+            { name: 'Station', href: '/station' },
             { name: 'Companion', href: 'https://github.com/signalco-io/companion' },
         ],
         developerOnly: true

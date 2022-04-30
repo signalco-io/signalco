@@ -1,8 +1,8 @@
 import { Typography } from '@mui/material';
-import useLocale from '../../../src/hooks/useLocale';
+import { useLocalePlaceholders } from '../../../src/hooks/useLocale';
 
 export default function ResultsPlaceholder() {
-  const placeholders = useLocale('App', 'Placeholders');
+  const placeholders = useLocalePlaceholders();
   return (
     <Typography variant="caption" color="textSecondary">
       {placeholders.t('NoItems')}

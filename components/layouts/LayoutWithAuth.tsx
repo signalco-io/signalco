@@ -3,8 +3,7 @@ import React, { useEffect } from 'react';
 import CurrentUserProvider from '../../src/services/CurrentUserProvider';
 import HttpService from '../../src/services/HttpService';
 
-
-export function LayoutWithAuth(props: { LayoutComponent: React.ComponentType; children?: React.ReactNode; }) {
+export function LayoutWithAuth(props: { LayoutComponent: React.FC<{ children: React.ReactNode }>, children?: React.ReactNode; }) {
     const {
         children, LayoutComponent
     } = props;

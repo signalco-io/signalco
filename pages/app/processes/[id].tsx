@@ -15,7 +15,7 @@ import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDelete
 import EntityRepository from '../../../src/entity/EntityRepository';
 import { ObjectDictAny } from '../../../src/sharedTypes';
 import { TransitionGroup } from 'react-transition-group';
-import useLocale from '../../../src/hooks/useLocale';
+import useLocale, { useLocalePlaceholders } from '../../../src/hooks/useLocale';
 import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
 
 interface IDeviceStateValue {
@@ -200,6 +200,7 @@ const DisplayValue = observer((props: { value: any | undefined, dataType: string
     const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
     const [dataType, setDataType] = useState(props.dataType);
     const [value, setValue] = useState<string>(props.value || '');
+    const { t } = useLocalePlaceholders();
 
     useEffect(() => {
         if (!dataType) {
@@ -231,7 +232,7 @@ const DisplayValue = observer((props: { value: any | undefined, dataType: string
 
     let label: string | React.ReactNode = 'None';
     if (dataType === 'bool' || dataType === 'any') {
-        label = props.value?.toString() || 'Unknown';
+        label = props.value?.toString() || t('Unknown');
     } else if (dataType === 'string') {
         label = `"${props.value}"`;
     } else if (dataType === 'double' || dataType === 'colortemp') {
@@ -441,6 +442,7 @@ const ProcessDetails = () => {
     const router = useRouter();
     const { id } = router.query;
     const { t } = useLocale('App', 'Processes');
+    const { t: tPlaceholders } = useLocalePlaceholders();
 
     const loadProcess = useCallback(async () => {
         if (typeof id !== 'undefined' && typeof id !== 'object')
@@ -546,7 +548,7 @@ const ProcessDetails = () => {
                     <Stack spacing={2}>
                         {process.isLoading ?
                             <Skeleton variant="text" width={260} height={38} /> :
-                            <Typography variant="h2">{process.item?.alias ?? 'Unknown'}</Typography>}
+                            <Typography variant="h2">{process.item?.alias ?? tPlaceholders('Unknown')}</Typography>}
                         <Box>
                             <ConfirmDeleteButton
                                 buttonLabel={t('DeleteProcessButtonLabel')}
