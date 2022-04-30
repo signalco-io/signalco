@@ -17,12 +17,12 @@ jobs:
                   path: "**/node_modules"
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
             - run: yarn install --network-timeout 1000000
-            - run: |
+            - name: Run stories-check
+              run: |
                   CHECK_RESULT=$(yarn stories-check)
                   CHECK_RESULT="${CHECK_RESULT//'%'/'%25'}"
                   CHECK_RESULT="${CHECK_RESULT//$'\n'/'%0A'}"
                   CHECK_RESULT="${CHECK_RESULT//$'\r'/'%0D'}"
-                  CHECK_RESULT="${CHECK_RESULT//$'\''/'\\\''}"
                   echo "::set-output name=changes::${CHECK_RESULT}\n"
               id: runStoriesCheck
               continue-on-error: true
@@ -47,5 +47,5 @@ jobs:
                           issue_number: context.issue.number,
                           owner: context.repo.owner,
                           repo: context.repo.repo,
-                          body: 'Some stories were changed:\n\n${{ steps.runStoriesCheck.outputs.changes }}'
+                          body: `Some stories were changed:\n\n${{ steps.runStoriesCheck.outputs.changes }}`
                       })
