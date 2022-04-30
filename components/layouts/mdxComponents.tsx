@@ -156,7 +156,7 @@ const components: any = {
         return memo(THead);
     })(),
     code: (() => {
-        const Code = ({ className, ...props }) => {
+        const Code = ({ className, ...props }: { children: string | string[], className?: string | undefined }) => {
             const appContext = useContext(AppContext);
             const match = /language-(\w+)/.exec(className || '')
             return match
