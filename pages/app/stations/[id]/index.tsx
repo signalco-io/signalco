@@ -1,24 +1,20 @@
 import { Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
-import React, { useCallback, useState } from 'react';
-import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
+import React, { useCallback } from 'react';
+import { AppLayoutWithAuth } from '../../../../components/layouts/AppLayoutWithAuth';
 import { observer } from 'mobx-react-lite';
-import StationsRepository, { IBlobInfoModel } from '../../../src/stations/StationsRepository';
-
-import AutoTable from '../../../components/shared/table/AutoTable';
-import useAutoTable from '../../../components/shared/table/useAutoTable';
+import StationsRepository from '../../../../src/stations/StationsRepository';
+import AutoTable from '../../../../components/shared/table/AutoTable';
+import useAutoTable from '../../../../components/shared/table/useAutoTable';
 import LoadingButton from '@mui/lab/LoadingButton';
-import HttpService from '../../../src/services/HttpService';
-import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
-import PageNotificationService from '../../../src/notifications/PageNotificationService';
-import useLocale, { localizer, useLocalePlaceholders } from '../../../src/hooks/useLocale';
-import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
-import LoadableText from '../../../components/shared/Loadable/LoadableText';
-import Loadable from '../../../components/shared/Loadable/Loadable';
-import StationCheckUpdate from '../../../components/station/StationCheckUpdate';
-import Timeago from '../../../components/shared/time/Timeago';
-import LogViewer from '../../../components/logging/LogViewer';
-import { formatBytes } from '../../../src/helpers/StringHelpers';
+import ConfirmDeleteButton from '../../../../components/shared/dialog/ConfirmDeleteButton';
+import PageNotificationService from '../../../../src/notifications/PageNotificationService';
+import useLocale, { localizer, useLocalePlaceholders } from '../../../../src/hooks/useLocale';
+import { useLoadAndError } from '../../../../src/hooks/useLoadingAndError';
+import LoadableText from '../../../../components/shared/Loadable/LoadableText';
+import Loadable from '../../../../components/shared/Loadable/Loadable';
+import StationCheckUpdate from '../../../../components/station/StationCheckUpdate';
+import Timeago from '../../../../components/shared/time/Timeago';
 
 export const stationCommandAsync = async (stationId: string | string[] | undefined, command: (id: string) => Promise<void>, commandDescription: string) => {
     try {
@@ -76,40 +72,6 @@ const StationDetails = () => {
     }, [station, t]);
     const workerServicesTableLoadItems = useCallback(() => Promise.resolve(station.item?.availableWorkerServices || []), [station])
     const workerServicesTable = useAutoTable(workerServicesTableLoadItems, workerServicesTableTransformItems, t);
-
-    const [logContent, setLogContent] = useState('');
-    const [loadingLog, setLoadingLog] = useState<string | undefined>(undefined);
-
-    const logsAutoTableItemTransform = useCallback((i: IBlobInfoModel) => {
-        var nameMatch = new RegExp(/.*\/(.*).txt/g).exec(i.name);
-        return ({
-            id: i.name,
-            name: nameMatch ? nameMatch[1] : i.name,
-            created: <Timeago date={i.createdTimeStamp} />,
-            modified: <Timeago date={i.modifiedTimeStamp} />,
-            size: formatBytes(i.size),
-            actions: (
-                <LoadingButton disabled={!!loadingLog && loadingLog !== i.name} loading={loadingLog === i.name} onClick={async () => {
-                    if (station.item) {
-                        try {
-                            console.log(`Downloading ${i.name}...`);
-                            setLoadingLog(i.name);
-                            const response = await HttpService.getAsync(`/stations/logging/download?stationId=${station.item?.id}&blobName=${i.name}`) as { fileContents: string };
-                            console.log(`Reading ${i.name}...`);
-                            const contentBuffer = Buffer.from(response.fileContents, 'base64');
-                            setLogContent(contentBuffer.toString('utf8'));
-                            console.log(`Done ${i.name}...`);
-                        }
-                        finally {
-                            setLoadingLog(undefined);
-                        }
-                    }
-                }}>{t('LogView')}</LoadingButton>
-            )
-        });
-    }, [loadingLog, station.item, t]);
-    const logsLoadItems = useCallback(() => Promise.resolve(station.item ? StationsRepository.getLogsAsync(station.item.id) : []), [station]);
-    const logsTable = useAutoTable(logsLoadItems, logsAutoTableItemTransform, t);
 
     const handleDelete = async () => {
         if (!station.item) return;
@@ -195,70 +157,11 @@ const StationDetails = () => {
                             </CardMedia>
                         </Card>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={8} lg={6}>
-                        <Card>
-                            <CardHeader title={t('Logs')} />
-                            <CardMedia>
-                                <Loadable isLoading={station.isLoading} error={station.error} placeholder="linear">
-                                    <AutoTable {...logsTable} />
-                                </Loadable>
-                            </CardMedia>
-                        </Card>
-                    </Grid>
-                    {logContent && (
-                        <Grid item xs={12}>
-                            <Card>
-                                <CardHeader title={t('LogViewer')} />
-                                <CardMedia>
-                                    <LogViewer text={logContent} height={500} />
-                                </CardMedia>
-                            </Card>
-                        </Grid>
-                    )}
                 </Grid>
             </Stack>
         </Box>
     );
 }
-
-export interface ILogViewerProps {
-    text: string;
-    height: number;
-}
-
-interface ILogViewerLineProps {
-    number: number;
-    data: any;
-    lineHeight: number;
-}
-
-const logLineRegex = new RegExp(/\[(.*)\]\s\((\w+)\)\s(.*)/);
-
-const LogLevelBadge = ({ level }: { level: string }) => {
-    let color = 'gray';
-    switch (level) {
-        case 'Information': color = 'DodgerBlue'; break;
-        case 'Warning': color = 'DarkOrange'; break;
-        case 'Fatal':
-        case 'Error': color = 'DarkRed'; break;
-    }
-
-    return <span style={{ backgroundColor: color, padding: '2px', paddingLeft: '6px', paddingRight: '6px', borderRadius: 4, marginRight: '8px', fontSize: '10px', textTransform: 'uppercase' }}>{level.substring(0, 3)}</span>
-};
-
-export const LogViewerLine = (props: ILogViewerLineProps) => {
-    const { number, data, lineHeight } = props;
-    const matches = logLineRegex.exec(data);
-    const timeStamp = matches ? new Date(matches[1]) : new Date(0);
-    return (
-        <div style={{ top: `${number * lineHeight}px`, position: 'absolute' }}>
-            <span style={{ paddingLeft: '8px', minWidth: '60px', display: 'inline-block' }}>{number}</span>
-            {matches && <span style={{ marginRight: '8px' }}>{timeStamp.getUTCHours().toString().padStart(2, '0')}:{timeStamp.getUTCMinutes().toString().padStart(2, '0')}:{timeStamp.getUTCSeconds().toString().padStart(2, '0')}.{timeStamp.getMilliseconds().toString().padEnd(3, '0')}</span>}
-            {matches && <LogLevelBadge level={matches[2]} />}
-            <div style={{ opacity: 0.8, display: 'inline-block', height: '1.3rem' }}>{matches ? matches[3] : data}</div>
-        </div>
-    )
-};
 
 StationDetails.layout = AppLayoutWithAuth;
 

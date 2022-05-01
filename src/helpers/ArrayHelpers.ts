@@ -4,7 +4,9 @@ export const selectMany = <TArray, TItem>(array: Array<TArray>, selector: (val: 
     });
 };
 
-export const orderBy = <T>(array: T[], compareFn?: (a: T, b: T) => number) => {
+export const orderBy = <T>(array: T[] | undefined, compareFn?: (a: T, b: T) => number) => {
+    if (!array) return undefined;
+
     const copy = [...array];
     copy.sort(compareFn);
     return copy;

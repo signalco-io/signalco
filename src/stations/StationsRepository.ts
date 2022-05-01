@@ -1,6 +1,8 @@
 import ConductsService from '../conducts/ConductsService';
 import EntityRepository from '../entity/EntityRepository';
 import HttpService from '../services/HttpService';
+import BlobInfoModel from '../storage/BlobInfoModel';
+import IBlobInfoModel from '../storage/IBlobInfoModel';
 
 export interface IStationModel {
     id: string;
@@ -37,27 +39,6 @@ class StationBlobInfoDto {
         }
 
         return new BlobInfoModel(dto.name, new Date(dto.createdTimeStamp), dto.modifiedTimeStamp ? new Date(dto.modifiedTimeStamp) : undefined, dto.size);
-    }
-}
-
-export interface IBlobInfoModel {
-    name: string;
-    createdTimeStamp: Date;
-    modifiedTimeStamp?: Date;
-    size: number;
-}
-
-class BlobInfoModel implements IBlobInfoModel {
-    name: string;
-    createdTimeStamp: Date;
-    modifiedTimeStamp?: Date;
-    size: number;
-
-    constructor(name: string, createdTimeStamp: Date, modifiedTimeStamp: Date | undefined, size: number) {
-        this.name = name;
-        this.createdTimeStamp = createdTimeStamp;
-        this.modifiedTimeStamp = modifiedTimeStamp;
-        this.size = size;
     }
 }
 
