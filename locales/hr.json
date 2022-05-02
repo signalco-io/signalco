@@ -1,10 +1,10 @@
 {
     "Helpers": {
-        "CopyToClipboard": "Kopiraj u clipboard",
-        "CopyLinkToClipboard": "Kopiraj link u clipboard",
-        "CopyCodeToClipboard": "Kopiraj kod u clipboard",
-        "CopyToClipboardSuccess": "Kopirano u clipboard",
-        "CopyToClipboardError": "Greška kopiranja u clipboard"
+        "CopyToClipboard": "Kopiraj u međuspremnik",
+        "CopyLinkToClipboard": "Kopiraj link u međuspremnik",
+        "CopyCodeToClipboard": "Kopiraj kod u međuspremnik",
+        "CopyToClipboardSuccess": "Kopirano u međuspremnik",
+        "CopyToClipboardError": "Greška kopiranja u međuspremnik"
     },
     "App": {
         "Account": {
