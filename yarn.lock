@@ -2696,6 +2696,14 @@
     core-js "^3.8.2"
     global "^4.4.0"
 
+"@storybook/client-logger@6.5.0-beta.3":
+  version "6.5.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-6.5.0-beta.3.tgz#530cf6122e9ee08106ea81372f28f57d2eb43aba"
+  integrity sha512-KnaZThIZPLV1XRSq7NWPaAfkdSqfcI+3JKCxQ0pP7A2r/n6wqq/tFvvZlUqK1VwwtQ0oAlNkeHp7NLuKXBQlVw==
+  dependencies:
+    core-js "^3.8.2"
+    global "^4.4.0"
+
 "@storybook/components@6.5.0-beta.1":
   version "6.5.0-beta.1"
   resolved "https://registry.yarnpkg.com/@storybook/components/-/components-6.5.0-beta.1.tgz#a68ee34912a406fef00e55cf8df50fc475f79acd"
@@ -3362,6 +3370,15 @@
   integrity sha512-MroHCzbuSwK1r1jstlwW5m9HeOlNOqS3PGWBxJn0/1BaxoEJDEAza8ldxopZd7j1axbIciX3p9U/4jwdLITU7g==
   dependencies:
     "@storybook/client-logger" "6.5.0-beta.2"
+    core-js "^3.8.2"
+    regenerator-runtime "^0.13.7"
+
+"@storybook/theming@6.5.0-beta.3":
+  version "6.5.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.5.0-beta.3.tgz#ea3535680b9b6757100953f44a06725e39c818a3"
+  integrity sha512-nz8FPLF2bW0QGxUsz8oX9QclGFk1SqdbpZk5F5hWKniM2ekTiF5erIIze+8SKG14WlG0bll35mi/+7mk+20N+A==
+  dependencies:
+    "@storybook/client-logger" "6.5.0-beta.3"
     core-js "^3.8.2"
     regenerator-runtime "^0.13.7"
 
