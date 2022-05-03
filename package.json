@@ -82,7 +82,7 @@
         "@storybook/builder-webpack5": "6.5.0-beta.2",
         "@storybook/manager-webpack5": "6.5.0-beta.1",
         "@storybook/react": "6.5.0-beta.1",
-        "@storybook/theming": "6.5.0-beta.1",
+        "@storybook/theming": "6.5.0-beta.2",
         "@types/color": "^3.0.3",
         "@types/d3": "7.1.0",
         "@types/date-fns": "^2.6.0",
