@@ -1,4 +1,4 @@
-import { Divider, Paper, Stack, Typography } from '@mui/material';
+import { Divider, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { AppLayoutWithAuth } from '../../../../components/layouts/AppLayoutWithAuth';
