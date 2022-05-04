@@ -94,10 +94,11 @@ const GraphTimeLine = (props: IGraphProps) => {
                 maxBarSize={20}
                 barGap={0}
             >
-                <XAxis type="number" axisLine={false} interval="preserveStartEnd" tickFormatter={(v) => {
-                    var date = domainGraph.invert(v);
-                    return `${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}`
-                }} />
+                <XAxis
+                    type="number"
+                    axisLine={false}
+                    interval="preserveStartEnd"
+                    tickFormatter={(v) => DateTimeProvider.formatTimeHourMinute(domainGraph.invert(v))} />
                 <YAxis type="category" domain={[0]} hide />
                 {new Array(reversedData.length + 1).fill(0).map((_, i) => {
                     return (

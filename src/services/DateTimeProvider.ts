@@ -83,6 +83,14 @@ export class DateTimeProvider {
             + ((time.getMinutes())? time.getMinutes() + 'M' : '')
             + ((time.getSeconds())? time.getSeconds() + 'S' : '');
     }
+
+    formatTimeDetailed(date: Date) {
+        return `${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}:${date.getUTCSeconds().toString().padStart(2, '0')}.${date.getMilliseconds().toString().padEnd(3, '0')}`
+    }
+
+    formatTimeHourMinute(date: Date) {
+        return `${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}`;
+    }
 }
 
 const provider = new DateTimeProvider();
