@@ -2162,18 +2162,18 @@
     util-deprecate "^1.0.2"
     uuid-browser "^3.1.0"
 
-"@storybook/addon-actions@6.5.0-beta.5":
-  version "6.5.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-6.5.0-beta.5.tgz#ccc8d8a8dcb08aadb6a60d78d9c13031083b1ea4"
-  integrity sha512-B6murjkRB04el31mofSDWgZndtV20TMHA4m6ojRBzDnqGnNXmim+sc5CE8Ntl41aplLzmtgK1xd+z3HYoqSnLg==
+"@storybook/addon-actions@6.5.0-beta.6":
+  version "6.5.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-6.5.0-beta.6.tgz#c74c44515132947dee11087ff7ae7053a99d9213"
+  integrity sha512-c6jsGANLY/xAuH8W6+N7R8UTO42vYF/jCWnMO9uNckmAf3cQ3M3mM9JsLTy7uhWo7Ojaq3OH3XZf5itCCiEQyg==
   dependencies:
-    "@storybook/addons" "6.5.0-beta.5"
-    "@storybook/api" "6.5.0-beta.5"
-    "@storybook/client-logger" "6.5.0-beta.5"
-    "@storybook/components" "6.5.0-beta.5"
-    "@storybook/core-events" "6.5.0-beta.5"
+    "@storybook/addons" "6.5.0-beta.6"
+    "@storybook/api" "6.5.0-beta.6"
+    "@storybook/client-logger" "6.5.0-beta.6"
+    "@storybook/components" "6.5.0-beta.6"
+    "@storybook/core-events" "6.5.0-beta.6"
     "@storybook/csf" "0.0.2--canary.4566f4d.1"
-    "@storybook/theming" "6.5.0-beta.5"
+    "@storybook/theming" "6.5.0-beta.6"
     core-js "^3.8.2"
     fast-deep-equal "^3.1.3"
     global "^4.4.0"
@@ -2868,19 +2868,6 @@
     "@storybook/client-logger" "6.5.0-beta.4"
     "@storybook/csf" "0.0.2--canary.4566f4d.1"
     "@storybook/theming" "6.5.0-beta.4"
-    "@types/react-syntax-highlighter" "11.0.5"
-    core-js "^3.8.2"
-    react-syntax-highlighter "^15.4.5"
-    regenerator-runtime "^0.13.7"
-
-"@storybook/components@6.5.0-beta.5":
-  version "6.5.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-6.5.0-beta.5.tgz#526d30cd4490f491da2bc1ab17de0f0ffbe42388"
-  integrity sha512-lFE5fG7BScuhoCTfEH6TdjWiwu1GVX8UZPjqRbmIpReI7LwZ54EVV+FSmkfHHAaEXs0+e0He3hYnZ24INs29bA==
-  dependencies:
-    "@storybook/client-logger" "6.5.0-beta.5"
-    "@storybook/csf" "0.0.2--canary.4566f4d.1"
-    "@storybook/theming" "6.5.0-beta.5"
     "@types/react-syntax-highlighter" "11.0.5"
     core-js "^3.8.2"
     react-syntax-highlighter "^15.4.5"
