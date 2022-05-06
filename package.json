@@ -49,7 +49,7 @@
         "eslint-plugin-storybook": "0.5.11",
         "material-ui-popup-state": "2.0.1",
         "mobx": "6.5.0",
-        "mobx-react-lite": "3.3.0",
+        "mobx-react-lite": "3.4.0",
         "monaco-editor": "^0.33.0",
         "next": "12.1.6",
         "next-pwa": "5.5.2",
