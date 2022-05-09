@@ -2115,19 +2115,19 @@
   resolved "https://registry.yarnpkg.com/@sideway/pinpoint/-/pinpoint-2.0.0.tgz#cff8ffadc372ad29fd3f78277aeb29e632cc70df"
   integrity sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==
 
-"@storybook/addon-a11y@6.5.0-beta.6":
-  version "6.5.0-beta.6"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-a11y/-/addon-a11y-6.5.0-beta.6.tgz#2f565a97e52c10aefcf0a140e55cb10b0f59edc6"
-  integrity sha512-3R2ovZ4ssE6gtlkXKObLLsd4aUURrWr0gVu1IhqTDKlTqdeocfHlzoYUfVF5IIopr9786ozwO+G2q/7hL2iC4g==
+"@storybook/addon-a11y@6.5.0-beta.7":
+  version "6.5.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-a11y/-/addon-a11y-6.5.0-beta.7.tgz#20928894996d5c7503e0aa01029e56e5103f4558"
+  integrity sha512-GFsJXI80MehSePd0WFy3Wq2zi9BJ4EGnAHBJ1VV1Kn4TerRxt8YgHHYF0/ja4Wpkv3wBlS6qqfS2zZiXFV2yIQ==
   dependencies:
-    "@storybook/addons" "6.5.0-beta.6"
-    "@storybook/api" "6.5.0-beta.6"
-    "@storybook/channels" "6.5.0-beta.6"
-    "@storybook/client-logger" "6.5.0-beta.6"
-    "@storybook/components" "6.5.0-beta.6"
-    "@storybook/core-events" "6.5.0-beta.6"
+    "@storybook/addons" "6.5.0-beta.7"
+    "@storybook/api" "6.5.0-beta.7"
+    "@storybook/channels" "6.5.0-beta.7"
+    "@storybook/client-logger" "6.5.0-beta.7"
+    "@storybook/components" "6.5.0-beta.7"
+    "@storybook/core-events" "6.5.0-beta.7"
     "@storybook/csf" "0.0.2--canary.4566f4d.1"
-    "@storybook/theming" "6.5.0-beta.6"
+    "@storybook/theming" "6.5.0-beta.7"
     axe-core "^4.2.0"
     core-js "^3.8.2"
     global "^4.4.0"
@@ -3296,6 +3296,22 @@
   dependencies:
     core-js "^3.6.5"
     find-up "^4.1.0"
+
+"@storybook/source-loader@6.5.0-beta.7":
+  version "6.5.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@storybook/source-loader/-/source-loader-6.5.0-beta.7.tgz#090bd3cb06d0bebdb89e8a90059544968ffbe23d"
+  integrity sha512-RcuKUqaQITfZurC6cJibG4x5uYKZU8QfKUffxpcbJ1tVe6e+NF44Lv7td4EpnTfaBC0k7e9eSj0V/bMCTmWiSg==
+  dependencies:
+    "@storybook/addons" "6.5.0-beta.7"
+    "@storybook/client-logger" "6.5.0-beta.7"
+    "@storybook/csf" "0.0.2--canary.4566f4d.1"
+    core-js "^3.8.2"
+    estraverse "^5.2.0"
+    global "^4.4.0"
+    loader-utils "^2.0.0"
+    lodash "^4.17.21"
+    prettier ">=2.2.1 <=2.3.0"
+    regenerator-runtime "^0.13.7"
 
 "@storybook/source-loader@6.5.0-beta.7":
   version "6.5.0-beta.7"
