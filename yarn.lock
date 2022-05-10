@@ -2279,16 +2279,16 @@
     regenerator-runtime "^0.13.7"
     ts-dedent "^2.0.0"
 
-"@storybook/addon-links@6.5.0-beta.6":
-  version "6.5.0-beta.6"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-6.5.0-beta.6.tgz#856b08472f568f783cd9e5922411e5736d88cd51"
-  integrity sha512-Qh/HLg00kvb0td/jyfeMYyH/DNIN1Fo8gEg1A1Fbn2v97j9YgGV2TejR9MKjjf489RvIBMIQ0oKmLT83humx8w==
+"@storybook/addon-links@6.5.0-beta.7":
+  version "6.5.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-6.5.0-beta.7.tgz#3b706e7ffb843053f1609a1acb2526e935ce1141"
+  integrity sha512-YR9v+HBrFNWHBwLtv3Nri8/OWeTmDsxp73cXLFHGJ+A1c3zA+7oXj7MGweZAXnduGQ/J3bOBHM/UEazjyPzUmw==
   dependencies:
-    "@storybook/addons" "6.5.0-beta.6"
-    "@storybook/client-logger" "6.5.0-beta.6"
-    "@storybook/core-events" "6.5.0-beta.6"
+    "@storybook/addons" "6.5.0-beta.7"
+    "@storybook/client-logger" "6.5.0-beta.7"
+    "@storybook/core-events" "6.5.0-beta.7"
     "@storybook/csf" "0.0.2--canary.4566f4d.1"
-    "@storybook/router" "6.5.0-beta.6"
+    "@storybook/router" "6.5.0-beta.7"
     "@types/qs" "^6.9.5"
     core-js "^3.8.2"
     global "^4.4.0"
@@ -3296,38 +3296,6 @@
   dependencies:
     core-js "^3.6.5"
     find-up "^4.1.0"
-
-"@storybook/source-loader@6.5.0-beta.7":
-  version "6.5.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@storybook/source-loader/-/source-loader-6.5.0-beta.7.tgz#090bd3cb06d0bebdb89e8a90059544968ffbe23d"
-  integrity sha512-RcuKUqaQITfZurC6cJibG4x5uYKZU8QfKUffxpcbJ1tVe6e+NF44Lv7td4EpnTfaBC0k7e9eSj0V/bMCTmWiSg==
-  dependencies:
-    "@storybook/addons" "6.5.0-beta.7"
-    "@storybook/client-logger" "6.5.0-beta.7"
-    "@storybook/csf" "0.0.2--canary.4566f4d.1"
-    core-js "^3.8.2"
-    estraverse "^5.2.0"
-    global "^4.4.0"
-    loader-utils "^2.0.0"
-    lodash "^4.17.21"
-    prettier ">=2.2.1 <=2.3.0"
-    regenerator-runtime "^0.13.7"
-
-"@storybook/source-loader@6.5.0-beta.7":
-  version "6.5.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@storybook/source-loader/-/source-loader-6.5.0-beta.7.tgz#090bd3cb06d0bebdb89e8a90059544968ffbe23d"
-  integrity sha512-RcuKUqaQITfZurC6cJibG4x5uYKZU8QfKUffxpcbJ1tVe6e+NF44Lv7td4EpnTfaBC0k7e9eSj0V/bMCTmWiSg==
-  dependencies:
-    "@storybook/addons" "6.5.0-beta.7"
-    "@storybook/client-logger" "6.5.0-beta.7"
-    "@storybook/csf" "0.0.2--canary.4566f4d.1"
-    core-js "^3.8.2"
-    estraverse "^5.2.0"
-    global "^4.4.0"
-    loader-utils "^2.0.0"
-    lodash "^4.17.21"
-    prettier ">=2.2.1 <=2.3.0"
-    regenerator-runtime "^0.13.7"
 
 "@storybook/source-loader@6.5.0-beta.7":
   version "6.5.0-beta.7"
