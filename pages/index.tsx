@@ -160,15 +160,17 @@ const Index = () => {
       <Box my={2}>
         <Cover />
       </Box>
-      <Box sx={{ margin: 'auto' }}>
-        <CounterIndicator count={0} />
-      </Box>
       {AppSettingsProvider.isDeveloper && (
-        <StepContent title="Developers" subtitle="Signalco is free and open source project run by small team of enthusiasts.">
-          <Stack alignItems="center">
-            <Button variant="outlined" startIcon={<GitHub />} endIcon={<KeyboardArrowRight />} href="https://github.com/signalco-io" size="large">Signalco on GitHub</Button>
-          </Stack>
-        </StepContent>
+        <>
+          <Box sx={{ margin: 'auto' }}>
+            <CounterIndicator count={0} />
+          </Box>
+          <StepContent title="Developers" subtitle="Signalco is free and open source project run by small team of enthusiasts.">
+            <Stack alignItems="center">
+              <Button variant="outlined" startIcon={<GitHub />} endIcon={<KeyboardArrowRight />} href="https://github.com/signalco-io" size="large">Signalco on GitHub</Button>
+            </Stack>
+          </StepContent>
+        </>
       )}
       <Box sx={{ margin: 'auto' }}>
         <CounterIndicator count={1} />
