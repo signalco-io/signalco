@@ -19,6 +19,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { ObjectDictAny } from '../../../src/sharedTypes';
 import SendIcon from '@mui/icons-material/Send';
 import CodeEditor from '../../../components/code/CodeEditor';
+import appSettingsProvider from '../../../src/services/AppSettingsProvider';
 
 type ChipColors = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
 
@@ -500,7 +501,7 @@ async function getOpenApiDoc(url: string) {
 const ApiContext = React.createContext<OpenAPIV3.Document | undefined>(undefined);
 
 const DocsApiPage = () => {
-    const url = 'https://api.signalco.io/api/swagger.json';
+    const url = appSettingsProvider.isDeveloper ? 'https://api.signalco.dev/api/swagger.json' : 'https://api.signalco.io/api/swagger.json';
     const apiRequest = useCallback(() => getOpenApiDoc(url), [url]);
     const { item: api, isLoading, error } = useLoadAndError<OpenAPIV3.Document>(apiRequest);
 
