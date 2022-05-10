@@ -35,7 +35,7 @@
         "@monaco-editor/react": "^4.4.4",
         "@mui/icons-material": "5.6.2",
         "@mui/lab": "5.0.0-alpha.81",
-        "@mui/material": "5.6.4",
+        "@mui/material": "5.7.0",
         "@next/mdx": "^12.1.6",
         "@storybook/addons": "^6.4.22",
         "@vvo/tzdb": "^6.50.0",
