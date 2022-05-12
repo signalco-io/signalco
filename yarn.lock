@@ -10772,10 +10772,10 @@ normalize-range@^0.1.2:
   resolved "https://registry.yarnpkg.com/normalize-range/-/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
   integrity sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=
 
-notistack@2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/notistack/-/notistack-2.0.4.tgz#9e043991d4788bed3d1701d1b2f694233ad38dd8"
-  integrity sha512-kOJmKvTG91ElMzi4aHu82BDe1liQ0zMrBp+TnWJptgowDsTbeTKbZmsRqJNIj145BmlOtZsEE9xjcrN46zVo3w==
+notistack@2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/notistack/-/notistack-2.0.5.tgz#8eb53720453f6e02182cd0e6784ced630a7bb7e6"
+  integrity sha512-Ig2T1Muqkc1PaSQcEDrK7diKv6cBxw02Iq6uv074ySfgq524TV5lK41diAb6OSsaiWfp3aRt+T3+0MF8m2EcJQ==
   dependencies:
     clsx "^1.1.0"
     hoist-non-react-statics "^3.3.0"
