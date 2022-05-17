@@ -5,18 +5,10 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import appTheme from '../src/theme';
 import '../styles/global.scss';
-import { CacheProvider, EmotionCache } from '@emotion/react';
-import createEmotionCache from '../src/createEmotionCache';
 import { SnackbarProvider } from 'notistack';
 import { ChildrenProps } from '../src/sharedTypes';
 import IAppContext from '../src/appContext/IAppContext';
 import useAppTheme from '../src/hooks/useAppTheme';
-
-const clientSideEmotionCache = createEmotionCache();
-
-interface CustomAppProps extends AppProps {
-  emotionCache?: EmotionCache;
-}
 
 interface PageWithMetadata extends React.FunctionComponent {
   layout?: React.FunctionComponent | undefined
@@ -29,8 +21,8 @@ const appContextDefaultState: IAppContext = {
 
 export const AppContext = React.createContext<IAppContext>(appContextDefaultState);
 
-export default function App(props: CustomAppProps) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+export default function App(props: AppProps) {
+  const { Component, pageProps } = props;
 
   const [appContextState, setAppContextState] = React.useState<IAppContext>(appContextDefaultState);
   useAppTheme(appContextState, setAppContextState);
@@ -38,7 +30,7 @@ export default function App(props: CustomAppProps) {
   const Layout = (Component as PageWithMetadata).layout ?? ((props?: ChildrenProps) => <>{props?.children}</>);
 
   return (
-    <CacheProvider value={emotionCache}>
+    <>
       <Head>
         <meta
           name="viewport"
@@ -56,6 +48,6 @@ export default function App(props: CustomAppProps) {
           </SnackbarProvider>
         </AppContext.Provider>
       </ThemeProvider>
-    </CacheProvider>
+    </>
   );
 }
