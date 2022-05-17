@@ -2032,19 +2032,19 @@
   resolved "https://registry.yarnpkg.com/@sideway/pinpoint/-/pinpoint-2.0.0.tgz#cff8ffadc372ad29fd3f78277aeb29e632cc70df"
   integrity sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==
 
-"@storybook/addon-a11y@6.5.0-beta.8":
-  version "6.5.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-a11y/-/addon-a11y-6.5.0-beta.8.tgz#45ad1e008214b4a940b9c01aff07801445938e0c"
-  integrity sha512-wyvH4705zjWXhxBM9fK3KPgeghanY9y843n2jvAy7GRN6pJTYbCiVqyM2VhlMtrXFH2xL4CwrQNLLGpGhJQ6nw==
+"@storybook/addon-a11y@6.5.0-rc.0":
+  version "6.5.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-a11y/-/addon-a11y-6.5.0-rc.0.tgz#283ef1b9ecf1dd356711dd4609eae71ed5ef74bc"
+  integrity sha512-jR+YSa+W/BTA+cPNzjuDyQrv6h8XSyv75jd+NgBF2KCteRtuV82zhFeBXJm028SBC6Htm0DOT6Jev7d2UJMUqw==
   dependencies:
-    "@storybook/addons" "6.5.0-beta.8"
-    "@storybook/api" "6.5.0-beta.8"
-    "@storybook/channels" "6.5.0-beta.8"
-    "@storybook/client-logger" "6.5.0-beta.8"
-    "@storybook/components" "6.5.0-beta.8"
-    "@storybook/core-events" "6.5.0-beta.8"
+    "@storybook/addons" "6.5.0-rc.0"
+    "@storybook/api" "6.5.0-rc.0"
+    "@storybook/channels" "6.5.0-rc.0"
+    "@storybook/client-logger" "6.5.0-rc.0"
+    "@storybook/components" "6.5.0-rc.0"
+    "@storybook/core-events" "6.5.0-rc.0"
     "@storybook/csf" "0.0.2--canary.4566f4d.1"
-    "@storybook/theming" "6.5.0-beta.8"
+    "@storybook/theming" "6.5.0-rc.0"
     axe-core "^4.2.0"
     core-js "^3.8.2"
     global "^4.4.0"
