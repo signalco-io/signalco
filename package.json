@@ -54,7 +54,7 @@
         "next": "12.1.6",
         "next-pwa": "5.5.2",
         "next-secure-headers": "2.2.0",
-        "notistack": "2.0.4",
+        "notistack": "2.0.5",
         "pigeon-maps": "^0.21.0",
         "postcss": "^8.4.13",
         "react": "18.1.0",
@@ -72,7 +72,7 @@
         "uuid": "8.3.2"
     },
     "devDependencies": {
-        "@babel/core": "7.17.10",
+        "@babel/core": "7.17.12",
         "@next/bundle-analyzer": "12.1.6",
         "@storybook/addon-a11y": "6.5.0-beta.8",
         "@storybook/addon-actions": "6.5.0-beta.8",
