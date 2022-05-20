@@ -10237,10 +10237,10 @@ next-secure-headers@2.2.0:
   resolved "https://registry.yarnpkg.com/next-secure-headers/-/next-secure-headers-2.2.0.tgz#d4eb1b00a424f811c1455d1288990a4aad3026af"
   integrity sha512-C7OfZ9JdSJyYMz2ZBMI/WwNbt0qNjlFWX9afUp8nEUzbz6ez3JbeopdyxSZJZJAzVLIAfyk6n73rFpd4e22jRg==
 
-next-sitemap@^2.5.20:
-  version "2.5.20"
-  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-2.5.20.tgz#7124e138506c2f10e460c3dc77907baf4d134478"
-  integrity sha512-Qbm4N2WGA6VHemFN0C9PNWQav9RKwMEbVrNgVvDQhG0sDBmNBgKii54WklOjCvVJVHgQPgtXLBhlNaJGS+RVQA==
+next-sitemap@^2.5.21:
+  version "2.5.21"
+  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-2.5.21.tgz#ab3be9c99a7ce4687c331cef9e207130cb3af04c"
+  integrity sha512-YlqoGd8Ej3EUgxWYOwvKr84uzstgGurFiLXyZgvi9mdSlRwJW++odwlCPco5qdthX806jzasJwcNPIW45AnXRg==
   dependencies:
     "@corex/deepmerge" "^2.6.148"
     minimist "^1.2.6"
