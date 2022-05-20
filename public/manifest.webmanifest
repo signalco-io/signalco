@@ -1,9 +1,14 @@
 {
   "name": "Signalco",
   "short_name": "Signalco",
-  "theme_color": "#000000",
-  "background_color": "#000000",
+  "theme_color": "black",
+  "background_color": "black",
   "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
   "scope": "/",
   "start_url": "/app",
   "prefer_related_applications": false,
