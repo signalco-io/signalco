@@ -2409,17 +2409,6 @@
     qs "^6.10.0"
     telejson "^6.0.8"
 
-"@storybook/channel-websocket@6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@storybook/channel-websocket/-/channel-websocket-6.5.0.tgz#4553f54b3fef324e56de4ca3b250f6d1d5dce19f"
-  integrity sha512-J/SPYAPZ6S7Hct1Bo3+0va3Vt4b+wSw2MI5a1iYhLqrIeSKvoTTQVEGPVau1ZON68XCwrJIBEWHoBJJSFK/qtQ==
-  dependencies:
-    "@storybook/channels" "6.5.0"
-    "@storybook/client-logger" "6.5.0"
-    core-js "^3.8.2"
-    global "^4.4.0"
-    telejson "^6.0.8"
-
 "@storybook/channel-websocket@6.5.3":
   version "6.5.3"
   resolved "https://registry.yarnpkg.com/@storybook/channel-websocket/-/channel-websocket-6.5.3.tgz#3403d30c107763db311b084a0f6586c755ca64f0"
@@ -2545,32 +2534,6 @@
     qs "^6.10.0"
     react-syntax-highlighter "^15.4.5"
     regenerator-runtime "^0.13.7"
-    util-deprecate "^1.0.2"
-
-"@storybook/core-client@6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@storybook/core-client/-/core-client-6.5.0.tgz#7960926565378a2dffce86cfe4a675c47174a04e"
-  integrity sha512-YWeIHJ5qURwuzsfQZUhwhlucc56OKz40IwYwVeRhPdENcRVFdbiO5cVVPVHLz8+HcqiP4WOldcASG76DLNlo7g==
-  dependencies:
-    "@storybook/addons" "6.5.0"
-    "@storybook/channel-postmessage" "6.5.0"
-    "@storybook/channel-websocket" "6.5.0"
-    "@storybook/client-api" "6.5.0"
-    "@storybook/client-logger" "6.5.0"
-    "@storybook/core-events" "6.5.0"
-    "@storybook/csf" "0.0.2--canary.4566f4d.1"
-    "@storybook/preview-web" "6.5.0"
-    "@storybook/store" "6.5.0"
-    "@storybook/ui" "6.5.0"
-    airbnb-js-shims "^2.2.1"
-    ansi-to-html "^0.6.11"
-    core-js "^3.8.2"
-    global "^4.4.0"
-    lodash "^4.17.21"
-    qs "^6.10.0"
-    regenerator-runtime "^0.13.7"
-    ts-dedent "^2.0.0"
-    unfetch "^4.2.0"
     util-deprecate "^1.0.2"
 
 "@storybook/core-client@6.5.3":
@@ -2885,20 +2848,20 @@
     webpack-dev-middleware "^3.7.3"
     webpack-virtual-modules "^0.2.2"
 
-"@storybook/manager-webpack5@6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@storybook/manager-webpack5/-/manager-webpack5-6.5.0.tgz#24346e282fb309f5b552212de4b86604582c55b9"
-  integrity sha512-9tCRt5vcp2Y2+m5hJYP/dXrq3wnvaQBBqfFWBdOitCIn/N3DobBl8vk78d1OuRMqaPtPpGKSjENb8+/OAd8LHQ==
+"@storybook/manager-webpack5@6.5.3":
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/@storybook/manager-webpack5/-/manager-webpack5-6.5.3.tgz#63cd2fe547653c5489f301db954016bed4ab9d29"
+  integrity sha512-AJpx2cpiBXt6lVHxe2ZaBWTXqq8/GNXfFKXuBRTvLM0ZqiY3HcohUmgpWs56OC2JUwunbZiS0nvxA3dzQmuBZg==
   dependencies:
     "@babel/core" "^7.12.10"
     "@babel/plugin-transform-template-literals" "^7.12.1"
     "@babel/preset-react" "^7.12.10"
-    "@storybook/addons" "6.5.0"
-    "@storybook/core-client" "6.5.0"
-    "@storybook/core-common" "6.5.0"
-    "@storybook/node-logger" "6.5.0"
-    "@storybook/theming" "6.5.0"
-    "@storybook/ui" "6.5.0"
+    "@storybook/addons" "6.5.3"
+    "@storybook/core-client" "6.5.3"
+    "@storybook/core-common" "6.5.3"
+    "@storybook/node-logger" "6.5.3"
+    "@storybook/theming" "6.5.3"
+    "@storybook/ui" "6.5.3"
     "@types/node" "^14.0.10 || ^16.0.0"
     babel-loader "^8.0.0"
     case-sensitive-paths-webpack-plugin "^2.3.0"
@@ -3202,24 +3165,6 @@
     "@storybook/client-logger" "6.5.3"
     core-js "^3.8.2"
     regenerator-runtime "^0.13.7"
-
-"@storybook/ui@6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@storybook/ui/-/ui-6.5.0.tgz#50775066134de6b7a27f9f947921c0411fe8a27b"
-  integrity sha512-4SeY2AjVZXqw0XS30iWWKnBfYvy/x0UVJ3FavN8G+j3HhXw+8Q3R+yL7SuXDPg1JsO2OuWL5NJroPw4z7y78/Q==
-  dependencies:
-    "@storybook/addons" "6.5.0"
-    "@storybook/api" "6.5.0"
-    "@storybook/channels" "6.5.0"
-    "@storybook/client-logger" "6.5.0"
-    "@storybook/components" "6.5.0"
-    "@storybook/core-events" "6.5.0"
-    "@storybook/router" "6.5.0"
-    "@storybook/semver" "^7.3.2"
-    "@storybook/theming" "6.5.0"
-    core-js "^3.8.2"
-    regenerator-runtime "^0.13.7"
-    resolve-from "^5.0.0"
 
 "@storybook/ui@6.5.3":
   version "6.5.3"
