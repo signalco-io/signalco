@@ -2157,18 +2157,18 @@
     regenerator-runtime "^0.13.7"
     ts-dedent "^2.0.0"
 
-"@storybook/addon-storysource@6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-storysource/-/addon-storysource-6.5.0.tgz#37804e950509ad6801da230614f7b2e09dc0a0ed"
-  integrity sha512-4VJDBsH8iPp9/TXv73lqbm0qD5oj/t+J6lM3RFG1HRLQ7ORMKmPKLM/HiWXTdyXi32Vb3B4dU14TyEgySzFNTg==
+"@storybook/addon-storysource@6.5.3":
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-storysource/-/addon-storysource-6.5.3.tgz#b707b1334bf9ade33ae2b1eb64b6d240c8317848"
+  integrity sha512-zZdDFt0FEHFBkdZ/BGtkgkCAJpfH1i0VdmXqIAUxfv+XZyYVjD6Cf9CLtR088pZTmySD+MdEC5dJLwcIy/1Wbg==
   dependencies:
-    "@storybook/addons" "6.5.0"
-    "@storybook/api" "6.5.0"
-    "@storybook/client-logger" "6.5.0"
-    "@storybook/components" "6.5.0"
-    "@storybook/router" "6.5.0"
-    "@storybook/source-loader" "6.5.0"
-    "@storybook/theming" "6.5.0"
+    "@storybook/addons" "6.5.3"
+    "@storybook/api" "6.5.3"
+    "@storybook/client-logger" "6.5.3"
+    "@storybook/components" "6.5.3"
+    "@storybook/router" "6.5.3"
+    "@storybook/source-loader" "6.5.3"
+    "@storybook/theming" "6.5.3"
     core-js "^3.8.2"
     estraverse "^5.2.0"
     loader-utils "^2.0.0"
@@ -3100,6 +3100,22 @@
   dependencies:
     "@storybook/addons" "6.5.0"
     "@storybook/client-logger" "6.5.0"
+    "@storybook/csf" "0.0.2--canary.4566f4d.1"
+    core-js "^3.8.2"
+    estraverse "^5.2.0"
+    global "^4.4.0"
+    loader-utils "^2.0.0"
+    lodash "^4.17.21"
+    prettier ">=2.2.1 <=2.3.0"
+    regenerator-runtime "^0.13.7"
+
+"@storybook/source-loader@6.5.3":
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/@storybook/source-loader/-/source-loader-6.5.3.tgz#5991dd33805ebb54c5c1e0ad779a2cf80ec6b3b9"
+  integrity sha512-JrwCm3El6XZC7eVYCF83e7x7/fA4ue+g2s0oAtdXD11KOrrJ7e0bgtvVdtRWKG/4n4Ww3+sGFnuIlXfPbJ3hvw==
+  dependencies:
+    "@storybook/addons" "6.5.3"
+    "@storybook/client-logger" "6.5.3"
     "@storybook/csf" "0.0.2--canary.4566f4d.1"
     core-js "^3.8.2"
     estraverse "^5.2.0"
