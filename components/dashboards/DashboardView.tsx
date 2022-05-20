@@ -14,6 +14,8 @@ import Image from 'next/image';
 import { ChildrenProps } from '../../src/sharedTypes';
 import useLocale from '../../src/hooks/useLocale';
 
+const draggingUpscale = 1.1;
+
 function DragableWidget(props: IWidgetProps) {
     const {
         isDragging,
@@ -25,60 +27,46 @@ function DragableWidget(props: IWidgetProps) {
     } = useSortable({ id: props.id, disabled: !props.isEditMode });
 
     const [span, setSpan] = useState(({
-        colSpan: (props.config as any)?.columns || 2,
-        rowSpan: (props.config as any)?.columns || 2
+        colSpan: (props.config as any)?.columns || 1,
+        rowSpan: (props.config as any)?.columns || 1
     }));
 
     let customTransform;
     if (transform) {
         customTransform = {
-            scaleX: isDragging ? 1.1 : 1,
-            scaleY: isDragging ? 1.1 : 1,
+            scaleX: isDragging ? draggingUpscale : 1,
+            scaleY: isDragging ? draggingUpscale : 1,
             x: transform.x,
             y: transform.y
         };
     }
 
-    return (
-        <Box ref={setNodeRef} style={{
-            transform: customTransform ? CSS.Transform.toString(customTransform) : undefined,
-            transition,
-            gridRowStart: `span ${span.rowSpan}`,
-            gridColumnStart: `span ${span.colSpan}`,
-        }} {...attributes} {...listeners}>
-            <Widget {...props} onResize={(r, c) => setSpan({ rowSpan: r, colSpan: c })} />
-        </Box>
-    );
+    return <DisplayWidget ref={setNodeRef} style={{
+        transform: customTransform ? CSS.Transform.toString(customTransform) : undefined,
+        transition,
+    }} widgetProps={props} {...attributes} {...listeners} />
 }
 
-function DisplayWidget(props: IWidgetProps) {
+function DisplayWidget(props: { style?: React.CSSProperties | undefined, ref?: React.Ref<unknown>, widgetProps: IWidgetProps }) {
+    const { style, ref, widgetProps, ...rest } = props;
     const [span, setSpan] = useState(({
-        colSpan: (props.config as any)?.columns || 2,
-        rowSpan: (props.config as any)?.columns || 2
+        colSpan: (widgetProps.config as any)?.columns || 1,
+        rowSpan: (widgetProps.config as any)?.columns || 1
     }));
 
     return (
-        <Box style={{
+        <Box ref={ref} style={{
             gridRowStart: `span ${span.rowSpan}`,
             gridColumnStart: `span ${span.colSpan}`,
-        }}>
-            <Widget {...props} onResize={(r, c) => setSpan({ rowSpan: r, colSpan: c })} />
+            ...style
+        }} {...rest}>
+            <Widget {...widgetProps} onResize={(r, c) => setSpan({ rowSpan: r, colSpan: c })} />
         </Box>
     );
 }
 
-function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, onAddWidget: () => void }) {
-    const { dashboard, isEditing, onAddWidget } = props;
-
-    const { t } = useLocale('App', 'Dashboards');
-
-    const widgetSize = 78 + 8; // Widget is 76x76 + 2px for border + 8 spacing between widgets (2x4px)
-    const dashbaordPadding = 48 + useNavWidth(); // Has 24 x padding
-    const numberOfColumns = Math.max(4, Math.floor((window.innerWidth - dashbaordPadding) / widgetSize)); // When width is less than 400, set to quad column
-
-    const widgetsOrder = dashboard.widgets.slice().sort((a, b) => a.order - b.order).map(w => w.id);
-    const widgets = widgetsOrder.map(wo => dashboard.widgets.find(w => wo === w.id)!);
-
+function GridWrapper(props: { order: string[], isEditing: boolean, orderChanged: (newOrder: string[]) => void } & ChildrenProps) {
+    const { order, isEditing, children } = props;
     const sensors = useSensors(
         useSensor(TouchSensor, {
             activationConstraint: {
@@ -94,6 +82,47 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
         })
     );
 
+    function handleDragEnd(event: DragEndEvent) {
+        const { active, over } = event;
+
+        if (over && active.id !== over.id) {
+            const oldIndex = order.indexOf(active.id);
+            const newIndex = order.indexOf(over.id);
+            const newOrderedWidgets = arrayMove(order, oldIndex, newIndex);
+            const newOrder = [];
+            for (let i = 0; i < newOrderedWidgets.length; i++) {
+                newOrder.push(order[i]);
+            }
+        }
+    }
+
+    if (isEditing) {
+        return (
+            <DndContext
+                sensors={sensors}
+                modifiers={[snapCenterToCursor]}
+                onDragEnd={handleDragEnd}
+                onDragCancel={handleDragEnd}>
+                <SortableContext items={order} strategy={undefined}>
+                    {children}
+                </SortableContext>
+            </DndContext>
+        );
+    } else return <>{props.children}</>
+};
+
+function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, onAddWidget: () => void }) {
+    const { dashboard, isEditing, onAddWidget } = props;
+
+    const { t } = useLocale('App', 'Dashboards');
+
+    const widgetSize = 78 + 8; // Widget is 76x76 + 2px for border + 8 spacing between widgets (2x4px)
+    const dashbaordPadding = 48 + useNavWidth(); // Has 24 x padding
+    const numberOfColumns = Math.max(4, Math.floor((window.innerWidth - dashbaordPadding) / widgetSize)); // When width is less than 400, set to quad column
+
+    const widgetsOrder = dashboard.widgets.slice().sort((a, b) => a.order - b.order).map(w => w.id);
+    const widgets = widgetsOrder.map(wo => dashboard.widgets.find(w => wo === w.id)!);
+
     function handleSetWidgetConfig(widgetId: string, config: object | undefined) {
         dashboard.widgets.find(w => w.id === widgetId)?.setConfig(config);
     }
@@ -102,22 +131,16 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
         dashboard.widgets.splice(dashboard.widgets.findIndex(w => w.id === widgetId), 1);
     }
 
-    function handleDragEnd(event: DragEndEvent) {
-        const { active, over } = event;
-
-        if (over && active.id !== over.id) {
-            const oldIndex = widgetsOrder.indexOf(active.id);
-            const newIndex = widgetsOrder.indexOf(over.id);
-            const newOrderedWidgets = arrayMove(widgets, oldIndex, newIndex);;
-            for (let i = 0; i < newOrderedWidgets.length; i++) {
+    function handleOrderChanged(newOrder: string[]) {
+        for (let i = 0; i < newOrder.length; i++) {
+            const widget = widgets.find(w => w.id === newOrder[i]);
+            if (widget) {
                 runInAction(() => {
-                    newOrderedWidgets[i].order = i;
-                })
+                    widget.order = i;
+                });
             }
         }
     }
-
-    console.debug('Rendering DashboardView')
 
     // Render placeholder when there is no widgets
     if (widgets.length <= 0) {
@@ -135,22 +158,6 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
         );
     }
 
-    const GridWrapper = (props: ChildrenProps) => {
-        if (isEditing) {
-            return (
-                <DndContext
-                    sensors={sensors}
-                    modifiers={[snapCenterToCursor]}
-                    onDragEnd={handleDragEnd}
-                    onDragCancel={handleDragEnd}>
-                    <SortableContext items={widgetsOrder} strategy={undefined}>
-                        {props.children}
-                    </SortableContext>
-                </DndContext>
-            );
-        } else return <>{props.children}</>
-    };
-
     return (
         <Box sx={{
             display: 'grid',
@@ -158,7 +165,7 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
             gap: 1,
             width: `${widgetSize * numberOfColumns - 8}px`
         }}>
-            <GridWrapper>
+            <GridWrapper isEditing={isEditing} order={widgetsOrder} orderChanged={handleOrderChanged}>
                 {widgets.map((widget) => (
                     <React.Fragment key={`widget-${widget.id.toString()}`}>
                         {isEditing ? (
