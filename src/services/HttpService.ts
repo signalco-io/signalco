@@ -55,18 +55,19 @@ export default class HttpService {
   ) {
     const token = skipAuth ? false : await HttpService._getBearerTokenAsync()
     try {
-    const response = await axios.request({
-      url: isAbsoluteUrl(url) ? url : HttpService.getApiUrl(url),
-      method: method,
-      data: method !== 'get' ? data : undefined,
-      params: method === 'get' ? data : undefined,
-      headers: {
-        Authorization: token,
-        'Content-Type': 'application/json',
-        ...headers
-      },
-    });
-    return response.data;
+        const response = await axios.request({
+            url: isAbsoluteUrl(url) ? url : HttpService.getApiUrl(url),
+            method: method,
+            data: method !== 'get' ? data : undefined,
+            params: method === 'get' ? data : undefined,
+            headers: {
+                Accept: 'application/json',
+                Authorization: token,
+                'Content-Type': 'application/json',
+                ...headers
+            },
+        });
+        return response.data;
     } catch(err) {
       if (typeof err !== 'undefined' &&
         typeof err === 'object' &&

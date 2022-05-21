@@ -47,8 +47,10 @@
             "Graph": "Graph"
         },
         "Processes": {
+            "Processes": "Processes",
             "name": "Name",
             "enabled": "Enabled",
+            "SearchLabel": "Search...",
             "DeleteProcessButtonLabel": "Delete...",
             "DeleteProcessTitle": "Delete process",
             "ConfirmDialogExpectedText": "confirm",
@@ -60,7 +62,10 @@
             "NoConditions": "No conditions - process will execute on every trigger",
             "Conducts": "Conducts",
             "AddConduct": "Add conduct",
-            "NoConducts": "No conducts"
+            "NoConducts": "No conducts",
+            "CreateFailed": "Failed to create process. Please try again.",
+            "NewProcess": "New process",
+            "FailedToSave": "Couldn't save process change. Please try again."
         },
         "Stations": {
             "Stations": "Stations",

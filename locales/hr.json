@@ -72,7 +72,7 @@
             "LastActivity": "Posljednja aktivnost",
             "Manufacturer": "Proizvođač",
             "Model": "Model",
-            "SearchLabel": "Pretražite…",
+            "SearchLabel": "Pretraga...",
             "States": "Stanja",
             "Table": "Tablica",
             "history": "povijest",
@@ -102,11 +102,13 @@
             "Unknown": "Nepoznato"
         },
         "Processes": {
+            "Processes": "Procesi",
             "AddCondition": "Dodaj uvjet",
             "AddConduct": "Dodaj ponašanje",
             "AddTrigger": "Dodaj okidač",
             "Conditions": "Uvjeti",
             "Conducts": "Ponašanje",
+            "SearchLabel": "Pretraga...",
             "ConfirmDialogExpectedText": "potvrdi",
             "DeleteProcessButtonLabel": "Izbriši...",
             "DeleteProcessTitle": "Izbriši proces",
@@ -115,7 +117,10 @@
             "NoTriggers": "Nema okidača",
             "Triggers": "Okidači",
             "enabled": "Omogućen",
-            "name": "Naziv"
+            "name": "Naziv",
+            "CreateFailed": "Došlo je do greške prilikom kreiranja procesa. Molimo pokušajte ponovno.",
+            "NewProcess": "Novi proces",
+            "FailedToSave": "Greška prilikom spremanja promjena procesa. Molimo pokuštajte ponovno."
         },
         "Settings": {
             "ApiEndpoint": "API endpoint",

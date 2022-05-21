@@ -6,17 +6,17 @@ import { observer } from 'mobx-react-lite';
 import ProcessesRepository from '../../../src/processes/ProcessesRepository';
 import NoDataPlaceholder from '../../../components/shared/indicators/NoDataPlaceholder';
 import AddSharpIcon from '@mui/icons-material/AddSharp';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import { IDeviceTargetIncomplete } from '../../../src/devices/Device';
-import DevicesRepository from '../../../src/devices/DevicesRepository';
 import DisplayDeviceTarget from '../../../components/shared/entity/DisplayDeviceTarget';
 import useDevice from '../../../src/hooks/useDevice';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
 import EntityRepository from '../../../src/entity/EntityRepository';
-import { ObjectDictAny } from '../../../src/sharedTypes';
 import { TransitionGroup } from 'react-transition-group';
 import useLocale, { useLocalePlaceholders } from '../../../src/hooks/useLocale';
 import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
+import EditableInput from '../../../components/shared/form/EditableInput';
+import PageNotificationService from '../../../src/notifications/PageNotificationService';
 
 interface IDeviceStateValue {
     value?: any
@@ -30,18 +30,6 @@ interface IDeviceTargetState {
 const isIDeviceStateValue = (arg: any): arg is IDeviceStateValue => arg?.value !== undefined;
 const isIConditionDeviceStateTarget = (arg: any): arg is IConditionDeviceStateTarget => arg?.target !== undefined;
 const isIDeviceStateTarget = (arg: any): arg is IDeviceTargetIncomplete => arg?.deviceId !== undefined && typeof arg?.contact !== 'undefined' && typeof arg?.channel !== 'undefined';
-
-interface IDeviceStateTrigger {
-    deviceId?: string;
-    channelName?: string;
-    contactName?: string;
-}
-
-class DeviceStateTrigger implements IDeviceStateTrigger {
-    deviceId?: string;
-    channelName?: string;
-    contactName?: string;
-}
 
 interface IConditionDeviceStateTarget {
     target: IDeviceTargetIncomplete;
@@ -57,92 +45,6 @@ interface IConditionValueComparison {
 interface ICondition {
     operation?: string,
     operations: Array<IConditionValueComparison | ICondition>
-}
-
-type KeyedObjectOrAny = ObjectDictAny | any;
-
-type ModifierFunc = (key: string, value: any) => Promise<[key: string, value: any]>;
-
-async function mapArrayAsync(obj: KeyedObjectOrAny, funcAsync: ModifierFunc) {
-    const newArray = [];
-    for (let i = 0; i < obj.length; i++) {
-        const element = obj[i];
-        newArray.push(await mapObjectAsync(element, funcAsync));
-    }
-    return newArray;
-}
-
-async function mapObjectAsync(obj: KeyedObjectOrAny, funcAsync: ModifierFunc): Promise<any> {
-    if (typeof obj === 'undefined' || obj == null) return obj;
-    if (Array.isArray(obj)) {
-        return await mapArrayAsync(obj, funcAsync);
-    }
-    if (typeof obj !== 'object') return obj;
-
-    const newObj: ObjectDictAny = {};
-    const keys = Object.keys(obj);
-    for (let ki = 0; ki < keys.length; ki++) {
-        const key = keys[ki];
-        let [newKey, newValue] = await Promise.resolve(funcAsync(key, obj[key]));
-        if (typeof newValue === 'object') {
-            newValue = await mapObjectAsync(newValue, funcAsync);
-        }
-        newObj[newKey] = newValue;
-    }
-    return newObj;
-}
-
-type MapModifier = (key: string, value: any) => Promise<[key: string, value: any] | undefined> | ([key: string, value: any]) | undefined;
-
-const toLowerCaseKeysModifier: MapModifier = (key, value) => [`${key[0].toLowerCase()}${key.substring(1)}`, value];
-
-const deviceToIdentifierModifier: MapModifier = async (key, value) => {
-    if (key !== 'deviceId') return;
-    const device = await DevicesRepository.getDeviceAsync(value);
-    if (!device) return;
-    return ['identifier', device.identifier];
-};
-
-const contactNameToContactModifier: MapModifier = (key, value) => {
-    if (key !== 'contactName') return;
-    return ['contact', value];
-};
-
-const channelNameToChannelModifier: MapModifier = (key, value) => {
-    if (key !== 'channelName') return;
-    return ['channel', value];
-};
-
-const identifierToDeviceIdModifier: MapModifier = async (key, value) => {
-    if (key !== 'identifier') return;
-    const device = await DevicesRepository.getDeviceByIdentifierAsync(value);
-    if (!device) return;
-    return ['deviceId', device.id];
-};
-
-const contactToContactNameModifier: MapModifier = (key, value) => {
-    if (key !== 'contact') return;
-    return ['contactName', value];
-};
-
-const channelToChannelNameModifier: MapModifier = (key, value) => {
-    if (key !== 'channel') return;
-    return ['channelName', value];
-};
-
-async function mapWithModifiersAsync(obj: ObjectDictAny, modifiers: MapModifier[]) {
-    return await mapObjectAsync(obj, async (key, value) => {
-        let newKey = key;
-        let newValue = value;
-        for (let i = 0; i < modifiers.length; i++) {
-            const modifier = modifiers[i];
-            const result = await Promise.resolve(modifier(newKey, newValue));
-            if (result) {
-                [newKey, newValue] = result;
-            }
-        }
-        return [newKey, newValue];
-    });
 }
 
 class Condition implements ICondition {
@@ -169,28 +71,12 @@ class Conduct implements IConduct {
 }
 
 async function parseProcessConfigurationAsync(configJson: string | undefined) {
-    const config = JSON.parse(configJson ?? '');
-
-    console.log('Parsing config...', config);
-
-    // Migrate to V2
-    if (config.Triggers || config.Condition || config.Conducts) {
-        config.triggers = config.Triggers;
-        config.condition = config.Condition;
-        config.conducts = config.Conducts;
-    }
-    const modifiers = [toLowerCaseKeysModifier, identifierToDeviceIdModifier, contactToContactNameModifier, channelToChannelNameModifier];
-
-    const triggers = await mapWithModifiersAsync(config.triggers, modifiers) as IDeviceStateTrigger[];
-    const condition = await mapWithModifiersAsync(config.condition, modifiers) as ICondition;
-    const conducts = await mapWithModifiersAsync(config.conducts, modifiers) as IConduct[];
-
-    console.log('new config', triggers, condition, conducts);
+    const config = JSON.parse(configJson ?? '{}');
 
     const configMapped = makeAutoObservable({
-        triggers: triggers.filter(t => typeof t !== undefined),
-        condition: condition,
-        conducts: conducts.filter(c => typeof c !== undefined)
+        triggers: (config.triggers?.filter((t: unknown) => t) ?? []) as IDeviceTargetIncomplete[],
+        condition: (config.condition ?? { operations: [] }) as Condition,
+        conducts: (config.conducts?.filter((c: unknown) => c) ?? []) as IConduct[]
     });
 
     return configMapped;
@@ -442,7 +328,6 @@ const ProcessDetails = () => {
     const router = useRouter();
     const { id } = router.query;
     const { t } = useLocale('App', 'Processes');
-    const { t: tPlaceholders } = useLocalePlaceholders();
 
     const loadProcess = useCallback(async () => {
         if (typeof id !== 'undefined' && typeof id !== 'object')
@@ -451,39 +336,20 @@ const ProcessDetails = () => {
     const process = useLoadAndError(loadProcess);
 
     const loadProcessConfig = useCallback(async () => {
-        if (process.item)
+        if (process.item) {
             return await parseProcessConfigurationAsync(process.item.configurationSerialized)
+        }
     }, [process.item]);
     const processConfig = useLoadAndError(loadProcessConfig);
 
     const persistProcessAsync = async () => {
-        if (process == null) {
-            console.error('Can\'t persist null process.');
+        if (!process.item || !processConfig.item) {
+            console.error('Can not persist null process or config.');
             return;
         }
 
-        const mappedConfig = await mapWithModifiersAsync(processConfig as KeyedObjectOrAny, [
-            deviceToIdentifierModifier,
-            contactNameToContactModifier,
-            channelNameToChannelModifier
-        ]);
-
-        const configSerialized = JSON.stringify(mappedConfig);
-
-        console.log('TODO: Persist process', configSerialized);
-        //await ProcessesRepository.saveProcessConfigurationAsync(process?.id, configSerialized);
+        await ProcessesRepository.saveProcessConfigurationAsync(process.item?.id, JSON.stringify(processConfig.item));
     };
-
-    const handleTriggerChange = (index: number, updated?: IDeviceStateTrigger) => {
-        // TODO: Use action to change state
-        if (processConfig.item) {
-            if (updated)
-                processConfig.item.triggers[index] = updated;
-            else processConfig.item.triggers.splice(index, 1);
-        }
-
-        persistProcessAsync();
-    }
 
     const handleConditionChange = (updated: ICondition) => {
         // TODO: Use action to change state
@@ -516,20 +382,22 @@ const ProcessDetails = () => {
     };
 
     const handleAddConduct = () => {
-        if (processConfig.item)
-            processConfig.item.conducts.push(new Conduct());
+        runInAction(() => {
+            if (processConfig.item) {
+                processConfig.item.conducts.push(new Conduct());
+            }
+        });
     };
-
-    const handleAddTrigger = () => {
-        if (processConfig.item)
-            processConfig.item.triggers.push(new DeviceStateTrigger());
-    }
 
     const handleAddCondition = () => {
         if (processConfig.item) {
             const condition = processConfig.item.condition;
-            if (condition)
-                condition.operations.push(new Condition());
+            if (condition) {
+                const c = new Condition();
+                c.operation = '=';
+                c.operations.push({ left: { target: {} }, right: { value: true } });
+                condition.operations.push(c);
+            }
         }
     }
 
@@ -540,15 +408,32 @@ const ProcessDetails = () => {
         }
     }
 
+    const handleRename = async (newAlias: string) => {
+        if (process.item) {
+            process.item.alias = newAlias;
+            try {
+                await ProcessesRepository.saveProcessAsync(process.item);
+            } catch (err) {
+                console.error('Process rename failed', err);
+                PageNotificationService.show(t('FailedToSave'), 'error');
+            }
+        }
+    }
+
     return (
         <>
             {process.error && <Alert severity="error">{process.error}</Alert>}
             <Container sx={{ pt: { xs: 0, sm: 4 } }}>
                 <Stack spacing={2}>
                     <Stack spacing={2}>
-                        {process.isLoading ?
-                            <Skeleton variant="text" width={260} height={38} /> :
-                            <Typography variant="h2">{process.item?.alias ?? tPlaceholders('Unknown')}</Typography>}
+                        <EditableInput
+                            sx={{
+                                fontWeight: 300,
+                                fontSize: { xs: 18, sm: 24 }
+                            }}
+                            text={process.item?.alias || ''}
+                            noWrap
+                            onChange={handleRename} />
                         <Box>
                             <ConfirmDeleteButton
                                 buttonLabel={t('DeleteProcessButtonLabel')}
@@ -558,12 +443,6 @@ const ProcessDetails = () => {
                         </Box>
                     </Stack>
                     <Stack spacing={3}>
-                        <Stack spacing={1}>
-                            <ProcessSection header={t('Triggers')} isLoading={processConfig.isLoading} onAdd={handleAddTrigger} addTitle={t('AddTrigger')} />
-                            <TransitionGroup>{processConfig.item?.triggers?.map((t, i) => <ProcessItem key={`trigger${i}`}><DisplayDeviceTarget target={t.deviceId ? { deviceId: t.deviceId, contactName: t.contactName, channelName: t.channelName } : undefined} onChanged={(updated) => handleTriggerChange(i, updated)} /></ProcessItem>)}</TransitionGroup>
-                            {processConfig.isLoading ? <DisplayItemPlaceholder /> :
-                                ((processConfig.item?.triggers?.length ?? 0) <= 0 && <NoDataPlaceholder content={t('NoTriggers')} />)}
-                        </Stack>
                         <Stack spacing={1}>
                             <ProcessSection header={t('Conditions')} isLoading={processConfig.isLoading} onAdd={handleAddCondition} addTitle={t('AddCondition')} />
                             {processConfig.isLoading ? <><DisplayItemPlaceholder /><DisplayItemPlaceholder /><DisplayItemPlaceholder /></> :
