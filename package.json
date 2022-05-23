@@ -37,7 +37,7 @@
         "@mui/lab": "5.0.0-alpha.82",
         "@mui/material": "5.8.0",
         "@next/mdx": "^12.1.6",
-        "@storybook/addons": "^6.5.3",
+        "@storybook/addons": "^6.5.4",
         "@vvo/tzdb": "^6.50.0",
         "axios": "0.27.2",
         "clsx": "1.1.1",
