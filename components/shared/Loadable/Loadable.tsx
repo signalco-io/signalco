@@ -17,7 +17,7 @@ export default function Loadable(props: LoadableProps) {
     }
 
     if (props.error) {
-        return <Alert variant="filled" color="error">{props.error}</Alert>
+        return <Alert variant="filled" severity="error">{props.error}</Alert>
     }
 
     return <>{props.children}</>;

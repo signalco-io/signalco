@@ -11,7 +11,7 @@
         "postbuild": "next-sitemap --config next-sitemap.config.js",
         "start": "next start",
         "lint": "next lint",
-        "storybook": "start-storybook -p 6006",
+        "storybook": "start-storybook -p 3000",
         "build-storybook": "build-storybook",
         "update-widget-images": "cross-env WIDGET_IMAGES=true npx storycap --outDir \"public/assets/widget-previews\" --flat --include \"Components/Widgets/**\" --serverTimeout 180000 http://localhost:9009 --serverCmd \"start-storybook --no-open -p 9009\"",
         "stories-check": "rimraf ./.stories-pending && storycap --silent --serverCmd \"start-storybook --no-open -p 6006\" --serverTimeout 180000 -o .stories-pending http://localhost:6006 && yarn node ./tools/storiescompare.js"

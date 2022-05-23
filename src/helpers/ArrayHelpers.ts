@@ -1,4 +1,5 @@
 export const selectMany = <TArray, TItem>(array: Array<TArray>, selector: (val: TArray) => TItem[]) => {
+    if (!array.length) return [];
     return array.map(selector).reduce((a, b) => {
         return a.concat(b);
     });

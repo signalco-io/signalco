@@ -79,6 +79,12 @@ const theme = (theme: AppTheme) => {
       },
     },
     components: {
+      MuiTooltip: {
+        defaultProps: {
+          enterDelay: 500,
+          leaveDelay: 200
+        }
+      },
       MuiButton: {
         styleOverrides: {
           root: {
