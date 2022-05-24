@@ -67,43 +67,25 @@ interface IActionTableItem {
     channel: string
 }
 
-const DeviceContactAction = observer((props: { deviceId: string, state?: IDeviceContactState, contact: IDeviceContact, channel: string }) => {
+export const InputDeviceContactValue = observer((props: { value: any, contact: IDeviceContact, onChange: (value: any) => void }) => {
+    const { onChange } = props;
+
     const [sliderValue, setSliderValue] = useState<number | number[] | undefined>();
     const [sliderColor, setSliderColor] = useState<string | undefined>();
-    const [dataValuesSelected, setDataValueSelected] = useState<string[]>(props.contact.dataValues && props.contact.dataValues.length ? [props.state?.valueSerialized ?? props.contact.dataValues[0].value] : []);
+    const [dataValuesSelected, setDataValueSelected] = useState<string[]>(props.contact.dataValues && props.contact.dataValues.length ? [props.value ?? props.contact.dataValues[0].value] : []);
     const requestDoubleChangeMemoized = useCallback(throttle(async (value) => {
-        console.log('Do double change', 'contact:', props.contact, 'state:', props.state, 'value:', value);
-        await ConductsService.RequestConductAsync({
-            channelName: props.channel,
-            contactName: props.contact.name,
-            deviceId: props.deviceId
-        }, value);
+        console.log('Do double change', 'contact:', props.contact, 'state:', props.value, 'value:', value);
+        onChange(value);
     }, 500), []);
 
-    const handleBooleanClick = async () => {
-        const newState = props.state?.valueSerialized === 'true' ? false : true;
-
-        console.log('Do boolean', 'contact:', props.contact, 'state:', props.state, 'new state:', newState);
-
-        await ConductsService.RequestConductAsync({
-            channelName: props.channel,
-            contactName: props.contact.name,
-            deviceId: props.deviceId
-        }, newState);
-    };
-
     const handleActionClick = async () => {
-        console.log('Do action', 'contact:', props.contact, 'state:', props.state, 'dataValuesSelected:', dataValuesSelected);
+        console.debug('Do action', 'contact:', props.contact, 'state:', props.value, 'dataValuesSelected:', dataValuesSelected);
 
-        await ConductsService.RequestConductAsync({
-            channelName: props.channel,
-            contactName: props.contact.name,
-            deviceId: props.deviceId
-        }, props.contact.dataValuesMultiple ? dataValuesSelected : dataValuesSelected[0]);
+        onChange(props.contact.dataValuesMultiple ? dataValuesSelected : dataValuesSelected[0]);
     };
 
     const handleDoubleChange = (_: Event | React.SyntheticEvent, value: number | number[]) => {
-        console.log('double changed', value)
+        console.debug('double changed', value)
         setSliderValue(value);
         requestDoubleChangeMemoized(value);
     };
@@ -114,7 +96,7 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
     };
 
     const handleDataValuesChanged = (values: string[]) => {
-        console.log('selected', values)
+        console.debug('selected', values)
         setDataValueSelected(values);
     }
 
@@ -124,14 +106,15 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
             if (props.contact.dataType === 'colortemp') {
                 setSliderColor(blendColors('#ffffff', '#C47A10', sliderValue));
             }
-            if (Math.abs(props.state?.valueSerialized - sliderValue) < 0.01) {
+            if (Math.abs(props.value - sliderValue) < 0.01) {
                 setSliderValue(undefined);
             }
         }
-    }, [props.state?.valueSerialized, props.contact.dataType, sliderValue]);
+    }, [props.value, props.contact.dataType, sliderValue]);
 
     if (props.contact.dataType === 'bool') {
-        return <Switch onChange={handleBooleanClick} checked={props.state?.valueSerialized === 'true'} color="warning" />
+        const boolValue = typeof props.value === 'boolean' ? props.value : props.value === 'true';
+        return <Switch onChange={(_, checked) => onChange(checked)} checked={boolValue} color="warning" />
     } else if (props.contact.dataType === 'action' || props.contact.dataType === 'enum') {
         return (
             <Stack alignItems="center" direction="row">
@@ -140,7 +123,7 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
             </Stack>
         );
     } else if (props.contact.dataType === 'double') {
-        const resolvedSliderValue = sliderValue ?? (Number.parseFloat(props.state?.valueSerialized) || undefined);
+        const resolvedSliderValue = sliderValue ?? (Number.parseFloat(props.value) || undefined);
         return <Slider
             step={0.01}
             sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
@@ -151,7 +134,7 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
             onChange={handleDoubleChange}
             onChangeCommitted={handleDoubleChange} />
     } else if (props.contact.dataType === 'colortemp') {
-        const resolvedSliderValue = sliderValue ?? (Number.parseFloat(props.state?.valueSerialized) || undefined);
+        const resolvedSliderValue = sliderValue ?? (Number.parseFloat(props.value) || undefined);
         return <Slider
             step={0.01}
             sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
@@ -166,9 +149,6 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
     }
 });
 
-const ContactStateLastUpdatedDisplay = observer((props: { state?: IDeviceContactState }) => (
-    <Timeago date={props.state?.timeStamp} live />
-));
 
 const ContactStateValueDisplay = observer((props: { contact?: IDeviceContact, state?: IDeviceContactState }) => {
     const { contact, state } = props;
@@ -288,7 +268,7 @@ const DeviceDetails = () => {
                             _contactName: contact.name,
                             name: contact.name,
                             value: <ContactStateValueDisplay contact={contact} state={state} />,
-                            lastUpdate: <ContactStateLastUpdatedDisplay state={state} />
+                            lastUpdate: <Timeago date={state?.timeStamp} live />
                         };
                     }));
 
@@ -381,33 +361,46 @@ const DeviceDetails = () => {
         </Card>
     );
 
-    const EntityActions = () => (
-        <Card>
-            <CardHeader title={t('Actions')} />
-            <CardContent>
-                <Stack spacing={1}>
-                    {typeof actionTableItems === 'undefined' && (
-                        <Skeleton width="100%" height={90} />
-                    )}
-                    {typeof actionTableItems !== 'undefined' && actionTableItems?.length <= 0 && (
-                        <ResultsPlaceholder />
-                    )}
-                    {actionTableItems?.map(item => (
-                        <Paper elevation={0} key={`action-item-${item.name}`} sx={{ p: 2 }}>
-                            <Grid container direction="row" alignItems="center" justifyContent="space-between" spacing={2} wrap="nowrap">
-                                <Grid item>
-                                    <Typography>{item.name}</Typography>
+    const EntityActions = () => {
+        const handleAction = async (deviceId: string, channelName: string, contactName: string, value: any) => {
+            await ConductsService.RequestConductAsync({
+                channelName,
+                contactName,
+                deviceId
+            }, value);
+        }
+
+        return (
+            <Card>
+                <CardHeader title={t('Actions')} />
+                <CardContent>
+                    <Stack spacing={1}>
+                        {typeof actionTableItems === 'undefined' && (
+                            <Skeleton width="100%" height={90} />
+                        )}
+                        {typeof actionTableItems !== 'undefined' && actionTableItems?.length <= 0 && (
+                            <ResultsPlaceholder />
+                        )}
+                        {actionTableItems?.map(item => (
+                            <Paper elevation={0} key={`action-item-${item.name}`} sx={{ p: 2 }}>
+                                <Grid container direction="row" alignItems="center" justifyContent="space-between" spacing={2} wrap="nowrap">
+                                    <Grid item>
+                                        <Typography>{item.name}</Typography>
+                                    </Grid>
+                                    <Grid item>
+                                        {device && <InputDeviceContactValue
+                                            contact={item.contact}
+                                            value={item.state?.valueSerialized}
+                                            onChange={(v) => handleAction(device.id, item.channel, item.contact.name, v)} />}
+                                    </Grid>
                                 </Grid>
-                                <Grid item>
-                                    {device && <DeviceContactAction deviceId={device.id} channel={item.channel} contact={item.contact} state={item.state} />}
-                                </Grid>
-                            </Grid>
-                        </Paper>
-                    ))}
-                </Stack>
-            </CardContent>
-        </Card>
-    );
+                            </Paper>
+                        ))}
+                    </Stack>
+                </CardContent>
+            </Card>
+        );
+    };
 
     const EntityStates = () => {
         const [contactNameHash, setContactNameHash] = useHashParam('contact');

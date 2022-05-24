@@ -9,7 +9,6 @@ import AddSharpIcon from '@mui/icons-material/AddSharp';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { EntityContactAccess, IDeviceTargetIncomplete } from '../../../src/devices/Device';
 import DisplayDeviceTarget from '../../../components/shared/entity/DisplayDeviceTarget';
-import useDevice from '../../../src/hooks/useDevice';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
 import EntityRepository from '../../../src/entity/EntityRepository';
 import { TransitionGroup } from 'react-transition-group';
@@ -17,7 +16,6 @@ import useLocale, { useLocalePlaceholders } from '../../../src/hooks/useLocale';
 import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
 import EditableInput from '../../../components/shared/form/EditableInput';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
-import useEntity from '../../../src/hooks/useEntity';
 
 interface IDeviceStateValue {
     value?: any
@@ -269,46 +267,6 @@ const DisplayCondition = observer((props: { condition: ICondition, onChanged: (u
     );
 });
 
-const DisplayDeviceStateValue = observer((props: { target?: IDeviceTargetIncomplete, value: any | undefined, contactAccess?: number, onChanged: (updated?: IDeviceTargetState) => void }) => {
-    const {
-        value,
-        target,
-        contactAccess,
-        onChanged
-    } = props;
-    const { item: entity, isLoading } = useEntity(target?.deviceId);
-
-    const contact = entity && target?.channelName && target?.contactName
-        ? entity?.getContact({
-            contactName: target?.contactName,
-            channelName: target?.channelName,
-            deviceId: entity.id
-        })
-        : null;
-
-    return (
-        <Stack direction="row" alignItems="center" spacing={1}>
-            <DisplayDeviceTarget target={target} onChanged={(newTarget) => {
-                onChanged({
-                    target: newTarget,
-                    value: typeof newTarget?.contactName !== 'undefined' ? value : undefined
-                });
-            }} contactAccess={contactAccess} />
-            {contact && (
-                <>
-                    {isLoading ? <Skeleton /> : (
-                        <DisplayValue dataType={contact.dataType} value={value} onChanged={(value) => {
-                            onChanged({
-                                target: target,
-                                value: typeof target?.contactName !== 'undefined' ? value : undefined
-                            });
-                        }} />)}
-                </>
-            )}
-        </Stack>
-    );
-});
-
 const ProcessItem = (props: { children: React.ReactNode, in?: boolean }) => (
     <Collapse in={props.in} sx={{ pb: 1 }}>
         <Paper sx={{ p: 2, width: '100%' }} variant="elevation" elevation={0}>
@@ -385,7 +343,7 @@ const ProcessDetails = () => {
             if (condition) {
                 const c = new Condition();
                 c.operation = '=';
-                c.operations.push({ left: { target: {} }, right: { value: true } });
+                c.operations.push({ left: undefined, right: { value: true } });
                 condition.operations.push(c);
             }
         }
@@ -450,7 +408,13 @@ const ProcessDetails = () => {
                             <TransitionGroup>
                                 {processConfig.item?.conducts?.map((c, i) =>
                                     <ProcessItem key={`value${i}`} in>
-                                        <DisplayDeviceStateValue target={c.target} value={c.value} contactAccess={EntityContactAccess.Write.value} onChanged={(u) => handleValueChanged(i, u)} />
+                                        <DisplayDeviceTarget
+                                            target={c.target}
+                                            value={c.value}
+                                            contactAccessFilter={EntityContactAccess.Write.value}
+                                            onChanged={(target, value) => handleValueChanged(i, { target, value })}
+                                            selectContact
+                                            selectValue />
                                     </ProcessItem>
                                 )}
                             </TransitionGroup>

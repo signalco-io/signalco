@@ -13,8 +13,34 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import EntityIcon from './EntityIcon';
 import Loadable from '../Loadable/Loadable';
 import useEntity from '../../../src/hooks/useEntity';
-import { Edit as EditIcon } from '@mui/icons-material';
 import NoDataPlaceholder from '../indicators/NoDataPlaceholder';
+import { InputDeviceContactValue } from '../../../pages/app/entities/[id]';
+
+const EntityContactValueSelection = (props: { target: IDeviceTargetIncomplete | undefined, value: any, onSelected: (value: any) => void }) => {
+    const { target, value, onSelected } = props;
+    const entity = useEntity(target?.deviceId);
+
+    const targetFull = target && target.channelName && target.contactName
+        ? { deviceId: target.deviceId, contactName: target.contactName, channelName: target.channelName }
+        : undefined;
+    const contact = targetFull ? entity.item?.getContact(targetFull) : undefined;
+
+    const handleChange = (newValue: any) => {
+        onSelected(newValue);
+    };
+
+    return (
+        <Loadable isLoading={entity.isLoading} error={entity.error}>
+            {(target && targetFull && contact) && (
+                <InputDeviceContactValue
+                    contact={contact}
+                    value={value}
+                    onChange={handleChange}
+                />
+            )}
+        </Loadable>
+    );
+};
 
 const EntitySelection = (props: { target: IDeviceTargetIncomplete | undefined, onSelected: (target: IDeviceTargetIncomplete | undefined) => void; }) => {
     const {
@@ -46,7 +72,7 @@ const EntitySelection = (props: { target: IDeviceTargetIncomplete | undefined, o
     );
 };
 
-const EntityContactSelection = (props: { target: IDeviceTargetIncomplete, contactAccess?: number, onSelected: (target: IDeviceTargetIncomplete | undefined) => void }) => {
+const EntityContactSelection = (props: { target: IDeviceTargetIncomplete | undefined, contactAccess?: number, onSelected: (target: IDeviceTargetIncomplete | undefined) => void }) => {
     const {
         target, contactAccess, onSelected
     } = props;
@@ -71,13 +97,13 @@ const EntityContactSelection = (props: { target: IDeviceTargetIncomplete, contac
     return (
         <Loadable isLoading={isLoading} error={error}>
             <List>
-                <ListItem selected={!target.contactName || !target.channelName} disablePadding>
-                    <ListItemButton onClick={() => handleContactSelected({ deviceId: target.deviceId })}>
+                <ListItem selected={!target?.contactName || !target?.channelName} disablePadding>
+                    <ListItemButton onClick={() => handleContactSelected({ deviceId: target!.deviceId })}>
                         <ListItemText>None</ListItemText>
                     </ListItemButton>
                 </ListItem>
                 {contacts.map(c => (
-                    <ListItem selected={target.channelName === c.channelName && target.contactName === c.contactName} key={`${c.channelName}-${c.contactName}`} disablePadding>
+                    <ListItem selected={target?.channelName === c.channelName && target?.contactName === c.contactName} key={`${c.channelName}-${c.contactName}`} disablePadding>
                         <ListItemButton onClick={() => handleContactSelected(c)}>
                             <ListItemText>{c.contactName}</ListItemText>
                         </ListItemButton>
@@ -88,74 +114,123 @@ const EntityContactSelection = (props: { target: IDeviceTargetIncomplete, contac
     );
 };
 
-function EntitySelectionMenu(props: { target?: IDeviceTargetIncomplete; contactAccessFilter?: number, onSelected: (target: IDeviceTargetIncomplete | undefined) => void, onClose: () => void }) {
+interface EntitySelectionMenuProps {
+    target?: IDeviceTargetIncomplete;
+    selectContact?: boolean;
+    contactAccessFilter?: number;
+    selectValue?: boolean;
+    value?: any;
+    onSelected: (target: IDeviceTargetIncomplete | undefined, value: any) => void;
+    onClose: () => void;
+}
+
+function EntitySelectionMenu(props: EntitySelectionMenuProps) {
     const {
-        target, contactAccessFilter: contactAccess, onSelected, onClose
+        target, selectContact, contactAccessFilter, selectValue, value, onSelected, onClose
     } = props;
-    const [selectingEntity, setSelectingEntity] = useState(false);
-    const [selectingContact, setSelectingContact] = useState(false);
-    const [selectingValue, setSelectingValue] = useState(false);
+    const [selecting, setSelecting] = useState<undefined | 'entity' | 'contact' | 'value'>(undefined);
     const entitySelected = target?.deviceId;
+    const contactSelected = !!(target?.channelName && target?.contactName);
 
     useEffect(() => {
-        if (target?.deviceId) {
+        if (selectValue && target?.channelName && target?.contactName) {
             startTransition(() => {
-                setSelectingContact(true);
-                setSelectingEntity(false);
+                setSelecting('value');
+            });
+        } else if (selectContact && target?.deviceId) {
+            startTransition(() => {
+                setSelecting('contact');
             });
         } else {
             startTransition(() => {
-                setSelectingEntity(true);
-                setSelectingContact(false);
+                setSelecting('entity');
             });
         }
-    }, [target]);
+    }, [selectContact, selectValue, target]);
+
+    console.log('selecting', selecting)
 
     const handleEditEntity = () => {
         startTransition(() => {
-            setSelectingContact(false);
-            setSelectingEntity(true);
+            setSelecting('entity');
         });
     };
 
     const handleEntitySelected = (target: IDeviceTargetIncomplete | undefined) => {
-        onSelected(target);
+        onSelected(target, undefined);
+        if (!selectContact && target?.deviceId) {
+            onClose();
+        }
     };
 
     const handleContactSelected = (target: IDeviceTargetIncomplete | undefined) => {
-        onSelected(target);
-        if (target?.channelName && target?.contactName) {
+        onSelected(target, undefined);
+        if (!selectValue && target?.channelName && target?.contactName) {
+            onClose();
+        }
+    };
+
+    const handleContactValueSelected = (newValue: any) => {
+        onSelected(target, newValue);
+        if (typeof newValue !== undefined) {
             onClose();
         }
     };
 
     return (
-        <Stack sx={{ height: '100%' }}>
-            <Accordion expanded={selectingEntity} onChange={handleEditEntity} disableGutters TransitionProps={{ unmountOnExit: true, timeout: 150 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <Accordion expanded={selecting === 'entity'} sx={{ flexGrow: selecting === 'entity' ? 1 : 0 }} onChange={handleEditEntity} disableGutters TransitionProps={{ timeout: 150 }}>
                 <AccordionSummary
-                    expandIcon={!selectingEntity && <EditIcon />}>
+                    expandIcon={!(selecting === 'entity') && <ChevronRightIcon />}>
                     {entitySelected ? (
                         <EntityIconLabel entityId={target.deviceId} />
                     ) : (
                         <Typography variant="body2" color="textSecondary">Select entity</Typography>
                     )}
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails sx={{ p: 0, overflow: 'auto' }}>
                     <EntitySelection target={target} onSelected={handleEntitySelected} />
                 </AccordionDetails>
             </Accordion>
-            <Accordion disabled={!entitySelected} expanded={selectingContact} disableGutters TransitionProps={{ unmountOnExit: true, timeout: 150 }} sx={{ flexGrow: 1 }}>
-                <AccordionSummary>
-                    <Stack spacing={2} direction="row" alignItems="center">
-                        <Typography>Contact</Typography>
-                        {!entitySelected && <Typography variant="body2" color="textSecondary">Select entity first</Typography>}
-                    </Stack>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <EntityContactSelection target={target!} contactAccess={contactAccess} onSelected={handleContactSelected} />
-                </AccordionDetails>
-            </Accordion>
-        </Stack >
+            {selectContact && (
+                <Accordion disabled={!entitySelected} sx={{ flexGrow: selecting === 'contact' ? 1 : 0 }} expanded={selecting === 'contact'} disableGutters TransitionProps={{ timeout: 150 }}>
+                    <AccordionSummary
+                        expandIcon={!(selecting === 'contact') && <ChevronRightIcon />}>
+                        <Stack spacing={2} direction="row" alignItems="center">
+                            {contactSelected ? (
+                                <Typography>{target.contactName}</Typography>
+                            ) : (
+                                <>
+                                    {!entitySelected && (
+                                        <>
+                                            <Typography>Contact</Typography>
+                                            <Typography variant="body2" color="textSecondary">Select entity first</Typography>
+                                        </>
+                                    )}
+                                </>
+                            )}
+                        </Stack>
+                    </AccordionSummary>
+                    <AccordionDetails sx={{ p: 0 }}>
+                        <EntityContactSelection target={target!} contactAccess={contactAccessFilter} onSelected={handleContactSelected} />
+                    </AccordionDetails>
+                </Accordion>
+            )}
+            {selectValue && (
+                <Accordion disabled={!contactSelected} sx={{ flexGrow: selecting === 'value' ? 1 : 0 }} expanded={selecting === 'value'} disableGutters TransitionProps={{ timeout: 150 }}>
+                    <AccordionSummary
+                        expandIcon={(!(selecting === 'value') && contactSelected) && <ChevronRightIcon />}>
+                        <Stack spacing={2} direction="row" alignItems="center">
+                            <Typography>Value</Typography>
+                            {!contactSelected && <Typography variant="body2" color="textSecondary">Select contact first</Typography>}
+                        </Stack>
+                    </AccordionSummary>
+                    <AccordionDetails sx={{ p: 0 }}>
+                        <EntityContactValueSelection target={target!} value={value} onSelected={handleContactValueSelected} />
+                    </AccordionDetails>
+                </Accordion>
+            )}
+        </Box>
     );
 }
 
@@ -187,12 +262,12 @@ function EntityIconLabel(props: { entityId: string | undefined, description?: st
 }
 
 export interface DisplayEntityTargetProps {
-    isLoading?: boolean;
     target?: IDeviceTargetIncomplete;
     selectContact?: boolean;
     contactAccessFilter?: number;
     selectValue?: boolean;
-    onChanged: (updated?: IDeviceTargetIncomplete) => void;
+    value?: any;
+    onChanged: (updated: IDeviceTargetIncomplete | undefined, value: any | undefined) => void;
 }
 
 function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
@@ -200,12 +275,13 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
         target,
         selectContact, contactAccessFilter,
         selectValue,
+        value,
         onChanged
     } = props;
     const entityMenu = usePopupState({ variant: 'popover', popupId: 'entitytarget-menu' });
 
-    const handleEntitySelected = (target: IDeviceTargetIncomplete | undefined) => {
-        onChanged && onChanged(target);
+    const handleEntitySelected = (target: IDeviceTargetIncomplete | undefined, value: any) => {
+        onChanged && onChanged(target, value);
     };
 
     const handleEntitySelectionClose = () => {
@@ -241,7 +317,10 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                 <Box sx={{ width: 420, height: 620 }}>
                     <EntitySelectionMenu
                         target={target}
+                        selectContact={selectContact}
                         contactAccessFilter={contactAccessFilter}
+                        selectValue={selectValue}
+                        value={value}
                         onSelected={handleEntitySelected}
                         onClose={handleEntitySelectionClose} />
                 </Box>
