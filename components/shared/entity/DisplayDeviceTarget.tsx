@@ -91,7 +91,7 @@ const EntityContactSelection = (props: { target: IDeviceTargetIncomplete | undef
     }
 
     if (!isLoading && !error && !contacts.length) {
-        return <NoDataPlaceholder content={'No applicable contacts available'} />;
+        return <Box sx={{ p: 2 }}><NoDataPlaceholder content={'No applicable contacts available'} /></Box>;
     }
 
     return (
@@ -201,9 +201,9 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                                 <Typography>{target.contactName}</Typography>
                             ) : (
                                 <>
+                                    <Typography>Contact</Typography>
                                     {!entitySelected && (
                                         <>
-                                            <Typography>Contact</Typography>
                                             <Typography variant="body2" color="textSecondary">Select entity first</Typography>
                                         </>
                                     )}
@@ -298,7 +298,11 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                     <EntityIconLabel entityId={target?.deviceId} description={entityDescription} />
                     <Stack spacing={1} direction="row" alignItems="center">
                         {(target && target.contactName && selectContact) && (
-                            <Chip label={target.contactName ?? 'None'} />
+                            // <Chip label={target.contactName ?? 'None'} />
+                            <Stack direction="row" spacing={1} alignItems="end">
+                                <Typography variant="subtitle2" color="textSecondary">{target.contactName ?? 'None'}</Typography>
+                                <Typography fontWeight="bold">{value?.toString() ?? '-'}</Typography>
+                            </Stack>
                         )}
                         <ChevronRightIcon />
                     </Stack>
