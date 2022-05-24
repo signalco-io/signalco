@@ -1,4 +1,5 @@
 import { makeAutoObservable, makeObservable, observable } from 'mobx';
+import Enum from '@enterwell/enum-helper';
 
 export class SignalUserDto {
     id?: string;
@@ -46,6 +47,13 @@ export class DeviceContactDataValue implements IDeviceContactDataValue {
         this.label = label;
     }
 }
+
+export const EntityContactAccess = new Enum([
+    {value: 0, name: 'None', label: 'None'},
+    {value: 1, name: 'Read', label: 'Read'},
+    {value: 2, name: 'Write', label: 'Write'},
+    {value: 4, name: 'Get', label: 'Get'},
+]);
 
 export interface IDeviceContact {
     name: string;

@@ -1440,6 +1440,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
+"@enterwell/enum-helper@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@enterwell/enum-helper/-/enum-helper-1.0.4.tgz#86325e0106a775d6da90c6216b9f21543e5600b9"
+  integrity sha512-cMhvHKqABX++RLmaDewbDOfJAsST8YplyhThwB0AkEbNJNQ11d4B9rB5jQMw3mpBiNgbWv76p6MwEEIozgmdYQ==
+
 "@enterwell/react-form-builder@^0.1.7":
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/@enterwell/react-form-builder/-/react-form-builder-0.1.7.tgz#92fa69fb3d8161c9fa773c624798c902088a218e"

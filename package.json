@@ -26,6 +26,7 @@
         "@emotion/react": "11.9.0",
         "@emotion/server": "11.4.0",
         "@emotion/styled": "11.8.1",
+        "@enterwell/enum-helper": "^1.0.4",
         "@enterwell/react-form-builder": "^0.1.7",
         "@enterwell/react-form-validation": "^1.2.4",
         "@hcaptcha/react-hcaptcha": "1.3.0",

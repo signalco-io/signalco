@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { startTransition, useEffect, useState } from 'react';
 
 export type useLoadAndErrorResult<T> = {
   item?: T | undefined,
@@ -16,9 +16,15 @@ export function useLoadAndError<T>(load?: (() => Promise<T>) | Promise<T>) : use
           return;
         }
 
-        setState({ isLoading: false, item: typeof load === 'function' ? await load() : await load});
+        const itemData = typeof load === 'function' ? await load() : await load;
+
+        startTransition(() => {
+            setState({ isLoading: false, item: itemData });
+        });
       } catch (err: any) {
-        setState({ isLoading: false, error: err?.toString()});
+        startTransition(() => {
+            setState({ isLoading: false, error: err?.toString()});
+        });
       }
     };
 
@@ -42,13 +48,15 @@ const useLoadingAndError = <TIn, TOut>(
   const result = useLoadAndError<TIn[]>(loadData);
 
   useEffect(() => {
-    if (result.isLoading ||
-      typeof result.error !== 'undefined' ||
-      result.item == null)  {
-      return;
-    }
+    startTransition(() => {
+        if (result.isLoading ||
+            typeof result.error !== 'undefined' ||
+            result.item == null)  {
+            return;
+        }
 
-    setItems(transformItem ? result.item.map(transformItem) : result.item.map(i => i as unknown as TOut));
+        setItems(transformItem ? result.item.map(transformItem) : result.item.map(i => i as unknown as TOut));
+    });
   }, [result, transformItem]);
 
   return {items: items ?? Array<TOut>(), isLoading: result.isLoading, error: result.error};

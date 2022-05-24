@@ -4,6 +4,7 @@ import {
   LinearProgress, Link,
   Stack,
   TextField,
+  Tooltip,
   Typography
 } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -60,11 +61,13 @@ const ErrorRow = (props: IErrorProps) => {
 const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
   if (typeof props.value === 'string' && isAbsoluteUrl(props.value as string))
     return (
-      <Box title={props.link || props.value} onClick={props.hasClick ? props.onClick : undefined} sx={{ cursor: props.hasClick ? 'pointer' : 'default' }}>
-        <Link href={props.link || props.value} rel="noopener" target="_blank">
-          <OpenInNewIcon style={props.style} fontSize="small" />
-        </Link>
-      </Box>
+      <Tooltip title={props.link || props.value}>
+        <Box onClick={props.hasClick ? props.onClick : undefined} sx={{ cursor: props.hasClick ? 'pointer' : 'default' }}>
+          <Link href={props.link || props.value} rel="noopener" target="_blank">
+            <OpenInNewIcon style={props.style} fontSize="small" />
+          </Link>
+        </Box>
+      </Tooltip>
     );
 
   let Wrapper = ({ children }: ChildrenProps) => <>{children}</>;

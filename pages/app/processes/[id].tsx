@@ -7,7 +7,7 @@ import ProcessesRepository from '../../../src/processes/ProcessesRepository';
 import NoDataPlaceholder from '../../../components/shared/indicators/NoDataPlaceholder';
 import AddSharpIcon from '@mui/icons-material/AddSharp';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { IDeviceTargetIncomplete } from '../../../src/devices/Device';
+import { EntityContactAccess, IDeviceTargetIncomplete } from '../../../src/devices/Device';
 import DisplayDeviceTarget from '../../../components/shared/entity/DisplayDeviceTarget';
 import useDevice from '../../../src/hooks/useDevice';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
@@ -17,6 +17,7 @@ import useLocale, { useLocalePlaceholders } from '../../../src/hooks/useLocale';
 import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
 import EditableInput from '../../../components/shared/form/EditableInput';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
+import useEntity from '../../../src/hooks/useEntity';
 
 interface IDeviceStateValue {
     value?: any
@@ -268,50 +269,49 @@ const DisplayCondition = observer((props: { condition: ICondition, onChanged: (u
     );
 });
 
-const DisplayDeviceStateValue = observer((props: { target?: IDeviceTargetIncomplete, value: any | undefined, onChanged: (updated?: IDeviceTargetState) => void }) => {
+const DisplayDeviceStateValue = observer((props: { target?: IDeviceTargetIncomplete, value: any | undefined, contactAccess?: number, onChanged: (updated?: IDeviceTargetState) => void }) => {
     const {
-        target
+        value,
+        target,
+        contactAccess,
+        onChanged
     } = props;
-    const device = useDevice(target?.deviceId);
+    const { item: entity, isLoading } = useEntity(target?.deviceId);
 
-    const contact = target?.channelName && target?.contactName
-        ? device?.getContact({
+    const contact = entity && target?.channelName && target?.contactName
+        ? entity?.getContact({
             contactName: target?.contactName,
             channelName: target?.channelName,
-            deviceId: device.id
+            deviceId: entity.id
         })
         : null;
 
     return (
-        <Grid container alignItems="center" spacing={1}>
-            <Grid item>
-                <DisplayDeviceTarget target={target} onChanged={(value) => {
-                    props.onChanged({
-                        target: value,
-                        value: typeof value?.contactName !== 'undefined' ? props.value : undefined
-                    });
-                }} />
-            </Grid>
-            <Grid item>
-                <span>set</span>
-            </Grid>
-            <Grid item>
-                {contact ?
-                    <DisplayValue dataType={contact.dataType} value={props.value} onChanged={(value) => {
-                        props.onChanged({
-                            target: target,
-                            value: typeof target?.contactName !== 'undefined' ? value : undefined
-                        });
-                    }} />
-                    : <Skeleton />}
-            </Grid>
-        </Grid>
+        <Stack direction="row" alignItems="center" spacing={1}>
+            <DisplayDeviceTarget target={target} onChanged={(newTarget) => {
+                onChanged({
+                    target: newTarget,
+                    value: typeof newTarget?.contactName !== 'undefined' ? value : undefined
+                });
+            }} contactAccess={contactAccess} />
+            {contact && (
+                <>
+                    {isLoading ? <Skeleton /> : (
+                        <DisplayValue dataType={contact.dataType} value={value} onChanged={(value) => {
+                            onChanged({
+                                target: target,
+                                value: typeof target?.contactName !== 'undefined' ? value : undefined
+                            });
+                        }} />)}
+                </>
+            )}
+        </Stack>
     );
 });
 
 const ProcessItem = (props: { children: React.ReactNode, in?: boolean }) => (
     <Collapse in={props.in} sx={{ pb: 1 }}>
-        <Paper sx={{ p: 2 }} variant="elevation" elevation={0}>
+        <Paper sx={{ p: 2, width: '100%' }} variant="elevation" elevation={0}>
             {props.children}
         </Paper>
     </Collapse>
@@ -361,24 +361,14 @@ const ProcessDetails = () => {
 
     const handleValueChanged = (index: number, updated?: IDeviceTargetState) => {
         // TODO: Use action to change state
-        if (processConfig.item) {
-            processConfig.item.conducts[index].value = updated?.value;
-            const target = processConfig.item.conducts[index].target;
-            if (typeof target !== 'undefined' &&
-                updated?.target?.deviceId) {
-                target.channelName = updated.target.channelName;
-                target.contactName = updated.target.contactName;
-                target.deviceId = updated.target.deviceId;
-            } else if (updated?.target?.deviceId) {
-                processConfig.item.conducts[index].target = {
-                    channelName: updated.target?.channelName,
-                    contactName: updated.target?.contactName,
-                    deviceId: updated.target?.deviceId,
-                }
+        runInAction(() => {
+            if (processConfig.item) {
+                processConfig.item.conducts[index].value = updated?.value;
+                processConfig.item.conducts[index].target = updated?.target;
             }
-        }
 
-        persistProcessAsync();
+            persistProcessAsync();
+        });
     };
 
     const handleAddConduct = () => {
@@ -423,7 +413,7 @@ const ProcessDetails = () => {
     return (
         <>
             {process.error && <Alert severity="error">{process.error}</Alert>}
-            <Container sx={{ pt: { xs: 0, sm: 4 } }}>
+            <Container sx={{ pt: { xs: 0, sm: 4 } }} maxWidth="md">
                 <Stack spacing={2}>
                     <Stack spacing={2}>
                         <EditableInput
@@ -447,12 +437,23 @@ const ProcessDetails = () => {
                             <ProcessSection header={t('Conditions')} isLoading={processConfig.isLoading} onAdd={handleAddCondition} addTitle={t('AddCondition')} />
                             {processConfig.isLoading ? <><DisplayItemPlaceholder /><DisplayItemPlaceholder /><DisplayItemPlaceholder /></> :
                                 (processConfig.item?.condition
-                                    ? <ProcessItem in><DisplayCondition isTopLevel condition={processConfig.item.condition} onChanged={handleConditionChange} /></ProcessItem>
-                                    : <NoDataPlaceholder content={t('NoConductions')} />)}
+                                    ? (<ProcessItem in>
+                                        <DisplayCondition isTopLevel condition={processConfig.item.condition} onChanged={handleConditionChange} />
+                                    </ProcessItem>
+                                    ) : (
+                                        <NoDataPlaceholder content={t('NoConductions')} />
+                                    )
+                                )}
                         </Stack>
                         <Stack spacing={1}>
                             <ProcessSection header={t('Conducts')} isLoading={processConfig.isLoading} onAdd={handleAddConduct} addTitle={t('AddConduct')} />
-                            <TransitionGroup>{processConfig.item?.conducts?.map((c, i) => <ProcessItem key={`value${i}`}><DisplayDeviceStateValue target={c.target} value={c.value} onChanged={(u) => handleValueChanged(i, u)} /></ProcessItem>)}</TransitionGroup>
+                            <TransitionGroup>
+                                {processConfig.item?.conducts?.map((c, i) =>
+                                    <ProcessItem key={`value${i}`} in>
+                                        <DisplayDeviceStateValue target={c.target} value={c.value} contactAccess={EntityContactAccess.Write.value} onChanged={(u) => handleValueChanged(i, u)} />
+                                    </ProcessItem>
+                                )}
+                            </TransitionGroup>
                             {processConfig.isLoading ? <><DisplayItemPlaceholder /><DisplayItemPlaceholder /></> :
                                 ((processConfig.item?.conducts?.length ?? 0) <= 0 && <NoDataPlaceholder content={t('NoConducts')} />)}
                         </Stack>
