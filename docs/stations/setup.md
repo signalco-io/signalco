@@ -7,7 +7,7 @@
 - Download [balena Etcher](https://www.balena.io/etcher/)
 - Attach SD card to your computer
 - Select Frash from URL
-- Paste URL: `TODO` for latest station image (Orange Pi Zero2 Ubuntu Focal) and click OK
+- Paste URL: `TODO` for latest station image (Orange Pi Zero2 Ubuntu Server Focal) and click OK
 - Etcher will download the image, when that is done click "Select target" and select SD card
 - Click "Flash!" to start writing the image
 - When done you can close the Etcher and remove the SD from your computer
@@ -29,7 +29,7 @@ sudo ./ss-install.sh
 ```bash
 curl https://raw.githubusercontent.com/signalco-io/station/main/z2m-install.sh > ./z2m-install.sh
 sudo chmod +x ./z2m-install.sh
-sudo ./install.sh
+sudo ./z2m-install.sh
 ```
 
 #### Useful commands
