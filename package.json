@@ -103,7 +103,7 @@
         "eslint": "8.16.0",
         "eslint-config-next": "12.1.6",
         "fs-extra": "^10.1.0",
-        "next-sitemap": "^2.5.25",
+        "next-sitemap": "^2.5.28",
         "openapi-types": "^11.0.1",
         "prop-types": "15.8.1",
         "puppeteer": "14.1.1",
