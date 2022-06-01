@@ -1,7 +1,7 @@
 import { LoadingButton } from '@mui/lab';
 import { NoSsr } from '@mui/material';
-import { useEffect, useState } from '@storybook/addons';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 export default function OAuthRedirectConnectButton(props: { label: string; initiateUrl: string; queryParamName: string; onCode: (code: string) => Promise<void>; }) {
     const { label, initiateUrl, queryParamName, onCode } = props;

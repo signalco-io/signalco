@@ -4,7 +4,7 @@ import { AppLayoutWithAuth } from '../../../../components/layouts/AppLayoutWithA
 import HttpService from '../../../../src/services/HttpService';
 import OAuthRedirectConnectButton from '../../../../components/oauth/OAuthRedirectConnectButton';
 
-const slackAppClientIdResolved = process.env.SLACK_CLIENTID;
+const slackAppClientIdResolved = process.env.NEXT_PUBLIC_SLACK_CLIENTID;
 
 const slackScopes = [
     'chat:write',
@@ -15,7 +15,8 @@ const slackScopes = [
 
 const ChannelSlack = () => {
     const handleOAuthCode = async (code: string) => {
-        await HttpService.requestAsync('https://slack.channel.signalco.dev/api/oauth/access', 'post', { code });
+        const response = await HttpService.requestAsync('https://slack.channel.signalco.dev/api/auth/access', 'post', { code });
+        console.log('Slack access response', response);
     };
 
     return (
