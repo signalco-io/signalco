@@ -53,15 +53,14 @@ module.exports = withBundleAnalyzer(withPWA(withMDX({
                         workerSrc: '\'self\'',
                         imgSrc: [
                             '\'self\'', 'data:',
-                            'https://www.signalco.io', 'https://www.signalco.dev',
+                            'https://*.signalco.io', 'https://*.signalco.dev',
                             'https://lh3.googleusercontent.com',
                             'https://dfnoise.eu.auth0.com',
                             'https://api.mapbox.com'
                         ],
                         formAction: '\'self\'',
                         connectSrc: ['\'self\'',
-                            'https://www.signalco.io', 'https://api.signalco.io',
-                            'https://www.signalco.dev', 'https://api.signalco.dev',
+                            'https://*.signalco.io', 'https://*.signalco.dev',
                             'https://*.service.signalr.net', 'wss://*.service.signalr.net',
 
                             // Station status checking
