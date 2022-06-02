@@ -1,4 +1,4 @@
-const chalk = require('chalk');
+const { green, red, yellow } = require('colorette');
 const { unlinkSync, renameSync, readFileSync, readdirSync, lstatSync, mkdirSync } = require('fs');
 const { join, dirname } = require('path');
 const { stdout } = require('process');
@@ -47,12 +47,12 @@ function logProcess(message, taskToRun, silent) {
         }
         const valueToReturn = taskToRun();
         if (!silent) {
-            stdout.write(chalk.green(' DONE ✔') + '\n');
+            stdout.write(green(' DONE ✔') + '\n');
         }
 
         return valueToReturn;
     } catch (error) {
-        stdout.write(chalk.red(' ERROR X') + '\n');
+        stdout.write(red(' ERROR X') + '\n');
 
         throw error;
     }
@@ -73,7 +73,7 @@ try {
         // If the approved file is an old one (does not exist in the pending folder)
         // delete it from the approved folder.
         if (!pendingFiles.includes(possiblePending)) {
-            logProcess(`\t[${chalk.red('-')}] ${approvedFile.substring(possiblePending.indexOf(APPROVED_DIR_NAME) + APPROVED_DIR_NAME.length + 1)}`, () => unlinkSync(approvedFile));
+            logProcess(`\t[${red('-')}] ${approvedFile.substring(possiblePending.indexOf(APPROVED_DIR_NAME) + APPROVED_DIR_NAME.length + 1)}`, () => unlinkSync(approvedFile));
             numberOfChanges++;
         }
     });
@@ -87,7 +87,7 @@ try {
         // move it to the approved folder.
         if (!approvedFiles.includes(possibleNew)) {
             mkdirSync(dirname(possibleNew), { recursive: true });
-            logProcess(`[${chalk.green('+')}] ${possibleNewShortPath}`, () => renameSync(pendingFile, possibleNew));
+            logProcess(`[${green('+')}] ${possibleNewShortPath}`, () => renameSync(pendingFile, possibleNew));
             numberOfChanges++;
         } else {
             const pendingFileBytes = readFileSync(pendingFile);
@@ -95,14 +95,14 @@ try {
 
             // If the files are not the same, overwrite it.
             if (!pendingFileBytes.equals(approvedFileBytes)) {
-                logProcess(`[${chalk.yellow('~')}] ${possibleNewShortPath}`, () => renameSync(pendingFile, possibleNew));
+                logProcess(`[${yellow('~')}] ${possibleNewShortPath}`, () => renameSync(pendingFile, possibleNew));
                 numberOfChanges++;
             }
         }
     });
 } catch (error) {
     console.log();
-    console.error(chalk.red('(error 2) Error occurred while running the script:'));
-    console.error(chalk.red(error));
+    console.error(red('(error 2) Error occurred while running the script:'));
+    console.error(red(error));
     process.exit(2);
 }

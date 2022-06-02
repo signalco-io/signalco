@@ -36,6 +36,7 @@ export default function App(props: AppProps) {
           name="viewport"
           content="initial-scale=1, width=device-width"
         />
+        <meta name="theme-color" content={`${appContextState.isDark ? '#000000' : '#ffffff'}`}></meta>
         <title>Signalco</title>
       </Head>
       <ThemeProvider theme={appTheme(appContextState.theme)}>
