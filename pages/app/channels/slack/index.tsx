@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite';
 import { AppLayoutWithAuth } from '../../../../components/layouts/AppLayoutWithAuth';
 import HttpService from '../../../../src/services/HttpService';
 import OAuthRedirectConnectButton from '../../../../components/oauth/OAuthRedirectConnectButton';
-import { useState } from 'react';
 
 const slackAppClientIdResolved = process.env.NEXT_PUBLIC_SLACK_CLIENTID;
 
