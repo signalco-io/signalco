@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { AppLayoutWithAuth } from '../../../../components/layouts/AppLayoutWithAuth';
 import HttpService from '../../../../src/services/HttpService';
 import OAuthRedirectConnectButton from '../../../../components/oauth/OAuthRedirectConnectButton';
+import { useRouter } from 'next/router';
 
 const slackAppClientIdResolved = process.env.NEXT_PUBLIC_SLACK_CLIENTID;
 
@@ -14,13 +15,14 @@ const slackScopes = [
 ];
 
 const ChannelSlack = () => {
+    const router = useRouter();
     const redirectUrl = typeof window !== 'undefined'
         ? `${window.location.origin}/app/channels/slack`
         : undefined;
 
     const handleOAuthCode = async (code: string) => {
         const response = await HttpService.requestAsync('https://slack.channel.api.signalco.io/api/auth/access', 'post', { code, redirectUrl });
-        console.log('Slack access response', response);
+        router.push('/app/entities/' + response.id);
     };
 
     return (
