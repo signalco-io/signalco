@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export type useLoadAndErrorResult<T> = {
   item?: T | undefined,
@@ -38,20 +38,23 @@ const useLoadingAndError = <TIn, TOut>(
   loadData?: (() => Promise<TIn[]>) | Promise<TIn[]>,
   transformItem?: (item: TIn) => TOut
 ): useLoadingAndErrorResult<TOut> => {
-  const [items, setItems] = useState<TOut[] | undefined>();
   const result = useLoadAndError<TIn[]>(loadData);
+  const [state, setState] = useState<useLoadingAndErrorResult<TOut>>({items: Array<TOut>(), isLoading: result.isLoading, error: result.error});
 
-  useEffect(() => {
-    if (result.isLoading ||
+  useMemo(() => {
+      const mappedResults = result.isLoading ||
       typeof result.error !== 'undefined' ||
-      result.item == null)  {
-      return;
-    }
+      result.item == null
+      ? []
+      : (transformItem ? result.item.map(transformItem) : result.item.map(i => i as unknown as TOut));
+    setState({
+        items: mappedResults,
+        isLoading: result.isLoading,
+        error: result.error
+    })
+  }, [result.error, result.isLoading, result.item, transformItem]);
 
-    setItems(transformItem ? result.item.map(transformItem) : result.item.map(i => i as unknown as TOut));
-  }, [result, transformItem]);
-
-  return {items: items ?? Array<TOut>(), isLoading: result.isLoading, error: result.error};
+  return state;
 };
 
 export default useLoadingAndError;
