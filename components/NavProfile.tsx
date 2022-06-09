@@ -162,6 +162,7 @@ const NavLink = ({ path, Icon, active, label, onClick }: { path: string, Icon: S
 
 const NavProfile = () => {
   const router = useRouter();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const activeNavItem = orderBy(navItems.filter(ni => router.pathname.startsWith(ni.path)), ni => 0 - ni.path.length)[0];
   const navWidth = useNavWidth();
   const { t } = useLocale('App', 'Nav');
@@ -169,10 +170,17 @@ const NavProfile = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
   useEffect(() => {
     if (!isMobile) setMobileMenuOpen(false);
   }, [isMobile]);
+
+  const handleMobileMenuOpenClick = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  }
+
+  const handleMobileMenuClose = () => {
+    setMobileMenuOpen(false);
+  }
 
   return (
     <Stack
@@ -193,7 +201,7 @@ const NavProfile = () => {
       {(isMobile && mobileMenuOpen) && <Typography sx={{ opacity: 0.6 }}>Menu</Typography>}
       {isMobile &&
         <>
-          <IconButton size="large" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <IconButton size="large" onClick={handleMobileMenuOpenClick}>
             {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
           <Box hidden={!mobileMenuOpen} sx={{
@@ -207,7 +215,7 @@ const NavProfile = () => {
           }}>
             <Stack>
               {navItems.map((ni, index) =>
-                <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} onClick={() => setMobileMenuOpen(false)} />)}
+                <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} onClick={handleMobileMenuClose} />)}
             </Stack>
           </Box>
         </>

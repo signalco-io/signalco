@@ -1,10 +1,9 @@
 import { Box, Button, Card, CardContent, CardHeader, CardMedia, Grid, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router'
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import { observer } from 'mobx-react-lite';
-import StationsRepository, { IBlobInfoModel } from '../../../src/stations/StationsRepository';
-
+import StationsRepository, { IBlobInfoModel, IStationModel } from '../../../src/stations/StationsRepository';
 import AutoTable from '../../../components/shared/table/AutoTable';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -49,8 +48,8 @@ const StationDetails = () => {
 
     // Load station
     const { id } = router.query;
-    const loadStationCallback = useCallback(() => loadStation(id?.toString()), [id]);
-    const station = useLoadAndError(loadStationCallback);
+    const loadStationCallback = useMemo(() => id ? loadStation(id.toString()) : undefined, [id]);
+    const station = useLoadAndError<IStationModel | undefined>(loadStationCallback);
 
     // Station actions
     const handleUpdateSystem = () => stationCommandAsync(id, StationsRepository.updateSystemAsync, 'update system');
@@ -74,7 +73,7 @@ const StationDetails = () => {
             }
         );
     }, [station, t]);
-    const workerServicesTableLoadItems = useCallback(() => Promise.resolve(station.item?.availableWorkerServices || []), [station])
+    const workerServicesTableLoadItems = useMemo(() => Promise.resolve(station.item?.availableWorkerServices || []), [station])
     const workerServicesTable = useAutoTable(workerServicesTableLoadItems, workerServicesTableTransformItems, t);
 
     const [logContent, setLogContent] = useState('');
@@ -108,7 +107,7 @@ const StationDetails = () => {
             )
         });
     }, [loadingLog, station.item, t]);
-    const logsLoadItems = useCallback(() => Promise.resolve(station.item ? StationsRepository.getLogsAsync(station.item.id) : []), [station]);
+    const logsLoadItems = useMemo(() => Promise.resolve(station.item ? StationsRepository.getLogsAsync(station.item.id) : []), [station]);
     const logsTable = useAutoTable(logsLoadItems, logsAutoTableItemTransform, t);
 
     const handleDelete = async () => {
