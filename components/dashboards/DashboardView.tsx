@@ -1,4 +1,4 @@
-import { DndContext, DragEndEvent, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DndContext, DragEndEvent, DraggableAttributes, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
@@ -13,6 +13,7 @@ import { Button, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import { ChildrenProps } from '../../src/sharedTypes';
 import useLocale from '../../src/hooks/useLocale';
+import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 
 const draggingUpscale = 1.1;
 
@@ -26,11 +27,6 @@ function DragableWidget(props: IWidgetProps) {
         transition,
     } = useSortable({ id: props.id, disabled: !props.isEditMode });
 
-    const [span, setSpan] = useState(({
-        colSpan: (props.config as any)?.columns || 1,
-        rowSpan: (props.config as any)?.columns || 1
-    }));
-
     let customTransform;
     if (transform) {
         customTransform = {
@@ -41,32 +37,36 @@ function DragableWidget(props: IWidgetProps) {
         };
     }
 
-    return <DisplayWidget ref={setNodeRef} style={{
-        transform: customTransform ? CSS.Transform.toString(customTransform) : undefined,
-        transition,
-    }} widgetProps={props} {...attributes} {...listeners} />
+    return <DisplayWidget
+        elementRef={setNodeRef}
+        style={{
+            transform: customTransform ? CSS.Transform.toString(customTransform) : undefined,
+            transition,
+        }} {...props} attributes={attributes} listeners={listeners} />
 }
 
-function DisplayWidget(props: { style?: React.CSSProperties | undefined, ref?: React.Ref<unknown>, widgetProps: IWidgetProps }) {
-    const { style, ref, widgetProps, ...rest } = props;
+function DisplayWidget(props: IWidgetProps & { style?: React.CSSProperties | undefined, elementRef?: React.Ref<unknown>, attributes?: DraggableAttributes, listeners?: SyntheticListenerMap }) {
+    const { style, elementRef, attributes, listeners, ...rest } = props;
     const [span, setSpan] = useState(({
-        colSpan: (widgetProps.config as any)?.columns || 1,
-        rowSpan: (widgetProps.config as any)?.columns || 1
+        colSpan: (rest.config as any)?.columns || 1,
+        rowSpan: (rest.config as any)?.columns || 1
     }));
 
     return (
-        <Box ref={ref} style={{
-            gridRowStart: `span ${span.rowSpan}`,
-            gridColumnStart: `span ${span.colSpan}`,
-            ...style
-        }} {...rest}>
-            <Widget {...widgetProps} onResize={(r, c) => setSpan({ rowSpan: r, colSpan: c })} />
+        <Box
+            ref={elementRef}
+            style={{
+                gridRowStart: `span ${span.rowSpan}`,
+                gridColumnStart: `span ${span.colSpan}`,
+                ...style
+            }} {...attributes} {...listeners}>
+            <Widget {...rest} onResize={(r, c) => setSpan({ rowSpan: r, colSpan: c })} />
         </Box>
     );
 }
 
-function GridWrapper(props: { order: string[], isEditing: boolean, orderChanged: (newOrder: string[]) => void } & ChildrenProps) {
-    const { order, isEditing, children } = props;
+function DragableGridWrapper(props: { order: string[], orderChanged: (newOrder: string[]) => void } & ChildrenProps) {
+    const { order, children } = props;
     const sensors = useSensors(
         useSensor(TouchSensor, {
             activationConstraint: {
@@ -86,8 +86,8 @@ function GridWrapper(props: { order: string[], isEditing: boolean, orderChanged:
         const { active, over } = event;
 
         if (over && active.id !== over.id) {
-            const oldIndex = order.indexOf(active.id);
-            const newIndex = order.indexOf(over.id);
+            const oldIndex = order.indexOf(active.id.toString());
+            const newIndex = order.indexOf(over.id.toString());
             const newOrderedWidgets = arrayMove(order, oldIndex, newIndex);
             const newOrder = [];
             for (let i = 0; i < newOrderedWidgets.length; i++) {
@@ -96,19 +96,28 @@ function GridWrapper(props: { order: string[], isEditing: boolean, orderChanged:
         }
     }
 
+    return (
+        <DndContext
+            sensors={sensors}
+            modifiers={[snapCenterToCursor]}
+            onDragEnd={handleDragEnd}
+            onDragCancel={handleDragEnd}>
+            <SortableContext items={order} strategy={undefined}>
+                {children}
+            </SortableContext>
+        </DndContext>
+    );
+}
+
+function GridWrapper(props: { order: string[], isEditing: boolean, orderChanged: (newOrder: string[]) => void } & ChildrenProps) {
+    const { isEditing, children, ...rest } = props;
     if (isEditing) {
         return (
-            <DndContext
-                sensors={sensors}
-                modifiers={[snapCenterToCursor]}
-                onDragEnd={handleDragEnd}
-                onDragCancel={handleDragEnd}>
-                <SortableContext items={order} strategy={undefined}>
-                    {children}
-                </SortableContext>
-            </DndContext>
+            <DragableGridWrapper {...rest}>
+                {children}
+            </DragableGridWrapper>
         );
-    } else return <>{props.children}</>
+    } else return <>{children}</>
 };
 
 function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, onAddWidget: () => void }) {
@@ -158,6 +167,8 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
         );
     }
 
+    const WidgetComponent = isEditing ? DragableWidget : DisplayWidget;
+
     return (
         <Box sx={{
             display: 'grid',
@@ -168,23 +179,13 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
             <GridWrapper isEditing={isEditing} order={widgetsOrder} orderChanged={handleOrderChanged}>
                 {widgets.map((widget) => (
                     <React.Fragment key={`widget-${widget.id.toString()}`}>
-                        {isEditing ? (
-                            <DragableWidget
-                                id={widget.id}
-                                onRemove={() => handleRemoveWidget(widget.id)}
-                                isEditMode={isEditing}
-                                type={widget.type}
-                                config={widget.config}
-                                setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
-                        ) : (
-                            <DisplayWidget
-                                id={widget.id}
-                                onRemove={() => handleRemoveWidget(widget.id)}
-                                isEditMode={isEditing}
-                                type={widget.type}
-                                config={widget.config}
-                                setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
-                        )}
+                        <WidgetComponent
+                            id={widget.id}
+                            onRemove={() => handleRemoveWidget(widget.id)}
+                            isEditMode={isEditing}
+                            type={widget.type}
+                            config={widget.config}
+                            setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
                     </React.Fragment>
                 ))}
             </GridWrapper>
