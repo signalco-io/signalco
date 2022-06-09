@@ -33,7 +33,7 @@
         "@mdx-js/react": "^2.1.1",
         "@microsoft/signalr": "6.0.5",
         "@monaco-editor/react": "^4.4.5",
-        "@mui/icons-material": "5.8.2",
+        "@mui/icons-material": "5.8.3",
         "@mui/lab": "5.0.0-alpha.84",
         "@mui/material": "5.8.2",
         "@next/mdx": "^12.1.6",
