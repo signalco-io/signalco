@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Avatar, Box, ButtonBase, Grid, NoSsr, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import { IDeviceModel } from '../../../src/devices/Device';
@@ -111,9 +111,30 @@ function deviceModelToTableItem(entity: IDeviceModel): IAutoTableItem {
 
 const Entities = () => {
     const entities = useAllEntities();
+    const entityItems = entities.items;
     const { t } = useLocale('App', 'Entities');
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
-    const [filteredItems, showSearch, searchText, handleSearchTextChange] = useSearch(entities.items, filterFuncObjectStringProps);
+    const [filteredItems, showSearch, searchText, handleSearchTextChange] = useSearch(entityItems, filterFuncObjectStringProps);
+
+    const filteredItemsMapped = useMemo(() => {
+        return filteredItems.map(deviceModelToTableItem);
+    }, [filteredItems]);
+
+    const results = useMemo(() => (
+        <>
+            {entityListViewType === 'table' ? (
+                <AutoTable hideSearch items={filteredItemsMapped} isLoading={entities.isLoading} error={entities.error} localize={t} />
+            ) : (
+                <Box sx={{ px: 2 }}>
+                    <Grid container spacing={2}>
+                        {!entities.isLoading && filteredItems.map(entity => (
+                            <EntityCard key={entity.id} entity={entity} />
+                        ))}
+                    </Grid>
+                </Box>
+            )}
+        </>
+    ), [entities.error, entities.isLoading, entityListViewType, filteredItems, filteredItemsMapped, t])
 
     return (
         <Stack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
@@ -136,17 +157,7 @@ const Entities = () => {
                 </Stack>
             </Stack>
             <Loadable isLoading={entities.isLoading} error={entities.error} placeholder="linear">
-                {entityListViewType === 'table' ? (
-                    <AutoTable hideSearch items={filteredItems.map(deviceModelToTableItem)} isLoading={entities.isLoading} error={entities.error} localize={t} />
-                ) : (
-                    <Box sx={{ px: 2 }}>
-                        <Grid container spacing={2}>
-                            {!entities.isLoading && filteredItems.map(entity => (
-                                <EntityCard key={entity.id} entity={entity} />
-                            ))}
-                        </Grid>
-                    </Box>
-                )}
+                {results}
             </Loadable>
         </Stack>
     );
