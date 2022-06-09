@@ -1170,10 +1170,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@corex/deepmerge@^2.6.148":
-  version "2.6.148"
-  resolved "https://registry.yarnpkg.com/@corex/deepmerge/-/deepmerge-2.6.148.tgz#8fa825d53ffd1cbcafce1b6a830eefd3dcc09dd5"
-  integrity sha512-6QMz0/2h5C3ua51iAnXMPWFbb1QOU1UvSM4bKBw5mzdT+WtLgjbETBBIQZ+Sh9WvEcGwlAt/DEdRpIC3XlDBMA==
+"@corex/deepmerge@^4.0.14":
+  version "4.0.16"
+  resolved "https://registry.yarnpkg.com/@corex/deepmerge/-/deepmerge-4.0.16.tgz#2fca1db87ebdfd3faa2798cdbde1b02e73b11f4a"
+  integrity sha512-NjPTizUx0ovYv7WiC8Erq/yMGjc4OfSMywbEUkb1QpaBb4tgD9fe2DwRy3hfogrMZ30nWxwOtMg7hwuY67RYnQ==
 
 "@date-io/core@^2.13.1", "@date-io/core@^2.14.0":
   version "2.14.0"
@@ -10163,12 +10163,12 @@ next-secure-headers@2.2.0:
   resolved "https://registry.yarnpkg.com/next-secure-headers/-/next-secure-headers-2.2.0.tgz#d4eb1b00a424f811c1455d1288990a4aad3026af"
   integrity sha512-C7OfZ9JdSJyYMz2ZBMI/WwNbt0qNjlFWX9afUp8nEUzbz6ez3JbeopdyxSZJZJAzVLIAfyk6n73rFpd4e22jRg==
 
-next-sitemap@2.5.28:
-  version "2.5.28"
-  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-2.5.28.tgz#c061914edcc74268e43254710dec0a0febae5fa4"
-  integrity sha512-rDMTa7nLE0ikYnu8JDCrwQufIRm4b4Sg8BK11DGdDAmYpXmcmw4Qvm+oVBR8gUL97E6i2ihTM+cRx8mgENDACA==
+next-sitemap@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-3.0.5.tgz#6c031641455356db7fac9d34b42809dd4c43d1b2"
+  integrity sha512-YdiW5wYNruyZCvhGGOMAdTylCQuxQkZKbSFV9Fjuf/U7aAt8lJwc3HG/WvR0n3Q1Y8c1ZiW/24UDZLQPfoKsYg==
   dependencies:
-    "@corex/deepmerge" "^2.6.148"
+    "@corex/deepmerge" "^4.0.14"
     minimist "^1.2.6"
 
 next@12.1.6:
