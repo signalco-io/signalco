@@ -1,4 +1,4 @@
-import React, { useDeferredValue, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Avatar, Box, ButtonBase, Grid, NoSsr, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import { IDeviceModel } from '../../../src/devices/Device';
@@ -26,7 +26,6 @@ import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import useLocale from '../../../src/hooks/useLocale';
 import Loadable from '../../../components/shared/Loadable/Loadable';
 import Timeago from '../../../components/shared/time/Timeago';
-import useTilg from 'tilg';
 
 const EntityIcon = (entity: IDeviceModel) => {
     let Icon = DevicesOtherIcon;
