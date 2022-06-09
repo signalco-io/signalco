@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, useTransition } from 'react';
+import { useEffect, useRef, useState, useTransition } from 'react';
 import { ValueOrFuncGeneric } from '../sharedTypes';
 
 export type useLoadAndErrorResult<T> = {
@@ -9,7 +9,7 @@ export type useLoadAndErrorResult<T> = {
 
 export function useLoadAndError<T>(load?: ValueOrFuncGeneric<Promise<T> | undefined>) : useLoadAndErrorResult<T> {
   const [state, setState] = useState<useLoadAndErrorResult<T>>({ isLoading: true, item: undefined, error: undefined });
-  const [isPending, startTransition] = useTransition();
+  const [_, startTransition] = useTransition();
   const loadPromiseRef = useRef<Promise<T>>();
 
   useEffect(() => {
