@@ -4,7 +4,7 @@ import React from 'react';
 import { snapCenterToCursor } from '@dnd-kit/modifiers';
 import { ChildrenProps } from '../../src/sharedTypes';
 
-export function DragableGridWrapper(props: { order: string[]; orderChanged: (newOrder: string[]) => void; } & ChildrenProps) {
+export default function DragableGridWrapper(props: { order: string[]; orderChanged: (newOrder: string[]) => void; } & ChildrenProps) {
     const { order, children } = props;
     const sensors = useSensors(
         useSensor(TouchSensor, {

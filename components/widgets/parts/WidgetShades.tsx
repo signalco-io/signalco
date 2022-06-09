@@ -8,12 +8,12 @@ import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
-import { IWidgetSharedProps } from '../Widget';
+import { WidgetSharedProps } from '../Widget';
 import { executeStateActionsAsync, StateAction } from './WidgetState';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
-const WidgetShades = (props: IWidgetSharedProps) => {
+const WidgetShades = (props: WidgetSharedProps) => {
     const { config } = props;
     const device = useDevice(config?.target?.deviceId);
 

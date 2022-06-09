@@ -1,11 +1,11 @@
 import { useSortable } from '@dnd-kit/sortable';
 import React from 'react';
-import { IWidgetProps } from '../widgets/Widget';
+import { WidgetProps } from '../widgets/Widget';
 import { CSS } from '@dnd-kit/utilities';
 import { draggingUpscale } from './DashboardView';
-import { DisplayWidget } from "./DisplayWidget";
+import DisplayWidget from './DisplayWidget';
 
-export function DragableWidget(props: IWidgetProps) {
+export default function DragableWidget(props: WidgetProps) {
     const {
         isDragging, attributes, listeners, setNodeRef, transform, transition,
     } = useSortable({ id: props.id, disabled: !props.isEditMode });

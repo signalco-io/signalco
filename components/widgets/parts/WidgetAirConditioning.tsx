@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import useDevice from '../../../src/hooks/useDevice';
 import { CircleSlider } from 'react-circle-slider';
-import { IWidgetSharedProps } from '../Widget';
+import { WidgetSharedProps } from '../Widget';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
@@ -31,7 +31,7 @@ const SmallIndicator = observer((props: { isActive: boolean, icon: string, label
     </Link>
 ));
 
-const WidgetAirConditioning = (props: IWidgetSharedProps) => {
+const WidgetAirConditioning = (props: WidgetSharedProps) => {
     const { config } = props;
     useWidgetOptions(stateOptions, props);
     const temperatureDevice = useDevice(config?.targetTemperature?.deviceId);

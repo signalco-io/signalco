@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { IWidgetSharedProps } from '../../../components/widgets/Widget';
+import { WidgetSharedProps } from '../../../components/widgets/Widget';
 
-const useWidgetActive = (newActive: boolean, props: IWidgetSharedProps) => {
+const useWidgetActive = (newActive: boolean, props: WidgetSharedProps) => {
     useEffect(() => {
         props.onActive(newActive);
     }, [props, newActive]);

@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 import ConductsService from '../../../src/conducts/ConductsService';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import { Box } from '@mui/system';
-import { IWidgetSharedProps } from '../Widget';
+import { WidgetSharedProps } from '../Widget';
 import useDevices from '../../../src/hooks/useDevices';
 import { IDeviceTarget } from '../../../src/devices/Device';
 import { DefaultLabel, DefaultTargetMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -74,7 +74,7 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
     await ConductsService.RequestMultipleConductAsync(conducts);
 };
 
-const WidgetState = (props: IWidgetSharedProps) => {
+const WidgetState = (props: WidgetSharedProps) => {
     const { config } = props;
     const deviceIds = useMemo(() => (Array.isArray(config?.target) ? config.target as IDeviceTarget[] : undefined)?.map(i => i.deviceId), [config?.target]);
     const devices = useDevices(deviceIds);

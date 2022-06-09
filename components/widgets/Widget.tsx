@@ -17,14 +17,14 @@ const WidgetButton = dynamic(() => import('./parts/WidgetButton'));
 
 export type widgetType = 'button' | 'state' | 'vacuum' | 'shades' | 'indicator' | 'airconditioning' | 'termostat' | 'time' | 'checklist';
 
-export interface IWidgetProps extends IWidgetSpecifigProps {
+export interface WidgetProps extends WidgetSpecifigProps {
     type: widgetType,
     onResize?: (rows: number, columns: number) => void,
     setConfig: (config: object) => void,
     onRemove: () => void
 }
 
-export interface IWidgetSharedProps {
+export interface WidgetSharedProps {
     id: string,
     isEditMode: boolean,
     config: any,
@@ -32,7 +32,7 @@ export interface IWidgetSharedProps {
     onActive: (active: boolean) => void
 }
 
-export interface IWidgetSpecifigProps {
+export interface WidgetSpecifigProps {
     id: string,
     isEditMode: boolean,
     config: any,
@@ -58,7 +58,7 @@ const UnresolvedWidget = () => (
     <Alert severity="error" sx={{ height: '100%' }}>Unknown widget</Alert>
 );
 
-const Widget = (props: IWidgetProps) => {
+const Widget = (props: WidgetProps) => {
     const [config, setConfig] = useState(props.config);
     const [options, setOptions] = useState<IWidgetConfigurationOption[] | undefined>(undefined);
     const [active, setActive] = useState(false);

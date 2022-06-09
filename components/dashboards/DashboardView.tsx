@@ -7,9 +7,9 @@ import { runInAction } from 'mobx';
 import { Button, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import useLocale from '../../src/hooks/useLocale';
-import { DragableWidget } from './DragableWidget';
-import { DisplayWidget } from './DisplayWidget';
-import { GridWrapper } from './GridWrapper';
+import DragableWidget from './DragableWidget';
+import DisplayWidget from './DisplayWidget';
+import GridWrapper from './GridWrapper';
 
 export const draggingUpscale = 1.1;
 

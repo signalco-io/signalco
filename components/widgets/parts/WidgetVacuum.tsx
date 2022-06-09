@@ -4,7 +4,7 @@ import React from 'react';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
-import { IWidgetSharedProps } from '../Widget';
+import { WidgetSharedProps } from '../Widget';
 
 const stateOptions: IWidgetConfigurationOption[] = [
     DefaultLabel,
@@ -12,7 +12,7 @@ const stateOptions: IWidgetConfigurationOption[] = [
     DefaultHeight(4),
 ];
 
-const WidgetVacuum = (props: IWidgetSharedProps) => {
+const WidgetVacuum = (props: WidgetSharedProps) => {
     const label = props.config?.label ?? '';
     const batteryPerc = 100;
 
