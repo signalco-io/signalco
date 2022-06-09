@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useTransition } from 'react';
+import { ValueOrFuncGeneric } from '../sharedTypes';
 
 export type useLoadAndErrorResult<T> = {
   item?: T | undefined,
@@ -6,19 +7,28 @@ export type useLoadAndErrorResult<T> = {
   error?: string | undefined
 };
 
-export function useLoadAndError<T>(load?: (() => Promise<T>) | Promise<T>) : useLoadAndErrorResult<T> {
+export function useLoadAndError<T>(load?: ValueOrFuncGeneric<Promise<T> | undefined>) : useLoadAndErrorResult<T> {
   const [state, setState] = useState<useLoadAndErrorResult<T>>({ isLoading: true, item: undefined, error: undefined });
+  const [isPending, startTransition] = useTransition();
+  const loadPromiseRef = useRef<Promise<T>>();
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        if (!load) {
+        if (!load || loadPromiseRef.current) {
           return;
         }
 
-        setState({ isLoading: false, item: typeof load === 'function' ? await load() : await load});
+        loadPromiseRef.current = typeof load === 'function' ? load() : load;
+        const item = await loadPromiseRef.current;
+
+        startTransition(() => {
+            setState({ isLoading: false, item: item});
+            loadPromiseRef.current = undefined;
+        });
       } catch (err: any) {
         setState({ isLoading: false, error: err?.toString()});
+        loadPromiseRef.current = undefined;
       }
     };
 
@@ -41,17 +51,18 @@ const useLoadingAndError = <TIn, TOut>(
   const result = useLoadAndError<TIn[]>(loadData);
   const [state, setState] = useState<useLoadingAndErrorResult<TOut>>({items: Array<TOut>(), isLoading: result.isLoading, error: result.error});
 
-  useMemo(() => {
+  useEffect(() => {
       const mappedResults = result.isLoading ||
       typeof result.error !== 'undefined' ||
       result.item == null
       ? []
       : (transformItem ? result.item.map(transformItem) : result.item.map(i => i as unknown as TOut));
+
     setState({
         items: mappedResults,
         isLoading: result.isLoading,
         error: result.error
-    })
+    });
   }, [result.error, result.isLoading, result.item, transformItem]);
 
   return state;
