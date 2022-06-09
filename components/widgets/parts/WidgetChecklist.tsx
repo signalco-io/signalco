@@ -1,7 +1,7 @@
 import { Checkbox, FilledInput, FormControlLabel, FormGroup, IconButton, InputAdornment, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Typography } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 import { Box } from '@mui/system';
-import { IWidgetSharedProps } from '../Widget';
+import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { observable, runInAction } from 'mobx';
@@ -57,7 +57,7 @@ const ChecklistItem = observer((props: { item: IChecklistItem, onChange: (id: st
     )
 });
 
-const WidgetChecklist = (props: IWidgetSharedProps) => {
+const WidgetChecklist = (props: WidgetSharedProps) => {
     const { id, config } = props;
     const placeholders = useLocalePlaceholders();
     const { t } = useLocale('App', 'Widgets', 'WidgetChecklist');

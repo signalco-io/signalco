@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from '@mui/material';
 import React, { useCallback, useState } from 'react';
-import { IWidgetSharedProps } from '../Widget';
+import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
@@ -13,7 +13,7 @@ const stateOptions = [
     DefaultHeight(1)
 ];
 
-const WidgetTime = (props: IWidgetSharedProps) => {
+const WidgetTime = (props: WidgetSharedProps) => {
     const { config } = props;
     const [time, setTime] = useState('');
     const [seconds, setSeconds] = useState('');
