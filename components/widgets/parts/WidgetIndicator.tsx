@@ -7,7 +7,7 @@ import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVer
 import SentimentDissatisfiedOutlinedIcon from '@mui/icons-material/SentimentDissatisfiedOutlined';
 import { useRouter } from 'next/router';
 import useDevice from '../../../src/hooks/useDevice';
-import { IWidgetSharedProps } from '../Widget';
+import { WidgetSharedProps } from '../Widget';
 import { DefaultTarget, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
@@ -17,7 +17,7 @@ const stateOptions = [
     DefaultWidth(1)
 ];
 
-const WidgetIndicator = (props: IWidgetSharedProps) => {
+const WidgetIndicator = (props: WidgetSharedProps) => {
     const { config } = props;
     const device = useDevice(config?.target?.deviceId);
     const router = useRouter();

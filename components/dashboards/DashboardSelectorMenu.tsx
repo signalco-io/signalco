@@ -100,8 +100,8 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
         const { active, over } = event;
 
         if (over && active.id !== over.id) {
-            const oldIndex = orderedDashboardIds.indexOf(active.id);
-            const newIndex = orderedDashboardIds.indexOf(over.id);
+            const oldIndex = orderedDashboardIds.indexOf(active.id.toString());
+            const newIndex = orderedDashboardIds.indexOf(over.id.toString());
             const newOrderedDashboards = arrayMove(orderedDashboards, oldIndex, newIndex);;
             for (let i = 0; i < newOrderedDashboards.length; i++) {
                 runInAction(() => {
