@@ -98,7 +98,7 @@
         "@types/suncalc": "1.8.1",
         "@types/uuid": "8.3.4",
         "babel-loader": "8.2.5",
-        "colorette": "2.0.17",
+        "colorette": "2.0.19",
         "cross-env": "7.0.3",
         "eslint": "8.17.0",
         "eslint-config-next": "12.1.6",
