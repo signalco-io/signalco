@@ -1,6 +1,6 @@
-import { Stack, Typography, ButtonBase } from '@mui/material';
+import { Stack, Typography, ButtonBase, CircularProgress } from '@mui/material';
 import { observer } from 'mobx-react-lite';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import dynamic from 'next/dynamic'
 import ConductsService from '../../../src/conducts/ConductsService';
@@ -78,6 +78,7 @@ const WidgetState = (props: WidgetSharedProps) => {
     const { config } = props;
     const deviceIds = useMemo(() => (Array.isArray(config?.target) ? config.target as IDeviceTarget[] : undefined)?.map(i => i.deviceId), [config?.target]);
     const devices = useDevices(deviceIds);
+    const [isLoading, setIsLoading] = useState(true);
 
     // Calc state from source value
     // If atleast one contact is true, this widget will set it's state to true
@@ -97,6 +98,9 @@ const WidgetState = (props: WidgetSharedProps) => {
                 break;
             }
         }
+
+        if (isLoading)
+            setIsLoading(false);
     }
 
     const label = props.config?.label || (typeof devices !== 'undefined' ? devices[0]?.alias : '');
@@ -122,15 +126,20 @@ const WidgetState = (props: WidgetSharedProps) => {
     useWidgetActive(state, props);
 
     return (
-        <ButtonBase sx={{ height: '100%', width: '100%', display: 'block', textAlign: 'left', borderRadius: 2 }} onClick={handleStateChangeRequest} >
+        <ButtonBase sx={{ position: 'relative', height: '100%', width: '100%', display: 'block', textAlign: 'left', borderRadius: 2 }} onClick={handleStateChangeRequest} >
             <Stack sx={{ height: '100%', py: 2 }}>
-                <Box sx={{ px: 2.5 }}>
+                <Box sx={{ px: 2 }}>
                     <Visual state={state} size={68} />
                 </Box>
-                <Box sx={{ px: 2.5 }}>
+                <Box sx={{ px: 2 }}>
                     <Typography fontWeight="light" noWrap>{label}</Typography>
                 </Box>
             </Stack>
+            {isLoading && (
+                <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
+                    <CircularProgress size={24} />
+                </Box>
+            )}
         </ButtonBase>
     );
 };
