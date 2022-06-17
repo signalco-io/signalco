@@ -1,4 +1,4 @@
-import { Alert, CircularProgress, LinearProgress, Skeleton } from '@mui/material';
+import { Alert, Box, CircularProgress, LinearProgress, Skeleton } from '@mui/material';
 import LoadableProps from './LoadableProps';
 
 export default function Loadable(props: LoadableProps) {
@@ -12,7 +12,7 @@ export default function Loadable(props: LoadableProps) {
                 return <LinearProgress variant="indeterminate" />
             case 'circular':
             default:
-                return <CircularProgress />
+                return <Box textAlign="center"><CircularProgress /></Box>
         }
     }
 

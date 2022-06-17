@@ -12,5 +12,6 @@ const Dashboard = () => {
 };
 
 Dashboard.layout = AppLayoutWithAuth;
+Dashboard.title = 'Home';
 
 export default observer(Dashboard);

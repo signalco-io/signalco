@@ -34,7 +34,7 @@ export default class MyDocument extends Document {
             color="#000000"
           ></link>
           <meta name="msapplication-TileColor" content="#000000"></meta>
-          <meta name="description" content="Automate your life" />
+
           {/* Inject MUI styles first to match with the prepend: true configuration. */}
           {(this.props as any).emotionStyleTags}
         </Head>

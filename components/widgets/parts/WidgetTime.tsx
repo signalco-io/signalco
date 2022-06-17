@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from '@mui/material';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
@@ -29,6 +29,7 @@ const WidgetTime = (props: WidgetSharedProps) => {
     useWidgetOptions(stateOptions, props);
     useWidgetActive(true, props);
     useInterval(updateTime, 1000);
+    useEffect(() => updateTime(), [updateTime]);
 
     return (
         <Box sx={{ height: '100%' }}>
