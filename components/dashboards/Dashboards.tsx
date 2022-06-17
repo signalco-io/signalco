@@ -1,4 +1,4 @@
-import { Box, Button, LinearProgress, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import DashboardsRepository, { WidgetModel } from '../../src/dashboards/DashboardsRepository';
@@ -15,6 +15,7 @@ import Image from 'next/image';
 import useHashParam from '../../src/hooks/useHashParam';
 import useDashboardsUpdateChecker from './useDashboardsUpdateChecker';
 import useLocale from '../../src/hooks/useLocale';
+import Loadable from '../shared/Loadable/Loadable';
 
 const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 
@@ -94,29 +95,28 @@ const Dashboards = observer(() => {
                         </Box>
                     )}
                 </Stack>
-                {selectedDashboard.isLoading ?
-                    <LinearProgress /> : (
-                        <Box sx={{ px: 2 }}>
-                            {selectedDashboard.item
-                                ? (
-                                    <DashboardView
-                                        dashboard={selectedDashboard.item}
-                                        isEditing={isEditing}
-                                        onAddWidget={handleAddWidgetPlaceholder} />
-                                ) : (
-                                    <Stack alignItems="center" justifyContent="center">
-                                        <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
-                                            <Stack maxWidth={280} spacing={4} alignItems="center" justifyContent="center">
-                                                <Image priority width={280} height={213} alt={t('NoDashboardsPlaceholder')} src="/assets/placeholders/placeholder-no-dashboards.svg" />
-                                                <Typography variant="h1">{t('NoDashboardsPlaceholder')}</Typography>
-                                                <Typography textAlign="center" color="textSecondary">{t('NoDashboardsHelpText')}</Typography>
-                                                <Button variant="contained" onClick={handleNewDashboard}>{t('NewDahsboard')}</Button>
-                                            </Stack>
+                <Loadable isLoading={selectedDashboard.isLoading} error={selectedDashboard.error}>
+                    <Box sx={{ px: 2 }}>
+                        {selectedDashboard.item
+                            ? (
+                                <DashboardView
+                                    dashboard={selectedDashboard.item}
+                                    isEditing={isEditing}
+                                    onAddWidget={handleAddWidgetPlaceholder} />
+                            ) : (
+                                <Stack alignItems="center" justifyContent="center">
+                                    <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
+                                        <Stack maxWidth={280} spacing={4} alignItems="center" justifyContent="center">
+                                            <Image priority width={280} height={213} alt={t('NoDashboardsPlaceholder')} src="/assets/placeholders/placeholder-no-dashboards.svg" />
+                                            <Typography variant="h1">{t('NoDashboardsPlaceholder')}</Typography>
+                                            <Typography textAlign="center" color="textSecondary">{t('NoDashboardsHelpText')}</Typography>
+                                            <Button variant="contained" onClick={handleNewDashboard}>{t('NewDahsboard')}</Button>
                                         </Stack>
                                     </Stack>
-                                )}
-                        </Box>
-                    )}
+                                </Stack>
+                            )}
+                    </Box>
+                </Loadable>
             </Stack>
             {isDashboardSettingsOpen && (
                 <DashboardSettings
