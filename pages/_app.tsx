@@ -14,6 +14,10 @@ interface PageWithMetadata extends React.FunctionComponent {
   layout?: React.FunctionComponent | undefined
 };
 
+interface PageWithTitle extends React.FunctionComponent {
+  title?: string | undefined;
+};
+
 const appContextDefaultState: IAppContext = {
   theme: 'light',
   isDark: false
@@ -28,6 +32,7 @@ export default function App(props: AppProps) {
   useAppTheme(appContextState, setAppContextState);
 
   const Layout = (Component as PageWithMetadata).layout ?? ((props?: ChildrenProps) => <>{props?.children}</>);
+  const title = (Component as PageWithTitle).title;
 
   return (
     <>
@@ -39,7 +44,8 @@ export default function App(props: AppProps) {
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
         <meta name="theme-color" content={`${appContextState.isDark ? '#000000' : '#ffffff'}`}></meta>
-        <title>Signalco</title>
+        <meta name="description" content="Automate your life" />
+        <title>{`Signalco${title ? ' - ' + title : ''}`}</title>
       </Head>
       <ThemeProvider theme={appTheme(appContextState.theme)}>
         <AppContext.Provider value={appContextState}>
