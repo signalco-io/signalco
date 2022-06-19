@@ -3921,10 +3921,10 @@
     "@typescript-eslint/types" "5.22.0"
     eslint-visitor-keys "^3.0.0"
 
-"@vvo/tzdb@6.51.0":
-  version "6.51.0"
-  resolved "https://registry.yarnpkg.com/@vvo/tzdb/-/tzdb-6.51.0.tgz#ba4090f5ee1e3a81a47a7871465b491daaf95d82"
-  integrity sha512-jZkoBVUHQmlJ3oGZMoGzRGNP691yY86/rzW0YGMq12Ywl+BJ0LZDqQRyfzYH0U5VQJvXTOiQ3OulgeEwSHDJrg==
+"@vvo/tzdb@6.52.0":
+  version "6.52.0"
+  resolved "https://registry.yarnpkg.com/@vvo/tzdb/-/tzdb-6.52.0.tgz#3cfde296f8a57adf89dbee86997084d70b50da85"
+  integrity sha512-GSTPXBCA66A42VdhTbxzUPdun8P2Rx9OQCQMr8ByuB+P74HJ6zxxrUKW2CzJlhyperjzlijjkMN84fotAYEeLQ==
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
