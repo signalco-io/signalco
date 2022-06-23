@@ -41,7 +41,7 @@
         "@mui/material": "5.8.4",
         "@next/mdx": "12.1.6",
         "@storybook/addons": "6.5.9",
-        "@vvo/tzdb": "6.51.0",
+        "@vvo/tzdb": "6.52.0",
         "axios": "0.27.2",
         "clsx": "1.1.1",
         "cobe": "0.5.0",
