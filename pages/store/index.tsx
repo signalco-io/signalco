@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActionArea, CardContent, Checkbox, Grid, List, Paper, Typography } from '@mui/material';
+import { Box, Button, Card, CardActionArea, CardContent, Checkbox, Chip, Grid, List, Paper, Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -13,6 +13,8 @@ import { useState } from 'react';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import contentData from './content.json';
 import { PageLayout } from '../../components/layouts/PageLayout';
+import SignalcoLogo from '../../components/icons/SignalcoLogo';
+import useLocale from '../../src/hooks/useLocale';
 
 const FilterList = (props: { header: string, items: { id: string, label: string }[], truncate: number }) => {
     const {
@@ -39,7 +41,11 @@ const FilterList = (props: { header: string, items: { id: string, label: string 
 
     return (
         <Stack>
-            <List subheader={header}>
+            <List subheader={
+                <Stack direction="row" spacing={1}>
+                    <Typography>{header}</Typography>
+                    {(!isShowMore && items.length > truncate) && <Typography color="textSecondary">({items.length - truncate} more)</Typography>}
+                </Stack>}>
                 {items.slice(0, isShowMore ? items.length : truncate).map(item => (
                     <ListItemButton key={item.id} role={undefined} onClick={handleToggle(item.id)} sx={{ py: 0 }}>
                         <ListItemIcon>
@@ -51,7 +57,7 @@ const FilterList = (props: { header: string, items: { id: string, label: string 
                                 inputProps={{ 'aria-labelledby': item.id }}
                             />
                         </ListItemIcon>
-                        <ListItemText id={item.id} primary={item.label} />
+                        <ListItemText id={item.id} primary={item.label} primaryTypographyProps={{ noWrap: true }} />
                     </ListItemButton>
                 ))}
             </List>
@@ -64,7 +70,7 @@ const FilterList = (props: { header: string, items: { id: string, label: string 
     );
 };
 
-const StoreStockStatusBadge = (props: { status: number }) => {
+const StoreStockStatusBadge = (props: { status: number | undefined }) => {
     let Icon = CancelIcon;
     let opacity = 0.6;
     let text = 'Out of stock';
@@ -102,19 +108,33 @@ const StoreStockStatusBadge = (props: { status: number }) => {
     );
 }
 
-const StoreItemThumb = (props: { id: string, name: string, imageSrc: string, price: number, stockStatus: number }) => {
+const StoreItemThumb = (props: { id: string, name: string, features?: string[], imageSrc?: string, price?: number, stockStatus?: number }) => {
+    const { id, name, features, imageSrc, price, stockStatus } = props;
+
     return (
-        <Card variant="elevation" elevation={6}>
+        <Card variant="elevation">
             <CardActionArea>
                 <CardContent>
                     <Stack spacing={2}>
-                        <Image src={props.imageSrc} alt={`${props.name} image`} width={180} height={180} objectFit="contain" />
+                        {imageSrc
+                            ? <Image src={imageSrc} alt={`${name} image`} width={180} height={180} objectFit="contain" />
+                            : (
+                                <Stack alignItems="center" justifyContent="center" textAlign="center" spacing={2} sx={{ width: 180, height: 180 }}>
+                                    <SignalcoLogo height={40} />
+                                    <Typography variant="caption" color="textSecondary">Image unavailable</Typography>
+                                </Stack>
+                            )}
                         <Stack spacing={1}>
-                            <Typography fontWeight="bold" sx={{ opacity: 0.9 }}>{props.name}</Typography>
+                            <Typography fontWeight="bold" sx={{ opacity: 0.9 }}>{name}</Typography>
                             <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
-                                <Typography fontSize="1.2rem" fontWeight="bold">€&nbsp;{props.price}</Typography>
-                                <StoreStockStatusBadge status={props.stockStatus} />
+                                <Typography fontSize="1.2rem" fontWeight="bold">€&nbsp;{price ?? '-'}</Typography>
+                                <StoreStockStatusBadge status={stockStatus} />
                             </Stack>
+                            {features && (
+                                <Grid container>
+                                    {features.map(f => <Grid item key={f}><Chip label={f} size="small" /></Grid>)}
+                                </Grid>
+                            )}
                         </Stack>
                     </Stack>
                 </CardContent>
@@ -126,26 +146,12 @@ const StoreItemThumb = (props: { id: string, name: string, imageSrc: string, pri
 export async function getStaticProps() {
     return {
         props: {
-            categories: Array.from(new Set(contentData.items.flatMap(i => i.categories))),
-            brands: Array.from(new Set(contentData.items.map(i => i.manufacturer)))
+            categories: Array.from(new Set(contentData.items.flatMap(i => i.categories))).filter(i => i),
+            brands: Array.from(new Set(contentData.items.map(i => i.manufacturer ?? null))).filter(i => i),
+            communication: Array.from(new Set(contentData.items.flatMap(i => i.communication ?? null))).filter(i => i)
         }
     };
 }
-
-const communication = [
-    { id: 'zigbee', label: 'Zigbee' },
-    { id: 'bluetooth', label: 'Bluetooth' },
-    { id: 'wifi', label: 'Wi-Fi' },
-    { id: 'radio', label: 'Radio (433/868 MHz)' },
-    { id: 'ir', label: 'Infrared' }
-];
-
-const items = [
-    { id: 'item1', name: 'Item 1', imageSrc: '/images/icon-light-512x512.png', price: 100, stockStatus: 0 },
-    { id: 'item2', name: 'Item 2', imageSrc: '/images/icon-light-512x512.png', price: 29, stockStatus: 1 },
-    { id: 'item3', name: 'Item 3', imageSrc: '/images/icon-light-512x512.png', price: 29, stockStatus: 2 },
-    { id: 'item4', name: 'Item 4', imageSrc: '/images/icon-light-512x512.png', price: 1945, stockStatus: 3 }
-];
 
 const orderByItems = [
     { value: '0', label: 'Popularity' },
@@ -153,9 +159,25 @@ const orderByItems = [
     { value: '2', label: 'Price high > low' }
 ];
 
-const StoreIndex = (props: { categories: string[], brands: string[] }) => {
-    const categories = props.categories.map(c => ({ id: c, label: c }));
+function stockStatus(id: string) {
+    if ((contentData.stock as any)[id]?.inStock > 0) return 1;
+    return 0;
+}
+
+const StoreIndex = (props: { categories: string[], brands: string[], communication: string[] }) => {
+    const { t: tCategories } = useLocale('Store', 'Categories');
+    const { t: tCommunication } = useLocale('Store', 'Communication');
+    const categories = props.categories.map(c => ({ id: c, label: tCategories(c) }));
     const brands = props.brands.map(b => ({ id: b, label: b }));
+    const communication = props.communication.map(b => ({ id: b, label: tCommunication(b) }));
+
+    const items = contentData.items.map(i => ({
+        id: i.id,
+        name: i.name,
+        features: [...i.categories, ...(i.communication ?? [])],
+        imageSrc: i.imagesCount ? `/store/${i.id}_cover.png` : undefined,
+        stockStatus: stockStatus(i.id)
+    }));
 
     const [selectedOrderByItems, setSelectedOrderByItems] = useState<string[]>(['0']);
     const handleOrderByItemsChange = (values: string[]) => setSelectedOrderByItems(values);
@@ -166,17 +188,17 @@ const StoreIndex = (props: { categories: string[], brands: string[] }) => {
                 <Typography variant="h1">Discover your new smart home</Typography>
             </Box>
             <Stack direction="row" spacing={4}>
-                <Paper variant="elevation" elevation={6} sx={{ padding: 2, width: '100%', maxWidth: 360 }}>
+                <Box sx={{ padding: 2, width: '100%', maxWidth: 360, height: 'fit-content' }}>
                     <Stack spacing={4}>
                         <FilterList header="Categories" items={categories} truncate={6} />
                         <FilterList header="Brands" items={brands} truncate={6} />
-                        <FilterList header="Communication" items={communication} truncate={999} />
+                        <FilterList header="Communication" items={communication} truncate={6} />
                     </Stack>
-                </Paper>
+                </Box>
                 <Stack spacing={4}>
                     <Stack direction="row" justifyContent="space-between">
                         <Typography gutterBottom variant="h1">Found {items.length} products</Typography>
-                        <SelectItems value={selectedOrderByItems} items={orderByItems} onChange={handleOrderByItemsChange} />
+                        <SelectItems label="Sort" value={selectedOrderByItems} items={orderByItems} onChange={handleOrderByItemsChange} />
                     </Stack>
                     <div>
                         <Grid container spacing={3} alignContent="flex-start">
