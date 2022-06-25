@@ -135,7 +135,13 @@ const DeviceContactAction = observer((props: { deviceId: string, state?: IDevice
     } else if (props.contact.dataType === 'action' || props.contact.dataType === 'enum') {
         return (
             <Stack alignItems="center" direction="row">
-                {props.contact.dataValues && <SelectItems value={dataValuesSelected} items={props.contact.dataValues} multiple={props.contact.dataValuesMultiple} onChange={handleDataValuesChanged} />}
+                {props.contact.dataValues &&
+                    <SelectItems
+                        label={props.contact.name}
+                        value={dataValuesSelected}
+                        items={props.contact.dataValues}
+                        multiple={props.contact.dataValuesMultiple}
+                        onChange={handleDataValuesChanged} />}
                 <IconButton onClick={handleActionClick} size="large"><PlayArrowIcon /></IconButton>
             </Stack>
         );
