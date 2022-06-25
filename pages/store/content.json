@@ -4,14 +4,282 @@
             "id": "5bfa7597-cdf1-4f28-9585-4f07389edd08",
             "name": "Philips Hue E26 White Ambience",
             "manufacturer": "Philips",
+            "power": "socket-e26",
+            "imagesCount": 1,
             "categories": [
-                "Lights"
+                "light"
             ],
             "communication": [
                 "zigbee",
                 "bluetooth"
             ],
             "officialWebsite": "https://www.philips-hue.com/en-us/p/hue-white-ambiance-1-pack-e26/046677548490"
+        },
+        {
+            "id": "faba2478-174e-465e-86cd-661f38e7c56d",
+            "name": "Philips Hue White and color ambience Lightstrip Plus extension 1m",
+            "manufacturer": "Philips",
+            "power": "socket-eu",
+            "imagesCount": 1,
+            "categories": [
+                "light"
+            ],
+            "communication": [
+                "zigbee"
+            ],
+            "officialWebsite": "https://www.philips-hue.com/en-in/p/hue-white-and-color-ambiance-lightstrip-plus-extension-1-meter/8718699703561"
+        },
+        {
+            "id": "ae094789-9111-486e-82e7-1a1e0db7f67d",
+            "name": "Divoom Timebox-Evo",
+            "manufacturer": "Divoom",
+            "power": "usbc",
+            "categories": [
+                "speaker",
+                "display"
+            ],
+            "communication": [
+                "bluetooth"
+            ],
+            "officialWebsite": "https://www.divoom.com/products/divoom-timebox-evo"
+        },
+        {
+            "id": "38b76bfb-e70f-46cc-b130-4a8310a928b7",
+            "name": "Ikea Styrbar White",
+            "manufacturer": "Ikea",
+            "power": "battery-aaa-x2",
+            "categories": [
+                "remote",
+                "switch"
+            ],
+            "communication": [
+                "zigbee"
+            ],
+            "officialWebsite": "https://www.ikea.com/cz/en/p/styrbar-remote-control-white-30488363/#content"
+        },
+        {
+            "id": "ef1f5013-a780-42c0-8508-a6317f8fa66f",
+            "name": "Orange Pi Zero 2",
+            "manufacturer": "Orange Pi",
+            "power": "usbc-3a",
+            "categories": [
+                "computer"
+            ],
+            "communication": [
+                "wifi",
+                "bluetooth",
+                "ethernet"
+            ],
+            "officialWebsite": "http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-2.html"
+        },
+        {
+            "id": "75ec2e44-5be8-4d81-9e50-5194eb3ace49",
+            "name": "HHCC Flower Care",
+            "manufacturer": "HHCC Plant Technology Co., Ltd.",
+            "model": "HHCCJCY01HHCC",
+            "power": "battery-cr2032",
+            "categories": [
+                "sensor",
+                "plants"
+            ],
+            "communication": [
+                "bluetooth"
+            ],
+            "officialWebsite": "http://www.huahuacaocao.com/product"
+        },
+        {
+            "id": "04715e15-b283-4179-b14b-b3a2c0a9d07b",
+            "name": "Aqara Vibration Sensor",
+            "manufacturer": "Aqara, Lumi United Technology Co., Ltd.",
+            "model": "DJT11LM",
+            "power": "battery-cr2032",
+            "imagesCount": 1,
+            "categories": [
+                "sensor"
+            ],
+            "communication": [
+                "zigbee"
+            ],
+            "officialWebsite": "https://www.aqara.com/us/vibration_sensor.html"
+        },
+        {
+            "id": "45444c03-1e9c-42a3-a840-135994434012",
+            "name": "Aqara Temperature and Humidity Sensor",
+            "manufacturer": "Aqara, Lumi United Technology Co., Ltd.",
+            "model": "WSDCGQ11LM",
+            "power": "battery-cr2032",
+            "imagesCount": 1,
+            "categories": [
+                "sensor"
+            ],
+            "communication": [
+                "zigbee"
+            ],
+            "officialWebsite": "https://www.aqara.com/us/temperature_humidity_sensor.html"
+        },
+        {
+            "id": "886bb859-bd44-4258-bb07-3834ab319a08",
+            "name": "Smart Life Door Window Sensor",
+            "model": "D06",
+            "power": "battery-aaa-x2",
+            "categories": [
+                "sensor"
+            ],
+            "communication": [
+                "wifi"
+            ]
+        },
+        {
+            "id": "28a40784-834a-4490-a585-d298b1720989",
+            "name": "Mi Window and Door Sensor",
+            "manufacturer": "Mi, Lumi United Technology Co., Ltd.",
+            "categories": [
+                "sensor"
+            ],
+            "communication": [
+                "zigbee"
+            ],
+            "model": "MCCGQ01LM",
+            "power": "battery-cr1632",
+            "officialWebsite": "https://www.mi.com/global/product/mi-window-and-door-sensor/"
+        },
+        {
+            "id": "1be5e480-3fbb-41df-9811-3bcc094f39fb",
+            "name": "Moes Smart Switch 2 Gang No Neutral Zigbee",
+            "model": "ZS-B-EU2-WH-MS",
+            "manufacturer": "Moes",
+            "categories": [
+                "switch"
+            ],
+            "power": "mains",
+            "communication": [
+                "zigbee"
+            ],
+            "officialWebsite": "https://www.moeshouse.com/products/zigbee-smart-wall-light-switch-with-neutral-wire-or-no-neutral-wire-wiring-no-capacitor-needed-smart-life-tuya-2-3-way-muilti-control-association-works-with-alexa-google-home-hub-required?_pos=34&_sid=d9f0ebcb3&_ss=r&variant=39357460545617"
+        },
+        {
+            "id": "6f2b9fda-332a-4eb8-a844-c6791e433e39",
+            "name": "Sonoff Zigbee 3.0 USB Dongle Plus",
+            "power": "usba",
+            "categories": [
+                "computer"
+            ],
+            "communication": [
+                "zigbee"
+            ],
+            "manufacturer": "Sonoff",
+            "model": "ZBDongle-P",
+            "officialWebsite": "https://sonoff.tech/product/diy-smart-switch/sonoff-dongle-plus/"
+        },
+        {
+            "id": "4e23ae1b-c292-4fe2-a8f5-1ead282471fa",
+            "name": "Lidl LivarnoLux Smart LED Light Bulb",
+            "power": "socket-gu10",
+            "categories": [
+                "light"
+            ],
+            "manufacturer": "Lidl",
+            "communication": [
+                "zigbee"
+            ]
+        },
+        {
+            "id": "30dcda4b-926a-4108-a83d-e1a21fc51043",
+            "name": "Lidl LivarnoLux Smart Colour-Change LED Light Bulb",
+            "power": "socket-gu10",
+            "categories": [
+                "light"
+            ],
+            "manufacturer": "Lidl",
+            "communication": [
+                "zigbee"
+            ]
+        },
+        {
+            "id": "c04eb797-d9fe-43c6-b564-275884a0ebd0",
+            "name": "Raspberry Pi 3 Model A+",
+            "categories": [
+                "computer"
+            ],
+            "communication": [
+                "wifi",
+                "bluetooth"
+            ],
+            "power": "usbmicro-2a",
+            "manufacturer": "Raspberry Pi",
+            "officialWebsite": "https://www.raspberrypi.com/products/raspberry-pi-3-model-a-plus/"
+        },
+        {
+            "id": "2f5aff42-f723-48d5-85c5-33085b317e9c",
+            "name": "Raspberry Pi Universal Power Supply 2.5A, Micros USB, 1.5m, White",
+            "manufacturer": "Raspberry Pi",
+            "categories": [
+                "computer"
+            ],
+            "officialWebsite": "https://www.raspberrypi.com/products/raspberry-pi-universal-power-supply/"
+        },
+        {
+            "id": "ecf2796e-d041-4ee9-842f-027192912f9c",
+            "name": "Generic Switching Power Supply 3.0A, USB-C, Black",
+            "categories": [
+                "computer"
+            ],
+            "power": "socket-eu"
         }
-    ]
+    ],
+    "stock": {
+        "faba2478-174e-465e-86cd-661f38e7c56d": {
+            "inStock": 2
+        },
+        "ae094789-9111-486e-82e7-1a1e0db7f67d": {
+            "inStock": 1
+        },
+        "38b76bfb-e70f-46cc-b130-4a8310a928b7": {
+            "inStock": 1
+        },
+        "ef1f5013-a780-42c0-8508-a6317f8fa66f": {
+            "inStock": 2,
+            "testing": 1
+        },
+        "75ec2e44-5be8-4d81-9e50-5194eb3ace49": {
+            "inStock": 3
+        },
+        "04715e15-b283-4179-b14b-b3a2c0a9d07b": {
+            "inStock": 2
+        },
+        "45444c03-1e9c-42a3-a840-135994434012": {
+            "inStock": 1
+        },
+        "886bb859-bd44-4258-bb07-3834ab319a08": {
+            "inStock": 1,
+            "testing": 1
+        },
+        "28a40784-834a-4490-a585-d298b1720989": {
+            "inStock": 4
+        },
+        "1be5e480-3fbb-41df-9811-3bcc094f39fb": {
+            "inStock": 1
+        },
+        "6f2b9fda-332a-4eb8-a844-c6791e433e39": {
+            "inStock": 2
+        },
+        "4e23ae1b-c292-4fe2-a8f5-1ead282471fa": {
+            "inStock": 2
+        },
+        "30dcda4b-926a-4108-a83d-e1a21fc51043": {
+            "testing": 1
+        },
+        "c04eb797-d9fe-43c6-b564-275884a0ebd0": {
+            "inStock": 1,
+            "testing": 1
+        },
+        "2f5aff42-f723-48d5-85c5-33085b317e9c": {
+            "inStock": 1,
+            "testing": 1
+        },
+        "ecf2796e-d041-4ee9-842f-027192912f9c": {
+            "inStock": 2,
+            "testing": 1
+        }
+    }
 }

@@ -103,6 +103,7 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
         return <DisplayDeviceTarget target={{ ...props.value, deviceId: props.option.data }} hideDevice onChanged={t => props.onChange(t)} />
     } else if (props.option.type === 'select') {
         return <SelectItems
+            label={props.option.label}
             value={props.value}
             items={props.option.data}
             placeholder={props.option.label}
