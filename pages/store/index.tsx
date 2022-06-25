@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActionArea, CardContent, Checkbox, Chip, Grid, List, Paper, Typography } from '@mui/material';
+import { Box, Button, Card, CardActionArea, CardContent, Checkbox, Chip, Grid, List, Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -109,7 +109,7 @@ const StoreStockStatusBadge = (props: { status: number | undefined }) => {
 }
 
 const StoreItemThumb = (props: { id: string, name: string, features?: string[], imageSrc?: string, price?: number, stockStatus?: number }) => {
-    const { id, name, features, imageSrc, price, stockStatus } = props;
+    const { name, features, imageSrc, price, stockStatus } = props;
 
     return (
         <Card variant="elevation">
