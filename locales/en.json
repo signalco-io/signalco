@@ -191,5 +191,23 @@
                 "Cancel": "Cancel"
             }
         }
+    },
+    "Store": {
+        "Categories": {
+            "light": "Light",
+            "speaker": "Speaker",
+            "display": "Display",
+            "remote": "Remote",
+            "switch": "Switch",
+            "computer": "Computer",
+            "sensor": "Sensor",
+            "plants": "Plants"
+        },
+        "Communication": {
+            "zigbee": "Zigbee",
+            "bluetooth": "Bluetooth",
+            "wifi": "WiFi",
+            "ethernet": "Ethernet"
+        }
     }
 }

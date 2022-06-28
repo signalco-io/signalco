@@ -1,9 +1,10 @@
-import React from 'react';
-import { Box, Checkbox, Chip, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import React, { useId } from 'react';
+import { Box, Checkbox, Chip, FormControl, InputLabel, ListItemText, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
 export interface ISelectItemsProps {
     multiple?: boolean,
     value: string[],
+    label: string,
     items: { value: string, label?: string }[],
     onChange: (values: string[]) => void,
     placeholder?: string,
@@ -17,8 +18,11 @@ const SelectItems = (props: ISelectItemsProps) => {
         multiple = false,
         placeholder,
         fullWidth,
+        label,
         onChange
     } = props;
+    const id = useId();
+    const elementLabelId = `select-values-${id}`;
 
     const handleOnChange = (event: SelectChangeEvent<typeof value>) => {
         const newValue = event.target.value;
@@ -28,8 +32,10 @@ const SelectItems = (props: ISelectItemsProps) => {
     };
 
     return (
-        <FormControl fullWidth={fullWidth}>
+        <FormControl variant="filled" fullWidth={fullWidth}>
+            <InputLabel id={elementLabelId}>{label}</InputLabel>
             <Select
+                labelId={elementLabelId}
                 value={value}
                 multiple={multiple}
                 placeholder={placeholder}
