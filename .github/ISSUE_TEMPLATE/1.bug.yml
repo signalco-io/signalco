@@ -35,13 +35,13 @@ body:
       label: Steps to reproduce ▶️
       description: |
         Please provide step-by-step guide to reproduce the bug. Provide as much details as possible but be careful to not expose your private or sensitive information.
-        
+
         **These bug reports are public so avoid posting secrets, unique id's, email addresses, personal info, etc.)**
-        
+
         **We will never ask you to provide any private or sensitive information.**
-        
+
         To submit bug report privately please contact us via email: contact@signalco.io
-        
+
         _Issues that we can't reproduce will be closed._
       value: |
         Steps:
