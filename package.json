@@ -39,7 +39,7 @@
         "@mui/icons-material": "5.8.4",
         "@mui/lab": "5.0.0-alpha.88",
         "@mui/material": "5.8.6",
-        "@next/env": "^12.2.0",
+        "@next/env": "12.2.0",
         "@next/mdx": "12.2.0",
         "@storybook/addons": "6.5.9",
         "@vvo/tzdb": "6.52.0",
