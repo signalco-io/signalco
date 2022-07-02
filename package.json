@@ -3,8 +3,8 @@
     "description": "Automate your life",
     "version": "1.0.0",
     "private": true,
-    "engines" : { 
-        "node" : ">=16.0.0"
+    "engines": {
+        "node": ">=16.0.0"
     },
     "scripts": {
         "dev": "next",
@@ -39,6 +39,7 @@
         "@mui/icons-material": "5.8.4",
         "@mui/lab": "5.0.0-alpha.88",
         "@mui/material": "5.8.6",
+        "@next/env": "^12.2.0",
         "@next/mdx": "12.2.0",
         "@storybook/addons": "6.5.9",
         "@vvo/tzdb": "6.52.0",
