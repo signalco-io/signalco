@@ -44,7 +44,7 @@
         "@storybook/addons": "6.5.9",
         "@vvo/tzdb": "6.52.0",
         "axios": "0.27.2",
-        "clsx": "1.1.1",
+        "clsx": "1.2.0",
         "cobe": "0.5.0",
         "color": "4.2.3",
         "compare-versions": "4.1.3",
