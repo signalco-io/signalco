@@ -167,7 +167,7 @@ const Index = () => {
           </Box>
           <StepContent title="Developers" subtitle="Signalco is free and open source project run by small team of enthusiasts.">
             <Stack alignItems="center">
-              <Button variant="outlined" startIcon={<GitHub />} endIcon={<KeyboardArrowRight />} href="https://github.com/signalco-io" size="large">Signalco on GitHub</Button>
+              <Button variant="outlined" startIcon={<GitHub />} endIcon={<KeyboardArrowRight />} href="https://github.com/signalco-io" size="large">signalco on GitHub</Button>
             </Stack>
           </StepContent>
         </>
