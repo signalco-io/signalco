@@ -8,8 +8,15 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useState } from 'react';
 
-const AppThemeVisual = (props: { label: string, theme: AppTheme, disabled?: boolean }) => {
-    const { label, theme, disabled } = props;
+interface AppThemeVisualProps {
+    label: string;
+    theme: AppTheme;
+    disabled?: boolean;
+    size?: 'large' | 'small';
+}
+
+function AppThemeVisual(props: AppThemeVisualProps) {
+    const { label, theme, disabled, size } = props;
 
     let textColor;
     let backgroundColor;
@@ -19,7 +26,7 @@ const AppThemeVisual = (props: { label: string, theme: AppTheme, disabled?: bool
             textColor = 'white';
             break;
         case 'darkDimmed':
-            backgroundColor = 'rgba(32, 31, 30, 1)'
+            backgroundColor = 'rgba(32, 31, 30, 1)';
             textColor = 'white';
             break;
         default:
@@ -28,26 +35,28 @@ const AppThemeVisual = (props: { label: string, theme: AppTheme, disabled?: bool
             break;
     }
 
+    const sizeMultiplier = size === 'small' ? 0.5 : 1;
+
     return (
         <Stack alignItems="center" sx={{ opacity: disabled ? 0.4 : 1 }}>
             <Box sx={{
                 position: 'relative',
-                width: 80,
-                height: 60,
+                width: 80 * sizeMultiplier,
+                height: 60 * sizeMultiplier,
                 backgroundColor: backgroundColor,
                 border: '1px solid gray',
                 borderTop: '4px solid gray',
                 borderRadius: 1
             }}>
-                <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 4, left: 4 }} />
-                <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 18, height: 5, top: 12, left: 4 }} />
-                <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 22, height: 5, top: 20, left: 4 }} />
-                <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 28, left: 4 }} />
+                <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20 * sizeMultiplier, height: 5, top: 4 * sizeMultiplier, left: 4 * sizeMultiplier }} />
+                <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 18 * sizeMultiplier, height: 5, top: 12 * sizeMultiplier, left: 4 * sizeMultiplier }} />
+                <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 22 * sizeMultiplier, height: 5, top: 20 * sizeMultiplier, left: 4 * sizeMultiplier }} />
+                <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20 * sizeMultiplier, height: 5, top: 28 * sizeMultiplier, left: 4 * sizeMultiplier }} />
             </Box>
             <Typography sx={{ pt: 1, color: 'text.primary' }} variant="body2">{label}</Typography>
         </Stack>
     );
-};
+}
 
 export default function AppThemePicker() {
     const themes = useLocale('App', 'Settings', 'Themes');
