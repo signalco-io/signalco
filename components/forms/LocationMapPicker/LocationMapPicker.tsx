@@ -2,7 +2,7 @@ import { Map, Marker, Draggable } from 'pigeon-maps'
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import React, { useCallback, useContext, useState } from 'react';
-import { AppContext } from '../../../pages/_app';
+import { ThemeContext } from '../../../pages/_app';
 import { FormBuilderField } from '@enterwell/react-form-builder';
 import { Stack, IconButton, Box, Accordion, AccordionSummary, AccordionDetails, Typography, Skeleton } from '@mui/material';
 import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
@@ -44,7 +44,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
     const loadLatLngToAddress = useCallback(() => latLngToAddress(latLng), [latLng]);
     const placeName = useLoadAndError(loadLatLngToAddress);
     const [zoom, setZoom] = useState<number | undefined>(3);
-    const appContext = useContext(AppContext);
+    const themeContext = useContext(ThemeContext);
 
     const handleMove = ({ center, zoom }: { center: [number, number], zoom: number }) => {
         setZoom(zoom);
@@ -96,7 +96,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
                     </Stack>
                     <Box sx={{ '&>div': { background: 'transparent !important' } }}>
                         <Map
-                            provider={(x, y, z, dpr) => mapTiler(appContext.isDark, x, y, z, dpr)}
+                            provider={(x, y, z, dpr) => mapTiler(themeContext.isDark, x, y, z, dpr)}
                             dprs={[1, 2]}
                             height={320}
                             center={latLng}

@@ -1,15 +1,15 @@
 import { useContext } from 'react';
-import { AppContext } from '../../../../pages/_app';
+import { ThemeContext } from '../../../../pages/_app';
 import theme from '../../../../src/theme';
 
 const DiscoverVisual = () => {
-    const appContext = useContext(AppContext);
+    const themeContext = useContext(ThemeContext);
 
-    const connectionsColor = appContext.isDark ? '#555' : '#CECECE';
-    const pointsColor = appContext.isDark ? '#777' : '#999';
-    const successPointColor = appContext.isDark ? '#537B63' : '#AEFCCD';
-    const successIconColor = appContext.isDark ? '#26E773' : '#1FC160';
-    const backgroundColor = theme(appContext.theme).palette.background.default;
+    const connectionsColor = themeContext.isDark ? '#555' : '#CECECE';
+    const pointsColor = themeContext.isDark ? '#777' : '#999';
+    const successPointColor = themeContext.isDark ? '#537B63' : '#AEFCCD';
+    const successIconColor = themeContext.isDark ? '#26E773' : '#1FC160';
+    const backgroundColor = theme(themeContext.theme).palette.background.default;
 
     return (
         <svg width="616" height="616" viewBox="0 0 616 616" fill="none" xmlns="http://www.w3.org/2000/svg">

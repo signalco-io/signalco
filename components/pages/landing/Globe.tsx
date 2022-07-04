@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { AppContext } from '../../../pages/_app';
+import { ThemeContext } from '../../../pages/_app';
 import createGlobe from 'cobe';
 import theme from '../../../src/theme';
 import { colorToRgb } from '../../../src/helpers/StringHelpers';
@@ -8,14 +8,14 @@ import useWindowWidth from '../../../src/hooks/useWindowWidth';
 
 function Globe() {
     const canvasRef = React.useRef(null);
-    const appContext = useContext(AppContext);
+    const themeContext = useContext(ThemeContext);
     const rectWidth = useWindowWidth();
     const width = Math.min(1100, rectWidth ?? 0);
     const height = width;
-    const isDark = appContext.isDark;
+    const isDark = themeContext.isDark;
 
-    const glow = colorToRgb(theme(appContext.theme).palette.background.default);
-    const base = Color(theme(appContext.theme).palette.background.default).lightness(128).rgb().object();
+    const glow = colorToRgb(theme(themeContext.theme).palette.background.default);
+    const base = Color(theme(themeContext.theme).palette.background.default).lightness(128).rgb().object();
 
     useEffect(() => {
         let phi = 4.1;

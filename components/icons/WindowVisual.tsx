@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { AppContext } from '../../pages/_app';
+import { ThemeContext } from '../../pages/_app';
 import { colorToRgb } from '../../src/helpers/StringHelpers';
 import useInterval from '../../src/hooks/useInterval';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
@@ -33,7 +33,7 @@ var skySunnyGrads = [
 ];
 
 const WindowVisual = (props: { shadePerc: number, size: number, dateAndTime?: Date }) => {
-    const appContext = useContext(AppContext);
+    const themeContext = useContext(ThemeContext);
     const [hours, setHours] = useState(((props.dateAndTime ?? DateTimeProvider.now()).getHours()) % 24);
 
     // Update hours every minute
@@ -51,7 +51,7 @@ const WindowVisual = (props: { shadePerc: number, size: number, dateAndTime?: Da
 
     const shadePosition = 1 + (perc * 64);
 
-    const edgeColor = appContext.isDark ? '#fff' : '#000';
+    const edgeColor = themeContext.isDark ? '#fff' : '#000';
 
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className={styles.root} width={props.size * 1.4} height={props.size * 1.4} fill="none" viewBox="0 0 81 104">
