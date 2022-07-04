@@ -37,8 +37,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import useLocale from '../src/hooks/useLocale';
 import CurrentUserProvider from '../src/services/CurrentUserProvider';
 import LocalStorageService from '../src/services/LocalStorageService';
-import appSettingsProvider from '../src/services/AppSettingsProvider';
 import useUserSetting from '../src/hooks/useUserSetting';
+import ApiBadge from './development/ApiBadge';
 
 const navItems = [
   { label: 'Dashboards', path: '/app', icon: DashboardSharpIcon },
@@ -108,7 +108,7 @@ const UserProfileAvatar = () => {
           {!isMobile &&
             <Typography variant="h5" fontWeight={500} sx={{ maxWidth: `${maxWidth}px` }}>{userNickName}</Typography>
           }
-          {appSettingsProvider.isDeveloper && <Chip color="warning" label="dev" size="small" />}
+          <ApiBadge />
         </Stack>
       </ButtonBase>
       <Menu {...bindMenu(popupState)}>

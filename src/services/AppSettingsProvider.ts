@@ -10,6 +10,10 @@ class AppSettingsProvider {
 
   public apiAddress: string;
 
+  public get apiIsProduction() {
+    return this.apiAddress === ApiProductionUrl;
+  }
+
   public isDeveloper: boolean;
 
   constructor() {
