@@ -1,5 +1,5 @@
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
-import { Chip, Container, FormControl, FormHelperText, InputLabel, MenuItem, NoSsr, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
+import { Container, FormControl, FormHelperText, InputLabel, MenuItem, NoSsr, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import React, { ReactNode } from 'react';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
@@ -16,6 +16,7 @@ import { isTrue } from '@enterwell/react-form-validation';
 import GoogleIcon from '@mui/icons-material/Google';
 import AppThemePicker from '../../../components/settings/AppThemePicker';
 import { ChildrenProps } from '../../../src/sharedTypes';
+import ApiBadge from '../../../components/development/ApiBadge';
 
 function ConnectedService() {
     const { t } = useLocale('App', 'Settings');
@@ -76,13 +77,13 @@ const settingsFormComponents: FormBuilderComponents = {
             <Select onChange={(e) => onChange(e.target.value, { receiveEvent: false })} {...rest}>
                 <MenuItem value={ApiProductionUrl}>
                     <Stack direction="row" alignItems="center" spacing={1}>
-                        <Chip color="info" label="prod" size="small" />
+                        <ApiBadge force="prod" />
                         <Typography>{ApiProductionUrl}</Typography>
                     </Stack>
                 </MenuItem>
                 <MenuItem value={ApiDevelopmentUrl}>
                     <Stack direction="row" alignItems="center" spacing={1}>
-                        <Chip color="warning" label="dev" size="small" />
+                        <ApiBadge force="dev" />
                         <Typography>{ApiDevelopmentUrl}</Typography>
                     </Stack>
                 </MenuItem>

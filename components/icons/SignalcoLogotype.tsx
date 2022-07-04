@@ -1,7 +1,8 @@
-import { Chip, Box } from '@mui/material';
+import { Box } from '@mui/material';
 import { useContext } from 'react';
 import { ThemeContext } from '../../pages/_app';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
+import ApiBadge from '../development/ApiBadge';
 
 export default function SignalcoLogotype({ width, height, theme, hideBadge }: { width?: number, height?: number, theme?: 'auto' | 'dark' | 'light', hideBadge?: boolean }) {
     if (typeof width === 'undefined' &&
@@ -35,7 +36,7 @@ export default function SignalcoLogotype({ width, height, theme, hideBadge }: { 
             </svg>
             {(!hideBadge && appSettingsProvider.isDeveloper) && (
                 <Box>
-                    <Chip sx={{ position: 'absolute', top: fixedHeight - 24 - fixedHeight * 0.18 }} label="dev" color="warning" size="small" />
+                    <ApiBadge style={{ position: 'absolute', top: fixedHeight - 24 - fixedHeight * 0.18 }} />
                 </Box>
             )}
         </Box>
