@@ -10,7 +10,7 @@ import useIsClient from '../../src/hooks/useIsClient';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { a11yDark as dark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import { a11yLight as light } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
-import { AppContext } from '../../pages/_app';
+import { ThemeContext } from '../../pages/_app';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const headingTopSpacing = 2;
@@ -158,7 +158,7 @@ const components: any = {
     })(),
     code: (() => {
         const Code = ({ className, ...props }: { children: string | string[], className?: string | undefined }) => {
-            const appContext = useContext(AppContext);
+            const themeContext = useContext(ThemeContext);
             const id = useId();
             const { t } = useLocalePlaceholders();
             const match = /language-(\w+)/.exec(className || '')
@@ -167,7 +167,7 @@ const components: any = {
                     <Stack spacing={1}>
                         <Paper sx={{ py: 1, px: 2, position: 'relative' }}>
                             <Typography sx={{ position: 'absolute', right: 12, top: 12, userSelect: 'none' }} color="textSecondary" variant="caption">{match[1]?.toUpperCase()}</Typography>
-                            <SyntaxHighlighter customStyle={{ background: 'transparent', fontSize: '0.9em' }} showLineNumbers style={appContext.isDark ? dark : light} language={match[1]} PreTag="div" {...props} />
+                            <SyntaxHighlighter customStyle={{ background: 'transparent', fontSize: '0.9em' }} showLineNumbers style={themeContext.isDark ? dark : light} language={match[1]} PreTag="div" {...props} />
                         </Paper>
                         <Stack direction="row" justifyContent="end">
                             <IconButtonCopyToClipboard id={id} title={t('CopyCodeToClipboard')} value={props.children}>

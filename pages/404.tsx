@@ -3,14 +3,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { PageLayout } from '../components/layouts/PageLayout';
-import { AppContext } from './_app';
+import { ThemeContext } from './_app';
 
 const Image404 = () => {
-    const appContext = useContext(AppContext);
+    const themeContext = useContext(ThemeContext);
     const scale = 0.6;
     return (
         <Image
-            src={appContext.isDark ? '/images/404-dark.png' : '/images/404-light.png'}
+            src={themeContext.isDark ? '/images/404-dark.png' : '/images/404-light.png'}
             width={256 * scale}
             height={256 * scale}
             alt="404 image"

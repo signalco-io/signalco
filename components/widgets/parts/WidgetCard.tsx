@@ -8,7 +8,7 @@ import {
     bindTrigger,
     bindMenu,
 } from 'material-ui-popup-state/hooks';
-import { AppContext } from '../../../pages/_app';
+import { ThemeContext } from '../../../pages/_app';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
 
@@ -33,7 +33,7 @@ const WidgetCard = (props: IWidgetCardProps) => {
         onRemove
     } = props;
 
-    const appContext = useContext(AppContext);
+    const themeContext = useContext(ThemeContext);
 
     const width = (config as any)?.columns || 2;
     const height = (config as any)?.rows || 2;
@@ -66,7 +66,7 @@ const WidgetCard = (props: IWidgetCardProps) => {
     }
 
     let bgColor;
-    if (appContext.isDark) {
+    if (themeContext.isDark) {
         bgColor = state ? 'action.selected' : undefined;
     } else {
         bgColor = state ? 'background.default' : undefined
