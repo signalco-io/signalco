@@ -28,7 +28,7 @@ const footerLinks: FooterSectionType[] = [
     {
         header: 'Community',
         links: [
-            { name: 'Coming soon...', href: '#' },
+            { name: 'Discussions on GitHub', href: 'https://github.com/signalco-io/signalco/discussions', developerOnly: true }
         ]
     },
     {
