@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   ButtonBase,
-  Chip,
   IconButton,
   ListItemIcon,
   ListItemText,
