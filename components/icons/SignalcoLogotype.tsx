@@ -1,4 +1,4 @@
-import { Chip, Box } from '@mui/material';
+import { Box } from '@mui/material';
 import { useContext } from 'react';
 import { ThemeContext } from '../../pages/_app';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
