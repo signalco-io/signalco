@@ -3,7 +3,7 @@ import { deepOrange, lightBlue } from '@mui/material/colors';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
 import { useContext } from 'react';
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
-import { AppContext } from '../../pages/_app';
+import { ThemeContext } from '../../pages/_app';
 import { arrayMax, arrayMin } from '../../src/helpers/ArrayHelpers';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
@@ -44,9 +44,9 @@ const renderCustomizedTimeLineLabel = (props: any) => {
 
 const GraphTimeLine = (props: IGraphProps) => {
     const { label, data, durationMs, width, startDateTime } = props;
-    const appContext = useContext(AppContext);
+    const themeContext = useContext(ThemeContext);
 
-    const isDarkTheme = appContext.isDark;
+    const isDarkTheme = themeContext.isDark;
     const accentTrue = lightBlue[isDarkTheme ? 900 : 500];
     const accentFalse = deepOrange[isDarkTheme ? 800 : 400];
 
@@ -138,7 +138,7 @@ const ChartGenericTooltip = ({ active, payload, domain, units }: { active?: bool
 
 const GraphArea = (props: IGraphProps) => {
     const { data, durationMs, width, height, startDateTime } = props;
-    const appContext = useContext(AppContext);
+    const themeContext = useContext(ThemeContext);
 
     const yKey = 'value';
     const xKey = 'key';
@@ -177,7 +177,7 @@ const GraphArea = (props: IGraphProps) => {
             <Area
                 type="basis"
                 dataKey={yKey}
-                fill={appContext.isDark ? '#ffffff' : '#000000'}
+                fill={themeContext.isDark ? '#ffffff' : '#000000'}
                 fillOpacity={0.1}
                 stroke="#aeaeae"
                 strokeWidth={1} />

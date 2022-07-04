@@ -71,15 +71,14 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
         }}>
             <GridWrapper isEditing={isEditing} order={widgetsOrder} orderChanged={handleOrderChanged}>
                 {widgets.map((widget) => (
-                    <React.Fragment key={`widget-${widget.id.toString()}`}>
-                        <WidgetComponent
-                            id={widget.id}
-                            onRemove={() => handleRemoveWidget(widget.id)}
-                            isEditMode={isEditing}
-                            type={widget.type}
-                            config={widget.config}
-                            setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
-                    </React.Fragment>
+                    <WidgetComponent
+                        key={`widget-${widget.id.toString()}`}
+                        id={widget.id}
+                        onRemove={() => handleRemoveWidget(widget.id)}
+                        isEditMode={isEditing}
+                        type={widget.type}
+                        config={widget.config}
+                        setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
                 ))}
             </GridWrapper>
         </Box >

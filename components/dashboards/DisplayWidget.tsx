@@ -13,10 +13,12 @@ export interface DisplayWidgetProps {
 
 export default function DisplayWidget(props: WidgetProps & DisplayWidgetProps) {
     const { style, elementRef, attributes, listeners, ...rest } = props;
-    const [span, setSpan] = useState(({
-        colSpan: (rest.config as any)?.columns || 1,
-        rowSpan: (rest.config as any)?.columns || 1
-    }));
+    const [span, setSpan] = useState({
+        colSpan: (rest.config as any)?.columns || 2,
+        rowSpan: (rest.config as any)?.rows || 2
+    });
+
+    console.log(rest.config, span)
 
     return (
         <Box

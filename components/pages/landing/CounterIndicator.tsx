@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material';
 import { useContext } from 'react';
-import { AppContext } from '../../../pages/_app';
+import { ThemeContext } from '../../../pages/_app';
 
 const CounterIndicator = (props: { count: number, hideAfter?: boolean }) => {
-    const appContext = useContext(AppContext);
+    const themeContext = useContext(ThemeContext);
 
     return (
         <Box sx={{ display: 'flex', width: '42px', height: props.hideAfter ? '106px' : '170px', alignItems: props.hideAfter ? 'end' : 'center' }}>
@@ -21,7 +21,7 @@ const CounterIndicator = (props: { count: number, hideAfter?: boolean }) => {
                     display: 'block',
                     height: '64px',
                     width: '1px',
-                    background: `linear-gradient(180deg, ${appContext.isDark ? '#ffffff' : '#000000'} 40%, rgba(255, 255, 255, 0) 100%)`,
+                    background: `linear-gradient(180deg, ${themeContext.isDark ? '#ffffff' : '#000000'} 40%, rgba(255, 255, 255, 0) 100%)`,
                     position: 'absolute',
                     left: '20px',
                     top: '-64px',
@@ -32,7 +32,7 @@ const CounterIndicator = (props: { count: number, hideAfter?: boolean }) => {
                     display: 'block',
                     height: '64px',
                     width: '1px',
-                    background: `linear-gradient(180deg, ${appContext.isDark ? '#ffffff' : '#000000'} 40%, rgba(255, 255, 255, 0) 100%)`,
+                    background: `linear-gradient(180deg, ${themeContext.isDark ? '#ffffff' : '#000000'} 40%, rgba(255, 255, 255, 0) 100%)`,
                     position: 'absolute',
                     left: '21px',
                     top: '42px',

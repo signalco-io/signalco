@@ -1,7 +1,7 @@
 import Editor, { loader } from '@monaco-editor/react';
 import { editor } from 'monaco-editor';
 import { useContext } from 'react';
-import { AppContext } from '../../pages/_app';
+import { ThemeContext } from '../../pages/_app';
 
 loader.config({ paths: { vs: '/vs' } });
 if (typeof window !== 'undefined') {
@@ -37,13 +37,13 @@ export interface CodeEditorProps {
 
 export default function CodeEditor(props: CodeEditorProps) {
     const { language, code, setCode, height, readonly, lineNumbers, options } = props;
-    const appContext = useContext(AppContext);
+    const themeContext = useContext(ThemeContext);
 
     return (
         <Editor
             height={height}
             language={language}
-            theme={appContext.isDark ? 'signalco-dark' : 'signalco-light'}
+            theme={themeContext.isDark ? 'signalco-dark' : 'signalco-light'}
             options={{
                 lineNumbers: lineNumbers ? 'on' : 'off',
                 minimap: { enabled: false },
