@@ -1,9 +1,10 @@
+import React from 'react';
 import { CssBaseline } from '@mui/material';
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import theme from '../src/theme';
 import '../styles/global.scss';
 import { themes } from '@storybook/theming';
-import { AppContext } from '../pages/_app';
+import { ThemeContext } from '../pages/_app';
 import { withScreenshot } from 'storycap';
 import { DateTimeProvider } from '../src/services/DateTimeProvider';
 
@@ -23,14 +24,10 @@ export const decorators = [
     Story => (
         <StyledEngineProvider injectFirst>
             <ThemeProvider theme={theme('dark')}>
-                <CssBaseline />
-                <AppContext.Provider value={{
-                    theme: 'dark',
-                    setTheme: () => { },
-                    isDark: true
-                }}>
+                <ThemeContext.Provider value={{ isDark: true, theme: 'dark' }}>
+                    <CssBaseline />
                     <Story />
-                </AppContext.Provider>
+                </ThemeContext.Provider>
             </ThemeProvider>
         </StyledEngineProvider>
     )
