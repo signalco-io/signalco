@@ -1,4 +1,3 @@
-import { TimePicker } from '@mui/lab';
 import { Stack, Box, Typography, NoSsr, ToggleButtonGroup, ToggleButton, TextField } from '@mui/material';
 import useLocale from '../../src/hooks/useLocale';
 import useUserSetting from '../../src/hooks/useUserSetting';
@@ -7,6 +6,7 @@ import { AppTheme, AppThemeMode } from '../../src/theme';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useState } from 'react';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 const AppThemeVisual = (props: { label: string, theme: AppTheme, disabled?: boolean }) => {
     const { label, theme, disabled } = props;

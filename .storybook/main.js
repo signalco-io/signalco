@@ -16,5 +16,8 @@ module.exports = {
         builder: 'webpack5'
     },
     staticDirs: ['../public'],
-    features: { emotionAlias: false }
+    features: {
+        emotionAlias: false,
+        storyStoreV7: true
+    }
 }

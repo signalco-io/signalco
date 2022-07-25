@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import CodeEditor from './CodeEditor';
 
@@ -11,7 +12,7 @@ export default {
     }
 } as ComponentMeta<typeof CodeEditor>;
 
-const Template: ComponentStory<typeof CodeEditor> = (args) => <CodeEditor {...args} />;
+const Template: ComponentStory<typeof CodeEditor> = (args) => <Box sx={{ m: 2 }}><CodeEditor {...args} /></Box>;
 
 export const Default = Template.bind({});
 
