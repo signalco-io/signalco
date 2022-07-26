@@ -18,17 +18,12 @@ jobs:
                   key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
             - run: yarn install --network-timeout 1000000
             - name: Run stories-check
-              run: |
-                  CHECK_RESULT=$(yarn stories-check)
-                  CHECK_RESULT="${CHECK_RESULT//'%'/'%25'}"
-                  CHECK_RESULT="${CHECK_RESULT//$'\n'/'%0A'}"
-                  CHECK_RESULT="${CHECK_RESULT//$'\r'/'%0D'}"
-                  echo "::set-output name=changes::${CHECK_RESULT}\n"
+              run: yarn stories-check
               id: runStoriesCheck
               continue-on-error: true
             - name: Commit changes
               id: ccc
-              if: contains(steps.runStoriesCheck.outputs.changes, '[+]') || contains(steps.runStoriesCheck.outputs.changes, '[-]') || contains(steps.runStoriesCheck.outputs.changes, '[~]')
+              if: steps.runStoriesCheck.outcome == 'failure'
               uses: EndBug/add-and-commit@v9
               with:
                   add: ".stories-approved"
@@ -37,15 +32,3 @@ jobs:
                   default_author: github_actions
               env:
                   GITHUB_TOKEN: ${{ secrets.AT_GH_CD_REPO_PAT }}
-            - name: Create comment about stories changes
-              uses: actions/github-script@v6
-              if: steps.runStoriesCheck.outcome == 'failure'
-              with:
-                  github-token: ${{secrets.GITHUB_TOKEN}}
-                  script: |
-                      github.rest.issues.createComment({
-                          issue_number: context.issue.number,
-                          owner: context.repo.owner,
-                          repo: context.repo.repo,
-                          body: `Some stories were changed:\n\n${{ steps.runStoriesCheck.outputs.changes }}`
-                      })
