@@ -1,7 +1,6 @@
 import { Chip, IconButton, Slide, Stack, TextField } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
-import { IUser } from '../../src/devices/Device';
 import { useState } from 'react';
 import HttpService from '../../src/services/HttpService';
 import ShareIcon from '@mui/icons-material/Share';
@@ -10,6 +9,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import SendIcon from '@mui/icons-material/Send';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import useLocale from '../../src/hooks/useLocale';
+import IUser from 'src/users/IUser';
 
 interface IShareEntityChipProps {
     entity?: { id: string, sharedWith?: IUser[] },
