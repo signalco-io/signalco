@@ -4,7 +4,7 @@ import { ObjectDict } from '../sharedTypes';
 
 var durationRegex = /P((([0-9]*\.?[0-9]*)Y)?(([0-9]*\.?[0-9]*)M)?(([0-9]*\.?[0-9]*)W)?(([0-9]*\.?[0-9]*)D)?)?(T(([0-9]*\.?[0-9]*)H)?(([0-9]*\.?[0-9]*)M)?(([0-9]*\.?[0-9]*)S)?)?/
 
-export class DateTimeProvider {
+class DateTimeProvider {
     static staticDateTime: Date | undefined = undefined;
 
     static timeZonesCache: ObjectDict<TimeZone> = {};

@@ -1,9 +1,10 @@
 import { action, isObservable, makeAutoObservable, makeObservable, observable, onBecomeObserved, runInAction } from 'mobx';
+import ContactRepository from 'src/contacts/ContactRepository';
+import IEntityDetails from 'src/entity/IEntityDetails';
+import IUser from 'src/users/IUser';
 import { widgetType } from '../../components/widgets/Widget';
-import { IUser, SignalUserDto } from '../devices/Device';
 import EntityRepository from '../entity/EntityRepository';
 import { arrayMax, orderBy, sequenceEqual } from '../helpers/ArrayHelpers';
-import HttpService from '../services/HttpService';
 import LocalStorageService from '../services/LocalStorageService';
 import UserSettingsProvider from '../services/UserSettingsProvider';
 
@@ -55,95 +56,53 @@ class DashboardModel implements IDashboardModel {
     configurationSerialized?: string;
     name: string;
     id: string;
-    timeStamp?: Date;
     isFavorite: boolean;
     widgets: IWidget[];
     sharedWith: IUser[];
     order: number;
+    timeStamp: Date | undefined;
 
     constructor(id: string, name: string, configurationSerialized: string | undefined, sharedWith: IUser[], timeStamp: Date | undefined, order: number) {
         this.id = id;
         this.name = name;
         this.configurationSerialized = configurationSerialized;
-        this.timeStamp = timeStamp;
         this.isFavorite = false;
         this.widgets = [];
         this.sharedWith = sharedWith;
+        this.timeStamp = timeStamp;
         this.order = order;
 
         makeAutoObservable(this);
     }
 }
 
-export class DashboardSetModel implements IDashboardSetModel {
-    configurationSerialized?: string | undefined;
-    name: string;
-    id?: string | undefined;
+function dashboardModelFromEntity(entity: IEntityDetails, order: number) {
+    const configurationSerialized = entity.contacts.find(c => c.contactName === 'configuration');
+    const dashboard = new DashboardModel(
+        entity.id,
+        entity.alias,
+        configurationSerialized?.valueSerialized,
+        entity.sharedWith,
+        entity.timeStamp,
+        order);
 
-    constructor(name: string) {
-        this.name = name;
-    }
-}
+    dashboard.widgets = (typeof dashboard.configurationSerialized !== 'undefined' && dashboard.configurationSerialized != null
+            ? ((JSON.parse(dashboard.configurationSerialized).widgets ?? []) as Array<IWidget>).map(i => makeAutoObservable(i))
+            : [])
+        .map((w, i) => ({ ...w, id: i.toString() }));
 
-class SignalDashboardSetDto {
-    id?: string;
-    name: string;
-    configurationSerialized?: string;
-
-    constructor(name: string) {
-        this.name = name;
-    }
-
-    static ToDto(model: IDashboardSetModel) {
-        if (typeof model.name !== 'string' || model.name.length <= 0) {
-            throw Error('Invalid SignalDashboardSetDto - must have name.');
+    // Apply widget order
+    let maxOrder = 0;
+    for (let i = 0; i < dashboard.widgets.length; i++) {
+        const w = dashboard.widgets[i];
+        maxOrder = Math.max(maxOrder, w.order);
+        if (typeof w.order === 'undefined'){
+            console.debug('Widget has no order, applying default...');
+            w.order = i;
         }
-
-        const dto = new SignalDashboardSetDto(model.name);
-        dto.id = model.id;
-        dto.configurationSerialized = model.configurationSerialized;
-        return dto;
     }
-}
 
-class SignalDashboardDto {
-    id?: string;
-    name?: string;
-    configurationSerialized?: string;
-    sharedWith?: SignalUserDto[];
-    timeStamp?: string;
-
-    static FromDto(dto: SignalDashboardDto, order: number): IDashboardModel {
-        if (dto.id == null || dto.name == null) {
-            throw Error('Invalid SignalDashboardDto - missing required properties.');
-        }
-
-        const dashboard = new DashboardModel(
-            dto.id,
-            dto.name,
-            dto.configurationSerialized,
-            dto.sharedWith?.map(SignalUserDto.FromDto) ?? [],
-            dto.timeStamp ? new Date(dto.timeStamp + 'Z') : undefined,
-            order);
-
-        dashboard.widgets = (typeof dashboard.configurationSerialized !== 'undefined' && dashboard.configurationSerialized != null
-                ? ((JSON.parse(dashboard.configurationSerialized).widgets ?? []) as Array<IWidget>).map(i => makeAutoObservable(i))
-                : [])
-            .map((w, i) => ({ ...w, id: i.toString() }));
-
-        // Apply widget order
-        let maxOrder = 0;
-        for (let i = 0; i < dashboard.widgets.length; i++) {
-            const w = dashboard.widgets[i];
-            maxOrder = Math.max(maxOrder, w.order);
-            if (typeof w.order === 'undefined'){
-                console.debug('Widget has no order, applying default...');
-                w.order = i;
-            }
-        }
-
-        return dashboard;
-    }
+    return dashboard;
 }
 
 const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';
@@ -219,7 +178,7 @@ class DashboardsRepository {
     }
 
     async deleteDashboardAsync(id: string) {
-        await EntityRepository.deleteAsync(id, 3);
+        await EntityRepository.deleteAsync(id);
         await this._applyRemoteDashboardsAsync();
     }
 
@@ -405,12 +364,13 @@ class DashboardsRepository {
     }
 
     private async _setRemoteDashboardAsync(dashboard: IDashboardSetModel): Promise<string> {
-        const response = await HttpService.requestAsync('/dashboards/set', 'post', SignalDashboardSetDto.ToDto(dashboard));
-        return response.id;
+        const id = await EntityRepository.upsertAsync(dashboard.id, 2, dashboard.name);
+        await ContactRepository.setAsync({entityId: id, channelName: 'config', contactName: 'configuration'}, dashboard.configurationSerialized);
+        return id;
     }
 
     private async _getRemoteDahboardsAsync() {
-        return (await HttpService.getAsync<SignalDashboardDto[]>('/dashboards')).map(SignalDashboardDto.FromDto);
+        return (await EntityRepository.byTypeAsync(2)).map(dashboardModelFromEntity);
     }
 }
 
