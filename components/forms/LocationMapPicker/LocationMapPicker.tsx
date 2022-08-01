@@ -5,9 +5,9 @@ import React, { useCallback, useContext, useState } from 'react';
 import { ThemeContext } from '../../../pages/_app';
 import { FormBuilderField } from '@enterwell/react-form-builder';
 import { Stack, IconButton, Box, Accordion, AccordionSummary, AccordionDetails, Typography, Skeleton } from '@mui/material';
-import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/esm/index.types';
+import useLoadAndError from 'src/hooks/useLoadAndError';
 
 const mapBoxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 

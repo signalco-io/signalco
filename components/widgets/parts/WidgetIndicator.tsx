@@ -6,7 +6,7 @@ import Image from 'next/image';
 import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVerySatisfiedOutlined';
 import SentimentDissatisfiedOutlinedIcon from '@mui/icons-material/SentimentDissatisfiedOutlined';
 import { useRouter } from 'next/router';
-import useDevice from '../../../src/hooks/useDevice';
+import useEntity from '../../../src/hooks/useEntity';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultTarget, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
@@ -19,7 +19,7 @@ const stateOptions = [
 
 const WidgetIndicator = (props: WidgetSharedProps) => {
     const { config } = props;
-    const device = useDevice(config?.target?.deviceId);
+    const device = useEntity(config?.target?.deviceId);
     const router = useRouter();
 
     // Calc state from source value

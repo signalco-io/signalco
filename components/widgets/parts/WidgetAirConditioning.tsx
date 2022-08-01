@@ -1,7 +1,7 @@
 import { Box, ButtonBase, Icon, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import useDevice from '../../../src/hooks/useDevice';
+import useEntity from '../../../src/hooks/useEntity';
 import { CircleSlider } from 'react-circle-slider';
 import { WidgetSharedProps } from '../Widget';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -34,8 +34,8 @@ const SmallIndicator = observer((props: { isActive: boolean, icon: string, label
 const WidgetAirConditioning = (props: WidgetSharedProps) => {
     const { config } = props;
     useWidgetOptions(stateOptions, props);
-    const temperatureDevice = useDevice(config?.targetTemperature?.deviceId);
-    const heatingDevice = useDevice(config?.targetHeating?.deviceId);
+    const temperatureDevice = useEntity(config?.targetTemperature?.deviceId);
+    const heatingDevice = useEntity(config?.targetHeating?.deviceId);
 
     const temperatureContact = temperatureDevice?.getState({
         channelName: config?.targetTemperature?.channelName,

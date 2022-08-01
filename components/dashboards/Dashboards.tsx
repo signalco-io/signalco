@@ -10,12 +10,12 @@ import { LoadingButton } from '@mui/lab';
 import { widgetType } from '../widgets/Widget';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import dynamic from 'next/dynamic';
-import { useLoadAndError } from '../../src/hooks/useLoadingAndError';
 import Image from 'next/image';
 import useHashParam from '../../src/hooks/useHashParam';
 import useDashboardsUpdateChecker from './useDashboardsUpdateChecker';
 import useLocale from '../../src/hooks/useLocale';
 import Loadable from '../shared/Loadable/Loadable';
+import useLoadAndError from 'src/hooks/useLoadAndError';
 
 const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 

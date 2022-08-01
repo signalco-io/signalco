@@ -10,13 +10,13 @@ import { makeAutoObservable } from 'mobx';
 import { IDeviceTargetIncomplete } from '../../../src/devices/Device';
 import DevicesRepository from '../../../src/devices/DevicesRepository';
 import DisplayDeviceTarget from '../../../components/shared/entity/DisplayDeviceTarget';
-import useDevice from '../../../src/hooks/useDevice';
+import useEntity from '../../../src/hooks/useEntity';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
 import EntityRepository from '../../../src/entity/EntityRepository';
 import { ObjectDictAny } from '../../../src/sharedTypes';
 import { TransitionGroup } from 'react-transition-group';
 import useLocale, { useLocalePlaceholders } from '../../../src/hooks/useLocale';
-import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
+import useLoadAndError from '../../../src/hooks/useLoadAndError';
 
 interface IDeviceStateValue {
     value?: any
@@ -386,7 +386,7 @@ const DisplayDeviceStateValue = observer((props: { target?: IDeviceTargetIncompl
     const {
         target
     } = props;
-    const device = useDevice(target?.deviceId);
+    const device = useEntity(target?.deviceId);
 
     const contact = target?.channelName && target?.contactName
         ? device?.getContact({

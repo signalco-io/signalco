@@ -1,9 +1,8 @@
 import { ButtonBase, Chip, Menu, MenuItem, Skeleton, Stack } from '@mui/material';
 import { observer } from 'mobx-react-lite';
-import React, { } from 'react';
-import { IDeviceModel, IDeviceTarget, IDeviceTargetIncomplete } from '../../../src/devices/Device';
+import React from 'react';
 import { selectMany } from '../../../src/helpers/ArrayHelpers';
-import useDevice from '../../../src/hooks/useDevice';
+import useEntity from '../../../src/hooks/useEntity';
 import {
     usePopupState,
     bindTrigger,
@@ -68,12 +67,17 @@ const ContactSelection = (props: { device?: IDeviceModel, target?: IDeviceTarget
     );
 }
 
-const DisplayDeviceTarget = observer((props: { target?: IDeviceTargetIncomplete, hideDevice?: boolean, hideContact?: boolean, onChanged: (updated?: IDeviceTargetIncomplete) => void }) => {
-    const device = useDevice(props.target?.deviceId);
+interface DisplayDeviceTargetProps {
+    target?: IDeviceTargetIncomplete;
+    hideDevice?: boolean;
+    hideContact?: boolean;
+    onChanged: (updated?: IDeviceTargetIncomplete) => void;
+}
+
+const DisplayDeviceTarget = observer((props: DisplayDeviceTargetProps) => {
+    const { isLoading, item: device, error } = useEntity(props.target?.deviceId);
     const deviceMenu = usePopupState({ variant: 'popover', popupId: 'devicetarget-device-menu' });
     const contactMenu = usePopupState({ variant: 'popover', popupId: 'devicetarget-device-contact-menu' });
-
-    const isLoading = typeof device === 'undefined';
 
     const handleDevicesSelected = (device: IDeviceModel | undefined) => {
         // Retrieve available contact, set undefined if no matching

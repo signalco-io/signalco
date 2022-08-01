@@ -15,7 +15,7 @@ import { useCallback } from 'react';
 import blendColors from '../../../src/helpers/BlendColors';
 import SelectItems from '../../../components/shared/form/SelectItems';
 import useAutoTable from '../../../components/shared/table/useAutoTable';
-import useDevice from '../../../src/hooks/useDevice';
+import useEntity from '../../../src/hooks/useEntity';
 import useHashParam from '../../../src/hooks/useHashParam';
 import EditableInput from '../../../components/shared/form/EditableInput';
 import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
@@ -274,7 +274,7 @@ const DeviceDetails = () => {
     const { t } = useLocale('App', 'Entities');
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | undefined>();
-    const device = useDevice(typeof id !== 'object' && typeof id !== 'undefined' ? id : undefined);
+    const device = useEntity(typeof id !== 'object' && typeof id !== 'undefined' ? id : undefined);
     const [stateTableItems, setStateTableItems] = useState<IStateTableItem[] | undefined>();
     const [actionTableItems, setActionTableItems] = useState<IActionTableItem[] | undefined>();
 

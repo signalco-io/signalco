@@ -2,7 +2,7 @@ import { ArrowUpward, Stop, ArrowDownward } from '@mui/icons-material';
 import { Button, Grid, Stack, Typography } from '@mui/material';
 import dynamic from 'next/dynamic';
 import React, { useMemo } from 'react';
-import useDevice from '../../../src/hooks/useDevice';
+import useEntity from '../../../src/hooks/useEntity';
 import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
@@ -15,7 +15,7 @@ const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
 const WidgetShades = (props: WidgetSharedProps) => {
     const { config } = props;
-    const device = useDevice(config?.target?.deviceId);
+    const device = useEntity(config?.target?.deviceId);
 
     const label = props.config?.label || device?.alias || '';
 
