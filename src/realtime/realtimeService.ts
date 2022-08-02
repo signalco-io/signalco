@@ -1,38 +1,39 @@
-import DevicesRepository from '../devices/DevicesRepository';
 import PageNotificationService from '../notifications/PageNotificationService';
 import HttpService from '../services/HttpService';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import CurrentUserProvider from '../services/CurrentUserProvider';
 
 class SignalSignalRDeviceStateDto {
-    DeviceId?: string;
-    ChannelName?: string;
-    ContactName?: string;
-    ValueSerialized?: string;
-    TimeStamp?: string;
+    entityId?: string;
+    channelName?: string;
+    contactName?: string;
+    valueSerialized?: string;
+    timeStamp?: string;
 }
 
 class RealtimeService {
     private devicesHub?: HubConnection;
 
     private async HandleDeviceStateAsync(state: SignalSignalRDeviceStateDto) {
-        if (typeof state.DeviceId === 'undefined' ||
-            typeof state.ChannelName === 'undefined' ||
-            typeof state.ContactName === 'undefined' ||
-            typeof state.TimeStamp === 'undefined') {
+        if (typeof state.entityId === 'undefined' ||
+            typeof state.channelName === 'undefined' ||
+            typeof state.contactName === 'undefined' ||
+            typeof state.timeStamp === 'undefined') {
         console.warn('Got device state with invalid values', state);
         return;
         }
 
-        const device = await DevicesRepository.getDeviceAsync(state.DeviceId);
-        if (typeof device !== 'undefined') {
-            device.updateState(
-                state.ChannelName,
-                state.ContactName,
-                state.ValueSerialized,
-                new Date(state.TimeStamp)
-            );
-        }
+        // TODO: Update local contact value
+        console.debug('TODO: Update local contact value');
+        // const device = await EntityRepository.byIdAsync(state.entityId);
+        // if (typeof device !== 'undefined') {
+        //     device.updateState(
+        //         state.channelName,
+        //         state.contactName,
+        //         state.valueSerialized,
+        //         new Date(state.timeStamp)
+        //     );
+        // }
     }
 
     private async _hubStartWithRetryAsync(retryCount: number) {

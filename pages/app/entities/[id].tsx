@@ -158,10 +158,6 @@ import EntityRepository from 'src/entity/EntityRepository';
 //     }
 // });
 
-// const ContactStateLastUpdatedDisplay = observer((props: { state?: IDeviceContactState }) => (
-//     <Timeago date={props.state?.timeStamp} live />
-// ));
-
 // const ContactStateValueDisplay = observer((props: { contact?: IDeviceContact, state?: IDeviceContactState }) => {
 //     const { contact, state } = props;
 

@@ -1,30 +1,29 @@
-import { IDeviceTarget } from '../devices/Device';
-import DevicesRepository from '../devices/DevicesRepository';
-import DateTimeProvider from '../services/DateTimeProvider';
+import IContactPointer from 'src/contacts/IContactPointer';
 import HttpService from '../services/HttpService';
 
 export interface IConduct {
-    target: IDeviceTarget,
+    pointer: IContactPointer,
     value?: any,
     delay: number
 }
 
 export default class ConductsService {
-    private static async _updateLocalStateAsync(conduct: IConduct) {
-        const device = await DevicesRepository.getDeviceAsync(conduct.target.deviceId);
-        device?.updateState(
-            conduct.target.channelName,
-            conduct.target.contactName,
-            conduct.value?.toString(),
-            DateTimeProvider.now()
-        );
+    private static async _updateLocalStateAsync(_: IConduct) {
+        throw new Error('not implemented');
+        // const device = await DevicesRepository.getDeviceAsync(conduct.target.deviceId);
+        // device?.updateState(
+        //     conduct.target.channelName,
+        //     conduct.target.contactName,
+        //     conduct.value?.toString(),
+        //     DateTimeProvider.now()
+        // );
     }
 
-    static async RequestConductAsync(target: IDeviceTarget, value?: any, delay?: number) {
+    static async RequestConductAsync(pointer: IContactPointer, value?: any, delay?: number) {
         await HttpService.requestAsync('/conducts/request', 'post', {
-            deviceId: target.deviceId,
-            channelName: target.channelName,
-            contactName: target.contactName,
+            entityId: pointer.entityId,
+            channelName: pointer.channelName,
+            contactName: pointer.contactName,
             valueSerialized: typeof value === 'string' ? value : JSON.stringify(value),
             delay: delay || 0
         });
@@ -32,15 +31,15 @@ export default class ConductsService {
         ConductsService._updateLocalStateAsync({
             delay: delay || 0,
             value: value,
-            target: target
+            pointer: pointer
         });
     }
 
     static async RequestMultipleConductAsync(conducts: IConduct[]) {
         const conductsDtos = conducts.map(conduct => ({
-            deviceId: conduct.target.deviceId,
-            channelName: conduct.target.channelName,
-            contactName: conduct.target.contactName,
+            entityId: conduct.pointer.entityId,
+            channelName: conduct.pointer.channelName,
+            contactName: conduct.pointer.contactName,
             valueSerialized: typeof conduct.value === 'string' ? conduct.value : JSON.stringify(conduct.value),
             delay: conduct.delay || 0
         }));

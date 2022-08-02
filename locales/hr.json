@@ -72,7 +72,7 @@
             "LastActivity": "Posljednja aktivnost",
             "Manufacturer": "Proizvođač",
             "Model": "Model",
-            "SearchLabel": "Pretražite…",
+            "SearchLabel": "Pretraga...",
             "States": "Stanja",
             "Table": "Tablica",
             "history": "povijest",
@@ -94,7 +94,7 @@
             "Stations": "Stanice"
         },
         "Placeholders": {
-            "Loading": "Učitavanje…",
+            "Loading": "Učitavanje...",
             "Never": "Nikad",
             "NoDashboardsAvailable": "Nema dostupnih nadzornih ploča",
             "NoData": "Nema podataka za prikazivanje",

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ObjectDictAny } from '../../../src/sharedTypes';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
-import DisplayDeviceTarget from '../../shared/entity/DisplayDeviceTarget';
+import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import SelectItems from '../../shared/form/SelectItems';
 
 interface IWidgetConfigurationDialogProps {
@@ -68,7 +68,7 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
             for (let i = 0; i <= valueItems.length; i++) {
                 const value = valueItems[i];
                 console.log('multiple value', value)
-                elements.push(<DisplayDeviceTarget key={`option-${i}`} target={value} onChanged={t => {
+                elements.push(<DisplayEntityTarget selectContact selectValue key={`option-${i}`} target={value} onChanged={t => {
                     const newValues = [...valueItems];
                     newValues[i] = t;
                     return props.onChange(newValues.filter(i => typeof i !== 'undefined'));
@@ -79,7 +79,7 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
         }
 
         // Handle single-contact target
-        return <DisplayDeviceTarget target={props.value} onChanged={t => props.onChange(t)} />
+        return <DisplayEntityTarget selectContact selectValue target={props.value} onChanged={t => props.onChange(t)} />
     } else if (props.option.type === 'deviceContactTargetWithValue') {
         return <Stack direction="row" spacing={1}>
             <WidgetConfigurationOption
@@ -98,9 +98,9 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
                 })} />
         </Stack>
     } else if (props.option.type === 'deviceTarget') {
-        return <DisplayDeviceTarget target={props.value} hideContact onChanged={t => props.onChange(t)} />
+        return <DisplayEntityTarget target={props.value} onChanged={t => props.onChange(t)} />
     } else if (props.option.type === 'contactTarget') {
-        return <DisplayDeviceTarget target={{ ...props.value, deviceId: props.option.data }} hideDevice onChanged={t => props.onChange(t)} />
+        return <DisplayEntityTarget target={{ ...props.value, deviceId: props.option.data }} selectContact onChanged={t => props.onChange(t)} />
     } else if (props.option.type === 'select') {
         return <SelectItems
             label={props.option.label}

@@ -6,11 +6,12 @@ import Image from 'next/image';
 import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVerySatisfiedOutlined';
 import SentimentDissatisfiedOutlinedIcon from '@mui/icons-material/SentimentDissatisfiedOutlined';
 import { useRouter } from 'next/router';
-import useEntity from '../../../src/hooks/useEntity';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultTarget, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
+import useContact from 'src/hooks/useContact';
+import IContactPointer from 'src/contacts/IContactPointer';
 
 const stateOptions = [
     DefaultTarget,
@@ -19,12 +20,13 @@ const stateOptions = [
 
 const WidgetIndicator = (props: WidgetSharedProps) => {
     const { config } = props;
-    const device = useEntity(config?.target?.deviceId);
     const router = useRouter();
 
     // Calc state from source value
-    const contactState = device?.getState({ channelName: config?.target?.channelName, contactName: config?.target?.contactName, deviceId: device.id });
-    const value = Number.parseFloat(contactState?.valueSerialized) || 0;
+    const pointer = config?.target as IContactPointer;
+    const contact = useContact(config?.target);
+    const contactValueSerialized = contact?.item?.valueSerialized;
+    const value = typeof contactValueSerialized !== 'undefined' ? Number.parseFloat(contactValueSerialized) || 0 : 0;
 
     const isLow = value < 10;
 
@@ -33,8 +35,7 @@ const WidgetIndicator = (props: WidgetSharedProps) => {
     const Icon = isLow ? SentimentDissatisfiedOutlinedIcon : SentimentVerySatisfiedOutlinedIcon;
 
     const handleSelected = () => {
-        if (device)
-            router.push(`/app/entities/${device.id}`)
+        router.push(`/app/entities/${pointer.entityId}`)
     }
 
     useWidgetOptions(stateOptions, props);

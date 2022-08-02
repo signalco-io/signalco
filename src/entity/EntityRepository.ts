@@ -1,3 +1,5 @@
+import IContact from 'src/contacts/IContact';
+import IContactPointer from 'src/contacts/IContactPointer';
 import HttpService from '../services/HttpService';
 import IEntityDetails from './IEntityDetails';
 
@@ -25,6 +27,10 @@ class EntityRepository {
 
     async byTypeAsync(type: number) {
         return (await this.allAsync()).filter(e => e.type === type);
+    }
+
+    async contactAsync(_: IContactPointer) : Promise<IContact | undefined> {
+        throw new Error('Method not implemented.');
     }
 
     async upsertAsync(id: string | undefined, type: number, alias: string) {

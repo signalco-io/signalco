@@ -61,6 +61,7 @@ export default class HttpService {
       data: method !== 'get' ? data : undefined,
       params: method === 'get' ? data : undefined,
       headers: {
+        Accept: 'application/json',
         Authorization: token,
         'Content-Type': 'application/json',
         ...headers
