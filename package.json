@@ -74,7 +74,7 @@
         "uuid": "8.3.2"
     },
     "devDependencies": {
-        "@babel/core": "7.18.9",
+        "@babel/core": "7.18.10",
         "@next/bundle-analyzer": "12.2.3",
         "@storybook/addon-a11y": "6.5.9",
         "@storybook/addon-actions": "6.5.9",
