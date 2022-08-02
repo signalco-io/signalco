@@ -25,7 +25,7 @@
         "@dnd-kit/core": "6.0.5",
         "@dnd-kit/modifiers": "6.0.0",
         "@dnd-kit/sortable": "7.0.1",
-        "@emotion/cache": "11.10.0",
+        "@emotion/cache": "11.10.1",
         "@emotion/react": "11.10.0",
         "@emotion/server": "11.10.0",
         "@emotion/styled": "11.10.0",
@@ -37,8 +37,8 @@
         "@microsoft/signalr": "6.0.7",
         "@monaco-editor/react": "4.4.5",
         "@mui/icons-material": "5.8.4",
-        "@mui/lab": "5.0.0-alpha.92",
-        "@mui/material": "5.9.2",
+        "@mui/lab": "5.0.0-alpha.93",
+        "@mui/material": "5.9.3",
         "@mui/x-date-pickers": "5.0.0-beta.3",
         "@next/env": "12.2.3",
         "@next/mdx": "12.2.3",
@@ -74,7 +74,7 @@
         "uuid": "8.3.2"
     },
     "devDependencies": {
-        "@babel/core": "7.18.9",
+        "@babel/core": "7.18.10",
         "@next/bundle-analyzer": "12.2.3",
         "@storybook/addon-a11y": "6.5.9",
         "@storybook/addon-actions": "6.5.9",
