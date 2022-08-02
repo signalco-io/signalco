@@ -1,5 +1,43 @@
 import React, { useState } from 'react';
-import { ILogViewerProps, LogViewerLine } from '../../pages/app/stations/[id]';
+
+export interface ILogViewerProps {
+    text: string;
+    height: number;
+}
+
+interface ILogViewerLineProps {
+    number: number;
+    data: any;
+    lineHeight: number;
+}
+
+const LogLevelBadge = ({ level }: { level: string }) => {
+    let color = 'gray';
+    switch (level) {
+        case 'Information': color = 'DodgerBlue'; break;
+        case 'Warning': color = 'DarkOrange'; break;
+        case 'Fatal':
+        case 'Error': color = 'DarkRed'; break;
+    }
+
+    return <span style={{ backgroundColor: color, padding: '2px', paddingLeft: '6px', paddingRight: '6px', borderRadius: 4, marginRight: '8px', fontSize: '10px', textTransform: 'uppercase' }}>{level.substring(0, 3)}</span>
+};
+
+const logLineRegex = new RegExp(/\[(.*)\]\s\((\w+)\)\s(.*)/);
+
+export const LogViewerLine = (props: ILogViewerLineProps) => {
+    const { number, data, lineHeight } = props;
+    const matches = logLineRegex.exec(data);
+    const timeStamp = matches ? new Date(matches[1]) : new Date(0);
+    return (
+        <div style={{ top: `${number * lineHeight}px`, position: 'absolute' }}>
+            <span style={{ paddingLeft: '8px', minWidth: '60px', display: 'inline-block' }}>{number}</span>
+            {matches && <span style={{ marginRight: '8px' }}>{timeStamp.getUTCHours().toString().padStart(2, '0')}:{timeStamp.getUTCMinutes().toString().padStart(2, '0')}:{timeStamp.getUTCSeconds().toString().padStart(2, '0')}.{timeStamp.getMilliseconds().toString().padEnd(3, '0')}</span>}
+            {matches && <LogLevelBadge level={matches[2]} />}
+            <div style={{ opacity: 0.8, display: 'inline-block', height: '1.3rem' }}>{matches ? matches[3] : data}</div>
+        </div>
+    )
+};
 
 export default function LogViewer(props: ILogViewerProps) {
     const { text, height } = props;

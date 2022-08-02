@@ -22,12 +22,12 @@ class ContactRepository {
         });
     }
 
-    async historyAsync(pointer: IContactPointer, duration: Date) {
+    async historyAsync(pointer: IContactPointer, duration: Date | string) {
         return (await HttpService.requestAsync('/contact/history', 'get', {
             entityId: pointer.entityId,
             contactName: pointer.contactName,
             channelName: pointer.channelName,
-            duration: DateTimeProvider.toDuration(duration)
+            duration: typeof duration === 'string' ? duration : DateTimeProvider.toDuration(duration)
         }) as ContactHistoryResponseDto).values.map(tsvp => ({
             timeStamp: new Date(tsvp.timeStamp),
             valueSerialized: tsvp.valueSerialized
