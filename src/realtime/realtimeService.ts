@@ -12,7 +12,7 @@ class SignalSignalRDeviceStateDto {
 }
 
 class RealtimeService {
-    private devicesHub?: HubConnection;
+    private contactsHub?: HubConnection;
 
     private async HandleDeviceStateAsync(state: SignalSignalRDeviceStateDto) {
         if (typeof state.entityId === 'undefined' ||
@@ -38,22 +38,22 @@ class RealtimeService {
 
     private async _hubStartWithRetryAsync(retryCount: number) {
         try {
-            if (this.devicesHub == null) return;
+            if (this.contactsHub == null) return;
 
             console.debug('Connecting to SignalR...');
 
-            await this.devicesHub.start();
-            this.devicesHub.on('devicestate', this.HandleDeviceStateAsync);
-            this.devicesHub.onclose((err) => {
+            await this.contactsHub.start();
+            this.contactsHub.on('contact', this.HandleDeviceStateAsync);
+            this.contactsHub.onclose((err) => {
                 console.log('SignalR connection closed. Reconnecting with delay...');
                 console.debug('SignalR connection closes reason:', err);
                 this._hubStartWithRetryAsync(0);
             });
-            this.devicesHub.onreconnecting((err) => {
+            this.contactsHub.onreconnecting((err) => {
                 console.log('Signalr reconnecting...');
                 console.debug('Signalr reconnection reason:', err);
             });
-            this.devicesHub.onreconnected(() => {
+            this.contactsHub.onreconnected(() => {
                 console.log('Signalr reconnected');
                 PageNotificationService.show('Realtime connection to cloud established.', 'success');
             });
@@ -71,12 +71,12 @@ class RealtimeService {
     };
 
     async startAsync() {
-        if (this.devicesHub != null) return;
+        if (this.contactsHub != null) return;
 
         console.debug('Configuring SignalR...');
 
-        this.devicesHub = new HubConnectionBuilder()
-          .withUrl(HttpService.getApiUrl('/signalr/devices'), {
+        this.contactsHub = new HubConnectionBuilder()
+          .withUrl(HttpService.getApiUrl('/signalr/contacts'), {
             accessTokenFactory: () => {
                 const token = CurrentUserProvider.getToken();
                 if (token === 'undefined')
