@@ -1,4 +1,4 @@
-import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, Grid, Stack, Typography, CardMedia } from '@mui/material';
+import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardHeader, Grid, Stack, Typography, CardMedia } from '@mui/material';
 import { useRouter } from 'next/router'
 import React from 'react';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
@@ -11,10 +11,7 @@ import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDelete
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import useLocale from '../../../src/hooks/useLocale';
 import EntityRepository from 'src/entity/EntityRepository';
-import useHashParam from 'src/hooks/useHashParam';
 import AutoTable, { IAutoTableItem } from 'components/shared/table/AutoTable';
-import useContacts from 'src/hooks/useContacts';
-import IContact from 'src/contacts/IContact';
 import Timeago from 'components/shared/time/Timeago';
 
 // const DynamicGraph = dynamic(() => import('../../../components/graphs/Graph'));

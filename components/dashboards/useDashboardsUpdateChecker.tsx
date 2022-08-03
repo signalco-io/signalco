@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import DashboardsRepository from '../../src/dashboards/DashboardsRepository';
 import useInterval from '../../src/hooks/useInterval';
 import useLocale from '../../src/hooks/useLocale';
