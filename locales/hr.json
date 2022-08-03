@@ -19,6 +19,7 @@
                 "PickNightTheme": "Odaberite noćnu temu"
             },
             "ShareEntityChip": {
+                "Share": "Dijeli s korisnikom...",
                 "Cancel": "Otkaži",
                 "Email": "Email adresa",
                 "SendInvitation": "Pošalji pozivnicu",
@@ -72,13 +73,14 @@
             "LastActivity": "Posljednja aktivnost",
             "Manufacturer": "Proizvođač",
             "Model": "Model",
-            "SearchLabel": "Pretražite…",
+            "SearchLabel": "Pretraga...",
             "States": "Stanja",
             "Table": "Tablica",
             "history": "povijest",
             "lastActivity": "Posljednja aktivnost",
             "lastUpdate": "Zadnja promjena",
             "name": "Naziv",
+            "channel": "Kanal",
             "shared": "Dijeljeno",
             "value": "Vrijednost"
         },
@@ -94,7 +96,7 @@
             "Stations": "Stanice"
         },
         "Placeholders": {
-            "Loading": "Učitavanje…",
+            "Loading": "Učitavanje...",
             "Never": "Nikad",
             "NoDashboardsAvailable": "Nema dostupnih nadzornih ploča",
             "NoData": "Nema podataka za prikazivanje",

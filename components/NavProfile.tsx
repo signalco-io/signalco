@@ -18,9 +18,7 @@ import Link from 'next/link';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import Skeleton from '@mui/material/Skeleton';
 import DashboardSharpIcon from '@mui/icons-material/DashboardSharp';
-import AccountTreeSharpIcon from '@mui/icons-material/AccountTreeSharp';
 import DevicesOtherSharpIcon from '@mui/icons-material/DevicesOtherSharp';
-import DeviceHubSharpIcon from '@mui/icons-material/DeviceHubSharp';
 import SettingsIcon from '@mui/icons-material/Settings';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -42,8 +40,6 @@ import ApiBadge from './development/ApiBadge';
 const navItems = [
   { label: 'Dashboards', path: '/app', icon: DashboardSharpIcon },
   { label: 'Entities', path: '/app/entities', icon: DevicesOtherSharpIcon },
-  { label: 'Processes', path: '/app/processes', icon: AccountTreeSharpIcon },
-  { label: 'Stations', path: '/app/stations', icon: DeviceHubSharpIcon },
   { label: 'Settings', path: '/app/settings', icon: SettingsIcon }
 ];
 

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import DashboardsRepository from '../../src/dashboards/DashboardsRepository';
 import useInterval from '../../src/hooks/useInterval';
 import useLocale from '../../src/hooks/useLocale';
@@ -18,6 +19,10 @@ export default function useDashboardsUpdateChecker() {
             PageNotificationService.show(t('UpdateError'), 'info');
         }
     };
+
+    useEffect(() => {
+        checkDashboardUpdateAsync();
+    }, []);
 
     useInterval(checkDashboardUpdateAsync, 30 * 60000)
 }

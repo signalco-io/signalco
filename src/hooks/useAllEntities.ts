@@ -1,9 +1,9 @@
-import { IDeviceModel } from '../devices/Device';
-import DevicesRepository from '../devices/DevicesRepository';
+import EntityRepository from 'src/entity/EntityRepository';
+import IEntityDetails from 'src/entity/IEntityDetails';
 import useLoadingAndError from './useLoadingAndError';
 
 const useAllEntities = () => {
-    return useLoadingAndError<IDeviceModel, IDeviceModel>(DevicesRepository.getDevicesAsync);
+    return useLoadingAndError<IEntityDetails, IEntityDetails>(EntityRepository.allAsync);
 };
 
 export default useAllEntities;

@@ -1,13 +1,14 @@
 import { Box, ButtonBase, Icon, Stack, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import useDevice from '../../../src/hooks/useDevice';
+import useEntity from '../../../src/hooks/useEntity';
 import { CircleSlider } from 'react-circle-slider';
 import { WidgetSharedProps } from '../Widget';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import Link from 'next/link';
+import useContact from 'src/hooks/useContact';
 
 const stateOptions: IWidgetConfigurationOption[] = [
     DefaultLabel,
@@ -34,24 +35,24 @@ const SmallIndicator = observer((props: { isActive: boolean, icon: string, label
 const WidgetAirConditioning = (props: WidgetSharedProps) => {
     const { config } = props;
     useWidgetOptions(stateOptions, props);
-    const temperatureDevice = useDevice(config?.targetTemperature?.deviceId);
-    const heatingDevice = useDevice(config?.targetHeating?.deviceId);
+    const { item: temperatureDevice } = useEntity(config?.targetTemperature?.deviceId);
+    const { item: heatingDevice } = useEntity(config?.targetHeating?.deviceId);
 
-    const temperatureContact = temperatureDevice?.getState({
+    const temperatureContact = useContact(temperatureDevice ? {
         channelName: config?.targetTemperature?.channelName,
         contactName: config?.targetTemperature?.contactName,
-        deviceId: temperatureDevice.id
-    });
+        entityId: temperatureDevice.id
+    } : undefined)?.item;
 
-    const degrees = temperatureContact ? Number.parseFloat(temperatureContact?.valueSerialized) : undefined;
+    const degrees = temperatureContact ? (typeof temperatureContact?.valueSerialized !== 'undefined' ? Number.parseFloat(temperatureContact?.valueSerialized) : undefined) : undefined;
     const degreesWhole = typeof degrees !== 'undefined' ? Math.floor(degrees) : undefined;
     const degreesDecimal = typeof degrees !== 'undefined' && typeof degreesWhole !== 'undefined' ? Math.floor((degrees - degreesWhole) * 10) : undefined;
 
-    const heatingContact = heatingDevice?.getState({
+    const heatingContact = useContact(heatingDevice ? {
         channelName: config?.targetHeating?.channelName,
         contactName: config?.targetHeating?.contactName,
-        deviceId: heatingDevice.id
-    });
+        entityId: heatingDevice.id
+    } : undefined)?.item;
     const heatingActive = heatingContact?.valueSerialized === 'true';
 
     return (

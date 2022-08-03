@@ -1,8 +1,8 @@
-import { IDeviceTargetIncomplete } from '../devices/Device';
+import IContactPointerPartial from 'src/contacts/IContactPointerPartial';
 import IWidgetConfigurationOption from './IWidgetConfigurationOption';
 
-const isInvalidateDeviceContactTarget = (value: IDeviceTargetIncomplete) =>
-    !value.deviceId ||
+const isInvalidateDeviceContactTarget = (value: IContactPointerPartial) =>
+    !value.entityId ||
     !value.contactName ||
     !value.channelName;
 
@@ -29,7 +29,7 @@ export const IsConfigurationValid = (config: any, options: IWidgetConfigurationO
                 break;
             case 'deviceContactTarget':
                 if (opt.multiple){
-                    if ((value as IDeviceTargetIncomplete[]).filter(v => isInvalidateDeviceContactTarget(v)).length) {
+                    if ((value as IContactPointerPartial[]).filter(v => isInvalidateDeviceContactTarget(v)).length) {
                         return false;
                     }
                 } else if (isInvalidateDeviceContactTarget(value)) {
