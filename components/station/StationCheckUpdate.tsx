@@ -1,11 +1,11 @@
 import compareVersions from 'compare-versions';
-import { useLoadAndError } from '../../src/hooks/useLoadingAndError';
-import useLocale, { useLocalePlaceholders } from '../../src/hooks/useLocale';
+import useLocale, { localizer, useLocalePlaceholders } from '../../src/hooks/useLocale';
 import StationsRepository from '../../src/stations/StationsRepository';
 import UploadIcon from '@mui/icons-material/Upload';
 import CheckIcon from '@mui/icons-material/Check';
 import { Button } from '@mui/material';
-import { stationCommandAsync } from '../../pages/app/stations/[id]';
+import useLoadAndError from 'src/hooks/useLoadAndError';
+import PageNotificationService from 'src/notifications/PageNotificationService';
 
 async function loadLatestAvailableVersion() {
     try {
@@ -14,6 +14,21 @@ async function loadLatestAvailableVersion() {
     catch (err) {
         console.warn('Failed to retrieve latest available version', err);
         throw err;
+    }
+}
+
+// TODO: Use generic command dispatch with state and error handling
+const stationCommandAsync = async (stationId: string | string[] | undefined, command: (id: string) => Promise<void>, commandDescription: string) => {
+    try {
+        if (stationId == null ||
+            typeof stationId !== 'string')
+            throw Error('Station identifier not available. Can\'t ' + commandDescription);
+
+        await command(stationId);
+    }
+    catch (err) {
+        console.error('Station command execution error', err);
+        PageNotificationService.show(localizer('App', 'Stations')('StationCommandError'), 'error');
     }
 }
 

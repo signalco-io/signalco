@@ -1,4 +1,4 @@
-import useLoadingAndError from '../../../src/hooks/useLoadingAndError';
+import useLoadingAndError from 'src/hooks/useLoadingAndError';
 import { IAutoListItem } from './AutoList';
 
 const useAutoList = <TIn>(

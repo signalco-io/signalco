@@ -4,6 +4,7 @@ import {
   LinearProgress, Link,
   Stack,
   TextField,
+  Tooltip,
   Typography
 } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -60,11 +61,13 @@ const ErrorRow = (props: IErrorProps) => {
 const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
   if (typeof props.value === 'string' && isAbsoluteUrl(props.value as string))
     return (
-      <Box title={props.link || props.value} onClick={props.hasClick ? props.onClick : undefined} sx={{ cursor: props.hasClick ? 'pointer' : 'default' }}>
-        <Link href={props.link || props.value} rel="noopener" target="_blank">
-          <OpenInNewIcon style={props.style} fontSize="small" />
-        </Link>
-      </Box>
+      <Tooltip title={props.link || props.value}>
+        <Box onClick={props.hasClick ? props.onClick : undefined} sx={{ cursor: props.hasClick ? 'pointer' : 'default' }}>
+          <Link href={props.link || props.value} rel="noopener" target="_blank">
+            <OpenInNewIcon style={props.style} fontSize="small" />
+          </Link>
+        </Box>
+      </Tooltip>
     );
 
   let Wrapper = ({ children }: ChildrenProps) => <>{children}</>;
@@ -120,7 +123,7 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
 
   return (
     <Stack spacing={1} sx={{ height: '100%' }}>
-      {!props.hideSearch && showSearch && <TextField label={props.localize ? props.localize('Search') : 'Search...'} sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
+      {!props.hideSearch && showSearch && <TextField label={props.localize ? props.localize('SearchLabel') : 'Search...'} sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ overflow: 'auto', display: 'grid' }}>
           {props.isLoading && <LinearProgress />}

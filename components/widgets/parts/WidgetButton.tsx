@@ -1,11 +1,10 @@
 import { ButtonBase, Icon, Stack } from '@mui/material';
-import { IDeviceTargetWithValueFallback } from '../../../src/devices/Device';
 import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { DefaultHeight, DefaultTargetWithValue, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import { WidgetSharedProps } from '../Widget';
-import { executeStateActionsAsync } from './WidgetState';
+import { executeStateActionsAsync, StateAction } from './WidgetState';
 
 const stateOptions: IWidgetConfigurationOption[] = [
     { label: 'Icon', name: 'icon', type: 'string', optional: true },
@@ -21,8 +20,8 @@ export default function WidgetButton(props: WidgetSharedProps) {
 
     const handleActionRequest = () => {
         const targetArray = Array.isArray(config.target) ? config.target : [config.target];
-        executeStateActionsAsync((targetArray as IDeviceTargetWithValueFallback[]).map(d => ({
-            deviceId: d.deviceId,
+        executeStateActionsAsync((targetArray as StateAction[]).map(d => ({
+            entityId: d.entityId,
             channelName: d.channelName,
             contactName: d.contactName,
             valueSerialized: d.valueSerialized,

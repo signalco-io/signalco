@@ -2,7 +2,7 @@ import { ArrowUpward, Stop, ArrowDownward } from '@mui/icons-material';
 import { Button, Grid, Stack, Typography } from '@mui/material';
 import dynamic from 'next/dynamic';
 import React, { useMemo } from 'react';
-import useDevice from '../../../src/hooks/useDevice';
+import useEntity from '../../../src/hooks/useEntity';
 import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
@@ -15,9 +15,10 @@ const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
 const WidgetShades = (props: WidgetSharedProps) => {
     const { config } = props;
-    const device = useDevice(config?.target?.deviceId);
+    const entity = useEntity(config?.target?.entityId);
+    const entityId = entity.item?.id;
 
-    const label = props.config?.label || device?.alias || '';
+    const label = props.config?.label || entity?.item?.alias || '';
 
     // TODO: Calc from source value
     const shadePerc = 0.3;
@@ -25,17 +26,17 @@ const WidgetShades = (props: WidgetSharedProps) => {
     // TODO: Move outside of component
     const stateOptions: IWidgetConfigurationOption[] = useMemo(() => [
         { name: 'target', label: 'Target', type: 'deviceTarget' },
-        { name: 'targetContactUp', label: 'Up button', type: 'contactTarget', data: device?.id },
-        { name: 'targetContactDown', label: 'Down button', type: 'contactTarget', data: device?.id },
-        { name: 'stopAfter', label: 'Stop after', type: 'number', dataUnit: 'seconds', data: device?.id, optional: true },
+        { name: 'targetContactUp', label: 'Up button', type: 'contactTarget', data: entityId },
+        { name: 'targetContactDown', label: 'Down button', type: 'contactTarget', data: entityId },
+        { name: 'stopAfter', label: 'Stop after', type: 'number', dataUnit: 'seconds', data: entityId, optional: true },
         DefaultWidth(4)
-    ], [device]);
+    ], [entityId]);
 
     useWidgetOptions(stateOptions, props);
     useWidgetActive(true, props);
 
     const handleStateChangeRequest = (direction: 'up' | 'down' | 'stop') => {
-        if (typeof device === 'undefined') {
+        if (typeof entityId === 'undefined') {
             console.warn('State change requested but device is undefined.');
             PageNotificationService.show('Can\'t execute action, widget is not loaded yet.', 'warning');
             return;
@@ -43,8 +44,8 @@ const WidgetShades = (props: WidgetSharedProps) => {
 
         const stopActions = (delay: number = 0) => {
             return [
-                { deviceId: device.id, channelName: config?.targetContactDown?.channelName, contactName: config?.targetContactDown?.contactName, valueSerialized: 'false', delay },
-                { deviceId: device.id, channelName: config?.targetContactUp?.channelName, contactName: config?.targetContactUp?.contactName, valueSerialized: 'false', delay },
+                { entityId: entityId, channelName: config?.targetContactDown?.channelName, contactName: config?.targetContactDown?.contactName, valueSerialized: 'false', delay },
+                { entityId: entityId, channelName: config?.targetContactUp?.channelName, contactName: config?.targetContactUp?.contactName, valueSerialized: 'false', delay },
             ];
         }
 
@@ -53,7 +54,7 @@ const WidgetShades = (props: WidgetSharedProps) => {
         switch (direction) {
             case 'up':
                 actions.push({
-                    deviceId: device.id,
+                    entityId: entityId,
                     channelName: config?.targetContactUp?.channelName,
                     contactName: config?.targetContactUp?.contactName,
                     valueSerialized: 'true'
@@ -61,7 +62,7 @@ const WidgetShades = (props: WidgetSharedProps) => {
                 break;
             case 'down':
                 actions.push({
-                    deviceId: device.id,
+                    entityId: entityId,
                     channelName: config?.targetContactDown?.channelName,
                     contactName: config?.targetContactDown?.contactName,
                     valueSerialized: 'true'

@@ -10,12 +10,12 @@ import { LoadingButton } from '@mui/lab';
 import { widgetType } from '../widgets/Widget';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import dynamic from 'next/dynamic';
-import { useLoadAndError } from '../../src/hooks/useLoadingAndError';
 import Image from 'next/image';
 import useHashParam from '../../src/hooks/useHashParam';
 import useDashboardsUpdateChecker from './useDashboardsUpdateChecker';
 import useLocale from '../../src/hooks/useLocale';
 import Loadable from '../shared/Loadable/Loadable';
+import useLoadAndError from 'src/hooks/useLoadAndError';
 
 const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 
@@ -57,10 +57,14 @@ const Dashboards = observer(() => {
     };
 
     const handleNewDashboard = async () => {
-        const newDashboardId = await DashboardsRepository.saveDashboardAsync({
-            name: 'New dashboard'
-        });
-        setDashboardIdHash(newDashboardId);
+        try {
+            const newDashboardId = await DashboardsRepository.saveDashboardAsync({
+                name: 'New dashboard'
+            });
+            setDashboardIdHash(newDashboardId);
+        } catch (err) {
+            PageNotificationService.show(t('NewDashboardErrorUnknown'), 'error');
+        }
     };
 
     const [showWidgetStore, setShowWidgetStore] = useState(false);
@@ -110,7 +114,7 @@ const Dashboards = observer(() => {
                                             <Image priority width={280} height={213} alt={t('NoDashboardsPlaceholder')} src="/assets/placeholders/placeholder-no-dashboards.svg" />
                                             <Typography variant="h1">{t('NoDashboardsPlaceholder')}</Typography>
                                             <Typography textAlign="center" color="textSecondary">{t('NoDashboardsHelpText')}</Typography>
-                                            <Button variant="contained" onClick={handleNewDashboard}>{t('NewDahsboard')}</Button>
+                                            <Button variant="contained" onClick={handleNewDashboard}>{t('NewDashboard')}</Button>
                                         </Stack>
                                     </Stack>
                                 </Stack>

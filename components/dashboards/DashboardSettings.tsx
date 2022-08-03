@@ -60,7 +60,7 @@ const DashboardSettings = (props: IDashboardSettingsProps) => {
                     <ConfirmDeleteButton
                         buttonLabel={t('DeleteButtonLabel')}
                         title={t('DeleteTitle')}
-                        expectedConfirmText={name || t('ConfirmDialogExpectedText')}
+                        expectedConfirmText={dashboard?.name || t('ConfirmDialogExpectedText')}
                         onConfirm={handleDashboardDelete} />
                 </Stack>
             </Stack>

@@ -7,8 +7,8 @@ export default function ApiBadge(props: { force?: 'dev' | 'prod', style?: React.
     if (appSettingsProvider.isDeveloper) {
         return <Chip
             sx={{ ...style }}
-            color={force === 'prod' || appSettingsProvider.apiIsProduction ? 'info' : 'warning'}
-            label={force === 'prod' || appSettingsProvider.apiIsProduction ? 'prod' : 'dev'}
+            color={(force && force === 'prod') || (!force && appSettingsProvider.apiIsProduction) ? 'info' : 'warning'}
+            label={(force && force === 'prod') || (!force && appSettingsProvider.apiIsProduction) ? 'prod' : 'dev'}
             size="small" />;
     }
 

@@ -1,23 +1,16 @@
-import { useState } from 'react';
-import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
+import { useCallback, useState } from 'react';
+import useWindowEvent from './useWindowEvent';
 
-const useWindowWidth = () => {
-    const [width, setWidth] = useState<number | undefined>(undefined);
+const browser = typeof window !== 'undefined';
 
-    useIsomorphicLayoutEffect(() => {
-        function updateNumberOfColumns() {
-            if (width !== window.innerWidth)
-                setWidth(window.innerWidth);
-        }
+export default function useWindowWidth() {
+    const [width, setWidth] = useState<number | undefined>(browser ? window.innerWidth : undefined);
 
-        window.addEventListener('resize', updateNumberOfColumns);
+    const updateNumberOfColumns = useCallback(() => {
+        setWidth(window.innerWidth || 0);
+    }, []);
 
-        updateNumberOfColumns();
-
-        return () => window.removeEventListener('resize', updateNumberOfColumns);
-    }, [width]);
+    useWindowEvent('resize', updateNumberOfColumns);
 
     return width;
-};
-
-export default useWindowWidth;
+}

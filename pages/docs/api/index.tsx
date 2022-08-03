@@ -5,7 +5,6 @@ import axios, { AxiosError, Method } from 'axios';
 import { useCallback, useState } from 'react';
 import { PageFullLayout } from '../../../components/layouts/PageFullLayout';
 import { OpenAPIV3 } from 'openapi-types';
-import { useLoadAndError } from '../../../src/hooks/useLoadingAndError';
 import Link from 'next/link';
 import useHashParam from '../../../src/hooks/useHashParam';
 import CopyToClipboardInput from '../../../components/shared/form/CopyToClipboardInput';
@@ -20,6 +19,7 @@ import { ObjectDictAny } from '../../../src/sharedTypes';
 import SendIcon from '@mui/icons-material/Send';
 import CodeEditor from '../../../components/code/CodeEditor';
 import appSettingsProvider from '../../../src/services/AppSettingsProvider';
+import useLoadAndError from 'src/hooks/useLoadAndError';
 
 type ChipColors = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
 
@@ -501,7 +501,9 @@ async function getOpenApiDoc(url: string) {
 const ApiContext = React.createContext<OpenAPIV3.Document | undefined>(undefined);
 
 const DocsApiPage = () => {
-    const url = appSettingsProvider.isDeveloper ? 'https://api.signalco.dev/api/swagger.json' : 'https://api.signalco.io/api/swagger.json';
+    const url = appSettingsProvider.isDeveloper
+        ? 'https://api.signalco.dev/api/swagger.json'
+        : 'https://api.signalco.io/api/swagger.json';
     const apiRequest = useCallback(() => getOpenApiDoc(url), [url]);
     const { item: api, isLoading, error } = useLoadAndError<OpenAPIV3.Document>(apiRequest);
 
