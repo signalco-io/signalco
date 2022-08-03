@@ -164,6 +164,7 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
 
     const handleContactSelected = (target: IContactPointerPartial | undefined) => {
         onSelected(target, undefined);
+        console.debug('contact selected', target);
         if (!selectValue && target?.channelName && target?.contactName) {
             onClose();
         }

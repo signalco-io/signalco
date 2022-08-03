@@ -19,6 +19,7 @@
                 "PickNightTheme": "Odaberite noćnu temu"
             },
             "ShareEntityChip": {
+                "Share": "Dijeli s korisnikom...",
                 "Cancel": "Otkaži",
                 "Email": "Email adresa",
                 "SendInvitation": "Pošalji pozivnicu",
@@ -79,6 +80,7 @@
             "lastActivity": "Posljednja aktivnost",
             "lastUpdate": "Zadnja promjena",
             "name": "Naziv",
+            "channel": "Kanal",
             "shared": "Dijeljeno",
             "value": "Vrijednost"
         },

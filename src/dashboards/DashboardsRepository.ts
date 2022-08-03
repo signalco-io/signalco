@@ -77,7 +77,7 @@ class DashboardModel implements IDashboardModel {
 }
 
 function dashboardModelFromEntity(entity: IEntityDetails, order: number) {
-    const configurationSerialized = entity.contacts.find(c => c.contactName === 'configuration');
+    const configurationSerialized = entity.contacts.find(c => c.channelName === 'config' && c.contactName === 'configuration');
     const dashboard = new DashboardModel(
         entity.id,
         entity.alias,
@@ -243,6 +243,7 @@ class DashboardsRepository {
         console.debug('Checking for dashboard updates...');
 
         const remoteDashboards = await this._getRemoteDahboardsAsync();
+        console.log('remote dashboards', remoteDashboards)
 
         const widgetEquals = (a: IWidget, b: IWidget) => {
             return a.order === b.order &&
@@ -260,11 +261,9 @@ class DashboardsRepository {
             const sharedEqual = localDashboard != null && sequenceEqual(orderBy(remoteDashboard.sharedWith, userOrder), orderBy(localDashboard.sharedWith, userOrder), userEquals);
             const widgetsEqual = localDashboard != null && sequenceEqual(remoteDashboard.widgets, localDashboard.widgets, widgetEquals);
             if (localDashboard == null ||
-                remoteDashboard.timeStamp == null ||
-                localDashboard.timeStamp == null ||
                 !sharedEqual ||
                 !widgetsEqual ||
-                localDashboard.timeStamp < remoteDashboard.timeStamp) {
+                (typeof remoteDashboard.timeStamp !== 'undefined' && typeof localDashboard.timeStamp !== 'undefined' && localDashboard.timeStamp < remoteDashboard.timeStamp)) {
                 this.isUpdateAvailable = true;
 
                 // Log difference
@@ -365,7 +364,12 @@ class DashboardsRepository {
 
     private async _setRemoteDashboardAsync(dashboard: IDashboardSetModel): Promise<string> {
         const id = await EntityRepository.upsertAsync(dashboard.id, 2, dashboard.name);
-        await ContactRepository.setAsync({entityId: id, channelName: 'config', contactName: 'configuration'}, dashboard.configurationSerialized);
+        await ContactRepository.setAsync({
+                entityId: id,
+                channelName: 'config',
+                contactName: 'configuration'
+            },
+            dashboard.configurationSerialized);
         return id;
     }
 

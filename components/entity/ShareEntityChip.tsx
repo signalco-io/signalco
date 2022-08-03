@@ -1,4 +1,4 @@
-import { Chip, IconButton, Slide, Stack, TextField } from '@mui/material';
+import { Chip, IconButton, Slide, Stack, TextField, Tooltip } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
 import { useState } from 'react';
@@ -25,7 +25,7 @@ interface IShareEntityModalProps {
 
 function ShareEntityModal(props: IShareEntityModalProps) {
     const { entity, entityType, onClose } = props;
-    const { t } = useLocale('App', 'Components', 'ShareEntityModal');
+    const { t } = useLocale('App', 'Components', 'ShareEntityChip');
     const [isShareWithNewOpen, setIsShareWithNewOpen] = useState(false);
     const [shareWithNewEmail, setShareWithNewEmail] = useState('');
     const handleShareWithUser = () => {
@@ -54,9 +54,11 @@ function ShareEntityModal(props: IShareEntityModalProps) {
             isOpen
             title={`${t('ShareWith')} (${entity?.sharedWith?.length || 1})`}
             titleActions={(
-                <IconButton onClick={handleShareWithUser} size="large">
-                    <ShareIcon />
-                </IconButton>
+                <Tooltip title={t('Share')}>
+                    <IconButton onClick={handleShareWithUser} size="large">
+                        <ShareIcon />
+                    </IconButton>
+                </Tooltip>
             )}
             onClose={onClose}
             noPadding

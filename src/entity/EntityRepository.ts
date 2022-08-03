@@ -29,17 +29,18 @@ class EntityRepository {
         return (await this.allAsync()).filter(e => e.type === type);
     }
 
-    async contactAsync(_: IContactPointer) : Promise<IContact | undefined> {
-        throw new Error('Method not implemented.');
+    async contactAsync(pointer: IContactPointer) : Promise<IContact | undefined> {
+        const entity = await this.byIdAsync(pointer.entityId);
+        return entity?.contacts.find(c => c.channelName === pointer.channelName && c.contactName === c.contactName);
     }
 
     async upsertAsync(id: string | undefined, type: number, alias: string) {
         // TODO: Optimize by using cache when applicable
-        return await HttpService.requestAsync('/entity', 'post', {
+        return (await HttpService.requestAsync('/entity', 'post', {
             id: id,
             type: type,
             alias: alias
-        }) as string;
+        }) as {id: string})?.id;
     }
 }
 

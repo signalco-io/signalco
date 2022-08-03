@@ -61,14 +61,14 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
     if (props.option.type === 'deviceContactTarget') {
         // Handle multi-contact target
         if (props.option.multiple) {
-            console.log('options multiple')
+            console.debug('widget config - options multiple')
             const valueItems = typeof props.value === 'undefined' ? [] : (Array.isArray(props.value) ? props.value : [props.value]);
             const elements = [];
-            console.log('multiple value', valueItems)
+            console.debug('widget config - multiple value', valueItems)
             for (let i = 0; i <= valueItems.length; i++) {
                 const value = valueItems[i];
-                console.log('multiple value', value)
-                elements.push(<DisplayEntityTarget selectContact selectValue key={`option-${i}`} target={value} onChanged={t => {
+                console.debug('widget config - multiple value', value)
+                elements.push(<DisplayEntityTarget selectContact key={`option-${i}`} target={value} onChanged={t => {
                     const newValues = [...valueItems];
                     newValues[i] = t;
                     return props.onChange(newValues.filter(i => typeof i !== 'undefined'));
@@ -79,7 +79,7 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
         }
 
         // Handle single-contact target
-        return <DisplayEntityTarget selectContact selectValue target={props.value} onChanged={t => props.onChange(t)} />
+        return <DisplayEntityTarget selectContact target={props.value} onChanged={t => props.onChange(t)} />
     } else if (props.option.type === 'deviceContactTargetWithValue') {
         return <Stack direction="row" spacing={1}>
             <WidgetConfigurationOption

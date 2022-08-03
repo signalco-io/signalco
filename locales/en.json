@@ -41,6 +41,7 @@
             "Actions": "Actions",
             "States": "States",
             "value": "Value",
+            "channel": "Channel",
             "lastUpdate": "Last update",
             "history": "history",
             "Table": "Table",
@@ -137,6 +138,7 @@
             "NoDashboardsPlaceholder": "No Dashboards",
             "NoDashboardsHelpText": "You don't have any dashboards. Create a dashboard to get started.",
             "NewDashboard": "New Dashboard",
+            "NewDashboardErrorUnknown": "Failed to create dashboard. Please try again.",
             "Dashboard": "Dashboard",
             "ToggleFullscreen": "Toggle fullscreen",
             "Settings": "Settings",
@@ -185,6 +187,7 @@
                 "PickNightTheme": "Pick night theme"
             },
             "ShareEntityChip": {
+                "Share": "Share with user...",
                 "ShareWith": "Share with",
                 "Email": "Email address",
                 "SendInvitation": "Send invitation",

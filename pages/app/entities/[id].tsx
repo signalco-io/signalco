@@ -1,4 +1,4 @@
-import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, Grid, Stack, Typography } from '@mui/material';
+import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, Grid, Stack, Typography, CardMedia } from '@mui/material';
 import { useRouter } from 'next/router'
 import React from 'react';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
@@ -11,6 +11,11 @@ import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDelete
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import useLocale from '../../../src/hooks/useLocale';
 import EntityRepository from 'src/entity/EntityRepository';
+import useHashParam from 'src/hooks/useHashParam';
+import AutoTable, { IAutoTableItem } from 'components/shared/table/AutoTable';
+import useContacts from 'src/hooks/useContacts';
+import IContact from 'src/contacts/IContact';
+import Timeago from 'components/shared/time/Timeago';
 
 // const DynamicGraph = dynamic(() => import('../../../components/graphs/Graph'));
 
@@ -312,8 +317,8 @@ const DeviceDetails = () => {
     const EntityInformation = () => (
         <Card>
             <CardHeader title={t('Information')} />
-            <CardContent>
-                <Accordion elevation={3}>
+            <CardMedia>
+                <Accordion square TransitionProps={{ unmountOnExit: true }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography>{t('Advanced')}</Typography>
                     </AccordionSummary>
@@ -326,7 +331,7 @@ const DeviceDetails = () => {
                                 <CopyToClipboardInput id="device-id" readOnly fullWidth size="small" value={entity?.id ?? ''} />
                             </Grid>
                             <Grid item xs={3}>
-                                <span>{t('Identifier')}</span>
+                                <span>{t('DeleteTitle')}</span>
                             </Grid>
                             <Grid item>
                                 {entity && (
@@ -340,7 +345,7 @@ const DeviceDetails = () => {
                         </Grid>
                     </AccordionDetails>
                 </Accordion>
-            </CardContent>
+            </CardMedia>
         </Card>
     );
 
@@ -372,28 +377,38 @@ const DeviceDetails = () => {
     //     </Card>
     // );
 
-    // const EntityStates = () => {
-    //     const [contactNameHash, setContactNameHash] = useHashParam('contact');
-    //     const [channelNameHash, setChannelNameHash] = useHashParam('channel');
-    //     const handleStateSelected = async (row: IStateTableItem) => {
-    //         await setChannelNameHash(row._channelName);
-    //         await setContactNameHash(row._contactName);
-    //     };
+    const ContactsTable = () => {
+        const contacts = entity?.contacts;
+        const tableItems = contacts?.map(c => ({
+            id: c.contactName,
+            name: c.contactName,
+            channel: c.channelName,
+            value: c.valueSerialized,
+            lastActivity: <Timeago date={c.timeStamp} live />
+        }));
+        const isLoading = false;
+        const error = undefined;
+        // const [contactNameHash, setContactNameHash] = useHashParam('contactName');
+        // const [channelNameHash, setChannelNameHash] = useHashParam('channelName');
+        const handleStateSelected = async (_: IAutoTableItem) => {
+            // await setChannelNameHash(row._channelName);
+            // await setContactNameHash(row._contactName);
+        };
 
-    //     return (
-    //         <Card>
-    //             <CardHeader title={t('States')} />
-    //             <CardMedia>
-    //                 <Stack spacing={4}>
-    //                     <AutoTable error={error} isLoading={isLoading} items={stateTableItems} onRowClick={handleStateSelected} localize={t} />
-    //                     {id && contactNameHash && channelNameHash && (
-    //                         <ContactHistory entityId={id} />
-    //                     )}
-    //                 </Stack>
-    //             </CardMedia>
-    //         </Card>
-    //     );
-    // };
+        return (
+            <Card>
+                <CardHeader title={t('States')} />
+                <CardMedia>
+                    <Stack spacing={4}>
+                        <AutoTable error={error} isLoading={isLoading} items={tableItems} onRowClick={handleStateSelected} localize={t} />
+                        {/* {id && contactNameHash && channelNameHash && (
+                            <ContactHistory entityId={id} />
+                        )} */}
+                    </Stack>
+                </CardMedia>
+            </Card>
+        );
+    };
 
     const handleRename = async (newAlias: string) => {
         if (id) {
@@ -420,6 +435,9 @@ const DeviceDetails = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6} md={4}>
                         <EntityInformation />
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={8}>
+                        <ContactsTable />
                     </Grid>
                     {/* <Grid item xs={12} sm={6} md={4}>
                         <EntityActions />
