@@ -36,6 +36,7 @@ import CurrentUserProvider from '../src/services/CurrentUserProvider';
 import LocalStorageService from '../src/services/LocalStorageService';
 import useUserSetting from '../src/hooks/useUserSetting';
 import ApiBadge from './development/ApiBadge';
+import useIsMobile from 'src/hooks/useIsMobile';
 
 const navItems = [
   { label: 'Dashboards', path: '/app', icon: DashboardSharpIcon },
@@ -83,8 +84,7 @@ const UserProfileAvatar = () => {
   const maxWidth = navWidth - 16;
   const router = useRouter();
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useIsMobile();
 
   const user = CurrentUserProvider.getCurrentUser();
   const [userNickName] = useUserSetting<string>('nickname', user?.name ?? '');
@@ -120,7 +120,7 @@ const UserProfileAvatar = () => {
 
 export const useNavWidth = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useIsMobile();
   const isLaptopOrTablet = useMediaQuery(theme.breakpoints.between('sm', 'lg'));
 
   if (isMobile)
@@ -130,7 +130,7 @@ export const useNavWidth = () => {
 
 const NavLink = ({ path, Icon, active, label, onClick }: { path: string, Icon: SvgIconComponent, active: boolean, label: string, onClick?: () => void }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useIsMobile();
   const isNotDesktop = useMediaQuery(theme.breakpoints.down('lg'));
 
   return (
@@ -163,7 +163,7 @@ const NavProfile = () => {
   const { t } = useLocale('App', 'Nav');
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!isMobile) setMobileMenuOpen(false);

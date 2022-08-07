@@ -1,0 +1,143 @@
+[
+    {
+        "id": "slack",
+        "label": "Slack",
+        "categories": [
+            "communication"
+        ],
+        "description": "Slack is a new generation communication application. It unites your team and your apps for better information sharing and collaboration."
+    },
+    {
+        "id": "irobot",
+        "label": "iRobot",
+        "categories": [
+            "smart-home"
+        ]
+    },
+    {
+        "id": "philips-hue",
+        "label": "Philips Hue",
+        "categories": [
+            "smart-home"
+        ]
+    },
+    {
+        "id": "samsung",
+        "label": "Samsung",
+        "categories": [
+            "smart-home"
+        ]
+    },
+    {
+        "id": "octoprint",
+        "label": "Octoprint",
+        "categories": [
+            "smart-home",
+            "productivity"
+        ],
+        "planned": true
+    },
+    {
+        "id": "xiaomi",
+        "label": "Xiaomi",
+        "categories": [
+            "smart-home"
+        ],
+        "planned": true
+    },
+    {
+        "id": "miflora",
+        "label": "Mi Flora",
+        "categories": [
+            "smart-home"
+        ]
+    },
+    {
+        "id": "esphome",
+        "label": "ESPHome",
+        "categories": [
+            "smart-home"
+        ],
+        "planned": true
+    },
+    {
+        "id": "zapier",
+        "label": "Zapier",
+        "categories": [
+            "productivity"
+        ],
+        "planned": true
+    },
+    {
+        "id": "trello",
+        "label": "Trello",
+        "categories": [
+            "productivity"
+        ],
+        "planned": true
+    },
+    {
+        "id": "microsoft-todo",
+        "label": "Microsoft To Do",
+        "categories": [
+            "productivity"
+        ],
+        "planned": true
+    },
+    {
+        "id": "microsoft-azuredevops",
+        "label": "Microsoft Azure DevOps",
+        "categories": [
+            "productivity"
+        ],
+        "planned": true
+    },
+    {
+        "id": "divoom",
+        "label": "Divoom",
+        "categories": [
+            "smart-home",
+            "media"
+        ],
+        "planned": true
+    },
+    {
+        "id": "zigbee2mqtt",
+        "label": "Zigbee2MQTT",
+        "categories": [
+            "smart-home"
+        ]
+    },
+    {
+        "id": "github-app",
+        "label": "GitHub",
+        "categories": [
+            "productivity"
+        ],
+        "planned": true
+    },
+    {
+        "id": "http-rest",
+        "label": "HTTP REST",
+        "categories": [
+            "productivity"
+        ],
+        "planned": true
+    },
+    {
+        "id": "plex",
+        "label": "Plex",
+        "categories": [
+            "media"
+        ],
+        "planned": true
+    },
+    {
+        "id": "broadlink",
+        "label": "Broadlink",
+        "categories": [
+            "smart-home"
+        ],
+        "planned": true
+    }
+]

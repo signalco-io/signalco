@@ -10,8 +10,10 @@ import { ChildrenProps } from '../src/sharedTypes';
 import IAppContext from '../src/appContext/IAppContext';
 import useAppTheme from '../src/hooks/useAppTheme';
 
-interface PageWithMetadata extends React.FunctionComponent {
+export interface PageWithMetadata extends React.FunctionComponent<any> {
   layout?: React.FunctionComponent | undefined
+  inDevelopment?: boolean | undefined,
+  title?: string | undefined
 };
 
 interface PageWithTitle extends React.FunctionComponent {
@@ -31,8 +33,9 @@ export default function App(props: AppProps) {
   const [themeContextState, setAppContextState] = React.useState<IAppContext>(themeContextDefault);
   useAppTheme(themeContextState, setAppContextState);
 
-  const Layout = (Component as PageWithMetadata).layout ?? ((props?: ChildrenProps) => <>{props?.children}</>);
-  const title = (Component as PageWithTitle).title;
+  const pageWithMetadata = (Component as PageWithMetadata);
+  const Layout = pageWithMetadata.layout ?? ((props?: ChildrenProps) => <>{props?.children}</>);
+  const title = pageWithMetadata.title;
 
   return (
     <>
