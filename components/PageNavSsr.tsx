@@ -5,6 +5,12 @@ import Link from 'next/link';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 
+const navLinks = [
+    { href: '/features', text: 'Features' },
+    { href: '/channels', text: 'Channels' },
+    { href: '/pricing', text: 'Pricing' }
+];
+
 export function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?: boolean; }) {
     const router = useRouter();
 
@@ -32,7 +38,12 @@ export function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?
                             <SignalcoLogotype height={42} />
                         </ButtonBase>
                     </Link>
-                    <Stack direction="row" alignItems="center" spacing={2}>
+                    <Stack direction="row" alignItems="center" spacing={{ xs: 1, sm: 2, md: 4 }}>
+                        {navLinks.map(nl => (
+                            <Link key={nl.href} href={nl.href} passHref>
+                                <Button variant="text" size="large" sx={{ fontWeight: 'bold' }}>{nl.text}</Button>
+                            </Link>
+                        ))}
                         <Link href="/app" prefetch={false} passHref>
                             <Button variant="contained" endIcon={<KeyboardArrowRightIcon fontSize="small" />}>App</Button>
                         </Link>

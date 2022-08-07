@@ -1,10 +1,7 @@
-import { Box, Button, Card, CardActionArea, CardContent, Checkbox, Chip, Grid, List, Typography } from '@mui/material';
+import { Card, CardActionArea, CardContent, Chip, Grid, Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import React from 'react';
-import { ArrowDownward as ArrowDownwardIcon, Cancel as CancelIcon, CheckCircle } from '@mui/icons-material';
+import { Cancel as CancelIcon, CheckCircle } from '@mui/icons-material';
 import Image from 'next/image';
 import { amber, green, grey } from '@mui/material/colors';
 import LaunchIcon from '@mui/icons-material/Launch';
@@ -15,60 +12,10 @@ import contentData from './content.json';
 import { PageLayout } from '../../components/layouts/PageLayout';
 import SignalcoLogo from '../../components/icons/SignalcoLogo';
 import useLocale from '../../src/hooks/useLocale';
-
-const FilterList = (props: { header: string, items: { id: string, label: string }[], truncate: number }) => {
-    const {
-        header,
-        items,
-        truncate
-    } = props;
-
-    const [checked, setChecked] = React.useState<string[]>([]);
-    const [isShowMore, setIsShowMore] = React.useState<boolean>(false);
-    const handleToggle = (value: string) => () => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
-
-        if (currentIndex === -1) {
-            newChecked.push(value);
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
-
-        setChecked(newChecked);
-    };
-    const handleToggleShowMore = () => setIsShowMore(true);
-
-    return (
-        <Stack>
-            <List subheader={
-                <Stack direction="row" spacing={1}>
-                    <Typography>{header}</Typography>
-                    {(!isShowMore && items.length > truncate) && <Typography color="textSecondary">({items.length - truncate} more)</Typography>}
-                </Stack>}>
-                {items.slice(0, isShowMore ? items.length : truncate).map(item => (
-                    <ListItemButton key={item.id} role={undefined} onClick={handleToggle(item.id)} sx={{ py: 0 }}>
-                        <ListItemIcon>
-                            <Checkbox
-                                edge="start"
-                                checked={checked.indexOf(item.id) !== -1}
-                                tabIndex={-1}
-                                disableRipple
-                                inputProps={{ 'aria-labelledby': item.id }}
-                            />
-                        </ListItemIcon>
-                        <ListItemText id={item.id} primary={item.label} primaryTypographyProps={{ noWrap: true }} />
-                    </ListItemButton>
-                ))}
-            </List>
-            {(!isShowMore && items.length > truncate) && (
-                <Box>
-                    <Button startIcon={<ArrowDownwardIcon />} onClick={handleToggleShowMore}>Show all</Button>
-                </Box>
-            )}
-        </Stack>
-    );
-};
+import FilterList from 'components/shared/list/FilterList';
+import { PageWithMetadata } from 'pages/_app';
+import PageCenterHeader from 'components/pages/PageCenterHeader';
+import Gallery from 'components/gallery/Gallery';
 
 const StoreStockStatusBadge = (props: { status: number | undefined }) => {
     let Icon = CancelIcon;
@@ -112,7 +59,7 @@ const StoreItemThumb = (props: { id: string, name: string, features?: string[], 
     const { name, features, imageSrc, price, stockStatus } = props;
 
     return (
-        <Card variant="elevation">
+        <Card sx={{ width: '222px' }}>
             <CardActionArea>
                 <CardContent>
                     <Stack spacing={2}>
@@ -164,7 +111,13 @@ function stockStatus(id: string) {
     return 0;
 }
 
-const StoreIndex = (props: { categories: string[], brands: string[], communication: string[] }) => {
+interface StorePageProps {
+    categories: string[];
+    brands: string[];
+    communication: string[];
+}
+
+const StorePage: PageWithMetadata = (props: StorePageProps) => {
     const { t: tCategories } = useLocale('Store', 'Categories');
     const { t: tCommunication } = useLocale('Store', 'Communication');
     const categories = props.categories.map(c => ({ id: c, label: tCategories(c) }));
@@ -174,6 +127,7 @@ const StoreIndex = (props: { categories: string[], brands: string[], communicati
     const items = contentData.items.map(i => ({
         id: i.id,
         name: i.name,
+        label: i.name,
         features: [...i.categories, ...(i.communication ?? [])],
         imageSrc: i.imagesCount ? `/store/${i.id}_cover.png` : undefined,
         stockStatus: stockStatus(i.id)
@@ -184,37 +138,24 @@ const StoreIndex = (props: { categories: string[], brands: string[], communicati
 
     return (
         <Stack spacing={8}>
-            <Box sx={{ zIndex: -1 }}>
-                <Typography variant="h1">Discover your new smart home</Typography>
-            </Box>
-            <Stack direction="row" spacing={4}>
-                <Box sx={{ padding: 2, width: '100%', maxWidth: 360, height: 'fit-content' }}>
-                    <Stack spacing={4}>
-                        <FilterList header="Categories" items={categories} truncate={6} />
-                        <FilterList header="Brands" items={brands} truncate={6} />
-                        <FilterList header="Communication" items={communication} truncate={6} />
-                    </Stack>
-                </Box>
-                <Stack spacing={4}>
-                    <Stack direction="row" justifyContent="space-between">
-                        <Typography gutterBottom variant="h1">Found {items.length} products</Typography>
-                        <SelectItems label="Sort" value={selectedOrderByItems} items={orderByItems} onChange={handleOrderByItemsChange} />
-                    </Stack>
-                    <div>
-                        <Grid container spacing={3} alignContent="flex-start">
-                            {items.map(item => (
-                                <Grid item key={item.id} sx={{ width: '252px' }}>
-                                    <StoreItemThumb {...item} />
-                                </Grid>
-                            ))}
-                        </Grid>
-                    </div>
-                </Stack>
-            </Stack>
+            <PageCenterHeader header="Store" subHeader="Discover your new smart home" />
+            <Gallery
+                items={items}
+                itemComponent={StoreItemThumb}
+                filters={(compact: boolean) => (
+                    <>
+                        <FilterList header="Categories" items={categories} truncate={6} multiple compact={compact} />
+                        <FilterList header="Brands" items={brands} truncate={6} multiple compact={compact} />
+                        <FilterList header="Communication" items={communication} truncate={6} multiple compact={compact} />
+                    </>
+                )}
+                gridHeader={`Found ${items.length} products`}
+                gridFilters={(<SelectItems label="Sort" value={selectedOrderByItems} items={orderByItems} onChange={handleOrderByItemsChange} />)} />
         </Stack>
     );
 };
 
-StoreIndex.layout = PageLayout;
+StorePage.layout = PageLayout;
+StorePage.inDevelopment = true;
 
-export default StoreIndex;
+export default StorePage;
