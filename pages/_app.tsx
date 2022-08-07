@@ -16,10 +16,6 @@ export interface PageWithMetadata extends React.FunctionComponent<any> {
   title?: string | undefined
 };
 
-interface PageWithTitle extends React.FunctionComponent {
-  title?: string | undefined;
-};
-
 const themeContextDefault: IAppContext = {
   theme: 'light',
   isDark: false
