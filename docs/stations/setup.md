@@ -32,6 +32,8 @@ sudo chmod +x ./ss-install.sh
 sudo ./ss-install.sh
 ```
 
+After installation you should restart the device. When connecting again use `signalcostation` as hostname as it was changed during the installation: `ssh root@signalcostation` with password `orangepi`.
+
 #### Install Zigbee2MQTT
 
 ```bash
