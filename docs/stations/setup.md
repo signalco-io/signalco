@@ -51,3 +51,7 @@ sudo journalctl -u signalcostation.service -f
 # View Zigbee2MQTT logs
 sudo journalctl -u zigbee2mqtt.service -f
 ```
+
+#### Post-install tips
+
+- Change root password
