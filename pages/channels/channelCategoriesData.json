@@ -1,0 +1,18 @@
+[
+    {
+        "id": "communication",
+        "label": "Communication"
+    },
+    {
+        "id": "media",
+        "label": "Media"
+    },
+    {
+        "id": "productivity",
+        "label": "Productivity"
+    },
+    {
+        "id": "smart-home",
+        "label": "Smart home"
+    }
+]

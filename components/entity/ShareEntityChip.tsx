@@ -52,7 +52,7 @@ function ShareEntityModal(props: IShareEntityModalProps) {
     return (
         <ConfigurationDialog
             isOpen
-            title={`${t('ShareWith')} (${entity?.sharedWith?.length || 1})`}
+            title={t('ShareWith')}
             titleActions={(
                 <Tooltip title={t('Share')}>
                     <IconButton onClick={handleShareWithUser} size="large">

@@ -30,6 +30,8 @@
             "SearchLabel": "Search...",
             "DeleteButtonLabel": "Delete...",
             "DeleteTitle": "Delete entity",
+            "DeleteErrorUnknown": "Failed to delete entity. Please try again.",
+            "ConfirmDialogExpectedText": "confirm",
             "General": "General",
             "Information": "Information",
             "LastActivity": "Last Activity",
@@ -188,7 +190,7 @@
             },
             "ShareEntityChip": {
                 "Share": "Share with user...",
-                "ShareWith": "Share with",
+                "ShareWith": "Shared with",
                 "Email": "Email address",
                 "SendInvitation": "Send invitation",
                 "Cancel": "Cancel"

@@ -1,18 +1,19 @@
-import { Accordion, Box, AccordionDetails, AccordionSummary, Card, CardHeader, Grid, Stack, Typography, CardMedia } from '@mui/material';
+import { Box, Card, CardHeader, Stack, CardMedia, Button, Menu, MenuItem, ListItemText } from '@mui/material';
 import { useRouter } from 'next/router'
-import React from 'react';
+import React, { useState } from 'react';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import { observer } from 'mobx-react-lite';
-import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
-import CopyToClipboardInput from '../../../components/shared/form/CopyToClipboardInput';
 import useEntity from '../../../src/hooks/useEntity';
 import EditableInput from '../../../components/shared/form/EditableInput';
-import ConfirmDeleteButton from '../../../components/shared/dialog/ConfirmDeleteButton';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import useLocale from '../../../src/hooks/useLocale';
 import EntityRepository from 'src/entity/EntityRepository';
 import AutoTable, { IAutoTableItem } from 'components/shared/table/AutoTable';
 import Timeago from 'components/shared/time/Timeago';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { bindMenu, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
+import PageNotificationService from 'src/notifications/PageNotificationService';
+import ConfirmDeleteDialog from 'components/shared/dialog/ConfirmDeleteDialog';
 
 // const DynamicGraph = dynamic(() => import('../../../components/graphs/Graph'));
 
@@ -252,6 +253,51 @@ import Timeago from 'components/shared/time/Timeago';
 //     );
 // };
 
+function EntityOptions(props: { id: string | undefined }) {
+    const { id } = props;
+    const { t } = useLocale('App', 'Entities');
+    const router = useRouter();
+    const popupState = usePopupState({ variant: 'popover', popupId: 'entityOptionsMenu' });
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+    const { item: entity } = useEntity(id);
+
+    const handleDelete = () => {
+        popupState.close();
+        setIsDeleteOpen(true);
+    };
+
+    const handleDeleteConfirm = async () => {
+        try {
+            if (typeof id === 'undefined')
+                throw new Error('Entity identifier not present.');
+
+            await EntityRepository.deleteAsync(id);
+            router.push('/app/entities');
+        } catch (err) {
+            PageNotificationService.show(t('DeleteErrorUnknown'))
+        }
+    };
+
+    return (
+        <>
+            <Button {...bindTrigger(popupState)}>
+                <MoreHorizIcon />
+            </Button>
+            <Menu  {...bindMenu(popupState)}>
+                <MenuItem onClick={handleDelete}>
+                    <ListItemText>{t('DeleteButtonLabel')}</ListItemText>
+                </MenuItem>
+            </Menu>
+            <ConfirmDeleteDialog
+                expectedConfirmText={entity?.alias || t('ConfirmDialogExpectedText')}
+                title={t('DeleteTitle')}
+                isOpen={isDeleteOpen}
+                onClose={() => setIsDeleteOpen(false)}
+                onConfirm={handleDeleteConfirm} />
+        </>
+    )
+}
+
 const DeviceDetails = () => {
     const router = useRouter();
     const { id: queryId } = router.query;
@@ -303,48 +349,6 @@ const DeviceDetails = () => {
     //         setIsLoading(false);
     //     }
     // }, [device]);
-
-    const handleDelete = async () => {
-        if (id) {
-            await EntityRepository.deleteAsync(id);
-            router.push('/app/entities');
-        }
-    };
-
-    const EntityInformation = () => (
-        <Card>
-            <CardHeader title={t('Information')} />
-            <CardMedia>
-                <Accordion square TransitionProps={{ unmountOnExit: true }}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>{t('Advanced')}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Grid container spacing={2} alignItems="center">
-                            <Grid item xs={3}>
-                                <span>{t('ID')}</span>
-                            </Grid>
-                            <Grid item xs={9}>
-                                <CopyToClipboardInput id="device-id" readOnly fullWidth size="small" value={entity?.id ?? ''} />
-                            </Grid>
-                            <Grid item xs={3}>
-                                <span>{t('DeleteTitle')}</span>
-                            </Grid>
-                            <Grid item>
-                                {entity && (
-                                    <ConfirmDeleteButton
-                                        buttonLabel={t('DeleteButtonLabel')}
-                                        title={t('DeleteTitle')}
-                                        expectedConfirmText={entity?.alias ?? t('ConfirmDialogExpectedText')}
-                                        onConfirm={handleDelete} />
-                                )}
-                            </Grid>
-                        </Grid>
-                    </AccordionDetails>
-                </Accordion>
-            </CardMedia>
-        </Card>
-    );
 
     // const EntityActions = () => (
     //     <Card>
@@ -416,33 +420,23 @@ const DeviceDetails = () => {
     return (
         <Stack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
             <Stack sx={{ px: 2 }} spacing={1}>
-                <EditableInput
-                    sx={{
-                        fontWeight: 300,
-                        fontSize: { xs: 18, sm: 24 }
-                    }}
-                    text={entity?.alias || ''}
-                    noWrap
-                    onChange={handleRename} />
+                <Stack direction="row" spacing={1}>
+                    <EditableInput
+                        sx={{
+                            fontWeight: 300,
+                            fontSize: { xs: 18, sm: 24 }
+                        }}
+                        text={entity?.alias || ''}
+                        noWrap
+                        onChange={handleRename} />
+                    <EntityOptions id={id} />
+                </Stack>
                 <Stack direction="row">
                     <ShareEntityChip entity={entity} entityType={1} />
                 </Stack>
             </Stack>
             <Box sx={{ px: { xs: 1, sm: 2 } }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6} md={4}>
-                        <EntityInformation />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={8}>
-                        <ContactsTable />
-                    </Grid>
-                    {/* <Grid item xs={12} sm={6} md={4}>
-                        <EntityActions />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
-                        <EntityStates />
-                    </Grid> */}
-                </Grid>
+                <ContactsTable />
             </Box>
         </Stack>
     );

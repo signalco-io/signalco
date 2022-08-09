@@ -59,9 +59,7 @@ function SLink({ href, children }: { href: string; children: React.ReactElement 
             {typeof children === 'string' ? (
                 <Link underline="hover">{children}</Link>
             ) : (
-                <>
-                    {children}
-                </>
+                children
             )}
         </NextLink>
     );
