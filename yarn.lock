@@ -4212,10 +4212,10 @@
     "@typescript-eslint/types" "5.32.0"
     eslint-visitor-keys "^3.3.0"
 
-"@vvo/tzdb@6.52.0":
-  version "6.52.0"
-  resolved "https://registry.yarnpkg.com/@vvo/tzdb/-/tzdb-6.52.0.tgz#3cfde296f8a57adf89dbee86997084d70b50da85"
-  integrity sha512-GSTPXBCA66A42VdhTbxzUPdun8P2Rx9OQCQMr8ByuB+P74HJ6zxxrUKW2CzJlhyperjzlijjkMN84fotAYEeLQ==
+"@vvo/tzdb@6.53.0":
+  version "6.53.0"
+  resolved "https://registry.yarnpkg.com/@vvo/tzdb/-/tzdb-6.53.0.tgz#18e686f0aab56bd6895442b1f8ef5af26231de17"
+  integrity sha512-uWhOWRM0avXOaB0e73Kjz7o8XJNM29wcCO8/zA4ob3p/sfZQIQdy2kcuDN40lJS8j6jfCHLLXnaYE5EMiGdLbw==
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
