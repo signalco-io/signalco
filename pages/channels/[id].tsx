@@ -1,11 +1,11 @@
 import { Button, List, ListItem, ListItemButton, ListItemText, Paper, Stack, Typography } from '@mui/material';
 import ChannelLogo from 'components/channels/ChannelLogo';
 import { useRouter } from 'next/router';
-import { PageWithMetadata } from 'pages/_app';
 import { PageLayout } from '../../components/layouts/PageLayout';
 import channels from './channelsData.json';
 import categories from './channelCategoriesData.json';
 import ShareSocial from 'components/pages/ShareSocial';
+import { PageWithMetadata } from 'pages/_app';
 
 const ChannelPage: PageWithMetadata = () => {
     const router = useRouter();
