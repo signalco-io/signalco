@@ -5741,10 +5741,10 @@ clsx@^1.1.0, clsx@^1.1.1:
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
   integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
 
-cobe@0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/cobe/-/cobe-0.5.0.tgz#48fd9d77e3747eb692a2cdf99904d22bfe7e9989"
-  integrity sha512-iutLGC4FU0WyruiF0Rlq/iKsDtuM3GtsTd/bNi4gjT0eSOT9Mrpp/dGV46HYPaAYmebMsUFFdhQ5hqZZEChnPQ==
+cobe@0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/cobe/-/cobe-0.6.0.tgz#b2e73390002b2a7a977710fdf44e617af143b36e"
+  integrity sha512-+FuvBjhfxPMOGXkSzAmj3XVmXqq6vqKtufeg64axTr0ipBxOwGIpyXN6T6wR7SGRCueF/bkbyL2fMITtZwjUNQ==
   dependencies:
     phenomenon "^1.6.0"
 
