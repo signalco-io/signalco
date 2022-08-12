@@ -14,13 +14,14 @@ class SignalSignalRDeviceStateDto {
 class RealtimeService {
     private contactsHub?: HubConnection;
 
-    private async HandleDeviceStateAsync(state: SignalSignalRDeviceStateDto) {
-        if (typeof state.entityId === 'undefined' ||
-            typeof state.channelName === 'undefined' ||
-            typeof state.contactName === 'undefined' ||
-            typeof state.timeStamp === 'undefined') {
-        console.warn('Got device state with invalid values', state);
-        return;
+    private async HandleDeviceStateAsync(state: string) {
+        const change = JSON.parse(state) as SignalSignalRDeviceStateDto;
+        if (typeof change.entityId === 'undefined' ||
+            typeof change.channelName === 'undefined' ||
+            typeof change.contactName === 'undefined' ||
+            typeof change.timeStamp === 'undefined') {
+            console.warn('Got device state with invalid values', state);
+            return;
         }
 
         // TODO: Update local contact value

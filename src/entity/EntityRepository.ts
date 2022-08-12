@@ -4,13 +4,25 @@ import HttpService from '../services/HttpService';
 import IEntityDetails from './IEntityDetails';
 
 class EntityRepository {
+    constructor() {
+        this.allAsync = this.allAsync.bind(this);
+        this.byIdAsync = this.byIdAsync.bind(this);
+    }
+
+    private mapEntityDetailsFromDto(e: any) {
+        return {
+            ...e,
+            timeStamp: e.timeStamp ? new Date(e.timeStamp) : undefined
+        } as IEntityDetails;
+    }
+
     async deleteAsync(id: string) {
         await HttpService.requestAsync('/entity', 'delete', {id: id});
     }
 
     async allAsync() {
         const entities = await HttpService.requestAsync('/entity', 'get');
-        return entities.map((e: any) => ({...e, timeStamp: e.timeStamp ? new Date(e.timeStamp) : undefined})) as IEntityDetails[];
+        return entities.map(this.mapEntityDetailsFromDto) as IEntityDetails[];
     }
 
     async renameAsync(id: string, newAlias: string) {
@@ -22,7 +34,8 @@ class EntityRepository {
     }
 
     async byIdAsync(id: string) {
-        return (await this.allAsync()).find(e => e.id === id);
+        const entity = await HttpService.getAsync(`/entity/${id}`);
+        return this.mapEntityDetailsFromDto(entity);
     }
 
     async byTypeAsync(type: number) {
