@@ -14,6 +14,9 @@ import useLocale from '../../../src/hooks/useLocale';
 import Loadable from '../../../components/shared/Loadable/Loadable';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import EntityIcon from 'components/shared/entity/EntityIcon';
+import Timeago from 'components/shared/time/Timeago';
+import { entityLastActivity } from 'src/entity/EntityHelper';
+import EntityStatus from 'components/entity/EntityStatus';
 
 const EntityCard = (props: { entity: IEntityDetails }) => {
     const { entity } = props;
@@ -33,7 +36,12 @@ const EntityCard = (props: { entity: IEntityDetails }) => {
                                 </Stack>
                                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                                     <ShareEntityChip entityType={2} entity={entity} disableAction />
-                                    {/* <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}><Timeago date={entity.getLastActivity()} /></Box> */}
+                                    <Stack direction="row" spacing={1} alignItems="center">
+                                        <EntityStatus entity={entity} />
+                                        <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
+                                            <Timeago date={entityLastActivity(entity)} />
+                                        </Box>
+                                    </Stack>
                                 </Stack>
                             </Stack>
                         </Box>
@@ -60,7 +68,14 @@ function deviceModelToTableItem(entity: IEntityDetails): IAutoTableItem {
         id: entity.id,
         name: <EntityTableName entity={entity} />,
         shared: <ShareEntityChip entity={entity} entityType={1} />,
-        // lastActivity: <Box style={{ opacity: 0.8 }}><Timeago date={entity.getLastActivity()} /></Box>,
+        lastActivity: (
+            <Stack direction="row" alignItems="center" spacing={1}>
+                <EntityStatus entity={entity} />
+                <Box style={{ opacity: 0.8 }}>
+                    <Timeago date={entityLastActivity(entity)} />
+                </Box>
+            </Stack>
+        ),
         _link: `/app/entities/${entity.id}`
     };
 }

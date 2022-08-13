@@ -14,6 +14,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { bindMenu, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import PageNotificationService from 'src/notifications/PageNotificationService';
 import ConfirmDeleteDialog from 'components/shared/dialog/ConfirmDeleteDialog';
+import EntityStatus from 'components/entity/EntityStatus';
 
 // const DynamicGraph = dynamic(() => import('../../../components/graphs/Graph'));
 
@@ -431,7 +432,8 @@ const DeviceDetails = () => {
                         onChange={handleRename} />
                     <EntityOptions id={id} />
                 </Stack>
-                <Stack direction="row">
+                <Stack direction="row" alignItems="center" spacing={1}>
+                    <EntityStatus entity={entity} />
                     <ShareEntityChip entity={entity} entityType={1} />
                 </Stack>
             </Stack>

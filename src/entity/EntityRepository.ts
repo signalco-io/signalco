@@ -1,5 +1,6 @@
 import IContact from 'src/contacts/IContact';
 import IContactPointer from 'src/contacts/IContactPointer';
+import { orderBy } from 'src/helpers/ArrayHelpers';
 import HttpService from '../services/HttpService';
 import IEntityDetails from './IEntityDetails';
 
@@ -12,7 +13,11 @@ class EntityRepository {
     private mapEntityDetailsFromDto(e: any) {
         return {
             ...e,
-            timeStamp: e.timeStamp ? new Date(e.timeStamp) : undefined
+            timeStamp: e.timeStamp ? new Date(e.timeStamp) : undefined,
+            contacts: e.contacts.map((c: any) => ({
+                ...c,
+                timeStamp: c.timeStamp ? new Date(c.timeStamp) : undefined
+            }))
         } as IEntityDetails;
     }
 
@@ -22,7 +27,7 @@ class EntityRepository {
 
     async allAsync() {
         const entities = await HttpService.requestAsync('/entity', 'get');
-        return entities.map(this.mapEntityDetailsFromDto) as IEntityDetails[];
+        return orderBy(entities.map(this.mapEntityDetailsFromDto) as IEntityDetails[], (a, b) => a.alias?.localeCompare(b.alias));
     }
 
     async renameAsync(id: string, newAlias: string) {
