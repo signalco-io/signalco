@@ -14,6 +14,8 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { bindMenu, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import PageNotificationService from 'src/notifications/PageNotificationService';
 import ConfirmDeleteDialog from 'components/shared/dialog/ConfirmDeleteDialog';
+import DotIndicator from 'components/shared/indicators/DotIndicator';
+import { entityInError, entityLastActivity } from 'src/entity/EntityHelper';
 
 // const DynamicGraph = dynamic(() => import('../../../components/graphs/Graph'));
 
@@ -417,6 +419,12 @@ const DeviceDetails = () => {
         }
     }
 
+    const isStale = new Date().getTime() - entityLastActivity(entity).getTime() > 24 * 60 * 60 * 1000;
+    const isOffline = entityInError(entity);
+    let statusColor: 'success' | 'warning' | 'error' = 'success';
+    if (isOffline) statusColor = 'error';
+    else if (isStale) statusColor = 'warning';
+
     return (
         <Stack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
             <Stack sx={{ px: 2 }} spacing={1}>
@@ -431,7 +439,8 @@ const DeviceDetails = () => {
                         onChange={handleRename} />
                     <EntityOptions id={id} />
                 </Stack>
-                <Stack direction="row">
+                <Stack direction="row" alignItems="center" spacing={1}>
+                    <DotIndicator color={statusColor} />
                     <ShareEntityChip entity={entity} entityType={1} />
                 </Stack>
             </Stack>

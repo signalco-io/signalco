@@ -16,16 +16,10 @@ const withMDX = require('@next/mdx')({
     },
 });
 
-module.exports = withBundleAnalyzer(withPWA(withMDX({
+const nextConfigProd = {
     reactStrictMode: true,
     swcMinify: true,
     pageExtensions: ['tsx'],
-    pwa: {
-        dest: 'public',
-        disable: process.env.NODE_ENV === 'development',
-        runtimeCaching,
-        buildExcludes: [/middleware-manifest.json$/],
-    },
     images: {
         formats: ['image/avif', 'image/webp'],
         dangerouslyAllowSVG: true,
@@ -88,4 +82,15 @@ module.exports = withBundleAnalyzer(withPWA(withMDX({
             })
         }];
     },
-})));
+};
+
+module.exports = isDevelopment
+    ? withBundleAnalyzer(withMDX(nextConfigProd))
+    : withPWA(withMDX({
+        ...nextConfigProd,
+        pwa: {
+            dest: 'public',
+            runtimeCaching,
+            buildExcludes: [/middleware-manifest.json$/],
+        }
+    }));

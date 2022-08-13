@@ -14,6 +14,8 @@ import useLocale from '../../../src/hooks/useLocale';
 import Loadable from '../../../components/shared/Loadable/Loadable';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import EntityIcon from 'components/shared/entity/EntityIcon';
+import Timeago from 'components/shared/time/Timeago';
+import { entityInError, entityLastActivity } from 'src/entity/EntityHelper';
 
 const EntityCard = (props: { entity: IEntityDetails }) => {
     const { entity } = props;
@@ -33,7 +35,7 @@ const EntityCard = (props: { entity: IEntityDetails }) => {
                                 </Stack>
                                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                                     <ShareEntityChip entityType={2} entity={entity} disableAction />
-                                    {/* <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}><Timeago date={entity.getLastActivity()} /></Box> */}
+                                    <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}><Timeago error={entityInError(entity)} date={entityLastActivity(entity)} /></Box>
                                 </Stack>
                             </Stack>
                         </Box>
@@ -60,7 +62,9 @@ function deviceModelToTableItem(entity: IEntityDetails): IAutoTableItem {
         id: entity.id,
         name: <EntityTableName entity={entity} />,
         shared: <ShareEntityChip entity={entity} entityType={1} />,
-        // lastActivity: <Box style={{ opacity: 0.8 }}><Timeago date={entity.getLastActivity()} /></Box>,
+        lastActivity: <Box style={{ opacity: 0.8 }}><Timeago
+            error={entityInError(entity)}
+            date={entityLastActivity(entity)} /></Box>,
         _link: `/app/entities/${entity.id}`
     };
 }
