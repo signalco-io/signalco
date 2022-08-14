@@ -28,7 +28,8 @@ export default function FaqSection(props: { faq: FaqItem[] }) {
                             </Accordion>
                         ))}
                     </section>
-                    <Button href="/help" variant="outlined" size="large">Visit help center</Button>
+                    {/* TODO: Enable when help center is available */}
+                    {/* <Button href="/help" variant="outlined" size="large">Visit help center</Button> */}
                 </Stack>
             </Container>
         </Stack>
