@@ -35,8 +35,8 @@ function PricingCard(props: { option: PricingOption, variant: 'normal' | 'outlin
                 }}
                 variant={variant === 'normal' ? 'elevation' : 'outlined'}>
                 <CardActionArea href={option.href} sx={{ height: '100%' }} disabled={option.price.eur > 0}>
-                    <Stack sx={{ p: 6, height: '100%' }} spacing={6} justifyContent="space-between">
-                        <Stack spacing={6}>
+                    <Stack sx={{ p: { xs: 4, md: 6 }, height: '100%' }} spacing={{ xs: 3, md: 6 }} justifyContent="space-between">
+                        <Stack spacing={{ xs: 3, md: 6 }}>
                             <Typography textAlign="center" fontWeight="bold" variant="h1" component="p"><SignalcoLogotype theme={themeVariant} width={200} hideBadge /> {option.label}</Typography>
                             <Stack direction="row" alignItems="end" spacing={1}>
                                 <Typography variant="h2" fontWeight="bold" component="p">€{option.price.eur}</Typography>
@@ -109,14 +109,14 @@ const pricingFaq = [
 
 const PricingPage: PageWithMetadata = () => {
     return (
-        <Stack spacing={12}>
+        <Stack spacing={{ xs: 4, md: 12 }}>
             <PageCenterHeader header={'Pricing'} subHeader={'Find the plan for you'} />
-            <Stack direction="row" spacing={4} justifyContent="center">
+            <Stack direction={{ xs: 'column', md: 'row' }} spacing={4} justifyContent="center">
                 {pricingOptions.map((po, i) => <PricingCard key={po.id} option={po} variant={pricingCardVariantMap[i]} />)}
             </Stack>
             <FaqSection faq={pricingFaq} />
             <CtaSection />
-        </Stack>
+        </Stack >
     );
 };
 

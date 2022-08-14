@@ -1,15 +1,32 @@
-import { Box, Button, ButtonBase, Container, Stack } from '@mui/material';
+import { Box, Button, ButtonBase, Container, NoSsr, Stack } from '@mui/material';
 import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import SignalcoLogotype from './icons/SignalcoLogotype';
+import useIsMobile from 'src/hooks/useIsMobile';
 
 const navLinks = [
-    { href: '/features', text: 'Features' },
+    // { href: '/features', text: 'Features' },
     { href: '/channels', text: 'Channels' },
     { href: '/pricing', text: 'Pricing' }
 ];
+
+function NavMenu() {
+    const isMobile = useIsMobile();
+
+    if (isMobile) return null;
+
+    return (
+        <>
+            {navLinks.map(nl => (
+                <Link key={nl.href} href={nl.href} passHref>
+                    <Button variant="text" size="large" sx={{ fontWeight: 'bold' }}>{nl.text}</Button>
+                </Link>
+            ))}
+        </>
+    )
+};
 
 export function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?: boolean; }) {
     const router = useRouter();
@@ -39,11 +56,9 @@ export function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?
                         </ButtonBase>
                     </Link>
                     <Stack direction="row" alignItems="center" spacing={{ xs: 1, sm: 2, md: 4 }}>
-                        {navLinks.map(nl => (
-                            <Link key={nl.href} href={nl.href} passHref>
-                                <Button variant="text" size="large" sx={{ fontWeight: 'bold' }}>{nl.text}</Button>
-                            </Link>
-                        ))}
+                        <NoSsr>
+                            <NavMenu />
+                        </NoSsr>
                         <Link href="/app" prefetch={false} passHref>
                             <Button variant="contained" endIcon={<KeyboardArrowRightIcon fontSize="small" />}>App</Button>
                         </Link>
