@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Button, Container, Stack, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Container, Stack, Typography } from '@mui/material';
 import PageCenterHeader from './PageCenterHeader';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -28,7 +28,8 @@ export default function FaqSection(props: { faq: FaqItem[] }) {
                             </Accordion>
                         ))}
                     </section>
-                    <Button href="/help" variant="outlined" size="large">Visit help center</Button>
+                    {/* TODO: Enable when help center is available */}
+                    {/* <Button href="/help" variant="outlined" size="large">Visit help center</Button> */}
                 </Stack>
             </Container>
         </Stack>
