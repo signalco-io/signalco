@@ -35,8 +35,8 @@ function PricingCard(props: { option: PricingOption, variant: 'normal' | 'outlin
                 }}
                 variant={variant === 'normal' ? 'elevation' : 'outlined'}>
                 <CardActionArea href={option.href} sx={{ height: '100%' }} disabled={option.price.eur > 0}>
-                    <Stack sx={{ p: { xs: 4, md: 6 }, height: '100%' }} spacing={{ xs: 3, md: 6 }} justifyContent="space-between">
-                        <Stack spacing={{ xs: 3, md: 6 }}>
+                    <Stack sx={{ p: { xs: 4, md: 6 }, height: '100%' }} spacing={{ xs: 3, md: 4 }} justifyContent="space-between">
+                        <Stack spacing={{ xs: 3, md: 4 }}>
                             <Typography textAlign="center" fontWeight="bold" variant="h1" component="p"><SignalcoLogotype theme={themeVariant} width={200} hideBadge /> {option.label}</Typography>
                             <Stack direction="row" alignItems="end" spacing={1}>
                                 <Typography variant="h2" fontWeight="bold" component="p">€{option.price.eur}</Typography>
@@ -44,7 +44,7 @@ function PricingCard(props: { option: PricingOption, variant: 'normal' | 'outlin
                                 <Typography>{option.duration}</Typography>
                             </Stack>
                             <Typography>{option.description}</Typography>
-                            <Stack spacing={1}>
+                            <Stack>
                                 {option.features.map(feature => (
                                     <Stack key={feature}>
                                         <Checkbox checked readonly label={feature} />
