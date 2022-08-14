@@ -1,16 +1,33 @@
 import IContact from 'src/contacts/IContact';
 import IContactPointer from 'src/contacts/IContactPointer';
+import { orderBy } from 'src/helpers/ArrayHelpers';
 import HttpService from '../services/HttpService';
 import IEntityDetails from './IEntityDetails';
 
 class EntityRepository {
+    constructor() {
+        this.allAsync = this.allAsync.bind(this);
+        this.byIdAsync = this.byIdAsync.bind(this);
+    }
+
+    private mapEntityDetailsFromDto(e: any) {
+        return {
+            ...e,
+            timeStamp: e.timeStamp ? new Date(e.timeStamp) : undefined,
+            contacts: e.contacts.map((c: any) => ({
+                ...c,
+                timeStamp: c.timeStamp ? new Date(c.timeStamp) : undefined
+            }))
+        } as IEntityDetails;
+    }
+
     async deleteAsync(id: string) {
         await HttpService.requestAsync('/entity', 'delete', {id: id});
     }
 
     async allAsync() {
         const entities = await HttpService.requestAsync('/entity', 'get');
-        return entities.map((e: any) => ({...e, timeStamp: e.timeStamp ? new Date(e.timeStamp) : undefined})) as IEntityDetails[];
+        return orderBy(entities.map(this.mapEntityDetailsFromDto) as IEntityDetails[], (a, b) => a.alias?.localeCompare(b.alias));
     }
 
     async renameAsync(id: string, newAlias: string) {
@@ -22,7 +39,8 @@ class EntityRepository {
     }
 
     async byIdAsync(id: string) {
-        return (await this.allAsync()).find(e => e.id === id);
+        const entity = await HttpService.getAsync(`/entity/${id}`);
+        return this.mapEntityDetailsFromDto(entity);
     }
 
     async byTypeAsync(type: number) {

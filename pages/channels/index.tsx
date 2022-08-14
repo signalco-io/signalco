@@ -9,6 +9,8 @@ import { orderBy } from 'src/helpers/ArrayHelpers';
 import items from './channelsData.json';
 import categories from './channelCategoriesData.json';
 import { useRouter } from 'next/router';
+import CtaSection from 'components/pages/CtaSection';
+import FaqSection from 'components/pages/FaqSection';
 
 const ChannelGalleryItem = (props: { id: string, label: string, planned?: boolean }) => {
     const { id, label, planned } = props;
@@ -29,6 +31,11 @@ const ChannelGalleryItem = (props: { id: string, label: string, planned?: boolea
     )
 }
 
+const channelsFaq = [
+    { id: 'channel', question: 'What is Channel?', answer: 'Channel is Entity that contains all information required for connected online service, application or device. Channels can execute actions directly or contain connected entities to manage.' },
+    { id: 'entities', question: 'What are Entities?', answer: 'Entity is a thing you want to automate in signalco. This can be is online service connected to signalco, smart device, your custom dashboard, automation process, etc.' },
+];
+
 const ChannelsPage: PageWithMetadata = () => {
     const router = useRouter();
     const category = router.query.category as (string | undefined)
@@ -37,22 +44,26 @@ const ChannelsPage: PageWithMetadata = () => {
     const gridItems = orderBy(items.filter(i => selectedCategory ? i.categories.includes(selectedCategory.id) : true), (a, b) => a.label.localeCompare(b.label));
 
     return (
-        <Stack spacing={8}>
-            <PageCenterHeader header="Channels" subHeader="List of all channels available on signalco" />
-            <Gallery
-                items={gridItems}
-                itemComponent={ChannelGalleryItem}
-                gridHeader={selectedCategory ? `${selectedCategory?.label} channels` : 'All channels'}
-                filters={(compact?: boolean | undefined) => (
-                    <>
-                        <FilterList
-                            header="Categories"
-                            items={categories}
-                            selected={category}
-                            compact={compact}
-                            onSelected={(newCategory) => router.replace({ pathname: router.pathname, query: { ...router.query, category: newCategory } })} />
-                    </>
-                )} />
+        <Stack spacing={12}>
+            <Stack spacing={8}>
+                <PageCenterHeader header="Channels" subHeader="List of all channels available on signalco" />
+                <Gallery
+                    items={gridItems}
+                    itemComponent={ChannelGalleryItem}
+                    gridHeader={selectedCategory ? `${selectedCategory?.label} channels` : 'All channels'}
+                    filters={(compact?: boolean | undefined) => (
+                        <>
+                            <FilterList
+                                header="Categories"
+                                items={categories}
+                                selected={category}
+                                compact={compact}
+                                onSelected={(newCategory) => router.replace({ pathname: router.pathname, query: { ...router.query, category: newCategory } })} />
+                        </>
+                    )} />
+            </Stack>
+            <FaqSection faq={channelsFaq} />
+            <CtaSection />
         </Stack>
     );
 }
