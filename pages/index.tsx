@@ -13,6 +13,7 @@ import { useContext } from 'react';
 import { ThemeContext } from './_app';
 import { GitHub, KeyboardArrowRight } from '@mui/icons-material';
 import AppSettingsProvider from '../src/services/AppSettingsProvider';
+import CtaSection from 'components/pages/CtaSection';
 
 const Newsletter = dynamic(() => import('../components/pages/landing/Newsletter'));
 const GlobePart = dynamic(() => import('../components/pages/landing/GlobeSection'));
@@ -228,6 +229,9 @@ const Index = () => {
       </SectionCenter>
       <Divider />
       <NewsletterSection />
+      <Container sx={{ pb: 8 }}>
+        <CtaSection />
+      </Container>
     </Stack >
   );
 };
