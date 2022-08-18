@@ -71,7 +71,7 @@ const pricingOptions: PricingOption[] = [
         price: { eur: 0 },
         duration: 'forever',
         description: 'Start automating today.',
-        features: ['10 Entities', '10k monthly Executions', 'No credit card required'],
+        features: ['10 Entities', '2,000 Executions/mo', 'No credit card required'],
         href: '/app',
         hrefLabel: 'Start now'
     },
@@ -81,7 +81,7 @@ const pricingOptions: PricingOption[] = [
         price: { eur: 1.99 },
         duration: 'month',
         description: 'Expand with ease.',
-        features: ['20 Entities', '50k monthly Executions', 'Unlimited users', 'Everything in Free'],
+        features: ['20 Entities', '10,000 Executions/mo', '7 day history', 'Unlimited users'],
         href: '/subscription/basic',
         hrefLabel: 'Select Basic'
     },
@@ -91,7 +91,7 @@ const pricingOptions: PricingOption[] = [
         price: { eur: 4.99 },
         duration: 'month',
         description: 'Pro plan scales with you.',
-        features: ['30 Entities', '1M monthly Executions', 'Everything in Basic'],
+        features: ['30 Entities', '50,000 Executions/mo', '30 day history', 'Unlimited users'],
         href: '/subscription/pro',
         hrefLabel: 'Select Pro'
     }
