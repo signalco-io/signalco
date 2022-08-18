@@ -1,6 +1,6 @@
 [
     {
-        "id": "slack",
+        "channelName": "slack",
         "label": "Slack",
         "categories": [
             "communication"
@@ -8,28 +8,28 @@
         "description": "Slack is a new generation communication application. It unites your team and your apps for better information sharing and collaboration."
     },
     {
-        "id": "irobot",
+        "channelName": "irobot",
         "label": "iRobot",
         "categories": [
             "smart-home"
         ]
     },
     {
-        "id": "philips-hue",
+        "channelName": "philips-hue",
         "label": "Philips Hue",
         "categories": [
             "smart-home"
         ]
     },
     {
-        "id": "samsung",
+        "channelName": "samsung",
         "label": "Samsung",
         "categories": [
             "smart-home"
         ]
     },
     {
-        "id": "octoprint",
+        "channelName": "octoprint",
         "label": "Octoprint",
         "categories": [
             "smart-home",
@@ -38,7 +38,7 @@
         "planned": true
     },
     {
-        "id": "xiaomi",
+        "channelName": "xiaomi",
         "label": "Xiaomi",
         "categories": [
             "smart-home"
@@ -46,14 +46,14 @@
         "planned": true
     },
     {
-        "id": "miflora",
+        "channelName": "miflora",
         "label": "Mi Flora",
         "categories": [
             "smart-home"
         ]
     },
     {
-        "id": "esphome",
+        "channelName": "esphome",
         "label": "ESPHome",
         "categories": [
             "smart-home"
@@ -61,7 +61,7 @@
         "planned": true
     },
     {
-        "id": "zapier",
+        "channelName": "zapier",
         "label": "Zapier",
         "categories": [
             "productivity"
@@ -69,7 +69,7 @@
         "planned": true
     },
     {
-        "id": "trello",
+        "channelName": "trello",
         "label": "Trello",
         "categories": [
             "productivity"
@@ -77,7 +77,7 @@
         "planned": true
     },
     {
-        "id": "microsoft-todo",
+        "channelName": "microsoft-todo",
         "label": "Microsoft To Do",
         "categories": [
             "productivity"
@@ -85,7 +85,7 @@
         "planned": true
     },
     {
-        "id": "microsoft-azuredevops",
+        "channelName": "microsoft-azuredevops",
         "label": "Microsoft Azure DevOps",
         "categories": [
             "productivity"
@@ -93,7 +93,7 @@
         "planned": true
     },
     {
-        "id": "divoom",
+        "channelName": "divoom",
         "label": "Divoom",
         "categories": [
             "smart-home",
@@ -102,14 +102,14 @@
         "planned": true
     },
     {
-        "id": "zigbee2mqtt",
+        "channelName": "zigbee2mqtt",
         "label": "Zigbee2MQTT",
         "categories": [
             "smart-home"
         ]
     },
     {
-        "id": "github-app",
+        "channelName": "github-app",
         "label": "GitHub",
         "categories": [
             "productivity"
@@ -117,7 +117,7 @@
         "planned": true
     },
     {
-        "id": "http-rest",
+        "channelName": "http-rest",
         "label": "HTTP REST",
         "categories": [
             "productivity"
@@ -125,7 +125,7 @@
         "planned": true
     },
     {
-        "id": "plex",
+        "channelName": "plex",
         "label": "Plex",
         "categories": [
             "media"
@@ -133,7 +133,7 @@
         "planned": true
     },
     {
-        "id": "broadlink",
+        "channelName": "broadlink",
         "label": "Broadlink",
         "categories": [
             "smart-home"

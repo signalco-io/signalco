@@ -2,20 +2,20 @@ import { useEffect, useState } from 'react';
 import EntityRepository from 'src/entity/EntityRepository';
 import IEntityDetails from 'src/entity/IEntityDetails';
 
-export default function useEntities(deviceIds?: string[]) {
+export default function useEntities(entityIds?: string[]) {
     const [entities, setEntities] = useState<(IEntityDetails | undefined)[] | undefined>(undefined);
     useEffect(() => {
         (async () => {
-            if (deviceIds) {
-                const newDevices = [];
-                for (let i = 0; i < deviceIds.length; i++) {
-                    const deviceId = deviceIds[i];
-                    const device = await EntityRepository.byIdAsync(deviceId);
-                    newDevices.push(device);
+            if (entityIds) {
+                const newEntities = [];
+                for (let i = 0; i < entityIds.length; i++) {
+                    const entityId = entityIds[i];
+                    const entity = await EntityRepository.byIdAsync(entityId);
+                    newEntities.push(entity);
                 }
-                setEntities(newDevices);
+                setEntities(newEntities);
             }
         })();
-    }, [deviceIds]);
+    }, [entityIds]);
     return entities;
 }

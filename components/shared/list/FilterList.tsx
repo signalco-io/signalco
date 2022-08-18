@@ -102,7 +102,7 @@ export default function FilterList(props: FilterListProps) {
                                             inputProps={{ 'aria-labelledby': item.id }} />
                                     </ListItemIcon>
                                 )}
-                                <ListItemText id={item.id} primary={item.label} primaryTypographyProps={{ noWrap: true }} />
+                                <ListItemText id={item.id} primary={item.label} title={item.label} primaryTypographyProps={{ noWrap: true }} />
                             </ListItemButton>
                         ))}
                     </List>

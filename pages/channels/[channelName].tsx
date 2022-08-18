@@ -2,12 +2,13 @@ import { Button, List, ListItem, ListItemButton, ListItemText, Paper, Stack, Typ
 import ChannelLogo from 'components/channels/ChannelLogo';
 import { useRouter } from 'next/router';
 import { PageLayout } from '../../components/layouts/PageLayout';
-import channels from './channelsData.json';
-import categories from './channelCategoriesData.json';
+import channels from '../../components/channels/channelsData.json';
+import categories from '../../components/channels/channelCategoriesData.json';
 import ShareSocial from 'components/pages/ShareSocial';
 import { PageWithMetadata } from 'pages/_app';
 import FaqSection from 'components/pages/FaqSection';
 import CtaSection from 'components/pages/CtaSection';
+import Link from 'next/link';
 
 const channelFaq = [
     { id: 'channel', question: 'What is Channel?', answer: 'Channel is Entity that contains all information required for connected online service, application or device. Channels can execute actions directly or contain connected entities to manage.' },
@@ -17,15 +18,15 @@ const channelFaq = [
 
 const ChannelPage: PageWithMetadata = () => {
     const router = useRouter();
-    const id = router.query.id as string;
-    const channel = channels.find(c => c.id === id);
+    const channelName = router.query.channelName as string;
+    const channel = channels.find(c => c.channelName === channelName);
     const channelCategories = channel?.categories.map(cc => categories.find(category => category.id === cc)).filter(cc => cc);
 
     return (
         <Stack spacing={12}>
             <Stack spacing={8}>
                 <Stack spacing={4}>
-                    <ChannelLogo id={id} label={channel?.label} />
+                    <ChannelLogo channelName={channelName} label={channel?.label} />
                     <Stack direction="row" alignItems="center" spacing={1}>
                         <Typography variant="h1">{channel?.label} channel</Typography>
                         <ShareSocial />
@@ -52,7 +53,9 @@ const ChannelPage: PageWithMetadata = () => {
                     </Paper>
                 </Stack>
                 <Stack direction="row" alignItems="center" spacing={2}>
-                    <Button href={`/app/channels/${id}`} disabled={channel?.planned} variant="contained" color="primary">Use this channel</Button>
+                    <Link href={`/app/channels/${channelName}`} passHref>
+                        <Button disabled={channel?.planned} variant="contained" color="primary">Use this channel</Button>
+                    </Link>
                     {channel?.planned && <Typography>Available soon</Typography>}
                 </Stack>
             </Stack>
@@ -66,7 +69,7 @@ ChannelPage.layout = PageLayout;
 const isClient = typeof window !== 'undefined';
 const clientWindow = isClient ? window : undefined;
 const pathNameSplit = clientWindow?.location.pathname.split('/') ?? [];
-const channelName = channels.find(c => c.id === (pathNameSplit.length ? pathNameSplit[pathNameSplit.length - 1] : undefined))?.label;
+const channelName = channels.find(c => c.channelName === (pathNameSplit.length ? pathNameSplit[pathNameSplit.length - 1] : undefined))?.label;
 ChannelPage.title = channelName ? channelName : 'Channel';
 
 export default ChannelPage;

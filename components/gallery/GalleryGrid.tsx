@@ -14,7 +14,7 @@ export default function GalleryGrid(props: GalleryGridProps) {
     const ItemComponent = itemComponent;
     return (
         <div>
-            <Grid container spacing={3} justifyContent={compact ? 'center' : 'start'}>
+            <Grid container spacing={{ xs: 1, md: 3 }} justifyContent={compact ? 'center' : 'start'}>
                 {items.map(item => (
                     <Grid item key={item.id}>
                         <ItemComponent {...item} />

@@ -29,7 +29,7 @@ export default function OAuthRedirectConnectButton(props: { label: string; initi
     // TODO: Show "Connected" if already connected
     return (
         <NoSsr>
-            <LoadingButton loading={!router.isReady || isLoading} variant="outlined" href={initiateUrl}>{label}</LoadingButton>
+            <LoadingButton loading={!router.isReady || isLoading} variant="contained" href={initiateUrl}>{label}</LoadingButton>
         </NoSsr>
     );
 }

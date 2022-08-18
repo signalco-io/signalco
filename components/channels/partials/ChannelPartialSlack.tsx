@@ -1,9 +1,7 @@
 import { Stack, Typography } from '@mui/material';
-import { observer } from 'mobx-react-lite';
-import { AppLayoutWithAuth } from '../../../../components/layouts/AppLayoutWithAuth';
-import HttpService from '../../../../src/services/HttpService';
-import OAuthRedirectConnectButton from '../../../../components/oauth/OAuthRedirectConnectButton';
+import OAuthRedirectConnectButton from 'components/oauth/OAuthRedirectConnectButton';
 import { useRouter } from 'next/router';
+import HttpService from 'src/services/HttpService';
 
 const slackAppClientIdResolved = process.env.NEXT_PUBLIC_SLACK_CLIENTID;
 
@@ -14,7 +12,7 @@ const slackScopes = [
     'channels:history'
 ];
 
-const ChannelSlack = () => {
+export default function ChannelPartialSlack() {
     const router = useRouter();
     const redirectUrl = typeof window !== 'undefined'
         ? `${window.location.origin}/app/channels/slack`
@@ -26,20 +24,15 @@ const ChannelSlack = () => {
     };
 
     return (
-        <Stack spacing={{ xs: 0, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
-            <Typography variant="h2" sx={{ visibility: { xs: 'hidden', sm: 'visible' } }}>Slack</Typography>
-            <Stack>
+        <Stack spacing={2}>
+            <Typography>To add slack to signalco you need to install Signalco app to your Slack team.</Typography>
+            <div>
                 <OAuthRedirectConnectButton
-                    label="Add to Slack"
+                    label="Install signalco Slack App"
                     initiateUrl={`https://slack.com/oauth/v2/authorize?scope=${slackScopes.join(',')}&client_id=${slackAppClientIdResolved}&redirect_uri=${redirectUrl}`}
                     queryParamName="code"
-                    onCode={handleOAuthCode}
-                />
-            </Stack>
+                    onCode={handleOAuthCode} />
+            </div>
         </Stack>
-    )
-};
-
-ChannelSlack.layout = AppLayoutWithAuth;
-
-export default observer(ChannelSlack);
+    );
+}
