@@ -3,7 +3,9 @@ import IEntityDetails from './IEntityDetails'
 
 export function entityInError(entity: IEntityDetails | undefined) {
     if (typeof entity === 'undefined') return false;
-    return !!entity.contacts.find(c => c.contactName === 'offline' && c.valueSerialized === 'true')
+    const contact = entity.contacts.find(c => c.contactName === 'offline');
+    if (!contact) return undefined;
+    return contact.valueSerialized?.toLocaleLowerCase() === 'true';
 }
 
 export function entityLastActivity(entity: IEntityDetails | undefined) {
