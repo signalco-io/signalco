@@ -12,7 +12,7 @@ export default function ChannelsGallery(props: { channelHrefFunc: (id: string) =
     const category = router.query.category as (string | undefined)
     const selectedCategory = categories.find(c => c.id == category);
     const gridItems = orderBy(items.filter(i => selectedCategory ? i.categories.includes(selectedCategory.id) : true), (a, b) => a.label.localeCompare(b.label))
-        .map(gi => ({ ...gi, hrefFunc: channelHrefFunc }));
+        .map(gi => ({ ...gi, id: gi.channelName, hrefFunc: channelHrefFunc }));
 
     return (
         <Gallery

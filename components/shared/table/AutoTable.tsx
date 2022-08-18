@@ -80,6 +80,15 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
     }
   }
 
+  // TODO: Implement object display
+  let value = props.value;
+  if (typeof value === 'object' &&
+    typeof value.type === 'undefined' &&
+    typeof value.key === 'undefined' &&
+    typeof value.props === 'undefined') {
+    value = JSON.stringify(value);
+  }
+
   return (
     <Wrapper>
       <Box
@@ -95,7 +104,7 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
           alignItems: 'center',
           height: '100%'
         }}>
-        <Typography variant="body2" style={props.style} component="div">{props.value}</Typography>
+        <Typography variant="body2" style={props.style} component="div">{value}</Typography>
       </Box>
     </Wrapper>
   );
