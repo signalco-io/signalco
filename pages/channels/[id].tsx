@@ -2,8 +2,8 @@ import { Button, List, ListItem, ListItemButton, ListItemText, Paper, Stack, Typ
 import ChannelLogo from 'components/channels/ChannelLogo';
 import { useRouter } from 'next/router';
 import { PageLayout } from '../../components/layouts/PageLayout';
-import channels from './channelsData.json';
-import categories from './channelCategoriesData.json';
+import channels from '../../components/channels/channelsData.json';
+import categories from '../../components/channels/channelCategoriesData.json';
 import ShareSocial from 'components/pages/ShareSocial';
 import { PageWithMetadata } from 'pages/_app';
 import FaqSection from 'components/pages/FaqSection';
