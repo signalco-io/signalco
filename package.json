@@ -105,6 +105,7 @@
         "cross-env": "7.0.3",
         "eslint": "8.22.0",
         "eslint-config-next": "12.2.5",
+        "eslint-plugin-mdx": "^2.0.2",
         "eslint-plugin-storybook": "0.6.4",
         "fs-extra": "10.1.0",
         "next-sitemap": "3.1.18",
