@@ -9,7 +9,12 @@ export interface GalleryFiltersProps {
 export default function GalleryFilters(props: GalleryFiltersProps) {
     const { filters, compact } = props;
     return (
-        <Stack spacing={4} sx={{ padding: 2, width: '100%', maxWidth: compact ? undefined : 360, height: 'fit-content' }}>
+        <Stack spacing={{ xs: 1, md: 4 }} sx={{
+            padding: 0,
+            width: '100%',
+            maxWidth: compact ? undefined : '24%',
+            height: 'fit-content'
+        }}>
             {filters}
         </Stack>
     );

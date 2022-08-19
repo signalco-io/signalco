@@ -8,6 +8,7 @@
     },
     "App": {
         "Account": {
+            "Settings": "Postavke...",
             "Logout": "Odjava",
             "UserProfileImageAlt": "Slika korisničkog profila"
         },
@@ -93,7 +94,8 @@
             "Entities": "Entiteti",
             "Processes": "Procesi",
             "Settings": "Postavke",
-            "Stations": "Stanice"
+            "Stations": "Stanice",
+            "Channels": "Kanali"
         },
         "Placeholders": {
             "Loading": "Učitavanje...",

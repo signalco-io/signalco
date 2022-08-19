@@ -13,6 +13,7 @@
         },
         "Account": {
             "Logout": "Logout",
+            "Settings": "Settings...",
             "UserProfileImageAlt": "User profile image"
         },
         "Nav": {
@@ -20,7 +21,8 @@
             "Entities": "Entities",
             "Processes": "Processes",
             "Stations": "Stations",
-            "Settings": "Settings"
+            "Settings": "Settings",
+            "Channels": "Channels"
         },
         "Entities": {
             "Entities": "Entities",

@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   ButtonBase,
+  Divider,
   IconButton,
   ListItemIcon,
   ListItemText,
@@ -37,11 +38,13 @@ import LocalStorageService from '../src/services/LocalStorageService';
 import useUserSetting from '../src/hooks/useUserSetting';
 import ApiBadge from './development/ApiBadge';
 import useIsMobile from 'src/hooks/useIsMobile';
+import CommitIcon from '@mui/icons-material/Commit';
 
 const navItems = [
+  { label: 'Channels', path: '/app/channels', icon: CommitIcon, hidden: true },
+  { label: 'Settings', path: '/app/settings', icon: SettingsIcon, hidden: true },
   { label: 'Dashboards', path: '/app', icon: DashboardSharpIcon },
-  { label: 'Entities', path: '/app/entities', icon: DevicesOtherSharpIcon },
-  { label: 'Settings', path: '/app/settings', icon: SettingsIcon }
+  { label: 'Entities', path: '/app/entities', icon: DevicesOtherSharpIcon }
 ];
 
 const UserAvatar = () => {
@@ -89,11 +92,17 @@ const UserProfileAvatar = () => {
   const user = CurrentUserProvider.getCurrentUser();
   const [userNickName] = useUserSetting<string>('nickname', user?.name ?? '');
 
-  const logout = () => {
+  const logout = async () => {
+    popupState.close();
     LocalStorageService.setItem('token', undefined);
     CurrentUserProvider.setToken(undefined);
-    router.push('/');
+    await router.push('/');
   }
+
+  const navigateTo = (href: string) => async () => {
+    popupState.close();
+    await router.push(href);
+  };
 
   return (
     <>
@@ -107,6 +116,13 @@ const UserProfileAvatar = () => {
         </Stack>
       </ButtonBase>
       <Menu {...bindMenu(popupState)}>
+        <MenuItem onClick={navigateTo('/app/settings')}>
+          <ListItemIcon>
+            <SettingsIcon />
+          </ListItemIcon>
+          <ListItemText>{t('Settings')}</ListItemText>
+        </MenuItem>
+        <Divider />
         <MenuItem onClick={logout}>
           <ListItemIcon>
             <ExitToAppIcon />
@@ -158,7 +174,8 @@ const NavLink = ({ path, Icon, active, label, onClick }: { path: string, Icon: S
 const NavProfile = () => {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const activeNavItem = orderBy(navItems.filter(ni => router.pathname.startsWith(ni.path)), ni => 0 - ni.path.length)[0];
+  const activeNavItem = orderBy(navItems.filter(ni => router.pathname.startsWith(ni.path)), (a, b) => b.path.length - a.path.length)[0];
+  const visibleNavItems = navItems.filter(ni => ni === activeNavItem || !ni.hidden);
   const navWidth = useNavWidth();
   const { t } = useLocale('App', 'Nav');
 
@@ -189,8 +206,11 @@ const NavProfile = () => {
       </NoSsr>
       {!mobileMenuOpen &&
         <Stack sx={{ width: { xs: undefined, lg: '100%' } }}>
-          {navItems.filter(ni => isMobile ? ni === activeNavItem : true).map((ni, index) =>
-            <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} />)}
+          {visibleNavItems
+            .filter(ni => isMobile ? ni === activeNavItem : true)
+            .map((ni, index) => (
+              <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} />
+            ))}
         </Stack>
       }
       {(isMobile && mobileMenuOpen) && <Typography sx={{ opacity: 0.6 }}>Menu</Typography>}
@@ -209,7 +229,7 @@ const NavProfile = () => {
             zIndex: 999
           }}>
             <Stack>
-              {navItems.map((ni, index) =>
+              {visibleNavItems.map((ni, index) =>
                 <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} onClick={handleMobileMenuClose} />)}
             </Stack>
           </Box>
