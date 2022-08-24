@@ -1,4 +1,3 @@
-const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
     enabled: process.env.ANALYZE === 'true',
@@ -16,7 +15,13 @@ const withMDX = require('@next/mdx')({
     },
 });
 
-const nextConfigProd = {
+const withPWA = require('next-pwa')({
+    dest: 'public',
+    runtimeCaching,
+    buildExcludes: [/middleware-manifest.json$/],
+});
+
+const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     pageExtensions: ['tsx'],
@@ -84,13 +89,4 @@ const nextConfigProd = {
     },
 };
 
-module.exports = isDevelopment
-    ? withBundleAnalyzer(withMDX(nextConfigProd))
-    : withPWA(withMDX({
-        ...nextConfigProd,
-        pwa: {
-            dest: 'public',
-            runtimeCaching,
-            buildExcludes: [/middleware-manifest.json$/],
-        }
-    }));
+module.exports = withBundleAnalyzer(withPWA(withMDX(nextConfig)));
