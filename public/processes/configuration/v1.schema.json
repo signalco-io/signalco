@@ -1,0 +1,125 @@
+{
+    "$id": "https://www.signalco.dev/processes/configuration/v1.schema.json",
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "title": "Signalco Process Configuration Schema",
+    "type": "object",
+    "required": [
+        "version",
+        "type"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "version": {
+            "type": "string",
+            "description": "Version of configuration schema."
+        },
+        "type": {
+            "enum": [
+                "basic"
+            ],
+            "description": "Type of the process configuration."
+        },
+        "conducts": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/conduct"
+            }
+        }
+    },
+    "definitions": {
+        "conduct": {
+            "title": "Conduct",
+            "type": "object",
+            "required": [
+                "type"
+            ],
+            "properties": {
+                "type": {
+                    "enum": [
+                        "contactTrigger",
+                        "entityConduct"
+                    ]
+                }
+            },
+            "dependencies": {},
+            "definitions": {
+                "contactTrigger": {
+                    "title": "Conduct: Contact Trigger",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "type",
+                        "id",
+                        "contactPointer"
+                    ],
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "contactTrigger"
+                            ]
+                        },
+                        "id": {
+                            "$ref": "#/definitions/guidString"
+                        },
+                        "contactPointer": {
+                            "$ref": "#/definitions/contactPointer"
+                        }
+                    }
+                },
+                "entityConduct": {
+                    "title": "Conduct: Entity Conduct",
+                    "type": "object",
+                    "properties": {
+                        "contactPointer": {
+                            "$ref": "#/definitions/contactPointer"
+                        },
+                        "valueSerialized": {
+                            "type": "string"
+                        },
+                        "delay": {
+                            "type": "number"
+                        },
+                        "conditions": {
+                            "type": "array",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/condition"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "condition": {},
+        "contactPointer": {
+            "title": "Entity Contact Pointer",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "entityId": {
+                    "$ref": "#/definitions/guidString"
+                },
+                "channelName": {
+                    "type": "string",
+                    "pattern": "^[0-9a-zA-Z]+$"
+                },
+                "contactName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "channelName",
+                "contactName",
+                "entityId"
+            ]
+        },
+        "guidString": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+        }
+    }
+}
