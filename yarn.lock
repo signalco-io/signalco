@@ -5887,10 +5887,10 @@ commondir@^1.0.1:
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
 
-compare-versions@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/compare-versions/-/compare-versions-5.0.0.tgz#5c5b69cff4d37c5f452874ec47ff48a66b89f5bb"
-  integrity sha512-ei+3+vZQfunm1CeyipFXEZ5oBk3/cVo7rdSX635Ph0yn/4XFLabcQyOp+YucEj46raOD7/crw7gIQ8twxQTuhQ==
+compare-versions@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/compare-versions/-/compare-versions-5.0.1.tgz#14c6008436d994c3787aba38d4087fabe858555e"
+  integrity sha512-v8Au3l0b+Nwkp4G142JcgJFh1/TUhdxut7wzD1Nq1dyp5oa3tXaqb03EXOAB6jS4gMlalkjAUPZBMiAfKUixHQ==
 
 component-emitter@^1.2.1:
   version "1.3.0"
