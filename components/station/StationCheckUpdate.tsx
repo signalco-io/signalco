@@ -1,4 +1,4 @@
-import compareVersions from 'compare-versions';
+import { compareVersions } from 'compare-versions';
 import useLocale, { localizer, useLocalePlaceholders } from '../../src/hooks/useLocale';
 import StationsRepository from '../../src/stations/StationsRepository';
 import UploadIcon from '@mui/icons-material/Upload';
