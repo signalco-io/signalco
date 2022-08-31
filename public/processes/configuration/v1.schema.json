@@ -1,6 +1,6 @@
 {
     "$id": "https://www.signalco.dev/processes/configuration/v1.schema.json",
-    "$schema": "https://json-schema.org/draft-07/schema",
+    "$schema": "https://json-schema.org/draft-07/schema#",
     "title": "Signalco Process Configuration Schema",
     "type": "object",
     "required": [
@@ -24,6 +24,8 @@
         },
         "conducts": {
             "type": "array",
+            "description": "Ordered list of conducts to execute",
+            "minItems": 1,
             "items": {
                 "$ref": "#/definitions/conduct"
             }
@@ -33,17 +35,14 @@
         "conduct": {
             "title": "Conduct",
             "type": "object",
-            "required": [
-                "type"
-            ],
-            "properties": {
-                "type": {
-                    "enum": [
-                        "contactTrigger",
-                        "entityConduct"
-                    ]
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/conduct/definitions/contactTrigger"
+                },
+                {
+                    "$ref": "#/definitions/conduct/definitions/entityConduct"
                 }
-            },
+            ],
             "dependencies": {},
             "definitions": {
                 "contactTrigger": {
@@ -72,7 +71,18 @@
                 "entityConduct": {
                     "title": "Conduct: Entity Conduct",
                     "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "type",
+                        "id",
+                        "contactPointer"
+                    ],
                     "properties": {
+                        "type": {
+                            "enum": [
+                                "entityConduct"
+                            ]
+                        },
                         "contactPointer": {
                             "$ref": "#/definitions/contactPointer"
                         },
