@@ -101,7 +101,11 @@
                         "conditions": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/condition"
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/condition"
+                                    }
+                                ]
                             }
                         }
                     }
@@ -110,7 +114,6 @@
         },
         "condition": {
             "title": "Condition",
-            "additionalProperties": false,
             "oneOf": [
                 {
                     "$ref": "#/definitions/condition/definitions/orGroup"
@@ -159,7 +162,7 @@
                             "const": "compare"
                         },
                         "op": {
-                            "type": "array",
+                            "type": "string",
                             "enum": [
                                 "equal",
                                 "notEqual"
