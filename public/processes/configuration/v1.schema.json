@@ -24,7 +24,7 @@
         },
         "conducts": {
             "type": "array",
-            "description": "Ordered list of conducts to execute",
+            "description": "List of conducts to execute.",
             "minItems": 1,
             "items": {
                 "$ref": "#/definitions/conduct"
@@ -40,7 +40,7 @@
                     "$ref": "#/definitions/conduct/definitions/contactTrigger"
                 },
                 {
-                    "$ref": "#/definitions/conduct/definitions/entityConduct"
+                    "$ref": "#/definitions/conduct/definitions/conductEntity"
                 }
             ],
             "dependencies": {},
@@ -68,7 +68,7 @@
                         }
                     }
                 },
-                "entityConduct": {
+                "conductEntity": {
                     "title": "Conduct: Entity Conduct",
                     "type": "object",
                     "additionalProperties": false,
@@ -78,10 +78,17 @@
                         "contactPointer"
                     ],
                     "properties": {
+                        "id": {
+                            "$ref": "#/definitions/guidString"
+                        },
                         "type": {
                             "enum": [
-                                "entityConduct"
+                                "conductEntity"
                             ]
+                        },
+                        "notBeforeConduct": {
+                            "description": "Id of another conduct of same process. If defined, this conduct will not execute before specified conduct.",
+                            "$ref": "#/definitions/guidString"
                         },
                         "contactPointer": {
                             "$ref": "#/definitions/contactPointer"
@@ -89,22 +96,55 @@
                         "valueSerialized": {
                             "type": "string"
                         },
-                        "delay": {
+                        "delayBefore": {
+                            "description": "Number of miliseconds to delay execution of this conduct.",
+                            "type": "number"
+                        },
+                        "delayAfter": {
+                            "description": "Number of miliseconds to wait until this conduct is marked completed.",
                             "type": "number"
                         },
                         "conditions": {
                             "type": "array",
-                            "anyOf": [
-                                {
-                                    "$ref": "#/definitions/condition"
-                                }
-                            ]
+                            "items": {
+                                "$ref": "#/definitions/condition"
+                            }
                         }
                     }
                 }
             }
         },
-        "condition": {},
+        "condition": {
+            "title": "Condition",
+            "additionalProperties": false,
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/condition/definitions/orGroup"
+                }
+            ],
+            "definitions": {
+                "orGroup": {
+                    "additionalProperties": false,
+                    "required": [
+                        "type",
+                        "conditions"
+                    ],
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "orGroup"
+                            ]
+                        },
+                        "conditions": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/condition"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "contactPointer": {
             "title": "Entity Contact Pointer",
             "type": "object",
