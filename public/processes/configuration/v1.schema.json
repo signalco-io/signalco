@@ -52,9 +52,8 @@
                     ],
                     "properties": {
                         "type": {
-                            "enum": [
-                                "contactTrigger"
-                            ]
+                            "type": "string",
+                            "const": "contactTrigger"
                         },
                         "id": {
                             "$ref": "#/definitions/guidString"
@@ -78,9 +77,8 @@
                             "$ref": "#/definitions/guidString"
                         },
                         "type": {
-                            "enum": [
-                                "conductEntity"
-                            ]
+                            "type": "string",
+                            "const": "conductEntity"
                         },
                         "notBeforeConduct": {
                             "description": "Id of another conduct of same process. If defined, this conduct will not execute before specified conduct.",
@@ -116,6 +114,15 @@
             "oneOf": [
                 {
                     "$ref": "#/definitions/condition/definitions/orGroup"
+                },
+                {
+                    "$ref": "#/definitions/condition/definitions/compare"
+                },
+                {
+                    "$ref": "#/definitions/condition/definitions/contact"
+                },
+                {
+                    "$ref": "#/definitions/condition/definitions/value"
                 }
             ],
             "definitions": {
@@ -127,15 +134,73 @@
                     ],
                     "properties": {
                         "type": {
-                            "enum": [
-                                "orGroup"
-                            ]
+                            "type": "string",
+                            "const": "orGroup"
                         },
                         "conditions": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/condition"
                             }
+                        }
+                    }
+                },
+                "compare": {
+                    "additionalProperties": false,
+                    "required": [
+                        "type",
+                        "op",
+                        "left",
+                        "right"
+                    ],
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "compare"
+                        },
+                        "op": {
+                            "type": "array",
+                            "enum": [
+                                "equal",
+                                "notEqual"
+                            ]
+                        },
+                        "left": {
+                            "$ref": "#/definitions/condition"
+                        },
+                        "right": {
+                            "$ref": "#/definitions/condition"
+                        }
+                    }
+                },
+                "contact": {
+                    "additionalProperties": false,
+                    "required": [
+                        "type",
+                        "contactPointer"
+                    ],
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "contact"
+                        },
+                        "contactPointer": {
+                            "$ref": "#/definitions/contactPointer"
+                        }
+                    }
+                },
+                "value": {
+                    "additionalProperties": false,
+                    "required": [
+                        "type"
+                    ],
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "value"
+                        },
+                        "valueSerialized": {
+                            "type": "string"
                         }
                     }
                 }
