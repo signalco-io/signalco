@@ -27,23 +27,19 @@
             "description": "List of conducts to execute.",
             "minItems": 1,
             "items": {
-                "$ref": "#/definitions/conduct"
+                "oneOf": [
+                    {
+                        "$ref": "#/definitions/conducts/definitions/contactTrigger"
+                    },
+                    {
+                        "$ref": "#/definitions/conducts/definitions/conductEntity"
+                    }
+                ]
             }
         }
     },
     "definitions": {
-        "conduct": {
-            "title": "Conduct",
-            "type": "object",
-            "oneOf": [
-                {
-                    "$ref": "#/definitions/conduct/definitions/contactTrigger"
-                },
-                {
-                    "$ref": "#/definitions/conduct/definitions/conductEntity"
-                }
-            ],
-            "dependencies": {},
+        "conducts": {
             "definitions": {
                 "contactTrigger": {
                     "title": "Conduct: Contact Trigger",
