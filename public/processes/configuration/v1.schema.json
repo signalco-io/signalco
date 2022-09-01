@@ -143,7 +143,11 @@
                         "conditions": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/condition"
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/condition"
+                                    }
+                                ]
                             }
                         }
                     }
