@@ -1,0 +1,28 @@
+{
+    "$id": "https://www.signalco.dev/processes/configuration/condition.orGroup.schema.json",
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "Condition: Or group",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "type",
+        "conditions"
+    ],
+    "properties": {
+        "type": {
+            "type": "string",
+            "const": "orGroup"
+        },
+        "conditions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "https://www.signalco.dev/processes/configuration/condition.schema.json#"
+                    }
+                ]
+            }
+        }
+    }
+}

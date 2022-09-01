@@ -1,0 +1,19 @@
+{
+    "$id": "https://www.signalco.dev/processes/configuration/condition.schema.json",
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "Condition",
+    "oneOf": [
+        {
+            "$ref": "https://www.signalco.dev/processes/configuration/condition.compare.schema.json"
+        },
+        {
+            "$ref": "https://www.signalco.dev/processes/configuration/condition.const.schema.json"
+        },
+        {
+            "$ref": "https://www.signalco.dev/processes/configuration/condition.contact.schema.json"
+        },
+        {
+            "$ref": "https://www.signalco.dev/processes/configuration/condition.orGroup.schema.json"
+        }
+    ]
+}
