@@ -29,34 +29,56 @@
             "items": {
                 "oneOf": [
                     {
-                        "$ref": "#/definitions/conducts/definitions/contactTrigger"
-                    },
-                    {
-                        "$ref": "#/definitions/conducts/definitions/conductEntity"
+                        "$ref": "#/definitions/conduct"
                     }
                 ]
             }
         }
     },
     "definitions": {
-        "conducts": {
+        "conduct": {
+            "required": [
+                "id",
+                "type"
+            ],
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/guidString"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "notBeforeConduct": {
+                    "description": "Id of another conduct of same process. If defined, this conduct will not execute before specified conduct.",
+                    "$ref": "#/definitions/guidString"
+                },
+                "delayBefore": {
+                    "description": "Number of miliseconds to delay execution of this conduct.",
+                    "type": "number"
+                },
+                "delayAfter": {
+                    "description": "Number of miliseconds to wait until this conduct is marked completed.",
+                    "type": "number"
+                }
+            },
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/conduct/definitions/contactTrigger"
+                },
+                {
+                    "$ref": "#/definitions/conduct/definitions/conductEntity"
+                }
+            ],
             "definitions": {
                 "contactTrigger": {
                     "title": "Conduct: Contact Trigger",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
-                        "type",
-                        "id",
                         "contactPointer"
                     ],
                     "properties": {
                         "type": {
-                            "type": "string",
                             "const": "contactTrigger"
-                        },
-                        "id": {
-                            "$ref": "#/definitions/guidString"
                         },
                         "contactPointer": {
                             "$ref": "#/definitions/contactPointer"
@@ -66,37 +88,18 @@
                 "conductEntity": {
                     "title": "Conduct: Entity Conduct",
                     "type": "object",
-                    "additionalProperties": false,
                     "required": [
-                        "type",
-                        "id",
                         "contactPointer"
                     ],
                     "properties": {
-                        "id": {
-                            "$ref": "#/definitions/guidString"
-                        },
                         "type": {
-                            "type": "string",
                             "const": "conductEntity"
-                        },
-                        "notBeforeConduct": {
-                            "description": "Id of another conduct of same process. If defined, this conduct will not execute before specified conduct.",
-                            "$ref": "#/definitions/guidString"
                         },
                         "contactPointer": {
                             "$ref": "#/definitions/contactPointer"
                         },
                         "valueSerialized": {
                             "type": "string"
-                        },
-                        "delayBefore": {
-                            "description": "Number of miliseconds to delay execution of this conduct.",
-                            "type": "number"
-                        },
-                        "delayAfter": {
-                            "description": "Number of miliseconds to wait until this conduct is marked completed.",
-                            "type": "number"
                         },
                         "conditions": {
                             "type": "array",
@@ -128,6 +131,14 @@
                     "$ref": "#/definitions/condition/definitions/value"
                 }
             ],
+            "required": [
+                "type"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string"
+                }
+            },
             "definitions": {
                 "orGroup": {
                     "additionalProperties": false,
