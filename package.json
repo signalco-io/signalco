@@ -40,7 +40,7 @@
         "@mui/lab": "5.0.0-alpha.97",
         "@mui/material": "5.10.3",
         "@mui/system": "5.10.3",
-        "@mui/x-date-pickers": "5.0.0-beta.7",
+        "@mui/x-date-pickers": "5.0.0",
         "@next/env": "12.2.5",
         "@next/mdx": "12.2.5",
         "@vvo/tzdb": "6.61.0",
