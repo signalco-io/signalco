@@ -4,22 +4,35 @@
     "title": "Conduct: Entity contact",
     "type": "object",
     "required": [
+        "id",
+        "type",
         "contactPointer"
     ],
     "properties": {
+        "id": {
+            "$ref": "https://www.signalco.dev/processes/configuration/shared.schema.json#/definitions/guidString"
+        },
         "type": {
-            "const": "conductEntity"
-        },
-        "contactPointer": {
-            "$ref": "https://www.signalco.dev/processes/configuration/shared.schema.json#/definitions/contactPointer"
-        },
-        "valueSerialized": {
-            "type": "string"
+            "const": "contact"
         },
         "conditions": {
             "type": "array",
             "items": {
                 "$ref": "https://www.signalco.dev/processes/configuration/condition.schema.json#"
+            }
+        },
+        "contacts": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "contactPointer": {
+                        "$ref": "https://www.signalco.dev/processes/configuration/shared.schema.json#/definitions/contactPointer"
+                    },
+                    "valueSerialized": {
+                        "type": "string"
+                    }
+                }
             }
         },
         "notBeforeConduct": {
