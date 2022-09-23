@@ -8,10 +8,11 @@ export default function Timeago(props: { date: number | Date | undefined, live?:
     const { date, live } = props;
 
     const isNever = typeof date === 'number' || date == null;
+
     return (
         <div>
             {isNever
-                ? <Typography>{t('Never')}</Typography>
+                ? <Typography variant="subtitle2">{t('Never')}</Typography>
                 : <ReactTimeago date={date!} live={live} />}
         </div>
     )

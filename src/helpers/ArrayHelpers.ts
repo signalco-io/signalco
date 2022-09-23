@@ -23,7 +23,7 @@ export const arraySum = <T>(array: T[], selectorFunc: (i: T, index: number) => n
     return sum;
 }
 
-const arrayPick = <T>(array: T[], compareFn: (i: T, index: number) => number, pickFn: (a: number, b: number) => boolean) => {
+const arrayPick = <T>(array: T[], compareFn: (i: T, index: number) => number | undefined, pickFn: (a: number | undefined, b: number | undefined) => boolean) => {
     if (!Array.isArray(array))
         throw new Error('Not an array: ' + typeof array);
 
@@ -41,8 +41,8 @@ const arrayPick = <T>(array: T[], compareFn: (i: T, index: number) => number, pi
     return currentMin;
 }
 
-export const arrayMin = <T>(array: T[], compareFn: (i: T, index: number) => number) => arrayPick(array, compareFn, (a, b) => a < b)
-export const arrayMax = <T>(array: T[], compareFn: (i: T, index: number) => number) => arrayPick(array, compareFn, (a, b) => a > b)
+export const arrayMin = <T>(array: T[], compareFn: (i: T, index: number) => number | undefined) => arrayPick(array, compareFn, (a, b) => typeof a === 'undefined' ? true : a < (typeof b === 'undefined' ? false : b))
+export const arrayMax = <T>(array: T[], compareFn: (i: T, index: number) => number | undefined) => arrayPick(array, compareFn, (a, b) => typeof a === 'undefined' ? false : a > (typeof b === 'undefined' ? true : b))
 
 export const sequenceEqual = <TA, TB>(arrayA: TA[], arrayB: TB[], compareFn: (a: TA, b: TB) => boolean) => {
     if (!arrayA || !arrayB) return false;

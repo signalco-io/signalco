@@ -12,16 +12,17 @@
         },
         {
             "name": "Next.js: debug client-side",
-            "type": "pwa-chrome",
+            "type": "msedge",
             "request": "launch",
-            "url": "http://localhost:3000"
+            "userDataDir": false,
+            "url": "http://localhost:3000",
+            "smartStep": true
         },
         {
             "name": "Next.js: debug full stack",
             "type": "node-terminal",
             "request": "launch",
             "command": "npm run dev",
-            "console": "integratedTerminal",
             "serverReadyAction": {
                 "pattern": "started server on .+, url: (https?://.+)",
                 "uriFormat": "%s",

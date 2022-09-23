@@ -9,15 +9,20 @@ export default function EntityStatus(props: { entity: IEntityDetails | undefined
     if (!entity || entity.type !== 1) return null;
 
     const isOffline = entityInError(entity);
-    let statusColor: 'success' | 'warning' | 'error' = 'success';
+    let statusColor: 'success' | 'warning' | 'error' | 'grey' = 'success';
     let content: React.ReactNode | undefined = undefined;
     if (isOffline) {
         statusColor = 'error';
         content = <BoltIcon fontSize="small" />;
     }
     else if (typeof isOffline === 'undefined') {
-        const isStale = new Date().getTime() - entityLastActivity(entity).getTime() > 24 * 60 * 60 * 1000;
-        if (isStale) statusColor = 'warning';
+        const lastActivity = entityLastActivity(entity);
+        if (!lastActivity) {
+            statusColor = 'grey';
+        } else {
+            const isStale = new Date().getTime() - lastActivity.getTime() > 24 * 60 * 60 * 1000;
+            if (isStale) statusColor = 'warning';
+        }
     }
 
     return (

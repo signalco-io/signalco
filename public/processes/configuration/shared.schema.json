@@ -1,0 +1,34 @@
+{
+    "$id": "https://www.signalco.dev/processes/configuration/shared.schema.json",
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "Shared schema",
+    "description": "Signalco process configuration shared schema.",
+    "definitions": {
+        "contactPointer": {
+            "title": "Entity Contact Pointer",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "entityId": {
+                    "$ref": "https://www.signalco.dev/processes/configuration/shared.schema.json#/definitions/guidString"
+                },
+                "channelName": {
+                    "type": "string",
+                    "pattern": "^[0-9a-zA-Z]+$"
+                },
+                "contactName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "channelName",
+                "contactName",
+                "entityId"
+            ]
+        },
+        "guidString": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"
+        }
+    }
+}

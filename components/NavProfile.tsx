@@ -47,7 +47,7 @@ const navItems = [
   { label: 'Entities', path: '/app/entities', icon: DevicesOtherSharpIcon }
 ];
 
-const UserAvatar = () => {
+function UserAvatar() {
   const { t } = useLocale('App', 'Account');
   const user = CurrentUserProvider.getCurrentUser();
 
@@ -78,9 +78,9 @@ const UserAvatar = () => {
   return (
     <Avatar sx={{ width: size, height: size }}>{userNameInitials}</Avatar>
   );
-};
+}
 
-const UserProfileAvatar = () => {
+function UserProfileAvatar() {
   const { t } = useLocale('App', 'Account');
   const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' });
   const navWidth = useNavWidth();
@@ -144,7 +144,7 @@ export const useNavWidth = () => {
   return isLaptopOrTablet ? 109 : 228;
 };
 
-const NavLink = ({ path, Icon, active, label, onClick }: { path: string, Icon: SvgIconComponent, active: boolean, label: string, onClick?: () => void }) => {
+function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: SvgIconComponent, active: boolean, label: string, onClick?: () => void }) {
   const theme = useTheme();
   const isMobile = useIsMobile();
   const isNotDesktop = useMediaQuery(theme.breakpoints.down('lg'));
@@ -169,9 +169,9 @@ const NavLink = ({ path, Icon, active, label, onClick }: { path: string, Icon: S
       </Button>
     </Link>
   );
-};
+}
 
-const NavProfile = () => {
+function NavProfile() {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const activeNavItem = orderBy(navItems.filter(ni => router.pathname.startsWith(ni.path)), (a, b) => b.path.length - a.path.length)[0];
@@ -237,6 +237,6 @@ const NavProfile = () => {
       }
     </Stack>
   );
-};
+}
 
 export default NavProfile;

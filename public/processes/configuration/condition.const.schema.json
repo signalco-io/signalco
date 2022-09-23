@@ -1,0 +1,19 @@
+{
+    "$id": "https://www.signalco.dev/processes/configuration/condition.const.schema.json",
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "Condition: Const",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "type"
+    ],
+    "properties": {
+        "type": {
+            "type": "string",
+            "const": "value"
+        },
+        "valueSerialized": {
+            "type": "string"
+        }
+    }
+}

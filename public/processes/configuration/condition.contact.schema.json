@@ -1,0 +1,20 @@
+{
+    "$id": "https://www.signalco.dev/processes/configuration/condition.contact.schema.json",
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "Condition: Contact",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "type",
+        "contactPointer"
+    ],
+    "properties": {
+        "type": {
+            "type": "string",
+            "const": "contact"
+        },
+        "contactPointer": {
+            "$ref": "https://www.signalco.dev/processes/configuration/shared.schema.json#/definitions/contactPointer"
+        }
+    }
+}

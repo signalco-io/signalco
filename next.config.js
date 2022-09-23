@@ -19,6 +19,7 @@ const withPWA = require('next-pwa')({
     dest: 'public',
     runtimeCaching,
     buildExcludes: [/middleware-manifest.json$/],
+    disable: isDevelopment
 });
 
 const nextConfig = {
@@ -31,7 +32,7 @@ const nextConfig = {
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;'
     },
     eslint: {
-        dirs: ['worker', 'tools', 'src', 'pages', 'locales', 'docs', 'components', '.storybook']
+        dirs: ['worker', 'tools', 'src', 'pages', 'locales', 'components', '.storybook']
     },
     async headers() {
         return [{
