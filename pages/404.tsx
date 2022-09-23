@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { PageLayout } from '../components/layouts/PageLayout';
 import { ThemeContext } from './_app';
 
-const Image404 = () => {
+function Image404() {
     const themeContext = useContext(ThemeContext);
     const scale = 0.6;
     return (
@@ -18,8 +18,8 @@ const Image404 = () => {
     );
 }
 
-const NotFound = () => (
-    <Stack alignItems="center" justifyContent="center" sx={{ minHeight: '50vh' }}>
+function NotFound() {
+  return <Stack alignItems="center" justifyContent="center" sx={{ minHeight: '50vh' }}>
         <Stack direction="row" alignItems="center" justifyContent="center">
             <Stack direction="row" justifyContent="center" spacing={{ xs: 2, sm: 4, md: 8 }} alignItems="center">
                 <Box display={{ xs: 'none', sm: 'inline-block' }}>
@@ -38,7 +38,7 @@ const NotFound = () => (
             </Stack>
         </Stack>
     </Stack>
-);
+}
 
 NotFound.layout = PageLayout;
 

@@ -1,5 +1,4 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, Button, List, ListItem, ListItemButton, ListItemText, Popover, Skeleton, Stack, Tooltip, Typography } from '@mui/material';
-import { observer } from 'mobx-react-lite';
 import React, { startTransition, useEffect, useState } from 'react';
 import {
     usePopupState,
@@ -17,7 +16,7 @@ import IEntityDetails from 'src/entity/IEntityDetails';
 import IContactPointerPartial from 'src/contacts/IContactPointerPartial';
 import InputContactValue from './InputContactValue';
 
-const EntityContactValueSelection = (props: { target: IContactPointerPartial | undefined, value: any, onSelected: (value: any) => void }) => {
+function EntityContactValueSelection(props: { target: IContactPointerPartial | undefined, value: any, onSelected: (value: any) => void }) {
     const { target, value, onSelected } = props;
     const entity = useEntity(target?.entityId);
 
@@ -41,9 +40,9 @@ const EntityContactValueSelection = (props: { target: IContactPointerPartial | u
             )}
         </Loadable>
     );
-};
+}
 
-const EntitySelection = (props: { target: IContactPointerPartial | undefined, onSelected: (target: IContactPointerPartial | undefined) => void; }) => {
+function EntitySelection(props: { target: IContactPointerPartial | undefined, onSelected: (target: IContactPointerPartial | undefined) => void; }) {
     const {
         target, onSelected
     } = props;
@@ -71,14 +70,14 @@ const EntitySelection = (props: { target: IContactPointerPartial | undefined, on
             </List>
         </Loadable>
     );
-};
+}
 
 interface EntityContactSelectionProps {
     target: IContactPointerPartial | undefined;
     onSelected: (target: IContactPointerPartial | undefined) => void;
 }
 
-const EntityContactSelection = (props: EntityContactSelectionProps) => {
+function EntityContactSelection(props: EntityContactSelectionProps) {
     const {
         target, onSelected
     } = props;
@@ -112,7 +111,7 @@ const EntityContactSelection = (props: EntityContactSelectionProps) => {
             </List>
         </Loadable>
     );
-};
+}
 
 interface EntitySelectionMenuProps {
     target?: IContactPointerPartial;
@@ -331,4 +330,4 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
     );
 }
 
-export default observer(DisplayDeviceTarget);
+export default DisplayDeviceTarget;

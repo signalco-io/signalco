@@ -12,7 +12,7 @@ interface IDashboardSettingsProps {
     onClose: () => void,
 }
 
-const DashboardSettings = (props: IDashboardSettingsProps) => {
+function DashboardSettings(props: IDashboardSettingsProps) {
     const { isOpen, dashboard, onClose } = props;
     const { t } = useLocale('App', 'Dashboards');
     const router = useRouter();
@@ -66,6 +66,6 @@ const DashboardSettings = (props: IDashboardSettingsProps) => {
             </Stack>
         </ConfigurationDialog>
     );
-};
+}
 
 export default DashboardSettings;

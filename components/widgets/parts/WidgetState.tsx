@@ -1,5 +1,4 @@
 import { Stack, Typography, ButtonBase, CircularProgress } from '@mui/material';
-import { observer } from 'mobx-react-lite';
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
 import ConductsService from '../../../src/conducts/ConductsService';
@@ -75,7 +74,7 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
     await ConductsService.RequestMultipleConductAsync(conducts);
 };
 
-const WidgetState = (props: WidgetSharedProps) => {
+function WidgetState(props: WidgetSharedProps) {
     const { config } = props;
     const contactPointers = useMemo(() => (Array.isArray(config?.target) ? config.target as IContactPointer[] : undefined), [config?.target]);
     const entityIds = useMemo(() => (Array.isArray(config?.target) ? config.target as IContactPointer[] : undefined)?.map(i => i.entityId), [config?.target]);
@@ -141,6 +140,6 @@ const WidgetState = (props: WidgetSharedProps) => {
             )}
         </ButtonBase>
     );
-};
+}
 
-export default observer(WidgetState);
+export default WidgetState;

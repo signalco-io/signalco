@@ -2,7 +2,6 @@ import { Box, Card, CardHeader, Stack, CardMedia, Button, Menu, MenuItem, ListIt
 import { useRouter } from 'next/router'
 import React, { useState } from 'react';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
-import { observer } from 'mobx-react-lite';
 import useEntity from '../../../src/hooks/useEntity';
 import EditableInput from '../../../components/shared/form/EditableInput';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
@@ -299,7 +298,7 @@ function EntityOptions(props: { id: string | undefined }) {
     )
 }
 
-const DeviceDetails = () => {
+function DeviceDetails() {
     const router = useRouter();
     const { id: queryId } = router.query;
     const id = typeof queryId !== 'object' && typeof queryId !== 'undefined' ? queryId : undefined;
@@ -379,7 +378,7 @@ const DeviceDetails = () => {
     //     </Card>
     // );
 
-    const ContactsTable = () => {
+    function ContactsTable() {
         const contacts = entity?.contacts;
         const tableItems = contacts?.map(c => ({
             id: c.contactName,
@@ -410,7 +409,7 @@ const DeviceDetails = () => {
                 </CardMedia>
             </Card>
         );
-    };
+    }
 
     const handleRename = async (newAlias: string) => {
         if (id) {
@@ -446,4 +445,4 @@ const DeviceDetails = () => {
 
 DeviceDetails.layout = AppLayoutWithAuth;
 
-export default observer(DeviceDetails);
+export default DeviceDetails;

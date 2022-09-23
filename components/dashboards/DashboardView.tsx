@@ -2,8 +2,6 @@ import { Box } from '@mui/system';
 import React from 'react';
 import { useNavWidth } from '../NavProfile';
 import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
-import { observer } from 'mobx-react-lite';
-import { runInAction } from 'mobx';
 import { Button, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import useLocale from '../../src/hooks/useLocale';
@@ -37,9 +35,7 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
         for (let i = 0; i < newOrder.length; i++) {
             const widget = widgets.find(w => w.id === newOrder[i]);
             if (widget) {
-                runInAction(() => {
-                    widget.order = i;
-                });
+                widget.order = i;
             }
         }
     }
@@ -85,4 +81,4 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
     );
 }
 
-export default observer(DashboardView);
+export default DashboardView;

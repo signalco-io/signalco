@@ -1,5 +1,4 @@
 import { ButtonBase, Stack } from '@mui/material';
-import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Box } from '@mui/system';
 import Image from 'next/image';
@@ -18,7 +17,7 @@ const stateOptions = [
     DefaultWidth(1)
 ];
 
-const WidgetIndicator = (props: WidgetSharedProps) => {
+function WidgetIndicator(props: WidgetSharedProps) {
     const { config } = props;
     const router = useRouter();
 
@@ -53,6 +52,6 @@ const WidgetIndicator = (props: WidgetSharedProps) => {
             </Stack>
         </ButtonBase>
     );
-};
+}
 
-export default observer(WidgetIndicator);
+export default WidgetIndicator;

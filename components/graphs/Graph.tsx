@@ -42,7 +42,7 @@ const renderCustomizedTimeLineLabel = (props: any) => {
     return null;
 };
 
-const GraphTimeLine = (props: IGraphProps) => {
+function GraphTimeLine(props: IGraphProps) {
     const { label, data, durationMs, width, startDateTime } = props;
     const themeContext = useContext(ThemeContext);
 
@@ -121,7 +121,7 @@ const GraphTimeLine = (props: IGraphProps) => {
     );
 }
 
-const ChartGenericTooltip = ({ active, payload, domain, units }: { active?: boolean, payload?: any, domain: ScaleTime<number, number, never>, units?: string }) => {
+function ChartGenericTooltip({ active, payload, domain, units }: { active?: boolean, payload?: any, domain: ScaleTime<number, number, never>, units?: string }) {
     if (active && payload && payload.length) {
         const dateTime = domain.invert(payload[0].payload.key) as Date;
         return (
@@ -134,9 +134,9 @@ const ChartGenericTooltip = ({ active, payload, domain, units }: { active?: bool
     }
 
     return null;
-};
+}
 
-const GraphArea = (props: IGraphProps) => {
+function GraphArea(props: IGraphProps) {
     const { data, durationMs, width, height, startDateTime } = props;
     const themeContext = useContext(ThemeContext);
 
@@ -190,9 +190,9 @@ const GraphArea = (props: IGraphProps) => {
             <Tooltip content={<ChartGenericTooltip domain={domainGraph} />} />
         </ComposedChart>
     );
-};
+}
 
-const Graph = (props: IGraphProps) => {
+function Graph(props: IGraphProps) {
     const { data } = props;
     const { t } = useLocalePlaceholders();
 
@@ -204,6 +204,6 @@ const Graph = (props: IGraphProps) => {
     if (isBoolean) {
         return <Box p={2}><GraphTimeLine {...props} /></Box>;
     } else return <GraphArea {...props} />
-};
+}
 
 export default Graph;

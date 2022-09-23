@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '../../pages/_app';
 import styles from './TvVisual.module.scss';
 
-const TvVisual = (props: { state: boolean, size: number }) => {
+function TvVisual(props: { state: boolean, size: number }) {
     const themeContext = useContext(ThemeContext);
 
     const isActive = props.state;

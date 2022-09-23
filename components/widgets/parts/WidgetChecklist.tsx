@@ -4,8 +4,6 @@ import { Box } from '@mui/system';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { observable, runInAction } from 'mobx';
-import { observer } from 'mobx-react-lite';
 import { bindMenu, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import DeleteIcon from '@mui/icons-material/Delete';
 import NoDataPlaceholder from '../../shared/indicators/NoDataPlaceholder';
@@ -30,7 +28,7 @@ interface IChecklistItem {
     text: string
 };
 
-const ChecklistItem = observer((props: { item: IChecklistItem, onChange: (id: string, done: boolean) => void, onRemove: (id: string) => void }) => {
+function ChecklistItem(props: { item: IChecklistItem; onChange: (id: string, done: boolean) => void; onRemove: (id: string) => void; }) {
     const { item, onChange, onRemove } = props;
     const popupState = usePopupState({ variant: 'popover', popupId: `checkboxItemMenu${item.id}` });
 
@@ -54,14 +52,14 @@ const ChecklistItem = observer((props: { item: IChecklistItem, onChange: (id: st
                 </MenuItem>
             </Menu>
         </>
-    )
-});
+    );
+}
 
-const WidgetChecklist = (props: WidgetSharedProps) => {
+function WidgetChecklist(props: WidgetSharedProps) {
     const { id, config } = props;
     const placeholders = useLocalePlaceholders();
     const { t } = useLocale('App', 'Widgets', 'WidgetChecklist');
-    const [items] = useState(observable(LocalStorageService.getItemOrDefault<IChecklistItem[]>(`checklist-${id}`, [])));
+    const [items] = useState(LocalStorageService.getItemOrDefault<IChecklistItem[]>(`checklist-${id}`, []));
     const [newItemText, setNewItemText] = useState('');
     const [isInputFocusedOrFilled, setIsInputFocusedOrFilled] = useState(false);
 
@@ -77,34 +75,28 @@ const WidgetChecklist = (props: WidgetSharedProps) => {
         if (newItemText.trim().length <= 0)
             return;
 
-        runInAction(() => {
-            items.push({ id: uuidv4(), text: newItemText });
-            saveItems(items);
-            setNewItemText('');
-        })
+        items.push({ id: uuidv4(), text: newItemText });
+        saveItems(items);
+        setNewItemText('');
     }
 
     const handleItemChanged = (id: string, done: boolean) => {
         const item = items.find(i => i.id === id);
         if (item) {
-            runInAction(() => {
-                item.done = done;
-                if (done && removeOnDone) {
-                    setTimeout(() => {
-                        handleItemRemoved(id);
-                    }, removeOnDoneDelay);
-                } else {
-                    saveItems(items);
-                }
-            })
+            item.done = done;
+            if (done && removeOnDone) {
+                setTimeout(() => {
+                    handleItemRemoved(id);
+                }, removeOnDoneDelay);
+            } else {
+                saveItems(items);
+            }
         }
     };
 
     const handleItemRemoved = (id: string) => {
-        runInAction(() => {
-            items.splice(items.findIndex(i => i.id === id), 1);
-            saveItems(items);
-        });
+        items.splice(items.findIndex(i => i.id === id), 1);
+        saveItems(items);
     };
 
     // Configure widget
@@ -146,6 +138,6 @@ const WidgetChecklist = (props: WidgetSharedProps) => {
             </Box>
         </Stack>
     );
-};
+}
 
-export default observer(WidgetChecklist);
+export default WidgetChecklist;

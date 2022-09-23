@@ -1,5 +1,4 @@
 import { Box, ButtonBase, Icon, Stack, Typography } from '@mui/material';
-import { observer } from 'mobx-react-lite';
 import React from 'react';
 import useEntity from '../../../src/hooks/useEntity';
 import { CircleSlider } from 'react-circle-slider';
@@ -19,20 +18,22 @@ const stateOptions: IWidgetConfigurationOption[] = [
     DefaultHeight(4)
 ];
 
-const SmallIndicator = observer((props: { isActive: boolean, icon: string, label: string, activeBackgroundColor: string, href: string }) => (
-    <Link href={props.href} passHref>
-        <ButtonBase>
-            <Box sx={{ width: '52px', height: '82px', backgroundColor: props.isActive ? props.activeBackgroundColor : 'transparent', borderRadius: 1 }}>
-                <Stack alignItems="center" justifyContent="center" height="100%" spacing={1}>
-                    <Icon sx={{ fontSize: 28, opacity: props.isActive ? 1 : 0.6, }}>{props.icon}</Icon>
-                    <Typography fontWeight={100} fontSize={12}>{props.label}</Typography>
-                </Stack>
-            </Box>
-        </ButtonBase>
-    </Link>
-));
+function SmallIndicator(props: { isActive: boolean; icon: string; label: string; activeBackgroundColor: string; href: string; }) {
+    return (
+        <Link href={props.href} passHref>
+            <ButtonBase>
+                <Box sx={{ width: '52px', height: '82px', backgroundColor: props.isActive ? props.activeBackgroundColor : 'transparent', borderRadius: 1 }}>
+                    <Stack alignItems="center" justifyContent="center" height="100%" spacing={1}>
+                        <Icon sx={{ fontSize: 28, opacity: props.isActive ? 1 : 0.6, }}>{props.icon}</Icon>
+                        <Typography fontWeight={100} fontSize={12}>{props.label}</Typography>
+                    </Stack>
+                </Box>
+            </ButtonBase>
+        </Link>
+    );
+}
 
-const WidgetAirConditioning = (props: WidgetSharedProps) => {
+function WidgetAirConditioning(props: WidgetSharedProps) {
     const { config } = props;
     useWidgetOptions(stateOptions, props);
     const { item: temperatureDevice } = useEntity(config?.targetTemperature?.deviceId);
@@ -101,9 +102,9 @@ const WidgetAirConditioning = (props: WidgetSharedProps) => {
             </Stack>
         </Box>
     );
-};
+}
 
 WidgetAirConditioning.columns = 4;
 WidgetAirConditioning.rows = 4;
 
-export default observer(WidgetAirConditioning);
+export default WidgetAirConditioning;

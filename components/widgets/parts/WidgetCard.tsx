@@ -22,7 +22,7 @@ interface IWidgetCardProps {
     onRemove?: () => void
 }
 
-const WidgetCard = (props: IWidgetCardProps) => {
+function WidgetCard(props: IWidgetCardProps) {
     const {
         children,
         state,

@@ -12,7 +12,7 @@ const stateOptions: IWidgetConfigurationOption[] = [
     DefaultHeight(4),
 ];
 
-const WidgetVacuum = (props: WidgetSharedProps) => {
+function WidgetVacuum(props: WidgetSharedProps) {
     const label = props.config?.label ?? '';
     const batteryPerc = 100;
 
@@ -27,6 +27,6 @@ const WidgetVacuum = (props: WidgetSharedProps) => {
             <Typography>{label}</Typography>
         </Stack>
     );
-};
+}
 
 export default WidgetVacuum;

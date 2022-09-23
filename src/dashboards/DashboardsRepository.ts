@@ -1,4 +1,3 @@
-import { action, isObservable, makeAutoObservable, makeObservable, observable, onBecomeObserved, runInAction } from 'mobx';
 import ContactRepository from 'src/contacts/ContactRepository';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import IUser from 'src/users/IUser';
@@ -33,7 +32,6 @@ export class WidgetModel implements IWidget {
         this.order = order;
         this.type = type;
         this.config = config;
-        makeAutoObservable(this);
     }
 
     setConfig(newConfig: object | undefined) {
@@ -71,8 +69,6 @@ class DashboardModel implements IDashboardModel {
         this.sharedWith = sharedWith;
         this.timeStamp = timeStamp;
         this.order = order;
-
-        makeAutoObservable(this);
     }
 }
 
@@ -87,7 +83,7 @@ function dashboardModelFromEntity(entity: IEntityDetails, order: number) {
         order);
 
     dashboard.widgets = (typeof dashboard.configurationSerialized !== 'undefined' && dashboard.configurationSerialized != null
-            ? ((JSON.parse(dashboard.configurationSerialized).widgets ?? []) as Array<IWidget>).map(i => makeAutoObservable(i))
+            ? ((JSON.parse(dashboard.configurationSerialized).widgets ?? []) as Array<IWidget>)
             : [])
         .map((w, i) => ({ ...w, id: i.toString() }));
 
@@ -118,14 +114,6 @@ class DashboardsRepository {
 
     constructor() {
         this._cacheDashboardsAsync = this._cacheDashboardsAsync.bind(this);
-        makeObservable(this, {
-            isUpdateAvailable: observable,
-            isLoading: observable,
-            dashboards: observable,
-            _mapAndApplyDashboards: action.bound
-        });
-
-        onBecomeObserved(this, 'dashboards', this._cacheDashboardsAsync);
     }
 
 
@@ -154,9 +142,7 @@ class DashboardsRepository {
         // Mark favorite locally
         const favoritedDashboard = this.dashboards.find(d => d.id === id);
         if (favoritedDashboard) {
-            runInAction(() => {
-                favoritedDashboard.isFavorite = newIsFavorite;
-            });
+            favoritedDashboard.isFavorite = newIsFavorite;
         }
     }
 
@@ -333,7 +319,7 @@ class DashboardsRepository {
             }
         }
 
-        return isObservable(d) ? d : makeAutoObservable(d);
+        return d;
     }
 
     async _mapAndApplyDashboards(updatedDashboards: IDashboardModel[]) {

@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { ThemeContext } from '../../../pages/_app';
 
-const CounterIndicator = (props: { count: number, hideAfter?: boolean }) => {
+function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
     const themeContext = useContext(ThemeContext);
 
     return (
@@ -42,6 +42,6 @@ const CounterIndicator = (props: { count: number, hideAfter?: boolean }) => {
             </Box>
         </Box>
     );
-};
+}
 
 export default CounterIndicator;

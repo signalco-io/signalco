@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { Avatar, Box, ButtonBase, Grid, NoSsr, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
-import { observer } from 'mobx-react-lite';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import useAllEntities from '../../../src/hooks/useAllEntities';
 import Link from 'next/link';
@@ -18,7 +17,7 @@ import Timeago from 'components/shared/time/Timeago';
 import { entityLastActivity } from 'src/entity/EntityHelper';
 import EntityStatus from 'components/entity/EntityStatus';
 
-const EntityCard = (props: { entity: IEntityDetails }) => {
+function EntityCard(props: { entity: IEntityDetails }) {
     const { entity } = props;
     const Icon = EntityIcon(entity);
     return (
@@ -54,7 +53,7 @@ const EntityCard = (props: { entity: IEntityDetails }) => {
     );
 }
 
-const EntityTableName = (props: { entity: IEntityDetails }) => {
+function EntityTableName(props: { entity: IEntityDetails }) {
     const { entity } = props;
     const Icon = EntityIcon(entity);
     return (
@@ -63,7 +62,7 @@ const EntityTableName = (props: { entity: IEntityDetails }) => {
             <Typography noWrap sx={{ opacity: 0.9 }}>{entity.alias}</Typography>
         </Stack>
     );
-};
+}
 
 function deviceModelToTableItem(entity: IEntityDetails): IAutoTableItem {
     return {
@@ -82,7 +81,7 @@ function deviceModelToTableItem(entity: IEntityDetails): IAutoTableItem {
     };
 }
 
-const Entities = () => {
+function Entities() {
     const entities = useAllEntities();
     const entityItems = entities.items;
     const { t } = useLocale('App', 'Entities');
@@ -138,8 +137,8 @@ const Entities = () => {
             </Stack>
         </Stack>
     );
-};
+}
 
 Entities.layout = AppLayoutWithAuth;
 
-export default observer(Entities);
+export default Entities;

@@ -17,7 +17,7 @@ import { PageWithMetadata } from 'pages/_app';
 import PageCenterHeader from 'components/pages/PageCenterHeader';
 import Gallery from 'components/gallery/Gallery';
 
-const StoreStockStatusBadge = (props: { status: number | undefined }) => {
+function StoreStockStatusBadge(props: { status: number | undefined }) {
     let Icon = CancelIcon;
     let opacity = 0.6;
     let text = 'Out of stock';
@@ -55,7 +55,7 @@ const StoreStockStatusBadge = (props: { status: number | undefined }) => {
     );
 }
 
-const StoreItemThumb = (props: { id: string, name: string, features?: string[], imageSrc?: string, price?: number, stockStatus?: number }) => {
+function StoreItemThumb(props: { id: string, name: string, features?: string[], imageSrc?: string, price?: number, stockStatus?: number }) {
     const { name, features, imageSrc, price, stockStatus } = props;
 
     return (
@@ -88,7 +88,7 @@ const StoreItemThumb = (props: { id: string, name: string, features?: string[], 
             </CardActionArea>
         </Card>
     );
-};
+}
 
 export async function getStaticProps() {
     return {

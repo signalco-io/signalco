@@ -1,6 +1,5 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
 import React, { useCallback, useState } from 'react';
-import { observer } from 'mobx-react-lite';
 import DashboardsRepository, { WidgetModel } from '../../src/dashboards/DashboardsRepository';
 import PageNotificationService from '../../src/notifications/PageNotificationService';
 import DashboardView from './DashboardView';
@@ -19,7 +18,7 @@ import useLoadAndError from 'src/hooks/useLoadAndError';
 
 const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 
-const Dashboards = observer(() => {
+function Dashboards() {
     const { t } = useLocale('App', 'Dashboards');
     const [selectedId, setDashboardIdHash] = useHashParam('dashboard');
     const retrieveDashbaord = useCallback(() => {
@@ -76,7 +75,7 @@ const Dashboards = observer(() => {
     const handleAddWidgetPlaceholder = () => {
         setIsEditing(true);
         setShowWidgetStore(true);
-    }
+    };
 
     const [isDashboardSettingsOpen, setIsDashboardSettingsOpen] = useState<boolean>(false);
     const handleSettings = useCallback(() => setIsDashboardSettingsOpen(true), []);
@@ -129,12 +128,12 @@ const Dashboards = observer(() => {
                     onClose={() => setIsDashboardSettingsOpen(false)} />
             )}
             {showWidgetStore && (
-                <ConfigurationDialog isOpen={showWidgetStore} onClose={() => setShowWidgetStore(false)} title={t('AddWidget')} maxWidth="lg" >
+                <ConfigurationDialog isOpen={showWidgetStore} onClose={() => setShowWidgetStore(false)} title={t('AddWidget')} maxWidth="lg">
                     <WidgetStoreDynamic onAddWidget={handleAddWidget} />
                 </ConfigurationDialog>
             )}
         </>
     );
-});
+}
 
 export default Dashboards;

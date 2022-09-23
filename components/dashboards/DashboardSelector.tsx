@@ -3,7 +3,6 @@ import { bindPopover, bindTrigger, usePopupState } from 'material-ui-popup-state
 import React, { useEffect } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import DashboardsRepository from '../../src/dashboards/DashboardsRepository';
-import { observer } from 'mobx-react-lite';
 import useHashParam from '../../src/hooks/useHashParam';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
 
@@ -103,4 +102,4 @@ function DashboardSelector(props: IDashboardSelectorProps) {
     );
 }
 
-export default observer(DashboardSelector);
+export default DashboardSelector;

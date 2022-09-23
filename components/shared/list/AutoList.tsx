@@ -34,7 +34,7 @@ export interface IItemRendererProps {
   item: IAutoListItem;
 }
 
-const ItemRenderer = (props: IItemRendererProps) => {
+function ItemRenderer(props: IItemRendererProps) {
   const IconComponent = props.item.icon;
 
   return (
@@ -55,7 +55,7 @@ const ItemRenderer = (props: IItemRendererProps) => {
         ))}
     </ListItem>
   );
-};
+}
 
 function AutoList<T extends IAutoListItem>(props: IAutoListProps<T>) {
   return props.isLoading ? (

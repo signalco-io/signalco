@@ -5,13 +5,11 @@ import { AddSharp } from '@mui/icons-material';
 import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import PushPinSharpIcon from '@mui/icons-material/PushPinSharp';
 import DashboardsRepository, { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
-import { observer } from 'mobx-react-lite';
 import useHashParam from '../../src/hooks/useHashParam';
 import ShareEntityChip from '../entity/ShareEntityChip';
 import { CSS } from '@dnd-kit/utilities';
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
-import { runInAction } from 'mobx';
 import useLocale from '../../src/hooks/useLocale';
 
 interface IDashboardSelectorMenuProps {
@@ -29,13 +27,9 @@ interface IDashboardSortableItemProps {
     onFavorite: (id: string) => void;
 }
 
-const DashboardSortableItem = observer((props: IDashboardSortableItemProps) => {
+function DashboardSortableItem(props: IDashboardSortableItemProps) {
     const {
-        attributes,
-        listeners,
-        setNodeRef,
-        transform,
-        transition,
+        attributes, listeners, setNodeRef, transform, transition,
     } = useSortable({ id: props.dashboard.id });
     const { dashboard, selectedId, onSelection, onFavorite } = props;
 
@@ -61,7 +55,7 @@ const DashboardSortableItem = observer((props: IDashboardSortableItemProps) => {
             </Stack>
         </div>
     );
-});
+}
 
 function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const { selectedId, popupState, onSelection, onEditWidgets, onSettings } = props;
@@ -104,9 +98,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
             const newIndex = orderedDashboardIds.indexOf(over.id.toString());
             const newOrderedDashboards = arrayMove(orderedDashboards, oldIndex, newIndex);;
             for (let i = 0; i < newOrderedDashboards.length; i++) {
-                runInAction(() => {
-                    newOrderedDashboards[i].order = i;
-                })
+                newOrderedDashboards[i].order = i;
             }
 
             await DashboardsRepository.dashboardsOrderSetAsync(newOrderedDashboards.map(d => d.id));
@@ -163,4 +155,4 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     );
 }
 
-export default observer(DashboardSelectorMenu);
+export default DashboardSelectorMenu;

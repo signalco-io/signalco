@@ -13,7 +13,7 @@ import { executeStateActionsAsync, StateAction } from './WidgetState';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
-const WidgetShades = (props: WidgetSharedProps) => {
+function WidgetShades(props: WidgetSharedProps) {
     const { config } = props;
     const entity = useEntity(config?.target?.entityId);
     const entityId = entity.item?.id;
@@ -99,7 +99,7 @@ const WidgetShades = (props: WidgetSharedProps) => {
             </Grid>
         </Grid>
     );
-};
+}
 
 WidgetShades.columns = 4;
 

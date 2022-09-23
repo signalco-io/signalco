@@ -7,7 +7,7 @@ export interface CopyToClipboardInputProps extends FilledInputProps {
     label?: string | undefined
 };
 
-export const LabelWrapper = (props: { children: React.ReactNode, variant: 'standard' | 'outlined' | 'filled', options: CopyToClipboardInputProps }) => {
+export function LabelWrapper(props: { children: React.ReactNode, variant: 'standard' | 'outlined' | 'filled', options: CopyToClipboardInputProps }) {
     if (props.options.label) {
         return (
             <FormControl fullWidth variant={props.variant}>
@@ -19,7 +19,7 @@ export const LabelWrapper = (props: { children: React.ReactNode, variant: 'stand
     return <>{props.children}</>;
 }
 
-const CopyToClipboardInput = (props: CopyToClipboardInputProps) => {
+function CopyToClipboardInput(props: CopyToClipboardInputProps) {
     if (!props.id) throw 'CopyToClipboardInput requires id';
 
     return (
@@ -36,6 +36,6 @@ const CopyToClipboardInput = (props: CopyToClipboardInputProps) => {
             </LabelWrapper>
         </>
     );
-};
+}
 
 export default CopyToClipboardInput;

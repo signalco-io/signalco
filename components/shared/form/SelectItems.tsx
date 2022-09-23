@@ -11,7 +11,7 @@ export interface ISelectItemsProps {
     fullWidth?: boolean
 }
 
-const SelectItems = (props: ISelectItemsProps) => {
+function SelectItems(props: ISelectItemsProps) {
     const {
         value,
         items,
@@ -64,6 +64,6 @@ const SelectItems = (props: ISelectItemsProps) => {
             )}</Select>
         </FormControl>
     );
-};
+}
 
 export default SelectItems;
