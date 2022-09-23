@@ -10,5 +10,8 @@ export function entityInError(entity: IEntityDetails | undefined) {
 
 export function entityLastActivity(entity: IEntityDetails | undefined) {
     if (typeof entity === 'undefined') return new Date(0);
-    return new Date(arrayMax(entity.contacts.map(c => c.timeStamp), d => d?.getTime() ?? 0) ?? 0)
+    const maxTimeStamp = arrayMax<Date | undefined>(entity.contacts.map(c => c.timeStamp), d => d?.getTime());
+    if (maxTimeStamp)
+        return new Date(maxTimeStamp);
+    return undefined;
 }

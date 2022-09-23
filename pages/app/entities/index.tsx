@@ -35,7 +35,9 @@ const EntityCard = (props: { entity: IEntityDetails }) => {
                                     <Typography noWrap sx={{ opacity: 0.9 }}>{entity.alias}</Typography>
                                 </Stack>
                                 <Stack direction="row" alignItems="center" justifyContent="space-between">
-                                    <ShareEntityChip entityType={2} entity={entity} disableAction />
+                                    <div>
+                                        <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
+                                    </div>
                                     <Stack direction="row" spacing={1} alignItems="center">
                                         <EntityStatus entity={entity} />
                                         <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
@@ -85,7 +87,7 @@ const Entities = () => {
     const entityItems = entities.items;
     const { t } = useLocale('App', 'Entities');
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
-    const [filteredItems, showSearch, searchText, handleSearchTextChange] = useSearch(entityItems, filterFuncObjectStringProps);
+    const [filteredItems, showSearch, searchText, handleSearchTextChange, isSearching] = useSearch(entityItems, filterFuncObjectStringProps);
 
     const filteredItemsMapped = useMemo(() => {
         return filteredItems.map(deviceModelToTableItem);
@@ -94,18 +96,18 @@ const Entities = () => {
     const results = useMemo(() => (
         <>
             {entityListViewType === 'table' ? (
-                <AutoTable hideSearch items={filteredItemsMapped} isLoading={entities.isLoading} error={entities.error} localize={t} />
+                <AutoTable hideSearch items={filteredItemsMapped} localize={t} isLoading={false} error={undefined} />
             ) : (
                 <Box sx={{ px: 2 }}>
                     <Grid container spacing={2}>
-                        {!entities.isLoading && filteredItems.map(entity => (
+                        {filteredItems.map(entity => (
                             <EntityCard key={entity.id} entity={entity} />
                         ))}
                     </Grid>
                 </Box>
             )}
         </>
-    ), [entities.error, entities.isLoading, entityListViewType, filteredItems, filteredItemsMapped, t])
+    ), [entityListViewType, filteredItems, filteredItemsMapped, t])
 
     return (
         <Stack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
@@ -127,9 +129,13 @@ const Entities = () => {
                     </NoSsr>
                 </Stack>
             </Stack>
-            <Loadable isLoading={entities.isLoading} error={entities.error} placeholder="linear">
-                {results}
-            </Loadable>
+            <Stack spacing={1}>
+                <Loadable isLoading={entities.isLoading} error={entities.error}>
+                    <Loadable isLoading={isSearching} contentVisible placeholder="linear" sx={{px: 2}}>
+                        {results}
+                    </Loadable>
+                </Loadable>
+            </Stack>
         </Stack>
     );
 };

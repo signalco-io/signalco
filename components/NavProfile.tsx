@@ -39,6 +39,7 @@ import useUserSetting from '../src/hooks/useUserSetting';
 import ApiBadge from './development/ApiBadge';
 import useIsMobile from 'src/hooks/useIsMobile';
 import CommitIcon from '@mui/icons-material/Commit';
+import useIsTablet from 'src/hooks/useIsTablet';
 
 const navItems = [
   { label: 'Channels', path: '/app/channels', icon: CommitIcon, hidden: true },

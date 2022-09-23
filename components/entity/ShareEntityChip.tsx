@@ -12,9 +12,10 @@ import useLocale from '../../src/hooks/useLocale';
 import IUser from 'src/users/IUser';
 
 interface IShareEntityChipProps {
-    entity?: { id: string, sharedWith?: IUser[] },
-    entityType: number,
-    disableAction?: boolean
+    entity?: { id: string, sharedWith?: IUser[] };
+    entityType: number;
+    disableAction?: boolean;
+    hideSingle?: boolean;
 }
 
 interface IShareEntityModalProps {
@@ -78,8 +79,12 @@ function ShareEntityModal(props: IShareEntityModalProps) {
 }
 
 function ShareEntityChip(props: IShareEntityChipProps) {
-    const { entity, entityType, disableAction } = props;
+    const { entity, entityType, disableAction, hideSingle } = props;
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    if (hideSingle && (entity?.sharedWith?.length ?? 0) <= 1) {
+        return null;
+    }
 
     const handleChipClick = () => {
         setIsModalOpen(true);
