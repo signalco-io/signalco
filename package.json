@@ -50,7 +50,7 @@
         "color": "4.2.3",
         "compare-versions": "5.0.1",
         "d3": "7.6.1",
-        "date-fns": "2.29.2",
+        "date-fns": "2.29.3",
         "material-ui-popup-state": "4.0.2",
         "mobx": "6.6.2",
         "mobx-react-lite": "3.4.0",
