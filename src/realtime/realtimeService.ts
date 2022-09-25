@@ -40,6 +40,8 @@ class RealtimeService {
     private async _hubStartWithRetryAsync(retryCount: number) {
         try {
             if (this.contactsHub == null) return;
+            if (this.contactsHub.state === 'Connected')
+                return;
 
             console.debug('Connecting to SignalR...');
 

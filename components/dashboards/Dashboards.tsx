@@ -1,6 +1,6 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
-import React, { useCallback, useState } from 'react';
-import DashboardsRepository, { WidgetModel } from '../../src/dashboards/DashboardsRepository';
+import React, { useCallback, useEffect, useState } from 'react';
+import { WidgetModel } from '../../src/dashboards/DashboardsRepository';
 import PageNotificationService from '../../src/notifications/PageNotificationService';
 import DashboardView from './DashboardView';
 import DashboardSelector from './DashboardSelector';
@@ -11,41 +11,32 @@ import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import useHashParam from '../../src/hooks/useHashParam';
-import useDashboardsUpdateChecker from './useDashboardsUpdateChecker';
 import useLocale from '../../src/hooks/useLocale';
 import Loadable from '../shared/Loadable/Loadable';
-import useLoadAndError from 'src/hooks/useLoadAndError';
+import useDashboard from 'src/hooks/dashboards/useDashboard';
+import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
 
 const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 
 function Dashboards() {
     const { t } = useLocale('App', 'Dashboards');
     const [selectedId, setDashboardIdHash] = useHashParam('dashboard');
-    const retrieveDashbaord = useCallback(() => {
-        return DashboardsRepository.getAsync(selectedId);
-    }, [selectedId]);
-    const selectedDashboard = useLoadAndError(retrieveDashbaord);
-
-    useDashboardsUpdateChecker();
+    const selectedDashboard = useDashboard(selectedId);
+    const saveDashboard = useSaveDashboard();
 
     const [isEditing, setIsEditing] = useState(false);
     const [isSavingEdit, setIsSavingEdit] = useState(false);
     const handleEditWidgets = useCallback(() => setIsEditing(true), []);
     const handleEditDone = async () => {
+        if (!selectedDashboard.data) {
+            console.warn('Can not save - dashboard not selected');
+            return;
+        }
+
         try {
             setIsSavingEdit(true);
-            const updatedDashboards = [];
-            for (let i = 0; i < DashboardsRepository.dashboards.length; i++) {
-                const dashboard = DashboardsRepository.dashboards[i];
-                updatedDashboards.push({
-                    ...dashboard,
-                    configurationSerialized: JSON.stringify({
-                        widgets: dashboard.widgets
-                    })
-                });
-            }
-            console.debug('Saving dashboards...', updatedDashboards);
-            await DashboardsRepository.saveDashboardsAsync(updatedDashboards);
+            console.debug(`Saving dashboard ${selectedId}...`, selectedDashboard.data);
+            await saveDashboard.mutateAsync(selectedDashboard.data);
         } catch (err) {
             console.error('Failed to save dashboards', err);
             PageNotificationService.show(t('SaveFailedNotification'), 'error');
@@ -55,22 +46,27 @@ function Dashboards() {
         }
     };
 
+    useEffect(() => {
+        setIsEditing(false);
+    }, [selectedId]);
+
     const handleNewDashboard = async () => {
         try {
-            const newDashboardId = await DashboardsRepository.saveDashboardAsync({
+            const newDashboardId = await saveDashboard.mutateAsync({
                 name: 'New dashboard'
             });
             setDashboardIdHash(newDashboardId);
         } catch (err) {
+            console.error('Failed to create dashboard', err);
             PageNotificationService.show(t('NewDashboardErrorUnknown'), 'error');
         }
     };
 
     const [showWidgetStore, setShowWidgetStore] = useState(false);
     const handleAddWidget = useCallback((widgetType: widgetType) => {
-        selectedDashboard.item?.widgets.push(new WidgetModel('new-widget', selectedDashboard.item.widgets.length, widgetType));
+        selectedDashboard.data?.widgets.push(new WidgetModel('new-widget', selectedDashboard.data.widgets.length, widgetType));
         setShowWidgetStore(false);
-    }, [selectedDashboard.item?.widgets]);
+    }, [selectedDashboard.data?.widgets]);
 
     const handleAddWidgetPlaceholder = () => {
         setIsEditing(true);
@@ -100,10 +96,10 @@ function Dashboards() {
                 </Stack>
                 <Loadable isLoading={selectedDashboard.isLoading} error={selectedDashboard.error}>
                     <Box sx={{ px: 2 }}>
-                        {selectedDashboard.item
+                        {selectedDashboard.data
                             ? (
                                 <DashboardView
-                                    dashboard={selectedDashboard.item}
+                                    dashboard={selectedDashboard.data}
                                     isEditing={isEditing}
                                     onAddWidget={handleAddWidgetPlaceholder} />
                             ) : (
@@ -123,7 +119,7 @@ function Dashboards() {
             </Stack>
             {isDashboardSettingsOpen && (
                 <DashboardSettings
-                    dashboard={selectedDashboard.item}
+                    dashboard={selectedDashboard.data}
                     isOpen={isDashboardSettingsOpen}
                     onClose={() => setIsDashboardSettingsOpen(false)} />
             )}

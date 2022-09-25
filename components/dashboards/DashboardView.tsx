@@ -24,7 +24,10 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
     const widgets = widgetsOrder.map(wo => dashboard.widgets.find(w => wo === w.id)!);
 
     function handleSetWidgetConfig(widgetId: string, config: object | undefined) {
-        dashboard.widgets.find(w => w.id === widgetId)?.setConfig(config);
+        const widget = dashboard.widgets.find(w => w.id === widgetId);
+        if (widget) {
+            widget.config = config;
+        }
     }
 
     function handleRemoveWidget(widgetId: string) {

@@ -11,6 +11,8 @@ import { CSS } from '@dnd-kit/utilities';
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import useLocale from '../../src/hooks/useLocale';
+import useDashboards from 'src/hooks/dashboards/useDashboards';
+import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
 
 interface IDashboardSelectorMenuProps {
     selectedId: string | undefined,
@@ -62,10 +64,11 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const { t } = useLocale('App', 'Dashboards');
     const [_, setDashboardIdHash] = useHashParam('dashboard');
     const [isFullScreen, setFullScreenHash] = useHashParam('fullscreen');
+    const { data: dashboards } = useDashboards();
+    const saveDashboard = useSaveDashboard();
 
-    const dashboards = DashboardsRepository.dashboards;
-    const orderedDashboardIds = dashboards.slice().sort((a, b) => a.order - b.order).map(d => d.id);
-    const orderedDashboards = orderedDashboardIds.map(dor => dashboards.find(d => dor === d.id)!);
+    const orderedDashboardIds = dashboards?.slice().sort((a, b) => a.order - b.order).map(d => d.id) ?? [];
+    const orderedDashboards = orderedDashboardIds?.map(dor => dashboards?.find(d => dor === d.id)!) ?? [];
 
     const handleAndClose = (callback: (...params: any[]) => void) => {
         return (...params: any[]) => {
@@ -75,14 +78,14 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     }
 
     const handleNewDashboard = handleAndClose(async () => {
-        const newDashboardId = await DashboardsRepository.saveDashboardAsync({
-            name: t('NewDashboard')
+        const newDashboardId = await saveDashboard.mutateAsync({
+            name: 'New dashboard'
         });
         setDashboardIdHash(newDashboardId);
     });
 
     const handleToggleFavorite = async (id: string) => {
-        const dashboard = dashboards.find(d => d.id === id);
+        const dashboard = dashboards?.find(d => d.id === id);
         if (dashboard) {
             await DashboardsRepository.favoriteSetAsync(dashboard.id, !dashboard.isFavorite);
         }
@@ -146,7 +149,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
             <Divider />
             <Stack direction="row" alignItems="center" sx={{ p: 2 }}>
                 <Typography variant="subtitle1" color="textSecondary" sx={{ flexGrow: 1 }}>{t('Dashboard')}</Typography>
-                <ShareEntityChip entity={dashboards.find(d => d.id === selectedId)} entityType={3} />
+                <ShareEntityChip entity={dashboards?.find(d => d.id === selectedId)} entityType={3} />
             </Stack>
             <Button size="large" onClick={handleAndClose(onFullscreen)}>{t('ToggleFullscreen')}</Button>
             <Button size="large" onClick={handleAndClose(onSettings)}>{t('Settings')}</Button>

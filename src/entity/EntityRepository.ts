@@ -53,7 +53,6 @@ class EntityRepository {
     }
 
     async upsertAsync(id: string | undefined, type: number, alias: string) {
-        // TODO: Optimize by using cache when applicable
         return (await HttpService.requestAsync('/entity', 'post', {
             id: id,
             type: type,
