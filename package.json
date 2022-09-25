@@ -43,7 +43,7 @@
         "@mui/x-date-pickers": "5.0.3",
         "@next/env": "12.3.1",
         "@next/mdx": "12.3.1",
-        "@vvo/tzdb": "6.65.0",
+        "@vvo/tzdb": "6.66.0",
         "axios": "0.27.2",
         "clsx": "1.2.1",
         "cobe": "0.6.2",
