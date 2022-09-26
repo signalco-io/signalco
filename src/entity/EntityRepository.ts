@@ -4,64 +4,51 @@ import { orderBy } from 'src/helpers/ArrayHelpers';
 import HttpService from '../services/HttpService';
 import IEntityDetails from './IEntityDetails';
 
-class EntityRepository {
-    constructor() {
-        this.allAsync = this.allAsync.bind(this);
-        this.byIdAsync = this.byIdAsync.bind(this);
-    }
-
-    private mapEntityDetailsFromDto(e: any) {
-        return {
-            ...e,
-            timeStamp: e.timeStamp ? new Date(e.timeStamp) : undefined,
-            contacts: e.contacts.map((c: any) => ({
-                ...c,
-                timeStamp: c.timeStamp ? new Date(c.timeStamp) : undefined
-            }))
-        } as IEntityDetails;
-    }
-
-    async deleteAsync(id: string) {
-        await HttpService.requestAsync('/entity', 'delete', {id: id});
-    }
-
-    async allAsync() {
-        const entities = await HttpService.requestAsync('/entity', 'get');
-        return orderBy(entities.map(this.mapEntityDetailsFromDto) as IEntityDetails[], (a, b) => a.alias?.localeCompare(b.alias));
-    }
-
-    async renameAsync(id: string, newAlias: string) {
-        const entity = await this.byIdAsync(id);
-        if (entity == null)
-            throw new Error(`Unknown entity \"${id}\"`);
-
-        await this.upsertAsync(id, entity.type, newAlias);
-    }
-
-    async byIdAsync(id: string) {
-        const entity = await HttpService.getAsync(`/entity/${id}`);
-        return this.mapEntityDetailsFromDto(entity);
-    }
-
-    async byTypeAsync(type: number) {
-        return (await this.allAsync()).filter(e => e.type === type);
-    }
-
-    async contactAsync(pointer: IContactPointer) : Promise<IContact | undefined> {
-        const entity = await this.byIdAsync(pointer.entityId);
-        return entity?.contacts.find(c => c.channelName === pointer.channelName && c.contactName === c.contactName);
-    }
-
-    async upsertAsync(id: string | undefined, type: number, alias: string) {
-        // TODO: Optimize by using cache when applicable
-        return (await HttpService.requestAsync('/entity', 'post', {
-            id: id,
-            type: type,
-            alias: alias
-        }) as {id: string})?.id;
-    }
+function mapEntityDetailsFromDto(e: any) {
+    return {
+        ...e,
+        timeStamp: e.timeStamp ? new Date(e.timeStamp) : undefined,
+        contacts: e.contacts.map((c: any) => ({
+            ...c,
+            timeStamp: c.timeStamp ? new Date(c.timeStamp) : undefined
+        }))
+    } as IEntityDetails;
 }
 
-const instance = new EntityRepository();
+export async function entityAsync(id: string) {
+    const entity = await HttpService.getAsync(`/entity/${id}`);
+    return mapEntityDetailsFromDto(entity);
+}
 
-export default instance;
+export async function entityRenameAsync(id: string, newAlias: string) {
+    const entity = await entityAsync(id);
+    if (entity == null)
+        throw new Error(`Unknown entity \"${id}\"`);
+
+    await entityUpsertAsync(id, entity.type, newAlias);
+}
+
+export async function entitiesAsync(type?: number) {
+    let entities = (await HttpService.requestAsync('/entity', 'get')).map(mapEntityDetailsFromDto) as IEntityDetails[];
+    if (typeof type !== 'undefined') {
+        entities = entities.filter(e => e.type === type);
+    }
+    return orderBy(entities, (a, b) => a.alias?.localeCompare(b.alias));
+}
+
+export async function entityUpsertAsync(id: string | undefined, type: number, alias: string) {
+    return (await HttpService.requestAsync('/entity', 'post', {
+        id: id,
+        type: type,
+        alias: alias
+    }) as {id: string})?.id;
+}
+
+export async function contactAsync(pointer: IContactPointer) : Promise<IContact | undefined> {
+    const entity = await entityAsync(pointer.entityId);
+    return entity?.contacts.find(c => c.channelName === pointer.channelName && c.contactName === c.contactName);
+}
+
+export async function entityDeleteAsync(id: string) {
+    await HttpService.requestAsync('/entity', 'delete', {id: id});
+}

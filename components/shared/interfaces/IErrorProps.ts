@@ -1,3 +1,3 @@
 export default interface IErrorProps {
-  error: string | undefined;
+  error: unknown | undefined;
 }

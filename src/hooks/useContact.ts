@@ -1,9 +1,13 @@
-import { useCallback } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import IContactPointer from 'src/contacts/IContactPointer';
-import EntityRepository from 'src/entity/EntityRepository';
-import useLoadAndError from './useLoadAndError';
+import { contactAsync } from 'src/entity/EntityRepository';
 
 export default function useContact(pointer: IContactPointer | undefined) {
-    const loadFunc = useCallback(() => pointer ? EntityRepository.contactAsync(pointer) : undefined, [pointer]);
-    return useLoadAndError(loadFunc);
+    return useQuery(['contact', pointer?.entityId, pointer?.channelName, pointer?.contactName], () => {
+        if (!pointer)
+            throw new Error('Pointer is required for contact');
+        return contactAsync(pointer);
+    }, {
+        enabled: Boolean(pointer)
+    });
 }

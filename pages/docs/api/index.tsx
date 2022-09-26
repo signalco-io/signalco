@@ -23,7 +23,7 @@ import useLoadAndError from 'src/hooks/useLoadAndError';
 
 type ChipColors = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
 
-const OperationChip = (props: { operation?: string | undefined, small?: boolean }) => {
+function OperationChip(props: { operation?: string | undefined, small?: boolean }) {
     const color = ({
         'get': 'success',
         'post': 'info',
@@ -32,7 +32,7 @@ const OperationChip = (props: { operation?: string | undefined, small?: boolean 
     }[props.operation?.toLowerCase() ?? ''] ?? 'default') as ChipColors;
 
     return <Chip color={color} size={props.small ? 'small' : 'medium'} sx={{ fontWeight: 'bold' }} label={props.operation?.toUpperCase()} />;
-};
+}
 
 type ApiOperationProps = { path: string, operation: OpenAPIV3.HttpMethods, info: OpenAPIV3.OperationObject };
 
@@ -62,7 +62,7 @@ function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject
     }
 };
 
-const NonArraySchema = (props: { name: string, schema: OpenAPIV3.NonArraySchemaObject }) => {
+function NonArraySchema(props: { name: string, schema: OpenAPIV3.NonArraySchemaObject }) {
     const propertyNames = props.schema.properties && Object.keys(props.schema.properties);
     const properties = typeof props.schema.properties !== 'undefined' && propertyNames
         ? propertyNames.map(pn => ({ name: pn, prop: props.schema.properties![pn] }))
@@ -74,11 +74,12 @@ const NonArraySchema = (props: { name: string, schema: OpenAPIV3.NonArraySchemaO
                 <Schema key={prop.name} name={prop.name} schema={prop.prop} />)}
         </div>
     );
-};
-const ArraySchema = (props: { name: string, schema: OpenAPIV3.ArraySchemaObject }) =>
-    <Typography key={props.name} color={red[400]} fontWeight="bold" variant="overline">{'Not supported property type "array"'}</Typography>
+}
+function ArraySchema(props: { name: string, schema: OpenAPIV3.ArraySchemaObject }) {
+  return <Typography key={props.name} color={red[400]} fontWeight="bold" variant="overline">{'Not supported property type "array"'}</Typography>
+}
 
-const Schema = (props: { name: string, schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | undefined }) => {
+function Schema(props: { name: string, schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | undefined }) {
     const api = useContext(ApiContext);
     if (!api) throw 'API is undefined';
 
@@ -99,7 +100,7 @@ const Schema = (props: { name: string, schema: OpenAPIV3.ReferenceObject | OpenA
     );
 }
 
-const ApiOperation = (props: ApiOperationProps) => {
+function ApiOperation(props: ApiOperationProps) {
     const api = useContext(ApiContext);
     if (!api) throw 'Api undefined';
     const { path, operation, info } = props;
@@ -197,7 +198,7 @@ const ApiOperation = (props: ApiOperationProps) => {
             </Stack>
         </Stack>
     );
-};
+}
 
 function ResponseStatusCode(props: { statusCode: number }) {
     return (
@@ -212,7 +213,7 @@ function extractTags(api: OpenAPIV3.Document): string[] {
     return allTags.filter((v, i, s) => s.indexOf(v) === i);
 }
 
-const Nav = () => {
+function Nav() {
     const api = useContext(ApiContext);
     const [tagName, setTagName] = useHashParam('tag');
     const [pathName, setPathName] = useHashParam('path');
@@ -264,13 +265,13 @@ const Nav = () => {
             </TreeView>
         </Stack>
     );
-};
+}
 
-const NavSkeleton = () => (
-    <Stack>
+function NavSkeleton() {
+  return <Stack>
         <Skeleton width="80%" />
     </Stack>
-);
+}
 
 function enumKeys<O extends object, K extends keyof O = keyof O>(obj: O): K[] {
     return Object.keys(obj).filter(k => Number.isNaN(+k)) as K[];
@@ -305,7 +306,7 @@ function getOperations(api: OpenAPIV3.Document): Array<GetOperationResult> {
     }).filter(i => typeof i !== 'undefined') as GetOperationResult[];
 }
 
-const Route = () => {
+function Route() {
     const api = useContext(ApiContext);
     const [tagName] = useHashParam('tag');
     const [pathName] = useHashParam('path');
@@ -333,7 +334,7 @@ const Route = () => {
             ))}
         </>
     );
-};
+}
 
 type ActionsProps = ApiOperationProps;
 
@@ -346,7 +347,7 @@ const useSecurityInfo = (requirements: OpenAPIV3.SecurityRequirementObject) => {
         .map(t => resolveRef<OpenAPIV3.SecuritySchemeObject>(api, t));
 };
 
-const SecurityInput = (props: { security: OpenAPIV3.SecurityRequirementObject }) => {
+function SecurityInput(props: { security: OpenAPIV3.SecurityRequirementObject }) {
     const { security } = props;
     const info = useSecurityInfo(security);
     return (
@@ -371,9 +372,9 @@ const SecurityInput = (props: { security: OpenAPIV3.SecurityRequirementObject })
             })}
         </>
     );
-};
+}
 
-const SecurityBadge = (props: { security: OpenAPIV3.SecurityRequirementObject }) => {
+function SecurityBadge(props: { security: OpenAPIV3.SecurityRequirementObject }) {
     const { security } = props;
     const info = useSecurityInfo(security);
     return (
@@ -392,7 +393,7 @@ const SecurityBadge = (props: { security: OpenAPIV3.SecurityRequirementObject })
     );
 }
 
-const Actions = (props: ActionsProps) => {
+function Actions(props: ActionsProps) {
     const { info } = props;
     const api = useContext(ApiContext);
     const [selectedServer, setSelectedServer] = useHashParam('server');
@@ -500,7 +501,7 @@ async function getOpenApiDoc(url: string) {
 
 const ApiContext = React.createContext<OpenAPIV3.Document | undefined>(undefined);
 
-const DocsApiPage = () => {
+function DocsApiPage() {
     const url = appSettingsProvider.isDeveloper
         ? 'https://api.signalco.dev/api/swagger.json'
         : 'https://api.signalco.io/api/swagger.json';
@@ -531,7 +532,7 @@ const DocsApiPage = () => {
             </Stack>
         </ApiContext.Provider>
     );
-};
+}
 
 DocsApiPage.layout = PageFullLayout;
 

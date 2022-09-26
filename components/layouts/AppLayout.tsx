@@ -7,7 +7,10 @@ import RealtimeService from '../../src/realtime/realtimeService';
 import useHashParam from '../../src/hooks/useHashParam';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import { ChildrenProps } from '../../src/sharedTypes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+const queryClient = new QueryClient();
 
 export function AppLayout(props: ChildrenProps) {
   const {
@@ -21,16 +24,20 @@ export function AppLayout(props: ChildrenProps) {
   // Initiate SignalR communication
   useEffect(() => {
     RealtimeService.startAsync();
+    RealtimeService.queryClient = queryClient;
   }, []);
 
   return (
     <>
-      <Stack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100%', width: '100%' }}>
-        {isFullScreen !== 'on' && <NavProfile />}
-        <Box sx={{ height: '100%', width: '100%', flexGrow: 1, position: 'relative' }}>
-          {children}
-        </Box>
-      </Stack>
+      <QueryClientProvider client={queryClient}>
+        <Stack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100%', width: '100%' }}>
+          {isFullScreen !== 'on' && <NavProfile />}
+          <Box sx={{ height: '100%', width: '100%', flexGrow: 1, position: 'relative' }}>
+            {children}
+          </Box>
+        </Stack>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
       {isFullScreen && (
         <Fab
           size="small"

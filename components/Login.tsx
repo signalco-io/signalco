@@ -6,7 +6,7 @@ import Link from 'next/link';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 import useTimeout from '../src/hooks/useTimeout';
 
-const Login = () => {
+function Login() {
   const [isLong, setIsLong] = useState(false);
   useTimeout(() => setIsLong(true), 3000);
 
@@ -23,6 +23,6 @@ const Login = () => {
       </Stack>
     </Stack>
   );
-};
+}
 
 export default Login;

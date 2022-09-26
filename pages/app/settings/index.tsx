@@ -37,21 +37,21 @@ function ConnectedService() {
     )
 }
 
-const SettingsItem = (props: { children: ReactNode, label?: string | undefined }) => (
-    <Stack spacing={1}>
+function SettingsItem(props: { children: ReactNode, label?: string | undefined }) {
+  return <Stack spacing={1}>
         {props.label && <Typography>{props.label}</Typography>}
         {props.children}
     </Stack>
-);
+}
 
-const SettingsSection = (props: { children: ReactNode, header: string }) => (
-    <Stack spacing={2}>
+function SettingsSection(props: { children: ReactNode, header: string }) {
+  return <Stack spacing={2}>
         <Typography variant="h2" sx={{ pt: { xs: 0, sm: 2 } }}>{props.header}</Typography>
         <Stack spacing={2}>
             {props.children}
         </Stack>
     </Stack>
-);
+}
 
 const SelectTimeZone: FormBuilderComponent = ({ onChange, label, helperText, error, ...rest }) => {
     const { t } = useLocale('App', 'Settings');
@@ -116,7 +116,7 @@ function SettingsFormProvider(props: ChildrenProps) {
     return <FormBuilderProvider components={components} {...props} />;
 }
 
-const SettingsIndex = () => {
+function SettingsIndex() {
     const { t } = useLocale('App', 'Settings');
     const locales = useLocale('App', 'Locales');
     const [userLocale, setUserLocale] = useUserSetting<string>('locale', 'en');
@@ -219,7 +219,7 @@ const SettingsIndex = () => {
             </Container>
         </SettingsFormProvider>
     );
-};
+}
 
 SettingsIndex.layout = AppLayoutWithAuth;
 

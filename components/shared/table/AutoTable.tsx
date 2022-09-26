@@ -8,7 +8,6 @@ import {
   Typography
 } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import { observer } from 'mobx-react-lite';
 import React from 'react';
 import NextLink from 'next/link';
 import {
@@ -46,7 +45,7 @@ export interface IAutoTableCellRendererProps {
   onClick: () => void
 }
 
-const ErrorRow = (props: IErrorProps) => {
+function ErrorRow(props: IErrorProps) {
   return (
     <div>
       <div>
@@ -56,9 +55,13 @@ const ErrorRow = (props: IErrorProps) => {
       </div>
     </div>
   );
-};
+}
 
-const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
+function DefaultCallWrapper({ children }: ChildrenProps) {
+  return <>{children}</>;
+}
+
+function CellRenderer(props: IAutoTableCellRendererProps) {
   if (typeof props.value === 'string' && isAbsoluteUrl(props.value as string))
     return (
       <Tooltip title={props.link || props.value}>
@@ -70,14 +73,13 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
       </Tooltip>
     );
 
-  let Wrapper = ({ children }: ChildrenProps) => <>{children}</>;
-
+  let Wrapper = DefaultCallWrapper;
   if (props.link) {
     Wrapper = function LinkWrapper({ children }: ChildrenProps) {
       return <Box>
         <NextLink passHref href={props.link}>{children}</NextLink>
-      </Box>
-    }
+      </Box>;
+    };
   }
 
   // TODO: Implement object display
@@ -108,7 +110,7 @@ const CellRenderer = observer((props: IAutoTableCellRendererProps) => {
       </Box>
     </Wrapper>
   );
-});
+}
 
 const filterItemKey = (ik: string) => ik !== 'id' && !ik.startsWith('_');
 
@@ -136,7 +138,7 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ overflow: 'auto', display: 'grid' }}>
           {props.isLoading && <LinearProgress />}
-          {props.error && <ErrorRow error={props.error} />}
+          {Boolean(props.error) && <ErrorRow error={props.error} />}
           {cells?.length > 0 && cells.map((item, rowIndex) => {
             return Object.keys(item)
               .filter(filterItemKey)
@@ -165,4 +167,4 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
   );
 }
 
-export default observer(AutoTable);
+export default AutoTable;

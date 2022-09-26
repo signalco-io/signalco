@@ -3,7 +3,7 @@ import SignalcoLogo from '../../components/icons/SignalcoLogo';
 import SignalcoLogotype from '../../components/icons/SignalcoLogotype';
 import { PageLayout } from '../../components/layouts/PageLayout';
 
-const DesignPage = () => {
+function DesignPage() {
     return (
         <Stack spacing={3}>
             <Typography gutterBottom variant="h2">Logo and logomark</Typography>

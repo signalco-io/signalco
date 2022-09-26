@@ -5,14 +5,14 @@ import { AddSharp } from '@mui/icons-material';
 import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import PushPinSharpIcon from '@mui/icons-material/PushPinSharp';
 import DashboardsRepository, { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
-import { observer } from 'mobx-react-lite';
 import useHashParam from '../../src/hooks/useHashParam';
 import ShareEntityChip from '../entity/ShareEntityChip';
 import { CSS } from '@dnd-kit/utilities';
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
-import { runInAction } from 'mobx';
 import useLocale from '../../src/hooks/useLocale';
+import useDashboards from 'src/hooks/dashboards/useDashboards';
+import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
 
 interface IDashboardSelectorMenuProps {
     selectedId: string | undefined,
@@ -29,13 +29,9 @@ interface IDashboardSortableItemProps {
     onFavorite: (id: string) => void;
 }
 
-const DashboardSortableItem = observer((props: IDashboardSortableItemProps) => {
+function DashboardSortableItem(props: IDashboardSortableItemProps) {
     const {
-        attributes,
-        listeners,
-        setNodeRef,
-        transform,
-        transition,
+        attributes, listeners, setNodeRef, transform, transition,
     } = useSortable({ id: props.dashboard.id });
     const { dashboard, selectedId, onSelection, onFavorite } = props;
 
@@ -61,17 +57,18 @@ const DashboardSortableItem = observer((props: IDashboardSortableItemProps) => {
             </Stack>
         </div>
     );
-});
+}
 
 function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const { selectedId, popupState, onSelection, onEditWidgets, onSettings } = props;
     const { t } = useLocale('App', 'Dashboards');
     const [_, setDashboardIdHash] = useHashParam('dashboard');
     const [isFullScreen, setFullScreenHash] = useHashParam('fullscreen');
+    const { data: dashboards } = useDashboards();
+    const saveDashboard = useSaveDashboard();
 
-    const dashboards = DashboardsRepository.dashboards;
-    const orderedDashboardIds = dashboards.slice().sort((a, b) => a.order - b.order).map(d => d.id);
-    const orderedDashboards = orderedDashboardIds.map(dor => dashboards.find(d => dor === d.id)!);
+    const orderedDashboardIds = dashboards?.slice().sort((a, b) => a.order - b.order).map(d => d.id) ?? [];
+    const orderedDashboards = orderedDashboardIds?.map(dor => dashboards?.find(d => dor === d.id)!) ?? [];
 
     const handleAndClose = (callback: (...params: any[]) => void) => {
         return (...params: any[]) => {
@@ -81,14 +78,14 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     }
 
     const handleNewDashboard = handleAndClose(async () => {
-        const newDashboardId = await DashboardsRepository.saveDashboardAsync({
-            name: t('NewDashboard')
+        const newDashboardId = await saveDashboard.mutateAsync({
+            name: 'New dashboard'
         });
         setDashboardIdHash(newDashboardId);
     });
 
     const handleToggleFavorite = async (id: string) => {
-        const dashboard = dashboards.find(d => d.id === id);
+        const dashboard = dashboards?.find(d => d.id === id);
         if (dashboard) {
             await DashboardsRepository.favoriteSetAsync(dashboard.id, !dashboard.isFavorite);
         }
@@ -104,9 +101,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
             const newIndex = orderedDashboardIds.indexOf(over.id.toString());
             const newOrderedDashboards = arrayMove(orderedDashboards, oldIndex, newIndex);;
             for (let i = 0; i < newOrderedDashboards.length; i++) {
-                runInAction(() => {
-                    newOrderedDashboards[i].order = i;
-                })
+                newOrderedDashboards[i].order = i;
             }
 
             await DashboardsRepository.dashboardsOrderSetAsync(newOrderedDashboards.map(d => d.id));
@@ -154,7 +149,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
             <Divider />
             <Stack direction="row" alignItems="center" sx={{ p: 2 }}>
                 <Typography variant="subtitle1" color="textSecondary" sx={{ flexGrow: 1 }}>{t('Dashboard')}</Typography>
-                <ShareEntityChip entity={dashboards.find(d => d.id === selectedId)} entityType={3} />
+                <ShareEntityChip entity={dashboards?.find(d => d.id === selectedId)} entityType={3} />
             </Stack>
             <Button size="large" onClick={handleAndClose(onFullscreen)}>{t('ToggleFullscreen')}</Button>
             <Button size="large" onClick={handleAndClose(onSettings)}>{t('Settings')}</Button>
@@ -163,4 +158,4 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     );
 }
 
-export default observer(DashboardSelectorMenu);
+export default DashboardSelectorMenu;

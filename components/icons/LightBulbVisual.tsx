@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '../../pages/_app';
 import styles from './LightBulbVisual.module.scss';
 
-const LightBulbVisual = (props: { state: boolean, size: number }) => {
+function LightBulbVisual(props: { state: boolean, size: number }) {
     const themeContext = useContext(ThemeContext);
 
     const isActive = props.state;

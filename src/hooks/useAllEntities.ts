@@ -1,9 +1,8 @@
-import EntityRepository from 'src/entity/EntityRepository';
-import IEntityDetails from 'src/entity/IEntityDetails';
-import useLoadingAndError from './useLoadingAndError';
+import { useQuery } from '@tanstack/react-query';
+import { entitiesAsync } from 'src/entity/EntityRepository';
 
-const useAllEntities = () => {
-    return useLoadingAndError<IEntityDetails, IEntityDetails>(EntityRepository.allAsync);
-};
+const useAllEntities = () => useQuery(['entities'], () => entitiesAsync(), {
+    staleTime: 60*1000 // 1min
+});
 
 export default useAllEntities;

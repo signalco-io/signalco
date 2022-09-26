@@ -12,7 +12,7 @@ export interface IConfirmDeleteDialogProps {
     maxWidth?: false | undefined | Breakpoint,
 }
 
-const ConfirmDeleteDialog = (props: IConfirmDeleteDialogProps) => {
+function ConfirmDeleteDialog(props: IConfirmDeleteDialogProps) {
     const { isOpen, title, expectedConfirmText, onClose, onConfirm, maxWidth } = props;
     const { t } = useLocale('App', 'Dialogs');
     const [confirmText, setConfirmText] = useState('');
@@ -32,6 +32,6 @@ const ConfirmDeleteDialog = (props: IConfirmDeleteDialogProps) => {
             </Stack>
         </ConfigurationDialog>
     );
-};
+}
 
 export default ConfirmDeleteDialog;

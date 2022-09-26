@@ -11,7 +11,7 @@ interface ILogViewerLineProps {
     lineHeight: number;
 }
 
-const LogLevelBadge = ({ level }: { level: string }) => {
+function LogLevelBadge({ level }: { level: string }) {
     let color = 'gray';
     switch (level) {
         case 'Information': color = 'DodgerBlue'; break;
@@ -21,11 +21,11 @@ const LogLevelBadge = ({ level }: { level: string }) => {
     }
 
     return <span style={{ backgroundColor: color, padding: '2px', paddingLeft: '6px', paddingRight: '6px', borderRadius: 4, marginRight: '8px', fontSize: '10px', textTransform: 'uppercase' }}>{level.substring(0, 3)}</span>
-};
+}
 
 const logLineRegex = new RegExp(/\[(.*)\]\s\((\w+)\)\s(.*)/);
 
-export const LogViewerLine = (props: ILogViewerLineProps) => {
+export function LogViewerLine(props: ILogViewerLineProps) {
     const { number, data, lineHeight } = props;
     const matches = logLineRegex.exec(data);
     const timeStamp = matches ? new Date(matches[1]) : new Date(0);
@@ -37,7 +37,7 @@ export const LogViewerLine = (props: ILogViewerLineProps) => {
             <div style={{ opacity: 0.8, display: 'inline-block', height: '1.3rem' }}>{matches ? matches[3] : data}</div>
         </div>
     )
-};
+}
 
 export default function LogViewer(props: ILogViewerProps) {
     const { text, height } = props;

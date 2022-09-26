@@ -1,5 +1,4 @@
 import { ButtonBase, Stack } from '@mui/material';
-import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Box } from '@mui/system';
 import Image from 'next/image';
@@ -18,14 +17,14 @@ const stateOptions = [
     DefaultWidth(1)
 ];
 
-const WidgetIndicator = (props: WidgetSharedProps) => {
+function WidgetIndicator(props: WidgetSharedProps) {
     const { config } = props;
     const router = useRouter();
 
     // Calc state from source value
     const pointer = config?.target as IContactPointer;
     const contact = useContact(config?.target);
-    const contactValueSerialized = contact?.item?.valueSerialized;
+    const contactValueSerialized = contact?.data?.valueSerialized;
     const value = typeof contactValueSerialized !== 'undefined' ? Number.parseFloat(contactValueSerialized) || 0 : 0;
 
     const isLow = value < 10;
@@ -53,6 +52,6 @@ const WidgetIndicator = (props: WidgetSharedProps) => {
             </Stack>
         </ButtonBase>
     );
-};
+}
 
-export default observer(WidgetIndicator);
+export default WidgetIndicator;

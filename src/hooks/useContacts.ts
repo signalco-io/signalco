@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import IContact from 'src/contacts/IContact';
 import IContactPointer from 'src/contacts/IContactPointer';
-import EntityRepository from 'src/entity/EntityRepository';
+import { contactAsync } from 'src/entity/EntityRepository';
 
 export default function useContacts(pointers: IContactPointer[] | undefined) {
     const [contacts, setContacts] = useState<(IContact | undefined)[] | undefined>(undefined);
@@ -11,7 +11,7 @@ export default function useContacts(pointers: IContactPointer[] | undefined) {
                 const newContacts = [];
                 for (let i = 0; i < pointers.length; i++) {
                     const pointer = pointers[i];
-                    const contact = await EntityRepository.contactAsync(pointer);
+                    const contact = await contactAsync(pointer);
                     newContacts.push(contact);
                 }
                 setContacts(newContacts);

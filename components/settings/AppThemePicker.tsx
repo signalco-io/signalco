@@ -8,7 +8,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useState } from 'react';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
-const AppThemeVisual = (props: { label: string, theme: AppTheme, disabled?: boolean }) => {
+function AppThemeVisual(props: { label: string, theme: AppTheme, disabled?: boolean }) {
     const { label, theme, disabled } = props;
 
     let textColor;
@@ -47,7 +47,7 @@ const AppThemeVisual = (props: { label: string, theme: AppTheme, disabled?: bool
             <Typography sx={{ pt: 1, color: 'text.primary' }} variant="body2">{label}</Typography>
         </Stack>
     );
-};
+}
 
 export default function AppThemePicker() {
     const themes = useLocale('App', 'Settings', 'Themes');
