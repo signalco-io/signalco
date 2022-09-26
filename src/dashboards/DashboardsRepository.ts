@@ -1,8 +1,8 @@
 import ContactRepository from 'src/contacts/ContactRepository';
+import { entitiesAsync, entityDeleteAsync, entityUpsertAsync } from 'src/entity/EntityRepository';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import IUser from 'src/users/IUser';
 import { widgetType } from '../../components/widgets/Widget';
-import EntityRepository from '../entity/EntityRepository';
 import { arrayMax } from '../helpers/ArrayHelpers';
 import UserSettingsProvider from '../services/UserSettingsProvider';
 
@@ -106,13 +106,13 @@ function dashboardModelFromEntity(entity: IEntityDetails, order: number, favorit
 }
 
 export async function getAllAsync() {
-    const dashboardEntities = await EntityRepository.byTypeAsync(2);
+    const dashboardEntities = await entitiesAsync(2);
     const currentFavorites = UserSettingsProvider.value<string[]>(DashboardsFavoritesLocalStorageKey, []);
     return dashboardEntities.map((entity, i) => dashboardModelFromEntity(entity, i, currentFavorites));
 }
 
 export async function saveDashboardAsync(dashboard: IDashboardSetModel) {
-    const id = await EntityRepository.upsertAsync(dashboard.id, 2, dashboard.name);
+    const id = await entityUpsertAsync(dashboard.id, 2, dashboard.name);
     await ContactRepository.setAsync({
             entityId: id,
             channelName: 'config',
@@ -123,7 +123,7 @@ export async function saveDashboardAsync(dashboard: IDashboardSetModel) {
 }
 
 export function deleteDashboardAsync(id: string) {
-    return EntityRepository.deleteAsync(id);
+    return entityDeleteAsync(id);
 }
 
 const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';

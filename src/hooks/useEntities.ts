@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import EntityRepository from 'src/entity/EntityRepository';
+import { entityAsync } from 'src/entity/EntityRepository';
 import IEntityDetails from 'src/entity/IEntityDetails';
 
 export default function useEntities(entityIds?: string[]) {
@@ -10,7 +10,7 @@ export default function useEntities(entityIds?: string[]) {
                 const newEntities = [];
                 for (let i = 0; i < entityIds.length; i++) {
                     const entityId = entityIds[i];
-                    const entity = await EntityRepository.byIdAsync(entityId);
+                    const entity = await entityAsync(entityId);
                     newEntities.push(entity);
                 }
                 setEntities(newEntities);

@@ -6,7 +6,7 @@ import useEntity from '../../../src/hooks/useEntity';
 import EditableInput from '../../../components/shared/form/EditableInput';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import useLocale from '../../../src/hooks/useLocale';
-import EntityRepository from 'src/entity/EntityRepository';
+import { entityDeleteAsync, entityRenameAsync } from 'src/entity/EntityRepository';
 import AutoTable, { IAutoTableItem } from 'components/shared/table/AutoTable';
 import Timeago from 'components/shared/time/Timeago';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -259,7 +259,7 @@ function EntityOptions(props: { id: string | undefined }) {
     const router = useRouter();
     const popupState = usePopupState({ variant: 'popover', popupId: 'entityOptionsMenu' });
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-    const { item: entity } = useEntity(id);
+    const { data: entity } = useEntity(id);
 
     const handleDelete = () => {
         popupState.close();
@@ -271,7 +271,7 @@ function EntityOptions(props: { id: string | undefined }) {
             if (typeof id === 'undefined')
                 throw new Error('Entity identifier not present.');
 
-            await EntityRepository.deleteAsync(id);
+            await entityDeleteAsync(id);
             router.push('/app/entities');
         } catch (err) {
             PageNotificationService.show(t('DeleteErrorUnknown'))
@@ -303,7 +303,7 @@ function DeviceDetails() {
     const { id: queryId } = router.query;
     const id = typeof queryId !== 'object' && typeof queryId !== 'undefined' ? queryId : undefined;
     const { t } = useLocale('App', 'Entities');
-    const { item: entity } = useEntity(id);
+    const { data: entity } = useEntity(id);
     // const [stateTableItems, setStateTableItems] = useState<IStateTableItem[] | undefined>();
     // const [actionTableItems, setActionTableItems] = useState<IActionTableItem[] | undefined>();
 
@@ -413,7 +413,7 @@ function DeviceDetails() {
 
     const handleRename = async (newAlias: string) => {
         if (id) {
-            await EntityRepository.renameAsync(id, newAlias);
+            await entityRenameAsync(id, newAlias);
         }
     }
 

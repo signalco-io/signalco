@@ -9,7 +9,7 @@ import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import { ChildrenProps } from '../../src/sharedTypes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import RouterSharpIcon from '@mui/icons-material/RouterSharp';
+
 const queryClient = new QueryClient();
 
 export function AppLayout(props: ChildrenProps) {
@@ -24,6 +24,7 @@ export function AppLayout(props: ChildrenProps) {
   // Initiate SignalR communication
   useEffect(() => {
     RealtimeService.startAsync();
+    RealtimeService.queryClient = queryClient;
   }, []);
 
   return (

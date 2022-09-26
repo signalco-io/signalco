@@ -83,7 +83,7 @@ function deviceModelToTableItem(entity: IEntityDetails): IAutoTableItem {
 
 function Entities() {
     const entities = useAllEntities();
-    const entityItems = entities.items;
+    const entityItems = entities.data;
     const { t } = useLocale('App', 'Entities');
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
     const [filteredItems, showSearch, searchText, handleSearchTextChange, isSearching] = useSearch(entityItems, filterFuncObjectStringProps);

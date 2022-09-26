@@ -2,6 +2,7 @@ import PageNotificationService from '../notifications/PageNotificationService';
 import HttpService from '../services/HttpService';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import CurrentUserProvider from '../services/CurrentUserProvider';
+import { QueryClient } from '@tanstack/react-query';
 
 class SignalSignalRDeviceStateDto {
     entityId?: string;
@@ -13,6 +14,11 @@ class SignalSignalRDeviceStateDto {
 
 class RealtimeService {
     private contactsHub?: HubConnection;
+    public queryClient?: QueryClient = undefined;
+
+    constructor() {
+        this.HandleDeviceStateAsync = this.HandleDeviceStateAsync.bind(this);
+    }
 
     private async HandleDeviceStateAsync(state: string) {
         const change = JSON.parse(state) as SignalSignalRDeviceStateDto;
@@ -22,6 +28,12 @@ class RealtimeService {
             typeof change.timeStamp === 'undefined') {
             console.warn('Got device state with invalid values', state);
             return;
+        }
+
+        if (this.queryClient) {
+            console.debug('Invalidated queries for entity', change.entityId);
+            this.queryClient.invalidateQueries(['entity', change.entityId]);
+            this.queryClient.invalidateQueries(['contact', change.entityId, change.channelName, change.contactName]);
         }
 
         // TODO: Update local contact value
