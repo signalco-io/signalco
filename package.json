@@ -124,6 +124,6 @@
         "webpack": "5.74.0"
     },
     "optionalDependencies": {
-        "terser": "5.14.2"
+        "terser": "5.15.0"
     }
 }
