@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { Avatar, Box, ButtonBase, Grid, NoSsr, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import React, { useMemo, useState } from 'react';
+import { Avatar, Box, Button, ButtonBase, ButtonGroup, Grid, NoSsr, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import useAllEntities from '../../../src/hooks/useAllEntities';
@@ -16,6 +16,10 @@ import EntityIcon from 'components/shared/entity/EntityIcon';
 import Timeago from 'components/shared/time/Timeago';
 import { entityLastActivity } from 'src/entity/EntityHelper';
 import EntityStatus from 'components/entity/EntityStatus';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import ConfigurationDialog from 'components/shared/dialog/ConfigurationDialog';
+import { entityUpsertAsync } from 'src/entity/EntityRepository';
+import { useRouter } from 'next/router';
 
 function EntityCard(props: { entity: IEntityDetails }) {
     const { entity } = props;
@@ -81,6 +85,35 @@ function deviceModelToTableItem(entity: IEntityDetails): IAutoTableItem {
     };
 }
 
+function EntityCreate() {
+    const router = useRouter();
+    const { t } = useLocale('App', 'Entities', 'NewEntityDialog');
+
+    const onType = async (type: {value: number, label: string}) => {
+        const id = await entityUpsertAsync(undefined, type.value, 'New ' + t('Types.' + type.label));
+        router.push('/app/entities/' + id);
+    };
+
+    const types = [
+        { value: 1, label: 'Device' },
+        { value: 2, label: 'Dashboard' },
+        { value: 3, label: 'Process' },
+        { value: 4, label: 'Station' },
+        { value: 5, label: 'Channel' }
+    ];
+
+    return (
+        <Stack spacing={2}>
+            <Typography variant="body2" color="textSecondary">{t('PickTypeHeader')}</Typography>
+            <ButtonGroup orientation="vertical">
+                {types.map(type => (
+                    <Button key={type.value} onClick={() => onType(type)}>{t('Types.' + type.label)}</Button>
+                ))}
+            </ButtonGroup>
+        </Stack>
+    );
+}
+
 function Entities() {
     const entities = useAllEntities();
     const entityItems = entities.data;
@@ -108,7 +141,11 @@ function Entities() {
         </>
     ), [entityListViewType, filteredItems, filteredItemsMapped, t])
 
+    const [isAddEntityOpen, setIsAddEntityOpen] = useState(false);
+    const handleAddEntity = () => setIsAddEntityOpen(true);
+
     return (
+        <>
         <Stack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
             <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 2 }}>
                 <Typography variant="h2" sx={{ display: { xs: 'none', sm: 'inline-block' } }}>{t('Entities')}</Typography>
@@ -126,6 +163,7 @@ function Entities() {
                             <ToggleButton value="cards" size="small" title="Card view"><ViewModuleIcon /></ToggleButton>
                         </ToggleButtonGroup>
                     </NoSsr>
+                    <Button variant="outlined" startIcon={<AddCircleIcon />} onClick={handleAddEntity}>{t('NewEntity')}</Button>
                 </Stack>
             </Stack>
             <Stack spacing={1}>
@@ -136,6 +174,10 @@ function Entities() {
                 </Loadable>
             </Stack>
         </Stack>
+            <ConfigurationDialog isOpen={isAddEntityOpen} title={t('NewEntityDialogTitle')} onClose={() => setIsAddEntityOpen(false)}>
+                <EntityCreate />
+            </ConfigurationDialog>
+        </>
     );
 }
 
