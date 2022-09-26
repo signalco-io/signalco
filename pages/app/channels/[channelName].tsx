@@ -1,4 +1,3 @@
-import { PageWithMetadata } from 'pages/_app';
 import channels from '../../../components/channels/channelsData.json';
 import { Container, Stack, Typography } from '@mui/material';
 import ChannelLogo from 'components/channels/ChannelLogo';
@@ -30,13 +29,13 @@ function ChannelConnectPartial(props: { channelName: string }) {
     );
 }
 
-const AppChannelPage: PageWithMetadata = () => {
+function AppChannelPage() {
     const router = useRouter();
     const channelName = router.query.channelName as string;
     const channel = channels.find(c => c.channelName === channelName);
 
     const entities = useAllEntities();
-    const connectedChannels = useMemo(() => entities.items?.filter(e => e?.contacts.filter(c => c.channelName === channel?.channelName).length), [channel?.channelName, entities]);
+    const connectedChannels = useMemo(() => entities.data?.filter(e => e?.contacts.filter(c => c.channelName === channel?.channelName).length), [channel?.channelName, entities]);
     const connectedChannelsTableItems = connectedChannels?.map(EntityDetailsToAutoTableItem);
 
     return (
@@ -59,7 +58,7 @@ const AppChannelPage: PageWithMetadata = () => {
             </Stack>
         </Container>
     )
-};
+}
 
 AppChannelPage.layout = AppLayoutWithAuth;
 const isClient = typeof window !== 'undefined';

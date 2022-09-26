@@ -49,7 +49,12 @@
             "lastUpdate": "Last update",
             "history": "history",
             "Table": "Table",
-            "Graph": "Graph"
+            "Graph": "Graph",
+            "NewEntity": "New Entity...",
+            "NewEntityDialogTitle": "New Entity",
+            "NewEntityDialog": {
+                "PickTypeHeader": "Pick Entity type"
+            }
         },
         "Processes": {
             "name": "Name",

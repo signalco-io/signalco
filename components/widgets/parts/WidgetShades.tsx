@@ -16,9 +16,9 @@ const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 function WidgetShades(props: WidgetSharedProps) {
     const { config } = props;
     const entity = useEntity(config?.target?.entityId);
-    const entityId = entity.item?.id;
+    const entityId = entity.data?.id;
 
-    const label = props.config?.label || entity?.item?.alias || '';
+    const label = props.config?.label || entity?.data?.alias || '';
 
     // TODO: Calc from source value
     const shadePerc = 0.3;

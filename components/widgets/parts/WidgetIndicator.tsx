@@ -24,7 +24,7 @@ function WidgetIndicator(props: WidgetSharedProps) {
     // Calc state from source value
     const pointer = config?.target as IContactPointer;
     const contact = useContact(config?.target);
-    const contactValueSerialized = contact?.item?.valueSerialized;
+    const contactValueSerialized = contact?.data?.valueSerialized;
     const value = typeof contactValueSerialized !== 'undefined' ? Number.parseFloat(contactValueSerialized) || 0 : 0;
 
     const isLow = value < 10;

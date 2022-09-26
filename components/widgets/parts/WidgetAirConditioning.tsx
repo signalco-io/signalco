@@ -36,14 +36,14 @@ function SmallIndicator(props: { isActive: boolean; icon: string; label: string;
 function WidgetAirConditioning(props: WidgetSharedProps) {
     const { config } = props;
     useWidgetOptions(stateOptions, props);
-    const { item: temperatureDevice } = useEntity(config?.targetTemperature?.deviceId);
-    const { item: heatingDevice } = useEntity(config?.targetHeating?.deviceId);
+    const { data: temperatureDevice } = useEntity(config?.targetTemperature?.deviceId);
+    const { data: heatingDevice } = useEntity(config?.targetHeating?.deviceId);
 
     const temperatureContact = useContact(temperatureDevice ? {
         channelName: config?.targetTemperature?.channelName,
         contactName: config?.targetTemperature?.contactName,
         entityId: temperatureDevice.id
-    } : undefined)?.item;
+    } : undefined)?.data;
 
     const degrees = temperatureContact ? (typeof temperatureContact?.valueSerialized !== 'undefined' ? Number.parseFloat(temperatureContact?.valueSerialized) : undefined) : undefined;
     const degreesWhole = typeof degrees !== 'undefined' ? Math.floor(degrees) : undefined;
@@ -53,7 +53,7 @@ function WidgetAirConditioning(props: WidgetSharedProps) {
         channelName: config?.targetHeating?.channelName,
         contactName: config?.targetHeating?.contactName,
         entityId: heatingDevice.id
-    } : undefined)?.item;
+    } : undefined)?.data;
     const heatingActive = heatingContact?.valueSerialized === 'true';
 
     return (
