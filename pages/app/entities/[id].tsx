@@ -1,6 +1,6 @@
-import { Box, Card, CardHeader, Stack, CardMedia, Button, Menu, MenuItem, ListItemText } from '@mui/material';
+import { Box, Card, CardHeader, Stack, CardMedia, Button, Menu, MenuItem, ListItemText, Typography, Alert, ToggleButton, IconButton, ListItemIcon } from '@mui/material';
 import { useRouter } from 'next/router'
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import useEntity from '../../../src/hooks/useEntity';
 import EditableInput from '../../../components/shared/form/EditableInput';
@@ -14,6 +14,10 @@ import { bindMenu, bindTrigger, usePopupState } from 'material-ui-popup-state/ho
 import PageNotificationService from 'src/notifications/PageNotificationService';
 import ConfirmDeleteDialog from 'components/shared/dialog/ConfirmDeleteDialog';
 import EntityStatus from 'components/entity/EntityStatus';
+import IEntityDetails from 'src/entity/IEntityDetails';
+import useContact from 'src/hooks/useContact';
+import Loadable from 'components/shared/Loadable/Loadable';
+import { Add as AddIcon, MoreVert as MoreVertIcon } from '@mui/icons-material';
 
 // const DynamicGraph = dynamic(() => import('../../../components/graphs/Graph'));
 
@@ -298,11 +302,82 @@ function EntityOptions(props: { id: string | undefined }) {
     )
 }
 
-function DeviceDetails() {
+function ContactsTable(props: {entity: IEntityDetails | undefined}) {
+    const {entity} = props;
+    const { t } = useLocale('App', 'Entities');
+
+    const tableItems = entity?.contacts?.map(c => ({
+        id: c.contactName,
+        name: c.contactName,
+        channel: c.channelName,
+        value: c.valueSerialized,
+        lastActivity: <Timeago date={c.timeStamp} live />
+    }));
+    const isLoading = false;
+    const error = undefined;
+
+    // const [contactNameHash, setContactNameHash] = useHashParam('contactName');
+    // const [channelNameHash, setChannelNameHash] = useHashParam('channelName');
+    const handleStateSelected = async (_: IAutoTableItem) => {
+        // await setChannelNameHash(row._channelName);
+        // await setContactNameHash(row._contactName);
+    };
+
+    const popupState = usePopupState({ variant: 'popover', popupId: 'contactsMenu' });
+    const handleCreateContact = () => {
+
+    };
+
+    return (
+        <>
+            <Card>
+                <CardHeader
+                title={t('Contacts')}
+                action={
+                    <IconButton {...bindTrigger(popupState)}>
+                        <MoreVertIcon />
+                    </IconButton>
+                } />
+                <CardMedia>
+                    <Stack spacing={4}>
+                        <AutoTable error={error} isLoading={isLoading} items={tableItems} onRowClick={handleStateSelected} localize={t} />
+                        {/* {id && contactNameHash && channelNameHash && (
+                            <ContactHistory entityId={id} />
+                        )} */}
+                    </Stack>
+                </CardMedia>
+            </Card>
+            <Menu {...bindMenu(popupState)}>
+                <MenuItem onClick={handleCreateContact}>
+                    <ListItemIcon>
+                        <AddIcon />
+                    </ListItemIcon>
+                    <ListItemText>{t('CreateContact')}</ListItemText>
+                </MenuItem>
+            </Menu>
+        </>
+    );
+}
+
+function EntityProcessDetails(props: { entity: IEntityDetails }) {
+    const { entity } = props;
+
+    const isEnabledContact = useContact({entityId: entity.id, channelName: 'config', contactName: 'isEnabled'});
+    const isEnabled = isEnabledContact.data?.valueSerialized === 'true';
+
+    return (
+        <div>
+            <Loadable {...isEnabledContact}>
+                <Typography>IsEnabled: {isEnabled.toString()}</Typography>
+            </Loadable>
+        </div>
+    );
+}
+
+function EntityDetailsPage() {
     const router = useRouter();
     const { id: queryId } = router.query;
     const id = typeof queryId !== 'object' && typeof queryId !== 'undefined' ? queryId : undefined;
-    const { t } = useLocale('App', 'Entities');
     const { data: entity } = useEntity(id);
     // const [stateTableItems, setStateTableItems] = useState<IStateTableItem[] | undefined>();
     // const [actionTableItems, setActionTableItems] = useState<IActionTableItem[] | undefined>();
@@ -378,44 +453,22 @@ function DeviceDetails() {
     //     </Card>
     // );
 
-    function ContactsTable() {
-        const contacts = entity?.contacts;
-        const tableItems = contacts?.map(c => ({
-            id: c.contactName,
-            name: c.contactName,
-            channel: c.channelName,
-            value: c.valueSerialized,
-            lastActivity: <Timeago date={c.timeStamp} live />
-        }));
-        const isLoading = false;
-        const error = undefined;
-        // const [contactNameHash, setContactNameHash] = useHashParam('contactName');
-        // const [channelNameHash, setChannelNameHash] = useHashParam('channelName');
-        const handleStateSelected = async (_: IAutoTableItem) => {
-            // await setChannelNameHash(row._channelName);
-            // await setContactNameHash(row._contactName);
-        };
-
-        return (
-            <Card>
-                <CardHeader title={t('States')} />
-                <CardMedia>
-                    <Stack spacing={4}>
-                        <AutoTable error={error} isLoading={isLoading} items={tableItems} onRowClick={handleStateSelected} localize={t} />
-                        {/* {id && contactNameHash && channelNameHash && (
-                            <ContactHistory entityId={id} />
-                        )} */}
-                    </Stack>
-                </CardMedia>
-            </Card>
-        );
-    }
-
     const handleRename = async (newAlias: string) => {
         if (id) {
             await entityRenameAsync(id, newAlias);
         }
     }
+
+    const detailsComponent = useMemo(() => {
+        switch (entity?.type) {
+            case 3:
+                return <EntityProcessDetails entity={entity} />
+            default:
+                return null;
+        }
+    }, [entity]);
+
+    const disabledContact = useContact(entity && { entityId: entity.id, channelName: 'config', contactName: 'disabled' });
 
     return (
         <Stack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
@@ -434,15 +487,19 @@ function DeviceDetails() {
                 <Stack direction="row" alignItems="center" spacing={1}>
                     <EntityStatus entity={entity} />
                     <ShareEntityChip entity={entity} entityType={1} />
+                    {!disabledContact.isError && (
+                        <ToggleButton value={disabledContact.data?.valueSerialized === 'true'}>Disable</ToggleButton>
+                    )}
                 </Stack>
             </Stack>
             <Box sx={{ px: { xs: 1, sm: 2 } }}>
-                <ContactsTable />
+                <ContactsTable entity={entity} />
+                {detailsComponent}
             </Box>
         </Stack>
     );
 }
 
-DeviceDetails.layout = AppLayoutWithAuth;
+EntityDetailsPage.layout = AppLayoutWithAuth;
 
-export default DeviceDetails;
+export default EntityDetailsPage;

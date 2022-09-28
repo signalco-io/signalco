@@ -85,9 +85,9 @@ function CellRenderer(props: IAutoTableCellRendererProps) {
   // TODO: Implement object display
   let value = props.value;
   if (typeof value === 'object' &&
-    typeof value.type === 'undefined' &&
-    typeof value.key === 'undefined' &&
-    typeof value.props === 'undefined') {
+    typeof value?.type === 'undefined' &&
+    typeof value?.key === 'undefined' &&
+    typeof value?.props === 'undefined') {
     value = JSON.stringify(value);
   }
 

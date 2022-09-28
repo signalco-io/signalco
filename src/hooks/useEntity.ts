@@ -11,6 +11,7 @@ export default function useEntity(id: string | undefined) {
     }, {
         initialData: () => client.getQueryData<IEntityDetails[]>(['entities'])?.find(e => e.id === id),
         initialDataUpdatedAt: () => client.getQueryState(['entities'])?.dataUpdatedAt,
-        enabled: Boolean(id)
+        enabled: Boolean(id),
+        staleTime: 60*1000
     });
 }

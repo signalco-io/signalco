@@ -17,6 +17,9 @@ function mapEntityDetailsFromDto(e: any) {
 
 export async function entityAsync(id: string) {
     const entity = await HttpService.getAsync(`/entity/${id}`);
+    if (!entity)
+        throw new Error('Entity not found');
+
     return mapEntityDetailsFromDto(entity);
 }
 
@@ -42,11 +45,6 @@ export async function entityUpsertAsync(id: string | undefined, type: number, al
         type: type,
         alias: alias
     }) as {id: string})?.id;
-}
-
-export async function contactAsync(pointer: IContactPointer) : Promise<IContact | undefined> {
-    const entity = await entityAsync(pointer.entityId);
-    return entity?.contacts.find(c => c.channelName === pointer.channelName && c.contactName === c.contactName);
 }
 
 export async function entityDeleteAsync(id: string) {

@@ -88,9 +88,10 @@ function deviceModelToTableItem(entity: IEntityDetails): IAutoTableItem {
 function EntityCreate() {
     const router = useRouter();
     const { t } = useLocale('App', 'Entities', 'NewEntityDialog');
+    const { t: tType } = useLocale('Global', 'Entity', 'Types');
 
     const onType = async (type: {value: number, label: string}) => {
-        const id = await entityUpsertAsync(undefined, type.value, 'New ' + t('Types.' + type.label));
+        const id = await entityUpsertAsync(undefined, type.value, 'New ' + tType(type.label));
         router.push('/app/entities/' + id);
     };
 
@@ -107,7 +108,7 @@ function EntityCreate() {
             <Typography variant="body2" color="textSecondary">{t('PickTypeHeader')}</Typography>
             <ButtonGroup orientation="vertical">
                 {types.map(type => (
-                    <Button key={type.value} onClick={() => onType(type)}>{t('Types.' + type.label)}</Button>
+                    <Button key={type.value} onClick={() => onType(type)}>{tType(type.label)}</Button>
                 ))}
             </ButtonGroup>
         </Stack>
