@@ -109,7 +109,7 @@
         "eslint-plugin-mdx": "2.0.5",
         "eslint-plugin-storybook": "0.6.4",
         "fs-extra": "10.1.0",
-        "next-sitemap": "3.1.22",
+        "next-sitemap": "3.1.23",
         "openapi-types": "12.0.2",
         "prop-types": "15.8.1",
         "puppeteer": "18.0.5",
