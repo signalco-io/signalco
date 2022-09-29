@@ -11,7 +11,11 @@ import EntityProcessDetails from './EntityProcessDetails';
 import ContactsTable from './ContactsTable';
 import EntityOptions from './EntityOptions';
 
-export default function EntityDetailsView(props: { id: string }) {
+export interface EntityDetailsViewProps {
+    id: string;
+}
+
+export default function EntityDetailsView(props: EntityDetailsViewProps) {
     const { id } = props;
     const { data: entity } = useEntity(id);
 
