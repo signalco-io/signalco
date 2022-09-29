@@ -43,7 +43,7 @@
             "ID": "ID",
             "Identifier": "Identifier",
             "Actions": "Actions",
-            "States": "States",
+            "Contacts": "Contacts",
             "value": "Value",
             "channel": "Channel",
             "lastUpdate": "Last update",
@@ -54,7 +54,8 @@
             "NewEntityDialogTitle": "New Entity",
             "NewEntityDialog": {
                 "PickTypeHeader": "Pick Entity type"
-            }
+            },
+            "CreateContact": "Create contact"
         },
         "Processes": {
             "name": "Name",
@@ -201,6 +202,17 @@
                 "Email": "Email address",
                 "SendInvitation": "Send invitation",
                 "Cancel": "Cancel"
+            }
+        }
+    },
+    "Global": {
+        "Entity": {
+            "Types": {
+                "Device": "Device",
+                "Dashboard": "Dashboard",
+                "Process": "Process",
+                "Station": "Station",
+                "Channel": "Channel"
             }
         }
     },

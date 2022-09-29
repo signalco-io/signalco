@@ -1,22 +1,29 @@
-import { useEffect, useState } from 'react';
-import IContact from 'src/contacts/IContact';
+import { useQueries, useQueryClient } from '@tanstack/react-query';
 import IContactPointer from 'src/contacts/IContactPointer';
-import { contactAsync } from 'src/entity/EntityRepository';
+import { entityAsync } from 'src/entity/EntityRepository';
+import IEntityDetails from 'src/entity/IEntityDetails';
 
 export default function useContacts(pointers: IContactPointer[] | undefined) {
-    const [contacts, setContacts] = useState<(IContact | undefined)[] | undefined>(undefined);
-    useEffect(() => {
-        (async () => {
-            if (pointers) {
-                const newContacts = [];
-                for (let i = 0; i < pointers.length; i++) {
-                    const pointer = pointers[i];
-                    const contact = await contactAsync(pointer);
-                    newContacts.push(contact);
+    const client = useQueryClient();
+    return useQueries({
+        queries: (pointers ?? []).map(pointer => {
+            return {
+                queryKey: ['contact', pointer.entityId, pointer.channelName, pointer.contactName],
+                queryFn: async () => {
+                    const entityKey = ['entity', pointer.entityId];
+                    const entityQuery = client.getQueryState<IEntityDetails>(entityKey);
+                    let entity: IEntityDetails | undefined = undefined;
+                    if (entityQuery?.status === 'success')
+                        entity = entityQuery.data;
+                    if (!entity)
+                        entity = await entityAsync(pointer.entityId);
+
+                    const contact = entity.contacts?.find(c => c.channelName === pointer.channelName && c.contactName === c.contactName);
+                    if (!contact)
+                        throw new Error('Contact not found');
+                    return contact;
                 }
-                setContacts(newContacts);
             }
-        })();
-    }, [pointers]);
-    return contacts;
+        })
+    });
 }

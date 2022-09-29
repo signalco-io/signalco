@@ -1,13 +1,25 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import IContactPointer from 'src/contacts/IContactPointer';
-import { contactAsync } from 'src/entity/EntityRepository';
+import { entityAsync } from 'src/entity/EntityRepository';
+import IEntityDetails from 'src/entity/IEntityDetails';
 
 export default function useContact(pointer: IContactPointer | undefined) {
-    return useQuery(['contact', pointer?.entityId, pointer?.channelName, pointer?.contactName], () => {
+    const client = useQueryClient();
+    return useQuery(['contact', pointer?.entityId, pointer?.channelName, pointer?.contactName], async () => {
         if (!pointer)
             throw new Error('Pointer is required for contact');
-        return contactAsync(pointer);
+
+        const entity = await entityAsync(pointer.entityId);
+        const contact = entity.contacts?.find(c => c.channelName === pointer.channelName && c.contactName === pointer.contactName);
+        if (contact == null)
+            throw new Error(`Unknown contact ${pointer.entityId} | ${pointer.channelName} | ${pointer.contactName}`);
+
+        return contact;
     }, {
-        enabled: Boolean(pointer)
+        enabled: Boolean(pointer) && Boolean(pointer?.entityId),
+        retry: false,
+        staleTime: 60*1000,
+        initialData: () => client.getQueryData<IEntityDetails>(['entity', pointer?.entityId])?.contacts?.find(c => c.entityId === pointer?.entityId && c.channelName === pointer?.channelName && c.contactName === pointer?.contactName),
+        initialDataUpdatedAt: () => client.getQueryState(['entity', pointer?.entityId])?.dataUpdatedAt,
     });
 }

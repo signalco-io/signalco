@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import LoadableText from './LoadableText';
+import LoadableTextProps from './LoadableTextProps';
 
 export default {
     title: 'Components/Shared/LoadableText',
@@ -10,7 +11,8 @@ export default {
     }
 } as ComponentMeta<typeof LoadableText>;
 
-const Template: ComponentStory<typeof LoadableText> = (args) => <LoadableText {...args} />;
+function LoadableTextTemplate(args: LoadableTextProps) { return <LoadableText {...args} />; }
+const Template: ComponentStory<typeof LoadableText> = LoadableTextTemplate;
 
 export const Default = Template.bind({});
 

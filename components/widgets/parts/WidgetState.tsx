@@ -10,7 +10,7 @@ import { DefaultLabel, DefaultTargetMultiple } from '../../../src/widgets/Widget
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
 import IContactPointer from 'src/contacts/IContactPointer';
-import { contactAsync, entityAsync } from 'src/entity/EntityRepository';
+import { entityAsync } from 'src/entity/EntityRepository';
 import useContacts from 'src/hooks/useContacts';
 
 const stateOptions = [
@@ -32,7 +32,7 @@ const determineActionValueAsync = async (action: StateAction) => {
         // Retrieve device and determine whether contact is action contact
         const entity = await entityAsync(action.entityId);
         const contact = entity
-            ? await contactAsync(action)
+            ? entity.contacts.find(c => c.channelName === action.channelName && c.contactName === action.contactName)
             : undefined;
         const contactValueSerializedLowerCase = contact?.valueSerialized?.toLocaleLowerCase();
         const isAction = contact
@@ -91,7 +91,7 @@ function WidgetState(props: WidgetSharedProps) {
             if (typeof contact === 'undefined')
                 continue;
 
-            if (contact?.valueSerialized === 'true') {
+            if (contact.data?.valueSerialized === 'true') {
                 state = true;
                 break;
             }
