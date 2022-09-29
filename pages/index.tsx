@@ -1,4 +1,4 @@
-import { Box, Button, Container, Divider, Grid, Stack, SxProps, Theme, Typography } from '@mui/material';
+import { Box, Button, Container, Divider, Fade, Grid, Slide, Stack, SxProps, Theme, Typography } from '@mui/material';
 import React from 'react';
 import Link from 'next/link';
 import CounterIndicator from '../components/pages/landing/CounterIndicator';
@@ -33,6 +33,10 @@ function FeatureDescription(props: { title: string, content: string | React.Reac
 }
 
 function StepContent(props: { title: string; subtitle?: string; image?: React.ReactNode, imageContainerHeight?: number, imageContainerStyles?: SxProps | undefined, children?: React.ReactNode | React.ReactNode[]; }) {
+  const { observe, inView } = useInView({
+    onEnter: ({ unobserve }) => unobserve(), // only run once
+  });
+
   return (
     <SectionCenter>
       <Stack spacing={{ xs: 6, md: 12 }}>
@@ -40,14 +44,16 @@ function StepContent(props: { title: string; subtitle?: string; image?: React.Re
           <Typography fontWeight={600} fontSize={{ xs: 42, md: 52 }} textAlign="center">{props.title}</Typography>
           {props.subtitle && <Typography variant="subtitle1" textAlign="center" color="textSecondary">{props.subtitle}</Typography>}
         </Stack>
-        <Box>
+        <Box ref={observe}>
           <Grid container spacing={8} alignItems="center">
             {props.image && (
-              <Grid item xs={12} md={6} sx={{ position: 'relative', height: props.imageContainerHeight }}>
-                <Box sx={props.imageContainerStyles}>
-                  {props.image}
-                </Box>
-              </Grid>
+              <Fade in={inView} timeout={1200}>
+                <Grid item xs={12} md={6} sx={{ position: 'relative', height: props.imageContainerHeight }}>
+                  <Box sx={props.imageContainerStyles}>
+                    {props.image}
+                  </Box>
+                </Grid>
+              </Fade>
             )}
             {props.children && (
               <Grid item xs={12} md={props.image ? 6 : 12}>
