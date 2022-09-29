@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '../../../../pages/_app';
 import theme from '../../../../src/theme';
 
-const DiscoverVisual = () => {
+function DiscoverVisual() {
     const themeContext = useContext(ThemeContext);
 
     const connectionsColor = themeContext.isDark ? '#555' : '#CECECE';

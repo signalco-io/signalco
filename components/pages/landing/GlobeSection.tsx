@@ -1,10 +1,11 @@
-import { Container, Box, NoSsr } from '@mui/material';
+import { Container, Box, NoSsr, Fade } from '@mui/material';
 import dynamic from 'next/dynamic';
 const Globe = dynamic(() => import('./Globe'));
 
 function GlobeSection() {
     return (
         <Container>
+            <Fade timeout={2000} in>
             <Box sx={{
                 overflow: 'hidden',
             }}>
@@ -28,6 +29,7 @@ function GlobeSection() {
                     </Box>
                 </Box>
             </Box>
+            </Fade>
         </Container>
     );
 }

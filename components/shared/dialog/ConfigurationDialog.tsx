@@ -13,7 +13,7 @@ export interface IConfigurationDialogProps {
     actions?: React.ReactNode
 }
 
-const ConfigurationDialog = (props: IConfigurationDialogProps) => {
+function ConfigurationDialog(props: IConfigurationDialogProps) {
     const { children, title, titleActions, isOpen, onClose, maxWidth = 'sm', noPadding, actions } = props;
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 760;
@@ -41,6 +41,6 @@ const ConfigurationDialog = (props: IConfigurationDialogProps) => {
             )}
         </Dialog>
     );
-};
+}
 
 export default ConfigurationDialog;

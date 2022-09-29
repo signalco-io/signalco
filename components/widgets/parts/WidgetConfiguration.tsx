@@ -57,7 +57,7 @@ const useWidgetConfiguration = (options: IWidgetConfigurationOption[], config: o
     } as IWidgetConfigurationDialogProps;
 };
 
-const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, value: any, onChange: (value: any) => void }) => {
+function WidgetConfigurationOption(props: { option: IWidgetConfigurationOption, value: any, onChange: (value: any) => void }) {
     if (props.option.type === 'deviceContactTarget') {
         // Handle multi-contact target
         if (props.option.multiple) {
@@ -127,9 +127,9 @@ const WidgetConfigurationOption = (props: { option: IWidgetConfigurationOption, 
     }
 
     return <Typography>{`Unknown option type \"${props.option.type}\"`}</Typography>;
-};
+}
 
-const WidgetConfiguration = (props: IWidgetConfigurationProps) => {
+function WidgetConfiguration(props: IWidgetConfigurationProps) {
     const configProps = useWidgetConfiguration(props.options, props.config, props.onConfiguration)
 
     return (
@@ -162,6 +162,6 @@ const WidgetConfiguration = (props: IWidgetConfigurationProps) => {
             )}
         </>
     );
-};
+}
 
 export default WidgetConfiguration;

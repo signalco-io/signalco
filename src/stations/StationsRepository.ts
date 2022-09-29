@@ -1,6 +1,6 @@
 import IEntityDetails from 'src/entity/IEntityDetails';
 import ConductsService from '../conducts/ConductsService';
-import EntityRepository from '../entity/EntityRepository';
+import { entitiesAsync, entityAsync, entityDeleteAsync } from '../entity/EntityRepository';
 import HttpService from '../services/HttpService';
 
 class StationBlobInfoDto {
@@ -43,7 +43,7 @@ export default class StationsRepository {
     static isLoading: boolean;
 
     static async deleteAsync(id: string) {
-        await EntityRepository.deleteAsync(id);
+        await entityDeleteAsync(id);
     }
 
     static async updateStationAsync(id: string): Promise<void> {
@@ -83,10 +83,10 @@ export default class StationsRepository {
     }
 
     static async getStationAsync(id: string): Promise<IEntityDetails | undefined> {
-        return await EntityRepository.byIdAsync(id);
+        return await entityAsync(id);
     }
 
     static async getStationsAsync(): Promise<IEntityDetails[]> {
-        return await EntityRepository.byTypeAsync(4);
+        return await entitiesAsync(4);
     }
 }

@@ -14,7 +14,7 @@ export interface IConfirmDeleteButtonProps extends IConfirmDeleteButtonDialogPro
     buttonLabel: string
 }
 
-const ConfirmDeleteButton = (props: IConfirmDeleteButtonProps) => {
+function ConfirmDeleteButton(props: IConfirmDeleteButtonProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleConfirm = () => {
@@ -28,6 +28,6 @@ const ConfirmDeleteButton = (props: IConfirmDeleteButtonProps) => {
             <ConfirmDeleteDialog isOpen={isOpen} onClose={() => setIsOpen(false)} {...props} onConfirm={handleConfirm} />
         </>
     )
-};
+}
 
 export default ConfirmDeleteButton;

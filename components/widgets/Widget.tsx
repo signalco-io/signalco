@@ -1,6 +1,5 @@
 
 import { Alert } from '@mui/material';
-import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ObjectDictAny } from '../../src/sharedTypes';
@@ -54,11 +53,11 @@ function applyStaticToConfig(config: any | undefined, options: IWidgetConfigurat
     };
 }
 
-const UnresolvedWidget = () => (
-    <Alert severity="error" sx={{ height: '100%' }}>Unknown widget</Alert>
-);
+function UnresolvedWidget() {
+  return <Alert severity="error" sx={{ height: '100%' }}>Unknown widget</Alert>
+}
 
-const Widget = (props: WidgetProps) => {
+function Widget(props: WidgetProps) {
     const [config, setConfig] = useState(props.config);
     const [options, setOptions] = useState<IWidgetConfigurationOption[] | undefined>(undefined);
     const [active, setActive] = useState(false);
@@ -120,6 +119,6 @@ const Widget = (props: WidgetProps) => {
             <WidgetResolved {...widgetSharedProps} />
         </WidgetCard>
     );
-};
+}
 
-export default observer(Widget);
+export default Widget;

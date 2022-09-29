@@ -32,7 +32,7 @@ var skySunnyGrads = [
     [{ color: '#00000c', position: 80 }, { color: '#150800', position: 100 }],
 ];
 
-const WindowVisual = (props: { shadePerc: number, size: number, dateAndTime?: Date }) => {
+function WindowVisual(props: { shadePerc: number, size: number, dateAndTime?: Date }) {
     const themeContext = useContext(ThemeContext);
     const [hours, setHours] = useState(((props.dateAndTime ?? DateTimeProvider.now()).getHours()) % 24);
 

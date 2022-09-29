@@ -1,5 +1,4 @@
 import { Chip, IconButton, Slide, Stack, TextField, Tooltip } from '@mui/material';
-import { observer } from 'mobx-react-lite';
 import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
 import { useState } from 'react';
 import HttpService from '../../src/services/HttpService';
@@ -98,4 +97,4 @@ function ShareEntityChip(props: IShareEntityChipProps) {
     );
 }
 
-export default observer(ShareEntityChip);
+export default ShareEntityChip;

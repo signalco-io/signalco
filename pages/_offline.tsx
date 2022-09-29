@@ -3,8 +3,8 @@ import React from 'react';
 import SignalcoLogotype from '../components/icons/SignalcoLogotype';
 import { PageFullLayout } from '../components/layouts/PageFullLayout';
 
-const OfflinePage = () => (
-    <Stack
+function OfflinePage() {
+  return <Stack
         sx={{
             my: '20vh'
         }}
@@ -16,7 +16,7 @@ const OfflinePage = () => (
         </div>
         <Typography variant="h1" fontWeight={300} color="textSecondary">You are offline...</Typography>
     </Stack>
-);
+}
 
 OfflinePage.layout = PageFullLayout;
 

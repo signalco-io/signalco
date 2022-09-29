@@ -1,7 +1,6 @@
 import { Close, Edit, Save } from '@mui/icons-material';
 import { Theme, Typography, Box, Input, InputAdornment, IconButton } from '@mui/material';
 import { SystemStyleObject } from '@mui/system';
-import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
 
 interface IEditableInputProps {
@@ -80,4 +79,4 @@ function EditableInput(props: IEditableInputProps) {
     );
 }
 
-export default observer(EditableInput);
+export default EditableInput;

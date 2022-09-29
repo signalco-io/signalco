@@ -56,7 +56,7 @@ const availableWidgets = [
     }
 ];
 
-const WidgetStore = (props: { onAddWidget?: (widgetType: widgetType) => void }) => {
+function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) {
     const [filteredAvailableWidgetsItems, showAvailableWidgetsSearch, searchAvailableWidgetsText, handleSearchAvailableWidgetsTextChange] =
         useSearch(availableWidgets, filterFuncObjectStringProps, 6);
 
@@ -97,6 +97,6 @@ const WidgetStore = (props: { onAddWidget?: (widgetType: widgetType) => void }) 
             </div>
         </Stack>
     );
-};
+}
 
 export default WidgetStore;

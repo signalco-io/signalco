@@ -1,5 +1,5 @@
 import { Alert, Box, CircularProgress, LinearProgress, Skeleton } from '@mui/material';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import LoadableProps from './LoadableProps';
 
 export default function Loadable(props: LoadableProps) {
@@ -20,7 +20,19 @@ export default function Loadable(props: LoadableProps) {
     }, [height, placeholder, width]);
 
     if (error) {
-        return <Alert variant="filled" severity="error">{error}</Alert>
+        console.warn('User presented with error', error, typeof error);
+
+        let errorDisplay = error as any;
+        if (typeof error === 'object') {
+            const errorAny = error as any;
+            if (typeof errorAny.message !== 'undefined') {
+                errorDisplay = errorAny.message;
+            }
+            else {
+                errorDisplay = JSON.stringify(error);
+            }
+        }
+        return <Alert variant="filled" severity="error">{errorDisplay}</Alert>
     }
 
     return (

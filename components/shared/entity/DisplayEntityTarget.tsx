@@ -1,6 +1,5 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, List, ListItem, ListItemButton, ListItemText, Popover, Skeleton, Stack, Tooltip, Typography } from '@mui/material';
-import { observer } from 'mobx-react-lite';
-import React, { startTransition, useEffect, useState } from 'react';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, List, ListItem, ListItemButton, ListItemText, Popover, Skeleton, Stack, TextField, Tooltip, Typography } from '@mui/material';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
     usePopupState,
     bindTrigger,
@@ -17,7 +16,7 @@ import IEntityDetails from 'src/entity/IEntityDetails';
 import IContactPointerPartial from 'src/contacts/IContactPointerPartial';
 import InputContactValue from './InputContactValue';
 
-const EntityContactValueSelection = (props: { target: IContactPointerPartial | undefined, value: any, onSelected: (value: any) => void }) => {
+function EntityContactValueSelection(props: { target: IContactPointerPartial | undefined, value: any, onSelected: (value: any) => void }) {
     const { target, value, onSelected } = props;
     const entity = useEntity(target?.entityId);
 
@@ -34,16 +33,16 @@ const EntityContactValueSelection = (props: { target: IContactPointerPartial | u
         <Loadable isLoading={entity.isLoading} error={entity.error}>
             {(target && targetFull && contact) && (
                 <InputContactValue
-                    contact={contact.item}
+                    contact={contact.data}
                     value={value}
                     onChange={handleChange}
                 />
             )}
         </Loadable>
     );
-};
+}
 
-const EntitySelection = (props: { target: IContactPointerPartial | undefined, onSelected: (target: IContactPointerPartial | undefined) => void; }) => {
+function EntitySelection(props: { target: IContactPointerPartial | undefined, onSelected: (target: IContactPointerPartial | undefined) => void; }) {
     const {
         target, onSelected
     } = props;
@@ -53,37 +52,49 @@ const EntitySelection = (props: { target: IContactPointerPartial | undefined, on
         onSelected(selectedEntity ? { entityId: selectedEntity.id } : undefined);
     };
 
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const filteredEntities = useMemo(() => {
+        return searchTerm
+            ? entities.data?.filter(e => e.alias.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0)
+            : entities.data;
+    }, [searchTerm, entities.data]);
+
     return (
         <Loadable isLoading={entities.isLoading} error={entities.error}>
-            <List>
-                <ListItem selected={!target?.entityId} disablePadding>
-                    <ListItemButton onClick={() => handleDeviceSelected(undefined)}>
-                        <ListItemText>None</ListItemText>
-                    </ListItemButton>
-                </ListItem>
-                {entities.items.map(entity => (
-                    <ListItem selected={target?.entityId === entity.id} key={entity.id} disablePadding>
-                        <ListItemButton onClick={() => handleDeviceSelected(entity)}>
-                            <ListItemText>{entity.alias}</ListItemText>
+            <Stack spacing={1}>
+                <Box px={2}>
+                    <TextField fullWidth placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)}  />
+                </Box>
+                <List>
+                    <ListItem selected={!target?.entityId} disablePadding>
+                        <ListItemButton onClick={() => handleDeviceSelected(undefined)}>
+                            <ListItemText>None</ListItemText>
                         </ListItemButton>
                     </ListItem>
-                ))}
-            </List>
+                    {filteredEntities?.map(entity => (
+                        <ListItem selected={target?.entityId === entity.id} key={entity.id} disablePadding>
+                            <ListItemButton onClick={() => handleDeviceSelected(entity)}>
+                                <ListItemText>{entity.alias}</ListItemText>
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+            </Stack>
         </Loadable>
     );
-};
+}
 
 interface EntityContactSelectionProps {
     target: IContactPointerPartial | undefined;
     onSelected: (target: IContactPointerPartial | undefined) => void;
 }
 
-const EntityContactSelection = (props: EntityContactSelectionProps) => {
+function EntityContactSelection(props: EntityContactSelectionProps) {
     const {
         target, onSelected
     } = props;
 
-    const { item: entity, isLoading, error } = useEntity(target?.entityId);
+    const { data: entity, isLoading, error } = useEntity(target?.entityId);
     const contacts = entity?.contacts ?? [];
 
     const handleContactSelected = (contact: IContactPointerPartial) => {
@@ -112,7 +123,7 @@ const EntityContactSelection = (props: EntityContactSelectionProps) => {
             </List>
         </Loadable>
     );
-};
+}
 
 interface EntitySelectionMenuProps {
     target?: IContactPointerPartial;
@@ -133,26 +144,18 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
 
     useEffect(() => {
         if (selectValue && target?.channelName && target?.contactName) {
-            startTransition(() => {
-                setSelecting('value');
-            });
+            setSelecting('value');
         } else if (selectContact && target?.entityId) {
-            startTransition(() => {
-                setSelecting('contact');
-            });
+            setSelecting('contact');
         } else {
-            startTransition(() => {
-                setSelecting('entity');
-            });
+            setSelecting('entity');
         }
     }, [selectContact, selectValue, target]);
 
     console.log('selecting', selecting)
 
     const handleEditEntity = () => {
-        startTransition(() => {
-            setSelecting('entity');
-        });
+        setSelecting('entity');
     };
 
     const handleEntitySelected = (target: IContactPointerPartial | undefined) => {
@@ -237,7 +240,7 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
 
 function EntityIconLabel(props: { entityId: string | undefined, description?: string }) {
     const { entityId, description } = props;
-    const { item: entity, isLoading } = useEntity(entityId);
+    const { data: entity, isLoading } = useEntity(entityId);
 
     const entityName = entity?.alias ?? (entity?.id);
     const Icon = EntityIcon(entity);
@@ -284,7 +287,7 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
     };
 
     const handleEntitySelectionClose = () => {
-        startTransition(entityMenu.close);
+        entityMenu.close();
     }
 
     let entityDescription = '';
@@ -331,4 +334,4 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
     );
 }
 
-export default observer(DisplayDeviceTarget);
+export default DisplayDeviceTarget;

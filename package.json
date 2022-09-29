@@ -37,13 +37,15 @@
         "@microsoft/signalr": "6.0.9",
         "@monaco-editor/react": "4.4.6",
         "@mui/icons-material": "5.10.6",
-        "@mui/lab": "5.0.0-alpha.100",
-        "@mui/material": "5.10.6",
-        "@mui/system": "5.10.6",
+        "@mui/lab": "5.0.0-alpha.101",
+        "@mui/material": "5.10.7",
+        "@mui/system": "5.10.7",
         "@mui/x-date-pickers": "5.0.3",
         "@next/env": "12.3.1",
         "@next/mdx": "12.3.1",
-        "@vvo/tzdb": "6.66.0",
+        "@tanstack/react-query": "4.7.2",
+        "@tanstack/react-query-devtools": "4.7.2",
+        "@vvo/tzdb": "6.68.0",
         "axios": "0.27.2",
         "clsx": "1.2.1",
         "cobe": "0.6.2",
@@ -52,8 +54,6 @@
         "d3": "7.6.1",
         "date-fns": "2.29.3",
         "material-ui-popup-state": "4.1.0",
-        "mobx": "6.6.2",
-        "mobx-react-lite": "3.4.0",
         "monaco-editor": "0.34.0",
         "next": "12.3.1",
         "next-pwa": "5.6.0",
@@ -70,12 +70,12 @@
         "react-timeago": "7.1.0",
         "react-transition-group": "4.4.5",
         "recharts": "2.1.14",
-        "sharp": "0.31.0",
+        "sharp": "0.31.1",
         "suncalc": "1.9.0",
         "uuid": "9.0.0"
     },
     "devDependencies": {
-        "@babel/core": "7.19.1",
+        "@babel/core": "7.19.3",
         "@next/bundle-analyzer": "12.3.1",
         "@storybook/addon-a11y": "6.5.12",
         "@storybook/addon-actions": "6.5.12",
@@ -109,7 +109,7 @@
         "eslint-plugin-mdx": "2.0.5",
         "eslint-plugin-storybook": "0.6.4",
         "fs-extra": "10.1.0",
-        "next-sitemap": "3.1.22",
+        "next-sitemap": "3.1.23",
         "openapi-types": "12.0.2",
         "prop-types": "15.8.1",
         "puppeteer": "18.0.5",
@@ -120,10 +120,10 @@
         "storybook-addon-next": "1.6.9",
         "storycap": "3.1.9",
         "tilg": "0.1.1",
-        "typescript": "4.8.3",
+        "typescript": "4.8.4",
         "webpack": "5.74.0"
     },
     "optionalDependencies": {
-        "terser": "5.14.2"
+        "terser": "5.15.0"
     }
 }

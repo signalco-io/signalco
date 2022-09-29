@@ -22,8 +22,8 @@ const variants: VariantWithDefault[] = ['default', 'text', 'outlined', 'containe
 const sizes: SizeWithDefault[] = ['default', 'small', 'medium', 'large'];
 const colors: ColorWithDefault[] = ['default', 'inherit', 'primary', 'secondary', 'success', 'error', 'info', 'warning'];
 
-const Size = (props: { variant: Variant, size: Size }) => (
-  <Stack>
+function Size(props: { variant: Variant, size: Size }) {
+  return <Stack>
     {colors.map(color => (
       <Button key={`${props.variant}-${props.size}-${color}`}
         variant={props.variant}
@@ -33,10 +33,10 @@ const Size = (props: { variant: Variant, size: Size }) => (
       </Button>
     ))}
   </Stack>
-);
+}
 
-const Variant = ({ variant }: { variant: Variant }) => (
-  <Stack spacing={1}>
+function Variant({ variant }: { variant: Variant }) {
+  return <Stack spacing={1}>
     <div>
       <Typography textAlign="center">{camelToSentenceCase(variant ?? 'default')}</Typography>
     </div>
@@ -46,12 +46,12 @@ const Variant = ({ variant }: { variant: Variant }) => (
       ))}
     </Stack>
   </Stack>
-)
+}
 
-export const Matrix = () => (
-  <Stack direction="row" spacing={1}>
+export function Matrix() {
+  return <Stack direction="row" spacing={1}>
     {variants.map(variant => (
       <Variant key={variant} variant={variant === 'default' ? undefined : variant} />
     ))}
   </Stack>
-);
+}

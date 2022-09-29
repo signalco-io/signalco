@@ -1,4 +1,4 @@
 export default interface LoadableLoadingErrorProps {
-    error?: string | React.ReactElement;
+    error?: unknown | string | React.ReactElement;
     isLoading?: boolean;
 }

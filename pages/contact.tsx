@@ -1,8 +1,8 @@
 import { Stack, Typography } from '@mui/material';
 import { PageLayout } from '../components/layouts/PageLayout';
 
-const ContactPage = () => (
-    <Stack spacing={4}>
+function ContactPage() {
+  return <Stack spacing={4}>
         <Stack>
             <Typography>Social</Typography>
             <ul>
@@ -23,7 +23,7 @@ const ContactPage = () => (
             </ul>
         </Stack>
     </Stack>
-);
+}
 
 ContactPage.layout = PageLayout;
 

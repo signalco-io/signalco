@@ -1,7 +1,9 @@
 import { Button, Stack, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import DashboardsRepository, { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
+import useDeleteDashboard from 'src/hooks/dashboards/useDeleteDashboard';
+import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
+import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
 import useLocale from '../../src/hooks/useLocale';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
@@ -12,25 +14,25 @@ interface IDashboardSettingsProps {
     onClose: () => void,
 }
 
-const DashboardSettings = (props: IDashboardSettingsProps) => {
+function DashboardSettings(props: IDashboardSettingsProps) {
     const { isOpen, dashboard, onClose } = props;
     const { t } = useLocale('App', 'Dashboards');
     const router = useRouter();
     const [name, setName] = useState(dashboard?.name || '');
+    const saveDashboard = useSaveDashboard();
+    const deleteDashboard = useDeleteDashboard();
 
     const handleSave = async () => {
-        await DashboardsRepository.saveDashboardAsync(
-            {
-                ...dashboard,
-                name: name
-            }
-        );
+        saveDashboard.mutate({
+            ...dashboard,
+            name: name
+        });
         onClose();
     }
 
     const handleDashboardDelete = async () => {
         if (dashboard) {
-            await DashboardsRepository.deleteDashboardAsync(dashboard?.id);
+            await deleteDashboard.mutateAsync(dashboard.id);
             router.push({ hash: undefined });
         }
         onClose();
@@ -66,6 +68,6 @@ const DashboardSettings = (props: IDashboardSettingsProps) => {
             </Stack>
         </ConfigurationDialog>
     );
-};
+}
 
 export default DashboardSettings;

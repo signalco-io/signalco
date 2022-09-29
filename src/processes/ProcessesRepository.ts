@@ -1,5 +1,5 @@
 import ContactRepository from 'src/contacts/ContactRepository';
-import EntityRepository from 'src/entity/EntityRepository';
+import { entitiesAsync, entityAsync } from 'src/entity/EntityRepository';
 import IEntityDetails from 'src/entity/IEntityDetails';
 
 export default class ProcessesRepository {
@@ -8,10 +8,10 @@ export default class ProcessesRepository {
     }
 
     static async getProcessAsync(id: string): Promise<IEntityDetails | undefined> {
-        return await EntityRepository.byIdAsync(id);
+        return await entityAsync(id);
     }
 
     static async getProcessesAsync(): Promise<IEntityDetails[]> {
-        return await EntityRepository.byTypeAsync(3);
+        return await entitiesAsync(3);
     }
 }

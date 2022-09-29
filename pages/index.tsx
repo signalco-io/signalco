@@ -1,4 +1,4 @@
-import { Box, Button, Container, Divider, Grid, Stack, SxProps, Theme, Typography } from '@mui/material';
+import { Box, Button, Container, Divider, Fade, Grid, Stack, SxProps, Theme, Typography } from '@mui/material';
 import React from 'react';
 import Link from 'next/link';
 import CounterIndicator from '../components/pages/landing/CounterIndicator';
@@ -18,8 +18,8 @@ import CtaSection from 'components/pages/CtaSection';
 const Newsletter = dynamic(() => import('../components/pages/landing/Newsletter'));
 const GlobePart = dynamic(() => import('../components/pages/landing/GlobeSection'));
 
-const FeatureDescription = (props: { title: string, content: string | React.ReactElement, link?: string, linkText?: string }) => (
-  <Stack spacing={2}>
+function FeatureDescription(props: { title: string, content: string | React.ReactElement, link?: string, linkText?: string }) {
+  return <Stack spacing={2}>
     <Typography fontWeight={600} variant="h2">{props.title}</Typography>
     <Typography color="textSecondary">{props.content}</Typography>
     <Box>
@@ -30,9 +30,13 @@ const FeatureDescription = (props: { title: string, content: string | React.Reac
       )}
     </Box>
   </Stack>
-);
+}
 
 function StepContent(props: { title: string; subtitle?: string; image?: React.ReactNode, imageContainerHeight?: number, imageContainerStyles?: SxProps | undefined, children?: React.ReactNode | React.ReactNode[]; }) {
+  const { observe, inView } = useInView({
+    onEnter: ({ unobserve }) => unobserve(), // only run once
+  });
+
   return (
     <SectionCenter>
       <Stack spacing={{ xs: 6, md: 12 }}>
@@ -40,14 +44,16 @@ function StepContent(props: { title: string; subtitle?: string; image?: React.Re
           <Typography fontWeight={600} fontSize={{ xs: 42, md: 52 }} textAlign="center">{props.title}</Typography>
           {props.subtitle && <Typography variant="subtitle1" textAlign="center" color="textSecondary">{props.subtitle}</Typography>}
         </Stack>
-        <Box>
+        <Box ref={observe}>
           <Grid container spacing={8} alignItems="center">
             {props.image && (
-              <Grid item xs={12} md={6} sx={{ position: 'relative', height: props.imageContainerHeight }}>
-                <Box sx={props.imageContainerStyles}>
-                  {props.image}
-                </Box>
-              </Grid>
+              <Fade in={inView} timeout={1200}>
+                <Grid item xs={12} md={6} sx={{ position: 'relative', height: props.imageContainerHeight }}>
+                  <Box sx={props.imageContainerStyles}>
+                    {props.image}
+                  </Box>
+                </Grid>
+              </Fade>
             )}
             {props.children && (
               <Grid item xs={12} md={props.image ? 6 : 12}>
@@ -63,15 +69,15 @@ function StepContent(props: { title: string; subtitle?: string; image?: React.Re
   );
 }
 
-const SectionCenter = (props: { children?: React.ReactNode | undefined, sx?: SxProps<Theme> | undefined, narrow?: boolean }) => (
-  <Box sx={props.sx}>
+function SectionCenter(props: { children?: React.ReactNode | undefined, sx?: SxProps<Theme> | undefined, narrow?: boolean }) {
+  return <Box sx={props.sx}>
     <Container>
       <Box sx={{ px: { xs: 1, sm: 4, md: 8 }, py: { xs: props.narrow ? 4 : 8, sm: props.narrow ? 4 : 12 } }}>
         {props.children}
       </Box>
     </Container>
   </Box>
-);
+}
 
 const integrationsList = [
   { name: 'Samsung', img: '/assets/logos/samsunglogo.png', imgRatio: 3.5, page: '/channels/samsung' },
@@ -85,8 +91,8 @@ const integrationsList = [
 
 const integrationsLogoSize = 60;
 
-const FeaturedIntegrationsSection = () => (
-  <SectionCenter>
+function FeaturedIntegrationsSection() {
+  return <SectionCenter>
     <Stack spacing={4}>
       <Typography variant="overline" textAlign="center" fontSize="1em">Featured integrations</Typography>
       <Grid container alignItems="center" justifyContent="center">
@@ -103,9 +109,9 @@ const FeaturedIntegrationsSection = () => (
       </Grid>
     </Stack>
   </SectionCenter>
-);
+}
 
-const NewsletterSection = () => {
+function NewsletterSection() {
   const { observe, inView } = useInView({
     onEnter: ({ unobserve }) => unobserve(), // only run once
   });
@@ -117,9 +123,9 @@ const NewsletterSection = () => {
       </SectionCenter>
     </div>
   );
-};
+}
 
-const GlobeSection = () => {
+function GlobeSection() {
   const { observe, inView } = useInView({
     onEnter: ({ unobserve }) => unobserve(), // only run once
   });
@@ -129,9 +135,9 @@ const GlobeSection = () => {
       {inView && <GlobePart />}
     </Box>
   );
-};
+}
 
-const PlaySection = () => {
+function PlaySection() {
   const themeContext = useContext(ThemeContext);
 
   return (
@@ -153,9 +159,9 @@ const PlaySection = () => {
         content="Notify me if today's forecast shows rain and windows are open. Ease your mind knowing you will get notified on time" />
     </StepContent>
   );
-};
+}
 
-const Index = () => {
+function Index() {
   return (
     <Stack sx={{ overflowX: 'hidden' }}>
       <Box my={2}>
@@ -234,14 +240,14 @@ const Index = () => {
       </Container>
     </Stack >
   );
-};
+}
 
-const DataPart = (props: { value: string, subtitle: string }) => (
-  <Stack alignItems="center" spacing={1}>
+function DataPart(props: { value: string, subtitle: string }) {
+  return <Stack alignItems="center" spacing={1}>
     <Typography variant="body2" fontWeight={600} fontSize={{ xs: 38, md: 52 }} lineHeight={1}>{props.value}</Typography>
     <Typography variant="overline" fontSize={{ xs: 14, md: 18 }} color="textSecondary" lineHeight={1}>{props.subtitle}</Typography>
   </Stack>
-);
+}
 
 Index.layout = PageFullLayout;
 

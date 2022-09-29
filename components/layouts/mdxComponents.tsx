@@ -34,130 +34,147 @@ function LinkedHeader(props: ChildrenProps & { id: string | undefined }) {
 
 const components: any = {
     a: (() => {
-        const A = (props: any) => (
-            <NextLink href={props.href} passHref>
+        function A(props: any) {
+  return <NextLink href={props.href} passHref>
                 <Link >{props.children}</Link>
-            </NextLink>);
+            </NextLink>
+}
         return memo(A);
     })(),
     p: (() => {
-        const P = (props: any) => <Typography sx={{ py: 1 }} gutterBottom color="textSecondary" {...props} />;
+        function P(props: any) {
+  return <Typography sx={{ py: 1 }} gutterBottom color="textSecondary" {...props} />
+}
         return memo(P);
     })(),
     h1: (() => {
-        const H1 = (props: any) => {
+        function H1(props: any) {
             const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
             return (
                 <LinkedHeader id={id}>
                     <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h1" id={id} />
                 </LinkedHeader>
             );
-        };
+        }
         return memo(H1);
     })(),
     h2: (() => {
-        const H2 = (props: any) => {
+        function H2(props: any) {
             const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
             return (
                 <LinkedHeader id={id}>
                     <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h2" id={id} />
                 </LinkedHeader>
             );
-        };
+        }
         return memo(H2);
     })(),
     h3: (() => {
-        const H3 = (props: any) => {
+        function H3(props: any) {
             const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
             return (
                 <LinkedHeader id={id}>
                     <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h3" id={id} />
                 </LinkedHeader>
             );
-        };
+        }
         return memo(H3);
     })(),
     h4: (() => {
-        const H4 = (props: any) => {
+        function H4(props: any) {
             const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
             return (
                 <LinkedHeader id={id}>
                     <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h4" id={id} />
                 </LinkedHeader>
             );
-        };
+        }
         return memo(H4);
     })(),
     h5: (() => {
-        const H5 = (props: any) => {
+        function H5(props: any) {
             const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
             return (
                 <LinkedHeader id={id}>
                     <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h5" id={id} />
                 </LinkedHeader>
             );
-        };
+        }
         return memo(H5);
     })(),
     h6: (() => {
-        const H6 = (props: any) => {
+        function H6(props: any) {
             const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
             return (
                 <LinkedHeader id={id}>
                     <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h6" id={id} />
                 </LinkedHeader>
             );
-        };
+        }
         return memo(H6);
     })(),
     blockquote: (() => {
-        const Blockquote = (props: any) => (
-            <Paper style={{ borderLeft: '4px solid grey', padding: 8 }} {...props} />
-        );
+        function Blockquote(props: any) {
+  return <Paper style={{ borderLeft: '4px solid grey', padding: 8 }} {...props} />
+}
         return memo(Blockquote);
     })(),
     ul: (() => {
-        const Ul = (props: any) => <Typography {...props} component="ul" color="textSecondary" />;
+        function Ul(props: any) {
+  return <Typography {...props} component="ul" color="textSecondary" />
+}
         return memo(Ul);
     })(),
     ol: (() => {
-        const Ol = (props: any) => <Typography {...props} component="ol" color="textSecondary" />;
+        function Ol(props: any) {
+  return <Typography {...props} component="ol" color="textSecondary" />
+}
         return memo(Ol);
     })(),
     li: (() => {
-        const Li = (props: any) => <Typography {...props} component="li" color="textSecondary" />;
+        function Li(props: any) {
+  return <Typography {...props} component="li" color="textSecondary" />
+}
         return memo(Li);
     })(),
     table: (() => {
-        const Table = (props: any) => <Table {...props} />;
+        function Table(props: any) {
+  return <Table {...props} />
+}
         return memo(Table);
     })(),
     tr: (() => {
-        const Tr = (props: any) => <TableRow {...props} />;
+        function Tr(props: any) {
+  return <TableRow {...props} />
+}
         return memo(Tr);
     })(),
     td: (() => {
-        const Td = ({ align, ...props }: { align?: 'inherit' | 'left' | 'center' | 'right' | 'justify' }) => (
-            <TableCell align={align || undefined} {...props} />
-        );
+        function Td({ align, ...props }: { align?: 'inherit' | 'left' | 'center' | 'right' | 'justify' }) {
+  return <TableCell align={align || undefined} {...props} />
+}
         return memo(Td);
     })(),
     tbody: (() => {
-        const TBody = (props: any) => <TableBody {...props} />;
+        function TBody(props: any) {
+  return <TableBody {...props} />
+}
         return memo(TBody);
     })(),
     th: (() => {
-        const Th = ({ align, ...props }: { align?: 'inherit' | 'left' | 'center' | 'right' | 'justify' }) => (
-            <TableCell align={align || undefined} {...props} />
-        );
+        function Th({ align, ...props }: { align?: 'inherit' | 'left' | 'center' | 'right' | 'justify' }) {
+  return <TableCell align={align || undefined} {...props} />
+}
         return memo(Th);
     })(),
     thead: (() => {
-        const THead = (props: any) => <TableHead {...props} />;
+        function THead(props: any) {
+  return <TableHead {...props} />
+}
         return memo(THead);
     })(),
     code: (() => {
-        const Code = ({ className, ...props }: { children: string | string[], className?: string | undefined }) => {
+        function Code({ className, ...props }: { children: string | string[], className?: string | undefined }) {
             const themeContext = useContext(ThemeContext);
             const id = useId();
             const { t } = useLocalePlaceholders();
@@ -176,22 +193,24 @@ const components: any = {
                         </Stack>
                     </Stack>)
                 : <code className={className} {...props} />
-        };
+        }
         return memo(Code);
     })(),
     hr: Divider,
     input: (() => {
-        const Input = (props: any) => {
+        function Input(props: any) {
             const { type } = props;
             if (type === 'checkbox') {
                 return <Checkbox {...props} disabled={false} readOnly />;
             }
             return <input {...props} />;
-        };
+        }
         return memo(Input);
     })(),
     wrapper: (() => {
-        const Wrapper = (props: any) => <MdxPageLayout maxWidth="md" {...props} />;
+        function Wrapper(props: any) {
+  return <MdxPageLayout maxWidth="md" {...props} />
+}
         return memo(Wrapper);
     })(),
 };

@@ -1,10 +1,17 @@
-import { useCallback } from 'react';
-import EntityRepository from 'src/entity/EntityRepository';
-import useLoadAndError from './useLoadAndError';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { entityAsync } from 'src/entity/EntityRepository';
+import IEntityDetails from 'src/entity/IEntityDetails';
 
-function useEntity(id: string | undefined) {
-    const loadEntityFunc = useCallback(() => id ? EntityRepository.byIdAsync(id) : undefined, [id]);
-    return useLoadAndError(loadEntityFunc);
+export default function useEntity(id: string | undefined) {
+    const client = useQueryClient();
+    return useQuery(['entity', id], () => {
+        if (!id)
+            throw new Error('Entity Id is required');
+        return entityAsync(id);
+    }, {
+        initialData: () => client.getQueryData<IEntityDetails[]>(['entities'])?.find(e => e.id === id),
+        initialDataUpdatedAt: () => client.getQueryState(['entities'])?.dataUpdatedAt,
+        enabled: Boolean(id),
+        staleTime: 60*1000
+    });
 }
-
-export default useEntity;
