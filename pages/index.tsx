@@ -1,4 +1,4 @@
-import { Box, Button, Container, Divider, Fade, Grid, Slide, Stack, SxProps, Theme, Typography } from '@mui/material';
+import { Box, Button, Container, Divider, Fade, Grid, Stack, SxProps, Theme, Typography } from '@mui/material';
 import React from 'react';
 import Link from 'next/link';
 import CounterIndicator from '../components/pages/landing/CounterIndicator';
