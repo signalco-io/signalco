@@ -1,5 +1,3 @@
-import IContact from 'src/contacts/IContact';
-import IContactPointer from 'src/contacts/IContactPointer';
 import { orderBy } from 'src/helpers/ArrayHelpers';
 import HttpService from '../services/HttpService';
 import IEntityDetails from './IEntityDetails';
