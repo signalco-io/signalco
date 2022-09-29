@@ -1,0 +1,26 @@
+.ringInner {
+    border-radius: 50%;
+    background: linear-gradient(200deg, rgba(127,127,127,1) 40%, rgba(0,0,0,0) 60%);
+    opacity: 0;
+    transform: scale(0.4);
+    
+    &:before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+
+    animation: 
+        scaleRing 1s cubic-bezier(0.33, 1, 0.68, 1) forwards,
+        scaleRingGentle 12s ease-in-out infinite alternate;
+    animation-delay: 0s, 1s;
+}
+
+@keyframes scaleRing {
+    to { transform: scale(1); opacity: 0.6; }
+}
+
+@keyframes scaleRingGentle {
+    from { transform: scale(1); }
+    to { transform: scale(1.02); }
+}
