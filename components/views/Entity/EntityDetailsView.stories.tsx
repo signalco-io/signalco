@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import EntityDetailsView, { EntityDetailsViewProps } from './EntityDetailsView';
 
 export default {
-    title: 'Components/Views/EntityDetails',
+    title: 'Views/Entity/EntityDetails',
     component: EntityDetailsView,
     args:{
         id: ''
