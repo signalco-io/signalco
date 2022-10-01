@@ -16,14 +16,14 @@ type FooterSectionType = {
 
 const footerLinks: FooterSectionType[] = [
     {
-        header: 'Projects',
+        header: 'Product',
         links: [
-            { name: 'Website', href: 'https://github.com/signalco-io/signalco' },
-            { name: 'Cloud', href: 'https://github.com/signalco-io/cloud' },
+            { name: 'Features', href: '/features' },
+            { name: 'Channels', href: '/channels' },
+            { name: 'App', href: '/app' },
+            { name: 'Pricing', href: '/pricing' },
             { name: 'Station', href: '/station' },
-            { name: 'Companion', href: 'https://github.com/signalco-io/companion' },
-        ],
-        developerOnly: true
+        ]
     },
     {
         header: 'Community',
