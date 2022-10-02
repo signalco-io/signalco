@@ -1,4 +1,5 @@
-import { Box, Fade, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import GentleSlide from 'components/shared/animations/GentleSlide';
 import { useContext } from 'react';
 import { useInView } from 'react-cool-inview';
 import { ThemeContext } from '../../../pages/_app';
@@ -7,11 +8,17 @@ function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
     const themeContext = useContext(ThemeContext);
     const { observe, inView } = useInView({
         onEnter: ({ unobserve }) => unobserve(), // only run once
-      });
+    });
 
     return (
-        <Fade in={inView}>
-            <Box ref={observe} sx={{ display: 'flex', width: '42px', height: props.hideAfter ? '106px' : '170px', alignItems: props.hideAfter ? 'end' : 'center' }}>
+        <GentleSlide appear={inView} direction="down">
+            <Box ref={observe} sx={{
+                margin: 'auto',
+                display: 'flex',
+                width: '42px',
+                height: props.hideAfter ? '106px' : '170px',
+                alignItems: props.hideAfter ? 'end' : 'center'
+            }}>
                 <Box sx={{
                     pt: 0.5,
                     width: '42px',
@@ -46,7 +53,7 @@ function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
                     <Typography textAlign="center" fontSize={23} fontWeight={600}>{props.count}</Typography>
                 </Box>
             </Box>
-        </Fade>
+        </GentleSlide>
     );
 }
 

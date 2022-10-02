@@ -209,19 +209,18 @@ function Index() {
       </Box>
       {AppSettingsProvider.isDeveloper && (
         <>
-          <Box sx={{ margin: 'auto' }}>
-            <CounterIndicator count={0} />
-          </Box>
-          <StepContent title="Developers" subtitle="Signalco is free and open source project run by small team of enthusiasts." direction="horizontal">
+          <CounterIndicator count={0} />
+          <StepContent
+            title="Developers"
+            subtitle="Signalco is free and open source project run by small team of enthusiasts."
+            direction="horizontal">
             <Stack alignItems="center">
               <Button variant="outlined" startIcon={<GitHub />} endIcon={<KeyboardArrowRight />} href="https://github.com/signalco-io" size="large">signalco on GitHub</Button>
             </Stack>
           </StepContent>
         </>
       )}
-      <Box sx={{ margin: 'auto' }}>
-        <CounterIndicator count={1} />
-      </Box>
+      <CounterIndicator count={1} />
       <StepContent title="Discover" image={<DiscoverVisual />} imageContainerHeight={420} imageContainerStyles={{ position: 'absolute', top: '-92px', right: 0, zIndex: -1 }}>
         <FeatureDescription
           title="Bring together"
@@ -234,13 +233,9 @@ function Index() {
           content="Repetitive tasks are boring. Automate so you can focus on things that matter to you." />
       </StepContent>
       <FeaturedIntegrationsSection />
-      <Box sx={{ margin: 'auto' }}>
-        <CounterIndicator count={2} />
-      </Box>
+      <CounterIndicator count={2} />
       <PlaySection />
-      <Box sx={{ margin: 'auto' }}>
-        <CounterIndicator count={3} hideAfter />
-      </Box>
+      <CounterIndicator count={3} hideAfter />
       <StepContent title="Enjoy" direction="horizontal">
         <FeatureDescription
           title="Anywhere you are"
