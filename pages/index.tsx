@@ -15,6 +15,7 @@ import { GitHub, KeyboardArrowRight } from '@mui/icons-material';
 import AppSettingsProvider from '../src/services/AppSettingsProvider';
 import CtaSection from 'components/pages/CtaSection';
 import GentleSlide from 'components/shared/animations/GentleSlide';
+import useIsTablet from 'src/hooks/useIsTablet';
 
 const Newsletter = dynamic(() => import('../components/pages/landing/Newsletter'));
 const GlobePart = dynamic(() => import('../components/pages/landing/GlobeSection'));
@@ -47,7 +48,8 @@ function StepContent(props: {
   const { observe, inView } = useInView({
     onEnter: ({ unobserve }) => unobserve(), // only run once
   });
-  const direction = props.direction ?? 'vertical';
+  const isMobile = useIsTablet();
+  const direction = isMobile ? 'vertical' : (props.direction ?? 'vertical');
 
   return (
     <SectionCenter>
