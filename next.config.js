@@ -14,7 +14,6 @@ const withMDX = require('@next/mdx')({
         providerImportSource: '@mdx-js/react',
     },
 });
-
 const withPWA = require('next-pwa')({
     dest: 'public',
     runtimeCaching,
