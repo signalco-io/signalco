@@ -3490,25 +3490,25 @@
   dependencies:
     remove-accents "0.4.2"
 
-"@tanstack/query-core@4.7.2":
-  version "4.7.2"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.7.2.tgz#5e8f0bc632b9c5423e5c5ca6d147c386b64dfec7"
-  integrity sha512-1zQuFsKShMhLY6rQYBEmkYiK9Zcb3lQcCVOTIgQcvliKIxPyZFaE/8LMtaITEEfgGF5qwYqHdm61+BUtpyNsrg==
+"@tanstack/query-core@4.8.0":
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.8.0.tgz#8a7d0a0495c92ab82a49de5c4393dc7b40080d66"
+  integrity sha512-PVcSqAWboFA86eNgtHTOjfHjBkNuFGAM6kPH82p1ibx1R76f7EjedZ+LZi4ZnW4ppoSl/+hUtCgWsiNQ2ViLTw==
 
-"@tanstack/react-query-devtools@4.7.2":
-  version "4.7.2"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-4.7.2.tgz#954bb315f05801e8591d7cda4527fb3f4e9a87e9"
-  integrity sha512-Dia8EaesGvZeWVFsDnSd98cbNi16+s74glAjrjFigtvUNQKziBqYKMzBpFwFMNfMJbaZlx4b4V5DeJh7hkKfvA==
+"@tanstack/react-query-devtools@4.8.0":
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-4.8.0.tgz#f6aae17677e670880e49c35900127a98e59e1e06"
+  integrity sha512-PJNAuUFOVfv/8FDjpL8O0DmXGkS5hONhSE9Ciyn/ewkqpAgbZOnwQ3nYj/9HKxNyciBzNx/54nPxQfe/smqoLw==
   dependencies:
     "@tanstack/match-sorter-utils" "^8.1.1"
     use-sync-external-store "^1.2.0"
 
-"@tanstack/react-query@4.7.2":
-  version "4.7.2"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.7.2.tgz#ce020c4e0261e16b99d24322d1598ffc28974472"
-  integrity sha512-4nJ0HxU2kxkaHZ/swJw39io3Bb3liiggJBsCCdFOydZOl8AJDRCor1E3GsOBrtn53HT01R9EIP4PY/6fyYdKsw==
+"@tanstack/react-query@4.8.0":
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.8.0.tgz#30dbbb9efeb28c66a40ef0bf68b89952dce66ed2"
+  integrity sha512-e3QzL/S8XeA5MYqOUUABet4oZDBc1MbeUIo32r0cxEDoDJS+9oqx0az9AbBxacZ7SjM/Fy4u/eXQFBjsKGFQ6A==
   dependencies:
-    "@tanstack/query-core" "4.7.2"
+    "@tanstack/query-core" "4.8.0"
     use-sync-external-store "^1.2.0"
 
 "@types/acorn@^4.0.0":
@@ -4300,10 +4300,10 @@
     "@typescript-eslint/types" "5.32.0"
     eslint-visitor-keys "^3.3.0"
 
-"@vvo/tzdb@6.68.0":
-  version "6.68.0"
-  resolved "https://registry.yarnpkg.com/@vvo/tzdb/-/tzdb-6.68.0.tgz#70e2eeca1869f37b69c63e115fd6cd671a2ec523"
-  integrity sha512-gTYX0c/zfvdeywLFZdHJzxczXjZf4oZHRnkTemziyn4p0R+qoqdrRK5PqY2DFnH64YkFcpreNS1JbbnfWiMQgQ==
+"@vvo/tzdb@6.69.0":
+  version "6.69.0"
+  resolved "https://registry.yarnpkg.com/@vvo/tzdb/-/tzdb-6.69.0.tgz#2c13b578c169554e95cba84329bd6897457f0721"
+  integrity sha512-L0BcVtrFG0a43mmiWo34yyQarsoAYbfD16q4yyO/A/r+fgcg3glAzFfqUxXGm7PLxt2SK9/f+jVtPZWNn2oSrg==
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
@@ -11641,10 +11641,10 @@ pify@^4.0.1:
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
-pigeon-maps@0.21.2:
-  version "0.21.2"
-  resolved "https://registry.yarnpkg.com/pigeon-maps/-/pigeon-maps-0.21.2.tgz#ec789291f59896e60ba71259b4d212530c8d4541"
-  integrity sha512-4uc60/EJV3uVy6HwTkzEICauseuWcjzuHK/1VUwvpdZRfjH0l6o/0MNKvJ3721DuKDKMtMeAU0PmmO5omiVd3w==
+pigeon-maps@0.21.3:
+  version "0.21.3"
+  resolved "https://registry.yarnpkg.com/pigeon-maps/-/pigeon-maps-0.21.3.tgz#a15c44e5f179c56a2560993b3660296d184c3d6c"
+  integrity sha512-NbzISHHvMrcYBMBJ6NSSdTC1iGshSYOvsql9AqBfsE7KXni9xFIV9dkIWAfkKGCbafZ/0JysWZSp7zfg2piOFg==
 
 pinkie-promise@^2.0.0:
   version "2.0.1"
@@ -11818,10 +11818,10 @@ postcss@8.4.14, postcss@^8.2.14, postcss@^8.2.15:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-postcss@8.4.16:
-  version "8.4.16"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.16.tgz#33a1d675fac39941f5f445db0de4db2b6e01d43c"
-  integrity sha512-ipHE1XBvKzm5xI7hiHCZJCSugxvsdq2mPnsq5+UF+VHCjiBvtDrlxJfMBToWaP9D5XlgNmcFGqoHmUn0EYEaRQ==
+postcss@8.4.17:
+  version "8.4.17"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.17.tgz#f87863ec7cd353f81f7ab2dec5d67d861bbb1be5"
+  integrity sha512-UNxNOLQydcOFi41yHNMcKRZ39NeXlr8AxGuZJsdub8vIb12fHzcq37DTU/QtbI6WLxNg2gF9Z+8qtRwTj1UI1Q==
   dependencies:
     nanoid "^3.3.4"
     picocolors "^1.0.0"

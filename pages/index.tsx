@@ -14,37 +14,57 @@ import { ThemeContext } from './_app';
 import { GitHub, KeyboardArrowRight } from '@mui/icons-material';
 import AppSettingsProvider from '../src/services/AppSettingsProvider';
 import CtaSection from 'components/pages/CtaSection';
+import GentleSlide from 'components/shared/animations/GentleSlide';
+import useIsTablet from 'src/hooks/useIsTablet';
 
 const Newsletter = dynamic(() => import('../components/pages/landing/Newsletter'));
 const GlobePart = dynamic(() => import('../components/pages/landing/GlobeSection'));
 
 function FeatureDescription(props: { title: string, content: string | React.ReactElement, link?: string, linkText?: string }) {
-  return <Stack spacing={2}>
-    <Typography fontWeight={600} variant="h2">{props.title}</Typography>
-    <Typography color="textSecondary">{props.content}</Typography>
-    <Box>
-      {props.link && (
-        <Link passHref href={props.link}>
-          <Button variant="outlined">{props.linkText ?? 'Read more'}</Button>
-        </Link>
-      )}
-    </Box>
-  </Stack>
+  return (
+    <Stack spacing={2}>
+      <Typography fontWeight={600} variant="h2">{props.title}</Typography>
+      <Typography color="textSecondary">{props.content}</Typography>
+      <Box>
+        {props.link && (
+          <Link passHref href={props.link}>
+            <Button variant="outlined">{props.linkText ?? 'Read more'}</Button>
+          </Link>
+        )}
+      </Box>
+    </Stack>
+  );
 }
 
-function StepContent(props: { title: string; subtitle?: string; image?: React.ReactNode, imageContainerHeight?: number, imageContainerStyles?: SxProps | undefined, children?: React.ReactNode | React.ReactNode[]; }) {
+function StepContent(props: {
+  title: string;
+  direction?: 'vertical' | 'horizontal'
+  subtitle?: string;
+  image?: React.ReactNode,
+  imageContainerHeight?: number,
+  imageContainerStyles?: SxProps | undefined,
+  children?: React.ReactNode | React.ReactNode[];
+}) {
   const { observe, inView } = useInView({
     onEnter: ({ unobserve }) => unobserve(), // only run once
   });
+  const isMobile = useIsTablet();
+  const direction = isMobile ? 'vertical' : (props.direction ?? 'vertical');
 
   return (
     <SectionCenter>
-      <Stack spacing={{ xs: 6, md: 12 }}>
+      <Stack spacing={{ xs: 6, md: 12 }} ref={observe}>
         <Stack spacing={{ xs: 2, md: 4 }}>
-          <Typography fontWeight={600} fontSize={{ xs: 42, md: 52 }} textAlign="center">{props.title}</Typography>
-          {props.subtitle && <Typography variant="subtitle1" textAlign="center" color="textSecondary">{props.subtitle}</Typography>}
+          <GentleSlide appear={inView} direction="down">
+            <Typography fontWeight={600} fontSize={{ xs: 42, md: 52 }} textAlign="center">{props.title}</Typography>
+          </GentleSlide>
+          {props.subtitle && (
+            <Fade in={inView}>
+              <Typography variant="subtitle1" textAlign="center" color="textSecondary">{props.subtitle}</Typography>
+            </Fade>
+          )}
         </Stack>
-        <Box ref={observe}>
+        <Box>
           <Grid container spacing={8} alignItems="center">
             {props.image && (
               <Fade in={inView} timeout={1200}>
@@ -57,8 +77,16 @@ function StepContent(props: { title: string; subtitle?: string; image?: React.Re
             )}
             {props.children && (
               <Grid item xs={12} md={props.image ? 6 : 12}>
-                <Stack width="100%" spacing={4} justifyContent="space-evenly">
-                  {props.children}
+                <Stack width="100%" spacing={4} justifyContent="space-evenly" direction={direction === 'horizontal' ? 'row' : 'column'}>
+                  {(Array.isArray(props.children) ? props.children : [props.children]).map((child, childIndex) => (
+                    <GentleSlide
+                      key={childIndex}
+                      appear={inView}
+                      index={childIndex}
+                      direction={direction === 'horizontal' ? 'down' : 'left'}>
+                      {child}
+                    </GentleSlide>
+                  ))}
                 </Stack>
               </Grid>
             )}
@@ -70,13 +98,15 @@ function StepContent(props: { title: string; subtitle?: string; image?: React.Re
 }
 
 function SectionCenter(props: { children?: React.ReactNode | undefined, sx?: SxProps<Theme> | undefined, narrow?: boolean }) {
-  return <Box sx={props.sx}>
-    <Container>
-      <Box sx={{ px: { xs: 1, sm: 4, md: 8 }, py: { xs: props.narrow ? 4 : 8, sm: props.narrow ? 4 : 12 } }}>
-        {props.children}
-      </Box>
-    </Container>
-  </Box>
+  return (
+    <Box sx={props.sx}>
+      <Container>
+        <Box sx={{ px: { xs: 1, sm: 4, md: 8 }, py: { xs: props.narrow ? 4 : 8, sm: props.narrow ? 4 : 12 } }}>
+          {props.children}
+        </Box>
+      </Container>
+    </Box>
+  );
 }
 
 const integrationsList = [
@@ -92,23 +122,33 @@ const integrationsList = [
 const integrationsLogoSize = 60;
 
 function FeaturedIntegrationsSection() {
-  return <SectionCenter>
-    <Stack spacing={4}>
-      <Typography variant="overline" textAlign="center" fontSize="1em">Featured integrations</Typography>
-      <Grid container alignItems="center" justifyContent="center">
-        {integrationsList.map(channel => (
-          <Grid item key={channel.name} xs={6} md={12 / integrationsList.length} textAlign="center" sx={{ p: 1 }}>
-            <LinkImage href={channel.page} imageProps={{
-              alt: channel.name,
-              src: channel.img,
-              width: `${integrationsLogoSize * channel.imgRatio}`,
-              height: `${integrationsLogoSize * channel.imgRatio}`
-            }} />
-          </Grid>
-        ))}
-      </Grid>
-    </Stack>
-  </SectionCenter>
+  const { observe, inView } = useInView({
+    onEnter: ({ unobserve }) => unobserve(), // only run once
+  });
+
+  return (
+    <SectionCenter>
+      <Stack spacing={4} ref={observe}>
+        <Fade in={inView}>
+          <Typography variant="overline" textAlign="center" fontSize="1em">Featured integrations</Typography>
+        </Fade>
+        <Grid container alignItems="center" justifyContent="center">
+          {integrationsList.map((channel, channelIndex) => (
+            <Grid key={channel.name} item xs={6} md={12 / integrationsList.length} textAlign="center" sx={{ p: 1 }}>
+              <GentleSlide appear={inView} index={channelIndex} direction="down">
+                <LinkImage href={channel.page} imageProps={{
+                  alt: channel.name,
+                  src: channel.img,
+                  width: `${integrationsLogoSize * channel.imgRatio}`,
+                  height: `${integrationsLogoSize * channel.imgRatio}`
+                }} />
+              </GentleSlide>
+            </Grid>
+          ))}
+        </Grid>
+      </Stack>
+    </SectionCenter>
+  );
 }
 
 function NewsletterSection() {
@@ -169,19 +209,18 @@ function Index() {
       </Box>
       {AppSettingsProvider.isDeveloper && (
         <>
-          <Box sx={{ margin: 'auto' }}>
-            <CounterIndicator count={0} />
-          </Box>
-          <StepContent title="Developers" subtitle="Signalco is free and open source project run by small team of enthusiasts.">
+          <CounterIndicator count={0} />
+          <StepContent
+            title="Developers"
+            subtitle="Signalco is free and open source project run by small team of enthusiasts."
+            direction="horizontal">
             <Stack alignItems="center">
               <Button variant="outlined" startIcon={<GitHub />} endIcon={<KeyboardArrowRight />} href="https://github.com/signalco-io" size="large">signalco on GitHub</Button>
             </Stack>
           </StepContent>
         </>
       )}
-      <Box sx={{ margin: 'auto' }}>
-        <CounterIndicator count={1} />
-      </Box>
+      <CounterIndicator count={1} />
       <StepContent title="Discover" image={<DiscoverVisual />} imageContainerHeight={420} imageContainerStyles={{ position: 'absolute', top: '-92px', right: 0, zIndex: -1 }}>
         <FeatureDescription
           title="Bring together"
@@ -194,31 +233,19 @@ function Index() {
           content="Repetitive tasks are boring. Automate so you can focus on things that matter to you." />
       </StepContent>
       <FeaturedIntegrationsSection />
-      <Box sx={{ margin: 'auto' }}>
-        <CounterIndicator count={2} />
-      </Box>
+      <CounterIndicator count={2} />
       <PlaySection />
-      <Box sx={{ margin: 'auto' }}>
-        <CounterIndicator count={3} hideAfter />
-      </Box>
-      <StepContent title="Enjoy">
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <FeatureDescription
-              title="Anywhere you are"
-              content="Access all features wherever you are. Controlling devices in your home from other side of the world or room&nbsp;:) has never been simpler." />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <FeatureDescription
-              title="Share"
-              content="Share devices, media, dashboards, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <FeatureDescription
-              title="Relax"
-              content="Enjoy the automated life. Use gained free time doing what you love. Relax in nature, hobbies, family... or automate one more thing." />
-          </Grid>
-        </Grid>
+      <CounterIndicator count={3} hideAfter />
+      <StepContent title="Enjoy" direction="horizontal">
+        <FeatureDescription
+          title="Anywhere you are"
+          content="Access all features wherever you are. Controlling devices in your home from other side of the world or room&nbsp;:) has never been simpler." />
+        <FeatureDescription
+          title="Share"
+          content="Share devices, media, dashboards, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
+        <FeatureDescription
+          title="Relax"
+          content="Enjoy the automated life. Use gained free time doing what you love. Relax in nature, hobbies, family... or automate one more thing." />
       </StepContent>
       <GlobeSection />
       <Divider />

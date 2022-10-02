@@ -1,4 +1,4 @@
-import { Box, keyframes, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import Image, { ImageProps } from 'next/image';
 import { useMemo } from 'react';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
@@ -46,24 +46,6 @@ type RingLogoInfo = {
     height: number
 }
 
-const scaleRingLogoKeyframes = keyframes`
-    to   { opacity: 1; }
-`;
-
-const rotateRingLogoKeyframes = (radius: number, degOffset: number, power: number) => keyframes`
-    from    { transform: rotate(${-degOffset}deg) translateX(${radius}px) rotate(${degOffset}deg); }
-    to      { transform: rotate(${-degOffset - power}deg) translateX(${radius * 1.02}px) rotate(${degOffset + power}deg); }
-`;
-
-const scaleRing = keyframes`
-    to { transform: scale(1); opacity: 0.6; }
-`;
-
-const scaleRingGentle = keyframes`
-    from { transform: scale(1); }
-    to { transform: scale(1.02); }
-`
-
 function RingLogo(props: { ringRadius: number, degrees: number, imageProps: ImageProps }) {
     const logoPadding = 16;
 
@@ -72,8 +54,10 @@ function RingLogo(props: { ringRadius: number, degrees: number, imageProps: Imag
 
     const top = -logoHeight / 2 - logoPadding + props.ringRadius;
     const left = -logoWidth / 2 - logoPadding + props.ringRadius;
-
     const power = useMemo(() => Math.random() > 0.5 ? 4 : -4, []);
+
+    const keyframesName = `@keyframes scaleRingLogo${top}${left}`;
+    const rotateKeyframesName = `@keyframes rotateRingLogo${top}${left}`;
 
     return (
         <Box sx={{
@@ -86,12 +70,21 @@ function RingLogo(props: { ringRadius: number, degrees: number, imageProps: Imag
             borderRadius: '50%',
             position: 'absolute',
             opacity: 0,
-            animation: `${scaleRingLogoKeyframes} 0.5s ease-in, ${rotateRingLogoKeyframes(props.ringRadius, props.degrees, power)} 12s ease-in-out infinite`,
+            animation: `scaleRingLogo${top}${left} 0.5s ease-in forwards, rotateRingLogo${top}${left} 12s ease-in-out infinite alternate`,
             animationDelay: '0.4s',
-            animationFillMode: 'forwards',
-            animationDirection: 'alternate',
+            [keyframesName]: {
+                to: { opacity: 1 }
+            },
+            [rotateKeyframesName]: {
+                from: { transform: `rotate(${-props.degrees}deg) translateX(${props.ringRadius}px) rotate(${props.degrees}deg)` },
+                to: { transform: `rotate(${-props.degrees - power}deg) translateX(${props.ringRadius * 1.02}px) rotate(${props.degrees + power}deg)` }
+            },
         }}>
-            <Image alt={props.imageProps.alt} {...props.imageProps} />
+            <Image
+                alt={props.imageProps.alt}
+                width={props.imageProps.width}
+                height={props.imageProps.height}
+                src={props.imageProps.src} />
         </Box>
     );
 }
@@ -107,14 +100,21 @@ function Ring(props: { size: number, logos: RingLogoInfo[] }) {
                 background: 'linear-gradient(200deg, rgba(127,127,127,1) 40%, rgba(0,0,0,0) 60%)',
                 opacity: 0,
                 transform: 'scale(0.8)',
-                animation: `${scaleRing} 1s cubic-bezier(0.33, 1, 0.68, 1) forwards, ${scaleRingGentle} 12s ease-in-out infinite alternate`,
+                animation: 'scaleRing 1s cubic-bezier(0.33, 1, 0.68, 1) forwards, scaleRingGentle 12s ease-in-out infinite alternate',
                 animationDelay: '0s, 1s',
                 mask: `radial-gradient(transparent ${props.size / 2 - 3}px, #000 ${props.size / 2 - 2}px)`,
                 '&:before': {
                     content: '""',
                     display: 'block',
                     paddingTop: '100%'
-                }
+                },
+                '@keyframes scaleRing': {
+                    to: { transform: 'scale(1)', opacity: 0.6 }
+                },
+                '@keyframes scaleRingGentle': {
+                    from: { transform: 'scale(1)' },
+                    to: { transform: 'scale(1.02)' }
+                },
             }}></Box>
             {props.logos.map(logo => (
                 <RingLogo key={logo.alt} ringRadius={props.size / 2} degrees={logo.angle} imageProps={logo} />
