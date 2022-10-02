@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { entityAsync } from 'src/entity/EntityRepository';
 import IEntityDetails from 'src/entity/IEntityDetails';
+import { entityAsync } from 'src/entity/EntityRepository';
 
 export default function useEntities(entityIds?: string[]) {
     const [entities, setEntities] = useState<(IEntityDetails | undefined)[] | undefined>(undefined);

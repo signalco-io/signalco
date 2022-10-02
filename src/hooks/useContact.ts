@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import IContactPointer from 'src/contacts/IContactPointer';
-import { entityAsync } from 'src/entity/EntityRepository';
 import IEntityDetails from 'src/entity/IEntityDetails';
+import { entityAsync } from 'src/entity/EntityRepository';
+import IContactPointer from 'src/contacts/IContactPointer';
 
 export default function useContact(pointer: IContactPointer | undefined) {
     const client = useQueryClient();

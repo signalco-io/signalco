@@ -1,3 +1,12 @@
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import {
+  bindMenu,
+  bindTrigger,
+  usePopupState,
+} from 'material-ui-popup-state/hooks';
+import Skeleton from '@mui/material/Skeleton';
 import {
   Avatar,
   Box,
@@ -15,30 +24,21 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import Link from 'next/link';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import Skeleton from '@mui/material/Skeleton';
-import DashboardSharpIcon from '@mui/icons-material/DashboardSharp';
-import DevicesOtherSharpIcon from '@mui/icons-material/DevicesOtherSharp';
 import SettingsIcon from '@mui/icons-material/Settings';
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { orderBy } from '../src/helpers/ArrayHelpers';
-import { SvgIconComponent } from '@mui/icons-material';
-import {
-  usePopupState,
-  bindTrigger,
-  bindMenu,
-} from 'material-ui-popup-state/hooks';
 import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
-import useLocale from '../src/hooks/useLocale';
-import CurrentUserProvider from '../src/services/CurrentUserProvider';
-import LocalStorageService from '../src/services/LocalStorageService';
-import useUserSetting from '../src/hooks/useUserSetting';
-import ApiBadge from './development/ApiBadge';
-import useIsMobile from 'src/hooks/useIsMobile';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import DevicesOtherSharpIcon from '@mui/icons-material/DevicesOtherSharp';
+import DashboardSharpIcon from '@mui/icons-material/DashboardSharp';
 import CommitIcon from '@mui/icons-material/Commit';
+import CloseIcon from '@mui/icons-material/Close';
+import { SvgIconComponent } from '@mui/icons-material';
+import useIsMobile from 'src/hooks/useIsMobile';
+import ApiBadge from './development/ApiBadge';
+import LocalStorageService from '../src/services/LocalStorageService';
+import CurrentUserProvider from '../src/services/CurrentUserProvider';
+import useUserSetting from '../src/hooks/useUserSetting';
+import useLocale from '../src/hooks/useLocale';
+import { orderBy } from '../src/helpers/ArrayHelpers';
 
 const navItems = [
   { label: 'Channels', path: '/app/channels', icon: CommitIcon, hidden: true },

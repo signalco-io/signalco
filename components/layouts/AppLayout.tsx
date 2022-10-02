@@ -1,14 +1,14 @@
-import { Box, Fab, Stack } from '@mui/material';
 import React, { useEffect } from 'react';
-import NavProfile from '../NavProfile';
 import { useSnackbar } from 'notistack';
-import PageNotificationService from '../../src/notifications/PageNotificationService';
-import RealtimeService from '../../src/realtime/realtimeService';
-import useHashParam from '../../src/hooks/useHashParam';
-import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
-import { ChildrenProps } from '../../src/sharedTypes';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Box, Fab, Stack } from '@mui/material';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
+import NavProfile from '../NavProfile';
+import { ChildrenProps } from '../../src/sharedTypes';
+import RealtimeService from '../../src/realtime/realtimeService';
+import PageNotificationService from '../../src/notifications/PageNotificationService';
+import useHashParam from '../../src/hooks/useHashParam';
 
 const queryClient = new QueryClient();
 

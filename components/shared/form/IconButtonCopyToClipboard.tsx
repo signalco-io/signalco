@@ -1,11 +1,11 @@
+import React, { MouseEvent, useState } from 'react';
+import {
+    bindPopper,
+    usePopupState
+} from 'material-ui-popup-state/hooks';
+import Popper from '@mui/material/Popper';
 import { Fade, IconButton, Paper, Stack, Tooltip, Typography } from '@mui/material';
 import { Warning } from '@mui/icons-material';
-import React, { MouseEvent, useState } from 'react';
-import Popper from '@mui/material/Popper';
-import {
-    usePopupState,
-    bindPopper
-} from 'material-ui-popup-state/hooks';
 import { ChildrenProps } from '../../../src/sharedTypes';
 import { useLocaleHelpers } from '../../../src/hooks/useLocale';
 

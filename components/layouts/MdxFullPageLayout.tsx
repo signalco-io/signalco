@@ -1,7 +1,7 @@
 import { MDXProvider } from '@mdx-js/react';
-import { ChildrenProps } from '../../src/sharedTypes';
-import mdxComponents from './mdxComponents';
 import { PageFullLayout } from './PageFullLayout';
+import mdxComponents from './mdxComponents';
+import { ChildrenProps } from '../../src/sharedTypes';
 
 export default function MdxFullPageLayout(props: ChildrenProps) {
     return (

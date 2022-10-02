@@ -1,17 +1,16 @@
+import { a11yDark as dark , a11yLight as light } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import SyntaxHighlighter from 'react-syntax-highlighter';
 import React, { memo, useContext, useId } from 'react';
 import NextLink from 'next/link';
-import { Checkbox, Paper, Typography, TableBody, TableCell, TableHead, TableRow, Divider, Link, Stack } from '@mui/material';
-import MdxPageLayout from './MdxPageLayout';
+import { Checkbox, Divider, Link, Paper, Stack, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import MdxPageLayout from './MdxPageLayout';
+import IconButtonCopyToClipboard from '../shared/form/IconButtonCopyToClipboard';
 import { ChildrenProps } from '../../src/sharedTypes';
 import { useLocaleHelpers, useLocalePlaceholders } from '../../src/hooks/useLocale';
-import IconButtonCopyToClipboard from '../shared/form/IconButtonCopyToClipboard';
 import useIsClient from '../../src/hooks/useIsClient';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { a11yDark as dark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
-import { a11yLight as light } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import { ThemeContext } from '../../pages/_app';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const headingTopSpacing = 2;
 const headingBottomSpacing = 2;

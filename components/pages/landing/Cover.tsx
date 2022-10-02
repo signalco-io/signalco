@@ -1,6 +1,6 @@
-import { Box, Stack, Typography } from '@mui/material';
-import Image, { ImageProps } from 'next/image';
 import { useMemo } from 'react';
+import Image, { ImageProps } from 'next/image';
+import { Box, Stack, Typography } from '@mui/material';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
 
 const ringConfig = [

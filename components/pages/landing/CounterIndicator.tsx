@@ -1,7 +1,7 @@
+import { useInView } from 'react-cool-inview';
+import { useContext } from 'react';
 import { Box, Typography } from '@mui/material';
 import GentleSlide from 'components/shared/animations/GentleSlide';
-import { useContext } from 'react';
-import { useInView } from 'react-cool-inview';
 import { ThemeContext } from '../../../pages/_app';
 
 function CounterIndicator(props: { count: number, hideAfter?: boolean }) {

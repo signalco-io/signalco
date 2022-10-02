@@ -1,6 +1,6 @@
-import ContactRepository from 'src/contacts/ContactRepository';
-import { entitiesAsync, entityAsync } from 'src/entity/EntityRepository';
 import IEntityDetails from 'src/entity/IEntityDetails';
+import { entitiesAsync, entityAsync } from 'src/entity/EntityRepository';
+import ContactRepository from 'src/contacts/ContactRepository';
 
 export default class ProcessesRepository {
     static async saveProcessConfigurationAsync(id: string, configurationSerialized: string) {

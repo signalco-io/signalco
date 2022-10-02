@@ -1,8 +1,8 @@
-import { Box } from '@mui/material';
 import React from 'react';
 import { useSnackbar } from 'notistack';
-import PageNotificationService from '../../src/notifications/PageNotificationService';
+import { Box } from '@mui/material';
 import { ChildrenProps } from '../../src/sharedTypes';
+import PageNotificationService from '../../src/notifications/PageNotificationService';
 
 export function EmptyLayout(props: ChildrenProps) {
     const {

@@ -1,13 +1,13 @@
-import { Box, ButtonBase, Icon, Stack, Typography } from '@mui/material';
 import React from 'react';
-import useEntity from '../../../src/hooks/useEntity';
+import Link from 'next/link';
+import { Box, ButtonBase, Icon, Stack, Typography } from '@mui/material';
+import useContact from 'src/hooks/useContact';
 import { CircleSlider } from 'react-circle-slider';
 import { WidgetSharedProps } from '../Widget';
-import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import Link from 'next/link';
-import useContact from 'src/hooks/useContact';
+import useEntity from '../../../src/hooks/useEntity';
 
 const stateOptions: IWidgetConfigurationOption[] = [
     DefaultLabel,

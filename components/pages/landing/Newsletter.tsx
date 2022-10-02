@@ -1,7 +1,7 @@
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { ChangeEvent, SyntheticEvent, createRef, useRef, useState } from 'react';
+import { Alert, Collapse, Fade, FilledInput, Slide, Stack, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { Stack, Typography, Collapse, FilledInput, Slide, Alert, Fade } from '@mui/material';
-import { useState, useRef, createRef, SyntheticEvent, ChangeEvent } from 'react';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import HttpService from '../../../src/services/HttpService';
 
 function Newsletter() {

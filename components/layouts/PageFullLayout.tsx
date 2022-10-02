@@ -1,8 +1,8 @@
 import React from 'react';
-import { ChildrenProps } from '../../src/sharedTypes';
-import { PageNav } from '../PageNav';
-import { PageNavSsr } from '../PageNavSsr';
 import Footer from '../pages/Footer';
+import { PageNavSsr } from '../PageNavSsr';
+import { PageNav } from '../PageNav';
+import { ChildrenProps } from '../../src/sharedTypes';
 
 export function PageFullLayout(props: ChildrenProps) {
     const Nav = typeof window !== 'undefined' ? PageNav : PageNavSsr;

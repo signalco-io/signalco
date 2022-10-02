@@ -1,8 +1,8 @@
+import React, { useState } from 'react';
+import Link from 'next/link';
 import {
   Button, Stack, Typography
 } from '@mui/material';
-import React, { useState } from 'react';
-import Link from 'next/link';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 import useTimeout from '../src/hooks/useTimeout';
 

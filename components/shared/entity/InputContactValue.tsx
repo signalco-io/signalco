@@ -1,10 +1,10 @@
-import { IconButton, Slider, Stack, Switch, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
-import IContact from 'src/contacts/IContact';
-import blendColors from 'src/helpers/BlendColors';
-import throttle from 'src/helpers/Throttle';
-import SelectItems from '../form/SelectItems';
+import { IconButton, Slider, Stack, Switch, Typography } from '@mui/material';
 import { PlayArrow as PlayArrowIcon } from '@mui/icons-material';
+import throttle from 'src/helpers/Throttle';
+import blendColors from 'src/helpers/BlendColors';
+import IContact from 'src/contacts/IContact';
+import SelectItems from '../form/SelectItems';
 
 export interface InputContactValueProps {
     value: any | undefined;

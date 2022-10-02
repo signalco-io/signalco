@@ -1,10 +1,10 @@
-import { Box, Button, NoSsr, Popover, Stack, Tab, Tabs, Typography } from '@mui/material';
-import { bindPopover, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import React, { useEffect } from 'react';
+import { bindPopover, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
+import { Box, Button, NoSsr, Popover, Stack, Tab, Tabs, Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import useHashParam from '../../src/hooks/useHashParam';
-import DashboardSelectorMenu from './DashboardSelectorMenu';
 import useDashboards from 'src/hooks/dashboards/useDashboards';
+import DashboardSelectorMenu from './DashboardSelectorMenu';
+import useHashParam from '../../src/hooks/useHashParam';
 
 export interface IDashboardSelectorProps {
     onEditWidgets: () => void,

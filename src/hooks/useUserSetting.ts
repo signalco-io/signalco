@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
-import UserSettingsProvider from '../services/UserSettingsProvider';
 import { ValueOrFuncGeneric } from '../sharedTypes';
+import UserSettingsProvider from '../services/UserSettingsProvider';
 
 const useUserSetting = <T>(key: string, defaultValue: ValueOrFuncGeneric<T>): [T | undefined, (value: T | undefined) => void] => {
     const [value, setValue] = useState<T | undefined>(UserSettingsProvider.value(key, defaultValue));

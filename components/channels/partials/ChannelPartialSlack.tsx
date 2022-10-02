@@ -1,7 +1,7 @@
-import { Stack, Typography } from '@mui/material';
-import OAuthRedirectConnectButton from 'components/oauth/OAuthRedirectConnectButton';
 import { useRouter } from 'next/router';
+import { Stack, Typography } from '@mui/material';
 import HttpService from 'src/services/HttpService';
+import OAuthRedirectConnectButton from 'components/oauth/OAuthRedirectConnectButton';
 
 const slackAppClientIdResolved = process.env.NEXT_PUBLIC_SLACK_CLIENTID;
 

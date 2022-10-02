@@ -1,15 +1,15 @@
-import { ToggleButton } from '@mui/material';
-import { Stack, Box } from '@mui/system';
-import EntityStatus from 'components/entity/EntityStatus';
-import ShareEntityChip from 'components/entity/ShareEntityChip';
-import EditableInput from 'components/shared/form/EditableInput';
 import { useMemo } from 'react';
-import { entityRenameAsync } from 'src/entity/EntityRepository';
-import useContact from 'src/hooks/useContact';
+import { Box, Stack } from '@mui/system';
+import { ToggleButton } from '@mui/material';
 import useEntity from 'src/hooks/useEntity';
+import useContact from 'src/hooks/useContact';
+import { entityRenameAsync } from 'src/entity/EntityRepository';
+import EditableInput from 'components/shared/form/EditableInput';
+import ShareEntityChip from 'components/entity/ShareEntityChip';
+import EntityStatus from 'components/entity/EntityStatus';
 import EntityProcessDetails from './EntityProcessDetails';
-import ContactsTable from './ContactsTable';
 import EntityOptions from './EntityOptions';
+import ContactsTable from './ContactsTable';
 
 export interface EntityDetailsViewProps {
     id: string;

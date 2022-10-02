@@ -1,9 +1,9 @@
-import { useSortable } from '@dnd-kit/sortable';
 import React from 'react';
-import { WidgetProps } from '../widgets/Widget';
 import { CSS } from '@dnd-kit/utilities';
-import { draggingUpscale } from './DashboardView';
+import { useSortable } from '@dnd-kit/sortable';
 import DisplayWidget from './DisplayWidget';
+import { draggingUpscale } from './DashboardView';
+import { WidgetProps } from '../widgets/Widget';
 
 export default function DragableWidget(props: WidgetProps) {
     const {

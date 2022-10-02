@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import en from '../../locales/en.json';
-import hr from '../../locales/hr.json';
-import UserSettingsProvider from '../services/UserSettingsProvider';
-import { ObjectDictAny } from '../sharedTypes';
 import useIsClient from './useIsClient';
+import { ObjectDictAny } from '../sharedTypes';
+import UserSettingsProvider from '../services/UserSettingsProvider';
+import hr from '../../locales/hr.json';
+import en from '../../locales/en.json';
 
 export type LocalizeFunc = (key: string, data?: object | undefined) => string;
 

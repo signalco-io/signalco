@@ -1,9 +1,9 @@
-import { Box } from '@mui/material';
 import { useContext } from 'react';
+import { Box } from '@mui/material';
 import { AppTheme } from 'src/theme';
-import { ThemeContext } from '../../pages/_app';
-import appSettingsProvider from '../../src/services/AppSettingsProvider';
 import ApiBadge from '../development/ApiBadge';
+import appSettingsProvider from '../../src/services/AppSettingsProvider';
+import { ThemeContext } from '../../pages/_app';
 
 export default function SignalcoLogotype({ width, height, theme, hideBadge }: { width?: number, height?: number, theme?: AppTheme, hideBadge?: boolean }) {
     if (typeof width === 'undefined' &&

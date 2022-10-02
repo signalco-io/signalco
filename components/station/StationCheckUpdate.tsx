@@ -1,11 +1,11 @@
 import { compareVersions } from 'compare-versions';
-import useLocale, { localizer, useLocalePlaceholders } from '../../src/hooks/useLocale';
-import StationsRepository from '../../src/stations/StationsRepository';
+import { Button } from '@mui/material';
 import UploadIcon from '@mui/icons-material/Upload';
 import CheckIcon from '@mui/icons-material/Check';
-import { Button } from '@mui/material';
-import useLoadAndError from 'src/hooks/useLoadAndError';
 import PageNotificationService from 'src/notifications/PageNotificationService';
+import useLoadAndError from 'src/hooks/useLoadAndError';
+import StationsRepository from '../../src/stations/StationsRepository';
+import useLocale, { localizer, useLocalePlaceholders } from '../../src/hooks/useLocale';
 
 async function loadLatestAvailableVersion() {
     try {

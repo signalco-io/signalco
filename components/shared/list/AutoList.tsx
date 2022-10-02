@@ -1,3 +1,5 @@
+import React from 'react';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
 import {
   Alert,
   Box, LinearProgress, List,
@@ -11,12 +13,10 @@ import {
 
   Typography
 } from '@mui/material';
-import { OverridableComponent } from '@mui/material/OverridableComponent';
-import React from 'react';
-import AutoActionButton from '../action/AutoActionButton';
-import ResultsPlaceholder from '../indicators/ResultsPlaceholder';
-import IAutoAction from '../interfaces/IAutoAction';
 import IErrorProps from '../interfaces/IErrorProps';
+import IAutoAction from '../interfaces/IAutoAction';
+import ResultsPlaceholder from '../indicators/ResultsPlaceholder';
+import AutoActionButton from '../action/AutoActionButton';
 
 export interface IAutoListItem {
   id: string;

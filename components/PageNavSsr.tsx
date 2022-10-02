@@ -1,10 +1,10 @@
-import { Box, Button, ButtonBase, Container, NoSsr, Stack } from '@mui/material';
 import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { Box, Button, ButtonBase, Container, NoSsr, Stack } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import SignalcoLogotype from './icons/SignalcoLogotype';
 import useIsMobile from 'src/hooks/useIsMobile';
+import SignalcoLogotype from './icons/SignalcoLogotype';
 
 const navLinks = [
     // { href: '/features', text: 'Features' },

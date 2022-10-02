@@ -1,7 +1,7 @@
 import { Card, CardMedia, Stack, Typography } from '@mui/material';
-import SignalcoLogo from '../../components/icons/SignalcoLogo';
-import SignalcoLogotype from '../../components/icons/SignalcoLogotype';
 import { PageLayout } from '../../components/layouts/PageLayout';
+import SignalcoLogotype from '../../components/icons/SignalcoLogotype';
+import SignalcoLogo from '../../components/icons/SignalcoLogo';
 
 function DesignPage() {
     return (

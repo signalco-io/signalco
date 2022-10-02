@@ -1,21 +1,21 @@
-import { Box, Button, Container, Divider, Fade, Grid, Stack, SxProps, Theme, Typography } from '@mui/material';
-import React from 'react';
-import Link from 'next/link';
-import CounterIndicator from '../components/pages/landing/CounterIndicator';
-import Cover from '../components/pages/landing/Cover';
-import LinkImage from '../components/shared/ImageLink';
-import { PageFullLayout } from '../components/layouts/PageFullLayout';
 import { useInView } from 'react-cool-inview';
-import dynamic from 'next/dynamic';
-import DiscoverVisual from '../components/pages/landing/visuals/DiscoverVisual';
+import React, { useContext } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
-import { useContext } from 'react';
-import { ThemeContext } from './_app';
+import dynamic from 'next/dynamic';
+
+import { Box, Button, Container, Divider, Fade, Grid, Stack, SxProps, Theme, Typography } from '@mui/material';
 import { GitHub, KeyboardArrowRight } from '@mui/icons-material';
-import AppSettingsProvider from '../src/services/AppSettingsProvider';
-import CtaSection from 'components/pages/CtaSection';
-import GentleSlide from 'components/shared/animations/GentleSlide';
 import useIsTablet from 'src/hooks/useIsTablet';
+import GentleSlide from 'components/shared/animations/GentleSlide';
+import CtaSection from 'components/pages/CtaSection';
+import { ThemeContext } from './_app';
+import AppSettingsProvider from '../src/services/AppSettingsProvider';
+import LinkImage from '../components/shared/ImageLink';
+import DiscoverVisual from '../components/pages/landing/visuals/DiscoverVisual';
+import Cover from '../components/pages/landing/Cover';
+import CounterIndicator from '../components/pages/landing/CounterIndicator';
+import { PageFullLayout } from '../components/layouts/PageFullLayout';
 
 const Newsletter = dynamic(() => import('../components/pages/landing/Newsletter'));
 const GlobePart = dynamic(() => import('../components/pages/landing/GlobeSection'));

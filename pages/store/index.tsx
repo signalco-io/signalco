@@ -1,21 +1,20 @@
-import { Card, CardActionArea, CardContent, Chip, Grid, Typography } from '@mui/material';
-import Stack from '@mui/material/Stack';
-import React from 'react';
-import { Cancel as CancelIcon, CheckCircle } from '@mui/icons-material';
+import React, { useState } from 'react';
 import Image from 'next/image';
+import Stack from '@mui/material/Stack';
 import { amber, green, grey } from '@mui/material/colors';
-import LaunchIcon from '@mui/icons-material/Launch';
-import SelectItems from '../../components/shared/form/SelectItems';
-import { useState } from 'react';
+import { Card, CardActionArea, CardContent, Chip, Grid, Typography } from '@mui/material';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
-import contentData from './content.json';
-import { PageLayout } from '../../components/layouts/PageLayout';
-import SignalcoLogo from '../../components/icons/SignalcoLogo';
-import useLocale from '../../src/hooks/useLocale';
+import LaunchIcon from '@mui/icons-material/Launch';
+import { Cancel as CancelIcon, CheckCircle } from '@mui/icons-material';
 import FilterList from 'components/shared/list/FilterList';
-import { PageWithMetadata } from 'pages/_app';
 import PageCenterHeader from 'components/pages/PageCenterHeader';
 import Gallery from 'components/gallery/Gallery';
+import contentData from './content.json';
+import useLocale from '../../src/hooks/useLocale';
+import SelectItems from '../../components/shared/form/SelectItems';
+import { PageLayout } from '../../components/layouts/PageLayout';
+import SignalcoLogo from '../../components/icons/SignalcoLogo';
+
 
 function StoreStockStatusBadge(props: { status: number | undefined }) {
     let Icon = CancelIcon;
@@ -117,7 +116,7 @@ interface StorePageProps {
     communication: string[];
 }
 
-const StorePage: PageWithMetadata = (props: StorePageProps) => {
+function StorePage(props: StorePageProps) {
     const { t: tCategories } = useLocale('Store', 'Categories');
     const { t: tCommunication } = useLocale('Store', 'Communication');
     const categories = props.categories.map(c => ({ id: c, label: tCategories(c) }));
@@ -153,7 +152,7 @@ const StorePage: PageWithMetadata = (props: StorePageProps) => {
                 gridFilters={(<SelectItems label="Sort" value={selectedOrderByItems} items={orderByItems} onChange={handleOrderByItemsChange} />)} />
         </Stack>
     );
-};
+}
 
 StorePage.layout = PageLayout;
 StorePage.inDevelopment = true;

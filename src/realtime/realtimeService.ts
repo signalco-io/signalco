@@ -1,8 +1,8 @@
-import PageNotificationService from '../notifications/PageNotificationService';
-import HttpService from '../services/HttpService';
-import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-import CurrentUserProvider from '../services/CurrentUserProvider';
 import { QueryClient } from '@tanstack/react-query';
+import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import HttpService from '../services/HttpService';
+import CurrentUserProvider from '../services/CurrentUserProvider';
+import PageNotificationService from '../notifications/PageNotificationService';
 
 class SignalSignalRDeviceStateDto {
     entityId?: string;

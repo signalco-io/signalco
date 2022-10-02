@@ -1,6 +1,6 @@
-import CloseIcon from '@mui/icons-material/Close';
-import { Breakpoint, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, Typography } from '@mui/material';
 import React from 'react';
+import { Breakpoint, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, Typography } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 export interface IConfigurationDialogProps {
     isOpen: boolean,

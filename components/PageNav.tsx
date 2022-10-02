@@ -1,6 +1,6 @@
 import React from 'react';
-import useWindowRect from '../src/hooks/useWindowRect';
 import { PageNavSsr } from './PageNavSsr';
+import useWindowRect from '../src/hooks/useWindowRect';
 
 
 export function PageNav(props: { fullWidth?: boolean | undefined; }) {

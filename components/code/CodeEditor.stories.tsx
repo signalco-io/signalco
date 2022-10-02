@@ -1,5 +1,5 @@
-import { Box } from '@mui/material';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Box } from '@mui/material';
 import CodeEditor from './CodeEditor';
 
 export default {

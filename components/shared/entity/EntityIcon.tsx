@@ -1,15 +1,15 @@
-import DevicesOtherIcon from '@mui/icons-material/DevicesOther';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
-import ThermostatIcon from '@mui/icons-material/Thermostat';
-import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
-import TvIcon from '@mui/icons-material/Tv';
-import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
-import SensorWindowIcon from '@mui/icons-material/SensorWindow';
-import PowerIcon from '@mui/icons-material/Power';
-import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
-import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
+import TvIcon from '@mui/icons-material/Tv';
+import ThermostatIcon from '@mui/icons-material/Thermostat';
+import SensorWindowIcon from '@mui/icons-material/SensorWindow';
+import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import PowerIcon from '@mui/icons-material/Power';
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
+import DevicesOtherIcon from '@mui/icons-material/DevicesOther';
 import IEntityDetails from 'src/entity/IEntityDetails';
 
 export default function EntityIcon(entity: IEntityDetails | undefined) {

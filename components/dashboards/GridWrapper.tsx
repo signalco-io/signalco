@@ -1,6 +1,6 @@
 import React from 'react';
-import { ChildrenProps } from '../../src/sharedTypes';
 import DragableGridWrapper from './DragableGridWrapper';
+import { ChildrenProps } from '../../src/sharedTypes';
 
 export default function GridWrapper(props: { order: string[]; isEditing: boolean; orderChanged: (newOrder: string[]) => void; } & ChildrenProps) {
     const { isEditing, children, ...rest } = props;

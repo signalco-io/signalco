@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { ThemeContext } from '../../../pages/_app';
+import Color from 'color';
 import createGlobe from 'cobe';
 import theme from '../../../src/theme';
-import { colorToRgb } from '../../../src/helpers/StringHelpers';
-import Color from 'color';
 import useWindowWidth from '../../../src/hooks/useWindowWidth';
+import { colorToRgb } from '../../../src/helpers/StringHelpers';
+import { ThemeContext } from '../../../pages/_app';
 
 function Globe() {
     const canvasRef = React.useRef(null);

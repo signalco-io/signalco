@@ -1,5 +1,5 @@
-import { Button, Stack, Typography } from '@mui/material';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Button, Stack, Typography } from '@mui/material';
 import Loadable from './Loadable';
 
 export default {

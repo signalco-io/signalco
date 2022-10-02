@@ -1,6 +1,6 @@
+import React from 'react';
 import { FilledInput, FilledInputProps, FormControl, InputAdornment, InputLabel } from '@mui/material';
 import { ContentCopy as ContentCopyIcon } from '@mui/icons-material';
-import React from 'react';
 import IconButtonCopyToClipboard from './IconButtonCopyToClipboard';
 
 export interface CopyToClipboardInputProps extends FilledInputProps {

@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
-import Loadable from 'components/shared/Loadable/Loadable';
-import IEntityDetails from 'src/entity/IEntityDetails';
 import useContact from 'src/hooks/useContact';
+import IEntityDetails from 'src/entity/IEntityDetails';
+import Loadable from 'components/shared/Loadable/Loadable';
 
 export default function EntityProcessDetails(props: { entity: IEntityDetails; }) {
     const { entity } = props;

@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react';
-import { ThemeContext } from '../../pages/_app';
-import { colorToRgb } from '../../src/helpers/StringHelpers';
-import useInterval from '../../src/hooks/useInterval';
-import DateTimeProvider from '../../src/services/DateTimeProvider';
 import styles from './WindowVisual.module.scss';
+import DateTimeProvider from '../../src/services/DateTimeProvider';
+import useInterval from '../../src/hooks/useInterval';
+import { colorToRgb } from '../../src/helpers/StringHelpers';
+import { ThemeContext } from '../../pages/_app';
 
 var skySunnyGrads = [
     [{ color: '#00000c', position: 0 }, { color: '#00000c', position: 0 }],

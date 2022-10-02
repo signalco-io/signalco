@@ -1,14 +1,14 @@
 import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { AppProps } from 'next/app';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import appTheme from '../src/theme';
 import '../styles/global.scss';
 import { SnackbarProvider } from 'notistack';
 import { ChildrenProps } from '../src/sharedTypes';
-import IAppContext from '../src/appContext/IAppContext';
 import useAppTheme from '../src/hooks/useAppTheme';
+import IAppContext from '../src/appContext/IAppContext';
 
 export interface PageWithMetadata extends React.FunctionComponent<any> {
   layout?: React.FunctionComponent | undefined

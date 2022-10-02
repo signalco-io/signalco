@@ -1,10 +1,10 @@
-import { Box, Button, Checkbox, FormControlLabel, FormGroup, InputAdornment, OutlinedInput, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { ObjectDictAny } from '../../../src/sharedTypes';
-import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
-import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
-import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
+import { Box, Button, Checkbox, FormControlLabel, FormGroup, InputAdornment, OutlinedInput, Stack, Typography } from '@mui/material';
 import SelectItems from '../../shared/form/SelectItems';
+import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
+import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
+import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import { ObjectDictAny } from '../../../src/sharedTypes';
 
 interface IWidgetConfigurationDialogProps {
     options: IWidgetConfigurationOption[],

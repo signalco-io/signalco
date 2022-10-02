@@ -1,4 +1,4 @@
-import { Paper, Stack, Typography, Button } from '@mui/material';
+import { Button, Paper, Stack, Typography } from '@mui/material';
 
 export default function CtaSection() {
     return (
