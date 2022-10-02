@@ -1,11 +1,8 @@
 import React, { ReactNode , useEffect } from 'react';
-
 import { getTimeZones } from '@vvo/tzdb';
 import { Container, FormControl, FormHelperText, InputLabel, MenuItem, NoSsr, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
-import LocationMapPicker from '../../../components/forms/LocationMapPicker/LocationMapPicker';
 import GoogleIcon from '@mui/icons-material/Google';
-import { isNonEmptyString, isNotNull } from '@enterwell/react-form-validation';
-import { isTrue } from '@enterwell/react-form-validation';
+import { isNonEmptyString, isNotNull , isTrue } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
 import { ChildrenProps } from '../../../src/sharedTypes';
@@ -15,6 +12,7 @@ import useUserSetting from '../../../src/hooks/useUserSetting';
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
 import AppThemePicker from '../../../components/settings/AppThemePicker';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
+import LocationMapPicker from '../../../components/forms/LocationMapPicker/LocationMapPicker';
 import generalFormComponents from '../../../components/forms/generalFormComponents';
 import ApiBadge from '../../../components/development/ApiBadge';
 

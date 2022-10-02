@@ -1,11 +1,11 @@
 import * as React from 'react';
+import { SnackbarProvider } from 'notistack';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import appTheme from '../src/theme';
 import '../styles/global.scss';
-import { SnackbarProvider } from 'notistack';
 import { ChildrenProps } from '../src/sharedTypes';
 import useAppTheme from '../src/hooks/useAppTheme';
 import IAppContext from '../src/appContext/IAppContext';

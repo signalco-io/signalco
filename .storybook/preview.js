@@ -1,12 +1,12 @@
+import { withScreenshot } from 'storycap';
 import React from 'react';
+import theme from '../src/theme';
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import theme from '../src/theme';
 import '../styles/global.scss';
 import { themes } from '@storybook/theming';
 import { DateTimeProvider } from '../src/services/DateTimeProvider';
 import { ThemeContext } from '../pages/_app';
-import { withScreenshot } from 'storycap';
 
 const newStaticDate = new Date();
 newStaticDate.setUTCFullYear(2022);

@@ -1,4 +1,4 @@
-import React, { useCallback, useState , useContext } from 'react';
+import React, { useCallback, useState , useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import Link from 'next/link';
 import axios, { AxiosError, Method } from 'axios';
@@ -497,7 +497,7 @@ async function getOpenApiDoc(url: string) {
     return (await axios.get<OpenAPIV3.Document>(url)).data;
 }
 
-const ApiContext = React.createContext<OpenAPIV3.Document | undefined>(undefined);
+const ApiContext = createContext<OpenAPIV3.Document | undefined>(undefined);
 
 function DocsApiPage() {
     const url = appSettingsProvider.isDeveloper

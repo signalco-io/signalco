@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-
 import { Box, Button, Container, Divider, Fade, Grid, Stack, SxProps, Theme, Typography } from '@mui/material';
 import { GitHub, KeyboardArrowRight } from '@mui/icons-material';
 import useIsTablet from 'src/hooks/useIsTablet';
