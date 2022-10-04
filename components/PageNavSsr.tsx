@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Box, Button, ButtonBase, Container, NoSsr, Stack } from '@mui/material';
+import { Box, Button, ButtonBase, Container, Stack } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import useIsMobile from 'src/hooks/useIsMobile';
 import SignalcoLogotype from './icons/SignalcoLogotype';
@@ -56,9 +56,9 @@ export function PageNavSsr(props: { fullWidth?: boolean | undefined; isScrolled?
                         </ButtonBase>
                     </Link>
                     <Stack direction="row" alignItems="center" spacing={{ xs: 1, sm: 2, md: 4 }}>
-                        <NoSsr>
+                        <Suspense>
                             <NavMenu />
-                        </NoSsr>
+                        </Suspense>
                         <Link href="/app" prefetch={false} passHref>
                             <Button variant="contained" endIcon={<KeyboardArrowRightIcon fontSize="small" />}>App</Button>
                         </Link>

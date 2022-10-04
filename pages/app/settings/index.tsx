@@ -1,6 +1,6 @@
-import React, { ReactNode , useEffect } from 'react';
+import React, { ReactNode , Suspense, useEffect } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
-import { Container, FormControl, FormHelperText, InputLabel, MenuItem, NoSsr, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
+import { Container, FormControl, FormHelperText, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import { isNonEmptyString, isNotNull , isTrue } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
@@ -192,26 +192,24 @@ function SettingsIndex() {
                     </SettingsSection>
                     <SettingsSection header={t('LookAndFeel')}>
                         <SettingsItem label={t('Theme')}>
-                            <NoSsr>
-                                <AppThemePicker />
-                            </NoSsr>
+                            <AppThemePicker />
                         </SettingsItem>
                     </SettingsSection>
                     <SettingsSection header={t('Profile')}>
-                        <NoSsr>
+                        <Suspense>
                             <FormBuilder form={profileForm} />
                             <ConnectedService />
-                        </NoSsr>
+                        </Suspense>
                     </SettingsSection>
                     <SettingsSection header={t('LocationAndTime')}>
-                        <NoSsr>
+                        <Suspense>
                             <FormBuilder form={timeLocationForm} />
-                        </NoSsr>
+                        </Suspense>
                     </SettingsSection>
                     <SettingsSection header={t('Developer')}>
-                        <NoSsr>
+                        <Suspense>
                             <FormBuilder form={developerSettingsForm} />
-                        </NoSsr>
+                        </Suspense>
                     </SettingsSection>
                 </Stack>
             </Container>

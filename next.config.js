@@ -1,12 +1,14 @@
+const { createSecureHeaders } = require('next-secure-headers');
 const runtimeCaching = require('next-pwa/cache');
+const createPwa = require('next-pwa');
+const createMdx = require('@next/mdx');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
     enabled: process.env.ANALYZE === 'true',
 });
-const { createSecureHeaders } = require('next-secure-headers');
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-const withMDX = require('@next/mdx')({
+const withMDX = createMdx({
     extension: /\.mdx?$/,
     options: {
         remarkPlugins: [],
@@ -14,7 +16,7 @@ const withMDX = require('@next/mdx')({
         providerImportSource: '@mdx-js/react',
     },
 });
-const withPWA = require('next-pwa')({
+const withPWA = createPwa({
     dest: 'public',
     runtimeCaching,
     buildExcludes: [/middleware-manifest.json$/],

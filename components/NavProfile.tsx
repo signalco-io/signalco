@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import {
@@ -18,7 +18,6 @@ import {
   ListItemText,
   Menu,
   MenuItem,
-  NoSsr,
   Stack,
   Typography,
   useMediaQuery,
@@ -201,9 +200,9 @@ function NavProfile() {
       sx={{ px: { xs: 2, sm: 0 }, pt: { xs: 0, sm: 4 }, minWidth: `${navWidth}px`, minHeight: { xs: '60px', sm: undefined } }}
       justifyContent={isMobile ? 'space-between' : undefined}
       alignItems="center">
-      <NoSsr>
+      <Suspense>
         <UserProfileAvatar />
-      </NoSsr>
+      </Suspense>
       {!mobileMenuOpen &&
         <Stack sx={{ width: { xs: undefined, lg: '100%' } }}>
           {visibleNavItems
