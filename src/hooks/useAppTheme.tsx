@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import useUserSetting from './useUserSetting';
-import useLocale from './useLocale';
+import { localizer } from './useLocale';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 import useInterval from './useInterval';
 import { AppTheme, AppThemeMode } from '../theme';
@@ -13,7 +13,6 @@ import IAppContext from '../appContext/IAppContext';
 export default function useAppTheme(appContextState: IAppContext, setAppContextState: (state: IAppContext) => void) {
   const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
   const [themeTimeRange] = useUserSetting<[string, string] | undefined>('themeTimeRange', undefined);
-  const themes = useLocale('App', 'Settings', 'Themes');
 
   const applyThemeMode = useCallback((hideNotification?: boolean) => {
     let themeOrPrefered = UserSettingsProvider.value<AppTheme>('theme', () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -37,10 +36,11 @@ export default function useAppTheme(appContextState: IAppContext, setAppContextS
         isDark: themeOrPrefered === 'dark' || themeOrPrefered === 'darkDimmed'
       });
       if (!hideNotification) {
-        PageNotificationService.show(`Switched to ${themes.t(themeOrPrefered)} theme.`);
+        const themeName = localizer('App', 'Settings', 'Themes')(themeOrPrefered);
+        PageNotificationService.show(`Switched to ${themeName} theme.`);
       }
     }
-  }, [appContextState.theme, setAppContextState, themeMode, themeTimeRange, themes]);
+  }, [appContextState.theme, setAppContextState, themeMode, themeTimeRange]);
 
   // Apply theme mode every minute (and on first paint)
   useInterval(applyThemeMode, 60000);
