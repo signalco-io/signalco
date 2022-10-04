@@ -1,16 +1,12 @@
-import { useContext } from 'react';
-import { Box } from '@mui/material';
-import { AppTheme } from 'src/theme';
+import { Box, SupportedColorScheme } from '@mui/material';
 import ApiBadge from '../development/ApiBadge';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
-import { ThemeContext } from '../../pages/_app';
 
-export default function SignalcoLogotype({ width, height, theme, hideBadge }: { width?: number, height?: number, theme?: AppTheme, hideBadge?: boolean }) {
+export default function SignalcoLogotype({ width, height, theme, hideBadge }: { width?: number, height?: number, theme?: SupportedColorScheme, hideBadge?: boolean }) {
     if (typeof width === 'undefined' &&
         typeof height === 'undefined') {
         throw new Error('Either height or width must be provided to SignalcoLogo.');
     }
-    const themeContext = useContext(ThemeContext);
     const fixedWidth = width ?? (2810 / 666) * (height ?? 0);
     const fixedHeight = height ?? (666 / 2810) * (width ?? 0);
 
@@ -20,7 +16,8 @@ export default function SignalcoLogotype({ width, height, theme, hideBadge }: { 
                 width={fixedWidth} height={fixedHeight} viewBox="0 0 2810.000000 666.000000"
                 preserveAspectRatio="xMidYMid meet">
                 <g transform="translate(0.000000,666.000000) scale(0.100000,-0.100000)"
-                    fill={theme === 'dark' || (!theme && themeContext.isDark) ? '#ffffff' : '#000000'} stroke="none">
+                    style={{ fill: theme === 'dark' ? '#ffffff' : (theme === 'light' ? '#000000' : 'var(--mui-palette-text-primary)') }}
+                    stroke="none">
                     <path d="M4427 6389 c-94 -22 -182 -96 -225 -187 -36 -75 -38 -193 -5 -263 80 -175 285 -253 459 -174 73 33 129 87 166 162 27 55 32 76 32 141 1 65 -4 86 -27 134 -72 146 -240 225 -400 187z" />
                     <path d="M18900 3955 l0 -2445 235 0 235 0 0 2445 0 2445 -235 0 -235 0 0 -2445z" />
                     <path d="M25505 6320 c-413 -37 -785 -140 -1130 -313 -281 -140 -551 -329 -752 -524 -65 -63 -82 -87 -93 -125 -33 -122 46 -244 172 -264 63 -11 114 12 200 89 363 323 713 522 1117 633 845 233 1749 45 2417 -505 60 -49 127 -108 149 -131 56 -59 108 -84 175 -84 157 -1 257 171 177 305 -14 24 -70 83 -124 131 -485 430 -1061 694 -1693 773 -152 19 -478 27 -615 15z" />

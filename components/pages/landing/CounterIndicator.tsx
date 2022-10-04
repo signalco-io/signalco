@@ -1,11 +1,8 @@
 import { useInView } from 'react-cool-inview';
-import { useContext } from 'react';
 import { Box, Typography } from '@mui/material';
 import GentleSlide from 'components/shared/animations/GentleSlide';
-import { ThemeContext } from '../../../pages/_app';
 
 function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
-    const themeContext = useContext(ThemeContext);
     const { observe, inView } = useInView({
         onEnter: ({ unobserve }) => unobserve(), // only run once
     });
@@ -33,7 +30,7 @@ function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
                         display: 'block',
                         height: '64px',
                         width: '1px',
-                        background: `linear-gradient(180deg, ${themeContext.isDark ? '#ffffff' : '#000000'} 40%, rgba(255, 255, 255, 0) 100%)`,
+                        background: 'linear-gradient(180deg, var(--mui-palette-text-primary) 40%, rgba(255, 255, 255, 0) 100%)',
                         position: 'absolute',
                         left: '20px',
                         top: '-64px',
@@ -44,7 +41,7 @@ function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
                         display: 'block',
                         height: '64px',
                         width: '1px',
-                        background: `linear-gradient(180deg, ${themeContext.isDark ? '#ffffff' : '#000000'} 40%, rgba(255, 255, 255, 0) 100%)`,
+                        background: 'linear-gradient(180deg, var(--mui-palette-text-primary) 40%, rgba(255, 255, 255, 0) 100%)',
                         position: 'absolute',
                         left: '21px',
                         top: '42px',

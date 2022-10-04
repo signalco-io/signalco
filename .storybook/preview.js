@@ -1,8 +1,8 @@
 import { withScreenshot } from 'storycap';
 import React from 'react';
-import theme from '../src/theme';
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
+import theme from '../src/theme';
 import '../styles/global.scss';
 import { themes } from '@storybook/theming';
 import { DateTimeProvider } from '../src/services/DateTimeProvider';

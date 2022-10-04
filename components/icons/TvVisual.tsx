@@ -1,9 +1,8 @@
-import { useContext } from 'react';
+import useUserTheme from 'src/hooks/useUserTheme';
 import styles from './TvVisual.module.scss';
-import { ThemeContext } from '../../pages/_app';
 
 function TvVisual(props: { state: boolean, size: number }) {
-    const themeContext = useContext(ThemeContext);
+    const themeContext = useUserTheme();
 
     const isActive = props.state;
     const screenColor = isActive ? '#378DBD' : '#333';

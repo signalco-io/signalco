@@ -19,6 +19,10 @@ export function AppLayoutWithAuth(props: ChildrenProps) {
     console.debug('Not logged in. Wrapping with Auth0');
 
     return (
-        <Auth0Wrapper><LayoutWithAuth LayoutComponent={withAuthenticationRequired(AppLayout)}>{props.children}</LayoutWithAuth></Auth0Wrapper>
+        <Auth0Wrapper>
+            <LayoutWithAuth LayoutComponent={withAuthenticationRequired(AppLayout)}>
+                {props.children}
+            </LayoutWithAuth>
+        </Auth0Wrapper>
     );
 }

@@ -1,13 +1,13 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Draggable, Map, Marker } from 'pigeon-maps'
 import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Skeleton, Stack, Typography } from '@mui/material';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/esm/index.types';
 import { FormBuilderField } from '@enterwell/react-form-builder';
+import useUserTheme from 'src/hooks/useUserTheme';
 import useLoadAndError from 'src/hooks/useLoadAndError';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
-import { ThemeContext } from '../../../pages/_app';
 
 const mapBoxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -44,7 +44,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
     const loadLatLngToAddress = useCallback(() => latLngToAddress(latLng), [latLng]);
     const placeName = useLoadAndError(loadLatLngToAddress);
     const [zoom, setZoom] = useState<number | undefined>(3);
-    const themeContext = useContext(ThemeContext);
+    const themeContext = useUserTheme();
 
     const handleMove = ({ center, zoom }: { center: [number, number], zoom: number }) => {
         setZoom(zoom);
