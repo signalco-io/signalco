@@ -1,7 +1,6 @@
-import { useContext } from 'react';
 import { editor } from 'monaco-editor';
 import Editor, { loader } from '@monaco-editor/react';
-import { ThemeContext } from '../../pages/_app';
+import useUserTheme from 'src/hooks/useUserTheme';
 
 loader.config({ paths: { vs: '/vs' } });
 if (typeof window !== 'undefined') {
@@ -37,7 +36,7 @@ export interface CodeEditorProps {
 
 export default function CodeEditor(props: CodeEditorProps) {
     const { language, code, setCode, height, readonly, lineNumbers, options } = props;
-    const themeContext = useContext(ThemeContext);
+    const themeContext = useUserTheme();
 
     return (
         <Editor

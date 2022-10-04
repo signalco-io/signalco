@@ -2,13 +2,13 @@ import { Suspense, useState } from 'react';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { Box, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
-import { AppTheme, AppThemeMode } from '../../src/theme';
+import { Box, Stack, SupportedColorScheme, TextField, ToggleButton, ToggleButtonGroup, Typography, useColorScheme } from '@mui/material';
+import { AppThemeMode } from '../../src/theme';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale from '../../src/hooks/useLocale';
 
-function AppThemeVisual(props: { label: string, theme: AppTheme, disabled?: boolean }) {
+function AppThemeVisual(props: { label: string, theme: SupportedColorScheme, disabled?: boolean }) {
     const { label, theme, disabled } = props;
 
     let textColor;
@@ -18,10 +18,10 @@ function AppThemeVisual(props: { label: string, theme: AppTheme, disabled?: bool
             backgroundColor = 'black';
             textColor = 'white';
             break;
-        case 'darkDimmed':
-            backgroundColor = 'rgba(32, 31, 30, 1)'
-            textColor = 'white';
-            break;
+        // case 'darkDimmed':
+        //     backgroundColor = 'rgba(32, 31, 30, 1)'
+        //     textColor = 'white';
+        //     break;
         default:
             backgroundColor = 'white';
             textColor = 'black';
@@ -55,19 +55,19 @@ export default function AppThemePicker() {
     const picker = useLocale('App', 'Components', 'AppThemePicker');
     const [userTimeFormat] = useUserSetting<string>('timeFormat', '1');
 
-    const [activeTheme, setSelectedTheme] = useUserSetting<AppTheme>('theme', 'light');
+    const { colorScheme, setColorScheme } = useColorScheme();
     const [themeMode, setThemeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
 
-    const handleThemeSelect = (newTheme: AppTheme) => {
+    const handleThemeSelect = (newTheme: SupportedColorScheme) => {
         const newThemeSelect = newTheme ?? 'light';
-        setSelectedTheme(newThemeSelect);
+        setColorScheme(newThemeSelect);
     };
 
     const [userLocation] = useUserSetting<[number, number] | undefined>('location', undefined);
     const handleThemeModeChange = (_e: React.SyntheticEvent, newThemeMode: AppThemeMode) => {
         const newThemeModeSelect = newThemeMode ?? 'manual';
         setThemeMode(newThemeModeSelect);
-        if (newThemeModeSelect !== 'manual' && activeTheme === 'light') {
+        if (newThemeModeSelect !== 'manual' && colorScheme === 'light') {
             handleThemeSelect('dark');
         }
     };
@@ -122,9 +122,9 @@ export default function AppThemePicker() {
                 )}
                 <Stack spacing={1}>
                     {themeMode !== 'manual' && <Typography variant="body2" sx={{ color: 'text.secondary' }}>{picker.t('PickNightTheme')}</Typography>}
-                    <ToggleButtonGroup exclusive color="primary" value={activeTheme} onChange={(_e, value) => handleThemeSelect(value)}>
+                    <ToggleButtonGroup exclusive color="primary" value={colorScheme} onChange={(_e, value) => handleThemeSelect(value)}>
                         {themeMode === 'manual' && <ToggleButton value="light"><AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" /></ToggleButton>}
-                        <ToggleButton value="darkDimmed"><AppThemeVisual label={themes.t('DarkDimmed')} theme="darkDimmed" /></ToggleButton>
+                        {/* <ToggleButton value="darkDimmed"><AppThemeVisual label={themes.t('DarkDimmed')} theme="darkDimmed" /></ToggleButton> */}
                         <ToggleButton value="dark"><AppThemeVisual label={themes.t('Dark')} theme="dark" /></ToggleButton>
                     </ToggleButtonGroup>
                 </Stack>

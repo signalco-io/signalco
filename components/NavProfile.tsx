@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import {
@@ -32,6 +32,7 @@ import CommitIcon from '@mui/icons-material/Commit';
 import CloseIcon from '@mui/icons-material/Close';
 import { SvgIconComponent } from '@mui/icons-material';
 import useIsMobile from 'src/hooks/useIsMobile';
+import Loadable from './shared/Loadable/Loadable';
 import ApiBadge from './development/ApiBadge';
 import LocalStorageService from '../src/services/LocalStorageService';
 import CurrentUserProvider from '../src/services/CurrentUserProvider';
@@ -47,9 +48,7 @@ const navItems = [
 ];
 
 function UserAvatar() {
-  const { t } = useLocale('App', 'Account');
   const user = CurrentUserProvider.getCurrentUser();
-
   if (user === undefined) {
     return (
       <Skeleton variant="circular">
@@ -69,7 +68,7 @@ function UserAvatar() {
   const size = { xs: '36px', sm: '42px', lg: '58px' };
 
   if (user.picture) {
-    return (<Avatar sx={{ width: size, height: size }} variant="circular" src={user.picture} alt={t('UserProfileImageAlt')}>
+    return (<Avatar sx={{ width: size, height: size }} variant="circular" src={user.picture} alt={userNameInitials}>
       {userNameInitials}
     </Avatar>);
   }
@@ -103,8 +102,13 @@ function UserProfileAvatar() {
     await router.push(href);
   };
 
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
-    <>
+    <Loadable isLoading={isLoading} placeholder="skeletonRect" width={30} height={30}>
       <ButtonBase {...bindTrigger(popupState)} sx={{ width: { xs: undefined, sm: '100%' }, py: 1 }}>
         <Stack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
           <UserAvatar />
@@ -129,7 +133,7 @@ function UserProfileAvatar() {
           <ListItemText>{t('Logout')}</ListItemText>
         </MenuItem>
       </Menu>
-    </>
+    </Loadable>
   );
 }
 
@@ -178,7 +182,6 @@ function NavProfile() {
   const navWidth = useNavWidth();
   const { t } = useLocale('App', 'Nav');
 
-  const theme = useTheme();
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -202,9 +205,7 @@ function NavProfile() {
       sx={{ px: { xs: 2, sm: 0 }, pt: { xs: 0, sm: 4 }, minWidth: `${navWidth}px`, minHeight: { xs: '60px', sm: undefined } }}
       justifyContent={isMobile ? 'space-between' : undefined}
       alignItems="center">
-      <Suspense>
         <UserProfileAvatar />
-      </Suspense>
       {!mobileMenuOpen &&
         <Stack sx={{ width: { xs: undefined, lg: '100%' } }}>
           {visibleNavItems
@@ -226,7 +227,7 @@ function NavProfile() {
             bottom: 0,
             left: 0,
             right: 0,
-            background: theme.palette.background.default,
+            background: 'var(--mui-palette-background-default)',
             zIndex: 999
           }}>
             <Stack>

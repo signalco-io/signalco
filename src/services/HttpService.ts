@@ -30,7 +30,7 @@ export default class HttpService {
       typeof HttpService.tokenFactory !== 'undefined') {
       token = await HttpService.tokenFactory();
       CurrentUserProvider.setToken(token);
-      console.debug('Used token factory')
+      console.debug('Used token factory. Have token?', typeof token !== 'undefined')
     }
 
     // Cache token and return if available

@@ -1,9 +1,8 @@
-import { useContext } from 'react';
+import useUserTheme from 'src/hooks/useUserTheme';
 import styles from './LightBulbVisual.module.scss';
-import { ThemeContext } from '../../pages/_app';
 
 function LightBulbVisual(props: { state: boolean, size: number }) {
-    const themeContext = useContext(ThemeContext);
+    const themeContext = useUserTheme();
 
     const isActive = props.state;
     const bulbColor = isActive ? '#FFDD66' : '#c4c4c4';

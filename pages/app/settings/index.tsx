@@ -1,10 +1,11 @@
-import React, { ReactNode , Suspense, useEffect } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
 import { Container, FormControl, FormHelperText, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
-import { isNonEmptyString, isNotNull , isTrue } from '@enterwell/react-form-validation';
+import { isNonEmptyString, isNotNull, isTrue } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
+import Loadable from 'components/shared/Loadable/Loadable';
 import { ChildrenProps } from '../../../src/sharedTypes';
 import CurrentUserProvider from '../../../src/services/CurrentUserProvider';
 import appSettingsProvider, { ApiDevelopmentUrl, ApiProductionUrl } from '../../../src/services/AppSettingsProvider';
@@ -36,14 +37,14 @@ function ConnectedService() {
 }
 
 function SettingsItem(props: { children: ReactNode, label?: string | undefined }) {
-  return <Stack spacing={1}>
+    return <Stack spacing={1}>
         {props.label && <Typography>{props.label}</Typography>}
         {props.children}
     </Stack>
 }
 
 function SettingsSection(props: { children: ReactNode, header: string }) {
-  return <Stack spacing={2}>
+    return <Stack spacing={2}>
         <Typography variant="h2" sx={{ pt: { xs: 0, sm: 2 } }}>{props.header}</Typography>
         <Stack spacing={2}>
             {props.children}
@@ -117,11 +118,16 @@ function SettingsFormProvider(props: ChildrenProps) {
 function SettingsIndex() {
     const { t } = useLocale('App', 'Settings');
     const locales = useLocale('App', 'Locales');
+    const [isLoading, setIsLoading] = useState(true);
     const [userLocale, setUserLocale] = useUserSetting<string>('locale', 'en');
     const [userNickName, setUserNickName] = useUserSetting<string>('nickname', CurrentUserProvider.getCurrentUser()?.name ?? '');
     const [userTimeFormat, setUserTimeFormat] = useUserSetting<string>('timeFormat', '1');
     const [userTimeZone, setUserTimeZone] = useUserSetting<string>('timeZone', '0');
     const [userLocation, setUserLocation] = useUserSetting<[number, number] | undefined>('location', undefined);
+
+    useEffect(() => {
+        setIsLoading(false);
+    }, []);
 
     const handleLocaleChange = (event: SelectChangeEvent) => {
         setUserLocale(event.target.value);
@@ -177,41 +183,37 @@ function SettingsIndex() {
     return (
         <SettingsFormProvider>
             <Container sx={{ p: 2 }}>
-                <Stack spacing={4}>
-                    <SettingsSection header={t('General')}>
-                        <SettingsItem label={t('Language')}>
-                            <FormControl variant="filled" sx={{ maxWidth: 320 }}>
-                                <InputLabel id="app-settings-locale-select-label">{t('SelectLanguage')}</InputLabel>
-                                <Select variant="filled" labelId="app-settings-locale-select-label" value={userLocale} onChange={handleLocaleChange}>
-                                    {availableLocales.map(l => (
-                                        <MenuItem key={l} value={l} selected={userLocale === l}>{locales.t(l)}</MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                        </SettingsItem>
-                    </SettingsSection>
-                    <SettingsSection header={t('LookAndFeel')}>
-                        <SettingsItem label={t('Theme')}>
-                            <AppThemePicker />
-                        </SettingsItem>
-                    </SettingsSection>
-                    <SettingsSection header={t('Profile')}>
-                        <Suspense>
+                <Loadable isLoading={isLoading}>
+                    <Stack spacing={4}>
+                        <SettingsSection header={t('General')}>
+                            <SettingsItem label={t('Language')}>
+                                <FormControl variant="filled" sx={{ maxWidth: 320 }}>
+                                    <InputLabel id="app-settings-locale-select-label">{t('SelectLanguage')}</InputLabel>
+                                    <Select variant="filled" labelId="app-settings-locale-select-label" value={userLocale} onChange={handleLocaleChange}>
+                                        {availableLocales.map(l => (
+                                            <MenuItem key={l} value={l} selected={userLocale === l}>{locales.t(l)}</MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </SettingsItem>
+                        </SettingsSection>
+                        <SettingsSection header={t('LookAndFeel')}>
+                            <SettingsItem label={t('Theme')}>
+                                <AppThemePicker />
+                            </SettingsItem>
+                        </SettingsSection>
+                        <SettingsSection header={t('Profile')}>
                             <FormBuilder form={profileForm} />
                             <ConnectedService />
-                        </Suspense>
-                    </SettingsSection>
-                    <SettingsSection header={t('LocationAndTime')}>
-                        <Suspense>
+                        </SettingsSection>
+                        <SettingsSection header={t('LocationAndTime')}>
                             <FormBuilder form={timeLocationForm} />
-                        </Suspense>
-                    </SettingsSection>
-                    <SettingsSection header={t('Developer')}>
-                        <Suspense>
+                        </SettingsSection>
+                        <SettingsSection header={t('Developer')}>
                             <FormBuilder form={developerSettingsForm} />
-                        </Suspense>
-                    </SettingsSection>
-                </Stack>
+                        </SettingsSection>
+                    </Stack>
+                </Loadable>
             </Container>
         </SettingsFormProvider>
     );

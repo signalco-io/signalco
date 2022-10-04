@@ -42,7 +42,7 @@ const nextConfig = {
                 contentSecurityPolicy: {
                     directives: {
                         defaultSrc: '\'self\'',
-                        scriptSrc: ['\'self\'', 'https://hcaptcha.com', 'https://*.hcaptcha.com', isDevelopment ? '\'unsafe-eval\'' : undefined],
+                        scriptSrc: ['\'self\'', 'https://hcaptcha.com', 'https://*.hcaptcha.com', '\'unsave-inline\'', isDevelopment ? '\'unsafe-eval\'' : undefined],
                         objectSrc: '\'none\'',
                         styleSrc: ['\'self\'', 'https://hcaptcha.com', 'https://*.hcaptcha.com', '\'unsafe-inline\''],
                         fontSrc: ['\'self\''],

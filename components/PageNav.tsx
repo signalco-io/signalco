@@ -42,9 +42,10 @@ export function PageNav(props: { fullWidth?: boolean | undefined; }) {
         <Box component="nav" sx={{
             borderBottom: '1px solid transparent',
             borderColor: 'divider',
-            transition: 'borderColor 0.2s, filter 0.5s',
             py: 2,
-            position: 'sticky',
+            position: 'fixed',
+            left: 0,
+            right: 0,
             top: 0,
             height: '75px',
             backdropFilter: 'saturate(180%) blur(10px)',

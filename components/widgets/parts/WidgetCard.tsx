@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import {
     bindMenu,
     bindTrigger,
@@ -7,10 +7,10 @@ import {
 import { Box, Button, ListItemIcon, ListItemText, Menu, MenuItem, Paper, Stack } from '@mui/material';
 import MoreHorizSharpIcon from '@mui/icons-material/MoreHorizSharp';
 import { Delete, Settings } from '@mui/icons-material';
+import useUserTheme from 'src/hooks/useUserTheme';
 import WidgetConfiguration from './WidgetConfiguration';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
-import { ThemeContext } from '../../../pages/_app';
 
 interface IWidgetCardProps {
     children: JSX.Element,
@@ -33,7 +33,7 @@ function WidgetCard(props: IWidgetCardProps) {
         onRemove
     } = props;
 
-    const themeContext = useContext(ThemeContext);
+    const themeContext = useUserTheme();
 
     const width = (config as any)?.columns || 2;
     const height = (config as any)?.rows || 2;

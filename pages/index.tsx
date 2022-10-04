@@ -1,14 +1,14 @@
 import { useInView } from 'react-cool-inview';
-import React, { useContext } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Box, Button, Container, Divider, Fade, Grid, Stack, SxProps, Theme, Typography } from '@mui/material';
 import { GitHub, KeyboardArrowRight } from '@mui/icons-material';
+import useUserTheme from 'src/hooks/useUserTheme';
 import useIsTablet from 'src/hooks/useIsTablet';
 import GentleSlide from 'components/shared/animations/GentleSlide';
 import CtaSection from 'components/pages/CtaSection';
-import { ThemeContext } from './_app';
 import AppSettingsProvider from '../src/services/AppSettingsProvider';
 import LinkImage from '../components/shared/ImageLink';
 import DiscoverVisual from '../components/pages/landing/visuals/DiscoverVisual';
@@ -177,7 +177,7 @@ function GlobeSection() {
 }
 
 function PlaySection() {
-  const themeContext = useContext(ThemeContext);
+  const themeContext = useUserTheme();
 
   return (
     <StepContent title="Play" subtitle="Here are some of our favorite ways you can automate your life"

@@ -13,8 +13,7 @@
         },
         "Account": {
             "Logout": "Logout",
-            "Settings": "Settings...",
-            "UserProfileImageAlt": "User profile image"
+            "Settings": "Settings..."
         },
         "Nav": {
             "Dashboards": "Dashboards",
