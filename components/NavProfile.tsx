@@ -47,9 +47,7 @@ const navItems = [
 ];
 
 function UserAvatar() {
-  const { t } = useLocale('App', 'Account');
   const user = CurrentUserProvider.getCurrentUser();
-
   if (user === undefined) {
     return (
       <Skeleton variant="circular">
@@ -69,7 +67,7 @@ function UserAvatar() {
   const size = { xs: '36px', sm: '42px', lg: '58px' };
 
   if (user.picture) {
-    return (<Avatar sx={{ width: size, height: size }} variant="circular" src={user.picture} alt={t('UserProfileImageAlt')}>
+    return (<Avatar sx={{ width: size, height: size }} variant="circular" src={user.picture} alt={userNameInitials}>
       {userNameInitials}
     </Avatar>);
   }

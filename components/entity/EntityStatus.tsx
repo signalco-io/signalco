@@ -1,4 +1,5 @@
 import BoltIcon from '@mui/icons-material/Bolt';
+import DateTimeProvider from 'src/services/DateTimeProvider';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import { entityInError, entityLastActivity } from 'src/entity/EntityHelper';
 import DotIndicator from 'components/shared/indicators/DotIndicator';
@@ -20,7 +21,7 @@ export default function EntityStatus(props: { entity: IEntityDetails | undefined
         if (!lastActivity) {
             statusColor = 'grey';
         } else {
-            const isStale = new Date().getTime() - lastActivity.getTime() > 24 * 60 * 60 * 1000;
+            const isStale = DateTimeProvider.now().getTime() - lastActivity.getTime() > 24 * 60 * 60 * 1000;
             if (isStale) statusColor = 'warning';
         }
     }

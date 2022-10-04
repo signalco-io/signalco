@@ -8,15 +8,7 @@ import { themes } from '@storybook/theming';
 import { DateTimeProvider } from '../src/services/DateTimeProvider';
 import { ThemeContext } from '../pages/_app';
 
-const newStaticDate = new Date();
-newStaticDate.setUTCFullYear(2022);
-newStaticDate.setUTCMonth(5);
-newStaticDate.setUTCDate(1);
-newStaticDate.setUTCHours(10);
-newStaticDate.setUTCMinutes(9);
-newStaticDate.setUTCSeconds(36);
-newStaticDate.setUTCMilliseconds(0);
-DateTimeProvider.staticDateTime = newStaticDate;
+DateTimeProvider.staticDateTime = new Date(2022, 5, 1, 10, 9, 36);
 
 // Integrating with the MUI by defining a global decorator
 export const decorators = [

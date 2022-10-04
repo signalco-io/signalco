@@ -5,6 +5,8 @@ import { PageNav } from '../PageNav';
 import { ChildrenProps } from '../../src/sharedTypes';
 
 export function PageLayout(props: ChildrenProps & { maxWidth?: false | Breakpoint | undefined }) {
+    console.log('PageLayout rendered');
+
     return (
         <Stack spacing={4}>
             <PageNav />

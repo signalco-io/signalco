@@ -1,5 +1,4 @@
 import { Stack } from '@mui/material';
-import { PageWithMetadata } from 'pages/_app';
 import PageCenterHeader from 'components/pages/PageCenterHeader';
 import FaqSection from 'components/pages/FaqSection';
 import CtaSection from 'components/pages/CtaSection';
@@ -11,7 +10,7 @@ const channelsFaq = [
     { id: 'entities', question: 'What are Entities?', answer: 'Entity is a thing you want to automate in signalco. This can be is online service connected to signalco, smart device, your custom dashboard, automation process, etc.' },
 ];
 
-const ChannelsPage: PageWithMetadata = () => {
+function ChannelsPage() {
     return (
         <Stack spacing={{ xs: 8, md: 12 }}>
             <Stack spacing={{ xs: 4, md: 8 }}>

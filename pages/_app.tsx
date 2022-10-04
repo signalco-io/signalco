@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { createContext, FunctionComponent, useMemo, useState } from 'react';
 import { SnackbarProvider } from 'notistack';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
@@ -10,7 +10,7 @@ import { ChildrenProps } from '../src/sharedTypes';
 import useAppTheme from '../src/hooks/useAppTheme';
 import IAppContext from '../src/appContext/IAppContext';
 
-export interface PageWithMetadata extends React.FunctionComponent<any> {
+export interface PageWithMetadata extends FunctionComponent<any> {
   layout?: React.FunctionComponent | undefined
   inDevelopment?: boolean | undefined,
   title?: string | undefined
@@ -21,17 +21,20 @@ const themeContextDefault: IAppContext = {
   isDark: false
 };
 
-export const ThemeContext = React.createContext<IAppContext>(themeContextDefault);
+export const ThemeContext = createContext<IAppContext>(themeContextDefault);
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
 
-  const [themeContextState, setAppContextState] = React.useState<IAppContext>(themeContextDefault);
+  const [themeContextState, setAppContextState] = useState<IAppContext>(themeContextDefault);
   useAppTheme(themeContextState, setAppContextState);
 
-  const pageWithMetadata = (Component as PageWithMetadata);
-  const Layout = pageWithMetadata.layout ?? ((props?: ChildrenProps) => <>{props?.children}</>);
-  const title = pageWithMetadata.title;
+  const Layout = useMemo(() => {
+    const pageWithMetadata = (Component as PageWithMetadata);
+    return pageWithMetadata.layout ?? ((props?: ChildrenProps) => <>{props?.children}</>);
+  }, [Component]);
+
+  const title = useMemo(() => (Component as PageWithMetadata).title, [Component]);
 
   return (
     <>

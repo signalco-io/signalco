@@ -9,8 +9,7 @@
     "App": {
         "Account": {
             "Settings": "Postavke...",
-            "Logout": "Odjava",
-            "UserProfileImageAlt": "Slika korisničkog profila"
+            "Logout": "Odjava"
         },
         "Components": {
             "AppThemePicker": {
