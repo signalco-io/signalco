@@ -193,6 +193,8 @@ function NavProfile() {
     setMobileMenuOpen(false);
   }
 
+  console.log('NavProfile rendered');
+
   return (
     <Stack
       direction={{ xs: 'row', sm: 'column' }}

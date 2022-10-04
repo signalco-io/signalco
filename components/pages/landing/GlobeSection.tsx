@@ -1,6 +1,5 @@
-import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
-import { Box, Container, Fade } from '@mui/material';
+import { Box, Container, Fade, NoSsr } from '@mui/material';
 const Globe = dynamic(() => import('./Globe'));
 
 function GlobeSection() {
@@ -24,9 +23,9 @@ function GlobeSection() {
                         maxWidth: '100vw!important',
                         maxHeight: '100vw!important'
                     }}>
-                        <Suspense>
+                        <NoSsr>
                             <Globe />
-                        </Suspense>
+                        </NoSsr>
                     </Box>
                 </Box>
             </Box>
