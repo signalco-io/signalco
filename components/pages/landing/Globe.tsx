@@ -1,21 +1,19 @@
-import React, { useContext, useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Color from 'color';
 import createGlobe from 'cobe';
+import { useColorScheme } from '@mui/material';
 import theme from '../../../src/theme';
 import useWindowWidth from '../../../src/hooks/useWindowWidth';
 import { colorToRgb } from '../../../src/helpers/StringHelpers';
-import { ThemeContext } from '../../../pages/_app';
 
 function Globe() {
     const canvasRef = useRef(null);
-    const themeContext = useContext(ThemeContext);
     const rectWidth = useWindowWidth();
     const width = Math.min(1100, rectWidth ?? 0);
     const height = width;
-    const isDark = themeContext.isDark;
-    const scheme = useMemo(() => isDark
-        ? theme(themeContext.theme).colorSchemes.dark
-        : theme(themeContext.theme).colorSchemes.light, [isDark, themeContext.theme]);
+    const { colorScheme, darkColorScheme } = useColorScheme();
+    const isDark = colorScheme === darkColorScheme;
+    const scheme = theme().colorSchemes[colorScheme ?? 'light'];
 
     const glow = colorToRgb(scheme.palette.background.default);
     const base = Color(scheme.palette.background.default).lightness(128).rgb().object();

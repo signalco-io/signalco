@@ -1,12 +1,11 @@
-import { useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Box, Button, Stack, Typography } from '@mui/material';
-import { ThemeContext } from './_app';
+import useUserTheme from 'src/hooks/useUserTheme';
 import { PageLayout } from '../components/layouts/PageLayout';
 
 function Image404() {
-    const themeContext = useContext(ThemeContext);
+    const themeContext = useUserTheme();
     const scale = 0.6;
     return (
         <Image

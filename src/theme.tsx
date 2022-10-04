@@ -1,9 +1,7 @@
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 
-export type AppThemeMode = 'manual' | 'sunriseSunset' | 'timeRange';
-
-export type AppTheme = 'dark' | 'darkDimmed' | 'light';
+export type AppThemeMode = 'system' | 'manual' | 'sunriseSunset' | 'timeRange';
 
 const componentsTopLevelBorder = {
   styleOverrides: {
@@ -21,7 +19,7 @@ const componentInPageBorder = {
   }
 }
 
-const theme = (_theme: AppTheme) => {
+const theme = () => {
   //   const createdTheme = createTheme({
   //     palette: {
   //       mode: isDark ? 'dark' : 'light',
@@ -86,14 +84,14 @@ const theme = (_theme: AppTheme) => {
       light: {
         palette: {
           primary: {
-            main: '#fff',
-            light: '#000',
-            dark: '#fff'
+            main: '#000',
+            light: '#fff',
+            dark: '#000'
           },
           secondary: {
-            main: '#000',
-            light: '#000',
-            dark: '#000'
+            main: '#fff',
+            light: '#fff',
+            dark: '#fff'
           },
           error: {
             main: red.A400,

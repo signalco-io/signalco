@@ -1,15 +1,14 @@
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
-import { useContext } from 'react';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
 import { deepOrange, lightBlue } from '@mui/material/colors';
 import { Box, Paper, Stack, Typography } from '@mui/material';
+import useUserTheme from 'src/hooks/useUserTheme';
 import Timeago from '../shared/time/Timeago';
 import NoDataPlaceholder from '../shared/indicators/NoDataPlaceholder';
 import { ObjectDictAny } from '../../src/sharedTypes';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
 import { arrayMax, arrayMin } from '../../src/helpers/ArrayHelpers';
-import { ThemeContext } from '../../pages/_app';
 
 export interface IGraphProps {
     label?: string;
@@ -44,7 +43,7 @@ const renderCustomizedTimeLineLabel = (props: any) => {
 
 function GraphTimeLine(props: IGraphProps) {
     const { label, data, durationMs, width, startDateTime } = props;
-    const themeContext = useContext(ThemeContext);
+    const themeContext = useUserTheme();
 
     const isDarkTheme = themeContext.isDark;
     const accentTrue = lightBlue[isDarkTheme ? 900 : 500];
@@ -138,7 +137,7 @@ function ChartGenericTooltip({ active, payload, domain, units }: { active?: bool
 
 function GraphArea(props: IGraphProps) {
     const { data, durationMs, width, height, startDateTime } = props;
-    const themeContext = useContext(ThemeContext);
+    const themeContext = useUserTheme();
 
     const yKey = 'value';
     const xKey = 'key';

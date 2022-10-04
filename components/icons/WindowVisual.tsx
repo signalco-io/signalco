@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+import useUserTheme from 'src/hooks/useUserTheme';
 import styles from './WindowVisual.module.scss';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
 import useInterval from '../../src/hooks/useInterval';
 import { colorToRgb } from '../../src/helpers/StringHelpers';
-import { ThemeContext } from '../../pages/_app';
 
 var skySunnyGrads = [
     [{ color: '#00000c', position: 0 }, { color: '#00000c', position: 0 }],
@@ -33,7 +33,7 @@ var skySunnyGrads = [
 ];
 
 function WindowVisual(props: { shadePerc: number, size: number, dateAndTime?: Date }) {
-    const themeContext = useContext(ThemeContext);
+    const themeContext = useUserTheme();
     const [hours, setHours] = useState(((props.dateAndTime ?? DateTimeProvider.now()).getHours()) % 24);
 
     // Update hours every minute

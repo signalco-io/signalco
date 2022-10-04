@@ -1,7 +1,5 @@
-import { useContext } from 'react';
-import { Button, Card, CardActionArea, Stack, ThemeProvider, Typography } from '@mui/material';
-import theme from 'src/theme';
-import { ThemeContext } from 'pages/_app';
+import { Button, Card, CardActionArea, Stack, Typography } from '@mui/material';
+import useUserTheme from 'src/hooks/useUserTheme';
 import Checkbox from 'components/shared/form/Checkbox';
 import SignalcoLogotype from 'components/icons/SignalcoLogotype';
 
@@ -23,13 +21,13 @@ export interface PricingCardProps {
 
 export default function PricingCard(props: PricingCardProps) {
     const { option, variant } = props;
-    const themeContext = useContext(ThemeContext);
+    const themeContext = useUserTheme();
     const themeVariant = variant === 'inverted' ? (themeContext.isDark ? 'light' : 'dark') : (themeContext.theme ?? 'light');
 
     const disabled = option.price.eur > 0;
 
     return (
-        <ThemeProvider theme={theme(themeVariant)}>
+        <div data-mui-color-scheme={themeVariant}>
             <Card
                 sx={{
                     bgcolor: variant === 'outlined' ? 'transparent' : undefined,
@@ -66,6 +64,6 @@ export default function PricingCard(props: PricingCardProps) {
                     </Stack>
                 </CardActionArea>
             </Card>
-        </ThemeProvider>
+        </div>
     );
 }

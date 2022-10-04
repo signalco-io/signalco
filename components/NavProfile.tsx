@@ -20,7 +20,6 @@ import {
   MenuItem,
   Stack,
   Typography,
-  useColorScheme,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -33,6 +32,7 @@ import CommitIcon from '@mui/icons-material/Commit';
 import CloseIcon from '@mui/icons-material/Close';
 import { SvgIconComponent } from '@mui/icons-material';
 import useIsMobile from 'src/hooks/useIsMobile';
+import Loadable from './shared/Loadable/Loadable';
 import ApiBadge from './development/ApiBadge';
 import LocalStorageService from '../src/services/LocalStorageService';
 import CurrentUserProvider from '../src/services/CurrentUserProvider';
@@ -102,8 +102,13 @@ function UserProfileAvatar() {
     await router.push(href);
   };
 
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
-    <>
+    <Loadable isLoading={isLoading} placeholder="skeletonRect" width={30} height={30}>
       <ButtonBase {...bindTrigger(popupState)} sx={{ width: { xs: undefined, sm: '100%' }, py: 1 }}>
         <Stack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
           <UserAvatar />
@@ -128,7 +133,7 @@ function UserProfileAvatar() {
           <ListItemText>{t('Logout')}</ListItemText>
         </MenuItem>
       </Menu>
-    </>
+    </Loadable>
   );
 }
 
@@ -200,9 +205,7 @@ function NavProfile() {
       sx={{ px: { xs: 2, sm: 0 }, pt: { xs: 0, sm: 4 }, minWidth: `${navWidth}px`, minHeight: { xs: '60px', sm: undefined } }}
       justifyContent={isMobile ? 'space-between' : undefined}
       alignItems="center">
-      <Suspense>
         <UserProfileAvatar />
-      </Suspense>
       {!mobileMenuOpen &&
         <Stack sx={{ width: { xs: undefined, lg: '100%' } }}>
           {visibleNavItems
