@@ -1,7 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import React, { Suspense, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Avatar, Box, Button, ButtonBase, ButtonGroup, Grid, NoSsr, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { Avatar, Box, Button, ButtonBase, ButtonGroup, Grid, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -158,12 +158,12 @@ function Entities() {
                         variant="filled"
                         onChange={(e) => handleSearchTextChange(e.target.value)}
                         sx={{ width: { xs: '100%', sm: 'initial' } }} />}
-                    <NoSsr>
+                    <Suspense>
                         <ToggleButtonGroup exclusive value={entityListViewType} color="primary" onChange={(_, value) => setEntityListViewType(value)}>
                             <ToggleButton value="table" size="small" title="List view"><ViewListIcon /></ToggleButton>
                             <ToggleButton value="cards" size="small" title="Card view"><ViewModuleIcon /></ToggleButton>
                         </ToggleButtonGroup>
-                    </NoSsr>
+                    </Suspense>
                     <Button variant="outlined" startIcon={<AddCircleIcon />} onClick={handleAddEntity}>{t('NewEntity')}</Button>
                 </Stack>
             </Stack>
