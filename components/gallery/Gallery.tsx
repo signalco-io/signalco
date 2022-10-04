@@ -1,9 +1,9 @@
 import React from 'react';
 import { Stack } from '@mui/material';
+import useIsTablet from 'src/hooks/useIsTablet';
+import GalleryGridFilter from './GalleryGridFilter';
 import GalleryGrid from './GalleryGrid';
 import GalleryFilters from './GalleryFilters';
-import GalleryGridFilter from './GalleryGridFilter';
-import useIsTablet from 'src/hooks/useIsTablet';
 
 interface GalleryProps {
     items: {

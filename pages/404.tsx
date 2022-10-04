@@ -1,9 +1,9 @@
-import { Box, Button, Stack, Typography } from '@mui/material';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useContext } from 'react';
-import { PageLayout } from '../components/layouts/PageLayout';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import { ThemeContext } from './_app';
+import { PageLayout } from '../components/layouts/PageLayout';
 
 function Image404() {
     const themeContext = useContext(ThemeContext);

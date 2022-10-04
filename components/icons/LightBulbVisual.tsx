@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { ThemeContext } from '../../pages/_app';
 import styles from './LightBulbVisual.module.scss';
+import { ThemeContext } from '../../pages/_app';
 
 function LightBulbVisual(props: { state: boolean, size: number }) {
     const themeContext = useContext(ThemeContext);

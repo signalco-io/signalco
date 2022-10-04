@@ -1,6 +1,6 @@
 import { MDXProvider } from '@mdx-js/react';
-import mdxComponents from '../../components/layouts/mdxComponents';
 import AcceptableUsePolicyMdx from './acceptable-use-policy-content.mdx';
+import mdxComponents from '../../components/layouts/mdxComponents';
 
 export default function AcceptableUsePolicy() {
     return (

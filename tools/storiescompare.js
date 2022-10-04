@@ -1,7 +1,7 @@
-const { green, red, yellow } = require('colorette');
-const { unlinkSync, renameSync, readFileSync, readdirSync, lstatSync, mkdirSync } = require('fs');
-const { join, dirname } = require('path');
 const { stdout } = require('process');
+const { join, dirname } = require('path');
+const { unlinkSync, renameSync, readFileSync, readdirSync, lstatSync, mkdirSync } = require('fs');
+const { green, red, yellow } = require('colorette');
 
 // Directory paths
 const APPROVED_DIR_NAME = '.stories-approved';

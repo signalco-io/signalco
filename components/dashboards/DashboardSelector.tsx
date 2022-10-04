@@ -1,10 +1,10 @@
-import { Box, Button, NoSsr, Popover, Stack, Tab, Tabs, Typography } from '@mui/material';
+import React, { Suspense, useEffect } from 'react';
 import { bindPopover, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
-import React, { useEffect } from 'react';
+import { Box, Button, Popover, Stack, Tab, Tabs, Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import useHashParam from '../../src/hooks/useHashParam';
-import DashboardSelectorMenu from './DashboardSelectorMenu';
 import useDashboards from 'src/hooks/dashboards/useDashboards';
+import DashboardSelectorMenu from './DashboardSelectorMenu';
+import useHashParam from '../../src/hooks/useHashParam';
 
 export interface IDashboardSelectorProps {
     onEditWidgets: () => void,
@@ -32,7 +32,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
     console.debug('Rendering DashboardSelector');
 
     return (
-        <NoSsr>
+        <Suspense>
             <Stack spacing={{ xs: 0, sm: 2 }} direction="row">
                 {(dashboards?.length ?? 0) > 0 && (
                     <Box>
@@ -98,7 +98,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                     onEditWidgets={onEditWidgets}
                     onSettings={onSettings} />
             </Popover>
-        </NoSsr>
+        </Suspense>
     );
 }
 

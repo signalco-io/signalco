@@ -1,6 +1,6 @@
-import Editor, { loader } from '@monaco-editor/react';
-import { editor } from 'monaco-editor';
 import { useContext } from 'react';
+import { editor } from 'monaco-editor';
+import Editor, { loader } from '@monaco-editor/react';
 import { ThemeContext } from '../../pages/_app';
 
 loader.config({ paths: { vs: '/vs' } });

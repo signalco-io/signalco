@@ -1,6 +1,6 @@
-import { CopyAll as CopyAllIcon } from '@mui/icons-material';
-import { FilledInput, InputAdornment } from '@mui/material';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { FilledInput, InputAdornment } from '@mui/material';
+import { CopyAll as CopyAllIcon } from '@mui/icons-material';
 import IconButtonCopyToClipboard from './IconButtonCopyToClipboard';
 
 export default {

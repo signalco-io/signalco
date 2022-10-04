@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material';
-import ChannelsGallery from 'components/channels/ChannelsGallery';
 import { AppLayoutWithAuth } from 'components/layouts/AppLayoutWithAuth';
+import ChannelsGallery from 'components/channels/ChannelsGallery';
 
 function AppChannelsPage() {
     return (

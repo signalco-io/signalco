@@ -1,10 +1,21 @@
 {
   "extends": [
     "plugin:storybook/recommended",
-    "next/core-web-vitals"
+    "next/core-web-vitals",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
   ],
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      }
+    }
+  },
   "rules": {
-    "react/function-component-definition": ["warn"],
+    "react/function-component-definition": [
+      "warn"
+    ],
     "no-trailing-spaces": "warn",
     "quotes": [
       "error",
@@ -13,6 +24,28 @@
     "jsx-quotes": [
       "error",
       "prefer-double"
+    ],
+    "import/no-unresolved": "error",
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          [
+            "sibling",
+            "parent"
+          ],
+          "index",
+          "unknown"
+        ],
+        "newlines-between": "never",
+        "alphabetize": {
+          "order": "desc",
+          "caseInsensitive": true
+        }
+      }
     ]
   }
 }

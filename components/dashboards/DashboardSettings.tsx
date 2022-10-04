@@ -1,12 +1,12 @@
-import { Button, Stack, TextField, Typography } from '@mui/material';
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import useDeleteDashboard from 'src/hooks/dashboards/useDeleteDashboard';
+import { useRouter } from 'next/router';
+import { Button, Stack, TextField, Typography } from '@mui/material';
 import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
-import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
-import useLocale from '../../src/hooks/useLocale';
-import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
+import useDeleteDashboard from 'src/hooks/dashboards/useDeleteDashboard';
 import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
+import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
+import useLocale from '../../src/hooks/useLocale';
+import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
 
 interface IDashboardSettingsProps {
     isOpen: boolean,

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { ThemeContext } from '../../../../pages/_app';
 import theme from '../../../../src/theme';
+import { ThemeContext } from '../../../../pages/_app';
 
 function DiscoverVisual() {
     const themeContext = useContext(ThemeContext);

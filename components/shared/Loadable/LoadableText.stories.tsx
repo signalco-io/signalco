@@ -1,7 +1,7 @@
-import { Typography } from '@mui/material';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import LoadableText from './LoadableText';
+import { Typography } from '@mui/material';
 import LoadableTextProps from './LoadableTextProps';
+import LoadableText from './LoadableText';
 
 export default {
     title: 'Components/Shared/LoadableText',

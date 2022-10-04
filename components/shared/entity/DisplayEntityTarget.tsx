@@ -1,20 +1,20 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, List, ListItem, ListItemButton, ListItemText, Popover, Skeleton, Stack, TextField, Tooltip, Typography } from '@mui/material';
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-    usePopupState,
+    bindPopover,
     bindTrigger,
-    bindPopover
+    usePopupState
 } from 'material-ui-popup-state/hooks';
-import useAllEntities from '../../../src/hooks/useAllEntities';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, List, ListItem, ListItemButton, ListItemText, Popover, Skeleton, Stack, TextField, Tooltip, Typography } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import EntityIcon from './EntityIcon';
-import Loadable from '../Loadable/Loadable';
-import useEntity from '../../../src/hooks/useEntity';
-import NoDataPlaceholder from '../indicators/NoDataPlaceholder';
 import useContact from 'src/hooks/useContact';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import IContactPointerPartial from 'src/contacts/IContactPointerPartial';
 import InputContactValue from './InputContactValue';
+import EntityIcon from './EntityIcon';
+import Loadable from '../Loadable/Loadable';
+import NoDataPlaceholder from '../indicators/NoDataPlaceholder';
+import useEntity from '../../../src/hooks/useEntity';
+import useAllEntities from '../../../src/hooks/useAllEntities';
 
 function EntityContactValueSelection(props: { target: IContactPointerPartial | undefined, value: any, onSelected: (value: any) => void }) {
     const { target, value, onSelected } = props;

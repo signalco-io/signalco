@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router'
 import React, {  } from 'react';
-import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
-import NoDataPlaceholder from 'components/shared/indicators/NoDataPlaceholder';
+import { useRouter } from 'next/router'
 import EntityDetailsView from 'components/views/Entity/EntityDetailsView';
+import NoDataPlaceholder from 'components/shared/indicators/NoDataPlaceholder';
+import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 
 function EntityDetailsPage() {
     const router = useRouter();

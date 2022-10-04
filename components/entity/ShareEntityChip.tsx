@@ -1,14 +1,14 @@
-import { Chip, IconButton, Slide, Stack, TextField, Tooltip } from '@mui/material';
-import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
 import { useState } from 'react';
-import HttpService from '../../src/services/HttpService';
+import { Chip, IconButton, Slide, Stack, TextField, Tooltip } from '@mui/material';
 import ShareIcon from '@mui/icons-material/Share';
-import AutoTable from '../shared/table/AutoTable';
-import ClearIcon from '@mui/icons-material/Clear';
 import SendIcon from '@mui/icons-material/Send';
-import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
-import useLocale from '../../src/hooks/useLocale';
+import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
+import ClearIcon from '@mui/icons-material/Clear';
 import IUser from 'src/users/IUser';
+import AutoTable from '../shared/table/AutoTable';
+import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
+import HttpService from '../../src/services/HttpService';
+import useLocale from '../../src/hooks/useLocale';
 
 interface IShareEntityChipProps {
     entity?: { id: string, sharedWith?: IUser[] };

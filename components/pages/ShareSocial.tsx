@@ -1,7 +1,7 @@
-import ShareIcon from '@mui/icons-material/Share';
 import { useId } from 'react';
-import IconButtonCopyToClipboard from 'components/shared/form/IconButtonCopyToClipboard';
+import ShareIcon from '@mui/icons-material/Share';
 import useIsClient from 'src/hooks/useIsClient';
+import IconButtonCopyToClipboard from 'components/shared/form/IconButtonCopyToClipboard';
 
 export default function ShareSocial() {
     const id = useId();

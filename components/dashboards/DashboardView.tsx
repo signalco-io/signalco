@@ -1,13 +1,13 @@
-import { Box } from '@mui/system';
 import React from 'react';
-import { useNavWidth } from '../NavProfile';
-import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
-import { Button, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
-import useLocale from '../../src/hooks/useLocale';
+import { Box } from '@mui/system';
+import { Button, Stack, Typography } from '@mui/material';
+import GridWrapper from './GridWrapper';
 import DragableWidget from './DragableWidget';
 import DisplayWidget from './DisplayWidget';
-import GridWrapper from './GridWrapper';
+import { useNavWidth } from '../NavProfile';
+import useLocale from '../../src/hooks/useLocale';
+import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
 
 export const draggingUpscale = 1.1;
 

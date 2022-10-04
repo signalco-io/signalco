@@ -1,13 +1,13 @@
-import { Button, Card, CardActionArea, Stack, ThemeProvider, Typography } from '@mui/material';
-import SignalcoLogotype from 'components/icons/SignalcoLogotype';
-import { PageLayout } from 'components/layouts/PageLayout';
-import CtaSection from 'components/pages/CtaSection';
-import FaqSection from 'components/pages/FaqSection';
-import PageCenterHeader from 'components/pages/PageCenterHeader';
-import Checkbox from 'components/shared/form/Checkbox';
-import { PageWithMetadata, ThemeContext } from 'pages/_app';
 import { useContext } from 'react';
+import { Button, Card, CardActionArea, Stack, ThemeProvider, Typography } from '@mui/material';
 import theme from 'src/theme';
+import { ThemeContext } from 'pages/_app';
+import Checkbox from 'components/shared/form/Checkbox';
+import PageCenterHeader from 'components/pages/PageCenterHeader';
+import FaqSection from 'components/pages/FaqSection';
+import CtaSection from 'components/pages/CtaSection';
+import { PageLayout } from 'components/layouts/PageLayout';
+import SignalcoLogotype from 'components/icons/SignalcoLogotype';
 
 interface PricingOption {
     id: string,
@@ -107,7 +107,7 @@ const pricingFaq = [
     { id: 'executionsLimit', question: 'What happens if I run out of executions?', answer: 'Your automation processes will not execute until executions are added again. We add executions to your account every month as per your plan. If you are using Free or Basic plans, it\'s advised to upgrade to Pro plan. In Pro plan you can select how much executions and contacts you need in your billing page.' },
 ];
 
-const PricingPage: PageWithMetadata = () => {
+function PricingPage() {
     return (
         <Stack spacing={{ xs: 4, md: 12 }}>
             <PageCenterHeader header={'Pricing'} subHeader={'Find the plan for you'} />
@@ -118,7 +118,7 @@ const PricingPage: PageWithMetadata = () => {
             <CtaSection />
         </Stack >
     );
-};
+}
 
 PricingPage.title = 'Pricing';
 PricingPage.layout = PageLayout;

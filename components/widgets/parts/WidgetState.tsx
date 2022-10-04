@@ -1,17 +1,17 @@
-import { Stack, Typography, ButtonBase, CircularProgress } from '@mui/material';
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
-import ConductsService from '../../../src/conducts/ConductsService';
-import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import { Box } from '@mui/system';
+import { ButtonBase, CircularProgress, Stack, Typography } from '@mui/material';
+import useContacts from 'src/hooks/useContacts';
+import { entityAsync } from 'src/entity/EntityRepository';
+import IContactPointer from 'src/contacts/IContactPointer';
 import { WidgetSharedProps } from '../Widget';
-import useEntities from '../../../src/hooks/useEntities';
 import { DefaultLabel, DefaultTargetMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
+import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
-import IContactPointer from 'src/contacts/IContactPointer';
-import { entityAsync } from 'src/entity/EntityRepository';
-import useContacts from 'src/hooks/useContacts';
+import useEntities from '../../../src/hooks/useEntities';
+import ConductsService from '../../../src/conducts/ConductsService';
 
 const stateOptions = [
     DefaultLabel,

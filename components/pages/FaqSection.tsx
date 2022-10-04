@@ -1,6 +1,6 @@
 import { Accordion, AccordionDetails, AccordionSummary, Container, Stack, Typography } from '@mui/material';
-import PageCenterHeader from './PageCenterHeader';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import PageCenterHeader from './PageCenterHeader';
 
 export interface FaqItem {
     id: string,

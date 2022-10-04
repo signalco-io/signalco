@@ -1,15 +1,15 @@
-import channels from '../../../components/channels/channelsData.json';
-import { Container, Stack, Typography } from '@mui/material';
-import ChannelLogo from 'components/channels/ChannelLogo';
-import { useRouter } from 'next/router';
-import { AppLayoutWithAuth } from 'components/layouts/AppLayoutWithAuth';
 import { useMemo } from 'react';
+import { useRouter } from 'next/router';
+import { Container, Stack, Typography } from '@mui/material';
 import useAllEntities from 'src/hooks/useAllEntities';
-import AutoTable from 'components/shared/table/AutoTable';
 import IEntityDetails from 'src/entity/IEntityDetails';
+import AutoTable from 'components/shared/table/AutoTable';
 import Loadable from 'components/shared/Loadable/Loadable';
-import ChannelPartialSlack from 'components/channels/partials/ChannelPartialSlack';
 import NoDataPlaceholder from 'components/shared/indicators/NoDataPlaceholder';
+import { AppLayoutWithAuth } from 'components/layouts/AppLayoutWithAuth';
+import ChannelPartialSlack from 'components/channels/partials/ChannelPartialSlack';
+import ChannelLogo from 'components/channels/ChannelLogo';
+import channels from '../../../components/channels/channelsData.json';
 
 function EntityDetailsToAutoTableItem(entity: IEntityDetails) {
     return {

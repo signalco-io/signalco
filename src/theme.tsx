@@ -1,5 +1,5 @@
-import { red } from '@mui/material/colors';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
 
 export type AppThemeMode = 'manual' | 'sunriseSunset' | 'timeRange';
 

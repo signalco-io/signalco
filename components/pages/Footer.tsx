@@ -1,12 +1,12 @@
-import { Box, Divider, Container, Grid, Typography, Stack, IconButton, Link } from '@mui/material';
-import NextLink from 'next/link';
 import React from 'react';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import NextLink from 'next/link';
+import { Box, Container, Divider, Grid, IconButton, Link, Stack, Typography } from '@mui/material';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import SignalcoLogotype from '../icons/SignalcoLogotype';
 import RedditIcon from '@mui/icons-material/Reddit';
-import appSettingsProvider from '../../src/services/AppSettingsProvider';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import SignalcoLogotype from '../icons/SignalcoLogotype';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
+import appSettingsProvider from '../../src/services/AppSettingsProvider';
 
 type FooterSectionType = {
     header: string,

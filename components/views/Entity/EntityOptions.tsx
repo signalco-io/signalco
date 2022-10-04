@@ -1,14 +1,14 @@
-import { Button, ListItemText, Menu, MenuItem } from '@mui/material';
-import ConfirmDeleteDialog from 'components/shared/dialog/ConfirmDeleteDialog';
-import { bindTrigger, bindMenu } from 'material-ui-popup-state';
-import { usePopupState } from 'material-ui-popup-state/hooks';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { entityDeleteAsync } from 'src/entity/EntityRepository';
-import useEntity from 'src/hooks/useEntity';
-import useLocale from 'src/hooks/useLocale';
-import PageNotificationService from 'src/notifications/PageNotificationService';
+import { useRouter } from 'next/router';
+import { usePopupState } from 'material-ui-popup-state/hooks';
+import { bindMenu, bindTrigger } from 'material-ui-popup-state';
+import { Button, ListItemText, Menu, MenuItem } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import PageNotificationService from 'src/notifications/PageNotificationService';
+import useLocale from 'src/hooks/useLocale';
+import useEntity from 'src/hooks/useEntity';
+import { entityDeleteAsync } from 'src/entity/EntityRepository';
+import ConfirmDeleteDialog from 'components/shared/dialog/ConfirmDeleteDialog';
 
 export default function EntityOptions(props: { id: string | undefined; }) {
     const { id } = props;

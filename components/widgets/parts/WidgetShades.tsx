@@ -1,15 +1,15 @@
-import { ArrowUpward, Stop, ArrowDownward } from '@mui/icons-material';
-import { Button, Grid, Stack, Typography } from '@mui/material';
-import dynamic from 'next/dynamic';
 import React, { useMemo } from 'react';
-import useEntity from '../../../src/hooks/useEntity';
-import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
-import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import PageNotificationService from '../../../src/notifications/PageNotificationService';
-import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
-import { DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import dynamic from 'next/dynamic';
+import { Button, Grid, Stack, Typography } from '@mui/material';
+import { ArrowDownward, ArrowUpward, Stop } from '@mui/icons-material';
+import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';
-import { executeStateActionsAsync, StateAction } from './WidgetState';
+import { DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import PageNotificationService from '../../../src/notifications/PageNotificationService';
+import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
+import useEntity from '../../../src/hooks/useEntity';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 

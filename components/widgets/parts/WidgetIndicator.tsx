@@ -1,16 +1,16 @@
-import { ButtonBase, Stack } from '@mui/material';
 import React from 'react';
-import { Box } from '@mui/system';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { Box } from '@mui/system';
+import { ButtonBase, Stack } from '@mui/material';
 import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVerySatisfiedOutlined';
 import SentimentDissatisfiedOutlinedIcon from '@mui/icons-material/SentimentDissatisfiedOutlined';
-import { useRouter } from 'next/router';
+import useContact from 'src/hooks/useContact';
+import IContactPointer from 'src/contacts/IContactPointer';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultTarget, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
-import useContact from 'src/hooks/useContact';
-import IContactPointer from 'src/contacts/IContactPointer';
 
 const stateOptions = [
     DefaultTarget,

@@ -1,7 +1,7 @@
-import { Close, Edit, Save } from '@mui/icons-material';
-import { Theme, Typography, Box, Input, InputAdornment, IconButton } from '@mui/material';
-import { SystemStyleObject } from '@mui/system';
 import React, { useEffect, useState } from 'react';
+import { SystemStyleObject } from '@mui/system';
+import { Box, IconButton, Input, InputAdornment, Theme, Typography } from '@mui/material';
+import { Close, Edit, Save } from '@mui/icons-material';
 
 interface IEditableInputProps {
     text: string,

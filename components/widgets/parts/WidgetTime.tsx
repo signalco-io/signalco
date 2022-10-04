@@ -1,10 +1,10 @@
-import { Box, Stack, Typography } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
+import { Box, Stack, Typography } from '@mui/material';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import DateTimeProvider from '../../../src/services/DateTimeProvider';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
-import DateTimeProvider from '../../../src/services/DateTimeProvider';
 import useInterval from '../../../src/hooks/useInterval';
 
 const stateOptions = [

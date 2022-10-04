@@ -1,10 +1,10 @@
 
-import { Alert } from '@mui/material';
-import dynamic from 'next/dynamic';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ObjectDictAny } from '../../src/sharedTypes';
-import IWidgetConfigurationOption from '../../src/widgets/IWidgetConfigurationOption';
+import dynamic from 'next/dynamic';
+import { Alert } from '@mui/material';
 import WidgetCard from './parts/WidgetCard';
+import IWidgetConfigurationOption from '../../src/widgets/IWidgetConfigurationOption';
+import { ObjectDictAny } from '../../src/sharedTypes';
 const WidgetChecklist = dynamic(() => import('./parts/WidgetChecklist'));
 const WidgetIndicator = dynamic(() => import('./parts/WidgetIndicator'));
 const WidgetTime = dynamic(() => import('./parts/WidgetTime'));

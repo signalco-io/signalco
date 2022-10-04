@@ -1,12 +1,12 @@
-import { Stack, Box, Typography, NoSsr, ToggleButtonGroup, ToggleButton, TextField } from '@mui/material';
-import useLocale from '../../src/hooks/useLocale';
-import useUserSetting from '../../src/hooks/useUserSetting';
-import DateTimeProvider from '../../src/services/DateTimeProvider';
-import { AppTheme, AppThemeMode } from '../../src/theme';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { Box, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { AppTheme, AppThemeMode } from '../../src/theme';
+import DateTimeProvider from '../../src/services/DateTimeProvider';
+import useUserSetting from '../../src/hooks/useUserSetting';
+import useLocale from '../../src/hooks/useLocale';
 
 function AppThemeVisual(props: { label: string, theme: AppTheme, disabled?: boolean }) {
     const { label, theme, disabled } = props;
@@ -92,7 +92,7 @@ export default function AppThemePicker() {
     }
 
     return (
-        <NoSsr>
+        <Suspense>
             <Stack spacing={2}>
                 <ToggleButtonGroup exclusive color="primary" value={themeMode} onChange={handleThemeModeChange}>
                     <ToggleButton value="manual">{themeModes.t('Manual')}</ToggleButton>
@@ -129,6 +129,6 @@ export default function AppThemePicker() {
                     </ToggleButtonGroup>
                 </Stack>
             </Stack>
-        </NoSsr>
+        </Suspense>
     );
 }

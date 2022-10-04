@@ -1,11 +1,11 @@
-import axios, { AxiosError } from 'axios';
-import AppSettingsProvider from './AppSettingsProvider';
-import { trimStartChar, isAbsoluteUrl } from '../helpers/StringHelpers';
-import CurrentUserProvider from './CurrentUserProvider';
-import { ObjectDictAny } from '../sharedTypes';
 import Router from 'next/router';
-import { parseHash, parseHashParam } from '../hooks/useHashParam';
+import axios, { AxiosError } from 'axios';
+import CurrentUserProvider from './CurrentUserProvider';
+import AppSettingsProvider from './AppSettingsProvider';
+import { ObjectDictAny } from '../sharedTypes';
 import PageNotificationService from '../notifications/PageNotificationService';
+import { parseHash, parseHashParam } from '../hooks/useHashParam';
+import { isAbsoluteUrl, trimStartChar } from '../helpers/StringHelpers';
 
 export default class HttpService {
   public static tokenFactory?: () => Promise<string>;

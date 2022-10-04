@@ -1,15 +1,15 @@
-import { Box, Paper, Stack, Typography } from '@mui/material';
-import { deepOrange, lightBlue } from '@mui/material/colors';
-import { ScaleTime, scaleTime, timeHour } from 'd3';
-import { useContext } from 'react';
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
-import { ThemeContext } from '../../pages/_app';
-import { arrayMax, arrayMin } from '../../src/helpers/ArrayHelpers';
-import { useLocalePlaceholders } from '../../src/hooks/useLocale';
-import DateTimeProvider from '../../src/services/DateTimeProvider';
-import { ObjectDictAny } from '../../src/sharedTypes';
-import NoDataPlaceholder from '../shared/indicators/NoDataPlaceholder';
+import { useContext } from 'react';
+import { ScaleTime, scaleTime, timeHour } from 'd3';
+import { deepOrange, lightBlue } from '@mui/material/colors';
+import { Box, Paper, Stack, Typography } from '@mui/material';
 import Timeago from '../shared/time/Timeago';
+import NoDataPlaceholder from '../shared/indicators/NoDataPlaceholder';
+import { ObjectDictAny } from '../../src/sharedTypes';
+import DateTimeProvider from '../../src/services/DateTimeProvider';
+import { useLocalePlaceholders } from '../../src/hooks/useLocale';
+import { arrayMax, arrayMin } from '../../src/helpers/ArrayHelpers';
+import { ThemeContext } from '../../pages/_app';
 
 export interface IGraphProps {
     label?: string;

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import MuiLink from '@mui/material/Link';
 import Image, { ImageProps } from 'next/image';
+import MuiLink from '@mui/material/Link';
 
 export default function LinkImage(props: { href: string; imageProps: ImageProps; }) {
     return (

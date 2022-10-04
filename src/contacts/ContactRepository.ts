@@ -1,5 +1,5 @@
-import DateTimeProvider from 'src/services/DateTimeProvider';
 import HttpService from 'src/services/HttpService';
+import DateTimeProvider from 'src/services/DateTimeProvider';
 import IContactPointer from './IContactPointer';
 
 interface TimeStampValuePairDto {

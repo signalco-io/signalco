@@ -1,12 +1,12 @@
-import { Card, CardHeader, CardMedia, IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
-import { Stack } from '@mui/system';
-import AutoTable from 'components/shared/table/AutoTable';
-import Timeago from 'components/shared/time/Timeago';
-import { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { usePopupState } from 'material-ui-popup-state/hooks';
-import IEntityDetails from 'src/entity/IEntityDetails';
-import useLocale from 'src/hooks/useLocale';
+import { bindMenu, bindTrigger } from 'material-ui-popup-state';
+import { Stack } from '@mui/system';
+import { Card, CardHeader, CardMedia, IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 import { Add as AddIcon, MoreVert as MoreVertIcon } from '@mui/icons-material';
+import useLocale from 'src/hooks/useLocale';
+import IEntityDetails from 'src/entity/IEntityDetails';
+import Timeago from 'components/shared/time/Timeago';
+import AutoTable from 'components/shared/table/AutoTable';
 
 export default function ContactsTable(props: { entity: IEntityDetails | undefined; }) {
     const { entity } = props;

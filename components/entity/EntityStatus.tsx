@@ -1,7 +1,7 @@
-import DotIndicator from 'components/shared/indicators/DotIndicator';
-import { entityLastActivity, entityInError } from 'src/entity/EntityHelper';
-import IEntityDetails from 'src/entity/IEntityDetails';
 import BoltIcon from '@mui/icons-material/Bolt';
+import IEntityDetails from 'src/entity/IEntityDetails';
+import { entityInError, entityLastActivity } from 'src/entity/EntityHelper';
+import DotIndicator from 'components/shared/indicators/DotIndicator';
 
 export default function EntityStatus(props: { entity: IEntityDetails | undefined }) {
     const { entity } = props;

@@ -1,14 +1,14 @@
-import { AppTheme, AppThemeMode } from '../theme';
-import IAppContext from '../appContext/IAppContext';
-import UserSettingsProvider from '../services/UserSettingsProvider';
-import useUserSetting from './useUserSetting';
-import SunHelper from '../helpers/SunHelper';
-import PageNotificationService from '../notifications/PageNotificationService';
-import useLocale from './useLocale';
 import { useCallback } from 'react';
-import DateTimeProvider from '../services/DateTimeProvider';
-import useInterval from './useInterval';
+import useUserSetting from './useUserSetting';
+import useLocale from './useLocale';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
+import useInterval from './useInterval';
+import { AppTheme, AppThemeMode } from '../theme';
+import UserSettingsProvider from '../services/UserSettingsProvider';
+import DateTimeProvider from '../services/DateTimeProvider';
+import PageNotificationService from '../notifications/PageNotificationService';
+import SunHelper from '../helpers/SunHelper';
+import IAppContext from '../appContext/IAppContext';
 
 export default function useAppTheme(appContextState: IAppContext, setAppContextState: (state: IAppContext) => void) {
   const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');

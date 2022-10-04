@@ -1,5 +1,5 @@
-import { Card, CardActionArea, CardContent, Chip, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
+import { Card, CardActionArea, CardContent, Chip, Stack, Typography } from '@mui/material';
 import ChannelLogo from './ChannelLogo';
 
 interface ChannelGalleryItemProps {

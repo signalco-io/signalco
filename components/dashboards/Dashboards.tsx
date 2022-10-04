@@ -1,20 +1,20 @@
-import { Box, Button, Stack, Typography } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
-import { WidgetModel } from '../../src/dashboards/DashboardsRepository';
-import PageNotificationService from '../../src/notifications/PageNotificationService';
-import DashboardView from './DashboardView';
-import DashboardSelector from './DashboardSelector';
-import DashboardSettings from './DashboardSettings';
-import { LoadingButton } from '@mui/lab';
-import { widgetType } from '../widgets/Widget';
-import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import useHashParam from '../../src/hooks/useHashParam';
-import useLocale from '../../src/hooks/useLocale';
-import Loadable from '../shared/Loadable/Loadable';
-import useDashboard from 'src/hooks/dashboards/useDashboard';
+import dynamic from 'next/dynamic';
+import { Box, Button, Stack, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
+import useDashboard from 'src/hooks/dashboards/useDashboard';
+import DashboardView from './DashboardView';
+import DashboardSettings from './DashboardSettings';
+import DashboardSelector from './DashboardSelector';
+import { widgetType } from '../widgets/Widget';
+import Loadable from '../shared/Loadable/Loadable';
+import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
+import PageNotificationService from '../../src/notifications/PageNotificationService';
+import useLocale from '../../src/hooks/useLocale';
+import useHashParam from '../../src/hooks/useHashParam';
+import { WidgetModel } from '../../src/dashboards/DashboardsRepository';
 
 const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 

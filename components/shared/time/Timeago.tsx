@@ -1,6 +1,6 @@
-import { Typography } from '@mui/material';
-import React from 'react';
 import ReactTimeago from 'react-timeago';
+import React from 'react';
+import { Typography } from '@mui/material';
 import { useLocalePlaceholders } from '../../../src/hooks/useLocale';
 
 export default function Timeago(props: { date: number | Date | undefined, live?: boolean }) {

@@ -1,12 +1,12 @@
+import { withScreenshot } from 'storycap';
 import React from 'react';
-import { CssBaseline } from '@mui/material';
-import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import theme from '../src/theme';
+import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
 import '../styles/global.scss';
 import { themes } from '@storybook/theming';
-import { ThemeContext } from '../pages/_app';
-import { withScreenshot } from 'storycap';
 import { DateTimeProvider } from '../src/services/DateTimeProvider';
+import { ThemeContext } from '../pages/_app';
 
 const newStaticDate = new Date();
 newStaticDate.setUTCFullYear(2022);

@@ -1,9 +1,9 @@
 import { Stack } from '@mui/material';
-import { PageLayout } from 'components/layouts/PageLayout';
-import PageCenterHeader from 'components/pages/PageCenterHeader';
 import { PageWithMetadata } from 'pages/_app';
-import CtaSection from 'components/pages/CtaSection';
+import PageCenterHeader from 'components/pages/PageCenterHeader';
 import FaqSection from 'components/pages/FaqSection';
+import CtaSection from 'components/pages/CtaSection';
+import { PageLayout } from 'components/layouts/PageLayout';
 import ChannelsGallery from 'components/channels/ChannelsGallery';
 
 const channelsFaq = [

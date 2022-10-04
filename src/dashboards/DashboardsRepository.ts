@@ -1,10 +1,10 @@
-import ContactRepository from 'src/contacts/ContactRepository';
-import { entitiesAsync, entityDeleteAsync, entityUpsertAsync } from 'src/entity/EntityRepository';
-import IEntityDetails from 'src/entity/IEntityDetails';
 import IUser from 'src/users/IUser';
-import { widgetType } from '../../components/widgets/Widget';
-import { arrayMax } from '../helpers/ArrayHelpers';
+import IEntityDetails from 'src/entity/IEntityDetails';
+import { entitiesAsync, entityDeleteAsync, entityUpsertAsync } from 'src/entity/EntityRepository';
+import ContactRepository from 'src/contacts/ContactRepository';
 import UserSettingsProvider from '../services/UserSettingsProvider';
+import { arrayMax } from '../helpers/ArrayHelpers';
+import { widgetType } from '../../components/widgets/Widget';
 
 export interface IDashboardSetModel {
     configurationSerialized?: string;

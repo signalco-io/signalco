@@ -1,25 +1,25 @@
-import React, { useMemo, useState } from 'react';
-import { Avatar, Box, Button, ButtonBase, ButtonGroup, Grid, NoSsr, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import React, { Suspense, useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { Avatar, Box, Button, ButtonBase, ButtonGroup, Grid, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import ViewListIcon from '@mui/icons-material/ViewList';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import IEntityDetails from 'src/entity/IEntityDetails';
+import { entityUpsertAsync } from 'src/entity/EntityRepository';
+import { entityLastActivity } from 'src/entity/EntityHelper';
+import Timeago from 'components/shared/time/Timeago';
+import EntityIcon from 'components/shared/entity/EntityIcon';
+import ConfigurationDialog from 'components/shared/dialog/ConfigurationDialog';
+import EntityStatus from 'components/entity/EntityStatus';
+import useUserSetting from '../../../src/hooks/useUserSetting';
+import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
+import useLocale from '../../../src/hooks/useLocale';
+import useAllEntities from '../../../src/hooks/useAllEntities';
+import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
+import Loadable from '../../../components/shared/Loadable/Loadable';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
-import useAllEntities from '../../../src/hooks/useAllEntities';
-import Link from 'next/link';
-import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
-import useUserSetting from '../../../src/hooks/useUserSetting';
-import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
-import ViewListIcon from '@mui/icons-material/ViewList';
-import ViewModuleIcon from '@mui/icons-material/ViewModule';
-import useLocale from '../../../src/hooks/useLocale';
-import Loadable from '../../../components/shared/Loadable/Loadable';
-import IEntityDetails from 'src/entity/IEntityDetails';
-import EntityIcon from 'components/shared/entity/EntityIcon';
-import Timeago from 'components/shared/time/Timeago';
-import { entityLastActivity } from 'src/entity/EntityHelper';
-import EntityStatus from 'components/entity/EntityStatus';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import ConfigurationDialog from 'components/shared/dialog/ConfigurationDialog';
-import { entityUpsertAsync } from 'src/entity/EntityRepository';
-import { useRouter } from 'next/router';
 
 function EntityCard(props: { entity: IEntityDetails }) {
     const { entity } = props;
@@ -158,12 +158,12 @@ function Entities() {
                         variant="filled"
                         onChange={(e) => handleSearchTextChange(e.target.value)}
                         sx={{ width: { xs: '100%', sm: 'initial' } }} />}
-                    <NoSsr>
+                    <Suspense>
                         <ToggleButtonGroup exclusive value={entityListViewType} color="primary" onChange={(_, value) => setEntityListViewType(value)}>
                             <ToggleButton value="table" size="small" title="List view"><ViewListIcon /></ToggleButton>
                             <ToggleButton value="cards" size="small" title="Card view"><ViewModuleIcon /></ToggleButton>
                         </ToggleButtonGroup>
-                    </NoSsr>
+                    </Suspense>
                     <Button variant="outlined" startIcon={<AddCircleIcon />} onClick={handleAddEntity}>{t('NewEntity')}</Button>
                 </Stack>
             </Stack>

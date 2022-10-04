@@ -1,5 +1,5 @@
-import { FormControlLabel, Checkbox as MuiCheckbox, SxProps, Theme } from '@mui/material';
 import { ChangeEvent, ReactNode } from 'react';
+import { FormControlLabel, Checkbox as MuiCheckbox, SxProps, Theme } from '@mui/material';
 
 export interface CheckboxProps {
     checked: boolean;

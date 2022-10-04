@@ -1,10 +1,10 @@
 import { ButtonBase, Icon, Stack } from '@mui/material';
-import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
-import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
-import { DefaultHeight, DefaultTargetWithValue, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';
-import { executeStateActionsAsync, StateAction } from './WidgetState';
+import { DefaultHeight, DefaultTargetWithValue, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
 
 const stateOptions: IWidgetConfigurationOption[] = [
     { label: 'Icon', name: 'icon', type: 'string', optional: true },

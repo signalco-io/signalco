@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material';
-import { PageLayout } from '../../components/layouts/PageLayout';
 import WidgetStore from '../../components/widget-store/WidgetStore';
+import { PageLayout } from '../../components/layouts/PageLayout';
 
 function FeatureDashboardsPage() {
   return <Stack spacing={4}>

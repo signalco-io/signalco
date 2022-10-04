@@ -1,3 +1,5 @@
+import React from 'react';
+import NextLink from 'next/link';
 import {
   Alert,
   Box,
@@ -8,17 +10,15 @@ import {
   Typography
 } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import React from 'react';
-import NextLink from 'next/link';
+import IErrorProps from '../interfaces/IErrorProps';
+import ResultsPlaceholder from '../indicators/ResultsPlaceholder';
+import { ChildrenProps } from '../../../src/sharedTypes';
+import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
+import { LocalizeFunc } from '../../../src/hooks/useLocale';
 import {
   camelToSentenceCase,
   isAbsoluteUrl
 } from '../../../src/helpers/StringHelpers';
-import ResultsPlaceholder from '../indicators/ResultsPlaceholder';
-import IErrorProps from '../interfaces/IErrorProps';
-import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
-import { ChildrenProps } from '../../../src/sharedTypes';
-import { LocalizeFunc } from '../../../src/hooks/useLocale';
 
 export interface IAutoTableItem {
   id: string;

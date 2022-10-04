@@ -1,7 +1,7 @@
-import { Breakpoint, Button, Stack, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import useLocale from '../../../src/hooks/useLocale';
+import { Breakpoint, Button, Stack, TextField, Typography } from '@mui/material';
 import ConfigurationDialog from './ConfigurationDialog';
+import useLocale from '../../../src/hooks/useLocale';
 
 export interface IConfirmDeleteDialogProps {
     isOpen: boolean,

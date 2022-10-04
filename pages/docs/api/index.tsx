@@ -1,25 +1,23 @@
-import { TreeItem, TreeView } from '@mui/lab';
-import { Link as MuiLink, Alert, AlertTitle, Chip, FormControl, Grid, InputLabel, MenuItem, Select, Skeleton, Stack, TextField, Typography, Paper, Divider, Badge, Box, Button } from '@mui/material';
-import { red } from '@mui/material/colors';
-import axios, { AxiosError, Method } from 'axios';
-import { useCallback, useState } from 'react';
-import { PageFullLayout } from '../../../components/layouts/PageFullLayout';
+import React, { useCallback, useState , useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import Link from 'next/link';
-import useHashParam from '../../../src/hooks/useHashParam';
-import CopyToClipboardInput from '../../../components/shared/form/CopyToClipboardInput';
-import { useContext } from 'react';
-import React from 'react';
-import OpenInNewSharpIcon from '@mui/icons-material/OpenInNewSharp';
-import { camelToSentenceCase } from '../../../src/helpers/StringHelpers';
+import axios, { AxiosError, Method } from 'axios';
+import { red } from '@mui/material/colors';
+import { Alert, AlertTitle, Badge, Box, Button, Chip, Divider, FormControl, Grid, InputLabel, MenuItem, Link as MuiLink, Paper, Select, Skeleton, Stack, TextField, Typography } from '@mui/material';
+import { TreeItem, TreeView } from '@mui/lab';
+import SendIcon from '@mui/icons-material/Send';
 import SecurityIcon from '@mui/icons-material/Security';
+import OpenInNewSharpIcon from '@mui/icons-material/OpenInNewSharp';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { ObjectDictAny } from '../../../src/sharedTypes';
-import SendIcon from '@mui/icons-material/Send';
-import CodeEditor from '../../../components/code/CodeEditor';
-import appSettingsProvider from '../../../src/services/AppSettingsProvider';
 import useLoadAndError from 'src/hooks/useLoadAndError';
+import { ObjectDictAny } from '../../../src/sharedTypes';
+import appSettingsProvider from '../../../src/services/AppSettingsProvider';
+import useHashParam from '../../../src/hooks/useHashParam';
+import { camelToSentenceCase } from '../../../src/helpers/StringHelpers';
+import CopyToClipboardInput from '../../../components/shared/form/CopyToClipboardInput';
+import { PageFullLayout } from '../../../components/layouts/PageFullLayout';
+import CodeEditor from '../../../components/code/CodeEditor';
 
 type ChipColors = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
 
@@ -499,7 +497,7 @@ async function getOpenApiDoc(url: string) {
     return (await axios.get<OpenAPIV3.Document>(url)).data;
 }
 
-const ApiContext = React.createContext<OpenAPIV3.Document | undefined>(undefined);
+const ApiContext = createContext<OpenAPIV3.Document | undefined>(undefined);
 
 function DocsApiPage() {
     const url = appSettingsProvider.isDeveloper

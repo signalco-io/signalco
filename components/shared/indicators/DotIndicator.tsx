@@ -1,5 +1,5 @@
-import { useTheme } from '@mui/material';
 import { Box } from '@mui/system';
+import { useTheme } from '@mui/material';
 
 export default function DotIndicator(props: { color: 'success' | 'warning' | 'error' | 'grey', content?: React.ReactElement, size?: number }) {
     const { color, content, size: requestedSize } = props;

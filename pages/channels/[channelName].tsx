@@ -1,14 +1,14 @@
-import { Button, List, ListItem, ListItemButton, ListItemText, Paper, Stack, Typography } from '@mui/material';
-import ChannelLogo from 'components/channels/ChannelLogo';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { Button, List, ListItem, ListItemButton, ListItemText, Paper, Stack, Typography } from '@mui/material';
+import { PageWithMetadata } from 'pages/_app';
+import ShareSocial from 'components/pages/ShareSocial';
+import FaqSection from 'components/pages/FaqSection';
+import CtaSection from 'components/pages/CtaSection';
+import ChannelLogo from 'components/channels/ChannelLogo';
 import { PageLayout } from '../../components/layouts/PageLayout';
 import channels from '../../components/channels/channelsData.json';
 import categories from '../../components/channels/channelCategoriesData.json';
-import ShareSocial from 'components/pages/ShareSocial';
-import { PageWithMetadata } from 'pages/_app';
-import FaqSection from 'components/pages/FaqSection';
-import CtaSection from 'components/pages/CtaSection';
-import Link from 'next/link';
 
 const channelFaq = [
     { id: 'channel', question: 'What is Channel?', answer: 'Channel is Entity that contains all information required for connected online service, application or device. Channels can execute actions directly or contain connected entities to manage.' },
