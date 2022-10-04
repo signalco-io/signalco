@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Card, CardActionArea, CardContent, Chip, Stack, Typography } from '@mui/material';
+import { Card, CardActionArea, CardContent, Stack, Typography } from '@mui/material';
+import Chip from '@mui/joy/Chip';
 import ChannelLogo from './ChannelLogo';
 
 interface ChannelGalleryItemProps {
@@ -17,8 +18,8 @@ export default function ChannelGalleryItem(props: ChannelGalleryItemProps) {
             <Link href={hrefFunc ? hrefFunc(id) : `/channels/${id}`} passHref>
                 <CardActionArea sx={{ height: '100%' }} >
                     <CardContent sx={{ height: '100%' }}>
-                        {planned && <Chip label="Soon" size="small" color="default" sx={{ position: 'absolute', right: 8, top: 8 }} />}
-                        {!planned && <Chip label="New" size="small" color="info" sx={{ position: 'absolute', right: 8, top: 8 }} />}
+                        {planned && <Chip size="sm" color="neutral" sx={{ position: 'absolute', right: 8, top: 8 }}>Soon</Chip>}
+                        {!planned && <Chip size="sm" color="info" sx={{ position: 'absolute', right: 8, top: 8 }}>New</Chip>}
                         <Stack alignItems="center" justifyContent="center" sx={{ height: '100%' }} spacing={2}>
                             <ChannelLogo channelName={id} label={label} />
                             <Typography textAlign="center" variant="h5">{label}</Typography>

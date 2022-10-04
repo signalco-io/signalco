@@ -1,5 +1,9 @@
+import { deepmerge } from '@mui/utils';
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
+import {
+  extendTheme as extendJoyTheme,
+} from '@mui/joy/styles';
 
 export type AppThemeMode = 'system' | 'manual' | 'sunriseSunset' | 'timeRange';
 
@@ -184,7 +188,29 @@ const theme = () => {
     }
   });
 
-  return createdTheme;
+  const joyTheme = extendJoyTheme({
+    components: {
+      JoyCircularProgress: {
+        defaultProps: {
+          color: 'neutral'
+        }
+      },
+      JoySwitch: {
+        defaultProps: {
+          color: 'neutral'
+        }
+      },
+      JoyChip: {
+        defaultProps: {
+          color: 'neutral'
+        }
+      }
+    }
+  });
+
+  const finalTheme = deepmerge(createdTheme, joyTheme);
+
+  return finalTheme;
 };
 
 export default theme;

@@ -37,6 +37,7 @@
         "@microsoft/signalr": "6.0.9",
         "@monaco-editor/react": "4.4.6",
         "@mui/icons-material": "5.10.6",
+        "@mui/joy": "^5.0.0-alpha.48",
         "@mui/lab": "5.0.0-alpha.102",
         "@mui/material": "5.10.8",
         "@mui/system": "5.10.8",

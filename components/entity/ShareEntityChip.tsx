@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Chip, IconButton, Slide, Stack, TextField, Tooltip } from '@mui/material';
+import { IconButton, Slide, Stack, TextField, Tooltip } from '@mui/material';
+import Chip from '@mui/joy/Chip';
 import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
 import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
@@ -91,7 +92,11 @@ function ShareEntityChip(props: IShareEntityChipProps) {
 
     return (
         <>
-            <Chip onClick={disableAction ? undefined : handleChipClick} icon={<PeopleAltSharpIcon fontSize="small" />} label={entity?.sharedWith?.length ?? 0} />
+            <Chip
+                onClick={disableAction ? undefined : handleChipClick}
+                startDecorator={<PeopleAltSharpIcon fontSize="small" />}>
+                {entity?.sharedWith?.length ?? 0}
+            </Chip>
             {(isModalOpen && entity) && <ShareEntityModal entity={entity} entityType={entityType} onClose={() => setIsModalOpen(false)} />}
         </>
     );

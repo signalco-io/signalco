@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Color from 'color';
 import createGlobe from 'cobe';
-import { useColorScheme } from '@mui/material';
+import { useColorScheme } from '@mui/joy/styles';
 import theme from '../../../src/theme';
 import useWindowWidth from '../../../src/hooks/useWindowWidth';
 import { colorToRgb } from '../../../src/helpers/StringHelpers';
