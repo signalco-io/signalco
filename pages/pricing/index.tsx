@@ -1,68 +1,9 @@
-import { useContext } from 'react';
-import { Button, Card, CardActionArea, Stack, ThemeProvider, Typography } from '@mui/material';
-import theme from 'src/theme';
-import { ThemeContext } from 'pages/_app';
-import Checkbox from 'components/shared/form/Checkbox';
+import { Stack } from '@mui/material';
+import PricingCard, { PricingOption } from 'components/pages/pricing/PricingCard';
 import PageCenterHeader from 'components/pages/PageCenterHeader';
 import FaqSection from 'components/pages/FaqSection';
 import CtaSection from 'components/pages/CtaSection';
 import { PageLayout } from 'components/layouts/PageLayout';
-import SignalcoLogotype from 'components/icons/SignalcoLogotype';
-
-interface PricingOption {
-    id: string,
-    label: string,
-    price: { eur: number },
-    duration: 'forever' | 'month' | 'year',
-    description: string,
-    features: string[],
-    href: string,
-    hrefLabel: string
-}
-
-function PricingCard(props: { option: PricingOption, variant: 'normal' | 'outlined' | 'inverted' }) {
-    const { option, variant } = props;
-    const themeContext = useContext(ThemeContext);
-    const themeVariant = variant === 'inverted' ? (themeContext.isDark ? 'light' : 'dark') : (themeContext.theme ?? 'light');
-    return (
-        <ThemeProvider theme={theme(themeVariant)}>
-            <Card
-                sx={{
-                    bgcolor: variant === 'outlined' ? 'transparent' : undefined,
-                    borderWidth: 3,
-                    borderColor: 'text.primary',
-                    borderRadius: 3
-                }}
-                variant={variant === 'normal' ? 'elevation' : 'outlined'}>
-                <CardActionArea href={option.href} sx={{ height: '100%' }} disabled={option.price.eur > 0}>
-                    <Stack sx={{ p: { xs: 4, md: 6 }, height: '100%' }} spacing={{ xs: 3, md: 4 }} justifyContent="space-between">
-                        <Stack spacing={{ xs: 3, md: 4 }}>
-                            <Typography textAlign="center" fontWeight="bold" variant="h1" component="p"><SignalcoLogotype theme={themeVariant} width={200} hideBadge /> {option.label}</Typography>
-                            <Stack direction="row" alignItems="end" spacing={1}>
-                                <Typography variant="h2" fontWeight="bold" component="p">€{option.price.eur}</Typography>
-                                <Typography>/</Typography>
-                                <Typography>{option.duration}</Typography>
-                            </Stack>
-                            <Typography>{option.description}</Typography>
-                            <Stack>
-                                {option.features.map(feature => (
-                                    <Stack key={feature}>
-                                        <Checkbox checked readonly label={feature} />
-                                    </Stack>
-                                ))}
-                            </Stack>
-                        </Stack>
-                        <Stack spacing={1}>
-                            <Button variant="contained" href={option.href} disabled={option.price.eur > 0}>{option.hrefLabel}</Button>
-                            {option.price.eur > 0 && <Typography color="textSecondary" textAlign="center">Available soon</Typography>}
-                            {option.price.eur <= 0 && <Typography color="textSecondary" textAlign="center">No credit card required</Typography>}
-                        </Stack>
-                    </Stack>
-                </CardActionArea>
-            </Card>
-        </ThemeProvider>
-    );
-}
 
 const pricingOptions: PricingOption[] = [
     {

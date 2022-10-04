@@ -8,7 +8,7 @@ export function PageLayout(props: ChildrenProps & { maxWidth?: false | Breakpoin
     return (
         <Stack spacing={4}>
             <PageNav />
-            <Box>
+            <Box sx={{ paddingTop: 10 }}>
                 <Container maxWidth={props.maxWidth}>
                     {props.children}
                 </Container>
