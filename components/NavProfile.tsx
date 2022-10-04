@@ -20,6 +20,7 @@ import {
   MenuItem,
   Stack,
   Typography,
+  useColorScheme,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -176,7 +177,6 @@ function NavProfile() {
   const navWidth = useNavWidth();
   const { t } = useLocale('App', 'Nav');
 
-  const theme = useTheme();
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -224,7 +224,7 @@ function NavProfile() {
             bottom: 0,
             left: 0,
             right: 0,
-            background: theme.palette.background.default,
+            background: 'var(--mui-palette-background-default)',
             zIndex: 999
           }}>
             <Stack>

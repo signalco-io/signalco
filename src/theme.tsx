@@ -1,4 +1,4 @@
-import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 
 export type AppThemeMode = 'manual' | 'sunriseSunset' | 'timeRange';
@@ -21,81 +21,123 @@ const componentInPageBorder = {
   }
 }
 
-// Create a theme instance.
-const theme = (theme: AppTheme) => {
-  const responsiveFont = true;
-  const isDark = theme === 'dark' || theme === 'darkDimmed';
+const theme = (_theme: AppTheme) => {
+  //   const createdTheme = createTheme({
+  //     palette: {
+  //       mode: isDark ? 'dark' : 'light',
+  //       primary: {
+  //         main: primary,
+  //         light: primaryLight,
+  //         dark: primaryDark
+  //       },
+  //       secondary: {
+  //         main: secondary,
+  //         light: primaryLight,
+  //         dark: secondaryDark
+  //       },
+  //       error: {
+  //         main: red.A400,
+  //       },
+  //       background: {
+  //         default: background,
+  //         paper: paper
+  //       },
+  //     },
+  //   });
 
-  let primaryDark;
-  let secondaryDark;
-  let background;
-  let paper;
+  //   switch (theme) {
+  //     case 'darkDimmed':
+  //       primaryDark = '#fff';
+  //       secondaryDark = '#000';
+  //       background = 'rgba(32,31,30,1)';
+  //       paper = 'rgba(50,49,48,1)';
+  //       break;
+  //   }
 
-  switch (theme) {
-    case 'dark':
-      primaryDark = '#fff';
-      secondaryDark = '#000';
-      background = '#000';
-      paper = '#121212';
-      break;
-    case 'darkDimmed':
-      primaryDark = '#fff';
-      secondaryDark = '#000';
-      background = 'rgba(32,31,30,1)';
-      paper = 'rgba(50,49,48,1)';
-      break;
-    default:
-      primaryDark = '#fff';
-      secondaryDark = '#000';
-      background = '#fff';
-      paper = '#eee';
-      break;
-  }
+  //   const primaryLight = '#000';
+  //   const secondaryLight = '#cccccc';
+  //   const primary = isDark ? primaryDark : primaryLight;
+  //   const secondary = isDark ? secondaryDark : secondaryLight;
 
-  const primaryLight = '#000';
-  const secondaryLight = '#cccccc';
-  const primary = isDark ? primaryDark : primaryLight;
-  const secondary = isDark ? secondaryDark : secondaryLight;
 
-  const createdTheme = createTheme({
-    palette: {
-      mode: isDark ? 'dark' : 'light',
-      primary: {
-        main: primary,
-        light: primaryLight,
-        dark: primaryDark
+  const createdTheme = extendTheme({
+    colorSchemes: {
+      dark: {
+        palette: {
+          primary: {
+            main: '#fff',
+            light: '#000',
+            dark: '#fff'
+          },
+          secondary: {
+            main: '#000',
+            light: '#000',
+            dark: '#000'
+          },
+          error: {
+            main: red.A400,
+          },
+          background: {
+            default: '#000',
+            paper: '#121212'
+          },
+        },
       },
-      secondary: {
-        main: secondary,
-        light: primaryLight,
-        dark: secondaryDark
-      },
-      error: {
-        main: red.A400,
-      },
-      background: {
-        default: background,
-        paper: paper
-      },
+      light: {
+        palette: {
+          primary: {
+            main: '#fff',
+            light: '#000',
+            dark: '#fff'
+          },
+          secondary: {
+            main: '#000',
+            light: '#000',
+            dark: '#000'
+          },
+          error: {
+            main: red.A400,
+          },
+          background: {
+            default: '#fff',
+            paper: '#eee'
+          },
+        },
+      }
     },
     components: {
       MuiButton: {
         styleOverrides: {
-          root: {
+          root: ({ theme }) => ({
             textTransform: 'none',
             fontWeight: 400,
             '&.MuiButton-outlined': {
-              backgroundColor: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)',
-              border: isDark ? '1px solid rgba(255,255,255,0.05)' : '1px solid rgba(0,0,0,0.04)'
+              backgroundColor: 'rgba(0,0,0,0.08)',
+              [theme.getColorSchemeSelector('dark')]: {
+                backgroundColor: 'rgba(255,255,255,0.15)'
+              },
+              border: '1px solid rgba(0,0,0,0.04)',
+              [theme.getColorSchemeSelector('dark')]: {
+                border: '1px solid rgba(255,255,255,0.05)'
+              }
             },
             '&.MuiButton-outlined:hover': {
-              backgroundColor: isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.12)',
-              border: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)'
+              backgroundColor: 'rgba(0,0,0,0.12)',
+              [theme.getColorSchemeSelector('dark')]: {
+                backgroundColor: 'rgba(255,255,255,0.2)'
+              },
+              border: '1px solid rgba(0,0,0,0.1)',
+              [theme.getColorSchemeSelector('dark')]: {
+                border: '1px solid rgba(255,255,255,0.1)'
+              }
             },
             '&.MuiButton-contained:hover': {
-              backgroundColor: isDark ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.7)'
+              backgroundColor: 'rgba(0,0,0,0.7)',
+              [theme.getColorSchemeSelector('dark')]: {
+                backgroundColor: 'rgba(255,255,255,0.8)'
+              }
             }
-          },
+          }),
         }
       },
       MuiTextField: {
@@ -147,10 +189,6 @@ const theme = (theme: AppTheme) => {
       }
     }
   });
-
-  if (responsiveFont) {
-    return responsiveFontSizes(createdTheme);
-  }
 
   return createdTheme;
 };

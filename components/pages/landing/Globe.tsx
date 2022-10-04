@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
 import Color from 'color';
 import createGlobe from 'cobe';
 import theme from '../../../src/theme';
@@ -13,9 +13,12 @@ function Globe() {
     const width = Math.min(1100, rectWidth ?? 0);
     const height = width;
     const isDark = themeContext.isDark;
+    const scheme = useMemo(() => isDark
+        ? theme(themeContext.theme).colorSchemes.dark
+        : theme(themeContext.theme).colorSchemes.light, [isDark, themeContext.theme]);
 
-    const glow = colorToRgb(theme(themeContext.theme).palette.background.default);
-    const base = Color(theme(themeContext.theme).palette.background.default).lightness(128).rgb().object();
+    const glow = colorToRgb(scheme.palette.background.default);
+    const base = Color(scheme.palette.background.default).lightness(128).rgb().object();
 
     useEffect(() => {
         let phi = 4.1;

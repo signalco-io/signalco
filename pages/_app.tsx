@@ -2,7 +2,7 @@ import React, { createContext, FunctionComponent, useMemo, useState } from 'reac
 import { SnackbarProvider } from 'notistack';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
-import { ThemeProvider } from '@mui/material/styles';
+import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import appTheme from '../src/theme';
 import '../styles/global.scss';
@@ -49,7 +49,7 @@ export default function App(props: AppProps) {
         <meta name="description" content="Automate your life" />
         <title>{`Signalco${title ? ' - ' + title : ''}`}</title>
       </Head>
-      <ThemeProvider theme={appTheme(themeContextState.theme)}>
+      <CssVarsProvider theme={appTheme(themeContextState.theme)}>
         <ThemeContext.Provider value={themeContextState}>
           <SnackbarProvider maxSnack={3}>
             <CssBaseline />
@@ -58,7 +58,7 @@ export default function App(props: AppProps) {
             </Layout>
           </SnackbarProvider>
         </ThemeContext.Provider>
-      </ThemeProvider>
+      </CssVarsProvider>
     </>
   );
 }
