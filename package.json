@@ -114,7 +114,7 @@
         "next-sitemap": "3.1.23",
         "openapi-types": "12.0.2",
         "prop-types": "15.8.1",
-        "puppeteer": "18.0.5",
+        "puppeteer": "18.1.0",
         "react-is": "18.2.0",
         "rimraf": "3.0.2",
         "sass": "1.55.0",
