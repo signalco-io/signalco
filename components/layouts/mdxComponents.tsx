@@ -183,14 +183,14 @@ const components: any = {
     code: (() => {
         function Code({ className, ...props }: { children: string | string[], className?: string | undefined }) {
             const themeContext = useUserTheme();
-            const { t } = useLocalePlaceholders();
+            const { t } = useLocaleHelpers();
             const match = /language-(\w+)/.exec(className || '')
             return match
                 ? (
                     <Stack spacing={1}>
                         <Paper sx={{ py: 1, px: 2, position: 'relative' }}>
                             <Typography sx={{ position: 'absolute', right: 12, top: 12, userSelect: 'none' }} level="body2">{match[1]?.toUpperCase()}</Typography>
-                            <SyntaxHighlighter customStyle={{ background: 'transparent', fontSize: '0.9em' }} showLineNumbers style={themeContext.isDark ? dark : light} language={match[1]} PreTag="div" {...props} />
+                            <SyntaxHighlighter customStyle={{ background: 'transparent', fontSize: '0.9rem' }} showLineNumbers style={themeContext.isDark ? dark : light} language={match[1]} PreTag="div" {...props} />
                         </Paper>
                         <Stack direction="row" justifyContent="end">
                             <IconButtonCopyToClipboard title={t('CopyCodeToClipboard')} value={props.children}>
