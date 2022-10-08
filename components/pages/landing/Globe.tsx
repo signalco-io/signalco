@@ -1,10 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import Color from 'color';
+import React, { useEffect, useMemo, useRef } from 'react';
 import createGlobe from 'cobe';
 import { useColorScheme } from '@mui/joy/styles';
-import theme from '../../../src/theme';
 import useWindowWidth from '../../../src/hooks/useWindowWidth';
-import { colorToRgb } from '../../../src/helpers/StringHelpers';
 
 function Globe() {
     const canvasRef = useRef(null);
@@ -13,10 +10,9 @@ function Globe() {
     const height = width;
     const { colorScheme, darkColorScheme } = useColorScheme();
     const isDark = colorScheme === darkColorScheme;
-    const scheme = theme().colorSchemes[colorScheme ?? 'light'];
 
-    const glow = colorToRgb(scheme.palette.background.body);
-    const base = Color(scheme.palette.background.body).lightness(128).rgb().object();
+    const glow = useMemo(() => isDark ? [0.2,0.2,0.2] : [1,1,1], [isDark]);
+    const base = useMemo(() => isDark ? [0.4,0.4,0.4] : [1,1,1], [isDark]);
 
     useEffect(() => {
         let phi = 4.1;
@@ -34,9 +30,9 @@ function Globe() {
             diffuse: 1.1,
             mapSamples: 16000,
             mapBrightness: 6,
-            baseColor: [base.r / 255, base.g / 255, base.b / 255],
+            baseColor: base,
             markerColor: [0.1, 0.8, 1],
-            glowColor: [glow.r / 255, glow.g / 255, glow.b / 255],
+            glowColor: glow,
             markers: [],
             onRender: (state: { phi: number }) => {
                 state.phi = phi;

@@ -1,4 +1,5 @@
-import { Button, Card, CardActionArea, Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/system';
+import { Button, Card, Typography } from '@mui/joy';
 import useUserTheme from 'src/hooks/useUserTheme';
 import Checkbox from 'components/shared/form/Checkbox';
 import SignalcoLogotype from 'components/icons/SignalcoLogotype';
@@ -21,29 +22,23 @@ export interface PricingCardProps {
 
 export default function PricingCard(props: PricingCardProps) {
     const { option, variant } = props;
-    const themeContext = useUserTheme();
-    const themeVariant = variant === 'inverted' ? (themeContext.isDark ? 'light' : 'dark') : (themeContext.theme ?? 'light');
 
     const disabled = option.price.eur > 0;
 
     return (
-        <div data-joy-color-scheme={themeVariant}>
+        <div>
             <Card
                 sx={{
-                    bgcolor: variant === 'outlined' ? 'transparent' : undefined,
-                    borderWidth: 3,
-                    borderColor: 'text.primary',
-                    borderRadius: 3
+                    height: '100%'
                 }}
-                variant={variant === 'normal' ? 'elevation' : 'outlined'}>
-                <CardActionArea href={disabled ? '#' : option.href} sx={{ height: '100%' }} disabled={disabled}>
+                variant={variant === 'normal' ? 'plain' : (variant === 'inverted' ? 'solid' : 'soft')}>
                     <Stack sx={{ p: { xs: 4, md: 6 }, height: '100%' }} spacing={{ xs: 3, md: 4 }} justifyContent="space-between">
                         <Stack spacing={{ xs: 3, md: 4 }}>
-                            <Typography textAlign="center" fontWeight="bold" variant="h1" component="div">
-                                <SignalcoLogotype theme={themeVariant} width={200} hideBadge /> {option.label}
+                            <Typography textAlign="center" level="h3" component="div">
+                                <SignalcoLogotype width={180} hideBadge /> {option.label}
                             </Typography>
                             <Stack direction="row" alignItems="end" spacing={1}>
-                                <Typography variant="h2" fontWeight="bold" component="p">€{option.price.eur}</Typography>
+                                <Typography level="h5" component="p">€{option.price.eur}</Typography>
                                 <Typography>/</Typography>
                                 <Typography>{option.duration}</Typography>
                             </Stack>
@@ -57,12 +52,11 @@ export default function PricingCard(props: PricingCardProps) {
                             </Stack>
                         </Stack>
                         <Stack spacing={1}>
-                            <Button disableRipple variant="contained" disabled={option.price.eur > 0}>{option.hrefLabel}</Button>
-                            {option.price.eur > 0 && <Typography color="textSecondary" textAlign="center">Available soon</Typography>}
-                            {option.price.eur <= 0 && <Typography color="textSecondary" textAlign="center">No credit card required</Typography>}
+                            <Button variant="solid" disabled={disabled} href={option.href}>{option.hrefLabel}</Button>
+                            {disabled && <Typography textColor="text.secondary" textAlign="center">Available soon</Typography>}
+                            {option.price.eur <= 0 && <Typography textColor="text.secondary" textAlign="center">No credit card required</Typography>}
                         </Stack>
                     </Stack>
-                </CardActionArea>
             </Card>
         </div>
     );

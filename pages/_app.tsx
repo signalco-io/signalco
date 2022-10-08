@@ -43,7 +43,7 @@ export default function App(props: AppProps) {
       <CssVarsProvider theme={appTheme()}>
         <ThemeChangerWrapper>
           <SnackbarProvider maxSnack={3}>
-            <CssBaseline />
+            <CssBaseline enableColorScheme />
             <Layout>
               <Component {...pageProps} />
             </Layout>

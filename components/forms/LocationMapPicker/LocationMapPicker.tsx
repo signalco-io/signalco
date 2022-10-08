@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import { Draggable, Map, Marker } from 'pigeon-maps'
-import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Skeleton, Stack, Typography } from '@mui/material';
+import { Draggable, Map, Marker } from 'pigeon-maps';
+import { Box, Stack } from '@mui/system';
+import { Accordion, AccordionDetails, AccordionSummary, Skeleton } from '@mui/material';
+import { IconButton, TextField, Typography } from '@mui/joy';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/esm/index.types';
-import { FormBuilderField } from '@enterwell/react-form-builder';
 import useUserTheme from 'src/hooks/useUserTheme';
 import useLoadAndError from 'src/hooks/useLoadAndError';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
@@ -20,9 +21,6 @@ function mapTiler(dark: boolean, x: number, y: number, z: number, dpr?: number) 
 export interface LocationMapPickerProps {
     label?: string,
     value?: [number, number],
-    error?: boolean,
-    helperText?: string,
-    onKeyPress?: React.KeyboardEventHandler<HTMLDivElement>,
     onChange: (value: [number, number], config: FieldConfig) => void
 }
 
@@ -38,7 +36,7 @@ async function latLngToAddress(latLng?: [number, number]) {
 }
 
 export default function LocationMapPicker(props: LocationMapPickerProps) {
-    const { label, value: latLng, error, helperText, onChange: setLatLng } = props;
+    const { label, value: latLng, onChange: setLatLng } = props;
 
     const [expanded, setExpanded] = useState<boolean>(false);
     const loadLatLngToAddress = useCallback(() => latLngToAddress(latLng), [latLng]);
@@ -82,17 +80,10 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
             <AccordionDetails>
                 <Stack spacing={2}>
                     <Stack direction="row" alignItems="center" justifyContent="stretch" spacing={1}>
-                        <FormBuilderField field={{
-                            value: placeName.item,
-                            label: label,
-                            type: 'stringReadonly',
-                            onChange: () => { },
-                            error: error ?? false,
-                            onBlur: () => { },
-                            validate: () => error ?? false,
-                            errorMessages: helperText ? [helperText] : undefined
-                        }} />
-                        <IconButton onClick={handleGetLocation} size="large" edge="end"><MyLocationIcon /></IconButton>
+                        <IconButton onClick={handleGetLocation} size="lg">
+                            <MyLocationIcon />
+                        </IconButton>
+                        <TextField value={placeName.item ?? ''} />
                     </Stack>
                     <Box sx={{ '&>div': { background: 'transparent !important' } }}>
                         <Map
