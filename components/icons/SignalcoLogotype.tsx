@@ -33,8 +33,8 @@ export default function SignalcoLogotype({ width, height, theme, hideBadge }: { 
                 </g>
             </svg>
             {(!hideBadge && appSettingsProvider.isDeveloper) && (
-                <Box>
-                    <ApiBadge style={{ position: 'absolute', top: fixedHeight - 24 - fixedHeight * 0.18 }} />
+                <Box sx={{ '&>*': { position: 'absolute', top: fixedHeight - 24 - fixedHeight * 0.18 } }}>
+                    <ApiBadge />
                 </Box>
             )}
         </Box>

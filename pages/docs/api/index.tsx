@@ -1,16 +1,18 @@
-import React, { useCallback, useState , useContext, createContext } from 'react';
+import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import Link from 'next/link';
 import axios, { AxiosError, Method } from 'axios';
 import { red } from '@mui/material/colors';
-import { Alert, AlertTitle, Badge, Box, Button, Chip, Divider, FormControl, Grid, InputLabel, MenuItem, Link as MuiLink, Paper, Select, Skeleton, Stack, TextField, Typography } from '@mui/material';
+import { Alert, AlertTitle, Badge, Box, Button, Divider, FormControl, Grid, InputLabel, MenuItem, Link as MuiLink, Paper, Select, Skeleton, Stack, Typography } from '@mui/material';
 import { TreeItem, TreeView } from '@mui/lab';
+import { TextField } from '@mui/joy';
 import SendIcon from '@mui/icons-material/Send';
 import SecurityIcon from '@mui/icons-material/Security';
 import OpenInNewSharpIcon from '@mui/icons-material/OpenInNewSharp';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import useLoadAndError from 'src/hooks/useLoadAndError';
+import Chip from 'components/shared/indicators/Chip';
 import { ObjectDictAny } from '../../../src/sharedTypes';
 import appSettingsProvider from '../../../src/services/AppSettingsProvider';
 import useHashParam from '../../../src/hooks/useHashParam';
@@ -19,17 +21,17 @@ import CopyToClipboardInput from '../../../components/shared/form/CopyToClipboar
 import { PageFullLayout } from '../../../components/layouts/PageFullLayout';
 import CodeEditor from '../../../components/code/CodeEditor';
 
-type ChipColors = 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
+type ChipColors = 'neutral' | 'primary' | 'danger' | 'info' | 'success' | 'warning';
 
 function OperationChip(props: { operation?: string | undefined, small?: boolean }) {
     const color = ({
         'get': 'success',
         'post': 'info',
         'put': 'warning',
-        'delete': 'error'
-    }[props.operation?.toLowerCase() ?? ''] ?? 'default') as ChipColors;
+        'delete': 'danger'
+    }[props.operation?.toLowerCase() ?? ''] ?? 'neutral') as ChipColors;
 
-    return <Chip color={color} size={props.small ? 'small' : 'medium'} sx={{ fontWeight: 'bold' }} label={props.operation?.toUpperCase()} />;
+    return <Chip color={color} size={props.small ? 'sm' : 'md'}>{props.operation?.toUpperCase()}</Chip>;
 }
 
 type ApiOperationProps = { path: string, operation: OpenAPIV3.HttpMethods, info: OpenAPIV3.OperationObject };
@@ -74,7 +76,7 @@ function NonArraySchema(props: { name: string, schema: OpenAPIV3.NonArraySchemaO
     );
 }
 function ArraySchema(props: { name: string, schema: OpenAPIV3.ArraySchemaObject }) {
-  return <Typography key={props.name} color={red[400]} fontWeight="bold" variant="overline">{'Not supported property type "array"'}</Typography>
+    return <Typography key={props.name} color={red[400]} fontWeight="bold" variant="overline">{'Not supported property type "array"'}</Typography>
 }
 
 function Schema(props: { name: string, schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | undefined }) {
@@ -119,7 +121,7 @@ function ApiOperation(props: ApiOperationProps) {
                 </Stack>
                 <Stack spacing={1} direction="row" alignItems="center">
                     {security && security.map((securityVariant, i) => <SecurityBadge key={i} security={securityVariant} />)}
-                    {tags && tags.map(tag => <Chip key={tag} label={tag} />)}
+                    {tags && tags.map(tag => <Chip key={tag}>{tag}</Chip>)}
                 </Stack>
             </Stack>
             {summary && <Typography variant="body1">{summary}</Typography>}
@@ -242,7 +244,11 @@ function Nav() {
 
     return (
         <Stack spacing={2}>
-            <Typography component="div">{info.title} <Chip label={info.version} size="small" /> {info.license && <Chip label={info.license.name} size="small" />}</Typography>
+            <Stack alignItems="center" direction="row" spacing={1}>
+                <Typography>{info.title}</Typography>
+                <Chip size="sm" variant="soft">v{info.version}</Chip>
+                {info.license && <Chip size="sm">{info.license.name}</Chip>}
+            </Stack>
             <TreeView
                 onNodeSelect={handleItemSelected}
                 defaultCollapseIcon={<ExpandMoreIcon />}
@@ -266,7 +272,7 @@ function Nav() {
 }
 
 function NavSkeleton() {
-  return <Stack>
+    return <Stack>
         <Skeleton width="80%" />
     </Stack>
 }
@@ -319,18 +325,18 @@ function Route() {
         .filter(i => typeof operation === 'undefined' || (i.operationName.toLowerCase() === operation.toLowerCase()));
 
     return (
-        <>
+        <Stack py={2} spacing={20}>
             {pathOperations.map(({ pathName, operationName, httpOperation, operation }) => (
                 <Grid container key={`path-${pathName}-${operationName}`}>
-                    <Grid item xs={6} sx={{ p: 4 }}>
+                    <Grid item xs={6} sx={{ px: 2 }}>
                         <ApiOperation path={pathName} operation={httpOperation} info={operation} />
                     </Grid>
-                    <Grid item xs={6} sx={{ borderLeft: '1px solid', borderColor: 'divider', p: 2 }}>
+                    <Grid item xs={6} sx={{ px: 2 }}>
                         <Actions path={pathName} operation={httpOperation} info={operation} />
                     </Grid>
                 </Grid>
             ))}
-        </>
+        </Stack>
     );
 }
 
@@ -359,7 +365,7 @@ function SecurityInput(props: { security: OpenAPIV3.SecurityRequirementObject })
                                 {httpSource.description && <Typography variant="caption">{httpSource.description}</Typography>}
                                 {httpSource.bearerFormat && <Typography variant="caption">{httpSource.bearerFormat}</Typography>}
                             </Stack>
-                            <TextField variant="filled" label={camelToSentenceCase(httpSource.scheme)}></TextField>
+                            <TextField size="sm" variant="soft" placeholder="Empty" label={camelToSentenceCase(httpSource.scheme)}></TextField>
                         </Stack>
                     );
                 } else if (source) {
@@ -380,7 +386,7 @@ function SecurityBadge(props: { security: OpenAPIV3.SecurityRequirementObject })
             {info.map(source => {
                 if (source && source.type === 'http') {
                     const httpSource = source as OpenAPIV3.HttpSecurityScheme;
-                    return <Chip variant="outlined" icon={<SecurityIcon fontSize="small" />} key={httpSource.scheme} label={camelToSentenceCase(httpSource.scheme)} />;
+                    return <Chip variant="outlined" startDecorator={<SecurityIcon fontSize="small" />} key={httpSource.scheme}>{camelToSentenceCase(httpSource.scheme)}</Chip>;
                 } else if (source) {
                     return <Typography key={source.type} color={red[400]} fontWeight="bold" variant="overline">{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
@@ -457,7 +463,7 @@ function Actions(props: ActionsProps) {
                         ))}
                     </Select>
                 </FormControl>}
-            <CopyToClipboardInput id="base-address" label="Base address" readOnly fullWidth sx={{ fontFamily: 'Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace', fontSize: '0.8em' }} value={selectedServerUrl} />
+            <CopyToClipboardInput id="base-address" label="Base address" fullWidth sx={{ fontFamily: 'Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace', fontSize: '0.8em' }} value={selectedServerUrl} />
             {security && (
                 <Stack spacing={1}>
                     <Typography variant="overline">Authentication</Typography>
@@ -510,7 +516,6 @@ function DocsApiPage() {
 
     return (
         <ApiContext.Provider value={api}>
-            <Divider />
             <Stack>
                 {error && (
                     <Alert severity="error" variant="filled" sx={{ borderRadius: 0 }}>

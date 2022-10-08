@@ -27,7 +27,7 @@ export default function PricingCard(props: PricingCardProps) {
     const disabled = option.price.eur > 0;
 
     return (
-        <div data-mui-color-scheme={themeVariant}>
+        <div data-joy-color-scheme={themeVariant}>
             <Card
                 sx={{
                     bgcolor: variant === 'outlined' ? 'transparent' : undefined,

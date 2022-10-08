@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { IconButton, Slide, Stack, TextField, Tooltip } from '@mui/material';
-import Chip from '@mui/joy/Chip';
 import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
 import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
 import ClearIcon from '@mui/icons-material/Clear';
 import IUser from 'src/users/IUser';
+import Chip from 'components/shared/indicators/Chip';
 import AutoTable from '../shared/table/AutoTable';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import HttpService from '../../src/services/HttpService';

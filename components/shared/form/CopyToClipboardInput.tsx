@@ -1,40 +1,32 @@
 import React from 'react';
-import { FilledInput, FilledInputProps, FormControl, InputAdornment, InputLabel } from '@mui/material';
+import { TextField, TextFieldProps } from '@mui/joy';
 import { ContentCopy as ContentCopyIcon } from '@mui/icons-material';
 import IconButtonCopyToClipboard from './IconButtonCopyToClipboard';
 
-export interface CopyToClipboardInputProps extends FilledInputProps {
-    label?: string | undefined
-};
-
-export function LabelWrapper(props: { children: React.ReactNode, variant: 'standard' | 'outlined' | 'filled', options: CopyToClipboardInputProps }) {
-    if (props.options.label) {
-        return (
-            <FormControl fullWidth variant={props.variant}>
-                <InputLabel id={`${props.options.id}-label`}>Base address</InputLabel>
-                {props.children}
-            </FormControl>
-        );
-    }
-    return <>{props.children}</>;
-}
-
-function CopyToClipboardInput(props: CopyToClipboardInputProps) {
+function CopyToClipboardInput(props: TextFieldProps) {
     if (!props.id) throw 'CopyToClipboardInput requires id';
 
+    let fontSize: 'small' | 'medium' | 'large' = 'medium';
+    switch (props.size) {
+        case 'sm':
+            fontSize = 'small';
+            break;
+        case 'lg':
+            fontSize = 'large';
+    }
+
     return (
-        <>
-            <LabelWrapper variant="filled" options={props}>
-                <FilledInput
-                    endAdornment={
-                        <InputAdornment position="end">
-                            <IconButtonCopyToClipboard edge id={props.id} title="Copy to clipboard" value={props.value} defaultValue={props.defaultValue}>
-                                <ContentCopyIcon fontSize={props.size} />
-                            </IconButtonCopyToClipboard>
-                        </InputAdornment>
-                    } {...props} />
-            </LabelWrapper>
-        </>
+        <TextField
+            endDecorator={
+                <IconButtonCopyToClipboard
+                    edge
+                    id={props.id}
+                    title="Copy to clipboard"
+                    value={props.value}
+                    defaultValue={props.defaultValue}>
+                    <ContentCopyIcon fontSize={fontSize} />
+                </IconButtonCopyToClipboard>
+            } {...props} />
     );
 }
 
