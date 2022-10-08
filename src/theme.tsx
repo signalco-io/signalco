@@ -193,7 +193,8 @@ const theme = () => {
     components: {
       JoyIconButton: {
         defaultProps: {
-          color: 'neutral'
+          color: 'neutral',
+          variant: 'plain'
         }
       },
       JoyButton: {

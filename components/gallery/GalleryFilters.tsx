@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack } from '@mui/material';
+import { Stack } from '@mui/system';
 
 export interface GalleryFiltersProps {
     filters: React.ReactElement;
