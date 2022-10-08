@@ -22,7 +22,7 @@ export interface LocationMapPickerProps {
     value?: [number, number],
     error?: boolean,
     helperText?: string,
-    onKeyPress: React.KeyboardEventHandler<HTMLDivElement>,
+    onKeyPress?: React.KeyboardEventHandler<HTMLDivElement>,
     onChange: (value: [number, number], config: FieldConfig) => void
 }
 
