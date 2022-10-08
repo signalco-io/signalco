@@ -10,7 +10,7 @@ import useUserTheme from 'src/hooks/useUserTheme';
 import IconButtonCopyToClipboard from 'components/shared/buttons/IconButtonCopyToClipboard';
 import MdxPageLayout from './MdxPageLayout';
 import { ChildrenProps } from '../../src/sharedTypes';
-import { useLocaleHelpers, useLocalePlaceholders } from '../../src/hooks/useLocale';
+import { useLocaleHelpers } from '../../src/hooks/useLocale';
 import useIsClient from '../../src/hooks/useIsClient';
 
 const headingTopSpacing = 2;
