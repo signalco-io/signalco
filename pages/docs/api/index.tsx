@@ -2,7 +2,6 @@ import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import Link from 'next/link';
 import axios, { AxiosError, Method } from 'axios';
-import { red } from '@mui/material/colors';
 import { Alert, AlertTitle, Badge, Box, Button, Divider, FormControl, Grid, InputLabel, MenuItem, Link as MuiLink, Paper, Select, Skeleton, Stack } from '@mui/material';
 import { TreeItem, TreeView } from '@mui/lab';
 import {Typography, TextField } from '@mui/joy';

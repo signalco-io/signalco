@@ -1,6 +1,5 @@
 import { Stack } from '@mui/system';
 import { Button, Card, Typography } from '@mui/joy';
-import useUserTheme from 'src/hooks/useUserTheme';
 import Checkbox from 'components/shared/form/Checkbox';
 import SignalcoLogotype from 'components/icons/SignalcoLogotype';
 

@@ -189,7 +189,7 @@ const components: any = {
                 ? (
                     <Stack spacing={1}>
                         <Paper sx={{ py: 1, px: 2, position: 'relative' }}>
-                            <Typography sx={{ position: 'absolute', right: 12, top: 12, userSelect: 'none' }} textColor="text.secondary" variant="caption">{match[1]?.toUpperCase()}</Typography>
+                            <Typography sx={{ position: 'absolute', right: 12, top: 12, userSelect: 'none' }} level="body2">{match[1]?.toUpperCase()}</Typography>
                             <SyntaxHighlighter customStyle={{ background: 'transparent', fontSize: '0.9em' }} showLineNumbers style={themeContext.isDark ? dark : light} language={match[1]} PreTag="div" {...props} />
                         </Paper>
                         <Stack direction="row" justifyContent="end">
