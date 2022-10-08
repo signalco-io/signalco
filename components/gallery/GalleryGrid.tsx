@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@mui/material';
+import { Grid } from '@mui/joy';
 
 export interface GalleryGridProps {
     items: {
@@ -16,7 +16,7 @@ export default function GalleryGrid(props: GalleryGridProps) {
         <div>
             <Grid container spacing={{ xs: 1, md: 3 }} justifyContent={compact ? 'center' : 'start'}>
                 {items.map(item => (
-                    <Grid item key={item.id}>
+                    <Grid key={item.id}>
                         <ItemComponent {...item} />
                     </Grid>
                 ))}

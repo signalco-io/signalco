@@ -1,13 +1,13 @@
 .root {
-    line { stroke: var(--mui-palette-divider); }
+    line { stroke: var(--joy-palette-divider); }
     circle { fill: #777; }
-    circle:last-of-type { fill: #537B63; }
-    path { fill: #26E773 }
-    stop { stop-color: var(--mui-palette-background-default); }
+    circle:last-of-type { fill: #45ca7a; }
+    path { fill: #ffffff }
+    stop { stop-color: var(--joy-palette-background-default); }
 
     [data-mui-color-scheme="light"] & {
         circle { fill: #999; }
-        circle:last-of-type { fill: #AEFCCD; }
-        path { fill: #1FC160 }
+        circle:last-of-type { fill: rgb(58, 141, 91); }
+        path { fill: #ffffff }
     }
 }

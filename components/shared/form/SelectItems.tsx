@@ -1,5 +1,6 @@
 import React, { useId } from 'react';
-import { Box, Checkbox, Chip, FormControl, InputLabel, ListItemText, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { Box, Checkbox, FormControl, InputLabel, ListItemText, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import Chip from '../indicators/Chip';
 
 export interface ISelectItemsProps {
     multiple?: boolean,
@@ -46,7 +47,9 @@ function SelectItems(props: ISelectItemsProps) {
                         return (
                             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                                 {selected.map((value) => (
-                                    <Chip key={value} label={items.find(i => i.value === value)?.label ?? value} sx={{ m: '2px' }} />
+                                    <Box key={value} sx={{ m: '2px' }}>
+                                        <Chip>{items.find(i => i.value === value)?.label ?? value}</Chip>
+                                    </Box>
                                 ))}
                             </Box>
                         );

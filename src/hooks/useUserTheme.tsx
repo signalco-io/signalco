@@ -1,4 +1,4 @@
-import { useColorScheme } from '@mui/material';
+import { useColorScheme } from '@mui/joy/styles';
 
 export default function useUserTheme() {
     const { colorScheme } = useColorScheme();

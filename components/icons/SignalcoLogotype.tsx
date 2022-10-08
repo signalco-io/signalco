@@ -16,7 +16,7 @@ export default function SignalcoLogotype({ width, height, theme, hideBadge }: { 
                 width={fixedWidth} height={fixedHeight} viewBox="0 0 2810.000000 666.000000"
                 preserveAspectRatio="xMidYMid meet">
                 <g transform="translate(0.000000,666.000000) scale(0.100000,-0.100000)"
-                    style={{ fill: theme === 'dark' ? '#ffffff' : (theme === 'light' ? '#000000' : 'var(--mui-palette-text-primary)') }}
+                    style={{ fill: theme === 'dark' ? '#ffffff' : (theme === 'light' ? '#000000' : 'var(--joy-palette-text-primary)') }}
                     stroke="none">
                     <path d="M4427 6389 c-94 -22 -182 -96 -225 -187 -36 -75 -38 -193 -5 -263 80 -175 285 -253 459 -174 73 33 129 87 166 162 27 55 32 76 32 141 1 65 -4 86 -27 134 -72 146 -240 225 -400 187z" />
                     <path d="M18900 3955 l0 -2445 235 0 235 0 0 2445 0 2445 -235 0 -235 0 0 -2445z" />
@@ -33,8 +33,8 @@ export default function SignalcoLogotype({ width, height, theme, hideBadge }: { 
                 </g>
             </svg>
             {(!hideBadge && appSettingsProvider.isDeveloper) && (
-                <Box>
-                    <ApiBadge style={{ position: 'absolute', top: fixedHeight - 24 - fixedHeight * 0.18 }} />
+                <Box sx={{ '&>*': { position: 'absolute', top: fixedHeight - 24 - fixedHeight * 0.18 } }}>
+                    <ApiBadge />
                 </Box>
             )}
         </Box>

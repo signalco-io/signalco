@@ -1,11 +1,12 @@
 import React from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/system';
+import { Typography } from '@mui/joy';
 
-export default function PageCenterHeader(props: { header: string; subHeader?: string; }) {
-    const { header, subHeader } = props;
+export default function PageCenterHeader(props: { header: string; subHeader?: string; secondary?: boolean }) {
+    const { header, subHeader, secondary } = props;
     return (
         <Stack alignItems="center" spacing={2} sx={{ py: { xs: 2, md: 4 } }}>
-            <Typography variant="h1">{header}</Typography>
+            <Typography level={secondary ? 'h5' : 'h4'}>{header}</Typography>
             {subHeader && <Typography>{subHeader}</Typography>}
         </Stack>
     );

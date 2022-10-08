@@ -1,15 +1,16 @@
-import { a11yDark as dark , a11yLight as light } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import { a11yDark as dark, a11yLight as light } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import React, { memo, useId } from 'react';
+import React, { memo } from 'react';
 import NextLink from 'next/link';
-import { Checkbox, Divider, Link, Paper, Stack, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
+import { Checkbox, Divider, Link, Paper, Stack, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { Typography } from '@mui/joy';
 import LinkIcon from '@mui/icons-material/Link';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import useUserTheme from 'src/hooks/useUserTheme';
+import IconButtonCopyToClipboard from 'components/shared/buttons/IconButtonCopyToClipboard';
 import MdxPageLayout from './MdxPageLayout';
-import IconButtonCopyToClipboard from '../shared/form/IconButtonCopyToClipboard';
 import { ChildrenProps } from '../../src/sharedTypes';
-import { useLocaleHelpers, useLocalePlaceholders } from '../../src/hooks/useLocale';
+import { useLocaleHelpers } from '../../src/hooks/useLocale';
 import useIsClient from '../../src/hooks/useIsClient';
 
 const headingTopSpacing = 2;
@@ -20,10 +21,17 @@ function LinkedHeader(props: ChildrenProps & { id: string | undefined }) {
     const isClient = useIsClient();
 
     return (
-        <Stack spacing={1} direction="row" alignItems="center" sx={{ '&>.mdxHeaderLinkButton': { visibility: 'hidden' }, '&:hover': { '&>.mdxHeaderLinkButton': { visibility: 'visible' } } }}>
+        <Stack
+            spacing={1}
+            direction="row"
+            alignItems="center"
+            sx={{
+                '&>.mdxHeaderLinkButton': { visibility: 'hidden' },
+                '&:hover': { '&>.mdxHeaderLinkButton': { visibility: 'visible' } }
+            }}>
             {props.children}
             {(props.id && isClient) &&
-                <IconButtonCopyToClipboard id={props.id} title={t('CopyLinkToClipboard')} value={`${window.location.origin}${window.location.pathname}#${props.id}`} className="mdxHeaderLinkButton">
+                <IconButtonCopyToClipboard title={t('CopyLinkToClipboard')} value={`${window.location.origin}${window.location.pathname}#${props.id}`} className="mdxHeaderLinkButton">
                     <LinkIcon />
                 </IconButtonCopyToClipboard>
             }
@@ -34,16 +42,16 @@ function LinkedHeader(props: ChildrenProps & { id: string | undefined }) {
 const components: any = {
     a: (() => {
         function A(props: any) {
-  return <NextLink href={props.href} passHref>
+            return <NextLink href={props.href} passHref>
                 <Link >{props.children}</Link>
             </NextLink>
-}
+        }
         return memo(A);
     })(),
     p: (() => {
         function P(props: any) {
-  return <Typography sx={{ py: 1 }} gutterBottom color="textSecondary" {...props} />
-}
+            return <Typography sx={{ py: 1 }} gutterBottom textColor="text.secondary" {...props} />
+        }
         return memo(P);
     })(),
     h1: (() => {
@@ -51,7 +59,7 @@ const components: any = {
             const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
             return (
                 <LinkedHeader id={id}>
-                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h1" id={id} />
+                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} level="h3" id={id} />
                 </LinkedHeader>
             );
         }
@@ -62,7 +70,7 @@ const components: any = {
             const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
             return (
                 <LinkedHeader id={id}>
-                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h2" id={id} />
+                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} level="h4" id={id} />
                 </LinkedHeader>
             );
         }
@@ -73,7 +81,7 @@ const components: any = {
             const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
             return (
                 <LinkedHeader id={id}>
-                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h3" id={id} />
+                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} level="h5" id={id} />
                 </LinkedHeader>
             );
         }
@@ -84,7 +92,7 @@ const components: any = {
             const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
             return (
                 <LinkedHeader id={id}>
-                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h4" id={id} />
+                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} level="h6" id={id} />
                 </LinkedHeader>
             );
         }
@@ -95,7 +103,7 @@ const components: any = {
             const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
             return (
                 <LinkedHeader id={id}>
-                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h5" id={id} />
+                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} level="h6" id={id} />
                 </LinkedHeader>
             );
         }
@@ -106,7 +114,7 @@ const components: any = {
             const id = typeof props.children === 'string' ? (props.children as string).toLowerCase().replace(' ', '-') : undefined;
             return (
                 <LinkedHeader id={id}>
-                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} variant="h6" id={id} />
+                    <Typography sx={{ pt: headingTopSpacing, pb: headingBottomSpacing }} {...props} level="h6" id={id} />
                 </LinkedHeader>
             );
         }
@@ -114,79 +122,78 @@ const components: any = {
     })(),
     blockquote: (() => {
         function Blockquote(props: any) {
-  return <Paper style={{ borderLeft: '4px solid grey', padding: 8 }} {...props} />
-}
+            return <Paper style={{ borderLeft: '4px solid grey', padding: 8 }} {...props} />
+        }
         return memo(Blockquote);
     })(),
     ul: (() => {
         function Ul(props: any) {
-  return <Typography {...props} component="ul" color="textSecondary" />
-}
+            return <ul {...props} />
+        }
         return memo(Ul);
     })(),
     ol: (() => {
         function Ol(props: any) {
-  return <Typography {...props} component="ol" color="textSecondary" />
-}
+            return <ol {...props} />
+        }
         return memo(Ol);
     })(),
     li: (() => {
         function Li(props: any) {
-  return <Typography {...props} component="li" color="textSecondary" />
-}
+            return <Typography {...props} component="li" textColor="text.secondary" />
+        }
         return memo(Li);
     })(),
     table: (() => {
         function Table(props: any) {
-  return <Table {...props} />
-}
+            return <Table {...props} />
+        }
         return memo(Table);
     })(),
     tr: (() => {
         function Tr(props: any) {
-  return <TableRow {...props} />
-}
+            return <TableRow {...props} />
+        }
         return memo(Tr);
     })(),
     td: (() => {
         function Td({ align, ...props }: { align?: 'inherit' | 'left' | 'center' | 'right' | 'justify' }) {
-  return <TableCell align={align || undefined} {...props} />
-}
+            return <TableCell align={align || undefined} {...props} />
+        }
         return memo(Td);
     })(),
     tbody: (() => {
         function TBody(props: any) {
-  return <TableBody {...props} />
-}
+            return <TableBody {...props} />
+        }
         return memo(TBody);
     })(),
     th: (() => {
         function Th({ align, ...props }: { align?: 'inherit' | 'left' | 'center' | 'right' | 'justify' }) {
-  return <TableCell align={align || undefined} {...props} />
-}
+            return <TableCell align={align || undefined} {...props} />
+        }
         return memo(Th);
     })(),
     thead: (() => {
         function THead(props: any) {
-  return <TableHead {...props} />
-}
+            return <TableHead {...props} />
+        }
         return memo(THead);
     })(),
     code: (() => {
         function Code({ className, ...props }: { children: string | string[], className?: string | undefined }) {
             const themeContext = useUserTheme();
-            const id = useId();
-            const { t } = useLocalePlaceholders();
+            const { t } = useLocaleHelpers();
             const match = /language-(\w+)/.exec(className || '')
             return match
                 ? (
                     <Stack spacing={1}>
                         <Paper sx={{ py: 1, px: 2, position: 'relative' }}>
-                            <Typography sx={{ position: 'absolute', right: 12, top: 12, userSelect: 'none' }} color="textSecondary" variant="caption">{match[1]?.toUpperCase()}</Typography>
-                            <SyntaxHighlighter customStyle={{ background: 'transparent', fontSize: '0.9em' }} showLineNumbers style={themeContext.isDark ? dark : light} language={match[1]} PreTag="div" {...props} />
+                            <Typography sx={{ position: 'absolute', right: 12, top: 12, userSelect: 'none' }} level="body2">{match[1]?.toUpperCase()}</Typography>
+                            <SyntaxHighlighter customStyle={{ background: 'transparent', fontSize: '0.9rem' }} showLineNumbers style={themeContext.isDark ? dark : light} language={match[1]} PreTag="div" {...props} />
                         </Paper>
                         <Stack direction="row" justifyContent="end">
-                            <IconButtonCopyToClipboard id={id} title={t('CopyCodeToClipboard')} value={props.children}>
+                            <IconButtonCopyToClipboard title={t('CopyCodeToClipboard')} value={props.children}>
                                 <ContentCopyIcon fontSize="small" />
                             </IconButtonCopyToClipboard>
                         </Stack>
@@ -208,8 +215,8 @@ const components: any = {
     })(),
     wrapper: (() => {
         function Wrapper(props: any) {
-  return <MdxPageLayout maxWidth="md" {...props} />
-}
+            return <MdxPageLayout maxWidth="md" {...props} />
+        }
         return memo(Wrapper);
     })(),
 };

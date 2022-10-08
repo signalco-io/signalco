@@ -1,10 +1,14 @@
 import { useState } from 'react';
-import { Chip, IconButton, Slide, Stack, TextField, Tooltip } from '@mui/material';
+import { Stack } from '@mui/system';
+import { Tooltip } from '@mui/material';
+import { IconButton, TextField } from '@mui/joy';
 import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
 import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
 import ClearIcon from '@mui/icons-material/Clear';
 import IUser from 'src/users/IUser';
+import Chip from 'components/shared/indicators/Chip';
+import GentleSlide from 'components/shared/animations/GentleSlide';
 import AutoTable from '../shared/table/AutoTable';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import HttpService from '../../src/services/HttpService';
@@ -55,23 +59,26 @@ function ShareEntityModal(props: IShareEntityModalProps) {
             title={t('ShareWith')}
             titleActions={(
                 <Tooltip title={t('Share')}>
-                    <IconButton onClick={handleShareWithUser} size="large">
+                    <IconButton onClick={handleShareWithUser} variant="plain">
                         <ShareIcon />
                     </IconButton>
                 </Tooltip>
             )}
             onClose={onClose}
-            noPadding
         >
-            <Slide in={isShareWithNewOpen} direction="down" mountOnEnter unmountOnExit>
-                <Stack direction="row" spacing={2} alignItems="center" sx={{ pb: 1, px: 2 }}>
-                    <TextField label={t('EmailAddress')} type="email" fullWidth onChange={(e) => setShareWithNewEmail(e.target.value)} />
+            <GentleSlide appear={isShareWithNewOpen} direction="down" collapsedWhenHidden duration={200}>
+                <Stack direction="row" spacing={2} alignItems="center" justifyContent="end">
+                    <TextField
+                        placeholder={t('EmailAddress')}
+                        type="email"
+                        sx={{ maxWidth: '270px' }}
+                        onChange={(e) => setShareWithNewEmail(e.target.value)} />
                     <Stack direction="row">
-                        <IconButton onClick={handleSubmitShareWithNew} size="large" title={t('SendInvitation')}><SendIcon /></IconButton>
-                        <IconButton onClick={handleCancelShareWithNew} size="large" title={t('Cancel')}><ClearIcon /></IconButton>
+                        <IconButton onClick={handleSubmitShareWithNew} color="success" title={t('SendInvitation')}><SendIcon /></IconButton>
+                        <IconButton onClick={handleCancelShareWithNew} title={t('Cancel')}><ClearIcon /></IconButton>
                     </Stack>
                 </Stack>
-            </Slide>
+            </GentleSlide>
             <AutoTable error={''} isLoading={false} items={entity.sharedWith?.map(u => ({ id: u.id, name: u.fullName ?? u.email, email: u.email }))} />
         </ConfigurationDialog>
     );
@@ -91,7 +98,11 @@ function ShareEntityChip(props: IShareEntityChipProps) {
 
     return (
         <>
-            <Chip onClick={disableAction ? undefined : handleChipClick} icon={<PeopleAltSharpIcon fontSize="small" />} label={entity?.sharedWith?.length ?? 0} />
+            <Chip
+                onClick={disableAction ? undefined : handleChipClick}
+                startDecorator={<PeopleAltSharpIcon fontSize="small" />}>
+                {entity?.sharedWith?.length ?? 0}
+            </Chip>
             {(isModalOpen && entity) && <ShareEntityModal entity={entity} entityType={entityType} onClose={() => setIsModalOpen(false)} />}
         </>
     );

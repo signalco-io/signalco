@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import { Stack } from '@mui/system';
+import { Button, TextField, Typography } from '@mui/joy';
 import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
 import useDeleteDashboard from 'src/hooks/dashboards/useDeleteDashboard';
 import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
@@ -56,9 +57,12 @@ function DashboardSettings(props: IDashboardSettingsProps) {
                 </>
             )}>
             <Stack spacing={4} sx={{ py: 1 }}>
-                <TextField label={t('DashboardSettingName')} value={name} onChange={(e) => setName(e.target.value ?? '')} />
-                <Stack spacing={2}>
-                    <Typography sx={{ opacity: 0.6 }} variant="subtitle2">{t('Advanced')}</Typography>
+                <TextField
+                    label={t('DashboardSettingName')}
+                    value={name}
+                    onChange={(e) => setName(e.target.value ?? '')} />
+                <Stack spacing={1}>
+                    <Typography level="body2">{t('Advanced')}</Typography>
                     <ConfirmDeleteButton
                         buttonLabel={t('DeleteButtonLabel')}
                         title={t('DeleteTitle')}

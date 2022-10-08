@@ -18,6 +18,8 @@ module.exports = {
     staticDirs: ['../public'],
     features: {
         emotionAlias: false,
-        storyStoreV7: true
+        storyStoreV7: true,
+        lazyCompilation: true,
+        fsCache: true
     }
 }

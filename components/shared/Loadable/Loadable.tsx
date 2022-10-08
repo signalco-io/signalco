@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { Alert, Box, CircularProgress, LinearProgress, Skeleton } from '@mui/material';
+import { Alert, Box, LinearProgress, Skeleton } from '@mui/material';
+import CircularProgress from '@mui/joy/CircularProgress';
 import LoadableProps from './LoadableProps';
 
 export default function Loadable(props: LoadableProps) {

@@ -1,26 +1,28 @@
 import { withScreenshot } from 'storycap';
 import React from 'react';
-import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
+import { StyledEngineProvider } from '@mui/material/styles';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { CssBaseline } from '@mui/material';
-import theme from '../src/theme';
+import { CssVarsProvider } from '@mui/joy/styles';
+import appTheme from '../src/theme';
 import '../styles/global.scss';
 import { themes } from '@storybook/theming';
-import { DateTimeProvider } from '../src/services/DateTimeProvider';
-import { ThemeContext } from '../pages/_app';
+import DateTimeProvider from '../src/services/DateTimeProvider';
 
 DateTimeProvider.staticDateTime = new Date(2022, 5, 1, 10, 9, 36);
+const queryClient = new QueryClient();
 
 // Integrating with the MUI by defining a global decorator
 export const decorators = [
     withScreenshot,
     Story => (
         <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={theme('dark')}>
-                <ThemeContext.Provider value={{ isDark: true, theme: 'dark' }}>
+            <CssVarsProvider theme={appTheme()}>
+                <QueryClientProvider client={queryClient}>
                     <CssBaseline />
                     <Story />
-                </ThemeContext.Provider>
-            </ThemeProvider>
+                </QueryClientProvider>
+            </CssVarsProvider>
         </StyledEngineProvider>
     )
 ];

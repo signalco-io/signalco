@@ -1,4 +1,6 @@
-import { Accordion, AccordionDetails, AccordionSummary, Container, Stack, Typography } from '@mui/material';
+import { Stack, Container } from '@mui/system';
+import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import { Typography } from '@mui/joy';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PageCenterHeader from './PageCenterHeader';
 
@@ -13,7 +15,7 @@ export default function FaqSection(props: { faq: FaqItem[] }) {
 
     return (
         <Stack spacing={4}>
-            <PageCenterHeader header={'Frequently asked questions'} />
+            <PageCenterHeader header={'Frequently asked questions'} secondary />
             <Container maxWidth="md" sx={{ alignSelf: 'center' }}>
                 <Stack spacing={4} justifyItems="center" alignItems="center">
                     <section>

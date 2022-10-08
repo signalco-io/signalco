@@ -1,6 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
-import { Container, FormControl, FormHelperText, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
+import { Container, FormControl, FormHelperText, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, Stack } from '@mui/material';
+import { Typography } from '@mui/joy';
 import GoogleIcon from '@mui/icons-material/Google';
 import { isNonEmptyString, isNotNull, isTrue } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
@@ -27,7 +28,7 @@ function ConnectedService() {
                     <GoogleIcon fontSize="large" />
                     <Stack>
                         <Typography>Google</Typography>
-                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>{CurrentUserProvider.getCurrentUser()?.name} ({CurrentUserProvider.getCurrentUser()?.email})</Typography>
+                        <Typography level="body2">{CurrentUserProvider.getCurrentUser()?.name} ({CurrentUserProvider.getCurrentUser()?.email})</Typography>
                     </Stack>
                 </Stack>
                 <Typography sx={{ color: 'text.secondary' }}>{t('Connected')}</Typography>
@@ -45,7 +46,7 @@ function SettingsItem(props: { children: ReactNode, label?: string | undefined }
 
 function SettingsSection(props: { children: ReactNode, header: string }) {
     return <Stack spacing={2}>
-        <Typography variant="h2" sx={{ pt: { xs: 0, sm: 2 } }}>{props.header}</Typography>
+        <Typography level="h5" sx={{ pt: { xs: 0, sm: 2 } }}>{props.header}</Typography>
         <Stack spacing={2}>
             {props.children}
         </Stack>

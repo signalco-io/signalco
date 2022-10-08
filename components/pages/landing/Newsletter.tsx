@@ -1,6 +1,7 @@
 import { ChangeEvent, SyntheticEvent, createRef, useRef, useState } from 'react';
-import { Alert, Collapse, Fade, FilledInput, Slide, Stack, Typography } from '@mui/material';
+import { Alert, Collapse, Fade, Slide, Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { TextField, Typography } from '@mui/joy';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import HttpService from '../../../src/services/HttpService';
 
@@ -74,22 +75,22 @@ function Newsletter() {
                 onVerify={onHCaptchaChange}
                 onClose={() => onHCaptchaChange(undefined)} />
             <Stack spacing={4}>
-                <Typography variant="h2">{'What\'s new?'}</Typography>
+                <Typography level="h4">{'What\'s new?'}</Typography>
                 <Stack spacing={1} ref={errorContainerRef}>
-                    <Typography sx={{ opacity: 0.9 }}>{'We\'ll get back to you with awesome news and updates.'}</Typography>
+                    <Typography>{'We\'ll get back to you with awesome news and updates.'}</Typography>
                     <Collapse unmountOnExit in={!showSuccess}>
                         <Stack direction="row" alignItems="stretch">
-                            <FilledInput
+                            <TextField
                                 disabled={isLoading}
                                 type="email"
+                                size="lg"
                                 placeholder="you@email.com"
-                                hiddenLabel
                                 fullWidth
                                 required
-                                sx={{ borderRadius: '8px 0 0 8px', maxWidth: '400px' }}
+                                sx={{ '.JoyInput-root': { '--Input-radius': '8px 0 0 8px' }, maxWidth: '400px' }}
                                 value={email}
                                 onChange={handleOnEmail} />
-                            <LoadingButton loading={isLoading} type="submit" variant="outlined" size="large" sx={{ borderRadius: '0 8px 8px 0' }} disableElevation>Subscribe</LoadingButton>
+                            <LoadingButton loading={isLoading} type="submit" variant="contained" size="large" sx={{ borderRadius: '0 8px 8px 0' }} disableElevation>Subscribe</LoadingButton>
                         </Stack>
                     </Collapse>
                     <Slide unmountOnExit in={error != null} direction="down" container={errorContainerRef.current}>

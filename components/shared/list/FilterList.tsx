@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Checkbox, List, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from '@mui/material';
+import { Box, Checkbox, List, ListItemButton, ListItemIcon, ListItemText, Stack } from '@mui/material';
+import { Typography, Button } from '@mui/joy';
 import { ArrowDownward as ArrowDownwardIcon } from '@mui/icons-material';
 import SelectItems from '../form/SelectItems';
 
@@ -82,8 +83,8 @@ export default function FilterList(props: FilterListProps) {
                 <>
                     <List subheader={(
                         <Stack direction="row" spacing={1}>
-                            <Typography gutterBottom variant="h4">{header}</Typography>
-                            {(!isShowMore && shouldTruncate) && <Typography color="textSecondary">({items.length - truncate} more)</Typography>}
+                            <Typography gutterBottom level="h5">{header}</Typography>
+                            {(!isShowMore && shouldTruncate) && <Typography level="body2">({items.length - truncate} more)</Typography>}
                         </Stack>
                     )}>
                         {items.slice(0, isShowMore ? items.length : truncate).map(item => (
@@ -108,7 +109,7 @@ export default function FilterList(props: FilterListProps) {
                     </List>
                     {(!isShowMore && shouldTruncate) && (
                         <Box>
-                            <Button startIcon={<ArrowDownwardIcon />} onClick={handleToggleShowMore}>Show all</Button>
+                            <Button startDecorator={<ArrowDownwardIcon />} onClick={handleToggleShowMore}>Show all</Button>
                         </Box>
                     )}
                 </>
