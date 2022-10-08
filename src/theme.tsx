@@ -7,21 +7,21 @@ import {
 
 export type AppThemeMode = 'system' | 'manual' | 'sunriseSunset' | 'timeRange';
 
-const componentsTopLevelBorder = {
-  styleOverrides: {
-    root: {
-      borderRadius: '8px'
-    }
-  }
-}
+// const componentsTopLevelBorder = {
+//   styleOverrides: {
+//     root: {
+//       borderRadius: '8px'
+//     }
+//   }
+// }
 
-const componentInPageBorder = {
-  styleOverrides: {
-    root: {
-      borderRadius: '4px'
-    }
-  }
-}
+// const componentInPageBorder = {
+//   styleOverrides: {
+//     root: {
+//       borderRadius: '4px'
+//     }
+//   }
+// }
 
 const theme = () => {
   //   const createdTheme = createTheme({
@@ -191,9 +191,21 @@ const theme = () => {
 
   const joyTheme = extendJoyTheme({
     components: {
+      JoyIconButton: {
+        defaultProps: {
+          color: 'neutral'
+        }
+      },
+      JoyButton: {
+        defaultProps: {
+          variant: 'soft',
+          color: 'neutral'
+        }
+      },
       JoyTextField: {
         defaultProps: {
-          variant: 'soft'
+          variant: 'soft',
+          color: 'neutral'
         }
       },
       JoyCircularProgress: {

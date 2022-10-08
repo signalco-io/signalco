@@ -1,11 +1,9 @@
 import React from 'react';
 import { TextField, TextFieldProps } from '@mui/joy';
 import { ContentCopy as ContentCopyIcon } from '@mui/icons-material';
-import IconButtonCopyToClipboard from './IconButtonCopyToClipboard';
+import IconButtonCopyToClipboard from '../buttons/IconButtonCopyToClipboard';
 
 function CopyToClipboardInput(props: TextFieldProps) {
-    if (!props.id) throw 'CopyToClipboardInput requires id';
-
     let fontSize: 'small' | 'medium' | 'large' = 'medium';
     switch (props.size) {
         case 'sm':
@@ -19,8 +17,6 @@ function CopyToClipboardInput(props: TextFieldProps) {
         <TextField
             endDecorator={
                 <IconButtonCopyToClipboard
-                    edge
-                    id={props.id}
                     title="Copy to clipboard"
                     value={props.value}
                     defaultValue={props.defaultValue}>

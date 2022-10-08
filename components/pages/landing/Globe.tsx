@@ -15,8 +15,8 @@ function Globe() {
     const isDark = colorScheme === darkColorScheme;
     const scheme = theme().colorSchemes[colorScheme ?? 'light'];
 
-    const glow = colorToRgb(scheme.palette.background.default);
-    const base = Color(scheme.palette.background.default).lightness(128).rgb().object();
+    const glow = colorToRgb(scheme.palette.background.body);
+    const base = Color(scheme.palette.background.body).lightness(128).rgb().object();
 
     useEffect(() => {
         let phi = 4.1;

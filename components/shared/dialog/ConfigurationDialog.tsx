@@ -1,45 +1,45 @@
 import React from 'react';
-import { Breakpoint, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, Typography } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import { Breakpoint, Stack } from '@mui/system';
+import { Modal, ModalClose, ModalDialog, Typography } from '@mui/joy';
+import useIsMobile from 'src/hooks/useIsMobile';
 
 export interface IConfigurationDialogProps {
     isOpen: boolean,
     title: React.ReactNode,
     titleActions?: React.ReactNode,
     onClose: () => void,
-    noPadding?: boolean,
     children: React.ReactNode,
     maxWidth?: false | undefined | Breakpoint,
     actions?: React.ReactNode
 }
 
 function ConfigurationDialog(props: IConfigurationDialogProps) {
-    const { children, title, titleActions, isOpen, onClose, maxWidth = 'sm', noPadding, actions } = props;
-
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 760;
+    const { children, title, titleActions, isOpen, onClose, maxWidth = 'sm', actions } = props;
+    const isMobile = useIsMobile();
 
     return (
-        <Dialog open={isOpen} maxWidth={maxWidth} fullWidth fullScreen={isMobile} scroll="paper" onClose={onClose}>
-            <DialogTitle>
+        <Modal open={isOpen} onClose={onClose}>
+            <ModalDialog layout={isMobile ? 'fullscreen' : 'center'} sx={{
+                width: '100%',
+                maxWidth: maxWidth ? maxWidth : undefined,
+            }}>
+                <ModalClose />
+                <Stack spacing={1}>
                 <Stack direction="row" justifyContent="space-between" alignItems="center">
-                    <Typography variant="h2">{title}</Typography>
-                    <Stack direction="row" spacing={1}>
+                    <Typography level="h5">{title}</Typography>
+                    <Stack direction="row" spacing={1} sx={{mt: -1.5, mr: 4}}>
                         {titleActions}
-                        <IconButton size="large" title="Close" onClick={onClose}>
-                            <CloseIcon />
-                        </IconButton>
                     </Stack>
                 </Stack>
-            </DialogTitle>
-            <DialogContent sx={{ padding: noPadding ? 0 : 3 }}>
                 {children}
-            </DialogContent>
-            {actions && (
-                <DialogActions>
-                    {actions}
-                </DialogActions>
-            )}
-        </Dialog>
+                {actions && (
+                    <Stack direction="row" spacing={1} justifyContent="end">
+                        {actions}
+                    </Stack>
+                )}
+                </Stack>
+            </ModalDialog>
+        </Modal>
     );
 }
 

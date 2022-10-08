@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { Breakpoint } from '@mui/system';
-import { Button } from '@mui/material';
+import { Button } from '@mui/joy';
 import ConfirmDeleteDialog from './ConfirmDeleteDialog';
 
-export interface IConfirmDeleteButtonDialogProps {
+export interface ConfirmDeleteButtonDialogProps {
     title: React.ReactNode,
     expectedConfirmText: string,
     onConfirm: () => void,
     maxWidth?: false | undefined | Breakpoint,
 }
 
-export interface IConfirmDeleteButtonProps extends IConfirmDeleteButtonDialogProps {
+export interface ConfirmDeleteButtonProps extends ConfirmDeleteButtonDialogProps {
     buttonLabel: string
 }
 
-function ConfirmDeleteButton(props: IConfirmDeleteButtonProps) {
+function ConfirmDeleteButton(props: ConfirmDeleteButtonProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleConfirm = () => {
@@ -24,7 +24,7 @@ function ConfirmDeleteButton(props: IConfirmDeleteButtonProps) {
 
     return (
         <>
-            <Button variant="outlined" color="error" onClick={() => setIsOpen(true)}>{props.buttonLabel}</Button>
+            <Button variant="outlined" color="danger" onClick={() => setIsOpen(true)}>{props.buttonLabel}</Button>
             <ConfirmDeleteDialog isOpen={isOpen} onClose={() => setIsOpen(false)} {...props} onConfirm={handleConfirm} />
         </>
     )

@@ -1,13 +1,13 @@
 import { a11yDark as dark , a11yLight as light } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import React, { memo, useId } from 'react';
+import React, { memo } from 'react';
 import NextLink from 'next/link';
 import { Checkbox, Divider, Link, Paper, Stack, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import useUserTheme from 'src/hooks/useUserTheme';
+import IconButtonCopyToClipboard from 'components/shared/buttons/IconButtonCopyToClipboard';
 import MdxPageLayout from './MdxPageLayout';
-import IconButtonCopyToClipboard from '../shared/form/IconButtonCopyToClipboard';
 import { ChildrenProps } from '../../src/sharedTypes';
 import { useLocaleHelpers, useLocalePlaceholders } from '../../src/hooks/useLocale';
 import useIsClient from '../../src/hooks/useIsClient';
@@ -23,7 +23,7 @@ function LinkedHeader(props: ChildrenProps & { id: string | undefined }) {
         <Stack spacing={1} direction="row" alignItems="center" sx={{ '&>.mdxHeaderLinkButton': { visibility: 'hidden' }, '&:hover': { '&>.mdxHeaderLinkButton': { visibility: 'visible' } } }}>
             {props.children}
             {(props.id && isClient) &&
-                <IconButtonCopyToClipboard id={props.id} title={t('CopyLinkToClipboard')} value={`${window.location.origin}${window.location.pathname}#${props.id}`} className="mdxHeaderLinkButton">
+                <IconButtonCopyToClipboard title={t('CopyLinkToClipboard')} value={`${window.location.origin}${window.location.pathname}#${props.id}`} className="mdxHeaderLinkButton">
                     <LinkIcon />
                 </IconButtonCopyToClipboard>
             }
@@ -175,7 +175,6 @@ const components: any = {
     code: (() => {
         function Code({ className, ...props }: { children: string | string[], className?: string | undefined }) {
             const themeContext = useUserTheme();
-            const id = useId();
             const { t } = useLocalePlaceholders();
             const match = /language-(\w+)/.exec(className || '')
             return match
@@ -186,7 +185,7 @@ const components: any = {
                             <SyntaxHighlighter customStyle={{ background: 'transparent', fontSize: '0.9em' }} showLineNumbers style={themeContext.isDark ? dark : light} language={match[1]} PreTag="div" {...props} />
                         </Paper>
                         <Stack direction="row" justifyContent="end">
-                            <IconButtonCopyToClipboard id={id} title={t('CopyCodeToClipboard')} value={props.children}>
+                            <IconButtonCopyToClipboard title={t('CopyCodeToClipboard')} value={props.children}>
                                 <ContentCopyIcon fontSize="small" />
                             </IconButtonCopyToClipboard>
                         </Stack>
