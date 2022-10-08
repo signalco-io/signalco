@@ -1,5 +1,5 @@
 import { deepmerge } from '@mui/utils';
-import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
+import { experimental_extendTheme as extendMuiTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import {
   extendTheme as extendJoyTheme,
@@ -62,7 +62,8 @@ const theme = () => {
   //   const secondary = isDark ? secondaryDark : secondaryLight;
 
 
-  const createdTheme = extendTheme({
+  const createdTheme = extendMuiTheme({
+    cssVarPrefix: 'joy',
     colorSchemes: {
       dark: {
         palette: {
@@ -107,89 +108,94 @@ const theme = () => {
         },
       }
     },
-    components: {
-      MuiButton: {
-        styleOverrides: {
-          root: ({ theme }) => ({
-            textTransform: 'none',
-            fontWeight: 400,
-            '&.MuiButton-outlined': {
-              backgroundColor: 'rgba(0,0,0,0.08)',
-              border: '1px solid rgba(0,0,0,0.04)',
-              [theme.getColorSchemeSelector('dark')]: {
-                backgroundColor: 'rgba(255,255,255,0.15)',
-                border: '1px solid rgba(255,255,255,0.05)'
-              }
-            },
-            '&.MuiButton-outlined:hover': {
-              backgroundColor: 'rgba(0,0,0,0.12)',
-              border: '1px solid rgba(0,0,0,0.1)',
-              [theme.getColorSchemeSelector('dark')]: {
-                border: '1px solid rgba(255,255,255,0.1)',
-                backgroundColor: 'rgba(255,255,255,0.2)'
-              }
-            },
-            '&.MuiButton-contained:hover': {
-              backgroundColor: 'rgba(0,0,0,0.7)',
-              [theme.getColorSchemeSelector('dark')]: {
-                backgroundColor: 'rgba(255,255,255,0.8)'
-              }
-            }
-          }),
-        }
-      },
-      MuiTextField: {
-        defaultProps: {
-          variant: 'outlined'
-        }
-      },
-      MuiFilledInput: {
-        defaultProps: {
-          disableUnderline: true
-        },
-        ...componentInPageBorder
-      },
-      MuiPaper: {
-        defaultProps: {
-          variant: 'outlined'
-        },
-        ...componentsTopLevelBorder
-      },
-      MuiCard: {
-        defaultProps: {
-          variant: 'outlined'
-        },
-        ...componentsTopLevelBorder
-      }
-    },
-    typography: {
-      h1: {
-        fontSize: '2rem',
-        fontFamily: 'Raleway, Open Sans, sans-serif',
-        fontWeight: 400,
-      },
-      h2: {
-        fontSize: '1.4rem',
-        fontWeight: 400,
-      },
-      h3: {
-        fontSize: '1.3rem',
-      },
-      h4: {
-        fontSize: '1.2rem',
-      },
-      h5: {
-        fontSize: '1.1rem',
-      },
-      h6: {
-        fontSize: '1rem',
-        fontWeight: 400,
-      }
-    }
+    // components: {
+    //   MuiButton: {
+    //     styleOverrides: {
+    //       root: ({ theme }) => ({
+    //         textTransform: 'none',
+    //         fontWeight: 400,
+    //         '&.MuiButton-outlined': {
+    //           backgroundColor: 'rgba(0,0,0,0.08)',
+    //           border: '1px solid rgba(0,0,0,0.04)',
+    //           [theme.getColorSchemeSelector('dark')]: {
+    //             backgroundColor: 'rgba(255,255,255,0.15)',
+    //             border: '1px solid rgba(255,255,255,0.05)'
+    //           }
+    //         },
+    //         '&.MuiButton-outlined:hover': {
+    //           backgroundColor: 'rgba(0,0,0,0.12)',
+    //           border: '1px solid rgba(0,0,0,0.1)',
+    //           [theme.getColorSchemeSelector('dark')]: {
+    //             border: '1px solid rgba(255,255,255,0.1)',
+    //             backgroundColor: 'rgba(255,255,255,0.2)'
+    //           }
+    //         },
+    //         '&.MuiButton-contained:hover': {
+    //           backgroundColor: 'rgba(0,0,0,0.7)',
+    //           [theme.getColorSchemeSelector('dark')]: {
+    //             backgroundColor: 'rgba(255,255,255,0.8)'
+    //           }
+    //         }
+    //       }),
+    //     }
+    //   },
+    //   MuiTextField: {
+    //     defaultProps: {
+    //       variant: 'outlined'
+    //     }
+    //   },
+    //   MuiFilledInput: {
+    //     defaultProps: {
+    //       disableUnderline: true
+    //     },
+    //     ...componentInPageBorder
+    //   },
+    //   MuiPaper: {
+    //     defaultProps: {
+    //       variant: 'outlined'
+    //     },
+    //     ...componentsTopLevelBorder
+    //   },
+    //   MuiCard: {
+    //     defaultProps: {
+    //       variant: 'outlined'
+    //     },
+    //     ...componentsTopLevelBorder
+    //   }
+    // },
+    // typography: {
+    //   h1: {
+    //     fontSize: '2rem',
+    //     fontFamily: 'Raleway, Open Sans, sans-serif',
+    //     fontWeight: 400,
+    //   },
+    //   h2: {
+    //     fontSize: '1.4rem',
+    //     fontWeight: 400,
+    //   },
+    //   h3: {
+    //     fontSize: '1.3rem',
+    //   },
+    //   h4: {
+    //     fontSize: '1.2rem',
+    //   },
+    //   h5: {
+    //     fontSize: '1.1rem',
+    //   },
+    //   h6: {
+    //     fontSize: '1rem',
+    //     fontWeight: 400,
+    //   }
+    // }
   });
 
   const joyTheme = extendJoyTheme({
     components: {
+      JoyTextField: {
+        defaultProps: {
+          variant: 'soft'
+        }
+      },
       JoyCircularProgress: {
         defaultProps: {
           color: 'neutral'
@@ -202,13 +208,14 @@ const theme = () => {
       },
       JoyChip: {
         defaultProps: {
-          color: 'neutral'
+          color: 'neutral',
+          variant: 'soft'
         }
       }
     }
   });
 
-  const finalTheme = deepmerge(createdTheme, joyTheme);
+  const finalTheme = deepmerge(joyTheme, createdTheme);
 
   return finalTheme;
 };
