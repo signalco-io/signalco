@@ -6,6 +6,7 @@ import { ChildrenProps } from 'src/sharedTypes';
 interface NavigatingButtonProps extends ChildrenProps {
     href: string;
     prefetch?: boolean;
+    size?: 'sm' | 'md' | 'lg';
 }
 
 export default function NavigatingButton(props: NavigatingButtonProps) {
@@ -14,6 +15,7 @@ export default function NavigatingButton(props: NavigatingButtonProps) {
             <Button
                 color="primary"
                 variant="solid"
+                size={props.size}
                 endDecorator={<KeyboardArrowRightIcon fontSize="small" />}>
                 {props.children}
             </Button>

@@ -47,7 +47,7 @@ function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
                         top: '42px',
                     } : undefined
                 }}>
-                    <Typography textColor="primary.contrastText" textAlign="center" fontSize={23}>{props.count}</Typography>
+                    <Typography textColor="primary.solidBg" textAlign="center" fontSize={23}>{props.count}</Typography>
                 </Box>
             </Box>
         </GentleSlide>

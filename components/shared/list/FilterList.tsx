@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Checkbox, List, ListItemButton, ListItemIcon, ListItemText, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/system';
 import { Typography, Button } from '@mui/joy';
 import { ArrowDownward as ArrowDownwardIcon } from '@mui/icons-material';
 import SelectItems from '../form/SelectItems';
+import Checkbox from '../form/Checkbox';
 
 export interface FilterListItem {
     id: string;
@@ -81,32 +82,20 @@ export default function FilterList(props: FilterListProps) {
                     }} />
             ) : (
                 <>
-                    <List subheader={(
-                        <Stack direction="row" spacing={1}>
-                            <Typography gutterBottom level="h5">{header}</Typography>
-                            {(!isShowMore && shouldTruncate) && <Typography level="body2">({items.length - truncate} more)</Typography>}
-                        </Stack>
-                    )}>
+                    <Stack direction="row" spacing={1}>
+                        <Typography gutterBottom level="h5">{header}</Typography>
+                        {(!isShowMore && shouldTruncate) && <Typography level="body2">({items.length - truncate} more)</Typography>}
+                    </Stack>
+                    <Stack>
                         {items.slice(0, isShowMore ? items.length : truncate).map(item => (
-                            <ListItemButton
+                            <Checkbox
                                 key={item.id}
-                                role={undefined}
-                                onClick={() => handleToggle(item.id)} sx={{ py: 0 }}
-                                selected={checked.indexOf(item.id) >= 0}>
-                                {multiple && (
-                                    <ListItemIcon>
-                                        <Checkbox
-                                            edge="start"
-                                            checked={checked.indexOf(item.id) !== -1}
-                                            tabIndex={-1}
-                                            disableRipple
-                                            inputProps={{ 'aria-labelledby': item.id }} />
-                                    </ListItemIcon>
-                                )}
-                                <ListItemText id={item.id} primary={item.label} title={item.label} primaryTypographyProps={{ noWrap: true }} />
-                            </ListItemButton>
+                                sx={{p: 2}}
+                                label={item.label} checked={checked.indexOf(item.id) >= 0}
+                                onChange={() => handleToggle(item.id)}
+                                disableIcon />
                         ))}
-                    </List>
+                    </Stack>
                     {(!isShowMore && shouldTruncate) && (
                         <Box>
                             <Button startDecorator={<ArrowDownwardIcon />} onClick={handleToggleShowMore}>Show all</Button>

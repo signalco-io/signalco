@@ -57,7 +57,9 @@ export function PageNav(props: { fullWidth?: boolean | undefined; }) {
                 <Stack component="header" direction="row" justifyContent="space-between" alignItems="center">
                     <Box onContextMenu={handleButtonAuxClick} onAuxClick={handleButtonAuxClick}>
                         <Link href="/" passHref>
-                            <SignalcoLogotype height={42} />
+                            <a style={{ textDecoration: 'none' }}>
+                                <SignalcoLogotype height={42} />
+                            </a>
                         </Link>
                     </Box>
                     <Stack direction="row" alignItems="center" spacing={{ xs: 1, sm: 2, md: 4 }}>

@@ -197,6 +197,12 @@ const theme = () => {
           variant: 'plain'
         }
       },
+      JoySheet: {
+        defaultProps: {
+          variant: 'soft',
+          color: 'neutral'
+        }
+      },
       JoyButton: {
         defaultProps: {
           variant: 'soft',

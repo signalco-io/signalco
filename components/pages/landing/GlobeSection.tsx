@@ -1,35 +1,42 @@
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Box, Fade, NoSsr } from '@mui/material';
+import { Box } from '@mui/system';
+import { NoSsr } from '@mui/material';
+import useTimeout from 'src/hooks/useTimeout';
 import Container from 'components/shared/layout/Container';
+import Fade from 'components/shared/animations/Fade';
 const Globe = dynamic(() => import('./Globe'));
 
 function GlobeSection() {
+    const [appear, setAppear] = useState(false);
+    useTimeout(() => setAppear(true), 100);
+
     return (
         <Container>
-            <Fade timeout={2000} in>
-            <Box sx={{
-                overflow: 'hidden',
-            }}>
+            <Fade duration={2000} appear={appear}>
                 <Box sx={{
-                    minHeight: { xs: '12vh', sm: '20vh', md: '380px' },
-                    display: 'flex',
-                    justifyContent: 'center',
-                    position: 'relative'
+                    overflow: 'hidden',
                 }}>
                     <Box sx={{
-                        position: 'absolute',
-                        transform: 'translateY(-8%)',
-                        width: '1100px',
-                        height: '1100px',
-                        maxWidth: '100vw!important',
-                        maxHeight: '100vw!important'
+                        minHeight: { xs: '12vh', sm: '20vh', md: '380px' },
+                        display: 'flex',
+                        justifyContent: 'center',
+                        position: 'relative'
                     }}>
-                        <NoSsr>
-                            <Globe />
-                        </NoSsr>
+                        <Box sx={{
+                            position: 'absolute',
+                            transform: 'translateY(-8%)',
+                            width: '1100px',
+                            height: '1100px',
+                            maxWidth: '100vw!important',
+                            maxHeight: '100vw!important'
+                        }}>
+                            <NoSsr>
+                                <Globe />
+                            </NoSsr>
+                        </Box>
                     </Box>
                 </Box>
-            </Box>
             </Fade>
         </Container>
     );
