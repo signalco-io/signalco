@@ -2,10 +2,10 @@ import React, { Suspense } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Stack, Box } from '@mui/system';
-import { Button, ButtonBase } from '@mui/material';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { Button } from '@mui/joy';
 import useIsMobile from 'src/hooks/useIsMobile';
 import Container from './shared/layout/Container';
+import NavigatingButton from './shared/buttons/NavigatingButton';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 
 const navLinks = [
@@ -23,7 +23,7 @@ function NavMenu() {
         <>
             {navLinks.map(nl => (
                 <Link key={nl.href} href={nl.href} passHref>
-                    <Button variant="text" size="large" sx={{ fontWeight: 'bold' }}>{nl.text}</Button>
+                    <Button variant="plain" size="lg">{nl.text}</Button>
                 </Link>
             ))}
         </>
@@ -33,7 +33,7 @@ function NavMenu() {
 export function PageNav(props: { fullWidth?: boolean | undefined; }) {
     const router = useRouter();
 
-    const handleButtonAuxClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleButtonAuxClick = (e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
         router.push('/design');
     };
@@ -55,18 +55,16 @@ export function PageNav(props: { fullWidth?: boolean | undefined; }) {
         }}>
             <Container maxWidth={props.fullWidth ? false : 'lg'}>
                 <Stack component="header" direction="row" justifyContent="space-between" alignItems="center">
-                    <Link href="/" passHref>
-                        <ButtonBase disableRipple onContextMenu={handleButtonAuxClick} onAuxClick={handleButtonAuxClick}>
+                    <Box onContextMenu={handleButtonAuxClick} onAuxClick={handleButtonAuxClick}>
+                        <Link href="/" passHref>
                             <SignalcoLogotype height={42} />
-                        </ButtonBase>
-                    </Link>
+                        </Link>
+                    </Box>
                     <Stack direction="row" alignItems="center" spacing={{ xs: 1, sm: 2, md: 4 }}>
                         <Suspense>
                             <NavMenu />
                         </Suspense>
-                        <Link href="/app" prefetch={false} passHref>
-                            <Button variant="contained" endIcon={<KeyboardArrowRightIcon fontSize="small" />}>App</Button>
-                        </Link>
+                        <NavigatingButton href="/app" prefetch={false}>App</NavigatingButton>
                     </Stack>
                 </Stack>
             </Container>

@@ -228,7 +228,7 @@ const theme = () => {
     }
   });
 
-  const finalTheme = deepmerge(joyTheme, createdTheme);
+  const finalTheme = joyTheme;//deepmerge(joyTheme, createdTheme);
 
   return finalTheme;
 };
