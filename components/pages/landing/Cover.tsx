@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import Image, { ImageProps } from 'next/image';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/system';
+import { Typography } from '@mui/joy';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
 
 const ringConfig = [
@@ -135,7 +136,13 @@ export default function Cover() {
                         ))}
                     </Box>
                 </Box>
-                <Typography component="h1" fontFamily="Raleway" fontWeight={200} fontSize={{ xs: '1.3rem', sm: '1.7rem', lg: '2rem' }}>Automate your life</Typography>
+                <Typography
+                    component="h1"
+                    fontFamily="Raleway"
+                    fontWeight={200}
+                    fontSize={{ xs: '1.3rem', sm: '1.7rem', lg: '2rem' }}>
+                    Automate your life
+                </Typography>
             </Stack>
         </Box>
     );

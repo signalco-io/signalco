@@ -8,11 +8,11 @@ function Globe() {
     const rectWidth = useWindowWidth();
     const width = Math.min(1100, rectWidth ?? 0);
     const height = width;
-    const { colorScheme, darkColorScheme } = useColorScheme();
-    const isDark = colorScheme === darkColorScheme;
+    const { colorScheme } = useColorScheme();
+    const isDark = colorScheme === 'dark';
 
-    const glow = useMemo(() => isDark ? [0.2,0.2,0.2] : [1,1,1], [isDark]);
-    const base = useMemo(() => isDark ? [0.4,0.4,0.4] : [1,1,1], [isDark]);
+    const glow = useMemo(() => isDark ? [0.1,0.1,0.1] : [1, 1, 1], [isDark]);
+    const base = useMemo(() => isDark ? [0.4,0.4,0.4] : [0.9,0.9,0.9], [isDark]);
 
     useEffect(() => {
         let phi = 4.1;
