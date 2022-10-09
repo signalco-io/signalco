@@ -1,9 +1,11 @@
 import React, { Suspense } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Box, Button, ButtonBase, Container, Stack } from '@mui/material';
+import { Stack, Box } from '@mui/system';
+import { Button, ButtonBase } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import useIsMobile from 'src/hooks/useIsMobile';
+import Container from './shared/layout/Container';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 
 const navLinks = [

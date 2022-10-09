@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
-import { Box, Container, Fade, NoSsr } from '@mui/material';
+import { Box, Fade, NoSsr } from '@mui/material';
+import Container from 'components/shared/layout/Container';
 const Globe = dynamic(() => import('./Globe'));
 
 function GlobeSection() {
