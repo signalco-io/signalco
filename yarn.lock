@@ -2028,7 +2028,7 @@
   dependencies:
     "@babel/runtime" "^7.19.0"
 
-"@mui/joy@^5.0.0-alpha.48":
+"@mui/joy@5.0.0-alpha.48":
   version "5.0.0-alpha.48"
   resolved "https://registry.yarnpkg.com/@mui/joy/-/joy-5.0.0-alpha.48.tgz#3373a7c4ed9751ef79100dae3f5fb5221008d1b3"
   integrity sha512-S+wG0DJEbGsFnTBJOvnhoFIZLF0vKwxI4S41t2PGIOZm1gr/8+HfRGrB667oCGITSmr7LWxABzWrvoT/itfdwQ==
