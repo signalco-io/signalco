@@ -3,12 +3,13 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { Box, Container, Divider, Fade, Grid, Stack, SxProps, Theme } from '@mui/material';
+import { Box, Divider, Fade, Grid, Stack, SxProps, Theme } from '@mui/material';
 import { Button, Typography } from '@mui/joy';
 import { GitHub, KeyboardArrowRight } from '@mui/icons-material';
 import AppSettingsProvider from 'src/services/AppSettingsProvider';
 import useUserTheme from 'src/hooks/useUserTheme';
 import useIsTablet from 'src/hooks/useIsTablet';
+import Container from 'components/shared/layout/Container';
 import LinkImage from 'components/shared/ImageLink';
 import GentleSlide from 'components/shared/animations/GentleSlide';
 import DiscoverVisual from 'components/pages/landing/visuals/DiscoverVisual';
@@ -208,73 +209,75 @@ function DataPart(props: { value: string, subtitle: string }) {
 }
 
 export default function LandingPageView() {
-    return (
-        <Stack sx={{ overflowX: 'hidden' }}>
-          <Box my={2}>
-            <Cover />
-          </Box>
-          {AppSettingsProvider.isDeveloper && (
-            <>
-              <CounterIndicator count={0} />
-              <StepContent
-                title="Developers"
-                subtitle="Signalco is free and open source project run by small team of enthusiasts."
-                direction="horizontal">
-                <Stack alignItems="center">
-                  <Button
-                    startDecorator={<GitHub />}
-                    endDecorator={<KeyboardArrowRight />}
-                    href="https://github.com/signalco-io"
-                    size="lg">signalco on GitHub</Button>
-                </Stack>
-              </StepContent>
-            </>
-          )}
-          <CounterIndicator count={1} />
-          <StepContent title="Discover" image={<DiscoverVisual />} imageContainerHeight={420} imageContainerStyles={{ position: 'absolute', top: '-92px', right: 0, zIndex: -1 }}>
-            <FeatureDescription
-              title="Bring together"
-              content="Every service and device is useful by itself, but the real magic happens when you bring them all together." />
-            <FeatureDescription
-              title="Connected"
-              content="Connect a wide range of devices and services, from Smart Home and IoT devices to productivity tools and social apps." />
-            <FeatureDescription
-              title="Automation"
-              content="Repetitive tasks are boring. Automate so you can focus on things that matter to you." />
-          </StepContent>
-          <FeaturedIntegrationsSection />
-          <CounterIndicator count={2} />
-          <PlaySection />
-          <CounterIndicator count={3} hideAfter />
-          <StepContent title="Enjoy" direction="horizontal">
-            <FeatureDescription
-              title="Anywhere you are"
-              content="Access all features wherever you are. Controlling devices in your home from other side of the world or room&nbsp;:) has never been simpler." />
-            <FeatureDescription
-              title="Share"
-              content="Share devices, media, dashboards, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
-            <FeatureDescription
-              title="Relax"
-              content="Enjoy the automated life. Use gained free time doing what you love. Relax in nature, hobbies, family... or automate one more thing." />
-          </StepContent>
-          <GlobeSection />
-          <Divider />
-          <SectionCenter narrow sx={{ bgcolor: 'background.paper' }}>
-            <Stack
-              spacing={{ xs: 6, md: 8 }}
-              alignItems="center"
-              direction={{ xs: 'column', md: 'row' }}
-              justifyContent={{ xs: 'space-between' }}>
-              <DataPart value="8" subtitle="Integrations" />
-              <DataPart value="500+" subtitle="Automations per day" />
-              <DataPart value="2000+" subtitle="Supported devices" />
+  return (
+    <Stack sx={{ overflowX: 'hidden' }}>
+      <Box my={2}>
+        <Cover />
+      </Box>
+      {AppSettingsProvider.isDeveloper && (
+        <>
+          <CounterIndicator count={0} />
+          <StepContent
+            title="Developers"
+            subtitle="Signalco is free and open source project run by small team of enthusiasts."
+            direction="horizontal">
+            <Stack alignItems="center">
+              <Button
+                startDecorator={<GitHub />}
+                endDecorator={<KeyboardArrowRight />}
+                href="https://github.com/signalco-io"
+                size="lg">signalco on GitHub</Button>
             </Stack>
-          </SectionCenter>
-          <Divider />
-          <NewsletterSection />
-          <Container sx={{ pb: 8 }}>
-            <CtaSection />
-          </Container>
-        </Stack >
-      );
+          </StepContent>
+        </>
+      )}
+      <CounterIndicator count={1} />
+      <StepContent title="Discover" image={<DiscoverVisual />} imageContainerHeight={420} imageContainerStyles={{ position: 'absolute', top: '-92px', right: 0, zIndex: -1 }}>
+        <FeatureDescription
+          title="Bring together"
+          content="Every service and device is useful by itself, but the real magic happens when you bring them all together." />
+        <FeatureDescription
+          title="Connected"
+          content="Connect a wide range of devices and services, from Smart Home and IoT devices to productivity tools and social apps." />
+        <FeatureDescription
+          title="Automation"
+          content="Repetitive tasks are boring. Automate so you can focus on things that matter to you." />
+      </StepContent>
+      <FeaturedIntegrationsSection />
+      <CounterIndicator count={2} />
+      <PlaySection />
+      <CounterIndicator count={3} hideAfter />
+      <StepContent title="Enjoy" direction="horizontal">
+        <FeatureDescription
+          title="Anywhere you are"
+          content="Access all features wherever you are. Controlling devices in your home from other side of the world or room&nbsp;:) has never been simpler." />
+        <FeatureDescription
+          title="Share"
+          content="Share devices, media, dashboards, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
+        <FeatureDescription
+          title="Relax"
+          content="Enjoy the automated life. Use gained free time doing what you love. Relax in nature, hobbies, family... or automate one more thing." />
+      </StepContent>
+      <GlobeSection />
+      <Divider />
+      <SectionCenter narrow sx={{ bgcolor: 'background.paper' }}>
+        <Stack
+          spacing={{ xs: 6, md: 8 }}
+          alignItems="center"
+          direction={{ xs: 'column', md: 'row' }}
+          justifyContent={{ xs: 'space-between' }}>
+          <DataPart value="8" subtitle="Integrations" />
+          <DataPart value="500+" subtitle="Automations per day" />
+          <DataPart value="2000+" subtitle="Supported devices" />
+        </Stack>
+      </SectionCenter>
+      <Divider />
+      <NewsletterSection />
+      <Container>
+        <Box sx={{ pb: 8 }}>
+          <CtaSection />
+        </Box>
+      </Container>
+    </Stack >
+  );
 }

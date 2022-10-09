@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { Container, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import useAllEntities from 'src/hooks/useAllEntities';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import AutoTable from 'components/shared/table/AutoTable';
 import Loadable from 'components/shared/Loadable/Loadable';
+import Container from 'components/shared/layout/Container';
 import NoDataPlaceholder from 'components/shared/indicators/NoDataPlaceholder';
 import { AppLayoutWithAuth } from 'components/layouts/AppLayoutWithAuth';
 import ChannelPartialSlack from 'components/channels/partials/ChannelPartialSlack';
