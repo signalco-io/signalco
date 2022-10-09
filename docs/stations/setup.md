@@ -17,8 +17,10 @@
 - Click "Flash!" to start writing the image
 - When done you can close the Etcher and remove the SD from your computer
 
-Check image integrity:
-_Orangepizero2_3.0.4_ubuntu_jammy_server_linux5.16.17.img SHA: 8b8dbecfa30a259d7f990bad9f3ceecfe477ba742e1a45ebc88a5cbccd43eb1d_
+Image integrity:
+
+- Name: `Orangepizero2_3.0.4_ubuntu_jammy_server_linux5.16.17.img`
+- SHA: `8b8dbecfa30a259d7f990bad9f3ceecfe477ba742e1a45ebc88a5cbccd43eb1d`
 
 ### Installation on Orange Pi Zero 2
 

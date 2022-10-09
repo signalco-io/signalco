@@ -4,7 +4,7 @@ import NavigatingButton from 'components/shared/buttons/NavigatingButton';
 
 export default function CtaSection() {
     return (
-        <Sheet sx={{borderRadius: 'var(--joy-radius-lg)'}}>
+        <Sheet sx={{ borderRadius: 'var(--joy-radius-lg)' }}>
             <Stack alignItems="center" spacing={4} sx={{ py: 8 }}>
                 <Typography level="h4" component="p">Automate your life</Typography>
                 <Typography>Focus on things that matter to you.</Typography>

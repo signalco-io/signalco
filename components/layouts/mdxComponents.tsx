@@ -2,11 +2,13 @@ import { a11yDark as dark, a11yLight as light } from 'react-syntax-highlighter/d
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import React, { memo } from 'react';
 import NextLink from 'next/link';
-import { Checkbox, Divider, Link, Paper, Stack, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
-import { Typography } from '@mui/joy';
+import { Box, Stack } from '@mui/system';
+import { Divider, Link, Sheet, Typography } from '@mui/joy';
 import LinkIcon from '@mui/icons-material/Link';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import useUserTheme from 'src/hooks/useUserTheme';
+import Loadable from 'components/shared/Loadable/Loadable';
+import Checkbox from 'components/shared/form/Checkbox';
 import IconButtonCopyToClipboard from 'components/shared/buttons/IconButtonCopyToClipboard';
 import MdxPageLayout from './MdxPageLayout';
 import { ChildrenProps } from '../../src/sharedTypes';
@@ -31,7 +33,10 @@ function LinkedHeader(props: ChildrenProps & { id: string | undefined }) {
             }}>
             {props.children}
             {(props.id && isClient) &&
-                <IconButtonCopyToClipboard title={t('CopyLinkToClipboard')} value={`${window.location.origin}${window.location.pathname}#${props.id}`} className="mdxHeaderLinkButton">
+                <IconButtonCopyToClipboard
+                    title={t('CopyLinkToClipboard')}
+                    value={`${window.location.origin}${window.location.pathname}#${props.id}`}
+                    className="mdxHeaderLinkButton">
                     <LinkIcon />
                 </IconButtonCopyToClipboard>
             }
@@ -43,7 +48,7 @@ const components: any = {
     a: (() => {
         function A(props: any) {
             return <NextLink href={props.href} passHref>
-                <Link >{props.children}</Link>
+                <Link>{props.children}</Link>
             </NextLink>
         }
         return memo(A);
@@ -122,7 +127,7 @@ const components: any = {
     })(),
     blockquote: (() => {
         function Blockquote(props: any) {
-            return <Paper style={{ borderLeft: '4px solid grey', padding: 8 }} {...props} />
+            return <Sheet sx={{ borderLeft: '4px solid grey', padding: 8 }} {...props} />
         }
         return memo(Blockquote);
     })(),
@@ -144,60 +149,79 @@ const components: any = {
         }
         return memo(Li);
     })(),
-    table: (() => {
-        function Table(props: any) {
-            return <Table {...props} />
-        }
-        return memo(Table);
-    })(),
-    tr: (() => {
-        function Tr(props: any) {
-            return <TableRow {...props} />
-        }
-        return memo(Tr);
-    })(),
-    td: (() => {
-        function Td({ align, ...props }: { align?: 'inherit' | 'left' | 'center' | 'right' | 'justify' }) {
-            return <TableCell align={align || undefined} {...props} />
-        }
-        return memo(Td);
-    })(),
-    tbody: (() => {
-        function TBody(props: any) {
-            return <TableBody {...props} />
-        }
-        return memo(TBody);
-    })(),
-    th: (() => {
-        function Th({ align, ...props }: { align?: 'inherit' | 'left' | 'center' | 'right' | 'justify' }) {
-            return <TableCell align={align || undefined} {...props} />
-        }
-        return memo(Th);
-    })(),
-    thead: (() => {
-        function THead(props: any) {
-            return <TableHead {...props} />
-        }
-        return memo(THead);
-    })(),
+    // table: (() => {
+    //     function Table(props: any) {
+    //         return <Table {...props} />
+    //     }
+    //     return memo(Table);
+    // })(),
+    // tr: (() => {
+    //     function Tr(props: any) {
+    //         return <TableRow {...props} />
+    //     }
+    //     return memo(Tr);
+    // })(),
+    // td: (() => {
+    //     function Td({ align, ...props }: { align?: 'inherit' | 'left' | 'center' | 'right' | 'justify' }) {
+    //         return <TableCell align={align || undefined} {...props} />
+    //     }
+    //     return memo(Td);
+    // })(),
+    // tbody: (() => {
+    //     function TBody(props: any) {
+    //         return <TableBody {...props} />
+    //     }
+    //     return memo(TBody);
+    // })(),
+    // th: (() => {
+    //     function Th({ align, ...props }: { align?: 'inherit' | 'left' | 'center' | 'right' | 'justify' }) {
+    //         return <TableCell align={align || undefined} {...props} />
+    //     }
+    //     return memo(Th);
+    // })(),
+    // thead: (() => {
+    //     function THead(props: any) {
+    //         return <TableHead {...props} />
+    //     }
+    //     return memo(THead);
+    // })(),
     code: (() => {
         function Code({ className, ...props }: { children: string | string[], className?: string | undefined }) {
             const themeContext = useUserTheme();
+            const isClient = useIsClient();
             const { t } = useLocaleHelpers();
-            const match = /language-(\w+)/.exec(className || '')
+            const match = /language-(\w+)/.exec(className || '');
+            const children = Array.isArray(props.children)
+                ? props.children
+                : (props.children.charCodeAt(props.children.length - 1) === 10
+                    ? props.children.slice(0, props.children.length - 2)
+                    : props.children);
             return match
                 ? (
-                    <Stack spacing={1}>
-                        <Paper sx={{ py: 1, px: 2, position: 'relative' }}>
-                            <Typography sx={{ position: 'absolute', right: 12, top: 12, userSelect: 'none' }} level="body2">{match[1]?.toUpperCase()}</Typography>
-                            <SyntaxHighlighter customStyle={{ background: 'transparent', fontSize: '0.9rem' }} showLineNumbers style={themeContext.isDark ? dark : light} language={match[1]} PreTag="div" {...props} />
-                        </Paper>
-                        <Stack direction="row" justifyContent="end">
-                            <IconButtonCopyToClipboard title={t('CopyCodeToClipboard')} value={props.children}>
+                    <Sheet sx={{ px: 1, position: 'relative', borderRadius: 'var(--joy-radius-sm)' }}>
+                        <Typography
+                            sx={{ position: 'absolute', right: 46, top: 8, userSelect: 'none' }}
+                            level="body2">
+                            {match[1]?.toUpperCase()}
+                        </Typography>
+                        <Loadable isLoading={!isClient}>
+                            <SyntaxHighlighter
+                                customStyle={{ background: 'transparent', fontSize: '0.9rem', paddingRight: '80px' }}
+                                showLineNumbers
+                                style={themeContext.isDark ? dark : light}
+                                language={match[1]}
+                                PreTag="div"
+                                {...props}>
+                                {children}
+                            </SyntaxHighlighter>
+                        </Loadable>
+                        <Box sx={{ position: 'absolute', right: 0, top: 0 }}>
+                            <IconButtonCopyToClipboard title={t('CopyCodeToClipboard')} value={children}>
                                 <ContentCopyIcon fontSize="small" />
                             </IconButtonCopyToClipboard>
-                        </Stack>
-                    </Stack>)
+                        </Box>
+                    </Sheet>
+                )
                 : <code className={className} {...props} />
         }
         return memo(Code);
