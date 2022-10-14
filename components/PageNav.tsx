@@ -49,7 +49,7 @@ export function PageNav(props: { fullWidth?: boolean | undefined; }) {
             left: 0,
             right: 0,
             top: 0,
-            height: '75px',
+            height: '80px',
             backdropFilter: 'saturate(180%) blur(10px)',
             zIndex: 101
         }}>

@@ -8,7 +8,7 @@ export function PageFullLayout(props: ChildrenProps) {
     return (
         <>
             <PageNav fullWidth />
-            <Box sx={{ paddingTop: '75px' }}>
+            <Box sx={{ paddingTop: '80px' }}>
                 {props.children}
             </Box>
             <Footer />
