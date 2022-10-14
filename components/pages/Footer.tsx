@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import NextLink from 'next/link';
 import { Box, Stack } from '@mui/system';
-import { Divider, Grid, IconButton, Typography, Link as JoyLink } from '@mui/joy';
+import { Grid, IconButton, Typography, Link as JoyLink } from '@mui/joy';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import RedditIcon from '@mui/icons-material/Reddit';
 import GitHubIcon from '@mui/icons-material/GitHub';
