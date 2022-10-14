@@ -10,16 +10,16 @@ export default function EntityStatus(props: { entity: IEntityDetails | undefined
     if (!entity || entity.type !== 1) return null;
 
     const isOffline = entityInError(entity);
-    let statusColor: 'success' | 'warning' | 'error' | 'grey' = 'success';
+    let statusColor: 'success' | 'warning' | 'danger' | 'neutral' = 'success';
     let content: React.ReactNode | undefined = undefined;
     if (isOffline) {
-        statusColor = 'error';
+        statusColor = 'danger';
         content = <BoltIcon fontSize="small" />;
     }
     else if (typeof isOffline === 'undefined') {
         const lastActivity = entityLastActivity(entity);
         if (!lastActivity) {
-            statusColor = 'grey';
+            statusColor = 'neutral';
         } else {
             const isStale = DateTimeProvider.now().getTime() - lastActivity.getTime() > 24 * 60 * 60 * 1000;
             if (isStale) statusColor = 'warning';

@@ -6,23 +6,9 @@ import {
   bindTrigger,
   usePopupState,
 } from 'material-ui-popup-state/hooks';
-import Skeleton from '@mui/material/Skeleton';
-import {
-  Avatar,
-  Box,
-  Button,
-  ButtonBase,
-  Divider,
-  IconButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  Stack,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
-import { Typography } from '@mui/joy';
+import { Box, Stack } from '@mui/system';
+import { useMediaQuery } from '@mui/material';
+import { Avatar, Button, Divider, IconButton, ListItemDecorator, Menu, MenuItem, Typography, useTheme } from '@mui/joy';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MenuIcon from '@mui/icons-material/Menu';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -51,9 +37,7 @@ function UserAvatar() {
   const user = CurrentUserProvider.getCurrentUser();
   if (user === undefined) {
     return (
-      <Skeleton variant="circular">
-        <Avatar variant="circular" />
-      </Skeleton>
+      <Avatar />
     );
   }
 
@@ -65,16 +49,16 @@ function UserAvatar() {
     userNameInitials = user.email[0];
   }
 
-  const size = { xs: '36px', sm: '42px', lg: '48px' };
-
   if (user.picture) {
-    return (<Avatar sx={{ width: size, height: size }} variant="circular" src={user.picture} alt={userNameInitials}>
-      {userNameInitials}
-    </Avatar>);
+    return (
+      <Avatar src={user.picture} alt={userNameInitials}>
+        {userNameInitials}
+      </Avatar>
+    );
   }
 
   return (
-    <Avatar sx={{ width: size, height: size }}>{userNameInitials}</Avatar>
+    <Avatar>{userNameInitials}</Avatar>
   );
 }
 
@@ -109,7 +93,7 @@ function UserProfileAvatar() {
 
   return (
     <Loadable isLoading={isLoading} placeholder="skeletonRect" width={30} height={30}>
-      <ButtonBase {...bindTrigger(popupState)} sx={{ width: { xs: undefined, sm: '100%' }, py: 1 }}>
+      <Button {...bindTrigger(popupState)} variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 1 }}>
         <Stack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
           <UserAvatar />
           {!isMobile &&
@@ -117,20 +101,20 @@ function UserProfileAvatar() {
           }
           <ApiBadge />
         </Stack>
-      </ButtonBase>
+      </Button>
       <Menu {...bindMenu(popupState)}>
         <MenuItem onClick={navigateTo('/app/settings')}>
-          <ListItemIcon>
+          <ListItemDecorator>
             <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText>{t('Settings')}</ListItemText>
+          </ListItemDecorator>
+          {t('Settings')}
         </MenuItem>
         <Divider />
         <MenuItem onClick={logout}>
-          <ListItemIcon>
+          <ListItemDecorator>
             <ExitToAppIcon />
-          </ListItemIcon>
-          <ListItemText>{t('Logout')}</ListItemText>
+          </ListItemDecorator>
+          {t('Logout')}
         </MenuItem>
       </Menu>
     </Loadable>
@@ -161,7 +145,8 @@ function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: S
         }}
         aria-label={label}
         title={label}
-        size="large"
+        variant="plain"
+        size="lg"
         onClick={onClick}>
         <Stack direction="row" sx={{ width: isNotDesktop ? '100%' : '128px' }} alignItems="center" spacing={isMobile ? 1 : 0}>
           <Icon sx={{ opacity: active ? 1 : 0.6, mr: { xs: 0, lg: 2 }, fontSize: { xs: '26px', lg: '17px' } }} />
@@ -205,7 +190,7 @@ function NavProfile() {
       sx={{ px: { xs: 2, sm: 0 }, pt: { xs: 0, sm: 4 }, minWidth: `${navWidth}px`, minHeight: { xs: '60px', sm: undefined } }}
       justifyContent={isMobile ? 'space-between' : undefined}
       alignItems="center">
-        <UserProfileAvatar />
+      <UserProfileAvatar />
       {!mobileMenuOpen &&
         <Stack sx={{ width: { xs: undefined, lg: '100%' } }}>
           {visibleNavItems
@@ -218,7 +203,7 @@ function NavProfile() {
       {(isMobile && mobileMenuOpen) && <Typography sx={{ opacity: 0.6 }}>Menu</Typography>}
       {isMobile &&
         <>
-          <IconButton size="large" onClick={handleMobileMenuOpenClick}>
+          <IconButton size="lg" onClick={handleMobileMenuOpenClick}>
             {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
           <Box hidden={!mobileMenuOpen} sx={{

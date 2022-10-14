@@ -211,7 +211,7 @@ const theme = () => {
             level1: '#00ff00',
             level2: '#00ffff',
             level3: '#0000ff',
-            backdrop: '#ff00ff',
+            // backdrop: '#ff00ff',
             tooltip: '#f0f0f0'
           },
           neutral: {

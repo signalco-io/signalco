@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
-import { Button, ListItemText, Menu, MenuItem } from '@mui/material';
+import { Button, Menu, MenuItem } from '@mui/joy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import PageNotificationService from 'src/notifications/PageNotificationService';
 import useLocale from 'src/hooks/useLocale';
@@ -41,9 +41,7 @@ export default function EntityOptions(props: { id: string | undefined; }) {
                 <MoreHorizIcon />
             </Button>
             <Menu {...bindMenu(popupState)}>
-                <MenuItem onClick={handleDelete}>
-                    <ListItemText>{t('DeleteButtonLabel')}</ListItemText>
-                </MenuItem>
+                <MenuItem onClick={handleDelete}>{t('DeleteButtonLabel')}</MenuItem>
             </Menu>
             <ConfirmDeleteDialog
                 expectedConfirmText={entity?.alias || t('ConfirmDialogExpectedText')}
