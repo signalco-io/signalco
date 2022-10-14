@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Stack from '@mui/material/Stack';
 import { amber, green, grey } from '@mui/material/colors';
-import { Card, CardActionArea, CardContent, Chip, Grid, Typography } from '@mui/material';
+import { Card, CardActionArea, CardContent, Grid, Typography } from '@mui/material';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import LaunchIcon from '@mui/icons-material/Launch';
 import { Cancel as CancelIcon, CheckCircle } from '@mui/icons-material';
 import FilterList from 'components/shared/list/FilterList';
+import Chip from 'components/shared/indicators/Chip';
 import PageCenterHeader from 'components/pages/PageCenterHeader';
 import Gallery from 'components/gallery/Gallery';
 import contentData from './content.json';
@@ -78,7 +79,7 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
                             </Stack>
                             {features && (
                                 <Grid container>
-                                    {features.map(f => <Grid item key={f}><Chip label={f} size="small" /></Grid>)}
+                                    {features.map(f => <Grid item key={f}><Chip size="sm">{f}</Chip></Grid>)}
                                 </Grid>
                             )}
                         </Stack>

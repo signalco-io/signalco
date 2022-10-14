@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { SystemStyleObject } from '@mui/system';
-import { Box, IconButton, Input, InputAdornment, Theme, Typography } from '@mui/material';
+import { Stack, SystemStyleObject } from '@mui/system';
+import { Box, IconButton, Input, Theme, Typography } from '@mui/joy';
 import { Close, Edit, Save } from '@mui/icons-material';
 
 interface IEditableInputProps {
@@ -42,41 +42,45 @@ function EditableInput(props: IEditableInputProps) {
         else if (e.key === 'Escape') handleCancel();
     };
 
-    return (
-        isEditing
-            ? <Input
-                sx={{
-                    '& input': {
-                        ...(sxInput || sx)
-                    }
-                }}
-                value={editingText}
-                autoFocus
-                onChange={(e) => setEditingText(e.target.value)}
-                onKeyDown={handleKeyDown}
-                endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton
-                            aria-label="Confirm edit"
-                            onClick={handleConfirm}>
-                            <Save />
-                        </IconButton>
-                        <IconButton
-                            aria-label="Cancel edit"
-                            onClick={handleCancel}>
-                            <Close />
-                        </IconButton>
-                    </InputAdornment>
-                }
-            />
-            : <Box sx={{ py: '4px', cursor: 'pointer' }} onClick={() => setIsEditing(true)}>
+    if (isEditing) {
+        return (
+            <Stack direction="row" spacing={1}>
+                <Input
+                    sx={{
+                        '& input': {
+                            ...(sxInput || sx)
+                        }
+                    }}
+                    value={editingText}
+                    autoFocus
+                    onChange={(e) => setEditingText(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                />
+                <Stack spacing={1} direction="row">
+                    <IconButton
+                        aria-label="Confirm edit"
+                        onClick={handleConfirm}>
+                        <Save />
+                    </IconButton>
+                    <IconButton
+                        aria-label="Cancel edit"
+                        onClick={handleCancel}>
+                        <Close />
+                    </IconButton>
+                </Stack>
+            </Stack>
+        );
+    } else {
+        return (
+            <Box sx={{ py: '4px', cursor: 'pointer' }} onClick={() => setIsEditing(true)}>
                 <Typography sx={{
                     '& > .editIndicator': { visibility: 'hidden' },
                     '&:hover': { '& > .editIndicator': { visibility: 'visible' } },
                     ...sx
                 }} noWrap={noWrap}>{text}<span className="editIndicator"><Edit sx={{ ml: 1, verticalAlign: 'middle' }} /></span></Typography>
             </Box>
-    );
+        )
+    }
 }
 
 export default EditableInput;

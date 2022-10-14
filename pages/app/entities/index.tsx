@@ -1,7 +1,8 @@
 import React, { Suspense, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Avatar, Box, Button, ButtonBase, ButtonGroup, Grid, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { Avatar, Box, Button, ButtonBase, ButtonGroup, Grid, Paper, Stack, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { Typography } from '@mui/joy';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -105,7 +106,7 @@ function EntityCreate() {
 
     return (
         <Stack spacing={2}>
-            <Typography variant="body2" color="textSecondary">{t('PickTypeHeader')}</Typography>
+            <Typography level="body2">{t('PickTypeHeader')}</Typography>
             <ButtonGroup orientation="vertical">
                 {types.map(type => (
                     <Button key={type.value} onClick={() => onType(type)}>{tType(type.label)}</Button>
@@ -149,7 +150,7 @@ function Entities() {
         <>
         <Stack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
             <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 2 }}>
-                <Typography variant="h2" sx={{ display: { xs: 'none', sm: 'inline-block' } }}>{t('Entities')}</Typography>
+                <Typography level="h5" sx={{ display: { xs: 'none', sm: 'inline-block' } }}>{t('Entities')}</Typography>
                 <Stack direction="row" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="flex-end">
                     {showSearch && <TextField
                         label={t('SearchLabel')}

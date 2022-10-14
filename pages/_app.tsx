@@ -2,8 +2,8 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { SnackbarProvider } from 'notistack';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
-import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { CssVarsProvider } from '@mui/joy/styles';
 import appTheme from '../src/theme';
 import '../styles/global.scss';
 import { ChildrenProps } from '../src/sharedTypes';
@@ -43,7 +43,7 @@ export default function App(props: AppProps) {
       <CssVarsProvider theme={appTheme()}>
         <ThemeChangerWrapper>
           <SnackbarProvider maxSnack={3}>
-            <CssBaseline />
+            <CssBaseline enableColorScheme />
             <Layout>
               <Component {...pageProps} />
             </Layout>

@@ -101,7 +101,8 @@ function CellRenderer(props: IAutoTableCellRendererProps) {
           gridColumn: props.column,
           px: 2,
           py: 1,
-          borderBottom: '1px solid rgba(128,128,128,0.6)',
+          borderBottom: '1px solid transparent',
+          borderBottomColor: 'divider',
           display: 'flex',
           alignItems: 'center',
           height: '100%'

@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import { Box, Stack } from '@mui/system';
-import { ToggleButton } from '@mui/material';
 import useEntity from 'src/hooks/useEntity';
 import useContact from 'src/hooks/useContact';
 import { entityRenameAsync } from 'src/entity/EntityRepository';
 import EditableInput from 'components/shared/form/EditableInput';
+import DisableButton from 'components/shared/buttons/DisableButton';
 import ShareEntityChip from 'components/entity/ShareEntityChip';
 import EntityStatus from 'components/entity/EntityStatus';
 import EntityProcessDetails from './EntityProcessDetails';
@@ -35,6 +35,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
     }, [entity]);
 
     const disabledContact = useContact(entity && { entityId: entity.id, channelName: 'config', contactName: 'disabled' });
+    const isDisabled = disabledContact.data?.valueSerialized === 'true';
 
     return (
         <Stack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
@@ -54,7 +55,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                     <EntityStatus entity={entity} />
                     <ShareEntityChip entity={entity} entityType={1} />
                     {!disabledContact.isError && (
-                        <ToggleButton value={disabledContact.data?.valueSerialized === 'true'}>Disable</ToggleButton>
+                        <DisableButton disabled={isDisabled} />
                     )}
                 </Stack>
             </Stack>

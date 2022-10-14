@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { IconButton, Slider, Stack, Switch, Typography } from '@mui/material';
+import { IconButton, Slider, Stack, Typography } from '@mui/material';
+import Switch from '@mui/joy/Switch';
 import { PlayArrow as PlayArrowIcon } from '@mui/icons-material';
 import throttle from 'src/helpers/Throttle';
 import blendColors from 'src/helpers/BlendColors';
@@ -64,7 +65,7 @@ export default function InputContactValue(props: InputContactValueProps) {
 
     if (dataType === 'bool') {
         const boolValue = typeof value === 'boolean' ? value : value === 'true';
-        return <Switch onChange={(_, checked) => onChange(checked)} checked={boolValue} color="warning" />
+        return <Switch onChange={(e) => onChange(e.target.checked)} checked={boolValue} color="warning" />
     } else if (dataType === 'action' || dataType === 'enum') {
         return (
             <Stack alignItems="center" direction="row">

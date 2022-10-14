@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import NextLink from 'next/link';
-import { Box, Container, Divider, Grid, IconButton, Link, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/system';
+import { Divider, Grid, IconButton, Typography, Link as JoyLink } from '@mui/joy';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import RedditIcon from '@mui/icons-material/Reddit';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import Container from 'components/shared/layout/Container';
 import SignalcoLogotype from '../icons/SignalcoLogotype';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
@@ -28,7 +30,8 @@ const footerLinks: FooterSectionType[] = [
     {
         header: 'Community',
         links: [
-            { name: 'Discussions on GitHub', href: 'https://github.com/signalco-io/signalco/discussions', developerOnly: true }
+            { name: 'Discussions on GitHub', href: 'https://github.com/signalco-io/signalco/discussions', developerOnly: true },
+            { name: 'r/signalco', href: 'https://www.reddit.com/r/signalco/', developerOnly: true }
         ]
     },
     {
@@ -53,14 +56,12 @@ const footerLinks: FooterSectionType[] = [
     }
 ];
 
-function SLink({ href, children }: { href: string; children: React.ReactElement | string; }) {
+function Link(props: { href: string, children: ReactNode }) {
     return (
-        <NextLink href={href} passHref>
-            {typeof children === 'string' ? (
-                <Link underline="hover">{children}</Link>
-            ) : (
-                children
-            )}
+        <NextLink href={props.href} passHref>
+            <JoyLink>
+                {props.children}
+            </JoyLink>
         </NextLink>
     );
 }
@@ -71,47 +72,40 @@ export default function Footer() {
             <Divider />
             <Container maxWidth="lg">
                 <Box component="footer" sx={{ padding: '64px 0 32px 0' }}>
-                    <Grid container direction="column" spacing={4}>
-                        <Grid item>
-                            <Grid container justifyContent="space-between" spacing={4}>
-                                {footerLinks.filter(i => appSettingsProvider.isDeveloper ? true : !i.developerOnly).map(section => (
-                                    <Grid item key={section.header} xs={12} sm={6} md={3} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-                                        <Typography variant="h4" color="textSecondary" sx={{ pb: 2 }}>{section.header}</Typography>
-                                        <Stack spacing={1}>
-                                            {section.links.filter(l => appSettingsProvider.isDeveloper ? true : !l.developerOnly).map(link => (
-                                                <SLink key={link.name} href={link.href}>{link.name}</SLink>
-                                            ))}
-                                        </Stack>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </Grid>
-                        <Grid item>
-                            <Stack alignItems={{ xs: 'center', sm: 'stretch' }}>
-                                <SignalcoLogotype height={68} />
-                                <Stack alignItems="center" justifyContent="space-between" direction={{ xs: 'column-reverse', sm: 'row' }}>
-                                    <Typography textAlign={{ xs: 'center', sm: 'left' }} variant="subtitle2" fontWeight={400} component="span" color="textSecondary">Copyright © {DateTimeProvider.now().getFullYear()} signalco. All rights reserved.</Typography>
-                                    <Stack direction="row" spacing={1} alignItems={{ xs: 'center', sm: 'start' }}>
-                                        <SLink href="https://twitter.com/signalco_io">
-                                            <IconButton size="large" aria-label="Twitter link">
-                                                <TwitterIcon />
-                                            </IconButton>
-                                        </SLink>
-                                        <SLink href="https://www.reddit.com/r/signalco/">
-                                            <IconButton size="large" aria-label="reddit link">
-                                                <RedditIcon />
-                                            </IconButton>
-                                        </SLink>
-                                        <SLink href="https://github.com/signalco-io/signalco">
-                                            <IconButton size="large" aria-label="GitHub link">
-                                                <GitHubIcon />
-                                            </IconButton>
-                                        </SLink>
+                    <Stack spacing={4}>
+                        <Grid container direction="row" justifyContent="space-between" spacing={4}>
+                            {footerLinks.filter(i => appSettingsProvider.isDeveloper ? true : !i.developerOnly).map(section => (
+                                <Grid key={section.header} xs={12} sm={6} md={3} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+                                    <Typography level="h6" textColor="neutral.400" sx={{ pb: 2 }}>{section.header}</Typography>
+                                    <Stack spacing={1}>
+                                        {section.links.filter(l => appSettingsProvider.isDeveloper ? true : !l.developerOnly).map(link => (
+                                            <Link key={link.name} href={link.href}>{link.name}</Link>
+                                        ))}
                                     </Stack>
+                                </Grid>
+                            ))}
+                        </Grid>
+                        <Stack alignItems={{ xs: 'center', sm: 'stretch' }}>
+                            <SignalcoLogotype width={220} />
+                            <Stack alignItems="center" justifyContent="space-between" direction={{ xs: 'column-reverse', sm: 'row' }}>
+                                <Typography
+                                    textAlign={{ xs: 'center', sm: 'left' }}
+                                    level="body2"
+                                    textColor="neutral.400">Copyright © {DateTimeProvider.now().getFullYear()} signalco. All rights reserved.</Typography>
+                                <Stack direction="row" spacing={1} alignItems={{ xs: 'center', sm: 'start' }}>
+                                    <IconButton aria-label="Twitter link" href="https://twitter.com/signalco_io">
+                                        <TwitterIcon />
+                                    </IconButton>
+                                    <IconButton aria-label="reddit link" href="https://www.reddit.com/r/signalco/">
+                                        <RedditIcon />
+                                    </IconButton>
+                                    <IconButton aria-label="GitHub link" href="https://github.com/signalco-io/signalco">
+                                        <GitHubIcon />
+                                    </IconButton>
                                 </Stack>
                             </Stack>
-                        </Grid>
-                    </Grid>
+                        </Stack>
+                    </Stack>
                 </Box>
             </Container>
         </Box>

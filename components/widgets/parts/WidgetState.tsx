@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
 import { Box } from '@mui/system';
-import { ButtonBase, CircularProgress, Stack, Typography } from '@mui/material';
+import { ButtonBase, Stack, Typography } from '@mui/material';
+import CircularProgress from '@mui/joy/CircularProgress';
 import useContacts from 'src/hooks/useContacts';
 import { entityAsync } from 'src/entity/EntityRepository';
 import IContactPointer from 'src/contacts/IContactPointer';
@@ -135,7 +136,7 @@ function WidgetState(props: WidgetSharedProps) {
             </Stack>
             {isLoading && (
                 <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
-                    <CircularProgress size={24} />
+                    <CircularProgress size="sm" />
                 </Box>
             )}
         </ButtonBase>

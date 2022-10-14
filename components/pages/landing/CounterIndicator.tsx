@@ -1,5 +1,5 @@
 import { useInView } from 'react-cool-inview';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/joy';
 import GentleSlide from 'components/shared/animations/GentleSlide';
 
 function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
@@ -30,7 +30,7 @@ function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
                         display: 'block',
                         height: '64px',
                         width: '1px',
-                        background: 'linear-gradient(180deg, var(--mui-palette-text-primary) 40%, rgba(255, 255, 255, 0) 100%)',
+                        background: 'linear-gradient(180deg, var(--joy-palette-text-primary) 40%, rgba(255, 255, 255, 0) 100%)',
                         position: 'absolute',
                         left: '20px',
                         top: '-64px',
@@ -41,13 +41,13 @@ function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
                         display: 'block',
                         height: '64px',
                         width: '1px',
-                        background: 'linear-gradient(180deg, var(--mui-palette-text-primary) 40%, rgba(255, 255, 255, 0) 100%)',
+                        background: 'linear-gradient(180deg, var(--joy-palette-text-primary) 40%, rgba(255, 255, 255, 0) 100%)',
                         position: 'absolute',
                         left: '21px',
                         top: '42px',
                     } : undefined
                 }}>
-                    <Typography textAlign="center" fontSize={23} fontWeight={600}>{props.count}</Typography>
+                    <Typography textColor="primary.contrastText" textAlign="center" fontSize={23}>{props.count}</Typography>
                 </Box>
             </Box>
         </GentleSlide>

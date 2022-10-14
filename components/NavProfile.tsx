@@ -19,10 +19,10 @@ import {
   Menu,
   MenuItem,
   Stack,
-  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { Typography } from '@mui/joy';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MenuIcon from '@mui/icons-material/Menu';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -65,7 +65,7 @@ function UserAvatar() {
     userNameInitials = user.email[0];
   }
 
-  const size = { xs: '36px', sm: '42px', lg: '58px' };
+  const size = { xs: '36px', sm: '42px', lg: '48px' };
 
   if (user.picture) {
     return (<Avatar sx={{ width: size, height: size }} variant="circular" src={user.picture} alt={userNameInitials}>
@@ -113,7 +113,7 @@ function UserProfileAvatar() {
         <Stack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
           <UserAvatar />
           {!isMobile &&
-            <Typography variant="h5" fontWeight={500} sx={{ maxWidth: `${maxWidth}px` }}>{userNickName}</Typography>
+            <Typography sx={{ maxWidth: `${maxWidth}px` }}>{userNickName}</Typography>
           }
           <ApiBadge />
         </Stack>
@@ -166,7 +166,7 @@ function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: S
         <Stack direction="row" sx={{ width: isNotDesktop ? '100%' : '128px' }} alignItems="center" spacing={isMobile ? 1 : 0}>
           <Icon sx={{ opacity: active ? 1 : 0.6, mr: { xs: 0, lg: 2 }, fontSize: { xs: '26px', lg: '17px' } }} />
           {(isMobile || !isNotDesktop) &&
-            <Typography variant="h5" fontWeight={500} sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
+            <Typography fontWeight={500} sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
           }
         </Stack>
       </Button>
@@ -227,7 +227,7 @@ function NavProfile() {
             bottom: 0,
             left: 0,
             right: 0,
-            background: 'var(--mui-palette-background-default)',
+            background: 'var(--joy-palette-background-default)',
             zIndex: 999
           }}>
             <Stack>

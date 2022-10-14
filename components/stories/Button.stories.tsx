@@ -1,6 +1,7 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { Button, Stack, Typography } from '@mui/material';
+import { DefaultColorPalette, DefaultVariantProp } from '@mui/joy/styles/types';
+import { Button, Stack, Typography } from '@mui/joy';
 import { camelToSentenceCase } from '../../src/helpers/StringHelpers';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -9,18 +10,18 @@ export default {
   component: Button
 } as ComponentMeta<typeof Button>;
 
-type Variant = undefined | 'text' | 'outlined' | 'contained';
+type Variant = undefined | DefaultVariantProp;
 type VariantWithDefault = Variant | 'default';
 
-type Size = undefined | 'small' | 'medium' | 'large';
+type Size = undefined | 'sm' | 'md' | 'lg';
 type SizeWithDefault = Size | 'default';
 
-type Color = undefined | 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
+type Color = undefined | DefaultColorPalette;
 type ColorWithDefault = Color | 'default';
 
-const variants: VariantWithDefault[] = ['default', 'text', 'outlined', 'contained'];
-const sizes: SizeWithDefault[] = ['default', 'small', 'medium', 'large'];
-const colors: ColorWithDefault[] = ['default', 'inherit', 'primary', 'secondary', 'success', 'error', 'info', 'warning'];
+const variants: VariantWithDefault[] = ['default', 'plain', 'soft', 'outlined', 'solid'];
+const sizes: SizeWithDefault[] = ['default', 'sm', 'md', 'lg'];
+const colors: ColorWithDefault[] = ['default', 'primary', 'neutral', 'success', 'danger', 'info', 'warning'];
 
 function Size(props: { variant: Variant, size: Size }) {
   return <Stack>

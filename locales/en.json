@@ -198,7 +198,7 @@
             "ShareEntityChip": {
                 "Share": "Share with user...",
                 "ShareWith": "Shared with",
-                "Email": "Email address",
+                "EmailAddress": "Email address",
                 "SendInvitation": "Send invitation",
                 "Cancel": "Cancel"
             }

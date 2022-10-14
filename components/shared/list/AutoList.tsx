@@ -4,13 +4,9 @@ import {
   Alert,
   Box, LinearProgress, List,
   ListItem,
-
   ListItemIcon,
-
   ListItemSecondaryAction, ListItemText,
-
   SvgIconTypeMap,
-
   Typography
 } from '@mui/material';
 import IErrorProps from '../interfaces/IErrorProps';

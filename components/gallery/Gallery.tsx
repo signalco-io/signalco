@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack } from '@mui/material';
+import { Stack } from '@mui/system';
 import useIsTablet from 'src/hooks/useIsTablet';
 import GalleryGridFilter from './GalleryGridFilter';
 import GalleryGrid from './GalleryGrid';

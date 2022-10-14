@@ -3,6 +3,7 @@
 import * as React from 'react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { getInitColorSchemeScript } from '@mui/material/styles';
+import { getInitColorSchemeScript as joiGetInitColorSchemeScript } from '@mui/joy/styles';
 import createEmotionServer from '@emotion/server/create-instance';
 import createEmotionCache from '../src/createEmotionCache';
 
@@ -41,6 +42,7 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           {getInitColorSchemeScript()}
+          {joiGetInitColorSchemeScript()}
           <Main />
           <NextScript />
         </body>
