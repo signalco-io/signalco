@@ -1,4 +1,3 @@
-import { deepmerge } from '@mui/utils';
 import { experimental_extendTheme as extendMuiTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import {
