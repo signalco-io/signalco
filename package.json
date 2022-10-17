@@ -55,7 +55,7 @@
         "d3": "7.6.1",
         "date-fns": "2.29.3",
         "material-ui-popup-state": "4.1.0",
-        "monaco-editor": "0.34.0",
+        "monaco-editor": "0.34.1",
         "next": "12.3.1",
         "next-pwa": "5.6.0",
         "next-secure-headers": "2.2.0",
