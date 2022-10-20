@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Box, Stack } from '@mui/system';
-import { LoadingButton , Button, Typography } from '@mui/joy';
+import { Button, Typography } from '@mui/joy';
 import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
 import useDashboard from 'src/hooks/dashboards/useDashboard';
 import DashboardView from './DashboardView';
@@ -89,7 +89,7 @@ function Dashboards() {
                         <Box sx={{ px: 2, width: { md: 'auto', xs: '100%' } }}>
                             <Stack direction="row" spacing={1}>
                                 <Button variant="outlined" size="lg" onClick={() => setShowWidgetStore(true)} sx={{ width: '250px' }}>{t('AddWidget')}</Button>
-                                <LoadingButton loading={isSavingEdit} variant="outlined" size="large" onClick={handleEditDone} fullWidth>{t('Save')}</LoadingButton>
+                                <Button loading={isSavingEdit} variant="outlined" size="lg" onClick={handleEditDone} fullWidth>{t('Save')}</Button>
                             </Stack>
                         </Box>
                     )}
