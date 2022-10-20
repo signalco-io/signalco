@@ -1,46 +1,63 @@
-import {
-  extendTheme as extendJoyTheme,
-} from '@mui/joy/styles';
+import { extendTheme } from '@mui/joy/styles';
 
 export type AppThemeMode = 'system' | 'manual' | 'sunriseSunset' | 'timeRange';
 
+const zincColor = {
+  '50': '#f9fafb',
+  '100': '#f4f4f5',
+  '200': '#e4e4e7',
+  '300': '#d4d4d8',
+  '400': '#a1a1aa',
+  '500': '#71717a',
+  '600': '#52525b',
+  '700': '#3f3f46',
+  '800': '#27272a',
+  '900': '#18181b'
+}
+
+const neutralColor = {
+  '50': '#f9fafb',
+  '100': '#f4f4f5',
+  '200': '#e4e4e7',
+  '300': '#d4d4d8',
+  '400': '#a1a1aa',
+  '500': '#71717a',
+  '600': '#52525b',
+  '700': '#3f3f46',
+  '800': '#27272a',
+  '900': '#18181b'
+}
+
 const theme = () => {
-  const joyTheme = extendJoyTheme({
+  const joyTheme = extendTheme({
     colorSchemes: {
       dark: {
         palette: {
-          primary: { // zinc
-            '50': '#f9fafb',
-            '100': '#f4f4f5',
-            '200': '#e4e4e7',
-            '300': '#d4d4d8',
-            '400': '#a1a1aa',
-            '500': '#71717a',
-            '600': '#52525b',
-            '700': '#3f3f46',
-            '800': '#27272a',
-            '900': '#18181b',
-          },
+          primary: zincColor,
+          neutral: neutralColor,
           background: {
-            body: '#131313',
-            surface: '#000000',
+            body: '#000000',
+            surface: '#131313',
             level1: '#00ff00',
             level2: '#00ffff',
             level3: '#0000ff',
             // backdrop: '#ff00ff',
             tooltip: '#f0f0f0'
-          },
-          neutral: {
-            '50': '#f9fafb',
-            '100': '#f4f4f5',
-            '200': '#e4e4e7',
-            '300': '#d4d4d8',
-            '400': '#a1a1aa',
-            '500': '#71717a',
-            '600': '#52525b',
-            '700': '#3f3f46',
-            '800': '#27272a',
-            '900': '#18181b',
+          }
+        }
+      },
+      light: {
+        palette: {
+          primary: zincColor,
+          neutral: neutralColor,
+          background: {
+            // body: '#ffffff',
+            // surface: '#ffffff',
+            level1: '#00ff00',
+            level2: '#00ffff',
+            level3: '#0000ff',
+            // backdrop: '#ff00ff',
+            tooltip: '#f0f0f0'
           }
         }
       }
@@ -89,9 +106,9 @@ const theme = () => {
     }
   });
 
-  const finalTheme = joyTheme;//deepmerge(joyTheme, createdTheme);
-
-  return finalTheme;
+  return joyTheme;
 };
 
-export default theme;
+const rootTheme = theme();
+
+export default rootTheme;

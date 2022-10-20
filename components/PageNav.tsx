@@ -43,7 +43,7 @@ export function PageNav(props: { fullWidth?: boolean | undefined; }) {
     return (
         <Box component="nav" sx={{
             borderBottom: '1px solid transparent',
-            borderColor: 'divider',
+            borderColor: 'background.body',
             py: 2,
             position: 'fixed',
             left: 0,

@@ -203,7 +203,7 @@ function NavProfile() {
       {(isMobile && mobileMenuOpen) && <Typography sx={{ opacity: 0.6 }}>Menu</Typography>}
       {isMobile &&
         <>
-          <IconButton size="lg" onClick={handleMobileMenuOpenClick}>
+          <IconButton size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
             {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
           <Box hidden={!mobileMenuOpen} sx={{

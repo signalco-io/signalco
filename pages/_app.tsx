@@ -40,7 +40,7 @@ export default function App(props: AppProps) {
         <meta name="description" content="Automate your life" />
         <title>{`Signalco${title ? ' - ' + title : ''}`}</title>
       </Head>
-      <CssVarsProvider theme={appTheme()}>
+      <CssVarsProvider theme={appTheme}>
         <ThemeChangerWrapper>
           <SnackbarProvider maxSnack={3}>
             <CssBaseline />
