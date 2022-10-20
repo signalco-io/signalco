@@ -1,11 +1,12 @@
 import React from 'react';
-import Image from 'next/image';
-import { Box, Card, CardActions, CardHeader, CardMedia, Divider, Grid, IconButton, Stack, TextField, Typography } from '@mui/material';
+import Image from 'next/future/image';
+import { Box, Stack } from '@mui/system';
+import { AspectRatio, Card, CardOverflow, Grid, IconButton, TextField, Typography } from '@mui/joy';
 import { AddOutlined } from '@mui/icons-material';
 import { widgetType } from '../widgets/Widget';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
 
-const availableWidgets = [
+const availableWidgets: { type: widgetType | widgetType[], name: string, description: string, preview: string }[] = [
     {
         type: 'state',
         name: 'State',
@@ -57,44 +58,48 @@ const availableWidgets = [
 ];
 
 function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) {
-    const [filteredAvailableWidgetsItems, showAvailableWidgetsSearch, searchAvailableWidgetsText, handleSearchAvailableWidgetsTextChange] =
+    const [
+        filteredAvailableWidgetsItems,
+        showAvailableWidgetsSearch,
+        searchAvailableWidgetsText,
+        handleSearchAvailableWidgetsTextChange] =
         useSearch(availableWidgets, filterFuncObjectStringProps, 6);
 
     return (
         <Stack spacing={2}>
             {showAvailableWidgetsSearch && <TextField placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />}
             <Stack direction="row">
-                <Typography variant="body2" color="text.secondary">{filteredAvailableWidgetsItems.length} widget{filteredAvailableWidgetsItems.length > 1 ? 's' : ''} available</Typography>
+                <Typography level="body2">{filteredAvailableWidgetsItems.length} widget{filteredAvailableWidgetsItems.length > 1 ? 's' : ''} available</Typography>
             </Stack>
-            <div>
+            <Box sx={{ maxHeight: '60vh', overflowY: 'auto' }}>
                 <Grid container spacing={2} justifyContent="center">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (
-                        <Grid item key={`${availableWidget.type}-${index}`}>
-                            <Card>
-                                <CardHeader
-                                    title={availableWidget.name}
-                                    subheader={availableWidget.description}
-                                    subheaderTypographyProps={{ variant: 'body2', color: 'text.secondary', pt: 1 }} />
-                                <CardMedia>
-                                    <Box sx={{ width: '100%', height: '370px', display: 'flex', 'justifyContent': 'center' }}>
+                        <Grid key={`${availableWidget.type}-${index}`}>
+                            <Card variant="outlined" sx={{ width: '370px' }}>
+                                <Stack pb={2}>
+                                    <Stack direction="row" spacing={1} justifyContent="space-between" alignItems="center">
+                                        <div>
+                                            <Typography>{availableWidget.name}</Typography>
+                                            <Typography level="body2">{availableWidget.description}</Typography>
+                                        </div>
+                                        <IconButton disabled={props.onAddWidget == null} aria-label="Add to dashboard" onClick={() => props.onAddWidget && props.onAddWidget(Array.isArray(availableWidget.type) ? availableWidget.type[0] : availableWidget.type)}>
+                                            <AddOutlined />
+                                        </IconButton>
+                                    </Stack>
+                                </Stack>
+                                <CardOverflow>
+                                    <AspectRatio ratio={1}>
                                         <Image
                                             src={availableWidget.preview}
                                             alt={`${availableWidget.name} Preview`}
-                                            width={availableWidget.previewWidth || 370}
-                                            height={availableWidget.previewHeight || 370} />
-                                    </Box>
-                                </CardMedia>
-                                <Divider />
-                                <CardActions sx={{ justifyContent: 'flex-end' }}>
-                                    <IconButton disabled={props.onAddWidget == null} aria-label="Add to dashboard" onClick={() => props.onAddWidget && props.onAddWidget(availableWidget.type)}>
-                                        <AddOutlined />
-                                    </IconButton>
-                                </CardActions>
+                                            fill sizes="100vw" />
+                                    </AspectRatio>
+                                </CardOverflow>
                             </Card>
                         </Grid>
                     ))}
                 </Grid>
-            </div>
+            </Box>
         </Stack>
     );
 }

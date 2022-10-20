@@ -7,7 +7,7 @@ export interface CheckboxProps {
     readonly?: boolean;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     sx?: SxProps | undefined;
-    label: ReactNode;
+    label?: ReactNode;
     disableIcon?: boolean;
 }
 

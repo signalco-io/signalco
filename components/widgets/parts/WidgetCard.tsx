@@ -4,7 +4,8 @@ import {
     bindTrigger,
     usePopupState,
 } from 'material-ui-popup-state/hooks';
-import { Box, Button, ListItemIcon, ListItemText, Menu, MenuItem, Paper, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/system';
+import { Button, ListItemDecorator, Menu, MenuItem, Sheet } from '@mui/joy';
 import MoreHorizSharpIcon from '@mui/icons-material/MoreHorizSharp';
 import { Delete, Settings } from '@mui/icons-material';
 import useUserTheme from 'src/hooks/useUserTheme';
@@ -74,10 +75,10 @@ function WidgetCard(props: IWidgetCardProps) {
 
     return (
         <>
-            <Paper
+            <Sheet
                 sx={{
                     position: 'relative',
-                    borderRadius: 2,
+                    borderRadius: 8,
                     width: sizeWidth,
                     height: sizeHeight,
                     display: 'block',
@@ -86,7 +87,7 @@ function WidgetCard(props: IWidgetCardProps) {
                 variant="outlined">
                 {(!isLoading && needsConfiguration) ? (
                     <Stack justifyContent="stretch" sx={{ height: '100%' }}>
-                        <Button disabled={!isEditMode} size="large" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
+                        <Button disabled={!isEditMode} size="lg" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
                     </Stack>
                 ) : (<>{children}</>)}
                 {isEditMode && (
@@ -94,23 +95,23 @@ function WidgetCard(props: IWidgetCardProps) {
                         <Button sx={{ minWidth: '42px' }}  {...bindTrigger(popupState)}><MoreHorizSharpIcon /></Button>
                     </Box>
                 )}
-            </Paper >
+            </Sheet>
             {options && <WidgetConfiguration onConfiguration={handleOnConfiguration} options={options} config={config} isOpen={isConfiguring} />}
             <Menu {...bindMenu(popupState)}>
                 {options && (
                     <MenuItem onClick={handleOnConfigureClicked}>
-                        <ListItemIcon>
+                        <ListItemDecorator>
                             <Settings />
-                        </ListItemIcon>
-                        <ListItemText>Configure</ListItemText>
+                        </ListItemDecorator>
+                        Configure
                     </MenuItem>
                 )}
                 {onRemove && (
                     <MenuItem onClick={handleOnRemove}>
-                        <ListItemIcon>
+                        <ListItemDecorator>
                             <Delete />
-                        </ListItemIcon>
-                        <ListItemText>Remove</ListItemText>
+                        </ListItemDecorator>
+                        Remove
                     </MenuItem>
                 )}
             </Menu>

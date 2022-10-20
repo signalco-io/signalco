@@ -3,7 +3,7 @@ import { useSnackbar } from 'notistack';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Box, Stack } from '@mui/system';
-import { Fab } from '@mui/material';
+import { IconButton } from '@mui/joy';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import NavProfile from '../NavProfile';
 import { ChildrenProps } from '../../src/sharedTypes';
@@ -40,14 +40,14 @@ export function AppLayout(props: ChildrenProps) {
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
       {isFullScreen && (
-        <Fab
-          size="small"
+        <IconButton
+          size="lg"
           aria-label="Exit fullscreen"
           title="Exit fullscreen"
           sx={{ position: 'fixed', bottom: '12px', right: '12px' }}
           onClick={() => setFullScreenHash(undefined)}>
           <FullscreenExitIcon fontSize="medium" />
-        </Fab>
+        </IconButton>
       )}
     </>
   );

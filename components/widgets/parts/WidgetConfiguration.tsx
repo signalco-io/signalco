@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Button, Checkbox, FormControlLabel, FormGroup, InputAdornment, OutlinedInput, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/system';
+import { Button, TextField, Typography } from '@mui/joy';
+import Checkbox from 'components/shared/form/Checkbox';
 import SelectItems from '../../shared/form/SelectItems';
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
@@ -110,18 +112,21 @@ function WidgetConfigurationOption(props: { option: IWidgetConfigurationOption, 
             fullWidth
             onChange={(item) => item && item.length && props.onChange(item[0])} />
     } else if (props.option.type === 'yesno') {
-        return <FormGroup>
-            <FormControlLabel
-                control={<Checkbox checked={props.value} onChange={(e) => props.onChange(e.target.checked)} />}
+        return (
+            <Checkbox
+                checked={props.value}
+                onChange={(e) => props.onChange(e.target.checked)}
                 label={props.option.label} />
-        </FormGroup>
+        );
     } else if (
         props.option.type === 'number' ||
         props.option.type === 'string') {
-        return <OutlinedInput
-            value={props.value}
-            onChange={e => props.onChange(e.target.value)}
-            endAdornment={props.option.dataUnit && (<InputAdornment position="end">{props.option.dataUnit}</InputAdornment>)} />
+        return (
+            <TextField
+                value={props.value}
+                onChange={e => props.onChange(e.target.value)}
+                endDecorator={props.option.dataUnit && <span>{props.option.dataUnit}</span>} />
+        );
     } else if (props.option.type === 'static') {
         return <Typography>{props.value}</Typography>
     }

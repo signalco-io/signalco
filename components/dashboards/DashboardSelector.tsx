@@ -1,8 +1,10 @@
 import React, { Suspense, useEffect } from 'react';
+import Link from 'next/link';
 import { bindPopover, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import { Box, Stack } from '@mui/system';
-import { Button, List, ListItem, ListItemButton } from '@mui/joy';
+import { Button } from '@mui/joy';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import ClickAwayListener from '@mui/base/ClickAwayListener';
 import { PopperUnstyled } from '@mui/base';
 import useDashboards from 'src/hooks/dashboards/useDashboards';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
@@ -38,29 +40,45 @@ function DashboardSelector(props: IDashboardSelectorProps) {
             <Stack spacing={{ xs: 0, sm: 2 }} direction="row">
                 {(dashboards?.length ?? 0) > 0 && (
                     <Box>
-                        <Button variant="plain" size="lg" endDecorator={<KeyboardArrowDownIcon />} {...bindTrigger(popupState)}>
+                        <Button
+                            variant="plain"
+                            size="lg"
+                            sx={{
+                                '.JoyButton-endDecorator': {
+                                    pointerEvents: 'none'
+                                }
+                            }}
+                            endDecorator={<KeyboardArrowDownIcon />} {...bindTrigger(popupState)}>
                             {currentName}
                         </Button>
                     </Box>
                 )}
                 {(favoriteDashboards?.length ?? 0) > 0 && (
-                    <List row>
+                    <Stack direction="row">
                         {favoriteDashboards?.map(fd => (
-                            <ListItem key={fd.id}>
-                                <ListItemButton href={`#dashboard=${fd.id}`}>{fd.name}</ListItemButton>
-                            </ListItem>
+                            <Link key={fd.id} href={`#dashboard=${fd.id}`} passHref>
+                                <Button variant="plain" sx={{ color: 'var(--joy-palette-neutral-400)' }}>
+                                    {fd.name}
+                                </Button>
+                            </Link>
                         ))}
-                    </List>
+                    </Stack>
                 )}
             </Stack>
-            <PopperUnstyled {...bindPopover(popupState)}>
-                <DashboardSelectorMenu
-                    selectedId={selectedId}
-                    popupState={popupState}
-                    onSelection={setSelectedIdHash}
-                    onEditWidgets={onEditWidgets}
-                    onSettings={onSettings} />
-            </PopperUnstyled>
+            <ClickAwayListener onClickAway={(e) => {
+                if (e.target !== popupState.anchorEl) {
+                    popupState.close();
+                }
+            }}>
+                <PopperUnstyled {...bindPopover(popupState)}>
+                    <DashboardSelectorMenu
+                        selectedId={selectedId}
+                        popupState={popupState}
+                        onSelection={setSelectedIdHash}
+                        onEditWidgets={onEditWidgets}
+                        onSettings={onSettings} />
+                </PopperUnstyled>
+            </ClickAwayListener>
         </Suspense>
     );
 }

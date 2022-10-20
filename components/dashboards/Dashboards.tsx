@@ -88,8 +88,8 @@ function Dashboards() {
                     {isEditing && (
                         <Box sx={{ px: 2, width: { md: 'auto', xs: '100%' } }}>
                             <Stack direction="row" spacing={1}>
-                                <Button variant="outlined" size="lg" onClick={() => setShowWidgetStore(true)} sx={{ width: '250px' }}>{t('AddWidget')}</Button>
-                                <Button loading={isSavingEdit} variant="outlined" size="lg" onClick={handleEditDone} fullWidth>{t('Save')}</Button>
+                                <Button onClick={() => setShowWidgetStore(true)} sx={{ minWidth: '140px' }}>{t('AddWidget')}</Button>
+                                <Button loading={isSavingEdit} onClick={handleEditDone} fullWidth>{t('Save')}</Button>
                             </Stack>
                         </Box>
                     )}

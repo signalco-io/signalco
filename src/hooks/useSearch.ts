@@ -1,12 +1,12 @@
 import { useDeferredValue, useEffect, useMemo, useState, useTransition } from 'react';
 
-export const filterFuncObjectStringProps = (i: any, kw: string) => Object.keys(i).filter(ik => typeof i[ik] === 'string' && i[ik].toString().toLowerCase().indexOf(kw) >= 0).length > 0;
+export const filterFuncObjectStringProps = <TItem extends object>(i: TItem, kw: string) => Object.keys(i).filter(ik => typeof (i as any)[ik] === 'string' && (i as any)[ik].toString().toLowerCase().indexOf(kw) >= 0).length > 0;
 
-const defaultSearchFunc = (i: any, kw: string) => typeof i === 'string' && i.toString().toLocaleLowerCase() === kw;
+const defaultSearchFunc = <TItem>(i: TItem, kw: string) => typeof i === 'string' && i.toString().toLocaleLowerCase() === kw;
 
-type UseSearchReturn = [any[], boolean, string, (text: string) => void, boolean];
+type UseSearchReturn<TItem> = [TItem[], boolean, string, (text: string) => void, boolean];
 
-const useSearch = (items?: any[], filterFunc?: (item: any, keyword: string) => boolean, minItems?: number): UseSearchReturn => {
+const useSearch = <TItem>(items?: TItem[], filterFunc?: (item: TItem, keyword: string) => boolean, minItems?: number): UseSearchReturn<TItem> => {
     const [searchText, setSearchText] = useState<string>('');
     const [isTransitioning, startTransition] = useTransition();
 
@@ -15,7 +15,7 @@ const useSearch = (items?: any[], filterFunc?: (item: any, keyword: string) => b
     };
 
     const showSearch = useMemo(() => (items?.length ?? 0) > (minItems || 10), [items, minItems]);
-    const [filteredItems, setFilteredItems] = useState<any[]>([]);
+    const [filteredItems, setFilteredItems] = useState<TItem[]>([]);
 
     useEffect(() => {
         startTransition(() => {

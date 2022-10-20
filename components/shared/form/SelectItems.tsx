@@ -1,6 +1,5 @@
-import React, { useId } from 'react';
-import { Box, Checkbox, FormControl, InputLabel, ListItemText, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import Chip from '../indicators/Chip';
+import React from 'react';
+import { Select, Option } from '@mui/joy';
 
 export interface ISelectItemsProps {
     multiple?: boolean,
@@ -16,56 +15,44 @@ function SelectItems(props: ISelectItemsProps) {
     const {
         value,
         items,
-        multiple = false,
         placeholder,
-        fullWidth,
-        label,
         onChange
     } = props;
-    const id = useId();
-    const elementLabelId = `select-values-${id}`;
 
-    const handleOnChange = (event: SelectChangeEvent<typeof value>) => {
-        const newValue = event.target.value;
-
-        // On autofill we get a the stringified value.
-        onChange(typeof newValue === 'string' ? newValue.split(',') : newValue);
+    const handleOnChange = (_: any, value: string | string[] | null) => {
+        onChange(typeof value === 'string' ? value.split(',') : (value ?? []));
     };
 
     return (
-        <FormControl variant="filled" fullWidth={fullWidth}>
-            <InputLabel id={elementLabelId}>{label}</InputLabel>
-            <Select
-                labelId={elementLabelId}
-                value={value}
-                multiple={multiple}
-                placeholder={placeholder}
-                onChange={handleOnChange}
-                fullWidth={fullWidth}
-                renderValue={(selected) => {
-                    if (multiple)
-                        return (
-                            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                                {selected.map((value) => (
-                                    <Box key={value} sx={{ m: '2px' }}>
-                                        <Chip>{items.find(i => i.value === value)?.label ?? value}</Chip>
-                                    </Box>
-                                ))}
-                            </Box>
-                        );
-                    else {
-                        return items.find(i => i.value === (Array.isArray(selected) ? value[0] : selected))?.label ?? value;
-                    }
-                }}
-            >{items.map(item => (
-                <MenuItem
-                    value={item.value}
-                    key={item.value}>
-                    {multiple && <Checkbox checked={value.indexOf(item.value) > -1} />}
-                    <ListItemText primary={item.label ?? item.value} />
-                </MenuItem>)
-            )}</Select>
-        </FormControl>
+        <Select
+            value={value}
+            placeholder={placeholder}
+            onChange={handleOnChange}
+            renderValue={(selected) => {
+                // if (multiple)
+                //     return (
+                //         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                //             {selected.map((value) => (
+                //                 <Box key={value} sx={{ m: '2px' }}>
+                //                     <Chip>{items.find(i => i.value === value)?.label ?? value}</Chip>
+                //                 </Box>
+                //             ))}
+                //         </Box>
+                //     );
+                // else {
+                    const selectedValue = (Array.isArray(selected) ? selected[0] : selected);
+                    return items.find(i => i.value === selectedValue)?.label ?? value;
+                // }
+            }}
+        >{items.map(item => (
+            <Option
+                value={item.value}
+                key={item.value}>
+                {/* {multiple && <Checkbox checked={value.indexOf(item.value) > -1} />} */}
+                {item.label ?? item.value}
+            </Option>)
+        )}
+        </Select>
     );
 }
 

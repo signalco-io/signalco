@@ -43,14 +43,14 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
 
     return (
         <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-            <Stack direction="row" sx={{ width: '100%', position: 'relative' }}>
+            <Stack direction="row" alignItems="center" sx={{ width: '100%', position: 'relative' }}>
                 <Button
-                    disabled={dashboard.id === selectedId}
                     variant="plain"
+                    sx={{ color: dashboard.id !== selectedId ? 'var(--joy-palette-neutral-400)' : 'inherit' }}
                     onClick={() => onSelection(dashboard.id)}
-                    sx={{ flexGrow: 1, py: 1 }}
+                    fullWidth
                 >
-                    <Typography>{dashboard.name}</Typography>
+                    {dashboard.name}
                 </Button>
                 <IconButton sx={{ position: 'absolute', right: 0, height: '100%' }} onClick={() => onFavorite(dashboard.id)}>
                     {dashboard.isFavorite ? <PushPinSharpIcon /> : <PushPinOutlinedIcon />}
@@ -134,7 +134,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
 
     return (
         <Card sx={{ gap: 1.5 }}>
-            <Stack sx={{ minWidth: 330 }}>
+            <Stack sx={{ minWidth: 280 }}>
                 <Stack sx={{ maxHeight: '50vh', overflow: 'auto' }}>
                     <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
                         <SortableContext items={orderedDashboardIds}>
@@ -153,7 +153,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
             </Stack>
             <Divider />
             <Stack>
-                <Stack direction="row" alignItems="center" sx={{ p: 2 }}>
+                <Stack direction="row" alignItems="center" sx={{ px: 2 }}>
                     <Typography level="body2" sx={{ flexGrow: 1 }}>{selectedDashboard?.name}</Typography>
                     <ShareEntityChip entity={selectedDashboard} entityType={3} />
                 </Stack>

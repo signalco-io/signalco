@@ -1,7 +1,7 @@
 import React from 'react';
-import { Breakpoint, Stack } from '@mui/system';
+import { Box, Breakpoint, Stack } from '@mui/system';
 import { Modal, ModalClose, ModalDialog, Typography } from '@mui/joy';
-import useIsMobile from 'src/hooks/useIsMobile';
+import useIsTablet from 'src/hooks/useIsTablet';
 
 export interface IConfigurationDialogProps {
     isOpen: boolean,
@@ -15,28 +15,28 @@ export interface IConfigurationDialogProps {
 
 function ConfigurationDialog(props: IConfigurationDialogProps) {
     const { children, title, titleActions, isOpen, onClose, maxWidth = 'sm', actions } = props;
-    const isMobile = useIsMobile();
+    const isTablet = useIsTablet();
 
     return (
         <Modal open={isOpen} onClose={onClose}>
-            <ModalDialog layout={isMobile ? 'fullscreen' : 'center'} sx={{
+            <ModalDialog layout={isTablet ? 'fullscreen' : 'center'} sx={{
                 width: '100%',
-                maxWidth: maxWidth ? maxWidth : undefined,
+                maxWidth: maxWidth ? maxWidth : undefined
             }}>
                 <ModalClose />
                 <Stack spacing={1}>
-                <Stack direction="row" justifyContent="space-between" alignItems="center">
-                    <Typography level="h5">{title}</Typography>
-                    <Stack direction="row" spacing={1} sx={{mt: -1.5, mr: 4}}>
-                        {titleActions}
+                    <Stack direction="row" justifyContent="space-between" alignItems="center">
+                        <Typography level="h5">{title}</Typography>
+                        <Stack direction="row" spacing={1} sx={{ mt: -1.5, mr: 4 }}>
+                            {titleActions}
+                        </Stack>
                     </Stack>
-                </Stack>
-                {children}
-                {actions && (
-                    <Stack direction="row" spacing={1} justifyContent="end">
-                        {actions}
-                    </Stack>
-                )}
+                        {children}
+                    {actions && (
+                        <Stack direction="row" spacing={1} justifyContent="end">
+                            {actions}
+                        </Stack>
+                    )}
                 </Stack>
             </ModalDialog>
         </Modal>
