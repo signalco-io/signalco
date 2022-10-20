@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
-import { Box } from '@mui/system';
-import { ButtonBase, Stack, Typography } from '@mui/material';
+import { Box , Stack } from '@mui/system';
+import { ButtonBase } from '@mui/material';
 import CircularProgress from '@mui/joy/CircularProgress';
+import { Typography } from '@mui/joy';
 import useContacts from 'src/hooks/useContacts';
 import { entityAsync } from 'src/entity/EntityRepository';
 import IContactPointer from 'src/contacts/IContactPointer';

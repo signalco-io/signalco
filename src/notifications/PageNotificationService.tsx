@@ -1,5 +1,5 @@
 import { OptionsObject, SnackbarKey, SnackbarMessage, VariantType } from 'notistack';
-import { Button } from '@mui/material';
+import { Button } from '@mui/joy';
 
 class PageNotificationService {
     private _enqueue?: (message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey;

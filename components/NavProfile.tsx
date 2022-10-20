@@ -7,8 +7,7 @@ import {
   usePopupState,
 } from 'material-ui-popup-state/hooks';
 import { Box, Stack } from '@mui/system';
-import { useMediaQuery } from '@mui/material';
-import { Avatar, Button, Divider, IconButton, ListItemDecorator, Menu, MenuItem, Typography, useTheme } from '@mui/joy';
+import { Avatar, Button, Divider, IconButton, ListItemDecorator, Menu, MenuItem, Typography } from '@mui/joy';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MenuIcon from '@mui/icons-material/Menu';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -17,7 +16,10 @@ import DashboardSharpIcon from '@mui/icons-material/DashboardSharp';
 import CommitIcon from '@mui/icons-material/Commit';
 import CloseIcon from '@mui/icons-material/Close';
 import { SvgIconComponent } from '@mui/icons-material';
+import useIsTablet from 'src/hooks/useIsTablet';
 import useIsMobile from 'src/hooks/useIsMobile';
+import useIsLaptop from 'src/hooks/useIsLaptop';
+import useIsDesktop from 'src/hooks/useIsDesktop';
 import Loadable from './shared/Loadable/Loadable';
 import ApiBadge from './development/ApiBadge';
 import LocalStorageService from '../src/services/LocalStorageService';
@@ -122,9 +124,10 @@ function UserProfileAvatar() {
 }
 
 export const useNavWidth = () => {
-  const theme = useTheme();
   const isMobile = useIsMobile();
-  const isLaptopOrTablet = useMediaQuery(theme.breakpoints.between('sm', 'lg'));
+  const isLaptop = useIsLaptop();
+  const isTablet = useIsTablet()
+  const isLaptopOrTablet = isTablet || isLaptop;
 
   if (isMobile)
     return 0;
@@ -132,9 +135,8 @@ export const useNavWidth = () => {
 };
 
 function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: SvgIconComponent, active: boolean, label: string, onClick?: () => void }) {
-  const theme = useTheme();
   const isMobile = useIsMobile();
-  const isNotDesktop = useMediaQuery(theme.breakpoints.down('lg'));
+  const isNotDesktop = !useIsDesktop();
 
   return (
     <Link href={path} passHref>

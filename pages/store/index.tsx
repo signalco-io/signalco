@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Stack from '@mui/material/Stack';
+import { Stack } from '@mui/system';
 import { amber, green, grey } from '@mui/material/colors';
 import { Card, CardActionArea, CardContent, Grid, Typography } from '@mui/material';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';

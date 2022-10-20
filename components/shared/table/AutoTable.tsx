@@ -1,14 +1,10 @@
 import React from 'react';
 import NextLink from 'next/link';
+import { Box, Stack } from '@mui/system';
 import {
-  Alert,
-  Box,
-  LinearProgress, Link,
-  Stack,
-  TextField,
-  Tooltip,
-  Typography
+  LinearProgress
 } from '@mui/material';
+import { Alert, Link, TextField, Tooltip, Typography } from '@mui/joy';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import IErrorProps from '../interfaces/IErrorProps';
 import ResultsPlaceholder from '../indicators/ResultsPlaceholder';
@@ -49,7 +45,7 @@ function ErrorRow(props: IErrorProps) {
   return (
     <div>
       <div>
-        <Alert severity="error">
+        <Alert color="danger">
           {(props.error || 'Unknown error').toString()}
         </Alert>
       </div>
@@ -107,7 +103,7 @@ function CellRenderer(props: IAutoTableCellRendererProps) {
           alignItems: 'center',
           height: '100%'
         }}>
-        <Typography variant="body2" style={props.style} component="div">{value}</Typography>
+        <Typography level="body2" style={props.style} component="div">{value}</Typography>
       </Box>
     </Wrapper>
   );
@@ -135,7 +131,7 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
 
   return (
     <Stack spacing={1} sx={{ height: '100%' }}>
-      {!props.hideSearch && showSearch && <TextField label={props.localize ? props.localize('SearchLabel') : 'Search...'} sx={{ mx: 2 }} size="small" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
+      {!props.hideSearch && showSearch && <TextField label={props.localize ? props.localize('SearchLabel') : 'Search...'} sx={{ mx: 2 }} size="sm" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ overflow: 'auto', display: 'grid' }}>
           {props.isLoading && <LinearProgress />}

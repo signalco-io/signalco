@@ -1,14 +1,15 @@
 import React from 'react';
+import { Box } from '@mui/system';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import {
-  Alert,
-  Box, LinearProgress, List,
+  LinearProgress,
+  List,
   ListItem,
   ListItemIcon,
   ListItemSecondaryAction, ListItemText,
-  SvgIconTypeMap,
-  Typography
+  SvgIconTypeMap
 } from '@mui/material';
+import { Alert, Typography } from '@mui/joy';
 import IErrorProps from '../interfaces/IErrorProps';
 import IAutoAction from '../interfaces/IAutoAction';
 import ResultsPlaceholder from '../indicators/ResultsPlaceholder';
@@ -41,7 +42,7 @@ function ItemRenderer(props: IItemRendererProps) {
         </ListItemIcon>
       )}
       <ListItemText>
-        <Typography variant="body2">{props.item.value}</Typography>
+        <Typography level="body2">{props.item.value}</Typography>
       </ListItemText>
       {props.item.actions &&
         props.item.actions.map((action) => (
@@ -61,7 +62,7 @@ function AutoList<T extends IAutoListItem>(props: IAutoListProps<T>) {
   ) : (
       <List>
         {props.error ? (
-          <Alert severity="error">
+          <Alert color="danger">
             {(props.error || 'Unknown error').toString()}
           </Alert>
         ) : (

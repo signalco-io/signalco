@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/system';
 import { LoadingButton } from '@mui/lab';
+import { Button, Typography } from '@mui/joy';
 import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
 import useDashboard from 'src/hooks/dashboards/useDashboard';
 import DashboardView from './DashboardView';
@@ -88,7 +89,7 @@ function Dashboards() {
                     {isEditing && (
                         <Box sx={{ px: 2, width: { md: 'auto', xs: '100%' } }}>
                             <Stack direction="row" spacing={1}>
-                                <Button variant="outlined" size="large" onClick={() => setShowWidgetStore(true)} sx={{ width: '250px' }}>{t('AddWidget')}</Button>
+                                <Button variant="outlined" size="lg" onClick={() => setShowWidgetStore(true)} sx={{ width: '250px' }}>{t('AddWidget')}</Button>
                                 <LoadingButton loading={isSavingEdit} variant="outlined" size="large" onClick={handleEditDone} fullWidth>{t('Save')}</LoadingButton>
                             </Stack>
                         </Box>
@@ -107,9 +108,9 @@ function Dashboards() {
                                     <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
                                         <Stack maxWidth={280} spacing={4} alignItems="center" justifyContent="center">
                                             <Image priority width={280} height={213} alt={t('NoDashboardsPlaceholder')} src="/assets/placeholders/placeholder-no-dashboards.svg" />
-                                            <Typography variant="h1">{t('NoDashboardsPlaceholder')}</Typography>
-                                            <Typography textAlign="center" color="textSecondary">{t('NoDashboardsHelpText')}</Typography>
-                                            <Button variant="contained" onClick={handleNewDashboard}>{t('NewDashboard')}</Button>
+                                            <Typography level="h2">{t('NoDashboardsPlaceholder')}</Typography>
+                                            <Typography textAlign="center" level="body2">{t('NoDashboardsHelpText')}</Typography>
+                                            <Button onClick={handleNewDashboard}>{t('NewDashboard')}</Button>
                                         </Stack>
                                     </Stack>
                                 </Stack>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import { Box } from '@mui/system';
-import { Button, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/system';
+import { Button, Typography } from '@mui/joy';
 import GridWrapper from './GridWrapper';
 import DragableWidget from './DragableWidget';
 import DisplayWidget from './DisplayWidget';
@@ -50,9 +50,9 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
                 <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
                     <Stack maxWidth={320} spacing={4} alignItems="center" justifyContent="center">
                         <Image priority width={280} height={213} alt="No Widgets" src="/assets/placeholders/placeholder-no-widgets.svg" />
-                        <Typography variant="h1">{t('NoWidgets')}</Typography>
-                        <Typography textAlign="center" color="textSecondary">{t('NoWidgetsHelpTextFirstLine')}<br />{t('NoWidgetsHelpTextSecondLine')}</Typography>
-                        <Button variant="contained" onClick={onAddWidget}>{t('AddWidget')}</Button>
+                        <Typography level="h2">{t('NoWidgets')}</Typography>
+                        <Typography textAlign="center" level="body2">{t('NoWidgetsHelpTextFirstLine')}<br />{t('NoWidgetsHelpTextSecondLine')}</Typography>
+                        <Button onClick={onAddWidget}>{t('AddWidget')}</Button>
                     </Stack>
                 </Stack>
             </Stack>

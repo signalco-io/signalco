@@ -2,9 +2,10 @@ import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import Link from 'next/link';
 import axios, { AxiosError, Method } from 'axios';
-import { Alert, AlertTitle, Badge, Box, Button, Divider, FormControl, Grid, InputLabel, MenuItem, Link as MuiLink, Paper, Select, Skeleton, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/system';
+import { FormControl, Grid, InputLabel, MenuItem, Link as MuiLink, Paper, Select, Skeleton } from '@mui/material';
 import { TreeItem, TreeView } from '@mui/lab';
-import {Typography, TextField } from '@mui/joy';
+import {Typography, TextField, Divider, Badge, Alert, Button } from '@mui/joy';
 import SendIcon from '@mui/icons-material/Send';
 import SecurityIcon from '@mui/icons-material/Security';
 import OpenInNewSharpIcon from '@mui/icons-material/OpenInNewSharp';
@@ -201,7 +202,7 @@ function ApiOperation(props: ApiOperationProps) {
 
 function ResponseStatusCode(props: { statusCode: number }) {
     return (
-        <Badge variant="dot" color={props.statusCode < 300 ? 'success' : (props.statusCode < 500 ? 'warning' : 'error')}>
+        <Badge color={props.statusCode < 300 ? 'success' : (props.statusCode < 500 ? 'warning' : 'danger')}>
             <Typography sx={{ pr: 1 }}>{props.statusCode}</Typography>
         </Badge>
     );
@@ -482,7 +483,7 @@ function Actions(props: ActionsProps) {
                     </Stack>
                 </Stack>
             )}
-            <Button variant="outlined" startIcon={<SendIcon />} onClick={handleExecuteAction}>Run</Button>
+            <Button variant="outlined" startDecorator={<SendIcon />} onClick={handleExecuteAction}>Run</Button>
             {responseStatusCode && (
                 <Stack spacing={1}>
                     <Stack direction="row" alignItems="center" justifyContent="space-between">
@@ -517,16 +518,16 @@ function DocsApiPage() {
         <ApiContext.Provider value={api}>
             <Stack>
                 {error && (
-                    <Alert severity="error" variant="filled" sx={{ borderRadius: 0 }}>
-                        <AlertTitle>{'Couldn\'t load OpenAPI docs'}</AlertTitle>
-                        {error}
+                    <Alert color="danger" variant="solid">
+                        <Typography fontWeight="lg" mt={0.25}>{'Couldn\'t load OpenAPI docs'}</Typography>
+                        <Typography fontSize="sm">{error}</Typography>
                     </Alert>
                 )}
                 <Stack direction="row" alignItems="stretch">
                     <Box sx={{ minWidth: { xs: '230px', md: '320px' }, px: 2, py: 4 }}>
                         {isLoading || !api ? <NavSkeleton /> : <Nav />}
                     </Box>
-                    <Divider orientation="vertical" flexItem />
+                    <Divider />
                     <Box flexGrow={1}>
                         <Route />
                     </Box>
