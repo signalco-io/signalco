@@ -16,7 +16,7 @@ function OfflinePage() {
             <div>
                 <SignalcoLogotype width={230} />
             </div>
-            <Typography variant="h1" fontWeight={300} color="textSecondary">You are offline...</Typography>
+            <Typography level="h1" fontWeight={300} textColor="text.secondary">You are offline...</Typography>
         </Stack>
     );
 }

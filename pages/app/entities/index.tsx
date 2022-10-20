@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack } from '@mui/system';
-import { Avatar, Button, Card, Radio, RadioGroup, TextField, Typography } from '@mui/joy';
+import { Avatar, Button, Card, IconButton, TextField, Typography } from '@mui/joy';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -11,6 +11,7 @@ import IEntityDetails from 'src/entity/IEntityDetails';
 import { entityUpsertAsync } from 'src/entity/EntityRepository';
 import { entityLastActivity } from 'src/entity/EntityHelper';
 import Timeago from 'components/shared/time/Timeago';
+import Picker from 'components/shared/form/Picker';
 import EntityIcon from 'components/shared/entity/EntityIcon';
 import ConfigurationDialog from 'components/shared/dialog/ConfigurationDialog';
 import EntityStatus from 'components/entity/EntityStatus';
@@ -147,7 +148,7 @@ function Entities() {
         <>
             <Stack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 2 }}>
-                    <Typography level="h5" sx={{ display: { xs: 'none', sm: 'inline-block' } }}>{t('Entities')}</Typography>
+                    <Typography level="h2" fontWeight="300" sx={{ display: { xs: 'none', sm: 'inline-block' } }}>{t('Entities')}</Typography>
                     <Stack direction="row" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="flex-end">
                         {showSearch && <TextField
                             label={t('SearchLabel')}
@@ -156,12 +157,12 @@ function Entities() {
                             onChange={(e) => handleSearchTextChange(e.target.value)}
                             sx={{ width: { xs: '100%', sm: 'initial' } }} />}
                         <Suspense>
-                            <RadioGroup value={entityListViewType} onChange={(e) => setEntityListViewType(e.target.value)}>
-                                <Radio value="table" size="sm" title="List view"><ViewListIcon /></Radio>
-                                <Radio value="cards" size="sm" title="Card view"><ViewModuleIcon /></Radio>
-                            </RadioGroup>
+                            <Picker value={entityListViewType} setValue={setEntityListViewType} options={[
+                                { value: 'table', label: <ViewListIcon /> },
+                                { value: 'cards', label: <ViewModuleIcon /> }
+                            ]} />
                         </Suspense>
-                        <Button variant="outlined" startDecorator={<AddCircleIcon />} onClick={handleAddEntity}>{t('NewEntity')}</Button>
+                        <IconButton size="lg" onClick={handleAddEntity}><AddCircleIcon /></IconButton>
                     </Stack>
                 </Stack>
                 <Stack spacing={1}>

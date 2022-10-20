@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { Stack } from '@mui/system';
-import { Button, Card, Typography } from '@mui/joy';
+import { Card, Typography } from '@mui/joy';
+import NavigatingButton from 'components/shared/buttons/NavigatingButton';
+import Breadcrumbs from 'components/shared/Breadcrumbs';
 import ShareSocial from 'components/pages/ShareSocial';
 import FaqSection from 'components/pages/FaqSection';
 import CtaSection from 'components/pages/CtaSection';
@@ -22,12 +23,18 @@ function ChannelPage() {
     const channel = channels.find(c => c.channelName === channelName);
     const channelCategories = channel?.categories.map(cc => categories.find(category => category.id === cc)).filter(cc => cc);
 
+    const breadcrumbs = [
+        { href: '/channels', label: 'Channels' },
+        { label: channel?.label }
+    ]
+
     return (
         <Stack spacing={12}>
             <Stack spacing={8}>
-                <Stack spacing={4}>
-                    <ChannelLogo channelName={channelName} label={channel?.label} />
-                    <Stack direction="row" alignItems="center" spacing={1}>
+                <Stack spacing={2}>
+                    <Breadcrumbs items={breadcrumbs} />
+                    <Stack spacing={4} direction="row">
+                        <ChannelLogo channelName={channelName} label={channel?.label} />
                         <Typography level="h1">{channel?.label} channel</Typography>
                         <ShareSocial />
                     </Stack>
@@ -43,22 +50,20 @@ function ChannelPage() {
                             <Stack spacing={1}>
                                 {channelCategories?.map(category => {
                                     return (
-                                        <Link key={category?.id} href={`/channels?category=${category?.id}`} passHref>
-                                            <Button variant="plain">
-                                                {category?.label}
-                                            </Button>
-                                        </Link>
+                                        <NavigatingButton key={category?.id} href={`/channels?category=${category?.id}`} hideArrow>
+                                            {category?.label}
+                                        </NavigatingButton>
                                     );
                                 })}
                             </Stack>
                         </Stack>
                     </Card>
                 </Stack>
-                <Stack direction="row" alignItems="center" spacing={2}>
-                    <Link href={`/app/channels/${channelName}`} passHref>
-                        <Button disabled={channel?.planned} color="primary">Use this channel</Button>
-                    </Link>
-                    {channel?.planned && <Typography>Available soon</Typography>}
+                <Stack direction="column" alignItems="start">
+                    <NavigatingButton href={`/app/channels/${channelName}`} disabled={channel?.planned}>
+                        Use this channel
+                    </NavigatingButton>
+                    {channel?.planned && <Typography level="body3">Available soon</Typography>}
                 </Stack>
             </Stack>
             <FaqSection faq={channelFaq} />

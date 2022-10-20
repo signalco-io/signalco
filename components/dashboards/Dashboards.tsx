@@ -2,8 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Box, Stack } from '@mui/system';
-import { LoadingButton } from '@mui/lab';
-import { Button, Typography } from '@mui/joy';
+import { LoadingButton , Button, Typography } from '@mui/joy';
 import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
 import useDashboard from 'src/hooks/dashboards/useDashboard';
 import DashboardView from './DashboardView';
@@ -95,9 +94,9 @@ function Dashboards() {
                         </Box>
                     )}
                 </Stack>
-                <Loadable isLoading={selectedDashboard.isLoading} error={selectedDashboard.error}>
+                <Loadable isLoading={!!selectedId && selectedDashboard.isLoading} error={selectedDashboard.error}>
                     <Box sx={{ px: 2 }}>
-                        {selectedDashboard.data
+                        {selectedId && selectedDashboard.data
                             ? (
                                 <DashboardView
                                     dashboard={selectedDashboard.data}
@@ -110,7 +109,7 @@ function Dashboards() {
                                             <Image priority width={280} height={213} alt={t('NoDashboardsPlaceholder')} src="/assets/placeholders/placeholder-no-dashboards.svg" />
                                             <Typography level="h2">{t('NoDashboardsPlaceholder')}</Typography>
                                             <Typography textAlign="center" level="body2">{t('NoDashboardsHelpText')}</Typography>
-                                            <Button onClick={handleNewDashboard}>{t('NewDashboard')}</Button>
+                                            <Button variant="solid" onClick={handleNewDashboard}>{t('NewDashboard')}</Button>
                                         </Stack>
                                     </Stack>
                                 </Stack>
