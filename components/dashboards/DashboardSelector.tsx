@@ -70,7 +70,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                     popupState.close();
                 }
             }}>
-                <PopperUnstyled {...bindPopover(popupState)}>
+                <PopperUnstyled style={{ zIndex: 999999 }} {...bindPopover(popupState)}>
                     <DashboardSelectorMenu
                         selectedId={selectedId}
                         popupState={popupState}

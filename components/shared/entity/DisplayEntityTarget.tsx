@@ -15,6 +15,7 @@ import {
     Typography
 } from '@mui/joy';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ClickAwayListener from '@mui/base/ClickAwayListener';
 import { PopperUnstyled } from '@mui/base';
 import useContact from 'src/hooks/useContact';
 import IEntityDetails from 'src/entity/IEntityDetails';
@@ -330,17 +331,23 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                     </Stack>
                 </Stack>
             </Button>
-            <PopperUnstyled {...bindPopover(entityMenu)}>
-                <Sheet sx={{ width: 420, height: 620 }}>
-                    <EntitySelectionMenu
-                        target={target}
-                        selectContact={selectContact}
-                        selectValue={selectValue}
-                        value={value}
-                        onSelected={handleEntitySelected}
-                        onClose={handleEntitySelectionClose} />
-                </Sheet>
-            </PopperUnstyled>
+            <ClickAwayListener onClickAway={(e) => {
+                if (e.target !== entityMenu.anchorEl) {
+                    entityMenu.close();
+                }
+            }}>
+                <PopperUnstyled style={{ zIndex: 999999 }} {...bindPopover(entityMenu)}>
+                    <Sheet sx={{ width: 420, height: 620 }}>
+                        <EntitySelectionMenu
+                            target={target}
+                            selectContact={selectContact}
+                            selectValue={selectValue}
+                            value={value}
+                            onSelected={handleEntitySelected}
+                            onClose={handleEntitySelectionClose} />
+                    </Sheet>
+                </PopperUnstyled>
+            </ClickAwayListener>
         </>
     );
 }

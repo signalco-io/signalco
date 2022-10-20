@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
-import { Box , Stack } from '@mui/system';
-import { ButtonBase } from '@mui/material';
+import { Box, Stack } from '@mui/system';
 import CircularProgress from '@mui/joy/CircularProgress';
-import { Typography } from '@mui/joy';
+import { Button, Typography } from '@mui/joy';
 import useContacts from 'src/hooks/useContacts';
 import { entityAsync } from 'src/entity/EntityRepository';
 import IContactPointer from 'src/contacts/IContactPointer';
@@ -126,7 +125,9 @@ function WidgetState(props: WidgetSharedProps) {
     useWidgetActive(state, props);
 
     return (
-        <ButtonBase sx={{ position: 'relative', height: '100%', width: '100%', display: 'block', textAlign: 'left', borderRadius: 2 }} onClick={handleStateChangeRequest} >
+        <Button
+            sx={{ position: 'relative', height: '100%', width: '100%', display: 'block', textAlign: 'left', margin: 0, padding: 0 }}
+            onClick={handleStateChangeRequest} >
             <Stack sx={{ height: '100%', py: 2 }}>
                 <Box sx={{ px: 2 }}>
                     <Visual state={state} size={68} />
@@ -140,7 +141,7 @@ function WidgetState(props: WidgetSharedProps) {
                     <CircularProgress size="sm" />
                 </Box>
             )}
-        </ButtonBase>
+        </Button>
     );
 }
 

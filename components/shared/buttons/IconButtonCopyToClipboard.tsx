@@ -6,6 +6,7 @@ import {
 import Popper from '@mui/material/Popper';
 import { Alert, IconButton } from '@mui/joy';
 import { Warning, CopyAll as CopyAllIcon } from '@mui/icons-material';
+import ClickAwayListener from '@mui/base/ClickAwayListener';
 import Fade from '../animations/Fade';
 import { ChildrenProps } from '../../../src/sharedTypes';
 import { useLocaleHelpers } from '../../../src/hooks/useLocale';
@@ -59,13 +60,19 @@ export default function IconButtonCopyToClipboard(props: IconButtonCopyToClipboa
                 onMouseDown={handleMouseDownCopyToClipboard}>
                 {props.children ? props.children : <CopyAllIcon />}
             </IconButton>
-            <Popper sx={{ zIndex: 999999 }} {...bindPopper(popupState)} transition>
-                {({ TransitionProps }) => (
-                    <Fade appear={TransitionProps?.in ?? false} duration={350}>
-                        <Alert color={error ? 'warning' : 'neutral'} startDecorator={error && <Warning color="warning" />}>{!error ? t('CopyToClipboardSuccess') : t('CopyToClipboardError')}</Alert>
-                    </Fade>
-                )}
-            </Popper>
+            <ClickAwayListener onClickAway={(e) => {
+                if (e.target !== popupState.anchorEl) {
+                    popupState.close();
+                }
+            }}>
+                <Popper sx={{ zIndex: 999999 }} {...bindPopper(popupState)} transition>
+                    {({ TransitionProps }) => (
+                        <Fade appear={TransitionProps?.in ?? false} duration={350}>
+                            <Alert color={error ? 'warning' : 'neutral'} startDecorator={error && <Warning color="warning" />}>{!error ? t('CopyToClipboardSuccess') : t('CopyToClipboardError')}</Alert>
+                        </Fade>
+                    )}
+                </Popper>
+            </ClickAwayListener>
         </>
     );
 }

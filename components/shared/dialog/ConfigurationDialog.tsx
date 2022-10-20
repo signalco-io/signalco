@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Breakpoint, Stack } from '@mui/system';
+import { Breakpoint, Stack } from '@mui/system';
 import { Modal, ModalClose, ModalDialog, Typography } from '@mui/joy';
 import useIsTablet from 'src/hooks/useIsTablet';
 
@@ -31,7 +31,7 @@ function ConfigurationDialog(props: IConfigurationDialogProps) {
                             {titleActions}
                         </Stack>
                     </Stack>
-                        {children}
+                    {children}
                     {actions && (
                         <Stack direction="row" spacing={1} justifyContent="end">
                             {actions}
