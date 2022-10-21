@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Stack, Box } from '@mui/system';
 import { Button } from '@mui/joy';
-import useIsMobile from 'src/hooks/useIsMobile';
 import Container from './shared/layout/Container';
 import NavigatingButton from './shared/buttons/NavigatingButton';
 import SignalcoLogotype from './icons/SignalcoLogotype';
@@ -15,10 +14,6 @@ const navLinks = [
 ];
 
 function NavMenu() {
-    const isMobile = useIsMobile();
-
-    if (isMobile) return null;
-
     return (
         <>
             {navLinks.map(nl => (

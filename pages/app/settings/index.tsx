@@ -1,14 +1,15 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
 import { Box, Stack } from '@mui/system';
-import { FormControl, FormHelperText, InputLabel, MenuItem, Paper, Select, SelectChangeEvent } from '@mui/material';
-import { Typography } from '@mui/joy';
+import { Card, Typography } from '@mui/joy';
 import GoogleIcon from '@mui/icons-material/Google';
 import { isNonEmptyString, isNotNull, isTrue } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
 import Loadable from 'components/shared/Loadable/Loadable';
 import Container from 'components/shared/layout/Container';
+import SelectItems from 'components/shared/form/SelectItems';
+import Picker from 'components/shared/form/Picker';
 import { ChildrenProps } from '../../../src/sharedTypes';
 import CurrentUserProvider from '../../../src/services/CurrentUserProvider';
 import appSettingsProvider, { ApiDevelopmentUrl, ApiProductionUrl } from '../../../src/services/AppSettingsProvider';
@@ -24,89 +25,85 @@ function ConnectedService() {
     const { t } = useLocale('App', 'Settings');
 
     return (
-        <Paper variant="outlined" sx={{ p: 2, backgroundColor: 'background.default' }}>
-            <Stack direction="row" alignItems="center" justifyContent="space-between">
+        <Card variant="outlined">
+            <Stack spacing={2} direction="row" alignItems="center" justifyContent="space-between">
                 <Stack direction="row" alignItems="center" spacing={2}>
                     <GoogleIcon fontSize="large" />
                     <Stack>
                         <Typography>Google</Typography>
-                        <Typography level="body2">{CurrentUserProvider.getCurrentUser()?.name} ({CurrentUserProvider.getCurrentUser()?.email})</Typography>
+                        <Typography level="body3">{CurrentUserProvider.getCurrentUser()?.name} ({CurrentUserProvider.getCurrentUser()?.email})</Typography>
                     </Stack>
                 </Stack>
-                <Typography sx={{ color: 'text.secondary' }}>{t('Connected')}</Typography>
+                <Typography level="body2">{t('Connected')}</Typography>
             </Stack>
-        </Paper>
+        </Card>
     )
 }
 
 function SettingsItem(props: { children: ReactNode, label?: string | undefined }) {
-    return <Stack spacing={1}>
-        {props.label && <Typography>{props.label}</Typography>}
-        {props.children}
-    </Stack>
+    return (
+        <Stack spacing={1}>
+            {props.label && <Typography>{props.label}</Typography>}
+            {props.children}
+        </Stack>
+    );
 }
 
 function SettingsSection(props: { children: ReactNode, header: string }) {
-    return <Stack spacing={2}>
-        <Typography level="h5" sx={{ pt: { xs: 0, sm: 2 } }}>{props.header}</Typography>
+    return (
         <Stack spacing={2}>
-            {props.children}
+            <Typography level="h5" sx={{ pt: { xs: 0, sm: 2 } }}>{props.header}</Typography>
+            <Stack spacing={2} alignItems="start">
+                {props.children}
+            </Stack>
         </Stack>
-    </Stack>
+    );
 }
 
-const SelectTimeZone: FormBuilderComponent = ({ onChange, label, helperText, error, ...rest }) => {
+const SelectTimeZone: FormBuilderComponent = ({ onChange, value }) => {
     const { t } = useLocale('App', 'Settings');
 
     // <EwSelect variant="filled" label="Time format" fullWidth options={[{ value: 0, label: '12h' }, { value: 1, label: '24h' }]} />
     return (
-        <FormControl variant="filled" error={error}>
-            <InputLabel>{label}</InputLabel>
-            <Select onChange={(e) => onChange(e.target.value, { receiveEvent: false })} {...rest}>
-                <MenuItem value={'0'}>{t('TimeFormat12Hour')}</MenuItem>
-                <MenuItem value={'1'}>{t('TimeFormat24Hour')}</MenuItem>
-            </Select>
-            <FormHelperText error={error}>{helperText}</FormHelperText>
-        </FormControl>
+        <Picker value={value} onChange={onChange} options={[
+            { value: '0', label: t('TimeFormat12Hour') },
+            { value: '1', label: t('TimeFormat24Hour') }
+        ]} />
     );
 };
 
 const settingsFormComponents: FormBuilderComponents = {
     fieldWrapper: (props) => <SettingsItem {...props} />,
-    selectApiEndpoint: ({ onChange, label, helperText, error, ...rest }) => (
-        <FormControl variant="filled" error={error}>
-            <InputLabel>{label}</InputLabel>
-            <Select onChange={(e) => onChange(e.target.value, { receiveEvent: false })} {...rest}>
-                <MenuItem value={ApiProductionUrl}>
+    selectApiEndpoint: ({ value, onChange, label }) => (
+        <SelectItems value={value} onChange={onChange} items={[
+            {
+                value: ApiProductionUrl,
+                label: (
                     <Stack direction="row" alignItems="center" spacing={1}>
                         <ApiBadge force="prod" />
                         <Typography>{ApiProductionUrl}</Typography>
                     </Stack>
-                </MenuItem>
-                <MenuItem value={ApiDevelopmentUrl}>
+                )
+            },
+            {
+                value: ApiDevelopmentUrl,
+                label: (
                     <Stack direction="row" alignItems="center" spacing={1}>
                         <ApiBadge force="dev" />
                         <Typography>{ApiDevelopmentUrl}</Typography>
                     </Stack>
-                </MenuItem>
-            </Select>
-            <FormHelperText error={error}>{helperText}</FormHelperText>
-        </FormControl>
+                )
+            }
+        ]} label={label} />
     ),
     selectTimeFormat: (props) => <SelectTimeZone {...props} />,
-    selectTimeZone: ({ onChange, label, helperText, error, ...rest }) => {
+    selectTimeZone: ({ value, onChange, label }) => {
         const timeZones = getTimeZones();
         return (
-            <FormControl variant="filled" error={error}>
-                <InputLabel>{label}</InputLabel>
-                <Select onChange={(e) => onChange && onChange(e.target.value, { receiveEvent: false })} {...rest}>
-                    <MenuItem value={'0'} disabled>+00:00 UTC</MenuItem>
-                    {timeZones.map(tz => (
-                        <MenuItem key={tz.name} value={tz.name}>{tz.currentTimeFormat}</MenuItem>
-                    ))}
-                </Select>
-                <FormHelperText error={error}>{helperText}</FormHelperText>
-            </FormControl>
+            <SelectItems value={value} onChange={onChange} items={[
+                { value: '0', label: '+00:00 UTC', disabled: true },
+                ...timeZones.map(tz => ({ value: tz.name, label: tz.currentTimeFormat }))
+            ]} label={label} />
         );
     },
     locationMap: (props) => <LocationMapPicker {...props} />
@@ -132,8 +129,8 @@ function SettingsIndex() {
         setIsLoading(false);
     }, []);
 
-    const handleLocaleChange = (event: SelectChangeEvent) => {
-        setUserLocale(event.target.value);
+    const handleLocaleChange = (values: string[]) => {
+        setUserLocale(values[0]);
         window.location.reload();
     };
 
@@ -191,14 +188,10 @@ function SettingsIndex() {
                         <Stack spacing={4}>
                             <SettingsSection header={t('General')}>
                                 <SettingsItem label={t('Language')}>
-                                    <FormControl variant="filled" sx={{ maxWidth: 320 }}>
-                                        <InputLabel id="app-settings-locale-select-label">{t('SelectLanguage')}</InputLabel>
-                                        <Select variant="filled" labelId="app-settings-locale-select-label" value={userLocale} onChange={handleLocaleChange}>
-                                            {availableLocales.map(l => (
-                                                <MenuItem key={l} value={l} selected={userLocale === l}>{locales.t(l)}</MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
+                                    <SelectItems
+                                        value={userLocale ? [userLocale] : []}
+                                        onChange={handleLocaleChange}
+                                        items={availableLocales.map(l => ({ value: l, label: locales.t(l) }))} />
                                 </SettingsItem>
                             </SettingsSection>
                             <SettingsSection header={t('LookAndFeel')}>

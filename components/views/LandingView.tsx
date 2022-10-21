@@ -9,7 +9,6 @@ import { Button, Divider, Typography } from '@mui/joy';
 import { GitHub, KeyboardArrowRight } from '@mui/icons-material';
 import AppSettingsProvider from 'src/services/AppSettingsProvider';
 import useUserTheme from 'src/hooks/useUserTheme';
-import useIsTablet from 'src/hooks/useIsTablet';
 import Container from 'components/shared/layout/Container';
 import LinkImage from 'components/shared/ImageLink';
 import GentleSlide from 'components/shared/animations/GentleSlide';
@@ -50,8 +49,6 @@ function StepContent(props: {
   const { observe, inView } = useInView({
     onEnter: ({ unobserve }) => unobserve(), // only run once
   });
-  const isMobile = useIsTablet();
-  const direction = isMobile ? 'vertical' : (props.direction ?? 'vertical');
 
   return (
     <SectionCenter>
@@ -79,13 +76,18 @@ function StepContent(props: {
             )}
             {props.children && (
               <Grid xs={12} md={props.image ? 6 : 12}>
-                <Stack width="100%" spacing={4} justifyContent="space-evenly" direction={direction === 'horizontal' ? 'row' : 'column'}>
+                <Stack
+                  width="100%"
+                  spacing={4}
+                  justifyContent="space-evenly"
+                  sx={{
+                    flexDirection: { xs: 'column', md: 'row' }
+                  }}>
                   {(Array.isArray(props.children) ? props.children : [props.children]).map((child, childIndex) => (
                     <GentleSlide
                       key={childIndex}
                       appear={inView}
-                      index={childIndex}
-                      direction={direction === 'horizontal' ? 'down' : 'left'}>
+                      index={childIndex}>
                       {child}
                     </GentleSlide>
                   ))}

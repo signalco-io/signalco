@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Box } from '@mui/system';
-import { NoSsr } from '@mui/material';
 import useTimeout from 'src/hooks/useTimeout';
+import useIsClient from 'src/hooks/useIsClient';
 import Container from 'components/shared/layout/Container';
 import Fade from 'components/shared/animations/Fade';
 const Globe = dynamic(() => import('./Globe'));
@@ -10,6 +10,8 @@ const Globe = dynamic(() => import('./Globe'));
 function GlobeSection() {
     const [appear, setAppear] = useState(false);
     useTimeout(() => setAppear(true), 100);
+
+    const isClient = useIsClient();
 
     return (
         <Container>
@@ -31,9 +33,9 @@ function GlobeSection() {
                             maxWidth: '100vw!important',
                             maxHeight: '100vw!important'
                         }}>
-                            <NoSsr>
+                            {isClient && (
                                 <Globe />
-                            </NoSsr>
+                            )}
                         </Box>
                     </Box>
                 </Box>

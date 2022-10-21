@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { Box } from '@mui/system';
-import { ButtonBase, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/system';
+import { Button } from '@mui/joy';
 import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVerySatisfiedOutlined';
 import SentimentDissatisfiedOutlinedIcon from '@mui/icons-material/SentimentDissatisfiedOutlined';
 import useContact from 'src/hooks/useContact';
@@ -41,7 +41,10 @@ function WidgetIndicator(props: WidgetSharedProps) {
     useWidgetActive(true, props);
 
     return (
-        <ButtonBase sx={{ height: '100%', width: '100%', display: 'block', textAlign: 'left', borderRadius: 2 }} onClick={handleSelected} >
+        <Button
+            variant="plain"
+            sx={{ height: '100%', width: '100%', display: 'block', textAlign: 'left' }}
+            onClick={handleSelected} >
             <Stack sx={{ height: '100%' }} alignItems="center" justifyContent="flex-end">
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <Image src="/assets/widget-images/plant-aloe.png" alt="Plant Aloe" width={76} height={76} />
@@ -50,7 +53,7 @@ function WidgetIndicator(props: WidgetSharedProps) {
                     <Icon fontSize="large" htmlColor={iconColor} />
                 </Box>
             </Stack>
-        </ButtonBase>
+        </Button>
     );
 }
 

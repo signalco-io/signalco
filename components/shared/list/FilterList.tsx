@@ -16,7 +16,6 @@ export interface FilterListProps {
     selected?: string | string[] | undefined;
     truncate?: number | undefined;
     multiple?: boolean;
-    compact?: boolean;
     onSelected?: (selectedId: string | undefined) => void;
     onSelectedMultiple?: (selectedIds: string[]) => void;
 }
@@ -30,7 +29,6 @@ export default function FilterList(props: FilterListProps) {
         selected,
         onSelected,
         onSelectedMultiple,
-        compact
     } = props;
 
     const [checked, setChecked] = useState<string[]>(Array.isArray(selected) ? selected : (selected ? [selected] : []));
@@ -68,7 +66,7 @@ export default function FilterList(props: FilterListProps) {
 
     return (
         <Stack>
-            {compact ? (
+            <Box sx={{ dispaly: { xs: 'visible', md: 'none' } }}>
                 <SelectItems
                     items={items.map(i => ({ value: i.id, label: i.label }))}
                     value={checked}
@@ -80,29 +78,28 @@ export default function FilterList(props: FilterListProps) {
                             handleToggle(changedValue);
                         });
                     }} />
-            ) : (
-                <>
-                    <Stack direction="row" spacing={1}>
-                        <Typography gutterBottom level="h5">{header}</Typography>
-                        {(!isShowMore && shouldTruncate) && <Typography level="body2">({items.length - truncate} more)</Typography>}
-                    </Stack>
-                    <Stack>
-                        {items.slice(0, isShowMore ? items.length : truncate).map(item => (
-                            <Checkbox
-                                key={item.id}
-                                sx={{p: 2}}
-                                label={item.label} checked={checked.indexOf(item.id) >= 0}
-                                onChange={() => handleToggle(item.id)}
-                                disableIcon />
-                        ))}
-                    </Stack>
-                    {(!isShowMore && shouldTruncate) && (
-                        <Box>
-                            <Button startDecorator={<ArrowDownwardIcon />} onClick={handleToggleShowMore}>Show all</Button>
-                        </Box>
-                    )}
-                </>
-            )}
+            </Box>
+            <Box sx={{ dispaly: { xs: 'none', md: 'visible' } }}>
+                <Stack direction="row" spacing={1}>
+                    <Typography gutterBottom level="h5">{header}</Typography>
+                    {(!isShowMore && shouldTruncate) && <Typography level="body2">({items.length - truncate} more)</Typography>}
+                </Stack>
+                <Stack>
+                    {items.slice(0, isShowMore ? items.length : truncate).map(item => (
+                        <Checkbox
+                            key={item.id}
+                            sx={{ p: 2 }}
+                            label={item.label} checked={checked.indexOf(item.id) >= 0}
+                            onChange={() => handleToggle(item.id)}
+                            disableIcon />
+                    ))}
+                </Stack>
+                {(!isShowMore && shouldTruncate) && (
+                    <Box>
+                        <Button startDecorator={<ArrowDownwardIcon />} onClick={handleToggleShowMore}>Show all</Button>
+                    </Box>
+                )}
+            </Box>
         </Stack>
     );
 }

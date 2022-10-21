@@ -1,7 +1,6 @@
 import React from 'react';
 import { Breakpoint, Stack } from '@mui/system';
 import { Modal, ModalClose, ModalDialog, Typography } from '@mui/joy';
-import useIsTablet from 'src/hooks/useIsTablet';
 
 export interface IConfigurationDialogProps {
     isOpen: boolean,
@@ -15,14 +14,14 @@ export interface IConfigurationDialogProps {
 
 function ConfigurationDialog(props: IConfigurationDialogProps) {
     const { children, title, titleActions, isOpen, onClose, maxWidth = 'sm', actions } = props;
-    const isTablet = useIsTablet();
 
     return (
         <Modal open={isOpen} onClose={onClose}>
-            <ModalDialog layout={isTablet ? 'fullscreen' : 'center'} sx={{
-                width: '100%',
-                maxWidth: maxWidth ? maxWidth : undefined
-            }}>
+            <ModalDialog
+                sx={{
+                    width: '100%',
+                    maxWidth: maxWidth ? maxWidth : undefined
+                }}>
                 <ModalClose />
                 <Stack spacing={1}>
                     <Stack direction="row" justifyContent="space-between" alignItems="center">

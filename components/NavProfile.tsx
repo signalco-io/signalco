@@ -16,15 +16,10 @@ import DashboardSharpIcon from '@mui/icons-material/DashboardSharp';
 import CommitIcon from '@mui/icons-material/Commit';
 import CloseIcon from '@mui/icons-material/Close';
 import { SvgIconComponent } from '@mui/icons-material';
-import useIsTablet from 'src/hooks/useIsTablet';
-import useIsMobile from 'src/hooks/useIsMobile';
-import useIsLaptop from 'src/hooks/useIsLaptop';
-import useIsDesktop from 'src/hooks/useIsDesktop';
 import Loadable from './shared/Loadable/Loadable';
 import ApiBadge from './development/ApiBadge';
 import LocalStorageService from '../src/services/LocalStorageService';
 import CurrentUserProvider from '../src/services/CurrentUserProvider';
-import useUserSetting from '../src/hooks/useUserSetting';
 import useLocale from '../src/hooks/useLocale';
 import { orderBy } from '../src/helpers/ArrayHelpers';
 
@@ -67,14 +62,7 @@ function UserAvatar() {
 function UserProfileAvatar() {
   const { t } = useLocale('App', 'Account');
   const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' });
-  const navWidth = useNavWidth();
-  const maxWidth = navWidth - 16;
   const router = useRouter();
-
-  const isMobile = useIsMobile();
-
-  const user = CurrentUserProvider.getCurrentUser();
-  const [userNickName] = useUserSetting<string>('nickname', user?.name ?? '');
 
   const logout = async () => {
     popupState.close();
@@ -98,9 +86,6 @@ function UserProfileAvatar() {
       <Button {...bindTrigger(popupState)} variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 1 }}>
         <Stack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
           <UserAvatar />
-          {!isMobile &&
-            <Typography sx={{ maxWidth: `${maxWidth}px` }}>{userNickName}</Typography>
-          }
           <ApiBadge />
         </Stack>
       </Button>
@@ -123,21 +108,7 @@ function UserProfileAvatar() {
   );
 }
 
-export const useNavWidth = () => {
-  const isMobile = useIsMobile();
-  const isLaptop = useIsLaptop();
-  const isTablet = useIsTablet()
-  const isLaptopOrTablet = isTablet || isLaptop;
-
-  if (isMobile)
-    return 0;
-  return isLaptopOrTablet ? 109 : 228;
-};
-
 function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: SvgIconComponent, active: boolean, label: string, onClick?: () => void }) {
-  const isMobile = useIsMobile();
-  const isNotDesktop = !useIsDesktop();
-
   return (
     <Link href={path} passHref>
       <Button
@@ -150,11 +121,9 @@ function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: S
         variant="plain"
         size="lg"
         onClick={onClick}>
-        <Stack direction="row" sx={{ width: isNotDesktop ? '100%' : '128px' }} alignItems="center" spacing={isMobile ? 1 : 0}>
+        <Stack direction="row" alignItems="center">
           <Icon sx={{ opacity: active ? 1 : 0.6, mr: { xs: 0, lg: 2 }, fontSize: { xs: '26px', lg: '17px' } }} />
-          {(isMobile || !isNotDesktop) &&
-            <Typography fontWeight={500} sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
-          }
+          <Typography fontWeight={500} sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
         </Stack>
       </Button>
     </Link>
@@ -166,14 +135,7 @@ function NavProfile() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const activeNavItem = orderBy(navItems.filter(ni => router.pathname.startsWith(ni.path)), (a, b) => b.path.length - a.path.length)[0];
   const visibleNavItems = navItems.filter(ni => ni === activeNavItem || !ni.hidden);
-  const navWidth = useNavWidth();
   const { t } = useLocale('App', 'Nav');
-
-  const isMobile = useIsMobile();
-
-  useEffect(() => {
-    if (!isMobile) setMobileMenuOpen(false);
-  }, [isMobile]);
 
   const handleMobileMenuOpenClick = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -189,41 +151,37 @@ function NavProfile() {
     <Stack
       direction={{ xs: 'row', sm: 'column' }}
       spacing={{ xs: 0, sm: 4 }}
-      sx={{ px: { xs: 2, sm: 0 }, pt: { xs: 0, sm: 4 }, minWidth: `${navWidth}px`, minHeight: { xs: '60px', sm: undefined } }}
-      justifyContent={isMobile ? 'space-between' : undefined}
+      sx={{ px: { xs: 2, sm: 0 }, pt: { xs: 0, sm: 4 }, minHeight: { xs: '60px', sm: undefined } }}
       alignItems="center">
       <UserProfileAvatar />
       {!mobileMenuOpen &&
         <Stack sx={{ width: { xs: undefined, lg: '100%' } }}>
           {visibleNavItems
-            .filter(ni => isMobile ? ni === activeNavItem : true)
             .map((ni, index) => (
               <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} />
             ))}
         </Stack>
       }
-      {(isMobile && mobileMenuOpen) && <Typography sx={{ opacity: 0.6 }}>Menu</Typography>}
-      {isMobile &&
-        <>
-          <IconButton size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
-            {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
-          </IconButton>
-          <Box hidden={!mobileMenuOpen} sx={{
-            position: 'fixed',
-            top: '60px',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            background: 'var(--joy-palette-background-default)',
-            zIndex: 999
-          }}>
-            <Stack>
-              {visibleNavItems.map((ni, index) =>
-                <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} onClick={handleMobileMenuClose} />)}
-            </Stack>
-          </Box>
-        </>
-      }
+      {mobileMenuOpen && <Typography sx={{ opacity: 0.6 }}>Menu</Typography>}
+      <>
+        <IconButton size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
+          {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+        </IconButton>
+        <Box hidden={!mobileMenuOpen} sx={{
+          position: 'fixed',
+          top: '60px',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          background: 'var(--joy-palette-background-default)',
+          zIndex: 999
+        }}>
+          <Stack>
+            {visibleNavItems.map((ni, index) =>
+              <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} onClick={handleMobileMenuClose} />)}
+          </Stack>
+        </Box>
+      </>
     </Stack>
   );
 }

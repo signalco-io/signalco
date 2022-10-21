@@ -1,11 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
 import React, { useCallback, useState } from 'react';
 import { bindMenu, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
-import { Box } from '@mui/system';
-import { Checkbox, FilledInput, FormControlLabel, FormGroup, IconButton, InputAdornment, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/system';
+import { IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckIcon from '@mui/icons-material/Check';
+import Checkbox from 'components/shared/form/Checkbox';
 import { WidgetSharedProps } from '../Widget';
 import NoDataPlaceholder from '../../shared/indicators/NoDataPlaceholder';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -35,20 +36,15 @@ function ChecklistItem(props: { item: IChecklistItem; onChange: (id: string, don
     return (
         <>
             <Stack direction="row" alignItems="center" justifyContent="space-between">
-                <FormGroup sx={{ flexGrow: 1 }}>
-                    <FormControlLabel
-                        control={<Checkbox checked={item.done} onChange={(e) => onChange(item.id, e.currentTarget.checked)} />}
-                        sx={{ textDecorationLine: item.done ? 'line-through' : 'none' }}
-                        label={item.text} />
-                </FormGroup>
-                <IconButton {...bindTrigger(popupState)} edge="end"><MoreHorizIcon sx={{ opacity: 0.3 }} /></IconButton>
+                <Checkbox checked={item.done ?? false} onChange={(e) => onChange(item.id, e.currentTarget.checked)} label={item.text} />
+                <IconButton {...bindTrigger(popupState)}><MoreHorizIcon sx={{ opacity: 0.3 }} /></IconButton>
             </Stack>
             <Menu {...bindMenu(popupState)}>
                 <MenuItem onClick={() => onRemove(item.id)}>
-                    <ListItemIcon>
+                    <ListItemDecorator>
                         <DeleteIcon />
-                    </ListItemIcon>
-                    <ListItemText>Remove</ListItemText>
+                    </ListItemDecorator>
+                    <ListItemContent>Remove</ListItemContent>
                 </MenuItem>
             </Menu>
         </>
@@ -117,8 +113,7 @@ function WidgetChecklist(props: WidgetSharedProps) {
             </Box>
             <Box sx={{ px: 2 }}>
                 <form onSubmit={handleNewItem}>
-                    <FilledInput
-                        hiddenLabel
+                    <TextField
                         placeholder={t('AddItem')}
                         fullWidth
                         onFocus={() => setIsInputFocusedOrFilled(true)}
@@ -127,10 +122,8 @@ function WidgetChecklist(props: WidgetSharedProps) {
                                 setIsInputFocusedOrFilled(false);
                             }
                         }}
-                        endAdornment={isInputFocusedOrFilled &&
-                            <InputAdornment position="end">
-                                <IconButton type="submit" edge="end"><CheckIcon /></IconButton>
-                            </InputAdornment>
+                        endDecorator={isInputFocusedOrFilled &&
+                            <IconButton type="submit"><CheckIcon /></IconButton>
                         }
                         value={newItemText}
                         onChange={(e) => setNewItemText(e.currentTarget.value)} />

@@ -1,18 +1,19 @@
 import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
-import Link from 'next/link';
 import axios, { AxiosError, Method } from 'axios';
+import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack } from '@mui/system';
-import { FormControl, Grid, InputLabel, MenuItem, Link as MuiLink, Paper, Select, Skeleton } from '@mui/material';
 import { TreeItem, TreeView } from '@mui/lab';
-import {Typography, TextField, Divider, Badge, Alert, Button } from '@mui/joy';
+import { Typography, TextField, Divider, Badge, Alert, Button, Card } from '@mui/joy';
 import SendIcon from '@mui/icons-material/Send';
 import SecurityIcon from '@mui/icons-material/Security';
-import OpenInNewSharpIcon from '@mui/icons-material/OpenInNewSharp';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import useLoadAndError from 'src/hooks/useLoadAndError';
+import Loadable from 'components/shared/Loadable/Loadable';
 import Chip from 'components/shared/indicators/Chip';
+import SelectItems from 'components/shared/form/SelectItems';
+import NavigatingButton from 'components/shared/buttons/NavigatingButton';
 import { ObjectDictAny } from '../../../src/sharedTypes';
 import appSettingsProvider from '../../../src/services/AppSettingsProvider';
 import useHashParam from '../../../src/hooks/useHashParam';
@@ -129,20 +130,13 @@ function ApiOperation(props: ApiOperationProps) {
             {externalDocs && (
                 <Stack>
                     {externalDocs.description && <Typography>{externalDocs.description}</Typography>}
-                    <Link href={externalDocs.url} passHref>
-                        <MuiLink>
-                            <Stack spacing={1} alignItems="center" direction="row">
-                                <OpenInNewSharpIcon fontSize="small" />
-                                <span>More info</span>
-                            </Stack>
-                        </MuiLink>
-                    </Link>
+                    <NavigatingButton href={externalDocs.url}>More info</NavigatingButton>
                 </Stack>
             )}
             {parametersResolved && (
                 <Stack spacing={1}>
                     <Typography textTransform="uppercase">Parameters</Typography>
-                    <Paper variant="outlined">
+                    <Card variant="outlined">
                         {parametersResolved.map((parameter, i) => (
                             <React.Fragment key={parameter.name}>
                                 <Stack sx={{ p: 2 }}>
@@ -158,15 +152,15 @@ function ApiOperation(props: ApiOperationProps) {
                                 {i != Object.keys(parametersResolved).length && <Divider />}
                             </React.Fragment>
                         ))}
-                    </Paper>
+                    </Card>
                 </Stack>
             )}
             {requestBodyResolved && (
                 <Stack spacing={1}>
                     <Typography textTransform="uppercase">Request body</Typography>
                     {requestBodyResolved.description && <Typography level="body2">{requestBodyResolved.description}</Typography>}
-                    <Paper variant="outlined">
-                        <Stack sx={{ p: 2 }}>
+                    <Card variant="outlined">
+                        <Stack>
                             {Object.keys(requestBodyResolved.content).map(contentType => (
                                 <React.Fragment key={contentType}>
                                     {requestBodyResolved.content[contentType].schema &&
@@ -174,12 +168,12 @@ function ApiOperation(props: ApiOperationProps) {
                                 </React.Fragment>
                             ))}
                         </Stack>
-                    </Paper>
+                    </Card>
                 </Stack>
             )}
             <Stack spacing={1}>
                 <Typography textTransform="uppercase">Responses</Typography>
-                <Paper variant="outlined">
+                <Card variant="outlined">
                     {Object.keys(responses).map((responseCode, i) => {
                         const responseCodeNumber = parseInt(responseCode, 10) || 0;
                         const responseObj = resolveRef<OpenAPIV3.ResponseObject>(api, responses[responseCode]);
@@ -194,7 +188,7 @@ function ApiOperation(props: ApiOperationProps) {
                             </React.Fragment>
                         );
                     })}
-                </Paper>
+                </Card>
             </Stack>
         </Stack>
     );
@@ -271,12 +265,6 @@ function Nav() {
     );
 }
 
-function NavSkeleton() {
-    return <Stack>
-        <Skeleton width="80%" />
-    </Stack>
-}
-
 function enumKeys<O extends object, K extends keyof O = keyof O>(obj: O): K[] {
     return Object.keys(obj).filter(k => Number.isNaN(+k)) as K[];
 }
@@ -328,10 +316,10 @@ function Route() {
         <Stack py={2} spacing={20}>
             {pathOperations.map(({ pathName, operationName, httpOperation, operation }) => (
                 <Grid container key={`path-${pathName}-${operationName}`}>
-                    <Grid item xs={6} sx={{ px: 2 }}>
+                    <Grid xs={6} sx={{ px: 2 }}>
                         <ApiOperation path={pathName} operation={httpOperation} info={operation} />
                     </Grid>
-                    <Grid item xs={6} sx={{ px: 2 }}>
+                    <Grid xs={6} sx={{ px: 2 }}>
                         <Actions path={pathName} operation={httpOperation} info={operation} />
                     </Grid>
                 </Grid>
@@ -369,9 +357,9 @@ function SecurityInput(props: { security: OpenAPIV3.SecurityRequirementObject })
                         </Stack>
                     );
                 } else if (source) {
-                    return <Typography key={source.type} color="danger" fontWeight="bold"  textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
+                    return <Typography key={source.type} color="danger" fontWeight="bold" textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
-                    return <Typography key="unknown" color="danger" fontWeight="bold"  textTransform="uppercase">Security not defined</Typography>
+                    return <Typography key="unknown" color="danger" fontWeight="bold" textTransform="uppercase">Security not defined</Typography>
                 }
             })}
         </>
@@ -388,7 +376,7 @@ function SecurityBadge(props: { security: OpenAPIV3.SecurityRequirementObject })
                     const httpSource = source as OpenAPIV3.HttpSecurityScheme;
                     return <Chip variant="outlined" startDecorator={<SecurityIcon fontSize="small" />} key={httpSource.scheme}>{camelToSentenceCase(httpSource.scheme)}</Chip>;
                 } else if (source) {
-                    return <Typography key={source.type} color="danger" fontWeight="bold"  textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
+                    return <Typography key={source.type} color="danger" fontWeight="bold" textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
                     return <Typography key="unknown" color="danger" fontWeight="bold" textTransform="uppercase">Security not defined</Typography>
                 }
@@ -443,26 +431,21 @@ function Actions(props: ActionsProps) {
 
     return (
         <Stack spacing={2}>
-            {servers && servers.length > 1 &&
-                <FormControl fullWidth variant="filled" size="small">
-                    <InputLabel id="server-select-label">Server</InputLabel>
-                    <Select
-                        labelId="server-select-label"
-                        renderValue={(value) => api?.servers?.find(s => s.url === value)?.description || value}
-                        size="small"
-                        fullWidth
-                        value={selectedServer || ''}
-                        onChange={(e) => setSelectedServer(e.target.value)}>
-                        {servers.map(server => (
-                            <MenuItem value={server.url} key={server.url}>
-                                <Stack>
-                                    <Typography noWrap>{server.description ?? server.url}</Typography>
-                                    {server.description && <Typography noWrap  level="body2">{server.url}</Typography>}
-                                </Stack>
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>}
+            {servers && servers.length > 1 && (
+                <SelectItems
+                    label="Server"
+                    value={selectedServer ? [selectedServer] : []}
+                    onChange={(v) => setSelectedServer(v[0])}
+                    items={servers.map(s => ({
+                        value: s.url,
+                        label: (
+                            <Stack>
+                                <Typography noWrap>{s.description ?? s.url}</Typography>
+                                {s.description && <Typography noWrap level="body2">{s.url}</Typography>}
+                            </Stack>
+                        )
+                    }))} />
+            )}
             <CopyToClipboardInput id="base-address" label="Base address" fullWidth sx={{ fontFamily: 'Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace', fontSize: '0.8em' }} value={selectedServerUrl} />
             {security && (
                 <Stack spacing={1}>
@@ -476,10 +459,10 @@ function Actions(props: ActionsProps) {
                 <Stack spacing={1}>
                     <Typography textTransform="uppercase">Body</Typography>
                     <Stack>
-                        <Typography textAlign="right"  level="body3">application/json</Typography>
-                        <Paper variant="outlined">
+                        <Typography textAlign="right" level="body3">application/json</Typography>
+                        <Card variant="outlined">
                             <CodeEditor language="json" code={requestBodyValue} setCode={setRequestBodyValue} height={300} />
-                        </Paper>
+                        </Card>
                     </Stack>
                 </Stack>
             )}
@@ -490,9 +473,9 @@ function Actions(props: ActionsProps) {
                         <Typography textTransform="uppercase">Response</Typography>
                         <ResponseStatusCode statusCode={responseStatusCode} />
                     </Stack>
-                    <Paper variant="outlined">
+                    <Card variant="outlined">
                         <CodeEditor language="json" code={response || 'Empty response'} height={200} readonly />
-                    </Paper>
+                    </Card>
                 </Stack>
             )}
         </Stack>
@@ -525,7 +508,9 @@ function DocsApiPage() {
                 )}
                 <Stack direction="row" alignItems="stretch">
                     <Box sx={{ minWidth: { xs: '230px', md: '320px' }, px: 2, py: 4 }}>
-                        {isLoading || !api ? <NavSkeleton /> : <Nav />}
+                        <Loadable isLoading={isLoading || !api}>
+                            <Nav />
+                        </Loadable>
                     </Box>
                     <Divider />
                     <Box flexGrow={1}>

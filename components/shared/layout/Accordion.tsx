@@ -5,7 +5,7 @@ export interface AccordionProps extends ChildrenProps {
     open?: boolean;
     disabled?: boolean;
     sx?: SxProps<Theme>;
-    onChange?: () => void
+    onChange?: (e: unknown, expanded: boolean) => void
 }
 
 export default function Accordion(props: AccordionProps) {

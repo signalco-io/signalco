@@ -1,17 +1,17 @@
-import { Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
+import { TextField } from '@mui/joy';
 import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
+import Checkbox from 'components/shared/form/Checkbox';
 
 const components: FormBuilderComponents = {
-    number: (props) => <TextField type="number" variant="filled" hiddenLabel={!props.label} {...props} />,
+    number: (props) => <TextField type="number" {...props} />,
     yesno: (props) => (
-        <FormGroup>
-            <FormControlLabel
-                control={<Checkbox checked={props.value} onChange={(e) => props.onChange(e.target.checked)} />}
-                label={props.label} />
-        </FormGroup>
+        <Checkbox
+            checked={props.value}
+            onChange={(e) => props.onChange(e.target.checked)}
+            label={props.label} />
     ),
-    string: (props) => <TextField variant="filled" fullWidth hiddenLabel={!props.label} {...props} />,
-    stringReadonly: ({ value, ...props }) => <TextField variant="filled" fullWidth hiddenLabel={!props.label} defaultValue={value} {...props} onChange={() => { }} />
+    string: (props) => <TextField fullWidth {...props} />,
+    stringReadonly: ({ value, ...props }) => <TextField fullWidth defaultValue={value} {...props} onChange={() => { }} />
 };
 
 export default components;

@@ -1,12 +1,11 @@
 import React, { Suspense, useEffect } from 'react';
 import Link from 'next/link';
-import { bindPopover, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
+import { bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import { Box, Stack } from '@mui/system';
 import { Button } from '@mui/joy';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import ClickAwayListener from '@mui/base/ClickAwayListener';
-import { PopperUnstyled } from '@mui/base';
 import useDashboards from 'src/hooks/dashboards/useDashboards';
+import Popper from 'components/shared/layout/Popper';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
 import useHashParam from '../../src/hooks/useHashParam';
 
@@ -65,20 +64,14 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                     </Stack>
                 )}
             </Stack>
-            <ClickAwayListener onClickAway={(e) => {
-                if (e.target !== popupState.anchorEl) {
-                    popupState.close();
-                }
-            }}>
-                <PopperUnstyled style={{ zIndex: 999999 }} {...bindPopover(popupState)}>
-                    <DashboardSelectorMenu
-                        selectedId={selectedId}
-                        popupState={popupState}
-                        onSelection={setSelectedIdHash}
-                        onEditWidgets={onEditWidgets}
-                        onSettings={onSettings} />
-                </PopperUnstyled>
-            </ClickAwayListener>
+            <Popper popupState={popupState}>
+                <DashboardSelectorMenu
+                    selectedId={selectedId}
+                    popupState={popupState}
+                    onSelection={setSelectedIdHash}
+                    onEditWidgets={onEditWidgets}
+                    onSettings={onSettings} />
+            </Popper>
         </Suspense>
     );
 }

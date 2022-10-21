@@ -1,11 +1,9 @@
 import React from 'react';
 import NextLink from 'next/link';
 import { Box, Stack } from '@mui/system';
-import {
-  LinearProgress
-} from '@mui/material';
 import { Alert, Link, TextField, Tooltip, Typography } from '@mui/joy';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import Loadable from '../Loadable/Loadable';
 import IErrorProps from '../interfaces/IErrorProps';
 import ResultsPlaceholder from '../indicators/ResultsPlaceholder';
 import { ChildrenProps } from '../../../src/sharedTypes';
@@ -36,7 +34,7 @@ export interface IAutoTableCellRendererProps {
   style?: React.CSSProperties,
   row: number,
   column: number,
-  link: string,
+  link: string | undefined,
   hasClick: boolean,
   onClick: () => void
 }
@@ -72,9 +70,11 @@ function CellRenderer(props: IAutoTableCellRendererProps) {
   let Wrapper = DefaultCallWrapper;
   if (props.link) {
     Wrapper = function LinkWrapper({ children }: ChildrenProps) {
-      return <Box>
-        <NextLink passHref href={props.link}>{children}</NextLink>
-      </Box>;
+      return (
+        <Box>
+          <NextLink passHref href={props.link!}>{children}</NextLink>
+        </Box>
+      );
     };
   }
 
@@ -134,30 +134,31 @@ function AutoTable<T extends IAutoTableItem>(props: IAutoTableProps<T>) {
       {!props.hideSearch && showSearch && <TextField label={props.localize ? props.localize('SearchLabel') : 'Search...'} sx={{ mx: 2 }} size="sm" value={searchText} onChange={(e) => handleSearchTextChange(e.target.value)} />}
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ overflow: 'auto', display: 'grid' }}>
-          {props.isLoading && <LinearProgress />}
-          {Boolean(props.error) && <ErrorRow error={props.error} />}
-          {cells?.length > 0 && cells.map((item, rowIndex) => {
-            return Object.keys(item)
-              .filter(filterItemKey)
-              .map((itemKey, index) => {
-                return (
-                  <CellRenderer
-                    key={itemKey}
-                    value={item[itemKey]}
-                    row={rowIndex + 1}
-                    column={index + 1}
-                    style={{ opacity: item._opacity ? item._opacity : 1 }}
-                    link={item._link}
-                    hasClick={typeof props.onRowClick !== 'undefined'}
-                    onClick={() => props.onRowClick && props.onRowClick(item)} />
-                );
-              })
-          })}
-          {(!props.isLoading && !(props.items?.length)) && (
-            <Box p={2}>
-              <ResultsPlaceholder />
-            </Box>
-          )}
+          <Loadable isLoading={props.isLoading}>
+            {!!props.error && <ErrorRow error={props.error} />}
+            {cells?.length > 0 && cells.map((item, rowIndex) => {
+              return Object.keys(item)
+                .filter(filterItemKey)
+                .map((itemKey, index) => {
+                  return (
+                    <CellRenderer
+                      key={itemKey}
+                      value={item[itemKey]}
+                      row={rowIndex + 1}
+                      column={index + 1}
+                      style={{ opacity: item._opacity ? item._opacity : 1 }}
+                      link={item._link}
+                      hasClick={typeof props.onRowClick !== 'undefined'}
+                      onClick={() => props.onRowClick && props.onRowClick(item as T)} />
+                  );
+                })
+            })}
+            {!props.items?.length && (
+              <Box p={2}>
+                <ResultsPlaceholder />
+              </Box>
+            )}
+          </Loadable>
         </div>
       </div>
     </Stack>

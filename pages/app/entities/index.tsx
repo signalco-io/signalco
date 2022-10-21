@@ -157,7 +157,7 @@ function Entities() {
                             onChange={(e) => handleSearchTextChange(e.target.value)}
                             sx={{ width: { xs: '100%', sm: 'initial' } }} />}
                         <Suspense>
-                            <Picker value={entityListViewType} setValue={setEntityListViewType} options={[
+                            <Picker value={entityListViewType} onChange={(_, value) => setEntityListViewType(value)} options={[
                                 { value: 'table', label: <ViewListIcon /> },
                                 { value: 'cards', label: <ViewModuleIcon /> }
                             ]} />

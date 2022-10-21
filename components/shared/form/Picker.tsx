@@ -1,15 +1,28 @@
-import { ReactElement } from 'react';
+import { ChangeEvent, ReactElement } from 'react';
 import { Radio, RadioGroup } from '@mui/joy';
 
-export default function Picker(props: { value?: any, setValue: (value: any) => void, options: { value: any, label: ReactElement }[] }) {
-    const { value, options, setValue } = props;
+export interface PickerOption {
+    value: any;
+    label: ReactElement | string;
+    disabled?: boolean;
+}
+
+export interface PickerProps {
+    value: any | undefined;
+    onChange: (event: ChangeEvent<HTMLInputElement>, value: any) => void;
+    options: PickerOption[];
+}
+
+export default function Picker(props: PickerProps) {
+    const { value, options, onChange } = props;
     return (
         <RadioGroup
             row
             name="justify"
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => onChange(e, e.target.value)}
             sx={{
+                alignSelf: 'start',
                 minHeight: 48,
                 padding: '4px',
                 borderRadius: 'md',
@@ -22,6 +35,7 @@ export default function Picker(props: { value?: any, setValue: (value: any) => v
                 <Radio
                     key={option.value}
                     color="neutral"
+                    disabled={option.disabled}
                     value={option.value}
                     disableIcon
                     label={option.label}

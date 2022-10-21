@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-    bindPopover,
     bindTrigger,
     usePopupState
 } from 'material-ui-popup-state/hooks';
@@ -15,14 +14,13 @@ import {
     Typography
 } from '@mui/joy';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ClickAwayListener from '@mui/base/ClickAwayListener';
-import { PopperUnstyled } from '@mui/base';
 import useContact from 'src/hooks/useContact';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import IContactPointerPartial from 'src/contacts/IContactPointerPartial';
 import InputContactValue from './InputContactValue';
 import EntityIcon from './EntityIcon';
 import Loadable from '../Loadable/Loadable';
+import Popper from '../layout/Popper';
 import Accordion from '../layout/Accordion';
 import NoDataPlaceholder from '../indicators/NoDataPlaceholder';
 import useEntity from '../../../src/hooks/useEntity';
@@ -331,23 +329,17 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                     </Stack>
                 </Stack>
             </Button>
-            <ClickAwayListener onClickAway={(e) => {
-                if (e.target !== entityMenu.anchorEl) {
-                    entityMenu.close();
-                }
-            }}>
-                <PopperUnstyled style={{ zIndex: 999999 }} {...bindPopover(entityMenu)}>
-                    <Sheet sx={{ width: 420, height: 620 }}>
-                        <EntitySelectionMenu
-                            target={target}
-                            selectContact={selectContact}
-                            selectValue={selectValue}
-                            value={value}
-                            onSelected={handleEntitySelected}
-                            onClose={handleEntitySelectionClose} />
-                    </Sheet>
-                </PopperUnstyled>
-            </ClickAwayListener>
+            <Popper popupState={entityMenu}>
+                <Sheet sx={{ width: 420, height: 620 }}>
+                    <EntitySelectionMenu
+                        target={target}
+                        selectContact={selectContact}
+                        selectValue={selectValue}
+                        value={value}
+                        onSelected={handleEntitySelected}
+                        onClose={handleEntitySelectionClose} />
+                </Sheet>
+            </Popper>
         </>
     );
 }

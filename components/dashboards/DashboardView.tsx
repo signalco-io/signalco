@@ -5,7 +5,6 @@ import { Button, Typography } from '@mui/joy';
 import GridWrapper from './GridWrapper';
 import DragableWidget from './DragableWidget';
 import DisplayWidget from './DisplayWidget';
-import { useNavWidth } from '../NavProfile';
 import useLocale from '../../src/hooks/useLocale';
 import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
 
@@ -17,7 +16,7 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
     const { t } = useLocale('App', 'Dashboards');
 
     const widgetSize = 78 + 8; // Widget is 76x76 + 2px for border + 8 spacing between widgets (2x4px)
-    const dashbaordPadding = 48 + useNavWidth(); // Has 24 x padding
+    const dashbaordPadding = 48 + 109; // Has 24 x padding (109 nav width)
     const numberOfColumns = Math.max(4, Math.floor((window.innerWidth - dashbaordPadding) / widgetSize)); // When width is less than 400, set to quad column
 
     const widgetsOrder = dashboard.widgets.slice().sort((a, b) => a.order - b.order).map(w => w.id);

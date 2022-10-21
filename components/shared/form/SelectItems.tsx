@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Select, Option } from '@mui/joy';
 
 export interface ISelectItemsProps {
     multiple?: boolean,
     value: string[],
-    label: string,
-    items: { value: string, label?: string }[],
+    label?: string,
+    items: { value: string, label?: ReactElement | string, disabled?: boolean }[],
     onChange: (values: string[]) => void,
     placeholder?: string,
     fullWidth?: boolean
@@ -47,7 +47,8 @@ function SelectItems(props: ISelectItemsProps) {
         >{items.map(item => (
             <Option
                 value={item.value}
-                key={item.value}>
+                key={item.value}
+                disabled={item.disabled}>
                 {/* {multiple && <Checkbox checked={value.indexOf(item.value) > -1} />} */}
                 {item.label ?? item.value}
             </Option>)
