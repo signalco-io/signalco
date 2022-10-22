@@ -100,7 +100,7 @@ const settingsFormComponents: FormBuilderComponents = {
     selectTimeZone: ({ value, onChange, label }) => {
         const timeZones = getTimeZones();
         return (
-            <SelectItems value={value} onChange={(v) => onChange(v[0])} items={[
+            <SelectItems value={[value]} onChange={(v) => onChange(v[0])} items={[
                 { value: '0', label: '+00:00 UTC', disabled: true },
                 ...timeZones.map(tz => ({ value: tz.name, label: tz.currentTimeFormat }))
             ]} label={label} />
@@ -139,7 +139,7 @@ function SettingsIndex() {
     }
 
     const timeLocationForm = {
-        timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', t('TimeFormat'), { receiveEvent: false }),
+        timeFormat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', t('TimeFormat'), { receiveEvent: false }),
         timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', t('TimeZone'), { receiveEvent: false }),
         location: useFormField(userLocation, isTrue, 'locationMap', t('Location'))
     };
@@ -163,10 +163,10 @@ function SettingsIndex() {
     }, [setUserNickName, profileForm.nickname]);
 
     useEffect(() => {
-        if (!timeLocationForm.timeFromat.error) {
-            setUserTimeFormat(timeLocationForm.timeFromat.value?.trim() || undefined);
+        if (!timeLocationForm.timeFormat.error) {
+            setUserTimeFormat(timeLocationForm.timeFormat.value?.trim() || undefined);
         }
-    }, [setUserTimeFormat, timeLocationForm.timeFromat]);
+    }, [setUserTimeFormat, timeLocationForm.timeFormat]);
 
     useEffect(() => {
         if (!timeLocationForm.timeZone.error) {
