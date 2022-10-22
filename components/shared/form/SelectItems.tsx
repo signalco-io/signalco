@@ -25,7 +25,7 @@ function SelectItems(props: ISelectItemsProps) {
 
     return (
         <Select
-            value={value[0]}
+            value={value?.at(0)}
             placeholder={placeholder}
             onChange={handleOnChange}
             renderValue={(selected) => {

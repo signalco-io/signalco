@@ -1,5 +1,6 @@
 import { Suspense, useState } from 'react';
 import { Box, Stack } from '@mui/system';
+import { DefaultColorScheme } from '@mui/joy/styles/types';
 import { useColorScheme } from '@mui/joy/styles';
 import { TextField, SupportedColorScheme, Typography } from '@mui/joy';
 import Picker from 'components/shared/form/Picker';
@@ -49,25 +50,53 @@ function AppThemeVisual(props: { label: string, theme: SupportedColorScheme, dis
     );
 }
 
-export default function AppThemePicker() {
+function AppThemeColorPicker() {
     const themes = useLocale('App', 'Settings', 'Themes');
+    const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
+    const { colorScheme, setColorScheme } = useColorScheme();
+
+    const handleThemeSelect = (newTheme: DefaultColorScheme | undefined) => {
+        const newThemeSelect = newTheme ?? 'light';
+        setColorScheme(newThemeSelect);
+    };
+
+    console.log('color scheme', colorScheme)
+
+    return (
+        <Picker value={colorScheme} onChange={(_, value) => handleThemeSelect(value)} options={[
+            {
+                value: 'light',
+                label: (
+                    <Box p={1}>
+                        <AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" />
+                    </Box>
+                )
+            },
+            {
+                value: 'dark',
+                label: (
+                    <Box p={1}>
+                        <AppThemeVisual label={themes.t('Dark')} theme="dark" />
+                    </Box>
+                )
+            }
+        ]} />
+    );
+}
+
+export default function AppThemePicker() {
     const themeModes = useLocale('App', 'Settings', 'ThemeModes');
     const picker = useLocale('App', 'Components', 'AppThemePicker');
 
     const { colorScheme, setColorScheme } = useColorScheme();
     const [themeMode, setThemeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
 
-    const handleThemeSelect = (newTheme: SupportedColorScheme) => {
-        const newThemeSelect = newTheme ?? 'light';
-        setColorScheme(newThemeSelect);
-    };
-
     const [userLocation] = useUserSetting<[number, number] | undefined>('location', undefined);
-    const handleThemeModeChange = (_: unknown, newThemeMode: AppThemeMode) => {
+    const handleThemeModeChange = (_: unknown, newThemeMode: AppThemeMode | undefined) => {
         const newThemeModeSelect = newThemeMode ?? 'manual';
         setThemeMode(newThemeModeSelect);
         if (newThemeModeSelect !== 'manual' && colorScheme === 'light') {
-            handleThemeSelect('dark');
+            setColorScheme('dark');
         }
     };
 
@@ -93,7 +122,7 @@ export default function AppThemePicker() {
     return (
         <Suspense>
             <Stack spacing={2}>
-                <Picker value={themeMode} onChange={handleThemeModeChange} options={[
+                <Picker value={themeMode ?? 'manual'} onChange={handleThemeModeChange} options={[
                     { value: 'manual', label: themeModes.t('Manual') },
                     { value: 'sunriseSunset', label: themeModes.t('SunriseSunset'), disabled: (userLocation?.length ?? 0) <= 0 },
                     { value: 'timeRange', label: themeModes.t('TimeRange') },
@@ -117,10 +146,7 @@ export default function AppThemePicker() {
                 )}
                 <Stack spacing={1}>
                     {themeMode !== 'manual' && <Typography level="body2">{picker.t('PickNightTheme')}</Typography>}
-                    <Picker value={colorScheme} onChange={(_, value) => handleThemeSelect(value)} options={[
-                        { value: 'light', label: <AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" /> },
-                        { value: 'dark', label: <AppThemeVisual label={themes.t('Dark')} theme="dark" /> }
-                    ]} />
+                    <AppThemeColorPicker />
                 </Stack>
             </Stack>
         </Suspense>

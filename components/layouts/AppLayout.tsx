@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { Box, Stack } from '@mui/system';
 import { IconButton, Sheet } from '@mui/joy';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
@@ -11,7 +11,6 @@ import RealtimeService from '../../src/realtime/realtimeService';
 import PageNotificationService from '../../src/notifications/PageNotificationService';
 import useHashParam from '../../src/hooks/useHashParam';
 
-const queryClient = new QueryClient();
 
 export function AppLayout(props: ChildrenProps) {
   const {
@@ -19,6 +18,7 @@ export function AppLayout(props: ChildrenProps) {
   } = props;
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [isFullScreen, setFullScreenHash] = useHashParam('fullscreen');
+  const queryClient = useQueryClient();
 
   PageNotificationService.setSnackbar(enqueueSnackbar, closeSnackbar);
 
@@ -30,19 +30,17 @@ export function AppLayout(props: ChildrenProps) {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <Stack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100%', width: '100%' }}>
-          {isFullScreen !== 'on' && (
-            <Sheet>
-              <NavProfile />
-            </Sheet>
-          )}
-          <Box sx={{ height: '100%', width: '100%', flexGrow: 1, position: 'relative' }}>
-            {children}
-          </Box>
-        </Stack>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+      <Stack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100%', width: '100%' }}>
+        {isFullScreen !== 'on' && (
+          <Sheet>
+            <NavProfile />
+          </Sheet>
+        )}
+        <Box sx={{ height: '100%', width: '100%', flexGrow: 1, position: 'relative' }}>
+          {children}
+        </Box>
+      </Stack>
+      <ReactQueryDevtools initialIsOpen={false} />
       {isFullScreen && (
         <IconButton
           size="lg"
