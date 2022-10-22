@@ -7,6 +7,13 @@ export interface IconProps extends ChildrenProps {
 
 export default function Icon(props: IconProps) {
     return (
-        <Box component="span" sx={props.sx}>{props.children}</Box>
+        <Box
+            component="span"
+            className="material-icons"
+            sx={{
+                ...props.sx
+            }}>
+            {props.children}
+        </Box>
     );
 }

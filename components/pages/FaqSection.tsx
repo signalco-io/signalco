@@ -1,6 +1,7 @@
 import { Box, Stack } from '@mui/system';
-import { Card, Typography } from '@mui/joy';
+import { Typography } from '@mui/joy';
 import Container from 'components/shared/layout/Container';
+import Accordion from 'components/shared/layout/Accordion';
 import PageCenterHeader from './PageCenterHeader';
 
 export interface FaqItem {
@@ -20,12 +21,10 @@ export default function FaqSection(props: { faq: FaqItem[] }) {
                     <Stack spacing={4} justifyItems="center" alignItems="center">
                         <Stack spacing={2}>
                             {faq.map(f => (
-                                <Card variant="soft" key={f.id}>
-                                    <Stack spacing={1}>
-                                        <Typography level="h6">{f.question}</Typography>
-                                        <Typography>{f.answer}</Typography>
-                                    </Stack>
-                                </Card>
+                                <Accordion key={f.id}>
+                                    <Typography level="h6">{f.question}</Typography>
+                                    <Typography>{f.answer}</Typography>
+                                </Accordion>
                             ))}
                         </Stack>
                         {/* TODO: Enable when help center is available */}
