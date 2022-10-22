@@ -10,13 +10,15 @@ export interface PopperProps extends ChildrenProps {
 export default function Popper(props: PopperProps) {
     const { popupState, children } = props;
 
+    const { anchorReference, ...popoverProps } = bindPopover(popupState);
+
     return (
         <ClickAwayListener onClickAway={(e) => {
             if (e.target !== popupState.anchorEl) {
                 popupState.close();
             }
         }}>
-            <PopperUnstyled style={{ zIndex: 999999 }} {...bindPopover(popupState)}>
+            <PopperUnstyled style={{ zIndex: 999999 }} {...popoverProps}>
                 {children}
             </PopperUnstyled>
         </ClickAwayListener>

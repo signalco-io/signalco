@@ -1,4 +1,4 @@
-import React, { Suspense, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Grid from '@mui/system/Unstable_Grid';
@@ -30,7 +30,7 @@ function EntityCard(props: { entity: IEntityDetails }) {
     return (
         <Grid xs={6} sm={4} lg={3}>
             <Link href={`/app/entities/${entity.id}`} passHref>
-                <Card sx={{ width: '100%', bgcolor: 'background.default' }}>
+                <Card variant="outlined">
                     <Stack spacing={2}>
                         <Stack direction="row" spacing={2} alignItems="center">
                             <Avatar>
@@ -142,26 +142,26 @@ function Entities() {
 
     return (
         <>
-            <Stack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
+            <Stack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 2 }}>
-                    <Typography level="h2" fontWeight="300" sx={{ display: { xs: 'none', sm: 'inline-block' } }}>{t('Entities')}</Typography>
-                    <Stack direction="row" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="flex-end">
-                        {showSearch && <TextField
-                            label={t('SearchLabel')}
-                            size="sm"
-                            value={searchText}
-                            onChange={(e) => handleSearchTextChange(e.target.value)}
-                            sx={{ width: { xs: '100%', sm: 'initial' } }} />}
-                        <Suspense>
-                            <Picker value={entityListViewType} onChange={(_, value) => setEntityListViewType(value)} options={[
-                                { value: 'table', label: <ViewListIcon /> },
-                                { value: 'cards', label: <ViewModuleIcon /> }
-                            ]} />
-                        </Suspense>
+                    <Typography level="h3" sx={{ display: { xs: 'none', sm: 'inline-block' } }}>{t('Entities')}</Typography>
+                    <Stack direction="row" alignItems="center" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="end">
+                        {showSearch && (
+                            <TextField
+                                label={t('SearchLabel')}
+                                size="sm"
+                                value={searchText}
+                                onChange={(e) => handleSearchTextChange(e.target.value)}
+                                sx={{ width: { xs: '100%', sm: 'initial' } }} />
+                        )}
+                        <Picker value={entityListViewType} onChange={(_, value) => setEntityListViewType(value)} options={[
+                            { value: 'table', label: <ViewListIcon /> },
+                            { value: 'cards', label: <ViewModuleIcon /> }
+                        ]} />
                         <IconButton size="lg" onClick={handleAddEntity}><AddCircleIcon /></IconButton>
                     </Stack>
                 </Stack>
-                <Stack spacing={1}>
+                <Stack>
                     <Loadable isLoading={entities.isLoading} error={entities.error}>
                         <Loadable isLoading={isSearching} contentVisible placeholder="linear" sx={{ px: 2 }}>
                             {results}

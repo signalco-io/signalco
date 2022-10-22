@@ -7,7 +7,7 @@ import {
   usePopupState,
 } from 'material-ui-popup-state/hooks';
 import { Box, Stack } from '@mui/system';
-import { Avatar, Button, Divider, IconButton, ListItemDecorator, Menu, MenuItem, Sheet, Typography } from '@mui/joy';
+import { Avatar, Button, Divider, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, Sheet, Typography } from '@mui/joy';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MenuIcon from '@mui/icons-material/Menu';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -81,6 +81,8 @@ function UserProfileAvatar() {
     setIsLoading(false);
   }, []);
 
+  const { anchorReference, ...menuProps } = bindMenu(popupState);
+
   return (
     <Loadable isLoading={isLoading} placeholder="skeletonRect" width={30} height={30}>
       <Button {...bindTrigger(popupState)} variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 1 }}>
@@ -89,19 +91,23 @@ function UserProfileAvatar() {
           <ApiBadge />
         </Stack>
       </Button>
-      <Menu {...bindMenu(popupState)}>
+      <Menu {...menuProps}>
         <MenuItem onClick={navigateTo('/app/settings')}>
           <ListItemDecorator>
             <SettingsIcon />
           </ListItemDecorator>
-          {t('Settings')}
+          <ListItemContent>
+            {t('Settings')}
+          </ListItemContent>
         </MenuItem>
         <Divider />
         <MenuItem onClick={logout}>
           <ListItemDecorator>
             <ExitToAppIcon />
           </ListItemDecorator>
-          {t('Logout')}
+          <ListItemContent>
+            {t('Logout')}
+          </ListItemContent>
         </MenuItem>
       </Menu>
     </Loadable>
@@ -111,19 +117,17 @@ function UserProfileAvatar() {
 function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: SvgIconComponent, active: boolean, label: string, onClick?: () => void }) {
   return (
     <Link href={path} passHref>
-      <Button
-        sx={{
-          py: { xs: 2, lg: 3 },
-          justifyContent: 'start',
-        }}
+      <IconButton
         aria-label={label}
         title={label}
         variant="plain"
         size="lg"
-        onClick={onClick}
-        startDecorator={<Icon sx={{ opacity: active ? 1 : 0.6, fontSize: '26px' }} />}>
-        <Typography sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
-      </Button>
+        sx={{
+          p: 2
+        }}
+        onClick={onClick}>
+        <Icon sx={{ opacity: active ? 1 : 0.6, fontSize: '26px' }} />
+      </IconButton>
     </Link>
   );
 }
@@ -150,8 +154,6 @@ function NavProfile() {
       direction={{ xs: 'row', sm: 'column' }}
       spacing={{ xs: 0, sm: 4 }}
       sx={{
-        px: { xs: 2, sm: 0 },
-        pt: { xs: 0, sm: 4 },
         minHeight: { xs: '60px', sm: undefined },
         justifyContent: { xs: 'space-between', sm: 'start' }
       }}

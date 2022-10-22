@@ -37,7 +37,7 @@ const theme = () => {
           neutral: neutralColor,
           background: {
             body: '#000000',
-            surface: '#131313',
+            //surface: '#131313',
             level1: '#00ff00',
             level2: '#00ffff',
             level3: '#0000ff',
@@ -51,7 +51,7 @@ const theme = () => {
           primary: zincColor,
           neutral: neutralColor,
           background: {
-            // body: '#ffffff',
+            body: '#ffffff',
             // surface: '#ffffff',
             level1: '#00ff00',
             level2: '#00ffff',

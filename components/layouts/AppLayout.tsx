@@ -3,7 +3,7 @@ import { useSnackbar } from 'notistack';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Box, Stack } from '@mui/system';
-import { IconButton } from '@mui/joy';
+import { IconButton, Sheet } from '@mui/joy';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import NavProfile from '../NavProfile';
 import { ChildrenProps } from '../../src/sharedTypes';
@@ -32,7 +32,11 @@ export function AppLayout(props: ChildrenProps) {
     <>
       <QueryClientProvider client={queryClient}>
         <Stack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100%', width: '100%' }}>
-          {isFullScreen !== 'on' && <NavProfile />}
+          {isFullScreen !== 'on' && (
+            <Sheet>
+              <NavProfile />
+            </Sheet>
+          )}
           <Box sx={{ height: '100%', width: '100%', flexGrow: 1, position: 'relative' }}>
             {children}
           </Box>

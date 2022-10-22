@@ -1,7 +1,4 @@
 import { Suspense, useState } from 'react';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Box, Stack } from '@mui/system';
 import { useColorScheme } from '@mui/joy/styles';
 import { TextField, SupportedColorScheme, Typography } from '@mui/joy';
@@ -106,28 +103,16 @@ export default function AppThemePicker() {
                     <Stack spacing={1}>
                         <Typography level="body2">{picker.t('PickDayNightTimes')}</Typography>
                         <Stack direction="row" spacing={1}>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <TimePicker
-                                    label={picker.t('DayTime')}
-                                    onChange={handleDayTimeChange}
-                                    value={dayTime}
-                                    ampm={userTimeFormat === '0'}
-                                    ampmInClock={userTimeFormat === '0'}
-                                    renderInput={({color, sx, defaultValue, value, variant, size, ...params}) =>
-                                        <TextField value={value as any} {...params} />}
-                                />
-                            </LocalizationProvider>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <TimePicker
-                                    label={picker.t('NightTime')}
-                                    onChange={handleNightTimeChange}
-                                    value={nightTime}
-                                    ampm={userTimeFormat === '0'}
-                                    ampmInClock={userTimeFormat === '0'}
-                                    renderInput={({color, sx, defaultValue, value, variant, size, ...params}) =>
-                                        <TextField value={value as any} {...params} />}
-                                />
-                            </LocalizationProvider>
+                            <TextField
+                                label={picker.t('DayTime')}
+                                value={dayTime ? DateTimeProvider.toDuration(dayTime) : ''}
+                                onChange={(e) => handleDayTimeChange(DateTimeProvider.fromDuration(DateTimeProvider.now(), e.target.value))}
+                            />
+                            <TextField
+                                label={picker.t('NightTime')}
+                                value={nightTime ? DateTimeProvider.toDuration(nightTime) : ''}
+                                onChange={(e) => handleNightTimeChange(DateTimeProvider.fromDuration(DateTimeProvider.now(), e.target.value))}
+                            />
                         </Stack>
                     </Stack>
                 )}
