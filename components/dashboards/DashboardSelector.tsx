@@ -1,8 +1,11 @@
 import React, { Suspense, useEffect } from 'react';
-import { bindPopover, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
-import { Box, Button, Popover, Stack, Tab, Tabs, Typography } from '@mui/material';
+import Link from 'next/link';
+import { bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
+import { Box, Stack } from '@mui/system';
+import { Button } from '@mui/joy';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import useDashboards from 'src/hooks/dashboards/useDashboards';
+import Popper from 'components/shared/layout/Popper';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
 import useHashParam from '../../src/hooks/useHashParam';
 
@@ -36,68 +39,39 @@ function DashboardSelector(props: IDashboardSelectorProps) {
             <Stack spacing={{ xs: 0, sm: 2 }} direction="row">
                 {(dashboards?.length ?? 0) > 0 && (
                     <Box>
-                        <Button {...bindTrigger(popupState)}>
-                            <Stack spacing={1} sx={{ pl: 1 }} direction="row" alignItems="center">
-                                <Typography variant="h2" fontWeight={500} fontSize={{ xs: 18, sm: 24 }} noWrap>{currentName}</Typography>
-                                <KeyboardArrowDownIcon sx={{ fontSize: { xs: '28px', sm: '32px' } }} />
-                            </Stack>
+                        <Button
+                            variant="plain"
+                            size="lg"
+                            sx={{
+                                '.JoyButton-endDecorator': {
+                                    pointerEvents: 'none'
+                                }
+                            }}
+                            endDecorator={<KeyboardArrowDownIcon />} {...bindTrigger(popupState)}>
+                            {currentName}
                         </Button>
                     </Box>
                 )}
                 {(favoriteDashboards?.length ?? 0) > 0 && (
-                    <Tabs
-                        value={0}
-                        variant="scrollable"
-                        scrollButtons="auto"
-                        aria-label="pinned dashboards"
-                        sx={{
-                            '.MuiTabScrollButton-root': {
-                                display: 'none'
-                            },
-                            '.MuiTabs-indicator': {
-                                backgroundColor: 'transparent'
-                            },
-                            '.Mui-selected > h3': {
-                                color: 'text.secondary'
-                            }
-                        }}
-                    >
+                    <Stack direction="row">
                         {favoriteDashboards?.map(fd => (
-                            <Tab
-                                key={fd.id}
-                                sx={{
-                                    px: { xs: 0, sm: 2 },
-                                    minHeight: { xs: 40, sm: 48 },
-                                    minWidth: 80
-                                }}
-                                onClick={() => setSelectedIdHash(fd.id)}
-                                label={<Typography
-                                    variant="h3"
-                                    fontWeight={400}
-                                    fontSize={{ xs: 16, sm: 20 }}
-                                    sx={{ opacity: 0.6, textTransform: 'none' }}>{fd.name}</Typography>} />
+                            <Link key={fd.id} href={`#dashboard=${fd.id}`} passHref>
+                                <Button variant="plain" sx={{ color: 'var(--joy-palette-neutral-400)' }}>
+                                    {fd.name}
+                                </Button>
+                            </Link>
                         ))}
-                    </Tabs>
+                    </Stack>
                 )}
             </Stack>
-            <Popover
-                {...bindPopover(popupState)}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                PaperProps={{ elevation: 8, variant: 'elevation' }}>
+            <Popper popupState={popupState}>
                 <DashboardSelectorMenu
                     selectedId={selectedId}
                     popupState={popupState}
                     onSelection={setSelectedIdHash}
                     onEditWidgets={onEditWidgets}
                     onSettings={onSettings} />
-            </Popover>
+            </Popper>
         </Suspense>
     );
 }

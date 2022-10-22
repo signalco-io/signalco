@@ -1,8 +1,7 @@
 import { withScreenshot } from 'storycap';
 import React from 'react';
-import { StyledEngineProvider } from '@mui/material/styles';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { CssBaseline } from '@mui/material';
+import CssBaseline from '@mui/joy/CssBaseline';
 import { CssVarsProvider } from '@mui/joy/styles';
 import appTheme from '../src/theme';
 import '../styles/global.scss';
@@ -16,14 +15,12 @@ const queryClient = new QueryClient();
 export const decorators = [
     withScreenshot,
     Story => (
-        <StyledEngineProvider injectFirst>
-            <CssVarsProvider theme={appTheme()}>
-                <QueryClientProvider client={queryClient}>
-                    <CssBaseline />
-                    <Story />
-                </QueryClientProvider>
-            </CssVarsProvider>
-        </StyledEngineProvider>
+        <CssVarsProvider theme={appTheme}>
+            <CssBaseline />
+            <QueryClientProvider client={queryClient}>
+                <Story />
+            </QueryClientProvider>
+        </CssVarsProvider>
     )
 ];
 

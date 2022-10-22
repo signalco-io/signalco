@@ -1,13 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { Draggable, Map, Marker } from 'pigeon-maps';
 import { Box, Stack } from '@mui/system';
-import { Accordion, AccordionDetails, AccordionSummary, Skeleton } from '@mui/material';
 import { IconButton, TextField, Typography } from '@mui/joy';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/esm/index.types';
 import useUserTheme from 'src/hooks/useUserTheme';
 import useLoadAndError from 'src/hooks/useLoadAndError';
+import Loadable from 'components/shared/Loadable/Loadable';
+import Accordion from 'components/shared/layout/Accordion';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 
 const mapBoxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -62,50 +62,50 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
     };
 
     return (
-        <Accordion expanded={expanded} onChange={(_e, expanded) => setExpanded(expanded)} variant="elevation">
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ '.MuiAccordionSummary-content': { marginY: 1 } }}>
-                {expanded
-                    ? <Typography>Pick position on map</Typography>
-                    : (
-                        <Stack>
-                            <Typography sx={{ width: '33%', flexShrink: 0, fontSize: '0.8em', color: 'text.secondary' }}>
-                                {label}
-                            </Typography>
-                            {placeName.isLoading
-                                ? <Skeleton variant="text" width={230} />
-                                : <Typography>{placeName.item}</Typography>}
-                        </Stack>
-                    )}
-            </AccordionSummary>
-            <AccordionDetails>
-                <Stack spacing={2}>
-                    <Stack direction="row" alignItems="center" justifyContent="stretch" spacing={1}>
-                        <IconButton onClick={handleGetLocation} size="lg">
-                            <MyLocationIcon />
-                        </IconButton>
-                        <TextField value={placeName.item ?? ''} />
+        <Accordion
+            open={expanded}
+            onChange={(_, open) => setExpanded(open)}
+            // expandIcon={<ExpandMoreIcon />}
+        >
+            {expanded
+                ? <Typography>Pick position on map</Typography>
+                : (
+                    <Stack>
+                        <Typography sx={{ width: '33%', flexShrink: 0, fontSize: '0.8em', color: 'text.secondary' }}>
+                            {label}
+                        </Typography>
+                        <Loadable isLoading={placeName.isLoading}>
+                            <Typography>{placeName.item}</Typography>
+                        </Loadable>
                     </Stack>
-                    <Box sx={{ '&>div': { background: 'transparent !important' } }}>
-                        <Map
-                            provider={(x, y, z, dpr) => mapTiler(themeContext.isDark, x, y, z, dpr)}
-                            dprs={[1, 2]}
-                            height={320}
-                            center={latLng}
-                            zoom={zoom}
-                            attribution={false}
-                            onBoundsChanged={handleMove}
-                        >
-                            <Draggable offset={[0, 50]} anchor={latLng} onDragEnd={(point) => setLatLng(point, { receiveEvent: false })}>
-                                <Marker
-                                    width={50}
-                                    anchor={latLng}
-                                    color="black"
-                                />
-                            </Draggable>
-                        </Map>
-                    </Box>
+                )}
+            <Stack spacing={2}>
+                <Stack direction="row" alignItems="center" justifyContent="stretch" spacing={1}>
+                    <IconButton onClick={handleGetLocation} size="lg">
+                        <MyLocationIcon />
+                    </IconButton>
+                    <TextField value={placeName.item ?? ''} />
                 </Stack>
-            </AccordionDetails>
+                <Box sx={{ '&>div': { background: 'transparent !important' } }}>
+                    <Map
+                        provider={(x, y, z, dpr) => mapTiler(themeContext.isDark, x, y, z, dpr)}
+                        dprs={[1, 2]}
+                        height={320}
+                        center={latLng}
+                        zoom={zoom}
+                        attribution={false}
+                        onBoundsChanged={handleMove}
+                    >
+                        <Draggable offset={[0, 50]} anchor={latLng} onDragEnd={(point) => setLatLng(point, { receiveEvent: false })}>
+                            <Marker
+                                width={50}
+                                anchor={latLng}
+                                color="black"
+                            />
+                        </Draggable>
+                    </Map>
+                </Box>
+            </Stack>
         </Accordion>
     );
 }

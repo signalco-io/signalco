@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
-import Image, { ImageProps } from 'next/image';
+import Link from 'next/link';
+import Image, { ImageProps } from 'next/future/image';
 import { Box, Stack } from '@mui/system';
 import { Typography } from '@mui/joy';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
@@ -8,28 +9,28 @@ const ringConfig = [
     {
         radius: 500,
         logos: [
-            { angle: 120, alt: 'Xiaomi', src: '/assets/logos/xiaomilogo.png', width: 40, height: 40 },
-            { angle: 50, alt: 'Zigbee2MQTT', src: '/assets/logos/z2mlogo.png', width: 60, height: 60 },
+            { id: 'mi', angle: 120, alt: 'Xiaomi', src: '/assets/logos/xiaomilogo.png', width: 40, height: 40 },
+            { id: 'zigbee2mqtt', angle: 50, alt: 'Zigbee2MQTT', src: '/assets/logos/z2mlogo.png', width: 60, height: 60 },
         ]
     },
     {
         radius: 900,
         logos: [
-            { angle: 140, alt: 'Philips Hue', src: '/assets/logos/huelogo.png', width: 60, height: 60 },
-            { angle: 80, alt: 'Samsung', src: '/assets/logos/samsunglogo.png', width: 90, height: 90 }
+            { id: 'philipshue', angle: 140, alt: 'Philips Hue', src: '/assets/logos/huelogo.png', width: 60, height: 60 },
+            { id: 'samsung', angle: 80, alt: 'Samsung', src: '/assets/logos/samsunglogo.png', width: 90, height: 90 }
         ]
     },
     {
         radius: 1300,
         logos: [
-            { angle: 30, alt: 'iRobot', src: '/assets/logos/irobotlogo.png', width: 70, height: 70 },
-            { angle: 120, alt: 'GitHub', src: '/assets/logos/githublogo.png', width: 70, height: 70 }
+            { id: 'irobot', angle: 30, alt: 'iRobot', src: '/assets/logos/irobotlogo.png', width: 70, height: 70 },
+            { id: 'github', angle: 120, alt: 'GitHub', src: '/assets/logos/githublogo.png', width: 70, height: 70 }
         ]
     },
     {
         radius: 1700,
         logos: [
-            { angle: 0, alt: 'Tasmota', src: '/assets/logos/tasmotalogo.png', width: 40, height: 40 }
+            { id: 'tasmota', angle: 0, alt: 'Tasmota', src: '/assets/logos/tasmotalogo.png', width: 40, height: 40 }
         ]
     },
     {
@@ -57,36 +58,39 @@ function RingLogo(props: { ringRadius: number, degrees: number, imageProps: Imag
     const left = -logoWidth / 2 - logoPadding + props.ringRadius;
     const power = useMemo(() => Math.random() > 0.5 ? 4 : -4, []);
 
-    const keyframesName = `@keyframes scaleRingLogo${top}${left}`;
-    const rotateKeyframesName = `@keyframes rotateRingLogo${top}${left}`;
+    const keyframesName = `@keyframes scaleRingLogo${props.imageProps.id}`;
+    const rotateKeyframesName = `@keyframes rotateRingLogo${props.imageProps.id}`;
 
     return (
-        <Box sx={{
-            p: `${logoPadding}px`,
-            backgroundColor: 'background.default',
-            width: `${logoWidth + logoPadding * 2}px`,
-            height: `${logoHeight + logoPadding * 2}px`,
-            top: `${top}px`,
-            left: `${left}px`,
-            borderRadius: '50%',
-            position: 'absolute',
-            opacity: 0,
-            animation: `scaleRingLogo${top}${left} 0.5s ease-in forwards, rotateRingLogo${top}${left} 12s ease-in-out infinite alternate`,
-            animationDelay: '0.4s',
-            [keyframesName]: {
-                to: { opacity: 1 }
-            },
-            [rotateKeyframesName]: {
-                from: { transform: `rotate(${-props.degrees}deg) translateX(${props.ringRadius}px) rotate(${props.degrees}deg)` },
-                to: { transform: `rotate(${-props.degrees - power}deg) translateX(${props.ringRadius * 1.02}px) rotate(${props.degrees + power}deg)` }
-            },
-        }}>
-            <Image
-                alt={props.imageProps.alt}
-                width={props.imageProps.width}
-                height={props.imageProps.height}
-                src={props.imageProps.src} />
-        </Box>
+        <Link href={`/channels/${props.imageProps.id}`} passHref>
+            <Box component="a" sx={{
+                p: `${logoPadding}px`,
+                backgroundColor: 'background.default',
+                width: `${logoWidth + logoPadding * 2}px`,
+                height: `${logoHeight + logoPadding * 2}px`,
+                top: `${top}px`,
+                left: `${left}px`,
+                borderRadius: '50%',
+                position: 'absolute',
+                opacity: 0,
+                animation: `scaleRingLogo${props.imageProps.id} 0.5s ease-in forwards, rotateRingLogo${props.imageProps.id} 12s ease-in-out infinite alternate`,
+                animationDelay: '0.4s',
+                [keyframesName]: {
+                    to: { opacity: 1 }
+                },
+                [rotateKeyframesName]: {
+                    from: { transform: `rotate(${-props.degrees}deg) translateX(${props.ringRadius}px) rotate(${props.degrees}deg)` },
+                    to: { transform: `rotate(${-props.degrees - power}deg) translateX(${props.ringRadius * 1.02}px) rotate(${props.degrees + power}deg)` }
+                },
+                zIndex: 1
+            }}>
+                <Image
+                    alt={props.imageProps.alt}
+                    width={props.imageProps.width}
+                    height={props.imageProps.height}
+                    src={props.imageProps.src} />
+            </Box>
+        </Link>
     );
 }
 
@@ -116,6 +120,7 @@ function Ring(props: { size: number, logos: RingLogoInfo[] }) {
                     from: { transform: 'scale(1)' },
                     to: { transform: 'scale(1.02)' }
                 },
+                userSelect: 'none'
             }}></Box>
             {props.logos.map(logo => (
                 <RingLogo key={logo.alt} ringRadius={props.size / 2} degrees={logo.angle} imageProps={logo} />

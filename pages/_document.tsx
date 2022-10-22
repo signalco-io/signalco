@@ -2,7 +2,6 @@
 /* eslint-disable react/display-name */
 import * as React from 'react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
-import { getInitColorSchemeScript } from '@mui/material/styles';
 import { getInitColorSchemeScript as joiGetInitColorSchemeScript } from '@mui/joy/styles';
 import createEmotionServer from '@emotion/server/create-instance';
 import createEmotionCache from '../src/createEmotionCache';
@@ -41,7 +40,6 @@ export default class MyDocument extends Document {
           {(this.props as any).emotionStyleTags}
         </Head>
         <body>
-          {getInitColorSchemeScript()}
           {joiGetInitColorSchemeScript()}
           <Main />
           <NextScript />

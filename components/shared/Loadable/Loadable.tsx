@@ -1,24 +1,24 @@
 import React, { useMemo } from 'react';
-import { Alert, Box, LinearProgress, Skeleton } from '@mui/material';
-import CircularProgress from '@mui/joy/CircularProgress';
+import { Box } from '@mui/system';
+import { Alert, CircularProgress } from '@mui/joy';
 import LoadableProps from './LoadableProps';
 
 export default function Loadable(props: LoadableProps) {
-    const {isLoading, placeholder, error, children, width, height, contentVisible, sx} = props;
+    const {isLoading, placeholder, error, children, contentVisible, sx} = props;
 
     const indicator = useMemo(() => {
         switch (placeholder) {
             case 'skeletonText':
-                return <Skeleton variant="text" width={width ?? 120} />;
+                // return <Skeleton variant="text" width={width ?? 120} />;
             case 'skeletonRect':
-                return <Skeleton variant="rectangular" width={width ?? 120} height={height ?? 32} />;
+                // return <Skeleton variant="rectangular" width={width ?? 120} height={height ?? 32} />;
             case 'linear':
-                return <LinearProgress variant="indeterminate" />
+                // return <LinearProgress variant="indeterminate" />
             case 'circular':
             default:
                 return <Box textAlign="center"><CircularProgress /></Box>
         }
-    }, [height, placeholder, width]);
+    }, [placeholder]);
 
     if (error) {
         console.warn('User presented with error', error, typeof error);
@@ -33,7 +33,7 @@ export default function Loadable(props: LoadableProps) {
                 errorDisplay = JSON.stringify(error);
             }
         }
-        return <Alert variant="filled" severity="error">{errorDisplay}</Alert>
+        return <Alert variant="solid" color="danger">{errorDisplay}</Alert>
     }
 
     return (

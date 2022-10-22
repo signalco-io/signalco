@@ -1,6 +1,7 @@
 import React from 'react';
 import { PopupState } from 'material-ui-popup-state/hooks';
-import { Button, Divider, Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/system';
+import { Button, Card, Divider, IconButton, Typography } from '@mui/joy';
 import PushPinSharpIcon from '@mui/icons-material/PushPinSharp';
 import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import { AddSharp } from '@mui/icons-material';
@@ -42,18 +43,18 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
 
     return (
         <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-            <Stack direction="row" sx={{ width: '100%', position: 'relative' }}>
+            <Stack direction="row" alignItems="center" sx={{ width: '100%', position: 'relative' }}>
                 <Button
-                    disabled={dashboard.id === selectedId}
-                    size="large"
+                    variant="plain"
+                    sx={{ color: dashboard.id !== selectedId ? 'var(--joy-palette-neutral-400)' : 'inherit' }}
                     onClick={() => onSelection(dashboard.id)}
-                    sx={{ flexGrow: 1, py: 2 }}
+                    fullWidth
                 >
-                    <Typography>{dashboard.name}</Typography>
+                    {dashboard.name}
                 </Button>
-                <Button sx={{ position: 'absolute', right: 0, height: '100%' }} onClick={() => onFavorite(dashboard.id)}>
+                <IconButton sx={{ position: 'absolute', right: 0, height: '100%' }} onClick={() => onFavorite(dashboard.id)}>
                     {dashboard.isFavorite ? <PushPinSharpIcon /> : <PushPinOutlinedIcon />}
-                </Button>
+                </IconButton>
             </Stack>
         </div>
     );
@@ -127,34 +128,40 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
         })
     );
 
+    const selectedDashboard = dashboards?.find(d => d.id === selectedId);
+
     console.debug('Rendering DashboardSelectorMenu')
 
     return (
-        <Stack sx={{ minWidth: 330 }}>
-            <Stack sx={{ maxHeight: '50vh', overflow: 'auto' }}>
-                <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
-                    <SortableContext items={orderedDashboardIds}>
-                        {orderedDashboards.map((d) => (
-                            <DashboardSortableItem
-                                key={d.id}
-                                dashboard={d}
-                                selectedId={selectedId}
-                                onSelection={(id) => handleAndClose(onSelection)(id)}
-                                onFavorite={handleToggleFavorite} />
-                        ))}
-                    </SortableContext>
-                </DndContext>
+        <Card sx={{ gap: 1.5 }}>
+            <Stack sx={{ minWidth: 280 }}>
+                <Stack sx={{ maxHeight: '50vh', overflow: 'auto' }}>
+                    <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
+                        <SortableContext items={orderedDashboardIds}>
+                            {orderedDashboards.map((d) => (
+                                <DashboardSortableItem
+                                    key={d.id}
+                                    dashboard={d}
+                                    selectedId={selectedId}
+                                    onSelection={(id) => handleAndClose(onSelection)(id)}
+                                    onFavorite={handleToggleFavorite} />
+                            ))}
+                        </SortableContext>
+                    </DndContext>
+                </Stack>
+                <Button variant="plain" onClick={handleNewDashboard} startDecorator={<AddSharp />}>{t('NewDashboard')}</Button>
             </Stack>
-            <Button onClick={handleNewDashboard} size="large" startIcon={<AddSharp />} sx={{ py: 2 }}>{t('NewDashboard')}</Button>
             <Divider />
-            <Stack direction="row" alignItems="center" sx={{ p: 2 }}>
-                <Typography variant="subtitle1" color="textSecondary" sx={{ flexGrow: 1 }}>{t('Dashboard')}</Typography>
-                <ShareEntityChip entity={dashboards?.find(d => d.id === selectedId)} entityType={3} />
+            <Stack>
+                <Stack direction="row" alignItems="center" sx={{ px: 2 }}>
+                    <Typography level="body2" sx={{ flexGrow: 1 }}>{selectedDashboard?.name}</Typography>
+                    <ShareEntityChip entity={selectedDashboard} entityType={3} />
+                </Stack>
+                <Button variant="plain" onClick={handleAndClose(onFullscreen)}>{t('ToggleFullscreen')}</Button>
+                <Button variant="plain" onClick={handleAndClose(onSettings)}>{t('Settings')}</Button>
+                <Button variant="plain" onClick={handleAndClose(onEditWidgets)}>{t('EditWidgets')}</Button>
             </Stack>
-            <Button size="large" onClick={handleAndClose(onFullscreen)}>{t('ToggleFullscreen')}</Button>
-            <Button size="large" onClick={handleAndClose(onSettings)}>{t('Settings')}</Button>
-            <Button size="large" onClick={handleAndClose(onEditWidgets)}>{t('EditWidgets')}</Button>
-        </Stack>
+        </Card>
     );
 }
 

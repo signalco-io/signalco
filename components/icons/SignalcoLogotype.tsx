@@ -1,4 +1,5 @@
-import { Box, SupportedColorScheme } from '@mui/material';
+import { Box } from '@mui/system';
+import { SupportedColorScheme } from '@mui/joy';
 import ApiBadge from '../development/ApiBadge';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
 

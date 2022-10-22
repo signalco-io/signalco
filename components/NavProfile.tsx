@@ -6,23 +6,8 @@ import {
   bindTrigger,
   usePopupState,
 } from 'material-ui-popup-state/hooks';
-import Skeleton from '@mui/material/Skeleton';
-import {
-  Avatar,
-  Box,
-  Button,
-  ButtonBase,
-  Divider,
-  IconButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  Stack,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
-import { Typography } from '@mui/joy';
+import { Box, Stack } from '@mui/system';
+import { Avatar, Button, Divider, IconButton, ListItemDecorator, Menu, MenuItem, Sheet, Typography } from '@mui/joy';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MenuIcon from '@mui/icons-material/Menu';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -31,12 +16,10 @@ import DashboardSharpIcon from '@mui/icons-material/DashboardSharp';
 import CommitIcon from '@mui/icons-material/Commit';
 import CloseIcon from '@mui/icons-material/Close';
 import { SvgIconComponent } from '@mui/icons-material';
-import useIsMobile from 'src/hooks/useIsMobile';
 import Loadable from './shared/Loadable/Loadable';
 import ApiBadge from './development/ApiBadge';
 import LocalStorageService from '../src/services/LocalStorageService';
 import CurrentUserProvider from '../src/services/CurrentUserProvider';
-import useUserSetting from '../src/hooks/useUserSetting';
 import useLocale from '../src/hooks/useLocale';
 import { orderBy } from '../src/helpers/ArrayHelpers';
 
@@ -51,9 +34,7 @@ function UserAvatar() {
   const user = CurrentUserProvider.getCurrentUser();
   if (user === undefined) {
     return (
-      <Skeleton variant="circular">
-        <Avatar variant="circular" />
-      </Skeleton>
+      <Avatar />
     );
   }
 
@@ -65,30 +46,23 @@ function UserAvatar() {
     userNameInitials = user.email[0];
   }
 
-  const size = { xs: '36px', sm: '42px', lg: '48px' };
-
   if (user.picture) {
-    return (<Avatar sx={{ width: size, height: size }} variant="circular" src={user.picture} alt={userNameInitials}>
-      {userNameInitials}
-    </Avatar>);
+    return (
+      <Avatar src={user.picture} alt={userNameInitials}>
+        {userNameInitials}
+      </Avatar>
+    );
   }
 
   return (
-    <Avatar sx={{ width: size, height: size }}>{userNameInitials}</Avatar>
+    <Avatar>{userNameInitials}</Avatar>
   );
 }
 
 function UserProfileAvatar() {
   const { t } = useLocale('App', 'Account');
   const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' });
-  const navWidth = useNavWidth();
-  const maxWidth = navWidth - 16;
   const router = useRouter();
-
-  const isMobile = useIsMobile();
-
-  const user = CurrentUserProvider.getCurrentUser();
-  const [userNickName] = useUserSetting<string>('nickname', user?.name ?? '');
 
   const logout = async () => {
     popupState.close();
@@ -109,66 +83,46 @@ function UserProfileAvatar() {
 
   return (
     <Loadable isLoading={isLoading} placeholder="skeletonRect" width={30} height={30}>
-      <ButtonBase {...bindTrigger(popupState)} sx={{ width: { xs: undefined, sm: '100%' }, py: 1 }}>
+      <Button {...bindTrigger(popupState)} variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 1 }}>
         <Stack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
           <UserAvatar />
-          {!isMobile &&
-            <Typography sx={{ maxWidth: `${maxWidth}px` }}>{userNickName}</Typography>
-          }
           <ApiBadge />
         </Stack>
-      </ButtonBase>
+      </Button>
       <Menu {...bindMenu(popupState)}>
         <MenuItem onClick={navigateTo('/app/settings')}>
-          <ListItemIcon>
+          <ListItemDecorator>
             <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText>{t('Settings')}</ListItemText>
+          </ListItemDecorator>
+          {t('Settings')}
         </MenuItem>
         <Divider />
         <MenuItem onClick={logout}>
-          <ListItemIcon>
+          <ListItemDecorator>
             <ExitToAppIcon />
-          </ListItemIcon>
-          <ListItemText>{t('Logout')}</ListItemText>
+          </ListItemDecorator>
+          {t('Logout')}
         </MenuItem>
       </Menu>
     </Loadable>
   );
 }
 
-export const useNavWidth = () => {
-  const theme = useTheme();
-  const isMobile = useIsMobile();
-  const isLaptopOrTablet = useMediaQuery(theme.breakpoints.between('sm', 'lg'));
-
-  if (isMobile)
-    return 0;
-  return isLaptopOrTablet ? 109 : 228;
-};
-
 function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: SvgIconComponent, active: boolean, label: string, onClick?: () => void }) {
-  const theme = useTheme();
-  const isMobile = useIsMobile();
-  const isNotDesktop = useMediaQuery(theme.breakpoints.down('lg'));
-
   return (
     <Link href={path} passHref>
       <Button
         sx={{
           py: { xs: 2, lg: 3 },
-          px: 2
+          justifyContent: 'start',
         }}
         aria-label={label}
         title={label}
-        size="large"
-        onClick={onClick}>
-        <Stack direction="row" sx={{ width: isNotDesktop ? '100%' : '128px' }} alignItems="center" spacing={isMobile ? 1 : 0}>
-          <Icon sx={{ opacity: active ? 1 : 0.6, mr: { xs: 0, lg: 2 }, fontSize: { xs: '26px', lg: '17px' } }} />
-          {(isMobile || !isNotDesktop) &&
-            <Typography fontWeight={500} sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
-          }
-        </Stack>
+        variant="plain"
+        size="lg"
+        onClick={onClick}
+        startDecorator={<Icon sx={{ opacity: active ? 1 : 0.6, fontSize: '26px' }} />}>
+        <Typography sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
       </Button>
     </Link>
   );
@@ -179,14 +133,7 @@ function NavProfile() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const activeNavItem = orderBy(navItems.filter(ni => router.pathname.startsWith(ni.path)), (a, b) => b.path.length - a.path.length)[0];
   const visibleNavItems = navItems.filter(ni => ni === activeNavItem || !ni.hidden);
-  const navWidth = useNavWidth();
   const { t } = useLocale('App', 'Nav');
-
-  const isMobile = useIsMobile();
-
-  useEffect(() => {
-    if (!isMobile) setMobileMenuOpen(false);
-  }, [isMobile]);
 
   const handleMobileMenuOpenClick = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -202,41 +149,49 @@ function NavProfile() {
     <Stack
       direction={{ xs: 'row', sm: 'column' }}
       spacing={{ xs: 0, sm: 4 }}
-      sx={{ px: { xs: 2, sm: 0 }, pt: { xs: 0, sm: 4 }, minWidth: `${navWidth}px`, minHeight: { xs: '60px', sm: undefined } }}
-      justifyContent={isMobile ? 'space-between' : undefined}
+      sx={{
+        px: { xs: 2, sm: 0 },
+        pt: { xs: 0, sm: 4 },
+        minHeight: { xs: '60px', sm: undefined },
+        justifyContent: { xs: 'space-between', sm: 'start' }
+      }}
       alignItems="center">
-        <UserProfileAvatar />
-      {!mobileMenuOpen &&
+      <UserProfileAvatar />
+      <Box sx={{ display: { xs: 'none', sm: 'inherit' } }}>
         <Stack sx={{ width: { xs: undefined, lg: '100%' } }}>
           {visibleNavItems
-            .filter(ni => isMobile ? ni === activeNavItem : true)
             .map((ni, index) => (
               <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} />
             ))}
         </Stack>
-      }
-      {(isMobile && mobileMenuOpen) && <Typography sx={{ opacity: 0.6 }}>Menu</Typography>}
-      {isMobile &&
-        <>
-          <IconButton size="large" onClick={handleMobileMenuOpenClick}>
-            {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
-          </IconButton>
-          <Box hidden={!mobileMenuOpen} sx={{
-            position: 'fixed',
-            top: '60px',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            background: 'var(--joy-palette-background-default)',
-            zIndex: 999
-          }}>
+      </Box>
+      <Typography sx={{
+        display: { xs: 'inherit', sm: 'none' },
+        opacity: 0.6
+      }}>
+        {mobileMenuOpen ? 'Menu' : activeNavItem.label}
+      </Typography>
+      <Box sx={{ display: { xs: 'inherit', sm: 'none' } }}>
+        <IconButton size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
+          {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+        </IconButton>
+        <Box hidden={!mobileMenuOpen} sx={{
+          position: 'fixed',
+          top: '60px',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          background: 'var(--joy-palette-background-default)',
+          zIndex: 999
+        }}>
+          <Sheet variant="outlined" sx={{ height: '100%' }}>
             <Stack>
               {visibleNavItems.map((ni, index) =>
                 <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} onClick={handleMobileMenuClose} />)}
             </Stack>
-          </Box>
-        </>
-      }
+          </Sheet>
+        </Box>
+      </Box>
     </Stack>
   );
 }

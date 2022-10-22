@@ -1,5 +1,6 @@
 import React from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/system';
+import { Typography } from '@mui/joy';
 import { BatteryCharging20Outlined } from '@mui/icons-material';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';

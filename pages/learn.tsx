@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import { Typography } from '@mui/joy';
 import { PageLayout } from '../components/layouts/PageLayout';
 
 function Learn() {

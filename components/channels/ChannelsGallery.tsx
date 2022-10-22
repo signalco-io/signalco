@@ -19,13 +19,12 @@ export default function ChannelsGallery(props: { channelHrefFunc: (id: string) =
             items={gridItems}
             itemComponent={ChannelGalleryItem}
             gridHeader={selectedCategory ? `${selectedCategory?.label} channels` : 'All channels'}
-            filters={(compact?: boolean | undefined) => (
+            filters={() => (
                 <>
                     <FilterList
                         header="Categories"
                         items={categories}
                         selected={category}
-                        compact={compact}
                         onSelected={(newCategory) => router.replace({ pathname: router.pathname, query: { ...router.query, category: newCategory } })} />
                 </>
             )} />

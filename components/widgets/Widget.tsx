@@ -1,7 +1,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Alert } from '@mui/material';
+import { Alert } from '@mui/joy';
 import WidgetCard from './parts/WidgetCard';
 import IWidgetConfigurationOption from '../../src/widgets/IWidgetConfigurationOption';
 import { ObjectDictAny } from '../../src/sharedTypes';
@@ -54,7 +54,7 @@ function applyStaticToConfig(config: any | undefined, options: IWidgetConfigurat
 }
 
 function UnresolvedWidget() {
-  return <Alert severity="error" sx={{ height: '100%' }}>Unknown widget</Alert>
+  return <Alert color="danger" sx={{ height: '100%' }}>Unknown widget</Alert>
 }
 
 function Widget(props: WidgetProps) {

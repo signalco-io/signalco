@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Breakpoint, Stack } from '@mui/material';
+import { Box, Breakpoint, Stack } from '@mui/system';
 import Container from 'components/shared/layout/Container';
 import Footer from '../pages/Footer';
 import { PageNav } from '../PageNav';

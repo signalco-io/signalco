@@ -1,15 +1,15 @@
-import { ChangeEvent, SyntheticEvent, createRef, useRef, useState } from 'react';
-import { Alert, Collapse, Fade, Slide, Stack } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
-import { TextField, Typography } from '@mui/joy';
+import { ChangeEvent, SyntheticEvent, createRef, useState } from 'react';
+import { Stack } from '@mui/system';
+import { Alert, Button, TextField, Typography } from '@mui/joy';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import GentleSlide from 'components/shared/animations/GentleSlide';
+import Fade from 'components/shared/animations/Fade';
 import HttpService from '../../../src/services/HttpService';
 
 function Newsletter() {
     const [email, setEmail] = useState('');
     const [showSuccess, setShowSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const errorContainerRef = useRef<Element>(null);
     const [error, setError] = useState<string | undefined>(undefined);
     const hcaptchaRef = createRef<HCaptcha>();
 
@@ -76,9 +76,9 @@ function Newsletter() {
                 onClose={() => onHCaptchaChange(undefined)} />
             <Stack spacing={4}>
                 <Typography level="h4">{'What\'s new?'}</Typography>
-                <Stack spacing={1} ref={errorContainerRef}>
+                <Stack spacing={1}>
                     <Typography>{'We\'ll get back to you with awesome news and updates.'}</Typography>
-                    <Collapse unmountOnExit in={!showSuccess}>
+                    <GentleSlide collapsedWhenHidden appear={!showSuccess} duration={200}>
                         <Stack direction="row" alignItems="stretch">
                             <TextField
                                 disabled={isLoading}
@@ -90,14 +90,14 @@ function Newsletter() {
                                 sx={{ '.JoyInput-root': { '--Input-radius': '8px 0 0 8px' }, maxWidth: '400px' }}
                                 value={email}
                                 onChange={handleOnEmail} />
-                            <LoadingButton loading={isLoading} type="submit" variant="contained" size="large" sx={{ borderRadius: '0 8px 8px 0' }} disableElevation>Subscribe</LoadingButton>
+                            <Button disabled={isLoading} type="submit" color="primary" size="lg" sx={{ '--Button-radius': '0 8px 8px 0' }}>Subscribe</Button>
                         </Stack>
-                    </Collapse>
-                    <Slide unmountOnExit in={error != null} direction="down" container={errorContainerRef.current}>
-                        <Alert severity="error" variant="outlined">{error}</Alert>
-                    </Slide>
-                    <Fade unmountOnExit in={showSuccess}>
-                        <Alert severity="success" variant="outlined">You are our new favorite subscriber</Alert>
+                    </GentleSlide>
+                    <GentleSlide collapsedWhenHidden appear={error != null} direction="down" duration={200}>
+                        <Alert color="danger" variant="outlined">{error}</Alert>
+                    </GentleSlide>
+                    <Fade collapsedWhenHidden appear={showSuccess}>
+                        <Alert color="success" variant="outlined">You are our new favorite subscriber</Alert>
                     </Fade>
                 </Stack>
             </Stack>

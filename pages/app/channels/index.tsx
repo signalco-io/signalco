@@ -1,10 +1,10 @@
-import { Stack } from '@mui/material';
+import { Stack } from '@mui/system';
 import { AppLayoutWithAuth } from 'components/layouts/AppLayoutWithAuth';
 import ChannelsGallery from 'components/channels/ChannelsGallery';
 
 function AppChannelsPage() {
     return (
-        <Stack sx={{ p: 4 }}>
+        <Stack p={4}>
             <ChannelsGallery channelHrefFunc={(id) => `/app/channels/${id}`} />
         </Stack>
     );

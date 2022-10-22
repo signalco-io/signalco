@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import dynamic from 'next/dynamic';
-import { Box, Button, Stack, Typography } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import { Box, Stack } from '@mui/system';
+import { Button, Typography } from '@mui/joy';
 import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
 import useDashboard from 'src/hooks/dashboards/useDashboard';
 import DashboardView from './DashboardView';
@@ -88,15 +88,15 @@ function Dashboards() {
                     {isEditing && (
                         <Box sx={{ px: 2, width: { md: 'auto', xs: '100%' } }}>
                             <Stack direction="row" spacing={1}>
-                                <Button variant="outlined" size="large" onClick={() => setShowWidgetStore(true)} sx={{ width: '250px' }}>{t('AddWidget')}</Button>
-                                <LoadingButton loading={isSavingEdit} variant="outlined" size="large" onClick={handleEditDone} fullWidth>{t('Save')}</LoadingButton>
+                                <Button onClick={() => setShowWidgetStore(true)} sx={{ minWidth: '140px' }}>{t('AddWidget')}</Button>
+                                <Button loading={isSavingEdit} onClick={handleEditDone} fullWidth>{t('Save')}</Button>
                             </Stack>
                         </Box>
                     )}
                 </Stack>
-                <Loadable isLoading={selectedDashboard.isLoading} error={selectedDashboard.error}>
+                <Loadable isLoading={!!selectedId && selectedDashboard.isLoading} error={selectedDashboard.error}>
                     <Box sx={{ px: 2 }}>
-                        {selectedDashboard.data
+                        {selectedId && selectedDashboard.data
                             ? (
                                 <DashboardView
                                     dashboard={selectedDashboard.data}
@@ -107,9 +107,9 @@ function Dashboards() {
                                     <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
                                         <Stack maxWidth={280} spacing={4} alignItems="center" justifyContent="center">
                                             <Image priority width={280} height={213} alt={t('NoDashboardsPlaceholder')} src="/assets/placeholders/placeholder-no-dashboards.svg" />
-                                            <Typography variant="h1">{t('NoDashboardsPlaceholder')}</Typography>
-                                            <Typography textAlign="center" color="textSecondary">{t('NoDashboardsHelpText')}</Typography>
-                                            <Button variant="contained" onClick={handleNewDashboard}>{t('NewDashboard')}</Button>
+                                            <Typography level="h2">{t('NoDashboardsPlaceholder')}</Typography>
+                                            <Typography textAlign="center" level="body2">{t('NoDashboardsHelpText')}</Typography>
+                                            <Button variant="solid" onClick={handleNewDashboard}>{t('NewDashboard')}</Button>
                                         </Stack>
                                     </Stack>
                                 </Stack>

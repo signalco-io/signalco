@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import dynamic from 'next/dynamic';
-import { Button, Grid, Stack, Typography } from '@mui/material';
+import Grid from '@mui/system/Unstable_Grid';
+import { Stack } from '@mui/system';
+import { Button, Typography } from '@mui/joy';
 import { ArrowDownward, ArrowUpward, Stop } from '@mui/icons-material';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';
@@ -84,13 +86,13 @@ function WidgetShades(props: WidgetSharedProps) {
 
     return (
         <Grid container wrap="nowrap" sx={{ height: '100%' }}>
-            <Grid item xs={6}>
+            <Grid xs={6}>
                 <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent="space-between">
                     <WindowVisual shadePerc={shadePerc} size={68} />
                     <Typography fontWeight="light" noWrap>{label}</Typography>
                 </Stack>
             </Grid>
-            <Grid item xs={6} sx={{ flexGrow: 1, bgcolor: 'background.paper', borderLeft: '1px solid', borderColor: 'divider', borderRadius: 2 }}>
+            <Grid xs={6} sx={{ flexGrow: 1, bgcolor: 'background.paper', borderLeft: '1px solid', borderColor: 'divider', borderRadius: 2 }}>
                 <Stack sx={{ height: '100%' }} justifyContent="stretch">
                     <Button onClick={() => handleStateChangeRequest('up')} sx={{ flexGrow: 1, borderBottom: '1px solid', borderColor: 'divider' }}><ArrowUpward /></Button>
                     <Button onClick={() => handleStateChangeRequest('stop')} sx={{ flexGrow: 1 }}><Stop /></Button>

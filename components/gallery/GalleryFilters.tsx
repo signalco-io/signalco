@@ -3,16 +3,15 @@ import { Stack } from '@mui/system';
 
 export interface GalleryFiltersProps {
     filters: React.ReactElement;
-    compact?: boolean;
 }
 
 export default function GalleryFilters(props: GalleryFiltersProps) {
-    const { filters, compact } = props;
+    const { filters } = props;
     return (
         <Stack spacing={{ xs: 1, md: 4 }} sx={{
             padding: 0,
             width: '100%',
-            maxWidth: compact ? undefined : '24%',
+            maxWidth: {xs: undefined, md: '24%'},
             height: 'fit-content'
         }}>
             {filters}

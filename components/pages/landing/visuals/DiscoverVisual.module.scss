@@ -3,7 +3,7 @@
     circle { fill: #777; }
     circle:last-of-type { fill: #45ca7a; }
     path { fill: #ffffff }
-    stop { stop-color: var(--joy-palette-background-default); }
+    stop { stop-color: var(--joy-palette-background-body); }
 
     [data-mui-color-scheme="light"] & {
         circle { fill: #999; }

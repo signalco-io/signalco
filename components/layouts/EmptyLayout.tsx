@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSnackbar } from 'notistack';
-import { Box } from '@mui/material';
+import { Box } from '@mui/system';
 import { ChildrenProps } from '../../src/sharedTypes';
 import PageNotificationService from '../../src/notifications/PageNotificationService';
 

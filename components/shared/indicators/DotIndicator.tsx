@@ -1,13 +1,23 @@
 import { Box } from '@mui/system';
-import { useTheme } from '@mui/material';
 
-export default function DotIndicator(props: { color: 'success' | 'warning' | 'error' | 'grey', content?: React.ReactElement, size?: number }) {
+export interface DotIndicatorProps {
+    color: 'success' | 'warning' | 'danger' | 'neutral';
+    content?: React.ReactElement;
+    size?: number;
+}
+
+export default function DotIndicator(props: DotIndicatorProps) {
     const { color, content, size: requestedSize } = props;
-    const theme = useTheme();
-    const colorPalette = color === 'grey' ? theme.palette.grey[400] : theme.palette[color].main;
     const size = requestedSize || 10;
     return (
-        <Box sx={{ width: size, height: size, borderRadius: size / 2, backgroundColor: colorPalette, color: 'white' }}>
+        <Box sx={{
+            width: size,
+            height: size,
+            borderRadius: size / 2,
+            backgroundColor: `var(--joy-palette-${color}-500)`,
+            color: 'white',
+            textAlign: 'center'
+        }}>
             {content}
         </Box>
     )

@@ -1,10 +1,18 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-    bindPopover,
     bindTrigger,
     usePopupState
 } from 'material-ui-popup-state/hooks';
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, List, ListItem, ListItemButton, ListItemText, Popover, Skeleton, Stack, TextField, Tooltip, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/system';
+import {
+    Button,
+    List,
+    ListItem,
+    ListItemButton,
+    Sheet,
+    TextField,
+    Typography
+} from '@mui/joy';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import useContact from 'src/hooks/useContact';
 import IEntityDetails from 'src/entity/IEntityDetails';
@@ -12,6 +20,8 @@ import IContactPointerPartial from 'src/contacts/IContactPointerPartial';
 import InputContactValue from './InputContactValue';
 import EntityIcon from './EntityIcon';
 import Loadable from '../Loadable/Loadable';
+import Popper from '../layout/Popper';
+import Accordion from '../layout/Accordion';
 import NoDataPlaceholder from '../indicators/NoDataPlaceholder';
 import useEntity from '../../../src/hooks/useEntity';
 import useAllEntities from '../../../src/hooks/useAllEntities';
@@ -63,18 +73,18 @@ function EntitySelection(props: { target: IContactPointerPartial | undefined, on
         <Loadable isLoading={entities.isLoading} error={entities.error}>
             <Stack spacing={1}>
                 <Box px={2}>
-                    <TextField fullWidth placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)}  />
+                    <TextField fullWidth placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} />
                 </Box>
                 <List>
-                    <ListItem selected={!target?.entityId} disablePadding>
-                        <ListItemButton onClick={() => handleDeviceSelected(undefined)}>
-                            <ListItemText>None</ListItemText>
+                    <ListItem>
+                        <ListItemButton onClick={() => handleDeviceSelected(undefined)} selected={!target?.entityId}>
+                            None
                         </ListItemButton>
                     </ListItem>
                     {filteredEntities?.map(entity => (
-                        <ListItem selected={target?.entityId === entity.id} key={entity.id} disablePadding>
-                            <ListItemButton onClick={() => handleDeviceSelected(entity)}>
-                                <ListItemText>{entity.alias}</ListItemText>
+                        <ListItem key={entity.id}>
+                            <ListItemButton onClick={() => handleDeviceSelected(entity)} selected={target?.entityId === entity.id}>
+                                {entity.alias}
                             </ListItemButton>
                         </ListItem>
                     ))}
@@ -108,15 +118,15 @@ function EntityContactSelection(props: EntityContactSelectionProps) {
     return (
         <Loadable isLoading={isLoading} error={error}>
             <List>
-                <ListItem selected={!target?.contactName || !target?.channelName} disablePadding>
-                    <ListItemButton onClick={() => handleContactSelected({ entityId: target!.entityId })}>
-                        <ListItemText>None</ListItemText>
+                <ListItem>
+                    <ListItemButton onClick={() => handleContactSelected({ entityId: target!.entityId })} selected={!target?.contactName || !target?.channelName}>
+                        None
                     </ListItemButton>
                 </ListItem>
                 {contacts.map(c => (
-                    <ListItem selected={target?.channelName === c.channelName && target?.contactName === c.contactName} key={`${c.channelName}-${c.contactName}`} disablePadding>
-                        <ListItemButton onClick={() => handleContactSelected(c)}>
-                            <ListItemText>{c.contactName}</ListItemText>
+                    <ListItem key={`${c.channelName}-${c.contactName}`}>
+                        <ListItemButton onClick={() => handleContactSelected(c)} selected={target?.channelName === c.channelName && target?.contactName === c.contactName}>
+                            {c.contactName}
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -182,23 +192,31 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-            <Accordion expanded={selecting === 'entity'} sx={{ flexGrow: selecting === 'entity' ? 1 : 0 }} onChange={handleEditEntity} disableGutters TransitionProps={{ timeout: 150 }}>
-                <AccordionSummary
-                    expandIcon={!(selecting === 'entity') && <ChevronRightIcon />}>
+            <Accordion
+                open={selecting === 'entity'}
+                sx={{ flexGrow: selecting === 'entity' ? 1 : 0 }}
+                onChange={handleEditEntity}
+            //expandIcon={!(selecting === 'entity') && <ChevronRightIcon />}
+            >
+                <Typography>
                     {entitySelected ? (
                         <EntityIconLabel entityId={target.entityId} />
                     ) : (
-                        <Typography variant="body2" color="textSecondary">Select entity</Typography>
+                        <Typography level="body2">Select entity</Typography>
                     )}
-                </AccordionSummary>
-                <AccordionDetails sx={{ p: 0, overflow: 'auto' }}>
+                </Typography>
+                <Box sx={{ p: 0, overflow: 'auto' }}>
                     <EntitySelection target={target} onSelected={handleEntitySelected} />
-                </AccordionDetails>
+                </Box>
             </Accordion>
             {selectContact && (
-                <Accordion disabled={!entitySelected} sx={{ flexGrow: selecting === 'contact' ? 1 : 0 }} expanded={selecting === 'contact'} disableGutters TransitionProps={{ timeout: 150 }}>
-                    <AccordionSummary
-                        expandIcon={!(selecting === 'contact') && <ChevronRightIcon />}>
+                <Accordion
+                    disabled={!entitySelected}
+                    sx={{ flexGrow: selecting === 'contact' ? 1 : 0 }}
+                    open={selecting === 'contact'}
+                //expandIcon={!(selecting === 'contact') && <ChevronRightIcon />}
+                >
+                    <Typography>
                         <Stack spacing={2} direction="row" alignItems="center">
                             {contactSelected ? (
                                 <Typography>{target.contactName}</Typography>
@@ -207,30 +225,30 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                                     <Typography>Contact</Typography>
                                     {!entitySelected && (
                                         <>
-                                            <Typography variant="body2" color="textSecondary">Select entity first</Typography>
+                                            <Typography level="body2">Select entity first</Typography>
                                         </>
                                     )}
                                 </>
                             )}
                         </Stack>
-                    </AccordionSummary>
-                    <AccordionDetails sx={{ p: 0 }}>
-                        <EntityContactSelection target={target!} onSelected={handleContactSelected} />
-                    </AccordionDetails>
+                    </Typography>
+                    <EntityContactSelection target={target!} onSelected={handleContactSelected} />
                 </Accordion>
             )}
             {selectValue && (
-                <Accordion disabled={!contactSelected} sx={{ flexGrow: selecting === 'value' ? 1 : 0 }} expanded={selecting === 'value'} disableGutters TransitionProps={{ timeout: 150 }}>
-                    <AccordionSummary
-                        expandIcon={(!(selecting === 'value') && contactSelected) && <ChevronRightIcon />}>
+                <Accordion
+                    disabled={!contactSelected}
+                    sx={{ flexGrow: selecting === 'value' ? 1 : 0 }}
+                    open={selecting === 'value'}
+                //expandIcon={(!(selecting === 'value') && contactSelected) && <ChevronRightIcon />}
+                >
+                    <Typography>
                         <Stack spacing={2} direction="row" alignItems="center">
                             <Typography>Value</Typography>
-                            {!contactSelected && <Typography variant="body2" color="textSecondary">Select contact first</Typography>}
+                            {!contactSelected && <Typography level="body2">Select contact first</Typography>}
                         </Stack>
-                    </AccordionSummary>
-                    <AccordionDetails sx={{ p: 0 }}>
-                        <EntityContactValueSelection target={target!} value={value} onSelected={handleContactValueSelected} />
-                    </AccordionDetails>
+                    </Typography>
+                    <EntityContactValueSelection target={target!} value={value} onSelected={handleContactValueSelected} />
                 </Accordion>
             )}
         </Box>
@@ -240,27 +258,28 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
 
 function EntityIconLabel(props: { entityId: string | undefined, description?: string }) {
     const { entityId, description } = props;
-    const { data: entity, isLoading } = useEntity(entityId);
+    const { data: entity, isLoading: loadingEntity } = useEntity(entityId);
+    const isLoading = !!entityId && loadingEntity;
 
     const entityName = entity?.alias ?? (entity?.id);
     const Icon = EntityIcon(entity);
 
     return (
-        <Tooltip title={entityName || ''}>
-            <Stack spacing={2} direction="row" alignItems="center" minWidth={0}>
-                {entity && <Icon />}
-                <Stack alignItems="start" minWidth={0}>
-                    <Typography noWrap maxWidth="100%">
-                        {isLoading ? <Skeleton width={160} variant="text" /> : entityName}
+        <Stack spacing={2} direction="row" alignItems="center" minWidth={0}>
+            {entity && <Icon />}
+            <Stack alignItems="start" minWidth={0}>
+                <Typography noWrap maxWidth="100%">
+                    <Loadable isLoading={isLoading}>
+                        {entityName}
+                    </Loadable>
+                </Typography>
+                {!isLoading && (
+                    <Typography level="body2">
+                        {description}
                     </Typography>
-                    {!isLoading && (
-                        <Typography variant="caption" color="textSecondary">
-                            {description}
-                        </Typography>
-                    )}
-                </Stack>
+                )}
             </Stack>
-        </Tooltip>
+        </Stack>
     );
 }
 
@@ -302,7 +321,7 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                         {(target && target.contactName && selectContact) && (
                             // <Chip label={target.contactName ?? 'None'} />
                             <Stack direction="row" spacing={1} alignItems="end">
-                                <Typography variant="subtitle2" color="textSecondary">{target.contactName ?? 'None'}</Typography>
+                                <Typography level="body2">{target.contactName ?? 'None'}</Typography>
                                 <Typography fontWeight="bold">{value?.toString() ?? '-'}</Typography>
                             </Stack>
                         )}
@@ -310,17 +329,8 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                     </Stack>
                 </Stack>
             </Button>
-            <Popover
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                {...bindPopover(entityMenu)}>
-                <Box sx={{ width: 420, height: 620 }}>
+            <Popper popupState={entityMenu}>
+                <Sheet sx={{ width: 420, height: 620 }}>
                     <EntitySelectionMenu
                         target={target}
                         selectContact={selectContact}
@@ -328,8 +338,8 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                         value={value}
                         onSelected={handleEntitySelected}
                         onClose={handleEntitySelectionClose} />
-                </Box>
-            </Popover>
+                </Sheet>
+            </Popper>
         </>
     );
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, IconButton } from '@mui/material';
+import { Button, IconButton } from '@mui/joy';
 import IAutoAction from '../interfaces/IAutoAction';
 import HttpService from '../../../src/services/HttpService';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
@@ -53,11 +53,11 @@ export default function AutoActionButton(props: IAutoActionButtonProps) {
       title={action.label}
       aria-label={action.label}
       {...commonProps}
-      size="large">
+      size="lg">
       {action.icon}
     </IconButton>
   ) : (
-    <Button variant="text" {...commonProps}>
+    <Button variant="plain" {...commonProps}>
       {action.label}
     </Button>
   );

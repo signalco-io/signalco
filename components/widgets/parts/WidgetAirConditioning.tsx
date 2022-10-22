@@ -1,8 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import { Box, ButtonBase, Icon, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/system';
+import { Button, Typography } from '@mui/joy';
 import useContact from 'src/hooks/useContact';
 import { CircleSlider } from 'react-circle-slider';
+import Icon from 'components/shared/Icon';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -21,14 +23,14 @@ const stateOptions: IWidgetConfigurationOption[] = [
 function SmallIndicator(props: { isActive: boolean; icon: string; label: string; activeBackgroundColor: string; href: string; }) {
     return (
         <Link href={props.href} passHref>
-            <ButtonBase>
+            <Button variant="plain">
                 <Box sx={{ width: '52px', height: '82px', backgroundColor: props.isActive ? props.activeBackgroundColor : 'transparent', borderRadius: 1 }}>
                     <Stack alignItems="center" justifyContent="center" height="100%" spacing={1}>
                         <Icon sx={{ fontSize: 28, opacity: props.isActive ? 1 : 0.6, }}>{props.icon}</Icon>
                         <Typography fontWeight={100} fontSize={12}>{props.label}</Typography>
                     </Stack>
                 </Box>
-            </ButtonBase>
+            </Button>
         </Link>
     );
 }
@@ -77,7 +79,7 @@ function WidgetAirConditioning(props: WidgetSharedProps) {
                 </Box>
                 <Box sx={{ mt: 9 }}>
                     <Link href={`/app/entities/${temperatureDevice?.id}`} passHref>
-                        <ButtonBase>
+                        <Button variant="plain">
                             <Stack direction="row">
                                 <Stack sx={{ height: '100%' }} justifyContent="center" alignItems="center">
                                     <Typography fontWeight={100} fontSize={64} sx={{ lineHeight: 1 }}>{degreesWhole}</Typography>
@@ -87,7 +89,7 @@ function WidgetAirConditioning(props: WidgetSharedProps) {
                                     <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>.{degreesDecimal}</Typography>
                                 </Stack>
                             </Stack>
-                        </ButtonBase>
+                        </Button>
                     </Link>
                 </Box>
                 <Typography fontWeight="light" sx={{ opacity: 0.5 }}>{config.label}</Typography>

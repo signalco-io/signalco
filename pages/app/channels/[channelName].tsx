@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/system';
+import { Typography } from '@mui/joy';
 import useAllEntities from 'src/hooks/useAllEntities';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import AutoTable from 'components/shared/table/AutoTable';
@@ -41,10 +42,10 @@ function AppChannelPage() {
 
     return (
         <Container maxWidth="md">
-            <Stack spacing={4} sx={{ pt: { xs: 0, sm: 4 } }}>
+            <Stack spacing={4} pt={{ xs: 0, sm: 4 }}>
                 <ChannelLogo channelName={channelName} label={channel?.label} />
                 <Stack direction="row" alignItems="center" spacing={1}>
-                    <Typography variant="h1">{channel?.label} channel</Typography>
+                    <Typography level="h1">{channel?.label} channel</Typography>
                 </Stack>
                 <Stack spacing={2}>
                     <Typography typography="h3">Connected entities</Typography>

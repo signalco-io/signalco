@@ -1,4 +1,6 @@
-import { ButtonBase, Icon, Stack } from '@mui/material';
+import { Stack } from '@mui/system';
+import { Button } from '@mui/joy';
+import Icon from 'components/shared/Icon';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultTargetWithValue, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -33,12 +35,12 @@ export default function WidgetButton(props: WidgetSharedProps) {
     useWidgetActive(true, props);
 
     return (
-        <ButtonBase sx={{ height: '100%', width: '100%', display: 'block', textAlign: 'left', borderRadius: 2 }} onClick={handleActionRequest} >
+        <Button sx={{ height: '100%', width: '100%', display: 'block', textAlign: 'left' }} onClick={handleActionRequest} >
             <Stack direction="row" alignItems="stretch" justifyContent="center" sx={{ height: '100%' }}>
                 <Stack justifyContent="center">
                     <Icon sx={{ fontSize: '2.4em !important' }}>{icon}</Icon>
                 </Stack>
             </Stack>
-        </ButtonBase>
+        </Button>
     );
 }

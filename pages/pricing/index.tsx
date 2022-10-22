@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material';
+import { Stack } from '@mui/system';
 import PricingCard, { PricingOption } from 'components/pages/pricing/PricingCard';
 import PageCenterHeader from 'components/pages/PageCenterHeader';
 import FaqSection from 'components/pages/FaqSection';

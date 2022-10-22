@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Breakpoint, Button, Stack, TextField, Typography } from '@mui/material';
+import { Breakpoint, Stack } from '@mui/system';
+import { Button, TextField, Typography } from '@mui/joy';
 import ConfigurationDialog from './ConfigurationDialog';
 import useLocale from '../../../src/hooks/useLocale';
 
@@ -26,7 +27,7 @@ function ConfirmDeleteDialog(props: IConfirmDeleteDialogProps) {
             <Stack spacing={4}>
                 <Typography>{t('ConfirmDeleteBody', { code: expectedConfirmText })}</Typography>
                 <TextField label={t('Confirm')} onChange={(e) => setConfirmText(e.target.value)} />
-                <Button variant="contained" color="error" disabled={confirmText !== expectedConfirmText} onClick={onConfirm}>
+                <Button variant="solid" color="danger" disabled={confirmText !== expectedConfirmText} onClick={onConfirm}>
                     {`${t('ConfirmDeleteButton')} "${expectedConfirmText}"`}
                 </Button>
             </Stack>

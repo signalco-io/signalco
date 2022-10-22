@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
-import Stack from '@mui/material/Stack';
-import { amber, green, grey } from '@mui/material/colors';
-import { Card, CardActionArea, CardContent, Grid, Typography } from '@mui/material';
+import Image from 'next/future/image';
+import Grid from '@mui/system/Unstable_Grid';
+import { Stack } from '@mui/system';
+import { Card, Typography } from '@mui/joy';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import LaunchIcon from '@mui/icons-material/Launch';
 import { Cancel as CancelIcon, CheckCircle } from '@mui/icons-material';
+import green from 'src/colors/green';
+import grey from 'src/colors/gray';
+import amber from 'src/colors/amber';
 import FilterList from 'components/shared/list/FilterList';
 import Chip from 'components/shared/indicators/Chip';
 import PageCenterHeader from 'components/pages/PageCenterHeader';
@@ -60,32 +63,28 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
 
     return (
         <Card sx={{ width: '222px' }}>
-            <CardActionArea>
-                <CardContent>
-                    <Stack spacing={2}>
-                        {imageSrc
-                            ? <Image src={imageSrc} alt={`${name} image`} width={180} height={180} objectFit="contain" />
-                            : (
-                                <Stack alignItems="center" justifyContent="center" textAlign="center" spacing={2} sx={{ width: 180, height: 180 }}>
-                                    <SignalcoLogo height={40} />
-                                    <Typography variant="caption" color="textSecondary">Image unavailable</Typography>
-                                </Stack>
-                            )}
-                        <Stack spacing={1}>
-                            <Typography fontWeight="bold" sx={{ opacity: 0.9 }}>{name}</Typography>
-                            <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
-                                <Typography fontSize="1.2rem" fontWeight="bold">€&nbsp;{price ?? '-'}</Typography>
-                                <StoreStockStatusBadge status={stockStatus} />
-                            </Stack>
-                            {features && (
-                                <Grid container>
-                                    {features.map(f => <Grid item key={f}><Chip size="sm">{f}</Chip></Grid>)}
-                                </Grid>
-                            )}
+            <Stack spacing={2}>
+                {imageSrc
+                    ? <Image src={imageSrc} alt={`${name} image`} width={180} height={180} />
+                    : (
+                        <Stack alignItems="center" justifyContent="center" textAlign="center" spacing={2} sx={{ width: 180, height: 180 }}>
+                            <SignalcoLogo height={40} />
+                            <Typography level="body2">Image unavailable</Typography>
                         </Stack>
+                    )}
+                <Stack spacing={1}>
+                    <Typography fontWeight="bold" sx={{ opacity: 0.9 }}>{name}</Typography>
+                    <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
+                        <Typography fontSize="1.2rem" fontWeight="bold">€&nbsp;{price ?? '-'}</Typography>
+                        <StoreStockStatusBadge status={stockStatus} />
                     </Stack>
-                </CardContent>
-            </CardActionArea>
+                    {features && (
+                        <Grid container>
+                            {features.map(f => <Grid key={f}><Chip size="sm">{f}</Chip></Grid>)}
+                        </Grid>
+                    )}
+                </Stack>
+            </Stack>
         </Card>
     );
 }
@@ -142,11 +141,11 @@ function StorePage(props: StorePageProps) {
             <Gallery
                 items={items}
                 itemComponent={StoreItemThumb}
-                filters={(compact: boolean) => (
+                filters={() => (
                     <>
-                        <FilterList header="Categories" items={categories} truncate={6} multiple compact={compact} />
-                        <FilterList header="Brands" items={brands} truncate={6} multiple compact={compact} />
-                        <FilterList header="Communication" items={communication} truncate={6} multiple compact={compact} />
+                        <FilterList header="Categories" items={categories} truncate={6} multiple />
+                        <FilterList header="Brands" items={brands} truncate={6} multiple />
+                        <FilterList header="Communication" items={communication} truncate={6} multiple />
                     </>
                 )}
                 gridHeader={`Found ${items.length} products`}

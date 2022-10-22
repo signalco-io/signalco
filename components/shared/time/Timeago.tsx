@@ -1,6 +1,6 @@
 import ReactTimeago from 'react-timeago';
 import React from 'react';
-import { Typography } from '@mui/material';
+import { Typography } from '@mui/joy';
 import { useLocalePlaceholders } from '../../../src/hooks/useLocale';
 
 export default function Timeago(props: { date: number | Date | undefined, live?: boolean }) {
@@ -12,7 +12,7 @@ export default function Timeago(props: { date: number | Date | undefined, live?:
     return (
         <div>
             {isNever
-                ? <Typography variant="subtitle2">{t('Never')}</Typography>
+                ? <Typography level="body3">{t('Never')}</Typography>
                 : <ReactTimeago date={date!} live={live} />}
         </div>
     )

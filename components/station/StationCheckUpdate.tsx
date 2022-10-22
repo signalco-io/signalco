@@ -1,5 +1,5 @@
 import { compareVersions } from 'compare-versions';
-import { Button } from '@mui/material';
+import { Button } from '@mui/joy';
 import UploadIcon from '@mui/icons-material/Upload';
 import CheckIcon from '@mui/icons-material/Check';
 import PageNotificationService from 'src/notifications/PageNotificationService';
@@ -44,7 +44,8 @@ export default function StationCheckUpdate(props: { stationId: string[] | string
     const handleUpdate = () => stationCommandAsync(props.stationId, StationsRepository.updateStationAsync, 'update station');
 
     return (
-        <Button startIcon={canUpdate ? <UploadIcon /> : <CheckIcon />}
+        <Button
+            startDecorator={canUpdate ? <UploadIcon /> : <CheckIcon />}
             variant="outlined"
             disabled={!canUpdate}
             onClick={handleUpdate}>

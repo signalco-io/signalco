@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Typography } from '@mui/material';
+import { Typography } from '@mui/joy';
 import LoadableTextProps from './LoadableTextProps';
 import LoadableText from './LoadableText';
 

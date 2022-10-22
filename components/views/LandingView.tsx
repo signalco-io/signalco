@@ -1,17 +1,18 @@
 import { useInView } from 'react-cool-inview';
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import dynamic from 'next/dynamic';
-import { Box, Divider, Fade, Grid, Stack, SxProps, Theme } from '@mui/material';
-import { Button, Typography } from '@mui/joy';
+import Grid from '@mui/system/Unstable_Grid';
+import { Box, Stack, SxProps, Theme } from '@mui/system';
+import { Button, Divider, Typography } from '@mui/joy';
 import { GitHub, KeyboardArrowRight } from '@mui/icons-material';
 import AppSettingsProvider from 'src/services/AppSettingsProvider';
 import useUserTheme from 'src/hooks/useUserTheme';
-import useIsTablet from 'src/hooks/useIsTablet';
 import Container from 'components/shared/layout/Container';
 import LinkImage from 'components/shared/ImageLink';
 import GentleSlide from 'components/shared/animations/GentleSlide';
+import Fade from 'components/shared/animations/Fade';
 import DiscoverVisual from 'components/pages/landing/visuals/DiscoverVisual';
 import Cover from 'components/pages/landing/Cover';
 import CounterIndicator from 'components/pages/landing/CounterIndicator';
@@ -48,8 +49,6 @@ function StepContent(props: {
   const { observe, inView } = useInView({
     onEnter: ({ unobserve }) => unobserve(), // only run once
   });
-  const isMobile = useIsTablet();
-  const direction = isMobile ? 'vertical' : (props.direction ?? 'vertical');
 
   return (
     <SectionCenter>
@@ -59,31 +58,34 @@ function StepContent(props: {
             <Typography level="h3" textAlign="center">{props.title}</Typography>
           </GentleSlide>
           {props.subtitle && (
-            <Fade in={inView}>
+            <GentleSlide appear={inView} direction="down" index={1}>
               <Typography level="body2" textAlign="center">{props.subtitle}</Typography>
-            </Fade>
+            </GentleSlide>
           )}
         </Stack>
         <Box>
           <Grid container spacing={8} alignItems="center">
             {props.image && (
-              <Fade in={inView} timeout={1200}>
-                <Grid item xs={12} md={6} sx={{ position: 'relative', height: props.imageContainerHeight }}>
+              <Grid xs={12} md={6} sx={{ position: 'relative', height: props.imageContainerHeight }}>
+                <Fade appear={inView} duration={1400}>
                   <Box sx={props.imageContainerStyles}>
                     {props.image}
                   </Box>
-                </Grid>
-              </Fade>
+                </Fade>
+              </Grid>
             )}
             {props.children && (
-              <Grid item xs={12} md={props.image ? 6 : 12}>
-                <Stack width="100%" spacing={4} justifyContent="space-evenly" direction={direction === 'horizontal' ? 'row' : 'column'}>
+              <Grid xs={12} md={props.image ? 6 : 12}>
+                <Stack
+                  sx={{
+                    gap: 4,
+                    flexDirection: props.direction === 'horizontal' ? { xs: 'column', md: 'row' } : 'colum'
+                  }}>
                   {(Array.isArray(props.children) ? props.children : [props.children]).map((child, childIndex) => (
                     <GentleSlide
                       key={childIndex}
                       appear={inView}
-                      index={childIndex}
-                      direction={direction === 'horizontal' ? 'down' : 'left'}>
+                      index={childIndex}>
                       {child}
                     </GentleSlide>
                   ))}
@@ -129,12 +131,12 @@ function FeaturedIntegrationsSection() {
   return (
     <SectionCenter>
       <Stack spacing={4} ref={observe}>
-        <Fade in={inView}>
+        <GentleSlide appear={inView} direction="down">
           <Typography level="body2" textAlign="center" textTransform="uppercase">Featured integrations</Typography>
-        </Fade>
+        </GentleSlide>
         <Grid container alignItems="center" justifyContent="center">
           {integrationsList.map((channel, channelIndex) => (
-            <Grid key={channel.name} item xs={6} md={12 / integrationsList.length} textAlign="center" sx={{ p: 1 }}>
+            <Grid key={channel.name} xs={6} md={12 / integrationsList.length} textAlign="center" sx={{ p: 1 }}>
               <GentleSlide appear={inView} index={channelIndex} direction="down">
                 <LinkImage href={channel.page} imageProps={{
                   alt: channel.name,
@@ -182,9 +184,16 @@ function PlaySection() {
 
   return (
     <StepContent title="Play" subtitle="Here are some of our favorite ways you can automate your life"
-      image={<Image layout="fixed" src={themeContext.isDark ? '/images/playpitch-dark.png' : '/images/playpitch.png'} alt="Play" quality={100} width={511} height={684} />}
+      image={<Image src={themeContext.isDark ? '/images/playpitch-dark.png' : '/images/playpitch.png'} alt="Play" quality={100} width={511} height={684} />}
       imageContainerHeight={684 + 64}
-      imageContainerStyles={{ position: 'absolute', top: 0, right: 0, width: '511px', height: '684px', marginTop: '64px' }}>
+      imageContainerStyles={{
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: '511px',
+        height: '684px',
+        marginTop: '64px'
+      }}>
       <FeatureDescription
         title="Morning coffee"
         content="Raise the shades, play your favorite energizing morning beat and turn on the coffee maker." />
@@ -203,8 +212,8 @@ function PlaySection() {
 
 function DataPart(props: { value: string, subtitle: string }) {
   return <Stack alignItems="center" spacing={1}>
-    <Typography level="h4" component="span" fontWeight={600} lineHeight={1}>{props.value}</Typography>
-    <Typography textTransform="uppercase" textColor="neutral.400" lineHeight={1}>{props.subtitle}</Typography>
+    <Typography level="h3" component="span" lineHeight={1}>{props.value}</Typography>
+    <Typography textTransform="uppercase" textColor="text.secondary" lineHeight={1}>{props.subtitle}</Typography>
   </Stack>
 }
 
@@ -232,7 +241,13 @@ export default function LandingPageView() {
         </>
       )}
       <CounterIndicator count={1} />
-      <StepContent title="Discover" image={<DiscoverVisual />} imageContainerHeight={420} imageContainerStyles={{ position: 'absolute', top: '-92px', right: 0, zIndex: -1 }}>
+      <StepContent title="Discover" image={<DiscoverVisual />} imageContainerHeight={420}
+        imageContainerStyles={{
+          position: 'absolute',
+          top: '-92px',
+          right: 0,
+          zIndex: -1
+        }}>
         <FeatureDescription
           title="Bring together"
           content="Every service and device is useful by itself, but the real magic happens when you bring them all together." />

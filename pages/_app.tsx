@@ -2,8 +2,8 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { SnackbarProvider } from 'notistack';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
-import CssBaseline from '@mui/material/CssBaseline';
 import { CssVarsProvider } from '@mui/joy/styles';
+import CssBaseline from '@mui/joy/CssBaseline';
 import appTheme from '../src/theme';
 import '../styles/global.scss';
 import { ChildrenProps } from '../src/sharedTypes';
@@ -40,10 +40,10 @@ export default function App(props: AppProps) {
         <meta name="description" content="Automate your life" />
         <title>{`Signalco${title ? ' - ' + title : ''}`}</title>
       </Head>
-      <CssVarsProvider theme={appTheme()}>
+      <CssVarsProvider theme={appTheme}>
         <ThemeChangerWrapper>
           <SnackbarProvider maxSnack={3}>
-            <CssBaseline enableColorScheme />
+            <CssBaseline />
             <Layout>
               <Component {...pageProps} />
             </Layout>

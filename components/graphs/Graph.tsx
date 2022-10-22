@@ -1,8 +1,10 @@
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
-import { deepOrange, lightBlue } from '@mui/material/colors';
-import { Box, Paper, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/system';
+import { Sheet, Typography } from '@mui/joy';
 import useUserTheme from 'src/hooks/useUserTheme';
+import lightBlue from 'src/colors/lightBlue';
+import deepOrange from 'src/colors/deepOrange';
 import Timeago from '../shared/time/Timeago';
 import NoDataPlaceholder from '../shared/indicators/NoDataPlaceholder';
 import { ObjectDictAny } from '../../src/sharedTypes';
@@ -124,11 +126,11 @@ function ChartGenericTooltip({ active, payload, domain, units }: { active?: bool
     if (active && payload && payload.length) {
         const dateTime = domain.invert(payload[0].payload.key) as Date;
         return (
-            <Paper sx={{ p: 2, px: 3, maxWidth: '180px' }} variant="elevation" elevation={4}>
+            <Sheet sx={{ p: 2, px: 3, maxWidth: '180px' }} variant="plain">
                 <Typography>{`${payload[0].value}${units || ''}`}</Typography>
                 <Timeago date={dateTime} />
-                <Typography variant="caption" color="textSecondary" component="div">{`${dateTime.getFullYear()}-${dateTime.getMonth().toString().padStart(2, '0')}-${dateTime.getDate().toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`}</Typography>
-            </Paper>
+                <Typography level="body2">{`${dateTime.getFullYear()}-${dateTime.getMonth().toString().padStart(2, '0')}-${dateTime.getDate().toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`}</Typography>
+            </Sheet>
         );
     }
 

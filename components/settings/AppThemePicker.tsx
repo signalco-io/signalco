@@ -3,9 +3,9 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Box, Stack } from '@mui/system';
-import { ToggleButton, ToggleButtonGroup, TextField as MuiTextField } from '@mui/material';
 import { useColorScheme } from '@mui/joy/styles';
-import { SupportedColorScheme, Typography } from '@mui/joy';
+import { TextField, SupportedColorScheme, Typography } from '@mui/joy';
+import Picker from 'components/shared/form/Picker';
 import { AppThemeMode } from '../../src/theme';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
 import useUserSetting from '../../src/hooks/useUserSetting';
@@ -67,7 +67,7 @@ export default function AppThemePicker() {
     };
 
     const [userLocation] = useUserSetting<[number, number] | undefined>('location', undefined);
-    const handleThemeModeChange = (_e: React.SyntheticEvent, newThemeMode: AppThemeMode) => {
+    const handleThemeModeChange = (_: unknown, newThemeMode: AppThemeMode) => {
         const newThemeModeSelect = newThemeMode ?? 'manual';
         setThemeMode(newThemeModeSelect);
         if (newThemeModeSelect !== 'manual' && colorScheme === 'light') {
@@ -97,11 +97,11 @@ export default function AppThemePicker() {
     return (
         <Suspense>
             <Stack spacing={2}>
-                <ToggleButtonGroup exclusive color="primary" value={themeMode} onChange={handleThemeModeChange}>
-                    <ToggleButton value="manual">{themeModes.t('Manual')}</ToggleButton>
-                    <ToggleButton disabled={(userLocation?.length ?? 0) <= 0} value="sunriseSunset">{themeModes.t('SunriseSunset')}</ToggleButton>
-                    <ToggleButton value="timeRange">{themeModes.t('TimeRange')}</ToggleButton>
-                </ToggleButtonGroup>
+                <Picker value={themeMode} onChange={handleThemeModeChange} options={[
+                    { value: 'manual', label: themeModes.t('Manual') },
+                    { value: 'sunriseSunset', label: themeModes.t('SunriseSunset'), disabled: (userLocation?.length ?? 0) <= 0 },
+                    { value: 'timeRange', label: themeModes.t('TimeRange') },
+                ]} />
                 {themeMode === 'timeRange' && (
                     <Stack spacing={1}>
                         <Typography level="body2">{picker.t('PickDayNightTimes')}</Typography>
@@ -113,7 +113,8 @@ export default function AppThemePicker() {
                                     value={dayTime}
                                     ampm={userTimeFormat === '0'}
                                     ampmInClock={userTimeFormat === '0'}
-                                    renderInput={(params) => <MuiTextField variant="filled" {...params} />}
+                                    renderInput={({color, sx, defaultValue, value, variant, size, ...params}) =>
+                                        <TextField value={value as any} {...params} />}
                                 />
                             </LocalizationProvider>
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -123,7 +124,8 @@ export default function AppThemePicker() {
                                     value={nightTime}
                                     ampm={userTimeFormat === '0'}
                                     ampmInClock={userTimeFormat === '0'}
-                                    renderInput={(params) => <MuiTextField variant="filled" {...params} />}
+                                    renderInput={({color, sx, defaultValue, value, variant, size, ...params}) =>
+                                        <TextField value={value as any} {...params} />}
                                 />
                             </LocalizationProvider>
                         </Stack>
@@ -131,11 +133,10 @@ export default function AppThemePicker() {
                 )}
                 <Stack spacing={1}>
                     {themeMode !== 'manual' && <Typography level="body2">{picker.t('PickNightTheme')}</Typography>}
-                    <ToggleButtonGroup exclusive color="primary" value={colorScheme} onChange={(_e, value) => handleThemeSelect(value)}>
-                        {themeMode === 'manual' && <ToggleButton value="light"><AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" /></ToggleButton>}
-                        {/* <ToggleButton value="darkDimmed"><AppThemeVisual label={themes.t('DarkDimmed')} theme="darkDimmed" /></ToggleButton> */}
-                        <ToggleButton value="dark"><AppThemeVisual label={themes.t('Dark')} theme="dark" /></ToggleButton>
-                    </ToggleButtonGroup>
+                    <Picker value={colorScheme} onChange={(_, value) => handleThemeSelect(value)} options={[
+                        { value: 'light', label: <AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" /> },
+                        { value: 'dark', label: <AppThemeVisual label={themes.t('Dark')} theme="dark" /> }
+                    ]} />
                 </Stack>
             </Stack>
         </Suspense>

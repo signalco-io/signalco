@@ -1,7 +1,7 @@
-import { Typography } from '@mui/material';
+import { Typography } from '@mui/joy';
 
 function NoDataPlaceholder({ content }: { content: React.ReactNode | string }) {
-  return <Typography variant="subtitle2" color="textSecondary">{content}</Typography>
+  return <Typography level="body2">{content}</Typography>
 }
 
 export default NoDataPlaceholder;

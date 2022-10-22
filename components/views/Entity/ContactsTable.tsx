@@ -1,7 +1,7 @@
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { Stack } from '@mui/system';
-import { Card, CardHeader, CardMedia, IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
+import { Card, CardOverflow, IconButton, ListItemDecorator, Menu, MenuItem, Typography } from '@mui/joy';
 import { Add as AddIcon, MoreVert as MoreVertIcon } from '@mui/icons-material';
 import useLocale from 'src/hooks/useLocale';
 import IEntityDetails from 'src/entity/IEntityDetails';
@@ -29,23 +29,22 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
     return (
         <>
             <Card>
-                <CardHeader
-                    title={t('Contacts')}
-                    action={<IconButton {...bindTrigger(popupState)}>
-                        <MoreVertIcon />
-                    </IconButton>} />
-                <CardMedia>
+                <Typography>{t('Contacts')}</Typography>
+                <IconButton {...bindTrigger(popupState)}>
+                    <MoreVertIcon />
+                </IconButton>
+                <CardOverflow>
                     <Stack spacing={4}>
                         <AutoTable error={error} isLoading={isLoading} items={tableItems} localize={t} />
                     </Stack>
-                </CardMedia>
+                </CardOverflow>
             </Card>
             <Menu {...bindMenu(popupState)}>
                 <MenuItem onClick={handleCreateContact}>
-                    <ListItemIcon>
+                    <ListItemDecorator>
                         <AddIcon />
-                    </ListItemIcon>
-                    <ListItemText>{t('CreateContact')}</ListItemText>
+                    </ListItemDecorator>
+                    {t('CreateContact')}
                 </MenuItem>
             </Menu>
         </>
