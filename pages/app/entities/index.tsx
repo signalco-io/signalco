@@ -31,27 +31,23 @@ function EntityCard(props: { entity: IEntityDetails }) {
         <Grid xs={6} sm={4} lg={3}>
             <Link href={`/app/entities/${entity.id}`} passHref>
                 <Card sx={{ width: '100%', bgcolor: 'background.default' }}>
-                    <Box p={2}>
-                        <Stack spacing={2}>
-                            <Stack direction="row" spacing={2} alignItems="center">
-                                <Avatar>
-                                    <Icon />
-                                </Avatar>
-                                <Typography noWrap sx={{ opacity: 0.9 }}>{entity.alias}</Typography>
-                            </Stack>
-                            <Stack direction="row" alignItems="center" justifyContent="space-between">
-                                <div>
-                                    <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
-                                </div>
-                                <Stack direction="row" spacing={1} alignItems="center">
-                                    <EntityStatus entity={entity} />
-                                    <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
-                                        <Timeago date={entityLastActivity(entity)} />
-                                    </Box>
-                                </Stack>
+                    <Stack spacing={2}>
+                        <Stack direction="row" spacing={2} alignItems="center">
+                            <Avatar>
+                                <Icon />
+                            </Avatar>
+                            <Typography noWrap sx={{ opacity: 0.9 }}>{entity.alias}</Typography>
+                        </Stack>
+                        <Stack direction="row" alignItems="center" justifyContent="space-between">
+                            <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
+                            <Stack direction="row" spacing={1} alignItems="center">
+                                <EntityStatus entity={entity} />
+                                <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
+                                    <Timeago date={entityLastActivity(entity)} />
+                                </Box>
                             </Stack>
                         </Stack>
-                    </Box>
+                    </Stack>
                 </Card>
             </Link>
         </Grid>

@@ -4,7 +4,7 @@ import { Alert, CircularProgress } from '@mui/joy';
 import LoadableProps from './LoadableProps';
 
 export default function Loadable(props: LoadableProps) {
-    const {isLoading, placeholder, error, children, width, height, contentVisible, sx} = props;
+    const {isLoading, placeholder, error, children, contentVisible, sx} = props;
 
     const indicator = useMemo(() => {
         switch (placeholder) {
@@ -18,7 +18,7 @@ export default function Loadable(props: LoadableProps) {
             default:
                 return <Box textAlign="center"><CircularProgress /></Box>
         }
-    }, [height, placeholder, width]);
+    }, [placeholder]);
 
     if (error) {
         console.warn('User presented with error', error, typeof error);

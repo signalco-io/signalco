@@ -7,7 +7,7 @@ import {
   usePopupState,
 } from 'material-ui-popup-state/hooks';
 import { Box, Stack } from '@mui/system';
-import { Avatar, Button, Divider, IconButton, ListItemDecorator, Menu, MenuItem, Typography } from '@mui/joy';
+import { Avatar, Button, Divider, IconButton, ListItemDecorator, Menu, MenuItem, Sheet, Typography } from '@mui/joy';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MenuIcon from '@mui/icons-material/Menu';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -114,17 +114,15 @@ function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: S
       <Button
         sx={{
           py: { xs: 2, lg: 3 },
-          px: 2
+          justifyContent: 'start',
         }}
         aria-label={label}
         title={label}
         variant="plain"
         size="lg"
-        onClick={onClick}>
-        <Stack direction="row" alignItems="center">
-          <Icon sx={{ opacity: active ? 1 : 0.6, mr: { xs: 0, lg: 2 }, fontSize: { xs: '26px', lg: '17px' } }} />
-          <Typography fontWeight={500} sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
-        </Stack>
+        onClick={onClick}
+        startDecorator={<Icon sx={{ opacity: active ? 1 : 0.6, fontSize: '26px' }} />}>
+        <Typography sx={{ opacity: active ? 1 : 0.6, }}>{label}</Typography>
       </Button>
     </Link>
   );
@@ -151,19 +149,29 @@ function NavProfile() {
     <Stack
       direction={{ xs: 'row', sm: 'column' }}
       spacing={{ xs: 0, sm: 4 }}
-      sx={{ px: { xs: 2, sm: 0 }, pt: { xs: 0, sm: 4 }, minHeight: { xs: '60px', sm: undefined } }}
+      sx={{
+        px: { xs: 2, sm: 0 },
+        pt: { xs: 0, sm: 4 },
+        minHeight: { xs: '60px', sm: undefined },
+        justifyContent: { xs: 'space-between', sm: 'start' }
+      }}
       alignItems="center">
       <UserProfileAvatar />
-      {!mobileMenuOpen &&
+      <Box sx={{ display: { xs: 'none', sm: 'inherit' } }}>
         <Stack sx={{ width: { xs: undefined, lg: '100%' } }}>
           {visibleNavItems
             .map((ni, index) => (
               <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} />
             ))}
         </Stack>
-      }
-      {mobileMenuOpen && <Typography sx={{ opacity: 0.6 }}>Menu</Typography>}
-      <>
+      </Box>
+      <Typography sx={{
+        display: { xs: 'inherit', sm: 'none' },
+        opacity: 0.6
+      }}>
+        {mobileMenuOpen ? 'Menu' : activeNavItem.label}
+      </Typography>
+      <Box sx={{ display: { xs: 'inherit', sm: 'none' } }}>
         <IconButton size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
           {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
         </IconButton>
@@ -176,12 +184,14 @@ function NavProfile() {
           background: 'var(--joy-palette-background-default)',
           zIndex: 999
         }}>
-          <Stack>
-            {visibleNavItems.map((ni, index) =>
-              <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} onClick={handleMobileMenuClose} />)}
-          </Stack>
+          <Sheet variant="outlined" sx={{ height: '100%' }}>
+            <Stack>
+              {visibleNavItems.map((ni, index) =>
+                <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} onClick={handleMobileMenuClose} />)}
+            </Stack>
+          </Sheet>
         </Box>
-      </>
+      </Box>
     </Stack>
   );
 }

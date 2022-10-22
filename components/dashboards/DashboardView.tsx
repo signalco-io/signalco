@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { Box, Stack } from '@mui/system';
 import { Button, Typography } from '@mui/joy';
 import GridWrapper from './GridWrapper';

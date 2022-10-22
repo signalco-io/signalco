@@ -100,7 +100,7 @@ const settingsFormComponents: FormBuilderComponents = {
     selectTimeZone: ({ value, onChange, label }) => {
         const timeZones = getTimeZones();
         return (
-            <SelectItems value={value} onChange={onChange} items={[
+            <SelectItems value={value} onChange={(v) => onChange(v[0])} items={[
                 { value: '0', label: '+00:00 UTC', disabled: true },
                 ...timeZones.map(tz => ({ value: tz.name, label: tz.currentTimeFormat }))
             ]} label={label} />
@@ -139,13 +139,13 @@ function SettingsIndex() {
     }
 
     const timeLocationForm = {
-        timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', t('TimeFormat')),
-        timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', t('TimeZone')),
+        timeFromat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', t('TimeFormat'), { receiveEvent: false }),
+        timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', t('TimeZone'), { receiveEvent: false }),
         location: useFormField(userLocation, isTrue, 'locationMap', t('Location'))
     };
 
     const developerSettingsForm = {
-        apiEndpoint: useFormField(appSettingsProvider.apiAddress, isNonEmptyString, 'selectApiEndpoint', t('ApiEndpoint'))
+        apiEndpoint: useFormField(appSettingsProvider.apiAddress, isNonEmptyString, 'selectApiEndpoint', t('ApiEndpoint'), { receiveEvent: false })
     };
 
     useEffect(() => {

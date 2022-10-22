@@ -25,7 +25,7 @@ function SelectItems(props: ISelectItemsProps) {
 
     return (
         <Select
-            value={value}
+            value={value[0]}
             placeholder={placeholder}
             onChange={handleOnChange}
             renderValue={(selected) => {
@@ -40,8 +40,7 @@ function SelectItems(props: ISelectItemsProps) {
                 //         </Box>
                 //     );
                 // else {
-                    const selectedValue = (Array.isArray(selected) ? selected[0] : selected);
-                    return items.find(i => i.value === selectedValue)?.label ?? value;
+                    return items.find(i => i.value === selected?.value)?.label ?? value;
                 // }
             }}
         >{items.map(item => (

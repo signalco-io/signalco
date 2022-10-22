@@ -13,7 +13,7 @@ interface NavigatingButtonProps extends ChildrenProps {
 
 export default function NavigatingButton(props: NavigatingButtonProps) {
     return (
-        <Link href={props.href} passHref prefetch={props.prefetch ?? true}>
+        <Link href={props.href} passHref prefetch={props.prefetch ?? undefined}>
             <Button
                 color="primary"
                 variant={props.hideArrow ? 'plain' : 'solid'}

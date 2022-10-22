@@ -1,7 +1,7 @@
 import { useInView } from 'react-cool-inview';
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import dynamic from 'next/dynamic';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack, SxProps, Theme } from '@mui/system';
@@ -77,11 +77,9 @@ function StepContent(props: {
             {props.children && (
               <Grid xs={12} md={props.image ? 6 : 12}>
                 <Stack
-                  width="100%"
-                  spacing={4}
-                  justifyContent="space-evenly"
                   sx={{
-                    flexDirection: { xs: 'column', md: 'row' }
+                    gap: 4,
+                    flexDirection: props.direction === 'horizontal' ? { xs: 'column', md: 'row' } : 'colum'
                   }}>
                   {(Array.isArray(props.children) ? props.children : [props.children]).map((child, childIndex) => (
                     <GentleSlide
@@ -186,9 +184,16 @@ function PlaySection() {
 
   return (
     <StepContent title="Play" subtitle="Here are some of our favorite ways you can automate your life"
-      image={<Image layout="fixed" src={themeContext.isDark ? '/images/playpitch-dark.png' : '/images/playpitch.png'} alt="Play" quality={100} width={511} height={684} />}
+      image={<Image src={themeContext.isDark ? '/images/playpitch-dark.png' : '/images/playpitch.png'} alt="Play" quality={100} width={511} height={684} />}
       imageContainerHeight={684 + 64}
-      imageContainerStyles={{ position: 'absolute', top: 0, right: 0, width: '511px', height: '684px', marginTop: '64px' }}>
+      imageContainerStyles={{
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: '511px',
+        height: '684px',
+        marginTop: '64px'
+      }}>
       <FeatureDescription
         title="Morning coffee"
         content="Raise the shades, play your favorite energizing morning beat and turn on the coffee maker." />
@@ -236,7 +241,13 @@ export default function LandingPageView() {
         </>
       )}
       <CounterIndicator count={1} />
-      <StepContent title="Discover" image={<DiscoverVisual />} imageContainerHeight={420} imageContainerStyles={{ position: 'absolute', top: '-92px', right: 0, zIndex: -1 }}>
+      <StepContent title="Discover" image={<DiscoverVisual />} imageContainerHeight={420}
+        imageContainerStyles={{
+          position: 'absolute',
+          top: '-92px',
+          right: 0,
+          zIndex: -1
+        }}>
         <FeatureDescription
           title="Bring together"
           content="Every service and device is useful by itself, but the real magic happens when you bring them all together." />

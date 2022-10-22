@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
 import { Card, Typography } from '@mui/joy';
@@ -65,7 +65,7 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
         <Card sx={{ width: '222px' }}>
             <Stack spacing={2}>
                 {imageSrc
-                    ? <Image src={imageSrc} alt={`${name} image`} width={180} height={180} objectFit="contain" />
+                    ? <Image src={imageSrc} alt={`${name} image`} width={180} height={180} />
                     : (
                         <Stack alignItems="center" justifyContent="center" textAlign="center" spacing={2} sx={{ width: 180, height: 180 }}>
                             <SignalcoLogo height={40} />

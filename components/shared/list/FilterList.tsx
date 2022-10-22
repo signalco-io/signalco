@@ -62,8 +62,6 @@ export default function FilterList(props: FilterListProps) {
     const handleToggleShowMore = () => setIsShowMore(true);
     const shouldTruncate = typeof truncate !== 'undefined' && items.length > truncate;
 
-    console.log('checked', checked)
-
     return (
         <Stack>
             <Box sx={{ dispaly: { xs: 'visible', md: 'none' } }}>

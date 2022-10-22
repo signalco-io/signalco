@@ -88,7 +88,7 @@ function ShareEntityChip(props: IShareEntityChipProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     if (hideSingle && (entity?.sharedWith?.length ?? 0) <= 1) {
-        return null;
+        return <div></div>;
     }
 
     const handleChipClick = () => {
