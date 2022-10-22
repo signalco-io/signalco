@@ -12,10 +12,6 @@
         "$schema": {
             "type": "string"
         },
-        "version": {
-            "type": "string",
-            "description": "Version of configuration schema."
-        },
         "type": {
             "enum": [
                 "basic"
