@@ -196,7 +196,7 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                 open={selecting === 'entity'}
                 sx={{ flexGrow: selecting === 'entity' ? 1 : 0 }}
                 onChange={handleEditEntity}
-            //expandIcon={!(selecting === 'entity') && <ChevronRightIcon />}
+                disabled={selecting !== 'entity'}
             >
                 <Typography>
                     {entitySelected ? (
@@ -211,10 +211,9 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
             </Accordion>
             {selectContact && (
                 <Accordion
-                    disabled={!entitySelected}
                     sx={{ flexGrow: selecting === 'contact' ? 1 : 0 }}
                     open={selecting === 'contact'}
-                //expandIcon={!(selecting === 'contact') && <ChevronRightIcon />}
+                    disabled={selecting !== 'contact' && !entitySelected}
                 >
                     <Typography>
                         <Stack spacing={2} direction="row" alignItems="center">
@@ -237,10 +236,9 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
             )}
             {selectValue && (
                 <Accordion
-                    disabled={!contactSelected}
                     sx={{ flexGrow: selecting === 'value' ? 1 : 0 }}
                     open={selecting === 'value'}
-                //expandIcon={(!(selecting === 'value') && contactSelected) && <ChevronRightIcon />}
+                    disabled={selecting !== 'value' && !contactSelected}
                 >
                     <Typography>
                         <Stack spacing={2} direction="row" alignItems="center">

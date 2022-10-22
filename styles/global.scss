@@ -110,14 +110,14 @@
 //        url('/assets/fonts/raleway-v26-latin-900.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 // }
 
-// @font-face {
-//   font-family: 'Material Icons';
-//   font-style: normal;
-//   font-weight: 400;
-//   src: local(''),
-//     url('/assets/fonts/MaterialIcons-Regular.woff2') format('woff2'),
-//     url('/assets/fonts/MaterialIcons-Regular.woff') format('woff');
-// }
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+    url('/assets/fonts/MaterialIcons-Regular.woff2') format('woff2'),
+    url('/assets/fonts/MaterialIcons-Regular.woff') format('woff');
+}
 
 :root {
   --primary: #000000;
