@@ -23,7 +23,7 @@ function NavMenu() {
             ))}
         </>
     )
-};
+}
 
 export function PageNav(props: { fullWidth?: boolean | undefined; }) {
     const router = useRouter();

@@ -7,20 +7,20 @@ export interface PickerOption {
     disabled?: boolean;
 }
 
-export interface PickerProps {
-    value: any | undefined;
-    onChange: (event: ChangeEvent<HTMLInputElement>, value: any) => void;
+export interface PickerProps<TValue> {
+    value: TValue | undefined;
+    onChange: (event: ChangeEvent<HTMLInputElement>, value: TValue | undefined) => void;
     options: PickerOption[];
 }
 
-export default function Picker(props: PickerProps) {
+export default function Picker<TValue>(props: PickerProps<TValue>) {
     const { value, options, onChange } = props;
     return (
         <RadioGroup
             row
             name="justify"
             value={value}
-            onChange={(e) => onChange(e, e.target.value)}
+            onChange={(e) => onChange(e, e.target.value as (TValue | undefined))}
             sx={{
                 alignSelf: 'start',
                 minHeight: 48,

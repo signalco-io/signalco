@@ -8,11 +8,12 @@ export interface AccordionProps extends ChildrenProps {
     open?: boolean;
     disabled?: boolean;
     sx?: SxProps;
-    onChange?: (e: MouseEvent<HTMLAnchorElement>, expanded: boolean) => void
+    onChange?: (e: MouseEvent<HTMLAnchorElement>, expanded: boolean) => void,
+    unmountOnExit?: boolean;
 }
 
 export default function Accordion(props: AccordionProps) {
-    const { children, open, sx, disabled, onChange } = props;
+    const { children, open, sx, disabled, onChange, unmountOnExit } = props;
     const [isOpen, setIsOpen] = useState(open ?? false);
 
     const handleOpen = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -35,9 +36,11 @@ export default function Accordion(props: AccordionProps) {
                     </IconButton>
                 )}
             </Stack>
-            <Box sx={{ height: actualOpen ? 'auto' : 0, overflow: 'hidden' }}>
-                {!!children && Array.isArray(children) && children.filter((_, i) => i !== 0)}
-            </Box>
+            {(!unmountOnExit || actualOpen) && (
+                <Box sx={{ height: actualOpen ? 'auto' : 0, overflow: 'hidden' }}>
+                    {!!children && Array.isArray(children) && children.filter((_, i) => i !== 0)}
+                </Box>
+            )}
         </Card>
     )
 }

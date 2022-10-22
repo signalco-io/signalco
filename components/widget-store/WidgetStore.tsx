@@ -71,7 +71,7 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
             <Stack direction="row">
                 <Typography level="body2">{filteredAvailableWidgetsItems.length} widget{filteredAvailableWidgetsItems.length > 1 ? 's' : ''} available</Typography>
             </Stack>
-            <Box sx={{ maxHeight: '60vh', overflowY: 'auto' }}>
+            <Box sx={{ maxHeight: '60vh', overflowY: 'auto', overflowX: 'hidden' }}>
                 <Grid container spacing={2} justifyContent="center">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (
                         <Grid key={`${availableWidget.type}-${index}`}>

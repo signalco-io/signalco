@@ -1,8 +1,6 @@
 import { Suspense, useState } from 'react';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Box, Stack } from '@mui/system';
+import { DefaultColorScheme } from '@mui/joy/styles/types';
 import { useColorScheme } from '@mui/joy/styles';
 import { TextField, SupportedColorScheme, Typography } from '@mui/joy';
 import Picker from 'components/shared/form/Picker';
@@ -52,26 +50,53 @@ function AppThemeVisual(props: { label: string, theme: SupportedColorScheme, dis
     );
 }
 
-export default function AppThemePicker() {
+function AppThemeColorPicker() {
     const themes = useLocale('App', 'Settings', 'Themes');
-    const themeModes = useLocale('App', 'Settings', 'ThemeModes');
-    const picker = useLocale('App', 'Components', 'AppThemePicker');
-    const [userTimeFormat] = useUserSetting<string>('timeFormat', '1');
-
+    const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
     const { colorScheme, setColorScheme } = useColorScheme();
-    const [themeMode, setThemeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
 
-    const handleThemeSelect = (newTheme: SupportedColorScheme) => {
+    const handleThemeSelect = (newTheme: DefaultColorScheme | undefined) => {
         const newThemeSelect = newTheme ?? 'light';
         setColorScheme(newThemeSelect);
     };
 
+    console.log('color scheme', colorScheme)
+
+    return (
+        <Picker value={colorScheme} onChange={(_, value) => handleThemeSelect(value)} options={[
+            {
+                value: 'light',
+                label: (
+                    <Box p={1}>
+                        <AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" />
+                    </Box>
+                )
+            },
+            {
+                value: 'dark',
+                label: (
+                    <Box p={1}>
+                        <AppThemeVisual label={themes.t('Dark')} theme="dark" />
+                    </Box>
+                )
+            }
+        ]} />
+    );
+}
+
+export default function AppThemePicker() {
+    const themeModes = useLocale('App', 'Settings', 'ThemeModes');
+    const picker = useLocale('App', 'Components', 'AppThemePicker');
+
+    const { colorScheme, setColorScheme } = useColorScheme();
+    const [themeMode, setThemeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
+
     const [userLocation] = useUserSetting<[number, number] | undefined>('location', undefined);
-    const handleThemeModeChange = (_: unknown, newThemeMode: AppThemeMode) => {
+    const handleThemeModeChange = (_: unknown, newThemeMode: AppThemeMode | undefined) => {
         const newThemeModeSelect = newThemeMode ?? 'manual';
         setThemeMode(newThemeModeSelect);
         if (newThemeModeSelect !== 'manual' && colorScheme === 'light') {
-            handleThemeSelect('dark');
+            setColorScheme('dark');
         }
     };
 
@@ -97,7 +122,7 @@ export default function AppThemePicker() {
     return (
         <Suspense>
             <Stack spacing={2}>
-                <Picker value={themeMode} onChange={handleThemeModeChange} options={[
+                <Picker value={themeMode ?? 'manual'} onChange={handleThemeModeChange} options={[
                     { value: 'manual', label: themeModes.t('Manual') },
                     { value: 'sunriseSunset', label: themeModes.t('SunriseSunset'), disabled: (userLocation?.length ?? 0) <= 0 },
                     { value: 'timeRange', label: themeModes.t('TimeRange') },
@@ -106,37 +131,22 @@ export default function AppThemePicker() {
                     <Stack spacing={1}>
                         <Typography level="body2">{picker.t('PickDayNightTimes')}</Typography>
                         <Stack direction="row" spacing={1}>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <TimePicker
-                                    label={picker.t('DayTime')}
-                                    onChange={handleDayTimeChange}
-                                    value={dayTime}
-                                    ampm={userTimeFormat === '0'}
-                                    ampmInClock={userTimeFormat === '0'}
-                                    renderInput={({color, sx, defaultValue, value, variant, size, ...params}) =>
-                                        <TextField value={value as any} {...params} />}
-                                />
-                            </LocalizationProvider>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <TimePicker
-                                    label={picker.t('NightTime')}
-                                    onChange={handleNightTimeChange}
-                                    value={nightTime}
-                                    ampm={userTimeFormat === '0'}
-                                    ampmInClock={userTimeFormat === '0'}
-                                    renderInput={({color, sx, defaultValue, value, variant, size, ...params}) =>
-                                        <TextField value={value as any} {...params} />}
-                                />
-                            </LocalizationProvider>
+                            <TextField
+                                label={picker.t('DayTime')}
+                                value={dayTime ? DateTimeProvider.toDuration(dayTime) : ''}
+                                onChange={(e) => handleDayTimeChange(DateTimeProvider.fromDuration(DateTimeProvider.now(), e.target.value))}
+                            />
+                            <TextField
+                                label={picker.t('NightTime')}
+                                value={nightTime ? DateTimeProvider.toDuration(nightTime) : ''}
+                                onChange={(e) => handleNightTimeChange(DateTimeProvider.fromDuration(DateTimeProvider.now(), e.target.value))}
+                            />
                         </Stack>
                     </Stack>
                 )}
                 <Stack spacing={1}>
                     {themeMode !== 'manual' && <Typography level="body2">{picker.t('PickNightTheme')}</Typography>}
-                    <Picker value={colorScheme} onChange={(_, value) => handleThemeSelect(value)} options={[
-                        { value: 'light', label: <AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" /> },
-                        { value: 'dark', label: <AppThemeVisual label={themes.t('Dark')} theme="dark" /> }
-                    ]} />
+                    <AppThemeColorPicker />
                 </Stack>
             </Stack>
         </Suspense>
