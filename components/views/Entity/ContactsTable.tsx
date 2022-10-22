@@ -29,10 +29,12 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
     return (
         <>
             <Card>
-                <Typography>{t('Contacts')}</Typography>
-                <IconButton {...bindTrigger(popupState)}>
-                    <MoreVertIcon />
-                </IconButton>
+                <Stack direction="row" alignItems="center" justifyContent="space-between">
+                    <Typography>{t('Contacts')}</Typography>
+                    <IconButton size="sm" {...bindTrigger(popupState)}>
+                        <MoreVertIcon />
+                    </IconButton>
+                </Stack>
                 <CardOverflow>
                     <Stack spacing={4}>
                         <AutoTable error={error} isLoading={isLoading} items={tableItems} localize={t} />

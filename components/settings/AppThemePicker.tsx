@@ -53,7 +53,6 @@ export default function AppThemePicker() {
     const themes = useLocale('App', 'Settings', 'Themes');
     const themeModes = useLocale('App', 'Settings', 'ThemeModes');
     const picker = useLocale('App', 'Components', 'AppThemePicker');
-    const [userTimeFormat] = useUserSetting<string>('timeFormat', '1');
 
     const { colorScheme, setColorScheme } = useColorScheme();
     const [themeMode, setThemeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');

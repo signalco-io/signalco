@@ -69,6 +69,11 @@ const theme = () => {
           variant: 'plain'
         }
       },
+      JoyCard: {
+        defaultProps: {
+          variant: 'outlined'
+        }
+      },
       JoySheet: {
         defaultProps: {
           variant: 'soft',

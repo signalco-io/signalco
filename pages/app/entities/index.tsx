@@ -148,9 +148,9 @@ function Entities() {
                     <Stack direction="row" alignItems="center" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="end">
                         {showSearch && (
                             <TextField
-                                label={t('SearchLabel')}
-                                size="sm"
+                                placeholder={t('SearchLabel')}
                                 value={searchText}
+                                size="lg"
                                 onChange={(e) => handleSearchTextChange(e.target.value)}
                                 sx={{ width: { xs: '100%', sm: 'initial' } }} />
                         )}

@@ -54,7 +54,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                 <Stack direction="row" alignItems="center" spacing={1}>
                     <EntityStatus entity={entity} />
                     <ShareEntityChip entity={entity} entityType={1} />
-                    {!disabledContact.isError && (
+                    {(!disabledContact.isLoading && !disabledContact.isError) && (
                         <DisableButton disabled={isDisabled} />
                     )}
                 </Stack>

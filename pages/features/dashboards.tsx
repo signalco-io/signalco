@@ -1,15 +1,16 @@
 import { Stack } from '@mui/system';
 import { Typography } from '@mui/joy';
+import PageCenterHeader from 'components/pages/PageCenterHeader';
 import WidgetStore from '../../components/widget-store/WidgetStore';
 import { PageLayout } from '../../components/layouts/PageLayout';
 
 function FeatureDashboardsPage() {
     return (
         <Stack spacing={4}>
-            <Typography level="h1">Dashboards</Typography>
-            <Typography level="h2">Widgets</Typography>
+            <PageCenterHeader header="Dashboards" />
+            <Typography level="h4">Widgets</Typography>
             <Stack spacing={2}>
-                <Typography level="h3">Explore widgets</Typography>
+                <Typography level="h5">Explore widgets</Typography>
                 <WidgetStore />
             </Stack>
         </Stack>

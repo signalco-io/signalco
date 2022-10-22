@@ -6,6 +6,7 @@ import {
 import { Box, Stack } from '@mui/system';
 import {
     Button,
+    Card,
     List,
     ListItem,
     ListItemButton,
@@ -191,12 +192,13 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
     };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <>
             <Accordion
                 open={selecting === 'entity'}
                 sx={{ flexGrow: selecting === 'entity' ? 1 : 0 }}
                 onChange={handleEditEntity}
-                disabled={selecting !== 'entity'}
+                unmountOnExit
+                // disabled={selecting !== 'entity'}
             >
                 <Typography>
                     {entitySelected ? (
@@ -214,6 +216,7 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                     sx={{ flexGrow: selecting === 'contact' ? 1 : 0 }}
                     open={selecting === 'contact'}
                     disabled={selecting !== 'contact' && !entitySelected}
+                    unmountOnExit
                 >
                     <Typography>
                         <Stack spacing={2} direction="row" alignItems="center">
@@ -239,6 +242,7 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                     sx={{ flexGrow: selecting === 'value' ? 1 : 0 }}
                     open={selecting === 'value'}
                     disabled={selecting !== 'value' && !contactSelected}
+                    unmountOnExit
                 >
                     <Typography>
                         <Stack spacing={2} direction="row" alignItems="center">
@@ -249,7 +253,7 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                     <EntityContactValueSelection target={target!} value={value} onSelected={handleContactValueSelected} />
                 </Accordion>
             )}
-        </Box>
+        </>
     );
 }
 
@@ -328,7 +332,7 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                 </Stack>
             </Button>
             <Popper popupState={entityMenu}>
-                <Sheet sx={{ width: 420, height: 620 }}>
+                <Card sx={{ width: 420, minHeight: 320, maxHeight: 320 }}>
                     <EntitySelectionMenu
                         target={target}
                         selectContact={selectContact}
@@ -336,7 +340,7 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                         value={value}
                         onSelected={handleEntitySelected}
                         onClose={handleEntitySelectionClose} />
-                </Sheet>
+                </Card>
             </Popper>
         </>
     );
