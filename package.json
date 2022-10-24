@@ -30,7 +30,7 @@
         "@emotion/server": "11.10.0",
         "@emotion/styled": "11.10.4",
         "@enterwell/react-form-builder": "0.1.8",
-        "@enterwell/react-form-validation": "1.2.7",
+        "@enterwell/react-form-validation": "1.2.8",
         "@hcaptcha/react-hcaptcha": "1.4.4",
         "@mdx-js/loader": "2.1.5",
         "@mdx-js/react": "2.1.5",
