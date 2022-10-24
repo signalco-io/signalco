@@ -1649,10 +1649,10 @@
   resolved "https://registry.yarnpkg.com/@enterwell/react-form-builder/-/react-form-builder-0.1.8.tgz#9c415fceb9b00c040342221ca536614a7040e383"
   integrity sha512-Zm1IkSJx2y0BQsynkcCJV5nf3r78pZsTfL6JzYIJihRFtUOBt1i1aBSXSP5xvzDR1pntBLVEbcBMbOcVG2npVg==
 
-"@enterwell/react-form-validation@1.2.7":
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/@enterwell/react-form-validation/-/react-form-validation-1.2.7.tgz#a95068592f0f6d040295d82e0f90f5e2cfcd9d5f"
-  integrity sha512-vV1CYLZMX4rlC/IkyyEexTfD94RjAlpXw99jyE+Pcof88S8DfwW5mY8VadhFf3xYj3Py7AYDi9hxQsSIYktqVg==
+"@enterwell/react-form-validation@1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@enterwell/react-form-validation/-/react-form-validation-1.2.8.tgz#02d775acb161f58366be75e1de901a5fc546fcbb"
+  integrity sha512-5BA3vudT3IkFObkbFweDXJ5ClvUu7Px7aJzO++pP3bkV9JUfO++gklbOMT4V/3pcve0sMEfz9p9ixSc7pZ8m7g==
 
 "@eslint/eslintrc@^1.3.3":
   version "1.3.3"
