@@ -18,7 +18,7 @@ function Login() {
         {isLong
           ? <Stack spacing={2}>
             <Typography level="body2">Redirecting is taking a bit longer...</Typography>
-            <Link href="/" passHref>
+            <Link href="/" passHref legacyBehavior>
               <Button size="lg">Go home</Button>
             </Link>
           </Stack>

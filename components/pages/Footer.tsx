@@ -58,7 +58,7 @@ const footerLinks: FooterSectionType[] = [
 
 function Link(props: { href: string, children: ReactNode }) {
     return (
-        <NextLink href={props.href} passHref>
+        <NextLink href={props.href} passHref legacyBehavior>
             <JoyLink>
                 {props.children}
             </JoyLink>

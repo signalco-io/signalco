@@ -85,7 +85,7 @@ function UserProfileAvatar() {
 
   return (
     <Loadable isLoading={isLoading} placeholder="skeletonRect" width={30} height={30}>
-      <Button {...bindTrigger(popupState)} variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 1 }}>
+      <Button {...bindTrigger(popupState)} variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 2 }}>
         <Stack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
           <UserAvatar />
           <ApiBadge />
@@ -116,7 +116,7 @@ function UserProfileAvatar() {
 
 function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: SvgIconComponent, active: boolean, label: string, onClick?: () => void }) {
   return (
-    <Link href={path} passHref>
+    <Link href={path} passHref legacyBehavior>
       <IconButton
         aria-label={label}
         title={label}

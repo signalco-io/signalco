@@ -72,7 +72,7 @@ function CellRenderer(props: IAutoTableCellRendererProps) {
     Wrapper = function LinkWrapper({ children }: ChildrenProps) {
       return (
         <Box>
-          <NextLink passHref href={props.link!}>{children}</NextLink>
+          <NextLink passHref href={props.link!} legacyBehavior>{children}</NextLink>
         </Box>
       );
     };

@@ -62,7 +62,7 @@ function RingLogo(props: { ringRadius: number, degrees: number, imageProps: Imag
     const rotateKeyframesName = `@keyframes rotateRingLogo${props.imageProps.id}`;
 
     return (
-        <Link href={`/channels/${props.imageProps.id}`} passHref>
+        <Link href={`/channels/${props.imageProps.id}`} passHref legacyBehavior>
             <Box component="a" sx={{
                 p: `${logoPadding}px`,
                 backgroundColor: 'background.default',

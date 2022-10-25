@@ -14,15 +14,13 @@ const navLinks = [
 ];
 
 function NavMenu() {
-    return (
-        <>
-            {navLinks.map(nl => (
-                <Link key={nl.href} href={nl.href} passHref>
-                    <Button variant="plain" size="lg">{nl.text}</Button>
-                </Link>
-            ))}
-        </>
-    )
+    return <>
+        {navLinks.map(nl => (
+            <Link key={nl.href} href={nl.href} passHref legacyBehavior>
+                <Button variant="plain" size="lg">{nl.text}</Button>
+            </Link>
+        ))}
+    </>;
 }
 
 export function PageNav(props: { fullWidth?: boolean | undefined; }) {
@@ -51,10 +49,10 @@ export function PageNav(props: { fullWidth?: boolean | undefined; }) {
             <Container maxWidth={props.fullWidth ? false : 'lg'}>
                 <Stack component="header" direction="row" justifyContent="space-between" alignItems="center">
                     <Box onContextMenu={handleButtonAuxClick} onAuxClick={handleButtonAuxClick}>
-                        <Link href="/" passHref>
-                            <a style={{ textDecoration: 'none' }}>
-                                <SignalcoLogotype height={42} />
-                            </a>
+                        <Link href="/" passHref style={{ textDecoration: 'none' }}>
+
+                            <SignalcoLogotype height={42} />
+
                         </Link>
                     </Box>
                     <Stack direction="row" alignItems="center" spacing={{ xs: 1, sm: 2, md: 4 }}>

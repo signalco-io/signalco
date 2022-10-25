@@ -22,7 +22,7 @@ const stateOptions: IWidgetConfigurationOption[] = [
 
 function SmallIndicator(props: { isActive: boolean; icon: string; label: string; activeBackgroundColor: string; href: string; }) {
     return (
-        <Link href={props.href} passHref>
+        <Link href={props.href} passHref legacyBehavior>
             <Button variant="plain">
                 <Box sx={{ width: '52px', height: '82px', backgroundColor: props.isActive ? props.activeBackgroundColor : 'transparent', borderRadius: 1 }}>
                     <Stack alignItems="center" justifyContent="center" height="100%" spacing={1}>
@@ -78,7 +78,7 @@ function WidgetAirConditioning(props: WidgetSharedProps) {
                     />
                 </Box>
                 <Box sx={{ mt: 9 }}>
-                    <Link href={`/app/entities/${temperatureDevice?.id}`} passHref>
+                    <Link href={`/app/entities/${temperatureDevice?.id}`} passHref legacyBehavior>
                         <Button variant="plain">
                             <Stack direction="row">
                                 <Stack sx={{ height: '100%' }} justifyContent="center" alignItems="center">

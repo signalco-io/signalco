@@ -28,7 +28,11 @@ export default function ChannelGalleryItem(props: ChannelGalleryItemProps) {
             height: 164,
             '&:hover': { boxShadow: 'md', backgroundColor: 'neutral.softHoverBg' },
         }}>
-            <Link href={hrefFunc ? hrefFunc(id) : `/channels/${id}`} passHref style={{ height: '100%', width: '100%' }}>
+            <Link
+                href={hrefFunc ? hrefFunc(id) : `/channels/${id}`}
+                passHref
+                style={{ height: '100%', width: '100%' }}
+                legacyBehavior>
                 <JoyLink overlay sx={{ height: '100%', width: '100%' }}>
                     {planned && <ChannelGalleryItemChip label="Soon" color="neutral" />}
                     {!planned && <ChannelGalleryItemChip label="New" color="info" />}
