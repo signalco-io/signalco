@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/future/image';
+import Image from "next/image";
 import { Box, Stack } from '@mui/system';
 import { Button } from '@mui/joy';
 import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVerySatisfiedOutlined';

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import Image from 'next/future/image';
+import Image from "next/image";
 import dynamic from 'next/dynamic';
 import { Box, Stack } from '@mui/system';
 import { Button, Typography } from '@mui/joy';

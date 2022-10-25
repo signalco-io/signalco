@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import Link from 'next/link';
-import Image, { ImageProps } from 'next/future/image';
+import Image, { ImageProps } from "next/image";
 import { Box, Stack } from '@mui/system';
 import { Typography } from '@mui/joy';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';

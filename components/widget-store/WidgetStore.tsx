@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/future/image';
+import Image from "next/image";
 import { Box, Stack } from '@mui/system';
 import { AspectRatio, Card, CardOverflow, Grid, IconButton, TextField, Typography } from '@mui/joy';
 import { AddOutlined } from '@mui/icons-material';
