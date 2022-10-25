@@ -1,7 +1,7 @@
 import { useInView } from 'react-cool-inview';
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack, SxProps, Theme } from '@mui/system';
@@ -28,7 +28,7 @@ function FeatureDescription(props: { title: string, content: string | React.Reac
       <Typography textColor="neutral.400">{props.content}</Typography>
       <Box>
         {props.link && (
-          <Link passHref href={props.link}>
+          <Link passHref href={props.link} legacyBehavior>
             <Button variant="outlined">{props.linkText ?? 'Read more'}</Button>
           </Link>
         )}

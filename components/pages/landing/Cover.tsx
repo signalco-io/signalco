@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import Link from 'next/link';
-import Image, { ImageProps } from 'next/future/image';
+import Image, { ImageProps } from 'next/image';
 import { Box, Stack } from '@mui/system';
 import { Typography } from '@mui/joy';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
@@ -62,7 +62,7 @@ function RingLogo(props: { ringRadius: number, degrees: number, imageProps: Imag
     const rotateKeyframesName = `@keyframes rotateRingLogo${props.imageProps.id}`;
 
     return (
-        <Link href={`/channels/${props.imageProps.id}`} passHref>
+        <Link href={`/channels/${props.imageProps.id}`} passHref legacyBehavior>
             <Box component="a" sx={{
                 p: `${logoPadding}px`,
                 backgroundColor: 'background.default',

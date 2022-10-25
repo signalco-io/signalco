@@ -47,9 +47,11 @@ function LinkedHeader(props: ChildrenProps & { id: string | undefined }) {
 const components: any = {
     a: (() => {
         function A(props: any) {
-            return <NextLink href={props.href} passHref>
-                <Link>{props.children}</Link>
-            </NextLink>
+            return (
+                <NextLink href={props.href} passHref legacyBehavior>
+                    <Link>{props.children}</Link>
+                </NextLink>
+            );
         }
         return memo(A);
     })(),

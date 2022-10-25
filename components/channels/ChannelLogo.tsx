@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Image from 'next/future/image';
+import Image from 'next/image';
 
 export default function ChannelLogo(props: { channelName: string; label?: string; }) {
     const { channelName, label } = props;

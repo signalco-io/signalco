@@ -1,5 +1,6 @@
-import { Box } from '@mui/system';
+import { clsx } from 'clsx';
 import { SupportedColorScheme } from '@mui/joy';
+import styles from './SignalcoLogotype.module.scss';
 import ApiBadge from '../development/ApiBadge';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
 
@@ -10,9 +11,10 @@ export default function SignalcoLogotype({ width, height, theme, hideBadge }: { 
     }
     const fixedWidth = width ?? (2810 / 666) * (height ?? 0);
     const fixedHeight = height ?? (666 / 2810) * (width ?? 0);
+    const badgeContainerStyle: any = { '--fixedHeight': `${fixedHeight}px` };
 
     return (
-        <Box sx={{ display: hideBadge ? 'block' : 'flex', position: 'relative', gap: 1 }}>
+        <div className={clsx(styles.root, hideBadge && styles.hideBadge)}>
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                 width={fixedWidth} height={fixedHeight} viewBox="0 0 2810.000000 666.000000"
                 preserveAspectRatio="xMidYMid meet">
@@ -34,10 +36,10 @@ export default function SignalcoLogotype({ width, height, theme, hideBadge }: { 
                 </g>
             </svg>
             {(!hideBadge && appSettingsProvider.isDeveloper) && (
-                <Box sx={{ '&>*': { position: 'absolute', top: fixedHeight - 24 - fixedHeight * 0.18 } }}>
+                <div className={styles.badgeContainer} style={badgeContainerStyle}>
                     <ApiBadge />
-                </Box>
+                </div>
             )}
-        </Box>
+        </div>
     )
 }

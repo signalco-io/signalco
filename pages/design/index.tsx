@@ -27,7 +27,7 @@ function DesignPage() {
             </Stack>
             <Stack spacing={2} direction={{ xs: 'column', md: 'row' }}>
                 <Stack sx={{ width: '100%' }}>
-                    <Card sx={{ width: '100%', textAlign: 'center', p: 8, bgcolor: 'black' }}>
+                    <Card sx={{ textAlign: 'center', p: 8, alignItems: 'center', bgcolor: 'black' }}>
                         <SignalcoLogo width={60} theme="dark" />
                     </Card>
                     <Typography level="body3">Light on dark logomark</Typography>

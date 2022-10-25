@@ -55,7 +55,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                 {(favoriteDashboards?.length ?? 0) > 0 && (
                     <Stack direction="row">
                         {favoriteDashboards?.map(fd => (
-                            <Link key={fd.id} href={`#dashboard=${fd.id}`} passHref>
+                            <Link key={fd.id} href={`#dashboard=${fd.id}`} passHref legacyBehavior>
                                 <Button variant="plain" sx={{ color: 'var(--joy-palette-neutral-400)' }}>
                                     {fd.name}
                                 </Button>

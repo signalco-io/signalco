@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
 import { Card, Typography } from '@mui/joy';
