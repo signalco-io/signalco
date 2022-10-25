@@ -25,8 +25,9 @@ const withPWA = createPwa({
 
 const nextConfig = {
     reactStrictMode: true,
-    swcMinify: true,
-    pageExtensions: ['tsx'],
+    experimental: {
+        appDir: true
+    },
     images: {
         formats: ['image/avif', 'image/webp'],
         dangerouslyAllowSVG: true,

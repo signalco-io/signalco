@@ -1,0 +1,9 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--gap) * 4px);
+}
+
+.row {
+    flex-direction: row;
+}

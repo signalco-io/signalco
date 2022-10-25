@@ -1,8 +1,8 @@
 import { withScreenshot } from 'storycap';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import CssBaseline from '@mui/joy/CssBaseline';
 import { CssVarsProvider } from '@mui/joy/styles';
+import CssBaseline from '@mui/joy/CssBaseline';
 import appTheme from '../src/theme';
 import '../styles/global.scss';
 import { themes } from '@storybook/theming';
