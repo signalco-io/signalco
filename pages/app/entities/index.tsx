@@ -19,30 +19,37 @@ import useUserSetting from '../../../src/hooks/useUserSetting';
 import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
 import useLocale from '../../../src/hooks/useLocale';
 import useAllEntities from '../../../src/hooks/useAllEntities';
-import AutoTable, { IAutoTableItem } from '../../../components/shared/table/AutoTable';
 import Loadable from '../../../components/shared/Loadable/Loadable';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 
-function EntityCard(props: { entity: IEntityDetails }) {
-    const { entity } = props;
+function EntityCard(props: { entity: IEntityDetails, spread: boolean }) {
+    const { entity, spread } = props;
     const Icon = EntityIcon(entity);
+
+    const columns = {
+        xs: spread ? 12 : 6,
+        sm: spread ? 12 : 4,
+        lg: spread ? 12 : 3,
+        xl: spread ? 12 : 2
+    };
+
     return (
-        <Grid xs={6} sm={4} lg={3}>
+        <Grid {...columns}>
             <Link href={`/app/entities/${entity.id}`} passHref legacyBehavior>
-                <Card variant="outlined">
-                    <Stack spacing={2}>
+                <Card variant={spread ? 'outlined' : 'outlined'} sx={spread ? { p: 1 } : {}}>
+                    <Stack spacing={2} direction={spread ? 'row' : 'column'} justifyContent={spread ? 'space-between' : undefined}>
                         <Stack direction="row" spacing={2} alignItems="center">
-                            <Avatar>
+                            <Avatar variant={spread ? 'plain' : 'soft'}>
                                 <Icon />
                             </Avatar>
-                            <Typography noWrap sx={{ opacity: 0.9 }}>{entity.alias}</Typography>
+                            <Typography noWrap>{entity.alias}</Typography>
                         </Stack>
-                        <Stack direction="row" alignItems="center" justifyContent="space-between">
+                        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
                             <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
                             <Stack direction="row" spacing={1} alignItems="center">
                                 <EntityStatus entity={entity} />
-                                <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
+                                <Box style={{ opacity: 0.6, fontSize: '0.8rem', minWidth: spread ? '120px' : 0 }}>
                                     <Timeago date={entityLastActivity(entity)} />
                                 </Box>
                             </Stack>
@@ -52,32 +59,6 @@ function EntityCard(props: { entity: IEntityDetails }) {
             </Link>
         </Grid>
     );
-}
-
-function EntityTableName(props: { entity: IEntityDetails }) {
-    const { entity } = props;
-    const Icon = EntityIcon(entity);
-    return (
-        <Stack direction="row" spacing={1} alignItems="center">
-            <Avatar><Icon /></Avatar>
-            <Typography noWrap sx={{ opacity: 0.9 }}>{entity.alias}</Typography>
-        </Stack>
-    );
-}
-
-function deviceModelToTableItem(entity: IEntityDetails): IAutoTableItem {
-    return {
-        id: entity.id,
-        name: <EntityTableName entity={entity} />,
-        shared: <ShareEntityChip entity={entity} entityType={1} />,
-        lastActivity: (
-            <Stack direction="row" alignItems="center" spacing={1}>
-                <EntityStatus entity={entity} />
-                <Timeago date={entityLastActivity(entity)} />
-            </Stack>
-        ),
-        _link: `/app/entities/${entity.id}`
-    };
 }
 
 function EntityCreate() {
@@ -117,25 +98,15 @@ function Entities() {
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
     const [filteredItems, showSearch, searchText, handleSearchTextChange, isSearching] = useSearch(entityItems, filterFuncObjectStringProps);
 
-    const filteredItemsMapped = useMemo(() => {
-        return filteredItems.map(deviceModelToTableItem);
-    }, [filteredItems]);
-
     const results = useMemo(() => (
-        <>
-            {entityListViewType === 'table' ? (
-                <AutoTable hideSearch items={filteredItemsMapped} localize={t} isLoading={false} error={undefined} />
-            ) : (
-                <Box sx={{ px: 2 }}>
-                    <Grid container spacing={2}>
-                        {filteredItems.map(entity => (
-                            <EntityCard key={entity.id} entity={entity} />
-                        ))}
-                    </Grid>
-                </Box>
-            )}
-        </>
-    ), [entityListViewType, filteredItems, filteredItemsMapped, t])
+        <Box sx={{ px: 2 }}>
+            <Grid container spacing={entityListViewType === 'table' ? 1 : 2}>
+                {filteredItems.map(entity => (
+                    <EntityCard key={entity.id} entity={entity} spread={entityListViewType === 'table'} />
+                ))}
+            </Grid>
+        </Box>
+    ), [entityListViewType, filteredItems])
 
     const [isAddEntityOpen, setIsAddEntityOpen] = useState(false);
     const handleAddEntity = () => setIsAddEntityOpen(true);
