@@ -29,7 +29,7 @@ function EntityCard(props: { entity: IEntityDetails }) {
     const Icon = EntityIcon(entity);
     return (
         <Grid xs={6} sm={4} lg={3}>
-            <Link href={`/app/entities/${entity.id}`} passHref>
+            <Link href={`/app/entities/${entity.id}`} passHref legacyBehavior>
                 <Card variant="outlined">
                     <Stack spacing={2}>
                         <Stack direction="row" spacing={2} alignItems="center">
