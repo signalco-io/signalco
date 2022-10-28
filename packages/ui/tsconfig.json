@@ -1,5 +1,6 @@
 {
-    "extends": "tsconfig/react-library.json",
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "@signalco/tsconfig/react-library.json",
     "include": [
         "."
     ],

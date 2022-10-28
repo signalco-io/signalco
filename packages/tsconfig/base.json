@@ -17,8 +17,7 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "preserveConstEnums": true,
-        "preserveWatchOutput": true,
-        "incremental": true
+        "preserveWatchOutput": true
     },
     "exclude": [
         "node_modules"
