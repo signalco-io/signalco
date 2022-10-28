@@ -1,0 +1,41 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Web",
+    "extends": "./base.json",
+    "compilerOptions": {
+        "allowJs": true,
+        "declaration": false,
+        "declarationMap": false,
+        "incremental": true,
+        "noEmit": true,
+        "jsx": "preserve",
+        "resolveJsonModule": true,
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "typeRoots": [
+            "../node_modules/@types",
+            "../@types"
+        ],
+        "module": "esnext",
+        "target": "es6",
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ]
+    },
+    "exclude": [
+        "node_modules",
+        "public",
+        "worker"
+    ],
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts"
+    ]
+}
