@@ -8,7 +8,6 @@ import SelectItems from '../../shared/form/SelectItems';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
 import useLocale from '../../../src/hooks/useLocale';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
-import IContact from '../../../src/contacts/IContact';
 import { setAsync } from '../../../src/contacts/ContactRepository';
 import Timeago from '../../../components/shared/time/Timeago';
 import AutoTable from '../../../components/shared/table/AutoTable';
@@ -32,7 +31,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
     const editContactValueDialogState = usePopupState({ variant: 'dialog', popupId: 'contactCreateDialog' });
     const [channelName, setChannelName] = useState('');
     const [contactName, setContactName] = useState('');
-    const [editingContact, setEditingContact] = useState<string | undefined>('');
+    const [editingContact, setEditingContact] = useState('');
     const [valueSerialized, setValueSerialized] = useState('');
 
     const handleCreateSubmit = async () => {
@@ -49,7 +48,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
         if (entity) {
             await setAsync({
                 entityId: entity.id,
-                channelName: entity.contacts.find(c => c.contactName === editingContact)?.channelName,
+                channelName: entity.contacts.find(c => c.contactName === editingContact)?.channelName ?? '',
                 contactName: editingContact
             }, valueSerialized);
         }
@@ -101,7 +100,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                 onClose={editContactValueDialogState.close}>
                 <Stack spacing={1}>
                     <SelectItems
-                        items={entity?.contacts?.map(c => ({ value: c.contactName, label: c.contactName }))}
+                        items={entity?.contacts?.map(c => ({ value: c.contactName, label: c.contactName })) ?? []}
                         value={editingContact ? [editingContact] : []}
                         onChange={(values) => setEditingContact(values[0])} />
                     <TextField value={valueSerialized} onChange={(e) => setValueSerialized(e.target.value)} />

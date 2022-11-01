@@ -3,6 +3,10 @@
     "extends": "@signalco/tsconfig/web.json",
     "compilerOptions": {
         "baseUrl": ".",
-        "outDir": "dist"
-    }
+        "outDir": "dist",
+        "paths": {
+            "*": ["./*"]
+        }
+    },
+    "include": ["src", "components", "next-env.d.ts"]
 }
