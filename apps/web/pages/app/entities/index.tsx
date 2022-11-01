@@ -22,9 +22,11 @@ import useAllEntities from '../../../src/hooks/useAllEntities';
 import Loadable from '../../../components/shared/Loadable/Loadable';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
+import { useEntityStatus } from '../../../components/entity/EntityStatus';
 
 function EntityCard(props: { entity: IEntityDetails, spread: boolean }) {
     const { entity, spread } = props;
+    const { hasStatus } = useEntityStatus(entity);
     const Icon = EntityIcon(entity);
 
     const columns = {
@@ -49,9 +51,11 @@ function EntityCard(props: { entity: IEntityDetails, spread: boolean }) {
                             <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
                             <Stack direction="row" spacing={1} alignItems="center">
                                 <EntityStatus entity={entity} />
-                                <Box style={{ opacity: 0.6, fontSize: '0.8rem', minWidth: spread ? '120px' : 0 }}>
-                                    <Timeago date={entityLastActivity(entity)} />
-                                </Box>
+                                {hasStatus && (
+                                    <Box style={{ opacity: 0.6, fontSize: '0.8rem', minWidth: spread ? '120px' : 0 }}>
+                                        <Timeago date={entityLastActivity(entity)} />
+                                    </Box>
+                                )}
                             </Stack>
                         </Stack>
                     </Stack>
