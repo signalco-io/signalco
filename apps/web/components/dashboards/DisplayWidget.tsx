@@ -18,8 +18,6 @@ export default function DisplayWidget(props: WidgetProps & DisplayWidgetProps) {
         rowSpan: (rest.config as any)?.rows || 2
     });
 
-    console.log(rest.config, span)
-
     return (
         <Box
             ref={elementRef}

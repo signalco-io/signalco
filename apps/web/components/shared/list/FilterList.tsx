@@ -39,7 +39,6 @@ export default function FilterList(props: FilterListProps) {
     }, [selected]);
 
     const handleToggle = (value: string) => {
-        console.log('handleToggle')
 
         const currentIndex = checked.indexOf(value);
         const newChecked = multiple ? [...checked] : [];
@@ -51,8 +50,6 @@ export default function FilterList(props: FilterListProps) {
         }
 
         setChecked(newChecked);
-
-        console.log('toggle2', newChecked)
 
         if (onSelected)
             onSelected(newChecked.length ? newChecked[0] : undefined);
