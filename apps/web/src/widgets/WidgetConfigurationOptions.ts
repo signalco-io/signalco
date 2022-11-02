@@ -13,3 +13,5 @@ export const DefaultTarget: IWidgetConfigurationOption = { name: 'target', label
 export const DefaultTargetMultiple: IWidgetConfigurationOption = { name: 'target', label: 'Target', type: 'deviceContactTarget', multiple: true };
 
 export const DefaultTargetWithValue: IWidgetConfigurationOption = { name: 'target', label: 'Target', type: 'deviceContactTargetWithValue' };
+
+export const DefaultTargetWithValueMultiple: IWidgetConfigurationOption = { name: 'target', label: 'Target', type: 'deviceContactTargetWithValue', multiple: true };

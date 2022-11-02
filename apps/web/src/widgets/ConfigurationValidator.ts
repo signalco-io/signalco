@@ -27,6 +27,7 @@ export const IsConfigurationValid = (config: any, options: IWidgetConfigurationO
                     return false;
                 }
                 break;
+            case 'deviceContactTargetWithValue':
             case 'deviceContactTarget':
                 if (opt.multiple){
                     if ((value as IContactPointerPartial[]).filter(v => isInvalidateDeviceContactTarget(v)).length) {
