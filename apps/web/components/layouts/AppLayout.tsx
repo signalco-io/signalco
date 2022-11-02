@@ -31,9 +31,7 @@ export function AppLayout(props: ChildrenProps) {
     <>
       <Stack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100vh', width: '100%' }}>
         {isFullScreen !== 'on' && (
-          <Sheet>
-            <NavProfile />
-          </Sheet>
+          <NavProfile />
         )}
         <Box sx={{ height: '100vh', overflow: 'auto', width: '100%', flexGrow: 1, position: 'relative' }}>
           {children}
