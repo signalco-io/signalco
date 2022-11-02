@@ -21,6 +21,7 @@ jobs:
               run: yarn stories-check
               id: runStoriesCheck
               continue-on-error: true
+              working-directory: apps/web/
             - name: Commit changes
               id: ccc
               if: steps.runStoriesCheck.outcome == 'failure'
