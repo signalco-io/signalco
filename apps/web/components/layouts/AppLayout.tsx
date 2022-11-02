@@ -11,7 +11,6 @@ import RealtimeService from '../../src/realtime/realtimeService';
 import PageNotificationService from '../../src/notifications/PageNotificationService';
 import useHashParam from '../../src/hooks/useHashParam';
 
-
 export function AppLayout(props: ChildrenProps) {
   const {
     children
@@ -26,17 +25,17 @@ export function AppLayout(props: ChildrenProps) {
   useEffect(() => {
     RealtimeService.startAsync();
     RealtimeService.queryClient = queryClient;
-  }, []);
+  }, [queryClient]);
 
   return (
     <>
-      <Stack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100%', width: '100%' }}>
+      <Stack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100vh', width: '100%' }}>
         {isFullScreen !== 'on' && (
           <Sheet>
             <NavProfile />
           </Sheet>
         )}
-        <Box sx={{ height: '100%', width: '100%', flexGrow: 1, position: 'relative' }}>
+        <Box sx={{ height: '100vh', overflow: 'auto', width: '100%', flexGrow: 1, position: 'relative' }}>
           {children}
         </Box>
       </Stack>
