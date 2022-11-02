@@ -68,9 +68,9 @@ function WidgetCard(props: IWidgetCardProps) {
 
     let bgColor;
     if (themeContext.isDark) {
-        bgColor = state ? 'action.selected' : undefined;
+        bgColor = state ? 'var(--joy-palette-background-body)' : 'var(--joy-palette-primary-900)';
     } else {
-        bgColor = state ? 'background.default' : undefined
+        bgColor = state ? undefined : 'var(--joy-palette-primary-100)'
     }
 
     return (
@@ -82,7 +82,7 @@ function WidgetCard(props: IWidgetCardProps) {
                     width: sizeWidth,
                     height: sizeHeight,
                     display: 'block',
-                    bgcolor: bgColor
+                    backgroundColor: bgColor
                 }}
                 variant="outlined">
                 {(!isLoading && needsConfiguration) ? (
