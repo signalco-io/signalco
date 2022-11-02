@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { Box, Stack } from '@mui/system';
 import { Button, Card, CardOverflow, IconButton, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
 import { Add as AddIcon, MoreVert as MoreVertIcon } from '@mui/icons-material';
+import Picker from 'components/shared/form/Picker';
+import CodeEditor from 'components/code/CodeEditor';
 import SelectItems from '../../shared/form/SelectItems';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
 import useLocale from '../../../src/hooks/useLocale';
@@ -61,6 +63,28 @@ function JsonVisualizer(props: { name: string, value: any }) {
     );
 }
 
+function DisplayJson(props: { json: string | undefined }) {
+    const [showSource, setShowSource] = useState(false);
+    const jsonObj = useMemo(() => JSON.parse(props.json ?? ''), [props.json]);
+    const jsonFormatted = useMemo(() => JSON.stringify(jsonObj, undefined, 4), [jsonObj]);
+
+    return (
+        <Box sx={{ position: 'relative', minWidth: '230px' }}>
+            {showSource ? (
+                <CodeEditor language="json" code={jsonFormatted} height={300} />
+            ) : (
+                <JsonVisualizer name="" value={jsonObj} />
+            )}
+            <Box sx={{ position: 'absolute', right: 0, top: 0 }}>
+                <Picker value={showSource ? 'source' : 'ui'} onChange={(_, s) => setShowSource(s === 'source')} options={[
+                    { value: 'ui', label: 'UI' },
+                    { value: 'source', label: 'Source' }
+                ]} />
+            </Box>
+        </Box>
+    );
+}
+
 function isJson(value: string | undefined) {
     try {
         if (typeof value === 'string' &&
@@ -81,7 +105,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
         id: c.contactName,
         name: c.contactName,
         channel: c.channelName,
-        value: isJson(c.valueSerialized) ? <JsonVisualizer name="" value={JSON.parse(c.valueSerialized ?? '')} /> : c.valueSerialized,
+        value: isJson(c.valueSerialized) ? <DisplayJson json={c.valueSerialized} /> : c.valueSerialized,
         lastActivity: <Timeago date={c.timeStamp} live />
     }));
     const isLoading = false;
