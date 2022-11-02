@@ -79,7 +79,7 @@ function WidgetShades(props: WidgetSharedProps) {
             <Grid xs={6}>
                 <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent="space-between">
                     <WindowVisual shadePerc={shadePerc} size={68} />
-                    <Typography fontWeight="light" noWrap>{label}</Typography>
+                    <Typography noWrap>{label}</Typography>
                 </Stack>
             </Grid>
             <Grid xs={6} sx={{ flexGrow: 1, backgroundColor: 'var(--joy-palette-primary-softBg)', borderLeft: '1px solid', borderColor: 'divider', borderRadius: '0 8px 8px 0' }}>
