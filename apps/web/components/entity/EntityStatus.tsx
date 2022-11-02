@@ -1,9 +1,9 @@
+import { useMemo } from 'react';
 import BoltIcon from '@mui/icons-material/Bolt';
 import DateTimeProvider from 'src/services/DateTimeProvider';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import { entityInError, entityLastActivity } from 'src/entity/EntityHelper';
 import DotIndicator from 'components/shared/indicators/DotIndicator';
-import { useMemo } from 'react';
 
 export function useEntityStatus(entity: IEntityDetails | undefined) {
     const hasStatus = entity && entity.type === 1;
@@ -16,7 +16,7 @@ export function useEntityStatus(entity: IEntityDetails | undefined) {
         isOffline,
         lastActivity,
         isStale
-    }), [isOffline, lastActivity, isStale]);
+    }), [hasStatus, isOffline, lastActivity, isStale]);
 
     return result;
 }
@@ -34,7 +34,7 @@ export default function EntityStatus(props: { entity: IEntityDetails | undefined
         statusColor = 'danger';
         content = <BoltIcon fontSize="small" />;
     }
-    else if (isOffline == null) {
+    else {
         if (!lastActivity) {
             statusColor = 'neutral';
         } else {

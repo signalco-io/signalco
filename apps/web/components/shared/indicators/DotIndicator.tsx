@@ -14,7 +14,7 @@ export default function DotIndicator(props: DotIndicatorProps) {
             width: size,
             height: size,
             borderRadius: size / 2,
-            backgroundColor: `var(--joy-palette-${color}-500)`,
+            backgroundColor: `var(--joy-palette-${color}-400)`,
             color: 'white',
             textAlign: 'center'
         }}>

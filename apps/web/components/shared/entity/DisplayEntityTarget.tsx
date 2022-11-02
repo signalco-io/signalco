@@ -74,7 +74,7 @@ function EntitySelection(props: { target: IContactPointerPartial | undefined, on
         <Loadable isLoading={entities.isLoading} error={entities.error}>
             <Stack spacing={1}>
                 <Box px={2}>
-                    <TextField fullWidth placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} />
+                    <TextField autoFocus fullWidth placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} />
                 </Box>
                 <List>
                     <ListItem>
