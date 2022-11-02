@@ -63,13 +63,10 @@ function WidgetConfigurationOption(props: { option: IWidgetConfigurationOption, 
     if (props.option.type === 'deviceContactTarget') {
         // Handle multi-contact target
         if (props.option.multiple) {
-            console.debug('widget config - options multiple')
             const valueItems = typeof props.value === 'undefined' ? [] : (Array.isArray(props.value) ? props.value : [props.value]);
             const elements = [];
-            console.debug('widget config - multiple value', valueItems)
             for (let i = 0; i <= valueItems.length; i++) {
                 const value = valueItems[i];
-                console.debug('widget config - multiple value', value)
                 elements.push(<DisplayEntityTarget selectContact key={`option-${i}`} target={value} onChanged={t => {
                     const newValues = [...valueItems];
                     newValues[i] = t;
@@ -83,6 +80,40 @@ function WidgetConfigurationOption(props: { option: IWidgetConfigurationOption, 
         // Handle single-contact target
         return <DisplayEntityTarget selectContact target={props.value} onChanged={t => props.onChange(t)} />
     } else if (props.option.type === 'deviceContactTargetWithValue') {
+        // Handle multi-contact target
+        if (props.option.multiple) {
+            const valueItems = typeof props.value === 'undefined' ? [] : (Array.isArray(props.value) ? props.value : [props.value]);
+            const elements = [];
+            for (let i = 0; i <= valueItems.length; i++) {
+                const value = valueItems[i];
+
+                elements.push(
+                    <Stack direction="row" spacing={1} key={`option-${i}`}>
+                        <WidgetConfigurationOption
+                            option={{ name: 'contact', label: 'Contact', type: 'deviceContactTarget' }}
+                            value={value}
+                            onChange={(t => {
+                                const newValue = { ...value, ...t };
+                                const newValues = [...valueItems];
+                                newValues[i] = newValue;
+                                return props.onChange(newValues.filter(i => typeof i !== 'undefined'));
+                            })} />
+                        <WidgetConfigurationOption
+                            option={{ name: 'value', label: 'Value', type: 'string' }}
+                            value={value?.valueSerialized}
+                            onChange={(t => {
+                                const newValue = { ...value, valueSerialized: t };
+                                const newValues = [...valueItems];
+                                newValues[i] = newValue;
+                                return props.onChange(newValues.filter(i => typeof i !== 'undefined'));
+                            })} />
+                    </Stack>
+                );
+            }
+
+            return <>{elements}</>;
+        }
+
         return (
             <Stack direction="row" spacing={1}>
                 <WidgetConfigurationOption
@@ -90,7 +121,6 @@ function WidgetConfigurationOption(props: { option: IWidgetConfigurationOption, 
                     value={props.value}
                     onChange={(t => {
                         const newValue = { ...props.value, ...t };
-                        console.log('new value', newValue);
                         return props.onChange(newValue);
                     })} />
                 <WidgetConfigurationOption

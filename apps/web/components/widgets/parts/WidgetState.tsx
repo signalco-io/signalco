@@ -6,8 +6,9 @@ import { Button, Typography } from '@mui/joy';
 import useContacts from 'src/hooks/useContacts';
 import { entityAsync } from 'src/entity/EntityRepository';
 import IContactPointer from 'src/contacts/IContactPointer';
+import IContact from 'src/contacts/IContact';
 import { WidgetSharedProps } from '../Widget';
-import { DefaultLabel, DefaultTargetMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
+import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
@@ -16,7 +17,8 @@ import ConductsService from '../../../src/conducts/ConductsService';
 
 const stateOptions = [
     DefaultLabel,
-    DefaultTargetMultiple,
+    { ...DefaultTargetWithValueMultiple, name: 'on', label: 'On' },
+    { ...DefaultTargetWithValueMultiple, name: 'off', label: 'Off' },
     { name: 'visual', label: 'Visual', type: 'select', default: 'lightbulb', data: [{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }] },
 ];
 
@@ -77,22 +79,31 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
 
 function WidgetState(props: WidgetSharedProps) {
     const { config } = props;
-    const contactPointers = useMemo(() => (Array.isArray(config?.target) ? config.target as IContactPointer[] : undefined), [config?.target]);
-    const entityIds = useMemo(() => (Array.isArray(config?.target) ? config.target as IContactPointer[] : undefined)?.map(i => i.entityId), [config?.target]);
-    const entities = useEntities(entityIds);
-    const contacts = useContacts(contactPointers);
+    const onContactPointers = useMemo(() => (Array.isArray(config?.on) ? config.on as IContactPointer[] : undefined), [config?.on]);
+    const onEntityIds = useMemo(() => (Array.isArray(config?.on) ? config.on as IContactPointer[] : undefined)?.map(i => i.entityId), [config?.on]);
+    const onEntities = useEntities(onEntityIds);
+    const onContacts = useContacts(onContactPointers);
+
     const [isLoading, setIsLoading] = useState(true);
 
     // Calc state from source value
     // If atleast one contact is true, this widget will set it's state to true
     let state = false;
-    if (contacts) {
-        for (let i = 0; i < contacts.length; i++) {
-            const contact = contacts[i];
-            if (typeof contact === 'undefined')
+    if (onContacts) {
+        for (let i = 0; i < onContacts.length; i++) {
+            const contact = onContacts[i];
+            if (typeof contact === 'undefined' || !contact.data)
                 continue;
 
-            if (contact.data?.valueSerialized === 'true') {
+                console.log('contact.data.valueSerialized', contact.data)
+                console.log('configcontact', config?.on?.find((e: IContact) =>
+                e.entityId === contact.data.entityId &&
+                e.channelName === contact.data.channelName &&
+                e.contactName === contact.data.contactName)?.valueSerialized)
+            if (contact.data.valueSerialized === config?.on?.find((e: IContact) =>
+                    e.entityId === contact.data.entityId &&
+                    e.channelName === contact.data.channelName &&
+                    e.contactName === contact.data.contactName)?.valueSerialized) {
                 state = true;
                 break;
             }
@@ -102,21 +113,22 @@ function WidgetState(props: WidgetSharedProps) {
             setIsLoading(false);
     }
 
-    const label = props.config?.label || (typeof entities !== 'undefined' ? entities[0]?.alias : '');
+    const label = props.config?.label || (typeof onEntities !== 'undefined' ? onEntities[0]?.alias : '');
     const Visual = useMemo(() => props.config?.visual === 'tv' ? TvVisual : LightBulbVisual, [props.config]);
 
     const handleStateChangeRequest = () => {
-        if (typeof entities === 'undefined') {
+        if (typeof onEntities === 'undefined') {
             console.warn('State change requested but device is undefined.');
             PageNotificationService.show('Can\'t execute action, widget is not loaded yet.', 'warning');
             return;
         }
 
-        executeStateActionsAsync((config.target as IContactPointer[]).map(d => ({
+        var targets = state ? config.off : config.on;
+        executeStateActionsAsync((targets as IContact[]).map(d => ({
             entityId: d.entityId,
             channelName: d.channelName,
             contactName: d.contactName,
-            valueSerialized: state ? 'false' : 'true',
+            valueSerialized: d.valueSerialized,
         })));
     };
 
@@ -127,7 +139,8 @@ function WidgetState(props: WidgetSharedProps) {
     return (
         <Button
             sx={{ position: 'relative', height: '100%', width: '100%', display: 'block', textAlign: 'left', margin: 0, padding: 0 }}
-            onClick={handleStateChangeRequest} >
+            onClick={handleStateChangeRequest}
+            variant="plain">
             <Stack sx={{ height: '100%', py: 2 }}>
                 <Box sx={{ px: 2 }}>
                     <Visual state={state} size={68} />

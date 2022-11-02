@@ -9,7 +9,7 @@ export interface IConduct {
 
 export default class ConductsService {
     private static async _updateLocalStateAsync(_: IConduct) {
-        throw new Error('not implemented');
+        console.warn('Implement local update or refetch');
         // const device = await DevicesRepository.getDeviceAsync(conduct.target.deviceId);
         // device?.updateState(
         //     conduct.target.channelName,

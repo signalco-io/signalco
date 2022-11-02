@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import dynamic from 'next/dynamic';
 import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
@@ -15,30 +15,30 @@ import useEntity from '../../../src/hooks/useEntity';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
+const stateOptions: IWidgetConfigurationOption[] = [
+    { name: 'targetUp', label: 'Up button', type: 'deviceContactTargetWithValue' },
+    { name: 'targetDown', label: 'Down button', type: 'deviceContactTargetWithValue' },
+    { name: 'stopValueSerialized', label: 'Stop value', type: 'string' },
+    { name: 'stopAfter', label: 'Stop after', type: 'number', dataUnit: 'seconds', optional: true },
+    DefaultWidth(4)
+];
+
 function WidgetShades(props: WidgetSharedProps) {
     const { config } = props;
-    const entity = useEntity(config?.target?.entityId);
-    const entityId = entity.data?.id;
+    const upEntity = useEntity(config?.targetUp?.entityId);
+    const downEntity = useEntity(config?.targetDown?.entityId);
 
-    const label = props.config?.label || entity?.data?.alias || '';
+    const label = props.config?.label ?? upEntity?.data?.alias ?? downEntity?.data?.alias ?? '';
 
     // TODO: Calc from source value
     const shadePerc = 0.3;
-
-    // TODO: Move outside of component
-    const stateOptions: IWidgetConfigurationOption[] = useMemo(() => [
-        { name: 'target', label: 'Target', type: 'deviceTarget' },
-        { name: 'targetContactUp', label: 'Up button', type: 'contactTarget', data: entityId },
-        { name: 'targetContactDown', label: 'Down button', type: 'contactTarget', data: entityId },
-        { name: 'stopAfter', label: 'Stop after', type: 'number', dataUnit: 'seconds', data: entityId, optional: true },
-        DefaultWidth(4)
-    ], [entityId]);
+    const stopValueSerialized = config?.stopValueSerialized;
 
     useWidgetOptions(stateOptions, props);
     useWidgetActive(true, props);
 
     const handleStateChangeRequest = (direction: 'up' | 'down' | 'stop') => {
-        if (typeof entityId === 'undefined') {
+        if (!upEntity || !downEntity) {
             console.warn('State change requested but device is undefined.');
             PageNotificationService.show('Can\'t execute action, widget is not loaded yet.', 'warning');
             return;
@@ -46,8 +46,8 @@ function WidgetShades(props: WidgetSharedProps) {
 
         const stopActions = (delay: number = 0) => {
             return [
-                { entityId: entityId, channelName: config?.targetContactDown?.channelName, contactName: config?.targetContactDown?.contactName, valueSerialized: 'false', delay },
-                { entityId: entityId, channelName: config?.targetContactUp?.channelName, contactName: config?.targetContactUp?.contactName, valueSerialized: 'false', delay },
+                { ...config?.targetUp, valueSerialized: stopValueSerialized, delay },
+                { ...config?.targetDown, valueSerialized: stopValueSerialized, delay },
             ];
         }
 
@@ -55,20 +55,10 @@ function WidgetShades(props: WidgetSharedProps) {
         const stopAfterDelay = config.stopAfter ? (Number.parseFloat(config.stopAfter) || 0) * 1000 : 0;
         switch (direction) {
             case 'up':
-                actions.push({
-                    entityId: entityId,
-                    channelName: config?.targetContactUp?.channelName,
-                    contactName: config?.targetContactUp?.contactName,
-                    valueSerialized: 'true'
-                })
+                actions.push(config?.targetUp)
                 break;
             case 'down':
-                actions.push({
-                    entityId: entityId,
-                    channelName: config?.targetContactDown?.channelName,
-                    contactName: config?.targetContactDown?.contactName,
-                    valueSerialized: 'true'
-                })
+                actions.push(config?.targetDown)
                 break;
             default:
             case 'stop':
@@ -92,11 +82,11 @@ function WidgetShades(props: WidgetSharedProps) {
                     <Typography fontWeight="light" noWrap>{label}</Typography>
                 </Stack>
             </Grid>
-            <Grid xs={6} sx={{ flexGrow: 1, bgcolor: 'background.paper', borderLeft: '1px solid', borderColor: 'divider', borderRadius: 2 }}>
+            <Grid xs={6} sx={{ flexGrow: 1, backgroundColor: 'var(--joy-palette-primary-softBg)', borderLeft: '1px solid', borderColor: 'divider', borderRadius: '0 8px 8px 0' }}>
                 <Stack sx={{ height: '100%' }} justifyContent="stretch">
-                    <Button onClick={() => handleStateChangeRequest('up')} sx={{ flexGrow: 1, borderBottom: '1px solid', borderColor: 'divider' }}><ArrowUpward /></Button>
-                    <Button onClick={() => handleStateChangeRequest('stop')} sx={{ flexGrow: 1 }}><Stop /></Button>
-                    <Button onClick={() => handleStateChangeRequest('down')} sx={{ flexGrow: 1, borderTop: '1px solid', borderColor: 'divider' }}><ArrowDownward /></Button>
+                    <Button variant="plain" onClick={() => handleStateChangeRequest('up')} sx={{ borderRadius: '0 8px 0 0', flexGrow: 1, borderBottom: '1px solid', borderColor: 'divider' }}><ArrowUpward /></Button>
+                    <Button variant="plain" onClick={() => handleStateChangeRequest('stop')} sx={{ borderRadius: 0, flexGrow: 1 }}><Stop /></Button>
+                    <Button variant="plain" onClick={() => handleStateChangeRequest('down')} sx={{ borderRadius: '0 0 8px 0', flexGrow: 1, borderTop: '1px solid', borderColor: 'divider' }}><ArrowDownward /></Button>
                 </Stack>
             </Grid>
         </Grid>
