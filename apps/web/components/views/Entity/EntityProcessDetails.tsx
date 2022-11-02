@@ -57,8 +57,6 @@ declare module ProcessConfigurationV1 {
 function Condition(props: { condition: ProcessConfigurationV1.Condition }) {
     const { condition } = props;
 
-    console.log(condition)
-
     return (
         <div>
             {(condition.type === 'contact') && (
