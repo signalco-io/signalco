@@ -1,7 +1,7 @@
 import IUser from 'src/users/IUser';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import { entitiesAsync, entityDeleteAsync, entityUpsertAsync } from 'src/entity/EntityRepository';
-import ContactRepository from 'src/contacts/ContactRepository';
+import { setAsync } from 'src/contacts/ContactRepository';
 import UserSettingsProvider from '../services/UserSettingsProvider';
 import { arrayMax } from '../helpers/ArrayHelpers';
 import { widgetType } from '../../components/widgets/Widget';
@@ -113,7 +113,7 @@ export async function getAllAsync() {
 
 export async function saveDashboardAsync(dashboard: IDashboardSetModel) {
     const id = await entityUpsertAsync(dashboard.id, 2, dashboard.name);
-    await ContactRepository.setAsync({
+    await setAsync({
             entityId: id,
             channelName: 'config',
             contactName: 'configuration'
