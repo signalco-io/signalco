@@ -18,7 +18,9 @@ export default function useContacts(pointers: IContactPointer[] | undefined) {
                     if (!entity)
                         entity = await entityAsync(pointer.entityId);
 
-                    const contact = entity.contacts?.find(c => c.channelName === pointer.channelName && c.contactName === c.contactName);
+                    const contact = entity.contacts?.find(c =>
+                        c.channelName === pointer.channelName &&
+                        c.contactName === pointer.contactName);
                     if (!contact)
                         throw new Error('Contact not found');
                     return contact;
