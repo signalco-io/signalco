@@ -8,5 +8,5 @@
             "*": ["./*"]
         }
     },
-    "include": ["src", "components", "pages", "next-env.d.ts"]
+    "include": ["src", "components", "pages", "next-env.d.ts", "@types"]
 }
