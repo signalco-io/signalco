@@ -1,8 +1,11 @@
 import { useMemo } from 'react';
 import { Container, Stack } from '@mui/system';
-import { Alert, Card, Typography } from '@mui/joy';
+import { Alert, Card, IconButton, Typography } from '@mui/joy';
+import ReportIcon from '@mui/icons-material/Report';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import useContact from 'src/hooks/useContact';
 import IEntityDetails from 'src/entity/IEntityDetails';
+import { setAsync } from 'src/contacts/ContactRepository';
 import Timeago from 'components/shared/time/Timeago';
 import DisplayDeviceTarget from 'components/shared/entity/DisplayEntityTarget';
 
@@ -83,15 +86,29 @@ function Condition(props: { condition: ProcessConfigurationV1.Condition }) {
 
 export default function EntityProcessDetails(props: { entity: IEntityDetails; }) {
     const { entity } = props;
+    const configurationErrorContactPointer = { entityId: entity.id, channelName: 'signalco', contactName: 'configurationError' };
 
     const configurationContact = useContact({ entityId: entity.id, channelName: 'signalco', contactName: 'configuration' });
     const config: ProcessConfigurationV1.Configuration = useMemo(() => configurationContact.data?.valueSerialized ? JSON.parse(configurationContact.data?.valueSerialized) : undefined, [configurationContact.data]);
-    const errorContact = useContact({ entityId: entity.id, channelName: 'signalco', contactName: 'configurationError' });
+    const errorContact = useContact(configurationErrorContactPointer);
+
+    const handleDismissError = async () => {
+        await setAsync(configurationErrorContactPointer, '');
+    }
+
     return (
         <Container>
             <Stack spacing={2}>
                 {errorContact.data?.valueSerialized && (
-                    <Alert color="danger">
+                    <Alert
+                        color="danger"
+                        sx={{ alignItems: 'flex-start' }}
+                        startDecorator={<ReportIcon sx={{ mx: '4px', fontSize: '24px' }} />}
+                        endDecorator={
+                            <IconButton size="sm" color="danger" onClick={handleDismissError}>
+                              <CloseRoundedIcon />
+                            </IconButton>
+                          }>
                         <Stack>
                             <Typography>Configuration error</Typography>
                             <Timeago date={errorContact.data.timeStamp} />

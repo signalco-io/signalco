@@ -11,6 +11,7 @@ import EntityProcessDetails from './EntityProcessDetails';
 import EntityOptions from './EntityOptions';
 import ContactsTable from './ContactsTable';
 
+
 export interface EntityDetailsViewProps {
     id: string;
 }
