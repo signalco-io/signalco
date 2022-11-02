@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { Box } from '@mui/system';
+import LinearProgress from '@mui/joy/LinearProgress';
 import { Alert, CircularProgress } from '@mui/joy';
 import LoadableProps from './LoadableProps';
 
@@ -13,7 +14,7 @@ export default function Loadable(props: LoadableProps) {
             case 'skeletonRect':
                 // return <Skeleton variant="rectangular" width={width ?? 120} height={height ?? 32} />;
             case 'linear':
-                // return <LinearProgress variant="indeterminate" />
+                return <LinearProgress />
             case 'circular':
             default:
                 return <Box textAlign="center"><CircularProgress /></Box>
