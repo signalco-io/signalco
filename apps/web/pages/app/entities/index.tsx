@@ -11,10 +11,11 @@ import IEntityDetails from 'src/entity/IEntityDetails';
 import { entityUpsertAsync } from 'src/entity/EntityRepository';
 import { entityLastActivity } from 'src/entity/EntityHelper';
 import Timeago from 'components/shared/time/Timeago';
+import SelectItems from 'components/shared/form/SelectItems';
 import Picker from 'components/shared/form/Picker';
 import EntityIcon from 'components/shared/entity/EntityIcon';
 import ConfigurationDialog from 'components/shared/dialog/ConfigurationDialog';
-import EntityStatus from 'components/entity/EntityStatus';
+import EntityStatus, { useEntityStatus } from 'components/entity/EntityStatus';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
 import useLocale from '../../../src/hooks/useLocale';
@@ -22,11 +23,11 @@ import useAllEntities from '../../../src/hooks/useAllEntities';
 import Loadable from '../../../components/shared/Loadable/Loadable';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
-import { useEntityStatus } from '../../../components/entity/EntityStatus';
+
 
 function EntityCard(props: { entity: IEntityDetails, spread: boolean }) {
     const { entity, spread } = props;
-    const { hasStatus } = useEntityStatus(entity);
+    const { hasStatus, isOffline, isStale } = useEntityStatus(entity);
     const Icon = EntityIcon(entity);
 
     const columns = {
@@ -49,13 +50,13 @@ function EntityCard(props: { entity: IEntityDetails, spread: boolean }) {
                         </Stack>
                         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
                             <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
-                            <Stack direction="row" spacing={1} alignItems="center">
-                                <EntityStatus entity={entity} />
-                                {hasStatus && (
-                                    <Box style={{ opacity: 0.6, fontSize: '0.8rem', minWidth: spread ? '120px' : 0 }}>
+                            <Stack direction="row" spacing={1} alignItems="center" sx={{ pr: spread ? 2 : 0 }}>
+                                {(hasStatus && (isStale || isOffline)) && (
+                                    <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
                                         <Timeago date={entityLastActivity(entity)} />
                                     </Box>
                                 )}
+                                <EntityStatus entity={entity} />
                             </Stack>
                         </Stack>
                     </Stack>
@@ -64,6 +65,22 @@ function EntityCard(props: { entity: IEntityDetails, spread: boolean }) {
         </Grid>
     );
 }
+
+const entityType = [
+    { value: 1, label: 'Device' },
+    { value: 2, label: 'Dashboard' },
+    { value: 3, label: 'Process' },
+    { value: 4, label: 'Station' },
+    { value: 5, label: 'Channel' }
+];
+
+const entityTypes = [
+    { value: '1', label: 'Devices' },
+    { value: '2', label: 'Dashboards' },
+    { value: '3', label: 'Processs' },
+    { value: '4', label: 'Stations' },
+    { value: '5', label: 'Channels' }
+];
 
 function EntityCreate() {
     const router = useRouter();
@@ -75,19 +92,11 @@ function EntityCreate() {
         router.push('/app/entities/' + id);
     };
 
-    const types = [
-        { value: 1, label: 'Device' },
-        { value: 2, label: 'Dashboard' },
-        { value: 3, label: 'Process' },
-        { value: 4, label: 'Station' },
-        { value: 5, label: 'Channel' }
-    ];
-
     return (
         <Stack spacing={2}>
             <Typography level="body2">{t('PickTypeHeader')}</Typography>
             <Stack spacing={1}>
-                {types.map(type => (
+                {entityType.map(type => (
                     <Button key={type.value} onClick={() => onType(type)}>{tType(type.label)}</Button>
                 ))}
             </Stack>
@@ -102,15 +111,22 @@ function Entities() {
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
     const [filteredItems, showSearch, searchText, handleSearchTextChange, isSearching] = useSearch(entityItems, filterFuncObjectStringProps);
 
+    const [selectedType, setSelectedType] = useState<string | undefined>('1');
+    const typedItems = useMemo(() => filteredItems.filter(e => {
+        console.log(e.type.toString(), selectedType,)
+        return e.type.toString() === selectedType;
+    }
+    ), [filteredItems, selectedType]);
+
     const results = useMemo(() => (
         <Box sx={{ px: 2 }}>
             <Grid container spacing={entityListViewType === 'table' ? 1 : 2}>
-                {filteredItems.map(entity => (
+                {typedItems.map(entity => (
                     <EntityCard key={entity.id} entity={entity} spread={entityListViewType === 'table'} />
                 ))}
             </Grid>
         </Box>
-    ), [entityListViewType, filteredItems])
+    ), [entityListViewType, typedItems]);
 
     const [isAddEntityOpen, setIsAddEntityOpen] = useState(false);
     const handleAddEntity = () => setIsAddEntityOpen(true);
@@ -119,7 +135,11 @@ function Entities() {
         <>
             <Stack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 2 }}>
-                    <Typography level="h3" sx={{ display: { xs: 'none', sm: 'inline-block' } }}>{t('Entities')}</Typography>
+                    <SelectItems
+                        value={selectedType ? [selectedType] : []}
+                        onChange={(v) => setSelectedType(v[0])}
+                        items={entityTypes.map(t => ({ value: t.value.toString(), label: t.label }))}
+                        heading />
                     <Stack direction="row" alignItems="center" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="end">
                         {showSearch && (
                             <TextField

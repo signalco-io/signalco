@@ -8,7 +8,8 @@ export interface ISelectItemsProps {
     items: { value: string, label?: ReactElement | string, disabled?: boolean }[],
     onChange: (values: string[]) => void,
     placeholder?: string,
-    fullWidth?: boolean
+    fullWidth?: boolean;
+    heading?: boolean;
 }
 
 function SelectItems(props: ISelectItemsProps) {
@@ -16,6 +17,7 @@ function SelectItems(props: ISelectItemsProps) {
         value,
         items,
         placeholder,
+        heading,
         onChange
     } = props;
 
@@ -28,6 +30,11 @@ function SelectItems(props: ISelectItemsProps) {
             value={value?.at(0)}
             placeholder={placeholder}
             onChange={handleOnChange}
+            variant={heading ? 'plain' : 'soft'}
+            size={heading ? 'lg' : undefined}
+            sx={{
+                fontSize: heading ? '1.6em' : undefined
+            }}
             renderValue={(selected) => {
                 // if (multiple)
                 //     return (
