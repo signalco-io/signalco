@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Box, Stack } from '@mui/system';
 import useEntity from 'src/hooks/useEntity';
 import useContact from 'src/hooks/useContact';
@@ -18,6 +18,7 @@ export interface EntityDetailsViewProps {
 export default function EntityDetailsView(props: EntityDetailsViewProps) {
     const { id } = props;
     const { data: entity } = useEntity(id);
+    const [showRaw, setShowRaw] = useState(false);
 
     const handleRename = async (newAlias: string) => {
         if (id) {
@@ -33,14 +34,15 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                 return null;
         }
     }, [entity]);
+    const showRawResolved = useMemo(() => detailsComponent == null || showRaw, [detailsComponent, showRaw]);
 
     const disabledContact = useContact(entity && { entityId: entity.id, channelName: 'config', contactName: 'disabled' });
     const isDisabled = disabledContact.data?.valueSerialized === 'true';
 
     return (
-        <Stack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 4 } }}>
+        <Stack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
             <Stack sx={{ px: 2 }} spacing={1}>
-                <Stack direction="row" spacing={1}>
+                <Stack direction="row" spacing={1} justifyContent="space-between">
                     <EditableInput
                         sx={{
                             fontWeight: 300,
@@ -49,7 +51,11 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                         text={entity?.alias || ''}
                         noWrap
                         onChange={handleRename} />
-                    <EntityOptions id={id} />
+                    <EntityOptions
+                        id={id}
+                        canHideRaw={detailsComponent != null}
+                        showRaw={showRaw}
+                        showRawChanged={(show) => setShowRaw(show)} />
                 </Stack>
                 <Stack direction="row" alignItems="center" spacing={1}>
                     <EntityStatus entity={entity} />
@@ -60,8 +66,13 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                 </Stack>
             </Stack>
             <Box sx={{ px: { xs: 1, sm: 2 } }}>
-                <ContactsTable entity={entity} />
-                {detailsComponent}
+                {showRawResolved ? (
+                    <ContactsTable entity={entity} />
+                ) : (
+                    <>
+                        {detailsComponent}
+                    </>
+                )}
             </Box>
         </Stack>
     );

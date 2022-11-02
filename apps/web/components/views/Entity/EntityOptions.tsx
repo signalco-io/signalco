@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
-import { Button, Menu, MenuItem } from '@mui/joy';
+import { Button, Divider, Menu, MenuItem } from '@mui/joy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import PageNotificationService from 'src/notifications/PageNotificationService';
 import useLocale from 'src/hooks/useLocale';
@@ -10,8 +10,15 @@ import useEntity from 'src/hooks/useEntity';
 import { entityDeleteAsync } from 'src/entity/EntityRepository';
 import ConfirmDeleteDialog from 'components/shared/dialog/ConfirmDeleteDialog';
 
-export default function EntityOptions(props: { id: string | undefined; }) {
-    const { id } = props;
+export interface EntityOptionsProps {
+    id: string | undefined;
+    canHideRaw: boolean;
+    showRaw: boolean;
+    showRawChanged: (show: boolean) => void;
+}
+
+export default function EntityOptions(props: EntityOptionsProps) {
+    const { id, canHideRaw, showRaw, showRawChanged } = props;
     const { t } = useLocale('App', 'Entities');
     const router = useRouter();
     const popupState = usePopupState({ variant: 'popover', popupId: 'entityOptionsMenu' });
@@ -21,6 +28,11 @@ export default function EntityOptions(props: { id: string | undefined; }) {
     const handleDelete = () => {
         popupState.close();
         setIsDeleteOpen(true);
+    };
+
+    const handleShowRaw = () => {
+        popupState.close();
+        showRawChanged(!showRaw);
     };
 
     const handleDeleteConfirm = async () => {
@@ -41,6 +53,8 @@ export default function EntityOptions(props: { id: string | undefined; }) {
                 <MoreHorizIcon />
             </Button>
             <Menu {...bindMenu(popupState)}>
+                {canHideRaw && <MenuItem onClick={handleShowRaw}>{showRaw ? 'Hide details' : 'Show details'}</MenuItem>}
+                <Divider />
                 <MenuItem onClick={handleDelete}>{t('DeleteButtonLabel')}</MenuItem>
             </Menu>
             <ConfirmDeleteDialog

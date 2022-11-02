@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
-import { Stack } from '@mui/system';
+import { Box, Stack } from '@mui/system';
 import { Button, Card, CardOverflow, IconButton, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
 import { Add as AddIcon, MoreVert as MoreVertIcon } from '@mui/icons-material';
 import SelectItems from '../../shared/form/SelectItems';
@@ -12,6 +12,67 @@ import { setAsync } from '../../../src/contacts/ContactRepository';
 import Timeago from '../../../components/shared/time/Timeago';
 import AutoTable from '../../../components/shared/table/AutoTable';
 
+function JsonNonArrayVisualizer(props: { name: string, value: any }) {
+    if (props.value === null ||
+        typeof (props.value) === 'undefined') {
+        return <div>null</div>
+    }
+
+    if (typeof props.value === 'object') {
+        const propertyNames = Object.keys(props.value);
+        const properties = typeof props.value !== 'undefined' && propertyNames
+            ? propertyNames.map(pn => ({ name: pn, value: props.value[pn] }))
+            : [];
+
+        return (
+            <div>
+                {properties && properties.map(prop =>
+                    <JsonVisualizer key={prop.name} name={prop.name} value={prop.value} />)}
+            </div>
+        );
+    }
+
+    return null;
+}
+function JsonArrayVisualizer(props: { name: string, value: Array<any> }) {
+    return (
+        <>
+            {props.value.map((v, i) => <JsonVisualizer key={`${props.name}-${i}`} name={i.toString()} value={v} />)}
+        </>
+    );
+}
+
+function JsonVisualizer(props: { name: string, value: any }) {
+    return (
+        <div>
+            <Stack spacing={1} direction="row" alignItems="center">
+                {props.name && <Typography>{props.name}</Typography>}
+                {(typeof props.value !== 'object' && !Array.isArray(props.value)) && (
+                    <Typography>{props.value?.toString()}</Typography>
+                )}
+                <Typography level="body3">({Array.isArray(props.value) ? `array(${props.value.length})` : typeof props.value})</Typography>
+            </Stack>
+            <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', px: 2 }}>
+                {Array.isArray(props.value)
+                    ? <JsonArrayVisualizer name={props.name} value={props.value as Array<any>} />
+                    : <JsonNonArrayVisualizer name={props.name} value={props.value} />}
+            </Box>
+        </div>
+    );
+}
+
+function isJson(value: string | undefined) {
+    try {
+        if (typeof value === 'string' &&
+            value[0] === '{' &&
+            typeof JSON.parse(value) !== 'undefined')
+            return true;
+        return false;
+    } catch {
+        return false;
+    }
+}
+
 export default function ContactsTable(props: { entity: IEntityDetails | undefined; }) {
     const { entity } = props;
     const { t } = useLocale('App', 'Entities');
@@ -20,7 +81,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
         id: c.contactName,
         name: c.contactName,
         channel: c.channelName,
-        value: c.valueSerialized,
+        value: isJson(c.valueSerialized) ? <JsonVisualizer name="" value={JSON.parse(c.valueSerialized ?? '')} /> : c.valueSerialized,
         lastActivity: <Timeago date={c.timeStamp} live />
     }));
     const isLoading = false;

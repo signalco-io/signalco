@@ -7,6 +7,7 @@ import { Box, Stack } from '@mui/system';
 import {
     Button,
     Card,
+    Chip,
     List,
     ListItem,
     ListItemButton,
@@ -197,7 +198,7 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                 sx={{ flexGrow: selecting === 'entity' ? 1 : 0 }}
                 onChange={handleEditEntity}
                 unmountOnExit
-                // disabled={selecting !== 'entity'}
+            // disabled={selecting !== 'entity'}
             >
                 <Typography>
                     {entitySelected ? (
@@ -289,7 +290,7 @@ export interface DisplayEntityTargetProps {
     selectContact?: boolean;
     selectValue?: boolean;
     value?: any;
-    onChanged: (updated: IContactPointerPartial | undefined, value: any | undefined) => void;
+    onChanged?: (updated: IContactPointerPartial | undefined, value: any | undefined) => void;
 }
 
 function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
@@ -320,10 +321,11 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                     <EntityIconLabel entityId={target?.entityId} description={entityDescription} />
                     <Stack spacing={1} direction="row" alignItems="center">
                         {(target && target.contactName && selectContact) && (
-                            // <Chip label={target.contactName ?? 'None'} />
                             <Stack direction="row" spacing={1} alignItems="end">
                                 <Typography level="body2">{target.contactName ?? 'None'}</Typography>
-                                <Typography fontWeight="bold">{value?.toString() ?? '-'}</Typography>
+                                {selectValue && (
+                                    <Typography fontWeight="bold">{value?.toString() ?? '-'}</Typography>
+                                )}
                             </Stack>
                         )}
                         <ChevronRightIcon />
