@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useQueryClient } from '@tanstack/react-query';
+import { Minimize } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
-import { IconButton, Sheet } from '@mui/joy';
-import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
+import { IconButton } from '@mui/joy';
 import NavProfile from '../NavProfile';
 import { ChildrenProps } from '../../src/sharedTypes';
 import RealtimeService from '../../src/realtime/realtimeService';
@@ -31,9 +31,7 @@ export function AppLayout(props: ChildrenProps) {
     <>
       <Stack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100vh', width: '100%' }}>
         {isFullScreen !== 'on' && (
-          <Sheet>
-            <NavProfile />
-          </Sheet>
+          <NavProfile />
         )}
         <Box sx={{ height: '100vh', overflow: 'auto', width: '100%', flexGrow: 1, position: 'relative' }}>
           {children}
@@ -47,7 +45,7 @@ export function AppLayout(props: ChildrenProps) {
           title="Exit fullscreen"
           sx={{ position: 'fixed', bottom: '12px', right: '12px' }}
           onClick={() => setFullScreenHash(undefined)}>
-          <FullscreenExitIcon fontSize="medium" />
+          <Minimize />
         </IconButton>
       )}
     </>

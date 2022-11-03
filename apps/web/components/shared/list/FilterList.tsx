@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Stack } from '@mui/system';
 import { Typography, Button } from '@mui/joy';
-import { ArrowDownward as ArrowDownwardIcon } from '@mui/icons-material';
 import SelectItems from '../form/SelectItems';
 import Checkbox from '../form/Checkbox';
+import { ExpandDown } from '@signalco/ui-icons';
 
 export interface FilterListItem {
     id: string;
@@ -91,7 +91,7 @@ export default function FilterList(props: FilterListProps) {
                 </Stack>
                 {(!isShowMore && shouldTruncate) && (
                     <Box>
-                        <Button startDecorator={<ArrowDownwardIcon />} onClick={handleToggleShowMore}>Show all</Button>
+                        <Button startDecorator={<ExpandDown />} onClick={handleToggleShowMore}>Show all</Button>
                     </Box>
                 )}
             </Box>

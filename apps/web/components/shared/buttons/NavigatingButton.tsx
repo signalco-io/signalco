@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@mui/joy';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { ChildrenProps } from 'src/sharedTypes';
+import { Navigate } from '@signalco/ui-icons';
 
 interface NavigatingButtonProps extends ChildrenProps {
     href: string;
@@ -23,7 +23,7 @@ export default function NavigatingButton(props: NavigatingButtonProps) {
                 variant={props.hideArrow ? 'plain' : 'solid'}
                 disabled={props.disabled}
                 size={props.size}
-                endDecorator={<KeyboardArrowRightIcon fontSize="small" />}
+                endDecorator={<Navigate size={16} />}
                 sx={{
                     '.JoyButton-endDecorator': {
                         opacity: props.hideArrow ? 0 : 1,

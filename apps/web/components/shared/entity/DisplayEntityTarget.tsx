@@ -13,7 +13,6 @@ import {
     TextField,
     Typography
 } from '@mui/joy';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import useContact from 'src/hooks/useContact';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import IContactPointerPartial from 'src/contacts/IContactPointerPartial';
@@ -23,6 +22,7 @@ import Loadable from '../Loadable/Loadable';
 import Popper from '../layout/Popper';
 import Accordion from '../layout/Accordion';
 import NoDataPlaceholder from '../indicators/NoDataPlaceholder';
+import { Navigate } from '@signalco/ui-icons';
 import useEntity from '../../../src/hooks/useEntity';
 import useAllEntities from '../../../src/hooks/useAllEntities';
 
@@ -327,7 +327,7 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                                 )}
                             </Stack>
                         )}
-                        <ChevronRightIcon />
+                        <Navigate />
                     </Stack>
                 </Stack>
             </Button>

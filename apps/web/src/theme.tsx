@@ -36,8 +36,8 @@ const theme = () => {
           primary: zincColor,
           neutral: neutralColor,
           background: {
-            body: '#000000',
-            //surface: '#131313',
+            body: 'var(--joy-palette-primary-900)',
+            //surface: 'var(--joy-palette-primary-900)',
             level1: '#00ff00',
             level2: '#00ffff',
             level3: '#0000ff',
@@ -51,7 +51,7 @@ const theme = () => {
           primary: zincColor,
           neutral: neutralColor,
           background: {
-            body: '#ffffff',
+            body: 'var(--joy-palette-primary-100)',
             // surface: '#ffffff',
             level1: '#00ff00',
             level2: '#00ffff',

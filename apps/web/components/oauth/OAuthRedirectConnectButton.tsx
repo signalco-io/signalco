@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { LoadingButton } from '@mui/lab';
+import { Button } from '@mui/joy';
 
 export default function OAuthRedirectConnectButton(props: { label: string; initiateUrl: string; queryParamName: string; onCode: (code: string) => Promise<void>; }) {
     const { label, initiateUrl, queryParamName, onCode } = props;
@@ -28,7 +28,7 @@ export default function OAuthRedirectConnectButton(props: { label: string; initi
     // TODO: Show "Connected" if already connected
     return (
         <Suspense>
-            <LoadingButton loading={!router.isReady || isLoading} variant="contained" href={initiateUrl}>{label}</LoadingButton>
+            <Button loading={!router.isReady || isLoading} variant="solid" href={initiateUrl}>{label}</Button>
         </Suspense>
     );
 }

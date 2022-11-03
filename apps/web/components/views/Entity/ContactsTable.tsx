@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
+import { Add, MoreVertical } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Button, Card, CardOverflow, IconButton, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
-import { Add as AddIcon, MoreVert as MoreVertIcon } from '@mui/icons-material';
 import Picker from 'components/shared/form/Picker';
 import CodeEditor from 'components/code/CodeEditor';
 import SelectItems from '../../shared/form/SelectItems';
@@ -146,7 +146,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                     <Typography>{t('Contacts')}</Typography>
                     <IconButton size="sm" {...bindTrigger(popupState)}>
-                        <MoreVertIcon />
+                        <MoreVertical />
                     </IconButton>
                 </Stack>
                 <CardOverflow>
@@ -158,13 +158,13 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
             <Menu {...bindMenu(popupState)}>
                 <MenuItem {...bindTrigger(createContactDialogState)}>
                     <ListItemDecorator>
-                        <AddIcon />
+                        <Add />
                     </ListItemDecorator>
                     {t('CreateContact')}
                 </MenuItem>
                 <MenuItem {...bindTrigger(editContactValueDialogState)}>
                     <ListItemDecorator>
-                        <AddIcon />
+                        <Add />
                     </ListItemDecorator>
                     {t('EditContact')}
                 </MenuItem>

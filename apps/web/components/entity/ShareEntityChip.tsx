@@ -1,10 +1,7 @@
 import { useState } from 'react';
+import { Clear, People, Send, Share } from '@signalco/ui-icons';
 import { Stack } from '@mui/system';
 import { Tooltip , IconButton, TextField } from '@mui/joy';
-import ShareIcon from '@mui/icons-material/Share';
-import SendIcon from '@mui/icons-material/Send';
-import PeopleAltSharpIcon from '@mui/icons-material/PeopleAltSharp';
-import ClearIcon from '@mui/icons-material/Clear';
 import IUser from 'src/users/IUser';
 import Chip from 'components/shared/indicators/Chip';
 import GentleSlide from 'components/shared/animations/GentleSlide';
@@ -59,7 +56,7 @@ function ShareEntityModal(props: IShareEntityModalProps) {
             titleActions={(
                 <Tooltip title={t('Share')}>
                     <IconButton onClick={handleShareWithUser} variant="plain">
-                        <ShareIcon />
+                        <Share />
                     </IconButton>
                 </Tooltip>
             )}
@@ -73,8 +70,8 @@ function ShareEntityModal(props: IShareEntityModalProps) {
                         sx={{ maxWidth: '270px' }}
                         onChange={(e) => setShareWithNewEmail(e.target.value)} />
                     <Stack direction="row">
-                        <IconButton onClick={handleSubmitShareWithNew} color="success" title={t('SendInvitation')}><SendIcon /></IconButton>
-                        <IconButton onClick={handleCancelShareWithNew} title={t('Cancel')}><ClearIcon /></IconButton>
+                        <IconButton onClick={handleSubmitShareWithNew} color="success" title={t('SendInvitation')}><Send /></IconButton>
+                        <IconButton onClick={handleCancelShareWithNew} title={t('Cancel')}><Clear /></IconButton>
                     </Stack>
                 </Stack>
             </GentleSlide>
@@ -99,7 +96,7 @@ function ShareEntityChip(props: IShareEntityChipProps) {
         <>
             <Chip
                 onClick={disableAction ? undefined : handleChipClick}
-                startDecorator={<PeopleAltSharpIcon fontSize="small" />}>
+                startDecorator={<People size={16} />}>
                 {entity?.sharedWith?.length ?? 0}
             </Chip>
             {(isModalOpen && entity) && <ShareEntityModal entity={entity} entityType={entityType} onClose={() => setIsModalOpen(false)} />}

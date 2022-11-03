@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import BoltIcon from '@mui/icons-material/Bolt';
+import { Lightning } from '@signalco/ui-icons';
 import DateTimeProvider from 'src/services/DateTimeProvider';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import { entityInError, entityLastActivity } from 'src/entity/EntityHelper';
@@ -32,7 +32,7 @@ export default function EntityStatus(props: { entity: IEntityDetails | undefined
     let content: React.ReactNode | undefined = undefined;
     if (isOffline) {
         statusColor = 'danger';
-        content = <BoltIcon fontSize="small" />;
+        content = <Lightning size={16} />;
     }
     else {
         if (!lastActivity) {

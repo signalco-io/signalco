@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
+import { MoreHorizontal } from '@signalco/ui-icons';
 import { Button, Divider, Menu, MenuItem } from '@mui/joy';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import PageNotificationService from 'src/notifications/PageNotificationService';
 import useLocale from 'src/hooks/useLocale';
 import useEntity from 'src/hooks/useEntity';
@@ -50,7 +50,7 @@ export default function EntityOptions(props: EntityOptionsProps) {
     return (
         <>
             <Button {...bindTrigger(popupState)}>
-                <MoreHorizIcon />
+                <MoreHorizontal />
             </Button>
             <Menu {...bindMenu(popupState)}>
                 {canHideRaw && <MenuItem onClick={handleShowRaw}>{showRaw ? 'Hide details' : 'Show details'}</MenuItem>}
