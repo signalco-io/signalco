@@ -5,7 +5,7 @@ import {
     usePopupState,
 } from 'material-ui-popup-state/hooks';
 import { Box, Stack } from '@mui/system';
-import { Button, ListItemDecorator, Menu, MenuItem, Sheet } from '@mui/joy';
+import { Button, Card, CardOverflow, ListItemDecorator, Menu, MenuItem } from '@mui/joy';
 import MoreHorizSharpIcon from '@mui/icons-material/MoreHorizSharp';
 import { Delete, Settings } from '@mui/icons-material';
 import useUserTheme from 'src/hooks/useUserTheme';
@@ -68,34 +68,33 @@ function WidgetCard(props: IWidgetCardProps) {
 
     let bgColor;
     if (themeContext.isDark) {
-        bgColor = state ? 'var(--joy-palette-background-body)' : 'var(--joy-palette-primary-900)';
+        bgColor = state ? 'var(--joy-palette-background-surface)' : 'var(--joy-palette-background-body)';
     } else {
         bgColor = state ? undefined : 'var(--joy-palette-primary-100)'
     }
 
     return (
         <>
-            <Sheet
+            <Card
                 sx={{
-                    position: 'relative',
-                    borderRadius: 8,
                     width: sizeWidth,
                     height: sizeHeight,
-                    display: 'block',
                     backgroundColor: bgColor
                 }}
                 variant="outlined">
-                {(!isLoading && needsConfiguration) ? (
-                    <Stack justifyContent="stretch" sx={{ height: '100%' }}>
-                        <Button disabled={!isEditMode} size="lg" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
-                    </Stack>
-                ) : (<>{children}</>)}
-                {isEditMode && (
-                    <Box sx={{ position: 'absolute', top: 0, right: 0 }}>
-                        <Button sx={{ minWidth: '42px' }}  {...bindTrigger(popupState)}><MoreHorizSharpIcon /></Button>
-                    </Box>
-                )}
-            </Sheet>
+                <CardOverflow sx={{ p: 0 }}>
+                    {(!isLoading && needsConfiguration) ? (
+                        <Stack justifyContent="stretch" sx={{ height: '100%' }}>
+                            <Button disabled={!isEditMode} size="lg" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
+                        </Stack>
+                    ) : (<>{children}</>)}
+                    {isEditMode && (
+                        <Box sx={{ position: 'absolute', top: 0, right: 0 }}>
+                            <Button sx={{ minWidth: '42px' }}  {...bindTrigger(popupState)}><MoreHorizSharpIcon /></Button>
+                        </Box>
+                    )}
+                </CardOverflow>
+            </Card>
             {options && <WidgetConfiguration onConfiguration={handleOnConfiguration} options={options} config={config} isOpen={isConfiguring} />}
             <Menu {...bindMenu(popupState)}>
                 {options && (

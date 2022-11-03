@@ -40,7 +40,7 @@ function EntityCard(props: { entity: IEntityDetails, spread: boolean }) {
     return (
         <Grid {...columns}>
             <Link href={`/app/entities/${entity.id}`} passHref legacyBehavior>
-                <Card variant={spread ? 'outlined' : 'outlined'} sx={spread ? { p: 1 } : {}}>
+                <Card variant="outlined" sx={spread ? { p: 1 } : {}}>
                     <Stack spacing={2} direction={spread ? 'row' : 'column'} justifyContent={spread ? 'space-between' : undefined}>
                         <Stack direction="row" spacing={2} alignItems="center">
                             <Avatar variant={spread ? 'plain' : 'soft'}>
