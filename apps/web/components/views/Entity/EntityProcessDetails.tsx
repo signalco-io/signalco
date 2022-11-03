@@ -1,12 +1,11 @@
 import { useMemo } from 'react';
 import { Container, Stack } from '@mui/system';
 import { Alert, Card, IconButton, Typography } from '@mui/joy';
-import ReportIcon from '@mui/icons-material/Report';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import useContact from 'src/hooks/useContact';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import { setAsync } from 'src/contacts/ContactRepository';
 import Timeago from 'components/shared/time/Timeago';
+import { Close, Warning } from 'components/shared/Icons';
 import DisplayDeviceTarget from 'components/shared/entity/DisplayEntityTarget';
 
 declare module ProcessConfigurationV1 {
@@ -101,10 +100,10 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                     <Alert
                         color="danger"
                         sx={{ alignItems: 'flex-start' }}
-                        startDecorator={<ReportIcon sx={{ mx: '4px', fontSize: '24px' }} />}
+                        startDecorator={<Warning />}
                         endDecorator={
                             <IconButton size="sm" color="danger" onClick={handleDismissError}>
-                              <CloseRoundedIcon />
+                              <Close />
                             </IconButton>
                           }>
                         <Stack>

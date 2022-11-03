@@ -2,10 +2,10 @@ import React from 'react';
 import NextLink from 'next/link';
 import { Box, Stack } from '@mui/system';
 import { Alert, Link, TextField, Tooltip, Typography } from '@mui/joy';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import Loadable from '../Loadable/Loadable';
 import IErrorProps from '../interfaces/IErrorProps';
 import ResultsPlaceholder from '../indicators/ResultsPlaceholder';
+import { ExternalLink } from '../Icons';
 import { ChildrenProps } from '../../../src/sharedTypes';
 import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
 import { LocalizeFunc } from '../../../src/hooks/useLocale';
@@ -61,7 +61,7 @@ function CellRenderer(props: IAutoTableCellRendererProps) {
       <Tooltip title={props.link || props.value}>
         <Box onClick={props.hasClick ? props.onClick : undefined} sx={{ cursor: props.hasClick ? 'pointer' : 'default' }}>
           <Link href={props.link || props.value} rel="noopener" target="_blank">
-            <OpenInNewIcon style={props.style} fontSize="small" />
+            <ExternalLink style={props.style} size={16} />
           </Link>
         </Box>
       </Tooltip>

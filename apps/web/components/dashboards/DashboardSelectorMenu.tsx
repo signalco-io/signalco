@@ -2,14 +2,12 @@ import React from 'react';
 import { PopupState } from 'material-ui-popup-state/hooks';
 import { Stack } from '@mui/system';
 import { Button, Card, Divider, IconButton, Typography } from '@mui/joy';
-import PushPinSharpIcon from '@mui/icons-material/PushPinSharp';
-import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
-import { AddSharp } from '@mui/icons-material';
 import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
 import useDashboards from 'src/hooks/dashboards/useDashboards';
+import { Add, Pin, PinOff } from 'components/shared/Icons';
 import ShareEntityChip from '../entity/ShareEntityChip';
 import useLocale from '../../src/hooks/useLocale';
 import useHashParam from '../../src/hooks/useHashParam';
@@ -53,7 +51,7 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
                     {dashboard.name}
                 </Button>
                 <IconButton sx={{ position: 'absolute', right: 0, height: '100%' }} onClick={() => onFavorite(dashboard.id)}>
-                    {dashboard.isFavorite ? <PushPinSharpIcon /> : <PushPinOutlinedIcon />}
+                    {dashboard.isFavorite ? <Pin /> : <PinOff />}
                 </IconButton>
             </Stack>
         </div>
@@ -149,7 +147,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
                         </SortableContext>
                     </DndContext>
                 </Stack>
-                <Button variant="plain" onClick={handleNewDashboard} startDecorator={<AddSharp />}>{t('NewDashboard')}</Button>
+                <Button variant="plain" onClick={handleNewDashboard} startDecorator={<Add />}>{t('NewDashboard')}</Button>
             </Stack>
             <Divider />
             <Stack>

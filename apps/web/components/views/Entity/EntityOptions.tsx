@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { Button, Divider, Menu, MenuItem } from '@mui/joy';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import PageNotificationService from 'src/notifications/PageNotificationService';
 import useLocale from 'src/hooks/useLocale';
 import useEntity from 'src/hooks/useEntity';
 import { entityDeleteAsync } from 'src/entity/EntityRepository';
+import { MoreHorizontal } from 'components/shared/Icons';
 import ConfirmDeleteDialog from 'components/shared/dialog/ConfirmDeleteDialog';
 
 export interface EntityOptionsProps {
@@ -50,7 +50,7 @@ export default function EntityOptions(props: EntityOptionsProps) {
     return (
         <>
             <Button {...bindTrigger(popupState)}>
-                <MoreHorizIcon />
+                <MoreHorizontal />
             </Button>
             <Menu {...bindMenu(popupState)}>
                 {canHideRaw && <MenuItem onClick={handleShowRaw}>{showRaw ? 'Hide details' : 'Show details'}</MenuItem>}

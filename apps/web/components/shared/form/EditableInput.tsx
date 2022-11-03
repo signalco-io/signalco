@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Stack, SystemStyleObject } from '@mui/system';
 import { Box, IconButton, Input, Theme, Typography } from '@mui/joy';
-import { Close, Edit, Save } from '@mui/icons-material';
+import { Close, Save, Edit } from '../Icons';
 
 interface IEditableInputProps {
     text: string,
@@ -77,7 +77,7 @@ function EditableInput(props: IEditableInputProps) {
                     '& > .editIndicator': { visibility: 'hidden' },
                     '&:hover': { '& > .editIndicator': { visibility: 'visible' } },
                     ...sx
-                }} noWrap={noWrap}>{text}<span className="editIndicator"><Edit sx={{ ml: 1, verticalAlign: 'middle' }} /></span></Typography>
+                }} noWrap={noWrap}>{text}<span className="editIndicator"><Edit /></span></Typography>
             </Box>
         )
     }

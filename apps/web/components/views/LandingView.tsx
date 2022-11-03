@@ -6,11 +6,11 @@ import dynamic from 'next/dynamic';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack, SxProps, Theme } from '@mui/system';
 import { Button, Divider, Typography } from '@mui/joy';
-import { GitHub, KeyboardArrowRight } from '@mui/icons-material';
 import AppSettingsProvider from 'src/services/AppSettingsProvider';
 import useUserTheme from 'src/hooks/useUserTheme';
 import Container from 'components/shared/layout/Container';
 import LinkImage from 'components/shared/ImageLink';
+import { Github, Navigate } from 'components/shared/Icons';
 import GentleSlide from 'components/shared/animations/GentleSlide';
 import Fade from 'components/shared/animations/Fade';
 import DiscoverVisual from 'components/pages/landing/visuals/DiscoverVisual';
@@ -232,8 +232,8 @@ export default function LandingPageView() {
             direction="horizontal">
             <Stack alignItems="center">
               <Button
-                startDecorator={<GitHub />}
-                endDecorator={<KeyboardArrowRight />}
+                startDecorator={<Github />}
+                endDecorator={<Navigate />}
                 href="https://github.com/signalco-io"
                 size="lg">signalco on GitHub</Button>
             </Stack>

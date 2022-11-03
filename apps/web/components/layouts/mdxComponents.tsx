@@ -4,13 +4,12 @@ import React, { memo } from 'react';
 import NextLink from 'next/link';
 import { Box, Stack } from '@mui/system';
 import { Divider, Link, Sheet, Typography } from '@mui/joy';
-import LinkIcon from '@mui/icons-material/Link';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import useUserTheme from 'src/hooks/useUserTheme';
 import Loadable from 'components/shared/Loadable/Loadable';
 import Checkbox from 'components/shared/form/Checkbox';
 import IconButtonCopyToClipboard from 'components/shared/buttons/IconButtonCopyToClipboard';
 import MdxPageLayout from './MdxPageLayout';
+import { Copy, Link as LinkIcon } from '../shared/Icons';
 import { ChildrenProps } from '../../src/sharedTypes';
 import { useLocaleHelpers } from '../../src/hooks/useLocale';
 import useIsClient from '../../src/hooks/useIsClient';
@@ -219,7 +218,7 @@ const components: any = {
                         </Loadable>
                         <Box sx={{ position: 'absolute', right: 0, top: 0 }}>
                             <IconButtonCopyToClipboard title={t('CopyCodeToClipboard')} value={children}>
-                                <ContentCopyIcon fontSize="small" />
+                                <Copy size={16} />
                             </IconButtonCopyToClipboard>
                         </Box>
                     </Sheet>

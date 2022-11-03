@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { Stack } from '@mui/system';
 import Switch from '@mui/joy/Switch';
 import { IconButton, Slider, Typography } from '@mui/joy';
-import { PlayArrow as PlayArrowIcon } from '@mui/icons-material';
 import throttle from 'src/helpers/Throttle';
 import blendColors from 'src/helpers/BlendColors';
 import IContact from 'src/contacts/IContact';
@@ -76,7 +75,7 @@ export default function InputContactValue(props: InputContactValueProps) {
                     multiple={dataValuesMultiple}
                     onChange={handleDataValuesChanged}
                     label={''} />}
-                <IconButton onClick={handleActionClick} size="lg"><PlayArrowIcon /></IconButton>
+                <IconButton onClick={handleActionClick} size="lg"><Play /></IconButton>
             </Stack>
         );
     } else if (dataType === 'double') {

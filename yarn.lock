@@ -1661,13 +1661,6 @@
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.10.12.tgz#ff36abc5f4aac3c762d116e12ab51c2688d93da1"
   integrity sha512-cR8lOS606G++iVHR8I6ySgMAEiPoA3DxO/nLeqiv7w7d1707kvKoV4/7SWjh4ui+kHb052xlf/G196q2EKx31w==
 
-"@mui/icons-material@5.10.9":
-  version "5.10.9"
-  resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.10.9.tgz#f9522c49797caf30146acc576e37ecb4f95bbc38"
-  integrity sha512-sqClXdEM39WKQJOQ0ZCPTptaZgqwibhj2EFV9N0v7BU1PO8y4OcX/a2wIQHn4fNuDjIZktJIBrmU23h7aqlGgg==
-  dependencies:
-    "@babel/runtime" "^7.19.0"
-
 "@mui/joy@5.0.0-alpha.52":
   version "5.0.0-alpha.52"
   resolved "https://registry.yarnpkg.com/@mui/joy/-/joy-5.0.0-alpha.52.tgz#5fbab73e51396e1c866134862d69c053707a3cf2"
@@ -9543,6 +9536,11 @@ lru-cache@^6.0.0:
   integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
   dependencies:
     yallist "^4.0.0"
+
+lucide-react@^0.98.0:
+  version "0.98.0"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.98.0.tgz#fa80f2ae62d4daab43a9d44a374a840cde835495"
+  integrity sha512-EWafUXkOQD6Wa53paYL2/odob18Q0ZE2WKGzKCpin0n+nJWZsnuVu5AyDU1bImZ9VFUh312gw7ywafgeaxbRAg==
 
 magic-string@^0.25.0, magic-string@^0.25.7:
   version "0.25.9"

@@ -1,9 +1,8 @@
 import { compareVersions } from 'compare-versions';
 import { Button } from '@mui/joy';
-import UploadIcon from '@mui/icons-material/Upload';
-import CheckIcon from '@mui/icons-material/Check';
 import PageNotificationService from 'src/notifications/PageNotificationService';
 import useLoadAndError from 'src/hooks/useLoadAndError';
+import { Check, Upload } from 'components/shared/Icons';
 import StationsRepository from '../../src/stations/StationsRepository';
 import useLocale, { localizer, useLocalePlaceholders } from '../../src/hooks/useLocale';
 
@@ -45,7 +44,7 @@ export default function StationCheckUpdate(props: { stationId: string[] | string
 
     return (
         <Button
-            startDecorator={canUpdate ? <UploadIcon /> : <CheckIcon />}
+            startDecorator={canUpdate ? <Upload /> : <Check />}
             variant="outlined"
             disabled={!canUpdate}
             onClick={handleUpdate}>

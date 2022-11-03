@@ -6,9 +6,8 @@ import {
 } from 'material-ui-popup-state/hooks';
 import { Box, Stack } from '@mui/system';
 import { Button, Card, CardOverflow, ListItemDecorator, Menu, MenuItem } from '@mui/joy';
-import MoreHorizSharpIcon from '@mui/icons-material/MoreHorizSharp';
-import { Delete, Settings } from '@mui/icons-material';
 import useUserTheme from 'src/hooks/useUserTheme';
+import { Delete, MoreHorizontal, Settings } from 'components/shared/Icons';
 import WidgetConfiguration from './WidgetConfiguration';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
@@ -90,7 +89,7 @@ function WidgetCard(props: IWidgetCardProps) {
                     ) : (<>{children}</>)}
                     {isEditMode && (
                         <Box sx={{ position: 'absolute', top: 0, right: 0 }}>
-                            <Button sx={{ minWidth: '42px' }}  {...bindTrigger(popupState)}><MoreHorizSharpIcon /></Button>
+                            <Button sx={{ minWidth: '42px' }}  {...bindTrigger(popupState)}><MoreHorizontal /></Button>
                         </Box>
                     )}
                 </CardOverflow>

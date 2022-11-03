@@ -3,14 +3,12 @@ import Image from 'next/image';
 import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
 import { Card, Typography } from '@mui/joy';
-import WatchLaterIcon from '@mui/icons-material/WatchLater';
-import LaunchIcon from '@mui/icons-material/Launch';
-import { Cancel as CancelIcon, CheckCircle } from '@mui/icons-material';
 import green from 'src/colors/green';
 import grey from 'src/colors/gray';
 import amber from 'src/colors/amber';
 import FilterList from 'components/shared/list/FilterList';
 import Chip from 'components/shared/indicators/Chip';
+import { Check, Close, ExternalLink, Hourglass } from 'components/shared/Icons';
 import PageCenterHeader from 'components/pages/PageCenterHeader';
 import Gallery from 'components/gallery/Gallery';
 import contentData from './content.json';
@@ -21,7 +19,7 @@ import SignalcoLogo from '../../components/icons/SignalcoLogo';
 
 
 function StoreStockStatusBadge(props: { status: number | undefined }) {
-    let Icon = CancelIcon;
+    let Icon = Close;
     let opacity = 0.6;
     let text = 'Out of stock';
     let color: string = grey[400];
@@ -30,19 +28,19 @@ function StoreStockStatusBadge(props: { status: number | undefined }) {
         case 0:
             break;
         case 1:
-            Icon = CheckCircle;
+            Icon = Check;
             opacity = 1;
             text = 'In stock';
             color = green[400];
             break;
         case 2:
-            Icon = LaunchIcon;
+            Icon = ExternalLink;
             opacity = 1;
             text = 'Sold elsewhere';
             color = grey[400];
             break;
         case 3:
-            Icon = WatchLaterIcon;
+            Icon = Hourglass;
             opacity = 1;
             text = 'On backorder';
             color = amber[400];
@@ -51,7 +49,7 @@ function StoreStockStatusBadge(props: { status: number | undefined }) {
 
     return (
         <Stack direction="row" justifyItems="center" alignItems="center" sx={{ opacity: opacity }}>
-            <Icon sx={{ fontSize: '1.3rem', color: color }} />
+            <Icon color={color} />
             &nbsp;
             <Typography fontSize="0.8rem" sx={{ color: color }}>{text}</Typography>
         </Stack>

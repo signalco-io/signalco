@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Box, Stack } from '@mui/system';
 import { AspectRatio, Card, CardOverflow, Grid, IconButton, TextField, Typography } from '@mui/joy';
-import { AddOutlined } from '@mui/icons-material';
+import { Add } from 'components/shared/Icons';
 import { widgetType } from '../widgets/Widget';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
 
@@ -83,7 +83,7 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
                                             <Typography level="body2">{availableWidget.description}</Typography>
                                         </div>
                                         <IconButton disabled={props.onAddWidget == null} aria-label="Add to dashboard" onClick={() => props.onAddWidget && props.onAddWidget(Array.isArray(availableWidget.type) ? availableWidget.type[0] : availableWidget.type)}>
-                                            <AddOutlined />
+                                            <Add />
                                         </IconButton>
                                     </Stack>
                                 </Stack>
