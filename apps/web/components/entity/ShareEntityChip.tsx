@@ -96,7 +96,7 @@ function ShareEntityChip(props: IShareEntityChipProps) {
         <>
             <Chip
                 onClick={disableAction ? undefined : handleChipClick}
-                startDecorator={<People fontSize="small" />}>
+                startDecorator={<People size={16} />}>
                 {entity?.sharedWith?.length ?? 0}
             </Chip>
             {(isModalOpen && entity) && <ShareEntityModal entity={entity} entityType={entityType} onClose={() => setIsModalOpen(false)} />}
