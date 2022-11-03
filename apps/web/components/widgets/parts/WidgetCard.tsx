@@ -7,14 +7,12 @@ import {
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Button, Card, CardOverflow, ListItemDecorator, Menu, MenuItem } from '@mui/joy';
-import useUserTheme from 'src/hooks/useUserTheme';
 import WidgetConfiguration from './WidgetConfiguration';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
 
 interface IWidgetCardProps {
     children: JSX.Element,
-    state: boolean,
     isEditMode?: boolean
     config?: any,
     options?: IWidgetConfigurationOption[],
@@ -25,15 +23,12 @@ interface IWidgetCardProps {
 function WidgetCard(props: IWidgetCardProps) {
     const {
         children,
-        state,
         isEditMode,
         options,
         config,
         onConfigured,
         onRemove
     } = props;
-
-    const themeContext = useUserTheme();
 
     const width = (config as any)?.columns || 2;
     const height = (config as any)?.rows || 2;
@@ -65,28 +60,27 @@ function WidgetCard(props: IWidgetCardProps) {
         }
     }
 
-    let bgColor;
-    if (themeContext.isDark) {
-        bgColor = state ? 'var(--joy-palette-background-surface)' : 'var(--joy-palette-background-body)';
-    } else {
-        bgColor = state ? undefined : 'var(--joy-palette-primary-100)'
-    }
-
     return (
         <>
             <Card
                 sx={{
                     width: sizeWidth,
                     height: sizeHeight,
-                    backgroundColor: bgColor
+                    position: 'relative'
                 }}
                 variant="outlined">
-                <CardOverflow sx={{ p: 0 }}>
+                <CardOverflow sx={{
+                    p: 0,
+                    width: sizeWidth,
+                    height: sizeHeight,
+                }}>
                     {(!isLoading && needsConfiguration) ? (
                         <Stack justifyContent="stretch" sx={{ height: '100%' }}>
                             <Button disabled={!isEditMode} size="lg" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
                         </Stack>
-                    ) : (<>{children}</>)}
+                    ) : (
+                        <>{children}</>
+                    )}
                     {isEditMode && (
                         <Box sx={{ position: 'absolute', top: 0, right: 0 }}>
                             <Button sx={{ minWidth: '42px' }}  {...bindTrigger(popupState)}><MoreHorizontal /></Button>

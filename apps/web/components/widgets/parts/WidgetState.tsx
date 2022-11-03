@@ -11,7 +11,6 @@ import { WidgetSharedProps } from '../Widget';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import PageNotificationService from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
 import useEntities from '../../../src/hooks/useEntities';
 import ConductsService from '../../../src/conducts/ConductsService';
 
@@ -134,7 +133,6 @@ function WidgetState(props: WidgetSharedProps) {
 
     // Configure widget
     useWidgetOptions(stateOptions, props);
-    useWidgetActive(state, props);
 
     return (
         <Button

@@ -9,7 +9,6 @@ import IContactPointer from 'src/contacts/IContactPointer';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultTarget, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
 
 const stateOptions = [
     DefaultTarget,
@@ -37,12 +36,11 @@ function WidgetIndicator(props: WidgetSharedProps) {
     }
 
     useWidgetOptions(stateOptions, props);
-    useWidgetActive(true, props);
 
     return (
         <Button
             variant="plain"
-            sx={{ height: '100%', width: '100%', display: 'block', textAlign: 'left' }}
+            sx={{ position: 'relative', height: '100%', width: '100%', display: 'block', textAlign: 'left', margin: 0, padding: 0 }}
             onClick={handleSelected} >
             <Stack sx={{ height: '100%' }} alignItems="center" justifyContent="flex-end">
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>

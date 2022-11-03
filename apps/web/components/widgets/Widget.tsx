@@ -27,8 +27,7 @@ export interface WidgetSharedProps {
     id: string,
     isEditMode: boolean,
     config: any,
-    onOptions: (opts: IWidgetConfigurationOption[]) => void,
-    onActive: (active: boolean) => void
+    onOptions: (opts: IWidgetConfigurationOption[]) => void
 }
 
 export interface WidgetSpecifigProps {
@@ -110,7 +109,6 @@ function Widget(props: WidgetProps) {
 
     return (
         <WidgetCard
-            state={active}
             isEditMode={props.isEditMode}
             onConfigured={props.setConfig}
             onRemove={props.onRemove}
