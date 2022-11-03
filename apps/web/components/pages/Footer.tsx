@@ -1,12 +1,10 @@
 import React, { ReactNode } from 'react';
 import NextLink from 'next/link';
+import { Github, Twitter } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Grid, IconButton, Typography, Link as JoyLink } from '@mui/joy';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import RedditIcon from '@mui/icons-material/Reddit';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import Container from 'components/shared/layout/Container';
-import SignalcoLogotype from '../icons/SignalcoLogotype';
+import SignalcoLogotype from 'components/icons/SignalcoLogotype';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
 
@@ -93,13 +91,13 @@ export default function Footer() {
                                     textColor="neutral.400">Copyright © {DateTimeProvider.now().getFullYear()} signalco. All rights reserved.</Typography>
                                 <Stack direction="row" spacing={1} alignItems={{ xs: 'center', sm: 'start' }}>
                                     <IconButton aria-label="Twitter link" href="https://twitter.com/signalco_io">
-                                        <TwitterIcon />
+                                        <Twitter />
                                     </IconButton>
                                     <IconButton aria-label="reddit link" href="https://www.reddit.com/r/signalco/">
-                                        <RedditIcon />
+                                        <Typography>/r</Typography>
                                     </IconButton>
                                     <IconButton aria-label="GitHub link" href="https://github.com/signalco-io/signalco">
-                                        <GitHubIcon />
+                                        <Github />
                                     </IconButton>
                                 </Stack>
                             </Stack>

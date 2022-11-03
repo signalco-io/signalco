@@ -1,14 +1,11 @@
 import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import axios, { AxiosError, Method } from 'axios';
+import { ExpandDown, Navigate, Security, Send } from '@signalco/ui-icons';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack } from '@mui/system';
 import { TreeItem, TreeView } from '@mui/lab';
 import { Typography, TextField, Divider, Badge, Alert, Button, Card } from '@mui/joy';
-import SendIcon from '@mui/icons-material/Send';
-import SecurityIcon from '@mui/icons-material/Security';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import useLoadAndError from 'src/hooks/useLoadAndError';
 import Loadable from 'components/shared/Loadable/Loadable';
 import Chip from 'components/shared/indicators/Chip';
@@ -245,8 +242,8 @@ function Nav() {
             </Stack>
             <TreeView
                 onNodeSelect={handleItemSelected}
-                defaultCollapseIcon={<ExpandMoreIcon />}
-                defaultExpandIcon={<ChevronRightIcon />}
+                defaultCollapseIcon={<ExpandDown />}
+                defaultExpandIcon={<Navigate />}
                 sx={{ overflowY: 'auto' }}>
                 {tags.map(t => (
                     <TreeItem key={t} nodeId={`tag-${t}`} label={t}>
@@ -374,7 +371,7 @@ function SecurityBadge(props: { security: OpenAPIV3.SecurityRequirementObject })
             {info.map(source => {
                 if (source && source.type === 'http') {
                     const httpSource = source as OpenAPIV3.HttpSecurityScheme;
-                    return <Chip variant="outlined" startDecorator={<SecurityIcon fontSize="small" />} key={httpSource.scheme}>{camelToSentenceCase(httpSource.scheme)}</Chip>;
+                    return <Chip variant="outlined" startDecorator={<Security fontSize="small" />} key={httpSource.scheme}>{camelToSentenceCase(httpSource.scheme)}</Chip>;
                 } else if (source) {
                     return <Typography key={source.type} color="danger" fontWeight="bold" textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
@@ -466,7 +463,7 @@ function Actions(props: ActionsProps) {
                     </Stack>
                 </Stack>
             )}
-            <Button variant="outlined" startDecorator={<SendIcon />} onClick={handleExecuteAction}>Run</Button>
+            <Button variant="outlined" startDecorator={<Send />} onClick={handleExecuteAction}>Run</Button>
             {responseStatusCode && (
                 <Stack spacing={1}>
                     <Stack direction="row" alignItems="center" justifyContent="space-between">

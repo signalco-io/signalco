@@ -2,7 +2,6 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
 import { Box, Stack } from '@mui/system';
 import { Card, Typography } from '@mui/joy';
-import GoogleIcon from '@mui/icons-material/Google';
 import { isNonEmptyString, isNotNull, isTrue } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
@@ -27,8 +26,7 @@ function ConnectedService() {
     return (
         <Card variant="outlined">
             <Stack spacing={2} direction="row" alignItems="center" justifyContent="space-between">
-                <Stack direction="row" alignItems="center" spacing={2}>
-                    <GoogleIcon fontSize="large" />
+                <Stack direction="row" alignItems="center">
                     <Stack>
                         <Typography>Google</Typography>
                         <Typography level="body3">{CurrentUserProvider.getCurrentUser()?.name} ({CurrentUserProvider.getCurrentUser()?.email})</Typography>

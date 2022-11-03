@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { Draggable, Map, Marker } from 'pigeon-maps';
+import { MyLocation } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { IconButton, TextField, Typography } from '@mui/joy';
-import MyLocationIcon from '@mui/icons-material/MyLocation';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/esm/index.types';
 import useUserTheme from 'src/hooks/useUserTheme';
 import useLoadAndError from 'src/hooks/useLoadAndError';
@@ -82,7 +82,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
             <Stack spacing={2}>
                 <Stack direction="row" alignItems="center" justifyContent="stretch" spacing={1}>
                     <IconButton onClick={handleGetLocation} size="lg">
-                        <MyLocationIcon />
+                        <MyLocation />
                     </IconButton>
                     <TextField value={placeName.item ?? ''} />
                 </Stack>

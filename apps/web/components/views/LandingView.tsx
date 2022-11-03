@@ -3,10 +3,10 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { Github, Navigate } from '@signalco/ui-icons';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack, SxProps, Theme } from '@mui/system';
 import { Button, Divider, Typography } from '@mui/joy';
-import { GitHub, KeyboardArrowRight } from '@mui/icons-material';
 import AppSettingsProvider from 'src/services/AppSettingsProvider';
 import useUserTheme from 'src/hooks/useUserTheme';
 import Container from 'components/shared/layout/Container';
@@ -232,8 +232,8 @@ export default function LandingPageView() {
             direction="horizontal">
             <Stack alignItems="center">
               <Button
-                startDecorator={<GitHub />}
-                endDecorator={<KeyboardArrowRight />}
+                startDecorator={<Github />}
+                endDecorator={<Navigate />}
                 href="https://github.com/signalco-io"
                 size="lg">signalco on GitHub</Button>
             </Stack>
