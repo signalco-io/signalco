@@ -7,10 +7,10 @@ import { Github, Navigate } from '@signalco/ui-icons';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack, SxProps, Theme } from '@mui/system';
 import { Button, Divider, Typography } from '@mui/joy';
-import AppSettingsProvider from 'src/services/AppSettingsProvider';
 import useUserTheme from 'src/hooks/useUserTheme';
 import Container from 'components/shared/layout/Container';
 import LinkImage from 'components/shared/ImageLink';
+import DeveloperOnly from 'components/shared/DeveloperOnly';
 import GentleSlide from 'components/shared/animations/GentleSlide';
 import Fade from 'components/shared/animations/Fade';
 import DiscoverVisual from 'components/pages/landing/visuals/DiscoverVisual';
@@ -223,23 +223,21 @@ export default function LandingPageView() {
       <Box my={2}>
         <Cover />
       </Box>
-      {AppSettingsProvider.isDeveloper && (
-        <>
-          <CounterIndicator count={0} />
-          <StepContent
-            title="Developers"
-            subtitle="Signalco is free and open source project run by small team of enthusiasts."
-            direction="horizontal">
-            <Stack alignItems="center">
-              <Button
-                startDecorator={<Github />}
-                endDecorator={<Navigate />}
-                href="https://github.com/signalco-io"
-                size="lg">signalco on GitHub</Button>
-            </Stack>
-          </StepContent>
-        </>
-      )}
+      <DeveloperOnly>
+        <CounterIndicator count={0} />
+        <StepContent
+          title="Developers"
+          subtitle="Signalco is free and open source project run by small team of enthusiasts."
+          direction="horizontal">
+          <Stack alignItems="center">
+            <Button
+              startDecorator={<Github />}
+              endDecorator={<Navigate />}
+              href="https://github.com/signalco-io"
+              size="lg">signalco on GitHub</Button>
+          </Stack>
+        </StepContent>
+      </DeveloperOnly>
       <CounterIndicator count={1} />
       <StepContent title="Discover" image={<DiscoverVisual />} imageContainerHeight={420}
         imageContainerStyles={{

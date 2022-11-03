@@ -5,7 +5,6 @@ import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import DateTimeProvider from '../../../src/services/DateTimeProvider';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
 import useInterval from '../../../src/hooks/useInterval';
 
 const stateOptions = [
@@ -28,7 +27,6 @@ function WidgetTime(props: WidgetSharedProps) {
     }, []);
 
     useWidgetOptions(stateOptions, props);
-    useWidgetActive(true, props);
     useInterval(updateTime, 1000);
     useEffect(() => updateTime(), [updateTime]);
 

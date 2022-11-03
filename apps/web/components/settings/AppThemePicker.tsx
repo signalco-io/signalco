@@ -1,4 +1,5 @@
 import { Suspense, useState } from 'react';
+import { Custom, SunMoon, Timer } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { DefaultColorScheme } from '@mui/joy/styles/types';
 import { useColorScheme } from '@mui/joy/styles';
@@ -85,7 +86,6 @@ function AppThemeColorPicker() {
 }
 
 export default function AppThemePicker() {
-    const themeModes = useLocale('App', 'Settings', 'ThemeModes');
     const picker = useLocale('App', 'Components', 'AppThemePicker');
 
     const { colorScheme, setColorScheme } = useColorScheme();
@@ -123,9 +123,9 @@ export default function AppThemePicker() {
         <Suspense>
             <Stack spacing={2}>
                 <Picker value={themeMode ?? 'manual'} onChange={handleThemeModeChange} options={[
-                    { value: 'manual', label: themeModes.t('Manual') },
-                    { value: 'sunriseSunset', label: themeModes.t('SunriseSunset'), disabled: (userLocation?.length ?? 0) <= 0 },
-                    { value: 'timeRange', label: themeModes.t('TimeRange') },
+                    { value: 'manual', label: <Custom /> },
+                    { value: 'sunriseSunset', label: <SunMoon />, disabled: (userLocation?.length ?? 0) <= 0 },
+                    { value: 'timeRange', label: <Timer /> },
                 ]} />
                 {themeMode === 'timeRange' && (
                     <Stack spacing={1}>

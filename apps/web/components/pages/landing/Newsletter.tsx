@@ -87,10 +87,11 @@ function Newsletter() {
                                 placeholder="you@email.com"
                                 fullWidth
                                 required
-                                sx={{ '.JoyInput-root': { '--Input-radius': '8px 0 0 8px' }, maxWidth: '400px' }}
+                                variant="outlined"
+                                sx={{ '.JoyInput-root': { '--Input-radius': isLoading ? '8px' : '8px 0 0 8px' }, maxWidth: '400px' }}
                                 value={email}
                                 onChange={handleOnEmail} />
-                            <Button disabled={isLoading} type="submit" color="primary" size="lg" sx={{ '--Button-radius': '0 8px 8px 0' }}>Subscribe</Button>
+                            <Button loading={isLoading} type="submit" variant="soft" size="lg" sx={{ '--Button-radius': '0 8px 8px 0' }}>Subscribe</Button>
                         </Stack>
                     </GentleSlide>
                     <GentleSlide collapsedWhenHidden appear={error != null} direction="down" duration={200}>

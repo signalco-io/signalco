@@ -11,7 +11,6 @@ import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import LocalStorageService from '../../../src/services/LocalStorageService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useWidgetActive from '../../../src/hooks/widgets/useWidgetActive';
 import useLocale, { useLocalePlaceholders } from '../../../src/hooks/useLocale';
 
 const stateOptions: IWidgetConfigurationOption[] = [
@@ -95,11 +94,10 @@ function WidgetChecklist(props: WidgetSharedProps) {
 
     // Configure widget
     useWidgetOptions(stateOptions, props);
-    useWidgetActive(items.length > 0, props);
 
     return (
-        <Stack sx={{ height: '100%' }} spacing={2} pt={2} pb={3}>
-            <Typography fontSize={24} sx={{ px: 2 }}>{label}</Typography>
+        <Stack sx={{ height: '100%' }} spacing={2} py={2}>
+            <Typography level="h4" sx={{ px: 2 }}>{label}</Typography>
             <Box sx={{ flexGrow: 1, overflow: 'auto', overflowX: 'hidden' }}>
                 <Stack sx={{ height: '100%', pl: 2, pr: 3 }}>
                     {items.length
@@ -114,6 +112,7 @@ function WidgetChecklist(props: WidgetSharedProps) {
                     <TextField
                         placeholder={t('AddItem')}
                         fullWidth
+                        size="lg"
                         onFocus={() => setIsInputFocusedOrFilled(true)}
                         onBlur={() => {
                             if (newItemText.length <= 0) {

@@ -38,8 +38,8 @@ function SmallIndicator(props: { isActive: boolean; icon: string; label: string;
 function WidgetAirConditioning(props: WidgetSharedProps) {
     const { config } = props;
     useWidgetOptions(stateOptions, props);
-    const { data: temperatureDevice } = useEntity(config?.targetTemperature?.deviceId);
-    const { data: heatingDevice } = useEntity(config?.targetHeating?.deviceId);
+    const { data: temperatureDevice } = useEntity(config?.targetTemperature?.entityId);
+    const { data: heatingDevice } = useEntity(config?.targetHeating?.entityId);
 
     const temperatureContact = useContact(temperatureDevice ? {
         channelName: config?.targetTemperature?.channelName,

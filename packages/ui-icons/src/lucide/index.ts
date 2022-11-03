@@ -20,7 +20,7 @@ export {
     PinOff,
     LogOut,
     Zap as Lightning,
-    Share,
+    Share2 as Share,
     Send,
     Users as People,
     Minimize,
@@ -44,6 +44,9 @@ export {
     ShieldCheck as Security,
     Hourglass,
     RadioReceiver as Station,
+    SunMoon,
+    Timer,
+    Sliders as Custom,
 
     Twitter,
     Github

@@ -26,7 +26,8 @@ export default function GentleSlide(props: GentleSlideProps) {
             transitionDelay: `${appearDelayPerIndex * (index ?? 0)}ms`,
             opacity: appear ? 1 : 0,
             transform: appear ? 'none' : translate,
-            height: !appear && collapsedWhenHidden ? 0 : 'auto'
+            height: !appear && collapsedWhenHidden ? 0 : 'auto',
+            width: '100%'
         }}>
             {children}
         </Box>
