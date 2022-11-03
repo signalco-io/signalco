@@ -33,7 +33,8 @@ function SelectItems(props: ISelectItemsProps) {
             variant={heading ? 'plain' : 'soft'}
             size={heading ? 'lg' : undefined}
             sx={{
-                fontSize: heading ? '1.6em' : undefined
+                fontSize: heading ? '1.6em' : undefined,
+                background: heading ? 'transparent' : undefined
             }}
             renderValue={(selected) => {
                 // if (multiple)
@@ -47,7 +48,7 @@ function SelectItems(props: ISelectItemsProps) {
                 //         </Box>
                 //     );
                 // else {
-                    return items.find(i => i.value === selected?.value)?.label ?? value;
+                return items.find(i => i.value === selected?.value)?.label ?? value;
                 // }
             }}
         >{items.map(item => (

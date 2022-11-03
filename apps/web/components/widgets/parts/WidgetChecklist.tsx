@@ -1,11 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 import React, { useCallback, useState } from 'react';
 import { bindMenu, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
+import { Check, Delete, MoreHorizontal } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import DeleteIcon from '@mui/icons-material/Delete';
-import CheckIcon from '@mui/icons-material/Check';
 import Checkbox from 'components/shared/form/Checkbox';
 import { WidgetSharedProps } from '../Widget';
 import NoDataPlaceholder from '../../shared/indicators/NoDataPlaceholder';
@@ -37,12 +35,12 @@ function ChecklistItem(props: { item: IChecklistItem; onChange: (id: string, don
         <>
             <Stack direction="row" alignItems="center" justifyContent="space-between">
                 <Checkbox checked={item.done ?? false} onChange={(e) => onChange(item.id, e.currentTarget.checked)} label={item.text} />
-                <IconButton {...bindTrigger(popupState)}><MoreHorizIcon sx={{ opacity: 0.3 }} /></IconButton>
+                <IconButton {...bindTrigger(popupState)}><Box sx={{ opacity: 0.3 }}><MoreHorizontal /></Box></IconButton>
             </Stack>
             <Menu {...bindMenu(popupState)}>
                 <MenuItem onClick={() => onRemove(item.id)}>
                     <ListItemDecorator>
-                        <DeleteIcon />
+                        <Delete />
                     </ListItemDecorator>
                     <ListItemContent>Remove</ListItemContent>
                 </MenuItem>
@@ -123,7 +121,7 @@ function WidgetChecklist(props: WidgetSharedProps) {
                             }
                         }}
                         endDecorator={isInputFocusedOrFilled &&
-                            <IconButton type="submit"><CheckIcon /></IconButton>
+                            <IconButton type="submit"><Check /></IconButton>
                         }
                         value={newItemText}
                         onChange={(e) => setNewItemText(e.currentTarget.value)} />

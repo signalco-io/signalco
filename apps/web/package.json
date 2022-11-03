@@ -36,7 +36,6 @@
         "@mdx-js/react": "2.1.5",
         "@microsoft/signalr": "6.0.10",
         "@monaco-editor/react": "4.4.6",
-        "@mui/icons-material": "5.10.9",
         "@mui/joy": "5.0.0-alpha.52",
         "@mui/lab": "5.0.0-alpha.106",
         "@mui/material": "5.10.12",
@@ -75,9 +74,10 @@
         "uuid": "9.0.0"
     },
     "devDependencies": {
-        "@signalco/tsconfig": "*",
         "@babel/core": "7.19.6",
         "@next/bundle-analyzer": "13.0.1",
+        "@signalco/tsconfig": "*",
+        "@signalco/ui-icons": "*",
         "@storybook/addon-a11y": "6.5.13",
         "@storybook/addon-actions": "6.5.13",
         "@storybook/addon-essentials": "6.5.13",

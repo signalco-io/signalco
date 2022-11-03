@@ -1,9 +1,9 @@
 import React, { Suspense, useEffect } from 'react';
 import Link from 'next/link';
 import { bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
+import { Select } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Button } from '@mui/joy';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import useDashboards from 'src/hooks/dashboards/useDashboards';
 import Popper from 'components/shared/layout/Popper';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
@@ -47,7 +47,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                                     pointerEvents: 'none'
                                 }
                             }}
-                            endDecorator={<KeyboardArrowDownIcon />} {...bindTrigger(popupState)}>
+                            endDecorator={<Select />} {...bindTrigger(popupState)}>
                             {currentName}
                         </Button>
                     </Box>

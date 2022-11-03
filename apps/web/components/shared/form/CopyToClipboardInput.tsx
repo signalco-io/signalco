@@ -1,18 +1,9 @@
 import React from 'react';
 import { TextField, TextFieldProps } from '@mui/joy';
-import { ContentCopy as ContentCopyIcon } from '@mui/icons-material';
+import { Copy } from '@signalco/ui-icons';
 import IconButtonCopyToClipboard from '../buttons/IconButtonCopyToClipboard';
 
 function CopyToClipboardInput(props: TextFieldProps) {
-    let fontSize: 'small' | 'medium' | 'large' = 'medium';
-    switch (props.size) {
-        case 'sm':
-            fontSize = 'small';
-            break;
-        case 'lg':
-            fontSize = 'large';
-    }
-
     return (
         <TextField
             endDecorator={
@@ -20,7 +11,7 @@ function CopyToClipboardInput(props: TextFieldProps) {
                     title="Copy to clipboard"
                     value={props.value}
                     defaultValue={props.defaultValue}>
-                    <ContentCopyIcon fontSize={fontSize} />
+                    <Copy fontSize={props.size === 'sm' ? 16 : (props.size === 'lg' ? 32 : 24)} />
                 </IconButtonCopyToClipboard>
             } {...props} />
     );

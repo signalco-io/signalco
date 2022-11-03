@@ -1,7 +1,6 @@
 import React from 'react';
 import { Stack } from '@mui/system';
 import { Typography } from '@mui/joy';
-import { BatteryCharging20Outlined } from '@mui/icons-material';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -23,7 +22,6 @@ function WidgetVacuum(props: WidgetSharedProps) {
         <Stack>
             <Stack>
                 <Typography>{batteryPerc}%</Typography>
-                <BatteryCharging20Outlined />
             </Stack>
             <Typography>{label}</Typography>
         </Stack>

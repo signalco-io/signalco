@@ -1,9 +1,9 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
+import { Down, Stop, Up } from '@signalco/ui-icons';
 import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
 import { Button, Typography } from '@mui/joy';
-import { ArrowDownward, ArrowUpward, Stop } from '@mui/icons-material';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -79,14 +79,14 @@ function WidgetShades(props: WidgetSharedProps) {
             <Grid xs={6}>
                 <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent="space-between">
                     <WindowVisual shadePerc={shadePerc} size={68} />
-                    <Typography fontWeight="light" noWrap>{label}</Typography>
+                    <Typography noWrap>{label}</Typography>
                 </Stack>
             </Grid>
             <Grid xs={6} sx={{ flexGrow: 1, backgroundColor: 'var(--joy-palette-primary-softBg)', borderLeft: '1px solid', borderColor: 'divider', borderRadius: '0 8px 8px 0' }}>
                 <Stack sx={{ height: '100%' }} justifyContent="stretch">
-                    <Button variant="plain" onClick={() => handleStateChangeRequest('up')} sx={{ borderRadius: '0 8px 0 0', flexGrow: 1, borderBottom: '1px solid', borderColor: 'divider' }}><ArrowUpward /></Button>
-                    <Button variant="plain" onClick={() => handleStateChangeRequest('stop')} sx={{ borderRadius: 0, flexGrow: 1 }}><Stop /></Button>
-                    <Button variant="plain" onClick={() => handleStateChangeRequest('down')} sx={{ borderRadius: '0 0 8px 0', flexGrow: 1, borderTop: '1px solid', borderColor: 'divider' }}><ArrowDownward /></Button>
+                    <Button variant="plain" onClick={() => handleStateChangeRequest('up')} sx={{ borderRadius: '0 8px 0 0', flexGrow: 1, borderBottom: '1px solid', borderColor: 'divider' }}><Up /></Button>
+                    <Button variant="plain" onClick={() => handleStateChangeRequest('stop')} sx={{ borderRadius: 0, flexGrow: 1 }}><Stop size={18} /></Button>
+                    <Button variant="plain" onClick={() => handleStateChangeRequest('down')} sx={{ borderRadius: '0 0 8px 0', flexGrow: 1, borderTop: '1px solid', borderColor: 'divider' }}><Down /></Button>
                 </Stack>
             </Grid>
         </Grid>

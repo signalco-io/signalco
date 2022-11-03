@@ -1,4 +1,4 @@
-import ShareIcon from '@mui/icons-material/Share';
+import { Share } from '@signalco/ui-icons';
 import useIsClient from 'src/hooks/useIsClient';
 import IconButtonCopyToClipboard from 'components/shared/buttons/IconButtonCopyToClipboard';
 
@@ -10,7 +10,7 @@ export default function ShareSocial() {
     const value = window.location.href;
     return (
         <IconButtonCopyToClipboard title="Copy link to clipboard" value={value}>
-            <ShareIcon />
+            <Share />
         </IconButtonCopyToClipboard>
     );
 }

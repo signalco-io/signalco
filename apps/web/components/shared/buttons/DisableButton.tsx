@@ -1,6 +1,5 @@
 import { Button } from '@mui/joy';
-import NotInterestedIcon from '@mui/icons-material/NotInterested';
-import CheckIcon from '@mui/icons-material/Check';
+import { Check, Disabled } from '@signalco/ui-icons';
 
 interface DisableButtonProps {
     readonly?: boolean;
@@ -14,7 +13,7 @@ export default function DisableButton(props: DisableButtonProps) {
         <Button
             disabled={readonly}
             color={disabled ? 'success' : 'warning'}
-            startDecorator={disabled ? <CheckIcon /> : <NotInterestedIcon />}>
+            startDecorator={disabled ? <Check /> : <Disabled />}>
             {disabled ? 'Enable' : 'Disable'}
         </Button>
     );

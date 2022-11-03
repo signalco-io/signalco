@@ -1,12 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { Add, LayoutGrid, LayoutList } from '@signalco/ui-icons';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack } from '@mui/system';
 import { Avatar, Button, Card, IconButton, TextField, Typography } from '@mui/joy';
-import ViewModuleIcon from '@mui/icons-material/ViewModule';
-import ViewListIcon from '@mui/icons-material/ViewList';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import { entityUpsertAsync } from 'src/entity/EntityRepository';
 import { entityLastActivity } from 'src/entity/EntityHelper';
@@ -40,7 +38,7 @@ function EntityCard(props: { entity: IEntityDetails, spread: boolean }) {
     return (
         <Grid {...columns}>
             <Link href={`/app/entities/${entity.id}`} passHref legacyBehavior>
-                <Card variant={spread ? 'outlined' : 'outlined'} sx={spread ? { p: 1 } : {}}>
+                <Card variant="outlined" sx={spread ? { p: 1 } : {}}>
                     <Stack spacing={2} direction={spread ? 'row' : 'column'} justifyContent={spread ? 'space-between' : undefined}>
                         <Stack direction="row" spacing={2} alignItems="center">
                             <Avatar variant={spread ? 'plain' : 'soft'}>
@@ -150,10 +148,10 @@ function Entities() {
                                 sx={{ width: { xs: '100%', sm: 'initial' } }} />
                         )}
                         <Picker value={entityListViewType} onChange={(_, value) => setEntityListViewType(value)} options={[
-                            { value: 'table', label: <ViewListIcon /> },
-                            { value: 'cards', label: <ViewModuleIcon /> }
+                            { value: 'table', label: <LayoutList /> },
+                            { value: 'cards', label: <LayoutGrid /> }
                         ]} />
-                        <IconButton size="lg" onClick={handleAddEntity}><AddCircleIcon /></IconButton>
+                        <IconButton size="lg" onClick={handleAddEntity}><Add /></IconButton>
                     </Stack>
                 </Stack>
                 <Stack>

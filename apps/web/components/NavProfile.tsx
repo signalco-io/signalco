@@ -6,16 +6,9 @@ import {
   bindTrigger,
   usePopupState,
 } from 'material-ui-popup-state/hooks';
+import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Avatar, Button, Divider, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, Sheet, Typography } from '@mui/joy';
-import SettingsIcon from '@mui/icons-material/Settings';
-import MenuIcon from '@mui/icons-material/Menu';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import DevicesOtherSharpIcon from '@mui/icons-material/DevicesOtherSharp';
-import DashboardSharpIcon from '@mui/icons-material/DashboardSharp';
-import CommitIcon from '@mui/icons-material/Commit';
-import CloseIcon from '@mui/icons-material/Close';
-import { SvgIconComponent } from '@mui/icons-material';
 import Loadable from './shared/Loadable/Loadable';
 import ApiBadge from './development/ApiBadge';
 import LocalStorageService from '../src/services/LocalStorageService';
@@ -24,10 +17,10 @@ import useLocale from '../src/hooks/useLocale';
 import { orderBy } from '../src/helpers/ArrayHelpers';
 
 const navItems = [
-  { label: 'Channels', path: '/app/channels', icon: CommitIcon, hidden: true },
-  { label: 'Settings', path: '/app/settings', icon: SettingsIcon, hidden: true },
-  { label: 'Dashboards', path: '/app', icon: DashboardSharpIcon },
-  { label: 'Entities', path: '/app/entities', icon: DevicesOtherSharpIcon }
+  { label: 'Channels', path: '/app/channels', icon: Channel, hidden: true },
+  { label: 'Settings', path: '/app/settings', icon: Settings, hidden: true },
+  { label: 'Dashboards', path: '/app', icon: Dashboard },
+  { label: 'Entities', path: '/app/entities', icon: Device }
 ];
 
 function UserAvatar() {
@@ -94,7 +87,7 @@ function UserProfileAvatar() {
       <Menu {...menuProps}>
         <MenuItem onClick={navigateTo('/app/settings')}>
           <ListItemDecorator>
-            <SettingsIcon />
+            <Settings />
           </ListItemDecorator>
           <ListItemContent>
             {t('Settings')}
@@ -103,7 +96,7 @@ function UserProfileAvatar() {
         <Divider />
         <MenuItem onClick={logout}>
           <ListItemDecorator>
-            <ExitToAppIcon />
+            <LogOut />
           </ListItemDecorator>
           <ListItemContent>
             {t('Logout')}
@@ -114,7 +107,7 @@ function UserProfileAvatar() {
   );
 }
 
-function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: SvgIconComponent, active: boolean, label: string, onClick?: () => void }) {
+function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: React.FunctionComponent, active: boolean, label: string, onClick?: () => void }) {
   return (
     <Link href={path} passHref legacyBehavior>
       <IconButton
@@ -126,7 +119,9 @@ function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: S
           p: 2
         }}
         onClick={onClick}>
-        <Icon sx={{ opacity: active ? 1 : 0.6, fontSize: '26px' }} />
+        <Box sx={{ opacity: active ? 1 : 0.6, fontSize: '26px' }}>
+          <Icon />
+        </Box>
       </IconButton>
     </Link>
   );
@@ -175,7 +170,7 @@ function NavProfile() {
       </Typography>
       <Box sx={{ display: { xs: 'inherit', sm: 'none' } }}>
         <IconButton size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
-          {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          {mobileMenuOpen ? <Close /> : <MenuIcon />}
         </IconButton>
         <Box hidden={!mobileMenuOpen} sx={{
           position: 'fixed',
