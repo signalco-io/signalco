@@ -1,11 +1,11 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { SmileMeh, SmileVeryHappy } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Button } from '@mui/joy';
 import useContact from 'src/hooks/useContact';
 import IContactPointer from 'src/contacts/IContactPointer';
-import { SmileMeh, SmileVeryHappy } from 'components/shared/Icons';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultTarget, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';

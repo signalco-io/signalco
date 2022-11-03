@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
 import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
 import { Card, Typography } from '@mui/joy';
@@ -8,7 +9,6 @@ import grey from 'src/colors/gray';
 import amber from 'src/colors/amber';
 import FilterList from 'components/shared/list/FilterList';
 import Chip from 'components/shared/indicators/Chip';
-import { Check, Close, ExternalLink, Hourglass } from 'components/shared/Icons';
 import PageCenterHeader from 'components/pages/PageCenterHeader';
 import Gallery from 'components/gallery/Gallery';
 import contentData from './content.json';

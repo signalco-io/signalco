@@ -5,7 +5,6 @@ import { Alert, Link, TextField, Tooltip, Typography } from '@mui/joy';
 import Loadable from '../Loadable/Loadable';
 import IErrorProps from '../interfaces/IErrorProps';
 import ResultsPlaceholder from '../indicators/ResultsPlaceholder';
-import { ExternalLink } from '../Icons';
 import { ChildrenProps } from '../../../src/sharedTypes';
 import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
 import { LocalizeFunc } from '../../../src/hooks/useLocale';
@@ -13,6 +12,7 @@ import {
   camelToSentenceCase,
   isAbsoluteUrl
 } from '../../../src/helpers/StringHelpers';
+import { ExternalLink } from '@signalco/ui-icons';
 
 export interface IAutoTableItem {
   id: string;

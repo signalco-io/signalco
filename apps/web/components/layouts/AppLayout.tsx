@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useQueryClient } from '@tanstack/react-query';
+import { Minimize } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { IconButton, Sheet } from '@mui/joy';
 import NavProfile from '../NavProfile';

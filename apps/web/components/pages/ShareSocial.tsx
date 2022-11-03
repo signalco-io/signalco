@@ -1,3 +1,4 @@
+import { Share } from '@signalco/ui-icons';
 import useIsClient from 'src/hooks/useIsClient';
 import IconButtonCopyToClipboard from 'components/shared/buttons/IconButtonCopyToClipboard';
 

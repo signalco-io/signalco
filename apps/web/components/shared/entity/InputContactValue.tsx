@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { Play } from '@signalco/ui-icons';
 import { Stack } from '@mui/system';
 import Switch from '@mui/joy/Switch';
 import { IconButton, Slider, Typography } from '@mui/joy';

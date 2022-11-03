@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react';
 import NextLink from 'next/link';
+import { Github, Twitter } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Grid, IconButton, Typography, Link as JoyLink } from '@mui/joy';
 import Container from 'components/shared/layout/Container';
-import { Github, Twitter } from 'components/shared/Icons';
-import SignalcoLogotype from '../icons/SignalcoLogotype';
+import SignalcoLogotype from 'components/icons/SignalcoLogotype';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
 

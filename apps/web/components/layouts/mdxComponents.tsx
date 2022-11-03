@@ -9,10 +9,10 @@ import Loadable from 'components/shared/Loadable/Loadable';
 import Checkbox from 'components/shared/form/Checkbox';
 import IconButtonCopyToClipboard from 'components/shared/buttons/IconButtonCopyToClipboard';
 import MdxPageLayout from './MdxPageLayout';
-import { Copy, Link as LinkIcon } from '../shared/Icons';
 import { ChildrenProps } from '../../src/sharedTypes';
 import { useLocaleHelpers } from '../../src/hooks/useLocale';
 import useIsClient from '../../src/hooks/useIsClient';
+import { Copy, Link as LinkIcon } from '@signalco/ui-icons';
 
 const headingTopSpacing = 2;
 const headingBottomSpacing = 2;

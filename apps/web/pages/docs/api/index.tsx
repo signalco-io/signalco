@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import axios, { AxiosError, Method } from 'axios';
+import { ExpandDown, Navigate, Security, Send } from '@signalco/ui-icons';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack } from '@mui/system';
 import { TreeItem, TreeView } from '@mui/lab';
@@ -8,7 +9,6 @@ import { Typography, TextField, Divider, Badge, Alert, Button, Card } from '@mui
 import useLoadAndError from 'src/hooks/useLoadAndError';
 import Loadable from 'components/shared/Loadable/Loadable';
 import Chip from 'components/shared/indicators/Chip';
-import { ExpandDown, Navigate, Security, Send } from 'components/shared/Icons';
 import SelectItems from 'components/shared/form/SelectItems';
 import NavigatingButton from 'components/shared/buttons/NavigatingButton';
 import { ObjectDictAny } from '../../../src/sharedTypes';

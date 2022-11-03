@@ -1,9 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 import React, { useCallback, useState } from 'react';
 import { bindMenu, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
+import { Check, Delete, MoreHorizontal } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
-import { Check, Delete, MoreHorizontal } from 'components/shared/Icons';
 import Checkbox from 'components/shared/form/Checkbox';
 import { WidgetSharedProps } from '../Widget';
 import NoDataPlaceholder from '../../shared/indicators/NoDataPlaceholder';

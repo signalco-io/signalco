@@ -1,5 +1,5 @@
+import { Channel, Dashboard, Device, Play, Station } from '@signalco/ui-icons';
 import IEntityDetails from 'src/entity/IEntityDetails';
-import { Channel, Dashboard, Device, Play, Station } from '../Icons';
 
 export default function EntityIcon(entity: IEntityDetails | undefined) {
     let Icon = Device;

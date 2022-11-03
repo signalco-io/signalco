@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
+import { Add } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { AspectRatio, Card, CardOverflow, Grid, IconButton, TextField, Typography } from '@mui/joy';
-import { Add } from 'components/shared/Icons';
 import { widgetType } from '../widgets/Widget';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
 

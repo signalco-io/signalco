@@ -4,10 +4,10 @@ import {
     bindTrigger,
     usePopupState,
 } from 'material-ui-popup-state/hooks';
+import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Button, Card, CardOverflow, ListItemDecorator, Menu, MenuItem } from '@mui/joy';
 import useUserTheme from 'src/hooks/useUserTheme';
-import { Delete, MoreHorizontal, Settings } from 'components/shared/Icons';
 import WidgetConfiguration from './WidgetConfiguration';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';

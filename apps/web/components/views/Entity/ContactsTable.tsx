@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
+import { Add, MoreVertical } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Button, Card, CardOverflow, IconButton, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
-import { Add, MoreVertical } from 'components/shared/Icons';
 import Picker from 'components/shared/form/Picker';
 import CodeEditor from 'components/code/CodeEditor';
 import SelectItems from '../../shared/form/SelectItems';

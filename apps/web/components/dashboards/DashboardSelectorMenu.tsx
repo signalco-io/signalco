@@ -1,5 +1,6 @@
 import React from 'react';
 import { PopupState } from 'material-ui-popup-state/hooks';
+import { Add, Pin, PinOff } from '@signalco/ui-icons';
 import { Stack } from '@mui/system';
 import { Button, Card, Divider, IconButton, Typography } from '@mui/joy';
 import { CSS } from '@dnd-kit/utilities';
@@ -7,7 +8,6 @@ import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } 
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
 import useDashboards from 'src/hooks/dashboards/useDashboards';
-import { Add, Pin, PinOff } from 'components/shared/Icons';
 import ShareEntityChip from '../entity/ShareEntityChip';
 import useLocale from '../../src/hooks/useLocale';
 import useHashParam from '../../src/hooks/useHashParam';

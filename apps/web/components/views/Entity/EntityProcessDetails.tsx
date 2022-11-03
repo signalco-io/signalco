@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
+import { Close, Warning } from '@signalco/ui-icons';
 import { Container, Stack } from '@mui/system';
 import { Alert, Card, IconButton, Typography } from '@mui/joy';
 import useContact from 'src/hooks/useContact';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import { setAsync } from 'src/contacts/ContactRepository';
 import Timeago from 'components/shared/time/Timeago';
-import { Close, Warning } from 'components/shared/Icons';
 import DisplayDeviceTarget from 'components/shared/entity/DisplayEntityTarget';
 
 declare module ProcessConfigurationV1 {

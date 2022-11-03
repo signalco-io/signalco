@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextField, TextFieldProps } from '@mui/joy';
-import { Copy } from '../Icons';
+import { Copy } from '@signalco/ui-icons';
 import IconButtonCopyToClipboard from '../buttons/IconButtonCopyToClipboard';
 
 function CopyToClipboardInput(props: TextFieldProps) {

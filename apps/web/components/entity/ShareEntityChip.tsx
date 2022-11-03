@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import { Clear, People, Send, Share } from '@signalco/ui-icons';
 import { Stack } from '@mui/system';
 import { Tooltip , IconButton, TextField } from '@mui/joy';
 import IUser from 'src/users/IUser';
 import Chip from 'components/shared/indicators/Chip';
-import { Clear, People, Send, Share } from 'components/shared/Icons';
 import GentleSlide from 'components/shared/animations/GentleSlide';
 import AutoTable from '../shared/table/AutoTable';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';

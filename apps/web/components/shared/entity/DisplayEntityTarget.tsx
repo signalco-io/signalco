@@ -22,7 +22,7 @@ import Loadable from '../Loadable/Loadable';
 import Popper from '../layout/Popper';
 import Accordion from '../layout/Accordion';
 import NoDataPlaceholder from '../indicators/NoDataPlaceholder';
-import { Navigate } from '../Icons';
+import { Navigate } from '@signalco/ui-icons';
 import useEntity from '../../../src/hooks/useEntity';
 import useAllEntities from '../../../src/hooks/useAllEntities';
 

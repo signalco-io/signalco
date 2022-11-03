@@ -1,5 +1,5 @@
 import { Button } from '@mui/joy';
-import { Check, Disabled } from '../Icons';
+import { Check, Disabled } from '@signalco/ui-icons';
 
 interface DisableButtonProps {
     readonly?: boolean;

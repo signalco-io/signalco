@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { Add, LayoutGrid, LayoutList } from '@signalco/ui-icons';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack } from '@mui/system';
 import { Avatar, Button, Card, IconButton, TextField, Typography } from '@mui/joy';
@@ -8,7 +9,6 @@ import IEntityDetails from 'src/entity/IEntityDetails';
 import { entityUpsertAsync } from 'src/entity/EntityRepository';
 import { entityLastActivity } from 'src/entity/EntityHelper';
 import Timeago from 'components/shared/time/Timeago';
-import { Add, LayoutGrid, LayoutList } from 'components/shared/Icons';
 import SelectItems from 'components/shared/form/SelectItems';
 import Picker from 'components/shared/form/Picker';
 import EntityIcon from 'components/shared/entity/EntityIcon';
