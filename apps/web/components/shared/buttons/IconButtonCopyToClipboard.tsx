@@ -1,8 +1,8 @@
 import React, { MouseEvent, useId, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
+import { Copy, Warning } from '@signalco/ui-icons';
 import { Alert, IconButton } from '@mui/joy';
 import Popper from '../layout/Popper';
-import { Copy, Warning } from '@signalco/ui-icons';
 import { ChildrenProps } from '../../../src/sharedTypes';
 import { useLocaleHelpers } from '../../../src/hooks/useLocale';
 

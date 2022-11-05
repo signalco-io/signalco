@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { ExpandDown } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Typography, Button } from '@mui/joy';
 import SelectItems from '../form/SelectItems';
 import Checkbox from '../form/Checkbox';
-import { ExpandDown } from '@signalco/ui-icons';
 
 export interface FilterListItem {
     id: string;

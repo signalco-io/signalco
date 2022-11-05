@@ -18,7 +18,7 @@ function ChannelConnectPartial(props: { channelName: string }) {
         return <ChannelPartialSlack />;
 
     return (
-        <NoDataPlaceholder content="No connect action availble" />
+        <NoDataPlaceholder content="Connect action not availble" />
     );
 }
 
