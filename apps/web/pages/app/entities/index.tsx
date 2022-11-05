@@ -107,7 +107,7 @@ function Entities() {
     const entityItems = entities.data;
     const { t } = useLocale('App', 'Entities');
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
-    const [filteredItems, showSearch, searchText, handleSearchTextChange, isSearching] = useSearch(entityItems, filterFuncObjectStringProps);
+    const [filteredItems, showSearch, searchText, handleSearchTextChange] = useSearch(entityItems, filterFuncObjectStringProps);
 
     const [selectedType, setSelectedType] = useState<string | undefined>('1');
     const typedItems = useMemo(() => filteredItems.filter(e => {
@@ -166,9 +166,7 @@ function Entities() {
                 </Stack>
                 <Stack>
                     <Loadable isLoading={entities.isLoading} error={entities.error}>
-                        <Loadable isLoading={isSearching} contentVisible placeholder="linear" sx={{ px: 2 }}>
-                            {results}
-                        </Loadable>
+                        {results}
                     </Loadable>
                 </Stack>
             </Stack>
