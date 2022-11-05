@@ -1,13 +1,13 @@
 import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import axios, { AxiosError, Method } from 'axios';
-import { ExpandDown, Navigate, Security, Send } from '@signalco/ui-icons';
+import { Security, Send } from '@signalco/ui-icons';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack } from '@mui/system';
-import { TreeItem, TreeView } from '@mui/lab';
-import { Typography, TextField, Divider, Badge, Alert, Button, Card } from '@mui/joy';
+import { Typography, TextField, Divider, Badge, Alert, Button, Card, List } from '@mui/joy';
 import useLoadAndError from 'src/hooks/useLoadAndError';
 import Loadable from 'components/shared/Loadable/Loadable';
+import ListTreeItem from 'components/shared/list/ListTreeItem';
 import Chip from 'components/shared/indicators/Chip';
 import SelectItems from 'components/shared/form/SelectItems';
 import NavigatingButton from 'components/shared/buttons/NavigatingButton';
@@ -216,7 +216,7 @@ function Nav() {
     const tags = api.tags?.map(t => t.name) ?? extractTags(api);
     const operations = getOperations(api);
 
-    const handleItemSelected = async (_: React.SyntheticEvent, newValue: string) => {
+    const handleItemSelected = async (newValue: string) => {
         const newTagName = newValue.startsWith('tag-') ? newValue.substring(4) : undefined;
         if (tagName !== newTagName) {
             await setTagName(newTagName);
@@ -240,24 +240,30 @@ function Nav() {
                 <Chip size="sm" variant="soft">v{info.version}</Chip>
                 {info.license && <Chip size="sm">{info.license.name}</Chip>}
             </Stack>
-            <TreeView
-                onNodeSelect={handleItemSelected}
-                defaultCollapseIcon={<ExpandDown />}
-                defaultExpandIcon={<Navigate />}
-                sx={{ overflowY: 'auto' }}>
+            <List>
                 {tags.map(t => (
-                    <TreeItem key={t} nodeId={`tag-${t}`} label={t}>
+                    <ListTreeItem
+                        key={t}
+                        nodeId={`tag-${t}`}
+                        label={t}
+                        selected={tagName === t}
+                        onSelected={handleItemSelected}>
                         {operations.filter(op => (op.operation.tags?.indexOf(t) ?? -1) >= 0).map(op => (
-                            <TreeItem key={`nav-route-${op.pathName}-${op.operationName}`} nodeId={`path-${op.pathName}-${op.operationName}`} label={(
-                                <Stack sx={{ py: 0.5 }} direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
-                                    <Typography noWrap level="body2">{op.pathName}</Typography>
-                                    <OperationChip operation={op.operationName} small />
-                                </Stack>
-                            )} />
+                            <ListTreeItem
+                                key={`nav-route-${op.pathName}-${op.operationName}`}
+                                nodeId={`path-${op.pathName}-${op.operationName}`}
+                                selected={pathName === op.pathName && operationName === op.operationName}
+                                onSelected={handleItemSelected}
+                                label={(
+                                    <Stack sx={{ py: 0.5 }} direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+                                        <Typography noWrap level="body2">{op.pathName}</Typography>
+                                        <OperationChip operation={op.operationName} small />
+                                    </Stack>
+                                )} />
                         ))}
-                    </TreeItem>
+                    </ListTreeItem>
                 ))}
-            </TreeView>
+            </List>
         </Stack>
     );
 }
