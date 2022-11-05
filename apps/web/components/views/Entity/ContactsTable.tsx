@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
-import { Add, MoreVertical } from '@signalco/ui-icons';
+import { Add, Code, MoreVertical, UI } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Button, Card, CardOverflow, IconButton, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
 import Picker from 'components/shared/form/Picker';
@@ -76,9 +76,9 @@ function DisplayJson(props: { json: string | undefined }) {
                 <JsonVisualizer name="" value={jsonObj} />
             )}
             <Box sx={{ position: 'absolute', right: 0, top: 0 }}>
-                <Picker value={showSource ? 'source' : 'ui'} onChange={(_, s) => setShowSource(s === 'source')} options={[
-                    { value: 'ui', label: 'UI' },
-                    { value: 'source', label: 'Source' }
+                <Picker value={showSource ? 'source' : 'ui'} size="sm" onChange={(_, s) => setShowSource(s === 'source')} options={[
+                    { value: 'ui', label: <UI size={18} /> },
+                    { value: 'source', label: <Code size={18} /> }
                 ]} />
             </Box>
         </Box>
