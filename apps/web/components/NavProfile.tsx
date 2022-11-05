@@ -147,15 +147,14 @@ function NavProfile() {
   return (
     <Stack
       direction={{ xs: 'row', sm: 'column' }}
-      spacing={{ xs: 0, sm: 4 }}
       sx={{
         minHeight: { xs: '60px', sm: undefined },
         justifyContent: { xs: 'space-between', sm: 'start' }
       }}
       alignItems="center">
       <UserProfileAvatar />
-      <Box sx={{ display: { xs: 'none', sm: 'inherit' } }}>
-        <Stack sx={{ width: { xs: undefined, lg: '100%' } }}>
+      <Box sx={{ display: { xs: 'none', sm: 'inherit', width: '100%' } }}>
+        <Stack sx={{ width: { xs: undefined, sm: '100%' } }}>
           {visibleNavItems
             .map((ni, index) => (
               <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} />

@@ -2,6 +2,7 @@ import { a11yDark as dark, a11yLight as light } from 'react-syntax-highlighter/d
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import React, { memo } from 'react';
 import NextLink from 'next/link';
+import { Copy, Link as LinkIcon } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Divider, Link, Sheet, Typography } from '@mui/joy';
 import useUserTheme from 'src/hooks/useUserTheme';
@@ -12,7 +13,6 @@ import MdxPageLayout from './MdxPageLayout';
 import { ChildrenProps } from '../../src/sharedTypes';
 import { useLocaleHelpers } from '../../src/hooks/useLocale';
 import useIsClient from '../../src/hooks/useIsClient';
-import { Copy, Link as LinkIcon } from '@signalco/ui-icons';
 
 const headingTopSpacing = 2;
 const headingBottomSpacing = 2;

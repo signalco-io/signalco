@@ -37,9 +37,7 @@ const footerLinks: FooterSectionType[] = [
         links: [
             { name: 'Status', href: 'https://status.signalco.io' },
             { name: 'Design', href: '/design' },
-            { name: 'API', href: '/docs/api', developerOnly: true },
-            { name: 'Storybook', href: 'https://storybook.signalco.dev', developerOnly: true },
-            { name: 'Storybook (next)', href: 'https://next.storybook.signalco.dev', developerOnly: true },
+            { name: 'API', href: '/docs/api', developerOnly: true }
         ]
     },
     {

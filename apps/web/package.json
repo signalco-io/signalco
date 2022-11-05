@@ -37,8 +37,6 @@
         "@microsoft/signalr": "6.0.10",
         "@monaco-editor/react": "4.4.6",
         "@mui/joy": "5.0.0-alpha.52",
-        "@mui/lab": "5.0.0-alpha.106",
-        "@mui/material": "5.10.12",
         "@mui/system": "5.10.12",
         "@next/env": "13.0.1",
         "@next/mdx": "13.0.1",

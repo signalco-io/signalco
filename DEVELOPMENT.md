@@ -56,12 +56,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 Staging (branch `next`):
 
 - [signalco.dev](https://next.signalco.io)
-- [next.storybook.signalco.dev](https://next.storybook.dev.signalco.io)
 
 Production (branch `main`):
 
 - [signalco.io](https://www.signalco.io)
-- [storybook.signalco.dev](https://storybook.dev.signalco.io)
 
 ## More info
 

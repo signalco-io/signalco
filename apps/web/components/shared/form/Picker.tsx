@@ -11,10 +11,11 @@ export interface PickerProps<TValue> {
     value: TValue | undefined;
     onChange: (event: ChangeEvent<HTMLInputElement>, value: TValue | undefined) => void;
     options: PickerOption[];
+    size?: 'sm' | 'md';
 }
 
 export default function Picker<TValue>(props: PickerProps<TValue>) {
-    const { value, options, onChange } = props;
+    const { value, options, size, onChange } = props;
     return (
         <RadioGroup
             row
@@ -23,11 +24,11 @@ export default function Picker<TValue>(props: PickerProps<TValue>) {
             onChange={(e) => onChange(e, e.target.value as (TValue | undefined))}
             sx={{
                 alignSelf: 'start',
-                minHeight: 48,
-                padding: '4px',
+                minHeight: size === 'sm' ? 32 : 48,
+                padding: size === 'sm' ? '2px' : '4px',
                 borderRadius: 'md',
                 bgcolor: 'neutral.softBg',
-                '--RadioGroup-gap': '4px',
+                '--RadioGroup-gap': size === 'sm' ? '2px' : '4px',
                 '--Radio-action-radius': '8px',
             }}
         >
@@ -49,7 +50,7 @@ export default function Picker<TValue>(props: PickerProps<TValue>) {
                             sx: {
                                 ...(checked && {
                                     bgcolor: 'background.surface',
-                                    boxShadow: 'md',
+                                    boxShadow: size === 'sm' ? 'sm' : 'md',
                                     '&:hover': {
                                         bgcolor: 'background.surface',
                                     },

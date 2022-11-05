@@ -11,7 +11,7 @@ import { entityLastActivity } from 'src/entity/EntityHelper';
 import Timeago from 'components/shared/time/Timeago';
 import SelectItems from 'components/shared/form/SelectItems';
 import Picker from 'components/shared/form/Picker';
-import EntityIcon from 'components/shared/entity/EntityIcon';
+import EntityIcon, { EntityIconByType } from 'components/shared/entity/EntityIcon';
 import ConfigurationDialog from 'components/shared/dialog/ConfigurationDialog';
 import EntityStatus, { useEntityStatus } from 'components/entity/EntityStatus';
 import useUserSetting from '../../../src/hooks/useUserSetting';
@@ -75,7 +75,7 @@ const entityType = [
 const entityTypes = [
     { value: '1', label: 'Devices' },
     { value: '2', label: 'Dashboards' },
-    { value: '3', label: 'Processs' },
+    { value: '3', label: 'Process' },
     { value: '4', label: 'Stations' },
     { value: '5', label: 'Channels' }
 ];
@@ -111,7 +111,6 @@ function Entities() {
 
     const [selectedType, setSelectedType] = useState<string | undefined>('1');
     const typedItems = useMemo(() => filteredItems.filter(e => {
-        console.log(e.type.toString(), selectedType,)
         return e.type.toString() === selectedType;
     }
     ), [filteredItems, selectedType]);
@@ -134,9 +133,20 @@ function Entities() {
             <Stack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 2 }}>
                     <SelectItems
+                        minWidth={220}
                         value={selectedType ? [selectedType] : []}
                         onChange={(v) => setSelectedType(v[0])}
-                        items={entityTypes.map(t => ({ value: t.value.toString(), label: t.label }))}
+                        items={entityTypes.map(t => {
+                            const Icon = EntityIconByType(parseInt(t.value));
+                            return ({
+                                value: t.value, label: t.label, content: (
+                                    <Stack direction="row" spacing={1} alignItems="center">
+                                        <Avatar><Icon /></Avatar>
+                                        <Typography>{t.label}</Typography>
+                                    </Stack>
+                                )
+                            });
+                        })}
                         heading />
                     <Stack direction="row" alignItems="center" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="end">
                         {showSearch && (

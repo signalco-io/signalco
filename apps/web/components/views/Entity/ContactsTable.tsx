@@ -1,9 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
-import { Add, MoreVertical } from '@signalco/ui-icons';
+import { Add, Code, MoreVertical, UI } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
-import { Button, Card, CardOverflow, IconButton, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
+import { Button, Card, IconButton, List, ListDivider, ListItem, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
+import Loadable from 'components/shared/Loadable/Loadable';
 import Picker from 'components/shared/form/Picker';
 import CodeEditor from 'components/code/CodeEditor';
 import SelectItems from '../../shared/form/SelectItems';
@@ -12,7 +13,6 @@ import useLocale from '../../../src/hooks/useLocale';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import { setAsync } from '../../../src/contacts/ContactRepository';
 import Timeago from '../../../components/shared/time/Timeago';
-import AutoTable from '../../../components/shared/table/AutoTable';
 
 function JsonNonArrayVisualizer(props: { name: string, value: any }) {
     if (props.value === null ||
@@ -76,9 +76,9 @@ function DisplayJson(props: { json: string | undefined }) {
                 <JsonVisualizer name="" value={jsonObj} />
             )}
             <Box sx={{ position: 'absolute', right: 0, top: 0 }}>
-                <Picker value={showSource ? 'source' : 'ui'} onChange={(_, s) => setShowSource(s === 'source')} options={[
-                    { value: 'ui', label: 'UI' },
-                    { value: 'source', label: 'Source' }
+                <Picker value={showSource ? 'source' : 'ui'} size="sm" onChange={(_, s) => setShowSource(s === 'source')} options={[
+                    { value: 'ui', label: <UI size={18} /> },
+                    { value: 'source', label: <Code size={18} /> }
                 ]} />
             </Box>
         </Box>
@@ -101,13 +101,6 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
     const { entity } = props;
     const { t } = useLocale('App', 'Entities');
 
-    const tableItems = entity?.contacts?.map(c => ({
-        id: c.contactName,
-        name: c.contactName,
-        channel: c.channelName,
-        value: isJson(c.valueSerialized) ? <DisplayJson json={c.valueSerialized} /> : c.valueSerialized,
-        lastActivity: <Timeago date={c.timeStamp} live />
-    }));
     const isLoading = false;
     const error = undefined;
 
@@ -149,11 +142,33 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                         <MoreVertical />
                     </IconButton>
                 </Stack>
-                <CardOverflow>
-                    <Stack spacing={4}>
-                        <AutoTable error={error} isLoading={isLoading} items={tableItems} localize={t} />
-                    </Stack>
-                </CardOverflow>
+                <Loadable isLoading={isLoading} error={error}>
+                    <List>
+                        {entity?.contacts?.map((c, i) => (
+                            <>
+                                <ListItem key={`${c.entityId}-${c.channelName}-${c.contactName}`}>
+                                    <ListItemContent>
+                                        <Stack spacing={1} direction="row" alignItems="center">
+                                            <Stack sx={{ width: '30%', maxWidth: '260px' }}>
+                                                <Typography noWrap>{c.contactName}</Typography>
+                                                <Typography noWrap level="body3">{c.channelName}</Typography>
+                                            </Stack>
+                                            <Stack>
+                                                {isJson(c.valueSerialized)
+                                                    ? <DisplayJson json={c.valueSerialized} />
+                                                    : <Typography>{c.valueSerialized}</Typography>}
+                                                <Box sx={{ fontSize: 'var(--joy-fontSize-xs)', color: 'var(--joy-palette-text-tertiary)' }}>
+                                                    <Timeago date={c.timeStamp} live />
+                                                </Box>
+                                            </Stack>
+                                        </Stack>
+                                    </ListItemContent>
+                                </ListItem>
+                                {i < (entity?.contacts?.length ?? 0) - 1 && <ListDivider />}
+                            </>
+                        ))}
+                    </List>
+                </Loadable>
             </Card>
             <Menu {...bindMenu(popupState)}>
                 <MenuItem {...bindTrigger(createContactDialogState)}>

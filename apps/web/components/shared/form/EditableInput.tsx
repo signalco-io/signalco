@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Close, Save, Edit } from '@signalco/ui-icons';
 import { Stack, SystemStyleObject } from '@mui/system';
 import { Box, IconButton, Input, Theme, Typography } from '@mui/joy';
-import { Close, Save, Edit } from '@signalco/ui-icons';
 
 interface IEditableInputProps {
     text: string,

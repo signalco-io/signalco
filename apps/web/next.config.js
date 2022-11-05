@@ -31,7 +31,7 @@ const nextConfig = {
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;'
     },
     eslint: {
-        dirs: ['worker', 'tools', 'src', 'pages', 'locales', 'components', '.storybook']
+        dirs: ['worker', 'tools', 'src', 'pages', 'locales', 'components']
     },
     async headers() {
         return [{

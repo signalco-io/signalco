@@ -3,6 +3,7 @@ import {
     bindTrigger,
     usePopupState
 } from 'material-ui-popup-state/hooks';
+import { Navigate } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import {
     Button,
@@ -22,7 +23,6 @@ import Loadable from '../Loadable/Loadable';
 import Popper from '../layout/Popper';
 import Accordion from '../layout/Accordion';
 import NoDataPlaceholder from '../indicators/NoDataPlaceholder';
-import { Navigate } from '@signalco/ui-icons';
 import useEntity from '../../../src/hooks/useEntity';
 import useAllEntities from '../../../src/hooks/useAllEntities';
 

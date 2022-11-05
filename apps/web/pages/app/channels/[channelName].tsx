@@ -1,25 +1,16 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { Stack } from '@mui/system';
-import { Typography } from '@mui/joy';
+import { List, ListItemButton, Typography } from '@mui/joy';
 import useAllEntities from 'src/hooks/useAllEntities';
-import IEntityDetails from 'src/entity/IEntityDetails';
-import AutoTable from 'components/shared/table/AutoTable';
 import Loadable from 'components/shared/Loadable/Loadable';
 import Container from 'components/shared/layout/Container';
+import ResultsPlaceholder from 'components/shared/indicators/ResultsPlaceholder';
 import NoDataPlaceholder from 'components/shared/indicators/NoDataPlaceholder';
 import { AppLayoutWithAuth } from 'components/layouts/AppLayoutWithAuth';
 import ChannelPartialSlack from 'components/channels/partials/ChannelPartialSlack';
 import ChannelLogo from 'components/channels/ChannelLogo';
 import channels from '../../../components/channels/channelsData.json';
-
-function EntityDetailsToAutoTableItem(entity: IEntityDetails) {
-    return {
-        id: entity.id,
-        alias: entity.alias,
-        _link: `/app/entities/${entity.id}`
-    };
-}
 
 function ChannelConnectPartial(props: { channelName: string }) {
     const { channelName } = props;
@@ -27,7 +18,7 @@ function ChannelConnectPartial(props: { channelName: string }) {
         return <ChannelPartialSlack />;
 
     return (
-        <NoDataPlaceholder content="No connect action availble" />
+        <NoDataPlaceholder content="Connect action not availble" />
     );
 }
 
@@ -38,7 +29,6 @@ function AppChannelPage() {
 
     const entities = useAllEntities();
     const connectedChannels = useMemo(() => entities.data?.filter(e => e?.contacts.filter(c => c.channelName === channel?.channelName).length), [channel?.channelName, entities]);
-    const connectedChannelsTableItems = connectedChannels?.map(EntityDetailsToAutoTableItem);
 
     return (
         <Container maxWidth="md">
@@ -49,7 +39,20 @@ function AppChannelPage() {
                 </Stack>
                 <Stack spacing={2}>
                     <Typography typography="h3">Connected entities</Typography>
-                    <AutoTable items={connectedChannelsTableItems} isLoading={entities.isLoading} error={entities.error} />
+                    <Loadable isLoading={entities.isLoading} error={entities.error}>
+                        {(connectedChannels?.length ?? 0) > 0
+                            ? (
+                                <List>
+                                    {connectedChannels?.map(c => (
+                                        <ListItemButton href={`/app/entities/${c.id}`} key={c.id}>
+                                            <Typography>{c.alias || c.id}</Typography>
+                                        </ListItemButton>
+                                    ))}
+                                </List>
+                            ) : (
+                                <ResultsPlaceholder />
+                            )}
+                    </Loadable>
                 </Stack>
                 <Stack spacing={2}>
                     <Typography typography="h3">Connect</Typography>
