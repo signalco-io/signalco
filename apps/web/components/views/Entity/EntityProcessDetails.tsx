@@ -25,6 +25,11 @@ declare module ProcessConfigurationV1 {
         valueSerialized: string;
     }
 
+    export interface ConditionOrGroup {
+        type: 'orGroup';
+        conditions: Condition[];
+    }
+
     export interface ConditionCompare {
         type: 'compare';
         left: Condition;
@@ -32,7 +37,7 @@ declare module ProcessConfigurationV1 {
         right: Condition;
     }
 
-    export type Condition = ConditionContact | ConditionConstant | ConditionCompare;
+    export type Condition = ConditionContact | ConditionConstant | ConditionCompare | ConditionOrGroup;
 
     export interface Contact {
         contactPointer: ContactPointer;
@@ -75,6 +80,16 @@ function Condition(props: { condition: ProcessConfigurationV1.Condition }) {
                         {condition.op === 0 ? ' is ' : ' is not '}
                     </span>
                     <Condition condition={condition.right} />
+                </Stack>
+            )}
+            {(condition.type === 'orGroup') && (
+                <Stack direction="row" alignItems="center" spacing={1}>
+                    {condition.conditions.map((c, i) => (
+                        <>
+                            <Condition key={i} condition={c} />
+                            {i < condition.conditions.length - 1 && <Typography>or</Typography>}
+                        </>
+                    ))}
                 </Stack>
             )}
         </div>
