@@ -129,7 +129,7 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                     </Alert>
                 )}
                 <Stack spacing={2}>
-                    {config.conducts.map(conduct => (
+                    {config?.conducts.map(conduct => (
                         <Card key={conduct.id}>
                             <Typography level="body2">Do</Typography>
                             <Stack spacing={1}>
