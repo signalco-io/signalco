@@ -1,30 +1,25 @@
 import { Channel, Dashboard, Device, Play, Station } from '@signalco/ui-icons';
 import IEntityDetails from 'src/entity/IEntityDetails';
 
+export function EntityIconByType(type: number) {
+    switch(type) {
+        case 2:
+            return Dashboard;
+        case 3:
+            return Play;
+        case 4:
+            return Station;
+        case 5:
+            return Channel;
+        default:
+            return Device;
+    }
+}
+
 export default function EntityIcon(entity: IEntityDetails | undefined) {
-    let Icon = Device;
+    let Icon = null;
 
     if (entity) {
-        //    { value: '1', label: 'Devices' },
-    // { value: '2', label: 'Dashboards' },
-    // { value: '3', label: 'Processs' },
-    // { value: '4', label: 'Stations' },
-    // { value: '5', label: 'Channels' }
-        switch(entity.type) {
-            case 2:
-                Icon = Dashboard;
-                break;
-            case 3:
-                Icon = Play;
-                break;
-            case 4:
-                Icon = Station;
-                break;
-            case 5:
-                Icon = Channel;
-                break;
-        }
-
         if (entity.alias.toLowerCase().indexOf('light') >= 0 ||
             entity.alias.toLowerCase().indexOf('lamp') >= 0 ||
             entity.alias.toLowerCase().indexOf('svijetlo') >= 0) {
@@ -52,6 +47,11 @@ export default function EntityIcon(entity: IEntityDetails | undefined) {
         } else if (entity.alias.toLowerCase().indexOf('switch') >= 0) {
             // Icon = PowerSettingsNewIcon;
         }
+
+        if (!Icon) {
+            return EntityIconByType(entity.type);
+        }
     }
-    return Icon;
+
+    return Icon ?? Device;
 }
