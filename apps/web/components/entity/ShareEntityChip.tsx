@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { Clear, People, Send, Share } from '@signalco/ui-icons';
 import { Stack } from '@mui/system';
-import { Tooltip , IconButton, TextField } from '@mui/joy';
+import { Tooltip, IconButton, TextField, List, ListItem, ListItemContent, ListDivider } from '@mui/joy';
 import IUser from 'src/users/IUser';
 import Chip from 'components/shared/indicators/Chip';
 import GentleSlide from 'components/shared/animations/GentleSlide';
-import AutoTable from '../shared/table/AutoTable';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import HttpService from '../../src/services/HttpService';
 import useLocale from '../../src/hooks/useLocale';
@@ -75,7 +74,24 @@ function ShareEntityModal(props: IShareEntityModalProps) {
                     </Stack>
                 </Stack>
             </GentleSlide>
-            <AutoTable error={''} isLoading={false} items={entity.sharedWith?.map(u => ({ id: u.id, name: u.fullName ?? u.email, email: u.email }))} />
+            <Stack spacing={1}>
+                <List variant="outlined" sx={{
+                    borderRadius: 'sm',
+                }}>
+                    {entity.sharedWith?.map((u, i) => (
+                        <>
+                            <ListItem key={u.id}>
+                                <ListItemContent>
+                                    {u.fullName ?? u.email}
+                                </ListItemContent>
+                            </ListItem>
+                            {i < (entity.sharedWith?.length ?? 0) - 1 && (
+                                <ListDivider />
+                            )}
+                        </>
+                    ))}
+                </List>
+            </Stack>
         </ConfigurationDialog>
     );
 }
