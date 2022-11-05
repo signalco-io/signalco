@@ -1,15 +1,17 @@
 import React, { ReactElement } from 'react';
-import { Select, Option } from '@mui/joy';
+import { Select as SelectIcon } from '@signalco/ui-icons';
+import { Select, Option, selectClasses } from '@mui/joy';
 
 export interface ISelectItemsProps {
     multiple?: boolean,
     value: string[],
     label?: string,
-    items: { value: string, label?: ReactElement | string, disabled?: boolean }[],
+    items: { value: string, label?: ReactElement | string, content?: ReactElement | string | undefined, disabled?: boolean }[],
     onChange: (values: string[]) => void,
     placeholder?: string,
     fullWidth?: boolean;
     heading?: boolean;
+    minWidth?: number | undefined;
 }
 
 function SelectItems(props: ISelectItemsProps) {
@@ -18,6 +20,7 @@ function SelectItems(props: ISelectItemsProps) {
         items,
         placeholder,
         heading,
+        minWidth,
         onChange
     } = props;
 
@@ -33,9 +36,17 @@ function SelectItems(props: ISelectItemsProps) {
             variant={heading ? 'plain' : 'soft'}
             size={heading ? 'lg' : undefined}
             sx={{
-                fontSize: heading ? '1.6em' : undefined,
-                background: heading ? 'transparent' : undefined
+                fontSize: heading ? '1.4em' : undefined,
+                background: heading ? 'transparent' : undefined,
+                [`& .${selectClasses.indicator}`]: {
+                  transition: '0.2s',
+                  [`&.${selectClasses.expanded}`]: {
+                    transform: 'rotate(-180deg)',
+                  },
+                },
+                minWidth
             }}
+            indicator={<SelectIcon />}
             renderValue={(selected) => {
                 // if (multiple)
                 //     return (
@@ -55,9 +66,10 @@ function SelectItems(props: ISelectItemsProps) {
             <Option
                 value={item.value}
                 key={item.value}
-                disabled={item.disabled}>
+                disabled={item.disabled}
+                label={item.label}>
                 {/* {multiple && <Checkbox checked={value.indexOf(item.value) > -1} />} */}
-                {item.label ?? item.value}
+                {item.content ?? (item.label ?? item.value)}
             </Option>)
         )}
         </Select>
