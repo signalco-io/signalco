@@ -37,7 +37,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
     }, [entity]);
     const showRawResolved = useMemo(() => detailsComponent == null || showRaw, [detailsComponent, showRaw]);
 
-    const disabledContact = useContact(entity && { entityId: entity.id, channelName: 'config', contactName: 'disabled' });
+    const disabledContact = useContact(entity && { entityId: entity.id, channelName: 'signalco', contactName: 'disabled' });
     const isDisabled = disabledContact.data?.valueSerialized === 'true';
 
     return (
