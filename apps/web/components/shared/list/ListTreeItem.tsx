@@ -42,7 +42,7 @@ export default function ListTreeItem(props: ListTreeItemProps) {
                     <ExpandDown />
                 </IconButton>
             )}>
-                <ListItemButton onClick={handleClick} selected={selected}>
+                <ListItemButton onClick={handleClick} selected={selected} disabled={!onSelected}>
                     {label}
                 </ListItemButton>
                 {open && (
