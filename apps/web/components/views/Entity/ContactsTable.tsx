@@ -179,7 +179,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                                                 <Typography noWrap>{c.contactName}</Typography>
                                                 <Typography noWrap level="body3">{c.channelName}</Typography>
                                             </Stack>
-                                            <Stack>
+                                            <Stack flexGrow={1}>
                                                 {isJson(c.valueSerialized)
                                                     ? <DisplayJson json={c.valueSerialized} />
                                                     : <Typography>{c.valueSerialized}</Typography>}
