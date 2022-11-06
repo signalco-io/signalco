@@ -29,7 +29,15 @@ export default function ListTreeItem(props: ListTreeItemProps) {
     return (
         <>
             <ListItem nested startAction={children && (
-                <IconButton onClick={handleOpenClick}>
+                <IconButton title="Toggle" onClick={handleOpenClick} className={open ? 'expanded' : ''} size="sm" sx={{
+                    ['& > *']: {
+                        transition: '0.2s',
+                        transform: 'rotate(-90deg)',
+                    },
+                    ['&.expanded > *']: {
+                        transform: 'rotate(0deg)',
+                    },
+                }}>
                     <ExpandDown />
                 </IconButton>
             )}>
