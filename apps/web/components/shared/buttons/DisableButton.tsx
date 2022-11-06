@@ -4,17 +4,21 @@ import { Button } from '@mui/joy';
 interface DisableButtonProps {
     readonly?: boolean;
     disabled: boolean;
+    onClick?: () => void;
 }
 
 export default function DisableButton(props: DisableButtonProps) {
-    const { disabled, readonly } = props;
+    const { disabled, readonly, onClick } = props;
 
     return (
         <Button
             disabled={readonly}
-            color={disabled ? 'success' : 'warning'}
-            startDecorator={disabled ? <Check /> : <Disabled />}>
-            {disabled ? 'Enable' : 'Disable'}
+            color={disabled ? 'warning' : 'success'}
+            variant={disabled ? 'solid' : 'soft'}
+            size="sm"
+            startDecorator={disabled ? <Disabled /> : <Check />}
+            onClick={onClick}>
+            {disabled ? 'Disabled' : 'Enabled'}
         </Button>
     );
 }
