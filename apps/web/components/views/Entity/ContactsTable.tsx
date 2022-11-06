@@ -6,7 +6,6 @@ import { Box, Stack } from '@mui/system';
 import { Button, Card, IconButton, List, ListDivider, ListItem, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
 import Loadable from 'components/shared/Loadable/Loadable';
 import ListTreeItem from 'components/shared/list/ListTreeItem';
-import Chip from 'components/shared/indicators/Chip';
 import Picker from 'components/shared/form/Picker';
 import CopyToClipboardInput from 'components/shared/form/CopyToClipboardInput';
 import CodeEditor from 'components/code/CodeEditor';
