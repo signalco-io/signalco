@@ -6,7 +6,9 @@ import { Box, Stack } from '@mui/system';
 import { Button, Card, IconButton, List, ListDivider, ListItem, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
 import Loadable from 'components/shared/Loadable/Loadable';
 import ListTreeItem from 'components/shared/list/ListTreeItem';
+import Chip from 'components/shared/indicators/Chip';
 import Picker from 'components/shared/form/Picker';
+import CopyToClipboardInput from 'components/shared/form/CopyToClipboardInput';
 import CodeEditor from 'components/code/CodeEditor';
 import SelectItems from '../../shared/form/SelectItems';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
@@ -40,30 +42,44 @@ function JsonNonArrayVisualizer(props: { name: string, value: any }) {
 function JsonArrayVisualizer(props: { name: string, value: Array<any> }) {
     return (
         <>
-            {props.value.map((v, i) => <ObjectVisualizer key={`${props.name}-${i}`} name={i.toString()} value={v} />)}
+            {props.value.map((v, i) => <ObjectVisualizer key={`${props.name}-${i}`} defaultOpen={props.value.length <= 1} name={i.toString()} value={v} />)}
         </>
     );
 }
 
-function ObjectVisualizer(props: { name: string, value: any }) {
-    const { name, value } = props;
-    const hasChildren = typeof value === 'object' || Array.isArray(value);
+function ObjectVisualizer(props: { name: string, value: any, defaultOpen?: boolean }) {
+    const { name, value, defaultOpen } = props;
+    const isArray = Array.isArray(value);
+    const hasChildren = typeof value === 'object' || isArray;
 
     return (
         <ListTreeItem
             nodeId={name}
+            defaultOpen={defaultOpen}
             label={(
                 <Stack spacing={1} direction="row" alignItems="center">
-                    {name && <Typography>{name}</Typography>}
-                    {!hasChildren && (
-                        <Typography>{value?.toString()}</Typography>
+                    {name && (
+                        <Typography
+                            minWidth={120}
+                            title={`${name} (${(isArray ? `array[${value.length}]` : typeof value)})`}>
+                            {name}
+                        </Typography>
                     )}
-                    <Typography level="body3">({Array.isArray(value) ? `array(${value.length})` : typeof value})</Typography>
+                    {!hasChildren && (
+                        // TODO: Implement visualizer for different data types
+                        //     - number
+                        //     - color (hex)
+                        //     - URL
+                        //     - GUID/UUID
+                        //     - boolean
+                        //     - ability to unset value
+                        <CopyToClipboardInput size="sm" variant="outlined" value={value?.toString()} />
+                    )}
                 </Stack>
             )}>
             {hasChildren && (
-                <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', ml: 2.6 }}>
-                    {Array.isArray(value)
+                <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', ml: 2.5 }}>
+                    {isArray
                         ? <JsonArrayVisualizer name={name} value={value as Array<any>} />
                         : <JsonNonArrayVisualizer name={name} value={value} />}
                 </Box>
@@ -82,7 +98,9 @@ function DisplayJson(props: { json: string | undefined }) {
             {showSource ? (
                 <CodeEditor language="json" code={jsonFormatted} height={300} />
             ) : (
-                <ObjectVisualizer name="" value={jsonObj} />
+                <List size="sm">
+                    <ObjectVisualizer name="root" defaultOpen value={jsonObj} />
+                </List>
             )}
             <Box sx={{ position: 'absolute', right: 0, top: 0 }}>
                 <Picker value={showSource ? 'source' : 'ui'} size="sm" onChange={(_, s) => setShowSource(s === 'source')} options={[
