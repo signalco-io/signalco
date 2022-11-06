@@ -5,6 +5,7 @@ import { Add, Code, MoreVertical, UI } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Button, Card, IconButton, List, ListDivider, ListItem, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
 import Loadable from 'components/shared/Loadable/Loadable';
+import ListTreeItem from 'components/shared/list/ListTreeItem';
 import Picker from 'components/shared/form/Picker';
 import CodeEditor from 'components/code/CodeEditor';
 import SelectItems from '../../shared/form/SelectItems';
@@ -29,7 +30,7 @@ function JsonNonArrayVisualizer(props: { name: string, value: any }) {
         return (
             <div>
                 {properties && properties.map(prop =>
-                    <JsonVisualizer key={prop.name} name={prop.name} value={prop.value} />)}
+                    <ObjectVisualizer key={prop.name} name={prop.name} value={prop.value} />)}
             </div>
         );
     }
@@ -39,27 +40,35 @@ function JsonNonArrayVisualizer(props: { name: string, value: any }) {
 function JsonArrayVisualizer(props: { name: string, value: Array<any> }) {
     return (
         <>
-            {props.value.map((v, i) => <JsonVisualizer key={`${props.name}-${i}`} name={i.toString()} value={v} />)}
+            {props.value.map((v, i) => <ObjectVisualizer key={`${props.name}-${i}`} name={i.toString()} value={v} />)}
         </>
     );
 }
 
-function JsonVisualizer(props: { name: string, value: any }) {
+function ObjectVisualizer(props: { name: string, value: any }) {
+    const { name, value } = props;
+    const hasChildren = typeof value === 'object' || Array.isArray(value);
+
     return (
-        <div>
-            <Stack spacing={1} direction="row" alignItems="center">
-                {props.name && <Typography>{props.name}</Typography>}
-                {(typeof props.value !== 'object' && !Array.isArray(props.value)) && (
-                    <Typography>{props.value?.toString()}</Typography>
-                )}
-                <Typography level="body3">({Array.isArray(props.value) ? `array(${props.value.length})` : typeof props.value})</Typography>
-            </Stack>
-            <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', px: 2 }}>
-                {Array.isArray(props.value)
-                    ? <JsonArrayVisualizer name={props.name} value={props.value as Array<any>} />
-                    : <JsonNonArrayVisualizer name={props.name} value={props.value} />}
-            </Box>
-        </div>
+        <ListTreeItem
+            nodeId={name}
+            label={(
+                <Stack spacing={1} direction="row" alignItems="center">
+                    {name && <Typography>{name}</Typography>}
+                    {!hasChildren && (
+                        <Typography>{value?.toString()}</Typography>
+                    )}
+                    <Typography level="body3">({Array.isArray(value) ? `array(${value.length})` : typeof value})</Typography>
+                </Stack>
+            )}>
+            {hasChildren && (
+                <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', ml: 2.6 }}>
+                    {Array.isArray(value)
+                        ? <JsonArrayVisualizer name={name} value={value as Array<any>} />
+                        : <JsonNonArrayVisualizer name={name} value={value} />}
+                </Box>
+            )}
+        </ListTreeItem>
     );
 }
 
@@ -73,7 +82,7 @@ function DisplayJson(props: { json: string | undefined }) {
             {showSource ? (
                 <CodeEditor language="json" code={jsonFormatted} height={300} />
             ) : (
-                <JsonVisualizer name="" value={jsonObj} />
+                <ObjectVisualizer name="" value={jsonObj} />
             )}
             <Box sx={{ position: 'absolute', right: 0, top: 0 }}>
                 <Picker value={showSource ? 'source' : 'ui'} size="sm" onChange={(_, s) => setShowSource(s === 'source')} options={[
