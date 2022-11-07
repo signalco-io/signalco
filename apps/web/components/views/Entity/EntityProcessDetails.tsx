@@ -1,11 +1,12 @@
 import { useMemo } from 'react';
-import { Close, Warning } from '@signalco/ui-icons';
-import { Container, Stack } from '@mui/system';
+import { Close, Play, Warning } from '@signalco/ui-icons';
+import { Box, Container, Stack } from '@mui/system';
 import { Alert, Card, IconButton, Typography } from '@mui/joy';
 import useContact from 'src/hooks/useContact';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import { setAsync } from 'src/contacts/ContactRepository';
 import Timeago from 'components/shared/time/Timeago';
+import Chip from 'components/shared/indicators/Chip';
 import DisplayDeviceTarget from 'components/shared/entity/DisplayEntityTarget';
 
 declare module ProcessConfigurationV1 {
@@ -96,9 +97,25 @@ function Condition(props: { condition: ProcessConfigurationV1.Condition }) {
     )
 }
 
+function ExecutionDisplay(props: { entity: IEntityDetails }) {
+    const { entity } = props;
+    const executeContact = useContact({ entityId: entity.id, channelName: 'signalco', contactName: 'executed' });
+    const executed = executeContact?.data?.valueSerialized ? JSON.parse(executeContact?.data?.valueSerialized) : undefined;
+
+    return (
+        <Box>
+            <Chip startDecorator={<Play />}>
+                <Timeago date={executed?.StartTimeStamp} />
+            </Chip>
+        </Box>
+    )
+}
+
 export default function EntityProcessDetails(props: { entity: IEntityDetails; }) {
     const { entity } = props;
     const configurationErrorContactPointer = { entityId: entity.id, channelName: 'signalco', contactName: 'configurationError' };
+
+
 
     const configurationContact = useContact({ entityId: entity.id, channelName: 'signalco', contactName: 'configuration' });
     const config: ProcessConfigurationV1.Configuration = useMemo(() => configurationContact.data?.valueSerialized ? JSON.parse(configurationContact.data?.valueSerialized) : undefined, [configurationContact.data]);
@@ -111,6 +128,7 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
     return (
         <Container>
             <Stack spacing={2}>
+                <ExecutionDisplay entity={entity} />
                 {errorContact.data?.valueSerialized && (
                     <Alert
                         color="danger"
@@ -118,9 +136,9 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                         startDecorator={<Warning />}
                         endDecorator={
                             <IconButton size="sm" color="danger" onClick={handleDismissError}>
-                              <Close />
+                                <Close />
                             </IconButton>
-                          }>
+                        }>
                         <Stack>
                             <Typography>Configuration error</Typography>
                             <Timeago date={errorContact.data.timeStamp} />
