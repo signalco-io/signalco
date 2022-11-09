@@ -1,21 +1,12 @@
 const { createSecureHeaders } = require('next-secure-headers');
 const runtimeCaching = require('next-pwa/cache');
 const createPwa = require('next-pwa');
-const createMdx = require('@next/mdx');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
     enabled: process.env.ANALYZE === 'true',
 });
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-const withMDX = createMdx({
-    extension: /\.mdx?$/,
-    options: {
-        remarkPlugins: [],
-        rehypePlugins: [],
-        providerImportSource: '@mdx-js/react',
-    },
-});
 const withPWA = createPwa({
     dest: 'public',
     runtimeCaching,
@@ -89,4 +80,6 @@ const nextConfig = {
     },
 };
 
-module.exports = withBundleAnalyzer(withPWA(withMDX(nextConfig)));
+module.exports = isDevelopment
+    ? withBundleAnalyzer(nextConfig)
+    : withBundleAnalyzer(withPWA(nextConfig));
