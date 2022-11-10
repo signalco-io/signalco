@@ -54,6 +54,12 @@ const availableWidgets: { type: widgetType | widgetType[], name: string, descrip
         name: 'Button',
         description: 'Execute the action.',
         preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Button.png',
+    },
+    {
+        type: 'finance-stock',
+        name: 'Stock',
+        description: 'See sotck prices at a glance.',
+        preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Finance Stock.png',
     }
 ];
 

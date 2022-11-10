@@ -66,7 +66,10 @@ const nextConfig = {
                             'https://hcaptcha.com', 'https://*.hcaptcha.com',
 
                             // MapBox
-                            'https://api.mapbox.com'
+                            'https://api.mapbox.com',
+
+                            // Finace - Stock widget
+                            'https://api.polygon.io'
                         ],
                         baseURI: ['https://www.signalco.io', 'https://www.signalco.dev'],
                         'frame-ancestors': '\'none\''
