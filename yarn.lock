@@ -3755,10 +3755,10 @@
     "@typescript-eslint/types" "5.41.0"
     eslint-visitor-keys "^3.3.0"
 
-"@vvo/tzdb@6.75.0":
-  version "6.75.0"
-  resolved "https://registry.yarnpkg.com/@vvo/tzdb/-/tzdb-6.75.0.tgz#cf27d6058256ae1d14d50c6ffdc1fb811cccfa96"
-  integrity sha512-36hx1wBIJD+ddu2vA3o0JL2xtR6yFbpmLm4hngd59OYtYY/0Mh6BVusUlCdayf9qVZs7UASN07+cwXAanCAuww==
+"@vvo/tzdb@6.76.0":
+  version "6.76.0"
+  resolved "https://registry.yarnpkg.com/@vvo/tzdb/-/tzdb-6.76.0.tgz#752ed593619c7118333025f22f82836cc876f583"
+  integrity sha512-hDVkAaqDA5ti5izUiPFk7tYWu12D3MyM7BgCkJb++KSUpJbhMiEI+um2PhmWvMhXt5Fwz0OAIGpV5Xtfv63HVw==
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
