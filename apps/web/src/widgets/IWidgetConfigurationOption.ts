@@ -1,5 +1,5 @@
-export default interface IWidgetConfigurationOption {
-    name: string,
+type IWidgetConfigurationOption<TConfigProps> = {
+    name: keyof TConfigProps,
     label: string,
     type: string,
     default?: any,
@@ -8,3 +8,5 @@ export default interface IWidgetConfigurationOption {
     optional?: boolean,
     multiple?: boolean
 }
+
+export default IWidgetConfigurationOption;

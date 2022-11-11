@@ -6,14 +6,14 @@ import { DefaultHeight, DefaultTargetWithValue, DefaultWidth } from '../../../sr
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 
-const stateOptions: IWidgetConfigurationOption[] = [
+const stateOptions: IWidgetConfigurationOption<any>[] = [
     { label: 'Icon', name: 'icon', type: 'string', optional: true },
     DefaultTargetWithValue,
     DefaultHeight(1),
     DefaultWidth(1)
 ];
 
-export default function WidgetButton(props: WidgetSharedProps) {
+export default function WidgetButton(props: WidgetSharedProps<any>) {
     const { config } = props;
 
     const icon = config?.icon ?? 'adjust';

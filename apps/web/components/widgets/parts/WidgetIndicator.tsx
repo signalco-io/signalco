@@ -15,7 +15,7 @@ const stateOptions = [
     DefaultWidth(1)
 ];
 
-function WidgetIndicator(props: WidgetSharedProps) {
+function WidgetIndicator(props: WidgetSharedProps<any>) {
     const { config } = props;
     const router = useRouter();
 

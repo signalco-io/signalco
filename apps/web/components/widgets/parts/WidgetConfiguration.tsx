@@ -9,7 +9,7 @@ import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfiguratio
 import { ObjectDictAny } from '../../../src/sharedTypes';
 
 interface IWidgetConfigurationDialogProps {
-    options: IWidgetConfigurationOption[],
+    options: IWidgetConfigurationOption<unknown>[],
     values: ObjectDictAny,
     setValue: (name: string, value: any) => void,
     onCancel: () => void,
@@ -19,11 +19,11 @@ interface IWidgetConfigurationDialogProps {
 export interface IWidgetConfigurationProps {
     isOpen: boolean,
     config: object,
-    options: IWidgetConfigurationOption[],
+    options: IWidgetConfigurationOption<unknown>[],
     onConfiguration: (config: object) => void,
 }
 
-const useWidgetConfiguration = (options: IWidgetConfigurationOption[], config: object | undefined, onConfiguration: (config: any) => void) => {
+const useWidgetConfiguration = (options: IWidgetConfigurationOption<unknown>[], config: object | undefined, onConfiguration: (config: any) => void) => {
     const [configurationValues, setConfigurationValues] = useState<ObjectDictAny>(config || {});
 
     const setValue = (name: string, value: any) => {
@@ -59,7 +59,7 @@ const useWidgetConfiguration = (options: IWidgetConfigurationOption[], config: o
     } as IWidgetConfigurationDialogProps;
 };
 
-function WidgetConfigurationOption(props: { option: IWidgetConfigurationOption, value: any, onChange: (value: any) => void }) {
+function WidgetConfigurationOption(props: { option: IWidgetConfigurationOption<any>, value: any, onChange: (value: any) => void }) {
     if (props.option.type === 'deviceContactTarget') {
         // Handle multi-contact target
         if (props.option.multiple) {

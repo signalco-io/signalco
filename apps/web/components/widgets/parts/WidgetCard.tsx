@@ -15,7 +15,7 @@ interface IWidgetCardProps {
     children: JSX.Element,
     isEditMode?: boolean
     config?: any,
-    options?: IWidgetConfigurationOption[],
+    options?: IWidgetConfigurationOption<any>[],
     onConfigured?: (config: any) => void
     onRemove?: () => void
 }

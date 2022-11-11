@@ -76,7 +76,7 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
     await ConductsService.RequestMultipleConductAsync(conducts);
 };
 
-function WidgetState(props: WidgetSharedProps) {
+function WidgetState(props: WidgetSharedProps<any>) {
     const { config } = props;
     const onContactPointers = useMemo(() => (Array.isArray(config?.on) ? config.on as IContactPointer[] : undefined), [config?.on]);
     const onEntityIds = useMemo(() => (Array.isArray(config?.on) ? config.on as IContactPointer[] : undefined)?.map(i => i.entityId), [config?.on]);

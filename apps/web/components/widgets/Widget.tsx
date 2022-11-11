@@ -24,11 +24,11 @@ export interface WidgetProps extends WidgetSpecifigProps {
     onRemove: () => void
 }
 
-export interface WidgetSharedProps {
+export interface WidgetSharedProps<TConfigurationProps> {
     id: string,
     isEditMode: boolean,
-    config: any,
-    onOptions: (opts: IWidgetConfigurationOption[]) => void
+    config: TConfigurationProps | undefined,
+    onOptions: (opts: IWidgetConfigurationOption<TConfigurationProps>[]) => void
 }
 
 export interface WidgetSpecifigProps {
@@ -37,7 +37,7 @@ export interface WidgetSpecifigProps {
     config: any,
 }
 
-function applyStaticToConfig(config: any | undefined, options: IWidgetConfigurationOption[] | undefined) {
+function applyStaticToConfig(config: any | undefined, options: IWidgetConfigurationOption<unknown>[] | undefined) {
     const staticConfigs: ObjectDictAny = {};
     if (options) {
         options.filter(o => o.type === 'static').forEach(o => {
@@ -59,7 +59,7 @@ function UnresolvedWidget() {
 
 function Widget(props: WidgetProps) {
     const [config, setConfig] = useState(props.config);
-    const [options, setOptions] = useState<IWidgetConfigurationOption[] | undefined>(undefined);
+    const [options, setOptions] = useState<IWidgetConfigurationOption<any>[] | undefined>(undefined);
     const [active, setActive] = useState(false);
 
     useEffect(() => {
@@ -74,7 +74,7 @@ function Widget(props: WidgetProps) {
         }
     }, [options, props, config]);
 
-    const handleOptions = useCallback((opts: IWidgetConfigurationOption[]) => setOptions(opts), []);
+    const handleOptions = useCallback((opts: IWidgetConfigurationOption<any>[]) => setOptions(opts), []);
     const handleAction = useCallback((newActive: boolean) => {
         if (active !== newActive) {
             return setActive(newActive);

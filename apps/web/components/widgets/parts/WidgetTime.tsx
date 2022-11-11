@@ -13,7 +13,7 @@ const stateOptions = [
     DefaultHeight(1)
 ];
 
-function WidgetTime(props: WidgetSharedProps) {
+function WidgetTime(props: WidgetSharedProps<any>) {
     const { config } = props;
     const [time, setTime] = useState('');
     const [seconds, setSeconds] = useState('');

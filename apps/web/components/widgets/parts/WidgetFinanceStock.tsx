@@ -6,21 +6,36 @@ import IWidgetConfigurationOption from 'src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from 'src/hooks/widgets/useWidgetOptions';
 import useLoadAndError from 'src/hooks/useLoadAndError';
 import Loadable from 'components/shared/Loadable/Loadable';
+import NoDataPlaceholder from 'components/shared/indicators/NoDataPlaceholder';
 import { WidgetSharedProps } from '../Widget';
 
-const stateOptions: IWidgetConfigurationOption[] = [
+type ConfigProps = {
+    ticker: string;
+    polygonApiKey: string;
+    rows: number;
+    columns: number;
+}
+
+const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     { label: 'Ticker', name: 'ticker', type: 'string' },
     { label: 'Polygon.io API key', name: 'polygonApiKey', type: 'string' },
     DefaultHeight(2),
     DefaultWidth(2)
 ];
 
-async function loadPricePolygonApi(ticker: string, apiKey: string) {
-    const response = await fetch(`https://api.polygon.io/v2/aggs/ticker/${ticker}/prev?apiKey=${apiKey}`);
-    const data: any = await response.json();
+async function loadPricePolygonApi(ticker: string | undefined, apiKey: string | undefined) {
+    if (!ticker || !apiKey)
+        return undefined;
 
     const tickerResponse = await fetch(`https://api.polygon.io/v3/reference/tickers?ticker=${ticker}&active=true&sort=ticker&order=asc&limit=10&apiKey=${apiKey}`);
     const tickerData: any = await tickerResponse.json();
+    if (!tickerData?.results?.length)
+        return undefined;
+
+    const response = await fetch(`https://api.polygon.io/v2/aggs/ticker/${ticker}/prev?apiKey=${apiKey}`);
+    const data: any = await response.json();
+    if (!data?.results?.length)
+        return undefined;
 
     return {
         ticker: tickerData.results[0].ticker,
@@ -30,14 +45,14 @@ async function loadPricePolygonApi(ticker: string, apiKey: string) {
     };
 }
 
-export default function WidgetFinanceStock(props: WidgetSharedProps) {
+export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>) {
     const { config } = props;
-    const loadPriceFunc = useCallback(() => loadPricePolygonApi(config.ticker, config.polygonApiKey), [config.ticker, config.polygonApiKey])
+    const loadPriceFunc = useCallback(() => loadPricePolygonApi(config?.ticker, config?.polygonApiKey), [config?.ticker, config?.polygonApiKey])
     const price = useLoadAndError(loadPriceFunc);
 
     useWidgetOptions(stateOptions, props);
 
-    const ticker = price.item?.ticker;
+    const ticker = price.item?.ticker ?? config?.ticker;
     const name = price.item?.name;
     const closePrice = price.item?.close;
     const diff = price.item?.close - price.item?.open;
@@ -52,8 +67,14 @@ export default function WidgetFinanceStock(props: WidgetSharedProps) {
                         <Typography level="body2">{name}</Typography>
                     </Stack>
                     <Stack>
-                        <Typography level="h4" fontWeight="bold" lineHeight={0.9}>${closePrice}</Typography>
-                        <Typography color={diffPerc >= 0 ? 'success' : 'danger'}>{diffPerc}%</Typography>
+                        {!price?.item ? (
+                            <NoDataPlaceholder content={'No data'} />
+                        ) : (
+                            <>
+                                <Typography level="h4" fontWeight="bold" lineHeight={0.9}>${closePrice}</Typography>
+                                <Typography color={diffPerc >= 0 ? 'success' : 'danger'}>{diffPerc}%</Typography>
+                            </>
+                        )}
                     </Stack>
                 </Stack>
             </Loadable>

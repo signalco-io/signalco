@@ -14,7 +14,7 @@ import useEntity from '../../../src/hooks/useEntity';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
-const stateOptions: IWidgetConfigurationOption[] = [
+const stateOptions: IWidgetConfigurationOption<any>[] = [
     { name: 'targetUp', label: 'Up button', type: 'deviceContactTargetWithValue' },
     { name: 'targetDown', label: 'Down button', type: 'deviceContactTargetWithValue' },
     { name: 'stopValueSerialized', label: 'Stop value', type: 'string' },
@@ -22,7 +22,7 @@ const stateOptions: IWidgetConfigurationOption[] = [
     DefaultWidth(4)
 ];
 
-function WidgetShades(props: WidgetSharedProps) {
+function WidgetShades(props: WidgetSharedProps<any>) {
     const { config } = props;
     const upEntity = useEntity(config?.targetUp?.entityId);
     const downEntity = useEntity(config?.targetDown?.entityId);
