@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Box, Stack } from '@mui/system';
 import { Typography } from '@mui/joy';
+import IWidgetConfigurationOption from 'src/widgets/IWidgetConfigurationOption';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import DateTimeProvider from '../../../src/services/DateTimeProvider';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useInterval from '../../../src/hooks/useInterval';
 
-const stateOptions = [
+const stateOptions: IWidgetConfigurationOption<any>[] = [
     { label: 'Show seconds', name: 'showSeconds', type: 'yesno', default: false, optional: true },
     DefaultWidth(2),
     DefaultHeight(1)
