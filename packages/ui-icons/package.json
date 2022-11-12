@@ -24,6 +24,6 @@
     },
     "dependencies": {
       "react-dom": "18.2.0",
-      "lucide-react": "0.99.0"
+      "lucide-react": "0.100.0"
     }
   }

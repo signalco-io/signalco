@@ -11,7 +11,7 @@ import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfiguratio
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useEntity from '../../../src/hooks/useEntity';
 
-const stateOptions: IWidgetConfigurationOption[] = [
+const stateOptions: IWidgetConfigurationOption<any>[] = [
     DefaultLabel,
     { name: 'targetTemperature', label: 'Temperature', type: 'deviceContactTarget' },
     { name: 'targetHeating', label: 'Heating', type: 'deviceContactTarget', optional: true },
@@ -35,7 +35,7 @@ function SmallIndicator(props: { isActive: boolean; icon: string; label: string;
     );
 }
 
-function WidgetAirConditioning(props: WidgetSharedProps) {
+function WidgetAirConditioning(props: WidgetSharedProps<any>) {
     const { config } = props;
     useWidgetOptions(stateOptions, props);
     const { data: temperatureDevice } = useEntity(config?.targetTemperature?.entityId);

@@ -4,18 +4,19 @@ import Image from 'next/image';
 import { SmileMeh, SmileVeryHappy } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
 import { Button } from '@mui/joy';
+import IWidgetConfigurationOption from 'src/widgets/IWidgetConfigurationOption';
 import useContact from 'src/hooks/useContact';
 import IContactPointer from 'src/contacts/IContactPointer';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultTarget, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 
-const stateOptions = [
+const stateOptions: IWidgetConfigurationOption<any>[] = [
     DefaultTarget,
     DefaultWidth(1)
 ];
 
-function WidgetIndicator(props: WidgetSharedProps) {
+function WidgetIndicator(props: WidgetSharedProps<any>) {
     const { config } = props;
     const router = useRouter();
 

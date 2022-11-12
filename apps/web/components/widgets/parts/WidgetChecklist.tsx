@@ -13,7 +13,7 @@ import LocalStorageService from '../../../src/services/LocalStorageService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useLocale, { useLocalePlaceholders } from '../../../src/hooks/useLocale';
 
-const stateOptions: IWidgetConfigurationOption[] = [
+const stateOptions: IWidgetConfigurationOption<any>[] = [
     DefaultLabel,
     { label: 'Remove when done', name: 'removeOnDone', type: 'yesno', default: true, optional: true },
     DefaultHeight(4),
@@ -48,7 +48,7 @@ function ChecklistItem(props: { item: IChecklistItem; onChange: (id: string, don
     );
 }
 
-function WidgetChecklist(props: WidgetSharedProps) {
+function WidgetChecklist(props: WidgetSharedProps<any>) {
     const { id, config } = props;
     const placeholders = useLocalePlaceholders();
     const { t } = useLocale('App', 'Widgets', 'WidgetChecklist');

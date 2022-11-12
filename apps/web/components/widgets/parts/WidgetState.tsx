@@ -76,7 +76,7 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
     await ConductsService.RequestMultipleConductAsync(conducts);
 };
 
-function WidgetState(props: WidgetSharedProps) {
+function WidgetState(props: WidgetSharedProps<any>) {
     const { config } = props;
     const onContactPointers = useMemo(() => (Array.isArray(config?.on) ? config.on as IContactPointer[] : undefined), [config?.on]);
     const onEntityIds = useMemo(() => (Array.isArray(config?.on) ? config.on as IContactPointer[] : undefined)?.map(i => i.entityId), [config?.on]);
@@ -136,7 +136,7 @@ function WidgetState(props: WidgetSharedProps) {
 
     return (
         <Button
-            sx={{ position: 'relative', height: '100%', width: '100%', display: 'block', textAlign: 'left', margin: 0, padding: 0 }}
+            sx={{ borderRadius: 'md', position: 'relative', height: '100%', width: 'calc(100% - 2px)', display: 'block', textAlign: 'left', margin: 0, padding: 0 }}
             onClick={handleStateChangeRequest}
             variant="plain">
             <Stack sx={{ height: '100%', py: 2 }}>

@@ -6,13 +6,13 @@ import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 
-const stateOptions: IWidgetConfigurationOption[] = [
+const stateOptions: IWidgetConfigurationOption<any>[] = [
     DefaultLabel,
     DefaultWidth(4),
     DefaultHeight(4),
 ];
 
-function WidgetVacuum(props: WidgetSharedProps) {
+function WidgetVacuum(props: WidgetSharedProps<any>) {
     const label = props.config?.label ?? '';
     const batteryPerc = 100;
 
