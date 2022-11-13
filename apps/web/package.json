@@ -104,7 +104,7 @@
         "eslint-plugin-import": "2.26.0",
         "eslint-plugin-storybook": "0.6.7",
         "fs-extra": "10.1.0",
-        "next-sitemap": "3.1.30",
+        "next-sitemap": "3.1.31",
         "openapi-types": "12.0.2",
         "prop-types": "15.8.1",
         "puppeteer": "19.2.2",
