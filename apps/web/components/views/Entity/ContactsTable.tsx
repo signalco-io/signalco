@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { Fragment, useMemo, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { Add, Code, MoreVertical, UI } from '@signalco/ui-icons';
@@ -171,8 +171,8 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                 <Loadable isLoading={isLoading} error={error}>
                     <List>
                         {entity?.contacts?.map((c, i) => (
-                            <>
-                                <ListItem key={`${c.entityId}-${c.channelName}-${c.contactName}`}>
+                            <Fragment key={`${c.entityId}-${c.channelName}-${c.contactName}`}>
+                                <ListItem>
                                     <ListItemContent>
                                         <Stack spacing={1} direction="row" alignItems="center">
                                             <Stack sx={{ width: '30%', maxWidth: '260px' }}>
@@ -191,7 +191,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                                     </ListItemContent>
                                 </ListItem>
                                 {i < (entity?.contacts?.length ?? 0) - 1 && <ListDivider />}
-                            </>
+                            </Fragment>
                         ))}
                     </List>
                 </Loadable>
