@@ -77,7 +77,7 @@ function WidgetShades(props: WidgetSharedProps<any>) {
             <Grid xs={6}>
                 <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent="space-between">
                     <WindowVisual shadePerc={shadePerc} size={68} />
-                    <Typography noWrap>{label}</Typography>
+                    <Typography fontWeight="500" noWrap>{label}</Typography>
                 </Stack>
             </Grid>
             <Divider orientation="vertical" />

@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Box, Stack } from '@mui/system';
 import { Button, Typography } from '@mui/joy';
 import useContact from 'src/hooks/useContact';
-import { CircleSlider } from 'react-circle-slider';
 import Icon from 'components/shared/Icon';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -27,7 +26,7 @@ function SmallIndicator(props: { isActive: boolean; icon: string; label: string;
                 <Box sx={{ width: '52px', height: '82px', backgroundColor: props.isActive ? props.activeBackgroundColor : 'transparent', borderRadius: 1 }}>
                     <Stack alignItems="center" justifyContent="center" height="100%" spacing={1}>
                         <Icon sx={{ fontSize: 28, opacity: props.isActive ? 1 : 0.6, }}>{props.icon}</Icon>
-                        <Typography fontWeight={100} fontSize={12}>{props.label}</Typography>
+                        <Typography level="body3">{props.label}</Typography>
                     </Stack>
                 </Box>
             </Button>
@@ -61,22 +60,6 @@ function WidgetAirConditioning(props: WidgetSharedProps<any>) {
     return (
         <Box sx={{ width: '100%', height: '100%' }}>
             <Stack alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
-                <Box sx={{ height: '111px', overflow: 'hidden', position: 'absolute', top: '24px' }}>
-                    <CircleSlider
-                        value={degrees}
-                        size={222}
-                        stepSize={0.1}
-                        min={10}
-                        max={34}
-                        shadow={false}
-                        knobRadius={15}
-                        progressWidth={4}
-                        circleWidth={15}
-                        circleColor="#666"
-                        progressColor={heatingActive ? '#DC5151' : 'transparent'}
-                        onChange={() => { }}
-                    />
-                </Box>
                 <Box sx={{ mt: 9 }}>
                     <Link href={`/app/entities/${temperatureDevice?.id}`} passHref legacyBehavior>
                         <Button variant="plain">
