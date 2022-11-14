@@ -3,7 +3,7 @@ import axios, { AxiosError } from 'axios';
 import CurrentUserProvider from './CurrentUserProvider';
 import AppSettingsProvider from './AppSettingsProvider';
 import { ObjectDictAny } from '../sharedTypes';
-import PageNotificationService from '../notifications/PageNotificationService';
+import { showPrompt } from '../notifications/PageNotificationService';
 import { parseHash, parseHashParam } from '../hooks/useHashParam';
 import { isAbsoluteUrl, trimStartChar } from '../helpers/StringHelpers';
 
@@ -82,7 +82,7 @@ export default class HttpService {
           const isAuthReload = parseHashParam('authReload');
           if (isAuthReload === 'true') {
               // Show notification to manually reload the app
-              PageNotificationService.prompt(
+              showPrompt(
                   'Authorization failed. Please reload the app to continue...',
                   'error',
                   'Reload',

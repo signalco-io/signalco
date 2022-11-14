@@ -8,7 +8,7 @@ import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
-import PageNotificationService from '../../../src/notifications/PageNotificationService';
+import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useEntity from '../../../src/hooks/useEntity';
 
@@ -38,7 +38,7 @@ function WidgetShades(props: WidgetSharedProps<any>) {
     const handleStateChangeRequest = (direction: 'up' | 'down' | 'stop') => {
         if (!upEntity || !downEntity) {
             console.warn('State change requested but device is undefined.');
-            PageNotificationService.show('Can\'t execute action, widget is not loaded yet.', 'warning');
+            showNotification('Can\'t execute action, widget is not loaded yet.', 'warning');
             return;
         }
 
@@ -77,7 +77,7 @@ function WidgetShades(props: WidgetSharedProps<any>) {
             <Grid xs={6}>
                 <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent="space-between">
                     <WindowVisual shadePerc={shadePerc} size={68} />
-                    <Typography noWrap>{label}</Typography>
+                    <Typography fontWeight="500" noWrap>{label}</Typography>
                 </Stack>
             </Grid>
             <Divider orientation="vertical" />

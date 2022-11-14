@@ -6,7 +6,7 @@ import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 import useInterval from './useInterval';
 import { AppThemeMode } from '../theme';
 import DateTimeProvider from '../services/DateTimeProvider';
-import PageNotificationService from '../notifications/PageNotificationService';
+import { showNotification } from '../notifications/PageNotificationService';
 import SunHelper from '../helpers/SunHelper';
 
 export default function useAppTheme() {
@@ -45,7 +45,7 @@ export default function useAppTheme() {
     // Notify user theme was changed (if not first render)
     if (!hideNotification) {
       const themeName = localizer('App', 'Settings', 'Themes')(newColorScheme);
-      PageNotificationService.show(`Switched to ${themeName} theme.`);
+      showNotification(`Switched to ${themeName} theme.`);
     }
 
     console.debug('Color scheme updated', newColorScheme);
