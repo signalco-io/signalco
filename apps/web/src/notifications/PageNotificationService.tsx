@@ -1,18 +1,40 @@
-import { OptionsObject, SnackbarKey, SnackbarMessage, VariantType } from 'notistack';
+import { toast } from 'react-toastify';
+import { ReactNode } from 'react';
+import { Stack } from '@mui/system';
 import { Button } from '@mui/joy';
 
-class PageNotificationService {
-    private _enqueue?: (message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey;
-    private _close?: (key?: SnackbarKey | undefined) => void;
+export type PageNotificationVariant = 'default' | 'info' | 'success' | 'warning' | 'error';
 
-    setSnackbar(
-        enqueue: (message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey,
-        close: (key?: SnackbarKey | undefined) => void) {
-        this._enqueue = enqueue;
-        this._close = close;
+export interface PageNotificationOptions {
+    variant?: PageNotificationVariant;
+    autoHideDuration?: number;
+    persist?: boolean;
+    action?: ReactNode
+}
+
+class PageNotificationService {
+    private _enqueue(message: string | ReactNode, options?: PageNotificationOptions): string | number {
+        const content = options?.action
+        ? (
+            <Stack direction="row" alignItems="center" justifyContent="space-between">
+                {message}
+                {options.action}
+            </Stack>
+        ) : message;
+
+        return toast(content, {
+            autoClose: options?.persist ? false : options?.autoHideDuration,
+            type: options?.variant,
+            position: 'bottom-right',
+            theme: 'dark'
+        });
     }
 
-    show(text: string, variant: VariantType = 'default') {
+    private _close(key?: string | number | undefined) {
+        toast.dismiss(key);
+    }
+
+    show(text: string, variant: PageNotificationVariant = 'default') {
         if (variant === 'warning' || variant === 'error') {
             (variant === 'error' ? console.error : console.warn)(`User presented with ${variant}: ${text}`);
         }
@@ -25,7 +47,7 @@ class PageNotificationService {
         }
     }
 
-    prompt(text: string, variant: VariantType = 'default', actionLabel: string, actionCallback: () => void) {
+    prompt(text: string, variant: PageNotificationVariant = 'default', actionLabel: string, actionCallback: () => void) {
         if (this._enqueue) {
             return this._enqueue(text, {
                 variant: variant,

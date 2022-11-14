@@ -1,11 +1,12 @@
+import { ToastContainer } from 'react-toastify';
 import React, { FunctionComponent, useMemo } from 'react';
-import { SnackbarProvider } from 'notistack';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { CssVarsProvider } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
 import appTheme from '../src/theme';
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/global.scss';
 import { ChildrenProps } from '../src/sharedTypes';
 import useAppTheme from '../src/hooks/useAppTheme';
@@ -46,12 +47,11 @@ export default function App(props: AppProps) {
       <CssVarsProvider theme={appTheme}>
         <QueryClientProvider client={queryClient}>
           <ThemeChangerWrapper>
-            <SnackbarProvider maxSnack={3}>
-              <CssBaseline />
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </SnackbarProvider>
+            <ToastContainer />
+            <CssBaseline />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </ThemeChangerWrapper>
         </QueryClientProvider>
       </CssVarsProvider>

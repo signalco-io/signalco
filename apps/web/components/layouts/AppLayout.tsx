@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useSnackbar } from 'notistack';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useQueryClient } from '@tanstack/react-query';
 import { Minimize } from '@signalco/ui-icons';
@@ -8,18 +7,14 @@ import { IconButton } from '@mui/joy';
 import NavProfile from '../NavProfile';
 import { ChildrenProps } from '../../src/sharedTypes';
 import RealtimeService from '../../src/realtime/realtimeService';
-import PageNotificationService from '../../src/notifications/PageNotificationService';
 import useHashParam from '../../src/hooks/useHashParam';
 
 export function AppLayout(props: ChildrenProps) {
   const {
     children
   } = props;
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [isFullScreen, setFullScreenHash] = useHashParam('fullscreen');
   const queryClient = useQueryClient();
-
-  PageNotificationService.setSnackbar(enqueueSnackbar, closeSnackbar);
 
   // Initiate SignalR communication
   useEffect(() => {
