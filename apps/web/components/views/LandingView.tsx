@@ -24,7 +24,7 @@ const GlobePart = dynamic(() => import('../pages/landing/GlobeSection'));
 function FeatureDescription(props: { title: string, content: string | React.ReactElement, link?: string, linkText?: string }) {
   return (
     <Stack spacing={2}>
-      <Typography level="h5">{props.title}</Typography>
+      <Typography level="h5" component="h3">{props.title}</Typography>
       <Typography textColor="neutral.400">{props.content}</Typography>
       <Box>
         {props.link && (
@@ -55,7 +55,7 @@ function StepContent(props: {
       <Stack spacing={{ xs: 6, md: 12 }} ref={observe}>
         <Stack spacing={{ xs: 2, md: 4 }}>
           <GentleSlide appear={inView} direction="down">
-            <Typography level="h3" textAlign="center">{props.title}</Typography>
+            <Typography level="h3" component="h2" textAlign="center">{props.title}</Typography>
           </GentleSlide>
           {props.subtitle && (
             <GentleSlide appear={inView} direction="down" index={1}>
@@ -101,7 +101,7 @@ function StepContent(props: {
 
 function SectionCenter(props: { children?: React.ReactNode | undefined, sx?: SxProps<Theme> | undefined, narrow?: boolean }) {
   return (
-    <Box sx={props.sx}>
+    <Box sx={props.sx} component="section">
       <Container>
         <Box sx={{ px: { xs: 1, sm: 4, md: 8 }, py: { xs: props.narrow ? 4 : 8, sm: props.narrow ? 4 : 12 } }}>
           {props.children}
