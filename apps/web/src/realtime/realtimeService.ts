@@ -2,7 +2,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import HttpService from '../services/HttpService';
 import CurrentUserProvider from '../services/CurrentUserProvider';
-import PageNotificationService from '../notifications/PageNotificationService';
+import { showNotification } from '../notifications/PageNotificationService';
 
 class SignalSignalRDeviceStateDto {
     entityId?: string;
@@ -70,7 +70,7 @@ class RealtimeService {
             });
             this.contactsHub.onreconnected(() => {
                 console.log('Signalr reconnected');
-                PageNotificationService.show('Realtime connection to cloud established.', 'success');
+                showNotification('Realtime connection to cloud established.', 'success');
             });
             } catch (err) {
             const delay = Math.min((retryCount + 1) * 2, 180);

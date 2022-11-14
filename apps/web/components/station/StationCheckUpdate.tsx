@@ -1,7 +1,7 @@
 import { compareVersions } from 'compare-versions';
 import { Check, Upload } from '@signalco/ui-icons';
 import { Button } from '@mui/joy';
-import PageNotificationService from 'src/notifications/PageNotificationService';
+import { showNotification } from 'src/notifications/PageNotificationService';
 import useLoadAndError from 'src/hooks/useLoadAndError';
 import StationsRepository from '../../src/stations/StationsRepository';
 import useLocale, { localizer, useLocalePlaceholders } from '../../src/hooks/useLocale';
@@ -27,7 +27,7 @@ const stationCommandAsync = async (stationId: string | string[] | undefined, com
     }
     catch (err) {
         console.error('Station command execution error', err);
-        PageNotificationService.show(localizer('App', 'Stations')('StationCommandError'), 'error');
+        showNotification(localizer('App', 'Stations')('StationCommandError'), 'error');
     }
 }
 
