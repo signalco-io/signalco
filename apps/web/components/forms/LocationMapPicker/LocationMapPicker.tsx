@@ -8,7 +8,7 @@ import useUserTheme from 'src/hooks/useUserTheme';
 import useLoadAndError from 'src/hooks/useLoadAndError';
 import Loadable from 'components/shared/Loadable/Loadable';
 import Accordion from 'components/shared/layout/Accordion';
-import PageNotificationService from '../../../src/notifications/PageNotificationService';
+import { showNotification } from '../../../src/notifications/PageNotificationService';
 
 const mapBoxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -54,7 +54,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
             setLatLng([position.coords.latitude, position.coords.longitude], { receiveEvent: false });
             setZoom(15);
         }, () => {
-            PageNotificationService.show('Failed to retrieve your location. Make sure access to location is not blocked.', 'warning')
+            showNotification('Failed to retrieve your location. Make sure access to location is not blocked.', 'warning')
         }, {
             enableHighAccuracy: true,
             timeout: 10000

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Box, Stack } from '@mui/system';
 import { Button, Typography } from '@mui/joy';
+import { showNotification } from 'src/notifications/PageNotificationService';
 import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
 import useDashboard from 'src/hooks/dashboards/useDashboard';
 import DashboardView from './DashboardView';
@@ -11,7 +12,6 @@ import DashboardSelector from './DashboardSelector';
 import { widgetType } from '../widgets/Widget';
 import Loadable from '../shared/Loadable/Loadable';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
-import PageNotificationService from '../../src/notifications/PageNotificationService';
 import useLocale from '../../src/hooks/useLocale';
 import useHashParam from '../../src/hooks/useHashParam';
 import { WidgetModel } from '../../src/dashboards/DashboardsRepository';
@@ -39,7 +39,7 @@ function Dashboards() {
             await saveDashboard.mutateAsync(selectedDashboard.data);
         } catch (err) {
             console.error('Failed to save dashboards', err);
-            PageNotificationService.show(t('SaveFailedNotification'), 'error');
+            showNotification(t('SaveFailedNotification'), 'error');
         } finally {
             setIsEditing(false);
             setIsSavingEdit(false);
@@ -58,7 +58,7 @@ function Dashboards() {
             setDashboardIdHash(newDashboardId);
         } catch (err) {
             console.error('Failed to create dashboard', err);
-            PageNotificationService.show(t('NewDashboardErrorUnknown'), 'error');
+            showNotification(t('NewDashboardErrorUnknown'), 'error');
         }
     };
 

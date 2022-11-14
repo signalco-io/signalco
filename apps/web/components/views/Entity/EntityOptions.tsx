@@ -4,7 +4,7 @@ import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { MoreHorizontal } from '@signalco/ui-icons';
 import { Button, Divider, Menu, MenuItem } from '@mui/joy';
-import PageNotificationService from 'src/notifications/PageNotificationService';
+import { showNotification } from 'src/notifications/PageNotificationService';
 import useLocale from 'src/hooks/useLocale';
 import useEntity from 'src/hooks/useEntity';
 import { entityDeleteAsync } from 'src/entity/EntityRepository';
@@ -43,7 +43,8 @@ export default function EntityOptions(props: EntityOptionsProps) {
             await entityDeleteAsync(id);
             router.push('/app/entities');
         } catch (err) {
-            PageNotificationService.show(t('DeleteErrorUnknown'));
+            console.error('Failed to delete entity', err);
+            showNotification(t('DeleteErrorUnknown'));
         }
     };
 
