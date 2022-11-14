@@ -144,7 +144,7 @@ function WidgetState(props: WidgetSharedProps<any>) {
                     <Visual state={state} size={68} />
                 </Box>
                 <Box sx={{ px: 2 }}>
-                    <Typography fontWeight="400" noWrap>{label}</Typography>
+                    <Typography fontWeight="500" noWrap>{label}</Typography>
                 </Box>
             </Stack>
             {isLoading && (
