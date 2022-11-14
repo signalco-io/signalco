@@ -9,7 +9,7 @@ import IContactPointer from 'src/contacts/IContactPointer';
 import IContact from 'src/contacts/IContact';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
-import PageNotificationService from '../../../src/notifications/PageNotificationService';
+import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useEntities from '../../../src/hooks/useEntities';
 import ConductsService from '../../../src/conducts/ConductsService';
@@ -44,7 +44,7 @@ const determineActionValueAsync = async (action: StateAction) => {
         if (!isAction) {
             if (typeof contact === 'undefined') {
                 console.warn('Failed to retrieve button action source state', action)
-                PageNotificationService.show('Conduct action new value can\'t be determined.', 'warning');
+                showNotification('Conduct action new value can\'t be determined.', 'warning');
                 return null;
             }
 
@@ -64,7 +64,7 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
             typeof action.channelName === 'undefined' ||
             typeof action.contactName === 'undefined') {
             console.warn('Action has invalid target', action)
-            PageNotificationService.show('Conduct has missing target data.', 'warning');
+            showNotification('Conduct has missing target data.', 'warning');
             continue;
         }
 
@@ -118,7 +118,7 @@ function WidgetState(props: WidgetSharedProps<any>) {
     const handleStateChangeRequest = () => {
         if (typeof onEntities === 'undefined') {
             console.warn('State change requested but device is undefined.');
-            PageNotificationService.show('Can\'t execute action, widget is not loaded yet.', 'warning');
+            showNotification('Can\'t execute action, widget is not loaded yet.', 'warning');
             return;
         }
 
