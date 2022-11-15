@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
+import { Icon } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import { Button, Typography } from '@mui/joy';
 import useContact from 'src/hooks/useContact';
-import Icon from 'components/shared/Icon';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
