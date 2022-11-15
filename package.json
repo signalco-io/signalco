@@ -19,6 +19,7 @@
     "nextBundleAnalysis": {
         "budget": 358400,
         "budgetPercentIncreaseRed": 10,
-        "showDetails": true
+        "showDetails": true,
+        "buildOutputDirectory": "apps/web/.next"
     }
 }
