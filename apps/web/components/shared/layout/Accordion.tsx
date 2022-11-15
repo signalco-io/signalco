@@ -1,8 +1,8 @@
 import { MouseEvent, useState } from 'react';
+import { Icon } from '@signalco/ui';
 import { Box, Stack, SxProps } from '@mui/system';
 import { Card, IconButton } from '@mui/joy';
 import { ChildrenProps } from 'src/sharedTypes';
-import Icon from '../Icon';
 
 export interface AccordionProps extends ChildrenProps {
     open?: boolean;

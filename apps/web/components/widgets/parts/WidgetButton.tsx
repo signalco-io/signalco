@@ -1,6 +1,6 @@
+import { Icon } from '@signalco/ui';
 import { IconButton } from '@mui/joy';
 import IContact from 'src/contacts/IContact';
-import Icon from 'components/shared/Icon';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultTargetWithValueMultiple, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
