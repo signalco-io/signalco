@@ -2,10 +2,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Alert } from '@mui/joy';
+import WidgetState from './parts/WidgetState'; 
 import WidgetCard from './parts/WidgetCard';
 import IWidgetConfigurationOption from '../../src/widgets/IWidgetConfigurationOption';
 import { ObjectDictAny } from '../../src/sharedTypes';
-import WidgetState from './parts/WidgetState'; 
 const WidgetChecklist = dynamic(() => import('./parts/WidgetChecklist'));
 const WidgetIndicator = dynamic(() => import('./parts/WidgetIndicator'));
 const WidgetTime = dynamic(() => import('./parts/WidgetTime'));
