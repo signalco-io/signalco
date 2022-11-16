@@ -7,7 +7,7 @@ export interface PopperProps extends ChildrenProps {
     popupState: PopupState;
 }
 
-export default function Popper(props: PopperProps) {
+export function Popper(props: PopperProps) {
     const { popupState, children } = props;
 
     const { anchorReference, ...popoverProps } = bindPopover(popupState);

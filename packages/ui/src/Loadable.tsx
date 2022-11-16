@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Box, SxProps } from '@mui/system';
 import LinearProgress from '@mui/joy/LinearProgress';
 import { Alert, CircularProgress } from '@mui/joy';
-import { ChildrenProps } from 'src/sharedTypes';
+import { ChildrenProps } from './sharedTypes';
 
 export interface LoadableLoadingErrorProps {
     error?: unknown | string | React.ReactElement;
@@ -20,7 +20,7 @@ export interface LoadableProps extends LoadableLoadingErrorProps, LoadableSkelet
     sx?: SxProps | undefined;
 }
 
-export default function Loadable(props: LoadableProps) {
+export function Loadable(props: LoadableProps) {
     const {isLoading, placeholder, error, children, contentVisible, sx} = props;
 
     const indicator = useMemo(() => {

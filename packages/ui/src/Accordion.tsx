@@ -1,5 +1,5 @@
 import { MouseEvent, useState } from 'react';
-import Icon from './Icon';
+import {Icon} from './Icon';
 import { Box, Stack, SxProps } from '@mui/system';
 import { Card, IconButton } from '@mui/joy';
 import { ChildrenProps } from './sharedTypes';
@@ -12,7 +12,7 @@ export interface AccordionProps extends ChildrenProps {
     unmountOnExit?: boolean;
 }
 
-export default function Accordion(props: AccordionProps) {
+export function Accordion(props: AccordionProps) {
     const { children, open, sx, disabled, onChange, unmountOnExit } = props;
     const [isOpen, setIsOpen] = useState(open ?? false);
 

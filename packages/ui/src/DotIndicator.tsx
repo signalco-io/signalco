@@ -6,7 +6,7 @@ export interface DotIndicatorProps {
     size?: number;
 }
 
-export default function DotIndicator(props: DotIndicatorProps) {
+export function DotIndicator(props: DotIndicatorProps) {
     const { color, content, size: requestedSize } = props;
     const size = requestedSize || 10;
     return (

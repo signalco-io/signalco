@@ -5,7 +5,7 @@ export interface IconProps extends ChildrenProps {
     sx?: SxProps<Theme>;
 }
 
-export default function Icon(props: IconProps) {
+export function Icon(props: IconProps) {
     return (
         <Box
             component="span"

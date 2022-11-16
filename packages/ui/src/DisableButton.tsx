@@ -7,7 +7,7 @@ interface DisableButtonProps {
     onClick?: () => void;
 }
 
-export default function DisableButton(props: DisableButtonProps) {
+export function DisableButton(props: DisableButtonProps) {
     const { disabled, readonly, onClick } = props;
 
     return (

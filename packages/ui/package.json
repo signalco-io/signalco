@@ -11,8 +11,8 @@
         "dist/**"
     ],
     "scripts": {
-        "build": "tsup src/index.ts --format esm --dts --external react react-dom next",
-        "dev": "tsup src/index.ts --format esm --watch --dts --external react react-dom next",
+        "build": "tsup src/index.ts --format esm --dts --external react",
+        "dev": "tsup src/index.ts --format esm --watch --dts --external react",
         "clean": "rm -rf dist"
     },
     "devDependencies": {

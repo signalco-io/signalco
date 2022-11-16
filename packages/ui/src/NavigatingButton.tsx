@@ -11,7 +11,7 @@ export interface NavigatingButtonProps extends ChildrenProps {
     hideArrow?: boolean;
 }
 
-export default function NavigatingButton({
+export function NavigatingButton({
     href,
     prefetch,
     size,
