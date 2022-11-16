@@ -1,6 +1,11 @@
 import { arrayMax } from 'src/helpers/ArrayHelpers'
 import IEntityDetails from './IEntityDetails'
 
+export function entityHasOffline(entity: IEntityDetails | undefined) {
+    if (typeof entity === 'undefined') return false;
+    return !!entity.contacts.find(c => c.contactName === 'offline');
+}
+
 export function entityInError(entity: IEntityDetails | undefined) {
     if (typeof entity === 'undefined') return false;
     const contact = entity.contacts.find(c => c.contactName === 'offline');
