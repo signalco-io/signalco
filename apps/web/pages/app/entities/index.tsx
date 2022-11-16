@@ -38,29 +38,29 @@ function EntityCard(props: { entity: IEntityDetails, spread: boolean }) {
     return (
         <Grid {...columns}>
             <Link href={`/app/entities/${entity.id}`} passHref legacyBehavior>
-                <Card variant="outlined" sx={spread ? { p: 1 } : {}}>
-                    <Stack spacing={2} direction={spread ? 'row' : 'column'} justifyContent={spread ? 'space-between' : undefined}>
-                        <Stack direction="row" spacing={2} alignItems="center">
-                            <Avatar variant={spread ? 'plain' : 'soft'}>
-                                <Icon />
-                            </Avatar>
-                            <Typography noWrap>{entity.alias}</Typography>
-                        </Stack>
-                        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
-                            <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
-                            <Stack direction="row" spacing={1} alignItems="center" sx={{ pr: spread ? 2 : 0 }}>
-                                {(hasStatus && (isStale || isOffline)) && (
-                                    <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
-                                        <Timeago date={entityLastActivity(entity)} />
-                                    </Box>
-                                )}
-                                <EntityStatus entity={entity} />
-                            </Stack>
+                <Card variant="outlined" sx={{ height: '100%', p: spread ? 0 : 1 }}>
+                <Stack spacing={2} direction={spread ? 'row' : 'column'} justifyContent={spread ? 'space-between' : undefined}>
+                    <Stack direction="row" spacing={2} alignItems="center">
+                        <Avatar variant={spread ? 'plain' : 'soft'}>
+                            <Icon />
+                        </Avatar>
+                        <Typography noWrap>{entity.alias}</Typography>
+                    </Stack>
+                    <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+                        <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
+                        <Stack direction="row" spacing={1} alignItems="center" sx={{ pr: spread ? 2 : 0 }}>
+                            {(hasStatus && (isStale || isOffline)) && (
+                                <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
+                                    <Timeago date={entityLastActivity(entity)} />
+                                </Box>
+                            )}
+                            <EntityStatus entity={entity} />
                         </Stack>
                     </Stack>
-                </Card>
-            </Link>
-        </Grid>
+                </Stack>
+            </Card>
+        </Link>
+        </Grid >
     );
 }
 
@@ -117,7 +117,7 @@ function Entities() {
 
     const results = useMemo(() => (
         <Box sx={{ px: 2 }}>
-            <Grid container spacing={entityListViewType === 'table' ? 1 : 2}>
+            <Grid container spacing={1}>
                 {typedItems.map(entity => (
                     <EntityCard key={entity.id} entity={entity} spread={entityListViewType === 'table'} />
                 ))}

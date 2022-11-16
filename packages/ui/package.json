@@ -19,7 +19,7 @@
       "@signalco/tsconfig": "*",
       "react": "18.2.0",
       "tsup": "6.5.0",
-      "typescript": "4.8.4",
+      "typescript": "4.9.3",
       "prop-types": "15.8.1"
     },
     "dependencies": {
