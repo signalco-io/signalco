@@ -4,12 +4,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Github, Navigate } from '@signalco/ui-icons';
+import { Container, ImageLink } from '@signalco/ui';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack, SxProps, Theme } from '@mui/system';
 import { Button, Divider, Typography } from '@mui/joy';
 import useUserTheme from 'src/hooks/useUserTheme';
-import Container from 'components/shared/layout/Container';
-import LinkImage from 'components/shared/ImageLink';
 import DeveloperOnly from 'components/shared/DeveloperOnly';
 import GentleSlide from 'components/shared/animations/GentleSlide';
 import Fade from 'components/shared/animations/Fade';
@@ -138,7 +137,7 @@ function FeaturedIntegrationsSection() {
           {integrationsList.map((channel, channelIndex) => (
             <Grid key={channel.name} xs={6} md={12 / integrationsList.length} textAlign="center" sx={{ p: 1 }}>
               <GentleSlide appear={inView} index={channelIndex} direction="down">
-                <LinkImage href={channel.page} imageProps={{
+                <ImageLink href={channel.page} imageProps={{
                   alt: channel.name,
                   src: channel.img,
                   width: `${integrationsLogoSize * channel.imgRatio}`,

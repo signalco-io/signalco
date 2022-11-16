@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { Navigate } from '@signalco/ui-icons';
 import { Button } from '@mui/joy';
-import { ChildrenProps } from 'src/sharedTypes';
+import { ChildrenProps } from './sharedTypes';
 
-interface NavigatingButtonProps extends ChildrenProps {
+export interface NavigatingButtonProps extends ChildrenProps {
     href: string;
     prefetch?: boolean;
     size?: 'sm' | 'md' | 'lg';
@@ -11,22 +11,29 @@ interface NavigatingButtonProps extends ChildrenProps {
     hideArrow?: boolean;
 }
 
-export default function NavigatingButton(props: NavigatingButtonProps) {
+export default function NavigatingButton({
+    href,
+    prefetch,
+    size,
+    disabled,
+    hideArrow,
+    children
+}: NavigatingButtonProps) {
     return (
         <Link
-            href={props.href}
+            href={href}
             passHref
-            prefetch={props.prefetch ?? undefined}
+            prefetch={prefetch ?? undefined}
             legacyBehavior>
             <Button
                 color="primary"
-                variant={props.hideArrow ? 'plain' : 'solid'}
-                disabled={props.disabled}
-                size={props.size}
+                variant={hideArrow ? 'plain' : 'solid'}
+                disabled={disabled}
+                size={size}
                 endDecorator={<Navigate size={16} />}
                 sx={{
                     '.JoyButton-endDecorator': {
-                        opacity: props.hideArrow ? 0 : 1,
+                        opacity: hideArrow ? 0 : 1,
                         transition: 'opacity 0.2s linear'
                     },
                     '&:hover': {
@@ -35,7 +42,7 @@ export default function NavigatingButton(props: NavigatingButtonProps) {
                         }
                     }
                 }}>
-                {props.children}
+                {children}
             </Button>
         </Link>
     );

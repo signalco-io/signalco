@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { Loadable } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import { Button, Typography } from '@mui/joy';
 import { showNotification } from 'src/notifications/PageNotificationService';
@@ -10,7 +11,6 @@ import DashboardView from './DashboardView';
 import DashboardSettings from './DashboardSettings';
 import DashboardSelector from './DashboardSelector';
 import { widgetType } from '../widgets/Widget';
-import Loadable from '../shared/Loadable/Loadable';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import useLocale from '../../src/hooks/useLocale';
 import useHashParam from '../../src/hooks/useHashParam';

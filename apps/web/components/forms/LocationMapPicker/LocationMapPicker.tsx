@@ -1,13 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { Draggable, Map, Marker } from 'pigeon-maps';
 import { MyLocation } from '@signalco/ui-icons';
+import { Loadable , Accordion } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import { IconButton, TextField, Typography } from '@mui/joy';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/esm/index.types';
 import useUserTheme from 'src/hooks/useUserTheme';
 import useLoadAndError from 'src/hooks/useLoadAndError';
-import Loadable from 'components/shared/Loadable/Loadable';
-import Accordion from 'components/shared/layout/Accordion';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 
 const mapBoxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;

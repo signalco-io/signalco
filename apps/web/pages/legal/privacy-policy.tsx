@@ -1,4 +1,4 @@
-import Link from 'components/shared/Link';
+import { Link } from '@signalco/ui';
 import { PageLayout } from 'components/layouts/PageLayout';
 
 function PrivacyPolicy() {

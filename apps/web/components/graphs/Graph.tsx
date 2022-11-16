@@ -1,12 +1,12 @@
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
+import { NoDataPlaceholder } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import { Sheet, Typography } from '@mui/joy';
 import useUserTheme from 'src/hooks/useUserTheme';
 import lightBlue from 'src/colors/lightBlue';
 import deepOrange from 'src/colors/deepOrange';
 import Timeago from '../shared/time/Timeago';
-import NoDataPlaceholder from '../shared/indicators/NoDataPlaceholder';
 import { ObjectDictAny } from '../../src/sharedTypes';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
