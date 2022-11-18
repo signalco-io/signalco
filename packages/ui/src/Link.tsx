@@ -1,5 +1,5 @@
 import NextLink from 'next/link';
-import JoyLink, { LinkProps } from '@mui/joy/Link';
+import { Link as JoyLink, LinkProps } from '@mui/joy';
 
 export default function Link(props: LinkProps & { href: string }) {
     const { href, ...rest } = props;

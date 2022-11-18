@@ -1,21 +1,21 @@
-import React, { MouseEvent, useId, useState } from 'react';
+import { MouseEvent, useId, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { Copy, Warning } from '@signalco/ui-icons';
 import { Alert, IconButton } from '@mui/joy';
-import Popper from '../layout/Popper';
-import { ChildrenProps } from '../../../src/sharedTypes';
-import { useLocaleHelpers } from '../../../src/hooks/useLocale';
+import Popper from './Popper';
+import { ChildrenProps } from './sharedTypes';
 
 export type IconButtonCopyToClipboardProps = ChildrenProps & {
     title: string;
     value?: unknown;
     defaultValue?: unknown;
     className?: string | undefined;
+    successMessage: string,
+    errorMessage: string
 };
 
 export default function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps) {
     const id = useId();
-    const { t } = useLocaleHelpers();
     const popupState = usePopupState({ variant: 'popper', popupId: `copytoclipboard-button-${id}` });
     const [error, setError] = useState<boolean>(false);
 
@@ -56,7 +56,9 @@ export default function IconButtonCopyToClipboard(props: IconButtonCopyToClipboa
                 {props.children ? props.children : <Copy />}
             </IconButton>
             <Popper popupState={popupState}>
-                <Alert color={error ? 'warning' : 'neutral'} startDecorator={error && <Warning />}>{!error ? t('CopyToClipboardSuccess') : t('CopyToClipboardError')}</Alert>
+                <Alert color={error ? 'warning' : 'neutral'} startDecorator={error && <Warning />}>
+                    {error ? props.errorMessage : props.successMessage}
+                </Alert>
             </Popper>
         </>
     );

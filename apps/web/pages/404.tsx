@@ -1,6 +1,6 @@
+import { NavigatingButton } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import { Typography } from '@mui/joy';
-import NavigatingButton from 'components/shared/buttons/NavigatingButton';
 import { PageLayout } from '../components/layouts/PageLayout';
 
 function NotFound() {

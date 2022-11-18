@@ -7,25 +7,31 @@
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
+    "type": "module",
     "files": [
-      "dist/**"
+        "dist/**"
     ],
     "scripts": {
-      "build": "tsup src/index.ts --format esm,cjs --dts --external react",
-      "dev": "tsup src/index.ts --format esm,cjs --watch --dts --external react",
-      "clean": "rm -rf dist"
+        "build": "tsup src/index.tsx --format esm --treeshake --dts --external react",
+        "dev": "tsup src/index.tsx --format esm --treeshake --watch --dts --external react",
+        "clean": "rm -rf dist"
     },
     "devDependencies": {
-      "@signalco/tsconfig": "*",
-      "react": "18.2.0",
-      "tsup": "6.5.0",
-      "typescript": "4.9.3",
-      "prop-types": "15.8.1"
+        "@signalco/tsconfig": "*",
+        "tsup": "6.5.0",
+        "typescript": "4.9.3",
+        "react": "18.2.0",
+        "@types/react": "18.0.25",
+        "@types/react-dom": "18.0.9"
     },
     "dependencies": {
-      "@signalco/ui-icons": "*",
-      "@mui/system": "5.10.14",
-      "react-dom": "18.2.0",
-      "lucide-react": "0.101.0"
+        "@signalco/ui-icons": "*",
+        "react-dom": "18.2.0",
+        "@mui/system": "5.10.14",
+        "@mui/joy": "5.0.0-alpha.54",
+        "@mui/base": "5.0.0-alpha.106",
+        "material-ui-popup-state": "4.1.0",
+        "@storybook/react": "6.5.13",
+        "next": "13.0.3"
     }
-  }
+}

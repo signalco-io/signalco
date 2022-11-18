@@ -1,6 +1,6 @@
 import { Share } from '@signalco/ui-icons';
+import { IconButtonCopyToClipboard } from '@signalco/ui';
 import useIsClient from 'src/hooks/useIsClient';
-import IconButtonCopyToClipboard from 'components/shared/buttons/IconButtonCopyToClipboard';
 
 export default function ShareSocial() {
     const isClient = useIsClient();
@@ -9,7 +9,11 @@ export default function ShareSocial() {
 
     const value = window.location.href;
     return (
-        <IconButtonCopyToClipboard title="Copy link to clipboard" value={value}>
+        <IconButtonCopyToClipboard
+            title="Copy link to clipboard"
+            value={value}
+            successMessage={'Copied'}
+            errorMessage={'Failed to copy'}>
             <Share />
         </IconButtonCopyToClipboard>
     );

@@ -1,7 +1,7 @@
 /* eslint-disable react/function-component-definition */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Typography } from '@mui/joy';
-import Accordion, { AccordionProps } from './Accordion';
+import { Accordion, AccordionProps } from './Accordion';
 
 export default {
     title: 'Components/Shared/Layout/Accordion',

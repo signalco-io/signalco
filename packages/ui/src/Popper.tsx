@@ -1,7 +1,6 @@
 import { bindPopover, PopupState } from 'material-ui-popup-state/hooks';
-import ClickAwayListener from '@mui/base/ClickAwayListener';
-import { PopperUnstyled } from '@mui/base';
-import { ChildrenProps } from 'src/sharedTypes';
+import { PopperUnstyled, ClickAwayListener } from '@mui/base';
+import { ChildrenProps } from './sharedTypes';
 
 export interface PopperProps extends ChildrenProps {
     popupState: PopupState;

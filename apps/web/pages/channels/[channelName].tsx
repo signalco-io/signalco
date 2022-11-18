@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router';
+import { Breadcrumbs , NavigatingButton } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import { Card, Typography } from '@mui/joy';
-import NavigatingButton from 'components/shared/buttons/NavigatingButton';
-import Breadcrumbs from 'components/shared/Breadcrumbs';
 import ShareSocial from 'components/pages/ShareSocial';
 import FaqSection from 'components/pages/FaqSection';
 import CtaSection from 'components/pages/CtaSection';

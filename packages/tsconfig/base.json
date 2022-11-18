@@ -5,19 +5,16 @@
         "composite": false,
         "declaration": true,
         "declarationMap": true,
-        "skipLibCheck": true,
-        "inlineSources": false,
-        "strict": true,
-        "forceConsistentCasingInFileNames": true,
         "esModuleInterop": true,
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
+        "forceConsistentCasingInFileNames": true,
+        "inlineSources": false,
         "isolatedModules": true,
-        "removeComments": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "preserveConstEnums": true,
-        "preserveWatchOutput": true
+        "moduleResolution": "node",
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "preserveWatchOutput": true,
+        "skipLibCheck": true,
+        "strict": true
     },
     "exclude": [
         "node_modules"

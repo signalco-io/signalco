@@ -1,6 +1,6 @@
+import { NavigatingButton } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import { Sheet, Typography } from '@mui/joy';
-import NavigatingButton from 'components/shared/buttons/NavigatingButton';
 
 export default function CtaSection() {
     return (

@@ -1,12 +1,9 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
+import { Container, Loadable, NoDataPlaceholder } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import { List, ListItemButton, Typography } from '@mui/joy';
 import useAllEntities from 'src/hooks/useAllEntities';
-import Loadable from 'components/shared/Loadable/Loadable';
-import Container from 'components/shared/layout/Container';
-import ResultsPlaceholder from 'components/shared/indicators/ResultsPlaceholder';
-import NoDataPlaceholder from 'components/shared/indicators/NoDataPlaceholder';
 import { AppLayoutWithAuth } from 'components/layouts/AppLayoutWithAuth';
 import ChannelPartialSlack from 'components/channels/partials/ChannelPartialSlack';
 import ChannelLogo from 'components/channels/ChannelLogo';
@@ -50,7 +47,7 @@ function AppChannelPage() {
                                     ))}
                                 </List>
                             ) : (
-                                <ResultsPlaceholder />
+                                <NoDataPlaceholder content="No items" />
                             )}
                     </Loadable>
                 </Stack>
