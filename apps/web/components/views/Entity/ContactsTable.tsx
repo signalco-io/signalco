@@ -4,7 +4,7 @@ import { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { Add, Code, MoreVertical, UI } from '@signalco/ui-icons';
 import { Loadable } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
-import { Button, Card, IconButton, List, ListDivider, ListItem, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
+import { Button, Card, IconButton, List, ListDivider, ListItem, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Tooltip, Typography } from '@mui/joy';
 import ListTreeItem from 'components/shared/list/ListTreeItem';
 import Picker from 'components/shared/form/Picker';
 import CopyToClipboardInput from 'components/shared/form/CopyToClipboardInput';
@@ -58,11 +58,12 @@ function ObjectVisualizer(props: { name: string, value: any, defaultOpen?: boole
             label={(
                 <Stack spacing={1} direction="row" alignItems="center">
                     {name && (
-                        <Typography
-                            minWidth={120}
-                            title={`${name} (${(isArray ? `array[${value.length}]` : typeof value)})`}>
-                            {name}
-                        </Typography>
+                        <Tooltip title={`${name} (${(isArray ? `array[${value.length}]` : typeof value)})`}>
+                            <Typography
+                                minWidth={120}>
+                                {name}
+                            </Typography>
+                        </Tooltip>
                     )}
                     {!hasChildren && (
                         // TODO: Implement visualizer for different data types
@@ -212,7 +213,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
             </Menu>
             <ConfigurationDialog
                 isOpen={createContactDialogState.isOpen}
-                title="Create contact"
+                header="Create contact"
                 onClose={createContactDialogState.close}>
                 <Stack spacing={1}>
                     <TextField value={channelName} onChange={(e) => setChannelName(e.target.value)} />
@@ -222,7 +223,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
             </ConfigurationDialog>
             <ConfigurationDialog
                 isOpen={editContactValueDialogState.isOpen}
-                title="Create contact"
+                header="Create contact"
                 onClose={editContactValueDialogState.close}>
                 <Stack spacing={1}>
                     <SelectItems

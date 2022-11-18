@@ -22,8 +22,7 @@ interface IShareEntityModalProps {
     onClose: () => void
 }
 
-function ShareEntityModal(props: IShareEntityModalProps) {
-    const { entity, entityType, onClose } = props;
+function ShareEntityModal({ entity, entityType, onClose }: IShareEntityModalProps) {
     const { t } = useLocale('App', 'Components', 'ShareEntityChip');
     const [isShareWithNewOpen, setIsShareWithNewOpen] = useState(false);
     const [shareWithNewEmail, setShareWithNewEmail] = useState('');
@@ -51,8 +50,8 @@ function ShareEntityModal(props: IShareEntityModalProps) {
     return (
         <ConfigurationDialog
             isOpen
-            title={t('ShareWith')}
-            titleActions={(
+            header={t('ShareWith')}
+            headerActions={(
                 <Tooltip title={t('Share')}>
                     <IconButton onClick={handleShareWithUser} variant="plain">
                         <Share />
@@ -69,8 +68,12 @@ function ShareEntityModal(props: IShareEntityModalProps) {
                         sx={{ maxWidth: '270px' }}
                         onChange={(e) => setShareWithNewEmail(e.target.value)} />
                     <Stack direction="row">
-                        <IconButton onClick={handleSubmitShareWithNew} color="success" title={t('SendInvitation')}><Send /></IconButton>
-                        <IconButton onClick={handleCancelShareWithNew} title={t('Cancel')}><Clear /></IconButton>
+                        <Tooltip title={t('SendInvitation')}>
+                            <IconButton onClick={handleSubmitShareWithNew} color="success" ><Send /></IconButton>
+                        </Tooltip>
+                        <Tooltip title={t('Cancel')}>
+                            <IconButton onClick={handleCancelShareWithNew}><Clear /></IconButton>
+                        </Tooltip>
                     </Stack>
                 </Stack>
             </GentleSlide>

@@ -170,7 +170,7 @@ function Entities() {
                     </Loadable>
                 </Stack>
             </Stack>
-            <ConfigurationDialog isOpen={isAddEntityOpen} title={t('NewEntityDialogTitle')} onClose={() => setIsAddEntityOpen(false)}>
+            <ConfigurationDialog isOpen={isAddEntityOpen} header={t('NewEntityDialogTitle')} onClose={() => setIsAddEntityOpen(false)}>
                 <EntityCreate />
             </ConfigurationDialog>
         </>

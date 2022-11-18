@@ -150,7 +150,7 @@
             "NewDashboardErrorUnknown": "Failed to create dashboard. Please try again.",
             "Dashboard": "Dashboard",
             "ToggleFullscreen": "Toggle fullscreen",
-            "Settings": "Settings",
+            "Settings": "Settings...",
             "EditWidgets": "Edit widgets...",
             "NoWidgets": "No Widgets",
             "NoWidgetsHelpTextFirstLine": "Dashboard is a bit empty.",

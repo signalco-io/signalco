@@ -124,7 +124,7 @@ function Dashboards() {
                     onClose={() => setIsDashboardSettingsOpen(false)} />
             )}
             {showWidgetStore && (
-                <ConfigurationDialog isOpen={showWidgetStore} onClose={() => setShowWidgetStore(false)} title={t('AddWidget')} maxWidth="lg">
+                <ConfigurationDialog isOpen={showWidgetStore} onClose={() => setShowWidgetStore(false)} header={t('AddWidget')} maxWidth="lg">
                     <WidgetStoreDynamic onAddWidget={handleAddWidget} />
                 </ConfigurationDialog>
             )}

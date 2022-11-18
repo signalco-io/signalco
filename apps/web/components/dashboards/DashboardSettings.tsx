@@ -15,8 +15,7 @@ interface IDashboardSettingsProps {
     onClose: () => void,
 }
 
-function DashboardSettings(props: IDashboardSettingsProps) {
-    const { isOpen, dashboard, onClose } = props;
+function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsProps) {
     const { t } = useLocale('App', 'Dashboards');
     const router = useRouter();
     const [name, setName] = useState(dashboard?.name || '');
@@ -48,7 +47,7 @@ function DashboardSettings(props: IDashboardSettingsProps) {
     return (
         <ConfigurationDialog
             isOpen={isOpen}
-            title={t('DashboardSettings')}
+            header={t('DashboardSettings')}
             onClose={onClose}
             actions={(
                 <>
@@ -65,7 +64,7 @@ function DashboardSettings(props: IDashboardSettingsProps) {
                     <Typography level="body2">{t('Advanced')}</Typography>
                     <ConfirmDeleteButton
                         buttonLabel={t('DeleteButtonLabel')}
-                        title={t('DeleteTitle')}
+                        header={t('DeleteTitle')}
                         expectedConfirmText={dashboard?.name || t('ConfirmDialogExpectedText')}
                         onConfirm={handleDashboardDelete} />
                 </Stack>
