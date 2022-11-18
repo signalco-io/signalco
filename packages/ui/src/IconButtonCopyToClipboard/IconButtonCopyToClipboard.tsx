@@ -1,5 +1,3 @@
-'use client';
-
 import { MouseEvent, useId, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { Copy, Warning } from '@signalco/ui-icons';
@@ -19,21 +17,20 @@ export type IconButtonCopyToClipboardProps = ChildrenProps & {
 export default function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps) {
     const id = useId();
     const popupState = usePopupState({ variant: 'popper', popupId: `copytoclipboard-button-${id}` });
-    // const [error, setError] = useState<boolean>(false);
-    const error = false;
+    const [error, setError] = useState<boolean>(false);
 
     const handleClickShowCopyToClipboard = (event: MouseEvent<HTMLButtonElement>) => {
         try {
             const value = props.value || props.defaultValue;
             if (typeof value === 'string') {
                 navigator.clipboard.writeText(value);
-                // setError(false);
+                setError(false);
             } else {
-                // setError(true);
+                setError(true);
             }
         } catch (error) {
             console.warn('Failed to copy to clipboard', error);
-            // setError(true);
+            setError(true);
         } finally {
             if (event.target) {
                 popupState.open(event.currentTarget);

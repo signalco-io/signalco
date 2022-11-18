@@ -13,7 +13,6 @@ export interface AccordionProps extends ChildrenProps {
 }
 
 export default function Accordion(props: AccordionProps) {
-    'use client';
     const { children, open, sx, disabled, onChange, unmountOnExit } = props;
     const [isOpen, setIsOpen] = useState(open ?? false);
 
