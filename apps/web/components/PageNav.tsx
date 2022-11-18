@@ -1,3 +1,5 @@
+'use client';
+
 import React, { Suspense } from 'react';
 import Link from 'next/link';
 import NavigatingButton from '@signalco/ui/dist/NavigatingButton';

@@ -1,6 +1,4 @@
-import { PageLayout } from 'components/layouts/PageLayout';
-
-function Sla() {
+export default function Sla() {
     return (
         <main>
             <h1 id="service-level-agreement">Service Level Agreement</h1>
@@ -54,8 +52,3 @@ function Sla() {
         </main>
     );
 }
-
-Sla.title = 'SLA';
-Sla.layout = PageLayout;
-
-export default Sla;

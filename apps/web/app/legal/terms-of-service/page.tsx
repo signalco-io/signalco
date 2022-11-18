@@ -1,6 +1,4 @@
-import { PageLayout } from 'components/layouts/PageLayout';
-
-function TermsOfService() {
+export default function TermsOfService() {
     return (
         <main>
             <h1 id="terms-of-service">Terms of Service</h1>
@@ -48,8 +46,3 @@ function TermsOfService() {
         </main>
     );
 }
-
-TermsOfService.title = 'SLA';
-TermsOfService.layout = PageLayout;
-
-export default TermsOfService;

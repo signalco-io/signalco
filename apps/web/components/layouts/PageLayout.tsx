@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import Container from '@signalco/ui/dist/Container';
+import { Container } from '@signalco/ui';
 import { Box, Breakpoint, Stack } from '@mui/system';
 import Footer from '../pages/Footer';
 import { PageNav } from '../PageNav';
