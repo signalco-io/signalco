@@ -1,7 +1,9 @@
+'use client';
+
 import React, { ReactNode } from 'react';
 import NextLink from 'next/link';
+import Container from '@signalco/ui/dist/Container';
 import { Github, Twitter } from '@signalco/ui-icons';
-import { Container } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import { Grid, IconButton, Typography, Link as JoyLink } from '@mui/joy';
 import SignalcoLogotype from 'components/icons/SignalcoLogotype';

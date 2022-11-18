@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@signalco/ui';
+import Container from '@signalco/ui/dist/Container';
 import { Box, Breakpoint, Stack } from '@mui/system';
 import Footer from '../pages/Footer';
 import { PageNav } from '../PageNav';

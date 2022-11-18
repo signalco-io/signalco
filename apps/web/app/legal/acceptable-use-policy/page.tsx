@@ -1,6 +1,4 @@
-import { PageLayout } from 'components/layouts/PageLayout';
-
-function AcceptableUsePolicy() {
+export default function AcceptableUsePolicyPage() {
     return (
         <main>
             <h1 id="acceptable-use-policy">Acceptable Use Policy</h1>
@@ -55,8 +53,3 @@ function AcceptableUsePolicy() {
         </main>
     );
 }
-
-AcceptableUsePolicy.title = 'Acceptable Use Policy';
-AcceptableUsePolicy.layout = PageLayout;
-
-export default AcceptableUsePolicy;

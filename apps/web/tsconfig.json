@@ -5,8 +5,22 @@
         "baseUrl": ".",
         "outDir": "dist",
         "paths": {
-            "*": ["./*"]
-        }
+            "*": [
+                "./*"
+            ]
+        },
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ]
     },
-    "include": ["src", "components", "pages", "next-env.d.ts", "@types"]
+    "include": [
+        "src",
+        "components",
+        "pages",
+        "next-env.d.ts",
+        "@types",
+        ".next/types/**/*.ts"
+    ]
 }

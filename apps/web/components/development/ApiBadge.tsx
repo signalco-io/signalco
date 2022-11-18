@@ -1,6 +1,6 @@
 'use client';
 
-import { Chip } from '@signalco/ui';
+import Chip from '@signalco/ui/dist/Chip';
 import useIsClient from 'src/hooks/useIsClient';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
 
