@@ -48,18 +48,16 @@ type RingLogoInfo = {
     height: number
 }
 
+var seed = 1;
+function random() {
+    var x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+}
+
 function RingLogo(props: { ringRadius: number, degrees: number, imageProps: ImageProps }) {
     const logoPadding = 16;
-
     const logoWidth = props.imageProps.width as number;
     const logoHeight = props.imageProps.height as number;
-
-    const top = -logoHeight / 2 - logoPadding + props.ringRadius;
-    const left = -logoWidth / 2 - logoPadding + props.ringRadius;
-    const power = useMemo(() => Math.random() > 0.5 ? 4 : -4, []);
-
-    const keyframesName = `@keyframes scaleRingLogo${props.imageProps.id}`;
-    const rotateKeyframesName = `@keyframes rotateRingLogo${props.imageProps.id}`;
 
     return (
         <Link href={`/channels/${props.imageProps.id}`} passHref legacyBehavior>
@@ -68,19 +66,19 @@ function RingLogo(props: { ringRadius: number, degrees: number, imageProps: Imag
                 backgroundColor: 'background.default',
                 width: `${logoWidth + logoPadding * 2}px`,
                 height: `${logoHeight + logoPadding * 2}px`,
-                top: `${top}px`,
-                left: `${left}px`,
+                top: `${-logoHeight / 2 - logoPadding + props.ringRadius}px`,
+                left: `${-logoWidth / 2 - logoPadding + props.ringRadius}px`,
                 borderRadius: '50%',
                 position: 'absolute',
                 opacity: 0,
                 animation: `scaleRingLogo${props.imageProps.id} 0.5s ease-in forwards, rotateRingLogo${props.imageProps.id} 12s ease-in-out infinite alternate`,
                 animationDelay: '0.4s',
-                [keyframesName]: {
+                [`@keyframes scaleRingLogo${props.imageProps.id}`]: {
                     to: { opacity: 1 }
                 },
-                [rotateKeyframesName]: {
-                    from: { transform: `rotate(${-props.degrees}deg) translateX(${props.ringRadius}px) rotate(${props.degrees}deg)` },
-                    to: { transform: `rotate(${-props.degrees - power}deg) translateX(${props.ringRadius * 1.02}px) rotate(${props.degrees + power}deg)` }
+                [`@keyframes rotateRingLogo${props.imageProps.id}`]: {
+                    from: { transform: `rotate(${-props.degrees - (props.degrees * props.ringRadius)/10000}deg) translateX(${props.ringRadius}px) rotate(${props.degrees + (props.degrees * props.ringRadius)/10000}deg)` },
+                    to: { transform: `rotate(${-props.degrees}deg) translateX(${props.ringRadius * 1.02}px) rotate(${props.degrees}deg)` }
                 },
                 zIndex: 1
             }}>
@@ -95,11 +93,8 @@ function RingLogo(props: { ringRadius: number, degrees: number, imageProps: Imag
 }
 
 function Ring(props: { size: number, logos: RingLogoInfo[] }) {
-    const offsetX = -100;
-    const offsetY = -40;
-
     return (
-        <Box sx={{ width: props.size, position: 'absolute', left: `calc(50% - ${props.size / 2 + offsetX}px)`, bottom: `-${props.size / 2 + offsetY}px` }}>
+        <Box sx={{ width: props.size, position: 'absolute', left: `calc(50% - ${props.size / 2 - 100}px)`, bottom: `-${props.size / 2 - 40}px` }}>
             <Box sx={{
                 borderRadius: '50%',
                 background: 'linear-gradient(200deg, rgba(127,127,127,1) 40%, rgba(0,0,0,0) 60%)',
