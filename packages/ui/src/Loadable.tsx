@@ -20,7 +20,7 @@ export interface LoadableProps extends LoadableLoadingErrorProps, LoadableSkelet
     sx?: SxProps | undefined;
 }
 
-export function Loadable(props: LoadableProps) {
+export default function Loadable(props: LoadableProps) {
     const { isLoading, placeholder, error, children, contentVisible, sx } = props;
 
     const indicator = useMemo(() => {

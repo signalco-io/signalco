@@ -11,7 +11,7 @@ export interface ChipProps extends ChildrenProps {
     variant?: VariantProp
 }
 
-export function Chip(props: ChipProps) {
+export default function Chip(props: ChipProps) {
     const { color, size, startDecorator, variant, onClick, children } = props;
     return <JoiChip variant={variant} color={color} size={size} startDecorator={startDecorator} onClick={onClick}>{children}</JoiChip>
 }

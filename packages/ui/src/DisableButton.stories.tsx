@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { DisableButton } from './DisableButton';
+import DisableButton from './DisableButton';
 
 export default {
     title: 'Components/Shared/Buttons/DisableButton',

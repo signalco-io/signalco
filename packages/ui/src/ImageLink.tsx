@@ -6,7 +6,7 @@ export interface ImageLinkProps {
     imageProps: ImageProps;
 }
 
-export function ImageLink({ href, imageProps }: ImageLinkProps) {
+export default function ImageLink({ href, imageProps }: ImageLinkProps) {
     return (
         <Link href={href}>
             <Image {...imageProps} alt={imageProps.alt} />

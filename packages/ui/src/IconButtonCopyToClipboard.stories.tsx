@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { TextField } from '@mui/joy';
-import { IconButtonCopyToClipboard } from './IconButtonCopyToClipboard';
+import IconButtonCopyToClipboard from './IconButtonCopyToClipboard';
 import { LinkOff } from '@signalco/ui-icons';
 
 export default {
