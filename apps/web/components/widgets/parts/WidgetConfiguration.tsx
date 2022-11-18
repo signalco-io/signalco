@@ -173,7 +173,7 @@ function WidgetConfiguration(props: IWidgetConfigurationProps) {
         <>
             {props.isOpen && (
                 <ConfigurationDialog
-                    title="Configure widget"
+                    header="Configure widget"
                     isOpen={props.isOpen}
                     onClose={configProps.onCancel}
                     actions={(

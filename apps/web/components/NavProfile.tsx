@@ -9,7 +9,7 @@ import {
 import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
 import { Loadable } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
-import { Avatar, Button, Divider, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, Sheet, Typography } from '@mui/joy';
+import { Avatar, Button, Divider, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, Sheet, Tooltip, Typography } from '@mui/joy';
 import ApiBadge from './development/ApiBadge';
 import LocalStorageService from '../src/services/LocalStorageService';
 import CurrentUserProvider from '../src/services/CurrentUserProvider';
@@ -110,19 +110,21 @@ function UserProfileAvatar() {
 function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: React.FunctionComponent, active: boolean, label: string, onClick?: () => void }) {
   return (
     <Link href={path} passHref legacyBehavior>
-      <IconButton
-        aria-label={label}
-        title={label}
-        variant="plain"
-        size="lg"
-        sx={{
-          p: 2
-        }}
-        onClick={onClick}>
-        <Box sx={{ opacity: active ? 1 : 0.6, fontSize: '26px' }}>
-          <Icon />
-        </Box>
-      </IconButton>
+      <Tooltip title={label}>
+        <IconButton
+          aria-label={label}
+          title={label}
+          variant="plain"
+          size="lg"
+          sx={{
+            p: 2
+          }}
+          onClick={onClick}>
+          <Box sx={{ opacity: active ? 1 : 0.6, fontSize: '26px' }}>
+            <Icon />
+          </Box>
+        </IconButton>
+      </Tooltip>
     </Link>
   );
 }

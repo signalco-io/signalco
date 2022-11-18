@@ -4,17 +4,17 @@ import { Modal, ModalClose, ModalDialog, Typography } from '@mui/joy';
 
 export interface IConfigurationDialogProps {
     isOpen: boolean,
-    title: React.ReactNode,
-    titleActions?: React.ReactNode,
+    header: React.ReactNode,
+    headerActions?: React.ReactNode,
     onClose: () => void,
     children: React.ReactNode,
     maxWidth?: false | undefined | Breakpoint,
     actions?: React.ReactNode
 }
 
-function ConfigurationDialog(props: IConfigurationDialogProps) {
-    const { children, title, titleActions, isOpen, onClose, maxWidth = 'sm', actions } = props;
-
+function ConfigurationDialog({
+    children, header, headerActions, isOpen, onClose, maxWidth = 'sm', actions
+}: IConfigurationDialogProps) {
     return (
         <Modal open={isOpen} onClose={onClose}>
             <ModalDialog
@@ -25,9 +25,9 @@ function ConfigurationDialog(props: IConfigurationDialogProps) {
                 <ModalClose />
                 <Stack spacing={1}>
                     <Stack direction="row" justifyContent="space-between" alignItems="center">
-                        <Typography level="h5">{title}</Typography>
+                        <Typography level="h5">{header}</Typography>
                         <Stack direction="row" spacing={1} sx={{ mt: -1.5, mr: 4 }}>
-                            {titleActions}
+                            {headerActions}
                         </Stack>
                     </Stack>
                     {children}

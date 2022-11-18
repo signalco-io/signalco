@@ -4,7 +4,7 @@ import { Button } from '@mui/joy';
 import ConfirmDeleteDialog from './ConfirmDeleteDialog';
 
 export interface ConfirmDeleteButtonDialogProps {
-    title: React.ReactNode,
+    header: React.ReactNode,
     expectedConfirmText: string,
     onConfirm: () => void,
     maxWidth?: false | undefined | Breakpoint,

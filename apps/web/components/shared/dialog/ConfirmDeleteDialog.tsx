@@ -6,7 +6,7 @@ import useLocale from '../../../src/hooks/useLocale';
 
 export interface IConfirmDeleteDialogProps {
     isOpen: boolean,
-    title: React.ReactNode,
+    header: React.ReactNode,
     expectedConfirmText: string,
     onClose: () => void,
     onConfirm: () => void,
@@ -14,13 +14,13 @@ export interface IConfirmDeleteDialogProps {
 }
 
 function ConfirmDeleteDialog(props: IConfirmDeleteDialogProps) {
-    const { isOpen, title, expectedConfirmText, onClose, onConfirm, maxWidth } = props;
+    const { isOpen, header, expectedConfirmText, onClose, onConfirm, maxWidth } = props;
     const { t } = useLocale('App', 'Dialogs');
     const [confirmText, setConfirmText] = useState('');
 
     return (
         <ConfigurationDialog
-            title={title}
+            header={header}
             isOpen={isOpen}
             onClose={onClose}
             maxWidth={maxWidth}>

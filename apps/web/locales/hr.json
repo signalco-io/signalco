@@ -38,6 +38,7 @@
             "DeleteTitle": "Izbriši nadzornu ploču",
             "EditWidgets": "Uredi widgete...",
             "NewDashboard": "Nova nadzorna ploča",
+            "NewDashboardErrorUnknown": "Došlo je do greške prilikom stvaranja nadyorne ploče. Molimo pokušajte ponovo.",
             "NoDashboardsHelpText": "Nemate nadzorne ploče. Stvorite nadzornu ploču da biste započeli.",
             "NoDashboardsPlaceholder": "Nema nadzornih ploča",
             "NoWidgets": "Nema Widgeta",
@@ -45,7 +46,7 @@
             "NoWidgetsHelpTextSecondLine": "Započnite dodavanjem widgeta iz trgovine widgetima.",
             "Save": "Spremi",
             "SaveChanges": "Spremi promjene",
-            "SaveFailedNotification": "Došlo je do pogreške prilikom spremanja nadzornih ploča. Pokušajte ponovo ili osvježite stranicu.",
+            "SaveFailedNotification": "Došlo je do greške prilikom spremanja nadzornih ploča. Pokušajte ponovo ili osvježite stranicu.",
             "Settings": "Postavke...",
             "ToggleFullscreen": "Primjeni preko cijelog zaslona",
             "UpdateChecker": {

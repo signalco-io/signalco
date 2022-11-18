@@ -1,6 +1,6 @@
 import { ReactElement, useState } from 'react';
 import { ExpandDown } from '@signalco/ui-icons';
-import { IconButton, List, ListItem, ListItemButton } from '@mui/joy';
+import { IconButton, List, ListItem, ListItemButton, Tooltip } from '@mui/joy';
 import { ChildrenProps } from 'src/sharedTypes';
 
 export interface ListTreeItemProps extends ChildrenProps {
@@ -30,17 +30,19 @@ export default function ListTreeItem(props: ListTreeItemProps) {
     return (
         <>
             <ListItem nested startAction={children && (
-                <IconButton title="Toggle" onClick={handleOpenClick} className={open ? 'expanded' : ''} size="sm" sx={{
-                    ['& > *']: {
-                        transition: '0.2s',
-                        transform: 'rotate(-90deg)',
-                    },
-                    ['&.expanded > *']: {
-                        transform: 'rotate(0deg)',
-                    },
-                }}>
-                    <ExpandDown />
-                </IconButton>
+                <Tooltip title="Toggle">
+                    <IconButton onClick={handleOpenClick} className={open ? 'expanded' : ''} size="sm" sx={{
+                        ['& > *']: {
+                            transition: '0.2s',
+                            transform: 'rotate(-90deg)',
+                        },
+                        ['&.expanded > *']: {
+                            transform: 'rotate(0deg)',
+                        },
+                    }}>
+                        <ExpandDown />
+                    </IconButton>
+                </Tooltip>
             )}>
                 <ListItemButton onClick={handleClick} selected={selected} disabled={!onSelected}>
                     {label}

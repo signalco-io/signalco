@@ -60,7 +60,7 @@ export default function EntityOptions(props: EntityOptionsProps) {
             </Menu>
             <ConfirmDeleteDialog
                 expectedConfirmText={entity?.alias || t('ConfirmDialogExpectedText')}
-                title={t('DeleteTitle')}
+                header={t('DeleteTitle')}
                 isOpen={isDeleteOpen}
                 onClose={() => setIsDeleteOpen(false)}
                 onConfirm={handleDeleteConfirm} />
