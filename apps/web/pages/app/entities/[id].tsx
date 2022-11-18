@@ -1,7 +1,7 @@
 import React, {  } from 'react';
 import { useRouter } from 'next/router'
+import { NoDataPlaceholder } from '@signalco/ui';
 import EntityDetailsView from 'components/views/Entity/EntityDetailsView';
-import NoDataPlaceholder from 'components/shared/indicators/NoDataPlaceholder';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 
 function EntityDetailsPage() {

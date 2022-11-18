@@ -1,6 +1,6 @@
 import React from 'react';
+import { Container } from '@signalco/ui';
 import { Box, Breakpoint, Stack } from '@mui/system';
-import Container from 'components/shared/layout/Container';
 import Footer from '../pages/Footer';
 import { PageNav } from '../PageNav';
 import { ChildrenProps } from '../../src/sharedTypes';

@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Add, LayoutGrid, LayoutList } from '@signalco/ui-icons';
+import { Loadable  } from '@signalco/ui';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack } from '@mui/system';
 import { Avatar, Button, Card, IconButton, TextField, Typography } from '@mui/joy';
@@ -18,7 +19,6 @@ import useUserSetting from '../../../src/hooks/useUserSetting';
 import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
 import useLocale from '../../../src/hooks/useLocale';
 import useAllEntities from '../../../src/hooks/useAllEntities';
-import Loadable from '../../../components/shared/Loadable/Loadable';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 

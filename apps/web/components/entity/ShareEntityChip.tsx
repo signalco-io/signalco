@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Clear, People, Send, Share } from '@signalco/ui-icons';
+import { Chip } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import { Tooltip, IconButton, TextField, List, ListItem, ListItemContent, ListDivider } from '@mui/joy';
 import IUser from 'src/users/IUser';
-import Chip from 'components/shared/indicators/Chip';
 import GentleSlide from 'components/shared/animations/GentleSlide';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import HttpService from '../../src/services/HttpService';

@@ -4,6 +4,7 @@ import {
     usePopupState
 } from 'material-ui-popup-state/hooks';
 import { Navigate } from '@signalco/ui-icons';
+import {Loadable,Popper,Accordion,NoDataPlaceholder} from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import {
     Button,
@@ -19,10 +20,6 @@ import IEntityDetails from 'src/entity/IEntityDetails';
 import IContactPointerPartial from 'src/contacts/IContactPointerPartial';
 import InputContactValue from './InputContactValue';
 import EntityIcon from './EntityIcon';
-import Loadable from '../Loadable/Loadable';
-import Popper from '../layout/Popper';
-import Accordion from '../layout/Accordion';
-import NoDataPlaceholder from '../indicators/NoDataPlaceholder';
 import useEntity from '../../../src/hooks/useEntity';
 import useAllEntities from '../../../src/hooks/useAllEntities';
 

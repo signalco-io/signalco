@@ -1,18 +1,34 @@
-import React, { useMemo } from 'react';
-import { Box } from '@mui/system';
-import LinearProgress from '@mui/joy/LinearProgress';
+import { useMemo } from 'react';
+import { Box, SxProps } from '@mui/system';
+import { LinearProgress } from '@mui/joy';
 import { Alert, CircularProgress } from '@mui/joy';
-import LoadableProps from './LoadableProps';
+import { ChildrenProps } from './sharedTypes';
+
+export interface LoadableLoadingErrorProps {
+    error?: unknown | string | React.ReactElement;
+    isLoading?: boolean;
+}
+
+export interface LoadableSkeletonProps {
+    width?: number;
+    height?: number;
+}
+
+export interface LoadableProps extends LoadableLoadingErrorProps, LoadableSkeletonProps, ChildrenProps {
+    placeholder?: 'skeletonText' | 'skeletonRect' | 'linear' | 'circular';
+    contentVisible?: boolean;
+    sx?: SxProps | undefined;
+}
 
 export default function Loadable(props: LoadableProps) {
-    const {isLoading, placeholder, error, children, contentVisible, sx} = props;
+    const { isLoading, placeholder, error, children, contentVisible, sx } = props;
 
     const indicator = useMemo(() => {
         switch (placeholder) {
             case 'skeletonText':
-                // return <Skeleton variant="text" width={width ?? 120} />;
+            // return <Skeleton variant="text" width={width ?? 120} />;
             case 'skeletonRect':
-                // return <Skeleton variant="rectangular" width={width ?? 120} height={height ?? 32} />;
+            // return <Skeleton variant="rectangular" width={width ?? 120} height={height ?? 32} />;
             case 'linear':
                 return <LinearProgress />
             case 'circular':

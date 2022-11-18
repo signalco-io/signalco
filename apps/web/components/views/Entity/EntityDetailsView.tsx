@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { DisableButton } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import { Avatar } from '@mui/joy';
 import useEntity from 'src/hooks/useEntity';
@@ -9,7 +10,6 @@ import { setAsync } from 'src/contacts/ContactRepository';
 import Timeago from 'components/shared/time/Timeago';
 import EditableInput from 'components/shared/form/EditableInput';
 import EntityIcon from 'components/shared/entity/EntityIcon';
-import DisableButton from 'components/shared/buttons/DisableButton';
 import ShareEntityChip from 'components/entity/ShareEntityChip';
 import EntityStatus, { useEntityStatus } from 'components/entity/EntityStatus';
 import EntityProcessDetails from './EntityProcessDetails';
