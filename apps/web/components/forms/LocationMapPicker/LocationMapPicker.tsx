@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { Draggable, Map, Marker } from 'pigeon-maps';
 import { MyLocation } from '@signalco/ui-icons';
-import { Loadable , Accordion } from '@signalco/ui';
+import { Accordion } from '@signalco/ui-client';
+import { Loadable } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import { IconButton, TextField, Typography } from '@mui/joy';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/esm/index.types';

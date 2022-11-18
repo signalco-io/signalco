@@ -1,6 +1,3 @@
-export { default as Accordion } from './Accordion';
-export * from './Accordion';
-
 export { default as Breadcrumbs } from './Breadcrumbs';
 export * from './Breadcrumbs';
 
@@ -18,9 +15,6 @@ export * from './DisableButton';
 
 export { default as Icon } from './Icon';
 export * from './Icon';
-
-export { default as IconButtonCopyToClipboard } from './IconButtonCopyToClipboard';
-export * from './IconButtonCopyToClipboard';
 
 export { default as ImageLink } from './ImageLink';
 export * from './ImageLink';
