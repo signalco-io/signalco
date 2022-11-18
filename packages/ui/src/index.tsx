@@ -1,4 +1,3 @@
-import * as React from "react";
 export * from './Accordion';
 export * from './Breadcrumbs';
 export * from './Chip';
