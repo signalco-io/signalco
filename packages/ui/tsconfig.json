@@ -15,12 +15,6 @@
         "lib": [
             "ES2015",
             "dom"
-        ],
-        "rootDir": "./src",
-        "paths": {
-            "@signalco/ui": ["./src"],
-            "@signalco/ui/*": ["./src/*"]
-        },
-        "baseUrl": "./"
+        ]
     }
 }
