@@ -9,7 +9,7 @@ export * from './Icon';
 export * from './IconButtonCopyToClipboard';
 export * from './ImageLink';
 export * from './Loadable';
-export { default } from './Link';
+export { default as Link } from './Link';
 export * from './NavigatingButton';
 export * from './NoDataPlaceholder';
 export * from './Popper';
