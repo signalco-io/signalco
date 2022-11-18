@@ -1,5 +1,5 @@
 {
-    "name": "@signalco/ui",
+    "name": "@signalco/ui-client",
     "version": "0.0.0",
     "private": true,
     "license": "MIT",
@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "@signalco/ui-icons": "*",
+        "@signalco/ui": "*",
         "react-dom": "18.2.0",
         "@mui/system": "5.10.14",
         "@mui/joy": "5.0.0-alpha.54",
