@@ -48,12 +48,6 @@ type RingLogoInfo = {
     height: number
 }
 
-var seed = 1;
-function random() {
-    var x = Math.sin(seed++) * 10000;
-    return x - Math.floor(x);
-}
-
 function RingLogo(props: { ringRadius: number, degrees: number, imageProps: ImageProps }) {
     const logoPadding = 16;
     const logoWidth = props.imageProps.width as number;
