@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Box, SxProps } from '@mui/system';
 import { LinearProgress } from '@mui/joy';
 import { Alert, CircularProgress } from '@mui/joy';
-import { ChildrenProps } from './sharedTypes';
+import { ChildrenProps } from '../sharedTypes';
 
 export interface LoadableLoadingErrorProps {
     error?: unknown | string | React.ReactElement;

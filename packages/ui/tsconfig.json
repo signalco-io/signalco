@@ -8,12 +8,19 @@
         "dist",
         "build",
         "node_modules",
-        ".turbo"
+        ".turbo",
+        "src/**/*.stories.ts*"
     ],
     "compilerOptions": {
         "lib": [
             "ES2015",
             "dom"
-        ]
+        ],
+        "rootDir": "./src",
+        "paths": {
+            "@signalco/ui": ["./src"],
+            "@signalco/ui/*": ["./src/*"]
+        },
+        "baseUrl": "./"
     }
 }
