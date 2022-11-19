@@ -2,7 +2,7 @@ import React, { Fragment, useMemo, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { Add, Code, MoreVertical, UI } from '@signalco/ui-icons';
-import { Loadable } from '@signalco/ui';
+import { Loadable, Row } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import { Button, Card, IconButton, List, ListDivider, ListItem, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Tooltip, Typography } from '@mui/joy';
 import ListTreeItem from 'components/shared/list/ListTreeItem';
@@ -56,7 +56,7 @@ function ObjectVisualizer(props: { name: string, value: any, defaultOpen?: boole
             nodeId={name}
             defaultOpen={defaultOpen}
             label={(
-                <Stack spacing={1} direction="row" alignItems="center">
+                <Row spacing={1}>
                     {name && (
                         <Tooltip title={`${name} (${(isArray ? `array[${value.length}]` : typeof value)})`}>
                             <Typography
@@ -75,7 +75,7 @@ function ObjectVisualizer(props: { name: string, value: any, defaultOpen?: boole
                         //     - ability to unset value
                         <CopyToClipboardInput size="sm" variant="outlined" value={value?.toString()} />
                     )}
-                </Stack>
+                </Row>
             )}>
             {hasChildren && (
                 <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', ml: 2.5 }}>

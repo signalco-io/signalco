@@ -1,7 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import { Add } from '@signalco/ui-icons';
-import { Box, Stack } from '@mui/system';
+import { Stack, Row } from '@signalco/ui';
+import { Box } from '@mui/system';
 import { AspectRatio, Card, CardOverflow, Grid, IconButton, TextField, Typography } from '@mui/joy';
 import { widgetType } from '../widgets/Widget';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
@@ -69,31 +70,26 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
         showAvailableWidgetsSearch,
         searchAvailableWidgetsText,
         handleSearchAvailableWidgetsTextChange] =
-        useSearch(availableWidgets, filterFuncObjectStringProps, 6);
+        useSearch(availableWidgets, filterFuncObjectStringProps, 3);
 
     return (
-        <Stack spacing={2}>
+        <Stack spacing={4}>
             {showAvailableWidgetsSearch && <TextField placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />}
-            <Stack direction="row">
-                <Typography level="body2">{filteredAvailableWidgetsItems.length} widget{filteredAvailableWidgetsItems.length > 1 ? 's' : ''} available</Typography>
-            </Stack>
-            <Box sx={{ maxHeight: '60vh', overflowY: 'auto', overflowX: 'hidden' }}>
+            <Box sx={{ overflowY: 'auto', overflowX: 'hidden' }}>
                 <Grid container spacing={2} justifyContent="center">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (
                         <Grid key={`${availableWidget.type}-${index}`}>
-                            <Card variant="outlined" sx={{ width: '370px' }}>
-                                <Stack pb={2}>
-                                    <Stack direction="row" spacing={1} justifyContent="space-between" alignItems="center">
-                                        <div>
-                                            <Typography>{availableWidget.name}</Typography>
-                                            <Typography level="body2">{availableWidget.description}</Typography>
-                                        </div>
-                                        <IconButton disabled={props.onAddWidget == null} aria-label="Add to dashboard" onClick={() => props.onAddWidget && props.onAddWidget(Array.isArray(availableWidget.type) ? availableWidget.type[0] : availableWidget.type)}>
-                                            <Add />
-                                        </IconButton>
-                                    </Stack>
-                                </Stack>
-                                <CardOverflow>
+                            <Card variant="outlined" sx={{ width: '270px' }}>
+                                <Row spacing={1} justifyContent="space-between">
+                                    <div>
+                                        <Typography>{availableWidget.name}</Typography>
+                                        <Typography level="body2">{availableWidget.description}</Typography>
+                                    </div>
+                                    <IconButton disabled={props.onAddWidget == null} aria-label="Add to dashboard" onClick={() => props.onAddWidget && props.onAddWidget(Array.isArray(availableWidget.type) ? availableWidget.type[0] : availableWidget.type)}>
+                                        <Add />
+                                    </IconButton>
+                                </Row>
+                                <CardOverflow sx={{ pt: 2 }}>
                                     <AspectRatio ratio={1}>
                                         <Image
                                             src={availableWidget.preview}

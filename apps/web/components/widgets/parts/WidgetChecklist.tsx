@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import React, { useCallback, useState } from 'react';
 import { bindMenu, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import { Check, Delete, MoreHorizontal } from '@signalco/ui-icons';
-import { NoDataPlaceholder } from '@signalco/ui';
+import { NoDataPlaceholder, Row } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import { IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography } from '@mui/joy';
 import Checkbox from 'components/shared/form/Checkbox';
@@ -32,10 +32,10 @@ function ChecklistItem(props: { item: IChecklistItem; onChange: (id: string, don
 
     return (
         <>
-            <Stack direction="row" alignItems="center" justifyContent="space-between">
+            <Row justifyContent="space-between">
                 <Checkbox checked={item.done ?? false} onChange={(e) => onChange(item.id, e.currentTarget.checked)} label={item.text} />
                 <IconButton {...bindTrigger(popupState)}><Box sx={{ opacity: 0.3 }}><MoreHorizontal /></Box></IconButton>
-            </Stack>
+            </Row>
             <Menu {...bindMenu(popupState)}>
                 <MenuItem onClick={() => onRemove(item.id)}>
                     <ListItemDecorator>

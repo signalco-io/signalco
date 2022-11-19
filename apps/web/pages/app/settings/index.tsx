@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
-import { Loadable , Container } from '@signalco/ui';
-import { Box, Stack } from '@mui/system';
+import { Loadable, Container, Stack, Row } from '@signalco/ui';
+import { Box } from '@mui/system';
 import { Card, Sheet, Typography } from '@mui/joy';
 import { isNonEmptyString, isNotNull, isTrue } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
@@ -24,15 +24,13 @@ function ConnectedService() {
 
     return (
         <Card variant="outlined">
-            <Stack spacing={2} direction="row" alignItems="center" justifyContent="space-between">
-                <Stack direction="row" alignItems="center">
-                    <Stack>
-                        <Typography>Google</Typography>
-                        <Typography level="body3">{CurrentUserProvider.getCurrentUser()?.name} ({CurrentUserProvider.getCurrentUser()?.email})</Typography>
-                    </Stack>
+            <Row spacing={2}>
+                <Stack>
+                    <Typography>Google</Typography>
+                    <Typography level="body3">{CurrentUserProvider.getCurrentUser()?.name} ({CurrentUserProvider.getCurrentUser()?.email})</Typography>
                 </Stack>
                 <Typography level="body2">{t('Connected')}</Typography>
-            </Stack>
+            </Row>
         </Card>
     )
 }
@@ -76,19 +74,19 @@ const settingsFormComponents: FormBuilderComponents = {
             {
                 value: ApiProductionUrl,
                 label: (
-                    <Stack direction="row" alignItems="center" spacing={1}>
+                    <Row spacing={1}>
                         <ApiBadge force="prod" />
                         <Typography>{ApiProductionUrl}</Typography>
-                    </Stack>
+                    </Row>
                 )
             },
             {
                 value: ApiDevelopmentUrl,
                 label: (
-                    <Stack direction="row" alignItems="center" spacing={1}>
+                    <Row spacing={1}>
                         <ApiBadge force="dev" />
                         <Typography>{ApiDevelopmentUrl}</Typography>
-                    </Stack>
+                    </Row>
                 )
             }
         ]} label={label} />

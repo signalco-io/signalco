@@ -1,7 +1,7 @@
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
-import { NoDataPlaceholder } from '@signalco/ui';
-import { Box, Stack } from '@mui/system';
+import { NoDataPlaceholder, Row } from '@signalco/ui';
+import { Box } from '@mui/system';
 import { Sheet, Typography } from '@mui/joy';
 import useUserTheme from 'src/hooks/useUserTheme';
 import lightBlue from 'src/colors/lightBlue';
@@ -82,7 +82,7 @@ function GraphTimeLine(props: IGraphProps) {
     }
 
     return (
-        <Stack direction="row" spacing={2}>
+        <Row spacing={2}>
             {!!label && (
                 <Typography sx={{ pt: '2px' }}>{label}</Typography>
             )}
@@ -118,7 +118,7 @@ function GraphTimeLine(props: IGraphProps) {
                     );
                 })}
             </BarChart>
-        </Stack>
+        </Row>
     );
 }
 

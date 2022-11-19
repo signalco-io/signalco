@@ -1,5 +1,5 @@
 import { ChangeEvent, SyntheticEvent, createRef, useState } from 'react';
-import { Stack } from '@mui/system';
+import { Row, Stack } from '@signalco/ui';
 import { Alert, Button, TextField, Typography } from '@mui/joy';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import GentleSlide from 'components/shared/animations/GentleSlide';
@@ -79,7 +79,7 @@ function Newsletter() {
                 <Stack spacing={1}>
                     <Typography>{'We\'ll get back to you with awesome news and updates.'}</Typography>
                     <GentleSlide collapsedWhenHidden appear={!showSuccess} duration={200}>
-                        <Stack direction="row" alignItems="stretch">
+                        <Row>
                             <TextField
                                 disabled={isLoading}
                                 type="email"
@@ -92,7 +92,7 @@ function Newsletter() {
                                 value={email}
                                 onChange={handleOnEmail} />
                             <Button loading={isLoading} type="submit" variant="soft" size="lg" sx={{ '--Button-radius': '0 8px 8px 0' }}>Subscribe</Button>
-                        </Stack>
+                        </Row>
                     </GentleSlide>
                     <GentleSlide collapsedWhenHidden appear={error != null} direction="down" duration={200}>
                         <Alert color="danger" variant="outlined">{error}</Alert>

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { Loadable } from '@signalco/ui';
+import { Loadable, Row } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import { Button, Typography } from '@mui/joy';
 import { showNotification } from 'src/notifications/PageNotificationService';
@@ -87,10 +87,10 @@ function Dashboards() {
                         onSettings={handleSettings} />
                     {isEditing && (
                         <Box sx={{ px: 2, width: { md: 'auto', xs: '100%' } }}>
-                            <Stack direction="row" spacing={1}>
+                            <Row spacing={1}>
                                 <Button onClick={() => setShowWidgetStore(true)} sx={{ minWidth: '140px' }}>{t('AddWidget')}</Button>
                                 <Button loading={isSavingEdit} onClick={handleEditDone} fullWidth>{t('Save')}</Button>
-                            </Stack>
+                            </Row>
                         </Box>
                     )}
                 </Stack>

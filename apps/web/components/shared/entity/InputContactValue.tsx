@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Play } from '@signalco/ui-icons';
-import { Stack } from '@mui/system';
+import { Row } from '@signalco/ui';
 import Switch from '@mui/joy/Switch';
 import { IconButton, Slider, Typography } from '@mui/joy';
 import throttle from 'src/helpers/Throttle';
@@ -69,7 +69,7 @@ export default function InputContactValue(props: InputContactValueProps) {
         return <Switch onChange={(e) => onChange(e.target.checked)} checked={boolValue} color="warning" />
     } else if (dataType === 'action' || dataType === 'enum') {
         return (
-            <Stack alignItems="center" direction="row">
+            <Row>
                 {dataValues && <SelectItems
                     value={dataValuesSelected}
                     items={dataValues}
@@ -77,7 +77,7 @@ export default function InputContactValue(props: InputContactValueProps) {
                     onChange={handleDataValuesChanged}
                     label={''} />}
                 <IconButton onClick={handleActionClick} size="lg"><Play /></IconButton>
-            </Stack>
+            </Row>
         );
     } else if (dataType === 'double') {
         const resolvedSliderValue = sliderValue ?? (typeof value !== 'undefined' ? Number.parseFloat(value) || undefined : undefined);

@@ -2,8 +2,8 @@ import React, { useCallback, useState } from 'react';
 import { Draggable, Map, Marker } from 'pigeon-maps';
 import { MyLocation } from '@signalco/ui-icons';
 import { Accordion } from '@signalco/ui-client';
-import { Loadable } from '@signalco/ui';
-import { Box, Stack } from '@mui/system';
+import { Loadable, Row, Stack } from '@signalco/ui';
+import { Box } from '@mui/system';
 import { IconButton, TextField, Typography } from '@mui/joy';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/esm/index.types';
 import useUserTheme from 'src/hooks/useUserTheme';
@@ -80,12 +80,12 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
                     </Stack>
                 )}
             <Stack spacing={2}>
-                <Stack direction="row" alignItems="center" justifyContent="stretch" spacing={1}>
+                <Row spacing={1}>
                     <IconButton onClick={handleGetLocation} size="lg">
                         <MyLocation />
                     </IconButton>
                     <TextField value={placeName.item ?? ''} />
-                </Stack>
+                </Row>
                 <Box sx={{ '&>div': { background: 'transparent !important' } }}>
                     <Map
                         provider={(x, y, z, dpr) => mapTiler(themeContext.isDark, x, y, z, dpr)}

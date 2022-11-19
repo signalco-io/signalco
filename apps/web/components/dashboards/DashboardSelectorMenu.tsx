@@ -1,6 +1,7 @@
 import React from 'react';
 import { PopupState } from 'material-ui-popup-state/hooks';
 import { Add, Pin, PinOff } from '@signalco/ui-icons';
+import { Row } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import { Button, Card, Divider, IconButton, Typography } from '@mui/joy';
 import { CSS } from '@dnd-kit/utilities';
@@ -151,10 +152,10 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
             </Stack>
             <Divider />
             <Stack>
-                <Stack direction="row" alignItems="center" sx={{ px: 2 }}>
+                <Row>
                     <Typography level="body2" sx={{ flexGrow: 1 }}>{selectedDashboard?.name}</Typography>
                     <ShareEntityChip entity={selectedDashboard} entityType={3} />
-                </Stack>
+                </Row>
                 <Button variant="plain" onClick={handleAndClose(onFullscreen)}>{t('ToggleFullscreen')}</Button>
                 <Button variant="plain" onClick={handleAndClose(onSettings)}>{t('Settings')}</Button>
                 <Button variant="plain" onClick={handleAndClose(onEditWidgets)}>{t('EditWidgets')}</Button>
