@@ -163,19 +163,19 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
     return (
         <>
             <Card>
-                <Stack direction="row" alignItems="center" justifyContent="space-between">
+                <Row justifyContent="space-between">
                     <Typography>{t('Contacts')}</Typography>
                     <IconButton size="sm" {...bindTrigger(popupState)}>
                         <MoreVertical />
                     </IconButton>
-                </Stack>
+                </Row>
                 <Loadable isLoading={isLoading} error={error}>
                     <List>
                         {entity?.contacts?.map((c, i) => (
                             <Fragment key={`${c.entityId}-${c.channelName}-${c.contactName}`}>
                                 <ListItem>
                                     <ListItemContent>
-                                        <Stack spacing={1} direction="row" alignItems="center">
+                                        <Row spacing={1}>
                                             <Stack sx={{ width: '30%', maxWidth: '260px' }}>
                                                 <Typography noWrap>{c.contactName}</Typography>
                                                 <Typography noWrap level="body3">{c.channelName}</Typography>
@@ -188,7 +188,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                                                     <Timeago date={c.timeStamp} live />
                                                 </Box>
                                             </Stack>
-                                        </Stack>
+                                        </Row>
                                     </ListItemContent>
                                 </ListItem>
                                 {i < (entity?.contacts?.length ?? 0) - 1 && <ListDivider />}
