@@ -1,7 +1,4 @@
-import { Link } from '@signalco/ui';
-import { PageLayout } from 'components/layouts/PageLayout';
-
-function PrivacyPolicy() {
+export default function PrivacyPolicy() {
     return (
         <main>
             <h1 id="privacy-policy">Privacy Policy</h1>
@@ -104,7 +101,7 @@ function PrivacyPolicy() {
             <p><strong>Unsubscribe:</strong> To unsubscribe from our email database or opt-out of communications (including marketing communications), please contact us using the details provided in this privacy policy, or opt-out using the opt-out facilities provided in the communication. We may need to request specific information from you to help us confirm your identity.</p>
             <h2 id="use-of-cookies">Use of Cookies</h2>
             <p>We use “cookies” to collect information about you and your activity across our site. A cookie is a small piece of data that our website stores on your computer, and accesses each time you visit, so we can understand how you use our site. This helps us serve you content based on preferences you have specified.</p>
-            <p>Please refer to our <Link href="/legal/cookie-policy">Cookie Policy</Link> for more information.</p>
+            <p>Please refer to our <a href="/legal/cookie-policy">Cookie Policy</a> for more information.</p>
             <h2 id="business-transfers">Business Transfers</h2>
             <p>If we or our assets are acquired, or in the unlikely event that we go out of business or enter bankruptcy, we would include data, including your personal information, among the assets transferred to any parties who acquire us. You acknowledge that such transfers may occur, and that any parties who acquire us may, to the extent permitted by applicable law, continue to use your personal information according to this policy, which they will be required to assume as it is the basis for any ownership or use rights we have over such information.</p>
             <h2 id="limits-of-our-policy">Limits of Our Policy</h2>
@@ -179,8 +176,3 @@ function PrivacyPolicy() {
         </main>
     );
 }
-
-PrivacyPolicy.title = 'Privacy Policy';
-PrivacyPolicy.layout = PageLayout;
-
-export default PrivacyPolicy;

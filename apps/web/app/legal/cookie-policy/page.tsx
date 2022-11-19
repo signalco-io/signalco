@@ -1,6 +1,4 @@
-import { PageLayout } from 'components/layouts/PageLayout';
-
-function CookiePolicy() {
+export default function CookiePolicy() {
     return (
         <main>
             <h1 id="cookie-policy">Cookie Policy</h1>
@@ -28,8 +26,3 @@ function CookiePolicy() {
         </main>
     );
 }
-
-CookiePolicy.title = 'Cookie Policy';
-CookiePolicy.layout = PageLayout;
-
-export default CookiePolicy;

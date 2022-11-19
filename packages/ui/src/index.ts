@@ -33,3 +33,6 @@ export * from './NoDataPlaceholder';
 
 export { default as Popper } from './Popper';
 export * from './Popper';
+
+export { default as Stack } from './Stack';
+export * from './Stack';
