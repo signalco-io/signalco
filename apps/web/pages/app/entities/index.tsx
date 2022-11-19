@@ -1,76 +1,21 @@
 import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { Add, LayoutGrid, LayoutList } from '@signalco/ui-icons';
-import { Loadable  } from '@signalco/ui';
+import { Loadable, Row } from '@signalco/ui';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack } from '@mui/system';
-import { Avatar, Button, Card, IconButton, TextField, Typography } from '@mui/joy';
-import IEntityDetails from 'src/entity/IEntityDetails';
+import { Avatar, Button, IconButton, TextField, Typography } from '@mui/joy';
 import { entityUpsertAsync } from 'src/entity/EntityRepository';
-import { entityLastActivity } from 'src/entity/EntityHelper';
-import Timeago from 'components/shared/time/Timeago';
 import SelectItems from 'components/shared/form/SelectItems';
 import Picker from 'components/shared/form/Picker';
-import EntityIcon, { EntityIconByType } from 'components/shared/entity/EntityIcon';
+import { EntityIconByType } from 'components/shared/entity/EntityIcon';
 import ConfigurationDialog from 'components/shared/dialog/ConfigurationDialog';
-import EntityStatus, { useEntityStatus } from 'components/entity/EntityStatus';
+import EntityCard from 'components/entity/EntityCard';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
 import useLocale from '../../../src/hooks/useLocale';
 import useAllEntities from '../../../src/hooks/useAllEntities';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
-import ShareEntityChip from '../../../components/entity/ShareEntityChip';
-
-
-function EntityCard(props: { entity: IEntityDetails, spread: boolean }) {
-    const { entity, spread } = props;
-    const { hasStatus, isOffline, isStale } = useEntityStatus(entity);
-    const Icon = EntityIcon(entity);
-
-    const columns = {
-        xs: spread ? 12 : 6,
-        sm: spread ? 12 : 4,
-        lg: spread ? 12 : 3,
-        xl: spread ? 12 : 2
-    };
-
-    return (
-        <Grid {...columns}>
-            <Link href={`/app/entities/${entity.id}`} passHref legacyBehavior>
-                <Card variant="outlined" sx={{ height: '100%', p: spread ? 0 : 1 }}>
-                <Stack spacing={2} direction={spread ? 'row' : 'column'} justifyContent={spread ? 'space-between' : undefined}>
-                    <Stack direction="row" spacing={2} alignItems="center">
-                        <Avatar variant={spread ? 'plain' : 'soft'}>
-                            <Icon />
-                        </Avatar>
-                        <Typography noWrap>{entity.alias}</Typography>
-                    </Stack>
-                    <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
-                        <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
-                        <Stack direction="row" spacing={1} alignItems="center" sx={{ pr: spread ? 2 : 0 }}>
-                            {(hasStatus && (isStale || isOffline)) && (
-                                <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
-                                    <Timeago date={entityLastActivity(entity)} />
-                                </Box>
-                            )}
-                            <EntityStatus entity={entity} />
-                        </Stack>
-                    </Stack>
-                </Stack>
-            </Card>
-        </Link>
-        </Grid >
-    );
-}
-
-const entityType = [
-    { value: 1, label: 'Device' },
-    { value: 2, label: 'Dashboard' },
-    { value: 3, label: 'Process' },
-    { value: 4, label: 'Station' },
-    { value: 5, label: 'Channel' }
-];
 
 const entityTypes = [
     { value: '1', label: 'Devices' },
@@ -78,6 +23,14 @@ const entityTypes = [
     { value: '3', label: 'Process' },
     { value: '4', label: 'Stations' },
     { value: '5', label: 'Channels' }
+];
+
+const entityType = [
+    { value: 1, label: 'Device' },
+    { value: 2, label: 'Dashboard' },
+    { value: 3, label: 'Process' },
+    { value: 4, label: 'Station' },
+    { value: 5, label: 'Channel' }
 ];
 
 function EntityCreate() {
@@ -115,15 +68,24 @@ function Entities() {
     }
     ), [filteredItems, selectedType]);
 
+    const columns = useMemo(() => ({
+        xs: entityListViewType === 'table' ? 12 : 6,
+        sm: entityListViewType === 'table' ? 12 : 4,
+        lg: entityListViewType === 'table' ? 12 : 3,
+        xl: entityListViewType === 'table' ? 12 : 2
+    }), [entityListViewType]);
+
     const results = useMemo(() => (
         <Box sx={{ px: 2 }}>
             <Grid container spacing={1}>
                 {typedItems.map(entity => (
-                    <EntityCard key={entity.id} entity={entity} spread={entityListViewType === 'table'} />
+                    <Grid key={entity.id} {...columns}>
+                        <EntityCard entity={entity} spread={entityListViewType === 'table'} />
+                    </Grid>
                 ))}
             </Grid>
         </Box>
-    ), [entityListViewType, typedItems]);
+    ), [columns, entityListViewType, typedItems]);
 
     const [isAddEntityOpen, setIsAddEntityOpen] = useState(false);
     const handleAddEntity = () => setIsAddEntityOpen(true);
@@ -140,10 +102,10 @@ function Entities() {
                             const Icon = EntityIconByType(parseInt(t.value));
                             return ({
                                 value: t.value, label: t.label, content: (
-                                    <Stack direction="row" spacing={1} alignItems="center">
+                                    <Row spacing={1}>
                                         <Avatar><Icon /></Avatar>
                                         <Typography>{t.label}</Typography>
-                                    </Stack>
+                                    </Row>
                                 )
                             });
                         })}

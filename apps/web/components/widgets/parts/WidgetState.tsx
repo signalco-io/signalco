@@ -94,11 +94,6 @@ function WidgetState(props: WidgetSharedProps<any>) {
             if (typeof contact === 'undefined' || !contact.data)
                 continue;
 
-                console.log('contact.data.valueSerialized', contact.data)
-                console.log('configcontact', config?.on?.find((e: IContact) =>
-                e.entityId === contact.data.entityId &&
-                e.channelName === contact.data.channelName &&
-                e.contactName === contact.data.contactName)?.valueSerialized)
             if (contact.data.valueSerialized === config?.on?.find((e: IContact) =>
                     e.entityId === contact.data.entityId &&
                     e.channelName === contact.data.channelName &&

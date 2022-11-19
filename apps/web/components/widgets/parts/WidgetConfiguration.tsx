@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Stack } from '@mui/system';
+import { Row, Stack } from '@signalco/ui';
+import { Box } from '@mui/system';
 import { Button, TextField, Typography } from '@mui/joy';
 import Checkbox from 'components/shared/form/Checkbox';
 import SelectItems from '../../shared/form/SelectItems';
@@ -88,7 +89,7 @@ function WidgetConfigurationOption(props: { option: IWidgetConfigurationOption<a
                 const value = valueItems[i];
 
                 elements.push(
-                    <Stack direction="row" spacing={1} key={`option-${i}`}>
+                    <Row spacing={1} key={`option-${i}`}>
                         <WidgetConfigurationOption
                             option={{ name: 'contact', label: 'Contact', type: 'deviceContactTarget' }}
                             value={value}
@@ -107,7 +108,7 @@ function WidgetConfigurationOption(props: { option: IWidgetConfigurationOption<a
                                 newValues[i] = newValue;
                                 return props.onChange(newValues.filter(i => typeof i !== 'undefined'));
                             })} />
-                    </Stack>
+                    </Row>
                 );
             }
 
@@ -115,7 +116,7 @@ function WidgetConfigurationOption(props: { option: IWidgetConfigurationOption<a
         }
 
         return (
-            <Stack direction="row" spacing={1}>
+            <Row spacing={1}>
                 <WidgetConfigurationOption
                     option={{ name: 'contact', label: 'Contact', type: 'deviceContactTarget' }}
                     value={props.value}
@@ -129,7 +130,7 @@ function WidgetConfigurationOption(props: { option: IWidgetConfigurationOption<a
                     onChange={(t => {
                         return props.onChange({ ...props.value, valueSerialized: t });
                     })} />
-            </Stack>
+            </Row>
         );
     } else if (props.option.type === 'deviceTarget') {
         return <DisplayEntityTarget target={props.value} onChanged={t => props.onChange(t)} />

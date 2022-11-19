@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
-import { Breadcrumbs , NavigatingButton } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Breadcrumbs , NavigatingButton, Row, Stack } from '@signalco/ui';
 import { Card, Typography } from '@mui/joy';
 import ShareSocial from 'components/pages/ShareSocial';
 import FaqSection from 'components/pages/FaqSection';
@@ -32,13 +31,13 @@ function ChannelPage() {
             <Stack spacing={8}>
                 <Stack spacing={2}>
                     <Breadcrumbs items={breadcrumbs} />
-                    <Stack spacing={4} direction="row">
+                    <Row spacing={4}>
                         <ChannelLogo channelName={channelName} label={channel?.label} />
                         <Typography level="h1">{channel?.label} channel</Typography>
                         <ShareSocial />
-                    </Stack>
+                    </Row>
                 </Stack>
-                <Stack direction="row" spacing={2} justifyContent="space-between">
+                <Row spacing={2} justifyContent="space-between">
                     <Stack spacing={2}>
                         {channel?.description && <Typography>{channel?.description}</Typography>}
                         <Typography>Connect {channel?.label} channel with any of your favorite apps and devices in just a few clicks.</Typography>
@@ -57,8 +56,8 @@ function ChannelPage() {
                             </Stack>
                         </Stack>
                     </Card>
-                </Stack>
-                <Stack direction="column" alignItems="start">
+                </Row>
+                <Stack alignItems="start">
                     <NavigatingButton href={`/app/channels/${channelName}`} disabled={channel?.planned}>
                         Use this channel
                     </NavigatingButton>

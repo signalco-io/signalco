@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { Container, Loadable, NoDataPlaceholder } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Container, Loadable, NoDataPlaceholder, Row, Stack } from '@signalco/ui';
+import { Box } from '@mui/system';
 import { List, ListItemButton, Typography } from '@mui/joy';
 import useAllEntities from 'src/hooks/useAllEntities';
 import { AppLayoutWithAuth } from 'components/layouts/AppLayoutWithAuth';
@@ -29,35 +29,37 @@ function AppChannelPage() {
 
     return (
         <Container maxWidth="md">
-            <Stack spacing={4} pt={{ xs: 0, sm: 4 }}>
-                <ChannelLogo channelName={channelName} label={channel?.label} />
-                <Stack direction="row" alignItems="center" spacing={1}>
-                    <Typography level="h1">{channel?.label} channel</Typography>
+            <Box pt={{ xs: 0, sm: 4 }}>
+                <Stack spacing={4}>
+                    <ChannelLogo channelName={channelName} label={channel?.label} />
+                    <Row spacing={1}>
+                        <Typography level="h1">{channel?.label} channel</Typography>
+                    </Row>
+                    <Stack spacing={2}>
+                        <Typography typography="h3">Connected entities</Typography>
+                        <Loadable isLoading={entities.isLoading} error={entities.error}>
+                            {(connectedChannels?.length ?? 0) > 0
+                                ? (
+                                    <List>
+                                        {connectedChannels?.map(c => (
+                                            <ListItemButton href={`/app/entities/${c.id}`} key={c.id}>
+                                                <Typography>{c.alias || c.id}</Typography>
+                                            </ListItemButton>
+                                        ))}
+                                    </List>
+                                ) : (
+                                    <NoDataPlaceholder content="No items" />
+                                )}
+                        </Loadable>
+                    </Stack>
+                    <Stack spacing={2}>
+                        <Typography typography="h3">Connect</Typography>
+                        <Loadable isLoading={!!!channelName}>
+                            <ChannelConnectPartial channelName={channelName} />
+                        </Loadable>
+                    </Stack>
                 </Stack>
-                <Stack spacing={2}>
-                    <Typography typography="h3">Connected entities</Typography>
-                    <Loadable isLoading={entities.isLoading} error={entities.error}>
-                        {(connectedChannels?.length ?? 0) > 0
-                            ? (
-                                <List>
-                                    {connectedChannels?.map(c => (
-                                        <ListItemButton href={`/app/entities/${c.id}`} key={c.id}>
-                                            <Typography>{c.alias || c.id}</Typography>
-                                        </ListItemButton>
-                                    ))}
-                                </List>
-                            ) : (
-                                <NoDataPlaceholder content="No items" />
-                            )}
-                    </Loadable>
-                </Stack>
-                <Stack spacing={2}>
-                    <Typography typography="h3">Connect</Typography>
-                    <Loadable isLoading={!!!channelName}>
-                        <ChannelConnectPartial channelName={channelName} />
-                    </Loadable>
-                </Stack>
-            </Stack>
+            </Box>
         </Container>
     )
 }

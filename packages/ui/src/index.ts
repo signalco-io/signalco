@@ -36,3 +36,6 @@ export * from './Popper';
 
 export { default as Stack } from './Stack';
 export * from './Stack';
+
+export { default as Row } from './Row';
+export * from './Stack';

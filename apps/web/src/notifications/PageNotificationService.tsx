@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import { ReactNode } from 'react';
-import { Stack } from '@mui/system';
+import { Row } from '@signalco/ui';
 import { Button } from '@mui/joy';
 
 export type PageNotificationVariant = 'default' | 'info' | 'success' | 'warning' | 'error';
@@ -15,10 +15,10 @@ export interface PageNotificationOptions {
 function _enqueue(message: string | ReactNode, options?: PageNotificationOptions): string | number {
     const content = options?.action
         ? (
-            <Stack direction="row" alignItems="center" justifyContent="space-between">
+            <Row justifyContent="space-between">
                 {message}
                 {options.action}
-            </Stack>
+            </Row>
         ) : message;
 
     return toast(content, {

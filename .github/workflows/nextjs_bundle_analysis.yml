@@ -17,29 +17,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Set up node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
-
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-
-      - name: Restore next build
-        uses: actions/cache@v3
-        id: restore-build-cache
-        env:
-          cache-name: cache-next-build
+            node-version: "16.x"
+            cache: "yarn"
+      - uses: actions/cache@v3
         with:
-          # if you use a custom build directory, replace all instances of `.next` in this file with your build directory
-          # ex: if your app builds to `dist`, replace `.next` with `dist`
-          path: /.next/cache
-          # change this if you prefer a more strict cache
-          key: ${{ runner.os }}-build-${{ env.cache-name }}
+            path: "**/node_modules"
+            key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - run: yarn install
 
       - name: Build next.js app
-        # change this if your site requires a custom build command
         run: yarn build
 
       # Here's the first place where next-bundle-analysis' own script is used

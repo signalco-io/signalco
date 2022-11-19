@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ExpandDown } from '@signalco/ui-icons';
-import { Box, Stack } from '@mui/system';
+import { Row, Stack } from '@signalco/ui';
+import { Box } from '@mui/system';
 import { Typography, Button } from '@mui/joy';
 import SelectItems from '../form/SelectItems';
 import Checkbox from '../form/Checkbox';
@@ -75,10 +76,10 @@ export default function FilterList(props: FilterListProps) {
                     }} />
             </Box>
             <Box sx={{ dispaly: { xs: 'none', md: 'visible' } }}>
-                <Stack direction="row" spacing={1}>
+                <Row spacing={1}>
                     <Typography gutterBottom level="h5">{header}</Typography>
                     {(!isShowMore && shouldTruncate) && <Typography level="body2">({items.length - truncate} more)</Typography>}
-                </Stack>
+                </Row>
                 <Stack>
                     {items.slice(0, isShowMore ? items.length : truncate).map(item => (
                         <Checkbox

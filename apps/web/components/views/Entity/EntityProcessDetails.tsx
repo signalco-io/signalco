@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { Close, Play, Warning } from '@signalco/ui-icons';
-import { Chip } from '@signalco/ui';
-import { Box, Container, Stack } from '@mui/system';
+import { Chip, Row, Stack, Container } from '@signalco/ui';
 import { Alert, Card, IconButton, Typography } from '@mui/joy';
 import useContact from 'src/hooks/useContact';
 import IEntityDetails from 'src/entity/IEntityDetails';
@@ -75,23 +74,23 @@ function Condition(props: { condition: ProcessConfigurationV1.Condition }) {
                 </>
             )}
             {(condition.type === 'compare') && (
-                <Stack direction="row" alignItems="center" spacing={1}>
+                <Row spacing={1}>
                     <Condition condition={condition.left} />
                     <span>
                         {condition.op === 0 ? ' is ' : ' is not '}
                     </span>
                     <Condition condition={condition.right} />
-                </Stack>
+                </Row>
             )}
             {(condition.type === 'orGroup') && (
-                <Stack direction="row" alignItems="center" spacing={1}>
+                <Row spacing={1}>
                     {condition.conditions.map((c, i) => (
                         <>
                             <Condition key={i} condition={c} />
                             {i < condition.conditions.length - 1 && <Typography>or</Typography>}
                         </>
                     ))}
-                </Stack>
+                </Row>
             )}
         </div>
     )
@@ -103,11 +102,11 @@ function ExecutionDisplay(props: { entity: IEntityDetails }) {
     const executed = executeContact?.data?.valueSerialized ? JSON.parse(executeContact?.data?.valueSerialized) : undefined;
 
     return (
-        <Box>
+        <div>
             <Chip startDecorator={<Play />}>
                 <Timeago date={executed?.StartTimeStamp} />
             </Chip>
-        </Box>
+        </div>
     )
 }
 

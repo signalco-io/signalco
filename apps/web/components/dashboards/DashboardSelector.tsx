@@ -2,7 +2,7 @@ import React, { Suspense, useEffect } from 'react';
 import Link from 'next/link';
 import { bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import { Select } from '@signalco/ui-icons';
-import { Popper } from '@signalco/ui';
+import { Popper, Row } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import { Button } from '@mui/joy';
 import useDashboards from 'src/hooks/dashboards/useDashboards';
@@ -53,7 +53,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                     </Box>
                 )}
                 {(favoriteDashboards?.length ?? 0) > 0 && (
-                    <Stack direction="row">
+                    <Row>
                         {favoriteDashboards?.map(fd => (
                             <Link key={fd.id} href={`#dashboard=${fd.id}`} passHref legacyBehavior>
                                 <Button variant="plain" sx={{ color: 'var(--joy-palette-neutral-400)' }}>
@@ -61,7 +61,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                                 </Button>
                             </Link>
                         ))}
-                    </Stack>
+                    </Row>
                 )}
             </Stack>
             <Popper popupState={popupState}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Icon } from '@signalco/ui';
+import { Icon, Row } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import { Button, Typography } from '@mui/joy';
 import useContact from 'src/hooks/useContact';
@@ -63,7 +63,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<any>) {
                 <Box sx={{ mt: 9 }}>
                     <Link href={`/app/entities/${temperatureDevice?.id}`} passHref legacyBehavior>
                         <Button variant="plain">
-                            <Stack direction="row">
+                            <Row>
                                 <Stack sx={{ height: '100%' }} justifyContent="center" alignItems="center">
                                     <Typography fontWeight={100} fontSize={64} sx={{ lineHeight: 1 }}>{degreesWhole}</Typography>
                                 </Stack>
@@ -71,7 +71,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<any>) {
                                     <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>&#176;C</Typography>
                                     <Typography fontWeight={100} fontSize={18} sx={{ opacity: 0.5 }}>.{degreesDecimal}</Typography>
                                 </Stack>
-                            </Stack>
+                            </Row>
                         </Button>
                     </Link>
                 </Box>

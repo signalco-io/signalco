@@ -1,6 +1,7 @@
 import { Suspense, useState } from 'react';
 import { Custom, SunMoon, Timer } from '@signalco/ui-icons';
-import { Box, Stack } from '@mui/system';
+import { Stack, Row } from '@signalco/ui';
+import { Box } from '@mui/system';
 import { DefaultColorScheme } from '@mui/joy/styles/types';
 import { useColorScheme } from '@mui/joy/styles';
 import { TextField, SupportedColorScheme, Typography } from '@mui/joy';
@@ -31,23 +32,25 @@ function AppThemeVisual(props: { label: string, theme: SupportedColorScheme, dis
     }
 
     return (
-        <Stack alignItems="center" spacing={1} sx={{ opacity: disabled ? 0.4 : 1 }}>
-            <Box sx={{
-                position: 'relative',
-                width: 80,
-                height: 60,
-                backgroundColor: backgroundColor,
-                border: '1px solid gray',
-                borderTop: '4px solid gray',
-                borderRadius: 1
-            }}>
-                <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 4, left: 4 }} />
-                <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 18, height: 5, top: 12, left: 4 }} />
-                <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 22, height: 5, top: 20, left: 4 }} />
-                <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 28, left: 4 }} />
-            </Box>
-            <Typography level="body2">{label}</Typography>
-        </Stack>
+        <Box sx={{ opacity: disabled ? 0.4 : 1 }}>
+            <Stack alignItems="center" spacing={1}>
+                <Box sx={{
+                    position: 'relative',
+                    width: 80,
+                    height: 60,
+                    backgroundColor: backgroundColor,
+                    border: '1px solid gray',
+                    borderTop: '4px solid gray',
+                    borderRadius: 1
+                }}>
+                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 4, left: 4 }} />
+                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 18, height: 5, top: 12, left: 4 }} />
+                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 22, height: 5, top: 20, left: 4 }} />
+                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 28, left: 4 }} />
+                </Box>
+                <Typography level="body2">{label}</Typography>
+            </Stack>
+        </Box>
     );
 }
 
@@ -130,7 +133,7 @@ export default function AppThemePicker() {
                 {themeMode === 'timeRange' && (
                     <Stack spacing={1}>
                         <Typography level="body2">{picker.t('PickDayNightTimes')}</Typography>
-                        <Stack direction="row" spacing={1}>
+                        <Row spacing={1}>
                             <TextField
                                 label={picker.t('DayTime')}
                                 value={dayTime ? DateTimeProvider.toDuration(dayTime) : ''}
@@ -141,7 +144,7 @@ export default function AppThemePicker() {
                                 value={nightTime ? DateTimeProvider.toDuration(nightTime) : ''}
                                 onChange={(e) => handleNightTimeChange(DateTimeProvider.fromDuration(DateTimeProvider.now(), e.target.value))}
                             />
-                        </Stack>
+                        </Row>
                     </Stack>
                 )}
                 <Stack spacing={1}>

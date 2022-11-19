@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Clear, People, Send, Share } from '@signalco/ui-icons';
-import { Chip } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Chip, Row, Stack } from '@signalco/ui';
 import { Tooltip, IconButton, TextField, List, ListItem, ListItemContent, ListDivider } from '@mui/joy';
 import IUser from 'src/users/IUser';
 import GentleSlide from 'components/shared/animations/GentleSlide';
@@ -61,21 +60,21 @@ function ShareEntityModal({ entity, entityType, onClose }: IShareEntityModalProp
             onClose={onClose}
         >
             <GentleSlide appear={isShareWithNewOpen} direction="down" collapsedWhenHidden duration={200}>
-                <Stack direction="row" spacing={2} alignItems="center" justifyContent="end">
+                <Row spacing={2} justifyContent="end">
                     <TextField
                         placeholder={t('EmailAddress')}
                         type="email"
                         sx={{ maxWidth: '270px' }}
                         onChange={(e) => setShareWithNewEmail(e.target.value)} />
-                    <Stack direction="row">
+                    <Row>
                         <Tooltip title={t('SendInvitation')}>
                             <IconButton onClick={handleSubmitShareWithNew} color="success" ><Send /></IconButton>
                         </Tooltip>
                         <Tooltip title={t('Cancel')}>
                             <IconButton onClick={handleCancelShareWithNew}><Clear /></IconButton>
                         </Tooltip>
-                    </Stack>
-                </Stack>
+                    </Row>
+                </Row>
             </GentleSlide>
             <Stack spacing={1}>
                 <List variant="outlined" sx={{

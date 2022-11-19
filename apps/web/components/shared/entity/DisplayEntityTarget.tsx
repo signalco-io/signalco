@@ -5,7 +5,7 @@ import {
 } from 'material-ui-popup-state/hooks';
 import { Navigate } from '@signalco/ui-icons';
 import { Accordion } from '@signalco/ui-client';
-import {Loadable,Popper,NoDataPlaceholder} from '@signalco/ui';
+import {Loadable,Popper,NoDataPlaceholder, Row} from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
 import {
     Button,
@@ -216,7 +216,7 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                     unmountOnExit
                 >
                     <Typography>
-                        <Stack spacing={2} direction="row" alignItems="center">
+                        <Row spacing={2}>
                             {contactSelected ? (
                                 <Typography>{target.contactName}</Typography>
                             ) : (
@@ -229,7 +229,7 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                                     )}
                                 </>
                             )}
-                        </Stack>
+                        </Row>
                     </Typography>
                     <EntityContactSelection target={target!} onSelected={handleContactSelected} />
                 </Accordion>
@@ -242,10 +242,10 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                     unmountOnExit
                 >
                     <Typography>
-                        <Stack spacing={2} direction="row" alignItems="center">
+                        <Row spacing={2}>
                             <Typography>Value</Typography>
                             {!contactSelected && <Typography level="body2">Select contact first</Typography>}
-                        </Stack>
+                        </Row>
                     </Typography>
                     <EntityContactValueSelection target={target!} value={value} onSelected={handleContactValueSelected} />
                 </Accordion>
@@ -316,7 +316,7 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
             <Button variant="outlined" fullWidth sx={{ minHeight: 56 }} {...bindTrigger(entityMenu)}>
                 <Stack sx={{ width: '100%' }} spacing={2} direction="row" alignItems="center" justifyContent="space-between">
                     <EntityIconLabel entityId={target?.entityId} description={entityDescription} />
-                    <Stack spacing={1} direction="row" alignItems="center">
+                    <Row spacing={1}>
                         {(target && target.contactName && selectContact) && (
                             <Stack direction="row" spacing={1} alignItems="end">
                                 <Typography level="body2">{target.contactName ?? 'None'}</Typography>
@@ -326,7 +326,7 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                             </Stack>
                         )}
                         <Navigate />
-                    </Stack>
+                    </Row>
                 </Stack>
             </Button>
             <Popper popupState={entityMenu}>
