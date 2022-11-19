@@ -2,8 +2,8 @@ import { MouseEvent, useId, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { Copy, Warning } from '@signalco/ui-icons';
 import { Alert, IconButton } from '@mui/joy';
-import Popper from './Popper';
-import { ChildrenProps } from './sharedTypes';
+import Popper from '../Popper';
+import { ChildrenProps } from '../sharedTypes';
 
 export type IconButtonCopyToClipboardProps = ChildrenProps & {
     title: string;

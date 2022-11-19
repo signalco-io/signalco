@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import Link from './Link';
+import Link from '../Link';
 import { Typography, Breadcrumbs as JoyBreadcrumbs } from '@mui/joy';
 
 export default function Breadcrumbs(props: { items: { href?: string, label: string | undefined }[] }) {

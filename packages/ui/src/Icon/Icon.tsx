@@ -1,5 +1,5 @@
 import { Box, SxProps, Theme } from '@mui/system';
-import { ChildrenProps } from './sharedTypes';
+import { ChildrenProps } from '../sharedTypes';
 
 export interface IconProps extends ChildrenProps {
     sx?: SxProps<Theme>;

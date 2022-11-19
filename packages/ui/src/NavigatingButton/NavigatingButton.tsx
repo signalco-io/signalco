@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Navigate } from '@signalco/ui-icons';
 import { Button } from '@mui/joy';
-import { ChildrenProps } from './sharedTypes';
+import { ChildrenProps } from '../sharedTypes';
 
 export interface NavigatingButtonProps extends ChildrenProps {
     href: string;

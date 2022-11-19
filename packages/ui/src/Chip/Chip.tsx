@@ -1,7 +1,7 @@
 import { MouseEventHandler, ReactNode } from 'react';
 import { Chip as JoiChip } from '@mui/joy';
 import { ColorPaletteProp, VariantProp } from '@mui/joy';
-import { ChildrenProps } from './sharedTypes';
+import { ChildrenProps } from '../sharedTypes';
 
 export interface ChipProps extends ChildrenProps {
     color?: ColorPaletteProp

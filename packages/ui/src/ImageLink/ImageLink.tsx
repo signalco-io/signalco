@@ -1,5 +1,5 @@
 import Image, { ImageProps } from 'next/image';
-import Link from './Link';
+import Link from '../Link';
 
 export interface ImageLinkProps {
     href: string;
