@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Add, LayoutGrid, LayoutList } from '@signalco/ui-icons';
-import { Loadable  } from '@signalco/ui';
+import { Loadable } from '@signalco/ui';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack } from '@mui/system';
 import { Avatar, Button, Card, IconButton, TextField, Typography } from '@mui/joy';
@@ -37,29 +37,33 @@ function EntityCard(props: { entity: IEntityDetails, spread: boolean }) {
 
     return (
         <Grid {...columns}>
-            <Link href={`/app/entities/${entity.id}`} passHref legacyBehavior>
+            <Link href={`/app/entities/${entity.id}`} legacyBehavior>
                 <Card variant="outlined" sx={{ height: '100%', p: spread ? 0 : 1 }}>
-                <Stack spacing={2} direction={spread ? 'row' : 'column'} justifyContent={spread ? 'space-between' : undefined}>
-                    <Stack direction="row" spacing={2} alignItems="center">
-                        <Avatar variant={spread ? 'plain' : 'soft'}>
-                            <Icon />
-                        </Avatar>
-                        <Typography noWrap>{entity.alias}</Typography>
-                    </Stack>
-                    <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
-                        <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
-                        <Stack direction="row" spacing={1} alignItems="center" sx={{ pr: spread ? 2 : 0 }}>
-                            {(hasStatus && (isStale || isOffline)) && (
-                                <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
-                                    <Timeago date={entityLastActivity(entity)} />
-                                </Box>
-                            )}
-                            <EntityStatus entity={entity} />
+                    <Stack
+                        spacing={2}
+                        direction={spread ? 'row' : 'column'}
+                        justifyContent="space-between"
+                        sx={{ height: '100%' }}>
+                        <Stack direction="row" spacing={2} alignItems="center">
+                            <Avatar variant={spread ? 'plain' : 'soft'}>
+                                <Icon />
+                            </Avatar>
+                            <Typography noWrap>{entity.alias}</Typography>
+                        </Stack>
+                        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+                            <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
+                            <Stack direction="row" spacing={1} alignItems="center" sx={{ pr: spread ? 2 : 0 }}>
+                                {(hasStatus && (isStale || isOffline)) && (
+                                    <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
+                                        <Timeago date={entityLastActivity(entity)} />
+                                    </Box>
+                                )}
+                                <EntityStatus entity={entity} />
+                            </Stack>
                         </Stack>
                     </Stack>
-                </Stack>
-            </Card>
-        </Link>
+                </Card>
+            </Link>
         </Grid >
     );
 }
