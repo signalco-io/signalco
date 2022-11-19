@@ -3,7 +3,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useQueryClient } from '@tanstack/react-query';
 import { Minimize } from '@signalco/ui-icons';
 import { Box, Stack } from '@mui/system';
-import { IconButton } from '@mui/joy';
+import { IconButton, Tooltip } from '@mui/joy';
 import NavProfile from '../NavProfile';
 import { ChildrenProps } from '../../src/sharedTypes';
 import RealtimeService from '../../src/realtime/realtimeService';
@@ -34,14 +34,15 @@ export function AppLayout(props: ChildrenProps) {
       </Stack>
       <ReactQueryDevtools initialIsOpen={false} />
       {isFullScreen && (
-        <IconButton
-          size="lg"
-          aria-label="Exit fullscreen"
-          title="Exit fullscreen"
-          sx={{ position: 'fixed', bottom: '12px', right: '12px' }}
-          onClick={() => setFullScreenHash(undefined)}>
-          <Minimize />
-        </IconButton>
+        <Tooltip title="Exit fullscreen">
+          <IconButton
+            size="lg"
+            aria-label="Exit fullscreen"
+            sx={{ position: 'fixed', bottom: '12px', right: '12px' }}
+            onClick={() => setFullScreenHash(undefined)}>
+            <Minimize />
+          </IconButton>
+        </Tooltip>
       )}
     </>
   );

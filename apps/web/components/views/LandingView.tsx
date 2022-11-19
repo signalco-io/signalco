@@ -20,10 +20,10 @@ import CtaSection from 'components/pages/CtaSection';
 const Newsletter = dynamic(() => import('../pages/landing/Newsletter'));
 const GlobePart = dynamic(() => import('../pages/landing/GlobeSection'));
 
-function FeatureDescription(props: { title: string, content: string | React.ReactElement, link?: string, linkText?: string }) {
+function FeatureDescription(props: { header: string, content: string | React.ReactElement, link?: string, linkText?: string }) {
   return (
     <Stack spacing={2}>
-      <Typography level="h5" component="h3">{props.title}</Typography>
+      <Typography level="h5" component="h3">{props.header}</Typography>
       <Typography textColor="neutral.400">{props.content}</Typography>
       <Box>
         {props.link && (
@@ -37,7 +37,7 @@ function FeatureDescription(props: { title: string, content: string | React.Reac
 }
 
 function StepContent(props: {
-  title: string;
+  header: string;
   direction?: 'vertical' | 'horizontal'
   subtitle?: string;
   image?: React.ReactNode,
@@ -54,7 +54,7 @@ function StepContent(props: {
       <Stack spacing={{ xs: 6, md: 12 }} ref={observe}>
         <Stack spacing={{ xs: 2, md: 4 }}>
           <GentleSlide appear={inView} direction="down">
-            <Typography level="h3" component="h2" textAlign="center">{props.title}</Typography>
+            <Typography level="h3" component="h2" textAlign="center">{props.header}</Typography>
           </GentleSlide>
           {props.subtitle && (
             <GentleSlide appear={inView} direction="down" index={1}>
@@ -182,7 +182,7 @@ function PlaySection() {
   const themeContext = useUserTheme();
 
   return (
-    <StepContent title="Play" subtitle="Here are some of our favorite ways you can automate your life"
+    <StepContent header="Play" subtitle="Here are some of our favorite ways you can automate your life"
       image={<Image src={themeContext.isDark ? '/images/playpitch-dark.png' : '/images/playpitch.png'} alt="Play" quality={100} width={511} height={684} />}
       imageContainerHeight={684 + 64}
       imageContainerStyles={{
@@ -194,16 +194,16 @@ function PlaySection() {
         marginTop: '64px'
       }}>
       <FeatureDescription
-        title="Morning coffee"
+        header="Morning coffee"
         content="Raise the shades, play your favorite energizing morning beat and turn on the coffee maker." />
       <FeatureDescription
-        title="Busywork"
+        header="Busywork"
         content="Create a list of Trello cards and GitHub tasks that need your attention today. Maybe you can automate some of them too." />
       <FeatureDescription
-        title="TV time"
+        header="TV time"
         content="Dim the lights, switch the TV to Netflix, and turn on do-not-disturb on your phone. Now is You time." />
       <FeatureDescription
-        title="Rain alert"
+        header="Rain alert"
         content="Notify me if today's forecast shows rain and windows are open. Ease your mind knowing you will get notified on time" />
     </StepContent>
   );
@@ -225,7 +225,7 @@ export default function LandingPageView() {
       <DeveloperOnly>
         <CounterIndicator count={0} />
         <StepContent
-          title="Developers"
+          header="Developers"
           subtitle="Signalco is free and open source project run by small team of enthusiasts."
           direction="horizontal">
           <Stack alignItems="center">
@@ -238,7 +238,7 @@ export default function LandingPageView() {
         </StepContent>
       </DeveloperOnly>
       <CounterIndicator count={1} />
-      <StepContent title="Discover" image={<DiscoverVisual />} imageContainerHeight={420}
+      <StepContent header="Discover" image={<DiscoverVisual />} imageContainerHeight={420}
         imageContainerStyles={{
           position: 'absolute',
           top: '-92px',
@@ -246,28 +246,28 @@ export default function LandingPageView() {
           zIndex: -1
         }}>
         <FeatureDescription
-          title="Bring together"
+          header="Bring together"
           content="Every service and device is useful by itself, but the real magic happens when you bring them all together." />
         <FeatureDescription
-          title="Connected"
+          header="Connected"
           content="Connect a wide range of devices and services, from Smart Home and IoT devices to productivity tools and social apps." />
         <FeatureDescription
-          title="Automation"
+          header="Automation"
           content="Repetitive tasks are boring. Automate so you can focus on things that matter to you." />
       </StepContent>
       <FeaturedIntegrationsSection />
       <CounterIndicator count={2} />
       <PlaySection />
       <CounterIndicator count={3} hideAfter />
-      <StepContent title="Enjoy" direction="horizontal">
+      <StepContent header="Enjoy" direction="horizontal">
         <FeatureDescription
-          title="Anywhere you are"
+          header="Anywhere you are"
           content="Access all features wherever you are. Controlling devices in your home from other side of the world or room&nbsp;:) has never been simpler." />
         <FeatureDescription
-          title="Share"
+          header="Share"
           content="Share devices, media, dashboards, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
         <FeatureDescription
-          title="Relax"
+          header="Relax"
           content="Enjoy the automated life. Use gained free time doing what you love. Relax in nature, hobbies, family... or automate one more thing." />
       </StepContent>
       <GlobeSection />

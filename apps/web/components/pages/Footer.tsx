@@ -1,3 +1,5 @@
+'use client';
+
 import React, { ReactNode } from 'react';
 import NextLink from 'next/link';
 import { Github, Twitter } from '@signalco/ui-icons';

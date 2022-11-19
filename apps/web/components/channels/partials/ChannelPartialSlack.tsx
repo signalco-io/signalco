@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Stack } from '@mui/system';
+import { Stack } from '@signalco/ui';
 import { Typography } from '@mui/joy';
 import HttpService from 'src/services/HttpService';
 import OAuthRedirectConnectButton from 'components/oauth/OAuthRedirectConnectButton';
