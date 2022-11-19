@@ -44,7 +44,7 @@ export function PageNav(props: { fullWidth?: boolean | undefined; }) {
             <Container maxWidth={props.fullWidth ? false : 'lg'}>
                 <Stack component="header" direction="row" justifyContent="space-between" alignItems="center">
                     <Box>
-                        <Link href="/" passHref style={{ textDecoration: 'none' }}>
+                        <Link href="/" passHref style={{ textDecoration: 'none' }} aria-label="signalco">
                             <SignalcoLogotype height={42} />
                         </Link>
                     </Box>
