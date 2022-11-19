@@ -109,8 +109,8 @@ function UserProfileAvatar() {
 
 function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: React.FunctionComponent, active: boolean, label: string, onClick?: () => void }) {
   return (
-    <Link href={path} passHref legacyBehavior>
-      <Tooltip title={label}>
+    <Tooltip title={label}>
+      <Link href={path}>
         <IconButton
           aria-label={label}
           title={label}
@@ -124,8 +124,8 @@ function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: R
             <Icon />
           </Box>
         </IconButton>
-      </Tooltip>
-    </Link>
+      </Link>
+    </Tooltip>
   );
 }
 
@@ -159,7 +159,12 @@ function NavProfile() {
         <Stack sx={{ width: { xs: undefined, sm: '100%' } }}>
           {visibleNavItems
             .map((ni, index) => (
-              <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} />
+              <NavLink
+                key={index + 1}
+                path={ni.path}
+                Icon={ni.icon}
+                active={ni === activeNavItem}
+                label={t(ni.label)} />
             ))}
         </Stack>
       </Box>
@@ -185,7 +190,13 @@ function NavProfile() {
           <Sheet variant="outlined" sx={{ height: '100%' }}>
             <Stack>
               {visibleNavItems.map((ni, index) =>
-                <NavLink key={index + 1} path={ni.path} Icon={ni.icon} active={ni === activeNavItem} label={t(ni.label)} onClick={handleMobileMenuClose} />)}
+                <NavLink
+                  key={index + 1}
+                  path={ni.path}
+                  Icon={ni.icon}
+                  active={ni === activeNavItem}
+                  label={t(ni.label)}
+                  onClick={handleMobileMenuClose} />)}
             </Stack>
           </Sheet>
         </Box>
