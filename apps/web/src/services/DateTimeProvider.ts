@@ -1,31 +1,14 @@
-import { TimeZone, getTimeZones } from '@vvo/tzdb';
-import UserSettingsProvider from './UserSettingsProvider';
-import { ObjectDict } from '../sharedTypes';
-
 const durationRegex = /P((([0-9]*\.?[0-9]*)Y)?(([0-9]*\.?[0-9]*)M)?(([0-9]*\.?[0-9]*)W)?(([0-9]*\.?[0-9]*)D)?)?(T(([0-9]*\.?[0-9]*)H)?(([0-9]*\.?[0-9]*)M)?(([0-9]*\.?[0-9]*)S)?)?/
 const staticDateTime: Date | undefined = undefined;
-const timeZonesCache: ObjectDict<TimeZone> = {};
-
-function getTimeZoneByName(name: string | undefined) {
-    if (!name) return undefined;
-
-    if (!timeZonesCache[name]) {
-        timeZonesCache[name] = getTimeZones().find(tz => tz.name === name);
-    }
-
-    return timeZonesCache[name];
-}
 
 export function now() {
-    const timeZoneName = UserSettingsProvider.value<string | undefined>('timeZone', undefined);
-    const timeZone = getTimeZoneByName(timeZoneName);
     const _now = staticDateTime ?? new Date();
     return new Date(
         _now.getUTCFullYear(),
         _now.getUTCMonth(),
         _now.getUTCDate(),
         _now.getUTCHours(),
-        _now.getUTCMinutes() + (timeZone?.currentTimeOffsetInMinutes ?? 0),
+        _now.getUTCMinutes(),// + (timeZone?.currentTimeOffsetInMinutes ?? 0),
         _now.getUTCSeconds(),
         _now.getUTCMilliseconds());
 }
