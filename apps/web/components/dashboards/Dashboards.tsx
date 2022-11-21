@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { Loadable, Row , Button, Typography } from '@signalco/ui';
-import { Box } from '@signalco/ui';
+import { Loadable, Row , Button, Typography , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import { showNotification } from 'src/notifications/PageNotificationService';
 import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';

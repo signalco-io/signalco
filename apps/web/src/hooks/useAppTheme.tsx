@@ -5,9 +5,9 @@ import { localizer } from './useLocale';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 import useInterval from './useInterval';
 import { AppThemeMode } from '../theme';
-import DateTimeProvider from '../services/DateTimeProvider';
 import { showNotification } from '../notifications/PageNotificationService';
 import SunHelper from '../helpers/SunHelper';
+import { fromDuration, now } from 'src/services/DateTimeProvider';
 
 export default function useAppTheme() {
   const { colorScheme, setColorScheme } = useColorScheme();
@@ -24,10 +24,10 @@ export default function useAppTheme() {
 
     // Handle time range
     if (themeMode === 'timeRange' && themeTimeRange?.length === 2) {
-      const now = DateTimeProvider.now();
-      const dayTime = DateTimeProvider.fromDuration(now, themeTimeRange[0]);
-      const nightTime = DateTimeProvider.fromDuration(now, themeTimeRange[1]);
-      if (dayTime && nightTime && now >= dayTime && now < nightTime) {
+      const nowTime = now();
+      const dayTime = fromDuration(nowTime, themeTimeRange[0]);
+      const nightTime = fromDuration(nowTime, themeTimeRange[1]);
+      if (dayTime && nightTime && nowTime >= dayTime && nowTime < nightTime) {
         themeOrPrefered = 'light';
       } else {
         themeOrPrefered = 'dark';

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useUserTheme from 'src/hooks/useUserTheme';
 import styles from './WindowVisual.module.scss';
-import DateTimeProvider from '../../src/services/DateTimeProvider';
+import { now } from '../../src/services/DateTimeProvider';
 import useInterval from '../../src/hooks/useInterval';
 import { colorToRgb } from '../../src/helpers/StringHelpers';
 
@@ -34,10 +34,10 @@ var skySunnyGrads = [
 
 function WindowVisual(props: { shadePerc: number, size: number, dateAndTime?: Date }) {
     const themeContext = useUserTheme();
-    const [hours, setHours] = useState(((props.dateAndTime ?? DateTimeProvider.now()).getHours()) % 24);
+    const [hours, setHours] = useState(((props.dateAndTime ?? now()).getHours()) % 24);
 
     // Update hours every minute
-    useInterval(() => setHours(((props.dateAndTime ?? DateTimeProvider.now()).getHours()) % 24), 60 * 1000);
+    useInterval(() => setHours(((props.dateAndTime ?? now()).getHours()) % 24), 60 * 1000);
 
     const perc = Math.max(0, Math.min(props.shadePerc || 0, 1));
 

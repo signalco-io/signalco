@@ -6,7 +6,7 @@ import { Github, Twitter } from '@signalco/ui-icons';
 import { Container , Grid, IconButton, Typography, JoyLink , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import SignalcoLogotype from 'components/icons/SignalcoLogotype';
-import DateTimeProvider from '../../src/services/DateTimeProvider';
+import { now } from '../../src/services/DateTimeProvider';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
 
 type FooterSectionType = {
@@ -86,7 +86,7 @@ export default function Footer() {
                             <Stack alignItems="center" justifyContent="space-between" direction={{ xs: 'column-reverse', sm: 'row' }}>
                                 <Typography
                                     textAlign={{ xs: 'center', sm: 'left' }}
-                                    level="body3">Copyright © {DateTimeProvider.now().getFullYear()} signalco. All rights reserved.</Typography>
+                                    level="body3">Copyright © {now().getFullYear()} signalco. All rights reserved.</Typography>
                                 <Stack direction="row" spacing={1} alignItems={{ xs: 'center', sm: 'start' }}>
                                     <IconButton aria-label="Twitter link" href="https://twitter.com/signalco_io">
                                         <Twitter />
