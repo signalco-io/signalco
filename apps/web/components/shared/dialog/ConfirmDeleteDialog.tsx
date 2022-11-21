@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Stack , Button, TextField, Typography } from '@signalco/ui';
-import { Breakpoint } from '@signalco/ui';
+import { Stack , Button, TextField, Typography , Breakpoint } from '@signalco/ui';
 import ConfigurationDialog from './ConfigurationDialog';
 import useLocale from '../../../src/hooks/useLocale';
 

@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
 import Link from 'next/link';
 import Image, { ImageProps } from 'next/image';
-import { Typography } from '@signalco/ui';
-import { Box } from '@signalco/ui';
+import { Typography , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import SignalcoLogotype from 'components/icons/SignalcoLogotype';
 

@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { Row , Avatar, Card, Typography } from '@signalco/ui';
-import { Box } from '@signalco/ui';
+import { Row , Avatar, Card, Typography , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import { entityLastActivity } from 'src/entity/EntityHelper';

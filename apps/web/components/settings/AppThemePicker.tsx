@@ -1,9 +1,7 @@
 import { Suspense, useState } from 'react';
 import { Custom, SunMoon, Timer } from '@signalco/ui-icons';
-import { Stack, Row , TextField, SupportedColorScheme, Typography } from '@signalco/ui';
-import { Box } from '@signalco/ui';
+import { Stack, Row , TextField, SupportedColorScheme, Typography , Box , useColorScheme } from '@signalco/ui';
 import { DefaultColorScheme } from '@mui/joy/styles/types';
-import { useColorScheme } from '@signalco/ui';
 import Picker from 'components/shared/form/Picker';
 import { AppThemeMode } from '../../src/theme';
 import DateTimeProvider from '../../src/services/DateTimeProvider';

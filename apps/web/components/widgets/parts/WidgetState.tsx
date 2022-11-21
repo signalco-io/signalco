@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
-import { Button, Typography } from '@signalco/ui';
-import { Box } from '@signalco/ui';
+import { Button, Typography , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import CircularProgress from '@mui/joy/CircularProgress';
 import useContacts from 'src/hooks/useContacts';
