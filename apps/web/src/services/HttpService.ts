@@ -1,5 +1,4 @@
 import Router from 'next/router';
-import axios, { AxiosError } from 'axios';
 import CurrentUserProvider from './CurrentUserProvider';
 import AppSettingsProvider from './AppSettingsProvider';
 import { ObjectDictAny } from '../sharedTypes';
@@ -50,59 +49,55 @@ export default class HttpService {
     url: string,
     method: 'get' | 'post' | 'put' | 'delete',
     data?: any,
-    headers?: ObjectDictAny,
+    headers?: Record<string, string>,
     skipAuth?: boolean
   ) {
-    const token = skipAuth ? false : await HttpService._getBearerTokenAsync()
+    const token = skipAuth ? '' : await HttpService._getBearerTokenAsync()
     try {
-    const response = await axios.request({
-      url: isAbsoluteUrl(url) ? url : HttpService.getApiUrl(url),
-      method: method,
-      data: method !== 'get' ? data : undefined,
-      params: method === 'get' ? data : undefined,
-      headers: {
-        Accept: 'application/json',
-        Authorization: token,
-        'Content-Type': 'application/json',
-        ...headers
-      },
-    });
-    return response.data;
-    } catch(err) {
-      if (typeof err !== 'undefined' &&
-        typeof err === 'object' &&
-        err !== null &&
-        Object.values(err).find(errv => errv === 'AxiosError')) {
-        const axiosError = err as AxiosError;
-        if (axiosError.response?.status === 403) {
-          console.warn('Token expired.', err);
-          CurrentUserProvider.setToken(undefined);
-
-          // Check if we are already reloading to authenticate
-          const isAuthReload = parseHashParam('authReload');
-          if (isAuthReload === 'true') {
-              // Show notification to manually reload the app
-              showPrompt(
-                  'Authorization failed. Please reload the app to continue...',
-                  'error',
-                  'Reload',
-                  () => {
-                      window.location.replace('/app');
-                  });
-              return;
-          }
-
-          // Reload with auth reload flag
-          const hash = parseHash();
-          hash.set('authReload', 'true');
-          Router.push({ hash: hash.toString() }, undefined, {shallow: false});
+        var urlResolved = new URL(isAbsoluteUrl(url) ? url : HttpService.getApiUrl(url));
+        if (method === 'get' && data) {
+            urlResolved.search = new URLSearchParams(data).toString();
         }
-        console.warn(`API (${axiosError.response?.status}) - ${axiosError.message}`)
-      } else {
-        console.error('API error', err);
-      }
+        const response = await fetch(urlResolved, {
+            method: method,
+            body: method !== 'get' ? data : undefined,
+            headers: {
+                Accept: 'application/json',
+                Authorization: token,
+                'Content-Type': 'application/json',
+                ...headers
+            },
+        });
 
-      throw err;
+        if (response.status === 200)
+            return await response.json();
+
+        if (response.status === 403) {
+            console.warn('Token expired: ', response.statusText, response.status);
+            CurrentUserProvider.setToken(undefined);
+
+            // Check if we are already reloading to authenticate
+            const isAuthReload = parseHashParam('authReload');
+            if (isAuthReload === 'true') {
+                // Show notification to manually reload the app
+                showPrompt(
+                    'Authorization failed. Please reload the app to continue...',
+                    'error',
+                    'Reload',
+                    () => {
+                        window.location.replace('/app');
+                    });
+                return;
+            }
+
+            // Reload with auth reload flag
+            const hash = parseHash();
+            hash.set('authReload', 'true');
+            Router.push({ hash: hash.toString() }, undefined, {shallow: false});
+        }
+    } catch(err) {
+        console.error('Unknown API error', err);
+        throw err;
     }
   }
 
