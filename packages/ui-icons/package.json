@@ -25,7 +25,7 @@
     },
     "dependencies": {
         "react-dom": "18.2.0",
-        "lucide-react": "0.101.0"
+        "lucide-react": "0.102.0"
     },
     "peerDependencies": {
     }
