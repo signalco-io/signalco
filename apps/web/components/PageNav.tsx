@@ -2,9 +2,8 @@
 
 import React, { Suspense } from 'react';
 import Link from 'next/link';
-import { NavigatingButton , Container } from '@signalco/ui';
+import { NavigatingButton , Container , Button } from '@signalco/ui';
 import { Stack, Box } from '@mui/system';
-import { Button } from '@mui/joy';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 
 const navLinks = [

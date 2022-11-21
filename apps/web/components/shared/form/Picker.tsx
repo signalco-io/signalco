@@ -1,5 +1,5 @@
 import { ChangeEvent, ReactElement } from 'react';
-import { Radio, RadioGroup } from '@mui/joy';
+import { Radio, RadioGroup } from '@signalco/ui';
 
 export interface PickerOption {
     value: any;

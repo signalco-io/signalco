@@ -1,6 +1,6 @@
 import React from 'react';
+import { Modal, ModalClose, ModalDialog, Typography } from '@signalco/ui';
 import { Breakpoint, Stack } from '@mui/system';
-import { Modal, ModalClose, ModalDialog, Typography } from '@mui/joy';
 
 export interface IConfigurationDialogProps {
     isOpen: boolean,

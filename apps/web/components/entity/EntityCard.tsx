@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { Row } from '@signalco/ui';
+import { Row , Avatar, Card, Typography } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
-import { Avatar, Card, Typography } from '@mui/joy';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import { entityLastActivity } from 'src/entity/EntityHelper';
 import Timeago from 'components/shared/time/Timeago';

@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Button } from '@mui/joy';
+import { Button } from '@signalco/ui';
 
 export default function OAuthRedirectConnectButton(props: { label: string; initiateUrl: string; queryParamName: string; onCode: (code: string) => Promise<void>; }) {
     const { label, initiateUrl, queryParamName, onCode } = props;

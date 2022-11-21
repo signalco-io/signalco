@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { MoreHorizontal } from '@signalco/ui-icons';
-import { Button, Divider, Menu, MenuItem } from '@mui/joy';
+import { Button, Divider, Menu, MenuItem } from '@signalco/ui';
 import { showNotification } from 'src/notifications/PageNotificationService';
 import useLocale from 'src/hooks/useLocale';
 import useEntity from 'src/hooks/useEntity';

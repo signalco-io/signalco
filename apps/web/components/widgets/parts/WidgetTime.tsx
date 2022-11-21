@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { Typography } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
-import { Typography } from '@mui/joy';
 import IWidgetConfigurationOption from 'src/widgets/IWidgetConfigurationOption';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';

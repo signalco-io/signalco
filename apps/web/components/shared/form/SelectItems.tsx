@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Select as SelectIcon } from '@signalco/ui-icons';
-import { Select, Option, selectClasses } from '@mui/joy';
+import { Select, Option, selectClasses } from '@signalco/ui';
 
 export interface ISelectItemsProps {
     multiple?: boolean,

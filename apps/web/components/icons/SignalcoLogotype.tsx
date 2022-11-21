@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import { SupportedColorScheme } from '@mui/joy';
+import { SupportedColorScheme } from '@signalco/ui';
 import styles from './SignalcoLogotype.module.scss';
 import ApiBadge from '../development/ApiBadge';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';

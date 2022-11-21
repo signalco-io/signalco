@@ -1,6 +1,5 @@
 import React from 'react';
-import { Stack } from '@mui/system';
-import { Typography } from '@mui/joy';
+import { Stack, Typography } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';

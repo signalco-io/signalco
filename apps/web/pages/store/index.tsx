@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
-import { Chip } from '@signalco/ui';
+import { Chip , Card, Typography } from '@signalco/ui';
 import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
-import { Card, Typography } from '@mui/joy';
 import green from 'src/colors/green';
 import grey from 'src/colors/gray';
 import amber from 'src/colors/amber';

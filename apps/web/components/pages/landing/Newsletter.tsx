@@ -1,6 +1,5 @@
 import { ChangeEvent, SyntheticEvent, createRef, useState } from 'react';
-import { Row, Stack } from '@signalco/ui';
-import { Alert, Button, TextField, Typography } from '@mui/joy';
+import { Row, Stack , Alert, Button, TextField, Typography } from '@signalco/ui';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import GentleSlide from 'components/shared/animations/GentleSlide';
 import Fade from 'components/shared/animations/Fade';

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { Button, TextField, Typography } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import { Button, TextField, Typography } from '@mui/joy';
 import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
 import useDeleteDashboard from 'src/hooks/dashboards/useDeleteDashboard';
 import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';

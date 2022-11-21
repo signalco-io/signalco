@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
+import { Button, Row, Stack, Typography } from '@signalco/ui';
 import { DefaultColorPalette, DefaultVariantProp } from '@mui/joy/styles/types';
-import { Button, Stack, Typography } from '@mui/joy';
 import { camelToSentenceCase } from '../../src/helpers/StringHelpers';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -41,7 +41,7 @@ function Variant({ variant }: { variant: Variant }) {
     <div>
       <Typography textAlign="center">{camelToSentenceCase(variant ?? 'default')}</Typography>
     </div>
-    <Stack direction="column" spacing={4}>
+    <Stack spacing={4}>
       {sizes.map(size => (
         <Size key={`${variant}-${size}`} variant={variant} size={size === 'default' ? undefined : size} />
       ))}
@@ -50,9 +50,11 @@ function Variant({ variant }: { variant: Variant }) {
 }
 
 export function Matrix() {
-  return <Stack direction="row" spacing={1}>
-    {variants.map(variant => (
-      <Variant key={variant} variant={variant === 'default' ? undefined : variant} />
-    ))}
-  </Stack>
+  return (
+    <Row spacing={1}>
+      {variants.map(variant => (
+        <Variant key={variant} variant={variant === 'default' ? undefined : variant} />
+      ))}
+    </Row>
+  );
 }

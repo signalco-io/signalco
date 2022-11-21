@@ -1,9 +1,8 @@
 import React from 'react';
 import { PopupState } from 'material-ui-popup-state/hooks';
 import { Add, Pin, PinOff } from '@signalco/ui-icons';
-import { Row } from '@signalco/ui';
+import { Row , Button, Card, Divider, IconButton, Typography } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import { Button, Card, Divider, IconButton, Typography } from '@mui/joy';
 import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';

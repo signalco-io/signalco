@@ -1,5 +1,4 @@
-import { Stack } from '@signalco/ui';
-import { Typography } from '@mui/joy';
+import { Stack , Typography } from '@signalco/ui';
 import PageCenterHeader from 'components/pages/PageCenterHeader';
 import WidgetStore from '../../components/widget-store/WidgetStore';
 import { PageLayout } from '../../components/layouts/PageLayout';

@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
+import { Button, Typography } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
-import { Button, Typography } from '@mui/joy';
 import GridWrapper from './GridWrapper';
 import DragableWidget from './DragableWidget';
 import DisplayWidget from './DisplayWidget';

@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { Close, Play, Warning } from '@signalco/ui-icons';
-import { Chip, Row, Stack, Container } from '@signalco/ui';
-import { Alert, Card, IconButton, Typography } from '@mui/joy';
+import { Chip, Row, Stack, Container , Alert, Card, IconButton, Typography } from '@signalco/ui';
 import useContact from 'src/hooks/useContact';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import { setAsync } from 'src/contacts/ContactRepository';

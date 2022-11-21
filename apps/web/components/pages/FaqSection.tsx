@@ -1,7 +1,6 @@
 import { Accordion } from '@signalco/ui-client';
-import { Container } from '@signalco/ui';
+import { Container , Typography } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
-import { Typography } from '@mui/joy';
 import PageCenterHeader from './PageCenterHeader';
 
 export interface FaqItem {

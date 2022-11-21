@@ -1,12 +1,12 @@
 import { ChangeEvent, ReactNode } from 'react';
+import { JoyCheckbox } from '@signalco/ui';
 import { SxProps } from '@mui/system';
-import { Checkbox as JoyCheckbox } from '@mui/joy';
 
 export interface CheckboxProps {
     checked: boolean;
     readonly?: boolean;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-    sx?: SxProps | undefined;
+    sx?: SxProps | undefined; // TODO: Remove - only used for padding in one place
     label?: ReactNode;
     disableIcon?: boolean;
 }

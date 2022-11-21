@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ExpandDown } from '@signalco/ui-icons';
-import { Row, Stack } from '@signalco/ui';
+import { Row, Stack , Typography, Button } from '@signalco/ui';
 import { Box } from '@mui/system';
-import { Typography, Button } from '@mui/joy';
 import SelectItems from '../form/SelectItems';
 import Checkbox from '../form/Checkbox';
 
