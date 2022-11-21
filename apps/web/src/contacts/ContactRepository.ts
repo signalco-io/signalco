@@ -1,6 +1,6 @@
 import IContactPointer from './IContactPointer';
 import HttpService from '../../src/services/HttpService';
-import DateTimeProvider from '../../src/services/DateTimeProvider';
+import { toDuration } from 'src/services/DateTimeProvider';
 
 interface TimeStampValuePairDto {
     timeStamp: string;
@@ -26,7 +26,7 @@ export async function historyAsync(pointer: IContactPointer, duration: Date | st
         entityId: pointer.entityId,
         contactName: pointer.contactName,
         channelName: pointer.channelName,
-        duration: typeof duration === 'string' ? duration : DateTimeProvider.toDuration(duration)
+        duration: typeof duration === 'string' ? duration : toDuration(duration)
     }) as ContactHistoryResponseDto).values.map(tsvp => ({
         timeStamp: new Date(tsvp.timeStamp),
         valueSerialized: tsvp.valueSerialized

@@ -6,9 +6,9 @@ import lightBlue from 'src/colors/lightBlue';
 import deepOrange from 'src/colors/deepOrange';
 import Timeago from '../shared/time/Timeago';
 import { ObjectDictAny } from '../../src/sharedTypes';
-import DateTimeProvider from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
 import { arrayMax, arrayMin } from '../../src/helpers/ArrayHelpers';
+import { now } from 'src/services/DateTimeProvider';
 
 export interface IGraphProps {
     label?: string;
@@ -49,10 +49,10 @@ function GraphTimeLine(props: IGraphProps) {
     const accentTrue = lightBlue[isDarkTheme ? 900 : 500];
     const accentFalse = deepOrange[isDarkTheme ? 800 : 400];
 
-    const now = startDateTime ?? DateTimeProvider.now();
-    const past = startDateTime ?? DateTimeProvider.now();
-    past.setTime(now.getTime() - durationMs);
-    const domainGraph = scaleTime().domain([past, now]);
+    const nowTime = startDateTime ?? now();
+    const past = startDateTime ?? now();
+    past.setTime(nowTime.getTime() - durationMs);
+    const domainGraph = scaleTime().domain([past, nowTime]);
 
     const reversedData = [...data].reverse();
     const firstEntry = reversedData[0];
@@ -75,7 +75,7 @@ function GraphTimeLine(props: IGraphProps) {
 
     // Period from last state change until present
     if (lastEntry) {
-        transformedDataItem[`t${entriesCount}`] = domainGraph(now.getTime()) - domainGraph(new Date(lastEntry.id).getTime());
+        transformedDataItem[`t${entriesCount}`] = domainGraph(nowTime.getTime()) - domainGraph(new Date(lastEntry.id).getTime());
         transformedDataItem[`v${entriesCount}`] = lastEntry.value;
     }
 
@@ -142,10 +142,10 @@ function GraphArea(props: IGraphProps) {
     const yKey = 'value';
     const xKey = 'key';
 
-    const now = startDateTime ?? DateTimeProvider.now();
-    const past = startDateTime ?? DateTimeProvider.now();
-    past.setTime(now.getTime() - durationMs);
-    const domainGraph = scaleTime().domain([past, now]);
+    const nowTime = startDateTime ?? now();
+    const past = startDateTime ?? now();
+    past.setTime(nowTime.getTime() - durationMs);
+    const domainGraph = scaleTime().domain([past, nowTime]);
     const ticksHours = timeHour.every(1)!;
     const ticks = domainGraph.ticks(ticksHours).map(i => i.toString());
 
@@ -183,7 +183,7 @@ function GraphArea(props: IGraphProps) {
             {lastDataPoint && (
                 <Line type="monotone" dot={false} data={[
                     { key: domainGraph(new Date(lastDataPoint.id).getTime()), value: lastDataPoint.value },
-                    { key: domainGraph(now.getTime()), value: lastDataPoint.value }
+                    { key: domainGraph(nowTime.getTime()), value: lastDataPoint.value }
                 ]} dataKey="value" stroke="#aeaeae" strokeDasharray="5 3" />
             )}
             <Tooltip content={<ChartGenericTooltip domain={domainGraph} />} />
