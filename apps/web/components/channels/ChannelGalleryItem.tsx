@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { Chip } from '@signalco/ui';
+import { Chip, Card, ColorPaletteProp, Typography, JoyLink } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
-import { Card, ColorPaletteProp, Typography, Link as JoyLink } from '@mui/joy';
 import ChannelLogo from './ChannelLogo';
 
 interface ChannelGalleryItemProps {

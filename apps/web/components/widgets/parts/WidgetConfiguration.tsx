@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Row, Stack } from '@signalco/ui';
+import { Row, Stack , Button, TextField, Typography } from '@signalco/ui';
 import { Box } from '@mui/system';
-import { Button, TextField, Typography } from '@mui/joy';
 import Checkbox from 'components/shared/form/Checkbox';
 import SelectItems from '../../shared/form/SelectItems';
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';

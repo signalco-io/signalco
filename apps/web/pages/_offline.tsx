@@ -1,6 +1,6 @@
 import React from 'react';
+import { Typography } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import { Typography } from '@mui/joy';
 import { PageFullLayout } from '../components/layouts/PageFullLayout';
 import SignalcoLogotype from '../components/icons/SignalcoLogotype';
 

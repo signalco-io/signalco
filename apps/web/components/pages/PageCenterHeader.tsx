@@ -1,6 +1,6 @@
 import React from 'react';
+import { Typography } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import { Typography } from '@mui/joy';
 
 export default function PageCenterHeader(props: { header: string; subHeader?: string; secondary?: boolean }) {
     const { header, subHeader, secondary } = props;

@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import Link from 'next/link';
 import Image, { ImageProps } from 'next/image';
+import { Typography } from '@signalco/ui';
 import { Box, Stack } from '@mui/system';
-import { Typography } from '@mui/joy';
 import SignalcoLogotype from 'components/icons/SignalcoLogotype';
 
 const ringConfig = [

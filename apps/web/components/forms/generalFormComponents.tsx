@@ -1,4 +1,4 @@
-import { TextField } from '@mui/joy';
+import { TextField } from '@signalco/ui';
 import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import Checkbox from 'components/shared/form/Checkbox';
 

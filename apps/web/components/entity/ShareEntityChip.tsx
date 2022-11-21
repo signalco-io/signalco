@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Clear, People, Send, Share } from '@signalco/ui-icons';
-import { Chip, Row, Stack } from '@signalco/ui';
-import { Tooltip, IconButton, TextField, List, ListItem, ListItemContent, ListDivider } from '@mui/joy';
+import { Chip, Row, Stack , Tooltip, IconButton, TextField, List, ListItem, ListItemContent, ListDivider } from '@signalco/ui';
 import IUser from 'src/users/IUser';
 import GentleSlide from 'components/shared/animations/GentleSlide';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';

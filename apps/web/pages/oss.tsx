@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@mui/joy';
+import { Typography } from '@signalco/ui';
 import { PageLayout } from '../components/layouts/PageLayout';
 
 function OpenSourceSoftware() {

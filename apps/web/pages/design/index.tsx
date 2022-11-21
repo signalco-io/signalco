@@ -1,5 +1,5 @@
+import { Card, Typography } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import { Card, Typography } from '@mui/joy';
 import { PageLayout } from '../../components/layouts/PageLayout';
 import SignalcoLogotype from '../../components/icons/SignalcoLogotype';
 import SignalcoLogo from '../../components/icons/SignalcoLogo';
