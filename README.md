@@ -1,6 +1,9 @@
 <p align="center">
-  <a href="#">
-    <img height="128" width="455" alt="signalco" src="https://www.signalco.io/images/logo-ghtheme-128x455.png">
+  <a href="https://www.signalco.io">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://www.signalco.io/LogotypeDark.png">
+      <img height="128" width="455" alt="signalco logotype" src="https://www.signalco.io/LogotypeDark.png">
+    </picture>
   </a>
 </p>
 <h4 align="center">Automate your life.</h4>
