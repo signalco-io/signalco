@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { DisableButton , Avatar } from '@signalco/ui';
-import { Box, Stack } from '@mui/system';
+import { Box } from '@signalco/ui';
+import { Stack } from '@mui/system';
 import useEntity from 'src/hooks/useEntity';
 import useContact from 'src/hooks/useContact';
 import { entityRenameAsync } from 'src/entity/EntityRepository';

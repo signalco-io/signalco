@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import createGlobe from 'cobe';
-import { useColorScheme } from '@mui/joy/styles';
+import { useColorScheme } from '@signalco/ui';
 import useWindowWidth from '../../../src/hooks/useWindowWidth';
 
 function Globe() {

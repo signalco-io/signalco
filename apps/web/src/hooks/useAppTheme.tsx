@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useColorScheme } from '@mui/joy/styles';
+import { useColorScheme } from '@signalco/ui';
 import useUserSetting from './useUserSetting';
 import { localizer } from './useLocale';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';

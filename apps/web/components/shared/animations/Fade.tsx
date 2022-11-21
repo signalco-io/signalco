@@ -1,4 +1,4 @@
-import { Box } from '@mui/system';
+import { Box } from '@signalco/ui';
 import { ChildrenProps } from 'src/sharedTypes';
 
 export interface FadeProps extends ChildrenProps {

@@ -1,4 +1,4 @@
-import { useColorScheme } from '@mui/joy/styles';
+import { useColorScheme } from '@signalco/ui';
 
 export default function useUserTheme() {
     const { colorScheme } = useColorScheme();

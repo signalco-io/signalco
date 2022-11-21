@@ -12,7 +12,7 @@ export default function Stack({ children, spacing, alignItems }: StackProps) {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems,
-                gap: `${(spacing ?? 0) * 4}px`
+                gap: `${(spacing ?? 0) * 8}px`
             }}
         >
             {children}

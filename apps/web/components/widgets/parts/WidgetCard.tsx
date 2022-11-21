@@ -6,7 +6,8 @@ import {
 } from 'material-ui-popup-state/hooks';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
 import { Button, Card, CardOverflow, ListItemDecorator, Menu, MenuItem } from '@signalco/ui';
-import { Box, Stack } from '@mui/system';
+import { Box } from '@signalco/ui';
+import { Stack } from '@mui/system';
 import WidgetConfiguration from './WidgetConfiguration';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';

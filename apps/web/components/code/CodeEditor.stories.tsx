@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Box } from '@mui/system';
+import { Box } from '@signalco/ui';
 import CodeEditor from './CodeEditor';
 
 export default {

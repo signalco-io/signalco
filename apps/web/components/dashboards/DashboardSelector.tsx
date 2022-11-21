@@ -2,8 +2,7 @@ import React, { Suspense, useEffect } from 'react';
 import Link from 'next/link';
 import { bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import { Select } from '@signalco/ui-icons';
-import { Popper, Row , Button } from '@signalco/ui';
-import { Box, Stack } from '@mui/system';
+import { Popper, Row, Stack, Button, Box } from '@signalco/ui';
 import useDashboards from 'src/hooks/dashboards/useDashboards';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
 import useHashParam from '../../src/hooks/useHashParam';
@@ -35,7 +34,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
 
     return (
         <Suspense>
-            <Stack spacing={{ xs: 0, sm: 2 }} direction="row">
+            <Row>
                 {(dashboards?.length ?? 0) > 0 && (
                     <Box>
                         <Button
@@ -62,7 +61,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                         ))}
                     </Row>
                 )}
-            </Stack>
+            </Row>
             <Popper popupState={popupState}>
                 <DashboardSelectorMenu
                     selectedId={selectedId}

@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Add } from '@signalco/ui-icons';
 import { Stack, Row , AspectRatio, Card, CardOverflow, Grid, IconButton, TextField, Typography } from '@signalco/ui';
-import { Box } from '@mui/system';
+import { Box } from '@signalco/ui';
 import { widgetType } from '../widgets/Widget';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
 
@@ -78,7 +78,7 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
                 <Grid container spacing={2} justifyContent="center">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (
                         <Grid key={`${availableWidget.type}-${index}`}>
-                            <Card variant="outlined" sx={{ width: '270px' }}>
+                            <Card sx={{ width: '270px' }}>
                                 <Row spacing={1} justifyContent="space-between">
                                     <div>
                                         <Typography>{availableWidget.name}</Typography>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/system';
+import { Box } from '@signalco/ui';
 import { ChildrenProps } from '../../src/sharedTypes';
 
 export function EmptyLayout(props: ChildrenProps) {

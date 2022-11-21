@@ -7,8 +7,8 @@ import {
   usePopupState,
 } from 'material-ui-popup-state/hooks';
 import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
-import { Loadable , Avatar, Button, Divider, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, Sheet, Tooltip, Typography } from '@signalco/ui';
-import { Box, Stack } from '@mui/system';
+import { Loadable , Avatar, Button, Divider, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, Sheet, Tooltip, Typography , Box } from '@signalco/ui';
+import { Stack } from '@mui/system';
 import ApiBadge from './development/ApiBadge';
 import LocalStorageService from '../src/services/LocalStorageService';
 import CurrentUserProvider from '../src/services/CurrentUserProvider';

@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { Container, Loadable, NoDataPlaceholder, Row, Stack , List, ListItemButton, Typography } from '@signalco/ui';
-import { Box } from '@mui/system';
+import { Container, Loadable, NoDataPlaceholder, Row, Stack , List, ListItemButton, Typography , Box } from '@signalco/ui';
 import useAllEntities from 'src/hooks/useAllEntities';
 import { AppLayoutWithAuth } from 'components/layouts/AppLayoutWithAuth';
 import ChannelPartialSlack from 'components/channels/partials/ChannelPartialSlack';
