@@ -1,6 +1,5 @@
 import { Accordion } from '@signalco/ui-client';
-import { Container , Typography } from '@signalco/ui';
-import { Box, Stack } from '@mui/system';
+import { Container, Typography, Box, Stack } from '@signalco/ui';
 import PageCenterHeader from './PageCenterHeader';
 
 export interface FaqItem {
@@ -17,17 +16,13 @@ export default function FaqSection(props: { faq: FaqItem[] }) {
             <Container maxWidth="md">
                 <Stack spacing={4}>
                     <PageCenterHeader header={'Frequently asked questions'} secondary />
-                    <Stack spacing={4} justifyItems="center" alignItems="center">
-                        <Stack spacing={2}>
-                            {faq.map(f => (
-                                <Accordion key={f.id}>
-                                    <Typography level="h6">{f.question}</Typography>
-                                    <Typography>{f.answer}</Typography>
-                                </Accordion>
-                            ))}
-                        </Stack>
-                        {/* TODO: Enable when help center is available */}
-                        {/* <Button href="/help" variant="outlined" size="large">Visit help center</Button> */}
+                    <Stack spacing={2}>
+                        {faq.map(f => (
+                            <Accordion key={f.id}>
+                                <Typography level="h6">{f.question}</Typography>
+                                <Typography>{f.answer}</Typography>
+                            </Accordion>
+                        ))}
                     </Stack>
                 </Stack>
             </Container>

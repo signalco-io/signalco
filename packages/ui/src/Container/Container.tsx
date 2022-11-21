@@ -5,7 +5,7 @@ export interface ContainerProps extends ChildrenProps {
 }
 
 export default function Container({ maxWidth, children }: ContainerProps) {
-    let width = 1200;
+    let width: number | undefined = 1200;
     switch (maxWidth) {
         case 'md':
             width = 900;
@@ -16,6 +16,8 @@ export default function Container({ maxWidth, children }: ContainerProps) {
             width = 444;
         case 'xl':
             width = 1536;
+        case false:
+            width = undefined;
         default:
             break;
     }
@@ -24,7 +26,7 @@ export default function Container({ maxWidth, children }: ContainerProps) {
         <div style={{
             width: '100%',
             display: 'block',
-            maxWidth: `${width}px`,
+            maxWidth: width ? `${width}px` : undefined,
             margin: 'auto'
         }}>
             {children}

@@ -1,7 +1,7 @@
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
 import { NoDataPlaceholder, Row , Sheet, Typography } from '@signalco/ui';
-import { Box } from '@mui/system';
+import { Box } from '@signalco/ui';
 import useUserTheme from 'src/hooks/useUserTheme';
 import lightBlue from 'src/colors/lightBlue';
 import deepOrange from 'src/colors/deepOrange';

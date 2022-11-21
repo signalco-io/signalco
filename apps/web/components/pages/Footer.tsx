@@ -3,8 +3,8 @@
 import React, { ReactNode } from 'react';
 import NextLink from 'next/link';
 import { Github, Twitter } from '@signalco/ui-icons';
-import { Container , Grid, IconButton, Typography, JoyLink } from '@signalco/ui';
-import { Box, Stack } from '@mui/system';
+import { Container , Grid, IconButton, Typography, JoyLink , Box } from '@signalco/ui';
+import { Stack } from '@mui/system';
 import SignalcoLogotype from 'components/icons/SignalcoLogotype';
 import DateTimeProvider from '../../src/services/DateTimeProvider';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
