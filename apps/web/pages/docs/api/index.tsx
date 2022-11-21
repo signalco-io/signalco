@@ -1,6 +1,5 @@
 import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
-import axios, { AxiosError, Method } from 'axios';
 import { Security, Send } from '@signalco/ui-icons';
 import { Loadable, Chip, NavigatingButton } from '@signalco/ui';
 import Grid from '@mui/system/Unstable_Grid';
@@ -407,10 +406,12 @@ function Actions(props: ActionsProps) {
     const requestUrl = selectedServerUrl + props.path;
     const handleExecuteAction = async () => {
         try {
-            const response = await axios.request({
-                url: requestUrl,
-                method: props.operation.toString() as Method,
-                data: props.operation !== 'get' ? requestBodyValue : undefined,
+            // TODO: Attach params
+            // TODO: Attach body
+            // TODO: Attach headers
+            const response = await fetch(requestUrl, {
+                method: props.operation.toString(),
+                // param: props.operation !== 'get' ? requestBodyValue : undefined,
                 // params: props.operation === "get" ? data : undefined,
                 headers: {
                     //   Authorization: token,
@@ -419,17 +420,12 @@ function Actions(props: ActionsProps) {
                 },
             });
             setResponseStatusCode(response.status);
-            setResponse(JSON.stringify(response.data, undefined, 2));
+
+            const data = await response.json();
+            setResponse(JSON.stringify(data, undefined, 2));
         } catch (err) {
-            if (typeof err === 'object' && Object.keys(err as object).find(key => key === 'isAxiosError')) {
-                const axiosError = err as AxiosError;
-                console.log(axiosError.response?.status, axiosError.response?.data)
-                setResponseStatusCode(axiosError.response?.status);
-                setResponse(JSON.stringify(axiosError.response?.data, undefined, 2));
-            } else {
-                setResponseStatusCode(999);
-                setResponse('Unknown error');
-            }
+            setResponseStatusCode(999);
+            setResponse('Unknown error');
         }
     };
 
@@ -487,7 +483,7 @@ function Actions(props: ActionsProps) {
 }
 
 async function getOpenApiDoc(url: string) {
-    return (await axios.get<OpenAPIV3.Document>(url)).data;
+    return (await (await fetch(url)).json()) as OpenAPIV3.Document;
 }
 
 const ApiContext = createContext<OpenAPIV3.Document | undefined>(undefined);
