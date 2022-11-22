@@ -1,4 +1,4 @@
-name: "stories-check"
+name: "[Web] stories-check"
 on:
     pull_request:
         branches: [next, main]
