@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Box } from '@signalco/ui';
 import Footer from '../pages/Footer';
