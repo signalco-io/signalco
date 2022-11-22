@@ -65,7 +65,7 @@ function Link(props: { href: string, children: ReactNode }) {
 
 export default function Footer() {
     return (
-        <Box sx={{ alignSelf: 'stretch' }} component="footer">
+        <Box sx={{ alignSelf: 'stretch', px: 2 }} component="footer">
             <Container maxWidth="lg">
                 <Box component="footer" sx={{ padding: '64px 0 32px 0' }}>
                     <Stack spacing={4}>

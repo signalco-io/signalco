@@ -23,8 +23,6 @@ function NavMenu() {
 }
 
 export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
-    console.log('PageNav rendered');
-
     return (
         <Box component="nav" sx={{
             borderBottom: '1px solid transparent',
