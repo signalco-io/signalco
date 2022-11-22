@@ -2,11 +2,6 @@ import { test, expect } from '@playwright/test'
 import type { Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-test('should contain header', async ({ page }) => {
-  await page.goto('/')
-  await expect(page.locator('h1')).toContainText('Automate your life')
-});
-
 async function assertAccessibility(page: Page, url: string) {
     await page.goto(url);
     const accessibilityScanResults = await new AxeBuilder({ page })
@@ -14,6 +9,11 @@ async function assertAccessibility(page: Page, url: string) {
         .analyze();
     expect(accessibilityScanResults.violations).toEqual([]);
 }
+
+test('should contain header', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.locator('h1')).toContainText('Automate your life')
+});
 
 test('should be accessible', ({ page }) => assertAccessibility(page, '/'));
 test('channels should be accessible', ({ page }) => assertAccessibility(page, '/channels'));
