@@ -1,6 +1,5 @@
 import React from 'react';
-import { Breakpoint, Stack } from '@mui/system';
-import { Modal, ModalClose, ModalDialog, Typography } from '@mui/joy';
+import { Modal, ModalClose, ModalDialog, Typography, Breakpoint, Stack, Row, Box } from '@signalco/ui';
 
 export interface IConfigurationDialogProps {
     isOpen: boolean,
@@ -24,17 +23,19 @@ function ConfigurationDialog({
                 }}>
                 <ModalClose />
                 <Stack spacing={1}>
-                    <Stack direction="row" justifyContent="space-between" alignItems="center">
+                    <Row justifyContent="space-between">
                         <Typography level="h5">{header}</Typography>
-                        <Stack direction="row" spacing={1} sx={{ mt: -1.5, mr: 4 }}>
-                            {headerActions}
-                        </Stack>
-                    </Stack>
+                        <Box sx={{ mt: -1.5, mr: 4 }}>
+                            <Row spacing={1}>
+                                {headerActions}
+                            </Row>
+                        </Box>
+                    </Row>
                     {children}
                     {actions && (
-                        <Stack direction="row" spacing={1} justifyContent="end">
+                        <Row spacing={1} justifyContent="end">
                             {actions}
-                        </Stack>
+                        </Row>
                     )}
                 </Stack>
             </ModalDialog>

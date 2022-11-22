@@ -1,13 +1,10 @@
 import { Suspense, useState } from 'react';
 import { Custom, SunMoon, Timer } from '@signalco/ui-icons';
-import { Stack, Row } from '@signalco/ui';
-import { Box } from '@mui/system';
+import { Stack, Row , TextField, SupportedColorScheme, Typography , Box , useColorScheme } from '@signalco/ui';
 import { DefaultColorScheme } from '@mui/joy/styles/types';
-import { useColorScheme } from '@mui/joy/styles';
-import { TextField, SupportedColorScheme, Typography } from '@mui/joy';
 import Picker from 'components/shared/form/Picker';
 import { AppThemeMode } from '../../src/theme';
-import DateTimeProvider from '../../src/services/DateTimeProvider';
+import { fromDuration, now, todayAt, toDuration } from '../../src/services/DateTimeProvider';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale from '../../src/hooks/useLocale';
 
@@ -104,10 +101,10 @@ export default function AppThemePicker() {
     };
 
     const [timeRange, setTimeRange] = useUserSetting<[string, string]>('themeTimeRange', ['PT8H', 'PT20H']);
-    const [dayTime, setDayTime] = useState<Date | null | undefined>(timeRange ? DateTimeProvider.fromDuration(DateTimeProvider.now(), timeRange[0]) : DateTimeProvider.todayAt(8));
-    const [nightTime, setNightTime] = useState<Date | null | undefined>(timeRange ? DateTimeProvider.fromDuration(DateTimeProvider.now(), timeRange[1]) : DateTimeProvider.todayAt(20));
+    const [dayTime, setDayTime] = useState<Date | null | undefined>(timeRange ? fromDuration(now(), timeRange[0]) : todayAt(8));
+    const [nightTime, setNightTime] = useState<Date | null | undefined>(timeRange ? fromDuration(now(), timeRange[1]) : todayAt(20));
     const setThemeTimeRangeValues = (start: Date, end: Date) => {
-        setTimeRange([DateTimeProvider.toDuration(start), DateTimeProvider.toDuration(end)]);
+        setTimeRange([toDuration(start), toDuration(end)]);
     };
     const handleDayTimeChange = (date: Date | null | undefined) => {
         setDayTime(date);
@@ -136,13 +133,13 @@ export default function AppThemePicker() {
                         <Row spacing={1}>
                             <TextField
                                 label={picker.t('DayTime')}
-                                value={dayTime ? DateTimeProvider.toDuration(dayTime) : ''}
-                                onChange={(e) => handleDayTimeChange(DateTimeProvider.fromDuration(DateTimeProvider.now(), e.target.value))}
+                                value={dayTime ? toDuration(dayTime) : ''}
+                                onChange={(e) => handleDayTimeChange(fromDuration(now(), e.target.value))}
                             />
                             <TextField
                                 label={picker.t('NightTime')}
-                                value={nightTime ? DateTimeProvider.toDuration(nightTime) : ''}
-                                onChange={(e) => handleNightTimeChange(DateTimeProvider.fromDuration(DateTimeProvider.now(), e.target.value))}
+                                value={nightTime ? toDuration(nightTime) : ''}
+                                onChange={(e) => handleNightTimeChange(fromDuration(now(), e.target.value))}
                             />
                         </Row>
                     </Stack>

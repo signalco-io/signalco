@@ -8,7 +8,7 @@ if (typeof window !== 'undefined') {
         monaco.editor.defineTheme('signalco-dark', {
             base: 'vs-dark',
             colors: {
-                'editor.background': '#121212'
+                'editor.background': '#09090D'
             },
             inherit: true,
             rules: []

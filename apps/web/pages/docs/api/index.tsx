@@ -1,11 +1,7 @@
 import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
-import axios, { AxiosError, Method } from 'axios';
 import { Security, Send } from '@signalco/ui-icons';
-import { Loadable, Chip, NavigatingButton } from '@signalco/ui';
-import Grid from '@mui/system/Unstable_Grid';
-import { Box, Stack } from '@mui/system';
-import { Typography, TextField, Divider, Badge, Alert, Button, Card, List, Tooltip } from '@mui/joy';
+import { Stack, Loadable, Chip, NavigatingButton, Typography, TextField, Divider, Badge, Alert, Button, Card, List, Tooltip, Box, Row, Grid, CardOverflow } from '@signalco/ui';
 import useLoadAndError from 'src/hooks/useLoadAndError';
 import ListTreeItem from 'components/shared/list/ListTreeItem';
 import SelectItems from 'components/shared/form/SelectItems';
@@ -83,10 +79,10 @@ function Schema(props: { name: string, schema: OpenAPIV3.ReferenceObject | OpenA
 
     return (
         <div>
-            <Stack spacing={1} direction="row" alignItems="center">
+            <Row spacing={1}>
                 <Typography>{props.name}</Typography>
                 <Typography level="body2">{schemaResolved?.type}</Typography>
-            </Stack>
+            </Row>
             <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', px: 2 }}>
                 {schemaResolved?.type === 'array'
                     ? <ArraySchema name={props.name} schema={schemaResolved as OpenAPIV3.ArraySchemaObject} />
@@ -108,7 +104,7 @@ function ApiOperation(props: ApiOperationProps) {
     return (
         <Stack spacing={4}>
             <Stack spacing={1}>
-                <Stack spacing={1} direction="row" alignItems="center">
+                <Row spacing={1}>
                     <OperationChip operation={operation} />
                     <Tooltip title={deprecated ? 'Deprecated' : undefined}>
                         <Typography
@@ -117,11 +113,11 @@ function ApiOperation(props: ApiOperationProps) {
                             {path}
                         </Typography>
                     </Tooltip>
-                </Stack>
-                <Stack spacing={1} direction="row" alignItems="center">
+                </Row>
+                <Row spacing={1}>
                     {security && security.map((securityVariant, i) => <SecurityBadge key={i} security={securityVariant} />)}
                     {tags && tags.map(tag => <Chip key={tag}>{tag}</Chip>)}
-                </Stack>
+                </Row>
             </Stack>
             {summary && <Typography>{summary}</Typography>}
             {description && <Typography level="body2">{description}</Typography>}
@@ -134,19 +130,21 @@ function ApiOperation(props: ApiOperationProps) {
             {parametersResolved && (
                 <Stack spacing={1}>
                     <Typography textTransform="uppercase">Parameters</Typography>
-                    <Card variant="outlined">
+                    <Card>
                         {parametersResolved.map((parameter, i) => (
                             <React.Fragment key={parameter.name}>
-                                <Stack sx={{ p: 2 }}>
-                                    <Stack direction="row" alignItems="center" spacing={1} justifyContent="space-between">
-                                        <Typography textTransform="uppercase" fontWeight={400}>{parameter.name}</Typography>
-                                        <Stack direction="row" alignItems="center" spacing="4px">
-                                            <Typography level="body2">in</Typography>
-                                            <Typography level="body2" textTransform="uppercase">{parameter.in}</Typography>
-                                        </Stack>
+                                <Box sx={{ p: 2 }}>
+                                    <Stack>
+                                        <Row spacing={1} justifyContent="space-between">
+                                            <Typography textTransform="uppercase" fontWeight={400}>{parameter.name}</Typography>
+                                            <Row spacing={1}>
+                                                <Typography level="body2">in</Typography>
+                                                <Typography level="body2" textTransform="uppercase">{parameter.in}</Typography>
+                                            </Row>
+                                        </Row>
+                                        {parameter.description && <Typography level="body2">{parameter.description}</Typography>}
                                     </Stack>
-                                    {parameter.description && <Typography level="body2">{parameter.description}</Typography>}
-                                </Stack>
+                                </Box>
                                 {i != Object.keys(parametersResolved).length && <Divider />}
                             </React.Fragment>
                         ))}
@@ -157,7 +155,7 @@ function ApiOperation(props: ApiOperationProps) {
                 <Stack spacing={1}>
                     <Typography textTransform="uppercase">Request body</Typography>
                     {requestBodyResolved.description && <Typography level="body2">{requestBodyResolved.description}</Typography>}
-                    <Card variant="outlined">
+                    <Card>
                         <Stack>
                             {Object.keys(requestBodyResolved.content).map(contentType => (
                                 <React.Fragment key={contentType}>
@@ -171,18 +169,20 @@ function ApiOperation(props: ApiOperationProps) {
             )}
             <Stack spacing={1}>
                 <Typography textTransform="uppercase">Responses</Typography>
-                <Card variant="outlined">
+                <Card>
                     {Object.keys(responses).map((responseCode, i) => {
                         const responseCodeNumber = parseInt(responseCode, 10) || 0;
                         const responseObj = resolveRef<OpenAPIV3.ResponseObject>(api, responses[responseCode]);
                         if (!responseObj) return undefined;
                         return (
                             <React.Fragment key={responseCode}>
-                                <Stack sx={{ p: 2 }}>
-                                    <ResponseStatusCode statusCode={responseCodeNumber} />
-                                    <Typography level="body2">{responseObj.description}</Typography>
-                                </Stack>
-                                {i != Object.keys(responses).length && <Divider />}
+                                <Box sx={{ p: 2 }}>
+                                    <Stack>
+                                        <ResponseStatusCode statusCode={responseCodeNumber} />
+                                        <Typography level="body2">{responseObj.description}</Typography>
+                                    </Stack>
+                                </Box>
+                                {i != (Object.keys(responses).length - 1) && <Divider />}
                             </React.Fragment>
                         );
                     })}
@@ -236,11 +236,11 @@ function Nav() {
 
     return (
         <Stack spacing={2}>
-            <Stack alignItems="center" direction="row" spacing={1}>
+            <Row spacing={1}>
                 <Typography>{info.title}</Typography>
                 <Chip size="sm" variant="soft">v{info.version}</Chip>
                 {info.license && <Chip size="sm">{info.license.name}</Chip>}
-            </Stack>
+            </Row>
             <List>
                 {tags.map(t => (
                     <ListTreeItem
@@ -256,10 +256,12 @@ function Nav() {
                                 selected={pathName === op.pathName && operationName === op.operationName}
                                 onSelected={handleItemSelected}
                                 label={(
-                                    <Stack sx={{ py: 0.5 }} direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
-                                        <Typography noWrap level="body2">{op.pathName}</Typography>
-                                        <OperationChip operation={op.operationName} small />
-                                    </Stack>
+                                    <Box sx={{ py: 0.5 }}>
+                                        <Row justifyContent="space-between" spacing={1}>
+                                            <Typography noWrap level="body2">{op.pathName}</Typography>
+                                            <OperationChip operation={op.operationName} small />
+                                        </Row>
+                                    </Box>
                                 )} />
                         ))}
                     </ListTreeItem>
@@ -317,18 +319,22 @@ function Route() {
         .filter(i => typeof operation === 'undefined' || (i.operationName.toLowerCase() === operation.toLowerCase()));
 
     return (
-        <Stack py={2} spacing={20}>
-            {pathOperations.map(({ pathName, operationName, httpOperation, operation }) => (
-                <Grid container key={`path-${pathName}-${operationName}`}>
-                    <Grid xs={6} sx={{ px: 2 }}>
-                        <ApiOperation path={pathName} operation={httpOperation} info={operation} />
-                    </Grid>
-                    <Grid xs={6} sx={{ px: 2 }}>
-                        <Actions path={pathName} operation={httpOperation} info={operation} />
-                    </Grid>
-                </Grid>
-            ))}
-        </Stack>
+        <Box py={2} pr={2}>
+            <Stack spacing={4}>
+                {pathOperations.map(({ pathName, operationName, httpOperation, operation }) => (
+                    <Card variant="plain" key={`path-${pathName}-${operationName}`}>
+                        <Row spacing={2} alignItems="start">
+                            <Box sx={{ flexGrow: 1 }}>
+                                <ApiOperation path={pathName} operation={httpOperation} info={operation} />
+                            </Box>
+                            <Box sx={{ width: '40%' }}>
+                                <Actions path={pathName} operation={httpOperation} info={operation} />
+                            </Box>
+                        </Row>
+                    </Card>
+                ))}
+            </Stack>
+        </Box>
     );
 }
 
@@ -353,10 +359,10 @@ function SecurityInput(props: { security: OpenAPIV3.SecurityRequirementObject })
                     const httpSource = source as OpenAPIV3.HttpSecurityScheme;
                     return (
                         <Stack key={httpSource.scheme}>
-                            <Stack direction="row" alignItems="center" justifyContent="space-between">
+                            <Row justifyContent="space-between">
                                 {httpSource.description && <Typography level="body2">{httpSource.description}</Typography>}
                                 {httpSource.bearerFormat && <Typography level="body2">{httpSource.bearerFormat}</Typography>}
-                            </Stack>
+                            </Row>
                             <TextField size="sm" variant="soft" placeholder="Empty" label={camelToSentenceCase(httpSource.scheme)}></TextField>
                         </Stack>
                     );
@@ -407,10 +413,12 @@ function Actions(props: ActionsProps) {
     const requestUrl = selectedServerUrl + props.path;
     const handleExecuteAction = async () => {
         try {
-            const response = await axios.request({
-                url: requestUrl,
-                method: props.operation.toString() as Method,
-                data: props.operation !== 'get' ? requestBodyValue : undefined,
+            // TODO: Attach params
+            // TODO: Attach body
+            // TODO: Attach headers
+            const response = await fetch(requestUrl, {
+                method: props.operation.toString(),
+                // param: props.operation !== 'get' ? requestBodyValue : undefined,
                 // params: props.operation === "get" ? data : undefined,
                 headers: {
                     //   Authorization: token,
@@ -419,17 +427,12 @@ function Actions(props: ActionsProps) {
                 },
             });
             setResponseStatusCode(response.status);
-            setResponse(JSON.stringify(response.data, undefined, 2));
+
+            const data = await response.json();
+            setResponse(JSON.stringify(data, undefined, 2));
         } catch (err) {
-            if (typeof err === 'object' && Object.keys(err as object).find(key => key === 'isAxiosError')) {
-                const axiosError = err as AxiosError;
-                console.log(axiosError.response?.status, axiosError.response?.data)
-                setResponseStatusCode(axiosError.response?.status);
-                setResponse(JSON.stringify(axiosError.response?.data, undefined, 2));
-            } else {
-                setResponseStatusCode(999);
-                setResponse('Unknown error');
-            }
+            setResponseStatusCode(999);
+            setResponse('Unknown error');
         }
     };
 
@@ -464,20 +467,30 @@ function Actions(props: ActionsProps) {
                     <Typography textTransform="uppercase">Body</Typography>
                     <Stack>
                         <Typography textAlign="right" level="body3">application/json</Typography>
-                        <Card variant="outlined">
-                            <CodeEditor language="json" code={requestBodyValue} setCode={setRequestBodyValue} height={300} />
+                        <Card>
+                            <CardOverflow>
+                                <CodeEditor
+                                    language="json"
+                                    code={requestBodyValue}
+                                    setCode={setRequestBodyValue}
+                                    height={300} />
+                            </CardOverflow>
                         </Card>
                     </Stack>
                 </Stack>
             )}
-            <Button variant="outlined" startDecorator={<Send />} onClick={handleExecuteAction}>Run</Button>
+            <Button
+                color="success"
+                variant="solid"
+                startDecorator={<Send />}
+                onClick={handleExecuteAction}>Send request</Button>
             {responseStatusCode && (
                 <Stack spacing={1}>
-                    <Stack direction="row" alignItems="center" justifyContent="space-between">
+                    <Row justifyContent="space-between">
                         <Typography textTransform="uppercase">Response</Typography>
                         <ResponseStatusCode statusCode={responseStatusCode} />
-                    </Stack>
-                    <Card variant="outlined">
+                    </Row>
+                    <Card>
                         <CodeEditor language="json" code={response || 'Empty response'} height={200} readonly />
                     </Card>
                 </Stack>
@@ -487,7 +500,7 @@ function Actions(props: ActionsProps) {
 }
 
 async function getOpenApiDoc(url: string) {
-    return (await axios.get<OpenAPIV3.Document>(url)).data;
+    return (await (await fetch(url)).json()) as OpenAPIV3.Document;
 }
 
 const ApiContext = createContext<OpenAPIV3.Document | undefined>(undefined);
@@ -510,8 +523,8 @@ function DocsApiPage() {
                         <Typography fontSize="sm">{error}</Typography>
                     </Alert>
                 )}
-                <Stack direction="row" alignItems="stretch">
-                    <Box sx={{ minWidth: { xs: '230px', md: '320px' }, px: 2, py: 4 }}>
+                <Row>
+                    <Box sx={{ alignSelf: 'start', minWidth: { xs: '230px', md: '320px' }, px: 2, py: 4 }}>
                         <Loadable isLoading={isLoading || !api}>
                             <Nav />
                         </Loadable>
@@ -520,7 +533,7 @@ function DocsApiPage() {
                     <Box flexGrow={1}>
                         <Route />
                     </Box>
-                </Stack>
+                </Row>
             </Stack>
         </ApiContext.Provider>
     );

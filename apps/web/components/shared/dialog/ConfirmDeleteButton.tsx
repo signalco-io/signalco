@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Breakpoint } from '@mui/system';
-import { Button } from '@mui/joy';
+import { Button , Breakpoint } from '@signalco/ui';
 import ConfirmDeleteDialog from './ConfirmDeleteDialog';
 
 export interface ConfirmDeleteButtonDialogProps {

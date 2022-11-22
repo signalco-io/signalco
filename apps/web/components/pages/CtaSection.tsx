@@ -1,11 +1,9 @@
-import { NavigatingButton } from '@signalco/ui';
-import { Stack } from '@mui/system';
-import { Sheet, Typography } from '@mui/joy';
+import { NavigatingButton, Stack, Sheet, Typography } from '@signalco/ui';
 
 export default function CtaSection() {
     return (
-        <Sheet sx={{ borderRadius: 'var(--joy-radius-lg)' }}>
-            <Stack alignItems="center" spacing={4} sx={{ py: 8 }}>
+        <Sheet sx={{ borderRadius: 'var(--joy-radius-lg)', py: 8 }}>
+            <Stack alignItems="center" spacing={4}>
                 <Typography level="h4" component="p">Automate your life</Typography>
                 <Typography>Focus on things that matter to you.</Typography>
                 <Stack spacing={1}>

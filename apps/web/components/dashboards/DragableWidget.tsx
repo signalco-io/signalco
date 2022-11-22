@@ -2,8 +2,9 @@ import React from 'react';
 import { CSS } from '@dnd-kit/utilities';
 import { useSortable } from '@dnd-kit/sortable';
 import DisplayWidget from './DisplayWidget';
-import { draggingUpscale } from './DashboardView';
 import { WidgetProps } from '../widgets/Widget';
+
+const draggingUpscale = 1.1;
 
 export default function DragableWidget(props: WidgetProps) {
     const {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@mui/joy';
+import { Grid } from '@signalco/ui';
 
 export interface GalleryGridProps {
     items: {

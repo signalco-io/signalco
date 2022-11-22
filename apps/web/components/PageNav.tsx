@@ -1,10 +1,7 @@
 'use client';
 
 import React, { Suspense } from 'react';
-import Link from 'next/link';
-import { NavigatingButton , Container } from '@signalco/ui';
-import { Stack, Box } from '@mui/system';
-import { Button } from '@mui/joy';
+import { NavigatingButton, Container, Button, Box, Row, Link } from '@signalco/ui';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 
 const navLinks = [
@@ -17,7 +14,7 @@ function NavMenu() {
     return (
         <>
             {navLinks.map(nl => (
-                <Link key={nl.href} href={nl.href} passHref legacyBehavior>
+                <Link key={nl.href} href={nl.href}>
                     <Button variant="plain" size="lg">{nl.text}</Button>
                 </Link>
             ))}
@@ -25,7 +22,7 @@ function NavMenu() {
     );
 }
 
-export function PageNav(props: { fullWidth?: boolean | undefined; }) {
+export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
     console.log('PageNav rendered');
 
     return (
@@ -38,23 +35,27 @@ export function PageNav(props: { fullWidth?: boolean | undefined; }) {
             right: 0,
             top: 0,
             height: '80px',
+            paddingLeft: fullWidth ? '24px' : 0,
+            paddingRight: fullWidth ? '24px' : 0,
             backdropFilter: 'saturate(180%) blur(10px)',
             zIndex: 101
         }}>
-            <Container maxWidth={props.fullWidth ? false : 'lg'}>
-                <Stack component="header" direction="row" justifyContent="space-between" alignItems="center">
-                    <Box>
-                        <Link href="/" passHref style={{ textDecoration: 'none' }} aria-label="signalco">
-                            <SignalcoLogotype height={42} />
-                        </Link>
-                    </Box>
-                    <Stack direction="row" alignItems="center" spacing={{ xs: 1, sm: 2, md: 4 }}>
-                        <Suspense>
-                            <NavMenu />
-                        </Suspense>
-                        <NavigatingButton href="/app" prefetch={false}>App</NavigatingButton>
-                    </Stack>
-                </Stack>
+            <Container maxWidth={fullWidth ? false : 'lg'}>
+                <header>
+                    <Row justifyContent="space-between">
+                        <Box>
+                            <Link href="/" aria-label="signalco">
+                                <SignalcoLogotype height={42} />
+                            </Link>
+                        </Box>
+                        <Row spacing={1}>
+                            <Suspense>
+                                <NavMenu />
+                            </Suspense>
+                            <NavigatingButton href="/app" prefetch={false}>App</NavigatingButton>
+                        </Row>
+                    </Row>
+                </header>
             </Container>
         </Box>
     );

@@ -1,7 +1,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Alert } from '@mui/joy';
+import { Alert } from '@signalco/ui';
 import WidgetState from './parts/WidgetState';
 import WidgetCard from './parts/WidgetCard';
 import WidgetButton from './parts/WidgetButton';

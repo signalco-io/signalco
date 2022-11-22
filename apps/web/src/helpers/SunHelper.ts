@@ -1,15 +1,15 @@
+import { now } from 'src/services/DateTimeProvider';
 import { getTimes } from 'suncalc';
 import UserSettingsProvider from '../services/UserSettingsProvider';
-import DateTimeProvider from '../services/DateTimeProvider';
 
 class SunHelper {
     isDay() {
-        const now = DateTimeProvider.now();
+        const nowTime = now();
         const location = UserSettingsProvider.value('location', undefined);
         if (!location) return undefined;
 
-        const times = getTimes(now, location[0], location[1]);
-        return now >= times.sunrise && now <= times.sunset;
+        const times = getTimes(nowTime, location[0], location[1]);
+        return nowTime >= times.sunrise && nowTime <= times.sunset;
     }
 }
 

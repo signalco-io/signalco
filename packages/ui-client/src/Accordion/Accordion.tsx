@@ -1,6 +1,6 @@
 import { MouseEvent, useState } from 'react';
-import { Icon } from '@signalco/ui';
-import { Box, Stack, SxProps } from '@mui/system';
+import { Icon, Box, Row } from '@signalco/ui';
+import { SxProps } from '@mui/system';
 import { Card, IconButton } from '@mui/joy';
 import { ChildrenProps } from '../sharedTypes';
 
@@ -28,14 +28,14 @@ export default function Accordion(props: AccordionProps) {
 
     return (
         <Card variant="soft" sx={sx}>
-            <Stack spacing={1} direction="row" justifyContent="space-between" alignItems="center">
+            <Row spacing={1} justifyContent="space-between">
                 {!!children && Array.isArray(children) ? children[0] : children}
                 {!disabled && (
                     <IconButton size="sm" onClick={handleOpen}>
                         <Icon>{actualOpen ? 'expand_less' : 'expand_more'}</Icon>
                     </IconButton>
                 )}
-            </Stack>
+            </Row>
             {(!unmountOnExit || actualOpen) && (
                 <Box sx={{ height: actualOpen ? 'auto' : 0, overflow: 'hidden' }}>
                     {!!children && Array.isArray(children) && children.filter((_, i) => i !== 0)}

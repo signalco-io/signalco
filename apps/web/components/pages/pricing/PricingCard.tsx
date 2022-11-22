@@ -1,5 +1,5 @@
+import { Button, Card, Typography } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import { Button, Card, Typography } from '@mui/joy';
 import Checkbox from 'components/shared/form/Checkbox';
 import SignalcoLogotype from 'components/icons/SignalcoLogotype';
 

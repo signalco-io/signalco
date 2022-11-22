@@ -1,6 +1,5 @@
 import React from 'react';
-import { Stack } from '@mui/system';
-import { Typography } from '@mui/joy';
+import { Row, Typography } from '@signalco/ui';
 
 export interface GalleryGridFilterProps {
     header: string;
@@ -10,9 +9,9 @@ export interface GalleryGridFilterProps {
 export default function GalleryGridFilter(props: GalleryGridFilterProps) {
     const { header, filters } = props;
     return (
-        <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={1}>
+        <Row justifyContent="space-between" spacing={1}>
             <Typography gutterBottom level="h5">{header}</Typography>
             {filters}
-        </Stack>
+        </Row>
     );
 }

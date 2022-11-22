@@ -1,6 +1,6 @@
 import ReactTimeago from 'react-timeago';
 import React from 'react';
-import { Typography } from '@mui/joy';
+import { Typography } from '@signalco/ui';
 import { useLocalePlaceholders } from '../../../src/hooks/useLocale';
 
 export default function Timeago(props: { date: number | Date | undefined, live?: boolean }) {

@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { Icon, Row } from '@signalco/ui';
-import { Box, Stack } from '@mui/system';
-import { Button, Typography } from '@mui/joy';
+import { Icon, Row , Button, Typography , Box } from '@signalco/ui';
+import { Stack } from '@mui/system';
 import useContact from 'src/hooks/useContact';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';

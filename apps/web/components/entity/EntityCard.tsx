@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { Row } from '@signalco/ui';
-import { Box, Stack } from '@mui/system';
-import { Avatar, Card, Typography } from '@mui/joy';
+import { Row , Avatar, Card, Typography , Box } from '@signalco/ui';
+import { Stack } from '@mui/system';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import { entityLastActivity } from 'src/entity/EntityHelper';
 import Timeago from 'components/shared/time/Timeago';
@@ -20,7 +19,7 @@ export default function EntityCard({ entity, spread }: EntityCardProps) {
 
     return (
         <Link href={`/app/entities/${entity.id}`} legacyBehavior>
-            <Card variant="outlined" sx={{ height: '100%', p: spread ? 0 : 1 }}>
+            <Card sx={{ height: '100%', p: spread ? 0 : 1 }}>
                 <Stack
                     spacing={2}
                     direction={spread ? 'row' : 'column'}

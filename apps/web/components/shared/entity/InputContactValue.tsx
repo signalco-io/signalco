@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Play } from '@signalco/ui-icons';
-import { Row } from '@signalco/ui';
+import { Row , IconButton, Slider, Typography } from '@signalco/ui';
 import Switch from '@mui/joy/Switch';
-import { IconButton, Slider, Typography } from '@mui/joy';
 import throttle from 'src/helpers/Throttle';
 import blendColors from 'src/helpers/BlendColors';
 import IContact from 'src/contacts/IContact';

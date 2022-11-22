@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Box, Stack } from '@mui/system';
-import { Typography } from '@mui/joy';
+import { Typography , Box } from '@signalco/ui';
+import { Stack } from '@mui/system';
 import IWidgetConfigurationOption from 'src/widgets/IWidgetConfigurationOption';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
-import DateTimeProvider from '../../../src/services/DateTimeProvider';
+import { now } from '../../../src/services/DateTimeProvider';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useInterval from '../../../src/hooks/useInterval';
 
@@ -22,9 +22,9 @@ function WidgetTime(props: WidgetSharedProps<any>) {
     const showSeconds = config?.showSeconds ?? false;
 
     const updateTime = useCallback(() => {
-        const now = DateTimeProvider.now();
-        setTime(`${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`);
-        setSeconds(now.getSeconds().toString().padStart(2, '0'));
+        const nowTime = now();
+        setTime(`${nowTime.getHours().toString().padStart(2, '0')}:${nowTime.getMinutes().toString().padStart(2, '0')}`);
+        setSeconds(nowTime.getSeconds().toString().padStart(2, '0'));
     }, []);
 
     useWidgetOptions(stateOptions, props);

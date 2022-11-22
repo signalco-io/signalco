@@ -1,5 +1,4 @@
-import { Stack } from '@mui/system';
-import { Typography } from '@mui/joy';
+import { Stack, Typography } from '@signalco/ui';
 import { PageLayout } from '../components/layouts/PageLayout';
 
 function ContactPage() {

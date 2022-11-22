@@ -31,7 +31,6 @@
         "@mui/joy": "5.0.0-alpha.54",
         "@mui/base": "5.0.0-alpha.106",
         "material-ui-popup-state": "4.1.0",
-        "@storybook/react": "6.5.13",
         "next": "13.0.4"
     }
 }

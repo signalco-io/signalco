@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Container, Stack } from '@signalco/ui';
-import { Box } from '@mui/system';
+import { Container, Stack , Box } from '@signalco/ui';
 import Footer from '../pages/Footer';
 import { PageNav } from '../PageNav';
 import { ChildrenProps } from '../../src/sharedTypes';

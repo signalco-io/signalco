@@ -1,26 +1,48 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Image from 'next/image';
-import { Box, Stack } from '@mui/system';
-import { Button, Typography } from '@mui/joy';
+import { Button, Typography , Box } from '@signalco/ui';
+import { Stack } from '@mui/system';
 import GridWrapper from './GridWrapper';
 import DragableWidget from './DragableWidget';
 import DisplayWidget from './DisplayWidget';
 import useLocale from '../../src/hooks/useLocale';
 import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
 
-export const draggingUpscale = 1.1;
+function NoWidgetsPlaceholder({ onAdd }: { onAdd: () => void }) {
+    const { t } = useLocale('App', 'Dashboards');
+
+    return (
+        <Stack alignItems="center" justifyContent="center">
+            <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
+                <Stack maxWidth={320} spacing={4} alignItems="center" justifyContent="center">
+                    <Image priority width={280} height={213} alt="No Widgets" src="/assets/placeholders/placeholder-no-widgets.svg" />
+                    <Typography level="h2">{t('NoWidgets')}</Typography>
+                    <Typography textAlign="center" level="body2">{t('NoWidgetsHelpTextFirstLine')}<br />{t('NoWidgetsHelpTextSecondLine')}</Typography>
+                    <Button onClick={onAdd}>{t('AddWidget')}</Button>
+                </Stack>
+            </Stack>
+        </Stack>
+    );
+}
 
 function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, onAddWidget: () => void }) {
     const { dashboard, isEditing, onAddWidget } = props;
 
-    const { t } = useLocale('App', 'Dashboards');
+    // Render placeholder when there is no widgets
+    const widgetsOrder = useMemo(() => dashboard.widgets.slice().sort((a, b) => a.order - b.order).map(w => w.id), [dashboard.widgets]);
+    const widgets = useMemo(() => widgetsOrder.map(wo => dashboard.widgets.find(w => wo === w.id)!), [dashboard.widgets, widgetsOrder]);
+    if (widgets.length <= 0) {
+        return <NoWidgetsPlaceholder onAdd={onAddWidget} />
+    }
 
-    const widgetSize = 78 + 8; // Widget is 76x76 + 2px for border + 8 spacing between widgets (2x4px)
-    const dashbaordPadding = 48 + 109; // Has 24 x padding (109 nav width)
-    const numberOfColumns = Math.max(4, Math.floor((window.innerWidth - dashbaordPadding) / widgetSize)); // When width is less than 400, set to quad column
-
-    const widgetsOrder = dashboard.widgets.slice().sort((a, b) => a.order - b.order).map(w => w.id);
-    const widgets = widgetsOrder.map(wo => dashboard.widgets.find(w => wo === w.id)!);
+    function handleOrderChanged(newOrder: string[]) {
+        for (let i = 0; i < newOrder.length; i++) {
+            const widget = widgets.find(w => w.id === newOrder[i]);
+            if (widget) {
+                widget.order = i;
+            }
+        }
+    }
 
     function handleSetWidgetConfig(widgetId: string, config: object | undefined) {
         const widget = dashboard.widgets.find(w => w.id === widgetId);
@@ -33,32 +55,10 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
         dashboard.widgets.splice(dashboard.widgets.findIndex(w => w.id === widgetId), 1);
     }
 
-    function handleOrderChanged(newOrder: string[]) {
-        for (let i = 0; i < newOrder.length; i++) {
-            const widget = widgets.find(w => w.id === newOrder[i]);
-            if (widget) {
-                widget.order = i;
-            }
-        }
-    }
-
-    // Render placeholder when there is no widgets
-    if (widgets.length <= 0) {
-        return (
-            <Stack alignItems="center" justifyContent="center">
-                <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
-                    <Stack maxWidth={320} spacing={4} alignItems="center" justifyContent="center">
-                        <Image priority width={280} height={213} alt="No Widgets" src="/assets/placeholders/placeholder-no-widgets.svg" />
-                        <Typography level="h2">{t('NoWidgets')}</Typography>
-                        <Typography textAlign="center" level="body2">{t('NoWidgetsHelpTextFirstLine')}<br />{t('NoWidgetsHelpTextSecondLine')}</Typography>
-                        <Button onClick={onAddWidget}>{t('AddWidget')}</Button>
-                    </Stack>
-                </Stack>
-            </Stack>
-        );
-    }
-
     const WidgetComponent = isEditing ? DragableWidget : DisplayWidget;
+    const widgetSize = 78 + 8; // Widget is 76x76 + 2px for border + 8 spacing between widgets (2x4px)
+    const dashbaordPadding = 48 + 109; // Has 24 x padding (109 nav width)
+    const numberOfColumns = Math.max(4, Math.floor((window.innerWidth - dashbaordPadding) / widgetSize)); // When width is less than 400, set to quad column
 
     return (
         <Box sx={{

@@ -5,17 +5,21 @@ import {
 } from 'material-ui-popup-state/hooks';
 import { Navigate } from '@signalco/ui-icons';
 import { Accordion } from '@signalco/ui-client';
-import {Loadable,Popper,NoDataPlaceholder, Row} from '@signalco/ui';
-import { Box, Stack } from '@mui/system';
 import {
+    Loadable,
+    Popper,
+    NoDataPlaceholder,
+    Row,
     Button,
     Card,
     List,
     ListItem,
     ListItemButton,
     TextField,
-    Typography
-} from '@mui/joy';
+    Typography,
+    Box
+} from '@signalco/ui';
+import { Stack } from '@mui/system';
 import useContact from 'src/hooks/useContact';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import IContactPointerPartial from 'src/contacts/IContactPointerPartial';

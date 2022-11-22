@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Stack } from '@mui/system';
-import { Button, TextField, Typography } from '@mui/joy';
+import { Button, Stack, TextField, Typography } from '@signalco/ui';
 import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
 import useDeleteDashboard from 'src/hooks/dashboards/useDeleteDashboard';
 import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
@@ -55,7 +54,7 @@ function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsPro
                     <Button autoFocus onClick={handleSave}>{t('SaveChanges')}</Button>
                 </>
             )}>
-            <Stack spacing={4} sx={{ py: 1 }}>
+            <Stack spacing={4}>
                 <TextField
                     label={t('DashboardSettingName')}
                     value={name}

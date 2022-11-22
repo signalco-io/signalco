@@ -1,6 +1,6 @@
 import { ReactElement, useState } from 'react';
 import { ExpandDown } from '@signalco/ui-icons';
-import { IconButton, List, ListItem, ListItemButton, Tooltip } from '@mui/joy';
+import { IconButton, List, ListItem, ListItemButton, Tooltip } from '@signalco/ui';
 import { ChildrenProps } from 'src/sharedTypes';
 
 export interface ListTreeItemProps extends ChildrenProps {

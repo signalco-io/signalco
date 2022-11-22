@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
-import { Loadable , NoDataPlaceholder } from '@signalco/ui';
+import { Loadable , NoDataPlaceholder , Typography } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import { Typography } from '@mui/joy';
 import { DefaultHeight, DefaultWidth } from 'src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from 'src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from 'src/hooks/widgets/useWidgetOptions';

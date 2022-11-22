@@ -1,16 +1,16 @@
 import { useMemo } from 'react';
 import { Lightning } from '@signalco/ui-icons';
 import { DotIndicator } from '@signalco/ui';
-import DateTimeProvider from 'src/services/DateTimeProvider';
 import IEntityDetails from 'src/entity/IEntityDetails';
 import { entityHasOffline, entityInError, entityLastActivity } from 'src/entity/EntityHelper';
+import { now } from 'src/services/DateTimeProvider';
 
 export function useEntityStatus(entity: IEntityDetails | undefined) {
     const hasStatus = entity && entity.type === 1;
     const isOffline = useMemo(() => hasStatus ? entityInError(entity) : null, [entity, hasStatus]);
     const hasOffline = useMemo(() => hasStatus ? entityHasOffline(entity) : null, [entity, hasStatus]);
     const lastActivity = useMemo(() => hasStatus ? entityLastActivity(entity) : null, [entity, hasStatus]);
-    const isStale = useMemo(() => (hasStatus && lastActivity) ? DateTimeProvider.now().getTime() - lastActivity.getTime() > 24 * 60 * 60 * 1000 : null, [lastActivity, hasStatus]);
+    const isStale = useMemo(() => (hasStatus && lastActivity) ? now().getTime() - lastActivity.getTime() > 24 * 60 * 60 * 1000 : null, [lastActivity, hasStatus]);
 
     const result = useMemo(() => ({
         hasStatus,
