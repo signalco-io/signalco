@@ -21,7 +21,5 @@ jobs:
             - name: Install Playwright Browsers
               run: npx playwright install --with-deps
 
-            - name: Build
-              run: yarn build
             - name: Run tests
               run: yarn test
