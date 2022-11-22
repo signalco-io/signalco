@@ -1,7 +1,6 @@
 import Router from 'next/router';
 import CurrentUserProvider from './CurrentUserProvider';
 import AppSettingsProvider from './AppSettingsProvider';
-import { ObjectDictAny } from '../sharedTypes';
 import { showPrompt } from '../notifications/PageNotificationService';
 import { parseHash, parseHashParam } from '../hooks/useHashParam';
 import { isAbsoluteUrl, trimStartChar } from '../helpers/StringHelpers';
@@ -60,7 +59,7 @@ export default class HttpService {
         }
         const response = await fetch(urlResolved, {
             method: method,
-            body: method !== 'get' ? data : undefined,
+            body: method !== 'get' ? JSON.stringify(data) : undefined,
             headers: {
                 Accept: 'application/json',
                 Authorization: token,
@@ -69,8 +68,13 @@ export default class HttpService {
             },
         });
 
-        if (response.status === 200)
-            return await response.json();
+        if (response.status === 200) {
+            try {
+                return await response.json();
+            } catch {
+                return null;
+            }
+        }
 
         if (response.status === 403) {
             console.warn('Token expired: ', response.statusText, response.status);
@@ -95,6 +99,14 @@ export default class HttpService {
             hash.set('authReload', 'true');
             Router.push({ hash: hash.toString() }, undefined, {shallow: false});
         }
+
+        let bodyText: string | null = null;
+        try {
+            bodyText = await response.text()
+        } catch {
+            bodyText = 'empty response';
+        }
+        throw new Error(`Got status ${response.statusText} (${response.status}): bodyText`);
     } catch(err) {
         console.error('Unknown API error', err);
         throw err;
