@@ -11,22 +11,22 @@ const config: PlaywrightTestConfig = {
     testDir: path.join(__dirname, 'e2e'),
     outputDir: 'test-results/',
     webServer: {
-        command: 'yarn run start',
+        command: 'yarn start',
         url: baseURL,
-        timeout: 120 * 1000,
-        reuseExistingServer: !process.env.CI,
+        timeout: 120 * 1000
     },
     use: {
         headless: true,
         viewport: { width: 1280, height: 720 },
         baseURL,
         trace: 'retry-with-trace',
+        video: 'off'
     },
     projects: [
         {
-            name: 'Desktop Chrome',
+            name: 'Desktop Edge',
             use: {
-                ...devices['Desktop Chrome'],
+                ...devices['Desktop Edge'],
             },
         },
         {
@@ -34,11 +34,7 @@ const config: PlaywrightTestConfig = {
             use: {
                 ...devices['Pixel 5'],
             },
-        },
-        {
-            name: 'Mobile Safari',
-            use: devices['iPhone 12'],
-        },
+        }
     ],
 };
 export default config;
