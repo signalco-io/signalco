@@ -62,10 +62,18 @@ html, body, #__next {
 
 [data-joy-color-scheme="dark"] {
   --toastify-color-progress-dark: #fff;
+
+  .image--light {
+    display: none;
+  }
 }
 
 [data-joy-color-scheme="light"] {
   --toastify-color-dark: #fff;
   --toastify-color-progress-dark: #000;
   --toastify-text-color-dark: #333;
+
+  .image--dark {
+    display: none;
+  }
 }

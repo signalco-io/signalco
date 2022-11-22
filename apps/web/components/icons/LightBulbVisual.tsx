@@ -1,13 +1,8 @@
-import useUserTheme from 'src/hooks/useUserTheme';
 import styles from './LightBulbVisual.module.scss';
 
 function LightBulbVisual(props: { state: boolean, size: number }) {
-    const themeContext = useUserTheme();
-
     const isActive = props.state;
     const bulbColor = isActive ? '#FFDD66' : '#c4c4c4';
-    const edgeColor = themeContext.isDark ? '#fff' : '#333';
-    const glossColor = themeContext.isDark ? '#000' : '#fff';
 
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className={styles.root} width={props.size * 1.4} height={props.size * 1.4} fill="none" viewBox="0 0 78 94">
@@ -16,9 +11,8 @@ function LightBulbVisual(props: { state: boolean, size: number }) {
                     <circle cx="39" cy="53" r="15" fill={bulbColor} />
                 </g>
                 <path fill={bulbColor} d="M25 52.036c0-9.36 5.026-9.805 5.026-19.016 0-9.21 18.235-9.508 18.523 0C48.836 42.528 53 42.825 53 52.036c0 9.21-28 9.36-28 0z" className="GlassCurve" />
-                <path fill={edgeColor} d="M27 8h24v28H27z" className="Base" />
-                <path fill={edgeColor} d="M38.46 0h2.918L43 12h-6l1.46-12z" className="CordConnection" />
-                <path fill={glossColor} fillOpacity=".3" d="M27 8h13v28H27z" className="BaseGloss" />
+                <path fill="var(--joy-palette-text-primary)" d="M27 8h24v28H27z" className="Base" />
+                <path fill="var(--joy-palette-text-primary)" d="M38.46 0h2.918L43 12h-6l1.46-12z" className="CordConnection" />
             </g>
             <defs>
                 <filter id="lightbulbfilter0_d_11:221" width="78" height="78" x="0" y="16" className="lightbulbfilter0_d_11:221" colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse">
