@@ -233,6 +233,7 @@ export default function LandingPageView() {
           direction="horizontal">
           <Stack alignItems="center">
             <Button
+              variant="solid"
               startDecorator={<Github />}
               endDecorator={<Navigate />}
               href="https://github.com/signalco-io"

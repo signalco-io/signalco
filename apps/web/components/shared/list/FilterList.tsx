@@ -65,6 +65,7 @@ export default function FilterList(props: FilterListProps) {
                     items={items.map(i => ({ value: i.id, label: i.label }))}
                     value={checked}
                     label={header}
+                    placeholder={`Select ${header}`}
                     multiple={multiple}
                     fullWidth
                     onChange={(values) => {
