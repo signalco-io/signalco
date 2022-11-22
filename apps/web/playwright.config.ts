@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig = {
     testDir: path.join(__dirname, 'e2e'),
     outputDir: 'test-results/',
     webServer: {
-        command: 'yarn run dev',
+        command: 'yarn run start',
         url: baseURL,
         timeout: 120 * 1000,
         reuseExistingServer: !process.env.CI,
