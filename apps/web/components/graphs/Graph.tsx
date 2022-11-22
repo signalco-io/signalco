@@ -1,14 +1,13 @@
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
 import { NoDataPlaceholder, Row , Sheet, Typography , Box } from '@signalco/ui';
-import useUserTheme from 'src/hooks/useUserTheme';
+import { now } from 'src/services/DateTimeProvider';
 import lightBlue from 'src/colors/lightBlue';
 import deepOrange from 'src/colors/deepOrange';
 import Timeago from '../shared/time/Timeago';
 import { ObjectDictAny } from '../../src/sharedTypes';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
 import { arrayMax, arrayMin } from '../../src/helpers/ArrayHelpers';
-import { now } from 'src/services/DateTimeProvider';
 
 export interface IGraphProps {
     label?: string;
@@ -43,11 +42,9 @@ const renderCustomizedTimeLineLabel = (props: any) => {
 
 function GraphTimeLine(props: IGraphProps) {
     const { label, data, durationMs, width, startDateTime } = props;
-    const themeContext = useUserTheme();
 
-    const isDarkTheme = themeContext.isDark;
-    const accentTrue = lightBlue[isDarkTheme ? 900 : 500];
-    const accentFalse = deepOrange[isDarkTheme ? 800 : 400];
+    const accentTrue = lightBlue[600];
+    const accentFalse = deepOrange[500];
 
     const nowTime = startDateTime ?? now();
     const past = startDateTime ?? now();
@@ -137,7 +134,6 @@ function ChartGenericTooltip({ active, payload, domain, units }: { active?: bool
 
 function GraphArea(props: IGraphProps) {
     const { data, durationMs, width, height, startDateTime } = props;
-    const themeContext = useUserTheme();
 
     const yKey = 'value';
     const xKey = 'key';
@@ -176,7 +172,7 @@ function GraphArea(props: IGraphProps) {
             <Area
                 type="basis"
                 dataKey={yKey}
-                fill={themeContext.isDark ? '#ffffff' : '#000000'}
+                fill="var(--joy-palette-text-primary)"
                 fillOpacity={0.1}
                 stroke="#aeaeae"
                 strokeWidth={1} />

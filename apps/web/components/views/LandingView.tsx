@@ -6,10 +6,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Github, Navigate } from '@signalco/ui-icons';
-import { Container, ImageLink , Button, Divider, Typography } from '@signalco/ui';
+import { Container, ImageLink, Button, Divider, Typography } from '@signalco/ui';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack, SxProps, Theme } from '@mui/system';
-import useUserTheme from 'src/hooks/useUserTheme';
 import DeveloperOnly from 'components/shared/DeveloperOnly';
 import GentleSlide from 'components/shared/animations/GentleSlide';
 import Fade from 'components/shared/animations/Fade';
@@ -180,11 +179,14 @@ function GlobeSection() {
 }
 
 function PlaySection() {
-  const themeContext = useUserTheme();
-
   return (
     <StepContent header="Play" subtitle="Here are some of our favorite ways you can automate your life"
-      image={<Image src={themeContext.isDark ? '/images/playpitch-dark.png' : '/images/playpitch.png'} alt="Play" quality={100} width={511} height={684} />}
+      image={
+        <>
+          <Image className="image--light" src={'/images/playpitch.png'} alt="Play" quality={100} width={511} height={684} />
+          <Image className="image--dark" src={'/images/playpitch-dark.png'} alt="Play" quality={100} width={511} height={684} />
+        </>
+      }
       imageContainerHeight={684 + 64}
       imageContainerStyles={{
         position: 'absolute',
