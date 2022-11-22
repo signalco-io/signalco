@@ -97,6 +97,7 @@ function Ring(props: { size: number, logos: RingLogoInfo[] }) {
                 animation: 'scaleRing 1s cubic-bezier(0.33, 1, 0.68, 1) forwards, scaleRingGentle 12s ease-in-out infinite alternate',
                 animationDelay: '0s, 1s',
                 mask: `radial-gradient(transparent ${props.size / 2 - 3}px, #000 ${props.size / 2 - 2}px)`,
+                willChange: 'transform, opacity',
                 '&:before': {
                     content: '""',
                     display: 'block',
