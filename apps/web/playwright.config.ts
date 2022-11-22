@@ -17,7 +17,7 @@ const config: PlaywrightTestConfig = {
         reuseExistingServer: !process.env.CI,
     },
     use: {
-        headless: false,
+        headless: true,
         viewport: { width: 1280, height: 720 },
         baseURL,
         trace: 'retry-with-trace',
