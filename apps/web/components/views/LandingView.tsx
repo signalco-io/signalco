@@ -1,3 +1,5 @@
+'use client';
+
 import { useInView } from 'react-cool-inview';
 import React from 'react';
 import Link from 'next/link';

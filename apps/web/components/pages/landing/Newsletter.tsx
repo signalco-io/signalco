@@ -1,3 +1,5 @@
+'use client';
+
 import { ChangeEvent, SyntheticEvent, createRef, useState } from 'react';
 import { Row, Stack , Alert, Button, TextField, Typography } from '@signalco/ui';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
