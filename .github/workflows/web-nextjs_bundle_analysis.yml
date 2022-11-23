@@ -25,7 +25,8 @@ jobs:
         with:
             path: "**/node_modules"
             key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - run: yarn install
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Build next.js app
         run: yarn build
