@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { Close, Play, Warning } from '@signalco/ui-icons';
-import { Chip, Row, Stack, Container , Alert, Card, IconButton, Typography } from '@signalco/ui';
+import { Close, Equal, EqualNot, Play, Warning, Timer, Pause, Left, Right } from '@signalco/ui-icons';
+import { Chip, Row, Stack, Container, Alert, Card, IconButton, Typography, Box } from '@signalco/ui';
 import Timeago from '../../shared/time/Timeago';
 import DisplayDeviceTarget from '../../shared/entity/DisplayEntityTarget';
 import useContact from '../../../src/hooks/useContact';
@@ -48,6 +48,9 @@ declare module ProcessConfigurationV1 {
         type: string;
         conditions: Condition[];
         contacts: Contact[];
+        notBeforeConduct?: string;
+        delayBefore?: number;
+        delayAfter?: number;
     }
 
     export interface Configuration {
@@ -55,6 +58,23 @@ declare module ProcessConfigurationV1 {
         type: number;
         conducts: Conduct[];
     }
+}
+
+function CompareOperation({ operation }: { operation: number }) {
+    if (operation === 0)
+        return <Equal />;
+    if (operation === 1)
+        return <EqualNot />;
+    if (operation === 2)
+        return <Left />;
+    if (operation === 3)
+        return <Right />;
+    if (operation === 4)
+        return <><Left /><Equal /></>;
+    if (operation === 5)
+        return <><Right /><Equal /></>;
+
+    return <Typography color="danger">{`Unknown operation: ${operation}`}</Typography>;
 }
 
 function Condition(props: { condition: ProcessConfigurationV1.Condition }) {
@@ -75,9 +95,7 @@ function Condition(props: { condition: ProcessConfigurationV1.Condition }) {
             {(condition.type === 'compare') && (
                 <Row spacing={1}>
                     <Condition condition={condition.left} />
-                    <span>
-                        {condition.op === 0 ? ' is ' : ' is not '}
-                    </span>
+                    <CompareOperation operation={condition.op} />
                     <Condition condition={condition.right} />
                 </Row>
             )}
@@ -147,17 +165,69 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                 <Stack spacing={2}>
                     {config?.conducts?.map(conduct => (
                         <Card key={conduct.id}>
-                            <Typography level="body2">Do</Typography>
                             <Stack spacing={1}>
-                                {conduct.contacts.map(conductTargets => (
-                                    <div key={`${conductTargets.contactPointer.entityId}-${conductTargets.contactPointer.channelName}-${conductTargets.contactPointer.contactName}`}>
-                                        <DisplayDeviceTarget target={conductTargets.contactPointer} value={conductTargets.valueSerialized} selectContact selectValue />
-                                    </div>
-                                ))}
-                            </Stack>
-                            <Typography level="body2">When</Typography>
-                            <Stack spacing={1}>
-                                {conduct.conditions.map((condition, i) => <Condition key={i} condition={condition} />)}
+                                {/* {conduct.id && (
+                                    <Typography>{conduct.id}</Typography>
+                                )} */}
+
+                                {conduct.conditions?.length > 0 && (
+                                    <>
+                                        <Typography level="h6">When</Typography>
+                                        <Stack spacing={1}>
+                                            {conduct.conditions.map((condition, i) => <Condition key={i} condition={condition} />)}
+                                        </Stack>
+                                    </>
+                                )}
+
+                                {conduct.notBeforeConduct && (
+                                    <Card>
+                                        <Row spacing={2}>
+                                            <Pause />
+                                            <Box sx={{ flexGrow: 1 }}>
+                                                <Row spacing={1} justifyContent="space-between">
+                                                    <Typography fontWeight="500">Wait for</Typography>
+                                                    <Typography>{conduct.notBeforeConduct}</Typography>
+                                                </Row>
+                                            </Box>
+                                        </Row>
+                                    </Card>
+                                )}
+                                {conduct.delayBefore && (
+                                    <Card>
+                                        <Row spacing={2}>
+                                            <Timer />
+                                            <Box sx={{ flexGrow: 1 }}>
+                                                <Row spacing={1} justifyContent="space-between">
+                                                    <Typography fontWeight="500">Delay</Typography>
+                                                    <Typography>{`${conduct.delayBefore / 1000}s`}</Typography>
+                                                </Row>
+                                            </Box>
+                                        </Row>
+                                    </Card>
+                                )}
+
+                                <Typography level="h6">Do</Typography>
+                                <Stack spacing={1}>
+                                    {conduct.contacts.map(conductTargets => (
+                                        <div key={`${conductTargets.contactPointer.entityId}-${conductTargets.contactPointer.channelName}-${conductTargets.contactPointer.contactName}`}>
+                                            <DisplayDeviceTarget target={conductTargets.contactPointer} value={conductTargets.valueSerialized} selectContact selectValue />
+                                        </div>
+                                    ))}
+                                </Stack>
+
+                                {conduct.delayAfter && (
+                                    <Card>
+                                        <Row spacing={2}>
+                                            <Timer />
+                                            <Box sx={{ flexGrow: 1 }}>
+                                                <Row spacing={1} justifyContent="space-between">
+                                                    <Typography fontWeight="500">Delay after</Typography>
+                                                    <Typography>{`${conduct.delayAfter / 1000}s`}</Typography>
+                                                </Row>
+                                            </Box>
+                                        </Row>
+                                    </Card>
+                                )}
                             </Stack>
                         </Card>
                     ))}
