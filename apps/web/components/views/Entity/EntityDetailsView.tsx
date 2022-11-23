@@ -1,19 +1,19 @@
 import { useMemo, useState } from 'react';
 import { DisableButton , Avatar , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import useEntity from 'src/hooks/useEntity';
-import useContact from 'src/hooks/useContact';
-import { entityRenameAsync } from 'src/entity/EntityRepository';
-import { entityLastActivity } from 'src/entity/EntityHelper';
-import { setAsync } from 'src/contacts/ContactRepository';
-import Timeago from 'components/shared/time/Timeago';
-import EditableInput from 'components/shared/form/EditableInput';
-import EntityIcon from 'components/shared/entity/EntityIcon';
-import ShareEntityChip from 'components/entity/ShareEntityChip';
-import EntityStatus, { useEntityStatus } from 'components/entity/EntityStatus';
 import EntityProcessDetails from './EntityProcessDetails';
 import EntityOptions from './EntityOptions';
 import ContactsTable from './ContactsTable';
+import Timeago from '../../shared/time/Timeago';
+import EditableInput from '../../shared/form/EditableInput';
+import EntityIcon from '../../shared/entity/EntityIcon';
+import ShareEntityChip from '../../entity/ShareEntityChip';
+import EntityStatus, { useEntityStatus } from '../../entity/EntityStatus';
+import useEntity from '../../../src/hooks/useEntity';
+import useContact from '../../../src/hooks/useContact';
+import { entityRenameAsync } from '../../../src/entity/EntityRepository';
+import { entityLastActivity } from '../../../src/entity/EntityHelper';
+import { setAsync } from '../../../src/contacts/ContactRepository';
 
 
 export interface EntityDetailsViewProps {

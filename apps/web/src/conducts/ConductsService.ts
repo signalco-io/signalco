@@ -1,5 +1,5 @@
-import IContactPointer from 'src/contacts/IContactPointer';
 import HttpService from '../services/HttpService';
+import IContactPointer from '../contacts/IContactPointer';
 
 export interface IConduct {
     pointer: IContactPointer,

@@ -2,12 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import { Icon, Row , Button, Typography , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import useContact from 'src/hooks/useContact';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useEntity from '../../../src/hooks/useEntity';
+import useContact from '../../../src/hooks/useContact';
 
 const stateOptions: IWidgetConfigurationOption<any>[] = [
     DefaultLabel,

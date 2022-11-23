@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image, { ImageProps } from 'next/image';
 import { Typography , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import SignalcoLogotype from 'components/icons/SignalcoLogotype';
+import SignalcoLogotype from '../../icons/SignalcoLogotype';
 
 const ringConfig = [
     {

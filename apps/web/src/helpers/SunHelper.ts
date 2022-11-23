@@ -1,6 +1,6 @@
-import { now } from 'src/services/DateTimeProvider';
 import { getTimes } from 'suncalc';
 import UserSettingsProvider from '../services/UserSettingsProvider';
+import { now } from '../services/DateTimeProvider';
 
 class SunHelper {
     isDay() {

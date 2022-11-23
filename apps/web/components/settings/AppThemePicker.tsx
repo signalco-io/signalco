@@ -2,7 +2,7 @@ import { Suspense, useState } from 'react';
 import { Custom, SunMoon, Timer } from '@signalco/ui-icons';
 import { Stack, Row , TextField, SupportedColorScheme, Typography , Box , useColorScheme } from '@signalco/ui';
 import { DefaultColorScheme } from '@mui/joy/styles/types';
-import Picker from 'components/shared/form/Picker';
+import Picker from '../shared/form/Picker';
 import { AppThemeMode } from '../../src/theme';
 import { fromDuration, now, todayAt, toDuration } from '../../src/services/DateTimeProvider';
 import useUserSetting from '../../src/hooks/useUserSetting';

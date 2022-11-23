@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Typography , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import IWidgetConfigurationOption from 'src/widgets/IWidgetConfigurationOption';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { now } from '../../../src/services/DateTimeProvider';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useInterval from '../../../src/hooks/useInterval';

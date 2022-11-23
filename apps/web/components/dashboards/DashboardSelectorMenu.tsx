@@ -6,11 +6,11 @@ import { Stack } from '@mui/system';
 import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
-import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
-import useDashboards from 'src/hooks/dashboards/useDashboards';
 import ShareEntityChip from '../entity/ShareEntityChip';
 import useLocale from '../../src/hooks/useLocale';
 import useHashParam from '../../src/hooks/useHashParam';
+import useSaveDashboard from '../../src/hooks/dashboards/useSaveDashboard';
+import useDashboards from '../../src/hooks/dashboards/useDashboards';
 import DashboardsRepository, { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
 
 interface IDashboardSelectorMenuProps {

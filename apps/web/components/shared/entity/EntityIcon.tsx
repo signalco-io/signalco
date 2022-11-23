@@ -1,5 +1,5 @@
 import { Channel, Dashboard, Device, Play, Station } from '@signalco/ui-icons';
-import IEntityDetails from 'src/entity/IEntityDetails';
+import IEntityDetails from '../../../src/entity/IEntityDetails';
 
 export function EntityIconByType(type: number) {
     switch(type) {

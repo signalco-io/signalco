@@ -25,6 +25,7 @@
       "prefer-double"
     ],
     "import/no-unresolved": "error",
+    "import/no-absolute-path": "error",
     "import/order": [
       "warn",
       {

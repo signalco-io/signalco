@@ -1,5 +1,5 @@
-import IEntityDetails from 'src/entity/IEntityDetails';
 import HttpService from '../services/HttpService';
+import IEntityDetails from '../entity/IEntityDetails';
 import { entitiesAsync, entityAsync, entityDeleteAsync } from '../entity/EntityRepository';
 import ConductsService from '../conducts/ConductsService';
 

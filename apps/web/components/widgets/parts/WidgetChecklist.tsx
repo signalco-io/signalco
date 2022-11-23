@@ -4,8 +4,8 @@ import { bindMenu, bindTrigger, usePopupState } from 'material-ui-popup-state/ho
 import { Check, Delete, MoreHorizontal } from '@signalco/ui-icons';
 import { NoDataPlaceholder, Row , IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import Checkbox from 'components/shared/form/Checkbox';
 import { WidgetSharedProps } from '../Widget';
+import Checkbox from '../../shared/form/Checkbox';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import LocalStorageService from '../../../src/services/LocalStorageService';

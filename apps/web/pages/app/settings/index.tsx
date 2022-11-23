@@ -4,13 +4,13 @@ import { Loadable, Container, Stack, Row, Card, Sheet, Typography, Box, List, Li
 import { isNonEmptyString, isNotNull, isTrue } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
-import SelectItems from 'components/shared/form/SelectItems';
-import Picker from 'components/shared/form/Picker';
 import { ChildrenProps } from '../../../src/sharedTypes';
 import CurrentUserProvider from '../../../src/services/CurrentUserProvider';
 import appSettingsProvider, { ApiDevelopmentUrl, ApiProductionUrl } from '../../../src/services/AppSettingsProvider';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
+import SelectItems from '../../../components/shared/form/SelectItems';
+import Picker from '../../../components/shared/form/Picker';
 import AppThemePicker from '../../../components/settings/AppThemePicker';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import LocationMapPicker from '../../../components/forms/LocationMapPicker/LocationMapPicker';

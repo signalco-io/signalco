@@ -1,7 +1,7 @@
 import { Button, Card, Typography } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import Checkbox from 'components/shared/form/Checkbox';
-import SignalcoLogotype from 'components/icons/SignalcoLogotype';
+import Checkbox from '../../shared/form/Checkbox';
+import SignalcoLogotype from '../../icons/SignalcoLogotype';
 
 export interface PricingOption {
     id: string,

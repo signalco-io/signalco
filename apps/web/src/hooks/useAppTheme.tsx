@@ -5,9 +5,9 @@ import { localizer } from './useLocale';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 import useInterval from './useInterval';
 import { AppThemeMode } from '../theme';
+import { fromDuration, now } from '../services/DateTimeProvider';
 import { showNotification } from '../notifications/PageNotificationService';
 import SunHelper from '../helpers/SunHelper';
-import { fromDuration, now } from 'src/services/DateTimeProvider';
 
 export default function useAppTheme() {
   const { colorScheme, setColorScheme } = useColorScheme();

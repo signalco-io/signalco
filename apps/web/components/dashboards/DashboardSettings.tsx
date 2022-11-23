@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Stack, TextField, Typography } from '@signalco/ui';
-import useSaveDashboard from 'src/hooks/dashboards/useSaveDashboard';
-import useDeleteDashboard from 'src/hooks/dashboards/useDeleteDashboard';
 import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import useLocale from '../../src/hooks/useLocale';
+import useSaveDashboard from '../../src/hooks/dashboards/useSaveDashboard';
+import useDeleteDashboard from '../../src/hooks/dashboards/useDeleteDashboard';
 import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
 
 interface IDashboardSettingsProps {

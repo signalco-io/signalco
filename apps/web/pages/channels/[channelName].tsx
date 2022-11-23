@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { Breadcrumbs , NavigatingButton, Row, Stack , Card, Typography } from '@signalco/ui';
-import ShareSocial from 'components/pages/ShareSocial';
-import FaqSection from 'components/pages/FaqSection';
-import CtaSection from 'components/pages/CtaSection';
-import ChannelLogo from 'components/channels/ChannelLogo';
+import ShareSocial from '../../components/pages/ShareSocial';
+import FaqSection from '../../components/pages/FaqSection';
+import CtaSection from '../../components/pages/CtaSection';
 import { PageLayout } from '../../components/layouts/PageLayout';
 import channels from '../../components/channels/channelsData.json';
+import ChannelLogo from '../../components/channels/ChannelLogo';
 import categories from '../../components/channels/channelCategoriesData.json';
 
 const channelFaq = [

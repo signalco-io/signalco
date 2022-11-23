@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteDashboardAsync } from 'src/dashboards/DashboardsRepository';
+import { deleteDashboardAsync } from '../../dashboards/DashboardsRepository';
 
 export default function useDeleteDashboard() {
     const client = useQueryClient();
