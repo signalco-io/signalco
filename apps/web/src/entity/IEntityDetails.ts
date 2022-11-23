@@ -1,5 +1,5 @@
-import IUser from 'src/users/IUser';
-import IContact from 'src/contacts/IContact';
+import IUser from '../users/IUser';
+import IContact from '../contacts/IContact';
 
 export default interface IEntityDetails {
     type: number;

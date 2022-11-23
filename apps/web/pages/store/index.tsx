@@ -4,17 +4,17 @@ import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
 import { Chip , Card, Typography } from '@signalco/ui';
 import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
-import green from 'src/colors/green';
-import grey from 'src/colors/gray';
-import amber from 'src/colors/amber';
-import FilterList from 'components/shared/list/FilterList';
-import PageCenterHeader from 'components/pages/PageCenterHeader';
-import Gallery from 'components/gallery/Gallery';
 import contentData from './content.json';
 import useLocale from '../../src/hooks/useLocale';
+import green from '../../src/colors/green';
+import grey from '../../src/colors/gray';
+import amber from '../../src/colors/amber';
+import FilterList from '../../components/shared/list/FilterList';
 import SelectItems from '../../components/shared/form/SelectItems';
+import PageCenterHeader from '../../components/pages/PageCenterHeader';
 import { PageLayout } from '../../components/layouts/PageLayout';
 import SignalcoLogo from '../../components/icons/SignalcoLogo';
+import Gallery from '../../components/gallery/Gallery';
 
 
 function StoreStockStatusBadge(props: { status: number | undefined }) {

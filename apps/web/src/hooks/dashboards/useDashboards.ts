@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getAllAsync } from 'src/dashboards/DashboardsRepository';
+import { getAllAsync } from '../../dashboards/DashboardsRepository';
 
 export default function useDashboards() {
     return useQuery(['dashboards'], getAllAsync, {

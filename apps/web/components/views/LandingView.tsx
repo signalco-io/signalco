@@ -9,13 +9,13 @@ import { Github, Navigate } from '@signalco/ui-icons';
 import { Container, ImageLink, Button, Divider, Typography } from '@signalco/ui';
 import Grid from '@mui/system/Unstable_Grid';
 import { Box, Stack, SxProps, Theme } from '@mui/system';
-import DeveloperOnly from 'components/shared/DeveloperOnly';
-import GentleSlide from 'components/shared/animations/GentleSlide';
-import Fade from 'components/shared/animations/Fade';
-import DiscoverVisual from 'components/pages/landing/visuals/DiscoverVisual';
-import Cover from 'components/pages/landing/Cover';
-import CounterIndicator from 'components/pages/landing/CounterIndicator';
-import CtaSection from 'components/pages/CtaSection';
+import DeveloperOnly from '../shared/DeveloperOnly';
+import GentleSlide from '../shared/animations/GentleSlide';
+import Fade from '../shared/animations/Fade';
+import DiscoverVisual from '../pages/landing/visuals/DiscoverVisual';
+import Cover from '../pages/landing/Cover';
+import CounterIndicator from '../pages/landing/CounterIndicator';
+import CtaSection from '../pages/CtaSection';
 
 const Newsletter = dynamic(() => import('../pages/landing/Newsletter'));
 const GlobePart = dynamic(() => import('../pages/landing/GlobeSection'));
@@ -233,6 +233,7 @@ export default function LandingPageView() {
           direction="horizontal">
           <Stack alignItems="center">
             <Button
+              variant="solid"
               startDecorator={<Github />}
               endDecorator={<Navigate />}
               href="https://github.com/signalco-io"

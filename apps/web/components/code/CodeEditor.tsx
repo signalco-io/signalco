@@ -1,6 +1,6 @@
 import { editor } from 'monaco-editor';
 import Editor, { loader } from '@monaco-editor/react';
-import useUserTheme from 'src/hooks/useUserTheme';
+import useUserTheme from '../../src/hooks/useUserTheme';
 
 loader.config({ paths: { vs: '/vs' } });
 if (typeof window !== 'undefined') {

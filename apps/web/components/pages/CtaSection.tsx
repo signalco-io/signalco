@@ -1,8 +1,8 @@
-import { NavigatingButton, Stack, Sheet, Typography } from '@signalco/ui';
+import { NavigatingButton, Stack, Card, Typography } from '@signalco/ui';
 
 export default function CtaSection() {
     return (
-        <Sheet sx={{ borderRadius: 'var(--joy-radius-lg)', py: 8 }}>
+        <Card sx={{ py: 8 }}>
             <Stack alignItems="center" spacing={4}>
                 <Typography level="h4" component="p">Automate your life</Typography>
                 <Typography>Focus on things that matter to you.</Typography>
@@ -11,6 +11,6 @@ export default function CtaSection() {
                     <Typography level="body2" textAlign="center">No credit card required</Typography>
                 </Stack>
             </Stack>
-        </Sheet>
+        </Card>
     );
 }

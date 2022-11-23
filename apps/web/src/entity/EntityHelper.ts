@@ -1,5 +1,5 @@
-import { arrayMax } from 'src/helpers/ArrayHelpers'
 import IEntityDetails from './IEntityDetails'
+import { arrayMax } from '../helpers/ArrayHelpers';
 
 export function entityHasOffline(entity: IEntityDetails | undefined) {
     if (typeof entity === 'undefined') return false;

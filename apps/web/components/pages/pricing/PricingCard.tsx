@@ -1,7 +1,7 @@
 import { Button, Card, Typography } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import Checkbox from 'components/shared/form/Checkbox';
-import SignalcoLogotype from 'components/icons/SignalcoLogotype';
+import Checkbox from '../../shared/form/Checkbox';
+import SignalcoLogotype from '../../icons/SignalcoLogotype';
 
 export interface PricingOption {
     id: string,
@@ -29,8 +29,7 @@ export default function PricingCard(props: PricingCardProps) {
             <Card
                 sx={{
                     height: '100%'
-                }}
-                variant={variant !== 'normal' ? 'soft' : 'outlined'}>
+                }}>
                 <Stack
                     sx={{ height: '100%' }}
                     p={{ xs: 4, md: 6 }}
@@ -54,9 +53,13 @@ export default function PricingCard(props: PricingCardProps) {
                         </Stack>
                     </Stack>
                     <Stack spacing={1}>
-                        <Button variant={option.id === 'basic' ? 'solid' : 'outlined'} color={option.id === 'basic' ? 'primary' : 'neutral'} disabled={disabled} href={option.href}>{option.hrefLabel}</Button>
-                        {disabled && <Typography textColor="text.secondary" textAlign="center">Available soon</Typography>}
-                        {option.price.eur <= 0 && <Typography textColor="text.secondary" textAlign="center">No credit card required</Typography>}
+                        <Button
+                            variant={option.id === 'basic' ? 'solid' : 'outlined'}
+                            color={option.id === 'basic' ? 'primary' : 'neutral'}
+                            disabled={disabled}
+                            href={option.href}>
+                            {disabled ? 'Available soon' : option.hrefLabel}
+                        </Button>
                     </Stack>
                 </Stack>
             </Card>

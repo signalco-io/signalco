@@ -1,10 +1,10 @@
 import { compareVersions } from 'compare-versions';
 import { Check, Upload } from '@signalco/ui-icons';
 import { Button } from '@signalco/ui';
-import { showNotification } from 'src/notifications/PageNotificationService';
-import useLoadAndError from 'src/hooks/useLoadAndError';
 import StationsRepository from '../../src/stations/StationsRepository';
+import { showNotification } from '../../src/notifications/PageNotificationService';
 import useLocale, { localizer, useLocalePlaceholders } from '../../src/hooks/useLocale';
+import useLoadAndError from '../../src/hooks/useLoadAndError';
 
 async function loadLatestAvailableVersion() {
     try {

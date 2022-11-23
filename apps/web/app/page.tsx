@@ -1,3 +1,5 @@
+'use client';
+
 import LandingPageView from '../components/views/LandingView';
 import { PageFullLayout } from '../components/layouts/PageFullLayout';
 

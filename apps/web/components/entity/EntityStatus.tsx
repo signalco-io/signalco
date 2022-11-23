@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { Lightning } from '@signalco/ui-icons';
 import { DotIndicator } from '@signalco/ui';
-import IEntityDetails from 'src/entity/IEntityDetails';
-import { entityHasOffline, entityInError, entityLastActivity } from 'src/entity/EntityHelper';
-import { now } from 'src/services/DateTimeProvider';
+import { now } from '../../src/services/DateTimeProvider';
+import IEntityDetails from '../../src/entity/IEntityDetails';
+import { entityInError, entityHasOffline, entityLastActivity } from '../../src/entity/EntityHelper';
 
 export function useEntityStatus(entity: IEntityDetails | undefined) {
     const hasStatus = entity && entity.type === 1;

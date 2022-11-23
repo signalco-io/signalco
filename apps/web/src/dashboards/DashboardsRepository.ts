@@ -1,9 +1,9 @@
-import IUser from 'src/users/IUser';
-import IEntityDetails from 'src/entity/IEntityDetails';
-import { entitiesAsync, entityDeleteAsync, entityUpsertAsync } from 'src/entity/EntityRepository';
-import { setAsync } from 'src/contacts/ContactRepository';
+import IUser from '../users/IUser';
 import UserSettingsProvider from '../services/UserSettingsProvider';
 import { arrayMax } from '../helpers/ArrayHelpers';
+import IEntityDetails from '../entity/IEntityDetails';
+import { entitiesAsync, entityUpsertAsync, entityDeleteAsync } from '../entity/EntityRepository';
+import { setAsync } from '../contacts/ContactRepository';
 import { widgetType } from '../../components/widgets/Widget';
 
 export interface IDashboardSetModel {

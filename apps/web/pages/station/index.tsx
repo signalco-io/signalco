@@ -1,4 +1,4 @@
-import { PageLayout } from 'components/layouts/PageLayout';
+import { PageLayout } from '../../components/layouts/PageLayout';
 
 function StationIndex() {
     return (

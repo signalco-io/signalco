@@ -20,13 +20,13 @@ import {
     Box
 } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import useContact from 'src/hooks/useContact';
-import IEntityDetails from 'src/entity/IEntityDetails';
-import IContactPointerPartial from 'src/contacts/IContactPointerPartial';
 import InputContactValue from './InputContactValue';
 import EntityIcon from './EntityIcon';
 import useEntity from '../../../src/hooks/useEntity';
+import useContact from '../../../src/hooks/useContact';
 import useAllEntities from '../../../src/hooks/useAllEntities';
+import IEntityDetails from '../../../src/entity/IEntityDetails';
+import IContactPointerPartial from '../../../src/contacts/IContactPointerPartial';
 
 function EntityContactValueSelection(props: { target: IContactPointerPartial | undefined, value: any, onSelected: (value: any) => void }) {
     const { target, value, onSelected } = props;

@@ -2,10 +2,10 @@ import { useCallback, useEffect, useState } from 'react';
 import { Play } from '@signalco/ui-icons';
 import { Row , IconButton, Slider, Typography } from '@signalco/ui';
 import Switch from '@mui/joy/Switch';
-import throttle from 'src/helpers/Throttle';
-import blendColors from 'src/helpers/BlendColors';
-import IContact from 'src/contacts/IContact';
 import SelectItems from '../form/SelectItems';
+import throttle from '../../../src/helpers/Throttle';
+import blendColors from '../../../src/helpers/BlendColors';
+import IContact from '../../../src/contacts/IContact';
 
 export interface InputContactValueProps {
     value: any | undefined;

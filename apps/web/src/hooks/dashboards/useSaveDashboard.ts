@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { IDashboardSetModel, saveDashboardAsync } from 'src/dashboards/DashboardsRepository';
+import { IDashboardSetModel, saveDashboardAsync } from '../../dashboards/DashboardsRepository';
 
 export default function useSaveDashboard() {
     const client = useQueryClient();

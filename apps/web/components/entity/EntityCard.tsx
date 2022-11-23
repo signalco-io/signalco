@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { Row , Avatar, Card, Typography , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import IEntityDetails from 'src/entity/IEntityDetails';
-import { entityLastActivity } from 'src/entity/EntityHelper';
-import Timeago from 'components/shared/time/Timeago';
-import EntityIcon from 'components/shared/entity/EntityIcon';
 import ShareEntityChip from './ShareEntityChip';
 import EntityStatus, { useEntityStatus } from './EntityStatus';
+import Timeago from '../shared/time/Timeago';
+import EntityIcon from '../shared/entity/EntityIcon';
+import IEntityDetails from '../../src/entity/IEntityDetails';
+import { entityLastActivity } from '../../src/entity/EntityHelper';
 
 export interface EntityCardProps {
     entity: IEntityDetails;

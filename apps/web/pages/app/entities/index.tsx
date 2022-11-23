@@ -4,17 +4,17 @@ import { Add, LayoutGrid, LayoutList } from '@signalco/ui-icons';
 import { Loadable, Row , Avatar, Button, IconButton, TextField, Typography , Box } from '@signalco/ui';
 import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
-import { entityUpsertAsync } from 'src/entity/EntityRepository';
-import SelectItems from 'components/shared/form/SelectItems';
-import Picker from 'components/shared/form/Picker';
-import { EntityIconByType } from 'components/shared/entity/EntityIcon';
-import ConfigurationDialog from 'components/shared/dialog/ConfigurationDialog';
-import EntityCard from 'components/entity/EntityCard';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
 import useLocale from '../../../src/hooks/useLocale';
 import useAllEntities from '../../../src/hooks/useAllEntities';
+import { entityUpsertAsync } from '../../../src/entity/EntityRepository';
+import SelectItems from '../../../components/shared/form/SelectItems';
+import Picker from '../../../components/shared/form/Picker';
+import { EntityIconByType } from '../../../components/shared/entity/EntityIcon';
+import ConfigurationDialog from '../../../components/shared/dialog/ConfigurationDialog';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
+import EntityCard from '../../../components/entity/EntityCard';
 
 const entityTypes = [
     { value: '1', label: 'Devices' },

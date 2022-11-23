@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Row, Stack , Button, TextField, Typography , Box } from '@signalco/ui';
-import Checkbox from 'components/shared/form/Checkbox';
 import SelectItems from '../../shared/form/SelectItems';
+import Checkbox from '../../shared/form/Checkbox';
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';

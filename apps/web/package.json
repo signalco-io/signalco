@@ -13,7 +13,8 @@
         "postinstall": "node ./tools/post-install.js",
         "postbuild": "next-sitemap --config next-sitemap.config.js",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "test": "playwright test"
     },
     "dependencies": {
         "@auth0/auth0-react": "1.12.0",
@@ -66,8 +67,10 @@
         "uuid": "9.0.0"
     },
     "devDependencies": {
+        "@axe-core/playwright": "^4.5.2",
         "@babel/core": "7.20.2",
         "@next/bundle-analyzer": "13.0.4",
+        "@playwright/test": "^1.28.0",
         "@signalco/tsconfig": "*",
         "@types/color": "3.0.3",
         "@types/d3": "7.4.0",
@@ -91,6 +94,7 @@
         "fs-extra": "10.1.0",
         "next-sitemap": "3.1.32",
         "openapi-types": "12.0.2",
+        "playwright": "^1.28.0",
         "prop-types": "15.8.1",
         "puppeteer": "19.2.2",
         "react-is": "18.2.0",

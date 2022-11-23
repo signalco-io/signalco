@@ -51,6 +51,8 @@ export {
     Card,
     CardOverflow,
     Checkbox as JoyCheckbox, // TODO: Remove
+    FormControl,
+    FormLabel,
     Grid,
     IconButton, 
     Input,

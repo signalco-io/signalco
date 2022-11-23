@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
 import { Loadable , NoDataPlaceholder , Typography } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import { DefaultHeight, DefaultWidth } from 'src/widgets/WidgetConfigurationOptions';
-import IWidgetConfigurationOption from 'src/widgets/IWidgetConfigurationOption';
-import useWidgetOptions from 'src/hooks/widgets/useWidgetOptions';
-import useLoadAndError from 'src/hooks/useLoadAndError';
 import { WidgetSharedProps } from '../Widget';
+import { DefaultHeight, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import useLoadAndError from '../../../src/hooks/useLoadAndError';
 
 type ConfigProps = {
     ticker: string;

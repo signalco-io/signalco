@@ -7,7 +7,7 @@ import {
   usePopupState,
 } from 'material-ui-popup-state/hooks';
 import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
-import { Loadable , Avatar, Button, Divider, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, Sheet, Tooltip, Typography , Box } from '@signalco/ui';
+import { Loadable, Avatar, Button, Divider, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, Sheet, Tooltip, Typography, Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import ApiBadge from './development/ApiBadge';
 import LocalStorageService from '../src/services/LocalStorageService';
@@ -116,7 +116,8 @@ function NavLink({ path, Icon, active, label, onClick }: { path: string, Icon: R
           variant="plain"
           size="lg"
           sx={{
-            p: 2
+            p: 2,
+            width: '100%'
           }}
           onClick={onClick}>
           <Box sx={{ opacity: active ? 1 : 0.6, fontSize: '26px' }}>
@@ -186,18 +187,16 @@ function NavProfile() {
           background: 'var(--joy-palette-background-default)',
           zIndex: 999
         }}>
-          <Sheet variant="outlined" sx={{ height: '100%' }}>
-            <Stack>
-              {visibleNavItems.map((ni, index) =>
-                <NavLink
-                  key={index + 1}
-                  path={ni.path}
-                  Icon={ni.icon}
-                  active={ni === activeNavItem}
-                  label={t(ni.label)}
-                  onClick={handleMobileMenuClose} />)}
-            </Stack>
-          </Sheet>
+          <Stack>
+            {visibleNavItems.map((ni, index) =>
+              <NavLink
+                key={index + 1}
+                path={ni.path}
+                Icon={ni.icon}
+                active={ni === activeNavItem}
+                label={t(ni.label)}
+                onClick={handleMobileMenuClose} />)}
+          </Stack>
         </Box>
       </Box>
     </Stack>

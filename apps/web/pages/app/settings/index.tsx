@@ -1,16 +1,16 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
-import { Loadable, Container, Stack, Row , Card, Sheet, Typography, Box } from '@signalco/ui';
+import { Loadable, Container, Stack, Row, Card, Sheet, Typography, Box, List, ListItem } from '@signalco/ui';
 import { isNonEmptyString, isNotNull, isTrue } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
-import SelectItems from 'components/shared/form/SelectItems';
-import Picker from 'components/shared/form/Picker';
 import { ChildrenProps } from '../../../src/sharedTypes';
 import CurrentUserProvider from '../../../src/services/CurrentUserProvider';
 import appSettingsProvider, { ApiDevelopmentUrl, ApiProductionUrl } from '../../../src/services/AppSettingsProvider';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
+import SelectItems from '../../../components/shared/form/SelectItems';
+import Picker from '../../../components/shared/form/Picker';
 import AppThemePicker from '../../../components/settings/AppThemePicker';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import LocationMapPicker from '../../../components/forms/LocationMapPicker/LocationMapPicker';
@@ -174,9 +174,14 @@ function SettingsIndex() {
     }, [setUserLocation, timeLocationForm.location]);
 
     return (
-        <SettingsFormProvider>
-            <Sheet variant="plain" sx={{ height: '100%', overflow: 'auto' }}>
-                <Container>
+        <Row>
+            <Stack>
+                <List>
+                    <ListItem>test</ListItem>
+                </List>
+            </Stack>
+            <Card variant="plain" sx={{ height: '100%', overflow: 'auto' }}>
+                <SettingsFormProvider>
                     <Box sx={{ p: 2 }}>
                         <Loadable isLoading={isLoading}>
                             <Stack spacing={4}>
@@ -206,9 +211,9 @@ function SettingsIndex() {
                             </Stack>
                         </Loadable>
                     </Box>
-                </Container>
-            </Sheet>
-        </SettingsFormProvider>
+                </SettingsFormProvider>
+            </Card>
+        </Row>
     );
 }
 

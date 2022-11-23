@@ -1,9 +1,9 @@
 import { Stack } from '@mui/system';
-import PageCenterHeader from 'components/pages/PageCenterHeader';
-import FaqSection from 'components/pages/FaqSection';
-import CtaSection from 'components/pages/CtaSection';
-import { PageLayout } from 'components/layouts/PageLayout';
-import ChannelsGallery from 'components/channels/ChannelsGallery';
+import PageCenterHeader from '../../components/pages/PageCenterHeader';
+import FaqSection from '../../components/pages/FaqSection';
+import CtaSection from '../../components/pages/CtaSection';
+import { PageLayout } from '../../components/layouts/PageLayout';
+import ChannelsGallery from '../../components/channels/ChannelsGallery';
 
 const channelsFaq = [
     { id: 'channel', question: 'What is Channel?', answer: 'Channel is Entity that contains all information required for connected online service, application or device. Channels can execute actions directly or contain connected entities to manage.' },

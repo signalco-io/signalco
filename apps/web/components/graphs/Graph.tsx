@@ -1,13 +1,13 @@
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
 import { NoDataPlaceholder, Row , Sheet, Typography , Box } from '@signalco/ui';
-import { now } from 'src/services/DateTimeProvider';
-import lightBlue from 'src/colors/lightBlue';
-import deepOrange from 'src/colors/deepOrange';
 import Timeago from '../shared/time/Timeago';
 import { ObjectDictAny } from '../../src/sharedTypes';
+import { now } from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
 import { arrayMax, arrayMin } from '../../src/helpers/ArrayHelpers';
+import lightBlue from '../../src/colors/lightBlue';
+import deepOrange from '../../src/colors/deepOrange';
 
 export interface IGraphProps {
     label?: string;
