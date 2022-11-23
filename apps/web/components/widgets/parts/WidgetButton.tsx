@@ -1,10 +1,10 @@
 import { Icon , IconButton } from '@signalco/ui';
-import IContact from 'src/contacts/IContact';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultTargetWithValueMultiple, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import IContact from '../../../src/contacts/IContact';
 
 type ConfigProps = {
     icon: string | undefined;

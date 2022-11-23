@@ -3,15 +3,15 @@ import dynamic from 'next/dynamic'
 import { Button, Typography , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import CircularProgress from '@mui/joy/CircularProgress';
-import useContacts from 'src/hooks/useContacts';
-import { entityAsync } from 'src/entity/EntityRepository';
-import IContactPointer from 'src/contacts/IContactPointer';
-import IContact from 'src/contacts/IContact';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useEntities from '../../../src/hooks/useEntities';
+import useContacts from '../../../src/hooks/useContacts';
+import { entityAsync } from '../../../src/entity/EntityRepository';
+import IContactPointer from '../../../src/contacts/IContactPointer';
+import IContact from '../../../src/contacts/IContact';
 import ConductsService from '../../../src/conducts/ConductsService';
 
 const stateOptions = [

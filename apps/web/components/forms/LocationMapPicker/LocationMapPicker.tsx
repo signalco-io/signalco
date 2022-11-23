@@ -4,9 +4,9 @@ import { MyLocation } from '@signalco/ui-icons';
 import { Accordion } from '@signalco/ui-client';
 import { Loadable, Row, Stack , IconButton, TextField, Typography , Box } from '@signalco/ui';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/esm/index.types';
-import useUserTheme from 'src/hooks/useUserTheme';
-import useLoadAndError from 'src/hooks/useLoadAndError';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
+import useUserTheme from '../../../src/hooks/useUserTheme';
+import useLoadAndError from '../../../src/hooks/useLoadAndError';
 
 const mapBoxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 

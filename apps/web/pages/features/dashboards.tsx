@@ -1,6 +1,6 @@
 import { Stack , Typography } from '@signalco/ui';
-import PageCenterHeader from 'components/pages/PageCenterHeader';
 import WidgetStore from '../../components/widget-store/WidgetStore';
+import PageCenterHeader from '../../components/pages/PageCenterHeader';
 import { PageLayout } from '../../components/layouts/PageLayout';
 
 function FeatureDashboardsPage() {

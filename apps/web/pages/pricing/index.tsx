@@ -1,9 +1,9 @@
 import { Stack } from '@mui/system';
-import PricingCard, { PricingOption } from 'components/pages/pricing/PricingCard';
-import PageCenterHeader from 'components/pages/PageCenterHeader';
-import FaqSection from 'components/pages/FaqSection';
-import CtaSection from 'components/pages/CtaSection';
-import { PageLayout } from 'components/layouts/PageLayout';
+import PricingCard, { PricingOption } from '../../components/pages/pricing/PricingCard';
+import PageCenterHeader from '../../components/pages/PageCenterHeader';
+import FaqSection from '../../components/pages/FaqSection';
+import CtaSection from '../../components/pages/CtaSection';
+import { PageLayout } from '../../components/layouts/PageLayout';
 
 const pricingOptions: PricingOption[] = [
     {

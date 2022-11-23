@@ -1,8 +1,8 @@
 'use client';
 
 import { Chip } from '@signalco/ui';
-import useIsClient from 'src/hooks/useIsClient';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
+import useIsClient from '../../src/hooks/useIsClient';
 
 export default function ApiBadge(props: { force?: 'dev' | 'prod' }) {
     const { force } = props;

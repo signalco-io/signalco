@@ -1,5 +1,5 @@
 import { Box } from '@signalco/ui';
-import { ChildrenProps } from 'src/sharedTypes';
+import { ChildrenProps } from '../../../src/sharedTypes';
 
 export interface GentleSlideProps extends ChildrenProps {
     appear: boolean,

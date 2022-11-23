@@ -1,6 +1,6 @@
 import IContactPointer from './IContactPointer';
+import { toDuration } from '../services/DateTimeProvider';
 import HttpService from '../../src/services/HttpService';
-import { toDuration } from 'src/services/DateTimeProvider';
 
 interface TimeStampValuePairDto {
     timeStamp: string;

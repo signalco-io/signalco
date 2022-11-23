@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import { orderBy } from 'src/helpers/ArrayHelpers';
-import FilterList from 'components/shared/list/FilterList';
-import Gallery from 'components/gallery/Gallery';
 import items from './channelsData.json';
 import ChannelGalleryItem from './ChannelGalleryItem';
 import categories from './channelCategoriesData.json';
+import FilterList from '../shared/list/FilterList';
+import Gallery from '../gallery/Gallery';
+import { orderBy } from '../../src/helpers/ArrayHelpers';
 
 export default function ChannelsGallery(props: { channelHrefFunc: (id: string) => string }) {
     const { channelHrefFunc } = props;

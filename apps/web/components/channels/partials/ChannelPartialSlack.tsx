@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { Stack , Typography } from '@signalco/ui';
-import HttpService from 'src/services/HttpService';
-import OAuthRedirectConnectButton from 'components/oauth/OAuthRedirectConnectButton';
+import OAuthRedirectConnectButton from '../../oauth/OAuthRedirectConnectButton';
+import HttpService from '../../../src/services/HttpService';
 
 const slackAppClientIdResolved = process.env.NEXT_PUBLIC_SLACK_CLIENTID;
 

@@ -2,13 +2,7 @@
     "$schema": "https://json.schemastore.org/tsconfig",
     "extends": "@signalco/tsconfig/web.json",
     "compilerOptions": {
-        "baseUrl": ".",
         "outDir": "dist",
-        "paths": {
-            "*": [
-                "./*"
-            ]
-        },
         "plugins": [
             {
                 "name": "next"

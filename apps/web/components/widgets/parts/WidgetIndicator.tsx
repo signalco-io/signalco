@@ -4,12 +4,12 @@ import Image from 'next/image';
 import { SmileMeh, SmileVeryHappy } from '@signalco/ui-icons';
 import { Button , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import IWidgetConfigurationOption from 'src/widgets/IWidgetConfigurationOption';
-import useContact from 'src/hooks/useContact';
-import IContactPointer from 'src/contacts/IContactPointer';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultTarget, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import useContact from '../../../src/hooks/useContact';
+import type IContactPointer from '../../../src/contacts/IContactPointer';
 
 const stateOptions: IWidgetConfigurationOption<any>[] = [
     DefaultTarget,

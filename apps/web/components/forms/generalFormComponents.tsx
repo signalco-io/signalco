@@ -1,6 +1,6 @@
 import { TextField } from '@signalco/ui';
 import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
-import Checkbox from 'components/shared/form/Checkbox';
+import Checkbox from '../shared/form/Checkbox';
 
 const components: FormBuilderComponents = {
     number: (props) => <TextField type="number" {...props} />,

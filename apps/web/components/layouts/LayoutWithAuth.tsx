@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { ChildrenProps } from 'src/sharedTypes';
+import { ChildrenProps } from '../../src/sharedTypes';
 import HttpService from '../../src/services/HttpService';
 import CurrentUserProvider from '../../src/services/CurrentUserProvider';
 

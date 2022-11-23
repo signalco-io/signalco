@@ -5,7 +5,7 @@ import NextLink from 'next/link';
 import { Github, Twitter } from '@signalco/ui-icons';
 import { Container , Grid, IconButton, Typography, JoyLink , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import SignalcoLogotype from 'components/icons/SignalcoLogotype';
+import SignalcoLogotype from '../icons/SignalcoLogotype';
 import { now } from '../../src/services/DateTimeProvider';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
 
