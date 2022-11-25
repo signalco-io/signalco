@@ -13,6 +13,8 @@ export {
     ChevronDown as ExpandDown,
     ChevronUp as Up,
     ChevronDown as Down,
+    ChevronLeft as Left,
+    ChevronsRight as Right,
     Square as Stop,
     LayoutList,
     LayoutGrid,
@@ -48,7 +50,11 @@ export {
     RadioReceiver as Station,
     SunMoon,
     Timer,
+    Pause,
     Sliders as Custom,
+    Equal,
+    EqualNot,
+    
 
     Twitter,
     Github
