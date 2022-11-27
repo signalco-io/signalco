@@ -5,6 +5,7 @@ import ShareEntityChip from './ShareEntityChip';
 import EntityStatus, { useEntityStatus } from './EntityStatus';
 import Timeago from '../shared/time/Timeago';
 import EntityIcon from '../shared/entity/EntityIcon';
+import { KnownPages } from '../../src/knownPages';
 import IEntityDetails from '../../src/entity/IEntityDetails';
 import { entityLastActivity } from '../../src/entity/EntityHelper';
 
@@ -18,7 +19,7 @@ export default function EntityCard({ entity, spread }: EntityCardProps) {
     const Icon = EntityIcon(entity);
 
     return (
-        <Link href={`/app/entities/${entity.id}`} legacyBehavior>
+        <Link href={`${KnownPages.Entities}/${entity.id}`} legacyBehavior>
             <Card sx={{ height: '100%', p: spread ? 0 : 1 }}>
                 <Stack
                     spacing={2}

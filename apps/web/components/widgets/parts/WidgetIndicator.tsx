@@ -7,6 +7,7 @@ import { Stack } from '@mui/system';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultTarget, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import { KnownPages } from '../../../src/knownPages';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useContact from '../../../src/hooks/useContact';
 import type IContactPointer from '../../../src/contacts/IContactPointer';
@@ -33,7 +34,7 @@ function WidgetIndicator(props: WidgetSharedProps<any>) {
     const Icon = isLow ? SmileMeh : SmileVeryHappy;
 
     const handleSelected = () => {
-        router.push(`/app/entities/${pointer.entityId}`)
+        router.push(`${KnownPages.Entities}/${pointer.entityId}`)
     }
 
     useWidgetOptions(stateOptions, props);

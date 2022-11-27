@@ -54,7 +54,7 @@ function Dashboards() {
             const newDashboardId = await saveDashboard.mutateAsync({
                 name: 'New dashboard'
             });
-            setDashboardIdHash(newDashboardId);
+            await setDashboardIdHash(newDashboardId);
         } catch (err) {
             console.error('Failed to create dashboard', err);
             showNotification(t('NewDashboardErrorUnknown'), 'error');

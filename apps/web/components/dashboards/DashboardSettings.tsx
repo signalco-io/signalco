@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { Button, Stack, TextField, Typography } from '@signalco/ui';
 import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import useLocale from '../../src/hooks/useLocale';
+import useHashParam from '../../src/hooks/useHashParam';
 import useSaveDashboard from '../../src/hooks/dashboards/useSaveDashboard';
 import useDeleteDashboard from '../../src/hooks/dashboards/useDeleteDashboard';
 import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
@@ -16,8 +16,8 @@ interface IDashboardSettingsProps {
 
 function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsProps) {
     const { t } = useLocale('App', 'Dashboards');
-    const router = useRouter();
     const [name, setName] = useState(dashboard?.name || '');
+    const [_, setDashboardIdHash] = useHashParam('dashboard');
     const saveDashboard = useSaveDashboard();
     const deleteDashboard = useDeleteDashboard();
 
@@ -32,7 +32,7 @@ function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsPro
     const handleDashboardDelete = async () => {
         if (dashboard) {
             await deleteDashboard.mutateAsync(dashboard.id);
-            router.push({ hash: undefined });
+            setDashboardIdHash(undefined);
         }
         onClose();
     }
