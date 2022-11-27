@@ -55,6 +55,7 @@ export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>
     const closePrice = price.item?.close;
     const diff = price.item?.close - price.item?.open;
     const diffPerc = Math.round(((diff / closePrice) * 100 + Number.EPSILON) * 100) / 100;
+    const diffPercDecimals = diffPerc.toFixed(4).replace(/0{0,2}$/, '');
 
     return (
         <Stack sx={{ height: '100%' }} alignItems={price.isLoading ? 'center' : 'stretch'} direction="row" justifyContent={price.isLoading ? 'center' : 'stretch'}>
@@ -70,7 +71,7 @@ export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>
                         ) : (
                             <>
                                 <Typography level="h4" fontWeight="bold" lineHeight={0.9}>${closePrice}</Typography>
-                                <Typography color={diffPerc >= 0 ? 'success' : 'danger'}>{diffPerc}%</Typography>
+                                <Typography color={diffPerc >= 0 ? 'success' : 'danger'}>{diffPerc >= 0 ? '+' : ''}{diffPercDecimals}%</Typography>
                             </>
                         )}
                     </Stack>
