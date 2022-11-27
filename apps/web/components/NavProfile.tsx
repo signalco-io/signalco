@@ -17,8 +17,8 @@ import useLocale from '../src/hooks/useLocale';
 import { orderBy } from '../src/helpers/ArrayHelpers';
 
 const navItems = [
-  { label: 'Channels', path: '/app/channels', icon: Channel, hidden: true },
-  { label: 'Settings', path: '/app/settings', icon: Settings, hidden: true },
+  { label: 'Channels', path: KnownPages.Channels, icon: Channel, hidden: true },
+  { label: 'Settings', path: KnownPages.Settings, icon: Settings, hidden: true },
   { label: 'Dashboards', path: '/app', icon: Dashboard },
   { label: 'Entities', path: KnownPages.Entities, icon: Device }
 ];
@@ -82,7 +82,7 @@ function UserProfileAvatar() {
         </Stack>
       </Button>
       <Menu {...menuProps}>
-        <Link href="/app/settings" passHref legacyBehavior>
+        <Link href={KnownPages.Settings} passHref legacyBehavior>
           <MenuItem onClick={handleClose}>
             <ListItemDecorator>
               <Settings />
@@ -93,7 +93,7 @@ function UserProfileAvatar() {
           </MenuItem>
         </Link>
         <Divider />
-        <Link href="/" passHref legacyBehavior>
+        <Link href={KnownPages.Root} passHref legacyBehavior>
           <MenuItem onClick={logout}>
             <ListItemDecorator>
               <LogOut />

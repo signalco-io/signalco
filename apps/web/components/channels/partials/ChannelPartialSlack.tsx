@@ -16,7 +16,7 @@ const slackScopes = [
 export default function ChannelPartialSlack() {
     const router = useRouter();
     const redirectUrl = typeof window !== 'undefined'
-        ? `${window.location.origin}/app/channels/slack`
+        ? `${window.location.origin}/${KnownPages.Channels}/slack`
         : undefined;
 
     const handleOAuthCode = async (code: string) => {

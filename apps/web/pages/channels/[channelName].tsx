@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { Breadcrumbs , NavigatingButton, Row, Stack , Card, Typography } from '@signalco/ui';
+import { KnownPages } from '../../src/knownPages';
 import ShareSocial from '../../components/pages/ShareSocial';
 import FaqSection from '../../components/pages/FaqSection';
 import CtaSection from '../../components/pages/CtaSection';
@@ -57,7 +58,7 @@ function ChannelPage() {
                     </Card>
                 </Row>
                 <Stack alignItems="start">
-                    <NavigatingButton href={`/app/channels/${channelName}`} disabled={channel?.planned}>
+                    <NavigatingButton href={`${KnownPages.Channels}/${channelName}`} disabled={channel?.planned}>
                         Use this channel
                     </NavigatingButton>
                     {channel?.planned && <Typography level="body3">Available soon</Typography>}

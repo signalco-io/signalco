@@ -1,3 +1,6 @@
 export enum KnownPages {
-    Entities = '/app/entities'
+    Root = '/',
+    Entities = '/app/entities',
+    Channels = '/app/channels',
+    Settings = '/app/settings'
 }
