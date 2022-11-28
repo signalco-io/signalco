@@ -68,7 +68,7 @@
     },
     "devDependencies": {
         "@axe-core/playwright": "^4.5.2",
-        "@babel/core": "7.20.2",
+        "@babel/core": "7.20.5",
         "@next/bundle-analyzer": "13.0.5",
         "@playwright/test": "^1.28.0",
         "@signalco/tsconfig": "*",
