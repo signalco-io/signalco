@@ -12,14 +12,15 @@ import { Stack } from '@mui/system';
 import ApiBadge from './development/ApiBadge';
 import LocalStorageService from '../src/services/LocalStorageService';
 import CurrentUserProvider from '../src/services/CurrentUserProvider';
+import { KnownPages } from '../src/knownPages';
 import useLocale from '../src/hooks/useLocale';
 import { orderBy } from '../src/helpers/ArrayHelpers';
 
 const navItems = [
-  { label: 'Channels', path: '/app/channels', icon: Channel, hidden: true },
-  { label: 'Settings', path: '/app/settings', icon: Settings, hidden: true },
+  { label: 'Channels', path: KnownPages.Channels, icon: Channel, hidden: true },
+  { label: 'Settings', path: KnownPages.Settings, icon: Settings, hidden: true },
   { label: 'Dashboards', path: '/app', icon: Dashboard },
-  { label: 'Entities', path: '/app/entities', icon: Device }
+  { label: 'Entities', path: KnownPages.Entities, icon: Device }
 ];
 
 function UserAvatar() {
@@ -54,19 +55,16 @@ function UserAvatar() {
 function UserProfileAvatar() {
   const { t } = useLocale('App', 'Account');
   const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' });
-  const router = useRouter();
+
+  const handleClose = () => {
+    popupState.close();
+  };
 
   const logout = async () => {
-    popupState.close();
+    handleClose();
     LocalStorageService.setItem('token', undefined);
     CurrentUserProvider.setToken(undefined);
-    await router.push('/');
   }
-
-  const navigateTo = (href: string) => async () => {
-    popupState.close();
-    await router.push(href);
-  };
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -84,23 +82,27 @@ function UserProfileAvatar() {
         </Stack>
       </Button>
       <Menu {...menuProps}>
-        <MenuItem onClick={navigateTo('/app/settings')}>
-          <ListItemDecorator>
-            <Settings />
-          </ListItemDecorator>
-          <ListItemContent>
-            {t('Settings')}
-          </ListItemContent>
-        </MenuItem>
+        <Link href={KnownPages.Settings} passHref legacyBehavior>
+          <MenuItem onClick={handleClose}>
+            <ListItemDecorator>
+              <Settings />
+            </ListItemDecorator>
+            <ListItemContent>
+              {t('Settings')}
+            </ListItemContent>
+          </MenuItem>
+        </Link>
         <Divider />
-        <MenuItem onClick={logout}>
-          <ListItemDecorator>
-            <LogOut />
-          </ListItemDecorator>
-          <ListItemContent>
-            {t('Logout')}
-          </ListItemContent>
-        </MenuItem>
+        <Link href={KnownPages.Root} passHref legacyBehavior>
+          <MenuItem onClick={logout}>
+            <ListItemDecorator>
+              <LogOut />
+            </ListItemDecorator>
+            <ListItemContent>
+              {t('Logout')}
+            </ListItemContent>
+          </MenuItem>
+        </Link>
       </Menu>
     </Loadable>
   );

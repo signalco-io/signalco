@@ -4,6 +4,7 @@ import { Add, LayoutGrid, LayoutList } from '@signalco/ui-icons';
 import { Loadable, Row , Avatar, Button, IconButton, TextField, Typography , Box } from '@signalco/ui';
 import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
+import { KnownPages } from '../../../src/knownPages';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
 import useLocale from '../../../src/hooks/useLocale';
@@ -39,7 +40,7 @@ function EntityCreate() {
 
     const onType = async (type: { value: number, label: string }) => {
         const id = await entityUpsertAsync(undefined, type.value, 'New ' + tType(type.label));
-        router.push('/app/entities/' + id);
+        router.push(`${KnownPages.Entities}/${id}`);
     };
 
     return (

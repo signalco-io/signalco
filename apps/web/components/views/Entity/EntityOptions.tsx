@@ -6,6 +6,7 @@ import { MoreHorizontal } from '@signalco/ui-icons';
 import { Button, Divider, Menu, MenuItem } from '@signalco/ui';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
+import { KnownPages } from '../../../src/knownPages';
 import useLocale from '../../../src/hooks/useLocale';
 import useEntity from '../../../src/hooks/useEntity';
 import { entityDeleteAsync } from '../../../src/entity/EntityRepository';
@@ -41,7 +42,7 @@ export default function EntityOptions(props: EntityOptionsProps) {
                 throw new Error('Entity identifier not present.');
 
             await entityDeleteAsync(id);
-            router.push('/app/entities');
+            router.push(KnownPages.Entities);
         } catch (err) {
             console.error('Failed to delete entity', err);
             showNotification(t('DeleteErrorUnknown'));

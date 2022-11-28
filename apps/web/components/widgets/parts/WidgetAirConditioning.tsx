@@ -5,6 +5,7 @@ import { Stack } from '@mui/system';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import { KnownPages } from '../../../src/knownPages';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useEntity from '../../../src/hooks/useEntity';
 import useContact from '../../../src/hooks/useContact';
@@ -60,7 +61,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<any>) {
         <Box sx={{ width: '100%', height: '100%' }}>
             <Stack alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
                 <Box sx={{ mt: 9 }}>
-                    <Link href={`/app/entities/${temperatureDevice?.id}`} passHref legacyBehavior>
+                    <Link href={`${KnownPages.Entities}/${temperatureDevice?.id}`} passHref legacyBehavior>
                         <Button variant="plain">
                             <Row>
                                 <Stack sx={{ height: '100%' }} justifyContent="center" alignItems="center">
@@ -80,7 +81,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<any>) {
                         <SmallIndicator isActive={false} label="Cooling" icon="ac_unit" activeBackgroundColor="#445D79" />
                     } */}
                     {config.targetHeating &&
-                        <SmallIndicator isActive={heatingActive} label="Heating" icon="whatshot" activeBackgroundColor="#A14D4D" href={`/app/entities/${heatingDevice?.id}`} />
+                        <SmallIndicator isActive={heatingActive} label="Heating" icon="whatshot" activeBackgroundColor="#A14D4D" href={`${KnownPages.Entities}/${heatingDevice?.id}`} />
                     }
                 </Stack>
             </Stack>

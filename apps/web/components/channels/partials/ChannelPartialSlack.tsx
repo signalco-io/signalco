@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { Stack , Typography } from '@signalco/ui';
 import OAuthRedirectConnectButton from '../../oauth/OAuthRedirectConnectButton';
 import HttpService from '../../../src/services/HttpService';
+import { KnownPages } from '../../../src/knownPages';
 
 const slackAppClientIdResolved = process.env.NEXT_PUBLIC_SLACK_CLIENTID;
 
@@ -15,12 +16,12 @@ const slackScopes = [
 export default function ChannelPartialSlack() {
     const router = useRouter();
     const redirectUrl = typeof window !== 'undefined'
-        ? `${window.location.origin}/app/channels/slack`
+        ? `${window.location.origin}/${KnownPages.Channels}/slack`
         : undefined;
 
     const handleOAuthCode = async (code: string) => {
         const response = await HttpService.requestAsync('https://slack.channel.api.signalco.io/api/auth/access', 'post', { code, redirectUrl });
-        router.push('/app/entities/' + response.id);
+        router.push(`${KnownPages.Entities}/${response.id}`);
     };
 
     return (
