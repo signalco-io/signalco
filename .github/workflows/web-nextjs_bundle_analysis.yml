@@ -75,7 +75,7 @@ jobs:
           result-encoding: string
           script: |
             const fs = require('fs')
-            const comment = fs.readFileSync('.next/analyze/__bundle_analysis_comment.txt', 'utf8')
+            const comment = fs.readFileSync('apps/web/.next/analyze/__bundle_analysis_comment.txt', 'utf8')
             core.setOutput('body', comment)
 
       - name: Find Comment
