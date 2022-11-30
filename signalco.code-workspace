@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"name": "🏠 signalco-monorepo",
+			"path": "."
+		},
+		{
+			"name": "🌐 web",
+			"path": "apps/web"
+		},
+		{
+			"name": "📦 @signalco/tsconfig",
+			"path": "packages/tsconfig"
+		},
+		{
+			"name": "📦 @signalco/ui",
+			"path": "packages/ui"
+		},
+		{
+			"name": "📦 @signalco/ui-client",
+			"path": "packages/ui-client"
+		},
+		{
+			"name": "📦 @signalco/ui-icons",
+			"path": "packages/ui-icons"
+		}
+	],
+	"settings": {}
+}
