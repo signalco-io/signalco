@@ -2,11 +2,11 @@ import IWidgetConfigurationOption from './IWidgetConfigurationOption';
 import IContactPointer from '../contacts/IContactPointer';
 import IContact from '../contacts/IContact';
 
-export const DefaultWidth: (width: number) => IWidgetConfigurationOption<{ columns: number}> =
-    (width?: number) => ({ name: 'columns', label: 'Width', type: 'static', default: width });
+export const DefaultColumns: (columns: number) => IWidgetConfigurationOption<{ columns: number}> =
+    (width?: number) => ({ name: 'columns', label: 'Width', type: 'number', default: width });
 
-export const DefaultHeight: (height: number) => IWidgetConfigurationOption<{ rows: number}> =
-    (height?: number) => ({ name: 'rows', label: 'Height', type: 'static', default: height });
+export const DefaultRows: (rows: number) => IWidgetConfigurationOption<{ rows: number}> =
+    (height?: number) => ({ name: 'rows', label: 'Height', type: 'number', default: height });
 
 export const DefaultLabel: IWidgetConfigurationOption<{ label: string}> = { name: 'label', label: 'Label', type: 'string', optional: true };
 

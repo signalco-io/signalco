@@ -6,7 +6,7 @@ import { NoDataPlaceholder, Row , IconButton, ListItemContent, ListItemDecorator
 import { Stack } from '@mui/system';
 import { WidgetSharedProps } from '../Widget';
 import Checkbox from '../../shared/form/Checkbox';
-import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import LocalStorageService from '../../../src/services/LocalStorageService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
@@ -15,8 +15,8 @@ import useLocale, { useLocalePlaceholders } from '../../../src/hooks/useLocale';
 const stateOptions: IWidgetConfigurationOption<any>[] = [
     DefaultLabel,
     { label: 'Remove when done', name: 'removeOnDone', type: 'yesno', default: true, optional: true },
-    DefaultHeight(4),
-    DefaultWidth(4)
+    DefaultRows(4),
+    DefaultColumns(4)
 ];
 
 interface IChecklistItem {

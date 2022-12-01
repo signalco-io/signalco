@@ -1,14 +1,14 @@
 import React from 'react';
 import { Stack, Typography } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
-import { DefaultHeight, DefaultLabel, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 
 const stateOptions: IWidgetConfigurationOption<any>[] = [
     DefaultLabel,
-    DefaultWidth(4),
-    DefaultHeight(4),
+    DefaultColumns(4),
+    DefaultRows(4),
 ];
 
 function WidgetVacuum(props: WidgetSharedProps<any>) {

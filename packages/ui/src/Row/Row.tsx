@@ -2,7 +2,7 @@ import { ChildrenProps } from "../sharedTypes";
 
 export interface RowProps extends ChildrenProps {
     spacing?: number;
-    alignItems?: 'start' | 'center' | undefined;
+    alignItems?: 'start' | 'center' | 'stretch' | undefined;
     justifyContent?: 'start' | 'center' | 'space-between' | 'end' | undefined;
 }
 

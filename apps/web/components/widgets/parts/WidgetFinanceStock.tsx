@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { Loadable , NoDataPlaceholder , Typography } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import { WidgetSharedProps } from '../Widget';
-import { DefaultHeight, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import { DefaultRows, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useLoadAndError from '../../../src/hooks/useLoadAndError';
@@ -17,8 +17,8 @@ type ConfigProps = {
 const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     { label: 'Ticker', name: 'ticker', type: 'string' },
     { label: 'Polygon.io API key', name: 'polygonApiKey', type: 'string' },
-    DefaultHeight(2),
-    DefaultWidth(2)
+    DefaultRows(2),
+    DefaultColumns(2)
 ];
 
 async function loadPricePolygonApi(ticker: string | undefined, apiKey: string | undefined) {
