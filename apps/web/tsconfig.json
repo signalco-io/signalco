@@ -11,6 +11,7 @@
     },
     "include": [
         "src",
+        "app",
         "components",
         "pages",
         "next-env.d.ts",

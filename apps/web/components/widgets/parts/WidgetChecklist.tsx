@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import React, { useCallback, useState } from 'react';
-import { bindMenu, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import { Check, Delete, MoreHorizontal } from '@signalco/ui-icons';
-import { NoDataPlaceholder, Row , IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography , Box } from '@signalco/ui';
+import { NoDataPlaceholder, Row, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography, Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import { WidgetSharedProps } from '../Widget';
 import Checkbox from '../../shared/form/Checkbox';
@@ -27,22 +26,22 @@ interface IChecklistItem {
 
 function ChecklistItem(props: { item: IChecklistItem; onChange: (id: string, done: boolean) => void; onRemove: (id: string) => void; }) {
     const { item, onChange, onRemove } = props;
-    const popupState = usePopupState({ variant: 'popover', popupId: `checkboxItemMenu${item.id}` });
 
     return (
         <>
             <Row justifyContent="space-between">
                 <Checkbox checked={item.done ?? false} onChange={(e) => onChange(item.id, e.currentTarget.checked)} label={item.text} />
-                <IconButton {...bindTrigger(popupState)}><Box sx={{ opacity: 0.3 }}><MoreHorizontal /></Box></IconButton>
+                <Menu menuId={`widget-checklist-item-${item.id}-options`} renderTrigger={(props) => (
+                    <IconButton {...props}><Box sx={{ opacity: 0.3 }}><MoreHorizontal /></Box></IconButton>
+                )}>
+                    <MenuItem onClick={() => onRemove(item.id)}>
+                        <ListItemDecorator>
+                            <Delete />
+                        </ListItemDecorator>
+                        <ListItemContent>Remove</ListItemContent>
+                    </MenuItem>
+                </Menu>
             </Row>
-            <Menu {...bindMenu(popupState)}>
-                <MenuItem onClick={() => onRemove(item.id)}>
-                    <ListItemDecorator>
-                        <Delete />
-                    </ListItemDecorator>
-                    <ListItemContent>Remove</ListItemContent>
-                </MenuItem>
-            </Menu>
         </>
     );
 }

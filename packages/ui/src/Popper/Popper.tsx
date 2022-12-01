@@ -8,8 +8,7 @@ export interface PopperProps extends ChildrenProps {
 
 export default function Popper(props: PopperProps) {
     const { popupState, children } = props;
-
-    const { anchorReference, ...popoverProps } = bindPopover(popupState);
+    const { anchorReference, anchorPosition, ...popoverProps } = bindPopover(popupState);
 
     return (
         <ClickAwayListener onClickAway={(e) => {

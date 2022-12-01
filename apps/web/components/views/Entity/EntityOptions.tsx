@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { usePopupState } from 'material-ui-popup-state/hooks';
-import { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { MoreHorizontal } from '@signalco/ui-icons';
 import { Button, Divider, Menu, MenuItem } from '@signalco/ui';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
@@ -22,17 +20,14 @@ export default function EntityOptions(props: EntityOptionsProps) {
     const { id, canHideRaw, showRaw, showRawChanged } = props;
     const { t } = useLocale('App', 'Entities');
     const router = useRouter();
-    const popupState = usePopupState({ variant: 'popover', popupId: 'entityOptionsMenu' });
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
     const { data: entity } = useEntity(id);
 
     const handleDelete = () => {
-        popupState.close();
         setIsDeleteOpen(true);
     };
 
     const handleShowRaw = () => {
-        popupState.close();
         showRawChanged(!showRaw);
     };
 
@@ -51,10 +46,11 @@ export default function EntityOptions(props: EntityOptionsProps) {
 
     return (
         <>
-            <Button {...bindTrigger(popupState)}>
-                <MoreHorizontal />
-            </Button>
-            <Menu {...bindMenu(popupState)}>
+            <Menu menuId="entity-options" renderTrigger={(props) => (
+                <Button {...props}>
+                    <MoreHorizontal />
+                </Button>
+            )}>
                 {canHideRaw && <MenuItem onClick={handleShowRaw}>{showRaw ? 'Hide details' : 'Show details'}</MenuItem>}
                 <Divider />
                 <MenuItem onClick={handleDelete}>{t('DeleteButtonLabel')}</MenuItem>

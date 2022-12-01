@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import {
-  bindMenu,
-  bindTrigger,
-  usePopupState,
-} from 'material-ui-popup-state/hooks';
 import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
-import { Loadable, Avatar, Button, Divider, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, Sheet, Tooltip, Typography, Box } from '@signalco/ui';
+import { Loadable, Avatar, Button, Divider, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, Sheet, Tooltip, Typography, Box, MenuItemLink, ButtonProps } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import ApiBadge from './development/ApiBadge';
 import LocalStorageService from '../src/services/LocalStorageService';
@@ -52,57 +47,37 @@ function UserAvatar() {
   );
 }
 
+function UserProfileAvatarButton(props: ButtonProps) {
+  return (
+    <Button variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 2 }} {...props} >
+      <Stack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
+        <UserAvatar />
+        <ApiBadge />
+      </Stack>
+    </Button>
+  );
+}
+
 function UserProfileAvatar() {
   const { t } = useLocale('App', 'Account');
-  const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' });
-
-  const handleClose = () => {
-    popupState.close();
-  };
-
-  const logout = async () => {
-    handleClose();
-    LocalStorageService.setItem('token', undefined);
-    CurrentUserProvider.setToken(undefined);
-  }
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setIsLoading(false);
   }, []);
 
-  const { anchorReference, ...menuProps } = bindMenu(popupState);
-
   return (
     <Loadable isLoading={isLoading} placeholder="skeletonRect" width={30} height={30}>
-      <Button {...bindTrigger(popupState)} variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 2 }}>
-        <Stack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
-          <UserAvatar />
-          <ApiBadge />
-        </Stack>
-      </Button>
-      <Menu {...menuProps}>
-        <Link href={KnownPages.Settings} passHref legacyBehavior>
-          <MenuItem onClick={handleClose}>
-            <ListItemDecorator>
-              <Settings />
-            </ListItemDecorator>
-            <ListItemContent>
-              {t('Settings')}
-            </ListItemContent>
-          </MenuItem>
-        </Link>
+      <Menu
+        menuId="account-menu"
+        renderTrigger={UserProfileAvatarButton}>
+        <MenuItemLink href={KnownPages.Settings} startDecorator={<Settings />}>
+          {t('Settings')}
+        </MenuItemLink>
         <Divider />
-        <Link href={KnownPages.Root} passHref legacyBehavior>
-          <MenuItem onClick={logout}>
-            <ListItemDecorator>
-              <LogOut />
-            </ListItemDecorator>
-            <ListItemContent>
-              {t('Logout')}
-            </ListItemContent>
-          </MenuItem>
-        </Link>
+        <MenuItemLink href={KnownPages.Logout} startDecorator={<LogOut />}>
+          {t('Logout')}
+        </MenuItemLink>
       </Menu>
     </Loadable>
   );
@@ -186,7 +161,7 @@ function NavProfile() {
           bottom: 0,
           left: 0,
           right: 0,
-          background: 'var(--joy-palette-background-default)',
+          background: 'var(--joy-palette-background-body)',
           zIndex: 999
         }}>
           <Stack>
