@@ -105,7 +105,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                         <Button variant="plain">
                             <Row alignItems="stretch">
                                 <Stack sx={{ height: '100%' }} justifyContent="center" alignItems="center">
-                                    <Typography fontWeight={100} fontSize={rows > 2 ? 64 : 42} sx={{ lineHeight: rows > 1 ? 1 : 0.8 }}>{degreesWhole}</Typography>
+                                    <Typography fontWeight={100} fontSize={rows > 2 ? 64 : 42} lineHeight={1}>{degreesWhole}</Typography>
                                 </Stack>
                                 <Stack justifyContent="space-between">
                                     <Typography fontWeight={100} fontSize={rows > 2 ? 18 : 12} sx={{ opacity: 0.6 }}>&#176;C</Typography>
@@ -115,7 +115,14 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                         </Button>
                     </Link>
                 </Box>
-                {config?.label && <Typography fontWeight={rows > 1 ? 'light' : 'normal'} fontSize={rows > 1 ? '1rem' : '0.7rem'} sx={{ opacity: 0.5 }}>{config.label}</Typography>}
+                {config?.label && (
+                    <Typography
+                        fontWeight={rows > 1 ? 'light' : 'normal'}
+                        fontSize={rows > 1 ? '1rem' : '0.7rem'}
+                        sx={{ opacity: 0.5 }}>
+                        {config.label}
+                    </Typography>
+                )}
                 {rows > 2 && (
                     <Stack direction="row" spacing={2} sx={{ mt: rows > 2 ? 4 : 1 }}>
                         {config?.targetCooling &&
