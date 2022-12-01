@@ -6,7 +6,7 @@ import Grid from '@mui/system/Unstable_Grid';
 import { Stack } from '@mui/system';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';
-import { DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import { DefaultColumns, DefaultLabel } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
@@ -14,20 +14,31 @@ import useEntity from '../../../src/hooks/useEntity';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
-const stateOptions: IWidgetConfigurationOption<any>[] = [
+type ConfigProps = {
+    label: string,
+    targetUp: StateAction | undefined;
+    targetDown: StateAction | undefined;
+    stopValueSerialized: string | undefined;
+    stopAfter: string | undefined;
+    columns: number;
+}
+
+const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
+    DefaultLabel,
     { name: 'targetUp', label: 'Up button', type: 'deviceContactTargetWithValue' },
     { name: 'targetDown', label: 'Down button', type: 'deviceContactTargetWithValue' },
     { name: 'stopValueSerialized', label: 'Stop value', type: 'string' },
     { name: 'stopAfter', label: 'Stop after', type: 'number', dataUnit: 'seconds', optional: true },
-    DefaultWidth(4)
+    DefaultColumns(4)
 ];
 
-function WidgetShades(props: WidgetSharedProps<any>) {
+function WidgetShades(props: WidgetSharedProps<ConfigProps>) {
     const { config } = props;
     const upEntity = useEntity(config?.targetUp?.entityId);
     const downEntity = useEntity(config?.targetDown?.entityId);
 
     const label = props.config?.label ?? upEntity?.data?.alias ?? downEntity?.data?.alias ?? '';
+    const columns = props.config?.columns ?? 4;
 
     // TODO: Calc from source value
     const shadePerc = 0.3;
@@ -43,20 +54,25 @@ function WidgetShades(props: WidgetSharedProps<any>) {
         }
 
         const stopActions = (delay: number = 0) => {
-            return [
-                { ...config?.targetUp, valueSerialized: stopValueSerialized, delay },
-                { ...config?.targetDown, valueSerialized: stopValueSerialized, delay },
-            ];
+            if (config?.targetUp && config?.targetDown) {
+                return [
+                    { ...config?.targetUp, valueSerialized: stopValueSerialized, delay },
+                    { ...config?.targetDown, valueSerialized: stopValueSerialized, delay },
+                ];
+            }
+            return [];
         }
 
         const actions: StateAction[] = [];
-        const stopAfterDelay = config.stopAfter ? (Number.parseFloat(config.stopAfter) || 0) * 1000 : 0;
+        const stopAfterDelay = config?.stopAfter ? (Number.parseFloat(config.stopAfter) || 0) * 1000 : 0;
         switch (direction) {
             case 'up':
-                actions.push(config?.targetUp)
+                if (config?.targetUp)
+                    actions.push(config?.targetUp)
                 break;
             case 'down':
-                actions.push(config?.targetDown)
+                if (config?.targetDown)
+                    actions.push(config?.targetDown)
                 break;
             default:
             case 'stop':
@@ -65,7 +81,7 @@ function WidgetShades(props: WidgetSharedProps<any>) {
         }
 
         // Trigger stop if requested in fonfig
-        if (direction !== 'stop' && config.stopAfter) {
+        if (direction !== 'stop' && config?.stopAfter) {
             actions.push.apply(actions, stopActions(stopAfterDelay));
         }
 
@@ -74,18 +90,24 @@ function WidgetShades(props: WidgetSharedProps<any>) {
 
     return (
         <Grid container wrap="nowrap" sx={{ height: '100%' }}>
-            <Grid xs={6}>
-                <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent="space-between">
-                    <WindowVisual shadePerc={shadePerc} size={68} />
-                    <Typography fontWeight="500" noWrap>{label}</Typography>
-                </Stack>
-            </Grid>
-            <Divider orientation="vertical" />
+            {columns > 1 && (
+                <>
+                    <Grid xs={6}>
+                        <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent={columns > 2 ? 'space-between' : 'center'}>
+                            <WindowVisual shadePerc={shadePerc} size={68} />
+                            {columns > 2 && <Typography fontWeight="500" noWrap>{label}</Typography>}
+                        </Stack>
+                    </Grid>
+                    <Divider orientation="vertical" />
+                </>
+            )}
             <Grid xs={6} sx={{ flexGrow: 1, borderColor: 'divider', borderRadius: '0 8px 8px 0' }}>
                 <Stack sx={{ height: '100%' }} justifyContent="stretch">
-                    <Button variant="outlined" onClick={() => handleStateChangeRequest('up')} sx={{ borderRadius: '0 8px 0 0', flexGrow: 1, border: 0 }}><Up /></Button>
-                    <Button variant="outlined" onClick={() => handleStateChangeRequest('stop')} sx={{ borderRadius: 0, flexGrow: 1, border: 0 }}><Stop size={18} /></Button>
-                    <Button variant="outlined" onClick={() => handleStateChangeRequest('down')} sx={{ borderRadius: '0 0 8px 0', flexGrow: 1, border: 0 }}><Down /></Button>
+                    <Button variant="outlined" onClick={() => handleStateChangeRequest('up')}
+                        sx={{ borderRadius: '0 8px 0 0', flexGrow: 1, border: 0, width: 'calc(100% - 2px)' }}><Up /></Button>
+                    {stopValueSerialized && <Button variant="outlined" onClick={() => handleStateChangeRequest('stop')} sx={{ borderRadius: 0, flexGrow: 1, border: 0 }}><Stop size={18} /></Button>}
+                    <Button variant="outlined" onClick={() => handleStateChangeRequest('down')}
+                        sx={{ borderRadius: '0 0 8px 0', flexGrow: 1, border: 0, width: 'calc(100% - 2px)' }}><Down /></Button>
                 </Stack>
             </Grid>
         </Grid>

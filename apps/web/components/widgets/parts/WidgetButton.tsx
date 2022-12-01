@@ -1,7 +1,7 @@
-import { Icon , IconButton } from '@signalco/ui';
+import { Avatar, Button, Icon, IconButton, Row, Stack, Typography } from '@signalco/ui';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';
-import { DefaultHeight, DefaultTargetWithValueMultiple, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import { DefaultRows, DefaultTargetWithValueMultiple, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import IContact from '../../../src/contacts/IContact';
@@ -19,13 +19,15 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     { label: 'Icon', name: 'icon', type: 'string', optional: true },
     { label: 'Label', name: 'label', type: 'string', optional: true },
     DefaultTargetWithValueMultiple,
-    DefaultHeight(1),
-    DefaultWidth(1)
+    DefaultRows(1),
+    DefaultColumns(1)
 ];
 
 export default function WidgetButton(props: WidgetSharedProps<ConfigProps>) {
     const { config } = props;
 
+    const width = config?.columns ?? 1;
+    const label = config?.label;
     const icon = config?.icon ?? 'adjust';
 
     const handleActionRequest = () => {
@@ -41,8 +43,13 @@ export default function WidgetButton(props: WidgetSharedProps<ConfigProps>) {
     useWidgetOptions(stateOptions, props);
 
     return (
-        <IconButton sx={{ height: '100%', width: '100%', display: 'block', textAlign: 'center' }} variant="plain" onClick={handleActionRequest} >
-            <Icon sx={{ fontSize: '2.4em !important' }}>{icon}</Icon>
-        </IconButton>
+        <Button sx={{ height: '100%', width: 'calc(100% - 2px)', justifyContent: 'start' }} variant="plain" onClick={handleActionRequest} >
+            <Row spacing={1}>
+                <Avatar size="lg">
+                    <Icon sx={{ fontSize: '2em !important' }}>{icon}</Icon>
+                </Avatar>
+                {width > 1 && <Typography>{label}</Typography>}
+            </Row>
+        </Button>
     );
 }

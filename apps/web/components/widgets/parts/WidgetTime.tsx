@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Typography , Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import { WidgetSharedProps } from '../Widget';
-import { DefaultHeight, DefaultWidth } from '../../../src/widgets/WidgetConfigurationOptions';
+import { DefaultRows, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { now } from '../../../src/services/DateTimeProvider';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
@@ -10,8 +10,8 @@ import useInterval from '../../../src/hooks/useInterval';
 
 const stateOptions: IWidgetConfigurationOption<any>[] = [
     { label: 'Show seconds', name: 'showSeconds', type: 'yesno', default: false, optional: true },
-    DefaultWidth(2),
-    DefaultHeight(1)
+    DefaultColumns(2),
+    DefaultRows(1)
 ];
 
 function WidgetTime(props: WidgetSharedProps<any>) {

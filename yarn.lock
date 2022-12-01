@@ -2178,10 +2178,10 @@
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.6.tgz#250a7b16c3b91f672a24552ec64678eeb1d3a08d"
   integrity sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==
 
-"@types/uuid@8.3.4":
-  version "8.3.4"
-  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.4.tgz#bd86a43617df0594787d38b735f55c805becf1bc"
-  integrity sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==
+"@types/uuid@9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-9.0.0.tgz#53ef263e5239728b56096b0a869595135b7952d2"
+  integrity sha512-kr90f+ERiQtKWMz5rP32ltJ/BtULDI5RVO0uavn1HQUOwjx0R1h0rnDYNL0CepF1zL5bSY6FISAfd9tOdDhU5Q==
 
 "@types/yauzl@^2.9.1":
   version "2.10.0"
@@ -4122,10 +4122,10 @@ fs-constants@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs-constants/-/fs-constants-1.0.0.tgz#6be0de9be998ce16af8afc24497b9ee9b7ccd9ad"
   integrity sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==
 
-fs-extra@11.0.0:
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.0.0.tgz#5c50cf225ab1b16804cabd4249b7e58feb4bdbe7"
-  integrity sha512-4YxRvMi4P5C3WQTvdRfrv5UVqbISpqjORFQAW5QPiKAauaxNCwrEdIi6pG3tDFhKKpMen+enEhHIzB/tvIO+/w==
+fs-extra@11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.1.0.tgz#5784b102104433bb0e090f48bfc4a30742c357ed"
+  integrity sha512-0rcTq621PD5jM/e0a3EJoGC/1TC5ZBCERW82LQuwfGnCa1V8w7dpYH1yNu+SLb6E5dkeCBzKEyLGlFrnr+dUyw==
   dependencies:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
@@ -4972,10 +4972,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-lucide-react@0.102.0:
-  version "0.102.0"
-  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.102.0.tgz#ace76984ac13a761122bfe5689a09a28c48a8bf2"
-  integrity sha512-h4BOwyZ0cxqKw1Ftk6aQ/Gp7vEFaaq+AbhZWRbqGJCnBKXnAsf0+M8JRoRJxMqhOAxvl5dRje+eWKCGvO0enTg==
+lucide-react@0.103.0:
+  version "0.103.0"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.103.0.tgz#85b0fe03a4e16e5bc8d80c5f00241aa004fe06a2"
+  integrity sha512-TOgyZeFt+5E0YJhk1Spfk2kF7tast2wdFY8xLNrRRIRanzBB2VwR78PL9wZ0pOa1mABQTtt96n0Uz6KWzySZZw==
 
 magic-string@^0.25.0, magic-string@^0.25.7:
   version "0.25.9"
