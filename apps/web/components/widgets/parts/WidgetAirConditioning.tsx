@@ -78,9 +78,17 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
     } : undefined)?.data;
 
     const rows = config?.rows ?? 4;
-    const degrees = temperatureContact ? (typeof temperatureContact?.valueSerialized !== 'undefined' ? Number.parseFloat(temperatureContact?.valueSerialized) : undefined) : undefined;
-    const degreesWhole = typeof degrees !== 'undefined' ? Math.floor(degrees) : undefined;
-    const degreesDecimal = typeof degrees !== 'undefined' && typeof degreesWhole !== 'undefined' ? Math.floor((degrees - degreesWhole) * 10) : undefined;
+    const degrees = temperatureContact
+        ? (typeof temperatureContact?.valueSerialized !== 'undefined'
+            ? Number.parseFloat(temperatureContact?.valueSerialized)
+            : undefined)
+        : undefined;
+    const degreesWhole = typeof degrees !== 'undefined'
+        ? Math.floor(degrees)
+        : undefined;
+    const degreesDecimal = typeof degrees !== 'undefined' && typeof degreesWhole !== 'undefined'
+        ? Math.floor((degrees - degreesWhole) * 10)
+        : undefined;
 
     const heatingContact = useContact(heatingDevice && config?.targetHeating ? {
         channelName: config?.targetHeating?.channelName,
