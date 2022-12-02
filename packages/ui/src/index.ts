@@ -31,6 +31,9 @@ export * from './NavigatingButton';
 export { default as NoDataPlaceholder } from './NoDataPlaceholder';
 export * from './NoDataPlaceholder';
 
+export { default as Menu } from './Menu';
+export * from './Menu';
+
 export { default as Popper } from './Popper';
 export * from './Popper';
 
@@ -63,8 +66,6 @@ export {
     ListItemContent, 
     ListItemDecorator, 
     ListDivider,
-    Menu, 
-    MenuItem, 
     Modal, 
     ModalClose, 
     ModalDialog,
@@ -83,5 +84,5 @@ export {
 export { useColorScheme } from '@mui/joy/styles';
 
 // TODO: Remove as we should use direct joy types
-export type { ColorPaletteProp, SupportedColorScheme, TextFieldProps, Theme } from '@mui/joy';
+export type { ButtonProps, ColorPaletteProp, SupportedColorScheme, TextFieldProps, Theme } from '@mui/joy';
 export type { Breakpoint } from '@mui/system';

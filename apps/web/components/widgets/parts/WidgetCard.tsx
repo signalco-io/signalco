@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
-import {
-    bindMenu,
-    bindTrigger,
-    usePopupState,
-} from 'material-ui-popup-state/hooks';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
 import { Button, Card, CardOverflow, ListItemDecorator, Menu, MenuItem, Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
@@ -39,8 +34,6 @@ function WidgetCard(props: IWidgetCardProps) {
     const isLoading = typeof options === 'undefined';
     const needsConfiguration = typeof options === 'undefined' || options == null || !IsConfigurationValid(config, options);
 
-    const popupState = usePopupState({ variant: 'popover', popupId: 'accountMenu' });
-
     const [isConfiguring, setIsConfiguring] = useState<boolean>(false);
     const handleOnConfiguration = (newConfig: object) => {
         if (onConfigured) {
@@ -51,11 +44,9 @@ function WidgetCard(props: IWidgetCardProps) {
 
     const handleOnConfigureClicked = () => {
         setIsConfiguring(true);
-        popupState.close();
     };
 
     const handleOnRemove = () => {
-        popupState.close();
         if (onRemove) {
             onRemove();
         }
@@ -84,7 +75,26 @@ function WidgetCard(props: IWidgetCardProps) {
                     )}
                     {isEditMode && (
                         <Box sx={{ position: 'absolute', top: 0, right: 0 }}>
-                            <Button sx={{ minWidth: '42px' }}  {...bindTrigger(popupState)}><MoreHorizontal /></Button>
+                            <Menu menuId="widget-config" renderTrigger={(props) => (
+                                <Button sx={{ minWidth: '42px' }}  {...props}><MoreHorizontal /></Button>
+                            )}>
+                                {options && (
+                                    <MenuItem onClick={handleOnConfigureClicked}>
+                                        <ListItemDecorator>
+                                            <Settings />
+                                        </ListItemDecorator>
+                                        Configure
+                                    </MenuItem>
+                                )}
+                                {onRemove && (
+                                    <MenuItem onClick={handleOnRemove}>
+                                        <ListItemDecorator>
+                                            <Delete />
+                                        </ListItemDecorator>
+                                        Remove
+                                    </MenuItem>
+                                )}
+                            </Menu>
                         </Box>
                     )}
                 </CardOverflow>
@@ -94,24 +104,6 @@ function WidgetCard(props: IWidgetCardProps) {
                 options={options}
                 config={config}
                 isOpen={isConfiguring} />}
-            <Menu {...bindMenu(popupState)}>
-                {options && (
-                    <MenuItem onClick={handleOnConfigureClicked}>
-                        <ListItemDecorator>
-                            <Settings />
-                        </ListItemDecorator>
-                        Configure
-                    </MenuItem>
-                )}
-                {onRemove && (
-                    <MenuItem onClick={handleOnRemove}>
-                        <ListItemDecorator>
-                            <Delete />
-                        </ListItemDecorator>
-                        Remove
-                    </MenuItem>
-                )}
-            </Menu>
         </>
     );
 }

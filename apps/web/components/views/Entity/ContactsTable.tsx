@@ -1,8 +1,8 @@
 import React, { Fragment, useMemo, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
-import { bindMenu, bindTrigger } from 'material-ui-popup-state';
-import { Add, Code, MoreVertical, UI } from '@signalco/ui-icons';
-import { Loadable, Row , Button, Card, IconButton, List, ListDivider, ListItem, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Tooltip, Typography , Box } from '@signalco/ui';
+import { bindTrigger } from 'material-ui-popup-state';
+import { Add, Code, Edit, MoreVertical, UI } from '@signalco/ui-icons';
+import { Loadable, Row, Button, Card, IconButton, List, ListDivider, ListItem, ListItemContent, Menu, MenuItem, TextField, Tooltip, Typography, Box } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import ListTreeItem from '../../shared/list/ListTreeItem';
 import SelectItems from '../../shared/form/SelectItems';
@@ -130,7 +130,6 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
     const isLoading = false;
     const error = undefined;
 
-    const popupState = usePopupState({ variant: 'popover', popupId: 'contactsMenu' });
     const createContactDialogState = usePopupState({ variant: 'dialog', popupId: 'contactCreateDialog' });
     const editContactValueDialogState = usePopupState({ variant: 'dialog', popupId: 'contactCreateDialog' });
     const [channelName, setChannelName] = useState('');
@@ -164,9 +163,18 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
             <Card>
                 <Row justifyContent="space-between">
                     <Typography>{t('Contacts')}</Typography>
-                    <IconButton size="sm" {...bindTrigger(popupState)}>
-                        <MoreVertical />
-                    </IconButton>
+                    <Menu menuId="contacts-options" renderTrigger={(props) => (
+                        <IconButton size="sm" {...props}>
+                            <MoreVertical />
+                        </IconButton>
+                    )}>
+                        <MenuItem {...bindTrigger(createContactDialogState)} startDecorator={<Add />}>
+                            {t('CreateContact')}
+                        </MenuItem>
+                        <MenuItem {...bindTrigger(editContactValueDialogState)} startDecorator={<Edit />}>
+                            {t('EditContact')}
+                        </MenuItem>
+                    </Menu>
                 </Row>
                 <Loadable isLoading={isLoading} error={error}>
                     <List>
@@ -196,20 +204,6 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                     </List>
                 </Loadable>
             </Card>
-            <Menu {...bindMenu(popupState)}>
-                <MenuItem {...bindTrigger(createContactDialogState)}>
-                    <ListItemDecorator>
-                        <Add />
-                    </ListItemDecorator>
-                    {t('CreateContact')}
-                </MenuItem>
-                <MenuItem {...bindTrigger(editContactValueDialogState)}>
-                    <ListItemDecorator>
-                        <Add />
-                    </ListItemDecorator>
-                    {t('EditContact')}
-                </MenuItem>
-            </Menu>
             <ConfigurationDialog
                 isOpen={createContactDialogState.isOpen}
                 header="Create contact"
