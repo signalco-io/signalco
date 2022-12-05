@@ -27,5 +27,8 @@
         "clean": {
             "cache": false
         }
+    },
+    "remoteCache": {
+        "signature": true
     }
 }
