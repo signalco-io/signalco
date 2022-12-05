@@ -2243,10 +2243,10 @@
     "@typescript-eslint/types" "5.43.0"
     eslint-visitor-keys "^3.3.0"
 
-"@vvo/tzdb@6.77.0":
-  version "6.77.0"
-  resolved "https://registry.yarnpkg.com/@vvo/tzdb/-/tzdb-6.77.0.tgz#486c5f1cffbd3682ddedb91cd1dc1f6430431b06"
-  integrity sha512-t7aN3GAznzt8fQ5enJiM3C7HKPEDBoqKExp2W7nYu2AgS0J9FfMk6rwWhL2jjTe0+27REmO9C+TL3XM2evileQ==
+"@vvo/tzdb@6.78.0":
+  version "6.78.0"
+  resolved "https://registry.yarnpkg.com/@vvo/tzdb/-/tzdb-6.78.0.tgz#67ed4a6cf8da510dcc975c24e6c3a3122a3eb070"
+  integrity sha512-cphuafLj6X3dIkJqbcXQMpCtMjllHU3lkJhBKu3YuBXoezzR3IendDgc85b+LV2AA1slkEX5yTrF8Hxh8UX6KQ==
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
