@@ -11,12 +11,14 @@ importers:
   apps/web:
     specifiers:
       '@auth0/auth0-react': 1.12.0
+      '@auth0/auth0-spa-js': ^2.0.0
       '@axe-core/playwright': ^4.5.2
       '@babel/core': 7.20.5
       '@date-io/date-fns': 2.16.0
       '@dnd-kit/core': 6.0.5
       '@dnd-kit/modifiers': 6.0.0
       '@dnd-kit/sortable': 7.0.1
+      '@dnd-kit/utilities': ^3.2.0
       '@emotion/cache': 11.10.5
       '@emotion/react': 11.10.5
       '@emotion/server': 11.10.0
@@ -97,10 +99,12 @@ importers:
       webpack: 5.75.0
     dependencies:
       '@auth0/auth0-react': 1.12.0_biqbaboplfbrettd7655fr4n2y
+      '@auth0/auth0-spa-js': 2.0.0
       '@date-io/date-fns': 2.16.0_date-fns@2.29.3
       '@dnd-kit/core': 6.0.5_biqbaboplfbrettd7655fr4n2y
       '@dnd-kit/modifiers': 6.0.0_vvd3dzag27tc7rclyb2whqqnpe
       '@dnd-kit/sortable': 7.0.1_vvd3dzag27tc7rclyb2whqqnpe
+      '@dnd-kit/utilities': 3.2.0_react@18.2.0
       '@emotion/cache': 11.10.5
       '@emotion/react': 11.10.5_xl5my4wapvq2ctl7qwehtbgorq
       '@emotion/server': 11.10.0
@@ -312,6 +316,10 @@ packages:
       fast-text-encoding: 1.0.6
       promise-polyfill: 8.2.3
       unfetch: 4.2.0
+    dev: false
+
+  /@auth0/auth0-spa-js/2.0.0:
+    resolution: {integrity: sha512-qHArgvA+ltI37g1vo3q7XtWxhMNAyL0LrnwCKCHQ1uzMWnxhdyxi2w9/BXfp1c+2L1Zc+DDh3XhpbYVXNhvadg==}
     dev: false
 
   /@axe-core/playwright/4.5.2_playwright@1.28.0:
