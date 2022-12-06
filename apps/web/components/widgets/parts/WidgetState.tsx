@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
-import { Button, Typography , Box } from '@signalco/ui';
+import { Button, Typography, Box, CircularProgress } from '@signalco/ui';
 import { Stack } from '@mui/system';
-import CircularProgress from '@mui/joy/CircularProgress';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import { showNotification } from '../../../src/notifications/PageNotificationService';

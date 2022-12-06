@@ -76,13 +76,15 @@ export {
     selectClasses,
     Slider,
     Sheet, 
+    Switch,
     Tooltip, 
     Typography, 
     TextField
 } from "@mui/joy";
 
-export { useColorScheme, CssVarsProvider, CssBaseline } from '@mui/joy';
+export { useColorScheme, CssVarsProvider, CssBaseline, getInitColorSchemeScript, extendTheme } from '@mui/joy';
 
 // TODO: Remove as we should use direct joy types
+export type { DefaultColorScheme } from '@mui/joy/styles/types';
 export type { ButtonProps, ColorPaletteProp, SupportedColorScheme, TextFieldProps, Theme } from '@mui/joy';
 export type { Breakpoint } from '@mui/system';

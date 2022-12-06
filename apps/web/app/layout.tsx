@@ -1,8 +1,7 @@
 'use client';
 
 import '../styles/global.scss';
-import { getInitColorSchemeScript as joiGetInitColorSchemeScript, CssVarsProvider } from '@mui/joy/styles';
-import CssBaseline from '@mui/joy/CssBaseline';
+import { CssBaseline, CssVarsProvider, joiGetInitColorSchemeScript } from '@signalco/ui';
 import appTheme from '../src/theme';
 
 export default function RootLayout({
