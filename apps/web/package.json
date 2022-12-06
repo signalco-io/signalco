@@ -9,7 +9,7 @@
     "scripts": {
         "dev": "next",
         "build": "next build",
-        "build:analyze": "cross-env ANALYZE=true yarn build",
+        "build:analyze": "cross-env ANALYZE=true pnpm build",
         "postinstall": "node ./tools/post-install.js",
         "postbuild": "next-sitemap --config next-sitemap.config.js",
         "start": "next start",

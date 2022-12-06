@@ -20,16 +20,16 @@ jobs:
       - uses: actions/setup-node@v3
         with:
             node-version: "18.x"
-            cache: "yarn"
+            cache: "pnpm"
       - uses: actions/cache@v3
         with:
             path: "**/node_modules"
-            key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+            key: ${{ runner.os }}-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build next.js app
-        run: yarn build
+        run: pnpm build
 
       # Here's the first place where next-bundle-analysis' own script is used
       # This step pulls the raw bundle stats for the current bundle
