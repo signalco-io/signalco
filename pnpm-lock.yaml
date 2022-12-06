@@ -32,9 +32,9 @@ importers:
       '@next/env': 13.0.6
       '@playwright/test': ^1.28.0
       '@signalco/tsconfig': '*'
-      '@signalco/ui': '*'
-      '@signalco/ui-client': '*'
-      '@signalco/ui-icons': '*'
+      '@signalco/ui': workspace:*
+      '@signalco/ui-client': workspace:*
+      '@signalco/ui-icons': workspace:*
       '@tanstack/react-query': 4.19.1
       '@tanstack/react-query-devtools': 4.19.1
       '@types/color': 3.0.3
@@ -193,7 +193,7 @@ importers:
       '@mui/joy': 5.0.0-alpha.56
       '@mui/system': 5.10.16
       '@signalco/tsconfig': '*'
-      '@signalco/ui-icons': '*'
+      '@signalco/ui-icons': workspace:*
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
       material-ui-popup-state: 4.1.0
@@ -224,8 +224,8 @@ importers:
       '@mui/joy': 5.0.0-alpha.56
       '@mui/system': 5.10.16
       '@signalco/tsconfig': '*'
-      '@signalco/ui': '*'
-      '@signalco/ui-icons': '*'
+      '@signalco/ui': workspace:*
+      '@signalco/ui-icons': workspace:*
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
       material-ui-popup-state: 4.1.0
