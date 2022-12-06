@@ -24,7 +24,13 @@ Requirements:
 
 - [pnpm](https://pnpm.io/installation)
 
-First, run the development server:
+Enable corepack:
+
+```bash
+corepack enable
+```
+
+Run the development server:
 
 ```bash
 pnpm install
