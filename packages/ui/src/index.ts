@@ -54,6 +54,7 @@ export {
     Card,
     CardOverflow,
     Checkbox as JoyCheckbox, // TODO: Remove
+    CircularProgress,
     FormControl,
     FormLabel,
     Grid,
