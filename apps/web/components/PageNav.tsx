@@ -41,11 +41,11 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
             <Container maxWidth={fullWidth ? false : 'lg'}>
                 <header>
                     <Row justifyContent="space-between">
-                        <Box>
+                        <div>
                             <Link href="/" aria-label="signalco">
                                 <SignalcoLogotype height={42} />
                             </Link>
-                        </Box>
+                        </div>
                         <Row spacing={1}>
                             <Suspense>
                                 <NavMenu />

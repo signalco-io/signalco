@@ -90,9 +90,9 @@ export default function FilterList(props: FilterListProps) {
                     ))}
                 </Stack>
                 {(!isShowMore && shouldTruncate) && (
-                    <Box>
+                    <div>
                         <Button startDecorator={<ExpandDown />} onClick={handleToggleShowMore}>Show all</Button>
-                    </Box>
+                    </div>
                 )}
             </Box>
         </Stack>

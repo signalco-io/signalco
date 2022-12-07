@@ -1,10 +1,18 @@
+import React, { forwardRef } from 'react';
 import { clsx } from 'clsx';
 import { SupportedColorScheme } from '@signalco/ui';
 import styles from './SignalcoLogotype.module.scss';
 import ApiBadge from '../development/ApiBadge';
 import appSettingsProvider from '../../src/services/AppSettingsProvider';
 
-export default function SignalcoLogotype({ width, height, theme, hideBadge }: { width?: number, height?: number, theme?: SupportedColorScheme, hideBadge?: boolean }) {
+interface SignalcoLogotypeProps {
+    width?: number;
+    height?: number;
+    theme?: SupportedColorScheme;
+    hideBadge?: boolean;
+}
+
+function SignalcoLogotype({ width, height, theme, hideBadge }: SignalcoLogotypeProps, ref: React.Ref<HTMLDivElement>) {
     if (typeof width === 'undefined' &&
         typeof height === 'undefined') {
         throw new Error('Either height or width must be provided to SignalcoLogo.');
@@ -14,7 +22,7 @@ export default function SignalcoLogotype({ width, height, theme, hideBadge }: { 
     const badgeContainerStyle: any = { '--fixedHeight': `${fixedHeight}px` };
 
     return (
-        <div className={clsx(styles.root, hideBadge && styles.hideBadge)}>
+        <div className={clsx(styles.root, hideBadge && styles.hideBadge)} ref={ref}>
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                 width={fixedWidth} height={fixedHeight} viewBox="0 0 2810.000000 666.000000"
                 preserveAspectRatio="xMidYMid meet">
@@ -43,3 +51,5 @@ export default function SignalcoLogotype({ width, height, theme, hideBadge }: { 
         </div>
     )
 }
+
+export default forwardRef<HTMLDivElement, SignalcoLogotypeProps>(SignalcoLogotype);
