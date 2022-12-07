@@ -36,7 +36,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
         <Suspense>
             <Row>
                 {(dashboards?.length ?? 0) > 0 && (
-                    <Box>
+                    <div>
                         <Button
                             variant="plain"
                             size="lg"
@@ -48,7 +48,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                             endDecorator={<Select />} {...bindTrigger(popupState)}>
                             {currentName}
                         </Button>
-                    </Box>
+                    </div>
                 )}
                 {(favoriteDashboards?.length ?? 0) > 0 && (
                     <Row>

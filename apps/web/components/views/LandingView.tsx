@@ -6,9 +6,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Github, Navigate } from '@signalco/ui-icons';
-import { Container, ImageLink, Button, Divider, Typography } from '@signalco/ui';
-import Grid from '@mui/system/Unstable_Grid';
-import { Box, Stack, SxProps, Theme } from '@mui/system';
+import { Container, ImageLink, Button, Divider, Typography, Grid, Box } from '@signalco/ui';
+import { Stack, SxProps, Theme } from '@mui/system';
 import DeveloperOnly from '../shared/DeveloperOnly';
 import GentleSlide from '../shared/animations/GentleSlide';
 import Fade from '../shared/animations/Fade';
@@ -25,13 +24,13 @@ function FeatureDescription(props: { header: string, content: string | React.Rea
     <Stack spacing={2}>
       <Typography level="h5" component="h3">{props.header}</Typography>
       <Typography textColor="neutral.400">{props.content}</Typography>
-      <Box>
+      <div>
         {props.link && (
           <Link passHref href={props.link} legacyBehavior>
             <Button variant="outlined">{props.linkText ?? 'Read more'}</Button>
           </Link>
         )}
-      </Box>
+      </div>
     </Stack>
   );
 }
@@ -62,7 +61,7 @@ function StepContent(props: {
             </GentleSlide>
           )}
         </Stack>
-        <Box>
+        <div>
           <Grid container spacing={8} alignItems="center">
             {props.image && (
               <Grid xs={12} md={6} sx={{ position: 'relative', height: props.imageContainerHeight }}>
@@ -92,7 +91,7 @@ function StepContent(props: {
               </Grid>
             )}
           </Grid>
-        </Box>
+        </div>
       </Stack>
     </SectionCenter>
   );

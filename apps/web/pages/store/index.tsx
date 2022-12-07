@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
-import { Chip , Card, Typography } from '@signalco/ui';
-import Grid from '@mui/system/Unstable_Grid';
+import { Chip, Card, Typography, Grid, Row } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import contentData from './content.json';
 import useLocale from '../../src/hooks/useLocale';
@@ -71,10 +70,10 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
                     )}
                 <Stack spacing={1}>
                     <Typography fontWeight="bold" sx={{ opacity: 0.9 }}>{name}</Typography>
-                    <Stack direction="row" spacing={2} justifyContent="space-between" alignItems="center">
+                    <Row spacing={2} justifyContent="space-between" alignItems="center">
                         <Typography fontSize="1.2rem" fontWeight="bold">€&nbsp;{price ?? '-'}</Typography>
                         <StoreStockStatusBadge status={stockStatus} />
-                    </Stack>
+                    </Row>
                     {features && (
                         <Grid container>
                             {features.map(f => <Grid key={f}><Chip size="sm">{f}</Chip></Grid>)}
