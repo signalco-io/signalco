@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Play } from '@signalco/ui-icons';
-import { Row , IconButton, Slider, Typography } from '@signalco/ui';
-import Switch from '@mui/joy/Switch';
+import { Row, IconButton, Slider, Typography, Switch } from '@signalco/ui';
 import SelectItems from '../form/SelectItems';
 import throttle from '../../../src/helpers/Throttle';
 import blendColors from '../../../src/helpers/BlendColors';

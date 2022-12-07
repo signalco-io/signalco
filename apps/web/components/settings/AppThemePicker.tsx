@@ -1,7 +1,6 @@
 import { Suspense, useState } from 'react';
 import { Custom, SunMoon, Timer } from '@signalco/ui-icons';
-import { Stack, Row , TextField, SupportedColorScheme, Typography , Box , useColorScheme } from '@signalco/ui';
-import { DefaultColorScheme } from '@mui/joy/styles/types';
+import { Stack, Row, TextField, SupportedColorScheme, Typography, Box, useColorScheme, DefaultColorScheme } from '@signalco/ui';
 import Picker from '../shared/form/Picker';
 import { AppThemeMode } from '../../src/theme';
 import { fromDuration, now, todayAt, toDuration } from '../../src/services/DateTimeProvider';
