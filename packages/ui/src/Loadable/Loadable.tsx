@@ -1,6 +1,4 @@
 import { useMemo } from 'react';
-import { Box, SxProps } from '@mui/system';
-import { LinearProgress } from '@mui/joy';
 import { Alert, CircularProgress } from '@mui/joy';
 import { ChildrenProps } from '../sharedTypes';
 
@@ -15,13 +13,12 @@ export interface LoadableSkeletonProps {
 }
 
 export interface LoadableProps extends LoadableLoadingErrorProps, LoadableSkeletonProps, ChildrenProps {
-    placeholder?: 'skeletonText' | 'skeletonRect' | 'linear' | 'circular';
+    placeholder?: 'skeletonText' | 'skeletonRect' | 'circular';
     contentVisible?: boolean;
-    sx?: SxProps | undefined;
 }
 
 export default function Loadable(props: LoadableProps) {
-    const { isLoading, placeholder, error, children, contentVisible, sx } = props;
+    const { isLoading, placeholder, error, children, contentVisible } = props;
 
     const indicator = useMemo(() => {
         switch (placeholder) {
@@ -29,11 +26,9 @@ export default function Loadable(props: LoadableProps) {
             // return <Skeleton variant="text" width={width ?? 120} />;
             case 'skeletonRect':
             // return <Skeleton variant="rectangular" width={width ?? 120} height={height ?? 32} />;
-            case 'linear':
-                return <LinearProgress />
             case 'circular':
             default:
-                return <Box textAlign="center"><CircularProgress /></Box>
+                return <div style={{ textAlign: 'center' }}><CircularProgress /></div>
         }
     }, [placeholder]);
 
@@ -56,9 +51,9 @@ export default function Loadable(props: LoadableProps) {
     return (
         <>
             {(contentVisible || isLoading) && (
-                <Box visibility={isLoading ? 'visible' : 'hidden'} sx={sx}>
+                <div style={{ visibility: isLoading ? 'visible' : 'hidden' }}>
                     {indicator}
-                </Box>
+                </div>
             )}
             {(contentVisible || !isLoading) && children}
         </>
