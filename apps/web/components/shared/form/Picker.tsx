@@ -45,7 +45,7 @@ export default function Picker<TValue>(props: PickerProps<TValue>) {
                         px: 2,
                         alignItems: 'center',
                     }}
-                    componentsProps={{
+                    slotProps={{
                         action: ({ checked }) => ({
                             sx: {
                                 ...(checked && {
