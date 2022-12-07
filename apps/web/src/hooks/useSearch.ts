@@ -4,7 +4,7 @@ export const filterFuncObjectStringProps = <TItem extends object>(i: TItem, kw: 
 
 const defaultSearchFunc = <TItem>(i: TItem, kw: string) => typeof i === 'string' && i.toString().toLocaleLowerCase() === kw;
 
-type UseSearchReturn<TItem> = [TItem[], boolean, string, (text: string) => void];
+type UseSearchReturn<TItem> = [TItem[], string, (text: string) => void];
 
 const useSearch = <TItem>(items?: TItem[], filterFunc?: (item: TItem, keyword: string) => boolean, minItems?: number): UseSearchReturn<TItem> => {
     const [searchText, setSearchText] = useState<string>('');
@@ -13,13 +13,11 @@ const useSearch = <TItem>(items?: TItem[], filterFunc?: (item: TItem, keyword: s
         setSearchText(text);
     };
 
-    const showSearch = useMemo(() => (items?.length ?? 0) > (minItems || 10), [items, minItems]);
-
-    const filteredItems = useMemo(() => showSearch && searchText
+    const filteredItems = useMemo(() => searchText
         ? (items || []).filter(i => filterFunc ? filterFunc(i, searchText.toLowerCase()) : defaultSearchFunc(i, searchText.toLocaleLowerCase()))
-        : items || [], [filterFunc, items, searchText, showSearch]);
+        : items || [], [filterFunc, items, searchText]);
 
-    return [filteredItems, showSearch, searchText, handleSearchTextChange];
+    return [filteredItems, searchText, handleSearchTextChange];
 };
 
 export default useSearch;

@@ -71,14 +71,13 @@ const availableWidgets: { type: widgetType | widgetType[], name: string, descrip
 function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) {
     const [
         filteredAvailableWidgetsItems,
-        showAvailableWidgetsSearch,
         searchAvailableWidgetsText,
         handleSearchAvailableWidgetsTextChange] =
         useSearch(availableWidgets, filterFuncObjectStringProps, 3);
 
     return (
         <Stack spacing={4}>
-            {showAvailableWidgetsSearch && <TextField placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />}
+            <TextField placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />
             <Box sx={{ overflowY: 'auto', overflowX: 'hidden' }}>
                 <Grid container spacing={2} justifyContent="center">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (

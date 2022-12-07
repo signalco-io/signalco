@@ -59,7 +59,7 @@ function Entities() {
     const entityItems = entities.data;
     const { t } = useLocale('App', 'Entities');
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
-    const [filteredItems, showSearch, searchText, handleSearchTextChange] = useSearch(entityItems, filterFuncObjectStringProps);
+    const [filteredItems, searchText, handleSearchTextChange] = useSearch(entityItems, filterFuncObjectStringProps);
 
     const [selectedType, setSelectedType] = useState<string | undefined>('1');
     const typedItems = useMemo(() => filteredItems.filter(e => {
@@ -110,14 +110,12 @@ function Entities() {
                         })}
                         heading />
                     <Stack direction="row" alignItems="center" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="end">
-                        {showSearch && (
-                            <TextField
-                                placeholder={t('SearchLabel')}
-                                value={searchText}
-                                size="lg"
-                                onChange={(e) => handleSearchTextChange(e.target.value)}
-                                sx={{ width: { xs: '100%', sm: 'initial' } }} />
-                        )}
+                        <TextField
+                            placeholder={t('SearchLabel')}
+                            value={searchText}
+                            size="lg"
+                            onChange={(e) => handleSearchTextChange(e.target.value)}
+                            sx={{ width: { xs: '100%', sm: 'initial' } }} />
                         <Picker value={entityListViewType} onChange={(_, value) => setEntityListViewType(value)} options={[
                             { value: 'table', label: <LayoutList /> },
                             { value: 'cards', label: <LayoutGrid /> }
