@@ -59,7 +59,7 @@ function Entities() {
     const entityItems = entities.data;
     const { t } = useLocale('App', 'Entities');
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
-    const [filteredItems, _, searchText, handleSearchTextChange] = useSearch(entityItems, filterFuncObjectStringProps);
+    const [filteredItems, searchText, handleSearchTextChange] = useSearch(entityItems, filterFuncObjectStringProps);
 
     const [selectedType, setSelectedType] = useState<string | undefined>('1');
     const typedItems = useMemo(() => filteredItems.filter(e => {
