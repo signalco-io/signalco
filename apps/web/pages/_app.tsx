@@ -3,11 +3,10 @@ import React, { FunctionComponent, useMemo } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { CssVarsProvider } from '@mui/joy/styles';
-import CssBaseline from '@mui/joy/CssBaseline';
 import appTheme from '../src/theme';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/global.scss';
+import { CssBaseline, CssVarsProvider } from '@signalco/ui';
 import { ChildrenProps } from '../src/sharedTypes';
 import useAppTheme from '../src/hooks/useAppTheme';
 

@@ -40,7 +40,7 @@ function SelectItems(props: ISelectItemsProps) {
                 onChange={handleOnChange}
                 variant={heading ? 'plain' : 'outlined'}
                 size={heading ? 'lg' : undefined}
-                componentsProps={{
+                slotProps={{
                     button: {
                         id: `${id}-button`,
                         // TODO: Material UI set aria-labelledby correctly & automatically

@@ -1,8 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Down, Stop, Up } from '@signalco/ui-icons';
-import { Button, Divider, Typography } from '@signalco/ui';
-import Grid from '@mui/system/Unstable_Grid';
+import { Button, Divider, Grid, Typography } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';

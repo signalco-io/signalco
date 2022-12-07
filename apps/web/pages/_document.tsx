@@ -2,7 +2,7 @@
 /* eslint-disable react/display-name */
 import * as React from 'react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
-import { getInitColorSchemeScript as joiGetInitColorSchemeScript } from '@mui/joy/styles';
+import { getInitColorSchemeScript } from '@signalco/ui';
 import createEmotionServer from '@emotion/server/create-instance';
 import createEmotionCache from '../src/createEmotionCache';
 
@@ -40,7 +40,7 @@ export default class MyDocument extends Document {
           {(this.props as any).emotionStyleTags}
         </Head>
         <body>
-          {joiGetInitColorSchemeScript()}
+          {getInitColorSchemeScript()}
           <Main />
           <NextScript />
         </body>

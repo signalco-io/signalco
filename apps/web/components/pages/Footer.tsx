@@ -3,7 +3,7 @@
 import React, { ReactNode } from 'react';
 import NextLink from 'next/link';
 import { Github, Twitter } from '@signalco/ui-icons';
-import { Container , Grid, IconButton, Typography, JoyLink , Box } from '@signalco/ui';
+import { Container, Grid, IconButton, Typography, JoyLink, Box, Link } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import SignalcoLogotype from '../icons/SignalcoLogotype';
 import { now } from '../../src/services/DateTimeProvider';
@@ -52,16 +52,6 @@ const footerLinks: FooterSectionType[] = [
         ]
     }
 ];
-
-function Link(props: { href: string, children: ReactNode }) {
-    return (
-        <NextLink href={props.href} passHref legacyBehavior>
-            <JoyLink>
-                {props.children}
-            </JoyLink>
-        </NextLink>
-    );
-}
 
 export default function Footer() {
     return (

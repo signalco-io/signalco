@@ -1,4 +1,4 @@
-import { extendTheme } from '@mui/joy/styles';
+import { extendTheme } from '@signalco/ui';
 
 export type AppThemeMode = 'system' | 'manual' | 'sunriseSunset' | 'timeRange';
 

@@ -1,11 +1,14 @@
 import NextLink from 'next/link';
-import { Link as JoyLink, LinkProps } from '@mui/joy';
+import { ChildrenProps } from '../sharedTypes';
 
-export default function Link(props: LinkProps & { href: string }) {
-    const { href, ...rest } = props;
+export interface LinkProps extends ChildrenProps {
+    href: string;
+}
+
+export default function Link({ children, href }: LinkProps) {
     return (
         <NextLink href={href} passHref prefetch={false} legacyBehavior>
-            <JoyLink {...rest} />
+            {children}
         </NextLink>
     );
 }

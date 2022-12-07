@@ -20,11 +20,21 @@ Or Clone and build locally
 
 ### Local development
 
-First, run the development server:
+Requirements:
+
+- [pnpm](https://pnpm.io/installation)
+
+Enable corepack:
 
 ```bash
-yarn install
-yarn dev
+corepack enable
+```
+
+Run the development server:
+
+```bash
+pnpm install
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

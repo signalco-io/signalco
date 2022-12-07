@@ -54,6 +54,7 @@ export {
     Card,
     CardOverflow,
     Checkbox as JoyCheckbox, // TODO: Remove
+    CircularProgress,
     FormControl,
     FormLabel,
     Grid,
@@ -76,13 +77,15 @@ export {
     selectClasses,
     Slider,
     Sheet, 
+    Switch,
     Tooltip, 
     Typography, 
     TextField
 } from "@mui/joy";
 
-export { useColorScheme } from '@mui/joy/styles';
+export { useColorScheme, CssVarsProvider, CssBaseline, getInitColorSchemeScript, extendTheme } from '@mui/joy';
 
 // TODO: Remove as we should use direct joy types
+export type { DefaultColorScheme } from '@mui/joy/styles/types';
 export type { ButtonProps, ColorPaletteProp, SupportedColorScheme, TextFieldProps, Theme } from '@mui/joy';
 export type { Breakpoint } from '@mui/system';
