@@ -57,8 +57,14 @@ const availableWidgets: { type: widgetType | widgetType[], name: string, descrip
     {
         type: 'finance-stock',
         name: 'Stock',
-        description: 'See sotck prices at a glance.',
+        description: 'See stock prices at a glance.',
         preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Finance Stock.png',
+    },
+    {
+        type: 'graph',
+        name: 'Graph',
+        description: 'Visaulize your data with graph.',
+        preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Graph.png',
     }
 ];
 
