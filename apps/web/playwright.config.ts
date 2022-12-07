@@ -3,7 +3,7 @@ import type { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from '@playwright/test';
 
 const PORT = process.env.PORT || 3000
-const baseURL = `http://localhost:${PORT}`
+const baseURL = `http://127.0.0.1:${PORT}`
 
 const config: PlaywrightTestConfig = {
     retries: 2,
