@@ -35,11 +35,11 @@ export default class MyDocument extends Document {
             color="#000000"
           ></link>
           <meta name="msapplication-TileColor" content="#000000"></meta>
-
           <meta name="emotion-insertion-point" content="" />
           {(this.props as any).emotionStyleTags}
         </Head>
         <body>
+          <noscript>You need to enable JavaScript to run this app.</noscript>
           {getInitColorSchemeScript()}
           <Main />
           <NextScript />
