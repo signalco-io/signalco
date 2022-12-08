@@ -71,8 +71,6 @@ export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>
     const diffPerc = Math.round(((diff / closePrice) * 100 + Number.EPSILON) * 100) / 100;
     const diffPercDecimals = diffPerc.toFixed(4).replace(/0{0,2}$/, '');
 
-    console.log(price)
-
     return (
         <Stack sx={{ height: '100%' }} alignItems={price.isLoading ? 'center' : 'stretch'} direction="row" justifyContent={price.isLoading ? 'center' : 'stretch'}>
             <Loadable isLoading={price.isLoading} error={price.error || price.item?.errorMessage}>
