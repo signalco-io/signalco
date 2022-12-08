@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Close, Save, Edit } from '@signalco/ui-icons';
-import { Box, IconButton, Input, Theme, Typography } from '@signalco/ui';
-import { Stack, SystemStyleObject } from '@mui/system';
+import { type SystemStyleObject, Box, IconButton, Input, type Theme, Typography, Row } from '@signalco/ui';
 
 interface IEditableInputProps {
     text: string,
@@ -44,7 +43,7 @@ function EditableInput(props: IEditableInputProps) {
 
     if (isEditing) {
         return (
-            <Stack direction="row" spacing={1}>
+            <Row spacing={1}>
                 <Input
                     sx={{
                         '& input': {
@@ -56,7 +55,7 @@ function EditableInput(props: IEditableInputProps) {
                     onChange={(e) => setEditingText(e.target.value)}
                     onKeyDown={handleKeyDown}
                 />
-                <Stack spacing={1} direction="row">
+                <Row spacing={1}>
                     <IconButton
                         aria-label="Confirm edit"
                         onClick={handleConfirm}>
@@ -67,8 +66,8 @@ function EditableInput(props: IEditableInputProps) {
                         onClick={handleCancel}>
                         <Close />
                     </IconButton>
-                </Stack>
-            </Stack>
+                </Row>
+            </Row>
         );
     } else {
         return (
