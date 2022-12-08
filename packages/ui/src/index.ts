@@ -83,9 +83,10 @@ export {
     TextField
 } from "@mui/joy";
 
-export { useColorScheme, CssVarsProvider, CssBaseline, getInitColorSchemeScript, extendTheme } from '@mui/joy';
+export { CssBaseline } from '@mui/joy';
+export { useColorScheme, CssVarsProvider, getInitColorSchemeScript, extendTheme } from '@mui/joy/styles';
 
 // TODO: Remove as we should use direct joy types
 export type { DefaultColorScheme } from '@mui/joy/styles/types';
 export type { ButtonProps, ColorPaletteProp, SupportedColorScheme, TextFieldProps, Theme } from '@mui/joy';
-export type { Breakpoint } from '@mui/system';
+export type { Breakpoint, SystemStyleObject } from '@mui/system';
