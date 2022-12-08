@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Alert, CircularProgress } from '@mui/joy';
 import { ChildrenProps } from '../sharedTypes';
+import { Warning } from '@signalco/ui-icons';
 
 export interface LoadableLoadingErrorProps {
     error?: unknown | string | React.ReactElement;
@@ -45,7 +46,11 @@ export default function Loadable(props: LoadableProps) {
                 errorDisplay = JSON.stringify(error);
             }
         }
-        return <Alert variant="solid" color="danger">{errorDisplay}</Alert>
+        return (
+            <Alert variant="soft" color="danger" sx={{ width: '100%' }} startDecorator={<Warning />}>
+                {errorDisplay}
+            </Alert>
+        );
     }
 
     return (
