@@ -72,7 +72,7 @@ importers:
       next-pwa: 5.6.0
       next-secure-headers: 2.2.0
       next-sitemap: 3.1.32
-      openapi-types: 12.0.2
+      openapi-types: 12.1.0
       pigeon-maps: 0.21.3
       playwright: ^1.28.0
       postcss: 8.4.19
@@ -177,7 +177,7 @@ importers:
       eslint-plugin-import: 2.26.0_3ch7uy2dgmtovltwhobfjmisp4
       fs-extra: 11.1.0
       next-sitemap: 3.1.32_2x7vdsltqnntkvmayxgsj26u5i
-      openapi-types: 12.0.2
+      openapi-types: 12.1.0
       playwright: 1.28.0
       prop-types: 15.8.1
       puppeteer: 19.4.0
@@ -6042,8 +6042,8 @@ packages:
       is-wsl: 2.2.0
     dev: true
 
-  /openapi-types/12.0.2:
-    resolution: {integrity: sha512-GuTo7FyZjOIWVhIhQSWJVaws6A82sWIGyQogxxYBYKZ0NBdyP2CYSIgOwFfSB+UVoPExk/YzFpyYitHS8KVZtA==}
+  /openapi-types/12.1.0:
+    resolution: {integrity: sha512-XpeCy01X6L5EpP+6Hc3jWN7rMZJ+/k1lwki/kTmWzbVhdPie3jd5O2ZtedEx8Yp58icJ0osVldLMrTB/zslQXA==}
     dev: true
 
   /opener/1.5.2:
