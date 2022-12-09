@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Loadable , NoDataPlaceholder , Typography } from '@signalco/ui';
+import { Loadable, NoDataPlaceholder, Typography } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -25,21 +25,35 @@ async function loadPricePolygonApi(ticker: string | undefined, apiKey: string | 
     if (!ticker || !apiKey)
         return undefined;
 
-    const tickerResponse = await fetch(`https://api.polygon.io/v3/reference/tickers?ticker=${ticker}&active=true&sort=ticker&order=asc&limit=10&apiKey=${apiKey}`);
-    const tickerData: any = await tickerResponse.json();
-    if (!tickerData?.results?.length)
-        return undefined;
+    const tickerResponsePromise = fetch(`https://api.polygon.io/v3/reference/tickers?ticker=${ticker}&active=true&sort=ticker&order=asc&limit=10&apiKey=${apiKey}`);
+    const previousPriceResponsePromise = fetch(`https://api.polygon.io/v2/aggs/ticker/${ticker}/prev?apiKey=${apiKey}`);
 
-    const response = await fetch(`https://api.polygon.io/v2/aggs/ticker/${ticker}/prev?apiKey=${apiKey}`);
-    const data: any = await response.json();
-    if (!data?.results?.length)
-        return undefined;
+    const [tickerResponse, previousPriceResponse] = await Promise.all([tickerResponsePromise, previousPriceResponsePromise]);
+
+    const tickerData: any = await tickerResponse.json();
+    const previousPriceData: any = await previousPriceResponse.json();
+
+    if (!previousPriceData?.results?.length)
+        return {
+            error: previousPriceResponse.status,
+            errorMessage: previousPriceResponse.statusText || previousPriceResponse.status === 429
+                ? 'Too many requests'
+                : `Invalid response ${previousPriceResponse.status}`
+        };
+
+    if (!tickerData?.results?.length)
+        return {
+            error: tickerResponse.status,
+            errorMessage: tickerResponse.statusText || tickerResponse.status === 429
+                ? 'Too many requests'
+                : `Invalid response ${tickerResponse.status}`
+        };
 
     return {
         ticker: tickerData.results[0].ticker,
         name: tickerData.results[0].name,
-        close: data.results[0].c,
-        open: data.results[0].o
+        close: previousPriceData.results[0].c,
+        open: previousPriceData.results[0].o
     };
 }
 
@@ -59,7 +73,7 @@ export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>
 
     return (
         <Stack sx={{ height: '100%' }} alignItems={price.isLoading ? 'center' : 'stretch'} direction="row" justifyContent={price.isLoading ? 'center' : 'stretch'}>
-            <Loadable isLoading={price.isLoading} error={price.error}>
+            <Loadable isLoading={price.isLoading} error={price.error || price.item?.errorMessage}>
                 <Stack p={3} justifyContent="space-between">
                     <Stack>
                         <Typography level="h6" marginBottom={'-4px'}>{ticker}</Typography>

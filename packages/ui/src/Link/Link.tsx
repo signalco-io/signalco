@@ -7,7 +7,11 @@ export interface LinkProps extends ChildrenProps {
 
 export default function Link({ children, href }: LinkProps) {
     return (
-        <NextLink href={href} passHref prefetch={false} legacyBehavior>
+        <NextLink
+            href={href}
+            passHref
+            prefetch={false}
+            style={{ textDecoration: 'none', color: 'var(--joy-palette-text-secondary)' }}>
             {children}
         </NextLink>
     );
