@@ -89,7 +89,7 @@ importers:
       react-transition-group: 4.4.5
       recharts: 2.2.0
       rimraf: 3.0.2
-      sass: 1.56.1
+      sass: 1.56.2
       sass-loader: 13.2.0
       sharp: 0.31.2
       suncalc: 1.9.0
@@ -131,7 +131,7 @@ importers:
       date-fns: 2.29.3
       material-ui-popup-state: 4.1.0_lskpmcsdi7ipu6qpuapyu56ihm
       monaco-editor: 0.34.1
-      next: 13.0.6_kzvotn2zipzqwaptii5a7wxu3y
+      next: 13.0.6_mz53pcrhrtbilczuivypd336dm
       next-pwa: 5.6.0_rrkzavgdx36b422hmp3wrqv2jq
       next-secure-headers: 2.2.0
       pigeon-maps: 0.21.3_react@18.2.0
@@ -183,8 +183,8 @@ importers:
       puppeteer: 19.4.0
       react-is: 18.2.0
       rimraf: 3.0.2
-      sass: 1.56.1
-      sass-loader: 13.2.0_sass@1.56.1+webpack@5.75.0
+      sass: 1.56.2
+      sass-loader: 13.2.0_sass@1.56.2+webpack@5.75.0
       typescript: 4.9.4
       webpack: 5.75.0
 
@@ -5806,7 +5806,7 @@ packages:
       babel-loader: 8.3.0_ztqwsvkb6z73luspkai6ilstpu
       clean-webpack-plugin: 4.0.0_webpack@5.75.0
       globby: 11.1.0
-      next: 13.0.6_kzvotn2zipzqwaptii5a7wxu3y
+      next: 13.0.6_mz53pcrhrtbilczuivypd336dm
       terser-webpack-plugin: 5.3.6_webpack@5.75.0
       workbox-webpack-plugin: 6.5.4_webpack@5.75.0
       workbox-window: 6.5.4
@@ -5836,7 +5836,7 @@ packages:
       '@corex/deepmerge': 4.0.29
       '@next/env': 13.0.6
       minimist: 1.2.7
-      next: 13.0.6_kzvotn2zipzqwaptii5a7wxu3y
+      next: 13.0.6_mz53pcrhrtbilczuivypd336dm
     dev: true
 
   /next/13.0.6_biqbaboplfbrettd7655fr4n2y:
@@ -5883,7 +5883,7 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /next/13.0.6_kzvotn2zipzqwaptii5a7wxu3y:
+  /next/13.0.6_mz53pcrhrtbilczuivypd336dm:
     resolution: {integrity: sha512-COvigvms2LRt1rrzfBQcMQ2GZd86Mvk1z+LOLY5pniFtL4VrTmhZ9salrbKfSiXbhsD01TrDdD68ec3ABDyscA==}
     engines: {node: '>=14.6.0'}
     hasBin: true
@@ -5907,7 +5907,7 @@ packages:
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      sass: 1.56.1
+      sass: 1.56.2
       styled-jsx: 5.1.0_zavbqmrropwrojvx6ojaa4s7im
     optionalDependencies:
       '@next/swc-android-arm-eabi': 13.0.6
@@ -6812,7 +6812,7 @@ packages:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
     dev: false
 
-  /sass-loader/13.2.0_sass@1.56.1+webpack@5.75.0:
+  /sass-loader/13.2.0_sass@1.56.2+webpack@5.75.0:
     resolution: {integrity: sha512-JWEp48djQA4nbZxmgC02/Wh0eroSUutulROUusYJO9P9zltRbNN80JCBHqRGzjd4cmZCa/r88xgfkjGD0TXsHg==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -6833,12 +6833,12 @@ packages:
     dependencies:
       klona: 2.0.5
       neo-async: 2.6.2
-      sass: 1.56.1
+      sass: 1.56.2
       webpack: 5.75.0
     dev: true
 
-  /sass/1.56.1:
-    resolution: {integrity: sha512-VpEyKpyBPCxE7qGDtOcdJ6fFbcpOM+Emu7uZLxVrkX8KVU/Dp5UF7WLvzqRuUhB6mqqQt1xffLoG+AndxTZrCQ==}
+  /sass/1.56.2:
+    resolution: {integrity: sha512-ciEJhnyCRwzlBCB+h5cCPM6ie/6f8HrhZMQOf5vlU60Y1bI1rx5Zb0vlDZvaycHsg/MqFfF1Eq2eokAa32iw8w==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
