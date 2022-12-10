@@ -4,16 +4,20 @@
     "private": true,
     "license": "MIT",
     "sideEffects": false,
-    "main": "./dist/index.js",
-    "module": "./dist/index.mjs",
+    "module": "./dist/index.es.js",
     "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.es.js"
+        }
+    },
     "type": "module",
     "files": [
-        "dist/**"
+        "dist"
     ],
     "scripts": {
-        "build": "tsup src/index.ts --format esm --treeshake --dts --external react",
-        "dev": "tsup src/index.ts --format esm --treeshake --watch --dts --external react",
+        "build": "tsc & vite build",
+        "dev": "vite",
         "clean": "rm -rf dist"
     },
     "devDependencies": {
@@ -21,12 +25,18 @@
         "tsup": "6.5.0",
         "typescript": "4.9.4",
         "prop-types": "15.8.1",
-        "react": "18.2.0"
+        "@vitejs/plugin-react": "^3.0.0",
+        "vite": "4.0.0",
+        "vite-plugin-dts": "^1.7.1"
     },
     "dependencies": {
+        "react": "18.2.0",
         "react-dom": "18.2.0",
         "lucide-react": "0.104.1"
     },
     "peerDependencies": {
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "lucide-react": "0.104.1"
     }
 }

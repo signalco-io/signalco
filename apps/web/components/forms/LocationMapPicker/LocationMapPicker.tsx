@@ -1,8 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Draggable, Map, Marker } from 'pigeon-maps';
 import { MyLocation } from '@signalco/ui-icons';
-import { Accordion } from '@signalco/ui-client';
-import { Loadable, Row, Stack , IconButton, TextField, Typography , Box } from '@signalco/ui';
+import { Accordion, Loadable, Row, Stack, IconButton, TextField, Typography, Box } from '@signalco/ui';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/esm/index.types';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useUserTheme from '../../../src/hooks/useUserTheme';

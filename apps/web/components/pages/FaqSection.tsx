@@ -1,5 +1,4 @@
-import { Accordion } from '@signalco/ui-client';
-import { Container, Typography, Box, Stack } from '@signalco/ui';
+import { Accordion, Container, Typography, Box, Stack } from '@signalco/ui';
 import PageCenterHeader from './PageCenterHeader';
 
 export interface FaqItem {

@@ -1,5 +1,5 @@
 import { ChildrenProps } from "../sharedTypes";
-import JoyMenu from '@mui/joy/Menu';
+import { Menu as JoyMenu } from '@mui/joy';
 import { usePopupState, bindTrigger, bindMenu } from "material-ui-popup-state/hooks";
 import { ReactElement, useMemo } from "react";
 
