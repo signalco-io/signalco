@@ -1,15 +1,14 @@
-const { createSecureHeaders } = require('next-secure-headers');
-const runtimeCaching = require('next-pwa/cache');
-const createPwa = require('next-pwa');
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-    enabled: process.env.ANALYZE === 'true',
-});
+import { createSecureHeaders } from 'next-secure-headers';
+import nextPwa from 'next-pwa';
+import nextBundleAnalyzer from '@next/bundle-analyzer';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-const withPWA = createPwa({
+const withBundleAnalyzer = nextBundleAnalyzer({
+    enabled: process.env.ANALYZE === 'true',
+});
+const withPWA = nextPwa({
     dest: 'public',
-    runtimeCaching,
     buildExcludes: [/middleware-manifest.json$/],
     disable: isDevelopment
 });
@@ -84,6 +83,6 @@ const nextConfig = {
     },
 };
 
-module.exports = isDevelopment
+export default isDevelopment
     ? withBundleAnalyzer(nextConfig)
     : withBundleAnalyzer(withPWA(nextConfig));
