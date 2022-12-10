@@ -13,6 +13,7 @@ export default function useContact(pointer: IContactPointer | undefined) {
 
     return {
         isLoading: entity.isLoading,
+        isError: entity.isError,
         error: entity.error,
         data: contact
     };
