@@ -6,7 +6,7 @@ import { WidgetSharedProps } from '../Widget';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useEntities from '../../../src/hooks/useEntities';
+import useEntity from '../../../src/hooks/useEntity';
 import useContacts from '../../../src/hooks/useContacts';
 import { entityAsync } from '../../../src/entity/EntityRepository';
 import IContactPointer from '../../../src/contacts/IContactPointer';
@@ -77,9 +77,9 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
 
 function WidgetState(props: WidgetSharedProps<any>) {
     const { config } = props;
-    const onContactPointers = useMemo(() => (Array.isArray(config?.on) ? config.on as IContactPointer[] : undefined), [config?.on]);
-    const onEntityIds = useMemo(() => (Array.isArray(config?.on) ? config.on as IContactPointer[] : undefined)?.map(i => i.entityId), [config?.on]);
-    const onEntities = useEntities(onEntityIds);
+    const onContactPointers = useMemo(() => Array.isArray(config?.on) ? config.on as IContactPointer[] : undefined, [config?.on]);
+    const onEntityIds = useMemo(() => onContactPointers?.map(i => i.entityId), [onContactPointers]);
+    const onEntity = useEntity(onEntityIds && onEntityIds[0]);
     const onContacts = useContacts(onContactPointers);
 
     const [isLoading, setIsLoading] = useState(true);
@@ -106,11 +106,11 @@ function WidgetState(props: WidgetSharedProps<any>) {
             setIsLoading(false);
     }
 
-    const label = props.config?.label || (typeof onEntities !== 'undefined' ? onEntities[0]?.alias : '');
+    const label = props.config?.label || (typeof onEntity !== 'undefined' ? onEntity.data?.alias : '');
     const Visual = useMemo(() => props.config?.visual === 'tv' ? TvVisual : LightBulbVisual, [props.config]);
 
     const handleStateChangeRequest = () => {
-        if (typeof onEntities === 'undefined') {
+        if (typeof onEntity === 'undefined') {
             console.warn('State change requested but device is undefined.');
             showNotification('Can\'t execute action, widget is not loaded yet.', 'warning');
             return;
