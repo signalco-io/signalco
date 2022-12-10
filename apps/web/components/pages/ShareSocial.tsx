@@ -1,5 +1,5 @@
 import { Share } from '@signalco/ui-icons';
-import { IconButtonCopyToClipboard } from '@signalco/ui-client';
+import { IconButtonCopyToClipboard } from '@signalco/ui';
 import useIsClient from '../../src/hooks/useIsClient';
 
 export default function ShareSocial() {

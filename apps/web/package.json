@@ -37,7 +37,6 @@
         "@mui/system": "5.10.17",
         "@next/env": "13.0.6",
         "@signalco/ui": "workspace:*",
-        "@signalco/ui-client": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "@tanstack/react-query": "4.19.1",
         "@tanstack/react-query-devtools": "4.19.1",

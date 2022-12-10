@@ -4,8 +4,8 @@ import {
     usePopupState
 } from 'material-ui-popup-state/hooks';
 import { Navigate } from '@signalco/ui-icons';
-import { Accordion } from '@signalco/ui-client';
 import {
+    Accordion,
     Loadable,
     Popper,
     NoDataPlaceholder,
