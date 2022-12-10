@@ -1,7 +1,7 @@
 import React from 'react';
 import { Copy } from '@signalco/ui-icons';
-import {IconButtonCopyToClipboard} from '@signalco/ui-client';
-import { TextField, TextFieldProps } from '@signalco/ui';
+import { IconButtonCopyToClipboard, TextField, TextFieldProps } from '@signalco/ui';
+
 
 function CopyToClipboardInput(props: TextFieldProps) {
     return (

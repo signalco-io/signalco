@@ -1,3 +1,6 @@
+export { default as Accordion } from './Accordion';
+export * from './Accordion';
+
 export { default as Breadcrumbs } from './Breadcrumbs';
 export * from './Breadcrumbs';
 
@@ -15,6 +18,9 @@ export * from './DisableButton';
 
 export { default as Icon } from './Icon';
 export * from './Icon';
+
+export { default as IconButtonCopyToClipboard } from './IconButtonCopyToClipboard';
+export * from './IconButtonCopyToClipboard';
 
 export { default as ImageLink } from './ImageLink';
 export * from './ImageLink';
@@ -89,4 +95,4 @@ export { useColorScheme, CssVarsProvider, getInitColorSchemeScript, extendTheme 
 // TODO: Remove as we should use direct joy types
 export type { DefaultColorScheme } from '@mui/joy/styles/types';
 export type { ButtonProps, ColorPaletteProp, SupportedColorScheme, TextFieldProps, Theme } from '@mui/joy';
-export type { Breakpoint, SystemStyleObject } from '@mui/system';
+export type { SxProps, Breakpoint, SystemStyleObject } from '@mui/system';

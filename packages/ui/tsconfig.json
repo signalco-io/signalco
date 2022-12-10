@@ -3,18 +3,5 @@
     "extends": "@signalco/tsconfig/react-library.json",
     "include": [
         "./src/**/*.ts*"
-    ],
-    "exclude": [
-        "dist",
-        "build",
-        "node_modules",
-        ".turbo",
-        "src/**/*.stories.ts*"
-    ],
-    "compilerOptions": {
-        "lib": [
-            "ES2015",
-            "dom"
-        ]
-    }
+    ]
 }

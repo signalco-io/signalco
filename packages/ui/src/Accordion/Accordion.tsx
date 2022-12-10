@@ -1,6 +1,5 @@
 import { MouseEvent, useState } from 'react';
-import { Card, IconButton, Icon, Box, Row } from '@signalco/ui';
-import { SxProps } from '@mui/system';
+import { Box, Card, Icon, IconButton, Row, SxProps } from '..';
 import { ChildrenProps } from '../sharedTypes';
 
 export interface AccordionProps extends ChildrenProps {
