@@ -101,10 +101,11 @@ function WidgetState(props: WidgetSharedProps<any>) {
                 break;
             }
         }
-
-        if (isLoading)
-            setIsLoading(false);
     }
+
+    // Hide loading when loaded fully
+    if (isLoading && onContacts && !onEntity.isLoading)
+        setIsLoading(false);
 
     const label = props.config?.label || (typeof onEntity !== 'undefined' ? onEntity.data?.alias : '');
     const Visual = useMemo(() => props.config?.visual === 'tv' ? TvVisual : LightBulbVisual, [props.config]);
