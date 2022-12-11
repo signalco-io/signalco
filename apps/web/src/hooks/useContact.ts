@@ -9,7 +9,10 @@ export default function useContact(pointer: IContactPointer | undefined) {
 
     if (!entity.isLoading &&
         contact == null)
-        throw new Error(`Unknown contact ${pointer?.entityId} | ${pointer?.channelName} | ${pointer?.contactName}`);
+        return {
+            isError: true,
+            error: `Unknown contact ${pointer?.entityId} | ${pointer?.channelName} | ${pointer?.contactName}`
+        }
 
     return {
         isLoading: entity.isLoading,
