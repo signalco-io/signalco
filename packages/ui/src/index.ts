@@ -1,3 +1,6 @@
+export { default as Alert } from './Alert';
+export * from './Alert';
+
 export { default as Accordion } from './Accordion';
 export * from './Accordion';
 
@@ -51,7 +54,6 @@ export * from './Row';
 
 export { Box } from '@mui/system';
 export { 
-    Alert,
     AspectRatio,
     Avatar, 
     Badge,

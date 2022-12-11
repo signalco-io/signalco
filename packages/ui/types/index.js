@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment as Fragment$1 } from 'react/jsx-runtime';
-import { Card, IconButton, Breadcrumbs as Breadcrumbs$1, Typography, Button, Alert, CircularProgress, Menu as Menu$1, ListItemDecorator } from '@mui/joy';
-export { Alert, AspectRatio, Avatar, Badge, Button, Card, CardOverflow, CircularProgress, CssBaseline, Divider, FormControl, FormLabel, Grid, IconButton, Input, Checkbox as JoyCheckbox, Link as JoyLink, List, ListDivider, ListItem, ListItemButton, ListItemContent, ListItemDecorator, Modal, ModalClose, ModalDialog, Option, Radio, RadioGroup, Select, Sheet, Slider, Switch, TextField, Tooltip, Typography, selectClasses } from '@mui/joy';
+import { Alert as Alert$1, Card, IconButton, Breadcrumbs as Breadcrumbs$1, Typography, Button, CircularProgress, Menu as Menu$1, ListItemDecorator } from '@mui/joy';
+export { AspectRatio, Avatar, Badge, Button, Card, CardOverflow, CircularProgress, CssBaseline, Divider, FormControl, FormLabel, Grid, IconButton, Input, Checkbox as JoyCheckbox, Link as JoyLink, List, ListDivider, ListItem, ListItemButton, ListItemContent, ListItemDecorator, Modal, ModalClose, ModalDialog, Option, Radio, RadioGroup, Select, Sheet, Slider, Switch, TextField, Tooltip, Typography, selectClasses } from '@mui/joy';
 import { useState, Fragment, useId, useMemo } from 'react';
 import Link$1 from 'next/link';
 import { Disabled, Check, Copy, Warning, Navigate } from '@signalco/ui-icons';
@@ -10,6 +10,10 @@ import Image from 'next/image';
 import JoyMenuItem from '@mui/joy/MenuItem';
 export { Box } from '@mui/system';
 export { CssVarsProvider, extendTheme, getInitColorSchemeScript, useColorScheme } from '@mui/joy/styles';
+
+function Alert({ children, color, variant, startDecorator, endDecorator, sx }) {
+    return jsx(Alert$1, { color: color, variant: variant, startDecorator: startDecorator, endDecorator: endDecorator, sx: sx, children: children });
+}
 
 /** @alpha */
 function Icon(props) {
@@ -151,7 +155,7 @@ function IconButtonCopyToClipboard(props) {
     const handleMouseDownCopyToClipboard = (event) => {
         event.preventDefault();
     };
-    return (jsxs(Fragment$1, { children: [jsx(IconButton, { size: "md", className: props.className, title: props.title, variant: "plain", "aria-label": props.title, onClick: handleClickShowCopyToClipboard, onMouseDown: handleMouseDownCopyToClipboard, children: props.children ? props.children : jsx(Copy, {}) }), jsx(Popper, { popupState: popupState, children: jsx(Alert, { color: error ? 'warning' : 'neutral', startDecorator: error && jsx(Warning, {}), children: error ? props.errorMessage : props.successMessage }) })] }));
+    return (jsxs(Fragment$1, { children: [jsx(IconButton, { size: "md", className: props.className, title: props.title, variant: "plain", "aria-label": props.title, onClick: handleClickShowCopyToClipboard, onMouseDown: handleMouseDownCopyToClipboard, children: props.children ? props.children : jsx(Copy, {}) }), jsx(Popper, { popupState: popupState, children: jsx(Alert$1, { color: error ? 'warning' : 'neutral', startDecorator: error && jsx(Warning, {}), children: error ? props.errorMessage : props.successMessage }) })] }));
 }
 
 /** @alpha */
@@ -185,7 +189,7 @@ function Loadable(props) {
                 errorDisplay = JSON.stringify(error);
             }
         }
-        return (jsx(Alert, { variant: "soft", color: "danger", sx: { width: '100%' }, startDecorator: jsx(Warning, {}), children: errorDisplay }));
+        return (jsx(Alert$1, { variant: "soft", color: "danger", sx: { width: '100%' }, startDecorator: jsx(Warning, {}), children: errorDisplay }));
     }
     return (jsxs(Fragment$1, { children: [(contentVisible || isLoading) && (jsx("div", { style: { visibility: isLoading ? 'visible' : 'hidden' }, children: indicator })), (contentVisible || !isLoading) && children] }));
 }
@@ -238,5 +242,5 @@ function Stack({ children, spacing, alignItems }) {
         }, children: children }));
 }
 
-export { Accordion, Breadcrumbs, Chip, Container, DisableButton, DotIndicator, Icon, IconButtonCopyToClipboard, ImageLink, Link, Loadable, Menu, MenuItem, MenuItemLink, NavigatingButton, NoDataPlaceholder, Popper, Row, Stack };
+export { Accordion, Alert, Breadcrumbs, Chip, Container, DisableButton, DotIndicator, Icon, IconButtonCopyToClipboard, ImageLink, Link, Loadable, Menu, MenuItem, MenuItemLink, NavigatingButton, NoDataPlaceholder, Popper, Row, Stack };
 //# sourceMappingURL=index.js.map

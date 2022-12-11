@@ -1,8 +1,9 @@
+import { CSSProperties } from 'react';
 import { ChildrenProps } from '../sharedTypes';
 
 /** @alpha */
 export interface IconProps extends ChildrenProps {
-    sx?: React.CSSProperties | undefined;
+    sx?: CSSProperties | undefined;
 }
 
 /** @alpha */

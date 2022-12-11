@@ -6,10 +6,10 @@ import styles from './Chip.module.scss';
 /** @alpha */
 export type ChipProps = ChildrenProps & {
     color?: "primary" | "neutral" | "danger" | "info" | "success" | "warning";
+    variant?: "plain" | "outlined" | "soft" | "solid";
     size?: 'sm' | 'md' | 'lg';
     onClick?: MouseEventHandler<HTMLButtonElement>
     startDecorator?: ReactNode,
-    variant?: "plain" | "outlined" | "soft" | "solid";
 }
 
 /** @alpha */
