@@ -14,7 +14,7 @@ export type ChipProps = ChildrenProps & {
 
 /** @alpha */
 export default function Chip(props: ChipProps) {
-    const { color, size, startDecorator, variant, onClick, children } = props;
+    const { startDecorator, onClick, children } = props;
     return (
         <button
             disabled={!onClick}
