@@ -17,6 +17,7 @@ export default function Chip(props: ChipProps) {
     const { color, size, startDecorator, variant, onClick, children } = props;
     return (
         <button
+            disabled={!onClick}
             onClick={onClick}
             className={styles.root}>
             <Row spacing={1}>
@@ -24,13 +25,5 @@ export default function Chip(props: ChipProps) {
                 {children}
             </Row>
         </button>
-        // <JoiChip
-        //     variant={variant}
-        //     color={color}
-        //     size={size}
-        //     startDecorator={startDecorator}
-        //     onClick={onClick}>
-        //     {children}
-        // </JoiChip>
     );
 }

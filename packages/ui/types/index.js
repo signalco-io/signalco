@@ -63,16 +63,7 @@ var styles = {"root":"Chip-module_root__l5QgN"};
 /** @alpha */
 function Chip(props) {
     const { color, size, startDecorator, variant, onClick, children } = props;
-    return (jsx("button", { onClick: onClick, className: styles.root, children: jsxs(Row, { spacing: 1, children: [startDecorator && startDecorator, children] }) })
-    // <JoiChip
-    //     variant={variant}
-    //     color={color}
-    //     size={size}
-    //     startDecorator={startDecorator}
-    //     onClick={onClick}>
-    //     {children}
-    // </JoiChip>
-    );
+    return (jsx("button", { disabled: !onClick, onClick: onClick, className: styles.root, children: jsxs(Row, { spacing: 1, children: [startDecorator && startDecorator, children] }) }));
 }
 
 /** @alpha */
