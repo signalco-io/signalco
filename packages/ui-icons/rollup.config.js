@@ -2,6 +2,7 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from '@rollup/plugin-commonjs';
 import esbuild from 'rollup-plugin-esbuild';
+import summary from "rollup-plugin-summary";
 
 export default [
     {
@@ -18,6 +19,9 @@ export default [
             commonjs(),
             esbuild({
                 tsconfig: 'tsconfig.build.json'
+            }),
+            summary({
+                showGzippedSize: true
             })
         ],
     }

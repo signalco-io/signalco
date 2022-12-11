@@ -4,7 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import esbuild from 'rollup-plugin-esbuild';
 import postcss from "rollup-plugin-postcss";
 import postcssPresetEnv from 'postcss-preset-env';
-import { visualizer } from "rollup-plugin-visualizer";
+import summary from "rollup-plugin-summary";
 
 export default [
     {
@@ -23,7 +23,9 @@ export default [
             }),
             commonjs(),
             esbuild({
-                tsconfig: 'tsconfig.build.json'
+                tsconfig: 'tsconfig.build.json',
+                target: 'esnext',
+                minify: false
             }),
             postcss({
                 modules: true,
@@ -38,7 +40,9 @@ export default [
                     postcssPresetEnv()
                 ]
             }),
-            visualizer()
+            summary({
+                showGzippedSize: true
+            })
         ],
     }
 ];
