@@ -47,7 +47,7 @@ export { default as Stack } from './Stack';
 export * from './Stack';
 
 export { default as Row } from './Row';
-export * from './Stack';
+export * from './Row';
 
 export { Box } from '@mui/system';
 export { 
@@ -96,3 +96,4 @@ export { useColorScheme, CssVarsProvider, getInitColorSchemeScript, extendTheme 
 export type { DefaultColorScheme } from '@mui/joy/styles/types';
 export type { ButtonProps, ColorPaletteProp, SupportedColorScheme, TextFieldProps, Theme } from '@mui/joy';
 export type { SxProps, Breakpoint, SystemStyleObject } from '@mui/system';
+export type { ChildrenProps } from './sharedTypes';

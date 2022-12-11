@@ -1,3 +1,4 @@
+import path from 'path';
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from '@rollup/plugin-commonjs';
@@ -25,9 +26,10 @@ export default [
             }),
             commonjs(),
             esbuild({
-                tsconfig: 'tsconfig.build.json',
+                tsconfig: 'tsconfig.json',
                 target: 'esnext',
-                minify: false
+                minify: false,
+                jsx: 'automatic'
             }),
             postcss({
                 modules: true,
@@ -40,7 +42,8 @@ export default [
                 extensions: ['.scss'],
                 plugins: [
                     postcssPresetEnv()
-                ]
+                ],
+                extract: path.resolve('dist/ui.css')
             }),
             summary({
                 showGzippedSize: true
@@ -50,12 +53,14 @@ export default [
     {
         input: "./src/index.ts",
         output: {
-            dir: "dist",
+            dir: "types",
             format: 'esm',
             sourcemap: true
         },
         plugins: [peerDepsExternal(), resolve({
             browser: true
-        }), typescript(), apiExtractor()]
+        }), postcss({ extract: true }), typescript({
+            noEmit: true
+        }), apiExtractor()]
     }
 ];

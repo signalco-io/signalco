@@ -1,9 +1,11 @@
+/** @alpha */
 export interface DotIndicatorProps {
     color: 'success' | 'warning' | 'danger' | 'neutral';
     content?: React.ReactElement;
     size?: number;
 }
 
+/** @alpha */
 export default function DotIndicator(props: DotIndicatorProps) {
     const { color, content, size: requestedSize } = props;
     const size = requestedSize || 10;

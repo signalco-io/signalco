@@ -1,9 +1,11 @@
 import { ChildrenProps } from '../sharedTypes';
 
+/** @alpha */
 export interface ContainerProps extends ChildrenProps {
     maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false
 }
 
+/** @alpha */
 export default function Container({ maxWidth, children }: ContainerProps) {
     let width: number | undefined = 1200;
     switch (maxWidth) {

@@ -5,6 +5,7 @@ import Icon from '../Icon';
 import Row from '../Row';
 import { ChildrenProps } from '../sharedTypes';
 
+/** @alpha */
 export interface AccordionProps extends ChildrenProps {
     open?: boolean;
     disabled?: boolean;
@@ -13,6 +14,7 @@ export interface AccordionProps extends ChildrenProps {
     unmountOnExit?: boolean;
 }
 
+/** @alpha */
 export default function Accordion(props: AccordionProps) {
     const { children, open, sx, disabled, onChange, unmountOnExit } = props;
     const [isOpen, setIsOpen] = useState(open ?? false);

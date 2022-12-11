@@ -1,7 +1,9 @@
 import { type MouseEventHandler, type ReactNode } from 'react';
-import { Chip as JoiChip } from '@mui/joy';
+import Row from '../Row';
 import { type ChildrenProps } from '../sharedTypes';
+import styles from './Chip.module.scss';
 
+/** @alpha */
 export type ChipProps = ChildrenProps & {
     color?: "primary" | "neutral" | "danger" | "info" | "success" | "warning";
     size?: 'sm' | 'md' | 'lg';
@@ -10,16 +12,18 @@ export type ChipProps = ChildrenProps & {
     variant?: "plain" | "outlined" | "soft" | "solid";
 }
 
+/** @alpha */
 export default function Chip(props: ChipProps) {
     const { color, size, startDecorator, variant, onClick, children } = props;
     return (
-        <JoiChip
-            variant={variant}
-            color={color}
-            size={size}
-            startDecorator={startDecorator}
-            onClick={onClick}>
-            {children}
-        </JoiChip>
+        <button
+            disabled={!onClick}
+            onClick={onClick}
+            className={styles.root}>
+            <Row spacing={1}>
+                {startDecorator && startDecorator}
+                {children}
+            </Row>
+        </button>
     );
 }
