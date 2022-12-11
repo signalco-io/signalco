@@ -1,5 +1,5 @@
 import useEntity from './useEntity';
-import IContactPointer from '../contacts/IContactPointer';
+import IContactPointer from '../../contacts/IContactPointer';
 
 export default function useContact(pointer: IContactPointer | undefined) {
     const entity = useEntity(pointer?.entityId);

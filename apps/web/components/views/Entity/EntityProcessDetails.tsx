@@ -3,7 +3,7 @@ import { Close, Equal, EqualNot, Play, Warning, Timer, Pause, Left, Right } from
 import { Chip, Row, Stack, Container, Alert, Card, IconButton, Typography, Box } from '@signalco/ui';
 import Timeago from '../../shared/time/Timeago';
 import DisplayDeviceTarget from '../../shared/entity/DisplayEntityTarget';
-import useContact from '../../../src/hooks/useContact';
+import useContact from '../../../src/hooks/signalco/useContact';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import { setAsync } from '../../../src/contacts/ContactRepository';
 

@@ -7,8 +7,8 @@ import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { KnownPages } from '../../../src/knownPages';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useEntity from '../../../src/hooks/useEntity';
-import useContact from '../../../src/hooks/useContact';
+import useEntity from '../../../src/hooks/signalco/useEntity';
+import useContact from '../../../src/hooks/signalco/useContact';
 import IContact from '../../../src/contacts/IContact';
 
 type ConfigProps = {

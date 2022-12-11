@@ -6,7 +6,7 @@ import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import { KnownPages } from '../../../src/knownPages';
 import useLocale from '../../../src/hooks/useLocale';
-import useEntity from '../../../src/hooks/useEntity';
+import useEntity from '../../../src/hooks/signalco/useEntity';
 import { entityDeleteAsync } from '../../../src/entity/EntityRepository';
 
 export interface EntityOptionsProps {

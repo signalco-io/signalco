@@ -9,7 +9,7 @@ import { DefaultTarget, DefaultColumns } from '../../../src/widgets/WidgetConfig
 import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { KnownPages } from '../../../src/knownPages';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useContact from '../../../src/hooks/useContact';
+import useContact from '../../../src/hooks/signalco/useContact';
 import type IContactPointer from '../../../src/contacts/IContactPointer';
 
 const stateOptions: IWidgetConfigurationOption<any>[] = [

@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { Container, Loadable, NoDataPlaceholder, Row, Stack , List, ListItemButton, Typography , Box } from '@signalco/ui';
 import { KnownPages } from '../../../src/knownPages';
-import useAllEntities from '../../../src/hooks/useAllEntities';
+import useAllEntities from '../../../src/hooks/signalco/useAllEntities';
 import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import ChannelPartialSlack from '../../../components/channels/partials/ChannelPartialSlack';
 import channels from '../../../components/channels/channelsData.json';

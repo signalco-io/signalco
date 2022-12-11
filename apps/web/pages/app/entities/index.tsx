@@ -7,7 +7,7 @@ import { KnownPages } from '../../../src/knownPages';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
 import useLocale from '../../../src/hooks/useLocale';
-import useAllEntities from '../../../src/hooks/useAllEntities';
+import useAllEntities from '../../../src/hooks/signalco/useAllEntities';
 import { entityUpsertAsync } from '../../../src/entity/EntityRepository';
 import SelectItems from '../../../components/shared/form/SelectItems';
 import Picker from '../../../components/shared/form/Picker';
