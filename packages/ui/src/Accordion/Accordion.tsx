@@ -1,5 +1,5 @@
 import { Card, IconButton } from '@mui/joy';
-import { Box, type SxProps } from '@mui/system';
+import { type SxProps } from '@mui/system';
 import { type MouseEvent, useState } from 'react';
 import Icon from '../Icon';
 import Row from '../Row';
@@ -38,9 +38,9 @@ export default function Accordion(props: AccordionProps) {
                 )}
             </Row>
             {(!unmountOnExit || actualOpen) && (
-                <Box sx={{ height: actualOpen ? 'auto' : 0, overflow: 'hidden' }}>
+                <div style={{ height: actualOpen ? 'auto' : 0, overflow: 'hidden' }}>
                     {!!children && Array.isArray(children) && children.filter((_, i) => i !== 0)}
-                </Box>
+                </div>
             )}
         </Card>
     )

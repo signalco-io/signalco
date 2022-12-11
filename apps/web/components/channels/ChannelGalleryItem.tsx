@@ -1,4 +1,4 @@
-import { Chip, Card, ColorPaletteProp, Typography, Link, Box } from '@signalco/ui';
+import { Chip, Card, ColorPaletteProp, Typography, Link } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import ChannelLogo from './ChannelLogo';
 
@@ -11,9 +11,9 @@ interface ChannelGalleryItemProps {
 
 function ChannelGalleryItemChip(props: { label: string, color: ColorPaletteProp }) {
     return (
-        <Box sx={{ position: 'absolute', right: 8, top: 8 }}>
+        <div style={{ position: 'absolute', right: 8, top: 8 }}>
             <Chip size="sm" variant="solid" color={props.color}>{props.label}</Chip>
-        </Box>
+        </div>
     );
 }
 

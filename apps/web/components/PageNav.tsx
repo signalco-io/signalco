@@ -50,7 +50,7 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
                             <Suspense>
                                 <NavMenu />
                             </Suspense>
-                            <NavigatingButton href="/app" prefetch={false}>App</NavigatingButton>
+                            <NavigatingButton href="/app">App</NavigatingButton>
                         </Row>
                     </Row>
                 </header>

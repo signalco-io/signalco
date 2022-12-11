@@ -5,7 +5,6 @@ import { ChildrenProps } from '../sharedTypes';
 
 export interface NavigatingButtonProps extends ChildrenProps {
     href: string;
-    prefetch?: boolean;
     size?: 'sm' | 'md' | 'lg';
     disabled?: boolean;
     hideArrow?: boolean;
@@ -13,7 +12,6 @@ export interface NavigatingButtonProps extends ChildrenProps {
 
 export default function NavigatingButton({
     href,
-    prefetch,
     size,
     disabled,
     hideArrow,
@@ -23,8 +21,7 @@ export default function NavigatingButton({
         <Link
             href={href}
             passHref
-            prefetch={prefetch ?? undefined}
-            legacyBehavior>
+            prefetch={false}>
             <Button
                 color="primary"
                 variant={hideArrow ? 'plain' : 'solid'}
