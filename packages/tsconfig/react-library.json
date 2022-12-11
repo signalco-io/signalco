@@ -13,8 +13,7 @@
         "module": "ESNext",
         "target": "ESNext",
         "useDefineForClassFields": true,
-        "resolveJsonModule": true,
-        "noEmit": true
+        "resolveJsonModule": true
     },
     "exclude": [
         "dist",
