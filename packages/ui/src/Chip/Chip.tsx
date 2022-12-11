@@ -2,9 +2,9 @@ import { type MouseEventHandler, type ReactNode } from 'react';
 import { Chip as JoiChip } from '@mui/joy';
 import { type ChildrenProps } from '../sharedTypes';
 
-export interface ChipProps extends ChildrenProps {
+export type ChipProps = ChildrenProps & {
     color?: "primary" | "neutral" | "danger" | "info" | "success" | "warning";
-    size?: 'sm' | 'md' | 'lg'
+    size?: 'sm' | 'md' | 'lg';
     onClick?: MouseEventHandler<HTMLButtonElement>
     startDecorator?: ReactNode,
     variant?: "plain" | "outlined" | "soft" | "solid";
