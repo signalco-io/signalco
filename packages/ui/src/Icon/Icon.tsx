@@ -1,19 +1,17 @@
-import { Box, SxProps, Theme } from '@mui/system';
 import { ChildrenProps } from '../sharedTypes';
 
 export interface IconProps extends ChildrenProps {
-    sx?: SxProps<Theme>;
+    sx?: React.CSSProperties | undefined;
 }
 
 export default function Icon(props: IconProps) {
     return (
-        <Box
-            component="span"
+        <span
             className="material-icons"
-            sx={{
+            style={{
                 ...props.sx
             }}>
             {props.children}
-        </Box>
+        </span>
     );
 }

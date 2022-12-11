@@ -1,5 +1,5 @@
 import { MouseEvent, useState } from 'react';
-import { Box, Card, Icon, IconButton, Row, SxProps } from '..';
+import { Card, Icon, IconButton, Row, SxProps } from '..';
 import { ChildrenProps } from '../sharedTypes';
 
 export interface AccordionProps extends ChildrenProps {
@@ -35,9 +35,9 @@ export default function Accordion(props: AccordionProps) {
                 )}
             </Row>
             {(!unmountOnExit || actualOpen) && (
-                <Box sx={{ height: actualOpen ? 'auto' : 0, overflow: 'hidden' }}>
+                <div style={{ height: actualOpen ? 'auto' : 0, overflow: 'hidden' }}>
                     {!!children && Array.isArray(children) && children.filter((_, i) => i !== 0)}
-                </Box>
+                </div>
             )}
         </Card>
     )
