@@ -42,7 +42,7 @@
         "@tanstack/react-query-devtools": "4.19.1",
         "@vvo/tzdb": "6.79.0",
         "clsx": "1.2.1",
-        "cobe": "0.6.2",
+        "cobe": "0.6.3",
         "color": "4.2.3",
         "compare-versions": "5.0.1",
         "d3": "7.7.0",
