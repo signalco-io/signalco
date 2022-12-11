@@ -6,6 +6,6 @@
     ],
     "compilerOptions": {
         "declaration": true,
-        "declarationDir": "dist/"
+        "declarationDir": "types/"
     }
 }

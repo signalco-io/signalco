@@ -208,6 +208,7 @@ importers:
       postcss-preset-env: ^7.8.3
       react: 18.2.0
       react-dom: 18.2.0
+      rimraf: 3.0.2
       rollup: ^3.7.2
       rollup-plugin-api-extractor: ^0.2.5
       rollup-plugin-esbuild: ^5.0.0
@@ -236,6 +237,7 @@ importers:
       esbuild: 0.16.4
       postcss: 8.4.19
       postcss-preset-env: 7.8.3_postcss@8.4.19
+      rimraf: 3.0.2
       rollup: 3.7.2
       rollup-plugin-api-extractor: 0.2.5_rollup@3.7.2+tslib@2.4.1
       rollup-plugin-esbuild: 5.0.0_uyd7v7jndykc7aad2otypgy7bi
@@ -258,6 +260,7 @@ importers:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0
+      rimraf: 3.0.2
       rollup: ^3.7.2
       rollup-plugin-api-extractor: ^0.2.5
       rollup-plugin-esbuild: ^5.0.0
@@ -277,8 +280,9 @@ importers:
       '@signalco/tsconfig': link:../tsconfig
       esbuild: 0.16.4
       prop-types: 15.8.1
+      rimraf: 3.0.2
       rollup: 3.7.2
-      rollup-plugin-api-extractor: 0.2.5_rollup@3.7.2+tslib@2.4.1
+      rollup-plugin-api-extractor: 0.2.5_htzcbyfbalvlvttwnrtchdqz4i
       rollup-plugin-esbuild: 5.0.0_uyd7v7jndykc7aad2otypgy7bi
       rollup-plugin-peer-deps-external: 2.2.4_rollup@3.7.2
       rollup-plugin-summary: 2.0.0_rollup@3.7.2
@@ -8195,6 +8199,18 @@ packages:
   /robust-predicates/3.0.1:
     resolution: {integrity: sha512-ndEIpszUHiG4HtDsQLeIuMvRsDnn8c8rYStabochtUeCvfuvNptb5TUbVD68LRAILPX7p9nqQGh4xJgn3EHS/g==}
     dev: false
+
+  /rollup-plugin-api-extractor/0.2.5_htzcbyfbalvlvttwnrtchdqz4i:
+    resolution: {integrity: sha512-oWG57yqB6n/xn2egrbiOFjgKjIt/GCwbcdQHaDDM5s26RvwBfckCIokCP3reZCS1OQnINw8NOPcJNarTjef8rA==}
+    peerDependencies:
+      '@microsoft/api-extractor': '>=7.19.0'
+      rollup: '>=2.63.0'
+      tslib: '*'
+    dependencies:
+      '@microsoft/api-extractor': 7.33.7
+      rollup: 3.7.2
+      tslib: 2.4.1
+    dev: true
 
   /rollup-plugin-api-extractor/0.2.5_rollup@3.7.2+tslib@2.4.1:
     resolution: {integrity: sha512-oWG57yqB6n/xn2egrbiOFjgKjIt/GCwbcdQHaDDM5s26RvwBfckCIokCP3reZCS1OQnINw8NOPcJNarTjef8rA==}

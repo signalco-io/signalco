@@ -18,7 +18,7 @@
     "scripts": {
         "build": "rollup -c",
         "dev": "rollup --watch -c",
-        "clean": "rm -rf dist && rm -rf .turbo"
+        "clean": "rimraf dist"
     },
     "devDependencies": {
         "@microsoft/api-extractor": "^7.33.7",
@@ -28,6 +28,7 @@
         "@signalco/tsconfig": "*",
         "esbuild": "^0.16.4",
         "prop-types": "15.8.1",
+        "rimraf": "3.0.2",
         "rollup": "^3.7.2",
         "rollup-plugin-api-extractor": "^0.2.5",
         "rollup-plugin-esbuild": "^5.0.0",
