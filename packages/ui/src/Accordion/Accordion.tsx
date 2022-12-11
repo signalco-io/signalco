@@ -1,7 +1,11 @@
-import { MouseEvent, useState } from 'react';
-import { Box, Card, Icon, IconButton, Row, SxProps } from '..';
+import { Card, IconButton } from '@mui/joy';
+import { type SxProps } from '@mui/system';
+import { type MouseEvent, useState } from 'react';
+import Icon from '../Icon';
+import Row from '../Row';
 import { ChildrenProps } from '../sharedTypes';
 
+/** @alpha */
 export interface AccordionProps extends ChildrenProps {
     open?: boolean;
     disabled?: boolean;
@@ -10,6 +14,7 @@ export interface AccordionProps extends ChildrenProps {
     unmountOnExit?: boolean;
 }
 
+/** @alpha */
 export default function Accordion(props: AccordionProps) {
     const { children, open, sx, disabled, onChange, unmountOnExit } = props;
     const [isOpen, setIsOpen] = useState(open ?? false);
@@ -35,9 +40,9 @@ export default function Accordion(props: AccordionProps) {
                 )}
             </Row>
             {(!unmountOnExit || actualOpen) && (
-                <Box sx={{ height: actualOpen ? 'auto' : 0, overflow: 'hidden' }}>
+                <div style={{ height: actualOpen ? 'auto' : 0, overflow: 'hidden' }}>
                     {!!children && Array.isArray(children) && children.filter((_, i) => i !== 0)}
-                </Box>
+                </div>
             )}
         </Card>
     )

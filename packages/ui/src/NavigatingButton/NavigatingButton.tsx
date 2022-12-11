@@ -3,17 +3,17 @@ import { Navigate } from '@signalco/ui-icons';
 import { Button } from '@mui/joy';
 import { ChildrenProps } from '../sharedTypes';
 
+/** @alpha */
 export interface NavigatingButtonProps extends ChildrenProps {
     href: string;
-    prefetch?: boolean;
     size?: 'sm' | 'md' | 'lg';
     disabled?: boolean;
     hideArrow?: boolean;
 }
 
+/** @alpha */
 export default function NavigatingButton({
     href,
-    prefetch,
     size,
     disabled,
     hideArrow,
@@ -23,8 +23,7 @@ export default function NavigatingButton({
         <Link
             href={href}
             passHref
-            prefetch={prefetch ?? undefined}
-            legacyBehavior>
+            prefetch={false}>
             <Button
                 color="primary"
                 variant={hideArrow ? 'plain' : 'solid'}

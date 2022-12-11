@@ -1,11 +1,13 @@
 import { ChildrenProps } from "../sharedTypes";
 
+/** @alpha */
 export interface RowProps extends ChildrenProps {
     spacing?: number;
     alignItems?: 'start' | 'center' | 'stretch' | undefined;
     justifyContent?: 'start' | 'center' | 'space-between' | 'end' | undefined;
 }
 
+/** @alpha */
 export default function Row({ children, spacing, alignItems, justifyContent }: RowProps) {
     return (
         <div

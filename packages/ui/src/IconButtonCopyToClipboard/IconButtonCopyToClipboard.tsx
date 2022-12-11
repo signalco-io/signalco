@@ -1,9 +1,11 @@
 import { MouseEvent, useId, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { Copy, Warning } from '@signalco/ui-icons';
-import { Popper, Alert, IconButton } from '..';
 import { ChildrenProps } from '../sharedTypes';
+import { Alert, IconButton } from '@mui/joy';
+import Popper from '../Popper';
 
+/** @alpha */
 export type IconButtonCopyToClipboardProps = ChildrenProps & {
     title: string;
     value?: unknown;
@@ -13,6 +15,7 @@ export type IconButtonCopyToClipboardProps = ChildrenProps & {
     errorMessage: string
 };
 
+/** @alpha */
 export default function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps) {
     const id = useId();
     const popupState = usePopupState({ variant: 'popper', popupId: `copytoclipboard-button-${id}` });

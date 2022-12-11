@@ -7,6 +7,7 @@ import { CssBaseline, CssVarsProvider } from '@signalco/ui';
 import appTheme from '../src/theme';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/global.scss';
+import '@signalco/ui/dist/ui.css';
 import { ChildrenProps } from '../src/sharedTypes';
 import useAppTheme from '../src/hooks/useAppTheme';
 

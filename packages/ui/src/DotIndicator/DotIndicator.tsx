@@ -1,16 +1,16 @@
-import { Box } from '@mui/system';
-
+/** @alpha */
 export interface DotIndicatorProps {
     color: 'success' | 'warning' | 'danger' | 'neutral';
     content?: React.ReactElement;
     size?: number;
 }
 
+/** @alpha */
 export default function DotIndicator(props: DotIndicatorProps) {
     const { color, content, size: requestedSize } = props;
     const size = requestedSize || 10;
     return (
-        <Box sx={{
+        <div style={{
             width: size,
             height: size,
             borderRadius: size / 2,
@@ -19,6 +19,6 @@ export default function DotIndicator(props: DotIndicatorProps) {
             textAlign: 'center'
         }}>
             {content}
-        </Box>
+        </div>
     )
 }

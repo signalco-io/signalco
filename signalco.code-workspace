@@ -17,13 +17,11 @@
 			"path": "packages/ui"
 		},
 		{
-			"name": "📦 @signalco/ui-client",
-			"path": "packages/ui-client"
-		},
-		{
 			"name": "📦 @signalco/ui-icons",
 			"path": "packages/ui-icons"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "✨ signalco-monorepo"
+	}
 }

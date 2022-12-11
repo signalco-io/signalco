@@ -1,17 +1,29 @@
-import { MouseEventHandler, ReactNode } from 'react';
-import { Chip as JoiChip } from '@mui/joy';
-import { ColorPaletteProp, VariantProp } from '@mui/joy';
-import { ChildrenProps } from '../sharedTypes';
+import { type MouseEventHandler, type ReactNode } from 'react';
+import Row from '../Row';
+import { type ChildrenProps } from '../sharedTypes';
+import styles from './Chip.module.scss';
 
-export interface ChipProps extends ChildrenProps {
-    color?: ColorPaletteProp
-    size?: 'sm' | 'md' | 'lg'
+/** @alpha */
+export type ChipProps = ChildrenProps & {
+    color?: "primary" | "neutral" | "danger" | "info" | "success" | "warning";
+    variant?: "plain" | "outlined" | "soft" | "solid";
+    size?: 'sm' | 'md' | 'lg';
     onClick?: MouseEventHandler<HTMLButtonElement>
     startDecorator?: ReactNode,
-    variant?: VariantProp
 }
 
+/** @alpha */
 export default function Chip(props: ChipProps) {
-    const { color, size, startDecorator, variant, onClick, children } = props;
-    return <JoiChip variant={variant} color={color} size={size} startDecorator={startDecorator} onClick={onClick}>{children}</JoiChip>
+    const { startDecorator, onClick, children } = props;
+    return (
+        <button
+            disabled={!onClick}
+            onClick={onClick}
+            className={styles.root}>
+            <Row spacing={1}>
+                {startDecorator && startDecorator}
+                {children}
+            </Row>
+        </button>
+    );
 }

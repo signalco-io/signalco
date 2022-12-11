@@ -4,34 +4,38 @@
     "private": true,
     "license": "MIT",
     "sideEffects": false,
-    "module": "./dist/index.es.js",
-    "types": "./dist/index.d.ts",
-    "exports": {
-        ".": {
-            "import": "./dist/index.es.js"
-        }
-    },
+    "module": "./dist/index.js",
+    "types": "./dist/ui.d.ts",
+
     "type": "module",
     "files": [
         "dist/**"
     ],
     "scripts": {
-        "build": "tsc && vite build",
-        "dev": "vite",
-        "clean": "rm -rf dist"
+        "build": "rollup -c",
+        "dev": "rollup --watch -c",
+        "clean": "rimraf dist"
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^23.0.4",
         "@rollup/plugin-node-resolve": "^15.0.1",
+        "@rollup/plugin-typescript": "^10.0.1",
         "@signalco/tsconfig": "*",
         "@types/react": "18.0.26",
         "@types/react-dom": "18.0.9",
-        "@vitejs/plugin-react": "^3.0.0",
+        "esbuild": "^0.16.4",
+        "postcss": "8.4.19",
+        "postcss-preset-env": "^7.8.3",
+        "rimraf": "3.0.2",
         "rollup": "^3.7.2",
+        "rollup-plugin-api-extractor": "^0.2.5",
+        "rollup-plugin-esbuild": "^5.0.0",
         "rollup-plugin-peer-deps-external": "^2.2.4",
-        "typescript": "4.9.4",
-        "vite": "4.0.0",
-        "vite-plugin-dts": "^1.7.1"
+        "rollup-plugin-postcss": "^4.0.2",
+        "rollup-plugin-summary": "^2.0.0",
+        "sass": "1.56.2",
+        "tslib": "^2.4.1",
+        "typescript": "4.9.4"
     },
     "dependencies": {
         "@mui/base": "5.0.0-alpha.109",
@@ -44,15 +48,15 @@
         "react-dom": "18.2.0"
     },
     "peerDependencies": {
-        "@signalco/ui-icons": "workspace:*",
         "@mui/base": "5.0.0-alpha.109",
         "@mui/joy": "5.0.0-alpha.57",
         "@mui/system": "5.10.17",
+        "@signalco/ui-icons": "workspace:*",
+        "@types/react": "18.0.26",
         "material-ui-popup-state": "4.1.0",
         "next": "13.0.6",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "styled-components": "5.0.0",
-        "@types/react": "18.0.26"
+        "styled-components": "5.3.6"
     }
 }

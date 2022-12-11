@@ -22,9 +22,9 @@ import {
 import { Stack } from '@mui/system';
 import InputContactValue from './InputContactValue';
 import EntityIcon from './EntityIcon';
-import useEntity from '../../../src/hooks/useEntity';
-import useContact from '../../../src/hooks/useContact';
-import useAllEntities from '../../../src/hooks/useAllEntities';
+import useEntity from '../../../src/hooks/signalco/useEntity';
+import useContact from '../../../src/hooks/signalco/useContact';
+import useAllEntities from '../../../src/hooks/signalco/useAllEntities';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointerPartial from '../../../src/contacts/IContactPointerPartial';
 

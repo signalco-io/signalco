@@ -9,7 +9,7 @@ import { DefaultColumns, DefaultLabel } from '../../../src/widgets/WidgetConfigu
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useEntity from '../../../src/hooks/useEntity';
+import useEntity from '../../../src/hooks/signalco/useEntity';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
