@@ -1,10 +1,12 @@
 import { ChildrenProps } from "../sharedTypes";
 
+/** @alpha */
 export interface StackProps extends ChildrenProps {
     spacing?: number;
     alignItems?: 'start' | 'center' | undefined;
 }
 
+/** @alpha */
 export default function Stack({ children, spacing, alignItems }: StackProps) {
     return (
         <div

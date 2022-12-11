@@ -3,6 +3,7 @@ import Row from '../Row';
 import { type ChildrenProps } from '../sharedTypes';
 import styles from './Chip.module.scss';
 
+/** @alpha */
 export type ChipProps = ChildrenProps & {
     color?: "primary" | "neutral" | "danger" | "info" | "success" | "warning";
     size?: 'sm' | 'md' | 'lg';
@@ -11,6 +12,7 @@ export type ChipProps = ChildrenProps & {
     variant?: "plain" | "outlined" | "soft" | "solid";
 }
 
+/** @alpha */
 export default function Chip(props: ChipProps) {
     const { color, size, startDecorator, variant, onClick, children } = props;
     return (

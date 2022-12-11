@@ -3,21 +3,25 @@ import { Alert, CircularProgress } from '@mui/joy';
 import { ChildrenProps } from '../sharedTypes';
 import { Warning } from '@signalco/ui-icons';
 
+/** @alpha */
 export interface LoadableLoadingErrorProps {
     error?: unknown | string | React.ReactElement;
     isLoading?: boolean;
 }
 
+/** @alpha */
 export interface LoadableSkeletonProps {
     width?: number;
     height?: number;
 }
 
+/** @alpha */
 export interface LoadableProps extends LoadableLoadingErrorProps, LoadableSkeletonProps, ChildrenProps {
     placeholder?: 'skeletonText' | 'skeletonRect' | 'circular';
     contentVisible?: boolean;
 }
 
+/** @alpha */
 export default function Loadable(props: LoadableProps) {
     const { isLoading, placeholder, error, children, contentVisible } = props;
 

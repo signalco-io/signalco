@@ -11,12 +11,14 @@ import JoyMenuItem from '@mui/joy/MenuItem';
 export { Box } from '@mui/system';
 export { CssVarsProvider, extendTheme, getInitColorSchemeScript, useColorScheme } from '@mui/joy/styles';
 
+/** @alpha */
 function Icon(props) {
     return (jsx("span", { className: "material-icons", style: {
             ...props.sx
         }, children: props.children }));
 }
 
+/** @alpha */
 function Row({ children, spacing, alignItems, justifyContent }) {
     return (jsx("div", { style: {
             display: 'flex',
@@ -27,6 +29,7 @@ function Row({ children, spacing, alignItems, justifyContent }) {
         }, children: children }));
 }
 
+/** @alpha */
 function Accordion(props) {
     const { children, open, sx, disabled, onChange, unmountOnExit } = props;
     const [isOpen, setIsOpen] = useState(open ?? false);
@@ -42,10 +45,12 @@ function Accordion(props) {
     return (jsxs(Card, { variant: "soft", sx: sx, children: [jsxs(Row, { spacing: 1, justifyContent: "space-between", children: [!!children && Array.isArray(children) ? children[0] : children, !disabled && (jsx(IconButton, { size: "sm", onClick: handleOpen, children: jsx(Icon, { children: actualOpen ? 'expand_less' : 'expand_more' }) }))] }), (!unmountOnExit || actualOpen) && (jsx("div", { style: { height: actualOpen ? 'auto' : 0, overflow: 'hidden' }, children: !!children && Array.isArray(children) && children.filter((_, i) => i !== 0) }))] }));
 }
 
+/** @alpha */
 function Link({ children, href }) {
     return (jsx(Link$1, { href: href, passHref: true, prefetch: false, style: { textDecoration: 'none', color: 'var(--joy-palette-text-secondary)' }, children: children }));
 }
 
+/** @alpha */
 function Breadcrumbs(props) {
     const { items } = props;
     return (jsx(Breadcrumbs$1, { separator: '\u203a', size: "lg", children: items.map((i, index) => jsx(Fragment, { children: i.href
@@ -55,6 +60,7 @@ function Breadcrumbs(props) {
 
 var styles = {"root":"Chip-module_root__l5QgN"};
 
+/** @alpha */
 function Chip(props) {
     const { color, size, startDecorator, variant, onClick, children } = props;
     return (jsx("button", { onClick: onClick, className: styles.root, children: jsxs(Row, { spacing: 1, children: [startDecorator && startDecorator, children] }) })
@@ -69,6 +75,7 @@ function Chip(props) {
     );
 }
 
+/** @alpha */
 function Container({ maxWidth, children }) {
     let width = 1200;
     switch (maxWidth) {
@@ -92,6 +99,7 @@ function Container({ maxWidth, children }) {
         }, children: children }));
 }
 
+/** @alpha */
 function DotIndicator(props) {
     const { color, content, size: requestedSize } = props;
     const size = requestedSize || 10;
@@ -105,11 +113,13 @@ function DotIndicator(props) {
         }, children: content }));
 }
 
+/** @alpha */
 function DisableButton(props) {
     const { disabled, readonly, onClick } = props;
     return (jsx(Button, { disabled: readonly, color: disabled ? 'warning' : 'success', variant: disabled ? 'solid' : 'soft', size: "sm", startDecorator: disabled ? jsx(Disabled, {}) : jsx(Check, {}), onClick: onClick, children: disabled ? 'Disabled' : 'Enabled' }));
 }
 
+/** @alpha */
 function Popper(props) {
     const { popupState, children } = props;
     const { anchorReference, anchorPosition, ...popoverProps } = bindPopover(popupState);
@@ -120,6 +130,7 @@ function Popper(props) {
         }, children: jsx(PopperUnstyled, { style: { zIndex: 999999 }, ...popoverProps, children: children }) }));
 }
 
+/** @alpha */
 function IconButtonCopyToClipboard(props) {
     const id = useId();
     const popupState = usePopupState({ variant: 'popper', popupId: `copytoclipboard-button-${id}` });
@@ -152,10 +163,12 @@ function IconButtonCopyToClipboard(props) {
     return (jsxs(Fragment$1, { children: [jsx(IconButton, { size: "md", className: props.className, title: props.title, variant: "plain", "aria-label": props.title, onClick: handleClickShowCopyToClipboard, onMouseDown: handleMouseDownCopyToClipboard, children: props.children ? props.children : jsx(Copy, {}) }), jsx(Popper, { popupState: popupState, children: jsx(Alert, { color: error ? 'warning' : 'neutral', startDecorator: error && jsx(Warning, {}), children: error ? props.errorMessage : props.successMessage }) })] }));
 }
 
+/** @alpha */
 function ImageLink({ href, imageProps }) {
     return (jsx(Link, { href: href, children: jsx(Image, { ...imageProps, alt: imageProps.alt }) }));
 }
 
+/** @alpha */
 function Loadable(props) {
     const { isLoading, placeholder, error, children, contentVisible } = props;
     const indicator = useMemo(() => {
@@ -186,6 +199,7 @@ function Loadable(props) {
     return (jsxs(Fragment$1, { children: [(contentVisible || isLoading) && (jsx("div", { style: { visibility: isLoading ? 'visible' : 'hidden' }, children: indicator })), (contentVisible || !isLoading) && children] }));
 }
 
+/** @alpha */
 function NavigatingButton({ href, size, disabled, hideArrow, children }) {
     return (jsx(Link$1, { href: href, passHref: true, prefetch: false, children: jsx(Button, { color: "primary", variant: hideArrow ? 'plain' : 'solid', disabled: disabled, size: size, endDecorator: jsx(Navigate, { size: 16 }), sx: {
                 '.JoyButton-endDecorator': {
@@ -200,10 +214,12 @@ function NavigatingButton({ href, size, disabled, hideArrow, children }) {
             }, children: children }) }));
 }
 
+/** @alpha */
 function NoDataPlaceholder({ content }) {
     return jsx(Typography, { level: "body2", children: content });
 }
 
+/** @alpha */
 function Menu({ children, menuId, renderTrigger }) {
     const popupState = usePopupState({ variant: 'popover', popupId: menuId });
     const { anchorReference, anchorPosition, ...menuProps } = bindMenu(popupState);
@@ -211,14 +227,17 @@ function Menu({ children, menuId, renderTrigger }) {
     return (jsxs("div", { children: [trigger, jsx(Menu$1, { ...menuProps, children: children })] }));
 }
 
+/** @alpha */
 function MenuItem({ startDecorator, children, ...rest }) {
     return (jsxs(JoyMenuItem, { ...rest, children: [startDecorator && (jsx(ListItemDecorator, { children: startDecorator })), children] }));
 }
 
+/** @alpha */
 function MenuItemLink({ href, ...rest }) {
     return (jsx(Link$1, { href: href, passHref: true, children: jsx(MenuItem, { ...rest }) }));
 }
 
+/** @alpha */
 function Stack({ children, spacing, alignItems }) {
     return (jsx("div", { style: {
             display: 'flex',

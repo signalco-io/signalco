@@ -3,6 +3,7 @@ import { Navigate } from '@signalco/ui-icons';
 import { Button } from '@mui/joy';
 import { ChildrenProps } from '../sharedTypes';
 
+/** @alpha */
 export interface NavigatingButtonProps extends ChildrenProps {
     href: string;
     size?: 'sm' | 'md' | 'lg';
@@ -10,6 +11,7 @@ export interface NavigatingButtonProps extends ChildrenProps {
     hideArrow?: boolean;
 }
 
+/** @alpha */
 export default function NavigatingButton({
     href,
     size,
