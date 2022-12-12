@@ -1,15 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Alert } from '@signalco/ui';
 
-const meta: Meta<typeof Alert> = {
-  title: 'Components/Alert',
-  component: Alert,
-  tags: ['docsPage'],
-  argTypes: {
-  },
-};
+export default { component: Alert, tags: ['docsPage'] };
 
-export default meta;
 type Story = StoryObj<typeof Alert>;
 
 export const Primary: Story = {
