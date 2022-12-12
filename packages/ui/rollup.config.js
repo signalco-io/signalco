@@ -24,7 +24,7 @@ export default [
             }),
             commonjs(),
             esbuild({
-                tsconfig: 'tsconfig.json',
+                tsconfig: 'tsconfig.build.json',
                 target: 'esnext',
                 minify: false,
                 jsx: 'automatic'

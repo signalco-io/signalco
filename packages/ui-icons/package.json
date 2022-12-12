@@ -5,7 +5,7 @@
     "license": "MIT",
     "sideEffects": false,
     "module": "./dist/index.js",
-    "types": "./dist/ui-icons.d.ts",
+    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
             "import": "./dist/index.js"
@@ -16,25 +16,26 @@
         "dist"
     ],
     "scripts": {
-        "build": "rollup -c",
-        "dev": "rollup --watch -c",
+        "build": "npm run clean && concurrently \"npm run build:bundle\" \"npm run build:types\"",
+        "build:bundle": "rollup -c",
+        "build:types": "tsc --emitDeclarationOnly --declaration --project tsconfig.build.json",
+        "dev": "concurrently --kill-others \"npm run dev:bundle\" \"npm run dev:types\"",
+        "dev:bundle": "rollup --watch -c",
+        "dev:types": "tsc --emitDeclarationOnly --declaration --project tsconfig.build.json",
         "clean": "rimraf dist"
     },
     "devDependencies": {
-        "@microsoft/api-extractor": "^7.33.7",
         "@rollup/plugin-commonjs": "^23.0.4",
         "@rollup/plugin-node-resolve": "^15.0.1",
-        "@rollup/plugin-typescript": "^10.0.1",
         "@signalco/tsconfig": "*",
+        "concurrently": "^7.6.0",
         "esbuild": "^0.16.4",
         "prop-types": "15.8.1",
         "rimraf": "3.0.2",
         "rollup": "^3.7.2",
-        "rollup-plugin-api-extractor": "^0.2.5",
         "rollup-plugin-esbuild": "^5.0.0",
         "rollup-plugin-peer-deps-external": "^2.2.4",
         "rollup-plugin-summary": "^2.0.0",
-        "tslib": "^2.4.1",
         "typescript": "4.9.4"
     },
     "dependencies": {
