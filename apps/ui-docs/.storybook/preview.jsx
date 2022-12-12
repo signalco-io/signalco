@@ -1,4 +1,5 @@
-import { CssVarsProvider, CssBaseline, extendTheme } from '../src/index';
+import { CssVarsProvider, CssBaseline, extendTheme } from '@signalco/ui';
+import signalcoTheme from './signalco-theme';
 
 const theme = extendTheme({});
 
@@ -10,11 +11,14 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  docs: {
+    theme: signalcoTheme
+  }
 }
 
 export const decorators = [
   (Story) => (
-    <CssVarsProvider theme={theme}>
+    <CssVarsProvider theme={theme} defaultMode='dark'>
       <CssBaseline />
       {Story()}
     </CssVarsProvider>
