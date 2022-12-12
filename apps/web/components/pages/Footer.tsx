@@ -1,9 +1,8 @@
 'use client';
 
-import React, { ReactNode } from 'react';
-import NextLink from 'next/link';
+import React from 'react';
 import { Github, Twitter } from '@signalco/ui-icons';
-import { Container, Grid, IconButton, Typography, JoyLink, Box, Link } from '@signalco/ui';
+import { Container, Grid, IconButton, Typography, Box, Link } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import SignalcoLogotype from '../icons/SignalcoLogotype';
 import { now } from '../../src/services/DateTimeProvider';
@@ -37,7 +36,7 @@ const footerLinks: FooterSectionType[] = [
         header: 'Resources',
         links: [
             { name: 'Status', href: 'https://status.signalco.io' },
-            { name: 'Design', href: '/design' },
+            { name: 'Design', href: appSettingsProvider.isDeveloper ? 'https://ui.signalco.dev' : 'https://ui.signalco.io' },
             { name: 'API', href: '/docs/api', developerOnly: true }
         ]
     },
