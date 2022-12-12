@@ -3,9 +3,5 @@
     "extends": "@signalco/tsconfig/react-library.json",
     "include": [
         "./src/**/*.ts*"
-    ],
-    "compilerOptions": {
-        "declaration": true,
-        "declarationDir": "types/"
-    }
+    ]
 }
