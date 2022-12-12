@@ -46,7 +46,7 @@
         "@mui/joy": "5.0.0-alpha.57",
         "@mui/system": "5.10.17",
         "@signalco/ui-icons": "workspace:*",
-        "material-ui-popup-state": "4.1.0",
+        "material-ui-popup-state": "5.0.3",
         "next": "13.0.6",
         "react": "18.2.0",
         "react-dom": "18.2.0"
@@ -57,7 +57,7 @@
         "@mui/system": "5.10.17",
         "@signalco/ui-icons": "workspace:*",
         "@types/react": "18.0.26",
-        "material-ui-popup-state": "4.1.0",
+        "material-ui-popup-state": "5.0.3",
         "next": "13.0.6",
         "react": "18.2.0",
         "react-dom": "18.2.0",
