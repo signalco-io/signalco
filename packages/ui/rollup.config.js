@@ -6,8 +6,6 @@ import esbuild from 'rollup-plugin-esbuild';
 import postcss from "rollup-plugin-postcss";
 import postcssPresetEnv from 'postcss-preset-env';
 import summary from "rollup-plugin-summary";
-import typescript from "@rollup/plugin-typescript";
-import { apiExtractor } from "rollup-plugin-api-extractor";
 
 export default [
     {
@@ -26,7 +24,7 @@ export default [
             }),
             commonjs(),
             esbuild({
-                tsconfig: 'tsconfig.json',
+                tsconfig: 'tsconfig.build.json',
                 target: 'esnext',
                 minify: false,
                 jsx: 'automatic'
@@ -49,18 +47,5 @@ export default [
                 showGzippedSize: true
             })
         ],
-    },
-    {
-        input: "./src/index.ts",
-        output: {
-            dir: "types",
-            format: 'esm',
-            sourcemap: true
-        },
-        plugins: [peerDepsExternal(), resolve({
-            browser: true
-        }), postcss({ extract: true }), typescript({
-            noEmit: true
-        }), apiExtractor()]
     }
 ];

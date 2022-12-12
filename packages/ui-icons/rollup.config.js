@@ -3,8 +3,6 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from '@rollup/plugin-commonjs';
 import esbuild from 'rollup-plugin-esbuild';
 import summary from "rollup-plugin-summary";
-import typescript from "@rollup/plugin-typescript";
-import { apiExtractor } from "rollup-plugin-api-extractor";
 
 export default [
     {
@@ -20,22 +18,14 @@ export default [
             resolve(),
             commonjs(),
             esbuild({
-                tsconfig: 'tsconfig.build.json'
+                tsconfig: 'tsconfig.build.json',
+                target: 'esnext',
+                minify: false,
+                jsx: 'automatic'
             }),
             summary({
                 showGzippedSize: true
             })
         ],
-    },
-    {
-        input: "./src/index.ts",
-        output: {
-            dir: "dist",
-            format: 'esm',
-            sourcemap: true
-        },
-        plugins: [peerDepsExternal(), resolve({
-            browser: true
-        }), typescript(), apiExtractor()]
     }
 ];

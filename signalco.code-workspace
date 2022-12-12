@@ -9,6 +9,10 @@
 			"path": "apps/web"
 		},
 		{
+			"name": "🚀 ui-docs",
+			"path": "apps/ui-docs"
+		},
+		{
 			"name": "📦 @signalco/tsconfig",
 			"path": "packages/tsconfig"
 		},

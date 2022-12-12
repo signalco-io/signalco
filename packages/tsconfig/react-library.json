@@ -13,12 +13,12 @@
         "module": "ESNext",
         "target": "ESNext",
         "useDefineForClassFields": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "declarationDir": "dist/"
     },
     "exclude": [
         "dist",
         "node_modules",
-        ".turbo",
-        "src/**/*.stories.ts*"
+        ".turbo"
     ]
 }
