@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Alert from '.';
+import { Alert } from '@signalco/ui';
 
 const meta: Meta<typeof Alert> = {
   title: 'Components/Alert',

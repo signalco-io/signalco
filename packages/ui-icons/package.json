@@ -21,7 +21,7 @@
         "build:types": "tsc --emitDeclarationOnly --declaration --project tsconfig.build.json",
         "dev": "concurrently --kill-others \"npm run dev:bundle\" \"npm run dev:types\"",
         "dev:bundle": "rollup --watch -c",
-        "dev:types": "tsc --emitDeclarationOnly --declaration --project tsconfig.build.json",
+        "dev:types": "tsc --watch --emitDeclarationOnly --declaration --project tsconfig.build.json",
         "clean": "rimraf dist"
     },
     "devDependencies": {
