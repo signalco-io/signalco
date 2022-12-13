@@ -1,5 +1,5 @@
-import { Box } from '@signalco/ui';
-import { ChildrenProps } from '../../../src/sharedTypes';
+import { Box } from '@mui/system';
+import { ChildrenProps } from '../sharedTypes';
 
 export interface GentleSlideProps extends ChildrenProps {
     appear: boolean,
@@ -21,7 +21,7 @@ export default function GentleSlide(props: GentleSlideProps) {
     const translate = direction === 'left' ? `translateX(${amount}px)` : `translateY(-${amount}px)`;
 
     return (
-        <Box sx={{
+        <div style={{
             transition: `opacity ${duration}ms  ease-out, transform ${duration}ms ease-out`,
             transitionDelay: `${appearDelayPerIndex * (index ?? 0)}ms`,
             opacity: appear ? 1 : 0,
@@ -30,6 +30,6 @@ export default function GentleSlide(props: GentleSlideProps) {
             width: '100%'
         }}>
             {children}
-        </Box>
+        </div>
     )
 }
