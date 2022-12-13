@@ -5,11 +5,12 @@
     "type": "module",
     "scripts": {
         "build": "storybook build",
-        "dev": "storybook dev -p 6006",
+        "dev": "storybook dev -p 6007",
         "clean": "rimraf node_modules/.cache/storybook"
     },
     "devDependencies": {
         "@babel/core": "7.20.5",
+        "@signalco/tsconfig": "workspace:*",
         "@storybook/addon-essentials": "7.0.0-beta.6",
         "@storybook/addon-links": "7.0.0-beta.6",
         "@storybook/addons": "7.0.0-beta.6",

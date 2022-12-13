@@ -14,6 +14,7 @@ importers:
       '@mui/base': 5.0.0-alpha.110
       '@mui/joy': 5.0.0-alpha.58
       '@mui/system': 5.11.0
+      '@signalco/tsconfig': workspace:*
       '@signalco/ui': workspace:*
       '@signalco/ui-icons': workspace:*
       '@storybook/addon-essentials': 7.0.0-beta.6
@@ -59,6 +60,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
       '@babel/core': 7.20.5
+      '@signalco/tsconfig': link:../../packages/tsconfig
       '@storybook/addon-essentials': 7.0.0-beta.6_o4scbtliisanygemawej7x2d6i
       '@storybook/addon-links': 7.0.0-beta.6_biqbaboplfbrettd7655fr4n2y
       '@storybook/addons': 7.0.0-beta.6_biqbaboplfbrettd7655fr4n2y
