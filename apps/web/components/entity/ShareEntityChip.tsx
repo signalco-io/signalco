@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Clear, People, Send, Share } from '@signalco/ui-icons';
-import { Chip, Row, Stack , Tooltip, IconButton, TextField, List, ListItem, ListItemContent, ListDivider } from '@signalco/ui';
+import { Chip, Row, Stack, Tooltip, IconButton, TextField, List, ListItem, ListItemContent, ListDivider, GentleSlide } from '@signalco/ui';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
-import GentleSlide from '../shared/animations/GentleSlide';
 import IUser from '../../src/users/IUser';
 import HttpService from '../../src/services/HttpService';
 import useLocale from '../../src/hooks/useLocale';
