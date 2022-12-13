@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import { Alert } from '@signalco/ui';
 
 export default { component: Alert, tags: ['docsPage'] };
