@@ -33,7 +33,7 @@ importers:
       css-loader: ^6.7.2
       jest: ^29.3.1
       jest-specific-snapshot: ^4.0.0
-      material-ui-popup-state: 4.1.0
+      material-ui-popup-state: 5.0.3
       next: 13.0.6
       postcss: 8.4.20
       react: 18.2.0
@@ -53,7 +53,7 @@ importers:
       '@mui/system': 5.10.17_kzbn2opkn2327fwg5yzwzya5o4
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
-      material-ui-popup-state: 4.1.0_ib3m5ricvtkl2cll7qpr2f6lvq
+      material-ui-popup-state: 5.0.3_ib3m5ricvtkl2cll7qpr2f6lvq
       next: 13.0.6_mz53pcrhrtbilczuivypd336dm
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -11090,23 +11090,6 @@ packages:
     dependencies:
       react: 18.2.0
     dev: true
-
-  /material-ui-popup-state/4.1.0_ib3m5ricvtkl2cll7qpr2f6lvq:
-    resolution: {integrity: sha512-YAxLT10XALsUuuo46sc81NKD6oKJzlkcKP3e+IqC0pKwzAhOAZIQ+RUHXT6Mz3bXHKoHCsM+NdIQxR4mOH/KEQ==}
-    peerDependencies:
-      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      '@babel/runtime': 7.20.1
-      '@mui/material': 5.10.13_ib3m5ricvtkl2cll7qpr2f6lvq
-      classnames: 2.3.2
-      prop-types: 15.8.1
-      react: 18.2.0
-    transitivePeerDependencies:
-      - '@emotion/react'
-      - '@emotion/styled'
-      - '@types/react'
-      - react-dom
-    dev: false
 
   /material-ui-popup-state/5.0.3_ib3m5ricvtkl2cll7qpr2f6lvq:
     resolution: {integrity: sha512-AdlAEDmOAQ3BZMnNfyKD5CL+aNMb8zd5tDZWG5Ykx3vcuPbaL6SPjJ5kWuWXrJvapL9I8wwxaYhV4gt3tZmyOA==}
