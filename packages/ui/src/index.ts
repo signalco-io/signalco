@@ -16,6 +16,12 @@ export * from './Container';
 export { default as DotIndicator } from './DotIndicator';
 export * from './DotIndicator';
 
+export { default as Fade } from './Fade';
+export * from './Fade';
+
+export { default as GentleSlide } from './GentleSlide';
+export * from './GentleSlide';
+
 export { default as DisableButton } from './DisableButton';
 export * from './DisableButton';
 

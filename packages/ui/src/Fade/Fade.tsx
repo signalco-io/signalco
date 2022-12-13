@@ -1,5 +1,4 @@
-import { Box } from '@signalco/ui';
-import { ChildrenProps } from '../../../src/sharedTypes';
+import { ChildrenProps } from "../sharedTypes";
 
 export interface FadeProps extends ChildrenProps {
     appear: boolean;
@@ -12,12 +11,12 @@ export default function Fade(props: FadeProps) {
     const duration = props.duration ?? 200;
 
     return (
-        <Box sx={{
+        <div style={{
             transition: `opacity ${duration}ms  ease-out`,
             opacity: appear ? 1 : 0,
             height: !appear && collapsedWhenHidden ? 0 : 'auto'
         }}>
             {children}
-        </Box>
+        </div>
     );
 }

@@ -1,6 +1,5 @@
 import { useInView } from 'react-cool-inview';
-import { Box, Typography } from '@signalco/ui';
-import GentleSlide from '../../shared/animations/GentleSlide';
+import { Box, Typography, GentleSlide } from '@signalco/ui';
 
 function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
     const { observe, inView } = useInView({
