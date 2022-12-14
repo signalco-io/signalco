@@ -117,8 +117,8 @@ importers:
       '@signalco/tsconfig': '*'
       '@signalco/ui': workspace:*
       '@signalco/ui-icons': workspace:*
-      '@tanstack/react-query': 4.19.1
-      '@tanstack/react-query-devtools': 4.19.1
+      '@tanstack/react-query': 4.20.4
+      '@tanstack/react-query-devtools': 4.20.4
       '@types/color': 3.0.3
       '@types/d3': 7.4.0
       '@types/next-pwa': ^5.6.0
@@ -199,8 +199,8 @@ importers:
       '@next/env': 13.0.6
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
-      '@tanstack/react-query': 4.19.1_biqbaboplfbrettd7655fr4n2y
-      '@tanstack/react-query-devtools': 4.19.1_xnkyuugmv5unvdsxvtkktqsuae
+      '@tanstack/react-query': 4.20.4_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query-devtools': 4.20.4_fu3ixcwltlssi3ozitelgaebme
       '@vvo/tzdb': 6.81.0
       clsx: 1.2.1
       cobe: 0.6.3
@@ -3902,12 +3902,12 @@ packages:
       telejson: 7.0.4
     dev: true
 
-  /@storybook/channel-postmessage/7.0.0-beta.7:
-    resolution: {integrity: sha512-zxDJ3DVrk5asPTjE6YVDUvHaaBjX8obFq2BkWO34GBlWWq6JujA6eknghNvUm4MX4vteaIeQTLGoEZqF1aOAkw==}
+  /@storybook/channel-postmessage/7.0.0-beta.8:
+    resolution: {integrity: sha512-UnTampw/jKAFn+p7C7UvCJ5gkyc+0jdZ+vamgop63zDak8qhYq2ZbvhmC4sL7vubbHHe0BEILoUERBWhnMspVA==}
     dependencies:
-      '@storybook/channels': 7.0.0-beta.7
-      '@storybook/client-logger': 7.0.0-beta.7
-      '@storybook/core-events': 7.0.0-beta.7
+      '@storybook/channels': 7.0.0-beta.8
+      '@storybook/client-logger': 7.0.0-beta.8
+      '@storybook/core-events': 7.0.0-beta.8
       global: 4.4.0
       qs: 6.11.0
       telejson: 7.0.4
@@ -3926,8 +3926,8 @@ packages:
     resolution: {integrity: sha512-CYm6PwLfxWI0sZVOqowIbXngjiuybSSSPHnbGdfsPlGWRrn+Cf48VdCxcjDcMaUhLxj5zGajgLX9r3rfxIxa2Q==}
     dev: true
 
-  /@storybook/channels/7.0.0-beta.7:
-    resolution: {integrity: sha512-Zclc1Zw6ZqJ5Et70AUZCo3o7EcBdRYf4rcjK0D+e+yClvLGJ7OqfbwbXDtGKx9t9oXsB9AoijeLUW939I2YWYw==}
+  /@storybook/channels/7.0.0-beta.8:
+    resolution: {integrity: sha512-yr5907Q9wivjSxIZDOxl/ft8xeZjbir5EuLkNnCcN8XHb6p5zNWVky5zm2+5c3o79nU4tk/z7YOxbJI6vMmmQw==}
     dev: true
 
   /@storybook/cli/7.0.0-beta.6_o4scbtliisanygemawej7x2d6i:
@@ -4001,8 +4001,8 @@ packages:
       global: 4.4.0
     dev: true
 
-  /@storybook/client-logger/7.0.0-beta.7:
-    resolution: {integrity: sha512-PKrov1AgSlsWY6IWVKLe6p3GpmGjGxwl/27J7G6PJgiFcQHrf0VVtlA4J7j+FDBtbOAS5ZJSFWdmf2BytfFBJw==}
+  /@storybook/client-logger/7.0.0-beta.8:
+    resolution: {integrity: sha512-aZzSPbh66sEX4BQS7aEFoW8bdHrWQJksFOcSNdwCsNk34rG9zSQrQJfKT/YJl1iKgfhX/k4d/fu7JfjlOrDgxQ==}
     dependencies:
       global: 4.4.0
     dev: true
@@ -4094,8 +4094,8 @@ packages:
     resolution: {integrity: sha512-a9O/wP2g6l5w1HOcV7HHzMqmjc4qj8zA+3+kucsJ7DjNndwb5fJJ7RRo5VFjc4PFuit5z+hOg6l9IOu7rjvXLA==}
     dev: true
 
-  /@storybook/core-events/7.0.0-beta.7:
-    resolution: {integrity: sha512-PJdDLhEcSzBAIq03+f26S4namnkM3aa/Wp5wMOH7vTvQXqSAMfRY1ikcTWRca5UbQsI5hX5wWKnhwkpDz8bPFQ==}
+  /@storybook/core-events/7.0.0-beta.8:
+    resolution: {integrity: sha512-+Jphuq3Spexn+zcPDEsfABnCf7uj+Q5MmnvXlDRp4mO3mlhu2rkFlHMelCCpLo9oGA3dIiwfeyn7LjQKI95h1Q==}
     dev: true
 
   /@storybook/core-server/7.0.0-beta.6_o4scbtliisanygemawej7x2d6i:
@@ -4222,13 +4222,13 @@ packages:
       - typescript
     dev: true
 
-  /@storybook/instrumenter/7.0.0-beta.7:
-    resolution: {integrity: sha512-oqIRmVr5Bmn8Kc06Qxqcv8CEWL6ZGgfHE3SCoSEguZw4s8f75+7IXyHcf2pb1hA6d8V6dsOQrCJSfdlSGVfBiQ==}
+  /@storybook/instrumenter/7.0.0-beta.8:
+    resolution: {integrity: sha512-GhUHi5uoopoezX/tjcnOlNpDKh1DFBHdLzyIeO/xEPnjl26HGY4MxCG0N7A5KppT8sQdPwOYdIwPhsC6bzCTBQ==}
     dependencies:
-      '@storybook/channels': 7.0.0-beta.7
-      '@storybook/client-logger': 7.0.0-beta.7
-      '@storybook/core-events': 7.0.0-beta.7
-      '@storybook/preview-api': 7.0.0-beta.7
+      '@storybook/channels': 7.0.0-beta.8
+      '@storybook/client-logger': 7.0.0-beta.8
+      '@storybook/core-events': 7.0.0-beta.8
+      '@storybook/preview-api': 7.0.0-beta.8
       core-js: 3.26.1
       global: 4.4.0
     transitivePeerDependencies:
@@ -4415,15 +4415,15 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/preview-api/7.0.0-beta.7:
-    resolution: {integrity: sha512-k25dP5YA1ZjdGZtMpkNMqqOv6qXXjbXinfgkqyUW+3RHWBps89//SxxFOdz2MgIkkiGqP4PBq/nb4pEEV20U+g==}
+  /@storybook/preview-api/7.0.0-beta.8:
+    resolution: {integrity: sha512-8tkvGNLO8Z7jY+ORrqxi222di2ALqmnSOWgAGapXpte+KWQe9enSPD+3kk4NTurpMmzc/52Lvly1D0s22CKLgA==}
     dependencies:
-      '@storybook/channel-postmessage': 7.0.0-beta.7
-      '@storybook/channels': 7.0.0-beta.7
-      '@storybook/client-logger': 7.0.0-beta.7
-      '@storybook/core-events': 7.0.0-beta.7
+      '@storybook/channel-postmessage': 7.0.0-beta.8
+      '@storybook/channels': 7.0.0-beta.8
+      '@storybook/client-logger': 7.0.0-beta.8
+      '@storybook/core-events': 7.0.0-beta.8
       '@storybook/csf': 0.0.2-next.8
-      '@storybook/types': 7.0.0-beta.7
+      '@storybook/types': 7.0.0-beta.8
       '@types/qs': 6.9.7
       dequal: 2.0.3
       global: 4.4.0
@@ -4550,8 +4550,8 @@ packages:
   /@storybook/testing-library/0.0.14-next.1:
     resolution: {integrity: sha512-1CAl40IKIhcPaCC4pYCG0b9IiYNymktfV/jTrX7ctquRY3akaN7f4A1SippVHosksft0M+rQTFE0ccfWW581fw==}
     dependencies:
-      '@storybook/client-logger': 7.0.0-beta.7
-      '@storybook/instrumenter': 7.0.0-beta.7
+      '@storybook/client-logger': 7.0.0-beta.8
+      '@storybook/instrumenter': 7.0.0-beta.8
       '@testing-library/dom': 8.19.0
       '@testing-library/user-event': 13.5.0_aaq3sbffpfe3jnxzm2zngsddei
       ts-dedent: 2.2.0
@@ -4599,11 +4599,11 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/types/7.0.0-beta.7:
-    resolution: {integrity: sha512-NsviBEyeUwTlMCrk8GZm6u4jyfbSFfmMnzwzhkeO+u309S1WUjsUUhKzGwbp3nL2k88qogIDxc5u+Z3BficQNQ==}
+  /@storybook/types/7.0.0-beta.8:
+    resolution: {integrity: sha512-u5g7T7a5Z9yDknBGceh1ZBi3f/KQAoRJosCtLVXLZ0eVDFCyToFunWsR91O+GhbB8dzyjmhJl4Fs0abhYQNueQ==}
     dependencies:
       '@babel/core': 7.20.5
-      '@storybook/channels': 7.0.0-beta.7
+      '@storybook/channels': 7.0.0-beta.8
       '@types/babel__core': 7.1.20
       '@types/express': 4.17.14
       express: 4.18.2
@@ -4646,27 +4646,27 @@ packages:
       remove-accents: 0.4.2
     dev: false
 
-  /@tanstack/query-core/4.19.1:
-    resolution: {integrity: sha512-Zp0aIose5C8skBzqbVFGk9HJsPtUhRVDVNWIqVzFbGQQgYSeLZMd3Sdb4+EnA5wl1J7X+bre2PJGnQg9x/zHOA==}
+  /@tanstack/query-core/4.20.4:
+    resolution: {integrity: sha512-lhLtGVNJDsJ/DyZXrLzekDEywQqRVykgBqTmkv0La32a/RleILXy6JMLBb7UmS3QCatg/F/0N9/5b0i5j6IKcA==}
     dev: false
 
-  /@tanstack/react-query-devtools/4.19.1_xnkyuugmv5unvdsxvtkktqsuae:
-    resolution: {integrity: sha512-U63A+ly9JLPJj7ryR9omdXT3n+gS7jlExrHty4klsd/6xdUhC38CKZyZ0Gi3vctaVYRGTU8/vI+uKzBYdFqLaA==}
+  /@tanstack/react-query-devtools/4.20.4_fu3ixcwltlssi3ozitelgaebme:
+    resolution: {integrity: sha512-4e4wOmqAYjLS1RQ7gRBLCk3koCjbOfCMvbxS3CPCAN5+FLBemLAvoYvFJ/i/7DPsIsltGwsnd7YAFFGMzdSx7A==}
     peerDependencies:
-      '@tanstack/react-query': 4.19.1
+      '@tanstack/react-query': 4.20.4
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@tanstack/match-sorter-utils': 8.7.0
-      '@tanstack/react-query': 4.19.1_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.20.4_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       superjson: 1.11.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
-  /@tanstack/react-query/4.19.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-5dvHvmc0vrWI03AJugzvKfirxCyCLe+qawrWFCXdu8t7dklIhJ7D5ZhgTypv7mMtIpdHPcECtCiT/+V74wCn2A==}
+  /@tanstack/react-query/4.20.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-SJRxx13k/csb9lXAJfycgVA1N/yU/h3bvRNWP0+aHMfMjmbyX82FdoAcckDBbOdEyAupvb0byelNHNeypCFSyA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -4677,7 +4677,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@tanstack/query-core': 4.19.1
+      '@tanstack/query-core': 4.20.4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
