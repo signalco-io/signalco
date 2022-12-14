@@ -19,14 +19,14 @@ export const IsConfigurationValid = <TConfigProps>(config: any, options: IWidget
         }
 
         if (opt.multiple && (!Array.isArray(value) || !value.length)) {
-            console.debug(`Config invalid: ${opt.name} - multiple but not array or empty`, config);
+            console.debug(`Config invalid: ${String(opt.name)} - multiple but not array or empty`, config);
             return false;
         }
 
         switch (opt.type) {
             case 'deviceTarget':
                 if (!value.deviceId) {
-                    console.debug(`Config invalid: ${opt.name} - deviceTarget, deviceId missing`, config);
+                    console.debug(`Config invalid: ${String(opt.name)} - deviceTarget, deviceId missing`, config);
                     return false;
                 }
                 break;
@@ -34,11 +34,11 @@ export const IsConfigurationValid = <TConfigProps>(config: any, options: IWidget
             case 'deviceContactTarget':
                 if (opt.multiple){
                     if ((value as IContactPointerPartial[]).filter(v => isInvalidateDeviceContactTarget(v)).length) {
-                        console.debug(`Config invalid: ${opt.name} - deviceContact multiple, missing options`, config);
+                        console.debug(`Config invalid: ${String(opt.name)} - deviceContact multiple, missing options`, config);
                         return false;
                     }
                 } else if (isInvalidateDeviceContactTarget(value)) {
-                    console.debug(`Config invalid: ${opt.name} - deviceContact, missing options`, config);
+                    console.debug(`Config invalid: ${String(opt.name)} - deviceContact, missing options`, config);
                     return false;
                 }
                 break;
