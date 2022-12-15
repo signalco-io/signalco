@@ -1,4 +1,3 @@
-import { Box } from '@mui/system';
 import { ChildrenProps } from '../sharedTypes';
 
 export interface GentleSlideProps extends ChildrenProps {
