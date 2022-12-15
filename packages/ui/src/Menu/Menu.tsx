@@ -1,12 +1,20 @@
 import { ChildrenProps } from "../sharedTypes";
 import { Menu as JoyMenu } from '@mui/joy';
 import { usePopupState, bindTrigger, bindMenu } from "material-ui-popup-state/hooks";
-import { ReactElement, useMemo } from "react";
+import { ReactElement } from "react";
 
-/** @alpha */
+export type ControlAriaProps = {
+    'aria-controls'?: string;
+    'aria-describedby'?: string;
+    'aria-haspopup'?: true;
+};
+
 export interface MenuProps extends ChildrenProps {
     menuId: string;
-    renderTrigger: (props: any) => ReactElement,
+    renderTrigger: (props: ControlAriaProps & {
+        onClick: (event: React.MouseEvent<Element, MouseEvent>) => void;
+        onTouchStart: (event: React.TouchEvent<Element>) => void;
+    }) => ReactElement,
 }
 
 /** @alpha */
