@@ -24,7 +24,7 @@ function FeatureDescription(props: { header: string, content: string | React.Rea
       <Typography textColor="neutral.400">{props.content}</Typography>
       <div>
         {props.link && (
-          <Link passHref href={props.link} legacyBehavior>
+          <Link passHref href={props.link}>
             <Button variant="outlined">{props.linkText ?? 'Read more'}</Button>
           </Link>
         )}

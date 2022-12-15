@@ -54,7 +54,7 @@ function RingLogo(props: { ringRadius: number, degrees: number, imageProps: Imag
     const logoHeight = props.imageProps.height as number;
 
     return (
-        <Link href={`/channels/${props.imageProps.id}`} passHref legacyBehavior>
+        <Link href={`/channels/${props.imageProps.id}`} passHref>
             <Box component="a" sx={{
                 p: `${logoPadding}px`,
                 backgroundColor: 'background.default',
