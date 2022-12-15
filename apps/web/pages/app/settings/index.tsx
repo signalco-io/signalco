@@ -1,14 +1,15 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
-import { Loadable, Container, Stack, Row, Card, Sheet, Typography, Box, List, ListItem } from '@signalco/ui';
+import { Loadable, Stack, Row, Card, Typography, Box, List, ListItem } from '@signalco/ui';
 import { isNonEmptyString, isNotNull, isTrue } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/esm/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
 import { ChildrenProps } from '../../../src/sharedTypes';
-import CurrentUserProvider from '../../../src/services/CurrentUserProvider';
+import { getCurrentUserAsync } from '../../../src/services/CurrentUserProvider';
 import appSettingsProvider, { ApiDevelopmentUrl, ApiProductionUrl } from '../../../src/services/AppSettingsProvider';
 import useUserSetting from '../../../src/hooks/useUserSetting';
 import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
+import useLoadAndError from '../../../src/hooks/useLoadAndError';
 import SelectItems from '../../../components/shared/form/SelectItems';
 import Picker from '../../../components/shared/form/Picker';
 import AppThemePicker from '../../../components/settings/AppThemePicker';
@@ -19,13 +20,14 @@ import ApiBadge from '../../../components/development/ApiBadge';
 
 function ConnectedService() {
     const { t } = useLocale('App', 'Settings');
+    const user = useLoadAndError(getCurrentUserAsync);
 
     return (
         <Card>
             <Row spacing={2}>
                 <Stack>
                     <Typography>Google</Typography>
-                    <Typography level="body3">{CurrentUserProvider.getCurrentUser()?.name} ({CurrentUserProvider.getCurrentUser()?.email})</Typography>
+                    <Typography level="body3">{user.item?.name} ({user.item?.email})</Typography>
                 </Stack>
                 <Typography level="body2">{t('Connected')}</Typography>
             </Row>
@@ -113,7 +115,7 @@ function SettingsIndex() {
     const locales = useLocale('App', 'Locales');
     const [isLoading, setIsLoading] = useState(true);
     const [userLocale, setUserLocale] = useUserSetting<string>('locale', 'en');
-    const [userNickName, setUserNickName] = useUserSetting<string>('nickname', CurrentUserProvider.getCurrentUser()?.name ?? '');
+    const [userNickName, setUserNickName] = useUserSetting<string>('nickname', '');
     const [userTimeFormat, setUserTimeFormat] = useUserSetting<string>('timeFormat', '1');
     const [userTimeZone, setUserTimeZone] = useUserSetting<string>('timeZone', '0');
     const [userLocation, setUserLocation] = useUserSetting<[number, number] | undefined>('location', undefined);

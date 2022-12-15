@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
-import { Loadable, Avatar, Button, Divider, IconButton, Menu, Tooltip, Typography, Box, MenuItemLink, ButtonProps } from '@signalco/ui';
+import { Avatar, Button, Divider, IconButton, Menu, Typography, Box, MenuItemLink, ButtonProps } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import NavLink from './navigation/NavLink';
 import ApiBadge from './development/ApiBadge';
-import CurrentUserProvider from '../src/services/CurrentUserProvider';
+import { getCurrentUserAsync } from '../src/services/CurrentUserProvider';
 import { KnownPages } from '../src/knownPages';
 import useLocale from '../src/hooks/useLocale';
+import useLoadAndError from '../src/hooks/useLoadAndError';
 import { orderBy } from '../src/helpers/ArrayHelpers';
 
 const navItems = [
@@ -19,31 +19,20 @@ const navItems = [
 ];
 
 function UserAvatar() {
-  const user = CurrentUserProvider.getCurrentUser();
-  if (user === undefined) {
-    return (
-      <Avatar />
-    );
-  }
+  const user = useLoadAndError(getCurrentUserAsync);
 
   let userNameInitials = '';
-  if (user.given_name && user.family_name) {
-    userNameInitials = `${user.given_name[0]}${user.family_name[0]}`;
+  if (user.item?.given_name && user.item?.family_name) {
+    userNameInitials = `${user.item.given_name[0]}${user.item.family_name[0]}`;
   }
-  if (userNameInitials === '' && user.email) {
-    userNameInitials = user.email[0];
-  }
-
-  if (user.picture) {
-    return (
-      <Avatar src={user.picture} alt={userNameInitials}>
-        {userNameInitials}
-      </Avatar>
-    );
+  if (userNameInitials === '' && user.item?.email) {
+    userNameInitials = user.item.email[0];
   }
 
   return (
-    <Avatar>{userNameInitials}</Avatar>
+    <Avatar src={user.item?.picture ?? '#'} alt={userNameInitials}>
+      {userNameInitials}
+    </Avatar>
   );
 }
 
@@ -61,25 +50,18 @@ function UserProfileAvatarButton(props: ButtonProps) {
 function UserProfileAvatar() {
   const { t } = useLocale('App', 'Account');
 
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
-
   return (
-    <Loadable isLoading={isLoading} placeholder="skeletonRect" width={30} height={30}>
-      <Menu
-        menuId="account-menu"
-        renderTrigger={UserProfileAvatarButton}>
-        <MenuItemLink href={KnownPages.Settings} startDecorator={<Settings />}>
-          {t('Settings')}
-        </MenuItemLink>
-        <Divider />
-        <MenuItemLink href={KnownPages.Logout} startDecorator={<LogOut />}>
-          {t('Logout')}
-        </MenuItemLink>
-      </Menu>
-    </Loadable>
+    <Menu
+      menuId="account-menu"
+      renderTrigger={UserProfileAvatarButton}>
+      <MenuItemLink href={KnownPages.Settings} startDecorator={<Settings />}>
+        {t('Settings')}
+      </MenuItemLink>
+      <Divider />
+      <MenuItemLink href={KnownPages.Logout} startDecorator={<LogOut />}>
+        {t('Logout')}
+      </MenuItemLink>
+    </Menu>
   );
 }
 
