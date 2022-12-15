@@ -77,13 +77,19 @@ export default function Footer() {
                                     textAlign={{ xs: 'center', sm: 'left' }}
                                     level="body3">Copyright © {now().getFullYear()} signalco. All rights reserved.</Typography>
                                 <Stack direction="row" spacing={1} alignItems={{ xs: 'center', sm: 'start' }}>
-                                    <IconButton aria-label="Twitter link" href="https://twitter.com/signalco_io">
+                                    <IconButton
+                                        aria-label="Twitter link"
+                                        href="https://twitter.com/signalco_io">
                                         <Twitter />
                                     </IconButton>
-                                    <IconButton aria-label="reddit link" href="https://www.reddit.com/r/signalco/">
+                                    <IconButton
+                                        aria-label="reddit link"
+                                        href="https://www.reddit.com/r/signalco/">
                                         <Typography>/r</Typography>
                                     </IconButton>
-                                    <IconButton aria-label="GitHub link" href="https://github.com/signalco-io/signalco">
+                                    <IconButton
+                                        aria-label="GitHub link"
+                                        href="https://github.com/signalco-io/signalco">
                                         <Github />
                                     </IconButton>
                                 </Stack>

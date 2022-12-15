@@ -47,7 +47,7 @@ function SmallIndicator({
     small = true
 }: SmallIndicatorProps) {
     return (
-        <Link href={href} passHref legacyBehavior>
+        <Link href={href} passHref>
             <Button variant="plain">
                 <Box sx={{
                     width: small ? 24 : 52,
@@ -101,7 +101,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
         <Box sx={{ width: '100%', height: '100%' }}>
             <Stack alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
                 <Box sx={{ mt: rows > 2 ? 9 : (rows > 1 ? 2 : 0) }}>
-                    <Link href={`${KnownPages.Entities}/${temperatureDevice?.id}`} passHref legacyBehavior>
+                    <Link href={`${KnownPages.Entities}/${temperatureDevice?.id}`} passHref>
                         <Button variant="plain">
                             <Row alignItems="stretch">
                                 <Stack sx={{ height: '100%' }} justifyContent="center" alignItems="center">

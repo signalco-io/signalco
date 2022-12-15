@@ -19,7 +19,7 @@ export default function EntityCard({ entity, spread }: EntityCardProps) {
     const Icon = EntityIcon(entity);
 
     return (
-        <Link href={`${KnownPages.Entities}/${entity.id}`} legacyBehavior>
+        <Link href={`${KnownPages.Entities}/${entity.id}`}>
             <Card sx={{ height: '100%', p: spread ? 0 : 1 }}>
                 <Stack
                     spacing={2}

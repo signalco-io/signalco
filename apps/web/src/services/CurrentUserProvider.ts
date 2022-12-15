@@ -1,11 +1,13 @@
 import { User } from '@auth0/auth0-spa-js';
 import LocalStorageService from './LocalStorageService';
 
-class CurrentUserProvider {
-    getCurrentUser() {
-        return LocalStorageService.getItem<User>('user');
-    }
+export function getCurrentUserAsync() {
+    return new Promise<User | undefined>((resolve) => {
+        resolve(LocalStorageService.getItem<User>('user'));
+    });
+}
 
+class CurrentUserProvider {
     setCurrentUser(user: User) {
         LocalStorageService.setItem('user', user);
     }

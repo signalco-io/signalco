@@ -27,6 +27,15 @@ html, body, #__next {
   width: 100%;
 }
 
+a {
+  text-decoration: none;
+  color: var(--joy-palette-text-tertiary);
+
+  &:hover {
+    color: var(--joy-palette-text-secondary);
+  }
+}
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;

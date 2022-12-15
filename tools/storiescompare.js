@@ -58,7 +58,6 @@ function logProcess(message, taskToRun, silent) {
     }
 }
 
-let numberOfChanges = false;
 try {
     // Get all the approved files.
     const approvedFiles = logProcess('Fetching approved files...', () => getFilesRecursively(APPROVED_STORYCAPS), true);
