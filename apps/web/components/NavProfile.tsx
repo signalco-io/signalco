@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
-import { Avatar, Button, Divider, IconButton, Menu, Typography, Box, MenuItemLink, ButtonProps } from '@signalco/ui';
+import { Button, Divider, IconButton, Menu, Typography, Box, MenuItemLink, ButtonProps } from '@signalco/ui';
 import { Stack } from '@mui/system';
+import UserAvatar from './users/UserAvatar';
 import NavLink from './navigation/NavLink';
 import ApiBadge from './development/ApiBadge';
 import { getCurrentUserAsync } from '../src/services/CurrentUserProvider';
@@ -18,29 +19,13 @@ const navItems = [
   { label: 'Entities', path: KnownPages.Entities, icon: Device }
 ];
 
-function UserAvatar() {
+function UserProfileAvatarButton(props: ButtonProps) {
   const user = useLoadAndError(getCurrentUserAsync);
 
-  let userNameInitials = '';
-  if (user.item?.given_name && user.item?.family_name) {
-    userNameInitials = `${user.item.given_name[0]}${user.item.family_name[0]}`;
-  }
-  if (userNameInitials === '' && user.item?.email) {
-    userNameInitials = user.item.email[0];
-  }
-
   return (
-    <Avatar src={user.item?.picture ?? '#'} alt={userNameInitials}>
-      {userNameInitials}
-    </Avatar>
-  );
-}
-
-function UserProfileAvatarButton(props: ButtonProps) {
-  return (
-    <Button variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 2 }} {...props} >
+    <Button variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 2 }} {...props}>
       <Stack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
-        <UserAvatar />
+        <UserAvatar user={user.item} />
         <ApiBadge />
       </Stack>
     </Button>
