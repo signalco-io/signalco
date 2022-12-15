@@ -54,8 +54,8 @@ function RingLogo(props: { ringRadius: number, degrees: number, imageProps: Imag
     const logoHeight = props.imageProps.height as number;
 
     return (
-        <Link href={`/channels/${props.imageProps.id}`} passHref>
-            <Box component="a" sx={{
+        <Link href={`/channels/${props.imageProps.id}`} passHref aria-label={props.imageProps.alt} >
+            <Box component="span" sx={{
                 p: `${logoPadding}px`,
                 backgroundColor: 'background.default',
                 width: `${logoWidth + logoPadding * 2}px`,

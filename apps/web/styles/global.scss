@@ -29,6 +29,11 @@ html, body, #__next {
 
 a {
   text-decoration: none;
+  color: var(--joy-palette-text-tertiary);
+
+  &:hover {
+    color: var(--joy-palette-text-secondary);
+  }
 }
 
 .material-icons {
