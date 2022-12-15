@@ -134,6 +134,7 @@ importers:
       '@types/uuid': 9.0.0
       '@vvo/tzdb': 6.82.0
       babel-loader: 9.1.0
+      classix: ^2.1.17
       clsx: 1.2.1
       cobe: 0.6.3
       color: 4.2.3
@@ -202,6 +203,7 @@ importers:
       '@tanstack/react-query': 4.20.4_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-devtools': 4.20.4_fu3ixcwltlssi3ozitelgaebme
       '@vvo/tzdb': 6.82.0
+      classix: 2.1.17
       clsx: 1.2.1
       cobe: 0.6.3
       color: 4.2.3
@@ -6332,6 +6334,10 @@ packages:
       isobject: 3.0.1
       static-extend: 0.1.2
     dev: true
+
+  /classix/2.1.17:
+    resolution: {integrity: sha512-0lBXJDoUtHoYHYfHop2BHyE1SehmUZhNfm9i5f3A1qvVTYT1mGLyOJRUZ+uE9QysOtmGnNvy4rrWPja1tIfPSA==}
+    dev: false
 
   /classnames/2.3.2:
     resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
