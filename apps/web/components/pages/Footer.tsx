@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Github, Twitter } from '@signalco/ui-icons';
+import { GitHub, Twitter } from '@signalco/ui-icons';
 import { Container, Grid, IconButton, Typography, Box, Link } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import SignalcoLogotype from '../icons/SignalcoLogotype';
@@ -90,7 +90,7 @@ export default function Footer() {
                                     <IconButton
                                         aria-label="GitHub link"
                                         href="https://github.com/signalco-io/signalco">
-                                        <Github />
+                                        <GitHub />
                                     </IconButton>
                                 </Stack>
                             </Stack>

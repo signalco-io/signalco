@@ -57,5 +57,5 @@ export {
     
 
     Twitter,
-    Github
+    Github as GitHub
 } from 'lucide-react';

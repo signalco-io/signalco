@@ -5,7 +5,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { Github, Navigate } from '@signalco/ui-icons';
+import { GitHub, Navigate } from '@signalco/ui-icons';
 import { Container, ImageLink, Button, Divider, Typography, Grid, Box, Fade, GentleSlide } from '@signalco/ui';
 import { Stack, SxProps, Theme } from '@mui/system';
 import DeveloperOnly from '../shared/DeveloperOnly';
@@ -231,7 +231,7 @@ export default function LandingPageView() {
           <Stack alignItems="center">
             <Button
               variant="solid"
-              startDecorator={<Github />}
+              startDecorator={<GitHub />}
               endDecorator={<Navigate />}
               href="https://github.com/signalco-io"
               size="lg">signalco on GitHub</Button>
