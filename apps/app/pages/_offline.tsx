@@ -1,14 +1,14 @@
 import React from 'react';
-import { Typography } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Typography, Stack } from '@signalco/ui';
 import { AppLayout } from '../components/layouts/AppLayout';
 import SignalcoLogotype from '../components/icons/SignalcoLogotype';
 
 function OfflinePage() {
     return (
         <Stack
-            sx={{
-                my: '20vh'
+            style={{
+                marginTop: '20vh',
+                marginBottom: '20vh'
             }}
             alignItems="center"
             spacing={4}
