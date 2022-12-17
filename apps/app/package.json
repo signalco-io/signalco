@@ -43,7 +43,6 @@
         "@tanstack/react-query-devtools": "4.20.4",
         "@vvo/tzdb": "6.82.0",
         "classix": "^2.1.17",
-        "clsx": "1.2.1",
         "cobe": "0.6.3",
         "color": "4.2.3",
         "compare-versions": "5.0.3",

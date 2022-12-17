@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { clsx } from 'clsx';
+import { cx } from 'classix';
 import { SupportedColorScheme } from '@signalco/ui';
 import styles from './SignalcoLogotype.module.scss';
 import ApiBadge from '../development/ApiBadge';
@@ -22,7 +22,7 @@ function SignalcoLogotype({ width, height, theme, hideBadge }: SignalcoLogotypeP
     const badgeContainerStyle: any = { '--fixedHeight': `${fixedHeight}px` };
 
     return (
-        <div aria-label="Signalco" role="img" className={clsx(styles.root, hideBadge && styles.hideBadge)} ref={ref}>
+        <div aria-label="Signalco" role="img" className={cx(styles.root, hideBadge && styles.hideBadge)} ref={ref}>
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                 width={fixedWidth} height={fixedHeight} viewBox="0 0 2810.000000 666.000000"
                 preserveAspectRatio="xMidYMid meet">
