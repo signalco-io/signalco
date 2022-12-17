@@ -40,7 +40,7 @@
         "@signalco/data": "workspace:*",
         "@tanstack/react-query": "4.20.4",
         "@tanstack/react-query-devtools": "4.20.4",
-        "@vvo/tzdb": "6.82.0",
+        "@vvo/tzdb": "6.83.0",
         "classix": "^2.1.17",
         "cobe": "0.6.3",
         "color": "4.2.3",
