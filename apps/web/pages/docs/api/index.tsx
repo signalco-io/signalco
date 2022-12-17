@@ -1,17 +1,13 @@
 import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import { Security, Send } from '@signalco/ui-icons';
-import { Stack, Loadable, Chip, NavigatingButton, Typography, TextField, Divider, Badge, Alert, Button, Card, List, Tooltip, Box, Row, Grid, CardOverflow } from '@signalco/ui';
+import { Stack, Loadable, Chip, NavigatingButton, Typography, TextField, Divider, Badge, Alert, Button, Card, List, Tooltip, Box, Row, Grid, CardOverflow, ListTreeItem, SelectItems, CopyToClipboardInput } from '@signalco/ui';
 import { ObjectDictAny } from '../../../src/sharedTypes';
-import appSettingsProvider from '../../../src/services/AppSettingsProvider';
+import { isDeveloper } from '../../../src/services/EnvProvider';
 import useLoadAndError from '../../../src/hooks/useLoadAndError';
 import useHashParam from '../../../src/hooks/useHashParam';
 import { camelToSentenceCase } from '../../../src/helpers/StringHelpers';
-import ListTreeItem from '../../../components/shared/list/ListTreeItem';
-import SelectItems from '../../../components/shared/form/SelectItems';
-import CopyToClipboardInput from '../../../components/shared/form/CopyToClipboardInput';
 import { PageFullLayout } from '../../../components/layouts/PageFullLayout';
-import CodeEditor from '../../../components/code/CodeEditor';
 
 type ChipColors = 'neutral' | 'primary' | 'danger' | 'info' | 'success' | 'warning';
 
@@ -469,11 +465,16 @@ function Actions(props: ActionsProps) {
                         <Typography textAlign="right" level="body3">application/json</Typography>
                         <Card>
                             <CardOverflow>
-                                <CodeEditor
+                                {/* TODO: Use CodeEditor component with language */}
+                                {/* <CodeEditor
                                     language="json"
                                     code={requestBodyValue}
                                     setCode={setRequestBodyValue}
-                                    height={300} />
+                                    height={300} /> */}
+                                <textarea
+                                    value={requestBodyValue}
+                                    onChange={(e) => setRequestBodyValue(e.target.value)}
+                                    rows={10} />
                             </CardOverflow>
                         </Card>
                     </Stack>
@@ -491,7 +492,12 @@ function Actions(props: ActionsProps) {
                         <ResponseStatusCode statusCode={responseStatusCode} />
                     </Row>
                     <Card>
-                        <CodeEditor language="json" code={response || 'Empty response'} height={200} readonly />
+                        {/* TODO: Use CodeEditor component with language */}
+                        {/* <CodeEditor language="json" code={response || 'Empty response'} height={200} readonly /> */}
+                        <textarea
+                            value={response || 'Empty response'}
+                            readOnly={true}
+                            rows={10} />
                     </Card>
                 </Stack>
             )}
@@ -506,7 +512,7 @@ async function getOpenApiDoc(url: string) {
 const ApiContext = createContext<OpenAPIV3.Document | undefined>(undefined);
 
 function DocsApiPage() {
-    const url = appSettingsProvider.isDeveloper
+    const url = isDeveloper
         ? 'https://api.signalco.dev/api/swagger.json'
         : 'https://api.signalco.io/api/swagger.json';
     const apiRequest = useCallback(() => getOpenApiDoc(url), [url]);

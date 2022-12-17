@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
+// TODO: Move to shared library
+
 export function parseHash() {
     if (typeof window === 'undefined') {
         return new URLSearchParams();

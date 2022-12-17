@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../styles/global.scss';
 import '@signalco/ui/dist/ui.css';
 import { ChildrenProps } from '../src/sharedTypes';
-import useAppTheme from '../src/hooks/useAppTheme';
 
 const queryClient = new QueryClient();
 
@@ -20,7 +19,6 @@ export interface PageWithMetadata extends FunctionComponent<any> {
 };
 
 function ThemeChangerWrapper(props: ChildrenProps) {
-  useAppTheme();
   return <>{props.children}</>;
 }
 

@@ -1,13 +1,13 @@
 'use client';
 
 import { useInView } from 'react-cool-inview';
-import React from 'react';
+import React, { type CSSProperties } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { GitHub, Navigate } from '@signalco/ui-icons';
-import { Container, ImageLink, Button, Divider, Typography, Grid, Box, Fade, GentleSlide } from '@signalco/ui';
-import { Stack, SxProps, Theme } from '@mui/system';
+import { Stack, Container, ImageLink, Button, Divider, Typography, Grid, Box, Fade, GentleSlide } from '@signalco/ui';
+import { Stack as MuiStack } from '@mui/system';
 import DeveloperOnly from '../shared/DeveloperOnly';
 import DiscoverVisual from '../pages/landing/visuals/DiscoverVisual';
 import Cover from '../pages/landing/Cover';
@@ -39,7 +39,7 @@ function StepContent(props: {
   subtitle?: string;
   image?: React.ReactNode,
   imageContainerHeight?: number,
-  imageContainerStyles?: SxProps | undefined,
+  imageContainerStyles?: CSSProperties | undefined,
   children?: React.ReactNode | React.ReactNode[];
 }) {
   const { observe, inView } = useInView({
@@ -48,8 +48,8 @@ function StepContent(props: {
 
   return (
     <SectionCenter>
-      <Stack spacing={{ xs: 6, md: 12 }} ref={observe}>
-        <Stack spacing={{ xs: 2, md: 4 }}>
+      <MuiStack spacing={{ xs: 6, md: 12 }} ref={observe}>
+        <MuiStack spacing={{ xs: 2, md: 4 }}>
           <GentleSlide appear={inView} direction="down">
             <Typography level="h3" component="h2" textAlign="center">{props.header}</Typography>
           </GentleSlide>
@@ -58,24 +58,24 @@ function StepContent(props: {
               <Typography level="body2" textAlign="center">{props.subtitle}</Typography>
             </GentleSlide>
           )}
-        </Stack>
+        </MuiStack>
         <div>
           <Grid container spacing={8} alignItems="center">
             {props.image && (
               <Grid xs={12} md={6} sx={{ position: 'relative', height: props.imageContainerHeight }}>
                 <Fade appear={inView} duration={1400}>
-                  <Box sx={props.imageContainerStyles}>
+                  <div style={props.imageContainerStyles}>
                     {props.image}
-                  </Box>
+                  </div>
                 </Fade>
               </Grid>
             )}
             {props.children && (
               <Grid xs={12} md={props.image ? 6 : 12}>
-                <Stack
+                <MuiStack
                   sx={{
                     gap: 4,
-                    flexDirection: props.direction === 'horizontal' ? { xs: 'column', md: 'row' } : 'colum'
+                    flexDirection: props.direction === 'horizontal' ? { xs: 'column', md: 'row' } : 'column'
                   }}>
                   {(Array.isArray(props.children) ? props.children : [props.children]).map((child, childIndex) => (
                     <GentleSlide
@@ -85,25 +85,25 @@ function StepContent(props: {
                       {child}
                     </GentleSlide>
                   ))}
-                </Stack>
+                </MuiStack>
               </Grid>
             )}
           </Grid>
         </div>
-      </Stack>
+      </MuiStack>
     </SectionCenter>
   );
 }
 
-function SectionCenter(props: { children?: React.ReactNode | undefined, sx?: SxProps<Theme> | undefined, narrow?: boolean }) {
+function SectionCenter(props: { children?: React.ReactNode | undefined, style?: CSSProperties | undefined, narrow?: boolean }) {
   return (
-    <Box sx={props.sx} component="section">
+    <section style={props.style}>
       <Container>
         <Box sx={{ px: { xs: 1, sm: 4, md: 8 }, py: { xs: props.narrow ? 4 : 8, sm: props.narrow ? 4 : 12 } }}>
           {props.children}
         </Box>
       </Container>
-    </Box>
+    </section>
   );
 }
 
@@ -126,7 +126,7 @@ function FeaturedIntegrationsSection() {
 
   return (
     <SectionCenter>
-      <Stack spacing={4} ref={observe}>
+      <MuiStack spacing={4} ref={observe}>
         <GentleSlide appear={inView} direction="down">
           <Typography level="body2" textAlign="center" textTransform="uppercase">Featured integrations</Typography>
         </GentleSlide>
@@ -144,7 +144,7 @@ function FeaturedIntegrationsSection() {
             </Grid>
           ))}
         </Grid>
-      </Stack>
+      </MuiStack>
     </SectionCenter>
   );
 }
@@ -218,10 +218,10 @@ function DataPart(props: { value: string, subtitle: string }) {
 
 export default function LandingPageView() {
   return (
-    <Stack sx={{ overflowX: 'hidden' }}>
-      <Box my={2}>
+    <Stack style={{ overflowX: 'hidden' }}>
+      <div style={{ marginTop: 2 * 8, marginBottom: 2 * 8 }}>
         <Cover />
-      </Box>
+      </div>
       <DeveloperOnly>
         <CounterIndicator count={0} />
         <StepContent
@@ -273,8 +273,8 @@ export default function LandingPageView() {
       </StepContent>
       <GlobeSection />
       <Divider />
-      <SectionCenter narrow sx={{ bgcolor: 'background.paper' }}>
-        <Stack
+      <SectionCenter narrow style={{ backgroundColor: 'var(--joy-palette-background-surface)' }}>
+        <MuiStack
           spacing={{ xs: 6, md: 8 }}
           alignItems="center"
           direction={{ xs: 'column', md: 'row' }}
@@ -282,15 +282,15 @@ export default function LandingPageView() {
           <DataPart value="8" subtitle="Integrations" />
           <DataPart value="500+" subtitle="Automations per day" />
           <DataPart value="2000+" subtitle="Supported devices" />
-        </Stack>
+        </MuiStack>
       </SectionCenter>
       <Divider />
       <NewsletterSection />
       <Container>
-        <Box sx={{ pb: 8 }}>
+        <div style={{ paddingBottom: 8 * 8 }}>
           <CtaSection />
-        </Box>
+        </div>
       </Container>
-    </Stack >
+    </Stack>
   );
 }

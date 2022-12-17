@@ -3,7 +3,6 @@
 import { ChangeEvent, SyntheticEvent, createRef, useState } from 'react';
 import { Row, Stack, Alert, Button, TextField, Typography, Fade, GentleSlide } from '@signalco/ui';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import HttpService from '../../../src/services/HttpService';
 
 function Newsletter() {
     const [email, setEmail] = useState('');
@@ -31,15 +30,13 @@ function Newsletter() {
 
             // TODO: Submit request
             try {
-                await HttpService.requestAsync(
-                    '/website/newsletter-subscribe',
-                    'post',
-                    { email: email },
-                    {
+                await fetch('https://api.signalco.io/api/website/newsletter-subscribe', {
+                    method: 'post',
+                    body: JSON.stringify({ email }),
+                    headers: {
                         'HCAPTCHA-RESPONSE': token
-                    },
-                    true
-                );
+                    }
+                });
 
                 setShowSuccess(true);
             } catch (err) {

@@ -73,32 +73,7 @@
     "security",
     "utilities"
   ],
-  "shortcuts": [
-    {
-      "name": "Open dashboards",
-      "short_name": "Dashboards",
-      "url": "/app",
-      "icons": [
-        {
-          "src": "/assets/dashboard_x192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "Open entities",
-      "short_name": "Entities",
-      "url": "/app/entities",
-      "icons": [
-        {
-          "src": "/assets/entities_x192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    }
-  ],
+  "shortcuts": [],
   "screenshots": [
     {
       "src": "https://www.signalco.io/images/screenshot_dashboard.png",
