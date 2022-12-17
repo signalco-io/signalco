@@ -1,5 +1,4 @@
-import { Stack , Typography } from '@signalco/ui';
-import WidgetStore from '../../components/widget-store/WidgetStore';
+import { Stack, Typography } from '@signalco/ui';
 import PageCenterHeader from '../../components/pages/PageCenterHeader';
 import { PageLayout } from '../../components/layouts/PageLayout';
 
@@ -10,7 +9,6 @@ function FeatureDashboardsPage() {
             <Typography level="h4">Widgets</Typography>
             <Stack spacing={2}>
                 <Typography level="h5">Explore widgets</Typography>
-                <WidgetStore />
             </Stack>
         </Stack>
     );

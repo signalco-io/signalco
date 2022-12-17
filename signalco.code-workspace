@@ -9,6 +9,10 @@
 			"path": "apps/web"
 		},
 		{
+			"name": "🚀 app",
+			"path": "apps/app"
+		},
+		{
 			"name": "🚀 ui-docs",
 			"path": "apps/ui-docs"
 		},
@@ -23,7 +27,11 @@
 		{
 			"name": "📦 @signalco/ui-icons",
 			"path": "packages/ui-icons"
-		}
+		},
+		{
+			"name": "📦 @signalco/data",
+			"path": "packages/data"
+		},
 	],
 	"settings": {
 		"liveServer.settings.multiRootWorkspaceName": "✨ signalco-monorepo"

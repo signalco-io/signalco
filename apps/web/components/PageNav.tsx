@@ -1,13 +1,14 @@
 'use client';
 
 import React, { Suspense } from 'react';
-import { NavigatingButton, Container, Button, Box, Row, Link } from '@signalco/ui';
+import { NavigatingButton, Container, Button, Row, Link } from '@signalco/ui';
 import SignalcoLogotype from './icons/SignalcoLogotype';
+import { KnownPages } from '../src/knownPages';
 
 const navLinks = [
     // { href: '/features', text: 'Features' },
-    { href: '/channels', text: 'Channels' },
-    { href: '/pricing', text: 'Pricing' }
+    { href: KnownPages.Channels, text: 'Channels' },
+    { href: KnownPages.Pricing, text: 'Pricing' }
 ];
 
 function NavMenu() {
@@ -24,10 +25,10 @@ function NavMenu() {
 
 export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
     return (
-        <Box component="nav" sx={{
-            borderBottom: '1px solid transparent',
-            borderColor: 'background.body',
-            py: 2,
+        <nav style={{
+            borderBottom: '1px solid var(--joy-palette-background-body)',
+            paddingTop: 16,
+            paddingBottom: 16,
             position: 'fixed',
             left: 0,
             right: 0,
@@ -35,7 +36,7 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
             height: '80px',
             paddingLeft: fullWidth ? '24px' : 0,
             paddingRight: fullWidth ? '24px' : 0,
-            backdropFilter: 'saturate(180%) blur(10px)',
+            backdropFilter: 'blur(10px)',
             zIndex: 101
         }}>
             <Container maxWidth={fullWidth ? false : 'lg'}>
@@ -50,11 +51,11 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
                             <Suspense>
                                 <NavMenu />
                             </Suspense>
-                            <NavigatingButton href="/app">App</NavigatingButton>
+                            <NavigatingButton href={KnownPages.App}>App</NavigatingButton>
                         </Row>
                     </Row>
                 </header>
             </Container>
-        </Box>
+        </nav>
     );
 }

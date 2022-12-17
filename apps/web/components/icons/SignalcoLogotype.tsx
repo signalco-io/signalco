@@ -1,9 +1,7 @@
 import React, { forwardRef } from 'react';
-import { clsx } from 'clsx';
+import { cx } from 'classix';
 import { SupportedColorScheme } from '@signalco/ui';
 import styles from './SignalcoLogotype.module.scss';
-import ApiBadge from '../development/ApiBadge';
-import appSettingsProvider from '../../src/services/AppSettingsProvider';
 
 interface SignalcoLogotypeProps {
     width?: number;
@@ -19,10 +17,9 @@ function SignalcoLogotype({ width, height, theme, hideBadge }: SignalcoLogotypeP
     }
     const fixedWidth = width ?? (2810 / 666) * (height ?? 0);
     const fixedHeight = height ?? (666 / 2810) * (width ?? 0);
-    const badgeContainerStyle: any = { '--fixedHeight': `${fixedHeight}px` };
 
     return (
-        <div aria-label="Signalco" role="img" className={clsx(styles.root, hideBadge && styles.hideBadge)} ref={ref}>
+        <div aria-label="Signalco" role="img" className={cx(styles.root, hideBadge && styles.hideBadge)} ref={ref}>
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                 width={fixedWidth} height={fixedHeight} viewBox="0 0 2810.000000 666.000000"
                 preserveAspectRatio="xMidYMid meet">
@@ -43,11 +40,6 @@ function SignalcoLogotype({ width, height, theme, hideBadge }: SignalcoLogotypeP
                     <path d="M14598 3113 c7 -3 16 -2 19 1 4 3 -2 6 -13 5 -11 0 -14 -3 -6 -6z" />
                 </g>
             </svg>
-            {(!hideBadge && appSettingsProvider.isDeveloper) && (
-                <div className={styles.badgeContainer} style={badgeContainerStyle}>
-                    <ApiBadge />
-                </div>
-            )}
         </div>
     )
 }

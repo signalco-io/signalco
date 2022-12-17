@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import useIsClient from '@signalco/ui/src/hooks/useIsClient';
 import { Container, Box, Fade } from '@signalco/ui';
 import useTimeout from '../../../src/hooks/useTimeout';
-import useIsClient from '../../../src/hooks/useIsClient';
 const Globe = dynamic(() => import('./Globe'));
 
 function GlobeSection() {
