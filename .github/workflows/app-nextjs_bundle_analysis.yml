@@ -35,6 +35,7 @@ jobs:
       # This step pulls the raw bundle stats for the current bundle
       - name: Analyze bundle
         run: npx -yes -p github:hashicorp/nextjs-bundle-analysis report
+        working-directory: ./apps/app/
 
       - name: Upload bundle
         uses: actions/upload-artifact@v3
