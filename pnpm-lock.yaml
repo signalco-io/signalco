@@ -381,7 +381,7 @@ importers:
 
   packages/data:
     specifiers:
-      '@rollup/plugin-json': 5.0.2
+      '@rollup/plugin-json': 6.0.0
       '@signalco/tsconfig': '*'
       concurrently: ^7.6.0
       esbuild: ^0.16.4
@@ -392,7 +392,7 @@ importers:
       rollup-plugin-summary: ^2.0.0
       typescript: 4.9.4
     devDependencies:
-      '@rollup/plugin-json': 5.0.2_rollup@3.7.2
+      '@rollup/plugin-json': 6.0.0_rollup@3.7.2
       '@signalco/tsconfig': link:../tsconfig
       concurrently: 7.6.0
       esbuild: 0.16.4
@@ -3604,8 +3604,8 @@ packages:
       rollup: 3.7.2
     dev: true
 
-  /@rollup/plugin-json/5.0.2_rollup@3.7.2:
-    resolution: {integrity: sha512-D1CoOT2wPvadWLhVcmpkDnesTzjhNIQRWLsc3fA49IFOP2Y84cFOOJ+nKGYedvXHKUsPeq07HR4hXpBBr+CHlA==}
+  /@rollup/plugin-json/6.0.0_rollup@3.7.2:
+    resolution: {integrity: sha512-i/4C5Jrdr1XUarRhVu27EEwjt4GObltD7c+MkCIpO2QIbojw8MUs+CCTqOphQi3Qtg1FLmYt+l+6YeoIf51J7w==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^1.20.0||^2.0.0||^3.0.0
