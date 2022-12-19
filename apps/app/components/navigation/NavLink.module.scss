@@ -10,7 +10,7 @@
         height: 80%;
         width: 0;
         opacity: 0;
-        background-color: white;
+        background-color: var(--joy-palette-text-primary);
         border-radius: 3px;
         transition: opacity, width linear 0.2s;
     }

@@ -17,7 +17,7 @@ jobs:
                   node-version: "18.x"
                   cache: "pnpm"
             - name: Install dependencies
-              run: pnpm install --frozen-lockfile
+              run: pnpm install --frozen-lockfile --filter=web... --filter=.
             - name: Run stories-check
               run: pnpm stories-check
               id: runStoriesCheck
