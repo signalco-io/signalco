@@ -72,7 +72,7 @@ importers:
       next: 13.0.7
       next-pwa: 5.6.0
       next-secure-headers: 2.2.0
-      next-sitemap: 3.1.42
+      next-sitemap: 3.1.43
       openapi-types: 12.1.0
       pigeon-maps: 0.21.3
       playwright: ^1.28.0
@@ -177,7 +177,7 @@ importers:
       eslint-import-resolver-typescript: 3.5.2_2lbwmhbr7bncddqbzzpg77o75m
       eslint-plugin-import: 2.26.0_ejvvtv3jid5h5ymvu4wwazkljy
       fs-extra: 11.1.0
-      next-sitemap: 3.1.42_yctveb4xazgnpnecintgjwhjki
+      next-sitemap: 3.1.43_yctveb4xazgnpnecintgjwhjki
       openapi-types: 12.1.0
       playwright: 1.28.0
       prop-types: 15.8.1
@@ -306,7 +306,7 @@ importers:
       next: 13.0.8-canary.0
       next-pwa: 5.6.0
       next-secure-headers: 2.2.0
-      next-sitemap: 3.1.42
+      next-sitemap: 3.1.43
       openapi-types: 12.1.0
       playwright: ^1.28.0
       postcss: 8.4.20
@@ -368,7 +368,7 @@ importers:
       eslint-config-next: 13.0.7_lzzuuodtsqwxnvqeq4g4likcqa
       eslint-import-resolver-typescript: 3.5.2_2lbwmhbr7bncddqbzzpg77o75m
       eslint-plugin-import: 2.26.0_ejvvtv3jid5h5ymvu4wwazkljy
-      next-sitemap: 3.1.42_d7l5m7q2bpmbdhuvwbid3ylnnm
+      next-sitemap: 3.1.43_d7l5m7q2bpmbdhuvwbid3ylnnm
       openapi-types: 12.1.0
       playwright: 1.28.0
       prop-types: 15.8.1
@@ -11331,8 +11331,8 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: false
 
-  /next-sitemap/3.1.42_d7l5m7q2bpmbdhuvwbid3ylnnm:
-    resolution: {integrity: sha512-z/m440ZDCTxoE3FWbBWZLK66ZEh9e2R+j/Bm0d1Vo4PFkMi4yhWdIjWqhj//kyFyBvMYk3YWs8QQqVCCe15E6g==}
+  /next-sitemap/3.1.43_d7l5m7q2bpmbdhuvwbid3ylnnm:
+    resolution: {integrity: sha512-TshDAP69OjHwvszedQ/jBvOjzqy7Gm9NU3ZIP30X3e1qXsNVOVF5uzi9kQOI6v0uBG08QUOk9wKNSIk3zI/wjQ==}
     engines: {node: '>=14.18'}
     hasBin: true
     peerDependencies:
@@ -11345,8 +11345,8 @@ packages:
       next: 13.0.8-canary.0_ysz4gko4a26lxtatclmfotxma4
     dev: true
 
-  /next-sitemap/3.1.42_yctveb4xazgnpnecintgjwhjki:
-    resolution: {integrity: sha512-z/m440ZDCTxoE3FWbBWZLK66ZEh9e2R+j/Bm0d1Vo4PFkMi4yhWdIjWqhj//kyFyBvMYk3YWs8QQqVCCe15E6g==}
+  /next-sitemap/3.1.43_yctveb4xazgnpnecintgjwhjki:
+    resolution: {integrity: sha512-TshDAP69OjHwvszedQ/jBvOjzqy7Gm9NU3ZIP30X3e1qXsNVOVF5uzi9kQOI6v0uBG08QUOk9wKNSIk3zI/wjQ==}
     engines: {node: '>=14.18'}
     hasBin: true
     peerDependencies:
