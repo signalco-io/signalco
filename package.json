@@ -16,12 +16,5 @@
     },
     "devDependencies": {
         "turbo": "1.6.3"
-    },
-    "nextBundleAnalysis": {
-        "budget": 358400,
-        "budgetPercentIncreaseRed": 10,
-        "minimumChangeThreshold": 100,
-        "showDetails": true,
-        "buildOutputDirectory": "apps/web/.next"
     }
 }
