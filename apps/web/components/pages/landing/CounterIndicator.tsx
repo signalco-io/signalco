@@ -8,7 +8,7 @@ function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
 
     return (
         <GentleSlide appear={inView} direction="down">
-            <Box ref={observe} sx={{
+            <div ref={observe} style={{
                 margin: 'auto',
                 display: 'flex',
                 width: '42px',
@@ -48,7 +48,7 @@ function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
                 }}>
                     <Typography textColor="background.body" textAlign="center" fontSize={23}>{props.count}</Typography>
                 </Box>
-            </Box>
+            </div>
         </GentleSlide>
     );
 }

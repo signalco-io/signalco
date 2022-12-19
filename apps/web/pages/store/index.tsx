@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
-import { Chip, Card, Typography, Grid, Row } from '@signalco/ui';
+import { Chip, Card, Typography, Grid, Row, FilterList, SelectItems, Gallery } from '@signalco/ui';
 import { Stack } from '@mui/system';
 import contentData from './content.json';
-import useLocale from '../../src/hooks/useLocale';
 import green from '../../src/colors/green';
 import grey from '../../src/colors/gray';
 import amber from '../../src/colors/amber';
-import FilterList from '../../components/shared/list/FilterList';
-import SelectItems from '../../components/shared/form/SelectItems';
 import PageCenterHeader from '../../components/pages/PageCenterHeader';
 import { PageLayout } from '../../components/layouts/PageLayout';
 import SignalcoLogo from '../../components/icons/SignalcoLogo';
-import Gallery from '../../components/gallery/Gallery';
-
 
 function StoreStockStatusBadge(props: { status: number | undefined }) {
     let Icon = Close;
@@ -113,8 +108,11 @@ interface StorePageProps {
 }
 
 function StorePage(props: StorePageProps) {
-    const { t: tCategories } = useLocale('Store', 'Categories');
-    const { t: tCommunication } = useLocale('Store', 'Communication');
+    // TODO: Localize
+    // const { t: tCategories } = useLocale('Store', 'Categories');
+    // const { t: tCommunication } = useLocale('Store', 'Communication');
+    const tCategories = (key: string) => key;
+    const tCommunication = (key: string) => key;
     const categories = props.categories.map(c => ({ id: c, label: tCategories(c) }));
     const brands = props.brands.map(b => ({ id: b, label: b }));
     const communication = props.communication.map(b => ({ id: b, label: tCommunication(b) }));

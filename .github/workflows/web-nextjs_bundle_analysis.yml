@@ -26,15 +26,16 @@ jobs:
             node-version: "18.x"
             cache: "pnpm"
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --filter web... --filter .
 
       - name: Build next.js app
-        run: pnpm build
+        run: pnpm build --filter=web
 
       # Here's the first place where next-bundle-analysis' own script is used
       # This step pulls the raw bundle stats for the current bundle
       - name: Analyze bundle
         run: npx -yes -p github:hashicorp/nextjs-bundle-analysis report
+        working-directory: apps/web/
 
       - name: Upload bundle
         uses: actions/upload-artifact@v3
@@ -66,6 +67,7 @@ jobs:
       - name: Compare with base branch bundle
         if: success() && github.event.number
         run: ls -laR apps/web/.next/analyze/base && npx -yes -p github:hashicorp/nextjs-bundle-analysis compare
+        working-directory: apps/web/
 
       - name: Get comment body
         id: get-comment-body
@@ -75,7 +77,7 @@ jobs:
           result-encoding: string
           script: |
             const fs = require('fs')
-            const comment = fs.readFileSync('apps/web/.next/analyze/__bundle_analysis_comment.txt', 'utf8')
+            const comment = fs.readFileSync('apps/web/.next/analyze/__bundle_analysis_comment.txt', 'utf8') + "<!-- __NEXTJS_BUNDLE_WEB -->"
             core.setOutput('body', comment)
 
       - name: Find Comment
@@ -84,7 +86,7 @@ jobs:
         id: fc
         with:
           issue-number: ${{ github.event.number }}
-          body-includes: '<!-- __NEXTJS_BUNDLE -->'
+          body-includes: '<!-- __NEXTJS_BUNDLE_WEB -->'
 
       - name: Create Comment
         uses: peter-evans/create-or-update-comment@v2.1.0

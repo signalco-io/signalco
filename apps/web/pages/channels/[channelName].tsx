@@ -1,13 +1,12 @@
 import { useRouter } from 'next/router';
 import { Breadcrumbs , NavigatingButton, Row, Stack , Card, Typography } from '@signalco/ui';
+import { channelCategories as channelCategoriesData, channelsData } from '@signalco/data';
 import { KnownPages } from '../../src/knownPages';
 import ShareSocial from '../../components/pages/ShareSocial';
 import FaqSection from '../../components/pages/FaqSection';
 import CtaSection from '../../components/pages/CtaSection';
 import { PageLayout } from '../../components/layouts/PageLayout';
-import channels from '../../components/channels/channelsData.json';
 import ChannelLogo from '../../components/channels/ChannelLogo';
-import categories from '../../components/channels/channelCategoriesData.json';
 
 const channelFaq = [
     { id: 'channel', question: 'What is Channel?', answer: 'Channel is Entity that contains all information required for connected online service, application or device. Channels can execute actions directly or contain connected entities to manage.' },
@@ -18,8 +17,8 @@ const channelFaq = [
 function ChannelPage() {
     const router = useRouter();
     const channelName = router.query.channelName as string;
-    const channel = channels.find(c => c.channelName === channelName);
-    const channelCategories = channel?.categories.map(cc => categories.find(category => category.id === cc)).filter(cc => cc);
+    const channel = channelsData.find(c => c.channelName === channelName);
+    const channelCategories = channel?.categories.map(cc => channelCategoriesData.find(category => category.id === cc)).filter(cc => cc);
 
     const breadcrumbs = [
         { href: '/channels', label: 'Channels' },
@@ -58,7 +57,7 @@ function ChannelPage() {
                     </Card>
                 </Row>
                 <Stack alignItems="start">
-                    <NavigatingButton href={`${KnownPages.Channels}/${channelName}`} disabled={channel?.planned}>
+                    <NavigatingButton href={`${KnownPages.AppChannels}/${channelName}`} disabled={channel?.planned}>
                         Use this channel
                     </NavigatingButton>
                     {channel?.planned && <Typography level="body3">Available soon</Typography>}
@@ -74,7 +73,7 @@ ChannelPage.layout = PageLayout;
 const isClient = typeof window !== 'undefined';
 const clientWindow = isClient ? window : undefined;
 const pathNameSplit = clientWindow?.location.pathname.split('/') ?? [];
-const channelName = channels.find(c => c.channelName === (pathNameSplit.length ? pathNameSplit[pathNameSplit.length - 1] : undefined))?.label;
+const channelName = channelsData.find(c => c.channelName === (pathNameSplit.length ? pathNameSplit[pathNameSplit.length - 1] : undefined))?.label;
 ChannelPage.title = channelName ? channelName : 'Channel';
 
 export default ChannelPage;

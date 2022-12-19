@@ -1,0 +1,105 @@
+name: '[App] Next.js Bundle Analysis'
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - next
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: ./
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 'latest'
+      - uses: actions/setup-node@v3
+        with:
+            node-version: "18.x"
+            cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --filter app... --filter .
+
+      - name: Build next.js app
+        run: pnpm build --filter=app
+
+      # Here's the first place where next-bundle-analysis' own script is used
+      # This step pulls the raw bundle stats for the current bundle
+      - name: Analyze bundle
+        run: npx -yes -p github:hashicorp/nextjs-bundle-analysis report
+        working-directory: apps/app/
+
+      - name: Upload bundle
+        uses: actions/upload-artifact@v3
+        with:
+          name: bundle
+          path: apps/app/.next/analyze/__bundle_analysis.json
+
+      - name: Download base branch bundle stats
+        uses: dawidd6/action-download-artifact@v2
+        if: success() && github.event.number
+        with:
+          workflow: nextjs_bundle_analysis.yml
+          branch: ${{ github.event.pull_request.base.ref }}
+          path: apps/app/.next/analyze/base
+
+      # And here's the second place - this runs after we have both the current and
+      # base branch bundle stats, and will compare them to determine what changed.
+      # There are two configurable arguments that come from package.json:
+      #
+      # - budget: optional, set a budget (bytes) against which size changes are measured
+      #           it's set to 350kb here by default, as informed by the following piece:
+      #           https://infrequently.org/2021/03/the-performance-inequality-gap/
+      #
+      # - red-status-percentage: sets the percent size increase where you get a red
+      #                          status indicator, defaults to 20%
+      #
+      # Either of these arguments can be changed or removed by editing the `nextBundleAnalysis`
+      # entry in your package.json file.
+      - name: Compare with base branch bundle
+        if: success() && github.event.number
+        run: ls -laR apps/app/.next/analyze/base && npx -yes -p github:hashicorp/nextjs-bundle-analysis compare
+        working-directory: apps/app/
+
+      - name: Get comment body
+        id: get-comment-body
+        if: success() && github.event.number
+        uses: actions/github-script@v6
+        with:
+          result-encoding: string
+          script: |
+            const fs = require('fs')
+            const comment = fs.readFileSync('apps/app/.next/analyze/__bundle_analysis_comment.txt', 'utf8') + "<!-- __NEXTJS_BUNDLE_APP -->"
+            core.setOutput('body', comment)
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        if: success() && github.event.number
+        id: fc
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: '<!-- __NEXTJS_BUNDLE_APP -->'
+
+      - name: Create Comment
+        uses: peter-evans/create-or-update-comment@v2.1.0
+        if: success() && github.event.number && steps.fc.outputs.comment-id == 0
+        with:
+          issue-number: ${{ github.event.number }}
+          body: ${{ steps.get-comment-body.outputs.body }}
+
+      - name: Update Comment
+        uses: peter-evans/create-or-update-comment@v2.1.0
+        if: success() && github.event.number && steps.fc.outputs.comment-id != 0
+        with:
+          issue-number: ${{ github.event.number }}
+          body: ${{ steps.get-comment-body.outputs.body }}
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          edit-mode: replace

@@ -14,10 +14,6 @@
 
 ## Getting Started
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/signalco-io/signalco)
-
-Or Clone and build locally
-
 ### Local development
 
 Requirements:
@@ -37,7 +33,11 @@ pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Apps:
+
+- Web on [http://localhost:3000](http://localhost:3000)
+- App on [http://localhost:3001](http://localhost:3001)
+- UI Docs on [http://localhost:6006](http://localhost:6006)
 
 ## Configure env variables
 

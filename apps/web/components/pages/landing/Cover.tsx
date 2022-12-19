@@ -1,8 +1,6 @@
-import { useMemo } from 'react';
 import Link from 'next/link';
 import Image, { ImageProps } from 'next/image';
-import { Typography , Box } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Stack, Typography, Box } from '@signalco/ui';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
 
 const ringConfig = [
@@ -55,8 +53,8 @@ function RingLogo(props: { ringRadius: number, degrees: number, imageProps: Imag
 
     return (
         <Link href={`/channels/${props.imageProps.id}`} passHref aria-label={props.imageProps.alt} >
-            <Box component="span" sx={{
-                p: `${logoPadding}px`,
+            <Box component="span" style={{
+                padding: `${logoPadding}px`,
                 backgroundColor: 'background.default',
                 width: `${logoWidth + logoPadding * 2}px`,
                 height: `${logoHeight + logoPadding * 2}px`,
@@ -71,7 +69,7 @@ function RingLogo(props: { ringRadius: number, degrees: number, imageProps: Imag
                     to: { opacity: 1 }
                 },
                 [`@keyframes rotateRingLogo${props.imageProps.id}`]: {
-                    from: { transform: `rotate(${-props.degrees - (props.degrees * props.ringRadius)/10000}deg) translateX(${props.ringRadius}px) rotate(${props.degrees + (props.degrees * props.ringRadius)/10000}deg)` },
+                    from: { transform: `rotate(${-props.degrees - (props.degrees * props.ringRadius) / 10000}deg) translateX(${props.ringRadius}px) rotate(${props.degrees + (props.degrees * props.ringRadius) / 10000}deg)` },
                     to: { transform: `rotate(${-props.degrees}deg) translateX(${props.ringRadius * 1.02}px) rotate(${props.degrees}deg)` }
                 },
                 zIndex: 1
@@ -121,16 +119,19 @@ function Ring(props: { size: number, logos: RingLogoInfo[] }) {
 
 export default function Cover() {
     return (
-        <Box sx={{ height: '60vh' }}>
-            <Stack alignItems="center" justifyContent="end" sx={{ height: '100%', pb: 8 }}>
-                <Box sx={{ position: 'relative' }}>
+        <div style={{ height: '60vh' }}>
+            <Stack alignItems="center" justifyContent="end" style={{ height: '100%', paddingBottom: 8 * 8 }}>
+                <div style={{ position: 'relative' }}>
                     <SignalcoLogotype width={250} />
-                    <Box sx={{ transform: { xs: 'scale(50%)', sm: 'scale(80%)', md: 'scale(1)' }, transformOrigin: { xs: '200px -40px', sm: 'center' } }}>
+                    <Box sx={{
+                        transform: { xs: 'scale(50%)', sm: 'scale(80%)', md: 'scale(1)' },
+                        transformOrigin: { xs: '200px -40px', sm: 'center' }
+                    }}>
                         {ringConfig.map(ring => (
                             <Ring key={ring.radius} size={ring.radius} logos={ring.logos} />
                         ))}
                     </Box>
-                </Box>
+                </div>
                 <Typography
                     component="h1"
                     fontFamily="Raleway"
@@ -139,6 +140,6 @@ export default function Cover() {
                     Automate your life
                 </Typography>
             </Stack>
-        </Box>
+        </div>
     );
 }

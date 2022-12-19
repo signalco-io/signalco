@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, useTransition } from 'react';
 import { ValueOrFuncGeneric } from '../sharedTypes';
 
+// TODO: Move to shared library
+
 export type useLoadAndErrorResult<T> = {
     item?: T | undefined;
     isLoading: boolean;
