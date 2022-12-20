@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "private": true,
     "engines": {
-        "node": "18"
+        "node": "18.12.1"
     },
     "scripts": {
         "dev": "next -p 3001",
@@ -17,12 +17,12 @@
     },
     "dependencies": {
         "@auth0/auth0-react": "1.12.0",
-        "@auth0/auth0-spa-js": "^2.0.0",
+        "@auth0/auth0-spa-js": "2.0.1",
         "@date-io/date-fns": "2.16.0",
         "@dnd-kit/core": "6.0.6",
         "@dnd-kit/modifiers": "6.0.1",
         "@dnd-kit/sortable": "7.0.1",
-        "@dnd-kit/utilities": "^3.2.0",
+        "@dnd-kit/utilities": "3.2.1",
         "@emotion/cache": "11.10.5",
         "@emotion/react": "11.10.5",
         "@emotion/server": "11.10.0",
@@ -41,7 +41,7 @@
         "@tanstack/react-query": "4.20.4",
         "@tanstack/react-query-devtools": "4.20.4",
         "@vvo/tzdb": "6.83.0",
-        "classix": "^2.1.17",
+        "classix": "2.1.17",
         "cobe": "0.6.3",
         "color": "4.2.3",
         "compare-versions": "5.0.3",
@@ -60,7 +60,7 @@
         "react-grid-layout": "1.3.4",
         "react-syntax-highlighter": "15.5.0",
         "react-timeago": "7.1.0",
-        "react-toastify": "^9.1.1",
+        "react-toastify": "9.1.1",
         "react-transition-group": "4.4.5",
         "recharts": "2.2.0",
         "sharp": "0.31.2",
@@ -68,14 +68,14 @@
         "uuid": "9.0.0"
     },
     "devDependencies": {
-        "@axe-core/playwright": "^4.5.2",
+        "@axe-core/playwright": "4.5.2",
         "@babel/core": "7.20.5",
         "@next/bundle-analyzer": "13.0.7",
-        "@playwright/test": "^1.28.0",
+        "@playwright/test": "1.29.0",
         "@signalco/tsconfig": "*",
         "@types/color": "3.0.3",
         "@types/d3": "7.4.0",
-        "@types/next-pwa": "^5.6.0",
+        "@types/next-pwa": "5.6.0",
         "@types/node": "18.11.17",
         "@types/react": "18.0.26",
         "@types/react-dom": "18.0.9",
@@ -96,7 +96,7 @@
         "fs-extra": "11.1.0",
         "next-sitemap": "3.1.43",
         "openapi-types": "12.1.0",
-        "playwright": "^1.28.0",
+        "playwright": "1.29.0",
         "prop-types": "15.8.1",
         "react-is": "18.2.0",
         "rimraf": "3.0.2",
