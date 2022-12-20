@@ -8,6 +8,9 @@
         "dev": "storybook dev -p 6007",
         "clean": "rimraf node_modules/.cache/storybook"
     },
+    "engines": {
+        "node": "18"
+    },
     "devDependencies": {
         "@babel/core": "7.20.5",
         "@signalco/tsconfig": "workspace:*",
