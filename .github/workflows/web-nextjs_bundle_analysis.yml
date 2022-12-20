@@ -15,6 +15,10 @@ defaults:
 jobs:
   analyze:
     runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: signalco
+      TURBO_REMOTE_ONLY: true
     steps:
       - uses: actions/checkout@v3
       - name: Setup pnpm
@@ -66,7 +70,7 @@ jobs:
       # entry in your package.json file.
       - name: Compare with base branch bundle
         if: success() && github.event.number
-        run: ls -laR apps/web/.next/analyze/base && npx -yes -p github:hashicorp/nextjs-bundle-analysis compare
+        run: ls -laR .next/analyze/base && npx -yes -p github:hashicorp/nextjs-bundle-analysis compare
         working-directory: apps/web/
 
       - name: Get comment body
