@@ -24,17 +24,17 @@
         "clean": "rimraf dist"
     },
     "devDependencies": {
-        "@rollup/plugin-commonjs": "^24.0.0",
-        "@rollup/plugin-node-resolve": "^15.0.1",
+        "@rollup/plugin-commonjs": "24.0.0",
+        "@rollup/plugin-node-resolve": "15.0.1",
         "@signalco/tsconfig": "*",
-        "concurrently": "^7.6.0",
-        "esbuild": "^0.16.4",
+        "concurrently": "7.6.0",
+        "esbuild": "0.16.10",
         "prop-types": "15.8.1",
         "rimraf": "3.0.2",
-        "rollup": "^3.7.2",
-        "rollup-plugin-esbuild": "^5.0.0",
-        "rollup-plugin-peer-deps-external": "^2.2.4",
-        "rollup-plugin-summary": "^2.0.0",
+        "rollup": "3.7.5",
+        "rollup-plugin-esbuild": "5.0.0",
+        "rollup-plugin-peer-deps-external": "2.2.4",
+        "rollup-plugin-summary": "2.0.0",
         "typescript": "4.9.4"
     },
     "dependencies": {
