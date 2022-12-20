@@ -1,7 +1,20 @@
 {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
         "config:base"
     ],
+    "packageRules": [
+        {
+            "automerge": true,
+            "matchPackageNames": [
+                "eslint",
+                "sass",
+                "@vvo/tzdb",
+                "@types/node"
+            ]
+        }
+    ],
+    "rangeStrategy": "pin",
     "dependencyDashboard": true,
     "assigneesFromCodeOwners": true,
     "baseBranches": [

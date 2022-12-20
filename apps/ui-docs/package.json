@@ -11,6 +11,10 @@
     "devDependencies": {
         "@babel/core": "7.20.5",
         "@signalco/tsconfig": "workspace:*",
+        "@emotion/cache": "11.10.5",
+        "@emotion/react": "11.10.5",
+        "@emotion/server": "11.10.0",
+        "@emotion/styled": "11.10.5",
         "@storybook/addon-essentials": "7.0.0-beta.12",
         "@storybook/addon-links": "7.0.0-beta.12",
         "@storybook/addons": "7.0.0-beta.12",
