@@ -39,7 +39,7 @@
         "rollup-plugin-peer-deps-external": "^2.2.4",
         "rollup-plugin-postcss": "^4.0.2",
         "rollup-plugin-summary": "^2.0.0",
-        "sass": "1.57.0",
+        "sass": "1.57.1",
         "typescript": "4.9.4"
     },
     "dependencies": {
