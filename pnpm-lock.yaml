@@ -60,7 +60,7 @@ importers:
       colorette: 2.0.19
       compare-versions: 5.0.3
       cross-env: 7.0.3
-      d3: 7.7.0
+      d3: 7.8.0
       date-fns: 2.29.3
       eslint: 8.30.0
       eslint-config-next: 13.0.7
@@ -127,7 +127,7 @@ importers:
       cobe: 0.6.3
       color: 4.2.3
       compare-versions: 5.0.3
-      d3: 7.7.0
+      d3: 7.8.0
       date-fns: 2.29.3
       material-ui-popup-state: 5.0.4_lskpmcsdi7ipu6qpuapyu56ihm
       monaco-editor: 0.34.1
@@ -7234,8 +7234,8 @@ packages:
       d3-transition: 3.0.1_d3-selection@3.0.0
     dev: false
 
-  /d3/7.7.0:
-    resolution: {integrity: sha512-VEwHCMgMjD2WBsxeRGUE18RmzxT9Bn7ghDpzvTEvkLSBAKgTMydJjouZTjspgQfRHpPt/PB3EHWBa6SSyFQq4g==}
+  /d3/7.8.0:
+    resolution: {integrity: sha512-a5rNemRadWkEfqnY5NsD4RdCP9vn8EIJ4I5Rl14U0uKH1SXqcNmk/h9aGaAF1O98lz6L9M0IeUcuPa9GUYbI5A==}
     engines: {node: '>=12'}
     dependencies:
       d3-array: 3.2.0
