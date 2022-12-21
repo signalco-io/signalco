@@ -23,7 +23,7 @@ importers:
       '@emotion/react': 11.10.5
       '@emotion/server': 11.10.0
       '@emotion/styled': 11.10.5
-      '@enterwell/react-form-builder': 0.2.0
+      '@enterwell/react-form-builder': 0.2.1
       '@enterwell/react-form-validation': 1.2.8
       '@hcaptcha/react-hcaptcha': 1.4.4
       '@microsoft/signalr': 7.0.0
@@ -109,7 +109,7 @@ importers:
       '@emotion/react': 11.10.5_xl5my4wapvq2ctl7qwehtbgorq
       '@emotion/server': 11.10.0
       '@emotion/styled': 11.10.5_3djhvnr4jirfvebjqpipo7gthy
-      '@enterwell/react-form-builder': 0.2.0_2xo3jry4fa6agtmoypeecp4bii
+      '@enterwell/react-form-builder': 0.2.1_2xo3jry4fa6agtmoypeecp4bii
       '@enterwell/react-form-validation': 1.2.8_biqbaboplfbrettd7655fr4n2y
       '@hcaptcha/react-hcaptcha': 1.4.4_biqbaboplfbrettd7655fr4n2y
       '@microsoft/signalr': 7.0.0
@@ -2194,8 +2194,8 @@ packages:
   /@emotion/weak-memoize/0.3.0:
     resolution: {integrity: sha512-AHPmaAx+RYfZz0eYu6Gviiagpmiyw98ySSlQvCUhVGDRtDFe4DBS0x1bSjdF3gqUDYOczB+yYvBTtEylYSdRhg==}
 
-  /@enterwell/react-form-builder/0.2.0_2xo3jry4fa6agtmoypeecp4bii:
-    resolution: {integrity: sha512-ZAHthx7wq0QPWFbT/iOtaDLi2+0E+9GCtymZ96gfsnOeqIQ9ByiSt3T2AAqg5C6pszB4ApaxyJqh2lBOwRAO8w==}
+  /@enterwell/react-form-builder/0.2.1_2xo3jry4fa6agtmoypeecp4bii:
+    resolution: {integrity: sha512-MHStwXbUAmEpWOfJP0knRwDkh8401OBBh/gYYDQGBjHBqEbvV8eUJ55SD4uAhqiZJd1IPV/WjWvPx/59qVJEsg==}
     engines: {node: '>=16'}
     peerDependencies:
       '@enterwell/react-form-validation': ^1
