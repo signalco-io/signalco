@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Draggable, Map, Marker } from 'pigeon-maps';
 import { MyLocation } from '@signalco/ui-icons';
 import { Accordion, Loadable, Row, Stack, IconButton, TextField, Typography, Box } from '@signalco/ui';
-import { type FieldConfig } from '@enterwell/react-form-validation';
+import { FieldConfig } from '@enterwell/react-form-builder/lib/index.types';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useUserTheme from '../../../src/hooks/useUserTheme';
 import useLoadAndError from '../../../src/hooks/useLoadAndError';
@@ -62,7 +62,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
         <Accordion
             open={expanded}
             onChange={(_, open) => setExpanded(open)}
-            // expandIcon={<ExpandMoreIcon />}
+        // expandIcon={<ExpandMoreIcon />}
         >
             {expanded
                 ? <Typography>Pick position on map</Typography>
