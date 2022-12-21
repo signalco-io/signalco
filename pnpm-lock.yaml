@@ -91,7 +91,7 @@ importers:
       rimraf: 3.0.2
       sass: 1.57.1
       sass-loader: 13.2.0
-      sharp: 0.31.2
+      sharp: 0.31.3
       suncalc: 1.9.0
       terser: 5.16.1
       typescript: 4.9.4
@@ -145,7 +145,7 @@ importers:
       react-toastify: 9.1.1_biqbaboplfbrettd7655fr4n2y
       react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
       recharts: 2.2.0_v2m5e27vhdewzwhryxwfaorcca
-      sharp: 0.31.2
+      sharp: 0.31.3
       suncalc: 1.9.0
       uuid: 9.0.0
     optionalDependencies:
@@ -327,7 +327,7 @@ importers:
       rimraf: 3.0.2
       sass: 1.57.1
       sass-loader: 13.2.0
-      sharp: 0.31.2
+      sharp: 0.31.3
       terser: 5.16.1
       typescript: 4.9.4
       webpack: 5.75.0
@@ -354,7 +354,7 @@ importers:
       react-cool-inview: 3.0.1_react@18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
-      sharp: 0.31.2
+      sharp: 0.31.3
     optionalDependencies:
       terser: 5.16.1
     devDependencies:
@@ -13628,8 +13628,8 @@ packages:
       kind-of: 6.0.3
     dev: true
 
-  /sharp/0.31.2:
-    resolution: {integrity: sha512-DUdNVEXgS5A97cTagSLIIp8dUZ/lZtk78iNVZgHdHbx1qnQR7JAHY0BnXnwwH39Iw+VKhO08CTYhIg0p98vQ5Q==}
+  /sharp/0.31.3:
+    resolution: {integrity: sha512-XcR4+FCLBFKw1bdB+GEhnUNXNXvnt0tDo4WsBsraKymuo/IAuPuCBVAL2wIkUw2r/dwFW5Q5+g66Kwl2dgDFVg==}
     engines: {node: '>=14.15.0'}
     requiresBuild: true
     dependencies:
