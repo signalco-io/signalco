@@ -63,7 +63,7 @@ importers:
       d3: 7.8.0
       date-fns: 2.29.3
       eslint: 8.30.0
-      eslint-config-next: 13.0.7
+      eslint-config-next: 13.1.0
       eslint-import-resolver-typescript: 3.5.2
       eslint-plugin-import: 2.26.0
       fs-extra: 11.1.0
@@ -173,7 +173,7 @@ importers:
       colorette: 2.0.19
       cross-env: 7.0.3
       eslint: 8.30.0
-      eslint-config-next: 13.0.7_lzzuuodtsqwxnvqeq4g4likcqa
+      eslint-config-next: 13.1.0_lzzuuodtsqwxnvqeq4g4likcqa
       eslint-import-resolver-typescript: 3.5.2_2lbwmhbr7bncddqbzzpg77o75m
       eslint-plugin-import: 2.26.0_ejvvtv3jid5h5ymvu4wwazkljy
       fs-extra: 11.1.0
@@ -307,7 +307,7 @@ importers:
       colorette: 2.0.19
       cross-env: 7.0.3
       eslint: 8.30.0
-      eslint-config-next: 13.0.7
+      eslint-config-next: 13.1.0
       eslint-import-resolver-typescript: 3.5.2
       eslint-plugin-import: 2.26.0
       material-ui-popup-state: 5.0.4
@@ -373,7 +373,7 @@ importers:
       colorette: 2.0.19
       cross-env: 7.0.3
       eslint: 8.30.0
-      eslint-config-next: 13.0.7_lzzuuodtsqwxnvqeq4g4likcqa
+      eslint-config-next: 13.1.0_lzzuuodtsqwxnvqeq4g4likcqa
       eslint-import-resolver-typescript: 3.5.2_2lbwmhbr7bncddqbzzpg77o75m
       eslint-plugin-import: 2.26.0_ejvvtv3jid5h5ymvu4wwazkljy
       next-sitemap: 3.1.43_z36wztfvqriwkymgabnvtnqmk4
@@ -3035,8 +3035,8 @@ packages:
   /@next/env/13.1.0:
     resolution: {integrity: sha512-6iNixFzCndH+Bl4FetQzOMjxCJqg8fs0LAlZviig1K6mIjOWH2m2oPcHcOg1Ta5VCe7Bx5KG1Hs+NrWDUkBt9A==}
 
-  /@next/eslint-plugin-next/13.0.7:
-    resolution: {integrity: sha512-Q/Z0V3D3UpKhhzFU6/s17wD4rqJ+ZDGded8UpqNyzX1nUdD+/PnsZexPhSIZ2Yf/c8QESeirmJVRb3eAfCQkRQ==}
+  /@next/eslint-plugin-next/13.1.0:
+    resolution: {integrity: sha512-LGh0iqcEwxs0HmEK96cXXuhofcOGSUGl8Zms279JW8Zq/6GJkXo87gtRpfJrwD+a77nEIdRaORPM91Us3xW0Qw==}
     dependencies:
       glob: 7.1.7
     dev: true
@@ -7724,8 +7724,8 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /eslint-config-next/13.0.7_lzzuuodtsqwxnvqeq4g4likcqa:
-    resolution: {integrity: sha512-X7DB7iDJ9iHi5DAZbnFdWm4M0dwarj5h5y6Vpm9INCYzFgAwSWslq3v0qjYEjtUO5IQ8n1WK6IU5FkOQ2HBhOA==}
+  /eslint-config-next/13.1.0_lzzuuodtsqwxnvqeq4g4likcqa:
+    resolution: {integrity: sha512-UdZm8GTR8PWys1dw+gJY+aLR/etkbTTsrRxiQ57nxqAE4Fw6PGZ2prLjqV6IhNkFve3c8ZgbCrUolfGad2mryA==}
     peerDependencies:
       eslint: ^7.23.0 || ^8.0.0
       typescript: '>=3.3.1'
@@ -7733,7 +7733,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@next/eslint-plugin-next': 13.0.7
+      '@next/eslint-plugin-next': 13.1.0
       '@rushstack/eslint-patch': 1.2.0
       '@typescript-eslint/parser': 5.43.0_lzzuuodtsqwxnvqeq4g4likcqa
       eslint: 8.30.0
