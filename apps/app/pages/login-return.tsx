@@ -10,7 +10,7 @@ function LoginReturnPage() {
 
     useEffect(() => {
         if (isAuthenticated) {
-            router.push('/app');
+            router.push('/');
         }
     }, [isAuthenticated, router]);
 
