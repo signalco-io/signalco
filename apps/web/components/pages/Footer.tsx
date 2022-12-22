@@ -7,6 +7,7 @@ import { Stack as MuiStack } from '@mui/system';
 import SignalcoLogotype from '../icons/SignalcoLogotype';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { now } from '../../src/services/DateTimeProvider';
+import { KnownPages } from '../../src/knownPages';
 
 type FooterSectionType = {
     header: string,
@@ -18,11 +19,11 @@ const footerLinks: FooterSectionType[] = [
     {
         header: 'Product',
         links: [
-            { name: 'Features', href: '/features' },
-            { name: 'Channels', href: '/channels' },
-            { name: 'App', href: '/app' },
-            { name: 'Pricing', href: '/pricing' },
-            { name: 'Station', href: '/station' },
+            { name: 'Features', href: KnownPages.Features },
+            { name: 'Channels', href: KnownPages.Channels },
+            { name: 'App', href: KnownPages.App },
+            { name: 'Pricing', href: KnownPages.Pricing },
+            { name: 'Station', href: KnownPages.Station },
         ]
     },
     {
@@ -35,19 +36,19 @@ const footerLinks: FooterSectionType[] = [
     {
         header: 'Resources',
         links: [
-            { name: 'Status', href: 'https://status.signalco.io' },
-            { name: 'Design', href: isDeveloper ? 'https://ui.signalco.dev' : 'https://ui.signalco.io' },
-            { name: 'API', href: '/docs/api', developerOnly: true }
+            { name: 'Status', href: KnownPages.Status },
+            { name: 'Design', href: KnownPages.UiDocs },
+            { name: 'API', href: KnownPages.DocsApi }
         ]
     },
     {
         header: 'Legal',
         links: [
-            { name: 'Privacy Policy', href: '/legal/privacy-policy' },
-            { name: 'Terms of Service', href: '/legal/terms-of-service' },
-            { name: 'Cookie Policy', href: '/legal/cookie-policy' },
-            { name: 'Acceptable Use Policy', href: '/legal/acceptable-use-policy' },
-            { name: 'SLA', href: '/legal/sla' },
+            { name: 'Privacy Policy', href: KnownPages.LegalPrivacyPolicy },
+            { name: 'Terms of Service', href: KnownPages.LegalTermsOfService },
+            { name: 'Cookie Policy', href: KnownPages.LegalCookiePolicy },
+            { name: 'Acceptable Use Policy', href: KnownPages.LegalAcceptableUsePolicy },
+            { name: 'SLA', href: KnownPages.LegalSla },
         ]
     }
 ];

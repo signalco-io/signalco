@@ -1,5 +1,5 @@
 {
-  "id": "/app",
+  "id": "/",
   "name": "Signalco",
   "short_name": "Signalco",
   "theme_color": "black",
@@ -11,7 +11,7 @@
     "minimal-ui"
   ],
   "scope": "/",
-  "start_url": "/app",
+  "start_url": "/",
   "prefer_related_applications": false,
   "icons": [
     {
