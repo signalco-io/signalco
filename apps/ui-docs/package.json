@@ -12,7 +12,7 @@
         "node": "18.12.1"
     },
     "devDependencies": {
-        "@babel/core": "7.20.5",
+        "@babel/core": "7.20.7",
         "@signalco/tsconfig": "workspace:*",
         "@emotion/cache": "11.10.5",
         "@emotion/react": "11.10.5",
