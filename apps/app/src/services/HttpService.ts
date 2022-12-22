@@ -88,7 +88,7 @@ export default class HttpService {
                     'error',
                     'Reload',
                     () => {
-                        window.location.replace('/app');
+                        window.location.replace('/');
                     });
                 return;
             }

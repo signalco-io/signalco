@@ -1,4 +1,5 @@
 import { Stack } from '@mui/system';
+import { KnownPages } from '../../src/knownPages';
 import PricingCard, { PricingOption } from '../../components/pages/pricing/PricingCard';
 import PageCenterHeader from '../../components/pages/PageCenterHeader';
 import FaqSection from '../../components/pages/FaqSection';
@@ -13,7 +14,7 @@ const pricingOptions: PricingOption[] = [
         duration: 'forever',
         description: 'Start automating today.',
         features: ['10 Entities', '2,000 Executions/mo', 'No credit card required'],
-        href: '/app',
+        href: KnownPages.App,
         hrefLabel: 'Start now'
     },
     {
