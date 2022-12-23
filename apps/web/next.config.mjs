@@ -17,9 +17,9 @@ const nextConfig = {
     reactStrictMode: true,
     experimental: { appDir: true },
     images: {
-        formats: ['image/avif', 'image/webp'],
         dangerouslyAllowSVG: true,
-        contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;'
+        contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
+        domains: ['www.signalco.io']
     },
     eslint: {
         dirs: ['worker', 'tools', 'src', 'pages', 'locales', 'components']

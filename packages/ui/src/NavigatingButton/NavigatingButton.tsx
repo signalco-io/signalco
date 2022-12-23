@@ -23,6 +23,7 @@ export default function NavigatingButton({
         <Link
             href={href}
             passHref
+            aria-disabled={disabled}
             prefetch={false}>
             <Button
                 color="primary"
