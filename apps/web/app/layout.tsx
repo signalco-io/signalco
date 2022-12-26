@@ -2,7 +2,7 @@
 
 import { CssBaseline, CssVarsProvider, getInitColorSchemeScript } from '@signalco/ui';
 import appTheme from '../src/theme';
-import '../styles/global.scss';
+import './global.scss';
 
 export default function RootLayout({
     // Layouts must accept a children prop.

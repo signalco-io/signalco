@@ -1,13 +1,19 @@
-import { useRouter } from 'next/router';
+'use client';
+
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FilterList, Gallery } from '@signalco/ui';
 import { channelsData, channelCategories } from '@signalco/data';
 import ChannelGalleryItem from './ChannelGalleryItem';
 import { orderBy } from '../../src/helpers/ArrayHelpers';
 
-export default function ChannelsGallery(props: { channelHrefFunc: (id: string) => string }) {
-    const { channelHrefFunc } = props;
+type ChannelsGalleryProps = {
+    channelHrefFunc: (id: string) => string;
+};
+
+export default function ChannelsGallery({ channelHrefFunc }: ChannelsGalleryProps) {
     const router = useRouter();
-    const category = router.query.category as (string | undefined)
+    const searchParams = useSearchParams();
+    const category = searchParams.get('category') ?? undefined;
     const selectedCategory = channelCategories.find(c => c.id == category);
     const gridItems = orderBy(
         selectedCategory
@@ -26,7 +32,15 @@ export default function ChannelsGallery(props: { channelHrefFunc: (id: string) =
                         header="Categories"
                         items={channelCategories}
                         selected={category}
-                        onSelected={(newCategory) => router.replace({ pathname: router.pathname, query: { ...router.query, category: newCategory } })} />
+                        onSelected={(newCategory: string | undefined) => {
+                            const newSearch = new URLSearchParams(searchParams);
+                            if (newCategory)
+                                newSearch.set('category', newCategory);
+                            else newSearch.delete('category');
+                            var newUrl = new URL(window.location.href);
+                            newUrl.search = newSearch.toString();
+                            return router.replace(newUrl.toString());
+                        }} />
                 </>
             )} />
     );
