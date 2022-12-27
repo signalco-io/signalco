@@ -13,10 +13,23 @@
                 "digest"
             ],
             "matchPackageNames": [
-                "eslint",
-                "sass",
+                "@babel/core",
+                "@rollup/plugin-commonjs",
+                "@rollup/plugin-json",
                 "@vvo/tzdb",
-                "@types/node"
+                "@types/node",
+                "@types/react-node",
+                "@types/react-dom",
+                "d3",
+                "esbuild",
+                "eslint",
+                "eslint-config-next",
+                "pnpm",
+                "playwright",
+                "mcr.microsoft.com/playwright",
+                "rollup",
+                "sass",
+                "sharp"
             ]
         }
     ],
