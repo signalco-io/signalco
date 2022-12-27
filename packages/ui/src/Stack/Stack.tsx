@@ -1,5 +1,6 @@
 import { CSSProperties } from "react";
 import { ChildrenProps } from "../sharedTypes";
+import styles from './Stack.module.scss';
 
 /** @alpha */
 export interface StackProps extends ChildrenProps {
@@ -13,12 +14,11 @@ export interface StackProps extends ChildrenProps {
 export default function Stack({ children, spacing, alignItems, justifyContent, style }: StackProps) {
     return (
         <div
+            className={styles.root}
             style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems,
-                justifyContent,
-                gap: `${(spacing ?? 0) * 8}px`,
+                '--s-gap': `${(spacing ?? 0) * 8}px`,
+                '--s-alignItems': alignItems ?? 'stretch',
+                '--s-justifyContent': justifyContent,
                 ...style
             }}
         >

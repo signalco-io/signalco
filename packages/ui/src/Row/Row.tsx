@@ -1,4 +1,5 @@
 import { ChildrenProps } from "../sharedTypes";
+import styles from './Row.module.scss';
 
 /** @alpha */
 export interface RowProps extends ChildrenProps {
@@ -11,12 +12,11 @@ export interface RowProps extends ChildrenProps {
 export default function Row({ children, spacing, alignItems, justifyContent }: RowProps) {
     return (
         <div
+            className={styles.root}
             style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: alignItems ?? 'center',
-                justifyContent,
-                gap: `${(spacing ?? 0) * 8}px`
+                '--s-gap': `${(spacing ?? 0) * 8}px`,
+                '--s-alignItems': alignItems ?? 'center',
+                '--s-justifyContent': justifyContent
             }}
         >
             {children}

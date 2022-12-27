@@ -15,15 +15,16 @@ export type ChipProps = ChildrenProps & {
 /** @alpha */
 export default function Chip(props: ChipProps) {
     const { startDecorator, onClick, children } = props;
+    const Wrapper = onClick
+        ? (props: ChildrenProps) => <button onClick={onClick} className={styles.root}>{props.children}</button>
+        : (props: ChildrenProps) => <div className={styles.root}>{props.children}</div>;
+
     return (
-        <button
-            disabled={!onClick}
-            onClick={onClick}
-            className={styles.root}>
+        <Wrapper>
             <Row spacing={1}>
-                {startDecorator && startDecorator}
+                {typeof startDecorator !== 'undefined' && startDecorator}
                 {children}
             </Row>
-        </button>
+        </Wrapper>
     );
 }
