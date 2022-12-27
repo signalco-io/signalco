@@ -47,9 +47,9 @@
         "webpack": "5.75.0"
     },
     "dependencies": {
-        "@mui/base": "5.0.0-alpha.111",
-        "@mui/joy": "5.0.0-alpha.59",
-        "@mui/system": "5.11.1",
+        "@mui/base": "5.0.0-alpha.112",
+        "@mui/joy": "5.0.0-alpha.60",
+        "@mui/system": "5.11.2",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "material-ui-popup-state": "5.0.4",
