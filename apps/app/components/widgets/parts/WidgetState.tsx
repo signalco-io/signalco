@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
-import { Button, Typography, Box, CircularProgress } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Button, Typography, Box, CircularProgress, Stack } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
@@ -134,7 +133,7 @@ function WidgetState(props: WidgetSharedProps<any>) {
             sx={{ borderRadius: 'md', position: 'relative', height: '100%', width: 'calc(100% - 2px)', display: 'block', textAlign: 'left', margin: 0, padding: 0 }}
             onClick={handleStateChangeRequest}
             variant="plain">
-            <Stack sx={{ height: '100%', py: 2 }}>
+            <Stack style={{ height: '100%', paddingTop: 16, paddingBottom: 16 }}>
                 <Box sx={{ px: 2 }}>
                     <Visual state={state} size={68} />
                 </Box>

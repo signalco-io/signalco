@@ -127,6 +127,7 @@ export {
 } from "@mui/joy";
 
 export { CssBaseline } from '@mui/joy';
+export { Stack as MuiStack } from '@mui/system';
 export { useColorScheme, CssVarsProvider, getInitColorSchemeScript, extendTheme } from '@mui/joy/styles';
 
 // TODO: Remove as we should use direct joy types

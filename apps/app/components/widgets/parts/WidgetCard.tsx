@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
-import { Button, Card, CardOverflow, ListItemDecorator, Menu, MenuItem, Box } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Stack, Button, Card, CardOverflow, ListItemDecorator, Menu, MenuItem, Box } from '@signalco/ui';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
 
@@ -67,7 +66,7 @@ function WidgetCard(props: IWidgetCardProps) {
                     height: sizeHeight,
                 }}>
                     {(!isLoading && needsConfiguration) ? (
-                        <Stack justifyContent="stretch" sx={{ height: '100%' }}>
+                        <Stack justifyContent="stretch" style={{ height: '100%' }}>
                             <Button disabled={!isEditMode} size="lg" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
                         </Stack>
                     ) : (
@@ -75,7 +74,7 @@ function WidgetCard(props: IWidgetCardProps) {
                     )}
                     {isEditMode && (
                         <Box sx={{ position: 'absolute', top: 0, right: 0 }}>
-                            <Menu menuId="widget-config" renderTrigger={(props) => (
+                            <Menu menuId="widget-config" renderTrigger={(props: any) => (
                                 <Button sx={{ minWidth: '42px' }}  {...props}><MoreHorizontal /></Button>
                             )}>
                                 {options && (

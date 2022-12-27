@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
 import { Loadable, Stack, Row, Card, Typography, Box, List, ListItem, Picker, SelectItems } from '@signalco/ui';
 import { isNonEmptyString, isNotNull, isTrue } from '@enterwell/react-form-validation';
+import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
 import { ChildrenProps } from '../../src/sharedTypes';
 import { getCurrentUserAsync } from '../../src/services/CurrentUserProvider';
@@ -14,7 +15,6 @@ import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';
 import LocationMapPicker from '../../components/forms/LocationMapPicker/LocationMapPicker';
 import generalFormComponents from '../../components/forms/generalFormComponents';
 import ApiBadge from '../../components/development/ApiBadge';
-import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
 
 function ConnectedService() {
     const { t } = useLocale('App', 'Settings');

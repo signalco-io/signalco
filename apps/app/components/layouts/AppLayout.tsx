@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useQueryClient } from '@tanstack/react-query';
 import { Minimize } from '@signalco/ui-icons';
-import { IconButton, Tooltip } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { IconButton, MuiStack, Tooltip } from '@signalco/ui';
 import NavProfile from '../NavProfile';
 import { ChildrenProps } from '../../src/sharedTypes';
 import RealtimeService from '../../src/realtime/realtimeService';
@@ -24,14 +23,14 @@ export function AppLayout(props: ChildrenProps) {
 
   return (
     <>
-      <Stack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100vh', width: '100%' }}>
+      <MuiStack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100vh', width: '100%' }}>
         {isFullScreen !== 'on' && (
           <NavProfile />
         )}
         <div style={{ height: '100vh', overflow: 'auto', width: '100%', flexGrow: 1, position: 'relative' }}>
           {children}
         </div>
-      </Stack>
+      </MuiStack>
       <ReactQueryDevtools initialIsOpen={false} />
       {isFullScreen && (
         <Tooltip title="Exit fullscreen">

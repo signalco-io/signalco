@@ -1,9 +1,9 @@
 import Router from 'next/router';
 import CurrentUserProvider from './CurrentUserProvider';
+import { signalcoApiEndpoint } from './AppSettingsProvider';
 import { showPrompt } from '../notifications/PageNotificationService';
 import { parseHash, parseHashParam } from '../hooks/useHashParam';
 import { isAbsoluteUrl, trimStartChar } from '../helpers/StringHelpers';
-import { signalcoApiEndpoint } from './AppSettingsProvider';
 
 export default class HttpService {
   public static tokenFactory?: () => Promise<string>;
