@@ -1,5 +1,5 @@
-import { CSSProperties } from "react";
-import { ChildrenProps } from "../sharedTypes";
+import { type CSSProperties } from "react";
+import { type ChildrenProps } from "../sharedTypes";
 import styles from './Stack.module.scss';
 
 /** @alpha */
@@ -20,7 +20,7 @@ export default function Stack({ children, spacing, alignItems, justifyContent, s
                 '--s-alignItems': alignItems ?? 'stretch',
                 '--s-justifyContent': justifyContent,
                 ...style
-            }}
+            } as CSSProperties}
         >
             {children}
         </div>

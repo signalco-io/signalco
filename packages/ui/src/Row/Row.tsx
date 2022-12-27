@@ -1,4 +1,5 @@
-import { ChildrenProps } from "../sharedTypes";
+import { type CSSProperties } from "react";
+import { type ChildrenProps } from "../sharedTypes";
 import styles from './Row.module.scss';
 
 /** @alpha */
@@ -17,7 +18,7 @@ export default function Row({ children, spacing, alignItems, justifyContent }: R
                 '--s-gap': `${(spacing ?? 0) * 8}px`,
                 '--s-alignItems': alignItems ?? 'center',
                 '--s-justifyContent': justifyContent
-            }}
+            } as CSSProperties}
         >
             {children}
         </div>
