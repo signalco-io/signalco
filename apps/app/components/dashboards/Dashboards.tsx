@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { Loadable, Row, Button, Typography, Box } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Loadable, Row, Button, Typography, Box, MuiStack } from '@signalco/ui';
 import DashboardView from './DashboardView';
 import DashboardSettings from './DashboardSettings';
 import DashboardSelector from './DashboardSelector';
@@ -79,8 +78,8 @@ function Dashboards() {
 
     return (
         <>
-            <Stack spacing={{ xs: 1, sm: 2 }} sx={{ pt: { xs: 0, sm: 2 } }}>
-                <Stack spacing={1} direction={{ xs: 'column-reverse', md: 'row' }} justifyContent="space-between" alignItems="stretch">
+            <MuiStack spacing={{ xs: 1, sm: 2 }} sx={{ pt: { xs: 0, sm: 2 } }}>
+                <MuiStack spacing={1} direction={{ xs: 'column-reverse', md: 'row' }} justifyContent="space-between" alignItems="stretch">
                     <DashboardSelector
                         onEditWidgets={handleEditWidgets}
                         onSettings={handleSettings} />
@@ -92,7 +91,7 @@ function Dashboards() {
                             </Row>
                         </Box>
                     )}
-                </Stack>
+                </MuiStack>
                 <Loadable isLoading={!!!selectedId || selectedDashboard.isLoading} error={selectedDashboard.error}>
                     <Box sx={{ px: 2 }}>
                         {selectedId && selectedDashboard.data
@@ -102,20 +101,20 @@ function Dashboards() {
                                     isEditing={isEditing}
                                     onAddWidget={handleAddWidgetPlaceholder} />
                             ) : (
-                                <Stack alignItems="center" justifyContent="center">
-                                    <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
-                                        <Stack maxWidth={280} spacing={4} alignItems="center" justifyContent="center">
+                                <MuiStack alignItems="center" justifyContent="center">
+                                    <MuiStack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
+                                        <MuiStack maxWidth={280} spacing={4} alignItems="center" justifyContent="center">
                                             <Image priority width={280} height={213} alt={t('NoDashboardsPlaceholder')} src="/assets/placeholders/placeholder-no-dashboards.svg" />
                                             <Typography level="h2">{t('NoDashboardsPlaceholder')}</Typography>
                                             <Typography textAlign="center" level="body2">{t('NoDashboardsHelpText')}</Typography>
                                             <Button variant="solid" onClick={handleNewDashboard}>{t('NewDashboard')}</Button>
-                                        </Stack>
-                                    </Stack>
-                                </Stack>
+                                        </MuiStack>
+                                    </MuiStack>
+                                </MuiStack>
                             )}
                     </Box>
                 </Loadable>
-            </Stack>
+            </MuiStack>
             {isDashboardSettingsOpen && (
                 <DashboardSettings
                     dashboard={selectedDashboard.data}

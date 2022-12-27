@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import Image from 'next/image';
-import { Button, Typography , Box } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Stack, Row, Button, Typography, Box } from '@signalco/ui';
 import GridWrapper from './GridWrapper';
 import DragableWidget from './DragableWidget';
 import DisplayWidget from './DisplayWidget';
@@ -13,14 +12,14 @@ function NoWidgetsPlaceholder({ onAdd }: { onAdd: () => void }) {
 
     return (
         <Stack alignItems="center" justifyContent="center">
-            <Stack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
-                <Stack maxWidth={320} spacing={4} alignItems="center" justifyContent="center">
+            <Row style={{ height: '80vh' }} justifyContent="center">
+                <Stack style={{ maxWidth: 320 }} spacing={4} alignItems="center" justifyContent="center">
                     <Image priority width={280} height={213} alt="No Widgets" src="/assets/placeholders/placeholder-no-widgets.svg" />
                     <Typography level="h2">{t('NoWidgets')}</Typography>
                     <Typography textAlign="center" level="body2">{t('NoWidgetsHelpTextFirstLine')}<br />{t('NoWidgetsHelpTextSecondLine')}</Typography>
                     <Button onClick={onAdd}>{t('AddWidget')}</Button>
                 </Stack>
-            </Stack>
+            </Row>
         </Stack>
     );
 }

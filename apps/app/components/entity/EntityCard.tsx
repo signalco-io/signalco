@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { Row, Avatar, Card, Typography, Box, Timeago } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Row, Avatar, Card, Typography, Box, Timeago, MuiStack } from '@signalco/ui';
 import ShareEntityChip from './ShareEntityChip';
 import EntityStatus, { useEntityStatus } from './EntityStatus';
 import EntityIcon from '../shared/entity/EntityIcon';
@@ -20,7 +19,7 @@ export default function EntityCard({ entity, spread }: EntityCardProps) {
     return (
         <Link href={`${KnownPages.Entities}/${entity.id}`}>
             <Card sx={{ height: '100%', p: spread ? 0 : 1 }}>
-                <Stack
+                <MuiStack
                     spacing={2}
                     direction={spread ? 'row' : 'column'}
                     justifyContent="space-between"
@@ -35,16 +34,16 @@ export default function EntityCard({ entity, spread }: EntityCardProps) {
                         justifyContent="space-between"
                         spacing={1}>
                         <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
-                        <Stack direction="row" spacing={1} alignItems="center" sx={{ pr: spread ? 2 : 0 }}>
+                        <Row spacing={1} style={{ paddingRight: spread ? 16 : 0 }}>
                             {(hasStatus && (isStale || isOffline)) && (
                                 <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
                                     <Timeago date={entityLastActivity(entity)} />
                                 </Box>
                             )}
                             <EntityStatus entity={entity} />
-                        </Stack>
+                        </Row>
                     </Row>
-                </Stack>
+                </MuiStack>
             </Card>
         </Link>
     );

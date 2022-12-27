@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { GitHub, Twitter } from '@signalco/ui-icons';
-import { Stack, Container, Grid, IconButton, Typography, Box, Link } from '@signalco/ui';
-import { Stack as MuiStack } from '@mui/system';
+import { Stack, Container, Grid, IconButton, Typography, Box, Link, MuiStack } from '@signalco/ui';
 import SignalcoLogotype from '../icons/SignalcoLogotype';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { now } from '../../src/services/DateTimeProvider';
 import { KnownPages } from '../../src/knownPages';
+
 
 type FooterSectionType = {
     header: string,

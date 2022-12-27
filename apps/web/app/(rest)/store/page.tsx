@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
-import { Chip, Card, Typography, Grid, Row, FilterList, SelectItems, Gallery } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Row, Chip, Card, Typography, Grid, FilterList, SelectItems, Gallery, Stack } from '@signalco/ui';
 import contentData from './content.json';
 import green from '../../../src/colors/green';
 import grey from '../../../src/colors/gray';
@@ -42,11 +41,11 @@ function StoreStockStatusBadge(props: { status: number | undefined }) {
     }
 
     return (
-        <Stack direction="row" justifyItems="center" alignItems="center" sx={{ opacity: opacity }}>
+        <Row justifyItems="center" style={{ opacity: opacity }}>
             <Icon color={color} />
             &nbsp;
             <Typography fontSize="0.8rem" sx={{ color: color }}>{text}</Typography>
-        </Stack>
+        </Row>
     );
 }
 
@@ -59,7 +58,7 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
                 {imageSrc
                     ? <Image src={imageSrc} alt={`${name} image`} width={180} height={180} />
                     : (
-                        <Stack alignItems="center" justifyContent="center" textAlign="center" spacing={2} sx={{ width: 180, height: 180 }}>
+                        <Stack alignItems="center" justifyContent="center" spacing={2} style={{ width: 180, height: 180, textAlign: 'center' }}>
                             <SignalcoLogo height={40} />
                             <Typography level="body2">Image unavailable</Typography>
                         </Stack>

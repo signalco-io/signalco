@@ -1,8 +1,7 @@
 import React from 'react';
 import { PopupState } from 'material-ui-popup-state/hooks';
 import { Add, Pin, PinOff } from '@signalco/ui-icons';
-import { Row , Button, Card, Divider, IconButton, Typography } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Stack, Row, Button, Card, Divider, IconButton, Typography } from '@signalco/ui';
 import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
@@ -41,7 +40,7 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
 
     return (
         <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-            <Stack direction="row" alignItems="center" sx={{ width: '100%', position: 'relative' }}>
+            <Row style={{ width: '100%', position: 'relative' }}>
                 <Button
                     variant="plain"
                     sx={{ color: dashboard.id !== selectedId ? 'var(--joy-palette-neutral-400)' : 'inherit' }}
@@ -53,7 +52,7 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
                 <IconButton sx={{ position: 'absolute', right: 0, height: '100%' }} onClick={() => onFavorite(dashboard.id)}>
                     {dashboard.isFavorite ? <Pin /> : <PinOff />}
                 </IconButton>
-            </Stack>
+            </Row>
         </div>
     );
 }
@@ -132,8 +131,8 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
 
     return (
         <Card sx={{ gap: 1.5 }}>
-            <Stack sx={{ minWidth: 280 }}>
-                <Stack sx={{ maxHeight: '50vh', overflow: 'auto' }}>
+            <Stack style={{ minWidth: 280 }}>
+                <Stack style={{ maxHeight: '50vh', overflow: 'auto' }}>
                     <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
                         <SortableContext items={orderedDashboardIds}>
                             {orderedDashboards.map((d) => (
