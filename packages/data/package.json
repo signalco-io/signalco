@@ -27,7 +27,7 @@
         "@rollup/plugin-json": "6.0.0",
         "@signalco/tsconfig": "*",
         "concurrently": "7.6.0",
-        "esbuild": "0.16.10",
+        "esbuild": "0.16.11",
         "prop-types": "15.8.1",
         "rimraf": "3.0.2",
         "rollup": "3.8.1",
