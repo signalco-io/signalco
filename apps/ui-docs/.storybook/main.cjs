@@ -9,6 +9,6 @@ module.exports = {
     "options": {}
   },
   "docs": {
-    "docsPage": true
+    "autodocs": true
   }
 }

@@ -1,7 +1,7 @@
 import { Accordion } from "@signalco/ui";
 import { StoryObj } from "@storybook/react";
 
-export default { component: Accordion, tags: ['docsPage'] };
+export default { component: Accordion, tags: ['autodocs'] };
 type Story = StoryObj<typeof Accordion>;
 
 export const Default: Story = {};
