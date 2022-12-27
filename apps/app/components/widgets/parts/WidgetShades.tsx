@@ -1,8 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Down, Stop, Up } from '@signalco/ui-icons';
-import { Button, Divider, Grid, Typography } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Stack, Button, Divider, Grid, Typography } from '@signalco/ui';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultColumns, DefaultLabel } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -92,7 +91,7 @@ function WidgetShades(props: WidgetSharedProps<ConfigProps>) {
             {columns > 1 && (
                 <>
                     <Grid xs={6}>
-                        <Stack sx={{ height: '100%', pl: 2.5, pr: 1.5, py: 2 }} justifyContent={columns > 2 ? 'space-between' : 'center'}>
+                        <Stack style={{ height: '100%', paddingLeft: 2.5 * 8, paddingRight: 1.5 * 8, paddingTop: 16, paddingBottom: 16 }} justifyContent={columns > 2 ? 'space-between' : 'center'}>
                             <WindowVisual shadePerc={shadePerc} size={68} />
                             {columns > 2 && <Typography fontWeight="500" noWrap>{label}</Typography>}
                         </Stack>
@@ -101,7 +100,7 @@ function WidgetShades(props: WidgetSharedProps<ConfigProps>) {
                 </>
             )}
             <Grid xs={6} sx={{ flexGrow: 1, borderColor: 'divider', borderRadius: '0 8px 8px 0' }}>
-                <Stack sx={{ height: '100%' }} justifyContent="stretch">
+                <Stack style={{ height: '100%' }} justifyContent="stretch">
                     <Button variant="outlined" onClick={() => handleStateChangeRequest('up')}
                         sx={{ borderRadius: '0 8px 0 0', flexGrow: 1, border: 0, width: 'calc(100% - 2px)' }}><Up /></Button>
                     {stopValueSerialized && <Button variant="outlined" onClick={() => handleStateChangeRequest('stop')} sx={{ borderRadius: 0, flexGrow: 1, border: 0 }}><Stop size={18} /></Button>}

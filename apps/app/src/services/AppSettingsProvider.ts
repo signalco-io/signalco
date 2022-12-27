@@ -1,5 +1,5 @@
-import { isDeveloper } from './EnvProvider';
 import UserSettingsProvider from './UserSettingsProvider';
+import { isDeveloper } from './EnvProvider';
 
 export const ApiProductionUrl = 'https://api.signalco.io/api/';
 export const ApiDevelopmentUrl = 'https://api.signalco.dev/api/'

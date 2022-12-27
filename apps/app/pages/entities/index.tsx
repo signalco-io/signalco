@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Add, LayoutGrid, LayoutList } from '@signalco/ui-icons';
-import { Loadable, Row, Avatar, Button, IconButton, TextField, Typography, Box, Grid, SelectItems, Picker } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Stack, Loadable, Row, Avatar, Button, IconButton, TextField, Typography, Box, Grid, SelectItems, Picker, MuiStack } from '@signalco/ui';
 import { KnownPages } from '../../src/knownPages';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
@@ -89,8 +88,8 @@ function Entities() {
 
     return (
         <>
-            <Stack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
-                <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 2 }}>
+            <MuiStack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
+                <Row justifyContent="space-between" style={{ paddingLeft: 16, paddingRight: 16 }}>
                     <SelectItems
                         minWidth={220}
                         value={selectedType ? [selectedType] : []}
@@ -107,7 +106,7 @@ function Entities() {
                             });
                         })}
                         heading />
-                    <Stack direction="row" alignItems="center" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="end">
+                    <MuiStack direction="row" alignItems="center" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="end">
                         <TextField
                             placeholder={t('SearchLabel')}
                             value={searchText}
@@ -119,14 +118,14 @@ function Entities() {
                             { value: 'cards', label: <LayoutGrid /> }
                         ]} />
                         <IconButton size="lg" onClick={handleAddEntity}><Add /></IconButton>
-                    </Stack>
-                </Stack>
+                    </MuiStack>
+                </Row>
                 <Stack>
                     <Loadable isLoading={entities.isLoading} error={entities.error}>
                         {results}
                     </Loadable>
                 </Stack>
-            </Stack>
+            </MuiStack>
             <ConfigurationDialog isOpen={isAddEntityOpen} header={t('NewEntityDialogTitle')} onClose={() => setIsAddEntityOpen(false)}>
                 <EntityCreate />
             </ConfigurationDialog>

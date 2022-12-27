@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
-import { DisableButton, Avatar, Box, EditableInput, Timeago } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { DisableButton, Avatar, Box, EditableInput, Timeago, MuiStack, Row, Stack } from '@signalco/ui';
 import EntityProcessDetails from './EntityProcessDetails';
 import EntityOptions from './EntityOptions';
 import ContactsTable from './ContactsTable';
@@ -52,10 +51,10 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
     const showRawResolved = useMemo(() => detailsComponent == null || showRaw, [detailsComponent, showRaw]);
 
     return (
-        <Stack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
-            <Stack sx={{ px: 2 }} spacing={1}>
-                <Stack direction="row" spacing={1} justifyContent="space-between">
-                    <Stack direction="row" alignItems="center" spacing={2}>
+        <MuiStack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
+            <Stack style={{ paddingLeft: 16, paddingRight: 16 }} spacing={1}>
+                <Row spacing={1} justifyContent="space-between">
+                    <Row spacing={2}>
                         <Avatar>
                             <Icon />
                         </Avatar>
@@ -67,14 +66,14 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                             text={entity?.alias || ''}
                             noWrap
                             onChange={handleRename} />
-                    </Stack>
+                    </Row>
                     <EntityOptions
                         id={id}
                         canHideRaw={detailsComponent != null}
                         showRaw={showRaw}
                         showRawChanged={(show) => setShowRaw(show)} />
-                </Stack>
-                <Stack direction="row" alignItems="center" spacing={1}>
+                </Row>
+                <Row spacing={1}>
                     <EntityStatus entity={entity} />
                     {(hasStatus && (isStale || isOffline)) && (
                         <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
@@ -85,7 +84,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                         <DisableButton disabled={isDisabled} onClick={handleDisableToggle} />
                     )}
                     <ShareEntityChip entity={entity} entityType={1} />
-                </Stack>
+                </Row>
             </Stack>
             <Box sx={{ px: { xs: 1, sm: 2 } }}>
                 {showRawResolved ? (
@@ -96,6 +95,6 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                     </>
                 )}
             </Box>
-        </Stack>
+        </MuiStack>
     );
 }

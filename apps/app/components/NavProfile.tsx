@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
-import { Button, Divider, IconButton, Menu, Typography, Box, MenuItemLink, ButtonProps } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Button, Divider, IconButton, Menu, Typography, Box, MenuItemLink, ButtonProps, MuiStack } from '@signalco/ui';
 import UserAvatar from './users/UserAvatar';
 import NavLink from './navigation/NavLink';
 import ApiBadge from './development/ApiBadge';
@@ -31,10 +30,10 @@ function UserProfileAvatarButton(props: ButtonProps) {
 
   return (
     <Button variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 2 }} {...props}>
-      <Stack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
+      <MuiStack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
         <UserAvatar user={user.item} />
         <ApiBadge />
-      </Stack>
+      </MuiStack>
     </Button>
   );
 }
@@ -75,7 +74,7 @@ function NavProfile() {
   console.log('NavProfile rendered');
 
   return (
-    <Stack
+    <MuiStack
       direction={{ xs: 'row', sm: 'column' }}
       sx={{
         minHeight: { xs: '60px', sm: undefined },
@@ -84,7 +83,7 @@ function NavProfile() {
       alignItems="center">
       <UserProfileAvatar />
       <Box sx={{ display: { xs: 'none', sm: 'inherit', width: '100%' } }}>
-        <Stack sx={{ width: { xs: undefined, sm: '100%' } }}>
+        <MuiStack sx={{ width: { xs: undefined, sm: '100%' } }}>
           {visibleNavItems
             .map((ni, index) => (
               <NavLink
@@ -94,7 +93,7 @@ function NavProfile() {
                 active={ni === activeNavItem}
                 label={t(ni.label)} />
             ))}
-        </Stack>
+        </MuiStack>
       </Box>
       <Typography sx={{
         display: { xs: 'inherit', sm: 'none' },
@@ -115,7 +114,7 @@ function NavProfile() {
           background: 'var(--joy-palette-background-body)',
           zIndex: 999
         }}>
-          <Stack>
+          <MuiStack>
             {visibleNavItems.map((ni, index) =>
               <NavLink
                 key={index + 1}
@@ -124,10 +123,10 @@ function NavProfile() {
                 active={ni === activeNavItem}
                 label={t(ni.label)}
                 onClick={handleMobileMenuClose} />)}
-          </Stack>
+          </MuiStack>
         </Box>
       </Box>
-    </Stack>
+    </MuiStack>
   );
 }
 
