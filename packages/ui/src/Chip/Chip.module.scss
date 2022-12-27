@@ -1,7 +1,9 @@
 .root {
     color: initial;
-    border: 1px solid gray;
-    border-radius: 12px;
-    background: transparent;
+    border: 1px solid var(--joy-palette-primary-outlinedBorder);
+    border-radius: 15px;
+    background: var(--joy-palette-primary-softBg);
     padding: 4px 8px;
+    margin: 0;
+    font-size: 0.8rem;
 }
