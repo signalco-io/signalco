@@ -3,16 +3,18 @@
     "pipeline": {
         "build": {
             "dependsOn": [
-                "^build",
-                "$NEXT_PUBLIC_HCAPTCHA_SITE_KEY",
-                "$NEXT_PUBLIC_APP_ENV",
-                "$NODE_ENV",
-                "$ANALYZE"
+                "^build"
             ],
             "outputs": [
                 ".next/**",
                 "dist/**",
                 "storybook-static/**"
+            ],
+            "env": [
+                "NEXT_PUBLIC_HCAPTCHA_SITE_KEY",
+                "NEXT_PUBLIC_APP_ENV",
+                "NODE_ENV",
+                "ANALYZE"
             ]
         },
         "lint": {
