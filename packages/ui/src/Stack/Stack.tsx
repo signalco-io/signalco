@@ -6,7 +6,7 @@ import styles from './Stack.module.scss';
 export interface StackProps extends ChildrenProps {
     spacing?: number;
     alignItems?: 'start' | 'center' | undefined;
-    justifyContent?: 'center' | 'end' | 'space-between' | 'stretch' | undefined;
+    justifyContent?: 'start' | 'center' | 'end' | 'space-between' | 'stretch' | undefined;
     style?: CSSProperties | undefined;
 }
 
