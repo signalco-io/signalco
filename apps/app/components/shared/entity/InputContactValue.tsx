@@ -14,7 +14,8 @@ export interface InputContactValueProps {
 export default function InputContactValue(props: InputContactValueProps) {
     const { value, onChange } = props;
 
-    const dataType = 'string'; // TODO: Add data type to contact props.pointer.dataType;
+    // eslint-disable-next-line @typescript-eslint/no-inferrable-types
+    const dataType: string = 'string'; // TODO: Add data type to contact props.pointer.dataType;
     const dataValues: ({ value: any })[] | undefined = []; // TODO: Use info from contact
     const dataValuesMultiple = false; // TODO: Use info from contact
 
