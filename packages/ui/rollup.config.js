@@ -19,14 +19,11 @@ export default [
         },
         plugins: [
             peerDepsExternal(),
-            resolve({
-                browser: true
-            }),
+            resolve(),
             commonjs(),
             esbuild({
                 tsconfig: 'tsconfig.build.json',
                 target: 'esnext',
-                minify: false,
                 jsx: 'automatic'
             }),
             postcss({
