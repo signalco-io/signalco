@@ -4,7 +4,7 @@ import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Security, Send } from '@signalco/ui-icons';
-import { Stack, Loadable, Chip, NavigatingButton, Typography, TextField, Divider, Badge, Alert, Button, Card, List, Tooltip, Box, Row, Grid, CardOverflow, ListTreeItem, SelectItems, CopyToClipboardInput } from '@signalco/ui';
+import { Stack, Loadable, Chip, NavigatingButton, Typography, TextField, Divider, Badge, Alert, Button, Card, List, Tooltip, Box, Row, CardOverflow, ListTreeItem, SelectItems, CopyToClipboardInput } from '@signalco/ui';
 import { ObjectDictAny } from '../../../../src/sharedTypes';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
 import useLoadAndError from '../../../../src/hooks/useLoadAndError';
@@ -36,8 +36,10 @@ function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject
     case 'number':
     case 'integer': return 0;
     case 'object':
-        if (typeof schemaObj.properties === 'undefined') return {};
-        let curr: ObjectDictAny = {};
+        if (typeof schemaObj.properties === 'undefined') {
+            return ({});
+        }
+        const curr: ObjectDictAny = {};
         Object.keys(schemaObj.properties).forEach(prop => {
             if (schemaObj.properties) {
                 curr[prop] = schemaToJson(api, schemaObj.properties[prop]);
@@ -49,7 +51,7 @@ function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject
         return [schemaToJson(api, arraySchema.items)];
     default: return undefined;
     }
-};
+}
 
 function NonArraySchema(props: { name: string, schema: OpenAPIV3.NonArraySchemaObject }) {
     const propertyNames = props.schema.properties && Object.keys(props.schema.properties);
@@ -439,7 +441,7 @@ function Actions(props: ActionsProps) {
                 <SelectItems
                     label="Server"
                     value={selectedServer ? [selectedServer] : []}
-                    onChange={() => { }}
+                    onChange={() => { console.debug('TODO implement server selection') }}
                     // onChange={(v) => setSelectedServer(v[0])}
                     items={servers.map(s => ({
                         value: s.url,

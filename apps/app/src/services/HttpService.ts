@@ -43,7 +43,7 @@ async function _getBearerTokenAsync() {
 
     console.warn('Token is undefined');
     throw new Error('Login failed.');
-};
+}
 
 export async function requestAsync(
     url: string,
@@ -53,7 +53,7 @@ export async function requestAsync(
 ) {
     const token = await _getBearerTokenAsync();
     try {
-        var urlResolved = new URL(isAbsoluteUrl(url) ? url : getApiUrl(url));
+        const urlResolved = new URL(isAbsoluteUrl(url) ? url : getApiUrl(url));
         if (method === 'get' && data) {
             urlResolved.search = new URLSearchParams(data).toString();
         }
@@ -106,7 +106,7 @@ export async function requestAsync(
         } catch {
             bodyText = 'empty response';
         }
-        throw new Error(`Got status ${response.statusText} (${response.status}): bodyText`);
+        throw new Error(`Got status ${response.statusText} (${response.status}): ${bodyText}`);
     } catch(err) {
         console.error('Unknown API error', err);
         throw err;

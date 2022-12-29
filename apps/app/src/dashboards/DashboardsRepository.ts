@@ -130,9 +130,9 @@ const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';
 const DashboardsOrderLocalStorageKey = 'dashboards-order';
 
 class DashboardsRepository {
-    isLoaded: boolean = false;
-    isLoading: boolean = false;
-    isUpdateAvailable: boolean = false;
+    isLoaded = false;
+    isLoading = false;
+    isUpdateAvailable = false;
 
     async favoriteSetAsync(id: string, newIsFavorite: boolean) {
         const currentFavorites = UserSettingsProvider.value<string[]>(DashboardsFavoritesLocalStorageKey, []);
@@ -143,7 +143,7 @@ class DashboardsRepository {
         if (!isCurrentlyFavorite && newIsFavorite) {
             UserSettingsProvider.set(DashboardsFavoritesLocalStorageKey, [...currentFavorites, id]);
         } else if (isCurrentlyFavorite && !newIsFavorite) {
-            let newFavorites = [...currentFavorites];
+            const newFavorites = [...currentFavorites];
             newFavorites.splice(currentFavoriteIndex, 1)
             UserSettingsProvider.set(DashboardsFavoritesLocalStorageKey, newFavorites);
         }

@@ -83,7 +83,7 @@ class RealtimeService {
                 this._hubStartWithRetryAsync(delay);
             }, (delay) * 1000);
         }
-    };
+    }
 
     async startAsync() {
         if (this.contactsHub != null) return;
@@ -103,7 +103,7 @@ class RealtimeService {
             .build();
 
         this._hubStartWithRetryAsync(0);
-    };
+    }
 }
 
 const service = new RealtimeService();

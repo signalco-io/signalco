@@ -18,7 +18,7 @@ export interface PricingCardProps {
 }
 
 export default function PricingCard(props: PricingCardProps) {
-    const { option, variant } = props;
+    const { option } = props;
 
     const disabled = option.price.eur > 0;
 

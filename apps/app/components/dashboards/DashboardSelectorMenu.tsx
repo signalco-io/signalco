@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import React from 'react';
 import { PopupState } from 'material-ui-popup-state/hooks';
 import { Add, Pin, PinOff } from '@signalco/ui-icons';
@@ -60,7 +62,7 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
 function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const { selectedId, popupState, onSelection, onEditWidgets, onSettings } = props;
     const { t } = useLocale('App', 'Dashboards');
-    const [_, setDashboardIdHash] = useHashParam('dashboard');
+    const [, setDashboardIdHash] = useHashParam('dashboard');
     const [isFullScreen, setFullScreenHash] = useHashParam('fullscreen');
     const { data: dashboards } = useDashboards();
     const saveDashboard = useSaveDashboard();
@@ -97,7 +99,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
         if (over && active.id !== over.id) {
             const oldIndex = orderedDashboardIds.indexOf(active.id.toString());
             const newIndex = orderedDashboardIds.indexOf(over.id.toString());
-            const newOrderedDashboards = arrayMove(orderedDashboards, oldIndex, newIndex);;
+            const newOrderedDashboards = arrayMove(orderedDashboards, oldIndex, newIndex);
             for (let i = 0; i < newOrderedDashboards.length; i++) {
                 newOrderedDashboards[i].order = i;
             }

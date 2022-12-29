@@ -51,7 +51,7 @@ function WidgetShades(props: WidgetSharedProps<ConfigProps>) {
             return;
         }
 
-        const stopActions = (delay: number = 0) => {
+        const stopActions = (delay = 0) => {
             if (config?.targetUp && config?.targetDown) {
                 return [
                     { ...config?.targetUp, valueSerialized: stopValueSerialized, delay },
@@ -74,12 +74,14 @@ function WidgetShades(props: WidgetSharedProps<ConfigProps>) {
             break;
         default:
         case 'stop':
+            // eslint-disable-next-line prefer-spread
             actions.push.apply(actions, stopActions());
             break;
         }
 
         // Trigger stop if requested in fonfig
         if (direction !== 'stop' && config?.stopAfter) {
+            // eslint-disable-next-line prefer-spread
             actions.push.apply(actions, stopActions(stopAfterDelay));
         }
 

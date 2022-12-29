@@ -115,7 +115,7 @@ function Ring(props: { size: number, logos: RingLogoInfo[] }) {
             ))}
         </Box>
     );
-};
+}
 
 export default function Cover() {
     return (

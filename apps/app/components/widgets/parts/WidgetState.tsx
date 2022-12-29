@@ -116,7 +116,7 @@ function WidgetState(props: WidgetSharedProps<any>) {
             return;
         }
 
-        var targets = state ? config.off : config.on;
+        const targets = state ? config.off : config.on;
         executeStateActionsAsync((targets as IContact[]).map(d => ({
             entityId: d.entityId,
             channelName: d.channelName,

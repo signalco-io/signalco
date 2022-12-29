@@ -7,7 +7,7 @@
 */
 function int_to_hex(num: number)
 {
-    var hex = Math.round(num).toString(16);
+    let hex = Math.round(num).toString(16);
     if (hex.length == 1)
         hex = '0' + hex;
     return hex;
@@ -56,11 +56,11 @@ export default function blendColors(color1: string, color2: string, percentage: 
         color2 = color2.substring(1);
 
     // 3: we have valid input, convert colors to rgb
-    let color1Channels = [parseInt(color1[0] + color1[1], 16), parseInt(color1[2] + color1[3], 16), parseInt(color1[4] + color1[5], 16)];
-    let color2Channels = [parseInt(color2[0] + color2[1], 16), parseInt(color2[2] + color2[3], 16), parseInt(color2[4] + color2[5], 16)];
+    const color1Channels = [parseInt(color1[0] + color1[1], 16), parseInt(color1[2] + color1[3], 16), parseInt(color1[4] + color1[5], 16)];
+    const color2Channels = [parseInt(color2[0] + color2[1], 16), parseInt(color2[2] + color2[3], 16), parseInt(color2[4] + color2[5], 16)];
 
     // 4: blend
-    var color3 = [
+    const color3 = [
         (1 - percentage) * color1Channels[0] + percentage * color2Channels[0],
         (1 - percentage) * color1Channels[1] + percentage * color2Channels[1],
         (1 - percentage) * color1Channels[2] + percentage * color2Channels[2]

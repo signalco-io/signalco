@@ -4,7 +4,8 @@ module.exports = {
         "turbo",
         "next/core-web-vitals",
         "plugin:import/recommended",
-        "plugin:import/typescript"
+        "plugin:import/typescript",
+        'plugin:@typescript-eslint/recommended'
     ],
     settings: {
         "import/resolver": {
@@ -33,6 +34,12 @@ module.exports = {
             "error",
             "prefer-double"
         ],
+        "no-var": "error",
+        "prefer-const": "error",
+        "@typescript-eslint/no-inferrable-types": "error",
+        "@typescript-eslint/no-extra-semi": "error",
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/no-namespace": 0,
         "import/no-unresolved": "error",
         "import/no-absolute-path": "error",
         "import/order": [

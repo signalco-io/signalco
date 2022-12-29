@@ -6,7 +6,7 @@ const defaultSearchFunc = <TItem>(i: TItem, kw: string) => typeof i === 'string'
 
 type UseSearchReturn<TItem> = [TItem[], string, (text: string) => void];
 
-const useSearch = <TItem>(items?: TItem[], filterFunc?: (item: TItem, keyword: string) => boolean, minItems?: number): UseSearchReturn<TItem> => {
+const useSearch = <TItem>(items?: TItem[], filterFunc?: (item: TItem, keyword: string) => boolean): UseSearchReturn<TItem> => {
     const [searchText, setSearchText] = useState<string>('');
 
     const handleSearchTextChange = (text: string) => {

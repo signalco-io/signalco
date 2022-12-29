@@ -17,7 +17,7 @@ export function EntityIconByType(type: number) {
 }
 
 export default function EntityIcon(entity: IEntityDetails | undefined) {
-    let Icon = null;
+    const Icon = null;
 
     if (entity) {
         if (entity.alias.toLowerCase().indexOf('light') >= 0 ||

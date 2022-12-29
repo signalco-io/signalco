@@ -26,7 +26,7 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
 ];
 
 const loadHistory = async (targets: IContactPointer[] | undefined, duration: number) => {
-    var contactsHistory = targets?.map(async t => ({ contact: t, history: await historyAsync(t, duration) }));
+    const contactsHistory = targets?.map(async t => ({ contact: t, history: await historyAsync(t, duration) }));
     if (contactsHistory) {
         return await Promise.all(contactsHistory);
     }

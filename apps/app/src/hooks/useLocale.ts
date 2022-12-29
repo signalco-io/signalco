@@ -26,11 +26,10 @@ function resolvePathSplit(data: ObjectDictAny, pathParts: string[]) {
 }
 
 function formatString(text: string, data?: object) {
-    return text.replace(/\{((\d+|[a-zA-Z_$]\w*(?:\.[a-zA-Z_$]\w*|\[\d+\])*)(?:\,(-?\d*))?(?:\:([^\}]*(?:(?:\}\})+[^\}]+)*))?)\}|(\{\{)|(\}\})/g, function () {
-        var innerArgs = arguments;
-        if (innerArgs[5]) return '{';
-        if (innerArgs[6]) return '}';
-        const path = innerArgs[2];
+    return text.replace(/\{((\d+|[a-zA-Z_$]\w*(?:\.[a-zA-Z_$]\w*|\[\d+\])*)(?:\,(-?\d*))?(?:\:([^\}]*(?:(?:\}\})+[^\}]+)*))?)\}|(\{\{)|(\}\})/g, function (...args) {
+        if (args[5]) return '{';
+        if (args[6]) return '}';
+        const path = args[2];
         return resolvePathDot(data as ObjectDictAny, path)?.toString() ?? `{${path}}`;
     });
 }
@@ -40,7 +39,7 @@ export const availableLocales = ['hr', 'en'];
 export function localizer(...namespace: string[]): LocalizeFunc {
     const userLocale = UserSettingsProvider.value('locale', 'en');
 
-    let namespaceKeys = resolvePathSplit(userLocale === 'en' ? en : hr, namespace);
+    const namespaceKeys = resolvePathSplit(userLocale === 'en' ? en : hr, namespace);
 
     return (key: string, data?: object) => { return namespaceKeys && namespaceKeys[key] ? formatString(namespaceKeys[key], data) : `{${key}}`; };
 }

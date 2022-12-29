@@ -17,7 +17,7 @@ export interface PageWithMetadata extends FunctionComponent<any> {
   layout?: React.FunctionComponent | undefined
   inDevelopment?: boolean | undefined,
   title?: string | undefined
-};
+}
 
 function ThemeChangerWrapper(props: ChildrenProps) {
     useAppTheme();
