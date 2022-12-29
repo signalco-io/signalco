@@ -19,7 +19,7 @@ export default function Row({ children, spacing, alignItems, justifyContent, jus
             style={{
                 '--s-gap': `${(spacing ?? 0) * 8}px`,
                 '--s-alignItems': alignItems ?? 'center',
-                '--s-justifyContent': justifyContent,
+                '--s-justifyContent': justifyContent ?? 'stretch',
                 '--s-justifyItems': justifyItems,
                 ...style
             } as CSSProperties}

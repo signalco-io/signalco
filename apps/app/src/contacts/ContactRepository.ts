@@ -26,6 +26,14 @@ export async function setAsync(pointer: IContactPointer, valueSerialized: string
     });
 }
 
+export async function historiesAsync(targets: IContactPointer[] | undefined, duration: number) {
+    const contactsHistory = targets?.map(async t => ({ contact: t, history: await historyAsync(t, duration) }));
+    if (contactsHistory) {
+        return await Promise.all(contactsHistory);
+    }
+    return [];
+}
+
 export async function historyAsync(pointer: IContactPointer, duration?: Date | string | number | undefined) {
     return (await requestAsync('/contact/history', 'get', {
         entityId: pointer.entityId,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Link from 'next/link';
 import { Stack, Icon, Row, Button, Typography, Box } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
@@ -9,6 +9,9 @@ import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useEntity from '../../../src/hooks/signalco/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
 import IContact from '../../../src/contacts/IContact';
+import Graph from '../../graphs/Graph';
+import useLoadAndError from '../../../src/hooks/useLoadAndError';
+import { historiesAsync } from '../../../src/contacts/ContactRepository';
 
 type ConfigProps = {
     label: string;
@@ -76,6 +79,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
         entityId: temperatureDevice.id
     } : undefined)?.data;
 
+    const columns = config?.columns ?? 4;
     const rows = config?.rows ?? 4;
     const degrees = temperatureContact
         ? (typeof temperatureContact?.valueSerialized !== 'undefined'
@@ -96,24 +100,26 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
     } : undefined)?.data;
     const heatingActive = heatingContact?.valueSerialized === 'true';
 
+    const duration = 24 * 60 * 60 * 1000;
+    const loadHistoryCallback = useCallback(() => historiesAsync(temperatureContact ? [temperatureContact] : [], duration), [temperatureContact, duration]);
+    const historyData = useLoadAndError(loadHistoryCallback);
+
     return (
         <Box sx={{ width: '100%', height: '100%' }}>
             <Stack alignItems="center" justifyContent="center" style={{ height: '100%' }}>
-                <Box sx={{ mt: rows > 2 ? 9 : (rows > 1 ? 2 : 0) }}>
-                    <Link href={`${KnownPages.Entities}/${temperatureDevice?.id}`} passHref>
-                        <Button variant="plain">
-                            <Row alignItems="stretch">
-                                <Stack style={{ height: '100%' }} justifyContent="center" alignItems="center">
-                                    <Typography fontWeight={100} fontSize={rows > 2 ? 64 : 42} lineHeight={1}>{degreesWhole}</Typography>
-                                </Stack>
-                                <Stack justifyContent="space-between">
-                                    <Typography fontWeight={100} fontSize={rows > 2 ? 18 : 12} sx={{ opacity: 0.6 }}>&#176;C</Typography>
-                                    <Typography fontWeight={100} fontSize={rows > 2 ? 18 : 14} sx={{ opacity: 0.6 }}>.{degreesDecimal}</Typography>
-                                </Stack>
-                            </Row>
-                        </Button>
-                    </Link>
-                </Box>
+                <Link href={`${KnownPages.Entities}/${temperatureDevice?.id}`} passHref>
+                    <Button variant="plain">
+                        <Row alignItems="stretch">
+                            <Stack style={{ height: '100%' }} justifyContent="center" alignItems="center">
+                                <Typography fontWeight={100} fontSize={rows > 2 ? 64 : 42} lineHeight={1}>{degreesWhole}</Typography>
+                            </Stack>
+                            <Stack justifyContent="space-between">
+                                <Typography fontWeight={100} fontSize={rows > 2 ? 18 : 12} sx={{ opacity: 0.6 }}>&#176;C</Typography>
+                                <Typography fontWeight={100} fontSize={rows > 2 ? 18 : 14} sx={{ opacity: 0.6 }}>.{degreesDecimal}</Typography>
+                            </Stack>
+                        </Row>
+                    </Button>
+                </Link>
                 {config?.label && (
                     <Typography
                         fontWeight={rows > 1 ? 'light' : 'normal'}
@@ -133,6 +139,17 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                     </Row>
                 )}
             </Stack>
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}>
+                <Graph
+                    data={historyData.item?.at(0)?.history?.map(i => ({
+                        id: i.timeStamp.toUTCString(),
+                        value: i.valueSerialized ?? ''
+                    })) ?? []} durationMs={duration}
+                    width={columns * 80 + 2}
+                    height={rows * 25}
+                    hideLegend
+                />
+            </div>
         </Box>
     );
 }
