@@ -1,4 +1,4 @@
-import HttpService from '../services/HttpService';
+import { requestAsync } from '../services/HttpService';
 import IContactPointer from '../contacts/IContactPointer';
 
 export interface IConduct {
@@ -20,7 +20,7 @@ export default class ConductsService {
     }
 
     static async RequestConductAsync(pointer: IContactPointer, value?: any, delay?: number) {
-        await HttpService.requestAsync('/conducts/request', 'post', {
+        await requestAsync('/conducts/request', 'post', {
             entityId: pointer.entityId,
             channelName: pointer.channelName,
             contactName: pointer.contactName,
@@ -43,7 +43,7 @@ export default class ConductsService {
             valueSerialized: typeof conduct.value === 'string' ? conduct.value : JSON.stringify(conduct.value),
             delay: conduct.delay || 0
         }));
-        await HttpService.requestAsync('/conducts/request-multiple', 'post', conductsDtos);
+        await requestAsync('/conducts/request-multiple', 'post', conductsDtos);
 
         // Set local value state
         for (let index = 0; index < conducts.length; index++) {

@@ -1,6 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-import HttpService from '../services/HttpService';
+import { getApiUrl } from '../services/HttpService';
 import CurrentUserProvider from '../services/CurrentUserProvider';
 import { showNotification } from '../notifications/PageNotificationService';
 
@@ -91,7 +91,7 @@ class RealtimeService {
         console.debug('Configuring SignalR...');
 
         this.contactsHub = new HubConnectionBuilder()
-          .withUrl(HttpService.getApiUrl('/signalr/contacts'), {
+          .withUrl(getApiUrl('/signalr/contacts'), {
             accessTokenFactory: () => {
                 const token = CurrentUserProvider.getToken();
                 if (token === 'undefined')

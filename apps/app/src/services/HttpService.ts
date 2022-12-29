@@ -5,54 +5,55 @@ import { showPrompt } from '../notifications/PageNotificationService';
 import { parseHash, parseHashParam } from '../hooks/useHashParam';
 import { isAbsoluteUrl, trimStartChar } from '../helpers/StringHelpers';
 
-export default class HttpService {
-  public static tokenFactory?: () => Promise<string>;
-  public static get isOnline(): boolean {
-    if (typeof window !== 'undefined' && 'onLine' in navigator)
-      return navigator.onLine;
-    return true;
-  }
+export function getApiUrl(url: string): string {
+    return signalcoApiEndpoint() + trimStartChar(url, '/');
+}
 
-  private static async _getBearerTokenAsync() {
+let _tokenFactory: (() => Promise<string>) | undefined = undefined;
+export function setTokenFactory(factory: () => Promise<string>) {
+    _tokenFactory = factory;
+}
+
+export function getTokenFactory() {
+    return _tokenFactory;
+}
+
+async function _getBearerTokenAsync() {
     let token: string | undefined;
 
     // Try to use cached token (for offline access)
     const cachedToken = CurrentUserProvider.getToken();
     if (cachedToken != null) {
-      token = cachedToken;
-      console.debug('Using cached token.');
+        token = cachedToken;
+        console.debug('Using cached token.');
     }
 
     // If unable to use cached token, ask factory for one
-    if (token == null &&
-      typeof HttpService.tokenFactory !== 'undefined') {
-      token = await HttpService.tokenFactory();
-      CurrentUserProvider.setToken(token);
-      console.debug('Used token factory. Have token?', typeof token !== 'undefined')
+    const tokenFactory = getTokenFactory();
+    if (token == null && tokenFactory) {
+        token = await tokenFactory();
+        CurrentUserProvider.setToken(token);
+        console.debug('Used token factory. Have token?', typeof token !== 'undefined')
     }
 
     // Cache token and return if available
     if (typeof token !== 'undefined') {
-      return `Bearer ${token}`;
+        return `Bearer ${token}`;
     }
 
     console.warn('Token is undefined');
     throw new Error('Login failed.');
-  };
+};
 
-  public static async getAsync<T>(url: string, data?: any): Promise<T> {
-    return await this.requestAsync(url, 'get', data) as T;
-  }
-
-  public static async requestAsync(
+export async function requestAsync(
     url: string,
     method: 'get' | 'post' | 'put' | 'delete',
     data?: any,
     headers?: Record<string, string>
-  ) {
-    const token = await HttpService._getBearerTokenAsync();
+) {
+    const token = await _getBearerTokenAsync();
     try {
-        var urlResolved = new URL(isAbsoluteUrl(url) ? url : HttpService.getApiUrl(url));
+        var urlResolved = new URL(isAbsoluteUrl(url) ? url : getApiUrl(url));
         if (method === 'get' && data) {
             urlResolved.search = new URLSearchParams(data).toString();
         }
@@ -82,7 +83,7 @@ export default class HttpService {
             // Check if we are already reloading to authenticate
             const isAuthReload = parseHashParam('authReload');
             if (isAuthReload === 'true') {
-                // Show notification to manually reload the app
+            // Show notification to manually reload the app
                 showPrompt(
                     'Authorization failed. Please reload the app to continue...',
                     'error',
@@ -110,9 +111,8 @@ export default class HttpService {
         console.error('Unknown API error', err);
         throw err;
     }
-  }
+}
 
-  public static getApiUrl(url: string): string {
-    return signalcoApiEndpoint() + trimStartChar(url, '/');
-  }
+export async function getAsync<T>(url: string, data?: any): Promise<T> {
+    return await requestAsync(url, 'get', data) as T;
 }

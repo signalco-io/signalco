@@ -3,7 +3,7 @@ import { Clear, People, Send, Share } from '@signalco/ui-icons';
 import { Chip, Row, Stack, Tooltip, IconButton, TextField, List, ListItem, ListItemContent, ListDivider, GentleSlide } from '@signalco/ui';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import IUser from '../../src/users/IUser';
-import HttpService from '../../src/services/HttpService';
+import { requestAsync } from '../../src/services/HttpService';
 import useLocale from '../../src/hooks/useLocale';
 
 interface IShareEntityChipProps {
@@ -29,7 +29,7 @@ function ShareEntityModal({ entity, entityType, onClose }: IShareEntityModalProp
 
     const handleSubmitShareWithNew = async () => {
         // TODO: Add success/error indicator
-        await HttpService.requestAsync('/share/entity', 'post', {
+        await requestAsync('/share/entity', 'post', {
             type: entityType, // 1 - Device
             entityId: entity.id,
             userEmails: [shareWithNewEmail]

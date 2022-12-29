@@ -1,4 +1,4 @@
-import HttpService from '../services/HttpService';
+import { getAsync } from '../services/HttpService';
 import IEntityDetails from '../entity/IEntityDetails';
 import { entitiesAsync, entityAsync, entityDeleteAsync } from '../entity/EntityRepository';
 import ConductsService from '../conducts/ConductsService';
@@ -79,7 +79,7 @@ export default class StationsRepository {
     }
 
     static async getLogsAsync(id: string) {
-        return (await HttpService.getAsync<StationBlobInfoDto[]>(`/stations/logging/list?stationId=${id}`)).map(StationBlobInfoDto.FromDto);
+        return (await getAsync<StationBlobInfoDto[]>(`/stations/logging/list?stationId=${id}`)).map(StationBlobInfoDto.FromDto);
     }
 
     static async getStationAsync(id: string): Promise<IEntityDetails | undefined> {
