@@ -24,24 +24,24 @@ export const IsConfigurationValid = <TConfigProps>(config: any, options: IWidget
         }
 
         switch (opt.type) {
-            case 'deviceTarget':
-                if (!value.deviceId) {
-                    console.debug(`Config invalid: ${String(opt.name)} - deviceTarget, deviceId missing`, config);
+        case 'deviceTarget':
+            if (!value.deviceId) {
+                console.debug(`Config invalid: ${String(opt.name)} - deviceTarget, deviceId missing`, config);
+                return false;
+            }
+            break;
+        case 'deviceContactTargetWithValue':
+        case 'deviceContactTarget':
+            if (opt.multiple){
+                if ((value as IContactPointerPartial[]).filter(v => isInvalidateDeviceContactTarget(v)).length) {
+                    console.debug(`Config invalid: ${String(opt.name)} - deviceContact multiple, missing options`, config);
                     return false;
                 }
-                break;
-            case 'deviceContactTargetWithValue':
-            case 'deviceContactTarget':
-                if (opt.multiple){
-                    if ((value as IContactPointerPartial[]).filter(v => isInvalidateDeviceContactTarget(v)).length) {
-                        console.debug(`Config invalid: ${String(opt.name)} - deviceContact multiple, missing options`, config);
-                        return false;
-                    }
-                } else if (isInvalidateDeviceContactTarget(value)) {
-                    console.debug(`Config invalid: ${String(opt.name)} - deviceContact, missing options`, config);
-                    return false;
-                }
-                break;
+            } else if (isInvalidateDeviceContactTarget(value)) {
+                console.debug(`Config invalid: ${String(opt.name)} - deviceContact, missing options`, config);
+                return false;
+            }
+            break;
         }
     }
     return true;

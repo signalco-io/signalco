@@ -72,7 +72,7 @@ class RealtimeService {
                 console.log('Signalr reconnected');
                 showNotification('Realtime connection to cloud established.', 'success');
             });
-            } catch (err) {
+        } catch (err) {
             const delay = Math.min((retryCount + 1) * 2, 180);
 
             console.warn(`Failed to start SignalR hub connection. Reconnecting in ${delay}s`, err);
@@ -91,16 +91,16 @@ class RealtimeService {
         console.debug('Configuring SignalR...');
 
         this.contactsHub = new HubConnectionBuilder()
-          .withUrl(getApiUrl('/signalr/contacts'), {
-            accessTokenFactory: () => {
-                const token = CurrentUserProvider.getToken();
-                if (token === 'undefined')
-                    throw Error('TokenFactory not present. Unable to authorize SignalR client.');
-                return token!;
-            }
-          })
-          .configureLogging(LogLevel.Information)
-          .build();
+            .withUrl(getApiUrl('/signalr/contacts'), {
+                accessTokenFactory: () => {
+                    const token = CurrentUserProvider.getToken();
+                    if (token === 'undefined')
+                        throw Error('TokenFactory not present. Unable to authorize SignalR client.');
+                    return token!;
+                }
+            })
+            .configureLogging(LogLevel.Information)
+            .build();
 
         this._hubStartWithRetryAsync(0);
     };

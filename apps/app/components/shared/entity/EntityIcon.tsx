@@ -3,16 +3,16 @@ import IEntityDetails from '../../../src/entity/IEntityDetails';
 
 export function EntityIconByType(type: number) {
     switch(type) {
-        case 2:
-            return Dashboard;
-        case 3:
-            return Play;
-        case 4:
-            return Station;
-        case 5:
-            return Channel;
-        default:
-            return Device;
+    case 2:
+        return Dashboard;
+    case 3:
+        return Play;
+    case 4:
+        return Station;
+    case 5:
+        return Channel;
+    default:
+        return Device;
     }
 }
 

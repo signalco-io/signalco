@@ -55,7 +55,7 @@ function applyStaticToConfig(config: any | undefined, options: IWidgetConfigurat
 }
 
 function UnresolvedWidget() {
-  return <Alert color="danger" sx={{ height: '100%' }}>Unknown widget</Alert>
+    return <Alert color="danger" sx={{ height: '100%' }}>Unknown widget</Alert>
 }
 
 function Widget(props: WidgetProps) {

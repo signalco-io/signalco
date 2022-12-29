@@ -12,6 +12,10 @@
     }
   },
   "rules": {
+    "indent": [
+      "error",
+      4
+    ],
     "react/function-component-definition": [
       "warn"
     ],
