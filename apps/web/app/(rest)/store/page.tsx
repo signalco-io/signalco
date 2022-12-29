@@ -17,27 +17,27 @@ function StoreStockStatusBadge(props: { status: number | undefined }) {
     let text = 'Out of stock';
     let color: string = grey[400];
     switch (props.status) {
-        default:
-        case 0:
-            break;
-        case 1:
-            Icon = Check;
-            opacity = 1;
-            text = 'In stock';
-            color = green[400];
-            break;
-        case 2:
-            Icon = ExternalLink;
-            opacity = 1;
-            text = 'Sold elsewhere';
-            color = grey[400];
-            break;
-        case 3:
-            Icon = Hourglass;
-            opacity = 1;
-            text = 'On backorder';
-            color = amber[400];
-            break;
+    default:
+    case 0:
+        break;
+    case 1:
+        Icon = Check;
+        opacity = 1;
+        text = 'In stock';
+        color = green[400];
+        break;
+    case 2:
+        Icon = ExternalLink;
+        opacity = 1;
+        text = 'Sold elsewhere';
+        color = grey[400];
+        break;
+    case 3:
+        Icon = Hourglass;
+        opacity = 1;
+        text = 'On backorder';
+        color = amber[400];
+        break;
     }
 
     return (

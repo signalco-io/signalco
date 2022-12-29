@@ -30,24 +30,24 @@ function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject
     if (typeof schemaObj === 'undefined') return undefined;
 
     switch (schemaObj.type) {
-        case 'string':
-            return '';
-        case 'boolean': return true;
-        case 'number':
-        case 'integer': return 0;
-        case 'object':
-            if (typeof schemaObj.properties === 'undefined') return {};
-            let curr: ObjectDictAny = {};
-            Object.keys(schemaObj.properties).forEach(prop => {
-                if (schemaObj.properties) {
-                    curr[prop] = schemaToJson(api, schemaObj.properties[prop]);
-                }
-            });
-            return curr;
-        case 'array':
-            const arraySchema = schemaObj as OpenAPIV3.ArraySchemaObject;
-            return [schemaToJson(api, arraySchema.items)];
-        default: return undefined;
+    case 'string':
+        return '';
+    case 'boolean': return true;
+    case 'number':
+    case 'integer': return 0;
+    case 'object':
+        if (typeof schemaObj.properties === 'undefined') return {};
+        let curr: ObjectDictAny = {};
+        Object.keys(schemaObj.properties).forEach(prop => {
+            if (schemaObj.properties) {
+                curr[prop] = schemaToJson(api, schemaObj.properties[prop]);
+            }
+        });
+        return curr;
+    case 'array':
+        const arraySchema = schemaObj as OpenAPIV3.ArraySchemaObject;
+        return [schemaToJson(api, arraySchema.items)];
+    default: return undefined;
     }
 };
 
