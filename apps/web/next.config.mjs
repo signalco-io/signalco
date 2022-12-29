@@ -22,7 +22,7 @@ const nextConfig = {
         domains: ['www.signalco.io']
     },
     eslint: {
-        dirs: ['worker', 'tools', 'src', 'pages', 'locales', 'components']
+        dirs: ['worker', 'tools', 'src', 'app', 'locales', 'components']
     },
     async headers() {
         return [{

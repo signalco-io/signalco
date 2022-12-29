@@ -22,7 +22,7 @@ const nextConfig = {
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;'
     },
     eslint: {
-        dirs: ['worker', 'tools', 'src', 'pages', 'locales', 'components']
+        dirs: ['worker', 'tools', 'src', 'pages', 'app', 'locales', 'components']
     },
     async headers() {
         return [{

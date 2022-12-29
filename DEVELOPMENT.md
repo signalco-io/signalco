@@ -65,17 +65,21 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 Staging (branch `next`):
 
-- [signalco.dev](https://next.signalco.io)
+- [signalco.dev](https://www.signalco.dev)
+- [app.signalco.dev](https://app.signalco.dev)
+- [ui.signalco.dev](https://ui.signalco.dev)
 
 Production (branch `main`):
 
 - [signalco.io](https://www.signalco.io)
+- [app.signalco.io](https://app.signalco.io)
+- [ui.signalco.io](https://ui.signalco.io)
 
 ## More info
 
 ### Next.js
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This project is using Next.js.
 
 To learn more about Next.js, take a look at the following resources:
 

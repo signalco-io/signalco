@@ -102,10 +102,13 @@ function WidgetShades(props: WidgetSharedProps<ConfigProps>) {
             <Grid xs={6} sx={{ flexGrow: 1, borderColor: 'divider', borderRadius: '0 8px 8px 0' }}>
                 <Stack style={{ height: '100%' }} justifyContent="stretch">
                     <Button variant="outlined" onClick={() => handleStateChangeRequest('up')}
-                        sx={{ borderRadius: '0 8px 0 0', flexGrow: 1, border: 0, width: 'calc(100% - 2px)' }}><Up /></Button>
-                    {stopValueSerialized && <Button variant="outlined" onClick={() => handleStateChangeRequest('stop')} sx={{ borderRadius: 0, flexGrow: 1, border: 0 }}><Stop size={18} /></Button>}
+                        sx={{ borderRadius: '0 8px 0 0', flexGrow: 1, border: 0, width: 'calc(100% - 2px)' }}
+                        aria-label="Up"><Up /></Button>
+                    {stopValueSerialized && <Button variant="outlined" onClick={() => handleStateChangeRequest('stop')} sx={{ borderRadius: 0, flexGrow: 1, border: 0 }} aria-label="Stop">
+                        <Stop size={18} /></Button>}
                     <Button variant="outlined" onClick={() => handleStateChangeRequest('down')}
-                        sx={{ borderRadius: '0 0 8px 0', flexGrow: 1, border: 0, width: 'calc(100% - 2px)' }}><Down /></Button>
+                        sx={{ borderRadius: '0 0 8px 0', flexGrow: 1, border: 0, width: 'calc(100% - 2px)' }}
+                        aria-label="Down"><Down /></Button>
                 </Stack>
             </Grid>
         </Grid>
