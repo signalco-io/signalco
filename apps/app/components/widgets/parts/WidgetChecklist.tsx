@@ -20,7 +20,7 @@ interface IChecklistItem {
     id: string,
     done?: boolean,
     text: string
-};
+}
 
 function ChecklistItem(props: { item: IChecklistItem; onChange: (id: string, done: boolean) => void; onRemove: (id: string) => void; }) {
     const { item, onChange, onRemove } = props;

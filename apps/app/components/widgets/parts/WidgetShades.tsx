@@ -51,7 +51,7 @@ function WidgetShades(props: WidgetSharedProps<ConfigProps>) {
             return;
         }
 
-        const stopActions = (delay: number = 0) => {
+        const stopActions = (delay = 0) => {
             if (config?.targetUp && config?.targetDown) {
                 return [
                     { ...config?.targetUp, valueSerialized: stopValueSerialized, delay },
@@ -64,22 +64,24 @@ function WidgetShades(props: WidgetSharedProps<ConfigProps>) {
         const actions: StateAction[] = [];
         const stopAfterDelay = config?.stopAfter ? (Number.parseFloat(config.stopAfter) || 0) * 1000 : 0;
         switch (direction) {
-            case 'up':
-                if (config?.targetUp)
-                    actions.push(config?.targetUp)
-                break;
-            case 'down':
-                if (config?.targetDown)
-                    actions.push(config?.targetDown)
-                break;
-            default:
-            case 'stop':
-                actions.push.apply(actions, stopActions());
-                break;
+        case 'up':
+            if (config?.targetUp)
+                actions.push(config?.targetUp)
+            break;
+        case 'down':
+            if (config?.targetDown)
+                actions.push(config?.targetDown)
+            break;
+        default:
+        case 'stop':
+            // eslint-disable-next-line prefer-spread
+            actions.push.apply(actions, stopActions());
+            break;
         }
 
         // Trigger stop if requested in fonfig
         if (direction !== 'stop' && config?.stopAfter) {
+            // eslint-disable-next-line prefer-spread
             actions.push.apply(actions, stopActions(stopAfterDelay));
         }
 

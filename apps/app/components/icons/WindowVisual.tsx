@@ -4,7 +4,7 @@ import { now } from '../../src/services/DateTimeProvider';
 import useInterval from '../../src/hooks/useInterval';
 import { colorToRgb } from '../../src/helpers/StringHelpers';
 
-var skySunnyGrads = [
+const skySunnyGrads = [
     [{ color: '#00000c', position: 0 }, { color: '#00000c', position: 0 }],
     [{ color: '#020111', position: 85 }, { color: '#191621', position: 100 }],
     [{ color: '#020111', position: 60 }, { color: '#20202c', position: 100 }],

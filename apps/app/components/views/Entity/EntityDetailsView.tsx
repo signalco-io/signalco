@@ -42,10 +42,10 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
 
     const detailsComponent = useMemo(() => {
         switch (entity?.type) {
-            case 3:
-                return <EntityProcessDetails entity={entity} />
-            default:
-                return null;
+        case 3:
+            return <EntityProcessDetails entity={entity} />
+        default:
+            return null;
         }
     }, [entity]);
     const showRawResolved = useMemo(() => detailsComponent == null || showRaw, [detailsComponent, showRaw]);

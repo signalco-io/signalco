@@ -28,7 +28,7 @@ export function nowUtc() {
 }
 
 export function at(date: Date, hours?: number, minutes?: number, seconds?: number, ms?: number) {
-    var dateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0,0,0,0);
+    const dateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0,0,0,0);
 
     if(hours) dateTime.setHours(hours);
     if(minutes) dateTime.setMinutes(minutes);
@@ -43,7 +43,7 @@ export function todayAt(hours?: number, minutes?: number, seconds?: number, ms?:
 }
 
 export function fromDuration(date: Date, duration: string) {
-    var matches = duration.match(durationRegex);
+    const matches = duration.match(durationRegex);
     if (!matches) return undefined;
 
     const years= parseFloat(matches[3]);
@@ -54,7 +54,7 @@ export function fromDuration(date: Date, duration: string) {
     const minutes= parseFloat(matches[14]);
     const seconds= parseFloat(matches[16]);
 
-    var dateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0,0,0,0);
+    const dateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0,0,0,0);
 
     if(years) dateTime.setFullYear(dateTime.getFullYear() + years);
     if(months) dateTime.setMonth(dateTime.getMonth() + months);

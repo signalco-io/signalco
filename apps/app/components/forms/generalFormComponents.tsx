@@ -10,7 +10,7 @@ const components: FormBuilderComponents = {
             label={props.label} />
     ),
     string: (props) => <TextField fullWidth {...props} />,
-    stringReadonly: ({ value, ...props }) => <TextField fullWidth defaultValue={value} {...props} onChange={() => { }} />
+    stringReadonly: ({ value, ...props }) => <TextField fullWidth defaultValue={value} {...props} />
 };
 
 export default components;

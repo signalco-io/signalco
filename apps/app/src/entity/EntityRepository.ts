@@ -1,5 +1,5 @@
 import IEntityDetails from './IEntityDetails';
-import HttpService from '../services/HttpService';
+import { getAsync, requestAsync } from '../services/HttpService';
 import { orderBy } from '../../src/helpers/ArrayHelpers';
 
 function mapEntityDetailsFromDto(e: any) {
@@ -14,7 +14,7 @@ function mapEntityDetailsFromDto(e: any) {
 }
 
 export async function entityAsync(id: string) {
-    const entity = await HttpService.getAsync(`/entity/${id}`);
+    const entity = await getAsync(`/entity/${id}`);
     if (!entity)
         throw new Error('Entity not found');
 
@@ -30,7 +30,7 @@ export async function entityRenameAsync(id: string, newAlias: string) {
 }
 
 export async function entitiesAsync(type?: number) {
-    let entities = (await HttpService.requestAsync('/entity', 'get')).map(mapEntityDetailsFromDto) as IEntityDetails[];
+    let entities = (await requestAsync('/entity', 'get')).map(mapEntityDetailsFromDto) as IEntityDetails[];
     if (typeof type !== 'undefined') {
         entities = entities.filter(e => e.type === type);
     }
@@ -38,7 +38,7 @@ export async function entitiesAsync(type?: number) {
 }
 
 export async function entityUpsertAsync(id: string | undefined, type: number, alias: string) {
-    return (await HttpService.requestAsync('/entity', 'post', {
+    return (await requestAsync('/entity', 'post', {
         id: id,
         type: type,
         alias: alias
@@ -46,5 +46,5 @@ export async function entityUpsertAsync(id: string | undefined, type: number, al
 }
 
 export async function entityDeleteAsync(id: string) {
-    await HttpService.requestAsync('/entity', 'delete', {id: id});
+    await requestAsync('/entity', 'delete', {id: id});
 }

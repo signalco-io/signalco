@@ -1,6 +1,2 @@
 
 'use strict'
-
-module.exports = () => {
-
-}

@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import IWidgetConfigurationOption from '../../widgets/IWidgetConfigurationOption';
-import { WidgetSharedProps } from '../../../components/widgets/Widget';
 
 const useWidgetOptions = <TConfigProps>(
     options: IWidgetConfigurationOption<TConfigProps>[],

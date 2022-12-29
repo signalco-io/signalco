@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { Stack , Typography } from '@signalco/ui';
 import OAuthRedirectConnectButton from '../../oauth/OAuthRedirectConnectButton';
-import HttpService from '../../../src/services/HttpService';
+import { requestAsync } from '../../../src/services/HttpService';
 import { KnownPages } from '../../../src/knownPages';
 
 const slackAppClientIdResolved = process.env.NEXT_PUBLIC_SLACK_CLIENTID;
@@ -20,7 +20,7 @@ export default function ChannelPartialSlack() {
         : undefined;
 
     const handleOAuthCode = async (code: string) => {
-        const response = await HttpService.requestAsync('https://slack.channel.api.signalco.io/api/auth/access', 'post', { code, redirectUrl });
+        const response = await requestAsync('https://slack.channel.api.signalco.io/api/auth/access', 'post', { code, redirectUrl });
         router.push(`${KnownPages.Entities}/${response.id}`);
     };
 

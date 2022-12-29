@@ -1,4 +1,4 @@
-import { Avatar, Button, Icon, IconButton, Row, Stack, Typography } from '@signalco/ui';
+import { Avatar, Button, Icon, Row, Typography } from '@signalco/ui';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultTargetWithValueMultiple, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';

@@ -6,7 +6,7 @@ import useContact from '../../../src/hooks/signalco/useContact';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import { setAsync } from '../../../src/contacts/ContactRepository';
 
-declare module ProcessConfigurationV1 {
+declare namespace ProcessConfigurationV1 {
     export interface ContactPointer {
         entityId: string;
         channelName: string;

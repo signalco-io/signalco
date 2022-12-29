@@ -37,7 +37,7 @@ export default function ChannelsGallery({ channelHrefFunc }: ChannelsGalleryProp
                             if (newCategory)
                                 newSearch.set('category', newCategory);
                             else newSearch.delete('category');
-                            var newUrl = new URL(window.location.href);
+                            const newUrl = new URL(window.location.href);
                             newUrl.search = newSearch.toString();
                             return router.replace(newUrl.toString());
                         }} />

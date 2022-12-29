@@ -13,7 +13,7 @@ export const orderBy = <T>(array: T[], compareFn?: (a: T, b: T) => number) => {
 
 export const arraySum = <T>(array: T[], selectorFunc: (i: T, index: number) => number) => {
     if (!Array.isArray(array))
-    throw new Error('Not an array: ' + typeof array);
+        throw new Error('Not an array: ' + typeof array);
 
     let sum = 0;
     for (let i = 0; i < array.length; i++) {

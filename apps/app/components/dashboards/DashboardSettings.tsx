@@ -17,7 +17,7 @@ interface IDashboardSettingsProps {
 function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsProps) {
     const { t } = useLocale('App', 'Dashboards');
     const [name, setName] = useState(dashboard?.name || '');
-    const [_, setDashboardIdHash] = useHashParam('dashboard');
+    const [, setDashboardIdHash] = useHashParam('dashboard');
     const saveDashboard = useSaveDashboard();
     const deleteDashboard = useDeleteDashboard();
 

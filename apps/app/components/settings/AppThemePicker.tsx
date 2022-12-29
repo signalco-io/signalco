@@ -12,18 +12,18 @@ function AppThemeVisual(props: { label: string, theme: SupportedColorScheme, dis
     let textColor;
     let backgroundColor;
     switch (theme) {
-        case 'dark':
-            backgroundColor = 'black';
-            textColor = 'white';
-            break;
+    case 'dark':
+        backgroundColor = 'black';
+        textColor = 'white';
+        break;
         // case 'darkDimmed':
         //     backgroundColor = 'rgba(32, 31, 30, 1)'
         //     textColor = 'white';
         //     break;
-        default:
-            backgroundColor = 'white';
-            textColor = 'black';
-            break;
+    default:
+        backgroundColor = 'white';
+        textColor = 'black';
+        break;
     }
 
     return (

@@ -59,7 +59,7 @@ function GraphTimeLine(props: IGraphProps) {
 
     // From start of graph to first entry
     transformedDataItem['t0'] = domainGraph(new Date(firstEntry.id).getTime()) - domainGraph(past.getTime());
-    transformedDataItem['v0'] = firstEntry.value === 'true' ? 'false' : 'true';;
+    transformedDataItem['v0'] = firstEntry.value === 'true' ? 'false' : 'true';
 
     // From first entry to last entry
     for (let i = 1; i < reversedData.length; i++) {
@@ -90,7 +90,7 @@ function GraphTimeLine(props: IGraphProps) {
                 barGap={0}
             >
                 <XAxis type="number" axisLine={false} interval="preserveStartEnd" tickFormatter={(v) => {
-                    var date = domainGraph.invert(v);
+                    const date = domainGraph.invert(v);
                     return `${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}`
                 }} />
                 <YAxis type="category" domain={[0]} hide />
