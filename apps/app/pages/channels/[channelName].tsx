@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { Container, Loadable, NoDataPlaceholder, Row, Stack, List, ListItemButton, Typography, Box } from '@signalco/ui';
+import { Link as LinkIcon } from '@signalco/ui-icons';
+import { Container, Loadable, NoDataPlaceholder, Row, Stack, List, ListItemButton, Typography, Box, Link } from '@signalco/ui';
 import { channelsData } from '@signalco/data';
 import { KnownPages } from '../../src/knownPages';
 import useAllEntities from '../../src/hooks/signalco/useAllEntities';
@@ -34,6 +35,7 @@ function AppChannelPage() {
                     <Row spacing={1}>
                         <Typography level="h1">{channel?.label} channel</Typography>
                     </Row>
+                    {channel && <Link href={channel?.officialUrl}><Row spacing={1}><LinkIcon /> Official website</Row></Link>}
                     <Stack spacing={2}>
                         <Typography typography="h3">Connected entities</Typography>
                         <Loadable isLoading={entities.isLoading} error={entities.error}>
