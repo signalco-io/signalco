@@ -11,7 +11,6 @@ type IWidgetConfigurationOption<TConfigProps> = {
     type: WidgetConfigurationType,
     default?: any,
     dataUnit?: string,
-    data?: any,
     optional?: boolean
 }
 

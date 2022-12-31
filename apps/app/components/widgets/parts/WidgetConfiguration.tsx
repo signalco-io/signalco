@@ -63,15 +63,6 @@ const useWidgetConfiguration = (
     } as IWidgetConfigurationDialogProps;
 };
 
-function componentMultiple<T>(valueItems: T[], componentFactory: (value: T, i: number) => React.ReactElement) {
-    const elements = [];
-    for (let i = 0; i <= valueItems.length; i++) {
-        const value = valueItems[i];
-        elements.push(componentFactory(value, i));
-    }
-    return <>{elements}</>;
-}
-
 const widgetConfigurationFormComponents: FormBuilderComponents = {
     entity: (props) => <DisplayEntityTarget target={props.value} onChanged={t => props.onChange(t, { receiveEvent: false })} />,
     entityContactMultiple: (props) => {
