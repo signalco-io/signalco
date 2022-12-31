@@ -75,7 +75,7 @@ function componentMultiple<T>(valueItems: T[], componentFactory: (value: T, i: n
 const widgetConfigurationFormComponents: FormBuilderComponents = {
     entity: (props) => <DisplayEntityTarget target={props.value} onChanged={t => props.onChange(t, { receiveEvent: false })} />,
     entityContactMultiple: (props) => {
-        const valueItems = asArray(props.value);
+        const valueItems = asArray(props.value).filter(p => !!p);
         valueItems.push(undefined); // Push new item as last
         return (
             <>
@@ -94,7 +94,7 @@ const widgetConfigurationFormComponents: FormBuilderComponents = {
         );
     },
     entityContactValueMultiple: (props) => {
-        const valueItems = asArray(props.value);
+        const valueItems = asArray(props.value).filter(p => !!p);
         valueItems.push(undefined); // Push new item as last
         return (
             <>
