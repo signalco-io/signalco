@@ -24,9 +24,9 @@ type ConfigProps = {
 
 const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     DefaultLabel,
-    { name: 'targetTemperature', label: 'Temperature', type: 'deviceContactTarget', optional: true },
-    { name: 'targetHeating', label: 'Heating', type: 'deviceContactTarget', optional: true },
-    { name: 'targetCooling', label: 'Cooling', type: 'deviceContactTarget', optional: true },
+    { name: 'targetTemperature', label: 'Temperature', type: 'entityContact', optional: true },
+    { name: 'targetHeating', label: 'Heating', type: 'entityContact', optional: true },
+    { name: 'targetCooling', label: 'Cooling', type: 'entityContact', optional: true },
     DefaultColumns(4),
     DefaultRows(4)
 ];

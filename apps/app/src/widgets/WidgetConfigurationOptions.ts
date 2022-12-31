@@ -1,5 +1,5 @@
 import IWidgetConfigurationOption from './IWidgetConfigurationOption';
-import IContactPointer from '../contacts/IContactPointer';
+import IContactPointerPartial from '../contacts/IContactPointerPartial';
 import IContact from '../contacts/IContact';
 
 export const DefaultColumns: (columns: number) => IWidgetConfigurationOption<{ columns: number}> =
@@ -10,10 +10,10 @@ export const DefaultRows: (rows: number) => IWidgetConfigurationOption<{ rows: n
 
 export const DefaultLabel: IWidgetConfigurationOption<{ label: string}> = { name: 'label', label: 'Label', type: 'string', optional: true };
 
-export const DefaultTarget: IWidgetConfigurationOption<{ target: IContactPointer }> = { name: 'target', label: 'Target', type: 'deviceContactTarget' };
+export const DefaultTarget: IWidgetConfigurationOption<{ target: IContactPointerPartial }> = { name: 'target', label: 'Target', type: 'entityContact' };
 
-export const DefaultTargetMultiple: IWidgetConfigurationOption<{ target: IContactPointer[] }> = { name: 'target', label: 'Target', type: 'deviceContactTarget', multiple: true };
+export const DefaultTargetMultiple: IWidgetConfigurationOption<{ target: IContactPointerPartial[] }> = { name: 'target', label: 'Target', type: 'entityContactMultiple' };
 
-export const DefaultTargetWithValue: IWidgetConfigurationOption<{ target: IContact }> = { name: 'target', label: 'Target', type: 'deviceContactTargetWithValue' };
+export const DefaultTargetWithValue: IWidgetConfigurationOption<{ target: IContact }> = { name: 'target', label: 'Target', type: 'entityContactValue' };
 
-export const DefaultTargetWithValueMultiple: IWidgetConfigurationOption<{ target: IContact[] }> = { name: 'target', label: 'Target', type: 'deviceContactTargetWithValue', multiple: true };
+export const DefaultTargetWithValueMultiple: IWidgetConfigurationOption<{ target: IContact[] }> = { name: 'target', label: 'Target', type: 'entityContactValueMultiple' };
