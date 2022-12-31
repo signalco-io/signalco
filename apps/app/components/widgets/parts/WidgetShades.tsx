@@ -23,8 +23,8 @@ type ConfigProps = {
 
 const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     DefaultLabel,
-    { name: 'targetUp', label: 'Up button', type: 'deviceContactTargetWithValue' },
-    { name: 'targetDown', label: 'Down button', type: 'deviceContactTargetWithValue' },
+    { name: 'targetUp', label: 'Up button', type: 'entityContactValue' },
+    { name: 'targetDown', label: 'Down button', type: 'entityContactValue' },
     { name: 'stopValueSerialized', label: 'Stop value', type: 'string' },
     { name: 'stopAfter', label: 'Stop after', type: 'number', dataUnit: 'seconds', optional: true },
     DefaultColumns(4)
