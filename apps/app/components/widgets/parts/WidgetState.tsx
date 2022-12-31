@@ -8,7 +8,7 @@ import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useEntity from '../../../src/hooks/signalco/useEntity';
 import useContacts from '../../../src/hooks/signalco/useContacts';
 import { entityAsync } from '../../../src/entity/EntityRepository';
-import IContactPointer from '../../../src/contacts/IContactPointer';
+import type IContactPointer from '../../../src/contacts/IContactPointer';
 import IContact from '../../../src/contacts/IContact';
 import ConductsService from '../../../src/conducts/ConductsService';
 
@@ -16,7 +16,7 @@ const stateOptions = [
     DefaultLabel,
     { ...DefaultTargetWithValueMultiple, name: 'on', label: 'On' },
     { ...DefaultTargetWithValueMultiple, name: 'off', label: 'Off' },
-    { name: 'visual', label: 'Visual', type: 'select', default: 'lightbulb', data: [{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }] },
+    { name: 'visual', label: 'Visual', type: 'selectVisual', default: 'lightbulb', data: [{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }] },
 ];
 
 const TvVisual = dynamic(() => import('../../icons/TvVisual'));
