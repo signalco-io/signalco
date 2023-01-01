@@ -9,6 +9,8 @@ import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfiguratio
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useEntity from '../../../src/hooks/signalco/useEntity';
+import IContactPointerPartial from '../../../src/contacts/IContactPointerPartial';
+import useContact from '../../../src/hooks/signalco/useContact';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
@@ -16,6 +18,7 @@ type ConfigProps = {
     label: string,
     targetUp: StateAction | undefined;
     targetDown: StateAction | undefined;
+    targetPosition: IContactPointerPartial | undefined;
     stopValueSerialized: string | undefined;
     stopAfter: string | undefined;
     columns: number;
@@ -25,24 +28,29 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     DefaultLabel,
     { name: 'targetUp', label: 'Up button', type: 'entityContactValue' },
     { name: 'targetDown', label: 'Down button', type: 'entityContactValue' },
+    { name: 'targetPosition', label: 'Position', type: 'entityContact', optional: true },
     { name: 'stopValueSerialized', label: 'Stop value', type: 'string' },
     { name: 'stopAfter', label: 'Stop after', type: 'number', dataUnit: 'seconds', optional: true },
     DefaultColumns(4)
 ];
 
-function WidgetShades(props: WidgetSharedProps<ConfigProps>) {
-    const { config } = props;
+function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
     const upEntity = useEntity(config?.targetUp?.entityId);
     const downEntity = useEntity(config?.targetDown?.entityId);
+    const positionContact = useContact(config?.targetPosition)
 
-    const label = props.config?.label ?? upEntity?.data?.alias ?? downEntity?.data?.alias ?? '';
-    const columns = props.config?.columns ?? 4;
-
-    // TODO: Calc from source value
-    const shadePerc = 0.3;
+    const label = config?.label ?? upEntity?.data?.alias ?? downEntity?.data?.alias ?? '';
+    const columns = config?.columns ?? 4;
     const stopValueSerialized = config?.stopValueSerialized;
 
-    useWidgetOptions(stateOptions, props);
+    // Calculate position
+    let shadePerc = 0.7;
+    if (positionContact.data?.valueSerialized)
+        shadePerc = parseFloat(positionContact.data.valueSerialized) / 100;
+    if (Number.isNaN(shadePerc))
+        shadePerc = 0.7;
+
+    useWidgetOptions(stateOptions, { onOptions });
 
     const handleStateChangeRequest = (direction: 'up' | 'down' | 'stop') => {
         if (!upEntity || !downEntity) {
@@ -94,7 +102,7 @@ function WidgetShades(props: WidgetSharedProps<ConfigProps>) {
                 <>
                     <Grid xs={6}>
                         <Stack style={{ height: '100%', paddingLeft: 2.5 * 8, paddingRight: 1.5 * 8, paddingTop: 16, paddingBottom: 16 }} justifyContent={columns > 2 ? 'space-between' : 'center'}>
-                            <WindowVisual shadePerc={shadePerc} size={68} />
+                            <WindowVisual shadePerc={1 - shadePerc} size={68} />
                             {columns > 2 && <Typography fontWeight="500" noWrap>{label}</Typography>}
                         </Stack>
                     </Grid>

@@ -57,7 +57,8 @@ function WidgetCard(props: IWidgetCardProps) {
                 sx={{
                     width: sizeWidth,
                     height: sizeHeight,
-                    position: 'relative'
+                    position: 'relative',
+                    overflow: 'hidden'
                 }}
                 variant="outlined">
                 <CardOverflow sx={{

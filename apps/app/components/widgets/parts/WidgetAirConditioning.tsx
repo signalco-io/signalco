@@ -145,9 +145,10 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                         id: i.timeStamp.toUTCString(),
                         value: i.valueSerialized ?? ''
                     })) ?? []} durationMs={duration}
-                    width={columns * 80 + 2}
+                    width={columns * 84 - 2}
                     height={rows * 25}
                     hideLegend
+                    adaptiveDomain
                 />
             </div>
         </Box>
