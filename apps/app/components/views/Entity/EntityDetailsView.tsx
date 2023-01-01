@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
-import { DisableButton, Avatar, Box, EditableInput, Timeago, MuiStack, Row, Stack, Loadable } from '@signalco/ui';
+import { ExternalLink } from '@signalco/ui-icons';
+import { DisableButton, Avatar, Box, EditableInput, Timeago, MuiStack, Row, Stack, Loadable, Chip } from '@signalco/ui';
 import EntityProcessDetails from './EntityProcessDetails';
 import EntityOptions from './EntityOptions';
 import ContactsTable from './ContactsTable';
@@ -8,6 +9,7 @@ import ShareEntityChip from '../../entity/ShareEntityChip';
 import EntityStatus, { useEntityStatus } from '../../entity/EntityStatus';
 import useEntity from '../../../src/hooks/signalco/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
+import { camelToSentenceCase } from '../../../src/helpers/StringHelpers';
 import { entityRenameAsync } from '../../../src/entity/EntityRepository';
 import { entityLastActivity } from '../../../src/entity/EntityHelper';
 import { setAsync } from '../../../src/contacts/ContactRepository';
@@ -39,6 +41,13 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
             await setAsync(disabledContactPointer, (!isDisabled).toString())
         }
     };
+
+    const visitLinks = entity?.contacts
+        .filter(c => (c.contactName === 'visit' || c.contactName.startsWith('visit-')) && c.valueSerialized)
+        .map(c => ({
+            alias: c.contactName.includes('-') ? camelToSentenceCase(c.contactName.substring(c.contactName.indexOf('-') + 1)) : 'Visit',
+            href: c.valueSerialized as string
+        }));
 
     const detailsComponent = useMemo(() => {
         switch (entity?.type) {
@@ -85,6 +94,9 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                             <DisableButton disabled={isDisabled} onClick={handleDisableToggle} />
                         )}
                         <ShareEntityChip entity={entity} entityType={1} />
+                        {visitLinks?.map(link => (
+                            <Chip key={link.href} href={link.href} startDecorator={<ExternalLink size={16} />}>{link.alias}</Chip>
+                        ))}
                     </Row>
                 </Stack>
                 <Box sx={{ px: { xs: 1, sm: 2 } }}>
