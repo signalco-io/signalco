@@ -16,6 +16,7 @@ export interface IGraphProps {
     height: number;
     startDateTime?: Date;
     hideLegend?: boolean;
+    adaptiveDomain?: boolean;
 }
 
 const renderCustomizedTimeLineLabel = (props: any) => {
@@ -135,7 +136,7 @@ function ChartGenericTooltip({ active, payload, domain, units }: { active?: bool
     return null;
 }
 
-function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend }: IGraphProps) {
+function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend, adaptiveDomain }: IGraphProps) {
     const yKey = 'value';
     const xKey = 'key';
 
@@ -165,10 +166,10 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend 
             <defs>
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="var(--joy-palette-text-primary)" stopOpacity={0.1} />
-                    <stop offset="95%" stopColor="var(--joy-palette-text-primary)" stopOpacity={0.02} />
+                    <stop offset="95%" stopColor="var(--joy-palette-text-primary)" stopOpacity={0.05} />
                 </linearGradient>
             </defs>
-            <XAxis domain={[0, 1]} ticks={ticks || []} dataKey={xKey} type="number" hide />
+            <XAxis domain={[domainGraph(new Date(firstDataPoint?.id ?? 0).getTime()), domainGraph(new Date(lastDataPoint?.id ?? 0).getTime())]} ticks={ticks || []} dataKey={xKey} type="number" hide />
             <YAxis
                 allowDecimals={false}
                 domain={[dMin, dMax]}
@@ -178,7 +179,7 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend 
                 minTickGap={32}
                 width={28}
                 hide={hideLegend} />
-            {(typeof firstDataPoint !== 'undefined') && (
+            {(!adaptiveDomain && typeof firstDataPoint !== 'undefined') && (
                 <Line type="monotone" dot={false} data={[
                     { key: domainGraph(past.getTime()), value: firstDataPoint.value },
                     { key: domainGraph(new Date(firstDataPoint.id).getTime()), value: firstDataPoint.value }
@@ -191,7 +192,7 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend 
                 fillOpacity={1}
                 stroke="var(--joy-palette-divider)"
                 strokeWidth={2} />
-            {(typeof lastDataPoint !== 'undefined') && (
+            {(!adaptiveDomain && typeof lastDataPoint !== 'undefined') && (
                 <Line type="monotone" dot={false} data={[
                     { key: domainGraph(new Date(lastDataPoint.id).getTime()), value: lastDataPoint.value },
                     { key: domainGraph(nowTime.getTime()), value: lastDataPoint.value }
