@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { Link as LinkIcon } from '@signalco/ui-icons';
+import { Bug, Link as LinkIcon } from '@signalco/ui-icons';
 import { Container, Loadable, NoDataPlaceholder, Row, Stack, List, ListItemButton, Typography, Box, Link } from '@signalco/ui';
 import { channelsData } from '@signalco/data';
 import { KnownPages } from '../../src/knownPages';
@@ -19,6 +19,19 @@ function ChannelConnectPartial(props: { channelName: string }) {
     );
 }
 
+// TODO: Move to sianglco specific UI library
+function LinkChannelIssues({ channelName }: { channelName: string }) {
+    return (
+        <Link
+            href={`https://github.com/orgs/signalco-io/projects/2/views/1?filterQuery=label%3Achannel%3A${encodeURIComponent(channelName)}`}>
+            <Row spacing={1}>
+                <Bug />
+                <span>Known issues</span>
+            </Row>
+        </Link>
+    )
+}
+
 function AppChannelPage() {
     const router = useRouter();
     const channelName = router.query.channelName as string;
@@ -35,7 +48,6 @@ function AppChannelPage() {
                     <Row spacing={1}>
                         <Typography level="h1">{channel?.label} channel</Typography>
                     </Row>
-                    {channel && <Link href={channel?.officialUrl}><Row spacing={1}><LinkIcon /> Official website</Row></Link>}
                     <Stack spacing={2}>
                         <Typography typography="h3">Connected entities</Typography>
                         <Loadable isLoading={entities.isLoading} error={entities.error}>
@@ -58,6 +70,13 @@ function AppChannelPage() {
                         <Loadable isLoading={!!!channelName}>
                             <ChannelConnectPartial channelName={channelName} />
                         </Loadable>
+                    </Stack>
+                    <Stack spacing={2}>
+                        <Typography level="h3">Useful links</Typography>
+                        <Stack spacing={1}>
+                            {channel && <Link href={channel?.officialUrl}><Row spacing={1}><LinkIcon /> Official website</Row></Link>}
+                            <LinkChannelIssues channelName={channelName} />
+                        </Stack>
                     </Stack>
                 </Stack>
             </Box>
