@@ -1,5 +1,6 @@
 import { CssVarsProvider, CssBaseline, extendTheme } from '@signalco/ui';
 import signalcoTheme from './signalco-theme';
+import '@signalco/ui/dist/ui.css';
 
 const theme = extendTheme({});
 
