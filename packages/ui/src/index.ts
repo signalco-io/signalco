@@ -25,6 +25,9 @@ export * from './DotIndicator';
 export { default as EditableInput } from './EditableInput';
 export * from './EditableInput';
 
+export { default as ErrorBoundary } from './ErrorBoundary';
+export * from './ErrorBoundary';
+
 export { default as Fade } from './Fade';
 export * from './Fade';
 
