@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
-import { Stack, Button, Card, CardOverflow, ListItemDecorator, Menu, MenuItem, Box } from '@signalco/ui';
+import { Stack, Button, Card, CardOverflow, ListItemDecorator, Menu, MenuItem, Box, ErrorBoundary } from '@signalco/ui';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
 
 const WidgetConfiguration = dynamic(() => import('./WidgetConfiguration'));
+
 interface IWidgetCardProps {
     children: JSX.Element,
     isEditMode?: boolean
@@ -71,7 +72,7 @@ function WidgetCard(props: IWidgetCardProps) {
                             <Button disabled={!isEditMode} size="lg" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
                         </Stack>
                     ) : (
-                        <>{children}</>
+                        <ErrorBoundary>{children}</ErrorBoundary>
                     )}
                     {isEditMode && (
                         <Box sx={{ position: 'absolute', top: 0, right: 0 }}>
