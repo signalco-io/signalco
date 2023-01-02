@@ -28,92 +28,86 @@ const neutralColor = {
     '900': '#18181b'
 }
 
-const theme = () => {
-    const joyTheme = extendTheme({
-        colorSchemes: {
-            dark: {
-                palette: {
-                    primary: zincColor,
-                    neutral: neutralColor,
-                    background: {
-                        // body: 'var(--joy-palette-primary-900)',
-                        //surface: 'var(--joy-palette-primary-900)',
-                        level1: '#00ff00',
-                        level2: '#00ffff',
-                        level3: '#0000ff',
-                        // backdrop: '#ff00ff',
-                        tooltip: '#f0f0f0'
-                    }
-                }
-            },
-            light: {
-                palette: {
-                    primary: zincColor,
-                    neutral: neutralColor,
-                    background: {
-                        body: 'var(--joy-palette-primary-50)',
-                        //surface: '#ffffff',
-                        level1: '#00ff00',
-                        level2: '#00ffff',
-                        level3: '#0000ff',
-                        // backdrop: '#ff00ff',
-                        tooltip: '#f0f0f0'
-                    }
+const joyTheme = extendTheme({
+    colorSchemes: {
+        dark: {
+            palette: {
+                primary: zincColor,
+                neutral: neutralColor,
+                background: {
+                    // body: 'var(--joy-palette-primary-900)',
+                    //surface: 'var(--joy-palette-primary-900)',
+                    level1: '#00ff00',
+                    level2: '#00ffff',
+                    level3: '#0000ff',
+                    // backdrop: '#ff00ff',
+                    tooltip: '#f0f0f0'
                 }
             }
         },
-        components: {
-            JoyIconButton: {
-                defaultProps: {
-                    color: 'neutral',
-                    variant: 'plain'
-                }
-            },
-            JoyCard: {
-                defaultProps: {
-                    variant: 'outlined'
-                }
-            },
-            JoySheet: {
-                defaultProps: {
-                    variant: 'soft',
-                    color: 'neutral'
-                }
-            },
-            JoyButton: {
-                defaultProps: {
-                    variant: 'soft',
-                    color: 'neutral'
-                }
-            },
-            JoyTextField: {
-                defaultProps: {
-                    variant: 'soft',
-                    color: 'neutral'
-                }
-            },
-            JoyCircularProgress: {
-                defaultProps: {
-                    color: 'neutral'
-                }
-            },
-            JoySwitch: {
-                defaultProps: {
-                    color: 'neutral'
-                }
-            },
-            JoyChip: {
-                defaultProps: {
-                    color: 'neutral',
-                    variant: 'soft'
+        light: {
+            palette: {
+                primary: zincColor,
+                neutral: neutralColor,
+                background: {
+                    body: 'var(--joy-palette-primary-50)',
+                    //surface: '#ffffff',
+                    level1: '#00ff00',
+                    level2: '#00ffff',
+                    level3: '#0000ff',
+                    // backdrop: '#ff00ff',
+                    tooltip: '#f0f0f0'
                 }
             }
         }
-    });
+    },
+    components: {
+        JoyIconButton: {
+            defaultProps: {
+                color: 'neutral',
+                variant: 'plain'
+            }
+        },
+        JoyCard: {
+            defaultProps: {
+                variant: 'outlined'
+            }
+        },
+        JoySheet: {
+            defaultProps: {
+                variant: 'soft',
+                color: 'neutral'
+            }
+        },
+        JoyButton: {
+            defaultProps: {
+                variant: 'soft',
+                color: 'neutral'
+            }
+        },
+        JoyTextField: {
+            defaultProps: {
+                variant: 'soft',
+                color: 'neutral'
+            }
+        },
+        JoyCircularProgress: {
+            defaultProps: {
+                color: 'neutral'
+            }
+        },
+        JoySwitch: {
+            defaultProps: {
+                color: 'neutral'
+            }
+        },
+        JoyChip: {
+            defaultProps: {
+                color: 'neutral',
+                variant: 'soft'
+            }
+        }
+    }
+});
 
-    return joyTheme;
-};
-
-const rootTheme = theme();
-
-export default rootTheme;
+export default joyTheme;
