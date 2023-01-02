@@ -88,6 +88,8 @@ export * from './Row';
 export { default as Timeago } from './Timeago';
 export * from './Timeago';
 
+export * from './colors';
+export * from './theme';
 export * from './hooks';
 
 export { Box } from '@mui/system';

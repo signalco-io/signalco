@@ -1,39 +1,12 @@
-import { extendTheme } from '@signalco/ui';
+import { extendTheme } from "@mui/joy";
+import { neutral, zinc } from "../colors";
 
-export type AppThemeMode = 'system' | 'manual' | 'sunriseSunset' | 'timeRange';
-
-const zincColor = {
-    '50': '#f9fafb',
-    '100': '#f4f4f5',
-    '200': '#e4e4e7',
-    '300': '#d4d4d8',
-    '400': '#a1a1aa',
-    '500': '#71717a',
-    '600': '#52525b',
-    '700': '#3f3f46',
-    '800': '#27272a',
-    '900': '#18181b'
-}
-
-const neutralColor = {
-    '50': '#f9fafb',
-    '100': '#f4f4f5',
-    '200': '#e4e4e7',
-    '300': '#d4d4d8',
-    '400': '#a1a1aa',
-    '500': '#71717a',
-    '600': '#52525b',
-    '700': '#3f3f46',
-    '800': '#27272a',
-    '900': '#18181b'
-}
-
-const joyTheme = extendTheme({
+const signalcoTheme = extendTheme({
     colorSchemes: {
         dark: {
             palette: {
-                primary: zincColor,
-                neutral: neutralColor,
+                primary: zinc,
+                neutral: neutral,
                 background: {
                     // body: 'var(--joy-palette-primary-900)',
                     //surface: 'var(--joy-palette-primary-900)',
@@ -47,8 +20,8 @@ const joyTheme = extendTheme({
         },
         light: {
             palette: {
-                primary: zincColor,
-                neutral: neutralColor,
+                primary: zinc,
+                neutral: neutral,
                 background: {
                     body: 'var(--joy-palette-primary-50)',
                     //surface: '#ffffff',
@@ -110,4 +83,4 @@ const joyTheme = extendTheme({
     }
 });
 
-export default joyTheme;
+export default signalcoTheme;
