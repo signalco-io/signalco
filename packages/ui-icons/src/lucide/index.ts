@@ -21,6 +21,7 @@ export {
     Pin,
     PinOff,
     LogOut,
+    Bug,
     Zap as Lightning,
     Share2 as Share,
     Send,
