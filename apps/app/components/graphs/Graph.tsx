@@ -163,8 +163,8 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
             margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
             <defs>
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="var(--joy-palette-text-primary)" stopOpacity={0.1} />
-                    <stop offset="95%" stopColor="var(--joy-palette-text-primary)" stopOpacity={0.05} />
+                    <stop offset="5%" stopColor="var(--graph-stroke)" stopOpacity={0.35} />
+                    <stop offset="95%" stopColor="var(--graph-stroke)" stopOpacity={0.15} />
                 </linearGradient>
             </defs>
             <XAxis domain={[domainGraph(new Date(firstDataPoint?.id ?? 0).getTime()), domainGraph(new Date(lastDataPoint?.id ?? 0).getTime())]} ticks={ticks || []} dataKey={xKey} type="number" hide />
@@ -188,7 +188,7 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
                 dataKey={yKey}
                 fill="url(#colorUv)"
                 fillOpacity={1}
-                stroke="var(--joy-palette-divider)"
+                stroke="var(--graph-stroke)"
                 strokeWidth={2} />
             {(!adaptiveDomain && typeof lastDataPoint !== 'undefined') && (
                 <Line type="monotone" dot={false} data={[
