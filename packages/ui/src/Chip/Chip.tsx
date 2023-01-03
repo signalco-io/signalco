@@ -3,6 +3,7 @@ import Link from '../Link';
 import Row from '../Row';
 import { type ChildrenProps } from '../sharedTypes';
 import styles from './Chip.module.scss';
+import { cx } from 'classix';
 
 /** @alpha */
 export type ChipProps = ChildrenProps & {
@@ -15,12 +16,16 @@ export type ChipProps = ChildrenProps & {
 }
 
 /** @alpha */
-export default function Chip({ startDecorator, onClick, children, href }: ChipProps) {
+export default function Chip({ size, color, startDecorator, onClick, children, href }: ChipProps) {
+    const className = cx(
+        styles.root, 
+        size && styles[size],
+        color && styles[color]);
     const Wrapper = onClick
-        ? (props: ChildrenProps) => <button onClick={onClick} className={styles.root}>{props.children}</button>
+        ? (props: ChildrenProps) => <button onClick={onClick} className={className}>{props.children}</button>
         : (href
-            ? (props: ChildrenProps) => <Link href={href} className={styles.root}>{props.children}</Link>
-            : (props: ChildrenProps) => <div className={styles.root}>{props.children}</div>);
+            ? (props: ChildrenProps) => <Link href={href} className={className}>{props.children}</Link>
+            : (props: ChildrenProps) => <div className={className}>{props.children}</div>);
 
     return (
         <Wrapper>

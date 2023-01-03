@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 /* raleway-200 - latin */
 @font-face {
   font-family: 'Raleway';
@@ -16,10 +18,6 @@
   src: local(''),
     url('/assets/fonts/MaterialIcons-Regular.woff2') format('woff2'),
     url('/assets/fonts/MaterialIcons-Regular.woff') format('woff');
-}
-
-:root {
-  --primary: #000000;
 }
 
 html, body, #__next {
@@ -68,6 +66,8 @@ a {
 [data-joy-color-scheme="dark"] {
   --toastify-color-progress-dark: #fff;
 
+  --graph-stroke: #888;
+
   .image--light {
     display: none;
   }
@@ -77,6 +77,8 @@ a {
   --toastify-color-dark: #fff;
   --toastify-color-progress-dark: #000;
   --toastify-text-color-dark: #333;
+
+  --graph-stroke: #666;
 
   .image--dark {
     display: none;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
-import { Button, Divider, IconButton, Menu, Typography, Box, MenuItemLink, ButtonProps, MuiStack } from '@signalco/ui';
+import { Button, Divider, IconButton, Menu, Typography, Box, MenuItemLink, ButtonProps, MuiStack, Stack } from '@signalco/ui';
 import UserAvatar from './users/UserAvatar';
 import NavLink from './navigation/NavLink';
 import ApiBadge from './development/ApiBadge';
@@ -29,11 +29,11 @@ function UserProfileAvatarButton(props: ButtonProps) {
     const user = useLoadAndError(getCurrentUserAsync);
 
     return (
-        <Button variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 2 }} {...props}>
-            <MuiStack alignItems="center" spacing={2} direction={{ xs: 'row', sm: 'column' }}>
-                <UserAvatar user={user.item} />
+        <Button variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 2 }} {...props} style={{position: 'relative'}}>
+            <UserAvatar user={user.item} />
+            <Box sx={{ position: 'absolute', left: '50%', bottom: 4, transform: 'translateX(-50%)' }}>
                 <ApiBadge />
-            </MuiStack>
+            </Box>
         </Button>
     );
 }
@@ -114,7 +114,7 @@ function NavProfile() {
                     background: 'var(--joy-palette-background-body)',
                     zIndex: 999
                 }}>
-                    <MuiStack>
+                    <Stack>
                         {visibleNavItems.map((ni, index) =>
                             <NavLink
                                 key={index + 1}
@@ -123,7 +123,7 @@ function NavProfile() {
                                 active={ni === activeNavItem}
                                 label={t(ni.label)}
                                 onClick={handleMobileMenuClose} />)}
-                    </MuiStack>
+                    </Stack>
                 </Box>
             </Box>
         </MuiStack>
