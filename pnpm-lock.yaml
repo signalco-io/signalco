@@ -380,7 +380,7 @@ importers:
       '@emotion/server': 11.10.0
       '@emotion/styled': 11.10.5
       '@mui/base': 5.0.0-alpha.112
-      '@mui/joy': 5.0.0-alpha.60
+      '@mui/joy': 5.0.0-alpha.61
       '@mui/system': 5.11.2
       '@rollup/plugin-commonjs': 24.0.0
       '@rollup/plugin-node-resolve': 15.0.1
@@ -416,7 +416,7 @@ importers:
       '@emotion/server': 11.10.0
       '@emotion/styled': 11.10.5_pwtpayi7py7ecifctvjbac33ee
       '@mui/base': 5.0.0-alpha.112_ib3m5ricvtkl2cll7qpr2f6lvq
-      '@mui/joy': 5.0.0-alpha.60_lskpmcsdi7ipu6qpuapyu56ihm
+      '@mui/joy': 5.0.0-alpha.61_lskpmcsdi7ipu6qpuapyu56ihm
       '@mui/system': 5.11.2_ogriz7mfahdh34qnfautfro5yu
       '@signalco/ui-icons': link:../ui-icons
       material-ui-popup-state: 5.0.4_lskpmcsdi7ipu6qpuapyu56ihm
@@ -2637,12 +2637,12 @@ packages:
       react-is: 18.2.0
     dev: false
 
-  /@mui/core-downloads-tracker/5.11.2:
-    resolution: {integrity: sha512-ztLQELdSSuJFXezng8g5eCzy8mogtzMM8JcfG3HIGgUJ2RlAiBXI2Qe0adKmrJlF4FMat8vTaTeoiRNBZH4t1Q==}
+  /@mui/core-downloads-tracker/5.11.3:
+    resolution: {integrity: sha512-Bgb6//KtxY7IC7M5Pa5RKFX1wttc213mqpKqydnz3wn4BGDXfA5c0vf5nTu5zqsJeB4T3ysAJTRJhQ/E1GsZDQ==}
     dev: false
 
-  /@mui/joy/5.0.0-alpha.60_lskpmcsdi7ipu6qpuapyu56ihm:
-    resolution: {integrity: sha512-KaOIJPfALLzaN26LbhqXMvGphEV1S/sUMxT2AUvM1axZomhN9/LF8F4aMP3pEA6LeE7n5nbQ2hpNwY59EbSlEA==}
+  /@mui/joy/5.0.0-alpha.61_lskpmcsdi7ipu6qpuapyu56ihm:
+    resolution: {integrity: sha512-juPWupDM9MwTwJKHmUWQMhXz+xBPSyKqkSfjCRxiwdoQGoMfGV5bkEQDCmn4TL1wGU2b00ON+brhbmTXLmIFcQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       '@emotion/react': ^11.5.0
@@ -2662,7 +2662,7 @@ packages:
       '@emotion/react': 11.10.5_3grbeiqrb6djg67fiejiqngkdi
       '@emotion/styled': 11.10.5_pwtpayi7py7ecifctvjbac33ee
       '@mui/base': 5.0.0-alpha.112_ib3m5ricvtkl2cll7qpr2f6lvq
-      '@mui/core-downloads-tracker': 5.11.2
+      '@mui/core-downloads-tracker': 5.11.3
       '@mui/system': 5.11.2_ogriz7mfahdh34qnfautfro5yu
       '@mui/types': 7.2.3_@types+react@18.0.26
       '@mui/utils': 5.11.2_react@18.2.0
@@ -2696,7 +2696,7 @@ packages:
       '@emotion/react': 11.10.5_3grbeiqrb6djg67fiejiqngkdi
       '@emotion/styled': 11.10.5_pwtpayi7py7ecifctvjbac33ee
       '@mui/base': 5.0.0-alpha.105_ib3m5ricvtkl2cll7qpr2f6lvq
-      '@mui/core-downloads-tracker': 5.11.2
+      '@mui/core-downloads-tracker': 5.11.3
       '@mui/system': 5.11.2_ogriz7mfahdh34qnfautfro5yu
       '@mui/types': 7.2.3_@types+react@18.0.26
       '@mui/utils': 5.11.2_react@18.2.0
