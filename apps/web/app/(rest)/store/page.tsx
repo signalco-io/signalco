@@ -3,11 +3,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
-import { Row, Chip, Card, Typography, Grid, FilterList, SelectItems, Gallery, Stack } from '@signalco/ui';
+import { Row, Chip, Card, Typography, Grid, FilterList, SelectItems, Gallery, Stack, amber, green, grey } from '@signalco/ui';
 import contentData from './content.json';
-import green from '../../../src/colors/green';
-import grey from '../../../src/colors/gray';
-import amber from '../../../src/colors/amber';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import SignalcoLogo from '../../../components/icons/SignalcoLogo';
 

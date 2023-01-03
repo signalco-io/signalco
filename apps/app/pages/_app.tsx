@@ -3,8 +3,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { CssBaseline, CssVarsProvider } from '@signalco/ui';
-import appTheme from '../src/theme';
+import { CssBaseline, CssVarsProvider, signalcoTheme } from '@signalco/ui';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/global.scss';
 import '@signalco/ui/dist/ui.css';
@@ -44,7 +43,7 @@ export default function App(props: AppProps) {
                 <meta name="description" content="Automate your life" />
                 <title>{`Signalco${title ? ' - ' + title : ''}`}</title>
             </Head>
-            <CssVarsProvider theme={appTheme}>
+            <CssVarsProvider theme={signalcoTheme}>
                 <CssBaseline />
                 <QueryClientProvider client={queryClient}>
                     <ThemeChangerWrapper>

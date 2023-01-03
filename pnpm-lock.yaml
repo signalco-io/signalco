@@ -50,7 +50,7 @@ importers:
       '@types/recharts': 1.8.24
       '@types/suncalc': 1.9.0
       '@types/uuid': 9.0.0
-      '@vvo/tzdb': 6.85.0
+      '@vvo/tzdb': 6.86.0
       babel-loader: 9.1.0
       classix: 2.1.17
       cobe: 0.6.3
@@ -114,7 +114,7 @@ importers:
       '@signalco/ui-icons': link:../../packages/ui-icons
       '@tanstack/react-query': 4.20.4_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-devtools': 4.20.4_fu3ixcwltlssi3ozitelgaebme
-      '@vvo/tzdb': 6.85.0
+      '@vvo/tzdb': 6.86.0
       classix: 2.1.17
       cobe: 0.6.3
       color: 4.2.3
@@ -191,14 +191,18 @@ importers:
       '@storybook/theming': 6.5.15
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.10
+      css-loader: ^6.7.3
       next: 13.1.1
       postcss: 8.4.20
+      postcss-loader: ^7.0.2
       react: 18.2.0
       react-dom: 18.2.0
       rimraf: 3.0.2
       sass: 1.57.1
       sass-loader: 13.2.0
       storybook: 7.0.0-beta.14
+      storybook-addon-swc: ^1.1.9
+      style-loader: ^3.3.1
       typescript: 4.9.4
       webpack: 5.75.0
     dependencies:
@@ -219,11 +223,15 @@ importers:
       '@storybook/theming': 6.5.15_biqbaboplfbrettd7655fr4n2y
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.10
+      css-loader: 6.7.3_webpack@5.75.0
       postcss: 8.4.20
+      postcss-loader: 7.0.2_qxxfhhrl3yknjjmta266mo3u64
       rimraf: 3.0.2
       sass: 1.57.1
       sass-loader: 13.2.0_sass@1.57.1+webpack@5.75.0
       storybook: 7.0.0-beta.14
+      storybook-addon-swc: 1.1.9_webpack@5.75.0
+      style-loader: 3.3.1_webpack@5.75.0
       typescript: 4.9.4
       webpack: 5.75.0
 
@@ -323,20 +331,20 @@ importers:
       esbuild: 0.16.12
       prop-types: 15.8.1
       rimraf: 3.0.2
-      rollup: 3.9.0
+      rollup: 3.9.1
       rollup-plugin-esbuild: 5.0.0
       rollup-plugin-summary: 2.0.0
       typescript: 4.9.4
     devDependencies:
-      '@rollup/plugin-json': 6.0.0_rollup@3.9.0
+      '@rollup/plugin-json': 6.0.0_rollup@3.9.1
       '@signalco/tsconfig': link:../tsconfig
       concurrently: 7.6.0
       esbuild: 0.16.12
       prop-types: 15.8.1
       rimraf: 3.0.2
-      rollup: 3.9.0
-      rollup-plugin-esbuild: 5.0.0_y373bxzhxrh563zoydfean2qqi
-      rollup-plugin-summary: 2.0.0_rollup@3.9.0
+      rollup: 3.9.1
+      rollup-plugin-esbuild: 5.0.0_mkpteeqeoluldespx4dbdedg5y
+      rollup-plugin-summary: 2.0.0_rollup@3.9.1
       typescript: 4.9.4
 
   packages/eslint-config-signalco:
@@ -393,7 +401,7 @@ importers:
       react-timeago: 7.1.0
       resolve-url-loader: 5.0.0
       rimraf: 3.0.2
-      rollup: 3.9.0
+      rollup: 3.9.1
       rollup-plugin-esbuild: 5.0.0
       rollup-plugin-peer-deps-external: 2.2.4
       rollup-plugin-postcss: 4.0.2
@@ -419,8 +427,8 @@ importers:
       react-timeago: 7.1.0_react@18.2.0
       styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
     devDependencies:
-      '@rollup/plugin-commonjs': 24.0.0_rollup@3.9.0
-      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.9.0
+      '@rollup/plugin-commonjs': 24.0.0_rollup@3.9.1
+      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.9.1
       '@signalco/tsconfig': link:../tsconfig
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.10
@@ -431,11 +439,11 @@ importers:
       postcss-preset-env: 7.8.3_postcss@8.4.20
       resolve-url-loader: 5.0.0
       rimraf: 3.0.2
-      rollup: 3.9.0
-      rollup-plugin-esbuild: 5.0.0_y373bxzhxrh563zoydfean2qqi
-      rollup-plugin-peer-deps-external: 2.2.4_rollup@3.9.0
+      rollup: 3.9.1
+      rollup-plugin-esbuild: 5.0.0_mkpteeqeoluldespx4dbdedg5y
+      rollup-plugin-peer-deps-external: 2.2.4_rollup@3.9.1
       rollup-plugin-postcss: 4.0.2_postcss@8.4.20
-      rollup-plugin-summary: 2.0.0_rollup@3.9.0
+      rollup-plugin-summary: 2.0.0_rollup@3.9.1
       sass: 1.57.1
       typescript: 4.9.4
 
@@ -451,7 +459,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       rimraf: 3.0.2
-      rollup: 3.9.0
+      rollup: 3.9.1
       rollup-plugin-esbuild: 5.0.0
       rollup-plugin-peer-deps-external: 2.2.4
       rollup-plugin-summary: 2.0.0
@@ -461,17 +469,17 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
-      '@rollup/plugin-commonjs': 24.0.0_rollup@3.9.0
-      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.9.0
+      '@rollup/plugin-commonjs': 24.0.0_rollup@3.9.1
+      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.9.1
       '@signalco/tsconfig': link:../tsconfig
       concurrently: 7.6.0
       esbuild: 0.16.12
       prop-types: 15.8.1
       rimraf: 3.0.2
-      rollup: 3.9.0
-      rollup-plugin-esbuild: 5.0.0_y373bxzhxrh563zoydfean2qqi
-      rollup-plugin-peer-deps-external: 2.2.4_rollup@3.9.0
-      rollup-plugin-summary: 2.0.0_rollup@3.9.0
+      rollup: 3.9.1
+      rollup-plugin-esbuild: 5.0.0_mkpteeqeoluldespx4dbdedg5y
+      rollup-plugin-peer-deps-external: 2.2.4_rollup@3.9.1
+      rollup-plugin-summary: 2.0.0_rollup@3.9.1
       typescript: 4.9.4
 
 packages:
@@ -3147,7 +3155,7 @@ packages:
       rollup: 2.79.1
     dev: false
 
-  /@rollup/plugin-commonjs/24.0.0_rollup@3.9.0:
+  /@rollup/plugin-commonjs/24.0.0_rollup@3.9.1:
     resolution: {integrity: sha512-0w0wyykzdyRRPHOb0cQt14mIBLujfAv6GgP6g8nvg/iBxEm112t3YPPq+Buqe2+imvElTka+bjNlJ/gB56TD8g==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -3156,16 +3164,16 @@ packages:
       rollup:
         optional: true
     dependencies:
-      '@rollup/pluginutils': 5.0.2_rollup@3.9.0
+      '@rollup/pluginutils': 5.0.2_rollup@3.9.1
       commondir: 1.0.1
       estree-walker: 2.0.2
       glob: 8.0.3
       is-reference: 1.2.1
       magic-string: 0.27.0
-      rollup: 3.9.0
+      rollup: 3.9.1
     dev: true
 
-  /@rollup/plugin-json/6.0.0_rollup@3.9.0:
+  /@rollup/plugin-json/6.0.0_rollup@3.9.1:
     resolution: {integrity: sha512-i/4C5Jrdr1XUarRhVu27EEwjt4GObltD7c+MkCIpO2QIbojw8MUs+CCTqOphQi3Qtg1FLmYt+l+6YeoIf51J7w==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -3174,8 +3182,8 @@ packages:
       rollup:
         optional: true
     dependencies:
-      '@rollup/pluginutils': 5.0.2_rollup@3.9.0
-      rollup: 3.9.0
+      '@rollup/pluginutils': 5.0.2_rollup@3.9.1
+      rollup: 3.9.1
     dev: true
 
   /@rollup/plugin-node-resolve/11.2.1_rollup@2.79.1:
@@ -3193,7 +3201,7 @@ packages:
       rollup: 2.79.1
     dev: false
 
-  /@rollup/plugin-node-resolve/15.0.1_rollup@3.9.0:
+  /@rollup/plugin-node-resolve/15.0.1_rollup@3.9.1:
     resolution: {integrity: sha512-ReY88T7JhJjeRVbfCyNj+NXAG3IIsVMsX9b5/9jC98dRP8/yxlZdz7mHZbHk5zHr24wZZICS5AcXsFZAXYUQEg==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -3202,13 +3210,13 @@ packages:
       rollup:
         optional: true
     dependencies:
-      '@rollup/pluginutils': 5.0.2_rollup@3.9.0
+      '@rollup/pluginutils': 5.0.2_rollup@3.9.1
       '@types/resolve': 1.20.2
       deepmerge: 4.2.2
       is-builtin-module: 3.2.0
       is-module: 1.0.0
       resolve: 1.22.1
-      rollup: 3.9.0
+      rollup: 3.9.1
     dev: true
 
   /@rollup/plugin-replace/2.4.2_rollup@2.79.1:
@@ -3233,7 +3241,7 @@ packages:
       rollup: 2.79.1
     dev: false
 
-  /@rollup/pluginutils/5.0.2_rollup@3.9.0:
+  /@rollup/pluginutils/5.0.2_rollup@3.9.1:
     resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -3245,7 +3253,7 @@ packages:
       '@types/estree': 1.0.0
       estree-walker: 2.0.2
       picomatch: 2.3.1
-      rollup: 3.9.0
+      rollup: 3.9.1
     dev: true
 
   /@rushstack/eslint-patch/1.2.0:
@@ -4671,6 +4679,114 @@ packages:
       string.prototype.matchall: 4.0.8
     dev: false
 
+  /@swc/core-darwin-arm64/1.3.24:
+    resolution: {integrity: sha512-rR+9UpWm+fGXcipsjCst2hIL1GYIbo0YTLhJZWdIpQD6KRHHJMFXiydMgQQkDj2Ml7HpqUVgxj6m4ZWYL8b0OA==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@swc/core-darwin-x64/1.3.24:
+    resolution: {integrity: sha512-px+5vkGtgPH0m3FkkTBHynlRdS5rRz+lK+wiXIuBZFJSySWFl6RkKbvwkD+sf0MpazQlqwlv/rTOGJBw6oDffg==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@swc/core-linux-arm-gnueabihf/1.3.24:
+    resolution: {integrity: sha512-jLs8ZOdTV4UW4J12E143QJ4mOMONQtqgAnuhBbRuWFzQ3ny1dfoC3P1jNWAJ2Xi59XdxAIXn0PggPNH4Kh34kw==}
+    engines: {node: '>=10'}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@swc/core-linux-arm64-gnu/1.3.24:
+    resolution: {integrity: sha512-A/v0h70BekrwGpp1DlzIFGcHQ3QQ2PexXcnnuIBZeMc9gNmHlcZmg3EcwAnaUDiokhNuSUFA/wV94yk1OqmSkw==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@swc/core-linux-arm64-musl/1.3.24:
+    resolution: {integrity: sha512-pbc9eArWPTiMrbpS/pJo0IiQNAKAQBcBIDjWBGP1tcw2iDXYLw4bruwz9kI/VjakbshWb8MoE4T5ClkeuULvSw==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@swc/core-linux-x64-gnu/1.3.24:
+    resolution: {integrity: sha512-pP5pOLlY1xd352qo7rTlpVPUI9/9VhOd4b3Lk+LzfZDq9bTL2NDlGfyrPiwa5DGHMSzrugH56K2J68eutkxYVA==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@swc/core-linux-x64-musl/1.3.24:
+    resolution: {integrity: sha512-phNbP7zGp+Wcyxq1Qxlpe5KkxO7WLT2kVQUC7aDFGlVdCr+xdXsfH1MzheHtnr0kqTVQX1aiM8XXXHfFxR0oNA==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@swc/core-win32-arm64-msvc/1.3.24:
+    resolution: {integrity: sha512-qhbiJTWAOqyR+K9xnGmCkOWSz2EmWpDBstEJCEOTc6FZiEdbiTscDmqTcMbCKaTHGu8t+6erVA4t65/Eg6uWPA==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@swc/core-win32-ia32-msvc/1.3.24:
+    resolution: {integrity: sha512-JfghIlscE4Rz+Lc08lSoDh+R0cWxrISed5biogFfE6vZqhaDnw3E5Qshqw7O3pIaiq8L2u1nmzuyP581ZmpbRA==}
+    engines: {node: '>=10'}
+    cpu: [ia32]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@swc/core-win32-x64-msvc/1.3.24:
+    resolution: {integrity: sha512-3AmJRr0hwciwDBbzUNqaftvppzS8v9X/iv/Wl7YaVLBVpPfQvaZzfqLycvNMGLZb5vIKXR/u58txg3dRBGsJtw==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@swc/core/1.3.24:
+    resolution: {integrity: sha512-QMOTd0AgiUT3K1crxLRqd3gw0f3FC8hhH1vvlIlryvYqU4c+FJ/T2G4ZhMKLxQlZ/jX6Rhk0gKINZRBxy2GFyQ==}
+    engines: {node: '>=10'}
+    hasBin: true
+    requiresBuild: true
+    optionalDependencies:
+      '@swc/core-darwin-arm64': 1.3.24
+      '@swc/core-darwin-x64': 1.3.24
+      '@swc/core-linux-arm-gnueabihf': 1.3.24
+      '@swc/core-linux-arm64-gnu': 1.3.24
+      '@swc/core-linux-arm64-musl': 1.3.24
+      '@swc/core-linux-x64-gnu': 1.3.24
+      '@swc/core-linux-x64-musl': 1.3.24
+      '@swc/core-win32-arm64-msvc': 1.3.24
+      '@swc/core-win32-ia32-msvc': 1.3.24
+      '@swc/core-win32-x64-msvc': 1.3.24
+    dev: true
+
   /@swc/helpers/0.4.11:
     resolution: {integrity: sha512-rEUrBSGIoSFuYxwBYtlUFMlE2CwGhmW+w9355/5oduSw8e5h2+Tj4UrAGNNgP9915++wj5vkQo0UuOBqOAq4nw==}
     dependencies:
@@ -5423,8 +5539,8 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: false
 
-  /@vvo/tzdb/6.85.0:
-    resolution: {integrity: sha512-LZ2SG86G+Sp+9pt8czTT7tIDJ0O/19ZEKeOFW6QNC6Nj1wM0hDXU3/JhBHZxmlWtRv9EtcZJDsB68TM52Y+BwA==}
+  /@vvo/tzdb/6.86.0:
+    resolution: {integrity: sha512-QWBFqEpyPAhPRC/bhJrPB431kGE8MtGae1QwEm/4qUyrDeO2CqfIyNT1ptBhpo1PaID+SwzUcHf1YOYlq7ccXA==}
     dev: false
 
   /@webassemblyjs/ast/1.11.1:
@@ -11074,6 +11190,20 @@ packages:
       webpack: 5.75.0
     dev: true
 
+  /postcss-loader/7.0.2_qxxfhhrl3yknjjmta266mo3u64:
+    resolution: {integrity: sha512-fUJzV/QH7NXUAqV8dWJ9Lg4aTkDCezpTS5HgJ2DvqznexTbSTxgi/dTECvTZ15BwKTtk8G/bqI/QTu2HPd3ZCg==}
+    engines: {node: '>= 14.15.0'}
+    peerDependencies:
+      postcss: ^7.0.0 || ^8.0.1
+      webpack: ^5.0.0
+    dependencies:
+      cosmiconfig: 7.1.0
+      klona: 2.0.5
+      postcss: 8.4.20
+      semver: 7.3.8
+      webpack: 5.75.0
+    dev: true
+
   /postcss-logical/5.0.4_postcss@8.4.20:
     resolution: {integrity: sha512-RHXxplCeLh9VjinvMrZONq7im4wjWGlRJAqmAVLXyZaXwfDWP73/oq4NdIp+OZwhQUMj0zjqDfM5Fj7qby+B4g==}
     engines: {node: ^12 || ^14 || >=16}
@@ -12280,30 +12410,30 @@ packages:
     resolution: {integrity: sha512-ndEIpszUHiG4HtDsQLeIuMvRsDnn8c8rYStabochtUeCvfuvNptb5TUbVD68LRAILPX7p9nqQGh4xJgn3EHS/g==}
     dev: false
 
-  /rollup-plugin-esbuild/5.0.0_y373bxzhxrh563zoydfean2qqi:
+  /rollup-plugin-esbuild/5.0.0_mkpteeqeoluldespx4dbdedg5y:
     resolution: {integrity: sha512-1cRIOHAPh8WQgdQQyyvFdeOdxuiyk+zB5zJ5+YOwrZP4cJ0MT3Fs48pQxrZeyZHcn+klFherytILVfE4aYrneg==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     peerDependencies:
       esbuild: '>=0.10.1'
       rollup: ^1.20.0 || ^2.0.0 || ^3.0.0
     dependencies:
-      '@rollup/pluginutils': 5.0.2_rollup@3.9.0
+      '@rollup/pluginutils': 5.0.2_rollup@3.9.1
       debug: 4.3.4
       es-module-lexer: 1.1.0
       esbuild: 0.16.12
       joycon: 3.1.1
       jsonc-parser: 3.2.0
-      rollup: 3.9.0
+      rollup: 3.9.1
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /rollup-plugin-peer-deps-external/2.2.4_rollup@3.9.0:
+  /rollup-plugin-peer-deps-external/2.2.4_rollup@3.9.1:
     resolution: {integrity: sha512-AWdukIM1+k5JDdAqV/Cxd+nejvno2FVLVeZ74NKggm3Q5s9cbbcOgUPGdbxPi4BXu7xGaZ8HG12F+thImYu/0g==}
     peerDependencies:
       rollup: '*'
     dependencies:
-      rollup: 3.9.0
+      rollup: 3.9.1
     dev: true
 
   /rollup-plugin-postcss/4.0.2_postcss@8.4.20:
@@ -12330,7 +12460,7 @@ packages:
       - ts-node
     dev: true
 
-  /rollup-plugin-summary/2.0.0_rollup@3.9.0:
+  /rollup-plugin-summary/2.0.0_rollup@3.9.1:
     resolution: {integrity: sha512-7Av6DQeCmVNpFmCdkkbMya1CneeGWhjSXXQ3B4yDO+BvN/Kbohqi3IEYXAvgHP3iIafSfMyOw+PBLFUlvf1ViA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -12340,7 +12470,7 @@ packages:
       cli-table3: 0.6.3
       filesize: 10.0.5
       gzip-size: 7.0.0
-      rollup: 3.9.0
+      rollup: 3.9.1
       terser: 5.16.1
     dev: true
 
@@ -12371,8 +12501,8 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-  /rollup/3.9.0:
-    resolution: {integrity: sha512-nGGylpmblyjTpF4lEUPgmOw6OVxRvnI6Iuuh6Lz4O/X66cVOX1XJSsqP1YamxQ+mPuFE7qJxLFDSCk8rNv5dDw==}
+  /rollup/3.9.1:
+    resolution: {integrity: sha512-GswCYHXftN8ZKGVgQhTFUJB/NBXxrRGgO2NCy6E8s1rwEJ4Q9/VttNqcYfEvx4dTo4j58YqdC3OVztPzlKSX8w==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
@@ -12878,6 +13008,24 @@ packages:
     resolution: {integrity: sha512-siT1RiqlfQnGqgT/YzXVUNsom9S0H1OX+dpdGN1xkyYATo4I6sep5NmsRD/40s3IIOvlCq6akxkqG82urIZW1w==}
     dev: true
 
+  /storybook-addon-swc/1.1.9_webpack@5.75.0:
+    resolution: {integrity: sha512-JmoPzJ5RA7ytPi58r5dKcRYNEESe57ZAMzJcUqnkMOwBuq0MZvBUH6gHWZxVagQe64RitS83ZOmZEJNxxc0ZWQ==}
+    peerDependencies:
+      terser-webpack-plugin: ^4.0.0 || ^5.0.0
+      webpack: ^4.0.0 || ^5.0.0
+    peerDependenciesMeta:
+      terser-webpack-plugin:
+        optional: true
+      webpack:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.20.7
+      '@swc/core': 1.3.24
+      deepmerge: 4.2.2
+      swc-loader: 0.1.16_gyzimtxqgxuicuv6kqhpgce7ve
+      webpack: 5.75.0
+    dev: true
+
   /storybook/7.0.0-beta.14:
     resolution: {integrity: sha512-q2Wc4sw+sFq13lgjQ594VWX8BV4IaRkpEsqKRLCI0Ferj46eL9nZ78cvVZURIhMOcnV/2dz1EWMBh7q8pu9epQ==}
     hasBin: true
@@ -13122,6 +13270,16 @@ packages:
       csso: 4.2.0
       picocolors: 1.0.0
       stable: 0.1.8
+    dev: true
+
+  /swc-loader/0.1.16_gyzimtxqgxuicuv6kqhpgce7ve:
+    resolution: {integrity: sha512-NKIm8aJjK/z/yfzk+v7YGwJMjBKaLaUs9ZKI2zoaIGKAjtkwjO92ZLI0fiTZuwzRqVLQl/29fBdSgFCBzquR0w==}
+    peerDependencies:
+      '@swc/core': ^1.2.147
+      webpack: '>=2'
+    dependencies:
+      '@swc/core': 1.3.24
+      webpack: 5.75.0
     dev: true
 
   /synchronous-promise/2.0.16:
