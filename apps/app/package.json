@@ -38,7 +38,7 @@
         "@signalco/ui-icons": "workspace:*",
         "@tanstack/react-query": "4.20.9",
         "@tanstack/react-query-devtools": "4.20.9",
-        "@vvo/tzdb": "6.86.0",
+        "@vvo/tzdb": "6.87.0",
         "classix": "2.1.17",
         "cobe": "0.6.3",
         "color": "4.2.3",
