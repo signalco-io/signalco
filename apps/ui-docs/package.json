@@ -9,7 +9,7 @@
         "clean": "rimraf node_modules/.cache/storybook"
     },
     "engines": {
-        "node": "18.12.1"
+        "node": "18.13.0"
     },
     "devDependencies": {
         "@babel/core": "7.20.12",
