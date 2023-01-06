@@ -46,7 +46,7 @@ importers:
       '@types/react-dom': 18.0.10
       '@types/react-grid-layout': 1.3.2
       '@types/react-motion': 0.0.33
-      '@types/react-syntax-highlighter': 15.5.5
+      '@types/react-syntax-highlighter': 15.5.6
       '@types/recharts': 1.8.24
       '@types/suncalc': 1.9.0
       '@types/uuid': 9.0.0
@@ -156,7 +156,7 @@ importers:
       '@types/react-dom': 18.0.10
       '@types/react-grid-layout': 1.3.2
       '@types/react-motion': 0.0.33
-      '@types/react-syntax-highlighter': 15.5.5
+      '@types/react-syntax-highlighter': 15.5.6
       '@types/recharts': 1.8.24
       '@types/suncalc': 1.9.0
       '@types/uuid': 9.0.0
@@ -3397,7 +3397,7 @@ packages:
       '@storybook/csf-plugin': 7.0.0-beta.13
       '@storybook/csf-tools': 7.0.0-beta.13
       '@storybook/global': 5.0.0
-      '@storybook/mdx2-csf': 1.0.0-next.3
+      '@storybook/mdx2-csf': 1.0.0-next.4
       '@storybook/node-logger': 7.0.0-beta.13
       '@storybook/postinstall': 7.0.0-beta.13
       '@storybook/preview-api': 7.0.0-beta.13
@@ -4230,8 +4230,8 @@ packages:
     resolution: {integrity: sha512-WNoDUQ8CHfAOY+RKlBd5zjhS4kdw/8wOLXatf98IpBR33BFvdpN11Rvjb2iOXX8+YF/BHK+1ZNmSkYPYdcBTEQ==}
     dev: true
 
-  /@storybook/mdx2-csf/1.0.0-next.3:
-    resolution: {integrity: sha512-obodj5cDa943eAPNmawzwviiaheWLvI39/o36O+fwkW8jxxXgyEMgad0mLTiwKjlvitLVoHa4Znm5aIN6TW08A==}
+  /@storybook/mdx2-csf/1.0.0-next.4:
+    resolution: {integrity: sha512-nvRgYdpYvXsvSgCzKc4LQA1JxtJzmv47IsFAsh1rTz5FoHyK8watLU2WqX9T4w52fpFXBHx7RwGEsCRt0XgZlQ==}
     dev: true
 
   /@storybook/nextjs/7.0.0-beta.14_gs64qceuqxpsf4ylhzppujdjjm:
@@ -5317,8 +5317,8 @@ packages:
       '@types/react': 18.0.26
     dev: true
 
-  /@types/react-syntax-highlighter/15.5.5:
-    resolution: {integrity: sha512-QH3JZQXa2usAvJvSsdSUJ4Yu4j8ReuZpgRrEW+XP+Rmosbn425YshW9iGEb/pAARm8496axHhHUPRH3UmTiB6A==}
+  /@types/react-syntax-highlighter/15.5.6:
+    resolution: {integrity: sha512-i7wFuLbIAFlabTeD2I1cLjEOrG/xdMa/rpx2zwzAoGHuXJDhSqp9BSfDlMHSh9JSuNfxHk9eEmMX6D55GiyjGg==}
     dependencies:
       '@types/react': 18.0.26
     dev: true
