@@ -30,7 +30,7 @@
         "@types/react-timeago": "4.1.3",
         "classix": "2.1.18",
         "concurrently": "7.6.0",
-        "esbuild": "0.16.14",
+        "esbuild": "0.16.15",
         "postcss": "8.4.20",
         "postcss-preset-env": "7.8.3",
         "resolve-url-loader": "5.0.0",
