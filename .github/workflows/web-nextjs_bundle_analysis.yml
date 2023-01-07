@@ -13,7 +13,8 @@ defaults:
     working-directory: ./
 
 jobs:
-  analyze:
+  analyze_web:
+    name: "[Web] Next.js Bundle Analysis"
     runs-on: ubuntu-latest
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}

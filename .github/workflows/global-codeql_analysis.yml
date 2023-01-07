@@ -9,7 +9,7 @@ on:
 
 jobs:
     analyze:
-        name: Analyze
+        name: "[Global] Analyze CodeQL"
         runs-on: ubuntu-latest
 
         strategy:
