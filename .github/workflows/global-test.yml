@@ -3,6 +3,7 @@ on:
     pull_request:
 jobs:
     test:
+        name: "[Global] Run Tests"
         timeout-minutes: 20
         runs-on: ubuntu-latest
         env:

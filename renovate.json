@@ -20,7 +20,6 @@
                 "@types/node",
                 "@types/react-node",
                 "@types/react-dom",
-                "@types/react-syntax-highlighter",
                 "classix",
                 "d3",
                 "esbuild",
