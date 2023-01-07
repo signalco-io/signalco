@@ -34,9 +34,21 @@
                 "sass",
                 "sharp"
             ]
+        },
+        {
+            "matchPackagePatterns": [
+                "*"
+            ],
+            "rangeStrategy": "pin"
+        },
+        {
+            "matchDepTypes": [
+                "engines",
+                "peerDependencies"
+            ],
+            "rangeStrategy": "auto"
         }
     ],
-    "rangeStrategy": "pin",
     "dependencyDashboard": true,
     "assigneesFromCodeOwners": true,
     "baseBranches": [
