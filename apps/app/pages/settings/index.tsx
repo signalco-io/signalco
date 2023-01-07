@@ -177,7 +177,7 @@ function SettingsIndex() {
         <Row>
             <Stack>
                 <List>
-                    <ListItem>test</ListItem>
+                    
                 </List>
             </Stack>
             <Card variant="plain" sx={{ height: '100%', overflow: 'auto' }}>
