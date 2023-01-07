@@ -6,7 +6,7 @@ const components: FormBuilderComponents = {
     yesno: (props) => (
         <Checkbox
             checked={props.value}
-            onChange={(e) => props.onChange(e.target.checked)}
+            onChange={(e) => props.onChange(e.target.checked, { receiveEvent: false })}
             label={props.label} />
     ),
     string: (props) => <TextField fullWidth {...props} />,

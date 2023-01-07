@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Typography, Box, Stack } from '@signalco/ui';
+import { Typography, Stack } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -31,16 +31,18 @@ function WidgetTime(props: WidgetSharedProps<any>) {
     useEffect(() => updateTime(), [updateTime]);
 
     return (
-        <Box sx={{ height: '100%' }}>
+        <div style={{ height: '100%' }}>
             <Stack style={{ height: '100%' }} alignItems="center" justifyContent="center">
-                <Typography fontSize={36} fontWeight={200} sx={{ margin: 0, padding: 0 }}>{time}</Typography>
+                <Typography fontSize={36} fontWeight={200} sx={{ margin: 0, padding: 0, position: 'relative' }}>
+                    {time}
+                    {showSeconds && (
+                        <span style={{ position: 'absolute', opacity: 0.4, bottom: -20, right: 0 }}>
+                            <Typography fontSize={18}>{seconds}</Typography>
+                        </span>
+                    )}
+                </Typography>
             </Stack>
-            {showSeconds && (
-                <Box sx={{ position: 'absolute', top: 19, left: '80%', opacity: 0.4 }}>
-                    <Typography>{seconds}</Typography>
-                </Box>
-            )}
-        </Box>
+        </div>
     );
 }
 
