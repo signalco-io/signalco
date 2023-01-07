@@ -28,6 +28,7 @@
                 "eslint-config-next",
                 "pnpm",
                 "playwright",
+                "postcss",
                 "mcr.microsoft.com/playwright",
                 "rollup",
                 "sass",
