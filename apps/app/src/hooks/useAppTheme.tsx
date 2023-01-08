@@ -38,16 +38,18 @@ export default function useAppTheme() {
             return;
 
         // document.documentElement.style.setProperty('color-scheme', themeOrPrefered === 'light' ? 'light' : 'dark');
-        const newColorScheme = themeOrPrefered === 'dark' ? 'dark' : 'light';
-        setColorScheme(newColorScheme);
+        if (themeOrPrefered) {
+            const newColorScheme = themeOrPrefered === 'dark' ? 'dark' : 'light';
+            setColorScheme(newColorScheme);
 
-        // Notify user theme was changed (if not first render)
-        if (!hideNotification) {
-            const themeName = localizer('App', 'Settings', 'Themes')(newColorScheme);
-            showNotification(`Switched to ${themeName} theme.`);
+            // Notify user theme was changed (if not first render)
+            if (!hideNotification) {
+                const themeName = localizer('App', 'Settings', 'Themes')(newColorScheme);
+                showNotification(`Switched to ${themeName} theme.`);
+            }
+
+            console.debug('Color scheme updated', newColorScheme);
         }
-
-        console.debug('Color scheme updated', newColorScheme);
     }, [colorScheme, setColorScheme, themeMode, themeTimeRange]);
 
     // Apply theme mode every minute (and on first paint)
