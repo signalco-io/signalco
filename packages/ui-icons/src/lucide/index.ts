@@ -6,6 +6,7 @@ export {
     MoreVertical,
     X as Close,
     X as Clear,
+    Laptop,
     LayoutDashboard as Dashboard,
     Smartphone as Device,
     ChevronDown as Select,
