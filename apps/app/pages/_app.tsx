@@ -43,7 +43,7 @@ export default function App(props: AppProps) {
                 <meta name="description" content="Automate your life" />
                 <title>{`Signalco${title ? ' - ' + title : ''}`}</title>
             </Head>
-            <CssVarsProvider theme={signalcoTheme}>
+            <CssVarsProvider theme={signalcoTheme} defaultMode="system">
                 <CssBaseline />
                 <QueryClientProvider client={queryClient}>
                     <ThemeChangerWrapper>
