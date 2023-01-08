@@ -15,7 +15,7 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 {getInitColorSchemeScript()}
-                <CssVarsProvider theme={signalcoTheme}>
+                <CssVarsProvider theme={signalcoTheme} defaultMode="system">
                     <CssBaseline />
                     {children}
                 </CssVarsProvider>
