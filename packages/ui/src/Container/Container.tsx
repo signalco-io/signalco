@@ -29,7 +29,7 @@ export default function Container({ maxWidth, children }: ContainerProps) {
             width: '100%',
             display: 'block',
             maxWidth: width ? `${width}px` : undefined,
-            margin: 'auto'
+            margin: '0 auto'
         }}>
             {children}
         </div>

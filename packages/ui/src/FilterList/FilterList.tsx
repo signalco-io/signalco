@@ -63,7 +63,7 @@ export default function FilterList(props: FilterListProps) {
 
     return (
         <Stack>
-            <Box sx={{ dispaly: { xs: 'visible', md: 'none' } }}>
+            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                 <SelectItems
                     items={items.map(i => ({ value: i.id, label: i.label }))}
                     value={checked}
@@ -77,7 +77,7 @@ export default function FilterList(props: FilterListProps) {
                         });
                     }} />
             </Box>
-            <Box sx={{ dispaly: { xs: 'none', md: 'visible' } }}>
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                 <Row spacing={1}>
                     <Typography gutterBottom level="h5">{header}</Typography>
                     {(!isShowMore && shouldTruncate) && <Typography level="body2">({items.length - truncate} more)</Typography>}
