@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
-import { Row, Chip, Card, Typography, Grid, FilterList, SelectItems, Gallery, Stack, amber, green, grey } from '@signalco/ui';
+import { Row, Chip, Card, Typography, FilterList, SelectItems, Gallery, Stack, amber, green, grey } from '@signalco/ui';
 import contentData from './content.json';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import SignalcoLogo from '../../../components/icons/SignalcoLogo';
@@ -60,16 +60,16 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
                             <Typography level="body2">Image unavailable</Typography>
                         </Stack>
                     )}
-                <Stack spacing={1}>
+                <Stack spacing={2}>
                     <Typography fontWeight="bold" sx={{ opacity: 0.9 }}>{name}</Typography>
                     <Row spacing={2} justifyContent="space-between" alignItems="center">
                         <Typography fontSize="1.2rem" fontWeight="bold">€&nbsp;{price ?? '-'}</Typography>
                         <StoreStockStatusBadge status={stockStatus} />
                     </Row>
                     {features && (
-                        <Grid container>
-                            {features.map(f => <Grid key={f}><Chip size="sm">{f}</Chip></Grid>)}
-                        </Grid>
+                        <Row spacing={1}>
+                            {features.map(f => <Chip size="sm" key={f}>{f}</Chip>)}
+                        </Row>
                     )}
                 </Stack>
             </Stack>
