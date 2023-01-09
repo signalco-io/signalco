@@ -1,5 +1,5 @@
 import { Suspense, useState } from 'react';
-import { Custom, SunMoon, Timer } from '@signalco/ui-icons';
+import { Custom, Laptop, SunMoon, Timer } from '@signalco/ui-icons';
 import { type AppThemeMode, Stack, Row, TextField, SupportedColorScheme, Typography, Box, useColorScheme, DefaultColorScheme, Picker } from '@signalco/ui';
 import { fromDuration, now, todayAt, toDuration } from '../../src/services/DateTimeProvider';
 import useUserSetting from '../../src/hooks/useUserSetting';
@@ -50,12 +50,12 @@ function AppThemeVisual(props: { label: string, theme: SupportedColorScheme, dis
 
 function AppThemeColorPicker() {
     const themes = useLocale('App', 'Settings', 'Themes');
-    const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
-    const { colorScheme, setColorScheme } = useColorScheme();
+    const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'system');
+    const { colorScheme, setMode } = useColorScheme();
 
     const handleThemeSelect = (newTheme: DefaultColorScheme | undefined) => {
         const newThemeSelect = newTheme ?? 'light';
-        setColorScheme(newThemeSelect);
+        setMode(newThemeSelect);
     };
 
     console.log('color scheme', colorScheme)
@@ -83,17 +83,28 @@ function AppThemeColorPicker() {
 }
 
 export default function AppThemePicker() {
-    const picker = useLocale('App', 'Components', 'AppThemePicker');
+    const { t: tPicker } = useLocale('App', 'Components', 'AppThemePicker');
+    const { t: tPickerModes } = useLocale('App', 'Components', 'AppThemePicker', 'Modes');
 
-    const { colorScheme, setColorScheme } = useColorScheme();
-    const [themeMode, setThemeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
+    const { mode, setMode } = useColorScheme();
+    const [themeMode, setThemeMode] = useUserSetting<AppThemeMode>('themeMode', 'system');
 
     const [userLocation] = useUserSetting<[number, number] | undefined>('location', undefined);
     const handleThemeModeChange = (_: unknown, newThemeMode: AppThemeMode | undefined) => {
         const newThemeModeSelect = newThemeMode ?? 'manual';
         setThemeMode(newThemeModeSelect);
-        if (newThemeModeSelect !== 'manual' && colorScheme === 'light') {
-            setColorScheme('dark');
+        if (newThemeModeSelect === 'system') {
+            setMode('system');
+        } else {
+            // Handle switched to manual
+            if (newThemeModeSelect === 'manual') {
+                setMode('dark');
+            }
+
+            // Handle switched to sunset/range and currently in light mode (switch to dark)
+            if (newThemeModeSelect !== 'manual' && mode === 'light') {
+                setMode('dark');
+            }
         }
     };
 
@@ -119,32 +130,38 @@ export default function AppThemePicker() {
     return (
         <Suspense>
             <Stack spacing={2}>
-                <Picker value={themeMode ?? 'manual'} onChange={handleThemeModeChange} options={[
-                    { value: 'manual', label: <Custom /> },
-                    { value: 'sunriseSunset', label: <SunMoon />, disabled: (userLocation?.length ?? 0) <= 0 },
-                    { value: 'timeRange', label: <Timer /> },
-                ]} />
+                <Stack spacing={1}>
+                    <Typography level="body2">{tPicker('PickMode')}</Typography>
+                    <Picker value={themeMode} onChange={handleThemeModeChange} options={[
+                        { value: 'system', label: <Laptop />, title: tPickerModes('System') },
+                        { value: 'manual', label: <Custom />, title: tPickerModes('Manual') },
+                        { value: 'sunriseSunset', label: <SunMoon />, disabled: (userLocation?.length ?? 0) <= 0, title: tPickerModes('SunriseSunset') },
+                        { value: 'timeRange', label: <Timer />, title: tPickerModes('TimeRange') },
+                    ]} />
+                </Stack>
                 {themeMode === 'timeRange' && (
                     <Stack spacing={1}>
-                        <Typography level="body2">{picker.t('PickDayNightTimes')}</Typography>
+                        <Typography level="body2">{tPicker('PickDayNightTimes')}</Typography>
                         <Row spacing={1}>
                             <TextField
-                                label={picker.t('DayTime')}
+                                label={tPicker('DayTime')}
                                 value={dayTime ? toDuration(dayTime) : ''}
                                 onChange={(e) => handleDayTimeChange(fromDuration(now(), e.target.value))}
                             />
                             <TextField
-                                label={picker.t('NightTime')}
+                                label={tPicker('NightTime')}
                                 value={nightTime ? toDuration(nightTime) : ''}
                                 onChange={(e) => handleNightTimeChange(fromDuration(now(), e.target.value))}
                             />
                         </Row>
                     </Stack>
                 )}
-                <Stack spacing={1}>
-                    {themeMode !== 'manual' && <Typography level="body2">{picker.t('PickNightTheme')}</Typography>}
-                    <AppThemeColorPicker />
-                </Stack>
+                {themeMode !== 'system' && (
+                    <Stack spacing={1}>
+                        {themeMode !== 'manual' && <Typography level="body2">{tPicker('PickNightTheme')}</Typography>}
+                        <AppThemeColorPicker />
+                    </Stack>
+                )}
             </Stack>
         </Suspense>
     );

@@ -1,10 +1,11 @@
-import { Radio, RadioGroup } from '@mui/joy';
+import { Radio, RadioGroup, Tooltip } from '@mui/joy';
 import { ChangeEvent, ReactElement } from 'react';
 
 export interface PickerOption {
     value: any;
     label: ReactElement | string;
     disabled?: boolean;
+    title?: string | undefined;
 }
 
 export interface PickerProps<TValue> {
@@ -33,32 +34,33 @@ export default function Picker<TValue>(props: PickerProps<TValue>) {
             }}
         >
             {options.map((option) => (
-                <Radio
-                    key={option.value}
-                    color="neutral"
-                    disabled={option.disabled}
-                    value={option.value}
-                    disableIcon
-                    label={option.label}
-                    variant="plain"
-                    sx={{
-                        px: 2,
-                        alignItems: 'center',
-                    }}
-                    slotProps={{
-                        action: ({ checked }) => ({
-                            sx: {
-                                ...(checked && {
-                                    bgcolor: 'background.surface',
-                                    boxShadow: size === 'sm' ? 'sm' : 'md',
-                                    '&:hover': {
+                <Tooltip title={option.title} key={option.value}>
+                    <Radio
+                        color="neutral"
+                        disabled={option.disabled}
+                        value={option.value}
+                        disableIcon
+                        label={option.label}
+                        variant="plain"
+                        sx={{
+                            px: 2,
+                            alignItems: 'center',
+                        }}
+                        slotProps={{
+                            action: ({ checked }) => ({
+                                sx: {
+                                    ...(checked && {
                                         bgcolor: 'background.surface',
-                                    },
-                                }),
-                            },
-                        }),
-                    }}
-                />
+                                        boxShadow: size === 'sm' ? 'sm' : 'md',
+                                        '&:hover': {
+                                            bgcolor: 'background.surface',
+                                        },
+                                    }),
+                                },
+                            }),
+                        }}
+                    />
+                </Tooltip>
             ))}
         </RadioGroup>
     )

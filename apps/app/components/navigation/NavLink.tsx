@@ -15,7 +15,7 @@ export type NavLinkProps = {
 
 export default function NavLink({ path, Icon, active, label, onClick }: NavLinkProps) {
     return (
-        <Tooltip title={label}>
+        <Tooltip title={label} placement="right">
             <Link href={path}>
                 <IconButton
                     className={cx(styles.root, active && styles.active)}

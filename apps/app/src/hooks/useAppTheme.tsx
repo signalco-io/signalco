@@ -9,12 +9,12 @@ import { showNotification } from '../notifications/PageNotificationService';
 import SunHelper from '../helpers/SunHelper';
 
 export default function useAppTheme() {
-    const { colorScheme, setColorScheme } = useColorScheme();
+    const { mode, setMode } = useColorScheme();
     const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
     const [themeTimeRange] = useUserSetting<[string, string] | undefined>('themeTimeRange', undefined);
 
     const applyThemeMode = useCallback((hideNotification?: boolean) => {
-        let themeOrPrefered = colorScheme;
+        let themeOrPrefered = mode;
 
         // Handle sunrise/sunst
         if (themeMode === 'sunriseSunset') {
@@ -34,21 +34,23 @@ export default function useAppTheme() {
         }
 
         // Ignore if not changed
-        if (colorScheme === themeOrPrefered)
+        if (mode === themeOrPrefered)
             return;
 
         // document.documentElement.style.setProperty('color-scheme', themeOrPrefered === 'light' ? 'light' : 'dark');
-        const newColorScheme = themeOrPrefered === 'dark' ? 'dark' : 'light';
-        setColorScheme(newColorScheme);
+        if (themeOrPrefered) {
+            const newColorScheme = themeOrPrefered === 'dark' ? 'dark' : 'light';
+            setMode(newColorScheme);
 
-        // Notify user theme was changed (if not first render)
-        if (!hideNotification) {
-            const themeName = localizer('App', 'Settings', 'Themes')(newColorScheme);
-            showNotification(`Switched to ${themeName} theme.`);
+            // Notify user theme was changed (if not first render)
+            if (!hideNotification) {
+                const themeName = localizer('App', 'Settings', 'Themes')(newColorScheme);
+                showNotification(`Switched to ${themeName} theme.`);
+            }
+
+            console.debug('Color scheme updated', newColorScheme);
         }
-
-        console.debug('Color scheme updated', newColorScheme);
-    }, [colorScheme, setColorScheme, themeMode, themeTimeRange]);
+    }, [setMode, mode, themeMode, themeTimeRange]);
 
     // Apply theme mode every minute (and on first paint)
     useInterval(applyThemeMode, 60000);

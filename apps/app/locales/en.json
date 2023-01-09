@@ -120,12 +120,6 @@
                 "darkDimmed": "Dark Dimmed",
                 "light": "Light"
             },
-            "ThemeModes": {
-                "Manual": "Manual",
-                "SunriseSunset": "Sunrise/Sunset",
-                "TimeRange": "Time range",
-                "LightSensor": "Light sensor"
-            },
             "Language": "Language",
             "SelectLanguage": "Select language",
             "Nickname": "Nickname",
@@ -193,7 +187,15 @@
                 "PickDayNightTimes": "Pick day and night times",
                 "DayTime": "Day time",
                 "NightTime": "Night time",
-                "PickNightTheme": "Pick night theme"
+                "PickNightTheme": "Pick night theme",
+                "PickMode": "Theme mode",
+                "Modes": {
+                    "System": "System",
+                    "Manual": "Manual",
+                    "SunriseSunset": "Sunrise/Sunset",
+                    "TimeRange": "Time range",
+                    "LightSensor": "Light sensor"
+                }
             },
             "ShareEntityChip": {
                 "Share": "Share with user...",
