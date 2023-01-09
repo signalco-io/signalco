@@ -2,22 +2,23 @@ import React, { useCallback } from 'react';
 import Link from 'next/link';
 import { Stack, Icon, Row, Button, Typography, Box } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
+import Graph from '../../graphs/Graph';
 import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { KnownPages } from '../../../src/knownPages';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import useLoadAndError from '../../../src/hooks/useLoadAndError';
 import useEntity from '../../../src/hooks/signalco/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
-import IContact from '../../../src/contacts/IContact';
-import Graph from '../../graphs/Graph';
-import useLoadAndError from '../../../src/hooks/useLoadAndError';
+import IContactPointer from '../../../src/contacts/IContactPointer';
 import { historiesAsync } from '../../../src/contacts/ContactRepository';
 
 type ConfigProps = {
     label: string;
-    targetTemperature: IContact | undefined;
-    targetHeating: IContact | undefined;
-    targetCooling: IContact | undefined;
+    targetTemperature: IContactPointer | undefined;
+    targetHumidity: IContactPointer | undefined;
+    targetHeating: IContactPointer | undefined;
+    targetCooling: IContactPointer | undefined;
     rows: number;
     columns: number;
 }
@@ -25,6 +26,7 @@ type ConfigProps = {
 const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     DefaultLabel,
     { name: 'targetTemperature', label: 'Temperature', type: 'entityContact', optional: true },
+    { name: 'targetHumidity', label: 'Humidity', type: 'entityContact', optional: true },
     { name: 'targetHeating', label: 'Heating', type: 'entityContact', optional: true },
     { name: 'targetCooling', label: 'Cooling', type: 'entityContact', optional: true },
     DefaultColumns(4),
@@ -50,20 +52,35 @@ function SmallIndicator({
 }: SmallIndicatorProps) {
     return (
         <Link href={href} passHref>
-            <Button variant="plain">
+            <Button variant="plain" fullWidth>
                 <Box sx={{
-                    width: small ? 24 : 52,
+                    minWidth: small ? 24 : 52,
                     height: small ? 30 : 82,
                     backgroundColor: isActive ? activeBackgroundColor : 'transparent', borderRadius: 1
                 }}>
-                    <Stack alignItems="center" justifyContent="center" style={{ height: '100%' }} spacing={1}>
-                        <Icon sx={{ fontSize: 28, opacity: isActive ? 1 : 0.3, }}>{icon}</Icon>
-                        {!small && <Typography level="body3">{label}</Typography>}
+                    <Stack alignItems="center" justifyContent="center" style={{ height: '100%', flexDirection: small ? 'row' : 'column' }} spacing={1}>
+                        <Icon sx={{ fontSize: small ? 18 : 28, opacity: isActive ? 1 : 0.3, }}>{icon}</Icon>
+                        <Typography level="body3">{label}</Typography>
                     </Stack>
                 </Box>
             </Button>
         </Link>
     );
+}
+
+function numberWholeAndDecimal(data: string | undefined) {
+    const degrees = typeof data !== 'undefined'
+        ? Number.parseFloat(data)
+        : undefined;
+    const degreesWhole = typeof degrees !== 'undefined'
+        ? Math.floor(degrees)
+        : undefined;
+    return [
+        degreesWhole,
+        typeof degrees !== 'undefined' && typeof degreesWhole !== 'undefined'
+            ? Math.floor((degrees - degreesWhole) * 10)
+            : undefined
+    ];
 }
 
 function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
@@ -73,25 +90,14 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
     const { data: heatingDevice } = useEntity(config?.targetHeating?.entityId);
     const { data: coolingDevice } = useEntity(config?.targetCooling?.entityId);
 
-    const temperatureContact = useContact(temperatureDevice && config?.targetTemperature ? {
-        channelName: config?.targetTemperature?.channelName,
-        contactName: config?.targetTemperature?.contactName,
-        entityId: temperatureDevice.id
-    } : undefined)?.data;
+    const temperatureContact = useContact(temperatureDevice && config?.targetTemperature)?.data;
+    const humidityContact = useContact(temperatureDevice && config?.targetHumidity)?.data;
 
     const columns = config?.columns ?? 4;
     const rows = config?.rows ?? 4;
-    const degrees = temperatureContact
-        ? (typeof temperatureContact?.valueSerialized !== 'undefined'
-            ? Number.parseFloat(temperatureContact?.valueSerialized)
-            : undefined)
-        : undefined;
-    const degreesWhole = typeof degrees !== 'undefined'
-        ? Math.floor(degrees)
-        : undefined;
-    const degreesDecimal = typeof degrees !== 'undefined' && typeof degreesWhole !== 'undefined'
-        ? Math.floor((degrees - degreesWhole) * 10)
-        : undefined;
+
+    const [degreesWhole, degreesDecimal] = numberWholeAndDecimal(temperatureContact?.valueSerialized);
+    const [humidityWhole] = numberWholeAndDecimal(humidityContact?.valueSerialized);
 
     const heatingContact = useContact(heatingDevice && config?.targetHeating ? {
         channelName: config?.targetHeating?.channelName,
@@ -128,8 +134,17 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                         {config.label}
                     </Typography>
                 )}
-                {rows > 2 && (
-                    <Row spacing={2} style={{ marginTop: rows > 2 ? 4 * 8 : 8 }}>
+                {rows > 1 && (
+                    <Row spacing={rows < 4 ? 0 : 1} style={{
+                        marginTop: rows > 2 ? (rows < 4 ? 0 : 4 * 8) : 8,
+                        flexDirection: rows < 4 ? 'column' : 'row',
+                        position: rows < 4 ? 'absolute' : 'unset',
+                        right: rows < 4 ? 12 : undefined,
+                        top: rows < 4 ? 0 : undefined
+                    }} alignItems="stretch">
+                        {humidityContact && (
+                            <SmallIndicator small={rows < 4} isActive={false} label={`${humidityWhole}%`} icon="water_drop" href={`${KnownPages.Entities}/${humidityContact?.entityId}`} activeBackgroundColor={'#445D79'} />
+                        )}
                         {config?.targetCooling &&
                             <SmallIndicator small={rows < 4} isActive={false} label="Cooling" icon="ac_unit" activeBackgroundColor="#445D79" href={`${KnownPages.Entities}/${coolingDevice?.id}`} />
                         }
