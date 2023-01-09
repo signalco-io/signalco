@@ -28,7 +28,7 @@
         "@rollup/plugin-node-resolve": "15.0.1",
         "@signalco/tsconfig": "*",
         "concurrently": "7.6.0",
-        "esbuild": "0.16.15",
+        "esbuild": "0.16.16",
         "prop-types": "15.8.1",
         "rimraf": "3.0.2",
         "rollup": "3.9.1",
