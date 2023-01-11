@@ -66,7 +66,7 @@ importers:
       next: 13.1.1
       next-pwa: 5.6.0
       next-secure-headers: 2.2.0
-      next-sitemap: 3.1.44
+      next-sitemap: 3.1.45
       openapi-types: 12.1.0
       pigeon-maps: 0.21.3
       playwright: 1.29.2
@@ -161,7 +161,7 @@ importers:
       cross-env: 7.0.3
       eslint: 8.31.0
       fs-extra: 11.1.0
-      next-sitemap: 3.1.44_syentjjt63dukspj2zj7hzem6y
+      next-sitemap: 3.1.45_syentjjt63dukspj2zj7hzem6y
       openapi-types: 12.1.0
       playwright: 1.29.2
       prop-types: 15.8.1
@@ -259,7 +259,7 @@ importers:
       next: 13.1.1
       next-pwa: 5.6.0
       next-secure-headers: 2.2.0
-      next-sitemap: 3.1.44
+      next-sitemap: 3.1.45
       openapi-types: 12.1.0
       playwright: 1.29.2
       postcss: 8.4.21
@@ -310,7 +310,7 @@ importers:
       colorette: 2.0.19
       cross-env: 7.0.3
       eslint: 8.31.0
-      next-sitemap: 3.1.44_syentjjt63dukspj2zj7hzem6y
+      next-sitemap: 3.1.45_syentjjt63dukspj2zj7hzem6y
       openapi-types: 12.1.0
       playwright: 1.29.2
       prop-types: 15.8.1
@@ -9948,8 +9948,8 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: false
 
-  /next-sitemap/3.1.44_syentjjt63dukspj2zj7hzem6y:
-    resolution: {integrity: sha512-dg+qGfOpQemAb+LGShJmaJHyuf36rVqsIbkCBt0ldu10sAx+eMowVx6DzEtf2HoIIGWc7J+kfy//YsBCPdj47Q==}
+  /next-sitemap/3.1.45_syentjjt63dukspj2zj7hzem6y:
+    resolution: {integrity: sha512-8vyvWC8KT8RIEUL9Vfiae9yGuIIiJ1IpepzbFtwZx43BaKsoi/Zk9OlmPKuQouVY726xwN7uLZPtgl2l2U+9Ug==}
     engines: {node: '>=14.18'}
     hasBin: true
     peerDependencies:
