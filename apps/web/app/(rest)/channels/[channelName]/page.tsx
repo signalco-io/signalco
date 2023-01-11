@@ -62,7 +62,7 @@ export default function ChannelPage({ params }: { params: { channelName: string 
                         <Typography>Connect {channel?.label} channel with any of your favorite apps and devices in just a few clicks.</Typography>
                     </Stack>
                     <Stack spacing={2}>
-                        <Card sx={{ px: 2, pt: 2 }}>
+                        <Card>
                             <Stack spacing={2}>
                                 <Typography level="h5">Categories</Typography>
                                 <Stack spacing={1}>
