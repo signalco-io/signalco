@@ -1,6 +1,11 @@
 import { useEffect, useRef } from 'react';
 
-export default function useAudio(src: string | undefined, { volume = 1, playbackRate = 1 }: any) {
+export type UseAudioOptions = {
+    volume: number;
+    playbackRate: number;
+};
+
+export default function useAudio(src: string, { volume = 1, playbackRate = 1 }: UseAudioOptions) {
     const audio = useRef(new Audio(src))
 
     useEffect(() => {
