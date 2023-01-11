@@ -1,7 +1,7 @@
 import { Card, GentleSlide, Row, Stack } from "@signalco/ui";
 import { StoryObj } from "@storybook/react";
 
-export default { component: GentleSlide, tags: ['docsPage'] };
+export default { component: GentleSlide, tags: ['autodocs'] };
 type Story = StoryObj<typeof GentleSlide>;
 
 const Template: Story = {
