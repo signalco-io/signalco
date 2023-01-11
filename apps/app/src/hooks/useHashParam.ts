@@ -30,7 +30,7 @@ const useHashParam = (parameterName: string): [string | undefined, (value: strin
         // Update current hash with new value
         const hash = parseHash();
         if (typeof value === 'undefined' || value.length <= 0)
-          hash.delete(parameterName);
+            hash.delete(parameterName);
         else hash.set(parameterName, value);
 
         try {

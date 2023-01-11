@@ -1,37 +1,17 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
-import { Loadable, Stack, Row, Card, Typography, Box, List, ListItem, Picker, SelectItems } from '@signalco/ui';
-import { isNonEmptyString, isNotNull, isTrue } from '@enterwell/react-form-validation';
-import { FormBuilder, FormBuilderProvider, useFormField } from '@enterwell/react-form-builder';
-import { ChildrenProps } from '../../src/sharedTypes';
-import { getCurrentUserAsync } from '../../src/services/CurrentUserProvider';
+import { Stack, Row, Typography, Picker, SelectItems, Checkbox, TextField, Container } from '@signalco/ui';
+import { isNonEmptyString, isNotNull, noError } from '@enterwell/react-form-validation';
+import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
+import { FormBuilder, FormBuilderProvider, FormItems, useFormField } from '@enterwell/react-form-builder';
 import { ApiDevelopmentUrl, ApiProductionUrl, setSignalcoApiEndpoint, signalcoApiEndpoint } from '../../src/services/AppSettingsProvider';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale, { availableLocales } from '../../src/hooks/useLocale';
-import useLoadAndError from '../../src/hooks/useLoadAndError';
 import AppThemePicker from '../../components/settings/AppThemePicker';
 import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';
 import LocationMapPicker from '../../components/forms/LocationMapPicker/LocationMapPicker';
 import generalFormComponents from '../../components/forms/generalFormComponents';
 import ApiBadge from '../../components/development/ApiBadge';
-import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
-
-function ConnectedService() {
-    const { t } = useLocale('App', 'Settings');
-    const user = useLoadAndError(getCurrentUserAsync);
-
-    return (
-        <Card>
-            <Row spacing={2}>
-                <Stack>
-                    <Typography>Google</Typography>
-                    <Typography level="body3">{user.item?.name} ({user.item?.email})</Typography>
-                </Stack>
-                <Typography level="body2">{t('Connected')}</Typography>
-            </Row>
-        </Card>
-    )
-}
 
 function SettingsItem(props: { children: ReactNode, label?: string | undefined }) {
     return (
@@ -42,21 +22,8 @@ function SettingsItem(props: { children: ReactNode, label?: string | undefined }
     );
 }
 
-function SettingsSection(props: { children: ReactNode, header: string }) {
-    return (
-        <Stack spacing={2}>
-            <Typography level="h5" sx={{ pt: { xs: 0, sm: 2 } }}>{props.header}</Typography>
-            <Stack spacing={2} alignItems="start">
-                {props.children}
-            </Stack>
-        </Stack>
-    );
-}
-
 const SelectTimeZone: FormBuilderComponent = ({ onChange, value }) => {
     const { t } = useLocale('App', 'Settings');
-
-    // <EwSelect variant="filled" label="Time format" fullWidth options={[{ value: 0, label: '12h' }, { value: 1, label: '24h' }]} />
     return (
         <Picker value={value} onChange={onChange} options={[
             { value: '0', label: t('TimeFormat12Hour') },
@@ -65,10 +32,21 @@ const SelectTimeZone: FormBuilderComponent = ({ onChange, value }) => {
     );
 };
 
+const SelectLanguage: FormBuilderComponent = ({ value, label, onChange }) => {
+    const locales = useLocale('App', 'Locales');
+    return (
+        <SelectItems
+            label={label}
+            value={value ? [value] : []}
+            onChange={(values) => onChange(values[0], { receiveEvent: false })}
+            items={availableLocales.map(l => ({ value: l, label: locales.t(l) }))} />
+    );
+}
+
 const settingsFormComponents: FormBuilderComponents = {
     fieldWrapper: (props) => <SettingsItem {...props} />,
     selectApiEndpoint: ({ value, onChange, label }) => (
-        <SelectItems value={value} onChange={onChange} items={[
+        <SelectItems value={[value]} onChange={(values) => onChange(values[0])} items={[
             {
                 value: ApiProductionUrl,
                 label: (
@@ -93,130 +71,165 @@ const settingsFormComponents: FormBuilderComponents = {
     selectTimeZone: ({ value, onChange, label }) => {
         const timeZones = getTimeZones();
         return (
-            <SelectItems value={[value]} onChange={(v) => onChange(v[0])} items={[
+            <SelectItems value={[value]} onChange={(values) => onChange(values[0])} items={[
                 { value: '0', label: '+00:00 UTC', disabled: true },
                 ...timeZones.map(tz => ({ value: tz.name, label: tz.currentTimeFormat }))
             ]} label={label} />
         );
     },
-    locationMap: (props) => <LocationMapPicker {...props} />
+    locationMap: (props) => <LocationMapPicker {...props} />,
+    language: (props) => <SelectLanguage {...props} />,
+    appTheme: () => <AppThemePicker />
 };
 
 const components = { ...generalFormComponents, ...settingsFormComponents };
 
-function SettingsFormProvider(props: ChildrenProps) {
-    return <FormBuilderProvider components={components} {...props} />;
+function SettingsPane() {
+    const generalForm = useGeneralForm();
+    const profileForm = useProfileForm();
+    const lookAndFeelForm = useLookAndFeelForm();
+    const timeLocationForm = useTimeLocationForm();
+    const developerForm = useDeveloperForm();
+
+    const categories = [
+        { id: 'general', label: 'General', form: generalForm },
+        { id: 'lookAndFeel', label: 'Look and feel', form: lookAndFeelForm },
+        { id: 'profile', label: 'Profile', form: profileForm },
+        { id: 'timeAndLocation', label: 'Time and location', form: timeLocationForm },
+        { id: 'developer', label: 'Developer', form: developerForm },
+    ];
+
+    const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+
+    return (
+        <Row alignItems="start" spacing={2} style={{ paddingTop: 16, paddingLeft: 16, paddingRight: 16 }}>
+            <Stack spacing={2} style={{ padding: 0 }}>
+                <Typography level="h5">&nbsp;</Typography>
+                <TextField placeholder="Search..." />
+                <Stack>
+                    {categories.map(category => (
+                        <Checkbox
+                            key={category.id}
+                            label={category.label}
+                            sx={{ p: 2 }}
+                            checked={selectedCategory.id === category.id}
+                            onChange={(e) => e.target.checked && setSelectedCategory(category)}
+                            disableIcon />
+                    ))}
+                </Stack>
+            </Stack>
+            <Container maxWidth="md">
+                <Stack spacing={2}>
+                    <Typography level="h5">{selectedCategory.label}</Typography>
+                    <FormBuilderProvider components={components}>
+                        <FormBuilder form={selectedCategory.form} />
+                    </FormBuilderProvider>
+                </Stack>
+            </Container>
+        </Row>
+    )
 }
 
-function SettingsIndex() {
-    const { t } = useLocale('App', 'Settings');
-    const locales = useLocale('App', 'Locales');
-    const [isLoading, setIsLoading] = useState(true);
-    const [userLocale, setUserLocale] = useUserSetting<string>('locale', 'en');
-    const [userNickName, setUserNickName] = useUserSetting<string>('nickname', '');
-    const [userTimeFormat, setUserTimeFormat] = useUserSetting<string>('timeFormat', '1');
-    const [userTimeZone, setUserTimeZone] = useUserSetting<string>('timeZone', '0');
-    const [userLocation, setUserLocation] = useUserSetting<[number, number] | undefined>('location', undefined);
-
-    useEffect(() => {
-        setIsLoading(false);
-    }, []);
-
-    const handleLocaleChange = (values: string[]) => {
-        setUserLocale(values[0]);
-        window.location.reload();
+function useLookAndFeelForm() {
+    const form: FormItems = {
+        appTheme: useFormField(undefined, noError, 'appTheme', 'App theme')
     };
 
-    const profileForm = {
+    return form;
+}
+
+function useGeneralForm() {
+    const [userLocale, setUserLocale] = useUserSetting<string>('locale', 'en');
+
+    const form: FormItems = {
+        language: useFormField(userLocale, noError, 'language', 'Language')
+    };
+
+    useEffect(() => {
+        if (!form.language?.error &&
+            form.language?.value !== userLocale) {
+            setUserLocale(form.language?.value);
+            window.location.reload();
+        }
+    }, [form.language, setUserLocale, userLocale]);
+
+    return form;
+}
+
+function useProfileForm() {
+    const { t } = useLocale('App', 'Settings');
+    const [userNickName, setUserNickName] = useUserSetting<string>('nickname', '');
+
+    const profileForm: FormItems = {
         nickname: useFormField(userNickName, isNonEmptyString, 'string', t('Nickname')),
     }
 
-    const timeLocationForm = {
-        timeFormat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', t('TimeFormat'), { receiveEvent: false }),
-        timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', t('TimeZone'), { receiveEvent: false }),
-        location: useFormField(userLocation, isTrue, 'locationMap', t('Location'))
-    };
+    useEffect(() => {
+        if (!profileForm.nickname?.error) {
+            setUserNickName(profileForm.nickname?.value?.trim() || undefined);
+        }
+    }, [setUserNickName, profileForm.nickname]);
 
-    const developerSettingsForm = {
+    return profileForm;
+}
+
+function useDeveloperForm() {
+    const { t } = useLocale('App', 'Settings');
+    const developerSettingsForm: FormItems = {
         apiEndpoint: useFormField(signalcoApiEndpoint(), isNonEmptyString, 'selectApiEndpoint', t('ApiEndpoint'), { receiveEvent: false })
     };
 
     useEffect(() => {
-        if (!developerSettingsForm.apiEndpoint.error &&
-            developerSettingsForm.apiEndpoint.value !== signalcoApiEndpoint()) {
-            setSignalcoApiEndpoint(developerSettingsForm.apiEndpoint.value);
+        if (!developerSettingsForm.apiEndpoint?.error &&
+            developerSettingsForm.apiEndpoint?.value !== signalcoApiEndpoint()) {
+            setSignalcoApiEndpoint(developerSettingsForm.apiEndpoint?.value);
             window.location.reload();
         }
     }, [developerSettingsForm.apiEndpoint]);
 
-    useEffect(() => {
-        if (!profileForm.nickname.error) {
-            setUserNickName(profileForm.nickname.value?.trim() || undefined);
-        }
-    }, [setUserNickName, profileForm.nickname]);
+    return developerSettingsForm;
+}
+
+function useTimeLocationForm() {
+    const { t } = useLocale('App', 'Settings');
+    const [userTimeFormat, setUserTimeFormat] = useUserSetting<string>('timeFormat', '1');
+    const [userTimeZone, setUserTimeZone] = useUserSetting<string>('timeZone', '0');
+    const [userLocation, setUserLocation] = useUserSetting<[number, number] | undefined>('location', undefined);
+
+    const timeLocationForm: FormItems = {
+        timeFormat: useFormField(userTimeFormat, isNotNull, 'selectTimeFormat', t('TimeFormat'), { receiveEvent: false }),
+        timeZone: useFormField(userTimeZone, isNotNull, 'selectTimeZone', t('TimeZone'), { receiveEvent: false }),
+        location: useFormField(userLocation, noError, 'locationMap', t('Location'))
+    };
 
     useEffect(() => {
-        if (!timeLocationForm.timeFormat.error) {
-            setUserTimeFormat(timeLocationForm.timeFormat.value?.trim() || undefined);
+        if (!timeLocationForm.timeFormat?.error) {
+            setUserTimeFormat(timeLocationForm.timeFormat?.value?.trim() || undefined);
         }
     }, [setUserTimeFormat, timeLocationForm.timeFormat]);
 
     useEffect(() => {
-        if (!timeLocationForm.timeZone.error) {
-            setUserTimeZone(timeLocationForm.timeZone.value?.trim() || undefined);
+        if (!timeLocationForm.timeZone?.error) {
+            setUserTimeZone(timeLocationForm.timeZone?.value?.trim() || undefined);
         }
     }, [setUserTimeZone, timeLocationForm.timeZone]);
 
     useEffect(() => {
-        if (!timeLocationForm.location.error) {
-            setUserLocation(timeLocationForm.location.value);
+        if (!timeLocationForm.location?.error) {
+            setUserLocation(timeLocationForm.location?.value);
         }
     }, [setUserLocation, timeLocationForm.location]);
 
+    return timeLocationForm;
+}
+
+function SettingsIndex() {
     return (
-        <Row>
-            <Stack>
-                <List>
-                    <ListItem>test</ListItem>
-                </List>
-            </Stack>
-            <Card variant="plain" sx={{ height: '100%', overflow: 'auto' }}>
-                <SettingsFormProvider>
-                    <Box sx={{ p: 2 }}>
-                        <Loadable isLoading={isLoading}>
-                            <Stack spacing={4}>
-                                <SettingsSection header={t('General')}>
-                                    <SettingsItem label={t('Language')}>
-                                        <SelectItems
-                                            value={userLocale ? [userLocale] : []}
-                                            onChange={handleLocaleChange}
-                                            items={availableLocales.map(l => ({ value: l, label: locales.t(l) }))} />
-                                    </SettingsItem>
-                                </SettingsSection>
-                                <SettingsSection header={t('LookAndFeel')}>
-                                    <SettingsItem label={t('Theme')}>
-                                        <AppThemePicker />
-                                    </SettingsItem>
-                                </SettingsSection>
-                                <SettingsSection header={t('Profile')}>
-                                    <FormBuilder form={profileForm} />
-                                    <ConnectedService />
-                                </SettingsSection>
-                                <SettingsSection header={t('LocationAndTime')}>
-                                    <FormBuilder form={timeLocationForm} />
-                                </SettingsSection>
-                                <SettingsSection header={t('Developer')}>
-                                    <FormBuilder form={developerSettingsForm} />
-                                </SettingsSection>
-                            </Stack>
-                        </Loadable>
-                    </Box>
-                </SettingsFormProvider>
-            </Card>
-        </Row>
+        <SettingsPane />
     );
 }
 
 SettingsIndex.layout = AppLayoutWithAuth;
 
 export default SettingsIndex;
+1

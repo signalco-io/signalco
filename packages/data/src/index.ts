@@ -6,7 +6,8 @@ export type ChannelDataItem = {
 	label: string,
 	categories: string[],
 	description?: string | undefined,
-    planned?: boolean | undefined
+    planned?: boolean | undefined,
+    officialUrl: string
 };
 export const channelsData: ChannelDataItem[] = ChannelsData;
 

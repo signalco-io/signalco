@@ -9,6 +9,14 @@
                 ".next/**",
                 "dist/**",
                 "storybook-static/**"
+            ],
+            "env": [
+                "NEXT_PUBLIC_HCAPTCHA_SITE_KEY",
+                "NEXT_PUBLIC_APP_ENV",
+                "NEXT_PUBLIC_SLACK_CLIENTID",
+                "NEXT_PUBLIC_MAPBOX_TOKEN",
+                "NODE_ENV",
+                "ANALYZE"
             ]
         },
         "lint": {

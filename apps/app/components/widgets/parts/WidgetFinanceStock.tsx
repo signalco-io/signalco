@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
-import { Loadable, NoDataPlaceholder, Typography } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Row, Stack, Loadable, NoDataPlaceholder, Typography } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -72,9 +71,9 @@ export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>
     const diffPercDecimals = diffPerc.toFixed(4).replace(/0{0,2}$/, '');
 
     return (
-        <Stack sx={{ height: '100%' }} alignItems={price.isLoading ? 'center' : 'stretch'} direction="row" justifyContent={price.isLoading ? 'center' : 'stretch'}>
+        <Row style={{ height: '100%' }} alignItems={price.isLoading ? 'center' : 'stretch'} justifyContent={price.isLoading ? 'center' : 'stretch'}>
             <Loadable isLoading={price.isLoading} error={price.error || price.item?.errorMessage}>
-                <Stack p={3} justifyContent="space-between">
+                <Stack style={{ padding: 3 * 8 }} justifyContent="space-between">
                     <Stack>
                         <Typography level="h6" marginBottom={'-4px'}>{ticker}</Typography>
                         <Typography level="body2">{name}</Typography>
@@ -91,6 +90,6 @@ export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>
                     </Stack>
                 </Stack>
             </Loadable>
-        </Stack>
+        </Row>
     );
 }

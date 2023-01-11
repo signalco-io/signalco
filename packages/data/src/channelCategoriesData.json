@@ -4,6 +4,10 @@
         "label": "Communication"
     },
     {
+        "id": "finance",
+        "label": "Finance"
+    },
+    {
         "id": "media",
         "label": "Media"
     },

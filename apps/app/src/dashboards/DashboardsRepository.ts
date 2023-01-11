@@ -90,8 +90,8 @@ function dashboardModelFromEntity(entity: IEntityDetails, order: number, favorit
     const configurationSerialized = configurationSerializedContact?.valueSerialized
 
     dashboard.widgets = (configurationSerialized != null
-            ? (JSON.parse(configurationSerialized).widgets ?? []) as Array<IWidget> // TODO: Construct models
-            : [])
+        ? (JSON.parse(configurationSerialized).widgets ?? []) as Array<IWidget> // TODO: Construct models
+        : [])
         .map((w, i) => ({ ...w, id: i.toString() }));
 
     // Apply widget order (if not specified)
@@ -114,11 +114,11 @@ export async function getAllAsync() {
 export async function saveDashboardAsync(dashboard: IDashboardSetModel) {
     const id = await entityUpsertAsync(dashboard.id, 2, dashboard.name);
     await setAsync({
-            entityId: id,
-            channelName: 'config',
-            contactName: 'configuration'
-        },
-        dashboard.configurationSerialized);
+        entityId: id,
+        channelName: 'config',
+        contactName: 'configuration'
+    },
+    dashboard.configurationSerialized);
     return id;
 }
 
@@ -130,9 +130,9 @@ const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';
 const DashboardsOrderLocalStorageKey = 'dashboards-order';
 
 class DashboardsRepository {
-    isLoaded: boolean = false;
-    isLoading: boolean = false;
-    isUpdateAvailable: boolean = false;
+    isLoaded = false;
+    isLoading = false;
+    isUpdateAvailable = false;
 
     async favoriteSetAsync(id: string, newIsFavorite: boolean) {
         const currentFavorites = UserSettingsProvider.value<string[]>(DashboardsFavoritesLocalStorageKey, []);
@@ -143,7 +143,7 @@ class DashboardsRepository {
         if (!isCurrentlyFavorite && newIsFavorite) {
             UserSettingsProvider.set(DashboardsFavoritesLocalStorageKey, [...currentFavorites, id]);
         } else if (isCurrentlyFavorite && !newIsFavorite) {
-            let newFavorites = [...currentFavorites];
+            const newFavorites = [...currentFavorites];
             newFavorites.splice(currentFavoriteIndex, 1)
             UserSettingsProvider.set(DashboardsFavoritesLocalStorageKey, newFavorites);
         }

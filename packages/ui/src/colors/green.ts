@@ -13,6 +13,6 @@ const green = {
     A200: '#69f0ae',
     A400: '#00e676',
     A700: '#00c853'
-  };
+};
 
-  export default green;
+export default green;

@@ -1,23 +1,30 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
-import { Button, Typography, Box, CircularProgress } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Button, Typography, Box, CircularProgress, Stack } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
+import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useEntity from '../../../src/hooks/signalco/useEntity';
 import useContacts from '../../../src/hooks/signalco/useContacts';
 import { entityAsync } from '../../../src/entity/EntityRepository';
-import IContactPointer from '../../../src/contacts/IContactPointer';
+import type IContactPointer from '../../../src/contacts/IContactPointer';
 import IContact from '../../../src/contacts/IContact';
 import ConductsService from '../../../src/conducts/ConductsService';
 
-const stateOptions = [
+type ConfigProps = {
+    label: string,
+    on: IContact[] | undefined;
+    off: IContact[] | undefined;
+    visual: string;
+}
+
+const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     DefaultLabel,
     { ...DefaultTargetWithValueMultiple, name: 'on', label: 'On' },
     { ...DefaultTargetWithValueMultiple, name: 'off', label: 'Off' },
-    { name: 'visual', label: 'Visual', type: 'select', default: 'lightbulb', data: [{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }] },
+    { name: 'visual', label: 'Visual', type: 'selectVisual', default: 'lightbulb' },
 ];
 
 const TvVisual = dynamic(() => import('../../icons/TvVisual'));
@@ -75,9 +82,9 @@ export const executeStateActionsAsync = async (actions: StateAction[]) => {
     await ConductsService.RequestMultipleConductAsync(conducts);
 };
 
-function WidgetState(props: WidgetSharedProps<any>) {
+function WidgetState(props: WidgetSharedProps<ConfigProps>) {
     const { config } = props;
-    const onContactPointers = useMemo(() => Array.isArray(config?.on) ? config.on as IContactPointer[] : undefined, [config?.on]);
+    const onContactPointers = useMemo(() => Array.isArray(config?.on) ? config?.on as IContactPointer[] : undefined, [config?.on]);
     const onEntityIds = useMemo(() => onContactPointers?.map(i => i.entityId), [onContactPointers]);
     const onEntity = useEntity(onEntityIds && onEntityIds[0]);
     const onContacts = useContacts(onContactPointers);
@@ -117,7 +124,7 @@ function WidgetState(props: WidgetSharedProps<any>) {
             return;
         }
 
-        var targets = state ? config.off : config.on;
+        const targets = state ? config?.off : config?.on;
         executeStateActionsAsync((targets as IContact[]).map(d => ({
             entityId: d.entityId,
             channelName: d.channelName,
@@ -134,7 +141,7 @@ function WidgetState(props: WidgetSharedProps<any>) {
             sx={{ borderRadius: 'md', position: 'relative', height: '100%', width: 'calc(100% - 2px)', display: 'block', textAlign: 'left', margin: 0, padding: 0 }}
             onClick={handleStateChangeRequest}
             variant="plain">
-            <Stack sx={{ height: '100%', py: 2 }}>
+            <Stack style={{ height: '100%', paddingTop: 16, paddingBottom: 16 }}>
                 <Box sx={{ px: 2 }}>
                     <Visual state={state} size={68} />
                 </Box>

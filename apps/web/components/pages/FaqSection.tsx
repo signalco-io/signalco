@@ -5,7 +5,7 @@ export interface FaqItem {
     id: string,
     question: string,
     answer: string
-};
+}
 
 export default function FaqSection(props: { faq: FaqItem[] }) {
     const { faq } = props;

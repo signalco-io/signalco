@@ -1,6 +1,6 @@
 import IContactPointer from './IContactPointer';
+import { requestAsync } from '../services/HttpService';
 import { toDuration } from '../services/DateTimeProvider';
-import HttpService from '../../src/services/HttpService';
 
 export interface ContactHistoryItem {
     timeStamp: Date;
@@ -17,7 +17,7 @@ interface ContactHistoryResponseDto {
 }
 
 export async function setAsync(pointer: IContactPointer, valueSerialized: string | undefined, timeStamp?: Date | undefined) {
-    await HttpService.requestAsync('/contact/set', 'post', {
+    await requestAsync('/contact/set', 'post', {
         entityId: pointer.entityId,
         contactName: pointer.contactName,
         channelName: pointer.channelName,
@@ -26,8 +26,16 @@ export async function setAsync(pointer: IContactPointer, valueSerialized: string
     });
 }
 
+export async function historiesAsync(targets: IContactPointer[] | undefined, duration: number) {
+    const contactsHistory = targets?.map(async t => ({ contact: t, history: await historyAsync(t, duration) }));
+    if (contactsHistory) {
+        return await Promise.all(contactsHistory);
+    }
+    return [];
+}
+
 export async function historyAsync(pointer: IContactPointer, duration?: Date | string | number | undefined) {
-    return (await HttpService.requestAsync('/contact/history', 'get', {
+    return (await requestAsync('/contact/history', 'get', {
         entityId: pointer.entityId,
         channelName: pointer.channelName,
         contactName: pointer.contactName,

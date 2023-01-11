@@ -1,4 +1,7 @@
+import cx from 'classix';
+import { type CSSProperties } from 'react';
 import { ChildrenProps } from '../sharedTypes';
+import styles from './Container.module.scss';
 
 /** @alpha */
 export interface ContainerProps extends ChildrenProps {
@@ -25,12 +28,9 @@ export default function Container({ maxWidth, children }: ContainerProps) {
     }
 
     return (
-        <div style={{
-            width: '100%',
-            display: 'block',
-            maxWidth: width ? `${width}px` : undefined,
-            margin: 'auto'
-        }}>
+        <div className={cx(styles.root, !!width && styles.pad)} style={{
+            "--container-maxWidth": width ? `${width}px` : undefined
+        } as CSSProperties}>
             {children}
         </div>
     )

@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import React, { useCallback, useState } from 'react';
 import { Check, Delete, MoreHorizontal } from '@signalco/ui-icons';
-import { NoDataPlaceholder, Row, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography, Box, Checkbox } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Stack, NoDataPlaceholder, Row, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography, Box, Checkbox } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -21,7 +20,7 @@ interface IChecklistItem {
     id: string,
     done?: boolean,
     text: string
-};
+}
 
 function ChecklistItem(props: { item: IChecklistItem; onChange: (id: string, done: boolean) => void; onRemove: (id: string) => void; }) {
     const { item, onChange, onRemove } = props;
@@ -93,10 +92,10 @@ function WidgetChecklist(props: WidgetSharedProps<any>) {
     useWidgetOptions(stateOptions, props);
 
     return (
-        <Stack sx={{ height: '100%' }} spacing={2} py={2}>
+        <Stack style={{ height: '100%', paddingTop: 16, paddingBottom: 16 }} spacing={2}>
             <Typography level="h4" sx={{ px: 2 }}>{label}</Typography>
             <Box sx={{ flexGrow: 1, overflow: 'auto', overflowX: 'hidden' }}>
-                <Stack sx={{ height: '100%', pl: 2, pr: 3 }}>
+                <Stack style={{ height: '100%', paddingLeft: 2 * 8, paddingRight: 3 * 8 }}>
                     {items.length
                         ? items.map(item => <ChecklistItem key={item.id} item={item} onChange={handleItemChanged} onRemove={handleItemRemoved} />)
                         : <Box display="flex" height="100%" alignItems="center" justifyContent="center">

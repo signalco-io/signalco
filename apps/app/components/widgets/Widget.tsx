@@ -1,12 +1,11 @@
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Alert } from '@signalco/ui';
 import WidgetState from './parts/WidgetState';
 import WidgetCard from './parts/WidgetCard';
 import WidgetButton from './parts/WidgetButton';
 import IWidgetConfigurationOption from '../../src/widgets/IWidgetConfigurationOption';
-import { ObjectDictAny } from '../../src/sharedTypes';
 const WidgetChecklist = dynamic(() => import('./parts/WidgetChecklist'));
 const WidgetIndicator = dynamic(() => import('./parts/WidgetIndicator'));
 const WidgetTime = dynamic(() => import('./parts/WidgetTime'));
@@ -38,42 +37,13 @@ export interface WidgetSpecifigProps {
     config: any,
 }
 
-function applyStaticToConfig(config: any | undefined, options: IWidgetConfigurationOption<unknown>[] | undefined) {
-    const staticConfigs: ObjectDictAny = {};
-    if (options) {
-        options.filter(o => o.type === 'static').forEach(o => {
-            if (typeof staticConfigs[o.name] === 'undefined') {
-                staticConfigs[o.name] = o.default;
-            }
-        });
-    }
-
-    return {
-        ...staticConfigs,
-        ...config
-    };
-}
-
 function UnresolvedWidget() {
-  return <Alert color="danger" sx={{ height: '100%' }}>Unknown widget</Alert>
+    return <Alert color="danger" sx={{ height: '100%' }}>Unknown widget</Alert>
 }
 
 function Widget(props: WidgetProps) {
-    const [config, setConfig] = useState(props.config);
     const [options, setOptions] = useState<IWidgetConfigurationOption<any>[] | undefined>(undefined);
     const [active, setActive] = useState(false);
-
-    useEffect(() => {
-        // Apply static props, ignore if not changed
-        const configWithStaticProps = applyStaticToConfig(props.config, options);
-        if (JSON.stringify(configWithStaticProps) === JSON.stringify(config))
-            return;
-
-        setConfig(configWithStaticProps);
-        if (props.onResize) {
-            props.onResize(configWithStaticProps.rows || 2, configWithStaticProps.columns || 2);
-        }
-    }, [options, props, config]);
 
     const handleOptions = useCallback((opts: IWidgetConfigurationOption<any>[]) => setOptions(opts), []);
     const handleAction = useCallback((newActive: boolean) => {
@@ -85,7 +55,7 @@ function Widget(props: WidgetProps) {
     const widgetSharedProps = {
         id: props.id,
         isEditMode: props.isEditMode,
-        config: config,
+        config: props.config,
         onOptions: handleOptions,
         onActive: handleAction
     };
@@ -119,7 +89,7 @@ function Widget(props: WidgetProps) {
             onConfigured={props.setConfig}
             onRemove={props.onRemove}
             options={options}
-            config={config}>
+            config={props.config}>
             <WidgetResolved {...widgetSharedProps} />
         </WidgetCard>
     );

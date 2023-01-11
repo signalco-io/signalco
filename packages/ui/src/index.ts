@@ -25,6 +25,9 @@ export * from './DotIndicator';
 export { default as EditableInput } from './EditableInput';
 export * from './EditableInput';
 
+export { default as ErrorBoundary } from './ErrorBoundary';
+export * from './ErrorBoundary';
+
 export { default as Fade } from './Fade';
 export * from './Fade';
 
@@ -85,6 +88,8 @@ export * from './Row';
 export { default as Timeago } from './Timeago';
 export * from './Timeago';
 
+export * from './colors';
+export * from './theme';
 export * from './hooks';
 
 export { Box } from '@mui/system';
@@ -127,6 +132,7 @@ export {
 } from "@mui/joy";
 
 export { CssBaseline } from '@mui/joy';
+export { Stack as MuiStack } from '@mui/system';
 export { useColorScheme, CssVarsProvider, getInitColorSchemeScript, extendTheme } from '@mui/joy/styles';
 
 // TODO: Remove as we should use direct joy types

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
-import { DisableButton, Avatar, Box, EditableInput, Timeago } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { ExternalLink } from '@signalco/ui-icons';
+import { DisableButton, Avatar, Box, EditableInput, Timeago, MuiStack, Row, Stack, Loadable, Chip } from '@signalco/ui';
 import EntityProcessDetails from './EntityProcessDetails';
 import EntityOptions from './EntityOptions';
 import ContactsTable from './ContactsTable';
@@ -9,6 +9,7 @@ import ShareEntityChip from '../../entity/ShareEntityChip';
 import EntityStatus, { useEntityStatus } from '../../entity/EntityStatus';
 import useEntity from '../../../src/hooks/signalco/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
+import { camelToSentenceCase } from '../../../src/helpers/StringHelpers';
 import { entityRenameAsync } from '../../../src/entity/EntityRepository';
 import { entityLastActivity } from '../../../src/entity/EntityHelper';
 import { setAsync } from '../../../src/contacts/ContactRepository';
@@ -20,7 +21,7 @@ export interface EntityDetailsViewProps {
 
 export default function EntityDetailsView(props: EntityDetailsViewProps) {
     const { id } = props;
-    const { data: entity } = useEntity(id);
+    const { isLoading, error, data: entity } = useEntity(id);
     const [showRaw, setShowRaw] = useState(false);
 
     const Icon = EntityIcon(entity);
@@ -41,61 +42,73 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
         }
     };
 
+    const visitLinks = entity?.contacts
+        .filter(c => (c.contactName === 'visit' || c.contactName.startsWith('visit-')) && c.valueSerialized)
+        .map(c => ({
+            alias: c.contactName.includes('-') ? camelToSentenceCase(c.contactName.substring(c.contactName.indexOf('-') + 1)) : 'Visit',
+            href: c.valueSerialized as string
+        }));
+
     const detailsComponent = useMemo(() => {
         switch (entity?.type) {
-            case 3:
-                return <EntityProcessDetails entity={entity} />
-            default:
-                return null;
+        case 3:
+            return <EntityProcessDetails entity={entity} />
+        default:
+            return null;
         }
     }, [entity]);
     const showRawResolved = useMemo(() => detailsComponent == null || showRaw, [detailsComponent, showRaw]);
 
     return (
-        <Stack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
-            <Stack sx={{ px: 2 }} spacing={1}>
-                <Stack direction="row" spacing={1} justifyContent="space-between">
-                    <Stack direction="row" alignItems="center" spacing={2}>
-                        <Avatar>
-                            <Icon />
-                        </Avatar>
-                        <EditableInput
-                            sx={{
-                                fontWeight: 300,
-                                fontSize: { xs: 18, sm: 24 }
-                            }}
-                            text={entity?.alias || ''}
-                            noWrap
-                            onChange={handleRename} />
-                    </Stack>
-                    <EntityOptions
-                        id={id}
-                        canHideRaw={detailsComponent != null}
-                        showRaw={showRaw}
-                        showRawChanged={(show) => setShowRaw(show)} />
+        <Loadable isLoading={isLoading} error={error}>
+            <MuiStack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
+                <Stack style={{ paddingLeft: 16, paddingRight: 16 }} spacing={1}>
+                    <Row spacing={1} justifyContent="space-between">
+                        <Row spacing={2}>
+                            <Avatar>
+                                <Icon />
+                            </Avatar>
+                            <EditableInput
+                                sx={{
+                                    fontWeight: 300,
+                                    fontSize: { xs: 18, sm: 24 }
+                                }}
+                                text={entity?.alias || ''}
+                                noWrap
+                                onChange={handleRename} />
+                        </Row>
+                        <EntityOptions
+                            id={id}
+                            canHideRaw={detailsComponent != null}
+                            showRaw={showRaw}
+                            showRawChanged={(show) => setShowRaw(show)} />
+                    </Row>
+                    <Row spacing={1}>
+                        <EntityStatus entity={entity} />
+                        {(hasStatus && (isStale || isOffline)) && (
+                            <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
+                                <Timeago date={entityLastActivity(entity)} />
+                            </Box>
+                        )}
+                        {(!disabledContact.isLoading && !disabledContact.isError) && (
+                            <DisableButton disabled={isDisabled} onClick={handleDisableToggle} />
+                        )}
+                        <ShareEntityChip entity={entity} entityType={1} />
+                        {visitLinks?.map(link => (
+                            <Chip key={link.href} href={link.href} startDecorator={<ExternalLink size={16} />}>{link.alias}</Chip>
+                        ))}
+                    </Row>
                 </Stack>
-                <Stack direction="row" alignItems="center" spacing={1}>
-                    <EntityStatus entity={entity} />
-                    {(hasStatus && (isStale || isOffline)) && (
-                        <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
-                            <Timeago date={entityLastActivity(entity)} />
-                        </Box>
+                <Box sx={{ px: { xs: 1, sm: 2 } }}>
+                    {showRawResolved ? (
+                        <ContactsTable entity={entity} />
+                    ) : (
+                        <>
+                            {detailsComponent}
+                        </>
                     )}
-                    {(!disabledContact.isLoading && !disabledContact.isError) && (
-                        <DisableButton disabled={isDisabled} onClick={handleDisableToggle} />
-                    )}
-                    <ShareEntityChip entity={entity} entityType={1} />
-                </Stack>
-            </Stack>
-            <Box sx={{ px: { xs: 1, sm: 2 } }}>
-                {showRawResolved ? (
-                    <ContactsTable entity={entity} />
-                ) : (
-                    <>
-                        {detailsComponent}
-                    </>
-                )}
-            </Box>
-        </Stack>
+                </Box>
+            </MuiStack>
+        </Loadable>
     );
 }

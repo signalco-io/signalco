@@ -9,7 +9,7 @@ export type useLoadAndErrorResult<T> = {
 
 export default function useLoadAndError<T>(load?: ValueOrFuncGeneric<Promise<T> | undefined>): useLoadAndErrorResult<T> {
     const [state, setState] = useState<useLoadAndErrorResult<T>>({ isLoading: true, item: undefined, error: undefined });
-    const [_, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
     const loadPromiseRef = useRef<Promise<T>>();
 
     useEffect(() => {

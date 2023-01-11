@@ -7,7 +7,7 @@ import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfiguratio
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useLoadAndError from '../../../src/hooks/useLoadAndError';
 import IContactPointer from '../../../src/contacts/IContactPointer';
-import { historyAsync } from '../../../src/contacts/ContactRepository';
+import { historiesAsync } from '../../../src/contacts/ContactRepository';
 
 type ConfigProps = {
     label: string | undefined;
@@ -25,14 +25,6 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     DefaultColumns(4)
 ];
 
-const loadHistory = async (targets: IContactPointer[] | undefined, duration: number) => {
-    var contactsHistory = targets?.map(async t => ({ contact: t, history: await historyAsync(t, duration) }));
-    if (contactsHistory) {
-        return await Promise.all(contactsHistory);
-    }
-    return [];
-};
-
 export default function WidgetButton({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
     useWidgetOptions(stateOptions, { onOptions });
 
@@ -40,16 +32,16 @@ export default function WidgetButton({ config, onOptions }: WidgetSharedProps<Co
     const rows = config?.rows ?? 2;
     const duration = config?.duration ?? 0;
 
-    const loadHistoryCallback = useCallback(() => loadHistory(config?.target, duration), [config?.target, duration]);
+    const loadHistoryCallback = useCallback(() => historiesAsync(config?.target, duration), [config?.target, duration]);
     const historyData = useLoadAndError(loadHistoryCallback);
 
     return (
         <Loadable isLoading={historyData.isLoading} error={historyData.error}>
             {(historyData.item?.length ?? 0) > 0 && (
-                <Graph data={historyData.item![0]?.history?.map(i => ({
+                <Graph data={historyData.item?.at(0)?.history?.map(i => ({
                     id: i.timeStamp.toUTCString(),
                     value: i.valueSerialized ?? ''
-                }))} durationMs={duration} width={columns * 80 + 2} height={rows * 80 + 2} />
+                })) ?? []} durationMs={duration} width={columns * 80 + 2} height={rows * 80 + 2} />
             )}
         </Loadable>
     );

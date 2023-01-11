@@ -1,6 +1,7 @@
 'use client';
 
-import { Breadcrumbs, NavigatingButton, Row, Stack, Card, Typography } from '@signalco/ui';
+import { Bug, Link as LinkIcon } from '@signalco/ui-icons';
+import { Breadcrumbs, NavigatingButton, Row, Stack, Card, Typography, Link } from '@signalco/ui';
 import { channelCategories as channelCategoriesData, channelsData } from '@signalco/data';
 import { KnownPages } from '../../../../src/knownPages';
 import ShareSocial from '../../../../components/pages/ShareSocial';
@@ -18,6 +19,19 @@ export async function generateStaticParams() {
     return channelsData.map((channel) => ({
         channelName: channel.channelName,
     }));
+}
+
+// TODO: Move to sianglco specific UI library
+function LinkChannelIssues({ channelName }: {channelName: string}) {
+    return (
+        <Link
+            href={`https://github.com/orgs/signalco-io/projects/2/views/1?filterQuery=label%3Achannel%3A${encodeURIComponent(channelName)}`}>
+            <Row spacing={1}>
+                <Bug />
+                <span>Known issues</span>
+            </Row>
+        </Link>
+    )
 }
 
 export default function ChannelPage({ params }: { params: { channelName: string } }) {
@@ -42,25 +56,29 @@ export default function ChannelPage({ params }: { params: { channelName: string 
                         <ShareSocial />
                     </Row>
                 </Stack>
-                <Row spacing={2} justifyContent="space-between">
+                <Row spacing={2} alignItems="start" justifyContent="space-between">
                     <Stack spacing={2}>
                         {channel?.description && <Typography>{channel?.description}</Typography>}
                         <Typography>Connect {channel?.label} channel with any of your favorite apps and devices in just a few clicks.</Typography>
                     </Stack>
-                    <Card sx={{ px: 2, pt: 2 }}>
-                        <Stack spacing={2}>
-                            <Typography level="h5">Categories</Typography>
-                            <Stack spacing={1}>
-                                {channelCategories?.map(category => {
-                                    return (
-                                        <NavigatingButton key={category?.id} href={`/channels?category=${category?.id}`} hideArrow>
-                                            {category?.label}
-                                        </NavigatingButton>
-                                    );
-                                })}
+                    <Stack spacing={2}>
+                        <Card>
+                            <Stack spacing={2}>
+                                <Typography level="h5">Categories</Typography>
+                                <Stack spacing={1}>
+                                    {channelCategories?.map(category => {
+                                        return (
+                                            <NavigatingButton key={category?.id} href={`/channels?category=${category?.id}`} hideArrow>
+                                                {category?.label}
+                                            </NavigatingButton>
+                                        );
+                                    })}
+                                </Stack>
                             </Stack>
-                        </Stack>
-                    </Card>
+                        </Card>
+                        {channel && <Link href={channel?.officialUrl}><Row spacing={1}><LinkIcon /><span>Official website</span></Row></Link>}
+                        <LinkChannelIssues channelName={channelName} />
+                    </Stack>
                 </Row>
                 <Stack alignItems="start">
                     <NavigatingButton href={`${KnownPages.AppChannels}/${channelName}`} disabled={channel?.planned}>

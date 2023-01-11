@@ -1,5 +1,4 @@
-import { Button, Card, Typography, Checkbox } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { MuiStack, Stack, Button, Card, Typography, Checkbox, Row } from '@signalco/ui';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
 
 export interface PricingOption {
@@ -19,7 +18,7 @@ export interface PricingCardProps {
 }
 
 export default function PricingCard(props: PricingCardProps) {
-    const { option, variant } = props;
+    const { option } = props;
 
     const disabled = option.price.eur > 0;
 
@@ -29,28 +28,28 @@ export default function PricingCard(props: PricingCardProps) {
                 sx={{
                     height: '100%'
                 }}>
-                <Stack
+                <MuiStack
                     sx={{ height: '100%' }}
                     p={{ xs: 4, md: 6 }}
                     spacing={{ xs: 3, md: 4 }}
                     justifyContent="space-between">
-                    <Stack spacing={{ xs: 3, md: 4 }}>
+                    <MuiStack spacing={{ xs: 3, md: 4 }}>
                         <Stack alignItems="center">
                             <SignalcoLogotype width={180} hideBadge />
                             <Typography level="h3">{option.label}</Typography>
                         </Stack>
-                        <Stack direction="row" alignItems="end" spacing={1}>
+                        <Row alignItems="end" spacing={1}>
                             <Typography level="h5" component="p">€{option.price.eur}</Typography>
                             <Typography>/</Typography>
                             <Typography>{option.duration}</Typography>
-                        </Stack>
+                        </Row>
                         <Typography>{option.description}</Typography>
                         <Stack spacing={1}>
                             {option.features.map(feature => (
                                 <Checkbox key={feature} checked readonly label={feature} />
                             ))}
                         </Stack>
-                    </Stack>
+                    </MuiStack>
                     <Stack spacing={1}>
                         <Button
                             variant={option.id === 'basic' ? 'solid' : 'outlined'}
@@ -60,7 +59,7 @@ export default function PricingCard(props: PricingCardProps) {
                             {disabled ? 'Available soon' : option.hrefLabel}
                         </Button>
                     </Stack>
-                </Stack>
+                </MuiStack>
             </Card>
         </div>
     );

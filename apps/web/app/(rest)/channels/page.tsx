@@ -1,6 +1,6 @@
 'use client';
 
-import { Stack } from '@mui/system';
+import { MuiStack } from '@signalco/ui';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import FaqSection from '../../../components/pages/FaqSection';
 import CtaSection from '../../../components/pages/CtaSection';
@@ -13,13 +13,13 @@ const channelsFaq = [
 
 export default function ChannelsPage() {
     return (
-        <Stack spacing={{ xs: 8, md: 12 }}>
-            <Stack spacing={{ xs: 4, md: 8 }}>
+        <MuiStack spacing={{ xs: 8, md: 12 }}>
+            <MuiStack spacing={{ xs: 4, md: 8 }}>
                 <PageCenterHeader header="Channels" subHeader="List of all channels available on signalco" />
                 <ChannelsGallery channelHrefFunc={(id) => `/channels/${id}`} />
-            </Stack>
+            </MuiStack>
             <FaqSection faq={channelsFaq} />
             <CtaSection />
-        </Stack >
+        </MuiStack >
     );
 }

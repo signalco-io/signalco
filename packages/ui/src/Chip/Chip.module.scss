@@ -1,7 +1,51 @@
 .root {
     color: initial;
-    border: 1px solid gray;
-    border-radius: 12px;
-    background: transparent;
+    border: 1px solid var(--joy-palette-primary-outlinedBorder);
+    border-radius: 15px;
+    background: var(--joy-palette-primary-softBg);
     padding: 4px 8px;
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.sm {
+    border-radius: 10px;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+}
+
+.lg {
+    border-radius: 28px;
+    padding: 4px 12px;
+    font-size: 1rem;
+}
+
+.info {
+    background: var(--joy-palette-info-softBg);
+    color: var(--joy-palette-info-softColor)
+}
+
+.warning {
+    background: var(--joy-palette-warning-softBg);
+    color: var(--joy-palette-warning-softColor);
+}
+
+.primary {
+    background: var(--joy-palette-primary-softBg);
+    color: var(--joy-palette-primary-softColor);
+}
+
+.neutral {
+    background: var(--joy-palette-neutral-softBg);
+    color: var(--joy-palette-neutral-softColor);
+}
+
+.danger {
+    background: var(--joy-palette-danger-softBg);
+    color: var(--joy-palette-danger-softColor);
+}
+
+.success {
+    background: var(--joy-palette-success-softBg);
+    color: var(--joy-palette-success-softColor);
 }

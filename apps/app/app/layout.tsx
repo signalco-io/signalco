@@ -1,8 +1,7 @@
 'use client';
 
 import '../styles/global.scss';
-import { CssBaseline, CssVarsProvider, getInitColorSchemeScript } from '@signalco/ui';
-import appTheme from '../src/theme';
+import { CssBaseline, CssVarsProvider, getInitColorSchemeScript, signalcoTheme } from '@signalco/ui';
 
 export default function RootLayout({
     // Layouts must accept a children prop.
@@ -15,7 +14,7 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 {getInitColorSchemeScript()}
-                <CssVarsProvider theme={appTheme}>
+                <CssVarsProvider theme={signalcoTheme}>
                     <CssBaseline />
                     {children}
                 </CssVarsProvider>

@@ -1,11 +1,12 @@
-name: Create new release
+name: "[Global] Create new release"
 
 on:
     push:
         branches: [main]
 
 jobs:
-    build:
+    release:
+        name: "[Global] Create new release"
         runs-on: ubuntu-latest
 
         steps:

@@ -17,10 +17,6 @@
 			"path": "apps/ui-docs"
 		},
 		{
-			"name": "📦 @signalco/tsconfig",
-			"path": "packages/tsconfig"
-		},
-		{
 			"name": "📦 @signalco/ui",
 			"path": "packages/ui"
 		},
@@ -31,6 +27,14 @@
 		{
 			"name": "📦 @signalco/data",
 			"path": "packages/data"
+		},
+		{
+			"name": "⛏️ @signalco/tsconfig",
+			"path": "packages/tsconfig"
+		},
+		{
+			"name": "⛏️ @signalco/eslint-config-signalco",
+			"path": "packages/eslint-config-signalco"
 		},
 	],
 	"settings": {

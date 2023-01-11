@@ -20,7 +20,7 @@ export default function Checkbox(props: CheckboxProps) {
             sx={{
                 ...sx,
                 'input': {
-                    cursor: readonly ? 'default' : 'unset'
+                    cursor: readonly ? 'default' : 'pointer'
                 },
                 '.JoyCheckbox-checkbox:hover': {
                     backgroundColor: readonly ? 'var(--joy-palette-primary-solidBg)' : undefined

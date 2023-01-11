@@ -73,7 +73,7 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
         filteredAvailableWidgetsItems,
         searchAvailableWidgetsText,
         handleSearchAvailableWidgetsTextChange] =
-        useSearch(availableWidgets, filterFuncObjectStringProps, 3);
+        useSearch(availableWidgets, filterFuncObjectStringProps);
 
     return (
         <Stack spacing={4}>

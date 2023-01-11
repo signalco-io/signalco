@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import React from 'react';
 import { PopupState } from 'material-ui-popup-state/hooks';
 import { Add, Pin, PinOff } from '@signalco/ui-icons';
-import { Row , Button, Card, Divider, IconButton, Typography } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Stack, Row, Button, Card, Divider, IconButton, Typography } from '@signalco/ui';
 import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
@@ -41,7 +42,7 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
 
     return (
         <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-            <Stack direction="row" alignItems="center" sx={{ width: '100%', position: 'relative' }}>
+            <Row style={{ width: '100%', position: 'relative' }}>
                 <Button
                     variant="plain"
                     sx={{ color: dashboard.id !== selectedId ? 'var(--joy-palette-neutral-400)' : 'inherit' }}
@@ -53,7 +54,7 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
                 <IconButton sx={{ position: 'absolute', right: 0, height: '100%' }} onClick={() => onFavorite(dashboard.id)}>
                     {dashboard.isFavorite ? <Pin /> : <PinOff />}
                 </IconButton>
-            </Stack>
+            </Row>
         </div>
     );
 }
@@ -61,7 +62,7 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
 function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const { selectedId, popupState, onSelection, onEditWidgets, onSettings } = props;
     const { t } = useLocale('App', 'Dashboards');
-    const [_, setDashboardIdHash] = useHashParam('dashboard');
+    const [, setDashboardIdHash] = useHashParam('dashboard');
     const [isFullScreen, setFullScreenHash] = useHashParam('fullscreen');
     const { data: dashboards } = useDashboards();
     const saveDashboard = useSaveDashboard();
@@ -98,7 +99,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
         if (over && active.id !== over.id) {
             const oldIndex = orderedDashboardIds.indexOf(active.id.toString());
             const newIndex = orderedDashboardIds.indexOf(over.id.toString());
-            const newOrderedDashboards = arrayMove(orderedDashboards, oldIndex, newIndex);;
+            const newOrderedDashboards = arrayMove(orderedDashboards, oldIndex, newIndex);
             for (let i = 0; i < newOrderedDashboards.length; i++) {
                 newOrderedDashboards[i].order = i;
             }
@@ -132,8 +133,8 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
 
     return (
         <Card sx={{ gap: 1.5 }}>
-            <Stack sx={{ minWidth: 280 }}>
-                <Stack sx={{ maxHeight: '50vh', overflow: 'auto' }}>
+            <Stack style={{ minWidth: 280 }}>
+                <Stack style={{ maxHeight: '50vh', overflow: 'auto' }}>
                     <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
                         <SortableContext items={orderedDashboardIds}>
                             {orderedDashboards.map((d) => (

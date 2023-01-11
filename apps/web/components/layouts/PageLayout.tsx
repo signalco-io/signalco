@@ -16,7 +16,7 @@ export function PageLayout({ maxWidth, children }: PageLayoutProps) {
     return (
         <Stack spacing={4}>
             <PageNav />
-            <div style={{ paddingTop: 10 }}>
+            <div style={{ paddingTop: 10 * 8 }}>
                 <Container maxWidth={maxWidth}>
                     {children}
                 </Container>

@@ -6,7 +6,7 @@ import IContactPointer from '../../contacts/IContactPointer';
 export default function useContacts(pointers: IContactPointer[] | undefined) {
     const client = useQueryClient();
     return useQueries({
-        queries: (pointers ?? []).map(pointer => {
+        queries: (pointers ?? []).filter(p => !!p).map(pointer => {
             return {
                 queryKey: ['contact', pointer.entityId, pointer.channelName, pointer.contactName],
                 queryFn: async () => {

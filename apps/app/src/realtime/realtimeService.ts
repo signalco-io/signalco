@@ -1,6 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-import HttpService from '../services/HttpService';
+import { getApiUrl } from '../services/HttpService';
 import CurrentUserProvider from '../services/CurrentUserProvider';
 import { showNotification } from '../notifications/PageNotificationService';
 
@@ -72,7 +72,7 @@ class RealtimeService {
                 console.log('Signalr reconnected');
                 showNotification('Realtime connection to cloud established.', 'success');
             });
-            } catch (err) {
+        } catch (err) {
             const delay = Math.min((retryCount + 1) * 2, 180);
 
             console.warn(`Failed to start SignalR hub connection. Reconnecting in ${delay}s`, err);
@@ -83,7 +83,7 @@ class RealtimeService {
                 this._hubStartWithRetryAsync(delay);
             }, (delay) * 1000);
         }
-    };
+    }
 
     async startAsync() {
         if (this.contactsHub != null) return;
@@ -91,19 +91,19 @@ class RealtimeService {
         console.debug('Configuring SignalR...');
 
         this.contactsHub = new HubConnectionBuilder()
-          .withUrl(HttpService.getApiUrl('/signalr/contacts'), {
-            accessTokenFactory: () => {
-                const token = CurrentUserProvider.getToken();
-                if (token === 'undefined')
-                    throw Error('TokenFactory not present. Unable to authorize SignalR client.');
-                return token!;
-            }
-          })
-          .configureLogging(LogLevel.Information)
-          .build();
+            .withUrl(getApiUrl('/signalr/contacts'), {
+                accessTokenFactory: () => {
+                    const token = CurrentUserProvider.getToken();
+                    if (token === 'undefined')
+                        throw Error('TokenFactory not present. Unable to authorize SignalR client.');
+                    return token!;
+                }
+            })
+            .configureLogging(LogLevel.Information)
+            .build();
 
         this._hubStartWithRetryAsync(0);
-    };
+    }
 }
 
 const service = new RealtimeService();

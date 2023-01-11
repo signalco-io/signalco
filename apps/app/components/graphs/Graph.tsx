@@ -1,12 +1,10 @@
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
-import { NoDataPlaceholder, Row, Sheet, Typography, Box, Timeago } from '@signalco/ui';
+import { NoDataPlaceholder, Row, Sheet, Typography, Box, Timeago, lightBlue, deepOrange } from '@signalco/ui';
 import { ObjectDictAny } from '../../src/sharedTypes';
 import { now } from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
 import { arrayMax, arrayMin } from '../../src/helpers/ArrayHelpers';
-import lightBlue from '../../src/colors/lightBlue';
-import deepOrange from '../../src/colors/deepOrange';
 
 export interface IGraphProps {
     label?: string;
@@ -15,6 +13,8 @@ export interface IGraphProps {
     width: number;
     height: number;
     startDateTime?: Date;
+    hideLegend?: boolean;
+    adaptiveDomain?: boolean;
 }
 
 const renderCustomizedTimeLineLabel = (props: any) => {
@@ -39,9 +39,7 @@ const renderCustomizedTimeLineLabel = (props: any) => {
     return null;
 };
 
-function GraphTimeLine(props: IGraphProps) {
-    const { label, data, durationMs, width, startDateTime } = props;
-
+function GraphTimeLine({ label, data, durationMs, width, startDateTime, hideLegend }: IGraphProps) {
     const accentTrue = lightBlue[600];
     const accentFalse = deepOrange[500];
 
@@ -59,7 +57,7 @@ function GraphTimeLine(props: IGraphProps) {
 
     // From start of graph to first entry
     transformedDataItem['t0'] = domainGraph(new Date(firstEntry.id).getTime()) - domainGraph(past.getTime());
-    transformedDataItem['v0'] = firstEntry.value === 'true' ? 'false' : 'true';;
+    transformedDataItem['v0'] = firstEntry.value === 'true' ? 'false' : 'true';
 
     // From first entry to last entry
     for (let i = 1; i < reversedData.length; i++) {
@@ -89,10 +87,15 @@ function GraphTimeLine(props: IGraphProps) {
                 maxBarSize={20}
                 barGap={0}
             >
-                <XAxis type="number" axisLine={false} interval="preserveStartEnd" tickFormatter={(v) => {
-                    var date = domainGraph.invert(v);
-                    return `${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}`
-                }} />
+                <XAxis
+                    type="number"
+                    axisLine={false}
+                    interval="preserveStartEnd"
+                    tickFormatter={(v) => {
+                        const date = domainGraph.invert(v);
+                        return `${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}`
+                    }}
+                    hide={hideLegend} />
                 <YAxis type="category" domain={[0]} hide />
                 {new Array(reversedData.length + 1).fill(0).map((_, i) => {
                     return (
@@ -131,9 +134,7 @@ function ChartGenericTooltip({ active, payload, domain, units }: { active?: bool
     return null;
 }
 
-function GraphArea(props: IGraphProps) {
-    const { data, durationMs, width, height, startDateTime } = props;
-
+function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend, adaptiveDomain }: IGraphProps) {
     const yKey = 'value';
     const xKey = 'key';
 
@@ -151,8 +152,8 @@ function GraphArea(props: IGraphProps) {
 
     const min = arrayMin(transformedData, d => parseFloat(d.value) || 0);
     const max = arrayMax(transformedData, d => parseFloat(d.value) || 0);
-    const dMin = Math.floor((min || 0) * 0.98);
-    const dMax = Math.ceil((max || 0) * 1.05);
+    const dMin = Math.floor((min || 0) * 0.99);
+    const dMax = Math.ceil((max || 0) * 1.01);
 
     return (
         <ComposedChart
@@ -160,26 +161,40 @@ function GraphArea(props: IGraphProps) {
             height={height}
             data={transformedData}
             margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
-            <XAxis domain={[0, 1]} ticks={ticks || []} dataKey={xKey} type="number" hide />
-            <YAxis allowDecimals={false} domain={[dMin, dMax]} tickSize={0} tickMargin={4} interval="preserveStartEnd" minTickGap={32} width={28} />
-            {(typeof firstDataPoint !== 'undefined') && (
+            <defs>
+                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="var(--graph-stroke)" stopOpacity={0.35} />
+                    <stop offset="95%" stopColor="var(--graph-stroke)" stopOpacity={0.15} />
+                </linearGradient>
+            </defs>
+            <XAxis domain={[domainGraph(new Date(firstDataPoint?.id ?? 0).getTime()), domainGraph(new Date(lastDataPoint?.id ?? 0).getTime())]} ticks={ticks || []} dataKey={xKey} type="number" hide />
+            <YAxis
+                allowDecimals={false}
+                domain={[dMin, dMax]}
+                tickSize={0}
+                tickMargin={4}
+                interval="preserveStartEnd"
+                minTickGap={32}
+                width={28}
+                hide={hideLegend} />
+            {(!adaptiveDomain && typeof firstDataPoint !== 'undefined') && (
                 <Line type="monotone" dot={false} data={[
                     { key: domainGraph(past.getTime()), value: firstDataPoint.value },
                     { key: domainGraph(new Date(firstDataPoint.id).getTime()), value: firstDataPoint.value }
-                ]} dataKey="value" stroke="#aeaeae" strokeDasharray="5 3" />
+                ]} dataKey="value" stroke="var(--joy-palette-divider)" strokeWidth={2} strokeDasharray="5 3" />
             )}
             <Area
                 type="basis"
                 dataKey={yKey}
-                fill="var(--joy-palette-text-primary)"
-                fillOpacity={0.1}
-                stroke="#aeaeae"
-                strokeWidth={1} />
-            {lastDataPoint && (
+                fill="url(#colorUv)"
+                fillOpacity={1}
+                stroke="var(--graph-stroke)"
+                strokeWidth={2} />
+            {(!adaptiveDomain && typeof lastDataPoint !== 'undefined') && (
                 <Line type="monotone" dot={false} data={[
                     { key: domainGraph(new Date(lastDataPoint.id).getTime()), value: lastDataPoint.value },
                     { key: domainGraph(nowTime.getTime()), value: lastDataPoint.value }
-                ]} dataKey="value" stroke="#aeaeae" strokeDasharray="5 3" />
+                ]} dataKey="value" stroke="var(--joy-palette-divider)" strokeWidth={2} strokeDasharray="5 3" />
             )}
             <Tooltip content={<ChartGenericTooltip domain={domainGraph} />} />
         </ComposedChart>
@@ -194,7 +209,7 @@ function Graph(props: IGraphProps) {
         return <NoDataPlaceholder content={t('NoData')} />
     }
 
-    const isBoolean = data?.length && (data[0].value === 'true' || data[0].value === 'false');
+    const isBoolean = data?.length && (data[0].value?.toLowerCase() === 'true' || data[0].value?.toLowerCase() === 'false');
     if (isBoolean) {
         return <Box p={2}><GraphTimeLine {...props} /></Box>;
     } else return <GraphArea {...props} />

@@ -2,8 +2,7 @@ import React, { Fragment, useMemo, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindTrigger } from 'material-ui-popup-state';
 import { Add, Code, Edit, MoreVertical, UI } from '@signalco/ui-icons';
-import { Loadable, Row, Button, Card, IconButton, List, ListDivider, ListItem, ListItemContent, Menu, MenuItem, TextField, Tooltip, Typography, Box, CopyToClipboardInput, ListTreeItem, Picker, SelectItems, Timeago } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Stack, Loadable, Row, Button, Card, IconButton, List, ListDivider, ListItem, ListItemContent, Menu, MenuItem, TextField, Tooltip, Typography, Box, CopyToClipboardInput, ListTreeItem, Picker, SelectItems, Timeago } from '@signalco/ui';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
 import CodeEditor from '../../code/CodeEditor';
 import useLocale from '../../../src/hooks/useLocale';
@@ -178,11 +177,11 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                                 <ListItem>
                                     <ListItemContent>
                                         <Row spacing={1}>
-                                            <Stack sx={{ width: '30%', maxWidth: '260px' }}>
+                                            <Stack style={{ width: '30%', maxWidth: '260px' }}>
                                                 <Typography noWrap>{c.contactName}</Typography>
                                                 <Typography noWrap level="body3">{c.channelName}</Typography>
                                             </Stack>
-                                            <Stack flexGrow={1}>
+                                            <Stack style={{ flexGrow: 1 }}>
                                                 {isJson(c.valueSerialized)
                                                     ? <DisplayJson json={c.valueSerialized} />
                                                     : <Typography>{c.valueSerialized}</Typography>}

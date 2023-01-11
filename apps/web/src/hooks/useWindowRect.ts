@@ -23,28 +23,28 @@ export function getWindowClientRect(element: typeof window): ClientRect {
         height,
         scrollY: element.scrollY
     };
-  }
+}
 
 export default function useWindowRect(element: typeof window | null = typeof window !== 'undefined' ? window : null) {
-  const [rect, setRect] = useState<ClientRect | undefined>(element ? getWindowClientRect(element) : undefined);
+    const [rect, setRect] = useState<ClientRect | undefined>(element ? getWindowClientRect(element) : undefined);
 
-  useLayoutEffect(() => {
-      if (!element) return;
+    useLayoutEffect(() => {
+        if (!element) return;
 
-      function updateNumberOfColumns() {
-        if (element) {
-          setRect(getWindowClientRect(element));
+        function updateNumberOfColumns() {
+            if (element) {
+                setRect(getWindowClientRect(element));
+            }
         }
-      }
 
-      window.addEventListener('resize', updateNumberOfColumns);
-      window.addEventListener('scroll', updateNumberOfColumns);
-      updateNumberOfColumns();
-      return () => {
-        window.removeEventListener('resize', updateNumberOfColumns);
-        window.removeEventListener('scroll', updateNumberOfColumns);
-      }
-  }, [element]);
+        window.addEventListener('resize', updateNumberOfColumns);
+        window.addEventListener('scroll', updateNumberOfColumns);
+        updateNumberOfColumns();
+        return () => {
+            window.removeEventListener('resize', updateNumberOfColumns);
+            window.removeEventListener('scroll', updateNumberOfColumns);
+        }
+    }, [element]);
 
-  return rect;
+    return rect;
 }

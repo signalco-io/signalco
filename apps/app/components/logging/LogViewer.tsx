@@ -14,10 +14,10 @@ interface ILogViewerLineProps {
 function LogLevelBadge({ level }: { level: string }) {
     let color = 'gray';
     switch (level) {
-        case 'Information': color = 'DodgerBlue'; break;
-        case 'Warning': color = 'DarkOrange'; break;
-        case 'Fatal':
-        case 'Error': color = 'DarkRed'; break;
+    case 'Information': color = 'DodgerBlue'; break;
+    case 'Warning': color = 'DarkOrange'; break;
+    case 'Fatal':
+    case 'Error': color = 'DarkRed'; break;
     }
 
     return <span style={{ backgroundColor: color, padding: '2px', paddingLeft: '6px', paddingRight: '6px', borderRadius: 4, marginRight: '8px', fontSize: '10px', textTransform: 'uppercase' }}>{level.substring(0, 3)}</span>

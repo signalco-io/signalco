@@ -15,11 +15,11 @@ import {
     List,
     ListItem,
     ListItemButton,
+    Stack,
     TextField,
     Typography,
     Box
 } from '@signalco/ui';
-import { Stack } from '@mui/system';
 import InputContactValue from './InputContactValue';
 import EntityIcon from './EntityIcon';
 import useEntity from '../../../src/hooks/signalco/useEntity';
@@ -268,9 +268,9 @@ function EntityIconLabel(props: { entityId: string | undefined, description?: st
     const Icon = EntityIcon(entity);
 
     return (
-        <Stack spacing={2} direction="row" alignItems="center" minWidth={0}>
+        <Row spacing={2} style={{ minWidth: 0 }}>
             {entity && <Icon />}
-            <Stack alignItems="start" minWidth={0}>
+            <Stack alignItems="start" style={{ minWidth: 0 }}>
                 <Typography noWrap maxWidth="100%">
                     <Loadable isLoading={isLoading}>
                         {entityName}
@@ -282,7 +282,7 @@ function EntityIconLabel(props: { entityId: string | undefined, description?: st
                     </Typography>
                 )}
             </Stack>
-        </Stack>
+        </Row>
     );
 }
 
@@ -318,20 +318,20 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
     return (
         <>
             <Button variant="outlined" fullWidth sx={{ minHeight: 56 }} {...bindTrigger(entityMenu)}>
-                <Stack sx={{ width: '100%' }} spacing={2} direction="row" alignItems="center" justifyContent="space-between">
+                <Row style={{ width: '100%' }} spacing={2} justifyContent="space-between">
                     <EntityIconLabel entityId={target?.entityId} description={entityDescription} />
                     <Row spacing={1}>
                         {(target && target.contactName && selectContact) && (
-                            <Stack direction="row" spacing={1} alignItems="end">
+                            <Row spacing={1} alignItems="end">
                                 <Typography level="body2">{target.contactName ?? 'None'}</Typography>
                                 {selectValue && (
                                     <Typography fontWeight="bold">{value?.toString() ?? '-'}</Typography>
                                 )}
-                            </Stack>
+                            </Row>
                         )}
                         <Navigate />
                     </Row>
-                </Stack>
+                </Row>
             </Button>
             <Popper popupState={entityMenu}>
                 <Card sx={{ width: 420, minHeight: 320, maxHeight: 320 }}>

@@ -1,5 +1,5 @@
 export default function throttle (callback: (...rest: any[]) => Promise<any> | void, limit: number) {
-    var wait = false;                  // Initially, we're not waiting
+    let wait = false;                  // Initially, we're not waiting
     return function (...rest: any[]) {               // We return a throttled function
         if (!wait) {                   // If we're not waiting
             wait = true;               // Prevent future invocations

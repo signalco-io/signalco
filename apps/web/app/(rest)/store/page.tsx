@@ -3,12 +3,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
-import { Chip, Card, Typography, Grid, Row, FilterList, SelectItems, Gallery } from '@signalco/ui';
-import { Stack } from '@mui/system';
+import { Row, Chip, Card, Typography, FilterList, SelectItems, Gallery, Stack, amber, green, grey } from '@signalco/ui';
 import contentData from './content.json';
-import green from '../../../src/colors/green';
-import grey from '../../../src/colors/gray';
-import amber from '../../../src/colors/amber';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import SignalcoLogo from '../../../components/icons/SignalcoLogo';
 
@@ -18,35 +14,35 @@ function StoreStockStatusBadge(props: { status: number | undefined }) {
     let text = 'Out of stock';
     let color: string = grey[400];
     switch (props.status) {
-        default:
-        case 0:
-            break;
-        case 1:
-            Icon = Check;
-            opacity = 1;
-            text = 'In stock';
-            color = green[400];
-            break;
-        case 2:
-            Icon = ExternalLink;
-            opacity = 1;
-            text = 'Sold elsewhere';
-            color = grey[400];
-            break;
-        case 3:
-            Icon = Hourglass;
-            opacity = 1;
-            text = 'On backorder';
-            color = amber[400];
-            break;
+    default:
+    case 0:
+        break;
+    case 1:
+        Icon = Check;
+        opacity = 1;
+        text = 'In stock';
+        color = green[400];
+        break;
+    case 2:
+        Icon = ExternalLink;
+        opacity = 1;
+        text = 'Sold elsewhere';
+        color = grey[400];
+        break;
+    case 3:
+        Icon = Hourglass;
+        opacity = 1;
+        text = 'On backorder';
+        color = amber[400];
+        break;
     }
 
     return (
-        <Stack direction="row" justifyItems="center" alignItems="center" sx={{ opacity: opacity }}>
+        <Row justifyItems="center" style={{ opacity: opacity }}>
             <Icon color={color} />
             &nbsp;
             <Typography fontSize="0.8rem" sx={{ color: color }}>{text}</Typography>
-        </Stack>
+        </Row>
     );
 }
 
@@ -59,21 +55,21 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
                 {imageSrc
                     ? <Image src={imageSrc} alt={`${name} image`} width={180} height={180} />
                     : (
-                        <Stack alignItems="center" justifyContent="center" textAlign="center" spacing={2} sx={{ width: 180, height: 180 }}>
+                        <Stack alignItems="center" justifyContent="center" spacing={2} style={{ width: 180, height: 180, textAlign: 'center' }}>
                             <SignalcoLogo height={40} />
                             <Typography level="body2">Image unavailable</Typography>
                         </Stack>
                     )}
-                <Stack spacing={1}>
+                <Stack spacing={2}>
                     <Typography fontWeight="bold" sx={{ opacity: 0.9 }}>{name}</Typography>
                     <Row spacing={2} justifyContent="space-between" alignItems="center">
                         <Typography fontSize="1.2rem" fontWeight="bold">€&nbsp;{price ?? '-'}</Typography>
                         <StoreStockStatusBadge status={stockStatus} />
                     </Row>
                     {features && (
-                        <Grid container>
-                            {features.map(f => <Grid key={f}><Chip size="sm">{f}</Chip></Grid>)}
-                        </Grid>
+                        <Row spacing={1}>
+                            {features.map(f => <Chip size="sm" key={f}>{f}</Chip>)}
+                        </Row>
                     )}
                 </Stack>
             </Stack>

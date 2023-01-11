@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import { Row, Stack, Button, TextField, Typography, Box, Checkbox, SelectItems } from '@signalco/ui';
+import React from 'react';
+import { Stack, Button, SelectItems } from '@signalco/ui';
+import { extractValues } from '@enterwell/react-form-validation';
+import { FormBuilder, type FormItems, useFormField, FormBuilderProvider, FormBuilderComponents } from '@enterwell/react-form-builder';
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
+import GeneralFormProvider from '../../forms/GeneralFormProvider';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
-import { ObjectDictAny } from '../../../src/sharedTypes';
+import { ChildrenProps, ObjectDictAny } from '../../../src/sharedTypes';
+import { asArray } from '../../../src/helpers/ArrayHelpers';
 
 interface IWidgetConfigurationDialogProps {
-    options: IWidgetConfigurationOption<unknown>[],
-    values: ObjectDictAny,
-    setValue: (name: string, value: any) => void,
+    form: FormItems,
     onCancel: () => void,
     onSave: (config: object) => void,
 }
@@ -20,152 +22,111 @@ export interface IWidgetConfigurationProps {
     onConfiguration: (config: object) => void,
 }
 
-const useWidgetConfiguration = (options: IWidgetConfigurationOption<unknown>[], config: object | undefined, onConfiguration: (config: any) => void) => {
-    const [configurationValues, setConfigurationValues] = useState<ObjectDictAny>(config || {});
-
-    const setValue = (name: string, value: any) => {
-        const newValues: ObjectDictAny = {
-            ...configurationValues,
-        };
-        newValues[name] = value;
-        setConfigurationValues(newValues);
-    };
+const useWidgetConfiguration = (
+    options: IWidgetConfigurationOption<unknown>[],
+    config: object | undefined,
+    onConfiguration: (config: any) => void) => {
+    const form: ObjectDictAny = {};
+    for (let index = 0; index < options.length; index++) {
+        const configOption = options[index];
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const field = useFormField(
+            config ? config[configOption.name] : undefined,
+            () => true,
+            configOption.type,
+            configOption.label);
+        form[configOption.name] = field;
+    }
 
     const handleCancelConfiguration = () => {
         onConfiguration(config || {});
     };
 
     const handleSaveConfiguration = () => {
+        const values = extractValues(form);
+
         // Include default values
         options.filter(o => o.default).forEach(defaultOpt => {
-            if (Object.keys(configurationValues).indexOf(defaultOpt.name) < 0) {
-                configurationValues[defaultOpt.name] = defaultOpt.default;
+            if (Object.keys(values).indexOf(defaultOpt.name) < 0) {
+                values[defaultOpt.name] = defaultOpt.default;
             }
         })
 
         // Submit
-        onConfiguration(configurationValues);
+        onConfiguration(values);
     }
 
     return {
         onCancel: handleCancelConfiguration,
         onSave: handleSaveConfiguration,
-        options,
-        values: configurationValues,
-        setValue
+        form
     } as IWidgetConfigurationDialogProps;
 };
 
-function WidgetConfigurationOption(props: { option: IWidgetConfigurationOption<any>, value: any, onChange: (value: any) => void }) {
-    if (props.option.type === 'deviceContactTarget') {
-        // Handle multi-contact target
-        if (props.option.multiple) {
-            const valueItems = typeof props.value === 'undefined' ? [] : (Array.isArray(props.value) ? props.value : [props.value]);
-            const elements = [];
-            for (let i = 0; i <= valueItems.length; i++) {
-                const value = valueItems[i];
-                elements.push(<DisplayEntityTarget selectContact key={`option-${i}`} target={value} onChanged={t => {
-                    const newValues = [...valueItems];
-                    newValues[i] = t;
-                    return props.onChange(newValues.filter(i => typeof i !== 'undefined'));
-                }} />);
-            }
-
-            return <>{elements}</>;
-        }
-
-        // Handle single-contact target
-        return <DisplayEntityTarget selectContact target={props.value} onChanged={t => props.onChange(t)} />
-    } else if (props.option.type === 'deviceContactTargetWithValue') {
-        // Handle multi-contact target
-        if (props.option.multiple) {
-            const valueItems = typeof props.value === 'undefined' ? [] : (Array.isArray(props.value) ? props.value : [props.value]);
-            const elements = [];
-            for (let i = 0; i <= valueItems.length; i++) {
-                const value = valueItems[i];
-
-                elements.push(
-                    <Row spacing={1} key={`option-${i}`}>
-                        <WidgetConfigurationOption
-                            option={{ name: 'contact', label: 'Contact', type: 'deviceContactTarget' }}
-                            value={value}
-                            onChange={(t => {
-                                const newValue = { ...value, ...t };
-                                const newValues = [...valueItems];
-                                newValues[i] = newValue;
-                                return props.onChange(newValues.filter(i => typeof i !== 'undefined'));
-                            })} />
-                        <WidgetConfigurationOption
-                            option={{ name: 'value', label: 'Value', type: 'string' }}
-                            value={value?.valueSerialized}
-                            onChange={(t => {
-                                const newValue = { ...value, valueSerialized: t };
-                                const newValues = [...valueItems];
-                                newValues[i] = newValue;
-                                return props.onChange(newValues.filter(i => typeof i !== 'undefined'));
-                            })} />
-                    </Row>
-                );
-            }
-
-            return <>{elements}</>;
-        }
-
+const widgetConfigurationFormComponents: FormBuilderComponents = {
+    entity: (props) => <DisplayEntityTarget target={props.value} onChanged={t => props.onChange(t, { receiveEvent: false })} />,
+    entityContactMultiple: (props) => {
+        const valueItems = asArray(props.value).filter(p => !!p);
+        valueItems.push(undefined); // Push new item as last
         return (
-            <Row spacing={1}>
-                <WidgetConfigurationOption
-                    option={{ name: 'contact', label: 'Contact', type: 'deviceContactTarget' }}
-                    value={props.value}
-                    onChange={(t => {
-                        const newValue = { ...props.value, ...t };
-                        return props.onChange(newValue);
-                    })} />
-                <WidgetConfigurationOption
-                    option={{ name: 'value', label: 'Value', type: 'string' }}
-                    value={props.value?.valueSerialized}
-                    onChange={(t => {
-                        return props.onChange({ ...props.value, valueSerialized: t });
-                    })} />
-            </Row>
+            <>
+                {valueItems.map((value, i) => (
+                    <DisplayEntityTarget
+                        selectContact
+                        key={`option-${i}`}
+                        target={value}
+                        onChanged={t => {
+                            const newValues = [...valueItems];
+                            newValues[i] = t;
+                            return props.onChange(newValues.filter(i => typeof i !== 'undefined'), { receiveEvent: false });
+                        }} />
+                ))}
+            </>
         );
-    } else if (props.option.type === 'deviceTarget') {
-        return <DisplayEntityTarget target={props.value} onChanged={t => props.onChange(t)} />
-    } else if (props.option.type === 'contactTarget') {
-        return <DisplayEntityTarget target={{ ...props.value, deviceId: props.option.data }} selectContact onChanged={t => props.onChange(t)} />
-    } else if (props.option.type === 'select') {
-        return <SelectItems
-            label={props.option.label}
-            value={props.value}
-            items={props.option.data}
-            placeholder={props.option.label}
-            fullWidth
-            onChange={(item) => item && item.length && props.onChange(item[0])} />
-    } else if (props.option.type === 'yesno') {
+    },
+    entityContactValueMultiple: (props) => {
+        const valueItems = asArray(props.value).filter(p => !!p);
+        valueItems.push(undefined); // Push new item as last
         return (
-            <Checkbox
-                checked={props.value}
-                onChange={(e) => props.onChange(e.target.checked)}
-                label={props.option.label} />
+            <>
+                {valueItems.map((value, i) => (
+                    <DisplayEntityTarget
+                        selectContact
+                        selectValue
+                        key={`option-${i}`}
+                        target={value}
+                        onChanged={t => {
+                            const newValues = [...valueItems];
+                            newValues[i] = t;
+                            return props.onChange(newValues.filter(i => typeof i !== 'undefined'), { receiveEvent: false });
+                        }} />
+                ))}
+            </>
         );
-    } else if (
-        props.option.type === 'number' ||
-        props.option.type === 'string') {
-        return (
-            <TextField
-                value={props.value}
-                onChange={e => props.onChange(e.target.value)}
-                endDecorator={props.option.dataUnit && <span>{props.option.dataUnit}</span>} />
-        );
-    } else if (props.option.type === 'static') {
-        return <Typography>{props.value}</Typography>
-    }
+    },
+    entityContact: (props) => <DisplayEntityTarget selectContact target={props.value} onChanged={t => props.onChange(t, { receiveEvent: false })} />,
+    entityContactValue: (props) => <DisplayEntityTarget selectContact selectValue target={props.value} onChanged={t => props.onChange(t, { receiveEvent: false })} />,
+    selectVisual: (props) => <SelectItems
+        label="Visual"
+        items={[{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }]}
+        placeholder="Select visual"
+        fullWidth
+        value={props.value}
+        onChange={(item) => item && item.length && props.onChange(item[0], { receiveEvent: false })} />
+};
 
-    return <Typography>{`Unknown option type \"${props.option.type}\"`}</Typography>;
+function WidgetConfigurationFormProvider(props: ChildrenProps) {
+    return (
+        <GeneralFormProvider>
+            <FormBuilderProvider components={widgetConfigurationFormComponents}>
+                {props.children}
+            </FormBuilderProvider>
+        </GeneralFormProvider>
+    )
 }
 
 function WidgetConfiguration(props: IWidgetConfigurationProps) {
     const configProps = useWidgetConfiguration(props.options, props.config, props.onConfiguration)
-
     return (
         <>
             {props.isOpen && (
@@ -180,17 +141,9 @@ function WidgetConfiguration(props: IWidgetConfigurationProps) {
                         </>
                     )}>
                     <Stack spacing={2}>
-                        {configProps.options.map(opt => {
-                            return (
-                                <Box key={opt.name}>
-                                    <Typography>{opt.label}{opt.optional && ' (optional)'}</Typography>
-                                    <WidgetConfigurationOption
-                                        option={opt}
-                                        value={configProps.values[opt.name] ?? opt.default}
-                                        onChange={(value) => configProps.setValue(opt.name, value)} />
-                                </Box>
-                            );
-                        })}
+                        <WidgetConfigurationFormProvider>
+                            <FormBuilder form={configProps.form} onSubmit={configProps.onSave} />
+                        </WidgetConfigurationFormProvider>
                     </Stack>
                 </ConfigurationDialog>
             )}

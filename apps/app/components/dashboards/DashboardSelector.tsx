@@ -2,7 +2,7 @@ import React, { Suspense, useEffect } from 'react';
 import Link from 'next/link';
 import { bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import { Select } from '@signalco/ui-icons';
-import { Popper, Row, Button, Box } from '@signalco/ui';
+import { Popper, Row, Button } from '@signalco/ui';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
 import useHashParam from '../../src/hooks/useHashParam';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
