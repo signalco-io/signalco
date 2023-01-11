@@ -1,7 +1,7 @@
 import type { StoryObj } from '@storybook/react';
 import { Alert } from '@signalco/ui';
 
-export default { component: Alert, tags: ['docsPage'] };
+export default { component: Alert, tags: ['autodocs'] };
 
 type Story = StoryObj<typeof Alert>;
 
