@@ -4,6 +4,7 @@ import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultTargetWithValueMultiple, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import useAudioOn from '../../../src/hooks/sounds/useAudioOn';
 import IContact from '../../../src/contacts/IContact';
 
 type ConfigProps = {
@@ -25,12 +26,14 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
 
 export default function WidgetButton(props: WidgetSharedProps<ConfigProps>) {
     const { config } = props;
+    const audioClick = useAudioOn();
 
     const width = config?.columns ?? 1;
     const label = config?.label;
     const icon = config?.icon ?? 'adjust';
 
     const handleActionRequest = () => {
+        audioClick.play();
         executeStateActionsAsync((config?.target as StateAction[]).map(d => ({
             entityId: d.entityId,
             channelName: d.channelName,

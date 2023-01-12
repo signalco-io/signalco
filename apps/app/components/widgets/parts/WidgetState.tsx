@@ -6,6 +6,8 @@ import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widge
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
+import useAudioOn from '../../../src/hooks/sounds/useAudioOn';
+import useAudioOff from '../../../src/hooks/sounds/useAudioOff';
 import useEntity from '../../../src/hooks/signalco/useEntity';
 import useContacts from '../../../src/hooks/signalco/useContacts';
 import { entityAsync } from '../../../src/entity/EntityRepository';
@@ -88,6 +90,8 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
     const onEntityIds = useMemo(() => onContactPointers?.map(i => i.entityId), [onContactPointers]);
     const onEntity = useEntity(onEntityIds && onEntityIds[0]);
     const onContacts = useContacts(onContactPointers);
+    const audioOn = useAudioOn();
+    const audioOff = useAudioOff();
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -123,6 +127,8 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
             showNotification('Can\'t execute action, widget is not loaded yet.', 'warning');
             return;
         }
+
+        (state ? audioOn : audioOff).play();
 
         const targets = state ? config?.off : config?.on;
         executeStateActionsAsync((targets as IContact[]).map(d => ({

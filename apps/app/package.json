@@ -43,7 +43,7 @@
         "cobe": "0.6.3",
         "color": "4.2.3",
         "compare-versions": "5.0.3",
-        "d3": "7.8.0",
+        "d3": "7.8.1",
         "date-fns": "2.29.3",
         "material-ui-popup-state": "5.0.4",
         "monaco-editor": "0.34.1",
