@@ -30,7 +30,7 @@
         "esbuild": "0.16.17",
         "prop-types": "15.8.1",
         "rimraf": "3.0.2",
-        "rollup": "3.9.1",
+        "rollup": "3.10.0",
         "rollup-plugin-esbuild": "5.0.0",
         "rollup-plugin-summary": "2.0.0",
         "typescript": "4.9.4"
