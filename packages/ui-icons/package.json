@@ -15,35 +15,23 @@
         "dist"
     ],
     "scripts": {
-        "build": "npm run clean && concurrently \"npm run build:bundle\" \"npm run build:types\"",
-        "build:bundle": "rollup -c",
-        "build:types": "tsc --emitDeclarationOnly --declaration --project tsconfig.build.json",
-        "dev": "concurrently --kill-others \"npm run dev:bundle\" \"npm run dev:types\"",
-        "dev:bundle": "rollup --watch -c",
-        "dev:types": "tsc --watch --emitDeclarationOnly --declaration --project tsconfig.build.json",
+        "build": "tsup src/index.ts --dts --format esm --clean --minify",
+        "dev": "tsup src/index.ts --dts --format esm --clean --watch",
         "clean": "rimraf dist"
     },
     "devDependencies": {
-        "@rollup/plugin-commonjs": "24.0.0",
-        "@rollup/plugin-node-resolve": "15.0.1",
-        "@signalco/tsconfig": "*",
-        "concurrently": "7.6.0",
-        "esbuild": "0.16.17",
+        "@signalco/tsconfig": "workspace:*",
         "prop-types": "15.8.1",
         "rimraf": "3.0.2",
-        "rollup": "3.10.0",
-        "rollup-plugin-esbuild": "5.0.0",
-        "rollup-plugin-peer-deps-external": "2.2.4",
-        "rollup-plugin-summary": "2.0.0",
-        "typescript": "4.9.4"
-    },
-    "dependencies": {
+        "tsup": "6.5.0",
+        "typescript": "4.9.4",
         "lucide-react": "0.104.1",
         "react": "18.2.0",
         "react-dom": "18.2.0"
     },
+    "dependencies": {
+    },
     "peerDependencies": {
-        "lucide-react": "0.104.1",
         "react": "18.2.0",
         "react-dom": "18.2.0"
     }
