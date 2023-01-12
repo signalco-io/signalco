@@ -41,6 +41,8 @@ Please see our [contributing.md](/CONTRIBUTING.md).
 
 More info on development can be found in [Development](/DEVELOPMENT.md) document.
 
+![Alt](https://repobeats.axiom.co/api/embed/d033729632144af008d06e42940bb9c689fb339a.svg "Repobeats analytics image")
+
 ## Related
 
 - [🌐 Website](https://www.signalco.io)
