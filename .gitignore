@@ -176,7 +176,6 @@ dist
 
 ### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
@@ -220,5 +219,3 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/node,turbo,macos,windows,visualstudiocode
-apps/app/.vscode/settings.json
-apps/web/.vscode/settings.json
