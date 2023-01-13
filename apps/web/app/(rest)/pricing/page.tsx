@@ -1,6 +1,6 @@
 'use client';
 
-import { MuiStack } from '@signalco/ui';
+import { Row, Stack } from '@signalco/ui';
 import { KnownPages } from '../../../src/knownPages';
 import PricingCard, { PricingOption } from '../../../components/pages/pricing/PricingCard';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
@@ -52,13 +52,13 @@ const pricingFaq = [
 
 export default function PricingPage() {
     return (
-        <MuiStack spacing={{ xs: 4, md: 12 }}>
+        <Stack spacing={4}>
             <PageCenterHeader header={'Pricing'} subHeader={'Find the plan for you'} />
-            <MuiStack direction={{ xs: 'column', md: 'row' }} spacing={4} justifyContent="center">
+            <Row spacing={4} alignItems="stretch" justifyContent="center">
                 {pricingOptions.map((po, i) => <PricingCard key={po.id} option={po} variant={pricingCardVariantMap[i]} />)}
-            </MuiStack>
+            </Row>
             <FaqSection faq={pricingFaq} />
             <CtaSection />
-        </MuiStack >
+        </Stack>
     );
 }
