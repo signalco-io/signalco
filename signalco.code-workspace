@@ -5,16 +5,32 @@
 			"path": "."
 		},
 		{
-			"name": "🚀 web",
-			"path": "apps/web"
-		},
-		{
 			"name": "🚀 app",
 			"path": "apps/app"
 		},
 		{
-			"name": "🚀 ui-docs",
+			"name": "🚀 @signalco/ui-docs",
 			"path": "apps/ui-docs"
+		},
+		{
+			"name": "🚀 web",
+			"path": "apps/web"
+		},
+		{
+			"name": "🚀 brandgrab",
+			"path": "apps/brandgrab"
+		},
+		{
+			"name": "📦 @signalco/data",
+			"path": "packages/data"
+		},
+		{
+			"name": "📦 @signalco/eslint-config-signalco",
+			"path": "packages/eslint-config-signalco"
+		},
+		{
+			"name": "📦 @signalco/tsconfig",
+			"path": "packages/tsconfig"
 		},
 		{
 			"name": "📦 @signalco/ui",
@@ -23,19 +39,7 @@
 		{
 			"name": "📦 @signalco/ui-icons",
 			"path": "packages/ui-icons"
-		},
-		{
-			"name": "📦 @signalco/data",
-			"path": "packages/data"
-		},
-		{
-			"name": "⛏️ @signalco/tsconfig",
-			"path": "packages/tsconfig"
-		},
-		{
-			"name": "⛏️ @signalco/eslint-config-signalco",
-			"path": "packages/eslint-config-signalco"
-		},
+		}
 	],
 	"settings": {
 		"liveServer.settings.multiRootWorkspaceName": "✨ signalco-monorepo"
