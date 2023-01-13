@@ -13,6 +13,9 @@ export * from './Checkbox';
 export { default as Chip } from './Chip';
 export * from './Chip';
 
+export { default as Collapse }from './Collapse';
+export * from './Collapse';
+
 export { default as Container }from './Container';
 export * from './Container';
 
