@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Check, ExpandDown } from '@signalco/ui-icons';
+import { Check, Close, ExpandDown } from '@signalco/ui-icons';
 import SelectItems from '../SelectItems';
 import Checkbox from '../Checkbox';
 import { Typography, Button } from '@mui/joy';
@@ -62,6 +62,8 @@ export default function FilterList(props: FilterListProps) {
     const handleToggleShowMore = () => setIsShowMore(true);
     const shouldTruncate = typeof truncate !== 'undefined' && items.length > truncate;
 
+    const handleClearSelection = () => setChecked([]);
+
     return (
         <Stack>
             <Box sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -101,10 +103,11 @@ export default function FilterList(props: FilterListProps) {
                     ))}
                 </Stack>
                 {(!isShowMore && shouldTruncate) && (
-                    <div>
-                        <Button startDecorator={<ExpandDown />} onClick={handleToggleShowMore}>Show all</Button>
-                    </div>
+                    <Button fullWidth variant="plain" startDecorator={<ExpandDown />} onClick={handleToggleShowMore}>Show all</Button>
                 )}
+                {(checked.length > 1 && (
+                    <Button fullWidth startDecorator={<Close />} variant="plain" size="sm" onClick={handleClearSelection}>Clear selection</Button>
+                ))}
             </Box>
         </Stack>
     );
