@@ -104,13 +104,13 @@ export default function FilterList(props: FilterListProps) {
                 <Typography level="h5" gutterBottom>{header}</Typography>
                 <Stack>
                     {items.slice(0, truncate).map(item => (
-                        <FilterItem item={item} checked={checked} onToggle={handleToggle} />
+                        <FilterItem key={item.id} item={item} checked={checked} onToggle={handleToggle} />
                     ))}
                 </Stack>
                 <Collapse appear={isShowMore}>
                     <Stack>
                         {items.slice(truncate).map(item => (
-                            <FilterItem item={item} checked={checked} onToggle={handleToggle} />
+                            <FilterItem key={item.id} item={item} checked={checked} onToggle={handleToggle} />
                         ))}
                     </Stack>
                 </Collapse>
