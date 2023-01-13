@@ -172,6 +172,82 @@ importers:
       typescript: 4.9.4
       webpack: 5.75.0
 
+  apps/brandgrab:
+    specifiers:
+      '@axe-core/playwright': 4.5.2
+      '@babel/core': 7.20.12
+      '@hcaptcha/react-hcaptcha': 1.4.4
+      '@next/bundle-analyzer': 13.1.2
+      '@next/env': 13.1.2
+      '@playwright/test': 1.29.2
+      '@signalco/eslint-config-signalco': workspace:*
+      '@signalco/tsconfig': workspace:*
+      '@signalco/ui': workspace:*
+      '@signalco/ui-icons': workspace:*
+      '@types/color': 3.0.3
+      '@types/node': 18.11.18
+      '@types/react': 18.0.26
+      '@types/react-dom': 18.0.10
+      '@types/react-motion': 0.0.33
+      babel-loader: 9.1.2
+      classix: 2.1.18
+      cross-env: 7.0.3
+      eslint: 8.31.0
+      next: 13.1.2
+      next-secure-headers: 2.2.0
+      next-sitemap: 3.1.45
+      playwright: 1.29.2
+      postcss: 8.4.21
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-cool-inview: 3.0.1
+      react-dom: 18.2.0
+      react-transition-group: 4.4.5
+      rimraf: 4.0.4
+      sass: 1.57.1
+      sharp: 0.31.3
+      terser: 5.16.1
+      typescript: 4.9.4
+      webpack: 5.75.0
+    dependencies:
+      '@hcaptcha/react-hcaptcha': 1.4.4_biqbaboplfbrettd7655fr4n2y
+      '@next/env': 13.1.2
+      '@signalco/ui': link:../../packages/ui
+      '@signalco/ui-icons': link:../../packages/ui-icons
+      classix: 2.1.18
+      next: 13.1.2_23e7ztf2chqi3ri6onem3l5mii
+      next-secure-headers: 2.2.0
+      postcss: 8.4.21
+      react: 18.2.0
+      react-cool-inview: 3.0.1_react@18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
+      sharp: 0.31.3
+    optionalDependencies:
+      terser: 5.16.1
+    devDependencies:
+      '@axe-core/playwright': 4.5.2_playwright@1.29.2
+      '@babel/core': 7.20.12
+      '@next/bundle-analyzer': 13.1.2
+      '@playwright/test': 1.29.2
+      '@signalco/eslint-config-signalco': link:../../packages/eslint-config-signalco
+      '@signalco/tsconfig': link:../../packages/tsconfig
+      '@types/color': 3.0.3
+      '@types/node': 18.11.18
+      '@types/react': 18.0.26
+      '@types/react-dom': 18.0.10
+      '@types/react-motion': 0.0.33
+      babel-loader: 9.1.2_la66t7xldg4uecmyawueag5wkm
+      cross-env: 7.0.3
+      eslint: 8.31.0
+      next-sitemap: 3.1.45_qzmmcn6byxg2j2hy7c3csxpwzm
+      playwright: 1.29.2
+      prop-types: 15.8.1
+      rimraf: 4.0.4
+      sass: 1.57.1
+      typescript: 4.9.4
+      webpack: 5.75.0
+
   apps/ui-docs:
     specifiers:
       '@babel/core': 7.20.12
@@ -1688,13 +1764,6 @@ packages:
       regenerator-runtime: 0.13.11
     dev: false
 
-  /@babel/runtime/7.20.1:
-    resolution: {integrity: sha512-mrzLkl6U9YLF8qpqI7TB82PESyEGjm/0Ly91jG575eVxMMlb8fYfOXFZIJ8XfLrJZQbm7dlKry2bJmXBUEkdFg==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      regenerator-runtime: 0.13.11
-    dev: false
-
   /@babel/runtime/7.20.6:
     resolution: {integrity: sha512-Q+8MqP7TiHMWzSfwiJwXCjyf4GYA4Dgw3emg/7xmwsdLJOZUp+nMqcOwOzzYheuM1rhDu8FSj2l0aoMygEuXuA==}
     engines: {node: '>=6.9.0'}
@@ -2424,7 +2493,7 @@ packages:
       react: '>= 16.3.0'
       react-dom: '>= 16.3.0'
     dependencies:
-      '@babel/runtime': 7.20.6
+      '@babel/runtime': 7.20.7
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -11865,7 +11934,7 @@ packages:
       react: '>=16.6.0'
       react-dom: '>=16.6.0'
     dependencies:
-      '@babel/runtime': 7.20.1
+      '@babel/runtime': 7.20.7
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
