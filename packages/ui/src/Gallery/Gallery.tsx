@@ -1,8 +1,9 @@
 import React from 'react';
-import { Stack } from '@mui/system';
+import { Stack as MuiStack } from '@mui/system';
 import GalleryGridFilter from './GalleryGridFilter';
 import GalleryGrid from './GalleryGrid';
 import GalleryFilters from './GalleryFilters';
+import Stack from '../Stack';
 
 export interface GalleryProps {
     items: {
@@ -19,12 +20,12 @@ export default function Gallery(props: GalleryProps) {
     const { items, itemComponent, filters, gridHeader, gridFilters } = props;
 
     return (
-        <Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
+        <MuiStack direction={{ xs: 'column', md: 'row' }} spacing={4}>
             {filters && <GalleryFilters filters={filters()} />}
-            <Stack spacing={{ xs: 2, md: 4 }} sx={{ width: '100%' }}>
+            <Stack spacing={2} style={{ width: '100%' }}>
                 <GalleryGridFilter header={gridHeader} filters={gridFilters} />
                 <GalleryGrid items={items} itemComponent={itemComponent} />
             </Stack>
-        </Stack>
+        </MuiStack>
     );
 }
