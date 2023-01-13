@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { ChildrenProps } from '../sharedTypes';
 
 export interface CollapseProps extends ChildrenProps {
@@ -5,14 +6,26 @@ export interface CollapseProps extends ChildrenProps {
     duration?: number,
 }
 
-export default function Collapse(props: CollapseProps) {
-    const { children, appear } = props;
+export default function Collapse({ children, appear, duration = 200 }: CollapseProps) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [targetHeight, setHeight] = useState<number | undefined>(0);
+
+    useEffect(() => {
+        if (containerRef.current) {
+            setHeight(appear
+                ? containerRef.current.scrollHeight
+                : 0);
+        }
+    }, [appear]);
 
     return (
-        <div style={{
-            height: appear ? 'auto' : 0, 
-            overflow: 'hidden'
-        }}>
+        <div
+            ref={containerRef}
+            style={{
+                height: `${targetHeight}px`,
+                transition: `height ${duration}ms ease-out`,
+                overflow: 'hidden'
+            }}>
             {children}
         </div>
     )

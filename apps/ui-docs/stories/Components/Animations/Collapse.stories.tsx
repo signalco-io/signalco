@@ -9,7 +9,7 @@ const Template: Story = {
         return (
             <Card>
                 <Stack>
-                    <Collapse appear={props.appear} duration={props.duration} collapsedWhenHidden={props.collapsedWhenHidden}>
+                    <Collapse appear={props.appear} duration={props.duration}>
                         <div style={{ width: 50, height: 50, backgroundColor: 'gray' }}></div>
                     </Collapse>
                     <p>Quis et quis ex incididunt voluptate officia.</p>
@@ -19,9 +19,12 @@ const Template: Story = {
     },
     args: {
         appear: true,
-        duration: 500,
-        collapsedWhenHidden: false
+        duration: 200
     }
 };
 
 export const Default: Story = { ...Template };
+
+export const AppearTrueOnMount: Story = { ...Template, args: { appear: true } };
+
+export const AppearFalseOnMount: Story = { ...Template, args: { appear: false } };
