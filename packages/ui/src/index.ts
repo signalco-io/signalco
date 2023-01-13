@@ -40,6 +40,9 @@ export * from './Gallery';
 export { default as GentleSlide } from './GentleSlide';
 export * from './GentleSlide';
 
+export { default as Grow } from './Grow';
+export * from './Grow';
+
 export { default as DisableButton } from './DisableButton';
 export * from './DisableButton';
 
