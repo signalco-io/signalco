@@ -26,7 +26,7 @@
         "css-loader": "6.7.3",
         "postcss": "8.4.21",
         "postcss-loader": "7.0.2",
-        "rimraf": "3.0.2",
+        "rimraf": "4.0.4",
         "sass": "1.57.1",
         "sass-loader": "13.2.0",
         "storybook": "7.0.0-beta.25",
@@ -38,7 +38,7 @@
     "dependencies": {
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
-        "next": "13.1.1",
+        "next": "13.1.2",
         "react": "18.2.0",
         "react-dom": "18.2.0"
     }
