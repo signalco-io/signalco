@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { ExpandDown } from '@signalco/ui-icons';
+import { Check, ExpandDown } from '@signalco/ui-icons';
 import SelectItems from '../SelectItems';
 import Checkbox from '../Checkbox';
 import { Typography, Button } from '@mui/joy';
 import { Box } from '@mui/system';
 import Row from '../Row';
 import Stack from '../Stack';
+import Grow from '../Grow';
 
 export interface FilterListItem {
     id: string;
@@ -86,8 +87,15 @@ export default function FilterList(props: FilterListProps) {
                     {items.slice(0, isShowMore ? items.length : truncate).map(item => (
                         <Checkbox
                             key={item.id}
-                            sx={{ p: 2 }}
-                            label={item.label} checked={checked.indexOf(item.id) >= 0}
+                            label={(
+                                <Row style={{ padding: 12 }}>
+                                    <Typography sx={{ flexGrow: 1 }}>{item.label}</Typography>
+                                    <Grow appear={checked.indexOf(item.id) >= 0}>
+                                        <Check />
+                                    </Grow>
+                                </Row>
+                            )}
+                            checked={checked.indexOf(item.id) >= 0}
                             onChange={() => handleToggle(item.id)}
                             disableIcon />
                     ))}
