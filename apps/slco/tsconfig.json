@@ -1,0 +1,21 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "@signalco/tsconfig/web.json",
+    "compilerOptions": {
+        "outDir": "dist",
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ]
+    },
+    "include": [
+        "src",
+        "app",
+        "components",
+        "pages",
+        "next-env.d.ts",
+        "@types",
+        ".next/types/**/*.ts"
+    ]
+}
