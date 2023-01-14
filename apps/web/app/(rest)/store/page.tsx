@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
 import { Row, Chip, Card, Typography, FilterList, SelectItems, Gallery, Stack, amber, green, grey } from '@signalco/ui';
-import contentData from './content.json';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import SignalcoLogo from '../../../components/icons/SignalcoLogo';
+import contentData from './content.json';
 
 function StoreStockStatusBadge(props: { status: number | undefined }) {
     let Icon = Close;

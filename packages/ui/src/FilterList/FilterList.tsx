@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import { ExpandDown } from '@signalco/ui-icons';
+import { Check, Close, ExpandDown } from '@signalco/ui-icons';
 import SelectItems from '../SelectItems';
 import Checkbox from '../Checkbox';
 import { Typography, Button } from '@mui/joy';
 import { Box } from '@mui/system';
 import Row from '../Row';
 import Stack from '../Stack';
+import Grow from '../Grow';
+import Collapse from '../Collapse';
+import Fade from '../Fade';
 
 export interface FilterListItem {
     id: string;
@@ -20,6 +23,24 @@ export interface FilterListProps {
     multiple?: boolean;
     onSelected?: (selectedId: string | undefined) => void;
     onSelectedMultiple?: (selectedIds: string[]) => void;
+}
+
+function FilterItem({ item, checked, onToggle }: { item: FilterListItem, checked: string[], onToggle: (id: string) => void }) {
+    return (
+        <Checkbox
+            key={item.id}
+            label={(
+                <Row style={{ padding: 12 }}>
+                    <Typography sx={{ flexGrow: 1 }}>{item.label}</Typography>
+                    <Grow appear={checked.indexOf(item.id) >= 0}>
+                        <Check />
+                    </Grow>
+                </Row>
+            )}
+            checked={checked.indexOf(item.id) >= 0}
+            onChange={() => onToggle(item.id)}
+            disableIcon />
+    );
 }
 
 export default function FilterList(props: FilterListProps) {
@@ -61,6 +82,8 @@ export default function FilterList(props: FilterListProps) {
     const handleToggleShowMore = () => setIsShowMore(true);
     const shouldTruncate = typeof truncate !== 'undefined' && items.length > truncate;
 
+    const handleClearSelection = () => setChecked([]);
+
     return (
         <Stack>
             <Box sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -78,25 +101,25 @@ export default function FilterList(props: FilterListProps) {
                     }} />
             </Box>
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-                <Row spacing={1}>
-                    <Typography gutterBottom level="h5">{header}</Typography>
-                    {(!isShowMore && shouldTruncate) && <Typography level="body2">({items.length - truncate} more)</Typography>}
-                </Row>
+                <Typography level="h5" gutterBottom>{header}</Typography>
                 <Stack>
-                    {items.slice(0, isShowMore ? items.length : truncate).map(item => (
-                        <Checkbox
-                            key={item.id}
-                            sx={{ p: 2 }}
-                            label={item.label} checked={checked.indexOf(item.id) >= 0}
-                            onChange={() => handleToggle(item.id)}
-                            disableIcon />
+                    {items.slice(0, truncate).map(item => (
+                        <FilterItem key={item.id} item={item} checked={checked} onToggle={handleToggle} />
                     ))}
                 </Stack>
-                {(!isShowMore && shouldTruncate) && (
-                    <div>
-                        <Button startDecorator={<ExpandDown />} onClick={handleToggleShowMore}>Show all</Button>
-                    </div>
-                )}
+                <Collapse appear={isShowMore}>
+                    <Stack>
+                        {items.slice(truncate).map(item => (
+                            <FilterItem key={item.id} item={item} checked={checked} onToggle={handleToggle} />
+                        ))}
+                    </Stack>
+                </Collapse>
+                <Fade appear={!isShowMore && shouldTruncate}>
+                    <Button fullWidth variant="plain" startDecorator={<ExpandDown />} onClick={handleToggleShowMore}>Show all {!!truncate && `(${items.length - truncate} more)`}</Button>
+                </Fade>
+                {(checked.length > 1 && (
+                    <Button fullWidth startDecorator={<Close />} variant="plain" size="sm" onClick={handleClearSelection}>Clear selection</Button>
+                ))}
             </Box>
         </Stack>
     );

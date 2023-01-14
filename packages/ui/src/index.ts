@@ -13,6 +13,9 @@ export * from './Checkbox';
 export { default as Chip } from './Chip';
 export * from './Chip';
 
+export { default as Collapse }from './Collapse';
+export * from './Collapse';
+
 export { default as Container }from './Container';
 export * from './Container';
 
@@ -39,6 +42,9 @@ export * from './Gallery';
 
 export { default as GentleSlide } from './GentleSlide';
 export * from './GentleSlide';
+
+export { default as Grow } from './Grow';
+export * from './Grow';
 
 export { default as DisableButton } from './DisableButton';
 export * from './DisableButton';

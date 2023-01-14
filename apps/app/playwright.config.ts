@@ -2,7 +2,7 @@ import path from 'path'
 import type { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from '@playwright/test';
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 const baseURL = `http://127.0.0.1:${PORT}`
 
 const config: PlaywrightTestConfig = {

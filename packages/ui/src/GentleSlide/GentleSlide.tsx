@@ -21,7 +21,7 @@ export default function GentleSlide(props: GentleSlideProps) {
 
     return (
         <div style={{
-            transition: `opacity ${duration}ms  ease-out, transform ${duration}ms ease-out`,
+            transition: `opacity ${duration}ms ease-out, transform ${duration}ms ease-out`,
             transitionDelay: `${appearDelayPerIndex * (index ?? 0)}ms`,
             opacity: appear ? 1 : 0,
             transform: appear ? 'none' : translate,
