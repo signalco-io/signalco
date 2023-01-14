@@ -1,10 +1,14 @@
 'use client';
 
 import React, { Suspense } from 'react';
-import { NavigatingButton, Container, Button, Row, Link } from '@signalco/ui';
-import { KnownPages } from '../src/knownPages';
+import { Container, Button, Row, Link } from '@signalco/ui';
 
-const navLinks = [
+type NavLinkItem = {
+    href: string,
+    text: string
+};
+
+const navLinks: NavLinkItem[] = [
     // { href: '/features', text: 'Features' },
     // { href: KnownPages.Pricing, text: 'Pricing' }
 ];
