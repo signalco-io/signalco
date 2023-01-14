@@ -2,27 +2,10 @@
 
 import { useInView } from 'react-cool-inview';
 import React, { type CSSProperties } from 'react';
-import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { Stack, Container, Button, Divider, Typography, Grid, Box, Fade, GentleSlide, MuiStack } from '@signalco/ui';
+import { Stack, Container, Divider, Typography, Grid, Box, Fade, GentleSlide, MuiStack } from '@signalco/ui';
 
 const Newsletter = dynamic(() => import('../pages/landing/Newsletter'));
-
-function FeatureDescription(props: { header: string, content: string | React.ReactElement, link?: string, linkText?: string }) {
-    return (
-        <Stack spacing={2}>
-            <Typography level="h5" component="h3">{props.header}</Typography>
-            <Typography textColor="neutral.400">{props.content}</Typography>
-            <div>
-                {props.link && (
-                    <Link passHref href={props.link}>
-                        <Button variant="outlined">{props.linkText ?? 'Read more'}</Button>
-                    </Link>
-                )}
-            </div>
-        </Stack>
-    );
-}
 
 function StepContent(props: {
   header: string;

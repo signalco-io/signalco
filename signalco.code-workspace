@@ -9,16 +9,16 @@
 			"path": "apps/app"
 		},
 		{
+			"name": "🚀 brandgrab",
+			"path": "apps/brandgrab"
+		},
+		{
 			"name": "🚀 @signalco/ui-docs",
 			"path": "apps/ui-docs"
 		},
 		{
 			"name": "🚀 web",
 			"path": "apps/web"
-		},
-		{
-			"name": "🚀 brandgrab",
-			"path": "apps/brandgrab"
 		},
 		{
 			"name": "📦 @signalco/data",

@@ -13,7 +13,7 @@ const nextConfig = {
     images: {
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
-        domains: ['www.signalco.io']
+        domains: ['www.brandgrab.io']
     },
     eslint: {
         dirs: ['worker', 'tools', 'src', 'app', 'locales', 'components']
