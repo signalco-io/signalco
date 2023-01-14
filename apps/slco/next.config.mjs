@@ -13,7 +13,7 @@ const nextConfig = {
     images: {
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
-        domains: ['www.brandgrab.io']
+        domains: ['slco.io']
     },
     eslint: {
         dirs: ['worker', 'tools', 'src', 'app', 'locales', 'components']
@@ -65,7 +65,7 @@ const nextConfig = {
                             // Finace - Stock widget
                             'https://api.polygon.io'
                         ],
-                        baseURI: ['https://www.brandgrab.io'],
+                        baseURI: ['https://slco.io'],
                         'frame-ancestors': '\'none\''
                     }
                 },
