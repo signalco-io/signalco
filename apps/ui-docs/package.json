@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "build": "tsc && storybook build",
-        "dev": "storybook dev -p 6007",
+        "dev": "storybook dev -p 6007 --no-open",
         "clean": "rimraf node_modules/.cache/storybook"
     },
     "engines": {

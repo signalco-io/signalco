@@ -1,0 +1,35 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.launcher {
+  display: flex;
+  gap: 1em;
+}
+
+.launcher-card > a {
+  border-radius: 1em;
+  border: 1px solid #333;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+}
+
+.launcher-card > a:hover {
+  background-color: #121212;
+  border-color: #666;
+}
+
+.launcher-card > a > .info {
+  display: flex;
+  flex-direction: column;
+}
+
+.launcher-card > a > .info > small {
+  opacity: .6;
+}

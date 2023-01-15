@@ -13,6 +13,10 @@
 			"path": "apps/brandgrab"
 		},
 		{
+			"name": "🚀 development",
+			"path": "apps/development"
+		},
+		{
 			"name": "🚀 slco",
 			"path": "apps/slco"
 		},
