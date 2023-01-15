@@ -54,7 +54,7 @@
         "openapi-types": "12.1.0",
         "playwright": "1.29.2",
         "prop-types": "15.8.1",
-        "rimraf": "4.0.4",
+        "rimraf": "4.0.5",
         "sass": "1.57.1",
         "typescript": "4.9.4",
         "webpack": "5.75.0"
