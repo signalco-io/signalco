@@ -30,6 +30,7 @@
                 "postcss",
                 "mcr.microsoft.com/playwright",
                 "rollup",
+                "rimraf",
                 "sass",
                 "sharp"
             ]
