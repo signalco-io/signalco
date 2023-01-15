@@ -80,7 +80,7 @@ importers:
       react-toastify: 9.1.1
       react-transition-group: 4.4.5
       recharts: 2.3.2
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       sass: 1.57.1
       sass-loader: 13.2.0
       sharp: 0.31.3
@@ -166,7 +166,7 @@ importers:
       playwright: 1.29.2
       prop-types: 15.8.1
       react-is: 18.2.0
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       sass: 1.57.1
       sass-loader: 13.2.0_sass@1.57.1+webpack@5.75.0
       typescript: 4.9.4
@@ -203,7 +203,7 @@ importers:
       react-cool-inview: 3.0.1
       react-dom: 18.2.0
       react-transition-group: 4.4.5
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       sass: 1.57.1
       sharp: 0.31.3
       terser: 5.16.1
@@ -243,7 +243,7 @@ importers:
       next-sitemap: 3.1.45_qzmmcn6byxg2j2hy7c3csxpwzm
       playwright: 1.29.2
       prop-types: 15.8.1
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       sass: 1.57.1
       typescript: 4.9.4
       webpack: 5.75.0
@@ -279,7 +279,7 @@ importers:
       react-cool-inview: 3.0.1
       react-dom: 18.2.0
       react-transition-group: 4.4.5
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       sass: 1.57.1
       sharp: 0.31.3
       terser: 5.16.1
@@ -319,7 +319,7 @@ importers:
       next-sitemap: 3.1.45_qzmmcn6byxg2j2hy7c3csxpwzm
       playwright: 1.29.2
       prop-types: 15.8.1
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       sass: 1.57.1
       typescript: 4.9.4
       webpack: 5.75.0
@@ -345,7 +345,7 @@ importers:
       postcss-loader: 7.0.2
       react: 18.2.0
       react-dom: 18.2.0
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       sass: 1.57.1
       sass-loader: 13.2.0
       storybook: 7.0.0-beta.27
@@ -374,7 +374,7 @@ importers:
       css-loader: 6.7.3_webpack@5.75.0
       postcss: 8.4.21
       postcss-loader: 7.0.2_6jdsrmfenkuhhw3gx4zvjlznce
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       sass: 1.57.1
       sass-loader: 13.2.0_sass@1.57.1+webpack@5.75.0
       storybook: 7.0.0-beta.27
@@ -420,7 +420,7 @@ importers:
       react-cool-inview: 3.0.1
       react-dom: 18.2.0
       react-transition-group: 4.4.5
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       sass: 1.57.1
       sharp: 0.31.3
       terser: 5.16.1
@@ -466,7 +466,7 @@ importers:
       openapi-types: 12.1.0
       playwright: 1.29.2
       prop-types: 15.8.1
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       sass: 1.57.1
       typescript: 4.9.4
       webpack: 5.75.0
@@ -477,7 +477,7 @@ importers:
       concurrently: 7.6.0
       esbuild: 0.17.0
       prop-types: 15.8.1
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       rollup: 3.10.0
       rollup-plugin-esbuild: 5.0.0
       rollup-plugin-summary: 2.0.0
@@ -488,7 +488,7 @@ importers:
       concurrently: 7.6.0
       esbuild: 0.17.0
       prop-types: 15.8.1
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       rollup: 3.10.0
       rollup-plugin-esbuild: 5.0.0_spdxjolkq2ojxuvyeotxhudecu
       rollup-plugin-summary: 2.0.0_rollup@3.10.0
@@ -549,7 +549,7 @@ importers:
       react-is: 18.2.0
       react-timeago: 7.1.0
       resolve-url-loader: 5.0.0
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       rollup: 3.10.0
       rollup-plugin-esbuild: 5.0.0
       rollup-plugin-peer-deps-external: 2.2.4
@@ -588,7 +588,7 @@ importers:
       postcss: 8.4.21
       postcss-preset-env: 7.8.3_postcss@8.4.21
       resolve-url-loader: 5.0.0
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       rollup: 3.10.0
       rollup-plugin-esbuild: 5.0.0_spdxjolkq2ojxuvyeotxhudecu
       rollup-plugin-peer-deps-external: 2.2.4_rollup@3.10.0
@@ -604,7 +604,7 @@ importers:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       tsup: 6.5.0
       typescript: 4.9.4
     devDependencies:
@@ -613,7 +613,7 @@ importers:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      rimraf: 4.0.4
+      rimraf: 4.0.5
       tsup: 6.5.0_typescript@4.9.4
       typescript: 4.9.4
 
@@ -12558,8 +12558,8 @@ packages:
     dependencies:
       glob: 7.2.3
 
-  /rimraf/4.0.4:
-    resolution: {integrity: sha512-R0hoVr9xTwemarQjoWlNt/nb5dEGVTBhVdkRmEX2zEkT8T6onH0XKiGjuaC7rNNj/gYzY2p4NVRJ3sjO1ascHQ==}
+  /rimraf/4.0.5:
+    resolution: {integrity: sha512-3gf/WdsBM+ZkuPb76MpXSxNKt00QQ3PdXqDCCBOsHgcoBs8DAhXbqtrGQUAkhxHgXYWzXxuaOsN4s21+at5fBw==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
