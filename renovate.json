@@ -25,6 +25,8 @@
                 "esbuild",
                 "eslint",
                 "eslint-config-next",
+                "eslint-plugin-import",
+                "eslint-plugin-react",
                 "pnpm",
                 "playwright",
                 "postcss",
