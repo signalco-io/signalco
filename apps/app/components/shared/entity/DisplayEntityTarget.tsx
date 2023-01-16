@@ -20,13 +20,13 @@ import {
     Typography,
     Box
 } from '@signalco/ui';
-import InputContactValue from './InputContactValue';
-import EntityIcon from './EntityIcon';
 import useEntity from '../../../src/hooks/signalco/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
 import useAllEntities from '../../../src/hooks/signalco/useAllEntities';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointerPartial from '../../../src/contacts/IContactPointerPartial';
+import InputContactValue from './InputContactValue';
+import EntityIcon from './EntityIcon';
 
 function EntityContactValueSelection(props: { target: IContactPointerPartial | undefined, value: any, onSelected: (value: any) => void }) {
     const { target, value, onSelected } = props;
