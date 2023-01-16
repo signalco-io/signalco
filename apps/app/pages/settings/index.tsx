@@ -4,9 +4,12 @@ import { Stack, Row, Typography, Picker, SelectItems, Checkbox, TextField, Conta
 import { isNonEmptyString, isNotNull, noError } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, FormItems, useFormField } from '@enterwell/react-form-builder';
+import { now } from '../../src/services/DateTimeProvider';
 import { ApiDevelopmentUrl, ApiProductionUrl, setSignalcoApiEndpoint, signalcoApiEndpoint } from '../../src/services/AppSettingsProvider';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale, { availableLocales } from '../../src/hooks/useLocale';
+import useAllEntities from '../../src/hooks/signalco/useAllEntities';
+import { arraySum } from '../../src/helpers/ArrayHelpers';
 import AppThemePicker from '../../components/settings/AppThemePicker';
 import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';
 import LocationMapPicker from '../../components/forms/LocationMapPicker/LocationMapPicker';
@@ -84,6 +87,44 @@ const settingsFormComponents: FormBuilderComponents = {
 
 const components = { ...generalFormComponents, ...settingsFormComponents };
 
+function UsagePage() {
+    const usersEntities = useAllEntities(6);
+    const userEntity = usersEntities.data?.at(0);
+
+    const nowDate = now();
+    const daysInCurrentMonth = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, 0).getDate();
+    const usages = [...new Array(daysInCurrentMonth).keys()].map(d =>
+        JSON.parse((userEntity?.contacts.find(c =>
+            c.channelName === 'signalco' &&
+            c.contactName === `usage-${nowDate.getFullYear()}${(nowDate.getMonth() + 1).toString().padStart(2, '0')}${(d + 1)}`)?.valueSerialized) ?? '{}'));
+
+    const usageTotal = arraySum(usages, u => u ? (u.other ?? 0) + (u.contactSet ?? 0) + (u.conduct ?? 0) + (u.process ?? 0) : 0);
+
+    return (
+        <Stack spacing={4}>
+            {/* <span>Plan</span> */}
+            <Stack spacing={2}>
+                <Typography level="h5">This month</Typography>
+                <Row spacing={4}>
+                    <Stack>
+                        <Typography>Used</Typography>
+                        <Typography>{usageTotal}</Typography>
+                    </Stack>
+                    <Stack>
+                        <Typography>Calculated Daily</Typography>
+                        <Typography>-</Typography>
+                    </Stack>
+                    <Stack>
+                        <Typography>Calculated Monthly</Typography>
+                        <Typography>-</Typography>
+                    </Stack>
+                </Row>
+            </Stack>
+            {/* <span>History</span> */}
+        </Stack>
+    )
+}
+
 function SettingsPane() {
     const generalForm = useGeneralForm();
     const profileForm = useProfileForm();
@@ -96,6 +137,7 @@ function SettingsPane() {
         { id: 'lookAndFeel', label: 'Look and feel', form: lookAndFeelForm },
         { id: 'profile', label: 'Profile', form: profileForm },
         { id: 'timeAndLocation', label: 'Time and location', form: timeLocationForm },
+        { id: 'usage', label: 'Usage', component: UsagePage },
         { id: 'developer', label: 'Developer', form: developerForm },
     ];
 
@@ -120,10 +162,13 @@ function SettingsPane() {
             </Stack>
             <Container maxWidth="md">
                 <Stack spacing={2}>
-                    <Typography level="h5">{selectedCategory.label}</Typography>
-                    <FormBuilderProvider components={components}>
-                        <FormBuilder form={selectedCategory.form} />
-                    </FormBuilderProvider>
+                    <Typography level="h4">{selectedCategory.label}</Typography>
+                    {selectedCategory.form && (
+                        <FormBuilderProvider components={components}>
+                            <FormBuilder form={selectedCategory.form} />
+                        </FormBuilderProvider>
+                    )}
+                    {selectedCategory.component && <selectedCategory.component />}
                 </Stack>
             </Container>
         </Row>

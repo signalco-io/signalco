@@ -21,11 +21,11 @@ const entityTypes = [
     { value: '5', label: 'Channels' }
 ];
 
-const entityType = [
-    { value: 1, label: 'Device' },
-    { value: 2, label: 'Dashboard' },
+const createEntityType = [
     { value: 3, label: 'Process' },
     { value: 4, label: 'Station' },
+    { value: 1, label: 'Device' },
+    { value: 2, label: 'Dashboard' },
     { value: 5, label: 'Channel' }
 ];
 
@@ -43,7 +43,7 @@ function EntityCreate() {
         <Stack spacing={2}>
             <Typography level="body2">{t('PickTypeHeader')}</Typography>
             <Stack spacing={1}>
-                {entityType.map(type => (
+                {createEntityType.map(type => (
                     <Button key={type.value} onClick={() => onType(type)}>{tType(type.label)}</Button>
                 ))}
             </Stack>
@@ -52,13 +52,14 @@ function EntityCreate() {
 }
 
 function Entities() {
-    const entities = useAllEntities();
+    const [selectedType, setSelectedType] = useState<string>('1');
+
+    const entities = useAllEntities(parseInt(selectedType, 10) || 1);
     const entityItems = entities.data;
     const { t } = useLocale('App', 'Entities');
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
     const [filteredItems, searchText, handleSearchTextChange] = useSearch(entityItems, filterFuncObjectStringProps);
 
-    const [selectedType, setSelectedType] = useState<string | undefined>('1');
     const typedItems = useMemo(() => filteredItems.filter(e => {
         return e.type.toString() === selectedType;
     }

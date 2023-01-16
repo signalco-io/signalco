@@ -1,6 +1,6 @@
-import IEntityDetails from './IEntityDetails';
 import { getAsync, requestAsync } from '../services/HttpService';
 import { orderBy } from '../../src/helpers/ArrayHelpers';
+import IEntityDetails from './IEntityDetails';
 
 function mapEntityDetailsFromDto(e: any) {
     return {
