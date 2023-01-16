@@ -23,7 +23,7 @@
         "@signalco/tsconfig": "*",
         "tsup": "6.5.0",
         "concurrently": "7.6.0",
-        "esbuild": "0.17.0",
+        "esbuild": "0.17.1",
         "prop-types": "15.8.1",
         "rimraf": "4.0.7",
         "rollup": "3.10.0",
