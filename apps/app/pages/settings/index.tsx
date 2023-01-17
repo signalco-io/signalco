@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
 import { Stack, Row, Typography, Picker, SelectItems, Checkbox, TextField, Container, amber, zinc, lightBlue, green } from '@signalco/ui';
@@ -16,6 +16,7 @@ import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';
 import LocationMapPicker from '../../components/forms/LocationMapPicker/LocationMapPicker';
 import generalFormComponents from '../../components/forms/generalFormComponents';
 import ApiBadge from '../../components/development/ApiBadge';
+import { humanizeNumber } from '../../src/helpers/StringHelpers';
 
 function SettingsItem(props: { children: ReactNode, label?: string | undefined }) {
     return (
@@ -95,9 +96,25 @@ type Usage = {
     other: number;
 }
 
-function UsagePage() {
+function LabeledValue({ value, unit, label }: { value: string | number, unit?: string, label: string }) {
+    return (
+        <Stack>
+            <Typography level="body2">{label}</Typography>
+            <Row>
+                <Typography level="h5" component="span">
+                    {typeof value === 'number' ? humanizeNumber(value) : value}
+                </Typography>
+                {!!unit && <Typography>{unit}</Typography>}
+            </Row>
+        </Stack>
+    )
+}
+
+function UsageCurrent() {
     const usersEntities = useAllEntities(6);
     const userEntity = usersEntities.data?.at(0);
+
+    const limit = 2000;
 
     const nowDate = now();
     const daysInCurrentMonth = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, 0).getDate();
@@ -139,49 +156,63 @@ function UsagePage() {
     }
 
     return (
-        <Stack spacing={4}>
-            {/* <span>Plan</span> */}
+        <Stack spacing={2}>
+            <Row spacing={4}>
+                <LabeledValue label="Used This Month" value={usageTotal} />
+                <LabeledValue label="Calculated Daily" value={dailyCalculated} />
+                <LabeledValue label="Calculated Monthly" value={monthlyCalculated} />
+            </Row>
+            <div style={{ height: 400 }}>
+                <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                        width={500}
+                        height={300}
+                        data={usagesAggregated}
+                        margin={{
+                            top: 20,
+                            right: 30,
+                            left: 20,
+                            bottom: 5,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="date" hide />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar name="Contacts" dataKey="contactSet" stackId="a" fill={green[600]} />
+                        <Bar name="Conducts" dataKey="conduct" stackId="a" fill={lightBlue[600]} />
+                        <Bar name="Processes" dataKey="process" stackId="a" fill={amber[600]} />
+                        <Bar name="Other" dataKey="other" stackId="a" fill={zinc[500]} />
+                        <ReferenceLine y={limit} label="Limit" stroke="red" alwaysShow />
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
+        </Stack>
+    )
+}
+
+function UsagePlan() {
+    return (
+        <Row spacing={4} alignItems="start">
+            <LabeledValue label="Plan" value="Free" />
             <Stack spacing={2}>
-                <Typography level="h5">This month</Typography>
-                <Row spacing={4}>
-                    <Stack>
-                        <Typography>Used</Typography>
-                        <Typography>{usageTotal}</Typography>
-                    </Stack>
-                    <Stack>
-                        <Typography>Calculated Daily</Typography>
-                        <Typography>{dailyCalculated}</Typography>
-                    </Stack>
-                    <Stack>
-                        <Typography>Calculated Monthly</Typography>
-                        <Typography>{monthlyCalculated}</Typography>
-                    </Stack>
-                </Row>
-                <div style={{ height: 400 }}>
-                    <ResponsiveContainer width="100%" height="100%">
-                        <BarChart
-                            width={500}
-                            height={300}
-                            data={usagesAggregated}
-                            margin={{
-                                top: 20,
-                                right: 30,
-                                left: 20,
-                                bottom: 5,
-                            }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="date" hide />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Bar name="Contacts" dataKey="contactSet" stackId="a" fill={green[400]} />
-                            <Bar name="Conducts" dataKey="conduct" stackId="a" fill={lightBlue[400]} />
-                            <Bar name="Processes" dataKey="process" stackId="a" fill={amber[400]} />
-                            <Bar name="Other" dataKey="other" stackId="a" fill={zinc[400]} />
-                        </BarChart>
-                    </ResponsiveContainer>
-                </div>
+                <LabeledValue label="Executions limit" value={2000} />
+            </Stack>
+        </Row>
+    )
+}
+
+function UsagePage() {
+    return (
+        <Stack spacing={4}>
+            <Stack spacing={2}>
+                <Typography level="h5">Plan</Typography>
+                <UsagePlan />
+            </Stack>
+            <Stack spacing={2}>
+                <Typography level="h5">Current</Typography>
+                <UsageCurrent />
             </Stack>
             {/* <span>History</span> */}
         </Stack>
