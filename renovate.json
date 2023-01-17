@@ -27,6 +27,7 @@
                 "eslint-config-next",
                 "eslint-plugin-import",
                 "eslint-plugin-react",
+                "lucide-react",
                 "pnpm",
                 "playwright",
                 "postcss",
