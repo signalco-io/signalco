@@ -1,6 +1,7 @@
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
-import { Stack, Row, Typography, Picker, SelectItems, Checkbox, TextField, Container } from '@signalco/ui';
+import { Stack, Row, Typography, Picker, SelectItems, Checkbox, TextField, Container, amber, zinc, lightBlue, green } from '@signalco/ui';
 import { isNonEmptyString, isNotNull, noError } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, FormItems, useFormField } from '@enterwell/react-form-builder';
@@ -87,18 +88,46 @@ const settingsFormComponents: FormBuilderComponents = {
 
 const components = { ...generalFormComponents, ...settingsFormComponents };
 
+type Usage = {
+    contactSet: number;
+    conduct: number;
+    process: number;
+    other: number;
+}
+
 function UsagePage() {
     const usersEntities = useAllEntities(6);
     const userEntity = usersEntities.data?.at(0);
 
     const nowDate = now();
     const daysInCurrentMonth = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, 0).getDate();
-    const usages = [...new Array(daysInCurrentMonth).keys()].map(d =>
-        JSON.parse((userEntity?.contacts.find(c =>
+    const usages = [...new Array(daysInCurrentMonth).keys()].map(d => ({
+        date: `${nowDate.getFullYear()}-${(nowDate.getMonth() + 1).toString().padStart(2, '0')}-${(d + 1).toString().padStart(2, '0')}`,
+        ...JSON.parse((userEntity?.contacts.find(c =>
             c.channelName === 'signalco' &&
-            c.contactName === `usage-${nowDate.getFullYear()}${(nowDate.getMonth() + 1).toString().padStart(2, '0')}${(d + 1)}`)?.valueSerialized) ?? '{}'));
+            c.contactName === `usage-${nowDate.getFullYear()}${(nowDate.getMonth() + 1).toString().padStart(2, '0')}${(d + 1).toString().padStart(2, '0')}`)?.valueSerialized) ?? '{}')
+    }));
+    const usagesAggregated: ({date: string} & Usage)[] = [];
+    for (let usageIndex = 0; usageIndex < usages.length; usageIndex++) {
+        const usage = usages[usageIndex];
+        const isCurrent = usageIndex < nowDate.getDate();
+        const previousUsage = usageIndex > 0
+            ? usagesAggregated[usageIndex - 1]
+            : {contactSet: 0, conduct: 0, process: 0, other: 0};
+        console.log({isFuture: isCurrent, usage, previousUsage}, usagesAggregated)
+        usagesAggregated.push({
+            date: usage.date,
+            contactSet: isCurrent ? ((usage.contactSet ?? 0) + previousUsage.contactSet) : 0,
+            conduct: isCurrent ? ((usage.conduct ?? 0) + previousUsage.conduct) : 0,
+            process: isCurrent ? ((usage.process ?? 0) + previousUsage.process) : 0,
+            other: isCurrent ? ((usage.other ?? 0) + previousUsage.other) : (previousUsage.contactSet + previousUsage.conduct + previousUsage.other + previousUsage.process)
+        })
+    }
 
-    const usageTotal = arraySum(usages, u => u ? (u.other ?? 0) + (u.contactSet ?? 0) + (u.conduct ?? 0) + (u.process ?? 0) : 0);
+    function sumUsage(u: Partial<Usage>) {
+        return u ? (u.other ?? 0) + (u.contactSet ?? 0) + (u.conduct ?? 0) + (u.process ?? 0) : 0;
+    }
+    const usageTotal = arraySum(usages, sumUsage);
 
     return (
         <Stack spacing={4}>
@@ -119,6 +148,31 @@ function UsagePage() {
                         <Typography>-</Typography>
                     </Stack>
                 </Row>
+                <div style={{ height: 400 }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                        <BarChart
+                            width={500}
+                            height={300}
+                            data={usagesAggregated}
+                            margin={{
+                                top: 20,
+                                right: 30,
+                                left: 20,
+                                bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="date" hide />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar name="Contacts" dataKey="contactSet" stackId="a" fill={green[400]} />
+                            <Bar name="Conducts" dataKey="conduct" stackId="a" fill={lightBlue[400]} />
+                            <Bar name="Processes" dataKey="process" stackId="a" fill={amber[400]} />
+                            <Bar name="Other" dataKey="other" stackId="a" fill={zinc[400]} />
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
             </Stack>
             {/* <span>History</span> */}
         </Stack>
