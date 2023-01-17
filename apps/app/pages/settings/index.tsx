@@ -107,27 +107,36 @@ function UsagePage() {
             c.channelName === 'signalco' &&
             c.contactName === `usage-${nowDate.getFullYear()}${(nowDate.getMonth() + 1).toString().padStart(2, '0')}${(d + 1).toString().padStart(2, '0')}`)?.valueSerialized) ?? '{}')
     }));
-    const usagesAggregated: ({date: string} & Usage)[] = [];
-    for (let usageIndex = 0; usageIndex < usages.length; usageIndex++) {
-        const usage = usages[usageIndex];
-        const isCurrent = usageIndex < nowDate.getDate();
-        const previousUsage = usageIndex > 0
-            ? usagesAggregated[usageIndex - 1]
-            : {contactSet: 0, conduct: 0, process: 0, other: 0};
-        console.log({isFuture: isCurrent, usage, previousUsage}, usagesAggregated)
-        usagesAggregated.push({
-            date: usage.date,
-            contactSet: isCurrent ? ((usage.contactSet ?? 0) + previousUsage.contactSet) : 0,
-            conduct: isCurrent ? ((usage.conduct ?? 0) + previousUsage.conduct) : 0,
-            process: isCurrent ? ((usage.process ?? 0) + previousUsage.process) : 0,
-            other: isCurrent ? ((usage.other ?? 0) + previousUsage.other) : (previousUsage.contactSet + previousUsage.conduct + previousUsage.other + previousUsage.process)
-        })
-    }
 
     function sumUsage(u: Partial<Usage>) {
         return u ? (u.other ?? 0) + (u.contactSet ?? 0) + (u.conduct ?? 0) + (u.process ?? 0) : 0;
     }
     const usageTotal = arraySum(usages, sumUsage);
+
+    const dailyCalculated = Math.round(usageTotal / nowDate.getDate());
+    const monthlyCalculated = usageTotal + dailyCalculated * (daysInCurrentMonth - nowDate.getDate());
+
+    const usagesAggregated: ({ date: string } & Usage)[] = [];
+    for (let usageIndex = 0; usageIndex < usages.length; usageIndex++) {
+        const usage = usages[usageIndex];
+        const isCurrent = usageIndex < nowDate.getDate();
+        const previousUsage = usageIndex > 0
+            ? usagesAggregated[usageIndex - 1]
+            : { contactSet: 0, conduct: 0, process: 0, other: 0 };
+        usagesAggregated.push({
+            date: usage.date,
+            contactSet: isCurrent ? ((usage.contactSet ?? 0) + previousUsage.contactSet) : 0,
+            conduct: isCurrent ? ((usage.conduct ?? 0) + previousUsage.conduct) : 0,
+            process: isCurrent ? ((usage.process ?? 0) + previousUsage.process) : 0,
+            other: isCurrent
+                ? ((usage.other ?? 0) + previousUsage.other)
+                : (dailyCalculated +
+                    previousUsage.contactSet +
+                    previousUsage.conduct +
+                    previousUsage.other +
+                    previousUsage.process)
+        })
+    }
 
     return (
         <Stack spacing={4}>
@@ -141,11 +150,11 @@ function UsagePage() {
                     </Stack>
                     <Stack>
                         <Typography>Calculated Daily</Typography>
-                        <Typography>-</Typography>
+                        <Typography>{dailyCalculated}</Typography>
                     </Stack>
                     <Stack>
                         <Typography>Calculated Monthly</Typography>
-                        <Typography>-</Typography>
+                        <Typography>{monthlyCalculated}</Typography>
                     </Stack>
                 </Row>
                 <div style={{ height: 400 }}>
