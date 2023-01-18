@@ -12,7 +12,7 @@
 
 .launcher-card > a {
   border-radius: 1em;
-  border: 1px solid #333;
+  border: 1px solid #222222;
   padding: 2em;
   display: flex;
   flex-direction: column;
@@ -21,8 +21,8 @@
 }
 
 .launcher-card > a:hover {
-  background-color: #121212;
-  border-color: #666;
+  background-color: #0a0a0a;
+  border-color: #333333;
 }
 
 .launcher-card > a > .info {
