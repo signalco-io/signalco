@@ -10,13 +10,13 @@ import { ApiDevelopmentUrl, ApiProductionUrl, setSignalcoApiEndpoint, signalcoAp
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale, { availableLocales } from '../../src/hooks/useLocale';
 import useAllEntities from '../../src/hooks/signalco/useAllEntities';
+import { humanizeNumber } from '../../src/helpers/StringHelpers';
 import { arraySum } from '../../src/helpers/ArrayHelpers';
 import AppThemePicker from '../../components/settings/AppThemePicker';
 import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';
 import LocationMapPicker from '../../components/forms/LocationMapPicker/LocationMapPicker';
 import generalFormComponents from '../../components/forms/generalFormComponents';
 import ApiBadge from '../../components/development/ApiBadge';
-import { humanizeNumber } from '../../src/helpers/StringHelpers';
 
 function SettingsItem(props: { children: ReactNode, label?: string | undefined }) {
     return (
