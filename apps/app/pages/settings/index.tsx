@@ -104,7 +104,7 @@ function LabeledValue({ value, unit, label }: { value: string | number, unit?: s
                 <Typography level="h5" component="span">
                     {typeof value === 'number' ? humanizeNumber(value) : value}
                 </Typography>
-                {!!unit && <Typography level="body3" style={{lineHeight: '24px'}}>{unit}</Typography>}
+                {!!unit && <Typography level="body3" style={{ lineHeight: '24px' }}>{unit}</Typography>}
             </Row>
         </Stack>
     )
@@ -200,7 +200,7 @@ function UsageCurrent() {
                         <Bar name="Conducts" dataKey="conduct" stackId="a" fill={lightBlue[600]} />
                         <Bar name="Processes" dataKey="process" stackId="a" fill={amber[600]} />
                         <Bar name="Other" dataKey="other" stackId="a" fill={zinc[500]} />
-                        <ReferenceLine y={limit} strokeDasharray={[8,8]} stroke={deepOrange[800]} ifOverflow="extendDomain" />
+                        <ReferenceLine y={limit} strokeDasharray="8 8" stroke={deepOrange[800]} ifOverflow="extendDomain" />
                     </BarChart>
                 </ResponsiveContainer>
             </div>
