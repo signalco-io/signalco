@@ -200,7 +200,7 @@ function UsageCurrent() {
                         <Bar name="Conducts" dataKey="conduct" stackId="a" fill={lightBlue[600]} />
                         <Bar name="Processes" dataKey="process" stackId="a" fill={amber[600]} />
                         <Bar name="Other" dataKey="other" stackId="a" fill={zinc[500]} />
-                        <ReferenceLine y={limit} stroke={deepOrange[800]} ifOverflow="extendDomain" />
+                        <ReferenceLine y={limit} strokeDasharray={[8,8]} stroke={deepOrange[800]} ifOverflow="extendDomain" />
                     </BarChart>
                 </ResponsiveContainer>
             </div>
