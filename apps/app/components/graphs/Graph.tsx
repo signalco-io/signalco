@@ -206,33 +206,6 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
     );
 }
 
-function GraphBar({width, height}: InnerGraphProps) {
-    return (
-        <BarChart
-            width={500}
-            height={300}
-            data={usagesAggregated}
-            margin={{
-                top: 20,
-                right: 30,
-                left: 20,
-                bottom: 5,
-            }}
-        >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" hide />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar name="Contacts" dataKey="contactSet" stackId="a" fill={green[600]} />
-            <Bar name="Conducts" dataKey="conduct" stackId="a" fill={lightBlue[600]} />
-            <Bar name="Processes" dataKey="process" stackId="a" fill={amber[600]} />
-            <Bar name="Other" dataKey="other" stackId="a" fill={zinc[500]} />
-            <ReferenceLine y={limit} label="Limit" stroke="red" alwaysShow />
-        </BarChart>
-    )
-}
-
 function Graph({ isLoading, error, data, label, ...rest }: GraphProps) {
     const { t } = useLocalePlaceholders();
 
