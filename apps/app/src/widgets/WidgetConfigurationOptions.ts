@@ -1,6 +1,6 @@
-import IWidgetConfigurationOption from './IWidgetConfigurationOption';
 import IContactPointerPartial from '../contacts/IContactPointerPartial';
 import IContact from '../contacts/IContact';
+import IWidgetConfigurationOption from './IWidgetConfigurationOption';
 
 export const DefaultColumns: (columns: number) => IWidgetConfigurationOption<{ columns: number}> =
     (width?: number) => ({ name: 'columns', label: 'Width', type: 'number', default: width });

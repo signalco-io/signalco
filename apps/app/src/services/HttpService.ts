@@ -1,9 +1,9 @@
 import Router from 'next/router';
-import CurrentUserProvider from './CurrentUserProvider';
-import { signalcoApiEndpoint } from './AppSettingsProvider';
 import { showPrompt } from '../notifications/PageNotificationService';
 import { parseHash, parseHashParam } from '../hooks/useHashParam';
 import { isAbsoluteUrl, trimStartChar } from '../helpers/StringHelpers';
+import CurrentUserProvider from './CurrentUserProvider';
+import { signalcoApiEndpoint } from './AppSettingsProvider';
 
 export function getApiUrl(url: string): string {
     return signalcoApiEndpoint() + trimStartChar(url, '/');

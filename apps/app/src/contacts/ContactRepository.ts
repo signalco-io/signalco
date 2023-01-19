@@ -1,6 +1,6 @@
-import IContactPointer from './IContactPointer';
 import { requestAsync } from '../services/HttpService';
 import { toDuration } from '../services/DateTimeProvider';
+import IContactPointer from './IContactPointer';
 
 export interface ContactHistoryItem {
     timeStamp: Date;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { CSS } from '@dnd-kit/utilities';
 import { useSortable } from '@dnd-kit/sortable';
-import DisplayWidget from './DisplayWidget';
 import { WidgetProps } from '../widgets/Widget';
+import DisplayWidget from './DisplayWidget';
 
 const draggingUpscale = 1.1;
 

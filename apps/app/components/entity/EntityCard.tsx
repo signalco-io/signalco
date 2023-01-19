@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { Row, Avatar, Card, Typography, Box, Timeago, MuiStack } from '@signalco/ui';
-import ShareEntityChip from './ShareEntityChip';
-import EntityStatus, { useEntityStatus } from './EntityStatus';
 import EntityIcon from '../shared/entity/EntityIcon';
 import { KnownPages } from '../../src/knownPages';
 import IEntityDetails from '../../src/entity/IEntityDetails';
 import { entityLastActivity } from '../../src/entity/EntityHelper';
+import ShareEntityChip from './ShareEntityChip';
+import EntityStatus, { useEntityStatus } from './EntityStatus';
 
 export interface EntityCardProps {
     entity: IEntityDetails;

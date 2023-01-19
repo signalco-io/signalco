@@ -1,9 +1,9 @@
 import React from 'react';
 import { ChildrenProps } from '@signalco/ui';
+import CurrentUserProvider from '../../src/services/CurrentUserProvider';
 import { LayoutWithAuth } from './LayoutWithAuth';
 import { EmptyLayout } from './EmptyLayout';
 import { Auth0Wrapper } from './Auth0Wrapper';
-import CurrentUserProvider from '../../src/services/CurrentUserProvider';
 
 export function EmptyLayoutWithAuth(props: ChildrenProps) {
     if (CurrentUserProvider.isLoggedIn() || typeof window === 'undefined') {

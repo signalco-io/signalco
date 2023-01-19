@@ -2,9 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Loadable, Row, Button, Typography, Box, MuiStack } from '@signalco/ui';
-import DashboardView from './DashboardView';
-import DashboardSettings from './DashboardSettings';
-import DashboardSelector from './DashboardSelector';
 import { widgetType } from '../widgets/Widget';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import { showNotification } from '../../src/notifications/PageNotificationService';
@@ -13,6 +10,9 @@ import useHashParam from '../../src/hooks/useHashParam';
 import useSaveDashboard from '../../src/hooks/dashboards/useSaveDashboard';
 import useDashboard from '../../src/hooks/dashboards/useDashboard';
 import { WidgetModel } from '../../src/dashboards/DashboardsRepository';
+import DashboardView from './DashboardView';
+import DashboardSettings from './DashboardSettings';
+import DashboardSelector from './DashboardSelector';
 
 const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 

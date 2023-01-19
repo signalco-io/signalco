@@ -1,5 +1,5 @@
-import LocalStorageService from './LocalStorageService';
 import { ValueOrFuncGeneric } from '../sharedTypes';
+import LocalStorageService from './LocalStorageService';
 
 class UserSettingsProvider {
     value<T>(key: string, defaultValue: ValueOrFuncGeneric<T>) {

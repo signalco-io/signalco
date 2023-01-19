@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
 import { Button, Divider, IconButton, Menu, Typography, Box, MenuItemLink, ButtonProps, MuiStack, Stack } from '@signalco/ui';
-import UserAvatar from './users/UserAvatar';
-import NavLink from './navigation/NavLink';
-import ApiBadge from './development/ApiBadge';
 import { getCurrentUserAsync } from '../src/services/CurrentUserProvider';
 import { KnownPages } from '../src/knownPages';
 import useLocale from '../src/hooks/useLocale';
 import useLoadAndError from '../src/hooks/useLoadAndError';
 import { orderBy } from '../src/helpers/ArrayHelpers';
+import UserAvatar from './users/UserAvatar';
+import NavLink from './navigation/NavLink';
+import ApiBadge from './development/ApiBadge';
 
 type NavItem = {
   label: string,

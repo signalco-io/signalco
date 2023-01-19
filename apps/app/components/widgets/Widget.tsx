@@ -2,10 +2,10 @@
 import React, { useCallback, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Alert } from '@signalco/ui';
+import IWidgetConfigurationOption from '../../src/widgets/IWidgetConfigurationOption';
 import WidgetState from './parts/WidgetState';
 import WidgetCard from './parts/WidgetCard';
 import WidgetButton from './parts/WidgetButton';
-import IWidgetConfigurationOption from '../../src/widgets/IWidgetConfigurationOption';
 const WidgetChecklist = dynamic(() => import('./parts/WidgetChecklist'));
 const WidgetIndicator = dynamic(() => import('./parts/WidgetIndicator'));
 const WidgetTime = dynamic(() => import('./parts/WidgetTime'));

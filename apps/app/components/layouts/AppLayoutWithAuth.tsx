@@ -1,10 +1,10 @@
 import React from 'react';
 import { withAuthenticationRequired } from '@auth0/auth0-react';
+import { ChildrenProps } from '../../src/sharedTypes';
+import CurrentUserProvider from '../../src/services/CurrentUserProvider';
 import { LayoutWithAuth } from './LayoutWithAuth';
 import { Auth0Wrapper } from './Auth0Wrapper';
 import { AppLayout } from './AppLayout';
-import { ChildrenProps } from '../../src/sharedTypes';
-import CurrentUserProvider from '../../src/services/CurrentUserProvider';
 
 
 export function AppLayoutWithAuth(props: ChildrenProps) {
