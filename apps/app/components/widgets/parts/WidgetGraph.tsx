@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Loadable } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
-import { DefaultRows, DefaultColumns, DefaultTargetMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
+import { DefaultRows, DefaultColumns, DefaultTargetMultiple, DefaultLabel } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useLoadAndError from '../../../src/hooks/useLoadAndError';
@@ -18,7 +18,7 @@ type ConfigProps = {
 }
 
 const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
-    { label: 'Label', name: 'label', type: 'string', optional: true },
+    DefaultLabel,
     { label: 'Duration', name: 'duration', type: 'number', optional: true },
     DefaultTargetMultiple,
     DefaultRows(2),

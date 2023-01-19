@@ -8,7 +8,7 @@ export const DefaultColumns: (columns: number) => IWidgetConfigurationOption<{ c
 export const DefaultRows: (rows: number) => IWidgetConfigurationOption<{ rows: number}> =
     (height?: number) => ({ name: 'rows', label: 'Height', type: 'number', default: height });
 
-export const DefaultLabel: IWidgetConfigurationOption<{ label: string}> = { name: 'label', label: 'Label', type: 'string', optional: true };
+export const DefaultLabel: IWidgetConfigurationOption<{ label?: string }> = { name: 'label', label: 'Label', type: 'string', optional: true };
 
 export const DefaultTarget: IWidgetConfigurationOption<{ target: IContactPointerPartial }> = { name: 'target', label: 'Target', type: 'entityContact' };
 

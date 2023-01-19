@@ -5,25 +5,25 @@ import { FormBuilder, type FormItems, useFormField, FormBuilderProvider, FormBui
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
 import GeneralFormProvider from '../../forms/GeneralFormProvider';
-import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
+import WidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { ChildrenProps, ObjectDictAny } from '../../../src/sharedTypes';
 import { asArray } from '../../../src/helpers/ArrayHelpers';
 
-interface IWidgetConfigurationDialogProps {
+type WidgetConfigurationDialogProps = {
     form: FormItems,
     onCancel: () => void,
     onSave: (config: object) => void,
 }
 
-export interface IWidgetConfigurationProps {
+export type WidgetConfigurationProps = {
     isOpen: boolean,
     config: object,
-    options: IWidgetConfigurationOption<unknown>[],
+    options: WidgetConfigurationOption<unknown>[],
     onConfiguration: (config: object) => void,
 }
 
 const useWidgetConfiguration = (
-    options: IWidgetConfigurationOption<unknown>[],
+    options: WidgetConfigurationOption<unknown>[],
     config: object | undefined,
     onConfiguration: (config: any) => void) => {
     const form: ObjectDictAny = {};
@@ -60,7 +60,7 @@ const useWidgetConfiguration = (
         onCancel: handleCancelConfiguration,
         onSave: handleSaveConfiguration,
         form
-    } as IWidgetConfigurationDialogProps;
+    } as WidgetConfigurationDialogProps;
 };
 
 const widgetConfigurationFormComponents: FormBuilderComponents = {
@@ -125,7 +125,7 @@ function WidgetConfigurationFormProvider(props: ChildrenProps) {
     )
 }
 
-function WidgetConfiguration(props: IWidgetConfigurationProps) {
+function WidgetConfiguration(props: WidgetConfigurationProps) {
     const configProps = useWidgetConfiguration(props.options, props.config, props.onConfiguration)
     return (
         <>

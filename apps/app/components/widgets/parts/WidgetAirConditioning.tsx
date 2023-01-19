@@ -14,7 +14,7 @@ import IContactPointer from '../../../src/contacts/IContactPointer';
 import { historiesAsync } from '../../../src/contacts/ContactRepository';
 
 type ConfigProps = {
-    label: string;
+    label?: string;
     targetTemperature: IContactPointer | undefined;
     targetHumidity: IContactPointer | undefined;
     targetHeating: IContactPointer | undefined;

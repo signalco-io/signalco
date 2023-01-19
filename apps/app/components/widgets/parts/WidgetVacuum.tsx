@@ -5,13 +5,19 @@ import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 
-const stateOptions: IWidgetConfigurationOption<any>[] = [
+type ConfigProps = {
+    label?: string;
+    rows: number;
+    columns: number;
+}
+
+const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     DefaultLabel,
     DefaultColumns(4),
     DefaultRows(4),
 ];
 
-function WidgetVacuum(props: WidgetSharedProps<any>) {
+function WidgetVacuum(props: WidgetSharedProps<ConfigProps>) {
     const label = props.config?.label ?? '';
     const batteryPerc = 100;
 
