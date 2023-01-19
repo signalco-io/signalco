@@ -4,9 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --open",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "dev": "vite --open"
   },
   "dependencies": {
     "react": "18.2.0",
