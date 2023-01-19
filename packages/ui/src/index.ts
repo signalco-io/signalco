@@ -67,6 +67,9 @@ export * from './Link';
 export { default as ListTreeItem } from './ListTreeItem';
 export * from './ListTreeItem';
 
+export { default as Menu } from './Menu';
+export * from './Menu';
+
 export { default as NavigatingButton } from './NavigatingButton';
 export * from './NavigatingButton';
 
@@ -75,9 +78,6 @@ export * from './NoDataPlaceholder';
 
 export { default as Picker } from './Picker';
 export * from './Picker';
-
-export { default as Menu } from './Menu';
-export * from './Menu';
 
 export { default as Popper } from './Popper';
 export * from './Popper';
@@ -90,6 +90,9 @@ export * from './Stack';
 
 export { default as Row } from './Row';
 export * from './Row';
+
+export { default as TextField } from './TextField';
+export * from './TextField';
 
 export { default as Timeago } from './Timeago';
 export * from './Timeago';
@@ -133,8 +136,7 @@ export {
     Sheet, 
     Switch,
     Tooltip, 
-    Typography, 
-    TextField
+    Typography
 } from "@mui/joy";
 
 export { CssBaseline } from '@mui/joy';
@@ -143,6 +145,6 @@ export { useColorScheme, CssVarsProvider, getInitColorSchemeScript, extendTheme 
 
 // TODO: Remove as we should use direct joy types
 export type { DefaultColorScheme } from '@mui/joy/styles/types';
-export type { ButtonProps, ColorPaletteProp, SupportedColorScheme, TextFieldProps, Theme } from '@mui/joy';
+export type { ButtonProps, ColorPaletteProp, SupportedColorScheme, Theme } from '@mui/joy';
 export type { SxProps, Breakpoint, SystemStyleObject } from '@mui/system';
 export type { ChildrenProps } from './sharedTypes';

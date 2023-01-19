@@ -58,7 +58,7 @@ const signalcoTheme = extendTheme({
                 color: 'neutral'
             }
         },
-        JoyTextField: {
+        JoyInput: {
             defaultProps: {
                 variant: 'soft',
                 color: 'neutral'

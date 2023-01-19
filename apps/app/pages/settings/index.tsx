@@ -1,7 +1,7 @@
 import { Bar, BarChart, CartesianGrid, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
-import { Stack, Row, Typography, Picker, SelectItems, Checkbox, TextField, Container, amber, zinc, lightBlue, green } from '@signalco/ui';
+import { Stack, Row, Typography, Picker, SelectItems, Checkbox, TextField, Container, amber, zinc, lightBlue, green, deepOrange, Divider } from '@signalco/ui';
 import { isNonEmptyString, isNotNull, noError } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, FormItems, useFormField } from '@enterwell/react-form-builder';
@@ -100,11 +100,11 @@ function LabeledValue({ value, unit, label }: { value: string | number, unit?: s
     return (
         <Stack>
             <Typography level="body2">{label}</Typography>
-            <Row>
+            <Row alignItems="end" spacing={1}>
                 <Typography level="h5" component="span">
                     {typeof value === 'number' ? humanizeNumber(value) : value}
                 </Typography>
-                {!!unit && <Typography>{unit}</Typography>}
+                {!!unit && <Typography level="body3" style={{lineHeight: '24px'}}>{unit}</Typography>}
             </Row>
         </Stack>
     )
@@ -128,10 +128,12 @@ function UsageCurrent() {
     function sumUsage(u: Partial<Usage>) {
         return u ? (u.other ?? 0) + (u.contactSet ?? 0) + (u.conduct ?? 0) + (u.process ?? 0) : 0;
     }
-    const usageTotal = arraySum(usages, sumUsage);
 
-    const dailyCalculated = Math.round(usageTotal / nowDate.getDate());
-    const monthlyCalculated = usageTotal + dailyCalculated * (daysInCurrentMonth - nowDate.getDate());
+    const calulatedUsageSlice = usages.slice(nowDate.getDate() - 3, nowDate.getDate());
+    const usageTotal = arraySum(calulatedUsageSlice, sumUsage);
+
+    const dailyCalculated = Math.round(usageTotal / calulatedUsageSlice.length);
+    const monthlyCalculated = usageTotal + dailyCalculated * daysInCurrentMonth;
 
     const usagesAggregated: ({ date: string } & Usage)[] = [];
     for (let usageIndex = 0; usageIndex < usages.length; usageIndex++) {
@@ -158,7 +160,9 @@ function UsageCurrent() {
     return (
         <Stack spacing={2}>
             <Row spacing={4}>
+                <LabeledValue label="Used Today" value={sumUsage(usages[nowDate.getDate() - 1])} />
                 <LabeledValue label="Used This Month" value={usageTotal} />
+                <Divider orientation="vertical" />
                 <LabeledValue label="Calculated Daily" value={dailyCalculated} />
                 <LabeledValue label="Calculated Monthly" value={monthlyCalculated} />
             </Row>
@@ -175,16 +179,28 @@ function UsageCurrent() {
                             bottom: 5,
                         }}
                     >
-                        <CartesianGrid strokeDasharray="3 3" />
+                        <CartesianGrid stroke="var(--joy-palette-divider)" vertical={false} />
                         <XAxis dataKey="date" hide />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
+                        <YAxis strokeWidth={0} fill="var(--joy-palette-text-tertiary)" />
+                        <Tooltip
+                            contentStyle={{
+                                backgroundColor: 'var(--joy-palette-background-body)',
+                                borderColor: 'var(--joy-palette-divider)',
+                                borderRadius: '8px',
+                                padding: '12px 16px'
+                            }}
+                            cursor={{
+                                stroke: 'var(--joy-palette-divider)',
+                                fill: 'rgba(128,128,128,0.2)'
+                            }} />
+                        <Legend iconType="circle" layout="vertical" align="right" verticalAlign="top" wrapperStyle={{
+                            paddingLeft: '16px'
+                        }} />
                         <Bar name="Contacts" dataKey="contactSet" stackId="a" fill={green[600]} />
                         <Bar name="Conducts" dataKey="conduct" stackId="a" fill={lightBlue[600]} />
                         <Bar name="Processes" dataKey="process" stackId="a" fill={amber[600]} />
                         <Bar name="Other" dataKey="other" stackId="a" fill={zinc[500]} />
-                        <ReferenceLine y={limit} label="Limit" stroke="red" alwaysShow />
+                        <ReferenceLine y={limit} stroke={deepOrange[800]} ifOverflow="extendDomain" />
                     </BarChart>
                 </ResponsiveContainer>
             </div>
@@ -197,7 +213,7 @@ function UsagePlan() {
         <Row spacing={4} alignItems="start">
             <LabeledValue label="Plan" value="Free" />
             <Stack spacing={2}>
-                <LabeledValue label="Executions limit" value={2000} />
+                <LabeledValue label="Executions limit" value={2000} unit="/month" />
             </Stack>
         </Row>
     )
@@ -205,7 +221,7 @@ function UsagePlan() {
 
 function UsagePage() {
     return (
-        <Stack spacing={4}>
+        <Stack spacing={8}>
             <Stack spacing={2}>
                 <Typography level="h5">Plan</Typography>
                 <UsagePlan />

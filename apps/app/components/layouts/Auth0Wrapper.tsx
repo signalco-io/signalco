@@ -18,7 +18,11 @@ export function Auth0Wrapper(props: ChildrenProps) {
 
     return (
         <Auth0Provider
-            redirectUri={redirectUri}
+            authorizationParams={{
+                redirect_uri: redirectUri,
+                audience: 'https://api.signalco.io',
+                scope: 'profile email'
+            }}
             onRedirectCallback={(appState) => {
                 // Use Next.js's Router.replace method to replace the url
                 const returnTo = appState?.returnTo || '/';
@@ -26,7 +30,6 @@ export function Auth0Wrapper(props: ChildrenProps) {
             }}
             domain="dfnoise.eu.auth0.com"
             clientId="nl7QIQD7Kw3ZHt45qHHAZG0MEILSFa7U"
-            audience="https://api.signalco.io"
         >
             {children}
         </Auth0Provider>

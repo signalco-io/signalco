@@ -1,20 +1,30 @@
 import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
-import { NoDataPlaceholder, Row, Sheet, Typography, Box, Timeago, lightBlue, deepOrange } from '@signalco/ui';
+import { NoDataPlaceholder, Row, Sheet, Typography, Timeago, lightBlue, deepOrange, Loadable } from '@signalco/ui';
 import { ObjectDictAny } from '../../src/sharedTypes';
 import { now } from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
 import { arrayMax, arrayMin } from '../../src/helpers/ArrayHelpers';
 
-export interface IGraphProps {
-    label?: string;
-    data: { id: string, value: string }[];
+export type GraphDataPoint = {
+    id: string;
+    value: string;
+}
+
+type InnerGraphProps = {
+    data: GraphDataPoint[];
     durationMs: number;
     width: number;
     height: number;
     startDateTime?: Date;
     hideLegend?: boolean;
     adaptiveDomain?: boolean;
+}
+
+export type GraphProps = InnerGraphProps & {
+    isLoading?: boolean;
+    error?: unknown;
+    label?: string;
 }
 
 const renderCustomizedTimeLineLabel = (props: any) => {
@@ -39,7 +49,7 @@ const renderCustomizedTimeLineLabel = (props: any) => {
     return null;
 };
 
-function GraphTimeLine({ label, data, durationMs, width, startDateTime, hideLegend }: IGraphProps) {
+function GraphTimeLine({ data, durationMs, width, startDateTime, hideLegend }: InnerGraphProps) {
     const accentTrue = lightBlue[600];
     const accentFalse = deepOrange[500];
 
@@ -74,48 +84,43 @@ function GraphTimeLine({ label, data, durationMs, width, startDateTime, hideLege
     }
 
     return (
-        <Row spacing={2}>
-            {!!label && (
-                <Typography sx={{ pt: '2px' }}>{label}</Typography>
-            )}
-            <BarChart
-                width={width}
-                height={60}
-                data={[transformedDataItem]}
-                layout="vertical"
-                barSize={20}
-                maxBarSize={20}
-                barGap={0}
-            >
-                <XAxis
-                    type="number"
-                    axisLine={false}
-                    interval="preserveStartEnd"
-                    tickFormatter={(v) => {
-                        const date = domainGraph.invert(v);
-                        return `${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}`
-                    }}
-                    hide={hideLegend} />
-                <YAxis type="category" domain={[0]} hide />
-                {new Array(reversedData.length + 1).fill(0).map((_, i) => {
-                    return (
-                        <Bar
-                            key={`t${i}`}
-                            dataKey={`t${i}`}
-                            stackId="0"
-                            barSize={20}
-                            maxBarSize={20}
-                            fill={transformedDataItem[`v${i}`] === 'true' ? accentTrue : accentFalse}
-                        >
-                            <LabelList
-                                dataKey={`v${i}`}
-                                content={renderCustomizedTimeLineLabel}
-                            />
-                        </Bar>
-                    );
-                })}
-            </BarChart>
-        </Row>
+        <BarChart
+            width={width}
+            height={60}
+            data={[transformedDataItem]}
+            layout="vertical"
+            barSize={20}
+            maxBarSize={20}
+            barGap={0}
+        >
+            <XAxis
+                type="number"
+                axisLine={false}
+                interval="preserveStartEnd"
+                tickFormatter={(v) => {
+                    const date = domainGraph.invert(v);
+                    return `${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}`
+                }}
+                hide={hideLegend} />
+            <YAxis type="category" domain={[0]} hide />
+            {new Array(reversedData.length + 1).fill(0).map((_, i) => {
+                return (
+                    <Bar
+                        key={`t${i}`}
+                        dataKey={`t${i}`}
+                        stackId="0"
+                        barSize={20}
+                        maxBarSize={20}
+                        fill={transformedDataItem[`v${i}`] === 'true' ? accentTrue : accentFalse}
+                    >
+                        <LabelList
+                            dataKey={`v${i}`}
+                            content={renderCustomizedTimeLineLabel}
+                        />
+                    </Bar>
+                );
+            })}
+        </BarChart>
     );
 }
 
@@ -134,7 +139,7 @@ function ChartGenericTooltip({ active, payload, domain, units }: { active?: bool
     return null;
 }
 
-function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend, adaptiveDomain }: IGraphProps) {
+function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend, adaptiveDomain }: InnerGraphProps) {
     const yKey = 'value';
     const xKey = 'key';
 
@@ -201,18 +206,24 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
     );
 }
 
-function Graph(props: IGraphProps) {
-    const { data } = props;
+function Graph({ isLoading, error, data, label, ...rest }: GraphProps) {
     const { t } = useLocalePlaceholders();
 
-    if (!data || data.length <= 0) {
-        return <NoDataPlaceholder content={t('NoData')} />
-    }
-
     const isBoolean = data?.length && (data[0].value?.toLowerCase() === 'true' || data[0].value?.toLowerCase() === 'false');
-    if (isBoolean) {
-        return <Box p={2}><GraphTimeLine {...props} /></Box>;
-    } else return <GraphArea {...props} />
+    let GraphComponent = GraphArea;
+    if (isBoolean)
+        GraphComponent = GraphTimeLine;
+
+    return (
+        <Row spacing={2}>
+            {!!label && <Typography style={{ paddingTop: '2px' }}>{label}</Typography>}
+            <Loadable isLoading={isLoading} error={error}>
+                {!data || data.length <= 0
+                    ? <NoDataPlaceholder content={t('NoData')} />
+                    : <GraphComponent data={data} {...rest} />}
+            </Loadable>
+        </Row>
+    );
 }
 
 export default Graph;
