@@ -1,6 +1,6 @@
-import { TextFieldProps, TextField } from '@mui/joy';
 import { Copy } from '@signalco/ui-icons';
 import IconButtonCopyToClipboard from '../IconButtonCopyToClipboard';
+import TextField, { TextFieldProps } from '../TextField';
 
 export type CopyToClipboardInputProps = TextFieldProps;
 
