@@ -217,7 +217,7 @@ function Graph({ isLoading, error, data, label, ...rest }: GraphProps) {
     return (
         <Row spacing={2}>
             {!!label && <Typography style={{ paddingTop: '2px' }}>{label}</Typography>}
-            <Loadable isLoading={isLoading} error={error}>
+            <Loadable isLoading={isLoading} error={error} width={100}>
                 {!data || data.length <= 0
                     ? <NoDataPlaceholder content={t('NoData')} />
                     : <GraphComponent data={data} {...rest} />}
