@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 import { Loadable } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
@@ -32,16 +32,19 @@ export default function WidgetButton({ config, onOptions }: WidgetSharedProps<Co
     const rows = config?.rows ?? 2;
     const duration = config?.duration ?? 0;
 
-    const loadHistoryCallback = useCallback(() => historiesAsync(config?.target, duration), [config?.target, duration]);
+    const loadHistoryCallback = useMemo(() => config?.target ? (() => historiesAsync(config.target, duration)) : undefined, [config?.target, duration]);
     const historyData = useLoadAndError(loadHistoryCallback);
 
     return (
         <Loadable isLoading={historyData.isLoading} error={historyData.error}>
             {(historyData.item?.length ?? 0) > 0 && (
-                <Graph data={historyData.item?.at(0)?.history?.map(i => ({
-                    id: i.timeStamp.toUTCString(),
-                    value: i.valueSerialized ?? ''
-                })) ?? []} durationMs={duration} width={columns * 80 + 2} height={rows * 80 + 2} />
+                <Graph
+                    isLoading={historyData.isLoading}
+                    error={historyData.error}
+                    data={historyData.item?.at(0)?.history?.map(i => ({
+                        id: i.timeStamp.toUTCString(),
+                        value: i.valueSerialized ?? ''
+                    })) ?? []} durationMs={duration} width={columns * 80 + 2} height={rows * 80 + 2} />
             )}
         </Loadable>
     );
