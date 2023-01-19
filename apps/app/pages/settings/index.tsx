@@ -1,7 +1,7 @@
 import { Bar, BarChart, CartesianGrid, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { getTimeZones } from '@vvo/tzdb';
-import { Stack, Row, Typography, Picker, SelectItems, Checkbox, TextField, Container, amber, zinc, lightBlue, green } from '@signalco/ui';
+import { Stack, Row, Typography, Picker, SelectItems, Checkbox, TextField, Container, amber, zinc, lightBlue, green, deepOrange } from '@signalco/ui';
 import { isNonEmptyString, isNotNull, noError } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, FormItems, useFormField } from '@enterwell/react-form-builder';
@@ -177,16 +177,28 @@ function UsageCurrent() {
                             bottom: 5,
                         }}
                     >
-                        <CartesianGrid strokeDasharray="3 3" />
+                        <CartesianGrid stroke="var(--joy-palette-divider)" vertical={false} />
                         <XAxis dataKey="date" hide />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
+                        <YAxis strokeWidth={0} fill="var(--joy-palette-text-tertiary)" />
+                        <Tooltip
+                            contentStyle={{
+                                backgroundColor: 'var(--joy-palette-background-body)',
+                                borderColor: 'var(--joy-palette-divider)',
+                                borderRadius: '8px',
+                                padding: '12px 16px'
+                            }}
+                            cursor={{
+                                stroke: 'var(--joy-palette-divider)',
+                                fill: 'rgba(128,128,128,0.2)'
+                            }} />
+                        <Legend iconType="circle" layout="vertical" align="right" verticalAlign="top" wrapperStyle={{
+                            paddingLeft: '16px'
+                        }} />
                         <Bar name="Contacts" dataKey="contactSet" stackId="a" fill={green[600]} />
                         <Bar name="Conducts" dataKey="conduct" stackId="a" fill={lightBlue[600]} />
                         <Bar name="Processes" dataKey="process" stackId="a" fill={amber[600]} />
                         <Bar name="Other" dataKey="other" stackId="a" fill={zinc[500]} />
-                        <ReferenceLine y={limit} label="Limit" stroke="red" alwaysShow />
+                        <ReferenceLine y={limit} label="Limit" stroke={deepOrange[800]} ifOverflow="extendDomain" />
                     </BarChart>
                 </ResponsiveContainer>
             </div>
