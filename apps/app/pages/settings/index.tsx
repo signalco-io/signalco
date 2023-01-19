@@ -128,9 +128,11 @@ function UsageCurrent() {
     function sumUsage(u: Partial<Usage>) {
         return u ? (u.other ?? 0) + (u.contactSet ?? 0) + (u.conduct ?? 0) + (u.process ?? 0) : 0;
     }
-    const usageTotal = arraySum(usages, sumUsage);
 
-    const dailyCalculated = Math.round(usageTotal / nowDate.getDate());
+    const calulatedUsageSlice = usages.slice(nowDate.getDate() - 3, nowDate.getDate());
+    const usageTotal = arraySum(calulatedUsageSlice, sumUsage);
+
+    const dailyCalculated = Math.round(usageTotal / calulatedUsageSlice.length);
     const monthlyCalculated = usageTotal + dailyCalculated * (daysInCurrentMonth - nowDate.getDate());
 
     const usagesAggregated: ({ date: string } & Usage)[] = [];
