@@ -12,9 +12,9 @@ import useAppTheme from '../src/hooks/useAppTheme';
 
 const queryClient = new QueryClient();
 
-export interface PageWithMetadata extends FunctionComponent<any> {
+// TODO: Remove when migrated to app directory
+type PageWithMetadata = FunctionComponent  & {
   layout?: React.FunctionComponent | undefined
-  inDevelopment?: boolean | undefined,
   title?: string | undefined
 }
 

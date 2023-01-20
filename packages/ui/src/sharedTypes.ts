@@ -15,3 +15,11 @@ export type RecursivePartial<T> = {
 };
 
 export type JsonResponse<T> = RecursivePartial<T>;
+
+export type ParsedJson =
+    | string
+    | number
+    | boolean
+    | null
+    | ParsedJson[]
+    | { [key: string]: ParsedJson };

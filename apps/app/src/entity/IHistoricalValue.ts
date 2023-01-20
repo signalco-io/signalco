@@ -1,4 +1,4 @@
 export interface IHistoricalValue {
     timeStamp: Date;
-    valueSerialized?: any;
+    valueSerialized?: string | undefined;
 }

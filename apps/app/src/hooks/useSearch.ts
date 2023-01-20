@@ -1,6 +1,11 @@
 import { useMemo, useState } from 'react';
 
-export const filterFuncObjectStringProps = <TItem extends object>(i: TItem, kw: string) => Object.keys(i).filter(ik => typeof (i as any)[ik] === 'string' && (i as any)[ik].toString().toLowerCase().indexOf(kw) >= 0).length > 0;
+export const filterFuncObjectStringProps = <TItem extends object>(i: TItem, kw: string) =>
+    Object
+        .keys(i)
+        .filter(ik =>
+            typeof (i as any)[ik] === 'string' && (i as any)[ik].toString().toLowerCase().indexOf(kw) >= 0)
+        .length > 0;
 
 const defaultSearchFunc = <TItem>(i: TItem, kw: string) => typeof i === 'string' && i.toString().toLocaleLowerCase() === kw;
 
