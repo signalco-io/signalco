@@ -7,13 +7,19 @@ import { now } from '../../../src/services/DateTimeProvider';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useInterval from '../../../src/hooks/useInterval';
 
-const stateOptions: IWidgetConfigurationOption<any>[] = [
+type ConfigProps = {
+    showSeconds?: boolean;
+    rows: number;
+    columns: number;
+}
+
+const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     { label: 'Show seconds', name: 'showSeconds', type: 'yesno', default: false, optional: true },
     DefaultColumns(2),
     DefaultRows(1)
 ];
 
-function WidgetTime(props: WidgetSharedProps<any>) {
+function WidgetTime(props: WidgetSharedProps<ConfigProps>) {
     const { config } = props;
     const [time, setTime] = useState('');
     const [seconds, setSeconds] = useState('');

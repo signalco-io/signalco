@@ -1,6 +1,6 @@
 import { FormBuilderProvider } from '@enterwell/react-form-builder';
-import formComponents from './generalFormComponents';
 import { ChildrenProps } from '../../src/sharedTypes';
+import formComponents from './generalFormComponents';
 
 export default function GeneralFormProvider(props: ChildrenProps) {
     return (

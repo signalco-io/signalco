@@ -94,9 +94,10 @@ class RealtimeService {
             .withUrl(getApiUrl('/signalr/contacts'), {
                 accessTokenFactory: () => {
                     const token = CurrentUserProvider.getToken();
-                    if (token === 'undefined')
+                    if (token === 'undefined' ||
+                        typeof token === 'undefined')
                         throw Error('TokenFactory not present. Unable to authorize SignalR client.');
-                    return token!;
+                    return token;
                 }
             })
             .configureLogging(LogLevel.Information)

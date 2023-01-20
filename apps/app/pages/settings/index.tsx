@@ -10,13 +10,13 @@ import { ApiDevelopmentUrl, ApiProductionUrl, setSignalcoApiEndpoint, signalcoAp
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale, { availableLocales } from '../../src/hooks/useLocale';
 import useAllEntities from '../../src/hooks/signalco/useAllEntities';
+import { humanizeNumber } from '../../src/helpers/StringHelpers';
 import { arraySum } from '../../src/helpers/ArrayHelpers';
 import AppThemePicker from '../../components/settings/AppThemePicker';
 import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';
 import LocationMapPicker from '../../components/forms/LocationMapPicker/LocationMapPicker';
 import generalFormComponents from '../../components/forms/generalFormComponents';
 import ApiBadge from '../../components/development/ApiBadge';
-import { humanizeNumber } from '../../src/helpers/StringHelpers';
 
 function SettingsItem(props: { children: ReactNode, label?: string | undefined }) {
     return (
@@ -104,7 +104,7 @@ function LabeledValue({ value, unit, label }: { value: string | number, unit?: s
                 <Typography level="h5" component="span">
                     {typeof value === 'number' ? humanizeNumber(value) : value}
                 </Typography>
-                {!!unit && <Typography level="body3" style={{lineHeight: '24px'}}>{unit}</Typography>}
+                {!!unit && <Typography level="body3" style={{ lineHeight: '24px' }}>{unit}</Typography>}
             </Row>
         </Stack>
     )
@@ -200,7 +200,7 @@ function UsageCurrent() {
                         <Bar name="Conducts" dataKey="conduct" stackId="a" fill={lightBlue[600]} />
                         <Bar name="Processes" dataKey="process" stackId="a" fill={amber[600]} />
                         <Bar name="Other" dataKey="other" stackId="a" fill={zinc[500]} />
-                        <ReferenceLine y={limit} stroke={deepOrange[800]} ifOverflow="extendDomain" />
+                        <ReferenceLine y={limit} strokeDasharray="8 8" stroke={deepOrange[800]} ifOverflow="extendDomain" />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

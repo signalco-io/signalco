@@ -26,7 +26,7 @@ export default function useLoadAndError<T>(load?: ValueOrFuncGeneric<Promise<T> 
                     setState({ isLoading: false, item: item });
                     loadPromiseRef.current = undefined;
                 });
-            } catch (err: any) {
+            } catch (err: unknown) {
                 setState({ isLoading: false, error: err?.toString() });
                 loadPromiseRef.current = undefined;
             }

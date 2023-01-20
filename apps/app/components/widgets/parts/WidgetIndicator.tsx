@@ -4,19 +4,25 @@ import Image from 'next/image';
 import { SmileMeh, SmileVeryHappy } from '@signalco/ui-icons';
 import { Button, Box, Stack } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
-import { DefaultTarget, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
+import { DefaultColumns, DefaultTarget } from '../../../src/widgets/WidgetConfigurationOptions';
 import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { KnownPages } from '../../../src/knownPages';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useContact from '../../../src/hooks/signalco/useContact';
+import IContactPointerPartial from '../../../src/contacts/IContactPointerPartial';
 import type IContactPointer from '../../../src/contacts/IContactPointer';
 
-const stateOptions: IWidgetConfigurationOption<any>[] = [
+type ConfigProps = {
+    target: IContactPointerPartial;
+    columns: number;
+}
+
+const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     DefaultTarget,
     DefaultColumns(1)
 ];
 
-function WidgetIndicator(props: WidgetSharedProps<any>) {
+function WidgetIndicator(props: WidgetSharedProps<ConfigProps>) {
     const { config } = props;
     const router = useRouter();
 

@@ -2,15 +2,15 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { Down, Stop, Up } from '@signalco/ui-icons';
 import { Stack, Button, Divider, Grid, Typography } from '@signalco/ui';
-import { StateAction, executeStateActionsAsync } from './WidgetState';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultColumns, DefaultLabel } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useEntity from '../../../src/hooks/signalco/useEntity';
-import IContactPointerPartial from '../../../src/contacts/IContactPointerPartial';
 import useContact from '../../../src/hooks/signalco/useContact';
+import IContactPointerPartial from '../../../src/contacts/IContactPointerPartial';
+import { StateAction, executeStateActionsAsync } from './WidgetState';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 

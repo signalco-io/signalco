@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { JsonResponse } from '@signalco/ui/dist/sharedTypes';
 import { Row, Stack, Loadable, NoDataPlaceholder, Typography } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -29,8 +30,8 @@ async function loadPricePolygonApi(ticker: string | undefined, apiKey: string | 
 
     const [tickerResponse, previousPriceResponse] = await Promise.all([tickerResponsePromise, previousPriceResponsePromise]);
 
-    const tickerData: any = await tickerResponse.json();
-    const previousPriceData: any = await previousPriceResponse.json();
+    const tickerData: JsonResponse<{ results: { ticker: string, name: string }[] }> = await tickerResponse.json();
+    const previousPriceData: JsonResponse<{ results: { c: number, o: number }[] }> = await previousPriceResponse.json();
 
     if (!previousPriceData?.results?.length)
         return {
@@ -66,8 +67,8 @@ export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>
     const ticker = price.item?.ticker ?? config?.ticker;
     const name = price.item?.name;
     const closePrice = price.item?.close;
-    const diff = price.item?.close - price.item?.open;
-    const diffPerc = Math.round(((diff / closePrice) * 100 + Number.EPSILON) * 100) / 100;
+    const diff = (price.item?.close ?? 0) - (price.item?.open ?? 0);
+    const diffPerc = closePrice ? (Math.round(((diff / closePrice) * 100 + Number.EPSILON) * 100) / 100) : 0;
     const diffPercDecimals = diffPerc.toFixed(4).replace(/0{0,2}$/, '');
 
     return (

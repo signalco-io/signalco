@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 import { cx } from 'classix';
 import { SupportedColorScheme } from '@signalco/ui';
-import styles from './SignalcoLogotype.module.scss';
 import ApiBadge from '../development/ApiBadge';
 import { isDeveloper } from '../../src/services/EnvProvider';
+import styles from './SignalcoLogotype.module.scss';
 
 interface SignalcoLogotypeProps {
     width?: number;

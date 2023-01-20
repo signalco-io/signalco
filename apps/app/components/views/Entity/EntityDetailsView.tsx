@@ -1,9 +1,6 @@
 import { useMemo, useState } from 'react';
 import { ExternalLink } from '@signalco/ui-icons';
 import { DisableButton, Avatar, Box, EditableInput, Timeago, MuiStack, Row, Stack, Loadable, Chip } from '@signalco/ui';
-import EntityProcessDetails from './EntityProcessDetails';
-import EntityOptions from './EntityOptions';
-import ContactsTable from './ContactsTable';
 import EntityIcon from '../../shared/entity/EntityIcon';
 import ShareEntityChip from '../../entity/ShareEntityChip';
 import EntityStatus, { useEntityStatus } from '../../entity/EntityStatus';
@@ -13,6 +10,9 @@ import { camelToSentenceCase } from '../../../src/helpers/StringHelpers';
 import { entityRenameAsync } from '../../../src/entity/EntityRepository';
 import { entityLastActivity } from '../../../src/entity/EntityHelper';
 import { setAsync } from '../../../src/contacts/ContactRepository';
+import EntityProcessDetails from './EntityProcessDetails';
+import EntityOptions from './EntityOptions';
+import ContactsTable from './ContactsTable';
 
 
 export interface EntityDetailsViewProps {

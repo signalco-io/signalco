@@ -60,7 +60,7 @@ export default function Loadable(props: LoadableProps) {
     return (
         <>
             {(contentVisible || isLoading) && (
-                <div style={{ visibility: isLoading ? 'visible' : 'hidden' }}>
+                <div style={{ visibility: isLoading ? 'visible' : 'hidden', width: '100%', height: '100%' }}>
                     {indicator}
                 </div>
             )}

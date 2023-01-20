@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import Image from 'next/image';
 import { Stack, Row, Button, Typography, Box } from '@signalco/ui';
+import useLocale from '../../src/hooks/useLocale';
+import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
 import GridWrapper from './GridWrapper';
 import DragableWidget from './DragableWidget';
 import DisplayWidget from './DisplayWidget';
-import useLocale from '../../src/hooks/useLocale';
-import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
 
 function NoWidgetsPlaceholder({ onAdd }: { onAdd: () => void }) {
     const { t } = useLocale('App', 'Dashboards');

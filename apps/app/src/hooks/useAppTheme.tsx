@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 import { type AppThemeMode, useColorScheme } from '@signalco/ui';
+import { fromDuration, now } from '../services/DateTimeProvider';
+import { showNotification } from '../notifications/PageNotificationService';
+import SunHelper from '../helpers/SunHelper';
 import useUserSetting from './useUserSetting';
 import { localizer } from './useLocale';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 import useInterval from './useInterval';
-import { fromDuration, now } from '../services/DateTimeProvider';
-import { showNotification } from '../notifications/PageNotificationService';
-import SunHelper from '../helpers/SunHelper';
 
 export default function useAppTheme() {
     const { mode, setMode } = useColorScheme();

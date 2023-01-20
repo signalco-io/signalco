@@ -1,5 +1,5 @@
-import IWidgetConfigurationOption from './IWidgetConfigurationOption';
 import IContactPointerPartial from '../contacts/IContactPointerPartial';
+import IWidgetConfigurationOption from './IWidgetConfigurationOption';
 
 const isInvalidateDeviceContactTarget = (value: IContactPointerPartial) =>
     !value.entityId ||

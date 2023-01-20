@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { Stack, Icon, Row, Button, Typography, Box } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
@@ -14,7 +14,7 @@ import IContactPointer from '../../../src/contacts/IContactPointer';
 import { historiesAsync } from '../../../src/contacts/ContactRepository';
 
 type ConfigProps = {
-    label: string;
+    label?: string;
     targetTemperature: IContactPointer | undefined;
     targetHumidity: IContactPointer | undefined;
     targetHeating: IContactPointer | undefined;
@@ -90,8 +90,8 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
     const { data: heatingDevice } = useEntity(config?.targetHeating?.entityId);
     const { data: coolingDevice } = useEntity(config?.targetCooling?.entityId);
 
-    const temperatureContact = useContact(temperatureDevice && config?.targetTemperature)?.data;
-    const humidityContact = useContact(temperatureDevice && config?.targetHumidity)?.data;
+    const { data: temperatureContact } = useContact(temperatureDevice && config?.targetTemperature);
+    const { data: humidityContact } = useContact(temperatureDevice && config?.targetHumidity);
 
     const columns = config?.columns ?? 4;
     const rows = config?.rows ?? 4;
@@ -107,7 +107,10 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
     const heatingActive = heatingContact?.valueSerialized === 'true';
 
     const duration = 24 * 60 * 60 * 1000;
-    const loadHistoryCallback = useCallback(() => historiesAsync(temperatureContact ? [temperatureContact] : [], duration), [temperatureContact, duration]);
+    const loadHistoryCallback = useMemo(() =>
+        temperatureContact
+            ? (() => historiesAsync([temperatureContact], duration))
+            : undefined, [temperatureContact, duration]);
     const historyData = useLoadAndError(loadHistoryCallback);
 
     return (
@@ -156,10 +159,13 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
             </Stack>
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}>
                 <Graph
+                    isLoading={historyData.isLoading}
+                    error={historyData.error}
                     data={historyData.item?.at(0)?.history?.map(i => ({
                         id: i.timeStamp.toUTCString(),
                         value: i.valueSerialized ?? ''
-                    })) ?? []} durationMs={duration}
+                    })) ?? []}
+                    durationMs={duration}
                     width={columns * 84 - 2}
                     height={rows * 25}
                     hideLegend

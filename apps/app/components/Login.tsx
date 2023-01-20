@@ -3,8 +3,8 @@ import Link from 'next/link';
 import {
     Button, Typography, Stack, Row
 } from '@signalco/ui';
-import SignalcoLogotype from './icons/SignalcoLogotype';
 import useTimeout from '../src/hooks/useTimeout';
+import SignalcoLogotype from './icons/SignalcoLogotype';
 
 function Login() {
     const [isLong, setIsLong] = useState(false);

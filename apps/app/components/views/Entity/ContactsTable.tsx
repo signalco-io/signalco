@@ -2,6 +2,7 @@ import React, { Fragment, useMemo, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindTrigger } from 'material-ui-popup-state';
 import { Add, Code, Edit, MoreVertical, UI } from '@signalco/ui-icons';
+import { ParsedJson } from '@signalco/ui/dist/sharedTypes';
 import { Stack, Loadable, Row, Button, Card, IconButton, List, ListDivider, ListItem, ListItemContent, Menu, MenuItem, TextField, Tooltip, Typography, Box, CopyToClipboardInput, ListTreeItem, Picker, SelectItems, Timeago } from '@signalco/ui';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
 import CodeEditor from '../../code/CodeEditor';
@@ -9,16 +10,16 @@ import useLocale from '../../../src/hooks/useLocale';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import { setAsync } from '../../../src/contacts/ContactRepository';
 
-function JsonNonArrayVisualizer(props: { name: string, value: any }) {
-    if (props.value === null ||
-        typeof (props.value) === 'undefined') {
+function JsonNonArrayVisualizer({ value }: { value: ParsedJson }) {
+    if (value === null ||
+        typeof (value) === 'undefined') {
         return <div>null</div>
     }
 
-    if (typeof props.value === 'object') {
-        const propertyNames = Object.keys(props.value);
-        const properties = typeof props.value !== 'undefined' && propertyNames
-            ? propertyNames.map(pn => ({ name: pn, value: props.value[pn] }))
+    if (typeof value === 'object') {
+        const propertyNames = Object.keys(value);
+        const properties = typeof value !== 'undefined' && propertyNames
+            ? propertyNames.map(pn => ({ name: pn, value: value == null ? value[pn] : null }))
             : [];
 
         return (
@@ -31,7 +32,7 @@ function JsonNonArrayVisualizer(props: { name: string, value: any }) {
 
     return null;
 }
-function JsonArrayVisualizer(props: { name: string, value: Array<any> }) {
+function JsonArrayVisualizer(props: { name: string, value: Array<ParsedJson> }) {
     return (
         <>
             {props.value.map((v, i) => <ObjectVisualizer key={`${props.name}-${i}`} defaultOpen={props.value.length <= 1} name={i.toString()} value={v} />)}
@@ -39,7 +40,7 @@ function JsonArrayVisualizer(props: { name: string, value: Array<any> }) {
     );
 }
 
-function ObjectVisualizer(props: { name: string, value: any, defaultOpen?: boolean }) {
+function ObjectVisualizer(props: { name: string, value: ParsedJson, defaultOpen?: boolean }) {
     const { name, value, defaultOpen } = props;
     const isArray = Array.isArray(value);
     const hasChildren = typeof value === 'object' || isArray;
@@ -73,8 +74,8 @@ function ObjectVisualizer(props: { name: string, value: any, defaultOpen?: boole
             {hasChildren && (
                 <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', ml: 2.5 }}>
                     {isArray
-                        ? <JsonArrayVisualizer name={name} value={value as Array<any>} />
-                        : <JsonNonArrayVisualizer name={name} value={value} />}
+                        ? <JsonArrayVisualizer name={name} value={value as Array<ParsedJson>} />
+                        : <JsonNonArrayVisualizer value={value} />}
                 </Box>
             )}
         </ListTreeItem>
