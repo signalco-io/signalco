@@ -4,6 +4,7 @@ import { NoDataPlaceholder, Row, Sheet, Typography, Timeago, lightBlue, deepOran
 import { ObjectDictAny } from '../../src/sharedTypes';
 import { now } from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
+import { isBoolean } from '../../src/helpers/ValueSerializedHelper';
 import { arrayMax, arrayMin } from '../../src/helpers/ArrayHelpers';
 
 export type GraphDataPoint = {
@@ -209,9 +210,8 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
 function Graph({ isLoading, error, data, label, ...rest }: GraphProps) {
     const { t } = useLocalePlaceholders();
 
-    const isBoolean = data?.length && (data[0].value?.toLowerCase() === 'true' || data[0].value?.toLowerCase() === 'false');
     let GraphComponent = GraphArea;
-    if (isBoolean)
+    if (isBoolean(data?.map(d => d.value)))
         GraphComponent = GraphTimeLine;
 
     return (
