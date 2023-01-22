@@ -1,4 +1,4 @@
-export function isBoolean(valueSerialized: string | string[] | false | null | undefined) {
+export function isBoolean(valueSerialized: string | (string | number | { [key: string]: string | number })[] | number | false | null | undefined) {
     if (valueSerialized == null ||
         valueSerialized === false)
         return false;
@@ -6,6 +6,6 @@ export function isBoolean(valueSerialized: string | string[] | false | null | un
     const valueToCompare = Array.isArray(valueSerialized)
         ? valueSerialized.at(0)
         : valueSerialized;
-    return valueToCompare?.toLowerCase() === 'true' ||
-        valueToCompare?.toLowerCase() === 'false';
+    return valueToCompare?.toString().toLowerCase() === 'true' ||
+        valueToCompare?.toString().toLowerCase() === 'false';
 }

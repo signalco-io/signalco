@@ -1,31 +1,39 @@
-import { Area, Bar, BarChart, ComposedChart, LabelList, Line, Tooltip, XAxis, YAxis } from 'recharts';
+import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
-import { NoDataPlaceholder, Row, Sheet, Typography, Timeago, lightBlue, deepOrange, Loadable } from '@signalco/ui';
+import { NoDataPlaceholder, Row, Sheet, Typography, Timeago, lightBlue, deepOrange, Loadable, amber, green, zinc } from '@signalco/ui';
 import { ObjectDictAny } from '../../src/sharedTypes';
 import { now } from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
 import { isBoolean } from '../../src/helpers/ValueSerializedHelper';
-import { arrayMax, arrayMin } from '../../src/helpers/ArrayHelpers';
+import { camelToSentenceCase } from '../../src/helpers/StringHelpers';
 
 export type GraphDataPoint = {
     id: string;
-    value: string;
+    value: string | number | { [key: string]: string | number };
 }
+
+export type GraphLimit = {
+    id: string;
+    value: string | number | undefined;
+};
 
 type InnerGraphProps = {
     data: GraphDataPoint[];
+    limits?: GraphLimit[];
     durationMs: number;
     width: number;
     height: number;
     startDateTime?: Date;
     hideLegend?: boolean;
     adaptiveDomain?: boolean;
+    aggregate?: boolean;
 }
 
 export type GraphProps = InnerGraphProps & {
     isLoading?: boolean;
     error?: unknown;
     label?: string;
+    discrete?: boolean;
 }
 
 const renderCustomizedTimeLineLabel = (props: any) => {
@@ -156,11 +164,6 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
     const firstDataPoint = data?.at(-1);
     const lastDataPoint = data ? data[0] : undefined;
 
-    const min = arrayMin(transformedData, d => parseFloat(d.value) || 0);
-    const max = arrayMax(transformedData, d => parseFloat(d.value) || 0);
-    const dMin = Math.floor((min || 0) * 0.99);
-    const dMax = Math.ceil((max || 0) * 1.01);
-
     return (
         <ComposedChart
             width={width}
@@ -176,7 +179,7 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
             <XAxis domain={[domainGraph(new Date(firstDataPoint?.id ?? 0).getTime()), domainGraph(new Date(lastDataPoint?.id ?? 0).getTime())]} ticks={ticks || []} dataKey={xKey} type="number" hide />
             <YAxis
                 allowDecimals={false}
-                domain={[dMin, dMax]}
+                domain={['dataMin', 'dataMax']}
                 tickSize={0}
                 tickMargin={4}
                 interval="preserveStartEnd"
@@ -207,12 +210,87 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
     );
 }
 
-function Graph({ isLoading, error, data, label, ...rest }: GraphProps) {
+const graphColorWheel = [
+    green[600],
+    lightBlue[600],
+    amber[600],
+    zinc[500]
+]
+
+function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
+    const barKeys = (data?.length ?? 0) > 0
+        ? (typeof data[0].value === 'object' ? Object.keys(data[0].value) : ['value'])
+        : [];
+
+    const graphData = data.map(d => typeof d.value === 'object' ? ({ id: d.id, ...d.value }) : d);
+
+    const usagesAggregated = [];
+    if (aggregate) {
+        for (let usageIndex = 0; usageIndex < graphData.length; usageIndex++) {
+            const currentPoint: ObjectDictAny = graphData[usageIndex];
+            const previousPoint = usageIndex > 0
+                ? usagesAggregated[usageIndex - 1]
+                : {};
+            const aggregatedPoint: ObjectDictAny = {
+                id: currentPoint.id
+            };
+            Object.keys(currentPoint).forEach(cpk => {
+                if (cpk === 'id') return;
+
+                aggregatedPoint[cpk] = currentPoint[cpk] + (previousPoint[cpk] ?? 0);
+            });
+            usagesAggregated.push(aggregatedPoint);
+        }
+    }
+
+    return (
+        <BarChart
+            width={width}
+            height={height}
+            data={aggregate ? usagesAggregated : graphData}
+            margin={{
+                top: 20,
+                right: 30,
+                left: 20,
+                bottom: 5,
+            }}
+        >
+            <CartesianGrid stroke="var(--joy-palette-divider)" vertical={false} />
+            <XAxis dataKey="id" hide />
+            <YAxis strokeWidth={0} fill="var(--joy-palette-text-tertiary)" />
+            <Tooltip
+                contentStyle={{
+                    backgroundColor: 'var(--joy-palette-background-body)',
+                    borderColor: 'var(--joy-palette-divider)',
+                    borderRadius: '8px',
+                    padding: '12px 16px'
+                }}
+                cursor={{
+                    stroke: 'var(--joy-palette-divider)',
+                    fill: 'rgba(128,128,128,0.2)'
+                }} />
+            <Legend iconType="circle" layout="vertical" align="right" verticalAlign="top" wrapperStyle={{
+                paddingLeft: '16px'
+            }} />
+            {barKeys.map((bk, bki) => (
+                <Bar key={bk} name={camelToSentenceCase(bk)} dataKey={bk} stackId="a" fill={graphColorWheel[bki % graphColorWheel.length]} />
+            ))}
+            {(limits?.length ?? 0) > 0 && limits?.map(l =>
+                <ReferenceLine key={l.id} y={l.value} strokeDasharray="8 8" stroke={deepOrange[800]} ifOverflow="extendDomain" />
+            )}
+        </BarChart>
+    );
+}
+
+function Graph({ isLoading, error, data, label, discrete, ...rest }: GraphProps) {
     const { t } = useLocalePlaceholders();
 
+    const dataItems = data?.map(d => d.value);
     let GraphComponent = GraphArea;
-    if (isBoolean(data?.map(d => d.value)))
+    if (isBoolean(dataItems))
         GraphComponent = GraphTimeLine;
+    if (discrete)
+        GraphComponent = GraphBar;
 
     return (
         <Row spacing={2}>
