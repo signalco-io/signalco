@@ -2,8 +2,8 @@
 
 import React, { Suspense } from 'react';
 import { NavigatingButton, Container, Button, Row, Link } from '@signalco/ui';
-import SignalcoLogotype from './icons/SignalcoLogotype';
 import { KnownPages } from '../src/knownPages';
+import SignalcoLogotype from './icons/SignalcoLogotype';
 
 const navLinks = [
     // { href: '/features', text: 'Features' },
