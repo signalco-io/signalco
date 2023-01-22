@@ -13,7 +13,10 @@
                 "zigbee",
                 "bluetooth"
             ],
-            "officialWebsite": "https://www.philips-hue.com/en-us/p/hue-white-ambiance-1-pack-e26/046677548490"
+            "officialWebsite": "https://www.philips-hue.com/en-us/p/hue-white-ambiance-1-pack-e26/046677548490",
+            "channelNames": [
+                "philipshue"
+            ]
         },
         {
             "id": "faba2478-174e-465e-86cd-661f38e7c56d",
@@ -27,7 +30,10 @@
             "communication": [
                 "zigbee"
             ],
-            "officialWebsite": "https://www.philips-hue.com/en-in/p/hue-white-and-color-ambiance-lightstrip-plus-extension-1-meter/8718699703561"
+            "officialWebsite": "https://www.philips-hue.com/en-in/p/hue-white-and-color-ambiance-lightstrip-plus-extension-1-meter/8718699703561",
+            "channelNames": [
+                "philipshue"
+            ]
         },
         {
             "id": "ae094789-9111-486e-82e7-1a1e0db7f67d",
@@ -133,7 +139,7 @@
             "id": "28a40784-834a-4490-a585-d298b1720989",
             "name": "Mi Window and Door Sensor",
             "manufacturer": "Mi, Lumi United Technology Co., Ltd.",
-            "categories": [
+        "categories": [
                 "sensor"
             ],
             "communication": [

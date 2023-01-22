@@ -1,7 +1,7 @@
-import IContactPointerPartial from '../contacts/IContactPointerPartial';
+import IContactPointer from '../contacts/IContactPointer';
 import IWidgetConfigurationOption from './IWidgetConfigurationOption';
 
-const isInvalidateDeviceContactTarget = (value: IContactPointerPartial) =>
+const isInvalidateDeviceContactTarget = (value: Partial<IContactPointer>) =>
     !value.entityId ||
     !value.contactName ||
     !value.channelName;
@@ -32,7 +32,7 @@ export const IsConfigurationValid = <TConfigProps>(config: any, options: IWidget
                 return false;
             }
 
-            if ((value as IContactPointerPartial[]).filter(v => isInvalidateDeviceContactTarget(v)).length) {
+            if ((value as Partial<IContactPointer>[]).filter(v => isInvalidateDeviceContactTarget(v)).length) {
                 console.debug(`Config invalid: ${String(opt.name)} - deviceContact multiple, missing options`, config);
                 return false;
             }

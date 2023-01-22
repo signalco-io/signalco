@@ -1,7 +1,7 @@
 import { ChildrenProps } from "../sharedTypes";
 import { Menu as JoyMenu } from '@mui/joy';
 import { usePopupState, bindTrigger, bindMenu } from "material-ui-popup-state/hooks";
-import { ReactElement } from "react";
+import { ReactElement, useId } from "react";
 
 export type ControlAriaProps = {
     'aria-controls'?: string;
@@ -10,7 +10,7 @@ export type ControlAriaProps = {
 };
 
 export interface MenuProps extends ChildrenProps {
-    menuId: string;
+    menuId?: string;
     renderTrigger: (props: ControlAriaProps & {
         onClick: (event: React.MouseEvent<Element, MouseEvent>) => void;
         onTouchStart: (event: React.TouchEvent<Element>) => void;
@@ -19,7 +19,8 @@ export interface MenuProps extends ChildrenProps {
 
 /** @alpha */
 export default function Menu({ children, menuId, renderTrigger }: MenuProps) {
-    const popupState = usePopupState({ variant: 'popover', popupId: menuId });
+    const id = useId();
+    const popupState = usePopupState({ variant: 'popover', popupId: menuId ?? id });
     const { anchorReference, anchorPosition, ...menuProps } = bindMenu(popupState);
     const trigger = renderTrigger(bindTrigger(popupState));
     return (

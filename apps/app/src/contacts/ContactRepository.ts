@@ -26,6 +26,14 @@ export async function setAsync(pointer: IContactPointer, valueSerialized: string
     });
 }
 
+export async function deleteContactAsync(pointer: IContactPointer) {
+    await requestAsync('/contact', 'delete', {
+        entityId: pointer.entityId,
+        contactName: pointer.contactName,
+        channelName: pointer.channelName
+    });
+}
+
 export async function historiesAsync(targets: IContactPointer[] | undefined, duration: number) {
     const contactsHistory = targets?.map(async t => ({ contact: t, history: await historyAsync(t, duration) }));
     if (contactsHistory) {

@@ -24,12 +24,12 @@ import useEntity from '../../../src/hooks/signalco/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
 import useAllEntities from '../../../src/hooks/signalco/useAllEntities';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
-import IContactPointerPartial from '../../../src/contacts/IContactPointerPartial';
+import IContactPointer from '../../../src/contacts/IContactPointer';
 import InputContactValue from './InputContactValue';
 import EntityIcon from './EntityIcon';
 
-function EntityContactValueSelection(props: { target: IContactPointerPartial | undefined, value: any, onSelected: (value: any) => void }) {
-    const { target, value, onSelected } = props;
+function EntityContactValueSelection(props: { target: IContactPointer, valueSerialized: string | undefined, onSelected: (valueSerialized: string | undefined) => void }) {
+    const { target, valueSerialized, onSelected } = props;
     const entity = useEntity(target?.entityId);
 
     const targetFull = target && target.entityId && target.channelName && target.contactName
@@ -37,30 +37,26 @@ function EntityContactValueSelection(props: { target: IContactPointerPartial | u
         : undefined;
     const contact = useContact(targetFull);
 
-    const handleChange = (newValue: any) => {
-        onSelected(newValue);
-    };
-
     return (
         <Loadable isLoading={entity.isLoading} error={entity.error}>
             {(target && targetFull && contact) && (
                 <InputContactValue
                     contact={contact.data}
-                    value={value}
-                    onChange={handleChange}
+                    value={valueSerialized}
+                    onChange={onSelected}
                 />
             )}
         </Loadable>
     );
 }
 
-function EntitySelection(props: { target: IContactPointerPartial | undefined, onSelected: (target: IContactPointerPartial | undefined) => void; }) {
+function EntitySelection(props: { target: Partial<IContactPointer> | undefined, onSelected: (target: Partial<IContactPointer> | undefined) => void; }) {
     const {
         target, onSelected
     } = props;
 
     const entities = useAllEntities();
-    const handleDeviceSelected = (selectedEntity: IEntityDetails | undefined) => {
+    const handleEntitySelected = (selectedEntity: IEntityDetails | undefined) => {
         onSelected(selectedEntity ? { entityId: selectedEntity.id } : undefined);
     };
 
@@ -79,13 +75,13 @@ function EntitySelection(props: { target: IContactPointerPartial | undefined, on
                 </Box>
                 <List>
                     <ListItem>
-                        <ListItemButton onClick={() => handleDeviceSelected(undefined)} selected={!target?.entityId}>
+                        <ListItemButton onClick={() => handleEntitySelected(undefined)} selected={!target?.entityId}>
                             None
                         </ListItemButton>
                     </ListItem>
                     {filteredEntities?.map(entity => (
                         <ListItem key={entity.id}>
-                            <ListItemButton onClick={() => handleDeviceSelected(entity)} selected={target?.entityId === entity.id}>
+                            <ListItemButton onClick={() => handleEntitySelected(entity)} selected={target?.entityId === entity.id}>
                                 {entity.alias}
                             </ListItemButton>
                         </ListItem>
@@ -96,9 +92,13 @@ function EntitySelection(props: { target: IContactPointerPartial | undefined, on
     );
 }
 
+type ContactPointerRequiredEntity =
+    (Partial<IContactPointer> & Pick<IContactPointer, 'entityId'>)
+    | IContactPointer;
+
 interface EntityContactSelectionProps {
-    target: IContactPointerPartial | undefined;
-    onSelected: (target: IContactPointerPartial | undefined) => void;
+    target: ContactPointerRequiredEntity;
+    onSelected: (target: ContactPointerRequiredEntity) => void;
 }
 
 function EntityContactSelection(props: EntityContactSelectionProps) {
@@ -109,7 +109,7 @@ function EntityContactSelection(props: EntityContactSelectionProps) {
     const { data: entity, isLoading, error } = useEntity(target?.entityId);
     const contacts = entity?.contacts ?? [];
 
-    const handleContactSelected = (contact: IContactPointerPartial) => {
+    const handleContactSelected = (contact: ContactPointerRequiredEntity) => {
         onSelected(contact);
     }
 
@@ -121,13 +121,13 @@ function EntityContactSelection(props: EntityContactSelectionProps) {
         <Loadable isLoading={isLoading} error={error}>
             <List>
                 <ListItem>
-                    <ListItemButton onClick={() => handleContactSelected({ entityId: target!.entityId })} selected={!target?.contactName || !target?.channelName}>
+                    <ListItemButton onClick={() => handleContactSelected({ entityId: target.entityId })} selected={!target.contactName || !target.channelName}>
                         None
                     </ListItemButton>
                 </ListItem>
                 {contacts.map(c => (
                     <ListItem key={`${c.channelName}-${c.contactName}`}>
-                        <ListItemButton onClick={() => handleContactSelected(c)} selected={target?.channelName === c.channelName && target?.contactName === c.contactName}>
+                        <ListItemButton onClick={() => handleContactSelected(c)} selected={target.channelName === c.channelName && target.contactName === c.contactName}>
                             {c.contactName}
                         </ListItemButton>
                     </ListItem>
@@ -138,56 +138,58 @@ function EntityContactSelection(props: EntityContactSelectionProps) {
 }
 
 interface EntitySelectionMenuProps {
-    target?: IContactPointerPartial;
+    target?: Partial<IContactPointer>;
     selectContact?: boolean;
     selectValue?: boolean;
-    value?: any;
-    onSelected: (target: IContactPointerPartial | undefined, value: any) => void;
+    valueSerialized?: string | undefined;
+    onSelected: (target: Partial<IContactPointer> | undefined, valueSerialized: string | undefined) => void;
     onClose: () => void;
 }
 
-function EntitySelectionMenu(props: EntitySelectionMenuProps) {
-    const {
-        target, selectContact, selectValue, value, onSelected, onClose
-    } = props;
-    const [selecting, setSelecting] = useState<undefined | 'entity' | 'contact' | 'value'>(undefined);
+function EntitySelectionMenu({
+    target, selectContact, selectValue, valueSerialized,
+    onSelected, onClose
+}: EntitySelectionMenuProps) {
+    const [selecting, setSelecting] = useState<'entity' | 'contact' | 'value'>(
+        (selectValue && target?.contactName)
+            ? 'value'
+            : (selectContact && target?.entityId
+                ? 'contact'
+                : 'entity'));
     const entitySelected = target?.entityId;
-    const contactSelected = !!(target?.channelName && target?.contactName);
+    const contactSelected = !!(entitySelected && target?.channelName && target?.contactName);
 
     useEffect(() => {
-        if (selectValue && target?.channelName && target?.contactName) {
+        if (selectValue && contactSelected) {
             setSelecting('value');
-        } else if (selectContact && target?.entityId) {
+        } else if (selectContact && entitySelected) {
             setSelecting('contact');
         } else {
             setSelecting('entity');
         }
-    }, [selectContact, selectValue, target]);
-
-    console.log('selecting', selecting)
+    }, [contactSelected, entitySelected, selectContact, selectValue]);
 
     const handleEditEntity = () => {
         setSelecting('entity');
     };
 
-    const handleEntitySelected = (target: IContactPointerPartial | undefined) => {
+    const handleEntitySelected = (target: Partial<IContactPointer> | undefined) => {
         onSelected(target, undefined);
         if (!selectContact && target?.entityId) {
             onClose();
         }
     };
 
-    const handleContactSelected = (target: IContactPointerPartial | undefined) => {
+    const handleContactSelected = (target: Partial<IContactPointer> | undefined) => {
         onSelected(target, undefined);
-        console.debug('contact selected', target);
         if (!selectValue && target?.channelName && target?.contactName) {
             onClose();
         }
     };
 
-    const handleContactValueSelected = (newValue: any) => {
-        onSelected(target, newValue);
-        if (typeof newValue !== undefined) {
+    const handleContactValueSelected = (newValueSerialized: string | undefined) => {
+        onSelected(target, newValueSerialized);
+        if (typeof newValueSerialized !== undefined) {
             onClose();
         }
     };
@@ -199,7 +201,6 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                 sx={{ flexGrow: selecting === 'entity' ? 1 : 0 }}
                 onChange={handleEditEntity}
                 unmountOnExit
-            // disabled={selecting !== 'entity'}
             >
                 <Typography>
                     {entitySelected ? (
@@ -212,7 +213,7 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                     <EntitySelection target={target} onSelected={handleEntitySelected} />
                 </Box>
             </Accordion>
-            {selectContact && (
+            {(selectContact && entitySelected) && (
                 <Accordion
                     sx={{ flexGrow: selecting === 'contact' ? 1 : 0 }}
                     open={selecting === 'contact'}
@@ -235,10 +236,10 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                             )}
                         </Row>
                     </Typography>
-                    <EntityContactSelection target={target!} onSelected={handleContactSelected} />
+                    <EntityContactSelection target={target as ContactPointerRequiredEntity} onSelected={handleContactSelected} />
                 </Accordion>
             )}
-            {selectValue && (
+            {(selectValue && contactSelected) && (
                 <Accordion
                     sx={{ flexGrow: selecting === 'value' ? 1 : 0 }}
                     open={selecting === 'value'}
@@ -251,7 +252,7 @@ function EntitySelectionMenu(props: EntitySelectionMenuProps) {
                             {!contactSelected && <Typography level="body2">Select contact first</Typography>}
                         </Row>
                     </Typography>
-                    <EntityContactValueSelection target={target!} value={value} onSelected={handleContactValueSelected} />
+                    <EntityContactValueSelection target={target as IContactPointer} valueSerialized={valueSerialized} onSelected={handleContactValueSelected} />
                 </Accordion>
             )}
         </>
@@ -287,25 +288,25 @@ function EntityIconLabel(props: { entityId: string | undefined, description?: st
 }
 
 export interface DisplayEntityTargetProps {
-    target?: IContactPointerPartial;
+    target?: Partial<IContactPointer>;
     selectContact?: boolean;
     selectValue?: boolean;
-    value?: any;
-    onChanged?: (updated: IContactPointerPartial | undefined, value: any | undefined) => void;
+    valueSerialized?: string | undefined;
+    onChanged?: (updated: Partial<IContactPointer> | undefined, valueSerialized: string | undefined) => void;
 }
 
-function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
+function DisplayEntityTarget(props: DisplayEntityTargetProps) {
     const {
         target,
         selectContact,
         selectValue,
-        value,
+        valueSerialized,
         onChanged
     } = props;
     const entityMenu = usePopupState({ variant: 'popover', popupId: 'entitytarget-menu' });
 
-    const handleEntitySelected = (target: IContactPointerPartial | undefined, value: any) => {
-        onChanged && onChanged(target, value);
+    const handleEntitySelected = (target: Partial<IContactPointer> | undefined, valueSerialized: string | undefined) => {
+        onChanged && onChanged(target, valueSerialized);
     };
 
     const handleEntitySelectionClose = () => {
@@ -325,7 +326,7 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                             <Row spacing={1} alignItems="end">
                                 <Typography level="body2">{target.contactName ?? 'None'}</Typography>
                                 {selectValue && (
-                                    <Typography fontWeight="bold">{value?.toString() ?? '-'}</Typography>
+                                    <Typography fontWeight="bold">{valueSerialized ?? '-'}</Typography>
                                 )}
                             </Row>
                         )}
@@ -339,7 +340,7 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
                         target={target}
                         selectContact={selectContact}
                         selectValue={selectValue}
-                        value={value}
+                        valueSerialized={valueSerialized}
                         onSelected={handleEntitySelected}
                         onClose={handleEntitySelectionClose} />
                 </Card>
@@ -348,4 +349,4 @@ function DisplayDeviceTarget(props: DisplayEntityTargetProps) {
     );
 }
 
-export default DisplayDeviceTarget;
+export default DisplayEntityTarget;

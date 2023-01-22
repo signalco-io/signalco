@@ -9,7 +9,7 @@ import { showNotification } from '../../../src/notifications/PageNotificationSer
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useEntity from '../../../src/hooks/signalco/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
-import IContactPointerPartial from '../../../src/contacts/IContactPointerPartial';
+import IContactPointer from '../../../src/contacts/IContactPointer';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
@@ -18,7 +18,7 @@ type ConfigProps = {
     label: string,
     targetUp: StateAction | undefined;
     targetDown: StateAction | undefined;
-    targetPosition: IContactPointerPartial | undefined;
+    targetPosition: Partial<IContactPointer> | undefined;
     stopValueSerialized: string | undefined;
     stopAfter: string | undefined;
     columns: number;

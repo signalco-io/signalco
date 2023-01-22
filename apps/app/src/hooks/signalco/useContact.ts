@@ -1,8 +1,7 @@
-import type IContactPointerPartial from '../../contacts/IContactPointerPartial';
 import type IContactPointer from '../../contacts/IContactPointer';
 import useEntity from './useEntity';
 
-export default function useContact(pointer: IContactPointer | IContactPointerPartial | undefined) {
+export default function useContact(pointer: Partial<IContactPointer> | undefined) {
     const entity = useEntity(pointer?.entityId);
     const contact = entity.data?.contacts?.find(c =>
         c.channelName === pointer?.channelName &&

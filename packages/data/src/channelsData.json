@@ -17,7 +17,7 @@
         "officialUrl": "https://www.irobot.com/"
     },
     {
-        "channelName": "philips-hue",
+        "channelName": "philipshue",
         "label": "Philips Hue",
         "categories": [
             "smart-home"
