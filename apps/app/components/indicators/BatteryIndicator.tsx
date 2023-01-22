@@ -22,7 +22,7 @@ export default function BatteryIndicator({ level, size }: { level: number | unde
 
     return (
         <Tooltip title={`${level}%`}>
-            <Icon stroke={color} size={size === 'sm' ? 16 : 24} />
+            <Icon stroke={color} size={size === 'sm' ? 16 : 20} />
         </Tooltip>
     );
 }
