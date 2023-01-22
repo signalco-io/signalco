@@ -28,7 +28,6 @@
             "name": "Name",
             "shared": "Shared",
             "lastActivity": "Last activity",
-            "SearchLabel": "Search...",
             "DeleteButtonLabel": "Delete...",
             "DeleteTitle": "Delete entity",
             "DeleteErrorUnknown": "Failed to delete entity. Please try again.",
@@ -183,6 +182,9 @@
             "Confirm": "Confirm"
         },
         "Components": {
+            "SearchInput": {
+                "Label": "Search..."
+            },
             "AppThemePicker": {
                 "PickDayNightTimes": "Pick day and night times",
                 "DayTime": "Day time",

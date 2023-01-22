@@ -12,6 +12,9 @@
             "Logout": "Odjava"
         },
         "Components": {
+            "SearchInput": {
+                "Label": "Pretraga..."
+            },
             "AppThemePicker": {
                 "DayTime": "Vrijeme dana",
                 "NightTime": "Noć",
@@ -74,7 +77,6 @@
             "LastActivity": "Posljednja aktivnost",
             "Manufacturer": "Proizvođač",
             "Model": "Model",
-            "SearchLabel": "Pretraga...",
             "Contacts": "Točke",
             "Table": "Tablica",
             "history": "povijest",
