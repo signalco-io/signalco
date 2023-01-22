@@ -1,6 +1,10 @@
 import { arrayMax } from '../helpers/ArrayHelpers';
 import IEntityDetails from './IEntityDetails'
 
+export function entityBatteryLevel(entity: IEntityDetails | undefined) {
+    return parseFloat(entity?.contacts.find(c => c.contactName === 'battery')?.valueSerialized ?? '');
+}
+
 export function entityHasOffline(entity: IEntityDetails | undefined) {
     if (typeof entity === 'undefined') return false;
     return !!entity.contacts.find(c => c.contactName === 'offline');

@@ -2,8 +2,10 @@ import { useMemo, useState } from 'react';
 import { ExternalLink } from '@signalco/ui-icons';
 import { DisableButton, Avatar, Box, EditableInput, Timeago, MuiStack, Row, Stack, Loadable, Chip } from '@signalco/ui';
 import EntityIcon from '../../shared/entity/EntityIcon';
+import BatteryIndicator from '../../indicators/BatteryIndicator';
 import ShareEntityChip from '../../entity/ShareEntityChip';
 import EntityStatus, { useEntityStatus } from '../../entity/EntityStatus';
+import { useEntityBattery } from '../../entity/EntityBattery';
 import useEntity from '../../../src/hooks/signalco/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
 import { camelToSentenceCase } from '../../../src/helpers/StringHelpers';
@@ -26,6 +28,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
 
     const Icon = EntityIcon(entity);
     const { hasStatus, isOffline, isStale } = useEntityStatus(entity);
+    const { hasBattery, level } = useEntityBattery(entity);
 
     const handleRename = async (newAlias: string) => {
         if (id) {
@@ -85,6 +88,12 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                     </Row>
                     <Row spacing={1}>
                         <EntityStatus entity={entity} />
+                        {hasBattery &&
+                            <Chip>
+                                <BatteryIndicator level={level} size="sm" />
+                                {`${level}%`}
+                            </Chip>
+                        }
                         {(hasStatus && (isStale || isOffline)) && (
                             <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
                                 <Timeago date={entityLastActivity(entity)} />
