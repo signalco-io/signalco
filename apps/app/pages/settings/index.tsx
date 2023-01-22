@@ -2,7 +2,7 @@ import { ResponsiveContainer } from 'recharts';
 import React, { ReactNode, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { getTimeZones } from '@vvo/tzdb';
-import { Stack, Row, Typography, Picker, SelectItems, Checkbox, TextField, Container, Divider, Loadable } from '@signalco/ui';
+import { Stack, Row, Typography, Picker, SelectItems, Checkbox, Container, Divider, Loadable } from '@signalco/ui';
 import { isNonEmptyString, isNotNull, noError } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, FormItems, useFormField } from '@enterwell/react-form-builder';
@@ -12,7 +12,8 @@ import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale, { availableLocales } from '../../src/hooks/useLocale';
 import useAllEntities from '../../src/hooks/signalco/useAllEntities';
 import { humanizeNumber } from '../../src/helpers/StringHelpers';
-import { arraySum } from '../../src/helpers/ArrayHelpers';
+import { arraySum, sequenceEqual } from '../../src/helpers/ArrayHelpers';
+import SearchInput from '../../components/shared/inputs/SearchInput';
 import AppThemePicker from '../../components/settings/AppThemePicker';
 import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';
 import LocationMapPicker from '../../components/forms/LocationMapPicker/LocationMapPicker';
@@ -238,15 +239,21 @@ function SettingsPane() {
         { id: 'developer', label: 'Developer', form: developerForm },
     ];
 
+    const [filteredItems, setFilteredItems] = useState(categories);
     const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+
+    const handleFilteredItems = (updated: typeof categories) => {
+        if (!sequenceEqual(updated, filteredItems))
+            setFilteredItems(updated);
+    };
 
     return (
         <Row alignItems="start" spacing={2} style={{ paddingTop: 16, paddingLeft: 16, paddingRight: 16 }}>
             <Stack spacing={2} style={{ padding: 0 }}>
                 <Typography level="h5">&nbsp;</Typography>
-                <TextField placeholder="Search..." />
+                <SearchInput items={categories} onFilteredItems={handleFilteredItems} />
                 <Stack>
-                    {categories.map(category => (
+                    {filteredItems.map(category => (
                         <Checkbox
                             key={category.id}
                             label={category.label}
