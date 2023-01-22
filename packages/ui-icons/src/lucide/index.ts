@@ -1,4 +1,9 @@
 export {
+    BatteryFull,
+    BatteryMedium,
+    BatteryLow,
+    BatteryCharging,
+    Battery as BatteryEmpty,
     Settings,
     Menu,
     GitCommit as Channel,
