@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Add, LayoutGrid, LayoutList } from '@signalco/ui-icons';
-import { Stack, Loadable, Row, Avatar, Button, IconButton, TextField, Typography, Box, Grid, SelectItems, Picker, MuiStack } from '@signalco/ui';
+import { Stack, Loadable, Row, Avatar, Button, IconButton, Typography, Box, Grid, SelectItems, Picker, MuiStack } from '@signalco/ui';
 import { KnownPages } from '../../src/knownPages';
 import useUserSetting from '../../src/hooks/useUserSetting';
-import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
 import useLocale from '../../src/hooks/useLocale';
 import useAllEntities from '../../src/hooks/signalco/useAllEntities';
+import IEntityDetails from '../../src/entity/IEntityDetails';
 import { entityUpsertAsync } from '../../src/entity/EntityRepository';
+import SearchInput from '../../components/shared/inputs/SearchInput';
 import { EntityIconByType } from '../../components/shared/entity/EntityIcon';
 import ConfigurationDialog from '../../components/shared/dialog/ConfigurationDialog';
 import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';
@@ -55,15 +56,13 @@ function Entities() {
     const [selectedType, setSelectedType] = useState<string>('1');
 
     const entities = useAllEntities(parseInt(selectedType, 10) || 1);
-    const entityItems = entities.data;
     const { t } = useLocale('App', 'Entities');
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
-    const [filteredItems, searchText, handleSearchTextChange] = useSearch(entityItems, filterFuncObjectStringProps);
+    const [filteredItems, setFilteredItems] = useState<IEntityDetails[] | undefined>(entities.data);
 
-    const typedItems = useMemo(() => filteredItems.filter(e => {
+    const typedItems = useMemo(() => filteredItems?.filter(e => {
         return e.type.toString() === selectedType;
-    }
-    ), [filteredItems, selectedType]);
+    }), [filteredItems, selectedType]);
 
     const columns = useMemo(() => ({
         xs: entityListViewType === 'table' ? 12 : 6,
@@ -75,7 +74,7 @@ function Entities() {
     const results = useMemo(() => (
         <Box sx={{ px: 2 }}>
             <Grid container spacing={1}>
-                {typedItems.map(entity => (
+                {typedItems?.map(entity => (
                     <Grid key={entity.id} {...columns}>
                         <EntityCard entity={entity} spread={entityListViewType === 'table'} />
                     </Grid>
@@ -108,12 +107,7 @@ function Entities() {
                         })}
                         heading />
                     <MuiStack direction="row" alignItems="center" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="end">
-                        <TextField
-                            placeholder={t('SearchLabel')}
-                            value={searchText}
-                            size="lg"
-                            onChange={(e) => handleSearchTextChange(e.target.value)}
-                            sx={{ width: { xs: '100%', sm: 'initial' } }} />
+                        <SearchInput items={entities.data} onFilteredItems={setFilteredItems} />
                         <Picker value={entityListViewType} onChange={(_, value) => setEntityListViewType(value)} options={[
                             { value: 'table', label: <LayoutList /> },
                             { value: 'cards', label: <LayoutGrid /> }

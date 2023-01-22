@@ -49,14 +49,15 @@ export function arrayMax<T>(array: T[], compareFn: (i: T, index: number) => numb
     return arrayPick(array, compareFn, (a, b) => typeof a === 'undefined' ? false : a > (typeof b === 'undefined' ? true : b));
 }
 
-export function sequenceEqual<TA, TB>(arrayA: TA[], arrayB: TB[], compareFn: (a: TA, b: TB) => boolean) {
+export function sequenceEqual<TA, TB>(arrayA: TA[], arrayB: TB[], compareFn?: (a: TA, b: TB) => boolean) {
     if (!arrayA || !arrayB)
         return false;
     if (arrayA.length !== arrayB.length)
         return false;
 
     for (let i = 0; i < arrayA.length; i++) {
-        if (!compareFn(arrayA[i], arrayB[i])) {
+        if ((compareFn && !compareFn(arrayA[i], arrayB[i])) ||
+            Object.is(arrayA[i], arrayB[i])) {
             return false;
         }
     }

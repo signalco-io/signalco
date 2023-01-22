@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
-import { Button, Divider, IconButton, Menu, Typography, Box, MenuItemLink, ButtonProps, MuiStack, Stack } from '@signalco/ui';
+import { Button, Divider, IconButton, Menu, Box, MenuItemLink, ButtonProps, MuiStack, Stack } from '@signalco/ui';
 import { getCurrentUserAsync } from '../src/services/CurrentUserProvider';
 import { KnownPages } from '../src/knownPages';
 import useLocale from '../src/hooks/useLocale';
@@ -80,7 +80,8 @@ function NavProfile() {
                 minHeight: { xs: '60px', sm: undefined },
                 justifyContent: { xs: 'space-between', sm: 'start' }
             }}
-            alignItems="center">
+            alignItems="center"
+            spacing={1}>
             <UserProfileAvatar />
             <Box sx={{ display: { xs: 'none', sm: 'inherit', width: '100%' } }}>
                 <MuiStack sx={{ width: { xs: undefined, sm: '100%' } }}>
@@ -95,12 +96,6 @@ function NavProfile() {
                         ))}
                 </MuiStack>
             </Box>
-            <Typography sx={{
-                display: { xs: 'inherit', sm: 'none' },
-                opacity: 0.6
-            }}>
-                {mobileMenuOpen ? 'Menu' : (activeNavItem?.label ?? '')}
-            </Typography>
             <Box sx={{ display: { xs: 'inherit', sm: 'none' } }}>
                 <IconButton size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
                     {mobileMenuOpen ? <Close /> : <MenuIcon />}
