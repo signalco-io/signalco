@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Close, Equal, EqualNot, Play, Warning, Timer, Pause, Left, Right } from '@signalco/ui-icons';
 import { Chip, Row, Stack, Container, Alert, Card, IconButton, Typography, Box, Timeago } from '@signalco/ui';
-import DisplayDeviceTarget from '../../shared/entity/DisplayEntityTarget';
+import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import useContact from '../../../src/hooks/signalco/useContact';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import { setAsync } from '../../../src/contacts/ContactRepository';
@@ -83,7 +83,7 @@ function Condition(props: { condition: ProcessConfigurationV1.Condition }) {
         <div>
             {(condition.type === 'contact') && (
                 <>
-                    <DisplayDeviceTarget target={condition.contactPointer} selectContact />
+                    <DisplayEntityTarget target={condition.contactPointer} selectContact />
                 </>
             )}
             {(condition.type === 'value') && (
@@ -209,7 +209,7 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                                 <Stack spacing={1}>
                                     {conduct.contacts.map(conductTargets => (
                                         <div key={`${conductTargets.contactPointer.entityId}-${conductTargets.contactPointer.channelName}-${conductTargets.contactPointer.contactName}`}>
-                                            <DisplayDeviceTarget target={conductTargets.contactPointer} value={conductTargets.valueSerialized} selectContact selectValue />
+                                            <DisplayEntityTarget target={conductTargets.contactPointer} valueSerialized={conductTargets.valueSerialized} selectContact selectValue />
                                         </div>
                                     ))}
                                 </Stack>

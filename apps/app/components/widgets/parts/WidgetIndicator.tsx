@@ -9,11 +9,10 @@ import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigu
 import { KnownPages } from '../../../src/knownPages';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useContact from '../../../src/hooks/signalco/useContact';
-import IContactPointerPartial from '../../../src/contacts/IContactPointerPartial';
 import type IContactPointer from '../../../src/contacts/IContactPointer';
 
 type ConfigProps = {
-    target: IContactPointerPartial;
+    target: Partial<IContactPointer>;
     columns: number;
 }
 

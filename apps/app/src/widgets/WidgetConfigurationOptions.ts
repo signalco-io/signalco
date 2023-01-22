@@ -1,4 +1,4 @@
-import IContactPointerPartial from '../contacts/IContactPointerPartial';
+import IContactPointer from '../contacts/IContactPointer';
 import IContact from '../contacts/IContact';
 import IWidgetConfigurationOption from './IWidgetConfigurationOption';
 
@@ -10,9 +10,9 @@ export const DefaultRows: (rows: number) => IWidgetConfigurationOption<{ rows: n
 
 export const DefaultLabel: IWidgetConfigurationOption<{ label?: string }> = { name: 'label', label: 'Label', type: 'string', optional: true };
 
-export const DefaultTarget: IWidgetConfigurationOption<{ target: IContactPointerPartial }> = { name: 'target', label: 'Target', type: 'entityContact' };
+export const DefaultTarget: IWidgetConfigurationOption<{ target: Partial<IContactPointer> }> = { name: 'target', label: 'Target', type: 'entityContact' };
 
-export const DefaultTargetMultiple: IWidgetConfigurationOption<{ target: IContactPointerPartial[] }> = { name: 'target', label: 'Target', type: 'entityContactMultiple' };
+export const DefaultTargetMultiple: IWidgetConfigurationOption<{ target: Partial<IContactPointer>[] }> = { name: 'target', label: 'Target', type: 'entityContactMultiple' };
 
 export const DefaultTargetWithValue: IWidgetConfigurationOption<{ target: IContact }> = { name: 'target', label: 'Target', type: 'entityContactValue' };
 
