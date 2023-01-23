@@ -3,8 +3,8 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FilterList, Gallery } from '@signalco/ui';
 import { channelsData, channelCategories } from '@signalco/data';
-import ChannelGalleryItem from './ChannelGalleryItem';
 import { orderBy } from '../../src/helpers/ArrayHelpers';
+import ChannelGalleryItem from './ChannelGalleryItem';
 
 type ChannelsGalleryProps = {
     channelHrefFunc: (id: string) => string;
@@ -39,7 +39,7 @@ export default function ChannelsGallery({ channelHrefFunc }: ChannelsGalleryProp
                             else newSearch.delete('category');
                             const newUrl = new URL(window.location.href);
                             newUrl.search = newSearch.toString();
-                            return router.replace(newUrl.toString());
+                            router.replace(newUrl.toString());
                         }} />
                 </>
             )} />

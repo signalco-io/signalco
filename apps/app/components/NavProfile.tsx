@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
 import { Button, Divider, IconButton, Menu, Box, MenuItemLink, ButtonProps, MuiStack, Stack } from '@signalco/ui';
 import { getCurrentUserAsync } from '../src/services/CurrentUserProvider';
@@ -57,9 +57,9 @@ function UserProfileAvatar() {
 }
 
 function NavProfile() {
-    const router = useRouter();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const activeNavItem: NavItem | undefined = orderBy(navItems.filter(ni => router.pathname.startsWith(ni.path)), (a, b) => b.path.length - a.path.length).at(0);
+    const pathname = usePathname();
+    const activeNavItem: NavItem | undefined = orderBy(navItems.filter(ni => pathname?.startsWith(ni.path)), (a, b) => b.path.length - a.path.length).at(0);
     const visibleNavItems = navItems.filter(ni => ni === activeNavItem || !ni.hidden);
     const { t } = useLocale('App', 'Nav');
 

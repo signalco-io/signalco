@@ -18,7 +18,7 @@ export interface FilterListItem {
 export interface FilterListProps {
     header: string;
     items: FilterListItem[];
-    selected?: string | string[] | undefined;
+    selected?: string | string[] | null | undefined;
     truncate?: number | undefined;
     multiple?: boolean;
     onSelected?: (selectedId: string | undefined) => void;

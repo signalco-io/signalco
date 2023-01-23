@@ -1,12 +1,17 @@
 import { Suspense, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { Button } from '@signalco/ui';
+import useHashParam from '../../src/hooks/useHashParam';
 
-export default function OAuthRedirectConnectButton(props: { label: string; initiateUrl: string; queryParamName: string; onCode: (code: string) => Promise<void>; }) {
-    const { label, initiateUrl, queryParamName, onCode } = props;
-    const router = useRouter();
+type OAuthRedirectConnectButtonProps = {
+    label: string;
+    initiateUrl: string;
+    queryParamName: string;
+    onCode: (code: string) => Promise<void>;
+};
+
+export default function OAuthRedirectConnectButton({ label, initiateUrl, queryParamName, onCode }: OAuthRedirectConnectButtonProps) {
+    const [queryParamValue] = useHashParam(queryParamName);
     const [isLoading, setIsLoading] = useState(false);
-    const queryParamValue = router.query ? router.query[queryParamName]?.toString() : undefined;
 
     useEffect(() => {
         async function requestAccess() {
@@ -28,7 +33,7 @@ export default function OAuthRedirectConnectButton(props: { label: string; initi
     // TODO: Show "Connected" if already connected
     return (
         <Suspense>
-            <Button loading={!router.isReady || isLoading} variant="solid" href={initiateUrl}>{label}</Button>
+            <Button loading={isLoading} variant="solid" href={initiateUrl}>{label}</Button>
         </Suspense>
     );
 }

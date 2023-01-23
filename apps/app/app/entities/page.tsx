@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useMemo, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Add, LayoutGrid, LayoutList } from '@signalco/ui-icons';
 import { Stack, Loadable, Row, Avatar, Button, IconButton, Typography, Box, Grid, SelectItems, Picker, MuiStack } from '@signalco/ui';
 import { KnownPages } from '../../src/knownPages';
