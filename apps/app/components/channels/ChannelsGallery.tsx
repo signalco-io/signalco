@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FilterList, Gallery } from '@signalco/ui';
 import { channelsData, channelCategories } from '@signalco/data';
 import { orderBy } from '../../src/helpers/ArrayHelpers';
@@ -7,7 +7,8 @@ import ChannelGalleryItem from './ChannelGalleryItem';
 export default function ChannelsGallery(props: { channelHrefFunc: (id: string) => string }) {
     const { channelHrefFunc } = props;
     const router = useRouter();
-    const category = router.query.category as (string | undefined)
+    const searchParams = useSearchParams();
+    const category = searchParams.get('category');
     const selectedCategory = channelCategories.find(c => c.id == category);
     const gridItems = orderBy(
         selectedCategory
@@ -26,7 +27,15 @@ export default function ChannelsGallery(props: { channelHrefFunc: (id: string) =
                         header="Categories"
                         items={channelCategories}
                         selected={category}
-                        onSelected={(newCategory) => router.replace({ pathname: router.pathname, query: { ...router.query, category: newCategory } })} />
+                        onSelected={(newCategory) => {
+                            const newSearch = new URLSearchParams(searchParams);
+                            if (newCategory)
+                                newSearch.set('category', newCategory);
+                            else newSearch.delete('category');
+                            const newUrl = new URL(window.location.href);
+                            newUrl.search = newSearch.toString();
+                            router.replace(newUrl.toString());
+                        }} />
                 </>
             )} />
     );

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { AppLayoutWithAuth } from '../components/layouts/AppLayoutWithAuth';
 import Dashboards from '../components/dashboards/Dashboards';

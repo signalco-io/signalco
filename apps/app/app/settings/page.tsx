@@ -1,3 +1,5 @@
+'use client';
+
 import { ResponsiveContainer } from 'recharts';
 import React, { ReactNode, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
