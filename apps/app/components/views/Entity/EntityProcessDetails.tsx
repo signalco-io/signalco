@@ -118,11 +118,9 @@ function ExecutionDisplay(props: { entity: IEntityDetails }) {
     const executed = executeContact?.data?.valueSerialized ? JSON.parse(executeContact?.data?.valueSerialized) : undefined;
 
     return (
-        <div>
-            <Chip startDecorator={<Play />}>
-                <Timeago date={executed?.StartTimeStamp} />
-            </Chip>
-        </div>
+        <Chip startDecorator={<Play />}>
+            <Timeago date={executed?.StartTimeStamp} />
+        </Chip>
     )
 }
 
@@ -143,7 +141,9 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
     return (
         <Container>
             <Stack spacing={2}>
-                <ExecutionDisplay entity={entity} />
+                <Row>
+                    <ExecutionDisplay entity={entity} />
+                </Row>
                 {errorContact.data?.valueSerialized && (
                     <Alert
                         color="danger"
