@@ -64,7 +64,7 @@
         "uuid": "9.0.0"
     },
     "devDependencies": {
-        "@axe-core/playwright": "4.5.2",
+        "@axe-core/playwright": "4.6.0",
         "@babel/core": "7.20.12",
         "@next/bundle-analyzer": "13.1.4",
         "@playwright/test": "1.29.2",
