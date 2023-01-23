@@ -13,6 +13,7 @@
                 "digest"
             ],
             "matchPackageNames": [
+                "@axe-core/playwright",
                 "@babel/core",
                 "@rollup/plugin-commonjs",
                 "@rollup/plugin-json",
