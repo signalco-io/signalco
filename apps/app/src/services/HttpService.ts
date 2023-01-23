@@ -1,6 +1,4 @@
-import Router from 'next/router';
 import { showPrompt } from '../notifications/PageNotificationService';
-import { parseHash, parseHashParam } from '../hooks/useHashParam';
 import { isAbsoluteUrl, trimStartChar } from '../helpers/StringHelpers';
 import CurrentUserProvider from './CurrentUserProvider';
 import { signalcoApiEndpoint } from './AppSettingsProvider';
@@ -80,24 +78,13 @@ export async function requestAsync(
             console.warn('Token expired: ', response.statusText, response.status);
             CurrentUserProvider.setToken(undefined);
 
-            // Check if we are already reloading to authenticate
-            const isAuthReload = parseHashParam('authReload');
-            if (isAuthReload === 'true') {
-            // Show notification to manually reload the app
-                showPrompt(
-                    'Authorization failed. Please reload the app to continue...',
-                    'error',
-                    'Reload',
-                    () => {
-                        window.location.replace('/');
-                    });
-                return;
-            }
-
-            // Reload with auth reload flag
-            const hash = parseHash();
-            hash.set('authReload', 'true');
-            Router.push({ hash: hash.toString() }, undefined, {shallow: false});
+            showPrompt(
+                'Authorization failed. Please reload the app to continue...',
+                'error',
+                'Reload',
+                () => {
+                    window.location.replace('/');
+                });
         }
 
         let bodyText: string | null = null;

@@ -27,6 +27,7 @@ export default function ChannelLogo({ channelName, label, size }: ChannelLogoPro
                 alt={`${label ?? channelName}`}
                 width={imageSize}
                 height={imageSize}
+                style={{ objectFit: 'contain' }}
                 onError={() => setNoLogo(true)} />
         </Tooltip>
     );

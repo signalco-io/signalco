@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Stack , Typography } from '@signalco/ui';
 import OAuthRedirectConnectButton from '../../oauth/OAuthRedirectConnectButton';
 import { requestAsync } from '../../../src/services/HttpService';

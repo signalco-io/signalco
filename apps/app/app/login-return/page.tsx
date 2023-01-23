@@ -1,8 +1,10 @@
+'use client';
+
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useAuth0 } from '@auth0/auth0-react';
-import Login from '../components/Login';
-import { EmptyLayoutWithAuth } from '../components/layouts/EmptyLayoutWithAuth';
+import Login from '../../components/Login';
+import { EmptyLayoutWithAuth } from '../../components/layouts/EmptyLayoutWithAuth';
 
 function LoginReturnPage() {
     const { isAuthenticated } = useAuth0();

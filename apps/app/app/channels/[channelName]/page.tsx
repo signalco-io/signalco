@@ -1,13 +1,14 @@
+'use client';
+
 import { useMemo } from 'react';
-import { useRouter } from 'next/router';
 import { Bug, Link as LinkIcon } from '@signalco/ui-icons';
 import { Container, Loadable, NoDataPlaceholder, Row, Stack, List, ListItemButton, Typography, Box, Link } from '@signalco/ui';
 import { channelsData } from '@signalco/data';
-import { KnownPages } from '../../src/knownPages';
-import useAllEntities from '../../src/hooks/signalco/useAllEntities';
-import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';
-import ChannelPartialSlack from '../../components/channels/partials/ChannelPartialSlack';
-import ChannelLogo from '../../components/channels/ChannelLogo';
+import { KnownPages } from '../../../src/knownPages';
+import useAllEntities from '../../../src/hooks/signalco/useAllEntities';
+import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
+import ChannelPartialSlack from '../../../components/channels/partials/ChannelPartialSlack';
+import ChannelLogo from '../../../components/channels/ChannelLogo';
 
 function ChannelConnectPartial(props: { channelName: string }) {
     const { channelName } = props;
@@ -32,9 +33,9 @@ function LinkChannelIssues({ channelName }: { channelName: string }) {
     )
 }
 
-function AppChannelPage() {
-    const router = useRouter();
-    const channelName = router.query.channelName as string;
+function AppChannelPage({ params }: { params: { channelName: string } }) {
+    const channelName = params.channelName;
+
     const channel = channelsData.find(c => c.channelName === channelName);
 
     const entities = useAllEntities();

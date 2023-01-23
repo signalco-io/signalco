@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { MoreHorizontal } from '@signalco/ui-icons';
 import { Button, Divider, Menu, MenuItem } from '@signalco/ui';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
