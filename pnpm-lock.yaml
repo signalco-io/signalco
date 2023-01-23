@@ -12,7 +12,7 @@ importers:
     specifiers:
       '@auth0/auth0-react': 2.0.0
       '@auth0/auth0-spa-js': 2.0.2
-      '@axe-core/playwright': 4.5.2
+      '@axe-core/playwright': 4.6.0
       '@babel/core': 7.20.12
       '@date-io/date-fns': 2.16.0
       '@dnd-kit/core': 6.0.7
@@ -139,7 +139,7 @@ importers:
     optionalDependencies:
       terser: 5.16.1
     devDependencies:
-      '@axe-core/playwright': 4.5.2_playwright@1.29.2
+      '@axe-core/playwright': 4.6.0_playwright@1.29.2
       '@babel/core': 7.20.12
       '@next/bundle-analyzer': 13.1.4
       '@playwright/test': 1.29.2
@@ -174,7 +174,7 @@ importers:
 
   apps/brandgrab:
     specifiers:
-      '@axe-core/playwright': 4.5.2
+      '@axe-core/playwright': 4.6.0
       '@babel/core': 7.20.12
       '@hcaptcha/react-hcaptcha': 1.4.4
       '@next/bundle-analyzer': 13.1.4
@@ -226,7 +226,7 @@ importers:
     optionalDependencies:
       terser: 5.16.1
     devDependencies:
-      '@axe-core/playwright': 4.5.2_playwright@1.29.2
+      '@axe-core/playwright': 4.6.0_playwright@1.29.2
       '@babel/core': 7.20.12
       '@next/bundle-analyzer': 13.1.4
       '@playwright/test': 1.29.2
@@ -269,7 +269,7 @@ importers:
 
   apps/slco:
     specifiers:
-      '@axe-core/playwright': 4.5.2
+      '@axe-core/playwright': 4.6.0
       '@babel/core': 7.20.12
       '@hcaptcha/react-hcaptcha': 1.4.4
       '@next/bundle-analyzer': 13.1.4
@@ -321,7 +321,7 @@ importers:
     optionalDependencies:
       terser: 5.16.1
     devDependencies:
-      '@axe-core/playwright': 4.5.2_playwright@1.29.2
+      '@axe-core/playwright': 4.6.0_playwright@1.29.2
       '@babel/core': 7.20.12
       '@next/bundle-analyzer': 13.1.4
       '@playwright/test': 1.29.2
@@ -404,7 +404,7 @@ importers:
 
   apps/web:
     specifiers:
-      '@axe-core/playwright': 4.5.2
+      '@axe-core/playwright': 4.6.0
       '@babel/core': 7.20.12
       '@hcaptcha/react-hcaptcha': 1.4.4
       '@next/bundle-analyzer': 13.1.4
@@ -465,7 +465,7 @@ importers:
     optionalDependencies:
       terser: 5.16.1
     devDependencies:
-      '@axe-core/playwright': 4.5.2_playwright@1.29.2
+      '@axe-core/playwright': 4.6.0_playwright@1.29.2
       '@babel/core': 7.20.12
       '@next/bundle-analyzer': 13.1.4
       '@playwright/test': 1.29.2
@@ -678,12 +678,12 @@ packages:
       default-browser-id: 3.0.0
     dev: true
 
-  /@axe-core/playwright/4.5.2_playwright@1.29.2:
-    resolution: {integrity: sha512-RXdnUeroQwLoIoxxZNKBy/2FsjOrgYsiIrSdZkRfVVWFudTgatncc9izyMZ40ou+nw/d1zi/WPCjrLUI6TZBBA==}
+  /@axe-core/playwright/4.6.0_playwright@1.29.2:
+    resolution: {integrity: sha512-q9K4GVJ1fH8FQqErgs01dwzhOJ03vZDfMg+vO9Er05BxQOCp9Rm8oyB3byVzC7oNlxFaPU1qQ8zLwZYypHmchw==}
     peerDependencies:
       playwright: '>= 1.0.0'
     dependencies:
-      axe-core: 4.5.2
+      axe-core: 4.6.3
       playwright: 1.29.2
     dev: true
 
@@ -6023,8 +6023,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /axe-core/4.5.2:
-    resolution: {integrity: sha512-u2MVsXfew5HBvjsczCv+xlwdNnB1oQR9HlAcsejZttNjKKSkeDNVwB1vMThIUIFI9GoT57Vtk8iQLwqOfAkboA==}
+  /axe-core/4.6.3:
+    resolution: {integrity: sha512-/BQzOX780JhsxDnPpH4ZiyrJAzcd8AfzFPkv+89veFSr1rcMjuq2JDCwypKaPeB6ljHp9KjXhPpjgCvQlWYuqg==}
     engines: {node: '>=4'}
 
   /axobject-query/2.2.0:
@@ -8146,7 +8146,7 @@ packages:
       aria-query: 4.2.2
       array-includes: 3.1.6
       ast-types-flow: 0.0.7
-      axe-core: 4.5.2
+      axe-core: 4.6.3
       axobject-query: 2.2.0
       damerau-levenshtein: 1.0.8
       emoji-regex: 9.2.2
