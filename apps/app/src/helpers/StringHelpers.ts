@@ -9,7 +9,10 @@ export const trimStartChar = (value: string, char: string): string => {
     return value;
 };
 
-export const camelToSentenceCase = (value: string): string => {
+export const camelToSentenceCase = (value: string | null | undefined): string | undefined => {
+    if (value == null)
+        return undefined;
+
     const result = value.replace(/([A-Z])/g, ' $1');
     return result.charAt(0).toUpperCase() + result.slice(1);
 };
