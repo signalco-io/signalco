@@ -20,7 +20,7 @@
         "@next/env": "13.1.5",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
-        "classix": "2.1.18",
+        "classix": "2.1.21",
         "next": "13.1.5",
         "next-secure-headers": "2.2.0",
         "postcss": "8.4.21",

@@ -51,7 +51,7 @@ importers:
       '@types/uuid': 9.0.0
       '@vvo/tzdb': 6.91.0
       babel-loader: 9.1.2
-      classix: 2.1.18
+      classix: 2.1.21
       cobe: 0.6.3
       color: 4.2.3
       colorette: 2.0.19
@@ -113,7 +113,7 @@ importers:
       '@tanstack/react-query': 4.22.4_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-devtools': 4.22.4_nuvt6iw2zzunisurt5cxfst6qu
       '@vvo/tzdb': 6.91.0
-      classix: 2.1.18
+      classix: 2.1.21
       cobe: 0.6.3
       color: 4.2.3
       compare-versions: 5.0.3
@@ -190,7 +190,7 @@ importers:
       '@types/react-dom': 18.0.10
       '@types/react-motion': 0.0.33
       babel-loader: 9.1.2
-      classix: 2.1.18
+      classix: 2.1.21
       cross-env: 7.0.3
       eslint: 8.32.0
       next: 13.1.5
@@ -214,7 +214,7 @@ importers:
       '@next/env': 13.1.5
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
-      classix: 2.1.18
+      classix: 2.1.21
       next: 13.1.5_23e7ztf2chqi3ri6onem3l5mii
       next-secure-headers: 2.2.0
       postcss: 8.4.21
@@ -285,7 +285,7 @@ importers:
       '@types/react-dom': 18.0.10
       '@types/react-motion': 0.0.33
       babel-loader: 9.1.2
-      classix: 2.1.18
+      classix: 2.1.21
       cross-env: 7.0.3
       eslint: 8.32.0
       next: 13.1.5
@@ -309,7 +309,7 @@ importers:
       '@next/env': 13.1.5
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
-      classix: 2.1.18
+      classix: 2.1.21
       next: 13.1.5_23e7ztf2chqi3ri6onem3l5mii
       next-secure-headers: 2.2.0
       postcss: 8.4.21
@@ -422,7 +422,7 @@ importers:
       '@types/react-dom': 18.0.10
       '@types/react-motion': 0.0.33
       babel-loader: 9.1.2
-      classix: 2.1.18
+      classix: 2.1.21
       cobe: 0.6.3
       colorette: 2.0.19
       cross-env: 7.0.3
@@ -451,7 +451,7 @@ importers:
       '@signalco/data': link:../../packages/data
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
-      classix: 2.1.18
+      classix: 2.1.21
       cobe: 0.6.3
       next: 13.1.5_23e7ztf2chqi3ri6onem3l5mii
       next-pwa: 5.6.0_ij6qteokrtqiw5m76vjzv7hpfe
@@ -556,7 +556,7 @@ importers:
       '@types/react': 18.0.27
       '@types/react-dom': 18.0.10
       '@types/react-timeago': 4.1.3
-      classix: 2.1.18
+      classix: 2.1.21
       concurrently: 7.6.0
       esbuild: 0.17.4
       material-ui-popup-state: 5.0.4
@@ -601,7 +601,7 @@ importers:
       '@types/react': 18.0.27
       '@types/react-dom': 18.0.10
       '@types/react-timeago': 4.1.3
-      classix: 2.1.18
+      classix: 2.1.21
       concurrently: 7.6.0
       esbuild: 0.17.4
       postcss: 8.4.21
@@ -6497,8 +6497,8 @@ packages:
       static-extend: 0.1.2
     dev: true
 
-  /classix/2.1.18:
-    resolution: {integrity: sha512-LJsPp4+4Y1sINzVciuZdnxbP3LxEw0/nhxGBAVmFwr73sSABr4347nlIC5P+H7xsOkAvzcNatuYSMcmGJrbegw==}
+  /classix/2.1.21:
+    resolution: {integrity: sha512-vI6fRGXOcfBgvI6J/50msPUlBPP8LV4Gy3rwesiRe+0tPOsgNYOst9So6wMJNJKpZq1jq9HjBA/Fwu126ebOtA==}
 
   /classnames/2.3.2:
     resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
