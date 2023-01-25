@@ -2,13 +2,11 @@ import { isAbsoluteUrl } from 'next/dist/shared/lib/utils';
 import NextLink from 'next/link';
 import { ChildrenProps } from '../sharedTypes';
 
-/** @alpha */
 export interface LinkProps extends ChildrenProps {
     href: string;
     className?: string | undefined;
 }
 
-/** @alpha */
 export default function Link({ children, className, href }: LinkProps) {
     return (
         <NextLink

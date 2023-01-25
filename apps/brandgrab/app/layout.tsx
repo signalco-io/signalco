@@ -1,6 +1,3 @@
-'use client';
-
-import { signalcoTheme , CssBaseline, CssVarsProvider, getInitColorSchemeScript } from '@signalco/ui';
 import '@signalco/ui/dist/ui.css';
 import './global.scss';
 
@@ -14,11 +11,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                {getInitColorSchemeScript()}
-                <CssVarsProvider theme={signalcoTheme} defaultMode="light">
-                    <CssBaseline />
-                    {children}
-                </CssVarsProvider>
+                {children}
             </body>
         </html>
     );

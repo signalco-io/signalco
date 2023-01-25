@@ -1,3 +1,4 @@
+@import './normalize.css';
 @import './variables.scss';
 
 /* raleway-200 - latin */
@@ -27,6 +28,7 @@
 html, body, #__next {
   height: 100%;
   width: 100%;
+  font-family: var(--joy-fontFamily-body);
 }
 
 a {
@@ -77,4 +79,16 @@ a {
   }
 
   ::selection { background: black; color: white; }
+}
+
+h6 {
+  font-size: 1.2em;
+  font-weight: 500;
+  opacity: .8;
+}
+
+xs:textAlign-center {
+  @media (max-width: 600px) {
+    text-align: center;
+  }
 }
