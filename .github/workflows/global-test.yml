@@ -11,7 +11,7 @@ jobs:
           TURBO_TEAM: signalco
           TURBO_REMOTE_ONLY: true
         container:
-          image: mcr.microsoft.com/playwright:v1.29.2-focal
+          image: mcr.microsoft.com/playwright:v1.30.0-focal
         steps:
             - uses: actions/checkout@v3
             - name: Setup pnpm
