@@ -30,7 +30,7 @@ importers:
       '@monaco-editor/react': 4.4.6
       '@next/bundle-analyzer': 13.1.5
       '@next/env': 13.1.5
-      '@playwright/test': 1.29.2
+      '@playwright/test': 1.30.0
       '@signalco/data': workspace:*
       '@signalco/eslint-config-signalco': workspace:*
       '@signalco/tsconfig': workspace:*
@@ -69,7 +69,7 @@ importers:
       next-sitemap: 3.1.47
       openapi-types: 12.1.0
       pigeon-maps: 0.21.3
-      playwright: 1.29.2
+      playwright: 1.30.0
       postcss: 8.4.21
       prop-types: 15.8.1
       react: 18.2.0
@@ -139,10 +139,10 @@ importers:
     optionalDependencies:
       terser: 5.16.1
     devDependencies:
-      '@axe-core/playwright': 4.6.0_playwright@1.29.2
+      '@axe-core/playwright': 4.6.0_playwright@1.30.0
       '@babel/core': 7.20.12
       '@next/bundle-analyzer': 13.1.5
-      '@playwright/test': 1.29.2
+      '@playwright/test': 1.30.0
       '@signalco/eslint-config-signalco': link:../../packages/eslint-config-signalco
       '@signalco/tsconfig': link:../../packages/tsconfig
       '@types/color': 3.0.3
@@ -163,7 +163,7 @@ importers:
       fs-extra: 11.1.0
       next-sitemap: 3.1.47_csmsbcsbfdx2cjngizs3en5eh4
       openapi-types: 12.1.0
-      playwright: 1.29.2
+      playwright: 1.30.0
       prop-types: 15.8.1
       react-is: 18.2.0
       rimraf: 4.1.2
@@ -179,7 +179,7 @@ importers:
       '@hcaptcha/react-hcaptcha': 1.4.4
       '@next/bundle-analyzer': 13.1.5
       '@next/env': 13.1.5
-      '@playwright/test': 1.29.2
+      '@playwright/test': 1.30.0
       '@signalco/eslint-config-signalco': workspace:*
       '@signalco/tsconfig': workspace:*
       '@signalco/ui': workspace:*
@@ -196,7 +196,7 @@ importers:
       next: 13.1.5
       next-secure-headers: 2.2.0
       next-sitemap: 3.1.47
-      playwright: 1.29.2
+      playwright: 1.30.0
       postcss: 8.4.21
       prop-types: 15.8.1
       react: 18.2.0
@@ -226,10 +226,10 @@ importers:
     optionalDependencies:
       terser: 5.16.1
     devDependencies:
-      '@axe-core/playwright': 4.6.0_playwright@1.29.2
+      '@axe-core/playwright': 4.6.0_playwright@1.30.0
       '@babel/core': 7.20.12
       '@next/bundle-analyzer': 13.1.5
-      '@playwright/test': 1.29.2
+      '@playwright/test': 1.30.0
       '@signalco/eslint-config-signalco': link:../../packages/eslint-config-signalco
       '@signalco/tsconfig': link:../../packages/tsconfig
       '@types/color': 3.0.3
@@ -241,7 +241,7 @@ importers:
       cross-env: 7.0.3
       eslint: 8.32.0
       next-sitemap: 3.1.47_csmsbcsbfdx2cjngizs3en5eh4
-      playwright: 1.29.2
+      playwright: 1.30.0
       prop-types: 15.8.1
       rimraf: 4.1.2
       sass: 1.57.1
@@ -274,7 +274,7 @@ importers:
       '@hcaptcha/react-hcaptcha': 1.4.4
       '@next/bundle-analyzer': 13.1.5
       '@next/env': 13.1.5
-      '@playwright/test': 1.29.2
+      '@playwright/test': 1.30.0
       '@signalco/eslint-config-signalco': workspace:*
       '@signalco/tsconfig': workspace:*
       '@signalco/ui': workspace:*
@@ -291,7 +291,7 @@ importers:
       next: 13.1.5
       next-secure-headers: 2.2.0
       next-sitemap: 3.1.47
-      playwright: 1.29.2
+      playwright: 1.30.0
       postcss: 8.4.21
       prop-types: 15.8.1
       react: 18.2.0
@@ -321,10 +321,10 @@ importers:
     optionalDependencies:
       terser: 5.16.1
     devDependencies:
-      '@axe-core/playwright': 4.6.0_playwright@1.29.2
+      '@axe-core/playwright': 4.6.0_playwright@1.30.0
       '@babel/core': 7.20.12
       '@next/bundle-analyzer': 13.1.5
-      '@playwright/test': 1.29.2
+      '@playwright/test': 1.30.0
       '@signalco/eslint-config-signalco': link:../../packages/eslint-config-signalco
       '@signalco/tsconfig': link:../../packages/tsconfig
       '@types/color': 3.0.3
@@ -336,7 +336,7 @@ importers:
       cross-env: 7.0.3
       eslint: 8.32.0
       next-sitemap: 3.1.47_csmsbcsbfdx2cjngizs3en5eh4
-      playwright: 1.29.2
+      playwright: 1.30.0
       prop-types: 15.8.1
       rimraf: 4.1.2
       sass: 1.57.1
@@ -409,7 +409,7 @@ importers:
       '@hcaptcha/react-hcaptcha': 1.4.4
       '@next/bundle-analyzer': 13.1.5
       '@next/env': 13.1.5
-      '@playwright/test': 1.29.2
+      '@playwright/test': 1.30.0
       '@signalco/data': workspace:*
       '@signalco/eslint-config-signalco': workspace:*
       '@signalco/tsconfig': workspace:*
@@ -432,7 +432,7 @@ importers:
       next-secure-headers: 2.2.0
       next-sitemap: 3.1.47
       openapi-types: 12.1.0
-      playwright: 1.29.2
+      playwright: 1.30.0
       postcss: 8.4.21
       prop-types: 15.8.1
       react: 18.2.0
@@ -465,10 +465,10 @@ importers:
     optionalDependencies:
       terser: 5.16.1
     devDependencies:
-      '@axe-core/playwright': 4.6.0_playwright@1.29.2
+      '@axe-core/playwright': 4.6.0_playwright@1.30.0
       '@babel/core': 7.20.12
       '@next/bundle-analyzer': 13.1.5
-      '@playwright/test': 1.29.2
+      '@playwright/test': 1.30.0
       '@signalco/eslint-config-signalco': link:../../packages/eslint-config-signalco
       '@signalco/tsconfig': link:../../packages/tsconfig
       '@types/color': 3.0.3
@@ -483,7 +483,7 @@ importers:
       eslint: 8.32.0
       next-sitemap: 3.1.47_csmsbcsbfdx2cjngizs3en5eh4
       openapi-types: 12.1.0
-      playwright: 1.29.2
+      playwright: 1.30.0
       prop-types: 15.8.1
       rimraf: 4.1.2
       sass: 1.57.1
@@ -678,13 +678,13 @@ packages:
       default-browser-id: 3.0.0
     dev: true
 
-  /@axe-core/playwright/4.6.0_playwright@1.29.2:
+  /@axe-core/playwright/4.6.0_playwright@1.30.0:
     resolution: {integrity: sha512-q9K4GVJ1fH8FQqErgs01dwzhOJ03vZDfMg+vO9Er05BxQOCp9Rm8oyB3byVzC7oNlxFaPU1qQ8zLwZYypHmchw==}
     peerDependencies:
       playwright: '>= 1.0.0'
     dependencies:
       axe-core: 4.6.3
-      playwright: 1.29.2
+      playwright: 1.30.0
     dev: true
 
   /@babel/code-frame/7.18.6:
@@ -3543,13 +3543,13 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /@playwright/test/1.29.2:
-    resolution: {integrity: sha512-+3/GPwOgcoF0xLz/opTnahel1/y42PdcgZ4hs+BZGIUjtmEFSXGg+nFoaH3NSmuc7a6GSFwXDJ5L7VXpqzigNg==}
+  /@playwright/test/1.30.0:
+    resolution: {integrity: sha512-SVxkQw1xvn/Wk/EvBnqWIq6NLo1AppwbYOjNLmyU0R1RoQ3rLEBtmjTnElcnz8VEtn11fptj1ECxK0tgURhajw==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.11.18
-      playwright-core: 1.29.2
+      playwright-core: 1.30.0
     dev: true
 
   /@pmmmwh/react-refresh-webpack-plugin/0.5.10_ohj47mxwagpoxvu7nhhwxzphqm:
@@ -11247,19 +11247,19 @@ packages:
       find-up: 5.0.0
     dev: true
 
-  /playwright-core/1.29.2:
-    resolution: {integrity: sha512-94QXm4PMgFoHAhlCuoWyaBYKb92yOcGVHdQLoxQ7Wjlc7Flg4aC/jbFW7xMR52OfXMVkWicue4WXE7QEegbIRA==}
+  /playwright-core/1.30.0:
+    resolution: {integrity: sha512-7AnRmTCf+GVYhHbLJsGUtskWTE33SwMZkybJ0v6rqR1boxq2x36U7p1vDRV7HO2IwTZgmycracLxPEJI49wu4g==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
 
-  /playwright/1.29.2:
-    resolution: {integrity: sha512-hKBYJUtdmYzcjdhYDkP9WGtORwwZBBKAW8+Lz7sr0ZMxtJr04ASXVzH5eBWtDkdb0c3LLFsehfPBTRfvlfKJOA==}
+  /playwright/1.30.0:
+    resolution: {integrity: sha512-ENbW5o75HYB3YhnMTKJLTErIBExrSlX2ZZ1C/FzmHjUYIfxj/UnI+DWpQr992m+OQVSg0rCExAOlRwB+x+yyIg==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      playwright-core: 1.29.2
+      playwright-core: 1.30.0
     dev: true
 
   /pnp-webpack-plugin/1.7.0_typescript@4.9.4:
