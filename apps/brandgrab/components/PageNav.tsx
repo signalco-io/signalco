@@ -1,29 +1,7 @@
-'use client';
-
-import React, { Suspense } from 'react';
-import { Container, Button, Row, Link } from '@signalco/ui';
-
-type NavLinkItem = {
-    href: string,
-    text: string
-};
-
-const navLinks: NavLinkItem[] = [
-    // { href: '/features', text: 'Features' },
-    // { href: KnownPages.Pricing, text: 'Pricing' }
-];
-
-function NavMenu() {
-    return (
-        <>
-            {navLinks.map(nl => (
-                <Link key={nl.href} href={nl.href}>
-                    <Button variant="plain" size="lg">{nl.text}</Button>
-                </Link>
-            ))}
-        </>
-    );
-}
+import React from 'react';
+import Row from '@signalco/ui/dist/Row';
+import Link from '@signalco/ui/dist/Link';
+import Container from '@signalco/ui/dist/Container';
 
 export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
     return (
@@ -49,11 +27,6 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
                                 BrandGrab.io
                             </Link>
                         </div>
-                        <Row spacing={1}>
-                            <Suspense>
-                                <NavMenu />
-                            </Suspense>
-                        </Row>
                     </Row>
                 </header>
             </Container>

@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { ChildrenProps } from '@signalco/ui';
 import Footer from '../pages/Footer';
