@@ -37,6 +37,14 @@
 			"path": "packages/eslint-config-signalco"
 		},
 		{
+			"name": "📦 @signalco/hooks",
+			"path": "packages/hooks"
+		},
+		{
+			"name": "📦 @signalco/js",
+			"path": "packages/js"
+		},
+		{
 			"name": "📦 @signalco/tsconfig",
 			"path": "packages/tsconfig"
 		},

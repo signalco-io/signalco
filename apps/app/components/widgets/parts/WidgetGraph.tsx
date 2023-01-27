@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import { Loadable } from '@signalco/ui';
+import { useLoadAndError } from '@signalco/hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
 import { DefaultRows, DefaultColumns, DefaultTargetMultiple, DefaultLabel } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useLoadAndError from '../../../src/hooks/useLoadAndError';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import { historiesAsync } from '../../../src/contacts/ContactRepository';
 

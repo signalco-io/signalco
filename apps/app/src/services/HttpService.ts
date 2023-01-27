@@ -1,5 +1,5 @@
+import { isAbsoluteUrl, trimStartChar } from '@signalco/js';
 import { showPrompt } from '../notifications/PageNotificationService';
-import { isAbsoluteUrl, trimStartChar } from '../helpers/StringHelpers';
 import CurrentUserProvider from './CurrentUserProvider';
 import { signalcoApiEndpoint } from './AppSettingsProvider';
 

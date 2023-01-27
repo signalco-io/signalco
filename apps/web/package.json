@@ -18,6 +18,8 @@
     "dependencies": {
         "@hcaptcha/react-hcaptcha": "1.4.4",
         "@next/env": "13.1.5",
+        "@signalco/hooks": "workspace:*",
+        "@signalco/js": "workspace:*",
         "@signalco/data": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",

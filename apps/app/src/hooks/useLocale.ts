@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import useIsClient from '@signalco/ui/src/hooks/useIsClient';
+import { useIsServer } from '@signalco/hooks';
 import { ObjectDictAny } from '../sharedTypes';
 import UserSettingsProvider from '../services/UserSettingsProvider';
 import hr from '../../locales/hr.json';
@@ -55,7 +55,7 @@ export function useLocaleHelpers() {
 export default function useLocale(...namespace: string[]): {t: LocalizeFunc} {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const t = useMemo(() => localizer(...namespace), [...namespace]);
-    const isClient = useIsClient();
+    const isServer = useIsServer();
 
-    return { t: isClient ? t : () => '' };
+    return { t: !isServer ? t : () => '' };
 }

@@ -9,7 +9,7 @@ import {
     Button,
     Card,
     Typography} from '@signalco/ui';
-import { camelToSentenceCase } from '../../../src/helpers/StringHelpers';
+import { camelToSentenceCase } from '@signalco/js';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import EntitySelectionMenu from './EntitySelectionMenu';
 import EntityIconLabel from './EntityIconLabel';

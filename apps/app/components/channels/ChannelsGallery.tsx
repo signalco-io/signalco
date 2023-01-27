@@ -1,7 +1,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FilterList, Gallery } from '@signalco/ui';
+import { orderBy } from '@signalco/js';
 import { channelsData, channelCategories } from '@signalco/data';
-import { orderBy } from '../../src/helpers/ArrayHelpers';
 import ChannelGalleryItem from './ChannelGalleryItem';
 
 export default function ChannelsGallery(props: { channelHrefFunc: (id: string) => string }) {

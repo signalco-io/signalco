@@ -1,4 +1,4 @@
-import { arrayMax } from '../helpers/ArrayHelpers';
+import { arrayMax } from '@signalco/js';
 import IEntityDetails from './IEntityDetails'
 
 export function entityBatteryLevel(entity: IEntityDetails | undefined) {
