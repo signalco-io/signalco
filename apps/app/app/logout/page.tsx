@@ -1,13 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Loadable, Row, useIsClient } from '@signalco/ui';
+import { Loadable, Row } from '@signalco/ui';
+import { useIsServer } from '@signalco/hooks';
 import LocalStorageService from '../../src/services/LocalStorageService';
 import CurrentUserProvider from '../../src/services/CurrentUserProvider';
 import { KnownPages } from '../../src/knownPages';
 
 export default function AppLogoutPage() {
-    const isClient = useIsClient();
+    const isClient = useIsServer();
     const router = useRouter();
     if (isClient) {
         LocalStorageService.setItem('token', undefined);

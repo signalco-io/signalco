@@ -8,9 +8,9 @@ export interface ClientRect {
     right: number;
     bottom: number;
     scrollY: number;
-  }
+}
 
-export function getWindowClientRect(element: typeof window): ClientRect {
+function getWindowClientRect(element: typeof window): ClientRect {
     const width = element.innerWidth;
     const height = element.innerHeight;
 

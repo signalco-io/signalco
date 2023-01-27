@@ -33,6 +33,8 @@
         "@microsoft/signalr": "7.0.2",
         "@monaco-editor/react": "4.4.6",
         "@next/env": "13.1.5",
+        "@signalco/js": "workspace:*",
+        "@signalco/hooks": "workspace:*",
         "@signalco/data": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",

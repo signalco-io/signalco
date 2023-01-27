@@ -1,6 +1,6 @@
+import { arrayMax } from '@signalco/js';
 import IUser from '../users/IUser';
 import UserSettingsProvider from '../services/UserSettingsProvider';
-import { arrayMax } from '../helpers/ArrayHelpers';
 import IEntityDetails from '../entity/IEntityDetails';
 import { entitiesAsync, entityUpsertAsync, entityDeleteAsync } from '../entity/EntityRepository';
 import { setAsync } from '../contacts/ContactRepository';

@@ -5,6 +5,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { getTimeZones } from '@vvo/tzdb';
 import { Stack, Row, Typography, Picker, SelectItems, Checkbox, Container, Divider, Loadable } from '@signalco/ui';
+import { arraySum, humanizeNumber, sequenceEqual } from '@signalco/js';
 import { isNonEmptyString, isNotNull, noError } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, FormItems, useFormField } from '@enterwell/react-form-builder';
@@ -13,8 +14,6 @@ import { ApiDevelopmentUrl, ApiProductionUrl, setSignalcoApiEndpoint, signalcoAp
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale, { availableLocales } from '../../src/hooks/useLocale';
 import useAllEntities from '../../src/hooks/signalco/useAllEntities';
-import { humanizeNumber } from '../../src/helpers/StringHelpers';
-import { arraySum, sequenceEqual } from '../../src/helpers/ArrayHelpers';
 import SearchInput from '../../components/shared/inputs/SearchInput';
 import AppThemePicker from '../../components/settings/AppThemePicker';
 import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';

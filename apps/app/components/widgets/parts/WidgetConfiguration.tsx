@@ -1,5 +1,6 @@
 import React from 'react';
 import { Stack, Button, SelectItems } from '@signalco/ui';
+import { asArray } from '@signalco/js';
 import { extractValues } from '@enterwell/react-form-validation';
 import { FormBuilder, type FormItems, useFormField, FormBuilderProvider, FormBuilderComponents } from '@enterwell/react-form-builder';
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
@@ -7,7 +8,6 @@ import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
 import GeneralFormProvider from '../../forms/GeneralFormProvider';
 import WidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { ChildrenProps, ObjectDictAny } from '../../../src/sharedTypes';
-import { asArray } from '../../../src/helpers/ArrayHelpers';
 
 type WidgetConfigurationDialogProps = {
     form: FormItems,
