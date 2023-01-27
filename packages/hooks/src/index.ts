@@ -7,3 +7,4 @@ export { default as useWindowEvent } from './useWindowEvent';
 export { default as useWindowRect } from './useWindowRect';
 export { type ClientRect } from './useWindowRect';
 export { default as useWindowWidth } from './useWindowWidth';
+export { default as useSearchParam } from './useSearchParam';

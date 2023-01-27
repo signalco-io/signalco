@@ -4,12 +4,12 @@ import React from 'react';
 import { PopupState } from 'material-ui-popup-state/hooks';
 import { Add, Pin, PinOff } from '@signalco/ui-icons';
 import { Stack, Row, Button, Card, Divider, IconButton, Typography } from '@signalco/ui';
+import { useSearchParam } from '@signalco/hooks';
 import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import ShareEntityChip from '../entity/ShareEntityChip';
 import useLocale from '../../src/hooks/useLocale';
-import useHashParam from '../../src/hooks/useHashParam';
 import useSaveDashboard from '../../src/hooks/dashboards/useSaveDashboard';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
 import DashboardsRepository, { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
@@ -62,8 +62,8 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
 function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const { selectedId, popupState, onSelection, onEditWidgets, onSettings } = props;
     const { t } = useLocale('App', 'Dashboards');
-    const [, setDashboardIdHash] = useHashParam('dashboard');
-    const [isFullScreen, setFullScreenHash] = useHashParam('fullscreen');
+    const [, setDashboardId] = useSearchParam('dashboard');
+    const [isFullScreen, setFullScreen] = useSearchParam('fullscreen');
     const { data: dashboards } = useDashboards();
     const saveDashboard = useSaveDashboard();
 
@@ -81,7 +81,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
         const newDashboardId = await saveDashboard.mutateAsync({
             name: 'New dashboard'
         });
-        setDashboardIdHash(newDashboardId);
+        setDashboardId(newDashboardId);
     });
 
     const handleToggleFavorite = async (id: string) => {
@@ -91,7 +91,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
         }
     }
 
-    const onFullscreen = () => setFullScreenHash(isFullScreen === 'on' ? undefined : 'on');
+    const onFullscreen = () => setFullScreen(isFullScreen === 'on' ? undefined : 'on');
 
     async function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;

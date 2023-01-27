@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import { Select } from '@signalco/ui-icons';
 import { Popper, Row, Button } from '@signalco/ui';
-import useHashParam from '../../src/hooks/useHashParam';
+import { useSearchParam } from '@signalco/hooks';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
 
@@ -15,7 +15,7 @@ export interface IDashboardSelectorProps {
 function DashboardSelector(props: IDashboardSelectorProps) {
     const { onEditWidgets, onSettings } = props;
     const popupState = usePopupState({ variant: 'popover', popupId: 'dashboardsMenu' });
-    const [selectedId, setSelectedIdHash] = useHashParam('dashboard');
+    const [selectedId, setSelectedId] = useSearchParam('dashboard');
     const { data: dashboards } = useDashboards();
 
     const currentDashboard = dashboards?.find(d => d.id == selectedId);
@@ -26,9 +26,9 @@ function DashboardSelector(props: IDashboardSelectorProps) {
     useEffect(() => {
         if (!selectedId && dashboards?.length) {
             console.log('Selecting first available dashboard', dashboards[0].id);
-            setSelectedIdHash(dashboards[0].id);
+            setSelectedId(dashboards[0].id);
         }
-    }, [selectedId, dashboards, setSelectedIdHash]);
+    }, [selectedId, dashboards, setSelectedId]);
 
     console.debug('Rendering DashboardSelector');
 
@@ -66,7 +66,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                 <DashboardSelectorMenu
                     selectedId={selectedId}
                     popupState={popupState}
-                    onSelection={setSelectedIdHash}
+                    onSelection={setSelectedId}
                     onEditWidgets={onEditWidgets}
                     onSettings={onSettings} />
             </Popper>
