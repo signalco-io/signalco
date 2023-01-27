@@ -1,11 +1,11 @@
 import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
 import { NoDataPlaceholder, Row, Sheet, Typography, Timeago, lightBlue, deepOrange, Loadable, amber, green, zinc } from '@signalco/ui';
+import { camelToSentenceCase } from '@signalco/js';
 import { ObjectDictAny } from '../../src/sharedTypes';
 import { now } from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
 import { isBoolean } from '../../src/helpers/ValueSerializedHelper';
-import { camelToSentenceCase } from '../../src/helpers/StringHelpers';
 
 export type GraphDataPoint = {
     id: string;

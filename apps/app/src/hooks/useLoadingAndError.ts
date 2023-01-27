@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import useLoadAndError from './useLoadAndError';
+import { useLoadAndError } from '@signalco/hooks';
 
 export type useLoadingAndErrorResult<TOut> = {
     items: Array<TOut>;
