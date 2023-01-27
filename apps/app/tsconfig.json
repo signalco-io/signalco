@@ -17,5 +17,5 @@
         "next-env.d.ts",
         "@types",
         ".next/types/**/*.ts"
-    ]
+, "../../packages/hooks/src/useInterval.ts"    ]
 }

@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Typography, Stack } from '@signalco/ui';
+import { useInterval } from '@signalco/hooks';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { now } from '../../../src/services/DateTimeProvider';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useInterval from '../../../src/hooks/useInterval';
 
 type ConfigProps = {
     showSeconds?: boolean;
