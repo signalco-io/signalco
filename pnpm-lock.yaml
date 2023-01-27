@@ -559,7 +559,7 @@ importers:
       classix: 2.1.21
       concurrently: 7.6.0
       esbuild: 0.17.4
-      glob: ^8.1.0
+      glob: 8.1.0
       material-ui-popup-state: 5.0.4
       next: 13.1.5
       postcss: 8.4.21
