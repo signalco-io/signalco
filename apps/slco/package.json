@@ -17,11 +17,11 @@
     },
     "dependencies": {
         "@hcaptcha/react-hcaptcha": "1.4.4",
-        "@next/env": "13.1.5",
+        "@next/env": "13.1.6",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "classix": "2.1.21",
-        "next": "13.1.5",
+        "next": "13.1.6",
         "next-secure-headers": "2.2.0",
         "postcss": "8.4.21",
         "react": "18.2.0",
@@ -33,7 +33,7 @@
     "devDependencies": {
         "@axe-core/playwright": "4.6.0",
         "@babel/core": "7.20.12",
-        "@next/bundle-analyzer": "13.1.5",
+        "@next/bundle-analyzer": "13.1.6",
         "@playwright/test": "1.30.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
