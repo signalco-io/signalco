@@ -611,7 +611,7 @@ importers:
       material-ui-popup-state: 5.0.4
       next: 13.1.6
       postcss: 8.4.21
-      postcss-preset-env: 8.0.0
+      postcss-preset-env: 8.0.1
       react: 18.2.0
       react-dom: 18.2.0
       react-is: 18.2.0
@@ -655,7 +655,7 @@ importers:
       esbuild: 0.17.5
       glob: 8.1.0
       postcss: 8.4.21
-      postcss-preset-env: 8.0.0_postcss@8.4.21
+      postcss-preset-env: 8.0.1_postcss@8.4.21
       resolve-url-loader: 5.0.0
       rimraf: 4.1.2
       rollup: 3.12.0
@@ -11870,8 +11870,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /postcss-preset-env/8.0.0_postcss@8.4.21:
-    resolution: {integrity: sha512-/kFWdq109OONR2Hl3T3nmo1dOdS7lHB6kF/nPaBn/2lGjQ99f/j5vGBYvupSmSni+F7T/0A0Xb0nfbJLnxwdjA==}
+  /postcss-preset-env/8.0.1_postcss@8.4.21:
+    resolution: {integrity: sha512-IUbymw0JlUbyVG+I85963PNWgPp3KhnFa1sxU7M/2dGthxV8e297P0VV5W9XcyypoH4hirH2fp1c6fmqh6YnSg==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
