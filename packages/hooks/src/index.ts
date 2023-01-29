@@ -9,4 +9,5 @@ export { type ClientRect } from './useWindowRect';
 export { default as useWindowWidth } from './useWindowWidth';
 export { default as useSearchParam } from './useSearchParam';
 export { default as useAudio } from './useAudio';
+export { type UseAudioOptions } from './useAudio';
 export { default as useInterval } from './useInterval';
