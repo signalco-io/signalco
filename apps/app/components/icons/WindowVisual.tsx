@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import { useInterval } from '@signalco/hooks';
 import { now } from '../../src/services/DateTimeProvider';
-import useInterval from '../../src/hooks/useInterval';
 import { colorToRgb } from '../../src/helpers/StringHelpers';
 import styles from './WindowVisual.module.scss';
 

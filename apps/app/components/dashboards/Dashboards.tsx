@@ -2,11 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Loadable, Row, Button, Typography, Box, MuiStack } from '@signalco/ui';
+import { useSearchParam } from '@signalco/hooks';
 import { widgetType } from '../widgets/Widget';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import { showNotification } from '../../src/notifications/PageNotificationService';
 import useLocale from '../../src/hooks/useLocale';
-import useHashParam from '../../src/hooks/useHashParam';
 import useSaveDashboard from '../../src/hooks/dashboards/useSaveDashboard';
 import useDashboard from '../../src/hooks/dashboards/useDashboard';
 import { WidgetModel } from '../../src/dashboards/DashboardsRepository';
@@ -18,7 +18,7 @@ const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 
 function Dashboards() {
     const { t } = useLocale('App', 'Dashboards');
-    const [selectedId, setDashboardIdHash] = useHashParam('dashboard');
+    const [selectedId, setDashboardId] = useSearchParam('dashboard');
     const selectedDashboard = useDashboard(selectedId);
     const saveDashboard = useSaveDashboard();
 
@@ -53,7 +53,7 @@ function Dashboards() {
             const newDashboardId = await saveDashboard.mutateAsync({
                 name: 'New dashboard'
             });
-            await setDashboardIdHash(newDashboardId);
+            await setDashboardId(newDashboardId);
         } catch (err) {
             console.error('Failed to create dashboard', err);
             showNotification(t('NewDashboardErrorUnknown'), 'error');

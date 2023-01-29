@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { ExternalLink } from '@signalco/ui-icons';
 import { DisableButton, Avatar, Box, EditableInput, Timeago, MuiStack, Row, Stack, Loadable, Chip } from '@signalco/ui';
+import { camelToSentenceCase } from '@signalco/js';
 import EntityIcon from '../../shared/entity/EntityIcon';
 import BatteryIndicator from '../../indicators/BatteryIndicator';
 import ShareEntityChip from '../../entity/ShareEntityChip';
@@ -8,7 +9,6 @@ import EntityStatus, { useEntityStatus } from '../../entity/EntityStatus';
 import { useEntityBattery } from '../../entity/EntityBattery';
 import useEntity from '../../../src/hooks/signalco/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
-import { camelToSentenceCase } from '../../../src/helpers/StringHelpers';
 import { entityRenameAsync } from '../../../src/entity/EntityRepository';
 import { entityLastActivity } from '../../../src/entity/EntityHelper';
 import { setAsync } from '../../../src/contacts/ContactRepository';

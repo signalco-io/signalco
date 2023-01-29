@@ -5,10 +5,10 @@ import { OpenAPIV3 } from 'openapi-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Security, Send } from '@signalco/ui-icons';
 import { Stack, Loadable, Chip, NavigatingButton, Typography, TextField, Divider, Badge, Alert, Button, Card, List, Tooltip, Box, Row, CardOverflow, ListTreeItem, SelectItems, CopyToClipboardInput } from '@signalco/ui';
+import { camelToSentenceCase } from '@signalco/js';
+import { useLoadAndError } from '@signalco/hooks';
 import { ObjectDictAny } from '../../../../src/sharedTypes';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
-import useLoadAndError from '../../../../src/hooks/useLoadAndError';
-import { camelToSentenceCase } from '../../../../src/helpers/StringHelpers';
 
 type ChipColors = 'neutral' | 'primary' | 'danger' | 'info' | 'success' | 'warning';
 

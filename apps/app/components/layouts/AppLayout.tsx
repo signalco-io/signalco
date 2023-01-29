@@ -3,16 +3,16 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useQueryClient } from '@tanstack/react-query';
 import { Minimize } from '@signalco/ui-icons';
 import { IconButton, MuiStack, Tooltip } from '@signalco/ui';
+import { useSearchParam } from '@signalco/hooks';
 import NavProfile from '../NavProfile';
 import { ChildrenProps } from '../../src/sharedTypes';
 import RealtimeService from '../../src/realtime/realtimeService';
-import useHashParam from '../../src/hooks/useHashParam';
 
 export function AppLayout(props: ChildrenProps) {
     const {
         children
     } = props;
-    const [isFullScreen, setFullScreenHash] = useHashParam('fullscreen');
+    const [isFullScreen, setFullScreen] = useSearchParam('fullscreen');
     const queryClient = useQueryClient();
 
     // Initiate SignalR communication
@@ -38,7 +38,7 @@ export function AppLayout(props: ChildrenProps) {
                         size="lg"
                         aria-label="Exit fullscreen"
                         sx={{ position: 'fixed', bottom: '12px', right: '12px' }}
-                        onClick={() => setFullScreenHash(undefined)}>
+                        onClick={() => setFullScreen(undefined)}>
                         <Minimize />
                     </IconButton>
                 </Tooltip>

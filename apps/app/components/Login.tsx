@@ -3,7 +3,7 @@ import Link from 'next/link';
 import {
     Button, Typography, Stack, Row
 } from '@signalco/ui';
-import useTimeout from '../src/hooks/useTimeout';
+import { useTimeout } from '@signalco/hooks';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 
 function Login() {

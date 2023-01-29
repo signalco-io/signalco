@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState } from 'react';
 import { Button } from '@signalco/ui';
-import useHashParam from '../../src/hooks/useHashParam';
+import { useSearchParam } from '@signalco/hooks';
 
 type OAuthRedirectConnectButtonProps = {
     label: string;
@@ -10,7 +10,7 @@ type OAuthRedirectConnectButtonProps = {
 };
 
 export default function OAuthRedirectConnectButton({ label, initiateUrl, queryParamName, onCode }: OAuthRedirectConnectButtonProps) {
-    const [queryParamValue] = useHashParam(queryParamName);
+    const [queryParamValue] = useSearchParam(queryParamName);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {

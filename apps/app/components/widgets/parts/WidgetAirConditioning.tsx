@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { Stack, Icon, Row, Button, Typography, Box } from '@signalco/ui';
+import { useLoadAndError } from '@signalco/hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
 import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { KnownPages } from '../../../src/knownPages';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useLoadAndError from '../../../src/hooks/useLoadAndError';
 import useEntity from '../../../src/hooks/signalco/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
 import IContactPointer from '../../../src/contacts/IContactPointer';

@@ -2,16 +2,15 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import useIsClient from '@signalco/ui/src/hooks/useIsClient';
 import { Container, Box, Fade } from '@signalco/ui';
-import useTimeout from '../../../src/hooks/useTimeout';
+import { useIsServer, useTimeout } from '@signalco/hooks';
 const Globe = dynamic(() => import('./Globe'));
 
 function GlobeSection() {
     const [appear, setAppear] = useState(false);
     useTimeout(() => setAppear(true), 100);
 
-    const isClient = useIsClient();
+    const isServer = useIsServer();
 
     return (
         <Container>
@@ -33,7 +32,7 @@ function GlobeSection() {
                             maxWidth: '100vw!important',
                             maxHeight: '100vw!important'
                         }}>
-                            {isClient && (
+                            {!isServer && (
                                 <Globe />
                             )}
                         </Box>
