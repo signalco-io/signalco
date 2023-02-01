@@ -23,7 +23,7 @@
         "@signalco/data": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
-        "classix": "2.1.21",
+        "classix": "2.1.22",
         "cobe": "0.6.3",
         "next": "13.1.6",
         "next-pwa": "5.6.0",
