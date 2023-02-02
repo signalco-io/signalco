@@ -13,15 +13,15 @@ export interface PickerProps<TValue> {
     onChange: (event: ChangeEvent<HTMLInputElement>, value: TValue | undefined) => void;
     options: PickerOption[];
     size?: 'sm' | 'md';
+    name?: string | undefined;
 }
 
-export default function Picker<TValue>(props: PickerProps<TValue>) {
-    const { value, options, size, onChange } = props;
+export default function Picker<TValue>({ value, options, size, name, onChange }: PickerProps<TValue>) {
     return (
         <RadioGroup
-            row
-            name="justify"
+            orientation="horizontal"
             value={value}
+            name={name}
             onChange={(e) => onChange(e, e.target.value as (TValue | undefined))}
             sx={{
                 alignSelf: 'start',
