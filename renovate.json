@@ -38,6 +38,7 @@
                 "rimraf",
                 "sass",
                 "sharp",
+                "terser",
                 "turbo",
                 "typesript",
                 "vite"
