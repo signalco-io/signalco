@@ -38,10 +38,10 @@
         "@signalco/data": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
-        "@tanstack/react-query": "4.23.0",
-        "@tanstack/react-query-devtools": "4.23.0",
-        "@vvo/tzdb": "6.91.0",
-        "classix": "2.1.21",
+        "@tanstack/react-query": "4.24.4",
+        "@tanstack/react-query-devtools": "4.24.4",
+        "@vvo/tzdb": "6.93.0",
+        "classix": "2.1.22",
         "cobe": "0.6.3",
         "color": "4.2.3",
         "compare-versions": "5.0.3",
@@ -88,19 +88,19 @@
         "cross-env": "7.0.3",
         "eslint": "8.33.0",
         "fs-extra": "11.1.0",
-        "next-sitemap": "3.1.48",
+        "next-sitemap": "3.1.49",
         "openapi-types": "12.1.0",
         "playwright": "1.30.0",
         "prop-types": "15.8.1",
         "react-is": "18.2.0",
         "rimraf": "4.1.2",
-        "sass": "1.57.1",
+        "sass": "1.58.0",
         "sass-loader": "13.2.0",
-        "typescript": "4.9.4",
+        "typescript": "4.9.5",
         "webpack": "5.75.0"
     },
     "optionalDependencies": {
-        "terser": "5.16.1"
+        "terser": "5.16.2"
     },
     "nextBundleAnalysis": {
         "budget": 358400,

@@ -17,6 +17,7 @@
                 "@babel/core",
                 "@rollup/plugin-commonjs",
                 "@rollup/plugin-json",
+                "@vitejs/plugin-react-swc",
                 "@vvo/tzdb",
                 "@types/node",
                 "@types/react-node",
@@ -36,7 +37,10 @@
                 "rollup",
                 "rimraf",
                 "sass",
-                "sharp"
+                "sharp",
+                "turbo",
+                "typesript",
+                "vite"
             ]
         },
         {
