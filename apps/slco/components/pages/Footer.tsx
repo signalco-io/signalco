@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { GitHub, Twitter } from '@signalco/ui-icons';
 import { Stack, Container, Grid, IconButton, Typography, Box, Link, MuiStack } from '@signalco/ui';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { now } from '../../src/services/DateTimeProvider';
@@ -55,7 +54,7 @@ export default function Footer() {
                                     <IconButton
                                         aria-label="Twitter link"
                                         href="https://twitter.com/signalco_io">
-                                        <Twitter />
+                                        <Typography>tw</Typography>
                                     </IconButton>
                                     <IconButton
                                         aria-label="reddit link"
@@ -65,7 +64,7 @@ export default function Footer() {
                                     <IconButton
                                         aria-label="GitHub link"
                                         href="https://github.com/signalco-io/signalco">
-                                        <GitHub />
+                                        <Typography>gh</Typography>
                                     </IconButton>
                                 </MuiStack>
                             </MuiStack>

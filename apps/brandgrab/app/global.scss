@@ -1,6 +1,9 @@
 @import './normalize.css';
 @import './variables.scss';
 
+// Custom normalize
+h6 { margin: 0 };
+
 /* raleway-200 - latin */
 @font-face {
   font-family: 'Raleway';

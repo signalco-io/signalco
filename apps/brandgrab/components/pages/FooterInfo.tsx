@@ -1,5 +1,4 @@
 import React from 'react';
-import { GitHub, Twitter } from '@signalco/ui-icons';
 import Row from '@signalco/ui/dist/Row';
 import Link from '@signalco/ui/dist/Link';
 import { now } from '../../src/services/DateTimeProvider';
@@ -13,7 +12,7 @@ export function FooterInfo() {
                 <Link
                     aria-label="Twitter link"
                     href="https://twitter.com/signalco_io">
-                    <Twitter />
+                    tw
                 </Link>
                 <Link
                     aria-label="reddit link"
@@ -23,7 +22,7 @@ export function FooterInfo() {
                 <Link
                     aria-label="GitHub link"
                     href="https://github.com/signalco-io/signalco">
-                    <GitHub />
+                    gh
                 </Link>
             </Row>
         </div>

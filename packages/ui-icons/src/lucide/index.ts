@@ -62,8 +62,4 @@ export {
     Sliders as Custom,
     Equal,
     EqualNot,
-    
-
-    Twitter,
-    Github as GitHub
 } from 'lucide-react';
