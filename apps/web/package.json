@@ -1,6 +1,7 @@
 {
     "name": "web",
     "description": "Automate your life",
+    "homepage": "https://www.signalco.io/",
     "version": "1.0.0",
     "private": true,
     "engines": {

@@ -1,6 +1,7 @@
 {
     "name": "brandgrab",
     "description": "BrandGrab",
+    "homepage": "https://www.brandgrab.io/",
     "version": "1.0.0",
     "private": true,
     "engines": {

@@ -1,6 +1,7 @@
 {
     "name": "@signalco/ui-docs",
     "version": "0.0.0",
+    "homepage": "https://ui.signalco.io/",
     "private": true,
     "type": "module",
     "scripts": {

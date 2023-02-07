@@ -1,6 +1,7 @@
 {
     "name": "slco",
     "description": "Short Link by Signalco",
+    "homepage": "https://slco.io/",
     "version": "1.0.0",
     "private": true,
     "engines": {
