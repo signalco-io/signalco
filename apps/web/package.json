@@ -1,6 +1,7 @@
 {
     "name": "web",
     "description": "Automate your life",
+    "homepage": "https://www.signalco.io/",
     "version": "1.0.0",
     "private": true,
     "engines": {
@@ -44,7 +45,7 @@
         "@signalco/tsconfig": "workspace:*",
         "@types/color": "3.0.3",
         "@types/next-pwa": "5.6.2",
-        "@types/node": "18.11.18",
+        "@types/node": "18.13.0",
         "@types/react": "18.0.27",
         "@types/react-dom": "18.0.10",
         "@types/react-motion": "0.0.33",
@@ -52,7 +53,7 @@
         "colorette": "2.0.19",
         "cross-env": "7.0.3",
         "eslint": "8.33.0",
-        "next-sitemap": "3.1.49",
+        "next-sitemap": "3.1.50",
         "openapi-types": "12.1.0",
         "playwright": "1.30.0",
         "prop-types": "15.8.1",
@@ -62,7 +63,7 @@
         "webpack": "5.75.0"
     },
     "optionalDependencies": {
-        "terser": "5.16.2"
+        "terser": "5.16.3"
     },
     "nextBundleAnalysis": {
         "budget": 358400,
