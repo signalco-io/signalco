@@ -64,7 +64,7 @@ importers:
       eslint: 8.33.0
       fs-extra: 11.1.0
       material-ui-popup-state: 5.0.4
-      monaco-editor: 0.34.1
+      monaco-editor: 0.35.0
       next: 13.1.6
       next-pwa: 5.6.0
       next-secure-headers: 2.2.0
@@ -107,7 +107,7 @@ importers:
       '@enterwell/react-form-validation': 1.2.8_biqbaboplfbrettd7655fr4n2y
       '@hcaptcha/react-hcaptcha': 1.4.4_biqbaboplfbrettd7655fr4n2y
       '@microsoft/signalr': 7.0.2
-      '@monaco-editor/react': 4.4.6_6vrjaj6ridxbohi43n7zt4gn7q
+      '@monaco-editor/react': 4.4.6_3vguicescx7w3divwtpzvtv5wy
       '@next/env': 13.1.6
       '@signalco/data': link:../../packages/data
       '@signalco/hooks': link:../../packages/hooks
@@ -124,7 +124,7 @@ importers:
       d3: 7.8.2
       date-fns: 2.29.3
       material-ui-popup-state: 5.0.4_rqh7qj4464ntrqrt6banhaqg4q
-      monaco-editor: 0.34.1
+      monaco-editor: 0.35.0
       next: 13.1.6_fcop3xylqakmbilfhdeuva2xj4
       next-pwa: 5.6.0_k2seot55bsmlm52vxz6m7rtrky
       next-secure-headers: 2.2.0
@@ -3063,24 +3063,24 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@monaco-editor/loader/1.3.2_monaco-editor@0.34.1:
+  /@monaco-editor/loader/1.3.2_monaco-editor@0.35.0:
     resolution: {integrity: sha512-BTDbpHl3e47r3AAtpfVFTlAi7WXv4UQ/xZmz8atKl4q7epQV5e7+JbigFDViWF71VBi4IIBdcWP57Hj+OWuc9g==}
     peerDependencies:
       monaco-editor: '>= 0.21.0 < 1'
     dependencies:
-      monaco-editor: 0.34.1
+      monaco-editor: 0.35.0
       state-local: 1.0.7
     dev: false
 
-  /@monaco-editor/react/4.4.6_6vrjaj6ridxbohi43n7zt4gn7q:
+  /@monaco-editor/react/4.4.6_3vguicescx7w3divwtpzvtv5wy:
     resolution: {integrity: sha512-Gr3uz3LYf33wlFE3eRnta4RxP5FSNxiIV9ENn2D2/rN8KgGAD8ecvcITRtsbbyuOuNkwbuHYxfeaz2Vr+CtyFA==}
     peerDependencies:
       monaco-editor: '>= 0.25.0 < 1'
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@monaco-editor/loader': 1.3.2_monaco-editor@0.34.1
-      monaco-editor: 0.34.1
+      '@monaco-editor/loader': 1.3.2_monaco-editor@0.35.0
+      monaco-editor: 0.35.0
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -9889,8 +9889,8 @@ packages:
     hasBin: true
     dev: true
 
-  /monaco-editor/0.34.1:
-    resolution: {integrity: sha512-FKc80TyiMaruhJKKPz5SpJPIjL+dflGvz4CpuThaPMc94AyN7SeC9HQ8hrvaxX7EyHdJcUY5i4D0gNyJj1vSZQ==}
+  /monaco-editor/0.35.0:
+    resolution: {integrity: sha512-BJfkAZ0EJ7JgrgWzqjfBNP9hPSS8NlfECEDMEIIiozV2UaPq22yeuOjgbd3TwMh3anH0krWZirXZfn8KUSxiOA==}
     dev: false
 
   /mri/1.2.0:
