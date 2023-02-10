@@ -45,7 +45,7 @@
         "@types/react-motion": "0.0.33",
         "babel-loader": "9.1.2",
         "cross-env": "7.0.3",
-        "eslint": "8.33.0",
+        "eslint": "8.34.0",
         "next-sitemap": "3.1.52",
         "playwright": "1.30.0",
         "prop-types": "15.8.1",

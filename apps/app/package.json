@@ -87,7 +87,7 @@
         "babel-loader": "9.1.2",
         "colorette": "2.0.19",
         "cross-env": "7.0.3",
-        "eslint": "8.33.0",
+        "eslint": "8.34.0",
         "fs-extra": "11.1.0",
         "next-sitemap": "3.1.52",
         "openapi-types": "12.1.0",
