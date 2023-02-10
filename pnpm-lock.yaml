@@ -81,7 +81,7 @@ importers:
       react-is: 18.2.0
       react-toastify: 9.1.1
       react-transition-group: 4.4.5
-      recharts: 2.4.0
+      recharts: 2.4.1
       rimraf: 4.1.2
       sass: 1.58.0
       sass-loader: 13.2.0
@@ -136,7 +136,7 @@ importers:
       react-grid-layout: 1.3.4_biqbaboplfbrettd7655fr4n2y
       react-toastify: 9.1.1_biqbaboplfbrettd7655fr4n2y
       react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
-      recharts: 2.4.0_v2m5e27vhdewzwhryxwfaorcca
+      recharts: 2.4.1_v2m5e27vhdewzwhryxwfaorcca
       sharp: 0.31.3
       suncalc: 1.9.0
       uuid: 9.0.0
@@ -11816,8 +11816,8 @@ packages:
       decimal.js-light: 2.5.1
     dev: false
 
-  /recharts/2.4.0_v2m5e27vhdewzwhryxwfaorcca:
-    resolution: {integrity: sha512-Aukj4jWPfkHNXQ9qdL15XWNACd/t6mK0UdkSmgEyeajMerzdq7UGteK48DhZ44qu+YA2tT7wBp8xVravTK6m5Q==}
+  /recharts/2.4.1_v2m5e27vhdewzwhryxwfaorcca:
+    resolution: {integrity: sha512-mX/R6wUFquFKbvqfa2VUFfrtqydzNp6f2b74NKVmk3Zt3m/uPD6hQYST2/1j/YXv0ZbNWE4xAyVp98tMBVxOsA==}
     engines: {node: '>=12'}
     peerDependencies:
       prop-types: ^15.6.0
