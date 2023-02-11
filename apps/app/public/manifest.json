@@ -1,7 +1,19 @@
 {
+  "short_name": "Signalco App",
+  "name": "Signalco App",
+  "description": "Automate your life",
+  "categories": [
+    "business",
+    "lifestyle",
+    "productivity",
+    "security",
+    "utilities"
+  ],
+  "lang": "English",
   "id": "/",
-  "name": "Signalco",
-  "short_name": "Signalco",
+  "scope": "/",
+  "start_url": "/",
+  "orientation": "any",
   "theme_color": "black",
   "background_color": "black",
   "display": "standalone",
@@ -10,8 +22,6 @@
     "standalone",
     "minimal-ui"
   ],
-  "scope": "/",
-  "start_url": "/",
   "prefer_related_applications": false,
   "icons": [
     {
@@ -58,20 +68,10 @@
     },
     {
       "src": "https://www.signalco.io/images/icon_x1.png",
-      "sizes": "572x572",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     }
-  ],
-  "lang": "English",
-  "orientation": "any",
-  "description": "Automate your life",
-  "categories": [
-    "business",
-    "lifestyle",
-    "productivity",
-    "security",
-    "utilities"
   ],
   "shortcuts": [
     {

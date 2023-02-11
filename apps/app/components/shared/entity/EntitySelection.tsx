@@ -29,7 +29,7 @@ export default function EntitySelection({ target, onSelected }: EntitySelectionP
     }, [searchTerm, entities.data]);
 
     return (
-        <Loadable isLoading={entities.isLoading} error={entities.error}>
+        <Loadable isLoading={entities.isLoading} loadingLabel="Loading entity" error={entities.error}>
             <Stack spacing={1}>
                 <Box px={2}>
                     <TextField autoFocus fullWidth placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} />

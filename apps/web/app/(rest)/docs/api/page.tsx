@@ -535,7 +535,7 @@ export default function DocsApiPage() {
                 )}
                 <Row>
                     <Box sx={{ alignSelf: 'start', minWidth: { xs: '230px', md: '320px' }, px: 2, py: 4 }}>
-                        <Loadable isLoading={isLoading || !api}>
+                        <Loadable isLoading={isLoading || !api} loadingLabel="Loading API">
                             <Nav />
                         </Loadable>
                     </Box>

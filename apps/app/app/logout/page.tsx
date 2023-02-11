@@ -19,7 +19,7 @@ export default function AppLogoutPage() {
     return (
         <div style={{ padding: 42 }}>
             <Row spacing={2} justifyContent="center">
-                <Loadable isLoading></Loadable>
+                <Loadable isLoading loadingLabel="Logging you out..."></Loadable>
                 <div>Logging you out...</div>
             </Row>
         </div>

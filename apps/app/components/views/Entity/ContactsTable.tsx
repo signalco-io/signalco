@@ -190,7 +190,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                         </MenuItem>
                     </Menu>
                 </Row>
-                <Loadable isLoading={isLoading} error={error}>
+                <Loadable isLoading={isLoading} loadingLabel="Loading contacts" error={error}>
                     <List>
                         {entity?.contacts?.map((c, i) => (
                             <Fragment key={`${c.entityId}-${c.channelName}-${c.contactName}`}>

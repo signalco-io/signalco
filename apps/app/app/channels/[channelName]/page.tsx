@@ -6,7 +6,6 @@ import { Container, Loadable, NoDataPlaceholder, Row, Stack, List, ListItemButto
 import { channelsData } from '@signalco/data';
 import { KnownPages } from '../../../src/knownPages';
 import useAllEntities from '../../../src/hooks/signalco/useAllEntities';
-import { AppLayoutWithAuth } from '../../../components/layouts/AppLayoutWithAuth';
 import ChannelPartialSlack from '../../../components/channels/partials/ChannelPartialSlack';
 import ChannelLogo from '../../../components/channels/ChannelLogo';
 
@@ -33,8 +32,9 @@ function LinkChannelIssues({ channelName }: { channelName: string }) {
     )
 }
 
-function AppChannelPage({ params }: { params: { channelName: string } }) {
+export default function AppChannelPage({ params }: { params: { channelName: string } }) {
     const channelName = params.channelName;
+    const isLoading = !!!channelName;
 
     const channel = channelsData.find(c => c.channelName === channelName);
 
@@ -51,7 +51,7 @@ function AppChannelPage({ params }: { params: { channelName: string } }) {
                     </Row>
                     <Stack spacing={2}>
                         <Typography typography="h3">Connected entities</Typography>
-                        <Loadable isLoading={entities.isLoading} error={entities.error}>
+                        <Loadable isLoading={entities.isLoading} error={entities.error} loadingLabel="Loading entities">
                             {(connectedChannels?.length ?? 0) > 0
                                 ? (
                                     <List>
@@ -68,7 +68,7 @@ function AppChannelPage({ params }: { params: { channelName: string } }) {
                     </Stack>
                     <Stack spacing={2}>
                         <Typography typography="h3">Connect</Typography>
-                        <Loadable isLoading={!!!channelName}>
+                        <Loadable isLoading={isLoading} loadingLabel="Loading channel connect">
                             <ChannelConnectPartial channelName={channelName} />
                         </Loadable>
                     </Stack>
@@ -84,12 +84,3 @@ function AppChannelPage({ params }: { params: { channelName: string } }) {
         </Container>
     )
 }
-
-AppChannelPage.layout = AppLayoutWithAuth;
-const isClient = typeof window !== 'undefined';
-const clientWindow = isClient ? window : undefined;
-const pathNameSplit = clientWindow?.location.pathname.split('/') ?? [];
-const channelName = channelsData.find(c => c.channelName === (pathNameSplit.length ? pathNameSplit[pathNameSplit.length - 1] : undefined))?.label;
-AppChannelPage.title = channelName ? channelName : 'Channel';
-
-export default AppChannelPage;

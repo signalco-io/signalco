@@ -16,13 +16,12 @@ import useLocale, { availableLocales } from '../../src/hooks/useLocale';
 import useAllEntities from '../../src/hooks/signalco/useAllEntities';
 import SearchInput from '../../components/shared/inputs/SearchInput';
 import AppThemePicker from '../../components/settings/AppThemePicker';
-import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';
 import LocationMapPicker from '../../components/forms/LocationMapPicker/LocationMapPicker';
 import generalFormComponents from '../../components/forms/generalFormComponents';
 import ApiBadge from '../../components/development/ApiBadge';
 
 const DynamicGraph = dynamic(() => import('../../components/graphs/Graph'), {
-    loading: () => <Loadable isLoading />,
+    loading: () => <Loadable isLoading loadingLabel="Loading graph" />,
 });
 
 function SettingsItem(props: { children: ReactNode, label?: string | undefined }) {
@@ -373,13 +372,8 @@ function useTimeLocationForm() {
     return timeLocationForm;
 }
 
-function SettingsIndex() {
+export default function SettingsIndex() {
     return (
         <SettingsPane />
     );
 }
-
-SettingsIndex.layout = AppLayoutWithAuth;
-
-export default SettingsIndex;
-1

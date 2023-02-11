@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import { ChildrenProps } from '@signalco/ui';
 import { useAuth0 } from '@auth0/auth0-react';
-import { ChildrenProps } from '../../src/sharedTypes';
 import { setTokenFactory } from '../../src/services/HttpService';
 import CurrentUserProvider from '../../src/services/CurrentUserProvider';
 
-export function LayoutWithAuth(props: { LayoutComponent: React.FC<ChildrenProps>, children?: React.ReactNode; }) {
-    const {
-        children, LayoutComponent
-    } = props;
+export default function WithAuth({ children }: ChildrenProps) {
     const { error, isLoading, user, getAccessTokenSilently } = useAuth0();
 
     setTokenFactory(getAccessTokenSilently);
@@ -25,5 +22,5 @@ export function LayoutWithAuth(props: { LayoutComponent: React.FC<ChildrenProps>
         console.warn('Layout auth error', error);
     }
 
-    return <LayoutComponent>{children}</LayoutComponent>;
+    return <>{children}</>;
 }

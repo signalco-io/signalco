@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ChildrenProps, CssBaseline, CssVarsProvider, getInitColorSchemeScript, signalcoTheme } from '@signalco/ui';
 import useAppTheme from '../src/hooks/useAppTheme';
-import { AppLayoutWithAuth } from '../components/layouts/AppLayoutWithAuth';
+import { AppLayout } from '../components/layouts/AppLayout';
 
 const queryClient = new QueryClient();
 
@@ -32,9 +32,9 @@ export default function RootLayout({
                     <QueryClientProvider client={queryClient}>
                         <ThemeChangerWrapper>
                             <ToastContainer />
-                            <AppLayoutWithAuth>
+                            <AppLayout>
                                 {children}
-                            </AppLayoutWithAuth>
+                            </AppLayout>
                         </ThemeChangerWrapper>
                     </QueryClientProvider>
                 </CssVarsProvider>

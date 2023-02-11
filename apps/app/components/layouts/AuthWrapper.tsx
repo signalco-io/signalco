@@ -2,8 +2,9 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { ChildrenProps } from '../../src/sharedTypes';
+import WithAuth from './WithAuth';
 
-export function Auth0Wrapper(props: ChildrenProps) {
+export function AuthWrapper(props: ChildrenProps) {
     const {
         children
     } = props;
@@ -31,7 +32,9 @@ export function Auth0Wrapper(props: ChildrenProps) {
             domain="dfnoise.eu.auth0.com"
             clientId="nl7QIQD7Kw3ZHt45qHHAZG0MEILSFa7U"
         >
-            {children}
+            <WithAuth>
+                {children}
+            </WithAuth>
         </Auth0Provider>
     );
 }

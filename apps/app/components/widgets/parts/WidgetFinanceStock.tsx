@@ -73,7 +73,7 @@ export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>
 
     return (
         <Row style={{ height: '100%' }} alignItems={price.isLoading ? 'center' : 'stretch'} justifyContent={price.isLoading ? 'center' : 'stretch'}>
-            <Loadable isLoading={price.isLoading} error={price.error || price.item?.errorMessage}>
+            <Loadable isLoading={price.isLoading} loadingLabel="Loading data" error={price.error || price.item?.errorMessage}>
                 <Stack style={{ padding: 3 * 8 }} justifyContent="space-between">
                     <Stack>
                         <Typography level="h6" marginBottom={'-4px'}>{ticker}</Typography>

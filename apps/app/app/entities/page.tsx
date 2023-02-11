@@ -13,7 +13,6 @@ import { entityUpsertAsync } from '../../src/entity/EntityRepository';
 import SearchInput from '../../components/shared/inputs/SearchInput';
 import { EntityIconByType } from '../../components/shared/entity/EntityIcon';
 import ConfigurationDialog from '../../components/shared/dialog/ConfigurationDialog';
-import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';
 import EntityCard from '../../components/entity/EntityCard';
 
 const entityTypes = [
@@ -54,7 +53,7 @@ function EntityCreate() {
     );
 }
 
-function Entities() {
+export default function Entities() {
     const [selectedType, setSelectedType] = useState<string>('1');
 
     const entities = useAllEntities(parseInt(selectedType, 10) || 1);
@@ -118,7 +117,7 @@ function Entities() {
                     </MuiStack>
                 </Row>
                 <Stack>
-                    <Loadable isLoading={entities.isLoading} error={entities.error}>
+                    <Loadable isLoading={entities.isLoading} loadingLabel="Loading entities" error={entities.error}>
                         {results}
                     </Loadable>
                 </Stack>
@@ -129,7 +128,3 @@ function Entities() {
         </>
     );
 }
-
-Entities.layout = AppLayoutWithAuth;
-
-export default Entities;
