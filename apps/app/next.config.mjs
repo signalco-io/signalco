@@ -9,7 +9,8 @@ const withBundleAnalyzer = nextBundleAnalyzer({
 });
 const withPWA = nextPwa({
     dest: 'public',
-    buildExcludes: [/middleware-manifest.json$/],
+    buildExcludes: [/middleware-manifest.json$/, /chunks\/images\/.*$/],
+    dynamicStartUrl: false,
     disable: isDevelopment
 });
 
