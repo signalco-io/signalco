@@ -19,11 +19,12 @@ export interface LoadableSkeletonProps {
 export interface LoadableProps extends LoadableLoadingErrorProps, LoadableSkeletonProps, ChildrenProps {
     placeholder?: 'skeletonText' | 'skeletonRect' | 'circular';
     contentVisible?: boolean;
+    loadingLabel: string;
 }
 
 /** @alpha */
 export default function Loadable(props: LoadableProps) {
-    const { isLoading, placeholder, error, children, contentVisible } = props;
+    const { isLoading, loadingLabel, placeholder, error, children, contentVisible } = props;
 
     const indicator = useMemo(() => {
         switch (placeholder) {
@@ -33,7 +34,7 @@ export default function Loadable(props: LoadableProps) {
             // return <Skeleton variant="rectangular" width={width ?? 120} height={height ?? 32} />;
             case 'circular':
             default:
-                return <div style={{ textAlign: 'center' }}><CircularProgress /></div>
+                return <div style={{ textAlign: 'center' }}><CircularProgress aria-label={loadingLabel} /></div>
         }
     }, [placeholder]);
 

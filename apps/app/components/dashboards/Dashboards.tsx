@@ -92,7 +92,7 @@ function Dashboards() {
                         </Box>
                     )}
                 </MuiStack>
-                <Loadable isLoading={!!!selectedId || selectedDashboard.isLoading} error={selectedDashboard.error}>
+                <Loadable isLoading={!!!selectedId || selectedDashboard.isLoading} loadingLabel="Loading dashboards" error={selectedDashboard.error}>
                     <Box sx={{ px: 2 }}>
                         {selectedId && selectedDashboard.data
                             ? (

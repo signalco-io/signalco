@@ -29,7 +29,7 @@ export default function EntityContactSelection(props: EntityContactSelectionProp
     }
 
     return (
-        <Loadable isLoading={isLoading} error={error}>
+        <Loadable isLoading={isLoading} loadingLabel="Loading contacts" error={error}>
             <List>
                 <ListItem>
                     <ListItemButton onClick={() => handleContactSelected({ entityId: target.entityId })} selected={!target.contactName || !target.channelName}>

@@ -118,7 +118,7 @@ function Entities() {
                     </MuiStack>
                 </Row>
                 <Stack>
-                    <Loadable isLoading={entities.isLoading} error={entities.error}>
+                    <Loadable isLoading={entities.isLoading} loadingLabel="Loading entities" error={entities.error}>
                         {results}
                     </Loadable>
                 </Stack>

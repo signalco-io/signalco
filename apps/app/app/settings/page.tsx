@@ -22,7 +22,7 @@ import generalFormComponents from '../../components/forms/generalFormComponents'
 import ApiBadge from '../../components/development/ApiBadge';
 
 const DynamicGraph = dynamic(() => import('../../components/graphs/Graph'), {
-    loading: () => <Loadable isLoading />,
+    loading: () => <Loadable isLoading loadingLabel="Loading graph" />,
 });
 
 function SettingsItem(props: { children: ReactNode, label?: string | undefined }) {

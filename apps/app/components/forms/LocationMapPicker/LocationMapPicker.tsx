@@ -71,7 +71,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
                         <Typography sx={{ width: '33%', flexShrink: 0, fontSize: '0.8em', color: 'text.secondary' }}>
                             {label}
                         </Typography>
-                        <Loadable isLoading={placeName.isLoading}>
+                        <Loadable isLoading={placeName.isLoading} loadingLabel="Loading location">
                             <Typography>{placeName.item}</Typography>
                         </Loadable>
                     </Stack>

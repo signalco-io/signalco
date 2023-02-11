@@ -63,7 +63,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
     const showRawResolved = useMemo(() => detailsComponent == null || showRaw, [detailsComponent, showRaw]);
 
     return (
-        <Loadable isLoading={isLoading} error={error}>
+        <Loadable isLoading={isLoading} loadingLabel="Loading entity" error={error}>
             <MuiStack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
                 <Stack style={{ paddingLeft: 16, paddingRight: 16 }} spacing={1}>
                     <Row spacing={1} justifyContent="space-between">

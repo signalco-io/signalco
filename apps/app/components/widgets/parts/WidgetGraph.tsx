@@ -36,7 +36,7 @@ export default function WidgetButton({ config, onOptions }: WidgetSharedProps<Co
     const historyData = useLoadAndError(loadHistoryCallback);
 
     return (
-        <Loadable isLoading={historyData.isLoading} error={historyData.error}>
+        <Loadable isLoading={historyData.isLoading} loadingLabel="Loading history" error={historyData.error}>
             {(historyData.item?.length ?? 0) > 0 && (
                 <Graph
                     isLoading={historyData.isLoading}

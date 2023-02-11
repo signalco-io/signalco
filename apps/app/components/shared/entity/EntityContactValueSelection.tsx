@@ -20,7 +20,7 @@ export default function EntityContactValueSelection({ target, valueSerialized, o
     const contact = useContact(targetFull);
 
     return (
-        <Loadable isLoading={entity.isLoading} error={entity.error}>
+        <Loadable isLoading={entity.isLoading} loadingLabel="Loading value" error={entity.error}>
             {(target && targetFull && contact) && (
                 <InputContactValue
                     contact={contact.data}

@@ -35,6 +35,7 @@ function LinkChannelIssues({ channelName }: { channelName: string }) {
 
 function AppChannelPage({ params }: { params: { channelName: string } }) {
     const channelName = params.channelName;
+    const isLoading = !!!channelName;
 
     const channel = channelsData.find(c => c.channelName === channelName);
 
@@ -51,7 +52,7 @@ function AppChannelPage({ params }: { params: { channelName: string } }) {
                     </Row>
                     <Stack spacing={2}>
                         <Typography typography="h3">Connected entities</Typography>
-                        <Loadable isLoading={entities.isLoading} error={entities.error}>
+                        <Loadable isLoading={entities.isLoading} error={entities.error} loadingLabel="Loading entities">
                             {(connectedChannels?.length ?? 0) > 0
                                 ? (
                                     <List>
@@ -68,7 +69,7 @@ function AppChannelPage({ params }: { params: { channelName: string } }) {
                     </Stack>
                     <Stack spacing={2}>
                         <Typography typography="h3">Connect</Typography>
-                        <Loadable isLoading={!!!channelName}>
+                        <Loadable isLoading={isLoading} loadingLabel="Loading channel connect">
                             <ChannelConnectPartial channelName={channelName} />
                         </Loadable>
                     </Stack>

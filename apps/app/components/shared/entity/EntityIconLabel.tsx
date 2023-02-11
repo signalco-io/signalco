@@ -12,7 +12,7 @@ type EntityIconLabelProps = {
 };
 
 export default function EntityIconLabel({ entityId, description }: EntityIconLabelProps) {
-    const { data: entity, isLoading: loadingEntity } = useEntity(entityId);
+    const { data: entity, isLoading: loadingEntity, error } = useEntity(entityId);
     const isLoading = !!entityId && loadingEntity;
 
     const entityName = entity?.alias ?? (entity?.id);
@@ -23,7 +23,7 @@ export default function EntityIconLabel({ entityId, description }: EntityIconLab
             {entity && <Icon />}
             <Stack alignItems="start" style={{ minWidth: 0 }}>
                 <Typography noWrap maxWidth="100%">
-                    <Loadable isLoading={isLoading}>
+                    <Loadable isLoading={isLoading} loadingLabel="Loading entity" error={error}>
                         {entityName}
                     </Loadable>
                 </Typography>
