@@ -111,7 +111,7 @@ function GraphTimeLine({ data, durationMs, width, startDateTime, hideLegend }: I
                     return `${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}`
                 }}
                 hide={hideLegend} />
-            <YAxis type="category" domain={[0]} hide />
+            <YAxis type="category" domain={[0, 0]} hide />
             {new Array(reversedData.length + 1).fill(0).map((_, i) => {
                 return (
                     <Bar
@@ -257,7 +257,7 @@ function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
         >
             <CartesianGrid stroke="var(--joy-palette-divider)" vertical={false} />
             <XAxis dataKey="id" hide />
-            <YAxis strokeWidth={0} fill="var(--joy-palette-text-tertiary)" />
+            <YAxis />
             <Tooltip
                 contentStyle={{
                     backgroundColor: 'var(--joy-palette-background-body)',
