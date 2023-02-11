@@ -16,7 +16,6 @@ import useLocale, { availableLocales } from '../../src/hooks/useLocale';
 import useAllEntities from '../../src/hooks/signalco/useAllEntities';
 import SearchInput from '../../components/shared/inputs/SearchInput';
 import AppThemePicker from '../../components/settings/AppThemePicker';
-import { AppLayoutWithAuth } from '../../components/layouts/AppLayoutWithAuth';
 import LocationMapPicker from '../../components/forms/LocationMapPicker/LocationMapPicker';
 import generalFormComponents from '../../components/forms/generalFormComponents';
 import ApiBadge from '../../components/development/ApiBadge';
@@ -373,13 +372,8 @@ function useTimeLocationForm() {
     return timeLocationForm;
 }
 
-function SettingsIndex() {
+export default function SettingsIndex() {
     return (
         <SettingsPane />
     );
 }
-
-SettingsIndex.layout = AppLayoutWithAuth;
-
-export default SettingsIndex;
-1

@@ -7,6 +7,7 @@ import { useSearchParam } from '@signalco/hooks';
 import NavProfile from '../NavProfile';
 import { ChildrenProps } from '../../src/sharedTypes';
 import RealtimeService from '../../src/realtime/realtimeService';
+import { AuthWrapper } from './AuthWrapper';
 
 export function AppLayout(props: ChildrenProps) {
     const {
@@ -22,7 +23,7 @@ export function AppLayout(props: ChildrenProps) {
     }, [queryClient]);
 
     return (
-        <>
+        <AuthWrapper>
             <MuiStack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100vh', width: '100%' }}>
                 {isFullScreen !== 'on' && (
                     <NavProfile />
@@ -43,6 +44,6 @@ export function AppLayout(props: ChildrenProps) {
                     </IconButton>
                 </Tooltip>
             )}
-        </>
+        </AuthWrapper>
     );
 }
