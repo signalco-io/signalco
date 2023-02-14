@@ -51,7 +51,7 @@ importers:
       '@types/recharts': 1.8.24
       '@types/suncalc': 1.9.0
       '@types/uuid': 9.0.0
-      '@vvo/tzdb': 6.97.0
+      '@vvo/tzdb': 6.98.0
       babel-loader: 9.1.2
       classix: 2.1.22
       cobe: 0.6.3
@@ -116,7 +116,7 @@ importers:
       '@signalco/ui-icons': link:../../packages/ui-icons
       '@tanstack/react-query': 4.24.6_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-devtools': 4.24.6_r32zdxeb7iubg3qfkymfterewe
-      '@vvo/tzdb': 6.97.0
+      '@vvo/tzdb': 6.98.0
       classix: 2.1.22
       cobe: 0.6.3
       color: 4.2.3
@@ -5693,8 +5693,8 @@ packages:
       vite: 4.1.1
     dev: true
 
-  /@vvo/tzdb/6.97.0:
-    resolution: {integrity: sha512-HVIYbAs3UTgF4wnd5wlNR4nRo3PEYoW2RVdx5iGt/T2U5mGQDIpipJFKCIccxSHIDJX/m4Cnp3lnObkVRWroOg==}
+  /@vvo/tzdb/6.98.0:
+    resolution: {integrity: sha512-lBkhDfcmHZvc4c+TBhiDUPSp4/oZciRoG8HDLl4pEPAN/TMJrDqgjgUqiGPBa8x5ybdHZB2DgYLc4Rn9EK/teA==}
     dev: false
 
   /@webassemblyjs/ast/1.11.1:
