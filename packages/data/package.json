@@ -21,7 +21,7 @@
     },
     "devDependencies": {
         "@signalco/tsconfig": "*",
-        "tsup": "6.6.2",
+        "tsup": "6.6.3",
         "concurrently": "7.6.0",
         "esbuild": "0.17.8",
         "prop-types": "15.8.1",
