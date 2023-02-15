@@ -1,7 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { getApiUrl, getTokenFactory } from '../services/HttpService';
-import CurrentUserProvider from '../services/CurrentUserProvider';
 import { showNotification } from '../notifications/PageNotificationService';
 
 class SignalSignalRDeviceStateDto {
