@@ -7,8 +7,8 @@ export function getApiUrl(url: string): string {
     return signalcoApiEndpoint() + trimStartChar(url, '/');
 }
 
-let _tokenFactory: (() => Promise<string>) | undefined = undefined;
-export function setTokenFactory(factory: () => Promise<string>) {
+let _tokenFactory: (() => Promise<string | undefined>) | undefined = undefined;
+export function setTokenFactory(factory: () => Promise<string | undefined>) {
     _tokenFactory = factory;
 }
 
