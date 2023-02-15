@@ -16,7 +16,7 @@ jobs:
       - name: Checkout 🛎
         uses: actions/checkout@v2
       - name: Merge `main` branch
-        uses: everlytic/branch-merge@1.1.2
+        uses: everlytic/branch-merge@1.1.5
         id: branch-merge
         with:
           github_token: ${{  secrets.GITHUB_TOKEN }}
