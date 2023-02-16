@@ -4,12 +4,9 @@ import '../styles/global.scss';
 import '@signalco/ui/dist/ui.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ChildrenProps, CssBaseline, CssVarsProvider, getInitColorSchemeScript, signalcoTheme } from '@signalco/ui';
 import useAppTheme from '../src/hooks/useAppTheme';
 import { AppLayout } from '../components/layouts/AppLayout';
-
-const queryClient = new QueryClient();
 
 function ThemeChangerWrapper(props: ChildrenProps) {
     useAppTheme();
@@ -29,14 +26,12 @@ export default function RootLayout({
                 {getInitColorSchemeScript()}
                 <CssVarsProvider theme={signalcoTheme}>
                     <CssBaseline />
-                    <QueryClientProvider client={queryClient}>
-                        <ThemeChangerWrapper>
-                            <ToastContainer />
-                            <AppLayout>
-                                {children}
-                            </AppLayout>
-                        </ThemeChangerWrapper>
-                    </QueryClientProvider>
+                    <ThemeChangerWrapper>
+                        <ToastContainer />
+                        <AppLayout>
+                            {children}
+                        </AppLayout>
+                    </ThemeChangerWrapper>
                 </CssVarsProvider>
             </body>
         </html>

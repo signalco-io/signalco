@@ -1,7 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-import { getApiUrl } from '../services/HttpService';
-import CurrentUserProvider from '../services/CurrentUserProvider';
+import { getApiUrl, getTokenFactory } from '../services/HttpService';
 import { showNotification } from '../notifications/PageNotificationService';
 
 class SignalSignalRDeviceStateDto {
@@ -92,11 +91,17 @@ class RealtimeService {
 
         this.contactsHub = new HubConnectionBuilder()
             .withUrl(getApiUrl('/signalr/contacts'), {
-                accessTokenFactory: () => {
-                    const token = CurrentUserProvider.getToken();
-                    if (token === 'undefined' ||
-                        typeof token === 'undefined')
+                accessTokenFactory: async () => {
+                    const factory = getTokenFactory();
+                    if (!factory) {
+                        throw Error('TokenFactory not present.');
+                    }
+
+                    const token = await factory();
+                    if (token === 'undefined' || typeof token === 'undefined') {
                         throw Error('TokenFactory not present. Unable to authorize SignalR client.');
+                    }
+                    
                     return token;
                 }
             })
