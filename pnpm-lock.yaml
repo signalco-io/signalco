@@ -669,7 +669,7 @@ importers:
   packages/ui-icons:
     specifiers:
       '@signalco/tsconfig': workspace:*
-      lucide-react: 0.114.0
+      lucide-react: 0.115.0
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0
@@ -678,7 +678,7 @@ importers:
       typescript: 4.9.5
     devDependencies:
       '@signalco/tsconfig': link:../tsconfig
-      lucide-react: 0.114.0_react@18.2.0
+      lucide-react: 0.115.0_react@18.2.0
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -3841,7 +3841,7 @@ packages:
     dependencies:
       '@storybook/client-logger': 7.0.0-beta.48
       '@storybook/core-events': 7.0.0-beta.48
-      '@storybook/csf': 0.0.2-next.8
+      '@storybook/csf': 0.0.2-next.10
       '@storybook/global': 5.0.0
       '@storybook/manager-api': 7.0.0-beta.48_biqbaboplfbrettd7655fr4n2y
       '@storybook/preview-api': 7.0.0-beta.48
@@ -4003,7 +4003,7 @@ packages:
       '@storybook/client-logger': 7.0.0-beta.47
       '@storybook/components': 7.0.0-beta.47_biqbaboplfbrettd7655fr4n2y
       '@storybook/core-events': 7.0.0-beta.47
-      '@storybook/csf': 0.0.2-next.8
+      '@storybook/csf': 0.0.2-next.10
       '@storybook/docs-tools': 7.0.0-beta.47
       '@storybook/global': 5.0.0
       '@storybook/manager-api': 7.0.0-beta.47_biqbaboplfbrettd7655fr4n2y
@@ -4247,7 +4247,7 @@ packages:
       '@babel/core': 7.20.12
       '@babel/preset-env': 7.20.2_@babel+core@7.20.12
       '@babel/types': 7.20.7
-      '@storybook/csf': 0.0.2-next.8
+      '@storybook/csf': 0.0.2-next.10
       '@storybook/csf-tools': 7.0.0-beta.48
       '@storybook/node-logger': 7.0.0-beta.48
       '@storybook/types': 7.0.0-beta.48
@@ -4269,7 +4269,7 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@storybook/client-logger': 7.0.0-beta.47
-      '@storybook/csf': 0.0.2-next.8
+      '@storybook/csf': 0.0.2-next.10
       '@storybook/global': 5.0.0
       '@storybook/theming': 7.0.0-beta.47_biqbaboplfbrettd7655fr4n2y
       '@storybook/types': 7.0.0-beta.47
@@ -4289,7 +4289,7 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@storybook/client-logger': 7.0.0-beta.48
-      '@storybook/csf': 0.0.2-next.8
+      '@storybook/csf': 0.0.2-next.10
       '@storybook/global': 5.0.0
       '@storybook/theming': 7.0.0-beta.48_biqbaboplfbrettd7655fr4n2y
       '@storybook/types': 7.0.0-beta.48
@@ -4389,7 +4389,7 @@ packages:
       '@storybook/builder-manager': 7.0.0-beta.48
       '@storybook/core-common': 7.0.0-beta.48
       '@storybook/core-events': 7.0.0-beta.48
-      '@storybook/csf': 0.0.2-next.8
+      '@storybook/csf': 0.0.2-next.10
       '@storybook/csf-tools': 7.0.0-beta.48
       '@storybook/docs-mdx': 0.0.1-next.6
       '@storybook/global': 5.0.0
@@ -4459,7 +4459,7 @@ packages:
     resolution: {integrity: sha512-NBi0psLToS0mR8ZjHugMcfQt11xIwz7w0Rot4VACTlv8Q8cQBv/FAznCVpfpFedqusSTksBCEmRfRbIcKI3+VQ==}
     dependencies:
       '@babel/types': 7.20.7
-      '@storybook/csf': 0.0.2-next.8
+      '@storybook/csf': 0.0.2-next.10
       '@storybook/types': 7.0.0-beta.47
       fs-extra: 11.1.0
       recast: 0.23.1
@@ -4472,7 +4472,7 @@ packages:
     resolution: {integrity: sha512-NL8SWlzAYHG2kLtC6l+jRt3tYQU06yzuwGVA+oZm7yrnelHgKyg2Er35zEZafustcm0lKCUwirITN+KdujYDvQ==}
     dependencies:
       '@babel/types': 7.20.7
-      '@storybook/csf': 0.0.2-next.8
+      '@storybook/csf': 0.0.2-next.10
       '@storybook/types': 7.0.0-beta.48
       fs-extra: 11.1.0
       recast: 0.23.1
@@ -4481,11 +4481,9 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/csf/0.0.2-next.8:
-    resolution: {integrity: sha512-3T6rflW7D9q1iXOR+bidwoNbd9rVUTyjYH/sqsnYjbXhb/aOXsQzGKwNeq9QqZIFVpKfg5BoOF5i7DCMtoGknQ==}
+  /@storybook/csf/0.0.2-next.10:
+    resolution: {integrity: sha512-m2PFgBP/xRIF85VrDhvesn9ktaD2pN3VUjvMqkAL/cINp/3qXsCyI81uw7N5VEOkQAbWrY2FcydnvEPDEdE8fA==}
     dependencies:
-      expect-type: 0.14.2
-      lodash: 4.17.21
       type-fest: 2.19.0
     dev: true
 
@@ -4534,7 +4532,7 @@ packages:
       '@storybook/channels': 7.0.0-alpha.54
       '@storybook/client-logger': 7.0.0-alpha.54
       '@storybook/core-events': 7.0.0-alpha.54
-      '@storybook/csf': 0.0.2-next.8
+      '@storybook/csf': 0.0.2-next.10
       '@storybook/router': 7.0.0-alpha.54_biqbaboplfbrettd7655fr4n2y
       '@storybook/theming': 7.0.0-alpha.54_biqbaboplfbrettd7655fr4n2y
       '@storybook/types': 7.0.0-alpha.54
@@ -4561,7 +4559,7 @@ packages:
       '@storybook/channels': 7.0.0-beta.47
       '@storybook/client-logger': 7.0.0-beta.47
       '@storybook/core-events': 7.0.0-beta.47
-      '@storybook/csf': 0.0.2-next.8
+      '@storybook/csf': 0.0.2-next.10
       '@storybook/global': 5.0.0
       '@storybook/router': 7.0.0-beta.47_biqbaboplfbrettd7655fr4n2y
       '@storybook/theming': 7.0.0-beta.47_biqbaboplfbrettd7655fr4n2y
@@ -4588,7 +4586,7 @@ packages:
       '@storybook/channels': 7.0.0-beta.48
       '@storybook/client-logger': 7.0.0-beta.48
       '@storybook/core-events': 7.0.0-beta.48
-      '@storybook/csf': 0.0.2-next.8
+      '@storybook/csf': 0.0.2-next.10
       '@storybook/global': 5.0.0
       '@storybook/router': 7.0.0-beta.48_biqbaboplfbrettd7655fr4n2y
       '@storybook/theming': 7.0.0-beta.48_biqbaboplfbrettd7655fr4n2y
@@ -4753,7 +4751,7 @@ packages:
       '@storybook/channels': 7.0.0-beta.47
       '@storybook/client-logger': 7.0.0-beta.47
       '@storybook/core-events': 7.0.0-beta.47
-      '@storybook/csf': 0.0.2-next.8
+      '@storybook/csf': 0.0.2-next.10
       '@storybook/global': 5.0.0
       '@storybook/types': 7.0.0-beta.47
       '@types/qs': 6.9.7
@@ -4776,7 +4774,7 @@ packages:
       '@storybook/channels': 7.0.0-beta.48
       '@storybook/client-logger': 7.0.0-beta.48
       '@storybook/core-events': 7.0.0-beta.48
-      '@storybook/csf': 0.0.2-next.8
+      '@storybook/csf': 0.0.2-next.10
       '@storybook/global': 5.0.0
       '@storybook/types': 7.0.0-beta.48
       '@types/qs': 6.9.7
@@ -8519,10 +8517,6 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /expect-type/0.14.2:
-    resolution: {integrity: sha512-ed3+tr5ujbIYXZ8Pl/VgIphwJQ0q5tBLGGdn7Zvwt1WyPBRX83xjT5pT77P/GkuQbctx0K2ZNSSan7eruJqTCQ==}
-    dev: true
-
   /express/4.18.2:
     resolution: {integrity: sha512-5/PsL6iGPdfQ/lKM1UuielYgv3BUoJfz1aUwU9vHZ+J7gyvwdQXFEBIEIaxeGf0GIcreATNyBExtalisDbuMqQ==}
     engines: {node: '>= 0.10.0'}
@@ -10134,8 +10128,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lucide-react/0.114.0_react@18.2.0:
-    resolution: {integrity: sha512-q+KzNGjFINMim7inE4jcTfgDMhXTOjzthHes4UaYoS7hyYcQl79f2KrdKoj5Z/Uuc0A6yt7JQ0R1w6I+tPDhsg==}
+  /lucide-react/0.115.0_react@18.2.0:
+    resolution: {integrity: sha512-VGL7jBKN6pEXi6peXoyn9t9O7olvinaAonnoe+iFi/F2q7/yQzAFM5KR1OY15u9PlrB3scI9HvcTFoOrIjUaVQ==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
