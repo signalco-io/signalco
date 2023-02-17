@@ -83,7 +83,7 @@ importers:
       react-transition-group: 4.4.5
       recharts: 2.4.3
       rimraf: 4.1.2
-      sass: 1.58.1
+      sass: 1.58.2
       sass-loader: 13.2.0
       sharp: 0.31.3
       suncalc: 1.9.0
@@ -125,7 +125,7 @@ importers:
       date-fns: 2.29.3
       material-ui-popup-state: 5.0.4_xqeqsl5kvjjtyxwyi3jhw3yuli
       monaco-editor: 0.35.0
-      next: 13.1.6_xwkhz2pflc2dna3hcltgugxula
+      next: 13.1.6_4u6c57fe2msmz5uzpiwwufo4my
       next-pwa: 5.6.0_k2seot55bsmlm52vxz6m7rtrky
       next-secure-headers: 2.2.0
       pigeon-maps: 0.21.3_react@18.2.0
@@ -151,7 +151,7 @@ importers:
       '@signalco/tsconfig': link:../../packages/tsconfig
       '@types/color': 3.0.3
       '@types/d3': 7.4.0
-      '@types/next-pwa': 5.6.2_xwkhz2pflc2dna3hcltgugxula
+      '@types/next-pwa': 5.6.2_4u6c57fe2msmz5uzpiwwufo4my
       '@types/node': 18.13.0
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
@@ -171,8 +171,8 @@ importers:
       prop-types: 15.8.1
       react-is: 18.2.0
       rimraf: 4.1.2
-      sass: 1.58.1
-      sass-loader: 13.2.0_sass@1.58.1+webpack@5.75.0
+      sass: 1.58.2
+      sass-loader: 13.2.0_sass@1.58.2+webpack@5.75.0
       typescript: 4.9.5
       webpack: 5.75.0
 
@@ -208,7 +208,7 @@ importers:
       react-dom: 18.2.0
       react-transition-group: 4.4.5
       rimraf: 4.1.2
-      sass: 1.58.1
+      sass: 1.58.2
       sharp: 0.31.3
       terser: 5.16.3
       typescript: 4.9.5
@@ -219,7 +219,7 @@ importers:
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
       classix: 2.1.22
-      next: 13.1.6_xwkhz2pflc2dna3hcltgugxula
+      next: 13.1.6_4u6c57fe2msmz5uzpiwwufo4my
       next-secure-headers: 2.2.0
       postcss: 8.4.21
       react: 18.2.0
@@ -248,7 +248,7 @@ importers:
       playwright: 1.30.0
       prop-types: 15.8.1
       rimraf: 4.1.2
-      sass: 1.58.1
+      sass: 1.58.2
       typescript: 4.9.5
       webpack: 5.75.0
 
@@ -303,7 +303,7 @@ importers:
       react-dom: 18.2.0
       react-transition-group: 4.4.5
       rimraf: 4.1.2
-      sass: 1.58.1
+      sass: 1.58.2
       sharp: 0.31.3
       terser: 5.16.3
       typescript: 4.9.5
@@ -314,7 +314,7 @@ importers:
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
       classix: 2.1.22
-      next: 13.1.6_xwkhz2pflc2dna3hcltgugxula
+      next: 13.1.6_4u6c57fe2msmz5uzpiwwufo4my
       next-secure-headers: 2.2.0
       postcss: 8.4.21
       react: 18.2.0
@@ -343,7 +343,7 @@ importers:
       playwright: 1.30.0
       prop-types: 15.8.1
       rimraf: 4.1.2
-      sass: 1.58.1
+      sass: 1.58.2
       typescript: 4.9.5
       webpack: 5.75.0
 
@@ -369,7 +369,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       rimraf: 4.1.2
-      sass: 1.58.1
+      sass: 1.58.2
       sass-loader: 13.2.0
       storybook: 7.0.0-beta.49
       storybook-addon-swc: 1.1.9
@@ -379,7 +379,7 @@ importers:
     dependencies:
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
-      next: 13.1.6_xwkhz2pflc2dna3hcltgugxula
+      next: 13.1.6_4u6c57fe2msmz5uzpiwwufo4my
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
@@ -389,7 +389,7 @@ importers:
       '@storybook/addon-links': 7.0.0-beta.49_biqbaboplfbrettd7655fr4n2y
       '@storybook/addons': 7.0.0-beta.49_biqbaboplfbrettd7655fr4n2y
       '@storybook/manager-api': 7.0.0-alpha.54_biqbaboplfbrettd7655fr4n2y
-      '@storybook/nextjs': 7.0.0-beta.49_kw4cdnnm6cokdkflbywyv6lfgm
+      '@storybook/nextjs': 7.0.0-beta.49_26tw5bdbippxbh2av4bw7ih2ye
       '@storybook/react': 7.0.0-beta.49_ygqkwb4gg3aean7xjfdauovyqq
       '@storybook/theming': 6.5.16_biqbaboplfbrettd7655fr4n2y
       '@types/react': 18.0.28
@@ -398,8 +398,8 @@ importers:
       postcss: 8.4.21
       postcss-loader: 7.0.2_6jdsrmfenkuhhw3gx4zvjlznce
       rimraf: 4.1.2
-      sass: 1.58.1
-      sass-loader: 13.2.0_sass@1.58.1+webpack@5.75.0
+      sass: 1.58.2
+      sass-loader: 13.2.0_sass@1.58.2+webpack@5.75.0
       storybook: 7.0.0-beta.49
       storybook-addon-swc: 1.1.9_webpack@5.75.0
       style-loader: 3.3.1_webpack@5.75.0
@@ -446,7 +446,7 @@ importers:
       react-dom: 18.2.0
       react-transition-group: 4.4.5
       rimraf: 4.1.2
-      sass: 1.58.1
+      sass: 1.58.2
       sharp: 0.31.3
       terser: 5.16.3
       typescript: 4.9.5
@@ -461,7 +461,7 @@ importers:
       '@signalco/ui-icons': link:../../packages/ui-icons
       classix: 2.1.22
       cobe: 0.6.3
-      next: 13.1.6_xwkhz2pflc2dna3hcltgugxula
+      next: 13.1.6_4u6c57fe2msmz5uzpiwwufo4my
       next-pwa: 5.6.0_k2seot55bsmlm52vxz6m7rtrky
       next-secure-headers: 2.2.0
       postcss: 8.4.21
@@ -480,7 +480,7 @@ importers:
       '@signalco/eslint-config-signalco': link:../../packages/eslint-config-signalco
       '@signalco/tsconfig': link:../../packages/tsconfig
       '@types/color': 3.0.3
-      '@types/next-pwa': 5.6.2_xwkhz2pflc2dna3hcltgugxula
+      '@types/next-pwa': 5.6.2_4u6c57fe2msmz5uzpiwwufo4my
       '@types/node': 18.13.0
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
@@ -494,7 +494,7 @@ importers:
       playwright: 1.30.0
       prop-types: 15.8.1
       rimraf: 4.1.2
-      sass: 1.58.1
+      sass: 1.58.2
       typescript: 4.9.5
       webpack: 5.75.0
 
@@ -623,7 +623,7 @@ importers:
       rollup-plugin-peer-deps-external: 2.2.4
       rollup-plugin-postcss: 4.0.2
       rollup-plugin-summary: 2.0.0
-      sass: 1.58.1
+      sass: 1.58.2
       styled-components: 5.3.6
       typescript: 4.9.5
     dependencies:
@@ -637,7 +637,7 @@ importers:
       '@mui/system': 5.11.9_d2lgyfpecxdc2bsiwyag5wf7ti
       '@signalco/ui-icons': link:../ui-icons
       material-ui-popup-state: 5.0.4_xqeqsl5kvjjtyxwyi3jhw3yuli
-      next: 13.1.6_xwkhz2pflc2dna3hcltgugxula
+      next: 13.1.6_4u6c57fe2msmz5uzpiwwufo4my
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-is: 18.2.0
@@ -663,7 +663,7 @@ importers:
       rollup-plugin-peer-deps-external: 2.2.4_rollup@3.15.0
       rollup-plugin-postcss: 4.0.2_postcss@8.4.21
       rollup-plugin-summary: 2.0.0_rollup@3.15.0
-      sass: 1.58.1
+      sass: 1.58.2
       typescript: 4.9.5
 
   packages/ui-icons:
@@ -4393,7 +4393,7 @@ packages:
     resolution: {integrity: sha512-02w0sgGZaK1agT050yCVhJ+o4rLHANWvLKWjQjeAsYbjneLC5ITt+3GDB4jRiWwJboZ8dHW1fGSK1Vg5fA34aQ==}
     dev: true
 
-  /@storybook/nextjs/7.0.0-beta.49_kw4cdnnm6cokdkflbywyv6lfgm:
+  /@storybook/nextjs/7.0.0-beta.49_26tw5bdbippxbh2av4bw7ih2ye:
     resolution: {integrity: sha512-6A5t+3WHK1QQ88cD8+5hb5SUsXmB6UNbE8hma9w+Ng4koBVCz65B01aIiokwJZnZlCW8sT/XUCRL5MxxUssTYw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -4427,14 +4427,14 @@ packages:
       fs-extra: 11.1.0
       image-size: 1.0.2
       loader-utils: 3.2.1
-      next: 13.1.6_xwkhz2pflc2dna3hcltgugxula
+      next: 13.1.6_4u6c57fe2msmz5uzpiwwufo4my
       pnp-webpack-plugin: 1.7.0_typescript@4.9.5
       postcss: 8.4.21
       postcss-loader: 7.0.2_6jdsrmfenkuhhw3gx4zvjlznce
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       resolve-url-loader: 5.0.0
-      sass-loader: 12.6.0_sass@1.58.1+webpack@5.75.0
+      sass-loader: 12.6.0_sass@1.58.2+webpack@5.75.0
       semver: 7.3.8
       ts-dedent: 2.2.0
       tsconfig-paths: 4.1.1
@@ -5346,11 +5346,11 @@ packages:
   /@types/minimatch/5.1.2:
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
 
-  /@types/next-pwa/5.6.2_xwkhz2pflc2dna3hcltgugxula:
+  /@types/next-pwa/5.6.2_4u6c57fe2msmz5uzpiwwufo4my:
     resolution: {integrity: sha512-K5zLZSzrJCOQBay5E7abGp7gQ0q1Pv58dE3RuBo5LQXYQFaCO4JPju0XYdzgLoQ20yhBVZ43AwIcSgCzx9KvqA==}
     dependencies:
       '@types/react': 18.0.28
-      next: 13.1.6_xwkhz2pflc2dna3hcltgugxula
+      next: 13.1.6_4u6c57fe2msmz5uzpiwwufo4my
       workbox-build: 6.5.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -10132,7 +10132,7 @@ packages:
       babel-loader: 8.3.0_la66t7xldg4uecmyawueag5wkm
       clean-webpack-plugin: 4.0.0_webpack@5.75.0
       globby: 11.1.0
-      next: 13.1.6_xwkhz2pflc2dna3hcltgugxula
+      next: 13.1.6_4u6c57fe2msmz5uzpiwwufo4my
       terser-webpack-plugin: 5.3.6_webpack@5.75.0
       workbox-webpack-plugin: 6.5.4_webpack@5.75.0
       workbox-window: 6.5.4
@@ -10162,8 +10162,52 @@ packages:
       '@corex/deepmerge': 4.0.29
       '@next/env': 13.1.6
       minimist: 1.2.7
-      next: 13.1.6_xwkhz2pflc2dna3hcltgugxula
+      next: 13.1.6_4u6c57fe2msmz5uzpiwwufo4my
     dev: true
+
+  /next/13.1.6_4u6c57fe2msmz5uzpiwwufo4my:
+    resolution: {integrity: sha512-hHlbhKPj9pW+Cymvfzc15lvhaOZ54l+8sXDXJWm3OBNBzgrVj6hwGPmqqsXg40xO1Leq+kXpllzRPuncpC0Phw==}
+    engines: {node: '>=14.6.0'}
+    hasBin: true
+    peerDependencies:
+      fibers: '>= 3.1.0'
+      node-sass: ^6.0.0 || ^7.0.0
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      sass: ^1.3.0
+    peerDependenciesMeta:
+      fibers:
+        optional: true
+      node-sass:
+        optional: true
+      sass:
+        optional: true
+    dependencies:
+      '@next/env': 13.1.6
+      '@swc/helpers': 0.4.14
+      caniuse-lite: 1.0.30001431
+      postcss: 8.4.14
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      sass: 1.58.2
+      styled-jsx: 5.1.1_2exiyaescjxorpwwmy4ejghgte
+    optionalDependencies:
+      '@next/swc-android-arm-eabi': 13.1.6
+      '@next/swc-android-arm64': 13.1.6
+      '@next/swc-darwin-arm64': 13.1.6
+      '@next/swc-darwin-x64': 13.1.6
+      '@next/swc-freebsd-x64': 13.1.6
+      '@next/swc-linux-arm-gnueabihf': 13.1.6
+      '@next/swc-linux-arm64-gnu': 13.1.6
+      '@next/swc-linux-arm64-musl': 13.1.6
+      '@next/swc-linux-x64-gnu': 13.1.6
+      '@next/swc-linux-x64-musl': 13.1.6
+      '@next/swc-win32-arm64-msvc': 13.1.6
+      '@next/swc-win32-ia32-msvc': 13.1.6
+      '@next/swc-win32-x64-msvc': 13.1.6
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
 
   /next/13.1.6_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-hHlbhKPj9pW+Cymvfzc15lvhaOZ54l+8sXDXJWm3OBNBzgrVj6hwGPmqqsXg40xO1Leq+kXpllzRPuncpC0Phw==}
@@ -10208,50 +10252,6 @@ packages:
       - '@babel/core'
       - babel-plugin-macros
     dev: true
-
-  /next/13.1.6_xwkhz2pflc2dna3hcltgugxula:
-    resolution: {integrity: sha512-hHlbhKPj9pW+Cymvfzc15lvhaOZ54l+8sXDXJWm3OBNBzgrVj6hwGPmqqsXg40xO1Leq+kXpllzRPuncpC0Phw==}
-    engines: {node: '>=14.6.0'}
-    hasBin: true
-    peerDependencies:
-      fibers: '>= 3.1.0'
-      node-sass: ^6.0.0 || ^7.0.0
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      sass: ^1.3.0
-    peerDependenciesMeta:
-      fibers:
-        optional: true
-      node-sass:
-        optional: true
-      sass:
-        optional: true
-    dependencies:
-      '@next/env': 13.1.6
-      '@swc/helpers': 0.4.14
-      caniuse-lite: 1.0.30001431
-      postcss: 8.4.14
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      sass: 1.58.1
-      styled-jsx: 5.1.1_2exiyaescjxorpwwmy4ejghgte
-    optionalDependencies:
-      '@next/swc-android-arm-eabi': 13.1.6
-      '@next/swc-android-arm64': 13.1.6
-      '@next/swc-darwin-arm64': 13.1.6
-      '@next/swc-darwin-x64': 13.1.6
-      '@next/swc-freebsd-x64': 13.1.6
-      '@next/swc-linux-arm-gnueabihf': 13.1.6
-      '@next/swc-linux-arm64-gnu': 13.1.6
-      '@next/swc-linux-arm64-musl': 13.1.6
-      '@next/swc-linux-x64-gnu': 13.1.6
-      '@next/swc-linux-x64-musl': 13.1.6
-      '@next/swc-win32-arm64-msvc': 13.1.6
-      '@next/swc-win32-ia32-msvc': 13.1.6
-      '@next/swc-win32-x64-msvc': 13.1.6
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
 
   /no-case/3.0.4:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
@@ -12423,7 +12423,7 @@ packages:
   /safer-buffer/2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  /sass-loader/12.6.0_sass@1.58.1+webpack@5.75.0:
+  /sass-loader/12.6.0_sass@1.58.2+webpack@5.75.0:
     resolution: {integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
@@ -12444,11 +12444,11 @@ packages:
     dependencies:
       klona: 2.0.5
       neo-async: 2.6.2
-      sass: 1.58.1
+      sass: 1.58.2
       webpack: 5.75.0
     dev: true
 
-  /sass-loader/13.2.0_sass@1.58.1+webpack@5.75.0:
+  /sass-loader/13.2.0_sass@1.58.2+webpack@5.75.0:
     resolution: {integrity: sha512-JWEp48djQA4nbZxmgC02/Wh0eroSUutulROUusYJO9P9zltRbNN80JCBHqRGzjd4cmZCa/r88xgfkjGD0TXsHg==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -12469,12 +12469,12 @@ packages:
     dependencies:
       klona: 2.0.5
       neo-async: 2.6.2
-      sass: 1.58.1
+      sass: 1.58.2
       webpack: 5.75.0
     dev: true
 
-  /sass/1.58.1:
-    resolution: {integrity: sha512-bnINi6nPXbP1XNRaranMFEBZWUfdW/AF16Ql5+ypRxfTvCRTTKrLsMIakyDcayUt2t/RZotmL4kgJwNH5xO+bg==}
+  /sass/1.58.2:
+    resolution: {integrity: sha512-2mbyOWOv/lhEXD6nVrQZQ4KT2DlwcODbTskM42EyqBAFUWOhiiYtAXZqjZz1ygzapYf+N+2GwfIH9M5FM4GUMg==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
