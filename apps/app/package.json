@@ -20,7 +20,7 @@
         "@auth0/auth0-react": "2.0.0",
         "@auth0/auth0-spa-js": "2.0.3",
         "@date-io/date-fns": "2.16.0",
-        "@dnd-kit/core": "6.0.7",
+        "@dnd-kit/core": "6.0.8",
         "@dnd-kit/modifiers": "6.0.1",
         "@dnd-kit/sortable": "7.0.2",
         "@dnd-kit/utilities": "3.2.1",
