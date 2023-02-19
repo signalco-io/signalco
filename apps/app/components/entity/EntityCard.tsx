@@ -38,7 +38,7 @@ export default function EntityCard({ entity, spread }: EntityCardProps) {
                         spacing={1}>
                         <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
                         <Row spacing={1} style={{ paddingRight: spread ? 16 : 0 }}>
-                            {hasBattery && <BatteryIndicator level={level} />}
+                            {hasBattery && <BatteryIndicator level={level} minLevel="low" />}
                             {(hasStatus && (isStale || isOffline)) && (
                                 <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
                                     <Timeago date={entityLastActivity(entity)} />

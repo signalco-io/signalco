@@ -1,6 +1,4 @@
 import { isAbsoluteUrl, trimStartChar } from '@signalco/js';
-import { showPrompt } from '../notifications/PageNotificationService';
-import CurrentUserProvider from './CurrentUserProvider';
 import { signalcoApiEndpoint } from './AppSettingsProvider';
 
 export function getApiUrl(url: string): string {
@@ -17,26 +15,12 @@ export function getTokenFactory() {
 }
 
 async function _getBearerTokenAsync() {
-    let token: string | undefined;
-
-    // Try to use cached token (for offline access)
-    const cachedToken = CurrentUserProvider.getToken();
-    if (cachedToken != null) {
-        token = cachedToken;
-        console.debug('Using cached token.');
-    }
-
-    // If unable to use cached token, ask factory for one
     const tokenFactory = getTokenFactory();
-    if (token == null && tokenFactory) {
-        token = await tokenFactory();
-        CurrentUserProvider.setToken(token);
-        console.debug('Used token factory. Have token?', typeof token !== 'undefined')
-    }
-
-    // Cache token and return if available
-    if (typeof token !== 'undefined') {
-        return `Bearer ${token}`;
+    if (tokenFactory) {
+        const token = await tokenFactory();
+        if (typeof token !== 'undefined') {
+            return `Bearer ${token}`;
+        }
     }
 
     console.warn('Token is undefined');
@@ -76,15 +60,6 @@ export async function requestAsync(
 
         if (response.status === 403) {
             console.warn('Token expired: ', response.statusText, response.status);
-            CurrentUserProvider.setToken(undefined);
-
-            showPrompt(
-                'Authorization failed. Please reload the app to continue...',
-                'error',
-                'Reload',
-                () => {
-                    window.location.replace('/');
-                });
         }
 
         let bodyText: string | null = null;

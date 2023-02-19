@@ -1,4 +1,4 @@
-name: 'Sync `next` Branch'
+name: '[Global] Sync `next` Branch'
 
 # This workflow attempts to merge updates from `main` into the long-standing next branch.
 
