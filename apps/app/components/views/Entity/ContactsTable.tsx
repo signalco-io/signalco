@@ -71,7 +71,6 @@ function ObjectVisualizer(props: { name: string, value: ParsedJson, defaultOpen?
                         //     - GUID/UUID
                         //     - boolean
                         //     - ability to unset value
-                        <CopyToClipboardInput size="sm" variant="outlined" value={value?.toString()} />
                     )}
                 </Row>
             )}>
@@ -113,7 +112,7 @@ function DisplayJson(props: { json: string | undefined }) {
 function isJson(value: string | undefined) {
     try {
         if (typeof value === 'string' &&
-            value[0] === '{' &&
+            /(\[|\{)(.|\s|\S)*(\]|\})/gm.test(value) &&
             typeof JSON.parse(value) !== 'undefined')
             return true;
         return false;
