@@ -3,10 +3,9 @@ import { usePathname } from 'next/navigation';
 import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
 import { Button, Divider, IconButton, Menu, Box, MenuItemLink, ButtonProps, MuiStack, Stack } from '@signalco/ui';
 import { orderBy } from '@signalco/js';
-import { useLoadAndError } from '@signalco/hooks';
-import { getCurrentUserAsync } from '../src/services/CurrentUserProvider';
 import { KnownPages } from '../src/knownPages';
 import useLocale from '../src/hooks/useLocale';
+import useCurrentUser from '../src/hooks/useCurrentUser';
 import UserAvatar from './users/UserAvatar';
 import NavLink from './navigation/NavLink';
 import ApiBadge from './development/ApiBadge';
@@ -26,11 +25,11 @@ const navItems: NavItem[] = [
 ];
 
 function UserProfileAvatarButton(props: ButtonProps) {
-    const user = useLoadAndError(getCurrentUserAsync);
+    const user = useCurrentUser();
 
     return (
         <Button variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 2 }} {...props} style={{position: 'relative'}}>
-            <UserAvatar user={user.item} />
+            <UserAvatar user={user} />
             <Box sx={{ position: 'absolute', left: '50%', bottom: 4, transform: 'translateX(-50%)' }}>
                 <ApiBadge />
             </Box>
