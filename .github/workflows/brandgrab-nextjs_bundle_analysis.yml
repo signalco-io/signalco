@@ -16,6 +16,9 @@ jobs:
   analyze_brandgrab:
     name: "[BrandGrab] Next.js Bundle Analysis"
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+      cancel-in-progress: true
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: signalco

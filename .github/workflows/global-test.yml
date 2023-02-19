@@ -6,6 +6,9 @@ jobs:
         name: "[Global] Run Tests"
         timeout-minutes: 20
         runs-on: ubuntu-latest
+        concurrency:
+          group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+          cancel-in-progress: true
         env:
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
           TURBO_TEAM: signalco
