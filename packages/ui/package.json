@@ -51,7 +51,7 @@
         "@emotion/server": "11.10.0",
         "@emotion/styled": "11.10.6",
         "@mui/base": "5.0.0-alpha.118",
-        "@mui/joy": "5.0.0-alpha.67",
+        "@mui/joy": "5.0.0-alpha.68",
         "@mui/system": "5.11.9",
         "@signalco/ui-icons": "workspace:*",
         "material-ui-popup-state": "5.0.4",
