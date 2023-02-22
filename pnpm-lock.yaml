@@ -11,7 +11,7 @@ importers:
   apps/app:
     specifiers:
       '@auth0/auth0-react': 2.0.0
-      '@auth0/auth0-spa-js': 2.0.3
+      '@auth0/auth0-spa-js': 2.0.4
       '@axe-core/playwright': 4.6.0
       '@babel/core': 7.21.0
       '@date-io/date-fns': 2.16.0
@@ -93,7 +93,7 @@ importers:
       webpack: 5.75.0
     dependencies:
       '@auth0/auth0-react': 2.0.0_biqbaboplfbrettd7655fr4n2y
-      '@auth0/auth0-spa-js': 2.0.3
+      '@auth0/auth0-spa-js': 2.0.4
       '@date-io/date-fns': 2.16.0_date-fns@2.29.3
       '@dnd-kit/core': 6.0.8_biqbaboplfbrettd7655fr4n2y
       '@dnd-kit/modifiers': 6.0.1_52scne4zmdeyjh2otzkgz2xfvu
@@ -712,13 +712,13 @@ packages:
       react: ^16.11.0 || ^17 || ^18
       react-dom: ^16.11.0 || ^17 || ^18
     dependencies:
-      '@auth0/auth0-spa-js': 2.0.3
+      '@auth0/auth0-spa-js': 2.0.4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@auth0/auth0-spa-js/2.0.3:
-    resolution: {integrity: sha512-eC3cBJCGOc+k4ZMxvKTo0KhhJJ4/9siA7C2RhDcWqSbrRcjB04RimM4Jp5ExgXtrwFhx8elk7DLxysrhTQYvjQ==}
+  /@auth0/auth0-spa-js/2.0.4:
+    resolution: {integrity: sha512-NgD6Fkm5Xnbned1VjhEW8irm1/Y8AWtdSLexgLXNwwBVgfnYicCVBu8w75m2t+4QljXkTcI7IXVEFhVmxMuxaA==}
     dev: false
 
   /@aw-web-design/x-default-browser/1.4.88:
