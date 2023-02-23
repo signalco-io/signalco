@@ -10,7 +10,7 @@ importers:
 
   apps/app:
     specifiers:
-      '@auth0/auth0-react': 2.0.0
+      '@auth0/auth0-react': 2.0.1
       '@auth0/auth0-spa-js': 2.0.4
       '@axe-core/playwright': 4.6.0
       '@babel/core': 7.21.0
@@ -92,7 +92,7 @@ importers:
       uuid: 9.0.0
       webpack: 5.75.0
     dependencies:
-      '@auth0/auth0-react': 2.0.0_biqbaboplfbrettd7655fr4n2y
+      '@auth0/auth0-react': 2.0.1_biqbaboplfbrettd7655fr4n2y
       '@auth0/auth0-spa-js': 2.0.4
       '@date-io/date-fns': 2.16.0_date-fns@2.29.3
       '@dnd-kit/core': 6.0.8_biqbaboplfbrettd7655fr4n2y
@@ -706,8 +706,8 @@ packages:
       jsonpointer: 5.0.1
       leven: 3.1.0
 
-  /@auth0/auth0-react/2.0.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-3pf41wU6ksm/6uPYAwjX5bZ7ma/K4LethibagTrKkMPuS8UatBvxLDtl3Aq52ZlJi1I+I42ckEfzWqloNxssIg==}
+  /@auth0/auth0-react/2.0.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-7Rla3del7inUloaWMsECs0JvBpDEj9lgfy+BQE/Z75zs9tveNvxab+xFdfrBC0GPN0eoiq1PeHcc++YjLnti+g==}
     peerDependencies:
       react: ^16.11.0 || ^17 || ^18
       react-dom: ^16.11.0 || ^17 || ^18
