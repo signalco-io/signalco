@@ -101,7 +101,7 @@
         "webpack": "5.75.0"
     },
     "optionalDependencies": {
-        "terser": "5.16.4"
+        "terser": "5.16.5"
     },
     "nextBundleAnalysis": {
         "budget": 358400,
