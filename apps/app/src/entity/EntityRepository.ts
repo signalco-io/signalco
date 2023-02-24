@@ -24,7 +24,7 @@ export async function entityAsync(id: string) {
 export async function entityRenameAsync(id: string, newAlias: string) {
     const entity = await entityAsync(id);
     if (entity == null)
-        throw new Error(`Unknown entity \"${id}\"`);
+        throw new Error(`Unknown entity "${id}"`);
 
     await entityUpsertAsync(id, entity.type, newAlias);
 }

@@ -7,6 +7,7 @@ on:
     branches:
       - main
   workflow_dispatch:
+
 concurrency: merge_main
 
 jobs:
@@ -15,11 +16,16 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v2
-      - name: Merge `main` branch
-        uses: everlytic/branch-merge@1.1.5
-        id: branch-merge
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        id: cpr
         with:
-          github_token: ${{  secrets.GITHUB_TOKEN }}
-          source_ref: 'main'
-          target_branch: 'next'
-          commit_message_template: '[Automated] Merged {source_ref} into target: {target_branch}'
+          title: '[Automated] Merge `main` into target `next`'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: 'next'
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
