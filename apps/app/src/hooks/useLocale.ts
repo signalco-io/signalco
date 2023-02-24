@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { useIsServer } from '@signalco/hooks';
-import { ObjectDictAny } from '../sharedTypes';
 import UserSettingsProvider from '../services/UserSettingsProvider';
 import hr from '../../locales/hr.json';
 import en from '../../locales/en.json';
+import { ObjectDictAny } from '@signalco/js';
 
 export type LocalizeFunc = (key: string, data?: object | undefined) => string;
 

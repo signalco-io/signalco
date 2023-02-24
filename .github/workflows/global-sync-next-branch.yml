@@ -17,15 +17,15 @@ jobs:
       - name: Checkout 🛎
         uses: actions/checkout@v2
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: repo-sync/pull-request@v2
         id: cpr
         with:
-          title: '[Automated] Merge `main` into target `next`'
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: 'next'
+          destination_branch: 'next'
+          pr_title: '[Automated] Merge `main` into target `next`'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Enable Pull Request Automerge
-        if: steps.cpr.outputs.pull-request-operation == 'created'
+        if: steps.cpr.outputs.pr_created == 'true'
         uses: peter-evans/enable-pull-request-automerge@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          pull-request-number: ${{ steps.cpr.outputs.pr_number }}

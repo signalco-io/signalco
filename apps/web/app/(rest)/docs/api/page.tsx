@@ -5,9 +5,8 @@ import { OpenAPIV3 } from 'openapi-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Security, Send } from '@signalco/ui-icons';
 import { Stack, Loadable, Chip, NavigatingButton, Typography, TextField, Divider, Badge, Alert, Button, Card, List, Tooltip, Box, Row, CardOverflow, ListTreeItem, SelectItems, CopyToClipboardInput } from '@signalco/ui';
-import { camelToSentenceCase, HttpOperation } from '@signalco/js';
+import { camelToSentenceCase, HttpOperation, ObjectDictAny } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
-import { ObjectDictAny } from '../../../../src/sharedTypes';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
 
 type ChipColors = 'neutral' | 'primary' | 'danger' | 'info' | 'success' | 'warning';

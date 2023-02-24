@@ -1,6 +1,6 @@
 // TODO: Move to shared UI library
 
-import { ChildrenProps } from '../../src/sharedTypes';
+import { ChildrenProps } from '@signalco/ui';
 import { isDeveloper } from '../../src/services/EnvProvider';
 
 export default function DeveloperOnly(props: ChildrenProps) {
