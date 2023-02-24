@@ -4,7 +4,7 @@ import { bindTrigger } from 'material-ui-popup-state';
 import { Add, Code, Delete, Edit, MoreVertical, UI } from '@signalco/ui-icons';
 import { ParsedJson } from '@signalco/ui/dist/sharedTypes';
 import { Stack, Loadable, Row, Button, Card, IconButton, List, ListDivider, ListItem, Menu, MenuItem, TextField, Tooltip, Typography, Box, CopyToClipboardInput, ListTreeItem, Picker, Timeago, ListItemDecorator } from '@signalco/ui';
-import { camelToSentenceCase } from '@signalco/js';
+import { camelToSentenceCase, isJson } from '@signalco/js';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
 import CodeEditor from '../../code/CodeEditor';
@@ -108,18 +108,6 @@ function DisplayJson(props: { json: string | undefined }) {
             </div>
         </div>
     );
-}
-
-function isJson(value: string | undefined) {
-    try {
-        if (typeof value === 'string' &&
-            /(\[|\{)(.|\s|\S)*(\]|\})/gm.test(value) &&
-            typeof JSON.parse(value) !== 'undefined')
-            return true;
-        return false;
-    } catch {
-        return false;
-    }
 }
 
 export default function ContactsTable(props: { entity: IEntityDetails | undefined; }) {
