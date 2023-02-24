@@ -5,14 +5,14 @@ import { OpenAPIV3 } from 'openapi-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Security, Send } from '@signalco/ui-icons';
 import { Stack, Loadable, Chip, NavigatingButton, Typography, TextField, Divider, Badge, Alert, Button, Card, List, Tooltip, Box, Row, CardOverflow, ListTreeItem, SelectItems, CopyToClipboardInput } from '@signalco/ui';
-import { camelToSentenceCase } from '@signalco/js';
-import { useLoadAndError } from '@signalco/hooks';
+import { camelToSentenceCase, HttpOperation } from '@signalco/js';
+import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { ObjectDictAny } from '../../../../src/sharedTypes';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
 
 type ChipColors = 'neutral' | 'primary' | 'danger' | 'info' | 'success' | 'warning';
 
-function OperationChip(props: { operation?: string | undefined, small?: boolean }) {
+function HttpOperationChip(props: { operation?: HttpOperation | undefined, small?: boolean }) {
     const color = ({
         'get': 'success',
         'post': 'info',
@@ -35,7 +35,7 @@ function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject
     case 'boolean': return true;
     case 'number':
     case 'integer': return 0;
-    case 'object':
+    case 'object': {
         if (typeof schemaObj.properties === 'undefined') {
             return ({});
         }
@@ -46,9 +46,11 @@ function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject
             }
         });
         return curr;
-    case 'array':
+    }
+    case 'array': {
         const arraySchema = schemaObj as OpenAPIV3.ArraySchemaObject;
         return [schemaToJson(api, arraySchema.items)];
+    }
     default: return undefined;
     }
 }
@@ -104,7 +106,7 @@ function ApiOperation(props: ApiOperationProps) {
         <Stack spacing={4}>
             <Stack spacing={1}>
                 <Row spacing={1}>
-                    <OperationChip operation={operation} />
+                    <HttpOperationChip operation={operation} />
                     <Tooltip title={deprecated ? 'Deprecated' : undefined}>
                         <Typography
                             level="h6"
@@ -210,8 +212,8 @@ function Nav() {
     const searchParams = useSearchParams();
     const tagName = searchParams.get('tag');
     const pathName = searchParams.get('path');
-    const operationName = searchParams.get('op');
-
+    const operationName = searchParams.get('op') as HttpOperation | undefined;
+ 
     if (!api) throw 'API undefined';
     const { info } = api;
 
@@ -257,7 +259,7 @@ function Nav() {
                                     <Box sx={{ py: 0.5 }}>
                                         <Row justifyContent="space-between" spacing={1}>
                                             <Typography noWrap level="body2">{op.pathName}</Typography>
-                                            <OperationChip operation={op.operationName} small />
+                                            <HttpOperationChip operation={op.operationName} small />
                                         </Row>
                                     </Box>
                                 )} />
@@ -267,10 +269,6 @@ function Nav() {
             </List>
         </Stack>
     );
-}
-
-function enumKeys<O extends object, K extends keyof O = keyof O>(obj: O): K[] {
-    return Object.keys(obj).filter(k => Number.isNaN(+k)) as K[];
 }
 
 function resolveRef<T>(api: OpenAPIV3.Document, obj: T | OpenAPIV3.ReferenceObject | undefined) {
@@ -286,28 +284,26 @@ function resolveRef<T>(api: OpenAPIV3.Document, obj: T | OpenAPIV3.ReferenceObje
     return curr as unknown as T;
 }
 
-type GetOperationResult = { pathName: string, operationName: string, httpOperation: OpenAPIV3.HttpMethods, operation: OpenAPIV3.OperationObject }
+type GetOperationResult = { pathName: string, operationName: HttpOperation, httpOperation: OpenAPIV3.HttpMethods, operation: OpenAPIV3.OperationObject }
 
 function getOperations(api: OpenAPIV3.Document): Array<GetOperationResult> {
     return Object.keys(api.paths).flatMap((pathName) => {
         const path = api.paths[pathName];
         if (!path) return Array<GetOperationResult>();
-        return enumKeys(OpenAPIV3.HttpMethods).map(opName => {
-            const httpOperation = OpenAPIV3.HttpMethods[opName] as OpenAPIV3.HttpMethods;
-            const pathOperation = path[httpOperation] as OpenAPIV3.OperationObject;
+        return Object.values(OpenAPIV3.HttpMethods).map(opName => {
+            const pathOperation = path[opName] as OpenAPIV3.OperationObject;
             if (!pathOperation) return undefined;
 
-            return { pathName: pathName, operationName: opName, httpOperation: httpOperation, operation: pathOperation };
+            return { pathName: pathName, operationName: opName, httpOperation: opName, operation: pathOperation };
         });
     }).filter(i => typeof i !== 'undefined') as GetOperationResult[];
 }
 
 function Route() {
     const api = useContext(ApiContext);
-    const searchParams = useSearchParams();
-    const tagName = searchParams.get('tag') ?? undefined;
-    const pathName = searchParams.get('path') ?? undefined;
-    const operationName = searchParams.get('op') ?? undefined;
+    const [tagName] = useSearchParam('tag');
+    const [pathName] = useSearchParam('path');
+    const [operationName] = useSearchParam('op');
 
     if (api == null)
         return <Typography>Select action from navigation bar</Typography>
