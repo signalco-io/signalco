@@ -1,13 +1,12 @@
 import React from 'react';
-import { Stack, Button, SelectItems } from '@signalco/ui';
-import { asArray } from '@signalco/js';
+import { Stack, Button, SelectItems, ChildrenProps } from '@signalco/ui';
+import { asArray, ObjectDictAny } from '@signalco/js';
 import { extractValues } from '@enterwell/react-form-validation';
 import { FormBuilder, type FormItems, useFormField, FormBuilderProvider, FormBuilderComponents } from '@enterwell/react-form-builder';
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
 import GeneralFormProvider from '../../forms/GeneralFormProvider';
 import WidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
-import { ChildrenProps, ObjectDictAny } from '../../../src/sharedTypes';
 
 type WidgetConfigurationDialogProps = {
     form: FormItems,
@@ -112,7 +111,7 @@ const widgetConfigurationFormComponents: FormBuilderComponents = {
         placeholder="Select visual"
         fullWidth
         value={props.value}
-        onChange={(item) => item && item.length && props.onChange(item[0], { receiveEvent: false })} />
+        onChange={(item: any) => item && item.length && props.onChange(item[0], { receiveEvent: false })} />
 };
 
 function WidgetConfigurationFormProvider(props: ChildrenProps) {

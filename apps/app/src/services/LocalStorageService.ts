@@ -1,4 +1,4 @@
-import { ValueOrFuncGeneric } from '../sharedTypes';
+import { ValueOrFuncGeneric } from "@signalco/js";
 
 class LocalStorageService {
     getItem<T>(key: string, skipDeseriaalization?: boolean): T | undefined {

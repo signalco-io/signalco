@@ -3,10 +3,9 @@
 import React from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Minimize } from '@signalco/ui-icons';
-import { IconButton, MuiStack, Tooltip } from '@signalco/ui';
+import { ChildrenProps, IconButton, MuiStack, Tooltip } from '@signalco/ui';
 import { useSearchParam } from '@signalco/hooks';
 import NavProfile from '../NavProfile';
-import { ChildrenProps } from '../../src/sharedTypes';
 import RealtimeService from '../../src/realtime/realtimeService';
 import { AuthWrapper } from './AuthWrapper';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

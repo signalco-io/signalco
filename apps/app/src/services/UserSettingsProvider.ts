@@ -1,4 +1,4 @@
-import { ValueOrFuncGeneric } from '../sharedTypes';
+import { ValueOrFuncGeneric } from '@signalco/js';
 import LocalStorageService from './LocalStorageService';
 
 class UserSettingsProvider {

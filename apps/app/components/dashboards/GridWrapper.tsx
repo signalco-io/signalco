@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChildrenProps } from '../../src/sharedTypes';
+import { ChildrenProps } from '@signalco/ui';
 import DragableGridWrapper from './DragableGridWrapper';
 
 export default function GridWrapper(props: { order: string[]; isEditing: boolean; orderChanged: (newOrder: string[]) => void; } & ChildrenProps) {
