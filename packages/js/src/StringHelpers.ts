@@ -32,3 +32,14 @@ export function humanizeNumber(value: number): string {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
+export function isJson(value: string | undefined) {
+    try {
+        if (typeof value === 'string' &&
+            /(\[|\{).*(\]|\})/gm.test(value) &&
+            typeof JSON.parse(value) !== 'undefined')
+            return true;
+        return false;
+    } catch {
+        return false;
+    }
+}

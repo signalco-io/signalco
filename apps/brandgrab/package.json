@@ -18,11 +18,11 @@
     },
     "dependencies": {
         "@hcaptcha/react-hcaptcha": "1.4.4",
-        "@next/env": "13.1.6",
+        "@next/env": "13.2.1",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "classix": "2.1.22",
-        "next": "13.1.6",
+        "next": "13.2.1",
         "next-secure-headers": "2.2.0",
         "postcss": "8.4.21",
         "react": "18.2.0",
@@ -33,13 +33,13 @@
     },
     "devDependencies": {
         "@axe-core/playwright": "4.6.0",
-        "@babel/core": "7.20.12",
-        "@next/bundle-analyzer": "13.1.6",
-        "@playwright/test": "1.30.0",
+        "@babel/core": "7.21.0",
+        "@next/bundle-analyzer": "13.2.1",
+        "@playwright/test": "1.31.1",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/color": "3.0.3",
-        "@types/node": "18.14.0",
+        "@types/node": "18.14.1",
         "@types/react": "18.0.28",
         "@types/react-dom": "18.0.11",
         "@types/react-motion": "0.0.33",
@@ -47,7 +47,7 @@
         "cross-env": "7.0.3",
         "eslint": "8.34.0",
         "next-sitemap": "3.1.52",
-        "playwright": "1.30.0",
+        "playwright": "1.31.1",
         "prop-types": "15.8.1",
         "rimraf": "4.1.2",
         "sass": "1.58.3",
@@ -55,7 +55,7 @@
         "webpack": "5.75.0"
     },
     "optionalDependencies": {
-        "terser": "5.16.4"
+        "terser": "5.16.5"
     },
     "nextBundleAnalysis": {
         "budget": 358400,
