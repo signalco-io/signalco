@@ -4,7 +4,7 @@ import { Octokit } from 'octokit';
 import { Up } from '@signalco/ui-icons';
 import Stack from '@signalco/ui/dist/Stack';
 import Row from '@signalco/ui/dist/Row';
-import { Button, Card, ChildrenProps, Chip, ItemsShowMore, Loadable, LoadableProps, NoDataPlaceholder, Typography } from '@signalco/ui';
+import { Button, Card, ChildrenProps, Chip, ItemsShowMore, Typography } from '@signalco/ui';
 import { camelToSentenceCase, orderBy } from '@signalco/js';
 import { useLoadAndError } from '@signalco/hooks';
 
