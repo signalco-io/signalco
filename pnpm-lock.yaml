@@ -68,7 +68,7 @@ importers:
       next: 13.2.1
       next-pwa: 5.6.0
       next-secure-headers: 2.2.0
-      next-sitemap: 3.1.52
+      next-sitemap: 3.1.54
       openapi-types: 12.1.0
       pigeon-maps: 0.21.3
       playwright: 1.31.1
@@ -165,7 +165,7 @@ importers:
       cross-env: 7.0.3
       eslint: 8.34.0
       fs-extra: 11.1.0
-      next-sitemap: 3.1.52_w72blvo532ghymzwxfaavzsw7a
+      next-sitemap: 3.1.54_w72blvo532ghymzwxfaavzsw7a
       openapi-types: 12.1.0
       playwright: 1.31.1
       prop-types: 15.8.1
@@ -199,7 +199,7 @@ importers:
       eslint: 8.34.0
       next: 13.2.1
       next-secure-headers: 2.2.0
-      next-sitemap: 3.1.52
+      next-sitemap: 3.1.54
       playwright: 1.31.1
       postcss: 8.4.21
       prop-types: 15.8.1
@@ -244,7 +244,7 @@ importers:
       babel-loader: 9.1.2_qoaxtqicpzj5p3ubthw53xafqm
       cross-env: 7.0.3
       eslint: 8.34.0
-      next-sitemap: 3.1.52_w72blvo532ghymzwxfaavzsw7a
+      next-sitemap: 3.1.54_w72blvo532ghymzwxfaavzsw7a
       playwright: 1.31.1
       prop-types: 15.8.1
       rimraf: 4.1.2
@@ -294,7 +294,7 @@ importers:
       eslint: 8.34.0
       next: 13.2.1
       next-secure-headers: 2.2.0
-      next-sitemap: 3.1.52
+      next-sitemap: 3.1.54
       playwright: 1.31.1
       postcss: 8.4.21
       prop-types: 15.8.1
@@ -339,7 +339,7 @@ importers:
       babel-loader: 9.1.2_qoaxtqicpzj5p3ubthw53xafqm
       cross-env: 7.0.3
       eslint: 8.34.0
-      next-sitemap: 3.1.52_w72blvo532ghymzwxfaavzsw7a
+      next-sitemap: 3.1.54_w72blvo532ghymzwxfaavzsw7a
       playwright: 1.31.1
       prop-types: 15.8.1
       rimraf: 4.1.2
@@ -436,7 +436,7 @@ importers:
       next: 13.2.1
       next-pwa: 5.6.0
       next-secure-headers: 2.2.0
-      next-sitemap: 3.1.52
+      next-sitemap: 3.1.54
       octokit: 2.0.14
       openapi-types: 12.1.0
       playwright: 1.31.1
@@ -491,7 +491,7 @@ importers:
       colorette: 2.0.19
       cross-env: 7.0.3
       eslint: 8.34.0
-      next-sitemap: 3.1.52_w72blvo532ghymzwxfaavzsw7a
+      next-sitemap: 3.1.54_w72blvo532ghymzwxfaavzsw7a
       openapi-types: 12.1.0
       playwright: 1.31.1
       prop-types: 15.8.1
@@ -10645,8 +10645,8 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: false
 
-  /next-sitemap/3.1.52_w72blvo532ghymzwxfaavzsw7a:
-    resolution: {integrity: sha512-tY469i4QRV1PwM9BoL+HdKYBCJ83IQl3PmUNapG/Hxp0MIYIw1hINU8E+Edf5Kr8vHXfVzPqDoul/Abu2P0vkw==}
+  /next-sitemap/3.1.54_w72blvo532ghymzwxfaavzsw7a:
+    resolution: {integrity: sha512-/uzk8hjHU5o6ZelzkLt/LJw9MyFhRiz9VKIst9EhZfF1C/Bw4OCGzLmA+8ImUnTzSxFyuiWr6P1sjFJxKBhjAA==}
     engines: {node: '>=14.18'}
     hasBin: true
     peerDependencies:
