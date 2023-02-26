@@ -4,7 +4,7 @@ import { Octokit } from 'octokit';
 import { Up } from '@signalco/ui-icons';
 import Stack from '@signalco/ui/dist/Stack';
 import Row from '@signalco/ui/dist/Row';
-import { Button, Card, ChildrenProps, Chip, Loadable, LoadableProps, NoDataPlaceholder, Typography } from '@signalco/ui';
+import { Button, Card, ChildrenProps, Chip, ItemsShowMore, Loadable, LoadableProps, NoDataPlaceholder, Typography } from '@signalco/ui';
 import { camelToSentenceCase, orderBy } from '@signalco/js';
 import { useLoadAndError } from '@signalco/hooks';
 
@@ -94,18 +94,6 @@ async function getRoadmapItemsAsync() {
     return items;
 }
 
-function ItemsWrapper({ children, noItemsPlaceholder, isLoading, error, loadingLabel }: ChildrenProps & LoadableProps & { noItemsPlaceholder: string }) {
-    return (
-        <Loadable isLoading={isLoading} error={error} loadingLabel={loadingLabel}>
-            {!children || !Array.isArray(children) || children.length === 0 ? (
-                <NoDataPlaceholder content={noItemsPlaceholder} />
-            ) : (
-                <>{children}</>
-            )}
-        </Loadable>
-    )
-}
-
 export default function RoadmapPage() {
     const { item: items, isLoading, error } = useLoadAndError(getRoadmapItemsAsync);
 
@@ -114,13 +102,17 @@ export default function RoadmapPage() {
             {statusOrderedList.map(status => (
                 <Stack spacing={1} key={status}>
                     <Typography level="h5">{camelToSentenceCase(status)}</Typography>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                        <ItemsWrapper isLoading={isLoading} error={error} loadingLabel={'Loading roadmap'} noItemsPlaceholder={'Empty at the moment'}>
-                            {orderBy(items?.filter(item => item.status === status) ?? [], (a, b) => (b.votes ?? 0) - (a.votes ?? 0)).map(item => (
-                                <RoadmapItem key={item.title} item={item} />
-                            ))}
-                        </ItemsWrapper>
-                    </div>
+                    <ItemsShowMore
+                        truncate={5}
+                        itemsWrapper={({ children }: ChildrenProps) => <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>{children}</div>}
+                        isLoading={isLoading}
+                        error={error}
+                        loadingLabel={'Loading roadmap'}
+                        noItemsPlaceholder={'Empty at the moment'}>
+                        {orderBy(items?.filter(item => item.status === status) ?? [], (a, b) => (b.votes ?? 0) - (a.votes ?? 0)).map(item => (
+                            <RoadmapItem key={item.title} item={item} />
+                        ))}
+                    </ItemsShowMore>
                 </Stack>
             ))}
         </Stack>
