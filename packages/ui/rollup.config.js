@@ -39,7 +39,7 @@ export default [
             esbuild({
                 tsconfig: 'tsconfig.build.json',
                 target: 'esnext',
-                jsx: 'automatic'
+                jsx: 'automatic',
             }),
             postcss({
                 modules: true,

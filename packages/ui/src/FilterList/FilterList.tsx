@@ -9,6 +9,10 @@ import Stack from '../Stack';
 import Grow from '../Grow';
 import Collapse from '../Collapse';
 import Fade from '../Fade';
+import { ChildrenProps } from '../sharedTypes';
+import Loadable, { LoadableProps } from '../Loadable';
+import React from 'react';
+import NoDataPlaceholder from '../NoDataPlaceholder';
 
 export interface FilterListItem {
     id: string;
@@ -43,6 +47,53 @@ function FilterItem({ item, checked, onToggle }: { item: FilterListItem, checked
     );
 }
 
+type ItemsWrapperProps = ChildrenProps & LoadableProps & { noItemsPlaceholder: string, itemsWrapper?: React.FunctionComponent | undefined };
+
+export function ItemsWrapper({ children, noItemsPlaceholder, itemsWrapper, ...rest }: ItemsWrapperProps) {
+    const ItemsWrapper = itemsWrapper ?? (({ children }: ChildrenProps) => <>{children}</>);
+    return (
+        <Loadable {...rest}>
+            {!children || !Array.isArray(children) || children.length === 0 ? (
+                <NoDataPlaceholder content={noItemsPlaceholder} />
+            ) : (
+                <ItemsWrapper>{children}</ItemsWrapper>
+            )}
+        </Loadable>
+    )
+}
+
+export type ItemsShowMoreProps = ItemsWrapperProps & { truncate?: number | undefined };
+
+export function ItemsShowMore({ children, truncate, itemsWrapper, ...rest }: ItemsShowMoreProps) {
+    const [isShowAll, setIsShowAll] = useState<boolean>(false);
+
+    const Wrapper = itemsWrapper ?? (({ children }: ChildrenProps) => <>{children}</>);
+
+    const items = React.Children.toArray(children);
+    const shouldTruncate = typeof truncate === 'number' && !isShowAll && items.length > truncate;
+
+    return (
+        <Stack>
+            <ItemsWrapper itemsWrapper={itemsWrapper} {...rest}>
+                {items.slice(0, truncate)}
+            </ItemsWrapper>
+            <Collapse appear={!shouldTruncate}>
+                <Wrapper>
+                    {items.slice(truncate)}
+                </Wrapper>
+            </Collapse>
+            <Fade appear={shouldTruncate}>
+                <Button
+                    fullWidth
+                    size="sm"
+                    variant="plain"
+                    startDecorator={<ExpandDown />}
+                    onClick={() => setIsShowAll(true)}>Show all</Button>
+            </Fade>
+        </Stack>
+    );
+}
+
 export default function FilterList(props: FilterListProps) {
     const {
         header,
@@ -55,7 +106,6 @@ export default function FilterList(props: FilterListProps) {
     } = props;
 
     const [checked, setChecked] = useState<string[]>(Array.isArray(selected) ? selected : (selected ? [selected] : []));
-    const [isShowMore, setIsShowMore] = useState<boolean>(false);
 
     useEffect(() => {
         setChecked(Array.isArray(selected) ? selected : (selected ? [selected] : []));
@@ -79,8 +129,6 @@ export default function FilterList(props: FilterListProps) {
         if (onSelectedMultiple)
             onSelectedMultiple(newChecked);
     };
-    const handleToggleShowMore = () => setIsShowMore(true);
-    const shouldTruncate = typeof truncate !== 'undefined' && items.length > truncate;
 
     const handleClearSelection = () => setChecked([]);
 
@@ -102,21 +150,15 @@ export default function FilterList(props: FilterListProps) {
             </Box>
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                 <Typography level="h5" gutterBottom>{header}</Typography>
-                <Stack>
-                    {items.slice(0, truncate).map(item => (
+                <ItemsShowMore
+                    truncate={truncate}
+                    loadingLabel={'Loading'}
+                    noItemsPlaceholder={'Not available'}
+                    itemsWrapper={({ children }: ChildrenProps) => <Stack>{children}</Stack>}>
+                    {items.map(item => (
                         <FilterItem key={item.id} item={item} checked={checked} onToggle={handleToggle} />
                     ))}
-                </Stack>
-                <Collapse appear={isShowMore}>
-                    <Stack>
-                        {items.slice(truncate).map(item => (
-                            <FilterItem key={item.id} item={item} checked={checked} onToggle={handleToggle} />
-                        ))}
-                    </Stack>
-                </Collapse>
-                <Fade appear={!isShowMore && shouldTruncate}>
-                    <Button fullWidth variant="plain" startDecorator={<ExpandDown />} onClick={handleToggleShowMore}>Show all {!!truncate && `(${items.length - truncate} more)`}</Button>
-                </Fade>
+                </ItemsShowMore>
                 {(checked.length > 1 && (
                     <Button fullWidth startDecorator={<Close />} variant="plain" size="sm" onClick={handleClearSelection}>Clear selection</Button>
                 ))}

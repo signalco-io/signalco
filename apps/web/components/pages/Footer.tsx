@@ -23,6 +23,7 @@ const footerLinks: FooterSectionType[] = [
             { name: 'App', href: KnownPages.App },
             { name: 'Pricing', href: KnownPages.Pricing },
             { name: 'Station', href: KnownPages.Station },
+            { name: 'Roadmap', href: KnownPages.Roadmap },
         ]
     },
     {
