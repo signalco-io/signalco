@@ -9,6 +9,7 @@ export const KnownPages = {
     Pricing: '/pricing',
     Station: '/station',
     Features: '/features',
+    Roadmap: '/roadmap',
     DocsApi: '/docs/api',
     UiDocs: `https://ui.signalco.${domainTld}`,
     Status: 'https://status.signalco.io',
