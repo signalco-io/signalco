@@ -22,6 +22,7 @@ jobs:
         with:
           destination_branch: 'next'
           pr_title: '[Automated] Merge `main` into target `next`'
+          pr_allow_empty: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Enable Pull Request Automerge
         if: steps.cpr.outputs.pr_created == 'true'
