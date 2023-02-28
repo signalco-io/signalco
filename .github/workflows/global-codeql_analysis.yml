@@ -11,14 +11,11 @@ jobs:
     analyze:
         name: "[Global] Analyze CodeQL"
         runs-on: ubuntu-latest
-        concurrency:
-          group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
-          cancel-in-progress: true
 
         strategy:
             fail-fast: false
             matrix:
-                language: ["javascript"]
+                language: ["javascript", "csharp"]
 
         steps:
             - name: Checkout repository

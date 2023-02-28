@@ -2,6 +2,11 @@ name: "[Web] stories-check"
 on:
     pull_request:
         branches: [next, main]
+
+defaults:
+  run:
+    working-directory: ./web
+
 jobs:
     check:
         name: Check
@@ -16,13 +21,14 @@ jobs:
               with:
                   node-version: "18.x"
                   cache: "pnpm"
+                  cache-dependency-path: ./web
             - name: Install dependencies
               run: pnpm install --frozen-lockfile --filter=web... --filter=.
             - name: Run stories-check
               run: pnpm stories-check
               id: runStoriesCheck
               continue-on-error: true
-              working-directory: apps/web/
+              working-directory: web/apps/web/
             - name: Commit changes
               id: ccc
               if: steps.runStoriesCheck.outcome == 'failure'

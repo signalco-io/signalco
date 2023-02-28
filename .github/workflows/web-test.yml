@@ -1,6 +1,11 @@
-name: "[Global] Run Tests"
+name: "[Web] Run Tests"
 on:
     pull_request:
+
+defaults:
+  run:
+    working-directory: ./web
+
 jobs:
     test:
         name: "[Global] Run Tests"
@@ -25,6 +30,7 @@ jobs:
               with:
                 node-version: "18.x"
                 cache: "pnpm"
+                cache-dependency-path: ./web
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
             - name: Run tests
