@@ -33,6 +33,7 @@ jobs:
         with:
             node-version: "18.x"
             cache: "pnpm"
+            working-directory: ./web
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --filter app... --filter .
 
