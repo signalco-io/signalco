@@ -47,7 +47,7 @@ function VoteButton({ votes, readonly, size = 'md' }: { votes?: number | undefin
 function RoadmapItem({ item }: { item: RoadmapItem }) {
     return (
         <div key={item.title} style={{ height: '100%', display: 'flex', gap: 8, alignItems: 'center' }}>
-            <VoteButton votes={item.votes} readonly={item.status === 'completed'} size="sm" />
+            <VoteButton votes={item.votes} readonly={true} size="sm" />
             {item.href ? (
                 <NavigatingButton hideArrow href={item.href}>{item.title}</NavigatingButton>
             ) : (
