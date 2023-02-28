@@ -17,12 +17,16 @@ export default function Container({ maxWidth, children }: ContainerProps) {
             break;
         case 'sm':
             width = 600;
+            break;
         case 'xs':
             width = 444;
+            break;
         case 'xl':
             width = 1536;
+            break;
         case false:
             width = undefined;
+            break;
         default:
             break;
     }
