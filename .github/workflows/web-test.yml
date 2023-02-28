@@ -1,6 +1,11 @@
-name: "[Global] Run Tests"
+name: "[Web] Run Tests"
 on:
     pull_request:
+
+defaults:
+  run:
+    working-directory: ./web
+
 jobs:
     test:
         name: "[Global] Run Tests"

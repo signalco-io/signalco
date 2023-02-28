@@ -2,6 +2,11 @@ name: "[Web] stories-check"
 on:
     pull_request:
         branches: [next, main]
+
+defaults:
+  run:
+    working-directory: ./web
+
 jobs:
     check:
         name: Check

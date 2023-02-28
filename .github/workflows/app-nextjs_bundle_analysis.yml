@@ -10,7 +10,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./
+    working-directory: ./web
 
 jobs:
   analyze_app:
