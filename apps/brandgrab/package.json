@@ -46,7 +46,7 @@
         "babel-loader": "9.1.2",
         "cross-env": "7.0.3",
         "eslint": "8.35.0",
-        "next-sitemap": "3.1.54",
+        "next-sitemap": "3.1.55",
         "playwright": "1.31.1",
         "prop-types": "15.8.1",
         "rimraf": "4.1.2",
