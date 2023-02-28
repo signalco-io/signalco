@@ -28,7 +28,7 @@ jobs:
               run: pnpm stories-check
               id: runStoriesCheck
               continue-on-error: true
-              working-directory: apps/web/
+              working-directory: web/apps/web/
             - name: Commit changes
               id: ccc
               if: steps.runStoriesCheck.outcome == 'failure'
