@@ -31,7 +31,7 @@
         "classix": "2.1.22",
         "concurrently": "7.6.0",
         "esbuild": "0.17.10",
-        "glob": "8.1.0",
+        "glob": "9.0.1",
         "postcss": "8.4.21",
         "postcss-preset-env": "8.0.1",
         "resolve-url-loader": "5.0.0",
