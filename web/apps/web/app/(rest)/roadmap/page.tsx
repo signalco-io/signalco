@@ -3,11 +3,10 @@
 import { Octokit } from 'octokit';
 import { Up } from '@signalco/ui-icons';
 import Stack from '@signalco/ui/dist/Stack';
-import Row from '@signalco/ui/dist/Row';
-import { Button, ChildrenProps, Chip, Container, ItemsShowMore, Loadable, Typography } from '@signalco/ui';
+import { Button, ChildrenProps, Chip, Container, ItemsShowMore, Loadable, NavigatingButton, Sheet, Typography } from '@signalco/ui';
 import { camelToSentenceCase, orderBy } from '@signalco/js';
-import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import { useLoadAndError } from '@signalco/hooks';
+import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 
 type RoadmapItemStatus = 'triage' | 'planned' | 'inQueue' | 'inProgress' | 'completed';
 
@@ -16,27 +15,44 @@ type RoadmapItem = {
     status: RoadmapItemStatus;
     scope: string;
     votes?: number | undefined;
+    href?: string | undefined;
 }
 
 const statusOrderedList: RoadmapItemStatus[] = ['inProgress', 'inQueue', 'planned', 'triage', 'completed'];
 
+function VoteButton({ votes, readonly, size = 'md' }: { votes?: number | undefined, readonly?: boolean, size?: 'sm' | 'md' }) {
+    if (readonly) {
+        return (
+            <Sheet variant="soft" style={{ width: 42, aspectRatio: 1, textAlign: 'center', borderRadius: 'var(--joy-radius-sm)' }}>
+                <span style={{ lineHeight: '42px' }}>{votes ?? 'Vote'}</span>
+            </Sheet>
+        )
+    }
+
+    return (
+        <Button
+            size="sm"
+            style={{
+                paddingLeft: size === 'sm' ? 8 : undefined,
+                paddingRight: size === 'sm' ? 8 : undefined
+            }}>
+            <Stack alignItems="center" spacing={size === 'sm' ? 0 : 1} style={{ paddingTop: size === 'sm' ? 0 : 4 }}>
+                <Up />
+                <span style={{ paddingBottom: size === 'sm' ? 4 : 16 }}>{votes ?? 'Vote'}</span>
+            </Stack>
+        </Button>
+    );
+}
+
 function RoadmapItem({ item }: { item: RoadmapItem }) {
     return (
-        <div key={item.title}>
-            <Row spacing={2} alignItems="start" style={{ height: '100%' }}>
-                <Button size="sm">
-                    <Stack alignItems="center" spacing={1} style={{ paddingTop: 4 }}>
-                        <Up />
-                        <span style={{ paddingBottom: 16 }}>{item.votes ?? 'Vote'}</span>
-                    </Stack>
-                </Button>
-                <Stack spacing={1} justifyContent="space-between" style={{ flexGrow: 1, overflow: 'hidden', height: '100%' }}>
-                    <Typography level="body2">{item.title}</Typography>
-                    <Row>
-                        <Chip>{camelToSentenceCase(item.scope)}</Chip>
-                    </Row>
-                </Stack>
-            </Row>
+        <div key={item.title} style={{ height: '100%', display: 'flex', gap: 8, alignItems: 'center' }}>
+            <VoteButton votes={item.votes} readonly={item.status === 'completed'} size="sm" />
+            {item.href ? (
+                <NavigatingButton hideArrow href={item.href}>{item.title}</NavigatingButton>
+            ) : (
+                <Typography level="body2" noWrap textOverflow="ellipsis">{item.title}</Typography>
+            )}
         </div>
     );
 }
@@ -87,7 +103,8 @@ async function getRoadmapItemsAsync() {
                     title,
                     scope,
                     status,
-                    votes
+                    votes,
+                    href: issue.html_url
                 });
             }
         }
