@@ -4,8 +4,9 @@ import { Octokit } from 'octokit';
 import { Up } from '@signalco/ui-icons';
 import Stack from '@signalco/ui/dist/Stack';
 import Row from '@signalco/ui/dist/Row';
-import { Button, Card, ChildrenProps, Chip, ItemsShowMore, Typography } from '@signalco/ui';
+import { Button, ChildrenProps, Chip, Container, ItemsShowMore, Loadable, Typography } from '@signalco/ui';
 import { camelToSentenceCase, orderBy } from '@signalco/js';
+import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import { useLoadAndError } from '@signalco/hooks';
 
 type RoadmapItemStatus = 'triage' | 'planned' | 'inQueue' | 'inProgress' | 'completed';
@@ -21,7 +22,7 @@ const statusOrderedList: RoadmapItemStatus[] = ['inProgress', 'inQueue', 'planne
 
 function RoadmapItem({ item }: { item: RoadmapItem }) {
     return (
-        <Card key={item.title} sx={{ width: '280px' }}>
+        <div key={item.title}>
             <Row spacing={2} alignItems="start" style={{ height: '100%' }}>
                 <Button size="sm">
                     <Stack alignItems="center" spacing={1} style={{ paddingTop: 4 }}>
@@ -31,12 +32,12 @@ function RoadmapItem({ item }: { item: RoadmapItem }) {
                 </Button>
                 <Stack spacing={1} justifyContent="space-between" style={{ flexGrow: 1, overflow: 'hidden', height: '100%' }}>
                     <Typography level="body2">{item.title}</Typography>
-                    <Row justifyContent="end">
+                    <Row>
                         <Chip>{camelToSentenceCase(item.scope)}</Chip>
                     </Row>
                 </Stack>
             </Row>
-        </Card>
+        </div>
     );
 }
 
@@ -98,23 +99,30 @@ export default function RoadmapPage() {
     const { item: items, isLoading, error } = useLoadAndError(getRoadmapItemsAsync);
 
     return (
-        <Stack spacing={4}>
-            {statusOrderedList.map(status => (
-                <Stack spacing={1} key={status}>
-                    <Typography level="h5">{camelToSentenceCase(status)}</Typography>
-                    <ItemsShowMore
-                        truncate={5}
-                        itemsWrapper={({ children }: ChildrenProps) => <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>{children}</div>}
-                        isLoading={isLoading}
-                        error={error}
-                        loadingLabel={'Loading roadmap'}
-                        noItemsPlaceholder={'Empty at the moment'}>
-                        {orderBy(items?.filter(item => item.status === status) ?? [], (a, b) => (b.votes ?? 0) - (a.votes ?? 0)).map(item => (
-                            <RoadmapItem key={item.title} item={item} />
+        <Container maxWidth="sm">
+            <Stack spacing={4}>
+                <PageCenterHeader header="Roadmap" subHeader="Help us by voting our roadmap." />
+                <Loadable isLoading={isLoading} error={error} loadingLabel={'Loading roadmap'}>
+                    <Stack spacing={2}>
+                        {statusOrderedList.map(status => (
+                            <Stack spacing={2} key={status}>
+                                <Typography level="h5">{camelToSentenceCase(status)}</Typography>
+                                <ItemsShowMore
+                                    truncate={5}
+                                    itemsWrapper={({ children }: ChildrenProps) => <Stack spacing={1}>{children}</Stack>}
+                                    isLoading={false}
+                                    error={undefined}
+                                    loadingLabel={'Loading roadmap'}
+                                    noItemsPlaceholder={'Empty at the moment'}>
+                                    {orderBy(items?.filter(item => item.status === status) ?? [], (a, b) => (b.votes ?? 0) - (a.votes ?? 0)).map(item => (
+                                        <RoadmapItem key={item.title} item={item} />
+                                    ))}
+                                </ItemsShowMore>
+                            </Stack>
                         ))}
-                    </ItemsShowMore>
-                </Stack>
-            ))}
-        </Stack>
+                    </Stack>
+                </Loadable>
+            </Stack>
+        </Container>
     );
 }

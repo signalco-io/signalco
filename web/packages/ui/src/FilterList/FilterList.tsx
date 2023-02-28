@@ -73,7 +73,7 @@ export function ItemsShowMore({ children, truncate, itemsWrapper, ...rest }: Ite
     const shouldTruncate = typeof truncate === 'number' && !isShowAll && items.length > truncate;
 
     return (
-        <Stack>
+        <Stack spacing={1}>
             <ItemsWrapper itemsWrapper={itemsWrapper} {...rest}>
                 {items.slice(0, truncate)}
             </ItemsWrapper>
@@ -88,7 +88,7 @@ export function ItemsShowMore({ children, truncate, itemsWrapper, ...rest }: Ite
                     size="sm"
                     variant="plain"
                     startDecorator={<ExpandDown />}
-                    onClick={() => setIsShowAll(true)}>Show all</Button>
+                    onClick={() => setIsShowAll(true)}>Show all ({items.length - (truncate ?? 0)} more)</Button>
             </Fade>
         </Stack>
     );
