@@ -32,12 +32,12 @@ export default function NavigatingButton({
                 size={size}
                 endDecorator={<Navigate size={16} />}
                 sx={{
-                    '.JoyButton-endDecorator': {
+                    '.MuiButton-endDecorator': {
                         opacity: hideArrow ? 0 : 1,
-                        transition: 'opacity 0.2s linear'
+                        transition: 'opacity 0.1s linear'
                     },
                     '&:hover': {
-                        '.JoyButton-endDecorator': {
+                        '.MuiButton-endDecorator': {
                             opacity: 1
                         }
                     }
