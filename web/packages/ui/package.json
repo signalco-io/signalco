@@ -55,7 +55,7 @@
         "@mui/system": "5.11.11",
         "@signalco/ui-icons": "workspace:*",
         "material-ui-popup-state": "5.0.4",
-        "next": "13.2.2",
+        "next": "13.2.3",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-is": "18.2.0",
@@ -65,7 +65,7 @@
     "peerDependencies": {
         "@babel/core": "7.21.0",
         "@signalco/ui-icons": "workspace:*",
-        "next": "13.2.2",
+        "next": "13.2.3",
         "react": "18.2.0",
         "react-dom": "18.2.0"
     }
