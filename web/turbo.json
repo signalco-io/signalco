@@ -17,7 +17,8 @@
                 "NEXT_PUBLIC_MAPBOX_TOKEN",
                 "NODE_ENV",
                 "ANALYZE",
-                "SITE_URL"
+                "SITE_URL",
+                "GITHUB_PAT_TOKEN"
             ]
         },
         "lint": {
