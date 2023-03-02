@@ -60,7 +60,7 @@
         "react-dom": "18.2.0",
         "react-is": "18.2.0",
         "react-timeago": "7.1.0",
-        "styled-components": "5.3.6"
+        "styled-components": "5.3.8"
     },
     "peerDependencies": {
         "@babel/core": "7.21.0",
