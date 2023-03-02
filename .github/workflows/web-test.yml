@@ -1,6 +1,9 @@
 name: "[Web] Run Tests"
 on:
     pull_request:
+      paths:
+        - "web/**"
+        - ".github/workflows/web-test.yml"
 
 defaults:
   run:

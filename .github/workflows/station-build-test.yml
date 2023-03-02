@@ -2,6 +2,10 @@ name: "[Station] Test"
 on:
   pull_request:
     branches: [next, main]
+    paths:
+      - "station/**"
+      - ".github/workflows/station-build-test.yml"
+      - ".github/workflows/station-release-binaries.yml"
 
 jobs:
   release:
