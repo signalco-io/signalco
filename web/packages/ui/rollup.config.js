@@ -11,6 +11,7 @@ import summary from "rollup-plugin-summary";
 
 export default [
     {
+        experimentalLogSideEffects: true,
         input: Object.fromEntries(
             [
                 ['index', fileURLToPath(new URL('src/index.ts', import.meta.url))],
