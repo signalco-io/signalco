@@ -1,0 +1,11 @@
+﻿install bluez
+
+```bash
+sudo apt-get install bluetooth bluez bluez-tools rfkill -y
+sudo service bluetooth start
+```
+
+sudo bluetoothctl 
+
+[bluetooth]# scan on
+[bluetooth]# pair 11:75:58:F9:E4:F7
