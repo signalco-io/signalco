@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <UserSecretsId>dotnet-Signal.Beacon.WorkerService-EDF6EB99-A6EE-4F07-B2B3-BEC456AB65B6</UserSecretsId>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="5.0.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Signal.Beacon.Application\Signal.Beacon.Application.csproj" />
+    <ProjectReference Include="..\Signal.Beacon.Channel.BroadLink\Signal.Beacon.Channel.BroadLink.csproj" />
+    <ProjectReference Include="..\Signal.Beacon.Channel.iRobot\Signal.Beacon.Channel.iRobot.csproj" />
+    <ProjectReference Include="..\Signal.Beacon.Channel.Samsung\Signal.Beacon.Channel.Samsung.csproj" />
+    <ProjectReference Include="..\Signal.Beacon.Channel.Signal\Signal.Beacon.Channel.Signal.csproj" />
+    <ProjectReference Include="..\Signal.Beacon.Configuration\Signal.Beacon.Configuration.csproj" />
+    <ProjectReference Include="..\Signal.Beacon.Core\Signal.Beacon.Core.csproj" />
+    <ProjectReference Include="..\Signal.Beacon.Channel.PhilipsHue\Signal.Beacon.Channel.PhilipsHue.csproj" />
+    <ProjectReference Include="..\Signal.Beacon.Voice\Signal.Beacon.Voice.csproj" />
+    <ProjectReference Include="..\Signal.Beacon.Channel.Zigbee2Mqtt\Signal.Beacon.Channel.Zigbee2Mqtt.csproj" />
+    <ProjectReference Include="..\Signalco.Station.Channel.MiFlora\Signalco.Station.Channel.MiFlora.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="rpi-update.sh" />
+    <Content Include="rpi-update.sh">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

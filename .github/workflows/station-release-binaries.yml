@@ -1,0 +1,67 @@
+name: "[Station] Publish Binaries"
+
+on:
+  push:
+    tags:
+      - 'v*'
+  release:
+    types: [published]
+
+jobs:
+  release:
+    strategy:
+      matrix: 
+        kind: ['arm-x64', 'windows-x64']
+        include:
+          - kind: arm-x64
+            os: ubuntu-latest
+            target: linux-arm64
+          - kind: windows-x64
+            os: windows-latest
+            target: win-x64
+            
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.201
+        include-prerelease: true
+    
+    - name: Restore dependencies
+      run: dotnet restore
+      with:
+        working-directory: ./station
+
+    - name: Build
+      shell: bash
+      run: |
+        # Define some variables for things we need
+        tag=$(git describe --tags --abbrev=0)
+        release_name="station-$tag-${{ matrix.target }}"
+        ver="${tag:1}"
+
+        # Build everything
+        dotnet publish ./Signal.Beacon.WorkerService/Signal.Beacon.csproj -p:Version=$ver -c Release -o "$release_name" -r "${{ matrix.target }}" --self-contained true
+
+        # Pack files
+        if [ "${{ matrix.target }}" == "win-x64" ]; then
+          7z a -tzip "${release_name}.zip" "./${release_name}/*"
+        else
+          tar czvf "${release_name}.tar.gz" "$release_name"
+        fi
+
+        # Delete output directory
+        rm -r "$release_name"
+      with:
+        working-directory: ./station
+        
+    - name: Publish
+      uses: softprops/action-gh-release@v1
+      with:
+        files: "station*"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
