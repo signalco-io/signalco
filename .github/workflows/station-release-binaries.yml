@@ -7,6 +7,10 @@ on:
   release:
     types: [published]
 
+defaults:
+  run:
+    working-directory: ./station
+
 jobs:
   release:
     strategy:
@@ -33,8 +37,6 @@ jobs:
     
     - name: Restore dependencies
       run: dotnet restore
-      with:
-        working-directory: ./station
 
     - name: Build
       shell: bash
@@ -56,8 +58,6 @@ jobs:
 
         # Delete output directory
         rm -r "$release_name"
-      with:
-        working-directory: ./station
         
     - name: Publish
       uses: softprops/action-gh-release@v1
