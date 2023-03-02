@@ -28,7 +28,11 @@ jobs:
           dotnet-version: 7.0.201
       - name: Restore dependencies
         run: dotnet restore
+        with:
+          working-directory: ./station
       - name: Build
         shell: bash
         run: |
-          dotnet build ./station/Signal.Beacon.WorkerService/Signal.Beacon.csproj -r "${{ matrix.target }}" --self-contained true
+          dotnet build ./Signal.Beacon.WorkerService/Signal.Beacon.csproj -r "${{ matrix.target }}" --self-contained true
+        with:
+          working-directory: ./station
