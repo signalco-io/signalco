@@ -49,7 +49,6 @@ More info on development can be found in [Development](/DEVELOPMENT.md) document
 - [✔️ Status page](https://status.signalco.io)
 - [🖌️ Figma files](https://www.figma.com/file/8cMJOfjFdQBiGdWTvr2SB1/Signalco.io-Design?node-id=78%3A684)
 - [Signalco Cloud](https://github.com/signalco-io/cloud)
-- [Signalco Companion](https://github.com/signalco-io/companion)
 
 ## License
 
