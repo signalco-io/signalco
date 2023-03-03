@@ -1,0 +1,9 @@
+{
+    "Helpers": {
+        "CopyToClipboard": "Kopiraj u međuspremnik",
+        "CopyLinkToClipboard": "Kopiraj link u međuspremnik",
+        "CopyCodeToClipboard": "Kopiraj kod u međuspremnik",
+        "CopyToClipboardSuccess": "Kopirano u međuspremnik",
+        "CopyToClipboardError": "Greška kopiranja u međuspremnik"
+    }
+}

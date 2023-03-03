@@ -9,6 +9,10 @@
 			"path": "apps/app"
 		},
 		{
+			"name": "🚀 blog",
+			"path": "apps/blog"
+		},
+		{
 			"name": "🚀 brandgrab",
 			"path": "apps/brandgrab"
 		},

@@ -176,6 +176,92 @@ importers:
       typescript: 4.9.5
       webpack: 5.75.0
 
+  apps/blog:
+    specifiers:
+      '@axe-core/playwright': 4.6.0
+      '@babel/core': 7.21.0
+      '@next/bundle-analyzer': 13.2.3
+      '@next/env': 13.2.3
+      '@playwright/test': 1.31.2
+      '@signalco/data': workspace:*
+      '@signalco/eslint-config-signalco': workspace:*
+      '@signalco/hooks': workspace:*
+      '@signalco/js': workspace:*
+      '@signalco/tsconfig': workspace:*
+      '@signalco/ui': workspace:*
+      '@signalco/ui-icons': workspace:*
+      '@types/color': 3.0.3
+      '@types/next-pwa': 5.6.2
+      '@types/node': 18.14.5
+      '@types/react': 18.0.28
+      '@types/react-dom': 18.0.11
+      '@types/react-motion': 0.0.33
+      babel-loader: 9.1.2
+      classix: 2.1.22
+      colorette: 2.0.19
+      cross-env: 7.0.3
+      encoding: 0.1.13
+      eslint: 8.35.0
+      next: 13.2.3
+      next-secure-headers: 2.2.0
+      next-sitemap: 4.0.1
+      playwright: 1.31.2
+      postcss: 8.4.21
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-cool-inview: 3.0.1
+      react-dom: 18.2.0
+      react-transition-group: 4.4.5
+      rimraf: 4.2.0
+      sass: 1.58.3
+      sharp: 0.31.3
+      terser: 5.16.5
+      typescript: 4.9.5
+      webpack: 5.75.0
+    dependencies:
+      '@next/env': 13.2.3
+      '@signalco/data': link:../../packages/data
+      '@signalco/hooks': link:../../packages/hooks
+      '@signalco/js': link:../../packages/js
+      '@signalco/ui': link:../../packages/ui
+      '@signalco/ui-icons': link:../../packages/ui-icons
+      classix: 2.1.22
+      encoding: 0.1.13
+      next: 13.2.3_4pgn6omj4irpgog4tpnzary34q
+      next-secure-headers: 2.2.0
+      postcss: 8.4.21
+      react: 18.2.0
+      react-cool-inview: 3.0.1_react@18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
+      sharp: 0.31.3
+    optionalDependencies:
+      terser: 5.16.5
+    devDependencies:
+      '@axe-core/playwright': 4.6.0_playwright@1.31.2
+      '@babel/core': 7.21.0
+      '@next/bundle-analyzer': 13.2.3
+      '@playwright/test': 1.31.2
+      '@signalco/eslint-config-signalco': link:../../packages/eslint-config-signalco
+      '@signalco/tsconfig': link:../../packages/tsconfig
+      '@types/color': 3.0.3
+      '@types/next-pwa': 5.6.2_4pgn6omj4irpgog4tpnzary34q
+      '@types/node': 18.14.5
+      '@types/react': 18.0.28
+      '@types/react-dom': 18.0.11
+      '@types/react-motion': 0.0.33
+      babel-loader: 9.1.2_qoaxtqicpzj5p3ubthw53xafqm
+      colorette: 2.0.19
+      cross-env: 7.0.3
+      eslint: 8.35.0
+      next-sitemap: 4.0.1_xeg3tdra7hobsncwzvo3da7vxi
+      playwright: 1.31.2
+      prop-types: 15.8.1
+      rimraf: 4.2.0
+      sass: 1.58.3
+      typescript: 4.9.5
+      webpack: 5.75.0
+
   apps/brandgrab:
     specifiers:
       '@axe-core/playwright': 4.6.0
@@ -7898,7 +7984,7 @@ packages:
   /dom-helpers/5.2.1:
     resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
     dependencies:
-      '@babel/runtime': 7.20.13
+      '@babel/runtime': 7.21.0
       csstype: 3.1.1
     dev: false
 
@@ -12242,7 +12328,7 @@ packages:
       react: '>=16.6.0'
       react-dom: '>=16.6.0'
     dependencies:
-      '@babel/runtime': 7.20.7
+      '@babel/runtime': 7.21.0
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
