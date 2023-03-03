@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Signalco.Channel.Slack": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7167",
+      "launchBrowser": false
+    }
+  }
+}

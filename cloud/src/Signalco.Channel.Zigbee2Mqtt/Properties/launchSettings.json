@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Signalco.Channel.Zigbee2Mqtt": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7292",
+      "launchBrowser": false
+    }
+  }
+}
