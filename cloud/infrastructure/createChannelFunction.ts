@@ -21,7 +21,7 @@ export default function createChannelFunction (channelName: string, resourceGrou
         resourceGroup,
         channelFunc.webApp,
         publicFunctionStoragePrefix,
-        `../Signalco.Channel.${channelName}/bin/Release/net6.0/publish/`,
+        `../src/Signalco.Channel.${channelName}/bin/Release/net6.0/publish/`,
         shouldProtect);
     apiStatusCheck(publicFunctionPrefix, `Channel - ${channelName}`, channelFunc.dnsCname.hostname, 30);
 
