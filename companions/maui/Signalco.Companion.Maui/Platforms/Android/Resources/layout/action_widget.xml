@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actionWidgetBackground"
+    android:theme="@style/WidgetTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="4dp"
+    android:background="@drawable/widget_bg"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:contentDescription="Action icon"
+        android:src="@drawable/abc_ic_arrow_drop_right_black_24dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/abc_text_size_caption_material"
+        android:text="Do action"/>
+</LinearLayout>
