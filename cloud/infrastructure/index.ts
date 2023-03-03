@@ -57,7 +57,7 @@ const pubFuncCode = assignFunctionCode(
     resourceGroup,
     pubFunc.webApp,
     publicFunctionPrefix,
-    '../Signal.Api.Public/bin/Release/net6.0/publish/',
+    '../src/Signal.Api.Public/bin/Release/net6.0/publish/',
     shouldProtect);
 apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, 5);
 const pubFuncInsights = createWebAppAppInsights(resourceGroup, publicFunctionPrefix, pubFunc.webApp);
@@ -73,7 +73,7 @@ const intFuncCode = assignFunctionCode(
     resourceGroup,
     intFunc.webApp,
     internalFunctionPrefix,
-    '../Signal.Api.Internal/bin/Release/net6.0/publish/',
+    '../src/Signal.Api.Internal/bin/Release/net6.0/publish/',
     shouldProtect);
 apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 15);
 const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, intFunc.webApp);
