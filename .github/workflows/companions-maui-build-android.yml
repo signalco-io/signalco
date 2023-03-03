@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: "[Companions] Signalco.Companion.Maui Build for Android"
+
+on:
+  push:
+    branches: [ main ]
+
+defaults:
+  run:
+    working-directory: ./companions/maui
+
+jobs:
+  build:
+    name: Build ${{ matrix.configuration }}
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        configuration: ['Debug', 'Release']
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.x
+    - name: Install workload
+      run: dotnet workload install maui-android
+    - name: Setup Java JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+    - name: Build
+      run: dotnet build -c ${{ matrix.configuration }} -f net6.0-android
+    - name: Publish
+      run: dotnet publish -c ${{ matrix.configuration }} -f net6.0-android -o ./artifacts
+    - name: Pack files
+      shell: bash
+      run: |
+        # Pack files
+        7z a -tzip "companion-maui-android-${{ matrix.configuration }}.zip" "./artifacts/*"
+        
+        # Delete output directory
+        rm -r "artifacts"
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: "artifact-${{ matrix.configuration }}"
+        path: "companion-maui-android-${{ matrix.configuration }}.zip"

@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Signalco.Channel.PhilipsHue": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7204",
+      "launchBrowser": false
+    }
+  }
+}

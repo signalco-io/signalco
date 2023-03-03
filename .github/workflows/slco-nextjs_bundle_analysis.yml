@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
 name: '[slco] Next.js Bundle Analysis'
 
 on:
@@ -6,6 +8,8 @@ on:
     branches:
       - main
       - next
+    paths:
+      - 'web/**'
   workflow_dispatch:
 
 defaults:

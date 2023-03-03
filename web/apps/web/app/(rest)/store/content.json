@@ -64,6 +64,52 @@
             "officialWebsite": "https://www.ikea.com/cz/en/p/styrbar-remote-control-white-30488363/#content"
         },
         {
+            "id": "f7d47397-a98b-438d-aa07-30af03f0f023",
+            "name": "Ikea SYMFONISK White",
+            "manufacturer": "Ikea",
+            "power": "battery-cr2032",
+            "categories": [
+                "remote",
+                "switch"
+            ],
+            "communication": [
+                "zigbee"
+            ],
+            "officialWebsite": "https://www.ikea.com/hr/hr/p/symfonisk-daljinski-upravljac-za-zvucnik-bijela-60370480/"
+        },
+        {
+            "id": "74fd2409-3662-493f-bd00-a3487b60484a",
+            "name": "Ikea SYMFONISK Black",
+            "manufacturer": "Ikea",
+            "power": "battery-cr2032",
+            "categories": [
+                "remote",
+                "switch"
+            ],
+            "communication": [
+                "zigbee"
+            ],
+            "officialWebsite": "https://www.ikea.com/hr/hr/p/symfonisk-daljinski-upravljac-za-zvucnik-bijela-60370480/"
+        },
+        {
+            "id": "a417b7dc-757f-43d9-b59c-5d3f4aad5643",
+            "name": "Ikea LILLHULT USB-A - USB-C",
+            "manufacturer": "Ikea",
+            "categories": [
+                "accessory"
+            ],
+            "officialWebsite": "https://www.ikea.com/hr/hr/p/lillhult-kabel-usb-a-kabel-usb-c-tamnosiva-70527602/"
+        },
+        {
+            "id": "ccaa088e-0336-4ac9-a856-ae138e0b371d",
+            "name": "Ikea SMAHAGEL USB-A 5V 5W",
+            "manufacturer": "Ikea",
+            "categories": [
+                "accessory"
+            ],
+            "officialWebsite": "https://www.ikea.com/hr/hr/p/smahagel-usb-punjac-s-1-ulazom-bijela-10544077/"
+        },
+        {
             "id": "ef1f5013-a780-42c0-8508-a6317f8fa66f",
             "name": "Orange Pi Zero 2",
             "manufacturer": "Orange Pi",
@@ -161,7 +207,35 @@
             "communication": [
                 "zigbee"
             ],
-            "officialWebsite": "https://www.moeshouse.com/products/zigbee-smart-wall-light-switch-with-neutral-wire-or-no-neutral-wire-wiring-no-capacitor-needed-smart-life-tuya-2-3-way-muilti-control-association-works-with-alexa-google-home-hub-required?_pos=34&_sid=d9f0ebcb3&_ss=r&variant=39357460545617"
+            "officialWebsite": "https://moeshouse.com/products/zigbee-smart-wall-light-switch-with-neutral-wire-or-no-neutral-wire-wiring-no-capacitor-needed-eu?variant=39357460578385"
+        },
+        {
+            "id": "26a06aa5-ac8b-4907-9203-380b13d8e505",
+            "name": "Moes Smart Switch 1 Gang No Neutral Zigbee",
+            "model": "ZS-B-EU1-WH-MS",
+            "manufacturer": "Moes",
+            "categories": [
+                "switch"
+            ],
+            "power": "mains",
+            "communication": [
+                "zigbee"
+            ],
+            "officialWebsite": "https://moeshouse.com/products/zigbee-smart-wall-light-switch-with-neutral-wire-or-no-neutral-wire-wiring-no-capacitor-needed-eu?variant=39357460545617"
+        },
+        {
+            "id": "35c11213-3638-45b3-9234-4ac944a82958",
+            "name": "Moes ZigBee Star Ring Button Switch Light Touch Switch",
+            "model": "ZS-SR-EU1-GY-MS",
+            "manufacturer": "Moes",
+            "categories": [
+                "switch"
+            ],
+            "power": "mains",
+            "communication": [
+                "zigbee"
+            ],
+            "officialWebsite": "https://moeshouse.com/products/moes-new-star-ring-smart-zigbee3-0-push-button-switch-embedded-light-touch-switch-1?variant=44551402291515"
         },
         {
             "id": "6f2b9fda-332a-4eb8-a844-c6791e433e39",
@@ -248,7 +322,6 @@
             "testing": 1
         },
         "75ec2e44-5be8-4d81-9e50-5194eb3ace49": {
-            "inStock": 0
         },
         "04715e15-b283-4179-b14b-b3a2c0a9d07b": {
             "inStock": 2
@@ -266,6 +339,18 @@
         "1be5e480-3fbb-41df-9811-3bcc094f39fb": {
             "inStock": 1
         },
+        "26a06aa5-ac8b-4907-9203-380b13d8e505": {
+            "inStock": 1
+        },
+        "35c11213-3638-45b3-9234-4ac944a82958": {
+            "inStock": 3
+        },
+        "f7d47397-a98b-438d-aa07-30af03f0f023": {
+            "inStock": 1
+        },
+        "74fd2409-3662-493f-bd00-a3487b60484a": {
+            "inStock": 1
+        },
         "6f2b9fda-332a-4eb8-a844-c6791e433e39": {
             "inStock": 2
         },
@@ -273,11 +358,16 @@
             "inStock": 2
         },
         "30dcda4b-926a-4108-a83d-e1a21fc51043": {
-            "testing": 1
         },
         "c04eb797-d9fe-43c6-b564-275884a0ebd0": {
             "inStock": 1,
             "testing": 1
+        },
+        "a417b7dc-757f-43d9-b59c-5d3f4aad5643": {
+            "inStock": 2
+        },
+        "ccaa088e-0336-4ac9-a856-ae138e0b371d": {
+            "inStock": 3
         },
         "2f5aff42-f723-48d5-85c5-33085b317e9c": {
             "inStock": 1,

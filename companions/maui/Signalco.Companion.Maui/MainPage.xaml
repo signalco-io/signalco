@@ -1,0 +1,23 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Signalco.Companion.Maui.MainPage"
+             BackgroundColor="{DynamicResource PrimaryColor}">
+
+    <Grid RowSpacing="25" RowDefinitions="Auto,Auto,Auto,Auto,*"
+          Padding="{OnPlatform iOS='30,60,30,30', Default='30'}">
+
+        <Label 
+            Text="Signalco Companion"
+            Grid.Row="0"
+            SemanticProperties.HeadingLevel="Level1"
+            FontSize="32"
+            HorizontalOptions="Center" />
+
+        <Button 
+            Text="Log in"
+            Grid.Row="1"
+            SemanticProperties.Hint="Proceeds to login page"
+            HorizontalOptions="Center" />
+
+    </Grid>
+</ContentPage>

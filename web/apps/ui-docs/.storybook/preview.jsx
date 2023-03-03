@@ -1,6 +1,8 @@
-import { CssVarsProvider, CssBaseline, signalcoTheme } from '@signalco/ui';
+import { CssVarsProvider, CssBaseline, buildSignalcoTheme } from '@signalco/ui';
 import storybookSignalcoTheme from './signalco-theme';
 import '@signalco/ui/dist/ui.css';
+
+const signalcoTheme = buildSignalcoTheme();
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

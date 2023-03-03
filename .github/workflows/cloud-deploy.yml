@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: "[Cloud] Deploy"
+
+on:
+  push:
+    branches: [main, next]
+
+env:
+  AZURE_FUNCTIONAPP_PUBLIC_PATH: "Signal.Api.Public"
+  AZURE_FUNCTIONAPP_INTERNAL_PATH: "Signal.Api.Internal"
+  DOTNET_VERSION: "6.0.x" # set this to the dotnet version to use
+
+defaults:
+  run:
+    working-directory: ./cloud/src
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    concurrency: ci-cloud-deploy
+    steps:
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@v3
+
+      - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: "Build ${{ env.AZURE_FUNCTIONAPP_PUBLIC_PATH }}"
+        shell: bash
+        run: |
+          pushd './${{ env.AZURE_FUNCTIONAPP_PUBLIC_PATH }}'
+          dotnet publish --configuration Release
+          popd
+
+      - name: "Build ${{ env.AZURE_FUNCTIONAPP_INTERNAL_PATH }}"
+        shell: bash
+        run: |
+          pushd './${{ env.AZURE_FUNCTIONAPP_INTERNAL_PATH }}'
+          dotnet publish --configuration Release
+          popd
+
+      - name: "Build Channels"
+        shell: bash
+        run: |
+          for channelDir in Signalco.Channel.[A-Z]*; do
+            pushd ./$channelDir
+            dotnet publish --configuration Release
+            popd
+          done
+
+      - uses: actions/cache@v3
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Extract branch name
+        shell: bash
+        run: |
+          [[ $(echo ${GITHUB_REF#refs/heads/}) = "main" ]] && echo "##[set-output name=branch;]production" || echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Deploy infrastructure
+        shell: bash
+        run: |
+          pushd '../infrastructure'
+          yarn install
+          pulumi up --stack signalco/${{ steps.extract_branch.outputs.branch }} --yes
+          popd
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

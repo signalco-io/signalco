@@ -1,8 +1,10 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
 name: "[Global] Create new release"
 
 on:
     push:
-        branches: [main]
+        branches: [main, next]
 
 jobs:
     release:

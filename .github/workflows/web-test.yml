@@ -1,6 +1,11 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
 name: "[Web] Run Tests"
 on:
     pull_request:
+      paths:
+        - "web/**"
+        - ".github/workflows/web-test.yml"
 
 defaults:
   run:
@@ -19,7 +24,7 @@ jobs:
           TURBO_TEAM: signalco
           TURBO_REMOTE_ONLY: true
         container:
-          image: mcr.microsoft.com/playwright:v1.31.1-focal
+          image: mcr.microsoft.com/playwright:v1.31.2-focal
         steps:
             - uses: actions/checkout@v3
             - name: Setup pnpm

@@ -1,7 +1,11 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
 name: "[Web] stories-check"
 on:
     pull_request:
         branches: [next, main]
+        paths:
+          - 'web/**'
 
 defaults:
   run:
