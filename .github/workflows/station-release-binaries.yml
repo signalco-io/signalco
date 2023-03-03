@@ -37,9 +37,6 @@ jobs:
         dotnet-version: 7.0.201
         include-prerelease: true
     
-    - name: Restore dependencies
-      run: dotnet restore
-
     - name: Build
       shell: bash
       run: |
