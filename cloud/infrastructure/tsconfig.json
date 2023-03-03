@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "outDir": "bin",
+        "target": "es2016",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "files": [
+        "index.ts",
+        "./createSignalR.ts",
+        "./createFunction.ts",
+        "./getConnectionString.ts",
+        "./createStorageAccount.ts",
+        "./createKeyVault.ts",
+        "./signedBlobReadUrl.ts",
+        "./assignCustomDomain.ts",
+        "./dnsRecord.ts",
+        "./createPublicFunction.ts",
+        "./webAppIdentity.ts",
+        "./vaultSecret.ts",
+        "./assignFunctionCode.ts",
+        "./assignFunctionSettings.ts",
+        "./createAppInsights.ts",
+        "./createAppInsights.ts",
+        "./apiStatusCheck.ts"
+    ]
+}
