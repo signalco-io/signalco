@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.Appwidget;
 using Android.Content;
 using Android.Widget;
@@ -20,15 +15,15 @@ namespace Signalco.Companion.Maui.Platforms.Android
         public override void OnUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
         {
             var me = new ComponentName(context, Java.Lang.Class.FromType(typeof(ActionWidget)).Name);
-            appWidgetManager.UpdateAppWidget(me, BuildRemoteViews(context, appWidgetIds));
+            appWidgetManager.UpdateAppWidget(me, this.BuildRemoteViews(context, appWidgetIds));
         }
 
         private RemoteViews BuildRemoteViews(Context context, int[] appWidgetIds)
         {
             var widgetView = new RemoteViews(context.PackageName, Resource.Layout.action_widget);
 
-            SetTextViewText(widgetView);
-            RegisterClicks(context, appWidgetIds, widgetView);
+            this.SetTextViewText(widgetView);
+            this.RegisterClicks(context, appWidgetIds, widgetView);
 
             return widgetView;
         }
@@ -51,7 +46,7 @@ namespace Signalco.Companion.Maui.Platforms.Android
             //widgetView.SetOnClickPendingIntent(Resource.Id.actionWidgetBg, piBackground);
 
             // Register click event for the Announcement-icon
-            widgetView.SetOnClickPendingIntent(Resource.Id.actionWidgetBackground, GetPendingSelfIntent(context, AnnouncementClick));
+            widgetView.SetOnClickPendingIntent(Resource.Id.actionWidgetBackground, this.GetPendingSelfIntent(context, AnnouncementClick));
         }
 
         private PendingIntent GetPendingSelfIntent(Context context, string action)
