@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: Deploy Cloud
+name: "[Cloud] Deploy"
 
 on:
   push:
