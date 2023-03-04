@@ -1,6 +1,7 @@
 .root {
     display: block;
     max-width: var(--container-maxWidth);
+    min-width: var(--container-maxWidth);
     margin: 0 auto;
 }
 
