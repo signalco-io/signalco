@@ -2,6 +2,7 @@ import React from 'react';
 import Row from '@signalco/ui/dist/Row';
 import Link from '@signalco/ui/dist/Link';
 import Container from '@signalco/ui/dist/Container';
+import InputGrabDomain from './InputGrabDomain';
 
 export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
     return (
@@ -27,6 +28,8 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
                                 BrandGrab.io
                             </Link>
                         </div>
+                        <InputGrabDomain placeholder="any-domain.com" />
+                        <div></div>
                     </Row>
                 </header>
             </Container>

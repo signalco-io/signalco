@@ -1,25 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import Image from 'next/image';
 import Stack from '@signalco/ui/dist/Stack';
-import { Button, Card, CardContent, CardCover, ChildrenProps, Container, Row, TextField, Typography } from '@signalco/ui';
-import { useSearchParam } from '@signalco/hooks';
+import { Card, CardContent, CardCover, ChildrenProps, Container, Loadable, Typography } from '@signalco/ui';
+import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import PageCenterHeader from '../pages/PageCenterHeader';
 import { BrandResources } from '../../app/api/quick/route';
-
-function BrandGrabInput({ value, onChange }: { value: string | undefined, onChange: (value: string) => void }) {
-    const [domain, setDomain] = useState(value || '');
-
-    return (
-        <Stack>
-            <Row spacing={1}>
-                <TextField placeholder="Enter domain name" value={domain} onChange={(e) => setDomain(e.target.value)} />
-                <Button onClick={() => onChange(domain)}>Go</Button>
-            </Row>
-        </Stack>
-    )
-}
 
 function OgPreview({ og }: { og: BrandResources['og'] }) {
     return (
@@ -61,8 +48,8 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
         }}>
             <Image
                 style={{
-                    width: 144+16*2,
-                    height: 144+16*2,
+                    width: 144 + 16 * 2,
+                    height: 144 + 16 * 2,
                     gridRowEnd: 'span 2',
                     padding: 16,
                     border: '1px solid var(--joy-palette-divider)',
@@ -74,8 +61,8 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
                 height={144} />
             <Image
                 style={{
-                    width: 42+16*2,
-                    height: 42+16*2,
+                    width: 42 + 16 * 2,
+                    height: 42 + 16 * 2,
                     padding: 16,
                     border: '1px solid var(--joy-palette-divider)',
                     borderRadius: 8
@@ -86,8 +73,8 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
                 height={42} />
             <Image
                 style={{
-                    width: 16*3,
-                    height: 16*3,
+                    width: 16 * 3,
+                    height: 16 * 3,
                     padding: 16,
                     border: '1px solid var(--joy-palette-divider)',
                     borderRadius: 8
@@ -113,7 +100,7 @@ function BrandView({ resources }: { resources: BrandResources | undefined }) {
     if (!resources) return null;
 
     return (
-        <Stack spacing={1}>
+        <Stack spacing={3}>
             <TextInfo title="Domain">
                 {resources.domain}
             </TextInfo>
@@ -133,36 +120,29 @@ function BrandView({ resources }: { resources: BrandResources | undefined }) {
     );
 }
 
-async function quickLookup(domain: string): Promise<BrandResources> {
+async function quickLookup(domain: string | undefined): Promise<BrandResources | undefined> {
+    if (!domain) {
+        return undefined;
+    }
+
     return await fetch('/api/quick?domain=' + domain).then(res => res.json()).then(res => res as BrandResources);
 }
 
-function stripDomain(domain: string) {
-    return domain.replace(/https?:\/\//, '');
-}
-
 export default function LandingPageView() {
-    const [domain, setDomain] = useSearchParam('domain');
-    const [domainResources, setDomainResources] = useState<BrandResources | undefined>(undefined);
-
-    const handleDomainChange = (domain: string) => {
-        setDomain(stripDomain(domain));
-    }
-
-    useEffect(() => {
-        if (domain) {
-            quickLookup(domain).then(setDomainResources);
-        }
-    }, [domain])
+    const [domain] = useSearchParam('domain');
+    const quickLookupDomain = useCallback(() => quickLookup(domain), [domain]);
+    const domainResources = useLoadAndError(quickLookupDomain);
 
     return (
         <Stack style={{ overflowX: 'hidden', paddingBottom: 16 }}>
             <PageCenterHeader header={'BrandGrab'} />
-            <Container>
-                <Stack spacing={2}>
-                    <BrandGrabInput value={domain} onChange={handleDomainChange} />
-                    <BrandView resources={domainResources} />
-                </Stack>
+            <Container maxWidth="md">
+                <Loadable
+                    isLoading={domainResources.isLoading}
+                    error={domainResources.error}
+                    loadingLabel={'Loading brand'}>
+                    <BrandView resources={domainResources.item} />
+                </Loadable>
             </Container>
         </Stack>
     );
