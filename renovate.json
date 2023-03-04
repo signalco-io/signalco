@@ -41,7 +41,20 @@
                 "terser",
                 "turbo",
                 "typesript",
-                "vite"
+                "vite",
+                
+                "@pulumi/aws",
+                "@pulumi/azure-native",
+                "@pulumi/pulumi",
+                "@pulumi/cloudflare",
+                "@types/node",
+                "Castle.Core",
+                "eslint",
+                "Moq",
+                "pnpm",
+                "typescript",
+                "@typescript-eslint/eslint-plugin",
+                "@typescript-eslint/parser"
             ]
         },
         {
