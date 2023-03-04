@@ -19,8 +19,12 @@
     "dependencies": {
         "@hcaptcha/react-hcaptcha": "1.4.4",
         "@next/env": "13.2.3",
+        "@signalco/hooks": "workspace:*",
+        "@signalco/js": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
+        "@types/jsdom": "^21.1.0",
+        "cheerio": "1.0.0-rc.12",
         "classix": "2.1.22",
         "next": "13.2.3",
         "next-secure-headers": "2.2.0",
