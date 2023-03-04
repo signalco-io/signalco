@@ -5,6 +5,10 @@ name: "[Cloud] Deploy"
 on:
   push:
     branches: [main, next]
+    paths:
+      - "cloud/**"
+      - "infrastructure/**"
+      - ".github/workflows/cloud-deploy.yml"
 
 env:
   AZURE_FUNCTIONAPP_PUBLIC_PATH: "Signal.Api.Public"
