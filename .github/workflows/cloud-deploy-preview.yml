@@ -7,6 +7,10 @@ on:
     branches:
       - "main"
       - "next"
+    paths:
+      - "cloud/**"
+      - "infrastructure/**"
+      - ".github/workflows/cloud-deploy-preview.yml"
 
 env:
   AZURE_FUNCTIONAPP_PUBLIC_PATH: "Signal.Api.Public"
