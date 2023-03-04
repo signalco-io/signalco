@@ -89,7 +89,7 @@
         "cross-env": "7.0.3",
         "eslint": "8.35.0",
         "fs-extra": "11.1.0",
-        "next-sitemap": "4.0.1",
+        "next-sitemap": "4.0.2",
         "openapi-types": "12.1.0",
         "playwright": "1.31.2",
         "prop-types": "15.8.1",
