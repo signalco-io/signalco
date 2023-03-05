@@ -20,13 +20,13 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
             zIndex: 101
         }}>
             <Container maxWidth={fullWidth ? false : 'lg'}>
-                <header style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center' }}>
+                <header style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', gap: 16 }}>
                     <div>
                         <Link href="/" aria-label="BrandGrab.io">
                             BrandGrab.io
                         </Link>
                     </div>
-                    <div style={{maxWidth: 600, minWidth: 280}}>
+                    <div>
                         <InputGrabDomain placeholder="any-domain.com" />
                     </div>
                     <div></div>
