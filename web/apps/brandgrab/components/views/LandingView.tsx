@@ -3,44 +3,92 @@
 import React, { useCallback } from 'react';
 import NextImage from 'next/image';
 import Stack from '@signalco/ui/dist/Stack';
-import { Card, CardContent, CardCover, ChildrenProps, Container, Loadable, Row, Typography } from '@signalco/ui';
+import { Card, CardContent, CardCover, CardOverflow, ChildrenProps, Container, Divider, Link, Loadable, MuiStack, Tooltip, Typography } from '@signalco/ui';
 import { orderBy } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { ScreenshotResponse } from '../../app/api/screenshot/route';
 import { BrandResources } from '../../app/api/quick/route';
 
-function OgPreview({ og }: { og: BrandResources['og'] }) {
-    if (!og.title && !og.image && !og.url)
+function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
+    if (!og?.title && !og?.image && !og?.url)
         return <>-</>;
 
     return (
-        <Card style={{ width: 400, minHeight: 209 }}>
-            {og.imageBase64 &&
-                <>
-                    <CardCover>
+        <Link href={og.url}>
+            <Card variant="outlined" style={{
+                width: 400,
+                minHeight: 209,
+                overflow: 'hidden',
+                transition: 'box-shadow .2s ease-in-out, border-color .2s ease-in-out'
+            }} sx={{
+                '&:hover': { boxShadow: 'md', borderColor: 'neutral.outlinedHoverBorder' },
+            }}>
+                {og.imageBase64 &&
+                    <CardOverflow sx={{
+                        padding: 0
+                    }}>
                         <NextImage
                             src={og.imageBase64}
                             alt="og:image"
                             width={400}
                             height={209} />
-                    </CardCover>
-                    <CardCover
-                        sx={{
-                            background:
-                                'linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 100px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 100px)',
-                        }}
-                    />
-                </>
-            }
-            <CardContent style={{ justifyContent: 'flex-end' }}>
-                <Stack>
-                    <Typography textColor="#fff" level="h5" style={{
-                        marginTop: 8
-                    }}>{og.title}</Typography>
-                    <Typography textColor="neutral.300">{og.description}</Typography>
-                </Stack>
-            </CardContent>
-        </Card>
+                    </CardOverflow>
+                }
+                <CardContent style={{ justifyContent: 'flex-end' }}>
+                    <Stack>
+                        <Typography level="h5" style={{
+                            marginTop: 8
+                        }}>{og.title}</Typography>
+                        <Typography level="body2">{og.description}</Typography>
+                    </Stack>
+                </CardContent>
+                <Divider sx={{ mt: 2 }} />
+                <CardOverflow
+                    variant="soft"
+                    sx={{
+                        display: 'flex',
+                        gap: 1.5,
+                        py: 1.5,
+                        px: 'var(--Card-padding)',
+                        bgcolor: 'background.level1',
+                    }}
+                >
+                    {!!og.siteName && (
+                        <Tooltip title={og.siteName}>
+                            <Typography noWrap level="body3" sx={{ fontWeight: 'md', color: 'text.secondary' }}>
+                                {og.siteName}
+                            </Typography>
+                        </Tooltip>
+                    )}
+                    {!!og.type && (
+                        <>
+                            {!!og.siteName && <Divider orientation="vertical" />}
+                            <Typography level="body3" sx={{ fontWeight: 'md', color: 'text.secondary' }}>
+                                {og.type}
+                            </Typography>
+                        </>
+                    )}
+                    {!!(og.locale || og.localeAlternate) && (
+                        <>
+                            <Divider orientation="vertical" />
+                            <Typography level="body3" sx={{ fontWeight: 'md', color: 'text.secondary' }}>
+                                {[og.locale, og.localeAlternate].filter(Boolean).join(', ')}
+                            </Typography>
+                        </>
+                    )}
+                    {!!og.url && (
+                        <>
+                            <Divider orientation="vertical" />
+                            <Tooltip title={og.url}>
+                                <Typography level="body3" noWrap sx={{ fontWeight: 'md', color: 'text.secondary' }}>
+                                    {og.url}
+                                </Typography>
+                            </Tooltip>
+                        </>
+                    )}
+                </CardOverflow>
+            </Card>
+        </Link>
     )
 }
 
@@ -99,7 +147,7 @@ function TextInfo({ title, children }: { title: string } & ChildrenProps) {
     return (
         <Stack spacing={.5}>
             <Typography level="body3">{title}</Typography>
-            <div>{children || '-'}</div>
+            <div>{children}</div>
         </Stack>
     )
 }
@@ -107,6 +155,7 @@ function TextInfo({ title, children }: { title: string } & ChildrenProps) {
 async function getPageScreenshot(domain: string) {
     const res = await fetch(`/api/screenshot?domain=${encodeURIComponent(domain)}`);
     const data = await res.json() as ScreenshotResponse;
+    // TODO: Move dimensions resolve to server
     const dimensions = await getImageDimensions(data.data);
     return {
         data: data.data,
@@ -134,15 +183,15 @@ function PagePreview({ domain }: { domain: string }) {
     const containerHeight = 300;
 
     return (
-        <Loadable isLoading={pageScreenshot.isLoading} error={pageScreenshot.error} loadingLabel="Loading preview">
-            <Stack spacing={3}>
-                <TextInfo title="Page preview">
-                    <Card style={{
-                        width: width,
-                        height: containerHeight,
-                        overflowY: 'auto',
-                        boxSizing: 'content-box'
-                    }}>
+        <Stack spacing={3}>
+            <TextInfo title="Page preview">
+                <Card style={{
+                    width: width,
+                    height: containerHeight,
+                    overflowY: 'auto',
+                    boxSizing: 'content-box',
+                }}>
+                    <Loadable isLoading={pageScreenshot.isLoading} error={pageScreenshot.error} loadingLabel="Loading preview">
                         <CardCover style={{
                             height: (width / (pageScreenshot.item?.w ?? 1)) * (pageScreenshot.item?.h ?? 0),
                             borderRadius: 0
@@ -158,9 +207,11 @@ function PagePreview({ domain }: { domain: string }) {
                                     borderRadius: 0
                                 }} />
                         </CardCover>
-                    </Card>
-                </TextInfo>
-                <TextInfo title="Colors">
+                    </Loadable>
+                </Card>
+            </TextInfo>
+            <TextInfo title="Colors">
+                <Loadable isLoading={pageScreenshot.isLoading} error={pageScreenshot.error} loadingLabel="Loading preview">
                     <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                         {orderBy(pageScreenshot.item?.colors ?? [], (a, b) => b.area - a.area).map((color) => (
                             <div key={color.hex} style={{
@@ -179,38 +230,54 @@ function PagePreview({ domain }: { domain: string }) {
                             </div>
                         ))}
                     </div>
-                </TextInfo>
-            </Stack>
-        </Loadable>
+                </Loadable>
+            </TextInfo>
+        </Stack>
     )
 }
 
-function BrandView({ resources }: { resources: BrandResources | undefined }) {
-    if (!resources) return null;
+function BrandView({ domain }: { domain: string | undefined }) {
+    const quickLookupDomain = useCallback(() => quickLookup(domain), [domain]);
+    const domainResources = useLoadAndError(quickLookupDomain);
+    const resources = domainResources.item;
 
     return (
-        <Row alignItems="start" spacing={4}>
+        <MuiStack direction={{ xs: 'column', md: 'row' }} spacing={4}>
             <Stack spacing={3}>
                 <TextInfo title="Domain">
-                    {resources.domain}
+                    <Loadable placeholder="skeletonText" isLoading={domainResources.isLoading} error={domainResources.error} loadingLabel="Loading SEO">
+                        {resources?.domain || '-'}
+                    </Loadable>
                 </TextInfo>
                 <TextInfo title="Title">
-                    {resources.title}
+                    <Loadable placeholder="skeletonText" isLoading={domainResources.isLoading} error={domainResources.error} loadingLabel="Loading SEO">
+                        {resources?.title || '-'}
+                    </Loadable>
                 </TextInfo>
                 <TextInfo title="Description">
-                    {resources.description}
+                    <Loadable placeholder="skeletonText" isLoading={domainResources.isLoading} error={domainResources.error} loadingLabel="Loading SEO">
+                        {resources?.description || '-'}
+                    </Loadable>
                 </TextInfo>
                 <TextInfo title="Favicon & Icons">
-                    <IconPreview favicon={resources.favicon} icons={resources.icons} />
+                    <Loadable isLoading={domainResources.isLoading} error={domainResources.error} loadingLabel="Loading SEO">
+                        {!!resources?.favicon ? (
+                            <IconPreview favicon={resources.favicon} icons={resources.icons} />
+                        ) : (
+                            <>-</>
+                        )}
+                    </Loadable>
                 </TextInfo>
                 <TextInfo title="Open Graph (og)">
-                    <OgPreview og={resources.og} />
+                    <Loadable isLoading={domainResources.isLoading} error={domainResources.error} loadingLabel="Loading SEO">
+                        <OgPreview og={resources?.og} />
+                    </Loadable>
                 </TextInfo>
             </Stack>
-            <Stack>
-                <PagePreview domain={resources.domain} />
-            </Stack>
-        </Row>
+            {resources?.domain && (
+                <PagePreview domain={resources?.domain} />
+            )}
+        </MuiStack>
     );
 }
 
@@ -224,18 +291,11 @@ async function quickLookup(domain: string | undefined): Promise<BrandResources |
 
 export default function LandingPageView() {
     const [domain] = useSearchParam('domain');
-    const quickLookupDomain = useCallback(() => quickLookup(domain), [domain]);
-    const domainResources = useLoadAndError(quickLookupDomain);
 
     return (
         <Stack style={{ overflowX: 'hidden', paddingBottom: 16 }}>
             <Container maxWidth="md">
-                <Loadable
-                    isLoading={domainResources.isLoading}
-                    error={domainResources.error}
-                    loadingLabel={'Loading brand'}>
-                    <BrandView resources={domainResources.item} />
-                </Loadable>
+                <BrandView domain={domain} />
             </Container>
         </Stack>
     );
