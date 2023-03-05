@@ -261,7 +261,7 @@ function BrandView({ domain }: { domain: string | undefined }) {
                 </TextInfo>
                 <TextInfo title="Favicon & Icons">
                     <Loadable isLoading={domainResources.isLoading} error={domainResources.error} loadingLabel="Loading SEO">
-                        {!!resources?.favicon ? (
+                        {resources?.favicon ? (
                             <IconPreview favicon={resources.favicon} icons={resources.icons} />
                         ) : (
                             <>-</>
