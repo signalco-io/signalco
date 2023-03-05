@@ -140,10 +140,12 @@ function PagePreview({ domain }: { domain: string }) {
                     <Card style={{
                         width: width,
                         height: containerHeight,
-                        overflowY: 'auto'
+                        overflowY: 'auto',
+                        boxSizing: 'content-box'
                     }}>
                         <CardCover style={{
-                            height: (width / (pageScreenshot.item?.w ?? 1)) * (pageScreenshot.item?.h ?? 0)
+                            height: (width / (pageScreenshot.item?.w ?? 1)) * (pageScreenshot.item?.h ?? 0),
+                            borderRadius: 0
                         }}>
                             {/* eslint-disable-next-line @next/next/no-img-element  */}
                             <img
@@ -152,8 +154,8 @@ function PagePreview({ domain }: { domain: string }) {
                                 width={pageScreenshot.item?.w}
                                 height={pageScreenshot.item?.h}
                                 style={{
-                                    objectFit: 'contain',
-                                    objectPosition: '0 0'
+                                    objectPosition: '0 0',
+                                    borderRadius: 0
                                 }} />
                         </CardCover>
                     </Card>

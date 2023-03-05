@@ -1,3 +1,4 @@
+import sharp from 'sharp';
 import { NextResponse } from 'next/server';
 import getPixels from 'get-pixels';
 import { extractColors } from 'extract-colors';
@@ -30,17 +31,19 @@ export async function GET(request: Request) {
 
     const query = `url=${domain}&full_page=true&width=1280&hide_cookie_banners=true`;
     const token = HmacSHA1(query, process.env.URLBOX_SECRET ?? '');
-    const response = await fetch(`https://api.urlbox.io/v1/${process.env.URLBOX_KEY}/${token}/png?${query}`);
+    const response = await fetch(`https://api.urlbox.io/v1/${process.env.URLBOX_KEY}/${token}/webp?${query}`);
     const data = Buffer.from(await response.arrayBuffer());
-    const dataUrlData = `data:image/png;base64,${data.toString('base64')}`;
+    const dataUrlDataWebp = `data:image/webp;base64,${data.toString('base64')}`;
 
     let colors: ScreenshotResponse['colors'] = [];
     try {
-        const pixels = await getPixelsAsync(dataUrlData);
+        const pngData = await sharp(data).png().toBuffer();
+        const dataUrlDataPng = `data:image/png;base64,${pngData.toString('base64')}`;
+        const pixels = await getPixelsAsync(dataUrlDataPng);
         colors = await extractColors({ data: pixels.data })
     } catch (e) {
         // TODO: Log error
     }
 
-    return NextResponse.json({ data: dataUrlData, colors });
+    return NextResponse.json({ data: dataUrlDataWebp, colors });
 }
