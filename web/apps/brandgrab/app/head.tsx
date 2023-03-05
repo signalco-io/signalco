@@ -7,7 +7,6 @@ export default async function Head() {
             <meta name="theme-color" content="black"></meta>
             <meta name="description" content="BrandGrab" />
             <title>BrandGrab</title>
-            <link rel="manifest" href="/manifest.webmanifest"></link>
             <link
                 rel="apple-touch-icon"
                 sizes="180x180"
