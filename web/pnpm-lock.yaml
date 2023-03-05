@@ -191,7 +191,7 @@ importers:
       '@signalco/ui': workspace:*
       '@signalco/ui-icons': workspace:*
       '@types/color': 3.0.3
-      '@types/jsdom': ^21.1.0
+      '@types/crypto-js': ^4.1.1
       '@types/node': 18.14.6
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
@@ -200,6 +200,7 @@ importers:
       cheerio: 1.0.0-rc.12
       classix: 2.1.22
       cross-env: 7.0.3
+      crypto-js: ^4.1.1
       eslint: 8.35.0
       next: 13.2.3
       next-secure-headers: 2.2.0
@@ -224,9 +225,9 @@ importers:
       '@signalco/js': link:../../packages/js
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
-      '@types/jsdom': 21.1.0
       cheerio: 1.0.0-rc.12
       classix: 2.1.22
+      crypto-js: 4.1.1
       next: 13.2.3_4pgn6omj4irpgog4tpnzary34q
       next-secure-headers: 2.2.0
       postcss: 8.4.21
@@ -245,6 +246,7 @@ importers:
       '@signalco/eslint-config-signalco': link:../../packages/eslint-config-signalco
       '@signalco/tsconfig': link:../../packages/tsconfig
       '@types/color': 3.0.3
+      '@types/crypto-js': 4.1.1
       '@types/node': 18.14.6
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
@@ -5443,6 +5445,10 @@ packages:
       '@types/node': 18.14.6
     dev: true
 
+  /@types/crypto-js/4.1.1:
+    resolution: {integrity: sha512-BG7fQKZ689HIoc5h+6D2Dgq1fABRa0RbBWKBd9SP/MVRVXROflpm5fhwyATX5duFmbStzyzyycPB8qUYKDH3NA==}
+    dev: true
+
   /@types/d3-array/3.0.3:
     resolution: {integrity: sha512-Reoy+pKnvsksN0lQUlcH6dOGjRZ/3WRwXR//m+/8lt1BXeI4xyaUZoqULNjyXXRuh0Mj4LNpkCvhUpQlY3X5xQ==}
 
@@ -5729,14 +5735,6 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jsdom/21.1.0:
-    resolution: {integrity: sha512-leWreJOdnuIxq9Y70tBVm/bvTuh31DSlF/r4l7Cfi4uhVQqLHD0Q4v301GMisEMwwbMgF7ZKxuZ+Jbd4NcdmRw==}
-    dependencies:
-      '@types/node': 18.14.6
-      '@types/tough-cookie': 4.0.2
-      parse5: 7.1.2
-    dev: false
-
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
 
@@ -5906,10 +5904,6 @@ packages:
   /@types/suncalc/1.9.0:
     resolution: {integrity: sha512-+c2wOhgyG5ZTtxfC8XG5SGY36HNlXYaPqv/mqBbjXn3iKWx0Lj375AShoKbjF1MCGoXFhSl3jLlmxTksjaGyZQ==}
     dev: true
-
-  /@types/tough-cookie/4.0.2:
-    resolution: {integrity: sha512-Q5vtl1W5ue16D+nIaW8JWebSSraJVlK+EthKn7e7UcD4KWsaSJ8BqGPXNaPghgtcn/fhvrN17Tv8ksUsQpiplw==}
-    dev: false
 
   /@types/trusted-types/2.0.2:
     resolution: {integrity: sha512-F5DIZ36YVLE+PN+Zwws4kJogq47hNgX3Nx6WyDJ3kcplxyke3XIzB8uK5n/Lpm1HBsbGzd6nmGehL8cPekP+Tg==}
@@ -7286,6 +7280,10 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+
+  /crypto-js/4.1.1:
+    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
+    dev: false
 
   /crypto-random-string/2.0.0:
     resolution: {integrity: sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==}

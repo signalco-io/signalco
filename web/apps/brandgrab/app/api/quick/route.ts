@@ -1,12 +1,12 @@
 import {load} from 'cheerio';
 import { isAbsoluteUrl } from '@signalco/js';
+import { NextResponse } from 'next/server'
 
 export type BrandResources = {
     domain: string;
     description: string;
     title: string;
     themeColor: string;
-    appleTouchIcon: string;
     msTileImage: string;
     msTileColor: string;
     favicon: {
@@ -26,6 +26,8 @@ export type BrandResources = {
         icon256Base64: string;
         icon512: string;
         icon512Base64: string;
+        appleTouchIcon: string;
+        appleTouchIconBase64: string;
     };
     og: {
         image: string;
@@ -56,7 +58,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const domain = searchParams.get('domain');
     if (!domain) {
-        return Response.json({ error: 'No domain provided' }, { status: 400 });
+        return NextResponse.json({ error: 'No domain provided' }, { status: 400 });
     }
 
     const pageHtml = await fetch(`https://${domain}`);
@@ -128,12 +130,16 @@ export async function GET(request: Request) {
         icon512Base64 = await fetchDataUrl(icon512, domain) ?? '';
     }
 
-    return Response.json({
+    let appleTouchIconBase64 = '';
+    if (appleTouchIcon.length > 0) {
+        appleTouchIconBase64 = await fetchDataUrl(appleTouchIcon, domain) ?? '';
+    }
+
+    return NextResponse.json({
         domain,
         title,
         description,
         themeColor,
-        appleTouchIcon,
         msTileImage,
         msTileColor,
         favicon: {
@@ -152,7 +158,9 @@ export async function GET(request: Request) {
             icon256,
             icon256Base64,
             icon512,
-            icon512Base64
+            icon512Base64,
+            appleTouchIcon,
+            appleTouchIconBase64,
         },
         og: {
             image: ogImage,

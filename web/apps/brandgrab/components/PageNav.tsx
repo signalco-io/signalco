@@ -21,7 +21,7 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
             zIndex: 101
         }}>
             <Container maxWidth={fullWidth ? false : 'lg'}>
-                <header style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr' }}>
+                <header style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center' }}>
                     <div>
                         <Link href="/" aria-label="BrandGrab.io">
                             BrandGrab.io
