@@ -4,8 +4,9 @@ import React, { useCallback } from 'react';
 import NextImage from 'next/image';
 import Stack from '@signalco/ui/dist/Stack';
 import { Card, CardContent, CardCover, ChildrenProps, Container, Loadable, Row, Typography } from '@signalco/ui';
+import { orderBy } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
-import PageCenterHeader from '../pages/PageCenterHeader';
+import { ScreenshotResponse } from '../../app/api/screenshot/route';
 import { BrandResources } from '../../app/api/quick/route';
 
 function OgPreview({ og }: { og: BrandResources['og'] }) {
@@ -105,12 +106,13 @@ function TextInfo({ title, children }: { title: string } & ChildrenProps) {
 
 async function getPageScreenshot(domain: string) {
     const res = await fetch(`/api/screenshot?domain=${encodeURIComponent(domain)}`);
-    const data = await res.json() as { data: string };
+    const data = await res.json() as ScreenshotResponse;
     const dimensions = await getImageDimensions(data.data);
     return {
         data: data.data,
         w: dimensions.w,
-        h: dimensions.h
+        h: dimensions.h,
+        colors: data.colors
     }
 }
 
@@ -133,28 +135,50 @@ function PagePreview({ domain }: { domain: string }) {
 
     return (
         <Loadable isLoading={pageScreenshot.isLoading} error={pageScreenshot.error} loadingLabel="Loading preview">
-            <TextInfo title="Page preview">
-                <Card style={{
-                    width: width,
-                    height: containerHeight,
-                    overflowY: 'auto'
-                }}>
-                    <CardCover style={{
-                        height: (width / (pageScreenshot.item?.w ?? 1)) * (pageScreenshot.item?.h ?? 0)
+            <Stack spacing={3}>
+                <TextInfo title="Page preview">
+                    <Card style={{
+                        width: width,
+                        height: containerHeight,
+                        overflowY: 'auto'
                     }}>
-                        {/* eslint-disable-next-line @next/next/no-img-element  */}
-                        <img
-                            src={pageScreenshot.item?.data || ''}
-                            alt="Page preview"
-                            width={pageScreenshot.item?.w}
-                            height={pageScreenshot.item?.h}
-                            style={{
-                                objectFit: 'contain',
-                                objectPosition: '0 0'
-                            }} />
-                    </CardCover>
-                </Card>
-            </TextInfo>
+                        <CardCover style={{
+                            height: (width / (pageScreenshot.item?.w ?? 1)) * (pageScreenshot.item?.h ?? 0)
+                        }}>
+                            {/* eslint-disable-next-line @next/next/no-img-element  */}
+                            <img
+                                src={pageScreenshot.item?.data || ''}
+                                alt="Page preview"
+                                width={pageScreenshot.item?.w}
+                                height={pageScreenshot.item?.h}
+                                style={{
+                                    objectFit: 'contain',
+                                    objectPosition: '0 0'
+                                }} />
+                        </CardCover>
+                    </Card>
+                </TextInfo>
+                <TextInfo title="Colors">
+                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                        {orderBy(pageScreenshot.item?.colors ?? [], (a, b) => b.area - a.area).map((color) => (
+                            <div key={color.hex} style={{
+                                width: 64,
+                                height: 64,
+                                borderRadius: 4,
+                                backgroundColor: color.hex,
+                                fontSize: '.8em',
+                                padding: 4,
+                                alignItems: 'end',
+                                display: 'flex',
+                                color: color.lightness < .5 ? 'rgba(256,256,256, .8)' : 'rgba(0,0,0, .8)',
+                                border: '1px solid var(--joy-palette-divider)'
+                            }}>
+                                {color.hex}
+                            </div>
+                        ))}
+                    </div>
+                </TextInfo>
+            </Stack>
         </Loadable>
     )
 }
@@ -163,7 +187,7 @@ function BrandView({ resources }: { resources: BrandResources | undefined }) {
     if (!resources) return null;
 
     return (
-        <Row alignItems="start">
+        <Row alignItems="start" spacing={4}>
             <Stack spacing={3}>
                 <TextInfo title="Domain">
                     {resources.domain}
@@ -203,7 +227,6 @@ export default function LandingPageView() {
 
     return (
         <Stack style={{ overflowX: 'hidden', paddingBottom: 16 }}>
-            <PageCenterHeader header={'BrandGrab'} />
             <Container maxWidth="md">
                 <Loadable
                     isLoading={domainResources.isLoading}
