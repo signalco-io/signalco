@@ -191,21 +191,21 @@ importers:
       '@signalco/ui': workspace:*
       '@signalco/ui-icons': workspace:*
       '@types/color': 3.0.3
-      '@types/crypto-js': ^4.1.1
-      '@types/get-pixels': ^3.3.2
+      '@types/crypto-js': 4.1.1
+      '@types/get-pixels': 3.3.2
       '@types/node': 18.14.6
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
       '@types/react-motion': 0.0.33
-      '@types/sharp': ^0.31.1
+      '@types/sharp': 0.31.1
       babel-loader: 9.1.2
       cheerio: 1.0.0-rc.12
       classix: 2.1.22
       cross-env: 7.0.3
-      crypto-js: ^4.1.1
+      crypto-js: 4.1.1
       eslint: 8.35.0
-      extract-colors: ^2.0.5
-      get-pixels: ^3.3.3
+      extract-colors: 2.0.5
+      get-pixels: 3.3.3
       next: 13.2.3
       next-secure-headers: 2.2.0
       next-sitemap: 4.0.2
