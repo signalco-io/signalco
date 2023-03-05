@@ -10,7 +10,7 @@ import { BrandResources } from '../../app/api/quick/route';
 
 function OgPreview({ og }: { og: BrandResources['og'] }) {
     if (!og.title && !og.image && !og.url)
-        return <>'-'</>;
+        return <>-</>;
 
     return (
         <Card style={{ width: 400, minHeight: 209 }}>

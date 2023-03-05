@@ -1,6 +1,6 @@
+import { NextResponse } from 'next/server';
 import {load} from 'cheerio';
 import { isAbsoluteUrl } from '@signalco/js';
-import { NextResponse } from 'next/server'
 
 export type BrandResources = {
     domain: string;
