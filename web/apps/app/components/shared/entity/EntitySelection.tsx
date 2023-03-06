@@ -6,7 +6,7 @@ import {
     Stack,
     TextField, Box
 } from '@signalco/ui';
-import useAllEntities from '../../../src/hooks/signalco/useAllEntities';
+import useAllEntities from '../../../src/hooks/signalco/entity/useAllEntities';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 

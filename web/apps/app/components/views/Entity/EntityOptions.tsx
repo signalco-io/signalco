@@ -6,8 +6,8 @@ import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import { KnownPages } from '../../../src/knownPages';
 import useLocale from '../../../src/hooks/useLocale';
-import useEntity from '../../../src/hooks/signalco/useEntity';
-import { entityDeleteAsync } from '../../../src/entity/EntityRepository';
+import useEntity from '../../../src/hooks/signalco/entity/useEntity';
+import useDeleteEntity from '../../../src/hooks/signalco/entity/useDeleteEntity';
 
 export interface EntityOptionsProps {
     id: string | undefined;
@@ -22,6 +22,7 @@ export default function EntityOptions(props: EntityOptionsProps) {
     const router = useRouter();
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
     const { data: entity } = useEntity(id);
+    const deleteEntity = useDeleteEntity();
 
     const handleDelete = () => {
         setIsDeleteOpen(true);
@@ -36,7 +37,7 @@ export default function EntityOptions(props: EntityOptionsProps) {
             if (typeof id === 'undefined')
                 throw new Error('Entity identifier not present.');
 
-            await entityDeleteAsync(id);
+            await deleteEntity.mutateAsync(id);
             router.push(KnownPages.Entities);
         } catch (err) {
             console.error('Failed to delete entity', err);

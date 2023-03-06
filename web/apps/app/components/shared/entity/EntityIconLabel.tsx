@@ -3,7 +3,7 @@ import {
     Loadable, Row, Stack,
     Typography
 } from '@signalco/ui';
-import useEntity from '../../../src/hooks/signalco/useEntity';
+import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import EntityIcon from './EntityIcon';
 
 type EntityIconLabelProps = {
