@@ -4,7 +4,7 @@ import {
     ListItem,
     ListItemButton, Box
 } from '@signalco/ui';
-import useEntity from '../../../src/hooks/signalco/useEntity';
+import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import { ContactPointerRequiredEntity } from './DisplayEntityTarget';
 
 export type EntityContactSelectionProps = {

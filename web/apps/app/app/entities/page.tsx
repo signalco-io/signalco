@@ -7,7 +7,7 @@ import { Stack, Loadable, Row, Avatar, Button, IconButton, Typography, Box, Grid
 import { KnownPages } from '../../src/knownPages';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale from '../../src/hooks/useLocale';
-import useAllEntities from '../../src/hooks/signalco/useAllEntities';
+import useAllEntities from '../../src/hooks/signalco/entity/useAllEntities';
 import IEntityDetails from '../../src/entity/IEntityDetails';
 import { entityUpsertAsync } from '../../src/entity/EntityRepository';
 import SearchInput from '../../components/shared/inputs/SearchInput';
