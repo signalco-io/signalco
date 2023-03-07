@@ -5905,6 +5905,10 @@ packages:
     resolution: {integrity: sha512-TrpoNiaPvBH5h8rQQenMtVsJXtGsVBRJrcp2Ik6oEt99jHfGvDLh20VTTq3ixTbjYujukYz1IlY4N8a8yfY0jA==}
     dev: true
 
+  /@types/node/18.14.5:
+    resolution: {integrity: sha512-CRT4tMK/DHYhw1fcCEBwME9CSaZNclxfzVMe7GsO6ULSwsttbj70wSiX6rZdIjGblu93sTJxLdhNIT85KKI7Qw==}
+    dev: true
+
   /@types/node/18.14.6:
     resolution: {integrity: sha512-93+VvleD3mXwlLI/xASjw0FzKcwzl3OdTCzm1LaRfqgS21gfFtK3zDXM5Op9TeeMsJVOaJ2VRDpT9q4Y3d0AvA==}
 
@@ -10825,6 +10829,20 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: false
 
+  /next-sitemap/4.0.1_xeg3tdra7hobsncwzvo3da7vxi:
+    resolution: {integrity: sha512-dY6vKE/uayNYSfhXA64U9NZYSJtFzK01oBouY+XqgQieksKBG9BWNmq8yGSJUermyux4wCnNa9gLHwSk38emhA==}
+    engines: {node: '>=14.18'}
+    hasBin: true
+    peerDependencies:
+      '@next/env': '*'
+      next: '*'
+    dependencies:
+      '@corex/deepmerge': 4.0.37
+      '@next/env': 13.2.3
+      minimist: 1.2.8
+      next: 13.2.3_4pgn6omj4irpgog4tpnzary34q
+    dev: true
+
   /next-sitemap/4.0.3_xeg3tdra7hobsncwzvo3da7vxi:
     resolution: {integrity: sha512-3sDnYY0NjtPhonxzfqmKhyX4lAY4J5ayqSV0JA8726DphjSVJ9ei6nvptGXDiMuvQ0doIznrPSpxI0AyZ23shQ==}
     engines: {node: '>=14.18'}
@@ -12975,6 +12993,14 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
+
+  /rimraf/4.2.0:
+    resolution: {integrity: sha512-tPt+gLORNVqRCk0NwuJ5SlMEcOGvt4CCU8sUPqgCFtCbnoNCTd9Q6vq7JlBbxQlACiH14OR28y7piA2Bak9Sxw==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dependencies:
+      glob: 9.2.1
+    dev: true
 
   /rimraf/4.3.1:
     resolution: {integrity: sha512-GfHJHBzFQra23IxDzIdBqhOWfbtdgS1/dCHrDy+yvhpoJY5TdwdT28oWaHWfRpKFDLd3GZnGTx6Mlt4+anbsxQ==}
