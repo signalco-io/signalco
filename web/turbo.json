@@ -18,7 +18,9 @@
                 "NODE_ENV",
                 "ANALYZE",
                 "SITE_URL",
-                "GITHUB_PAT_TOKEN"
+                "GITHUB_PAT_TOKEN",
+                "URLBOX_KEY",
+                "URLBOX_SECRET"
             ]
         },
         "lint": {

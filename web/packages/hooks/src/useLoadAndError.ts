@@ -18,6 +18,8 @@ export default function useLoadAndError<T>(load?: (Promise<T> | undefined) | (()
                     return;
                 }
 
+                setState({ isLoading: true });
+
                 loadPromiseRef.current = typeof load === 'function' ? load() : load;
                 const item = await loadPromiseRef.current;
 

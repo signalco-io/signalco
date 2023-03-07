@@ -7,7 +7,7 @@ import { DefaultColumns, DefaultLabel } from '../../../src/widgets/WidgetConfigu
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useEntity from '../../../src/hooks/signalco/useEntity';
+import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import { StateAction, executeStateActionsAsync } from './WidgetState';

@@ -111,6 +111,8 @@ export {
     Divider, 
     Card,
     CardOverflow,
+    CardCover,
+    CardContent,
     Checkbox as JoyCheckbox, // TODO: Remove
     CircularProgress,
     FormControl,

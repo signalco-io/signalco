@@ -44,26 +44,7 @@ const nextConfig = {
                         ],
                         formAction: '\'self\'',
                         connectSrc: ['\'self\'',
-                            'https://*.signalco.io', 'https://*.signalco.dev',
-                            'https://*.service.signalr.net', 'wss://*.service.signalr.net',
-
-                            // Station status checking
-                            'https://api.github.com',
-
-                            // Auth
-                            'https://dfnoise.eu.auth0.com',
-
-                            // User profile (picture, ...)
-                            'https://lh3.googleusercontent.com',
-
-                            // hcaptcha
-                            'https://hcaptcha.com', 'https://*.hcaptcha.com',
-
-                            // MapBox
-                            'https://api.mapbox.com',
-
-                            // Finace - Stock widget
-                            'https://api.polygon.io'
+                            'https://*.signalco.io', 'https://*.signalco.dev'
                         ],
                         baseURI: ['https://www.brandgrab.io'],
                         'frame-ancestors': '\'none\''

@@ -1,23 +1,24 @@
+import { useQuery } from '@tanstack/react-query';
 import type IContactPointer from '../../contacts/IContactPointer';
-import useEntity from './useEntity';
+import useEntity from './entity/useEntity';
 
 export default function useContact(pointer: Partial<IContactPointer> | undefined) {
     const entity = useEntity(pointer?.entityId);
-    const contact = entity.data?.contacts?.find(c =>
-        c.channelName === pointer?.channelName &&
-        c.contactName === pointer?.contactName);
 
-    if (!entity.isLoading &&
-        contact == null)
-        return {
-            isError: true,
-            error: `Unknown contact ${pointer?.entityId} | ${pointer?.channelName} | ${pointer?.contactName}`
-        }
+    return useQuery(['contact', pointer?.entityId, pointer?.channelName, pointer?.contactName], () => {
+        if (!entity || !pointer?.channelName || !pointer?.contactName)
+            throw new Error('EntityId, ChannelName and ContactName are required');
 
-    return {
-        isLoading: entity.isLoading,
-        isError: entity.isError,
-        error: entity.error,
-        data: contact
-    };
+        const contact = entity.data?.contacts?.find(c =>
+            c.channelName === pointer?.channelName &&
+            c.contactName === pointer?.contactName);
+
+        if (!contact)
+            throw new Error('Contact not found');
+
+        return contact;
+    }, {
+        enabled: Boolean(pointer) && Boolean(entity.data),
+        staleTime: 60*1000
+    });
 }

@@ -5,7 +5,7 @@ import { Bug, Link as LinkIcon } from '@signalco/ui-icons';
 import { Container, Loadable, NoDataPlaceholder, Row, Stack, List, ListItemButton, Typography, Box, Link } from '@signalco/ui';
 import { channelsData } from '@signalco/data';
 import { KnownPages } from '../../../src/knownPages';
-import useAllEntities from '../../../src/hooks/signalco/useAllEntities';
+import useAllEntities from '../../../src/hooks/signalco/entity/useAllEntities';
 import ChannelPartialSlack from '../../../components/channels/partials/ChannelPartialSlack';
 import ChannelLogo from '../../../components/channels/ChannelLogo';
 
