@@ -6,8 +6,7 @@ export default async function Head() {
             <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
             <meta name="theme-color" content="black"></meta>
             <meta name="description" content="Automate your life" />
-            <title>Signalco</title>
-            <link rel="manifest" href="/manifest.webmanifest"></link>
+            <title>Signalco | Blog</title>
             <link
                 rel="apple-touch-icon"
                 sizes="180x180"

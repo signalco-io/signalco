@@ -8,11 +8,11 @@
         "node": "18.x"
     },
     "scripts": {
-        "dev": "next",
+        "dev": "next -p 3002",
         "build": "next build",
         "build:analyze": "cross-env ANALYZE=true pnpm build",
         "postbuild": "next-sitemap --config next-sitemap.config.js",
-        "start": "next start",
+        "start": "next start -p 3002",
         "lint": "next lint",
         "test": "playwright test"
     },
