@@ -193,7 +193,7 @@ function PagePreview({ domain }: { domain: string }) {
                 }}>
                     <Loadable isLoading={pageScreenshot.isLoading} error={pageScreenshot.error} loadingLabel="Loading preview">
                         <CardCover style={{
-                            height: (width / (pageScreenshot.item?.w ?? 1)) * (pageScreenshot.item?.h ?? 0),
+                            height: ((width + 38) / (pageScreenshot.item?.w ?? 1)) * (pageScreenshot.item?.h ?? 0),
                             borderRadius: 0
                         }}>
                             {/* eslint-disable-next-line @next/next/no-img-element  */}

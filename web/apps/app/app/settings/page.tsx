@@ -13,7 +13,7 @@ import { now } from '../../src/services/DateTimeProvider';
 import { ApiDevelopmentUrl, ApiProductionUrl, setSignalcoApiEndpoint, signalcoApiEndpoint } from '../../src/services/AppSettingsProvider';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale, { availableLocales } from '../../src/hooks/useLocale';
-import useAllEntities from '../../src/hooks/signalco/useAllEntities';
+import useAllEntities from '../../src/hooks/signalco/entity/useAllEntities';
 import SearchInput from '../../components/shared/inputs/SearchInput';
 import AppThemePicker from '../../components/settings/AppThemePicker';
 import LocationMapPicker from '../../components/forms/LocationMapPicker/LocationMapPicker';

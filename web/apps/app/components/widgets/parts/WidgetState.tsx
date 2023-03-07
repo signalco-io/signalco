@@ -8,7 +8,7 @@ import { showNotification } from '../../../src/notifications/PageNotificationSer
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useAudioOn from '../../../src/hooks/sounds/useAudioOn';
 import useAudioOff from '../../../src/hooks/sounds/useAudioOff';
-import useEntity from '../../../src/hooks/signalco/useEntity';
+import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import useContacts from '../../../src/hooks/signalco/useContacts';
 import { entityAsync } from '../../../src/entity/EntityRepository';
 import type IContactPointer from '../../../src/contacts/IContactPointer';
