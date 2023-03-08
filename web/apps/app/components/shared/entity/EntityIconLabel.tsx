@@ -22,11 +22,13 @@ export default function EntityIconLabel({ entityId, description }: EntityIconLab
         <Row spacing={2} style={{ minWidth: 0 }}>
             {entity && <Icon />}
             <Stack alignItems="start" style={{ minWidth: 0 }}>
-                <Typography noWrap maxWidth="100%">
-                    <Loadable isLoading={isLoading} loadingLabel="Loading entity" error={error}>
-                        {entityName}
-                    </Loadable>
-                </Typography>
+                <div style={{ maxWidth: '100%' }}>
+                    <Typography noWrap>
+                        <Loadable isLoading={isLoading} loadingLabel="Loading entity" error={error}>
+                            {entityName}
+                        </Loadable>
+                    </Typography>
+                </div>
                 {!isLoading && (
                     <Typography level="body2">
                         {description}

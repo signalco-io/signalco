@@ -40,7 +40,7 @@ function RoadmapItem({ item }: { item: RoadmapItem }) {
             {item.href ? (
                 <NavigatingButton hideArrow href={item.href}>{item.title}</NavigatingButton>
             ) : (
-                <Typography level="body2" noWrap textOverflow="ellipsis">{item.title}</Typography>
+                <Typography level="body2" noWrap>{item.title}</Typography>
             )}
         </div>
     );

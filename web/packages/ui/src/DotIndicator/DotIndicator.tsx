@@ -1,6 +1,7 @@
-/** @alpha */
+import { ColorVariants } from "../sharedTypes";
+
 export interface DotIndicatorProps {
-    color: 'success' | 'warning' | 'danger' | 'neutral';
+    color: ColorVariants;
     content?: React.ReactElement;
     size?: number;
 }

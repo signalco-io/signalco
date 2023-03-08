@@ -1,21 +1,23 @@
 {
-    "$schema": "https://json.schemastore.org/tsconfig",
-    "extends": "@signalco/tsconfig/web.json",
-    "compilerOptions": {
-        "outDir": "dist",
-        "plugins": [
-            {
-                "name": "next"
-            }
-        ]
-    },
-    "include": [
-        "src",
-        "app",
-        "components",
-        "pages",
-        "next-env.d.ts",
-        "@types",
-        ".next/types/**/*.ts"
-, "../../packages/hooks/src/useInterval.ts"    ]
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@signalco/tsconfig/web.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "src",
+    "app",
+    "components",
+    "pages",
+    "next-env.d.ts",
+    "@types",
+    ".next/types/**/*.ts",
+    "../../packages/hooks/src/useInterval.ts",
+    "C:\\Users\\aleks\\Documents\\GitHub\\signalco\\web\\apps\\app\\.next/types/**/*.ts"
+  ]
 }

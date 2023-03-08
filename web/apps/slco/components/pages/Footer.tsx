@@ -36,7 +36,7 @@ export default function Footer() {
                         <Grid container direction="row" justifyContent="space-between" spacing={4}>
                             {footerLinks.filter(i => isDeveloper ? true : !i.developerOnly).map(section => (
                                 <Grid key={section.header} xs={12} sm={6} md={3} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-                                    <Typography level="h6" component="h2" sx={{ pb: 2 }}>{section.header}</Typography>
+                                    <Typography level="h6" component="h2">{section.header}</Typography>
                                     <Stack spacing={1}>
                                         {section.links.filter(l => isDeveloper ? true : !l.developerOnly).map(link => (
                                             <Link key={link.name} href={link.href}>{link.name}</Link>
@@ -47,9 +47,7 @@ export default function Footer() {
                         </Grid>
                         <MuiStack alignItems={{ xs: 'center', sm: 'stretch' }}>
                             <MuiStack alignItems="center" justifyContent="space-between" direction={{ xs: 'column-reverse', sm: 'row' }}>
-                                <Typography
-                                    textAlign={{ xs: 'center', sm: 'left' }}
-                                    level="body3">Copyright © {now().getFullYear()} signalco. All rights reserved.</Typography>
+                                <Typography level="body3">Copyright © {now().getFullYear()} signalco. All rights reserved.</Typography>
                                 <MuiStack direction="row" spacing={1} alignItems={{ xs: 'center', sm: 'start' }}>
                                     <IconButton
                                         aria-label="Twitter link"
