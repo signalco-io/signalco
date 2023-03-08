@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Stack, Container, Grid, IconButton, Typography, Box, Link, MuiStack } from '@signalco/ui';
+import { Stack, Container, Grid, IconButton, Typography, Box, Link, Row } from '@signalco/ui';
 import SignalcoLogotype from '../icons/SignalcoLogotype';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { now } from '../../src/services/DateTimeProvider';
@@ -75,9 +75,11 @@ export default function Footer() {
                         </Grid>
                         <Stack>
                             <SignalcoLogotype width={220} />
-                            <MuiStack alignItems="center" justifyContent="space-between" direction={{ xs: 'column-reverse', sm: 'row' }}>
+                            <Row
+                                alignItems="center"
+                                justifyContent="space-between">
                                 <Typography level="body3">Copyright © {now().getFullYear()} signalco. All rights reserved.</Typography>
-                                <MuiStack direction="row" spacing={1} alignItems={{ xs: 'center', sm: 'start' }}>
+                                <Row spacing={1}>
                                     <IconButton
                                         aria-label="Twitter link"
                                         href="https://twitter.com/signalco_io">
@@ -93,8 +95,8 @@ export default function Footer() {
                                         href="https://github.com/signalco-io/signalco">
                                         <Typography>gh</Typography>
                                     </IconButton>
-                                </MuiStack>
-                            </MuiStack>
+                                </Row>
+                            </Row>
                         </Stack>
                     </Stack>
                 </footer>
