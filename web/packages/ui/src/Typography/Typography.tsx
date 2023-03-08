@@ -27,6 +27,7 @@ export default function Typography({ children, component, level, opacity, textAl
         fontSize: level?.startsWith('h') 
             ? `var(--joy-fontSize-xl${7 - (parseInt(level.substring(1)) || 0)})` 
             : `var(--joy-fontSize-${level === 'body2' ? 'sm' : (level === 'body3' ? 'xs' : 'md')})`,
+        margin: 0
     };
     if (extraThin) styles['fontWeight'] = 100;
     if (thin) styles['fontWeight'] = 300;
