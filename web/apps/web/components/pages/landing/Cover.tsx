@@ -133,10 +133,9 @@ export default function Cover() {
                     </Box>
                 </div>
                 <Typography
-                    component="h1"
-                    fontFamily="Raleway"
-                    fontWeight={200}
-                    fontSize={{ xs: '1.3rem', sm: '1.7rem', lg: '2rem' }}>
+                    level="h1"
+                    thin
+                    fontSize="1.4rem">
                     Automate your life
                 </Typography>
             </Stack>

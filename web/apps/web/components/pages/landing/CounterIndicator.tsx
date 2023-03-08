@@ -20,7 +20,7 @@ function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
                     width: '42px',
                     height: '42px',
                     borderRadius: '21px',
-                    color: 'background.default',
+                    color: 'var(--joy-palette-background-body)',
                     backgroundColor: 'text.primary',
                     position: 'relative',
                     userSelect: 'none',
@@ -46,7 +46,7 @@ function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
                         top: '42px',
                     } : undefined
                 }}>
-                    <Typography textColor="background.body" textAlign="center" fontSize={23}>{props.count}</Typography>
+                    <Typography textAlign="center" fontSize={23}>{props.count}</Typography>
                 </Box>
             </div>
         </GentleSlide>

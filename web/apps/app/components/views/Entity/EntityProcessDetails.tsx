@@ -184,7 +184,7 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                                             <Pause />
                                             <Box sx={{ flexGrow: 1 }}>
                                                 <Row spacing={1} justifyContent="space-between">
-                                                    <Typography fontWeight="500">Wait for</Typography>
+                                                    <Typography semiBold>Wait for</Typography>
                                                     <Typography>{conduct.notBeforeConduct}</Typography>
                                                 </Row>
                                             </Box>
@@ -197,7 +197,7 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                                             <Timer />
                                             <Box sx={{ flexGrow: 1 }}>
                                                 <Row spacing={1} justifyContent="space-between">
-                                                    <Typography fontWeight="500">Delay</Typography>
+                                                    <Typography semiBold>Delay</Typography>
                                                     <Typography>{`${conduct.delayBefore / 1000}s`}</Typography>
                                                 </Row>
                                             </Box>
@@ -220,7 +220,7 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                                             <Timer />
                                             <Box sx={{ flexGrow: 1 }}>
                                                 <Row spacing={1} justifyContent="space-between">
-                                                    <Typography fontWeight="500">Delay after</Typography>
+                                                    <Typography semiBold>Delay after</Typography>
                                                     <Typography>{`${conduct.delayAfter / 1000}s`}</Typography>
                                                 </Row>
                                             </Box>

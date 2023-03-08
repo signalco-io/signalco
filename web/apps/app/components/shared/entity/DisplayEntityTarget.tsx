@@ -50,7 +50,7 @@ function DisplayEntityTarget({ target, selectContact, selectValue, valueSerializ
                             <Row spacing={1} alignItems="end">
                                 <Typography level="body2">{camelToSentenceCase(target.contactName) ?? 'None'}</Typography>
                                 {selectValue && (
-                                    <Typography fontWeight="bold">{valueSerialized ?? '-'}</Typography>
+                                    <Typography bold>{valueSerialized ?? '-'}</Typography>
                                 )}
                             </Row>
                         )}
