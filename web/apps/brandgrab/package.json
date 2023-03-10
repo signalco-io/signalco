@@ -18,7 +18,7 @@
     },
     "dependencies": {
         "@hcaptcha/react-hcaptcha": "1.4.4",
-        "@next/env": "13.2.3",
+        "@next/env": "13.2.4",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
         "@signalco/ui": "workspace:*",
@@ -28,7 +28,7 @@
         "crypto-js": "4.1.1",
         "extract-colors": "2.0.5",
         "get-pixels": "3.3.3",
-        "next": "13.2.3",
+        "next": "13.2.4",
         "next-secure-headers": "2.2.0",
         "postcss": "8.4.21",
         "react": "18.2.0",
@@ -40,7 +40,7 @@
     "devDependencies": {
         "@axe-core/playwright": "4.6.0",
         "@babel/core": "7.21.0",
-        "@next/bundle-analyzer": "13.2.3",
+        "@next/bundle-analyzer": "13.2.4",
         "@playwright/test": "1.31.2",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
