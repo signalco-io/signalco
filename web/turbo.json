@@ -11,6 +11,7 @@
                 "storybook-static/**"
             ],
             "env": [
+                "PORT",
                 "NEXT_PUBLIC_HCAPTCHA_SITE_KEY",
                 "NEXT_PUBLIC_APP_ENV",
                 "NEXT_PUBLIC_SLACK_CLIENTID",

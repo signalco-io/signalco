@@ -100,7 +100,9 @@ function WidgetChecklist(props: WidgetSharedProps<ConfigProps>) {
 
     return (
         <Stack style={{ height: '100%', paddingTop: 16, paddingBottom: 16 }} spacing={2}>
-            <Typography level="h4" sx={{ px: 2 }}>{label}</Typography>
+            <div style={{ paddingLeft: 8, paddingRight: 8 }}>
+                <Typography level="h4">{label}</Typography>
+            </div>
             <Box sx={{ flexGrow: 1, overflow: 'auto', overflowX: 'hidden' }}>
                 <Stack style={{ height: '100%', paddingLeft: 2 * 8, paddingRight: 3 * 8 }}>
                     {items.length

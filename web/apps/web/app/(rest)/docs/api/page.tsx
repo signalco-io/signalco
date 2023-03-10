@@ -68,7 +68,7 @@ function NonArraySchema(props: { name: string, schema: OpenAPIV3.NonArraySchemaO
     );
 }
 function ArraySchema(props: { name: string, schema: OpenAPIV3.ArraySchemaObject }) {
-    return <Typography key={props.name} color="danger" fontWeight="bold">{'Not supported property type "array"'}</Typography>
+    return <Typography key={props.name} color="danger" bold>{'Not supported property type "array"'}</Typography>
 }
 
 function Schema(props: { name: string, schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | undefined }) {
@@ -109,7 +109,7 @@ function ApiOperation(props: ApiOperationProps) {
                     <Tooltip title={deprecated ? 'Deprecated' : undefined}>
                         <Typography
                             level="h6"
-                            sx={{ textDecoration: deprecated ? 'line-through' : undefined }}>
+                            strikeThrough={deprecated}>
                             {path}
                         </Typography>
                     </Tooltip>
@@ -136,7 +136,7 @@ function ApiOperation(props: ApiOperationProps) {
                                 <Box sx={{ p: 2 }}>
                                     <Stack>
                                         <Row spacing={1} justifyContent="space-between">
-                                            <Typography textTransform="uppercase" fontWeight={400}>{parameter.name}</Typography>
+                                            <Typography textTransform="uppercase">{parameter.name}</Typography>
                                             <Row spacing={1}>
                                                 <Typography level="body2">in</Typography>
                                                 <Typography level="body2" textTransform="uppercase">{parameter.in}</Typography>
@@ -195,7 +195,9 @@ function ApiOperation(props: ApiOperationProps) {
 function ResponseStatusCode(props: { statusCode: number }) {
     return (
         <Badge color={props.statusCode < 300 ? 'success' : (props.statusCode < 500 ? 'warning' : 'danger')}>
-            <Typography sx={{ pr: 1 }}>{props.statusCode}</Typography>
+            <div style={{ paddingRight: 4 }}>
+                <Typography>{props.statusCode}</Typography>
+            </div>
         </Badge>
     );
 }
@@ -212,7 +214,7 @@ function Nav() {
     const tagName = searchParams.get('tag');
     const pathName = searchParams.get('path');
     const operationName = searchParams.get('op') as HttpOperation | undefined;
- 
+
     if (!api) throw 'API undefined';
     const { info } = api;
 
@@ -361,9 +363,9 @@ function SecurityInput(props: { security: OpenAPIV3.SecurityRequirementObject })
                         </Stack>
                     );
                 } else if (source) {
-                    return <Typography key={source.type} color="danger" fontWeight="bold" textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
+                    return <Typography key={source.type} color="danger" bold textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
-                    return <Typography key="unknown" color="danger" fontWeight="bold" textTransform="uppercase">Security not defined</Typography>
+                    return <Typography key="unknown" color="danger" bold textTransform="uppercase">Security not defined</Typography>
                 }
             })}
         </>
@@ -380,9 +382,9 @@ function SecurityBadge(props: { security: OpenAPIV3.SecurityRequirementObject })
                     const httpSource = source as OpenAPIV3.HttpSecurityScheme;
                     return <Chip variant="outlined" startDecorator={<Security fontSize="small" />} key={httpSource.scheme}>{camelToSentenceCase(httpSource.scheme)}</Chip>;
                 } else if (source) {
-                    return <Typography key={source.type} color="danger" fontWeight="bold" textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
+                    return <Typography key={source.type} color="danger" bold textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
-                    return <Typography key="unknown" color="danger" fontWeight="bold" textTransform="uppercase">Security not defined</Typography>
+                    return <Typography key="unknown" color="danger" bold textTransform="uppercase">Security not defined</Typography>
                 }
             })}
         </>
@@ -524,8 +526,8 @@ export default function DocsApiPage() {
             <Stack>
                 {error && (
                     <Alert color="danger" variant="solid">
-                        <Typography fontWeight="lg" mt={0.25}>{'Couldn\'t load OpenAPI docs'}</Typography>
-                        <Typography fontSize="sm">{error}</Typography>
+                        <Typography bold>{'Couldn\'t load OpenAPI docs'}</Typography>
+                        <Typography level="body2">{error}</Typography>
                     </Alert>
                 )}
                 <Row>

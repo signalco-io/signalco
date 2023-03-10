@@ -100,6 +100,9 @@ export * from './TextField';
 export { default as Timeago } from './Timeago';
 export * from './Timeago';
 
+export { default as Typography } from './Typography';
+export * from './Typography';
+
 export * from './colors';
 export * from './theme';
 
@@ -138,8 +141,7 @@ export {
     Slider,
     Sheet, 
     Switch,
-    Tooltip, 
-    Typography
+    Tooltip
 } from "@mui/joy";
 
 export { CssBaseline } from '@mui/joy';
@@ -150,4 +152,4 @@ export { useColorScheme, CssVarsProvider, getInitColorSchemeScript, extendTheme 
 export type { DefaultColorScheme } from '@mui/joy/styles/types';
 export type { ButtonProps, ColorPaletteProp, SupportedColorScheme, Theme } from '@mui/joy';
 export type { SxProps, Breakpoint, SystemStyleObject } from '@mui/system';
-export type { ChildrenProps } from './sharedTypes';
+export type { ChildrenProps, ColorVariants } from './sharedTypes';

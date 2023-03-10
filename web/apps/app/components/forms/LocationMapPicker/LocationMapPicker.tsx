@@ -62,15 +62,16 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
         <Accordion
             open={expanded}
             onChange={(_, open) => setExpanded(open)}
-        // expandIcon={<ExpandMoreIcon />}
         >
             {expanded
                 ? <Typography>Pick position on map</Typography>
                 : (
                     <Stack>
-                        <Typography sx={{ width: '33%', flexShrink: 0, fontSize: '0.8em', color: 'text.secondary' }}>
-                            {label}
-                        </Typography>
+                        <div style={{ width: '33%', flexShrink: 0 }}>
+                            <Typography level="body2">
+                                {label}
+                            </Typography>
+                        </div>
                         <Loadable isLoading={placeName.isLoading} loadingLabel="Loading location">
                             <Typography>{placeName.item}</Typography>
                         </Loadable>

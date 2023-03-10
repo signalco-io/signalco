@@ -35,10 +35,8 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                     </CardOverflow>
                 }
                 <CardContent style={{ justifyContent: 'flex-end' }}>
-                    <Stack>
-                        <Typography level="h5" style={{
-                            marginTop: 8
-                        }}>{og.title}</Typography>
+                    <Stack style={{ paddingTop: 8 }}>
+                        <Typography level="h5">{og.title}</Typography>
                         <Typography level="body2">{og.description}</Typography>
                     </Stack>
                 </CardContent>
@@ -55,7 +53,7 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                 >
                     {!!og.siteName && (
                         <Tooltip title={og.siteName}>
-                            <Typography noWrap level="body3" sx={{ fontWeight: 'md', color: 'text.secondary' }}>
+                            <Typography noWrap level="body3" semiBold secondary>
                                 {og.siteName}
                             </Typography>
                         </Tooltip>
@@ -63,7 +61,7 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                     {!!og.type && (
                         <>
                             {!!og.siteName && <Divider orientation="vertical" />}
-                            <Typography level="body3" sx={{ fontWeight: 'md', color: 'text.secondary' }}>
+                            <Typography level="body3" semiBold secondary>
                                 {og.type}
                             </Typography>
                         </>
@@ -71,7 +69,7 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                     {!!(og.locale || og.localeAlternate) && (
                         <>
                             <Divider orientation="vertical" />
-                            <Typography level="body3" sx={{ fontWeight: 'md', color: 'text.secondary' }}>
+                            <Typography level="body3" semiBold secondary>
                                 {[og.locale, og.localeAlternate].filter(Boolean).join(', ')}
                             </Typography>
                         </>
@@ -80,7 +78,7 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                         <>
                             <Divider orientation="vertical" />
                             <Tooltip title={og.url}>
-                                <Typography level="body3" noWrap sx={{ fontWeight: 'md', color: 'text.secondary' }}>
+                                <Typography level="body3" noWrap semiBold secondary>
                                     {og.url}
                                 </Typography>
                             </Tooltip>

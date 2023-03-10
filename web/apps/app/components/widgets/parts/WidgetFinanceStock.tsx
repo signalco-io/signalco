@@ -76,7 +76,9 @@ export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>
             <Loadable isLoading={price.isLoading} loadingLabel="Loading data" error={price.error || price.item?.errorMessage}>
                 <Stack style={{ padding: 3 * 8 }} justifyContent="space-between">
                     <Stack>
-                        <Typography level="h6" marginBottom={'-4px'}>{ticker}</Typography>
+                        <div style={{ marginBottom: -4 }}>
+                            <Typography level="h6">{ticker}</Typography>
+                        </div>
                         <Typography level="body2">{name}</Typography>
                     </Stack>
                     <Stack>
@@ -84,7 +86,7 @@ export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>
                             <NoDataPlaceholder content={'No data'} />
                         ) : (
                             <>
-                                <Typography level="h4" fontWeight="bold" lineHeight={0.9}>${closePrice}</Typography>
+                                <Typography level="h4" bold lineHeight={0.9}>${closePrice}</Typography>
                                 <Typography color={diffPerc >= 0 ? 'success' : 'danger'}>{diffPerc >= 0 ? '+' : ''}{diffPercDecimals}%</Typography>
                             </>
                         )}

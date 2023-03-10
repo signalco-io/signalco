@@ -7,8 +7,8 @@ import { DefaultColumns, DefaultLabel } from '../../../src/widgets/WidgetConfigu
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
+import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
 
@@ -103,7 +103,7 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
                     <Grid xs={6}>
                         <Stack style={{ height: '100%', paddingLeft: 2.5 * 8, paddingRight: 1.5 * 8, paddingTop: 16, paddingBottom: 16 }} justifyContent={columns > 2 ? 'space-between' : 'center'}>
                             <WindowVisual shadePerc={1 - shadePerc} size={68} />
-                            {columns > 2 && <Typography fontWeight="500" noWrap>{label}</Typography>}
+                            {columns > 2 && <Typography semiBold noWrap>{label}</Typography>}
                         </Stack>
                     </Grid>
                     <Divider orientation="vertical" />

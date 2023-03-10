@@ -152,7 +152,7 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
                     <Visual state={state} size={68} />
                 </Box>
                 <Box sx={{ px: 2 }}>
-                    <Typography fontWeight="500" noWrap>{label}</Typography>
+                    <Typography semiBold noWrap>{label}</Typography>
                 </Box>
             </Stack>
             {isLoading && (
