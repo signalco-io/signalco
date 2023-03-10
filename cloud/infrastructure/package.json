@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "@checkly/pulumi": "1.1.2",
-        "@pulumi/aws": "5.30.1",
+        "@pulumi/aws": "5.31.0",
         "@pulumi/azure-native": "1.96.0",
         "@pulumi/cloudflare": "4.16.0",
         "@pulumi/command": "0.7.1",
