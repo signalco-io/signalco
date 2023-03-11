@@ -691,7 +691,7 @@ importers:
   packages/ui-icons:
     specifiers:
       '@signalco/tsconfig': workspace:*
-      lucide-react: 0.124.0
+      lucide-react: 0.125.0
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0
@@ -700,7 +700,7 @@ importers:
       typescript: 4.9.5
     devDependencies:
       '@signalco/tsconfig': link:../tsconfig
-      lucide-react: 0.124.0_react@18.2.0
+      lucide-react: 0.125.0_react@18.2.0
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -10421,8 +10421,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /lucide-react/0.124.0_react@18.2.0:
-    resolution: {integrity: sha512-U1TGpFPLVOOIfs4SIeJ1F6gNcdpFpt5GDesgOaak6Tr7jTLkhjCdmBok0UksmpYfehN5zMMW+g37nzU2XHCtnw==}
+  /lucide-react/0.125.0_react@18.2.0:
+    resolution: {integrity: sha512-tadphtB6TPytEitR9vX75hqu9PQT/uz5RcvXMq976nC190eukAM9+cHMgBxfvfEGDXwIhIT9aFxTUGdAjxw9uQ==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
