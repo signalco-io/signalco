@@ -6,7 +6,7 @@ import styles from './Row.module.scss';
 export interface RowProps extends ChildrenProps {
     spacing?: number;
     alignItems?: 'start' | 'center' | 'stretch' | 'end' | undefined;
-    justifyContent?: 'start' | 'center' | 'space-between' | 'end' | 'stretch' | undefined;
+    justifyContent?: CSSProperties['justifyContent'];
     justifyItems?: 'center' | undefined;
     style?: CSSProperties | undefined;
 }
