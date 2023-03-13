@@ -1,14 +1,19 @@
 import { createSecureHeaders } from 'next-secure-headers';
+import mdx from '@next/mdx';
 import nextBundleAnalyzer from '@next/bundle-analyzer';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
+const withMDX = mdx();
 const withBundleAnalyzer = nextBundleAnalyzer({
     enabled: process.env.ANALYZE === 'true',
 });
 const nextConfig = {
     reactStrictMode: true,
-    experimental: { appDir: true },
+    experimental: { 
+        appDir: true,
+        mdxRs: true
+    },
     images: {
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
@@ -54,4 +59,4 @@ const nextConfig = {
     },
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default withMDX(withBundleAnalyzer(nextConfig));

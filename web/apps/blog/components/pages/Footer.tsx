@@ -61,7 +61,7 @@ export default function Footer() {
                     <Stack spacing={4}>
                         <Row spacing={4} alignItems="start" justifyContent="space-between" style={{ flexWrap: 'wrap' }}>
                             {footerLinks.filter(i => isDeveloper ? true : !i.developerOnly).map(section => (
-                                <Stack key={section.header} spacing={2}>
+                                <Stack key={section.header} spacing={2} style={{ minWidth: 220 }}>
                                     <Typography level="h6" component="h2">{section.header}</Typography>
                                     <Stack spacing={1}>
                                         {section.links.filter(l => isDeveloper ? true : !l.developerOnly).map(link => (
