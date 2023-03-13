@@ -5,11 +5,13 @@ import styles from './Container.module.scss';
 
 /** @alpha */
 export interface ContainerProps extends ChildrenProps {
-    maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false
+    maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false,
+    centered?: boolean,
+    padded?: boolean,
 }
 
 /** @alpha */
-export default function Container({ maxWidth, children }: ContainerProps) {
+export default function Container({ maxWidth, centered = true, padded = true, children }: ContainerProps) {
     let width: number | undefined = 1200;
     switch (maxWidth) {
         case 'md':
@@ -32,9 +34,13 @@ export default function Container({ maxWidth, children }: ContainerProps) {
     }
 
     return (
-        <div className={cx(styles.root, !!width && styles.pad)} style={{
-            "--container-maxWidth": width ? `${width}px` : undefined
-        } as CSSProperties}>
+        <div className={cx(
+            styles.root,
+            (Boolean(width) && padded) && styles.pad,
+            centered && styles.centered)}
+            style={{
+                "--container-maxWidth": width ? `${width}px` : undefined
+            } as CSSProperties}>
             {children}
         </div>
     )
