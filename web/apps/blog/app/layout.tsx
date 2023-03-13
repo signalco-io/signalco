@@ -1,4 +1,5 @@
 import '@signalco/ui/dist/ui.css';
+import { PageLayout } from '../components/layouts/PageLayout';
 import './global.scss';
 
 export default function RootLayout({
@@ -11,7 +12,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                {children}
+                <PageLayout>{children}</PageLayout>
             </body>
         </html>
     );
