@@ -4,6 +4,7 @@ const apps = [
     { label: 'Web', href: 'http://localhost:3000' },
     { label: 'Blog', href: 'http://localhost:3002' },
     { label: 'App', href: 'http://localhost:3001' },
+    { label: 'Blog', href: 'http://localhost:3002' },
     { label: 'UI Docs', href: 'http://localhost:6007' },
     { label: 'slco', href: 'http://localhost:4002' },
     { label: 'brandgrab', href: 'http://localhost:4001' }
