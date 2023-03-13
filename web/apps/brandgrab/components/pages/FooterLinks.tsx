@@ -1,44 +1,31 @@
-'use client';
-
 import React from 'react';
+import Typography from '@signalco/ui/dist/Typography';
 import Stack from '@signalco/ui/dist/Stack';
+import Row from '@signalco/ui/dist/Row';
 import Link from '@signalco/ui/dist/Link';
-import { Grid } from '@signalco/ui';
 import { isDeveloper } from '../../src/services/EnvProvider';
 
-type FooterSectionType = {
+export type FooterSectionType = {
     header: string,
     links: { name: string, href: string, developerOnly?: boolean }[]
     developerOnly?: boolean
 }
 
-const footerSections: FooterSectionType[] = [
-    {
-        header: 'Product',
-        links: []
-    },
-    {
-        header: 'Community',
-        links: [
-            { name: 'Discussions on GitHub', href: 'https://github.com/signalco-io/signalco/discussions?discussions_q=label%3Aapp%3Abrandgrab', developerOnly: true },
-            { name: 'r/signalco', href: 'https://www.reddit.com/r/signalco/' }
-        ]
-    },
-];
-
-export function FooterLinks() {
+export default function FooterLinks({ footerSections }: { footerSections: FooterSectionType[] }) {
     return (
-        <Grid container direction="row" justifyContent="space-between" spacing={4}>
-            {footerSections.filter(i => i.links.length && (isDeveloper ? true : !i.developerOnly)).map(section => (
-                <Grid key={section.header} xs={12} sm={6} md={3} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-                    <h6 style={{ paddingBottom: 4 * 8 }}>{section.header}</h6>
+        <Row spacing={4} alignItems="start" justifyContent="space-between" style={{ flexWrap: 'wrap' }}>
+            {footerSections.filter(i => isDeveloper ? true : !i.developerOnly).map(section => (
+                <Stack key={section.header} spacing={2}>
+                    <Typography level="h6" component="h2">{section.header}</Typography>
                     <Stack spacing={1}>
                         {section.links.filter(l => isDeveloper ? true : !l.developerOnly).map(link => (
-                            <Link key={link.name} href={link.href}>{link.name}</Link>
+                            <Link key={link.name} href={link.href}>
+                                <Typography>{link.name}</Typography>
+                            </Link>
                         ))}
                     </Stack>
-                </Grid>
+                </Stack>
             ))}
-        </Grid>
+        </Row>
     );
 }
