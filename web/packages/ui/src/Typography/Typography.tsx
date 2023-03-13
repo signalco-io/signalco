@@ -20,9 +20,10 @@ export type TypographyProps = ChildrenProps & {
     noWrap?: boolean;
     opacity?: number;
     color?: ColorVariants;
+    gutterBottom?: boolean;
 };
 
-export default function Typography({ children, component, level, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, secondary, tertiary, color, noWrap }: TypographyProps) {
+export default function Typography({ children, component, level, gutterBottom, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, secondary, tertiary, color, noWrap }: TypographyProps) {
     const styles: CSSProperties = {
         fontFamily: 'var(--joy-fontFamily-body)',
         fontSize: level?.startsWith('h') 
@@ -39,11 +40,12 @@ export default function Typography({ children, component, level, opacity, textAl
     if (textTransform) styles['textTransform'] = textTransform;
     if (strikeThrough) styles['textDecoration'] = 'line-through';
     if (textDecoration) styles['textDecoration'] = textDecoration;
-    if (fontSize) styles['fontSize'] = `${fontSize}px`;
+    if (fontSize) styles['fontSize'] = typeof fontSize === 'string' ? fontSize : `${fontSize}px`;
     if (lineHeight) styles['lineHeight'] = lineHeight;
     if (secondary) styles['color'] = 'var(--joy-palette-text-secondary)';
     if (tertiary) styles['color'] = 'var(--joy-palette-text-tertiary)';
     if (opacity) styles['opacity'] = opacity;
+    if (gutterBottom) styles['marginBottom'] = '2em';
     if (noWrap) {
         styles['whiteSpace'] = 'nowrap';
         styles['overflow'] = 'hidden';
