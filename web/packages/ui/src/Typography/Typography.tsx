@@ -15,13 +15,14 @@ export type TypographyProps = ChildrenProps & {
     textAlign?: 'left' | 'center' | 'right';
     fontSize?: number | string;
     secondary?: boolean;
+    tertiary?: boolean;
     lineHeight?: number;
     noWrap?: boolean;
     opacity?: number;
     color?: ColorVariants;
 };
 
-export default function Typography({ children, component, level, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, secondary, color, noWrap }: TypographyProps) {
+export default function Typography({ children, component, level, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, secondary, tertiary, color, noWrap }: TypographyProps) {
     const styles: CSSProperties = {
         fontFamily: 'var(--joy-fontFamily-body)',
         fontSize: level?.startsWith('h') 
@@ -41,6 +42,7 @@ export default function Typography({ children, component, level, opacity, textAl
     if (fontSize) styles['fontSize'] = `${fontSize}px`;
     if (lineHeight) styles['lineHeight'] = lineHeight;
     if (secondary) styles['color'] = 'var(--joy-palette-text-secondary)';
+    if (tertiary) styles['color'] = 'var(--joy-palette-text-tertiary)';
     if (opacity) styles['opacity'] = opacity;
     if (noWrap) {
         styles['whiteSpace'] = 'nowrap';
