@@ -40,7 +40,7 @@ export default function Typography({ children, component, level, gutterBottom, o
     if (textTransform) styles['textTransform'] = textTransform;
     if (strikeThrough) styles['textDecoration'] = 'line-through';
     if (textDecoration) styles['textDecoration'] = textDecoration;
-    if (fontSize) styles['fontSize'] = `${fontSize}px`;
+    if (fontSize) styles['fontSize'] = typeof fontSize === 'string' ? fontSize : `${fontSize}px`;
     if (lineHeight) styles['lineHeight'] = lineHeight;
     if (secondary) styles['color'] = 'var(--joy-palette-text-secondary)';
     if (tertiary) styles['color'] = 'var(--joy-palette-text-tertiary)';
