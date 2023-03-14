@@ -182,7 +182,7 @@ importers:
       '@babel/core': 7.21.0
       '@next/bundle-analyzer': 13.2.3
       '@next/env': 13.2.3
-      '@next/mdx': ^13.2.4
+      '@next/mdx': 13.2.4
       '@playwright/test': 1.31.2
       '@signalco/data': workspace:*
       '@signalco/eslint-config-signalco': workspace:*
@@ -192,8 +192,8 @@ importers:
       '@signalco/ui': workspace:*
       '@signalco/ui-icons': workspace:*
       '@types/color': 3.0.3
-      '@types/fs-extra': ^11.0.1
-      '@types/klaw': ^3.0.3
+      '@types/fs-extra': 11.0.1
+      '@types/klaw': 3.0.3
       '@types/node': 18.14.5
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
@@ -205,7 +205,7 @@ importers:
       encoding: 0.1.13
       eslint: 8.35.0
       fs-extra: 11.1.0
-      klaw: ^4.1.0
+      klaw: 4.1.0
       next: 13.2.3
       next-secure-headers: 2.2.0
       next-sitemap: 4.0.1
@@ -5959,7 +5959,7 @@ packages:
     resolution: {integrity: sha512-MxObHvNl4A69ofaTRU8DFqvgzzv8s9yRtaPPm5gud9HDNvpB3GPQFvNuTWAI59B9huVGV5jXYJwbCsmBsOGYWA==}
     dependencies:
       '@types/jsonfile': 6.1.1
-      '@types/node': 18.14.5
+      '@types/node': 18.15.2
     dev: true
 
   /@types/geojson/7946.0.10:
@@ -6026,7 +6026,7 @@ packages:
   /@types/jsonfile/6.1.1:
     resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
     dependencies:
-      '@types/node': 18.14.5
+      '@types/node': 18.15.2
     dev: true
 
   /@types/jsonwebtoken/9.0.1:
@@ -6038,7 +6038,7 @@ packages:
   /@types/klaw/3.0.3:
     resolution: {integrity: sha512-mXlRDFbTLpVysvxahXUQav0hFctgu3Fqr2xmSrpf/ptO/FwOp7SFEGsJkEihwshMbof3/BIiVJ/o42cuOOuv6g==}
     dependencies:
-      '@types/node': 18.14.5
+      '@types/node': 18.15.2
     dev: true
 
   /@types/lodash/4.14.191:
@@ -6100,6 +6100,7 @@ packages:
 
   /@types/node/18.14.5:
     resolution: {integrity: sha512-CRT4tMK/DHYhw1fcCEBwME9CSaZNclxfzVMe7GsO6ULSwsttbj70wSiX6rZdIjGblu93sTJxLdhNIT85KKI7Qw==}
+    dev: true
 
   /@types/node/18.15.2:
     resolution: {integrity: sha512-sDPHm2wfx2QhrMDK0pOt2J4KLJMAcerqWNvnED0itPRJWvI+bK+uNHzcH1dFsBlf7G3u8tqXmRF3wkvL9yUwMw==}
@@ -10427,7 +10428,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 18.14.5
+      '@types/node': 18.15.2
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
