@@ -83,7 +83,7 @@ importers:
       react-transition-group: 4.4.5
       recharts: 2.4.3
       rimraf: 4.4.0
-      sass: 1.59.2
+      sass: 1.59.3
       sass-loader: 13.2.0
       sharp: 0.31.3
       suncalc: 1.9.0
@@ -125,7 +125,7 @@ importers:
       date-fns: 2.29.3
       material-ui-popup-state: 5.0.5_xqeqsl5kvjjtyxwyi3jhw3yuli
       monaco-editor: 0.36.1
-      next: 13.2.4_fu7qbamxxbb2znoowhk2267e5a
+      next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
       next-pwa: 5.6.0_dilw5ucvg75kgwsqkso5xoe5xq
       next-secure-headers: 2.2.0
       pigeon-maps: 0.21.3_react@18.2.0
@@ -151,7 +151,7 @@ importers:
       '@signalco/tsconfig': link:../../packages/tsconfig
       '@types/color': 3.0.3
       '@types/d3': 7.4.0
-      '@types/next-pwa': 5.6.2_fu7qbamxxbb2znoowhk2267e5a
+      '@types/next-pwa': 5.6.2_l4i6tgmfppzwb2u4w42uz3wi4m
       '@types/node': 18.15.3
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
@@ -171,8 +171,8 @@ importers:
       prop-types: 15.8.1
       react-is: 18.2.0
       rimraf: 4.4.0
-      sass: 1.59.2
-      sass-loader: 13.2.0_sass@1.59.2+webpack@5.76.1
+      sass: 1.59.3
+      sass-loader: 13.2.0_sass@1.59.3+webpack@5.76.1
       typescript: 4.9.5
       webpack: 5.76.1
 
@@ -217,7 +217,7 @@ importers:
       react-dom: 18.2.0
       react-transition-group: 4.4.5
       rimraf: 4.2.0
-      sass: 1.58.3
+      sass: 1.59.3
       sharp: 0.31.3
       terser: 5.16.5
       typescript: 4.9.5
@@ -234,7 +234,7 @@ importers:
       encoding: 0.1.13
       fs-extra: 11.1.0
       klaw: 4.1.0
-      next: 13.2.3_ooxitnxerz4ueoyq3vflb3swdm
+      next: 13.2.3_l4i6tgmfppzwb2u4w42uz3wi4m
       next-secure-headers: 2.2.0
       postcss: 8.4.21
       react: 18.2.0
@@ -266,7 +266,7 @@ importers:
       playwright: 1.31.2
       prop-types: 15.8.1
       rimraf: 4.2.0
-      sass: 1.58.3
+      sass: 1.59.3
       typescript: 4.9.5
       webpack: 5.75.0
 
@@ -311,7 +311,7 @@ importers:
       react-dom: 18.2.0
       react-transition-group: 4.4.5
       rimraf: 4.4.0
-      sass: 1.59.2
+      sass: 1.59.3
       sharp: 0.31.3
       terser: 5.16.6
       typescript: 4.9.5
@@ -328,7 +328,7 @@ importers:
       crypto-js: 4.1.1
       extract-colors: 2.0.5
       get-pixels: 3.3.3
-      next: 13.2.4_fu7qbamxxbb2znoowhk2267e5a
+      next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
       next-secure-headers: 2.2.0
       postcss: 8.4.21
       react: 18.2.0
@@ -360,7 +360,7 @@ importers:
       playwright: 1.31.2
       prop-types: 15.8.1
       rimraf: 4.4.0
-      sass: 1.59.2
+      sass: 1.59.3
       typescript: 4.9.5
       webpack: 5.76.1
 
@@ -415,7 +415,7 @@ importers:
       react-dom: 18.2.0
       react-transition-group: 4.4.5
       rimraf: 4.4.0
-      sass: 1.59.2
+      sass: 1.59.3
       sharp: 0.31.3
       terser: 5.16.6
       typescript: 4.9.5
@@ -426,7 +426,7 @@ importers:
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
       classix: 2.1.22
-      next: 13.2.4_fu7qbamxxbb2znoowhk2267e5a
+      next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
       next-secure-headers: 2.2.0
       postcss: 8.4.21
       react: 18.2.0
@@ -455,7 +455,7 @@ importers:
       playwright: 1.31.2
       prop-types: 15.8.1
       rimraf: 4.4.0
-      sass: 1.59.2
+      sass: 1.59.3
       typescript: 4.9.5
       webpack: 5.76.1
 
@@ -481,7 +481,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       rimraf: 4.4.0
-      sass: 1.59.2
+      sass: 1.59.3
       sass-loader: 13.2.0
       storybook: 7.0.0-rc.3
       storybook-addon-swc: 1.1.9
@@ -491,7 +491,7 @@ importers:
     dependencies:
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
-      next: 13.2.4_fu7qbamxxbb2znoowhk2267e5a
+      next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
@@ -501,7 +501,7 @@ importers:
       '@storybook/addon-links': 7.0.0-rc.3_biqbaboplfbrettd7655fr4n2y
       '@storybook/addons': 7.0.0-rc.3_biqbaboplfbrettd7655fr4n2y
       '@storybook/manager-api': 7.0.0-alpha.54_biqbaboplfbrettd7655fr4n2y
-      '@storybook/nextjs': 7.0.0-rc.3_mhd5gugqqcfbfl5fvi225vpvtm
+      '@storybook/nextjs': 7.0.0-rc.3_pn7suohutzqt4f6j2dfef2yddm
       '@storybook/react': 7.0.0-rc.3_ygqkwb4gg3aean7xjfdauovyqq
       '@storybook/theming': 6.5.16_biqbaboplfbrettd7655fr4n2y
       '@types/react': 18.0.28
@@ -510,8 +510,8 @@ importers:
       postcss: 8.4.21
       postcss-loader: 7.0.2_mquw4qchulb5tpkmg3p2j6qala
       rimraf: 4.4.0
-      sass: 1.59.2
-      sass-loader: 13.2.0_sass@1.59.2+webpack@5.76.1
+      sass: 1.59.3
+      sass-loader: 13.2.0_sass@1.59.3+webpack@5.76.1
       storybook: 7.0.0-rc.3
       storybook-addon-swc: 1.1.9_webpack@5.76.1
       style-loader: 3.3.2_webpack@5.76.1
@@ -560,7 +560,7 @@ importers:
       react-dom: 18.2.0
       react-transition-group: 4.4.5
       rimraf: 4.4.0
-      sass: 1.59.2
+      sass: 1.59.3
       sharp: 0.31.3
       terser: 5.16.6
       typescript: 4.9.5
@@ -576,7 +576,7 @@ importers:
       classix: 2.1.22
       cobe: 0.6.3
       encoding: 0.1.13
-      next: 13.2.4_fu7qbamxxbb2znoowhk2267e5a
+      next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
       next-pwa: 5.6.0_dilw5ucvg75kgwsqkso5xoe5xq
       next-secure-headers: 2.2.0
       octokit: 2.0.14_encoding@0.1.13
@@ -596,7 +596,7 @@ importers:
       '@signalco/eslint-config-signalco': link:../../packages/eslint-config-signalco
       '@signalco/tsconfig': link:../../packages/tsconfig
       '@types/color': 3.0.3
-      '@types/next-pwa': 5.6.2_fu7qbamxxbb2znoowhk2267e5a
+      '@types/next-pwa': 5.6.2_l4i6tgmfppzwb2u4w42uz3wi4m
       '@types/node': 18.15.3
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
@@ -610,7 +610,7 @@ importers:
       playwright: 1.31.2
       prop-types: 15.8.1
       rimraf: 4.4.0
-      sass: 1.59.2
+      sass: 1.59.3
       typescript: 4.9.5
       webpack: 5.76.1
 
@@ -739,7 +739,7 @@ importers:
       rollup-plugin-peer-deps-external: 2.2.4
       rollup-plugin-postcss: 4.0.2
       rollup-plugin-summary: 2.0.0
-      sass: 1.59.2
+      sass: 1.59.3
       styled-components: 5.3.9
       typescript: 4.9.5
     dependencies:
@@ -753,7 +753,7 @@ importers:
       '@mui/system': 5.11.13_d2lgyfpecxdc2bsiwyag5wf7ti
       '@signalco/ui-icons': link:../ui-icons
       material-ui-popup-state: 5.0.5_xqeqsl5kvjjtyxwyi3jhw3yuli
-      next: 13.2.4_fu7qbamxxbb2znoowhk2267e5a
+      next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-is: 18.2.0
@@ -779,7 +779,7 @@ importers:
       rollup-plugin-peer-deps-external: 2.2.4_rollup@3.19.1
       rollup-plugin-postcss: 4.0.2_postcss@8.4.21
       rollup-plugin-summary: 2.0.0_rollup@3.19.1
-      sass: 1.59.2
+      sass: 1.59.3
       typescript: 4.9.5
 
   packages/ui-icons:
@@ -4985,7 +4985,7 @@ packages:
     resolution: {integrity: sha512-02w0sgGZaK1agT050yCVhJ+o4rLHANWvLKWjQjeAsYbjneLC5ITt+3GDB4jRiWwJboZ8dHW1fGSK1Vg5fA34aQ==}
     dev: true
 
-  /@storybook/nextjs/7.0.0-rc.3_mhd5gugqqcfbfl5fvi225vpvtm:
+  /@storybook/nextjs/7.0.0-rc.3_pn7suohutzqt4f6j2dfef2yddm:
     resolution: {integrity: sha512-LqW53INoE+l0jd8TZxi7ELNCN1fpZK/k/ouqnggAqHQaWWG5uy+Kbd+tNX4ZKg8/D9k8h5AS3+j8bTFfgkH3bw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -5034,14 +5034,14 @@ packages:
       fs-extra: 11.1.0
       image-size: 1.0.2
       loader-utils: 3.2.1
-      next: 13.2.4_fu7qbamxxbb2znoowhk2267e5a
+      next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
       pnp-webpack-plugin: 1.7.0_typescript@4.9.5
       postcss: 8.4.21
       postcss-loader: 7.0.2_mquw4qchulb5tpkmg3p2j6qala
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       resolve-url-loader: 5.0.0
-      sass-loader: 12.6.0_sass@1.59.2+webpack@5.76.1
+      sass-loader: 12.6.0_sass@1.59.3+webpack@5.76.1
       semver: 7.3.8
       style-loader: 3.3.2_webpack@5.76.1
       styled-jsx: 5.1.1_ogvc6ewgr3qq5z6tmbtquhqyui
@@ -6035,11 +6035,11 @@ packages:
     resolution: {integrity: sha512-hOZVTN24zDHwCHaW7mF9n1vHJt83fZhNZ0YYRBwQGhA96yBWWDPTDDlqJatagHIOJB0a4xoNkNc+t/Cxd+6qUA==}
     dev: true
 
-  /@types/next-pwa/5.6.2_fu7qbamxxbb2znoowhk2267e5a:
+  /@types/next-pwa/5.6.2_l4i6tgmfppzwb2u4w42uz3wi4m:
     resolution: {integrity: sha512-K5zLZSzrJCOQBay5E7abGp7gQ0q1Pv58dE3RuBo5LQXYQFaCO4JPju0XYdzgLoQ20yhBVZ43AwIcSgCzx9KvqA==}
     dependencies:
       '@types/react': 18.0.28
-      next: 13.2.4_fu7qbamxxbb2znoowhk2267e5a
+      next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
       workbox-build: 6.5.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -10970,7 +10970,7 @@ packages:
       babel-loader: 8.3.0_uskqpy7onh7hrgnpolkiy3c37i
       clean-webpack-plugin: 4.0.0_webpack@5.76.1
       globby: 11.1.0
-      next: 13.2.4_fu7qbamxxbb2znoowhk2267e5a
+      next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
       terser-webpack-plugin: 5.3.6_webpack@5.76.1
       workbox-webpack-plugin: 6.5.4_webpack@5.76.1
       workbox-window: 6.5.4
@@ -11000,7 +11000,7 @@ packages:
       '@corex/deepmerge': 4.0.37
       '@next/env': 13.2.3
       minimist: 1.2.8
-      next: 13.2.3_ooxitnxerz4ueoyq3vflb3swdm
+      next: 13.2.3_l4i6tgmfppzwb2u4w42uz3wi4m
     dev: true
 
   /next-sitemap/4.0.5_jccvrrmb7rb3yyi3af3znueaea:
@@ -11014,10 +11014,10 @@ packages:
       '@corex/deepmerge': 4.0.37
       '@next/env': 13.2.4
       minimist: 1.2.8
-      next: 13.2.4_fu7qbamxxbb2znoowhk2267e5a
+      next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
     dev: true
 
-  /next/13.2.3_ooxitnxerz4ueoyq3vflb3swdm:
+  /next/13.2.3_l4i6tgmfppzwb2u4w42uz3wi4m:
     resolution: {integrity: sha512-nKFJC6upCPN7DWRx4+0S/1PIOT7vNlCT157w9AzbXEgKy6zkiPKEt5YyRUsRZkmpEqBVrGgOqNfwecTociyg+w==}
     engines: {node: '>=14.6.0'}
     hasBin: true
@@ -11044,7 +11044,7 @@ packages:
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      sass: 1.58.3
+      sass: 1.59.3
       styled-jsx: 5.1.1_ogvc6ewgr3qq5z6tmbtquhqyui
     optionalDependencies:
       '@next/swc-android-arm-eabi': 13.2.3
@@ -11111,7 +11111,7 @@ packages:
       - babel-plugin-macros
     dev: true
 
-  /next/13.2.4_fu7qbamxxbb2znoowhk2267e5a:
+  /next/13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m:
     resolution: {integrity: sha512-g1I30317cThkEpvzfXujf0O4wtaQHtDCLhlivwlTJ885Ld+eOgcz7r3TGQzeU+cSRoNHtD8tsJgzxVdYojFssw==}
     engines: {node: '>=14.6.0'}
     hasBin: true
@@ -11138,7 +11138,7 @@ packages:
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      sass: 1.59.2
+      sass: 1.59.3
       styled-jsx: 5.1.1_ogvc6ewgr3qq5z6tmbtquhqyui
     optionalDependencies:
       '@next/swc-android-arm-eabi': 13.2.4
@@ -13361,7 +13361,7 @@ packages:
   /safer-buffer/2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  /sass-loader/12.6.0_sass@1.59.2+webpack@5.76.1:
+  /sass-loader/12.6.0_sass@1.59.3+webpack@5.76.1:
     resolution: {integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
@@ -13382,11 +13382,11 @@ packages:
     dependencies:
       klona: 2.0.5
       neo-async: 2.6.2
-      sass: 1.59.2
+      sass: 1.59.3
       webpack: 5.76.1
     dev: true
 
-  /sass-loader/13.2.0_sass@1.59.2+webpack@5.76.1:
+  /sass-loader/13.2.0_sass@1.59.3+webpack@5.76.1:
     resolution: {integrity: sha512-JWEp48djQA4nbZxmgC02/Wh0eroSUutulROUusYJO9P9zltRbNN80JCBHqRGzjd4cmZCa/r88xgfkjGD0TXsHg==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -13407,21 +13407,12 @@ packages:
     dependencies:
       klona: 2.0.5
       neo-async: 2.6.2
-      sass: 1.59.2
+      sass: 1.59.3
       webpack: 5.76.1
     dev: true
 
-  /sass/1.58.3:
-    resolution: {integrity: sha512-Q7RaEtYf6BflYrQ+buPudKR26/lH+10EmO9bBqbmPh/KeLqv8bjpTNqxe71ocONqXq+jYiCbpPUmQMS+JJPk4A==}
-    engines: {node: '>=12.0.0'}
-    hasBin: true
-    dependencies:
-      chokidar: 3.5.3
-      immutable: 4.1.0
-      source-map-js: 1.0.2
-
-  /sass/1.59.2:
-    resolution: {integrity: sha512-jJyO6SmbzkJexF8MUorHx5tAilcgabioYxT/BHbY4+OvoqmbHxsYlrjZ8Adhqcgl6Zqwie0TgMXLCAmPFxXOuw==}
+  /sass/1.59.3:
+    resolution: {integrity: sha512-QCq98N3hX1jfTCoUAsF3eyGuXLsY7BCnCEg9qAact94Yc21npG2/mVOqoDvE0fCbWDqiM4WlcJQla0gWG2YlxQ==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
