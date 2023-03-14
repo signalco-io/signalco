@@ -1,0 +1,20 @@
+{
+    "Helpers": {
+        "CopyToClipboard": "Copy to clipboard",
+        "CopyLinkToClipboard": "Copy link to clipboard",
+        "CopyCodeToClipboard": "Copy code to clipboard",
+        "CopyToClipboardSuccess": "Copied to clipboard",
+        "CopyToClipboardError": "Failed to copy to clipboard"
+    },
+    "Global": {
+        "Entity": {
+            "Types": {
+                "Device": "Device",
+                "Dashboard": "Dashboard",
+                "Process": "Process",
+                "Station": "Station",
+                "Channel": "Channel"
+            }
+        }
+    }
+}
