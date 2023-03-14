@@ -32,8 +32,8 @@ function P({ children }) {
 function Li({ children }) {
     return (
         <Row spacing={1} style={{ marginBottom: 8 }} alignItems="start">
-            <Typograhy opacity={0.4} fontSize={'1.1em'}>&ndash;</Typograhy>
-            <Typograhy level="body1" fontSize={'1.1em'}>{children}</Typograhy>
+            <Typograhy opacity={0.4} fontSize={'1.1em'} lineHeight={1.5}>&ndash;</Typograhy>
+            <Typograhy level="body1" fontSize={'1.1em'} lineHeight={1.5}>{children}</Typograhy>
         </Row>
     );
 }

@@ -9,8 +9,8 @@ export default function SignalcoLogo({ width, height, theme }: { width?: number,
 
     return (
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-            width={`${fixedWidth}pt`}
-            height={`${fixedHeight}pt`}
+            width={`${fixedWidth}px`}
+            height={`${fixedHeight}px`}
             viewBox="0 0 1255.000000 1294.000000"
             preserveAspectRatio="xMidYMid meet">
             <g

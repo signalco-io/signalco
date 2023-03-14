@@ -1,38 +1,51 @@
+import fs from 'fs';
 import React from 'react';
+import klaw from 'klaw';
 import Typography from '@signalco/ui/dist/Typography';
 import Stack from '@signalco/ui/dist/Stack';
 import Row from '@signalco/ui/dist/Row';
+import Link from '@signalco/ui/dist/Link';
+import PageCenterHeader from '../pages/PageCenterHeader';
 
-export default function LandingPageView() {
+export default async function LandingPageView() {
+    const posts = [];
+    for await (const file of klaw('./app/(posts)')) {
+        if (!file.path.endsWith('.mdx')) continue;
+        const content = fs.readFileSync(file.path, 'utf8');
+        const meta = content.match(/export const meta = ({.*?});/s)?.[1];
+        if (!meta) continue;
+        const directoryName = file.path.split(/\/|\\/).slice(-2)[0];
+        const title = meta.match(/title: '(.*)'/)?.[1];
+        const description = meta.match(/description: '(.*)'/)?.[1];
+        const category = meta.match(/category: '(.*)'/)?.[1];
+        const date = meta.match(/date: '(.*)'/)?.[1];
+        posts.push({ link: directoryName, title, description, category, date });
+    }
+
     return (
-        <Row spacing={4} alignItems="start">
-            <Stack spacing={1}>
-                <Typography level="h6">Levels</Typography>
-                <Stack>
-                    <Typography level="h1">H1</Typography>
-                    <Typography level="h2">H2</Typography>
-                    <Typography level="h3">H3</Typography>
-                    <Typography level="h4">H4</Typography>
-                    <Typography level="h5">H5</Typography>
-                    <Typography level="h6">H6</Typography>
-                    <Typography>Default</Typography>
-                    <Typography level="body1">Body1</Typography>
-                    <Typography level="body2">Body2</Typography>
-                    <Typography level="body3">Body3</Typography>
-                </Stack>
+        <div style={{ paddingTop: 12 }}>
+            <PageCenterHeader header={'Blog'} />
+            <Stack spacing={4}>
+                <Typography level="h5">All posts</Typography>
+                <Row spacing={2} style={{ flexWrap: 'wrap' }}>
+                    {posts.map(post => (
+                        <div key={post.title} style={{
+                            minWidth: 300,
+                            padding: 16,
+                            border: '1px solid var(--joy-palette-divider)',
+                            borderRadius: 4
+                        }}>
+                            <Stack key={post.title} spacing={2}>
+                                <Link href={post.link}>
+                                    <Typography level="h3">{post.title}</Typography>
+                                </Link>
+                                <Typography level="body2" secondary>{post.category}</Typography>
+                                <Typography level="body1">{post.description}</Typography>
+                            </Stack>
+                        </div>
+                    ))}
+                </Row>
             </Stack>
-            <Stack spacing={1}>
-                <Typography level="h6">Color and weight</Typography>
-                <Stack>
-                    <Typography>default</Typography>
-                    <Typography secondary>secondary</Typography>
-                    <Typography tertiary>tertiary</Typography>
-                    <Typography extraThin>extraThin</Typography>
-                    <Typography thin>thin</Typography>
-                    <Typography semiBold>semiBold</Typography>
-                    <Typography bold>bold</Typography>
-                </Stack>
-            </Stack>
-        </Row>
+        </div>
     );
 }
