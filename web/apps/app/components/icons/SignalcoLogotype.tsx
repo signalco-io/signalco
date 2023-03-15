@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { CSSProperties, forwardRef } from 'react';
 import { cx } from 'classix';
 import { SupportedColorScheme } from '@signalco/ui';
 import ApiBadge from '../development/ApiBadge';
@@ -12,6 +12,10 @@ interface SignalcoLogotypeProps {
     hideBadge?: boolean;
 }
 
+interface BadgeContainerCssProperties extends CSSProperties {
+    '--fixedHeight': string;
+}
+
 function SignalcoLogotype({ width, height, theme, hideBadge }: SignalcoLogotypeProps, ref: React.Ref<HTMLDivElement>) {
     if (typeof width === 'undefined' &&
         typeof height === 'undefined') {
@@ -20,7 +24,7 @@ function SignalcoLogotype({ width, height, theme, hideBadge }: SignalcoLogotypeP
     const paddingTop = height ? Math.ceil(height / 10.5) : Math.ceil((width ?? 0) / 40);
     const fixedHeight = height ?? (666 / 2810) * ((width ?? 0) + paddingTop * 4);
     const fixedWidth = width ?? (2810 / 666) * ((height ?? 0) - paddingTop);
-    const badgeContainerStyle: any = { '--fixedHeight': `${fixedHeight - paddingTop}px` };
+    const badgeContainerStyle: BadgeContainerCssProperties = { '--fixedHeight': `${fixedHeight - paddingTop}px` };
 
     return (
         <div aria-label="Signalco" role="img" className={cx(styles.root, hideBadge && styles.hideBadge)} ref={ref}>
