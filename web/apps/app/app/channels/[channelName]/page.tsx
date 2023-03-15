@@ -50,7 +50,7 @@ export default function AppChannelPage({ params }: { params: { channelName: stri
                         <Typography level="h1">{channel?.label} channel</Typography>
                     </Row>
                     <Stack spacing={2}>
-                        <Typography typography="h3">Connected entities</Typography>
+                        <Typography level="h3">Connected entities</Typography>
                         <Loadable isLoading={entities.isLoading} error={entities.error} loadingLabel="Loading entities">
                             {(connectedChannels?.length ?? 0) > 0
                                 ? (
@@ -67,7 +67,7 @@ export default function AppChannelPage({ params }: { params: { channelName: stri
                         </Loadable>
                     </Stack>
                     <Stack spacing={2}>
-                        <Typography typography="h3">Connect</Typography>
+                        <Typography level="h3">Connect</Typography>
                         <Loadable isLoading={isLoading} loadingLabel="Loading channel connect">
                             <ChannelConnectPartial channelName={channelName} />
                         </Loadable>

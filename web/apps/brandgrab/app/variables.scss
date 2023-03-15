@@ -295,7 +295,7 @@
   --joy-palette-background-body: var(--joy-palette-primary-50);
   --joy-palette-background-surface: var(--joy-palette-common-white);
   --joy-palette-background-popup: var(--joy-palette-common-white);
-  --joy-palette-background-level1: #00ff00;
+  --joy-palette-background-level1: rgba(var(--joy-palette-neutral-mainChannel) / 0.1);
   --joy-palette-background-level2: #00ffff;
   --joy-palette-background-level3: #0000ff;
   --joy-palette-background-tooltip: #f0f0f0;

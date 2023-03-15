@@ -20,7 +20,7 @@ function FeatureDescription(props: { header: string, content: string | React.Rea
     return (
         <Stack spacing={2}>
             <Typography level="h5" component="h3">{props.header}</Typography>
-            <Typography textColor="neutral.400">{props.content}</Typography>
+            <Typography color="neutral">{props.content}</Typography>
             <div>
                 {props.link && (
                     <Link passHref href={props.link}>
@@ -211,7 +211,7 @@ function PlaySection() {
 function DataPart(props: { value: string, subtitle: string }) {
     return <Stack alignItems="center" spacing={1}>
         <Typography level="h3" component="span" lineHeight={1}>{props.value}</Typography>
-        <Typography textTransform="uppercase" textColor="text.secondary" lineHeight={1}>{props.subtitle}</Typography>
+        <Typography textTransform="uppercase" secondary lineHeight={1}>{props.subtitle}</Typography>
     </Stack>
 }
 

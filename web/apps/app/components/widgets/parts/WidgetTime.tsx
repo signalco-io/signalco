@@ -39,14 +39,16 @@ function WidgetTime(props: WidgetSharedProps<ConfigProps>) {
     return (
         <div style={{ height: '100%' }}>
             <Stack style={{ height: '100%' }} alignItems="center" justifyContent="center">
-                <Typography fontSize={36} fontWeight={200} sx={{ margin: 0, padding: 0, position: 'relative' }}>
-                    {time}
-                    {showSeconds && (
-                        <span style={{ position: 'absolute', opacity: 0.4, bottom: -20, right: 0 }}>
-                            <Typography fontSize={18}>{seconds}</Typography>
-                        </span>
-                    )}
-                </Typography>
+                <div style={{ position: 'relative', margin: 0, padding: 0 }}>
+                    <Typography fontSize={36} thin>
+                        {time}
+                        {showSeconds && (
+                            <span style={{ position: 'absolute', opacity: 0.4, bottom: -20, right: 0 }}>
+                                <Typography fontSize={18}>{seconds}</Typography>
+                            </span>
+                        )}
+                    </Typography>
+                </div>
             </Stack>
         </div>
     );

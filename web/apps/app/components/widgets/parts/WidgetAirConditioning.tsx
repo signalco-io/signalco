@@ -8,8 +8,8 @@ import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { KnownPages } from '../../../src/knownPages';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
+import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import { historiesAsync } from '../../../src/contacts/ContactRepository';
 
@@ -120,20 +120,20 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                     <Button variant="plain">
                         <Row alignItems="stretch">
                             <Stack style={{ height: '100%' }} justifyContent="center" alignItems="center">
-                                <Typography fontWeight={100} fontSize={rows > 2 ? 64 : 42} lineHeight={1}>{degreesWhole}</Typography>
+                                <Typography extraThin fontSize={rows > 2 ? 64 : 42} lineHeight={1}>{degreesWhole}</Typography>
                             </Stack>
                             <Stack justifyContent="space-between">
-                                <Typography fontWeight={100} fontSize={rows > 2 ? 18 : 12} sx={{ opacity: 0.6 }}>&#176;C</Typography>
-                                <Typography fontWeight={100} fontSize={rows > 2 ? 18 : 14} sx={{ opacity: 0.6 }}>.{degreesDecimal}</Typography>
+                                <Typography extraThin fontSize={rows > 2 ? 18 : 12} opacity={0.6}>&#176;C</Typography>
+                                <Typography extraThin fontSize={rows > 2 ? 18 : 14} opacity={0.6}>.{degreesDecimal}</Typography>
                             </Stack>
                         </Row>
                     </Button>
                 </Link>
                 {config?.label && (
                     <Typography
-                        fontWeight={rows > 1 ? 'light' : 'normal'}
+                        thin={rows > 1}
                         fontSize={rows > 1 ? '1rem' : '0.7rem'}
-                        sx={{ opacity: 0.5 }}>
+                        opacity={0.5}>
                         {config.label}
                     </Typography>
                 )}

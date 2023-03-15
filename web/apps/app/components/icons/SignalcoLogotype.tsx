@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { CSSProperties, forwardRef } from 'react';
 import { cx } from 'classix';
 import { SupportedColorScheme } from '@signalco/ui';
 import ApiBadge from '../development/ApiBadge';
@@ -12,19 +12,24 @@ interface SignalcoLogotypeProps {
     hideBadge?: boolean;
 }
 
+interface BadgeContainerCssProperties extends CSSProperties {
+    '--fixedHeight': string;
+}
+
 function SignalcoLogotype({ width, height, theme, hideBadge }: SignalcoLogotypeProps, ref: React.Ref<HTMLDivElement>) {
     if (typeof width === 'undefined' &&
         typeof height === 'undefined') {
         throw new Error('Either height or width must be provided to SignalcoLogo.');
     }
-    const fixedWidth = width ?? (2810 / 666) * (height ?? 0);
-    const fixedHeight = height ?? (666 / 2810) * (width ?? 0);
-    const badgeContainerStyle: any = { '--fixedHeight': `${fixedHeight}px` };
+    const paddingTop = height ? Math.ceil(height / 10.5) : Math.ceil((width ?? 0) / 40);
+    const fixedHeight = height ?? (666 / 2810) * ((width ?? 0) + paddingTop * 4);
+    const fixedWidth = width ?? (2810 / 666) * ((height ?? 0) - paddingTop);
+    const badgeContainerStyle: BadgeContainerCssProperties = { '--fixedHeight': `${fixedHeight - paddingTop}px` };
 
     return (
         <div aria-label="Signalco" role="img" className={cx(styles.root, hideBadge && styles.hideBadge)} ref={ref}>
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                width={fixedWidth} height={fixedHeight} viewBox="0 0 2810.000000 666.000000"
+                width={fixedWidth} height={fixedHeight - paddingTop} viewBox="0 0 2810.000000 666.000000"
                 preserveAspectRatio="xMidYMid meet">
                 <g transform="translate(0.000000,666.000000) scale(0.100000,-0.100000)"
                     style={{ fill: theme === 'dark' ? '#ffffff' : (theme === 'light' ? '#000000' : 'var(--joy-palette-text-primary)') }}

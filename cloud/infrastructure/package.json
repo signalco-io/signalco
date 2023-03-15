@@ -6,10 +6,10 @@
         "lint": "eslint **/*.ts"
     },
     "devDependencies": {
-        "@types/node": "18.14.6",
-        "@typescript-eslint/eslint-plugin": "5.54.0",
-        "@typescript-eslint/parser": "5.54.0",
-        "eslint": "8.35.0",
+        "@types/node": "18.15.3",
+        "@typescript-eslint/eslint-plugin": "5.55.0",
+        "@typescript-eslint/parser": "5.55.0",
+        "eslint": "8.36.0",
         "eslint-config-standard": "17.0.0",
         "eslint-plugin-import": "2.27.5",
         "eslint-plugin-n": "15.6.1",
@@ -19,10 +19,10 @@
     },
     "dependencies": {
         "@checkly/pulumi": "1.1.2",
-        "@pulumi/aws": "5.30.0",
-        "@pulumi/azure-native": "1.96.0",
-        "@pulumi/cloudflare": "4.15.0",
+        "@pulumi/aws": "5.31.0",
+        "@pulumi/azure-native": "1.97.0",
+        "@pulumi/cloudflare": "5.0.0",
         "@pulumi/command": "0.7.1",
-        "@pulumi/pulumi": "3.56.0"
+        "@pulumi/pulumi": "3.57.1"
     }
 }

@@ -55,12 +55,13 @@ function ObjectVisualizer(props: { name: string, value: ParsedJson, defaultOpen?
             label={(
                 <Row spacing={1}>
                     {name && (
-                        <Tooltip title={`${name} (${(isArray ? `array[${value.length}]` : typeof value)})`}>
-                            <Typography
-                                minWidth={120}>
-                                {name}
-                            </Typography>
-                        </Tooltip>
+                        <div style={{ minWidth: 120 }}>
+                            <Tooltip title={`${name} (${(isArray ? `array[${value.length}]` : typeof value)})`}>
+                                <Typography>
+                                    {name}
+                                </Typography>
+                            </Tooltip>
+                        </div>
                     )}
                     {!hasChildren && (
                         // TODO: Implement visualizer for different data types
@@ -211,7 +212,9 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                                         <ChannelLogo channelName={c.channelName} size="tiny" label={c.channelName} />
                                     </ListItemDecorator>
                                     <Row spacing={1} style={{ flexGrow: 1 }}>
-                                        <Typography noWrap style={{ width: '30%', maxWidth: '200px' }}>{camelToSentenceCase(c.contactName)}</Typography>
+                                        <div style={{ width: '30%', maxWidth: '200px' }}>
+                                            <Typography noWrap>{camelToSentenceCase(c.contactName)}</Typography>
+                                        </div>
                                         <Stack style={{ flexGrow: 1 }}>
                                             {isJson(c.valueSerialized)
                                                 ? <DisplayJson json={c.valueSerialized} />

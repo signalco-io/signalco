@@ -153,7 +153,9 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
             <Divider />
             <Stack>
                 <Row>
-                    <Typography level="body2" sx={{ flexGrow: 1 }}>{selectedDashboard?.name}</Typography>
+                    <div style={{ flexGrow: 1 }}>
+                        <Typography level="body2">{selectedDashboard?.name}</Typography>
+                    </div>
                     <ShareEntityChip entity={selectedDashboard} entityType={3} />
                 </Row>
                 <Button variant="plain" onClick={handleAndClose(onFullscreen)}>{t('ToggleFullscreen')}</Button>

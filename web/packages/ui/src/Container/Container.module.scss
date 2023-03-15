@@ -1,11 +1,14 @@
 .root {
     display: block;
     max-width: var(--container-maxWidth);
-    margin-right: auto;
-    margin-left: auto;
     width: 100%;
 }
 
 .pad {
     padding: 0 12px;
+}
+
+.centered {
+    margin-left: auto;
+    margin-right: auto;
 }

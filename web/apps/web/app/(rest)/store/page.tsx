@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
-import { Row, Chip, Card, Typography, FilterList, SelectItems, Gallery, Stack, amber, green, grey } from '@signalco/ui';
+import { Row, Chip, Card, Typography, FilterList, SelectItems, Gallery, Stack, ColorVariants } from '@signalco/ui';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import SignalcoLogo from '../../../components/icons/SignalcoLogo';
 import contentData from './content.json';
@@ -12,7 +12,7 @@ function StoreStockStatusBadge(props: { status: number | undefined }) {
     let Icon = Close;
     let opacity = 0.6;
     let text = 'Out of stock';
-    let color: string = grey[400];
+    let color: ColorVariants = 'neutral';
     switch (props.status) {
     default:
     case 0:
@@ -21,19 +21,19 @@ function StoreStockStatusBadge(props: { status: number | undefined }) {
         Icon = Check;
         opacity = 1;
         text = 'In stock';
-        color = green[400];
+        color = 'success';
         break;
     case 2:
         Icon = ExternalLink;
         opacity = 1;
         text = 'Sold elsewhere';
-        color = grey[400];
+        color = 'neutral';
         break;
     case 3:
         Icon = Hourglass;
         opacity = 1;
         text = 'On backorder';
-        color = amber[400];
+        color = 'warning';
         break;
     }
 
@@ -41,7 +41,7 @@ function StoreStockStatusBadge(props: { status: number | undefined }) {
         <Row justifyItems="center" style={{ opacity: opacity }}>
             <Icon color={color} />
             &nbsp;
-            <Typography fontSize="0.8rem" sx={{ color: color }}>{text}</Typography>
+            <Typography level="body2" color={color}>{text}</Typography>
         </Row>
     );
 }
@@ -61,9 +61,9 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
                         </Stack>
                     )}
                 <Stack spacing={2}>
-                    <Typography fontWeight="bold" sx={{ opacity: 0.9 }}>{name}</Typography>
+                    <Typography bold opacity={0.9}>{name}</Typography>
                     <Row spacing={2} justifyContent="space-between" alignItems="center">
-                        <Typography fontSize="1.2rem" fontWeight="bold">€&nbsp;{price ?? '-'}</Typography>
+                        <Typography level="h5" bold>€&nbsp;{price ?? '-'}</Typography>
                         <StoreStockStatusBadge status={stockStatus} />
                     </Row>
                     {features && (

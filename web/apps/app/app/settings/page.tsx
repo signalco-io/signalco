@@ -110,7 +110,7 @@ function LabeledValue({ value, unit, label }: { value: string | number, unit?: s
                 <Typography level="h5" component="span">
                     {typeof value === 'number' ? humanizeNumber(value) : value}
                 </Typography>
-                {!!unit && <Typography level="body3" style={{ lineHeight: '24px' }}>{unit}</Typography>}
+                {!!unit && <Typography level="body3">{unit}</Typography>}
             </Row>
         </Stack>
     )
