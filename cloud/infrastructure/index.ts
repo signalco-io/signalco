@@ -197,6 +197,7 @@ createAppInsights(resourceGroup, 'web', 'signalco');
 // Vercel - Domains
 dnsRecord('vercel-web', 'www', 'cname.vercel-dns.com', 'CNAME', false);
 dnsRecord('vercel-app', 'app', 'cname.vercel-dns.com', 'CNAME', false);
+dnsRecord('vercel-blog', 'blog', 'cname.vercel-dns.com', 'CNAME', false);
 dnsRecord('vercel-ui-docs', 'ui', 'cname.vercel-dns.com', 'CNAME', false);
 dnsRecord('vercel-brandgrab', 'brandgrab', 'cname.vercel-dns.com', 'CNAME', false);
 dnsRecord('vercel-slco', 'slco', 'cname.vercel-dns.com', 'CNAME', false);
