@@ -26,7 +26,7 @@ importers:
       '@enterwell/react-form-builder': 0.2.3
       '@enterwell/react-form-validation': 1.2.8
       '@hcaptcha/react-hcaptcha': 1.4.4
-      '@microsoft/signalr': 7.0.3
+      '@microsoft/signalr': 7.0.4
       '@monaco-editor/react': 4.4.6
       '@next/bundle-analyzer': 13.2.4
       '@next/env': 13.2.4
@@ -106,7 +106,7 @@ importers:
       '@enterwell/react-form-builder': 0.2.3_2xo3jry4fa6agtmoypeecp4bii
       '@enterwell/react-form-validation': 1.2.8_biqbaboplfbrettd7655fr4n2y
       '@hcaptcha/react-hcaptcha': 1.4.4_biqbaboplfbrettd7655fr4n2y
-      '@microsoft/signalr': 7.0.3
+      '@microsoft/signalr': 7.0.4
       '@monaco-editor/react': 4.4.6_waewrrayshn643ztij6zbniufy
       '@next/env': 13.2.4
       '@signalco/data': link:../../packages/data
@@ -3232,8 +3232,8 @@ packages:
       react: 18.2.0
     dev: true
 
-  /@microsoft/signalr/7.0.3:
-    resolution: {integrity: sha512-gQbrCQxvC/djy+/GBHFpNnAqubGLe0Hrp3ZO8x8NRGAU8jhj3QcHuxhq6N5Z3A0zI6IE/fMfX2xSheQxOwA3ZA==}
+  /@microsoft/signalr/7.0.4:
+    resolution: {integrity: sha512-K+I0MXvawTph0D2pwmuGXBIQbyZ+zDSw39Iqgy+D9aewLfQR4TIRFvz4kFNRhvlHIcSKrUFL2w3uiHnMPSQs4g==}
     dependencies:
       abort-controller: 3.0.0
       eventsource: 2.0.2
