@@ -23,14 +23,7 @@ export type TypographyProps = ChildrenProps & {
     gutterBottom?: boolean;
 };
 
-export default function Typography({ children, component, level, gutterBottom, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, secondary, tertiary, color, noWrap }: TypographyProps) {
-    const styles: CSSProperties = {
-        fontFamily: 'var(--joy-fontFamily-body)',
-        fontSize: level?.startsWith('h') 
-            ? `var(--joy-fontSize-xl${7 - (parseInt(level.substring(1)) || 0)})` 
-            : `var(--joy-fontSize-${level === 'body2' ? 'sm' : (level === 'body3' ? 'xs' : 'md')})`,
-        margin: 0
-    };
+function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, secondary, tertiary, color, noWrap } : TypographyProps) {
     if (extraThin) styles['fontWeight'] = 100;
     if (thin) styles['fontWeight'] = 300;
     if (semiBold) styles['fontWeight'] = 500;
@@ -52,6 +45,19 @@ export default function Typography({ children, component, level, gutterBottom, o
         styles['textOverflow'] = 'ellipsis';
     }
     if (color) styles['color'] = `var(--joy-palette-${color}-plainColor)`;
+}
+
+export default function Typography(props: TypographyProps) {
+    const { level, component, children } = props;
+    const styles: CSSProperties = {
+        fontFamily: 'var(--joy-fontFamily-body)',
+        fontSize: level?.startsWith('h') 
+            ? `var(--joy-fontSize-xl${7 - (parseInt(level.substring(1)) || 0)})` 
+            : `var(--joy-fontSize-${level === 'body2' ? 'sm' : (level === 'body3' ? 'xs' : 'md')})`,
+        margin: 0
+    };
+
+    populateTypographyStyles(styles, props);
 
     return React.createElement(component ?? (level?.startsWith('h') ? level : 'p'), { children, style: styles });
 }
