@@ -486,6 +486,7 @@ importers:
       storybook: 7.0.0-rc.3
       storybook-addon-swc: 1.1.9
       style-loader: 3.3.2
+      styled-jsx: ^5.1.2
       typescript: 4.9.5
       webpack: 5.76.1
     dependencies:
@@ -515,6 +516,7 @@ importers:
       storybook: 7.0.0-rc.3
       storybook-addon-swc: 1.1.9_webpack@5.76.1
       style-loader: 3.3.2_webpack@5.76.1
+      styled-jsx: 5.1.2_ogvc6ewgr3qq5z6tmbtquhqyui
       typescript: 4.9.5
       webpack: 5.76.1
 
@@ -13952,6 +13954,24 @@ packages:
       babel-plugin-macros:
         optional: true
     dependencies:
+      client-only: 0.0.1
+      react: 18.2.0
+    dev: true
+
+  /styled-jsx/5.1.2_ogvc6ewgr3qq5z6tmbtquhqyui:
+    resolution: {integrity: sha512-FI5r0a5ED2/+DSdG2ZRz3a4FtNQnKPLadauU5v76a9QsscwZrWggQKOmyxGGP5EWKbyY3bsuWAJYzyKaDAVAcw==}
+    engines: {node: '>= 12.0.0'}
+    peerDependencies:
+      '@babel/core': '*'
+      babel-plugin-macros: '*'
+      react: '>= 16.8.0 || 17.x.x || ^18.0.0-0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      babel-plugin-macros:
+        optional: true
+    dependencies:
+      '@babel/core': 7.21.3
       client-only: 0.0.1
       react: 18.2.0
     dev: true
