@@ -53,7 +53,7 @@ importers:
       '@types/uuid': 9.0.1
       '@vvo/tzdb': 6.105.0
       babel-loader: 9.1.2
-      classix: 2.1.22
+      classix: 2.1.24
       cobe: 0.6.3
       color: 4.2.3
       colorette: 2.0.19
@@ -117,7 +117,7 @@ importers:
       '@tanstack/react-query': 4.26.1_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-devtools': 4.26.1_brdhmlf72zuns3lsk66phyptty
       '@vvo/tzdb': 6.105.0
-      classix: 2.1.22
+      classix: 2.1.24
       cobe: 0.6.3
       color: 4.2.3
       compare-versions: 5.0.3
@@ -199,7 +199,7 @@ importers:
       '@types/react-dom': 18.0.11
       '@types/react-motion': 0.0.33
       babel-loader: 9.1.2
-      classix: 2.1.22
+      classix: 2.1.24
       colorette: 2.0.19
       cross-env: 7.0.3
       encoding: 0.1.13
@@ -230,7 +230,7 @@ importers:
       '@signalco/js': link:../../packages/js
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
-      classix: 2.1.22
+      classix: 2.1.24
       encoding: 0.1.13
       fs-extra: 11.1.0
       klaw: 4.1.0
@@ -294,7 +294,7 @@ importers:
       '@types/sharp': 0.31.1
       babel-loader: 9.1.2
       cheerio: 1.0.0-rc.12
-      classix: 2.1.22
+      classix: 2.1.24
       cross-env: 7.0.3
       crypto-js: 4.1.1
       eslint: 8.36.0
@@ -324,7 +324,7 @@ importers:
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
       cheerio: 1.0.0-rc.12
-      classix: 2.1.22
+      classix: 2.1.24
       crypto-js: 4.1.1
       extract-colors: 2.0.5
       get-pixels: 3.3.3
@@ -401,7 +401,7 @@ importers:
       '@types/react-dom': 18.0.11
       '@types/react-motion': 0.0.33
       babel-loader: 9.1.2
-      classix: 2.1.22
+      classix: 2.1.24
       cross-env: 7.0.3
       eslint: 8.36.0
       next: 13.2.4
@@ -425,7 +425,7 @@ importers:
       '@next/env': 13.2.4
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
-      classix: 2.1.22
+      classix: 2.1.24
       next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
       next-secure-headers: 2.2.0
       postcss: 8.4.21
@@ -540,7 +540,7 @@ importers:
       '@types/react-dom': 18.0.11
       '@types/react-motion': 0.0.33
       babel-loader: 9.1.2
-      classix: 2.1.22
+      classix: 2.1.24
       cobe: 0.6.3
       colorette: 2.0.19
       cross-env: 7.0.3
@@ -573,7 +573,7 @@ importers:
       '@signalco/js': link:../../packages/js
       '@signalco/ui': link:../../packages/ui
       '@signalco/ui-icons': link:../../packages/ui-icons
-      classix: 2.1.22
+      classix: 2.1.24
       cobe: 0.6.3
       encoding: 0.1.13
       next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
@@ -720,7 +720,7 @@ importers:
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
       '@types/react-timeago': 4.1.3
-      classix: 2.1.22
+      classix: 2.1.24
       concurrently: 7.6.0
       esbuild: 0.17.11
       glob: 8.1.0
@@ -766,7 +766,7 @@ importers:
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
       '@types/react-timeago': 4.1.3
-      classix: 2.1.22
+      classix: 2.1.24
       concurrently: 7.6.0
       esbuild: 0.17.11
       glob: 8.1.0
@@ -7283,8 +7283,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /classix/2.1.22:
-    resolution: {integrity: sha512-WbpzCCk+lP47qRiNipJboLKLhksP1uhhsLlccbPRBaVhK6AeXAf8qY/UTixEvKhStoMPQlMPNTrk6ywSviFIQA==}
+  /classix/2.1.24:
+    resolution: {integrity: sha512-JisRdwL5G+MW7aJ5kfdutnoMIpd5VmBSeuCYXlikoWdIS9wO+QiorfvdEzLrD0zsDarV+aFGitpLYe3dRe7srA==}
 
   /classnames/2.3.2:
     resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
