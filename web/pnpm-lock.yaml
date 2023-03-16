@@ -372,16 +372,16 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       typescript: 4.9.5
-      vite: 4.1.4
+      vite: 4.2.0
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
-      '@vitejs/plugin-react-swc': 3.2.0_vite@4.1.4
+      '@vitejs/plugin-react-swc': 3.2.0_vite@4.2.0
       typescript: 4.9.5
-      vite: 4.1.4
+      vite: 4.2.0
 
   apps/slco:
     specifiers:
@@ -6329,13 +6329,13 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: false
 
-  /@vitejs/plugin-react-swc/3.2.0_vite@4.1.4:
+  /@vitejs/plugin-react-swc/3.2.0_vite@4.2.0:
     resolution: {integrity: sha512-IcBoXL/mcH7JdQr/nfDlDwTdIaH8Rg7LpfQDF4nAht+juHWIuv6WhpKPCSfY4+zztAaB07qdBoFz1XCZsgo3pQ==}
     peerDependencies:
       vite: ^4
     dependencies:
       '@swc/core': 1.3.35
-      vite: 4.1.4
+      vite: 4.2.0
     dev: true
 
   /@vvo/tzdb/6.105.0:
@@ -13295,14 +13295,6 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /rollup/3.17.2:
-    resolution: {integrity: sha512-qMNZdlQPCkWodrAZ3qnJtvCAl4vpQ8q77uEujVCCbC/6CLB7Lcmvjq7HyiOSnf4fxTT9XgsE36oLHJBH49xjqA==}
-    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
   /rollup/3.19.1:
     resolution: {integrity: sha512-lAbrdN7neYCg/8WaoWn/ckzCtz+jr70GFfYdlf50OF7387HTg+wiuiqJRFYawwSPpqfqDNYqK7smY/ks2iAudg==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
@@ -14756,8 +14748,8 @@ packages:
       d3-timer: 3.0.1
     dev: false
 
-  /vite/4.1.4:
-    resolution: {integrity: sha512-3knk/HsbSTKEin43zHu7jTwYWv81f8kgAL99G5NWBcA1LKvtvcVAC4JjBH1arBunO9kQka+1oGbrMKOjk4ZrBg==}
+  /vite/4.2.0:
+    resolution: {integrity: sha512-AbDTyzzwuKoRtMIRLGNxhLRuv1FpRgdIw+1y6AQG73Q5+vtecmvzKo/yk8X/vrHDpETRTx01ABijqUHIzBXi0g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -14781,10 +14773,10 @@ packages:
       terser:
         optional: true
     dependencies:
-      esbuild: 0.16.17
+      esbuild: 0.17.11
       postcss: 8.4.21
       resolve: 1.22.1
-      rollup: 3.17.2
+      rollup: 3.19.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
