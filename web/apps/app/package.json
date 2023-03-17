@@ -97,7 +97,7 @@
         "rimraf": "4.4.0",
         "sass": "1.59.3",
         "sass-loader": "13.2.0",
-        "typescript": "4.9.5",
+        "typescript": "5.0.2",
         "webpack": "5.76.2"
     },
     "optionalDependencies": {
