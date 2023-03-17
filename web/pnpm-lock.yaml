@@ -618,25 +618,15 @@ importers:
 
   packages/data:
     specifiers:
-      '@signalco/tsconfig': '*'
-      concurrently: 7.6.0
-      esbuild: 0.17.11
+      '@signalco/tsconfig': workspace:*
       prop-types: 15.8.1
       rimraf: 4.4.0
-      rollup: 3.19.1
-      rollup-plugin-esbuild: 5.0.0
-      rollup-plugin-summary: 2.0.0
       tsup: 6.6.3
       typescript: 4.9.5
     devDependencies:
       '@signalco/tsconfig': link:../tsconfig
-      concurrently: 7.6.0
-      esbuild: 0.17.11
       prop-types: 15.8.1
       rimraf: 4.4.0
-      rollup: 3.19.1
-      rollup-plugin-esbuild: 5.0.0_caszwlkzzxo5hzxqu45fmzwfye
-      rollup-plugin-summary: 2.0.0_rollup@3.19.1
       tsup: 6.6.3_typescript@4.9.5
       typescript: 4.9.5
 
