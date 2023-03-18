@@ -68,7 +68,7 @@ importers:
       next: 13.2.4
       next-pwa: 5.6.0
       next-secure-headers: 2.2.0
-      next-sitemap: 4.0.5
+      next-sitemap: 4.0.6
       openapi-types: 12.1.0
       pigeon-maps: 0.21.3
       playwright: 1.31.2
@@ -165,7 +165,7 @@ importers:
       cross-env: 7.0.3
       eslint: 8.36.0
       fs-extra: 11.1.0
-      next-sitemap: 4.0.5_jccvrrmb7rb3yyi3af3znueaea
+      next-sitemap: 4.0.6_jccvrrmb7rb3yyi3af3znueaea
       openapi-types: 12.1.0
       playwright: 1.31.2
       prop-types: 15.8.1
@@ -208,7 +208,7 @@ importers:
       klaw: 4.1.0
       next: 13.2.3
       next-secure-headers: 2.2.0
-      next-sitemap: 4.0.1
+      next-sitemap: 4.0.6
       playwright: 1.31.2
       postcss: 8.4.21
       prop-types: 15.8.1
@@ -262,7 +262,7 @@ importers:
       colorette: 2.0.19
       cross-env: 7.0.3
       eslint: 8.36.0
-      next-sitemap: 4.0.1_xeg3tdra7hobsncwzvo3da7vxi
+      next-sitemap: 4.0.6_xeg3tdra7hobsncwzvo3da7vxi
       playwright: 1.31.2
       prop-types: 15.8.1
       rimraf: 4.2.0
@@ -302,7 +302,7 @@ importers:
       get-pixels: 3.3.3
       next: 13.2.4
       next-secure-headers: 2.2.0
-      next-sitemap: 4.0.5
+      next-sitemap: 4.0.6
       playwright: 1.31.2
       postcss: 8.4.21
       prop-types: 15.8.1
@@ -356,7 +356,7 @@ importers:
       babel-loader: 9.1.2_h5x7dh6zbbyopr7jvxivhylqpa
       cross-env: 7.0.3
       eslint: 8.36.0
-      next-sitemap: 4.0.5_jccvrrmb7rb3yyi3af3znueaea
+      next-sitemap: 4.0.6_jccvrrmb7rb3yyi3af3znueaea
       playwright: 1.31.2
       prop-types: 15.8.1
       rimraf: 4.4.0
@@ -406,7 +406,7 @@ importers:
       eslint: 8.36.0
       next: 13.2.4
       next-secure-headers: 2.2.0
-      next-sitemap: 4.0.5
+      next-sitemap: 4.0.6
       playwright: 1.31.2
       postcss: 8.4.21
       prop-types: 15.8.1
@@ -451,7 +451,7 @@ importers:
       babel-loader: 9.1.2_h5x7dh6zbbyopr7jvxivhylqpa
       cross-env: 7.0.3
       eslint: 8.36.0
-      next-sitemap: 4.0.5_jccvrrmb7rb3yyi3af3znueaea
+      next-sitemap: 4.0.6_jccvrrmb7rb3yyi3af3znueaea
       playwright: 1.31.2
       prop-types: 15.8.1
       rimraf: 4.4.0
@@ -551,7 +551,7 @@ importers:
       next: 13.2.4
       next-pwa: 5.6.0
       next-secure-headers: 2.2.0
-      next-sitemap: 4.0.5
+      next-sitemap: 4.0.6
       octokit: 2.0.14
       openapi-types: 12.1.0
       playwright: 1.31.2
@@ -607,7 +607,7 @@ importers:
       colorette: 2.0.19
       cross-env: 7.0.3
       eslint: 8.36.0
-      next-sitemap: 4.0.5_jccvrrmb7rb3yyi3af3znueaea
+      next-sitemap: 4.0.6_jccvrrmb7rb3yyi3af3znueaea
       openapi-types: 12.1.0
       playwright: 1.31.2
       prop-types: 15.8.1
@@ -11211,22 +11211,8 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: false
 
-  /next-sitemap/4.0.1_xeg3tdra7hobsncwzvo3da7vxi:
-    resolution: {integrity: sha512-dY6vKE/uayNYSfhXA64U9NZYSJtFzK01oBouY+XqgQieksKBG9BWNmq8yGSJUermyux4wCnNa9gLHwSk38emhA==}
-    engines: {node: '>=14.18'}
-    hasBin: true
-    peerDependencies:
-      '@next/env': '*'
-      next: '*'
-    dependencies:
-      '@corex/deepmerge': 4.0.37
-      '@next/env': 13.2.3
-      minimist: 1.2.8
-      next: 13.2.3_l4i6tgmfppzwb2u4w42uz3wi4m
-    dev: true
-
-  /next-sitemap/4.0.5_jccvrrmb7rb3yyi3af3znueaea:
-    resolution: {integrity: sha512-kIABX4n8wJqY2sttRjivBF2r1MgQ1pg12y87qGT+5meippq0ivxaNSRldMDOj8pIGhXW6uFAsCxyH/JftqkwWQ==}
+  /next-sitemap/4.0.6_jccvrrmb7rb3yyi3af3znueaea:
+    resolution: {integrity: sha512-pZ9tynYe6mRR189qZqcOlWVgM1Gxo07BJQW0AjerKmLwQOt+6FQMdaDgifgCt6jDT3Y3EG/+NUDDZRcd0gbPkA==}
     engines: {node: '>=14.18'}
     hasBin: true
     peerDependencies:
@@ -11237,6 +11223,20 @@ packages:
       '@next/env': 13.2.4
       minimist: 1.2.8
       next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
+    dev: true
+
+  /next-sitemap/4.0.6_xeg3tdra7hobsncwzvo3da7vxi:
+    resolution: {integrity: sha512-pZ9tynYe6mRR189qZqcOlWVgM1Gxo07BJQW0AjerKmLwQOt+6FQMdaDgifgCt6jDT3Y3EG/+NUDDZRcd0gbPkA==}
+    engines: {node: '>=14.18'}
+    hasBin: true
+    peerDependencies:
+      '@next/env': '*'
+      next: '*'
+    dependencies:
+      '@corex/deepmerge': 4.0.37
+      '@next/env': 13.2.3
+      minimist: 1.2.8
+      next: 13.2.3_l4i6tgmfppzwb2u4w42uz3wi4m
     dev: true
 
   /next/13.2.3_l4i6tgmfppzwb2u4w42uz3wi4m:
