@@ -621,13 +621,13 @@ importers:
       '@signalco/tsconfig': workspace:*
       prop-types: 15.8.1
       rimraf: 4.4.0
-      tsup: 6.6.3
+      tsup: 6.7.0
       typescript: 5.0.2
     devDependencies:
       '@signalco/tsconfig': link:../tsconfig
       prop-types: 15.8.1
       rimraf: 4.4.0
-      tsup: 6.6.3_typescript@5.0.2
+      tsup: 6.7.0_typescript@5.0.2
       typescript: 5.0.2
 
   packages/eslint-config-signalco:
@@ -661,7 +661,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       rimraf: 4.4.0
-      tsup: 6.6.3
+      tsup: 6.7.0
       typescript: 5.0.2
     devDependencies:
       '@signalco/tsconfig': link:../tsconfig
@@ -671,7 +671,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       rimraf: 4.4.0
-      tsup: 6.6.3_typescript@5.0.2
+      tsup: 6.7.0_typescript@5.0.2
       typescript: 5.0.2
 
   packages/js:
@@ -681,7 +681,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       rimraf: 4.4.0
-      tsup: 6.6.3
+      tsup: 6.7.0
       typescript: 5.0.2
     devDependencies:
       '@signalco/tsconfig': link:../tsconfig
@@ -689,7 +689,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       rimraf: 4.4.0
-      tsup: 6.6.3_typescript@5.0.2
+      tsup: 6.7.0_typescript@5.0.2
       typescript: 5.0.2
 
   packages/tsconfig:
@@ -782,7 +782,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       rimraf: 4.4.0
-      tsup: 6.6.3
+      tsup: 6.7.0
       typescript: 5.0.2
     devDependencies:
       '@signalco/tsconfig': link:../tsconfig
@@ -791,7 +791,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       rimraf: 4.4.0
-      tsup: 6.6.3_typescript@5.0.2
+      tsup: 6.7.0_typescript@5.0.2
       typescript: 5.0.2
 
 packages:
@@ -7294,13 +7294,13 @@ packages:
     resolution: {integrity: sha512-zhaCDicdLuWN5UbN5IMnFqNMhNfo919sH85y2/ea+5Yg9TsTkeZxpL+JLbp6cgYFS4sRLp3YV4S6yDuqVWHYOw==}
     engines: {node: '>=6'}
 
-  /bundle-require/4.0.0_esbuild@0.17.11:
+  /bundle-require/4.0.0_esbuild@0.17.12:
     resolution: {integrity: sha512-5xjxGtR06579D7UcTBhcQO7Zg3A7ji5xuIUl7kNHSvVJ7/CmAs3bCosfYWNuD/Xm5k0jS9VFuPipSpm5S+ZlKw==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     peerDependencies:
       esbuild: '>=0.17'
     dependencies:
-      esbuild: 0.17.11
+      esbuild: 0.17.12
       load-tsconfig: 0.2.3
     dev: true
 
@@ -14568,14 +14568,14 @@ packages:
   /tslib/2.4.1:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
 
-  /tsup/6.6.3_typescript@5.0.2:
-    resolution: {integrity: sha512-OLx/jFllYlVeZQ7sCHBuRVEQBBa1tFbouoc/gbYakyipjVQdWy/iQOvmExUA/ewap9iQ7tbJf9pW0PgcEFfJcQ==}
+  /tsup/6.7.0_typescript@5.0.2:
+    resolution: {integrity: sha512-L3o8hGkaHnu5TdJns+mCqFsDBo83bJ44rlK7e6VdanIvpea4ArPcU3swWGsLVbXak1PqQx/V+SSmFPujBK+zEQ==}
     engines: {node: '>=14.18'}
     hasBin: true
     peerDependencies:
       '@swc/core': ^1
       postcss: ^8.4.12
-      typescript: ^4.1.0
+      typescript: '>=4.1.0'
     peerDependenciesMeta:
       '@swc/core':
         optional: true
@@ -14584,11 +14584,11 @@ packages:
       typescript:
         optional: true
     dependencies:
-      bundle-require: 4.0.0_esbuild@0.17.11
+      bundle-require: 4.0.0_esbuild@0.17.12
       cac: 6.7.14
       chokidar: 3.5.3
       debug: 4.3.4
-      esbuild: 0.17.11
+      esbuild: 0.17.12
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
