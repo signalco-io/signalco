@@ -44,15 +44,6 @@ jobs:
           dotnet publish --configuration Release
           popd
 
-      - name: "Build Channels"
-        shell: bash
-        run: |
-          for channelDir in Signalco.Channel.[A-Z]*; do
-            pushd ./$channelDir
-            dotnet publish --configuration Release
-            popd
-          done
-
       - uses: actions/cache@v3
         with:
           path: "**/node_modules"

@@ -2,8 +2,9 @@ import { ResourceGroup } from '@pulumi/azure-native/resources';
 import createPublicFunction from './createPublicFunction';
 import { assignFunctionCode } from './assignFunctionCode';
 import apiStatusCheck from '../Checkly/apiStatusCheck';
+import publishProjectAsync from '../dotnet/publishProjectAsync';
 
-export default function createChannelFunction (channelName: string, resourceGroup: ResourceGroup, shouldProtect: boolean) {
+export default async function createChannelFunctionAsync (channelName: string, resourceGroup: ResourceGroup, shouldProtect: boolean) {
     const channelNameLower = channelName.toLocaleLowerCase();
     const publicFunctionPrefix = 'channel' + channelNameLower;
     const publicFunctionStoragePrefix = 'ch' + channelNameLower;
@@ -17,11 +18,15 @@ export default function createChannelFunction (channelName: string, resourceGrou
         corsDomains,
         shouldProtect
     );
+
+    const codePath = `../src/Signalco.Channel.${channelName}`;
+    const publishResult = await publishProjectAsync(codePath);
+
     const channelFuncCode = assignFunctionCode(
         resourceGroup,
         channelFunc.webApp,
         publicFunctionStoragePrefix,
-        `../src/Signalco.Channel.${channelName}/bin/Release/net6.0/publish/`,
+        publishResult.releaseDir,
         shouldProtect);
     apiStatusCheck(publicFunctionPrefix, `Channel - ${channelName}`, channelFunc.dnsCname.hostname, 60);
 

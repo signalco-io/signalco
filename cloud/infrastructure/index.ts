@@ -16,7 +16,7 @@ import createSes from './AWS/createSes';
 import createChannelFunction from './Azure/createChannelFunction';
 import apiStatusCheck from './Checkly/apiStatusCheck';
 import dnsRecord from './CloudFlare/dnsRecord';
-import { run } from '@pulumi/command/local';
+import publishProjectAsync from './dotnet/publishProjectAsync';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -39,7 +39,6 @@ export = async () => {
     const signalrPrefix = 'sr';
     const storagePrefix = 'store';
     const keyvaultPrefix = 'kv';
-    const channelNames = ['Slack', 'Zigbee2Mqtt', 'PhilipsHue'];
 
     const resourceGroup = new ResourceGroup(resourceGroupName);
     const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
@@ -80,40 +79,36 @@ export = async () => {
 
     // Create Internal functions
     // TODO: move to separate file
-    async function CreateInternalFuncAsync (name: string, codePath: string) {
+    async function createInternalFuncAsync (name: string) {
+        const shortName = name.substring(0, 9).toLocaleLowerCase();
         const func = createFunction(
             resourceGroup,
-            `int${name}`,
+            `int${shortName}`,
             shouldProtect,
             false);
 
-        await run({
-            command: 'dotnet publish --configuration Release',
-            dir: codePath
-        });
-
-        // const buildFunc = new Command(`func-internal-build-${name}`, {
-        //     create: 'dotnet publish --configuration Release',
-        //     dir: codePath
-        // });
+        const codePath = `../src/Signalco.Func.Internal.${name}`;
+        const publishResult = await publishProjectAsync(codePath);
 
         const code = assignFunctionCode(
             resourceGroup,
             func.webApp,
-            `int${name}`,
-            `${codePath}/bin/Release/net6.0/publish/`,
+            `int${shortName}`,
+            publishResult.releaseDir,
             shouldProtect);
-        apiStatusCheck(`${internalFunctionPrefix}-${name}`, `Internal - ${name}`, func.webApp.hostNames[0], 60);
-        return { name, func, code };
+        apiStatusCheck(`${internalFunctionPrefix}-${shortName}`, `Internal - ${name}`, func.webApp.hostNames[0], 60);
+        return { name, shortName, func, code };
     }
 
-    const internalFuncs = await Promise.all([
-        CreateInternalFuncAsync('usageproc', '../src/Signalco.Func.Internal.UsageProcessor')
-    ]);
+    // Generate internal functions
+    const internalNames = ['UsageProcessor'];
+    const internalFuncs = await Promise.all(internalNames.map(funcName =>
+        createInternalFuncAsync(funcName)));
 
     // Generate channels functions
-    const channels = channelNames.map(channelName =>
-        createChannelFunction(channelName, resourceGroup, shouldProtect));
+    const channelNames = ['Slack', 'Zigbee2Mqtt', 'PhilipsHue'];
+    const channels = await Promise.all(channelNames.map(channelName =>
+        createChannelFunction(channelName, resourceGroup, shouldProtect)));
 
     // Create general storage and prepare tables
     const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
@@ -208,7 +203,7 @@ export = async () => {
         assignFunctionSettings(
             resourceGroup,
             func.func.webApp,
-            `int${func.name}`,
+            `int${func.shortName}`,
             func.code.storageAccount.connectionString,
             func.code.codeBlobUlr,
             {
