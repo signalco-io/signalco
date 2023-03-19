@@ -1,7 +1,7 @@
 import { ResourceGroup } from '@pulumi/azure-native/resources';
 import createPublicFunction from './createPublicFunction';
 import { assignFunctionCode } from './assignFunctionCode';
-import apiStatusCheck from './apiStatusCheck';
+import apiStatusCheck from '../Checkly/apiStatusCheck';
 
 export default function createChannelFunction (channelName: string, resourceGroup: ResourceGroup, shouldProtect: boolean) {
     const channelNameLower = channelName.toLocaleLowerCase();

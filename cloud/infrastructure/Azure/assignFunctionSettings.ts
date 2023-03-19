@@ -1,6 +1,6 @@
 import { Input } from '@pulumi/pulumi';
-import { WebApp, WebAppApplicationSettings } from '@pulumi/azure-native/web';
-import { ResourceGroup } from '@pulumi/azure-native/resources';
+import { type WebApp, WebAppApplicationSettings } from '@pulumi/azure-native/web';
+import { type ResourceGroup } from '@pulumi/azure-native/resources';
 
 export function assignFunctionSettings (resourceGroup: ResourceGroup, app: WebApp, namePrefix: string, storageConnectionString: Input<string>, codeUrl: Input<string>, appSettings: Input<{ [key: string]: Input<string>; }>, protect: boolean) {
     const settings = new WebAppApplicationSettings(`func-appsettings-${namePrefix}`, {

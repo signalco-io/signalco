@@ -2,7 +2,7 @@ import { Config, interpolate, log } from '@pulumi/pulumi';
 import { WebApp, AppServicePlan, WebAppHostNameBinding, Certificate, HostNameType, SslState, CustomHostNameDnsRecordType } from '@pulumi/azure-native/web';
 import { ResourceGroup } from '@pulumi/azure-native/resources';
 import { local } from '@pulumi/command';
-import { dnsRecord } from './dnsRecord';
+import dnsRecord from '../CloudFlare/dnsRecord';
 
 export function assignCustomDomain (resourceGroup: ResourceGroup, webApp: WebApp, servicePlan: AppServicePlan, namePrefix: string, subDomainName: string, protect: boolean) {
     const config = new Config();

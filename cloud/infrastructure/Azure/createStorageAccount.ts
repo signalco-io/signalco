@@ -18,7 +18,7 @@ export function createStorageAccount (resourceGroup: ResourceGroup, namePrefix: 
         // parent: parent ?? resourceGroup
     });
 
-    const connectionString = getConnectionString(resourceGroup, storageAccount.name);
+    const connectionString = getConnectionString(resourceGroup, storageAccount);
 
     return {
         storageAccount,

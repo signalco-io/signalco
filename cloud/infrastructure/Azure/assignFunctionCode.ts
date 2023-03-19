@@ -1,6 +1,6 @@
 import { asset } from '@pulumi/pulumi';
-import { WebApp } from '@pulumi/azure-native/web';
-import { ResourceGroup } from '@pulumi/azure-native/resources';
+import { type WebApp } from '@pulumi/azure-native/web';
+import { type ResourceGroup } from '@pulumi/azure-native/resources';
 import { Blob, BlobContainer } from '@pulumi/azure-native/storage';
 import { createStorageAccount } from './createStorageAccount';
 import { signedBlobReadUrl } from './signedBlobReadUrl';
