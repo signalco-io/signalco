@@ -13,11 +13,10 @@ import { assignFunctionSettings } from './Azure/assignFunctionSettings';
 import createWebAppAppInsights from './Azure/createWebAppAppInsights';
 import createAppInsights from './Azure/createAppInsights';
 import createSes from './AWS/createSes';
+import createInternalFunctionAsync from './Azure/createInternalFunctionAsync';
 import createChannelFunction from './Azure/createChannelFunction';
 import apiStatusCheck from './Checkly/apiStatusCheck';
 import dnsRecord from './CloudFlare/dnsRecord';
-import publishProjectAsync from './dotnet/publishProjectAsync';
-
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
  *       there is memory issued when enabled. (2022/04)
@@ -77,33 +76,10 @@ export = async () => {
     apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 30);
     const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, intFunc.webApp);
 
-    // Create Internal functions
-    // TODO: move to separate file
-    async function createInternalFuncAsync (name: string) {
-        const shortName = name.substring(0, 9).toLocaleLowerCase();
-        const func = createFunction(
-            resourceGroup,
-            `int${shortName}`,
-            shouldProtect,
-            false);
-
-        const codePath = `../src/Signalco.Func.Internal.${name}`;
-        const publishResult = await publishProjectAsync(codePath);
-
-        const code = assignFunctionCode(
-            resourceGroup,
-            func.webApp,
-            `int${shortName}`,
-            publishResult.releaseDir,
-            shouldProtect);
-        apiStatusCheck(`${internalFunctionPrefix}-${shortName}`, `Internal - ${name}`, func.webApp.hostNames[0], 60);
-        return { name, shortName, func, code };
-    }
-
     // Generate internal functions
     const internalNames = ['UsageProcessor'];
     const internalFuncs = await Promise.all(internalNames.map(funcName =>
-        createInternalFuncAsync(funcName)));
+        createInternalFunctionAsync(resourceGroup, funcName, shouldProtect)));
 
     // Generate channels functions
     const channelNames = ['Slack', 'Zigbee2Mqtt', 'PhilipsHue'];
