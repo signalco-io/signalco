@@ -72,8 +72,8 @@ jobs:
           pushd '../infrastructure'
           yarn install
           yarn lint
-          pulumi plugin install resource checkly v1.1.2
-          pulumi preview --stack signalco/${{ steps.extract_branch.outputs.branch }}
+          curl -fsSL https://get.pulumi.com | sh
+          /home/runner/.pulumi/bin/pulumi preview --stack signalco/${{ steps.extract_branch.outputs.branch }}
           popd
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
