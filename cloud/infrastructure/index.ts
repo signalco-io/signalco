@@ -204,6 +204,7 @@ dnsRecord('vercel-slco', 'slco', 'cname.vercel-dns.com', 'CNAME', false);
 
 // Checkly - Domains
 dnsRecord('checkly-public-dashboard', 'status', 'dashboards.checklyhq.com', 'CNAME', false);
+dnsRecord('checkly-public-dashboard', `_vercel.${domainName}`, `vc-domain-verify=status.${domainName},563d86cd3501b049a1ad`, 'TXT', false);
 
 export const signalRUrl = signalr.signalr.hostName;
 export const internalApiUrl = intFunc.webApp.hostNames[0];
