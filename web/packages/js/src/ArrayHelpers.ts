@@ -41,8 +41,10 @@ const arrayPick = <T>(array: T[], compareFn: (i: T, index: number) => number | u
     return currentMin;
 }
 
-export const arrayMin = <T>(array: T[], compareFn: (i: T, index: number) => number | undefined) => arrayPick(array, compareFn, (a, b) => typeof a === 'undefined' ? true : a < (typeof b === 'undefined' ? false : b))
-export const arrayMax = <T>(array: T[], compareFn: (i: T, index: number) => number | undefined) => arrayPick(array, compareFn, (a, b) => typeof a === 'undefined' ? false : a > (typeof b === 'undefined' ? true : b))
+export const arrayMin = <T>(array: T[], compareFn: (i: T, index: number) => number | undefined) => 
+    arrayPick(array, compareFn, (a, b) => typeof a === 'undefined' ? true : (typeof b === 'undefined' ? false : a < b))
+export const arrayMax = <T>(array: T[], compareFn: (i: T, index: number) => number | undefined) => 
+    arrayPick(array, compareFn, (a, b) => typeof a === 'undefined' ? false : (typeof b === 'undefined' ? true : a > b))
 
 export function sequenceEqual<TA, TB>(arrayA: TA[], arrayB: TB[], compareFn?: (a: TA, b: TB) => boolean) {
     if (!arrayA || !arrayB)

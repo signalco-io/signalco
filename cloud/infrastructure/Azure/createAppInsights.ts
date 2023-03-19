@@ -1,4 +1,4 @@
-import { ResourceGroup } from '@pulumi/azure-native/resources';
+import { type ResourceGroup } from '@pulumi/azure-native/resources';
 import { Component, ApplicationType, ComponentArgs } from '@pulumi/azure-native/insights';
 
 export default function createAppInsights (resourceGroup: ResourceGroup, namePrefix: string, nameSuffix: string, options?: Partial<ComponentArgs>) {

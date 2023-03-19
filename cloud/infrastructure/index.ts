@@ -1,21 +1,21 @@
 import { Config, getStack, interpolate } from '@pulumi/pulumi';
 import { ResourceGroup } from '@pulumi/azure-native/resources';
-import { createFunction } from './createFunction';
-import { createSignalR } from './createSignalR';
-import { createStorageAccount } from './createStorageAccount';
-import { createKeyVault } from './createKeyVault';
-import createPublicFunction from './createPublicFunction';
-import { webAppIdentity } from './webAppIdentity';
-import vaultSecret from './vaultSecret';
+import { createFunction } from './Azure/createFunction';
+import { createSignalR } from './Azure/createSignalR';
+import { createStorageAccount } from './Azure/createStorageAccount';
+import { createKeyVault } from './Azure/createKeyVault';
+import createPublicFunction from './Azure/createPublicFunction';
+import { webAppIdentity } from './Azure/webAppIdentity';
+import vaultSecret from './Azure/vaultSecret';
 import { Table, Queue } from '@pulumi/azure-native/storage';
-import { assignFunctionCode } from './assignFunctionCode';
-import { assignFunctionSettings } from './assignFunctionSettings';
-import createWebAppAppInsights from './createWebAppAppInsights';
-import createAppInsights from './createAppInsights';
-import createSes from './createSes';
-import createChannelFunction from './createChannelFunction';
-import apiStatusCheck from './apiStatusCheck';
-import { dnsRecord } from './dnsRecord';
+import { assignFunctionCode } from './Azure/assignFunctionCode';
+import { assignFunctionSettings } from './Azure/assignFunctionSettings';
+import createWebAppAppInsights from './Azure/createWebAppAppInsights';
+import createAppInsights from './Azure/createAppInsights';
+import createSes from './AWS/createSes';
+import createChannelFunction from './Azure/createChannelFunction';
+import apiStatusCheck from './Checkly/apiStatusCheck';
+import dnsRecord from './CloudFlare/dnsRecord';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -43,7 +43,7 @@ const resourceGroup = new ResourceGroup(resourceGroupName);
 const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
 
 const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, shouldProtect);
-apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, 15, '/api/v1/health');
+apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, 30, '/api/v1/health');
 
 // Create Public function
 const pubFunc = createPublicFunction(
@@ -59,7 +59,7 @@ const pubFuncCode = assignFunctionCode(
     publicFunctionPrefix,
     '../src/Signal.Api.Public/bin/Release/net6.0/publish/',
     shouldProtect);
-apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, 5);
+apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, 15);
 const pubFuncInsights = createWebAppAppInsights(resourceGroup, publicFunctionPrefix, pubFunc.webApp);
 
 // Create Internal function
@@ -75,7 +75,7 @@ const intFuncCode = assignFunctionCode(
     internalFunctionPrefix,
     '../src/Signal.Api.Internal/bin/Release/net6.0/publish/',
     shouldProtect);
-apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 15);
+apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 30);
 const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, intFunc.webApp);
 
 // Generate channels functions
@@ -204,6 +204,7 @@ dnsRecord('vercel-slco', 'slco', 'cname.vercel-dns.com', 'CNAME', false);
 
 // Checkly - Domains
 dnsRecord('checkly-public-dashboard', 'status', 'dashboards.checklyhq.com', 'CNAME', false);
+dnsRecord('checkly-public-dashboard-verify', `_vercel.${domainName}`, `vc-domain-verify=status.${domainName},563d86cd3501b049a1ad`, 'TXT', false);
 
 export const signalRUrl = signalr.signalr.hostName;
 export const internalApiUrl = intFunc.webApp.hostNames[0];

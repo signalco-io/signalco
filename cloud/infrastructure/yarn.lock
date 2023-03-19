@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@checkly/pulumi@1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@checkly/pulumi/-/pulumi-1.1.2.tgz#f0585a137e9284d8fd660da52010195b5ea4e190"
-  integrity sha512-t5zftLR98jo78joJAh7+njNpc8bkD7whox9wKFr4Sw9vt8vr7/S8RbI3A+vWGK++EiLY6+ZRxdD4FJX5ef80RA==
+"@checkly/pulumi@1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@checkly/pulumi/-/pulumi-1.1.4.tgz#b29c0e5cbe7c4c6b71c7b255278266abea9da6eb"
+  integrity sha512-YPNYtwEnKu23VDHNFu91xd/Ueu5zYONHcYwKDA5qTvtgZZ1nzrvPJgrO15KF0fLRVlGo7yckirDS26GpvBTe6w==
   dependencies:
     "@pulumi/pulumi" "^3.0.0"
 
@@ -304,10 +304,10 @@
   dependencies:
     "@pulumi/pulumi" "^3.0.0"
 
-"@pulumi/pulumi@3.57.1":
-  version "3.57.1"
-  resolved "https://registry.yarnpkg.com/@pulumi/pulumi/-/pulumi-3.57.1.tgz#5d356a3b1899346e844953b1e99056f7aee37857"
-  integrity sha512-KlM1OXhWFR17vaU+vV/vwIuRK7evVapj658bMaq/Mk1GdJQP/4BHeLj4FAECqMOj5wcYBOH1e6Qyst2u+q7Lzg==
+"@pulumi/pulumi@3.58.0":
+  version "3.58.0"
+  resolved "https://registry.yarnpkg.com/@pulumi/pulumi/-/pulumi-3.58.0.tgz#a325c8de9e6cdb2ad10ab89e2977477c76f88684"
+  integrity sha512-qlj3oCTKyngej53YoB/caAFzQbx+GuaJdLcfK72l0IwQp3SoMBHyArZishZK4xKNeQpl6kODBXuie9+xMcD5iA==
   dependencies:
     "@grpc/grpc-js" "^1.3.8"
     "@logdna/tail-file" "^2.0.6"
@@ -2363,10 +2363,10 @@ typed-array-length@^1.0.4:
     for-each "^0.3.3"
     is-typed-array "^1.1.9"
 
-typescript@4.9.5:
-  version "4.9.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
-  integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
+typescript@5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.0.2.tgz#891e1a90c5189d8506af64b9ef929fca99ba1ee5"
+  integrity sha512-wVORMBGO/FAs/++blGNeAVdbNKtIh1rbBL2EyQ1+J9lClJ93KiiKe8PmFIVdXhHcyv44SL9oglmfeSsndo0jRw==
 
 typescript@~3.7.3:
   version "3.7.7"
