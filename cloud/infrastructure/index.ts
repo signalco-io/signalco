@@ -43,7 +43,7 @@ const resourceGroup = new ResourceGroup(resourceGroupName);
 const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
 
 const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, shouldProtect);
-apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, 15, '/api/v1/health');
+apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, 30, '/api/v1/health');
 
 // Create Public function
 const pubFunc = createPublicFunction(
@@ -59,7 +59,7 @@ const pubFuncCode = assignFunctionCode(
     publicFunctionPrefix,
     '../src/Signal.Api.Public/bin/Release/net6.0/publish/',
     shouldProtect);
-apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, 5);
+apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, 15);
 const pubFuncInsights = createWebAppAppInsights(resourceGroup, publicFunctionPrefix, pubFunc.webApp);
 
 // Create Internal function
@@ -75,7 +75,7 @@ const intFuncCode = assignFunctionCode(
     internalFunctionPrefix,
     '../src/Signal.Api.Internal/bin/Release/net6.0/publish/',
     shouldProtect);
-apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 15);
+apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 30);
 const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, intFunc.webApp);
 
 // Generate channels functions

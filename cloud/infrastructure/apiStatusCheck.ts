@@ -1,7 +1,9 @@
 import { getStack, Input, interpolate } from '@pulumi/pulumi';
 import { Check } from '@checkly/pulumi';
 
-export default function apiStatusCheck (prefix: string, name: string, domain: Input<string>, frequency: number, route?: string) {
+type CheckFrequency = 15 | 30 | 60 | 120 | 180 | 360 | 720 | 1440;
+
+export default function apiStatusCheck (prefix: string, name: string, domain: Input<string>, frequency: CheckFrequency, route?: string) {
     const stack = getStack();
     new Check(`apicheck-${prefix}`, {
         name: `${name} (${stack})`,
