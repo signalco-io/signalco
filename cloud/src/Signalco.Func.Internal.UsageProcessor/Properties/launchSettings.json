@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Signalco.Func.Internal.UsageProcessor": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7239",
+      "launchBrowser": false
+    }
+  }
+}
