@@ -1,14 +1,14 @@
-import * as pulumi from '@pulumi/pulumi';
-import * as aws from '@pulumi/aws';
-import { interpolate } from '@pulumi/pulumi';
-import { dnsRecord } from './dnsRecord';
+import { Config, interpolate } from '@pulumi/pulumi';
+import { User, AccessKey, UserPolicy } from '@pulumi/aws/iam';
+import { DomainIdentity, MailFrom, DomainDkim } from '@pulumi/aws/ses';
+import dnsRecord from '../CloudFlare/dnsRecord';
 
 export default function createSes (prefix: string, subdomain: string) {
-    const config = new pulumi.Config();
+    const config = new Config();
     const baseDomain = config.require('domain');
     const sesRegion = config.require('ses-region');
 
-    const emailUser = new aws.iam.User(
+    const emailUser = new User(
         `${prefix}-usr`,
         {
             name: `${prefix}-email`,
@@ -18,7 +18,7 @@ export default function createSes (prefix: string, subdomain: string) {
 
     // Policy
     const allowedFromAddress = `*@${subdomain}.${baseDomain}`;
-    new aws.iam.UserPolicy(
+    new UserPolicy(
         `${prefix}-ses-policy`,
         {
             user: emailUser.name,
@@ -46,7 +46,7 @@ export default function createSes (prefix: string, subdomain: string) {
     );
 
     // Email Access key
-    const emailAccessKey = new aws.iam.AccessKey(
+    const emailAccessKey = new AccessKey(
         `${prefix}-ses-access-key`,
         { user: emailUser.name }
     );
@@ -54,24 +54,24 @@ export default function createSes (prefix: string, subdomain: string) {
     const sesSmtpUsername = interpolate`${emailAccessKey.id}`;
     const sesSmtpPassword = interpolate`${emailAccessKey.sesSmtpPasswordV4}`;
 
-    const sesDomainIdentity = new aws.ses.DomainIdentity(`${prefix}-domainIdentity`, {
+    const sesDomainIdentity = new DomainIdentity(`${prefix}-domainIdentity`, {
         domain: `${subdomain}.${baseDomain}`
     });
 
     // MailFrom
     const mailFromDomain = sesDomainIdentity.domain;
-    const mailFrom = new aws.ses.MailFrom(
+    const mailFrom = new MailFrom(
         `${prefix}-ses-mail-from`,
         {
             domain: sesDomainIdentity.domain,
-            mailFromDomain: pulumi.interpolate`bounce.${sesDomainIdentity.domain}`
+            mailFromDomain: interpolate`bounce.${sesDomainIdentity.domain}`
         });
 
     dnsRecord(`${prefix}-ses-mail-from-mx-record`, `bounce.${subdomain}`, `feedback-smtp.${sesRegion}.amazonses.com`, 'MX', false);
     dnsRecord(`${prefix}-spf`, mailFrom.mailFromDomain, 'v=spf1 include:amazonses.com -all', 'TXT', false);
     dnsRecord(`${prefix}-ses-dmarc`, `_dmarc.${subdomain}`, 'v=DMARC1; p=none; rua=mailto:contact@signalco.io; fo=1;', 'TXT', false);
 
-    const sesDomainDkim = new aws.ses.DomainDkim(`${prefix}-sesDomainDkim`, {
+    const sesDomainDkim = new DomainDkim(`${prefix}-sesDomainDkim`, {
         domain: sesDomainIdentity.domain
     });
     for (let i = 0; i < 3; i++) {

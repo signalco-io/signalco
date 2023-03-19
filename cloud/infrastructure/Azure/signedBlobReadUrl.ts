@@ -1,8 +1,9 @@
-import { ResourceGroup } from '@pulumi/azure-native/resources';
-import { Blob, BlobContainer, StorageAccount, SignedResource, Permissions, HttpProtocol, listStorageAccountServiceSASOutput } from '@pulumi/azure-native/storage';
+import { type ResourceGroup } from '@pulumi/azure-native/resources';
+import { type Blob, type BlobContainer, type StorageAccount, SignedResource, Permissions, HttpProtocol, listStorageAccountServiceSASOutput } from '@pulumi/azure-native/storage';
 import { interpolate, Output } from '@pulumi/pulumi';
 
-export function signedBlobReadUrl (blob: Blob,
+export function signedBlobReadUrl (
+    blob: Blob,
     container: BlobContainer,
     account: StorageAccount,
     resourceGroup: ResourceGroup): Output<string> {
