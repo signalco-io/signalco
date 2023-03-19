@@ -72,8 +72,7 @@ jobs:
           pushd '../infrastructure'
           yarn install
           yarn lint
-          curl -fsSL https://get.pulumi.com | sh
-          /home/runner/.pulumi/bin/pulumi preview --stack signalco/${{ steps.extract_branch.outputs.branch }}
+          pulumi preview --stack signalco/${{ steps.extract_branch.outputs.branch }}
           popd
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
