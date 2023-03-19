@@ -66,16 +66,23 @@ jobs:
         env:
           BASE_BRANCH: ${{ github.base_ref }}
 
-      - name: Preview infrastructure
+      - name: Lint infrastructure
         shell: bash
         run: |
           pushd '../infrastructure'
           yarn install
           yarn lint
-          pulumi preview --stack signalco/${{ steps.extract_branch.outputs.branch }}
           popd
+
+      - uses: pulumi/actions@v4
+        name: Preview infrastructure
+        with:
+          command: preview
+          stack-name: signalco/${{ steps.extract_branch.outputs.branch }}
+          github-token: ${{ secrets.ATGITHUBACCESSTOKEN }}
+          work-dir: '../infrastructure'
+          comment-on-pr: true
         env:
-          GITHUB_TOKEN: ${{ secrets.ATGITHUBACCESSTOKEN }}
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
