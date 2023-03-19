@@ -51,8 +51,7 @@ const pubFunc = createPublicFunction(
     publicFunctionPrefix,
     publicFunctionSubDomain,
     corsDomains,
-    shouldProtect
-);
+    shouldProtect);
 const pubFuncCode = assignFunctionCode(
     resourceGroup,
     pubFunc.webApp,
@@ -67,8 +66,7 @@ const intFunc = createFunction(
     resourceGroup,
     internalFunctionPrefix,
     shouldProtect,
-    false
-);
+    false);
 const intFuncCode = assignFunctionCode(
     resourceGroup,
     intFunc.webApp,
@@ -78,11 +76,31 @@ const intFuncCode = assignFunctionCode(
 apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 30);
 const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, intFunc.webApp);
 
-// Generate channels functions
-const channels = [];
-for (let i = 0; i < channelNames.length; i++) {
-    channels.push(createChannelFunction(channelNames[i], resourceGroup, shouldProtect));
+// Create Internal functions
+// TODO: move to separate file
+function CreateInternalFunc (name: string, codePath: string) {
+    const func = createFunction(
+        resourceGroup,
+        `${internalFunctionPrefix}-${name}`,
+        shouldProtect,
+        false);
+    const code = assignFunctionCode(
+        resourceGroup,
+        func.webApp,
+        `${internalFunctionPrefix}-${name}`,
+        codePath,
+        shouldProtect);
+    apiStatusCheck(`${internalFunctionPrefix}-${name}`, `Internal - ${name}`, func.webApp.hostNames[0], 60);
+    return { func, code };
 }
+
+const internalFuncs = [
+    CreateInternalFunc('usageprocessor', '../src/Signalco.Func.Internal.UsageProcessor/bin/Release/net6.0/publish/')
+];
+
+// Generate channels functions
+const channels = channelNames.map(channelName =>
+    createChannelFunction(channelName, resourceGroup, shouldProtect));
 
 // Create general storage and prepare tables
 const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
@@ -156,8 +174,7 @@ assignFunctionSettings(
         APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
         APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`
     },
-    shouldProtect
-);
+    shouldProtect);
 assignFunctionSettings(
     resourceGroup,
     intFunc.webApp,
@@ -171,12 +188,29 @@ assignFunctionSettings(
         APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${intFuncInsights.component.instrumentationKey}`,
         APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${intFuncInsights.component.connectionString}`
     },
-    shouldProtect
-);
+    shouldProtect);
+
+// Populate internal functions settings
+internalFuncs.forEach(func => {
+    assignFunctionSettings(
+        resourceGroup,
+        func.func.webApp,
+        `${internalFunctionPrefix}-usageprocessor`,
+        func.code.storageAccount.connectionString,
+        func.code.codeBlobUlr,
+        {
+            AzureSignalRConnectionString: signalr.connectionString,
+            SignalcoStorageAccountConnectionString: storage.connectionString,
+            SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
+            APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${intFuncInsights.component.instrumentationKey}`,
+            APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${intFuncInsights.component.connectionString}`
+        },
+        shouldProtect);
+});
 
 // Populate channel function settings
-channels.map(channel => {
-    return assignFunctionSettings(
+channels.forEach(channel => {
+    assignFunctionSettings(
         resourceGroup,
         channel.webApp,
         `channel${channel.nameLower}`,
@@ -207,6 +241,9 @@ dnsRecord('checkly-public-dashboard', 'status', 'dashboards.checklyhq.com', 'CNA
 dnsRecord('checkly-public-dashboard-verify', `_vercel.${domainName}`, `vc-domain-verify=status.${domainName},563d86cd3501b049a1ad`, 'TXT', false);
 
 export const signalRUrl = signalr.signalr.hostName;
-export const internalApiUrl = intFunc.webApp.hostNames[0];
+export const internalFunctionUrls = [
+    intFunc.webApp.hostNames[0],
+    ...internalFuncs.map(f => f.func.webApp.hostNames[0])
+];
 export const publicApiUrl = pubFunc.dnsCname.hostname;
 export const channelsUrls = channels.map(c => c.dnsCname.hostname);
