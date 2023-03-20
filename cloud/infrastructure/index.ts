@@ -183,7 +183,7 @@ export = async () => {
             APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${intFuncInsights.component.instrumentationKey}`,
             APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${intFuncInsights.component.connectionString}`
         },
-        shouldProtect);
+        false);
 
     // Populate internal functions settings
     internalFuncs.forEach(func => {
