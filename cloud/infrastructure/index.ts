@@ -63,6 +63,7 @@ export = async () => {
         shouldProtect);
     apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, 15);
 
+    // TODO: Split internal functino to specific functions
     // Create Internal function
     const intFunc = createFunction(
         resourceGroup,

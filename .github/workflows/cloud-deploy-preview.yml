@@ -18,10 +18,14 @@ defaults:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    concurrency: ci-cloud-preview
     steps:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@v3
+
+      - name: Set up mutex
+        uses: ben-z/gh-action-mutex@v1.0-alpha-7
+        with:
+          branch: mutex/cloud-preview
 
       - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v3
