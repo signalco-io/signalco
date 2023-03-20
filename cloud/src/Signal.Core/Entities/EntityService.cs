@@ -144,7 +144,7 @@ internal class EntityService : IEntityService
     {
         try
         {
-            var debounceMs = 0;
+            //var debounceMs = 0;
             var contact = await this.ContactAsync(pointer, cancellationToken);
             if (contact != null)
             {
