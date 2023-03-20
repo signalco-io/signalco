@@ -11,8 +11,6 @@ on:
       - ".github/workflows/cloud-deploy.yml"
 
 env:
-  AZURE_FUNCTIONAPP_PUBLIC_PATH: "Signal.Api.Public"
-  AZURE_FUNCTIONAPP_INTERNAL_PATH: "Signal.Api.Internal"
   DOTNET_VERSION: "6.0.x" # set this to the dotnet version to use
 
 defaults:
@@ -22,38 +20,19 @@ defaults:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    concurrency: ci-cloud-deploy
     steps:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@v3
+
+      - name: Set up mutex
+        uses: ben-z/gh-action-mutex@v1.0-alpha-7
+        with:
+          branch: mutex/cloud-deploy
 
       - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-
-      - name: "Build ${{ env.AZURE_FUNCTIONAPP_PUBLIC_PATH }}"
-        shell: bash
-        run: |
-          pushd './${{ env.AZURE_FUNCTIONAPP_PUBLIC_PATH }}'
-          dotnet publish --configuration Release
-          popd
-
-      - name: "Build ${{ env.AZURE_FUNCTIONAPP_INTERNAL_PATH }}"
-        shell: bash
-        run: |
-          pushd './${{ env.AZURE_FUNCTIONAPP_INTERNAL_PATH }}'
-          dotnet publish --configuration Release
-          popd
-
-      - name: "Build Channels"
-        shell: bash
-        run: |
-          for channelDir in Signalco.Channel.[A-Z]*; do
-            pushd ./$channelDir
-            dotnet publish --configuration Release
-            popd
-          done
 
       - uses: actions/cache@v3
         with:
