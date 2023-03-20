@@ -80,7 +80,7 @@ export = async () => {
     apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 30);
 
     // Generate internal functions
-    const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintanance'];
+    const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintenance'];
     const internalFuncs = [];
     for (const funcName of internalNames) {
         internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, shouldProtect));
