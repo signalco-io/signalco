@@ -48,66 +48,50 @@ export = async () => {
     apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, 30, '/api/v1/health');
 
     // Create Public function
-    async function createPublicFunctionAsync () {
-        const func = createPublicFunction(
-            resourceGroup,
-            publicFunctionPrefix,
-            publicFunctionSubDomain,
-            corsDomains,
-            shouldProtect);
-        const publishResult = await publishProjectAsync('../src/Signal.Api.Public');
-        const code = assignFunctionCode(
-            resourceGroup,
-            func.webApp,
-            publicFunctionPrefix,
-            publishResult.releaseDir,
-            shouldProtect);
-        apiStatusCheck(publicFunctionPrefix, 'API', func.dnsCname.hostname, 15);
-        return { func, code };
-    }
+    const pubFunc = createPublicFunction(
+        resourceGroup,
+        publicFunctionPrefix,
+        publicFunctionSubDomain,
+        corsDomains,
+        shouldProtect);
+    const pubFuncPublishResult = await publishProjectAsync('../src/Signal.Api.Public');
+    const pubFuncCode = assignFunctionCode(
+        resourceGroup,
+        pubFunc.webApp,
+        publicFunctionPrefix,
+        pubFuncPublishResult.releaseDir,
+        shouldProtect);
+    apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, 15);
 
-    // TODO: Split internal funntion into separate functions
+    // TODO: Split internal functino to specific functions
     // Create Internal function
-    async function createGlobalInternalFunctionAsync () {
-        const func = createFunction(
-            resourceGroup,
-            internalFunctionPrefix,
-            shouldProtect,
-            false);
-        const funcPublishResult = await publishProjectAsync('../src/Signal.Api.Internal');
-        const code = assignFunctionCode(
-            resourceGroup,
-            func.webApp,
-            internalFunctionPrefix,
-            funcPublishResult.releaseDir,
-            shouldProtect);
-        apiStatusCheck(internalFunctionPrefix, 'Internal', func.webApp.hostNames[0], 30);
-        return { func, code };
-    }
+    const intFunc = createFunction(
+        resourceGroup,
+        internalFunctionPrefix,
+        shouldProtect,
+        false);
+    const intFuncPublishResult = await publishProjectAsync('../src/Signal.Api.Internal');
+    const intFuncCode = assignFunctionCode(
+        resourceGroup,
+        intFunc.webApp,
+        internalFunctionPrefix,
+        intFuncPublishResult.releaseDir,
+        shouldProtect);
+    apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 30);
 
-    // Generate internal functions promisses
+    // Generate internal functions
     const internalNames = ['UsageProcessor'];
-    const internalFuncsPromisses = internalNames.map(funcName =>
-        createInternalFunctionAsync(resourceGroup, funcName, shouldProtect));
+    for (const funcName of internalNames) {
+        await createInternalFunctionAsync(resourceGroup, funcName, shouldProtect);
+    };
 
-    // Generate channels functions promisses
+    // Generate channels functions
     const channelNames = ['Slack', 'Zigbee2Mqtt', 'PhilipsHue'];
-    const channelsFuncsPromisses = channelNames.map(channelName =>
-        createChannelFunction(channelName, resourceGroup, shouldProtect));
+    for (const channelName of channelNames) {
+        await createChannelFunction(channelName, resourceGroup, shouldProtect);
+    };
 
-    // Wait for all functions to be created
-    const [
-        { func: pubFunc, code: pubFuncCode },
-        { func: intFunc, code: intFuncCode },
-        internalFuncs,
-        channelsFuncs
-    ] = await Promise.all([
-        createPublicFunctionAsync(),
-        createGlobalInternalFunctionAsync(),
-        Promise.all(internalFuncsPromisses),
-        Promise.all(channelsFuncsPromisses)
-    ]);
-
+    // Create App Insights
     const pubFuncInsights = createWebAppAppInsights(resourceGroup, publicFunctionPrefix, pubFunc.webApp);
     const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, intFunc.webApp);
 
