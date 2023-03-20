@@ -56,6 +56,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signalco.Func.Internal.Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signalco.Func.Internal.TimeEntityPublic", "Signalco.Func.Internal.TimeEntityPublic\Signalco.Func.Internal.TimeEntityPublic.csproj", "{FE74BA22-7552-4E5A-A814-164B61BA649A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Func.Internal.Maintenance", "Signalco.Func.Internal.Maintenance\Signalco.Func.Internal.Maintenance.csproj", "{1447E6A2-76C8-4CF5-9909-4E87BFC39030}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -138,6 +140,10 @@ Global
 		{FE74BA22-7552-4E5A-A814-164B61BA649A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE74BA22-7552-4E5A-A814-164B61BA649A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE74BA22-7552-4E5A-A814-164B61BA649A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1447E6A2-76C8-4CF5-9909-4E87BFC39030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1447E6A2-76C8-4CF5-9909-4E87BFC39030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1447E6A2-76C8-4CF5-9909-4E87BFC39030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1447E6A2-76C8-4CF5-9909-4E87BFC39030}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -162,6 +168,7 @@ Global
 		{B2BC2CDB-8022-4E81-AD94-7B136796992F} = {F8CEDDCF-4DC6-46FE-9F9B-D9AB60C147B6}
 		{E5051CC7-7B19-4DB5-B63A-618420258363} = {F8CEDDCF-4DC6-46FE-9F9B-D9AB60C147B6}
 		{FE74BA22-7552-4E5A-A814-164B61BA649A} = {F8CEDDCF-4DC6-46FE-9F9B-D9AB60C147B6}
+		{1447E6A2-76C8-4CF5-9909-4E87BFC39030} = {F8CEDDCF-4DC6-46FE-9F9B-D9AB60C147B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46B06AB8-117A-49FE-92EE-CBD00E067023}

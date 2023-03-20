@@ -6,7 +6,7 @@ using Microsoft.Azure.WebJobs;
 using Signal.Core.Sharing;
 using Signal.Core.Storage;
 
-namespace Signal.Api.Internal.Functions;
+namespace Signalco.Func.Internal.Maintenance;
 
 public class MaintenanceDanglingUserEntityAssignmentsFunction
 {
