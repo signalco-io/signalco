@@ -60,8 +60,7 @@ public interface IEntityService
         string? valueSerialized,
         DateTime? timeStamp = null,
         CancellationToken cancellationToken = default,
-        bool doNotProcess = false,
-        bool persistHistory = true);
+        bool doNotProcess = false);
 
     Task ContactSetMetadataAsync(
         IContactPointer pointer,
