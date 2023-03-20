@@ -48,47 +48,68 @@ export = async () => {
     apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, 30, '/api/v1/health');
 
     // Create Public function
-    const pubFunc = createPublicFunction(
-        resourceGroup,
-        publicFunctionPrefix,
-        publicFunctionSubDomain,
-        corsDomains,
-        shouldProtect);
-    const pubFuncPublishResult = await publishProjectAsync('../src/Signal.Api.Public');
-    const pubFuncCode = assignFunctionCode(
-        resourceGroup,
-        pubFunc.webApp,
-        publicFunctionPrefix,
-        pubFuncPublishResult.releaseDir,
-        shouldProtect);
-    apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, 15);
-    const pubFuncInsights = createWebAppAppInsights(resourceGroup, publicFunctionPrefix, pubFunc.webApp);
+    async function createPublicFunctionAsync () {
+        const func = createPublicFunction(
+            resourceGroup,
+            publicFunctionPrefix,
+            publicFunctionSubDomain,
+            corsDomains,
+            shouldProtect);
+        const publishResult = await publishProjectAsync('../src/Signal.Api.Public');
+        const code = assignFunctionCode(
+            resourceGroup,
+            func.webApp,
+            publicFunctionPrefix,
+            publishResult.releaseDir,
+            shouldProtect);
+        apiStatusCheck(publicFunctionPrefix, 'API', func.dnsCname.hostname, 15);
+        return { func, code };
+    }
 
+    // TODO: Split internal funntion into separate functions
     // Create Internal function
-    const intFunc = createFunction(
-        resourceGroup,
-        internalFunctionPrefix,
-        shouldProtect,
-        false);
-    const intFuncPublishResult = await publishProjectAsync('../src/Signal.Api.Internal');
-    const intFuncCode = assignFunctionCode(
-        resourceGroup,
-        intFunc.webApp,
-        internalFunctionPrefix,
-        intFuncPublishResult.releaseDir,
-        shouldProtect);
-    apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 30);
-    const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, intFunc.webApp);
+    async function createGlobalInternalFunctionAsync () {
+        const func = createFunction(
+            resourceGroup,
+            internalFunctionPrefix,
+            shouldProtect,
+            false);
+        const funcPublishResult = await publishProjectAsync('../src/Signal.Api.Internal');
+        const code = assignFunctionCode(
+            resourceGroup,
+            func.webApp,
+            internalFunctionPrefix,
+            funcPublishResult.releaseDir,
+            shouldProtect);
+        apiStatusCheck(internalFunctionPrefix, 'Internal', func.webApp.hostNames[0], 30);
+        return { func, code };
+    }
 
-    // Generate internal functions
+    // Generate internal functions promisses
     const internalNames = ['UsageProcessor'];
-    const internalFuncs = await Promise.all(internalNames.map(funcName =>
-        createInternalFunctionAsync(resourceGroup, funcName, shouldProtect)));
+    const internalFuncsPromisses = internalNames.map(funcName =>
+        createInternalFunctionAsync(resourceGroup, funcName, shouldProtect));
 
-    // Generate channels functions
+    // Generate channels functions promisses
     const channelNames = ['Slack', 'Zigbee2Mqtt', 'PhilipsHue'];
-    const channels = await Promise.all(channelNames.map(channelName =>
-        createChannelFunction(channelName, resourceGroup, shouldProtect)));
+    const channelsFuncsPromisses = channelNames.map(channelName =>
+        createChannelFunction(channelName, resourceGroup, shouldProtect));
+
+    // Wait for all functions to be created
+    const [
+        { func: pubFunc, code: pubFuncCode },
+        { func: intFunc, code: intFuncCode },
+        internalFuncs,
+        channelsFuncs
+    ] = await Promise.all([
+        createPublicFunctionAsync(),
+        createGlobalInternalFunctionAsync(),
+        Promise.all(internalFuncsPromisses),
+        Promise.all(channelsFuncsPromisses)
+    ]);
+
+    const pubFuncInsights = createWebAppAppInsights(resourceGroup, publicFunctionPrefix, pubFunc.webApp);
+    const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, intFunc.webApp);
 
     // Create general storage and prepare tables
     const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
@@ -130,7 +151,7 @@ export = async () => {
     const vault = createKeyVault(resourceGroup, keyvaultPrefix, shouldProtect, [
         webAppIdentity(pubFunc.webApp),
         webAppIdentity(intFunc.webApp),
-        ...channels.map(c => webAppIdentity(c.webApp))
+        ...channelsFuncs.map(c => webAppIdentity(c.webApp))
     ]);
     const s1 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ApiIdentifier', config.requireSecret('secret-auth0ApiIdentifier'));
     const s2 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ClientId--Station', config.requireSecret('secret-auth0ClientIdStation'), s1.secret);
@@ -197,7 +218,7 @@ export = async () => {
     });
 
     // Populate channel function settings
-    channels.forEach(channel => {
+    channelsFuncs.forEach(channel => {
         assignFunctionSettings(
             resourceGroup,
             channel.webApp,
@@ -235,6 +256,6 @@ export = async () => {
             ...internalFuncs.map(f => f.func.webApp.hostNames[0])
         ],
         publicApiUrl: pubFunc.dnsCname.hostname,
-        channelsUrls: channels.map(c => c.dnsCname.hostname)
+        channelsUrls: channelsFuncs.map(c => c.dnsCname.hostname)
     };
 };
