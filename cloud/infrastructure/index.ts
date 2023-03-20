@@ -68,7 +68,7 @@ export = async () => {
     const intFunc = createFunction(
         resourceGroup,
         internalFunctionPrefix,
-        shouldProtect,
+        false,
         false);
     const intFuncPublishResult = await publishProjectAsync('../src/Signal.Api.Internal');
     const intFuncCode = assignFunctionCode(
@@ -76,7 +76,7 @@ export = async () => {
         intFunc.webApp,
         internalFunctionPrefix,
         intFuncPublishResult.releaseDir,
-        shouldProtect);
+        false);
     apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 30);
 
     // Generate internal functions
