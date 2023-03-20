@@ -62,7 +62,6 @@ export = async () => {
         pubFuncPublishResult.releaseDir,
         shouldProtect);
     apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, 15);
-    const pubFuncInsights = createWebAppAppInsights(resourceGroup, publicFunctionPrefix, pubFunc.webApp);
 
     // Create Internal function
     const intFunc = createFunction(
@@ -78,17 +77,24 @@ export = async () => {
         intFuncPublishResult.releaseDir,
         shouldProtect);
     apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 30);
-    const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, intFunc.webApp);
 
     // Generate internal functions
     const internalNames = ['UsageProcessor'];
-    const internalFuncs = await Promise.all(internalNames.map(funcName =>
-        createInternalFunctionAsync(resourceGroup, funcName, shouldProtect)));
+    const internalFuncs = [];
+    for (const funcName of internalNames) {
+        internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, shouldProtect));
+    };
 
     // Generate channels functions
     const channelNames = ['Slack', 'Zigbee2Mqtt', 'PhilipsHue'];
-    const channels = await Promise.all(channelNames.map(channelName =>
-        createChannelFunction(channelName, resourceGroup, shouldProtect)));
+    const channelsFuncs = [];
+    for (const channelName of channelNames) {
+        channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, shouldProtect));
+    };
+
+    // Create App Insights
+    const pubFuncInsights = createWebAppAppInsights(resourceGroup, publicFunctionPrefix, pubFunc.webApp);
+    const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, intFunc.webApp);
 
     // Create general storage and prepare tables
     const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
@@ -130,7 +136,7 @@ export = async () => {
     const vault = createKeyVault(resourceGroup, keyvaultPrefix, shouldProtect, [
         webAppIdentity(pubFunc.webApp),
         webAppIdentity(intFunc.webApp),
-        ...channels.map(c => webAppIdentity(c.webApp))
+        ...channelsFuncs.map(c => webAppIdentity(c.webApp))
     ]);
     const s1 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ApiIdentifier', config.requireSecret('secret-auth0ApiIdentifier'));
     const s2 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ClientId--Station', config.requireSecret('secret-auth0ClientIdStation'), s1.secret);
@@ -197,7 +203,7 @@ export = async () => {
     });
 
     // Populate channel function settings
-    channels.forEach(channel => {
+    channelsFuncs.forEach(channel => {
         assignFunctionSettings(
             resourceGroup,
             channel.webApp,
@@ -235,6 +241,6 @@ export = async () => {
             ...internalFuncs.map(f => f.func.webApp.hostNames[0])
         ],
         publicApiUrl: pubFunc.dnsCname.hostname,
-        channelsUrls: channels.map(c => c.dnsCname.hostname)
+        channelsUrls: channelsFuncs.map(c => c.dnsCname.hostname)
     };
 };
