@@ -17,6 +17,8 @@ import createInternalFunctionAsync from './Azure/createInternalFunctionAsync';
 import createChannelFunction from './Azure/createChannelFunction';
 import apiStatusCheck from './Checkly/apiStatusCheck';
 import dnsRecord from './CloudFlare/dnsRecord';
+import publishProjectAsync from './dotnet/publishProjectAsync';
+
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
  *       there is memory issued when enabled. (2022/04)
@@ -52,11 +54,12 @@ export = async () => {
         publicFunctionSubDomain,
         corsDomains,
         shouldProtect);
+    const pubFuncPublishResult = await publishProjectAsync('../src/Signal.Api.Public');
     const pubFuncCode = assignFunctionCode(
         resourceGroup,
         pubFunc.webApp,
         publicFunctionPrefix,
-        '../src/Signal.Api.Public/bin/Release/net6.0/publish/',
+        pubFuncPublishResult.releaseDir,
         shouldProtect);
     apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, 15);
     const pubFuncInsights = createWebAppAppInsights(resourceGroup, publicFunctionPrefix, pubFunc.webApp);
@@ -67,11 +70,12 @@ export = async () => {
         internalFunctionPrefix,
         shouldProtect,
         false);
+    const intFuncPublishResult = await publishProjectAsync('../src/Signal.Api.Internal');
     const intFuncCode = assignFunctionCode(
         resourceGroup,
         intFunc.webApp,
         internalFunctionPrefix,
-        '../src/Signal.Api.Internal/bin/Release/net6.0/publish/',
+        intFuncPublishResult.releaseDir,
         shouldProtect);
     apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 30);
     const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, intFunc.webApp);

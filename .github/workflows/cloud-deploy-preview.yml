@@ -9,8 +9,6 @@ on:
       - "next"
 
 env:
-  AZURE_FUNCTIONAPP_PUBLIC_PATH: "Signal.Api.Public"
-  AZURE_FUNCTIONAPP_INTERNAL_PATH: "Signal.Api.Internal"
   DOTNET_VERSION: "6.0.x" # set this to the dotnet version to use
 
 defaults:
@@ -29,20 +27,6 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-
-      - name: "Build ${{ env.AZURE_FUNCTIONAPP_PUBLIC_PATH }}"
-        shell: bash
-        run: |
-          pushd './${{ env.AZURE_FUNCTIONAPP_PUBLIC_PATH }}'
-          dotnet publish --configuration Release
-          popd
-
-      - name: "Build ${{ env.AZURE_FUNCTIONAPP_INTERNAL_PATH }}"
-        shell: bash
-        run: |
-          pushd './${{ env.AZURE_FUNCTIONAPP_INTERNAL_PATH }}'
-          dotnet publish --configuration Release
-          popd
 
       - uses: actions/cache@v3
         with:
