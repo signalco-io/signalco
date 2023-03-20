@@ -38,7 +38,7 @@ public class UsageProcessTrigger
 
         // TODO: Move to service
         // Retrieve or create user entity
-        var userEntity = (await this.entityService.AllDetailedAsync(queueItem.UserId, new[] {EntityType.User}, cancellationToken)).FirstOrDefault();
+        var userEntity = (await this.entityService.AllAsync(queueItem.UserId, new[] {EntityType.User}, cancellationToken)).FirstOrDefault();
         if (userEntity == null)
         {
             var userEntityId = await this.entityService.UpsertAsync(
@@ -46,7 +46,7 @@ public class UsageProcessTrigger
                 null,
                 id => new Entity(EntityType.User, id, "Me"),
                 cancellationToken);
-            userEntity = await this.entityService.GetDetailedAsync(queueItem.UserId, userEntityId, cancellationToken);
+            userEntity = await this.entityService.GetInternalAsync(userEntityId, cancellationToken);
         }
 
         if (userEntity == null)
@@ -55,8 +55,9 @@ public class UsageProcessTrigger
         // Calculate updated usage
         var now = DateTime.UtcNow;
         var contactName = $"usage-{now.Year}{now.Month:D2}{now.Day:D2}";
-        var currentUsageValueSerialized = userEntity.Contacts.FirstOrDefault(c => 
-            c.ChannelName == "signalco" && c.ContactName == contactName)?.ValueSerialized;
+        var currentUsageValueSerialized = (await this.entityService.ContactAsync(
+            new ContactPointer(userEntity.Id, "signalco", contactName),
+            cancellationToken))?.ValueSerialized;
         var usage = JsonSerializer.Deserialize<Usage>(currentUsageValueSerialized ?? "{}") ??
                     new Usage(0, 0, 0, 0);
         usage = queueItem.Kind switch

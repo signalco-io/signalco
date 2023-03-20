@@ -40,9 +40,11 @@ Production API
 
 - `dotnet publish ./Signal.Api.Public --configuration Release`
 - `dotnet publish ./Signal.Api.Internal --configuration Release`
+- `dotnet publish ./Signal.Func.Internal.UsageProcessor --configuration Release`
 - `dotnet publish ./Signalco.Channel.GitHubApp --configuration Release`
 - `dotnet publish ./Signalco.Channel.Slack --configuration Release`
 - `dotnet publish ./Signalco.Channel.Zigbee2Mqtt --configuration Release`
+- `dotnet publish ./Signalco.Channel.PhilipsHue --configuration Release`
 
 ##### **Pulumi (required for Deploy step)**
 
