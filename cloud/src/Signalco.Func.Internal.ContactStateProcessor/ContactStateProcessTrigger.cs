@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using Signal.Core.Exceptions;
 using Signal.Core.Processor;
 
-namespace Signal.Api.Internal.Functions
+namespace Signalco.Func.Internal.ContactStateProcessor
 {
     public class ContactStateProcessTrigger
     {
