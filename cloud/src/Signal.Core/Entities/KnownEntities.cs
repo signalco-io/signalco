@@ -1,6 +1,6 @@
 ﻿using Signal.Core.Contacts;
 
-namespace Signal.Api.Internal;
+namespace Signal.Core.Entities;
 
 public static class KnownEntities
 {

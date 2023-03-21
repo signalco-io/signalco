@@ -68,7 +68,7 @@ export = async () => {
     const intFunc = createFunction(
         resourceGroup,
         internalFunctionPrefix,
-        shouldProtect,
+        false,
         false);
     const intFuncPublishResult = await publishProjectAsync('../src/Signal.Api.Internal');
     const intFuncCode = assignFunctionCode(
@@ -76,11 +76,11 @@ export = async () => {
         intFunc.webApp,
         internalFunctionPrefix,
         intFuncPublishResult.releaseDir,
-        shouldProtect);
+        false);
     apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 30);
 
     // Generate internal functions
-    const internalNames = ['UsageProcessor'];
+    const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintenance', 'Migration'];
     const internalFuncs = [];
     for (const funcName of internalNames) {
         internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, shouldProtect));
@@ -183,7 +183,7 @@ export = async () => {
             APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${intFuncInsights.component.instrumentationKey}`,
             APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${intFuncInsights.component.connectionString}`
         },
-        shouldProtect);
+        false);
 
     // Populate internal functions settings
     internalFuncs.forEach(func => {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Signal.Core.Entities;
 
-namespace Signal.Api.Internal.Functions;
+namespace Signalco.Func.Internal.TimeEntityPublic;
 
 public class PublicEntityTimeFunction
 {
