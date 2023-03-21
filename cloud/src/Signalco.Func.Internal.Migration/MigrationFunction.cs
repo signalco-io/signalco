@@ -5,7 +5,7 @@ using Microsoft.Azure.WebJobs;
 using Signal.Core.Entities;
 using Signal.Core.Storage;
 
-namespace Signal.Api.Internal.Functions;
+namespace Signalco.Func.Internal.Migration;
 
 public class MigrationFunction
 {
