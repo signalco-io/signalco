@@ -139,26 +139,24 @@ internal class EntityService : IEntityService
         string? valueSerialized,
         DateTime? timeStamp = null,
         CancellationToken cancellationToken = default,
-        bool doNotProcess = false,
-        bool persistHistory = true) // TODO: Switch to false when persistHistory flag is implemented)
+        bool doNotProcess = false)
     {
         try
         {
-            //var debounceMs = 0;
+            var persistHistory = false;
             var contact = await this.ContactAsync(pointer, cancellationToken);
             if (contact != null)
             {
-                // TODO: Retrieve persistHistory flag
-                // TODO: Retrieve debounceMs value
+                var contactMetadata1 = contact.ReadMetadata<ContactMetadataV1>();
+
+                // Retrieve persistHistory flag
+                persistHistory = contactMetadata1?.PersistHistory ?? false;
 
                 // Handle ignore same value flag
-                var processSaveValue = contact.ReadMetadata<ContactMetadataV1>()?.ProcessSameValue ?? false;
-                if (!processSaveValue &&
+                if (!(contactMetadata1?.ProcessSameValue ?? false) &&
                     contact.ValueSerialized == valueSerialized)
                     return;
             }
-
-            // TODO: Apply debounceMs
 
             // Persist as current state
             var updateCurrentStateTask = this.storage.UpsertAsync(

@@ -73,7 +73,6 @@ public class UsageProcessTrigger
         await this.entityService.ContactSetAsync(
             new ContactPointer(userEntity.Id, "signalco", contactName),
             JsonSerializer.Serialize(usage), 
-            cancellationToken: cancellationToken,
-            persistHistory: false);
+            cancellationToken: cancellationToken);
     }
 }
