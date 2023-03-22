@@ -63,7 +63,7 @@ importers:
       date-fns: 2.29.3
       eslint: 8.36.0
       fs-extra: 11.1.1
-      material-ui-popup-state: 5.0.7
+      material-ui-popup-state: 5.0.8
       monaco-editor: 0.36.1
       next: 13.2.4
       next-pwa: 5.6.0
@@ -123,7 +123,7 @@ importers:
       compare-versions: 5.0.3
       d3: 7.8.2
       date-fns: 2.29.3
-      material-ui-popup-state: 5.0.7_xqeqsl5kvjjtyxwyi3jhw3yuli
+      material-ui-popup-state: 5.0.8_xqeqsl5kvjjtyxwyi3jhw3yuli
       monaco-editor: 0.36.1
       next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
       next-pwa: 5.6.0_npbatwryqg4hkulzc6tj7cqewy
@@ -716,7 +716,7 @@ importers:
       concurrently: 7.6.0
       esbuild: 0.17.12
       glob: 8.1.0
-      material-ui-popup-state: 5.0.7
+      material-ui-popup-state: 5.0.8
       next: 13.2.4
       postcss: 8.4.21
       postcss-preset-env: 8.0.1
@@ -744,7 +744,7 @@ importers:
       '@mui/joy': 5.0.0-alpha.72_xqeqsl5kvjjtyxwyi3jhw3yuli
       '@mui/system': 5.11.14_d2lgyfpecxdc2bsiwyag5wf7ti
       '@signalco/ui-icons': link:../ui-icons
-      material-ui-popup-state: 5.0.7_xqeqsl5kvjjtyxwyi3jhw3yuli
+      material-ui-popup-state: 5.0.8_xqeqsl5kvjjtyxwyi3jhw3yuli
       next: 13.2.4_l4i6tgmfppzwb2u4w42uz3wi4m
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -10668,8 +10668,8 @@ packages:
       react: 18.2.0
     dev: true
 
-  /material-ui-popup-state/5.0.7_xqeqsl5kvjjtyxwyi3jhw3yuli:
-    resolution: {integrity: sha512-oIMqFOdF+779pWmt9yHmbZ2ViIvHQvkiYHrdfR5cNUTiiMkPqWyBA5tW38oGWVyyO4zz8X4jz6mn1Sw5OuSeWQ==}
+  /material-ui-popup-state/5.0.8_xqeqsl5kvjjtyxwyi3jhw3yuli:
+    resolution: {integrity: sha512-5ptEBQVd68QJpm0PCIYBatpX/F5QIFS+EH0lPpGqjl6HPD6uIHPt7laHbiqWDEm/6Wy5YvWF69ny+3jHXmHizQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
