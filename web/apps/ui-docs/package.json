@@ -27,7 +27,7 @@
         "css-loader": "6.7.3",
         "postcss": "8.4.21",
         "postcss-loader": "7.1.0",
-        "rimraf": "4.4.0",
+        "rimraf": "4.4.1",
         "sass": "1.59.3",
         "sass-loader": "13.2.1",
         "styled-jsx": "5.1.2",
