@@ -61,7 +61,7 @@
         "rimraf": "4.2.0",
         "sass": "1.59.3",
         "typescript": "5.0.2",
-        "webpack": "5.76.2"
+        "webpack": "5.76.3"
     },
     "optionalDependencies": {
         "terser": "5.16.5"

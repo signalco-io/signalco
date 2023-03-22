@@ -1,6 +1,5 @@
 import { Config, getStack, interpolate } from '@pulumi/pulumi';
 import { ResourceGroup } from '@pulumi/azure-native/resources';
-import { createFunction } from './Azure/createFunction';
 import { createSignalR } from './Azure/createSignalR';
 import { createStorageAccount } from './Azure/createStorageAccount';
 import { createKeyVault } from './Azure/createKeyVault';
@@ -63,22 +62,6 @@ export = async () => {
         shouldProtect);
     apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, 15);
 
-    // TODO: Split internal functino to specific functions
-    // Create Internal function
-    const intFunc = createFunction(
-        resourceGroup,
-        internalFunctionPrefix,
-        false,
-        false);
-    const intFuncPublishResult = await publishProjectAsync('../src/Signal.Api.Internal');
-    const intFuncCode = assignFunctionCode(
-        resourceGroup,
-        intFunc.webApp,
-        internalFunctionPrefix,
-        intFuncPublishResult.releaseDir,
-        false);
-    apiStatusCheck(internalFunctionPrefix, 'Internal', intFunc.webApp.hostNames[0], 30);
-
     // Generate internal functions
     const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintenance', 'Migration'];
     const internalFuncs = [];
@@ -95,7 +78,7 @@ export = async () => {
 
     // Create App Insights
     const pubFuncInsights = createWebAppAppInsights(resourceGroup, publicFunctionPrefix, pubFunc.webApp);
-    const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, intFunc.webApp);
+    const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, internalFuncs[0].func.webApp);
 
     // Create general storage and prepare tables
     const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
@@ -136,7 +119,7 @@ export = async () => {
     // Create and populate vault
     const vault = createKeyVault(resourceGroup, keyvaultPrefix, shouldProtect, [
         webAppIdentity(pubFunc.webApp),
-        webAppIdentity(intFunc.webApp),
+        ...internalFuncs.map(c => webAppIdentity(c.func.webApp)),
         ...channelsFuncs.map(c => webAppIdentity(c.webApp))
     ]);
     const s1 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ApiIdentifier', config.requireSecret('secret-auth0ApiIdentifier'));
@@ -170,20 +153,6 @@ export = async () => {
             APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`
         },
         shouldProtect);
-    assignFunctionSettings(
-        resourceGroup,
-        intFunc.webApp,
-        internalFunctionPrefix,
-        intFuncCode.storageAccount.connectionString,
-        intFuncCode.codeBlobUlr,
-        {
-            AzureSignalRConnectionString: signalr.connectionString,
-            SignalcoStorageAccountConnectionString: storage.connectionString,
-            SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
-            APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${intFuncInsights.component.instrumentationKey}`,
-            APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${intFuncInsights.component.connectionString}`
-        },
-        false);
 
     // Populate internal functions settings
     internalFuncs.forEach(func => {
@@ -237,10 +206,7 @@ export = async () => {
 
     return {
         signalrUrl: signalr.signalr.hostName,
-        internalFunctionUrls: [
-            intFunc.webApp.hostNames[0],
-            ...internalFuncs.map(f => f.func.webApp.hostNames[0])
-        ],
+        internalFunctionUrls: internalFuncs.map(f => f.func.webApp.hostNames[0]),
         publicApiUrl: pubFunc.dnsCname.hostname,
         channelsUrls: channelsFuncs.map(c => c.dnsCname.hostname)
     };
