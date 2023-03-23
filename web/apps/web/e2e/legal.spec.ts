@@ -1,5 +1,5 @@
 import { test } from '@playwright/test'
-import { assertAccessibility } from './landing.spec';
+import { assertAccessibility } from './shared';
 
 test('privacy policy should be accessible', ({ page }) => assertAccessibility(page, '/legal/privacy-policy'));
 test('TOS should be accessible', ({ page }) => assertAccessibility(page, '/legal/terms-of-service'));
