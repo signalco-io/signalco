@@ -1,4 +1,4 @@
 import { test } from '@playwright/test'
-import { assertAccessibility } from './landing.spec';
+import { assertAccessibility } from './shared';
 
 test('channels should be accessible', ({ page }) => assertAccessibility(page, '/station'));
