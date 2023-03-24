@@ -70,7 +70,7 @@ export = async () => {
     };
 
     // Generate channels functions
-    const productionChannelNames = ['Samsung', 'Slack', 'Zigbee2Mqtt', 'PhilipsHue'];
+    const productionChannelNames = ['Samsung', 'Slack', 'Zigbee2Mqtt', 'PhilipsHue', 'iRobot'];
     const nextChannelNames = ['GitHubApp'];
     const channelNames = stack === 'production'
         ? productionChannelNames
