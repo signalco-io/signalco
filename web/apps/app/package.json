@@ -95,7 +95,7 @@
         "prop-types": "15.8.1",
         "react-is": "18.2.0",
         "rimraf": "4.4.1",
-        "sass": "1.59.3",
+        "sass": "1.60.0",
         "sass-loader": "13.2.1",
         "typescript": "5.0.2",
         "webpack": "5.76.3"
