@@ -246,7 +246,7 @@ internal class Zigbee2MqttWorkerService : IWorkerService
             await this.entityService.ContactSetAsync(new ContactPointer(
                     entity.Id,
                     Zigbee2MqttChannels.DeviceChannel,
-                    "offline"),
+                    KnownContacts.Offline),
                 (payload == "offline").ToString().ToLowerInvariant(),
                 cancellationToken);
             return;
