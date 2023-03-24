@@ -26,7 +26,6 @@ internal class PhilipsHueWorkerService : IWorkerService
     private const string LightStateContactName = "on";
     private const string BrightnessContactName = "brightness";
     private const string ColorTemperatureContactName = "color-temperature";
-    private const string OfflineContactName = "offline";
 
     private readonly IEntitiesDao entitiesDao;
     private readonly IEntityService entityService;
@@ -244,7 +243,7 @@ internal class PhilipsHueWorkerService : IWorkerService
             var connectivity = await bridge.LocalClient.GetZigbeeConnectivityAsync();
             var isConnected = connectivity.Data.FirstOrDefault(c => updatedLight.Owner.Rid == c.Owner?.Rid)?.Status == ConnectivityStatus.connected;
             await this.entityService.ContactSetAsync(
-                new ContactPointer(newLight.EntityId, PhilipsHueChannels.DeviceChannel, OfflineContactName),
+                new ContactPointer(newLight.EntityId, PhilipsHueChannels.DeviceChannel, KnownContacts.Offline),
                 (!isConnected).ToString().ToLowerInvariant(), cancellationToken);
         }
         else
