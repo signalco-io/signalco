@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signal.Api.Public", "Signal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signal.Api.Common", "Signal.Api.Common\Signal.Api.Common.csproj", "{6187DDDC-013E-4226-942B-A6EBAF48EE6A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Cloud.Channel.GitHubApp", "Signalco.Cloud.Channel.GitHubApp\Signalco.Cloud.Channel.GitHubApp.csproj", "{EE218B89-6F1E-4CF1-AF27-E530B6419951}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Channel.GitHubApp", "Signalco.Channel.GitHubApp\Signalco.Channel.GitHubApp.csproj", "{EE218B89-6F1E-4CF1-AF27-E530B6419951}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Channel.Slack", "Signalco.Channel.Slack\Signalco.Channel.Slack.csproj", "{A8B25F97-1EDB-4D36-8003-2AE6D604C684}"
 EndProject
@@ -59,6 +59,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Func.Internal.Migration", "Signalco.Func.Internal.Migration\Signalco.Func.Internal.Migration.csproj", "{469BFB1D-5FC3-4CBC-A0B5-2F8207AF79F6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Channel.iRobot", "Signalco.Channel.iRobot\Signalco.Channel.iRobot.csproj", "{95DC3B46-DBF8-4C36-B02C-E1CE8A73601B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Channel.Samsung", "Signalco.Channel.Samsung\Signalco.Channel.Samsung.csproj", "{0EF33501-F473-4924-87B3-4353D9A2246F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -150,6 +152,10 @@ Global
 		{95DC3B46-DBF8-4C36-B02C-E1CE8A73601B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95DC3B46-DBF8-4C36-B02C-E1CE8A73601B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95DC3B46-DBF8-4C36-B02C-E1CE8A73601B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EF33501-F473-4924-87B3-4353D9A2246F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EF33501-F473-4924-87B3-4353D9A2246F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EF33501-F473-4924-87B3-4353D9A2246F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EF33501-F473-4924-87B3-4353D9A2246F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +182,7 @@ Global
 		{1447E6A2-76C8-4CF5-9909-4E87BFC39030} = {F8CEDDCF-4DC6-46FE-9F9B-D9AB60C147B6}
 		{469BFB1D-5FC3-4CBC-A0B5-2F8207AF79F6} = {F8CEDDCF-4DC6-46FE-9F9B-D9AB60C147B6}
 		{95DC3B46-DBF8-4C36-B02C-E1CE8A73601B} = {DCF287D4-46DA-4E27-80CD-34EEDC3766A4}
+		{0EF33501-F473-4924-87B3-4353D9A2246F} = {DCF287D4-46DA-4E27-80CD-34EEDC3766A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46B06AB8-117A-49FE-92EE-CBD00E067023}
