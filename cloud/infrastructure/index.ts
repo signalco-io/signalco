@@ -70,7 +70,11 @@ export = async () => {
     };
 
     // Generate channels functions
-    const channelNames = ['Slack', 'Zigbee2Mqtt', 'PhilipsHue'];
+    const productionChannelNames = ['Samsung', 'Slack', 'Zigbee2Mqtt', 'PhilipsHue'];
+    const nextChannelNames = ['GitHubApp'];
+    const channelNames = stack === 'production'
+        ? productionChannelNames
+        : [...productionChannelNames, ...nextChannelNames];
     const channelsFuncs = [];
     for (const channelName of channelNames) {
         channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, shouldProtect));
