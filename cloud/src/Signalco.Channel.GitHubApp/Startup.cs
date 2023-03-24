@@ -1,11 +1,11 @@
 ﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Signal.Infrastructure.AzureStorage.Tables;
 using Signal.Infrastructure.Secrets;
-using Signalco.Cloud.Channel.GitHubApp;
+using Signalco.Channel.GitHubApp;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 
-namespace Signalco.Cloud.Channel.GitHubApp;
+namespace Signalco.Channel.GitHubApp;
 
 public class Startup : FunctionsStartup
 {

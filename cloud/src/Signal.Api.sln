@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signal.Api.Public", "Signal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signal.Api.Common", "Signal.Api.Common\Signal.Api.Common.csproj", "{6187DDDC-013E-4226-942B-A6EBAF48EE6A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Cloud.Channel.GitHubApp", "Signalco.Cloud.Channel.GitHubApp\Signalco.Cloud.Channel.GitHubApp.csproj", "{EE218B89-6F1E-4CF1-AF27-E530B6419951}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Channel.GitHubApp", "Signalco.Channel.GitHubApp\Signalco.Channel.GitHubApp.csproj", "{EE218B89-6F1E-4CF1-AF27-E530B6419951}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Channel.Slack", "Signalco.Channel.Slack\Signalco.Channel.Slack.csproj", "{A8B25F97-1EDB-4D36-8003-2AE6D604C684}"
 EndProject
