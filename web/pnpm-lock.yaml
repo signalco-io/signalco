@@ -85,7 +85,7 @@ importers:
       rimraf: 4.4.1
       sass: 1.60.0
       sass-loader: 13.2.1
-      sharp: 0.31.3
+      sharp: 0.32.0
       suncalc: 1.9.0
       terser: 5.16.8
       typescript: 5.0.2
@@ -137,7 +137,7 @@ importers:
       react-toastify: 9.1.2_biqbaboplfbrettd7655fr4n2y
       react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
       recharts: 2.5.0_v2m5e27vhdewzwhryxwfaorcca
-      sharp: 0.31.3
+      sharp: 0.32.0
       suncalc: 1.9.0
       uuid: 9.0.0
     optionalDependencies:
@@ -218,7 +218,7 @@ importers:
       react-transition-group: 4.4.5
       rimraf: 4.4.1
       sass: 1.60.0
-      sharp: 0.31.3
+      sharp: 0.32.0
       terser: 5.16.8
       typescript: 5.0.2
       webpack: 5.76.3
@@ -241,7 +241,7 @@ importers:
       react-cool-inview: 3.0.1_react@18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
-      sharp: 0.31.3
+      sharp: 0.32.0
     optionalDependencies:
       terser: 5.16.8
     devDependencies:
@@ -312,7 +312,7 @@ importers:
       react-transition-group: 4.4.5
       rimraf: 4.4.1
       sass: 1.60.0
-      sharp: 0.31.3
+      sharp: 0.32.0
       terser: 5.16.8
       typescript: 5.0.2
       webpack: 5.76.3
@@ -335,7 +335,7 @@ importers:
       react-cool-inview: 3.0.1_react@18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
-      sharp: 0.31.3
+      sharp: 0.32.0
     optionalDependencies:
       terser: 5.16.8
     devDependencies:
@@ -416,7 +416,7 @@ importers:
       react-transition-group: 4.4.5
       rimraf: 4.4.1
       sass: 1.60.0
-      sharp: 0.31.3
+      sharp: 0.32.0
       terser: 5.16.8
       typescript: 5.0.2
       webpack: 5.76.3
@@ -433,7 +433,7 @@ importers:
       react-cool-inview: 3.0.1_react@18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
-      sharp: 0.31.3
+      sharp: 0.32.0
     optionalDependencies:
       terser: 5.16.8
     devDependencies:
@@ -563,7 +563,7 @@ importers:
       react-transition-group: 4.4.5
       rimraf: 4.4.1
       sass: 1.60.0
-      sharp: 0.31.3
+      sharp: 0.32.0
       terser: 5.16.8
       typescript: 5.0.2
       webpack: 5.76.3
@@ -587,7 +587,7 @@ importers:
       react-cool-inview: 3.0.1_react@18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
-      sharp: 0.31.3
+      sharp: 0.32.0
     optionalDependencies:
       terser: 5.16.8
     devDependencies:
@@ -11182,8 +11182,8 @@ packages:
     resolution: {integrity: sha512-/ujIVxthRs+7q6hsdjHMaj8hRG9NuWmwrz+JdRwZ14jdFoKSkm+vDsCbF9PLpnSqjaWQJuTmVtcWHNLr+vrOFw==}
     dev: true
 
-  /node-addon-api/5.0.0:
-    resolution: {integrity: sha512-CvkDw2OEnme7ybCykJpVcKH+uAOLV2qLqiyla128dN9TkEWfrYmxG6C2boDe5KcNQqZF3orkqzGgOMvZ/JNekA==}
+  /node-addon-api/6.0.0:
+    resolution: {integrity: sha512-GyHvgPvUXBvAkXa0YvYnhilSB1A+FRYMpIVggKzPZqdaZfevZOuzfWzyvgzOwRLHBeo/MMswmJFsrNF4Nw1pmA==}
     dev: false
 
   /node-bitmap/0.0.1:
@@ -13559,14 +13559,14 @@ packages:
     resolution: {integrity: sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==}
     dev: false
 
-  /sharp/0.31.3:
-    resolution: {integrity: sha512-XcR4+FCLBFKw1bdB+GEhnUNXNXvnt0tDo4WsBsraKymuo/IAuPuCBVAL2wIkUw2r/dwFW5Q5+g66Kwl2dgDFVg==}
+  /sharp/0.32.0:
+    resolution: {integrity: sha512-yLAypVcqj1toSAqRSwbs86nEzfyZVDYqjuUX8grhFpeij0DDNagKJXELS/auegDBRDg1XBtELdOGfo2X1cCpeA==}
     engines: {node: '>=14.15.0'}
     requiresBuild: true
     dependencies:
       color: 4.2.3
       detect-libc: 2.0.1
-      node-addon-api: 5.0.0
+      node-addon-api: 6.0.0
       prebuild-install: 7.1.1
       semver: 7.3.8
       simple-get: 4.0.1
