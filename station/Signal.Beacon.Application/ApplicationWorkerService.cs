@@ -94,13 +94,15 @@ internal class ApplicationWorkerService : IInternalWorkerService
                     await this.updateService.ShutdownSystemAsync();
                     break;
                 case "workerService:start":
-                    await this.StartWorkerServiceAsync(conduct.ValueSerialized ?? throw new InvalidOperationException("Provide worker service name"), cancellationToken);
+                    await this.StartWorkerServiceAsync(conduct.ValueSerialized 
+                                                       ?? throw new InvalidOperationException("Provide channel entity ID"), cancellationToken);
                     break;
                 case "workerService:stop":
-                    await this.StopWorkerServiceAsync(conduct.ValueSerialized ?? throw new InvalidOperationException("Provide worker service name"), cancellationToken);
+                    await this.StopWorkerServiceAsync(conduct.ValueSerialized 
+                                                      ?? throw new InvalidOperationException("Provide channel entity ID"), cancellationToken);
                     break;
                 case "beginDiscovery":
-                    await this.BeginWorkersDiscoveryAsync(cancellationToken);
+                    this.BeginWorkersDiscovery();
                     break;
                 default:
                     throw new NotSupportedException("Not supported station conduct.");
@@ -108,39 +110,32 @@ internal class ApplicationWorkerService : IInternalWorkerService
         }
     }
 
-    private async Task StopWorkerServiceAsync(string workerServiceTypeFullName, CancellationToken cancellationToken)
+    private async Task StopWorkerServiceAsync(string entityId, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrWhiteSpace(workerServiceTypeFullName))
-            throw new ArgumentException("Value cannot be null or whitespace.", nameof(workerServiceTypeFullName));
+        if (string.IsNullOrWhiteSpace(entityId))
+            throw new ArgumentException("Value cannot be null or whitespace.", nameof(entityId));
 
-        var ws = this.workerServiceManager.AvailableWorkerServices.FirstOrDefault(ws =>
-            ws.GetType().FullName == workerServiceTypeFullName);
+        var ws = this.workerServiceManager.WorkerServices.FirstOrDefault(ws => ws.EntityId == entityId);
         if (ws == null)
             throw new Exception("Requested worker service not available.");
 
-        await this.workerServiceManager.StopWorkerServiceAsync(ws);
+        await this.workerServiceManager.StopWorkerServiceAsync(entityId, cancellationToken);
     }
 
-    private async Task StartWorkerServiceAsync(string workerServiceTypeFullName, CancellationToken cancellationToken)
+    private async Task StartWorkerServiceAsync(string entityId, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrWhiteSpace(workerServiceTypeFullName))
-            throw new ArgumentException("Value cannot be null or whitespace.", nameof(workerServiceTypeFullName));
+        if (string.IsNullOrWhiteSpace(entityId))
+            throw new ArgumentException("Value cannot be null or whitespace.", nameof(entityId));
 
-        var ws = this.workerServiceManager.AvailableWorkerServices.FirstOrDefault(ws =>
-            ws.GetType().FullName == workerServiceTypeFullName);
+        var ws = this.workerServiceManager.WorkerServices.FirstOrDefault(ws => ws.EntityId == entityId);
         if (ws == null)
             throw new Exception("Requested worker service not available.");
 
-        await this.workerServiceManager.StartWorkerServiceAsync(ws, cancellationToken);
+        await this.workerServiceManager.StartWorkerServiceAsync(entityId, cancellationToken);
     }
 
-    private async Task BeginWorkersDiscoveryAsync(CancellationToken cancellationToken)
-    {
-        foreach (var workerWithDiscovery in this.workerServiceManager.RunningWorkerServices.OfType<IWorkerServiceWithDiscovery>())
-        {
-            await workerWithDiscovery.BeginDiscoveryAsync(cancellationToken);
-        }
-    }
+    private void BeginWorkersDiscovery() => 
+        this.workerServiceManager.BeginDiscovery();
 
     public Task StopAsync(CancellationToken cancellationToken)
     {

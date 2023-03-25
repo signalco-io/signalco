@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Signal.Beacon.Application.Signal.Client.Station;
 using Signal.Beacon.Core.Entity;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -11,7 +10,6 @@ namespace Signal.Beacon.Application.Signal.Station;
 
 internal class StationStateManager : IStationStateManager
 {
-    private readonly ISignalcoStationClient signalClient;
     private readonly IStationStateService stationStateService;
     private readonly IWorkerServiceManager workerServiceManager;
     private readonly IEntitiesDao entitiesDao;
@@ -23,7 +21,6 @@ internal class StationStateManager : IStationStateManager
 
 
     public StationStateManager(
-        ISignalcoStationClient stationClient,
         IStationStateService stationStateService,
         IWorkerServiceManager workerServiceManager,
         IEntitiesDao entitiesDao,
@@ -35,7 +32,6 @@ internal class StationStateManager : IStationStateManager
         this.entitiesDao = entitiesDao ?? throw new ArgumentNullException(nameof(entitiesDao));
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        this.signalClient = stationClient ?? throw new ArgumentNullException(nameof(stationClient));
     }
 
 
@@ -43,7 +39,7 @@ internal class StationStateManager : IStationStateManager
     {
         this.workerServiceManager.OnChange += this.WorkerServiceManagerOnOnChange;
 
-        Task.Run(async () => await this.PeriodicStatusReportsAsync(), cancellationToken);
+        Task.Run(this.PeriodicStatusReportsAsync, cancellationToken);
 
         this.logger.LogDebug("Started monitoring station state...");
 
@@ -86,8 +82,7 @@ internal class StationStateManager : IStationStateManager
             {
                 var pointer = new ContactPointer(stationEntityId, "signalco", string.Empty);
                 await this.entityService.ContactSetAsync(pointer with {ContactName = "version"}, state.Version, cancellationToken);
-                await this.entityService.ContactSetAsync(pointer with {ContactName = "availableChannels"}, JsonSerializer.Serialize(state.AvailableWorkerServices), cancellationToken);
-                await this.entityService.ContactSetAsync(pointer with {ContactName = "runningChannels"}, JsonSerializer.Serialize(state.RunningWorkerServices), cancellationToken);
+                await this.entityService.ContactSetAsync(pointer with {ContactName = "channels"}, JsonSerializer.Serialize(state.WorkerServices), cancellationToken);
             }
         }
         catch (Exception ex)

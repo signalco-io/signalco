@@ -8,18 +8,15 @@ public class WorkerServiceManagerStateChangeEventArgs : EventArgs, IWorkerServic
 {
     public WorkerServiceManagerStateChangeEventArgs(
         string entityId, 
-        Type workerServiceType,
-        IWorkerService? workerService, 
-        WorkerServiceState state)
+        WorkerServiceState state,
+        IWorkerService? workerService)
     {
         this.WorkerService = workerService;
         this.State = state;
         this.EntityId = entityId;
-        this.WorkerServiceType = workerServiceType;
     }
 
     public string EntityId { get; }
-    public Type WorkerServiceType { get; }
     public IWorkerService? WorkerService { get; }
     public WorkerServiceState State { get; }
 }

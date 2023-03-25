@@ -6,13 +6,29 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Signal.Beacon.Application;
 using Signal.Beacon.Application.Signal.Station;
+using Signal.Beacon.Core.Entity;
 using Signal.Beacon.Core.Workers;
 
 namespace Signal.Beacon;
 
-public class WorkerServiceManager : IWorkerServiceManager
+internal interface IChannelWorkerServiceResolver
+{
+    Task<Type?> ResolveWorkerServiceTypeAsync(string entityId, CancellationToken cancellationToken = default);
+}
+
+internal class ChannelWorkerServiceResolver : IChannelWorkerServiceResolver
+{
+    public Task<Type?> ResolveWorkerServiceTypeAsync(string entityId, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+internal class WorkerServiceManager : IWorkerServiceManager
 {
     private readonly IServiceProvider serviceProvider;
+    private readonly IEntitiesDao entitiesDao;
+    private readonly IChannelWorkerServiceResolver channelWorkerServiceResolver;
     private readonly ILogger<WorkerServiceManager> logger;
     private readonly List<StationWorkerServiceOperation> workers = new();
 
@@ -22,16 +38,22 @@ public class WorkerServiceManager : IWorkerServiceManager
 
     public WorkerServiceManager(
         IServiceProvider serviceProvider,
+        IEntitiesDao entitiesDao,
+        IChannelWorkerServiceResolver channelWorkerServiceResolver,
         ILogger<WorkerServiceManager> logger)
     {
         this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+        this.entitiesDao = entitiesDao ?? throw new ArgumentNullException(nameof(entitiesDao));
+        this.channelWorkerServiceResolver = channelWorkerServiceResolver ?? throw new ArgumentNullException(nameof(channelWorkerServiceResolver));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     public async Task StartAllWorkerServicesAsync(CancellationToken cancellationToken = default)
     {
         // TODO: Retrieve all channels with assigned station
-
+        var entities = await this.entitiesDao.AllAsync(cancellationToken);
+        entities
+            .Where(e => e.Type == EntityType.Channel && e.Contacts.Any(c => c.))
 
         this.logger.LogInformation("All worker services started.");
     }
@@ -39,22 +61,25 @@ public class WorkerServiceManager : IWorkerServiceManager
     public async Task StopAllWorkerServicesAsync(CancellationToken cancellationToken = default) =>
         await Task.WhenAll(
             this.workers.Select(ews =>
-                this.StopWorkerServiceAsync(ews.EntityId, ews.GetType(), cancellationToken)));
+                this.StopWorkerServiceAsync(ews.EntityId, cancellationToken)));
 
-    public async Task StartWorkerServiceAsync(string entityId, Type workerServiceType, CancellationToken cancellationToken = default)
+    public async Task StartWorkerServiceAsync(string entityId, CancellationToken cancellationToken = default)
     {
         try
         {
-            var state = new StationWorkerServiceOperation(entityId, workerServiceType);
+            var state = new StationWorkerServiceOperation(entityId);
             this.workers.Add(state);
 
-            if (this.serviceProvider.GetService(workerServiceType) is not IWorkerService workerService)
-                throw new InvalidOperationException($"Worker service not installed for {workerServiceType.Name}");
+            // Instantiate appropriate worker service
+            var workerServiceType = await this.channelWorkerServiceResolver.ResolveWorkerServiceTypeAsync(entityId, cancellationToken);
+            if (workerServiceType == null || 
+                this.serviceProvider.GetService(workerServiceType) is not IWorkerService workerService)
+                throw new InvalidOperationException($"Worker service not installed for {workerServiceType?.Name ?? "UNKNOWN"}");
 
             state.Instance = workerService;
             this.OnChange?.Invoke(
                 this,
-                new WorkerServiceManagerStateChangeEventArgs(entityId, workerServiceType, state.Instance, WorkerServiceState.Running));
+                new WorkerServiceManagerStateChangeEventArgs(entityId, WorkerServiceState.Running, state.Instance));
 
             this.logger.LogInformation("Starting {WorkerServiceName} on {EntityId}...", workerService.GetType().Name, entityId);
             await workerService.StartAsync(entityId, cancellationToken);
@@ -63,29 +88,29 @@ public class WorkerServiceManager : IWorkerServiceManager
 
             this.OnChange?.Invoke(
                 this,
-                new WorkerServiceManagerStateChangeEventArgs(entityId, workerServiceType, state.Instance, WorkerServiceState.Running));
+                new WorkerServiceManagerStateChangeEventArgs(entityId, WorkerServiceState.Running, state.Instance));
 
-            this.logger.LogInformation("{WorkerServiceName} on {EntityId} started", workerService.GetType().Name, entityId);
+            this.logger.LogInformation("Service {WorkerServiceName} on {EntityId} started", workerService.GetType().Name, entityId);
         }
         catch (Exception ex)
         {
-            this.logger.LogError(ex, "Failed to start worker service {WorkerServiceName} on {EntityId}", workerServiceType.Name, entityId);
+            this.logger.LogError(ex, "Failed to start worker service for {EntityId}", entityId);
         }
     }
 
-    public async Task StopWorkerServiceAsync(string entityId, Type workerServiceType, CancellationToken cancellationToken = default)
+    public async Task StopWorkerServiceAsync(string entityId, CancellationToken cancellationToken = default)
     {
         try
         {
             // Get running worker service
-            if (this.workers.FirstOrDefault(s => s.EntityId == entityId && s.GetType() == workerServiceType) is not { } state)
+            if (this.workers.FirstOrDefault(s => s.EntityId == entityId) is not { } state)
                 return;
 
             if (state.State != WorkerServiceState.Running || 
                 state.Instance == null)
                 return;
 
-            this.logger.LogInformation("Stopping {WorkerServiceName} on {EntityId}...", state.GetType().Name, entityId);
+            this.logger.LogInformation("Stopping service {WorkerServiceName} for {EntityId}...", state.Instance.GetType().Name, entityId);
             await state.Instance.StopAsync(CancellationToken.None);
 
             state.State = WorkerServiceState.Stopped;
@@ -93,23 +118,28 @@ public class WorkerServiceManager : IWorkerServiceManager
 
             this.OnChange?.Invoke(
                 this,
-                new WorkerServiceManagerStateChangeEventArgs(entityId, workerServiceType, null, WorkerServiceState.Stopped));
+                new WorkerServiceManagerStateChangeEventArgs(entityId, WorkerServiceState.Stopped, null));
 
-            this.logger.LogInformation("{WorkerServiceName} on {EntityId} stopped", state.GetType().Name, entityId);
+            this.logger.LogInformation("Service for {EntityId} stopped",  entityId);
         }
         catch (Exception ex)
         {
             this.logger.LogError(
                 ex,
-                "Service {WorkerServiceName} on {EntityId} stopping failed.",
-                workerServiceType.Name, entityId);
+                "Service {EntityId} stopping failed.",
+                entityId);
         }
+    }
+    
+    public void BeginDiscovery()
+    {
+        throw new NotImplementedException();
     }
 
     private class StationWorkerServiceOperation : StationWorkerServiceState
     {
-        public StationWorkerServiceOperation(string entityId, Type workerServiceType, WorkerServiceState state = WorkerServiceState.Stopped) 
-            : base(entityId, workerServiceType, state)
+        public StationWorkerServiceOperation(string entityId, WorkerServiceState state = WorkerServiceState.Stopped) 
+            : base(entityId, state)
         {
         }
 
