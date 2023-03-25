@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Signal.Beacon.Core.Configuration;
 
 namespace Signal.Beacon.Application.Signal.Station;
 
@@ -30,8 +28,7 @@ internal class StationStateService : IStationStateService
         {
             Id = config.Id,
             Version = Assembly.GetEntryAssembly()?.GetName().Version?.ToString() ?? "Unknown",
-            AvailableWorkerServices = this.workerServiceManager.AvailableWorkerServices.Select(ws => ws.GetType().FullName ?? "Unknown"),
-            RunningWorkerServices = this.workerServiceManager.RunningWorkerServices.Select(ws => ws.GetType().FullName ?? "Unknown")
+            WorkerServices = this.workerServiceManager.WorkerServices
         };
     }
 }

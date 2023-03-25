@@ -15,26 +15,25 @@ namespace Signal.Beacon.Channel.Signal;
 
 public class SignalWorkerService : IWorkerService
 {
-    private const string ConfigurationFileName = "Signal.json";
-
     private readonly IEntityService entityService;
     private readonly IEntitiesDao entitiesDao;
     private readonly IMqttClientFactory mqttClientFactory;
     private readonly IMqttDiscoveryService mqttDiscoveryService;
-    private readonly IConfigurationService configurationService;
+    private readonly IChannelConfigurationService configurationService;
     private readonly IConductSubscriberClient conductSubscriberClient;
     private readonly ILogger<SignalWorkerService> logger;
     private readonly List<IMqttClient> clients = new();
 
     private SignalWorkerServiceConfiguration configuration = new();
     private CancellationToken startCancellationToken;
+    private string channelId;
 
     public SignalWorkerService(
         IEntityService entityService,
         IEntitiesDao entitiesDao,
         IMqttClientFactory mqttClientFactory,
         IMqttDiscoveryService mqttDiscoveryService,
-        IConfigurationService configurationService,
+        IChannelConfigurationService configurationService,
         IConductSubscriberClient conductSubscriberClient,
         ILogger<SignalWorkerService> logger)
     {
@@ -48,13 +47,15 @@ public class SignalWorkerService : IWorkerService
     }
 
 
-    public async Task StartAsync(CancellationToken cancellationToken)
+    public async Task StartAsync(string entityId, CancellationToken cancellationToken)
     {
+        this.channelId = entityId;
         this.startCancellationToken = cancellationToken;
         this.startCancellationToken.Register(() => _ = this.StopAsync(CancellationToken.None));
         this.configuration =
             await this.configurationService.LoadAsync<SignalWorkerServiceConfiguration>(
-                ConfigurationFileName,
+                entityId,
+                "signalco",
                 cancellationToken);
 
         if (this.configuration.Servers.Any())
@@ -217,7 +218,7 @@ public class SignalWorkerService : IWorkerService
         {
             this.configuration.Servers.Add(new SignalWorkerServiceConfiguration.MqttServer
                 { Url = availableBroker.IpAddress });
-            await this.configurationService.SaveAsync(ConfigurationFileName, this.configuration, cancellationToken);
+            await this.configurationService.SaveAsync(this.channelId, "signalco", this.configuration, cancellationToken);
             this.StartMqttClientAsync(
                 new SignalWorkerServiceConfiguration.MqttServer
                     {Url = availableBroker.IpAddress});

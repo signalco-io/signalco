@@ -15,7 +15,7 @@ using Signal.Beacon.Core.Workers;
 
 namespace Signal.Beacon.Application;
 
-internal class ApplicationWorkerService : IWorkerService
+internal class ApplicationWorkerService : IInternalWorkerService
 {
     private readonly IProcessor processor;
     private readonly ISignalSignalRDevicesHubClient devicesHubClient;

@@ -570,7 +570,7 @@ public class VoiceService : IWorkerService, IDisposable
     }
 
         
-    public Task StartAsync(CancellationToken cancellationToken)
+    public Task StartAsync(string entityId, CancellationToken cancellationToken)
     {
         _ = Task.Run(async () =>
         {

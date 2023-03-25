@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Signal.Beacon.Core.Configuration;
+namespace Signal.Beacon.Application;
 
 public interface IConfigurationService
 {

@@ -5,10 +5,7 @@ namespace Signal.Beacon.Configuration;
 
 public static class ConfigurationServiceCollectionExtensions
 {
-    public static IServiceCollection AddBeaconConfiguration(this IServiceCollection services)
-    {
-        services.AddSingleton<IConfigurationService, FileSystemConfigurationService>();
-
-        return services;
-    }
+    public static IServiceCollection AddBeaconConfiguration(this IServiceCollection services) =>
+        services
+            .AddTransient<IChannelConfigurationService, ChannelConfigurationService>();
 }

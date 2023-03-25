@@ -22,7 +22,6 @@ namespace Signal.Beacon.Channel.PhilipsHue;
 internal class PhilipsHueWorkerService : IWorkerService
 {
     private const int RegisterBridgeRetryTimes = 12;
-    private const string PhilipsHueConfigurationFileName = "PhilipsHue.json";
     private const string LightStateContactName = "on";
     private const string BrightnessContactName = "brightness";
     private const string ColorTemperatureContactName = "color-temperature";
@@ -31,19 +30,20 @@ internal class PhilipsHueWorkerService : IWorkerService
     private readonly IEntityService entityService;
     private readonly IConductSubscriberClient conductSubscriberClient;
     private readonly ILogger<PhilipsHueWorkerService> logger;
-    private readonly IConfigurationService configurationService;
+    private readonly IChannelConfigurationService configurationService;
 
     private PhilipsHueWorkerServiceConfiguration configuration = new();
     private readonly List<BridgeConnection> bridges = new();
     private readonly Dictionary<Guid, PhilipsHueLight> lights = new();
     private readonly List<LocalHueApi> clipClients = new();
+    private string channelId;
 
     public PhilipsHueWorkerService(
         IEntitiesDao entitiesDao,
         IEntityService entityService,
         IConductSubscriberClient conductSubscriberClient,
         ILogger<PhilipsHueWorkerService> logger,
-        IConfigurationService configurationService)
+        IChannelConfigurationService configurationService)
     {
         this.entitiesDao = entitiesDao ?? throw new ArgumentNullException(nameof(entitiesDao));
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
@@ -52,8 +52,9 @@ internal class PhilipsHueWorkerService : IWorkerService
         this.configurationService = configurationService ?? throw new ArgumentNullException(nameof(configurationService));
     }
 
-    public async Task StartAsync(CancellationToken cancellationToken)
+    public async Task StartAsync(string entityId, CancellationToken cancellationToken)
     {
+        this.channelId = entityId;
         this.configuration = await this.LoadBridgeConfigsAsync(cancellationToken);
 
         // Remove duplicate bridge configuration (same IP address)
@@ -257,10 +258,10 @@ internal class PhilipsHueWorkerService : IWorkerService
     }
 
     private async Task<PhilipsHueWorkerServiceConfiguration> LoadBridgeConfigsAsync(CancellationToken cancellationToken) => 
-        await this.configurationService.LoadAsync<PhilipsHueWorkerServiceConfiguration>(PhilipsHueConfigurationFileName, cancellationToken);
+        await this.configurationService.LoadAsync<PhilipsHueWorkerServiceConfiguration>(this.channelId, PhilipsHueChannels.DeviceChannel, cancellationToken);
 
     private async Task SaveBridgeConfigsAsync(CancellationToken cancellationToken) => 
-        await this.configurationService.SaveAsync(PhilipsHueConfigurationFileName, this.configuration, cancellationToken);
+        await this.configurationService.SaveAsync(this.channelId, PhilipsHueChannels.DeviceChannel, this.configuration, cancellationToken);
 
     private async Task ConnectBridgeAsync(BridgeConfig config, CancellationToken cancellationToken)
     {

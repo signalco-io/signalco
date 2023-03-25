@@ -5,9 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Signal.Beacon.Core.Configuration;
 
-namespace Signal.Beacon.Configuration;
+namespace Signal.Beacon.Application;
 
 public class FileSystemConfigurationService : IConfigurationService
 {

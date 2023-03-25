@@ -36,7 +36,7 @@ internal class MiFloraWorkerService : IWorkerService
     }
 
 
-    public Task StartAsync(CancellationToken cancellationToken)
+    public Task StartAsync(string entityId, CancellationToken cancellationToken)
     {
         this.cts = new CancellationTokenSource();
 
