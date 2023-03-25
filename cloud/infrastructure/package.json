@@ -23,6 +23,6 @@
         "@pulumi/azure-native": "1.98.1",
         "@pulumi/cloudflare": "5.0.0",
         "@pulumi/command": "0.7.1",
-        "@pulumi/pulumi": "3.59.0"
+        "@pulumi/pulumi": "3.59.1"
     }
 }
