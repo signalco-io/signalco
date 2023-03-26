@@ -29,6 +29,7 @@ internal class WorkerServiceManager : IWorkerServiceManager
     private readonly IServiceProvider serviceProvider;
     private readonly IEntitiesDao entitiesDao;
     private readonly IChannelWorkerServiceResolver channelWorkerServiceResolver;
+    private readonly IStationStateService stationStateService;
     private readonly ILogger<WorkerServiceManager> logger;
     private readonly List<StationWorkerServiceOperation> workers = new();
 
@@ -40,20 +41,29 @@ internal class WorkerServiceManager : IWorkerServiceManager
         IServiceProvider serviceProvider,
         IEntitiesDao entitiesDao,
         IChannelWorkerServiceResolver channelWorkerServiceResolver,
+        IStationStateService stationStateService,
         ILogger<WorkerServiceManager> logger)
     {
         this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         this.entitiesDao = entitiesDao ?? throw new ArgumentNullException(nameof(entitiesDao));
         this.channelWorkerServiceResolver = channelWorkerServiceResolver ?? throw new ArgumentNullException(nameof(channelWorkerServiceResolver));
+        this.stationStateService = stationStateService ?? throw new ArgumentNullException(nameof(stationStateService));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     public async Task StartAllWorkerServicesAsync(CancellationToken cancellationToken = default)
     {
-        // TODO: Retrieve all channels with assigned station
+        // Retrieve all channels with assigned station
+        var stationState = await this.stationStateService.GetAsync(cancellationToken);
         var entities = await this.entitiesDao.AllAsync(cancellationToken);
-        entities
-            .Where(e => e.Type == EntityType.Channel && e.Contacts.Any(c => c.))
+        var assignedChannels = entities
+            .Where(e => 
+                e.Type == EntityType.Channel && 
+                e.Contacts.Any(c => c.ContactName == "station" && c.ValueSerialized == stationState.Id));
+
+        // Start all channels workers
+        await Task.WhenAll(assignedChannels.Select(assignedChannel =>
+            this.StartWorkerServiceAsync(assignedChannel.Id, cancellationToken)));
 
         this.logger.LogInformation("All worker services started.");
     }
