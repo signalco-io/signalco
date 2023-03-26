@@ -11,8 +11,9 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.IdentityModel.Tokens;
 using Octokit;
 using Signal.Core.Secrets;
+using Signalco.Channel.GitHubApp.Secrets;
 
-namespace Signalco.Cloud.Channel.GitHubApp
+namespace Signalco.Channel.GitHubApp.Functions
 {
     public class Function1
     {
@@ -31,31 +32,31 @@ namespace Signalco.Cloud.Channel.GitHubApp
             var key = new RsaSecurityKey(rsaProvider);
 
             // Create token using the JwtSecurityTokenHandler
-            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            var handler = new JwtSecurityTokenHandler();
             var token = handler.CreateJwtSecurityToken(appIdentifier, null, null, null, DateTime.Now.AddMinutes(1),
                 DateTime.Now, new SigningCredentials(key, SecurityAlgorithms.RsaSha256));
 
             return token.RawData;
         }
 
-        [FunctionName("Function1")]
-        [OpenApiOperation(nameof(Function1), "GitHub", Description = "TODO")]
-        [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
-        public async Task Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            CancellationToken cancellationToken)
-        {
-            var client = await GitHubClient(cancellationToken);
+        //[FunctionName("Function1")]
+        //[OpenApiOperation(nameof(Function1), "GitHub", Description = "TODO")]
+        //[OpenApiResponseWithoutBody(HttpStatusCode.OK)]
+        //public async Task Run(
+        //    [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+        //    CancellationToken cancellationToken)
+        //{
+        //    var client = await GitHubClient(cancellationToken);
 
-            // Get a list of installations for the authenticated GitHubApp
-            var installations = await client.GitHubApps.GetAllInstallationsForCurrent();
-            
-        }
+        //    // Get a list of installations for the authenticated GitHubApp
+        //    var installations = await client.GitHubApps.GetAllInstallationsForCurrent();
+
+        //}
 
         private async Task<GitHubClient> GitHubClient(CancellationToken cancellationToken)
         {
-            var privateKey = await this.secretsProvider.GetSecretAsync(SecretKeys.GitHub.PrivateKey, cancellationToken);
-            var appId = await this.secretsProvider.GetSecretAsync(SecretKeys.GitHub.AppId, cancellationToken);
+            var privateKey = await secretsProvider.GetSecretAsync(GitHubAppSecretKeys.PrivateKey, cancellationToken);
+            var appId = await secretsProvider.GetSecretAsync(GitHubAppSecretKeys.AppId, cancellationToken);
 
             // TODO: Cache token until expires
             var token = GenerateAppToken(privateKey, appId);

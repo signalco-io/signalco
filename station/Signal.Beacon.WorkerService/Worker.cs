@@ -39,13 +39,30 @@ public class Worker : BackgroundService
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
+    private async Task<StationConfiguration> LoadConfigurationAsync(
+        CancellationToken cancellationToken = default)
+    {
+        // Load from default location or fallback to old
+        var config = await this.configurationService.LoadAsync<StationConfiguration>("station.json", cancellationToken);;
+        return config.Id == null || config.Token == null
+            ? await this.configurationService.LoadAsync<StationConfiguration>("beacon.json", cancellationToken)
+            : config;
+    }
+
+    private async Task SaveConfigurationAsync(
+        StationConfiguration configuration,
+        CancellationToken cancellationToken = default)
+    {
+        await this.configurationService.SaveAsync("station.json", configuration, cancellationToken);
+    }
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         // Load configuration
-        var config = await this.configurationService.LoadAsync<StationConfiguration>("beacon.json", stoppingToken);
+        var config = await this.LoadConfigurationAsync(stoppingToken);
         if (config.Token == null || config.Id == null)
         {
-            this.logger.LogInformation("Beacon not registered. Started registration...");
+            this.logger.LogInformation("Station not registered. Started registration...");
                 
             try
             {
@@ -70,14 +87,14 @@ public class Worker : BackgroundService
                     stoppingToken);
                 config.Id = id;
                 config.Token = token;
-                await this.configurationService.SaveAsync("beacon.json", config, stoppingToken);
-                
+                await this.SaveConfigurationAsync(config, stoppingToken);
+
                 this.logger.LogInformation("Token saved");
                 this.logger.LogInformation("Registered successfully as {Id}", id);
             }
             catch (Exception ex)
             {
-                this.logger.LogError(ex, "Failed to register Beacon. Some functionality will be limited.");
+                this.logger.LogError(ex, "Failed to register Station. Some functionality will be limited.");
             }
         }
         else
@@ -105,11 +122,9 @@ public class Worker : BackgroundService
     {
         try
         {
-            var config =
-                await this.configurationService.LoadAsync<StationConfiguration>("Beacon.json",
-                    CancellationToken.None);
+            var config = await this.LoadConfigurationAsync();
             config.Token = e;
-            await this.configurationService.SaveAsync("Beacon.json", config, CancellationToken.None);
+            await this.SaveConfigurationAsync(config);
         }
         catch (Exception ex)
         {
