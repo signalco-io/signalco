@@ -4,6 +4,7 @@ using Signal.Core;
 using Signal.Infrastructure.AzureStorage.Tables;
 using Signal.Infrastructure.Secrets;
 using Signalco.Func.Internal.TimeEntityPublic;
+using Signalco.Infrastructure.Processor;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 
@@ -17,6 +18,7 @@ public class Startup : FunctionsStartup
             .AddCore()
             .AddApi()
             .AddSecrets()
-            .AddAzureStorage();
+            .AddAzureStorage()
+            .AddProcessor();
     }
 }
