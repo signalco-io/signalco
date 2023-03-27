@@ -69,7 +69,9 @@ const nextConfig = {
                             'https://api.mapbox.com',
 
                             // Finace - Stock widget
-                            'https://api.polygon.io'
+                            'https://api.polygon.io',
+
+                            'https://vercel.live', 'https://www.clarity.ms'
                         ],
                         baseURI: ['https://www.signalco.io', 'https://www.signalco.dev'],
                         'frame-ancestors': '\'none\''
