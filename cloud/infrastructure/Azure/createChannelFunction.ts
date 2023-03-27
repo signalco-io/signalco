@@ -3,6 +3,7 @@ import createPublicFunction from './createPublicFunction';
 import { assignFunctionCode } from './assignFunctionCode';
 import apiStatusCheck from '../Checkly/apiStatusCheck';
 import publishProjectAsync from '../dotnet/publishProjectAsync';
+import { ConfChannelApiCheckInterval } from '../config';
 
 export default async function createChannelFunctionAsync (channelName: string, resourceGroup: ResourceGroup, shouldProtect: boolean) {
     const channelNameLower = channelName.toLocaleLowerCase();
@@ -28,7 +29,7 @@ export default async function createChannelFunctionAsync (channelName: string, r
         publicFunctionStoragePrefix,
         publishResult.releaseDir,
         shouldProtect);
-    apiStatusCheck(publicFunctionPrefix, `Channel - ${channelName}`, channelFunc.dnsCname.hostname, 60);
+    apiStatusCheck(publicFunctionPrefix, `Channel - ${channelName}`, channelFunc.dnsCname.hostname, ConfChannelApiCheckInterval);
 
     return {
         nameLower: channelNameLower,

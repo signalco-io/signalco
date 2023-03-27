@@ -17,6 +17,7 @@ import createChannelFunction from './Azure/createChannelFunction';
 import apiStatusCheck from './Checkly/apiStatusCheck';
 import dnsRecord from './CloudFlare/dnsRecord';
 import publishProjectAsync from './dotnet/publishProjectAsync';
+import { ConfCloudApiCheckInterval, ConfPublicSignalRCheckInterval } from './config';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -44,7 +45,7 @@ export = async () => {
     const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
 
     const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, shouldProtect);
-    apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, 30, '/api/v1/health');
+    apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, ConfPublicSignalRCheckInterval, '/api/v1/health');
 
     // Create Public function
     const pubFunc = createPublicFunction(
@@ -60,7 +61,7 @@ export = async () => {
         publicFunctionPrefix,
         pubFuncPublishResult.releaseDir,
         shouldProtect);
-    apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, 15);
+    apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, ConfCloudApiCheckInterval);
 
     // Generate internal functions
     const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintenance', 'Migration'];
