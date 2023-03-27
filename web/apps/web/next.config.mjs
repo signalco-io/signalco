@@ -31,7 +31,7 @@ const nextConfig = {
                 contentSecurityPolicy: {
                     directives: {
                         defaultSrc: '\'self\'',
-                        scriptSrc: ['\'self\'', 'https://hcaptcha.com', 'https://*.hcaptcha.com', '\'unsafe-inline\'', isDevelopment ? '\'unsafe-eval\'' : undefined],
+                        scriptSrc: ['\'self\'', 'https://vercel.live', 'https://www.clarity.ms', 'https://hcaptcha.com', 'https://*.hcaptcha.com', '\'unsafe-inline\'', isDevelopment ? '\'unsafe-eval\'' : undefined],
                         objectSrc: '\'none\'',
                         styleSrc: ['\'self\'', 'https://hcaptcha.com', 'https://*.hcaptcha.com', '\'unsafe-inline\''],
                         fontSrc: ['\'self\''],
