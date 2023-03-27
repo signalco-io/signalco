@@ -1,6 +1,7 @@
 'use client';
 
-import { buildSignalcoTheme , CssBaseline, CssVarsProvider, getInitColorSchemeScript } from '@signalco/ui';
+import Script from 'next/script';
+import { buildSignalcoTheme, CssBaseline, CssVarsProvider, getInitColorSchemeScript } from '@signalco/ui';
 import '@signalco/ui/dist/ui.css';
 import './global.scss';
 
@@ -21,6 +22,7 @@ export default function RootLayout({
                     <CssBaseline />
                     {children}
                 </CssVarsProvider>
+                <Script src="/clarity.js" />
             </body>
         </html>
     );
