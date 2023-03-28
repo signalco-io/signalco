@@ -84,7 +84,7 @@ importers:
       recharts: 2.5.0
       rimraf: 4.4.1
       sass: 1.60.0
-      sass-loader: 13.2.1
+      sass-loader: 13.2.2
       sharp: 0.32.0
       suncalc: 1.9.0
       terser: 5.16.8
@@ -172,7 +172,7 @@ importers:
       react-is: 18.2.0
       rimraf: 4.4.1
       sass: 1.60.0
-      sass-loader: 13.2.1_sass@1.60.0+webpack@5.76.3
+      sass-loader: 13.2.2_sass@1.60.0+webpack@5.76.3
       typescript: 5.0.2
       webpack: 5.76.3
 
@@ -482,7 +482,7 @@ importers:
       react-dom: 18.2.0
       rimraf: 4.4.1
       sass: 1.60.0
-      sass-loader: 13.2.1
+      sass-loader: 13.2.2
       storybook: 7.0.0-rc.8
       storybook-addon-swc: 1.1.9
       style-loader: 3.3.2
@@ -512,7 +512,7 @@ importers:
       postcss-loader: 7.1.0_twwyhqqim6liv4fz2ggv7g4m5a
       rimraf: 4.4.1
       sass: 1.60.0
-      sass-loader: 13.2.1_sass@1.60.0+webpack@5.76.3
+      sass-loader: 13.2.2_sass@1.60.0+webpack@5.76.3
       storybook: 7.0.0-rc.8
       storybook-addon-swc: 1.1.9_webpack@5.76.3
       style-loader: 3.3.2_webpack@5.76.3
@@ -13395,8 +13395,8 @@ packages:
       webpack: 5.76.3
     dev: true
 
-  /sass-loader/13.2.1_sass@1.60.0+webpack@5.76.3:
-    resolution: {integrity: sha512-VQUrgUa5/waIzMrzyuko3sj5WD9NMsYph91cNICx+OaODbRtLl6To2fswLx8MH2qNxXFqRtpvdPQIa7mE93YOA==}
+  /sass-loader/13.2.2_sass@1.60.0+webpack@5.76.3:
+    resolution: {integrity: sha512-nrIdVAAte3B9icfBiGWvmMhT/D+eCDwnk+yA7VE/76dp/WkHX+i44Q/pfo71NYbwj0Ap+PGsn0ekOuU1WFJ2AA==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       fibers: '>= 3.1.0'
