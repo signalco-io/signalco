@@ -17,7 +17,7 @@
         "test": "playwright test"
     },
     "dependencies": {
-        "@hcaptcha/react-hcaptcha": "1.4.4",
+        "@hcaptcha/react-hcaptcha": "1.5.0",
         "@next/env": "13.2.4",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
@@ -38,7 +38,7 @@
         "sharp": "0.32.0"
     },
     "devDependencies": {
-        "@axe-core/playwright": "4.6.0",
+        "@axe-core/playwright": "4.6.1",
         "@babel/core": "7.21.3",
         "@next/bundle-analyzer": "13.2.4",
         "@playwright/test": "1.32.1",
@@ -48,7 +48,7 @@
         "@types/crypto-js": "4.1.1",
         "@types/get-pixels": "3.3.2",
         "@types/node": "18.15.11",
-        "@types/react": "18.0.30",
+        "@types/react": "18.0.31",
         "@types/react-dom": "18.0.11",
         "@types/react-motion": "0.0.33",
         "@types/sharp": "0.31.1",
