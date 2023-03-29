@@ -28,7 +28,7 @@
         "@types/react-dom": "18.0.11",
         "@types/react-timeago": "4.1.3",
         "classix": "2.1.24",
-        "concurrently": "7.6.0",
+        "concurrently": "8.0.1",
         "esbuild": "0.17.14",
         "glob": "8.1.0",
         "postcss": "8.4.21",
