@@ -54,7 +54,7 @@
         "@types/sharp": "0.31.1",
         "babel-loader": "9.1.2",
         "cross-env": "7.0.3",
-        "eslint": "8.36.0",
+        "eslint": "8.37.0",
         "next-sitemap": "4.0.6",
         "playwright": "1.32.1",
         "prop-types": "15.8.1",
