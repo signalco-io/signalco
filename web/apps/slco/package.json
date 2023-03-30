@@ -51,7 +51,7 @@
         "prop-types": "15.8.1",
         "rimraf": "4.4.1",
         "sass": "1.60.0",
-        "typescript": "5.0.2",
+        "typescript": "5.0.3",
         "webpack": "5.77.0"
     },
     "optionalDependencies": {
