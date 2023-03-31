@@ -3,7 +3,7 @@ import { GetSharedKeysResult } from '@pulumi/azure-native/operationalinsights';
 import { type ResourceGroup } from '@pulumi/azure-native/resources';
 import createLogWorkspace from './createLogWorkspace';
 
-export default function createManagedEnvironments(resourceGroup: ResourceGroup, namePrefix: string) {
+export default function createManagedEnvironments(resourceGroup: ResourceGroup, namePrefix: string, shouldProtect: boolean) {
     const workspace = createLogWorkspace(resourceGroup, namePrefix);
 
     const managedEnvironment = new ManagedEnvironment(`env-${namePrefix}`, {
@@ -15,6 +15,8 @@ export default function createManagedEnvironments(resourceGroup: ResourceGroup, 
                 sharedKey: workspace.sharedKeys.apply((r: GetSharedKeysResult) => r.primarySharedKey!),
             },
         },
+    }, {
+        protect: shouldProtect,
     });
 
     return {

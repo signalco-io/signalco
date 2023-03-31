@@ -4,7 +4,7 @@ import { Image } from '@pulumi/docker';
 import { interpolate } from '@pulumi/pulumi';
 import { ContainerRegistryResult } from './createContainerRegistry';
 
-export default function createContainerApp(resourceGroup: ResourceGroup, namePrefix: string, environment: ManagedEnvironment, registry: ContainerRegistryResult, image: Image) {
+export default function createContainerApp(resourceGroup: ResourceGroup, namePrefix: string, environment: ManagedEnvironment, registry: ContainerRegistryResult, image: Image, shouldProtect: boolean) {
     const containerApp = new ContainerApp(`docker-app-${namePrefix}`, {
         resourceGroupName: resourceGroup.name,
         managedEnvironmentId: environment.id,
@@ -29,6 +29,8 @@ export default function createContainerApp(resourceGroup: ResourceGroup, namePre
                 image: image.imageName,
             }],
         },
+    }, {
+        protect: shouldProtect,
     });
 
     return {

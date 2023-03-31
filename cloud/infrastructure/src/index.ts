@@ -199,7 +199,7 @@ export = async () => {
     createAppInsights(resourceGroup, 'web', 'signalco');
 
     // Create apps
-    createRemoteBrowser(resourceGroup, 'rb');
+    createRemoteBrowser(resourceGroup, 'rb', shouldProtect);
 
     // Vercel - Domains
     dnsRecord('vercel-web', 'www', 'cname.vercel-dns.com', 'CNAME', false);

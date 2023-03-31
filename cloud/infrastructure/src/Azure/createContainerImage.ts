@@ -1,16 +1,24 @@
 import { Image } from '@pulumi/docker';
-import { interpolate } from '@pulumi/pulumi';
+import { getStack, interpolate } from '@pulumi/pulumi';
 import { type ContainerRegistryResult } from './createContainerRegistry';
+import path = require('node:path');
 
 export default function createContainerImage(
     registry: ContainerRegistryResult,
     namePrefix: string,
     imageName: string,
-    dockerFileDirectory: string,
+    projectName: string,
 ) {
+    const stack = getStack();
+    const workingDirectory = path.join(process.cwd(), '..', 'src');
+    const dockerFilePath = path.join(workingDirectory, projectName);
     const image = new Image(`docker-image-${namePrefix}`, {
-        imageName: interpolate`${registry.registry.loginServer}/${imageName}:v1.0.0`,
-        build: { context: dockerFileDirectory },
+        imageName: interpolate`${registry.registry.loginServer}/${imageName}:${stack}`,
+        build: { 
+            context: workingDirectory,
+            dockerfile: dockerFilePath,
+            platform: 'linux/amd64',
+        },
         registry: {
             server: registry.registry.loginServer,
             username: registry.credentials.adminUserName,

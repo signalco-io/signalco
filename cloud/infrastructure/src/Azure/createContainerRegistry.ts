@@ -10,7 +10,7 @@ export type ContainerRegistryResult = {
     }
 }
 
-export default function createContainerRegistry(resourceGroup: ResourceGroup, name: string): ContainerRegistryResult {
+export default function createContainerRegistry(resourceGroup: ResourceGroup, name: string, shouldProtect: boolean): ContainerRegistryResult {
     const registry = new Registry(`acr-${name}`, {
         registryName: name,
         resourceGroupName: resourceGroup.name,
@@ -18,6 +18,8 @@ export default function createContainerRegistry(resourceGroup: ResourceGroup, na
             name: 'Basic',
         },
         adminUserEnabled: true,
+    }, {
+        protect: shouldProtect,
     });
 
     const credentials = listRegistryCredentialsOutput({
