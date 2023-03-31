@@ -18,7 +18,7 @@ export function assignFunctionCode (
     const codeContainer = new BlobContainer(`func-zips-${namePrefix}`, {
         containerName: 'zips',
         resourceGroupName: resourceGroup.name,
-        accountName: account.storageAccount.name
+        accountName: account.storageAccount.name,
     }, {
         // parent: app
     });
@@ -29,9 +29,9 @@ export function assignFunctionCode (
         resourceGroupName: resourceGroup.name,
         accountName: account.storageAccount.name,
         containerName: codeContainer.name,
-        source: new asset.FileArchive(codePath)
+        source: new asset.FileArchive(codePath),
     }, {
-        dependsOn
+        dependsOn,
         // parent: app
     });
 
@@ -40,6 +40,6 @@ export function assignFunctionCode (
     return {
         storageAccount: account,
         codeBlob,
-        codeBlobUlr: codeBlobUrl
+        codeBlobUlr: codeBlobUrl,
     };
 }

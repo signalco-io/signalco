@@ -10,11 +10,11 @@ export function createStorageAccount (resourceGroup: ResourceGroup, namePrefix: 
         enableHttpsTrafficOnly: true,
         minimumTlsVersion: MinimumTlsVersion.TLS1_2,
         sku: {
-            name: SkuName.Standard_LRS
+            name: SkuName.Standard_LRS,
         },
-        kind: Kind.StorageV2
+        kind: Kind.StorageV2,
     }, {
-        protect
+        protect,
         // parent: parent ?? resourceGroup
     });
 
@@ -22,6 +22,6 @@ export function createStorageAccount (resourceGroup: ResourceGroup, namePrefix: 
 
     return {
         storageAccount,
-        connectionString
+        connectionString,
     };
 }

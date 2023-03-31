@@ -14,7 +14,7 @@ export default function apiStatusCheck (prefix: string, name: string, domain: In
         tags: [stack === 'production' ? 'public' : 'dev'],
         request: {
             method: 'GET',
-            url: interpolate`https://${domain}${route ?? '/api/status'}`
-        }
+            url: interpolate`https://${domain}${route ?? '/api/status'}`,
+        },
     });
 }

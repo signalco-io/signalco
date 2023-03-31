@@ -2,8 +2,9 @@
     "name": "cloud-primary",
     "private": true,
     "license": "../LICENSE",
+    "main": "src/index.ts",
     "scripts": {
-        "lint": "eslint **/*.ts"
+        "lint": "eslint ./src/**/*.ts"
     },
     "devDependencies": {
         "@types/node": "18.15.10",
@@ -15,7 +16,7 @@
         "eslint-plugin-n": "15.6.1",
         "eslint-plugin-node": "11.1.0",
         "eslint-plugin-promise": "6.1.1",
-        "typescript": "5.0.2"
+        "typescript": "5.1.0-dev.20230331"
     },
     "dependencies": {
         "@checkly/pulumi": "1.1.4",
@@ -23,6 +24,7 @@
         "@pulumi/azure-native": "1.98.1",
         "@pulumi/cloudflare": "5.0.0",
         "@pulumi/command": "0.7.1",
+        "@pulumi/docker": "^4.1.1",
         "@pulumi/pulumi": "3.60.0"
     }
 }

@@ -21,7 +21,7 @@ export function assignCustomDomain (resourceGroup: ResourceGroup, webApp: WebApp
         interpolate`${webApp.name}.azurewebsites.net`,
         'CNAME',
         protect,
-        webApp
+        webApp,
     );
 
     // Until Pulumi comes up with circular dependency solution
@@ -29,9 +29,9 @@ export function assignCustomDomain (resourceGroup: ResourceGroup, webApp: WebApp
     // it's required to create certificate, only then the
     // hostname binding with SSL cert can be configured
     const assignHostName = new local.Command(`func-hostname-assign-${namePrefix}`, {
-        create: interpolate`az webapp config hostname add --webapp-name ${webApp.name} --resource-group ${resourceGroup.name} --hostname ${fullDomainName}`
+        create: interpolate`az webapp config hostname add --webapp-name ${webApp.name} --resource-group ${resourceGroup.name} --hostname ${fullDomainName}`,
     }, {
-        dependsOn: [txtVerifyRecord, cname]
+        dependsOn: [txtVerifyRecord, cname],
         // parent: webApp
     });
 
@@ -40,17 +40,17 @@ export function assignCustomDomain (resourceGroup: ResourceGroup, webApp: WebApp
     const cert = new Certificate(`func-cert-${namePrefix}`, {
         resourceGroupName: resourceGroup.name,
         canonicalName: fullDomainName,
-        serverFarmId: servicePlan.id
+        serverFarmId: servicePlan.id,
     }, {
         protect,
-        dependsOn: [assignHostName]
+        dependsOn: [assignHostName],
         // parent: webApp
     });
 
     const deleteHostName = new local.Command(`func-hostname-remove-${namePrefix}`, {
-        create: interpolate`az webapp config hostname delete --webapp-name ${webApp.name} --resource-group ${resourceGroup.name} --hostname ${fullDomainName}`
+        create: interpolate`az webapp config hostname delete --webapp-name ${webApp.name} --resource-group ${resourceGroup.name} --hostname ${fullDomainName}`,
     }, {
-        dependsOn: [cert]
+        dependsOn: [cert],
         // parent: webApp
     });
 
@@ -63,10 +63,10 @@ export function assignCustomDomain (resourceGroup: ResourceGroup, webApp: WebApp
         hostNameType: HostNameType.Verified,
         sslState: SslState.SniEnabled,
         customHostNameDnsRecordType: CustomHostNameDnsRecordType.CName,
-        thumbprint: cert.thumbprint
+        thumbprint: cert.thumbprint,
     }, {
         dependsOn: [deleteHostName],
-        protect
+        protect,
         // parent: webApp
     });
 
@@ -74,6 +74,6 @@ export function assignCustomDomain (resourceGroup: ResourceGroup, webApp: WebApp
         dnsTxtVerify: txtVerifyRecord,
         dnsCname: cname,
         cert,
-        binding
+        binding,
     };
 }

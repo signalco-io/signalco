@@ -12,10 +12,10 @@ export function createFunction (
         resourceGroupName: resourceGroup.name,
         sku: {
             name: 'Y1',
-            tier: 'Dynamic'
-        }
+            tier: 'Dynamic',
+        },
     }, {
-        protect
+        protect,
         // parent: resourceGroup
     });
 
@@ -27,7 +27,7 @@ export function createFunction (
         dailyMemoryTimeQuota: 500000,
         httpsOnly: !isPublic, // Internal functions are HTTPS only
         identity: {
-            type: 'SystemAssigned'
+            type: 'SystemAssigned',
         },
         keyVaultReferenceIdentity: 'SystemAssigned',
         siteConfig: {
@@ -41,19 +41,19 @@ export function createFunction (
                         'http://localhost:3000', // Next.js
                         'https://localhost:3001', // Next.js
                         'http://localhost:3001', // Next.js
-                        ...cors.map(c => interpolate`https://${c}`)
+                        ...cors.map(c => interpolate`https://${c}`),
                     ]
                     : ['*'],
-                supportCredentials: !!cors
-            }
-        }
+                supportCredentials: !!cors,
+            },
+        },
     }, {
-        protect
+        protect,
         // parent: plan
     });
 
     return {
         webApp: app,
-        servicePlan: plan
+        servicePlan: plan,
     };
 }

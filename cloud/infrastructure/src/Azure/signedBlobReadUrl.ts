@@ -22,7 +22,7 @@ export function signedBlobReadUrl (
         contentType: 'application/json',
         cacheControl: 'max-age=5',
         contentDisposition: 'inline',
-        contentEncoding: 'deflate'
+        contentEncoding: 'deflate',
     });
     return interpolate`https://${account.name}.blob.core.windows.net/${container.name}/${blob.name}?${blobSAS.serviceSasToken}`;
 }

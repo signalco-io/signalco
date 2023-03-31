@@ -13,9 +13,9 @@ export function createSignalR (resourceGroup: ResourceGroup, namePrefix: string,
                     'http://localhost:3001', // Next.js
                     'https://localhost:6006', // Storybook
                     'http://localhost:6006', // Storybook
-                    ...cors.map(c => interpolate`https://${c}`)
+                    ...cors.map(c => interpolate`https://${c}`),
                 ]
-                : ['*']
+                : ['*'],
         },
         kind: 'SignalR',
         networkACLs: {
@@ -25,27 +25,27 @@ export function createSignalR (resourceGroup: ResourceGroup, namePrefix: string,
                     'ServerConnection',
                     'ClientConnection',
                     'RESTAPI',
-                    'Trace'
-                ]
-            }
+                    'Trace',
+                ],
+            },
         },
         resourceGroupName: resourceGroup.name,
         sku: {
             capacity: 1,
-            name: 'Free_F1' // "Standard_S1"
-        }
+            name: 'Free_F1', // "Standard_S1"
+        },
     }, {
-        protect
+        protect,
         // parent: resourceGroup
     });
 
     const connectionString = interpolate`${listSignalRKeysOutput({
         resourceGroupName: resourceGroup.name,
-        resourceName: signalr.name
+        resourceName: signalr.name,
     }).primaryConnectionString}`;
 
     return {
         signalr,
-        connectionString
+        connectionString,
     };
 }

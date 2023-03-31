@@ -9,6 +9,6 @@ export default function createPublicFunction (resourceGroup: ResourceGroup, name
 
     return {
         ...pubFunc,
-        ...domain
+        ...domain,
     };
 }

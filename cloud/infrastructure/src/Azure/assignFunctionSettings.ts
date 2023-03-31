@@ -14,14 +14,14 @@ export function assignFunctionSettings (resourceGroup: ResourceGroup, app: WebAp
             OpenApi__DocTitle: 'Signalco Cloud API',
             OpenApi__Version: 'v3',
             OpenApi__HideSwaggerUI: 'true',
-            ...appSettings
-        }
+            ...appSettings,
+        },
     }, {
-        protect
+        protect,
         // parent: app
     });
 
     return {
-        appSettings: settings
+        appSettings: settings,
     };
 }

@@ -17,7 +17,7 @@ export default async function createChannelFunctionAsync (channelName: string, r
         publicFunctionPrefix,
         publicFunctionSubDomain,
         corsDomains,
-        shouldProtect
+        shouldProtect,
     );
 
     const codePath = `../src/Signalco.Channel.${channelName}`;
@@ -35,6 +35,6 @@ export default async function createChannelFunctionAsync (channelName: string, r
         nameLower: channelNameLower,
         name: channelName,
         ...channelFunc,
-        ...channelFuncCode
+        ...channelFuncCode,
     };
 }

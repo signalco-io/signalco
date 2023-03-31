@@ -9,9 +9,9 @@ export default function dnsRecord (name: string, dnsName: Input<string>, value: 
         zoneId,
         type,
         value,
-        priority: type === 'MX' ? 10 : undefined
+        priority: type === 'MX' ? 10 : undefined,
     }, {
-        protect
+        protect,
         // parent: parent
     });
 }

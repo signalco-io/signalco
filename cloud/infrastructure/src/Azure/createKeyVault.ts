@@ -17,7 +17,7 @@ export function createKeyVault (
         properties: {
             sku: {
                 family: SkuFamily.A,
-                name: SkuName.Standard
+                name: SkuName.Standard,
             },
             tenantId: current.tenantId,
             accessPolicies: [
@@ -30,7 +30,7 @@ export function createKeyVault (
                             KeyPermissions.Delete,
                             KeyPermissions.List,
                             KeyPermissions.Recover,
-                            KeyPermissions.Purge
+                            KeyPermissions.Purge,
                         ],
                         secrets: [
                             SecretPermissions.Get,
@@ -38,25 +38,25 @@ export function createKeyVault (
                             SecretPermissions.Set,
                             SecretPermissions.Delete,
                             SecretPermissions.Recover,
-                            SecretPermissions.Purge
-                        ]
+                            SecretPermissions.Purge,
+                        ],
                     },
-                    tenantId: current.tenantId
+                    tenantId: current.tenantId,
                 },
                 ...policies.map(i => ({
                     objectId: i.objectId,
                     tenantId: i.tenantId,
                     permissions: {
-                        secrets: [SecretPermissions.Get, SecretPermissions.Set]
-                    }
-                }))
-            ]
-        }
+                        secrets: [SecretPermissions.Get, SecretPermissions.Set],
+                    },
+                })),
+            ],
+        },
     }, {
-        protect
+        protect,
     });
 
     return {
-        keyVault: vault
+        keyVault: vault,
     };
 }

@@ -8,13 +8,13 @@ export default function vaultSecret (resourceGroup: ResourceGroup, vault: Vault,
         vaultName: vault.name,
         secretName: name,
         properties: {
-            value
-        }
+            value,
+        },
     }, {
-        dependsOn: waitFor
+        dependsOn: waitFor,
     });
 
     return {
-        secret
+        secret,
     };
 }

@@ -18,6 +18,7 @@ import apiStatusCheck from './Checkly/apiStatusCheck';
 import dnsRecord from './CloudFlare/dnsRecord';
 import publishProjectAsync from './dotnet/publishProjectAsync';
 import { ConfCloudApiCheckInterval, ConfPublicSignalRCheckInterval } from './config';
+import createRemoteBrowser from './apps/createRemoteBrowser';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -68,7 +69,7 @@ export = async () => {
     const internalFuncs = [];
     for (const funcName of internalNames) {
         internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, shouldProtect));
-    };
+    }
 
     // Generate channels functions
     const productionChannelNames = ['Samsung', 'Slack', 'Zigbee2Mqtt', 'PhilipsHue', 'iRobot'];
@@ -79,7 +80,7 @@ export = async () => {
     const channelsFuncs = [];
     for (const channelName of channelNames) {
         channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, shouldProtect));
-    };
+    }
 
     // Create App Insights
     const pubFuncInsights = createWebAppAppInsights(resourceGroup, publicFunctionPrefix, pubFunc.webApp);
@@ -95,7 +96,7 @@ export = async () => {
         'webnewsletter',
 
         // Caches
-        'contactLinks'
+        'contactLinks',
     ];
     const queueNames = ['contact-state-processing', 'usage-processing'];
 
@@ -103,18 +104,18 @@ export = async () => {
         new Table(`sa${storagePrefix}-table-${tableName}`, {
             resourceGroupName: resourceGroup.name,
             accountName: storage.storageAccount.name,
-            tableName
+            tableName,
         }, {
-            protect: shouldProtect
+            protect: shouldProtect,
         });
     });
     queueNames.forEach(queueName => {
         new Queue(`sa${storagePrefix}-queue-${queueName}`, {
             resourceGroupName: resourceGroup.name,
             accountName: storage.storageAccount.name,
-            queueName
+            queueName,
         }, {
-            protect: shouldProtect
+            protect: shouldProtect,
         });
     });
 
@@ -125,7 +126,7 @@ export = async () => {
     const vault = createKeyVault(resourceGroup, keyvaultPrefix, shouldProtect, [
         webAppIdentity(pubFunc.webApp),
         ...internalFuncs.map(c => webAppIdentity(c.func.webApp)),
-        ...channelsFuncs.map(c => webAppIdentity(c.webApp))
+        ...channelsFuncs.map(c => webAppIdentity(c.webApp)),
     ]);
     const s1 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ApiIdentifier', config.requireSecret('secret-auth0ApiIdentifier'));
     const s2 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ClientId--Station', config.requireSecret('secret-auth0ClientIdStation'), s1.secret);
@@ -155,7 +156,7 @@ export = async () => {
             AzureSignalRConnectionString: signalr.connectionString,
             SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
             APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
-            APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`
+            APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
         },
         shouldProtect);
 
@@ -172,7 +173,7 @@ export = async () => {
                 SignalcoStorageAccountConnectionString: storage.connectionString,
                 SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
                 APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${intFuncInsights.component.instrumentationKey}`,
-                APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${intFuncInsights.component.connectionString}`
+                APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${intFuncInsights.component.connectionString}`,
             },
             shouldProtect);
     });
@@ -189,13 +190,16 @@ export = async () => {
                 AzureSignalRConnectionString: signalr.connectionString,
                 SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
                 APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
-                APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`
+                APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
             },
-            shouldProtect
+            shouldProtect,
         );
     });
 
     createAppInsights(resourceGroup, 'web', 'signalco');
+
+    // Create apps
+    createRemoteBrowser(resourceGroup, 'rb');
 
     // Vercel - Domains
     dnsRecord('vercel-web', 'www', 'cname.vercel-dns.com', 'CNAME', false);
@@ -213,6 +217,6 @@ export = async () => {
         signalrUrl: signalr.signalr.hostName,
         internalFunctionUrls: internalFuncs.map(f => f.func.webApp.hostNames[0]),
         publicApiUrl: pubFunc.dnsCname.hostname,
-        channelsUrls: channelsFuncs.map(c => c.dnsCname.hostname)
+        channelsUrls: channelsFuncs.map(c => c.dnsCname.hostname),
     };
 };

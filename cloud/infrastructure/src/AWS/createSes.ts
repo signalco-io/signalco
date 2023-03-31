@@ -12,8 +12,8 @@ export default function createSes (prefix: string, subdomain: string) {
         `${prefix}-usr`,
         {
             name: `${prefix}-email`,
-            path: '/system/'
-        }
+            path: '/system/',
+        },
     );
 
     // Policy
@@ -30,32 +30,32 @@ export default function createSes (prefix: string, subdomain: string) {
                             'ses:SendEmail',
                             'ses:SendTemplatedEmail',
                             'ses:SendRawEmail',
-                            'ses:SendBulkTemplatedEmail'
+                            'ses:SendBulkTemplatedEmail',
                         ],
                         Effect: 'Allow',
                         Resource: '*',
                         Condition: {
                             StringLike: {
-                                'ses:FromAddress': allowedFromAddress
-                            }
-                        }
-                    }
-                ]
-            }, null, '  ')
-        }
+                                'ses:FromAddress': allowedFromAddress,
+                            },
+                        },
+                    },
+                ],
+            }, null, '  '),
+        },
     );
 
     // Email Access key
     const emailAccessKey = new AccessKey(
         `${prefix}-ses-access-key`,
-        { user: emailUser.name }
+        { user: emailUser.name },
     );
 
     const sesSmtpUsername = interpolate`${emailAccessKey.id}`;
     const sesSmtpPassword = interpolate`${emailAccessKey.sesSmtpPasswordV4}`;
 
     const sesDomainIdentity = new DomainIdentity(`${prefix}-domainIdentity`, {
-        domain: `${subdomain}.${baseDomain}`
+        domain: `${subdomain}.${baseDomain}`,
     });
 
     // MailFrom
@@ -64,7 +64,7 @@ export default function createSes (prefix: string, subdomain: string) {
         `${prefix}-ses-mail-from`,
         {
             domain: sesDomainIdentity.domain,
-            mailFromDomain: interpolate`bounce.${sesDomainIdentity.domain}`
+            mailFromDomain: interpolate`bounce.${sesDomainIdentity.domain}`,
         });
 
     dnsRecord(`${prefix}-ses-mail-from-mx-record`, `bounce.${subdomain}`, `feedback-smtp.${sesRegion}.amazonses.com`, 'MX', false);
@@ -72,7 +72,7 @@ export default function createSes (prefix: string, subdomain: string) {
     dnsRecord(`${prefix}-ses-dmarc`, `_dmarc.${subdomain}`, 'v=DMARC1; p=none; rua=mailto:contact@signalco.io; fo=1;', 'TXT', false);
 
     const sesDomainDkim = new DomainDkim(`${prefix}-sesDomainDkim`, {
-        domain: sesDomainIdentity.domain
+        domain: sesDomainIdentity.domain,
     });
     for (let i = 0; i < 3; i++) {
         const dkimValue = interpolate`${sesDomainDkim.dkimTokens[i]}.dkim.amazonses.com`;
@@ -84,6 +84,6 @@ export default function createSes (prefix: string, subdomain: string) {
         smtpUsername: sesSmtpUsername,
         smtpPassword: sesSmtpPassword,
         smtpServer: `email-smtp.${sesRegion}.amazonaws.com`,
-        smtpFromDomain: mailFromDomain
+        smtpFromDomain: mailFromDomain,
     };
 }

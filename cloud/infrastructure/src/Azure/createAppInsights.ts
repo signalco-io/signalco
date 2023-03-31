@@ -7,10 +7,10 @@ export default function createAppInsights (resourceGroup: ResourceGroup, namePre
         resourceGroupName: resourceGroup.name,
         applicationType: ApplicationType.Web,
         samplingPercentage: 1,
-        ...options
+        ...options,
     });
 
     return {
-        component
+        component,
     };
 }
