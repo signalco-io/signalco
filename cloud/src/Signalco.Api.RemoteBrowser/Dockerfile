@@ -10,10 +10,10 @@ RUN apt-get update && \
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Signalco.Api.RemoteBrowser/Signalco.Api.RemoteBrowser.csproj", "Signalco.Api.RemoteBrowser/"]
-RUN dotnet restore "Signalco.Api.RemoteBrowser/Signalco.Api.RemoteBrowser.csproj"
+# COPY ["Signalco.Api.RemoteBrowser/Signalco.Api.RemoteBrowser.csproj", "Signalco.Api.RemoteBrowser/"]
+
 COPY . .
-WORKDIR "/src/Signalco.Api.RemoteBrowser"
+RUN dotnet restore "Signalco.Api.RemoteBrowser.csproj"
 RUN dotnet build "Signalco.Api.RemoteBrowser.csproj" -c Release -o /app/build
 
 FROM build AS publish

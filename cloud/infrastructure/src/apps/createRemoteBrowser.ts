@@ -8,5 +8,9 @@ export default function createRemoteBrowser(resourceGroup: ResourceGroup, namePr
     const environment = createManagedEnvironment(resourceGroup, namePrefix, shouldProtect);
     const registry = createContainerRegistry(resourceGroup, 'signalco', shouldProtect);
     const image = createContainerImage(registry, namePrefix, 'signalco-remote-browser', 'Signalco.Api.RemoteBrowser');
-    createContainerApp(resourceGroup, namePrefix, environment.managedEnvironment, registry, image.image, shouldProtect);
+    const app = createContainerApp(resourceGroup, namePrefix, environment.managedEnvironment, registry, image.image, shouldProtect);
+
+    return {
+        app,
+    };
 }

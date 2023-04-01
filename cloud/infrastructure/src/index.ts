@@ -199,7 +199,7 @@ export = async () => {
     createAppInsights(resourceGroup, 'web', 'signalco');
 
     // Create apps
-    createRemoteBrowser(resourceGroup, 'rb', shouldProtect);
+    const appRb = createRemoteBrowser(resourceGroup, 'rb', shouldProtect);
 
     // Vercel - Domains
     dnsRecord('vercel-web', 'www', 'cname.vercel-dns.com', 'CNAME', false);
@@ -218,5 +218,8 @@ export = async () => {
         internalFunctionUrls: internalFuncs.map(f => f.func.webApp.hostNames[0]),
         publicApiUrl: pubFunc.dnsCname.hostname,
         channelsUrls: channelsFuncs.map(c => c.dnsCname.hostname),
+        appUrls: [
+            appRb.app.url,
+        ],
     };
 };
