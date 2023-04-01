@@ -37,9 +37,6 @@ export = async () => {
 
     const resourceGroupSharedName = 'signalco-shared';
     const resourceGroupName = `signalco-cloud-${stack}`;
-    const publicFunctionPrefix = 'cpub';
-    const publicFunctionSubDomain = 'api';
-    const internalFunctionPrefix = 'cint';
     const signalrPrefix = 'sr';
     const storagePrefix = 'store';
     const keyvaultPrefix = 'kv';
@@ -51,21 +48,34 @@ export = async () => {
     const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, shouldProtect);
     apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, ConfPublicSignalRCheckInterval, '/api/v1/health');
 
-    // Create Public function
-    const pubFunc = createPublicFunction(
-        resourceGroup,
-        publicFunctionPrefix,
-        publicFunctionSubDomain,
-        corsDomains,
-        shouldProtect);
-    const pubFuncPublishResult = await publishProjectAsync('../src/Signal.Api.Public');
-    const pubFuncCode = assignFunctionCode(
-        resourceGroup,
-        pubFunc.webApp,
-        publicFunctionPrefix,
-        pubFuncPublishResult.releaseDir,
-        shouldProtect);
-    apiStatusCheck(publicFunctionPrefix, 'API', pubFunc.dnsCname.hostname, ConfCloudApiCheckInterval);
+    // Generate public functions
+    const publicApis = [
+        { name: '', prefix: 'cpub', subDomain: 'api', cors: corsDomains },
+        { name: 'RemoteBrowser', prefix: 'rbpub', subDomain: 'browser.api', cors: corsDomains },
+    ];
+    const publicFuncs = [];
+    for (const api of publicApis) {
+        const apiFunc = createPublicFunction(
+            resourceGroup,
+            api.prefix,
+            api.subDomain,
+            api.cors,
+            shouldProtect);
+        const apiFuncPublish = await publishProjectAsync(['../src/Signalco.Api.Public', api.name].filter(i => i.length).join('.'));
+        const apiFuncCode = assignFunctionCode(
+            resourceGroup,
+            apiFunc.webApp,
+            api.prefix,
+            apiFuncPublish.releaseDir,
+            shouldProtect);
+        apiStatusCheck(api.prefix, [api.name, 'API'].filter(i => i.length).join(' '), apiFunc.dnsCname.hostname, ConfCloudApiCheckInterval);
+        publicFuncs.push({
+            name: api.name,
+            shortName: api.prefix,
+            ...apiFunc,
+            ...apiFuncCode,
+        });
+    }
 
     // Generate internal functions
     const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintenance', 'Migration'];
@@ -86,8 +96,8 @@ export = async () => {
     }
 
     // Create App Insights
-    const pubFuncInsights = createWebAppAppInsights(resourceGroup, publicFunctionPrefix, pubFunc.webApp);
-    const intFuncInsights = createWebAppAppInsights(resourceGroup, internalFunctionPrefix, internalFuncs[0].func.webApp);
+    const pubFuncInsights = createWebAppAppInsights(resourceGroup, 'cpub', publicFuncs[0].webApp);
+    const intFuncInsights = createWebAppAppInsights(resourceGroup, 'cint', internalFuncs[0].webApp);
 
     // Create general storage and prepare tables
     const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
@@ -127,8 +137,8 @@ export = async () => {
 
     // Create and populate vault
     const vault = createKeyVault(resourceGroup, keyvaultPrefix, shouldProtect, [
-        webAppIdentity(pubFunc.webApp),
-        ...internalFuncs.map(c => webAppIdentity(c.func.webApp)),
+        ...publicFuncs.map(c => webAppIdentity(c.webApp)),
+        ...internalFuncs.map(c => webAppIdentity(c.webApp)),
         ...channelsFuncs.map(c => webAppIdentity(c.webApp)),
     ]);
     const s1 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ApiIdentifier', config.requireSecret('secret-auth0ApiIdentifier'));
@@ -148,29 +158,32 @@ export = async () => {
     const s15 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientSecret', config.requireSecret('secret-slackClientSecret'), s14.secret);
     vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoProcessorAccessCode', config.requireSecret('secret-processorAccessCode'), s15.secret);
 
-    // Populate function settings
-    assignFunctionSettings(
-        resourceGroup,
-        pubFunc.webApp,
-        publicFunctionPrefix,
-        pubFuncCode.storageAccount.connectionString,
-        pubFuncCode.codeBlobUlr,
-        {
-            AzureSignalRConnectionString: signalr.connectionString,
-            SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
-            APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
-            APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
-        },
-        shouldProtect);
+    // Populate public functions settings
+    publicFuncs.forEach(func => {
+        assignFunctionSettings(
+            resourceGroup,
+            func.webApp,
+            `pub${func.shortName}`,
+            func.storageAccount.connectionString,
+            func.codeBlobUlr,
+            {
+                AzureSignalRConnectionString: signalr.connectionString,
+                SignalcoStorageAccountConnectionString: storage.connectionString,
+                SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
+                APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
+                APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
+            },
+            shouldProtect);
+    });
 
     // Populate internal functions settings
     internalFuncs.forEach(func => {
         assignFunctionSettings(
             resourceGroup,
-            func.func.webApp,
+            func.webApp,
             `int${func.shortName}`,
-            func.code.storageAccount.connectionString,
-            func.code.codeBlobUlr,
+            func.storageAccount.connectionString,
+            func.codeBlobUlr,
             {
                 AzureSignalRConnectionString: signalr.connectionString,
                 SignalcoStorageAccountConnectionString: storage.connectionString,
@@ -219,8 +232,8 @@ export = async () => {
 
     return {
         signalrUrl: signalr.signalr.hostName,
-        internalFunctionUrls: internalFuncs.map(f => f.func.webApp.hostNames[0]),
-        publicApiUrl: pubFunc.dnsCname.hostname,
+        internalFunctionUrls: internalFuncs.map(f => f.webApp.hostNames[0]),
+        publicUrls: publicFuncs.map(c => c.dnsCname.hostname),
         channelsUrls: channelsFuncs.map(c => c.dnsCname.hostname),
         appUrls: [
             appRb.app.url,

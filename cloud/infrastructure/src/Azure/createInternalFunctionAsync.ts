@@ -25,5 +25,10 @@ export default async function createInternalFunctionAsync (resourceGroup: Resour
         publishResult.releaseDir,
         shouldProtect);
     apiStatusCheck(`${internalFunctionPrefix}-${shortName}`, `Internal - ${name}`, func.webApp.hostNames[0], ConfInternalApiCheckInterval);
-    return { name, shortName, func, code };
+    return { 
+        name, 
+        shortName, 
+        ...func, 
+        ...code,
+    };
 }
