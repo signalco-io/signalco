@@ -28,6 +28,10 @@ export default function createContainerApp(resourceGroup: ResourceGroup, namePre
                 name: 'app',
                 image: image.imageName,
             }],
+            scale: {
+                minReplicas: 0,
+                maxReplicas: 3,
+            },
         },
     }, {
         protect: shouldProtect,

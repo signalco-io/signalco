@@ -1,12 +1,11 @@
-import { ResourceGroup } from '@pulumi/azure-native/resources';
+import { type ResourceGroup } from '@pulumi/azure-native/resources';
+import { type ContainerRegistryResult } from '../Azure/createContainerRegistry';
 import createContainerApp from '../Azure/createContainerApp';
 import createManagedEnvironment from '../Azure/createManagedEnvironment';
-import createContainerRegistry from '../Azure/createContainerRegistry';
 import createContainerImage from '../Azure/createContainerImage';
 
-export default function createRemoteBrowser(resourceGroup: ResourceGroup, namePrefix: string, shouldProtect: boolean) {
+export default function createRemoteBrowser(resourceGroup: ResourceGroup, namePrefix: string, registry: ContainerRegistryResult, shouldProtect: boolean) {
     const environment = createManagedEnvironment(resourceGroup, namePrefix, shouldProtect);
-    const registry = createContainerRegistry(resourceGroup, 'signalco', shouldProtect);
     const image = createContainerImage(registry, namePrefix, 'signalco-remote-browser', 'Signalco.Api.RemoteBrowser');
     const app = createContainerApp(resourceGroup, namePrefix, environment.managedEnvironment, registry, image.image, shouldProtect);
 

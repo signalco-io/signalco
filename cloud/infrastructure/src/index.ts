@@ -19,6 +19,7 @@ import dnsRecord from './CloudFlare/dnsRecord';
 import publishProjectAsync from './dotnet/publishProjectAsync';
 import { ConfCloudApiCheckInterval, ConfPublicSignalRCheckInterval } from './config';
 import createRemoteBrowser from './apps/createRemoteBrowser';
+import createContainerRegistry from './Azure/createContainerRegistry';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -34,6 +35,7 @@ export = async () => {
     const shouldProtect = stack === 'production';
     const domainName = `${config.require('domain')}`;
 
+    const resourceGroupSharedName = 'signalco-shared';
     const resourceGroupName = `signalco-cloud-${stack}`;
     const publicFunctionPrefix = 'cpub';
     const publicFunctionSubDomain = 'api';
@@ -42,6 +44,7 @@ export = async () => {
     const storagePrefix = 'store';
     const keyvaultPrefix = 'kv';
 
+    const resourceGroupShared = new ResourceGroup(resourceGroupSharedName);
     const resourceGroup = new ResourceGroup(resourceGroupName);
     const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
 
@@ -199,7 +202,8 @@ export = async () => {
     createAppInsights(resourceGroup, 'web', 'signalco');
 
     // Create apps
-    const appRb = createRemoteBrowser(resourceGroup, 'rb', shouldProtect);
+    const registry = createContainerRegistry(resourceGroupShared, 'signalco', shouldProtect);
+    const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, shouldProtect);
 
     // Vercel - Domains
     dnsRecord('vercel-web', 'www', 'cname.vercel-dns.com', 'CNAME', false);
