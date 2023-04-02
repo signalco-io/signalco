@@ -9,6 +9,10 @@ import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { ScreenshotResponse } from '../../app/api/screenshot/route';
 import { BrandResources } from '../../app/api/quick/route';
 
+function isImageDataUrl(url: string) {
+    return url.startsWith('data:image/');
+}
+
 function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
     if (!og?.title && !og?.image && !og?.url)
         return <>-</>;
@@ -23,7 +27,7 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
             }} sx={{
                 '&:hover': { boxShadow: 'md', borderColor: 'neutral.outlinedHoverBorder' },
             }}>
-                {og.imageBase64 &&
+                {isImageDataUrl(og.imageBase64) &&
                     <CardOverflow sx={{
                         padding: 0
                     }}>
@@ -144,7 +148,7 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
 function TextInfo({ title, children }: { title: string } & ChildrenProps) {
     return (
         <Stack spacing={.5}>
-            <Typography level="body3">{title}</Typography>
+            <Typography level="body3" secondary>{title}</Typography>
             <div>{children}</div>
         </Stack>
     )
