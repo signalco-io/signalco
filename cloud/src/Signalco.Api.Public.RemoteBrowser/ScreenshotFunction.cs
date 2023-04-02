@@ -39,9 +39,17 @@ public class ScreenshotFunction
 
         // TODO: Authorize using access key
 
+        int? width = null;
+        if (int.TryParse(req.Query["width"].ToString(), out var widthParsed))
+            width = widthParsed;
+        int? height = null;
+        if (int.TryParse(req.Query["height"].ToString(), out var heightParsed))
+            height = heightParsed;
         var request = new ScreenshotRequest(
             req.Query["url"], 
-            req.Query["scrollThrough"].ToString().ToLowerInvariant() == "true");
+            req.Query["scrollThrough"].ToString().ToLowerInvariant() == "true",
+            req.Query["fullPage"].ToString().ToLowerInvariant() == "true",
+            width, height);
 
         // TODO: Validate request
         // TODO: Fix URL to contain only absolute URLs with protocol
@@ -87,6 +95,13 @@ public class ScreenshotFunction
             };
             if (request.ScrollThrough == true)
                 queryParams.Add("scrollThrough=true");
+            if (request.FullPage == true)
+                queryParams.Add("scrollThrough=true");
+            if (request.Width.HasValue)
+                queryParams.Add($"width={request.Width.Value}");
+            if (request.Height.HasValue)
+                queryParams.Add($"height={request.Height.Value}");
+
 
             // Construct request for RemoteBrowser app
             var reqUrl = $"{url}/api/screenshot?{string.Join("&", queryParams)}";
@@ -148,7 +163,10 @@ public class ScreenshotFunction
 
 public record ScreenshotRequest(
     [property: JsonPropertyName("url")] string Url,
-    [property: JsonPropertyName("scrollThrough")] bool? ScrollThrough);
+    [property: JsonPropertyName("scrollThrough")] bool? ScrollThrough,
+    [property: JsonPropertyName("fullPage")] bool? FullPage,
+    [property: JsonPropertyName("width")] int? Width,
+    [property: JsonPropertyName("height")] int? Height);
 
 public record ScreenshotResult(
     DateTime RequestedTimeStamp,
