@@ -47,7 +47,7 @@ function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity
     if (color) styles['color'] = `var(--joy-palette-${color}-plainColor)`;
 }
 
-const TypographyForwardRef = forwardRef<HTMLDivElement>(function Typography(props: TypographyProps, ref) {
+const TypographyForwardRef = forwardRef<HTMLDivElement, TypographyProps>(function Typography(props: TypographyProps, ref?: ForwardedRef<HTMLDivElement>) {
     const { level, component, children } = props;
     const styles: CSSProperties = {
         fontFamily: 'var(--joy-fontFamily-body)',
