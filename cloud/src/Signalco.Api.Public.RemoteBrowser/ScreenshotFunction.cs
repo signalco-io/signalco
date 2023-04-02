@@ -87,6 +87,13 @@ public class ScreenshotFunction
             };
             if (request.ScrollThrough == true)
                 queryParams.Add("scrollThrough=true");
+            if (request.FullPage == true)
+                queryParams.Add("scrollThrough=true");
+            if (request.Width.HasValue)
+                queryParams.Add($"width={request.Width.Value}");
+            if (request.Height.HasValue)
+                queryParams.Add($"height={request.Height.Value}");
+
 
             // Construct request for RemoteBrowser app
             var reqUrl = $"{url}/api/screenshot?{string.Join("&", queryParams)}";
@@ -148,7 +155,10 @@ public class ScreenshotFunction
 
 public record ScreenshotRequest(
     [property: JsonPropertyName("url")] string Url,
-    [property: JsonPropertyName("scrollThrough")] bool? ScrollThrough);
+    [property: JsonPropertyName("scrollThrough")] bool? ScrollThrough,
+    [property: JsonPropertyName("fullPage")] bool? FullPage,
+    [property: JsonPropertyName("width")] int? Width,
+    [property: JsonPropertyName("height")] int? Height);
 
 public record ScreenshotResult(
     DateTime RequestedTimeStamp,
