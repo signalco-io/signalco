@@ -99,6 +99,10 @@ export = async () => {
     const pubFuncInsights = createWebAppAppInsights(resourceGroup, 'cpub', publicFuncs[0].webApp);
     const intFuncInsights = createWebAppAppInsights(resourceGroup, 'cint', internalFuncs[0].webApp);
 
+    // Create internal apps
+    const registry = createContainerRegistry(resourceGroupShared, 'signalco', shouldProtect);
+    const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, shouldProtect);
+
     // Create general storage and prepare tables
     const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
     const tableNames = [
@@ -156,7 +160,8 @@ export = async () => {
     const s13 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--SigningSecret', config.requireSecret('secret-slackSigningSecret'), s12.secret);
     const s14 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientId', config.require('secret-slackClientId'), s13.secret);
     const s15 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientSecret', config.requireSecret('secret-slackClientSecret'), s14.secret);
-    vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoProcessorAccessCode', config.requireSecret('secret-processorAccessCode'), s15.secret);
+    const s16 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoAppRemoteBrowserUrl', appRb.app.url, s15.secret);
+    vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoProcessorAccessCode', config.requireSecret('secret-processorAccessCode'), s16.secret);
 
     // Populate public functions settings
     publicFuncs.forEach(func => {
@@ -213,10 +218,6 @@ export = async () => {
     });
 
     createAppInsights(resourceGroup, 'web', 'signalco');
-
-    // Create apps
-    const registry = createContainerRegistry(resourceGroupShared, 'signalco', shouldProtect);
-    const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, shouldProtect);
 
     // Vercel - Domains
     dnsRecord('vercel-web', 'www', 'cname.vercel-dns.com', 'CNAME', false);
