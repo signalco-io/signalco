@@ -29,20 +29,21 @@ export async function GET(request: Request) {
         return NextResponse.json({ error: 'No domain provided' }, { status: 400 });
     }
 
-    const query = `url=${domain}&fullPage=true&width=1280&scrollThrough=true`;
-    const response = await fetch(`https://browser.api.signalco.${isDeveloper ? 'dev' : 'io'}/api/screenshot?${query}`);
+    const query = `url=https://${domain}&fullPage=true&width=1280&scrollThrough=true`;
+    const screenshotUrl = `https://browser.api.signalco.${isDeveloper ? 'dev' : 'io'}/api/screenshot?${query}`;
+    console.info('Requesting screenshot', screenshotUrl);
+
+    const response = await fetch(screenshotUrl);
     const data = Buffer.from(await response.arrayBuffer());
-    const dataUrlDataWebp = `data:image/webp;base64,${data.toString('base64')}`;
+    const dataUrlDataPng = `data:image/png;base64,${data.toString('base64')}`;
 
     let colors: ScreenshotResponse['colors'] = [];
     try {
-        const pngData = await sharp(data).png().toBuffer();
-        const dataUrlDataPng = `data:image/png;base64,${pngData.toString('base64')}`;
         const pixels = await getPixelsAsync(dataUrlDataPng);
         colors = await extractColors({ data: pixels.data })
     } catch (e) {
-        // TODO: Log error
+        console.error(e, 'Error extracting colors');
     }
 
-    return NextResponse.json({ data: dataUrlDataWebp, colors });
+    return NextResponse.json({ data: dataUrlDataPng, colors });
 }
