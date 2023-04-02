@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, ForwardedRef, forwardRef } from "react";
 import { ChildrenProps, ColorVariants } from "../sharedTypes";
 
 export type TypographyProps = ChildrenProps & {
@@ -47,7 +47,7 @@ function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity
     if (color) styles['color'] = `var(--joy-palette-${color}-plainColor)`;
 }
 
-export default function Typography(props: TypographyProps) {
+const TypographyForwardRef = forwardRef<HTMLDivElement, TypographyProps>(function Typography(props: TypographyProps, ref?: ForwardedRef<HTMLDivElement>) {
     const { level, component, children } = props;
     const styles: CSSProperties = {
         fontFamily: 'var(--joy-fontFamily-body)',
@@ -59,5 +59,7 @@ export default function Typography(props: TypographyProps) {
 
     populateTypographyStyles(styles, props);
 
-    return React.createElement(component ?? (level?.startsWith('h') ? level : 'p'), { children, style: styles });
-}
+    return React.createElement(component ?? (level?.startsWith('h') ? level : 'p'), { children, style: styles, ref: ref });
+});
+
+export default TypographyForwardRef;

@@ -9,11 +9,11 @@
         "@typescript-eslint/parser": "5.57.0",
         "eslint": "8.37.0",
         "eslint-config-next": "13.2.4",
-        "eslint-config-turbo": "1.8.6",
-        "eslint-import-resolver-typescript": "3.5.3",
+        "eslint-config-turbo": "1.8.8",
+        "eslint-import-resolver-typescript": "3.5.4",
         "eslint-plugin-import": "2.27.5",
         "eslint-plugin-react": "7.32.2",
-        "typescript": "5.0.2"
+        "typescript": "5.0.3"
     },
     "publishConfig": {
         "access": "public"

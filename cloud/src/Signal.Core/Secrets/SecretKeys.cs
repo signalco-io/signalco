@@ -6,6 +6,8 @@ public static class SecretKeys
 
     public const string ProcessorAccessCode = "SignalcoProcessorAccessCode";
 
+    public const string AppRemoteBrowserUrl = "SignalcoAppRemoteBrowserUrl";
+
     public static class Auth0
     {
         public const string ApiIdentifier = "Auth0--ApiIdentifier";

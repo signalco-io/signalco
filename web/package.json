@@ -6,15 +6,15 @@
         "apps/*",
         "packages/*"
     ],
-    "packageManager": "pnpm@8.0.0",
+    "packageManager": "pnpm@8.1.0",
     "scripts": {
         "build": "turbo run build",
         "clean": "turbo run clean",
-        "dev": "turbo run dev --no-cache --continue",
+        "dev": "turbo run dev --no-cache --continue --concurrency 15",
         "lint": "turbo run lint",
         "test": "turbo run test"
     },
     "devDependencies": {
-        "turbo": "1.8.6"
+        "turbo": "1.8.8"
     }
 }

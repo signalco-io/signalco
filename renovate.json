@@ -37,6 +37,7 @@
                 "pnpm",
                 "playwright",
                 "postcss",
+                "postcss-preset-env",
                 "mcr.microsoft.com/playwright",
                 "rollup",
                 "rimraf",
