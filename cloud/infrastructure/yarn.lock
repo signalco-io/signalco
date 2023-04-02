@@ -304,6 +304,14 @@
   dependencies:
     "@pulumi/pulumi" "^3.0.0"
 
+"@pulumi/docker@4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@pulumi/docker/-/docker-4.1.1.tgz#70abe47ac18333271f868b33807da6e9f8c38339"
+  integrity sha512-PEhBxDTwrerhJjSZoclevOUzVysX1wEiF+k8rPvRusSowUzqBjGhL4/bbY5WEM/FeN+Ss72iQsv/gmNAnbqDVA==
+  dependencies:
+    "@pulumi/pulumi" "^3.0.0"
+    semver "^5.4.0"
+
 "@pulumi/pulumi@3.60.1":
   version "3.60.1"
   resolved "https://registry.yarnpkg.com/@pulumi/pulumi/-/pulumi-3.60.1.tgz#68d8d940ca8cb8bd603510e4b04ade50ecf2350e"
@@ -2106,7 +2114,7 @@ sax@>=0.6.0:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
-"semver@2 || 3 || 4 || 5":
+"semver@2 || 3 || 4 || 5", semver@^5.4.0:
   version "5.7.1"
   resolved "https://registry.npmjs.org/semver/-/semver-5.7.1.tgz"
   integrity sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==

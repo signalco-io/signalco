@@ -2,12 +2,18 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "ESNext",
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
     },
     "include": [
-        "*.ts"
+        "src/**/*.ts"
     ],
     "exclude": [
         "node_modules"
