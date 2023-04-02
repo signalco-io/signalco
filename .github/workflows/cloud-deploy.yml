@@ -11,7 +11,7 @@ on:
       - ".github/workflows/cloud-deploy.yml"
 
 env:
-  DOTNET_VERSION: "6.0.x" # set this to the dotnet version to use
+  DOTNET_VERSION: "7.0.x" # set this to the dotnet version to use
 
 defaults:
   run:
