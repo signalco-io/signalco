@@ -39,9 +39,17 @@ public class ScreenshotFunction
 
         // TODO: Authorize using access key
 
+        int? width = null;
+        if (int.TryParse(req.Query["width"].ToString(), out var widthParsed))
+            width = widthParsed;
+        int? height = null;
+        if (int.TryParse(req.Query["height"].ToString(), out var heightParsed))
+            height = heightParsed;
         var request = new ScreenshotRequest(
             req.Query["url"], 
-            req.Query["scrollThrough"].ToString().ToLowerInvariant() == "true");
+            req.Query["scrollThrough"].ToString().ToLowerInvariant() == "true",
+            req.Query["fullPage"].ToString().ToLowerInvariant() == "true",
+            width, height);
 
         // TODO: Validate request
         // TODO: Fix URL to contain only absolute URLs with protocol
