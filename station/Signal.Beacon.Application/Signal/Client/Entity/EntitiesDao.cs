@@ -98,7 +98,10 @@ internal class EntitiesDao : IEntitiesDao
 
         try
         {
-            this.getEntitiesTask ??= this.entitiesClient.AllAsync(cancellationToken);
+            lock (this.cacheLock)
+            {
+                this.getEntitiesTask ??= this.entitiesClient.AllAsync(cancellationToken);
+            }
 
             var remoteEntities = (await this.getEntitiesTask).ToList();
 
@@ -109,18 +112,9 @@ internal class EntitiesDao : IEntitiesDao
 
                 try
                 {
-                    this.entities = new Dictionary<string, IEntityDetails?>();
-                    foreach (var entity in remoteEntities)
-                    {
-                        this.entities.Add(entity.Id, entity);
-
-                        //// Set local state
-                        //if (this.deviceStateManager.Value is EntityContactManager localDeviceStateManager)
-                        //    foreach (var retrievedState in deviceConfiguration.States)
-                        //        localDeviceStateManager.SetLocalState(
-                        //            retrievedState.contact with { Identifier = deviceConfiguration.Identifier },
-                        //            retrievedState.value);
-                    }
+                    this.entities = remoteEntities
+                        .Cast<IEntityDetails?>()
+                        .ToDictionary(re => re.Id);
 
                     this.logger.LogDebug("Entities cache renewed");
                 }

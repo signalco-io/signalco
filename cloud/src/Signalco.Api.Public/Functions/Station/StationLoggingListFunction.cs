@@ -17,7 +17,7 @@ using Signal.Core.Entities;
 using Signal.Core.Exceptions;
 using Signal.Core.Storage;
 
-namespace Signal.Api.Public.Functions.Station;
+namespace Signalco.Api.Public.Functions.Station;
 
 public class StationLoggingListFunction
 {

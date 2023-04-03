@@ -14,7 +14,7 @@ using Signal.Api.Common.OpenApi;
 using Signal.Core.Entities;
 using Signal.Core.Exceptions;
 
-namespace Signal.Api.Public.Functions.Entity;
+namespace Signalco.Api.Public.Functions.Entity;
 
 public class EntityDeleteFunction
 {

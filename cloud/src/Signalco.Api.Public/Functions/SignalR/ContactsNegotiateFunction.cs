@@ -11,7 +11,7 @@ using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
 
-namespace Signal.Api.Public.Functions.SignalR;
+namespace Signalco.Api.Public.Functions.SignalR;
 
 public class ContactsNegotiateFunction
 {
