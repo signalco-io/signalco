@@ -18,7 +18,7 @@ using Signal.Core.Entities;
 using Signal.Core.Exceptions;
 using Signal.Core.Storage;
 
-namespace Signal.Api.Public.Functions.Contacts;
+namespace Signalco.Api.Public.Functions.Contacts;
 
 public class ContactHistoryRetrieveFunction
 {

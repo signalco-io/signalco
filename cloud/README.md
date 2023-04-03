@@ -36,16 +36,6 @@ Production API
 
 #### Locally via CLI
 
-##### **Build projects**
-
-- `dotnet publish ./Signal.Api.Public --configuration Release`
-- `dotnet publish ./Signal.Api.Internal --configuration Release`
-- `dotnet publish ./Signal.Func.Internal.UsageProcessor --configuration Release`
-- `dotnet publish ./Signalco.Channel.GitHubApp --configuration Release`
-- `dotnet publish ./Signalco.Channel.Slack --configuration Release`
-- `dotnet publish ./Signalco.Channel.Zigbee2Mqtt --configuration Release`
-- `dotnet publish ./Signalco.Channel.PhilipsHue --configuration Release`
-
 ##### **Pulumi (required for Deploy step)**
 
 - [Install Pulumi](https://www.pulumi.com/docs/get-started/install)
@@ -53,8 +43,8 @@ Production API
   - MacOS: `brew install pulumi`
 - Navigate to `./infrastructure`
 - `yarn install`
-- `pulumi login`
-- `pulumi stack select` or `pulumi stack new` to create your new stack
+- [`pulumi login`](https://www.pulumi.com/docs/reference/cli/pulumi_login/)
+- [`pulumi stack select`](https://www.pulumi.com/docs/reference/cli/pulumi_stack_select/) or [`pulumi stack init`](https://www.pulumi.com/docs/reference/cli/pulumi_stack_init/) to create your new stack
 
 ##### **Azure (required for Deploy step)**
 

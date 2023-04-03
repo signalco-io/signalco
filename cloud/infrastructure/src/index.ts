@@ -62,7 +62,7 @@ export = async () => {
         // Generate public functions
         const publicApis = [
             { name: '', prefix: 'cpub', subDomain: 'api', cors: corsDomains },
-            { name: 'RemoteBrowser', prefix: 'rbpub', subDomain: 'browser.api', cors: corsDomains },
+            { name: 'RemoteBrowser', prefix: 'rbpub', subDomain: 'browser.api' },
         ];
         const publicFuncs = [];
         for (const api of publicApis) {

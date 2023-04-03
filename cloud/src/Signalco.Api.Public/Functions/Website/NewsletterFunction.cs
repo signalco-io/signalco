@@ -16,7 +16,7 @@ using Signal.Core.Exceptions;
 using Signal.Core.Newsletter;
 using Signal.Core.Storage;
 
-namespace Signal.Api.Public.Functions.Website;
+namespace Signalco.Api.Public.Functions.Website;
 
 public class NewsletterFunction
 {

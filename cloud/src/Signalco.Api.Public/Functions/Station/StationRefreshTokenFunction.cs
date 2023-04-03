@@ -14,7 +14,7 @@ using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
 using Signal.Core.Exceptions;
 
-namespace Signal.Api.Public.Functions.Station;
+namespace Signalco.Api.Public.Functions.Station;
 
 public class StationRefreshTokenFunction
 {
