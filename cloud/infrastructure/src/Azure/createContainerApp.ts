@@ -2,7 +2,7 @@ import { ContainerApp, ManagedEnvironment } from '@pulumi/azure-native/app';
 import { ResourceGroup } from '@pulumi/azure-native/resources';
 import { Image } from '@pulumi/docker';
 import { interpolate } from '@pulumi/pulumi';
-import { ContainerRegistryResult } from './createContainerRegistry';
+import { type ContainerRegistryResult } from './containerRegistry';
 
 export default function createContainerApp(resourceGroup: ResourceGroup, namePrefix: string, environment: ManagedEnvironment, registry: ContainerRegistryResult, image: Image, shouldProtect: boolean) {
     const containerApp = new ContainerApp(`docker-app-${namePrefix}`, {
