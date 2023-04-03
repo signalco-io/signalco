@@ -40,7 +40,7 @@
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "@tanstack/react-query": "4.28.0",
-        "@tanstack/react-query-devtools": "4.28.0",
+        "@tanstack/react-query-devtools": "4.29.0",
         "@vvo/tzdb": "6.105.0",
         "classix": "2.1.24",
         "cobe": "0.6.3",
