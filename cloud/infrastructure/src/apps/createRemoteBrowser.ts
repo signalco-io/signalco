@@ -1,5 +1,5 @@
 import { type ResourceGroup } from '@pulumi/azure-native/resources';
-import { type ContainerRegistryResult } from '../Azure/createContainerRegistry';
+import { type ContainerRegistryResult } from '../Azure/containerRegistry';
 import createContainerApp from '../Azure/createContainerApp';
 import createManagedEnvironment from '../Azure/createManagedEnvironment';
 import createContainerImage from '../Azure/createContainerImage';
