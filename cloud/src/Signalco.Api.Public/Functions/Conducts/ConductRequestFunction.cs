@@ -20,7 +20,7 @@ using Signal.Core.Processor;
 using Signal.Core.Storage;
 using Signalco.Common.Channel;
 
-namespace Signal.Api.Public.Functions.Conducts;
+namespace Signalco.Api.Public.Functions.Conducts;
 
 public class ConductRequestFunction : ConductFunctionsBase
 {

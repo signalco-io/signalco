@@ -1,6 +1,6 @@
 import { Image } from '@pulumi/docker';
 import { getStack, interpolate } from '@pulumi/pulumi';
-import { type ContainerRegistryResult } from './createContainerRegistry';
+import { type ContainerRegistryResult } from './containerRegistry';
 import path = require('node:path');
 
 export default function createContainerImage(

@@ -15,7 +15,7 @@ using Signal.Core.Contacts;
 using Signal.Core.Entities;
 using Signal.Core.Exceptions;
 
-namespace Signal.Api.Public.Functions.Contacts;
+namespace Signalco.Api.Public.Functions.Contacts;
 
 public class ContactMetadataFunction
 {

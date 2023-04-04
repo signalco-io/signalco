@@ -19,7 +19,7 @@ import dnsRecord from './CloudFlare/dnsRecord';
 import publishProjectAsync from './dotnet/publishProjectAsync';
 import { ConfCloudApiCheckInterval, ConfPublicSignalRCheckInterval } from './config';
 import createRemoteBrowser from './apps/createRemoteBrowser';
-import createContainerRegistry from './Azure/createContainerRegistry';
+import { createContainerRegistry, getContainerRegistry } from './Azure/containerRegistry';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -30,214 +30,226 @@ import createContainerRegistry from './Azure/createContainerRegistry';
  */
 
 export = async () => {
+    const resourceGroupSharedName = 'signalco-shared';
+    const containerRegistryName = 'signalco';
+
     const config = new Config();
     const stack = getStack();
-    const shouldProtect = stack === 'production';
-    const domainName = `${config.require('domain')}`;
 
-    const resourceGroupSharedName = 'signalco-shared';
-    const resourceGroupName = `signalco-cloud-${stack}`;
-    const signalrPrefix = 'sr';
-    const storagePrefix = 'store';
-    const keyvaultPrefix = 'kv';
-
-    const resourceGroupShared = new ResourceGroup(resourceGroupSharedName);
-    const resourceGroup = new ResourceGroup(resourceGroupName);
-    const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
-
-    const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, shouldProtect);
-    apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, ConfPublicSignalRCheckInterval, '/api/v1/health');
-
-    // Generate public functions
-    const publicApis = [
-        { name: '', prefix: 'cpub', subDomain: 'api', cors: corsDomains },
-        { name: 'RemoteBrowser', prefix: 'rbpub', subDomain: 'browser.api', cors: corsDomains },
-    ];
-    const publicFuncs = [];
-    for (const api of publicApis) {
-        const apiFunc = createPublicFunction(
-            resourceGroup,
-            api.prefix,
-            api.subDomain,
-            api.cors,
-            shouldProtect);
-        const apiFuncPublish = await publishProjectAsync(['../src/Signalco.Api.Public', api.name].filter(i => i.length).join('.'));
-        const apiFuncCode = assignFunctionCode(
-            resourceGroup,
-            apiFunc.webApp,
-            api.prefix,
-            apiFuncPublish.releaseDir,
-            shouldProtect);
-        apiStatusCheck(api.prefix, [api.name, 'API'].filter(i => i.length).join(' '), apiFunc.dnsCname.hostname, ConfCloudApiCheckInterval);
-        publicFuncs.push({
-            name: api.name,
-            shortName: api.prefix,
-            ...apiFunc,
-            ...apiFuncCode,
+    if (stack === 'shared') {
+        const resourceGroupShared = new ResourceGroup(resourceGroupSharedName, {
+            resourceGroupName: resourceGroupSharedName,
         });
-    }
 
-    // Generate internal functions
-    const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintenance', 'Migration'];
-    const internalFuncs = [];
-    for (const funcName of internalNames) {
-        internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, shouldProtect));
-    }
+        createContainerRegistry(resourceGroupShared, containerRegistryName, true);
 
-    // Generate channels functions
-    const productionChannelNames = ['Samsung', 'Slack', 'Zigbee2Mqtt', 'PhilipsHue', 'iRobot'];
-    const nextChannelNames = ['GitHubApp'];
-    const channelNames = stack === 'production'
-        ? productionChannelNames
-        : [...productionChannelNames, ...nextChannelNames];
-    const channelsFuncs = [];
-    for (const channelName of channelNames) {
-        channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, shouldProtect));
-    }
+        return { };
+    } else {
+        const shouldProtect = stack === 'production';
+        const domainName = `${config.require('domain')}`;
 
-    // Create App Insights
-    const pubFuncInsights = createWebAppAppInsights(resourceGroup, 'cpub', publicFuncs[0].webApp);
-    const intFuncInsights = createWebAppAppInsights(resourceGroup, 'cint', internalFuncs[0].webApp);
+        const resourceGroupName = `signalco-cloud-${stack}`;
+        const signalrPrefix = 'sr';
+        const storagePrefix = 'store';
+        const keyvaultPrefix = 'kv';
 
-    // Create internal apps
-    const registry = createContainerRegistry(resourceGroupShared, 'signalco', shouldProtect);
-    const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, shouldProtect);
+        const resourceGroup = new ResourceGroup(resourceGroupName);
+        const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
 
-    // Create general storage and prepare tables
-    const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
-    const tableNames = [
-        'entities', 'contacts', 'contactshistory', 'userassignedentity',
-        'users',
+        const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, shouldProtect);
+        apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, ConfPublicSignalRCheckInterval, '/api/v1/health');
 
-        // Public
-        'webnewsletter',
+        // Generate public functions
+        const publicApis = [
+            { name: '', prefix: 'cpub', subDomain: 'api', cors: corsDomains },
+            { name: 'RemoteBrowser', prefix: 'rbpub', subDomain: 'browser.api' },
+        ];
+        const publicFuncs = [];
+        for (const api of publicApis) {
+            const apiFunc = createPublicFunction(
+                resourceGroup,
+                api.prefix,
+                api.subDomain,
+                api.cors,
+                shouldProtect);
+            const apiFuncPublish = await publishProjectAsync(['../src/Signalco.Api.Public', api.name].filter(i => i.length).join('.'));
+            const apiFuncCode = assignFunctionCode(
+                resourceGroup,
+                apiFunc.webApp,
+                api.prefix,
+                apiFuncPublish.releaseDir,
+                shouldProtect);
+            apiStatusCheck(api.prefix, [api.name, 'API'].filter(i => i.length).join(' '), apiFunc.dnsCname.hostname, ConfCloudApiCheckInterval);
+            publicFuncs.push({
+                name: api.name,
+                shortName: api.prefix,
+                ...apiFunc,
+                ...apiFuncCode,
+            });
+        }
 
-        // Caches
-        'contactLinks',
-    ];
-    const queueNames = ['contact-state-processing', 'usage-processing'];
+        // Generate internal functions
+        const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintenance', 'Migration'];
+        const internalFuncs = [];
+        for (const funcName of internalNames) {
+            internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, shouldProtect));
+        }
 
-    tableNames.forEach(tableName => {
-        new Table(`sa${storagePrefix}-table-${tableName}`, {
-            resourceGroupName: resourceGroup.name,
-            accountName: storage.storageAccount.name,
-            tableName,
-        }, {
-            protect: shouldProtect,
+        // Generate channels functions
+        const productionChannelNames = ['Samsung', 'Slack', 'Zigbee2Mqtt', 'PhilipsHue', 'iRobot'];
+        const nextChannelNames = ['GitHubApp'];
+        const channelNames = stack === 'production'
+            ? productionChannelNames
+            : [...productionChannelNames, ...nextChannelNames];
+        const channelsFuncs = [];
+        for (const channelName of channelNames) {
+            channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, shouldProtect));
+        }
+
+        // Create App Insights
+        const pubFuncInsights = createWebAppAppInsights(resourceGroup, 'cpub', publicFuncs[0].webApp);
+        const intFuncInsights = createWebAppAppInsights(resourceGroup, 'cint', internalFuncs[0].webApp);
+
+        // Create internal apps
+        const registry = getContainerRegistry(resourceGroupSharedName, containerRegistryName);
+        const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, shouldProtect);
+
+        // Create general storage and prepare tables
+        const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
+        const tableNames = [
+            'entities', 'contacts', 'contactshistory', 'userassignedentity',
+            'users',
+
+            // Public
+            'webnewsletter',
+
+            // Caches
+            'contactLinks',
+        ];
+        const queueNames = ['contact-state-processing', 'usage-processing'];
+
+        tableNames.forEach(tableName => {
+            new Table(`sa${storagePrefix}-table-${tableName}`, {
+                resourceGroupName: resourceGroup.name,
+                accountName: storage.storageAccount.name,
+                tableName,
+            }, {
+                protect: shouldProtect,
+            });
         });
-    });
-    queueNames.forEach(queueName => {
-        new Queue(`sa${storagePrefix}-queue-${queueName}`, {
-            resourceGroupName: resourceGroup.name,
-            accountName: storage.storageAccount.name,
-            queueName,
-        }, {
-            protect: shouldProtect,
+        queueNames.forEach(queueName => {
+            new Queue(`sa${storagePrefix}-queue-${queueName}`, {
+                resourceGroupName: resourceGroup.name,
+                accountName: storage.storageAccount.name,
+                queueName,
+            }, {
+                protect: shouldProtect,
+            });
         });
-    });
 
-    // Create AWS SES service
-    const ses = createSes(`ses-${stack}`, 'notification');
+        // Create AWS SES service
+        const ses = createSes(`ses-${stack}`, 'notification');
 
-    // Create and populate vault
-    const vault = createKeyVault(resourceGroup, keyvaultPrefix, shouldProtect, [
-        ...publicFuncs.map(c => webAppIdentity(c.webApp)),
-        ...internalFuncs.map(c => webAppIdentity(c.webApp)),
-        ...channelsFuncs.map(c => webAppIdentity(c.webApp)),
-    ]);
-    const s1 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ApiIdentifier', config.requireSecret('secret-auth0ApiIdentifier'));
-    const s2 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ClientId--Station', config.requireSecret('secret-auth0ClientIdStation'), s1.secret);
-    const s3 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ClientSecret--Station', config.requireSecret('secret-auth0ClientSecretStation'), s2.secret);
-    const s4 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--Domain', config.require('secret-auth0Domain'), s3.secret);
-    const s5 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'HCaptcha--Secret', config.requireSecret('secret-hcaptchaSecret'), s4.secret);
-    const s6 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'HCaptcha--SiteKey', config.requireSecret('secret-hcaptchaSiteKey'), s5.secret);
-    const s7 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalStorageAccountConnectionString', storage.connectionString, s6.secret);
-    const s8 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoKeyVaultUrl', interpolate`${vault.keyVault.properties.vaultUri}`, s7.secret);
-    const s9 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SmtpNotificationServerUrl', ses.smtpServer, s8.secret);
-    const s10 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SmtpNotificationFromDomain', ses.smtpFromDomain, s9.secret);
-    const s11 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SmtpNotificationUsername', ses.smtpUsername, s10.secret);
-    const s12 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SmtpNotificationPassword', ses.smtpPassword, s11.secret);
-    const s13 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--SigningSecret', config.requireSecret('secret-slackSigningSecret'), s12.secret);
-    const s14 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientId', config.require('secret-slackClientId'), s13.secret);
-    const s15 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientSecret', config.requireSecret('secret-slackClientSecret'), s14.secret);
-    const s16 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoAppRemoteBrowserUrl', appRb.app.url, s15.secret);
-    vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoProcessorAccessCode', config.requireSecret('secret-processorAccessCode'), s16.secret);
+        // Create and populate vault
+        const vault = createKeyVault(resourceGroup, keyvaultPrefix, shouldProtect, [
+            ...publicFuncs.map(c => webAppIdentity(c.webApp)),
+            ...internalFuncs.map(c => webAppIdentity(c.webApp)),
+            ...channelsFuncs.map(c => webAppIdentity(c.webApp)),
+        ]);
+        const s1 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ApiIdentifier', config.requireSecret('secret-auth0ApiIdentifier'));
+        const s2 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ClientId--Station', config.requireSecret('secret-auth0ClientIdStation'), s1.secret);
+        const s3 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ClientSecret--Station', config.requireSecret('secret-auth0ClientSecretStation'), s2.secret);
+        const s4 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--Domain', config.require('secret-auth0Domain'), s3.secret);
+        const s5 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'HCaptcha--Secret', config.requireSecret('secret-hcaptchaSecret'), s4.secret);
+        const s6 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'HCaptcha--SiteKey', config.requireSecret('secret-hcaptchaSiteKey'), s5.secret);
+        const s7 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalStorageAccountConnectionString', storage.connectionString, s6.secret);
+        const s8 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoKeyVaultUrl', interpolate`${vault.keyVault.properties.vaultUri}`, s7.secret);
+        const s9 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SmtpNotificationServerUrl', ses.smtpServer, s8.secret);
+        const s10 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SmtpNotificationFromDomain', ses.smtpFromDomain, s9.secret);
+        const s11 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SmtpNotificationUsername', ses.smtpUsername, s10.secret);
+        const s12 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SmtpNotificationPassword', ses.smtpPassword, s11.secret);
+        const s13 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--SigningSecret', config.requireSecret('secret-slackSigningSecret'), s12.secret);
+        const s14 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientId', config.require('secret-slackClientId'), s13.secret);
+        const s15 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientSecret', config.requireSecret('secret-slackClientSecret'), s14.secret);
+        const s16 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoAppRemoteBrowserUrl', appRb.app.url, s15.secret);
+        vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoProcessorAccessCode', config.requireSecret('secret-processorAccessCode'), s16.secret);
 
-    // Populate public functions settings
-    publicFuncs.forEach(func => {
-        assignFunctionSettings(
-            resourceGroup,
-            func.webApp,
-            `pub${func.shortName}`,
-            func.storageAccount.connectionString,
-            func.codeBlobUlr,
-            {
-                AzureSignalRConnectionString: signalr.connectionString,
-                SignalcoStorageAccountConnectionString: storage.connectionString,
-                SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
-                APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
-                APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
-            },
-            shouldProtect);
-    });
+        // Populate public functions settings
+        publicFuncs.forEach(func => {
+            assignFunctionSettings(
+                resourceGroup,
+                func.webApp,
+                `pub${func.shortName}`,
+                func.storageAccount.connectionString,
+                func.codeBlobUlr,
+                {
+                    AzureSignalRConnectionString: signalr.connectionString,
+                    SignalcoStorageAccountConnectionString: storage.connectionString,
+                    SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
+                    APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
+                    APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
+                },
+                shouldProtect);
+        });
 
-    // Populate internal functions settings
-    internalFuncs.forEach(func => {
-        assignFunctionSettings(
-            resourceGroup,
-            func.webApp,
-            `int${func.shortName}`,
-            func.storageAccount.connectionString,
-            func.codeBlobUlr,
-            {
-                AzureSignalRConnectionString: signalr.connectionString,
-                SignalcoStorageAccountConnectionString: storage.connectionString,
-                SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
-                APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${intFuncInsights.component.instrumentationKey}`,
-                APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${intFuncInsights.component.connectionString}`,
-            },
-            shouldProtect);
-    });
+        // Populate internal functions settings
+        internalFuncs.forEach(func => {
+            assignFunctionSettings(
+                resourceGroup,
+                func.webApp,
+                `int${func.shortName}`,
+                func.storageAccount.connectionString,
+                func.codeBlobUlr,
+                {
+                    AzureSignalRConnectionString: signalr.connectionString,
+                    SignalcoStorageAccountConnectionString: storage.connectionString,
+                    SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
+                    APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${intFuncInsights.component.instrumentationKey}`,
+                    APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${intFuncInsights.component.connectionString}`,
+                },
+                shouldProtect);
+        });
 
-    // Populate channel function settings
-    channelsFuncs.forEach(channel => {
-        assignFunctionSettings(
-            resourceGroup,
-            channel.webApp,
-            `channel${channel.nameLower}`,
-            channel.storageAccount.connectionString,
-            channel.codeBlobUlr,
-            {
-                AzureSignalRConnectionString: signalr.connectionString,
-                SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
-                APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
-                APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
-            },
-            shouldProtect,
-        );
-    });
+        // Populate channel function settings
+        channelsFuncs.forEach(channel => {
+            assignFunctionSettings(
+                resourceGroup,
+                channel.webApp,
+                `channel${channel.nameLower}`,
+                channel.storageAccount.connectionString,
+                channel.codeBlobUlr,
+                {
+                    AzureSignalRConnectionString: signalr.connectionString,
+                    SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
+                    APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
+                    APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
+                },
+                shouldProtect,
+            );
+        });
 
-    createAppInsights(resourceGroup, 'web', 'signalco');
+        createAppInsights(resourceGroup, 'web', 'signalco');
 
-    // Vercel - Domains
-    dnsRecord('vercel-web', 'www', 'cname.vercel-dns.com', 'CNAME', false);
-    dnsRecord('vercel-app', 'app', 'cname.vercel-dns.com', 'CNAME', false);
-    dnsRecord('vercel-blog', 'blog', 'cname.vercel-dns.com', 'CNAME', false);
-    dnsRecord('vercel-ui-docs', 'ui', 'cname.vercel-dns.com', 'CNAME', false);
-    dnsRecord('vercel-brandgrab', 'brandgrab', 'cname.vercel-dns.com', 'CNAME', false);
-    dnsRecord('vercel-slco', 'slco', 'cname.vercel-dns.com', 'CNAME', false);
+        // Vercel - Domains
+        dnsRecord('vercel-web', 'www', 'cname.vercel-dns.com', 'CNAME', false);
+        dnsRecord('vercel-app', 'app', 'cname.vercel-dns.com', 'CNAME', false);
+        dnsRecord('vercel-blog', 'blog', 'cname.vercel-dns.com', 'CNAME', false);
+        dnsRecord('vercel-ui-docs', 'ui', 'cname.vercel-dns.com', 'CNAME', false);
+        dnsRecord('vercel-brandgrab', 'brandgrab', 'cname.vercel-dns.com', 'CNAME', false);
+        dnsRecord('vercel-slco', 'slco', 'cname.vercel-dns.com', 'CNAME', false);
 
-    // Checkly - Domains
-    dnsRecord('checkly-public-dashboard', 'status', 'dashboards.checklyhq.com', 'CNAME', false);
-    dnsRecord('checkly-public-dashboard-verify', `_vercel.${domainName}`, `vc-domain-verify=status.${domainName},563d86cd3501b049a1ad`, 'TXT', false);
+        // Checkly - Domains
+        dnsRecord('checkly-public-dashboard', 'status', 'dashboards.checklyhq.com', 'CNAME', false);
+        dnsRecord('checkly-public-dashboard-verify', `_vercel.${domainName}`, `vc-domain-verify=status.${domainName},563d86cd3501b049a1ad`, 'TXT', false);
 
-    return {
-        signalrUrl: signalr.signalr.hostName,
-        internalFunctionUrls: internalFuncs.map(f => f.webApp.hostNames[0]),
-        publicUrls: publicFuncs.map(c => c.dnsCname.hostname),
-        channelsUrls: channelsFuncs.map(c => c.dnsCname.hostname),
-        appUrls: [
-            appRb.app.url,
-        ],
-    };
+        return {
+            signalrUrl: signalr.signalr.hostName,
+            internalFunctionUrls: internalFuncs.map(f => f.webApp.hostNames[0]),
+            publicUrls: publicFuncs.map(c => c.dnsCname.hostname),
+            channelsUrls: channelsFuncs.map(c => c.dnsCname.hostname),
+            appUrls: [
+                appRb.app.url,
+            ],
+        };
+    }
 };

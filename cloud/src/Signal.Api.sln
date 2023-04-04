@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signal.Infrastructure.AzureSpeech", "Signal.Infrastructure.AzureSpeech\Signal.Infrastructure.AzureSpeech.csproj", "{80A852F7-1AA6-4C0F-8382-08AED9E3CE51}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signal.Api.Public", "Signalco.Api.Public\Signal.Api.Public.csproj", "{94C41557-A004-491A-AF09-53E47DB07E92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Api.Public", "Signalco.Api.Public\Signalco.Api.Public.csproj", "{94C41557-A004-491A-AF09-53E47DB07E92}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signal.Api.Common", "Signal.Api.Common\Signal.Api.Common.csproj", "{6187DDDC-013E-4226-942B-A6EBAF48EE6A}"
 EndProject

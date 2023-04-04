@@ -14,7 +14,7 @@ using Signal.Api.Common.OpenApi;
 using Signal.Core.Entities;
 using Signal.Core.Exceptions;
 
-namespace Signal.Api.Public.Functions.Entity;
+namespace Signalco.Api.Public.Functions.Entity;
 
 public class EntityUpsertFunction
 {
@@ -50,7 +50,7 @@ public class EntityUpsertFunction
             var entityId = await this.entityService.UpsertAsync(
                 user.UserId,
                 payload.Id,
-                id => new Core.Entities.Entity(
+                id => new Signal.Core.Entities.Entity(
                     payload.Type.Value,
                     id,
                     payload.Alias),

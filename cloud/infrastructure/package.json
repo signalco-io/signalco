@@ -8,8 +8,8 @@
     },
     "devDependencies": {
         "@types/node": "18.15.11",
-        "@typescript-eslint/eslint-plugin": "5.57.0",
-        "@typescript-eslint/parser": "5.57.0",
+        "@typescript-eslint/eslint-plugin": "5.57.1",
+        "@typescript-eslint/parser": "5.57.1",
         "eslint": "8.37.0",
         "eslint-config-standard": "17.0.0",
         "eslint-plugin-import": "2.27.5",
@@ -25,6 +25,6 @@
         "@pulumi/cloudflare": "5.0.0",
         "@pulumi/command": "0.7.1",
         "@pulumi/docker": "4.1.1",
-        "@pulumi/pulumi": "3.60.1"
+        "@pulumi/pulumi": "3.61.0"
     }
 }

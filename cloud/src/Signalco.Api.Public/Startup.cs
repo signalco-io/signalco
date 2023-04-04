@@ -3,15 +3,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Signal.Api.Common;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.HCaptcha;
-using Signal.Api.Public;
 using Signal.Core;
 using Signal.Infrastructure.AzureStorage.Tables;
 using Signal.Infrastructure.Secrets;
+using Signalco.Api.Public;
 using Signalco.Infrastructure.Processor;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 
-namespace Signal.Api.Public;
+namespace Signalco.Api.Public;
 
 public class Startup : FunctionsStartup
 {

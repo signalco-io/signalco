@@ -19,7 +19,7 @@ using Signal.Core.Entities;
 using Signal.Core.Exceptions;
 using Signal.Core.Sharing;
 
-namespace Signal.Api.Public.Functions.Sharing;
+namespace Signalco.Api.Public.Functions.Sharing;
 
 public class ShareEntityFunction
 {

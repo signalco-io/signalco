@@ -5,7 +5,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 
-namespace Signal.Api.Public.Functions;
+namespace Signalco.Api.Public.Functions;
 
 public class HealthFunctions
 {
