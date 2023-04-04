@@ -147,9 +147,8 @@ internal class Zigbee2MqttWorkerService : IWorkerService
 
     private async Task ConductHandler(IEnumerable<IConduct> conducts, CancellationToken cancellationToken)
     {
-        var conductsTasks = conducts.Select(conduct =>
-            this.ExecuteConductAsync(conduct, cancellationToken));
-        await Task.WhenAll(conductsTasks);
+        foreach (var conduct in conducts) 
+            await this.ExecuteConductAsync(conduct, cancellationToken);
     }
 
     private async Task ExecuteConductAsync(IConduct conduct, CancellationToken cancellationToken)
