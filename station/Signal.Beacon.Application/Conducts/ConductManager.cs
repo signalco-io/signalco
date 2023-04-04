@@ -17,7 +17,6 @@ internal class ConductManager : IConductManager, ICommandHandler<ConductPublishC
 {
     private readonly IPubSubTopicHub<IConduct> conductHub;
     private readonly ISignalSignalRConductsHubClient signalRConductsHubClient;
-    private readonly IEntitiesDao entitiesDao;
     private readonly IDelayedQueue<IConduct> delayedConducts = new DelayedQueue<IConduct>();
     private readonly ILogger<ConductManager> logger;
 
@@ -25,12 +24,10 @@ internal class ConductManager : IConductManager, ICommandHandler<ConductPublishC
     public ConductManager(
         IPubSubTopicHub<IConduct> conductHub,
         ISignalSignalRConductsHubClient signalRConductsHubClient,
-        IEntitiesDao entitiesDao,
         ILogger<ConductManager> logger)
     {
         this.conductHub = conductHub ?? throw new ArgumentNullException(nameof(conductHub));
         this.signalRConductsHubClient = signalRConductsHubClient ?? throw new ArgumentNullException(nameof(signalRConductsHubClient));
-        this.entitiesDao = entitiesDao ?? throw new ArgumentNullException(nameof(entitiesDao));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
