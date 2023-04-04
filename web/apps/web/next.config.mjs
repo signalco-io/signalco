@@ -31,7 +31,7 @@ const nextConfig = {
                 contentSecurityPolicy: {
                     directives: {
                         defaultSrc: '\'self\'',
-                        scriptSrc: ['\'self\'', 'https://vercel.live', 'https://www.clarity.ms', 'https://hcaptcha.com', 'https://*.hcaptcha.com', '\'unsafe-inline\'', isDevelopment ? '\'unsafe-eval\'' : undefined],
+                        scriptSrc: ['\'self\'', 'https://vercel.live', 'https://*.clarity.ms', 'https://hcaptcha.com', 'https://*.hcaptcha.com', '\'unsafe-inline\'', isDevelopment ? '\'unsafe-eval\'' : undefined],
                         objectSrc: '\'none\'',
                         styleSrc: ['\'self\'', 'https://hcaptcha.com', 'https://*.hcaptcha.com', '\'unsafe-inline\''],
                         fontSrc: ['\'self\''],
@@ -71,7 +71,8 @@ const nextConfig = {
                             // Finace - Stock widget
                             'https://api.polygon.io',
 
-                            'https://vercel.live', 'https://www.clarity.ms'
+                            'https://vercel.live',
+                            'https://*.clarity.ms'
                         ],
                         baseURI: ['https://www.signalco.io', 'https://www.signalco.dev'],
                         'frame-ancestors': '\'none\''
