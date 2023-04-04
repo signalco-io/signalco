@@ -723,8 +723,8 @@ importers:
         specifier: 8.4.21
         version: 8.4.21
       postcss-loader:
-        specifier: 7.2.2
-        version: 7.2.2(@types/node@18.15.11)(postcss@8.4.21)(ts-node@10.9.1)(typescript@5.0.3)(webpack@5.77.0)
+        specifier: 7.2.4
+        version: 7.2.4(@types/node@18.15.11)(postcss@8.4.21)(ts-node@10.9.1)(typescript@5.0.3)(webpack@5.77.0)
       rimraf:
         specifier: 4.4.1
         version: 4.4.1
@@ -5388,7 +5388,7 @@ packages:
       next: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
       pnp-webpack-plugin: 1.7.0(typescript@5.0.3)
       postcss: 8.4.21
-      postcss-loader: 7.2.2(@types/node@16.18.21)(postcss@8.4.21)(ts-node@10.9.1)(typescript@5.0.3)(webpack@5.77.0)
+      postcss-loader: 7.2.4(@types/node@16.18.21)(postcss@8.4.21)(ts-node@10.9.1)(typescript@5.0.3)(webpack@5.77.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       resolve-url-loader: 5.0.0
@@ -12256,8 +12256,8 @@ packages:
       yaml: 1.10.2
     dev: true
 
-  /postcss-loader@7.2.2(@types/node@16.18.21)(postcss@8.4.21)(ts-node@10.9.1)(typescript@5.0.3)(webpack@5.77.0):
-    resolution: {integrity: sha512-RRnvpkC2IQQLY0Ob8OikEPMRfeFULphStEfqbAjKxdgKP3BdgDNyKjVBAtlCVRQXc8T0InlZBcT5MEHC0cdBtA==}
+  /postcss-loader@7.2.4(@types/node@16.18.21)(postcss@8.4.21)(ts-node@10.9.1)(typescript@5.0.3)(webpack@5.77.0):
+    resolution: {integrity: sha512-F88rpxxNspo5hatIc+orYwZDtHFaVFOSIVAx+fBfJC1GmhWbVmPWtmg2gXKE1OxJbneOSGn8PWdIwsZFcruS+w==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       postcss: ^7.0.0 || ^8.0.1
@@ -12282,8 +12282,8 @@ packages:
       - '@types/node'
     dev: true
 
-  /postcss-loader@7.2.2(@types/node@18.15.11)(postcss@8.4.21)(ts-node@10.9.1)(typescript@5.0.3)(webpack@5.77.0):
-    resolution: {integrity: sha512-RRnvpkC2IQQLY0Ob8OikEPMRfeFULphStEfqbAjKxdgKP3BdgDNyKjVBAtlCVRQXc8T0InlZBcT5MEHC0cdBtA==}
+  /postcss-loader@7.2.4(@types/node@18.15.11)(postcss@8.4.21)(ts-node@10.9.1)(typescript@5.0.3)(webpack@5.77.0):
+    resolution: {integrity: sha512-F88rpxxNspo5hatIc+orYwZDtHFaVFOSIVAx+fBfJC1GmhWbVmPWtmg2gXKE1OxJbneOSGn8PWdIwsZFcruS+w==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       postcss: ^7.0.0 || ^8.0.1
