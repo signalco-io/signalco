@@ -35,7 +35,10 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                             src={og.imageBase64}
                             alt="og:image"
                             width={400}
-                            height={209} />
+                            height={209}
+                            style={{
+                                objectFit: 'cover',
+                            }} />
                     </CardOverflow>
                 }
                 <CardContent style={{ justifyContent: 'flex-end' }}>
@@ -155,7 +158,7 @@ function TextInfo({ title, children }: { title: string } & ChildrenProps) {
 }
 
 async function getPageScreenshot(domain: string) {
-    const res = await fetch(`/api/screenshot?domain=${encodeURIComponent(domain)}`);
+    const res = await fetch(`/api/screenshot?domain=${encodeURIComponent(domain)}`, { cache: 'no-store' });
     const data = await res.json() as ScreenshotResponse;
     // TODO: Move dimensions resolve to server
     const dimensions = await getImageDimensions(data.data);
