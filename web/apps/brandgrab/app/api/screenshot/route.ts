@@ -41,7 +41,7 @@ export async function GET(request: Request) {
         const pixels = await getPixelsAsync(dataUrlDataPng);
         colors = await extractColors({ data: pixels.data })
     } catch (e) {
-        console.error(e, 'Error extracting colors');
+        console.error('Error extracting colors', e);
     }
 
     return NextResponse.json({ data: dataUrlDataPng, colors });

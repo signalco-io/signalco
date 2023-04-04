@@ -4,14 +4,10 @@ import React, { useCallback } from 'react';
 import NextImage from 'next/image';
 import Stack from '@signalco/ui/dist/Stack';
 import { Card, CardContent, CardCover, CardOverflow, ChildrenProps, Container, Divider, Link, Loadable, MuiStack, Tooltip, Typography } from '@signalco/ui';
-import { orderBy } from '@signalco/js';
+import { orderBy, isImageDataUrl } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { ScreenshotResponse } from '../../app/api/screenshot/route';
 import { BrandResources } from '../../app/api/quick/route';
-
-function isImageDataUrl(url: string) {
-    return url.startsWith('data:image/');
-}
 
 function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
     if (!og?.title && !og?.image && !og?.url)
