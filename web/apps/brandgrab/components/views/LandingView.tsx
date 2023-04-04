@@ -4,14 +4,10 @@ import React, { useCallback } from 'react';
 import NextImage from 'next/image';
 import Stack from '@signalco/ui/dist/Stack';
 import { Card, CardContent, CardCover, CardOverflow, ChildrenProps, Container, Divider, Link, Loadable, MuiStack, Tooltip, Typography } from '@signalco/ui';
-import { orderBy } from '@signalco/js';
+import { orderBy, isImageDataUrl } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { ScreenshotResponse } from '../../app/api/screenshot/route';
 import { BrandResources } from '../../app/api/quick/route';
-
-function isImageDataUrl(url: string) {
-    return url.startsWith('data:image/');
-}
 
 function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
     if (!og?.title && !og?.image && !og?.url)
@@ -35,7 +31,10 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                             src={og.imageBase64}
                             alt="og:image"
                             width={400}
-                            height={209} />
+                            height={209}
+                            style={{
+                                objectFit: 'cover',
+                            }} />
                     </CardOverflow>
                 }
                 <CardContent style={{ justifyContent: 'flex-end' }}>
@@ -155,7 +154,7 @@ function TextInfo({ title, children }: { title: string } & ChildrenProps) {
 }
 
 async function getPageScreenshot(domain: string) {
-    const res = await fetch(`/api/screenshot?domain=${encodeURIComponent(domain)}`);
+    const res = await fetch(`/api/screenshot?domain=${encodeURIComponent(domain)}`, { cache: 'no-store' });
     const data = await res.json() as ScreenshotResponse;
     // TODO: Move dimensions resolve to server
     const dimensions = await getImageDimensions(data.data);
