@@ -943,6 +943,9 @@ importers:
 
   packages/hooks:
     devDependencies:
+      '@signalco/js':
+        specifier: workspace:*
+        version: link:../js
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
