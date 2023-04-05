@@ -91,7 +91,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
         }
     }
 
-    const onFullscreen = () => setFullScreen(isFullScreen === 'on' ? undefined : 'on');
+    const onFullscreen = () => setFullScreen(isFullScreen === 'true' ? undefined : 'true');
 
     async function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;
