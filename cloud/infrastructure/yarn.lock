@@ -304,10 +304,10 @@
   dependencies:
     "@pulumi/pulumi" "^3.0.0"
 
-"@pulumi/docker@4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@pulumi/docker/-/docker-4.1.1.tgz#70abe47ac18333271f868b33807da6e9f8c38339"
-  integrity sha512-PEhBxDTwrerhJjSZoclevOUzVysX1wEiF+k8rPvRusSowUzqBjGhL4/bbY5WEM/FeN+Ss72iQsv/gmNAnbqDVA==
+"@pulumi/docker@4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@pulumi/docker/-/docker-4.1.2.tgz#1372e7cc60036527a0d44d4ca0c148e505e0b1d6"
+  integrity sha512-BBMboSpud++rpwELDpRZ+5X/4OCog6/S1n54pM9aNvEptXGCf5l7CSUSjEThiMtIfKlsAJs+zPji+9GDeM79gA==
   dependencies:
     "@pulumi/pulumi" "^3.0.0"
     semver "^5.4.0"
