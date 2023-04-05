@@ -98,7 +98,7 @@
         "sass": "1.60.0",
         "sass-loader": "13.2.2",
         "typescript": "5.0.3",
-        "webpack": "5.77.0"
+        "webpack": "5.78.0"
     },
     "optionalDependencies": {
         "terser": "5.16.8"
