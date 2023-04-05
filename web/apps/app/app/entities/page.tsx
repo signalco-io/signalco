@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import { Add, Check, LayoutGrid, LayoutList } from '@signalco/ui-icons';
 import { Stack, Loadable, Row, Avatar, Button, IconButton, Typography, Box, Grid, SelectItems, Picker, MuiStack } from '@signalco/ui';
+import { useSearchParam } from '@signalco/hooks';
 import { KnownPages } from '../../src/knownPages';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale from '../../src/hooks/useLocale';
@@ -56,10 +57,10 @@ function EntityCreateForm() {
 }
 
 export default function Entities() {
-    const [selectedType, setSelectedType] = useState<string>('1');
-
-    const entities = useAllEntities(parseInt(selectedType, 10) || 1);
     const { t } = useLocale('App', 'Entities');
+    const [selectedType, setSelectedType] = useSearchParam('type', '1');
+    const entities = useAllEntities(parseInt(selectedType, 10) || 1);
+
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
     const [filteredItems, setFilteredItems] = useState<IEntityDetails[] | undefined>(entities.data);
 
