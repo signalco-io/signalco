@@ -30,7 +30,7 @@ export default function Picker<TValue>({ value, options, size, name, onChange }:
                 borderRadius: 'md',
                 bgcolor: 'neutral.softBg',
                 '--RadioGroup-gap': size === 'sm' ? '2px' : '4px',
-                '--Radio-action-radius': '8px',
+                '--Radio-actionRadius': '8px',
             }}
         >
             {options.map((option) => (

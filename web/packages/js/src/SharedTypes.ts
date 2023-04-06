@@ -22,3 +22,13 @@ export type ParsedJson =
     | null
     | ParsedJson[]
     | { [key: string]: ParsedJson };
+
+// Example usage:
+//
+// function returnStringOrUndefined<S extends string | undefined>(value: string, defaultValue?: S):
+//     TypeOrUndefined<S, string> { ... }
+//
+// Will return string | undefined if defaultValue is undefined, otherwise will return string
+export type TypeOrUndefined<TVal, TType> = TVal extends TType ? TVal : TType | undefined;
+
+export type StringOrUndefined<S> = TypeOrUndefined<S, string>;

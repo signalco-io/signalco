@@ -49,7 +49,7 @@ function SelectItems(props: SelectItemsProps) {
                     },
                 }}
                 sx={{
-                    fontSize: heading ? '1.4em' : undefined,
+                    fontSize: heading ? '1.2em' : undefined,
                     background: heading ? 'transparent' : undefined,
                     [`& .${selectClasses.indicator}`]: {
                         transition: '0.2s',

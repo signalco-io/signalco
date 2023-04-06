@@ -21,6 +21,7 @@
     },
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
+        "@signalco/js": "workspace:*",
         "@types/react": "18.0.33",
         "next": "13.2.4",
         "prop-types": "15.8.1",
