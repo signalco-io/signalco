@@ -48,6 +48,8 @@ Production API
 
 ##### **Azure (required for Deploy step)**
 
+- [Get credentials](https://www.pulumi.com/registry/packages/azure-native/installation-configuration/#create-your-service-principal-and-get-your-tokens)
+  - [Reset credentials](https://learn.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest#6-reset-credentials) if expired, lost or compromised
 - (optional) [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
   - Windows: `winget install Microsoft.AzureCLI`
   - MacOS: `brew install azure-cli`
