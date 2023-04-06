@@ -135,6 +135,7 @@ export = async () => {
                 tableName,
             }, {
                 protect: shouldProtect,
+                retainOnDelete: true,
             });
         });
         queueNames.forEach(queueName => {
@@ -144,6 +145,7 @@ export = async () => {
                 queueName,
             }, {
                 protect: shouldProtect,
+                retainOnDelete: true,
             });
         });
 
