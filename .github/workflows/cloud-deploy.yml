@@ -15,7 +15,7 @@ env:
 
 defaults:
   run:
-    working-directory: ./cloud/src
+    working-directory: ./cloud/infrastructure
 
 jobs:
   build-and-deploy:
@@ -24,34 +24,40 @@ jobs:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@v3
 
-      - name: Set up mutex
+      - name: ✋ Set up mutex
         uses: ben-z/gh-action-mutex@v1.0-alpha-7
         with:
           branch: mutex/cloud-deploy
 
-      - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      - name: ✨ Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - uses: actions/cache@v3
+      - name: ✨ Setup Node LTS
+        uses: actions/setup-node@v3
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          node-version: "18.x"
+          cache: yarn
+          cache-dependency-path: ./cloud/infrastructure
 
-      - name: Extract branch name
+      - name: 📦️ Installing dependencies
+        run: yarn install
+
+      - name: 🔎 Determine stack
         shell: bash
         run: |
           [[ $(echo ${GITHUB_REF#refs/heads/}) = "main" ]] && echo "##[set-output name=branch;]production" || echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
 
-      - name: Deploy infrastructure
-        shell: bash
-        run: |
-          pushd '../infrastructure'
-          yarn install
-          pulumi up --stack signalco/${{ steps.extract_branch.outputs.branch }} --skip-preview
-          popd
+      - name: ⚡ Deploy Infrastructure
+        uses: pulumi/actions@v4
+        with:
+          command: up
+          stack-name: signalco/cloud-primary/${{ steps.extract_branch.outputs.branch }}
+          work-dir: ./cloud/infrastructure
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}

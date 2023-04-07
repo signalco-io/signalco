@@ -50,14 +50,14 @@ importers:
         specifier: 1.2.8
         version: 1.2.8(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.6.0
-        version: 1.6.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.7.0
+        version: 1.7.0(react-dom@18.2.0)(react@18.2.0)
       '@microsoft/signalr':
         specifier: 7.0.4
         version: 7.0.4
       '@monaco-editor/react':
         specifier: 4.4.6
-        version: 4.4.6(monaco-editor@0.37.0)(react-dom@18.2.0)(react@18.2.0)
+        version: 4.4.6(monaco-editor@0.37.1)(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 13.2.4
         version: 13.2.4
@@ -107,11 +107,11 @@ importers:
         specifier: 5.0.8
         version: 5.0.8(@emotion/react@11.10.6)(@emotion/styled@11.10.6)(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)
       monaco-editor:
-        specifier: 0.37.0
-        version: 0.37.0
+        specifier: 0.37.1
+        version: 0.37.1
       next:
         specifier: 13.2.4
-        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
       next-pwa:
         specifier: 5.6.0
         version: 5.6.0(@babel/core@7.21.4)(next@13.2.4)(webpack@5.78.0)
@@ -185,7 +185,7 @@ importers:
         version: 7.4.0
       '@types/next-pwa':
         specifier: 5.6.2
-        version: 5.6.2(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+        version: 5.6.2(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
       '@types/node':
         specifier: 18.15.11
         version: 18.15.11
@@ -244,11 +244,11 @@ importers:
         specifier: 4.4.1
         version: 4.4.1
       sass:
-        specifier: 1.60.0
-        version: 1.60.0
+        specifier: 1.61.0
+        version: 1.61.0
       sass-loader:
         specifier: 13.2.2
-        version: 13.2.2(sass@1.60.0)(webpack@5.78.0)
+        version: 13.2.2(sass@1.61.0)(webpack@5.78.0)
       typescript:
         specifier: 5.0.3
         version: 5.0.3
@@ -293,7 +293,7 @@ importers:
         version: 4.1.0
       next:
         specifier: 13.2.3
-        version: 13.2.3(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+        version: 13.2.3(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -384,8 +384,8 @@ importers:
         specifier: 4.4.1
         version: 4.4.1
       sass:
-        specifier: 1.60.0
-        version: 1.60.0
+        specifier: 1.61.0
+        version: 1.61.0
       typescript:
         specifier: 5.0.3
         version: 5.0.3
@@ -396,8 +396,8 @@ importers:
   apps/brandgrab:
     dependencies:
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.6.0
-        version: 1.6.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.7.0
+        version: 1.7.0(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 13.2.4
         version: 13.2.4
@@ -423,14 +423,14 @@ importers:
         specifier: 4.1.1
         version: 4.1.1
       extract-colors:
-        specifier: 2.0.5
-        version: 2.0.5
+        specifier: 2.0.6
+        version: 2.0.6
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
       next:
         specifier: 13.2.4
-        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -521,8 +521,8 @@ importers:
         specifier: 4.4.1
         version: 4.4.1
       sass:
-        specifier: 1.60.0
-        version: 1.60.0
+        specifier: 1.61.0
+        version: 1.61.0
       typescript:
         specifier: 5.0.3
         version: 5.0.3
@@ -558,8 +558,8 @@ importers:
   apps/slco:
     dependencies:
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.6.0
-        version: 1.6.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.7.0
+        version: 1.7.0(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 13.2.4
         version: 13.2.4
@@ -574,7 +574,7 @@ importers:
         version: 2.1.24
       next:
         specifier: 13.2.4
-        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -656,8 +656,8 @@ importers:
         specifier: 4.4.1
         version: 4.4.1
       sass:
-        specifier: 1.60.0
-        version: 1.60.0
+        specifier: 1.61.0
+        version: 1.61.0
       typescript:
         specifier: 5.0.3
         version: 5.0.3
@@ -675,7 +675,7 @@ importers:
         version: link:../../packages/ui-icons
       next:
         specifier: 13.2.4
-        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -703,7 +703,7 @@ importers:
         version: 7.0.2(react-dom@18.2.0)(react@18.2.0)
       '@storybook/nextjs':
         specifier: 7.0.2
-        version: 7.0.2(@babel/core@7.21.4)(@swc/core@1.3.42)(esbuild@0.17.15)(next@13.2.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)(ts-node@10.9.1)(typescript@5.0.3)(webpack@5.78.0)
+        version: 7.0.2(@babel/core@7.21.4)(@swc/core@1.3.42)(esbuild@0.17.15)(next@13.2.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)(ts-node@10.9.1)(typescript@5.0.3)(webpack@5.78.0)
       '@storybook/react':
         specifier: 7.0.2
         version: 7.0.2(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.3)
@@ -729,11 +729,11 @@ importers:
         specifier: 4.4.1
         version: 4.4.1
       sass:
-        specifier: 1.60.0
-        version: 1.60.0
+        specifier: 1.61.0
+        version: 1.61.0
       sass-loader:
         specifier: 13.2.2
-        version: 13.2.2(sass@1.60.0)(webpack@5.78.0)
+        version: 13.2.2(sass@1.61.0)(webpack@5.78.0)
       storybook:
         specifier: 7.0.2
         version: 7.0.2
@@ -756,8 +756,8 @@ importers:
   apps/web:
     dependencies:
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.6.0
-        version: 1.6.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.7.0
+        version: 1.7.0(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 13.2.4
         version: 13.2.4
@@ -787,7 +787,7 @@ importers:
         version: 0.1.13
       next:
         specifier: 13.2.4
-        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
       next-pwa:
         specifier: 5.6.0
         version: 5.6.0(@babel/core@7.21.4)(next@13.2.4)(webpack@5.78.0)
@@ -843,7 +843,7 @@ importers:
         version: 3.0.3
       '@types/next-pwa':
         specifier: 5.6.2
-        version: 5.6.2(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+        version: 5.6.2(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
       '@types/node':
         specifier: 18.15.11
         version: 18.15.11
@@ -884,8 +884,8 @@ importers:
         specifier: 4.4.1
         version: 4.4.1
       sass:
-        specifier: 1.60.0
-        version: 1.60.0
+        specifier: 1.61.0
+        version: 1.61.0
       typescript:
         specifier: 5.0.3
         version: 5.0.3
@@ -954,7 +954,7 @@ importers:
         version: 18.0.33
       next:
         specifier: 13.2.4
-        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -1034,7 +1034,7 @@ importers:
         version: 5.0.8(@emotion/react@11.10.6)(@emotion/styled@11.10.6)(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)
       next:
         specifier: 13.2.4
-        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+        version: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1109,8 +1109,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(rollup@3.20.2)
       sass:
-        specifier: 1.60.0
-        version: 1.60.0
+        specifier: 1.61.0
+        version: 1.61.0
       typescript:
         specifier: 5.0.3
         version: 5.0.3
@@ -3521,8 +3521,8 @@ packages:
     resolution: {integrity: sha512-cEee/Z+I12mZcFJshKcCqC8tuX5hG3s+d+9nZ3LabqKF1vKdF41B92pJVCBggjAGORAeOzyyDDKrZwIkLffeOQ==}
     dev: true
 
-  /@hcaptcha/react-hcaptcha@1.6.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-FhUxeQRe5K6P1ZEUs/zGPs9ob1D/aVjOL/zCwgTWVnt8U+QHUXqo5E5Yeht167eIdnVhe1LsOY0Q66Sx4zMQCQ==}
+  /@hcaptcha/react-hcaptcha@1.7.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-XL9auBm28PmiGMGZwcSeolDmWeVlo5Gy8J8oFaai7ZzQElwFzC3cOZv7zv5zcrImaT23lY2cbddojKHYsMb5ow==}
     peerDependencies:
       react: '>= 16.3.0'
       react-dom: '>= 16.3.0'
@@ -3680,24 +3680,24 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@monaco-editor/loader@1.3.2(monaco-editor@0.37.0):
+  /@monaco-editor/loader@1.3.2(monaco-editor@0.37.1):
     resolution: {integrity: sha512-BTDbpHl3e47r3AAtpfVFTlAi7WXv4UQ/xZmz8atKl4q7epQV5e7+JbigFDViWF71VBi4IIBdcWP57Hj+OWuc9g==}
     peerDependencies:
       monaco-editor: '>= 0.21.0 < 1'
     dependencies:
-      monaco-editor: 0.37.0
+      monaco-editor: 0.37.1
       state-local: 1.0.7
     dev: false
 
-  /@monaco-editor/react@4.4.6(monaco-editor@0.37.0)(react-dom@18.2.0)(react@18.2.0):
+  /@monaco-editor/react@4.4.6(monaco-editor@0.37.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-Gr3uz3LYf33wlFE3eRnta4RxP5FSNxiIV9ENn2D2/rN8KgGAD8ecvcITRtsbbyuOuNkwbuHYxfeaz2Vr+CtyFA==}
     peerDependencies:
       monaco-editor: '>= 0.25.0 < 1'
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@monaco-editor/loader': 1.3.2(monaco-editor@0.37.0)
-      monaco-editor: 0.37.0
+      '@monaco-editor/loader': 1.3.2(monaco-editor@0.37.1)
+      monaco-editor: 0.37.1
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -5367,7 +5367,7 @@ packages:
     resolution: {integrity: sha512-dBAnEL4HfxxJmv7LdEYUoZlQbWj9APZNIbOaq0tgF8XkxiIbzqvgB0jhL/9UOrysSDbQWBiCRTu2wOVxedGfmw==}
     dev: true
 
-  /@storybook/nextjs@7.0.2(@babel/core@7.21.4)(@swc/core@1.3.42)(esbuild@0.17.15)(next@13.2.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)(ts-node@10.9.1)(typescript@5.0.3)(webpack@5.78.0):
+  /@storybook/nextjs@7.0.2(@babel/core@7.21.4)(@swc/core@1.3.42)(esbuild@0.17.15)(next@13.2.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)(ts-node@10.9.1)(typescript@5.0.3)(webpack@5.78.0):
     resolution: {integrity: sha512-ZFkUQci1yvm/HT3EPnBhsrVjHlL0jJgDkxQRo+jJj51YCyfRmoQ6I0/MmfheUiktG2hC5MlUhmD7nWTYk0ERiA==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -5416,14 +5416,14 @@ packages:
       fs-extra: 11.1.1
       image-size: 1.0.2
       loader-utils: 3.2.1
-      next: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+      next: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
       pnp-webpack-plugin: 1.7.0(typescript@5.0.3)
       postcss: 8.4.21
       postcss-loader: 7.2.4(@types/node@16.18.21)(postcss@8.4.21)(ts-node@10.9.1)(typescript@5.0.3)(webpack@5.78.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       resolve-url-loader: 5.0.0
-      sass-loader: 12.6.0(sass@1.60.0)(webpack@5.78.0)
+      sass-loader: 12.6.0(sass@1.61.0)(webpack@5.78.0)
       semver: 7.3.8
       style-loader: 3.3.2(webpack@5.78.0)
       styled-jsx: 5.1.1(@babel/core@7.21.4)(react@18.2.0)
@@ -6257,11 +6257,11 @@ packages:
     resolution: {integrity: sha512-hOZVTN24zDHwCHaW7mF9n1vHJt83fZhNZ0YYRBwQGhA96yBWWDPTDDlqJatagHIOJB0a4xoNkNc+t/Cxd+6qUA==}
     dev: true
 
-  /@types/next-pwa@5.6.2(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0):
+  /@types/next-pwa@5.6.2(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0):
     resolution: {integrity: sha512-K5zLZSzrJCOQBay5E7abGp7gQ0q1Pv58dE3RuBo5LQXYQFaCO4JPju0XYdzgLoQ20yhBVZ43AwIcSgCzx9KvqA==}
     dependencies:
       '@types/react': 18.0.33
-      next: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+      next: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
       workbox-build: 6.5.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -9342,8 +9342,8 @@ packages:
   /extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
 
-  /extract-colors@2.0.5:
-    resolution: {integrity: sha512-MCILfigw4M9T8czA8JS1aGbP7c3g8dzdyNbG63hKgSnLGA4FLtnsLdoEvtNFO8BhYuWKAOiYqBaXQetWmgG1Lg==}
+  /extract-colors@2.0.6:
+    resolution: {integrity: sha512-oS1quNBm1jJVXAXRzqS/ZA2Syp9QmHv65z+6sZAGgHuZr5knRzu0QiJKFBCWElHQYvd19Yv/nRFDQX2nFUTQkQ==}
     dev: false
 
   /extract-zip@1.7.0:
@@ -11240,8 +11240,8 @@ packages:
     hasBin: true
     dev: true
 
-  /monaco-editor@0.37.0:
-    resolution: {integrity: sha512-PrvIsrbD/uLQlzYqNnzrZ0yDCK+X3YoLgNx+fFZKvmgkDZxo9kJRvb5YNtCUesG4xjv44jEEKaHKE0demcEleg==}
+  /monaco-editor@0.37.1:
+    resolution: {integrity: sha512-jLXEEYSbqMkT/FuJLBZAVWGuhIb4JNwHE9kPTorAVmsdZ4UzHAfgWxLsVtD7pLRFaOwYPhNG9nUCpmFL1t/dIg==}
     dev: false
 
   /mri@1.2.0:
@@ -11329,7 +11329,7 @@ packages:
       babel-loader: 8.3.0(@babel/core@7.21.4)(webpack@5.78.0)
       clean-webpack-plugin: 4.0.0(webpack@5.78.0)
       globby: 11.1.0
-      next: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+      next: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
       terser-webpack-plugin: 5.3.7(@swc/core@1.3.42)(esbuild@0.17.15)(webpack@5.78.0)
       workbox-webpack-plugin: 6.5.4(webpack@5.78.0)
       workbox-window: 6.5.4
@@ -11359,7 +11359,7 @@ packages:
       '@corex/deepmerge': 4.0.37
       '@next/env': 13.2.3
       minimist: 1.2.8
-      next: 13.2.3(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+      next: 13.2.3(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
     dev: true
 
   /next-sitemap@4.0.6(@next/env@13.2.4)(next@13.2.4):
@@ -11373,10 +11373,10 @@ packages:
       '@corex/deepmerge': 4.0.37
       '@next/env': 13.2.4
       minimist: 1.2.8
-      next: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0)
+      next: 13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0)
     dev: true
 
-  /next@13.2.3(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0):
+  /next@13.2.3(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0):
     resolution: {integrity: sha512-nKFJC6upCPN7DWRx4+0S/1PIOT7vNlCT157w9AzbXEgKy6zkiPKEt5YyRUsRZkmpEqBVrGgOqNfwecTociyg+w==}
     engines: {node: '>=14.6.0'}
     hasBin: true
@@ -11403,7 +11403,7 @@ packages:
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      sass: 1.60.0
+      sass: 1.61.0
       styled-jsx: 5.1.1(@babel/core@7.21.4)(react@18.2.0)
     optionalDependencies:
       '@next/swc-android-arm-eabi': 13.2.3
@@ -11423,7 +11423,7 @@ packages:
       - '@babel/core'
       - babel-plugin-macros
 
-  /next@13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.60.0):
+  /next@13.2.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.61.0):
     resolution: {integrity: sha512-g1I30317cThkEpvzfXujf0O4wtaQHtDCLhlivwlTJ885Ld+eOgcz7r3TGQzeU+cSRoNHtD8tsJgzxVdYojFssw==}
     engines: {node: '>=14.6.0'}
     hasBin: true
@@ -11450,7 +11450,7 @@ packages:
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      sass: 1.60.0
+      sass: 1.61.0
       styled-jsx: 5.1.1(@babel/core@7.21.4)(react@18.2.0)
     optionalDependencies:
       '@next/swc-android-arm-eabi': 13.2.4
@@ -13665,7 +13665,7 @@ packages:
   /safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  /sass-loader@12.6.0(sass@1.60.0)(webpack@5.78.0):
+  /sass-loader@12.6.0(sass@1.61.0)(webpack@5.78.0):
     resolution: {integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
@@ -13686,11 +13686,11 @@ packages:
     dependencies:
       klona: 2.0.6
       neo-async: 2.6.2
-      sass: 1.60.0
+      sass: 1.61.0
       webpack: 5.78.0(@swc/core@1.3.42)(esbuild@0.17.15)
     dev: true
 
-  /sass-loader@13.2.2(sass@1.60.0)(webpack@5.78.0):
+  /sass-loader@13.2.2(sass@1.61.0)(webpack@5.78.0):
     resolution: {integrity: sha512-nrIdVAAte3B9icfBiGWvmMhT/D+eCDwnk+yA7VE/76dp/WkHX+i44Q/pfo71NYbwj0Ap+PGsn0ekOuU1WFJ2AA==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -13711,13 +13711,13 @@ packages:
     dependencies:
       klona: 2.0.6
       neo-async: 2.6.2
-      sass: 1.60.0
+      sass: 1.61.0
       webpack: 5.78.0(@swc/core@1.3.42)(esbuild@0.17.15)
     dev: true
 
-  /sass@1.60.0:
-    resolution: {integrity: sha512-updbwW6fNb5gGm8qMXzVO7V4sWf7LMXnMly/JEyfbfERbVH46Fn6q02BX7/eHTdKpE7d+oTkMMQpFWNUMfFbgQ==}
-    engines: {node: '>=12.0.0'}
+  /sass@1.61.0:
+    resolution: {integrity: sha512-PDsN7BrVkNZK2+dj/dpKQAWZavbAQ87IXqVvw2+oEYI+GwlTWkvbQtL7F2cCNbMqJEYKPh1EcjSxsnqIb/kyaQ==}
+    engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
       chokidar: 3.5.3

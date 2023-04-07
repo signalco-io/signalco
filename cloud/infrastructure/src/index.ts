@@ -6,7 +6,6 @@ import { createKeyVault } from './Azure/createKeyVault';
 import createPublicFunction from './Azure/createPublicFunction';
 import { webAppIdentity } from './Azure/webAppIdentity';
 import vaultSecret from './Azure/vaultSecret';
-import { Table, Queue } from '@pulumi/azure-native/storage';
 import { assignFunctionCode } from './Azure/assignFunctionCode';
 import { assignFunctionSettings } from './Azure/assignFunctionSettings';
 import createWebAppAppInsights from './Azure/createWebAppAppInsights';
@@ -116,38 +115,6 @@ export = async () => {
 
         // Create general storage and prepare tables
         const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
-        const tableNames = [
-            'entities', 'contacts', 'contactshistory', 'userassignedentity',
-            'users',
-
-            // Public
-            'webnewsletter',
-
-            // Caches
-            'contactLinks',
-        ];
-        const queueNames = ['contact-state-processing', 'usage-processing'];
-
-        tableNames.forEach(tableName => {
-            new Table(`sa${storagePrefix}-table-${tableName}`, {
-                resourceGroupName: resourceGroup.name,
-                accountName: storage.storageAccount.name,
-                tableName,
-            }, {
-                protect: false,
-                retainOnDelete: true,
-            });
-        });
-        queueNames.forEach(queueName => {
-            new Queue(`sa${storagePrefix}-queue-${queueName}`, {
-                resourceGroupName: resourceGroup.name,
-                accountName: storage.storageAccount.name,
-                queueName,
-            }, {
-                protect: false,
-                retainOnDelete: true,
-            });
-        });
 
         // Create AWS SES service
         const ses = createSes(`ses-${stack}`, 'notification');

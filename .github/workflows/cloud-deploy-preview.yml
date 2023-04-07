@@ -13,7 +13,7 @@ env:
 
 defaults:
   run:
-    working-directory: ./cloud/src
+    working-directory: ./cloud/infrastructure
 
 jobs:
   build-and-deploy:
@@ -22,22 +22,27 @@ jobs:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@v3
 
-      - name: Set up mutex
+      - name: ✋ Set up mutex
         uses: ben-z/gh-action-mutex@v1.0-alpha-7
         with:
           branch: mutex/cloud-preview
 
-      - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      - name: ✨ Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - uses: actions/cache@v3
+      - name: ✨ Setup Node LTS
+        uses: actions/setup-node@v3
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          node-version: "18.x"
+          cache: yarn
+          cache-dependency-path: ./cloud/infrastructure
 
-      - name: Extract branch name
+      - name: 📦️ Installing dependencies
+        run: yarn install
+
+      - name: 🔎 Determine stack
         shell: bash
         run: |
           [[ $(echo ${BASE_BRANCH#refs/heads/}) = "main" ]] && echo "##[set-output name=branch;]production" || echo "##[set-output name=branch;]$(echo ${BASE_BRANCH#refs/heads/})"
@@ -45,14 +50,13 @@ jobs:
         env:
           BASE_BRANCH: ${{ github.base_ref }}
 
-      - name: Preview infrastructure
-        shell: bash
-        run: |
-          pushd '../infrastructure'
-          yarn install
-          yarn lint
-          pulumi preview --stack signalco/${{ steps.extract_branch.outputs.branch }}
-          popd
+      - name: ⚡ Preview Deploy Infrastructure
+        uses: pulumi/actions@v4
+        with:
+          command: preview
+          stack-name: signalco/cloud-primary/${{ steps.extract_branch.outputs.branch }}
+          work-dir: ./cloud/infrastructure
+          comment-on-pr: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
