@@ -19,6 +19,7 @@ import publishProjectAsync from './dotnet/publishProjectAsync';
 import { ConfCloudApiCheckInterval, ConfPublicSignalRCheckInterval } from './config';
 import createRemoteBrowser from './apps/createRemoteBrowser';
 import { createContainerRegistry, getContainerRegistry } from './Azure/containerRegistry';
+import createFunctionsStorage from './Azure/createFunctionsStorage';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -58,6 +59,9 @@ export = async () => {
         const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, shouldProtect);
         apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, ConfPublicSignalRCheckInterval, '/api/v1/health');
 
+        // Create functions storage
+        const funcStorage = createFunctionsStorage(resourceGroup, 'funcs', shouldProtect);
+
         // Generate public functions
         const publicApis = [
             { name: '', prefix: 'cpub', subDomain: 'api', cors: corsDomains },
@@ -74,10 +78,10 @@ export = async () => {
             const apiFuncPublish = await publishProjectAsync(['../src/Signalco.Api.Public', api.name].filter(i => i.length).join('.'));
             const apiFuncCode = assignFunctionCode(
                 resourceGroup,
-                apiFunc.webApp,
+                funcStorage.storageAccount.storageAccount,
+                funcStorage.zipsContainer,
                 api.prefix,
-                apiFuncPublish.releaseDir,
-                shouldProtect);
+                apiFuncPublish.releaseDir);
             apiStatusCheck(api.prefix, [api.name, 'API'].filter(i => i.length).join(' '), apiFunc.dnsCname.hostname, ConfCloudApiCheckInterval);
             publicFuncs.push({
                 name: api.name,
@@ -91,7 +95,7 @@ export = async () => {
         const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintenance', 'Migration'];
         const internalFuncs = [];
         for (const funcName of internalNames) {
-            internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, shouldProtect));
+            internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, shouldProtect));
         }
 
         // Generate channels functions
@@ -102,7 +106,7 @@ export = async () => {
             : [...productionChannelNames, ...nextChannelNames];
         const channelsFuncs = [];
         for (const channelName of channelNames) {
-            channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, shouldProtect));
+            channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, shouldProtect));
         }
 
         // Create App Insights
@@ -149,7 +153,7 @@ export = async () => {
                 resourceGroup,
                 func.webApp,
                 `pub${func.shortName}`,
-                func.storageAccount.connectionString,
+                funcStorage.storageAccount.connectionString,
                 func.codeBlobUlr,
                 {
                     AzureSignalRConnectionString: signalr.connectionString,
@@ -167,7 +171,7 @@ export = async () => {
                 resourceGroup,
                 func.webApp,
                 `int${func.shortName}`,
-                func.storageAccount.connectionString,
+                funcStorage.storageAccount.connectionString,
                 func.codeBlobUlr,
                 {
                     AzureSignalRConnectionString: signalr.connectionString,
@@ -185,7 +189,7 @@ export = async () => {
                 resourceGroup,
                 channel.webApp,
                 `channel${channel.nameLower}`,
-                channel.storageAccount.connectionString,
+                funcStorage.storageAccount.connectionString,
                 channel.codeBlobUlr,
                 {
                     AzureSignalRConnectionString: signalr.connectionString,
