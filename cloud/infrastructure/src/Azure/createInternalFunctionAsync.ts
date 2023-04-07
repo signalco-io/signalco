@@ -4,10 +4,16 @@ import publishProjectAsync from '../dotnet/publishProjectAsync';
 import { assignFunctionCode } from './assignFunctionCode';
 import apiStatusCheck from '../Checkly/apiStatusCheck';
 import { ConfInternalApiCheckInterval } from '../config';
+import { type BlobContainer, type StorageAccount } from '@pulumi/azure-native/storage';
 
 const internalFunctionPrefix = 'cint';
 
-export default async function createInternalFunctionAsync (resourceGroup: ResourceGroup, name: string, shouldProtect: boolean) {
+export default async function createInternalFunctionAsync (
+    resourceGroup: ResourceGroup, 
+    name: string, 
+    storageAccount: StorageAccount,
+    zipsContainer: BlobContainer,
+    shouldProtect: boolean) {
     const shortName = name.substring(0, 9).toLocaleLowerCase();
     const func = createFunction(
         resourceGroup,
@@ -20,10 +26,10 @@ export default async function createInternalFunctionAsync (resourceGroup: Resour
 
     const code = assignFunctionCode(
         resourceGroup,
-        func.webApp,
+        storageAccount,
+        zipsContainer,
         `int${shortName}`,
-        publishResult.releaseDir,
-        shouldProtect);
+        publishResult.releaseDir);
     apiStatusCheck(`${internalFunctionPrefix}-${shortName}`, `Internal - ${name}`, func.webApp.hostNames[0], ConfInternalApiCheckInterval);
     return { 
         name, 
