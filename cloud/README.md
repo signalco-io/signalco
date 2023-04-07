@@ -72,23 +72,10 @@ Production API
   - on new stack
     - `pulumi config set ses-region eu-west-1`
   - stacks `next` and `production` are already configured
-- Configure (pick one method)
-  - _(recommended)_ create file `.aws/credentials` in your home directory
-  - set environment variables (for CI/CD)
-    - Windows:
-      - `$env:AWS_ACCESS_KEY_ID = "<YOUR_ACCESS_KEY_ID>"`
-      - `$env:AWS_SECRET_ACCESS_KEY = "<YOUR_SECRET_ACCESS_KEY>"`
-    - MacOS/Linux:
-      - `export AWS_ACCESS_KEY_ID=<YOUR_ACCESS_KEY_ID>`
-      - `export AWS_SECRET_ACCESS_KEY=<YOUR_SECRET_ACCESS_KEY>`
-
-`credentials` example:
-
-```txt
-[default]
-aws_access_key_id = <YOUR_ACCESS_KEY_ID>
-aws_secret_access_key = <YOUR_SECRET_ACCESS_KEY>
-```
+- Configure
+  - on new stack
+    - `$pulumi config set aws:accessKey <YOUR_ACCESS_KEY_ID> --secret`
+    - `$pulumi config set aws:secretKey <YOUR_ACCESS_KEY_ID> --secret`
 
 ##### **CloudFlare (required for Deploy step)**
 
