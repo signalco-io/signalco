@@ -216,7 +216,7 @@ export = async () => {
             });
 
             // Checkly - Domains
-            dnsRecord('checkly-public-dashboard', 'status', 'dashboards.checklyhq.com', 'CNAME', false);
+            dnsRecord('checkly-public-dashboard', 'status', 'checkly-dashboards.com', 'CNAME', false);
         }
     
         // Vercel - Domains
