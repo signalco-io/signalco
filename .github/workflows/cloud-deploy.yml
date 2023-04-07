@@ -44,6 +44,8 @@ jobs:
         run: |
           [[ $(echo ${GITHUB_REF#refs/heads/}) = "main" ]] && echo "##[set-output name=branch;]production" || echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
 
       - name: Deploy Infrastructure
         uses: pulumi/actions@v4
