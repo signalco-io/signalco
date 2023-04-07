@@ -34,14 +34,14 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: ✨ Setup Node LTS 
+      - name: ✨ Setup Node LTS
         uses: actions/setup-node@v3
         with:
           node-version: "18.x"
           cache: yarn
           cache-dependency-path: ./cloud/infrastructure
 
-      - name: 📦️ Installing dependencies 
+      - name: 📦️ Installing dependencies
         run: yarn install
 
       - name: 🔎 Determine stack
