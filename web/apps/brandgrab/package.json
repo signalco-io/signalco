@@ -26,7 +26,7 @@
         "cheerio": "1.0.0-rc.12",
         "classix": "2.1.24",
         "crypto-js": "4.1.1",
-        "extract-colors": "2.0.5",
+        "extract-colors": "2.0.6",
         "get-pixels": "3.3.3",
         "next": "13.2.4",
         "next-secure-headers": "2.2.0",
