@@ -12,7 +12,7 @@ export function assignFunctionCode (
     codePath: string,
     protect: boolean,
     dependsOn?: Input<Resource> | Input<Input<Resource>[]> | undefined) {
-    const account = createStorageAccount(resourceGroup, namePrefix, protect, app);
+    const account = createStorageAccount(resourceGroup, namePrefix, false, app);
 
     // Function code archives will be stored in this container.
     const codeContainer = new BlobContainer(`func-zips-${namePrefix}`, {
