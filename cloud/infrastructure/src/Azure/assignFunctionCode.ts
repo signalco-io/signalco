@@ -11,8 +11,8 @@ export function assignFunctionCode (
     codePath: string,
     dependsOn?: Input<Resource> | Input<Input<Resource>[]> | undefined) {
     // Upload Azure Function's code as a zip archive to the storage account.
-    const codeBlob = new Blob(`func-zip-${namePrefix}`, {
-        blobName: 'zip',
+    const codeBlob = new Blob(`zip-${namePrefix}`, {
+        blobName: `zip-${namePrefix}`,
         resourceGroupName: resourceGroup.name,
         accountName: storageAccount.name,
         containerName: zipsContainer.name,

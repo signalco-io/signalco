@@ -26,7 +26,9 @@ app.MapGet("/api/screenshot", async (
     [FromQuery] bool? scrollThrough,
     [FromQuery] bool? fullPage,
     [FromQuery] int? width,
-    [FromQuery] int? height) =>
+    [FromQuery] int? height,
+    [FromQuery] bool? allowAnimations,
+    [FromQuery] int? wait) =>
 {
     // TODO: Use browser pool with prepared browsers
     var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
@@ -49,28 +51,33 @@ app.MapGet("/api/screenshot", async (
     {
         await page.GotoAsync(url);
         
-        await Task.Delay(1000);
+        await Task.Delay(wait ?? 1000);
 
         // Scroll through whole page to trigger in-view animations and content
         if (scrollThrough == true)
         {
-            var currentHeight = 100;
-            while (currentHeight < 10000)
+            var lastLeftToScroll = float.MaxValue;
+            while (lastLeftToScroll > 0)
             {
-                var pageHeight = await page.EvaluateAsync<float>("document.body.scrollHeight");
-                currentHeight += 100;
-                await page.Mouse.WheelAsync(0, currentHeight);
-                if (currentHeight > pageHeight)
+                var leftToScroll = await page.EvaluateAsync<float>("document.body.scrollHeight - (window.innerHeight + window.scrollY)");
+                if (leftToScroll <= 0 ||
+                    Math.Abs(lastLeftToScroll - leftToScroll) < float.Epsilon)
                     break;
+                
+                lastLeftToScroll = leftToScroll;
+                await page.EvaluateAsync("window.scrollBy(0, 100)");
+                await Task.Delay(50);
             }
 
-            await page.Mouse.WheelAsync(0, 0);
+            await page.EvaluateAsync("window.scrollTo({ top: 0, left: 0, behaviour: 'instant' })");
+            await Task.Delay(500);
         }
 
         var img = await page.ScreenshotAsync(new PageScreenshotOptions
         {
             FullPage = fullPage,
-            Type = ScreenshotType.Png
+            Type = ScreenshotType.Png,
+            Animations = allowAnimations == true ? ScreenshotAnimations.Allow : ScreenshotAnimations.Disabled
         });
 
         return Results.File(img, "image/png", "screenshot.png");

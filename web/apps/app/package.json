@@ -32,7 +32,7 @@
         "@enterwell/react-form-validation": "1.2.8",
         "@hcaptcha/react-hcaptcha": "1.7.0",
         "@microsoft/signalr": "7.0.4",
-        "@monaco-editor/react": "4.4.6",
+        "@monaco-editor/react": "4.5.0",
         "@next/env": "13.2.4",
         "@signalco/js": "workspace:*",
         "@signalco/hooks": "workspace:*",
@@ -97,7 +97,7 @@
         "rimraf": "4.4.1",
         "sass": "1.61.0",
         "sass-loader": "13.2.2",
-        "typescript": "5.0.3",
+        "typescript": "5.0.4",
         "webpack": "5.78.0"
     },
     "optionalDependencies": {
