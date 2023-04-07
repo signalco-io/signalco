@@ -1,11 +1,17 @@
-import { ResourceGroup } from '@pulumi/azure-native/resources';
+import { type ResourceGroup } from '@pulumi/azure-native/resources';
 import createPublicFunction from './createPublicFunction';
 import { assignFunctionCode } from './assignFunctionCode';
 import apiStatusCheck from '../Checkly/apiStatusCheck';
 import publishProjectAsync from '../dotnet/publishProjectAsync';
 import { ConfChannelApiCheckInterval } from '../config';
+import { type BlobContainer, type StorageAccount } from '@pulumi/azure-native/storage';
 
-export default async function createChannelFunctionAsync (channelName: string, resourceGroup: ResourceGroup, shouldProtect: boolean) {
+export default async function createChannelFunctionAsync (
+    channelName: string, 
+    resourceGroup: ResourceGroup, 
+    storageAccount: StorageAccount,
+    zipsContainer: BlobContainer,
+    shouldProtect: boolean) {
     const channelNameLower = channelName.toLocaleLowerCase();
     const publicFunctionPrefix = 'channel' + channelNameLower;
     const publicFunctionStoragePrefix = 'ch' + channelNameLower;
@@ -25,10 +31,10 @@ export default async function createChannelFunctionAsync (channelName: string, r
 
     const channelFuncCode = assignFunctionCode(
         resourceGroup,
-        channelFunc.webApp,
+        storageAccount,
+        zipsContainer,
         publicFunctionStoragePrefix,
-        publishResult.releaseDir,
-        shouldProtect);
+        publishResult.releaseDir);
     apiStatusCheck(publicFunctionPrefix, `Channel - ${channelName}`, channelFunc.dnsCname.hostname, ConfChannelApiCheckInterval);
 
     return {
