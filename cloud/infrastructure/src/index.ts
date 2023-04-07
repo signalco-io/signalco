@@ -134,7 +134,7 @@ export = async () => {
                 accountName: storage.storageAccount.name,
                 tableName,
             }, {
-                protect: shouldProtect,
+                protect: false,
                 retainOnDelete: true,
             });
         });
@@ -144,7 +144,7 @@ export = async () => {
                 accountName: storage.storageAccount.name,
                 queueName,
             }, {
-                protect: shouldProtect,
+                protect: false,
                 retainOnDelete: true,
             });
         });
