@@ -20,8 +20,6 @@
     },
     "Docker": {
       "commandName": "Docker",
-      "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/scrape?url=https://www.signalco.io",
       "publishAllPorts": true,
       "useSSL": true
     }
