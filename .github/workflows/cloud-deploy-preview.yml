@@ -32,14 +32,6 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Extract branch name
-        shell: bash
-        run: |
-          [[ $(echo ${BASE_BRANCH#refs/heads/}) = "main" ]] && echo "##[set-output name=branch;]production" || echo "##[set-output name=branch;]$(echo ${BASE_BRANCH#refs/heads/})"
-        id: extract_branch
-        env:
-          BASE_BRANCH: ${{ github.base_ref }}
-
       - name: ✨ Setup Node LTS 
         uses: actions/setup-node@v3
         with:
@@ -50,11 +42,20 @@ jobs:
       - name: 📦️ Installing dependencies 
         run: yarn install
 
+      - name: 🔎 Determine stack
+        shell: bash
+        run: |
+          [[ $(echo ${BASE_BRANCH#refs/heads/}) = "main" ]] && echo "##[set-output name=branch;]production" || echo "##[set-output name=branch;]$(echo ${BASE_BRANCH#refs/heads/})"
+        id: extract_branch
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
+
       - name: ⚡ Preview Deploy Infrastructure
         uses: pulumi/actions@v4
         with:
           command: preview
           stack-name: signalco/cloud-primary/${{ steps.extract_branch.outputs.branch }}
+          work-dir: ./cloud/infrastructure
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
