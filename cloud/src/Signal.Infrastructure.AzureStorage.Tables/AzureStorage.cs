@@ -152,6 +152,12 @@ internal class AzureStorage : IAzureStorage
         await client.AppendBlockAsync(data, cancellationToken: cancellationToken);
     }
 
+    public async Task EnsureTableAsync(string tableName, CancellationToken cancellationToken = default) => 
+        await this.WithClientAsync(tableName, client => client.CreateIfNotExistsAsync(cancellationToken), cancellationToken);
+    
+    public async Task EnsureQueueAsync(string queueName, CancellationToken cancellationToken = default) => 
+        await this.WithQueueClientAsync(queueName, client => client.CreateIfNotExistsAsync(cancellationToken: cancellationToken), cancellationToken);
+
     private async Task WithQueueClientAsync(string queueName, Func<QueueClient, Task> action, CancellationToken cancellationToken = default) => 
         await action(await this.clientFactory.GetQueueClientAsync(queueName, cancellationToken));
 
