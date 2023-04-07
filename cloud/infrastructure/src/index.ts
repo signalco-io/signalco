@@ -20,6 +20,7 @@ import { ConfCloudApiCheckInterval, ConfPublicSignalRCheckInterval } from './con
 import createRemoteBrowser from './apps/createRemoteBrowser';
 import { createContainerRegistry, getContainerRegistry } from './Azure/containerRegistry';
 import createFunctionsStorage from './Azure/createFunctionsStorage';
+import { Dashboard } from '@checkly/pulumi/dashboard';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -203,6 +204,21 @@ export = async () => {
 
         createAppInsights(resourceGroup, 'web', 'signalco');
 
+        // Checkly public dashboard (only for production)
+        if (stack === 'production') {
+            new Dashboard('checkly-public-dashboard', {
+                customDomain: 'status.signalco.io',
+                customUrl: 'signalco-public',
+                header: 'Status',
+                logo: 'https://www.signalco.io/images/icon-light-512x512.png',
+                link: 'https://www.signalco.io',
+                tags: ['public'],
+            });
+
+            // Checkly - Domains
+            dnsRecord('checkly-public-dashboard', 'status', 'checkly-dashboards.com', 'CNAME', false);
+        }
+    
         // Vercel - Domains
         dnsRecord('vercel-web', 'www', 'cname.vercel-dns.com', 'CNAME', false);
         dnsRecord('vercel-app', 'app', 'cname.vercel-dns.com', 'CNAME', false);
@@ -210,10 +226,6 @@ export = async () => {
         dnsRecord('vercel-ui-docs', 'ui', 'cname.vercel-dns.com', 'CNAME', false);
         dnsRecord('vercel-brandgrab', 'brandgrab', 'cname.vercel-dns.com', 'CNAME', false);
         dnsRecord('vercel-slco', 'slco', 'cname.vercel-dns.com', 'CNAME', false);
-
-        // Checkly - Domains
-        dnsRecord('checkly-public-dashboard', 'status', 'dashboards.checklyhq.com', 'CNAME', false);
-        dnsRecord('checkly-public-dashboard-verify', `_vercel.${domainName}`, `vc-domain-verify=status.${domainName},563d86cd3501b049a1ad`, 'TXT', false);
 
         return {
             signalrUrl: signalr.signalr.hostName,
