@@ -45,6 +45,7 @@ jobs:
         with:
           node-version: "18.x"
           cache: yarn
+          cache-dependency-path: ./cloud/infrastructure
 
       - name: Installing dependencies 📦️
         run: yarn install
