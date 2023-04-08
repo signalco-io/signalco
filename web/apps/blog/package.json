@@ -54,7 +54,7 @@
         "babel-loader": "9.1.2",
         "colorette": "2.0.19",
         "cross-env": "7.0.3",
-        "eslint": "8.37.0",
+        "eslint": "8.38.0",
         "next-sitemap": "4.0.6",
         "playwright": "1.32.2",
         "prop-types": "15.8.1",
