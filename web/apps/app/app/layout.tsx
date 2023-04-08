@@ -4,6 +4,7 @@ import '../styles/global.scss';
 import '@signalco/ui/dist/ui.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { type Metadata } from 'next';
 import { ChildrenProps, CssBaseline, CssVarsProvider, getInitColorSchemeScript, buildSignalcoTheme } from '@signalco/ui';
 import useAppTheme from '../src/hooks/useAppTheme';
 import { AppLayout } from '../components/layouts/AppLayout';
