@@ -34,7 +34,7 @@ function Globe() {
             markerColor: [0.1, 0.8, 1],
             glowColor: glow,
             markers: [],
-            onRender: (state: Record<string, any>) => {
+            onRender: (state: Record<string, unknown>) => {
                 state.phi = phi;
                 phi += 0.0005;
             }

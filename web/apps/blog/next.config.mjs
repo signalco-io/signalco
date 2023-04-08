@@ -8,9 +8,11 @@ const withMDX = mdx();
 const withBundleAnalyzer = nextBundleAnalyzer({
     enabled: process.env.ANALYZE === 'true',
 });
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    experimental: { 
+    experimental: {
         appDir: true,
         mdxRs: true
     },
