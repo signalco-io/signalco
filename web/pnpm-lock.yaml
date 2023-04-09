@@ -83,8 +83,8 @@ importers:
         specifier: 4.29.0
         version: 4.29.0(@tanstack/react-query@4.28.0)(react-dom@18.2.0)(react@18.2.0)
       '@vvo/tzdb':
-        specifier: 6.105.0
-        version: 6.105.0
+        specifier: 6.106.0
+        version: 6.106.0
       classix:
         specifier: 2.1.24
         version: 2.1.24
@@ -6502,8 +6502,8 @@ packages:
       vite: 4.2.1
     dev: true
 
-  /@vvo/tzdb@6.105.0:
-    resolution: {integrity: sha512-um6mCvLccZFlHqDlU1CDSdK/6L9K/hl3XsCKv6FpBGQRXoDrcUXk0E4TXoHjtdY0zkaDjBmroHt0ktJYJpvrNg==}
+  /@vvo/tzdb@6.106.0:
+    resolution: {integrity: sha512-NMgDMHn79j5ABSTqCMxXROgLSzLx8QS/HzuSCkvcZ+TGgvVUh1Ob7JN9Vsp6r7LU5av02aWv6shfpogtHsxTWA==}
     dev: false
 
   /@webassemblyjs/ast@1.11.1:
