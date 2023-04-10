@@ -1,4 +1,4 @@
-import glob from 'glob';
+import { globSync } from 'glob';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
@@ -15,7 +15,7 @@ export default [
         input: Object.fromEntries(
             [
                 ['index', fileURLToPath(new URL('src/index.ts', import.meta.url))],
-                ...glob.sync('src/**/index.ts').map(file => [
+                ...globSync('src/**/index.ts').map(file => [
                     // This remove `src/` as well as the file extension from each
                     // file, so e.g. src/nested/foo.js becomes nested/foo
                     path.relative(
