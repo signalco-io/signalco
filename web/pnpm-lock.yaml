@@ -1088,8 +1088,8 @@ importers:
         specifier: 8.4.21
         version: 8.4.21
       postcss-preset-env:
-        specifier: 8.3.0
-        version: 8.3.0(postcss@8.4.21)
+        specifier: 8.3.1
+        version: 8.3.1(postcss@8.4.21)
       resolve-url-loader:
         specifier: 5.0.0
         version: 5.0.0
@@ -12179,8 +12179,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /postcss-preset-env@8.3.0(postcss@8.4.21):
-    resolution: {integrity: sha512-VFc/bhwRo37RoTVzCTCKDJLw0lwsqLRCTc7dkJkfs9S7XXfTbk7QkhbMWHd2L+iZsAsE5yqdSRBZ41/Q828TbA==}
+  /postcss-preset-env@8.3.1(postcss@8.4.21):
+    resolution: {integrity: sha512-k3Y8BXbVLBAufrla3CNmQJhMS1iRuT9LFlysYvzs1rU5E78+ShX2u0EUL6KpMi0pDJO3wZcuVYSR8cgukfoRtg==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
