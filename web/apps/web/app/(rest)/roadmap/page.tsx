@@ -78,7 +78,7 @@ async function getRoadmapItemsAsync() {
 }
 
 export default async function RoadmapPage() {
-    const {items, error} = await getRoadmapItemsAsync();
+    const { items, error } = await getRoadmapItemsAsync();
 
     return (
         <Roadmap items={items} error={error} />

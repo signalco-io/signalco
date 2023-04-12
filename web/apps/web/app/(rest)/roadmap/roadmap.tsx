@@ -61,7 +61,7 @@ export default function Roadmap({ items, error }: { items: RoadmapItem[] | undef
                                     itemsWrapper={({ children }: ChildrenProps) => <Stack spacing={1}>{children}</Stack>}
                                     loadingLabel={'Loading roadmap'}
                                     noItemsPlaceholder={'Empty at the moment'}>
-                                    {orderBy(items?.filter(item => item.status === status) ?? [], (a, b) => (b.votes ?? 0) - (a.votes ?? 0)).map(item => (
+                                    {orderBy(items?.filter(item => item.status === status) ?? [], (a: RoadmapItem, b: RoadmapItem) => (b.votes ?? 0) - (a.votes ?? 0)).map((item: RoadmapItem) => (
                                         <RoadmapItem key={item.title} item={item} />
                                     ))}
                                 </ItemsShowMore>
