@@ -34,9 +34,9 @@
         "@microsoft/signalr": "7.0.5",
         "@monaco-editor/react": "4.5.0",
         "@next/env": "13.3.0",
-        "@signalco/js": "workspace:*",
-        "@signalco/hooks": "workspace:*",
         "@signalco/data": "workspace:*",
+        "@signalco/hooks": "workspace:*",
+        "@signalco/js": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "@tanstack/react-query": "4.29.1",
@@ -84,7 +84,6 @@
         "@types/recharts": "1.8.24",
         "@types/suncalc": "1.9.0",
         "@types/uuid": "9.0.1",
-        "babel-loader": "9.1.2",
         "colorette": "2.0.19",
         "cross-env": "7.0.3",
         "eslint": "8.38.0",
@@ -97,8 +96,7 @@
         "rimraf": "5.0.0",
         "sass": "1.62.0",
         "sass-loader": "13.2.2",
-        "typescript": "5.0.4",
-        "webpack": "5.78.0"
+        "typescript": "5.0.4"
     },
     "optionalDependencies": {
         "terser": "5.16.9"
