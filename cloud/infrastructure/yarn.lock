@@ -297,10 +297,10 @@
   dependencies:
     "@pulumi/pulumi" "^3.0.0"
 
-"@pulumi/command@0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@pulumi/command/-/command-0.7.1.tgz#a8baabd053a40eef38221c66c29b484dfce26d27"
-  integrity sha512-glPRnkR+jKK/av1CsarIxRuyRSaDiV8Ht4OV5qsTXHRFu8jGbbJrTXT8K1rq1ZImQioS4L/NL9BjhzNjZcKEfA==
+"@pulumi/command@0.7.2":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@pulumi/command/-/command-0.7.2.tgz#f0ca9dd398525aa04c36ba0bec053879c18c8afe"
+  integrity sha512-R/eAIXIywSkn2cHIaNqs0EXcXduNeDuS+wom6oadB5KEP+6elgJbo4WMDP+OuDYGkkxEWIKjk0bPPO7570aXFQ==
   dependencies:
     "@pulumi/pulumi" "^3.0.0"
 
