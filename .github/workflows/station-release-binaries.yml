@@ -33,9 +33,6 @@ jobs:
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 7.0.202
-          include-prerelease: true
 
       - name: Build
         shell: bash
