@@ -50,8 +50,8 @@ importers:
         specifier: 1.2.8
         version: 1.2.8(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.8.0
-        version: 1.8.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.8.1
+        version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
       '@microsoft/signalr':
         specifier: 7.0.5
         version: 7.0.5
@@ -387,8 +387,8 @@ importers:
   apps/brandgrab:
     dependencies:
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.8.0
-        version: 1.8.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.8.1
+        version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 13.3.0
         version: 13.3.0
@@ -543,8 +543,8 @@ importers:
   apps/slco:
     dependencies:
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.8.0
-        version: 1.8.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.8.1
+        version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 13.3.0
         version: 13.3.0
@@ -735,8 +735,8 @@ importers:
   apps/web:
     dependencies:
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.8.0
-        version: 1.8.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.8.1
+        version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 13.3.0
         version: 13.3.0
@@ -3195,8 +3195,8 @@ packages:
     resolution: {integrity: sha512-cEee/Z+I12mZcFJshKcCqC8tuX5hG3s+d+9nZ3LabqKF1vKdF41B92pJVCBggjAGORAeOzyyDDKrZwIkLffeOQ==}
     dev: true
 
-  /@hcaptcha/react-hcaptcha@1.8.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-OXuD9I1PaPjXQKMymeMQ88pa/AIT77wORbYlM+s9z+viPtaxi5FZX9Pigb4pgXfBAymTYMrFCsSajTqV0pkfag==}
+  /@hcaptcha/react-hcaptcha@1.8.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-33tIl77HgeahiQ6R0+JPDA8cGBBv95cIVcdOcFVwiGCJhrOxyiOQetCdEUNTDS13xrkvIP29K/PrqLXXSbKl6Q==}
     peerDependencies:
       react: '>= 16.3.0'
       react-dom: '>= 16.3.0'
