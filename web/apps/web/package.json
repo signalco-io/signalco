@@ -52,7 +52,7 @@
         "@types/react": "18.0.35",
         "@types/react-dom": "18.0.11",
         "@types/react-motion": "0.0.33",
-        "babel-loader": "9.1.2",
+        "babel-loader": "^9.1.2",
         "colorette": "2.0.19",
         "cross-env": "7.0.3",
         "eslint": "8.38.0",
@@ -62,8 +62,7 @@
         "prop-types": "15.8.1",
         "rimraf": "5.0.0",
         "sass": "1.62.0",
-        "typescript": "5.0.4",
-        "webpack": "5.78.0"
+        "typescript": "5.0.4"
     },
     "optionalDependencies": {
         "terser": "5.16.9"
