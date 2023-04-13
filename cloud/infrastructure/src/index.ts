@@ -134,9 +134,6 @@ export = async () => {
         vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--SigningSecret', config.requireSecret('secret-slackSigningSecret'));
         vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientId', config.require('secret-slackClientId'));
         vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientSecret', config.requireSecret('secret-slackClientSecret'));
-        vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoProcessorAccessCode', config.requireSecret('secret-processorAccessCode'));
-        
-        // TODO: Move to table storage
         vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoAppRemoteBrowserUrl', appRb.app.url);
 
         const sharedEnvVariables = {
@@ -146,6 +143,7 @@ export = async () => {
             'Auth0--ApiIdentifier': config.requireSecret('secret-auth0ApiIdentifier'),
             'Auth0--Domain': config.require('secret-auth0Domain'),
             'HCaptcha--SiteKey': config.requireSecret('secret-hcaptchaSiteKey'),
+            'SignalcoProcessorAccessCode': config.requireSecret('secret-processorAccessCode'),
         };
 
         const internalEnvVariables = {
