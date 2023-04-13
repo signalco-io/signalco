@@ -414,8 +414,8 @@ importers:
         specifier: 4.1.1
         version: 4.1.1
       extract-colors:
-        specifier: 2.0.6
-        version: 2.0.6
+        specifier: 3.0.0
+        version: 3.0.0
       get-pixels:
         specifier: 3.3.3
         version: 3.3.3
@@ -8925,8 +8925,8 @@ packages:
   /extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
 
-  /extract-colors@2.0.6:
-    resolution: {integrity: sha512-oS1quNBm1jJVXAXRzqS/ZA2Syp9QmHv65z+6sZAGgHuZr5knRzu0QiJKFBCWElHQYvd19Yv/nRFDQX2nFUTQkQ==}
+  /extract-colors@3.0.0:
+    resolution: {integrity: sha512-foK1lbVagBAfiq+GPzRF6jsyGc2xWg6aWoAicWyi2lYw+I14q/hbkZfZ/9FwU2dzbXYzhxgrZTzzJIbDiOelYg==}
     dev: false
 
   /extract-zip@1.7.0:
