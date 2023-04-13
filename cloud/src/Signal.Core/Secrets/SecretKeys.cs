@@ -2,7 +2,7 @@
 
 public static class SecretKeys
 {
-    public const string StorageAccountConnectionString = "SignalStorageAccountConnectionString";
+    public const string StorageAccountConnectionString = "SignalcoStorageAccountConnectionString";
 
     public const string ProcessorAccessCode = "SignalcoProcessorAccessCode";
 
