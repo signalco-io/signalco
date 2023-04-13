@@ -30,6 +30,7 @@
                 "esbuild",
                 "eslint",
                 "eslint-config-next",
+                "eslint-config-turbo",
                 "eslint-plugin-import",
                 "eslint-plugin-react",
                 "eslint-plugin-n",

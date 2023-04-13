@@ -1,219 +1,25 @@
 'use client';
 
-import { useInView } from 'react-cool-inview';
-import React, { type CSSProperties } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import React from 'react';
 import dynamic from 'next/dynamic';
 import { Navigate } from '@signalco/ui-icons';
-import { Stack, Container, ImageLink, Button, Divider, Typography, Grid, Box, Fade, GentleSlide, MuiStack } from '@signalco/ui';
+import { Stack, Container, Button, Divider, MuiStack } from '@signalco/ui';
 import DeveloperOnly from '../shared/DeveloperOnly';
 import DiscoverVisual from '../pages/landing/visuals/DiscoverVisual';
 import Cover from '../pages/landing/Cover';
 import CounterIndicator from '../pages/landing/CounterIndicator';
 import CtaSection from '../pages/CtaSection';
+import { StepContent } from './StepContent';
+import { SectionCenter } from './SectionCenter';
+import { PlaySection } from './PlaySection';
+import { NewsletterSection } from './NewsletterSection';
+import { GlobeSection } from './GlobeSection';
+import { FeaturedIntegrationsSection } from './FeaturedIntegrationsSection';
+import { FeatureDescription } from './FeatureDescription';
+import { DataPart } from './DataPart';
 
-const Newsletter = dynamic(() => import('../pages/landing/Newsletter'));
-const GlobePart = dynamic(() => import('../pages/landing/GlobeSection'));
-
-function FeatureDescription(props: { header: string, content: string | React.ReactElement, link?: string, linkText?: string }) {
-    return (
-        <Stack spacing={2}>
-            <Typography level="h5" component="h3">{props.header}</Typography>
-            <Typography color="neutral">{props.content}</Typography>
-            <div>
-                {props.link && (
-                    <Link passHref href={props.link}>
-                        <Button variant="outlined">{props.linkText ?? 'Read more'}</Button>
-                    </Link>
-                )}
-            </div>
-        </Stack>
-    );
-}
-
-function StepContent(props: {
-  header: string;
-  direction?: 'vertical' | 'horizontal'
-  subtitle?: string;
-  image?: React.ReactNode,
-  imageContainerHeight?: number,
-  imageContainerStyles?: CSSProperties | undefined,
-  children?: React.ReactNode | React.ReactNode[];
-}) {
-    const { observe, inView } = useInView({
-        onEnter: ({ unobserve }) => unobserve(), // only run once
-    });
-
-    return (
-        <SectionCenter>
-            <MuiStack spacing={{ xs: 6, md: 12 }} ref={observe}>
-                <MuiStack spacing={{ xs: 2, md: 4 }}>
-                    <GentleSlide appear={inView} direction="down">
-                        <Typography level="h3" component="h2" textAlign="center">{props.header}</Typography>
-                    </GentleSlide>
-                    {props.subtitle && (
-                        <GentleSlide appear={inView} direction="down" index={1}>
-                            <Typography level="body2" textAlign="center">{props.subtitle}</Typography>
-                        </GentleSlide>
-                    )}
-                </MuiStack>
-                <div>
-                    <Grid container spacing={8} alignItems="center">
-                        {props.image && (
-                            <Grid xs={12} md={6} sx={{ position: 'relative', height: props.imageContainerHeight }}>
-                                <Fade appear={inView} duration={1400}>
-                                    <div style={props.imageContainerStyles}>
-                                        {props.image}
-                                    </div>
-                                </Fade>
-                            </Grid>
-                        )}
-                        {props.children && (
-                            <Grid xs={12} md={props.image ? 6 : 12}>
-                                <MuiStack
-                                    sx={{
-                                        gap: 4,
-                                        flexDirection: props.direction === 'horizontal' ? { xs: 'column', md: 'row' } : 'column'
-                                    }}>
-                                    {(Array.isArray(props.children) ? props.children : [props.children]).map((child, childIndex) => (
-                                        <GentleSlide
-                                            key={childIndex}
-                                            appear={inView}
-                                            index={childIndex}>
-                                            {child}
-                                        </GentleSlide>
-                                    ))}
-                                </MuiStack>
-                            </Grid>
-                        )}
-                    </Grid>
-                </div>
-            </MuiStack>
-        </SectionCenter>
-    );
-}
-
-function SectionCenter(props: { children?: React.ReactNode | undefined, style?: CSSProperties | undefined, narrow?: boolean }) {
-    return (
-        <section style={props.style}>
-            <Container>
-                <Box sx={{ px: { xs: 1, sm: 4, md: 8 }, py: { xs: props.narrow ? 4 : 8, sm: props.narrow ? 4 : 12 } }}>
-                    {props.children}
-                </Box>
-            </Container>
-        </section>
-    );
-}
-
-const integrationsList = [
-    { name: 'Samsung', img: '/assets/logos/samsunglogo.png', imgRatio: 3.5, page: '/channels/samsung' },
-    { name: 'Xiaomi', img: '/assets/logos/xiaomilogo.png', imgRatio: 1, page: '/channels/xiaomi' },
-    { name: 'Philips Hue', img: '/assets/logos/huelogo.png', imgRatio: 1.6, page: '/channels/philipshue' },
-    // { name: "Zigbee2MQTT", img: "/assets/logos/z2mlogo.png", imgRatio: 1, page: '/channels/zigbee2mqtt' },
-    { name: 'iRobot', img: '/assets/logos/irobotlogo.png', imgRatio: 2.5, page: '/channels/irobot' },
-    { name: 'GitHub', img: '/assets/logos/githublogo.png', imgRatio: 2, page: '/channels/github-app' },
-    // { name: "Tasmota", img: "/assets/logos/tasmotalogo.png", imgRatio: 1, page: '/channels/tasmota' },
-]
-
-const integrationsLogoSize = 60;
-
-function FeaturedIntegrationsSection() {
-    const { observe, inView } = useInView({
-        onEnter: ({ unobserve }) => unobserve(), // only run once
-    });
-
-    return (
-        <SectionCenter>
-            <MuiStack spacing={4} ref={observe}>
-                <GentleSlide appear={inView} direction="down">
-                    <Typography level="body2" textAlign="center" textTransform="uppercase">Featured integrations</Typography>
-                </GentleSlide>
-                <Grid container alignItems="center" justifyContent="center">
-                    {integrationsList.map((channel, channelIndex) => (
-                        <Grid key={channel.name} xs={6} md={12 / integrationsList.length} textAlign="center" sx={{ p: 1 }}>
-                            <GentleSlide appear={inView} index={channelIndex} direction="down">
-                                <ImageLink href={channel.page} imageProps={{
-                                    alt: channel.name,
-                                    src: channel.img,
-                                    width: `${integrationsLogoSize * channel.imgRatio}`,
-                                    height: `${integrationsLogoSize * channel.imgRatio}`
-                                }} />
-                            </GentleSlide>
-                        </Grid>
-                    ))}
-                </Grid>
-            </MuiStack>
-        </SectionCenter>
-    );
-}
-
-function NewsletterSection() {
-    const { observe, inView } = useInView({
-        onEnter: ({ unobserve }) => unobserve(), // only run once
-    });
-
-    return (
-        <div ref={observe}>
-            <SectionCenter>
-                {inView && <Newsletter />}
-            </SectionCenter>
-        </div>
-    );
-}
-
-function GlobeSection() {
-    const { observe, inView } = useInView({
-        onEnter: ({ unobserve }) => unobserve(), // only run once
-    });
-
-    return (
-        <Box ref={observe} sx={{ minHeight: { xs: '12vh', sm: '20vh', md: '380px' }, }}>
-            {inView && <GlobePart />}
-        </Box>
-    );
-}
-
-function PlaySection() {
-    return (
-        <StepContent header="Play" subtitle="Here are some of our favorite ways you can automate your life"
-            image={
-                <>
-                    <Image className="image--light" src={'/images/playpitch.png'} alt="Play" quality={100} width={511} height={684} />
-                    <Image className="image--dark" src={'/images/playpitch-dark.png'} alt="Play" quality={100} width={511} height={684} />
-                </>
-            }
-            imageContainerHeight={684 + 64}
-            imageContainerStyles={{
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                width: '511px',
-                height: '684px',
-                marginTop: '64px'
-            }}>
-            <FeatureDescription
-                header="Morning coffee"
-                content="Raise the shades, play your favorite energizing morning beat and turn on the coffee maker." />
-            <FeatureDescription
-                header="Busywork"
-                content="Create a list of Trello cards and GitHub tasks that need your attention today. Maybe you can automate some of them too." />
-            <FeatureDescription
-                header="TV time"
-                content="Dim the lights, switch the TV to Netflix, and turn on do-not-disturb on your phone. Now is You time." />
-            <FeatureDescription
-                header="Rain alert"
-                content="Notify me if today's forecast shows rain and windows are open. Ease your mind knowing you will get notified on time" />
-        </StepContent>
-    );
-}
-
-function DataPart(props: { value: string, subtitle: string }) {
-    return <Stack alignItems="center" spacing={1}>
-        <Typography level="h3" component="span" lineHeight={1}>{props.value}</Typography>
-        <Typography textTransform="uppercase" secondary lineHeight={1}>{props.subtitle}</Typography>
-    </Stack>
-}
+export const Newsletter = dynamic(() => import('../pages/landing/Newsletter'));
+export const GlobePart = dynamic(() => import('../pages/landing/GlobeSection'));
 
 export default function LandingPageView() {
     return (

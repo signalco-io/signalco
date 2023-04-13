@@ -130,23 +130,31 @@ export = async () => {
             ...internalFuncs.map(c => webAppIdentity(c.webApp)),
             ...channelsFuncs.map(c => webAppIdentity(c.webApp)),
         ]);
-        const s1 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ApiIdentifier', config.requireSecret('secret-auth0ApiIdentifier'));
-        const s2 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ClientId--Station', config.requireSecret('secret-auth0ClientIdStation'), s1.secret);
-        const s3 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--ClientSecret--Station', config.requireSecret('secret-auth0ClientSecretStation'), s2.secret);
-        const s4 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Auth0--Domain', config.require('secret-auth0Domain'), s3.secret);
-        const s5 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'HCaptcha--Secret', config.requireSecret('secret-hcaptchaSecret'), s4.secret);
-        const s6 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'HCaptcha--SiteKey', config.requireSecret('secret-hcaptchaSiteKey'), s5.secret);
-        const s7 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalStorageAccountConnectionString', storage.connectionString, s6.secret);
-        const s8 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoKeyVaultUrl', interpolate`${vault.keyVault.properties.vaultUri}`, s7.secret);
-        const s9 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SmtpNotificationServerUrl', ses.smtpServer, s8.secret);
-        const s10 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SmtpNotificationFromDomain', ses.smtpFromDomain, s9.secret);
-        const s11 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SmtpNotificationUsername', ses.smtpUsername, s10.secret);
-        const s12 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SmtpNotificationPassword', ses.smtpPassword, s11.secret);
-        const s13 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--SigningSecret', config.requireSecret('secret-slackSigningSecret'), s12.secret);
-        const s14 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientId', config.require('secret-slackClientId'), s13.secret);
-        const s15 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientSecret', config.requireSecret('secret-slackClientSecret'), s14.secret);
-        const s16 = vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoAppRemoteBrowserUrl', appRb.app.url, s15.secret);
-        vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoProcessorAccessCode', config.requireSecret('secret-processorAccessCode'), s16.secret);
+
+        vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--SigningSecret', config.requireSecret('secret-slackSigningSecret'));
+        vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientId', config.require('secret-slackClientId'));
+        vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientSecret', config.requireSecret('secret-slackClientSecret'));
+        vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoAppRemoteBrowserUrl', appRb.app.url);
+
+        const sharedEnvVariables = {
+            'SignalcoKeyVaultUrl': interpolate`${vault.keyVault.properties.vaultUri}`,
+            AzureSignalRConnectionString: signalr.connectionString,
+            SignalcoStorageAccountConnectionString: storage.connectionString,
+            'Auth0--ApiIdentifier': config.requireSecret('secret-auth0ApiIdentifier'),
+            'Auth0--Domain': config.require('secret-auth0Domain'),
+            'HCaptcha--SiteKey': config.requireSecret('secret-hcaptchaSiteKey'),
+            'SignalcoProcessorAccessCode': config.requireSecret('secret-processorAccessCode'),
+        };
+
+        const internalEnvVariables = {
+            SmtpNotificationServerUrl: ses.smtpServer,
+            SmtpNotificationFromDomain: ses.smtpFromDomain,
+            SmtpNotificationUsername: ses.smtpUsername,
+            SmtpNotificationPassword: ses.smtpPassword,
+            'Auth0--ClientId--Station': config.requireSecret('secret-auth0ClientIdStation'),
+            'Auth0--ClientSecret--Station': config.requireSecret('secret-auth0ClientSecretStation'),
+            'HCaptcha--Secret': config.requireSecret('secret-hcaptchaSecret'),
+        };
 
         // Populate public functions settings
         publicFuncs.forEach(func => {
@@ -157,9 +165,8 @@ export = async () => {
                 funcStorage.storageAccount.connectionString,
                 func.codeBlobUlr,
                 {
-                    AzureSignalRConnectionString: signalr.connectionString,
-                    SignalcoStorageAccountConnectionString: storage.connectionString,
-                    SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
+                    ...sharedEnvVariables,
+                    ...internalEnvVariables,
                     APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
                     APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
                 },
@@ -175,9 +182,8 @@ export = async () => {
                 funcStorage.storageAccount.connectionString,
                 func.codeBlobUlr,
                 {
-                    AzureSignalRConnectionString: signalr.connectionString,
-                    SignalcoStorageAccountConnectionString: storage.connectionString,
-                    SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
+                    ...sharedEnvVariables,
+                    ...internalEnvVariables,
                     APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${intFuncInsights.component.instrumentationKey}`,
                     APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${intFuncInsights.component.connectionString}`,
                 },
@@ -193,8 +199,7 @@ export = async () => {
                 funcStorage.storageAccount.connectionString,
                 channel.codeBlobUlr,
                 {
-                    AzureSignalRConnectionString: signalr.connectionString,
-                    SignalcoKeyVaultUrl: interpolate`${vault.keyVault.properties.vaultUri}`,
+                    ...sharedEnvVariables,
                     APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
                     APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
                 },

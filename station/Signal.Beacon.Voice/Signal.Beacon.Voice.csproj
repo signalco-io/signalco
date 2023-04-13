@@ -20,7 +20,7 @@
     <PackageReference Include="OpenTK.OpenAL" Version="5.0.0-pre.8" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
-    <PackageReference Include="Porcupine" Version="2.1.6" />
+    <PackageReference Include="Porcupine" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

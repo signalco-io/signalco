@@ -14,7 +14,6 @@
         "app",
         "components",
         "next-env.d.ts",
-        "@types",
         ".next/types/**/*.ts"
     ]
 }

@@ -13,9 +13,12 @@ const withPWA = nextPwa({
     disable: isDevelopment
 });
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    experimental: { appDir: true },
+    experimental: {
+        appDir: true,
+    },
     images: {
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
@@ -37,7 +40,6 @@ const nextConfig = {
                         fontSrc: ['\'self\''],
                         manifestSrc: '\'self\'',
                         mediaSrc: '\'self\'',
-                        prefetchSrc: '\'self\'',
                         childSrc: '\'self\'',
                         frameSrc: ['\'self\'', 'https://dfnoise.eu.auth0.com', 'https://hcaptcha.com', 'https://*.hcaptcha.com'],
                         workerSrc: '\'self\'',

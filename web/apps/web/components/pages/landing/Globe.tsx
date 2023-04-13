@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import createGlobe from 'cobe';
-import { useColorScheme } from '@signalco/ui';
+// import { useColorScheme } from '@signalco/ui';
 import { useWindowWidth } from '@signalco/hooks';
 
 function Globe() {
@@ -8,8 +8,8 @@ function Globe() {
     const rectWidth = useWindowWidth();
     const width = Math.min(1100, rectWidth ?? 0);
     const height = width;
-    const { colorScheme } = useColorScheme();
-    const isDark = colorScheme === 'dark';
+    // const { colorScheme } = useColorScheme();
+    const isDark = true;//colorScheme === 'dark';
 
     const glow: [number, number, number] = useMemo(() => isDark ? [0.1,0.1,0.1] : [1, 1, 1], [isDark]);
     const base: [number, number, number] = useMemo(() => isDark ? [0.4,0.4,0.4] : [0.9,0.9,0.9], [isDark]);
@@ -34,7 +34,7 @@ function Globe() {
             markerColor: [0.1, 0.8, 1],
             glowColor: glow,
             markers: [],
-            onRender: (state: Record<string, any>) => {
+            onRender: (state: Record<string, unknown>) => {
                 state.phi = phi;
                 phi += 0.0005;
             }

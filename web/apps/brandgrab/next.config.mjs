@@ -7,6 +7,7 @@ const withBundleAnalyzer = nextBundleAnalyzer({
     enabled: process.env.ANALYZE === 'true',
 });
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
     experimental: { appDir: true },
