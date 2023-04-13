@@ -24,7 +24,7 @@
         "@signalco/js": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
-        "classix": "2.1.24",
+        "classix": "2.1.28",
         "cobe": "0.6.3",
         "encoding": "0.1.13",
         "next": "13.3.1-canary.6",

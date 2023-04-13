@@ -21,7 +21,7 @@
         "@next/env": "13.3.0",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
-        "classix": "2.1.24",
+        "classix": "2.1.28",
         "next": "13.3.1-canary.6",
         "next-secure-headers": "2.2.0",
         "postcss": "8.4.21",
