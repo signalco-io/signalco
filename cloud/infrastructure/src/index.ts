@@ -222,7 +222,7 @@ export = async () => {
 
             // Checkly - Domains
             dnsRecord('checkly-public-dashboard', 'status', 'checkly-dashboards.com', 'CNAME', false);
-            dnsRecord('checkly-public-dashboard-txt', '_vercel', 'vc-domain-verify=status.signalco.io,563d86cd3501b049a1ad', 'CNAME', false);
+            dnsRecord('checkly-public-dashboard-txt', '_vercel', 'vc-domain-verify=status.signalco.io,563d86cd3501b049a1ad', 'TXT', false);
         }
     
         // Vercel - Domains
