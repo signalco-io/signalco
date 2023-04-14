@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-const apiUrl = 'http://127.0.0.1:7003/api';
+const apiUrl = 'https://mutex.d.api.signalco.io/api';
 
 const args = process.argv.slice(2);
 if (args.length < 2) {
