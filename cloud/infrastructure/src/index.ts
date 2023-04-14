@@ -122,7 +122,7 @@ export = async () => {
                 `${funcName.toLowerCase()}.d.api`,
                 undefined,
                 shouldProtect);
-            const funcPublish = await publishProjectAsync(`../../discrete/Signalco.Discrete.Api.${funcName}/cloud`);
+            const funcPublish = await publishProjectAsync(`../../discrete/Signalco.Discrete.Api.${funcName}/cloud`, 7);
             const funcCode = assignFunctionCode(
                 discreteResourceGroup,
                 discreteStorage.storageAccount.storageAccount,
