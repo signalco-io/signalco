@@ -32,7 +32,7 @@ export async function GET(request: Request) {
     const screenshotUrl = `https://browser.api.signalco.${isDeveloper ? 'dev' : 'io'}/api/screenshot?${query}`;
     console.info('Requesting screenshot', screenshotUrl);
 
-    const response = await fetch(screenshotUrl);
+    const response = await fetch(screenshotUrl, { cache: 'no-store' });
     const data = Buffer.from(await response.arrayBuffer());
     const dataUrlDataPng = `data:image/png;base64,${data.toString('base64')}`;
 
