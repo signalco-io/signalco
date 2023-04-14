@@ -115,7 +115,7 @@ export = async () => {
         const discreteFuncs = [];
         for (const funcName of discreteNames) {
             const discreteResourceGroup = new ResourceGroup(`signalco-discrete-${stack}-${funcName.toLowerCase()}`);
-            const discreteStorage = createFunctionsStorage(discreteResourceGroup, `${funcName.toLowerCase().substring(0, 5)}-funcs`, shouldProtect);
+            const discreteStorage = createFunctionsStorage(discreteResourceGroup, `${funcName.toLowerCase().substring(0, 5)}funcs`, shouldProtect);
             const func = createPublicFunction(
                 discreteResourceGroup,
                 funcName.toLowerCase().substring(0, 5),
