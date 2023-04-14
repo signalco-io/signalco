@@ -37,7 +37,6 @@ const nextConfig = {
                         fontSrc: ['\'self\''],
                         manifestSrc: '\'self\'',
                         mediaSrc: '\'self\'',
-                        prefetchSrc: '\'self\'',
                         childSrc: '\'self\'',
                         frameSrc: ['\'self\''],
                         workerSrc: '\'self\'',
