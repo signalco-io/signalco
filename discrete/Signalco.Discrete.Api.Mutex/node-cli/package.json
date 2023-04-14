@@ -1,0 +1,26 @@
+{
+  "name": "mutex-cli",
+  "version": "1.0.0",
+  "description": "Signalco Mutex API CLI",
+  "type": "module",
+  "bin": {
+    "mutex": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/signalco-io/signalco.git"
+  },
+  "keywords": [
+    "signalco",
+    "mutex",
+    "cloud",
+    "api",
+    "cli"
+  ],
+  "author": "Signalco",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/signalco-io/signalco/issues"
+  },
+  "homepage": "https://github.com/signalco-io/signalco#readme"
+}
