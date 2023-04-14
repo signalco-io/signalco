@@ -110,6 +110,35 @@ export = async () => {
             channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, shouldProtect));
         }
 
+        // Generate discrete functions
+        const discreteNames = ['Mutex'];
+        const discreteFuncs = [];
+        for (const funcName of discreteNames) {
+            const discreteResourceGroup = new ResourceGroup(`signalco-discrete-${stack}-${funcName}`);
+            const discreteStorage = createFunctionsStorage(discreteResourceGroup, 'funcs', shouldProtect);
+            const func = createPublicFunction(
+                discreteResourceGroup,
+                funcName.toLowerCase().substring(0, 5),
+                funcName.toLowerCase(),
+                undefined,
+                shouldProtect);
+            const funcPublish = await publishProjectAsync(`../../discrete/Signalco.Discrete.Api.${funcName}`);
+            const funcCode = assignFunctionCode(
+                discreteResourceGroup,
+                discreteStorage.storageAccount.storageAccount,
+                discreteStorage.zipsContainer,
+                funcName.toLowerCase().substring(0, 5),
+                funcPublish.releaseDir);
+            discreteFuncs.push({
+                name: funcName,
+                shortName: funcName.toLowerCase().substring(0, 5),
+                resourceGroup: discreteResourceGroup,
+                ...func,
+                ...funcCode,
+                storage: discreteStorage,
+            });
+        }
+
         // Create App Insights
         const pubFuncInsights = createWebAppAppInsights(resourceGroup, 'cpub', publicFuncs[0].webApp);
         const intFuncInsights = createWebAppAppInsights(resourceGroup, 'cint', internalFuncs[0].webApp);
@@ -205,6 +234,20 @@ export = async () => {
                 },
                 shouldProtect,
             );
+        });
+
+        // Populate discrete function settings
+        discreteFuncs.forEach(func => {
+            assignFunctionSettings(
+                func.resourceGroup,
+                func.webApp,
+                `discrete${func.shortName}`,
+                func.storage.storageAccount.connectionString,
+                func.codeBlobUlr,
+                {
+                    StorageAccountConnectionString: func.storage.storageAccount.connectionString,
+                },
+                shouldProtect);
         });
 
         createAppInsights(resourceGroup, 'web', 'signalco');
