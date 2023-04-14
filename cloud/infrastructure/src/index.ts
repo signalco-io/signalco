@@ -140,9 +140,9 @@ export = async () => {
             'SignalcoKeyVaultUrl': interpolate`${vault.keyVault.properties.vaultUri}`,
             AzureSignalRConnectionString: signalr.connectionString,
             SignalcoStorageAccountConnectionString: storage.connectionString,
-            'Auth0--ApiIdentifier': config.requireSecret('secret-auth0ApiIdentifier'),
-            'Auth0--Domain': config.require('secret-auth0Domain'),
-            'HCaptcha--SiteKey': config.requireSecret('secret-hcaptchaSiteKey'),
+            'Auth0_ApiIdentifier': config.requireSecret('secret-auth0ApiIdentifier'),
+            'Auth0_Domain': config.require('secret-auth0Domain'),
+            'HCaptcha_SiteKey': config.requireSecret('secret-hcaptchaSiteKey'),
             'SignalcoProcessorAccessCode': config.requireSecret('secret-processorAccessCode'),
         };
 
@@ -151,9 +151,9 @@ export = async () => {
             SmtpNotificationFromDomain: ses.smtpFromDomain,
             SmtpNotificationUsername: ses.smtpUsername,
             SmtpNotificationPassword: ses.smtpPassword,
-            'Auth0--ClientId--Station': config.requireSecret('secret-auth0ClientIdStation'),
-            'Auth0--ClientSecret--Station': config.requireSecret('secret-auth0ClientSecretStation'),
-            'HCaptcha--Secret': config.requireSecret('secret-hcaptchaSecret'),
+            'Auth0_ClientId_Station': config.requireSecret('secret-auth0ClientIdStation'),
+            'Auth0_ClientSecret_Station': config.requireSecret('secret-auth0ClientSecretStation'),
+            'HCaptcha_Secret': config.requireSecret('secret-hcaptchaSecret'),
         };
 
         // Populate public functions settings
