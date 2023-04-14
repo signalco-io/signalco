@@ -32,7 +32,6 @@ const nextConfig = {
                         fontSrc: ['\'self\''],
                         manifestSrc: '\'self\'',
                         mediaSrc: '\'self\'',
-                        prefetchSrc: '\'self\'',
                         childSrc: '\'self\'',
                         frameSrc: ['\'self\'', 'https://dfnoise.eu.auth0.com', 'https://hcaptcha.com', 'https://*.hcaptcha.com'],
                         workerSrc: '\'self\'',
