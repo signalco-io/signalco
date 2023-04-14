@@ -114,15 +114,15 @@ export = async () => {
         const discreteNames = ['Mutex'];
         const discreteFuncs = [];
         for (const funcName of discreteNames) {
-            const discreteResourceGroup = new ResourceGroup(`signalco-discrete-${stack}-${funcName}`);
-            const discreteStorage = createFunctionsStorage(discreteResourceGroup, 'funcs', shouldProtect);
+            const discreteResourceGroup = new ResourceGroup(`signalco-discrete-${stack}-${funcName.toLowerCase()}`);
+            const discreteStorage = createFunctionsStorage(discreteResourceGroup, `${funcName.toLowerCase().substring(0, 5)}-funcs`, shouldProtect);
             const func = createPublicFunction(
                 discreteResourceGroup,
                 funcName.toLowerCase().substring(0, 5),
                 funcName.toLowerCase(),
                 undefined,
                 shouldProtect);
-            const funcPublish = await publishProjectAsync(`../../discrete/Signalco.Discrete.Api.${funcName}`);
+            const funcPublish = await publishProjectAsync(`../../discrete/Signalco.Discrete.Api.${funcName}/cloud`);
             const funcCode = assignFunctionCode(
                 discreteResourceGroup,
                 discreteStorage.storageAccount.storageAccount,
