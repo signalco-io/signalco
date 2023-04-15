@@ -28,7 +28,7 @@
         "@emotion/react": "11.10.6",
         "@emotion/server": "11.10.0",
         "@emotion/styled": "11.10.6",
-        "@enterwell/react-form-builder": "0.2.3",
+        "@enterwell/react-form-builder": "0.3.0",
         "@enterwell/react-form-validation": "1.2.8",
         "@hcaptcha/react-hcaptcha": "1.8.1",
         "@microsoft/signalr": "7.0.5",
