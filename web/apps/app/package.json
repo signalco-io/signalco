@@ -42,7 +42,7 @@
         "@tanstack/react-query": "4.29.2",
         "@tanstack/react-query-devtools": "4.29.2",
         "@vvo/tzdb": "6.106.0",
-        "classix": "2.1.28",
+        "classix": "2.1.30",
         "cobe": "0.6.3",
         "color": "4.2.3",
         "compare-versions": "5.0.3",

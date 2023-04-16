@@ -24,7 +24,7 @@
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "cheerio": "1.0.0-rc.12",
-        "classix": "2.1.28",
+        "classix": "2.1.30",
         "crypto-js": "4.1.1",
         "extract-colors": "3.0.0",
         "get-pixels": "3.3.3",
