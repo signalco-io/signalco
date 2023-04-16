@@ -86,8 +86,8 @@ importers:
         specifier: 6.106.0
         version: 6.106.0
       classix:
-        specifier: 2.1.28
-        version: 2.1.28
+        specifier: 2.1.30
+        version: 2.1.30
       cobe:
         specifier: 0.6.3
         version: 0.6.3
@@ -277,8 +277,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-icons
       classix:
-        specifier: 2.1.28
-        version: 2.1.28
+        specifier: 2.1.30
+        version: 2.1.30
       encoding:
         specifier: 0.1.13
         version: 0.1.13
@@ -408,8 +408,8 @@ importers:
         specifier: 1.0.0-rc.12
         version: 1.0.0-rc.12
       classix:
-        specifier: 2.1.28
-        version: 2.1.28
+        specifier: 2.1.30
+        version: 2.1.30
       crypto-js:
         specifier: 4.1.1
         version: 4.1.1
@@ -555,8 +555,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-icons
       classix:
-        specifier: 2.1.28
-        version: 2.1.28
+        specifier: 2.1.30
+        version: 2.1.30
       next:
         specifier: 13.3.1-canary.7
         version: 13.3.1-canary.7(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.62.0)
@@ -756,8 +756,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-icons
       classix:
-        specifier: 2.1.28
-        version: 2.1.28
+        specifier: 2.1.30
+        version: 2.1.30
       cobe:
         specifier: 0.6.3
         version: 0.6.3
@@ -1049,8 +1049,8 @@ importers:
         specifier: 4.1.3
         version: 4.1.3
       classix:
-        specifier: 2.1.28
-        version: 2.1.28
+        specifier: 2.1.30
+        version: 2.1.30
       concurrently:
         specifier: 8.0.1
         version: 8.0.1
@@ -7354,8 +7354,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /classix@2.1.28:
-    resolution: {integrity: sha512-r9XvmmbtESMby1EIDQoMbGGmqlsF/phhEZUXTCKBAW8PYaTnxm5s2r+FhknOndx5BjZTxG3BGe4kjnupvqPeyw==}
+  /classix@2.1.30:
+    resolution: {integrity: sha512-NzQ7BMNZvIZSAFTNW+mVyFK7REjyJXOUqT+eyHWvWuxNYjYquZOelzLHSYuFtWBaBk9BB/O2HndYcnW9IKUywg==}
 
   /classnames@2.3.2:
     resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
