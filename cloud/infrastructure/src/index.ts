@@ -119,7 +119,7 @@ export = async () => {
             const func = createPublicFunction(
                 discreteResourceGroup,
                 funcName.toLowerCase().substring(0, 5),
-                `${funcName.toLowerCase()}.d.api`,
+                `${funcName.toLowerCase()}.api`,
                 undefined,
                 shouldProtect);
             const funcPublish = await publishProjectAsync(`../../discrete/Signalco.Discrete.Api.${funcName}/cloud`, 7);
