@@ -44,8 +44,8 @@ importers:
         specifier: 11.10.6
         version: 11.10.6(@emotion/react@11.10.6)(@types/react@18.0.35)(react@18.2.0)
       '@enterwell/react-form-builder':
-        specifier: 0.3.1
-        version: 0.3.1(@enterwell/react-form-validation@1.2.8)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 0.3.2
+        version: 0.3.2(@enterwell/react-form-validation@1.2.8)(react-dom@18.2.0)(react@18.2.0)
       '@enterwell/react-form-validation':
         specifier: 1.2.8
         version: 1.2.8(react-dom@18.2.0)(react@18.2.0)
@@ -2958,8 +2958,8 @@ packages:
     resolution: {integrity: sha512-AHPmaAx+RYfZz0eYu6Gviiagpmiyw98ySSlQvCUhVGDRtDFe4DBS0x1bSjdF3gqUDYOczB+yYvBTtEylYSdRhg==}
     dev: false
 
-  /@enterwell/react-form-builder@0.3.1(@enterwell/react-form-validation@1.2.8)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-t4PyfwrM6OwMLDmvEXXBJTUuqd9SATgYjvAfAf7fgiLtuhV6oQvwTR5lrjNdni3tbPnzPlF7Bf2Uu4hn1e/vXg==}
+  /@enterwell/react-form-builder@0.3.2(@enterwell/react-form-validation@1.2.8)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-efnQe4OEu2Wtgq8+L+dBBz3MkKsWo6h+eXT80ATJQXNtliTf2hS2PCRNRdmj6Bs+U8+CZrhtXEMfqCDj8qMRbA==}
     engines: {node: '>=16'}
     peerDependencies:
       '@enterwell/react-form-validation': ^1
