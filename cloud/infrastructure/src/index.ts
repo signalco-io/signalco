@@ -246,6 +246,7 @@ export = async () => {
                 func.codeBlobUlr,
                 {
                     StorageAccountConnectionString: func.storage.storageAccount.connectionString,
+                    FUNCTIONS_WORKER_RUNTIME: 'dotnet-isolated',
                 },
                 shouldProtect);
         });
