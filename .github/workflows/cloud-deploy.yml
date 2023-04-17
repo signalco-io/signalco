@@ -26,7 +26,7 @@ jobs:
 
       - name: ✋ Set up mutex
         run: |
-          pushd ../../discrete/node-cli
+          pushd ../../discrete/Signalco.Discrete.Api.Mutex/node-cli
           npm install
           npm install -g
           npx mutex wait signalcoclouddeploy
@@ -73,7 +73,7 @@ jobs:
       - name: ✋ Release mutex
         if: always()
         run: |
-          pushd ../../discrete/node-cli
+          pushd ../../discrete/Signalco.Discrete.Api.Mutex/node-cli
           npm install
           npm install -g
           npx mutex release signalcoclouddeploy
