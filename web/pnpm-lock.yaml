@@ -121,9 +121,6 @@ importers:
       pigeon-maps:
         specifier: 0.21.3
         version: 0.21.3(react@18.2.0)
-      postcss:
-        specifier: 8.4.22
-        version: 8.4.22
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -234,6 +231,9 @@ importers:
       playwright:
         specifier: 1.32.3
         version: 1.32.3
+      postcss:
+        specifier: 8.4.22
+        version: 8.4.22
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -294,9 +294,6 @@ importers:
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
-      postcss:
-        specifier: 8.4.22
-        version: 8.4.22
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -371,6 +368,9 @@ importers:
       playwright:
         specifier: 1.32.3
         version: 1.32.3
+      postcss:
+        specifier: 8.4.22
+        version: 8.4.22
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -386,9 +386,6 @@ importers:
 
   apps/brandgrab:
     dependencies:
-      '@hcaptcha/react-hcaptcha':
-        specifier: 1.8.1
-        version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 13.3.0
         version: 13.3.0
@@ -410,9 +407,6 @@ importers:
       classix:
         specifier: 2.1.30
         version: 2.1.30
-      crypto-js:
-        specifier: 4.1.1
-        version: 4.1.1
       extract-colors:
         specifier: 3.0.0
         version: 3.0.0
@@ -425,9 +419,6 @@ importers:
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
-      postcss:
-        specifier: 8.4.22
-        version: 8.4.22
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -469,9 +460,6 @@ importers:
       '@types/color':
         specifier: 3.0.3
         version: 3.0.3
-      '@types/crypto-js':
-        specifier: 4.1.1
-        version: 4.1.1
       '@types/get-pixels':
         specifier: 3.3.2
         version: 3.3.2
@@ -502,6 +490,9 @@ importers:
       playwright:
         specifier: 1.32.3
         version: 1.32.3
+      postcss:
+        specifier: 8.4.22
+        version: 8.4.22
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -563,9 +554,6 @@ importers:
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
-      postcss:
-        specifier: 8.4.22
-        version: 8.4.22
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -631,6 +619,9 @@ importers:
       playwright:
         specifier: 1.32.3
         version: 1.32.3
+      postcss:
+        specifier: 8.4.22
+        version: 8.4.22
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -776,9 +767,6 @@ importers:
       octokit:
         specifier: 2.0.14
         version: 2.0.14(encoding@0.1.13)
-      postcss:
-        specifier: 8.4.22
-        version: 8.4.22
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -859,6 +847,9 @@ importers:
       playwright:
         specifier: 1.32.3
         version: 1.32.3
+      postcss:
+        specifier: 8.4.22
+        version: 8.4.22
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -5953,10 +5944,6 @@ packages:
       '@types/node': 18.15.11
     dev: true
 
-  /@types/crypto-js@4.1.1:
-    resolution: {integrity: sha512-BG7fQKZ689HIoc5h+6D2Dgq1fABRa0RbBWKBd9SP/MVRVXROflpm5fhwyATX5duFmbStzyzyycPB8qUYKDH3NA==}
-    dev: true
-
   /@types/d3-array@3.0.4:
     resolution: {integrity: sha512-nwvEkG9vYOc0Ic7G7kwgviY4AQlTfYGIZ0fqB7CQHXGyYM6nO7kJh5EguSNA3jfh4rq7Sb7eMVq8isuvg2/miQ==}
 
@@ -7911,10 +7898,6 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
-
-  /crypto-js@4.1.1:
-    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
-    dev: false
 
   /crypto-random-string@2.0.0:
     resolution: {integrity: sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==}
@@ -12837,6 +12820,7 @@ packages:
       nanoid: 3.3.6
       picocolors: 1.0.0
       source-map-js: 1.0.2
+    dev: true
 
   /prebuild-install@7.1.1:
     resolution: {integrity: sha512-jAXscXWMcCK8GgCoHOfIr0ODh5ai8mj63L2nWrjuAgXE6tDyYGnx4/8o/rCgU+B4JSyZBKbeZqzhtwtC3ovxjw==}
