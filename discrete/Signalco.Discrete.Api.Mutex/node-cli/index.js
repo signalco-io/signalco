@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-const apiUrl = 'https://mutex.d.api.signalco.io/api';
+const apiUrl = 'https://mutex.api.signalco.io/api';
 
 const args = process.argv.slice(2);
 if (args.length < 2) {
@@ -14,10 +14,29 @@ async function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+async function fetchWithRetry(url, options, retryCount = 3) {
+    let response;
+    let error;
+    for (let i = 0; i <= retryCount; i++) {
+        try {
+            response = await fetch(url, options);
+            if(response.status >= 500)
+                throw new Error(`Server error ${response.status}`);
+            return response;
+        } catch (err) {
+            error = err;
+            console.warn('Failed to fetch', url, err, `(retry ${i}/${retryCount})`);
+            await delay(1000);
+        }
+    }
+    
+    throw error;
+}
+
 async function waitSync(key) {
     while(true) {
         try {
-            const response = await fetch(`${apiUrl}/wait/${key}`, {
+            const response = await fetchWithRetry(`${apiUrl}/wait/${key}`, {
                 method: 'POST',
             });
             if (response.status === 202) {
@@ -39,7 +58,7 @@ async function waitSync(key) {
 
 async function releaseSync(key) {
     try {
-        const response = await fetch(`${apiUrl}/release/${key}`, {
+        const response = await fetchWithRetry(`${apiUrl}/release/${key}`, {
             method: 'POST',
         });
         if (response.status === 202) {

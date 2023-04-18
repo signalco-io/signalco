@@ -271,10 +271,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
-"@pulumi/aws@5.35.0":
-  version "5.35.0"
-  resolved "https://registry.yarnpkg.com/@pulumi/aws/-/aws-5.35.0.tgz#fa5a767c1379c51508cd76c58533041f18782845"
-  integrity sha512-GplJF6Iy0lR8Ygx6FceV7HhcIJv1rjyRjU1fKeuMKjgTZmiWqbRmgD5DokalYe0aQlr0gs/QZidkQdPQt/OUsQ==
+"@pulumi/aws@5.36.0":
+  version "5.36.0"
+  resolved "https://registry.yarnpkg.com/@pulumi/aws/-/aws-5.36.0.tgz#747eb3593747f06738379c78f668eca7f5a41b5e"
+  integrity sha512-rn+wNWU41BLotO58U1TWTW3np+i1huezqxP18jwEr72/hNh/GTDppKO9nNNY4tQYeyY9T8ebcssjZaipQAkvdg==
   dependencies:
     "@pulumi/pulumi" "^3.0.0"
     aws-sdk "^2.0.0"
@@ -283,10 +283,10 @@
     read-package-tree "^5.2.1"
     resolve "^1.7.1"
 
-"@pulumi/azure-native@1.99.2":
-  version "1.99.2"
-  resolved "https://registry.yarnpkg.com/@pulumi/azure-native/-/azure-native-1.99.2.tgz#b062af2f0ec19f35e3a5d4b702208f2be0e484b2"
-  integrity sha512-U7l6QiwAERsHkzMP6WByK+wp1/QMvzUXtT3QEmkFZtP8Lmp/vzIcv9xOwNL+ECch3gf/F6GkYxbOhyB6QmFT9w==
+"@pulumi/azure-native@1.100.0":
+  version "1.100.0"
+  resolved "https://registry.yarnpkg.com/@pulumi/azure-native/-/azure-native-1.100.0.tgz#2ee4daad7102d35319fc35de16482cac75d6948b"
+  integrity sha512-NYUoGNvyOZYVR04IEjnnzf/SFof76f/qe6y7XaFWZW5cSBLhM9IiyFwia8ndN4Ec8cPQMinzR3l7GHUXDMH4kQ==
   dependencies:
     "@pulumi/pulumi" "^3.0.0"
 
