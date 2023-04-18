@@ -53,7 +53,7 @@
         "typescript": "5.0.4"
     },
     "optionalDependencies": {
-        "terser": "5.17.0"
+        "terser": "5.17.1"
     },
     "nextBundleAnalysis": {
         "budget": 358400,
