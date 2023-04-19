@@ -51,7 +51,7 @@
         "cross-env": "7.0.3",
         "eslint": "8.38.0",
         "next-sitemap": "4.0.7",
-        "postcss": "8.4.22",
+        "postcss": "8.4.23",
         "playwright": "1.32.3",
         "prop-types": "15.8.1",
         "rimraf": "5.0.0",
