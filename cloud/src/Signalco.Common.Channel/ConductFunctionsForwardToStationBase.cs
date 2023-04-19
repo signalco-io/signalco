@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
 using Signal.Core.Conducts;
@@ -21,8 +21,8 @@ public abstract class ConductFunctionsForwardToStationBase : ConductFunctionsBas
         this.authenticator = authenticator ?? throw new ArgumentNullException(nameof(authenticator));
     }
 
-    protected async Task<IActionResult> HandleAsync(
-        HttpRequest req,
+    protected async Task<HttpResponseData> HandleAsync(
+        HttpRequestData req,
         string channelName,
         string entityId,
         string contactName,

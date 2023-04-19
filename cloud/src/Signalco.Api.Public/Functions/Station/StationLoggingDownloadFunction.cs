@@ -4,11 +4,9 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Signal.Api.Common.Auth;
@@ -40,17 +38,17 @@ public class StationLoggingDownloadFunction
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    [FunctionName("Station-Logging-Download")]
+    [Function("Station-Logging-Download")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation(nameof(StationLoggingDownloadFunction), "Station")]
+    [OpenApiOperation<StationLoggingDownloadFunction>("Station")]
     [OpenApiParameter("stationId", In = ParameterLocation.Query, Required = true, Type = typeof(string),
         Description = "The **stationId** parameter")]
     [OpenApiParameter("blobName", In = ParameterLocation.Query, Required = true, Type = typeof(string),
         Description = "The **blobName** parameter. Use list function to obtain available blobs.")]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "stations/logging/download")]
-        HttpRequest req,
+        HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest(cancellationToken, this.functionAuthenticator, async context =>
         {

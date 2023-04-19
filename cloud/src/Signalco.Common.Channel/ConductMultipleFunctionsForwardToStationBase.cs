@@ -1,9 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.SignalRService;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Core.Conducts;
 using Signal.Core.Entities;
@@ -29,8 +27,8 @@ public abstract class ConductMultipleFunctionsForwardToStationBase : ConductMult
         this.storageDao = storageDao ?? throw new ArgumentNullException(nameof(storageDao));
     }
 
-    protected async Task<IActionResult> HandleAsync(
-        HttpRequest req,
+    protected async Task<HttpResponseData> HandleAsync(
+        HttpRequestData req,
         IAsyncCollector<SignalRMessage> signalRMessages,
         CancellationToken cancellationToken = default)
     {

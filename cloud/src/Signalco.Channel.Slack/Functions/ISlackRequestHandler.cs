@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.Functions.Worker.Http;
 
 namespace Signalco.Channel.Slack.Functions;
 
 public interface ISlackRequestHandler
 {
-    Task VerifyFromSlack(HttpRequest req, CancellationToken cancellationToken = default);
+    Task VerifyFromSlack(HttpRequestData req, CancellationToken cancellationToken = default);
 }

@@ -44,7 +44,7 @@ public class UserService : IUserService
         await this.dao.UserIdByEmailAsync(email, cancellationToken);
 
     // TODO: Use for retrieving user info
-    //private async Task ResolveUserAsync(HttpRequest request, CancellationToken cancellationToken, string nameIdentifier)
+    //private async Task ResolveUserAsync(HttpRequestData request, CancellationToken cancellationToken, string nameIdentifier)
     //{
     //    // Create user if doesn't exist
     //    var existingUser = await this.azureStorageDao.UserAsync(nameIdentifier, cancellationToken);

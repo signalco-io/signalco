@@ -4,11 +4,9 @@ using System.Net;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
@@ -26,14 +24,14 @@ public class StationRefreshTokenFunction
         this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
     }
 
-    [FunctionName("Station-RefreshToken")]
-    [OpenApiOperation(nameof(StationRefreshTokenFunction), "Station", Description = "Refreshes the access token.")]
+    [Function("Station-RefreshToken")]
+    [OpenApiOperation<StationRefreshTokenFunction>("Station", Description = "Refreshes the access token.")]
     [OpenApiJsonRequestBody<StationRefreshTokenRequestDto>]
     [OpenApiOkJsonResponse<StationRefreshTokenResponseDto>]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "station/refresh-token")]
-        HttpRequest req,
+        HttpRequestData req,
         CancellationToken cancellationToken = default)
     {
         return await req.AnonymousRequest<StationRefreshTokenRequestDto, StationRefreshTokenResponseDto>(cancellationToken, async (context) =>

@@ -6,11 +6,9 @@ using System.Net;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
@@ -40,15 +38,15 @@ public class UnShareEntityFunction
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    [FunctionName("UnShare-Entity")]
+    [Function("UnShare-Entity")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation(nameof(UnShareEntityFunction), "Sharing", Description = "Un-shared the entity from users.")]
+    [OpenApiOperation<ShareEntityFunction>("Sharing", Description = "Un-shared the entity from users.")]
     [OpenApiJsonRequestBody<UnShareRequestDto>(Description = "Un-share one entity with one or more users.")]
-    [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
+    [OpenApiResponseWithoutBody]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "share/entity")]
-        HttpRequest req,
+        HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest<UnShareRequestDto>(cancellationToken, this.functionAuthenticator,
             async context =>

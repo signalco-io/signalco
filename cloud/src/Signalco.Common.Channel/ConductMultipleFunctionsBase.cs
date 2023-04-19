@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Net;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
 using Signal.Core.Conducts;
@@ -24,8 +24,8 @@ public abstract class ConductMultipleFunctionsBase : ConductFunctionsBase
         this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
     }
 
-    protected async Task<IActionResult> HandleAsync(
-        HttpRequest req,
+    protected async Task<HttpResponseData> HandleAsync(
+        HttpRequestData req,
         Func<ConductRequestDto, UserOrSystemRequestContextWithPayload<List<ConductRequestDto>>, Task>? processConduct = null,
         Func<Task>? afterConducts = null,
         CancellationToken cancellationToken = default) =>

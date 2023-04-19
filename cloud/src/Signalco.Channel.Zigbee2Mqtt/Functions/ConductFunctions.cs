@@ -1,11 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
+using Signal.Api.Common.OpenApi;
 using Signal.Core.Entities;
 using Signalco.Common.Channel;
 
@@ -20,11 +19,11 @@ public class ConductFunctions : ConductFunctionsForwardToStationBase
     {
     }
 
-    [FunctionName("Conduct")]
-    [OpenApiOperation(operationId: nameof(ConductFunctions), tags: new[] { "Conducts" })]
-    public async Task<IActionResult> Run(
+    [Function("Conduct")]
+    [OpenApiOperation<ConductFunctions>("Conducts")]
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "conduct/{entityId:guid}/{contactName}")]
-        HttpRequest req,
+        HttpRequestData req,
         string entityId,
         string contactName,
         CancellationToken cancellationToken = default) =>

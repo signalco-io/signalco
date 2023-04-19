@@ -4,11 +4,9 @@ using System.Net;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.OpenApi.Models;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
@@ -36,16 +34,16 @@ public class StationLoggingListFunction
         this.storageDao = storageDao ?? throw new ArgumentNullException(nameof(storageDao));
     }
 
-    [FunctionName("Station-Logging-List")]
+    [Function("Station-Logging-List")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation(nameof(StationLoggingListFunction), "Station")]
+    [OpenApiOperation<StationLoggingListFunction>("Station")]
     [OpenApiParameter("stationId", In = ParameterLocation.Query, Required = true, Type = typeof(string),
         Description = "The **StationID** parameter")]
     [OpenApiOkJsonResponse<List<BlobInfoDto>>(Description = "List of blob infos.")]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "station/logging/list")]
-        HttpRequest req,
+        HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest(cancellationToken, this.functionAuthenticator, async context =>
         {

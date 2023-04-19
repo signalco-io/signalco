@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Signal.Core.Secrets;
 
@@ -28,10 +25,10 @@ public class ScreenshotFunction
         this.secretsProvider = secretsProvider ?? throw new ArgumentNullException(nameof(secretsProvider));
     }
 
-    [FunctionName("Screenshot")]
-    public async Task<IActionResult> Run(
+    [Function("Screenshot")]
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", "get", Route = "screenshot")]
-        HttpRequest req,
+        HttpRequestData req,
         ILogger logger,
         CancellationToken cancellationToken = default)
     {
@@ -72,7 +69,7 @@ public class ScreenshotFunction
         return ScreenshotResultToActionResult(result);
     }
 
-    private static IActionResult ScreenshotResultToActionResult(ScreenshotResult result)
+    private static HttpResponseData ScreenshotResultToActionResult(ScreenshotResult result)
     {
         if (result.ImageData == null || result.ImageContentType == null)
             return new InternalServerErrorResult();

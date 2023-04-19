@@ -8,11 +8,9 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
@@ -40,15 +38,15 @@ public class StationLoggingPersistFunction
         this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
     }
 
-    [FunctionName("Station-Logging-Persist")]
+    [Function("Station-Logging-Persist")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation(nameof(StationLoggingPersistFunction), "Station", Description = "Appends logging entries.")]
+    [OpenApiOperation<StationLoggingPersistFunction>("Station", Description = "Appends logging entries.")]
     [OpenApiJsonRequestBody<StationsLoggingPersistRequestDto>(Description = "The logging entries to persist per station.")]
     [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "station/logging/persist")]
-        HttpRequest req,
+        HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest<StationsLoggingPersistRequestDto>(
             cancellationToken, this.functionAuthenticator, async context =>

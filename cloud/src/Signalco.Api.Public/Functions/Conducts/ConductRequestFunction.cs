@@ -4,12 +4,9 @@ using System.Net;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-using Microsoft.Azure.WebJobs.Extensions.SignalRService;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
@@ -41,15 +38,15 @@ public class ConductRequestFunction : ConductFunctionsBase
         this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
     }
 
-    [FunctionName("Conducts-Request")]
+    [Function("Conducts-Request")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation(nameof(ConductRequestFunction), "Conducts", Description = "Requests conduct to be executed.")]
-    [OpenApiRequestBody("application/json", typeof(ConductRequestDto), Description = "The conduct to execute.")]
-    [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
+    [OpenApiOperation<ConductRequestFunction>("Conducts", Description = "Requests conduct to be executed.")]
+    [OpenApiJsonRequestBody<ConductRequestDto>(Description = "The conduct to execute.")]
+    [OpenApiResponseWithoutBody()]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "conducts/request")]
-        HttpRequest req,
+        HttpRequestData req,
         [SignalR(HubName = "conducts")] IAsyncCollector<SignalRMessage> signalRMessages,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest<ConductRequestDto>(cancellationToken, this.functionAuthenticator, async context =>

@@ -1,16 +1,12 @@
 using System;
 using System.Net;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
 using Signal.Core.Entities;
 
@@ -32,13 +28,13 @@ public class SlackEventFunction
         this.logger = log ?? throw new ArgumentNullException(nameof(log));
     }
 
-    [FunctionName("Slack-Event")]
-    [OpenApiOperation(nameof(SlackEventFunction), "Slack", "Event", Description = "Handles the slack event (slack > signalco web-hook call).")]
-    [OpenApiRequestBody("application/json", typeof(EventRequestDto), Description = "Base model that provides content type information.")]
+    [Function("Slack-Event")]
+    [OpenApiOperation<SlackEventFunction>( "Slack", "Event", Description = "Handles the slack event (slack > signalco web-hook call).")]
+    [OpenApiJsonRequestBody<EventRequestDto>(Description = "Base model that provides content type information.")]
     [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "hooks/event")] HttpRequest req,
+    public async Task<HttpResponseData> Run(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "hooks/event")] HttpRequestData req,
         CancellationToken cancellationToken = default)
     {
         await this.slackRequestHandler.VerifyFromSlack(req, cancellationToken);
@@ -53,8 +49,8 @@ public class SlackEventFunction
                     challenge = verifyRequest.Challenge
                 });
             case "event_callback":
-                var content = await req.ReadAsStringAsync();
-                var target = JsonSerializer.Deserialize<EventMessageChannelsRequestDto>(content);
+                // var content = await req.ReadAsStringAsync();
+                // var target = JsonSerializer.Deserialize<EventMessageChannelsRequestDto>(content);
                 // TODO: Retrieve channel entity with slack-team contact that matches EntityId-slack-team.id
                 // TODO: Update channel message contact
                 return new BadRequestResult();

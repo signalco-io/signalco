@@ -8,11 +8,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
@@ -44,13 +42,13 @@ public class SlackOauthAccessFunction
         this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
     }
 
-    [FunctionName("Slack-Auth-OauthAccess")]
-    [OpenApiOperation(nameof(SlackOauthAccessFunction), "Slack", "Auth", Description = "Creates new Slack channel.")]
-    [OpenApiRequestBody("application/json", typeof(OAuthAccessRequestDto), Description = "OAuth code returned by Slack.")]
+    [Function("Slack-Auth-OauthAccess")]
+    [OpenApiOperation<SlackOauthAccessFunction>("Slack", "Auth", Description = "Creates new Slack channel.")]
+    [OpenApiJsonRequestBody<OAuthAccessRequestDto>(Description = "OAuth code returned by Slack.")]
     [OpenApiOkJsonResponse(typeof(AccessResponseDto))]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "auth/access")] HttpRequest req,
+    public async Task<HttpResponseData> Run(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "auth/access")] HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest<OAuthAccessRequestDto, AccessResponseDto>(cancellationToken, this.authenticator, async context =>
         {

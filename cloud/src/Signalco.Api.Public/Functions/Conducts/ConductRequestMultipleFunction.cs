@@ -8,12 +8,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-using Microsoft.Azure.WebJobs.Extensions.SignalRService;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.OpenApi;
 using Signal.Core.Conducts;
@@ -45,15 +42,15 @@ public class ConductRequestMultipleFunction : ConductMultipleFunctionsBase
         this.notificationService = notificationService ?? throw new ArgumentNullException(nameof(notificationService));
     }
 
-    [FunctionName("Conducts-RequestMultiple")]
+    [Function("Conducts-RequestMultiple")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation(nameof(ConductRequestMultipleFunction), "Conducts", Description = "Requests multiple conducts to be executed.")]
-    [OpenApiRequestBody("application/json", typeof(List<ConductRequestDto>), Description = "Collection of conducts to execute.")]
+    [OpenApiOperation<ConductRequestMultipleFunction>("Conducts", Description = "Requests multiple conducts to be executed.")]
+    [OpenApiJsonRequestBody<List<ConductRequestDto>>(Description = "Collection of conducts to execute.")]
     [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "conducts/request-multiple")]
-        HttpRequest req,
+        HttpRequestData req,
         [SignalR(HubName = "conducts")] IAsyncCollector<SignalRMessage> signalRMessages,
         CancellationToken cancellationToken = default)
     {

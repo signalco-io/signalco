@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Core.Auth;
 using Signal.Core.Exceptions;
@@ -29,12 +29,9 @@ public static class HttpRequestExtensions
         }
     }
 
-    public static async Task<T> ReadAsJsonAsync<T>(this HttpRequest req)
+    public static async Task<T> ReadAsJsonAsync<T>(this HttpRequestData req)
     {
         var requestContent = await req.ReadAsStringAsync();
-        if (string.IsNullOrWhiteSpace(requestContent))
-            throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Request empty.");
-
         return JsonSerializer.Deserialize<T>(
             requestContent,
             new JsonSerializerOptions
@@ -44,7 +41,7 @@ public static class HttpRequestExtensions
             })!;
     }
 
-    public static async Task<IActionResult> AnonymousRequest(
+    public static async Task<HttpResponseData> AnonymousRequest(
         this HttpRequest _,
         Func<Task> executionBody)
     {
@@ -62,16 +59,16 @@ public static class HttpRequestExtensions
         }
     }
 
-    public static Task<IActionResult> AnonymousRequest<TPayload, TResponse>(
-        this HttpRequest req,
+    public static Task<HttpResponseData> AnonymousRequest<TPayload, TResponse>(
+        this HttpRequestData req,
         CancellationToken cancellationToken,
         Func<AnonymousRequestContextWithPayload<TPayload>, Task<TResponse>> executionBody) =>
         AnonymousRequest<TPayload>(req, async context =>
             new OkObjectResult(await executionBody(context)), cancellationToken);
 
-    private static async Task<IActionResult> AnonymousRequest<TPayload>(
-        this HttpRequest req,
-        Func<AnonymousRequestContextWithPayload<TPayload>, Task<IActionResult>> executionBody,
+    private static async Task<HttpResponseData> AnonymousRequest<TPayload>(
+        this HttpRequestData req,
+        Func<AnonymousRequestContextWithPayload<TPayload>, Task<HttpResponseData>> executionBody,
         CancellationToken cancellationToken = default)
     {
         try
@@ -92,8 +89,8 @@ public static class HttpRequestExtensions
         }
     }
 
-    public static async Task<IActionResult> UserRequest<TResponse>(
-        this HttpRequest req,
+    public static async Task<HttpResponseData> UserRequest<TResponse>(
+        this HttpRequestData req,
         CancellationToken cancellationToken,
         IFunctionAuthenticator authenticator,
         Func<UserRequestContext, Task<TResponse>> executionBody)
@@ -112,8 +109,8 @@ public static class HttpRequestExtensions
         }
     }
 
-    public static Task<IActionResult> UserRequest<TPayload>(
-        this HttpRequest req,
+    public static Task<HttpResponseData> UserRequest<TPayload>(
+        this HttpRequestData req,
         CancellationToken cancellationToken,
         IFunctionAuthenticator authenticator,
         Func<UserRequestContextWithPayload<TPayload>, Task> executionBody) =>
@@ -123,8 +120,8 @@ public static class HttpRequestExtensions
             return new OkResult();
         }, cancellationToken);
 
-    public static Task<IActionResult> UserOrSystemRequest<TPayload>(
-        this HttpRequest req,
+    public static Task<HttpResponseData> UserOrSystemRequest<TPayload>(
+        this HttpRequestData req,
         CancellationToken cancellationToken,
         IFunctionAuthenticator authenticator,
         Func<UserOrSystemRequestContextWithPayload<TPayload>, Task> executionBody) =>
@@ -134,23 +131,23 @@ public static class HttpRequestExtensions
             return new OkResult();
         }, cancellationToken);
 
-    public static Task<IActionResult> UserRequest<TPayload, TResponse>(
-        this HttpRequest req,
+    public static Task<HttpResponseData> UserRequest<TPayload, TResponse>(
+        this HttpRequestData req,
         CancellationToken cancellationToken,
         IFunctionAuthenticator authenticator,
         Func<UserRequestContextWithPayload<TPayload>, Task<TResponse>> executionBody) =>
         UserRequest<TPayload>(req, authenticator, async context => 
             new OkObjectResult(await executionBody(context)), cancellationToken);
 
-    private static async Task<IActionResult> UserOrSystemRequest<TPayload>(
-        this HttpRequest req,
+    private static async Task<HttpResponseData> UserOrSystemRequest<TPayload>(
+        this HttpRequestData req,
         IFunctionAuthenticator authenticator,
-        Func<UserOrSystemRequestContextWithPayload<TPayload>, Task<IActionResult>> executionBody,
+        Func<UserOrSystemRequestContextWithPayload<TPayload>, Task<HttpResponseData>> executionBody,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            var isSystem = req.Headers.ContainsKey(KnownHeaders.ProcessorAccessCode);
+            var isSystem = req.Headers.Contains(KnownHeaders.ProcessorAccessCode);
             IUserAuth? user = null;
             if (isSystem)
                 await authenticator.AuthenticateSystemAsync(req, cancellationToken);
@@ -175,10 +172,10 @@ public static class HttpRequestExtensions
         }
     }
 
-    private static async Task<IActionResult> UserRequest<TPayload>(
-        this HttpRequest req,
+    private static async Task<HttpResponseData> UserRequest<TPayload>(
+        this HttpRequestData req,
         IFunctionAuthenticator authenticator,
-        Func<UserRequestContextWithPayload<TPayload>, Task<IActionResult>> executionBody,
+        Func<UserRequestContextWithPayload<TPayload>, Task<HttpResponseData>> executionBody,
         CancellationToken cancellationToken = default)
     {
         try
