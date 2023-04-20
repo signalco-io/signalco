@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
+using Signal.Core.Exceptions;
 using Signal.Core.Secrets;
 
 namespace Signalco.Api.Public.RemoteBrowser;
@@ -37,20 +37,20 @@ public class ScreenshotFunction
         // TODO: Authorize using access key
 
         int? width = null;
-        if (int.TryParse(req.Query["width"].ToString(), out var widthParsed))
+        if (int.TryParse(req.Query["width"], out var widthParsed))
             width = widthParsed;
         int? height = null;
-        if (int.TryParse(req.Query["height"].ToString(), out var heightParsed))
+        if (int.TryParse(req.Query["height"], out var heightParsed))
             height = heightParsed;
         int? wait= null;
-        if (int.TryParse(req.Query["wait"].ToString(), out var waitParsed))
+        if (int.TryParse(req.Query["wait"], out var waitParsed))
             wait = waitParsed;
         var request = new ScreenshotRequest(
-            req.Query["url"], 
-            req.Query["scrollThrough"].ToString().ToLowerInvariant() == "true",
-            req.Query["fullPage"].ToString().ToLowerInvariant() == "true",
+            req.Query["url"] ?? throw new ExpectedHttpException(HttpStatusCode.BadRequest, "url is required"), 
+            req.Query["scrollThrough"]?.ToLowerInvariant() == "true",
+            req.Query["fullPage"]?.ToLowerInvariant() == "true",
             width, height,
-            req.Query["allowAnimations"].ToString().ToLowerInvariant() == "true",
+            req.Query["allowAnimations"]?.ToLowerInvariant() == "true",
             wait);
 
         // TODO: Validate request
@@ -58,7 +58,7 @@ public class ScreenshotFunction
 
         // Check if cache available
         if (await this.RetrieveCachedAsync(request, cancellationToken) is { } cachedResult)
-            return ScreenshotResultToActionResult(cachedResult);
+            return ScreenshotResultToActionResult(req, cachedResult);
 
         var result = await this.MakeScreenshotAsync(startTimeStamp, request, logger, cancellationToken);
 
@@ -66,18 +66,24 @@ public class ScreenshotFunction
         // TODO: Persist request and thumbnail (show to user on UI)
 
         await this.CacheAsync(result, cancellationToken);
-        return ScreenshotResultToActionResult(result);
+        return ScreenshotResultToActionResult(req, result);
     }
 
-    private static HttpResponseData ScreenshotResultToActionResult(ScreenshotResult result)
+    private static HttpResponseData ScreenshotResultToActionResult(
+        HttpRequestData req,
+        ScreenshotResult result)
     {
         if (result.ImageData == null || result.ImageContentType == null)
-            return new InternalServerErrorResult();
+            return req.CreateResponse(HttpStatusCode.InternalServerError);
 
         var streamOut = new MemoryStream();
         streamOut.Write(result.ImageData);
         streamOut.Position = 0;
-        return new FileStreamResult(streamOut, result.ImageContentType);
+        
+        var resp = req.CreateResponse(HttpStatusCode.OK);
+        resp.Body = streamOut;
+        resp.Headers.Add("Content-Type", result.ImageContentType);
+        return resp;
     }
 
     private async Task<ScreenshotResult> MakeScreenshotAsync(

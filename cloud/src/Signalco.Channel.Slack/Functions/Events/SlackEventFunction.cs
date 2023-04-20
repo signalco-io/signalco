@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
+using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
 using Signal.Core.Entities;
 
@@ -44,20 +45,20 @@ public class SlackEventFunction
         {
             case "url_verification":
                 var verifyRequest = await req.ReadAsJsonAsync<EventUrlVerificationRequestDto>();
-                return new OkObjectResult(new
+                return await req.JsonResponseAsync(new
                 {
                     challenge = verifyRequest.Challenge
-                });
+                }, cancellationToken: cancellationToken);
             case "event_callback":
                 // var content = await req.ReadAsStringAsync();
                 // var target = JsonSerializer.Deserialize<EventMessageChannelsRequestDto>(content);
                 // TODO: Retrieve channel entity with slack-team contact that matches EntityId-slack-team.id
                 // TODO: Update channel message contact
-                return new BadRequestResult();
+                return req.CreateResponse(HttpStatusCode.BadRequest);
                 break;
             default:
                 this.logger.LogWarning("Unknown event request type {Type}", eventReq.Type);
-                return new BadRequestResult();
+                return req.CreateResponse(HttpStatusCode.BadRequest);
         }
     }
 

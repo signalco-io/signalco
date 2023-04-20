@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
+using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.HCaptcha;
 using Signal.Api.Common.OpenApi;
 using Signal.Core.Exceptions;
@@ -35,7 +35,7 @@ public class NewsletterFunction
     [OpenApiOperation<NewsletterFunction>("Website", Description = "Subscribe to a newsletter.")]
     [OpenApiHeader(HCaptchaHttpRequestExtensions.HCaptchaHeaderKey, Description = "hCaptcha response.")]
     [OpenApiJsonRequestBody<NewsletterSubscribeDto>(Description = "Subscribe with email address.")]
-    [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
+    [OpenApiResponseWithoutBody]
     [OpenApiResponseBadRequestValidation]
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "website/newsletter-subscribe")] HttpRequestData req,
@@ -60,7 +60,7 @@ public class NewsletterFunction
             {
                 this.logger.LogError(ex, "Failed to subscribe to newsletter with email: {Email}", data.Email);
             }
-        });
+        }, cancellationToken: cancellationToken);
 
     [Serializable]
     private class NewsletterSubscribeDto

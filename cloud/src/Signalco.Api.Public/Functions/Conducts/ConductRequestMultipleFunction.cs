@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.OpenApi;
@@ -99,7 +100,7 @@ public class ConductRequestMultipleFunction : ConductMultipleFunctionsBase
                 // Forward to channel
                 // TODO: Use HTTP Client Factory
                 using var client = new HttpClient();
-                client.DefaultRequestHeaders.Add("Authorization", req.Headers.Authorization[0]);
+                client.DefaultRequestHeaders.Add("Authorization", req.Headers().Authorization[0]);
                 await client.PostAsync($"https://{conduct.ChannelName}.channel.api.signalco.io/api/conducts/request-multiple",
                     new StringContent(JsonSerializer.Serialize(new List<ConductRequestDto> { conduct }),
                         Encoding.UTF8, "application/json"), cancellationToken);

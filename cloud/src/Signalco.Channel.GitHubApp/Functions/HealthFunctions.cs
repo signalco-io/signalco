@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.OpenApi;
-using Signalco.Common.Channel;
+using Signalco.Api.Common.Health;
 
 namespace Signalco.Channel.GitHubApp.Functions;
 
@@ -14,5 +14,5 @@ public class HealthFunctions : HealthStatusFunctionsBase
     [OpenApiResponseWithoutBody]
     public Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "status")]
-        HttpRequestData req) => this.HandleAsync();
+        HttpRequestData req) => this.HandleAsync(req);
 }

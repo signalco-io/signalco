@@ -4,8 +4,8 @@ using System.Net;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.OpenApi.Models;
 using Signal.Api.Common.Auth;
@@ -47,7 +47,7 @@ public class StationLoggingListFunction
         CancellationToken cancellationToken = default) =>
         await req.UserRequest(cancellationToken, this.functionAuthenticator, async context =>
         {
-            string stationId = req.Query["stationId"];
+            var stationId = req.Query["stationId"];
             if (string.IsNullOrWhiteSpace(stationId))
                 throw new ExpectedHttpException(HttpStatusCode.BadRequest, "stationId is required");
 

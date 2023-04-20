@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
-using SignalRConnectionInfo = Microsoft.Azure.WebJobs.Extensions.SignalRService.SignalRConnectionInfo;
 
 namespace Signalco.Api.Public.Functions.SignalR;
 

@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using Microsoft.Azure.Functions.Worker.Http;
 
-namespace Signalco.Common.Channel;
+namespace Signalco.Api.Common.Health;
 
 public abstract class HealthStatusFunctionsBase
 {
-    protected async Task<HttpResponseData> HandleAsync() =>
-        new OkResult();
+    protected Task<HttpResponseData> HandleAsync(HttpRequestData req) =>
+        Task.FromResult(req.CreateResponse(HttpStatusCode.OK));
 }
