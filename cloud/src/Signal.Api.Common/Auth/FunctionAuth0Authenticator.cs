@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Signal.Core.Auth;
 using Signal.Core.Secrets;
@@ -37,7 +37,7 @@ public class FunctionAuth0Authenticator : IFunctionAuthenticator
     }
 
     public async Task<IUserRefreshToken> RefreshTokenAsync(
-        HttpRequest request,
+        HttpRequestData request,
         string refreshToken,
         CancellationToken cancellationToken = default)
     {
@@ -82,14 +82,14 @@ public class FunctionAuth0Authenticator : IFunctionAuthenticator
             DateTime.UtcNow.AddSeconds(tokenResult.ExpiresIn ?? 60));
     }
 
-    public async Task<bool> AuthenticateSystemAsync(HttpRequest req, CancellationToken cancellationToken = default)
+    public async Task<bool> AuthenticateSystemAsync(HttpRequestData req, CancellationToken cancellationToken = default)
     {
         try
         {
-            if (!req.Headers.ContainsKey(KnownHeaders.ProcessorAccessCode))
+            if (!req.Headers.Contains(KnownHeaders.ProcessorAccessCode))
                 throw new Exception("Internal key not available");
 
-            var providedKey = req.Headers[KnownHeaders.ProcessorAccessCode][0];
+            var providedKey = req.Headers.GetValues(KnownHeaders.ProcessorAccessCode).First();
             var realKey = await this.secretsProvider.GetSecretAsync(SecretKeys.ProcessorAccessCode, cancellationToken);
             if (providedKey != realKey)
                 throw new Exception("Invalid system key");
@@ -103,7 +103,7 @@ public class FunctionAuth0Authenticator : IFunctionAuthenticator
         }
     }
 
-    public async Task<IUserAuth> AuthenticateAsync(HttpRequest request, CancellationToken cancellationToken = default)
+    public async Task<IUserAuth> AuthenticateAsync(HttpRequestData request, CancellationToken cancellationToken = default)
     {
         try
         {

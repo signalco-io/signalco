@@ -1,5 +1,4 @@
-﻿using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 
 namespace Signal.Api.Common.OpenApi;
 

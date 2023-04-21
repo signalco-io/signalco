@@ -1,13 +1,8 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.IdentityModel.Tokens;
 using Octokit;
 using Signal.Core.Secrets;
@@ -43,7 +38,7 @@ namespace Signalco.Channel.GitHubApp.Functions
         //[OpenApiOperation(nameof(Function1), "GitHub", Description = "TODO")]
         //[OpenApiResponseWithoutBody(HttpStatusCode.OK)]
         //public async Task Run(
-        //    [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+        //    [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequestData req,
         //    CancellationToken cancellationToken)
         //{
         //    var client = await GitHubClient(cancellationToken);

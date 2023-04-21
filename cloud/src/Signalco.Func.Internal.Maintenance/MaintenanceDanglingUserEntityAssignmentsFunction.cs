@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Signal.Core.Sharing;
 using Signal.Core.Storage;
 
@@ -22,7 +22,7 @@ public class MaintenanceDanglingUserEntityAssignmentsFunction
         this.dao = dao ?? throw new ArgumentNullException(nameof(dao));
     }
 
-    [FunctionName("Maintenance-DanglingUserEntityAssignments")]
+    [Function("Maintenance-DanglingUserEntityAssignments")]
     public async Task Run(
         [TimerTrigger(CronEveryDay)] 
         TimerInfo timer,

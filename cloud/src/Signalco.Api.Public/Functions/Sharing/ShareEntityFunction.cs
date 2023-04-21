@@ -6,11 +6,8 @@ using System.Net;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
@@ -40,15 +37,15 @@ public class ShareEntityFunction
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    [FunctionName("Share-Entity")]
+    [Function("Share-Entity")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation(nameof(ShareEntityFunction), "Sharing", Description = "Shared the entity with users.")]
+    [OpenApiOperation<ShareEntityFunction>("Sharing", Description = "Shared the entity with users.")]
     [OpenApiJsonRequestBody<ShareRequestDto>(Description = "Share one entity with one or more users.")]
     [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "share/entity")]
-        HttpRequest req,
+        HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest<ShareRequestDto>(cancellationToken, this.functionAuthenticator,
             async context =>

@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Signal.Core.Entities;
 
 namespace Signalco.Func.Internal.TimeEntityPublic;
@@ -19,7 +19,7 @@ public class PublicEntityTimeFunction
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
     }
 
-    [FunctionName("PublicEntity-Time")]
+    [Function("PublicEntity-Time")]
     public async Task Run(
         [TimerTrigger(CronEveryMinute)] TimerInfo timer,
         CancellationToken cancellationToken = default)

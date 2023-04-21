@@ -7,6 +7,8 @@ public static class SecretKeys
     public const string ProcessorAccessCode = "SignalcoProcessorAccessCode";
 
     public const string AppRemoteBrowserUrl = "SignalcoAppRemoteBrowserUrl";
+    
+    public const string SignalRConnectionString = "AzureSignalRConnectionString";
 
     public static class Auth0
     {

@@ -1,44 +1,47 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-using Microsoft.Azure.WebJobs.Extensions.SignalRService;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Azure.SignalR.Management;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
+using Signal.Api.Common.SignalR;
 
 namespace Signalco.Api.Public.Functions.SignalR;
 
 public class ConductsNegotiateFunction
 {
     private readonly IFunctionAuthenticator authenticator;
+    private readonly ISignalRHubContextProvider contextProvider;
 
     public ConductsNegotiateFunction(
-        IFunctionAuthenticator authenticator)
+        IFunctionAuthenticator authenticator,
+        ISignalRHubContextProvider contextProvider)
     {
         this.authenticator = authenticator ?? throw new ArgumentNullException(nameof(authenticator));
+        this.contextProvider = contextProvider ?? throw new ArgumentNullException(nameof(contextProvider));
     }
 
-    [FunctionName("SignalR-Conducts-Negotiate")]
+    [Function("SignalR-Conducts-Negotiate")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation(operationId: nameof(ConductsNegotiateFunction), tags: new[] { "SignalR" }, 
+    [OpenApiOperation<ConductsNegotiateFunction>("SignalR",
         Description = "Negotiates SignalR connection for conducts hub.")]
     [OpenApiOkJsonResponse(typeof(SignalRConnectionInfo), Description = "SignalR connection info.")]
-    public async Task<IActionResult> Negotiate(
+    public async Task<HttpResponseData> Negotiate(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "signalr/conducts/negotiate")]
-        HttpRequest req,
-        IBinder binder, CancellationToken cancellationToken = default) =>
-        // This style is an example of imperative attribute binding; the mechanism for declarative binding described below does not work
-        // UserId = "{headers.x-my-custom-header}" https://docs.microsoft.com/en-us/azure/azure-signalr/signalr-concept-serverless-development-config
-        // Source: https://charliedigital.com/2019/09/02/azure-functions-signalr-and-authorization/
-        await req.UserRequest(cancellationToken, this.authenticator, async context =>
-            await binder.BindAsync<SignalRConnectionInfo>(new SignalRConnectionInfoAttribute
+        HttpRequestData req,
+        CancellationToken cancellationToken = default)
+    {
+        return await req.UserRequest(cancellationToken, this.authenticator, async context =>
+        {
+            var hub = await this.contextProvider.GetAsync("conducts", cancellationToken);
+            var negotiateResult = await hub.NegotiateAsync(new NegotiationOptions
             {
-                HubName = "conducts",
                 UserId = context.User.UserId
-            }, cancellationToken));
+            }, cancellationToken);
+            return req.JsonResponseAsync(negotiateResult, cancellationToken: cancellationToken);
+        });
+    }
 }

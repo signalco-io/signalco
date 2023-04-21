@@ -1,9 +1,10 @@
 using System;
+using System.Linq;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Signal.Api.Common.Auth;
@@ -21,14 +22,15 @@ public static class JwtAuthenticatorExtensions
     /// <param name="cancellationToken">An optional cancellation token.</param>
     public static async Task<(ClaimsPrincipal User, SecurityToken ValidatedToken)> AuthenticateAsync(
         this IJwtAuthenticator @this,
-        HttpRequest request,
+        HttpRequestData request,
         CancellationToken cancellationToken = default)
     {
-        if (!request.Headers.ContainsKey("Authorization"))
+        if (!request.Headers.Contains("Authorization"))
             throw new InvalidOperationException("Authorization header is required.");
 
-        var authHeader = request.Headers["Authorization"];
-        var auth = AuthenticationHeaderValue.Parse(authHeader);
+        AuthenticationHeaderValue? auth = null;
+        if (request.Headers.TryGetValues("Authorization", out var authHeaders))
+            auth = AuthenticationHeaderValue.Parse(authHeaders.First());
         if (auth == null || !string.Equals(auth.Scheme, "Bearer", StringComparison.InvariantCultureIgnoreCase))
             throw new InvalidOperationException("Authentication header does not use Bearer token.");
         if (auth.Parameter == null)

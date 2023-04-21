@@ -4,10 +4,8 @@ using System.Net;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
@@ -29,14 +27,14 @@ public class EntityUpsertFunction
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
     }
 
-    [FunctionName("Entity-Upsert")]
+    [Function("Entity-Upsert")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<EntityUpsertFunction>("Entity", Description = "Creates or updates entity. Will create entity if Id is not provided.")]
     [OpenApiJsonRequestBody<EntityUpsertDto>]
     [OpenApiOkJsonResponse<EntityUpsertResponseDto>]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", "put", Route = "entity")]
-        HttpRequest req,
+        HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest<EntityUpsertDto, EntityUpsertResponseDto>(cancellationToken, this.functionAuthenticator, async context =>
         {
