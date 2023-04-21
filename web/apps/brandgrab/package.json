@@ -24,7 +24,7 @@
         "@signalco/ui-icons": "workspace:*",
         "cheerio": "1.0.0-rc.12",
         "classix": "2.1.30",
-        "next": "13.3.1-canary.11",
+        "next": "13.3.1-canary.17",
         "next-secure-headers": "2.2.0",
         "react": "18.2.0",
         "react-cool-inview": "3.0.1",
@@ -56,7 +56,7 @@
         "typescript": "5.0.4"
     },
     "optionalDependencies": {
-        "terser": "5.16.9"
+        "terser": "5.17.1"
     },
     "nextBundleAnalysis": {
         "budget": 358400,
