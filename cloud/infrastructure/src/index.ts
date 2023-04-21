@@ -144,8 +144,8 @@ export = async () => {
         const intFuncInsights = createWebAppAppInsights(resourceGroup, 'cint', internalFuncs[0].webApp);
 
         // Create internal apps
-        const registry = getContainerRegistry(resourceGroupSharedName, containerRegistryName);
-        const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, false);
+        // const registry = getContainerRegistry(resourceGroupSharedName, containerRegistryName);
+        // const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, false);
 
         // Create general storage and prepare tables
         const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
@@ -163,7 +163,7 @@ export = async () => {
         vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--SigningSecret', config.requireSecret('secret-slackSigningSecret'));
         vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientId', config.require('secret-slackClientId'));
         vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientSecret', config.requireSecret('secret-slackClientSecret'));
-        vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoAppRemoteBrowserUrl', appRb.app.url);
+        // vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoAppRemoteBrowserUrl', appRb.app.url);
 
         const sharedEnvVariables = {
             'SignalcoKeyVaultUrl': interpolate`${vault.keyVault.properties.vaultUri}`,
@@ -283,7 +283,7 @@ export = async () => {
             publicUrls: publicFuncs.map(c => c.dnsCname.hostname),
             channelsUrls: channelsFuncs.map(c => c.dnsCname.hostname),
             appUrls: [
-                appRb.app.url,
+                // appRb.app.url,
             ],
             discreteUrls: discreteFuncs.map(f => f.webApp.hostNames[0]),
         };
