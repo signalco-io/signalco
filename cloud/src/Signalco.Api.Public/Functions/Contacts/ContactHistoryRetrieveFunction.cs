@@ -6,10 +6,8 @@ using System.Net;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
@@ -37,15 +35,15 @@ public class ContactHistoryRetrieveFunction
         this.storageDao = storage ?? throw new ArgumentNullException(nameof(storage));
     }
 
-    [FunctionName("Contact-HistoryRetrieve")]
+    [Function("Contact-HistoryRetrieve")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ContactHistoryRetrieveFunction>("Contact", Description = "Retrieves the contact history for provided duration.")]
     [OpenApiOkJsonResponse<ContactHistoryResponseDto>]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "contact/history")]
         ContactHistoryRequestDto payload,
-        HttpRequest req,
+        HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest(cancellationToken, this.functionAuthenticator, async context =>
         {

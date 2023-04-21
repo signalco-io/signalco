@@ -1,18 +1,18 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Core.Auth;
 
 namespace Signal.Api.Common.Auth;
 
 public interface IFunctionAuthenticator
 {
-    Task<IUserAuth> AuthenticateAsync(HttpRequest request, CancellationToken cancellationToken = default);
+    Task<IUserAuth> AuthenticateAsync(HttpRequestData request, CancellationToken cancellationToken = default);
 
     Task<IUserRefreshToken> RefreshTokenAsync(
-        HttpRequest request,
+        HttpRequestData request,
         string refreshToken,
         CancellationToken cancellationToken = default);
 
-    Task<bool> AuthenticateSystemAsync(HttpRequest req, CancellationToken cancellationToken = default);
+    Task<bool> AuthenticateSystemAsync(HttpRequestData req, CancellationToken cancellationToken = default);
 }

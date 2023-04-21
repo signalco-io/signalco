@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.HCaptcha;
@@ -34,14 +31,14 @@ public class NewsletterFunction
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    [FunctionName("Website-Newsletter")]
-    [OpenApiOperation(nameof(NewsletterFunction), "Website", Description = "Subscribe to a newsletter.")]
+    [Function("Website-Newsletter")]
+    [OpenApiOperation<NewsletterFunction>("Website", Description = "Subscribe to a newsletter.")]
     [OpenApiHeader(HCaptchaHttpRequestExtensions.HCaptchaHeaderKey, Description = "hCaptcha response.")]
     [OpenApiJsonRequestBody<NewsletterSubscribeDto>(Description = "Subscribe with email address.")]
-    [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
+    [OpenApiResponseWithoutBody]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "website/newsletter-subscribe")] HttpRequest req,
+    public async Task<HttpResponseData> Run(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "website/newsletter-subscribe")] HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.AnonymousRequest(async () =>
         {
@@ -63,7 +60,7 @@ public class NewsletterFunction
             {
                 this.logger.LogError(ex, "Failed to subscribe to newsletter with email: {Email}", data.Email);
             }
-        });
+        }, cancellationToken: cancellationToken);
 
     [Serializable]
     private class NewsletterSubscribeDto

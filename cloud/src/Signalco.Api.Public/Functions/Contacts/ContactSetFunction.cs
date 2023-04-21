@@ -2,11 +2,8 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Contact;
 using Signal.Api.Common.Exceptions;
@@ -35,15 +32,15 @@ public class ContactSetFunction
         this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
     }
 
-    [FunctionName("Contact-Set")]
+    [Function("Contact-Set")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ContactSetFunction>("Contact", Description = "Sets contact value.")]
     [OpenApiJsonRequestBody<ContactSetDto>]
     [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "contact/set")]
-        HttpRequest req,
+        HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest<ContactSetDto>(cancellationToken, this.functionAuthenticator, async context =>
         {

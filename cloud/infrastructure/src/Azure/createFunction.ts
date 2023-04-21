@@ -22,7 +22,7 @@ export function createFunction (
     const app = new WebApp(`func-${namePrefix}`, {
         resourceGroupName: resourceGroup.name,
         serverFarmId: plan.id,
-        kind: 'functionapp',
+        kind: 'functionapp,linux',
         containerSize: 1536,
         dailyMemoryTimeQuota: 500000,
         httpsOnly: !isPublic, // Internal functions are HTTPS only
@@ -31,6 +31,7 @@ export function createFunction (
         },
         keyVaultReferenceIdentity: 'SystemAssigned',
         siteConfig: {
+            linuxFxVersion: 'DOTNET-ISOLATED|7.0',
             http20Enabled: true,
             minTlsVersion: SupportedTlsVersions.SupportedTlsVersions_1_2,
             functionAppScaleLimit: 200,
