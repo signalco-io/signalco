@@ -52,10 +52,10 @@ public class StationLoggingDownloadFunction
         CancellationToken cancellationToken = default) =>
         await req.UserRequest(cancellationToken, this.functionAuthenticator, async context =>
         {
-            string stationId = req.Query["stationId"];
+            var stationId = req.Query["stationId"];
             if (string.IsNullOrWhiteSpace(stationId))
                 throw new ExpectedHttpException(HttpStatusCode.BadRequest, "stationId is required");
-            string blobName = req.Query["blobName"];
+            var blobName = req.Query["blobName"];
             if (string.IsNullOrWhiteSpace(blobName))
                 throw new ExpectedHttpException(HttpStatusCode.BadRequest, "blobName is required");
 
@@ -64,7 +64,7 @@ public class StationLoggingDownloadFunction
                 stationId);
 
             var stream = await this.azureStorageDao.LoggingDownloadAsync(blobName, cancellationToken);
-            var content = Encoding.UTF8.GetBytes(await new StreamReader(stream).ReadToEndAsync());
+            var content = Encoding.UTF8.GetBytes(await new StreamReader(stream).ReadToEndAsync(cancellationToken));
 
             return new FileContentResult(content, "text/plain");
         });

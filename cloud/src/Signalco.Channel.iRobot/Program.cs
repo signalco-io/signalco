@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Hosting;
-using Signal.Core;
+using Signalco.Common.Channel;
 
 new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
     .ConfigureServices(serviceCollection => serviceCollection
-            .AddCore())
+        .AddChannel())
     .Build()
     .Run();

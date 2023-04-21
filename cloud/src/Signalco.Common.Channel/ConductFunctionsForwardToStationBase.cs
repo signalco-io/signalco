@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;

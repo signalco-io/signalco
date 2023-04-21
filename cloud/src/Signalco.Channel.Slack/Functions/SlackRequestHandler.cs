@@ -1,5 +1,7 @@
+
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
@@ -28,8 +30,8 @@ internal class SlackRequestHandler : ISlackRequestHandler
 
     public async Task VerifyFromSlack(HttpRequestData req, CancellationToken cancellationToken = default)
     {
-        var signature = req.Headers["X-Slack-Signature"];
-        var timeStamp = req.Headers["X-Slack-Request-Timestamp"];
+        var signature = req.Headers.GetValues("X-Slack-Signature").First();
+        var timeStamp = req.Headers.GetValues("X-Slack-Request-Timestamp").First();
         var signingSecret = await this.secrets.GetSecretAsync(SlackSecretKeys.SigningSecret, cancellationToken);
         var content = await req.ReadAsStringAsync();
 
