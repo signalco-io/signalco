@@ -10,8 +10,8 @@ export function createFunction (
     cors?: Input<string>[]) {
     const plan = new AppServicePlan(`func-appplan-${namePrefix}`, {
         resourceGroupName: resourceGroup.name,
-        kind: 'linux',
-        reserved: true,
+        // kind: 'linux',
+        // reserved: true,
         sku: {
             name: 'Y1',
             tier: 'Dynamic',
@@ -24,7 +24,8 @@ export function createFunction (
     const app = new WebApp(`func-${namePrefix}`, {
         resourceGroupName: resourceGroup.name,
         serverFarmId: plan.id,
-        kind: 'functionapp,linux',
+        // kind: 'functionapp,linux',
+        kind: 'functionapp',
         containerSize: 1536,
         dailyMemoryTimeQuota: 500000,
         httpsOnly: !isPublic, // Internal functions are HTTPS only
@@ -33,7 +34,7 @@ export function createFunction (
         },
         keyVaultReferenceIdentity: 'SystemAssigned',
         siteConfig: {
-            linuxFxVersion: 'DOTNET-ISOLATED|7.0',
+            // linuxFxVersion: 'DOTNET-ISOLATED|7.0',
             http20Enabled: true,
             minTlsVersion: SupportedTlsVersions.SupportedTlsVersions_1_2,
             functionAppScaleLimit: 200,
