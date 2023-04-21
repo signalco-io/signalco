@@ -285,6 +285,7 @@ export = async () => {
             appUrls: [
                 appRb.app.url,
             ],
+            discreteUrls: discreteFuncs.map(f => f.webApp.hostNames[0]),
         };
     }
 };
