@@ -54,7 +54,6 @@ public class SlackEventFunction
                 // TODO: Retrieve channel entity with slack-team contact that matches EntityId-slack-team.id
                 // TODO: Update channel message contact
                 return req.CreateResponse(HttpStatusCode.BadRequest);
-                break;
             default:
                 this.logger.LogWarning("Unknown event request type {Type}", eventReq.Type);
                 return req.CreateResponse(HttpStatusCode.BadRequest);
