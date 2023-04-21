@@ -15,5 +15,5 @@ public class HealthFunctions : HealthStatusFunctionsBase
     [OpenApiResponseWithoutBody]
     public Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "status")]
-        HttpRequestData req) => this.HandleAsync();
+        HttpRequestData req) => this.HandleAsync(req);
 }

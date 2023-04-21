@@ -1,12 +1,12 @@
 ﻿using System.Net;
 using System.Text.Json;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Core.Conducts;
 using Signal.Core.Entities;
 using Signal.Core.Exceptions;
 using Signal.Core.Extensions;
+using Signal.Core.Notifications;
 using Signal.Core.Storage;
 
 namespace Signalco.Common.Channel;
@@ -15,21 +15,23 @@ public abstract class ConductMultipleFunctionsForwardToStationBase : ConductMult
 {
     private readonly IEntityService entityService;
     private readonly IAzureStorageDao storageDao;
+    private readonly ISignalRService signalRService;
 
     protected ConductMultipleFunctionsForwardToStationBase(
         IEntityService entityService,
         IAzureStorageDao storageDao,
         IFunctionAuthenticator authenticator,
-        IAzureStorage storage) 
+        IAzureStorage storage,
+        ISignalRService signalRService) 
         : base(authenticator, storage)
     {
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
         this.storageDao = storageDao ?? throw new ArgumentNullException(nameof(storageDao));
+        this.signalRService = signalRService ?? throw new ArgumentNullException(nameof(signalRService));
     }
 
     protected async Task<HttpResponseData> HandleAsync(
         HttpRequestData req,
-        IAsyncCollector<SignalRMessage> signalRMessages,
         CancellationToken cancellationToken = default)
     {
         var usersConducts = new Dictionary<string, ICollection<ConductRequestDto>>();
@@ -54,13 +56,12 @@ public abstract class ConductMultipleFunctionsForwardToStationBase : ConductMult
             foreach (var userId in usersConducts.Keys)
             {
                 var conducts = usersConducts[userId];
-                await signalRMessages.AddAsync(
-                    new SignalRMessage
-                    {
-                        Target = "requested-multiple",
-                        Arguments = new object[] { JsonSerializer.Serialize(conducts) },
-                        UserId = userId
-                    }, cancellationToken);
+                await this.signalRService.SendToUsersAsync(
+                    new[] {userId},
+                    "conducts",
+                    "requested-multiple",
+                    new object[] {JsonSerializer.Serialize(conducts)},
+                    cancellationToken);
             }
         }, cancellationToken);
     }

@@ -9,6 +9,7 @@ using Signal.Api.Common.Auth;
 using Signal.Api.Common.OpenApi;
 using Signal.Core.Conducts;
 using Signal.Core.Entities;
+using Signal.Core.Notifications;
 using Signal.Core.Storage;
 using Signalco.Common.Channel;
 
@@ -20,8 +21,9 @@ public class ConductMultipleFunctions : ConductMultipleFunctionsForwardToStation
         IEntityService entityService, 
         IAzureStorageDao storageDao, 
         IAzureStorage storage,
-        IFunctionAuthenticator authenticator) 
-        : base(entityService, storageDao, authenticator, storage)
+        IFunctionAuthenticator authenticator,
+        ISignalRService signalRService) 
+        : base(entityService, storageDao, authenticator, storage, signalRService)
     {
     }
 
@@ -36,7 +38,6 @@ public class ConductMultipleFunctions : ConductMultipleFunctionsForwardToStation
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "conducts/request-multiple")]
         HttpRequestData req,
-        [SignalR(HubName = "conducts")] IAsyncCollector<SignalRMessage> signalRMessages,
         CancellationToken cancellationToken = default) =>
-        await this.HandleAsync(req, signalRMessages, cancellationToken);
+        await this.HandleAsync(req, cancellationToken);
 }

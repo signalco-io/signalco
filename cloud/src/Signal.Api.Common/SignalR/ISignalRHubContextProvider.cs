@@ -4,7 +4,7 @@ using Microsoft.Azure.SignalR.Management;
 
 namespace Signal.Api.Common.SignalR;
 
-internal interface ISignalRHubContextProvider
+public interface ISignalRHubContextProvider
 {
     Task<ServiceHubContext> GetAsync(string hubName, CancellationToken cancellationToken = default);
 }
