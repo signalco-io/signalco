@@ -30,7 +30,7 @@ async function fetchWithRetry(url, options, retryCount = 10) {
         }
     }
     
-    console.warn('Failed to fetch', url, err);
+    console.warn('Failed to fetch', url, error);
     throw error;
 }
 
