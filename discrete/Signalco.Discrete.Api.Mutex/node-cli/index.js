@@ -14,7 +14,7 @@ async function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function fetchWithRetry(url, options, retryCount = 3) {
+async function fetchWithRetry(url, options, retryCount = 10) {
     let response;
     let error;
     for (let i = 0; i <= retryCount; i++) {
@@ -25,11 +25,12 @@ async function fetchWithRetry(url, options, retryCount = 3) {
             return response;
         } catch (err) {
             error = err;
-            console.warn('Failed to fetch', url, err, `(retry ${i}/${retryCount})`);
+            console.warn(`Failed to fetch (retry ${i}/${retryCount}). Url: ${url}`);
             await delay(1000);
         }
     }
     
+    console.warn('Failed to fetch', url, err);
     throw error;
 }
 
