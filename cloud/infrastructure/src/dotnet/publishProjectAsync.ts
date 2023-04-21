@@ -7,6 +7,6 @@ export default async function publishProjectAsync (codePath: string, dotnet: 7 =
     });
 
     return {
-        releaseDir: `${codePath}/bin/Release/net${dotnet}.0/publish/`,
+        releaseDir: `${codePath}/bin/Release/net${dotnet}.0/linux-x64/publish/`,
     };
 }
