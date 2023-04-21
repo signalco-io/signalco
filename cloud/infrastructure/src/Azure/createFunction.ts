@@ -10,6 +10,8 @@ export function createFunction (
     cors?: Input<string>[]) {
     const plan = new AppServicePlan(`func-appplan-${namePrefix}`, {
         resourceGroupName: resourceGroup.name,
+        kind: 'linux',
+        reserved: true,
         sku: {
             name: 'Y1',
             tier: 'Dynamic',
