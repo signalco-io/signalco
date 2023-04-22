@@ -286,6 +286,13 @@ export = async () => {
                 // appRb.app.url,
             ],
             discreteUrls: discreteFuncs.map(f => f.webApp.hostNames[0]),
+            resourceGroupName: resourceGroup.name,
+            functionApps: [
+                ...internalFuncs.map(c => c.webApp.name),
+                ...publicFuncs.map(c => c.webApp.name),
+                ...channelsFuncs.map(c => c.webApp.name),
+                ...discreteFuncs.map(c => c.webApp.name),
+            ]
         };
     }
 };

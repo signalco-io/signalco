@@ -4,7 +4,8 @@
     "license": "../LICENSE",
     "main": "src/index.ts",
     "scripts": {
-        "lint": "eslint ./src/**/*.ts"
+        "lint": "eslint ./src/**/*.ts",
+        "restart-functions": "node tools/restart-functions.js"
     },
     "devDependencies": {
         "@types/node": "18.15.13",
