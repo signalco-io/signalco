@@ -1,6 +1,4 @@
-const { exec } = require('node:child_process')
-
-console.log('hello from restart-functions.js');
+import { exec } from 'node:child_process';
 
 exec('pulumi stack output --json', (err, stdout, stderr) => {
     if (err) {
@@ -22,4 +20,3 @@ exec('pulumi stack output --json', (err, stdout, stderr) => {
         });
     }
 });
-
