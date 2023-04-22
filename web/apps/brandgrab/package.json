@@ -49,7 +49,7 @@
         "@types/react-motion": "0.0.33",
         "@types/sharp": "0.31.1",
         "cross-env": "7.0.3",
-        "eslint": "8.38.0",
+        "eslint": "8.39.0",
         "next-sitemap": "4.0.7",
         "postcss": "8.4.23",
         "playwright": "1.32.3",
