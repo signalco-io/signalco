@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Connections;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.SignalR.Management;
@@ -41,7 +42,7 @@ public class ConductsNegotiateFunction
             {
                 UserId = context.User.UserId
             }, cancellationToken);
-            return req.JsonResponseAsync(negotiateResult, cancellationToken: cancellationToken);
+            return NegotiateResultMapper.NegotiateResultToJsonAsync(req, negotiateResult, cancellationToken);
         });
     }
 }
