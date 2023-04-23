@@ -42,7 +42,7 @@ public class ConductsNegotiateFunction
             {
                 UserId = context.User.UserId
             }, cancellationToken);
-            return NegotiateResultMapper.NegotiateResultToJsonAsync(req, negotiateResult, cancellationToken);
+            return req.JsonResponse(negotiateResult);
         });
     }
 }

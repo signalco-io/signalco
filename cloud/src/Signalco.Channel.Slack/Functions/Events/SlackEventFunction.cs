@@ -44,10 +44,10 @@ public class SlackEventFunction
         {
             case "url_verification":
                 var verifyRequest = await req.ReadAsJsonAsync<EventUrlVerificationRequestDto>();
-                return await req.JsonResponseAsync(new
+                return req.JsonResponse(new
                 {
                     challenge = verifyRequest.Challenge
-                }, cancellationToken: cancellationToken);
+                });
             case "event_callback":
                 // var content = await req.ReadAsStringAsync();
                 // var target = JsonSerializer.Deserialize<EventMessageChannelsRequestDto>(content);

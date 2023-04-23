@@ -1,4 +1,4 @@
-import { exec } from 'node:child_process';
+const { exec } = require('node:child_process');
 
 exec('pulumi stack output --json', (err, stdout, stderr) => {
     if (err) {
