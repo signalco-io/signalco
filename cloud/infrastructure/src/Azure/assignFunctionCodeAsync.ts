@@ -11,12 +11,12 @@ export async function assignFunctionCodeAsync(
     namePrefix: string,
     codePath: string,
     dependsOn?: Input<Resource> | Input<Input<Resource>[]> | undefined) {
-    const hash = await hashElement(codePath);
+    const hash = encodeURIComponent((await hashElement(codePath)).hash);
     const archive = new asset.FileArchive(codePath);
 
     // Upload Azure Function's code as a zip archive to the storage account.
     const codeBlob = new Blob(`zip-${namePrefix}`, {
-        blobName: `zip-${namePrefix}-${hash.hash}.zip`,
+        blobName: `zip-${namePrefix}-${hash}.zip`,
         resourceGroupName: resourceGroup.name,
         accountName: storageAccount.name,
         containerName: zipsContainer.name,
