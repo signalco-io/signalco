@@ -41,7 +41,7 @@ public class ContactsNegotiateFunction
             {
                 UserId = context.User.UserId
             }, cancellationToken);
-            return req.JsonResponseAsync(negotiateResult, cancellationToken: cancellationToken);
+            return req.JsonResponse(negotiateResult);
         });
     }
 }

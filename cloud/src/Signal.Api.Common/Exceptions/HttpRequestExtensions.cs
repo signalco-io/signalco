@@ -54,21 +54,20 @@ public static class HttpRequestExtensions
         }
         catch (ExpectedHttpException ex)
         {
-            return await ExceptionResponseAsync(req, ex, cancellationToken);
+            return ExceptionResponse(req, ex);
         }
     }
 
-    public static async Task<HttpResponseData> JsonResponseAsync<TPayload>(
+    public static HttpResponseData JsonResponse<TPayload>(
         this HttpRequestData req,
         TPayload payload,
-        HttpStatusCode statusCode = HttpStatusCode.OK,
-        CancellationToken cancellationToken = default)
+        HttpStatusCode statusCode = HttpStatusCode.OK)
     {
         var resp = req.CreateResponse();
-        await resp.WriteAsJsonAsync(
-            payload,
-            statusCode,
-            cancellationToken: cancellationToken);
+        // ReSharper disable once MethodHasAsyncOverloadWithCancellation
+        resp.WriteString(Newtonsoft.Json.JsonConvert.SerializeObject(payload));
+        resp.Headers.Add("Content-Type", "application/json");
+        resp.StatusCode = statusCode;
         return resp;
     }
 
@@ -76,10 +75,8 @@ public static class HttpRequestExtensions
         this HttpRequestData req,
         CancellationToken cancellationToken,
         Func<AnonymousRequestContextWithPayload<TPayload>, Task<TResponse>> executionBody) =>
-        AnonymousRequest<TPayload>(req, async context => 
-            await req.JsonResponseAsync(
-                await executionBody(context), 
-                cancellationToken: cancellationToken), 
+        AnonymousRequest<TPayload>(req, async context =>
+                req.JsonResponse(await executionBody(context)),
             cancellationToken);
 
     private static async Task<HttpResponseData> AnonymousRequest<TPayload>(
@@ -98,16 +95,14 @@ public static class HttpRequestExtensions
         }
         catch (ExpectedHttpException ex)
         {
-            return await ExceptionResponseAsync(req, ex, cancellationToken);
+            return ExceptionResponse(req, ex);
         }
     }
 
-    private static async Task<HttpResponseData> ExceptionResponseAsync(HttpRequestData req, ExpectedHttpException ex,
-        CancellationToken cancellationToken) =>
-        await req.JsonResponseAsync(
+    private static HttpResponseData ExceptionResponse(HttpRequestData req, ExpectedHttpException ex) =>
+        req.JsonResponse(
             new ApiErrorDto(ex.Code.ToString(), ex.Message),
-            ex.Code,
-            cancellationToken);
+            ex.Code);
 
     public static async Task<HttpResponseData> UserRequest<TResponse>(
         this HttpRequestData req,
@@ -118,11 +113,11 @@ public static class HttpRequestExtensions
         try
         {
             var user = await authenticator.AuthenticateAsync(req, cancellationToken);
-            return await req.JsonResponseAsync(await executionBody(new UserRequestContext(user, cancellationToken)), cancellationToken: cancellationToken);
+            return req.JsonResponse(await executionBody(new UserRequestContext(user, cancellationToken)));
         }
         catch (ExpectedHttpException ex)
         {
-            return await ExceptionResponseAsync(req, ex, cancellationToken);
+            return ExceptionResponse(req, ex);
         }
     }
 
@@ -154,7 +149,7 @@ public static class HttpRequestExtensions
         IFunctionAuthenticator authenticator,
         Func<UserRequestContextWithPayload<TPayload>, Task<TResponse>> executionBody) =>
         UserRequest<TPayload>(req, authenticator, async context => 
-            await req.JsonResponseAsync(await executionBody(context), cancellationToken: cancellationToken), cancellationToken);
+            req.JsonResponse(await executionBody(context)), cancellationToken);
 
     private static async Task<HttpResponseData> UserOrSystemRequest<TPayload>(
         this HttpRequestData req,
@@ -182,7 +177,7 @@ public static class HttpRequestExtensions
         }
         catch (ExpectedHttpException ex)
         {
-            return await ExceptionResponseAsync(req, ex, cancellationToken);
+            return ExceptionResponse(req, ex);
         }
     }
 
@@ -205,7 +200,7 @@ public static class HttpRequestExtensions
         }
         catch (ExpectedHttpException ex)
         {
-            return await ExceptionResponseAsync(req, ex, cancellationToken);
+            return ExceptionResponse(req, ex);
         }
     }
 }
