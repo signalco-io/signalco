@@ -6,7 +6,7 @@ import { createKeyVault } from './Azure/createKeyVault';
 import createPublicFunction from './Azure/createPublicFunction';
 import { webAppIdentity } from './Azure/webAppIdentity';
 import vaultSecret from './Azure/vaultSecret';
-import { assignFunctionCode } from './Azure/assignFunctionCode';
+import { assignFunctionCodeAsync } from './Azure/assignFunctionCodeAsync';
 import { assignFunctionSettings } from './Azure/assignFunctionSettings';
 import createWebAppAppInsights from './Azure/createWebAppAppInsights';
 import createAppInsights from './Azure/createAppInsights';
@@ -77,7 +77,7 @@ export = async () => {
                 api.cors,
                 false);
             const apiFuncPublish = await publishProjectAsync(['../src/Signalco.Api.Public', api.name].filter(i => i.length).join('.'));
-            const apiFuncCode = assignFunctionCode(
+            const apiFuncCode = await assignFunctionCodeAsync(
                 resourceGroup,
                 funcStorage.storageAccount.storageAccount,
                 funcStorage.zipsContainer,
@@ -123,7 +123,7 @@ export = async () => {
                 undefined,
                 false);
             const funcPublish = await publishProjectAsync(`../../discrete/Signalco.Discrete.Api.${funcName}/cloud`, 7);
-            const funcCode = assignFunctionCode(
+            const funcCode = await assignFunctionCodeAsync(
                 discreteResourceGroup,
                 discreteStorage.storageAccount.storageAccount,
                 discreteStorage.zipsContainer,

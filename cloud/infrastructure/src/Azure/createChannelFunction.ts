@@ -1,6 +1,6 @@
 import { type ResourceGroup } from '@pulumi/azure-native/resources';
 import createPublicFunction from './createPublicFunction';
-import { assignFunctionCode } from './assignFunctionCode';
+import { assignFunctionCodeAsync } from './assignFunctionCodeAsync';
 import apiStatusCheck from '../Checkly/apiStatusCheck';
 import publishProjectAsync from '../dotnet/publishProjectAsync';
 import { ConfChannelApiCheckInterval } from '../config';
@@ -29,7 +29,7 @@ export default async function createChannelFunctionAsync (
     const codePath = `../src/Signalco.Channel.${channelName}`;
     const publishResult = await publishProjectAsync(codePath);
 
-    const channelFuncCode = assignFunctionCode(
+    const channelFuncCode = await assignFunctionCodeAsync(
         resourceGroup,
         storageAccount,
         zipsContainer,
