@@ -65,7 +65,7 @@ public static class HttpRequestExtensions
     {
         var resp = req.CreateResponse();
         // ReSharper disable once MethodHasAsyncOverloadWithCancellation
-        resp.WriteString(JsonSerializer.Serialize(payload));
+        resp.WriteString(Newtonsoft.Json.JsonConvert.SerializeObject(payload));
         resp.Headers.Add("Content-Type", "application/json");
         resp.StatusCode = statusCode;
         return resp;
