@@ -41,7 +41,11 @@ public class ContactsNegotiateFunction
             {
                 UserId = context.User.UserId
             }, cancellationToken);
-            return negotiateResult;
+            return new
+            {
+                url = negotiateResult.Url,
+                accessToken = negotiateResult.AccessToken,
+            };
         });
     }
 }

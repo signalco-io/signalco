@@ -39,9 +39,13 @@ public class ConductsNegotiateFunction
             var hub = await this.contextProvider.GetAsync("conducts", cancellationToken);
             var negotiateResult = await hub.NegotiateAsync(new NegotiationOptions
             {
-                UserId = context.User.UserId
+                UserId = context.User.UserId,
             }, cancellationToken);
-            return negotiateResult;
+            return new
+            {
+                url = negotiateResult.Url,
+                accessToken = negotiateResult.AccessToken,
+            };
         });
     }
 }
