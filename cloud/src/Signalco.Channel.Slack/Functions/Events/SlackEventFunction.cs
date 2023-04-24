@@ -31,7 +31,7 @@ public class SlackEventFunction
     [Function("Slack-Event")]
     [OpenApiOperation<SlackEventFunction>( "Slack", "Event", Description = "Handles the slack event (slack > signalco web-hook call).")]
     [OpenApiJsonRequestBody<EventRequestDto>(Description = "Base model that provides content type information.")]
-    [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
+    [OpenApiResponseWithoutBody]
     [OpenApiResponseBadRequestValidation]
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "hooks/event")] HttpRequestData req,
@@ -44,10 +44,10 @@ public class SlackEventFunction
         {
             case "url_verification":
                 var verifyRequest = await req.ReadAsJsonAsync<EventUrlVerificationRequestDto>();
-                return req.JsonResponse(new
+                return await req.JsonResponseAsync(new
                 {
                     challenge = verifyRequest.Challenge
-                });
+                }, cancellationToken: cancellationToken);
             case "event_callback":
                 // var content = await req.ReadAsStringAsync();
                 // var target = JsonSerializer.Deserialize<EventMessageChannelsRequestDto>(content);

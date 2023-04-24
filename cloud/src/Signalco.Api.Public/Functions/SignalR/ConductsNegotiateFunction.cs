@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Connections;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.SignalR.Management;
@@ -40,9 +39,13 @@ public class ConductsNegotiateFunction
             var hub = await this.contextProvider.GetAsync("conducts", cancellationToken);
             var negotiateResult = await hub.NegotiateAsync(new NegotiationOptions
             {
-                UserId = context.User.UserId
+                UserId = context.User.UserId,
             }, cancellationToken);
-            return req.JsonResponse(negotiateResult);
+            return new
+            {
+                url = negotiateResult.Url,
+                accessToken = negotiateResult.AccessToken,
+            };
         });
     }
 }
