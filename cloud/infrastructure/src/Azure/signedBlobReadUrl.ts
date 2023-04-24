@@ -7,14 +7,13 @@ export function signedBlobReadUrl (
     container: BlobContainer,
     account: StorageAccount,
     resourceGroup: ResourceGroup): Output<string> {
-    const sasStartDateString = '2022-03-28';
     const sasEndDateString = '2030-03-28';
 
     const blobSAS = listStorageAccountServiceSASOutput({
         accountName: account.name,
         protocols: HttpProtocol.Https,
         sharedAccessExpiryTime: sasEndDateString,
-        sharedAccessStartTime: sasStartDateString,
+        sharedAccessStartTime: new Date().toISOString().split('T')[0],
         resourceGroupName: resourceGroup.name,
         resource: SignedResource.C,
         permissions: Permissions.R,
