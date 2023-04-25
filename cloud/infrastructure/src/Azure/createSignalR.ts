@@ -18,6 +18,13 @@ export function createSignalR (resourceGroup: ResourceGroup, namePrefix: string,
                 : ['*'],
         },
         kind: 'SignalR',
+        features: [
+            {
+                flag: 'ServiceMode',
+                properties: {},
+                value: 'Serverless',
+            },
+        ],
         networkACLs: {
             defaultAction: 'Deny',
             publicNetwork: {
