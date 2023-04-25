@@ -27,7 +27,6 @@ export const metadata = {
         { media: '(prefers-color-scheme: dark)', color: 'black' },
         { color: 'black' },
     ],
-    manifest: '/manifest.json',
     icons: {
         apple: '/apple-touch-icon.png',
         icon: [
