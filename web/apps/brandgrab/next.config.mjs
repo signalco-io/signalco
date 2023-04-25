@@ -11,6 +11,7 @@ const withBundleAnalyzer = nextBundleAnalyzer({
 const nextConfig = {
     reactStrictMode: true,
     experimental: { appDir: true },
+    outputFileTracing: true,
     images: {
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
