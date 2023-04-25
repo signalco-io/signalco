@@ -24,12 +24,9 @@
         "@signalco/ui-icons": "workspace:*",
         "cheerio": "1.0.0-rc.12",
         "classix": "2.1.30",
-        "extract-colors": "3.0.0",
-        "get-pixels": "3.3.3",
         "next": "13.3.1",
         "next-secure-headers": "2.2.0",
         "react": "18.2.0",
-        "react-cool-inview": "3.0.1",
         "react-dom": "18.2.0",
         "react-transition-group": "4.4.5",
         "sharp": "0.32.0"
@@ -42,7 +39,6 @@
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/color": "3.0.3",
-        "@types/get-pixels": "3.3.2",
         "@types/node": "18.15.13",
         "@types/react": "18.2.0",
         "@types/react-dom": "18.2.0",
@@ -51,15 +47,12 @@
         "cross-env": "7.0.3",
         "eslint": "8.39.0",
         "next-sitemap": "4.0.7",
-        "postcss": "8.4.23",
         "playwright": "1.32.3",
+        "postcss": "8.4.22",
         "prop-types": "15.8.1",
         "rimraf": "5.0.0",
         "sass": "1.62.0",
         "typescript": "5.0.4"
-    },
-    "optionalDependencies": {
-        "terser": "5.17.1"
     },
     "nextBundleAnalysis": {
         "budget": 358400,
