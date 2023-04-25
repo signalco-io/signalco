@@ -15,7 +15,9 @@ jobs:
               uses: actions/checkout@v3
             - name: Enable auto-merge for known users
               if: github.event.pull_request.user.login == 'AleksandarDev'
-              run: gh pr merge --merge --auto "${{ github.event.pull_request.number }}"
+              run: |
+                gh pr merge --merge --auto "${{ github.event.pull_request.number }}"
+                gh pr comment "${{ github.event.pull_request.number }}" "Auto-merge enabled for known user."
               env:
                 GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               
