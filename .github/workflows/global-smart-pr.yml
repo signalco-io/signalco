@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: "[Global] SPR"
+
+on:
+    pull_request:
+        branches: [main, next]
+        types: [opened, synchronize, reopened]
+
+jobs:
+    enable_auto_merge_for_known_users:
+        name: "[Global] Enable auto-merge for known users"
+        runs-on: ubuntu-latest
+        steps:
+            - name: Enable auto-merge for known users
+              if: github.event.pull_request.user.login == 'aleksandar.toplek@gmail.com'
+              run: gh pr merge --merge --auto "${{ github.event.pull_request.number }}"
+              env:
+                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              
