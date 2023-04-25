@@ -17,19 +17,21 @@ namespace Signalco.Api.Public.RemoteBrowser;
 public class ScreenshotFunction
 {
     private readonly ISecretsProvider secretsProvider;
+    private readonly ILogger<ScreenshotFunction> logger;
     private readonly HttpClient httpClient = new();
 
     public ScreenshotFunction(
-        ISecretsProvider secretsProvider)
+        ISecretsProvider secretsProvider,
+        ILogger<ScreenshotFunction> logger)
     {
         this.secretsProvider = secretsProvider ?? throw new ArgumentNullException(nameof(secretsProvider));
+        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     [Function("Screenshot")]
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", "get", Route = "screenshot")]
         HttpRequestData req,
-        ILogger logger,
         CancellationToken cancellationToken = default)
     {
         var startTimeStamp = DateTime.UtcNow;
@@ -60,7 +62,7 @@ public class ScreenshotFunction
         if (await this.RetrieveCachedAsync(request, cancellationToken) is { } cachedResult)
             return ScreenshotResultToActionResult(req, cachedResult);
 
-        var result = await this.MakeScreenshotAsync(startTimeStamp, request, logger, cancellationToken);
+        var result = await this.MakeScreenshotAsync(startTimeStamp, request, cancellationToken);
 
         // TODO: Make image thumbnail
         // TODO: Persist request and thumbnail (show to user on UI)
@@ -89,7 +91,6 @@ public class ScreenshotFunction
     private async Task<ScreenshotResult> MakeScreenshotAsync(
         DateTime startTimeStamp, 
         ScreenshotRequest request,
-        ILogger logger, 
         CancellationToken cancellationToken = default)
     {
         try
@@ -132,7 +133,7 @@ public class ScreenshotFunction
         }
         catch(Exception ex)
         {
-            logger.LogError(ex, "Failed to make screenshot");
+            this.logger.LogError(ex, "Failed to make screenshot");
             return new ScreenshotResult(
                 startTimeStamp, DateTime.UtcNow, request, null, null);
         }

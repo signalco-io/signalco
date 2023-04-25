@@ -17,24 +17,26 @@ namespace Signalco.Func.Internal.UsageProcessor;
 public class UsageProcessTrigger
 {
     private readonly IEntityService entityService;
+    private readonly ILogger<UsageProcessTrigger> logger;
 
     public UsageProcessTrigger(
-        IEntityService entityService)
+        IEntityService entityService,
+        ILogger<UsageProcessTrigger> logger)
     {
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
+        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     [Function("UsageProcessTrigger")]
     public async Task Run(
         [QueueTrigger("usage-processing", Connection = "SignalcoStorageAccountConnectionString")]
-        string item, 
-        ILogger logger, 
+        string item,
         CancellationToken cancellationToken = default)
     {
         var queueItem = JsonSerializer.Deserialize<UsageQueueItem>(item) ??
                         throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Invalid queue item data");
 
-        logger.LogInformation("Dequeued usage item: {@UsageItem}", queueItem);
+        this.logger.LogInformation("Dequeued usage item: {@UsageItem}", queueItem);
 
         // TODO: Move to service
         // Retrieve or create user entity
