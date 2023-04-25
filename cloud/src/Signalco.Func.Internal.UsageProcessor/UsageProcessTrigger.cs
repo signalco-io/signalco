@@ -4,7 +4,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Signal.Core.Contacts;
 using Signal.Core.Entities;
@@ -24,7 +24,7 @@ public class UsageProcessTrigger
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
     }
 
-    [FunctionName("UsageProcessTrigger")]
+    [Function("UsageProcessTrigger")]
     public async Task Run(
         [QueueTrigger("usage-processing", Connection = "SignalcoStorageAccountConnectionString")]
         string item, 

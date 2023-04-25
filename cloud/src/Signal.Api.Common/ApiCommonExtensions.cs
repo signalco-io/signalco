@@ -8,7 +8,9 @@ namespace Signal.Api.Common
     {
         public static IServiceCollection AddApi(this IServiceCollection services)
         {
-            return services.AddTransient<ISignalRService, SignalRService>();
+            return services
+                .AddTransient<ISignalRService, SignalRService>()
+                .AddSingleton<ISignalRHubContextProvider, SignalRHubContextProvider>();
         }
     }
 }

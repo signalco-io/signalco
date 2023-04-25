@@ -2,11 +2,8 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Contact;
 using Signal.Api.Common.Exceptions;
@@ -30,15 +27,15 @@ public class ContactMetadataFunction
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
     }
 
-    [FunctionName("Contact-Metadata")]
+    [Function("Contact-Metadata")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ContactMetadataFunction>("Contact", Description = "Contact metadata.")]
     [OpenApiJsonRequestBody<ContactMetadataDto>]
     [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "contact/metadata")]
-        HttpRequest req,
+        HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest<ContactMetadataDto>(cancellationToken, this.functionAuthenticator, async context =>
         {

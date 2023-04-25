@@ -3,7 +3,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Signal.Core.Exceptions;
 using Signal.Core.Processor;
@@ -20,7 +20,7 @@ namespace Signalco.Func.Internal.ContactStateProcessor
             this.manager = manager ?? throw new ArgumentNullException(nameof(manager));
         }
 
-        [FunctionName("ContactStateProcessTrigger")]
+        [Function("ContactStateProcessTrigger")]
         public async Task Run(
             [QueueTrigger("contact-state-processing", Connection = "SignalcoStorageAccountConnectionString")]
             string trigger,

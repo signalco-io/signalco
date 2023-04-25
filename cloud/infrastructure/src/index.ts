@@ -6,7 +6,7 @@ import { createKeyVault } from './Azure/createKeyVault';
 import createPublicFunction from './Azure/createPublicFunction';
 import { webAppIdentity } from './Azure/webAppIdentity';
 import vaultSecret from './Azure/vaultSecret';
-import { assignFunctionCode } from './Azure/assignFunctionCode';
+import { assignFunctionCodeAsync } from './Azure/assignFunctionCodeAsync';
 import { assignFunctionSettings } from './Azure/assignFunctionSettings';
 import createWebAppAppInsights from './Azure/createWebAppAppInsights';
 import createAppInsights from './Azure/createAppInsights';
@@ -57,7 +57,7 @@ export = async () => {
         const resourceGroup = new ResourceGroup(resourceGroupName);
         const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
 
-        const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, shouldProtect);
+        const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, false);
         apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, ConfPublicSignalRCheckInterval, '/api/v1/health');
 
         // Create functions storage
@@ -75,9 +75,9 @@ export = async () => {
                 api.prefix,
                 api.subDomain,
                 api.cors,
-                shouldProtect);
+                false);
             const apiFuncPublish = await publishProjectAsync(['../src/Signalco.Api.Public', api.name].filter(i => i.length).join('.'));
-            const apiFuncCode = assignFunctionCode(
+            const apiFuncCode = await assignFunctionCodeAsync(
                 resourceGroup,
                 funcStorage.storageAccount.storageAccount,
                 funcStorage.zipsContainer,
@@ -96,7 +96,7 @@ export = async () => {
         const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintenance', 'Migration'];
         const internalFuncs = [];
         for (const funcName of internalNames) {
-            internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, shouldProtect));
+            internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, false));
         }
 
         // Generate channels functions
@@ -107,7 +107,7 @@ export = async () => {
             : [...productionChannelNames, ...nextChannelNames];
         const channelsFuncs = [];
         for (const channelName of channelNames) {
-            channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, shouldProtect));
+            channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, false));
         }
 
         // Generate discrete functions
@@ -115,15 +115,15 @@ export = async () => {
         const discreteFuncs = [];
         for (const funcName of discreteNames) {
             const discreteResourceGroup = new ResourceGroup(`signalco-discrete-${stack}-${funcName.toLowerCase()}`);
-            const discreteStorage = createFunctionsStorage(discreteResourceGroup, `${funcName.toLowerCase().substring(0, 5)}funcs`, shouldProtect);
+            const discreteStorage = createFunctionsStorage(discreteResourceGroup, `${funcName.toLowerCase().substring(0, 5)}funcs`, false);
             const func = createPublicFunction(
                 discreteResourceGroup,
                 funcName.toLowerCase().substring(0, 5),
                 `${funcName.toLowerCase()}.api`,
                 undefined,
-                shouldProtect);
+                false);
             const funcPublish = await publishProjectAsync(`../../discrete/Signalco.Discrete.Api.${funcName}/cloud`, 7);
-            const funcCode = assignFunctionCode(
+            const funcCode = await assignFunctionCodeAsync(
                 discreteResourceGroup,
                 discreteStorage.storageAccount.storageAccount,
                 discreteStorage.zipsContainer,
@@ -144,8 +144,8 @@ export = async () => {
         const intFuncInsights = createWebAppAppInsights(resourceGroup, 'cint', internalFuncs[0].webApp);
 
         // Create internal apps
-        const registry = getContainerRegistry(resourceGroupSharedName, containerRegistryName);
-        const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, shouldProtect);
+        // const registry = getContainerRegistry(resourceGroupSharedName, containerRegistryName);
+        // const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, false);
 
         // Create general storage and prepare tables
         const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
@@ -163,7 +163,7 @@ export = async () => {
         vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--SigningSecret', config.requireSecret('secret-slackSigningSecret'));
         vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientId', config.require('secret-slackClientId'));
         vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientSecret', config.requireSecret('secret-slackClientSecret'));
-        vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoAppRemoteBrowserUrl', appRb.app.url);
+        // vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoAppRemoteBrowserUrl', appRb.app.url);
 
         const sharedEnvVariables = {
             'SignalcoKeyVaultUrl': interpolate`${vault.keyVault.properties.vaultUri}`,
@@ -199,7 +199,7 @@ export = async () => {
                     APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
                     APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
                 },
-                shouldProtect);
+                false);
         });
 
         // Populate internal functions settings
@@ -216,7 +216,7 @@ export = async () => {
                     APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${intFuncInsights.component.instrumentationKey}`,
                     APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${intFuncInsights.component.connectionString}`,
                 },
-                shouldProtect);
+                false);
         });
 
         // Populate channel function settings
@@ -232,7 +232,7 @@ export = async () => {
                     APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
                     APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
                 },
-                shouldProtect,
+                false,
             );
         });
 
@@ -246,9 +246,8 @@ export = async () => {
                 func.codeBlobUlr,
                 {
                     StorageAccountConnectionString: func.storage.storageAccount.connectionString,
-                    FUNCTIONS_WORKER_RUNTIME: 'dotnet-isolated',
                 },
-                shouldProtect);
+                false);
         });
 
         createAppInsights(resourceGroup, 'web', 'signalco');
@@ -283,8 +282,16 @@ export = async () => {
             publicUrls: publicFuncs.map(c => c.dnsCname.hostname),
             channelsUrls: channelsFuncs.map(c => c.dnsCname.hostname),
             appUrls: [
-                appRb.app.url,
+                // appRb.app.url,
             ],
+            discreteUrls: discreteFuncs.map(f => f.webApp.hostNames[0]),
+            resourceGroupName: resourceGroup.name,
+            functionApps: [
+                ...internalFuncs.map(c => c.webApp.name),
+                ...publicFuncs.map(c => c.webApp.name),
+                ...channelsFuncs.map(c => c.webApp.name),
+                ...discreteFuncs.map(c => c.webApp.name),
+            ]
         };
     }
 };

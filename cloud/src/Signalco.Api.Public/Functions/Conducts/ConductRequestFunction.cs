@@ -4,18 +4,15 @@ using System.Net;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-using Microsoft.Azure.WebJobs.Extensions.SignalRService;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
 using Signal.Core.Conducts;
 using Signal.Core.Entities;
 using Signal.Core.Exceptions;
+using Signal.Core.Notifications;
 using Signal.Core.Processor;
 using Signal.Core.Storage;
 using Signalco.Common.Channel;
@@ -28,29 +25,31 @@ public class ConductRequestFunction : ConductFunctionsBase
     private readonly IEntityService entityService;
     private readonly IAzureStorageDao storageDao;
     private readonly IAzureStorage storage;
+    private readonly ISignalRService signalRService;
 
     public ConductRequestFunction(
         IFunctionAuthenticator functionAuthenticator,
         IEntityService entityService,
         IAzureStorageDao storageDao,
-        IAzureStorage storage)
+        IAzureStorage storage,
+        ISignalRService signalRService)
     {
         this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
         this.storageDao = storageDao ?? throw new ArgumentNullException(nameof(storageDao));
         this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
+        this.signalRService = signalRService ?? throw new ArgumentNullException(nameof(signalRService));
     }
 
-    [FunctionName("Conducts-Request")]
+    [Function("Conducts-Request")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation(nameof(ConductRequestFunction), "Conducts", Description = "Requests conduct to be executed.")]
-    [OpenApiRequestBody("application/json", typeof(ConductRequestDto), Description = "The conduct to execute.")]
-    [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
+    [OpenApiOperation<ConductRequestFunction>("Conducts", Description = "Requests conduct to be executed.")]
+    [OpenApiJsonRequestBody<ConductRequestDto>(Description = "The conduct to execute.")]
+    [OpenApiResponseWithoutBody()]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "conducts/request")]
-        HttpRequest req,
-        [SignalR(HubName = "conducts")] IAsyncCollector<SignalRMessage> signalRMessages,
+        HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest<ConductRequestDto>(cancellationToken, this.functionAuthenticator, async context =>
         {
@@ -70,18 +69,13 @@ public class ConductRequestFunction : ConductFunctionsBase
 
             await Task.WhenAll(authTask, entityUsersTask, usageTask);
 
-            // Send to all users of the entity
-            foreach (var entityUserId in entityUsersTask.Result.First().Value)
-            {
-                await signalRMessages.AddAsync(
-                    new SignalRMessage
-                    {
-                        Target = "requested",
-                        Arguments = new object[] {JsonSerializer.Serialize(payload)},
-                        UserId = entityUserId
-                    }, cancellationToken);
-            }
-
+            await this.signalRService.SendToUsersAsync(
+                entityUsersTask.Result.First().Value.ToList(),
+                "conducts", 
+                "requested",
+                new object[] {JsonSerializer.Serialize(payload)},
+                cancellationToken);
+            
             // TODO: Queue conduct on remote in case client doesn't receive signalR message
         });
 }

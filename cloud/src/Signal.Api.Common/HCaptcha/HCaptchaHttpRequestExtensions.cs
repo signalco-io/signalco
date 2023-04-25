@@ -1,8 +1,9 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Core.Exceptions;
 
 namespace Signal.Api.Common.HCaptcha;
@@ -17,15 +18,15 @@ public static class HCaptchaHttpRequestExtensions
     /// <param name="service">The service.</param>
     /// <param name="cancellationToken">A token that allows processing to be cancelled.</param>
     /// <returns>A Task.</returns>
-    public static async Task VerifyCaptchaAsync(this HttpRequest req, IHCaptchaService service,
+    public static async Task VerifyCaptchaAsync(this HttpRequestData req, IHCaptchaService service,
         CancellationToken cancellationToken = default)
     {
-        if (!req.Headers.TryGetValue(HCaptchaHeaderKey, out var responseValues))
+        if (!req.Headers.TryGetValues(HCaptchaHeaderKey, out var responseValues))
             throw new ExpectedHttpException(HttpStatusCode.BadRequest, "hCaptcha response not provided.");
 
         try
         {
-            var response = responseValues.ToString();
+            var response = responseValues.First();
             await service.VerifyAsync(response, cancellationToken);
         }
         catch (Exception ex)

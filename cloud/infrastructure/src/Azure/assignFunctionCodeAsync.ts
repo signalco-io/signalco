@@ -1,9 +1,10 @@
-import { asset, type Input, type Resource } from '@pulumi/pulumi';
+import { type Input, type Resource } from '@pulumi/pulumi';
+import { FileArchive } from '@pulumi/pulumi/asset';
 import { type ResourceGroup } from '@pulumi/azure-native/resources';
 import { Blob, type BlobContainer, type StorageAccount } from '@pulumi/azure-native/storage';
 import { signedBlobReadUrl } from './signedBlobReadUrl';
 
-export function assignFunctionCode (
+export async function assignFunctionCodeAsync(
     resourceGroup: ResourceGroup,
     storageAccount: StorageAccount,
     zipsContainer: BlobContainer,
@@ -16,10 +17,9 @@ export function assignFunctionCode (
         resourceGroupName: resourceGroup.name,
         accountName: storageAccount.name,
         containerName: zipsContainer.name,
-        source: new asset.FileArchive(codePath),
+        source: new FileArchive(codePath),
     }, {
         dependsOn,
-        // parent: app
     });
 
     const codeBlobUrl = signedBlobReadUrl(codeBlob, zipsContainer, storageAccount, resourceGroup);

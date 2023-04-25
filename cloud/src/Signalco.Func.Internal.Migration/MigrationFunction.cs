@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Signal.Core.Entities;
 using Signal.Core.Storage;
 
@@ -34,7 +34,7 @@ public class MigrationFunction
         this.azureStorage = azureStorage ?? throw new ArgumentNullException(nameof(azureStorage));
     }
 
-    [FunctionName("Migration")]
+    [Function("Migration")]
     public async Task Run(
         [TimerTrigger(CronOnceAYear, RunOnStartup = true)] TimerInfo timer,
         CancellationToken cancellationToken = default)

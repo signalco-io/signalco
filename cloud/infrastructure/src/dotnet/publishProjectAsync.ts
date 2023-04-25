@@ -1,6 +1,11 @@
 import { run } from '@pulumi/command/local';
 
-export default async function publishProjectAsync (codePath: string, dotnet: 6 | 7 = 6) {
+export default async function publishProjectAsync (codePath: string, dotnet: 7 = 7) {
+    await run({
+        command: 'dotnet clean',
+        dir: codePath,
+    });
+
     await run({
         command: 'dotnet publish --configuration Release',
         dir: codePath,

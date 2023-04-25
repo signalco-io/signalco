@@ -7,6 +7,7 @@
     <UserSecretsId>75b1b62c-8ca6-40ee-a213-e98c0340b5e6</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <PlaywrightPlatform>linux-x64</PlaywrightPlatform>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,16 +2,13 @@
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-using Microsoft.Azure.WebJobs.Extensions.SignalRService;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.OpenApi;
 using Signal.Core.Conducts;
 using Signal.Core.Entities;
+using Signal.Core.Notifications;
 using Signal.Core.Storage;
 using Signalco.Common.Channel;
 
@@ -23,23 +20,23 @@ public class ConductMultipleFunctions : ConductMultipleFunctionsForwardToStation
         IEntityService entityService, 
         IAzureStorageDao storageDao, 
         IAzureStorage storage,
-        IFunctionAuthenticator authenticator) 
-        : base(entityService, storageDao, authenticator, storage)
+        IFunctionAuthenticator authenticator, 
+        ISignalRService signalRService) 
+        : base(entityService, storageDao, authenticator, storage, signalRService)
     {
     }
 
-    [FunctionName("Conduct-Multiple")]
+    [Function("Conduct-Multiple")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation(nameof(ConductMultipleFunctions), "Conducts",
+    [OpenApiOperation<ConductMultipleFunctions>("Conducts",
         Description = "Requests multiple conducts to be executed.")]
-    [OpenApiRequestBody("application/json", typeof(List<ConductRequestDto>),
+    [OpenApiJsonRequestBody<List<ConductRequestDto>>(
         Description = "Collection of conducts to execute.")]
     [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "conducts/request-multiple")]
-        HttpRequest req,
-        [SignalR(HubName = "conducts")] IAsyncCollector<SignalRMessage> signalRMessages,
+        HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await this.HandleAsync(req, signalRMessages, cancellationToken);
+        await this.HandleAsync(req, cancellationToken);
 }

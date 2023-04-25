@@ -1,7 +1,7 @@
 import { createFunction } from './createFunction';
 import { type ResourceGroup } from '@pulumi/azure-native/resources';
 import publishProjectAsync from '../dotnet/publishProjectAsync';
-import { assignFunctionCode } from './assignFunctionCode';
+import { assignFunctionCodeAsync } from './assignFunctionCodeAsync';
 import apiStatusCheck from '../Checkly/apiStatusCheck';
 import { ConfInternalApiCheckInterval } from '../config';
 import { type BlobContainer, type StorageAccount } from '@pulumi/azure-native/storage';
@@ -24,7 +24,7 @@ export default async function createInternalFunctionAsync (
     const codePath = `../src/Signalco.Func.Internal.${name}`;
     const publishResult = await publishProjectAsync(codePath);
 
-    const code = assignFunctionCode(
+    const code = await assignFunctionCodeAsync(
         resourceGroup,
         storageAccount,
         zipsContainer,
