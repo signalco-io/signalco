@@ -36,7 +36,7 @@ public class ContactSetFunction
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ContactSetFunction>("Contact", Description = "Sets contact value.")]
     [OpenApiJsonRequestBody<ContactSetDto>]
-    [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
+    [OpenApiResponseWithoutBody]
     [OpenApiResponseBadRequestValidation]
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "contact/set")]

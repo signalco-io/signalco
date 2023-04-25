@@ -44,20 +44,24 @@ public class ContactHistoryRetrieveFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "contact/history")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest<ContactHistoryRequestDto, ContactHistoryResponseDto>(cancellationToken, this.functionAuthenticator, async context =>
+        await req.UserRequest<ContactHistoryResponseDto>(cancellationToken, this.functionAuthenticator, async context =>
         {
-            var payload = context.Payload;
-            if (string.IsNullOrWhiteSpace(payload.EntityId) ||
-                string.IsNullOrWhiteSpace(payload.ChannelName) ||
-                string.IsNullOrWhiteSpace(payload.ContactName))
+            var entityId = req.Query["entityId"];
+            var channelName = req.Query["channelName"];
+            var contactName = req.Query["contactName"];
+            var duration = req.Query["duration"];
+            
+            if (string.IsNullOrWhiteSpace(entityId) ||
+                string.IsNullOrWhiteSpace(channelName) ||
+                string.IsNullOrWhiteSpace(contactName))
                 throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Required fields not provided.");
 
-            var authTask = context.ValidateUserAssignedAsync(this.entityService, payload.EntityId);
+            var authTask = context.ValidateUserAssignedAsync(this.entityService, entityId);
             var historyDataTask = this.storageDao.ContactHistoryAsync(
-                new ContactPointer(payload.EntityId, payload.ChannelName, payload.ContactName),
-                TimeSpan.TryParse(payload.Duration, out var durationValue)
+                new ContactPointer(entityId, channelName, contactName),
+                TimeSpan.TryParse(duration, out var durationValue)
                     ? durationValue
-                    : double.TryParse(payload.Duration, out var durationValueMs)
+                    : double.TryParse(duration, out var durationValueMs)
                         ? TimeSpan.FromMilliseconds(durationValueMs)
                         : TimeSpan.FromDays(1),
                 cancellationToken);
@@ -73,25 +77,6 @@ public class ContactHistoryRetrieveFunction
                 })
             };
         });
-
-    [Serializable]
-    public class ContactHistoryRequestDto
-    {
-        [Required]
-        [JsonPropertyName("entityId")]
-        public string? EntityId { get; set; }
-
-        [Required]
-        [JsonPropertyName("channelName")]
-        public string? ChannelName { get; set; }
-
-        [Required]
-        [JsonPropertyName("contactName")]
-        public string? ContactName { get; set; }
-
-        [JsonPropertyName("duration")]
-        public string? Duration { get; set; }
-    }
 
     [Serializable]
     private class ContactHistoryResponseDto
