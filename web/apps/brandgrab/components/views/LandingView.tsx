@@ -176,6 +176,19 @@ function getImageDimensions(file: string) {
     })
 }
 
+function hexToRgb(hex: string) {
+    return {
+        r: parseInt(hex.slice(1, 3), 16),
+        g: parseInt(hex.slice(3, 5), 16),
+        b: parseInt(hex.slice(5, 7), 16)
+    };
+}
+
+function hexLightness(hex: string) {
+    const rgb = hexToRgb(hex);
+    return (rgb.r * 0.299 + rgb.g * 0.587 + rgb.b * 0.114) / 255;
+}
+
 function PagePreview({ domain }: { domain: string }) {
     const pageScreenshotDomain = useCallback(() => getPageScreenshot(domain), [domain]);
     const pageScreenshot = useLoadAndError(pageScreenshotDomain);
@@ -224,7 +237,7 @@ function PagePreview({ domain }: { domain: string }) {
                                 padding: 4,
                                 alignItems: 'end',
                                 display: 'flex',
-                                color: color.lightness < .5 ? 'rgba(256,256,256, .8)' : 'rgba(0,0,0, .8)',
+                                color: hexLightness(color.hex) < .5 ? 'rgba(256,256,256, .8)' : 'rgba(0,0,0, .8)',
                                 border: '1px solid var(--joy-palette-divider)'
                             }}>
                                 {color.hex}
