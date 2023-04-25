@@ -42,11 +42,11 @@ public class ContactHistoryRetrieveFunction
     [OpenApiResponseBadRequestValidation]
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "contact/history")]
-        ContactHistoryRequestDto payload,
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest(cancellationToken, this.functionAuthenticator, async context =>
+        await req.UserRequest<ContactHistoryRequestDto, ContactHistoryResponseDto>(cancellationToken, this.functionAuthenticator, async context =>
         {
+            var payload = context.Payload;
             if (string.IsNullOrWhiteSpace(payload.EntityId) ||
                 string.IsNullOrWhiteSpace(payload.ChannelName) ||
                 string.IsNullOrWhiteSpace(payload.ContactName))
@@ -70,7 +70,7 @@ public class ContactHistoryRetrieveFunction
                 {
                     TimeStamp = d.Timestamp,
                     ValueSerialized = d.ValueSerialized
-                }).ToList()
+                })
             };
         });
 
@@ -97,7 +97,7 @@ public class ContactHistoryRetrieveFunction
     private class ContactHistoryResponseDto
     {
         [JsonPropertyName("values")]
-        public List<TimeStampValuePair> Values { get; set; } = new();
+        public IEnumerable<TimeStampValuePair>? Values { get; set; }
 
         [Serializable]
         public class TimeStampValuePair
