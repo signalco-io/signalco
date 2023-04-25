@@ -151,10 +151,6 @@ importers:
       uuid:
         specifier: 9.0.0
         version: 9.0.0
-    optionalDependencies:
-      terser:
-        specifier: 5.17.1
-        version: 5.17.1
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.6.1
@@ -309,10 +305,6 @@ importers:
       sharp:
         specifier: 0.32.0
         version: 0.32.0
-    optionalDependencies:
-      terser:
-        specifier: 5.17.1
-        version: 5.17.1
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.6.1
@@ -416,9 +408,6 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
-      react-cool-inview:
-        specifier: 3.0.1
-        version: 3.0.1(react@18.2.0)
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
@@ -428,10 +417,6 @@ importers:
       sharp:
         specifier: 0.32.0
         version: 0.32.0
-    optionalDependencies:
-      terser:
-        specifier: 5.17.1
-        version: 5.17.1
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.6.1
@@ -560,10 +545,6 @@ importers:
       sharp:
         specifier: 0.32.0
         version: 0.32.0
-    optionalDependencies:
-      terser:
-        specifier: 5.17.1
-        version: 5.17.1
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.6.1
@@ -773,10 +754,6 @@ importers:
       sharp:
         specifier: 0.32.0
         version: 0.32.0
-    optionalDependencies:
-      terser:
-        specifier: 5.17.1
-        version: 5.17.1
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.6.1

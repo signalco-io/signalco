@@ -27,7 +27,6 @@
         "next": "13.3.1",
         "next-secure-headers": "2.2.0",
         "react": "18.2.0",
-        "react-cool-inview": "3.0.1",
         "react-dom": "18.2.0",
         "react-transition-group": "4.4.5",
         "sharp": "0.32.0"
@@ -54,9 +53,6 @@
         "rimraf": "5.0.0",
         "sass": "1.62.0",
         "typescript": "5.0.4"
-    },
-    "optionalDependencies": {
-        "terser": "5.17.1"
     },
     "nextBundleAnalysis": {
         "budget": 358400,
