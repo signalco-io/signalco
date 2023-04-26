@@ -29,10 +29,8 @@ public static class HttpRequestExtensions
 
     public static async Task<T> ReadAsJsonAsync<T>(this HttpRequestData req)
     {
-        var requestContent = await req.ReadAsStringAsync();
-        if (requestContent == null)
-            throw new NullReferenceException("No content in request");
-        
+        var requestContent = await req.ReadAsStringAsync() ?? throw new NullReferenceException("No content in request");
+
         return JsonSerializer.Deserialize<T>(
             requestContent,
             new JsonSerializerOptions
@@ -84,10 +82,7 @@ public static class HttpRequestExtensions
     {
         try
         {
-            // Deserialize and validate
-            var payload = await req.ReadAsJsonAsync<TPayload>();
-            if (payload == null)
-                throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Failed to read request data.");
+            var payload = await ReadRequiredJsonAsync<TPayload>(req);
 
             return await executionBody(new AnonymousRequestContextWithPayload<TPayload>(payload, cancellationToken));
         }
@@ -163,10 +158,7 @@ public static class HttpRequestExtensions
                 await authenticator.AuthenticateSystemAsync(req, cancellationToken);
             else user = await authenticator.AuthenticateAsync(req, cancellationToken);
 
-            // Deserialize and validate
-            var payload = await req.ReadAsJsonAsync<TPayload>();
-            if (payload == null)
-                throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Failed to read request data.");
+            var payload = await ReadRequiredJsonAsync<TPayload>(req);
 
             return await executionBody(
                 isSystem
@@ -188,17 +180,25 @@ public static class HttpRequestExtensions
         try
         {
             var user = await authenticator.AuthenticateAsync(req, cancellationToken);
-
-            // Deserialize and validate
-            var payload = await req.ReadAsJsonAsync<TPayload>();
-            if (payload == null)
-                throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Failed to read request data.");
+            var payload = await ReadRequiredJsonAsync<TPayload>(req);
 
             return await executionBody(new UserRequestContextWithPayload<TPayload>(user, payload, cancellationToken));
         }
         catch (ExpectedHttpException ex)
         {
             return await ExceptionResponseAsync(req, ex, cancellationToken);
+        }
+    }
+
+    private static async Task<TPayload> ReadRequiredJsonAsync<TPayload>(HttpRequestData req)
+    {
+        try
+        {
+            return await req.ReadAsJsonAsync<TPayload>() ?? throw new Exception("Required payload null.");
+        }
+        catch
+        {
+            throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Expected JSON payload.");
         }
     }
 }
