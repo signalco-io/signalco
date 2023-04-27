@@ -24,7 +24,7 @@
         "@signalco/js": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
-        "classix": "2.1.31",
+        "classix": "2.1.32",
         "encoding": "0.1.13",
         "fs-extra": "11.1.1",
         "klaw": "4.1.0",
