@@ -1,4 +1,4 @@
-import { Config, getStack, interpolate } from '@pulumi/pulumi';
+import { Config, getStack, interpolate, StackReference, getProject } from '@pulumi/pulumi';
 import { ResourceGroup } from '@pulumi/azure-native/resources';
 import { createSignalR } from './Azure/createSignalR';
 import { createStorageAccount } from './Azure/createStorageAccount';
@@ -291,7 +291,12 @@ export = async () => {
                 ...publicFuncs.map(c => c.webApp.name),
                 ...channelsFuncs.map(c => c.webApp.name),
                 ...discreteFuncs.map(c => c.webApp.name),
-            ]
+            ],
+            certs: [
+                ...publicFuncs.map(f => ({ fullDomainName: f.fullDomainName, thumbprint: f.cert.thumbprint})),
+                ...channelsFuncs.map(f => ({ fullDomainName: f.fullDomainName, thumbprint: f.cert.thumbprint})),
+                ...discreteFuncs.map(f => ({ fullDomainName: f.fullDomainName, thumbprint: f.cert.thumbprint})),
+            ],
         };
     }
 };
