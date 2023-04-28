@@ -71,6 +71,7 @@ export function assignCustomDomain (resourceGroup: ResourceGroup, webApp: WebApp
     });
 
     return {
+        fullDomainName: fullDomainName,
         dnsTxtVerify: txtVerifyRecord,
         dnsCname: cname,
         cert,
