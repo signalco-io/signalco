@@ -45,10 +45,10 @@
     },
     "dependencies": {
         "@babel/core": "7.21.4",
-        "@emotion/cache": "11.10.7",
-        "@emotion/react": "11.10.6",
+        "@emotion/cache": "11.10.8",
+        "@emotion/react": "11.10.8",
         "@emotion/server": "11.10.0",
-        "@emotion/styled": "11.10.6",
+        "@emotion/styled": "11.10.8",
         "@mui/base": "5.0.0-alpha.127",
         "@mui/joy": "5.0.0-alpha.77",
         "@mui/system": "5.12.1",
