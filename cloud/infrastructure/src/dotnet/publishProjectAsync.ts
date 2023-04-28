@@ -7,7 +7,7 @@ export default async function publishProjectAsync (codePath: string, dotnet: 7 =
     });
 
     await run({
-        command: 'dotnet publish --configuration Release -nologo -consoleLoggerParameters:NoSummary -verbosity:quiet',
+        command: 'dotnet publish --configuration Release -nologo -consoleLoggerParameters:NoSummary -verbosity:quiet --v:q',
         dir: codePath,
     });
 

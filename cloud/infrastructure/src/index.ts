@@ -54,6 +54,8 @@ export = async () => {
         const storagePrefix = 'store';
         const keyvaultPrefix = 'kv';
 
+        const currentStack = new StackReference(`signalco/${getProject()}/${getStack()}`);
+
         const resourceGroup = new ResourceGroup(resourceGroupName);
         const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
 
@@ -75,6 +77,7 @@ export = async () => {
                 api.prefix,
                 api.subDomain,
                 api.cors,
+                currentStack,
                 false);
             const apiFuncPublish = await publishProjectAsync(['../src/Signalco.Api.Public', api.name].filter(i => i.length).join('.'));
             const apiFuncCode = await assignFunctionCodeAsync(
@@ -107,7 +110,7 @@ export = async () => {
             : [...productionChannelNames, ...nextChannelNames];
         const channelsFuncs = [];
         for (const channelName of channelNames) {
-            channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, false));
+            channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, currentStack, false));
         }
 
         // Generate discrete functions
@@ -121,6 +124,7 @@ export = async () => {
                 funcName.toLowerCase().substring(0, 5),
                 `${funcName.toLowerCase()}.api`,
                 undefined,
+                currentStack,
                 false);
             const funcPublish = await publishProjectAsync(`../../discrete/Signalco.Discrete.Api.${funcName}/cloud`, 7);
             const funcCode = await assignFunctionCodeAsync(

@@ -1,3 +1,4 @@
+import { type StackReference } from '@pulumi/pulumi';
 import { type ResourceGroup } from '@pulumi/azure-native/resources';
 import createPublicFunction from './createPublicFunction';
 import { assignFunctionCodeAsync } from './assignFunctionCodeAsync';
@@ -11,7 +12,8 @@ export default async function createChannelFunctionAsync (
     resourceGroup: ResourceGroup, 
     storageAccount: StorageAccount,
     zipsContainer: BlobContainer,
-    shouldProtect: boolean) {
+    currentStack: StackReference,
+    protect: boolean) {
     const channelNameLower = channelName.toLocaleLowerCase();
     const publicFunctionPrefix = 'channel' + channelNameLower;
     const publicFunctionStoragePrefix = 'ch' + channelNameLower;
@@ -23,7 +25,8 @@ export default async function createChannelFunctionAsync (
         publicFunctionPrefix,
         publicFunctionSubDomain,
         corsDomains,
-        shouldProtect,
+        currentStack,
+        protect,
     );
 
     const codePath = `../src/Signalco.Channel.${channelName}`;

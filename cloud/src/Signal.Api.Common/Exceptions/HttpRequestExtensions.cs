@@ -64,6 +64,7 @@ public static class HttpRequestExtensions
     {
         var resp = req.CreateResponse();
         await resp.WriteAsJsonAsync(payload, cancellationToken: cancellationToken);
+        resp.StatusCode = statusCode;
         return resp;
     }
 
@@ -95,7 +96,8 @@ public static class HttpRequestExtensions
     private static async Task<HttpResponseData> ExceptionResponseAsync(HttpRequestData req, ExpectedHttpException ex, CancellationToken cancellationToken = default) =>
         await req.JsonResponseAsync(
             new ApiErrorDto(ex.Code.ToString(), ex.Message),
-            ex.Code, cancellationToken: cancellationToken);
+            ex.Code, 
+            cancellationToken: cancellationToken);
 
     public static async Task<HttpResponseData> UserRequest<TResponse>(
         this HttpRequestData req,
