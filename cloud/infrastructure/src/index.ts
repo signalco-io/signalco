@@ -167,7 +167,7 @@ export = async () => {
         vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--SigningSecret', config.requireSecret('secret-slackSigningSecret'));
         vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientId', config.require('secret-slackClientId'));
         vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'Slack--ClientSecret', config.requireSecret('secret-slackClientSecret'));
-        // vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoAppRemoteBrowserUrl', appRb.app.url);
+        vaultSecret(resourceGroup, vault.keyVault, keyvaultPrefix, 'SignalcoAppRemoteBrowserUrl', appRb.app.url);
 
         const sharedEnvVariables = {
             'SignalcoKeyVaultUrl': interpolate`${vault.keyVault.properties.vaultUri}`,
