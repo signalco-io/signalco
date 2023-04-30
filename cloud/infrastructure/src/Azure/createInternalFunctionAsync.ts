@@ -5,6 +5,7 @@ import { assignFunctionCodeAsync } from './assignFunctionCodeAsync';
 import apiStatusCheck from '../Checkly/apiStatusCheck';
 import { ConfInternalApiCheckInterval } from '../config';
 import { type BlobContainer, type StorageAccount } from '@pulumi/azure-native/storage';
+import createLogWorkspace from './createLogWorkspace';
 
 const internalFunctionPrefix = 'cint';
 
@@ -13,13 +14,15 @@ export default async function createInternalFunctionAsync (
     name: string, 
     storageAccount: StorageAccount,
     zipsContainer: BlobContainer,
+    logWorkspace: ReturnType<typeof createLogWorkspace>,
     shouldProtect: boolean) {
     const shortName = name.substring(0, 9).toLocaleLowerCase();
     const func = createFunction(
         resourceGroup,
         `int${shortName}`,
         shouldProtect,
-        false);
+        false,
+        logWorkspace);
 
     const codePath = `../src/Signalco.Func.Internal.${name}`;
     const publishResult = await publishProjectAsync(codePath);
