@@ -46,7 +46,7 @@
         "@types/sharp": "0.31.1",
         "cross-env": "7.0.3",
         "eslint": "8.39.0",
-        "next-sitemap": "4.0.7",
+        "next-sitemap": "4.0.8",
         "playwright": "1.33.0",
         "postcss": "8.4.22",
         "prop-types": "15.8.1",
