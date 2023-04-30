@@ -18,7 +18,7 @@ importers:
         version: 2.0.4
       '@date-io/date-fns':
         specifier: 2.16.0
-        version: 2.16.0(date-fns@2.29.3)
+        version: 2.16.0(date-fns@2.30.0)
       '@dnd-kit/core':
         specifier: 6.0.8
         version: 6.0.8(react-dom@18.2.0)(react@18.2.0)
@@ -101,8 +101,8 @@ importers:
         specifier: 7.8.4
         version: 7.8.4
       date-fns:
-        specifier: 2.29.3
-        version: 2.29.3
+        specifier: 2.30.0
+        version: 2.30.0
       material-ui-popup-state:
         specifier: 5.0.8
         version: 5.0.8(@emotion/react@11.10.8)(@emotion/styled@11.10.8)(@types/react@18.2.0)(react-dom@18.2.0)(react@18.2.0)
@@ -2719,7 +2719,7 @@ packages:
     resolution: {integrity: sha512-DYmSzkr+jToahwWrsiRA2/pzMEtz9Bq1euJwoOuYwuwIYXnZFtHajY2E6a1VNVDc9jP8YUXK1BvnZH9mmT19Zg==}
     dev: false
 
-  /@date-io/date-fns@2.16.0(date-fns@2.29.3):
+  /@date-io/date-fns@2.16.0(date-fns@2.30.0):
     resolution: {integrity: sha512-bfm5FJjucqlrnQcXDVU5RD+nlGmL3iWgkHTq3uAZWVIuBu6dDmGa3m8a6zo2VQQpu8ambq9H22UyUpn7590joA==}
     peerDependencies:
       date-fns: ^2.0.0
@@ -2728,7 +2728,7 @@ packages:
         optional: true
     dependencies:
       '@date-io/core': 2.16.0
-      date-fns: 2.29.3
+      date-fns: 2.30.0
     dev: false
 
   /@discoveryjs/json-ext@0.5.7:
@@ -7361,7 +7361,7 @@ packages:
     hasBin: true
     dependencies:
       chalk: 4.1.2
-      date-fns: 2.29.3
+      date-fns: 2.30.0
       lodash: 4.17.21
       rxjs: 7.8.0
       shell-quote: 1.8.1
@@ -7900,9 +7900,11 @@ packages:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
     dev: false
 
-  /date-fns@2.29.3:
-    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
+  /date-fns@2.30.0:
+    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
     engines: {node: '>=0.11'}
+    dependencies:
+      '@babel/runtime': 7.21.0
 
   /debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
