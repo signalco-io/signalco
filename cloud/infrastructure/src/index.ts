@@ -8,8 +8,6 @@ import { webAppIdentity } from './Azure/webAppIdentity';
 import vaultSecret from './Azure/vaultSecret';
 import { assignFunctionCodeAsync } from './Azure/assignFunctionCodeAsync';
 import { assignFunctionSettings } from './Azure/assignFunctionSettings';
-import createWebAppAppInsights from './Azure/createWebAppAppInsights';
-import createAppInsights from './Azure/createAppInsights';
 import createSes from './AWS/createSes';
 import createInternalFunctionAsync from './Azure/createInternalFunctionAsync';
 import createChannelFunction from './Azure/createChannelFunction';
@@ -21,6 +19,7 @@ import createRemoteBrowser from './apps/createRemoteBrowser';
 import { createContainerRegistry, getContainerRegistry } from './Azure/containerRegistry';
 import createFunctionsStorage from './Azure/createFunctionsStorage';
 import { Dashboard } from '@checkly/pulumi/dashboard';
+import createLogWorkspace from './Azure/createLogWorkspace';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -65,6 +64,9 @@ export = async () => {
         // Create functions storage
         const funcStorage = createFunctionsStorage(resourceGroup, 'funcs', shouldProtect);
 
+        // Create log workspace
+        const logWorkspace = createLogWorkspace(resourceGroup, 'log');
+
         // Generate public functions
         const publicApis = [
             { name: '', prefix: 'cpub', subDomain: 'api', cors: corsDomains },
@@ -78,6 +80,7 @@ export = async () => {
                 api.subDomain,
                 api.cors,
                 currentStack,
+                logWorkspace,
                 false);
             const apiFuncPublish = await publishProjectAsync(['../src/Signalco.Api.Public', api.name].filter(i => i.length).join('.'));
             const apiFuncCode = await assignFunctionCodeAsync(
@@ -99,7 +102,7 @@ export = async () => {
         const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintenance', 'Migration'];
         const internalFuncs = [];
         for (const funcName of internalNames) {
-            internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, false));
+            internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, logWorkspace, false));
         }
 
         // Generate channels functions
@@ -110,7 +113,7 @@ export = async () => {
             : [...productionChannelNames, ...nextChannelNames];
         const channelsFuncs = [];
         for (const channelName of channelNames) {
-            channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, currentStack, false));
+            channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, currentStack, logWorkspace, false));
         }
 
         // Generate discrete functions
@@ -125,6 +128,7 @@ export = async () => {
                 `${funcName.toLowerCase()}.api`,
                 undefined,
                 currentStack,
+                logWorkspace,
                 false);
             const funcPublish = await publishProjectAsync(`../../discrete/Signalco.Discrete.Api.${funcName}/cloud`, 7);
             const funcCode = await assignFunctionCodeAsync(
@@ -143,13 +147,9 @@ export = async () => {
             });
         }
 
-        // Create App Insights
-        const pubFuncInsights = createWebAppAppInsights(resourceGroup, 'cpub', publicFuncs[0].webApp);
-        const intFuncInsights = createWebAppAppInsights(resourceGroup, 'cint', internalFuncs[0].webApp);
-
         // Create internal apps
         const registry = getContainerRegistry(resourceGroupSharedName, containerRegistryName);
-        const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, false);
+        const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, logWorkspace, false);
 
         // Create general storage and prepare tables
         const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
@@ -200,8 +200,6 @@ export = async () => {
                 {
                     ...sharedEnvVariables,
                     ...internalEnvVariables,
-                    APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
-                    APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
                 },
                 false);
         });
@@ -217,8 +215,6 @@ export = async () => {
                 {
                     ...sharedEnvVariables,
                     ...internalEnvVariables,
-                    APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${intFuncInsights.component.instrumentationKey}`,
-                    APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${intFuncInsights.component.connectionString}`,
                 },
                 false);
         });
@@ -233,8 +229,6 @@ export = async () => {
                 channel.codeBlobUlr,
                 {
                     ...sharedEnvVariables,
-                    APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${pubFuncInsights.component.instrumentationKey}`,
-                    APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${pubFuncInsights.component.connectionString}`,
                 },
                 false,
             );
@@ -253,8 +247,6 @@ export = async () => {
                 },
                 false);
         });
-
-        createAppInsights(resourceGroup, 'web', 'signalco');
 
         // Checkly public dashboard (only for production)
         if (stack === 'production') {

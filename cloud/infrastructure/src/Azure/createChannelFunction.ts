@@ -6,6 +6,7 @@ import apiStatusCheck from '../Checkly/apiStatusCheck';
 import publishProjectAsync from '../dotnet/publishProjectAsync';
 import { ConfChannelApiCheckInterval } from '../config';
 import { type BlobContainer, type StorageAccount } from '@pulumi/azure-native/storage';
+import createLogWorkspace from './createLogWorkspace';
 
 export default async function createChannelFunctionAsync (
     channelName: string, 
@@ -13,6 +14,7 @@ export default async function createChannelFunctionAsync (
     storageAccount: StorageAccount,
     zipsContainer: BlobContainer,
     currentStack: StackReference,
+    logWorkspace: ReturnType<typeof createLogWorkspace>,
     protect: boolean) {
     const channelNameLower = channelName.toLocaleLowerCase();
     const publicFunctionPrefix = 'channel' + channelNameLower;
@@ -26,6 +28,7 @@ export default async function createChannelFunctionAsync (
         publicFunctionSubDomain,
         corsDomains,
         currentStack,
+        logWorkspace,
         protect,
     );
 
