@@ -1059,8 +1059,8 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
       lucide-react:
-        specifier: 0.189.0
-        version: 0.189.0(react@18.2.0)
+        specifier: 0.190.0
+        version: 0.190.0(react@18.2.0)
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -10490,8 +10490,8 @@ packages:
     engines: {node: '>=16.14'}
     dev: true
 
-  /lucide-react@0.189.0(react@18.2.0):
-    resolution: {integrity: sha512-NRun7PPWBvztIV8x4QwMGomvMw4WlLu2UhmPcDBVTyTGmiwlJef8WbcPMt9tBqGbdAKnAM+tfMv8I2QHFGOLfA==}
+  /lucide-react@0.190.0(react@18.2.0):
+    resolution: {integrity: sha512-a3usWP+PuTBOL2Py8jduu1CnHm6eF2FJWt4gLqsu3/tDgJKnQ/Q/3iaNveqPXUYVg9Akn8Gp14ydPf23QaOqhw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
