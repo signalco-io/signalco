@@ -1,12 +1,15 @@
 import { WebApp, AppServicePlan, SupportedTlsVersions } from '@pulumi/azure-native/web';
+import { DiagnosticSetting } from '@pulumi/azure-native/insights';
 import { ResourceGroup } from '@pulumi/azure-native/resources';
 import { Input, interpolate } from '@pulumi/pulumi';
+import createLogWorkspace from './createLogWorkspace';
 
 export function createFunction (
     resourceGroup: ResourceGroup,
     namePrefix: string,
     protect: boolean,
     isPublic: boolean,
+    logWorkspace: ReturnType<typeof createLogWorkspace>,
     cors?: Input<string>[]) {
     const plan = new AppServicePlan(`func-appplan-${namePrefix}`, {
         resourceGroupName: resourceGroup.name,
@@ -53,6 +56,27 @@ export function createFunction (
     }, {
         protect,
         // parent: plan
+    });
+
+    new DiagnosticSetting(`logs-diagnosticSetting-${namePrefix}`, {
+        logs: [{
+            category: 'FunctionAppLogs',
+            enabled: true,
+            retentionPolicy: {
+                enabled: true,
+                days: 7,
+            },
+        }],
+        metrics: [{
+            category: 'AllMetrics',
+            enabled: true,
+            retentionPolicy: {
+                enabled: true,
+                days: 7,
+            },
+        }],
+        resourceUri: app.id,
+        storageAccountId: logWorkspace.workspace.id,
     });
 
     return {
