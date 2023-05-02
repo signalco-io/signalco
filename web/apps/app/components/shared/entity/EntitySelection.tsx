@@ -1,14 +1,16 @@
 import React, { useMemo, useState } from 'react';
 import {
-    Loadable, List,
+    List,
     ListItem,
-    ListItemButton,
-    Stack,
-    TextField, Box
+    ListItemButton, 
+    Box
 } from '@signalco/ui';
 import useAllEntities from '../../../src/hooks/signalco/entity/useAllEntities';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointer from '../../../src/contacts/IContactPointer';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { TextField } from '@signalco/ui/dist/TextField';
 
 export type EntitySelectionProps = {
     target: Partial<IContactPointer> | undefined;

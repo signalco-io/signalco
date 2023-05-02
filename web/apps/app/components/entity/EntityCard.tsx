@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Row, Avatar, Card, Typography, Box, Timeago, MuiStack, Checkbox } from '@signalco/ui';
+import { Avatar, Card, Box, MuiStack } from '@signalco/ui';
 import EntityIcon from '../shared/entity/EntityIcon';
 import BatteryIndicator from '../indicators/BatteryIndicator';
 import { KnownPages } from '../../src/knownPages';
@@ -8,6 +8,10 @@ import { entityLastActivity } from '../../src/entity/EntityHelper';
 import ShareEntityChip from './ShareEntityChip';
 import EntityStatus, { useEntityStatus } from './EntityStatus';
 import { useEntityBattery } from './EntityBattery';
+import { Checkbox } from '@signalco/ui/dist/Checkbox';
+import { Row } from '@signalco/ui/dist/Row';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Typography } from '@signalco/ui/dist/Typography';
 
 export interface EntityCardProps {
     entity: IEntityDetails;

@@ -6,7 +6,7 @@ export type TextFieldProps = InputProps & {
     helperText?: ReactNode | string | undefined
 };
 
-export default function TextField({ label, helperText, ...rest }: TextFieldProps) {
+export function TextField({ label, helperText, ...rest }: TextFieldProps) {
     return (
         <FormControl>
             {label && <FormLabel>{label}</FormLabel>}

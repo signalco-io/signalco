@@ -1,6 +1,12 @@
 import { Suspense, useState } from 'react';
 import { Custom, Laptop, SunMoon, Timer } from '@signalco/ui-icons';
-import { type AppThemeMode, Stack, Row, TextField, SupportedColorScheme, Typography, Box, useColorScheme, DefaultColorScheme, Picker } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import type { AppThemeMode } from '@signalco/ui/dist/theme';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Picker } from '@signalco/ui/dist/Picker';
+import { SupportedColorScheme, Box, useColorScheme, DefaultColorScheme } from '@signalco/ui';
 import { fromDuration, now, todayAt, toDuration } from '../../src/services/DateTimeProvider';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale from '../../src/hooks/useLocale';

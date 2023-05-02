@@ -1,7 +1,15 @@
 'use client';
 
 import { ChangeEvent, SyntheticEvent, createRef, useState } from 'react';
-import { Row, Stack, Alert, Button, TextField, Typography, Fade, GentleSlide } from '@signalco/ui';
+import { Button, TextField, Fade } from '@signalco/ui';
+import { Alert } from '@signalco/ui/dist/Alert';
+
+import { Stack } from '@signalco/ui/dist/Stack';
+
+import { GentleSlide} from '@signalco/ui/dist/GentleSlide';
+
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Row } from '@signalco/ui/dist/Row';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 function Newsletter() {

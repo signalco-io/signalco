@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Loadable, Stack } from '@signalco/ui';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { Stack } from '@signalco/ui/dist/Stack';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export default function AppLogoutPage() {

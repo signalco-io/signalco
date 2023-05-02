@@ -1,2 +1,1 @@
-export { default } from './Loadable';
-export {type LoadableLoadingErrorProps, type LoadableSkeletonProps, type LoadableProps} from './Loadable';
+export { Loadable, type LoadableLoadingErrorProps, type LoadableSkeletonProps, type LoadableProps} from './Loadable';

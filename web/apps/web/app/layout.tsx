@@ -1,6 +1,6 @@
 import Script from 'next/script';
 import { type Metadata } from 'next';
-import '@signalco/ui/dist/ui.css';
+import '@signalco/ui/dist/index.css';
 import './global.scss';
 
 export default function RootLayout({ children, }: {

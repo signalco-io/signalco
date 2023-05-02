@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { TextField } from '@signalco/ui';
+import { TextField } from '@signalco/ui/dist/TextField';
 import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
 import useLocale from '../../../src/hooks/useLocale';
 

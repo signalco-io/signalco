@@ -1,8 +1,7 @@
 import { type MouseEventHandler, type ReactNode } from 'react';
-import Link from '../Link';
-import Row from '../Row';
+import {Link} from '../Link';
+import {Row} from '../Row';
 import { type ChildrenProps } from '../sharedTypes';
-import styles from './Chip.module.scss';
 import { cx } from 'classix';
 
 /** @alpha */
@@ -16,11 +15,12 @@ export type ChipProps = ChildrenProps & {
 }
 
 /** @alpha */
-export default function Chip({ size, color, startDecorator, onClick, children, href }: ChipProps) {
-    const className = cx(
-        styles.root, 
-        size && styles[size],
-        color && styles[color]);
+export function Chip({ size, color, startDecorator, onClick, children, href }: ChipProps) {
+    // const className = cx(
+    //     styles.root, 
+    //     size && styles[size],
+    //     color && styles[color]);
+    const className = '';
     const Wrapper = onClick
         ? (props: ChildrenProps) => <button onClick={onClick} className={className}>{props.children}</button>
         : (href

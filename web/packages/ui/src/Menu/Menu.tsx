@@ -9,7 +9,7 @@ export type ControlAriaProps = {
     'aria-haspopup'?: true;
 };
 
-export interface MenuProps extends ChildrenProps {
+export type MenuProps = ChildrenProps & {
     menuId?: string;
     renderTrigger: (props: ControlAriaProps & {
         onClick: (event: React.MouseEvent<Element, MouseEvent>) => void;
@@ -17,8 +17,7 @@ export interface MenuProps extends ChildrenProps {
     }) => ReactElement,
 }
 
-/** @alpha */
-export default function Menu({ children, menuId, renderTrigger }: MenuProps) {
+export function Menu({ children, menuId, renderTrigger }: MenuProps) {
     const id = useId();
     const popupState = usePopupState({ variant: 'popover', popupId: menuId ?? id });
     const { anchorReference, anchorPosition, ...menuProps } = bindMenu(popupState);

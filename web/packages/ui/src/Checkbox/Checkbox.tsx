@@ -2,7 +2,7 @@ import { ChangeEvent, ReactNode } from 'react';
 import { Checkbox as JoyCheckbox } from '@mui/joy';
 import { SxProps } from '@mui/system';
 
-export interface CheckboxProps {
+export type CheckboxProps = {
     checked: boolean;
     readonly?: boolean;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -11,7 +11,7 @@ export interface CheckboxProps {
     disableIcon?: boolean;
 }
 
-export default function Checkbox(props: CheckboxProps) {
+export function Checkbox(props: CheckboxProps) {
     const { checked, readonly, onChange, sx, label, disableIcon } = props;
 
     return (

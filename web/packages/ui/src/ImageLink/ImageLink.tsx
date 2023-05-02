@@ -1,14 +1,12 @@
 import Image, { ImageProps } from 'next/image';
-import Link from '../Link';
+import {Link} from '../Link';
 
-/** @alpha */
-export interface ImageLinkProps {
+export type ImageLinkProps = {
     href: string;
     imageProps: ImageProps;
 }
 
-/** @alpha */
-export default function ImageLink({ href, imageProps }: ImageLinkProps) {
+export function ImageLink({ href, imageProps }: ImageLinkProps) {
     return (
         <Link href={href}>
             <Image {...imageProps} alt={imageProps.alt} />

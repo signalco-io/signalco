@@ -1,7 +1,10 @@
 'use client';
 
 import React from 'react';
-import { Stack, Container, Grid, IconButton, Typography, Box, Link, MuiStack } from '@signalco/ui';
+import { Container, Grid, IconButton, Box, MuiStack } from '@signalco/ui';
+import { Link } from '@signalco/ui/dist/Link';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { now } from '../../src/services/DateTimeProvider';
 

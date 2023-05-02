@@ -1,12 +1,12 @@
 import { ChildrenProps } from "../sharedTypes";
 
-export interface GrowProps extends ChildrenProps {
+export type GrowProps = ChildrenProps & {
     appear: boolean;
     duration?: number;
     collapsedWhenHidden?: boolean;
 }
 
-export default function Grow(props: GrowProps) {
+export function Grow(props: GrowProps) {
     const { appear, collapsedWhenHidden, children } = props;
     const duration = props.duration ?? 100;
 

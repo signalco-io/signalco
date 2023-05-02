@@ -1,7 +1,7 @@
 import { extendTheme } from "@mui/joy";
 import { neutral, zinc } from "../colors";
 
-export default function buildSignalcoTheme() {
+export function buildSignalcoTheme() {
     return extendTheme({
         colorSchemes: {
             dark: {

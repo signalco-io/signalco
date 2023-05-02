@@ -1,2 +1,1 @@
-export { default } from './NavigatingButton';
-export {type NavigatingButtonProps} from './NavigatingButton';
+export { NavigatingButton, type NavigatingButtonProps} from './NavigatingButton';

@@ -1,4 +1,10 @@
-import { Chip, Card, ColorPaletteProp, Typography, Link, Stack } from '@signalco/ui';
+import { Card, ColorPaletteProp  } from '@signalco/ui';
+import { Chip } from '@signalco/ui/dist/Chip';
+
+import { Link } from '@signalco/ui/dist/Link';
+
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
 import ChannelLogo from './ChannelLogo';
 
 type ChannelGalleryItemProps = {

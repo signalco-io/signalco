@@ -1,6 +1,6 @@
 import Typography from '@signalco/ui/dist/Typography';
-import Stack from '@signalco/ui/dist/Stack';
-import Link from '@signalco/ui/dist/Link';
+import {Stack} from '@signalco/ui/dist/Stack';
+import {Link} from '@signalco/ui/dist/Link';
 import { type ChildrenProps } from '@signalco/ui';
 import { KnownPages } from '../../src/knownPages';
 

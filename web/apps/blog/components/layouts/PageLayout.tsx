@@ -1,6 +1,6 @@
 import React from 'react';
-import Stack from '@signalco/ui/dist/Stack';
-import Container from '@signalco/ui/dist/Container';
+import {Stack} from '@signalco/ui/dist/Stack';
+import {Container} from '@signalco/ui/dist/Container';
 import { ChildrenProps } from '@signalco/ui';
 import Footer from '../pages/Footer';
 import PageNav, { HeaderHeight } from '../PageNav';

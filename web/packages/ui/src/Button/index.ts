@@ -1,1 +1,1 @@
-export { default } from '@mui/joy/Button';
+export { default as Button } from '@mui/joy/Button';

@@ -1,6 +1,6 @@
 import { ChildrenProps } from '../sharedTypes';
 
-export interface GentleSlideProps extends ChildrenProps {
+export type GentleSlideProps = ChildrenProps & {
     appear: boolean,
     index?: number,
     appearDelayPerIndex?: number | undefined,
@@ -10,7 +10,7 @@ export interface GentleSlideProps extends ChildrenProps {
     collapsedWhenHidden?: boolean
 }
 
-export default function GentleSlide(props: GentleSlideProps) {
+export function GentleSlide(props: GentleSlideProps) {
     const { children, appear, index, collapsedWhenHidden } = props;
     const appearDelayPerIndex = props.appearDelayPerIndex ?? 200;
     const amount = props.amount ?? 12;

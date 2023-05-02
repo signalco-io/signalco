@@ -1,9 +1,7 @@
 import { type CSSProperties } from "react";
 import { type ChildrenProps } from "../sharedTypes";
-import styles from './Row.module.scss';
 
-/** @alpha */
-export interface RowProps extends ChildrenProps {
+export type RowProps = ChildrenProps & {
     spacing?: number;
     alignItems?: 'start' | 'center' | 'stretch' | 'end' | undefined;
     justifyContent?: CSSProperties['justifyContent'];
@@ -11,11 +9,10 @@ export interface RowProps extends ChildrenProps {
     style?: CSSProperties | undefined;
 }
 
-/** @alpha */
-export default function Row({ children, spacing, alignItems, justifyContent, justifyItems, style }: RowProps) {
+export function Row({ children, spacing, alignItems, justifyContent, justifyItems, style }: RowProps) {
     return (
         <div
-            className={styles.root}
+            className="flex gap-[var(--s-gap)] align-items-[var(--s-alignItems)] justify-content-[var(--s-justifyContent)] justify-items-[var(--s-justifyItems)]"
             style={{
                 '--s-gap': `${(spacing ?? 0) * 8}px`,
                 '--s-alignItems': alignItems ?? 'center',

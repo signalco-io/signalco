@@ -2,13 +2,11 @@ import { bindPopover, PopupState } from 'material-ui-popup-state/hooks';
 import { Popper as PopperUnstyled, ClickAwayListener } from "@mui/base";
 import { ChildrenProps } from '../sharedTypes';
 
-/** @alpha */
-export interface PopperProps extends ChildrenProps {
+export type PopperProps = ChildrenProps & {
     popupState: PopupState;
 }
 
-/** @alpha */
-export default function Popper(props: PopperProps) {
+export function Popper(props: PopperProps) {
     const { popupState, children } = props;
     const { anchorReference, anchorPosition, ...popoverProps } = bindPopover(popupState);
 

@@ -3,7 +3,7 @@ import { ExpandDown } from '@signalco/ui-icons';
 import { ChildrenProps } from '../sharedTypes';
 import { ListItem, Tooltip, IconButton, ListItemButton, List } from '@mui/joy';
 
-export interface ListTreeItemProps extends ChildrenProps {
+export type ListTreeItemProps = ChildrenProps & {
     label?: ReactElement | string;
     nodeId: string;
     defaultOpen?: boolean;
@@ -12,7 +12,7 @@ export interface ListTreeItemProps extends ChildrenProps {
     onSelected?: (nodeId: string) => void;
 }
 
-export default function ListTreeItem(props: ListTreeItemProps) {
+export function ListTreeItem(props: ListTreeItemProps) {
     const { label, children, nodeId, defaultOpen, onChange, selected, onSelected } = props;
     const [open, setOpen] = useState(defaultOpen);
 

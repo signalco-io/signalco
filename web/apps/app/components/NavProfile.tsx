@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
-import { Button, Divider, IconButton, Menu, Box, MenuItemLink, ButtonProps, MuiStack, Stack } from '@signalco/ui';
+import { Channel, Close, Dashboard, Device, Menu as MenuIcon, LogOut, Settings } from '@signalco/ui-icons';
+import { Divider, IconButton, Box, ButtonProps, MuiStack } from '@signalco/ui';
 import { orderBy } from '@signalco/js';
 import { KnownPages } from '../src/knownPages';
 import useLocale from '../src/hooks/useLocale';
@@ -9,6 +9,9 @@ import useCurrentUser from '../src/hooks/useCurrentUser';
 import UserAvatar from './users/UserAvatar';
 import NavLink from './navigation/NavLink';
 import ApiBadge from './development/ApiBadge';
+import { Button } from '@signalco/ui/dist/Button';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Menu, MenuItemLink } from '@signalco/ui/dist/Menu';
 
 type NavItem = {
   label: string,

@@ -1,6 +1,6 @@
 import { compareVersions } from 'compare-versions';
 import { Check, Upload } from '@signalco/ui-icons';
-import { Button } from '@signalco/ui';
+import { Button } from '@signalco/ui/dist/Button';
 import { useLoadAndError } from '@signalco/hooks';
 import StationsRepository from '../../src/stations/StationsRepository';
 import { showNotification } from '../../src/notifications/PageNotificationService';

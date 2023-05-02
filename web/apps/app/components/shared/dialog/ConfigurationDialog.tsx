@@ -1,5 +1,8 @@
 import React from 'react';
-import { Modal, ModalClose, ModalDialog, Typography, Breakpoint, Stack, Row, Box } from '@signalco/ui';
+import { Modal, ModalClose, ModalDialog, Breakpoint, Box } from '@signalco/ui';
+import { Row } from '@signalco/ui/dist/Row';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Typography } from '@signalco/ui/dist/Typography';
 
 export interface IConfigurationDialogProps {
     isOpen: boolean,

@@ -1,2 +1,1 @@
-export { default } from './DotIndicator';
-export { type DotIndicatorProps } from './DotIndicator';
+export { DotIndicator, type DotIndicatorProps } from './DotIndicator';

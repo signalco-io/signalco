@@ -1,6 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
-import { Button, Typography, Box, CircularProgress, Stack } from '@signalco/ui';
+import { Box, CircularProgress } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Button } from '@signalco/ui/dist/Button';
+import { Stack } from '@signalco/ui/dist/Stack';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';

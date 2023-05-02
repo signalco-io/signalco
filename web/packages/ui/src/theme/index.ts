@@ -1,2 +1,2 @@
-export type { default as AppThemeMode } from './AppThemeMode';
-export { default as buildSignalcoTheme } from './signalcoTheme'
+export type { AppThemeMode } from './AppThemeMode';
+export { buildSignalcoTheme } from './signalcoTheme'

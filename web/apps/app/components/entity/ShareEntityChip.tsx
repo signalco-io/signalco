@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { Clear, People, Send, Share } from '@signalco/ui-icons';
-import { Chip, Row, Stack, Tooltip, IconButton, TextField, List, ListItem, ListItemContent, ListDivider, GentleSlide } from '@signalco/ui';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { GentleSlide } from '@signalco/ui/dist/GentleSlide';
+import { Chip } from '@signalco/ui/dist/Chip';
+import { Tooltip, IconButton, List, ListItem, ListItemContent, ListDivider } from '@signalco/ui';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import IUser from '../../src/users/IUser';
 import { requestAsync } from '../../src/services/HttpService';

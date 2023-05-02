@@ -1,10 +1,10 @@
 import { Copy } from '@signalco/ui-icons';
-import IconButtonCopyToClipboard from '../IconButtonCopyToClipboard';
-import TextField, { TextFieldProps } from '../TextField';
+import { IconButtonCopyToClipboard } from '../IconButtonCopyToClipboard';
+import { TextField, TextFieldProps } from '../TextField';
 
 export type CopyToClipboardInputProps = TextFieldProps;
 
-export default function CopyToClipboardInput(props: TextFieldProps) {
+export function CopyToClipboardInput(props: TextFieldProps) {
     return (
         <TextField
             endDecorator={

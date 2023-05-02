@@ -1,4 +1,6 @@
-import { FormControl, TextField, Button } from '@signalco/ui';
+import { FormControl } from '@signalco/ui';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Button } from '@signalco/ui/dist/Button';
 
 type InputSubmitProps = {
     value: string;

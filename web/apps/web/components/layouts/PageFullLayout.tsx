@@ -1,5 +1,6 @@
 import React from 'react';
-import { ChildrenProps, Stack } from '@signalco/ui';
+import { ChildrenProps } from '@signalco/ui';
+import { Stack } from '@signalco/ui/dist/Stack';
 import Footer from '../pages/Footer';
 import { PageNav } from '../PageNav';
 

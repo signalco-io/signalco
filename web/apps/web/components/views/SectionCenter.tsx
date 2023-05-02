@@ -1,6 +1,8 @@
 'use client';
+
 import React, { type CSSProperties } from 'react';
-import { Container, Box } from '@signalco/ui';
+import { Container } from '@signalco/ui/dist/Container';
+import { Box } from '@signalco/ui';
 
 
 export function SectionCenter(props: { children?: React.ReactNode | undefined; style?: CSSProperties | undefined; narrow?: boolean; }) {

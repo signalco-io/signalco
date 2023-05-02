@@ -1,9 +1,9 @@
 import { Warning } from "@signalco/ui-icons";
 import { Component, ErrorInfo } from "react";
-import Alert from "../Alert";
+import { Alert } from "../Alert";
 import { ChildrenProps } from "../sharedTypes";
 
-export default class ErrorBoundary extends Component<ChildrenProps, { hasError: boolean }> {
+export class ErrorBoundary extends Component<ChildrenProps, { hasError: boolean }> {
     constructor(props: ChildrenProps) {
         super(props);
         this.state = { hasError: false };

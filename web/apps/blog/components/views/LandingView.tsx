@@ -2,9 +2,9 @@ import fs from 'fs';
 import React from 'react';
 import klaw from 'klaw';
 import Typography from '@signalco/ui/dist/Typography';
-import Stack from '@signalco/ui/dist/Stack';
-import Row from '@signalco/ui/dist/Row';
-import Link from '@signalco/ui/dist/Link';
+import {Stack} from '@signalco/ui/dist/Stack';
+import {Row} from '@signalco/ui/dist/Row';
+import {Link} from '@signalco/ui/dist/Link';
 import PageCenterHeader from '../pages/PageCenterHeader';
 
 export default async function LandingPageView() {

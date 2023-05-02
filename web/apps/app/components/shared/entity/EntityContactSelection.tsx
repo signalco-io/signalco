@@ -1,11 +1,13 @@
 import React from 'react';
 import {
-    Loadable, NoDataPlaceholder, List,
+    List,
     ListItem,
     ListItemButton, Box
 } from '@signalco/ui';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import { ContactPointerRequiredEntity } from './DisplayEntityTarget';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
 
 export type EntityContactSelectionProps = {
     target: ContactPointerRequiredEntity;

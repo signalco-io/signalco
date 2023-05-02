@@ -1,14 +1,14 @@
 import { Grid } from '@mui/joy';
 import React from 'react';
 
-export interface GalleryGridProps {
+export type GalleryGridProps = {
     items: {
         id: string;
     }[];
     itemComponent: React.FunctionComponent<any>;
 }
 
-export default function GalleryGrid(props: GalleryGridProps) {
+export function GalleryGrid(props: GalleryGridProps) {
     const { items, itemComponent } = props;
     const ItemComponent = itemComponent;
     return (

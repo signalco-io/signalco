@@ -4,7 +4,18 @@ import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Security, Send } from '@signalco/ui-icons';
-import { Stack, Loadable, Chip, NavigatingButton, Typography, TextField, Divider, Badge, Alert, Button, Card, List, Tooltip, Box, Row, CardOverflow, ListTreeItem, SelectItems, CopyToClipboardInput } from '@signalco/ui';
+import { Divider, Badge, Alert, Button, Card, List, Tooltip, Box, CardOverflow, ListTreeItem, SelectItems, CopyToClipboardInput    } from '@signalco/ui';
+import { TextField } from '@signalco/ui/dist/TextField';
+
+import { Chip } from '@signalco/ui/dist/Chip';
+
+import { Loadable } from '@signalco/ui/dist/Loadable';
+
+import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
+
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Row } from '@signalco/ui/dist/Row';
+import { Stack } from '@signalco/ui/dist/Stack';
 import { camelToSentenceCase, HttpOperation, ObjectDictAny } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { isDeveloper } from '../../../../src/services/EnvProvider';

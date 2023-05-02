@@ -1,2 +1,1 @@
-export {default} from './CopyToClipboardInput';
-export {type CopyToClipboardInputProps} from './CopyToClipboardInput';
+export { CopyToClipboardInput, type CopyToClipboardInputProps} from './CopyToClipboardInput';

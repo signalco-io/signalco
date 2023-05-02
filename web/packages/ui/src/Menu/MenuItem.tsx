@@ -3,8 +3,7 @@ import { ChildrenProps } from "../sharedTypes";
 import JoyMenuItem from '@mui/joy/MenuItem';
 import { ListItemDecorator } from '@mui/joy';
 
-/** @alpha */
-export interface MenuItemProps extends ChildrenProps {
+export type MenuItemProps = ChildrenProps & {
     'aria-controls'?: string
     'aria-describedby'?: string
     'aria-haspopup'?: true
@@ -14,8 +13,7 @@ export interface MenuItemProps extends ChildrenProps {
     href?: string;
 }
 
-/** @alpha */
-export default function MenuItem({ startDecorator, children, ...rest }: MenuItemProps) {
+export function MenuItem({ startDecorator, children, ...rest }: MenuItemProps) {
     return (
         <JoyMenuItem {...rest}>
             {startDecorator && (

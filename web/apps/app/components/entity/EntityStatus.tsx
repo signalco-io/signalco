@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Lightning } from '@signalco/ui-icons';
-import { DotIndicator } from '@signalco/ui';
+import { DotIndicator } from '@signalco/ui/dist/DotIndicator';
 import { now } from '../../src/services/DateTimeProvider';
 import IEntityDetails from '../../src/entity/IEntityDetails';
 import { entityInError, entityHasOffline, entityLastActivity } from '../../src/entity/EntityHelper';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loadable } from '@signalco/ui';
+import { Loadable } from '@signalco/ui/dist/Loadable';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
 import IContactPointer from '../../../src/contacts/IContactPointer';

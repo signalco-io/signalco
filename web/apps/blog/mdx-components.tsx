@@ -1,5 +1,5 @@
 import Typograhy from '@signalco/ui/dist/Typography';
-import Row from '@signalco/ui/dist/Row';
+import {Row} from '@signalco/ui/dist/Row';
 
 function H1({ children }) {
     return <Typograhy level="h1">{children}</Typograhy>;

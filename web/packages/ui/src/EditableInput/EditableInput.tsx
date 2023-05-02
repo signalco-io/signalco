@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Close, Save, Edit } from '@signalco/ui-icons';
 import { Input, IconButton, Theme, Typography } from '@mui/joy';
 import { SystemStyleObject, Box } from '@mui/system';
-import Row from '../Row';
+import { Row } from '../Row';
 
-export interface EditableInputProps {
+export type EditableInputProps = {
     text: string,
     onChange: (text: string) => void
     sx?: SystemStyleObject<Theme>
@@ -12,7 +12,7 @@ export interface EditableInputProps {
     noWrap?: boolean
 }
 
-function EditableInput(props: EditableInputProps) {
+export function EditableInput(props: EditableInputProps) {
     const {
         text,
         sx,
@@ -83,5 +83,3 @@ function EditableInput(props: EditableInputProps) {
         )
     }
 }
-
-export default EditableInput;

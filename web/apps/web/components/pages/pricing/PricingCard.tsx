@@ -1,4 +1,7 @@
-import { MuiStack, Stack, Button, Card, Typography, Checkbox, Row } from '@signalco/ui';
+import { MuiStack, Button, Card, Checkbox } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
 
 export interface PricingOption {

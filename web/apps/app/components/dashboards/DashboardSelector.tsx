@@ -2,11 +2,12 @@ import React, { Suspense, useEffect } from 'react';
 import Link from 'next/link';
 import { bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import { Select } from '@signalco/ui-icons';
-import { Popper, Row, Button } from '@signalco/ui';
 import { useSearchParam } from '@signalco/hooks';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
-
+import { Button } from '@signalco/ui/dist/Button';
+import { Row } from '@signalco/ui/dist/Row';
+import { Popper} from '@signalco/ui/dist/Popper';
 export interface IDashboardSelectorProps {
     onEditWidgets: () => void,
     onSettings: () => void

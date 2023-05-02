@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import Link from 'next/link';
-import { Stack, Icon, Row, Button, Typography, Box } from '@signalco/ui';
+import { Box } from '@signalco/ui';
 import { useLoadAndError } from '@signalco/hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
@@ -12,6 +12,11 @@ import useContact from '../../../src/hooks/signalco/useContact';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import { historiesAsync } from '../../../src/contacts/ContactRepository';
+import { Button } from '@signalco/ui/dist/Button';
+import { Row } from '@signalco/ui/dist/Row';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Typography } from '@signalco/ui/dist/Typography';
+import {Icon} from '@signalco/ui/dist/Icon';
 
 type ConfigProps = {
     label?: string;

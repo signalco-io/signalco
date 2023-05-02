@@ -1,13 +1,11 @@
-import { CSSProperties } from 'react';
-import { ChildrenProps } from '../sharedTypes';
+import type { CSSProperties } from 'react';
+import type { ChildrenProps } from '../sharedTypes';
 
-/** @alpha */
-export interface IconProps extends ChildrenProps {
+export type IconProps = ChildrenProps & {
     sx?: CSSProperties | undefined;
 }
 
-/** @alpha */
-export default function Icon(props: IconProps) {
+export function Icon(props: IconProps) {
     return (
         <span
             className="material-icons"

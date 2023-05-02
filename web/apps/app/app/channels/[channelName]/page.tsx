@@ -2,7 +2,14 @@
 
 import { useMemo } from 'react';
 import { Bug, Link as LinkIcon } from '@signalco/ui-icons';
-import { Container, Loadable, NoDataPlaceholder, Row, Stack, List, ListItemButton, Typography, Box, Link } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { Link } from '@signalco/ui/dist/Link';
+import { Container } from '@signalco/ui/dist/Container';
+import { Box, List, ListItemButton } from '@signalco/ui';
 import { channelsData } from '@signalco/data';
 import { KnownPages } from '../../../src/knownPages';
 import useAllEntities from '../../../src/hooks/signalco/entity/useAllEntities';

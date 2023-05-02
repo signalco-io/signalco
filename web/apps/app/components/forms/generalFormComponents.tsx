@@ -1,4 +1,5 @@
-import { TextField, Checkbox } from '@signalco/ui';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
 
 const components: FormBuilderComponents = {

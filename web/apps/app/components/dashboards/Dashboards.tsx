@@ -1,7 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { Loadable, Row, Button, Typography, Box, MuiStack } from '@signalco/ui';
+import { Box, MuiStack } from '@signalco/ui';
+import { Button } from '@signalco/ui/dist/Button';
+import { Row } from '@signalco/ui/dist/Row';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Loadable } from '@signalco/ui/dist/Loadable';
 import { useSearchParam } from '@signalco/hooks';
 import { widgetType } from '../widgets/Widget';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';

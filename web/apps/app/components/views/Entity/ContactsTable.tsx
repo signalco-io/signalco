@@ -2,7 +2,7 @@ import React, { Fragment, useMemo, useState } from 'react';
 import { usePopupState } from 'material-ui-popup-state/hooks';
 import { bindTrigger } from 'material-ui-popup-state';
 import { Add, Code, Delete, Edit, MoreVertical, UI } from '@signalco/ui-icons';
-import { Stack, Loadable, Row, Button, Card, IconButton, List, ListDivider, ListItem, Menu, MenuItem, TextField, Tooltip, Typography, Box, CopyToClipboardInput, ListTreeItem, Picker, Timeago, ListItemDecorator } from '@signalco/ui';
+import { Card, IconButton, List, ListDivider, ListItem, Tooltip, Box, ListItemDecorator } from '@signalco/ui';
 import { camelToSentenceCase, isJson, ParsedJson } from '@signalco/js';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
@@ -12,6 +12,18 @@ import useLocale from '../../../src/hooks/useLocale';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import { deleteContactAsync, setAsync } from '../../../src/contacts/ContactRepository';
+import { Button } from '@signalco/ui/dist/Button';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { MenuItem } from '@signalco/ui/dist/Menu';
+import { Picker } from '@signalco/ui/dist/Picker';
+import { Row } from '@signalco/ui/dist/Row';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
+import {CopyToClipboardInput} from '@signalco/ui/dist/CopyToClipboardInput';
+import {Menu} from '@signalco/ui/dist/Menu';
 
 function JsonNonArrayVisualizer({ value }: { value: ParsedJson }) {
     if (value === null ||

@@ -1,2 +1,1 @@
-export { default } from './GentleSlide';
-export {type GentleSlideProps} from './GentleSlide';
+export {GentleSlide, type GentleSlideProps} from './GentleSlide';

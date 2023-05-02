@@ -1,4 +1,4 @@
-import '@signalco/ui/dist/ui.css';
+import '@signalco/ui/dist/index.css';
 import './global.scss';
 import { Metadata } from 'next';
 

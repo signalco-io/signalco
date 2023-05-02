@@ -1,4 +1,4 @@
-import { Typography } from "@signalco/ui";
+import { Typography } from "@signalco/ui/dist/Typography";
 import { Meta, StoryObj } from "@storybook/react";
 
 export default { component: Typography, tags: ['autodocs'] } satisfies Meta<typeof Typography>;

@@ -1,6 +1,12 @@
 import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
-import { NoDataPlaceholder, Row, Sheet, Typography, Timeago, lightBlue, deepOrange, Loadable, amber, green, zinc } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Row } from '@signalco/ui/dist/Row';
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { lightBlue, deepOrange, green, amber, zinc } from '@signalco/ui/dist/colors';
+import { Sheet } from '@signalco/ui';
 import { camelToSentenceCase, ObjectDictAny } from '@signalco/js';
 import { now } from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';

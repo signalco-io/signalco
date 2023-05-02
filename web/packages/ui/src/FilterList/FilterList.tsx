@@ -1,25 +1,25 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { Check, Close, ExpandDown } from '@signalco/ui-icons';
-import SelectItems from '../SelectItems';
-import Checkbox from '../Checkbox';
+import {SelectItems} from '../SelectItems';
+import {Checkbox} from '../Checkbox';
 import { Typography, Button } from '@mui/joy';
 import { Box } from '@mui/system';
-import Row from '../Row';
-import Stack from '../Stack';
-import Grow from '../Grow';
-import Collapse from '../Collapse';
-import Fade from '../Fade';
+import {Row} from '../Row';
+import {Stack} from '../Stack';
+import {Grow} from '../Grow';
+import {Collapse} from '../Collapse';
+import {Fade} from '../Fade';
 import { ChildrenProps } from '../sharedTypes';
-import Loadable, { LoadableProps } from '../Loadable';
-import React from 'react';
-import NoDataPlaceholder from '../NoDataPlaceholder';
+import {Loadable, LoadableProps } from '../Loadable';
+import {NoDataPlaceholder} from '../NoDataPlaceholder';
 
-export interface FilterListItem {
+export type FilterListItem = {
     id: string;
     label: string;
 }
 
-export interface FilterListProps {
+export type FilterListProps = {
     header: string;
     items: FilterListItem[];
     selected?: string | string[] | null | undefined;
@@ -94,7 +94,7 @@ export function ItemsShowMore({ children, truncate, itemsWrapper, ...rest }: Ite
     );
 }
 
-export default function FilterList(props: FilterListProps) {
+export function FilterList(props: FilterListProps) {
     const {
         header,
         items,

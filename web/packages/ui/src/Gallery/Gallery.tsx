@@ -1,11 +1,11 @@
 import React from 'react';
 import { Stack as MuiStack } from '@mui/system';
-import GalleryGridFilter from './GalleryGridFilter';
-import GalleryGrid from './GalleryGrid';
-import GalleryFilters from './GalleryFilters';
-import Stack from '../Stack';
+import {GalleryGridFilter} from './GalleryGridFilter';
+import {GalleryGrid} from './GalleryGrid';
+import {GalleryFilters} from './GalleryFilters';
+import {Stack} from '../Stack';
 
-export interface GalleryProps {
+export type GalleryProps = {
     items: {
         id: string;
         label: string;
@@ -16,7 +16,7 @@ export interface GalleryProps {
     gridFilters?: React.ReactElement;
 }
 
-export default function Gallery(props: GalleryProps) {
+export function Gallery(props: GalleryProps) {
     const { items, itemComponent, filters, gridHeader, gridFilters } = props;
 
     return (

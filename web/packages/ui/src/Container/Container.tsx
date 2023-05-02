@@ -1,17 +1,14 @@
 import cx from 'classix';
-import { type CSSProperties } from 'react';
-import { ChildrenProps } from '../sharedTypes';
-import styles from './Container.module.scss';
+import type { CSSProperties } from 'react';
+import type { ChildrenProps } from '../sharedTypes';
 
-/** @alpha */
-export interface ContainerProps extends ChildrenProps {
+export type ContainerProps = ChildrenProps & {
     maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false,
     centered?: boolean,
     padded?: boolean,
 }
 
-/** @alpha */
-export default function Container({ maxWidth, centered = true, padded = true, children }: ContainerProps) {
+export function Container({ maxWidth, centered = true, padded = true, children }: ContainerProps) {
     let width: number | undefined = 1200;
     switch (maxWidth) {
         case 'md':
@@ -33,11 +30,13 @@ export default function Container({ maxWidth, centered = true, padded = true, ch
             break;
     }
 
+    const className = cx(
+        "display-block max-width-[var(--container-maxWidth)] width-full",
+        (Boolean(width) && padded) && "padding-x-4",
+        centered && "margin-x-auto");
+
     return (
-        <div className={cx(
-            styles.root,
-            (Boolean(width) && padded) && styles.pad,
-            centered && styles.centered)}
+        <div className={className}
             style={{
                 "--container-maxWidth": width ? `${width}px` : undefined
             } as CSSProperties}>

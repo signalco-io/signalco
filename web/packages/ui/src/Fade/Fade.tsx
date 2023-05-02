@@ -1,12 +1,12 @@
 import { ChildrenProps } from "../sharedTypes";
 
-export interface FadeProps extends ChildrenProps {
+export type FadeProps = ChildrenProps & {
     appear: boolean;
     duration?: number;
     collapsedWhenHidden?: boolean;
 }
 
-export default function Fade(props: FadeProps) {
+export function Fade(props: FadeProps) {
     const { appear, collapsedWhenHidden, children } = props;
     const duration = props.duration ?? 200;
 

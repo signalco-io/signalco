@@ -1,5 +1,5 @@
 import '../styles/global.scss';
-import '@signalco/ui/dist/ui.css';
+import '@signalco/ui/dist/index.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { type Metadata } from 'next';
 import { ChildrenProps } from '@signalco/ui';

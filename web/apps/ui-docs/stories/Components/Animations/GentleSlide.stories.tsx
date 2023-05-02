@@ -1,4 +1,7 @@
-import { Card, GentleSlide, Row, Stack } from "@signalco/ui";
+import { Card } from "@signalco/ui";
+import { GentleSlide } from "@signalco/ui/dist/GentleSlide";
+import { Stack } from "@signalco/ui/dist/Stack";
+import { Row } from "@signalco/ui/dist/Row";
 import { StoryObj } from "@storybook/react";
 
 export default { component: GentleSlide, tags: ['autodocs'] };

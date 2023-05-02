@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Button , Breakpoint } from '@signalco/ui';
+import { Breakpoint } from '@signalco/ui';
 import ConfirmDeleteDialog from './ConfirmDeleteDialog';
+import { Button } from '@signalco/ui/dist/Button';
 
 export interface ConfirmDeleteButtonDialogProps {
     header: React.ReactNode,

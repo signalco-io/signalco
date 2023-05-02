@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { ExternalLink } from '@signalco/ui-icons';
-import { DisableButton, Avatar, Box, EditableInput, Timeago, MuiStack, Row, Stack, Loadable, Chip } from '@signalco/ui';
+import { Avatar, Box, MuiStack } from '@signalco/ui';
 import { camelToSentenceCase } from '@signalco/js';
 import EntityIcon from '../../shared/entity/EntityIcon';
 import BatteryIndicator from '../../indicators/BatteryIndicator';
@@ -15,7 +15,13 @@ import { setAsync } from '../../../src/contacts/ContactRepository';
 import EntityProcessDetails from './EntityProcessDetails';
 import EntityOptions from './EntityOptions';
 import ContactsTable from './ContactsTable';
-
+import { Chip } from '@signalco/ui/dist/Chip';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { Row } from '@signalco/ui/dist/Row';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { EditableInput } from '@signalco/ui/dist/EditableInput';
+import { DisableButton } from '@signalco/ui/dist/DisableButton';
 
 export interface EntityDetailsViewProps {
     id: string;

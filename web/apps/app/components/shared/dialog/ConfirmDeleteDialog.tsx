@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { Stack , Button, TextField, Typography , Breakpoint } from '@signalco/ui';
+import { Breakpoint } from '@signalco/ui';
 import useLocale from '../../../src/hooks/useLocale';
 import ConfigurationDialog from './ConfigurationDialog';
+import { Button } from '@signalco/ui/dist/Button';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Typography } from '@signalco/ui/dist/Typography';
 
 export interface IConfirmDeleteDialogProps {
     isOpen: boolean,

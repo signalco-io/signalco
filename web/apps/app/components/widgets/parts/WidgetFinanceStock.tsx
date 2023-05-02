@@ -1,11 +1,15 @@
 import { useCallback } from 'react';
-import { Row, Stack, Loadable, NoDataPlaceholder, Typography } from '@signalco/ui';
 import { useLoadAndError } from '@signalco/hooks';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import { JsonResponse } from '@signalco/js';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
+import { Row } from '@signalco/ui/dist/Row';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Typography } from '@signalco/ui/dist/Typography';
 
 type ConfigProps = {
     ticker: string;

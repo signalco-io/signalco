@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Accordion, Row, Typography,
-    Box
-} from '@signalco/ui';
+import { Box } from '@signalco/ui';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import EntitySelection from './EntitySelection';
 import EntityIconLabel from './EntityIconLabel';
 import EntityContactValueSelection from './EntityContactValueSelection';
 import EntityContactSelection from './EntityContactSelection';
 import { ContactPointerRequiredEntity } from './DisplayEntityTarget';
+import { Accordion } from '@signalco/ui/dist/Accordion';
+import { Row } from '@signalco/ui/dist/Row';
+import { Typography } from '@signalco/ui/dist/Typography';
 
 export type EntitySelectionMenuProps = {
     target?: Partial<IContactPointer>;

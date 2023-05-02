@@ -1,7 +1,8 @@
 'use client';
 
 import { ToastContainer } from 'react-toastify';
-import { ChildrenProps, CssBaseline, CssVarsProvider, buildSignalcoTheme, getInitColorSchemeScript } from '@signalco/ui';
+import { buildSignalcoTheme } from '@signalco/ui/dist/theme';
+import { ChildrenProps, CssBaseline, CssVarsProvider, getInitColorSchemeScript } from '@signalco/ui';
 import useAppTheme from '../src/hooks/useAppTheme';
 
 const signalcoTheme = buildSignalcoTheme();

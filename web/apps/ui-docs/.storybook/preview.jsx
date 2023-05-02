@@ -1,6 +1,7 @@
-import { CssVarsProvider, CssBaseline, buildSignalcoTheme } from '@signalco/ui';
+import { CssVarsProvider, CssBaseline } from '@signalco/ui';
+import { buildSignalcoTheme } from '@signalco/ui/dist/theme';
 import storybookSignalcoTheme from './signalco-theme';
-import '@signalco/ui/dist/ui.css';
+import '@signalco/ui/dist/index.css';
 
 const signalcoTheme = buildSignalcoTheme();
 

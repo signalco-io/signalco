@@ -1,13 +1,13 @@
 import { Card, IconButton } from '@mui/joy';
-import { type SxProps } from '@mui/system';
-import { type MouseEvent, useState } from 'react';
-import Collapse from '../Collapse';
-import Icon from '../Icon';
-import Row from '../Row';
+import type { SxProps } from '@mui/system';
+import { useState } from 'react';
+import type { MouseEvent } from 'react';
+import { Collapse } from '../Collapse';
+import {Icon} from '../Icon';
+import {Row} from '../Row';
 import { ChildrenProps } from '../sharedTypes';
 
-/** @alpha */
-export interface AccordionProps extends ChildrenProps {
+export type AccordionProps = ChildrenProps & {
     open?: boolean;
     disabled?: boolean;
     sx?: SxProps;
@@ -15,8 +15,7 @@ export interface AccordionProps extends ChildrenProps {
     unmountOnExit?: boolean;
 }
 
-/** @alpha */
-export default function Accordion(props: AccordionProps) {
+export function Accordion(props: AccordionProps) {
     const { children, open, sx, disabled, onChange, unmountOnExit } = props;
     const [isOpen, setIsOpen] = useState(open ?? false);
 

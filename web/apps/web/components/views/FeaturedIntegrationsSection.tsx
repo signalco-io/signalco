@@ -2,8 +2,11 @@
 
 import { useInView } from 'react-cool-inview';
 import React from 'react';
-import { ImageLink, Typography, Grid, GentleSlide, MuiStack } from '@signalco/ui';
+import { Grid, MuiStack } from '@signalco/ui';
 import { SectionCenter } from './SectionCenter';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { GentleSlide } from '@signalco/ui/dist/GentleSlide';
+import {ImageLink} from '@signalco/ui/dist/ImageLink';
 
 const integrationsList = [
     { name: 'Samsung', img: '/assets/logos/samsunglogo.png', imgRatio: 3.5, page: '/channels/samsung' },
