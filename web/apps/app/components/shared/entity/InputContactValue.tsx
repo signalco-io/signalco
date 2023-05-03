@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Play } from '@signalco/ui-icons';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
+import { Row } from '@signalco/ui/dist/Row';
 import { IconButton, Slider, Switch } from '@signalco/ui';
 import throttle from '../../../src/helpers/Throttle';
 import blendColors from '../../../src/helpers/BlendColors';
 import IContact from '../../../src/contacts/IContact';
-import { Row } from '@signalco/ui/dist/Row';
-import { SelectItems } from '@signalco/ui/dist/SelectItems';
-import { Typography } from '@signalco/ui/dist/Typography';
 
 export interface InputContactValueProps {
     value: any | undefined;

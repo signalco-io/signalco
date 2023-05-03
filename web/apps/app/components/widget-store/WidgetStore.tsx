@@ -1,13 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
 import { Add } from '@signalco/ui-icons';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
 import { Card, CardOverflow, Grid, IconButton, Box } from '@signalco/ui';
 import { widgetType } from '../widgets/Widget';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
-import { Row } from '@signalco/ui/dist/Row';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { TextField } from '@signalco/ui/dist/TextField';
-import { Typography } from '@signalco/ui/dist/Typography';
 
 const availableWidgets: { type: widgetType | widgetType[], name: string, description: string, preview: string }[] = [
     {

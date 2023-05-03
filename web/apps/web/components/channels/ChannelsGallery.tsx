@@ -1,6 +1,7 @@
 'use client';
 
-import { FilterList, Gallery } from '@signalco/ui';
+import { Gallery } from '@signalco/ui/dist/Gallery';
+import { FilterList } from '@signalco/ui/dist/FilterList';
 import { orderBy } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks';
 import { channelsData, channelCategories } from '@signalco/data';

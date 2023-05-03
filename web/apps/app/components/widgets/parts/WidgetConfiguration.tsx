@@ -1,4 +1,8 @@
 import React from 'react';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
+import { Button } from '@signalco/ui/dist/Button';
+import { ChildrenProps } from '@signalco/ui';
 import { asArray, ObjectDictAny } from '@signalco/js';
 import { extractValues } from '@enterwell/react-form-validation';
 import { FormBuilder, type FormItems, useFormField, FormBuilderProvider, FormBuilderComponents } from '@enterwell/react-form-builder';
@@ -6,10 +10,6 @@ import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
 import GeneralFormProvider from '../../forms/GeneralFormProvider';
 import WidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
-import { ChildrenProps } from '@signalco/ui';
-import { Button } from '@signalco/ui/dist/Button';
-import { SelectItems } from '@signalco/ui/dist/SelectItems';
-import { Stack } from '@signalco/ui/dist/Stack';
 
 type WidgetConfigurationDialogProps = {
     form: FormItems,

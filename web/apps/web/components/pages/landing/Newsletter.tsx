@@ -1,15 +1,14 @@
 'use client';
 
 import { ChangeEvent, SyntheticEvent, createRef, useState } from 'react';
-import { Button, TextField, Fade } from '@signalco/ui';
-import { Alert } from '@signalco/ui/dist/Alert';
-
-import { Stack } from '@signalco/ui/dist/Stack';
-
-import { GentleSlide} from '@signalco/ui/dist/GentleSlide';
-
 import { Typography } from '@signalco/ui/dist/Typography';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
+import { GentleSlide} from '@signalco/ui/dist/GentleSlide';
+import { Fade } from '@signalco/ui/dist/Fade';
+import { Button } from '@signalco/ui/dist/Button';
+import { Alert } from '@signalco/ui/dist/Alert';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 function Newsletter() {

@@ -3,12 +3,14 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
-import { Card, FilterList, SelectItems, Gallery, ColorVariants  } from '@signalco/ui';
-import { Chip } from '@signalco/ui/dist/Chip';
-
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Row } from '@signalco/ui/dist/Row';
+import { Gallery } from '@signalco/ui/dist/Gallery';
+import { FilterList } from '@signalco/ui/dist/FilterList';
+import { Chip } from '@signalco/ui/dist/Chip';
+import { Card, ColorVariants  } from '@signalco/ui';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import SignalcoLogo from '../../../components/icons/SignalcoLogo';
 import contentData from './content.json';

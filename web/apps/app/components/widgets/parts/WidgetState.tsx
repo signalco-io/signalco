@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
-import { Box, CircularProgress } from '@signalco/ui';
 import { Typography } from '@signalco/ui/dist/Typography';
-import { Button } from '@signalco/ui/dist/Button';
 import { Stack } from '@signalco/ui/dist/Stack';
+import { Button } from '@signalco/ui/dist/Button';
+import { Box, CircularProgress } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -11,8 +11,8 @@ import { showNotification } from '../../../src/notifications/PageNotificationSer
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useAudioOn from '../../../src/hooks/sounds/useAudioOn';
 import useAudioOff from '../../../src/hooks/sounds/useAudioOff';
-import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import useContacts from '../../../src/hooks/signalco/useContacts';
+import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import { entityAsync } from '../../../src/entity/EntityRepository';
 import type IContactPointer from '../../../src/contacts/IContactPointer';
 import IContact from '../../../src/contacts/IContact';

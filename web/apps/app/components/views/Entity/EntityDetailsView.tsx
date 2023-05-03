@@ -1,5 +1,12 @@
 import { useMemo, useState } from 'react';
 import { ExternalLink } from '@signalco/ui-icons';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { EditableInput } from '@signalco/ui/dist/EditableInput';
+import { DisableButton } from '@signalco/ui/dist/DisableButton';
+import { Chip } from '@signalco/ui/dist/Chip';
 import { Avatar, Box, MuiStack } from '@signalco/ui';
 import { camelToSentenceCase } from '@signalco/js';
 import EntityIcon from '../../shared/entity/EntityIcon';
@@ -7,21 +14,14 @@ import BatteryIndicator from '../../indicators/BatteryIndicator';
 import ShareEntityChip from '../../entity/ShareEntityChip';
 import EntityStatus, { useEntityStatus } from '../../entity/EntityStatus';
 import { useEntityBattery } from '../../entity/EntityBattery';
-import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
+import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import { entityRenameAsync } from '../../../src/entity/EntityRepository';
 import { entityLastActivity } from '../../../src/entity/EntityHelper';
 import { setAsync } from '../../../src/contacts/ContactRepository';
 import EntityProcessDetails from './EntityProcessDetails';
 import EntityOptions from './EntityOptions';
 import ContactsTable from './ContactsTable';
-import { Chip } from '@signalco/ui/dist/Chip';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { Row } from '@signalco/ui/dist/Row';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Timeago } from '@signalco/ui/dist/Timeago';
-import { EditableInput } from '@signalco/ui/dist/EditableInput';
-import { DisableButton } from '@signalco/ui/dist/DisableButton';
 
 export interface EntityDetailsViewProps {
     id: string;

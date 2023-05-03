@@ -3,15 +3,15 @@ import {
     bindTrigger,
     usePopupState
 } from 'material-ui-popup-state/hooks';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Row } from '@signalco/ui/dist/Row';
+import { Popper } from '@signalco/ui/dist/Popper';
+import { Button } from '@signalco/ui/dist/Button';
 import { Card } from '@signalco/ui';
 import { camelToSentenceCase } from '@signalco/js';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import EntitySelectionMenu from './EntitySelectionMenu';
 import EntityIconLabel from './EntityIconLabel';
-import { Button } from '@signalco/ui/dist/Button';
-import { Popper } from '@signalco/ui/dist/Popper';
-import { Row } from '@signalco/ui/dist/Row';
-import { Typography } from '@signalco/ui/dist/Typography';
 
 export type ContactPointerRequiredEntity =
     (Partial<IContactPointer> & Pick<IContactPointer, 'entityId'>)

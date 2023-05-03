@@ -1,15 +1,15 @@
 import React, { useMemo } from 'react';
 import Image from 'next/image';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Button } from '@signalco/ui/dist/Button';
 import { Box } from '@signalco/ui';
 import useLocale from '../../src/hooks/useLocale';
 import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
 import GridWrapper from './GridWrapper';
 import DragableWidget from './DragableWidget';
 import DisplayWidget from './DisplayWidget';
-import { Button } from '@signalco/ui/dist/Button';
-import { Row } from '@signalco/ui/dist/Row';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Typography } from '@signalco/ui/dist/Typography';
 
 function NoWidgetsPlaceholder({ onAdd }: { onAdd: () => void }) {
     const { t } = useLocale('App', 'Dashboards');

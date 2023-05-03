@@ -1,7 +1,7 @@
 'use client';
 
-import { Row } from '@signalco/ui/dist/Row';
 import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
 import { KnownPages } from '../../../src/knownPages';
 import PricingCard, { PricingOption } from '../../../components/pages/pricing/PricingCard';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';

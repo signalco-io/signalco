@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
+import { ErrorBoundary } from '@signalco/ui/dist/ErrorBoundary';
+import { Button } from '@signalco/ui/dist/Button';
 import { Card, CardOverflow, ListItemDecorator } from '@signalco/ui';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
-import { Button } from '@signalco/ui/dist/Button';
-import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { ErrorBoundary } from '@signalco/ui/dist/ErrorBoundary';
 
 const WidgetConfiguration = dynamic(() => import('./WidgetConfiguration'));
 

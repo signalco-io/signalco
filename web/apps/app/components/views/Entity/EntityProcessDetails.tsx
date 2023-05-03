@@ -1,17 +1,17 @@
 import { useMemo } from 'react';
 import { Close, Equal, EqualNot, Play, Warning, Timer, Pause, Left, Right } from '@signalco/ui-icons';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Container } from '@signalco/ui/dist/Container';
+import { Chip } from '@signalco/ui/dist/Chip';
+import { Alert } from '@signalco/ui/dist/Alert';
 import { Card, IconButton, Box } from '@signalco/ui';
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import useContact from '../../../src/hooks/signalco/useContact';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import { setAsync } from '../../../src/contacts/ContactRepository';
-import { Alert } from '@signalco/ui/dist/Alert';
-import { Chip } from '@signalco/ui/dist/Chip';
-import { Container } from '@signalco/ui/dist/Container';
-import { Row } from '@signalco/ui/dist/Row';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Timeago } from '@signalco/ui/dist/Timeago';
-import { Typography } from '@signalco/ui/dist/Typography';
 
 declare namespace ProcessConfigurationV1 {
     export interface ContactPointer {

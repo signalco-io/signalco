@@ -1,10 +1,10 @@
 import React from 'react';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Loadable } from '@signalco/ui/dist/Loadable';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import EntityIcon from './EntityIcon';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { Row } from '@signalco/ui/dist/Row';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Typography } from '@signalco/ui/dist/Typography';
 
 type EntityIconLabelProps = {
     entityId: string | undefined;

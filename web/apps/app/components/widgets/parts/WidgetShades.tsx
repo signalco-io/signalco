@@ -1,10 +1,10 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Down, Stop, Up } from '@signalco/ui-icons';
-import { Divider, Grid } from '@signalco/ui';
 import { Typography } from '@signalco/ui/dist/Typography';
-import { Button } from '@signalco/ui/dist/Button';
 import { Stack } from '@signalco/ui/dist/Stack';
+import { Button } from '@signalco/ui/dist/Button';
+import { Divider, Grid } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultColumns, DefaultLabel } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';

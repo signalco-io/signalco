@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { ChildrenProps } from '@signalco/ui';
 import { Auth0Provider } from '@auth0/auth0-react';
 import WithAuth from './WithAuth';
-import { ChildrenProps } from '@signalco/ui';
 
 export function AuthWrapper(props: ChildrenProps) {
     const {

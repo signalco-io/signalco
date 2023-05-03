@@ -1,12 +1,12 @@
 'use client';
 
 import React, { Suspense } from 'react';
-import { Container } from '@signalco/ui';
+import { Row } from '@signalco/ui/dist/Row';
+import { Link } from '@signalco/ui/dist/Link';
+import { Container } from '@signalco/ui/dist/Container';
 import { Button } from '@signalco/ui/dist/Button';
 
-import { Link } from '@signalco/ui/dist/Link';
 
-import { Row } from '@signalco/ui/dist/Row';
 
 type NavLinkItem = {
     href: string,

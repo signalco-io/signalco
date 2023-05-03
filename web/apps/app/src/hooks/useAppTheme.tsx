@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
-import { type AppThemeMode, useColorScheme } from '@signalco/ui';
+import { type AppThemeMode } from '@signalco/ui/dist/theme';
+import { useColorScheme } from '@signalco/ui';
 import { useInterval, useIsomorphicLayoutEffect } from '@signalco/hooks';
 import { fromDuration, now } from '../services/DateTimeProvider';
 import { showNotification } from '../notifications/PageNotificationService';

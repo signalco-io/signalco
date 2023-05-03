@@ -3,7 +3,7 @@ import {Row} from '@signalco/ui/dist/Row';
 import {Link} from '@signalco/ui/dist/Link';
 import {Container} from '@signalco/ui/dist/Container';
 import { KnownPages } from '../src/knownPages';
-import NavigatingButton from './NavigatingButton';
+import {NavigatingButton} from './NavigatingButton';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 
 export const HeaderHeight = 80;

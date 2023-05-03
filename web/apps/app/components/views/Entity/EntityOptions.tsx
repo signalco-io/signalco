@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { MoreHorizontal } from '@signalco/ui-icons';
+import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
+import { Button } from '@signalco/ui/dist/Button';
 import { Divider } from '@signalco/ui';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
@@ -8,8 +10,6 @@ import { KnownPages } from '../../../src/knownPages';
 import useLocale from '../../../src/hooks/useLocale';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import useDeleteEntity from '../../../src/hooks/signalco/entity/useDeleteEntity';
-import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
-import { Button } from '@signalco/ui/dist/Button';
 
 export interface EntityOptionsProps {
     id: string | undefined;

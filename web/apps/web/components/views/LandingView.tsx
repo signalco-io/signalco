@@ -3,6 +3,9 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Navigate } from '@signalco/ui-icons';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Container } from '@signalco/ui/dist/Container';
+import {Button} from '@signalco/ui/dist/Button';
 import { Divider, MuiStack } from '@signalco/ui';
 import DeveloperOnly from '../shared/DeveloperOnly';
 import DiscoverVisual from '../pages/landing/visuals/DiscoverVisual';
@@ -17,9 +20,6 @@ import { GlobeSection } from './GlobeSection';
 import { FeaturedIntegrationsSection } from './FeaturedIntegrationsSection';
 import { FeatureDescription } from './FeatureDescription';
 import { DataPart } from './DataPart';
-import { Container } from '@signalco/ui/dist/Container';
-import { Stack } from '@signalco/ui/dist/Stack';
-import {Button} from '@signalco/ui/dist/Button';
 
 export const Newsletter = dynamic(() => import('../pages/landing/Newsletter'));
 export const GlobePart = dynamic(() => import('../pages/landing/GlobeSection'));

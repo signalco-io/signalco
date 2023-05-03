@@ -3,6 +3,10 @@
 import React from 'react';
 import { PopupState } from 'material-ui-popup-state/hooks';
 import { Add, Pin, PinOff } from '@signalco/ui-icons';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Button } from '@signalco/ui/dist/Button';
 import { Card, Divider, IconButton } from '@signalco/ui';
 import { useSearchParam } from '@signalco/hooks';
 import { CSS } from '@dnd-kit/utilities';
@@ -13,10 +17,6 @@ import useLocale from '../../src/hooks/useLocale';
 import useSaveDashboard from '../../src/hooks/dashboards/useSaveDashboard';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
 import DashboardsRepository, { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
-import { Button } from '@signalco/ui/dist/Button';
-import { Row } from '@signalco/ui/dist/Row';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Typography } from '@signalco/ui/dist/Typography';
 
 interface IDashboardSelectorMenuProps {
     selectedId: string | undefined,

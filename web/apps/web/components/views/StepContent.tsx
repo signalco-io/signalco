@@ -1,10 +1,10 @@
 'use client';
 import { useInView } from 'react-cool-inview';
 import React, { type CSSProperties } from 'react';
-import { Grid, MuiStack } from '@signalco/ui';
 import { Typography } from '@signalco/ui/dist/Typography';
-import { Fade } from '@signalco/ui/dist/Fade';
 import { GentleSlide } from '@signalco/ui/dist/GentleSlide';
+import { Fade } from '@signalco/ui/dist/Fade';
+import { Grid, MuiStack } from '@signalco/ui';
 import { SectionCenter } from './SectionCenter';
 
 export function StepContent(props: {

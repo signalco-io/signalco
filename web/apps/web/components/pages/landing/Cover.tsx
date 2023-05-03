@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image, { ImageProps } from 'next/image';
-import { Box } from '@signalco/ui';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
+import { Box } from '@signalco/ui';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
 
 const ringConfig = [

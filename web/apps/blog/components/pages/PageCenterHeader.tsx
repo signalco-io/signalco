@@ -1,5 +1,5 @@
 import React from 'react';
-import Typography from '@signalco/ui/dist/Typography';
+import {Typography} from '@signalco/ui/dist/Typography';
 import {Stack} from '@signalco/ui/dist/Stack';
 import style from './PageCenterHeader.module.scss';
 

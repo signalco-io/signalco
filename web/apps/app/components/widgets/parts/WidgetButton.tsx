@@ -1,3 +1,7 @@
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Row } from '@signalco/ui/dist/Row';
+import { Icon } from '@signalco/ui/dist/Icon';
+import { Button } from '@signalco/ui/dist/Button';
 import { Avatar } from '@signalco/ui';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultTargetWithValueMultiple, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -6,10 +10,6 @@ import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useAudioOn from '../../../src/hooks/sounds/useAudioOn';
 import IContact from '../../../src/contacts/IContact';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
-import { Button } from '@signalco/ui/dist/Button';
-import { Icon } from '@signalco/ui/dist/Icon';
-import { Row } from '@signalco/ui/dist/Row';
-import { Typography } from '@signalco/ui/dist/Typography';
 
 type ConfigProps = {
     icon: string | undefined;

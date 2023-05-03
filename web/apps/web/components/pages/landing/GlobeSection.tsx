@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Container, Box } from '@signalco/ui';
 import { Fade } from '@signalco/ui/dist/Fade';
-
+import { Container } from '@signalco/ui/dist/Container';
+import { Box } from '@signalco/ui';
 import { useIsServer, useTimeout } from '@signalco/hooks';
 const Globe = dynamic(() => import('./Globe'));
 
