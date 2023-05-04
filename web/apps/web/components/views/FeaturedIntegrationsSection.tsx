@@ -4,8 +4,8 @@ import { useInView } from 'react-cool-inview';
 import React from 'react';
 import { Typography } from '@signalco/ui/dist/Typography';
 import {ImageLink} from '@signalco/ui/dist/ImageLink';
-import { GentleSlide } from '@signalco/ui/dist/GentleSlide';
 import { Grid } from '@signalco/ui/dist/Grid';
+import { GentleSlide } from '@signalco/ui/dist/GentleSlide';
 import { SectionCenter } from './SectionCenter';
 
 const integrationsList = [

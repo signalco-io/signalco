@@ -5,10 +5,10 @@ import { Typography } from '@signalco/ui/dist/Typography';
 import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
-import { Box } from '@signalco/ui/dist/Box';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Grid } from '@signalco/ui/dist/Grid';
 import { Card, CardOverflow } from '@signalco/ui/dist/Card';
+import { Box } from '@signalco/ui/dist/Box';
 import { widgetType } from '../widgets/Widget';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
 

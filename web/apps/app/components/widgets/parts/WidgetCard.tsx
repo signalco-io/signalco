@@ -3,10 +3,10 @@ import dynamic from 'next/dynamic';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
-import { ErrorBoundary } from '@signalco/ui/dist/ErrorBoundary';
-import { Button } from '@signalco/ui/dist/Button';
 import { ListItemDecorator } from '@signalco/ui/dist/List';
+import { ErrorBoundary } from '@signalco/ui/dist/ErrorBoundary';
 import { Card, CardOverflow } from '@signalco/ui/dist/Card';
+import { Button } from '@signalco/ui/dist/Button';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Row } from '@signalco/ui/dist/Row';
-import { Accordion } from '@signalco/ui/dist/Accordion';
 import { Box } from '@signalco/ui/dist/Box';
+import { Accordion } from '@signalco/ui/dist/Accordion';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import EntitySelection from './EntitySelection';
 import EntityIconLabel from './EntityIconLabel';

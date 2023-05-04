@@ -2,11 +2,11 @@
 import { useInView } from 'react-cool-inview';
 import React, { type CSSProperties } from 'react';
 import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Grid } from '@signalco/ui/dist/Grid';
 import { GentleSlide } from '@signalco/ui/dist/GentleSlide';
 import { Fade } from '@signalco/ui/dist/Fade';
-import { Grid } from '@signalco/ui/dist/Grid';
 import { SectionCenter } from './SectionCenter';
-import { Stack } from '@signalco/ui/dist/Stack';
 
 export function StepContent(props: {
     header: string;

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import { Card } from '@signalco/ui/dist/Card';
@@ -13,7 +14,6 @@ import { entityLastActivity } from '../../src/entity/EntityHelper';
 import ShareEntityChip from './ShareEntityChip';
 import EntityStatus, { useEntityStatus } from './EntityStatus';
 import { useEntityBattery } from './EntityBattery';
-import { Stack } from '@signalco/ui/dist/Stack';
 
 export interface EntityCardProps {
     entity: IEntityDetails;

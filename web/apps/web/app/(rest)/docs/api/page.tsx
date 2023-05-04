@@ -5,6 +5,7 @@ import { OpenAPIV3 } from 'openapi-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Security, Send } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
+import { Tooltip } from '@signalco/ui/dist/Tooltip';
 import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import {SelectItems} from '@signalco/ui/dist/SelectItems';
@@ -12,20 +13,19 @@ import { Row } from '@signalco/ui/dist/Row';
 import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
+import { List } from '@signalco/ui/dist/List';
+import { Divider } from '@signalco/ui/dist/Divider';
 import {CopyToClipboardInput} from '@signalco/ui/dist/CopyToClipboardInput';
 import { Chip } from '@signalco/ui/dist/Chip';
-import { Badge } from '@signalco/ui/dist/Badge';
+import { Card, CardOverflow } from '@signalco/ui/dist/Card';
 import { Button } from '@signalco/ui/dist/Button';
-import {Alert} from '@signalco/ui/dist/Alert';
 import { Box } from '@signalco/ui/dist/Box';
-import { Tooltip } from '@signalco/ui/dist/Tooltip';
-import { List } from '@signalco/ui/dist/List';
-import { Card, CardOverflow } from "@signalco/ui/dist/Card";
-import { Divider } from '@signalco/ui/dist/Divider';
+import { Badge } from '@signalco/ui/dist/Badge';
+import {Alert} from '@signalco/ui/dist/Alert';
+import { ColorPaletteProp } from '@signalco/ui';
 import { camelToSentenceCase, HttpOperation, ObjectDictAny } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
-import { ColorPaletteProp } from '@signalco/ui';
 
 function HttpOperationChip(props: { operation?: HttpOperation | undefined, small?: boolean }) {
     const color = ({

@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Play } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
+import { Slider } from '@signalco/ui/dist/Slider';
 import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Row } from '@signalco/ui/dist/Row';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Slider } from '@signalco/ui/dist/Slider';
+import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import throttle from '../../../src/helpers/Throttle';
 import blendColors from '../../../src/helpers/BlendColors';
 import IContact from '../../../src/contacts/IContact';
-import { Checkbox } from '@signalco/ui/dist/Checkbox';
 
 export interface InputContactValueProps {
     value: any | undefined;

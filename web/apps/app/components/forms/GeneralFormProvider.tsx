@@ -1,6 +1,6 @@
+import { PropsWithChildren } from 'react';
 import { FormBuilderProvider } from '@enterwell/react-form-builder';
 import formComponents from './generalFormComponents';
-import { PropsWithChildren } from 'react';
 
 export default function GeneralFormProvider(props: PropsWithChildren) {
     return (
