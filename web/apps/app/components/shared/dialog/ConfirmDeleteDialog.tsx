@@ -3,7 +3,6 @@ import { Typography } from '@signalco/ui/dist/Typography';
 import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Button } from '@signalco/ui/dist/Button';
-import { Breakpoint } from '@signalco/ui';
 import useLocale from '../../../src/hooks/useLocale';
 import ConfigurationDialog from './ConfigurationDialog';
 
@@ -13,7 +12,7 @@ export interface IConfirmDeleteDialogProps {
     expectedConfirmText: string,
     onClose: () => void,
     onConfirm: () => void,
-    maxWidth?: false | undefined | Breakpoint,
+    maxWidth?: false | undefined | 'sm' | 'md' | 'lg' | 'xl',
 }
 
 function ConfirmDeleteDialog(props: IConfirmDeleteDialogProps) {
