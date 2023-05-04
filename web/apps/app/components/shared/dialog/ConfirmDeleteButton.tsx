@@ -6,7 +6,7 @@ export interface ConfirmDeleteButtonDialogProps {
     header: React.ReactNode,
     expectedConfirmText: string,
     onConfirm: () => void,
-    maxWidth?: false | undefined | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | undefined,
+    maxWidth?: false | undefined | 'sm' | 'md' | 'lg' | 'xl',
 }
 
 export interface ConfirmDeleteButtonProps extends ConfirmDeleteButtonDialogProps {
