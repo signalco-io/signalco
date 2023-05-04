@@ -6,7 +6,6 @@ import { Navigate } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Container } from '@signalco/ui/dist/Container';
 import {Button} from '@signalco/ui/dist/Button';
-import { MuiStack } from '@signalco/ui';
 import { Divider } from '@signalco/ui/dist/Divider';
 import DeveloperOnly from '../shared/DeveloperOnly';
 import DiscoverVisual from '../pages/landing/visuals/DiscoverVisual';
