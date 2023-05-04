@@ -17,14 +17,14 @@
         "test": "playwright test"
     },
     "dependencies": {
-        "@next/env": "13.3.4",
+        "@next/env": "13.4.0",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "cheerio": "1.0.0-rc.12",
         "classix": "2.1.32",
-        "next": "13.3.4",
+        "next": "13.4.0",
         "next-secure-headers": "2.2.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
@@ -34,7 +34,7 @@
     "devDependencies": {
         "@axe-core/playwright": "4.7.0",
         "@babel/core": "7.21.8",
-        "@next/bundle-analyzer": "13.3.4",
+        "@next/bundle-analyzer": "13.4.0",
         "@playwright/test": "1.33.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
