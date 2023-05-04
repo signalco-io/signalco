@@ -1,6 +1,5 @@
-import { useMemo } from 'react';
+import { PropsWithChildren, useMemo } from 'react';
 import { Alert, CircularProgress } from '@mui/joy';
-import { ChildrenProps } from '../sharedTypes';
 import { Warning } from '@signalco/ui-icons';
 
 export type LoadableLoadingErrorProps = {
@@ -13,11 +12,11 @@ export type LoadableSkeletonProps = {
     height?: number;
 }
 
-export type LoadableProps = LoadableLoadingErrorProps & LoadableSkeletonProps & ChildrenProps & {
+export type LoadableProps = PropsWithChildren<LoadableLoadingErrorProps & LoadableSkeletonProps & {
     placeholder?: 'skeletonText' | 'skeletonRect' | 'circular';
     contentVisible?: boolean;
     loadingLabel: string;
-}
+}>;
 
 export function Loadable(props: LoadableProps) {
     const { isLoading, loadingLabel, placeholder, error, children, contentVisible } = props;

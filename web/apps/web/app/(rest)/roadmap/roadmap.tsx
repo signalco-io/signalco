@@ -1,5 +1,6 @@
 'use client';
 
+import { PropsWithChildren } from 'react';
 import { Up } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
 import {Stack} from '@signalco/ui/dist/Stack';
@@ -7,8 +8,8 @@ import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { ItemsShowMore } from '@signalco/ui/dist/FilterList';
 import { Container } from '@signalco/ui/dist/Container';
+import { Card } from '@signalco/ui/dist/Card';
 import { Button } from '@signalco/ui/dist/Button';
-import { ChildrenProps, Sheet } from '@signalco/ui';
 import { camelToSentenceCase, orderBy } from '@signalco/js';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import { RoadmapItemStatus, RoadmapItem } from './page';
@@ -18,9 +19,9 @@ const statusOrderedList: RoadmapItemStatus[] = ['inProgress', 'inQueue', 'planne
 function VoteButton({ votes, readonly, size = 'md' }: { votes?: number | undefined, readonly?: boolean, size?: 'sm' | 'md' }) {
     if (readonly) {
         return (
-            <Sheet variant="soft" style={{ width: 42, aspectRatio: 1, textAlign: 'center', borderRadius: 'var(--joy-radius-sm)' }}>
+            <Card variant="soft" style={{ width: 42, aspectRatio: 1, textAlign: 'center', borderRadius: 'var(--joy-radius-sm)' }}>
                 <span style={{ lineHeight: '42px' }}>{votes ?? 'Vote'}</span>
-            </Sheet>
+            </Card>
         )
     }
 
@@ -64,7 +65,7 @@ export default function Roadmap({ items, error }: { items: RoadmapItem[] | undef
                                 <Typography level="h5">{camelToSentenceCase(status)}</Typography>
                                 <ItemsShowMore
                                     truncate={5}
-                                    itemsWrapper={({ children }: ChildrenProps) => <Stack spacing={1}>{children}</Stack>}
+                                    itemsWrapper={({ children }: PropsWithChildren) => <Stack spacing={1}>{children}</Stack>}
                                     loadingLabel={'Loading roadmap'}
                                     noItemsPlaceholder={'Empty at the moment'}>
                                     {orderBy(items?.filter(item => item.status === status) ?? [], (a: RoadmapItem, b: RoadmapItem) => (b.votes ?? 0) - (a.votes ?? 0)).map((item: RoadmapItem) => (

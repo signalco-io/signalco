@@ -1,9 +1,8 @@
-import type { CSSProperties } from 'react';
-import type { ChildrenProps } from '../sharedTypes';
+import type { CSSProperties, PropsWithChildren } from 'react';
 
-export type IconProps = ChildrenProps & {
+export type IconProps = PropsWithChildren<{
     sx?: CSSProperties | undefined;
-}
+}>;
 
 export function Icon(props: IconProps) {
     return (

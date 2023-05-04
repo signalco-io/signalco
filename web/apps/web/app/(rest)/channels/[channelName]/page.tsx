@@ -7,7 +7,7 @@ import { Row } from '@signalco/ui/dist/Row';
 import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
 import { Link } from '@signalco/ui/dist/Link';
 import { Breadcrumbs } from '@signalco/ui/dist/Breadcrumbs';
-import { Card } from '@signalco/ui';
+import { Card } from "@signalco/ui/dist/Card";
 import { channelCategories as channelCategoriesData, channelsData } from '@signalco/data';
 import { KnownPages } from '../../../../src/knownPages';
 import ShareSocial from '../../../../components/pages/ShareSocial';

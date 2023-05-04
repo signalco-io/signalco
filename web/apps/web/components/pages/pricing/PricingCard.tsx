@@ -3,7 +3,7 @@ import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import { Button } from '@signalco/ui/dist/Button';
-import { MuiStack, Card } from '@signalco/ui';
+import { Card } from "@signalco/ui/dist/Card";
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
 
 export interface PricingOption {
@@ -33,12 +33,11 @@ export default function PricingCard(props: PricingCardProps) {
                 sx={{
                     height: '100%'
                 }}>
-                <MuiStack
-                    sx={{ height: '100%' }}
-                    p={{ xs: 4, md: 6 }}
-                    spacing={{ xs: 3, md: 4 }}
+                <Stack
+                    style={{ height: '100%', padding: 16 }}
+                    spacing={3}
                     justifyContent="space-between">
-                    <MuiStack spacing={{ xs: 3, md: 4 }}>
+                    <Stack spacing={3}>
                         <Stack alignItems="center">
                             <SignalcoLogotype width={180} hideBadge />
                             <Typography level="h3">{option.label}</Typography>
@@ -54,7 +53,7 @@ export default function PricingCard(props: PricingCardProps) {
                                 <Checkbox key={feature} checked readonly label={feature} />
                             ))}
                         </Stack>
-                    </MuiStack>
+                    </Stack>
                     <Stack spacing={1}>
                         <Button
                             variant={option.id === 'basic' ? 'solid' : 'outlined'}
@@ -64,7 +63,7 @@ export default function PricingCard(props: PricingCardProps) {
                             {disabled ? 'Available soon' : option.hrefLabel}
                         </Button>
                     </Stack>
-                </MuiStack>
+                </Stack>
             </Card>
         </div>
     );

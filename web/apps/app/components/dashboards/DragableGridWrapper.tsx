@@ -1,10 +1,9 @@
-import React from 'react';
-import { ChildrenProps } from '@signalco/ui';
+import { PropsWithChildren } from 'react';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { snapCenterToCursor } from '@dnd-kit/modifiers';
 import { DndContext, DragEndEvent, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 
-export default function DragableGridWrapper(props: { order: string[]; orderChanged: (newOrder: string[]) => void; } & ChildrenProps) {
+export default function DragableGridWrapper(props: PropsWithChildren<{ order: string[]; orderChanged: (newOrder: string[]) => void; }>) {
     const { order, children } = props;
     const sensors = useSensors(
         useSensor(TouchSensor, {

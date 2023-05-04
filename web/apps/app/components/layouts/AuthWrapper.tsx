@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { useRouter } from 'next/navigation';
-import { ChildrenProps } from '@signalco/ui';
 import { Auth0Provider } from '@auth0/auth0-react';
 import WithAuth from './WithAuth';
 
-export function AuthWrapper(props: ChildrenProps) {
+export function AuthWrapper(props: PropsWithChildren) {
     const {
         children
     } = props;

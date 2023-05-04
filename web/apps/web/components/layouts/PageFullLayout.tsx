@@ -1,10 +1,9 @@
-import React from 'react';
+import { PropsWithChildren } from 'react';
 import { Stack } from '@signalco/ui/dist/Stack';
-import { ChildrenProps } from '@signalco/ui';
 import Footer from '../pages/Footer';
 import { PageNav } from '../PageNav';
 
-export function PageFullLayout(props: ChildrenProps) {
+export function PageFullLayout(props: PropsWithChildren) {
     return (
         <Stack spacing={4}>
             <PageNav fullWidth />

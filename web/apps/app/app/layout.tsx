@@ -1,12 +1,12 @@
 import '../styles/global.scss';
 import '@signalco/ui/dist/index.css';
 import 'react-toastify/dist/ReactToastify.css';
+import { PropsWithChildren } from 'react';
 import { type Metadata } from 'next';
-import { ChildrenProps } from '@signalco/ui';
 import { AppLayout } from '../components/layouts/AppLayout';
 import { LayoutClientWrapper } from './LayoutClientWrapper';
 
-export default function RootLayout({ children, }: ChildrenProps) {
+export default function RootLayout({ children }: PropsWithChildren) {
     return (
         <html lang="en">
             <body>

@@ -2,10 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { Button } from '@signalco/ui/dist/Button';
-import { Box, MuiStack } from '@signalco/ui';
 import { useSearchParam } from '@signalco/hooks';
 import { widgetType } from '../widgets/Widget';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
@@ -82,22 +82,22 @@ function Dashboards() {
 
     return (
         <>
-            <MuiStack spacing={{ xs: 1, sm: 2 }} sx={{ pt: { xs: 0, sm: 2 } }}>
-                <MuiStack spacing={1} direction={{ xs: 'column-reverse', md: 'row' }} justifyContent="space-between" alignItems="stretch">
+            <Stack spacing={1}>
+                <Row spacing={1} justifyContent="space-between" alignItems="stretch">
                     <DashboardSelector
                         onEditWidgets={handleEditWidgets}
                         onSettings={handleSettings} />
                     {isEditing && (
-                        <Box sx={{ px: 2, width: { md: 'auto', xs: '100%' } }}>
+                        <div className="px-2 xs:w-full">
                             <Row spacing={1}>
                                 <Button onClick={() => setShowWidgetStore(true)} sx={{ minWidth: '140px' }}>{t('AddWidget')}</Button>
                                 <Button loading={isSavingEdit} onClick={handleEditDone} fullWidth>{t('Save')}</Button>
                             </Row>
-                        </Box>
+                        </div>
                     )}
-                </MuiStack>
+                </Row>
                 <Loadable isLoading={!!!selectedId || selectedDashboard.isLoading} loadingLabel="Loading dashboards" error={selectedDashboard.error}>
-                    <Box sx={{ px: 2 }}>
+                    <div className="px-2">
                         {selectedId && selectedDashboard.data
                             ? (
                                 <DashboardView
@@ -105,20 +105,20 @@ function Dashboards() {
                                     isEditing={isEditing}
                                     onAddWidget={handleAddWidgetPlaceholder} />
                             ) : (
-                                <MuiStack alignItems="center" justifyContent="center">
-                                    <MuiStack sx={{ height: '80vh' }} alignItems="center" justifyContent="center" direction="row">
-                                        <MuiStack maxWidth={280} spacing={4} alignItems="center" justifyContent="center">
+                                <Stack alignItems="center" justifyContent="center">
+                                    <Row style={{ height: '80vh' }} justifyContent="center">
+                                        <Stack style={{ maxWidth: 280 }} spacing={4} alignItems="center" justifyContent="center">
                                             <Image priority width={280} height={213} alt={t('NoDashboardsPlaceholder')} src="/assets/placeholders/placeholder-no-dashboards.svg" />
                                             <Typography level="h2">{t('NoDashboardsPlaceholder')}</Typography>
                                             <Typography textAlign="center" level="body2">{t('NoDashboardsHelpText')}</Typography>
                                             <Button variant="solid" onClick={handleNewDashboard}>{t('NewDashboard')}</Button>
-                                        </MuiStack>
-                                    </MuiStack>
-                                </MuiStack>
+                                        </Stack>
+                                    </Row>
+                                </Stack>
                             )}
-                    </Box>
+                    </div>
                 </Loadable>
-            </MuiStack>
+            </Stack>
             {isDashboardSettingsOpen && (
                 <DashboardSettings
                     dashboard={selectedDashboard.data}

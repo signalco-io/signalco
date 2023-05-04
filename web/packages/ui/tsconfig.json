@@ -3,5 +3,10 @@
     "extends": "@signalco/tsconfig/react-library.json",
     "include": [
         "./**/*.ts*"
+    ],
+    "exclude": [
+        "dist",
+        "node_modules",
+        ".turbo"
     ]
 }

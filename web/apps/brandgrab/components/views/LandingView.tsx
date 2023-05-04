@@ -1,13 +1,15 @@
 'use client';
 
-import React, { useCallback } from 'react';
+import React, { PropsWithChildren, useCallback } from 'react';
 import NextImage from 'next/image';
 import { Typography } from '@signalco/ui/dist/Typography';
 import {Stack} from '@signalco/ui/dist/Stack';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { Link } from '@signalco/ui/dist/Link';
 import { Container } from '@signalco/ui/dist/Container';
-import { Card, CardContent, CardCover, CardOverflow, ChildrenProps, Divider, MuiStack, Tooltip } from '@signalco/ui';
+import { Tooltip } from '@signalco/ui/dist/Tooltip';
+import { Card, CardContent, CardCover, CardOverflow } from '@signalco/ui/dist/Card';
+import { Divider } from '@signalco/ui/dist/Divider';
 import { orderBy, isImageDataUrl } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { ScreenshotResponse } from '../../app/api/screenshot/route';
@@ -148,7 +150,7 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
     )
 }
 
-function TextInfo({ title, children }: { title: string } & ChildrenProps) {
+function TextInfo({ title, children }: PropsWithChildren<{ title: string }>) {
     return (
         <Stack spacing={.5}>
             <Typography level="body3" secondary>{title}</Typography>
@@ -260,7 +262,7 @@ function BrandView({ domain }: { domain: string | undefined }) {
     const resources = domainResources.item;
 
     return (
-        <MuiStack direction={{ xs: 'column', md: 'row' }} spacing={4}>
+        <Stack spacing={4}>
             <Stack spacing={3}>
                 <TextInfo title="Domain">
                     <Loadable placeholder="skeletonText" isLoading={domainResources.isLoading} error={domainResources.error} loadingLabel="Loading SEO">
@@ -295,7 +297,7 @@ function BrandView({ domain }: { domain: string | undefined }) {
             {resources?.domain && (
                 <PagePreview domain={resources?.domain} />
             )}
-        </MuiStack>
+        </Stack>
     );
 }
 

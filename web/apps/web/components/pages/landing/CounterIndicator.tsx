@@ -1,7 +1,7 @@
 import { useInView } from 'react-cool-inview';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { GentleSlide} from '@signalco/ui/dist/GentleSlide';
-import { Box } from '@signalco/ui';
+import { Box } from '@signalco/ui/dist/Box';
 
 
 function CounterIndicator(props: { count: number, hideAfter?: boolean }) {

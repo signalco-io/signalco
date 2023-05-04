@@ -1,4 +1,4 @@
-import { Card } from "@signalco/ui";
+import { Card } from "@signalco/ui/dist/Card";
 import { GentleSlide } from "@signalco/ui/dist/GentleSlide";
 import { Stack } from "@signalco/ui/dist/Stack";
 import { Row } from "@signalco/ui/dist/Row";

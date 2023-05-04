@@ -2,7 +2,7 @@ import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Container } from '@signalco/ui/dist/Container';
 import { Accordion } from '@signalco/ui/dist/Accordion';
-import { Box } from '@signalco/ui';
+import { Box } from '@signalco/ui/dist/Box';
 import PageCenterHeader from './PageCenterHeader';
 
 export interface FaqItem {

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { SmileMeh, SmileVeryHappy } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Button } from '@signalco/ui/dist/Button';
-import { Box } from '@signalco/ui';
+import { Box } from '@signalco/ui/dist/Box';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultColumns, DefaultTarget } from '../../../src/widgets/WidgetConfigurationOptions';
 import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';

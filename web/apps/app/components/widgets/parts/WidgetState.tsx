@@ -2,8 +2,9 @@ import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
+import { Loadable } from '@signalco/ui/dist/Loadable';
 import { Button } from '@signalco/ui/dist/Button';
-import { Box, CircularProgress } from '@signalco/ui';
+import { Box } from '@signalco/ui/dist/Box';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -160,7 +161,7 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
             </Stack>
             {isLoading && (
                 <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
-                    <CircularProgress size="sm" />
+                    <Loadable isLoading loadingLabel="Loading..." />
                 </Box>
             )}
         </Button>

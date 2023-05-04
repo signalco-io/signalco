@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import { ChildrenProps } from '../sharedTypes';
+import { type PropsWithChildren, useEffect, useRef, useState } from 'react';
 
-export type CollapseProps = ChildrenProps & {
+export type CollapseProps = PropsWithChildren<{
     appear: boolean,
     duration?: number,
-}
+}>;
 
 export function Collapse({ children, appear, duration = 200 }: CollapseProps) {
     const containerRef = useRef<HTMLDivElement>(null);

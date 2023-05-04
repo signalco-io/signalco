@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import { Navigate } from '@signalco/ui-icons';
 import { Button } from '@mui/joy';
-import { ChildrenProps } from '../sharedTypes';
+import type { PropsWithChildren } from 'react';
 
-export type NavigatingButtonProps = ChildrenProps & {
+export type NavigatingButtonProps = PropsWithChildren<{
     href: string;
     size?: 'sm' | 'md' | 'lg';
     disabled?: boolean;
     hideArrow?: boolean;
-}
+}>;
 
 export function NavigatingButton({
     href,

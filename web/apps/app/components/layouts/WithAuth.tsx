@@ -1,10 +1,9 @@
-import { useCallback, useEffect } from 'react';
-import { ChildrenProps } from '@signalco/ui';
+import { PropsWithChildren, useCallback, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { setTokenFactory } from '../../src/services/HttpService';
 import RealtimeService from '../../src/realtime/realtimeService';
 
-export default function WithAuth({ children }: ChildrenProps) {
+export default function WithAuth({ children }: PropsWithChildren) {
     const { error, isLoading, loginWithRedirect, getAccessTokenSilently } = useAuth0();
 
     const getToken = useCallback(async () => {

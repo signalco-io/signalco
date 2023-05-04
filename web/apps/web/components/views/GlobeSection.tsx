@@ -1,7 +1,7 @@
 'use client';
 import { useInView } from 'react-cool-inview';
 import React from 'react';
-import { Box } from '@signalco/ui';
+import { Box } from '@signalco/ui/dist/Box';
 import { GlobePart } from './LandingView';
 
 export function GlobeSection() {

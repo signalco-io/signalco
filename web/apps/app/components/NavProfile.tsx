@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { ComponentProps, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Channel, Close, Dashboard, Device, Menu as MenuIcon, LogOut, Settings } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Menu, MenuItemLink } from '@signalco/ui/dist/Menu';
 import { Button } from '@signalco/ui/dist/Button';
-import { Divider, IconButton, Box, ButtonProps, MuiStack } from '@signalco/ui';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Divider } from '@signalco/ui/dist/Divider';
 import { orderBy } from '@signalco/js';
 import { KnownPages } from '../src/knownPages';
 import useLocale from '../src/hooks/useLocale';
@@ -14,10 +15,10 @@ import NavLink from './navigation/NavLink';
 import ApiBadge from './development/ApiBadge';
 
 type NavItem = {
-  label: string,
-  path: string,
-  icon: React.FunctionComponent,
-  hidden?: boolean | undefined;
+    label: string,
+    path: string,
+    icon: React.FunctionComponent,
+    hidden?: boolean | undefined;
 }
 
 const navItems: NavItem[] = [
@@ -27,15 +28,15 @@ const navItems: NavItem[] = [
     { label: 'Entities', path: KnownPages.Entities, icon: Device }
 ];
 
-function UserProfileAvatarButton(props: ButtonProps) {
+function UserProfileAvatarButton(props: ComponentProps<typeof Button>) {
     const user = useCurrentUser();
 
     return (
-        <Button variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 2 }} {...props} style={{position: 'relative'}}>
+        <Button variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 2 }} {...props} style={{ position: 'relative' }}>
             <UserAvatar user={user} />
-            <Box sx={{ position: 'absolute', left: '50%', bottom: 4, transform: 'translateX(-50%)' }}>
+            <div style={{ position: 'absolute', left: '50%', bottom: 4, transform: 'translateX(-50%)' }}>
                 <ApiBadge />
-            </Box>
+            </div>
         </Button>
     );
 }
@@ -76,17 +77,10 @@ function NavProfile() {
     console.log('NavProfile rendered');
 
     return (
-        <MuiStack
-            direction={{ xs: 'row', sm: 'column' }}
-            sx={{
-                minHeight: { xs: '60px', sm: undefined },
-                justifyContent: { xs: 'space-between', sm: 'start' }
-            }}
-            alignItems="center"
-            spacing={1}>
+        <div className="flex xs:flex-row sm:flex-column xs:justify-between sm:justify-start items-center xs:min-h-60 gap-1">
             <UserProfileAvatar />
-            <Box sx={{ display: { xs: 'none', sm: 'inherit', width: '100%' } }}>
-                <MuiStack sx={{ width: { xs: undefined, sm: '100%' } }}>
+            <div className="width-full xs:hidden">
+                <Stack>
                     {visibleNavItems
                         .map((ni, index) => (
                             <NavLink
@@ -96,13 +90,14 @@ function NavProfile() {
                                 active={ni === activeNavItem}
                                 label={t(ni.label)} />
                         ))}
-                </MuiStack>
-            </Box>
-            <Box sx={{ display: { xs: 'inherit', sm: 'none' } }}>
+                </Stack>
+            </div>
+            <div className="sm:hidden">
                 <IconButton size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
                     {mobileMenuOpen ? <Close /> : <MenuIcon />}
                 </IconButton>
-                <Box hidden={!mobileMenuOpen} sx={{
+                <div style={{
+                    display: !mobileMenuOpen ? 'none' : 'block',
                     position: 'fixed',
                     top: '60px',
                     bottom: 0,
@@ -121,9 +116,9 @@ function NavProfile() {
                                 label={t(ni.label)}
                                 onClick={handleMobileMenuClose} />)}
                     </Stack>
-                </Box>
-            </Box>
-        </MuiStack>
+                </div>
+            </div>
+        </div>
     );
 }
 

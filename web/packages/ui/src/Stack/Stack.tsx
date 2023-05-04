@@ -1,12 +1,11 @@
-import { type CSSProperties } from "react";
-import { type ChildrenProps } from "../sharedTypes";
+import { PropsWithChildren, type CSSProperties } from "react";
 
-export type StackProps = ChildrenProps & {
+export type StackProps = PropsWithChildren<{
     spacing?: number;
     alignItems?: 'start' | 'center' | undefined;
     justifyContent?: 'start' | 'center' | 'end' | 'space-between' | 'stretch' | undefined;
     style?: CSSProperties | undefined;
-}
+}>;
 
 export function Stack({ children, spacing, alignItems, justifyContent, style }: StackProps) {
     return (

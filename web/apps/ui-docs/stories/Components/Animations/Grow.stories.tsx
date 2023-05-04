@@ -1,4 +1,4 @@
-import { Card } from "@signalco/ui";
+import { Card } from "@signalco/ui/dist/Card";
 import { Grow } from "@signalco/ui/dist/Grow";
 import { Stack } from "@signalco/ui/dist/Stack";
 import { StoryObj } from "@storybook/react";

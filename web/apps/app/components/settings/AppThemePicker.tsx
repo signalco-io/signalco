@@ -6,7 +6,7 @@ import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Picker } from '@signalco/ui/dist/Picker';
-import { SupportedColorScheme, Box, useColorScheme, DefaultColorScheme } from '@signalco/ui';
+import { SupportedColorScheme, useColorScheme, DefaultColorScheme } from '@signalco/ui';
 import { fromDuration, now, todayAt, toDuration } from '../../src/services/DateTimeProvider';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale from '../../src/hooks/useLocale';
@@ -32,25 +32,25 @@ function AppThemeVisual(props: { label: string, theme: SupportedColorScheme, dis
     }
 
     return (
-        <Box sx={{ opacity: disabled ? 0.4 : 1 }}>
+        <div style={{ opacity: disabled ? 0.4 : 1 }}>
             <Stack alignItems="center" spacing={1}>
-                <Box sx={{
+                <div style={{
                     position: 'relative',
                     width: 80,
                     height: 60,
                     backgroundColor: backgroundColor,
                     border: '1px solid gray',
                     borderTop: '4px solid gray',
-                    borderRadius: 1
+                    borderRadius: 4
                 }}>
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 4, left: 4 }} />
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 18, height: 5, top: 12, left: 4 }} />
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 22, height: 5, top: 20, left: 4 }} />
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 28, left: 4 }} />
-                </Box>
+                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 4, left: 4 }} />
+                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 18, height: 5, top: 12, left: 4 }} />
+                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 22, height: 5, top: 20, left: 4 }} />
+                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 28, left: 4 }} />
+                </div>
                 <Typography level="body2">{label}</Typography>
             </Stack>
-        </Box>
+        </div>
     );
 }
 
@@ -71,17 +71,17 @@ function AppThemeColorPicker() {
             {
                 value: 'light',
                 label: (
-                    <Box p={1}>
+                    <div className="p-1">
                         <AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" />
-                    </Box>
+                    </div>
                 )
             },
             {
                 value: 'dark',
                 label: (
-                    <Box p={1}>
+                    <div className="p-1">
                         <AppThemeVisual label={themes.t('Dark')} theme="dark" />
-                    </Box>
+                    </div>
                 )
             }
         ]} />

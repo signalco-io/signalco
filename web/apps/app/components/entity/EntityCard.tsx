@@ -3,7 +3,8 @@ import { Typography } from '@signalco/ui/dist/Typography';
 import { Timeago } from '@signalco/ui/dist/Timeago';
 import { Row } from '@signalco/ui/dist/Row';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
-import { Avatar, Card, Box, MuiStack } from '@signalco/ui';
+import { Card } from '@signalco/ui/dist/Card';
+import { Avatar } from '@signalco/ui/dist/Avatar';
 import EntityIcon from '../shared/entity/EntityIcon';
 import BatteryIndicator from '../indicators/BatteryIndicator';
 import { KnownPages } from '../../src/knownPages';
@@ -12,6 +13,7 @@ import { entityLastActivity } from '../../src/entity/EntityHelper';
 import ShareEntityChip from './ShareEntityChip';
 import EntityStatus, { useEntityStatus } from './EntityStatus';
 import { useEntityBattery } from './EntityBattery';
+import { Stack } from '@signalco/ui/dist/Stack';
 
 export interface EntityCardProps {
     entity: IEntityDetails;
@@ -26,16 +28,17 @@ export default function EntityCard({ entity, spread, selectable, selected, onSel
     const { hasBattery, level } = useEntityBattery(entity);
     const Icon = EntityIcon(entity);
 
+    const Container = spread ? Row : Stack;
+
     return (
         <Row spacing={1}>
             {selectable && <Checkbox checked={selected ?? false} onChange={onSelection} sx={{ ml: 1 }} />}
             <Link href={`${KnownPages.Entities}/${entity.id}`} style={{ flexGrow: 1 }}>
                 <Card sx={{ height: '100%', p: spread ? 0 : 1 }}>
-                    <MuiStack
+                    <Container
                         spacing={2}
-                        direction={spread ? 'row' : 'column'}
                         justifyContent="space-between"
-                        sx={{ height: '100%' }}>
+                        style={{ height: '100%' }}>
                         <Row spacing={1}>
                             <Avatar variant={spread ? 'plain' : 'soft'}>
                                 <Icon />
@@ -49,14 +52,14 @@ export default function EntityCard({ entity, spread, selectable, selected, onSel
                             <Row spacing={1} style={{ paddingRight: spread ? 16 : 0 }}>
                                 {hasBattery && <BatteryIndicator level={level} minLevel="low" />}
                                 {(hasStatus && (isStale || isOffline)) && (
-                                    <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
+                                    <div style={{ opacity: 0.6, fontSize: '0.8rem' }}>
                                         <Timeago date={entityLastActivity(entity)} />
-                                    </Box>
+                                    </div>
                                 )}
                                 <EntityStatus entity={entity} />
                             </Row>
                         </Row>
-                    </MuiStack>
+                    </Container>
                 </Card>
             </Link>
         </Row>

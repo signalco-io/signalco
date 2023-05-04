@@ -1,9 +1,9 @@
 // TODO: Move to shared UI library
 
-import { ChildrenProps } from '@signalco/ui';
+import { PropsWithChildren } from 'react';
 import { isDeveloper } from '../../src/services/EnvProvider';
 
-export default function DeveloperOnly(props: ChildrenProps) {
+export default function DeveloperOnly(props: PropsWithChildren) {
     if (isDeveloper)
         return <>{props.children}</>;
     return null;

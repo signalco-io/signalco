@@ -1,16 +1,17 @@
-import { ReactElement, useState } from 'react';
+import { PropsWithChildren, ReactElement, useState } from 'react';
 import { ExpandDown } from '@signalco/ui-icons';
-import { ChildrenProps } from '../sharedTypes';
-import { ListItem, Tooltip, IconButton, ListItemButton, List } from '@mui/joy';
+import { ListItem, IconButton } from '@mui/joy';
+import { Tooltip } from '../Tooltip';
+import { List, ListItemButton } from '../List';
 
-export type ListTreeItemProps = ChildrenProps & {
+export type ListTreeItemProps = PropsWithChildren<{
     label?: ReactElement | string;
     nodeId: string;
     defaultOpen?: boolean;
     onChange?: (nodeId: string, open: boolean) => void;
     selected?: boolean;
     onSelected?: (nodeId: string) => void;
-}
+}>;
 
 export function ListTreeItem(props: ListTreeItemProps) {
     const { label, children, nodeId, defaultOpen, onChange, selected, onSelected } = props;

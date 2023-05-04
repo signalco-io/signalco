@@ -1,5 +1,5 @@
 import { BatteryEmpty, BatteryLow, BatteryMedium, BatteryFull } from '@signalco/ui-icons';
-import { Tooltip } from '@signalco/ui';
+import { Tooltip } from '@signalco/ui/dist/Tooltip';
 
 type BatteryIndicatorProps = {
     level: number | undefined;

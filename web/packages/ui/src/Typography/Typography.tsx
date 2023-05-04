@@ -1,7 +1,7 @@
-import React, { CSSProperties, ForwardedRef, forwardRef } from "react";
-import { ChildrenProps, ColorVariants } from "../sharedTypes";
+import { type CSSProperties, ForwardedRef, type PropsWithChildren, createElement, forwardRef } from "react";
+import type { ColorVariants } from "../sharedTypes";
 
-export type TypographyProps = ChildrenProps & {
+export type TypographyProps = PropsWithChildren<{
     level?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'body3';
     component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div';
     semiBold?: boolean;
@@ -21,7 +21,7 @@ export type TypographyProps = ChildrenProps & {
     opacity?: number;
     color?: ColorVariants;
     gutterBottom?: boolean;
-};
+}>;
 
 function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, secondary, tertiary, color, noWrap } : TypographyProps) {
     if (extraThin) styles['fontWeight'] = 100;
@@ -59,5 +59,5 @@ export const Typography = forwardRef<HTMLDivElement, TypographyProps>(function T
 
     populateTypographyStyles(styles, props);
 
-    return React.createElement(component ?? (level?.startsWith('h') ? level : 'p'), { children, style: styles, ref: ref });
+    return createElement(component ?? (level?.startsWith('h') ? level : 'p'), { children, style: styles, ref: ref });
 });

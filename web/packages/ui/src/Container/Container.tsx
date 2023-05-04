@@ -1,12 +1,11 @@
 import cx from 'classix';
-import type { CSSProperties } from 'react';
-import type { ChildrenProps } from '../sharedTypes';
+import type { CSSProperties, PropsWithChildren } from 'react';
 
-export type ContainerProps = ChildrenProps & {
+export type ContainerProps = PropsWithChildren<{
     maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false,
     centered?: boolean,
     padded?: boolean,
-}
+}>;
 
 export function Container({ maxWidth, centered = true, padded = true, children }: ContainerProps) {
     let width: number | undefined = 1200;

@@ -7,7 +7,7 @@ import { Typography } from '@signalco/ui/dist/Typography';
 import { Row } from '@signalco/ui/dist/Row';
 import { Popper } from '@signalco/ui/dist/Popper';
 import { Button } from '@signalco/ui/dist/Button';
-import { Card } from '@signalco/ui';
+import { Card } from '@signalco/ui/dist/Card';
 import { camelToSentenceCase } from '@signalco/js';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import EntitySelectionMenu from './EntitySelectionMenu';

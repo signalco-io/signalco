@@ -22,8 +22,6 @@ export default defineConfig({
         ]
     ),
     format: 'esm',
-    dts: {
-        resolve: true,
-    },
+    dts: true,
     tsconfig: 'tsconfig.build.json',
 })

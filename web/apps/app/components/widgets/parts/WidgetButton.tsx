@@ -2,7 +2,7 @@ import { Typography } from '@signalco/ui/dist/Typography';
 import { Row } from '@signalco/ui/dist/Row';
 import { Icon } from '@signalco/ui/dist/Icon';
 import { Button } from '@signalco/ui/dist/Button';
-import { Avatar } from '@signalco/ui';
+import { Avatar } from '@signalco/ui/dist/Avatar';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultTargetWithValueMultiple, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';

@@ -1,12 +1,12 @@
 import { isAbsoluteUrl } from 'next/dist/shared/lib/utils';
 import NextLink from 'next/link';
-import { ChildrenProps } from '../sharedTypes';
+import { PropsWithChildren } from 'react';
 
-export type LinkProps = ChildrenProps & {
+export type LinkProps = PropsWithChildren<{
     href: string;
     className?: string | undefined;
     "aria-label"?: string | undefined;
-}
+}>;
 
 export function Link({ children, className, href, ...rest }: LinkProps) {
     return (

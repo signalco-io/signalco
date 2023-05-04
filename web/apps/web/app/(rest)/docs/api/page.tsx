@@ -14,9 +14,14 @@ import { Loadable } from '@signalco/ui/dist/Loadable';
 import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
 import {CopyToClipboardInput} from '@signalco/ui/dist/CopyToClipboardInput';
 import { Chip } from '@signalco/ui/dist/Chip';
-import {Button} from '@signalco/ui/dist/Button';
+import { Badge } from '@signalco/ui/dist/Badge';
+import { Button } from '@signalco/ui/dist/Button';
 import {Alert} from '@signalco/ui/dist/Alert';
-import { Divider, Badge, Card, List, Tooltip, Box, CardOverflow } from '@signalco/ui';
+import { Box } from '@signalco/ui/dist/Box';
+import { Tooltip } from '@signalco/ui/dist/Tooltip';
+import { List } from '@signalco/ui/dist/List';
+import { Card, CardOverflow } from "@signalco/ui/dist/Card";
+import { Divider } from '@signalco/ui/dist/Divider';
 import { camelToSentenceCase, HttpOperation, ObjectDictAny } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
@@ -145,7 +150,7 @@ function ApiOperation(props: ApiOperationProps) {
                     <Card>
                         {parametersResolved.map((parameter, i) => (
                             <React.Fragment key={parameter.name}>
-                                <Box sx={{ p: 2 }}>
+                                <div className="p-2">
                                     <Stack>
                                         <Row spacing={1} justifyContent="space-between">
                                             <Typography textTransform="uppercase">{parameter.name}</Typography>
@@ -156,7 +161,7 @@ function ApiOperation(props: ApiOperationProps) {
                                         </Row>
                                         {parameter.description && <Typography level="body2">{parameter.description}</Typography>}
                                     </Stack>
-                                </Box>
+                                </div>
                                 {i != Object.keys(parametersResolved).length && <Divider />}
                             </React.Fragment>
                         ))}
@@ -188,12 +193,12 @@ function ApiOperation(props: ApiOperationProps) {
                         if (!responseObj) return undefined;
                         return (
                             <React.Fragment key={responseCode}>
-                                <Box sx={{ p: 2 }}>
+                                <div className="p-2">
                                     <Stack>
                                         <ResponseStatusCode statusCode={responseCodeNumber} />
                                         <Typography level="body2">{responseObj.description}</Typography>
                                     </Stack>
-                                </Box>
+                                </div>
                                 {i != (Object.keys(responses).length - 1) && <Divider />}
                             </React.Fragment>
                         );

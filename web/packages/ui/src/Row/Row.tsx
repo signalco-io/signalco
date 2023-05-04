@@ -1,13 +1,12 @@
-import { type CSSProperties } from "react";
-import { type ChildrenProps } from "../sharedTypes";
+import type { PropsWithChildren, CSSProperties } from "react";
 
-export type RowProps = ChildrenProps & {
+export type RowProps = PropsWithChildren<{
     spacing?: number;
     alignItems?: 'start' | 'center' | 'stretch' | 'end' | undefined;
     justifyContent?: CSSProperties['justifyContent'];
     justifyItems?: 'center' | undefined;
     style?: CSSProperties | undefined;
-}
+}>;
 
 export function Row({ children, spacing, alignItems, justifyContent, justifyItems, style }: RowProps) {
     return (

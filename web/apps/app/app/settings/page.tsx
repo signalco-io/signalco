@@ -12,7 +12,7 @@ import { Picker } from '@signalco/ui/dist/Picker';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { Container } from '@signalco/ui/dist/Container';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
-import { Divider } from '@signalco/ui';
+import { Divider } from '@signalco/ui/dist/Divider';
 import { arraySum, humanizeNumber, sequenceEqual } from '@signalco/js';
 import { isNonEmptyString, isNotNull, noError } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';

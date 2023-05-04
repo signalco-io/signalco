@@ -1,10 +1,10 @@
-import { ChildrenProps } from "../sharedTypes";
+import type { PropsWithChildren } from "react";
 
-export type GrowProps = ChildrenProps & {
+export type GrowProps = PropsWithChildren<{
     appear: boolean;
     duration?: number;
     collapsedWhenHidden?: boolean;
-}
+}>;
 
 export function Grow(props: GrowProps) {
     const { appear, collapsedWhenHidden, children } = props;

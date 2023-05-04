@@ -2,12 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Loadable } from '@signalco/ui/dist/Loadable';
-import {
-    List,
-    ListItem,
-    ListItemButton,
-    Box
-} from '@signalco/ui';
+import { List, ListItem, ListItemButton } from '@signalco/ui/dist/List';
 import useAllEntities from '../../../src/hooks/signalco/entity/useAllEntities';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointer from '../../../src/contacts/IContactPointer';
@@ -33,9 +28,9 @@ export default function EntitySelection({ target, onSelected }: EntitySelectionP
     return (
         <Loadable isLoading={entities.isLoading} loadingLabel="Loading entity" error={entities.error}>
             <Stack spacing={1}>
-                <Box px={2}>
+                <div className="p-2">
                     <TextField autoFocus fullWidth placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} />
-                </Box>
+                </div>
                 <List>
                     <ListItem>
                         <ListItemButton onClick={() => handleEntitySelected(undefined)} selected={!target?.entityId}>

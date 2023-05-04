@@ -1,9 +1,8 @@
-import { MouseEvent, ReactElement, TouchEvent } from 'react'
-import { ChildrenProps } from "../sharedTypes";
+import { MouseEvent, PropsWithChildren, ReactElement, TouchEvent } from 'react'
 import JoyMenuItem from '@mui/joy/MenuItem';
-import { ListItemDecorator } from '@mui/joy';
+import { ListItemDecorator } from '../List';
 
-export type MenuItemProps = ChildrenProps & {
+export type MenuItemProps = PropsWithChildren<{
     'aria-controls'?: string
     'aria-describedby'?: string
     'aria-haspopup'?: true
@@ -11,7 +10,7 @@ export type MenuItemProps = ChildrenProps & {
     onTouchStart?: (event: TouchEvent<any>) => void,
     startDecorator?: ReactElement,
     href?: string;
-}
+}>;
 
 export function MenuItem({ startDecorator, children, ...rest }: MenuItemProps) {
     return (

@@ -1,8 +1,7 @@
-import React from 'react';
+import { PropsWithChildren } from 'react';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Button } from '@signalco/ui/dist/Button';
-import { ChildrenProps } from '@signalco/ui';
 import { asArray, ObjectDictAny } from '@signalco/js';
 import { extractValues } from '@enterwell/react-form-validation';
 import { FormBuilder, type FormItems, useFormField, FormBuilderProvider, FormBuilderComponents } from '@enterwell/react-form-builder';
@@ -117,7 +116,7 @@ const widgetConfigurationFormComponents: FormBuilderComponents = {
         onChange={(item: any) => item && item.length && props.onChange(item[0], { receiveEvent: false })} />
 };
 
-function WidgetConfigurationFormProvider(props: ChildrenProps) {
+function WidgetConfigurationFormProvider(props: PropsWithChildren) {
     return (
         <GeneralFormProvider>
             <FormBuilderProvider components={widgetConfigurationFormComponents}>

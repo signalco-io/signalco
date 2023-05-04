@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { MoreHorizontal } from '@signalco/ui-icons';
 import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
 import { Button } from '@signalco/ui/dist/Button';
-import { Divider } from '@signalco/ui';
+import { Divider } from '@signalco/ui/dist/Divider';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import { KnownPages } from '../../../src/knownPages';

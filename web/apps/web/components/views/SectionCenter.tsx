@@ -2,7 +2,7 @@
 
 import React, { type CSSProperties } from 'react';
 import { Container } from '@signalco/ui/dist/Container';
-import { Box } from '@signalco/ui';
+import { Box } from '@signalco/ui/dist/Box';
 
 
 export function SectionCenter(props: { children?: React.ReactNode | undefined; style?: CSSProperties | undefined; narrow?: boolean; }) {
