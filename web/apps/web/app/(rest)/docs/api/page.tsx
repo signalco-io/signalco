@@ -25,8 +25,7 @@ import { Divider } from '@signalco/ui/dist/Divider';
 import { camelToSentenceCase, HttpOperation, ObjectDictAny } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
-
-type ChipColors = 'neutral' | 'primary' | 'danger' | 'info' | 'success' | 'warning';
+import { ColorPaletteProp } from '@signalco/ui';
 
 function HttpOperationChip(props: { operation?: HttpOperation | undefined, small?: boolean }) {
     const color = ({
@@ -34,7 +33,7 @@ function HttpOperationChip(props: { operation?: HttpOperation | undefined, small
         'post': 'info',
         'put': 'warning',
         'delete': 'danger'
-    }[props.operation?.toLowerCase() ?? ''] ?? 'neutral') as ChipColors;
+    }[props.operation?.toLowerCase() ?? ''] ?? 'neutral') as ColorPaletteProp;
 
     return <Chip color={color} size={props.small ? 'sm' : 'md'}>{props.operation?.toUpperCase()}</Chip>;
 }
