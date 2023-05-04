@@ -2,9 +2,10 @@ import type { PropsWithChildren, MouseEventHandler, ReactNode } from 'react';
 import {Link} from '../Link';
 import {Row} from '../Row';
 import { cx } from 'classix';
+import { ColorPaletteProp } from '..';
 
 export type ChipProps = PropsWithChildren<{
-    color?: "primary" | "neutral" | "danger" | "info" | "success" | "warning";
+    color?: ColorPaletteProp;
     variant?: "plain" | "outlined" | "soft" | "solid";
     size?: 'sm' | 'md' | 'lg';
     onClick?: MouseEventHandler<HTMLButtonElement>,
