@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Button } from '@signalco/ui/dist/Button';
-import { Breakpoint } from '@signalco/ui';
 import ConfirmDeleteDialog from './ConfirmDeleteDialog';
 
 export interface ConfirmDeleteButtonDialogProps {
     header: React.ReactNode,
     expectedConfirmText: string,
     onConfirm: () => void,
-    maxWidth?: false | undefined | Breakpoint,
+    maxWidth?: false | undefined | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | undefined,
 }
 
 export interface ConfirmDeleteButtonProps extends ConfirmDeleteButtonDialogProps {
