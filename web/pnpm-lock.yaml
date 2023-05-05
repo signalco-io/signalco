@@ -11,8 +11,8 @@ importers:
   apps/app:
     dependencies:
       '@auth0/auth0-react':
-        specifier: 2.0.2
-        version: 2.0.2(react-dom@18.2.0)(react@18.2.0)
+        specifier: 2.1.0
+        version: 2.1.0(react-dom@18.2.0)(react@18.2.0)
       '@auth0/auth0-spa-js':
         specifier: 2.0.4
         version: 2.0.4
@@ -1100,8 +1100,8 @@ packages:
       jsonpointer: 5.0.1
       leven: 3.1.0
 
-  /@auth0/auth0-react@2.0.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-MyN1FdB+Ogo9S3YWShfUq7eVsq37ioh885oThnwZ1OjYrKUlImM+dWwybDD+Bg8U28sYBt3QEqFbMAQC/p4ONQ==}
+  /@auth0/auth0-react@2.1.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-+86qLx97BcSwL/ZwIzGq9jFa5SaV5z7goLU5gi+4R9KhzDg9vhmmZ+iQWW0GMiuwjJ8vcfX4hRTD6iF0DbGZWw==}
     peerDependencies:
       react: ^16.11.0 || ^17 || ^18
       react-dom: ^16.11.0 || ^17 || ^18
