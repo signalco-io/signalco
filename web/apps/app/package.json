@@ -17,7 +17,7 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@auth0/auth0-react": "2.0.2",
+        "@auth0/auth0-react": "2.1.0",
         "@auth0/auth0-spa-js": "2.0.4",
         "@date-io/date-fns": "2.16.0",
         "@dnd-kit/core": "6.0.8",
