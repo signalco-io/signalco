@@ -38,15 +38,20 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
+      - name: ✨ Setup pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 'latest'
+
       - name: ✨ Setup Node LTS
         uses: actions/setup-node@v3
         with:
           node-version: "18.x"
-          cache: yarn
+          cache: pnpm
           cache-dependency-path: ./cloud/infrastructure
 
       - name: 📦️ Installing dependencies
-        run: yarn install
+        run: pnpm i --frozen-lockfile
 
       - name: 🔎 Determine stack
         shell: bash
