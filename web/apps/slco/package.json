@@ -43,7 +43,7 @@
         "@types/react-dom": "18.2.4",
         "@types/react-motion": "0.0.33",
         "cross-env": "7.0.3",
-        "eslint": "8.39.0",
+        "eslint": "8.40.0",
         "next-sitemap": "4.0.9",
         "postcss": "8.4.23",
         "playwright": "1.33.0",
