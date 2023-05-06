@@ -130,7 +130,7 @@ function ApiOperation(props: ApiOperationProps) {
             {parametersResolved && (
                 <Stack spacing={1}>
                     <Typography textTransform="uppercase">Parameters</Typography>
-                    <Card>
+                    <Card variant="outlined">
                         {parametersResolved.map((parameter, i) => (
                             <React.Fragment key={parameter.name}>
                                 <Box sx={{ p: 2 }}>
@@ -155,7 +155,7 @@ function ApiOperation(props: ApiOperationProps) {
                 <Stack spacing={1}>
                     <Typography textTransform="uppercase">Request body</Typography>
                     {requestBodyResolved.description && <Typography level="body2">{requestBodyResolved.description}</Typography>}
-                    <Card>
+                    <Card variant="outlined">
                         <Stack>
                             {Object.keys(requestBodyResolved.content).map(contentType => (
                                 <React.Fragment key={contentType}>
@@ -169,7 +169,7 @@ function ApiOperation(props: ApiOperationProps) {
             )}
             <Stack spacing={1}>
                 <Typography textTransform="uppercase">Responses</Typography>
-                <Card>
+                <Card variant="outlined">
                     {Object.keys(responses).map((responseCode, i) => {
                         const responseCodeNumber = parseInt(responseCode, 10) || 0;
                         const responseObj = resolveRef<OpenAPIV3.ResponseObject>(api, responses[responseCode]);
@@ -239,7 +239,9 @@ function Nav() {
         <Stack spacing={2}>
             <Row spacing={1}>
                 <Typography>{info.title}</Typography>
-                <Chip size="sm" variant="soft">v{info.version}</Chip>
+                <Chip size="sm" variant="soft">
+                    <Typography level="body3">v{info.version}</Typography>
+                </Chip>
                 {info.license && <Chip size="sm">{info.license.name}</Chip>}
             </Row>
             <List>
@@ -380,7 +382,14 @@ function SecurityBadge(props: { security: OpenAPIV3.SecurityRequirementObject })
             {info.map(source => {
                 if (source && source.type === 'http') {
                     const httpSource = source as OpenAPIV3.HttpSecurityScheme;
-                    return <Chip variant="outlined" startDecorator={<Security fontSize="small" />} key={httpSource.scheme}>{camelToSentenceCase(httpSource.scheme)}</Chip>;
+                    return (
+                        <Chip
+                            variant="outlined"
+                            startDecorator={<Security size={18} />}
+                            key={httpSource.scheme}>
+                            {camelToSentenceCase(httpSource.scheme)}
+                        </Chip>
+                    );
                 } else if (source) {
                     return <Typography key={source.type} color="danger" bold textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
@@ -460,25 +469,38 @@ function Actions(props: ActionsProps) {
                 </Stack>
             )}
             {requestBodyResolved && (
-                <Stack spacing={1}>
-                    <Typography textTransform="uppercase">Body</Typography>
-                    <Stack>
-                        <Typography textAlign="right" level="body3">application/json</Typography>
-                        <Card>
-                            <CardOverflow>
-                                {/* TODO: Use CodeEditor component with language */}
-                                {/* <CodeEditor
+                <Stack>
+                    <Row spacing={1} style={{ width: '100%' }} justifyContent="space-between">
+                        <div style={{ paddingBottom: '8px' }}>
+                            <Typography textTransform="uppercase">Body</Typography>
+                        </div>
+                        <div style={{ alignSelf: 'flex-end' }}>
+                            <Typography textAlign="right" level="body3">application/json</Typography>
+                        </div>
+                    </Row>
+                    <Card variant="outlined">
+                        <CardOverflow sx={{ padding: 0, position: 'relative' }}>
+                            {/* TODO: Use CodeEditor component with language */}
+                            {/* <CodeEditor
                                     language="json"
                                     code={requestBodyValue}
                                     setCode={setRequestBodyValue}
                                     height={300} /> */}
-                                <textarea
-                                    value={requestBodyValue}
-                                    onChange={(e) => setRequestBodyValue(e.target.value)}
-                                    rows={10} />
-                            </CardOverflow>
-                        </Card>
-                    </Stack>
+                            <textarea
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    fontSize: '0.8em',
+                                    resize: 'none',
+                                    border: 'none',
+                                    background: 'transparent',
+                                    padding: '0.5em'
+                                }}
+                                value={requestBodyValue}
+                                onChange={(e) => setRequestBodyValue(e.target.value)}
+                                rows={10} />
+                        </CardOverflow>
+                    </Card>
                 </Stack>
             )}
             <Button

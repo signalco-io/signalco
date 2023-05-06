@@ -10,6 +10,7 @@ using Signal.Core.Contacts;
 using Signal.Core.Entities;
 using Signal.Core.Exceptions;
 using Signal.Core.Processor;
+using Signal.Core.Secrets;
 using Signal.Core.Usage;
 
 namespace Signalco.Func.Internal.UsageProcessor;
@@ -29,7 +30,7 @@ public class UsageProcessTrigger
 
     [Function("UsageProcessTrigger")]
     public async Task Run(
-        [QueueTrigger("usage-processing", Connection = "SignalcoStorageAccountConnectionString")]
+        [QueueTrigger("usage-processing", Connection = SecretKeys.StorageAccountConnectionString)]
         string item,
         CancellationToken cancellationToken = default)
     {

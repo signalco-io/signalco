@@ -18,6 +18,7 @@
     <ProjectReference Include="..\Signal.Core\Signal.Core.csproj" />
     <ProjectReference Include="..\Signal.Infrastructure.AzureStorage.Tables\Signal.Infrastructure.AzureStorage.Tables.csproj" />
     <ProjectReference Include="..\Signal.Infrastructure.Secrets\Signal.Infrastructure.Secrets.csproj" />
+    <ProjectReference Include="..\Signalco.Api.Common.Health\Signalco.Api.Common.Health.csproj" />
     <ProjectReference Include="..\Signalco.Infrastructure.Processor\Signalco.Infrastructure.Processor.csproj" />
   </ItemGroup>
   <ItemGroup>

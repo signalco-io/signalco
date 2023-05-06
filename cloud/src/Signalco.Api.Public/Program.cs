@@ -8,7 +8,7 @@ using Signal.Infrastructure.AzureStorage.Tables;
 using Signal.Infrastructure.Secrets;
 using Signalco.Infrastructure.Processor;
 
-new HostBuilder()
+await new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
     .ConfigureServices(serviceCollection => serviceCollection
         .AddCore()
@@ -19,4 +19,4 @@ new HostBuilder()
         .AddSingleton<IFunctionAuthenticator, FunctionAuth0Authenticator>()
         .AddHCaptcha())
     .Build()
-    .Run();
+    .RunAsync();

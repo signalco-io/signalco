@@ -7,6 +7,7 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Signal.Core.Exceptions;
 using Signal.Core.Processor;
+using Signal.Core.Secrets;
 
 namespace Signalco.Func.Internal.ContactStateProcessor
 {
@@ -25,7 +26,7 @@ namespace Signalco.Func.Internal.ContactStateProcessor
 
         [Function("ContactStateProcessTrigger")]
         public async Task Run(
-            [QueueTrigger("contact-state-processing", Connection = "SignalcoStorageAccountConnectionString")]
+            [QueueTrigger("contact-state-processing", Connection = SecretKeys.StorageAccountConnectionString)]
             string trigger,
             CancellationToken cancellationToken = default)
         {

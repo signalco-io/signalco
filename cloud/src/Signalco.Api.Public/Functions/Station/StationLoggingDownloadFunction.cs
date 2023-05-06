@@ -4,10 +4,8 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
@@ -23,19 +21,16 @@ public class StationLoggingDownloadFunction
     private readonly IFunctionAuthenticator functionAuthenticator;
     private readonly IEntityService entityService;
     private readonly IAzureStorageDao azureStorageDao;
-    private readonly ILogger<StationLoggingDownloadFunction> logger;
 
     public StationLoggingDownloadFunction(
         IFunctionAuthenticator functionAuthenticator,
         IEntityService entityService,
-        IAzureStorageDao azureStorageDao,
-        ILogger<StationLoggingDownloadFunction> logger)
+        IAzureStorageDao azureStorageDao)
     {
         this.functionAuthenticator =
             functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
         this.azureStorageDao = azureStorageDao ?? throw new ArgumentNullException(nameof(azureStorageDao));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     [Function("Station-Logging-Download")]
@@ -66,6 +61,10 @@ public class StationLoggingDownloadFunction
             var stream = await this.azureStorageDao.LoggingDownloadAsync(blobName, cancellationToken);
             var content = Encoding.UTF8.GetBytes(await new StreamReader(stream).ReadToEndAsync(cancellationToken));
 
-            return new FileContentResult(content, "text/plain");
+            var response = req.CreateResponse();
+            response.StatusCode = HttpStatusCode.OK;
+            response.Headers.Add("Content-Type", "text/plain");
+            await response.WriteBytesAsync(content, cancellationToken);
+            return response;
         });
 }

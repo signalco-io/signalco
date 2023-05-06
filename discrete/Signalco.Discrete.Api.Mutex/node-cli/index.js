@@ -25,8 +25,11 @@ async function fetchWithRetry(url, options, retryCount = 10) {
             return response;
         } catch (err) {
             error = err;
-            console.warn(`Failed to fetch (retry ${i}/${retryCount}). Url: ${url}`);
-            await delay(1000);
+
+            // Exponantial backoff with max 60s
+            const delayMs = Math.min(1000 * Math.pow(2, i), 60000);
+            process.stdout.write('!');
+            await delay(delayMs);
         }
     }
     
@@ -35,6 +38,7 @@ async function fetchWithRetry(url, options, retryCount = 10) {
 }
 
 async function waitSync(key) {
+    process.stdout.write(`Waiting for ${key}`);
     while(true) {
         try {
             const response = await fetchWithRetry(`${apiUrl}/wait/${key}`, {
@@ -58,6 +62,7 @@ async function waitSync(key) {
 }
 
 async function releaseSync(key) {
+    process.stdout.write(`Releasing ${key}`);
     try {
         const response = await fetchWithRetry(`${apiUrl}/release/${key}`, {
             method: 'POST',
