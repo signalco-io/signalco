@@ -64,7 +64,7 @@ export function createFunction (
             enabled: true,
             retentionPolicy: {
                 enabled: true,
-                days: 7,
+                days: 3,
             },
         }],
         metrics: [{
