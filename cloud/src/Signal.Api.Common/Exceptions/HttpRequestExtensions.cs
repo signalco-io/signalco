@@ -143,8 +143,12 @@ public static class HttpRequestExtensions
         CancellationToken cancellationToken,
         IFunctionAuthenticator authenticator,
         Func<UserRequestContextWithPayload<TPayload>, Task<TResponse>> executionBody) =>
-        UserRequest<TPayload>(req, authenticator, async context => 
-            await req.JsonResponseAsync(await executionBody(context), cancellationToken: cancellationToken), cancellationToken);
+        UserRequest<TPayload>(req, authenticator, async context =>
+        {
+            var response = await executionBody(context);
+            return response as HttpResponseData ??
+                   await req.JsonResponseAsync(response, cancellationToken: cancellationToken);
+        }, cancellationToken);
 
     private static async Task<HttpResponseData> UserOrSystemRequest<TPayload>(
         this HttpRequestData req,

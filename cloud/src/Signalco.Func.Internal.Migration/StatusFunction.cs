@@ -1,16 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.Functions.Worker;
+﻿using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.OpenApi;
+using System.Threading.Tasks;
+using Signalco.Api.Common.Health;
 
 namespace Signalco.Func.Internal.Migration;
 
-public class StatusFunction
+public class StatusFunction : HealthStatusFunctionsBase
 {
     [Function("Status")]
     [OpenApiOperation<StatusFunction>("Health")]
     [OpenApiResponseWithoutBody]
-    public IActionResult Run(
+    public Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "status")] HttpRequestData req) =>
-        new OkResult();
+        this.HandleAsync(req);
 }
