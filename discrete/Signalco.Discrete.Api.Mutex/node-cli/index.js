@@ -27,9 +27,9 @@ async function fetchWithRetry(url, options, retryCount = 10) {
             error = err;
 
             // Exponantial backoff with max 60s
-            const delay = Math.min(1000 * Math.pow(2, i), 60000);
-            console.warn(`Failed to fetch (retry ${i}/${retryCount}). Url: ${url}`, `Retrying in ${delay}ms`);
-            await delay(delay);
+            const delayMs = Math.min(1000 * Math.pow(2, i), 60000);
+            console.warn(`Failed to fetch (retry ${i}/${retryCount}). Url: ${url}`, `Retrying in ${delayMs}ms`);
+            await delay(delayMs);
         }
     }
     
