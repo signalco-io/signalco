@@ -76,7 +76,7 @@ export function createFunction (
             },
         }],
         resourceUri: app.id,
-        storageAccountId: logWorkspace.workspace.id,
+        workspaceId: logWorkspace.workspace.id,
     });
 
     return {
