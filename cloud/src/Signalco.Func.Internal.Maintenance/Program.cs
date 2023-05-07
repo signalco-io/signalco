@@ -5,7 +5,7 @@ using Signal.Infrastructure.AzureStorage.Tables;
 using Signal.Infrastructure.Secrets;
 using Signalco.Infrastructure.Processor;
 
-new HostBuilder()
+await new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
     .ConfigureServices(serviceCollection => serviceCollection
         .AddCore()
@@ -14,4 +14,4 @@ new HostBuilder()
         .AddAzureStorage()
         .AddProcessor())
     .Build()
-    .Run();
+    .RunAsync();

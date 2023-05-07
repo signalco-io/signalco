@@ -64,7 +64,7 @@ export function createFunction (
             enabled: true,
             retentionPolicy: {
                 enabled: true,
-                days: 7,
+                days: 3,
             },
         }],
         metrics: [{
@@ -76,7 +76,7 @@ export function createFunction (
             },
         }],
         resourceUri: app.id,
-        storageAccountId: logWorkspace.workspace.id,
+        workspaceId: logWorkspace.workspace.id,
     });
 
     return {

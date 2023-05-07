@@ -7,6 +7,9 @@ export default function createLogWorkspace(resourceGroup: ResourceGroup, namePre
         sku: {
             name: WorkspaceSkuNameEnum.PerGB2018,
         },
+        workspaceCapping: {
+            dailyQuotaGb: 1,
+        },
         retentionInDays: 30,
     });
 

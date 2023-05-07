@@ -2,10 +2,10 @@
 using Signal.Core;
 using Signal.Infrastructure.Secrets;
 
-new HostBuilder()
+await new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
     .ConfigureServices(serviceCollection => serviceCollection
             .AddCore()
             .AddSecrets())
     .Build()
-    .Run();
+    .RunAsync();
