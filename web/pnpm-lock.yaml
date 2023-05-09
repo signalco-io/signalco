@@ -140,8 +140,8 @@ importers:
         specifier: 4.4.5
         version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
       recharts:
-        specifier: 2.5.0
-        version: 2.5.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 2.6.0
+        version: 2.6.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       sharp:
         specifier: 0.32.1
         version: 0.32.1
@@ -12653,8 +12653,8 @@ packages:
       decimal.js-light: 2.5.1
     dev: false
 
-  /recharts@2.5.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-0EQYz3iA18r1Uq8VqGZ4dABW52AKBnio37kJgnztIqprELJXpOEsa0SzkqU1vjAhpCXCv52Dx1hiL9119xsqsQ==}
+  /recharts@2.6.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Y6PgYMmqAxj2cw1FClB1ldcn1xqjJIFysDNGZoyn4faVqNFP4Vx94fDqUz+OgpdTU3APMwIpu/JTVPPGGRUOGQ==}
     engines: {node: '>=12'}
     peerDependencies:
       prop-types: ^15.6.0
