@@ -19,6 +19,7 @@
     "dependencies": {
         "@hcaptcha/react-hcaptcha": "1.8.1",
         "@next/env": "13.4.1",
+        "@signalco/data": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "classix": "2.1.32",
