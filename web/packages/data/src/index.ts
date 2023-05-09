@@ -1,6 +1,8 @@
 import ChannelsData from './channelsData.json';
 import ChannelCategories from './channelCategoriesData.json';
 
+export { knownSecureHeadersExternalUrls, combineSecureHeaders } from './secureHeaders';
+
 export type ChannelDataItem = {
     channelName: string,
 	label: string,

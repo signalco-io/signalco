@@ -18,6 +18,7 @@
     },
     "dependencies": {
         "@next/env": "13.4.1",
+        "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
         "@signalco/ui": "workspace:*",
