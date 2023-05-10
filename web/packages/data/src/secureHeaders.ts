@@ -22,7 +22,7 @@ export const knownSecureHeadersExternalUrls: { [key: string]: ExternalUrls | ((p
     },
     auth0: (tenant: string) => {
         return {
-            frameSrc: [`'https://${tenant}.auth0.com'`],
+            frameSrc: [`https://${tenant}.auth0.com`],
             imgSrc: [`https://${tenant}.auth0.com`],
             connectSrc: [`https://${tenant}.auth0.com`]
         }
