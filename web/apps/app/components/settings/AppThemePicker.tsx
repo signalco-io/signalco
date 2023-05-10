@@ -6,7 +6,7 @@ import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Picker } from '@signalco/ui/dist/Picker';
-import { SupportedColorScheme, useColorScheme, DefaultColorScheme } from '@signalco/ui';
+import { type SupportedColorScheme, type DefaultColorScheme } from '@signalco/ui';
 import { fromDuration, now, todayAt, toDuration } from '../../src/services/DateTimeProvider';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale from '../../src/hooks/useLocale';
@@ -57,7 +57,10 @@ function AppThemeVisual(props: { label: string, theme: SupportedColorScheme, dis
 function AppThemeColorPicker() {
     const themes = useLocale('App', 'Settings', 'Themes');
     const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'system');
-    const { colorScheme, setMode } = useColorScheme();
+    // const { colorScheme, setMode } = useColorScheme();
+    const colorScheme: DefaultColorScheme = 'dark';
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+    const setMode = (mode: DefaultColorScheme) => {};
 
     const handleThemeSelect = (newTheme: DefaultColorScheme | undefined) => {
         const newThemeSelect = newTheme ?? 'light';
@@ -92,7 +95,10 @@ export default function AppThemePicker() {
     const { t: tPicker } = useLocale('App', 'Components', 'AppThemePicker');
     const { t: tPickerModes } = useLocale('App', 'Components', 'AppThemePicker', 'Modes');
 
-    const { mode, setMode } = useColorScheme();
+    // const { mode, setMode } = useColorScheme();
+    const mode: unknown = 'dark';
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+    const setMode = (mode: DefaultColorScheme | 'system') => {};
     const [themeMode, setThemeMode] = useUserSetting<AppThemeMode>('themeMode', 'system');
 
     const [userLocation] = useUserSetting<[number, number] | undefined>('location', undefined);

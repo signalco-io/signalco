@@ -1,4 +1,4 @@
-import { PropsWithChildren, useMemo } from 'react';
+import { type PropsWithChildren, useMemo } from 'react';
 import { Alert, CircularProgress } from '@mui/joy';
 import { Warning } from '@signalco/ui-icons';
 

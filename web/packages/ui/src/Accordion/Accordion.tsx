@@ -29,10 +29,12 @@ export function Accordion(props: AccordionProps) {
 
     const actualOpen = open ?? isOpen;
 
+    const multipleChildren = !!children && Array.isArray(children);
+
     return (
         <Card variant="soft" sx={sx}>
             <Row spacing={1} justifyContent="space-between">
-                {!!children && Array.isArray(children) ? children[0] : children}
+                {multipleChildren ? children[0] : children}
                 {!disabled && (
                     <IconButton size="sm" onClick={handleOpen}>
                         <Icon>{actualOpen ? 'expand_less' : 'expand_more'}</Icon>
@@ -41,7 +43,7 @@ export function Accordion(props: AccordionProps) {
             </Row>
             {(!unmountOnExit || actualOpen) && (
                 <Collapse appear={actualOpen}>
-                    {!!children && Array.isArray(children) && children.filter((_, i) => i !== 0)}
+                    {multipleChildren && children.filter((_, i) => i !== 0)}
                 </Collapse>
             )}
         </Card>
