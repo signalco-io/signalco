@@ -51,6 +51,10 @@ export const knownSecureHeadersExternalUrls: { [key: string]: ExternalUrls | ((p
     }
 };
 
+function quotes(value: string) {
+    return `'${value}'`;
+}
+
 export function combineSecureHeaders(
     baseDomains: string[],
     allowSubdomains: boolean,
@@ -62,19 +66,19 @@ export function combineSecureHeaders(
         contentSecurityPolicy: {
             directives: {
                 defaultSrc: '\'self\'',
-                scriptSrc: ['\'self\'', ...externalUrls.map(e => e.scriptSrc), '\'unsafe-inline\'', isDevelopment ? '\'unsafe-eval\'' : undefined],
+                scriptSrc: ['\'self\'', ...externalUrls.map(e => e.scriptSrc?.map(quotes)), '\'unsafe-inline\'', isDevelopment ? '\'unsafe-eval\'' : undefined],
                 objectSrc: '\'none\'',
-                styleSrc: ['\'self\'', ...externalUrls.map(e => e.styleSrc), '\'unsafe-inline\''],
+                styleSrc: ['\'self\'', ...externalUrls.map(e => e.styleSrc?.map(quotes)), '\'unsafe-inline\''],
                 fontSrc: ['\'self\''],
                 manifestSrc: '\'self\'',
                 mediaSrc: '\'self\'',
                 childSrc: '\'self\'',
-                frameSrc: ['\'self\'', , ...externalUrls.map(e => e.frameSrc)],
+                frameSrc: ['\'self\'', , ...externalUrls.map(e => e.frameSrc?.map(quotes))],
                 workerSrc: '\'self\'',
-                imgSrc: ['\'self\'', 'data:', ...baseSubdomains, ...externalUrls.map(e => e.imgSrc),],
+                imgSrc: ['\'self\'', 'data:', ...baseSubdomains?.map(quotes), ...externalUrls.map(e => e.imgSrc?.map(quotes)),],
                 formAction: '\'self\'',
-                connectSrc: ['\'self\'', ...baseSubdomains, ...externalUrls.map(e => e.connectSrc),],
-                baseURI: baseDomains,
+                connectSrc: ['\'self\'', ...baseSubdomains?.map(quotes), ...externalUrls.map(e => e.connectSrc?.map(quotes)),],
+                baseURI: baseDomains?.map(quotes),
                 'frame-ancestors': '\'none\''
             }
         },
