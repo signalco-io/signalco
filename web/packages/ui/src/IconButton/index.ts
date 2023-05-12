@@ -1,1 +1,1 @@
-export { default as IconButton } from '@mui/joy/IconButton';
+export * from './IconButton';

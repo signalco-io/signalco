@@ -1,9 +1,9 @@
 import React from 'react';
 import {Row} from '@signalco/ui/dist/Row';
+import {NavigatingButton} from '@signalco/ui/dist/NavigatingButton';
 import {Link} from '@signalco/ui/dist/Link';
 import {Container} from '@signalco/ui/dist/Container';
 import { KnownPages } from '../src/knownPages';
-import {NavigatingButton} from './NavigatingButton';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 
 export const HeaderHeight = 80;

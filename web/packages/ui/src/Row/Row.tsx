@@ -11,7 +11,7 @@ export type RowProps = PropsWithChildren<{
 export function Row({ children, spacing, alignItems, justifyContent, justifyItems, style }: RowProps) {
     return (
         <div
-            className="flex gap-[var(--s-gap)] align-items-[var(--s-alignItems)] justify-content-[var(--s-justifyContent)] justify-items-[var(--s-justifyItems)]"
+            className="flex [align-items:--s-alignItems] gap-[--s-gap] [justify-content:--s-justifyContent] [justify-items:--s-justifyItems]"
             style={{
                 '--s-gap': `${(spacing ?? 0) * 8}px`,
                 '--s-alignItems': alignItems ?? 'center',

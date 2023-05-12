@@ -60,9 +60,11 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
                 >
                     {dashboard.name}
                 </Button>
-                <IconButton sx={{ position: 'absolute', right: 0, height: '100%' }} onClick={() => onFavorite(dashboard.id)}>
-                    {dashboard.isFavorite ? <Pin /> : <PinOff />}
-                </IconButton>
+                <div className="position-absolute right-0 h-full">
+                    <IconButton onClick={() => onFavorite(dashboard.id)}>
+                        {dashboard.isFavorite ? <Pin /> : <PinOff />}
+                    </IconButton>
+                </div>
             </Row>
         </div>
     );

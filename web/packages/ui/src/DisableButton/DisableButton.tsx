@@ -1,5 +1,5 @@
 import { Check, Disabled } from '@signalco/ui-icons';
-import { Button } from '@mui/joy';
+import { Button } from '../Button';
 
 export type DisableButtonProps = {
     readonly?: boolean;
