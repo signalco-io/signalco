@@ -1,6 +1,7 @@
 'use client';
 
-import { Stack, Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
 
 export default function ContactPage() {
     return (

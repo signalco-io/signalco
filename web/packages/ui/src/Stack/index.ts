@@ -1,2 +1,1 @@
-export {default} from './Stack';
-export {type StackProps} from './Stack';
+export { Stack, type StackProps} from './Stack';

@@ -1,3 +1,1 @@
-type AppThemeMode = 'system' | 'manual' | 'sunriseSunset' | 'timeRange';
-
-export default AppThemeMode;
+export type AppThemeMode = 'system' | 'manual' | 'sunriseSunset' | 'timeRange';

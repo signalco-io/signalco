@@ -2,7 +2,10 @@
 
 import { useInView } from 'react-cool-inview';
 import React from 'react';
-import { ImageLink, Typography, Grid, GentleSlide, MuiStack } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import {ImageLink} from '@signalco/ui/dist/ImageLink';
+import { Grid } from '@signalco/ui/dist/Grid';
+import { GentleSlide } from '@signalco/ui/dist/GentleSlide';
 import { SectionCenter } from './SectionCenter';
 
 const integrationsList = [
@@ -24,7 +27,7 @@ export function FeaturedIntegrationsSection() {
 
     return (
         <SectionCenter>
-            <MuiStack spacing={4} ref={observe}>
+            <div className="flex flex-row gap-3" ref={observe}>
                 <GentleSlide appear={inView} direction="down">
                     <Typography level="body2" textAlign="center" textTransform="uppercase">Featured integrations</Typography>
                 </GentleSlide>
@@ -42,7 +45,7 @@ export function FeaturedIntegrationsSection() {
                         </Grid>
                     ))}
                 </Grid>
-            </MuiStack>
+            </div>
         </SectionCenter>
     );
 }

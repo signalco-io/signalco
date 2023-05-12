@@ -1,2 +1,1 @@
-export { default } from './DisableButton';
-export { type DisableButtonProps } from './DisableButton';
+export { DisableButton, type DisableButtonProps } from './DisableButton';

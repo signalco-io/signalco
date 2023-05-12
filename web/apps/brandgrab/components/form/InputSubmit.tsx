@@ -1,4 +1,5 @@
-import { FormControl, TextField, Button } from '@signalco/ui';
+import { Input } from '@signalco/ui/dist/Input';
+import { Button } from '@signalco/ui/dist/Button';
 
 type InputSubmitProps = {
     value: string;
@@ -16,21 +17,19 @@ export default function InputSubmit({ value, onChange, onSubmit, placeholder, is
 
     return (
         <form onSubmit={handleSubmit}>
-            <FormControl>
-                <TextField
-                    placeholder={placeholder}
-                    value={value}
-                    onChange={onChange}
-                    fullWidth
-                    endDecorator={
-                        <Button
-                            variant="solid"
-                            type="submit"
-                            loading={isLoading}>
-                            Grab
-                        </Button>
-                    } />
-            </FormControl>
+            <Input
+                placeholder={placeholder}
+                value={value}
+                onChange={onChange}
+                fullWidth
+                endDecorator={
+                    <Button
+                        variant="solid"
+                        type="submit"
+                        loading={isLoading}>
+                        Grab
+                    </Button>
+                } />
         </form>
     )
 }

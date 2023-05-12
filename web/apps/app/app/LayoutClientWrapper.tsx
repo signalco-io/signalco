@@ -1,27 +1,21 @@
 'use client';
 
 import { ToastContainer } from 'react-toastify';
-import { ChildrenProps, CssBaseline, CssVarsProvider, buildSignalcoTheme, getInitColorSchemeScript } from '@signalco/ui';
+import { PropsWithChildren } from 'react';
 import useAppTheme from '../src/hooks/useAppTheme';
 
-const signalcoTheme = buildSignalcoTheme();
-
-function ThemeChangerWrapper({children}: ChildrenProps) {
+function ThemeChangerWrapper({ children }: PropsWithChildren) {
     useAppTheme();
     return <>{children}</>;
 }
 
-export function LayoutClientWrapper({children}: ChildrenProps) {
+export function LayoutClientWrapper({ children }: PropsWithChildren) {
     return (
         <>
-            {getInitColorSchemeScript()}
-            <CssVarsProvider theme={signalcoTheme}>
-                <CssBaseline />
-                <ThemeChangerWrapper>
-                    <ToastContainer />
-                    {children}
-                </ThemeChangerWrapper>
-            </CssVarsProvider>
+            <ThemeChangerWrapper>
+                <ToastContainer />
+                {children}
+            </ThemeChangerWrapper>
         </>
     )
 }

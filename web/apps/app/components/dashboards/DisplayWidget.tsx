@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Box } from '@signalco/ui';
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 import { DraggableAttributes } from '@dnd-kit/core';
 import Widget, { WidgetProps } from '../widgets/Widget';
 
 export interface DisplayWidgetProps {
     style?: React.CSSProperties | undefined;
-    elementRef?: React.Ref<unknown>;
+    elementRef?: React.Ref<HTMLDivElement>;
     attributes?: DraggableAttributes;
     listeners?: SyntheticListenerMap;
 }
@@ -19,7 +18,7 @@ export default function DisplayWidget(props: WidgetProps & DisplayWidgetProps) {
     });
 
     return (
-        <Box
+        <div
             ref={elementRef}
             style={{
                 gridRowStart: `span ${span.rowSpan}`,
@@ -27,6 +26,6 @@ export default function DisplayWidget(props: WidgetProps & DisplayWidgetProps) {
                 ...style
             }} {...attributes} {...listeners}>
             <Widget {...rest} onResize={(r, c) => setSpan({ rowSpan: r, colSpan: c })} />
-        </Box>
+        </div>
     );
 }

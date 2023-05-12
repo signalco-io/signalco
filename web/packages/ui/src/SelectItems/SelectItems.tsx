@@ -2,7 +2,7 @@ import { ReactElement, useId } from 'react';
 import { Select as SelectIcon } from '@signalco/ui-icons';
 import { Select, FormControl, Option, FormLabel, selectClasses } from '@mui/joy';
 
-export interface SelectItemsProps {
+export type SelectItemsProps = {
     multiple?: boolean,
     value: string[],
     label?: string,
@@ -14,7 +14,7 @@ export interface SelectItemsProps {
     minWidth?: number | undefined;
 }
 
-function SelectItems(props: SelectItemsProps) {
+export function SelectItems(props: SelectItemsProps) {
     const {
         value,
         items,
@@ -89,5 +89,3 @@ function SelectItems(props: SelectItemsProps) {
         </FormControl>
     );
 }
-
-export default SelectItems;

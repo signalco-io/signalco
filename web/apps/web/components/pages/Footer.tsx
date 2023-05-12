@@ -1,7 +1,14 @@
 'use client';
 
 import React from 'react';
-import { Stack, Container, Grid, IconButton, Typography, Box, Link, Row } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Link } from '@signalco/ui/dist/Link';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Grid } from '@signalco/ui/dist/Grid';
+import { Container } from '@signalco/ui/dist/Container';
+import { Box } from '@signalco/ui/dist/Box';
 import SignalcoLogotype from '../icons/SignalcoLogotype';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { now } from '../../src/services/DateTimeProvider';

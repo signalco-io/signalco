@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useIsServer } from '@signalco/hooks';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -10,10 +11,11 @@ export default function LoginReturnPage() {
     const isServer = useIsServer();
     const router = useRouter();
 
-    console.log({isAuthenticated, isServer})
-    if (!isServer && isAuthenticated) {
-        router.push('/', {forceOptimisticNavigation: true});
-    }
+    useEffect(() => {
+        if (!isServer && isAuthenticated) {
+            router.push('/', {forceOptimisticNavigation: true});
+        }
+    }, [isAuthenticated, isServer, router]);
 
     return (
         <Login />

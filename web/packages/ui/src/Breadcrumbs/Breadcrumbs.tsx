@@ -1,8 +1,7 @@
 import { Fragment } from 'react';
-import Link from '../Link';
+import {Link} from '../Link';
 import { Typography, Breadcrumbs as JoyBreadcrumbs } from '@mui/joy';
 
-/** @alpha */
 export type BreadcrumbsProps = {
     items: {
         href?: string;
@@ -10,8 +9,7 @@ export type BreadcrumbsProps = {
     }[];
 };
 
-/** @alpha */
-export default function Breadcrumbs(props: BreadcrumbsProps) {
+export function Breadcrumbs(props: BreadcrumbsProps) {
     const { items } = props;
     return (
         <JoyBreadcrumbs separator={'\u203a'} size="lg">

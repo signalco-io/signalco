@@ -10,6 +10,6 @@ export type AlertProps = {
     children?: React.ReactNode | string | undefined
 };
 
-export default function Alert({ children, color, variant, startDecorator, endDecorator, sx }: AlertProps) {
+export function Alert({ children, color, variant, startDecorator, endDecorator, sx }: AlertProps) {
     return <JoyAlert color={color} variant={variant} startDecorator={startDecorator} endDecorator={endDecorator} sx={sx}>{children}</JoyAlert>
 }

@@ -1,7 +1,16 @@
 import { v4 as uuidv4 } from 'uuid';
 import React, { useCallback, useState } from 'react';
 import { Check, Delete, MoreHorizontal } from '@signalco/ui-icons';
-import { Stack, NoDataPlaceholder, Row, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography, Box, Checkbox } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
+import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
+import { ListItemContent, ListItemDecorator } from '@signalco/ui/dist/List';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Checkbox } from '@signalco/ui/dist/Checkbox';
+import { Box } from '@signalco/ui/dist/Box';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';

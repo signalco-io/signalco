@@ -6,7 +6,7 @@ export type TimeagoProps = {
     live?: boolean;
 };
 
-export default function Timeago(props: TimeagoProps) {
+export function Timeago(props: TimeagoProps) {
     const { date, live } = props;
 
     const isNever = typeof date === 'number' || date == null;

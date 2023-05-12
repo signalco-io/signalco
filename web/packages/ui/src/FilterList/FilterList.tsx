@@ -1,25 +1,24 @@
+import { Children, type PropsWithChildren } from 'react';
 import { useEffect, useState } from 'react';
 import { Check, Close, ExpandDown } from '@signalco/ui-icons';
-import SelectItems from '../SelectItems';
-import Checkbox from '../Checkbox';
+import {SelectItems} from '../SelectItems';
+import {Checkbox} from '../Checkbox';
 import { Typography, Button } from '@mui/joy';
 import { Box } from '@mui/system';
-import Row from '../Row';
-import Stack from '../Stack';
-import Grow from '../Grow';
-import Collapse from '../Collapse';
-import Fade from '../Fade';
-import { ChildrenProps } from '../sharedTypes';
-import Loadable, { LoadableProps } from '../Loadable';
-import React from 'react';
-import NoDataPlaceholder from '../NoDataPlaceholder';
+import {Row} from '../Row';
+import {Stack} from '../Stack';
+import {Grow} from '../Grow';
+import {Collapse} from '../Collapse';
+import {Fade} from '../Fade';
+import {Loadable, LoadableProps } from '../Loadable';
+import {NoDataPlaceholder} from '../NoDataPlaceholder';
 
-export interface FilterListItem {
+export type FilterListItem = {
     id: string;
     label: string;
 }
 
-export interface FilterListProps {
+export type FilterListProps = {
     header: string;
     items: FilterListItem[];
     selected?: string | string[] | null | undefined;
@@ -47,10 +46,10 @@ function FilterItem({ item, checked, onToggle }: { item: FilterListItem, checked
     );
 }
 
-type ItemsWrapperProps = ChildrenProps & LoadableProps & { noItemsPlaceholder: string, itemsWrapper?: React.FunctionComponent | undefined };
+type ItemsWrapperProps = PropsWithChildren<LoadableProps & { noItemsPlaceholder: string, itemsWrapper?: React.FunctionComponent | undefined }>;
 
 export function ItemsWrapper({ children, noItemsPlaceholder, itemsWrapper, ...rest }: ItemsWrapperProps) {
-    const ItemsWrapper = itemsWrapper ?? (({ children }: ChildrenProps) => <>{children}</>);
+    const ItemsWrapper = itemsWrapper ?? (({ children }: PropsWithChildren) => <>{children}</>);
     return (
         <Loadable {...rest}>
             {!children || !Array.isArray(children) || children.length === 0 ? (
@@ -67,9 +66,9 @@ export type ItemsShowMoreProps = ItemsWrapperProps & { truncate?: number | undef
 export function ItemsShowMore({ children, truncate, itemsWrapper, ...rest }: ItemsShowMoreProps) {
     const [isShowAll, setIsShowAll] = useState<boolean>(false);
 
-    const Wrapper = itemsWrapper ?? (({ children }: ChildrenProps) => <>{children}</>);
+    const Wrapper = itemsWrapper ?? (({ children }: PropsWithChildren) => <>{children}</>);
 
-    const items = React.Children.toArray(children);
+    const items = Children.toArray(children);
     const shouldTruncate = typeof truncate === 'number' && !isShowAll && items.length > truncate;
 
     return (
@@ -94,7 +93,7 @@ export function ItemsShowMore({ children, truncate, itemsWrapper, ...rest }: Ite
     );
 }
 
-export default function FilterList(props: FilterListProps) {
+export function FilterList(props: FilterListProps) {
     const {
         header,
         items,
@@ -154,7 +153,7 @@ export default function FilterList(props: FilterListProps) {
                     truncate={truncate}
                     loadingLabel={'Loading'}
                     noItemsPlaceholder={'Not available'}
-                    itemsWrapper={({ children }: ChildrenProps) => <Stack>{children}</Stack>}>
+                    itemsWrapper={({ children }: PropsWithChildren) => <Stack>{children}</Stack>}>
                     {items.map(item => (
                         <FilterItem key={item.id} item={item} checked={checked} onToggle={handleToggle} />
                     ))}

@@ -1,14 +1,15 @@
-import { Radio, RadioGroup, Tooltip } from '@mui/joy';
+import { Radio, RadioGroup } from '../Radio';
+import { Tooltip } from '../Tooltip';
 import { ChangeEvent, ReactElement } from 'react';
 
-export interface PickerOption {
+export type PickerOption = {
     value: any;
     label: ReactElement | string;
     disabled?: boolean;
     title?: string | undefined;
 }
 
-export interface PickerProps<TValue> {
+export type PickerProps<TValue> = {
     value: TValue | undefined;
     onChange: (event: ChangeEvent<HTMLInputElement>, value: TValue | undefined) => void;
     options: PickerOption[];
@@ -16,7 +17,7 @@ export interface PickerProps<TValue> {
     name?: string | undefined;
 }
 
-export default function Picker<TValue>({ value, options, size, name, onChange }: PickerProps<TValue>) {
+export function Picker<TValue>({ value, options, size, name, onChange }: PickerProps<TValue>) {
     return (
         <RadioGroup
             orientation="horizontal"

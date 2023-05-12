@@ -1,22 +1,21 @@
-import { Card, IconButton } from '@mui/joy';
-import { type SxProps } from '@mui/system';
-import { type MouseEvent, useState } from 'react';
-import Collapse from '../Collapse';
-import Icon from '../Icon';
-import Row from '../Row';
-import { ChildrenProps } from '../sharedTypes';
+import { IconButton } from '@mui/joy';
+import { Card } from "../Card";
+import type { SxProps } from '@mui/system';
+import { PropsWithChildren, useState } from 'react';
+import type { MouseEvent } from 'react';
+import { Collapse } from '../Collapse';
+import {Icon} from '../Icon';
+import {Row} from '../Row';
 
-/** @alpha */
-export interface AccordionProps extends ChildrenProps {
+export type AccordionProps = PropsWithChildren<{
     open?: boolean;
     disabled?: boolean;
     sx?: SxProps;
     onChange?: (e: MouseEvent<HTMLAnchorElement>, expanded: boolean) => void,
     unmountOnExit?: boolean;
-}
+}>;
 
-/** @alpha */
-export default function Accordion(props: AccordionProps) {
+export function Accordion(props: AccordionProps) {
     const { children, open, sx, disabled, onChange, unmountOnExit } = props;
     const [isOpen, setIsOpen] = useState(open ?? false);
 
@@ -30,10 +29,12 @@ export default function Accordion(props: AccordionProps) {
 
     const actualOpen = open ?? isOpen;
 
+    const multipleChildren = !!children && Array.isArray(children);
+
     return (
         <Card variant="soft" sx={sx}>
             <Row spacing={1} justifyContent="space-between">
-                {!!children && Array.isArray(children) ? children[0] : children}
+                {multipleChildren ? children[0] : children}
                 {!disabled && (
                     <IconButton size="sm" onClick={handleOpen}>
                         <Icon>{actualOpen ? 'expand_less' : 'expand_more'}</Icon>
@@ -42,7 +43,7 @@ export default function Accordion(props: AccordionProps) {
             </Row>
             {(!unmountOnExit || actualOpen) && (
                 <Collapse appear={actualOpen}>
-                    {!!children && Array.isArray(children) && children.filter((_, i) => i !== 0)}
+                    {multipleChildren && children.filter((_, i) => i !== 0)}
                 </Collapse>
             )}
         </Card>

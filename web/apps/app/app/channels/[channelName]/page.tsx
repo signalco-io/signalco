@@ -2,7 +2,14 @@
 
 import { useMemo } from 'react';
 import { Bug, Link as LinkIcon } from '@signalco/ui-icons';
-import { Container, Loadable, NoDataPlaceholder, Row, Stack, List, ListItemButton, Typography, Box, Link } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { List, ListItemButton } from '@signalco/ui/dist/List';
+import { Link } from '@signalco/ui/dist/Link';
+import { Container } from '@signalco/ui/dist/Container';
 import { channelsData } from '@signalco/data';
 import { KnownPages } from '../../../src/knownPages';
 import useAllEntities from '../../../src/hooks/signalco/entity/useAllEntities';
@@ -43,7 +50,7 @@ export default function AppChannelPage({ params }: { params: { channelName: stri
 
     return (
         <Container maxWidth="md">
-            <Box pt={{ xs: 0, sm: 4 }}>
+            <div className="sm:pt-4">
                 <Stack spacing={4}>
                     <ChannelLogo channelName={channelName} label={channel?.label} />
                     <Row spacing={1}>
@@ -80,7 +87,7 @@ export default function AppChannelPage({ params }: { params: { channelName: stri
                         </Stack>
                     </Stack>
                 </Stack>
-            </Box>
+            </div>
         </Container>
     )
 }

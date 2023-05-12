@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import { Clear, People, Send, Share } from '@signalco/ui-icons';
-import { Chip, Row, Stack, Tooltip, IconButton, TextField, List, ListItem, ListItemContent, ListDivider, GentleSlide } from '@signalco/ui';
+import { Tooltip } from '@signalco/ui/dist/Tooltip';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { List, ListItem, ListDivider } from '@signalco/ui/dist/List';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { GentleSlide } from '@signalco/ui/dist/GentleSlide';
+import { Chip } from '@signalco/ui/dist/Chip';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import IUser from '../../src/users/IUser';
 import { requestAsync } from '../../src/services/HttpService';
@@ -81,9 +88,7 @@ function ShareEntityModal({ entity, entityType, onClose }: IShareEntityModalProp
                     {entity.sharedWith?.map((u, i) => (
                         <>
                             <ListItem key={u.id}>
-                                <ListItemContent>
-                                    {u.fullName ?? u.email}
-                                </ListItemContent>
+                                {u.fullName ?? u.email}
                             </ListItem>
                             {i < (entity.sharedWith?.length ?? 0) - 1 && (
                                 <ListDivider />

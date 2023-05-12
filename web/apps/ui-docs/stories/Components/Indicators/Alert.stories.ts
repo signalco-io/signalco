@@ -1,5 +1,5 @@
 import type { StoryObj } from '@storybook/react';
-import { Alert } from '@signalco/ui';
+import { Alert } from '@signalco/ui/dist/Alert';
 
 export default { component: Alert, tags: ['autodocs'] };
 

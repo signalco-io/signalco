@@ -1,15 +1,13 @@
 import { Check, Disabled } from '@signalco/ui-icons';
 import { Button } from '@mui/joy';
 
-/** @alpha */
-export interface DisableButtonProps {
+export type DisableButtonProps = {
     readonly?: boolean;
     disabled: boolean;
     onClick?: () => void;
 }
 
-/** @alpha */
-export default function DisableButton(props: DisableButtonProps) {
+export function DisableButton(props: DisableButtonProps) {
     const { disabled, readonly, onClick } = props;
 
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from '@signalco/ui/dist/Link';
-import Container from '@signalco/ui/dist/Container';
+import {Link} from '@signalco/ui/dist/Link';
+import {Container} from '@signalco/ui/dist/Container';
 import InputGrabDomain from './InputGrabDomain';
 
 export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {

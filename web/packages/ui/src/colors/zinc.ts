@@ -1,4 +1,4 @@
-const zincColor = {
+export const zinc = {
     '50': '#f9fafb',
     '100': '#f4f4f5',
     '200': '#e4e4e7',
@@ -10,5 +10,3 @@ const zincColor = {
     '800': '#27272a',
     '900': '#18181b'
 }
-
-export default zincColor;

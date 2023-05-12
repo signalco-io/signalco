@@ -101,7 +101,7 @@ class RealtimeService {
                     if (token === 'undefined' || typeof token === 'undefined') {
                         throw Error('TokenFactory not present. Unable to authorize SignalR client.');
                     }
-                    
+
                     return token;
                 }
             })

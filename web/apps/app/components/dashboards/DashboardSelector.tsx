@@ -2,11 +2,12 @@ import React, { Suspense, useEffect } from 'react';
 import Link from 'next/link';
 import { bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import { Select } from '@signalco/ui-icons';
-import { Popper, Row, Button } from '@signalco/ui';
+import { Row } from '@signalco/ui/dist/Row';
+import { Popper} from '@signalco/ui/dist/Popper';
+import { Button } from '@signalco/ui/dist/Button';
 import { useSearchParam } from '@signalco/hooks';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
-
 export interface IDashboardSelectorProps {
     onEditWidgets: () => void,
     onSettings: () => void
@@ -40,12 +41,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                         <Button
                             variant="plain"
                             size="lg"
-                            sx={{
-                                '.JoyButton-endDecorator': {
-                                    pointerEvents: 'none'
-                                }
-                            }}
-                            endDecorator={<Select />} {...bindTrigger(popupState)}>
+                            endDecorator={<Select className="pointer-events-none" />} {...bindTrigger(popupState)}>
                             {currentName}
                         </Button>
                     </div>
@@ -54,7 +50,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                     <Row>
                         {favoriteDashboards?.map(fd => (
                             <Link key={fd.id} href={`#dashboard=${fd.id}`} passHref>
-                                <Button variant="plain" sx={{ color: 'var(--joy-palette-neutral-400)' }}>
+                                <Button variant="plain">
                                     {fd.name}
                                 </Button>
                             </Link>

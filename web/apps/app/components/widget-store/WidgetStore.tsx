@@ -1,7 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
 import { Add } from '@signalco/ui-icons';
-import { Stack, Row , AspectRatio, Card, CardOverflow, Grid, IconButton, TextField, Typography , Box } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Grid } from '@signalco/ui/dist/Grid';
+import { Card, CardOverflow } from '@signalco/ui/dist/Card';
+import { Box } from '@signalco/ui/dist/Box';
 import { widgetType } from '../widgets/Widget';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
 
@@ -93,12 +100,11 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
                                     </IconButton>
                                 </Row>
                                 <CardOverflow sx={{ pt: 2 }}>
-                                    <AspectRatio ratio={1}>
-                                        <Image
-                                            src={availableWidget.preview}
-                                            alt={`${availableWidget.name} Preview`}
-                                            fill sizes="100vw" />
-                                    </AspectRatio>
+                                    <Image
+                                        style={{ aspectRatio: 1 }}
+                                        src={availableWidget.preview}
+                                        alt={`${availableWidget.name} Preview`}
+                                        fill sizes="100vw" />
                                 </CardOverflow>
                             </Card>
                         </Grid>

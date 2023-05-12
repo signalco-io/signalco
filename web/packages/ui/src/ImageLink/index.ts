@@ -1,2 +1,1 @@
-export { default } from './ImageLink';
-export { type ImageLinkProps } from './ImageLink';
+export { ImageLink, type ImageLinkProps } from './ImageLink';

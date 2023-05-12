@@ -1,4 +1,4 @@
-import { Link } from "@signalco/ui";
+import { Link } from "@signalco/ui/dist/Link";
 import { StoryObj } from "@storybook/react";
 
 export default { component: Link, tags: ['autodocs'] };

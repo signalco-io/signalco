@@ -1,6 +1,12 @@
 import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
-import { NoDataPlaceholder, Row, Sheet, Typography, Timeago, lightBlue, deepOrange, Loadable, amber, green, zinc } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Row } from '@signalco/ui/dist/Row';
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { lightBlue, deepOrange, green, amber, zinc } from '@signalco/ui/dist/colors';
+import { Card } from '@signalco/ui/dist/Card';
 import { camelToSentenceCase, ObjectDictAny } from '@signalco/js';
 import { now } from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
@@ -136,11 +142,11 @@ function ChartGenericTooltip({ active, payload, domain, units }: { active?: bool
     if (active && payload && payload.length) {
         const dateTime = domain.invert(payload[0].payload.key) as Date;
         return (
-            <Sheet sx={{ p: 2, px: 3, maxWidth: '180px' }} variant="plain">
+            <Card sx={{ maxWidth: '180px' }} variant="plain">
                 <Typography>{`${payload[0].value}${units || ''}`}</Typography>
                 <Timeago date={dateTime} />
                 <Typography level="body2">{`${dateTime.getFullYear()}-${dateTime.getMonth().toString().padStart(2, '0')}-${dateTime.getDate().toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`}</Typography>
-            </Sheet>
+            </Card>
         );
     }
 

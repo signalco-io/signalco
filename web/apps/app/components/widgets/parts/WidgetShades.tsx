@@ -1,7 +1,11 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Down, Stop, Up } from '@signalco/ui-icons';
-import { Stack, Button, Divider, Grid, Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Grid } from '@signalco/ui/dist/Grid';
+import { Divider } from '@signalco/ui/dist/Divider';
+import { Button } from '@signalco/ui/dist/Button';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultColumns, DefaultLabel } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -112,12 +116,11 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
             <Grid xs={6} sx={{ flexGrow: 1, borderColor: 'divider', borderRadius: '0 8px 8px 0' }}>
                 <Stack style={{ height: '100%' }} justifyContent="stretch">
                     <Button variant="outlined" onClick={() => handleStateChangeRequest('up')}
-                        sx={{ borderRadius: '0 8px 0 0', flexGrow: 1, border: 0, width: 'calc(100% - 2px)' }}
                         aria-label="Up"><Up /></Button>
-                    {stopValueSerialized && <Button variant="outlined" onClick={() => handleStateChangeRequest('stop')} sx={{ borderRadius: 0, flexGrow: 1, border: 0 }} aria-label="Stop">
+                    {stopValueSerialized && <Button variant="outlined" onClick={() => handleStateChangeRequest('stop')}
+                        aria-label="Stop">
                         <Stop size={18} /></Button>}
                     <Button variant="outlined" onClick={() => handleStateChangeRequest('down')}
-                        sx={{ borderRadius: '0 0 8px 0', flexGrow: 1, border: 0, width: 'calc(100% - 2px)' }}
                         aria-label="Down"><Down /></Button>
                 </Stack>
             </Grid>

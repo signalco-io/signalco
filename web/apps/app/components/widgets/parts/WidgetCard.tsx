@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
-import { Stack, Button, Card, CardOverflow, ListItemDecorator, Menu, MenuItem, ErrorBoundary } from '@signalco/ui';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
+import { ListItemDecorator } from '@signalco/ui/dist/List';
+import { ErrorBoundary } from '@signalco/ui/dist/ErrorBoundary';
+import { Card, CardOverflow } from '@signalco/ui/dist/Card';
+import { Button } from '@signalco/ui/dist/Button';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
 
@@ -69,7 +74,7 @@ function WidgetCard(props: IWidgetCardProps) {
                 }}>
                     {(!isLoading && needsConfiguration) ? (
                         <Stack justifyContent="stretch" style={{ height: '100%' }}>
-                            <Button disabled={!isEditMode} size="lg" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
+                            <Button disabled={!isEditMode} size="lg" fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
                         </Stack>
                     ) : (
                         <ErrorBoundary>{children}</ErrorBoundary>

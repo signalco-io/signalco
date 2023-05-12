@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation';
-import { Stack , Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
 import OAuthRedirectConnectButton from '../../oauth/OAuthRedirectConnectButton';
 import { requestAsync } from '../../../src/services/HttpService';
 import { KnownPages } from '../../../src/knownPages';

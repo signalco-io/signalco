@@ -3,12 +3,11 @@ import {
     bindTrigger,
     usePopupState
 } from 'material-ui-popup-state/hooks';
-import {
-    Popper,
-    Row,
-    Button,
-    Card,
-    Typography} from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Row } from '@signalco/ui/dist/Row';
+import { Popper } from '@signalco/ui/dist/Popper';
+import { Card } from '@signalco/ui/dist/Card';
+import { Button } from '@signalco/ui/dist/Button';
 import { camelToSentenceCase } from '@signalco/js';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import EntitySelectionMenu from './EntitySelectionMenu';
@@ -42,7 +41,7 @@ function DisplayEntityTarget({ target, selectContact, selectValue, valueSerializ
 
     return (
         <>
-            <Button variant="outlined" fullWidth sx={{ minHeight: 56 }} {...bindTrigger(entityMenu)}>
+            <Button variant="outlined" fullWidth {...bindTrigger(entityMenu)}>
                 <Row style={{ width: '100%' }} spacing={2} justifyContent="space-between">
                     <EntityIconLabel entityId={target?.entityId} description={entityDescription} />
                     <Row spacing={1}>

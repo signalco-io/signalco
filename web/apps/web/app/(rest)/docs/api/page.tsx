@@ -4,12 +4,28 @@ import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Security, Send } from '@signalco/ui-icons';
-import { Stack, Loadable, Chip, NavigatingButton, Typography, TextField, Divider, Badge, Alert, Button, Card, List, Tooltip, Box, Row, CardOverflow, ListTreeItem, SelectItems, CopyToClipboardInput } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Tooltip } from '@signalco/ui/dist/Tooltip';
+import type { ColorPaletteProp } from '@signalco/ui/dist/theme';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Stack } from '@signalco/ui/dist/Stack';
+import {SelectItems} from '@signalco/ui/dist/SelectItems';
+import { Row } from '@signalco/ui/dist/Row';
+import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
+import { List } from '@signalco/ui/dist/List';
+import { Divider } from '@signalco/ui/dist/Divider';
+import {CopyToClipboardInput} from '@signalco/ui/dist/CopyToClipboardInput';
+import { Chip } from '@signalco/ui/dist/Chip';
+import { Card, CardOverflow } from '@signalco/ui/dist/Card';
+import { Button } from '@signalco/ui/dist/Button';
+import { Box } from '@signalco/ui/dist/Box';
+import { Badge } from '@signalco/ui/dist/Badge';
+import {Alert} from '@signalco/ui/dist/Alert';
 import { camelToSentenceCase, HttpOperation, ObjectDictAny } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
-
-type ChipColors = 'neutral' | 'primary' | 'danger' | 'info' | 'success' | 'warning';
 
 function HttpOperationChip(props: { operation?: HttpOperation | undefined, small?: boolean }) {
     const color = ({
@@ -17,7 +33,7 @@ function HttpOperationChip(props: { operation?: HttpOperation | undefined, small
         'post': 'info',
         'put': 'warning',
         'delete': 'danger'
-    }[props.operation?.toLowerCase() ?? ''] ?? 'neutral') as ChipColors;
+    }[props.operation?.toLowerCase() ?? ''] ?? 'neutral') as ColorPaletteProp;
 
     return <Chip color={color} size={props.small ? 'sm' : 'md'}>{props.operation?.toUpperCase()}</Chip>;
 }
@@ -133,7 +149,7 @@ function ApiOperation(props: ApiOperationProps) {
                     <Card variant="outlined">
                         {parametersResolved.map((parameter, i) => (
                             <React.Fragment key={parameter.name}>
-                                <Box sx={{ p: 2 }}>
+                                <div className="p-2">
                                     <Stack>
                                         <Row spacing={1} justifyContent="space-between">
                                             <Typography textTransform="uppercase">{parameter.name}</Typography>
@@ -144,7 +160,7 @@ function ApiOperation(props: ApiOperationProps) {
                                         </Row>
                                         {parameter.description && <Typography level="body2">{parameter.description}</Typography>}
                                     </Stack>
-                                </Box>
+                                </div>
                                 {i != Object.keys(parametersResolved).length && <Divider />}
                             </React.Fragment>
                         ))}
@@ -176,12 +192,12 @@ function ApiOperation(props: ApiOperationProps) {
                         if (!responseObj) return undefined;
                         return (
                             <React.Fragment key={responseCode}>
-                                <Box sx={{ p: 2 }}>
+                                <div className="p-2">
                                     <Stack>
                                         <ResponseStatusCode statusCode={responseCodeNumber} />
                                         <Typography level="body2">{responseObj.description}</Typography>
                                     </Stack>
-                                </Box>
+                                </div>
                                 {i != (Object.keys(responses).length - 1) && <Divider />}
                             </React.Fragment>
                         );

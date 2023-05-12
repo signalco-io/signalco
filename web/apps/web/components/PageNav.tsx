@@ -1,7 +1,11 @@
 'use client';
 
 import React, { Suspense } from 'react';
-import { NavigatingButton, Container, Button, Row, Link } from '@signalco/ui';
+import { Row } from '@signalco/ui/dist/Row';
+import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
+import { Link } from '@signalco/ui/dist/Link';
+import { Container } from '@signalco/ui/dist/Container';
+import { Button } from '@signalco/ui/dist/Button';
 import { KnownPages } from '../src/knownPages';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 

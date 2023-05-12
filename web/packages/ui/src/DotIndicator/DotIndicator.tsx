@@ -1,13 +1,12 @@
-import { ColorVariants } from "../sharedTypes";
+import type { ColorVariants } from "../theme";
 
-export interface DotIndicatorProps {
+export type DotIndicatorProps = {
     color: ColorVariants;
     content?: React.ReactElement;
     size?: number;
 }
 
-/** @alpha */
-export default function DotIndicator(props: DotIndicatorProps) {
+export function DotIndicator(props: DotIndicatorProps) {
     const { color, content, size: requestedSize } = props;
     const size = requestedSize || 10;
     return (

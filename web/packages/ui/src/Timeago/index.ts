@@ -1,2 +1,1 @@
-export {default} from './Timeago';
-export {type TimeagoProps} from './Timeago';
+export {Timeago, type TimeagoProps} from './Timeago';

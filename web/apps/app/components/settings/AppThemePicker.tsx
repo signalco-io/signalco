@@ -1,6 +1,11 @@
 import { Suspense, useState } from 'react';
 import { Custom, Laptop, SunMoon, Timer } from '@signalco/ui-icons';
-import { type AppThemeMode, Stack, Row, TextField, SupportedColorScheme, Typography, Box, useColorScheme, DefaultColorScheme, Picker } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import type { AppThemeMode, DefaultColorScheme, SupportedColorScheme } from '@signalco/ui/dist/theme';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Picker } from '@signalco/ui/dist/Picker';
 import { fromDuration, now, todayAt, toDuration } from '../../src/services/DateTimeProvider';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale from '../../src/hooks/useLocale';
@@ -26,32 +31,35 @@ function AppThemeVisual(props: { label: string, theme: SupportedColorScheme, dis
     }
 
     return (
-        <Box sx={{ opacity: disabled ? 0.4 : 1 }}>
+        <div style={{ opacity: disabled ? 0.4 : 1 }}>
             <Stack alignItems="center" spacing={1}>
-                <Box sx={{
+                <div style={{
                     position: 'relative',
                     width: 80,
                     height: 60,
                     backgroundColor: backgroundColor,
                     border: '1px solid gray',
                     borderTop: '4px solid gray',
-                    borderRadius: 1
+                    borderRadius: 4
                 }}>
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 4, left: 4 }} />
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 18, height: 5, top: 12, left: 4 }} />
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 22, height: 5, top: 20, left: 4 }} />
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 28, left: 4 }} />
-                </Box>
+                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 4, left: 4 }} />
+                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 18, height: 5, top: 12, left: 4 }} />
+                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 22, height: 5, top: 20, left: 4 }} />
+                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 28, left: 4 }} />
+                </div>
                 <Typography level="body2">{label}</Typography>
             </Stack>
-        </Box>
+        </div>
     );
 }
 
 function AppThemeColorPicker() {
     const themes = useLocale('App', 'Settings', 'Themes');
     const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'system');
-    const { colorScheme, setMode } = useColorScheme();
+    // const { colorScheme, setMode } = useColorScheme();
+    const colorScheme: DefaultColorScheme = 'dark';
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+    const setMode = (mode: DefaultColorScheme) => {};
 
     const handleThemeSelect = (newTheme: DefaultColorScheme | undefined) => {
         const newThemeSelect = newTheme ?? 'light';
@@ -65,17 +73,17 @@ function AppThemeColorPicker() {
             {
                 value: 'light',
                 label: (
-                    <Box p={1}>
+                    <div className="p-1">
                         <AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" />
-                    </Box>
+                    </div>
                 )
             },
             {
                 value: 'dark',
                 label: (
-                    <Box p={1}>
+                    <div className="p-1">
                         <AppThemeVisual label={themes.t('Dark')} theme="dark" />
-                    </Box>
+                    </div>
                 )
             }
         ]} />
@@ -86,7 +94,10 @@ export default function AppThemePicker() {
     const { t: tPicker } = useLocale('App', 'Components', 'AppThemePicker');
     const { t: tPickerModes } = useLocale('App', 'Components', 'AppThemePicker', 'Modes');
 
-    const { mode, setMode } = useColorScheme();
+    // const { mode, setMode } = useColorScheme();
+    const mode: unknown = 'dark';
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+    const setMode = (mode: DefaultColorScheme | 'system') => {};
     const [themeMode, setThemeMode] = useUserSetting<AppThemeMode>('themeMode', 'system');
 
     const [userLocation] = useUserSetting<[number, number] | undefined>('location', undefined);

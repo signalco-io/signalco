@@ -1,7 +1,7 @@
 
 import React, { useCallback, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Alert } from '@signalco/ui';
+import { Alert  } from '@signalco/ui/dist/Alert';
 import IWidgetConfigurationOption from '../../src/widgets/IWidgetConfigurationOption';
 import WidgetState from './parts/WidgetState';
 import WidgetCard from './parts/WidgetCard';

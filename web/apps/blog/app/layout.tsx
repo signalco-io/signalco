@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import '@signalco/ui/dist/ui.css';
+import '@signalco/ui/dist/index.css';
 import { PageLayout } from '../components/layouts/PageLayout';
 import './global.scss';
 

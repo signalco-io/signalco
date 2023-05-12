@@ -1,29 +1,24 @@
-import { useMemo } from 'react';
+import { type PropsWithChildren, useMemo } from 'react';
 import { Alert, CircularProgress } from '@mui/joy';
-import { ChildrenProps } from '../sharedTypes';
 import { Warning } from '@signalco/ui-icons';
 
-/** @alpha */
-export interface LoadableLoadingErrorProps {
+export type LoadableLoadingErrorProps = {
     error?: unknown | string | React.ReactElement;
     isLoading?: boolean;
 }
 
-/** @alpha */
-export interface LoadableSkeletonProps {
+export type LoadableSkeletonProps = {
     width?: number;
     height?: number;
 }
 
-/** @alpha */
-export interface LoadableProps extends LoadableLoadingErrorProps, LoadableSkeletonProps, ChildrenProps {
+export type LoadableProps = PropsWithChildren<LoadableLoadingErrorProps & LoadableSkeletonProps & {
     placeholder?: 'skeletonText' | 'skeletonRect' | 'circular';
     contentVisible?: boolean;
     loadingLabel: string;
-}
+}>;
 
-/** @alpha */
-export default function Loadable(props: LoadableProps) {
+export function Loadable(props: LoadableProps) {
     const { isLoading, loadingLabel, placeholder, error, children, contentVisible } = props;
 
     const indicator = useMemo(() => {

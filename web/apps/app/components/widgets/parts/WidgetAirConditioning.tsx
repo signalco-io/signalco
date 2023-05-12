@@ -1,6 +1,11 @@
 import React, { useMemo } from 'react';
 import Link from 'next/link';
-import { Stack, Icon, Row, Button, Typography, Box } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import {Icon} from '@signalco/ui/dist/Icon';
+import { Button } from '@signalco/ui/dist/Button';
+import { Box } from '@signalco/ui/dist/Box';
 import { useLoadAndError } from '@signalco/hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';

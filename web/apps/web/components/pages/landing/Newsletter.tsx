@@ -1,7 +1,14 @@
 'use client';
 
 import { ChangeEvent, SyntheticEvent, createRef, useState } from 'react';
-import { Row, Stack, Alert, Button, TextField, Typography, Fade, GentleSlide } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { GentleSlide} from '@signalco/ui/dist/GentleSlide';
+import { Fade } from '@signalco/ui/dist/Fade';
+import { Button } from '@signalco/ui/dist/Button';
+import { Alert } from '@signalco/ui/dist/Alert';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 function Newsletter() {
@@ -87,7 +94,7 @@ function Newsletter() {
                                 sx={{ '.JoyInput-root': { '--Input-radius': isLoading ? '8px' : '8px 0 0 8px' }, maxWidth: '400px' }}
                                 value={email}
                                 onChange={handleOnEmail} />
-                            <Button loading={isLoading} type="submit" variant="soft" size="lg" sx={{ '--Button-radius': '0 8px 8px 0' }}>Subscribe</Button>
+                            <Button loading={isLoading} type="submit" variant="soft" size="lg">Subscribe</Button>
                         </Row>
                     </GentleSlide>
                     <GentleSlide collapsedWhenHidden appear={error != null} direction="down" duration={200}>

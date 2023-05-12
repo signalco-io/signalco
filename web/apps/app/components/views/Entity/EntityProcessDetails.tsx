@@ -1,6 +1,15 @@
 import { useMemo } from 'react';
 import { Close, Equal, EqualNot, Play, Warning, Timer, Pause, Left, Right } from '@signalco/ui-icons';
-import { Chip, Row, Stack, Container, Alert, Card, IconButton, Typography, Box, Timeago } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Container } from '@signalco/ui/dist/Container';
+import { Chip } from '@signalco/ui/dist/Chip';
+import { Card } from '@signalco/ui/dist/Card';
+import { Box } from '@signalco/ui/dist/Box';
+import { Alert } from '@signalco/ui/dist/Alert';
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import useContact from '../../../src/hooks/signalco/useContact';
 import IEntityDetails from '../../../src/entity/IEntityDetails';

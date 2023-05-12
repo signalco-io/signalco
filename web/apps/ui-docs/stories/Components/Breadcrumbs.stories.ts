@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "@signalco/ui";
+import { Breadcrumbs } from "@signalco/ui/dist/Breadcrumbs";
 import { StoryObj } from "@storybook/react";
 
 export default { component: Breadcrumbs, tags: ['autodocs'] };

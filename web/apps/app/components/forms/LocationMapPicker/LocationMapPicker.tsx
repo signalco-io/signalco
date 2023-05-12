@@ -1,7 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { Draggable, Map, Marker } from 'pigeon-maps';
 import { MyLocation } from '@signalco/ui-icons';
-import { Accordion, Loadable, Row, Stack, IconButton, TextField, Typography, Box } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Accordion } from '@signalco/ui/dist/Accordion';
 import { useLoadAndError } from '@signalco/hooks';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/index.types';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
@@ -84,25 +90,23 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
                     </IconButton>
                     <TextField value={placeName.item ?? ''} />
                 </Row>
-                <Box sx={{ '&>div': { background: 'transparent !important' } }}>
-                    <Map
-                        provider={(x, y, z, dpr) => mapTiler(themeContext.isDark, x, y, z, dpr)}
-                        dprs={[1, 2]}
-                        height={320}
-                        center={latLng}
-                        zoom={zoom}
-                        attribution={false}
-                        onBoundsChanged={handleMove}
-                    >
-                        <Draggable offset={[0, 50]} anchor={latLng} onDragEnd={(point) => setLatLng(point, { receiveEvent: false })}>
-                            <Marker
-                                width={50}
-                                anchor={latLng}
-                                color="black"
-                            />
-                        </Draggable>
-                    </Map>
-                </Box>
+                <Map
+                    provider={(x, y, z, dpr) => mapTiler(themeContext.isDark, x, y, z, dpr)}
+                    dprs={[1, 2]}
+                    height={320}
+                    center={latLng}
+                    zoom={zoom}
+                    attribution={false}
+                    onBoundsChanged={handleMove}
+                >
+                    <Draggable offset={[0, 50]} anchor={latLng} onDragEnd={(point) => setLatLng(point, { receiveEvent: false })}>
+                        <Marker
+                            width={50}
+                            anchor={latLng}
+                            color="black"
+                        />
+                    </Draggable>
+                </Map>
             </Stack>
         </Accordion>
     );

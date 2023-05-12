@@ -2,7 +2,9 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { SmileMeh, SmileVeryHappy } from '@signalco/ui-icons';
-import { Button, Box, Stack } from '@signalco/ui';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Button } from '@signalco/ui/dist/Button';
+import { Box } from '@signalco/ui/dist/Box';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultColumns, DefaultTarget } from '../../../src/widgets/WidgetConfigurationOptions';
 import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -46,8 +48,7 @@ function WidgetIndicator(props: WidgetSharedProps<ConfigProps>) {
     return (
         <Button
             variant="plain"
-            sx={{ position: 'relative', height: '100%', width: '100%', display: 'block', textAlign: 'left', margin: 0, padding: 0 }}
-            onClick={handleSelected} >
+            onClick={handleSelected}>
             <Stack style={{ height: '100%' }} alignItems="center" justifyContent="end">
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <Image src="/assets/widget-images/plant-aloe.png" alt="Plant Aloe" width={76} height={76} />

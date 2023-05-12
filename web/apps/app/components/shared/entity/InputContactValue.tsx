@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Play } from '@signalco/ui-icons';
-import { Row, IconButton, Slider, Typography, Switch, SelectItems } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Slider } from '@signalco/ui/dist/Slider';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
+import { Row } from '@signalco/ui/dist/Row';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import throttle from '../../../src/helpers/Throttle';
 import blendColors from '../../../src/helpers/BlendColors';
 import IContact from '../../../src/contacts/IContact';
@@ -64,7 +69,7 @@ export default function InputContactValue(props: InputContactValueProps) {
 
     if (dataType === 'bool') {
         const boolValue = typeof value === 'boolean' ? value : value === 'true';
-        return <Switch onChange={(e) => onChange(e.target.checked)} checked={boolValue} color="warning" />
+        return <Checkbox onChange={(e) => onChange(e.target.checked)} checked={boolValue} />
     } else if (dataType === 'action' || dataType === 'enum') {
         return (
             <Row>

@@ -1,6 +1,9 @@
 import React, { useMemo } from 'react';
 import Image from 'next/image';
-import { Stack, Row, Button, Typography, Box } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Button } from '@signalco/ui/dist/Button';
 import useLocale from '../../src/hooks/useLocale';
 import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
 import GridWrapper from './GridWrapper';
@@ -60,10 +63,10 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
     const numberOfColumns = Math.max(4, Math.floor((window.innerWidth - dashbaordPadding) / widgetSize)); // When width is less than 400, set to quad column
 
     return (
-        <Box sx={{
+        <div style={{
             display: 'grid',
             gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`,
-            gap: 1,
+            gap: 4,
             width: `${widgetSize * numberOfColumns - 8}px`
         }}>
             <GridWrapper isEditing={isEditing} order={widgetsOrder} orderChanged={handleOrderChanged}>
@@ -78,7 +81,7 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
                         setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
                 ))}
             </GridWrapper>
-        </Box >
+        </div>
     );
 }
 

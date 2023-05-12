@@ -1,7 +1,14 @@
 'use client';
 
 import React from 'react';
-import { Stack, Container, Grid, IconButton, Typography, Box, Link, MuiStack } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Link } from '@signalco/ui/dist/Link';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Grid } from '@signalco/ui/dist/Grid';
+import { Container } from '@signalco/ui/dist/Container';
+import { Box } from '@signalco/ui/dist/Box';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { now } from '../../src/services/DateTimeProvider';
 
@@ -45,10 +52,10 @@ export default function Footer() {
                                 </Grid>
                             ))}
                         </Grid>
-                        <MuiStack alignItems={{ xs: 'center', sm: 'stretch' }}>
-                            <MuiStack alignItems="center" justifyContent="space-between" direction={{ xs: 'column-reverse', sm: 'row' }}>
+                        <Stack>
+                            <Stack alignItems="center" justifyContent="space-between">
                                 <Typography level="body3">Copyright © {now().getFullYear()} signalco. All rights reserved.</Typography>
-                                <MuiStack direction="row" spacing={1} alignItems={{ xs: 'center', sm: 'start' }}>
+                                <Row spacing={1}>
                                     <IconButton
                                         aria-label="Twitter link"
                                         href="https://twitter.com/signalco_io">
@@ -64,9 +71,9 @@ export default function Footer() {
                                         href="https://github.com/signalco-io/signalco">
                                         <Typography>gh</Typography>
                                     </IconButton>
-                                </MuiStack>
-                            </MuiStack>
-                        </MuiStack>
+                                </Row>
+                            </Stack>
+                        </Stack>
                     </Stack>
                 </footer>
             </Container>

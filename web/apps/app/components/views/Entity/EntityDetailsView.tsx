@@ -1,21 +1,28 @@
 import { useMemo, useState } from 'react';
 import { ExternalLink } from '@signalco/ui-icons';
-import { DisableButton, Avatar, Box, EditableInput, Timeago, MuiStack, Row, Stack, Loadable, Chip } from '@signalco/ui';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { EditableInput } from '@signalco/ui/dist/EditableInput';
+import { DisableButton } from '@signalco/ui/dist/DisableButton';
+import { Chip } from '@signalco/ui/dist/Chip';
+import { Box } from '@signalco/ui/dist/Box';
+import { Avatar } from '@signalco/ui/dist/Avatar';
 import { camelToSentenceCase } from '@signalco/js';
 import EntityIcon from '../../shared/entity/EntityIcon';
 import BatteryIndicator from '../../indicators/BatteryIndicator';
 import ShareEntityChip from '../../entity/ShareEntityChip';
 import EntityStatus, { useEntityStatus } from '../../entity/EntityStatus';
 import { useEntityBattery } from '../../entity/EntityBattery';
-import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
+import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import { entityRenameAsync } from '../../../src/entity/EntityRepository';
 import { entityLastActivity } from '../../../src/entity/EntityHelper';
 import { setAsync } from '../../../src/contacts/ContactRepository';
 import EntityProcessDetails from './EntityProcessDetails';
 import EntityOptions from './EntityOptions';
 import ContactsTable from './ContactsTable';
-
 
 export interface EntityDetailsViewProps {
     id: string;
@@ -64,7 +71,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
 
     return (
         <Loadable isLoading={isLoading} loadingLabel="Loading entity" error={error}>
-            <MuiStack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
+            <div className="flex flex-column xs:gap-1 sm:gap-4 sm:pt-2">
                 <Stack style={{ paddingLeft: 16, paddingRight: 16 }} spacing={1}>
                     <Row spacing={1} justifyContent="space-between">
                         <Row spacing={2}>
@@ -95,9 +102,9 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                             </Chip>
                         }
                         {(hasStatus && (isStale || isOffline)) && (
-                            <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
+                            <div style={{ opacity: 0.6, fontSize: '0.8rem' }}>
                                 <Timeago date={entityLastActivity(entity)} />
-                            </Box>
+                            </div>
                         )}
                         {(!disabledContact.isLoading && !disabledContact.isError) && (
                             <DisableButton disabled={isDisabled} onClick={handleDisableToggle} />
@@ -117,7 +124,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                         </>
                     )}
                 </Box>
-            </MuiStack>
+            </div>
         </Loadable>
     );
 }

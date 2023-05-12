@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Stack, TextField, Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { TextField } from '@signalco/ui/dist/TextField';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Button } from '@signalco/ui/dist/Button';
 import { useSearchParam } from '@signalco/hooks';
 import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';

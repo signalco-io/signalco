@@ -3,7 +3,10 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Navigate } from '@signalco/ui-icons';
-import { Stack, Container, Button, Divider, MuiStack } from '@signalco/ui';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Divider } from '@signalco/ui/dist/Divider';
+import { Container } from '@signalco/ui/dist/Container';
+import {Button} from '@signalco/ui/dist/Button';
 import DeveloperOnly from '../shared/DeveloperOnly';
 import DiscoverVisual from '../pages/landing/visuals/DiscoverVisual';
 import Cover from '../pages/landing/Cover';
@@ -78,15 +81,13 @@ export default function LandingPageView() {
             <GlobeSection />
             <Divider />
             <SectionCenter narrow style={{ backgroundColor: 'var(--joy-palette-background-surface)' }}>
-                <MuiStack
-                    spacing={{ xs: 6, md: 8 }}
-                    alignItems="center"
-                    direction={{ xs: 'column', md: 'row' }}
-                    justifyContent={{ xs: 'space-between' }}>
+                <Stack
+                    spacing={6}
+                    alignItems="center">
                     <DataPart value="8" subtitle="Integrations" />
                     <DataPart value="500+" subtitle="Automations per day" />
                     <DataPart value="2000+" subtitle="Supported devices" />
-                </MuiStack>
+                </Stack>
             </SectionCenter>
             <Divider />
             <NewsletterSection />

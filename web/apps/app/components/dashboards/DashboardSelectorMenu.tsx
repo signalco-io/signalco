@@ -2,8 +2,15 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import React from 'react';
 import { PopupState } from 'material-ui-popup-state/hooks';
+import { cx } from 'classix';
 import { Add, Pin, PinOff } from '@signalco/ui-icons';
-import { Stack, Row, Button, Card, Divider, IconButton, Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Divider } from '@signalco/ui/dist/Divider';
+import { Card } from '@signalco/ui/dist/Card';
+import { Button } from '@signalco/ui/dist/Button';
 import { useSearchParam } from '@signalco/hooks';
 import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
@@ -45,7 +52,9 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
             <Row style={{ width: '100%', position: 'relative' }}>
                 <Button
                     variant="plain"
-                    sx={{ color: dashboard.id !== selectedId ? 'var(--joy-palette-neutral-400)' : 'inherit' }}
+                    className={cx(
+                        dashboard.id !== selectedId && 'text-neutral-400'
+                    )}
                     onClick={() => onSelection(dashboard.id)}
                     fullWidth
                 >

@@ -4,7 +4,16 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import { Add, Check, LayoutGrid, LayoutList } from '@signalco/ui-icons';
-import { Stack, Loadable, Row, Avatar, Button, IconButton, Typography, Box, Grid, SelectItems, Picker, MuiStack } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
+import { Row } from '@signalco/ui/dist/Row';
+import { Picker } from '@signalco/ui/dist/Picker';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Grid } from '@signalco/ui/dist/Grid';
+import { Button } from '@signalco/ui/dist/Button';
+import { Avatar } from '@signalco/ui/dist/Avatar';
 import { useSearchParam } from '@signalco/hooks';
 import { KnownPages } from '../../src/knownPages';
 import useUserSetting from '../../src/hooks/useUserSetting';
@@ -97,7 +106,7 @@ export default function Entities() {
     }), [entityListViewType]);
 
     const results = useMemo(() => (
-        <Box sx={{ px: 2 }}>
+        <div style={{ paddingLeft: 8, paddingRight: 8 }}>
             <Grid container spacing={1}>
                 {typedItems?.map(entity => (
                     <Grid key={entity.id} {...columns}>
@@ -110,7 +119,7 @@ export default function Entities() {
                     </Grid>
                 ))}
             </Grid>
-        </Box>
+        </div>
     ), [columns, entityListViewType, handleEntitySelection, isSelecting, selected, typedItems]);
 
     const [isAddEntityOpen, setIsAddEntityOpen] = useState(false);
@@ -118,7 +127,7 @@ export default function Entities() {
 
     return (
         <>
-            <MuiStack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
+            <Stack spacing={3}>
                 <Stack spacing={1}>
                     <Row justifyContent="space-between" style={{ paddingLeft: 16, paddingRight: 16 }}>
                         <SelectItems
@@ -137,7 +146,7 @@ export default function Entities() {
                                 });
                             })}
                             heading />
-                        <MuiStack direction="row" alignItems="center" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="end">
+                        <Row spacing={1} style={{ flexGrow: 1 }} justifyContent="end">
                             <SearchInput items={entities.data} onFilteredItems={setFilteredItems} />
                             <Picker value={entityListViewType} onChange={(_, value) => setEntityListViewType(value)} options={[
                                 { value: 'table', label: <LayoutList /> },
@@ -145,7 +154,7 @@ export default function Entities() {
                             ]} />
                             <IconButton size="lg" onClick={handleAddEntity}><Add /></IconButton>
                             <IconButton size="lg" onClick={handleToggleSelection}><Check /></IconButton>
-                        </MuiStack>
+                        </Row>
                     </Row>
                     {isSelecting && (
                         <Row>
@@ -162,7 +171,7 @@ export default function Entities() {
                         {results}
                     </Loadable>
                 </Stack>
-            </MuiStack>
+            </Stack>
             <ConfigurationDialog isOpen={isAddEntityOpen} header={t('NewEntityDialogTitle')} onClose={() => setIsAddEntityOpen(false)}>
                 <EntityCreateForm />
             </ConfigurationDialog>
