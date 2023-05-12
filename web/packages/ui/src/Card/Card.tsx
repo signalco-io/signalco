@@ -1,5 +1,5 @@
 export function Card(props: any) {
-    return <div className="bg-neutral-100 p-2 rounded-lg border-neutral-300 border">{props.children}</div>;
+    return <div className="bg-card rounded-lg border text-card-foreground shadow-sm">{props.children}</div>;
 } 
 
 export function CardOverflow(props: any) {
@@ -7,7 +7,7 @@ export function CardOverflow(props: any) {
 } 
 
 export function CardContent(props: any) {
-    return <div className="flex">{props.children}</div>;
+    return <div className="p-6 pt-0">{props.children}</div>;
 } 
 
 export function CardCover(props: any) {

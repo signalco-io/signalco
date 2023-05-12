@@ -1,1 +1,1 @@
-export { NavigatingButton, type NavigatingButtonProps} from './NavigatingButton';
+export * from './NavigatingButton';

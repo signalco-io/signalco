@@ -90,7 +90,7 @@ function Dashboards() {
                     {isEditing && (
                         <div className="px-2 xs:w-full">
                             <Row spacing={1}>
-                                <Button onClick={() => setShowWidgetStore(true)} sx={{ minWidth: '140px' }}>{t('AddWidget')}</Button>
+                                <Button onClick={() => setShowWidgetStore(true)}>{t('AddWidget')}</Button>
                                 <Button loading={isSavingEdit} onClick={handleEditDone} fullWidth>{t('Save')}</Button>
                             </Row>
                         </div>

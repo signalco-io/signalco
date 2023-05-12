@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Navigate } from '@signalco/ui-icons';
-import { Button } from '@mui/joy';
+import { Button } from '../Button';
 import type { PropsWithChildren } from 'react';
 
 export type NavigatingButtonProps = PropsWithChildren<{
@@ -28,18 +28,11 @@ export function NavigatingButton({
                 variant={hideArrow ? 'plain' : 'solid'}
                 disabled={disabled}
                 size={size}
-                endDecorator={<Navigate size={16} />}
-                sx={{
-                    '.MuiButton-endDecorator': {
-                        opacity: hideArrow ? 0 : 1,
-                        transition: 'opacity 0.1s linear'
-                    },
-                    '&:hover': {
-                        '.MuiButton-endDecorator': {
-                            opacity: 1
-                        }
-                    }
-                }}>
+                endDecorator={(
+                    <span className='transition-opacity opacity-0 hover:opacity-1'>
+                        <Navigate size={16} />
+                    </span>
+                )}>
                 {children}
             </Button>
         </Link>

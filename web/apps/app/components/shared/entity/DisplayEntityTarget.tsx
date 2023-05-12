@@ -41,7 +41,7 @@ function DisplayEntityTarget({ target, selectContact, selectValue, valueSerializ
 
     return (
         <>
-            <Button variant="outlined" fullWidth sx={{ minHeight: 56 }} {...bindTrigger(entityMenu)}>
+            <Button variant="outlined" fullWidth {...bindTrigger(entityMenu)}>
                 <Row style={{ width: '100%' }} spacing={2} justifyContent="space-between">
                     <EntityIconLabel entityId={target?.entityId} description={entityDescription} />
                     <Row spacing={1}>

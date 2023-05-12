@@ -48,8 +48,7 @@ function WidgetIndicator(props: WidgetSharedProps<ConfigProps>) {
     return (
         <Button
             variant="plain"
-            sx={{ position: 'relative', height: '100%', width: '100%', display: 'block', textAlign: 'left', margin: 0, padding: 0 }}
-            onClick={handleSelected} >
+            onClick={handleSelected}>
             <Stack style={{ height: '100%' }} alignItems="center" justifyContent="end">
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <Image src="/assets/widget-images/plant-aloe.png" alt="Plant Aloe" width={76} height={76} />

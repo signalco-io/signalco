@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import React from 'react';
 import { PopupState } from 'material-ui-popup-state/hooks';
+import { cx } from 'classix';
 import { Add, Pin, PinOff } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
@@ -51,7 +52,9 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
             <Row style={{ width: '100%', position: 'relative' }}>
                 <Button
                     variant="plain"
-                    sx={{ color: dashboard.id !== selectedId ? 'var(--joy-palette-neutral-400)' : 'inherit' }}
+                    className={cx(
+                        dashboard.id !== selectedId && 'text-neutral-400'
+                    )}
                     onClick={() => onSelection(dashboard.id)}
                     fullWidth
                 >

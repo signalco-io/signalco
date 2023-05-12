@@ -74,7 +74,7 @@ function WidgetCard(props: IWidgetCardProps) {
                 }}>
                     {(!isLoading && needsConfiguration) ? (
                         <Stack justifyContent="stretch" style={{ height: '100%' }}>
-                            <Button disabled={!isEditMode} size="lg" sx={{ height: '100%', fontSize: width < 2 ? '0.7em' : '1em' }} fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
+                            <Button disabled={!isEditMode} size="lg" fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
                         </Stack>
                     ) : (
                         <ErrorBoundary>{children}</ErrorBoundary>

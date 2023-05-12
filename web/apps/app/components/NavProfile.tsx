@@ -32,12 +32,14 @@ function UserProfileAvatarButton(props: ComponentProps<typeof Button>) {
     const user = useCurrentUser();
 
     return (
-        <Button variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 2 }} {...props} style={{ position: 'relative' }}>
-            <UserAvatar user={user} />
-            <div style={{ position: 'absolute', left: '50%', bottom: 4, transform: 'translateX(-50%)' }}>
-                <ApiBadge />
-            </div>
-        </Button>
+        <div className="p-2 relative">
+            <Button variant="plain" {...props}>
+                <UserAvatar user={user} />
+                <div style={{ position: 'absolute', left: '50%', bottom: 4, transform: 'translateX(-50%)' }}>
+                    <ApiBadge />
+                </div>
+            </Button>
+        </div>
     );
 }
 

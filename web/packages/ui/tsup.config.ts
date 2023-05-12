@@ -4,10 +4,9 @@ import { fileURLToPath } from 'node:url';
 
 import { defineConfig } from 'tsup';
 
-export default defineConfig({
+export default defineConfig((opts) => ({
     entry: Object.fromEntries(
         [
-            // ['index', fileURLToPath(new URL('src/index.ts', import.meta.url))],
             ...globSync('src/**/index.ts').map(file => [
                 // This remove `src/` as well as the file extension from each
                 // file, so e.g. src/nested/foo.js becomes nested/foo
@@ -23,5 +22,6 @@ export default defineConfig({
     ),
     format: 'esm',
     dts: true,
-    tsconfig: 'tsconfig.build.json',
-})
+    clean: !opts.watch,
+    minify: !opts.watch
+}));

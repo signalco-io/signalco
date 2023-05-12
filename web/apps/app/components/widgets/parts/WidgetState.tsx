@@ -148,7 +148,6 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
 
     return (
         <Button
-            sx={{ borderRadius: 'md', position: 'relative', height: '100%', width: 'calc(100% - 2px)', display: 'block', textAlign: 'left', margin: 0, padding: 0 }}
             onClick={handleStateChangeRequest}
             variant="plain">
             <Stack style={{ height: '100%', paddingTop: 16, paddingBottom: 16 }}>

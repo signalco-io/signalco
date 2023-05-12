@@ -94,7 +94,7 @@ function Newsletter() {
                                 sx={{ '.JoyInput-root': { '--Input-radius': isLoading ? '8px' : '8px 0 0 8px' }, maxWidth: '400px' }}
                                 value={email}
                                 onChange={handleOnEmail} />
-                            <Button loading={isLoading} type="submit" variant="soft" size="lg" sx={{ '--Button-radius': '0 8px 8px 0' }}>Subscribe</Button>
+                            <Button loading={isLoading} type="submit" variant="soft" size="lg">Subscribe</Button>
                         </Row>
                     </GentleSlide>
                     <GentleSlide collapsedWhenHidden appear={error != null} direction="down" duration={200}>

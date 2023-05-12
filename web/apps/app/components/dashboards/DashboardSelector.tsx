@@ -41,12 +41,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                         <Button
                             variant="plain"
                             size="lg"
-                            sx={{
-                                '.JoyButton-endDecorator': {
-                                    pointerEvents: 'none'
-                                }
-                            }}
-                            endDecorator={<Select />} {...bindTrigger(popupState)}>
+                            endDecorator={<Select className="pointer-events-none" />} {...bindTrigger(popupState)}>
                             {currentName}
                         </Button>
                     </div>
@@ -55,7 +50,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                     <Row>
                         {favoriteDashboards?.map(fd => (
                             <Link key={fd.id} href={`#dashboard=${fd.id}`} passHref>
-                                <Button variant="plain" sx={{ color: 'var(--joy-palette-neutral-400)' }}>
+                                <Button variant="plain">
                                     {fd.name}
                                 </Button>
                             </Link>

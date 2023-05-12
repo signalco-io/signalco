@@ -50,7 +50,7 @@ export default function WidgetButton(props: WidgetSharedProps<ConfigProps>) {
     useWidgetOptions(stateOptions, props);
 
     return (
-        <Button sx={{ height: '100%', width: 'calc(100% - 2px)', justifyContent: 'start' }} variant="plain" onClick={handleActionRequest} >
+        <Button variant="plain" onClick={handleActionRequest}>
             <Row spacing={1}>
                 <Avatar size="lg">
                     <Icon sx={{ fontSize: '2em !important' }}>{icon}</Icon>
