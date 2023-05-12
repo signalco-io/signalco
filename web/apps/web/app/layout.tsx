@@ -1,7 +1,6 @@
 import Script from 'next/script';
 import { type Metadata } from 'next';
-import '@signalco/ui/dist/index.css';
-import './global.scss';
+import './global.css';
 
 export default function RootLayout({ children, }: {
     children: React.ReactNode;

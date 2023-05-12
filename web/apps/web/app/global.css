@@ -1,4 +1,9 @@
-@import './variables.scss';
+@import './variables.css';
+@import '@signalco/ui/dist/index.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* raleway-200 - latin */
 @font-face {
@@ -33,10 +38,9 @@ html, body, #__next {
 a {
   text-decoration: none;
   color: var(--joy-palette-text-tertiary);
-
-  &:hover {
-    color: var(--joy-palette-text-secondary);
-  }
+}
+a:hover {
+  color: var(--joy-palette-text-secondary);
 }
 
 .material-icons {
@@ -64,7 +68,7 @@ a {
   font-feature-settings: 'liga';
 }
 
-[data-joy-color-scheme="dark"] {
+/* [data-joy-color-scheme="dark"] {
   .image--light {
     display: none;
   }
@@ -78,4 +82,4 @@ a {
   }
 
   ::selection { background: black; color: white; }
-}
+} */

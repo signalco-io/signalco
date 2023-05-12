@@ -724,12 +724,18 @@ importers:
       '@signalco/js':
         specifier: workspace:*
         version: link:../../packages/js
+      '@signalco/tailwindcss-config-signalco':
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config-signalco
       '@signalco/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@signalco/ui-icons':
         specifier: workspace:*
         version: link:../../packages/ui-icons
+      autoprefixer:
+        specifier: ^10.4.14
+        version: 10.4.14(postcss@8.4.23)
       classix:
         specifier: 2.1.32
         version: 2.1.32
@@ -766,6 +772,12 @@ importers:
       sharp:
         specifier: 0.32.1
         version: 0.32.1
+      tailwindcss:
+        specifier: ^3.3.2
+        version: 3.3.2
+      tailwindcss-animate:
+        specifier: 1.0.5
+        version: 1.0.5(tailwindcss@3.3.2)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.0
@@ -948,6 +960,15 @@ importers:
         specifier: 5.0.4
         version: 5.0.4
 
+  packages/tailwind-config-signalco:
+    dependencies:
+      tailwindcss:
+        specifier: 3.3.2
+        version: 3.3.2
+      tailwindcss-animate:
+        specifier: 1.0.5
+        version: 1.0.5(tailwindcss@3.3.2)
+
   packages/tsconfig: {}
 
   packages/ui:
@@ -976,6 +997,9 @@ importers:
       '@mui/system':
         specifier: 5.12.3
         version: 5.12.3(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.6)(react@18.2.0)
+      '@signalco/tailwindcss-config-signalco':
+        specifier: workspace:*
+        version: link:../tailwind-config-signalco
       '@signalco/ui-icons':
         specifier: workspace:*
         version: link:../ui-icons
@@ -997,6 +1021,9 @@ importers:
       react-timeago:
         specifier: 7.1.0
         version: 7.1.0(react@18.2.0)
+      tailwindcss:
+        specifier: 3.3.2
+        version: 3.3.2
       tailwindcss-animate:
         specifier: ^1.0.5
         version: 1.0.5(tailwindcss@3.3.2)
@@ -1034,9 +1061,6 @@ importers:
       sass:
         specifier: 1.62.1
         version: 1.62.1
-      tailwindcss:
-        specifier: 3.3.2
-        version: 3.3.2
       tsup:
         specifier: 6.6.2
         version: 6.6.2(postcss@8.4.23)(typescript@5.0.4)
@@ -6383,7 +6407,6 @@ packages:
       picocolors: 1.0.0
       postcss: 8.4.23
       postcss-value-parser: 4.2.0
-    dev: true
 
   /available-typed-arrays@1.0.5:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
@@ -8655,7 +8678,6 @@ packages:
 
   /fraction.js@4.2.0:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
-    dev: true
 
   /fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
@@ -10357,7 +10379,6 @@ packages:
   /normalize-range@0.1.2:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /npm-run-path@4.0.1:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}

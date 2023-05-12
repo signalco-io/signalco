@@ -8,7 +8,7 @@ export function Card({ href, ...restProps }: any) {
         : ({ children }: PropsWithChildren) => (<>{children}</>);
     return (
         <Comp>
-            <div className="bg-card rounded-lg border text-card-foreground shadow-sm" {...restProps} />
+            <div className="bg-card rounded-lg p-2 border text-card-foreground shadow-sm" {...restProps} />
         </Comp>
     );
 }
