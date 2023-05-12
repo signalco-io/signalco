@@ -2,7 +2,7 @@ import type { PropsWithChildren, MouseEventHandler, ReactNode } from 'react';
 import {Link} from '../Link';
 import {Row} from '../Row';
 import { cx } from 'classix';
-import { ColorPaletteProp } from '..';
+import type { ColorPaletteProp } from '../theme';
 
 export type ChipProps = PropsWithChildren<{
     color?: ColorPaletteProp;

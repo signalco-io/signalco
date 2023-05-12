@@ -1,4 +1,4 @@
-import { ColorVariants } from "../sharedTypes";
+import type { ColorVariants } from "../theme";
 
 export type DotIndicatorProps = {
     color: ColorVariants;
