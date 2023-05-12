@@ -34,12 +34,12 @@
         "@emotion/react": "11.11.0",
         "@emotion/server": "11.11.0",
         "@emotion/styled": "11.11.0",
-        "@mui/base": "5.0.0-alpha.128",
-        "@mui/joy": "5.0.0-alpha.78",
+        "@mui/base": "5.0.0-beta.0",
+        "@mui/joy": "5.0.0-alpha.79",
         "@mui/system": "5.12.3",
         "@signalco/ui-icons": "workspace:*",
         "material-ui-popup-state": "5.0.8",
-        "next": "13.4.1",
+        "next": "13.4.2",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-is": "18.2.0",
@@ -49,7 +49,7 @@
     "peerDependencies": {
         "@babel/core": "7.21.8",
         "@signalco/ui-icons": "workspace:*",
-        "next": "13.4.1",
+        "next": "13.4.2",
         "react": "18.2.0",
         "react-dom": "18.2.0"
     }
