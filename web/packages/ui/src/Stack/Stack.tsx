@@ -10,7 +10,7 @@ export type StackProps = PropsWithChildren<{
 export function Stack({ children, spacing, alignItems, justifyContent, style }: StackProps) {
     return (
         <div
-            className="flex flex-col gap-[var(--s-gap)] align-items-[var(--s-alignItems)] justify-content-[var(--s-justifyContent)]"
+            className="flex flex-col gap-[var(--s-gap)] [align-items:--s-alignItems] [justify-content:--s-justifyContent]"
             style={{
                 '--s-gap': `${(spacing ?? 0) * 8}px`,
                 '--s-alignItems': alignItems ?? 'stretch',

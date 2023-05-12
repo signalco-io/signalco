@@ -30,9 +30,9 @@ export function Container({ maxWidth, centered = true, padded = true, children }
     }
 
     const className = cx(
-        "display-block max-width-[var(--container-maxWidth)] width-full",
+        "display-block [max-width:--container-maxWidth] width-full",
         (Boolean(width) && padded) && "padding-x-4",
-        centered && "margin-x-auto");
+        centered && "mx-auto");
 
     return (
         <div className={className}

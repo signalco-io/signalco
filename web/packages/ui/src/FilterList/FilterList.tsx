@@ -1,17 +1,18 @@
 import { Children, type PropsWithChildren } from 'react';
 import { useEffect, useState } from 'react';
 import { Check, Close, ExpandDown } from '@signalco/ui-icons';
-import {SelectItems} from '../SelectItems';
-import {Checkbox} from '../Checkbox';
-import { Typography, Button } from '@mui/joy';
+import { SelectItems } from '../SelectItems';
+import { Checkbox } from '../Checkbox';
+import { Typography } from '../Typography';
+import { Button } from '../Button';
 import { Box } from '@mui/system';
-import {Row} from '../Row';
-import {Stack} from '../Stack';
-import {Grow} from '../Grow';
-import {Collapse} from '../Collapse';
-import {Fade} from '../Fade';
-import {Loadable, LoadableProps } from '../Loadable';
-import {NoDataPlaceholder} from '../NoDataPlaceholder';
+import { Row } from '../Row';
+import { Stack } from '../Stack';
+import { Grow } from '../Grow';
+import { Collapse } from '../Collapse';
+import { Fade } from '../Fade';
+import { Loadable, LoadableProps } from '../Loadable';
+import { NoDataPlaceholder } from '../NoDataPlaceholder';
 
 export type FilterListItem = {
     id: string;
@@ -34,7 +35,9 @@ function FilterItem({ item, checked, onToggle }: { item: FilterListItem, checked
             key={item.id}
             label={(
                 <Row style={{ padding: 12 }}>
-                    <Typography sx={{ flexGrow: 1 }}>{item.label}</Typography>
+                    <div className='flex-grod-1'>
+                        <Typography>{item.label}</Typography>
+                    </div>
                     <Grow appear={checked.indexOf(item.id) >= 0}>
                         <Check />
                     </Grow>

@@ -1035,7 +1035,7 @@ importers:
         specifier: 1.62.1
         version: 1.62.1
       tailwindcss:
-        specifier: ^3.3.2
+        specifier: 3.3.2
         version: 3.3.2
       tsup:
         specifier: 6.6.2
