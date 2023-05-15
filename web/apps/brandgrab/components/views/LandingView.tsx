@@ -30,9 +30,7 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                 '&:hover': { boxShadow: 'md', borderColor: 'neutral.outlinedHoverBorder' },
             }}>
                 {isImageDataUrl(og.imageBase64) &&
-                    <CardOverflow sx={{
-                        padding: 0
-                    }}>
+                    <CardOverflow>
                         <NextImage
                             src={og.imageBase64}
                             alt="og:image"
@@ -50,16 +48,7 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                     </Stack>
                 </CardContent>
                 <Divider sx={{ mt: 2 }} />
-                <CardOverflow
-                    variant="soft"
-                    sx={{
-                        display: 'flex',
-                        gap: 1.5,
-                        py: 1.5,
-                        px: 'var(--Card-padding)',
-                        bgcolor: 'background.level1',
-                    }}
-                >
+                <CardOverflow className="flex">
                     {!!og.siteName && (
                         <Tooltip title={og.siteName}>
                             <Typography noWrap level="body3" semiBold secondary>

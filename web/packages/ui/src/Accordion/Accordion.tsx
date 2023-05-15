@@ -1,6 +1,5 @@
 import { IconButton } from '@mui/joy';
 import { Card } from "../Card";
-import type { SxProps } from '@mui/system';
 import { PropsWithChildren, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { Collapse } from '../Collapse';
@@ -10,13 +9,12 @@ import {Row} from '../Row';
 export type AccordionProps = PropsWithChildren<{
     open?: boolean;
     disabled?: boolean;
-    sx?: SxProps;
     onChange?: (e: MouseEvent<HTMLAnchorElement>, expanded: boolean) => void,
     unmountOnExit?: boolean;
+    className?: string | undefined;
 }>;
 
-export function Accordion(props: AccordionProps) {
-    const { children, open, sx, disabled, onChange, unmountOnExit } = props;
+export function Accordion({ children, open, disabled, onChange, unmountOnExit, className }: AccordionProps) {
     const [isOpen, setIsOpen] = useState(open ?? false);
 
     const handleOpen = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -32,7 +30,7 @@ export function Accordion(props: AccordionProps) {
     const multipleChildren = !!children && Array.isArray(children);
 
     return (
-        <Card variant="soft" sx={sx}>
+        <Card variant="soft" className={className}>
             <Row spacing={1} justifyContent="space-between">
                 {multipleChildren ? children[0] : children}
                 {!disabled && (

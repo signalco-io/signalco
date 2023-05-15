@@ -2,13 +2,17 @@ import type { HTMLAttributes, PropsWithChildren } from "react";
 import { Link } from "../Link";
 import { cx } from "classix";
 
-export function Card({ href, ...restProps }: any) {
+export function Card({ href, className, ...restProps }: any) {
     const Comp = href
         ? ({ children }: PropsWithChildren) => <Link href={href}>{children}</Link>
         : ({ children }: PropsWithChildren) => (<>{children}</>);
     return (
         <Comp>
-            <div className="bg-card rounded-lg border text-card-foreground shadow-sm" {...restProps} />
+            <div
+                className={cx(
+                    "bg-card rounded-lg p-2 border text-card-foreground shadow-sm",
+                    className)}
+                {...restProps} />
         </Comp>
     );
 }
@@ -21,14 +25,14 @@ export function CardTitle({ className, ...props }: HTMLAttributes<HTMLHeadingEle
     return <div className={cx("text-lg font-semibold leading-none tracking-tight", className)} {...props} />;
 };
 
-export function CardOverflow(props: any) {
-    return <div>{props.children}</div>;
+export function CardOverflow({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+    return <div className={className}>{props.children}</div>;
 }
 
 export function CardContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
     return <div className={cx("p-6 pt-0", className)}>{props.children}</div>;
 }
 
-export function CardCover(props: any) {
-    return <div>{props.children}</div>;
+export function CardCover({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+    return <div className={className}>{props.children}</div>;
 } 

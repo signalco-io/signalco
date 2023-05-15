@@ -17,15 +17,8 @@ function GlobeSection() {
     return (
         <Container>
             <Fade duration={2000} appear={appear}>
-                <Box sx={{
-                    overflow: 'hidden',
-                }}>
-                    <Box sx={{
-                        minHeight: { xs: '12vh', sm: '20vh', md: '380px' },
-                        display: 'flex',
-                        justifyContent: 'center',
-                        position: 'relative'
-                    }}>
+                <div className="overflow-hidden">
+                    <div className="min-h-12 flex justify-center relative">
                         <Box sx={{
                             position: 'absolute',
                             transform: 'translateY(-8%)',
@@ -38,8 +31,8 @@ function GlobeSection() {
                                 <Globe />
                             )}
                         </Box>
-                    </Box>
-                </Box>
+                    </div>
+                </div>
             </Fade>
         </Container>
     );

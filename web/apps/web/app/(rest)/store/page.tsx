@@ -58,7 +58,7 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
     const { name, features, imageSrc, price, stockStatus } = props;
 
     return (
-        <Card sx={{ width: '222px' }}>
+        <Card className="w-56">
             <Stack spacing={2}>
                 {imageSrc
                     ? <Image src={imageSrc} alt={`${name} image`} width={180} height={180} />

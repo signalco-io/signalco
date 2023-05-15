@@ -91,7 +91,7 @@ function Newsletter() {
                                 fullWidth
                                 required
                                 variant="outlined"
-                                sx={{ '.JoyInput-root': { '--Input-radius': isLoading ? '8px' : '8px 0 0 8px' }, maxWidth: '400px' }}
+                                className="max-w-md"
                                 value={email}
                                 onChange={handleOnEmail} />
                             <Button loading={isLoading} type="submit" variant="soft" size="lg">Subscribe</Button>

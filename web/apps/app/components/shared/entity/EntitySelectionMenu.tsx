@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { cx } from 'classix';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Row } from '@signalco/ui/dist/Row';
 import { Box } from '@signalco/ui/dist/Box';
@@ -70,7 +71,7 @@ export default function EntitySelectionMenu({
         <>
             <Accordion
                 open={selecting === 'entity'}
-                sx={{ flexGrow: selecting === 'entity' ? 1 : 0 }}
+                className={cx(selecting === 'entity' && 'grow-1')}
                 onChange={handleEditEntity}
                 unmountOnExit
             >
@@ -87,7 +88,7 @@ export default function EntitySelectionMenu({
             </Accordion>
             {(selectContact && entitySelected) && (
                 <Accordion
-                    sx={{ flexGrow: selecting === 'contact' ? 1 : 0 }}
+                    className={cx(selecting === 'contact' && 'grow-1')}
                     open={selecting === 'contact'}
                     disabled={selecting !== 'contact' && !entitySelected}
                     unmountOnExit
@@ -113,7 +114,7 @@ export default function EntitySelectionMenu({
             )}
             {(selectValue && contactSelected) && (
                 <Accordion
-                    sx={{ flexGrow: selecting === 'value' ? 1 : 0 }}
+                    className={cx(selecting === 'value' && 'grow-1')}
                     open={selecting === 'value'}
                     disabled={selecting !== 'value' && !contactSelected}
                     unmountOnExit

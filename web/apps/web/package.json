@@ -24,6 +24,8 @@
         "@signalco/js": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
+        "@signalco/tailwindcss-config-signalco": "workspace:*",
+        "autoprefixer": "^10.4.14",
         "classix": "2.1.32",
         "cobe": "0.6.3",
         "encoding": "0.1.13",
@@ -35,7 +37,9 @@
         "react-cool-inview": "3.0.1",
         "react-dom": "18.2.0",
         "react-transition-group": "4.4.5",
-        "sharp": "0.32.1"
+        "sharp": "0.32.1",
+        "tailwindcss": "^3.3.2",
+        "tailwindcss-animate": "1.0.5"
     },
     "devDependencies": {
         "@axe-core/playwright": "4.7.0",
@@ -57,8 +61,8 @@
         "eslint": "8.40.0",
         "next-sitemap": "4.0.9",
         "openapi-types": "12.1.0",
-        "postcss": "8.4.23",
         "playwright": "1.33.0",
+        "postcss": "8.4.23",
         "prop-types": "15.8.1",
         "rimraf": "5.0.0",
         "sass": "1.62.1",
