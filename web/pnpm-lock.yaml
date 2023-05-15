@@ -615,6 +615,9 @@ importers:
 
   apps/ui-docs:
     dependencies:
+      '@signalco/tailwindcss-config-signalco':
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config-signalco
       '@signalco/ui':
         specifier: workspace:*
         version: link:../../packages/ui

@@ -495,7 +495,7 @@ function Actions(props: ActionsProps) {
                         </div>
                     </Row>
                     <Card variant="outlined">
-                        <CardOverflow sx={{ padding: 0, position: 'relative' }}>
+                        <CardOverflow className="relative">
                             {/* TODO: Use CodeEditor component with language */}
                             {/* <CodeEditor
                                     language="json"

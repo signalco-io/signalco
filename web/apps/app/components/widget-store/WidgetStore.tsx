@@ -99,7 +99,7 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
                                         <Add />
                                     </IconButton>
                                 </Row>
-                                <CardOverflow sx={{ pt: 2 }}>
+                                <CardOverflow className="pt-2">
                                     <Image
                                         style={{ aspectRatio: 1 }}
                                         src={availableWidget.preview}
