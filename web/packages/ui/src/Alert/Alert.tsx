@@ -7,9 +7,10 @@ export type AlertProps = {
     startDecorator?: ReactNode | undefined,
     endDecorator?: ReactNode | undefined,
     sx?: CSSProperties | undefined,
-    children?: React.ReactNode | string | undefined
+    children?: React.ReactNode | string | undefined,
+    className?: string | undefined
 };
 
-export function Alert({ children, color, variant, startDecorator, endDecorator, sx }: AlertProps) {
-    return <JoyAlert color={color} variant={variant} startDecorator={startDecorator} endDecorator={endDecorator} sx={sx}>{children}</JoyAlert>
+export function Alert({ children, color, variant, startDecorator, endDecorator, sx, className }: AlertProps) {
+    return <JoyAlert color={color} variant={variant} startDecorator={startDecorator} endDecorator={endDecorator} sx={sx} className={className}>{children}</JoyAlert>
 }
