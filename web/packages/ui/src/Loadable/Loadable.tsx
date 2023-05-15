@@ -1,6 +1,7 @@
 import { type PropsWithChildren, useMemo } from 'react';
 import { Alert, CircularProgress } from '@mui/joy';
 import { Warning } from '@signalco/ui-icons';
+import { cx } from 'classix';
 
 export type LoadableLoadingErrorProps = {
     error?: unknown | string | React.ReactElement;
@@ -47,7 +48,7 @@ export function Loadable(props: LoadableProps) {
             }
         }
         return (
-            <Alert variant="soft" color="danger" sx={{ width: '100%' }} startDecorator={<Warning />}>
+            <Alert variant="soft" color="danger" className="w-full" startDecorator={<Warning />}>
                 {errorDisplay}
             </Alert>
         );
@@ -56,7 +57,7 @@ export function Loadable(props: LoadableProps) {
     return (
         <>
             {(contentVisible || isLoading) && (
-                <div style={{ visibility: isLoading ? 'visible' : 'hidden', width: '100%', height: '100%' }}>
+                <div className={cx("w-full h-full", !isLoading && 'hidden')}>
                     {indicator}
                 </div>
             )}
