@@ -38,7 +38,7 @@ export function StepContent(props: {
                     <div>
                         <Grid container spacing={8} alignItems="center">
                             {props.image && (
-                                <Grid xs={12} md={6} sx={{ position: 'relative', height: props.imageContainerHeight }}>
+                                <Grid xs={12} md={6} className="relative" style={{ height: props.imageContainerHeight }}>
                                     <Fade appear={inView} duration={1400}>
                                         <div style={props.imageContainerStyles}>
                                             {props.image}

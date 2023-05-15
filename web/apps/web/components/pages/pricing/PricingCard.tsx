@@ -29,12 +29,9 @@ export default function PricingCard(props: PricingCardProps) {
 
     return (
         <div>
-            <Card
-                sx={{
-                    height: '100%'
-                }}>
+            <Card className="h-full">
                 <Stack
-                    style={{ height: '100%', padding: 16 }}
+                    className="h-full p-4"
                     spacing={3}
                     justifyContent="space-between">
                     <Stack spacing={3}>
