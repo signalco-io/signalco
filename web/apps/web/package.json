@@ -25,7 +25,7 @@
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
-        "autoprefixer": "^10.4.14",
+        "autoprefixer": "10.4.14",
         "classix": "2.1.32",
         "cobe": "0.6.3",
         "encoding": "0.1.13",
@@ -38,7 +38,7 @@
         "react-dom": "18.2.0",
         "react-transition-group": "4.4.5",
         "sharp": "0.32.1",
-        "tailwindcss": "^3.3.2",
+        "tailwindcss": "3.3.2",
         "tailwindcss-animate": "1.0.5"
     },
     "devDependencies": {
