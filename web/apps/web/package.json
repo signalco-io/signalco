@@ -42,7 +42,7 @@
         "tailwindcss-animate": "1.0.5"
     },
     "devDependencies": {
-        "@axe-core/playwright": "4.7.0",
+        "@axe-core/playwright": "4.7.1",
         "@babel/core": "7.21.8",
         "@next/bundle-analyzer": "13.4.2",
         "@playwright/test": "1.33.0",
