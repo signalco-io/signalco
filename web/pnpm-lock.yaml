@@ -237,8 +237,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       rimraf:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       sass:
         specifier: 1.62.1
         version: 1.62.1
@@ -367,8 +367,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       sass:
         specifier: 1.62.1
         version: 1.62.1
@@ -476,8 +476,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       sass:
         specifier: 1.62.1
         version: 1.62.1
@@ -604,8 +604,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       sass:
         specifier: 1.62.1
         version: 1.62.1
@@ -680,8 +680,8 @@ importers:
         specifier: 7.3.0
         version: 7.3.0(postcss@8.4.23)(webpack@5.83.0)
       rimraf:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       sass:
         specifier: 1.62.1
         version: 1.62.1
@@ -849,8 +849,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       sass:
         specifier: 1.62.1
         version: 1.62.1
@@ -867,8 +867,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       tsup:
         specifier: 6.7.0
         version: 6.7.0(typescript@5.0.4)
@@ -930,8 +930,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       rimraf:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       tsup:
         specifier: 6.7.0
         version: 6.7.0(typescript@5.0.4)
@@ -954,8 +954,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       rimraf:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       tsup:
         specifier: 6.7.0
         version: 6.7.0(typescript@5.0.4)
@@ -1059,8 +1059,8 @@ importers:
         specifier: 8.3.2
         version: 8.3.2(postcss@8.4.23)
       rimraf:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       sass:
         specifier: 1.62.1
         version: 1.62.1
@@ -1089,8 +1089,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       rimraf:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       tsup:
         specifier: 6.7.0
         version: 6.7.0(typescript@5.0.4)
@@ -8901,6 +8901,18 @@ packages:
       path-scurry: 1.7.0
     dev: true
 
+  /glob@10.2.5:
+    resolution: {integrity: sha512-Gj+dFYPZ5hc5dazjXzB0iHg2jKWJZYMjITXYPBRQ/xc2Buw7H0BINknRTwURJ6IC6MEFpYbLvtgVb3qD+DwyuA==}
+    engines: {node: '>=16 || 14 >=14.17'}
+    hasBin: true
+    dependencies:
+      foreground-child: 3.1.1
+      jackspeak: 2.0.3
+      minimatch: 9.0.0
+      minipass: 5.0.0
+      path-scurry: 1.7.0
+    dev: true
+
   /glob@7.1.6:
     resolution: {integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==}
     dependencies:
@@ -12009,12 +12021,12 @@ packages:
     dependencies:
       glob: 7.2.3
 
-  /rimraf@5.0.0:
-    resolution: {integrity: sha512-Jf9llaP+RvaEVS5nPShYFhtXIrb3LRKP281ib3So0KkeZKo2wIKyq0Re7TOSwanasA423PSr6CCIL4bP6T040g==}
+  /rimraf@5.0.1:
+    resolution: {integrity: sha512-OfFZdwtd3lZ+XZzYP/6gTACubwFcHdLRqS9UX3UwpU2dnGQYkPFISRwvM3w9IiB2w7bW5qGo/uAwE4SmXXSKvg==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      glob: 10.2.2
+      glob: 10.2.5
     dev: true
 
   /robust-predicates@3.0.1:
