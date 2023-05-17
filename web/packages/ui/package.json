@@ -22,7 +22,7 @@
         "glob": "10.2.2",
         "postcss": "8.4.23",
         "postcss-preset-env": "8.3.2",
-        "rimraf": "5.0.0",
+        "rimraf": "5.0.1",
         "sass": "1.62.1",
         "tsup": "6.6.2",
         "typescript": "5.0.4"
