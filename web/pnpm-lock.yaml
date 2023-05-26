@@ -677,8 +677,8 @@ importers:
         specifier: 8.4.23
         version: 8.4.23
       postcss-loader:
-        specifier: 7.3.0
-        version: 7.3.0(postcss@8.4.23)(webpack@5.84.1)
+        specifier: 7.3.1
+        version: 7.3.1(postcss@8.4.23)(webpack@5.84.1)
       rimraf:
         specifier: 5.0.1
         version: 5.0.1
@@ -4866,7 +4866,7 @@ packages:
       node-polyfill-webpack-plugin: 2.0.1(webpack@5.84.1)
       pnp-webpack-plugin: 1.7.0(typescript@5.0.4)
       postcss: 8.4.23
-      postcss-loader: 7.3.0(postcss@8.4.23)(webpack@5.84.1)
+      postcss-loader: 7.3.1(postcss@8.4.23)(webpack@5.84.1)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       resolve-url-loader: 5.0.0
@@ -11439,8 +11439,8 @@ packages:
       postcss: 8.4.23
       yaml: 2.2.2
 
-  /postcss-loader@7.3.0(postcss@8.4.23)(webpack@5.84.1):
-    resolution: {integrity: sha512-qLAFjvR2BFNz1H930P7mj1iuWJFjGey/nVhimfOAAQ1ZyPpcClAxP8+A55Sl8mBvM+K2a9Pjgdj10KpANWrNfw==}
+  /postcss-loader@7.3.1(postcss@8.4.23)(webpack@5.84.1):
+    resolution: {integrity: sha512-uevGt8yy2gvruNvzy8jxgYSSnyqBcA7CnS6/57qoZnUMM51XgsTqxIpWZWdHyvIyo4ov0lCgnzIbhtWwVFI8lg==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       postcss: ^7.0.0 || ^8.0.1
