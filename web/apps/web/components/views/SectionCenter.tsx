@@ -1,17 +1,20 @@
-'use client';
-
 import React, { type CSSProperties } from 'react';
+import { cx } from 'classix';
 import { Container } from '@signalco/ui/dist/Container';
-import { Box } from '@signalco/ui/dist/Box';
 
 
-export function SectionCenter(props: { children?: React.ReactNode | undefined; style?: CSSProperties | undefined; narrow?: boolean; }) {
+export function SectionCenter(props: { children?: React.ReactNode | undefined; style?: CSSProperties | undefined; narrow?: boolean; className?: string; }) {
     return (
-        <section style={props.style}>
+        <section className={props.className} style={props.style}>
             <Container>
-                <Box sx={{ px: { xs: 1, sm: 4, md: 8 }, py: { xs: props.narrow ? 4 : 8, sm: props.narrow ? 4 : 12 } }}>
+                <div
+                    className={cx(
+                        'xs:px-1 sm:px-2 md:px-4',
+                        props.narrow && 'xs:py-4 sm:py-4',
+                        !props.narrow && 'xs:py-8 sm:py-12',
+                    )}>
                     {props.children}
-                </Box>
+                </div>
             </Container>
         </section>
     );

@@ -12,12 +12,21 @@ export type RowProps = HTMLAttributes<HTMLDivElement> & {
 export function Row({ spacing, alignItems, justifyContent, justifyItems, style, className, ...props }: RowProps) {
     return (
         <div
-            className={cx("flex [align-items:--s-alignItems] gap-[--s-gap] [justify-content:--s-justifyContent] [justify-items:--s-justifyItems]", className)}
+            className={cx(
+                "flex gap-[--s-gap]", 
+                justifyContent === 'start' && `[justify-content:start]`,
+                justifyContent === 'center' && `[justify-content:center]`,
+                justifyContent === 'end' && `[justify-content:end]`,
+                justifyContent === 'space-between' && `[justify-content:space-between]`,
+                (!justifyContent || justifyContent === 'stretch') && `[justify-content:stretch]`,
+                alignItems === 'start' && `[align-items:start]`,
+                alignItems === 'center' && `[align-items:center]`,
+                alignItems === 'end' && `[align-items:end]`,
+                (!alignItems || alignItems) === 'stretch' && `[align-items:stretch]`,
+                justifyItems === 'center' && `[justify-items:center]`,
+                className)}
             style={{
                 '--s-gap': `${(spacing ?? 0) * 8}px`,
-                '--s-alignItems': alignItems ?? 'center',
-                '--s-justifyContent': justifyContent ?? 'stretch',
-                '--s-justifyItems': justifyItems,
                 ...style
             } as CSSProperties}
             {...props}

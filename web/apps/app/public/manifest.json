@@ -17,11 +17,6 @@
   "theme_color": "black",
   "background_color": "black",
   "display": "standalone",
-  "display_override": [
-    "window-controls-overlay",
-    "standalone",
-    "minimal-ui"
-  ],
   "prefer_related_applications": false,
   "icons": [
     {

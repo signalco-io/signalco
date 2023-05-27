@@ -4,7 +4,7 @@ import React, { PropsWithChildren, useCallback } from 'react';
 import NextImage from 'next/image';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Tooltip } from '@signalco/ui/dist/Tooltip';
-import {Stack} from '@signalco/ui/dist/Stack';
+import { Stack } from '@signalco/ui/dist/Stack';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { Link } from '@signalco/ui/dist/Link';
 import { Divider } from '@signalco/ui/dist/Divider';
@@ -47,7 +47,9 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                         <Typography level="body2">{og.description}</Typography>
                     </Stack>
                 </CardContent>
-                <Divider sx={{ mt: 2 }} />
+                <div className="mt-2">
+                    <Divider />
+                </div>
                 <CardOverflow className="flex">
                     {!!og.siteName && (
                         <Tooltip title={og.siteName}>

@@ -25,10 +25,6 @@
     url('/assets/fonts/MaterialIcons-Regular.woff') format('woff');
 }
 
-:root {
-  --primary: #000000;
-}
-
 html, body, #__next {
   height: 100%;
   width: 100%;
@@ -63,23 +59,12 @@ a:hover {
 
   /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
-  font-feature-settings: 'liga';
 }
 
-/* [data-joy-color-scheme="dark"] {
-  .image--light {
-    display: none;
-  }
-
-  ::selection { background: white; color: black; }
+.image--light {
+  display: var(--light-display);
 }
 
-[data-joy-color-scheme="light"] {
-  .image--dark {
-    display: none;
-  }
-
-  ::selection { background: black; color: white; }
-} */
+.image--dark {
+  display: var(--dark-display);
+}

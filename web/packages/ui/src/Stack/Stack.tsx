@@ -10,11 +10,20 @@ export type StackProps = HTMLAttributes<HTMLDivElement> & {
 export function Stack({ spacing, alignItems, justifyContent, style, className, ...props }: StackProps) {
     return (
         <div
-            className={cx("flex flex-col gap-[var(--s-gap)] [align-items:--s-alignItems] [justify-content:--s-justifyContent]", className)}
+            className={cx(
+                `flex flex-col`, 
+                alignItems === 'start' && `[align-items:start]`,
+                alignItems === 'center' && `[align-items:center]`,
+                !alignItems && `[align-items:stretch]`,
+                Boolean(spacing) && `gap-[--s-gap]`,
+                justifyContent === 'start' && `[justify-content:start]`,
+                justifyContent === 'center' && `[justify-content:center]`,
+                justifyContent === 'end' && `[justify-content:end]`,
+                justifyContent === 'space-between' && `[justify-content:space-between]`,
+                justifyContent === 'stretch' && `[justify-content:stretch]`,
+                className)}
             style={{
                 '--s-gap': `${(spacing ?? 0) * 8}px`,
-                '--s-alignItems': alignItems ?? 'stretch',
-                '--s-justifyContent': justifyContent,
                 ...style
             } as CSSProperties}
             {...props}

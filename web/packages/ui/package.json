@@ -14,6 +14,7 @@
     },
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
+        "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@types/react": "18.2.7",
         "@types/react-dom": "18.2.4",
         "@types/react-timeago": "4.1.3",
@@ -28,7 +29,7 @@
         "typescript": "5.0.4"
     },
     "dependencies": {
-        "@signalco/tailwindcss-config-signalco": "workspace:*",
+        "@signalco/js": "workspace:*",
         "@babel/core": "7.22.1",
         "@emotion/cache": "11.11.0",
         "@emotion/react": "11.11.0",

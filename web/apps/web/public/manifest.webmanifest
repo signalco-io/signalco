@@ -5,11 +5,6 @@
   "theme_color": "black",
   "background_color": "black",
   "display": "standalone",
-  "display_override": [
-    "window-controls-overlay",
-    "standalone",
-    "minimal-ui"
-  ],
   "scope": "/",
   "start_url": "/",
   "prefer_related_applications": false,
