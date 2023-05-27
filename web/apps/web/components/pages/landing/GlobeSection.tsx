@@ -18,14 +18,13 @@ function GlobeSection() {
         <Container>
             <Fade duration={2000} appear={appear}>
                 <div className="overflow-hidden">
-                    <div className="min-h-12 flex justify-center relative">
+                    <div className="min-h-[12vh] sm:min-h-[20vh] md:min-h-[380px] flex justify-center relative">
                         <Box sx={{
                             position: 'absolute',
-                            transform: 'translateY(-8%)',
-                            width: '1100px',
-                            height: '1100px',
-                            maxWidth: '100vw!important',
-                            maxHeight: '100vw!important'
+                            width: '1000px',
+                            height: '1000px',
+                            maxWidth: '80vw!important',
+                            maxHeight: '800vw!important'
                         }}>
                             {!isServer && (
                                 <Globe />

@@ -29,13 +29,11 @@ export function Container({ maxWidth, centered = true, padded = true, children }
             break;
     }
 
-    const className = cx(
-        "display-block [max-width:--container-maxWidth] width-full",
-        (Boolean(width) && padded) && "padding-x-4",
-        centered && "mx-auto");
-
     return (
-        <div className={className}
+        <div className={cx(
+            "block max-w-[--container-maxWidth] w-full",
+            (Boolean(width) && padded) && "px-4",
+            centered && "mx-auto")}
             style={{
                 "--container-maxWidth": width ? `${width}px` : undefined
             } as CSSProperties}>

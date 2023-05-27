@@ -1,9 +1,10 @@
 'use client';
+
 import { useInView } from 'react-cool-inview';
 import React, { type CSSProperties } from 'react';
+import { cx } from 'classix';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
-import { Grid } from '@signalco/ui/dist/Grid';
 import { GentleSlide } from '@signalco/ui/dist/GentleSlide';
 import { Fade } from '@signalco/ui/dist/Fade';
 import { SectionCenter } from './SectionCenter';
@@ -35,32 +36,36 @@ export function StepContent(props: {
                             </GentleSlide>
                         )}
                     </Stack>
-                    <div>
-                        <Grid container spacing={8} alignItems="center">
-                            {props.image && (
-                                <Grid xs={12} md={6} className="relative" style={{ height: props.imageContainerHeight }}>
-                                    <Fade appear={inView} duration={1400}>
-                                        <div style={props.imageContainerStyles}>
-                                            {props.image}
-                                        </div>
-                                    </Fade>
-                                </Grid>
-                            )}
-                            {props.children && (
-                                <Grid xs={12} md={props.image ? 6 : 12}>
-                                    <Stack spacing={4}>
-                                        {(Array.isArray(props.children) ? props.children : [props.children]).map((child, childIndex) => (
-                                            <GentleSlide
-                                                key={childIndex}
-                                                appear={inView}
-                                                index={childIndex}>
-                                                {child}
-                                            </GentleSlide>
-                                        ))}
-                                    </Stack>
-                                </Grid>
-                            )}
-                        </Grid>
+                    <div className={cx(
+                        'grid xs:grid-cols-1 gap-8',
+                        Boolean(props.image) && 'md:grid-cols-2'
+                    )}>
+                        {props.image && (
+                            <div
+                                className={'relative h-[--height]'}
+                                style={{ '--height': `${props.imageContainerHeight}px` } as CSSProperties}>
+                                <Fade appear={inView} duration={1400}>
+                                    <div style={props.imageContainerStyles}>
+                                        {props.image}
+                                    </div>
+                                </Fade>
+                            </div>
+                        )}
+                        {props.children && (
+                            <div className={cx(
+                                'flex gap-8',
+                                props.direction === 'vertical' ? 'flex-col' : 'flex-col sm:flex-row'
+                            )}>
+                                {(Array.isArray(props.children) ? props.children : [props.children]).map((child, childIndex) => (
+                                    <GentleSlide
+                                        key={childIndex}
+                                        appear={inView}
+                                        index={childIndex}>
+                                        {child}
+                                    </GentleSlide>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </Stack>
             </div>

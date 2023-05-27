@@ -26,8 +26,8 @@ export const GlobePart = dynamic(() => import('../pages/landing/GlobeSection'));
 
 export default function LandingPageView() {
     return (
-        <Stack style={{ overflowX: 'hidden' }}>
-            <div style={{ marginTop: 2 * 8, marginBottom: 2 * 8 }}>
+        <Stack className="overflow-x-hidden">
+            <div className="my-2">
                 <Cover />
             </div>
             <DeveloperOnly>
@@ -80,19 +80,17 @@ export default function LandingPageView() {
             </StepContent>
             <GlobeSection />
             <Divider />
-            <SectionCenter narrow style={{ backgroundColor: 'var(--joy-palette-background-surface)' }}>
-                <Stack
-                    spacing={6}
-                    alignItems="center">
+            <SectionCenter narrow className="bg-[--joy-palette-background-surface]">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-24 items-center justify-center py-4">
                     <DataPart value="8" subtitle="Integrations" />
                     <DataPart value="500+" subtitle="Automations per day" />
                     <DataPart value="2000+" subtitle="Supported devices" />
-                </Stack>
+                </div>
             </SectionCenter>
             <Divider />
             <NewsletterSection />
             <Container>
-                <div style={{ paddingBottom: 8 * 8 }}>
+                <div className="pb-8">
                     <CtaSection />
                 </div>
             </Container>

@@ -1,24 +1,24 @@
-import { isAbsoluteUrl } from 'next/dist/shared/lib/utils';
+import { cx } from 'classix';
+import type { Url } from 'next/dist/shared/lib/router/router';
+import { isAbsoluteUrl } from '@signalco/js';
 import NextLink from 'next/link';
-import { PropsWithChildren } from 'react';
+import type { AnchorHTMLAttributes } from 'react';
 
-export type LinkProps = PropsWithChildren<{
-    href: string;
+export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+    href: string | Url;
     className?: string | undefined;
     "aria-label"?: string | undefined;
-}>;
+};
 
-export function Link({ children, className, href, ...rest }: LinkProps) {
+export function Link({ className, href, ...rest }: LinkProps) {
     return (
         <NextLink
             href={href}
-            className={className}
+            className={cx('no-underline color-[var(--joy-palette-text-secondary)]', className)}
             target={isAbsoluteUrl(href) ? '_blank' : '_self'}
             passHref
             prefetch={false}
-            style={{ textDecoration: 'none', color: 'var(--joy-palette-text-secondary)' }}
             {...rest}>
-            {children}
         </NextLink>
     );
 }
