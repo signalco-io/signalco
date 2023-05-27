@@ -1,5 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
-import Link from 'next/link';
+import { Suspense, useEffect } from 'react';
 import { bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import { Select } from '@signalco/ui-icons';
 import { Popper, Row, Button } from '@signalco/ui';
@@ -30,6 +29,10 @@ function DashboardSelector(props: IDashboardSelectorProps) {
         }
     }, [selectedId, dashboards, setSelectedId]);
 
+    const handleDashboardSelection = (id: string) => {
+        setSelectedId(id);
+    }
+
     console.debug('Rendering DashboardSelector');
 
     return (
@@ -53,11 +56,13 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                 {(favoriteDashboards?.length ?? 0) > 0 && (
                     <Row>
                         {favoriteDashboards?.map(fd => (
-                            <Link key={fd.id} href={`#dashboard=${fd.id}`} passHref>
-                                <Button variant="plain" sx={{ color: 'var(--joy-palette-neutral-400)' }}>
-                                    {fd.name}
-                                </Button>
-                            </Link>
+                            <Button
+                                key={fd.id}
+                                variant="plain"
+                                sx={{ color: 'var(--joy-palette-neutral-400)' }}
+                                onClick={() => handleDashboardSelection(fd.id)}>
+                                {fd.name}
+                            </Button>
                         ))}
                     </Row>
                 )}
