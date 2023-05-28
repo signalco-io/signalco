@@ -671,8 +671,8 @@ importers:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.24)
       css-loader:
-        specifier: 6.7.4
-        version: 6.7.4(webpack@5.84.1)
+        specifier: 6.8.1
+        version: 6.8.1(webpack@5.84.1)
       postcss:
         specifier: 8.4.24
         version: 8.4.24
@@ -5422,7 +5422,7 @@ packages:
       babel-plugin-named-exports-order: 0.0.2
       browser-assert: 1.2.1
       case-sensitive-paths-webpack-plugin: 2.4.0
-      css-loader: 6.7.4(webpack@5.84.1)
+      css-loader: 6.8.1(webpack@5.84.1)
       express: 4.18.2
       fork-ts-checker-webpack-plugin: 7.3.0(typescript@5.0.4)(webpack@5.84.1)
       fs-extra: 11.1.1
@@ -5807,7 +5807,7 @@ packages:
       '@storybook/preview-api': 7.0.18
       '@storybook/react': 7.0.18(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.4)
       '@types/node': 16.18.23
-      css-loader: 6.7.4(webpack@5.84.1)
+      css-loader: 6.8.1(webpack@5.84.1)
       find-up: 5.0.0
       fs-extra: 11.1.1
       image-size: 1.0.2
@@ -8318,8 +8318,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /css-loader@6.7.4(webpack@5.84.1):
-    resolution: {integrity: sha512-0Y5uHtK5BswfaGJ+jrO+4pPg1msFBc0pwPIE1VqfpmVn6YbDfYfXMj8rfd7nt+4goAhJueO+H/I40VWJfcP1mQ==}
+  /css-loader@6.8.1(webpack@5.84.1):
+    resolution: {integrity: sha512-xDAXtEVGlD0gJ07iclwWVkLoZOpEvAWaSyf6W18S2pOC//K8+qUDIx8IIT3D+HjnmkJPQeesOPv5aiUaJsCM2g==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       webpack: ^5.0.0
@@ -8327,7 +8327,7 @@ packages:
       icss-utils: 5.1.0(postcss@8.4.24)
       postcss: 8.4.24
       postcss-modules-extract-imports: 3.0.0(postcss@8.4.24)
-      postcss-modules-local-by-default: 4.0.1(postcss@8.4.24)
+      postcss-modules-local-by-default: 4.0.3(postcss@8.4.24)
       postcss-modules-scope: 3.0.0(postcss@8.4.24)
       postcss-modules-values: 4.0.0(postcss@8.4.24)
       postcss-value-parser: 4.2.0
@@ -12450,8 +12450,8 @@ packages:
       postcss: 8.4.24
     dev: true
 
-  /postcss-modules-local-by-default@4.0.1(postcss@8.4.24):
-    resolution: {integrity: sha512-Zr/dB+IlXaEqdoslLHhhqecwj73vc3rDmOpsBNBEVk7P2aqAlz+Ijy0fFbU5Ie9PtreDOIgGa9MsLWakVGl+fA==}
+  /postcss-modules-local-by-default@4.0.3(postcss@8.4.24):
+    resolution: {integrity: sha512-2/u2zraspoACtrbFRnTijMiQtb4GW4BvatjaG/bCjYQo8kLTdevCUlwuBHx2sCnSyrI3x3qj4ZK1j5LQBgzmwA==}
     engines: {node: ^10 || ^12 || >= 14}
     peerDependencies:
       postcss: ^8.1.0
