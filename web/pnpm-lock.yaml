@@ -18,8 +18,8 @@ importers:
         specifier: 2.1.0
         version: 2.1.0(react-dom@18.2.0)(react@18.2.0)
       '@auth0/auth0-spa-js':
-        specifier: 2.0.5
-        version: 2.0.5
+        specifier: 2.0.6
+        version: 2.0.6
       '@date-io/date-fns':
         specifier: 2.16.0
         version: 2.16.0(date-fns@2.30.0)
@@ -1135,13 +1135,13 @@ packages:
       react: ^16.11.0 || ^17 || ^18
       react-dom: ^16.11.0 || ^17 || ^18
     dependencies:
-      '@auth0/auth0-spa-js': 2.0.5
+      '@auth0/auth0-spa-js': 2.0.6
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@auth0/auth0-spa-js@2.0.5:
-    resolution: {integrity: sha512-3yuyQkeg5xVlpU5iNvYpdUV/2gkJSD0ejWQbD5M9CeHbgS0064OOx86T6ysDlq8acLKZQ/Tk6A9yEQ7qcMFevQ==}
+  /@auth0/auth0-spa-js@2.0.6:
+    resolution: {integrity: sha512-uZfYZEPi6jZCsixMQWpsaET9fUfTFDct0Bi/zR49Sw/y843WkMJyWDmt9XIae12/JKG+ehZNYYSI+/739jaa9Q==}
     dev: false
 
   /@aw-web-design/x-default-browser@1.4.88:
