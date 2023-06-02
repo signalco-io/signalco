@@ -26,6 +26,6 @@
         "@pulumi/cloudflare": "5.2.1",
         "@pulumi/command": "0.7.2",
         "@pulumi/docker": "4.2.3",
-        "@pulumi/pulumi": "3.68.0"
+        "@pulumi/pulumi": "3.69.0"
     }
 }
