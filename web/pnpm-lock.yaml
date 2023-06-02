@@ -108,8 +108,8 @@ importers:
         specifier: 2.30.0
         version: 2.30.0
       material-ui-popup-state:
-        specifier: 5.0.8
-        version: 5.0.8(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 5.0.9
+        version: 5.0.9(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0)
       monaco-editor:
         specifier: 0.38.0
         version: 0.38.0
@@ -1011,8 +1011,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-icons
       material-ui-popup-state:
-        specifier: 5.0.8
-        version: 5.0.8(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 5.0.9
+        version: 5.0.9(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0)
       next:
         specifier: 13.4.4
         version: 13.4.4(@babel/core@7.22.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.62.1)
@@ -4347,10 +4347,6 @@ packages:
       react-is: 18.2.0
     dev: false
 
-  /@mui/core-downloads-tracker@5.13.2:
-    resolution: {integrity: sha512-aOLCXMCySMFL2WmUhnz+DjF84AoFVu8rn35OsL759HXOZMz8zhEwVf5w/xxkWx7DycM2KXDTgAvYW48nTfqTLA==}
-    dev: false
-
   /@mui/core-downloads-tracker@5.13.3:
     resolution: {integrity: sha512-w4//nRIi9fiMow/MmhkForOezd8nc229EpSZZ5DzwpJNOmAXwypFTapOUVAGTUQiTJyeZXUNbQqYuUIrIs2nbg==}
     dev: false
@@ -4410,7 +4406,7 @@ packages:
       '@emotion/react': 11.11.0(@types/react@18.2.8)(react@18.2.0)
       '@emotion/styled': 11.11.0(@emotion/react@11.11.0)(@types/react@18.2.8)(react@18.2.0)
       '@mui/base': 5.0.0-alpha.124(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0)
-      '@mui/core-downloads-tracker': 5.13.2
+      '@mui/core-downloads-tracker': 5.13.3
       '@mui/system': 5.13.2(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.8)(react@18.2.0)
       '@mui/types': 7.2.4(@types/react@18.2.8)
       '@mui/utils': 5.13.1(react@18.2.0)
@@ -11272,8 +11268,8 @@ packages:
       react: 18.2.0
     dev: true
 
-  /material-ui-popup-state@5.0.8(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-5ptEBQVd68QJpm0PCIYBatpX/F5QIFS+EH0lPpGqjl6HPD6uIHPt7laHbiqWDEm/6Wy5YvWF69ny+3jHXmHizQ==}
+  /material-ui-popup-state@5.0.9(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-NjTm7zdEzOY1CHu+a2to6h1Jr1Y8ra24rZ2JF5teO/+g0wTNiKWwNT04v3oW3McHsLcTfG46yYcqf1iznjst8Q==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
