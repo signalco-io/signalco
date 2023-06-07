@@ -21,8 +21,8 @@ dependencies:
     specifier: 0.7.2
     version: 0.7.2
   '@pulumi/docker':
-    specifier: 4.2.3
-    version: 4.2.3
+    specifier: 4.2.4
+    version: 4.2.4
   '@pulumi/pulumi':
     specifier: 3.69.0
     version: 3.69.0
@@ -399,8 +399,8 @@ packages:
       - supports-color
     dev: false
 
-  /@pulumi/docker@4.2.3:
-    resolution: {integrity: sha512-PbMOSzSpfL5ONz7pQz/+malcNIZPTc9Pcbt1dKnmHfQP/7nsOgG7ad0eF6Jr+ghazRn77zGMElf6vAR44hYvRg==}
+  /@pulumi/docker@4.2.4:
+    resolution: {integrity: sha512-nxuZR658NZRh1ObmjMa+QoByBYeuUBy0rjvmvqAhvbd0r1orBcZHYiHG6YSMTwK+fQ5J2As6Esekuu6BY2HV+Q==}
     requiresBuild: true
     dependencies:
       '@pulumi/pulumi': 3.69.0
