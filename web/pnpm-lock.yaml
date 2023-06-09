@@ -783,8 +783,8 @@ importers:
         specifier: 3.3.2
         version: 3.3.2
       tailwindcss-animate:
-        specifier: 1.0.5
-        version: 1.0.5(tailwindcss@3.3.2)
+        specifier: 1.0.6
+        version: 1.0.6(tailwindcss@3.3.2)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.2
@@ -973,8 +973,8 @@ importers:
         specifier: 3.3.2
         version: 3.3.2
       tailwindcss-animate:
-        specifier: 1.0.5
-        version: 1.0.5(tailwindcss@3.3.2)
+        specifier: 1.0.6
+        version: 1.0.6(tailwindcss@3.3.2)
 
   packages/tsconfig: {}
 
@@ -1032,8 +1032,8 @@ importers:
         specifier: 3.3.2
         version: 3.3.2
       tailwindcss-animate:
-        specifier: 1.0.5
-        version: 1.0.5(tailwindcss@3.3.2)
+        specifier: 1.0.6
+        version: 1.0.6(tailwindcss@3.3.2)
     devDependencies:
       '@signalco/tailwindcss-config-signalco':
         specifier: workspace:*
@@ -14189,8 +14189,8 @@ packages:
       tslib: 2.5.0
     dev: false
 
-  /tailwindcss-animate@1.0.5(tailwindcss@3.3.2):
-    resolution: {integrity: sha512-UU3qrOJ4lFQABY+MVADmBm+0KW3xZyhMdRvejwtXqYOL7YjHYxmuREFAZdmVG5LPe5E9CAst846SLC4j5I3dcw==}
+  /tailwindcss-animate@1.0.6(tailwindcss@3.3.2):
+    resolution: {integrity: sha512-4WigSGMvbl3gCCact62ZvOngA+PRqhAn7si3TQ3/ZuPuQZcIEtVap+ENSXbzWhpojKB8CpvnIsrwBu8/RnHtuw==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
