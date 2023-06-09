@@ -30,7 +30,7 @@
     },
     "dependencies": {
         "@signalco/js": "workspace:*",
-        "@babel/core": "7.22.1",
+        "@babel/core": "7.22.5",
         "@emotion/cache": "11.11.0",
         "@emotion/react": "11.11.0",
         "@emotion/server": "11.11.0",
@@ -49,7 +49,7 @@
         "tailwindcss-animate": "1.0.5"
     },
     "peerDependencies": {
-        "@babel/core": "7.22.1",
+        "@babel/core": "7.22.5",
         "@signalco/ui-icons": "workspace:*",
         "next": "13.4.4",
         "react": "18.2.0",
