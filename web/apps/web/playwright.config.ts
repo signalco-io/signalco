@@ -10,6 +10,7 @@ const config: PlaywrightTestConfig = {
     timeout: 30 * 1000,
     testDir: path.join(__dirname, 'e2e'),
     outputDir: 'test-results/',
+    fullyParallel: true,
     webServer: {
         command: 'pnpm start',
         url: baseURL,
@@ -20,7 +21,7 @@ const config: PlaywrightTestConfig = {
         viewport: { width: 1280, height: 720 },
         baseURL,
         trace: 'retry-with-trace',
-        video: 'off'
+        video: 'off',
     },
     projects: [
         {
