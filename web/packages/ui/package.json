@@ -32,7 +32,7 @@
         "@signalco/js": "workspace:*",
         "@babel/core": "7.22.5",
         "@emotion/cache": "11.11.0",
-        "@emotion/react": "11.11.0",
+        "@emotion/react": "11.11.1",
         "@emotion/server": "11.11.0",
         "@emotion/styled": "11.11.0",
         "@mui/base": "5.0.0-beta.4",
