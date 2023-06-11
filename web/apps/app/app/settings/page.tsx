@@ -265,7 +265,6 @@ function SettingsPane() {
                         <Checkbox
                             key={category.id}
                             label={category.label}
-                            sx={{ p: 2 }}
                             checked={selectedCategory.id === category.id}
                             onChange={(e) => e.target.checked && setSelectedCategory(category)}
                             disableIcon />

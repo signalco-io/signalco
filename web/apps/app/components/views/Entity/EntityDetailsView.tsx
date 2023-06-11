@@ -79,10 +79,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                                 <Icon />
                             </Avatar>
                             <EditableInput
-                                sx={{
-                                    fontWeight: 300,
-                                    fontSize: { xs: 18, sm: 24 }
-                                }}
+                                className="font-light xs:text-lg sm:text-2xl"
                                 text={entity?.alias || ''}
                                 noWrap
                                 onChange={handleRename} />

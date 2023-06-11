@@ -5,7 +5,6 @@ import { SelectItems } from '../SelectItems';
 import { Checkbox } from '../Checkbox';
 import { Typography } from '../Typography';
 import { Button } from '../Button';
-import { Box } from '@mui/system';
 import { Row } from '../Row';
 import { Stack } from '../Stack';
 import { Grow } from '../Grow';
@@ -35,7 +34,7 @@ function FilterItem({ item, checked, onToggle }: { item: FilterListItem, checked
             key={item.id}
             label={(
                 <Row style={{ padding: 12 }}>
-                    <div className='flex-grod-1'>
+                    <div className='grow'>
                         <Typography>{item.label}</Typography>
                     </div>
                     <Grow appear={checked.indexOf(item.id) >= 0}>
@@ -136,7 +135,7 @@ export function FilterList(props: FilterListProps) {
 
     return (
         <Stack>
-            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+            <div className='md:hidden'>
                 <SelectItems
                     items={items.map(i => ({ value: i.id, label: i.label }))}
                     value={checked}
@@ -149,8 +148,8 @@ export function FilterList(props: FilterListProps) {
                             handleToggle(changedValue);
                         });
                     }} />
-            </Box>
-            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            </div>
+            <div className='hidden md:block'>
                 <Typography level="h5" gutterBottom>{header}</Typography>
                 <ItemsShowMore
                     truncate={truncate}
@@ -164,7 +163,7 @@ export function FilterList(props: FilterListProps) {
                 {(checked.length > 1 && (
                     <Button fullWidth startDecorator={<Close />} variant="plain" size="sm" onClick={handleClearSelection}>Clear selection</Button>
                 ))}
-            </Box>
+            </div>
         </Stack>
     );
 }

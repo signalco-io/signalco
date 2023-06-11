@@ -1,10 +1,10 @@
-import { Typography } from '@mui/joy';
-import React from 'react';
-import {Row} from '../Row';
+import type { ReactElement } from 'react';
+import { Typography } from '../Typography';
+import { Row } from '../Row';
 
 export type GalleryGridFilterProps = {
     header: string;
-    filters?: React.ReactElement;
+    filters?: ReactElement;
 }
 
 export function GalleryGridFilter(props: GalleryGridFilterProps) {

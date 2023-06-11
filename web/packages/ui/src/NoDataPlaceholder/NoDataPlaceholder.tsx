@@ -1,4 +1,4 @@
-import { Typography } from '@mui/joy';
+import { Typography } from '../Typography';
 
 export type NoDataPlaceholderProps = {
   content: React.ReactNode | string;
