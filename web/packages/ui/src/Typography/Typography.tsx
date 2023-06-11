@@ -21,6 +21,7 @@ export type TypographyProps = PropsWithChildren<{
     opacity?: number;
     color?: ColorVariants;
     gutterBottom?: boolean;
+    className?: string;
 }>;
 
 function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, secondary, tertiary, color, noWrap } : TypographyProps) {
@@ -48,7 +49,7 @@ function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity
 }
 
 export const Typography = forwardRef<HTMLDivElement, TypographyProps>(function Typography(props: TypographyProps, ref?: ForwardedRef<HTMLDivElement>) {
-    const { level, component, children } = props;
+    const { level, component, children, ...rest } = props;
     const styles: CSSProperties = {
         fontFamily: 'var(--joy-fontFamily-body)',
         fontSize: level?.startsWith('h') 
@@ -59,5 +60,5 @@ export const Typography = forwardRef<HTMLDivElement, TypographyProps>(function T
 
     populateTypographyStyles(styles, props);
 
-    return createElement(component ?? (level?.startsWith('h') ? level : 'p'), { children, style: styles, ref: ref });
+    return createElement(component ?? (level?.startsWith('h') ? level : 'p'), { children, style: styles, ref: ref, ...rest });
 });

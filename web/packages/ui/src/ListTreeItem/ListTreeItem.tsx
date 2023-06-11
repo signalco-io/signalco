@@ -1,8 +1,10 @@
 import { PropsWithChildren, ReactElement, useState } from 'react';
 import { ExpandDown } from '@signalco/ui-icons';
-import { ListItem, IconButton } from '@mui/joy';
+import { ListItem } from '@mui/joy';
+import { IconButton } from '../IconButton';
 import { Tooltip } from '../Tooltip';
 import { List, ListItemButton } from '../List';
+import { cx } from 'classix';
 
 export type ListTreeItemProps = PropsWithChildren<{
     label?: ReactElement | string;
@@ -32,16 +34,8 @@ export function ListTreeItem(props: ListTreeItemProps) {
         <>
             <ListItem nested startAction={children && (
                 <Tooltip title="Toggle">
-                    <IconButton onClick={handleOpenClick} className={open ? 'expanded' : ''} size="sm" sx={{
-                        ['& > *']: {
-                            transition: '0.2s',
-                            transform: 'rotate(-90deg)',
-                        },
-                        ['&.expanded > *']: {
-                            transform: 'rotate(0deg)',
-                        },
-                    }}>
-                        <ExpandDown />
+                    <IconButton onClick={handleOpenClick} className={"transition-transform"} size="sm">
+                        <ExpandDown className={cx(open && 'rotate-90')} />
                     </IconButton>
                 </Tooltip>
             )}>

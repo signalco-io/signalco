@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Close, Save, Edit } from '@signalco/ui-icons';
-import { Input, IconButton, Theme, Typography } from '@mui/joy';
-import { SystemStyleObject, Box } from '@mui/system';
+import { Input } from '@mui/joy';
+import { IconButton } from '../IconButton';
+import { Typography } from '../Typography';
 import { Row } from '../Row';
 
 export type EditableInputProps = {
     text: string,
     onChange: (text: string) => void
-    sx?: SystemStyleObject<Theme>
-    sxInput?: SystemStyleObject<Theme>,
     noWrap?: boolean
+    className?: string;
 }
 
-export function EditableInput(props: EditableInputProps) {
-    const {
-        text,
-        sx,
-        sxInput,
-        onChange,
-        noWrap
-    } = props;
-
+export function EditableInput({
+    text,
+    onChange,
+    noWrap,
+    className
+}: EditableInputProps) {
     const [isEditing, setIsEditing] = useState(false);
     const [editingText, setEditingText] = useState(text);
     useEffect(() => {
@@ -45,13 +42,8 @@ export function EditableInput(props: EditableInputProps) {
 
     if (isEditing) {
         return (
-            <Row spacing={1}>
+            <Row spacing={1} className={className}>
                 <Input
-                    sx={{
-                        '& input': {
-                            ...(sxInput || sx)
-                        }
-                    }}
                     value={editingText}
                     autoFocus
                     onChange={(e) => setEditingText(e.target.value)}
@@ -73,13 +65,12 @@ export function EditableInput(props: EditableInputProps) {
         );
     } else {
         return (
-            <Box sx={{ py: '4px', cursor: 'pointer' }} onClick={() => setIsEditing(true)}>
-                <Typography sx={{
-                    '& > .editIndicator': { visibility: 'hidden' },
-                    '&:hover': { '& > .editIndicator': { visibility: 'visible' } },
-                    ...sx
-                }} noWrap={noWrap}>{text}<span className="editIndicator"><Edit /></span></Typography>
-            </Box>
+            <div className="py-1 cursor-pointer" onClick={() => setIsEditing(true)}>
+                <Typography className="group" noWrap={noWrap}>
+                    {text}
+                    <span className="editIndicator invisible group-hover:visible"><Edit /></span>
+                </Typography>
+            </div>
         )
     }
 }

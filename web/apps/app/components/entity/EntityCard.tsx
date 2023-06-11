@@ -32,7 +32,7 @@ export default function EntityCard({ entity, spread, selectable, selected, onSel
 
     return (
         <Row spacing={1}>
-            {selectable && <Checkbox checked={selected ?? false} onChange={onSelection} sx={{ ml: 1 }} />}
+            {selectable && <Checkbox checked={selected ?? false} onChange={onSelection} />}
             <Link href={`${KnownPages.Entities}/${entity.id}`} style={{ flexGrow: 1 }}>
                 <Card sx={{ height: '100%', p: spread ? 0 : 1 }}>
                     <Container

@@ -1,4 +1,4 @@
-import { IconButton } from '@mui/joy';
+import { IconButton } from '../IconButton';
 import { Card } from "../Card";
 import { PropsWithChildren, useState } from 'react';
 import type { MouseEvent } from 'react';
@@ -9,7 +9,7 @@ import {Row} from '../Row';
 export type AccordionProps = PropsWithChildren<{
     open?: boolean;
     disabled?: boolean;
-    onChange?: (e: MouseEvent<HTMLAnchorElement>, expanded: boolean) => void,
+    onChange?: (e: MouseEvent<HTMLButtonElement>, expanded: boolean) => void,
     unmountOnExit?: boolean;
     className?: string | undefined;
 }>;
@@ -17,7 +17,7 @@ export type AccordionProps = PropsWithChildren<{
 export function Accordion({ children, open, disabled, onChange, unmountOnExit, className }: AccordionProps) {
     const [isOpen, setIsOpen] = useState(open ?? false);
 
-    const handleOpen = (e: MouseEvent<HTMLAnchorElement>) => {
+    const handleOpen = (e: MouseEvent<HTMLButtonElement>) => {
         if (typeof open !== 'undefined' && typeof onChange !== 'undefined') {
             onChange(e, !open);
         } else if (typeof open === 'undefined') {
