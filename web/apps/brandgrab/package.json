@@ -40,7 +40,7 @@
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/color": "3.0.3",
-        "@types/node": "18.16.17",
+        "@types/node": "18.16.18",
         "@types/react": "18.2.12",
         "@types/react-dom": "18.2.5",
         "@types/react-motion": "0.0.34",
