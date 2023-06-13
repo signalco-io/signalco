@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="chromium.linux-x64" Version="2022.6.4" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
-    <PackageReference Include="Microsoft.Playwright" Version="1.34.0" />
+    <PackageReference Include="Microsoft.Playwright" Version="1.35.0" />
   </ItemGroup>
 
 </Project>
