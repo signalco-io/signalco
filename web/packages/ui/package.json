@@ -24,7 +24,7 @@
         "postcss": "8.4.24",
         "postcss-preset-env": "8.4.2",
         "rimraf": "5.0.1",
-        "sass": "1.63.3",
+        "sass": "1.63.4",
         "tsup": "6.6.2",
         "typescript": "5.1.3"
     },
