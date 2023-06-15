@@ -158,7 +158,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.3
-        version: 4.7.3(playwright-core@1.35.0)
+        version: 4.7.3(playwright-core@1.35.1)
       '@babel/core':
         specifier: 7.22.5
         version: 7.22.5
@@ -166,8 +166,8 @@ importers:
         specifier: 13.4.5
         version: 13.4.5
       '@playwright/test':
-        specifier: 1.35.0
-        version: 1.35.0
+        specifier: 1.35.1
+        version: 1.35.1
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -309,7 +309,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.3
-        version: 4.7.3(playwright-core@1.35.0)
+        version: 4.7.3(playwright-core@1.35.1)
       '@babel/core':
         specifier: 7.22.5
         version: 7.22.5
@@ -317,8 +317,8 @@ importers:
         specifier: 13.4.5
         version: 13.4.5
       '@playwright/test':
-        specifier: 1.35.0
-        version: 1.35.0
+        specifier: 1.35.1
+        version: 1.35.1
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -421,7 +421,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.3
-        version: 4.7.3(playwright-core@1.35.0)
+        version: 4.7.3(playwright-core@1.35.1)
       '@babel/core':
         specifier: 7.22.5
         version: 7.22.5
@@ -429,8 +429,8 @@ importers:
         specifier: 13.4.5
         version: 13.4.5
       '@playwright/test':
-        specifier: 1.35.0
-        version: 1.35.0
+        specifier: 1.35.1
+        version: 1.35.1
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -549,7 +549,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.3
-        version: 4.7.3(playwright-core@1.35.0)
+        version: 4.7.3(playwright-core@1.35.1)
       '@babel/core':
         specifier: 7.22.5
         version: 7.22.5
@@ -557,8 +557,8 @@ importers:
         specifier: 13.4.5
         version: 13.4.5
       '@playwright/test':
-        specifier: 1.35.0
-        version: 1.35.0
+        specifier: 1.35.1
+        version: 1.35.1
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -776,7 +776,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.3
-        version: 4.7.3(playwright-core@1.35.0)
+        version: 4.7.3(playwright-core@1.35.1)
       '@babel/core':
         specifier: 7.22.5
         version: 7.22.5
@@ -784,8 +784,8 @@ importers:
         specifier: 13.4.5
         version: 13.4.5
       '@playwright/test':
-        specifier: 1.35.0
-        version: 1.35.0
+        specifier: 1.35.1
+        version: 1.35.1
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -1136,13 +1136,13 @@ packages:
       default-browser-id: 3.0.0
     dev: true
 
-  /@axe-core/playwright@4.7.3(playwright-core@1.35.0):
+  /@axe-core/playwright@4.7.3(playwright-core@1.35.1):
     resolution: {integrity: sha512-v2PRgAyGvop7bamrTpNJtc5b1R7giAPnMzZXrS/VDZBCY5+uwVYtCNgDvBsqp5P1QMZxUMoBN+CERJUTMjFN0A==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
     dependencies:
       axe-core: 4.7.0
-      playwright-core: 1.35.0
+      playwright-core: 1.35.1
     dev: true
 
   /@babel/code-frame@7.22.5:
@@ -4929,13 +4929,13 @@ packages:
       tslib: 2.5.0
     dev: false
 
-  /@playwright/test@1.35.0:
-    resolution: {integrity: sha512-6qXdd5edCBynOwsz1YcNfgX8tNWeuS9fxy5o59D0rvHXxRtjXRebB4gE4vFVfEMXl/z8zTnAzfOs7aQDEs8G4Q==}
+  /@playwright/test@1.35.1:
+    resolution: {integrity: sha512-b5YoFe6J9exsMYg0pQAobNDR85T1nLumUYgUTtKm4d21iX2L7WqKq9dW8NGJ+2vX0etZd+Y7UeuqsxDXm9+5ZA==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
       '@types/node': 18.16.18
-      playwright-core: 1.35.0
+      playwright-core: 1.35.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -12178,8 +12178,8 @@ packages:
       find-up: 5.0.0
     dev: true
 
-  /playwright-core@1.35.0:
-    resolution: {integrity: sha512-muMXyPmIx/2DPrCHOD1H1ePT01o7OdKxKj2ebmCAYvqhUy+Y1bpal7B0rdoxros7YrXI294JT/DWw2LqyiqTPA==}
+  /playwright-core@1.35.1:
+    resolution: {integrity: sha512-pNXb6CQ7OqmGDRspEjlxE49w+4YtR6a3X6mT1hZXeJHWmsEz7SunmvZeiG/+y1yyMZdHnnn73WKYdtV1er0Xyg==}
     engines: {node: '>=16'}
     hasBin: true
     dev: true
