@@ -23,7 +23,7 @@
         "@checkly/pulumi": "1.1.4",
         "@pulumi/aws": "5.41.0",
         "@pulumi/azure-native": "1.103.0",
-        "@pulumi/cloudflare": "5.4.0",
+        "@pulumi/cloudflare": "5.3.0",
         "@pulumi/command": "0.7.2",
         "@pulumi/docker": "4.2.4",
         "@pulumi/pulumi": "3.71.0"
