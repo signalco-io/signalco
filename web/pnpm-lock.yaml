@@ -750,8 +750,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       octokit:
-        specifier: 2.0.19
-        version: 2.0.19(encoding@0.1.13)
+        specifier: 2.0.22
+        version: 2.0.22(encoding@0.1.13)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -11806,8 +11806,8 @@ packages:
     resolution: {integrity: sha512-eJJDYkhJFFbBBAxeh8xW+weHlkI28n2ZdQV/J/DNfWfSKlGEf2xcfAbZTv3riEXHAhL9SVOTs2pRmXiSTf78xg==}
     dev: true
 
-  /octokit@2.0.19(encoding@0.1.13):
-    resolution: {integrity: sha512-hSloK4MK78QGbAuBrtIir0bsxMoRVZE5CkwKSbSRH9lqv2hx9EwhCxtPqEF+BtHqLXkXdfUaGkJMyMBotYno+A==}
+  /octokit@2.0.22(encoding@0.1.13):
+    resolution: {integrity: sha512-QBgGSB+odZ5o3ysLy5d2Qvwwx5+GU1zLVgkgpy3o4XocmrD/YInaIVUCA6nR8jUmdf5lgyyiYPyxRt0UrNwqMQ==}
     engines: {node: '>= 14'}
     dependencies:
       '@octokit/app': 13.1.5(encoding@0.1.13)
