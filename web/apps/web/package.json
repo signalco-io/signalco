@@ -26,7 +26,7 @@
         "@signalco/ui-icons": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "autoprefixer": "10.4.14",
-        "classix": "2.1.32",
+        "classix": "2.1.33",
         "cobe": "0.6.3",
         "encoding": "0.1.13",
         "next": "13.4.6",
