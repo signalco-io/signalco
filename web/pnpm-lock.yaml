@@ -1042,8 +1042,8 @@ importers:
         specifier: 2.1.33
         version: 2.1.33
       glob:
-        specifier: 10.2.7
-        version: 10.2.7
+        specifier: 10.3.0
+        version: 10.3.0
       postcss:
         specifier: 8.4.24
         version: 8.4.24
@@ -10128,6 +10128,18 @@ packages:
 
   /glob@10.2.7:
     resolution: {integrity: sha512-jTKehsravOJo8IJxUGfZILnkvVJM/MOfHRs8QcXolVef2zNI9Tqyy5+SeuOAZd3upViEZQLyFpQhYiHLrMUNmA==}
+    engines: {node: '>=16 || 14 >=14.17'}
+    hasBin: true
+    dependencies:
+      foreground-child: 3.1.1
+      jackspeak: 2.0.3
+      minimatch: 9.0.1
+      minipass: 5.0.0
+      path-scurry: 1.7.0
+    dev: true
+
+  /glob@10.3.0:
+    resolution: {integrity: sha512-AQ1/SB9HH0yCx1jXAT4vmCbTOPe5RQ+kCurjbel5xSCGhebumUv+GJZfa1rEqor3XIViqwSEmlkZCQD43RWrBg==}
     engines: {node: '>=16 || 14 >=14.17'}
     hasBin: true
     dependencies:
