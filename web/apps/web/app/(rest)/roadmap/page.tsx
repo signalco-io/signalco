@@ -11,6 +11,8 @@ export type RoadmapItem = {
     href?: string | undefined;
 }
 
+export const revalidate = 3600; // revalidate every hour
+
 async function getRoadmapItemsAsync() {
     const octokit = new Octokit({ auth: process.env.GITHUB_PAT_TOKEN });
 
