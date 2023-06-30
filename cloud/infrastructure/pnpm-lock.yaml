@@ -12,8 +12,8 @@ dependencies:
     specifier: 5.41.0
     version: 5.41.0
   '@pulumi/azure-native':
-    specifier: 1.103.0
-    version: 1.103.0
+    specifier: 2.0.0-beta.2
+    version: 2.0.0-beta.2
   '@pulumi/cloudflare':
     specifier: 5.5.0
     version: 5.5.0
@@ -372,8 +372,8 @@ packages:
       - supports-color
     dev: false
 
-  /@pulumi/azure-native@1.103.0:
-    resolution: {integrity: sha512-oq3lveFcZxHheZzThVG+Uq/mrKgkmb34x/mEd+daNLvg2972CCxfr5EFJjW8hndzvuGsxmFezSZ0HrRiXGS1cQ==}
+  /@pulumi/azure-native@2.0.0-beta.2:
+    resolution: {integrity: sha512-MIP1q7yB+DGGauk3D4yj2Az0z7Nn1kenBFOSS5TewnxufhgeJ/rNv1mt7S5421nBAj2/U7NCEf/jTu9yARIQCQ==}
     requiresBuild: true
     dependencies:
       '@pulumi/pulumi': 3.74.0
@@ -1055,7 +1055,7 @@ packages:
       eslint-import-resolver-node: 0.3.7
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@5.60.1)(eslint-import-resolver-node@0.3.7)(eslint@8.43.0)
       has: 1.0.3
-      is-core-module: 2.12.0
+      is-core-module: 2.12.1
       is-glob: 4.0.3
       minimatch: 3.1.2
       object.values: 1.1.6
@@ -1565,12 +1565,6 @@ packages:
   /is-callable@1.2.7:
     resolution: {integrity: sha512-1BC0BVFhS/p0qtw6enp8e+8OD0UrK0oFLztSjNzhcKA3WDuJxxAPXzPuPtKkjEY9UUoEWlX/8fgKeu2S8i9JTA==}
     engines: {node: '>= 0.4'}
-
-  /is-core-module@2.12.0:
-    resolution: {integrity: sha512-RECHCBCd/viahWmwj6enj19sKbHfJrddi/6cBDsNTKbNq0f7VeaUkBo60BqzvPqo/W54ChS62Z5qyun7cfOMqQ==}
-    dependencies:
-      has: 1.0.3
-    dev: true
 
   /is-core-module@2.12.1:
     resolution: {integrity: sha512-Q4ZuBAe2FUsKtyQJoQHlvP8OvBERxO3jEmy1I7hcRXcJBGGHFh/aJBswbXuS9sgrDH2QUO8ilkwNPHvHMd8clg==}
