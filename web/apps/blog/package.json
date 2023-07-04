@@ -52,7 +52,7 @@
         "@types/react-motion": "0.0.34",
         "colorette": "2.0.20",
         "cross-env": "7.0.3",
-        "eslint": "8.43.0",
+        "eslint": "8.44.0",
         "next-sitemap": "4.1.8",
         "postcss": "8.4.24",
         "prop-types": "15.8.1",
