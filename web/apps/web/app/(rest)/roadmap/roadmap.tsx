@@ -1,5 +1,3 @@
-'use client';
-
 import { PropsWithChildren } from 'react';
 import { Up } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
@@ -11,8 +9,8 @@ import { Container } from '@signalco/ui/dist/Container';
 import { Card } from '@signalco/ui/dist/Card';
 import { Button } from '@signalco/ui/dist/Button';
 import { camelToSentenceCase, orderBy } from '@signalco/js';
+import { RoadmapItem, RoadmapItemStatus } from '../../api/github/[owner]/[repo]/issues/route';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
-import { RoadmapItemStatus, RoadmapItem } from './page';
 
 const statusOrderedList: RoadmapItemStatus[] = ['inProgress', 'inQueue', 'planned', 'triage', 'completed'];
 
@@ -53,12 +51,12 @@ function RoadmapItem({ item }: { item: RoadmapItem }) {
     );
 }
 
-export default function Roadmap({ items, error }: { items: RoadmapItem[] | undefined, error?: string | undefined }) {
+export default function Roadmap({ items, error, isLoading }: { items: RoadmapItem[] | undefined, error?: string | undefined, isLoading?: boolean | undefined }) {
     return (
         <Container maxWidth="sm">
             <Stack spacing={4}>
                 <PageCenterHeader header="Roadmap" subHeader="Help us by voting our roadmap." />
-                <Loadable error={error} isLoading={false} loadingLabel={'Loading items'}>
+                <Loadable error={error} isLoading={isLoading} loadingLabel={'Loading items'}>
                     <Stack spacing={2}>
                         {statusOrderedList.map(status => (
                             <Stack spacing={2} key={status}>
