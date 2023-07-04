@@ -8,7 +8,7 @@ export default function PageCenterHeader(props: { header: string; subHeader?: st
         <header className="py-4">
             <Stack alignItems="center" spacing={2}>
                 <Typography level={secondary ? 'h5' : 'h4'}>{header}</Typography>
-                {subHeader && <Typography textAlign="center" opacity={0.8}>{subHeader}</Typography>}
+                {subHeader && <Typography className="text-center opacity-80">{subHeader}</Typography>}
             </Stack>
         </header>
     );
