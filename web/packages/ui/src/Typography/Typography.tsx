@@ -24,7 +24,7 @@ export type TypographyProps = PropsWithChildren<{
     className?: string;
 }>;
 
-function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, secondary, tertiary, color, noWrap } : TypographyProps) {
+function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, secondary, tertiary, color, noWrap, ...rest }: TypographyProps) {
     if (extraThin) styles['fontWeight'] = 100;
     if (thin) styles['fontWeight'] = 300;
     if (semiBold) styles['fontWeight'] = 500;
@@ -46,19 +46,20 @@ function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity
         styles['textOverflow'] = 'ellipsis';
     }
     if (color) styles['color'] = `var(--joy-palette-${color}-plainColor)`;
+    return rest;
 }
 
 export const Typography = forwardRef<HTMLDivElement, TypographyProps>(function Typography(props: TypographyProps, ref?: ForwardedRef<HTMLDivElement>) {
     const { level, component, children, ...rest } = props;
     const styles: CSSProperties = {
         fontFamily: 'var(--joy-fontFamily-body)',
-        fontSize: level?.startsWith('h') 
-            ? `var(--joy-fontSize-xl${7 - (parseInt(level.substring(1)) || 0)})` 
+        fontSize: level?.startsWith('h')
+            ? `var(--joy-fontSize-xl${7 - (parseInt(level.substring(1)) || 0)})`
             : `var(--joy-fontSize-${level === 'body2' ? 'sm' : (level === 'body3' ? 'xs' : 'md')})`,
         margin: 0
     };
 
-    populateTypographyStyles(styles, props);
+    const restAfterCustomStyles = populateTypographyStyles(styles, rest);
 
-    return createElement(component ?? (level?.startsWith('h') ? level : 'p'), { children, style: styles, ref: ref, ...rest });
+    return createElement(component ?? (level?.startsWith('h') ? level : 'p'), { children, style: styles, ref: ref, ...restAfterCustomStyles });
 });
