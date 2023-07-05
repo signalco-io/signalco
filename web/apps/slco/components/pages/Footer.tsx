@@ -1,12 +1,9 @@
-'use client';
-
 import React from 'react';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Link } from '@signalco/ui/dist/Link';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Grid } from '@signalco/ui/dist/Grid';
 import { Container } from '@signalco/ui/dist/Container';
 import { Box } from '@signalco/ui/dist/Box';
 import { isDeveloper } from '../../src/services/EnvProvider';
@@ -40,18 +37,18 @@ export default function Footer() {
             <Container maxWidth="lg">
                 <footer style={{ padding: '64px 0 32px 0' }}>
                     <Stack spacing={4}>
-                        <Grid container direction="row" justifyContent="space-between" spacing={4}>
+                        <div className="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
                             {footerLinks.filter(i => isDeveloper ? true : !i.developerOnly).map(section => (
-                                <Grid key={section.header} xs={12} sm={6} md={3} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+                                <div key={section.header} className="sm:text-center md:text-left">
                                     <Typography level="h6" component="h2">{section.header}</Typography>
                                     <Stack spacing={1}>
                                         {section.links.filter(l => isDeveloper ? true : !l.developerOnly).map(link => (
                                             <Link key={link.name} href={link.href}>{link.name}</Link>
                                         ))}
                                     </Stack>
-                                </Grid>
+                                </div>
                             ))}
-                        </Grid>
+                        </div>
                         <Stack>
                             <Stack alignItems="center" justifyContent="space-between">
                                 <Typography level="body3">Copyright © {now().getFullYear()} signalco. All rights reserved.</Typography>
