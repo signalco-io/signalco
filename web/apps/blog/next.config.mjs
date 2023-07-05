@@ -1,14 +1,10 @@
 import { createSecureHeaders } from 'next-secure-headers';
 import { combineSecureHeaders, knownSecureHeadersExternalUrls } from '@signalco/data';
 import mdx from '@next/mdx';
-import nextBundleAnalyzer from '@next/bundle-analyzer';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 const withMDX = mdx();
-const withBundleAnalyzer = nextBundleAnalyzer({
-    enabled: process.env.ANALYZE === 'true',
-});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -42,4 +38,8 @@ const nextConfig = {
     },
 };
 
-export default withMDX(withBundleAnalyzer(nextConfig));
+export default process.env.ANALYZE ?
+    import('@next/bundle-analyzer')({
+        enabled: process.env.ANALYZE === 'true',
+    })(withMDX(nextConfig)) :
+    withMDX(nextConfig);

@@ -1,7 +1,9 @@
-* { box-sizing: border-box; }
+@import './variables.css';
+@import '@signalco/ui/dist/index.css';
 
-@import './normalize.css';
-@import './variables.scss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* raleway-200 - latin */
 @font-face {
@@ -31,10 +33,9 @@ html, body, #__next {
 a {
   text-decoration: none;
   color: var(--joy-palette-text-tertiary);
-
-  &:hover {
-    color: var(--joy-palette-text-secondary);
-  }
+}
+a:hover {
+  color: var(--joy-palette-text-secondary);
 }
 
 .material-icons {
@@ -62,18 +63,10 @@ a {
   font-feature-settings: 'liga';
 }
 
-[data-joy-color-scheme="dark"] {
-  .image--light {
-    display: none;
-  }
-
-  ::selection { background: white; color: black; }
+.image--light {
+  display: var(--light-display);
 }
 
-[data-joy-color-scheme="light"] {
-  .image--dark {
-    display: none;
-  }
-
-  ::selection { background: black; color: white; }
+.image--dark {
+  display: var(--dark-display);
 }
