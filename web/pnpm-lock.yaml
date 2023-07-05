@@ -253,10 +253,10 @@ importers:
   apps/blog:
     dependencies:
       '@mdx-js/loader':
-        specifier: ^2.3.0
+        specifier: 2.3.0
         version: 2.3.0(webpack@5.88.1)
       '@mdx-js/react':
-        specifier: ^2.3.0
+        specifier: 2.3.0
         version: 2.3.0(react@18.2.0)
       '@next/env':
         specifier: 13.4.8
