@@ -1,1 +1,1 @@
-export { default as Tooltip } from '@mui/joy/Tooltip';
+export * from './Tooltip';
