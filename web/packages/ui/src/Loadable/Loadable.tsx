@@ -55,7 +55,7 @@ export function Loadable(props: LoadableProps) {
             }
         }
         return (
-            <Alert variant="soft" color="danger" className="w-full" startDecorator={<Warning />}>
+            <Alert color="danger" className="w-full" startDecorator={<Warning />}>
                 {errorDisplay}
             </Alert>
         );

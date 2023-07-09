@@ -15,8 +15,21 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     href?: string; 
 };
 
-export function Button({ children, startDecorator, endDecorator, loading, variant, color, size, href, fullWidth, ...otherProps }: ButtonProps) {
-    const Comp = href
+export function Button({ 
+    children, 
+    className,
+    startDecorator, 
+    endDecorator, 
+    disabled,
+    loading, 
+    variant, 
+    color, 
+    size, 
+    href, 
+    fullWidth, 
+    ...otherProps 
+}: ButtonProps) {
+    const Comp = href && !disabled
         ? ({ children }: PropsWithChildren) => <Link href={href}>{children}</Link>
         : ({ children }: PropsWithChildren) => <>{children}</>;
     return (
@@ -32,9 +45,10 @@ export function Button({ children, startDecorator, endDecorator, loading, varian
                     (!size || size === 'md') && "h-10 py-2 px-4",
                     size === 'sm' && "h-9 px-3 rounded-md",
                     size === 'lg' && "h-11 px-8 rounded-md",
-                    // TODO: fullWidth
+                    fullWidth && "w-full",
+                    className
                 )}
-                disabled={loading}
+                disabled={loading || disabled}
                 {...otherProps}
             >
                 {!loading && startDecorator}

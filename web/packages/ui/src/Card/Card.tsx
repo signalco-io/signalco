@@ -2,16 +2,22 @@ import type { HTMLAttributes, PropsWithChildren } from "react";
 import { Link } from "../Link";
 import { cx } from "classix";
 
-export function Card({ href, className, ...restProps }: any) {
+export type CardProps = HTMLAttributes<HTMLDivElement> & {
+    href?: string;
+};
+
+export function Card({ href, className, ...restProps }: CardProps) {
     const Comp = href
         ? ({ children }: PropsWithChildren) => <Link href={href}>{children}</Link>
         : ({ children }: PropsWithChildren) => (<>{children}</>);
+
     return (
         <Comp>
             <div
                 className={cx(
                     "bg-card rounded-lg p-2 border text-card-foreground shadow-sm",
-                    className)}
+                    className
+                )}
                 {...restProps} />
         </Comp>
     );

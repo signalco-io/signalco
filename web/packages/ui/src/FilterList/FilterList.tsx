@@ -33,17 +33,17 @@ function FilterItem({ item, checked, onToggle }: { item: FilterListItem, checked
         <Checkbox
             key={item.id}
             label={(
-                <Row style={{ padding: 12 }}>
-                    <div className='grow'>
-                        <Typography>{item.label}</Typography>
-                    </div>
+                <Row justifyContent='space-between' className="p-2">
+                    <span>
+                        {item.label}
+                    </span>
                     <Grow appear={checked.indexOf(item.id) >= 0}>
                         <Check />
                     </Grow>
                 </Row>
             )}
             checked={checked.indexOf(item.id) >= 0}
-            onChange={() => onToggle(item.id)}
+            onCheckedChange={() => onToggle(item.id)}
             disableIcon />
     );
 }
@@ -78,11 +78,13 @@ export function ItemsShowMore({ children, truncate, itemsWrapper, ...rest }: Ite
             <ItemsWrapper itemsWrapper={itemsWrapper} {...rest}>
                 {items.slice(0, truncate)}
             </ItemsWrapper>
-            <Collapse appear={!shouldTruncate}>
-                <Wrapper>
-                    {items.slice(truncate)}
-                </Wrapper>
-            </Collapse>
+            {typeof truncate === 'number' && (
+                <Collapse appear={!shouldTruncate}>
+                    <Wrapper>
+                        {items.slice(truncate)}
+                    </Wrapper>
+                </Collapse>
+            )}
             <Fade appear={shouldTruncate}>
                 <Button
                     fullWidth
@@ -113,7 +115,6 @@ export function FilterList(props: FilterListProps) {
     }, [selected]);
 
     const handleToggle = (value: string) => {
-
         const currentIndex = checked.indexOf(value);
         const newChecked = multiple ? [...checked] : [];
 
