@@ -21,13 +21,10 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
 
     return (
         <Link href={og.url}>
-            <Card variant="outlined" style={{
+            <Card style={{
                 width: 400,
                 minHeight: 209,
                 overflow: 'hidden',
-                transition: 'box-shadow .2s ease-in-out, border-color .2s ease-in-out'
-            }} sx={{
-                '&:hover': { boxShadow: 'md', borderColor: 'neutral.outlinedHoverBorder' },
             }}>
                 {isImageDataUrl(og.imageBase64) &&
                     <CardOverflow>
