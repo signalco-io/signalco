@@ -1,7 +1,7 @@
 
 import React, { useCallback, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Alert  } from '@signalco/ui/dist/Alert';
+import { Alert } from '@signalco/ui/dist/Alert';
 import IWidgetConfigurationOption from '../../src/widgets/IWidgetConfigurationOption';
 import WidgetState from './parts/WidgetState';
 import WidgetCard from './parts/WidgetCard';
@@ -38,7 +38,7 @@ export interface WidgetSpecifigProps {
 }
 
 function UnresolvedWidget() {
-    return <Alert color="danger" sx={{ height: '100%' }}>Unknown widget</Alert>
+    return <Alert color="danger" className="h-full">Unknown widget</Alert>
 }
 
 function Widget(props: WidgetProps) {

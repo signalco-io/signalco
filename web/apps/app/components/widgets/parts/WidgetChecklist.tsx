@@ -44,7 +44,7 @@ function ChecklistItem(props: { item: IChecklistItem; onChange: (id: string, don
     return (
         <>
             <Row justifyContent="space-between">
-                <Checkbox checked={item.done ?? false} onChange={(e) => onChange(item.id, e.currentTarget.checked)} label={item.text} />
+                <Checkbox checked={item.done ?? false} onCheckedChange={(checked) => onChange(item.id, checked === true)} label={item.text} />
                 <Menu menuId={`widget-checklist-item-${item.id}-options`} renderTrigger={(props) => (
                     <IconButton {...props}><Box sx={{ opacity: 0.3 }}><MoreHorizontal /></Box></IconButton>
                 )}>

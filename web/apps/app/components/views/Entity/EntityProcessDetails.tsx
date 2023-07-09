@@ -156,7 +156,6 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                 {errorContact.data?.valueSerialized && (
                     <Alert
                         color="danger"
-                        sx={{ alignItems: 'flex-start' }}
                         startDecorator={<Warning />}
                         endDecorator={
                             <IconButton size="sm" color="danger" onClick={handleDismissError}>

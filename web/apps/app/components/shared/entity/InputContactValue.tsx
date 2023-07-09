@@ -69,7 +69,7 @@ export default function InputContactValue(props: InputContactValueProps) {
 
     if (dataType === 'bool') {
         const boolValue = typeof value === 'boolean' ? value : value === 'true';
-        return <Checkbox onChange={(e) => onChange(e.target.checked)} checked={boolValue} />
+        return <Checkbox onCheckedChange={(checked) => onChange(checked === true)} checked={boolValue} />
     } else if (dataType === 'action' || dataType === 'enum') {
         return (
             <Row>

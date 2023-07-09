@@ -87,7 +87,7 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
             <Box sx={{ overflowY: 'auto', overflowX: 'hidden' }}>
                 <div className="grid gap-2 justify-center auto-cols-max">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (
-                        <Card key={`${availableWidget.type}-${index}`} sx={{ width: '270px' }}>
+                        <Card key={`${availableWidget.type}-${index}`} className="w-64">
                             <Row spacing={1} justifyContent="space-between">
                                 <div>
                                     <Typography>{availableWidget.name}</Typography>

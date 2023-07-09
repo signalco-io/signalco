@@ -64,8 +64,7 @@ function WidgetCard(props: IWidgetCardProps) {
                 style={{
                     width: sizeWidth,
                     height: sizeHeight
-                }}
-                variant="outlined">
+                }}>
                 <CardOverflow style={{
                     width: sizeWidth,
                     height: sizeHeight,

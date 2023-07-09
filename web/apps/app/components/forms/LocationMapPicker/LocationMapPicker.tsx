@@ -67,7 +67,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
     return (
         <Accordion
             open={expanded}
-            onChange={(_, open) => setExpanded(open)}
+            onOpenChanged={(_, open) => setExpanded(open)}
         >
             {expanded
                 ? <Typography>Pick position on map</Typography>

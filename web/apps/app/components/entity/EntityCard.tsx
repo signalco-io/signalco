@@ -1,4 +1,6 @@
+import { type FormEvent } from 'react';
 import Link from 'next/link';
+import { cx } from 'classix';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Timeago } from '@signalco/ui/dist/Timeago';
 import { Stack } from '@signalco/ui/dist/Stack';
@@ -20,7 +22,7 @@ export interface EntityCardProps {
     spread: boolean;
     selectable?: boolean;
     selected?: boolean;
-    onSelection?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onSelection?: (event: FormEvent<HTMLButtonElement>) => void;
 }
 
 export default function EntityCard({ entity, spread, selectable, selected, onSelection }: EntityCardProps) {
@@ -34,13 +36,13 @@ export default function EntityCard({ entity, spread, selectable, selected, onSel
         <Row spacing={1}>
             {selectable && <Checkbox checked={selected ?? false} onChange={onSelection} />}
             <Link href={`${KnownPages.Entities}/${entity.id}`} style={{ flexGrow: 1 }}>
-                <Card sx={{ height: '100%', p: spread ? 0 : 1 }}>
+                <Card className={cx('h-full p-1', spread && 'p-0')}>
                     <Container
                         spacing={2}
                         justifyContent="space-between"
-                        style={{ height: '100%' }}>
+                        className="h-full">
                         <Row spacing={1}>
-                            <Avatar variant={spread ? 'plain' : 'soft'}>
+                            <Avatar>
                                 <Icon />
                             </Avatar>
                             <Typography noWrap>{entity.alias}</Typography>
