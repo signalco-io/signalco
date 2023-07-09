@@ -1,25 +1,25 @@
 import { IconButton } from '../IconButton';
 import { Card } from "../Card";
-import { PropsWithChildren, useState } from 'react';
-import type { MouseEvent } from 'react';
+import { useState } from 'react';
+import type { HTMLAttributes, MouseEvent } from 'react';
 import { Collapse } from '../Collapse';
-import {Icon} from '../Icon';
-import {Row} from '../Row';
+import { Icon } from '../Icon';
+import { Row } from '../Row';
+import { cx } from 'classix';
 
-export type AccordionProps = PropsWithChildren<{
+export type AccordionProps = HTMLAttributes<HTMLDivElement> & {
     open?: boolean;
     disabled?: boolean;
-    onChange?: (e: MouseEvent<HTMLButtonElement>, expanded: boolean) => void,
+    onOpenChanged?: (e: MouseEvent<HTMLButtonElement>, open: boolean) => void;
     unmountOnExit?: boolean;
-    className?: string | undefined;
-}>;
+};
 
-export function Accordion({ children, open, disabled, onChange, unmountOnExit, className }: AccordionProps) {
+export function Accordion({ children, open, disabled, onOpenChanged, unmountOnExit, className, ...props }: AccordionProps) {
     const [isOpen, setIsOpen] = useState(open ?? false);
 
     const handleOpen = (e: MouseEvent<HTMLButtonElement>) => {
-        if (typeof open !== 'undefined' && typeof onChange !== 'undefined') {
-            onChange(e, !open);
+        if (typeof open !== 'undefined' && typeof onOpenChanged !== 'undefined') {
+            onOpenChanged(e, !open);
         } else if (typeof open === 'undefined') {
             setIsOpen(!isOpen);
         }
@@ -30,11 +30,11 @@ export function Accordion({ children, open, disabled, onChange, unmountOnExit, c
     const multipleChildren = !!children && Array.isArray(children);
 
     return (
-        <Card variant="soft" className={className}>
+        <Card className={cx("py-2 px-4", className)} {...props}>
             <Row spacing={1} justifyContent="space-between">
                 {multipleChildren ? children[0] : children}
                 {!disabled && (
-                    <IconButton size="sm" onClick={handleOpen}>
+                    <IconButton variant='plain' size="sm" onClick={handleOpen}>
                         <Icon>{actualOpen ? 'expand_less' : 'expand_more'}</Icon>
                     </IconButton>
                 )}
