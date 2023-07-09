@@ -266,7 +266,7 @@ function SettingsPane() {
                             key={category.id}
                             label={category.label}
                             checked={selectedCategory.id === category.id}
-                            onChange={(e) => e.target.checked && setSelectedCategory(category)}
+                            onCheckedChange={(checked) => checked === true && setSelectedCategory(category)}
                             disableIcon />
                     ))}
                 </Stack>

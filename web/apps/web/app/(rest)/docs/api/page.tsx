@@ -146,7 +146,7 @@ function ApiOperation(props: ApiOperationProps) {
             {parametersResolved && (
                 <Stack spacing={1}>
                     <Typography textTransform="uppercase">Parameters</Typography>
-                    <Card variant="outlined">
+                    <Card>
                         {parametersResolved.map((parameter, i) => (
                             <React.Fragment key={parameter.name}>
                                 <div className="p-2">
@@ -171,7 +171,7 @@ function ApiOperation(props: ApiOperationProps) {
                 <Stack spacing={1}>
                     <Typography textTransform="uppercase">Request body</Typography>
                     {requestBodyResolved.description && <Typography level="body2">{requestBodyResolved.description}</Typography>}
-                    <Card variant="outlined">
+                    <Card>
                         <Stack>
                             {Object.keys(requestBodyResolved.content).map(contentType => (
                                 <React.Fragment key={contentType}>
@@ -185,7 +185,7 @@ function ApiOperation(props: ApiOperationProps) {
             )}
             <Stack spacing={1}>
                 <Typography textTransform="uppercase">Responses</Typography>
-                <Card variant="outlined">
+                <Card>
                     {Object.keys(responses).map((responseCode, i) => {
                         const responseCodeNumber = parseInt(responseCode, 10) || 0;
                         const responseObj = resolveRef<OpenAPIV3.ResponseObject>(api, responses[responseCode]);
@@ -336,7 +336,7 @@ function Route() {
         <Box py={2} pr={2}>
             <Stack spacing={4}>
                 {pathOperations.map(({ pathName, operationName, httpOperation, operation }) => (
-                    <Card variant="plain" key={`path-${pathName}-${operationName}`}>
+                    <Card key={`path-${pathName}-${operationName}`}>
                         <Row spacing={2} alignItems="start">
                             <Box sx={{ flexGrow: 1 }}>
                                 <ApiOperation path={pathName} operation={httpOperation} info={operation} />
@@ -494,7 +494,7 @@ function Actions(props: ActionsProps) {
                             <Typography textAlign="right" level="body3">application/json</Typography>
                         </div>
                     </Row>
-                    <Card variant="outlined">
+                    <Card>
                         <CardOverflow className="relative">
                             {/* TODO: Use CodeEditor component with language */}
                             {/* <CodeEditor
@@ -563,7 +563,7 @@ export default function DocsApiPage() {
         <ApiContext.Provider value={api}>
             <Stack>
                 {error && (
-                    <Alert color="danger" variant="solid">
+                    <Alert color="danger">
                         <Typography bold>{'Couldn\'t load OpenAPI docs'}</Typography>
                         <Typography level="body2">{error}</Typography>
                     </Alert>

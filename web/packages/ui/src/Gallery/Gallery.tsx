@@ -19,7 +19,7 @@ export function Gallery(props: GalleryProps) {
     const { items, itemComponent, filters, gridHeader, gridFilters } = props;
 
     return (
-        <div className="flex xs:flex-column md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-4">
             {filters && <GalleryFilters filters={filters()} />}
             <Stack spacing={2} style={{ width: '100%' }}>
                 <GalleryGridFilter header={gridHeader} filters={gridFilters} />

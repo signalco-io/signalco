@@ -2,6 +2,7 @@
 
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { cx } from 'classix';
 import { useQueryClient } from '@tanstack/react-query';
 import { Add, Check, LayoutGrid, LayoutList } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
@@ -11,7 +12,6 @@ import { Row } from '@signalco/ui/dist/Row';
 import { Picker } from '@signalco/ui/dist/Picker';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Grid } from '@signalco/ui/dist/Grid';
 import { Button } from '@signalco/ui/dist/Button';
 import { Avatar } from '@signalco/ui/dist/Avatar';
 import { useSearchParam } from '@signalco/hooks';
@@ -98,29 +98,26 @@ export default function Entities() {
         return e.type.toString() === selectedType;
     }), [filteredItems, selectedType]);
 
-    const columns = useMemo(() => ({
-        xs: entityListViewType === 'table' ? 12 : 6,
-        sm: entityListViewType === 'table' ? 12 : 4,
-        lg: entityListViewType === 'table' ? 12 : 3,
-        xl: entityListViewType === 'table' ? 12 : 2
-    }), [entityListViewType]);
-
     const results = useMemo(() => (
         <div style={{ paddingLeft: 8, paddingRight: 8 }}>
-            <Grid container spacing={1}>
+            <div className={cx(
+                'grid auto-cols-max gap-1',
+                entityListViewType === 'table'
+                    ? 'grid-cols-1'
+                    : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
+            )}>
                 {typedItems?.map(entity => (
-                    <Grid key={entity.id} {...columns}>
-                        <EntityCard
-                            entity={entity}
-                            spread={entityListViewType === 'table'}
-                            selectable={isSelecting}
-                            selected={!!selected.find(e => e.id === entity.id)}
-                            onSelection={() => handleEntitySelection(entity)} />
-                    </Grid>
+                    <EntityCard
+                        key={entity.id}
+                        entity={entity}
+                        spread={entityListViewType === 'table'}
+                        selectable={isSelecting}
+                        selected={!!selected.find(e => e.id === entity.id)}
+                        onSelection={() => handleEntitySelection(entity)} />
                 ))}
-            </Grid>
+            </div>
         </div>
-    ), [columns, entityListViewType, handleEntitySelection, isSelecting, selected, typedItems]);
+    ), [entityListViewType, handleEntitySelection, isSelecting, selected, typedItems]);
 
     const [isAddEntityOpen, setIsAddEntityOpen] = useState(false);
     const handleAddEntity = () => setIsAddEntityOpen(true);

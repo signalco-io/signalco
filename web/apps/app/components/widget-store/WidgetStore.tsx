@@ -6,7 +6,6 @@ import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Grid } from '@signalco/ui/dist/Grid';
 import { Card, CardOverflow } from '@signalco/ui/dist/Card';
 import { Box } from '@signalco/ui/dist/Box';
 import { widgetType } from '../widgets/Widget';
@@ -86,30 +85,28 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
         <Stack spacing={4}>
             <TextField placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />
             <Box sx={{ overflowY: 'auto', overflowX: 'hidden' }}>
-                <Grid container spacing={2} justifyContent="center">
+                <div className="grid gap-2 justify-center auto-cols-max">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (
-                        <Grid key={`${availableWidget.type}-${index}`}>
-                            <Card sx={{ width: '270px' }}>
-                                <Row spacing={1} justifyContent="space-between">
-                                    <div>
-                                        <Typography>{availableWidget.name}</Typography>
-                                        <Typography level="body2">{availableWidget.description}</Typography>
-                                    </div>
-                                    <IconButton disabled={props.onAddWidget == null} aria-label="Add to dashboard" onClick={() => props.onAddWidget && props.onAddWidget(Array.isArray(availableWidget.type) ? availableWidget.type[0] : availableWidget.type)}>
-                                        <Add />
-                                    </IconButton>
-                                </Row>
-                                <CardOverflow className="pt-2">
-                                    <Image
-                                        style={{ aspectRatio: 1 }}
-                                        src={availableWidget.preview}
-                                        alt={`${availableWidget.name} Preview`}
-                                        fill sizes="100vw" />
-                                </CardOverflow>
-                            </Card>
-                        </Grid>
+                        <Card key={`${availableWidget.type}-${index}`} className="w-64">
+                            <Row spacing={1} justifyContent="space-between">
+                                <div>
+                                    <Typography>{availableWidget.name}</Typography>
+                                    <Typography level="body2">{availableWidget.description}</Typography>
+                                </div>
+                                <IconButton disabled={props.onAddWidget == null} aria-label="Add to dashboard" onClick={() => props.onAddWidget && props.onAddWidget(Array.isArray(availableWidget.type) ? availableWidget.type[0] : availableWidget.type)}>
+                                    <Add />
+                                </IconButton>
+                            </Row>
+                            <CardOverflow className="pt-2">
+                                <Image
+                                    style={{ aspectRatio: 1 }}
+                                    src={availableWidget.preview}
+                                    alt={`${availableWidget.name} Preview`}
+                                    fill sizes="100vw" />
+                            </CardOverflow>
+                        </Card>
                     ))}
-                </Grid>
+                </div>
             </Box>
         </Stack>
     );

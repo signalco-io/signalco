@@ -15,7 +15,13 @@ import FaqSection from '../../../../components/pages/FaqSection';
 import CtaSection from '../../../../components/pages/CtaSection';
 import ChannelLogo from '../../../../components/channels/ChannelLogo';
 
-const channelFaq = [
+type ChannelFaqItem = {
+    id: string;
+    question: string;
+    answer: string;
+}
+
+const channelFaq: ChannelFaqItem[] = [
     { id: 'channel', question: 'What is Channel?', answer: 'Channel is Entity that contains all information required for connected online service, application or device. Channels can execute actions directly or contain connected entities to manage.' },
     { id: 'entities', question: 'What are Entities?', answer: 'Entity is a thing you want to automate in signalco. This can be is online service connected to signalco, smart device, your custom dashboard, automation process, etc.' },
     { id: 'executions', question: 'What are Executions?', answer: 'Execution is when one of your automation processes executes one action.' },

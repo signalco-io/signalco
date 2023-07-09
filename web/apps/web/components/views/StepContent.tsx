@@ -54,7 +54,8 @@ export function StepContent(props: {
                         {props.children && (
                             <div className={cx(
                                 'flex gap-8',
-                                props.direction === 'vertical' ? 'flex-col' : 'flex-col sm:flex-row'
+                                props.direction === 'horizontal' && 'flex-col md:flex-row',
+                                props.direction !== 'vertical' && 'flex-col'
                             )}>
                                 {(Array.isArray(props.children) ? props.children : [props.children]).map((child, childIndex) => (
                                     <GentleSlide

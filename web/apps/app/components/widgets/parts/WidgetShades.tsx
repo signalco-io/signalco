@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic';
 import { Down, Stop, Up } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
-import { Grid } from '@signalco/ui/dist/Grid';
 import { Divider } from '@signalco/ui/dist/Divider';
 import { Button } from '@signalco/ui/dist/Button';
 import { WidgetSharedProps } from '../Widget';
@@ -101,19 +100,17 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
     };
 
     return (
-        <Grid container wrap="nowrap" sx={{ height: '100%' }}>
+        <div className="grid grid-cols-2 h-full">
             {columns > 1 && (
                 <>
-                    <Grid xs={6}>
-                        <Stack style={{ height: '100%', paddingLeft: 2.5 * 8, paddingRight: 1.5 * 8, paddingTop: 16, paddingBottom: 16 }} justifyContent={columns > 2 ? 'space-between' : 'center'}>
-                            <WindowVisual shadePerc={1 - shadePerc} size={68} />
-                            {columns > 2 && <Typography semiBold noWrap>{label}</Typography>}
-                        </Stack>
-                    </Grid>
+                    <Stack style={{ height: '100%', paddingLeft: 2.5 * 8, paddingRight: 1.5 * 8, paddingTop: 16, paddingBottom: 16 }} justifyContent={columns > 2 ? 'space-between' : 'center'}>
+                        <WindowVisual shadePerc={1 - shadePerc} size={68} />
+                        {columns > 2 && <Typography semiBold noWrap>{label}</Typography>}
+                    </Stack>
                     <Divider orientation="vertical" />
                 </>
             )}
-            <Grid xs={6} sx={{ flexGrow: 1, borderColor: 'divider', borderRadius: '0 8px 8px 0' }}>
+            <div className="grow border-current	border-br-lg border-tr-lg">
                 <Stack style={{ height: '100%' }} justifyContent="stretch">
                     <Button variant="outlined" onClick={() => handleStateChangeRequest('up')}
                         aria-label="Up"><Up /></Button>
@@ -123,8 +120,8 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
                     <Button variant="outlined" onClick={() => handleStateChangeRequest('down')}
                         aria-label="Down"><Down /></Button>
                 </Stack>
-            </Grid>
-        </Grid>
+            </div>
+        </div>
     );
 }
 

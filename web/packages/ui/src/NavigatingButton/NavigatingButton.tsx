@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Navigate } from '@signalco/ui-icons';
 import { Button } from '../Button';
 import type { PropsWithChildren } from 'react';
+import { cx } from 'classix';
 
 export type NavigatingButtonProps = PropsWithChildren<{
     href: string;
@@ -28,8 +29,15 @@ export function NavigatingButton({
                 variant={hideArrow ? 'plain' : 'solid'}
                 disabled={disabled}
                 size={size}
+                className={hideArrow ? 'group/nav-button' : undefined}
+                startDecorator={hideArrow && (
+                    <span className='pr-1 w-[16px]' />
+                )}
                 endDecorator={(
-                    <span className='transition-opacity opacity-0 hover:opacity-1'>
+                    <span className={cx(
+                        'pl-1',
+                        hideArrow && 'transition-opacity opacity-0 group-hover/nav-button:opacity-100'
+                    )}> 
                         <Navigate size={16} />
                     </span>
                 )}>

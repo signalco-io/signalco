@@ -19,7 +19,7 @@ export class ErrorBoundary extends Component<PropsWithChildren, { hasError: bool
     render() {
         if (this.state.hasError) {
             return (
-                <Alert variant="soft" color="danger" sx={{ width: '100%' }} startDecorator={<Warning />}>
+                <Alert color="danger" className="w-full" startDecorator={<Warning />}>
                     Something went wrong.
                 </Alert>
             );

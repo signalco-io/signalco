@@ -20,9 +20,9 @@ export function Row({ spacing, alignItems, justifyContent, justifyItems, style, 
                 justifyContent === 'space-between' && `[justify-content:space-between]`,
                 (!justifyContent || justifyContent === 'stretch') && `[justify-content:stretch]`,
                 alignItems === 'start' && `[align-items:start]`,
-                alignItems === 'center' && `[align-items:center]`,
+                (!alignItems || alignItems === 'center') && `[align-items:center]`,
                 alignItems === 'end' && `[align-items:end]`,
-                (!alignItems || alignItems) === 'stretch' && `[align-items:stretch]`,
+                alignItems === 'stretch' && `[align-items:stretch]`,
                 justifyItems === 'center' && `[justify-items:center]`,
                 className)}
             style={{

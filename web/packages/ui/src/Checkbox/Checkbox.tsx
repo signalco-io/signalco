@@ -1,32 +1,55 @@
-import { ChangeEvent, ReactNode } from 'react';
-import { Checkbox as JoyCheckbox } from '@mui/joy';
+import { type ReactNode, useId, type ButtonHTMLAttributes, type FormEvent, ComponentPropsWithoutRef, useState } from 'react';
+import { Check } from '@signalco/ui-icons';
+import { cx } from 'classix';
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
 
-export type CheckboxProps = {
-    checked: boolean;
-    readonly?: boolean;
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+export type CheckboxProps = ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> & {
     label?: ReactNode;
     disableIcon?: boolean;
-}
+    readOnly?: boolean;
+};
 
-export function Checkbox(props: CheckboxProps) {
-    const { checked, readonly, onChange, label, disableIcon } = props;
+// TODO: Remove radix dependency
 
+export function Checkbox({
+    className,
+    readOnly,
+    label,
+    disableIcon,
+    defaultChecked,
+    ...props
+}: CheckboxProps) {
+    const id = useId();
+    const readonlyChecked = defaultChecked;
     return (
-        <JoyCheckbox
-            label={label}
-            sx={{
-                'input': {
-                    cursor: readonly ? 'default' : 'pointer'
-                },
-                '.JoyCheckbox-checkbox:hover': {
-                    backgroundColor: readonly ? 'var(--joy-palette-primary-solidBg)' : undefined
-                }
-            }}
-            readOnly={readonly}
-            checked={checked}
-            disableIcon={disableIcon}
-            variant={disableIcon && !checked ? 'plain' : 'solid'}
-            onChange={onChange} />
+        <div className="flex items-center space-x-2">
+            <CheckboxPrimitive.Root
+                id={id}
+                className={cx(
+                    "peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
+                    readOnly && "cursor-default",
+                    className
+                )}
+                defaultChecked={readonlyChecked}
+                checked={readOnly ? readonlyChecked : undefined}
+                hidden={disableIcon}
+                {...props}
+            >
+                <CheckboxPrimitive.Indicator
+                    className={cx("flex items-center justify-center text-current")}
+                >
+                    <Check className="h-4 w-4" />
+                </CheckboxPrimitive.Indicator>
+            </CheckboxPrimitive.Root>
+            {label && (
+                <label
+                    htmlFor={id}
+                    className="grow text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                    {label}
+                </label>
+            )}
+        </div>
+
     );
 }

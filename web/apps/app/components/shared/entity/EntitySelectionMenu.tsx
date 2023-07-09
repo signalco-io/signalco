@@ -72,7 +72,7 @@ export default function EntitySelectionMenu({
             <Accordion
                 open={selecting === 'entity'}
                 className={cx(selecting === 'entity' && 'grow-1')}
-                onChange={handleEditEntity}
+                onOpenChanged={handleEditEntity}
                 unmountOnExit
             >
                 <Typography>

@@ -57,7 +57,7 @@ function DisplayEntityTarget({ target, selectContact, selectValue, valueSerializ
                 </Row>
             </Button>
             <Popper popupState={entityMenu}>
-                <Card sx={{ width: 420, minHeight: 320, maxHeight: 320 }}>
+                <Card className="w-[420px] min-h-80 max-h-80">
                     <EntitySelectionMenu
                         target={target}
                         selectContact={selectContact}

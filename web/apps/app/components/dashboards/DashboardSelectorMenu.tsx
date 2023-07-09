@@ -143,35 +143,37 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     console.debug('Rendering DashboardSelectorMenu')
 
     return (
-        <Card sx={{ gap: 1.5 }}>
-            <Stack style={{ minWidth: 280 }}>
-                <Stack style={{ maxHeight: '50vh', overflow: 'auto' }}>
-                    <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
-                        <SortableContext items={orderedDashboardIds}>
-                            {orderedDashboards.map((d) => (
-                                <DashboardSortableItem
-                                    key={d.id}
-                                    dashboard={d}
-                                    selectedId={selectedId}
-                                    onSelection={(id) => handleAndClose(onSelection)(id)}
-                                    onFavorite={handleToggleFavorite} />
-                            ))}
-                        </SortableContext>
-                    </DndContext>
+        <Card>
+            <Stack spacing={1}>
+                <Stack style={{ minWidth: 280 }}>
+                    <Stack style={{ maxHeight: '50vh', overflow: 'auto' }}>
+                        <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
+                            <SortableContext items={orderedDashboardIds}>
+                                {orderedDashboards.map((d) => (
+                                    <DashboardSortableItem
+                                        key={d.id}
+                                        dashboard={d}
+                                        selectedId={selectedId}
+                                        onSelection={(id) => handleAndClose(onSelection)(id)}
+                                        onFavorite={handleToggleFavorite} />
+                                ))}
+                            </SortableContext>
+                        </DndContext>
+                    </Stack>
+                    <Button variant="plain" onClick={handleNewDashboard} startDecorator={<Add />}>{t('NewDashboard')}</Button>
                 </Stack>
-                <Button variant="plain" onClick={handleNewDashboard} startDecorator={<Add />}>{t('NewDashboard')}</Button>
-            </Stack>
-            <Divider />
-            <Stack>
-                <Row>
-                    <div style={{ flexGrow: 1 }}>
-                        <Typography level="body2">{selectedDashboard?.name}</Typography>
-                    </div>
-                    <ShareEntityChip entity={selectedDashboard} entityType={3} />
-                </Row>
-                <Button variant="plain" onClick={handleAndClose(onFullscreen)}>{t('ToggleFullscreen')}</Button>
-                <Button variant="plain" onClick={handleAndClose(onSettings)}>{t('Settings')}</Button>
-                <Button variant="plain" onClick={handleAndClose(onEditWidgets)}>{t('EditWidgets')}</Button>
+                <Divider />
+                <Stack>
+                    <Row>
+                        <div style={{ flexGrow: 1 }}>
+                            <Typography level="body2">{selectedDashboard?.name}</Typography>
+                        </div>
+                        <ShareEntityChip entity={selectedDashboard} entityType={3} />
+                    </Row>
+                    <Button variant="plain" onClick={handleAndClose(onFullscreen)}>{t('ToggleFullscreen')}</Button>
+                    <Button variant="plain" onClick={handleAndClose(onSettings)}>{t('Settings')}</Button>
+                    <Button variant="plain" onClick={handleAndClose(onEditWidgets)}>{t('EditWidgets')}</Button>
+                </Stack>
             </Stack>
         </Card>
     );
