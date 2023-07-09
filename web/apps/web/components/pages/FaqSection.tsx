@@ -1,7 +1,6 @@
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Container } from '@signalco/ui/dist/Container';
-import { Box } from '@signalco/ui/dist/Box';
 import { Accordion } from '@signalco/ui/dist/Accordion';
 import PageCenterHeader from './PageCenterHeader';
 
@@ -11,11 +10,9 @@ export interface FaqItem {
     answer: string
 }
 
-export default function FaqSection(props: { faq: FaqItem[] }) {
-    const { faq } = props;
-
+export default function FaqSection({ faq }: { faq: FaqItem[] }) {
     return (
-        <Box sx={{ alignSelf: 'center' }}>
+        <div className="self-center">
             <Container maxWidth="md">
                 <Stack spacing={4}>
                     <PageCenterHeader header={'Frequently asked questions'} secondary />
@@ -29,6 +26,6 @@ export default function FaqSection(props: { faq: FaqItem[] }) {
                     </Stack>
                 </Stack>
             </Container>
-        </Box>
+        </div>
     );
 }

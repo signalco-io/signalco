@@ -28,40 +28,38 @@ export default function PricingCard(props: PricingCardProps) {
     const disabled = option.price.eur > 0;
 
     return (
-        <div>
-            <Card className="h-full">
-                <Stack
-                    className="h-full p-4"
-                    spacing={3}
-                    justifyContent="space-between">
-                    <Stack spacing={3}>
-                        <Stack alignItems="center">
-                            <SignalcoLogotype width={180} hideBadge />
-                            <Typography level="h3">{option.label}</Typography>
-                        </Stack>
-                        <Row alignItems="end" spacing={1}>
-                            <Typography level="h5" component="p">€{option.price.eur}</Typography>
-                            <Typography>/</Typography>
-                            <Typography>{option.duration}</Typography>
-                        </Row>
-                        <Typography>{option.description}</Typography>
-                        <Stack spacing={1}>
-                            {option.features.map(feature => (
-                                <Checkbox key={feature} checked readonly label={feature} />
-                            ))}
-                        </Stack>
+        <Card className="h-full">
+            <Stack
+                className="h-full p-8"
+                spacing={3}
+                justifyContent="space-between">
+                <Stack spacing={3}>
+                    <Stack alignItems="center">
+                        <SignalcoLogotype width={180} hideBadge />
+                        <Typography level="h3">{option.label}</Typography>
                     </Stack>
+                    <Row alignItems="end" spacing={1}>
+                        <Typography level="h5" component="p">€{option.price.eur}</Typography>
+                        <Typography>/</Typography>
+                        <Typography>{option.duration}</Typography>
+                    </Row>
+                    <Typography>{option.description}</Typography>
                     <Stack spacing={1}>
-                        <Button
-                            variant={option.id === 'basic' ? 'solid' : 'outlined'}
-                            color={option.id === 'basic' ? 'primary' : 'neutral'}
-                            disabled={disabled}
-                            href={option.href}>
-                            {disabled ? 'Available soon' : option.hrefLabel}
-                        </Button>
+                        {option.features.map(feature => (
+                            <Checkbox key={feature} defaultChecked readOnly label={feature} />
+                        ))}
                     </Stack>
                 </Stack>
-            </Card>
-        </div>
+                <Stack spacing={1}>
+                    <Button
+                        variant={option.id === 'basic' ? 'solid' : 'outlined'}
+                        color={option.id === 'basic' ? 'primary' : 'neutral'}
+                        disabled={disabled}
+                        href={option.href}>
+                        {disabled ? 'Available soon' : option.hrefLabel}
+                    </Button>
+                </Stack>
+            </Stack>
+        </Card>
     );
 }

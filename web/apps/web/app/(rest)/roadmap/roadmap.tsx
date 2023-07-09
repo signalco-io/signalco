@@ -17,7 +17,7 @@ const statusOrderedList: RoadmapItemStatus[] = ['inProgress', 'inQueue', 'planne
 function VoteButton({ votes, readonly, size = 'md' }: { votes?: number | undefined, readonly?: boolean, size?: 'sm' | 'md' }) {
     if (readonly) {
         return (
-            <Card variant="soft" style={{ width: 42, aspectRatio: 1, textAlign: 'center', borderRadius: 'var(--joy-radius-sm)' }}>
+            <Card style={{ width: 42, aspectRatio: 1, textAlign: 'center', borderRadius: 'var(--joy-radius-sm)' }}>
                 <span style={{ lineHeight: '42px' }}>{votes ?? 'Vote'}</span>
             </Card>
         )

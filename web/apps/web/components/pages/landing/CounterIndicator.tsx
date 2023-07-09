@@ -1,3 +1,5 @@
+'use client';
+
 import { useInView } from 'react-cool-inview';
 import { cx } from 'classix';
 import { Typography } from '@signalco/ui/dist/Typography';

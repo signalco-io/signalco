@@ -1,5 +1,3 @@
-'use client';
-
 import React, { Suspense } from 'react';
 import { cx } from 'classix';
 import { Row } from '@signalco/ui/dist/Row';

@@ -98,10 +98,10 @@ function Newsletter() {
                         </Row>
                     </GentleSlide>
                     <GentleSlide collapsedWhenHidden appear={error != null} direction="down" duration={200}>
-                        <Alert color="danger" variant="outlined">{error}</Alert>
+                        <Alert color="danger">{error}</Alert>
                     </GentleSlide>
                     <Fade collapsedWhenHidden appear={showSuccess}>
-                        <Alert color="success" variant="outlined">You are our new favorite subscriber</Alert>
+                        <Alert color="success">You are our new favorite subscriber</Alert>
                     </Fade>
                 </Stack>
             </Stack>
