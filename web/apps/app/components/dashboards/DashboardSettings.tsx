@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Typography } from '@signalco/ui/dist/Typography';
-import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
+import { Input } from '@signalco/ui/dist/Input';
 import { Button } from '@signalco/ui/dist/Button';
 import { useSearchParam } from '@signalco/hooks';
 import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
@@ -58,7 +58,7 @@ function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsPro
                 </>
             )}>
             <Stack spacing={4}>
-                <TextField
+                <Input
                     label={t('DashboardSettingName')}
                     value={name}
                     onChange={(e) => setName(e.target.value ?? '')} />

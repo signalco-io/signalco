@@ -2,10 +2,10 @@ import React, { useCallback, useState } from 'react';
 import { Draggable, Map, Marker } from 'pigeon-maps';
 import { MyLocation } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
-import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Loadable } from '@signalco/ui/dist/Loadable';
+import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Accordion } from '@signalco/ui/dist/Accordion';
 import { useLoadAndError } from '@signalco/hooks';
@@ -88,7 +88,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
                     <IconButton onClick={handleGetLocation} size="lg">
                         <MyLocation />
                     </IconButton>
-                    <TextField value={placeName.item ?? ''} />
+                    <Input value={placeName.item ?? ''} readOnly />
                 </Row>
                 <Map
                     provider={(x, y, z, dpr) => mapTiler(themeContext.isDark, x, y, z, dpr)}

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Clear, People, Send, Share } from '@signalco/ui-icons';
 import { Tooltip } from '@signalco/ui/dist/Tooltip';
-import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { List, ListItem, ListDivider } from '@signalco/ui/dist/List';
+import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { GentleSlide } from '@signalco/ui/dist/GentleSlide';
 import { Chip } from '@signalco/ui/dist/Chip';
@@ -66,10 +66,10 @@ function ShareEntityModal({ entity, entityType, onClose }: IShareEntityModalProp
         >
             <GentleSlide appear={isShareWithNewOpen} direction="down" collapsedWhenHidden duration={200}>
                 <Row spacing={2} justifyContent="end">
-                    <TextField
+                    <Input
                         placeholder={t('EmailAddress')}
                         type="email"
-                        sx={{ maxWidth: '270px' }}
+                        className="max-w-[270px]"
                         onChange={(e) => setShareWithNewEmail(e.target.value)} />
                     <Row>
                         <Tooltip title={t('SendInvitation')}>

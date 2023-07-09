@@ -7,7 +7,6 @@ import { Security, Send } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Tooltip } from '@signalco/ui/dist/Tooltip';
 import type { ColorPaletteProp } from '@signalco/ui/dist/theme';
-import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Row } from '@signalco/ui/dist/Row';
@@ -15,6 +14,7 @@ import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
 import { List } from '@signalco/ui/dist/List';
+import { Input } from '@signalco/ui/dist/Input';
 import { Divider } from '@signalco/ui/dist/Divider';
 import { CopyToClipboardInput } from '@signalco/ui/dist/CopyToClipboardInput';
 import { Chip } from '@signalco/ui/dist/Chip';
@@ -377,7 +377,9 @@ function SecurityInput(props: { security: OpenAPIV3.SecurityRequirementObject })
                                 {httpSource.description && <Typography level="body2">{httpSource.description}</Typography>}
                                 {httpSource.bearerFormat && <Typography level="body2">{httpSource.bearerFormat}</Typography>}
                             </Row>
-                            <TextField size="sm" variant="soft" placeholder="Empty" label={camelToSentenceCase(httpSource.scheme)}></TextField>
+                            <Input
+                                placeholder="Empty"
+                                label={camelToSentenceCase(httpSource.scheme)} />
                         </Stack>
                     );
                 } else if (source) {

@@ -1,1 +1,1 @@
-export { default as Input } from '@mui/joy/Input';
+export * from './Input';
