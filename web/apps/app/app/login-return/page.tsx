@@ -13,7 +13,7 @@ export default function LoginReturnPage() {
 
     useEffect(() => {
         if (!isServer && isAuthenticated) {
-            router.push('/', {forceOptimisticNavigation: true});
+            router.push('/');
         }
     }, [isAuthenticated, isServer, router]);
 
