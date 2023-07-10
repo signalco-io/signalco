@@ -111,9 +111,9 @@ const widgetConfigurationFormComponents: FormBuilderComponents = {
         label="Visual"
         items={[{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }]}
         placeholder="Select visual"
-        fullWidth
+        className="w-full"
         value={props.value}
-        onChange={(item: any) => item && item.length && props.onChange(item[0], { receiveEvent: false })} />
+        onValueChange={(item: string) => item && props.onChange(item, { receiveEvent: false })} />
 };
 
 function WidgetConfigurationFormProvider(props: PropsWithChildren) {

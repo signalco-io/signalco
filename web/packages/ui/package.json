@@ -38,6 +38,7 @@
         "@mui/joy": "5.0.0-alpha.86",
         "@mui/system": "5.13.7",
         "@radix-ui/react-checkbox": "1.0.4",
+        "@radix-ui/react-select": "^1.2.2",
         "@signalco/js": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "material-ui-popup-state": "5.0.9",

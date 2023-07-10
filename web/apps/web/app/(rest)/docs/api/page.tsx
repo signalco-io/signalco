@@ -462,8 +462,8 @@ function Actions(props: ActionsProps) {
             {servers && servers.length > 1 && (
                 <SelectItems
                     label="Server"
-                    value={selectedServer ? [selectedServer] : []}
-                    onChange={() => { console.debug('TODO implement server selection') }}
+                    value={selectedServer}
+                    onValueChange={() => { console.debug('TODO implement server selection') }}
                     // onChange={(v) => setSelectedServer(v[0])}
                     items={servers.map(s => ({
                         value: s.url,

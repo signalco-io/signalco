@@ -1,10 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Play } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Slider } from '@signalco/ui/dist/Slider';
-import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Row } from '@signalco/ui/dist/Row';
-import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import throttle from '../../../src/helpers/Throttle';
 import blendColors from '../../../src/helpers/BlendColors';
@@ -21,22 +18,22 @@ export default function InputContactValue(props: InputContactValueProps) {
 
     // eslint-disable-next-line @typescript-eslint/no-inferrable-types
     const dataType: string = 'string'; // TODO: Add data type to contact props.pointer.dataType;
-    const dataValues: ({ value: any })[] | undefined = []; // TODO: Use info from contact
-    const dataValuesMultiple = false; // TODO: Use info from contact
+    // const dataValues: ({ value: any })[] | undefined = []; // TODO: Use info from contact
+    // const dataValuesMultiple = false; // TODO: Use info from contact
 
     const [sliderValue, setSliderValue] = useState<number | number[] | undefined>();
     const [sliderColor, setSliderColor] = useState<string | undefined>();
-    const [dataValuesSelected, setDataValueSelected] = useState<string[]>(dataValues && dataValues.length ? [value ?? dataValues[0].value] : []);
+    // const [dataValuesSelected, setDataValueSelected] = useState<string>(dataValues && dataValues.length ? [value ?? dataValues[0].value] : []);
     const requestDoubleChangeMemoized = useCallback(throttle(async (value) => {
         console.log('Do double change', 'contact:', props.contact, 'state:', value, 'value:', value);
         onChange(value);
     }, 500), []);
 
-    const handleActionClick = async () => {
-        console.debug('Do action', 'contact:', props.contact, 'state:', value, 'dataValuesSelected:', dataValuesSelected);
+    // const handleActionClick = async () => {
+    //     console.debug('Do action', 'contact:', props.contact, 'state:', value, 'dataValuesSelected:', dataValuesSelected);
 
-        onChange(dataValuesMultiple ? dataValuesSelected : dataValuesSelected[0]);
-    };
+    //     onChange(dataValuesMultiple ? dataValuesSelected : dataValuesSelected[0]);
+    // };
 
     const handleDoubleChange = (_: Event | React.SyntheticEvent, value: number | number[]) => {
         console.debug('double changed', value)
@@ -49,10 +46,10 @@ export default function InputContactValue(props: InputContactValueProps) {
         requestDoubleChangeMemoized(value);
     };
 
-    const handleDataValuesChanged = (values: string[]) => {
-        console.debug('selected', values)
-        setDataValueSelected(values);
-    }
+    // const handleDataValuesChanged = (values: string[]) => {
+    //     console.debug('selected', values)
+    //     setDataValueSelected(values);
+    // }
 
     useEffect(() => {
         if ((dataType === 'colortemp' || dataType === 'double') &&
@@ -73,13 +70,13 @@ export default function InputContactValue(props: InputContactValueProps) {
     } else if (dataType === 'action' || dataType === 'enum') {
         return (
             <Row>
-                {dataValues && <SelectItems
+                <div>Not available</div>
+                {/* {dataValues && <SelectItems
                     value={dataValuesSelected}
                     items={dataValues}
-                    multiple={dataValuesMultiple}
-                    onChange={handleDataValuesChanged}
+                    onValueChange={handleDataValuesChanged}
                     label={''} />}
-                <IconButton onClick={handleActionClick} size="lg"><Play /></IconButton>
+                <IconButton onClick={handleActionClick} size="lg"><Play /></IconButton> */}
             </Row>
         );
     } else if (dataType === 'double') {
