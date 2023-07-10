@@ -1,4 +1,10 @@
-@import './variables.scss';
+@import './variables.css';
+@import '@signalco/ui/dist/index.css';
+@import 'react-toastify/dist/ReactToastify.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* raleway-200 - latin */
 @font-face {
@@ -28,10 +34,9 @@ html, body, #__next {
 a {
   text-decoration: none;
   color: var(--joy-palette-text-tertiary);
-
-  &:hover {
-    color: var(--joy-palette-text-secondary);
-  }
+}
+a:hover {
+  color: var(--joy-palette-text-secondary);
 }
 
 .material-icons {
@@ -67,10 +72,6 @@ a {
   --toastify-color-progress-dark: #fff;
 
   --graph-stroke: #888;
-
-  .image--light {
-    display: none;
-  }
 }
 
 [data-joy-color-scheme="light"] {
@@ -79,8 +80,12 @@ a {
   --toastify-text-color-dark: #333;
 
   --graph-stroke: #666;
+}
 
-  .image--dark {
-    display: none;
-  }
+.image--light {
+  display: var(--light-display);
+}
+
+.image--dark {
+  display: var(--dark-display);
 }

@@ -19,8 +19,11 @@ const lgStyles = 'rounded-3xl px-3 text-base'; //     padding: 4px 12px; font-si
 export function Chip({ size, color, startDecorator, onClick, children, href }: ChipProps) {
     const className = cx(
         'py-1 px-2 m-0 text-sm border border-neutral-500 rounded-2xl', 
-        size && (size === 'sm' ? smStyles : lgStyles),
-        // color && styles[color]
+        (size && size === 'sm') && smStyles,
+        (!size || size === 'lg') && lgStyles,
+        // color && styles[color],
+        color === 'info' && 'bg-sky-300 text-sky-800 border-sky-300',
+        color === 'warning' && 'bg-amber-300 text-amber-800 border-amber-300',
     );
     const Wrapper = onClick
         ? (props: PropsWithChildren) => <button onClick={onClick} className={className}>{props.children}</button>
