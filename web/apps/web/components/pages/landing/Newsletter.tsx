@@ -2,9 +2,9 @@
 
 import { ChangeEvent, SyntheticEvent, createRef, useState } from 'react';
 import { Typography } from '@signalco/ui/dist/Typography';
-import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
+import { Input } from '@signalco/ui/dist/Input';
 import { GentleSlide} from '@signalco/ui/dist/GentleSlide';
 import { Fade } from '@signalco/ui/dist/Fade';
 import { Button } from '@signalco/ui/dist/Button';
@@ -83,15 +83,12 @@ function Newsletter() {
                     <Typography>{'We\'ll get back to you with awesome news and updates.'}</Typography>
                     <GentleSlide collapsedWhenHidden appear={!showSuccess} duration={200}>
                         <Row>
-                            <TextField
+                            <Input
                                 disabled={isLoading}
                                 type="email"
-                                size="lg"
                                 placeholder="you@email.com"
-                                fullWidth
                                 required
-                                variant="outlined"
-                                className="max-w-md"
+                                className="w-full max-w-md"
                                 value={email}
                                 onChange={handleOnEmail} />
                             <Button loading={isLoading} type="submit" variant="soft" size="lg">Subscribe</Button>

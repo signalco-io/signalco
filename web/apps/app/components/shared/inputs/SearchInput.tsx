@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { TextField } from '@signalco/ui/dist/TextField';
+import { Input } from '@signalco/ui/dist/Input';
 import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
 import useLocale from '../../../src/hooks/useLocale';
 
@@ -17,11 +17,10 @@ export default function SearchInput<TItem extends object>({ items, onFilteredIte
     }, [filteredItems, onFilteredItems]);
 
     return (
-        <TextField
+        <Input
             placeholder={t('Label')}
             value={searchText}
-            size="lg"
             onChange={(e) => handleSearchTextChange(e.target.value)}
-            sx={{ width: { xs: '100%', sm: 'initial' } }} />
+            className="w-full sm:w-auto" />
     );
 }

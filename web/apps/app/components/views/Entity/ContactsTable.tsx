@@ -5,7 +5,6 @@ import { Add, Code, Delete, Edit, MoreVertical, UI } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Tooltip } from '@signalco/ui/dist/Tooltip';
 import { Timeago } from '@signalco/ui/dist/Timeago';
-import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Picker } from '@signalco/ui/dist/Picker';
@@ -13,6 +12,7 @@ import { MenuItem ,Menu} from '@signalco/ui/dist/Menu';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
 import { List, ListItem, ListItemDecorator, ListDivider } from '@signalco/ui/dist/List';
+import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import {CopyToClipboardInput} from '@signalco/ui/dist/CopyToClipboardInput';
 import { Card } from '@signalco/ui/dist/Card';
@@ -86,7 +86,7 @@ function ObjectVisualizer(props: { name: string, value: ParsedJson, defaultOpen?
                         //     - GUID/UUID
                         //     - boolean
                         //     - ability to unset value
-                        <CopyToClipboardInput size="sm" variant="outlined" value={value?.toString()} />
+                        <CopyToClipboardInput value={value?.toString()} />
                     )}
                 </Row>
             )}>
@@ -251,8 +251,8 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                 header="Create contact"
                 onClose={createContactDialogState.close}>
                 <Stack spacing={1}>
-                    <TextField value={channelName} onChange={(e) => setChannelName(e.target.value)} />
-                    <TextField value={contactName} onChange={(e) => setContactName(e.target.value)} />
+                    <Input value={channelName} onChange={(e) => setChannelName(e.target.value)} />
+                    <Input value={contactName} onChange={(e) => setContactName(e.target.value)} />
                     <Button onClick={handleCreateSubmit}>Create</Button>
                 </Stack>
             </ConfigurationDialog>
@@ -261,7 +261,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                 header="Edit contact"
                 onClose={editContactValueDialogState.close}>
                 <Stack spacing={1}>
-                    <TextField value={valueSerialized} onChange={(e) => setValueSerialized(e.target.value)} />
+                    <Input value={valueSerialized} onChange={(e) => setValueSerialized(e.target.value)} />
                     <Button onClick={handleEditValueSubmit}>Create</Button>
                 </Stack>
             </ConfigurationDialog>

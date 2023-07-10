@@ -2,12 +2,12 @@ import { v4 as uuidv4 } from 'uuid';
 import React, { useCallback, useState } from 'react';
 import { Check, Delete, MoreHorizontal } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
-import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
 import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
 import { ListItemContent, ListItemDecorator } from '@signalco/ui/dist/List';
+import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import { Box } from '@signalco/ui/dist/Box';
@@ -123,10 +123,9 @@ function WidgetChecklist(props: WidgetSharedProps<ConfigProps>) {
             </Box>
             <Box sx={{ px: 2 }}>
                 <form onSubmit={handleNewItem}>
-                    <TextField
+                    <Input
                         placeholder={t('AddItem')}
-                        fullWidth
-                        size="lg"
+                        className="w-full"
                         onFocus={() => setIsInputFocusedOrFilled(true)}
                         onBlur={() => {
                             if (newItemText.length <= 0) {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Typography } from '@signalco/ui/dist/Typography';
-import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
+import { Input } from '@signalco/ui/dist/Input';
 import { Button } from '@signalco/ui/dist/Button';
 import useLocale from '../../../src/hooks/useLocale';
 import ConfigurationDialog from './ConfigurationDialog';
@@ -28,7 +28,7 @@ function ConfirmDeleteDialog(props: IConfirmDeleteDialogProps) {
             maxWidth={maxWidth}>
             <Stack spacing={4}>
                 <Typography>{t('ConfirmDeleteBody', { code: expectedConfirmText })}</Typography>
-                <TextField label={t('Confirm')} onChange={(e) => setConfirmText(e.target.value)} />
+                <Input label={t('Confirm')} onChange={(e) => setConfirmText(e.target.value)} />
                 <Button variant="solid" color="danger" disabled={confirmText !== expectedConfirmText} onClick={onConfirm}>
                     {`${t('ConfirmDeleteButton')} "${expectedConfirmText}"`}
                 </Button>

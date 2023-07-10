@@ -21,7 +21,7 @@ export default function InputSubmit({ value, onChange, onSubmit, placeholder, is
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
-                fullWidth
+                className="w-full"
                 endDecorator={
                     <Button
                         variant="solid"
