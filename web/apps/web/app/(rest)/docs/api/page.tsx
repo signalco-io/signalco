@@ -477,7 +477,11 @@ function Actions(props: ActionsProps) {
                         )
                     }))} />
             )}
-            <CopyToClipboardInput id="base-address" label="Base address" fullWidth sx={{ fontFamily: 'Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace', fontSize: '0.8em' }} value={selectedServerUrl} />
+            <CopyToClipboardInput
+                id="base-address"
+                label="Base address"
+                className="w-full font-mono text-sm"
+                value={selectedServerUrl} />
             {security && (
                 <Stack spacing={1}>
                     <Typography textTransform="uppercase">Authentication</Typography>

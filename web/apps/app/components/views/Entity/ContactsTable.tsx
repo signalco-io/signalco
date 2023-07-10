@@ -86,7 +86,7 @@ function ObjectVisualizer(props: { name: string, value: ParsedJson, defaultOpen?
                         //     - GUID/UUID
                         //     - boolean
                         //     - ability to unset value
-                        <CopyToClipboardInput size="sm" variant="outlined" value={value?.toString()} />
+                        <CopyToClipboardInput value={value?.toString()} />
                     )}
                 </Row>
             )}>
