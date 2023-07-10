@@ -17,7 +17,6 @@ import { IconButton } from '@signalco/ui/dist/IconButton';
 import {CopyToClipboardInput} from '@signalco/ui/dist/CopyToClipboardInput';
 import { Card } from '@signalco/ui/dist/Card';
 import { Button } from '@signalco/ui/dist/Button';
-import { Box } from '@signalco/ui/dist/Box';
 import { camelToSentenceCase, isJson, ParsedJson } from '@signalco/js';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
@@ -91,11 +90,11 @@ function ObjectVisualizer(props: { name: string, value: ParsedJson, defaultOpen?
                 </Row>
             )}>
             {hasChildren && (
-                <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', ml: 2.5 }}>
+                <div className="ml-2">
                     {isArray
                         ? <JsonArrayVisualizer name={name} value={value as Array<ParsedJson>} />
                         : <JsonNonArrayVisualizer value={value} />}
-                </Box>
+                </div>
             )}
         </ListTreeItem>
     );
