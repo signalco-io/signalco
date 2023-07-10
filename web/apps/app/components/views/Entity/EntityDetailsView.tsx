@@ -80,8 +80,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                             </Avatar>
                             <EditableInput
                                 className="font-light xs:text-lg sm:text-2xl"
-                                text={entity?.alias || ''}
-                                noWrap
+                                value={entity?.alias || ''}
                                 onChange={handleRename} />
                         </Row>
                         <EntityOptions

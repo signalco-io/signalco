@@ -1,37 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { InputHTMLAttributes, useEffect, useState } from 'react';
 import { Close, Save, Edit } from '@signalco/ui-icons';
-import { Input } from '@mui/joy';
 import { IconButton } from '../IconButton';
 import { Typography } from '../Typography';
 import { Row } from '../Row';
+import { cx } from 'classix';
+import { Input } from '../Input';
 
 export type EditableInputProps = {
-    text: string,
+    value: string,
     onChange: (text: string) => void
-    noWrap?: boolean
     className?: string;
 }
 
 export function EditableInput({
-    text,
+    value,
     onChange,
-    noWrap,
     className
 }: EditableInputProps) {
     const [isEditing, setIsEditing] = useState(false);
-    const [editingText, setEditingText] = useState(text);
+    const [editingText, setEditingText] = useState(value);
+
     useEffect(() => {
-        if (isEditing)
-            setEditingText(text);
-    }, [isEditing, text, setEditingText])
+        if (isEditing) {
+            setEditingText(value);
+        }
+    }, [isEditing, value, setEditingText]);
 
     const handleConfirm = () => {
-        onChange(editingText);
+        if (onChange) {
+            onChange(editingText);
+        }
         setIsEditing(false);
     };
 
     const handleCancel = () => {
-        setEditingText(text);
+        setEditingText(value);
         setIsEditing(false);
     };
 
@@ -42,7 +45,9 @@ export function EditableInput({
 
     if (isEditing) {
         return (
-            <Row spacing={1} className={className}>
+            <Row
+                spacing={1}
+                className={className}>
                 <Input
                     value={editingText}
                     autoFocus
@@ -65,12 +70,15 @@ export function EditableInput({
         );
     } else {
         return (
-            <div className="py-1 cursor-pointer" onClick={() => setIsEditing(true)}>
-                <Typography className="group" noWrap={noWrap}>
-                    {text}
-                    <span className="editIndicator invisible group-hover:visible"><Edit /></span>
-                </Typography>
-            </div>
+            <Row
+                role="button"
+                className={cx("group py-1 cursor-pointer", className)}
+                spacing={1}
+                onClick={() => setIsEditing(true)}
+            >
+                <Typography>{value}</Typography>
+                <span className="editIndicator invisible group-hover:visible"><Edit size={16} /></span>
+            </Row>
         )
     }
 }

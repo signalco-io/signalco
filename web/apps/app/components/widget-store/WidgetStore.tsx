@@ -2,9 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import { Add } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
-import { TextField } from '@signalco/ui/dist/TextField';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
+import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Card, CardOverflow } from '@signalco/ui/dist/Card';
 import { Box } from '@signalco/ui/dist/Box';
@@ -83,7 +83,7 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
 
     return (
         <Stack spacing={4}>
-            <TextField placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />
+            <Input placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />
             <Box sx={{ overflowY: 'auto', overflowX: 'hidden' }}>
                 <div className="grid gap-2 justify-center auto-cols-max">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (
