@@ -128,9 +128,9 @@ export default function Entities() {
                 <Stack spacing={1}>
                     <Row justifyContent="space-between" style={{ paddingLeft: 16, paddingRight: 16 }}>
                         <SelectItems
-                            minWidth={220}
-                            value={selectedType ? [selectedType] : []}
-                            onChange={(v) => setSelectedType(v[0])}
+                            className="min-w-[220px]"
+                            value={selectedType}
+                            onValueChange={(v) => setSelectedType(v)}
                             items={entityTypes.map(t => {
                                 const Icon = EntityIconByType(parseInt(t.value));
                                 return ({
@@ -141,8 +141,7 @@ export default function Entities() {
                                         </Row>
                                     )
                                 });
-                            })}
-                            heading />
+                            })} />
                         <Row spacing={1} style={{ flexGrow: 1 }} justifyContent="end">
                             <SearchInput items={entities.data} onFilteredItems={setFilteredItems} />
                             <Picker value={entityListViewType} onChange={(_, value) => setEntityListViewType(value)} options={[

@@ -139,15 +139,12 @@ export function FilterList(props: FilterListProps) {
             <div className='md:hidden'>
                 <SelectItems
                     items={items.map(i => ({ value: i.id, label: i.label }))}
-                    value={checked}
+                    value={checked?.at(0)}
                     label={header}
                     placeholder={`Select ${header}`}
-                    multiple={multiple}
-                    fullWidth
-                    onChange={(values) => {
-                        values.forEach(changedValue => {
-                            handleToggle(changedValue);
-                        });
+                    className="w-full"
+                    onValueChange={(value) => {
+                        handleToggle(value);
                     }} />
             </div>
             <div className='hidden md:block'>

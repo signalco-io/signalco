@@ -56,8 +56,8 @@ const SelectLanguage: FormBuilderComponent = ({ value, label, onChange }) => {
     return (
         <SelectItems
             label={label}
-            value={value ? [value] : []}
-            onChange={(values) => onChange(values[0], { receiveEvent: false })}
+            value={value}
+            onValueChange={(v) => onChange(v, { receiveEvent: false })}
             items={availableLocales.map(l => ({ value: l, label: locales.t(l) }))} />
     );
 }
@@ -65,7 +65,7 @@ const SelectLanguage: FormBuilderComponent = ({ value, label, onChange }) => {
 const settingsFormComponents: FormBuilderComponents = {
     fieldWrapper: (props) => <SettingsItem {...props} />,
     selectApiEndpoint: ({ value, onChange, label }) => (
-        <SelectItems value={[value]} onChange={(values) => onChange(values[0])} items={[
+        <SelectItems value={value} onValueChange={(v) => onChange(v)} items={[
             {
                 value: ApiProductionUrl,
                 label: (
@@ -90,7 +90,7 @@ const settingsFormComponents: FormBuilderComponents = {
     selectTimeZone: ({ value, onChange, label }) => {
         const timeZones = getTimeZones();
         return (
-            <SelectItems value={[value]} onChange={(values) => onChange(values[0])} items={[
+            <SelectItems value={value} onValueChange={(v) => onChange(v)} items={[
                 { value: '0', label: '+00:00 UTC', disabled: true },
                 ...timeZones.map(tz => ({ value: tz.name, label: tz.currentTimeFormat }))
             ]} label={label} />
