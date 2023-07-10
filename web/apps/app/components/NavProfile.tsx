@@ -33,9 +33,9 @@ function UserProfileAvatarButton(props: ComponentProps<typeof Button>) {
 
     return (
         <div className="p-2 relative">
-            <Button variant="plain" {...props}>
+            <Button variant="plain" className="py-6" {...props}>
                 <UserAvatar user={user} />
-                <div style={{ position: 'absolute', left: '50%', bottom: 4, transform: 'translateX(-50%)' }}>
+                <div className="absolute left-1/2 -bottom-1 -translate-x-1/2">
                     <ApiBadge />
                 </div>
             </Button>
@@ -79,9 +79,9 @@ function NavProfile() {
     console.log('NavProfile rendered');
 
     return (
-        <div className="flex xs:flex-row sm:flex-column xs:justify-between sm:justify-start items-center xs:min-h-60 gap-1">
+        <div className="flex flex-row sm:flex-col justify-between sm:justify-start items-center min-h-[60px] gap-1">
             <UserProfileAvatar />
-            <div className="width-full xs:hidden">
+            <div className="w-full hidden sm:block">
                 <Stack>
                     {visibleNavItems
                         .map((ni, index) => (
@@ -95,10 +95,10 @@ function NavProfile() {
                 </Stack>
             </div>
             <div className="sm:hidden">
-                <IconButton size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
+                <IconButton variant="plain" size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
                     {mobileMenuOpen ? <Close /> : <MenuIcon />}
                 </IconButton>
-                <div style={{
+                <div className="fixed top-[60px] bottom-0 left-0 right-0 z-50 bg-current" style={{
                     display: !mobileMenuOpen ? 'none' : 'block',
                     position: 'fixed',
                     top: '60px',

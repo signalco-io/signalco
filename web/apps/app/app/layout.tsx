@@ -1,6 +1,4 @@
-import '../styles/global.scss';
-import '@signalco/ui/dist/index.css';
-import 'react-toastify/dist/ReactToastify.css';
+import './global.css';
 import { PropsWithChildren } from 'react';
 import { type Metadata } from 'next';
 import { AppLayout } from '../components/layouts/AppLayout';
