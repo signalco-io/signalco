@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Loadable } from '@signalco/ui/dist/Loadable';
-import { List } from '@signalco/ui/dist/List';
 import { ListItem } from '@signalco/ui/dist/ListItem';
+import { List } from '@signalco/ui/dist/List';
 import { Input } from '@signalco/ui/dist/Input';
 import useAllEntities from '../../../src/hooks/signalco/entity/useAllEntities';
 import IEntityDetails from '../../../src/entity/IEntityDetails';

@@ -6,6 +6,7 @@ import { Typography } from '@signalco/ui/dist/Typography';
 import { Tooltip } from '@signalco/ui/dist/Tooltip';
 import { Timeago } from '@signalco/ui/dist/Timeago';
 import { Stack } from '@signalco/ui/dist/Stack';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Row } from '@signalco/ui/dist/Row';
 import { MenuItem, Menu } from '@signalco/ui/dist/Menu';
 import { Loadable } from '@signalco/ui/dist/Loadable';
@@ -26,7 +27,6 @@ import useLocale from '../../../src/hooks/useLocale';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import { deleteContactAsync, setAsync } from '../../../src/contacts/ContactRepository';
-import { SelectItems } from '@signalco/ui/dist/SelectItems';
 
 function JsonNonArrayVisualizer({ value }: { value: ParsedJson }) {
     if (value === null ||
