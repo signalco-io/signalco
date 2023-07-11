@@ -518,13 +518,13 @@ importers:
         version: 18.2.6
       '@vitejs/plugin-react-swc':
         specifier: 3.3.2
-        version: 3.3.2(vite@4.4.2)
+        version: 3.3.2(vite@4.4.3)
       typescript:
         specifier: 5.1.6
         version: 5.1.6
       vite:
-        specifier: 4.4.2
-        version: 4.4.2
+        specifier: 4.4.3
+        version: 4.4.3
 
   apps/slco:
     dependencies:
@@ -7760,13 +7760,13 @@ packages:
       eslint-visitor-keys: 3.4.1
     dev: false
 
-  /@vitejs/plugin-react-swc@3.3.2(vite@4.4.2):
+  /@vitejs/plugin-react-swc@3.3.2(vite@4.4.3):
     resolution: {integrity: sha512-VJFWY5sfoZerQRvJrh518h3AcQt6f/yTuWn4/TRB+dqmYU0NX1qz7qM5Wfd+gOQqUzQW4gxKqKN3KpE/P3+zrA==}
     peerDependencies:
       vite: ^4
     dependencies:
       '@swc/core': 1.3.62
-      vite: 4.4.2
+      vite: 4.4.3
     transitivePeerDependencies:
       - '@swc/helpers'
     dev: true
@@ -16509,8 +16509,8 @@ packages:
       d3-timer: 3.0.1
     dev: false
 
-  /vite@4.4.2:
-    resolution: {integrity: sha512-zUcsJN+UvdSyHhYa277UHhiJ3iq4hUBwHavOpsNUGsTgjBeoBlK8eDt+iT09pBq0h9/knhG/SPrZiM7cGmg7NA==}
+  /vite@4.4.3:
+    resolution: {integrity: sha512-IMnXQXXWgLi5brBQx/4WzDxdzW0X3pjO4nqFJAuNvwKtxzAmPzFE1wszW3VDpAGQJm3RZkm/brzRdyGsnwgJIA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
