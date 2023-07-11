@@ -9,7 +9,6 @@ import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Row } from '@signalco/ui/dist/Row';
-import { Picker } from '@signalco/ui/dist/Picker';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Button } from '@signalco/ui/dist/Button';
@@ -119,58 +118,59 @@ export default function Entities() {
         </div>
     ), [entityListViewType, handleEntitySelection, isSelecting, selected, typedItems]);
 
-    const [isAddEntityOpen, setIsAddEntityOpen] = useState(false);
-    const handleAddEntity = () => setIsAddEntityOpen(true);
-
     return (
-        <>
-            <Stack spacing={3}>
-                <Stack spacing={1}>
-                    <Row justifyContent="space-between" style={{ paddingLeft: 16, paddingRight: 16 }}>
+        <Stack spacing={3}>
+            <Stack spacing={1}>
+                <Row justifyContent="space-between" style={{ paddingLeft: 16, paddingRight: 16 }}>
+                    <SelectItems
+                        className="min-w-[220px]"
+                        value={selectedType}
+                        onValueChange={(v: string) => setSelectedType(v)}
+                        items={entityTypes.map(t => {
+                            const Icon = EntityIconByType(parseInt(t.value));
+                            return ({
+                                value: t.value, label: t.label, content: (
+                                    <Row spacing={1}>
+                                        <Avatar><Icon /></Avatar>
+                                        <Typography>{t.label}</Typography>
+                                    </Row>
+                                )
+                            });
+                        })} />
+                    <Row spacing={1} style={{ flexGrow: 1 }} justifyContent="end">
+                        <SearchInput items={entities.data} onFilteredItems={setFilteredItems} />
                         <SelectItems
-                            className="min-w-[220px]"
-                            value={selectedType}
-                            onValueChange={(v) => setSelectedType(v)}
-                            items={entityTypes.map(t => {
-                                const Icon = EntityIconByType(parseInt(t.value));
-                                return ({
-                                    value: t.value, label: t.label, content: (
-                                        <Row spacing={1}>
-                                            <Avatar><Icon /></Avatar>
-                                            <Typography>{t.label}</Typography>
-                                        </Row>
-                                    )
-                                });
-                            })} />
-                        <Row spacing={1} style={{ flexGrow: 1 }} justifyContent="end">
-                            <SearchInput items={entities.data} onFilteredItems={setFilteredItems} />
-                            <Picker value={entityListViewType} onChange={(_, value) => setEntityListViewType(value)} options={[
+                            value={entityListViewType}
+                            onValueChange={setEntityListViewType}
+                            items={[
                                 { value: 'table', label: <LayoutList /> },
                                 { value: 'cards', label: <LayoutGrid /> }
                             ]} />
-                            <IconButton size="lg" onClick={handleAddEntity}><Add /></IconButton>
-                            <IconButton size="lg" onClick={handleToggleSelection}><Check /></IconButton>
-                        </Row>
+                        <ConfigurationDialog
+                            header={t('NewEntityDialogTitle')}
+                            trigger={(
+                                <IconButton size="lg"><Add /></IconButton>
+                            )}>
+                            <EntityCreateForm />
+                        </ConfigurationDialog>
+                        <IconButton size="lg" onClick={handleToggleSelection}><Check /></IconButton>
                     </Row>
-                    {isSelecting && (
-                        <Row>
-                            <ConfirmDeleteButton
-                                expectedConfirmText="confirm"
-                                buttonLabel="Delete selected"
-                                header={`Delete ${selected.length} entities`}
-                                onConfirm={handleConfirmDeleteSelected} />
-                        </Row>
-                    )}
-                </Stack>
-                <Stack>
-                    <Loadable isLoading={entities.isLoading} loadingLabel="Loading entities" error={entities.error}>
-                        {results}
-                    </Loadable>
-                </Stack>
+                </Row>
+                {isSelecting && (
+                    <Row>
+                        <ConfirmDeleteButton
+                            expectedConfirmText="confirm"
+                            buttonLabel="Delete selected"
+                            header={`Delete ${selected.length} entities`}
+                            onConfirm={handleConfirmDeleteSelected} />
+                    </Row>
+                )}
             </Stack>
-            <ConfigurationDialog isOpen={isAddEntityOpen} header={t('NewEntityDialogTitle')} onClose={() => setIsAddEntityOpen(false)}>
-                <EntityCreateForm />
-            </ConfigurationDialog>
-        </>
+            <Stack>
+                <Loadable isLoading={entities.isLoading} loadingLabel="Loading entities" error={entities.error}>
+                    {results}
+                </Loadable>
+            </Stack>
+        </Stack>
     );
 }

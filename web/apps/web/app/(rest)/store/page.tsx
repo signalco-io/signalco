@@ -122,7 +122,6 @@ export default function StorePage() {
     }));
 
     const [selectedOrderByItems, setSelectedOrderByItems] = useState<string>('0');
-    const handleOrderByItemsChange = (value: string) => setSelectedOrderByItems(value);
 
     return (
         <Stack spacing={8}>
@@ -138,7 +137,7 @@ export default function StorePage() {
                     </>
                 )}
                 gridHeader={`Found ${items.length} products`}
-                gridFilters={(<SelectItems label="Sort" value={selectedOrderByItems} items={orderByItems} onValueChange={handleOrderByItemsChange} />)} />
+                gridFilters={(<SelectItems label="Sort" value={selectedOrderByItems} items={orderByItems} onValueChange={setSelectedOrderByItems} />)} />
         </Stack>
     );
 }

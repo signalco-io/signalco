@@ -48,7 +48,7 @@ function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsPro
 
     return (
         <ConfigurationDialog
-            isOpen={isOpen}
+            open={isOpen}
             header={t('DashboardSettings')}
             onClose={onClose}
             actions={(

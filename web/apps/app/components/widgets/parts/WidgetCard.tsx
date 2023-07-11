@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
-import { ListItemDecorator } from '@signalco/ui/dist/List';
 import { ErrorBoundary } from '@signalco/ui/dist/ErrorBoundary';
 import { Card, CardOverflow } from '@signalco/ui/dist/Card';
 import { Button } from '@signalco/ui/dist/Button';
@@ -78,22 +77,16 @@ function WidgetCard(props: IWidgetCardProps) {
                     )}
                     {isEditMode && (
                         <div style={{ position: 'absolute', top: 0, right: 0 }}>
-                            <Menu menuId="widget-config" renderTrigger={(props: any) => (
-                                <Button sx={{ minWidth: '42px' }}  {...props}><MoreHorizontal /></Button>
+                            <Menu trigger={(
+                                <Button className="min-w-[42px]" {...props}><MoreHorizontal /></Button>
                             )}>
                                 {options && (
-                                    <MenuItem onClick={handleOnConfigureClicked}>
-                                        <ListItemDecorator>
-                                            <Settings />
-                                        </ListItemDecorator>
+                                    <MenuItem onClick={handleOnConfigureClicked} startDecorator={<Settings />}>
                                         Configure
                                     </MenuItem>
                                 )}
                                 {onRemove && (
-                                    <MenuItem onClick={handleOnRemove}>
-                                        <ListItemDecorator>
-                                            <Delete />
-                                        </ListItemDecorator>
+                                    <MenuItem onClick={handleOnRemove} startDecorator={<Delete />}>
                                         Remove
                                     </MenuItem>
                                 )}

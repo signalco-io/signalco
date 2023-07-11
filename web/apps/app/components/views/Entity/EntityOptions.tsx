@@ -49,7 +49,7 @@ export default function EntityOptions(props: EntityOptionsProps) {
 
     return (
         <>
-            <Menu menuId="entity-options" renderTrigger={(props) => (
+            <Menu trigger={(
                 <Button {...props}>
                     <MoreHorizontal />
                 </Button>

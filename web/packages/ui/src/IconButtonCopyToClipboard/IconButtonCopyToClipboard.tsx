@@ -1,9 +1,8 @@
 import { MouseEvent, type PropsWithChildren, useId, useState } from 'react';
-import { usePopupState } from 'material-ui-popup-state/hooks';
 import { Copy, Warning } from '@signalco/ui-icons';
 import { Alert } from '../Alert';
 import { IconButton } from '../IconButton';
-import {Popper} from '../Popper';
+import { Popper } from '../Popper';
 
 export type IconButtonCopyToClipboardProps = PropsWithChildren<{
     title: string;
@@ -16,7 +15,7 @@ export type IconButtonCopyToClipboardProps = PropsWithChildren<{
 
 export function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps) {
     const id = useId();
-    const popupState = usePopupState({ variant: 'popper', popupId: `copytoclipboard-button-${id}` });
+    const [notificationOpen, setNotificationOpen] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
 
     const handleClickShowCopyToClipboard = (event: MouseEvent<HTMLButtonElement>) => {
@@ -33,8 +32,8 @@ export function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps)
             setError(true);
         } finally {
             if (event.target) {
-                popupState.open(event.currentTarget);
-                setTimeout(() => popupState.close(), 2000);
+                setNotificationOpen(true);
+                setTimeout(() => setNotificationOpen(false), 2000);
             }
         }
     };
@@ -44,7 +43,7 @@ export function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps)
     };
 
     return (
-        <>
+        <Popper open={notificationOpen} anchor={(
             <IconButton
                 size="md"
                 className={props.className}
@@ -55,11 +54,10 @@ export function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps)
                 onMouseDown={handleMouseDownCopyToClipboard}>
                 {props.children ? props.children : <Copy />}
             </IconButton>
-            <Popper popupState={popupState}>
-                <Alert color={error ? 'warning' : 'neutral'} startDecorator={error && <Warning />}>
-                    {error ? props.errorMessage : props.successMessage}
-                </Alert>
-            </Popper>
-        </>
+        )}>
+            <Alert color={error ? 'warning' : 'neutral'} startDecorator={error && <Warning />}>
+                {error ? props.errorMessage : props.successMessage}
+            </Alert>
+        </Popper>
     );
 }

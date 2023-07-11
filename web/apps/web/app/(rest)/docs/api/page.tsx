@@ -20,8 +20,6 @@ import { CopyToClipboardInput } from '@signalco/ui/dist/CopyToClipboardInput';
 import { Chip } from '@signalco/ui/dist/Chip';
 import { Card, CardOverflow } from '@signalco/ui/dist/Card';
 import { Button } from '@signalco/ui/dist/Button';
-import { Box } from '@signalco/ui/dist/Box';
-import { Badge } from '@signalco/ui/dist/Badge';
 import { Alert } from '@signalco/ui/dist/Alert';
 import { camelToSentenceCase, HttpOperation, ObjectDictAny } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
@@ -99,11 +97,11 @@ function Schema(props: { name: string, schema: OpenAPIV3.ReferenceObject | OpenA
                 <Typography>{props.name}</Typography>
                 <Typography level="body2">{schemaResolved?.type}</Typography>
             </Row>
-            <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', px: 2 }}>
+            <div className="px-2 border-l">
                 {schemaResolved?.type === 'array'
                     ? <ArraySchema name={props.name} schema={schemaResolved as OpenAPIV3.ArraySchemaObject} />
                     : <NonArraySchema name={props.name} schema={schemaResolved as OpenAPIV3.NonArraySchemaObject} />}
-            </Box>
+            </div>
         </div>
     );
 }
@@ -210,11 +208,10 @@ function ApiOperation(props: ApiOperationProps) {
 
 function ResponseStatusCode(props: { statusCode: number }) {
     return (
-        <Badge color={props.statusCode < 300 ? 'success' : (props.statusCode < 500 ? 'warning' : 'danger')}>
-            <div style={{ paddingRight: 4 }}>
-                <Typography>{props.statusCode}</Typography>
-            </div>
-        </Badge>
+        <Row spacing={1}>
+            <Chip color={props.statusCode < 300 ? 'success' : (props.statusCode < 500 ? 'warning' : 'error')} />
+            <Typography>{props.statusCode}</Typography>
+        </Row>
     );
 }
 
@@ -275,12 +272,12 @@ function Nav() {
                                 selected={pathName === op.pathName && operationName === op.operationName}
                                 onSelected={handleItemSelected}
                                 label={(
-                                    <Box sx={{ py: 0.5 }}>
+                                    <div className="py-1">
                                         <Row justifyContent="space-between" spacing={1}>
                                             <Typography noWrap level="body2">{op.pathName}</Typography>
                                             <HttpOperationChip operation={op.operationName} small />
                                         </Row>
-                                    </Box>
+                                    </div>
                                 )} />
                         ))}
                     </ListTreeItem>
@@ -333,22 +330,22 @@ function Route() {
         .filter(i => typeof operationName === 'undefined' || (i.operationName.toLowerCase() === operationName.toLowerCase()));
 
     return (
-        <Box py={2} pr={2}>
+        <div className="py-2 pr-2">
             <Stack spacing={4}>
                 {pathOperations.map(({ pathName, operationName, httpOperation, operation }) => (
                     <Card key={`path-${pathName}-${operationName}`}>
                         <Row spacing={2} alignItems="start">
-                            <Box sx={{ flexGrow: 1 }}>
+                            <div className="grow">
                                 <ApiOperation path={pathName} operation={httpOperation} info={operation} />
-                            </Box>
-                            <Box sx={{ width: '40%' }}>
+                            </div>
+                            <div className="w-1/3">
                                 <Actions path={pathName} operation={httpOperation} info={operation} />
-                            </Box>
+                            </div>
                         </Row>
                     </Card>
                 ))}
             </Stack>
-        </Box>
+        </div>
     );
 }
 
@@ -575,15 +572,15 @@ export default function DocsApiPage() {
                     </Alert>
                 )}
                 <Row>
-                    <Box sx={{ alignSelf: 'start', minWidth: { xs: '230px', md: '320px' }, px: 2, py: 4 }}>
+                    <div className="self-start px-2 py-4 min-w-[230px] md:min-w-[320px]">
                         <Loadable isLoading={isLoading || !api} loadingLabel="Loading API">
                             <Nav />
                         </Loadable>
-                    </Box>
+                    </div>
                     <Divider />
-                    <Box flexGrow={1}>
+                    <div className="grow">
                         <Route />
-                    </Box>
+                    </div>
                 </Row>
             </Stack>
         </ApiContext.Provider>

@@ -7,7 +7,8 @@ import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
 import { Loadable } from '@signalco/ui/dist/Loadable';
-import { List, ListItemButton } from '@signalco/ui/dist/List';
+import { List } from '@signalco/ui/dist/List';
+import { ListItem } from '@signalco/ui/dist/ListItem';
 import { Link } from '@signalco/ui/dist/Link';
 import { Container } from '@signalco/ui/dist/Container';
 import { channelsData } from '@signalco/data';
@@ -63,9 +64,10 @@ export default function AppChannelPage({ params }: { params: { channelName: stri
                                 ? (
                                     <List>
                                         {connectedChannels?.map(c => (
-                                            <ListItemButton href={`${KnownPages.Entities}/${c.id}`} key={c.id}>
-                                                <Typography>{c.alias || c.id}</Typography>
-                                            </ListItemButton>
+                                            <ListItem
+                                                key={c.id}
+                                                href={`${KnownPages.Entities}/${c.id}`}
+                                                label={c.alias || c.id} />
                                         ))}
                                     </List>
                                 ) : (

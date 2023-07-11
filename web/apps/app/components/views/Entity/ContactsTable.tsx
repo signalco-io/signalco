@@ -7,14 +7,14 @@ import { Tooltip } from '@signalco/ui/dist/Tooltip';
 import { Timeago } from '@signalco/ui/dist/Timeago';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
-import { Picker } from '@signalco/ui/dist/Picker';
-import { MenuItem ,Menu} from '@signalco/ui/dist/Menu';
+import { MenuItem, Menu } from '@signalco/ui/dist/Menu';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
-import { List, ListItem, ListItemDecorator, ListDivider } from '@signalco/ui/dist/List';
+import { ListItem } from '@signalco/ui/dist/ListItem';
+import { List } from '@signalco/ui/dist/List';
 import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import {CopyToClipboardInput} from '@signalco/ui/dist/CopyToClipboardInput';
+import { CopyToClipboardInput } from '@signalco/ui/dist/CopyToClipboardInput';
 import { Card } from '@signalco/ui/dist/Card';
 import { Button } from '@signalco/ui/dist/Button';
 import { camelToSentenceCase, isJson, ParsedJson } from '@signalco/js';
@@ -26,6 +26,7 @@ import useLocale from '../../../src/hooks/useLocale';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import { deleteContactAsync, setAsync } from '../../../src/contacts/ContactRepository';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
 
 function JsonNonArrayVisualizer({ value }: { value: ParsedJson }) {
     if (value === null ||
@@ -110,12 +111,12 @@ function DisplayJson(props: { json: string | undefined }) {
             {showSource ? (
                 <CodeEditor language="json" code={jsonFormatted} height={300} />
             ) : (
-                <List size="sm">
+                <List>
                     <ObjectVisualizer name="root" defaultOpen value={jsonObj} />
                 </List>
             )}
             <div style={{ position: 'absolute', right: 0, top: 0 }}>
-                <Picker value={showSource ? 'source' : 'ui'} size="sm" onChange={(_, s) => setShowSource(s === 'source')} options={[
+                <SelectItems value={showSource ? 'source' : 'ui'} onValueChange={value => setShowSource(value === 'source')} items={[
                     { value: 'ui', label: <UI size={18} /> },
                     { value: 'source', label: <Code size={18} /> }
                 ]} />
@@ -124,8 +125,7 @@ function DisplayJson(props: { json: string | undefined }) {
     );
 }
 
-export default function ContactsTable(props: { entity: IEntityDetails | undefined; }) {
-    const { entity } = props;
+export default function ContactsTable({ entity }: { entity: IEntityDetails | undefined; }) {
     const { t } = useLocale('App', 'Entities');
 
     const isLoading = false;
@@ -182,8 +182,8 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
             <Card>
                 <Row justifyContent="space-between">
                     <Typography>{t('Contacts')}</Typography>
-                    <Menu menuId="contacts-options" renderTrigger={(props) => (
-                        <IconButton size="sm" {...props}>
+                    <Menu trigger={(
+                        <IconButton size="sm">
                             <MoreVertical />
                         </IconButton>
                     )}>
@@ -194,11 +194,15 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                 </Row>
                 <Loadable isLoading={isLoading} loadingLabel="Loading contacts" error={error}>
                     <List>
-                        {entity?.contacts?.map((c, i) => (
-                            <Fragment key={`${c.entityId}-${c.channelName}-${c.contactName}`}>
-                                <ListItem endAction={(
-                                    <Menu renderTrigger={(props) => (
-                                        <IconButton size="sm" {...props}>
+                        {entity?.contacts?.map(c => (
+                            <ListItem
+                                key={`${c.entityId}-${c.channelName}-${c.contactName}`}
+                                startDecorator={(
+                                    <ChannelLogo channelName={c.channelName} size="tiny" label={c.channelName} />
+                                )}
+                                endDecorator={(
+                                    <Menu trigger={(
+                                        <IconButton size="sm">
                                             <MoreVertical />
                                         </IconButton>
                                     )}>
@@ -221,10 +225,8 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                                             {t('DeleteContact')}
                                         </MenuItem>
                                     </Menu>
-                                )}>
-                                    <ListItemDecorator>
-                                        <ChannelLogo channelName={c.channelName} size="tiny" label={c.channelName} />
-                                    </ListItemDecorator>
+                                )}
+                                label={(
                                     <Row spacing={1} style={{ flexGrow: 1 }}>
                                         <div style={{ width: '30%', maxWidth: '200px' }}>
                                             <Typography noWrap>{camelToSentenceCase(c.contactName)}</Typography>
@@ -238,15 +240,13 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                                             </div>
                                         </Stack>
                                     </Row>
-                                </ListItem>
-                                {i < (entity?.contacts?.length ?? 0) - 1 && <ListDivider />}
-                            </Fragment>
+                                )} />
                         ))}
                     </List>
                 </Loadable>
             </Card>
             <ConfigurationDialog
-                isOpen={createContactDialogState.isOpen}
+                open={createContactDialogState.isOpen}
                 header="Create contact"
                 onClose={createContactDialogState.close}>
                 <Stack spacing={1}>
@@ -256,7 +256,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                 </Stack>
             </ConfigurationDialog>
             <ConfigurationDialog
-                isOpen={editContactValueDialogState.isOpen}
+                open={editContactValueDialogState.isOpen}
                 header="Edit contact"
                 onClose={editContactValueDialogState.close}>
                 <Stack spacing={1}>

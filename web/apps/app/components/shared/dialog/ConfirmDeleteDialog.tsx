@@ -12,20 +12,18 @@ export interface IConfirmDeleteDialogProps {
     expectedConfirmText: string,
     onClose: () => void,
     onConfirm: () => void,
-    maxWidth?: false | undefined | 'sm' | 'md' | 'lg' | 'xl',
 }
 
 function ConfirmDeleteDialog(props: IConfirmDeleteDialogProps) {
-    const { isOpen, header, expectedConfirmText, onClose, onConfirm, maxWidth } = props;
+    const { isOpen, header, expectedConfirmText, onClose, onConfirm } = props;
     const { t } = useLocale('App', 'Dialogs');
     const [confirmText, setConfirmText] = useState('');
 
     return (
         <ConfigurationDialog
             header={header}
-            isOpen={isOpen}
-            onClose={onClose}
-            maxWidth={maxWidth}>
+            open={isOpen}
+            onClose={onClose}>
             <Stack spacing={4}>
                 <Typography>{t('ConfirmDeleteBody', { code: expectedConfirmText })}</Typography>
                 <Input label={t('Confirm')} onChange={(e) => setConfirmText(e.target.value)} />

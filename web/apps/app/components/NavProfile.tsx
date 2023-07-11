@@ -1,8 +1,8 @@
-import React, { ComponentProps, useState } from 'react';
+import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Channel, Close, Dashboard, Device, Menu as MenuIcon, LogOut, Settings } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
-import { Menu, MenuItemLink } from '@signalco/ui/dist/Menu';
+import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Divider } from '@signalco/ui/dist/Divider';
 import { Button } from '@signalco/ui/dist/Button';
@@ -28,12 +28,12 @@ const navItems: NavItem[] = [
     { label: 'Entities', path: KnownPages.Entities, icon: Device }
 ];
 
-function UserProfileAvatarButton(props: ComponentProps<typeof Button>) {
+function UserProfileAvatarButton() {
     const user = useCurrentUser();
 
     return (
         <div className="p-2 relative">
-            <Button variant="plain" className="py-6" {...props}>
+            <Button variant="plain" className="py-6">
                 <UserAvatar user={user} />
                 <div className="absolute left-1/2 -bottom-1 -translate-x-1/2">
                     <ApiBadge />
@@ -47,16 +47,14 @@ function UserProfileAvatar() {
     const { t } = useLocale('App', 'Account');
 
     return (
-        <Menu
-            menuId="account-menu"
-            renderTrigger={UserProfileAvatarButton}>
-            <MenuItemLink href={KnownPages.Settings} startDecorator={<Settings />}>
+        <Menu trigger={<UserProfileAvatarButton />}>
+            <MenuItem href={KnownPages.Settings} startDecorator={<Settings />}>
                 {t('Settings')}
-            </MenuItemLink>
+            </MenuItem>
             <Divider />
-            <MenuItemLink href={KnownPages.Logout} startDecorator={<LogOut />}>
+            <MenuItem href={KnownPages.Logout} startDecorator={<LogOut />}>
                 {t('Logout')}
-            </MenuItemLink>
+            </MenuItem>
         </Menu>
     );
 }

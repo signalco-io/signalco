@@ -8,7 +8,6 @@ import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Row } from '@signalco/ui/dist/Row';
-import { Picker } from '@signalco/ui/dist/Picker';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { Divider } from '@signalco/ui/dist/Divider';
 import { Container } from '@signalco/ui/dist/Container';
@@ -44,7 +43,7 @@ function SettingsItem(props: { children: ReactNode, label?: string | undefined }
 const SelectTimeZone: FormBuilderComponent = ({ onChange, value }) => {
     const { t } = useLocale('App', 'Settings');
     return (
-        <Picker value={value} onChange={onChange} options={[
+        <SelectItems value={value} onValueChange={onChange} items={[
             { value: '0', label: t('TimeFormat12Hour') },
             { value: '1', label: t('TimeFormat24Hour') }
         ]} />
@@ -90,7 +89,7 @@ const settingsFormComponents: FormBuilderComponents = {
     selectTimeZone: ({ value, onChange, label }) => {
         const timeZones = getTimeZones();
         return (
-            <SelectItems value={value} onValueChange={(v) => onChange(v)} items={[
+            <SelectItems value={value} onValueChange={onChange} items={[
                 { value: '0', label: '+00:00 UTC', disabled: true },
                 ...timeZones.map(tz => ({ value: tz.name, label: tz.currentTimeFormat }))
             ]} label={label} />

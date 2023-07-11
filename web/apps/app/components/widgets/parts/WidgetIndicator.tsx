@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { SmileMeh, SmileVeryHappy } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Button } from '@signalco/ui/dist/Button';
-import { Box } from '@signalco/ui/dist/Box';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultColumns, DefaultTarget } from '../../../src/widgets/WidgetConfigurationOptions';
 import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -50,12 +49,16 @@ function WidgetIndicator(props: WidgetSharedProps<ConfigProps>) {
             variant="plain"
             onClick={handleSelected}>
             <Stack style={{ height: '100%' }} alignItems="center" justifyContent="end">
-                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                <div className="flex items-end">
                     <Image src="/assets/widget-images/plant-aloe.png" alt="Plant Aloe" width={76} height={76} />
-                </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '64px', width: '100%', background: statusColor, borderRadius: '0 0 7px 7px' }}>
+                </div>
+                <div
+                    className="flex justify-center items-center h-16 w-full"
+                    style={{
+                        background: statusColor
+                    }}>
                     <Icon fontSize={32} color={iconColor} />
-                </Box>
+                </div>
             </Stack>
         </Button>
     );
