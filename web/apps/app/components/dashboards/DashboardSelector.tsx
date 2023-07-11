@@ -1,8 +1,7 @@
 import { Suspense, useEffect } from 'react';
-import { bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
 import { Select } from '@signalco/ui-icons';
 import { Row } from '@signalco/ui/dist/Row';
-import { Popper} from '@signalco/ui/dist/Popper';
+import { Popper } from '@signalco/ui/dist/Popper';
 import { Button } from '@signalco/ui/dist/Button';
 import { useSearchParam } from '@signalco/hooks';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
@@ -14,7 +13,6 @@ export interface IDashboardSelectorProps {
 
 function DashboardSelector(props: IDashboardSelectorProps) {
     const { onEditWidgets, onSettings } = props;
-    const popupState = usePopupState({ variant: 'popover', popupId: 'dashboardsMenu' });
     const [selectedId, setSelectedId] = useSearchParam('dashboard');
     const { data: dashboards } = useDashboards();
 
@@ -41,12 +39,21 @@ function DashboardSelector(props: IDashboardSelectorProps) {
             <Row>
                 {(dashboards?.length ?? 0) > 0 && (
                     <div>
-                        <Button
-                            variant="plain"
-                            size="lg"
-                            endDecorator={<Select className="pointer-events-none" />} {...bindTrigger(popupState)}>
-                            {currentName}
-                        </Button>
+                        <Popper
+                            trigger={(
+                                <Button
+                                    variant="plain"
+                                    size="lg"
+                                    endDecorator={<Select className="pointer-events-none" />}>
+                                    {currentName}
+                                </Button>
+                            )}>
+                            <DashboardSelectorMenu
+                                selectedId={selectedId}
+                                onSelection={setSelectedId}
+                                onEditWidgets={onEditWidgets}
+                                onSettings={onSettings} />
+                        </Popper>
                     </div>
                 )}
                 {(favoriteDashboards?.length ?? 0) > 0 && (
@@ -62,14 +69,6 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                     </Row>
                 )}
             </Row>
-            <Popper popupState={popupState}>
-                <DashboardSelectorMenu
-                    selectedId={selectedId}
-                    popupState={popupState}
-                    onSelection={setSelectedId}
-                    onEditWidgets={onEditWidgets}
-                    onSettings={onSettings} />
-            </Popper>
         </Suspense>
     );
 }

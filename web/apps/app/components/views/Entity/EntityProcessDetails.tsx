@@ -8,7 +8,6 @@ import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Container } from '@signalco/ui/dist/Container';
 import { Chip } from '@signalco/ui/dist/Chip';
 import { Card } from '@signalco/ui/dist/Card';
-import { Box } from '@signalco/ui/dist/Box';
 import { Alert } from '@signalco/ui/dist/Alert';
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import useContact from '../../../src/hooks/signalco/useContact';
@@ -190,12 +189,10 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                                     <Card>
                                         <Row spacing={2}>
                                             <Pause />
-                                            <Box sx={{ flexGrow: 1 }}>
-                                                <Row spacing={1} justifyContent="space-between">
-                                                    <Typography semiBold>Wait for</Typography>
-                                                    <Typography>{conduct.notBeforeConduct}</Typography>
-                                                </Row>
-                                            </Box>
+                                            <Row spacing={1} justifyContent="space-between" className="grow">
+                                                <Typography semiBold>Wait for</Typography>
+                                                <Typography>{conduct.notBeforeConduct}</Typography>
+                                            </Row>
                                         </Row>
                                     </Card>
                                 )}
@@ -203,12 +200,10 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                                     <Card>
                                         <Row spacing={2}>
                                             <Timer />
-                                            <Box sx={{ flexGrow: 1 }}>
-                                                <Row spacing={1} justifyContent="space-between">
-                                                    <Typography semiBold>Delay</Typography>
-                                                    <Typography>{`${conduct.delayBefore / 1000}s`}</Typography>
-                                                </Row>
-                                            </Box>
+                                            <Row spacing={1} justifyContent="space-between" className="grow">
+                                                <Typography semiBold>Delay</Typography>
+                                                <Typography>{`${conduct.delayBefore / 1000}s`}</Typography>
+                                            </Row>
                                         </Row>
                                     </Card>
                                 )}
@@ -226,12 +221,10 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                                     <Card>
                                         <Row spacing={2}>
                                             <Timer />
-                                            <Box sx={{ flexGrow: 1 }}>
-                                                <Row spacing={1} justifyContent="space-between">
-                                                    <Typography semiBold>Delay after</Typography>
-                                                    <Typography>{`${conduct.delayAfter / 1000}s`}</Typography>
-                                                </Row>
-                                            </Box>
+                                            <Row spacing={1} justifyContent="space-between" className="grow">
+                                                <Typography semiBold>Delay after</Typography>
+                                                <Typography>{`${conduct.delayAfter / 1000}s`}</Typography>
+                                            </Row>
                                         </Row>
                                     </Card>
                                 )}

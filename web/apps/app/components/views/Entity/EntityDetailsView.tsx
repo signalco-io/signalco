@@ -7,7 +7,6 @@ import { Loadable } from '@signalco/ui/dist/Loadable';
 import { EditableInput } from '@signalco/ui/dist/EditableInput';
 import { DisableButton } from '@signalco/ui/dist/DisableButton';
 import { Chip } from '@signalco/ui/dist/Chip';
-import { Box } from '@signalco/ui/dist/Box';
 import { Avatar } from '@signalco/ui/dist/Avatar';
 import { camelToSentenceCase } from '@signalco/js';
 import EntityIcon from '../../shared/entity/EntityIcon';
@@ -111,7 +110,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                         ))}
                     </Row>
                 </Stack>
-                <Box sx={{ px: { xs: 1, sm: 2 } }}>
+                <div className="px-1 sm:px-2">
                     {showRawResolved ? (
                         <ContactsTable entity={entity} />
                     ) : (
@@ -119,7 +118,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                             {detailsComponent}
                         </>
                     )}
-                </Box>
+                </div>
             </div>
         </Loadable>
     );

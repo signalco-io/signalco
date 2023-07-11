@@ -129,26 +129,22 @@ function WidgetConfigurationFormProvider(props: PropsWithChildren) {
 function WidgetConfiguration(props: WidgetConfigurationProps) {
     const configProps = useWidgetConfiguration(props.options, props.config, props.onConfiguration)
     return (
-        <>
-            {props.isOpen && (
-                <ConfigurationDialog
-                    header="Configure widget"
-                    isOpen={props.isOpen}
-                    onClose={configProps.onCancel}
-                    actions={(
-                        <>
-                            <Button onClick={configProps.onCancel}>Cancel</Button>
-                            <Button autoFocus onClick={configProps.onSave}>Save changes</Button>
-                        </>
-                    )}>
-                    <Stack spacing={2}>
-                        <WidgetConfigurationFormProvider>
-                            <FormBuilder form={configProps.form} onSubmit={configProps.onSave} />
-                        </WidgetConfigurationFormProvider>
-                    </Stack>
-                </ConfigurationDialog>
-            )}
-        </>
+        <ConfigurationDialog
+            header="Configure widget"
+            open={props.isOpen}
+            onClose={configProps.onCancel}
+            actions={(
+                <>
+                    <Button onClick={configProps.onCancel}>Cancel</Button>
+                    <Button autoFocus onClick={configProps.onSave}>Save changes</Button>
+                </>
+            )}>
+            <Stack spacing={2}>
+                <WidgetConfigurationFormProvider>
+                    <FormBuilder form={configProps.form} onSubmit={configProps.onSave} />
+                </WidgetConfigurationFormProvider>
+            </Stack>
+        </ConfigurationDialog>
     );
 }
 

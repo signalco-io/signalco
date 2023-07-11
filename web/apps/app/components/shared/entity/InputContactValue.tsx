@@ -1,9 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Typography } from '@signalco/ui/dist/Typography';
-import { Slider } from '@signalco/ui/dist/Slider';
 import { Row } from '@signalco/ui/dist/Row';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
-import throttle from '../../../src/helpers/Throttle';
 import blendColors from '../../../src/helpers/BlendColors';
 import IContact from '../../../src/contacts/IContact';
 
@@ -22,12 +20,12 @@ export default function InputContactValue(props: InputContactValueProps) {
     // const dataValuesMultiple = false; // TODO: Use info from contact
 
     const [sliderValue, setSliderValue] = useState<number | number[] | undefined>();
-    const [sliderColor, setSliderColor] = useState<string | undefined>();
+    const [, setSliderColor] = useState<string | undefined>();
     // const [dataValuesSelected, setDataValueSelected] = useState<string>(dataValues && dataValues.length ? [value ?? dataValues[0].value] : []);
-    const requestDoubleChangeMemoized = useCallback(throttle(async (value) => {
-        console.log('Do double change', 'contact:', props.contact, 'state:', value, 'value:', value);
-        onChange(value);
-    }, 500), []);
+    // const requestDoubleChangeMemoized = useCallback(throttle(async (value) => {
+    //     console.log('Do double change', 'contact:', props.contact, 'state:', value, 'value:', value);
+    //     onChange(value);
+    // }, 500), []);
 
     // const handleActionClick = async () => {
     //     console.debug('Do action', 'contact:', props.contact, 'state:', value, 'dataValuesSelected:', dataValuesSelected);
@@ -35,16 +33,16 @@ export default function InputContactValue(props: InputContactValueProps) {
     //     onChange(dataValuesMultiple ? dataValuesSelected : dataValuesSelected[0]);
     // };
 
-    const handleDoubleChange = (_: Event | React.SyntheticEvent, value: number | number[]) => {
-        console.debug('double changed', value)
-        setSliderValue(value);
-        requestDoubleChangeMemoized(value);
-    };
+    // const handleDoubleChange = (_: Event | React.SyntheticEvent, value: number | number[]) => {
+    //     console.debug('double changed', value)
+    //     setSliderValue(value);
+    //     requestDoubleChangeMemoized(value);
+    // };
 
-    const handleColorTemperatureChange = (_: Event | React.SyntheticEvent, value: number | number[]) => {
-        setSliderValue(value);
-        requestDoubleChangeMemoized(value);
-    };
+    // const handleColorTemperatureChange = (_: Event | React.SyntheticEvent, value: number | number[]) => {
+    //     setSliderValue(value);
+    //     requestDoubleChangeMemoized(value);
+    // };
 
     // const handleDataValuesChanged = (values: string[]) => {
     //     console.debug('selected', values)
@@ -66,7 +64,7 @@ export default function InputContactValue(props: InputContactValueProps) {
 
     if (dataType === 'bool') {
         const boolValue = typeof value === 'boolean' ? value : value === 'true';
-        return <Checkbox onCheckedChange={(checked) => onChange(checked === true)} checked={boolValue} />
+        return <Checkbox onCheckedChange={onChange} checked={boolValue} />
     } else if (dataType === 'action' || dataType === 'enum') {
         return (
             <Row>
@@ -79,28 +77,28 @@ export default function InputContactValue(props: InputContactValueProps) {
                 <IconButton onClick={handleActionClick} size="lg"><Play /></IconButton> */}
             </Row>
         );
-    } else if (dataType === 'double') {
-        const resolvedSliderValue = sliderValue ?? (typeof value !== 'undefined' ? Number.parseFloat(value) || undefined : undefined);
-        return <Slider
-            step={0.01}
-            sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
-            marks={[
-                { label: 'Low', value: 0 },
-                { label: 'High', value: 1 }
-            ]}
-            onChange={handleDoubleChange}
-            onChangeCommitted={handleDoubleChange} />
-    } else if (dataType === 'colortemp') {
-        const resolvedSliderValue = sliderValue ?? (typeof value !== 'undefined' ? Number.parseFloat(value) || undefined : undefined);
-        return <Slider
-            step={0.01}
-            sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
-            marks={[
-                { label: 'Cold', value: 0 },
-                { label: 'Warm', value: 1 }
-            ]}
-            onChange={handleColorTemperatureChange}
-            onChangeCommitted={handleColorTemperatureChange} />
+    // } else if (dataType === 'double') {
+    //     const resolvedSliderValue = sliderValue ?? (typeof value !== 'undefined' ? Number.parseFloat(value) || undefined : undefined);
+    //     return <Slider
+    //         step={0.01}
+    //         sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
+    //         marks={[
+    //             { label: 'Low', value: 0 },
+    //             { label: 'High', value: 1 }
+    //         ]}
+    //         onChange={handleDoubleChange}
+    //         onChangeCommitted={handleDoubleChange} />
+    // } else if (dataType === 'colortemp') {
+    //     const resolvedSliderValue = sliderValue ?? (typeof value !== 'undefined' ? Number.parseFloat(value) || undefined : undefined);
+    //     return <Slider
+    //         step={0.01}
+    //         sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
+    //         marks={[
+    //             { label: 'Cold', value: 0 },
+    //             { label: 'Warm', value: 1 }
+    //         ]}
+    //         onChange={handleColorTemperatureChange}
+    //         onChangeCommitted={handleColorTemperatureChange} />
     } else {
         return <Typography level="body2">Action for this contact not supported yet.</Typography>
     }

@@ -5,7 +5,6 @@ import { Row } from '@signalco/ui/dist/Row';
 import { Link } from '@signalco/ui/dist/Link';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Container } from '@signalco/ui/dist/Container';
-import { Box } from '@signalco/ui/dist/Box';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { now } from '../../src/services/DateTimeProvider';
 
@@ -33,7 +32,7 @@ const footerLinks: FooterSectionType[] = [
 
 export default function Footer() {
     return (
-        <Box sx={{ alignSelf: 'stretch', px: 2 }} component="footer">
+        <footer className="px-2 self-stretch">
             <Container maxWidth="lg">
                 <footer style={{ padding: '64px 0 32px 0' }}>
                     <Stack spacing={4}>
@@ -74,6 +73,6 @@ export default function Footer() {
                     </Stack>
                 </footer>
             </Container>
-        </Box>
+        </footer>
     );
 }

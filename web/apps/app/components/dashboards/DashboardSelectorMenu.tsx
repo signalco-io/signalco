@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import React from 'react';
-import { PopupState } from 'material-ui-popup-state/hooks';
 import { cx } from 'classix';
 import { Add, Pin, PinOff } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
@@ -23,7 +22,6 @@ import DashboardsRepository, { IDashboardModel } from '../../src/dashboards/Dash
 
 interface IDashboardSelectorMenuProps {
     selectedId: string | undefined,
-    popupState: PopupState,
     onSelection: (id: string) => void,
     onEditWidgets: () => void,
     onSettings: () => void
@@ -71,7 +69,7 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
 }
 
 function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
-    const { selectedId, popupState, onSelection, onEditWidgets, onSettings } = props;
+    const { selectedId, onSelection, onEditWidgets, onSettings } = props;
     const { t } = useLocale('App', 'Dashboards');
     const [, setDashboardId] = useSearchParam('dashboard');
     const [isFullScreen, setFullScreen] = useSearchParam('fullscreen');
@@ -84,7 +82,6 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const handleAndClose = (callback: (...params: any[]) => void) => {
         return (...params: any[]) => {
             callback(...params);
-            popupState.close();
         };
     }
 

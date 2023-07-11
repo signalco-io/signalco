@@ -3,7 +3,8 @@ import { Clear, People, Send, Share } from '@signalco/ui-icons';
 import { Tooltip } from '@signalco/ui/dist/Tooltip';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
-import { List, ListItem, ListDivider } from '@signalco/ui/dist/List';
+import { ListItem } from '@signalco/ui/dist/ListItem';
+import { List } from '@signalco/ui/dist/List';
 import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { GentleSlide } from '@signalco/ui/dist/GentleSlide';
@@ -53,7 +54,7 @@ function ShareEntityModal({ entity, entityType, onClose }: IShareEntityModalProp
 
     return (
         <ConfigurationDialog
-            isOpen
+            open
             header={t('ShareWith')}
             headerActions={(
                 <Tooltip title={t('Share')}>
@@ -82,18 +83,9 @@ function ShareEntityModal({ entity, entityType, onClose }: IShareEntityModalProp
                 </Row>
             </GentleSlide>
             <Stack spacing={1}>
-                <List variant="outlined" sx={{
-                    borderRadius: 'sm',
-                }}>
-                    {entity.sharedWith?.map((u, i) => (
-                        <>
-                            <ListItem key={u.id}>
-                                {u.fullName ?? u.email}
-                            </ListItem>
-                            {i < (entity.sharedWith?.length ?? 0) - 1 && (
-                                <ListDivider />
-                            )}
-                        </>
+                <List>
+                    {entity.sharedWith?.map((u) => (
+                        <ListItem key={u.id} label={u.fullName ?? u.email} />
                     ))}
                 </List>
             </Stack>

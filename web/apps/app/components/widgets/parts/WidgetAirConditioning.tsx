@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import Link from 'next/link';
+import { cx } from 'classix';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
-import {Icon} from '@signalco/ui/dist/Icon';
+import { Icon } from '@signalco/ui/dist/Icon';
 import { Button } from '@signalco/ui/dist/Button';
-import { Box } from '@signalco/ui/dist/Box';
 import { useLoadAndError } from '@signalco/hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
@@ -58,16 +58,20 @@ function SmallIndicator({
     return (
         <Link href={href} passHref>
             <Button variant="plain" fullWidth>
-                <Box sx={{
-                    minWidth: small ? 24 : 52,
-                    height: small ? 30 : 82,
-                    backgroundColor: isActive ? activeBackgroundColor : 'transparent', borderRadius: 1
-                }}>
+                <div
+                    className={cx(
+                        'rounded-md',
+                        !small && 'min-w-[52px] min-h-[82px]',
+                        small && 'min-w-[24px] min-h-[30px]'
+                    )}
+                    style={{
+                        backgroundColor: isActive ? activeBackgroundColor : 'transparent',
+                    }}>
                     <Stack alignItems="center" justifyContent="center" style={{ height: '100%', flexDirection: small ? 'row' : 'column' }} spacing={1}>
                         <Icon sx={{ fontSize: small ? 18 : 28, opacity: isActive ? 1 : 0.3, }}>{icon}</Icon>
                         <Typography level="body3">{label}</Typography>
                     </Stack>
-                </Box>
+                </div>
             </Button>
         </Link>
     );
@@ -119,7 +123,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
     const historyData = useLoadAndError(loadHistoryCallback);
 
     return (
-        <Box sx={{ width: '100%', height: '100%' }}>
+        <div className="w-full h-full">
             <Stack alignItems="center" justifyContent="center" style={{ height: '100%' }}>
                 <Link href={`${KnownPages.Entities}/${temperatureDevice?.id}`} passHref>
                     <Button variant="plain">
@@ -177,7 +181,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                     adaptiveDomain
                 />
             </div>
-        </Box>
+        </div>
     );
 }
 

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { cx } from 'classix';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Row } from '@signalco/ui/dist/Row';
-import { Box } from '@signalco/ui/dist/Box';
 import { Accordion } from '@signalco/ui/dist/Accordion';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import EntitySelection from './EntitySelection';
@@ -82,9 +81,9 @@ export default function EntitySelectionMenu({
                         <Typography level="body2">Select entity</Typography>
                     )}
                 </Typography>
-                <Box sx={{ p: 0, overflow: 'auto' }}>
+                <div className="overflow-auto">
                     <EntitySelection target={target} onSelected={handleEntitySelected} />
-                </Box>
+                </div>
             </Accordion>
             {(selectContact && entitySelected) && (
                 <Accordion

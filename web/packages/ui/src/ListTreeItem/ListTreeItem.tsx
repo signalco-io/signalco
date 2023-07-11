@@ -1,10 +1,12 @@
 import { PropsWithChildren, ReactElement, useState } from 'react';
 import { ExpandDown } from '@signalco/ui-icons';
-import { ListItem } from '@mui/joy';
 import { IconButton } from '../IconButton';
 import { Tooltip } from '../Tooltip';
-import { List, ListItemButton } from '../List';
+import { Button } from '../Button';
+import { Stack } from '../Stack';
 import { cx } from 'classix';
+import { Row } from '../Row';
+import { ListItem } from '../ListItem/ListItem';
 
 export type ListTreeItemProps = PropsWithChildren<{
     label?: ReactElement | string;
@@ -19,35 +21,38 @@ export function ListTreeItem(props: ListTreeItemProps) {
     const { label, children, nodeId, defaultOpen, onChange, selected, onSelected } = props;
     const [open, setOpen] = useState(defaultOpen);
 
-    const handleClick = () => {
-        if (onSelected)
-            onSelected(nodeId);
-    };
-
     const handleOpenClick = () => {
         setOpen(!open);
         if (onChange)
             onChange(nodeId, !open);
     };
 
+    const handleOnSelected = (selectedNodeId: string) => {
+        if (onSelected) {
+            onSelected(selectedNodeId);
+        }
+    };
+
     return (
-        <>
-            <ListItem nested startAction={children && (
+        <Stack>
+            <Row spacing={1}>
                 <Tooltip title="Toggle">
                     <IconButton onClick={handleOpenClick} className={"transition-transform"} size="sm">
                         <ExpandDown className={cx(open && 'rotate-90')} />
                     </IconButton>
                 </Tooltip>
-            )}>
-                <ListItemButton onClick={handleClick} selected={selected} disabled={!onSelected}>
-                    {label}
-                </ListItemButton>
-                {open && (
-                    <List>
-                        {children}
-                    </List>
-                )}
-            </ListItem>
-        </>
-    )
+                <ListItem
+                    nodeId={nodeId}
+                    label={label}
+                    selected={selected}
+                    onSelected={handleOnSelected}
+                    disabled={!onSelected} />
+            </Row>
+            {open && (
+                <Stack>
+                    {children}
+                </Stack>
+            )}
+        </Stack>
+    );
 }
