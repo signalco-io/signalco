@@ -1,8 +1,8 @@
+import type { PropsWithChildren } from 'react';
 import Link from 'next/link';
+import { cx } from 'classix';
 import { Navigate } from '@signalco/ui-icons';
 import { Button } from '../Button';
-import type { PropsWithChildren } from 'react';
-import { cx } from 'classix';
 
 export type NavigatingButtonProps = PropsWithChildren<{
     href: string;
@@ -31,7 +31,7 @@ export function NavigatingButton({
                 size={size}
                 className={hideArrow ? 'group/nav-button' : undefined}
                 startDecorator={hideArrow && (
-                    <span className='pr-1 w-[16px]' />
+                    <span className="pr-1 w-[16px]" />
                 )}
                 endDecorator={(
                     <span className={cx(

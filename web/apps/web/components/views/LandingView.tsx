@@ -19,7 +19,6 @@ import { FeaturedIntegrationsSection } from './FeaturedIntegrationsSection';
 import { FeatureDescription } from './FeatureDescription';
 import { DataPart } from './DataPart';
 
-export const Newsletter = dynamic(() => import('../pages/landing/Newsletter'));
 export const GlobePart = dynamic(() => import('../pages/landing/GlobeSection'));
 
 export default function LandingPageView() {
@@ -34,7 +33,7 @@ export default function LandingPageView() {
                     header="Developers"
                     subtitle="Signalco is free and open source project run by small team of enthusiasts."
                     direction="horizontal">
-                    <Stack alignItems="center">
+                    <Stack alignItems="center" className="self-center">
                         <Button
                             variant="solid"
                             endDecorator={<Navigate />}

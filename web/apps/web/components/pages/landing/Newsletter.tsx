@@ -82,7 +82,7 @@ function Newsletter() {
                 <Stack spacing={1}>
                     <Typography>{'We\'ll get back to you with awesome news and updates.'}</Typography>
                     <GentleSlide collapsedWhenHidden appear={!showSuccess} duration={200}>
-                        <Row>
+                        <Row spacing={1}>
                             <Input
                                 disabled={isLoading}
                                 type="email"
@@ -91,7 +91,7 @@ function Newsletter() {
                                 className="w-full max-w-md"
                                 value={email}
                                 onChange={handleOnEmail} />
-                            <Button loading={isLoading} type="submit" variant="soft" size="lg">Subscribe</Button>
+                            <Button loading={isLoading} type="submit" variant="solid" color="primary">Subscribe</Button>
                         </Row>
                     </GentleSlide>
                     <GentleSlide collapsedWhenHidden appear={error != null} direction="down" duration={200}>
