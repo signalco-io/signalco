@@ -30,7 +30,7 @@
         "typescript": "5.1.6"
     },
     "dependencies": {
-        "@babel/core": "7.22.8",
+        "@babel/core": "7.22.9",
         "@radix-ui/react-checkbox": "1.0.4",
         "@radix-ui/react-dialog": "1.0.4",
         "@radix-ui/react-menubar": "1.0.3",
@@ -46,7 +46,7 @@
         "tailwindcss-animate": "1.0.6"
     },
     "peerDependencies": {
-        "@babel/core": "7.22.8",
+        "@babel/core": "7.22.9",
         "@signalco/ui-icons": "workspace:*",
         "next": "13.4.9",
         "react": "18.2.0",
