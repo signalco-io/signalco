@@ -10,11 +10,16 @@ export interface DisplayWidgetProps {
     listeners?: SyntheticListenerMap;
 }
 
+type WidgetConfig = {
+    columns?: number;
+    rows?: number;
+}
+
 export default function DisplayWidget(props: WidgetProps & DisplayWidgetProps) {
     const { style, elementRef, attributes, listeners, ...rest } = props;
     const [span, setSpan] = useState({
-        colSpan: (rest.config as any)?.columns || 2,
-        rowSpan: (rest.config as any)?.rows || 2
+        colSpan: (rest.config as WidgetConfig)?.columns || 2,
+        rowSpan: (rest.config as WidgetConfig)?.rows || 2
     });
 
     return (

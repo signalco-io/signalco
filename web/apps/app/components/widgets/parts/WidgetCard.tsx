@@ -14,10 +14,15 @@ const WidgetConfiguration = dynamic(() => import('./WidgetConfiguration'));
 interface IWidgetCardProps {
     children: JSX.Element,
     isEditMode?: boolean
-    config?: any,
-    options?: IWidgetConfigurationOption<any>[],
-    onConfigured?: (config: any) => void
+    config: object,
+    options?: IWidgetConfigurationOption<unknown>[],
+    onConfigured?: (config: object) => void
     onRemove?: () => void
+}
+
+type CardConfig = {
+    columns?: number;
+    rows?: number;
 }
 
 function WidgetCard(props: IWidgetCardProps) {
@@ -30,8 +35,8 @@ function WidgetCard(props: IWidgetCardProps) {
         onRemove
     } = props;
 
-    const width = (config as any)?.columns || 2;
-    const height = (config as any)?.rows || 2;
+    const width = (config as CardConfig)?.columns || 2;
+    const height = (config as CardConfig)?.rows || 2;
     const sizeWidth = width * 78 + (width - 1) * 8;
     const sizeHeight = height * 78 + (height - 1) * 8;
 
@@ -95,11 +100,12 @@ function WidgetCard(props: IWidgetCardProps) {
                     )}
                 </CardOverflow>
             </Card>
-            {(isConfiguring && options) && <WidgetConfiguration
-                onConfiguration={handleOnConfiguration}
-                options={options}
-                config={config}
-                isOpen={isConfiguring} />}
+            {(isConfiguring && options) &&
+                <WidgetConfiguration
+                    onConfiguration={handleOnConfiguration}
+                    options={options}
+                    config={config}
+                    isOpen={isConfiguring} />}
         </>
     );
 }

@@ -79,18 +79,12 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const orderedDashboardIds = dashboards?.slice().sort((a, b) => a.order - b.order).map(d => d.id) ?? [];
     const orderedDashboards = orderedDashboardIds?.map(dor => dashboards?.find(d => dor === d.id)!) ?? [];
 
-    const handleAndClose = (callback: (...params: any[]) => void) => {
-        return (...params: any[]) => {
-            callback(...params);
-        };
-    }
-
-    const handleNewDashboard = handleAndClose(async () => {
+    const handleNewDashboard = async () => {
         const newDashboardId = await saveDashboard.mutateAsync({
             name: 'New dashboard'
         });
         setDashboardId(newDashboardId);
-    });
+    };
 
     const handleToggleFavorite = async (id: string) => {
         const dashboard = dashboards?.find(d => d.id === id);
@@ -151,7 +145,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
                                         key={d.id}
                                         dashboard={d}
                                         selectedId={selectedId}
-                                        onSelection={(id) => handleAndClose(onSelection)(id)}
+                                        onSelection={onSelection}
                                         onFavorite={handleToggleFavorite} />
                                 ))}
                             </SortableContext>
@@ -167,9 +161,9 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
                         </div>
                         <ShareEntityChip entity={selectedDashboard} entityType={3} />
                     </Row>
-                    <Button variant="plain" onClick={handleAndClose(onFullscreen)}>{t('ToggleFullscreen')}</Button>
-                    <Button variant="plain" onClick={handleAndClose(onSettings)}>{t('Settings')}</Button>
-                    <Button variant="plain" onClick={handleAndClose(onEditWidgets)}>{t('EditWidgets')}</Button>
+                    <Button variant="plain" onClick={onFullscreen}>{t('ToggleFullscreen')}</Button>
+                    <Button variant="plain" onClick={onSettings}>{t('Settings')}</Button>
+                    <Button variant="plain" onClick={onEditWidgets}>{t('EditWidgets')}</Button>
                 </Stack>
             </Stack>
         </Card>

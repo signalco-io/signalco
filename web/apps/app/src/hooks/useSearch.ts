@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react';
+import { ObjectDictAny } from '@signalco/js';
 
-export function filterFuncObjectStringProps<TItem extends object>(i: TItem, kw: string) {
+export function filterFuncObjectStringProps<TItem extends ObjectDictAny>(i: TItem, kw: string) {
     return Object
         .keys(i)
-        .filter(ik => typeof (i as any)[ik] === 'string' && (i as any)[ik].toString().toLowerCase().indexOf(kw) >= 0)
+        .filter(ik => ik in i && (i[ik]?.toString().toLowerCase().indexOf(kw) ?? -1) >= 0)
         .length > 0;
 }
 

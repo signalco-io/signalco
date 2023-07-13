@@ -3,7 +3,7 @@ import IContactPointer from '../contacts/IContactPointer';
 
 export interface IConduct {
     pointer: IContactPointer,
-    value?: any,
+    value?: unknown,
     delay: number
 }
 

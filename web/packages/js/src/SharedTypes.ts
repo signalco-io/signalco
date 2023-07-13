@@ -1,6 +1,6 @@
 export type HttpOperation = 'get' | 'post' | 'put' | 'delete' | 'trace' | 'options' | 'head' | 'patch';
 
-export type ObjectDictAny = { [key: string]: any | undefined };
+export type ObjectDictAny = { [key: string]: unknown | undefined };
 
 export type ObjectDict<T> = { [key: string]: T | undefined };
 

@@ -7,7 +7,7 @@ export interface ILogViewerProps {
 
 interface ILogViewerLineProps {
     number: number;
-    data: any;
+    data: string;
     lineHeight: number;
 }
 

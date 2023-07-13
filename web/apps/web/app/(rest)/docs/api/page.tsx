@@ -38,33 +38,33 @@ function HttpOperationChip(props: { operation?: HttpOperation | undefined, small
 
 type ApiOperationProps = { path: string, operation: OpenAPIV3.HttpMethods, info: OpenAPIV3.OperationObject };
 
-function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | undefined): any | undefined {
+function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | undefined): unknown | undefined {
     const schemaObj = resolveRef(api, schema);
     if (typeof schemaObj === 'undefined') return undefined;
 
     switch (schemaObj.type) {
-    case 'string':
-        return '';
-    case 'boolean': return true;
-    case 'number':
-    case 'integer': return 0;
-    case 'object': {
-        if (typeof schemaObj.properties === 'undefined') {
-            return ({});
-        }
-        const curr: ObjectDictAny = {};
-        Object.keys(schemaObj.properties).forEach(prop => {
-            if (schemaObj.properties) {
-                curr[prop] = schemaToJson(api, schemaObj.properties[prop]);
+        case 'string':
+            return '';
+        case 'boolean': return true;
+        case 'number':
+        case 'integer': return 0;
+        case 'object': {
+            if (typeof schemaObj.properties === 'undefined') {
+                return ({});
             }
-        });
-        return curr;
-    }
-    case 'array': {
-        const arraySchema = schemaObj as OpenAPIV3.ArraySchemaObject;
-        return [schemaToJson(api, arraySchema.items)];
-    }
-    default: return undefined;
+            const curr: ObjectDictAny = {};
+            Object.keys(schemaObj.properties).forEach(prop => {
+                if (schemaObj.properties) {
+                    curr[prop] = schemaToJson(api, schemaObj.properties[prop]);
+                }
+            });
+            return curr;
+        }
+        case 'array': {
+            const arraySchema = schemaObj as OpenAPIV3.ArraySchemaObject;
+            return [schemaToJson(api, arraySchema.items)];
+        }
+        default: return undefined;
     }
 }
 
@@ -294,9 +294,15 @@ function resolveRef<T>(api: OpenAPIV3.Document, obj: T | OpenAPIV3.ReferenceObje
     const refSplit = refObj.$ref.split('/')
     if (refSplit.length <= 1 || refSplit[0] !== '#')
         return obj as T; // Don't support relative for now
-    let curr: any = api;
-    for (let i = 1; i < refSplit.length && typeof curr !== 'undefined'; i++)
-        curr = curr[refSplit[i]];
+    let curr: unknown = api;
+    for (let i = 1; i < refSplit.length && typeof curr !== 'undefined'; i++) {
+        const nextKey = refSplit[i];
+        const next: unknown | null = curr != null && typeof curr === 'object' && nextKey in curr ? curr[nextKey] : null;
+        if (next == null) {
+            break;
+        }
+        curr = next;
+    }
     return curr as unknown as T;
 }
 
