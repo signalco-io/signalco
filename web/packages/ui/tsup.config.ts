@@ -1,8 +1,7 @@
-import { globSync } from 'glob';
-import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-
+import path from 'node:path';
 import { defineConfig } from 'tsup';
+import { globSync } from 'glob';
 
 export default defineConfig((opts) => ({
     entry: Object.fromEntries(

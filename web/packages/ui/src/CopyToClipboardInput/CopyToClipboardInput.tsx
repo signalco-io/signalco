@@ -1,6 +1,6 @@
 import { Copy } from '@signalco/ui-icons';
-import { IconButtonCopyToClipboard } from '../IconButtonCopyToClipboard';
 import { Input, type InputProps } from '../Input';
+import { IconButtonCopyToClipboard } from '../IconButtonCopyToClipboard';
 
 export type CopyToClipboardInputProps = InputProps;
 

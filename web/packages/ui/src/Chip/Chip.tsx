@@ -1,12 +1,12 @@
 import type { PropsWithChildren, MouseEventHandler, ReactNode } from 'react';
-import {Link} from '../Link';
-import {Row} from '../Row';
 import { cx } from 'classix';
 import type { ColorPaletteProp } from '../theme';
+import {Row} from '../Row';
+import {Link} from '../Link';
 
 export type ChipProps = PropsWithChildren<{
     color?: ColorPaletteProp;
-    variant?: "plain" | "outlined" | "soft" | "solid";
+    variant?: 'plain' | 'outlined' | 'soft' | 'solid';
     size?: 'sm' | 'md' | 'lg';
     onClick?: MouseEventHandler<HTMLButtonElement>,
     href?: string | undefined,
@@ -18,7 +18,7 @@ const lgStyles = 'rounded-3xl px-3 text-base'; //     padding: 4px 12px; font-si
 
 export function Chip({ size, color, startDecorator, onClick, children, href }: ChipProps) {
     const className = cx(
-        'py-1 px-2 m-0 text-sm border border-neutral-500 rounded-2xl', 
+        'py-1 px-2 m-0 text-sm border border-neutral-500 rounded-2xl',
         (size && size === 'sm') && smStyles,
         (!size || size === 'lg') && lgStyles,
         // color && styles[color],

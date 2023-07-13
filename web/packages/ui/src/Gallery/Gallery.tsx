@@ -1,8 +1,8 @@
 import React from 'react';
+import {Stack} from '../Stack';
 import {GalleryGridFilter} from './GalleryGridFilter';
 import {GalleryGrid} from './GalleryGrid';
 import {GalleryFilters} from './GalleryFilters';
-import {Stack} from '../Stack';
 
 export type GalleryProps = {
     items: {

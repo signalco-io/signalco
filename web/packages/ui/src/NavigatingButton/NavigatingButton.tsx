@@ -37,7 +37,7 @@ export function NavigatingButton({
                     <span className={cx(
                         'pl-1',
                         hideArrow && 'transition-opacity opacity-0 group-hover/nav-button:opacity-100'
-                    )}> 
+                    )}>
                         <Navigate size={16} />
                     </span>
                 )}>

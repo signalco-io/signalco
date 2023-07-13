@@ -1,9 +1,9 @@
-import { cx } from "classix"
+import { cx } from 'classix'
 
-export function Divider({orientation = "horizontal"} : {orientation?: "horizontal" | "vertical"}) {
+export function Divider({orientation = 'horizontal'} : {orientation?: 'horizontal' | 'vertical'}) {
     return (
         <div className={cx(
-            "shrink-0 bg-border",
-            orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]")} />
+            'shrink-0 bg-border',
+            orientation === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]')} />
     );
 }

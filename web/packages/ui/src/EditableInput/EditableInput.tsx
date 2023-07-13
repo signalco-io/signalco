@@ -1,10 +1,10 @@
 import React, { InputHTMLAttributes, useEffect, useState } from 'react';
+import { cx } from 'classix';
 import { Close, Save, Edit } from '@signalco/ui-icons';
-import { IconButton } from '../IconButton';
 import { Typography } from '../Typography';
 import { Row } from '../Row';
-import { cx } from 'classix';
 import { Input } from '../Input';
+import { IconButton } from '../IconButton';
 
 export type EditableInputProps = {
     value: string,
@@ -72,7 +72,7 @@ export function EditableInput({
         return (
             <Row
                 role="button"
-                className={cx("group py-1 cursor-pointer", className)}
+                className={cx('group py-1 cursor-pointer', className)}
                 spacing={1}
                 onClick={() => setIsEditing(true)}
             >

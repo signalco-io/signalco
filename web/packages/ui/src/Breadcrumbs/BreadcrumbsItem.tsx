@@ -1,5 +1,5 @@
-import { Link } from '../Link';
 import { Typography } from '../Typography';
+import { Link } from '../Link';
 
 export function BreadcrumbsItem({ href, label }: { href?: string; label: string | undefined; }) {
     if (href) {

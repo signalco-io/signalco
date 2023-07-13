@@ -1,4 +1,4 @@
-import type { ColorVariants } from "../theme";
+import type { ColorVariants } from '../theme';
 
 export type DotIndicatorProps = {
     color: ColorVariants;

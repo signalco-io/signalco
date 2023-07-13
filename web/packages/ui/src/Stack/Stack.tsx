@@ -1,5 +1,5 @@
-import { cx } from "classix";
-import type { CSSProperties, HTMLAttributes } from "react";
+import type { CSSProperties, HTMLAttributes } from 'react';
+import { cx } from 'classix';
 
 export type StackProps = HTMLAttributes<HTMLDivElement> & {
     spacing?: number;
@@ -11,16 +11,16 @@ export function Stack({ spacing, alignItems, justifyContent, style, className, .
     return (
         <div
             className={cx(
-                `flex flex-col`, 
-                alignItems === 'start' && `[align-items:start]`,
-                alignItems === 'center' && `[align-items:center]`,
-                !alignItems && `[align-items:stretch]`,
-                Boolean(spacing) && `gap-[--s-gap]`,
-                justifyContent === 'start' && `[justify-content:start]`,
-                justifyContent === 'center' && `[justify-content:center]`,
-                justifyContent === 'end' && `[justify-content:end]`,
-                justifyContent === 'space-between' && `[justify-content:space-between]`,
-                justifyContent === 'stretch' && `[justify-content:stretch]`,
+                'flex flex-col',
+                alignItems === 'start' && '[align-items:start]',
+                alignItems === 'center' && '[align-items:center]',
+                !alignItems && '[align-items:stretch]',
+                Boolean(spacing) && 'gap-[--s-gap]',
+                justifyContent === 'start' && '[justify-content:start]',
+                justifyContent === 'center' && '[justify-content:center]',
+                justifyContent === 'end' && '[justify-content:end]',
+                justifyContent === 'space-between' && '[justify-content:space-between]',
+                justifyContent === 'stretch' && '[justify-content:stretch]',
                 className)}
             style={{
                 '--s-gap': `${(spacing ?? 0) * 8}px`,
