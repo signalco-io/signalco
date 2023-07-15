@@ -15,7 +15,7 @@ import { requestAsync } from '../../src/services/HttpService';
 import useLocale from '../../src/hooks/useLocale';
 
 interface IShareEntityChipProps {
-    entity?: { id: string, sharedWith?: IUser[] };
+    entity?: { id: string, sharedWith?: IUser[] } | null;
     entityType: number;
     disableAction?: boolean;
     hideSingle?: boolean;

@@ -83,8 +83,8 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
     return (
         <Stack spacing={4}>
             <Input placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />
-            <div className="overflow-x-hidden overflow-y-auto">
-                <div className="grid gap-2 justify-center auto-cols-max">
+            <div className="overflow-y-auto overflow-x-hidden">
+                <div className="grid auto-cols-max justify-center gap-2">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (
                         <Card key={`${availableWidget.type}-${index}`} className="w-64">
                             <Row spacing={1} justifyContent="space-between">

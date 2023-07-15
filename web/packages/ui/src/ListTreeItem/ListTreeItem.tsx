@@ -6,7 +6,6 @@ import { Stack } from '../Stack';
 import { Row } from '../Row';
 import { ListItem } from '../ListItem/ListItem';
 import { IconButton } from '../IconButton';
-import { Button } from '../Button';
 
 export type ListTreeItemProps = PropsWithChildren<{
     label?: ReactElement | string;

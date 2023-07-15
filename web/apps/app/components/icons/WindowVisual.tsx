@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import { useState } from 'react';
 import { useInterval } from '@signalco/hooks';
 import { now } from '../../src/services/DateTimeProvider';

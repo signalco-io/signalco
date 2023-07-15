@@ -151,7 +151,7 @@ function ChartGenericTooltip({
     if (active && payload && payload.length) {
         const dateTime = domain.invert(payload[0].payload.key) as Date;
         return (
-            <Card className="max-w-44">
+            <Card className="max-w-xs">
                 <Typography>{`${payload[0].value}${units || ''}`}</Typography>
                 <Timeago date={dateTime} />
                 <Typography level="body2">{`${dateTime.getFullYear()}-${dateTime.getMonth().toString().padStart(2, '0')}-${dateTime.getDate().toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`}</Typography>

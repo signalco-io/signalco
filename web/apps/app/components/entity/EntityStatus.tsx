@@ -5,7 +5,7 @@ import { now } from '../../src/services/DateTimeProvider';
 import IEntityDetails from '../../src/entity/IEntityDetails';
 import { entityInError, entityHasOffline, entityLastActivity } from '../../src/entity/EntityHelper';
 
-export function useEntityStatus(entity: IEntityDetails | undefined) {
+export function useEntityStatus(entity: IEntityDetails | null | undefined) {
     const hasStatus = entity && entity.type === 1;
     const isOffline = useMemo(() => hasStatus ? entityInError(entity) : null, [entity, hasStatus]);
     const hasOffline = useMemo(() => hasStatus ? entityHasOffline(entity) : null, [entity, hasStatus]);
@@ -25,7 +25,7 @@ export function useEntityStatus(entity: IEntityDetails | undefined) {
 
 type EntityStatusColors = 'success' | 'warning' | 'danger' | 'neutral';
 
-export default function EntityStatus(props: { entity: IEntityDetails | undefined }) {
+export default function EntityStatus(props: { entity: IEntityDetails | null | undefined }) {
     const { hasStatus, isOffline, hasOffline, lastActivity, isStale } = useEntityStatus(props.entity);
     if (!hasStatus)
         return null;

@@ -78,7 +78,7 @@ export default function LandingPageView() {
             <GlobeSection />
             <Divider />
             <SectionCenter narrow className="bg-[--joy-palette-background-surface]">
-                <div className="flex flex-col md:flex-row gap-4 md:gap-24 items-center justify-center py-4">
+                <div className="flex flex-col items-center justify-center gap-4 py-4 md:flex-row md:gap-24">
                     <DataPart value="8" subtitle="Integrations" />
                     <DataPart value="500+" subtitle="Automations per day" />
                     <DataPart value="2000+" subtitle="Supported devices" />

@@ -32,11 +32,11 @@ const footerLinks: FooterSectionType[] = [
 
 export default function Footer() {
     return (
-        <footer className="px-2 self-stretch">
+        <footer className="self-stretch px-2">
             <Container maxWidth="lg">
                 <footer style={{ padding: '64px 0 32px 0' }}>
                     <Stack spacing={4}>
-                        <div className="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
+                        <div className="grid grid-cols-4 gap-4 sm:grid-cols-1 md:grid-cols-2">
                             {footerLinks.filter(i => isDeveloper ? true : !i.developerOnly).map(section => (
                                 <div key={section.header} className="sm:text-center md:text-left">
                                     <Typography level="h6" component="h2">{section.header}</Typography>

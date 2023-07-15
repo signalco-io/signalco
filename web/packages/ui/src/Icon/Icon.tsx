@@ -7,6 +7,7 @@ export type IconProps = PropsWithChildren<{
 export function Icon(props: IconProps) {
     return (
         <span
+            // eslint-disable-next-line tailwindcss/no-custom-classname
             className="material-icons"
             style={{
                 ...props.sx

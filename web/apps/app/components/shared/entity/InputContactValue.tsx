@@ -6,9 +6,9 @@ import blendColors from '../../../src/helpers/BlendColors';
 import IContact from '../../../src/contacts/IContact';
 
 export interface InputContactValueProps {
-    value: unknown | undefined;
+    value: string | undefined;
     contact: IContact | undefined;
-    onChange: (value: unknown) => void;
+    onChange: (value: string | undefined) => void;
 }
 
 export default function InputContactValue(props: InputContactValueProps) {
@@ -64,7 +64,7 @@ export default function InputContactValue(props: InputContactValueProps) {
 
     if (dataType === 'bool') {
         const boolValue = typeof value === 'boolean' ? value : value === 'true';
-        return <Checkbox onCheckedChange={onChange} checked={boolValue} />
+        return <Checkbox onCheckedChange={(checked) => onChange((checked ? true : false).toString())} checked={boolValue} />
     } else if (dataType === 'action' || dataType === 'enum') {
         return (
             <Row>

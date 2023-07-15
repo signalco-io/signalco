@@ -60,7 +60,7 @@ export default function Footer() {
     return (
         <footer className="self-stretch">
             <Container maxWidth="lg">
-                <div className="pt-16 pb-8">
+                <div className="pb-8 pt-16">
                     <Stack spacing={4}>
                         <Row spacing={4} alignItems="start" justifyContent="space-between" className="flex-wrap">
                             {footerLinks.filter(i => isDeveloper ? true : !i.developerOnly).map(section => (

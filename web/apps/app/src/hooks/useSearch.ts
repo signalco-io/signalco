@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
-import { ObjectDictAny } from '@signalco/js';
+import { objectWithKey } from '@signalco/js';
 
-export function filterFuncObjectStringProps<TItem extends ObjectDictAny>(i: TItem, kw: string) {
+export function filterFuncObjectStringProps<TItem extends object>(i: TItem, kw: string) {
     return Object
         .keys(i)
-        .filter(ik => ik in i && (i[ik]?.toString().toLowerCase().indexOf(kw) ?? -1) >= 0)
+        .filter(ik => (objectWithKey(i, ik)?.ik?.toString().toLowerCase().indexOf(kw) ?? -1) >= 0)
         .length > 0;
 }
 
@@ -25,7 +25,7 @@ function useSearch<TItem>(items?: TItem[], filterFunc?: (item: TItem, keyword: s
         searchText
             ? (items || []).filter(i => filterFunc ? filterFunc(i, searchText.toLowerCase()) : defaultSearchFunc(i, searchText.toLocaleLowerCase()))
             : items || [],
-    [filterFunc, items, searchText]);
+        [filterFunc, items, searchText]);
 
     return [filteredItems, searchText, handleSearchTextChange];
 }

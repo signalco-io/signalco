@@ -1,7 +1,7 @@
 'use client';
 
 import { ResponsiveContainer } from 'recharts';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ComponentProps, ReactNode, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { getTimeZones } from '@vvo/tzdb';
 import { Typography } from '@signalco/ui/dist/Typography';
@@ -12,7 +12,7 @@ import { Loadable } from '@signalco/ui/dist/Loadable';
 import { Divider } from '@signalco/ui/dist/Divider';
 import { Container } from '@signalco/ui/dist/Container';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
-import { arraySum, humanizeNumber, sequenceEqual } from '@signalco/js';
+import { arraySum, humanizeNumber, sequenceEqual, objectWithKey } from '@signalco/js';
 import { isNonEmptyString, isNotNull, noError } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, FormItems, useFormField } from '@enterwell/react-form-builder';
@@ -40,7 +40,7 @@ function SettingsItem(props: { children: ReactNode, label?: string | undefined }
     );
 }
 
-const SelectTimeZone: FormBuilderComponent = ({ onChange, value }) => {
+function SelectTimeZone({ onChange, value }: ComponentProps<FormBuilderComponent>) {
     const { t } = useLocale('App', 'Settings');
     return (
         <SelectItems value={value} onValueChange={onChange} items={[
@@ -48,9 +48,9 @@ const SelectTimeZone: FormBuilderComponent = ({ onChange, value }) => {
             { value: '1', label: t('TimeFormat24Hour') }
         ]} />
     );
-};
+}
 
-const SelectLanguage: FormBuilderComponent = ({ value, label, onChange }) => {
+function SelectLanguage({ value, label, onChange }: ComponentProps<FormBuilderComponent>) {
     const locales = useLocale('App', 'Locales');
     return (
         <SelectItems
@@ -137,19 +137,19 @@ function UsageCurrent() {
     const daysInCurrentMonth = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, 0).getDate();
     const usages = [...new Array(daysInCurrentMonth).keys()].map(d => {
         const dayUsage = JSON.parse(
-            (userEntity?.contacts.find(c =>
-                c.channelName === 'signalco' &&
-                c.contactName === `usage-${nowDate.getFullYear()}${(nowDate.getMonth() + 1).toString().padStart(2, '0')}${(d + 1).toString().padStart(2, '0')}`)
+            (userEntity?.contacts.find((c: unknown) =>
+                objectWithKey(c, 'channelName')?.channelName === 'signalco' &&
+                objectWithKey(c, 'channelName')?.contactName === `usage-${nowDate.getFullYear()}${(nowDate.getMonth() + 1).toString().padStart(2, '0')}${(d + 1).toString().padStart(2, '0')}`)
                 ?.valueSerialized)
             ?? '{}');
 
         return {
             id: `${nowDate.getFullYear()}-${(nowDate.getMonth() + 1).toString().padStart(2, '0')}-${(d + 1).toString().padStart(2, '0')}`,
             value: {
-                conduct: dayUsage.conduct ?? 0,
-                contactSet: dayUsage.contactSet ?? 0,
-                process: dayUsage.process ?? 0,
-                other: dayUsage.other ?? 0
+                consuct: Number(objectWithKey(dayUsage, 'conduct')?.conduct) || 0,
+                contactSet: Number(objectWithKey(dayUsage, 'contactSet')?.contactSet) || 0,
+                process: Number(objectWithKey(dayUsage, 'process')?.process) || 0,
+                other: Number(objectWithKey(dayUsage, 'other')?.other) || 0
             }
         };
     });

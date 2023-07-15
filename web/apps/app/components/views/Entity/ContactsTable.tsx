@@ -101,7 +101,7 @@ function ObjectVisualizer(props: { name: string, value: ParsedJson, defaultOpen?
 
 function DisplayJson(props: { json: string | undefined }) {
     const [showSource, setShowSource] = useState(false);
-    const jsonObj = useMemo(() => JSON.parse(props.json ?? ''), [props.json]);
+    const jsonObj = useMemo(() => JSON.parse(props.json ?? '') as ParsedJson, [props.json]);
     const jsonFormatted = useMemo(() => JSON.stringify(jsonObj, undefined, 4), [jsonObj]);
 
     return (
@@ -123,7 +123,7 @@ function DisplayJson(props: { json: string | undefined }) {
     );
 }
 
-export default function ContactsTable({ entity }: { entity: IEntityDetails | undefined; }) {
+export default function ContactsTable({ entity }: { entity: IEntityDetails | null | undefined; }) {
     const { t } = useLocale('App', 'Entities');
 
     const isLoading = false;

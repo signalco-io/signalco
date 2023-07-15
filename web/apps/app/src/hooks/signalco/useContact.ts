@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import type IContactPointer from '../../contacts/IContactPointer';
 import useEntity from './entity/useEntity';
 
-export default function useContact(pointer: Partial<IContactPointer> | undefined) {
+export default function useContact(pointer: Partial<IContactPointer> | null | undefined) {
     const entity = useEntity(pointer?.entityId);
 
     return useQuery(['contact', pointer?.entityId, pointer?.channelName, pointer?.contactName], () => {

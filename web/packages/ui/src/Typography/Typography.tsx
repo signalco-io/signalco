@@ -61,5 +61,5 @@ export const Typography = forwardRef<HTMLDivElement, TypographyProps>(function T
 
     const restAfterCustomStyles = populateTypographyStyles(styles, rest);
 
-    return createElement(component ?? (level?.startsWith('h') ? level : 'p'), { children, style: styles, ref: ref, ...restAfterCustomStyles });
+    return createElement(component ?? (level?.startsWith('h') ? level : 'p'), { style: styles, ref: ref, ...restAfterCustomStyles }, children);
 });

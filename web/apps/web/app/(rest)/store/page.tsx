@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
-import type { ColorVariants  } from '@signalco/ui/dist/theme';
+import type { ColorVariants } from '@signalco/ui/dist/theme';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Row } from '@signalco/ui/dist/Row';
@@ -12,6 +12,7 @@ import { Gallery } from '@signalco/ui/dist/Gallery';
 import { FilterList } from '@signalco/ui/dist/FilterList';
 import { Chip } from '@signalco/ui/dist/Chip';
 import { Card } from '@signalco/ui/dist/Card';
+import { objectWithKey } from '@signalco/js';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import SignalcoLogo from '../../../components/icons/SignalcoLogo';
 import contentData from './content.json';
@@ -92,7 +93,12 @@ const orderByItems = [
 ];
 
 function stockStatus(id: string) {
-    if ((contentData.stock as any)[id]?.inStock > 0) return 1;
+    const stock = objectWithKey(contentData.stock, id);
+    const stockWithInStock = objectWithKey(stock, 'inStock');
+
+    if (typeof stockWithInStock?.inStock === 'number'
+        && stockWithInStock?.inStock > 0)
+        return 1;
     return 0;
 }
 
@@ -108,9 +114,9 @@ export default function StorePage() {
     // const { t: tCommunication } = useLocale('Store', 'Communication');
     const tCategories = (key: string) => key;
     const tCommunication = (key: string) => key;
-    const categories = props.categories.filter(b => typeof b !== 'undefined').map(c => ({ id: c!, label: tCategories(c!) }));
-    const brands = props.brands.filter(b => typeof b !== 'undefined').map(b => ({ id: b!, label: b! }));
-    const communication = props.communication.filter(b => typeof b !== 'undefined').map(b => ({ id: b!, label: tCommunication(b!) }));
+    const categories = props.categories.filter(Boolean).map(c => ({ id: c, label: tCategories(c) }));
+    const brands = props.brands.filter(Boolean).map(b => ({ id: b, label: b }));
+    const communication = props.communication.filter(Boolean).map(b => ({ id: b, label: tCommunication(b) }));
 
     const items = contentData.items.map(i => ({
         id: i.id,

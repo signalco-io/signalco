@@ -7,7 +7,7 @@ export type AlertProps = HTMLAttributes<HTMLDivElement> & {
     endDecorator?: ReactNode | undefined,
 };
 
-export function Alert({ color, startDecorator, endDecorator, className, ...props }: AlertProps) {
+export function Alert({ className, ...props }: AlertProps) {
     return (
         <div
             role="alert"

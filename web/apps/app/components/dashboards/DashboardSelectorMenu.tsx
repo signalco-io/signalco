@@ -58,7 +58,7 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
                 >
                     {dashboard.name}
                 </Button>
-                <div className="position-absolute right-0 h-full">
+                <div className="absolute right-0 h-full">
                     <IconButton onClick={() => onFavorite(dashboard.id)}>
                         {dashboard.isFavorite ? <Pin /> : <PinOff />}
                     </IconButton>
@@ -77,7 +77,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const saveDashboard = useSaveDashboard();
 
     const orderedDashboardIds = dashboards?.slice().sort((a, b) => a.order - b.order).map(d => d.id) ?? [];
-    const orderedDashboards = orderedDashboardIds?.map(dor => dashboards?.find(d => dor === d.id)!) ?? [];
+    const orderedDashboards = orderedDashboardIds?.map((dor) => dashboards?.find(d => dor === d.id)!) ?? [];
 
     const handleNewDashboard = async () => {
         const newDashboardId = await saveDashboard.mutateAsync({

@@ -23,7 +23,6 @@ export function Button({
     disabled,
     loading,
     variant,
-    color,
     size,
     href,
     fullWidth,

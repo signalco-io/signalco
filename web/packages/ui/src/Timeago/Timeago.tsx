@@ -15,7 +15,7 @@ export function Timeago(props: TimeagoProps) {
         <div>
             {isNever
                 ? <Typography level="body3">?</Typography>
-                : <ReactTimeago date={date!} live={live} />}
+                : <ReactTimeago date={date} live={live} />}
         </div>
     )
 }

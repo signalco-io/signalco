@@ -5,7 +5,14 @@ module.exports = {
         "next/core-web-vitals",
         "plugin:import/recommended",
         "plugin:import/typescript",
-        'plugin:@typescript-eslint/recommended'
+        'plugin:@typescript-eslint/recommended',
+        "plugin:tailwindcss/recommended"
+    ],
+    overrides: [
+        {
+            files: ['*.ts', '*.tsx', '*.js'],
+            parser: '@typescript-eslint/parser',
+        },
     ],
     settings: {
         "import/resolver": {
@@ -18,6 +25,7 @@ module.exports = {
         },
     },
     rules: {
+        "@next/next/no-html-link-for-pages": "off",
         indent: [
             "error",
             4

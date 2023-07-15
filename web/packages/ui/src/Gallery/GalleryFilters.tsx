@@ -8,7 +8,7 @@ export type GalleryFiltersProps = {
 export function GalleryFilters(props: GalleryFiltersProps) {
     const { filters } = props;
     return (
-        <Stack className="w-full md:max-w-[24%] h-fit gap-1 md:gap-4">
+        <Stack className="h-fit w-full gap-1 md:max-w-[24%] md:gap-4">
             {filters}
         </Stack>
     );

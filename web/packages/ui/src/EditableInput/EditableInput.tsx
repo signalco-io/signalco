@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { cx } from 'classix';
 import { Close, Save, Edit } from '@signalco/ui-icons';
 import { Typography } from '../Typography';
@@ -77,7 +77,7 @@ export function EditableInput({
                 onClick={() => setIsEditing(true)}
             >
                 <Typography>{value}</Typography>
-                <span className="editIndicator invisible group-hover:visible"><Edit size={16} /></span>
+                <span className="invisible group-hover:visible"><Edit size={16} /></span>
             </Row>
         )
     }

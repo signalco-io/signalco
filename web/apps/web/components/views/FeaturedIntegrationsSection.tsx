@@ -23,7 +23,7 @@ export function FeaturedIntegrationsSection() {
                 <Typography level="body2" textAlign="center" textTransform="uppercase">Featured integrations</Typography>
                 <div className="flex items-center justify-between">
                     {integrationsList.map((channel) => (
-                        <Link key={channel.name} href={channel.url} className="hover:opacity-75 transition-opacity duration-200 text-center">
+                        <Link key={channel.name} href={channel.url} className="text-center transition-opacity duration-200 hover:opacity-75">
                             <Image
                                 alt={channel.name}
                                 src={channel.img}

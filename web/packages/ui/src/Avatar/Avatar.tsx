@@ -7,5 +7,5 @@ export type AvatarProps = PropsWithChildren<{
 }>;
 
 export function Avatar({ children }: AvatarProps) {
-    return <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center">{children}</div>;
+    return <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted">{children}</div>;
 }

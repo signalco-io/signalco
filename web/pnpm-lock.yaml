@@ -172,7 +172,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tsconfig
       '@total-typescript/ts-reset':
-        specifier: ^0.4.2
+        specifier: 0.4.2
         version: 0.4.2
       '@types/color':
         specifier: 3.0.3
@@ -343,6 +343,9 @@ importers:
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
+      '@total-typescript/ts-reset':
+        specifier: 0.4.2
+        version: 0.4.2
       '@types/color':
         specifier: 3.0.3
         version: 3.0.3
@@ -586,6 +589,9 @@ importers:
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
+      '@total-typescript/ts-reset':
+        specifier: 0.4.2
+        version: 0.4.2
       '@types/color':
         specifier: 3.0.3
         version: 3.0.3
@@ -813,6 +819,9 @@ importers:
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
+      '@total-typescript/ts-reset':
+        specifier: 0.4.2
+        version: 0.4.2
       '@types/cobe':
         specifier: 0.4.0
         version: 0.4.0
@@ -912,6 +921,9 @@ importers:
       eslint-plugin-react:
         specifier: 7.32.2
         version: 7.32.2(eslint@8.44.0)
+      eslint-plugin-tailwindcss:
+        specifier: 3.13.0
+        version: 3.13.0(tailwindcss@3.3.2)
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -10099,6 +10111,17 @@ packages:
       resolve: 2.0.0-next.4
       semver: 6.3.0
       string.prototype.matchall: 4.0.8
+    dev: false
+
+  /eslint-plugin-tailwindcss@3.13.0(tailwindcss@3.3.2):
+    resolution: {integrity: sha512-Fcep4KDRLWaK3KmkQbdyKHG0P4GdXFmXdDaweTIPcgOP60OOuWFbh1++dufRT28Q4zpKTKaHwTsXPJ4O/EjU2Q==}
+    engines: {node: '>=12.13.0'}
+    peerDependencies:
+      tailwindcss: ^3.3.2
+    dependencies:
+      fast-glob: 3.2.12
+      postcss: 8.4.25
+      tailwindcss: 3.3.2
     dev: false
 
   /eslint-plugin-turbo@1.10.7(eslint@8.44.0):

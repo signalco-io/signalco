@@ -32,10 +32,10 @@ function UserProfileAvatarButton() {
     const user = useCurrentUser();
 
     return (
-        <div className="p-2 relative">
+        <div className="relative p-2">
             <Button variant="plain" className="py-6">
                 <UserAvatar user={user} />
-                <div className="absolute left-1/2 -bottom-1 -translate-x-1/2">
+                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2">
                     <ApiBadge />
                 </div>
             </Button>
@@ -77,9 +77,9 @@ function NavProfile() {
     console.log('NavProfile rendered');
 
     return (
-        <div className="flex flex-row sm:flex-col justify-between sm:justify-start items-center min-h-[60px] gap-1">
+        <div className="flex min-h-[60px] flex-row items-center justify-between gap-1 sm:flex-col sm:justify-start">
             <UserProfileAvatar />
-            <div className="w-full hidden sm:block">
+            <div className="hidden w-full sm:block">
                 <Stack>
                     {visibleNavItems
                         .map((ni, index) => (
@@ -96,7 +96,7 @@ function NavProfile() {
                 <IconButton variant="plain" size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
                     {mobileMenuOpen ? <Close /> : <MenuIcon />}
                 </IconButton>
-                <div className="fixed top-[60px] bottom-0 left-0 right-0 z-50 bg-current" style={{
+                <div className="fixed inset-x-0 bottom-0 top-[60px] z-50 bg-current" style={{
                     display: !mobileMenuOpen ? 'none' : 'block',
                     position: 'fixed',
                     top: '60px',

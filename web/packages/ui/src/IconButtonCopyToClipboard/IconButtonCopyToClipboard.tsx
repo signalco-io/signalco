@@ -1,4 +1,4 @@
-import { MouseEvent, type PropsWithChildren, useId, useState } from 'react';
+import { MouseEvent, type PropsWithChildren, useState } from 'react';
 import { Copy, Warning } from '@signalco/ui-icons';
 import { Popper } from '../Popper';
 import { IconButton } from '../IconButton';
@@ -14,7 +14,6 @@ export type IconButtonCopyToClipboardProps = PropsWithChildren<{
 }>;
 
 export function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps) {
-    const id = useId();
     const [notificationOpen, setNotificationOpen] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
 
