@@ -138,8 +138,8 @@ importers:
         specifier: 2.7.2
         version: 2.7.2(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       sharp:
-        specifier: 0.32.2
-        version: 0.32.2
+        specifier: 0.32.4
+        version: 0.32.4
       suncalc:
         specifier: 1.9.0
         version: 1.9.0
@@ -316,8 +316,8 @@ importers:
         specifier: 4.4.5
         version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
       sharp:
-        specifier: 0.32.2
-        version: 0.32.2
+        specifier: 0.32.4
+        version: 0.32.4
       tailwindcss:
         specifier: 3.3.3
         version: 3.3.3
@@ -437,8 +437,8 @@ importers:
         specifier: 4.4.5
         version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
       sharp:
-        specifier: 0.32.2
-        version: 0.32.2
+        specifier: 0.32.4
+        version: 0.32.4
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.3
@@ -568,8 +568,8 @@ importers:
         specifier: 4.4.5
         version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
       sharp:
-        specifier: 0.32.2
-        version: 0.32.2
+        specifier: 0.32.4
+        version: 0.32.4
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.3
@@ -792,8 +792,8 @@ importers:
         specifier: 4.4.5
         version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
       sharp:
-        specifier: 0.32.2
-        version: 0.32.2
+        specifier: 0.32.4
+        version: 0.32.4
       tailwindcss:
         specifier: 3.3.3
         version: 3.3.3
@@ -9466,8 +9466,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /detect-libc@2.0.1:
-    resolution: {integrity: sha512-463v3ZeIrcWtdgIg6vI6XUncguvr2TnGl4SzDXinkt9mSLpBJKXT3mW6xT3VQdDN11+WVs29pgvivTc4Lp8v+w==}
+  /detect-libc@2.0.2:
+    resolution: {integrity: sha512-UX6sGumvvqSaXgdKGUsgZWqcUyIXZ/vZTrlRT/iobiKhGL0zL4d3osHj3uqllWJK+i+sixDS/3COVEOFbupFyw==}
     engines: {node: '>=8'}
     dev: false
 
@@ -13849,7 +13849,7 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      detect-libc: 2.0.1
+      detect-libc: 2.0.2
       expand-template: 2.0.3
       github-from-package: 0.0.0
       minimist: 1.2.8
@@ -14944,13 +14944,13 @@ packages:
       kind-of: 6.0.3
     dev: true
 
-  /sharp@0.32.2:
-    resolution: {integrity: sha512-e4hyWKtU7ks/rLmoPys476zhpQnLqPJopz4+5b6OPeyJfvCTInAp0pe5tGhstjsNdUvDLrUVGEwevewYdZM8Eg==}
+  /sharp@0.32.4:
+    resolution: {integrity: sha512-exUnZewqVZC6UXqXuQ8fyJJv0M968feBi04jb9GcUHrWtkRoAKnbJt8IfwT4NJs7FskArbJ14JAFGVuooszoGg==}
     engines: {node: '>=14.15.0'}
     requiresBuild: true
     dependencies:
       color: 4.2.3
-      detect-libc: 2.0.1
+      detect-libc: 2.0.2
       node-addon-api: 6.1.0
       prebuild-install: 7.1.1
       semver: 7.5.4
