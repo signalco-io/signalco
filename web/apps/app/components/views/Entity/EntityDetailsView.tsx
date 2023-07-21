@@ -70,7 +70,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
 
     return (
         <Loadable isLoading={isLoading} loadingLabel="Loading entity" error={error}>
-            <div className="flex flex-column xs:gap-1 sm:gap-4 sm:pt-2">
+            <div className="xs:gap-1 flex flex-col sm:gap-4 sm:pt-2">
                 <Stack style={{ paddingLeft: 16, paddingRight: 16 }} spacing={1}>
                     <Row spacing={1} justifyContent="space-between">
                         <Row spacing={2}>
@@ -78,7 +78,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                                 <Icon />
                             </Avatar>
                             <EditableInput
-                                className="font-light xs:text-lg sm:text-2xl"
+                                className="xs:text-lg font-light sm:text-2xl"
                                 value={entity?.alias || ''}
                                 onChange={handleRename} />
                         </Row>

@@ -8,6 +8,7 @@ import { Loadable } from '@signalco/ui/dist/Loadable';
 import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Accordion } from '@signalco/ui/dist/Accordion';
+import { asArray, objectWithKey } from '@signalco/js';
 import { useLoadAndError } from '@signalco/hooks';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/index.types';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
@@ -32,10 +33,11 @@ async function latLngToAddress(latLng?: [number, number]) {
 
     const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${latLng[1]},${latLng[0]}.json?types=place%2Cpostcode%2Caddress&limit=1&access_token=${mapBoxAccessToken}`);
     const data = await response.json();
-    const newPlaceName = data.features && data.features.length
-        ? data.features[0].place_name
-        : `${latLng[1].toFixed(4)}, ${latLng[0].toFixed(4)}`
-    return newPlaceName;
+    const dataFeatures = objectWithKey(data, 'features')?.features;
+    const newPlaceName = Array.isArray(dataFeatures) && dataFeatures.length
+        ? objectWithKey(asArray(dataFeatures)?.at(0), 'place_name')?.place_name
+        : `${latLng[1].toFixed(4)}, ${latLng[0].toFixed(4)}`;
+    return typeof newPlaceName !== 'string' ? '' : newPlaceName;
 }
 
 export default function LocationMapPicker(props: LocationMapPickerProps) {

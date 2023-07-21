@@ -21,7 +21,7 @@ import { Chip } from '@signalco/ui/dist/Chip';
 import { Card, CardOverflow } from '@signalco/ui/dist/Card';
 import { Button } from '@signalco/ui/dist/Button';
 import { Alert } from '@signalco/ui/dist/Alert';
-import { camelToSentenceCase, HttpOperation, ObjectDictAny } from '@signalco/js';
+import { camelToSentenceCase, HttpOperation, ObjectDictAny, objectWithKey } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
 
@@ -38,7 +38,7 @@ function HttpOperationChip(props: { operation?: HttpOperation | undefined, small
 
 type ApiOperationProps = { path: string, operation: OpenAPIV3.HttpMethods, info: OpenAPIV3.OperationObject };
 
-function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | undefined): any | undefined {
+function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | undefined): unknown | undefined {
     const schemaObj = resolveRef(api, schema);
     if (typeof schemaObj === 'undefined') return undefined;
 
@@ -97,7 +97,7 @@ function Schema(props: { name: string, schema: OpenAPIV3.ReferenceObject | OpenA
                 <Typography>{props.name}</Typography>
                 <Typography level="body2">{schemaResolved?.type}</Typography>
             </Row>
-            <div className="px-2 border-l">
+            <div className="border-l px-2">
                 {schemaResolved?.type === 'array'
                     ? <ArraySchema name={props.name} schema={schemaResolved as OpenAPIV3.ArraySchemaObject} />
                     : <NonArraySchema name={props.name} schema={schemaResolved as OpenAPIV3.NonArraySchemaObject} />}
@@ -294,9 +294,15 @@ function resolveRef<T>(api: OpenAPIV3.Document, obj: T | OpenAPIV3.ReferenceObje
     const refSplit = refObj.$ref.split('/')
     if (refSplit.length <= 1 || refSplit[0] !== '#')
         return obj as T; // Don't support relative for now
-    let curr: any = api;
-    for (let i = 1; i < refSplit.length && typeof curr !== 'undefined'; i++)
-        curr = curr[refSplit[i]];
+    let curr: unknown = api;
+    for (let i = 1; i < refSplit.length && typeof curr !== 'undefined'; i++) {
+        const nextKey = refSplit[i];
+        const next = objectWithKey(curr, nextKey)?.nextKey;
+        if (next == null) {
+            break;
+        }
+        curr = next;
+    }
     return curr as unknown as T;
 }
 
@@ -572,7 +578,7 @@ export default function DocsApiPage() {
                     </Alert>
                 )}
                 <Row>
-                    <div className="self-start px-2 py-4 min-w-[230px] md:min-w-[320px]">
+                    <div className="min-w-[230px] self-start px-2 py-4 md:min-w-[320px]">
                         <Loadable isLoading={isLoading || !api} loadingLabel="Loading API">
                             <Nav />
                         </Loadable>

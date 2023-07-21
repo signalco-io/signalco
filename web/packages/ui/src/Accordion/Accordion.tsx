@@ -1,11 +1,11 @@
-import { IconButton } from '../IconButton';
-import { Card } from "../Card";
 import { useState } from 'react';
 import type { HTMLAttributes, MouseEvent } from 'react';
-import { Collapse } from '../Collapse';
-import { Icon } from '../Icon';
-import { Row } from '../Row';
 import { cx } from 'classix';
+import { Row } from '../Row';
+import { IconButton } from '../IconButton';
+import { Icon } from '../Icon';
+import { Collapse } from '../Collapse';
+import { Card } from '../Card';
 
 export type AccordionProps = HTMLAttributes<HTMLDivElement> & {
     open?: boolean;
@@ -30,11 +30,11 @@ export function Accordion({ children, open, disabled, onOpenChanged, unmountOnEx
     const multipleChildren = !!children && Array.isArray(children);
 
     return (
-        <Card className={cx("py-2 px-4", className)} {...props}>
+        <Card className={cx('py-2 px-4', className)} {...props}>
             <Row spacing={1} justifyContent="space-between">
                 {multipleChildren ? children[0] : children}
                 {!disabled && (
-                    <IconButton variant='plain' size="sm" onClick={handleOpen}>
+                    <IconButton variant="plain" size="sm" onClick={handleOpen}>
                         <Icon>{actualOpen ? 'expand_less' : 'expand_more'}</Icon>
                     </IconButton>
                 )}

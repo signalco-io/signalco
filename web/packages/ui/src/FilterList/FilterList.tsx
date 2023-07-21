@@ -1,17 +1,17 @@
 import { Children, type PropsWithChildren } from 'react';
 import { useEffect, useState } from 'react';
 import { Check, Close, ExpandDown } from '@signalco/ui-icons';
-import { SelectItems } from '../SelectItems';
-import { Checkbox } from '../Checkbox';
 import { Typography } from '../Typography';
-import { Button } from '../Button';
-import { Row } from '../Row';
 import { Stack } from '../Stack';
-import { Grow } from '../Grow';
-import { Collapse } from '../Collapse';
-import { Fade } from '../Fade';
-import { Loadable, LoadableProps } from '../Loadable';
+import { SelectItems } from '../SelectItems';
+import { Row } from '../Row';
 import { NoDataPlaceholder } from '../NoDataPlaceholder';
+import { Loadable, LoadableProps } from '../Loadable';
+import { Grow } from '../Grow';
+import { Fade } from '../Fade';
+import { Collapse } from '../Collapse';
+import { Checkbox } from '../Checkbox';
+import { Button } from '../Button';
 
 export type FilterListItem = {
     id: string;
@@ -33,7 +33,7 @@ function FilterItem({ item, checked, onToggle }: { item: FilterListItem, checked
         <Checkbox
             key={item.id}
             label={(
-                <Row justifyContent='space-between' className="p-2">
+                <Row justifyContent="space-between" className="p-2">
                     <span>
                         {item.label}
                     </span>
@@ -136,7 +136,7 @@ export function FilterList(props: FilterListProps) {
 
     return (
         <Stack>
-            <div className='md:hidden'>
+            <div className="md:hidden">
                 <SelectItems
                     items={items.map(i => ({ value: i.id, label: i.label }))}
                     value={checked?.at(0)}
@@ -147,7 +147,7 @@ export function FilterList(props: FilterListProps) {
                         handleToggle(value);
                     }} />
             </div>
-            <div className='hidden md:block'>
+            <div className="hidden md:block">
                 <Typography level="h5" gutterBottom>{header}</Typography>
                 <ItemsShowMore
                     truncate={truncate}

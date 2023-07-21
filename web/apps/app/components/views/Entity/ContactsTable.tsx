@@ -1,6 +1,4 @@
-import React, { Fragment, useMemo, useState } from 'react';
-import { usePopupState } from 'material-ui-popup-state/hooks';
-import { bindTrigger } from 'material-ui-popup-state';
+import React, { useMemo, useState } from 'react';
 import { Add, Code, Delete, Edit, MoreVertical, UI } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Tooltip } from '@signalco/ui/dist/Tooltip';
@@ -103,7 +101,7 @@ function ObjectVisualizer(props: { name: string, value: ParsedJson, defaultOpen?
 
 function DisplayJson(props: { json: string | undefined }) {
     const [showSource, setShowSource] = useState(false);
-    const jsonObj = useMemo(() => JSON.parse(props.json ?? ''), [props.json]);
+    const jsonObj = useMemo(() => JSON.parse(props.json ?? '') as ParsedJson, [props.json]);
     const jsonFormatted = useMemo(() => JSON.stringify(jsonObj, undefined, 4), [jsonObj]);
 
     return (
@@ -125,15 +123,15 @@ function DisplayJson(props: { json: string | undefined }) {
     );
 }
 
-export default function ContactsTable({ entity }: { entity: IEntityDetails | undefined; }) {
+export default function ContactsTable({ entity }: { entity: IEntityDetails | null | undefined; }) {
     const { t } = useLocale('App', 'Entities');
 
     const isLoading = false;
     const error = undefined;
 
-    const createContactDialogState = usePopupState({ variant: 'dialog', popupId: 'contactCreateDialog' });
-    const editContactValueDialogState = usePopupState({ variant: 'dialog', popupId: 'contactEditValueDialog' });
-    const deleteContactDialogState = usePopupState({ variant: 'dialog', popupId: 'contactDeleteDialog' });
+    const [createContactDialogOpen, setCreateContactDialogOpen] = useState(false);
+    const [editingContactDialogOpen, setEditingContactDialogOpen] = useState(false);
+    const [deletingContactDialogOpen, setDeletingContactDialogOpen] = useState(false);
     const [channelName, setChannelName] = useState('');
     const [contactName, setContactName] = useState('');
     const [editingContact, setEditingContact] = useState<IContactPointer | undefined>(undefined);
@@ -148,7 +146,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | und
                 contactName
             }, undefined);
         }
-        createContactDialogState.close();
+        setCreateContactDialogOpen(false);
     };
     const handleEditValueSubmit = async () => {
         if (entity) {
@@ -161,7 +159,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | und
                 contactName: editingContact.contactName
             }, valueSerialized);
         }
-        editContactValueDialogState.close();
+        setEditingContactDialogOpen(false);
     };
     const handleDeleteContact = async () => {
         if (entity) {
@@ -174,7 +172,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | und
                 contactName: deletingContact.contactName
             });
         }
-        deleteContactDialogState.close();
+        setDeletingContactDialogOpen(false);
     }
 
     return (
@@ -187,7 +185,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | und
                             <MoreVertical />
                         </IconButton>
                     )}>
-                        <MenuItem {...bindTrigger(createContactDialogState)} startDecorator={<Add />}>
+                        <MenuItem onClick={() => setCreateContactDialogOpen(true)} startDecorator={<Add />}>
                             {t('CreateContact')}
                         </MenuItem>
                     </Menu>
@@ -207,19 +205,17 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | und
                                         </IconButton>
                                     )}>
                                         <MenuItem
-                                            {...bindTrigger(editContactValueDialogState)}
-                                            onClick={(e) => {
+                                            onClick={() => {
+                                                setEditingContactDialogOpen(true);
                                                 setEditingContact(c);
-                                                editContactValueDialogState.open(e);
                                             }}
                                             startDecorator={<Edit />}>
                                             {t('EditContact')}
                                         </MenuItem>
                                         <MenuItem
-                                            {...bindTrigger(deleteContactDialogState)}
-                                            onClick={(e) => {
+                                            onClick={() => {
+                                                setDeletingContactDialogOpen(true);
                                                 setDeletingContact(c);
-                                                deleteContactDialogState.open(e);
                                             }}
                                             startDecorator={<Delete />}>
                                             {t('DeleteContact')}
@@ -246,9 +242,9 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | und
                 </Loadable>
             </Card>
             <ConfigurationDialog
-                open={createContactDialogState.isOpen}
+                open={createContactDialogOpen}
                 header="Create contact"
-                onClose={createContactDialogState.close}>
+                onClose={() => setCreateContactDialogOpen(false)}>
                 <Stack spacing={1}>
                     <Input value={channelName} onChange={(e) => setChannelName(e.target.value)} />
                     <Input value={contactName} onChange={(e) => setContactName(e.target.value)} />
@@ -256,19 +252,19 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | und
                 </Stack>
             </ConfigurationDialog>
             <ConfigurationDialog
-                open={editContactValueDialogState.isOpen}
+                open={editingContactDialogOpen}
                 header="Edit contact"
-                onClose={editContactValueDialogState.close}>
+                onClose={() => setEditingContactDialogOpen(false)}>
                 <Stack spacing={1}>
                     <Input value={valueSerialized} onChange={(e) => setValueSerialized(e.target.value)} />
                     <Button onClick={handleEditValueSubmit}>Create</Button>
                 </Stack>
             </ConfigurationDialog>
             <ConfirmDeleteDialog
-                isOpen={deleteContactDialogState.isOpen}
+                isOpen={deletingContactDialogOpen}
                 header="Delete contact"
                 expectedConfirmText={`${deletingContact?.channelName}-${deletingContact?.contactName}`}
-                onClose={deleteContactDialogState.close}
+                onClose={() => setDeletingContactDialogOpen(false)}
                 onConfirm={handleDeleteContact} />
         </>
     );

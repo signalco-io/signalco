@@ -19,7 +19,6 @@ import { FeaturedIntegrationsSection } from './FeaturedIntegrationsSection';
 import { FeatureDescription } from './FeatureDescription';
 import { DataPart } from './DataPart';
 
-export const Newsletter = dynamic(() => import('../pages/landing/Newsletter'));
 export const GlobePart = dynamic(() => import('../pages/landing/GlobeSection'));
 
 export default function LandingPageView() {
@@ -34,7 +33,7 @@ export default function LandingPageView() {
                     header="Developers"
                     subtitle="Signalco is free and open source project run by small team of enthusiasts."
                     direction="horizontal">
-                    <Stack alignItems="center">
+                    <Stack alignItems="center" className="self-center">
                         <Button
                             variant="solid"
                             endDecorator={<Navigate />}
@@ -79,7 +78,7 @@ export default function LandingPageView() {
             <GlobeSection />
             <Divider />
             <SectionCenter narrow className="bg-[--joy-palette-background-surface]">
-                <div className="flex flex-col md:flex-row gap-4 md:gap-24 items-center justify-center py-4">
+                <div className="flex flex-col items-center justify-center gap-4 py-4 md:flex-row md:gap-24">
                     <DataPart value="8" subtitle="Integrations" />
                     <DataPart value="500+" subtitle="Automations per day" />
                     <DataPart value="2000+" subtitle="Supported devices" />

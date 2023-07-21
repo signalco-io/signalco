@@ -1,6 +1,6 @@
-import { Warning } from "@signalco/ui-icons";
-import { Component, type ErrorInfo, type PropsWithChildren } from "react";
-import { Alert } from "../Alert";
+import { Component, type ErrorInfo, type PropsWithChildren } from 'react';
+import { Warning } from '@signalco/ui-icons';
+import { Alert } from '../Alert';
 
 export class ErrorBoundary extends Component<PropsWithChildren, { hasError: boolean }> {
     constructor(props: PropsWithChildren) {
@@ -13,7 +13,7 @@ export class ErrorBoundary extends Component<PropsWithChildren, { hasError: bool
     }
 
     componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-        console.error("ErrorBOundary catched", error, errorInfo);
+        console.error('ErrorBOundary catched', error, errorInfo);
     }
 
     render() {

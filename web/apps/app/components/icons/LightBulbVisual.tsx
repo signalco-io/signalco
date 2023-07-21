@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import styles from './LightBulbVisual.module.scss';
 
 function LightBulbVisual(props: { state: boolean, size: number }) {

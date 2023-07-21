@@ -26,7 +26,7 @@ export type WidgetConfigurationProps = {
 const useWidgetConfiguration = (
     options: WidgetConfigurationOption<unknown>[],
     config: object | undefined,
-    onConfiguration: (config: any) => void) => {
+    onConfiguration: (config: object) => void) => {
     const form: ObjectDictAny = {};
     for (let index = 0; index < options.length; index++) {
         const configOption = options[index];

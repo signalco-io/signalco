@@ -88,7 +88,7 @@ function Dashboards() {
                         onEditWidgets={handleEditWidgets}
                         onSettings={handleSettings} />
                     {isEditing && (
-                        <div className="px-2 xs:w-full">
+                        <div className="xs:w-full px-2">
                             <Row spacing={1}>
                                 <Button onClick={() => setShowWidgetStore(true)}>{t('AddWidget')}</Button>
                                 <Button loading={isSavingEdit} onClick={handleEditDone} fullWidth>{t('Save')}</Button>

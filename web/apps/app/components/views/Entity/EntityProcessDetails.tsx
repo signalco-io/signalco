@@ -9,6 +9,7 @@ import { Container } from '@signalco/ui/dist/Container';
 import { Chip } from '@signalco/ui/dist/Chip';
 import { Card } from '@signalco/ui/dist/Card';
 import { Alert } from '@signalco/ui/dist/Alert';
+import { objectWithKey } from '@signalco/js';
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import useContact from '../../../src/hooks/signalco/useContact';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
@@ -124,10 +125,11 @@ function ExecutionDisplay(props: { entity: IEntityDetails }) {
     const { entity } = props;
     const executeContact = useContact({ entityId: entity.id, channelName: 'signalco', contactName: 'executed' });
     const executed = executeContact?.data?.valueSerialized ? JSON.parse(executeContact?.data?.valueSerialized) : undefined;
+    const executedStartTimeStamp = objectWithKey(executed, 'StartTimeStamp')?.StartTimeStamp;
 
     return (
         <Chip startDecorator={<Play />}>
-            <Timeago date={executed?.StartTimeStamp} />
+            <Timeago date={executedStartTimeStamp as number} />
         </Chip>
     )
 }
@@ -139,7 +141,9 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
 
 
     const configurationContact = useContact({ entityId: entity.id, channelName: 'signalco', contactName: 'configuration' });
-    const config: ProcessConfigurationV1.Configuration = useMemo(() => configurationContact.data?.valueSerialized ? JSON.parse(configurationContact.data?.valueSerialized) : undefined, [configurationContact.data]);
+    const config: ProcessConfigurationV1.Configuration | undefined = useMemo(() => configurationContact.data?.valueSerialized
+        ? JSON.parse(configurationContact.data?.valueSerialized) as ProcessConfigurationV1.Configuration
+        : undefined, [configurationContact.data]);
     const errorContact = useContact(configurationErrorContactPointer);
 
     const handleDismissError = async () => {

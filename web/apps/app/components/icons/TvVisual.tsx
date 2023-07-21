@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import styles from './TvVisual.module.scss';
 
 function TvVisual(props: { state: boolean, size: number }) {

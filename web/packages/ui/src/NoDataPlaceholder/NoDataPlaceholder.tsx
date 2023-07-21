@@ -5,5 +5,5 @@ export type NoDataPlaceholderProps = {
 };
 
 export function NoDataPlaceholder({ content }: NoDataPlaceholderProps) {
-  return <Typography level="body2">{content}</Typography>
+    return <Typography level="body2">{content}</Typography>
 }

@@ -100,7 +100,7 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
     };
 
     return (
-        <div className="grid grid-cols-2 h-full">
+        <div className="grid h-full grid-cols-2">
             {columns > 1 && (
                 <>
                     <Stack style={{ height: '100%', paddingLeft: 2.5 * 8, paddingRight: 1.5 * 8, paddingTop: 16, paddingBottom: 16 }} justifyContent={columns > 2 ? 'space-between' : 'center'}>
@@ -110,7 +110,7 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
                     <Divider orientation="vertical" />
                 </>
             )}
-            <div className="grow border-current	border-br-lg border-tr-lg">
+            <div className="grow rounded-r-lg border-current">
                 <Stack style={{ height: '100%' }} justifyContent="stretch">
                     <Button variant="outlined" onClick={() => handleStateChangeRequest('up')}
                         aria-label="Up"><Up /></Button>

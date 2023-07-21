@@ -1,12 +1,11 @@
 import { PropsWithChildren, ReactElement, useState } from 'react';
-import { ExpandDown } from '@signalco/ui-icons';
-import { IconButton } from '../IconButton';
-import { Tooltip } from '../Tooltip';
-import { Button } from '../Button';
-import { Stack } from '../Stack';
 import { cx } from 'classix';
+import { ExpandDown } from '@signalco/ui-icons';
+import { Tooltip } from '../Tooltip';
+import { Stack } from '../Stack';
 import { Row } from '../Row';
 import { ListItem } from '../ListItem/ListItem';
+import { IconButton } from '../IconButton';
 
 export type ListTreeItemProps = PropsWithChildren<{
     label?: ReactElement | string;
@@ -37,7 +36,7 @@ export function ListTreeItem(props: ListTreeItemProps) {
         <Stack>
             <Row spacing={1}>
                 <Tooltip title="Toggle">
-                    <IconButton onClick={handleOpenClick} className={"transition-transform"} size="sm">
+                    <IconButton onClick={handleOpenClick} className={'transition-transform'} size="sm">
                         <ExpandDown className={cx(open && 'rotate-90')} />
                     </IconButton>
                 </Tooltip>

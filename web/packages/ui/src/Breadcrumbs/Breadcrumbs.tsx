@@ -1,6 +1,6 @@
+import { Fragment } from 'react';
 import { Typography } from '../Typography';
 import { Row } from '../Row';
-import { Fragment } from 'react';
 import { BreadcrumbsItem } from './BreadcrumbsItem';
 
 export type BreadcrumbItem = {

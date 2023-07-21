@@ -25,7 +25,7 @@ export default function ChannelGalleryItem(props: ChannelGalleryItemProps) {
 
     return (
         <Card
-            className="w-40 h-40"
+            className="h-40 w-40"
             href={hrefFunc ? hrefFunc(id) : `/channels/${id}`}
         >
             {planned && <ChannelGalleryItemChip label="Soon" color="neutral" />}

@@ -56,7 +56,7 @@ function DisplayEntityTarget({ target, selectContact, selectValue, valueSerializ
                     </Row>
                 </Button>
             )}>
-            <Card className="w-[420px] min-h-80 max-h-80">
+            <Card className="max-h-80 min-h-[320px] w-[420px]">
                 <EntitySelectionMenu
                     target={target}
                     selectContact={selectContact}

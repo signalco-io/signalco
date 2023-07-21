@@ -10,7 +10,8 @@
     "scripts": {
         "build": "npm run clean && pnpm tsup",
         "dev": "tsup --watch",
-        "clean": "rimraf dist"
+        "clean": "rimraf dist",
+        "lint": "eslint --ext .ts,.tsx . --fix"
     },
     "devDependencies": {
         "@signalco/tailwindcss-config-signalco": "workspace:*",

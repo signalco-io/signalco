@@ -1,11 +1,7 @@
-'use client';
-
-import { useInView } from 'react-cool-inview';
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Typography } from '@signalco/ui/dist/Typography';
-import { GentleSlide } from '@signalco/ui/dist/GentleSlide';
 import { SectionCenter } from './SectionCenter';
 
 const integrationsList = [
@@ -21,27 +17,19 @@ const integrationsList = [
 const integrationsLogoSize = 60;
 
 export function FeaturedIntegrationsSection() {
-    const { observe, inView } = useInView({
-        onEnter: ({ unobserve }) => unobserve(), // only run once
-    });
-
     return (
         <SectionCenter>
-            <div className="flex flex-col gap-3" ref={observe}>
-                <GentleSlide appear={inView} direction="down">
-                    <Typography level="body2" textAlign="center" textTransform="uppercase">Featured integrations</Typography>
-                </GentleSlide>
-                <div className="flex items-center">
-                    {integrationsList.map((channel, channelIndex) => (
-                        <GentleSlide key={channel.name} appear={inView} index={channelIndex} direction="down">
-                            <Link href={channel.url} className="hover:opacity-75 transition-opacity duration-200 text-center">
-                                <Image
-                                    alt={channel.name}
-                                    src={channel.img}
-                                    width={`${integrationsLogoSize * channel.scale}`}
-                                    height={`${integrationsLogoSize * channel.scale}`} />
-                            </Link>
-                        </GentleSlide>
+            <div className="flex flex-col gap-3">
+                <Typography level="body2" textAlign="center" textTransform="uppercase">Featured integrations</Typography>
+                <div className="flex items-center justify-between">
+                    {integrationsList.map((channel) => (
+                        <Link key={channel.name} href={channel.url} className="text-center transition-opacity duration-200 hover:opacity-75">
+                            <Image
+                                alt={channel.name}
+                                src={channel.img}
+                                width={`${integrationsLogoSize * channel.scale}`}
+                                height={`${integrationsLogoSize * channel.scale}`} />
+                        </Link>
                     ))}
                 </div>
             </div>

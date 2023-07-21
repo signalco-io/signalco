@@ -158,7 +158,7 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
                 </div>
             </Stack>
             {isLoading && (
-                <div className="absolute top-4 right-4">
+                <div className="absolute right-4 top-4">
                     <Loadable isLoading loadingLabel="Loading..." />
                 </div>
             )}

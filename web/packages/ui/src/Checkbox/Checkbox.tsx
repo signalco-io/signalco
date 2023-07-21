@@ -1,7 +1,7 @@
-import { type ReactNode, useId, type ButtonHTMLAttributes, type FormEvent, ComponentPropsWithoutRef, useState } from 'react';
-import { Check } from '@signalco/ui-icons';
+import { type ReactNode, useId, ComponentPropsWithoutRef } from 'react';
 import { cx } from 'classix';
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+import { Check } from '@signalco/ui-icons';
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
 
 export type CheckboxProps = ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> & {
     label?: ReactNode;
@@ -26,8 +26,8 @@ export function Checkbox({
             <CheckboxPrimitive.Root
                 id={id}
                 className={cx(
-                    "peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
-                    readOnly && "cursor-default",
+                    'peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
+                    readOnly && 'cursor-default',
                     className
                 )}
                 defaultChecked={readonlyChecked}
@@ -36,7 +36,7 @@ export function Checkbox({
                 {...props}
             >
                 <CheckboxPrimitive.Indicator
-                    className={cx("flex items-center justify-center text-current")}
+                    className={cx('flex items-center justify-center text-current')}
                 >
                     <Check className="h-4 w-4" />
                 </CheckboxPrimitive.Indicator>

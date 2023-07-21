@@ -32,7 +32,7 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
 
     // Render placeholder when there is no widgets
     const widgetsOrder = useMemo(() => dashboard.widgets.slice().sort((a, b) => a.order - b.order).map(w => w.id), [dashboard.widgets]);
-    const widgets = useMemo(() => widgetsOrder.map(wo => dashboard.widgets.find(w => wo === w.id)!), [dashboard.widgets, widgetsOrder]);
+    const widgets = useMemo(() => widgetsOrder.map(wo => dashboard.widgets.find(w => wo === w.id)).filter(Boolean), [dashboard.widgets, widgetsOrder]);
     if (widgets.length <= 0) {
         return <NoWidgetsPlaceholder onAdd={onAddWidget} />
     }
@@ -77,7 +77,7 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
                         onRemove={() => handleRemoveWidget(widget.id)}
                         isEditMode={isEditing}
                         type={widget.type}
-                        config={widget.config}
+                        config={widget.config ?? {}}
                         setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
                 ))}
             </GridWrapper>

@@ -1,4 +1,6 @@
-import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
+import { TooltipProps } from 'recharts/types/component/Tooltip';
+import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, LabelProps, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
+import { type SVGProps } from 'react';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Timeago } from '@signalco/ui/dist/Timeago';
@@ -41,26 +43,27 @@ export type GraphProps = InnerGraphProps & {
     discrete?: boolean;
 }
 
-const renderCustomizedTimeLineLabel = (props: any) => {
-    const { x, y, width, value } = props;
+const renderCustomizedTimeLineLabel = ({ x, y, width, value }: Omit<SVGProps<SVGTextElement>, 'viewBox'> & LabelProps) => {
     const radius = 10;
+    const widthNumber = Number(width) || 0;
 
-    if (width > 10) {
-        return (
-            <g>
-                <text
-                    x={x + width / 2}
-                    y={y + radius}
-                    fill="#fff"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                >
-                    {value?.toString().toUpperCase()[0]}
-                </text>
-            </g>
-        );
+    if (widthNumber <= 10) {
+        return null;
     }
-    return null;
+
+    return (
+        <g>
+            <text
+                x={Number(x) + widthNumber / 2}
+                y={Number(y) + radius}
+                fill="#fff"
+                textAnchor="middle"
+                dominantBaseline="middle"
+            >
+                {value?.toString().toUpperCase()[0]}
+            </text>
+        </g>
+    );
 };
 
 function GraphTimeLine({ data, durationMs, width, startDateTime, hideLegend }: InnerGraphProps) {
@@ -138,11 +141,17 @@ function GraphTimeLine({ data, durationMs, width, startDateTime, hideLegend }: I
     );
 }
 
-function ChartGenericTooltip({ active, payload, domain, units }: { active?: boolean, payload?: any, domain: ScaleTime<number, number, never>, units?: string }) {
+function ChartGenericTooltip({
+    active,
+    payload,
+    domain,
+    units
+}: TooltipProps<string | number | (string | number)[], string | number> &
+    { domain: ScaleTime<number, number, never>, units?: string }) {
     if (active && payload && payload.length) {
         const dateTime = domain.invert(payload[0].payload.key) as Date;
         return (
-            <Card className="max-w-44">
+            <Card className="max-w-xs">
                 <Typography>{`${payload[0].value}${units || ''}`}</Typography>
                 <Timeago date={dateTime} />
                 <Typography level="body2">{`${dateTime.getFullYear()}-${dateTime.getMonth().toString().padStart(2, '0')}-${dateTime.getDate().toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`}</Typography>
@@ -161,8 +170,8 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
     const past = startDateTime ?? now();
     past.setTime(nowTime.getTime() - durationMs);
     const domainGraph = scaleTime().domain([past, nowTime]);
-    const ticksHours = timeHour.every(1)!;
-    const ticks = domainGraph.ticks(ticksHours).map(i => i.toString());
+    const ticksHours = timeHour.every(1);
+    const ticks = ticksHours ? domainGraph.ticks(ticksHours).map(i => i.toString()) : [];
 
     const transformedData = data?.map(d => ({ key: domainGraph(new Date(d.id).getTime()), value: d.value })) ?? [];
 
@@ -242,7 +251,9 @@ function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
             Object.keys(currentPoint).forEach(cpk => {
                 if (cpk === 'id') return;
 
-                aggregatedPoint[cpk] = currentPoint[cpk] + (previousPoint[cpk] ?? 0);
+                aggregatedPoint[cpk] =
+                    (typeof currentPoint[cpk] === 'number' ? Number(currentPoint[cpk]) : 0) +
+                    (typeof currentPoint[cpk] === 'number' ? Number(previousPoint[cpk]) : 0);
             });
             usagesAggregated.push(aggregatedPoint);
         }

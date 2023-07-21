@@ -1,6 +1,7 @@
 import { compareVersions } from 'compare-versions';
 import { Check, Upload } from '@signalco/ui-icons';
 import { Button } from '@signalco/ui/dist/Button';
+import { objectWithKey } from '@signalco/js';
 import { useLoadAndError } from '@signalco/hooks';
 import StationsRepository from '../../src/stations/StationsRepository';
 import { showNotification } from '../../src/notifications/PageNotificationService';
@@ -36,8 +37,9 @@ export default function StationCheckUpdate(props: { stationId: string[] | string
     const { t: tPlaceholder } = useLocalePlaceholders();
 
     const latestAvailableVersion = useLoadAndError(loadLatestAvailableVersion);
+    const latestAvailableVersionName = objectWithKey(latestAvailableVersion.item, 'name');
     const canUpdate = (!latestAvailableVersion.isLoading && !latestAvailableVersion.error && props.stationVersion)
-        ? compareVersions(latestAvailableVersion.item.name?.replace('v', ''), props.stationVersion)
+        ? compareVersions(latestAvailableVersionName?.name?.toString().replace('v', '') ?? '', props.stationVersion)
         : false;
 
     const handleUpdate = () => stationCommandAsync(props.stationId, StationsRepository.updateStationAsync, 'update station');
@@ -49,7 +51,7 @@ export default function StationCheckUpdate(props: { stationId: string[] | string
             disabled={!canUpdate}
             onClick={handleUpdate}>
             {canUpdate && latestAvailableVersion
-                ? t('UpdateStationVersion', { version: latestAvailableVersion.item.name ?? tPlaceholder('Unknown') })
+                ? t('UpdateStationVersion', { version: latestAvailableVersionName?.name ?? tPlaceholder('Unknown') })
                 : t('UpdateStationUpToDate')}
         </Button>
     );

@@ -53,7 +53,7 @@ function WidgetIndicator(props: WidgetSharedProps<ConfigProps>) {
                     <Image src="/assets/widget-images/plant-aloe.png" alt="Plant Aloe" width={76} height={76} />
                 </div>
                 <div
-                    className="flex justify-center items-center h-16 w-full"
+                    className="flex h-16 w-full items-center justify-center"
                     style={{
                         background: statusColor
                     }}>

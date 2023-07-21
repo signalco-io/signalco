@@ -1,5 +1,5 @@
-import { PropsWithChildren } from "react";
-import { Stack } from "../Stack";
+import { PropsWithChildren } from 'react';
+import { Stack } from '../Stack';
 
 export function List({ children }: PropsWithChildren) {
     return (
