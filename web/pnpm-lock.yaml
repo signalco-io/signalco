@@ -147,11 +147,11 @@ importers:
         specifier: 1.9.0
         version: 1.9.0
       tailwindcss:
-        specifier: 3.3.2
-        version: 3.3.2
+        specifier: 3.3.3
+        version: 3.3.3
       tailwindcss-animate:
         specifier: 1.0.6
-        version: 1.0.6(tailwindcss@3.3.2)
+        version: 1.0.6(tailwindcss@3.3.3)
       uuid:
         specifier: 9.0.0
         version: 9.0.0
@@ -319,11 +319,11 @@ importers:
         specifier: 0.32.2
         version: 0.32.2
       tailwindcss:
-        specifier: 3.3.2
-        version: 3.3.2
+        specifier: 3.3.3
+        version: 3.3.3
       tailwindcss-animate:
         specifier: 1.0.6
-        version: 1.0.6(tailwindcss@3.3.2)
+        version: 1.0.6(tailwindcss@3.3.3)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.3
@@ -714,8 +714,8 @@ importers:
         specifier: 5.1.2
         version: 5.1.2(@babel/core@7.22.9)(react@18.2.0)
       tailwindcss:
-        specifier: 3.3.2
-        version: 3.3.2
+        specifier: 3.3.3
+        version: 3.3.3
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -789,11 +789,11 @@ importers:
         specifier: 0.32.2
         version: 0.32.2
       tailwindcss:
-        specifier: 3.3.2
-        version: 3.3.2
+        specifier: 3.3.3
+        version: 3.3.3
       tailwindcss-animate:
         specifier: 1.0.6
-        version: 1.0.6(tailwindcss@3.3.2)
+        version: 1.0.6(tailwindcss@3.3.3)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.3
@@ -976,11 +976,11 @@ importers:
   packages/tailwindcss-config-signalco:
     dependencies:
       tailwindcss:
-        specifier: 3.3.2
-        version: 3.3.2
+        specifier: 3.3.3
+        version: 3.3.3
       tailwindcss-animate:
         specifier: 1.0.6
-        version: 1.0.6(tailwindcss@3.3.2)
+        version: 1.0.6(tailwindcss@3.3.3)
 
   packages/tsconfig: {}
 
@@ -1023,11 +1023,11 @@ importers:
         specifier: 7.1.0
         version: 7.1.0(react@18.2.0)
       tailwindcss:
-        specifier: 3.3.2
-        version: 3.3.2
+        specifier: 3.3.3
+        version: 3.3.3
       tailwindcss-animate:
         specifier: 1.0.6
-        version: 1.0.6(tailwindcss@3.3.2)
+        version: 1.0.6(tailwindcss@3.3.3)
     devDependencies:
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
@@ -15621,16 +15621,16 @@ packages:
       tslib: 2.5.0
     dev: false
 
-  /tailwindcss-animate@1.0.6(tailwindcss@3.3.2):
+  /tailwindcss-animate@1.0.6(tailwindcss@3.3.3):
     resolution: {integrity: sha512-4WigSGMvbl3gCCact62ZvOngA+PRqhAn7si3TQ3/ZuPuQZcIEtVap+ENSXbzWhpojKB8CpvnIsrwBu8/RnHtuw==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
-      tailwindcss: 3.3.2
+      tailwindcss: 3.3.3
     dev: false
 
-  /tailwindcss@3.3.2:
-    resolution: {integrity: sha512-9jPkMiIBXvPc2KywkraqsUfbfj+dHDb+JPWtSJa9MLFdrPyazI7q6WX2sUrm7R9eVR7qqv3Pas7EvQFzxKnI6w==}
+  /tailwindcss@3.3.3:
+    resolution: {integrity: sha512-A0KgSkef7eE4Mf+nKJ83i75TMyq8HqY3qmFIJSWy8bNt0v1lG7jUcpGpoTFxAwYcWOphcTBLPPJg+bDfhDf52w==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
@@ -15654,7 +15654,6 @@ packages:
       postcss-load-config: 4.0.1(postcss@8.4.26)
       postcss-nested: 6.0.1(postcss@8.4.26)
       postcss-selector-parser: 6.0.13
-      postcss-value-parser: 4.2.0
       resolve: 1.22.2
       sucrase: 3.32.0
     transitivePeerDependencies:
