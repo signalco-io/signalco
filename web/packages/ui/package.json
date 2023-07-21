@@ -39,7 +39,7 @@
         "@radix-ui/react-select": "1.2.2",
         "@signalco/js": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
-        "next": "13.4.11",
+        "next": "13.4.12",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-timeago": "7.1.0",
@@ -49,7 +49,7 @@
     "peerDependencies": {
         "@babel/core": "7.22.9",
         "@signalco/ui-icons": "workspace:*",
-        "next": "13.4.11",
+        "next": "13.4.12",
         "react": "18.2.0",
         "react-dom": "18.2.0"
     }
