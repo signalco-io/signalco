@@ -11,7 +11,9 @@ export default function useEntities(entityIds?: string[]) {
                 for (let i = 0; i < entityIds.length; i++) {
                     const entityId = entityIds[i];
                     const entity = await entityAsync(entityId);
-                    newEntities.push(entity);
+                    if (entity) {
+                        newEntities.push(entity);
+                    }
                 }
                 setEntities(newEntities);
             }

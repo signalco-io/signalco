@@ -11,7 +11,7 @@ export type RoadmapItem = {
     href?: string | undefined;
 }
 
-export async function GET(request: Request, context: any) {
+export async function GET(request: Request, context: { params: { owner: string, repo: string } }) {
     const { owner, repo } = context.params;
     console.log('Requesting issues for', owner, repo);
     console.log('Have token? ', Boolean(process.env.GITHUB_PAT_TOKEN) ? 'yes' : 'no');

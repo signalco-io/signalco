@@ -1,15 +1,17 @@
 import React from 'react';
 
-export type GalleryItemComponent = <P>(props: P & {id: string}) => React.ReactElement;
+export type GalleryItemComponent<TItem extends GalleryItem> = React.FunctionComponent<TItem>;
 
-export type GalleryGridProps = {
-    items: {
-        id: string;
-    }[];
-    itemComponent: GalleryItemComponent;
+export type GalleryItem = {
+    id: string;
+};
+
+export type GalleryGridProps<TItem extends GalleryItem> = {
+    items: TItem[];
+    itemComponent: GalleryItemComponent<TItem>;
 }
 
-export function GalleryGrid(props: GalleryGridProps) {
+export function GalleryGrid<TItem extends GalleryItem>(props: GalleryGridProps<TItem>) {
     const { items, itemComponent } = props;
     const ItemComponent = itemComponent;
     return (

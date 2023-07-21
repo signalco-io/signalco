@@ -21,11 +21,9 @@ function useSearch<TItem>(items?: TItem[], filterFunc?: (item: TItem, keyword: s
         setSearchText(text);
     };
 
-    const filteredItems = useMemo(() =>
-        searchText
-            ? (items || []).filter(i => filterFunc ? filterFunc(i, searchText.toLowerCase()) : defaultSearchFunc(i, searchText.toLocaleLowerCase()))
-            : items || [],
-        [filterFunc, items, searchText]);
+    const filteredItems = useMemo(() => searchText
+        ? (items || []).filter(i => filterFunc ? filterFunc(i, searchText.toLowerCase()) : defaultSearchFunc(i, searchText.toLocaleLowerCase()))
+        : items || [], [filterFunc, items, searchText]);
 
     return [filteredItems, searchText, handleSearchTextChange];
 }

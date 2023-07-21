@@ -29,15 +29,28 @@ async function _getBearerTokenAsync() {
 
 export async function requestAsync(
     url: string,
+    method: 'get',
+    data?: string | Record<string, string> | string[][] | URLSearchParams,
+    headers?: Record<string, string>
+): Promise<unknown>;
+export async function requestAsync(
+    url: string,
+    method: 'post' | 'put' | 'delete',
+    data?: unknown,
+    headers?: Record<string, string>
+): Promise<unknown>;
+
+export async function requestAsync(
+    url: string,
     method: 'get' | 'post' | 'put' | 'delete',
-    data?: any,
+    data?: unknown,
     headers?: Record<string, string>
 ) {
     const token = await _getBearerTokenAsync();
     try {
         const urlResolved = new URL(isAbsoluteUrl(url) ? url : getApiUrl(url));
-        if (method === 'get' && data) {
-            urlResolved.search = new URLSearchParams(data).toString();
+        if (method === 'get' && data != null) {
+            urlResolved.search = new URLSearchParams(data as (string | Record<string, string> | string[][] | URLSearchParams)).toString();
         }
         const response = await fetch(urlResolved, {
             method: method,
@@ -69,12 +82,12 @@ export async function requestAsync(
             bodyText = 'empty response';
         }
         throw new Error(`Got status ${response.statusText} (${response.status}): ${bodyText}`);
-    } catch(err) {
+    } catch (err) {
         console.error('Unknown API error', err);
         throw err;
     }
 }
 
-export async function getAsync<T>(url: string, data?: any): Promise<T> {
+export async function getAsync<T>(url: string, data?: string | Record<string, string> | string[][] | URLSearchParams): Promise<T> {
     return await requestAsync(url, 'get', data) as T;
 }

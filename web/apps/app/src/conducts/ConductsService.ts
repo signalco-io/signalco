@@ -19,7 +19,7 @@ export default class ConductsService {
         // );
     }
 
-    static async RequestConductAsync(pointer: IContactPointer, value?: any, delay?: number) {
+    static async RequestConductAsync(pointer: IContactPointer, value?: unknown, delay?: number) {
         await requestAsync('/conducts/request', 'post', {
             entityId: pointer.entityId,
             channelName: pointer.channelName,
@@ -30,7 +30,7 @@ export default class ConductsService {
 
         ConductsService._updateLocalStateAsync({
             delay: delay || 0,
-            value: value,
+            value,
             pointer: pointer
         });
     }
