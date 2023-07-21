@@ -17,7 +17,7 @@
         "lint": "next lint --fix"
     },
     "dependencies": {
-        "@auth0/auth0-react": "2.1.1",
+        "@auth0/auth0-react": "2.2.0",
         "@auth0/auth0-spa-js": "2.0.8",
         "@date-io/date-fns": "2.16.0",
         "@dnd-kit/core": "6.0.8",
@@ -29,7 +29,7 @@
         "@hcaptcha/react-hcaptcha": "1.8.1",
         "@microsoft/signalr": "7.0.7",
         "@monaco-editor/react": "4.5.1",
-        "@next/env": "13.4.9",
+        "@next/env": "13.4.11",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
@@ -47,7 +47,7 @@
         "d3": "7.8.5",
         "date-fns": "2.30.0",
         "monaco-editor": "0.40.0",
-        "next": "13.4.9",
+        "next": "13.4.11",
         "next-pwa": "5.6.0",
         "next-secure-headers": "2.2.0",
         "pigeon-maps": "0.21.3",
@@ -60,14 +60,14 @@
         "recharts": "2.7.2",
         "sharp": "0.32.2",
         "suncalc": "1.9.0",
-        "tailwindcss": "3.3.2",
+        "tailwindcss": "3.3.3",
         "tailwindcss-animate": "1.0.6",
         "uuid": "9.0.0"
     },
     "devDependencies": {
         "@axe-core/playwright": "4.7.3",
         "@babel/core": "7.22.9",
-        "@next/bundle-analyzer": "13.4.9",
+        "@next/bundle-analyzer": "13.4.11",
         "@playwright/test": "1.36.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",

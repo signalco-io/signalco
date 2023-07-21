@@ -39,17 +39,17 @@
         "@radix-ui/react-select": "1.2.2",
         "@signalco/js": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
-        "next": "13.4.9",
+        "next": "13.4.11",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-timeago": "7.1.0",
-        "tailwindcss": "3.3.2",
+        "tailwindcss": "3.3.3",
         "tailwindcss-animate": "1.0.6"
     },
     "peerDependencies": {
         "@babel/core": "7.22.9",
         "@signalco/ui-icons": "workspace:*",
-        "next": "13.4.9",
+        "next": "13.4.11",
         "react": "18.2.0",
         "react-dom": "18.2.0"
     }
