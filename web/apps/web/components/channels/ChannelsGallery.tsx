@@ -7,11 +7,11 @@ import { useSearchParam } from '@signalco/hooks';
 import { channelsData, channelCategories } from '@signalco/data';
 import ChannelGalleryItem from './ChannelGalleryItem';
 
-type ChannelsGalleryProps = {
-    channelHrefFunc: (id: string) => string;
-};
+function channelHrefFunc(id: string) {
+    return `/channels/${id}`;
+}
 
-export default function ChannelsGallery({ channelHrefFunc }: ChannelsGalleryProps) {
+export default function ChannelsGallery() {
     const [category, setCategory] = useSearchParam('category');
     const selectedCategory = channelCategories.find(c => c.id == category);
     const gridItems = orderBy(
