@@ -22,7 +22,7 @@
         "@signalco/data": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
-        "classix": "2.1.33",
+        "classix": "2.1.34",
         "next": "13.4.11",
         "next-secure-headers": "2.2.0",
         "react": "18.2.0",

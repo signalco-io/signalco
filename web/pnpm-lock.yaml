@@ -84,8 +84,8 @@ importers:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.26)
       classix:
-        specifier: 2.1.33
-        version: 2.1.33
+        specifier: 2.1.34
+        version: 2.1.34
       cobe:
         specifier: 0.6.3
         version: 0.6.3
@@ -286,8 +286,8 @@ importers:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.26)
       classix:
-        specifier: 2.1.33
-        version: 2.1.33
+        specifier: 2.1.34
+        version: 2.1.34
       encoding:
         specifier: 0.1.13
         version: 0.1.13
@@ -419,8 +419,8 @@ importers:
         specifier: 1.0.0-rc.12
         version: 1.0.0-rc.12
       classix:
-        specifier: 2.1.33
-        version: 2.1.33
+        specifier: 2.1.34
+        version: 2.1.34
       next:
         specifier: 13.4.11
         version: 13.4.11(@babel/core@7.22.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.63.6)
@@ -547,8 +547,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-icons
       classix:
-        specifier: 2.1.33
-        version: 2.1.33
+        specifier: 2.1.34
+        version: 2.1.34
       next:
         specifier: 13.4.11
         version: 13.4.11(@babel/core@7.22.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.63.6)
@@ -759,8 +759,8 @@ importers:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.26)
       classix:
-        specifier: 2.1.33
-        version: 2.1.33
+        specifier: 2.1.34
+        version: 2.1.34
       cobe:
         specifier: 0.6.3
         version: 0.6.3
@@ -923,7 +923,7 @@ importers:
         version: 7.32.2(eslint@8.44.0)
       eslint-plugin-tailwindcss:
         specifier: 3.13.0
-        version: 3.13.0(tailwindcss@3.3.2)
+        version: 3.13.0(tailwindcss@3.3.3)
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -1063,8 +1063,8 @@ importers:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.26)
       classix:
-        specifier: 2.1.33
-        version: 2.1.33
+        specifier: 2.1.34
+        version: 2.1.34
       glob:
         specifier: 10.3.3
         version: 10.3.3
@@ -8576,8 +8576,8 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /classix@2.1.33:
-    resolution: {integrity: sha512-AiR6VoOprdFFf/Ae5SabKVIhMUfLEpIIRUgYAyhIye8b4DH4nX6zeGJMcWckGS44ecOHtcReCiyKraVvAglMnw==}
+  /classix@2.1.34:
+    resolution: {integrity: sha512-t57nWxh6aS3y7cdikKSNQG09LErCCgbJo5dOvffo5AIUKnV8py6tsC159CvegA/82eY9fUMF+hdfjItLoSbeEw==}
 
   /classnames@2.3.2:
     resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
@@ -10109,7 +10109,7 @@ packages:
       string.prototype.matchall: 4.0.8
     dev: false
 
-  /eslint-plugin-tailwindcss@3.13.0(tailwindcss@3.3.2):
+  /eslint-plugin-tailwindcss@3.13.0(tailwindcss@3.3.3):
     resolution: {integrity: sha512-Fcep4KDRLWaK3KmkQbdyKHG0P4GdXFmXdDaweTIPcgOP60OOuWFbh1++dufRT28Q4zpKTKaHwTsXPJ4O/EjU2Q==}
     engines: {node: '>=12.13.0'}
     peerDependencies:
@@ -10117,7 +10117,7 @@ packages:
     dependencies:
       fast-glob: 3.2.12
       postcss: 8.4.26
-      tailwindcss: 3.3.2
+      tailwindcss: 3.3.3
     dev: false
 
   /eslint-plugin-turbo@1.10.7(eslint@8.44.0):
