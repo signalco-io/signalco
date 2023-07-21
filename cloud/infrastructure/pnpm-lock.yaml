@@ -24,8 +24,8 @@ dependencies:
     specifier: 4.3.0
     version: 4.3.0
   '@pulumi/pulumi':
-    specifier: 3.75.0
-    version: 3.75.0
+    specifier: 3.76.0
+    version: 3.76.0
 
 devDependencies:
   '@types/node':
@@ -70,7 +70,7 @@ packages:
     resolution: {integrity: sha512-YPNYtwEnKu23VDHNFu91xd/Ueu5zYONHcYwKDA5qTvtgZZ1nzrvPJgrO15KF0fLRVlGo7yckirDS26GpvBTe6w==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.75.0
+      '@pulumi/pulumi': 3.76.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -367,7 +367,7 @@ packages:
     resolution: {integrity: sha512-1h7Q5DjwoWVGxhBMcNragx/Q1US1KT7g29Tk3RghTg/9N7rGUbzTQKEXSrGgRSjGA/aKTbU+gt5A9ZmhONLiLg==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.75.0
+      '@pulumi/pulumi': 3.76.0
       aws-sdk: 2.1372.0
       builtin-modules: 3.0.0
       mime: 2.6.0
@@ -381,7 +381,7 @@ packages:
     resolution: {integrity: sha512-8DM6LkS7i8oIcFG7BjAcCW1PysA/hgEJPitfYdey08jh4E7nrq8K0i1MYLH5F+C0MGBD0qL0rsrWJ3ACxDC9Fw==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.75.0
+      '@pulumi/pulumi': 3.76.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -390,7 +390,7 @@ packages:
     resolution: {integrity: sha512-U/FB6OJZNrJglQfdVeRWkVaHlnp9EpM80HpZnA3CCaXC/yEFCYiCGFJ8KHfD8Dj3ZBphjw4L8ZIm0qmwf/cbXQ==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.75.0
+      '@pulumi/pulumi': 3.76.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -399,7 +399,7 @@ packages:
     resolution: {integrity: sha512-R/eAIXIywSkn2cHIaNqs0EXcXduNeDuS+wom6oadB5KEP+6elgJbo4WMDP+OuDYGkkxEWIKjk0bPPO7570aXFQ==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.75.0
+      '@pulumi/pulumi': 3.76.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -408,14 +408,14 @@ packages:
     resolution: {integrity: sha512-HBKKzOq5khrw7OUaWpDkAEhYIbhaR2O0x+k0dW3JrnxwLEceO1Bvwl9LIPosr49Yu1qL3/uWZQicN1P4sHgzwQ==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.75.0
+      '@pulumi/pulumi': 3.76.0
       semver: 5.7.1
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@pulumi/pulumi@3.75.0:
-    resolution: {integrity: sha512-gtraq2JsCWIpMyohWluXGvxPzOnbqqPCVMtE96SPiKaevaBXdfx4PI/Yli29d3KK/thigvb3RrJ9e7X6q6DGew==}
+  /@pulumi/pulumi@3.76.0:
+    resolution: {integrity: sha512-YTr2N24J9XBV/xL71zQm2MtGuwFiKtWBvpUjWwUwilDSPWGAor9/mMVptZnWWjhh5CPVrC9So4CgJbQdwce/Yw==}
     engines: {node: '>=8.13.0 || >=10.10.0'}
     dependencies:
       '@grpc/grpc-js': 1.8.17
