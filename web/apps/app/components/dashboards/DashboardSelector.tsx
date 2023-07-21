@@ -1,4 +1,6 @@
-import { Suspense, useEffect } from 'react';
+'use client';
+
+import { useEffect } from 'react';
 import { Select } from '@signalco/ui-icons';
 import { Row } from '@signalco/ui/dist/Row';
 import { Popper } from '@signalco/ui/dist/Popper';
@@ -35,41 +37,37 @@ function DashboardSelector(props: IDashboardSelectorProps) {
     console.debug('Rendering DashboardSelector');
 
     return (
-        <Suspense>
-            <Row>
-                {(dashboards?.length ?? 0) > 0 && (
-                    <div>
-                        <Popper
-                            trigger={(
-                                <Button
-                                    variant="plain"
-                                    size="lg"
-                                    endDecorator={<Select className="pointer-events-none" />}>
-                                    {currentName}
-                                </Button>
-                            )}>
-                            <DashboardSelectorMenu
-                                selectedId={selectedId}
-                                onSelection={setSelectedId}
-                                onEditWidgets={onEditWidgets}
-                                onSettings={onSettings} />
-                        </Popper>
-                    </div>
-                )}
-                {(favoriteDashboards?.length ?? 0) > 0 && (
-                    <Row>
-                        {favoriteDashboards?.map(fd => (
-                            <Button
-                                key={fd.id}
-                                variant="plain"
-                                onClick={() => handleDashboardSelection(fd.id)}>
-                                {fd.name}
-                            </Button>
-                        ))}
-                    </Row>
-                )}
-            </Row>
-        </Suspense>
+        <Row>
+            {(dashboards?.length ?? 0) > 0 && (
+                <Popper
+                    trigger={(
+                        <Button
+                            variant="plain"
+                            size="lg"
+                            endDecorator={<Select className="pointer-events-none" />}>
+                            {currentName}
+                        </Button>
+                    )}>
+                    <DashboardSelectorMenu
+                        selectedId={selectedId}
+                        onSelection={setSelectedId}
+                        onEditWidgets={onEditWidgets}
+                        onSettings={onSettings} />
+                </Popper>
+            )}
+            {(favoriteDashboards?.length ?? 0) > 0 && (
+                <Row>
+                    {favoriteDashboards?.map(fd => (
+                        <Button
+                            key={fd.id}
+                            variant="plain"
+                            onClick={() => handleDashboardSelection(fd.id)}>
+                            {fd.name}
+                        </Button>
+                    ))}
+                </Row>
+            )}
+        </Row>
     );
 }
 

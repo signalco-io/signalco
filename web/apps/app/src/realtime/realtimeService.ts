@@ -30,22 +30,10 @@ class RealtimeService {
         }
 
         if (this.queryClient) {
-            console.debug('Invalidated queries for entity', change.entityId);
+            console.debug('Invalidated queries for entity and contact', change.entityId, change.channelName, change.contactName);
             this.queryClient.invalidateQueries(['entity', change.entityId]);
             this.queryClient.invalidateQueries(['contact', change.entityId, change.channelName, change.contactName]);
         }
-
-        // TODO: Update local contact value
-        console.debug('TODO: Update local contact value');
-        // const device = await EntityRepository.byIdAsync(state.entityId);
-        // if (typeof device !== 'undefined') {
-        //     device.updateState(
-        //         state.channelName,
-        //         state.contactName,
-        //         state.valueSerialized,
-        //         new Date(state.timeStamp)
-        //     );
-        // }
     }
 
     private async _hubStartWithRetryAsync(retryCount: number) {

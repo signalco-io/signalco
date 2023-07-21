@@ -4,22 +4,43 @@ import { Link } from '../Link';
 
 export type CardProps = HTMLAttributes<HTMLDivElement> & {
     href?: string;
+    onClick?: () => void;
 };
 
-export function Card({ href, className, ...restProps }: CardProps) {
-    const Comp = href
-        ? ({ children }: PropsWithChildren) => <Link href={href}>{children}</Link>
-        : ({ children }: PropsWithChildren) => (<>{children}</>);
-
+function LinkCard({ href, children }: PropsWithChildren & Required<Pick<CardProps, 'href'>>) {
     return (
-        <Comp>
+        <Link href={href}>{children}</Link>
+    );
+}
+
+function ButtonCard({ onClick, children }: PropsWithChildren & Required<Pick<CardProps, 'onClick'>>) {
+    return (
+        <button onClick={onClick}>{children}</button>
+    );
+}
+
+function BareCard({ children }: PropsWithChildren) {
+    return (
+        <>{children}</>
+    );
+}
+
+function CardWrapper({ href, onClick, children }: PropsWithChildren & Pick<CardProps, 'href' | 'onClick'>) {
+    if (href) return <LinkCard href={href}>{children}</LinkCard>;
+    if (onClick) return <ButtonCard onClick={onClick}>{children}</ButtonCard>;
+    return <BareCard>{children}</BareCard>;
+}
+
+export function Card({ href, onClick, className, ...restProps }: CardProps) {
+    return (
+        <CardWrapper href={href} onClick={onClick}>
             <div
                 className={cx(
                     'bg-card rounded-lg p-2 border text-card-foreground shadow-sm',
                     className
                 )}
                 {...restProps} />
-        </Comp>
+        </CardWrapper>
     );
 }
 
@@ -32,7 +53,7 @@ export function CardTitle({ className, ...props }: HTMLAttributes<HTMLHeadingEle
 }
 
 export function CardOverflow({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-    return <div className={className}>{props.children}</div>;
+    return <div className={cx('-m-2', className)}>{props.children}</div>;
 }
 
 export function CardContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {

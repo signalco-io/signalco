@@ -74,7 +74,7 @@ function WidgetCard(props: IWidgetCardProps) {
                     height: sizeHeight,
                 }}>
                     {(!isLoading && needsConfiguration) ? (
-                        <Stack justifyContent="stretch" style={{ height: '100%' }}>
+                        <Stack justifyContent="stretch" className="h-full">
                             <Button disabled={!isEditMode} size="lg" fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
                         </Stack>
                     ) : (
