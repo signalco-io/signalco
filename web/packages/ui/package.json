@@ -14,8 +14,8 @@
         "lint": "eslint --ext .ts,.tsx . --fix"
     },
     "devDependencies": {
-        "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/eslint-config-signalco": "workspace:*",
+        "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/react": "18.2.15",
         "@types/react-dom": "18.2.7",
@@ -37,6 +37,7 @@
         "@radix-ui/react-menubar": "1.0.3",
         "@radix-ui/react-popover": "1.0.6",
         "@radix-ui/react-select": "1.2.2",
+        "@radix-ui/react-slot": "1.0.2",
         "@signalco/js": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "next": "13.4.12",

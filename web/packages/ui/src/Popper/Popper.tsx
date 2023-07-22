@@ -18,7 +18,7 @@ export function Popper({ className, trigger, anchor, open, onOpenChange, ...rest
                 </PopoverPrimitive.Trigger>
             )}
             {anchor && (
-                <PopoverPrimitive.Anchor>
+                <PopoverPrimitive.Anchor asChild>
                     {anchor}
                 </PopoverPrimitive.Anchor>
             )}

@@ -5,8 +5,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "tsc && storybook build",
-        "dev": "storybook dev -p 6007 --no-open",
+        "build": "tsc && storybook build --quiet",
+        "dev": "storybook dev -p 6007 --no-open --quiet",
         "clean": "rimraf node_modules/.cache/storybook"
     },
     "engines": {

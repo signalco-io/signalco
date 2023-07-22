@@ -1,6 +1,7 @@
-import type { ButtonHTMLAttributes, PropsWithChildren, ReactNode } from 'react'
+import { forwardRef, type ButtonHTMLAttributes, type PropsWithChildren, type ReactNode, useMemo } from 'react'
 import { cx } from 'classix'
 import { LoaderSpinner } from '@signalco/ui-icons';
+import { Slot } from '@radix-ui/react-slot';
 import { VariantKeys } from '../theme';
 import { Link } from '../Link';
 
@@ -11,11 +12,12 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     startDecorator?: ReactNode;
     endDecorator?: ReactNode;
     loading?: boolean;
-    fullWidth?: boolean; // TODO: Implement
+    fullWidth?: boolean;
     href?: string;
+    asChild?: boolean;
 };
 
-export function Button({
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     children,
     className,
     startDecorator,
@@ -26,14 +28,18 @@ export function Button({
     size,
     href,
     fullWidth,
+    asChild,
     ...otherProps
-}: ButtonProps) {
-    const Comp = href && !disabled
+}, ref) => {
+    const Comp = useMemo(() => href && !disabled
         ? ({ children }: PropsWithChildren) => <Link href={href}>{children}</Link>
-        : ({ children }: PropsWithChildren) => <>{children}</>;
+        : ({ children }: PropsWithChildren) => <>{children}</>, [href, disabled]);
+    const ButtonComp = useMemo(() => asChild ? Slot : 'button', [asChild]);
+
     return (
         <Comp>
-            <button
+            <ButtonComp
+                ref={ref}
                 className={cx(
                     'inline-flex gap-1 items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background',
                     (!variant || variant === 'soft') && 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
@@ -54,7 +60,9 @@ export function Button({
                 {loading && <LoaderSpinner className="mr-2 h-4 w-4 animate-spin" />}
                 {children}
                 {endDecorator}
-            </button>
+            </ButtonComp>
         </Comp>
     )
-}
+});
+Button.displayName = 'Button'
+export { Button };

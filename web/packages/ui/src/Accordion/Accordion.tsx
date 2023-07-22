@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { HTMLAttributes, MouseEvent } from 'react';
+import type { ComponentProps, MouseEvent } from 'react';
 import { cx } from 'classix';
 import { Row } from '../Row';
 import { IconButton } from '../IconButton';
@@ -7,7 +7,7 @@ import { Icon } from '../Icon';
 import { Collapse } from '../Collapse';
 import { Card } from '../Card';
 
-export type AccordionProps = HTMLAttributes<HTMLDivElement> & {
+export type AccordionProps = ComponentProps<typeof Card> & {
     open?: boolean;
     disabled?: boolean;
     onOpenChanged?: (e: MouseEvent<HTMLButtonElement>, open: boolean) => void;
