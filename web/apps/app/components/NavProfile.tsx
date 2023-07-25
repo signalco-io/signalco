@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Channel, Close, Dashboard, Device, Menu as MenuIcon, LogOut, Settings } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
@@ -28,11 +28,11 @@ const navItems: NavItem[] = [
     { label: 'Entities', path: KnownPages.Entities, icon: Device }
 ];
 
-function UserProfileAvatarButton() {
+const UserProfileAvatarButton = forwardRef<HTMLDivElement>((_props, ref) => {
     const user = useCurrentUser();
 
     return (
-        <div className="relative p-2">
+        <div className="relative p-2" ref={ref}>
             <Button variant="plain" className="py-6">
                 <UserAvatar user={user} />
                 <div className="absolute -bottom-1 left-1/2 -translate-x-1/2">
@@ -41,7 +41,8 @@ function UserProfileAvatarButton() {
             </Button>
         </div>
     );
-}
+});
+UserProfileAvatarButton.displayName = 'UserProfileAvatarButton';
 
 function UserProfileAvatar() {
     const { t } = useLocale('App', 'Account');
