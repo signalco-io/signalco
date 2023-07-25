@@ -9,7 +9,7 @@
         "@typescript-eslint/parser": "6.2.0",
         "eslint": "8.45.0",
         "eslint-config-next": "13.4.12",
-        "eslint-config-turbo": "1.10.10",
+        "eslint-config-turbo": "1.10.11",
         "eslint-import-resolver-typescript": "3.5.5",
         "eslint-plugin-import": "2.27.5",
         "eslint-plugin-react": "7.33.0",
