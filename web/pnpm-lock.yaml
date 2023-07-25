@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -540,6 +540,9 @@ importers:
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
+      '@signalco/tailwindcss-config-signalco':
+        specifier: workspace:*
+        version: link:../../packages/tailwindcss-config-signalco
       '@signalco/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -570,6 +573,12 @@ importers:
       sharp:
         specifier: 0.32.4
         version: 0.32.4
+      tailwindcss:
+        specifier: 3.3.3
+        version: 3.3.3
+      tailwindcss-animate:
+        specifier: 1.0.6
+        version: 1.0.6(tailwindcss@3.3.3)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.3
