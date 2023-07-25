@@ -1,6 +1,14 @@
 import { arrayMax } from '@signalco/js';
 import IEntityDetails from './IEntityDetails'
 
+export const entityTypes = [
+    { value: 1, label: 'Device' },
+    { value: 2, label: 'Dashboard' },
+    { value: 3, label: 'Process' },
+    { value: 4, label: 'Station' },
+    { value: 5, label: 'Channel' }
+];
+
 export function entityBatteryLevel(entity: IEntityDetails | null | undefined) {
     return parseFloat(entity?.contacts.find(c => c.contactName === 'battery')?.valueSerialized ?? '');
 }
