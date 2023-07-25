@@ -53,14 +53,14 @@ function WindowVisual(props: { shadePerc: number, size: number, dateAndTime?: Da
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className={styles.root} width={props.size * 1.4} height={props.size * 1.4} fill="none" viewBox="0 0 81 104">
             <g className="Theme=Dark, Shades=Mid">
-                <path fill="var(--joy-palette-text-primary)" d="M16 1h49v71H16z" className="Frame" />
+                <path fill="hsl(var(--foreground))" d="M16 1h49v71H16z" className="Frame" />
                 <g className="Pane" filter="url(#filter0_d_21:114)">
                     <path fill="url(#windowpaint0_linear_21:114)" d="M19 4h43v65H19z" />
                 </g>
-                <path stroke="var(--joy-palette-text-primary)" d="M19 36.5h43" className="CrossHorizontal" />
-                <path stroke="var(--joy-palette-text-primary)" d="M40.5 69V4" className="CrossVertical" />
-                <path stroke="var(--joy-palette-text-primary)" strokeOpacity=".5" d="M17.646 27.203L42.395 2.454" className="Gloss2" />
-                <path stroke="var(--joy-palette-text-primary)" strokeOpacity=".5" strokeWidth="4" d="M17.586 32.799L47.991 2.393" className="Gloss1" />
+                <path stroke="hsl(var(--foreground))" d="M19 36.5h43" className="CrossHorizontal" />
+                <path stroke="hsl(var(--foreground))" d="M40.5 69V4" className="CrossVertical" />
+                <path stroke="hsl(var(--foreground))" strokeOpacity=".5" d="M17.646 27.203L42.395 2.454" className="Gloss2" />
+                <path stroke="hsl(var(--foreground))" strokeOpacity=".5" strokeWidth="4" d="M17.586 32.799L47.991 2.393" className="Gloss1" />
                 <g className="WindowShade">
                     <path fill="#666" d={`M19 4h43v${shadePosition}H19z`} className="Shade" />
                     <path fill="#C4C4C4" fillOpacity=".5" d={`M19 ${shadePosition + 2}h43v2H19z`} className="ShadeRod" />

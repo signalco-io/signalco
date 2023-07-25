@@ -13,6 +13,7 @@ import useCurrentUser from '../src/hooks/useCurrentUser';
 import UserAvatar from './users/UserAvatar';
 import NavLink from './navigation/NavLink';
 import ApiBadge from './development/ApiBadge';
+import { cx } from 'classix';
 
 type NavItem = {
     label: string,
@@ -96,16 +97,10 @@ function NavProfile() {
                 <IconButton variant="plain" size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
                     {mobileMenuOpen ? <Close /> : <MenuIcon />}
                 </IconButton>
-                <div className="fixed inset-x-0 bottom-0 top-[60px] z-50 bg-current" style={{
-                    display: !mobileMenuOpen ? 'none' : 'block',
-                    position: 'fixed',
-                    top: '60px',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    background: 'var(--joy-palette-background-body)',
-                    zIndex: 999
-                }}>
+                <div className={cx(
+                    'fixed inset-x-0 bottom-0 left-0 right-0 top-[60px] z-50 bg-current',
+                    !mobileMenuOpen && 'hidden'
+                )}>
                     <Stack>
                         {visibleNavItems.map((ni, index) =>
                             <NavLink

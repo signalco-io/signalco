@@ -1,7 +1,8 @@
 import { PropsWithChildren } from 'react';
+import { cx } from 'classix';
 import { Up } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
-import {Stack} from '@signalco/ui/dist/Stack';
+import { Stack } from '@signalco/ui/dist/Stack';
 import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { ItemsShowMore } from '@signalco/ui/dist/FilterList';
@@ -17,8 +18,8 @@ const statusOrderedList: RoadmapItemStatus[] = ['inProgress', 'inQueue', 'planne
 function VoteButton({ votes, readonly, size = 'md' }: { votes?: number | undefined, readonly?: boolean, size?: 'sm' | 'md' }) {
     if (readonly) {
         return (
-            <Card style={{ width: 42, aspectRatio: 1, textAlign: 'center', borderRadius: 'var(--joy-radius-sm)' }}>
-                <span style={{ lineHeight: '42px' }}>{votes ?? 'Vote'}</span>
+            <Card className="aspect-square w-10 rounded-sm text-center">
+                <span className="leading-10">{votes ?? 'Vote'}</span>
             </Card>
         )
     }
@@ -32,7 +33,10 @@ function VoteButton({ votes, readonly, size = 'md' }: { votes?: number | undefin
             }}>
             <Stack alignItems="center" spacing={size === 'sm' ? 0 : 1} style={{ paddingTop: size === 'sm' ? 0 : 4 }}>
                 <Up />
-                <span style={{ paddingBottom: size === 'sm' ? 4 : 16 }}>{votes ?? 'Vote'}</span>
+                <span className={cx(
+                    'pb-4',
+                    size === 'sm' && 'pb-1'
+                )}>{votes ?? 'Vote'}</span>
             </Stack>
         </Button>
     );
@@ -40,7 +44,7 @@ function VoteButton({ votes, readonly, size = 'md' }: { votes?: number | undefin
 
 function RoadmapItem({ item }: { item: RoadmapItem }) {
     return (
-        <div key={item.title} style={{ height: '100%', display: 'flex', gap: 8, alignItems: 'center' }}>
+        <div key={item.title} className="flex h-full items-center gap-2">
             <VoteButton votes={item.votes} readonly={true} size="sm" />
             {item.href ? (
                 <NavigatingButton hideArrow href={item.href}>{item.title}</NavigatingButton>

@@ -103,7 +103,7 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
                     height: 144 + 16 * 2,
                     gridRowEnd: 'span 2',
                     padding: 16,
-                    border: '1px solid var(--joy-palette-divider)',
+                    border: '1px solid hsl(var(--border))',
                     borderRadius: 8
                 }}
                 src={icons.icon512Base64 || icons.icon256Base64 || icons.appleTouchIconBase64 || icons.icon128Base64 || icons.icon64Base64 || icons.icon32Base64 || icons.icon16Base64 || favicon.base64}
@@ -115,7 +115,7 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
                     width: 42 + 16 * 2,
                     height: 42 + 16 * 2,
                     padding: 16,
-                    border: '1px solid var(--joy-palette-divider)',
+                    border: '1px solid hsl(var(--border))',
                     borderRadius: 8
                 }}
                 src={icons.icon64Base64 || icons.icon32Base64 || icons.icon16Base64 || favicon.base64}
@@ -127,7 +127,7 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
                     width: 16 * 3,
                     height: 16 * 3,
                     padding: 16,
-                    border: '1px solid var(--joy-palette-divider)',
+                    border: '1px solid hsl(var(--border))',
                     borderRadius: 8
                 }}
                 src={icons.icon16Base64 || favicon.base64}
@@ -232,7 +232,7 @@ function PagePreview({ domain }: { domain: string }) {
                                 alignItems: 'end',
                                 display: 'flex',
                                 color: hexLightness(color.hex) < .5 ? 'rgba(256,256,256, .8)' : 'rgba(0,0,0, .8)',
-                                border: '1px solid var(--joy-palette-divider)'
+                                border: '1px solid hsl(var(--border))'
                             }}>
                                 {color.hex}
                             </div>
