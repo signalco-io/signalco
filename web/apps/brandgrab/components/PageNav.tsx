@@ -1,24 +1,15 @@
 import React from 'react';
-import {Link} from '@signalco/ui/dist/Link';
-import {Container} from '@signalco/ui/dist/Container';
+import { cx } from 'classix';
+import { Link } from '@signalco/ui/dist/Link';
+import { Container } from '@signalco/ui/dist/Container';
 import InputGrabDomain from './InputGrabDomain';
 
 export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
     return (
-        <nav style={{
-            borderBottom: '1px solid var(--joy-palette-background-body)',
-            paddingTop: 8,
-            paddingBottom: 8,
-            position: 'fixed',
-            left: 0,
-            right: 0,
-            top: 0,
-            height: '60px',
-            paddingLeft: fullWidth ? '24px' : 0,
-            paddingRight: fullWidth ? '24px' : 0,
-            backdropFilter: 'blur(10px)',
-            zIndex: 101
-        }}>
+        <nav className={cx(
+            'backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-10 h-20',
+            fullWidth ? 'px-4' : 'px-0'
+        )}>
             <Container maxWidth={fullWidth ? false : 'lg'}>
                 <header style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', gap: 16 }}>
                     <div>

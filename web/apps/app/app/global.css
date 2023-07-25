@@ -1,4 +1,3 @@
-@import './variables.css';
 @import '@signalco/ui/dist/index.css';
 @import 'react-toastify/dist/ReactToastify.css';
 
@@ -31,14 +30,6 @@ html, body, #__next {
   width: 100%;
 }
 
-a {
-  text-decoration: none;
-  color: var(--joy-palette-text-tertiary);
-}
-a:hover {
-  color: var(--joy-palette-text-secondary);
-}
-
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -65,7 +56,7 @@ a:hover {
 }
 
 :root {
-  --toastify-font-family: var(--joy-fontFamily-body);
+  --toastify-font-family: var(--font-sans);
 }
 
 [data-joy-color-scheme="dark"] {

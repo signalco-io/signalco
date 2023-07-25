@@ -1,4 +1,3 @@
-@import './variables.css';
 @import '@signalco/ui/dist/index.css';
 
 @tailwind base;
@@ -28,14 +27,6 @@
 html, body, #__next {
   height: 100%;
   width: 100%;
-}
-
-a {
-  text-decoration: none;
-  color: var(--joy-palette-text-tertiary);
-}
-a:hover {
-  color: var(--joy-palette-text-secondary);
 }
 
 .material-icons {

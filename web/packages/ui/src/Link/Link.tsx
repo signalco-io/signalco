@@ -14,7 +14,7 @@ export function Link({ className, href, ...rest }: LinkProps) {
     return (
         <NextLink
             href={href}
-            className={cx('no-underline color-[var(--joy-palette-text-secondary)]', className)}
+            className={cx('no-underline text-muted', className)}
             target={isAbsoluteUrl(href) ? '_blank' : '_self'}
             passHref
             prefetch={false}

@@ -204,7 +204,7 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
                 <Line type="monotone" dot={false} data={[
                     { key: domainGraph(past.getTime()), value: firstDataPoint.value },
                     { key: domainGraph(new Date(firstDataPoint.id).getTime()), value: firstDataPoint.value }
-                ]} dataKey="value" stroke="var(--joy-palette-divider)" strokeWidth={2} strokeDasharray="5 3" />
+                ]} dataKey="value" stroke="hsl(var(--border))" strokeWidth={2} strokeDasharray="5 3" />
             )}
             <Area
                 type="basis"
@@ -217,7 +217,7 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
                 <Line type="monotone" dot={false} data={[
                     { key: domainGraph(new Date(lastDataPoint.id).getTime()), value: lastDataPoint.value },
                     { key: domainGraph(nowTime.getTime()), value: lastDataPoint.value }
-                ]} dataKey="value" stroke="var(--joy-palette-divider)" strokeWidth={2} strokeDasharray="5 3" />
+                ]} dataKey="value" stroke="hsl(var(--border))" strokeWidth={2} strokeDasharray="5 3" />
             )}
             <Tooltip content={<ChartGenericTooltip domain={domainGraph} />} />
         </ComposedChart>
@@ -271,18 +271,18 @@ function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
                 bottom: 5,
             }}
         >
-            <CartesianGrid stroke="var(--joy-palette-divider)" vertical={false} />
+            <CartesianGrid stroke="hsl(var(--border))" vertical={false} />
             <XAxis dataKey="id" hide />
             <YAxis />
             <Tooltip
                 contentStyle={{
-                    backgroundColor: 'var(--joy-palette-background-body)',
-                    borderColor: 'var(--joy-palette-divider)',
+                    backgroundColor: 'hsl(var(--background))',
+                    borderColor: 'hsl(var(--border))',
                     borderRadius: '8px',
                     padding: '12px 16px'
                 }}
                 cursor={{
-                    stroke: 'var(--joy-palette-divider)',
+                    stroke: 'hsl(var(--border))',
                     fill: 'rgba(128,128,128,0.2)'
                 }} />
             <Legend iconType="circle" layout="vertical" align="right" verticalAlign="top" wrapperStyle={{
