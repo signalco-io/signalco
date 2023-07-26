@@ -15,8 +15,8 @@ dependencies:
     specifier: 2.1.1
     version: 2.1.1
   '@pulumi/cloudflare':
-    specifier: 5.6.0
-    version: 5.6.0
+    specifier: 5.7.0
+    version: 5.7.0
   '@pulumi/command':
     specifier: 0.7.2
     version: 0.7.2
@@ -386,8 +386,8 @@ packages:
       - supports-color
     dev: false
 
-  /@pulumi/cloudflare@5.6.0:
-    resolution: {integrity: sha512-U/FB6OJZNrJglQfdVeRWkVaHlnp9EpM80HpZnA3CCaXC/yEFCYiCGFJ8KHfD8Dj3ZBphjw4L8ZIm0qmwf/cbXQ==}
+  /@pulumi/cloudflare@5.7.0:
+    resolution: {integrity: sha512-e0sbLLlGetL2gmrGkKurR7cCkN6mXiXO3qrQr3U6TPvk7AtDRmrjtkVCKHemF1GEnE0EoIiiQZ5q8QPtUZN6gA==}
     requiresBuild: true
     dependencies:
       '@pulumi/pulumi': 3.76.0
