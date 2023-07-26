@@ -11,7 +11,7 @@ public interface IWorkerServiceManager
     event EventHandler<IWorkerServiceManagerStateChangeEventArgs> OnChange;
     IEnumerable<StationWorkerServiceState> WorkerServices { get; }
     Task StartAllWorkerServicesAsync(CancellationToken cancellationToken = default);
-    Task StopAllWorkerServicesAsync(CancellationToken cancellationToken = default);
+    Task StopAllWorkerServicesAsync();
     Task StartWorkerServiceAsync(string entityId, CancellationToken cancellationToken = default);
     Task StopWorkerServiceAsync(string entityId, CancellationToken cancellationToken = default);
     void BeginDiscovery();

@@ -9,7 +9,6 @@ using Signal.Beacon.Application.Auth;
 using Signal.Beacon.Application.Auth0;
 using Signal.Beacon.Application.Signal.Client;
 using Signal.Beacon.Application.Signal.Station;
-using Signal.Beacon.Core.Configuration;
 using Signal.Beacon.Core.Entity;
 
 namespace Signal.Beacon;
@@ -76,7 +75,7 @@ public class Worker : BackgroundService
                 var token = await new Auth0DeviceAuthorization().WaitTokenAsync(deviceCodeResponse, stoppingToken);
                 if (token == null)
                     throw new Exception("Token response not received");
-                this.logger.LogInformation("Authorized successfully");
+                this.logger.LogDebug("Authorized successfully");
 
                 // Register Beacon
                 this.signalcoClientAuthFlow.AssignToken(token);
@@ -89,7 +88,7 @@ public class Worker : BackgroundService
                 config.Token = token;
                 await this.SaveConfigurationAsync(config, stoppingToken);
 
-                this.logger.LogInformation("Token saved");
+                this.logger.LogDebug("Token saved");
                 this.logger.LogInformation("Registered successfully as {Id}", id);
             }
             catch (Exception ex)
@@ -101,6 +100,8 @@ public class Worker : BackgroundService
         {
             this.signalcoClientAuthFlow.AssignToken(config.Token);
         }
+
+        this.logger.LogInformation("Visit entity at {Url}", $"https://app.signalco.io/entities/{config.Id}");
 
         this.signalcoClientAuthFlow.OnTokenRefreshed += this.SignalcoClientAuthFlowOnOnTokenRefreshed;
 

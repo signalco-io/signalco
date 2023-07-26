@@ -38,7 +38,7 @@ internal class iRobotWorkerService : IWorkerService
     private CancellationToken startCancellationToken;
     private iRobotWorkerServiceConfiguration? configuration;
     private readonly Dictionary<string, IMqttClient> roombaClients = new();
-    private string channelId;
+    private string? channelEntityId;
 
     public iRobotWorkerService(
         IEntityService entityService,
@@ -64,7 +64,7 @@ internal class iRobotWorkerService : IWorkerService
     public async Task StartAsync(string entityId, CancellationToken cancellationToken)
     {
         this.startCancellationToken = cancellationToken;
-        this.channelId = entityId;
+        this.channelEntityId = entityId;
         this.configuration =
             await this.configurationService.LoadAsync<iRobotWorkerServiceConfiguration>(
                 entityId,
@@ -232,14 +232,12 @@ internal class iRobotWorkerService : IWorkerService
         _ = this.ConnectToRoomba(config);
     }
 
-    private async Task SaveConfigurationAsync()
-    {
+    private async Task SaveConfigurationAsync() =>
         await this.configurationService.SaveAsync(
-            this.channelId,
+            this.channelEntityId ?? throw new NotSupportedException("Can not save because entity id is not set"),
             iRobotChannels.RoombaChannel,
             this.configuration,
             this.startCancellationToken);
-    }
 
     private async Task DisconnectRoombaClientAsync(string robotId)
     {
@@ -254,7 +252,7 @@ internal class iRobotWorkerService : IWorkerService
         }
         catch (Exception ex)
         {
-            this.logger.LogWarning(ex, "Failed to stop and dispose MQTT client.");
+            this.logger.LogWarning(ex, "Failed to stop and dispose MQTT client");
         }
 
         // Remove client

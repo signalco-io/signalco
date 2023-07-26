@@ -8,11 +8,11 @@ namespace Signal.Beacon.Application.Signal.Station;
 internal class StationStateService : IStationStateService
 {
     private readonly IConfigurationService configurationService;
-    private readonly IWorkerServiceManager workerServiceManager;
+    private readonly Lazy<IWorkerServiceManager> workerServiceManager;
 
     public StationStateService(
         IConfigurationService configurationService,
-        IWorkerServiceManager workerServiceManager)
+        Lazy<IWorkerServiceManager> workerServiceManager)
     {
         this.configurationService = configurationService ?? throw new ArgumentNullException(nameof(configurationService));
         this.workerServiceManager = workerServiceManager ?? throw new ArgumentNullException(nameof(workerServiceManager));
@@ -28,7 +28,7 @@ internal class StationStateService : IStationStateService
         {
             Id = config.Id,
             Version = Assembly.GetEntryAssembly()?.GetName().Version?.ToString() ?? "Unknown",
-            WorkerServices = this.workerServiceManager.WorkerServices
+            WorkerServices = this.workerServiceManager.Value.WorkerServices
         };
     }
 }

@@ -45,6 +45,7 @@ public static class Program
 
                 services.AddTransient(typeof(Lazy<>), typeof(Lazier<>));
                 services.AddSingleton<IWorkerServiceManager, WorkerServiceManager>();
+                services.AddTransient<IChannelWorkerServiceResolver, ChannelWorkerServiceResolver>();
             })
             .UseSerilog((context, provider, config) =>
             {
