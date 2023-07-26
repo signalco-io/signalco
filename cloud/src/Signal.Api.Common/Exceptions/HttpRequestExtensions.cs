@@ -4,9 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker.Http;
 using Signal.Api.Common.Auth;
 using Signal.Core.Auth;
 using Signal.Core.Exceptions;
@@ -29,11 +27,9 @@ public static class HttpRequestExtensions
         }
     }
 
-    public static async Task<T> ReadAsJsonAsync<T>(this HttpRequest req)
+    public static async Task<T> ReadAsJsonAsync<T>(this HttpRequestData req)
     {
-        var requestContent = await req.ReadAsStringAsync();
-        if (string.IsNullOrWhiteSpace(requestContent))
-            throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Request empty.");
+        var requestContent = await req.ReadAsStringAsync() ?? throw new NullReferenceException("No content in request");
 
         return JsonSerializer.Deserialize<T>(
             requestContent,
@@ -44,56 +40,67 @@ public static class HttpRequestExtensions
             })!;
     }
 
-    public static async Task<IActionResult> AnonymousRequest(
-        this HttpRequest _,
-        Func<Task> executionBody)
-    {
-        try
-        {
-            await executionBody();
-            return new OkResult();
-        }
-        catch (ExpectedHttpException ex)
-        {
-            return new ObjectResult(new ApiErrorDto(ex.Code.ToString(), ex.Message))
-            {
-                StatusCode = (int)ex.Code
-            };
-        }
-    }
-
-    public static Task<IActionResult> AnonymousRequest<TPayload, TResponse>(
-        this HttpRequest req,
-        CancellationToken cancellationToken,
-        Func<AnonymousRequestContextWithPayload<TPayload>, Task<TResponse>> executionBody) =>
-        AnonymousRequest<TPayload>(req, async context =>
-            new OkObjectResult(await executionBody(context)), cancellationToken);
-
-    private static async Task<IActionResult> AnonymousRequest<TPayload>(
-        this HttpRequest req,
-        Func<AnonymousRequestContextWithPayload<TPayload>, Task<IActionResult>> executionBody,
+    public static async Task<HttpResponseData> AnonymousRequest(
+        this HttpRequestData req,
+        Func<Task> executionBody,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            // Deserialize and validate
-            var payload = await req.ReadAsJsonAsync<TPayload>();
-            if (payload == null)
-                throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Failed to read request data.");
+            await executionBody();
+            return req.CreateResponse(HttpStatusCode.OK);
+        }
+        catch (ExpectedHttpException ex)
+        {
+            return await ExceptionResponseAsync(req, ex, cancellationToken);
+        }
+    }
+
+    public static async Task<HttpResponseData> JsonResponseAsync<TPayload>(
+        this HttpRequestData req,
+        TPayload payload,
+        HttpStatusCode statusCode = HttpStatusCode.OK,
+        CancellationToken cancellationToken = default)
+    {
+        var resp = req.CreateResponse();
+        await resp.WriteAsJsonAsync(payload, cancellationToken: cancellationToken);
+        resp.StatusCode = statusCode;
+        return resp;
+    }
+
+    public static Task<HttpResponseData> AnonymousRequest<TPayload, TResponse>(
+        this HttpRequestData req,
+        CancellationToken cancellationToken,
+        Func<AnonymousRequestContextWithPayload<TPayload>, Task<TResponse>> executionBody) =>
+        AnonymousRequest<TPayload>(req, async context =>
+                await req.JsonResponseAsync(await executionBody(context), cancellationToken: cancellationToken),
+            cancellationToken);
+
+    private static async Task<HttpResponseData> AnonymousRequest<TPayload>(
+        this HttpRequestData req,
+        Func<AnonymousRequestContextWithPayload<TPayload>, Task<HttpResponseData>> executionBody,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var payload = await ReadRequiredJsonAsync<TPayload>(req);
 
             return await executionBody(new AnonymousRequestContextWithPayload<TPayload>(payload, cancellationToken));
         }
         catch (ExpectedHttpException ex)
         {
-            return new ObjectResult(new ApiErrorDto(ex.Code.ToString(), ex.Message))
-            {
-                StatusCode = (int)ex.Code
-            };
+            return await ExceptionResponseAsync(req, ex, cancellationToken);
         }
     }
 
-    public static async Task<IActionResult> UserRequest<TResponse>(
-        this HttpRequest req,
+    private static async Task<HttpResponseData> ExceptionResponseAsync(HttpRequestData req, ExpectedHttpException ex, CancellationToken cancellationToken = default) =>
+        await req.JsonResponseAsync(
+            new ApiErrorDto(ex.Code.ToString(), ex.Message),
+            ex.Code, 
+            cancellationToken: cancellationToken);
+
+    public static async Task<HttpResponseData> UserRequest<TResponse>(
+        this HttpRequestData req,
         CancellationToken cancellationToken,
         IFunctionAuthenticator authenticator,
         Func<UserRequestContext, Task<TResponse>> executionBody)
@@ -101,65 +108,63 @@ public static class HttpRequestExtensions
         try
         {
             var user = await authenticator.AuthenticateAsync(req, cancellationToken);
-            return new OkObjectResult(await executionBody(new UserRequestContext(user, cancellationToken)));
+            return await req.JsonResponseAsync(await executionBody(new UserRequestContext(user, cancellationToken)), cancellationToken: cancellationToken);
         }
         catch (ExpectedHttpException ex)
         {
-            return new ObjectResult(new ApiErrorDto(ex.Code.ToString(), ex.Message))
-            {
-                StatusCode = (int)ex.Code
-            };
+            return await ExceptionResponseAsync(req, ex, cancellationToken);
         }
     }
 
-    public static Task<IActionResult> UserRequest<TPayload>(
-        this HttpRequest req,
+    public static Task<HttpResponseData> UserRequest<TPayload>(
+        this HttpRequestData req,
         CancellationToken cancellationToken,
         IFunctionAuthenticator authenticator,
         Func<UserRequestContextWithPayload<TPayload>, Task> executionBody) =>
         UserRequest<TPayload>(req, authenticator, async context =>
         {
             await executionBody(context);
-            return new OkResult();
+            return req.CreateResponse(HttpStatusCode.OK);
         }, cancellationToken);
 
-    public static Task<IActionResult> UserOrSystemRequest<TPayload>(
-        this HttpRequest req,
+    public static Task<HttpResponseData> UserOrSystemRequest<TPayload>(
+        this HttpRequestData req,
         CancellationToken cancellationToken,
         IFunctionAuthenticator authenticator,
         Func<UserOrSystemRequestContextWithPayload<TPayload>, Task> executionBody) =>
         UserOrSystemRequest<TPayload>(req, authenticator, async context =>
         {
             await executionBody(context);
-            return new OkResult();
+            return req.CreateResponse(HttpStatusCode.OK);
         }, cancellationToken);
 
-    public static Task<IActionResult> UserRequest<TPayload, TResponse>(
-        this HttpRequest req,
+    public static Task<HttpResponseData> UserRequest<TPayload, TResponse>(
+        this HttpRequestData req,
         CancellationToken cancellationToken,
         IFunctionAuthenticator authenticator,
         Func<UserRequestContextWithPayload<TPayload>, Task<TResponse>> executionBody) =>
-        UserRequest<TPayload>(req, authenticator, async context => 
-            new OkObjectResult(await executionBody(context)), cancellationToken);
+        UserRequest<TPayload>(req, authenticator, async context =>
+        {
+            var response = await executionBody(context);
+            return response as HttpResponseData ??
+                   await req.JsonResponseAsync(response, cancellationToken: cancellationToken);
+        }, cancellationToken);
 
-    private static async Task<IActionResult> UserOrSystemRequest<TPayload>(
-        this HttpRequest req,
+    private static async Task<HttpResponseData> UserOrSystemRequest<TPayload>(
+        this HttpRequestData req,
         IFunctionAuthenticator authenticator,
-        Func<UserOrSystemRequestContextWithPayload<TPayload>, Task<IActionResult>> executionBody,
+        Func<UserOrSystemRequestContextWithPayload<TPayload>, Task<HttpResponseData>> executionBody,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            var isSystem = req.Headers.ContainsKey(KnownHeaders.ProcessorAccessCode);
+            var isSystem = req.Headers.Contains(KnownHeaders.ProcessorAccessCode);
             IUserAuth? user = null;
             if (isSystem)
                 await authenticator.AuthenticateSystemAsync(req, cancellationToken);
             else user = await authenticator.AuthenticateAsync(req, cancellationToken);
 
-            // Deserialize and validate
-            var payload = await req.ReadAsJsonAsync<TPayload>();
-            if (payload == null)
-                throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Failed to read request data.");
+            var payload = await ReadRequiredJsonAsync<TPayload>(req);
 
             return await executionBody(
                 isSystem
@@ -168,36 +173,38 @@ public static class HttpRequestExtensions
         }
         catch (ExpectedHttpException ex)
         {
-            return new ObjectResult(new ApiErrorDto(ex.Code.ToString(), ex.Message))
-            {
-                StatusCode = (int)ex.Code
-            };
+            return await ExceptionResponseAsync(req, ex, cancellationToken);
         }
     }
 
-    private static async Task<IActionResult> UserRequest<TPayload>(
-        this HttpRequest req,
+    private static async Task<HttpResponseData> UserRequest<TPayload>(
+        this HttpRequestData req,
         IFunctionAuthenticator authenticator,
-        Func<UserRequestContextWithPayload<TPayload>, Task<IActionResult>> executionBody,
+        Func<UserRequestContextWithPayload<TPayload>, Task<HttpResponseData>> executionBody,
         CancellationToken cancellationToken = default)
     {
         try
         {
             var user = await authenticator.AuthenticateAsync(req, cancellationToken);
-
-            // Deserialize and validate
-            var payload = await req.ReadAsJsonAsync<TPayload>();
-            if (payload == null)
-                throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Failed to read request data.");
+            var payload = await ReadRequiredJsonAsync<TPayload>(req);
 
             return await executionBody(new UserRequestContextWithPayload<TPayload>(user, payload, cancellationToken));
         }
         catch (ExpectedHttpException ex)
         {
-            return new ObjectResult(new ApiErrorDto(ex.Code.ToString(), ex.Message))
-            {
-                StatusCode = (int)ex.Code
-            };
+            return await ExceptionResponseAsync(req, ex, cancellationToken);
+        }
+    }
+
+    private static async Task<TPayload> ReadRequiredJsonAsync<TPayload>(HttpRequestData req)
+    {
+        try
+        {
+            return await req.ReadAsJsonAsync<TPayload>() ?? throw new Exception("Required payload null.");
+        }
+        catch
+        {
+            throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Expected JSON payload.");
         }
     }
 }

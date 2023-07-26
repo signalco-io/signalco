@@ -1,7 +1,10 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Down, Stop, Up } from '@signalco/ui-icons';
-import { Stack, Button, Divider, Grid, Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Divider } from '@signalco/ui/dist/Divider';
+import { Button } from '@signalco/ui/dist/Button';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultColumns, DefaultLabel } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -97,31 +100,28 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
     };
 
     return (
-        <Grid container wrap="nowrap" sx={{ height: '100%' }}>
+        <div className="grid h-full grid-cols-2">
             {columns > 1 && (
                 <>
-                    <Grid xs={6}>
-                        <Stack style={{ height: '100%', paddingLeft: 2.5 * 8, paddingRight: 1.5 * 8, paddingTop: 16, paddingBottom: 16 }} justifyContent={columns > 2 ? 'space-between' : 'center'}>
-                            <WindowVisual shadePerc={1 - shadePerc} size={68} />
-                            {columns > 2 && <Typography semiBold noWrap>{label}</Typography>}
-                        </Stack>
-                    </Grid>
+                    <Stack style={{ height: '100%', paddingLeft: 2.5 * 8, paddingRight: 1.5 * 8, paddingTop: 16, paddingBottom: 16 }} justifyContent={columns > 2 ? 'space-between' : 'center'}>
+                        <WindowVisual shadePerc={1 - shadePerc} size={68} />
+                        {columns > 2 && <Typography semiBold noWrap>{label}</Typography>}
+                    </Stack>
                     <Divider orientation="vertical" />
                 </>
             )}
-            <Grid xs={6} sx={{ flexGrow: 1, borderColor: 'divider', borderRadius: '0 8px 8px 0' }}>
+            <div className="grow rounded-r-lg border-current">
                 <Stack style={{ height: '100%' }} justifyContent="stretch">
                     <Button variant="outlined" onClick={() => handleStateChangeRequest('up')}
-                        sx={{ borderRadius: '0 8px 0 0', flexGrow: 1, border: 0, width: 'calc(100% - 2px)' }}
                         aria-label="Up"><Up /></Button>
-                    {stopValueSerialized && <Button variant="outlined" onClick={() => handleStateChangeRequest('stop')} sx={{ borderRadius: 0, flexGrow: 1, border: 0 }} aria-label="Stop">
+                    {stopValueSerialized && <Button variant="outlined" onClick={() => handleStateChangeRequest('stop')}
+                        aria-label="Stop">
                         <Stop size={18} /></Button>}
                     <Button variant="outlined" onClick={() => handleStateChangeRequest('down')}
-                        sx={{ borderRadius: '0 0 8px 0', flexGrow: 1, border: 0, width: 'calc(100% - 2px)' }}
                         aria-label="Down"><Down /></Button>
                 </Stack>
-            </Grid>
-        </Grid>
+            </div>
+        </div>
     );
 }
 

@@ -2,17 +2,17 @@
 
 import React from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Minimize } from '@signalco/ui-icons';
-import { ChildrenProps, IconButton, MuiStack, Tooltip } from '@signalco/ui';
+import { IconButton } from '@signalco/ui/dist/IconButton';
 import { useSearchParam } from '@signalco/hooks';
 import NavProfile from '../NavProfile';
 import RealtimeService from '../../src/realtime/realtimeService';
 import { AuthWrapper } from './AuthWrapper';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
-export function AppLayout(props: ChildrenProps) {
+export function AppLayout(props: React.PropsWithChildren) {
     const {
         children
     } = props;
@@ -23,25 +23,24 @@ export function AppLayout(props: ChildrenProps) {
     return (
         <AuthWrapper>
             <QueryClientProvider client={queryClient}>
-                <MuiStack sx={{ flexDirection: { xs: 'column', sm: 'row' }, height: '100vh', width: '100%' }}>
-                    {isFullScreen !== 'on' && (
+                <div className="flex h-screen w-full flex-col sm:flex-row">
+                    {isFullScreen !== 'true' && (
                         <NavProfile />
                     )}
-                    <div style={{ height: '100vh', overflow: 'auto', width: '100%', flexGrow: 1, position: 'relative' }}>
+                    <div className="relative h-screen w-full grow overflow-hidden">
                         {children}
                     </div>
-                </MuiStack>
+                </div>
                 <ReactQueryDevtools initialIsOpen={false} />
                 {isFullScreen && (
-                    <Tooltip title="Exit fullscreen">
+                    <div className="fixed bottom-3 right-3">
                         <IconButton
                             size="lg"
                             aria-label="Exit fullscreen"
-                            sx={{ position: 'fixed', bottom: '12px', right: '12px' }}
                             onClick={() => setFullScreen(undefined)}>
                             <Minimize />
                         </IconButton>
-                    </Tooltip>
+                    </div>
                 )}
             </QueryClientProvider>
         </AuthWrapper>

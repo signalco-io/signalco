@@ -3,7 +3,16 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
-import { Row, Chip, Card, Typography, FilterList, SelectItems, Gallery, Stack, ColorVariants } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import type { ColorVariants } from '@signalco/ui/dist/theme';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
+import { Row } from '@signalco/ui/dist/Row';
+import { Gallery } from '@signalco/ui/dist/Gallery';
+import { FilterList } from '@signalco/ui/dist/FilterList';
+import { Chip } from '@signalco/ui/dist/Chip';
+import { Card } from '@signalco/ui/dist/Card';
+import { objectWithKey } from '@signalco/js';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import SignalcoLogo from '../../../components/icons/SignalcoLogo';
 import contentData from './content.json';
@@ -50,7 +59,7 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
     const { name, features, imageSrc, price, stockStatus } = props;
 
     return (
-        <Card sx={{ width: '222px' }}>
+        <Card className="w-56">
             <Stack spacing={2}>
                 {imageSrc
                     ? <Image src={imageSrc} alt={`${name} image`} width={180} height={180} />
@@ -84,7 +93,12 @@ const orderByItems = [
 ];
 
 function stockStatus(id: string) {
-    if ((contentData.stock as any)[id]?.inStock > 0) return 1;
+    const stock = objectWithKey(contentData.stock, id);
+    const stockWithInStock = objectWithKey(stock, 'inStock');
+
+    if (typeof stockWithInStock?.inStock === 'number'
+        && stockWithInStock?.inStock > 0)
+        return 1;
     return 0;
 }
 
@@ -100,9 +114,9 @@ export default function StorePage() {
     // const { t: tCommunication } = useLocale('Store', 'Communication');
     const tCategories = (key: string) => key;
     const tCommunication = (key: string) => key;
-    const categories = props.categories.filter(b => typeof b !== 'undefined').map(c => ({ id: c!, label: tCategories(c!) }));
-    const brands = props.brands.filter(b => typeof b !== 'undefined').map(b => ({ id: b!, label: b! }));
-    const communication = props.communication.filter(b => typeof b !== 'undefined').map(b => ({ id: b!, label: tCommunication(b!) }));
+    const categories = props.categories.filter(Boolean).map(c => ({ id: c, label: tCategories(c) }));
+    const brands = props.brands.filter(Boolean).map(b => ({ id: b, label: b }));
+    const communication = props.communication.filter(Boolean).map(b => ({ id: b, label: tCommunication(b) }));
 
     const items = contentData.items.map(i => ({
         id: i.id,
@@ -113,8 +127,7 @@ export default function StorePage() {
         stockStatus: stockStatus(i.id)
     }));
 
-    const [selectedOrderByItems, setSelectedOrderByItems] = useState<string[]>(['0']);
-    const handleOrderByItemsChange = (values: string[]) => setSelectedOrderByItems(values);
+    const [selectedOrderByItems, setSelectedOrderByItems] = useState<string>('0');
 
     return (
         <Stack spacing={8}>
@@ -130,7 +143,7 @@ export default function StorePage() {
                     </>
                 )}
                 gridHeader={`Found ${items.length} products`}
-                gridFilters={(<SelectItems label="Sort" value={selectedOrderByItems} items={orderByItems} onChange={handleOrderByItemsChange} />)} />
+                gridFilters={(<SelectItems label="Sort" value={selectedOrderByItems} items={orderByItems} onValueChange={setSelectedOrderByItems} />)} />
         </Stack>
     );
 }

@@ -42,6 +42,7 @@ export {
     Edit3 as Edit,
     ExternalLink,
     Upload,
+    Loader2 as LoaderSpinner,
     Trash2 as Delete,
     Plus as Add,
     Code2 as Code,

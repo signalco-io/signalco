@@ -1,12 +1,13 @@
+
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Signal.Core.Exceptions;
 using Signal.Core.Secrets;
@@ -27,10 +28,10 @@ internal class SlackRequestHandler : ISlackRequestHandler
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    public async Task VerifyFromSlack(HttpRequest req, CancellationToken cancellationToken = default)
+    public async Task VerifyFromSlack(HttpRequestData req, CancellationToken cancellationToken = default)
     {
-        var signature = req.Headers["X-Slack-Signature"];
-        var timeStamp = req.Headers["X-Slack-Request-Timestamp"];
+        var signature = req.Headers.GetValues("X-Slack-Signature").First();
+        var timeStamp = req.Headers.GetValues("X-Slack-Request-Timestamp").First();
         var signingSecret = await this.secrets.GetSecretAsync(SlackSecretKeys.SigningSecret, cancellationToken);
         var content = await req.ReadAsStringAsync();
 

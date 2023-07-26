@@ -1,4 +1,4 @@
-const grey = {
+export const grey = {
     50: '#fafafa',
     100: '#f5f5f5',
     200: '#eeeeee',
@@ -14,5 +14,3 @@ const grey = {
     A400: '#bdbdbd',
     A700: '#616161',
 };
-
-export default grey;

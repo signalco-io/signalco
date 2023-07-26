@@ -1,7 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
 import React, { useCallback, useState } from 'react';
 import { Check, Delete, MoreHorizontal } from '@signalco/ui-icons';
-import { Stack, NoDataPlaceholder, Row, IconButton, ListItemContent, ListItemDecorator, Menu, MenuItem, TextField, Typography, Box, Checkbox } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
+import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
+import { Input } from '@signalco/ui/dist/Input';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -35,15 +42,12 @@ function ChecklistItem(props: { item: IChecklistItem; onChange: (id: string, don
     return (
         <>
             <Row justifyContent="space-between">
-                <Checkbox checked={item.done ?? false} onChange={(e) => onChange(item.id, e.currentTarget.checked)} label={item.text} />
-                <Menu menuId={`widget-checklist-item-${item.id}-options`} renderTrigger={(props) => (
-                    <IconButton {...props}><Box sx={{ opacity: 0.3 }}><MoreHorizontal /></Box></IconButton>
+                <Checkbox checked={item.done ?? false} onCheckedChange={(checked) => onChange(item.id, checked === true)} label={item.text} />
+                <Menu trigger={(
+                    <IconButton><MoreHorizontal className="opacity-30" /></IconButton>
                 )}>
-                    <MenuItem onClick={() => onRemove(item.id)}>
-                        <ListItemDecorator>
-                            <Delete />
-                        </ListItemDecorator>
-                        <ListItemContent>Remove</ListItemContent>
+                    <MenuItem onClick={() => onRemove(item.id)} startDecorator={<Delete />}>
+                        Remove
                     </MenuItem>
                 </Menu>
             </Row>
@@ -103,21 +107,22 @@ function WidgetChecklist(props: WidgetSharedProps<ConfigProps>) {
             <div style={{ paddingLeft: 8, paddingRight: 8 }}>
                 <Typography level="h4">{label}</Typography>
             </div>
-            <Box sx={{ flexGrow: 1, overflow: 'auto', overflowX: 'hidden' }}>
+            <div className="grow overflow-auto overflow-x-hidden">
                 <Stack style={{ height: '100%', paddingLeft: 2 * 8, paddingRight: 3 * 8 }}>
                     {items.length
                         ? items.map(item => <ChecklistItem key={item.id} item={item} onChange={handleItemChanged} onRemove={handleItemRemoved} />)
-                        : <Box display="flex" height="100%" alignItems="center" justifyContent="center">
-                            <NoDataPlaceholder content={placeholders.t('NoItems')} />
-                        </Box>}
+                        : (
+                            <div className="flex h-full items-center justify-center">
+                                <NoDataPlaceholder content={placeholders.t('NoItems')} />
+                            </div>
+                        )}
                 </Stack>
-            </Box>
-            <Box sx={{ px: 2 }}>
+            </div>
+            <div className="px-2">
                 <form onSubmit={handleNewItem}>
-                    <TextField
+                    <Input
                         placeholder={t('AddItem')}
-                        fullWidth
-                        size="lg"
+                        className="w-full"
                         onFocus={() => setIsInputFocusedOrFilled(true)}
                         onBlur={() => {
                             if (newItemText.length <= 0) {
@@ -130,7 +135,7 @@ function WidgetChecklist(props: WidgetSharedProps<ConfigProps>) {
                         value={newItemText}
                         onChange={(e) => setNewItemText(e.currentTarget.value)} />
                 </form>
-            </Box>
+            </div>
         </Stack>
     );
 }

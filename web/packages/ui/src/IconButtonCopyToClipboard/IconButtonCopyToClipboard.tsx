@@ -1,24 +1,20 @@
-import { MouseEvent, useId, useState } from 'react';
-import { usePopupState } from 'material-ui-popup-state/hooks';
+import { MouseEvent, type PropsWithChildren, useState } from 'react';
 import { Copy, Warning } from '@signalco/ui-icons';
-import { ChildrenProps } from '../sharedTypes';
-import { Alert, IconButton } from '@mui/joy';
-import Popper from '../Popper';
+import { Popper } from '../Popper';
+import { IconButton } from '../IconButton';
+import { Alert } from '../Alert';
 
-/** @alpha */
-export type IconButtonCopyToClipboardProps = ChildrenProps & {
+export type IconButtonCopyToClipboardProps = PropsWithChildren<{
     title: string;
     value?: unknown;
     defaultValue?: unknown;
     className?: string | undefined;
     successMessage: string,
     errorMessage: string
-};
+}>;
 
-/** @alpha */
-export default function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps) {
-    const id = useId();
-    const popupState = usePopupState({ variant: 'popper', popupId: `copytoclipboard-button-${id}` });
+export function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps) {
+    const [notificationOpen, setNotificationOpen] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
 
     const handleClickShowCopyToClipboard = (event: MouseEvent<HTMLButtonElement>) => {
@@ -35,8 +31,8 @@ export default function IconButtonCopyToClipboard(props: IconButtonCopyToClipboa
             setError(true);
         } finally {
             if (event.target) {
-                popupState.open(event.currentTarget);
-                setTimeout(() => popupState.close(), 2000);
+                setNotificationOpen(true);
+                setTimeout(() => setNotificationOpen(false), 2000);
             }
         }
     };
@@ -46,7 +42,7 @@ export default function IconButtonCopyToClipboard(props: IconButtonCopyToClipboa
     };
 
     return (
-        <>
+        <Popper open={notificationOpen} anchor={(
             <IconButton
                 size="md"
                 className={props.className}
@@ -57,11 +53,10 @@ export default function IconButtonCopyToClipboard(props: IconButtonCopyToClipboa
                 onMouseDown={handleMouseDownCopyToClipboard}>
                 {props.children ? props.children : <Copy />}
             </IconButton>
-            <Popper popupState={popupState}>
-                <Alert color={error ? 'warning' : 'neutral'} startDecorator={error && <Warning />}>
-                    {error ? props.errorMessage : props.successMessage}
-                </Alert>
-            </Popper>
-        </>
+        )}>
+            <Alert color={error ? 'warning' : 'neutral'} startDecorator={error && <Warning />}>
+                {error ? props.errorMessage : props.successMessage}
+            </Alert>
+        </Popper>
     );
 }

@@ -1,20 +1,26 @@
-'use client';
-
+import { PropsWithChildren } from 'react';
+import { cx } from 'classix';
 import { Up } from '@signalco/ui-icons';
-import Stack from '@signalco/ui/dist/Stack';
-import { Button, ChildrenProps, Container, ItemsShowMore, Loadable, NavigatingButton, Sheet, Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { ItemsShowMore } from '@signalco/ui/dist/FilterList';
+import { Container } from '@signalco/ui/dist/Container';
+import { Card } from '@signalco/ui/dist/Card';
+import { Button } from '@signalco/ui/dist/Button';
 import { camelToSentenceCase, orderBy } from '@signalco/js';
+import { RoadmapItem, RoadmapItemStatus } from '../../api/github/[owner]/[repo]/issues/route';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
-import { RoadmapItemStatus, RoadmapItem } from './page';
 
 const statusOrderedList: RoadmapItemStatus[] = ['inProgress', 'inQueue', 'planned', 'triage', 'completed'];
 
 function VoteButton({ votes, readonly, size = 'md' }: { votes?: number | undefined, readonly?: boolean, size?: 'sm' | 'md' }) {
     if (readonly) {
         return (
-            <Sheet variant="soft" style={{ width: 42, aspectRatio: 1, textAlign: 'center', borderRadius: 'var(--joy-radius-sm)' }}>
-                <span style={{ lineHeight: '42px' }}>{votes ?? 'Vote'}</span>
-            </Sheet>
+            <Card className="aspect-square w-10 rounded-sm text-center">
+                <span className="leading-10">{votes ?? 'Vote'}</span>
+            </Card>
         )
     }
 
@@ -27,7 +33,10 @@ function VoteButton({ votes, readonly, size = 'md' }: { votes?: number | undefin
             }}>
             <Stack alignItems="center" spacing={size === 'sm' ? 0 : 1} style={{ paddingTop: size === 'sm' ? 0 : 4 }}>
                 <Up />
-                <span style={{ paddingBottom: size === 'sm' ? 4 : 16 }}>{votes ?? 'Vote'}</span>
+                <span className={cx(
+                    'pb-4',
+                    size === 'sm' && 'pb-1'
+                )}>{votes ?? 'Vote'}</span>
             </Stack>
         </Button>
     );
@@ -35,7 +44,7 @@ function VoteButton({ votes, readonly, size = 'md' }: { votes?: number | undefin
 
 function RoadmapItem({ item }: { item: RoadmapItem }) {
     return (
-        <div key={item.title} style={{ height: '100%', display: 'flex', gap: 8, alignItems: 'center' }}>
+        <div key={item.title} className="flex h-full items-center gap-2">
             <VoteButton votes={item.votes} readonly={true} size="sm" />
             {item.href ? (
                 <NavigatingButton hideArrow href={item.href}>{item.title}</NavigatingButton>
@@ -46,22 +55,22 @@ function RoadmapItem({ item }: { item: RoadmapItem }) {
     );
 }
 
-export default function Roadmap({ items, error }: { items: RoadmapItem[] | undefined, error?: string | undefined }) {
+export default function Roadmap({ items, error, isLoading }: { items: RoadmapItem[] | undefined, error?: string | undefined, isLoading?: boolean | undefined }) {
     return (
         <Container maxWidth="sm">
             <Stack spacing={4}>
                 <PageCenterHeader header="Roadmap" subHeader="Help us by voting our roadmap." />
-                <Loadable error={error} isLoading={false} loadingLabel={'Loading items'}>
+                <Loadable error={error} isLoading={isLoading} loadingLabel={'Loading items'}>
                     <Stack spacing={2}>
                         {statusOrderedList.map(status => (
                             <Stack spacing={2} key={status}>
                                 <Typography level="h5">{camelToSentenceCase(status)}</Typography>
                                 <ItemsShowMore
                                     truncate={5}
-                                    itemsWrapper={({ children }: ChildrenProps) => <Stack spacing={1}>{children}</Stack>}
+                                    itemsWrapper={({ children }: PropsWithChildren) => <Stack spacing={1}>{children}</Stack>}
                                     loadingLabel={'Loading roadmap'}
                                     noItemsPlaceholder={'Empty at the moment'}>
-                                    {orderBy(items?.filter(item => item.status === status) ?? [], (a, b) => (b.votes ?? 0) - (a.votes ?? 0)).map(item => (
+                                    {orderBy(items?.filter(item => item.status === status) ?? [], (a: RoadmapItem, b: RoadmapItem) => (b.votes ?? 0) - (a.votes ?? 0)).map((item: RoadmapItem) => (
                                         <RoadmapItem key={item.title} item={item} />
                                     ))}
                                 </ItemsShowMore>

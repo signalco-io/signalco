@@ -1,18 +1,17 @@
-﻿using System.Net;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+﻿using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+using Signal.Api.Common.OpenApi;
+using System.Threading.Tasks;
+using Signalco.Api.Common.Health;
 
 namespace Signalco.Func.Internal.TimeEntityPublic;
 
-public class StatusFunction
+public class StatusFunction : HealthStatusFunctionsBase
 {
-    [FunctionName("Status")]
-    [OpenApiOperation(nameof(StatusFunction), "Health")]
-    [OpenApiResponseWithoutBody(HttpStatusCode.OK, Description = "API is running.")]
-    public IActionResult Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "status")] HttpRequest req) =>
-        new OkResult();
+    [Function("Status")]
+    [OpenApiOperation<StatusFunction>("Health")]
+    [OpenApiResponseWithoutBody]
+    public Task<HttpResponseData> Run(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "status")] HttpRequestData req) =>
+        this.HandleAsync(req);
 }

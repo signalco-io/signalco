@@ -1,6 +1,14 @@
-import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
+import { TooltipProps } from 'recharts/types/component/Tooltip';
+import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, LabelProps, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
+import { type SVGProps } from 'react';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
-import { NoDataPlaceholder, Row, Sheet, Typography, Timeago, lightBlue, deepOrange, Loadable, amber, green, zinc } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Row } from '@signalco/ui/dist/Row';
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { lightBlue, deepOrange, green, amber, zinc } from '@signalco/ui/dist/colors';
+import { Card } from '@signalco/ui/dist/Card';
 import { camelToSentenceCase, ObjectDictAny } from '@signalco/js';
 import { now } from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
@@ -35,26 +43,27 @@ export type GraphProps = InnerGraphProps & {
     discrete?: boolean;
 }
 
-const renderCustomizedTimeLineLabel = (props: any) => {
-    const { x, y, width, value } = props;
+const renderCustomizedTimeLineLabel = ({ x, y, width, value }: Omit<SVGProps<SVGTextElement>, 'viewBox'> & LabelProps) => {
     const radius = 10;
+    const widthNumber = Number(width) || 0;
 
-    if (width > 10) {
-        return (
-            <g>
-                <text
-                    x={x + width / 2}
-                    y={y + radius}
-                    fill="#fff"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                >
-                    {value?.toString().toUpperCase()[0]}
-                </text>
-            </g>
-        );
+    if (widthNumber <= 10) {
+        return null;
     }
-    return null;
+
+    return (
+        <g>
+            <text
+                x={Number(x) + widthNumber / 2}
+                y={Number(y) + radius}
+                fill="#fff"
+                textAnchor="middle"
+                dominantBaseline="middle"
+            >
+                {value?.toString().toUpperCase()[0]}
+            </text>
+        </g>
+    );
 };
 
 function GraphTimeLine({ data, durationMs, width, startDateTime, hideLegend }: InnerGraphProps) {
@@ -132,15 +141,21 @@ function GraphTimeLine({ data, durationMs, width, startDateTime, hideLegend }: I
     );
 }
 
-function ChartGenericTooltip({ active, payload, domain, units }: { active?: boolean, payload?: any, domain: ScaleTime<number, number, never>, units?: string }) {
+function ChartGenericTooltip({
+    active,
+    payload,
+    domain,
+    units
+}: TooltipProps<string | number | (string | number)[], string | number> &
+    { domain: ScaleTime<number, number, never>, units?: string }) {
     if (active && payload && payload.length) {
         const dateTime = domain.invert(payload[0].payload.key) as Date;
         return (
-            <Sheet sx={{ p: 2, px: 3, maxWidth: '180px' }} variant="plain">
+            <Card className="max-w-xs">
                 <Typography>{`${payload[0].value}${units || ''}`}</Typography>
                 <Timeago date={dateTime} />
                 <Typography level="body2">{`${dateTime.getFullYear()}-${dateTime.getMonth().toString().padStart(2, '0')}-${dateTime.getDate().toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`}</Typography>
-            </Sheet>
+            </Card>
         );
     }
 
@@ -155,8 +170,8 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
     const past = startDateTime ?? now();
     past.setTime(nowTime.getTime() - durationMs);
     const domainGraph = scaleTime().domain([past, nowTime]);
-    const ticksHours = timeHour.every(1)!;
-    const ticks = domainGraph.ticks(ticksHours).map(i => i.toString());
+    const ticksHours = timeHour.every(1);
+    const ticks = ticksHours ? domainGraph.ticks(ticksHours).map(i => i.toString()) : [];
 
     const transformedData = data?.map(d => ({ key: domainGraph(new Date(d.id).getTime()), value: d.value })) ?? [];
 
@@ -189,7 +204,7 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
                 <Line type="monotone" dot={false} data={[
                     { key: domainGraph(past.getTime()), value: firstDataPoint.value },
                     { key: domainGraph(new Date(firstDataPoint.id).getTime()), value: firstDataPoint.value }
-                ]} dataKey="value" stroke="var(--joy-palette-divider)" strokeWidth={2} strokeDasharray="5 3" />
+                ]} dataKey="value" stroke="hsl(var(--border))" strokeWidth={2} strokeDasharray="5 3" />
             )}
             <Area
                 type="basis"
@@ -202,7 +217,7 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
                 <Line type="monotone" dot={false} data={[
                     { key: domainGraph(new Date(lastDataPoint.id).getTime()), value: lastDataPoint.value },
                     { key: domainGraph(nowTime.getTime()), value: lastDataPoint.value }
-                ]} dataKey="value" stroke="var(--joy-palette-divider)" strokeWidth={2} strokeDasharray="5 3" />
+                ]} dataKey="value" stroke="hsl(var(--border))" strokeWidth={2} strokeDasharray="5 3" />
             )}
             <Tooltip content={<ChartGenericTooltip domain={domainGraph} />} />
         </ComposedChart>
@@ -236,7 +251,9 @@ function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
             Object.keys(currentPoint).forEach(cpk => {
                 if (cpk === 'id') return;
 
-                aggregatedPoint[cpk] = currentPoint[cpk] + (previousPoint[cpk] ?? 0);
+                aggregatedPoint[cpk] =
+                    (typeof currentPoint[cpk] === 'number' ? Number(currentPoint[cpk]) : 0) +
+                    (typeof currentPoint[cpk] === 'number' ? Number(previousPoint[cpk]) : 0);
             });
             usagesAggregated.push(aggregatedPoint);
         }
@@ -254,18 +271,18 @@ function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
                 bottom: 5,
             }}
         >
-            <CartesianGrid stroke="var(--joy-palette-divider)" vertical={false} />
+            <CartesianGrid stroke="hsl(var(--border))" vertical={false} />
             <XAxis dataKey="id" hide />
             <YAxis />
             <Tooltip
                 contentStyle={{
-                    backgroundColor: 'var(--joy-palette-background-body)',
-                    borderColor: 'var(--joy-palette-divider)',
+                    backgroundColor: 'hsl(var(--background))',
+                    borderColor: 'hsl(var(--border))',
                     borderRadius: '8px',
                     padding: '12px 16px'
                 }}
                 cursor={{
-                    stroke: 'var(--joy-palette-divider)',
+                    stroke: 'hsl(var(--border))',
                     fill: 'rgba(128,128,128,0.2)'
                 }} />
             <Legend iconType="circle" layout="vertical" align="right" verticalAlign="top" wrapperStyle={{

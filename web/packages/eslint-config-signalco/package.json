@@ -5,15 +5,16 @@
     "main": "index.js",
     "sideEffects": false,
     "dependencies": {
-        "@typescript-eslint/eslint-plugin": "5.56.0",
-        "@typescript-eslint/parser": "5.56.0",
-        "eslint": "8.36.0",
-        "eslint-config-next": "13.2.4",
-        "eslint-config-turbo": "0.0.10",
-        "eslint-import-resolver-typescript": "3.5.3",
+        "@typescript-eslint/eslint-plugin": "6.2.0",
+        "@typescript-eslint/parser": "6.2.0",
+        "eslint": "8.45.0",
+        "eslint-config-next": "13.4.12",
+        "eslint-config-turbo": "1.10.12",
+        "eslint-import-resolver-typescript": "3.5.5",
         "eslint-plugin-import": "2.27.5",
-        "eslint-plugin-react": "7.32.2",
-        "typescript": "5.0.2"
+        "eslint-plugin-react": "7.33.0",
+        "eslint-plugin-tailwindcss": "3.13.0",
+        "typescript": "5.1.6"
     },
     "publishConfig": {
         "access": "public"

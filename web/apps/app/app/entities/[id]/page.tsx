@@ -1,7 +1,7 @@
 'use client';
 
 import React, { } from 'react';
-import { NoDataPlaceholder } from '@signalco/ui';
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
 import EntityDetailsView from '../../../components/views/Entity/EntityDetailsView';
 
 export default function EntityDetailsPage({ params }: { params: { id: string } }) {

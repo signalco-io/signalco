@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         id: cpr

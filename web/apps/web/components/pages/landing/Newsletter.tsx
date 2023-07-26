@@ -1,7 +1,14 @@
 'use client';
 
 import { ChangeEvent, SyntheticEvent, createRef, useState } from 'react';
-import { Row, Stack, Alert, Button, TextField, Typography, Fade, GentleSlide } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Input } from '@signalco/ui/dist/Input';
+import { GentleSlide} from '@signalco/ui/dist/GentleSlide';
+import { Fade } from '@signalco/ui/dist/Fade';
+import { Button } from '@signalco/ui/dist/Button';
+import { Alert } from '@signalco/ui/dist/Alert';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 function Newsletter() {
@@ -75,26 +82,23 @@ function Newsletter() {
                 <Stack spacing={1}>
                     <Typography>{'We\'ll get back to you with awesome news and updates.'}</Typography>
                     <GentleSlide collapsedWhenHidden appear={!showSuccess} duration={200}>
-                        <Row>
-                            <TextField
+                        <Row spacing={1}>
+                            <Input
                                 disabled={isLoading}
                                 type="email"
-                                size="lg"
                                 placeholder="you@email.com"
-                                fullWidth
                                 required
-                                variant="outlined"
-                                sx={{ '.JoyInput-root': { '--Input-radius': isLoading ? '8px' : '8px 0 0 8px' }, maxWidth: '400px' }}
+                                className="w-full max-w-md"
                                 value={email}
                                 onChange={handleOnEmail} />
-                            <Button loading={isLoading} type="submit" variant="soft" size="lg" sx={{ '--Button-radius': '0 8px 8px 0' }}>Subscribe</Button>
+                            <Button loading={isLoading} type="submit" variant="solid" color="primary">Subscribe</Button>
                         </Row>
                     </GentleSlide>
                     <GentleSlide collapsedWhenHidden appear={error != null} direction="down" duration={200}>
-                        <Alert color="danger" variant="outlined">{error}</Alert>
+                        <Alert color="danger">{error}</Alert>
                     </GentleSlide>
                     <Fade collapsedWhenHidden appear={showSuccess}>
-                        <Alert color="success" variant="outlined">You are our new favorite subscriber</Alert>
+                        <Alert color="success">You are our new favorite subscriber</Alert>
                     </Fade>
                 </Stack>
             </Stack>

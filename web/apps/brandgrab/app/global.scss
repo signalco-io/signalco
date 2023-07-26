@@ -1,7 +1,6 @@
 * { box-sizing: border-box; }
 
 @import './normalize.css';
-@import './variables.scss';
 
 // Custom normalize
 h6 { margin: 0 };
@@ -26,23 +25,9 @@ h6 { margin: 0 };
     url('/assets/fonts/MaterialIcons-Regular.woff') format('woff');
 }
 
-:root {
-  --primary: #000000;
-}
-
 html, body, #__next {
   height: 100%;
   width: 100%;
-  font-family: var(--joy-fontFamily-body);
-}
-
-a {
-  text-decoration: none;
-  color: var(--joy-palette-text-tertiary);
-
-  &:hover {
-    color: var(--joy-palette-text-secondary);
-  }
 }
 
 .material-icons {

@@ -1,4 +1,6 @@
-@import './variables.scss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* raleway-200 - latin */
 @font-face {
@@ -20,22 +22,9 @@
     url('/assets/fonts/MaterialIcons-Regular.woff') format('woff');
 }
 
-:root {
-  --primary: #000000;
-}
-
 html, body, #__next {
   height: 100%;
   width: 100%;
-}
-
-a {
-  text-decoration: none;
-  color: var(--joy-palette-text-tertiary);
-
-  &:hover {
-    color: var(--joy-palette-text-secondary);
-  }
 }
 
 .material-icons {

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Stack, TextField, Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Input } from '@signalco/ui/dist/Input';
+import { Button } from '@signalco/ui/dist/Button';
 import { useSearchParam } from '@signalco/hooks';
 import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
@@ -45,7 +48,7 @@ function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsPro
 
     return (
         <ConfigurationDialog
-            isOpen={isOpen}
+            open={isOpen}
             header={t('DashboardSettings')}
             onClose={onClose}
             actions={(
@@ -55,7 +58,7 @@ function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsPro
                 </>
             )}>
             <Stack spacing={4}>
-                <TextField
+                <Input
                     label={t('DashboardSettingName')}
                     value={name}
                     onChange={(e) => setName(e.target.value ?? '')} />

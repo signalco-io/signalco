@@ -43,3 +43,7 @@ export function isJson(value: string | undefined) {
         return false;
     }
 }
+
+export function isImageDataUrl(url: string) {
+    return url.startsWith('data:image/');
+}

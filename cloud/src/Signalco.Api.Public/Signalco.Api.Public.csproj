@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <AzureFunctionsVersion>v4</AzureFunctionsVersion>
+    <OutputType>exe</OutputType>
+    <UserSecretsId>4cf77441-9fec-4ebc-8a60-918e7e2ed7aa</UserSecretsId>
+    <Nullable>enable</Nullable>
+    <LangVersion>preview</LangVersion>
+    <IsPackable>false</IsPackable>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.9.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.18.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.12.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.OpenApi" Version="1.5.1" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.13" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="6.32.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Signal.Api.Common\Signal.Api.Common.csproj" />
+    <ProjectReference Include="..\Signal.Core\Signal.Core.csproj" />
+    <ProjectReference Include="..\Signal.Infrastructure.AzureStorage.Tables\Signal.Infrastructure.AzureStorage.Tables.csproj" />
+    <ProjectReference Include="..\Signal.Infrastructure.Secrets\Signal.Infrastructure.Secrets.csproj" />
+    <ProjectReference Include="..\Signalco.Api.Common.Health\Signalco.Api.Common.Health.csproj" />
+    <ProjectReference Include="..\Signalco.Common.Channel\Signalco.Common.Channel.csproj" />
+    <ProjectReference Include="..\Signalco.Infrastructure.Processor\Signalco.Infrastructure.Processor.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { Channel, Close, Dashboard, Device, LogOut, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
-import { Button, Divider, IconButton, Menu, Box, MenuItemLink, ButtonProps, MuiStack, Stack } from '@signalco/ui';
+import { Channel, Close, Dashboard, Device, Menu as MenuIcon, LogOut, Settings } from '@signalco/ui-icons';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Divider } from '@signalco/ui/dist/Divider';
+import { Button } from '@signalco/ui/dist/Button';
 import { orderBy } from '@signalco/js';
 import { KnownPages } from '../src/knownPages';
 import useLocale from '../src/hooks/useLocale';
@@ -9,12 +13,13 @@ import useCurrentUser from '../src/hooks/useCurrentUser';
 import UserAvatar from './users/UserAvatar';
 import NavLink from './navigation/NavLink';
 import ApiBadge from './development/ApiBadge';
+import { cx } from 'classix';
 
 type NavItem = {
-  label: string,
-  path: string,
-  icon: React.FunctionComponent,
-  hidden?: boolean | undefined;
+    label: string,
+    path: string,
+    icon: React.FunctionComponent,
+    hidden?: boolean | undefined;
 }
 
 const navItems: NavItem[] = [
@@ -24,33 +29,34 @@ const navItems: NavItem[] = [
     { label: 'Entities', path: KnownPages.Entities, icon: Device }
 ];
 
-function UserProfileAvatarButton(props: ButtonProps) {
+const UserProfileAvatarButton = forwardRef<HTMLDivElement>((_props, ref) => {
     const user = useCurrentUser();
 
     return (
-        <Button variant="plain" sx={{ width: { xs: undefined, sm: '100%' }, py: 2 }} {...props} style={{position: 'relative'}}>
-            <UserAvatar user={user} />
-            <Box sx={{ position: 'absolute', left: '50%', bottom: 4, transform: 'translateX(-50%)' }}>
-                <ApiBadge />
-            </Box>
-        </Button>
+        <div className="relative p-2" ref={ref}>
+            <Button variant="plain" className="py-6">
+                <UserAvatar user={user} />
+                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2">
+                    <ApiBadge />
+                </div>
+            </Button>
+        </div>
     );
-}
+});
+UserProfileAvatarButton.displayName = 'UserProfileAvatarButton';
 
 function UserProfileAvatar() {
     const { t } = useLocale('App', 'Account');
 
     return (
-        <Menu
-            menuId="account-menu"
-            renderTrigger={UserProfileAvatarButton}>
-            <MenuItemLink href={KnownPages.Settings} startDecorator={<Settings />}>
+        <Menu trigger={<UserProfileAvatarButton />}>
+            <MenuItem href={KnownPages.Settings} startDecorator={<Settings />}>
                 {t('Settings')}
-            </MenuItemLink>
+            </MenuItem>
             <Divider />
-            <MenuItemLink href={KnownPages.Logout} startDecorator={<LogOut />}>
+            <MenuItem href={KnownPages.Logout} startDecorator={<LogOut />}>
                 {t('Logout')}
-            </MenuItemLink>
+            </MenuItem>
         </Menu>
     );
 }
@@ -73,17 +79,10 @@ function NavProfile() {
     console.log('NavProfile rendered');
 
     return (
-        <MuiStack
-            direction={{ xs: 'row', sm: 'column' }}
-            sx={{
-                minHeight: { xs: '60px', sm: undefined },
-                justifyContent: { xs: 'space-between', sm: 'start' }
-            }}
-            alignItems="center"
-            spacing={1}>
+        <div className="flex min-h-[60px] flex-row items-center justify-between gap-1 sm:flex-col sm:justify-start">
             <UserProfileAvatar />
-            <Box sx={{ display: { xs: 'none', sm: 'inherit', width: '100%' } }}>
-                <MuiStack sx={{ width: { xs: undefined, sm: '100%' } }}>
+            <div className="hidden w-full sm:block">
+                <Stack>
                     {visibleNavItems
                         .map((ni, index) => (
                             <NavLink
@@ -93,21 +92,16 @@ function NavProfile() {
                                 active={ni === activeNavItem}
                                 label={t(ni.label)} />
                         ))}
-                </MuiStack>
-            </Box>
-            <Box sx={{ display: { xs: 'inherit', sm: 'none' } }}>
-                <IconButton size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
+                </Stack>
+            </div>
+            <div className="sm:hidden">
+                <IconButton variant="plain" size="lg" onClick={handleMobileMenuOpenClick} aria-label="Toggle menu">
                     {mobileMenuOpen ? <Close /> : <MenuIcon />}
                 </IconButton>
-                <Box hidden={!mobileMenuOpen} sx={{
-                    position: 'fixed',
-                    top: '60px',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    background: 'var(--joy-palette-background-body)',
-                    zIndex: 999
-                }}>
+                <div className={cx(
+                    'fixed inset-x-0 bottom-0 left-0 right-0 top-[60px] z-50 bg-current',
+                    !mobileMenuOpen && 'hidden'
+                )}>
                     <Stack>
                         {visibleNavItems.map((ni, index) =>
                             <NavLink
@@ -118,9 +112,9 @@ function NavProfile() {
                                 label={t(ni.label)}
                                 onClick={handleMobileMenuClose} />)}
                     </Stack>
-                </Box>
-            </Box>
-        </MuiStack>
+                </div>
+            </div>
+        </div>
     );
 }
 

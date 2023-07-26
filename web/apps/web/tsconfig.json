@@ -13,8 +13,8 @@
         "src",
         "app",
         "components",
-        "next-env.d.ts",
         "@types",
+        "next-env.d.ts",
         ".next/types/**/*.ts"
     ]
 }

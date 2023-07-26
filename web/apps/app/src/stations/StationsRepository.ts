@@ -82,11 +82,11 @@ export default class StationsRepository {
         return (await getAsync<StationBlobInfoDto[]>(`/stations/logging/list?stationId=${id}`)).map(StationBlobInfoDto.FromDto);
     }
 
-    static async getStationAsync(id: string): Promise<IEntityDetails | undefined> {
+    static async getStationAsync(id: string): Promise<IEntityDetails | null | undefined> {
         return await entityAsync(id);
     }
 
     static async getStationsAsync(): Promise<IEntityDetails[]> {
-        return await entitiesAsync(4);
+        return await entitiesAsync(4) ?? [];
     }
 }

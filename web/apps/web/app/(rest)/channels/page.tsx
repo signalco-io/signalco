@@ -1,6 +1,4 @@
-'use client';
-
-import { Stack } from '@signalco/ui';
+import { Stack } from '@signalco/ui/dist/Stack';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import FaqSection from '../../../components/pages/FaqSection';
 import CtaSection from '../../../components/pages/CtaSection';
@@ -16,7 +14,7 @@ export default function ChannelsPage() {
         <Stack spacing={4}>
             <Stack spacing={4}>
                 <PageCenterHeader header="Channels" subHeader="List of all channels available on signalco" />
-                <ChannelsGallery channelHrefFunc={(id) => `/channels/${id}`} />
+                <ChannelsGallery />
             </Stack>
             <FaqSection faq={channelsFaq} />
             <CtaSection />

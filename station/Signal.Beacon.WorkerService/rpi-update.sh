@@ -26,14 +26,14 @@ VER=""
 if [ "$1" = "--next" ];
 then
 	echo "Determining v.next version..."
-	RELEASE_JSON=$( curl -s $"https://api.github.com/repos/signalco-io/station/releases" )
+	RELEASE_JSON=$( curl -s $"https://api.github.com/repos/signalco-io/signalco/releases" )
 	VER=$( echo $RELEASE_JSON | jq -r 'map(select(.prerelease)) | first | .tag_name' )
-	URL=$( echo $RELEASE_JSON | jq -r 'map(select(.prerelease)) | first | .assets[] | select(.name | test("beacon-v(.*)-linux-arm64.tar.gz")) | .browser_download_url' )
+	URL=$( echo $RELEASE_JSON | jq -r 'map(select(.prerelease)) | first | .assets[] | select(.name | test("station-v(.*)-linux-arm64.tar.gz")) | .browser_download_url' )
 else
 	echo "Determining stable version..."
-	RELEASE_JSON=$( curl -s $"https://api.github.com/repos/signalco-io/station/releases/latest" )
+	RELEASE_JSON=$( curl -s $"https://api.github.com/repos/signalco-io/station/signalco/latest" )
 	VER=$( echo $RELEASE_JSON | jq -r '.tag_name' )
-	URL=$( echo $RELEASE_JSON | jq -r '.assets[] | select(.name | test("beacon-v(.*)-linux-arm64.tar.gz")) | .browser_download_url' )
+	URL=$( echo $RELEASE_JSON | jq -r '.assets[] | select(.name | test("station-v(.*)-linux-arm64.tar.gz")) | .browser_download_url' )
 fi
 
 echo "———————————————————————————————"
@@ -42,7 +42,7 @@ echo "Downloading station v$VER..."
 echo "URL: $URL"
 echo ""
 
-FILENAME=$( echo $URL | grep -oP "beacon-v(.*)-linux-arm64" )
+FILENAME=$( echo $URL | grep -oP "station-v(.*)-linux-arm64" )
 curl -LO "$URL"
 
 echo ""

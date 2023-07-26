@@ -1,19 +1,14 @@
 import React from 'react';
-import { Stack } from '@mui/system';
+import { Stack } from '../Stack';
 
-export interface GalleryFiltersProps {
+export type GalleryFiltersProps = {
     filters: React.ReactElement;
 }
 
-export default function GalleryFilters(props: GalleryFiltersProps) {
+export function GalleryFilters(props: GalleryFiltersProps) {
     const { filters } = props;
     return (
-        <Stack spacing={{ xs: 1, md: 4 }} sx={{
-            padding: 0,
-            width: '100%',
-            maxWidth: {xs: undefined, md: '24%'},
-            height: 'fit-content'
-        }}>
+        <Stack className="h-fit w-full gap-1 md:max-w-[24%] md:gap-4">
             {filters}
         </Stack>
     );

@@ -149,9 +149,8 @@ internal class Zigbee2MqttWorkerService : IWorkerService
 
     private async Task ConductHandler(IEnumerable<IConduct> conducts, CancellationToken cancellationToken)
     {
-        var conductsTasks = conducts.Select(conduct =>
-            this.ExecuteConductAsync(conduct, cancellationToken));
-        await Task.WhenAll(conductsTasks);
+        foreach (var conduct in conducts) 
+            await this.ExecuteConductAsync(conduct, cancellationToken);
     }
 
     private async Task ExecuteConductAsync(IConduct conduct, CancellationToken cancellationToken)
@@ -184,7 +183,7 @@ internal class Zigbee2MqttWorkerService : IWorkerService
             //}
 
             await this.PublishStateAsync(
-                conduct.Pointer.EntityId,
+                entity,
                 conduct.Pointer.ContactName,
                 value,
                 cancellationToken);
@@ -481,23 +480,19 @@ internal class Zigbee2MqttWorkerService : IWorkerService
         }
     }
 
-    private async Task PublishStateAsync(string entityId, string contactName, string? value, CancellationToken cancellationToken)
+    private async Task PublishStateAsync(IEntityDetails entity, string contactName, string? value, CancellationToken cancellationToken)
     {
         try
         {
-            var entity = await this.entitiesDao.GetAsync(entityId, cancellationToken);
-            if (entity == null)
-                throw new Exception($"Device with identifier {entityId} not found.");
-
             // TODO: Publish only to specific client (that has device)
 
             var identifierContact = entity.Contact(Zigbee2MqttChannels.DeviceChannel, "identifier");
             if (identifierContact == null || string.IsNullOrWhiteSpace(identifierContact.ValueSerialized))
-                throw new Exception($"Identifier not present on entity {entityId}");
+                throw new Exception($"Identifier not present on entity {entity.Id}");
 
             var topic = $"zigbee2mqtt/{identifierContact.ValueSerialized}/set/{contactName}";
             if (this.client != null)
-                await this.client.PublishAsync(topic, value);
+                await this.client.PublishAsync(topic, value).WaitAsync(cancellationToken);
         }
         catch (Exception ex)
         {

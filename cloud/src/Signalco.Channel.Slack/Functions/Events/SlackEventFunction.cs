@@ -1,14 +1,10 @@
 using System;
 using System.Net;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
@@ -32,13 +28,13 @@ public class SlackEventFunction
         this.logger = log ?? throw new ArgumentNullException(nameof(log));
     }
 
-    [FunctionName("Slack-Event")]
-    [OpenApiOperation(nameof(SlackEventFunction), "Slack", "Event", Description = "Handles the slack event (slack > signalco web-hook call).")]
-    [OpenApiRequestBody("application/json", typeof(EventRequestDto), Description = "Base model that provides content type information.")]
-    [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
+    [Function("Slack-Event")]
+    [OpenApiOperation<SlackEventFunction>( "Slack", "Event", Description = "Handles the slack event (slack > signalco web-hook call).")]
+    [OpenApiJsonRequestBody<EventRequestDto>(Description = "Base model that provides content type information.")]
+    [OpenApiResponseWithoutBody]
     [OpenApiResponseBadRequestValidation]
-    public async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "hooks/event")] HttpRequest req,
+    public async Task<HttpResponseData> Run(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "hooks/event")] HttpRequestData req,
         CancellationToken cancellationToken = default)
     {
         await this.slackRequestHandler.VerifyFromSlack(req, cancellationToken);
@@ -48,20 +44,19 @@ public class SlackEventFunction
         {
             case "url_verification":
                 var verifyRequest = await req.ReadAsJsonAsync<EventUrlVerificationRequestDto>();
-                return new OkObjectResult(new
+                return await req.JsonResponseAsync(new
                 {
                     challenge = verifyRequest.Challenge
-                });
+                }, cancellationToken: cancellationToken);
             case "event_callback":
-                var content = await req.ReadAsStringAsync();
-                var target = JsonSerializer.Deserialize<EventMessageChannelsRequestDto>(content);
+                // var content = await req.ReadAsStringAsync();
+                // var target = JsonSerializer.Deserialize<EventMessageChannelsRequestDto>(content);
                 // TODO: Retrieve channel entity with slack-team contact that matches EntityId-slack-team.id
                 // TODO: Update channel message contact
-                return new BadRequestResult();
-                break;
+                return req.CreateResponse(HttpStatusCode.BadRequest);
             default:
                 this.logger.LogWarning("Unknown event request type {Type}", eventReq.Type);
-                return new BadRequestResult();
+                return req.CreateResponse(HttpStatusCode.BadRequest);
         }
     }
 

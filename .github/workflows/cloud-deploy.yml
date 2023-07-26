@@ -11,11 +11,11 @@ on:
       - ".github/workflows/cloud-deploy.yml"
 
 env:
-  DOTNET_VERSION: "6.0.x" # set this to the dotnet version to use
+  DOTNET_VERSION: "7.0.x" # set this to the dotnet version to use
 
 defaults:
   run:
-    working-directory: ./cloud/src
+    working-directory: ./cloud/infrastructure
 
 jobs:
   build-and-deploy:
@@ -24,36 +24,58 @@ jobs:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@v3
 
-      - name: Set up mutex
-        uses: ben-z/gh-action-mutex@v1.0-alpha-7
-        with:
-          branch: mutex/cloud-deploy
+      - name: ✋ Set up mutex
+        id: mutex-setup
+        run: |
+          pushd ../../discrete/Signalco.Discrete.Api.Mutex/node-cli
+          npm install
+          npm install -g
+          npx mutex wait signalcoclouddeploy
+          popd
 
-      - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      - name: ✨ Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - uses: actions/cache@v3
+      - name: ✨ Setup pnpm
+        uses: pnpm/action-setup@v2.3.0
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          version: 'latest'
 
-      - name: Extract branch name
+      - name: ✨ Setup Node LTS
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+          cache: pnpm
+          cache-dependency-path: ./cloud/infrastructure
+
+      - name: 📦️ Installing dependencies
+        run: pnpm i --frozen-lockfile
+
+      - name: 🔎 Determine stack
         shell: bash
         run: |
           [[ $(echo ${GITHUB_REF#refs/heads/}) = "main" ]] && echo "##[set-output name=branch;]production" || echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
 
-      - name: Deploy infrastructure
-        shell: bash
-        run: |
-          pushd '../infrastructure'
-          yarn install
-          pulumi up --stack signalco/${{ steps.extract_branch.outputs.branch }} --yes
-          popd
+      - name: ⚡ Deploy Infrastructure
+        uses: pulumi/actions@v4
+        with:
+          command: up
+          stack-name: signalco/cloud-primary/${{ steps.extract_branch.outputs.branch }}
+          work-dir: ./cloud/infrastructure
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: ✋ Release mutex
+        if: always() && steps.mutex-setup.outcome == 'success'
+        run: |
+          pushd ../../discrete/Signalco.Discrete.Api.Mutex/node-cli
+          npm install
+          npm install -g
+          npx mutex release signalcoclouddeploy
+          popd

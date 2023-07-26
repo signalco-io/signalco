@@ -2,13 +2,14 @@
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Signal.Core.Entities;
 
 namespace Signalco.Func.Internal.TimeEntityPublic;
 
 public class PublicEntityTimeFunction
 {
+    private static readonly long RoundingAmountTicks = TimeSpan.FromMinutes(1).Ticks;
     private const string CronEveryMinute = "0 * * * * *";
     private readonly IEntityService entityService;
     
@@ -18,16 +19,19 @@ public class PublicEntityTimeFunction
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
     }
 
-    [FunctionName("PublicEntity-Time")]
+    [Function("PublicEntity-Time")]
     public async Task Run(
         [TimerTrigger(CronEveryMinute)] TimerInfo timer,
         CancellationToken cancellationToken = default)
     {
         var now = DateTime.UtcNow;
+
+        var fraction = (double) (now.Ticks % RoundingAmountTicks) / RoundingAmountTicks >= 0.5 ? 1 : 0;
+        var nowRounded = new DateTime((now.Ticks / RoundingAmountTicks + fraction) * RoundingAmountTicks);
+
         await this.entityService.ContactSetAsync(
             KnownEntities.Time.Contacts.Utc.Pointer,
-            DateTime.UtcNow.ToString("t", DateTimeFormatInfo.InvariantInfo),
-            now,
-            cancellationToken);
+            nowRounded.ToString("t", DateTimeFormatInfo.InvariantInfo),
+            cancellationToken: cancellationToken);
     }
 }

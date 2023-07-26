@@ -1,25 +1,24 @@
+import { Children, type PropsWithChildren } from 'react';
 import { useEffect, useState } from 'react';
 import { Check, Close, ExpandDown } from '@signalco/ui-icons';
-import SelectItems from '../SelectItems';
-import Checkbox from '../Checkbox';
-import { Typography, Button } from '@mui/joy';
-import { Box } from '@mui/system';
-import Row from '../Row';
-import Stack from '../Stack';
-import Grow from '../Grow';
-import Collapse from '../Collapse';
-import Fade from '../Fade';
-import { ChildrenProps } from '../sharedTypes';
-import Loadable, { LoadableProps } from '../Loadable';
-import React from 'react';
-import NoDataPlaceholder from '../NoDataPlaceholder';
+import { Typography } from '../Typography';
+import { Stack } from '../Stack';
+import { SelectItems } from '../SelectItems';
+import { Row } from '../Row';
+import { NoDataPlaceholder } from '../NoDataPlaceholder';
+import { Loadable, LoadableProps } from '../Loadable';
+import { Grow } from '../Grow';
+import { Fade } from '../Fade';
+import { Collapse } from '../Collapse';
+import { Checkbox } from '../Checkbox';
+import { Button } from '../Button';
 
-export interface FilterListItem {
+export type FilterListItem = {
     id: string;
     label: string;
 }
 
-export interface FilterListProps {
+export type FilterListProps = {
     header: string;
     items: FilterListItem[];
     selected?: string | string[] | null | undefined;
@@ -34,23 +33,25 @@ function FilterItem({ item, checked, onToggle }: { item: FilterListItem, checked
         <Checkbox
             key={item.id}
             label={(
-                <Row style={{ padding: 12 }}>
-                    <Typography sx={{ flexGrow: 1 }}>{item.label}</Typography>
+                <Row justifyContent="space-between" className="p-2">
+                    <span>
+                        {item.label}
+                    </span>
                     <Grow appear={checked.indexOf(item.id) >= 0}>
                         <Check />
                     </Grow>
                 </Row>
             )}
             checked={checked.indexOf(item.id) >= 0}
-            onChange={() => onToggle(item.id)}
+            onCheckedChange={() => onToggle(item.id)}
             disableIcon />
     );
 }
 
-type ItemsWrapperProps = ChildrenProps & LoadableProps & { noItemsPlaceholder: string, itemsWrapper?: React.FunctionComponent | undefined };
+type ItemsWrapperProps = PropsWithChildren<LoadableProps & { noItemsPlaceholder: string, itemsWrapper?: React.FunctionComponent | undefined }>;
 
 export function ItemsWrapper({ children, noItemsPlaceholder, itemsWrapper, ...rest }: ItemsWrapperProps) {
-    const ItemsWrapper = itemsWrapper ?? (({ children }: ChildrenProps) => <>{children}</>);
+    const ItemsWrapper = itemsWrapper ?? (({ children }: PropsWithChildren) => <>{children}</>);
     return (
         <Loadable {...rest}>
             {!children || !Array.isArray(children) || children.length === 0 ? (
@@ -67,9 +68,9 @@ export type ItemsShowMoreProps = ItemsWrapperProps & { truncate?: number | undef
 export function ItemsShowMore({ children, truncate, itemsWrapper, ...rest }: ItemsShowMoreProps) {
     const [isShowAll, setIsShowAll] = useState<boolean>(false);
 
-    const Wrapper = itemsWrapper ?? (({ children }: ChildrenProps) => <>{children}</>);
+    const Wrapper = itemsWrapper ?? (({ children }: PropsWithChildren) => <>{children}</>);
 
-    const items = React.Children.toArray(children);
+    const items = Children.toArray(children);
     const shouldTruncate = typeof truncate === 'number' && !isShowAll && items.length > truncate;
 
     return (
@@ -77,11 +78,13 @@ export function ItemsShowMore({ children, truncate, itemsWrapper, ...rest }: Ite
             <ItemsWrapper itemsWrapper={itemsWrapper} {...rest}>
                 {items.slice(0, truncate)}
             </ItemsWrapper>
-            <Collapse appear={!shouldTruncate}>
-                <Wrapper>
-                    {items.slice(truncate)}
-                </Wrapper>
-            </Collapse>
+            {typeof truncate === 'number' && (
+                <Collapse appear={!shouldTruncate}>
+                    <Wrapper>
+                        {items.slice(truncate)}
+                    </Wrapper>
+                </Collapse>
+            )}
             <Fade appear={shouldTruncate}>
                 <Button
                     fullWidth
@@ -94,7 +97,7 @@ export function ItemsShowMore({ children, truncate, itemsWrapper, ...rest }: Ite
     );
 }
 
-export default function FilterList(props: FilterListProps) {
+export function FilterList(props: FilterListProps) {
     const {
         header,
         items,
@@ -112,7 +115,6 @@ export default function FilterList(props: FilterListProps) {
     }, [selected]);
 
     const handleToggle = (value: string) => {
-
         const currentIndex = checked.indexOf(value);
         const newChecked = multiple ? [...checked] : [];
 
@@ -134,27 +136,24 @@ export default function FilterList(props: FilterListProps) {
 
     return (
         <Stack>
-            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+            <div className="md:hidden">
                 <SelectItems
                     items={items.map(i => ({ value: i.id, label: i.label }))}
-                    value={checked}
+                    value={checked?.at(0)}
                     label={header}
                     placeholder={`Select ${header}`}
-                    multiple={multiple}
-                    fullWidth
-                    onChange={(values) => {
-                        values.forEach(changedValue => {
-                            handleToggle(changedValue);
-                        });
+                    className="w-full"
+                    onValueChange={(value) => {
+                        handleToggle(value);
                     }} />
-            </Box>
-            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            </div>
+            <div className="hidden md:block">
                 <Typography level="h5" gutterBottom>{header}</Typography>
                 <ItemsShowMore
                     truncate={truncate}
                     loadingLabel={'Loading'}
                     noItemsPlaceholder={'Not available'}
-                    itemsWrapper={({ children }: ChildrenProps) => <Stack>{children}</Stack>}>
+                    itemsWrapper={({ children }: PropsWithChildren) => <Stack>{children}</Stack>}>
                     {items.map(item => (
                         <FilterItem key={item.id} item={item} checked={checked} onToggle={handleToggle} />
                     ))}
@@ -162,7 +161,7 @@ export default function FilterList(props: FilterListProps) {
                 {(checked.length > 1 && (
                     <Button fullWidth startDecorator={<Close />} variant="plain" size="sm" onClick={handleClearSelection}>Clear selection</Button>
                 ))}
-            </Box>
+            </div>
         </Stack>
     );
 }

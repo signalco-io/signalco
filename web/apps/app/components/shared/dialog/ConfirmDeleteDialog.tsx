@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Stack , Button, TextField, Typography , Breakpoint } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Input } from '@signalco/ui/dist/Input';
+import { Button } from '@signalco/ui/dist/Button';
 import useLocale from '../../../src/hooks/useLocale';
 import ConfigurationDialog from './ConfigurationDialog';
 
@@ -9,23 +12,21 @@ export interface IConfirmDeleteDialogProps {
     expectedConfirmText: string,
     onClose: () => void,
     onConfirm: () => void,
-    maxWidth?: false | undefined | Breakpoint,
 }
 
 function ConfirmDeleteDialog(props: IConfirmDeleteDialogProps) {
-    const { isOpen, header, expectedConfirmText, onClose, onConfirm, maxWidth } = props;
+    const { isOpen, header, expectedConfirmText, onClose, onConfirm } = props;
     const { t } = useLocale('App', 'Dialogs');
     const [confirmText, setConfirmText] = useState('');
 
     return (
         <ConfigurationDialog
             header={header}
-            isOpen={isOpen}
-            onClose={onClose}
-            maxWidth={maxWidth}>
+            open={isOpen}
+            onClose={onClose}>
             <Stack spacing={4}>
                 <Typography>{t('ConfirmDeleteBody', { code: expectedConfirmText })}</Typography>
-                <TextField label={t('Confirm')} onChange={(e) => setConfirmText(e.target.value)} />
+                <Input label={t('Confirm')} onChange={(e) => setConfirmText(e.target.value)} />
                 <Button variant="solid" color="danger" disabled={confirmText !== expectedConfirmText} onClick={onConfirm}>
                     {`${t('ConfirmDeleteButton')} "${expectedConfirmText}"`}
                 </Button>

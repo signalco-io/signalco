@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { cx } from 'classix';
-import { IconButton, Tooltip } from '@signalco/ui';
+import { Tooltip } from '@signalco/ui/dist/Tooltip';
+import { IconButton } from '@signalco/ui/dist/IconButton';
 import styles from './NavLink.module.scss';
 
 export type NavLinkProps = {
@@ -15,7 +16,7 @@ export type NavLinkProps = {
 
 export default function NavLink({ path, Icon, active, label, onClick }: NavLinkProps) {
     return (
-        <Tooltip title={label} placement="right">
+        <Tooltip title={label}>
             <Link href={path}>
                 <IconButton
                     className={cx(styles.root, active && styles.active)}

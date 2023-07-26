@@ -4,7 +4,9 @@
         "es2021": true
     },
     "extends": [
-        "standard"
+        "eslint:recommended",
+        "plugin:import/recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -19,10 +21,25 @@
             "error",
             4
         ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "comma-dangle": [
+            "warn",
+            {
+                "arrays": "always-multiline",
+                "objects": "always-multiline",
+                "imports": "always-multiline",
+                "exports": "always-multiline",
+                "functions": "always-multiline"
+            }
+        ],
         "semi": [
             "error",
             "always"
         ],
-        "no-new": "off"
+        "import/no-unresolved": 0,
+        "import/no-absolute-path": 0
     }
 }

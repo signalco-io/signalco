@@ -36,16 +36,6 @@ Production API
 
 #### Locally via CLI
 
-##### **Build projects**
-
-- `dotnet publish ./Signal.Api.Public --configuration Release`
-- `dotnet publish ./Signal.Api.Internal --configuration Release`
-- `dotnet publish ./Signal.Func.Internal.UsageProcessor --configuration Release`
-- `dotnet publish ./Signalco.Channel.GitHubApp --configuration Release`
-- `dotnet publish ./Signalco.Channel.Slack --configuration Release`
-- `dotnet publish ./Signalco.Channel.Zigbee2Mqtt --configuration Release`
-- `dotnet publish ./Signalco.Channel.PhilipsHue --configuration Release`
-
 ##### **Pulumi (required for Deploy step)**
 
 - [Install Pulumi](https://www.pulumi.com/docs/get-started/install)
@@ -53,11 +43,13 @@ Production API
   - MacOS: `brew install pulumi`
 - Navigate to `./infrastructure`
 - `yarn install`
-- `pulumi login`
-- `pulumi stack select` or `pulumi stack new` to create your new stack
+- [`pulumi login`](https://www.pulumi.com/docs/reference/cli/pulumi_login/)
+- [`pulumi stack select`](https://www.pulumi.com/docs/reference/cli/pulumi_stack_select/) or [`pulumi stack init`](https://www.pulumi.com/docs/reference/cli/pulumi_stack_init/) to create your new stack
 
 ##### **Azure (required for Deploy step)**
 
+- [Get credentials](https://www.pulumi.com/registry/packages/azure-native/installation-configuration/#create-your-service-principal-and-get-your-tokens)
+  - [Reset credentials](https://learn.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest#6-reset-credentials) if expired, lost or compromised
 - (optional) [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
   - Windows: `winget install Microsoft.AzureCLI`
   - MacOS: `brew install azure-cli`
@@ -80,23 +72,10 @@ Production API
   - on new stack
     - `pulumi config set ses-region eu-west-1`
   - stacks `next` and `production` are already configured
-- Configure (pick one method)
-  - _(recommended)_ create file `.aws/credentials` in your home directory
-  - set environment variables (for CI/CD)
-    - Windows:
-      - `$env:AWS_ACCESS_KEY_ID = "<YOUR_ACCESS_KEY_ID>"`
-      - `$env:AWS_SECRET_ACCESS_KEY = "<YOUR_SECRET_ACCESS_KEY>"`
-    - MacOS/Linux:
-      - `export AWS_ACCESS_KEY_ID=<YOUR_ACCESS_KEY_ID>`
-      - `export AWS_SECRET_ACCESS_KEY=<YOUR_SECRET_ACCESS_KEY>`
-
-`credentials` example:
-
-```txt
-[default]
-aws_access_key_id = <YOUR_ACCESS_KEY_ID>
-aws_secret_access_key = <YOUR_SECRET_ACCESS_KEY>
-```
+- Configure
+  - on new stack
+    - `$pulumi config set aws:accessKey <YOUR_ACCESS_KEY_ID> --secret`
+    - `$pulumi config set aws:secretKey <YOUR_ACCESS_KEY_ID> --secret`
 
 ##### **CloudFlare (required for Deploy step)**
 

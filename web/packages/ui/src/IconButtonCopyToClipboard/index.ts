@@ -1,2 +1,1 @@
-export { default } from './IconButtonCopyToClipboard';
-export { type IconButtonCopyToClipboardProps } from './IconButtonCopyToClipboard';
+export { IconButtonCopyToClipboard, type IconButtonCopyToClipboardProps } from './IconButtonCopyToClipboard';

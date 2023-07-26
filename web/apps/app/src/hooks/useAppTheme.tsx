@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { type AppThemeMode, useColorScheme } from '@signalco/ui';
+import type { AppThemeMode, DefaultColorScheme } from '@signalco/ui/dist/theme';
 import { useInterval, useIsomorphicLayoutEffect } from '@signalco/hooks';
 import { fromDuration, now } from '../services/DateTimeProvider';
 import { showNotification } from '../notifications/PageNotificationService';
@@ -8,7 +8,11 @@ import useUserSetting from './useUserSetting';
 import { localizer } from './useLocale';
 
 export default function useAppTheme() {
-    const { mode, setMode } = useColorScheme();
+    // const { mode, setMode } = useColorScheme();
+    const mode: unknown = 'dark';
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+    const setMode = (mode: DefaultColorScheme) => {};
+
     const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
     const [themeTimeRange] = useUserSetting<[string, string] | undefined>('themeTimeRange', undefined);
 
@@ -49,7 +53,7 @@ export default function useAppTheme() {
 
             console.debug('Color scheme updated', newColorScheme);
         }
-    }, [setMode, mode, themeMode, themeTimeRange]);
+    }, [mode, themeMode, themeTimeRange]);
 
     // Apply theme mode every minute (and on first paint)
     useInterval(applyThemeMode, 60000);

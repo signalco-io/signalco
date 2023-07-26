@@ -1,11 +1,10 @@
 'use client';
 
-import React from 'react';
-import { ChildrenProps } from '@signalco/ui';
+import { PropsWithChildren } from 'react';
 import Footer from '../pages/Footer';
 import { PageNav } from '../PageNav';
 
-export function PageFullLayout(props: ChildrenProps) {
+export function PageFullLayout(props: PropsWithChildren) {
     return (
         <>
             <PageNav fullWidth />

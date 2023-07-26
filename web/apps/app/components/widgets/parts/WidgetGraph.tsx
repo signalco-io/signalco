@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Loadable } from '@signalco/ui';
+import { Loadable } from '@signalco/ui/dist/Loadable';
 import { useLoadAndError } from '@signalco/hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';

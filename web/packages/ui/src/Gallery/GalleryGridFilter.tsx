@@ -1,13 +1,13 @@
-import { Typography } from '@mui/joy';
-import React from 'react';
-import Row from '../Row';
+import type { ReactElement } from 'react';
+import { Typography } from '../Typography';
+import { Row } from '../Row';
 
-export interface GalleryGridFilterProps {
+export type GalleryGridFilterProps = {
     header: string;
-    filters?: React.ReactElement;
+    filters?: ReactElement;
 }
 
-export default function GalleryGridFilter(props: GalleryGridFilterProps) {
+export function GalleryGridFilter(props: GalleryGridFilterProps) {
     const { header, filters } = props;
     return (
         <Row justifyContent="space-between" spacing={1}>

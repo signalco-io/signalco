@@ -1,21 +1,27 @@
 import { useMemo, useState } from 'react';
 import { ExternalLink } from '@signalco/ui-icons';
-import { DisableButton, Avatar, Box, EditableInput, Timeago, MuiStack, Row, Stack, Loadable, Chip } from '@signalco/ui';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { EditableInput } from '@signalco/ui/dist/EditableInput';
+import { DisableButton } from '@signalco/ui/dist/DisableButton';
+import { Chip } from '@signalco/ui/dist/Chip';
+import { Avatar } from '@signalco/ui/dist/Avatar';
 import { camelToSentenceCase } from '@signalco/js';
 import EntityIcon from '../../shared/entity/EntityIcon';
 import BatteryIndicator from '../../indicators/BatteryIndicator';
 import ShareEntityChip from '../../entity/ShareEntityChip';
 import EntityStatus, { useEntityStatus } from '../../entity/EntityStatus';
 import { useEntityBattery } from '../../entity/EntityBattery';
-import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import useContact from '../../../src/hooks/signalco/useContact';
+import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import { entityRenameAsync } from '../../../src/entity/EntityRepository';
 import { entityLastActivity } from '../../../src/entity/EntityHelper';
 import { setAsync } from '../../../src/contacts/ContactRepository';
 import EntityProcessDetails from './EntityProcessDetails';
 import EntityOptions from './EntityOptions';
 import ContactsTable from './ContactsTable';
-
 
 export interface EntityDetailsViewProps {
     id: string;
@@ -64,7 +70,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
 
     return (
         <Loadable isLoading={isLoading} loadingLabel="Loading entity" error={error}>
-            <MuiStack spacing={{ xs: 1, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
+            <div className="xs:gap-1 flex flex-col sm:gap-4 sm:pt-2">
                 <Stack style={{ paddingLeft: 16, paddingRight: 16 }} spacing={1}>
                     <Row spacing={1} justifyContent="space-between">
                         <Row spacing={2}>
@@ -72,12 +78,8 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                                 <Icon />
                             </Avatar>
                             <EditableInput
-                                sx={{
-                                    fontWeight: 300,
-                                    fontSize: { xs: 18, sm: 24 }
-                                }}
-                                text={entity?.alias || ''}
-                                noWrap
+                                className="xs:text-lg font-light sm:text-2xl"
+                                value={entity?.alias || ''}
                                 onChange={handleRename} />
                         </Row>
                         <EntityOptions
@@ -95,9 +97,9 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                             </Chip>
                         }
                         {(hasStatus && (isStale || isOffline)) && (
-                            <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
+                            <div style={{ opacity: 0.6, fontSize: '0.8rem' }}>
                                 <Timeago date={entityLastActivity(entity)} />
-                            </Box>
+                            </div>
                         )}
                         {(!disabledContact.isLoading && !disabledContact.isError) && (
                             <DisableButton disabled={isDisabled} onClick={handleDisableToggle} />
@@ -108,7 +110,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                         ))}
                     </Row>
                 </Stack>
-                <Box sx={{ px: { xs: 1, sm: 2 } }}>
+                <div className="px-1 sm:px-2">
                     {showRawResolved ? (
                         <ContactsTable entity={entity} />
                     ) : (
@@ -116,8 +118,8 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                             {detailsComponent}
                         </>
                     )}
-                </Box>
-            </MuiStack>
+                </div>
+            </div>
         </Loadable>
     );
 }

@@ -1,13 +1,13 @@
 import React from 'react';
-import Row from '@signalco/ui/dist/Row';
-import Link from '@signalco/ui/dist/Link';
+import {Row} from '@signalco/ui/dist/Row';
+import {Link} from '@signalco/ui/dist/Link';
 import { now } from '../../src/services/DateTimeProvider';
 import styles from './FooterInfo.module.scss';
 
 export function FooterInfo() {
     return (
         <div className={styles.root}>
-            <small className="xs:textAlign-center">Copyright © {now().getFullYear()} signalco. All rights reserved.</small>
+            <small className="text-center">Copyright © {now().getFullYear()} signalco. All rights reserved.</small>
             <Row spacing={4} alignItems="stretch">
                 <Link
                     aria-label="Twitter link"

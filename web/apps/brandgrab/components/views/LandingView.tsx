@@ -1,10 +1,16 @@
 'use client';
 
-import React, { useCallback } from 'react';
+import React, { PropsWithChildren, useCallback } from 'react';
 import NextImage from 'next/image';
-import Stack from '@signalco/ui/dist/Stack';
-import { Card, CardContent, CardCover, CardOverflow, ChildrenProps, Container, Divider, Link, Loadable, MuiStack, Tooltip, Typography } from '@signalco/ui';
-import { orderBy } from '@signalco/js';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Tooltip } from '@signalco/ui/dist/Tooltip';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { Link } from '@signalco/ui/dist/Link';
+import { Divider } from '@signalco/ui/dist/Divider';
+import { Container } from '@signalco/ui/dist/Container';
+import { Card, CardContent, CardCover, CardOverflow } from '@signalco/ui/dist/Card';
+import { orderBy, isImageDataUrl } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { ScreenshotResponse } from '../../app/api/screenshot/route';
 import { BrandResources } from '../../app/api/quick/route';
@@ -15,23 +21,21 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
 
     return (
         <Link href={og.url}>
-            <Card variant="outlined" style={{
+            <Card style={{
                 width: 400,
                 minHeight: 209,
                 overflow: 'hidden',
-                transition: 'box-shadow .2s ease-in-out, border-color .2s ease-in-out'
-            }} sx={{
-                '&:hover': { boxShadow: 'md', borderColor: 'neutral.outlinedHoverBorder' },
             }}>
-                {og.imageBase64 &&
-                    <CardOverflow sx={{
-                        padding: 0
-                    }}>
+                {isImageDataUrl(og.imageBase64) &&
+                    <CardOverflow>
                         <NextImage
                             src={og.imageBase64}
                             alt="og:image"
                             width={400}
-                            height={209} />
+                            height={209}
+                            style={{
+                                objectFit: 'cover',
+                            }} />
                     </CardOverflow>
                 }
                 <CardContent style={{ justifyContent: 'flex-end' }}>
@@ -40,17 +44,10 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                         <Typography level="body2">{og.description}</Typography>
                     </Stack>
                 </CardContent>
-                <Divider sx={{ mt: 2 }} />
-                <CardOverflow
-                    variant="soft"
-                    sx={{
-                        display: 'flex',
-                        gap: 1.5,
-                        py: 1.5,
-                        px: 'var(--Card-padding)',
-                        bgcolor: 'background.level1',
-                    }}
-                >
+                <div className="mt-2">
+                    <Divider />
+                </div>
+                <CardOverflow className="flex">
                     {!!og.siteName && (
                         <Tooltip title={og.siteName}>
                             <Typography noWrap level="body3" semiBold secondary>
@@ -106,7 +103,7 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
                     height: 144 + 16 * 2,
                     gridRowEnd: 'span 2',
                     padding: 16,
-                    border: '1px solid var(--joy-palette-divider)',
+                    border: '1px solid hsl(var(--border))',
                     borderRadius: 8
                 }}
                 src={icons.icon512Base64 || icons.icon256Base64 || icons.appleTouchIconBase64 || icons.icon128Base64 || icons.icon64Base64 || icons.icon32Base64 || icons.icon16Base64 || favicon.base64}
@@ -118,7 +115,7 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
                     width: 42 + 16 * 2,
                     height: 42 + 16 * 2,
                     padding: 16,
-                    border: '1px solid var(--joy-palette-divider)',
+                    border: '1px solid hsl(var(--border))',
                     borderRadius: 8
                 }}
                 src={icons.icon64Base64 || icons.icon32Base64 || icons.icon16Base64 || favicon.base64}
@@ -130,7 +127,7 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
                     width: 16 * 3,
                     height: 16 * 3,
                     padding: 16,
-                    border: '1px solid var(--joy-palette-divider)',
+                    border: '1px solid hsl(var(--border))',
                     borderRadius: 8
                 }}
                 src={icons.icon16Base64 || favicon.base64}
@@ -141,17 +138,17 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
     )
 }
 
-function TextInfo({ title, children }: { title: string } & ChildrenProps) {
+function TextInfo({ title, children }: PropsWithChildren<{ title: string }>) {
     return (
         <Stack spacing={.5}>
-            <Typography level="body3">{title}</Typography>
+            <Typography level="body3" secondary>{title}</Typography>
             <div>{children}</div>
         </Stack>
     )
 }
 
 async function getPageScreenshot(domain: string) {
-    const res = await fetch(`/api/screenshot?domain=${encodeURIComponent(domain)}`);
+    const res = await fetch(`/api/screenshot?domain=${encodeURIComponent(domain)}`, { cache: 'no-store' });
     const data = await res.json() as ScreenshotResponse;
     // TODO: Move dimensions resolve to server
     const dimensions = await getImageDimensions(data.data);
@@ -171,6 +168,19 @@ function getImageDimensions(file: string) {
         };
         i.src = file
     })
+}
+
+function hexToRgb(hex: string) {
+    return {
+        r: parseInt(hex.slice(1, 3), 16),
+        g: parseInt(hex.slice(3, 5), 16),
+        b: parseInt(hex.slice(5, 7), 16)
+    };
+}
+
+function hexLightness(hex: string) {
+    const rgb = hexToRgb(hex);
+    return (rgb.r * 0.299 + rgb.g * 0.587 + rgb.b * 0.114) / 255;
 }
 
 function PagePreview({ domain }: { domain: string }) {
@@ -221,8 +231,8 @@ function PagePreview({ domain }: { domain: string }) {
                                 padding: 4,
                                 alignItems: 'end',
                                 display: 'flex',
-                                color: color.lightness < .5 ? 'rgba(256,256,256, .8)' : 'rgba(0,0,0, .8)',
-                                border: '1px solid var(--joy-palette-divider)'
+                                color: hexLightness(color.hex) < .5 ? 'rgba(256,256,256, .8)' : 'rgba(0,0,0, .8)',
+                                border: '1px solid hsl(var(--border))'
                             }}>
                                 {color.hex}
                             </div>
@@ -240,7 +250,7 @@ function BrandView({ domain }: { domain: string | undefined }) {
     const resources = domainResources.item;
 
     return (
-        <MuiStack direction={{ xs: 'column', md: 'row' }} spacing={4}>
+        <Stack spacing={4}>
             <Stack spacing={3}>
                 <TextInfo title="Domain">
                     <Loadable placeholder="skeletonText" isLoading={domainResources.isLoading} error={domainResources.error} loadingLabel="Loading SEO">
@@ -275,7 +285,7 @@ function BrandView({ domain }: { domain: string | undefined }) {
             {resources?.domain && (
                 <PagePreview domain={resources?.domain} />
             )}
-        </MuiStack>
+        </Stack>
     );
 }
 

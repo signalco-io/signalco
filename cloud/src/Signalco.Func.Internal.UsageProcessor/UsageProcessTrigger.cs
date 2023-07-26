@@ -4,12 +4,13 @@ using System.Net;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Signal.Core.Contacts;
 using Signal.Core.Entities;
 using Signal.Core.Exceptions;
 using Signal.Core.Processor;
+using Signal.Core.Secrets;
 using Signal.Core.Usage;
 
 namespace Signalco.Func.Internal.UsageProcessor;
@@ -17,24 +18,26 @@ namespace Signalco.Func.Internal.UsageProcessor;
 public class UsageProcessTrigger
 {
     private readonly IEntityService entityService;
+    private readonly ILogger<UsageProcessTrigger> logger;
 
     public UsageProcessTrigger(
-        IEntityService entityService)
+        IEntityService entityService,
+        ILogger<UsageProcessTrigger> logger)
     {
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
+        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    [FunctionName("UsageProcessTrigger")]
+    [Function("UsageProcessTrigger")]
     public async Task Run(
-        [QueueTrigger("usage-processing", Connection = "SignalcoStorageAccountConnectionString")]
-        string item, 
-        ILogger logger, 
+        [QueueTrigger("usage-processing", Connection = SecretKeys.StorageAccountConnectionString)]
+        string item,
         CancellationToken cancellationToken = default)
     {
         var queueItem = JsonSerializer.Deserialize<UsageQueueItem>(item) ??
                         throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Invalid queue item data");
 
-        logger.LogInformation("Dequeued usage item: {@UsageItem}", queueItem);
+        this.logger.LogInformation("Dequeued usage item: {@UsageItem}", queueItem);
 
         // TODO: Move to service
         // Retrieve or create user entity

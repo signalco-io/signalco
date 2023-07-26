@@ -17,7 +17,7 @@ class LocalStorageService {
             try {
                 return skipDeseriaalization
                     ? value as unknown as T
-                    : JSON.parse(value);
+                    : JSON.parse(value) as T;
             }
             catch {
                 return value as unknown as T;

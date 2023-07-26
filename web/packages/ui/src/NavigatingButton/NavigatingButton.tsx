@@ -1,18 +1,17 @@
+import type { PropsWithChildren } from 'react';
 import Link from 'next/link';
+import { cx } from 'classix';
 import { Navigate } from '@signalco/ui-icons';
-import { Button } from '@mui/joy';
-import { ChildrenProps } from '../sharedTypes';
+import { Button } from '../Button';
 
-/** @alpha */
-export interface NavigatingButtonProps extends ChildrenProps {
+export type NavigatingButtonProps = PropsWithChildren<{
     href: string;
     size?: 'sm' | 'md' | 'lg';
     disabled?: boolean;
     hideArrow?: boolean;
-}
+}>;
 
-/** @alpha */
-export default function NavigatingButton({
+export function NavigatingButton({
     href,
     size,
     disabled,
@@ -30,18 +29,18 @@ export default function NavigatingButton({
                 variant={hideArrow ? 'plain' : 'solid'}
                 disabled={disabled}
                 size={size}
-                endDecorator={<Navigate size={16} />}
-                sx={{
-                    '.MuiButton-endDecorator': {
-                        opacity: hideArrow ? 0 : 1,
-                        transition: 'opacity 0.1s linear'
-                    },
-                    '&:hover': {
-                        '.MuiButton-endDecorator': {
-                            opacity: 1
-                        }
-                    }
-                }}>
+                className={hideArrow ? 'group/nav-button' : undefined}
+                startDecorator={hideArrow && (
+                    <span className="w-[16px] pr-1" />
+                )}
+                endDecorator={(
+                    <span className={cx(
+                        'pl-1',
+                        hideArrow && 'transition-opacity opacity-0 group-hover/nav-button:opacity-100'
+                    )}>
+                        <Navigate size={16} />
+                    </span>
+                )}>
                 {children}
             </Button>
         </Link>

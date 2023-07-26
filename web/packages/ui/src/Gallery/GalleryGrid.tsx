@@ -1,25 +1,24 @@
-import { Grid } from '@mui/joy';
 import React from 'react';
 
-export interface GalleryGridProps {
-    items: {
-        id: string;
-    }[];
-    itemComponent: React.FunctionComponent<any>;
+export type GalleryItemComponent<TItem extends GalleryItem> = React.FunctionComponent<TItem>;
+
+export type GalleryItem = {
+    id: string;
+};
+
+export type GalleryGridProps<TItem extends GalleryItem> = {
+    items: TItem[];
+    itemComponent: GalleryItemComponent<TItem>;
 }
 
-export default function GalleryGrid(props: GalleryGridProps) {
+export function GalleryGrid<TItem extends GalleryItem>(props: GalleryGridProps<TItem>) {
     const { items, itemComponent } = props;
     const ItemComponent = itemComponent;
     return (
-        <div>
-            <Grid container spacing={{ xs: 1, md: 3 }} justifyContent={{ xs: 'center', md: 'start' }}>
-                {items.map(item => (
-                    <Grid key={item.id}>
-                        <ItemComponent {...item} />
-                    </Grid>
-                ))}
-            </Grid>
+        <div className="grid grid-cols-2 gap-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+            {items.map(item => (
+                <ItemComponent key={item.id} {...item} />
+            ))}
         </div>
     );
 }

@@ -1,0 +1,36 @@
+{
+  "profiles": {
+    "Signalco.Api.RemoteBrowser": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "scrape?url=https://www.signalco.io",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7210;http://localhost:5077"
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "scrape?url=https://www.signalco.io",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "publishAllPorts": true,
+      "useSSL": true
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:18508",
+      "sslPort": 44364
+    }
+  }
+}

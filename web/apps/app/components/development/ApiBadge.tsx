@@ -1,6 +1,6 @@
 'use client';
 
-import { Chip } from '@signalco/ui';
+import { Chip } from '@signalco/ui/dist/Chip';
 import { useIsServer } from '@signalco/hooks';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { signalcoApiEndpointIsProduction } from '../../src/services/AppSettingsProvider';

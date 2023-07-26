@@ -1,6 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
-import { Button, Typography, Box, CircularProgress, Stack } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { Button } from '@signalco/ui/dist/Button';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -8,8 +11,8 @@ import { showNotification } from '../../../src/notifications/PageNotificationSer
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useAudioOn from '../../../src/hooks/sounds/useAudioOn';
 import useAudioOff from '../../../src/hooks/sounds/useAudioOff';
-import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import useContacts from '../../../src/hooks/signalco/useContacts';
+import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import { entityAsync } from '../../../src/entity/EntityRepository';
 import type IContactPointer from '../../../src/contacts/IContactPointer';
 import IContact from '../../../src/contacts/IContact';
@@ -144,21 +147,20 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
 
     return (
         <Button
-            sx={{ borderRadius: 'md', position: 'relative', height: '100%', width: 'calc(100% - 2px)', display: 'block', textAlign: 'left', margin: 0, padding: 0 }}
             onClick={handleStateChangeRequest}
             variant="plain">
             <Stack style={{ height: '100%', paddingTop: 16, paddingBottom: 16 }}>
-                <Box sx={{ px: 2 }}>
+                <div className="px-2">
                     <Visual state={state} size={68} />
-                </Box>
-                <Box sx={{ px: 2 }}>
+                </div>
+                <div className="px-2">
                     <Typography semiBold noWrap>{label}</Typography>
-                </Box>
+                </div>
             </Stack>
             {isLoading && (
-                <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
-                    <CircularProgress size="sm" />
-                </Box>
+                <div className="absolute right-4 top-4">
+                    <Loadable isLoading loadingLabel="Loading..." />
+                </div>
             )}
         </Button>
     );

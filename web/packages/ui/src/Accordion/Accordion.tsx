@@ -1,28 +1,25 @@
-import { Card, IconButton } from '@mui/joy';
-import { type SxProps } from '@mui/system';
-import { type MouseEvent, useState } from 'react';
-import Collapse from '../Collapse';
-import Icon from '../Icon';
-import Row from '../Row';
-import { ChildrenProps } from '../sharedTypes';
+import { useState } from 'react';
+import type { ComponentProps, MouseEvent } from 'react';
+import { cx } from 'classix';
+import { Row } from '../Row';
+import { IconButton } from '../IconButton';
+import { Icon } from '../Icon';
+import { Collapse } from '../Collapse';
+import { Card } from '../Card';
 
-/** @alpha */
-export interface AccordionProps extends ChildrenProps {
+export type AccordionProps = ComponentProps<typeof Card> & {
     open?: boolean;
     disabled?: boolean;
-    sx?: SxProps;
-    onChange?: (e: MouseEvent<HTMLAnchorElement>, expanded: boolean) => void,
+    onOpenChanged?: (e: MouseEvent<HTMLButtonElement>, open: boolean) => void;
     unmountOnExit?: boolean;
-}
+};
 
-/** @alpha */
-export default function Accordion(props: AccordionProps) {
-    const { children, open, sx, disabled, onChange, unmountOnExit } = props;
+export function Accordion({ children, open, disabled, onOpenChanged, unmountOnExit, className, ...props }: AccordionProps) {
     const [isOpen, setIsOpen] = useState(open ?? false);
 
-    const handleOpen = (e: MouseEvent<HTMLAnchorElement>) => {
-        if (typeof open !== 'undefined' && typeof onChange !== 'undefined') {
-            onChange(e, !open);
+    const handleOpen = (e: MouseEvent<HTMLButtonElement>) => {
+        if (typeof open !== 'undefined' && typeof onOpenChanged !== 'undefined') {
+            onOpenChanged(e, !open);
         } else if (typeof open === 'undefined') {
             setIsOpen(!isOpen);
         }
@@ -30,19 +27,21 @@ export default function Accordion(props: AccordionProps) {
 
     const actualOpen = open ?? isOpen;
 
+    const multipleChildren = !!children && Array.isArray(children);
+
     return (
-        <Card variant="soft" sx={sx}>
+        <Card className={cx('py-2 px-4', className)} {...props}>
             <Row spacing={1} justifyContent="space-between">
-                {!!children && Array.isArray(children) ? children[0] : children}
+                {multipleChildren ? children[0] : children}
                 {!disabled && (
-                    <IconButton size="sm" onClick={handleOpen}>
+                    <IconButton variant="plain" size="sm" onClick={handleOpen}>
                         <Icon>{actualOpen ? 'expand_less' : 'expand_more'}</Icon>
                     </IconButton>
                 )}
             </Row>
             {(!unmountOnExit || actualOpen) && (
                 <Collapse appear={actualOpen}>
-                    {!!children && Array.isArray(children) && children.filter((_, i) => i !== 0)}
+                    {multipleChildren && children.filter((_, i) => i !== 0)}
                 </Collapse>
             )}
         </Card>

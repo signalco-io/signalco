@@ -1,11 +1,15 @@
 import { useCallback } from 'react';
-import { Row, Stack, Loadable, NoDataPlaceholder, Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { objectWithKey } from '@signalco/js';
 import { useLoadAndError } from '@signalco/hooks';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
-import { JsonResponse } from '@signalco/js';
 
 type ConfigProps = {
     ticker: string;
@@ -30,10 +34,10 @@ async function loadPricePolygonApi(ticker: string | undefined, apiKey: string | 
 
     const [tickerResponse, previousPriceResponse] = await Promise.all([tickerResponsePromise, previousPriceResponsePromise]);
 
-    const tickerData: JsonResponse<{ results: { ticker: string, name: string }[] }> = await tickerResponse.json();
-    const previousPriceData: JsonResponse<{ results: { c: number, o: number }[] }> = await previousPriceResponse.json();
-
-    if (!previousPriceData?.results?.length)
+    const previousPriceData = await previousPriceResponse.json();
+    const previousPriceDataResults = objectWithKey(previousPriceData, 'results')?.results;
+    if (!Array.isArray(previousPriceDataResults) ||
+        !previousPriceDataResults?.length)
         return {
             error: previousPriceResponse.status,
             errorMessage: previousPriceResponse.statusText || previousPriceResponse.status === 429
@@ -41,7 +45,10 @@ async function loadPricePolygonApi(ticker: string | undefined, apiKey: string | 
                 : `Invalid response ${previousPriceResponse.status}`
         };
 
-    if (!tickerData?.results?.length)
+    const tickerData = await tickerResponse.json();
+    const tickerDataResults = objectWithKey(tickerData, 'results')?.results;
+    if (!Array.isArray(tickerDataResults) ||
+        !tickerDataResults?.length)
         return {
             error: tickerResponse.status,
             errorMessage: tickerResponse.statusText || tickerResponse.status === 429
@@ -50,10 +57,10 @@ async function loadPricePolygonApi(ticker: string | undefined, apiKey: string | 
         };
 
     return {
-        ticker: tickerData.results[0].ticker,
-        name: tickerData.results[0].name,
-        close: previousPriceData.results[0].c,
-        open: previousPriceData.results[0].o
+        ticker: Number(objectWithKey(tickerDataResults[0], 'ticker')?.ticker),
+        name: Number(objectWithKey(tickerDataResults[0], 'name')?.name),
+        close: Number(objectWithKey(previousPriceDataResults[0], 'c')?.c),
+        open: Number(objectWithKey(previousPriceDataResults[0], 'o')?.o)
     };
 }
 

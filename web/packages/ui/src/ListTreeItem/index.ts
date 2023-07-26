@@ -1,2 +1,1 @@
-export {default} from './ListTreeItem';
-export {type ListTreeItemProps} from './ListTreeItem';
+export {ListTreeItem, type ListTreeItemProps} from './ListTreeItem';

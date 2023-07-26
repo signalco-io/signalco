@@ -1,4 +1,8 @@
-import { Chip, Card, ColorPaletteProp, Typography, Link, Stack } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import type { ColorPaletteProp } from '@signalco/ui/dist/theme';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Chip } from '@signalco/ui/dist/Chip';
+import { Card } from '@signalco/ui/dist/Card';
 import ChannelLogo from './ChannelLogo';
 
 type ChannelGalleryItemProps = {
@@ -20,21 +24,16 @@ export default function ChannelGalleryItem(props: ChannelGalleryItemProps) {
     const { id, label, planned, hrefFunc } = props;
 
     return (
-        <Card variant="soft" sx={{
-            width: 164,
-            height: 164,
-            '&:hover': { boxShadow: 'md', backgroundColor: 'neutral.softHoverBg' },
-        }}>
-            <Link href={hrefFunc ? hrefFunc(id) : `/channels/${id}`}>
-                <>
-                    {planned && <ChannelGalleryItemChip label="Soon" color="neutral" />}
-                    {!planned && <ChannelGalleryItemChip label="New" color="info" />}
-                    <Stack alignItems="center" justifyContent="center" style={{ height: '100%', width: '100%' }} spacing={2}>
-                        <ChannelLogo channelName={id} label={label} />
-                        <Typography textAlign="center">{label}</Typography>
-                    </Stack>
-                </>
-            </Link>
+        <Card
+            className="h-full"
+            href={hrefFunc ? hrefFunc(id) : `/channels/${id}`}
+        >
+            {planned && <ChannelGalleryItemChip label="Soon" color="neutral" />}
+            {!planned && <ChannelGalleryItemChip label="New" color="info" />}
+            <Stack alignItems="center" justifyContent="center" style={{ height: '100%', width: '100%' }} spacing={2}>
+                <ChannelLogo channelName={id} label={label} />
+                <Typography textAlign="center">{label}</Typography>
+            </Stack>
         </Card>
     );
 }

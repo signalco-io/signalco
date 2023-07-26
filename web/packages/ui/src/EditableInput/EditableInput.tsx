@@ -1,40 +1,40 @@
 import React, { useEffect, useState } from 'react';
+import { cx } from 'classix';
 import { Close, Save, Edit } from '@signalco/ui-icons';
-import { Input, IconButton, Theme, Typography } from '@mui/joy';
-import { SystemStyleObject, Box } from '@mui/system';
-import Row from '../Row';
+import { Typography } from '../Typography';
+import { Row } from '../Row';
+import { Input } from '../Input';
+import { IconButton } from '../IconButton';
 
-export interface EditableInputProps {
-    text: string,
+export type EditableInputProps = {
+    value: string,
     onChange: (text: string) => void
-    sx?: SystemStyleObject<Theme>
-    sxInput?: SystemStyleObject<Theme>,
-    noWrap?: boolean
+    className?: string;
 }
 
-function EditableInput(props: EditableInputProps) {
-    const {
-        text,
-        sx,
-        sxInput,
-        onChange,
-        noWrap
-    } = props;
-
+export function EditableInput({
+    value,
+    onChange,
+    className
+}: EditableInputProps) {
     const [isEditing, setIsEditing] = useState(false);
-    const [editingText, setEditingText] = useState(text);
+    const [editingText, setEditingText] = useState(value);
+
     useEffect(() => {
-        if (isEditing)
-            setEditingText(text);
-    }, [isEditing, text, setEditingText])
+        if (isEditing) {
+            setEditingText(value);
+        }
+    }, [isEditing, value, setEditingText]);
 
     const handleConfirm = () => {
-        onChange(editingText);
+        if (onChange) {
+            onChange(editingText);
+        }
         setIsEditing(false);
     };
 
     const handleCancel = () => {
-        setEditingText(text);
+        setEditingText(value);
         setIsEditing(false);
     };
 
@@ -45,13 +45,10 @@ function EditableInput(props: EditableInputProps) {
 
     if (isEditing) {
         return (
-            <Row spacing={1}>
+            <Row
+                spacing={1}
+                className={className}>
                 <Input
-                    sx={{
-                        '& input': {
-                            ...(sxInput || sx)
-                        }
-                    }}
                     value={editingText}
                     autoFocus
                     onChange={(e) => setEditingText(e.target.value)}
@@ -73,15 +70,15 @@ function EditableInput(props: EditableInputProps) {
         );
     } else {
         return (
-            <Box sx={{ py: '4px', cursor: 'pointer' }} onClick={() => setIsEditing(true)}>
-                <Typography sx={{
-                    '& > .editIndicator': { visibility: 'hidden' },
-                    '&:hover': { '& > .editIndicator': { visibility: 'visible' } },
-                    ...sx
-                }} noWrap={noWrap}>{text}<span className="editIndicator"><Edit /></span></Typography>
-            </Box>
+            <Row
+                role="button"
+                className={cx('group py-1 cursor-pointer', className)}
+                spacing={1}
+                onClick={() => setIsEditing(true)}
+            >
+                <Typography>{value}</Typography>
+                <span className="invisible group-hover:visible"><Edit size={16} /></span>
+            </Row>
         )
     }
 }
-
-export default EditableInput;

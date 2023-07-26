@@ -1,28 +1,32 @@
-import { type CSSProperties } from "react";
-import { type ChildrenProps } from "../sharedTypes";
-import styles from './Stack.module.scss';
+import type { CSSProperties, HTMLAttributes } from 'react';
+import { cx } from 'classix';
 
-/** @alpha */
-export interface StackProps extends ChildrenProps {
+export type StackProps = HTMLAttributes<HTMLDivElement> & {
     spacing?: number;
     alignItems?: 'start' | 'center' | undefined;
     justifyContent?: 'start' | 'center' | 'end' | 'space-between' | 'stretch' | undefined;
-    style?: CSSProperties | undefined;
-}
+};
 
-/** @alpha */
-export default function Stack({ children, spacing, alignItems, justifyContent, style }: StackProps) {
+export function Stack({ spacing, alignItems, justifyContent, style, className, ...props }: StackProps) {
     return (
         <div
-            className={styles.root}
+            className={cx(
+                'flex flex-col',
+                alignItems === 'start' && '[align-items:start]',
+                alignItems === 'center' && '[align-items:center]',
+                !alignItems && '[align-items:stretch]',
+                Boolean(spacing) && 'gap-[--s-gap]',
+                justifyContent === 'start' && '[justify-content:start]',
+                justifyContent === 'center' && '[justify-content:center]',
+                justifyContent === 'end' && '[justify-content:end]',
+                justifyContent === 'space-between' && '[justify-content:space-between]',
+                justifyContent === 'stretch' && '[justify-content:stretch]',
+                className)}
             style={{
                 '--s-gap': `${(spacing ?? 0) * 8}px`,
-                '--s-alignItems': alignItems ?? 'stretch',
-                '--s-justifyContent': justifyContent,
                 ...style
             } as CSSProperties}
-        >
-            {children}
-        </div>
+            {...props}
+        />
     )
 }

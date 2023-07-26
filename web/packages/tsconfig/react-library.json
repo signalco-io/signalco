@@ -13,8 +13,7 @@
         "module": "ESNext",
         "target": "ESNext",
         "useDefineForClassFields": true,
-        "resolveJsonModule": true,
-        "declarationDir": "dist/"
+        "resolveJsonModule": true
     },
     "include": [
         "./src/**/*.ts*"

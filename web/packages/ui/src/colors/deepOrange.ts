@@ -1,4 +1,4 @@
-const deepOrange = {
+export const deepOrange = {
     50: '#fbe9e7',
     100: '#ffccbc',
     200: '#ffab91',
@@ -14,5 +14,3 @@ const deepOrange = {
     A400: '#ff3d00',
     A700: '#dd2c00'
 };
-
-export default deepOrange;

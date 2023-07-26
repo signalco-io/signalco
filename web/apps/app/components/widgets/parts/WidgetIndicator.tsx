@@ -2,7 +2,8 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { SmileMeh, SmileVeryHappy } from '@signalco/ui-icons';
-import { Button, Box, Stack } from '@signalco/ui';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Button } from '@signalco/ui/dist/Button';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultColumns, DefaultTarget } from '../../../src/widgets/WidgetConfigurationOptions';
 import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -46,15 +47,18 @@ function WidgetIndicator(props: WidgetSharedProps<ConfigProps>) {
     return (
         <Button
             variant="plain"
-            sx={{ position: 'relative', height: '100%', width: '100%', display: 'block', textAlign: 'left', margin: 0, padding: 0 }}
-            onClick={handleSelected} >
+            onClick={handleSelected}>
             <Stack style={{ height: '100%' }} alignItems="center" justifyContent="end">
-                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                <div className="flex items-end">
                     <Image src="/assets/widget-images/plant-aloe.png" alt="Plant Aloe" width={76} height={76} />
-                </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '64px', width: '100%', background: statusColor, borderRadius: '0 0 7px 7px' }}>
+                </div>
+                <div
+                    className="flex h-16 w-full items-center justify-center"
+                    style={{
+                        background: statusColor
+                    }}>
                     <Icon fontSize={32} color={iconColor} />
-                </Box>
+                </div>
             </Stack>
         </Button>
     );

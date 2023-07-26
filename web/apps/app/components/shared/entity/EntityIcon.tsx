@@ -16,7 +16,7 @@ export function EntityIconByType(type: number) {
     }
 }
 
-export default function EntityIcon(entity: IEntityDetails | undefined) {
+export default function EntityIcon(entity: IEntityDetails | null | undefined) {
     const Icon = null;
 
     if (entity) {

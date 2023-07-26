@@ -1,32 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Signal.Core.Secrets;
+﻿using System.Net;
+using Microsoft.Azure.Functions.Worker.Http;
 
-namespace Signalco.Common.Channel;
+namespace Signalco.Api.Common.Health;
 
 public abstract class HealthStatusFunctionsBase
 {
-    private readonly ISecretsManager secretsManager;
-
-    protected HealthStatusFunctionsBase(
-        ISecretsManager secretsManager)
-    {
-        this.secretsManager = secretsManager ?? throw new ArgumentNullException(nameof(secretsManager));
-    }
-
-    protected async Task<IActionResult> HandleAsync()
-    {
-        // Keys we always want to keep hot
-        var warmupKeys = new List<string>
-        {
-            SecretKeys.Auth0.ApiIdentifier,
-            SecretKeys.Auth0.ClientSecretStation,
-            SecretKeys.Auth0.Domain,
-            SecretKeys.ProcessorAccessCode,
-            SecretKeys.StorageAccountConnectionString,
-        };
-
-        await Task.WhenAll(warmupKeys.Select(k => this.secretsManager.GetSecretAsync(k)));
-
-        return new OkResult();
-    }
+    protected Task<HttpResponseData> HandleAsync(HttpRequestData req) =>
+        Task.FromResult(req.CreateResponse(HttpStatusCode.OK));
 }

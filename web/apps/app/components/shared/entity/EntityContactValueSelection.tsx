@@ -1,7 +1,7 @@
 import React from 'react';
-import { Loadable } from '@signalco/ui';
-import useEntity from '../../../src/hooks/signalco/entity/useEntity';
+import { Loadable } from '@signalco/ui/dist/Loadable';
 import useContact from '../../../src/hooks/signalco/useContact';
+import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import InputContactValue from './InputContactValue';
 

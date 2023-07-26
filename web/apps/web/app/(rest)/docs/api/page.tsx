@@ -4,12 +4,26 @@ import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Security, Send } from '@signalco/ui-icons';
-import { Stack, Loadable, Chip, NavigatingButton, Typography, TextField, Divider, Badge, Alert, Button, Card, List, Tooltip, Box, Row, CardOverflow, ListTreeItem, SelectItems, CopyToClipboardInput } from '@signalco/ui';
-import { camelToSentenceCase, HttpOperation, ObjectDictAny } from '@signalco/js';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Tooltip } from '@signalco/ui/dist/Tooltip';
+import type { ColorPaletteProp } from '@signalco/ui/dist/theme';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
+import { Row } from '@signalco/ui/dist/Row';
+import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
+import { List } from '@signalco/ui/dist/List';
+import { Input } from '@signalco/ui/dist/Input';
+import { Divider } from '@signalco/ui/dist/Divider';
+import { CopyToClipboardInput } from '@signalco/ui/dist/CopyToClipboardInput';
+import { Chip } from '@signalco/ui/dist/Chip';
+import { Card, CardOverflow } from '@signalco/ui/dist/Card';
+import { Button } from '@signalco/ui/dist/Button';
+import { Alert } from '@signalco/ui/dist/Alert';
+import { camelToSentenceCase, HttpOperation, ObjectDictAny, objectWithKey } from '@signalco/js';
 import { useLoadAndError, useSearchParam } from '@signalco/hooks';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
-
-type ChipColors = 'neutral' | 'primary' | 'danger' | 'info' | 'success' | 'warning';
 
 function HttpOperationChip(props: { operation?: HttpOperation | undefined, small?: boolean }) {
     const color = ({
@@ -17,14 +31,14 @@ function HttpOperationChip(props: { operation?: HttpOperation | undefined, small
         'post': 'info',
         'put': 'warning',
         'delete': 'danger'
-    }[props.operation?.toLowerCase() ?? ''] ?? 'neutral') as ChipColors;
+    }[props.operation?.toLowerCase() ?? ''] ?? 'neutral') as ColorPaletteProp;
 
     return <Chip color={color} size={props.small ? 'sm' : 'md'}>{props.operation?.toUpperCase()}</Chip>;
 }
 
 type ApiOperationProps = { path: string, operation: OpenAPIV3.HttpMethods, info: OpenAPIV3.OperationObject };
 
-function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | undefined): any | undefined {
+function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject | undefined): unknown | undefined {
     const schemaObj = resolveRef(api, schema);
     if (typeof schemaObj === 'undefined') return undefined;
 
@@ -83,11 +97,11 @@ function Schema(props: { name: string, schema: OpenAPIV3.ReferenceObject | OpenA
                 <Typography>{props.name}</Typography>
                 <Typography level="body2">{schemaResolved?.type}</Typography>
             </Row>
-            <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', px: 2 }}>
+            <div className="border-l px-2">
                 {schemaResolved?.type === 'array'
                     ? <ArraySchema name={props.name} schema={schemaResolved as OpenAPIV3.ArraySchemaObject} />
                     : <NonArraySchema name={props.name} schema={schemaResolved as OpenAPIV3.NonArraySchemaObject} />}
-            </Box>
+            </div>
         </div>
     );
 }
@@ -133,7 +147,7 @@ function ApiOperation(props: ApiOperationProps) {
                     <Card>
                         {parametersResolved.map((parameter, i) => (
                             <React.Fragment key={parameter.name}>
-                                <Box sx={{ p: 2 }}>
+                                <div className="p-2">
                                     <Stack>
                                         <Row spacing={1} justifyContent="space-between">
                                             <Typography textTransform="uppercase">{parameter.name}</Typography>
@@ -144,7 +158,7 @@ function ApiOperation(props: ApiOperationProps) {
                                         </Row>
                                         {parameter.description && <Typography level="body2">{parameter.description}</Typography>}
                                     </Stack>
-                                </Box>
+                                </div>
                                 {i != Object.keys(parametersResolved).length && <Divider />}
                             </React.Fragment>
                         ))}
@@ -176,12 +190,12 @@ function ApiOperation(props: ApiOperationProps) {
                         if (!responseObj) return undefined;
                         return (
                             <React.Fragment key={responseCode}>
-                                <Box sx={{ p: 2 }}>
+                                <div className="p-2">
                                     <Stack>
                                         <ResponseStatusCode statusCode={responseCodeNumber} />
                                         <Typography level="body2">{responseObj.description}</Typography>
                                     </Stack>
-                                </Box>
+                                </div>
                                 {i != (Object.keys(responses).length - 1) && <Divider />}
                             </React.Fragment>
                         );
@@ -194,11 +208,10 @@ function ApiOperation(props: ApiOperationProps) {
 
 function ResponseStatusCode(props: { statusCode: number }) {
     return (
-        <Badge color={props.statusCode < 300 ? 'success' : (props.statusCode < 500 ? 'warning' : 'danger')}>
-            <div style={{ paddingRight: 4 }}>
-                <Typography>{props.statusCode}</Typography>
-            </div>
-        </Badge>
+        <Row spacing={1}>
+            <Chip color={props.statusCode < 300 ? 'success' : (props.statusCode < 500 ? 'warning' : 'error')} />
+            <Typography>{props.statusCode}</Typography>
+        </Row>
     );
 }
 
@@ -226,7 +239,7 @@ function Nav() {
         const newPath = newValue.startsWith('path-') ? newValue.substring(5, newValue.lastIndexOf('-')) : undefined;
         const newOperation = newValue.startsWith('op-') ? newValue.substring(newValue.lastIndexOf('-') + 1) : undefined;
 
-        const newSearchParams = new URLSearchParams(searchParams);
+        const newSearchParams = new URLSearchParams({ ...searchParams.entries });
         if (newTagName) newSearchParams.set('tag', newTagName); else newSearchParams.delete('tag');
         if (newPath) newSearchParams.set('path', newPath); else newSearchParams.delete('path');
         if (newOperation) newSearchParams.set('op', newOperation); else newSearchParams.delete('op');
@@ -239,7 +252,9 @@ function Nav() {
         <Stack spacing={2}>
             <Row spacing={1}>
                 <Typography>{info.title}</Typography>
-                <Chip size="sm" variant="soft">v{info.version}</Chip>
+                <Chip size="sm" variant="soft">
+                    <Typography level="body3">v{info.version}</Typography>
+                </Chip>
                 {info.license && <Chip size="sm">{info.license.name}</Chip>}
             </Row>
             <List>
@@ -257,12 +272,12 @@ function Nav() {
                                 selected={pathName === op.pathName && operationName === op.operationName}
                                 onSelected={handleItemSelected}
                                 label={(
-                                    <Box sx={{ py: 0.5 }}>
+                                    <div className="py-1">
                                         <Row justifyContent="space-between" spacing={1}>
                                             <Typography noWrap level="body2">{op.pathName}</Typography>
                                             <HttpOperationChip operation={op.operationName} small />
                                         </Row>
-                                    </Box>
+                                    </div>
                                 )} />
                         ))}
                     </ListTreeItem>
@@ -279,9 +294,15 @@ function resolveRef<T>(api: OpenAPIV3.Document, obj: T | OpenAPIV3.ReferenceObje
     const refSplit = refObj.$ref.split('/')
     if (refSplit.length <= 1 || refSplit[0] !== '#')
         return obj as T; // Don't support relative for now
-    let curr: any = api;
-    for (let i = 1; i < refSplit.length && typeof curr !== 'undefined'; i++)
-        curr = curr[refSplit[i]];
+    let curr: unknown = api;
+    for (let i = 1; i < refSplit.length && typeof curr !== 'undefined'; i++) {
+        const nextKey = refSplit[i];
+        const next = objectWithKey(curr, nextKey)?.nextKey;
+        if (next == null) {
+            break;
+        }
+        curr = next;
+    }
     return curr as unknown as T;
 }
 
@@ -315,22 +336,22 @@ function Route() {
         .filter(i => typeof operationName === 'undefined' || (i.operationName.toLowerCase() === operationName.toLowerCase()));
 
     return (
-        <Box py={2} pr={2}>
+        <div className="py-2 pr-2">
             <Stack spacing={4}>
                 {pathOperations.map(({ pathName, operationName, httpOperation, operation }) => (
-                    <Card variant="plain" key={`path-${pathName}-${operationName}`}>
+                    <Card key={`path-${pathName}-${operationName}`}>
                         <Row spacing={2} alignItems="start">
-                            <Box sx={{ flexGrow: 1 }}>
+                            <div className="grow">
                                 <ApiOperation path={pathName} operation={httpOperation} info={operation} />
-                            </Box>
-                            <Box sx={{ width: '40%' }}>
+                            </div>
+                            <div className="w-1/3">
                                 <Actions path={pathName} operation={httpOperation} info={operation} />
-                            </Box>
+                            </div>
                         </Row>
                     </Card>
                 ))}
             </Stack>
-        </Box>
+        </div>
     );
 }
 
@@ -359,7 +380,9 @@ function SecurityInput(props: { security: OpenAPIV3.SecurityRequirementObject })
                                 {httpSource.description && <Typography level="body2">{httpSource.description}</Typography>}
                                 {httpSource.bearerFormat && <Typography level="body2">{httpSource.bearerFormat}</Typography>}
                             </Row>
-                            <TextField size="sm" variant="soft" placeholder="Empty" label={camelToSentenceCase(httpSource.scheme)}></TextField>
+                            <Input
+                                placeholder="Empty"
+                                label={camelToSentenceCase(httpSource.scheme)} />
                         </Stack>
                     );
                 } else if (source) {
@@ -380,7 +403,14 @@ function SecurityBadge(props: { security: OpenAPIV3.SecurityRequirementObject })
             {info.map(source => {
                 if (source && source.type === 'http') {
                     const httpSource = source as OpenAPIV3.HttpSecurityScheme;
-                    return <Chip variant="outlined" startDecorator={<Security fontSize="small" />} key={httpSource.scheme}>{camelToSentenceCase(httpSource.scheme)}</Chip>;
+                    return (
+                        <Chip
+                            variant="outlined"
+                            startDecorator={<Security size={18} />}
+                            key={httpSource.scheme}>
+                            {camelToSentenceCase(httpSource.scheme)}
+                        </Chip>
+                    );
                 } else if (source) {
                     return <Typography key={source.type} color="danger" bold textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
@@ -437,8 +467,8 @@ function Actions(props: ActionsProps) {
             {servers && servers.length > 1 && (
                 <SelectItems
                     label="Server"
-                    value={selectedServer ? [selectedServer] : []}
-                    onChange={() => { console.debug('TODO implement server selection') }}
+                    value={selectedServer}
+                    onValueChange={() => { console.debug('TODO implement server selection') }}
                     // onChange={(v) => setSelectedServer(v[0])}
                     items={servers.map(s => ({
                         value: s.url,
@@ -450,7 +480,11 @@ function Actions(props: ActionsProps) {
                         )
                     }))} />
             )}
-            <CopyToClipboardInput id="base-address" label="Base address" fullWidth sx={{ fontFamily: 'Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace', fontSize: '0.8em' }} value={selectedServerUrl} />
+            <CopyToClipboardInput
+                id="base-address"
+                label="Base address"
+                className="w-full font-mono text-sm"
+                value={selectedServerUrl} />
             {security && (
                 <Stack spacing={1}>
                     <Typography textTransform="uppercase">Authentication</Typography>
@@ -460,25 +494,38 @@ function Actions(props: ActionsProps) {
                 </Stack>
             )}
             {requestBodyResolved && (
-                <Stack spacing={1}>
-                    <Typography textTransform="uppercase">Body</Typography>
-                    <Stack>
-                        <Typography textAlign="right" level="body3">application/json</Typography>
-                        <Card>
-                            <CardOverflow>
-                                {/* TODO: Use CodeEditor component with language */}
-                                {/* <CodeEditor
+                <Stack>
+                    <Row spacing={1} style={{ width: '100%' }} justifyContent="space-between">
+                        <div style={{ paddingBottom: '8px' }}>
+                            <Typography textTransform="uppercase">Body</Typography>
+                        </div>
+                        <div style={{ alignSelf: 'flex-end' }}>
+                            <Typography textAlign="right" level="body3">application/json</Typography>
+                        </div>
+                    </Row>
+                    <Card>
+                        <CardOverflow className="relative">
+                            {/* TODO: Use CodeEditor component with language */}
+                            {/* <CodeEditor
                                     language="json"
                                     code={requestBodyValue}
                                     setCode={setRequestBodyValue}
                                     height={300} /> */}
-                                <textarea
-                                    value={requestBodyValue}
-                                    onChange={(e) => setRequestBodyValue(e.target.value)}
-                                    rows={10} />
-                            </CardOverflow>
-                        </Card>
-                    </Stack>
+                            <textarea
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    fontSize: '0.8em',
+                                    resize: 'none',
+                                    border: 'none',
+                                    background: 'transparent',
+                                    padding: '0.5em'
+                                }}
+                                value={requestBodyValue}
+                                onChange={(e) => setRequestBodyValue(e.target.value)}
+                                rows={10} />
+                        </CardOverflow>
+                    </Card>
                 </Stack>
             )}
             <Button
@@ -525,21 +572,21 @@ export default function DocsApiPage() {
         <ApiContext.Provider value={api}>
             <Stack>
                 {error && (
-                    <Alert color="danger" variant="solid">
+                    <Alert color="danger">
                         <Typography bold>{'Couldn\'t load OpenAPI docs'}</Typography>
                         <Typography level="body2">{error}</Typography>
                     </Alert>
                 )}
                 <Row>
-                    <Box sx={{ alignSelf: 'start', minWidth: { xs: '230px', md: '320px' }, px: 2, py: 4 }}>
+                    <div className="min-w-[230px] self-start px-2 py-4 md:min-w-[320px]">
                         <Loadable isLoading={isLoading || !api} loadingLabel="Loading API">
                             <Nav />
                         </Loadable>
-                    </Box>
+                    </div>
                     <Divider />
-                    <Box flexGrow={1}>
+                    <div className="grow">
                         <Route />
-                    </Box>
+                    </div>
                 </Row>
             </Stack>
         </ApiContext.Provider>

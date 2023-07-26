@@ -1,3 +1,2 @@
-export { default } from './FilterList';
-export { ItemsShowMore } from './FilterList';
-export { type FilterListProps, type FilterListItem } from './FilterList';
+export { FilterList, ItemsShowMore } from './FilterList';
+export type { FilterListProps, FilterListItem } from './FilterList';

@@ -1,7 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 import { Add } from '@signalco/ui-icons';
-import { Stack, Row , AspectRatio, Card, CardOverflow, Grid, IconButton, TextField, Typography , Box } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Input } from '@signalco/ui/dist/Input';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Card, CardOverflow } from '@signalco/ui/dist/Card';
 import { widgetType } from '../widgets/Widget';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
 
@@ -77,34 +82,31 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
 
     return (
         <Stack spacing={4}>
-            <TextField placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />
-            <Box sx={{ overflowY: 'auto', overflowX: 'hidden' }}>
-                <Grid container spacing={2} justifyContent="center">
+            <Input placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />
+            <div className="overflow-y-auto overflow-x-hidden">
+                <div className="grid auto-cols-max justify-center gap-2">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (
-                        <Grid key={`${availableWidget.type}-${index}`}>
-                            <Card sx={{ width: '270px' }}>
-                                <Row spacing={1} justifyContent="space-between">
-                                    <div>
-                                        <Typography>{availableWidget.name}</Typography>
-                                        <Typography level="body2">{availableWidget.description}</Typography>
-                                    </div>
-                                    <IconButton disabled={props.onAddWidget == null} aria-label="Add to dashboard" onClick={() => props.onAddWidget && props.onAddWidget(Array.isArray(availableWidget.type) ? availableWidget.type[0] : availableWidget.type)}>
-                                        <Add />
-                                    </IconButton>
-                                </Row>
-                                <CardOverflow sx={{ pt: 2 }}>
-                                    <AspectRatio ratio={1}>
-                                        <Image
-                                            src={availableWidget.preview}
-                                            alt={`${availableWidget.name} Preview`}
-                                            fill sizes="100vw" />
-                                    </AspectRatio>
-                                </CardOverflow>
-                            </Card>
-                        </Grid>
+                        <Card key={`${availableWidget.type}-${index}`} className="w-64">
+                            <Row spacing={1} justifyContent="space-between">
+                                <div>
+                                    <Typography>{availableWidget.name}</Typography>
+                                    <Typography level="body2">{availableWidget.description}</Typography>
+                                </div>
+                                <IconButton disabled={props.onAddWidget == null} aria-label="Add to dashboard" onClick={() => props.onAddWidget && props.onAddWidget(Array.isArray(availableWidget.type) ? availableWidget.type[0] : availableWidget.type)}>
+                                    <Add />
+                                </IconButton>
+                            </Row>
+                            <CardOverflow className="pt-2">
+                                <Image
+                                    style={{ aspectRatio: 1 }}
+                                    src={availableWidget.preview}
+                                    alt={`${availableWidget.name} Preview`}
+                                    fill sizes="100vw" />
+                            </CardOverflow>
+                        </Card>
                     ))}
-                </Grid>
-            </Box>
+                </div>
+            </div>
         </Stack>
     );
 }
