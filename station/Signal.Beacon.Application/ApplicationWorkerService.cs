@@ -10,8 +10,7 @@ using Signal.Beacon.Application.Processing;
 using Signal.Beacon.Application.Signal.SignalR;
 using Signal.Beacon.Application.Signal.Station;
 using Signal.Beacon.Core.Conducts;
-using Signal.Beacon.Core.Configuration;
-using Signal.Beacon.Core.Workers;
+using Signal.Beacon.Core.Entity;
 
 namespace Signal.Beacon.Application;
 
@@ -22,9 +21,10 @@ internal class ApplicationWorkerService : IInternalWorkerService
     private readonly ISignalSignalRConductsHubClient conductsHubClient;
     private readonly IConductSubscriberClient conductSubscriberClient;
     private readonly IUpdateService updateService;
-    private readonly IConfigurationService configurationService;
     private readonly IConductManager conductManager;
     private readonly IWorkerServiceManager workerServiceManager;
+    private readonly IStationStateService stationStateService;
+    private readonly IEntityService entityService;
     private readonly ILogger<ApplicationWorkerService> logger;
 
     public ApplicationWorkerService(
@@ -33,9 +33,10 @@ internal class ApplicationWorkerService : IInternalWorkerService
         ISignalSignalRConductsHubClient conductsHubClient,
         IConductSubscriberClient conductSubscriberClient,
         IUpdateService updateService,
-        IConfigurationService configurationService,
         IConductManager conductManager,
         IWorkerServiceManager workerServiceManager,
+        IStationStateService stationStateService,
+        IEntityService entityService,
         ILogger<ApplicationWorkerService> logger)
     {
         this.processor = processor ?? throw new ArgumentNullException(nameof(processor));
@@ -43,9 +44,10 @@ internal class ApplicationWorkerService : IInternalWorkerService
         this.conductsHubClient = conductsHubClient ?? throw new ArgumentNullException(nameof(conductsHubClient));
         this.conductSubscriberClient = conductSubscriberClient ?? throw new ArgumentNullException(nameof(conductSubscriberClient));
         this.updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
-        this.configurationService = configurationService ?? throw new ArgumentNullException(nameof(configurationService));
         this.conductManager = conductManager ?? throw new ArgumentNullException(nameof(conductManager));
         this.workerServiceManager = workerServiceManager ?? throw new ArgumentNullException(nameof(workerServiceManager));
+        this.stationStateService = stationStateService ?? throw new ArgumentNullException(nameof(stationStateService));
+        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
         
@@ -55,22 +57,39 @@ internal class ApplicationWorkerService : IInternalWorkerService
         _ = this.conductsHubClient.StartAsync(cancellationToken);
         await this.processor.StartAsync(cancellationToken);
         await this.conductManager.StartAsync(cancellationToken);
+        await this.RegisterConductsAsync(cancellationToken);
             
         this.conductSubscriberClient.Subscribe("station", this.StationConductHandler);
+    }
+
+    private async Task RegisterConductsAsync(CancellationToken cancellationToken = default)
+    {
+        var state = await this.stationStateService.GetAsync(cancellationToken);
+        if (string.IsNullOrWhiteSpace(state.Id))
+            throw new Exception("Can't register conducts without station id");
+
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "update"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "restartStation"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "updateSystem"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "restartSystem"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "shutdownSystem"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "workerService:start"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "workerService:stop"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "beginDiscovery"), null, cancellationToken);
     }
 
     private async Task StationConductHandler(IEnumerable<IConduct> conducts, CancellationToken cancellationToken)
     {
         this.logger.LogDebug("Processing station conducts...");
-            
-        var config = await this.configurationService.LoadAsync<StationConfiguration>("beacon.json", cancellationToken);
-        if (string.IsNullOrWhiteSpace(config.Id))
-            throw new Exception("Can't generate state report without id.");
+
+        var state = await this.stationStateService.GetAsync(cancellationToken);
+        if (string.IsNullOrWhiteSpace(state.Id))
+            throw new Exception("Can't process conduct without station id");
             
         foreach (var conduct in conducts)
         {
             // Skip if not for this station
-            if (conduct.Pointer.EntityId != config.Id)
+            if (conduct.Pointer.EntityId != state.Id)
             {
                 this.logger.LogDebug("Ignored conduct because target is not this station. Conduct: {@Conduct}", conduct);
                 continue;

@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Signal.Beacon.Core.Entity;
-using Signal.Beacon.Core.Signal;
 
 namespace Signal.Beacon.Application.Signal.Client.Entity;
 

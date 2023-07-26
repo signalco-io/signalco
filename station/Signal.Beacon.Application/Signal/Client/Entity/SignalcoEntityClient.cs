@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Signal.Beacon.Core.Entity;
-using Signal.Beacon.Core.Signal;
 
 namespace Signal.Beacon.Application.Signal.Client.Entity;
 

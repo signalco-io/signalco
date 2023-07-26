@@ -64,26 +64,24 @@ internal class StationStateManager : IStationStateManager
             var state = await this.stationStateService.GetAsync(cancellationToken);
 
             // Ensure station entity exists
-            var stationEntityIds = (await this.entitiesDao.GetByContactValueAsync(
-                    "signalco", "identifier", state.Id, cancellationToken))
-                .Select(s => s.Id)
-                .ToList();
-            if (!stationEntityIds.Any())
-            {
-                stationEntityIds.Add(await this.entityService.UpsertAsync(
+            var stationEntity = await this.entitiesDao.GetAsync(state.Id, cancellationToken);
+            if (stationEntity == null)
+                await this.entityService.UpsertAsync(
                     EntityType.Station,
                     state.Id,
                     "Signalco Station",
-                    cancellationToken));
-            }
+                    cancellationToken);
 
             // Report state
-            foreach (var stationEntityId in stationEntityIds)
-            {
-                var pointer = new ContactPointer(stationEntityId, "signalco", string.Empty);
-                await this.entityService.ContactSetAsync(pointer with {ContactName = "version"}, state.Version, cancellationToken);
-                await this.entityService.ContactSetAsync(pointer with {ContactName = "channels"}, JsonSerializer.Serialize(state.WorkerServices), cancellationToken);
-            }
+            var pointer = new ContactPointer(state.Id, "signalco", string.Empty);
+            await this.entityService.ContactSetAsync(
+                pointer with {ContactName = "version"},
+                state.Version,
+                cancellationToken);
+            await this.entityService.ContactSetAsync(
+                pointer with {ContactName = "channels"},
+                JsonSerializer.Serialize(state.WorkerServices),
+                cancellationToken);
         }
         catch (Exception ex)
         {
