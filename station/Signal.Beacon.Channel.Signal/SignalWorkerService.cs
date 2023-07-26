@@ -26,7 +26,7 @@ public class SignalWorkerService : IWorkerService
 
     private SignalWorkerServiceConfiguration configuration = new();
     private CancellationToken startCancellationToken;
-    private string channelId;
+    private string? channelId;
 
     public SignalWorkerService(
         IEntityService entityService,
@@ -55,7 +55,7 @@ public class SignalWorkerService : IWorkerService
         this.configuration =
             await this.configurationService.LoadAsync<SignalWorkerServiceConfiguration>(
                 entityId,
-                "signalco",
+                SignalChannels.DeviceChannel,
                 cancellationToken);
 
         if (this.configuration.Servers.Any())
@@ -76,17 +76,18 @@ public class SignalWorkerService : IWorkerService
             try
             {
                 var entityId = conduct.Pointer.EntityId;
-                var entity = await this.entitiesDao.GetAsync(entityId, cancellationToken);
-                if (entity == null)
-                    throw new Exception($"Unknown entity {conduct.Pointer.EntityId}");
+                var entity = await this.entitiesDao.GetAsync(entityId, cancellationToken)
+                             ?? throw new Exception($"Unknown entity {conduct.Pointer.EntityId}");
 
                 var identifier = entity.Contact(SignalChannels.DeviceChannel, "identifier")?.ValueSerialized;
                 if (string.IsNullOrWhiteSpace(identifier))
                     throw new Exception($"Entity not configured {entity?.Id}");
-                
+
                 var client = this.clients.FirstOrDefault();
                 if (client != null)
-                    await client.PublishAsync($"{conduct.Pointer.ChannelName}/{identifier}/{conduct.Pointer.ContactName}/set", conduct.ValueSerialized);
+                    await client.PublishAsync(
+                        $"{conduct.Pointer.ChannelName}/{identifier}/{conduct.Pointer.ContactName}/set",
+                        conduct.ValueSerialized);
             }
             catch (Exception ex)
             {
@@ -187,7 +188,7 @@ public class SignalWorkerService : IWorkerService
     private async Task TelemetryHandlerAsync(string entityId, MqttMessage message)
     {
         // Check topic
-        var entity = await this.entitiesDao.GetAsync(entityId);
+        var entity = await this.entitiesDao.GetAsync(entityId, this.startCancellationToken);
         var identifier = entity?.Contact(SignalChannels.DeviceChannel, "identifier")?.ValueSerialized;
         var isTelemetry = $"{SignalChannels.DeviceChannel}/{identifier}" == message.Topic;
         if (!isTelemetry)
@@ -218,7 +219,7 @@ public class SignalWorkerService : IWorkerService
         {
             this.configuration.Servers.Add(new SignalWorkerServiceConfiguration.MqttServer
                 { Url = availableBroker.IpAddress });
-            await this.configurationService.SaveAsync(this.channelId, "signalco", this.configuration, cancellationToken);
+            await this.configurationService.SaveAsync(this.channelId, SignalChannels.DeviceChannel, this.configuration, cancellationToken);
             this.StartMqttClientAsync(
                 new SignalWorkerServiceConfiguration.MqttServer
                     {Url = availableBroker.IpAddress});
