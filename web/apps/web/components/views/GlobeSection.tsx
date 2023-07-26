@@ -10,7 +10,7 @@ export function GlobeSection() {
     });
 
     return (
-        <div ref={observe} className="min-h-[12vh] sm:min-h-[20vh] md:min-h-[380px]">
+        <div ref={observe} className="min-h-[12vh] sm:min-h-[20vh] md:min-h-[300px]">
             {inView && <GlobePart />}
         </div>
     );

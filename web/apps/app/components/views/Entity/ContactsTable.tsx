@@ -231,7 +231,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                                             {isJson(c.valueSerialized)
                                                 ? <DisplayJson json={c.valueSerialized} />
                                                 : <Typography>{c.valueSerialized}</Typography>}
-                                            <div className="text-xs text-muted">
+                                            <div className="text-xs text-muted-foreground">
                                                 <Timeago date={c.timeStamp} live />
                                             </div>
                                         </Stack>

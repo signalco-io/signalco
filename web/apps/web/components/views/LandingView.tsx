@@ -31,8 +31,7 @@ export default function LandingPageView() {
                 <CounterIndicator count={0} />
                 <StepContent
                     header="Developers"
-                    subtitle="Signalco is free and open source project run by small team of enthusiasts."
-                    direction="horizontal">
+                    subtitle="Signalco is free and open source project run by small team of enthusiasts.">
                     <Stack alignItems="center" className="self-center">
                         <Button
                             variant="solid"
@@ -77,7 +76,7 @@ export default function LandingPageView() {
             </StepContent>
             <GlobeSection />
             <Divider />
-            <SectionCenter narrow className="bg-current">
+            <SectionCenter narrow className="bg-muted">
                 <div className="flex flex-col items-center justify-center gap-4 py-4 md:flex-row md:gap-24">
                     <DataPart value="8" subtitle="Integrations" />
                     <DataPart value="500+" subtitle="Automations per day" />

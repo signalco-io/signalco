@@ -10,15 +10,19 @@ export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
     'aria-label'?: string | undefined;
 };
 
-export function Link({ className, href, ...rest }: LinkProps) {
+export function Link({ className, href, children, ...rest }: LinkProps) {
     return (
         <NextLink
             href={href}
-            className={cx('no-underline text-muted', className)}
+            className={cx(
+                typeof children === 'string' && 'no-underline text-muted-foreground',
+                className
+            )}
             target={isAbsoluteUrl(href) ? '_blank' : '_self'}
             passHref
             prefetch={false}
             {...rest}>
+            {children}
         </NextLink>
     );
 }
