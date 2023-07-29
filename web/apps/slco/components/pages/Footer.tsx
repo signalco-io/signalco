@@ -53,17 +53,17 @@ export default function Footer() {
                                 <Typography level="body3">Copyright © {now().getFullYear()} signalco. All rights reserved.</Typography>
                                 <Row spacing={1}>
                                     <IconButton
-                                        aria-label="Twitter link"
-                                        href="https://twitter.com/signalco_io">
-                                        <Typography>tw</Typography>
+                                        aria-label="X formerly known as Twitter"
+                                        href="https://x.com/signalco_io">
+                                        <Typography>X</Typography>
                                     </IconButton>
                                     <IconButton
-                                        aria-label="reddit link"
+                                        aria-label="reddit"
                                         href="https://www.reddit.com/r/signalco/">
                                         <Typography>/r</Typography>
                                     </IconButton>
                                     <IconButton
-                                        aria-label="GitHub link"
+                                        aria-label="GitHub"
                                         href="https://github.com/signalco-io/signalco">
                                         <Typography>gh</Typography>
                                     </IconButton>

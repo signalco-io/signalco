@@ -10,17 +10,17 @@ export function FooterInfo() {
             <small className="text-center">Copyright © {now().getFullYear()} signalco. All rights reserved.</small>
             <Row spacing={4} alignItems="stretch">
                 <Link
-                    aria-label="Twitter link"
-                    href="https://twitter.com/signalco_io">
-                    tw
+                    aria-label="X"
+                    href="https://x.com/signalco_io">
+                    X
                 </Link>
                 <Link
-                    aria-label="reddit link"
+                    aria-label="reddit"
                     href="https://www.reddit.com/r/signalco/">
                     /r
                 </Link>
                 <Link
-                    aria-label="GitHub link"
+                    aria-label="GitHub"
                     href="https://github.com/signalco-io/signalco">
                     gh
                 </Link>
