@@ -415,7 +415,7 @@ internal class PhilipsHueWorkerService : IWorkerService
         }
     }
         
-    public Task StopAsync(CancellationToken cancellationToken)
+    public Task StopAsync()
     {
         this.clipClients.ForEach(cc => cc.StopEventStream());
         return Task.CompletedTask;

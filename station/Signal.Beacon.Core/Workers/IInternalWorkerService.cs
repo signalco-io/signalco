@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace Signal.Beacon.Core.Workers;
 
-public interface IWorkerService
+public interface IInternalWorkerService
 {
-    Task StartAsync(string entityId, CancellationToken cancellationToken);
+    Task StartAsync(CancellationToken cancellationToken);
 
     Task StopAsync();
 }

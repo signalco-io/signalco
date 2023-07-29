@@ -10,8 +10,10 @@ public interface IWorkerServiceManager
 {
     event EventHandler<IWorkerServiceManagerStateChangeEventArgs> OnChange;
     IEnumerable<StationWorkerServiceState> WorkerServices { get; }
+    Task StartAllInternalWorkerServicesAsync(CancellationToken cancellationToken = default);
     Task StartAllWorkerServicesAsync(CancellationToken cancellationToken = default);
     Task StopAllWorkerServicesAsync();
+    Task StopAllInternalWorkerServicesAsync();
     Task StartWorkerServiceAsync(string entityId, CancellationToken cancellationToken = default);
     Task StopWorkerServiceAsync(string entityId, CancellationToken cancellationToken = default);
     void BeginDiscovery();

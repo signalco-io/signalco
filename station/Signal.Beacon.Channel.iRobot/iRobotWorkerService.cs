@@ -533,7 +533,7 @@ internal class iRobotWorkerService : IWorkerService
         }
     }
 
-    public Task StopAsync(CancellationToken cancellationToken)
+    public Task StopAsync()
     {
         return Task.CompletedTask;
     }

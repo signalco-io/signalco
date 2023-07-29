@@ -373,7 +373,7 @@ internal class MiFloraWorkerService : IWorkerService
         }
     }
 
-    public Task StopAsync(CancellationToken cancellationToken)
+    public Task StopAsync()
     {
         try
         {

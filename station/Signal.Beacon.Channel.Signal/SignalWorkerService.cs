@@ -51,7 +51,7 @@ public class SignalWorkerService : IWorkerService
     {
         this.channelId = entityId;
         this.startCancellationToken = cancellationToken;
-        this.startCancellationToken.Register(() => _ = this.StopAsync(CancellationToken.None));
+        this.startCancellationToken.Register(() => _ = this.StopAsync());
         this.configuration =
             await this.configurationService.LoadAsync<SignalWorkerServiceConfiguration>(
                 entityId,
@@ -81,7 +81,7 @@ public class SignalWorkerService : IWorkerService
 
                 var identifier = entity.Contact(SignalChannels.DeviceChannel, "identifier")?.ValueSerialized;
                 if (string.IsNullOrWhiteSpace(identifier))
-                    throw new Exception($"Entity not configured {entity?.Id}");
+                    throw new Exception($"Entity not configured {entity.Id}");
 
                 var client = this.clients.FirstOrDefault();
                 if (client != null)
@@ -226,11 +226,11 @@ public class SignalWorkerService : IWorkerService
         }
     }
         
-    public async Task StopAsync(CancellationToken cancellationToken)
+    public async Task StopAsync()
     {
         this.logger.LogDebug("Stopping Signal worker service...");
 
         foreach (var mqttClient in this.clients) 
-            await mqttClient.StopAsync(cancellationToken);
+            await mqttClient.StopAsync(CancellationToken.None);
     }
 }

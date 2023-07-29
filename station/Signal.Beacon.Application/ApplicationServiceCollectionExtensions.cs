@@ -16,6 +16,7 @@ using Signal.Beacon.Core.Mqtt;
 using Signal.Beacon.Core.Network;
 using Signal.Beacon.Core.Processes;
 using Signal.Beacon.Core.Shell;
+using Signal.Beacon.Core.Workers;
 
 namespace Signal.Beacon.Application;
 
@@ -49,7 +50,7 @@ public static class ApplicationServiceCollectionExtensions
         services.AddTransient<IPubSubTopicHub<IConduct>, PubSubTopicHub<IConduct>>();
 
         // Processing
-        services.AddSingleton<IProcessor, Processor>();
+        services.AddSingleton<IProcessorWorkerService, ProcessorWorkerService>();
 
         // Conducts
         services.AddSingleton<IConductManager, ConductManager>();

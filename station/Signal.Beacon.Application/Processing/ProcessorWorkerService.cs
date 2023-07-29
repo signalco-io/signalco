@@ -12,21 +12,21 @@ using Signal.Beacon.Core.Structures.Queues;
 
 namespace Signal.Beacon.Application.Processing;
 
-internal class Processor : IProcessor
+internal class ProcessorWorkerService : IProcessorWorkerService
 {
     private readonly IConditionEvaluatorService conditionEvaluatorService;
     private readonly IProcessesService processesService;
     private readonly IConductManager conductManager;
-    private readonly ILogger<Processor> logger;
+    private readonly ILogger<ProcessorWorkerService> logger;
 
     private readonly IDelayedQueue<Process> delayedTriggers = new DelayedQueue<Process>();
 
 
-    public Processor(
+    public ProcessorWorkerService(
         IConditionEvaluatorService conditionEvaluatorService,
         IProcessesService processesService,
         IConductManager conductManager,
-        ILogger<Processor> logger)
+        ILogger<ProcessorWorkerService> logger)
     {
         this.conditionEvaluatorService = conditionEvaluatorService ?? throw new ArgumentNullException(nameof(conditionEvaluatorService));
         this.processesService = processesService ?? throw new ArgumentNullException(nameof(processesService));
@@ -50,7 +50,7 @@ internal class Processor : IProcessor
             await this.EvaluateAndExecute(new[] { process }, cancellationToken);
     }
 
-    public Task StopAsync(CancellationToken cancellationToken)
+    public Task StopAsync()
     {
         return Task.CompletedTask;
     }

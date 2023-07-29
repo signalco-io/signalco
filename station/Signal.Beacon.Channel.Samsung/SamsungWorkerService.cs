@@ -165,9 +165,9 @@ internal class SamsungWorkerService : IWorkerService, IWorkerServiceWithDiscover
         this.tvRemotes.Add(remote);
     }
 
-    public async Task StopAsync(CancellationToken cancellationToken)
+    public async Task StopAsync()
     {
-        await this.configurationService.SaveAsync(this.channelId, SamsungChannels.SamsungChannel, this.configuration, cancellationToken);
+        await this.configurationService.SaveAsync(this.channelId, SamsungChannels.SamsungChannel, this.configuration, CancellationToken.None);
     }
 
     public async Task BeginDiscoveryAsync(CancellationToken cancellationToken)

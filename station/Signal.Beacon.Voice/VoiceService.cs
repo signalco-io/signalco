@@ -637,7 +637,7 @@ public class VoiceService : IWorkerService, IDisposable
         return false;
     }
 
-    public Task StopAsync(CancellationToken cancellationToken)
+    public Task StopAsync()
     {
         return Task.CompletedTask;
     }

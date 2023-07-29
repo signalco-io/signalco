@@ -109,6 +109,7 @@ public class Worker : BackgroundService
         await this.stationStateManager.BeginMonitoringStateAsync(stoppingToken);
 
         // Start worker services
+        await this.workerServiceManager.StartAllInternalWorkerServicesAsync(stoppingToken);
         await this.workerServiceManager.StartAllWorkerServicesAsync(stoppingToken);
 
         // Wait for cancellation token
@@ -117,6 +118,7 @@ public class Worker : BackgroundService
 
         // Stop services
         await this.workerServiceManager.StopAllWorkerServicesAsync();
+        await this.workerServiceManager.StopAllInternalWorkerServicesAsync();
     }
 
     private async void SignalcoClientAuthFlowOnOnTokenRefreshed(object? sender, AuthToken? e)

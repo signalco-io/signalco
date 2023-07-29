@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Signal.Beacon.Application.Conducts;
 using Signal.Beacon.Application.Lifetime;
-using Signal.Beacon.Application.Processing;
 using Signal.Beacon.Application.Signal.SignalR;
 using Signal.Beacon.Application.Signal.Station;
 using Signal.Beacon.Core.Conducts;
 using Signal.Beacon.Core.Entity;
+using Signal.Beacon.Core.Workers;
 
 namespace Signal.Beacon.Application;
 
 internal class ApplicationWorkerService : IInternalWorkerService
 {
-    private readonly IProcessor processor;
     private readonly ISignalSignalRDevicesHubClient devicesHubClient;
     private readonly ISignalSignalRConductsHubClient conductsHubClient;
     private readonly IConductSubscriberClient conductSubscriberClient;
@@ -28,7 +27,6 @@ internal class ApplicationWorkerService : IInternalWorkerService
     private readonly ILogger<ApplicationWorkerService> logger;
 
     public ApplicationWorkerService(
-        IProcessor processor,
         ISignalSignalRDevicesHubClient devicesHubClient,
         ISignalSignalRConductsHubClient conductsHubClient,
         IConductSubscriberClient conductSubscriberClient,
@@ -39,7 +37,6 @@ internal class ApplicationWorkerService : IInternalWorkerService
         IEntityService entityService,
         ILogger<ApplicationWorkerService> logger)
     {
-        this.processor = processor ?? throw new ArgumentNullException(nameof(processor));
         this.devicesHubClient = devicesHubClient ?? throw new ArgumentNullException(nameof(devicesHubClient));
         this.conductsHubClient = conductsHubClient ?? throw new ArgumentNullException(nameof(conductsHubClient));
         this.conductSubscriberClient = conductSubscriberClient ?? throw new ArgumentNullException(nameof(conductSubscriberClient));
@@ -55,14 +52,13 @@ internal class ApplicationWorkerService : IInternalWorkerService
     {
         _ = this.devicesHubClient.StartAsync(cancellationToken);
         _ = this.conductsHubClient.StartAsync(cancellationToken);
-        await this.processor.StartAsync(cancellationToken);
         await this.conductManager.StartAsync(cancellationToken);
-        await this.RegisterConductsAsync(cancellationToken);
+        await this.RegisterStationConductsAsync(cancellationToken);
             
         this.conductSubscriberClient.Subscribe("station", this.StationConductHandler);
     }
 
-    private async Task RegisterConductsAsync(CancellationToken cancellationToken = default)
+    private async Task RegisterStationConductsAsync(CancellationToken cancellationToken = default)
     {
         var state = await this.stationStateService.GetAsync(cancellationToken);
         if (string.IsNullOrWhiteSpace(state.Id))
@@ -156,7 +152,7 @@ internal class ApplicationWorkerService : IInternalWorkerService
     private void BeginWorkersDiscovery() => 
         this.workerServiceManager.BeginDiscovery();
 
-    public Task StopAsync(CancellationToken cancellationToken)
+    public Task StopAsync()
     {
         return Task.CompletedTask;
     }

@@ -140,11 +140,11 @@ internal class Zigbee2MqttWorkerService : IWorkerService
         }
     }
 
-    public async Task StopAsync(CancellationToken cancellationToken)
+    public async Task StopAsync()
     {
         this.cts.Cancel();
         if (this.client != null)
-            await this.client.StopAsync(cancellationToken);
+            await this.client.StopAsync(CancellationToken.None);
     }
 
     private async Task ConductHandler(IEnumerable<IConduct> conducts, CancellationToken cancellationToken)
