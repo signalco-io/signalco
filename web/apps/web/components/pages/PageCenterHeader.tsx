@@ -3,7 +3,7 @@ import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 
 type PageCenterHeaderProps = {
-    level?: ComponentProps<typeof Typography>["level"];
+    level?: ComponentProps<typeof Typography>['level'];
     header: string;
     subHeader?: string;
     secondary?: boolean;
