@@ -1,5 +1,3 @@
-'use client';
-
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { KnownPages } from '../../../src/knownPages';
