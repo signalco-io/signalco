@@ -1,4 +1,8 @@
-import { Avatar, Button, Icon, Row, Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Row } from '@signalco/ui/dist/Row';
+import { Icon } from '@signalco/ui/dist/Icon';
+import { Button } from '@signalco/ui/dist/Button';
+import { Avatar } from '@signalco/ui/dist/Avatar';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultTargetWithValueMultiple, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -46,10 +50,10 @@ export default function WidgetButton(props: WidgetSharedProps<ConfigProps>) {
     useWidgetOptions(stateOptions, props);
 
     return (
-        <Button sx={{ height: '100%', width: 'calc(100% - 2px)', justifyContent: 'start' }} variant="plain" onClick={handleActionRequest} >
+        <Button variant="plain" onClick={handleActionRequest}>
             <Row spacing={1}>
                 <Avatar size="lg">
-                    <Icon sx={{ fontSize: '2em !important' }}>{icon}</Icon>
+                    <Icon className="text-3xl">{icon}</Icon>
                 </Avatar>
                 {width > 1 && <Typography>{label}</Typography>}
             </Row>

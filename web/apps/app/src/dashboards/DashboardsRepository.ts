@@ -1,4 +1,4 @@
-import { arrayMax } from '@signalco/js';
+import { arrayMax, objectWithKey } from '@signalco/js';
 import IUser from '../users/IUser';
 import UserSettingsProvider from '../services/UserSettingsProvider';
 import IEntityDetails from '../entity/IEntityDetails';
@@ -90,7 +90,7 @@ function dashboardModelFromEntity(entity: IEntityDetails, order: number, favorit
     const configurationSerialized = configurationSerializedContact?.valueSerialized
 
     dashboard.widgets = (configurationSerialized != null
-        ? (JSON.parse(configurationSerialized).widgets ?? []) as Array<IWidget> // TODO: Construct models
+        ? (objectWithKey(JSON.parse(configurationSerialized), 'widgets')?.widgets ?? []) as Array<IWidget> // TODO: Construct models
         : [])
         .map((w, i) => ({ ...w, id: i.toString() }));
 
@@ -108,7 +108,7 @@ function dashboardModelFromEntity(entity: IEntityDetails, order: number, favorit
 export async function getAllAsync() {
     const dashboardEntities = await entitiesAsync(2);
     const currentFavorites = UserSettingsProvider.value<string[]>(DashboardsFavoritesLocalStorageKey, []);
-    return dashboardEntities.map((entity, i) => dashboardModelFromEntity(entity, i, currentFavorites));
+    return dashboardEntities?.map((entity, i) => dashboardModelFromEntity(entity, i, currentFavorites));
 }
 
 export async function saveDashboardAsync(dashboard: IDashboardSetModel) {

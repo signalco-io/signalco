@@ -1,13 +1,21 @@
 import { useState } from 'react';
 import { Clear, People, Send, Share } from '@signalco/ui-icons';
-import { Chip, Row, Stack, Tooltip, IconButton, TextField, List, ListItem, ListItemContent, ListDivider, GentleSlide } from '@signalco/ui';
+import { Tooltip } from '@signalco/ui/dist/Tooltip';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { ListItem } from '@signalco/ui/dist/ListItem';
+import { List } from '@signalco/ui/dist/List';
+import { Input } from '@signalco/ui/dist/Input';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { GentleSlide } from '@signalco/ui/dist/GentleSlide';
+import { Chip } from '@signalco/ui/dist/Chip';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import IUser from '../../src/users/IUser';
 import { requestAsync } from '../../src/services/HttpService';
 import useLocale from '../../src/hooks/useLocale';
 
 interface IShareEntityChipProps {
-    entity?: { id: string, sharedWith?: IUser[] };
+    entity?: { id: string, sharedWith?: IUser[] } | null;
     entityType: number;
     disableAction?: boolean;
     hideSingle?: boolean;
@@ -46,7 +54,7 @@ function ShareEntityModal({ entity, entityType, onClose }: IShareEntityModalProp
 
     return (
         <ConfigurationDialog
-            isOpen
+            open
             header={t('ShareWith')}
             headerActions={(
                 <Tooltip title={t('Share')}>
@@ -59,10 +67,10 @@ function ShareEntityModal({ entity, entityType, onClose }: IShareEntityModalProp
         >
             <GentleSlide appear={isShareWithNewOpen} direction="down" collapsedWhenHidden duration={200}>
                 <Row spacing={2} justifyContent="end">
-                    <TextField
+                    <Input
                         placeholder={t('EmailAddress')}
                         type="email"
-                        sx={{ maxWidth: '270px' }}
+                        className="max-w-[270px]"
                         onChange={(e) => setShareWithNewEmail(e.target.value)} />
                     <Row>
                         <Tooltip title={t('SendInvitation')}>
@@ -75,20 +83,9 @@ function ShareEntityModal({ entity, entityType, onClose }: IShareEntityModalProp
                 </Row>
             </GentleSlide>
             <Stack spacing={1}>
-                <List variant="outlined" sx={{
-                    borderRadius: 'sm',
-                }}>
-                    {entity.sharedWith?.map((u, i) => (
-                        <>
-                            <ListItem key={u.id}>
-                                <ListItemContent>
-                                    {u.fullName ?? u.email}
-                                </ListItemContent>
-                            </ListItem>
-                            {i < (entity.sharedWith?.length ?? 0) - 1 && (
-                                <ListDivider />
-                            )}
-                        </>
+                <List>
+                    {entity.sharedWith?.map((u) => (
+                        <ListItem key={u.id} label={u.fullName ?? u.email} />
                     ))}
                 </List>
             </Stack>

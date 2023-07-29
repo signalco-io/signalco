@@ -2,42 +2,29 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Container, Box, Fade } from '@signalco/ui';
+import { Fade } from '@signalco/ui/dist/Fade';
+import { Container } from '@signalco/ui/dist/Container';
 import { useIsServer, useTimeout } from '@signalco/hooks';
 const Globe = dynamic(() => import('./Globe'));
 
 function GlobeSection() {
     const [appear, setAppear] = useState(false);
-    useTimeout(() => setAppear(true), 100);
+    useTimeout(() => setAppear(true), 200);
 
     const isServer = useIsServer();
 
     return (
         <Container>
             <Fade duration={2000} appear={appear}>
-                <Box sx={{
-                    overflow: 'hidden',
-                }}>
-                    <Box sx={{
-                        minHeight: { xs: '12vh', sm: '20vh', md: '380px' },
-                        display: 'flex',
-                        justifyContent: 'center',
-                        position: 'relative'
-                    }}>
-                        <Box sx={{
-                            position: 'absolute',
-                            transform: 'translateY(-8%)',
-                            width: '1100px',
-                            height: '1100px',
-                            maxWidth: '100vw!important',
-                            maxHeight: '100vw!important'
-                        }}>
+                <div className="overflow-hidden">
+                    <div className="relative flex min-h-[12vh] justify-center sm:min-h-[20vh] md:min-h-[300px]">
+                        <div className="absolute h-[1000px] max-h-[700vw!important] w-[1000px] max-w-[80vw!important]">
                             {!isServer && (
                                 <Globe />
                             )}
-                        </Box>
-                    </Box>
-                </Box>
+                        </div>
+                    </div>
+                </div>
             </Fade>
         </Container>
     );

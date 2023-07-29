@@ -1,2 +1,1 @@
-export { default } from './Grow';
-export {type GrowProps} from './Grow';
+export {Grow, type GrowProps} from './Grow';

@@ -1,6 +1,15 @@
 import { useMemo } from 'react';
 import { Close, Equal, EqualNot, Play, Warning, Timer, Pause, Left, Right } from '@signalco/ui-icons';
-import { Chip, Row, Stack, Container, Alert, Card, IconButton, Typography, Box, Timeago } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Container } from '@signalco/ui/dist/Container';
+import { Chip } from '@signalco/ui/dist/Chip';
+import { Card } from '@signalco/ui/dist/Card';
+import { Alert } from '@signalco/ui/dist/Alert';
+import { objectWithKey } from '@signalco/js';
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import useContact from '../../../src/hooks/signalco/useContact';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
@@ -116,10 +125,11 @@ function ExecutionDisplay(props: { entity: IEntityDetails }) {
     const { entity } = props;
     const executeContact = useContact({ entityId: entity.id, channelName: 'signalco', contactName: 'executed' });
     const executed = executeContact?.data?.valueSerialized ? JSON.parse(executeContact?.data?.valueSerialized) : undefined;
+    const executedStartTimeStamp = objectWithKey(executed, 'StartTimeStamp')?.StartTimeStamp;
 
     return (
         <Chip startDecorator={<Play />}>
-            <Timeago date={executed?.StartTimeStamp} />
+            <Timeago date={executedStartTimeStamp as number} />
         </Chip>
     )
 }
@@ -131,7 +141,9 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
 
 
     const configurationContact = useContact({ entityId: entity.id, channelName: 'signalco', contactName: 'configuration' });
-    const config: ProcessConfigurationV1.Configuration = useMemo(() => configurationContact.data?.valueSerialized ? JSON.parse(configurationContact.data?.valueSerialized) : undefined, [configurationContact.data]);
+    const config: ProcessConfigurationV1.Configuration | undefined = useMemo(() => configurationContact.data?.valueSerialized
+        ? JSON.parse(configurationContact.data?.valueSerialized) as ProcessConfigurationV1.Configuration
+        : undefined, [configurationContact.data]);
     const errorContact = useContact(configurationErrorContactPointer);
 
     const handleDismissError = async () => {
@@ -147,7 +159,6 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                 {errorContact.data?.valueSerialized && (
                     <Alert
                         color="danger"
-                        sx={{ alignItems: 'flex-start' }}
                         startDecorator={<Warning />}
                         endDecorator={
                             <IconButton size="sm" color="danger" onClick={handleDismissError}>
@@ -182,12 +193,10 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                                     <Card>
                                         <Row spacing={2}>
                                             <Pause />
-                                            <Box sx={{ flexGrow: 1 }}>
-                                                <Row spacing={1} justifyContent="space-between">
-                                                    <Typography semiBold>Wait for</Typography>
-                                                    <Typography>{conduct.notBeforeConduct}</Typography>
-                                                </Row>
-                                            </Box>
+                                            <Row spacing={1} justifyContent="space-between" className="grow">
+                                                <Typography semiBold>Wait for</Typography>
+                                                <Typography>{conduct.notBeforeConduct}</Typography>
+                                            </Row>
                                         </Row>
                                     </Card>
                                 )}
@@ -195,12 +204,10 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                                     <Card>
                                         <Row spacing={2}>
                                             <Timer />
-                                            <Box sx={{ flexGrow: 1 }}>
-                                                <Row spacing={1} justifyContent="space-between">
-                                                    <Typography semiBold>Delay</Typography>
-                                                    <Typography>{`${conduct.delayBefore / 1000}s`}</Typography>
-                                                </Row>
-                                            </Box>
+                                            <Row spacing={1} justifyContent="space-between" className="grow">
+                                                <Typography semiBold>Delay</Typography>
+                                                <Typography>{`${conduct.delayBefore / 1000}s`}</Typography>
+                                            </Row>
                                         </Row>
                                     </Card>
                                 )}
@@ -218,12 +225,10 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                                     <Card>
                                         <Row spacing={2}>
                                             <Timer />
-                                            <Box sx={{ flexGrow: 1 }}>
-                                                <Row spacing={1} justifyContent="space-between">
-                                                    <Typography semiBold>Delay after</Typography>
-                                                    <Typography>{`${conduct.delayAfter / 1000}s`}</Typography>
-                                                </Row>
-                                            </Box>
+                                            <Row spacing={1} justifyContent="space-between" className="grow">
+                                                <Typography semiBold>Delay after</Typography>
+                                                <Typography>{`${conduct.delayAfter / 1000}s`}</Typography>
+                                            </Row>
                                         </Row>
                                     </Card>
                                 )}

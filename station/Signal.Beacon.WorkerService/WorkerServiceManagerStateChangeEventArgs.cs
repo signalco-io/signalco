@@ -6,13 +6,17 @@ namespace Signal.Beacon;
 
 public class WorkerServiceManagerStateChangeEventArgs : EventArgs, IWorkerServiceManagerStateChangeEventArgs
 {
-    public WorkerServiceManagerStateChangeEventArgs(IWorkerService workerService, WorkerServiceState state)
+    public WorkerServiceManagerStateChangeEventArgs(
+        string entityId, 
+        WorkerServiceState state,
+        IWorkerService? workerService)
     {
         this.WorkerService = workerService;
         this.State = state;
+        this.EntityId = entityId;
     }
 
-    public IWorkerService WorkerService { get; }
-
+    public string EntityId { get; }
+    public IWorkerService? WorkerService { get; }
     public WorkerServiceState State { get; }
 }

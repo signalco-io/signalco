@@ -1,9 +1,15 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import React from 'react';
-import { PopupState } from 'material-ui-popup-state/hooks';
+import { cx } from 'classix';
 import { Add, Pin, PinOff } from '@signalco/ui-icons';
-import { Stack, Row, Button, Card, Divider, IconButton, Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Divider } from '@signalco/ui/dist/Divider';
+import { Card } from '@signalco/ui/dist/Card';
+import { Button } from '@signalco/ui/dist/Button';
 import { useSearchParam } from '@signalco/hooks';
 import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
@@ -16,7 +22,6 @@ import DashboardsRepository, { IDashboardModel } from '../../src/dashboards/Dash
 
 interface IDashboardSelectorMenuProps {
     selectedId: string | undefined,
-    popupState: PopupState,
     onSelection: (id: string) => void,
     onEditWidgets: () => void,
     onSettings: () => void
@@ -45,22 +50,26 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
             <Row style={{ width: '100%', position: 'relative' }}>
                 <Button
                     variant="plain"
-                    sx={{ color: dashboard.id !== selectedId ? 'var(--joy-palette-neutral-400)' : 'inherit' }}
+                    className={cx(
+                        dashboard.id !== selectedId && 'text-neutral-400'
+                    )}
                     onClick={() => onSelection(dashboard.id)}
                     fullWidth
                 >
                     {dashboard.name}
                 </Button>
-                <IconButton sx={{ position: 'absolute', right: 0, height: '100%' }} onClick={() => onFavorite(dashboard.id)}>
-                    {dashboard.isFavorite ? <Pin /> : <PinOff />}
-                </IconButton>
+                <div className="absolute right-0 h-full">
+                    <IconButton onClick={() => onFavorite(dashboard.id)}>
+                        {dashboard.isFavorite ? <Pin /> : <PinOff />}
+                    </IconButton>
+                </div>
             </Row>
         </div>
     );
 }
 
 function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
-    const { selectedId, popupState, onSelection, onEditWidgets, onSettings } = props;
+    const { selectedId, onSelection, onEditWidgets, onSettings } = props;
     const { t } = useLocale('App', 'Dashboards');
     const [, setDashboardId] = useSearchParam('dashboard');
     const [isFullScreen, setFullScreen] = useSearchParam('fullscreen');
@@ -68,21 +77,14 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const saveDashboard = useSaveDashboard();
 
     const orderedDashboardIds = dashboards?.slice().sort((a, b) => a.order - b.order).map(d => d.id) ?? [];
-    const orderedDashboards = orderedDashboardIds?.map(dor => dashboards?.find(d => dor === d.id)!) ?? [];
+    const orderedDashboards = orderedDashboardIds?.map((dor) => dashboards?.find(d => dor === d.id)!) ?? [];
 
-    const handleAndClose = (callback: (...params: any[]) => void) => {
-        return (...params: any[]) => {
-            callback(...params);
-            popupState.close();
-        };
-    }
-
-    const handleNewDashboard = handleAndClose(async () => {
+    const handleNewDashboard = async () => {
         const newDashboardId = await saveDashboard.mutateAsync({
             name: 'New dashboard'
         });
         setDashboardId(newDashboardId);
-    });
+    };
 
     const handleToggleFavorite = async (id: string) => {
         const dashboard = dashboards?.find(d => d.id === id);
@@ -132,35 +134,37 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     console.debug('Rendering DashboardSelectorMenu')
 
     return (
-        <Card sx={{ gap: 1.5 }}>
-            <Stack style={{ minWidth: 280 }}>
-                <Stack style={{ maxHeight: '50vh', overflow: 'auto' }}>
-                    <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
-                        <SortableContext items={orderedDashboardIds}>
-                            {orderedDashboards.map((d) => (
-                                <DashboardSortableItem
-                                    key={d.id}
-                                    dashboard={d}
-                                    selectedId={selectedId}
-                                    onSelection={(id) => handleAndClose(onSelection)(id)}
-                                    onFavorite={handleToggleFavorite} />
-                            ))}
-                        </SortableContext>
-                    </DndContext>
+        <Card>
+            <Stack spacing={1}>
+                <Stack style={{ minWidth: 280 }}>
+                    <Stack style={{ maxHeight: '50vh', overflow: 'auto' }}>
+                        <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
+                            <SortableContext items={orderedDashboardIds}>
+                                {orderedDashboards.map((d) => (
+                                    <DashboardSortableItem
+                                        key={d.id}
+                                        dashboard={d}
+                                        selectedId={selectedId}
+                                        onSelection={onSelection}
+                                        onFavorite={handleToggleFavorite} />
+                                ))}
+                            </SortableContext>
+                        </DndContext>
+                    </Stack>
+                    <Button variant="plain" onClick={handleNewDashboard} startDecorator={<Add />}>{t('NewDashboard')}</Button>
                 </Stack>
-                <Button variant="plain" onClick={handleNewDashboard} startDecorator={<Add />}>{t('NewDashboard')}</Button>
-            </Stack>
-            <Divider />
-            <Stack>
-                <Row>
-                    <div style={{ flexGrow: 1 }}>
-                        <Typography level="body2">{selectedDashboard?.name}</Typography>
-                    </div>
-                    <ShareEntityChip entity={selectedDashboard} entityType={3} />
-                </Row>
-                <Button variant="plain" onClick={handleAndClose(onFullscreen)}>{t('ToggleFullscreen')}</Button>
-                <Button variant="plain" onClick={handleAndClose(onSettings)}>{t('Settings')}</Button>
-                <Button variant="plain" onClick={handleAndClose(onEditWidgets)}>{t('EditWidgets')}</Button>
+                <Divider />
+                <Stack>
+                    <Row>
+                        <div style={{ flexGrow: 1 }}>
+                            <Typography level="body2">{selectedDashboard?.name}</Typography>
+                        </div>
+                        <ShareEntityChip entity={selectedDashboard} entityType={3} />
+                    </Row>
+                    <Button variant="plain" onClick={onFullscreen}>{t('ToggleFullscreen')}</Button>
+                    <Button variant="plain" onClick={onSettings}>{t('Settings')}</Button>
+                    <Button variant="plain" onClick={onEditWidgets}>{t('EditWidgets')}</Button>
+                </Stack>
             </Stack>
         </Card>
     );

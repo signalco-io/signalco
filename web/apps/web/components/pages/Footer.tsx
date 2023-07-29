@@ -1,7 +1,10 @@
-'use client';
-
 import React from 'react';
-import { Stack, Container, Grid, IconButton, Typography, Box, Link, Row } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Link } from '@signalco/ui/dist/Link';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Container } from '@signalco/ui/dist/Container';
 import SignalcoLogotype from '../icons/SignalcoLogotype';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { now } from '../../src/services/DateTimeProvider';
@@ -55,52 +58,50 @@ const footerLinks: FooterSectionType[] = [
 
 export default function Footer() {
     return (
-        <Box sx={{ alignSelf: 'stretch', px: 2 }} component="footer">
+        <footer className="self-stretch">
             <Container maxWidth="lg">
-                <footer style={{ padding: '64px 0 32px 0' }}>
+                <div className="pb-8 pt-16">
                     <Stack spacing={4}>
-                        <Grid container direction="row" justifyContent="space-between" spacing={4}>
+                        <Row spacing={4} alignItems="start" justifyContent="space-between" className="flex-wrap">
                             {footerLinks.filter(i => isDeveloper ? true : !i.developerOnly).map(section => (
-                                <Grid key={section.header} xs={12} sm={6} md={3} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-                                    <div style={{ paddingBottom: 8 }}>
-                                        <Typography level="h6" component="h2">{section.header}</Typography>
-                                    </div>
+                                <Stack key={section.header} spacing={2} className="min-w-[220px]">
+                                    <Typography level="h6" component="h2">{section.header}</Typography>
                                     <Stack spacing={1}>
                                         {section.links.filter(l => isDeveloper ? true : !l.developerOnly).map(link => (
-                                            <Link key={link.name} href={link.href}>{link.name}</Link>
+                                            <Link key={link.name} href={link.href}>
+                                                <Typography>{link.name}</Typography>
+                                            </Link>
                                         ))}
                                     </Stack>
-                                </Grid>
+                                </Stack>
                             ))}
-                        </Grid>
-                        <Stack>
+                        </Row>
+                        <Stack className="text-center">
                             <SignalcoLogotype width={220} />
-                            <Row
-                                alignItems="center"
-                                justifyContent="space-between">
+                            <Stack alignItems="center" justifyContent="space-between">
                                 <Typography level="body3">Copyright © {now().getFullYear()} signalco. All rights reserved.</Typography>
                                 <Row spacing={1}>
                                     <IconButton
-                                        aria-label="Twitter link"
-                                        href="https://twitter.com/signalco_io">
-                                        <Typography>tw</Typography>
+                                        aria-label="X formerly known as Twitter"
+                                        href="https://x.com/signalco_io">
+                                        <Typography>X</Typography>
                                     </IconButton>
                                     <IconButton
-                                        aria-label="reddit link"
+                                        aria-label="reddit"
                                         href="https://www.reddit.com/r/signalco/">
                                         <Typography>/r</Typography>
                                     </IconButton>
                                     <IconButton
-                                        aria-label="GitHub link"
+                                        aria-label="GitHub"
                                         href="https://github.com/signalco-io/signalco">
                                         <Typography>gh</Typography>
                                     </IconButton>
                                 </Row>
-                            </Row>
+                            </Stack>
                         </Stack>
                     </Stack>
-                </footer>
+                </div>
             </Container>
-        </Box>
+        </footer>
     );
 }

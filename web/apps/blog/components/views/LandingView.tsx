@@ -1,10 +1,10 @@
 import fs from 'fs';
 import React from 'react';
 import klaw from 'klaw';
-import Typography from '@signalco/ui/dist/Typography';
-import Stack from '@signalco/ui/dist/Stack';
-import Row from '@signalco/ui/dist/Row';
-import Link from '@signalco/ui/dist/Link';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Card, CardContent, CardTitle } from '@signalco/ui/dist/Card';
 import PageCenterHeader from '../pages/PageCenterHeader';
 
 export default async function LandingPageView() {
@@ -29,20 +29,15 @@ export default async function LandingPageView() {
                 <Typography level="h5">All posts</Typography>
                 <Row spacing={2} style={{ flexWrap: 'wrap' }}>
                     {posts.map(post => (
-                        <div key={post.title} style={{
-                            minWidth: 300,
-                            padding: 16,
-                            border: '1px solid var(--joy-palette-divider)',
-                            borderRadius: 4
-                        }}>
-                            <Stack key={post.title} spacing={2}>
-                                <Link href={post.link}>
-                                    <Typography level="h3">{post.title}</Typography>
-                                </Link>
-                                <Typography level="body2" secondary>{post.category}</Typography>
-                                <Typography level="body1">{post.description}</Typography>
-                            </Stack>
-                        </div>
+                        <Card key={post.title} href={post.link}>
+                            <CardTitle>{post.title}</CardTitle>
+                            <CardContent>
+                                <Stack spacing={2}>
+                                    <Typography level="body2" secondary>{post.category}</Typography>
+                                    <Typography level="body1">{post.description}</Typography>
+                                </Stack>
+                            </CardContent>
+                        </Card>
                     ))}
                 </Row>
             </Stack>

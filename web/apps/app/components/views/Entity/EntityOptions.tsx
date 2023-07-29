@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { MoreHorizontal } from '@signalco/ui-icons';
-import { Button, Divider, Menu, MenuItem } from '@signalco/ui';
+import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
+import { Divider } from '@signalco/ui/dist/Divider';
+import { Button } from '@signalco/ui/dist/Button';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import { KnownPages } from '../../../src/knownPages';
@@ -47,7 +49,7 @@ export default function EntityOptions(props: EntityOptionsProps) {
 
     return (
         <>
-            <Menu menuId="entity-options" renderTrigger={(props) => (
+            <Menu trigger={(
                 <Button {...props}>
                     <MoreHorizontal />
                 </Button>

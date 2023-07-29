@@ -1,8 +1,8 @@
 import React from 'react';
-import Typography from '@signalco/ui/dist/Typography';
-import Stack from '@signalco/ui/dist/Stack';
-import Row from '@signalco/ui/dist/Row';
-import Link from '@signalco/ui/dist/Link';
+import {Typography} from '@signalco/ui/dist/Typography';
+import {Stack} from '@signalco/ui/dist/Stack';
+import {Row} from '@signalco/ui/dist/Row';
+import {Link} from '@signalco/ui/dist/Link';
 import { isDeveloper } from '../../src/services/EnvProvider';
 
 export type FooterSectionType = {

@@ -8,24 +8,24 @@
         "restart-functions": "node tools/restart-functions.js"
     },
     "devDependencies": {
-        "@types/node": "18.15.13",
-        "@typescript-eslint/eslint-plugin": "5.59.5",
-        "@typescript-eslint/parser": "5.59.5",
-        "eslint": "8.40.0",
-        "eslint-config-standard": "17.0.0",
-        "eslint-plugin-import": "2.27.5",
-        "eslint-plugin-n": "15.7.0",
+        "@types/node": "18.17.1",
+        "@typescript-eslint/eslint-plugin": "6.2.0",
+        "@typescript-eslint/parser": "6.2.0",
+        "eslint": "8.46.0",
+        "eslint-config-standard": "17.1.0",
+        "eslint-plugin-import": "2.28.0",
+        "eslint-plugin-n": "16.0.1",
         "eslint-plugin-node": "11.1.0",
         "eslint-plugin-promise": "6.1.1",
-        "typescript": "5.0.4"
+        "typescript": "5.1.6"
     },
     "dependencies": {
         "@checkly/pulumi": "1.1.4",
-        "@pulumi/aws": "5.40.0",
-        "@pulumi/azure-native": "1.102.0",
-        "@pulumi/cloudflare": "5.0.0",
-        "@pulumi/command": "0.7.2",
-        "@pulumi/docker": "4.2.0",
-        "@pulumi/pulumi": "3.66.0"
+        "@pulumi/aws": "5.42.0",
+        "@pulumi/azure-native": "2.1.1",
+        "@pulumi/cloudflare": "5.7.0",
+        "@pulumi/command": "0.8.0",
+        "@pulumi/docker": "4.3.1",
+        "@pulumi/pulumi": "3.76.1"
     }
 }

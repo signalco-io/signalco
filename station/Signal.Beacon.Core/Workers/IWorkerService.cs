@@ -5,7 +5,7 @@ namespace Signal.Beacon.Core.Workers;
 
 public interface IWorkerService
 {
-    Task StartAsync(CancellationToken cancellationToken);
+    Task StartAsync(string entityId, CancellationToken cancellationToken);
 
-    Task StopAsync(CancellationToken cancellationToken);
+    Task StopAsync();
 }

@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
+import { ObjectDictAny } from '@signalco/js';
 import { useIsServer } from '@signalco/hooks';
 import UserSettingsProvider from '../services/UserSettingsProvider';
 import hr from '../../locales/hr.json';
 import en from '../../locales/en.json';
-import { ObjectDictAny } from '@signalco/js';
 
 export type LocalizeFunc = (key: string, data?: object | undefined) => string;
 
@@ -41,7 +41,13 @@ export function localizer(...namespace: string[]): LocalizeFunc {
 
     const namespaceKeys = resolvePathSplit(userLocale === 'en' ? en : hr, namespace);
 
-    return (key: string, data?: object) => { return namespaceKeys && namespaceKeys[key] ? formatString(namespaceKeys[key], data) : `{${key}}`; };
+    return (key: string, data?: object) => {
+        const valueUnknown = namespaceKeys[key];
+        const value = typeof valueUnknown === 'string' ? valueUnknown : undefined;
+        return typeof value !== 'undefined'
+            ? formatString(value, data)
+            : `{${key}}`;
+    };
 }
 
 export function useLocalePlaceholders() {
@@ -52,7 +58,7 @@ export function useLocaleHelpers() {
     return useLocale('Helpers');
 }
 
-export default function useLocale(...namespace: string[]): {t: LocalizeFunc} {
+export default function useLocale(...namespace: string[]): { t: LocalizeFunc } {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const t = useMemo(() => localizer(...namespace), [...namespace]);
     const isServer = useIsServer();

@@ -1,5 +1,13 @@
+import { type FormEvent } from 'react';
 import Link from 'next/link';
-import { Row, Avatar, Card, Typography, Box, Timeago, MuiStack, Checkbox } from '@signalco/ui';
+import { cx } from 'classix';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Checkbox } from '@signalco/ui/dist/Checkbox';
+import { Card } from '@signalco/ui/dist/Card';
+import { Avatar } from '@signalco/ui/dist/Avatar';
 import EntityIcon from '../shared/entity/EntityIcon';
 import BatteryIndicator from '../indicators/BatteryIndicator';
 import { KnownPages } from '../../src/knownPages';
@@ -14,7 +22,7 @@ export interface EntityCardProps {
     spread: boolean;
     selectable?: boolean;
     selected?: boolean;
-    onSelection?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onSelection?: (event: FormEvent<HTMLButtonElement>) => void;
 }
 
 export default function EntityCard({ entity, spread, selectable, selected, onSelection }: EntityCardProps) {
@@ -22,18 +30,19 @@ export default function EntityCard({ entity, spread, selectable, selected, onSel
     const { hasBattery, level } = useEntityBattery(entity);
     const Icon = EntityIcon(entity);
 
+    const Container = spread ? Row : Stack;
+
     return (
         <Row spacing={1}>
-            {selectable && <Checkbox checked={selected ?? false} onChange={onSelection} sx={{ ml: 1 }} />}
+            {selectable && <Checkbox checked={selected ?? false} onChange={onSelection} />}
             <Link href={`${KnownPages.Entities}/${entity.id}`} style={{ flexGrow: 1 }}>
-                <Card sx={{ height: '100%', p: spread ? 0 : 1 }}>
-                    <MuiStack
+                <Card className={cx('h-full p-1', spread && 'p-0')}>
+                    <Container
                         spacing={2}
-                        direction={spread ? 'row' : 'column'}
                         justifyContent="space-between"
-                        sx={{ height: '100%' }}>
+                        className="h-full">
                         <Row spacing={1}>
-                            <Avatar variant={spread ? 'plain' : 'soft'}>
+                            <Avatar>
                                 <Icon />
                             </Avatar>
                             <Typography noWrap>{entity.alias}</Typography>
@@ -45,14 +54,14 @@ export default function EntityCard({ entity, spread, selectable, selected, onSel
                             <Row spacing={1} style={{ paddingRight: spread ? 16 : 0 }}>
                                 {hasBattery && <BatteryIndicator level={level} minLevel="low" />}
                                 {(hasStatus && (isStale || isOffline)) && (
-                                    <Box style={{ opacity: 0.6, fontSize: '0.8rem' }}>
+                                    <div style={{ opacity: 0.6, fontSize: '0.8rem' }}>
                                         <Timeago date={entityLastActivity(entity)} />
-                                    </Box>
+                                    </div>
                                 )}
                                 <EntityStatus entity={entity} />
                             </Row>
                         </Row>
-                    </MuiStack>
+                    </Container>
                 </Card>
             </Link>
         </Row>

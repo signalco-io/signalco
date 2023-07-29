@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Google.Cloud.Speech.V1;
@@ -570,7 +568,7 @@ public class VoiceService : IWorkerService, IDisposable
     }
 
         
-    public Task StartAsync(CancellationToken cancellationToken)
+    public Task StartAsync(string entityId, CancellationToken cancellationToken)
     {
         _ = Task.Run(async () =>
         {
@@ -639,7 +637,7 @@ public class VoiceService : IWorkerService, IDisposable
         return false;
     }
 
-    public Task StopAsync(CancellationToken cancellationToken)
+    public Task StopAsync()
     {
         return Task.CompletedTask;
     }

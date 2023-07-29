@@ -1,13 +1,12 @@
-import React from 'react';
-import Stack from '@signalco/ui/dist/Stack';
-import Container from '@signalco/ui/dist/Container';
-import { ChildrenProps } from '@signalco/ui';
+import { PropsWithChildren } from 'react';
+import {Stack} from '@signalco/ui/dist/Stack';
+import {Container} from '@signalco/ui/dist/Container';
 import Footer from '../pages/Footer';
 import PageNav, { HeaderHeight } from '../PageNav';
 
-interface PageLayoutProps extends ChildrenProps {
+type PageLayoutProps = PropsWithChildren<{
     maxWidth?: false | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | undefined;
-}
+}>;
 
 export function PageLayout({ maxWidth, children }: PageLayoutProps) {
     return (

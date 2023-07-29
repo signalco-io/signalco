@@ -1,6 +1,11 @@
 import { Suspense, useState } from 'react';
 import { Custom, Laptop, SunMoon, Timer } from '@signalco/ui-icons';
-import { type AppThemeMode, Stack, Row, TextField, SupportedColorScheme, Typography, Box, useColorScheme, DefaultColorScheme, Picker } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import type { AppThemeMode, DefaultColorScheme, SupportedColorScheme } from '@signalco/ui/dist/theme';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
+import { Row } from '@signalco/ui/dist/Row';
+import { Input } from '@signalco/ui/dist/Input';
 import { fromDuration, now, todayAt, toDuration } from '../../src/services/DateTimeProvider';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale from '../../src/hooks/useLocale';
@@ -15,10 +20,10 @@ function AppThemeVisual(props: { label: string, theme: SupportedColorScheme, dis
         backgroundColor = 'black';
         textColor = 'white';
         break;
-        // case 'darkDimmed':
-        //     backgroundColor = 'rgba(32, 31, 30, 1)'
-        //     textColor = 'white';
-        //     break;
+    // case 'darkDimmed':
+    //     backgroundColor = 'rgba(32, 31, 30, 1)'
+    //     textColor = 'white';
+    //     break;
     default:
         backgroundColor = 'white';
         textColor = 'black';
@@ -26,32 +31,35 @@ function AppThemeVisual(props: { label: string, theme: SupportedColorScheme, dis
     }
 
     return (
-        <Box sx={{ opacity: disabled ? 0.4 : 1 }}>
+        <div style={{ opacity: disabled ? 0.4 : 1 }}>
             <Stack alignItems="center" spacing={1}>
-                <Box sx={{
+                <div style={{
                     position: 'relative',
                     width: 80,
                     height: 60,
                     backgroundColor: backgroundColor,
                     border: '1px solid gray',
                     borderTop: '4px solid gray',
-                    borderRadius: 1
+                    borderRadius: 4
                 }}>
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 4, left: 4 }} />
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 18, height: 5, top: 12, left: 4 }} />
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 22, height: 5, top: 20, left: 4 }} />
-                    <Box sx={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 28, left: 4 }} />
-                </Box>
+                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 4, left: 4 }} />
+                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 18, height: 5, top: 12, left: 4 }} />
+                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 22, height: 5, top: 20, left: 4 }} />
+                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 28, left: 4 }} />
+                </div>
                 <Typography level="body2">{label}</Typography>
             </Stack>
-        </Box>
+        </div>
     );
 }
 
 function AppThemeColorPicker() {
     const themes = useLocale('App', 'Settings', 'Themes');
     const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'system');
-    const { colorScheme, setMode } = useColorScheme();
+    // const { colorScheme, setMode } = useColorScheme();
+    const colorScheme: DefaultColorScheme = 'dark';
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+    const setMode = (mode: DefaultColorScheme) => { };
 
     const handleThemeSelect = (newTheme: DefaultColorScheme | undefined) => {
         const newThemeSelect = newTheme ?? 'light';
@@ -61,24 +69,27 @@ function AppThemeColorPicker() {
     console.log('color scheme', colorScheme)
 
     return (
-        <Picker value={colorScheme} onChange={(_, value) => handleThemeSelect(value)} options={[
-            {
-                value: 'light',
-                label: (
-                    <Box p={1}>
-                        <AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" />
-                    </Box>
-                )
-            },
-            {
-                value: 'dark',
-                label: (
-                    <Box p={1}>
-                        <AppThemeVisual label={themes.t('Dark')} theme="dark" />
-                    </Box>
-                )
-            }
-        ]} />
+        <SelectItems
+            value={colorScheme}
+            onValueChange={(value) => handleThemeSelect(value as DefaultColorScheme)}
+            items={[
+                {
+                    value: 'light',
+                    label: (
+                        <div className="p-1">
+                            <AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" />
+                        </div>
+                    )
+                },
+                {
+                    value: 'dark',
+                    label: (
+                        <div className="p-1">
+                            <AppThemeVisual label={themes.t('Dark')} theme="dark" />
+                        </div>
+                    )
+                }
+            ]} />
     );
 }
 
@@ -86,11 +97,14 @@ export default function AppThemePicker() {
     const { t: tPicker } = useLocale('App', 'Components', 'AppThemePicker');
     const { t: tPickerModes } = useLocale('App', 'Components', 'AppThemePicker', 'Modes');
 
-    const { mode, setMode } = useColorScheme();
+    // const { mode, setMode } = useColorScheme();
+    const mode: unknown = 'dark';
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+    const setMode = (mode: DefaultColorScheme | 'system') => { };
     const [themeMode, setThemeMode] = useUserSetting<AppThemeMode>('themeMode', 'system');
 
     const [userLocation] = useUserSetting<[number, number] | undefined>('location', undefined);
-    const handleThemeModeChange = (_: unknown, newThemeMode: AppThemeMode | undefined) => {
+    const handleThemeModeChange = (newThemeMode: AppThemeMode | undefined) => {
         const newThemeModeSelect = newThemeMode ?? 'manual';
         setThemeMode(newThemeModeSelect);
         if (newThemeModeSelect === 'system') {
@@ -132,7 +146,7 @@ export default function AppThemePicker() {
             <Stack spacing={2}>
                 <Stack spacing={1}>
                     <Typography level="body2">{tPicker('PickMode')}</Typography>
-                    <Picker value={themeMode} onChange={handleThemeModeChange} options={[
+                    <SelectItems value={themeMode} onValueChange={value => handleThemeModeChange(value as AppThemeMode)} items={[
                         { value: 'system', label: <Laptop />, title: tPickerModes('System') },
                         { value: 'manual', label: <Custom />, title: tPickerModes('Manual') },
                         { value: 'sunriseSunset', label: <SunMoon />, disabled: (userLocation?.length ?? 0) <= 0, title: tPickerModes('SunriseSunset') },
@@ -143,12 +157,12 @@ export default function AppThemePicker() {
                     <Stack spacing={1}>
                         <Typography level="body2">{tPicker('PickDayNightTimes')}</Typography>
                         <Row spacing={1}>
-                            <TextField
+                            <Input
                                 label={tPicker('DayTime')}
                                 value={dayTime ? toDuration(dayTime) : ''}
                                 onChange={(e) => handleDayTimeChange(fromDuration(now(), e.target.value))}
                             />
-                            <TextField
+                            <Input
                                 label={tPicker('NightTime')}
                                 value={nightTime ? toDuration(nightTime) : ''}
                                 onChange={(e) => handleNightTimeChange(fromDuration(now(), e.target.value))}

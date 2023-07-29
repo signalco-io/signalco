@@ -2,9 +2,17 @@
 
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { cx } from 'classix';
 import { useQueryClient } from '@tanstack/react-query';
 import { Add, Check, LayoutGrid, LayoutList } from '@signalco/ui-icons';
-import { Stack, Loadable, Row, Avatar, Button, IconButton, Typography, Box, Grid, SelectItems, Picker, MuiStack } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
+import { Row } from '@signalco/ui/dist/Row';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Button } from '@signalco/ui/dist/Button';
+import { Avatar } from '@signalco/ui/dist/Avatar';
 import { useSearchParam } from '@signalco/hooks';
 import { KnownPages } from '../../src/knownPages';
 import useUserSetting from '../../src/hooks/useUserSetting';
@@ -89,83 +97,80 @@ export default function Entities() {
         return e.type.toString() === selectedType;
     }), [filteredItems, selectedType]);
 
-    const columns = useMemo(() => ({
-        xs: entityListViewType === 'table' ? 12 : 6,
-        sm: entityListViewType === 'table' ? 12 : 4,
-        lg: entityListViewType === 'table' ? 12 : 3,
-        xl: entityListViewType === 'table' ? 12 : 2
-    }), [entityListViewType]);
-
     const results = useMemo(() => (
-        <Box sx={{ px: 2 }}>
-            <Grid container spacing={1}>
+        <div style={{ paddingLeft: 8, paddingRight: 8 }}>
+            <div className={cx(
+                'grid auto-cols-max gap-1',
+                entityListViewType === 'table'
+                    ? 'grid-cols-1'
+                    : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
+            )}>
                 {typedItems?.map(entity => (
-                    <Grid key={entity.id} {...columns}>
-                        <EntityCard
-                            entity={entity}
-                            spread={entityListViewType === 'table'}
-                            selectable={isSelecting}
-                            selected={!!selected.find(e => e.id === entity.id)}
-                            onSelection={() => handleEntitySelection(entity)} />
-                    </Grid>
+                    <EntityCard
+                        key={entity.id}
+                        entity={entity}
+                        spread={entityListViewType === 'table'}
+                        selectable={isSelecting}
+                        selected={!!selected.find(e => e.id === entity.id)}
+                        onSelection={() => handleEntitySelection(entity)} />
                 ))}
-            </Grid>
-        </Box>
-    ), [columns, entityListViewType, handleEntitySelection, isSelecting, selected, typedItems]);
-
-    const [isAddEntityOpen, setIsAddEntityOpen] = useState(false);
-    const handleAddEntity = () => setIsAddEntityOpen(true);
+            </div>
+        </div>
+    ), [entityListViewType, handleEntitySelection, isSelecting, selected, typedItems]);
 
     return (
-        <>
-            <MuiStack spacing={{ xs: 2, sm: 4 }} sx={{ pt: { xs: 0, sm: 2 } }}>
-                <Stack spacing={1}>
-                    <Row justifyContent="space-between" style={{ paddingLeft: 16, paddingRight: 16 }}>
+        <Stack spacing={3}>
+            <Stack spacing={1}>
+                <Row justifyContent="space-between" style={{ paddingLeft: 16, paddingRight: 16 }}>
+                    <SelectItems
+                        className="min-w-[220px]"
+                        value={selectedType}
+                        onValueChange={(v: string) => setSelectedType(v)}
+                        items={entityTypes.map(t => {
+                            const Icon = EntityIconByType(parseInt(t.value));
+                            return ({
+                                value: t.value, label: t.label, content: (
+                                    <Row spacing={1}>
+                                        <Avatar><Icon /></Avatar>
+                                        <Typography>{t.label}</Typography>
+                                    </Row>
+                                )
+                            });
+                        })} />
+                    <Row spacing={1} style={{ flexGrow: 1 }} justifyContent="end">
+                        <SearchInput items={entities.data} onFilteredItems={setFilteredItems} />
                         <SelectItems
-                            minWidth={220}
-                            value={selectedType ? [selectedType] : []}
-                            onChange={(v) => setSelectedType(v[0])}
-                            items={entityTypes.map(t => {
-                                const Icon = EntityIconByType(parseInt(t.value));
-                                return ({
-                                    value: t.value, label: t.label, content: (
-                                        <Row spacing={1}>
-                                            <Avatar><Icon /></Avatar>
-                                            <Typography>{t.label}</Typography>
-                                        </Row>
-                                    )
-                                });
-                            })}
-                            heading />
-                        <MuiStack direction="row" alignItems="center" spacing={1} sx={{ flexGrow: { xs: 1, sm: 0 } }} justifyContent="end">
-                            <SearchInput items={entities.data} onFilteredItems={setFilteredItems} />
-                            <Picker value={entityListViewType} onChange={(_, value) => setEntityListViewType(value)} options={[
+                            value={entityListViewType}
+                            onValueChange={setEntityListViewType}
+                            items={[
                                 { value: 'table', label: <LayoutList /> },
                                 { value: 'cards', label: <LayoutGrid /> }
                             ]} />
-                            <IconButton size="lg" onClick={handleAddEntity}><Add /></IconButton>
-                            <IconButton size="lg" onClick={handleToggleSelection}><Check /></IconButton>
-                        </MuiStack>
+                        <ConfigurationDialog
+                            header={t('NewEntityDialogTitle')}
+                            trigger={(
+                                <IconButton size="lg"><Add /></IconButton>
+                            )}>
+                            <EntityCreateForm />
+                        </ConfigurationDialog>
+                        <IconButton size="lg" onClick={handleToggleSelection}><Check /></IconButton>
                     </Row>
-                    {isSelecting && (
-                        <Row>
-                            <ConfirmDeleteButton
-                                expectedConfirmText="confirm"
-                                buttonLabel="Delete selected"
-                                header={`Delete ${selected.length} entities`}
-                                onConfirm={handleConfirmDeleteSelected} />
-                        </Row>
-                    )}
-                </Stack>
-                <Stack>
-                    <Loadable isLoading={entities.isLoading} loadingLabel="Loading entities" error={entities.error}>
-                        {results}
-                    </Loadable>
-                </Stack>
-            </MuiStack>
-            <ConfigurationDialog isOpen={isAddEntityOpen} header={t('NewEntityDialogTitle')} onClose={() => setIsAddEntityOpen(false)}>
-                <EntityCreateForm />
-            </ConfigurationDialog>
-        </>
+                </Row>
+                {isSelecting && (
+                    <Row>
+                        <ConfirmDeleteButton
+                            expectedConfirmText="confirm"
+                            buttonLabel="Delete selected"
+                            header={`Delete ${selected.length} entities`}
+                            onConfirm={handleConfirmDeleteSelected} />
+                    </Row>
+                )}
+            </Stack>
+            <Stack>
+                <Loadable isLoading={entities.isLoading} loadingLabel="Loading entities" error={entities.error}>
+                    {results}
+                </Loadable>
+            </Stack>
+        </Stack>
     );
 }

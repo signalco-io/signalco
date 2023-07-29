@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import UserSettingsProvider from '../services/UserSettingsProvider';
 import { ValueOrFuncGeneric } from '@signalco/js';
+import UserSettingsProvider from '../services/UserSettingsProvider';
 
 export const useUserSettingAsync = <T>(key: string, defaultValue: ValueOrFuncGeneric<T>): [T | undefined | null, (value: T | undefined) => void] => {
     const client = useQueryClient();

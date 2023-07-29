@@ -1,4 +1,4 @@
-import { Avatar } from '@signalco/ui';
+import { Avatar } from '@signalco/ui/dist/Avatar';
 import { User } from '@auth0/auth0-spa-js';
 
 export default function UserAvatar({ user }: { user: User | undefined }) {

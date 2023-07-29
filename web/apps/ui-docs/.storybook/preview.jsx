@@ -1,8 +1,5 @@
-import { CssVarsProvider, CssBaseline, buildSignalcoTheme } from '@signalco/ui';
 import storybookSignalcoTheme from './signalco-theme';
-import '@signalco/ui/dist/ui.css';
-
-const signalcoTheme = buildSignalcoTheme();
+import '@signalco/ui/dist/index.css';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -19,9 +16,8 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <CssVarsProvider theme={signalcoTheme} defaultMode='dark'>
-      <CssBaseline />
+    <>
       {Story()}
-    </CssVarsProvider>
+    </>
   )
 ];

@@ -1,2 +1,1 @@
-export { default } from './NoDataPlaceholder';
-export {type NoDataPlaceholderProps} from './NoDataPlaceholder';
+export { NoDataPlaceholder, type NoDataPlaceholderProps} from './NoDataPlaceholder';

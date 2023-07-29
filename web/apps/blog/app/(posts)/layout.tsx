@@ -1,10 +1,10 @@
-import Typography from '@signalco/ui/dist/Typography';
-import Stack from '@signalco/ui/dist/Stack';
-import Link from '@signalco/ui/dist/Link';
-import { type ChildrenProps } from '@signalco/ui';
+import { PropsWithChildren } from 'react';
+import {Typography} from '@signalco/ui/dist/Typography';
+import {Stack} from '@signalco/ui/dist/Stack';
+import {Link} from '@signalco/ui/dist/Link';
 import { KnownPages } from '../../src/knownPages';
 
-export default function PostLayout({ children }: ChildrenProps) {
+export default function PostLayout({ children }: PropsWithChildren) {
     return (
         <div style={{ paddingTop: 12 }}>
             <Stack spacing={8}>

@@ -20,14 +20,13 @@ namespace Signal.Beacon.Channel.Zigbee2Mqtt;
 internal class Zigbee2MqttWorkerService : IWorkerService
 {
     private const string MqttTopicSubscription = "zigbee2mqtt/#";
-    private const string ConfigurationFileName = "Zigbee2mqtt.json"; // TODO: Remove when switched to cloud channel start
     private const int MqttClientStartRetryDelay = 10000;
 
     private readonly IEntitiesDao entitiesDao;
     private readonly IEntityService entityService;
     private readonly IConductSubscriberClient conductSubscriberClient;
     private readonly IMqttClientFactory mqttClientFactory;
-    private readonly IConfigurationService configurationService;
+    private readonly IChannelConfigurationService configurationService;
     private readonly ILogger<Zigbee2MqttWorkerService> logger;
 
     private readonly CancellationTokenSource cts = new();
@@ -37,13 +36,14 @@ internal class Zigbee2MqttWorkerService : IWorkerService
 
     private static readonly JsonSerializerOptions CaseInsensitiveOptions = new() { PropertyNameCaseInsensitive = true };
     private Zigbee2MqttWorkerServiceConfiguration.MqttServer? configuration;
+    private string channelId;
 
     public Zigbee2MqttWorkerService(
         IEntitiesDao entitiesDao,
         IEntityService entityService,
         IConductSubscriberClient conductSubscriberClient,
         IMqttClientFactory mqttClientFactory,
-        IConfigurationService configurationService,
+        IChannelConfigurationService configurationService,
         ILogger<Zigbee2MqttWorkerService> logger)
     {
         this.entitiesDao = entitiesDao ?? throw new ArgumentNullException(nameof(entitiesDao));
@@ -55,12 +55,14 @@ internal class Zigbee2MqttWorkerService : IWorkerService
     }
 
     // TODO: Accept channel entity id and retrieve configuration from cloud
-    public async Task StartAsync(CancellationToken cancellationToken)
+    public async Task StartAsync(string entityId, CancellationToken cancellationToken)
     {
+        this.channelId = entityId;
         this.startCancellationToken = cancellationToken;
         var channelsConfiguration =
             await this.configurationService.LoadAsync<Zigbee2MqttWorkerServiceConfiguration>(
-                ConfigurationFileName,
+                this.channelId,
+                Zigbee2MqttChannels.DeviceChannel,
                 cancellationToken);
 
         if (channelsConfiguration.Servers.Any())
@@ -138,11 +140,11 @@ internal class Zigbee2MqttWorkerService : IWorkerService
         }
     }
 
-    public async Task StopAsync(CancellationToken cancellationToken)
+    public async Task StopAsync()
     {
         this.cts.Cancel();
         if (this.client != null)
-            await this.client.StopAsync(cancellationToken);
+            await this.client.StopAsync(CancellationToken.None);
     }
 
     private async Task ConductHandler(IEnumerable<IConduct> conducts, CancellationToken cancellationToken)

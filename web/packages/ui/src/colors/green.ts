@@ -1,4 +1,4 @@
-const green = {
+export const green = {
     50: '#e8f5e9',
     100: '#c8e6c9',
     200: '#a5d6a7',
@@ -14,5 +14,3 @@ const green = {
     A400: '#00e676',
     A700: '#00c853'
 };
-
-export default green;

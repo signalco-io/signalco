@@ -1,4 +1,4 @@
-import { DotIndicator } from "@signalco/ui";
+import { DotIndicator } from "@signalco/ui/dist/DotIndicator";
 import { StoryObj } from "@storybook/react";
 
 export default { component: DotIndicator, tags: ['autodocs'] };

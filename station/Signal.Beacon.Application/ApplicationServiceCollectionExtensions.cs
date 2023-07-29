@@ -24,7 +24,9 @@ public static class ApplicationServiceCollectionExtensions
 {
     public static IServiceCollection AddBeaconApplication(this IServiceCollection services)
     {
-        services.AddTransient<IWorkerService, ApplicationWorkerService>();
+        services
+            .AddTransient<IInternalWorkerService, ApplicationWorkerService>()
+            .AddSingleton<IConfigurationService, FileSystemConfigurationService>();
 
         services.AddTransient<IConditionEvaluatorService, ConditionEvaluatorService>();
         services.AddSingleton<IConditionEvaluatorValueProvider, ConditionEvaluatorValueProvider>();
@@ -48,7 +50,7 @@ public static class ApplicationServiceCollectionExtensions
         services.AddTransient<IPubSubTopicHub<IConduct>, PubSubTopicHub<IConduct>>();
 
         // Processing
-        services.AddSingleton<IProcessor, Processor>();
+        services.AddSingleton<IProcessorWorkerService, ProcessorWorkerService>();
 
         // Conducts
         services.AddSingleton<IConductManager, ConductManager>();

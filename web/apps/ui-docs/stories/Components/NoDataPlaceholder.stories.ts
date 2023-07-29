@@ -1,4 +1,4 @@
-import { NoDataPlaceholder } from "@signalco/ui";
+import { NoDataPlaceholder } from "@signalco/ui/dist/NoDataPlaceholder";
 import { StoryObj } from "@storybook/react";
 
 export default { component: NoDataPlaceholder, tags: ['autodocs'] };

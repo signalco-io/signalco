@@ -1,9 +1,8 @@
 import React from 'react';
-import {
-    Loadable, NoDataPlaceholder, List,
-    ListItem,
-    ListItemButton, Box
-} from '@signalco/ui';
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { ListItem } from '@signalco/ui/dist/ListItem';
+import { List } from '@signalco/ui/dist/List';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import { ContactPointerRequiredEntity } from './DisplayEntityTarget';
 
@@ -25,23 +24,24 @@ export default function EntityContactSelection(props: EntityContactSelectionProp
     };
 
     if (!isLoading && !error && !contacts.length) {
-        return <Box sx={{ p: 2 }}><NoDataPlaceholder content={'No applicable contacts available'} /></Box>;
+        return <div className="p-2"><NoDataPlaceholder content={'No applicable contacts available'} /></div>;
     }
 
     return (
         <Loadable isLoading={isLoading} loadingLabel="Loading contacts" error={error}>
             <List>
-                <ListItem>
-                    <ListItemButton onClick={() => handleContactSelected({ entityId: target.entityId })} selected={!target.contactName || !target.channelName}>
-                        None
-                    </ListItemButton>
-                </ListItem>
+                <ListItem
+                    nodeId={`entity-contact-selection-${target.entityId}-none`}
+                    onSelected={() => handleContactSelected({ entityId: target.entityId })}
+                    selected={!target.contactName || !target.channelName}
+                    label="None" />
                 {contacts.map(c => (
-                    <ListItem key={`${c.channelName}-${c.contactName}`}>
-                        <ListItemButton onClick={() => handleContactSelected(c)} selected={target.channelName === c.channelName && target.contactName === c.contactName}>
-                            {c.contactName}
-                        </ListItemButton>
-                    </ListItem>
+                    <ListItem
+                        key={`${c.channelName}-${c.contactName}`}
+                        nodeId={`entity-contact-selection-${target.entityId}-${c.channelName}-${c.contactName}`}
+                        onSelected={() => handleContactSelected(c)}
+                        selected={target.channelName === c.channelName && target.contactName === c.contactName}
+                        label={c.contactName} />
                 ))}
             </List>
         </Loadable>

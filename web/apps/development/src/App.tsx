@@ -1,34 +1,42 @@
 import './App.css'
+import { AppItemSection } from './AppItemSection';
+import { AppItemType } from './AppItemType';
+import { Stack } from '@signalco/ui/dist/Stack';
 
-const apps = [
+const tools: AppItemType[] = [
+    { label: 'UI Docs', href: 'http://localhost:6007' },
+];
+
+const apps: AppItemType[] = [
     { label: 'Web', href: 'http://localhost:3000' },
     { label: 'App', href: 'http://localhost:3001' },
     { label: 'Blog', href: 'http://localhost:3002' },
-    { label: 'UI Docs', href: 'http://localhost:6007' },
+];
+
+const uSaas: AppItemType[] = [
     { label: 'slco', href: 'http://localhost:4002' },
     { label: 'brandgrab', href: 'http://localhost:4001' }
-]
+];
 
 function App() {
+    const sections = [
+        { items: tools, title: 'Tools' },
+        { items: apps, title: 'Apps' },
+        { items: uSaas, title: 'uSaas' },
+    ];
 
-  return (
-    <div className="App">
-        <h1>signalco development portal</h1>
-        <ul className='launcher'>
-            {apps.map(app => (
-                <li key={app.label} className="launcher-card">
-                    <a href={app.href} target="_blank">
-                        <img src={`${app.href}/favicon.ico`} />
-                        <div className="info">
-                            <span>{app.label}</span>
-                            <small>{app.href}</small>
-                        </div>
-                    </a>
-                </li>
-            ))}
-        </ul>
-    </div>
-  )
+    return (
+        <>
+            <header>
+                <h1>Developer Home</h1>
+            </header>
+            <main>
+                <Stack spacing={2}>
+                    {sections.map(section => <AppItemSection key={section.title} {...section} />)}
+                </Stack>
+            </main>
+        </>
+    )
 }
 
 export default App

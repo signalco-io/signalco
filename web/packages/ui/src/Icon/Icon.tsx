@@ -1,20 +1,10 @@
-import { CSSProperties } from 'react';
-import { ChildrenProps } from '../sharedTypes';
+import type { HTMLAttributes } from 'react';
+import { cx } from 'classix';
 
-/** @alpha */
-export interface IconProps extends ChildrenProps {
-    sx?: CSSProperties | undefined;
-}
+export type IconProps = HTMLAttributes<HTMLSpanElement>;
 
-/** @alpha */
-export default function Icon(props: IconProps) {
+export function Icon({ className, ...rest }: IconProps) {
     return (
-        <span
-            className="material-icons"
-            style={{
-                ...props.sx
-            }}>
-            {props.children}
-        </span>
+        <span className={cx('material-icons', className)} {...rest} />
     );
 }

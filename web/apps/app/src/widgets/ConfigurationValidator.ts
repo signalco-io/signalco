@@ -6,7 +6,9 @@ const isInvalidateDeviceContactTarget = (value: Partial<IContactPointer>) =>
     !value.contactName ||
     !value.channelName;
 
-export const IsConfigurationValid = <TConfigProps>(config: any, options: IWidgetConfigurationOption<TConfigProps>[]) => {
+export function IsConfigurationValid<TConfigProps>(
+    config: TConfigProps,
+    options: IWidgetConfigurationOption<TConfigProps>[]) {
     if (!config) return false;
     for (let i = 0; i < options.length; i++) {
         const opt = options[i];
@@ -20,7 +22,7 @@ export const IsConfigurationValid = <TConfigProps>(config: any, options: IWidget
 
         switch (opt.type) {
         case 'entity':
-            if (!value.deviceId) {
+            if (typeof value === 'object' && 'deviceId' in value && !value.deviceId) {
                 console.debug(`Config invalid: ${String(opt.name)} - deviceTarget, deviceId missing`, config);
                 return false;
             }
@@ -47,4 +49,4 @@ export const IsConfigurationValid = <TConfigProps>(config: any, options: IWidget
         }
     }
     return true;
-};
+}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export default function throttle (callback: (...rest: any[]) => Promise<any> | void, limit: number) {
     let wait = false;                  // Initially, we're not waiting
     return function (...rest: any[]) {               // We return a throttled function

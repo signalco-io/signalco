@@ -1,5 +1,7 @@
-import React from 'react';
-import { Stack, Button, SelectItems, ChildrenProps } from '@signalco/ui';
+import { PropsWithChildren } from 'react';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
+import { Button } from '@signalco/ui/dist/Button';
 import { asArray, ObjectDictAny } from '@signalco/js';
 import { extractValues } from '@enterwell/react-form-validation';
 import { FormBuilder, type FormItems, useFormField, FormBuilderProvider, FormBuilderComponents } from '@enterwell/react-form-builder';
@@ -24,7 +26,7 @@ export type WidgetConfigurationProps = {
 const useWidgetConfiguration = (
     options: WidgetConfigurationOption<unknown>[],
     config: object | undefined,
-    onConfiguration: (config: any) => void) => {
+    onConfiguration: (config: object) => void) => {
     const form: ObjectDictAny = {};
     for (let index = 0; index < options.length; index++) {
         const configOption = options[index];
@@ -109,12 +111,12 @@ const widgetConfigurationFormComponents: FormBuilderComponents = {
         label="Visual"
         items={[{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }]}
         placeholder="Select visual"
-        fullWidth
+        className="w-full"
         value={props.value}
-        onChange={(item: any) => item && item.length && props.onChange(item[0], { receiveEvent: false })} />
+        onValueChange={(item: string) => item && props.onChange(item, { receiveEvent: false })} />
 };
 
-function WidgetConfigurationFormProvider(props: ChildrenProps) {
+function WidgetConfigurationFormProvider(props: PropsWithChildren) {
     return (
         <GeneralFormProvider>
             <FormBuilderProvider components={widgetConfigurationFormComponents}>
@@ -127,26 +129,22 @@ function WidgetConfigurationFormProvider(props: ChildrenProps) {
 function WidgetConfiguration(props: WidgetConfigurationProps) {
     const configProps = useWidgetConfiguration(props.options, props.config, props.onConfiguration)
     return (
-        <>
-            {props.isOpen && (
-                <ConfigurationDialog
-                    header="Configure widget"
-                    isOpen={props.isOpen}
-                    onClose={configProps.onCancel}
-                    actions={(
-                        <>
-                            <Button onClick={configProps.onCancel}>Cancel</Button>
-                            <Button autoFocus onClick={configProps.onSave}>Save changes</Button>
-                        </>
-                    )}>
-                    <Stack spacing={2}>
-                        <WidgetConfigurationFormProvider>
-                            <FormBuilder form={configProps.form} onSubmit={configProps.onSave} />
-                        </WidgetConfigurationFormProvider>
-                    </Stack>
-                </ConfigurationDialog>
-            )}
-        </>
+        <ConfigurationDialog
+            header="Configure widget"
+            open={props.isOpen}
+            onClose={configProps.onCancel}
+            actions={(
+                <>
+                    <Button onClick={configProps.onCancel}>Cancel</Button>
+                    <Button autoFocus onClick={configProps.onSave}>Save changes</Button>
+                </>
+            )}>
+            <Stack spacing={2}>
+                <WidgetConfigurationFormProvider>
+                    <FormBuilder form={configProps.form} onSubmit={configProps.onSave} />
+                </WidgetConfigurationFormProvider>
+            </Stack>
+        </ConfigurationDialog>
     );
 }
 

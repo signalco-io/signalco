@@ -5,9 +5,8 @@ namespace Signal.Beacon.Channel.Samsung;
 
 public static class SamsungServiceCollectionExtensions
 {
-    public static IServiceCollection AddSamsung(this IServiceCollection services)
-    {
-        return services
-            .AddSingleton<IWorkerService, SamsungWorkerService>();
-    }
+    public static IServiceCollection AddSamsung(this IServiceCollection services) =>
+        services
+            .AddTransient<IWorkerServiceRegistration, SamsungWorkerServiceRegistration>()
+            .AddTransient<SamsungWorkerService>();
 }

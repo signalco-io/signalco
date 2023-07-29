@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Signal.Beacon.Application.Signal.Client.Entity;
 using Signal.Beacon.Core.Entity;
-using Signal.Beacon.Core.Signal;
 using Process = Signal.Beacon.Core.Processes.Process;
 
 namespace Signal.Beacon.Application;

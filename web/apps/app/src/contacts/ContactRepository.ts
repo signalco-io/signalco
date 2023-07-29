@@ -43,13 +43,22 @@ export async function historiesAsync(targets: IContactPointer[] | undefined, dur
 }
 
 export async function historyAsync(pointer: IContactPointer, duration?: Date | string | number | undefined) {
-    return (await requestAsync('/contact/history', 'get', {
+    const params = {
         entityId: pointer.entityId,
         channelName: pointer.channelName,
         contactName: pointer.contactName,
-        duration: typeof duration === 'string' || typeof duration === 'undefined' || typeof duration === 'number'
-            ? duration
-            : toDuration(duration)
+    };
+    const optionalParams = new Map<string, string>();
+    const durationParam = typeof duration === 'string' || typeof duration === 'undefined' || typeof duration === 'number'
+        ? duration?.toString()
+        : toDuration(duration);
+    if (durationParam) {
+        optionalParams.set('duration', durationParam);
+    }
+
+    return (await requestAsync('/contact/history', 'get', {
+        ...params,
+        ...optionalParams.entries
     }) as ContactHistoryResponseDto).values.map(tsvp => ({
         timeStamp: new Date(tsvp.timeStamp),
         valueSerialized: tsvp.valueSerialized

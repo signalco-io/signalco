@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Accordion, Row, Typography,
-    Box
-} from '@signalco/ui';
+import { cx } from 'classix';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Row } from '@signalco/ui/dist/Row';
+import { Accordion } from '@signalco/ui/dist/Accordion';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import EntitySelection from './EntitySelection';
 import EntityIconLabel from './EntityIconLabel';
@@ -70,8 +70,8 @@ export default function EntitySelectionMenu({
         <>
             <Accordion
                 open={selecting === 'entity'}
-                sx={{ flexGrow: selecting === 'entity' ? 1 : 0 }}
-                onChange={handleEditEntity}
+                className={cx(selecting === 'entity' && 'grow-1')}
+                onOpenChanged={handleEditEntity}
                 unmountOnExit
             >
                 <Typography>
@@ -81,13 +81,13 @@ export default function EntitySelectionMenu({
                         <Typography level="body2">Select entity</Typography>
                     )}
                 </Typography>
-                <Box sx={{ p: 0, overflow: 'auto' }}>
+                <div className="overflow-auto">
                     <EntitySelection target={target} onSelected={handleEntitySelected} />
-                </Box>
+                </div>
             </Accordion>
             {(selectContact && entitySelected) && (
                 <Accordion
-                    sx={{ flexGrow: selecting === 'contact' ? 1 : 0 }}
+                    className={cx(selecting === 'contact' && 'grow-1')}
                     open={selecting === 'contact'}
                     disabled={selecting !== 'contact' && !entitySelected}
                     unmountOnExit
@@ -113,7 +113,7 @@ export default function EntitySelectionMenu({
             )}
             {(selectValue && contactSelected) && (
                 <Accordion
-                    sx={{ flexGrow: selecting === 'value' ? 1 : 0 }}
+                    className={cx(selecting === 'value' && 'grow-1')}
                     open={selecting === 'value'}
                     disabled={selecting !== 'value' && !contactSelected}
                     unmountOnExit

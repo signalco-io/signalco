@@ -1,8 +1,11 @@
 'use client';
+
 import { useInView } from 'react-cool-inview';
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { SectionCenter } from './SectionCenter';
-import { Newsletter } from './LandingView';
+
+export const Newsletter = dynamic(() => import('../pages/landing/Newsletter'));
 
 export function NewsletterSection() {
     const { observe, inView } = useInView({

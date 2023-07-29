@@ -6,7 +6,6 @@ using Signal.Beacon.Application.Signal.Client.Station;
 using Signal.Beacon.Application.Signal.SignalR;
 using Signal.Beacon.Application.Signal.Station;
 using Signal.Beacon.Core.Extensions;
-using Signal.Beacon.Core.Signal;
 
 namespace Signal.Beacon.Application.Signal;
 

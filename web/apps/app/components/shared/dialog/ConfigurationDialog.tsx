@@ -1,44 +1,38 @@
 import React from 'react';
-import { Modal, ModalClose, ModalDialog, Typography, Breakpoint, Stack, Row, Box } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Modal } from '@signalco/ui/dist/Modal';
 
 export interface IConfigurationDialogProps {
-    isOpen: boolean,
+    open?: boolean;
     header: React.ReactNode,
     headerActions?: React.ReactNode,
-    onClose: () => void,
+    onClose?: () => void,
     children: React.ReactNode,
-    maxWidth?: false | undefined | Breakpoint,
-    actions?: React.ReactNode
+    actions?: React.ReactNode,
+    trigger?: React.ReactNode
 }
 
 function ConfigurationDialog({
-    children, header, headerActions, isOpen, onClose, maxWidth = 'sm', actions
+    children, header, headerActions, open, onClose, actions
 }: IConfigurationDialogProps) {
     return (
-        <Modal open={isOpen} onClose={onClose}>
-            <ModalDialog
-                sx={{
-                    width: '100%',
-                    maxWidth: maxWidth ? maxWidth : undefined
-                }}>
-                <ModalClose />
-                <Stack spacing={1}>
-                    <Row justifyContent="space-between">
-                        <Typography level="h5">{header}</Typography>
-                        <Box sx={{ mt: -1.5, mr: 4 }}>
-                            <Row spacing={1}>
-                                {headerActions}
-                            </Row>
-                        </Box>
+        <Modal open={open} onOpenChange={(newOpenState: boolean) => newOpenState && onClose && onClose()}>
+            <Stack spacing={1}>
+                <Row justifyContent="space-between">
+                    <Typography level="h5">{header}</Typography>
+                    <Row spacing={1}>
+                        {headerActions}
                     </Row>
-                    {children}
-                    {actions && (
-                        <Row spacing={1} justifyContent="end">
-                            {actions}
-                        </Row>
-                    )}
-                </Stack>
-            </ModalDialog>
+                </Row>
+                {children}
+                {actions && (
+                    <Row spacing={1} justifyContent="end">
+                        {actions}
+                    </Row>
+                )}
+            </Stack>
         </Modal>
     );
 }

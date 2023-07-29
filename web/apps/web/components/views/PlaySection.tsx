@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import Image from 'next/image';
 import { StepContent } from './StepContent';
@@ -6,7 +5,9 @@ import { FeatureDescription } from './FeatureDescription';
 
 export function PlaySection() {
     return (
-        <StepContent header="Play" subtitle="Here are some of our favorite ways you can automate your life"
+        <StepContent
+            header="Play"
+            subtitle="Here are some of our favorite ways you can automate your life"
             image={<>
                 <Image className="image--light" src={'/images/playpitch.png'} alt="Play" quality={100} width={511} height={684} />
                 <Image className="image--dark" src={'/images/playpitch-dark.png'} alt="Play" quality={100} width={511} height={684} />

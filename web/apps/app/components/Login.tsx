@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-    Button, Stack, Row
-} from '@signalco/ui';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Row } from '@signalco/ui/dist/Row';
+import { Button } from '@signalco/ui/dist/Button';
 import { useTimeout } from '@signalco/hooks';
 
 export default function Login() {

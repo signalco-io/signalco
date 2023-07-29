@@ -1,6 +1,5 @@
-'use client';
-import React from 'react';
-import { Stack, Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
 
 export function DataPart(props: { value: string; subtitle: string; }) {
     return <Stack alignItems="center" spacing={1}>

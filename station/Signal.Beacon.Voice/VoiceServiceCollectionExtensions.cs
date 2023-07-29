@@ -5,10 +5,9 @@ namespace Signal.Beacon.Voice;
 
 public static class VoiceServiceCollectionExtensions
 {
-    public static IServiceCollection AddVoice(this IServiceCollection services)
-    {
-        return services
+    public static IServiceCollection AddVoice(this IServiceCollection services) =>
+        services
             .AddTransient<SpeechResultEvaluator>()
-            .AddSingleton<IWorkerService, VoiceService>();
-    }
+            .AddTransient<IWorkerServiceRegistration, VoiceWorkerServiceRegistration>()
+            .AddSingleton<VoiceService>();
 }

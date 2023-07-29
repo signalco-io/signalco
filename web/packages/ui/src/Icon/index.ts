@@ -1,2 +1,1 @@
-export { default } from './Icon';
-export { type IconProps } from './Icon';
+export { Icon, type IconProps } from './Icon';

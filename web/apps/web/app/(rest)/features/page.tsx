@@ -1,6 +1,7 @@
 'use client';
 
-import { Link, Stack } from '@signalco/ui';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Link } from '@signalco/ui/dist/Link';
 
 export default function FeaturesPage() {
     return (

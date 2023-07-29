@@ -1,15 +1,20 @@
-import { Alert as JoyAlert } from '@mui/joy';
-import { CSSProperties, ReactNode } from "react";
+import { type HTMLAttributes, type ReactNode } from 'react';
+import { cx } from 'classix';
 
-export type AlertProps = {
-    color?: "primary" | "neutral" | "danger" | "info" | "success" | "warning",
-    variant?: "plain" | "outlined" | "soft" | "solid",
+export type AlertProps = HTMLAttributes<HTMLDivElement> & {
+    color?: 'primary' | 'neutral' | 'danger' | 'info' | 'success' | 'warning',
     startDecorator?: ReactNode | undefined,
     endDecorator?: ReactNode | undefined,
-    sx?: CSSProperties | undefined,
-    children?: React.ReactNode | string | undefined
 };
 
-export default function Alert({ children, color, variant, startDecorator, endDecorator, sx }: AlertProps) {
-    return <JoyAlert color={color} variant={variant} startDecorator={startDecorator} endDecorator={endDecorator} sx={sx}>{children}</JoyAlert>
+export function Alert({ className, ...props }: AlertProps) {
+    return (
+        <div
+            role="alert"
+            // color={color}
+            // startDecorator={startDecorator}
+            // endDecorator={endDecorator}
+            className={cx('', className)}
+            {...props} />
+    );
 }

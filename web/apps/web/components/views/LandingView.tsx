@@ -1,9 +1,10 @@
-'use client';
-
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Navigate } from '@signalco/ui-icons';
-import { Stack, Container, Button, Divider, MuiStack } from '@signalco/ui';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Divider } from '@signalco/ui/dist/Divider';
+import { Container } from '@signalco/ui/dist/Container';
+import {Button} from '@signalco/ui/dist/Button';
 import DeveloperOnly from '../shared/DeveloperOnly';
 import DiscoverVisual from '../pages/landing/visuals/DiscoverVisual';
 import Cover from '../pages/landing/Cover';
@@ -18,22 +19,20 @@ import { FeaturedIntegrationsSection } from './FeaturedIntegrationsSection';
 import { FeatureDescription } from './FeatureDescription';
 import { DataPart } from './DataPart';
 
-export const Newsletter = dynamic(() => import('../pages/landing/Newsletter'));
 export const GlobePart = dynamic(() => import('../pages/landing/GlobeSection'));
 
 export default function LandingPageView() {
     return (
-        <Stack style={{ overflowX: 'hidden' }}>
-            <div style={{ marginTop: 2 * 8, marginBottom: 2 * 8 }}>
+        <Stack className="overflow-x-hidden">
+            <div className="my-2">
                 <Cover />
             </div>
             <DeveloperOnly>
                 <CounterIndicator count={0} />
                 <StepContent
                     header="Developers"
-                    subtitle="Signalco is free and open source project run by small team of enthusiasts."
-                    direction="horizontal">
-                    <Stack alignItems="center">
+                    subtitle="Signalco is free and open source project run by small team of enthusiasts.">
+                    <Stack alignItems="center" className="self-center">
                         <Button
                             variant="solid"
                             endDecorator={<Navigate />}
@@ -77,21 +76,17 @@ export default function LandingPageView() {
             </StepContent>
             <GlobeSection />
             <Divider />
-            <SectionCenter narrow style={{ backgroundColor: 'var(--joy-palette-background-surface)' }}>
-                <MuiStack
-                    spacing={{ xs: 6, md: 8 }}
-                    alignItems="center"
-                    direction={{ xs: 'column', md: 'row' }}
-                    justifyContent={{ xs: 'space-between' }}>
+            <SectionCenter narrow className="bg-muted">
+                <div className="flex flex-col items-center justify-center gap-4 py-4 md:flex-row md:gap-24">
                     <DataPart value="8" subtitle="Integrations" />
                     <DataPart value="500+" subtitle="Automations per day" />
                     <DataPart value="2000+" subtitle="Supported devices" />
-                </MuiStack>
+                </div>
             </SectionCenter>
             <Divider />
             <NewsletterSection />
             <Container>
-                <div style={{ paddingBottom: 8 * 8 }}>
+                <div className="pb-8">
                     <CtaSection />
                 </div>
             </Container>

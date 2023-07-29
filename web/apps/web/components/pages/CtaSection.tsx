@@ -1,9 +1,12 @@
-import { NavigatingButton, Stack, Card, Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
+import { Card } from '@signalco/ui/dist/Card';
 import { KnownPages } from '../../src/knownPages';
 
 export default function CtaSection() {
     return (
-        <Card sx={{ py: 8 }}>
+        <Card className="py-8">
             <Stack alignItems="center" spacing={4}>
                 <Typography level="h4" component="p">Automate your life</Typography>
                 <Typography>Focus on things that matter to you.</Typography>

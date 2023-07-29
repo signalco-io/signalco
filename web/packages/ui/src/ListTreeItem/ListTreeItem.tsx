@@ -1,25 +1,24 @@
-import { ReactElement, useState } from 'react';
+import { PropsWithChildren, ReactElement, useState } from 'react';
+import { cx } from 'classix';
 import { ExpandDown } from '@signalco/ui-icons';
-import { ChildrenProps } from '../sharedTypes';
-import { ListItem, Tooltip, IconButton, ListItemButton, List } from '@mui/joy';
+import { Tooltip } from '../Tooltip';
+import { Stack } from '../Stack';
+import { Row } from '../Row';
+import { ListItem } from '../ListItem/ListItem';
+import { IconButton } from '../IconButton';
 
-export interface ListTreeItemProps extends ChildrenProps {
+export type ListTreeItemProps = PropsWithChildren<{
     label?: ReactElement | string;
     nodeId: string;
     defaultOpen?: boolean;
     onChange?: (nodeId: string, open: boolean) => void;
     selected?: boolean;
     onSelected?: (nodeId: string) => void;
-}
+}>;
 
-export default function ListTreeItem(props: ListTreeItemProps) {
+export function ListTreeItem(props: ListTreeItemProps) {
     const { label, children, nodeId, defaultOpen, onChange, selected, onSelected } = props;
     const [open, setOpen] = useState(defaultOpen);
-
-    const handleClick = () => {
-        if (onSelected)
-            onSelected(nodeId);
-    };
 
     const handleOpenClick = () => {
         setOpen(!open);
@@ -27,32 +26,32 @@ export default function ListTreeItem(props: ListTreeItemProps) {
             onChange(nodeId, !open);
     };
 
+    const handleOnSelected = (selectedNodeId: string) => {
+        if (onSelected) {
+            onSelected(selectedNodeId);
+        }
+    };
+
     return (
-        <>
-            <ListItem nested startAction={children && (
+        <Stack>
+            <Row spacing={1}>
                 <Tooltip title="Toggle">
-                    <IconButton onClick={handleOpenClick} className={open ? 'expanded' : ''} size="sm" sx={{
-                        ['& > *']: {
-                            transition: '0.2s',
-                            transform: 'rotate(-90deg)',
-                        },
-                        ['&.expanded > *']: {
-                            transform: 'rotate(0deg)',
-                        },
-                    }}>
-                        <ExpandDown />
+                    <IconButton onClick={handleOpenClick} className={'transition-transform'} size="sm">
+                        <ExpandDown className={cx(open && 'rotate-90')} />
                     </IconButton>
                 </Tooltip>
-            )}>
-                <ListItemButton onClick={handleClick} selected={selected} disabled={!onSelected}>
-                    {label}
-                </ListItemButton>
-                {open && (
-                    <List>
-                        {children}
-                    </List>
-                )}
-            </ListItem>
-        </>
-    )
+                <ListItem
+                    nodeId={nodeId}
+                    label={label}
+                    selected={selected}
+                    onSelected={handleOnSelected}
+                    disabled={!onSelected} />
+            </Row>
+            {open && (
+                <Stack>
+                    {children}
+                </Stack>
+            )}
+        </Stack>
+    );
 }

@@ -1,12 +1,12 @@
 import { Copy } from '@signalco/ui-icons';
-import IconButtonCopyToClipboard from '../IconButtonCopyToClipboard';
-import TextField, { TextFieldProps } from '../TextField';
+import { Input, type InputProps } from '../Input';
+import { IconButtonCopyToClipboard } from '../IconButtonCopyToClipboard';
 
-export type CopyToClipboardInputProps = TextFieldProps;
+export type CopyToClipboardInputProps = InputProps;
 
-export default function CopyToClipboardInput(props: TextFieldProps) {
+export function CopyToClipboardInput(props: CopyToClipboardInputProps) {
     return (
-        <TextField
+        <Input
             endDecorator={
                 <IconButtonCopyToClipboard
                     title="Copy to clipboard"
@@ -14,7 +14,7 @@ export default function CopyToClipboardInput(props: TextFieldProps) {
                     defaultValue={props.defaultValue}
                     successMessage={'Copied'}
                     errorMessage={'Failed to copy'}>
-                    <Copy fontSize={props.size === 'sm' ? 16 : (props.size === 'lg' ? 32 : 24)} />
+                    <Copy />
                 </IconButtonCopyToClipboard>
             } {...props} />
     );

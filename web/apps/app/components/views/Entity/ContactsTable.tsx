@@ -1,8 +1,21 @@
-import React, { Fragment, useMemo, useState } from 'react';
-import { usePopupState } from 'material-ui-popup-state/hooks';
-import { bindTrigger } from 'material-ui-popup-state';
+import React, { useMemo, useState } from 'react';
 import { Add, Code, Delete, Edit, MoreVertical, UI } from '@signalco/ui-icons';
-import { Stack, Loadable, Row, Button, Card, IconButton, List, ListDivider, ListItem, Menu, MenuItem, TextField, Tooltip, Typography, Box, CopyToClipboardInput, ListTreeItem, Picker, Timeago, ListItemDecorator } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Tooltip } from '@signalco/ui/dist/Tooltip';
+import { Timeago } from '@signalco/ui/dist/Timeago';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
+import { Row } from '@signalco/ui/dist/Row';
+import { MenuItem, Menu } from '@signalco/ui/dist/Menu';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
+import { ListItem } from '@signalco/ui/dist/ListItem';
+import { List } from '@signalco/ui/dist/List';
+import { Input } from '@signalco/ui/dist/Input';
+import { IconButton } from '@signalco/ui/dist/IconButton';
+import { CopyToClipboardInput } from '@signalco/ui/dist/CopyToClipboardInput';
+import { Card } from '@signalco/ui/dist/Card';
+import { Button } from '@signalco/ui/dist/Button';
 import { camelToSentenceCase, isJson, ParsedJson } from '@signalco/js';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
@@ -71,16 +84,16 @@ function ObjectVisualizer(props: { name: string, value: ParsedJson, defaultOpen?
                         //     - GUID/UUID
                         //     - boolean
                         //     - ability to unset value
-                        <CopyToClipboardInput size="sm" variant="outlined" value={value?.toString()} />
+                        <CopyToClipboardInput value={value?.toString()} />
                     )}
                 </Row>
             )}>
             {hasChildren && (
-                <Box sx={{ borderLeft: '1px solid', borderColor: 'divider', ml: 2.5 }}>
+                <div className="ml-2">
                     {isArray
                         ? <JsonArrayVisualizer name={name} value={value as Array<ParsedJson>} />
                         : <JsonNonArrayVisualizer value={value} />}
-                </Box>
+                </div>
             )}
         </ListTreeItem>
     );
@@ -88,7 +101,7 @@ function ObjectVisualizer(props: { name: string, value: ParsedJson, defaultOpen?
 
 function DisplayJson(props: { json: string | undefined }) {
     const [showSource, setShowSource] = useState(false);
-    const jsonObj = useMemo(() => JSON.parse(props.json ?? ''), [props.json]);
+    const jsonObj = useMemo(() => JSON.parse(props.json ?? '') as ParsedJson, [props.json]);
     const jsonFormatted = useMemo(() => JSON.stringify(jsonObj, undefined, 4), [jsonObj]);
 
     return (
@@ -96,12 +109,12 @@ function DisplayJson(props: { json: string | undefined }) {
             {showSource ? (
                 <CodeEditor language="json" code={jsonFormatted} height={300} />
             ) : (
-                <List size="sm">
+                <List>
                     <ObjectVisualizer name="root" defaultOpen value={jsonObj} />
                 </List>
             )}
             <div style={{ position: 'absolute', right: 0, top: 0 }}>
-                <Picker value={showSource ? 'source' : 'ui'} size="sm" onChange={(_, s) => setShowSource(s === 'source')} options={[
+                <SelectItems value={showSource ? 'source' : 'ui'} onValueChange={value => setShowSource(value === 'source')} items={[
                     { value: 'ui', label: <UI size={18} /> },
                     { value: 'source', label: <Code size={18} /> }
                 ]} />
@@ -110,16 +123,15 @@ function DisplayJson(props: { json: string | undefined }) {
     );
 }
 
-export default function ContactsTable(props: { entity: IEntityDetails | undefined; }) {
-    const { entity } = props;
+export default function ContactsTable({ entity }: { entity: IEntityDetails | null | undefined; }) {
     const { t } = useLocale('App', 'Entities');
 
     const isLoading = false;
     const error = undefined;
 
-    const createContactDialogState = usePopupState({ variant: 'dialog', popupId: 'contactCreateDialog' });
-    const editContactValueDialogState = usePopupState({ variant: 'dialog', popupId: 'contactEditValueDialog' });
-    const deleteContactDialogState = usePopupState({ variant: 'dialog', popupId: 'contactDeleteDialog' });
+    const [createContactDialogOpen, setCreateContactDialogOpen] = useState(false);
+    const [editingContactDialogOpen, setEditingContactDialogOpen] = useState(false);
+    const [deletingContactDialogOpen, setDeletingContactDialogOpen] = useState(false);
     const [channelName, setChannelName] = useState('');
     const [contactName, setContactName] = useState('');
     const [editingContact, setEditingContact] = useState<IContactPointer | undefined>(undefined);
@@ -134,7 +146,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                 contactName
             }, undefined);
         }
-        createContactDialogState.close();
+        setCreateContactDialogOpen(false);
     };
     const handleEditValueSubmit = async () => {
         if (entity) {
@@ -147,7 +159,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                 contactName: editingContact.contactName
             }, valueSerialized);
         }
-        editContactValueDialogState.close();
+        setEditingContactDialogOpen(false);
     };
     const handleDeleteContact = async () => {
         if (entity) {
@@ -160,7 +172,7 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                 contactName: deletingContact.contactName
             });
         }
-        deleteContactDialogState.close();
+        setDeletingContactDialogOpen(false);
     }
 
     return (
@@ -168,49 +180,49 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
             <Card>
                 <Row justifyContent="space-between">
                     <Typography>{t('Contacts')}</Typography>
-                    <Menu menuId="contacts-options" renderTrigger={(props) => (
-                        <IconButton size="sm" {...props}>
+                    <Menu trigger={(
+                        <IconButton size="sm">
                             <MoreVertical />
                         </IconButton>
                     )}>
-                        <MenuItem {...bindTrigger(createContactDialogState)} startDecorator={<Add />}>
+                        <MenuItem onClick={() => setCreateContactDialogOpen(true)} startDecorator={<Add />}>
                             {t('CreateContact')}
                         </MenuItem>
                     </Menu>
                 </Row>
                 <Loadable isLoading={isLoading} loadingLabel="Loading contacts" error={error}>
                     <List>
-                        {entity?.contacts?.map((c, i) => (
-                            <Fragment key={`${c.entityId}-${c.channelName}-${c.contactName}`}>
-                                <ListItem endAction={(
-                                    <Menu renderTrigger={(props) => (
-                                        <IconButton size="sm" {...props}>
+                        {entity?.contacts?.map(c => (
+                            <ListItem
+                                key={`${c.entityId}-${c.channelName}-${c.contactName}`}
+                                startDecorator={(
+                                    <ChannelLogo channelName={c.channelName} size="tiny" label={c.channelName} />
+                                )}
+                                endDecorator={(
+                                    <Menu trigger={(
+                                        <IconButton size="sm">
                                             <MoreVertical />
                                         </IconButton>
                                     )}>
                                         <MenuItem
-                                            {...bindTrigger(editContactValueDialogState)}
-                                            onClick={(e) => {
+                                            onClick={() => {
+                                                setEditingContactDialogOpen(true);
                                                 setEditingContact(c);
-                                                editContactValueDialogState.open(e);
                                             }}
                                             startDecorator={<Edit />}>
                                             {t('EditContact')}
                                         </MenuItem>
                                         <MenuItem
-                                            {...bindTrigger(deleteContactDialogState)}
-                                            onClick={(e) => {
+                                            onClick={() => {
+                                                setDeletingContactDialogOpen(true);
                                                 setDeletingContact(c);
-                                                deleteContactDialogState.open(e);
                                             }}
                                             startDecorator={<Delete />}>
                                             {t('DeleteContact')}
                                         </MenuItem>
                                     </Menu>
-                                )}>
-                                    <ListItemDecorator>
-                                        <ChannelLogo channelName={c.channelName} size="tiny" label={c.channelName} />
-                                    </ListItemDecorator>
+                                )}
+                                label={(
                                     <Row spacing={1} style={{ flexGrow: 1 }}>
                                         <div style={{ width: '30%', maxWidth: '200px' }}>
                                             <Typography noWrap>{camelToSentenceCase(c.contactName)}</Typography>
@@ -219,42 +231,40 @@ export default function ContactsTable(props: { entity: IEntityDetails | undefine
                                             {isJson(c.valueSerialized)
                                                 ? <DisplayJson json={c.valueSerialized} />
                                                 : <Typography>{c.valueSerialized}</Typography>}
-                                            <div style={{ fontSize: 'var(--joy-fontSize-xs)', color: 'var(--joy-palette-text-tertiary)' }}>
+                                            <div className="text-xs text-muted-foreground">
                                                 <Timeago date={c.timeStamp} live />
                                             </div>
                                         </Stack>
                                     </Row>
-                                </ListItem>
-                                {i < (entity?.contacts?.length ?? 0) - 1 && <ListDivider />}
-                            </Fragment>
+                                )} />
                         ))}
                     </List>
                 </Loadable>
             </Card>
             <ConfigurationDialog
-                isOpen={createContactDialogState.isOpen}
+                open={createContactDialogOpen}
                 header="Create contact"
-                onClose={createContactDialogState.close}>
+                onClose={() => setCreateContactDialogOpen(false)}>
                 <Stack spacing={1}>
-                    <TextField value={channelName} onChange={(e) => setChannelName(e.target.value)} />
-                    <TextField value={contactName} onChange={(e) => setContactName(e.target.value)} />
+                    <Input value={channelName} onChange={(e) => setChannelName(e.target.value)} />
+                    <Input value={contactName} onChange={(e) => setContactName(e.target.value)} />
                     <Button onClick={handleCreateSubmit}>Create</Button>
                 </Stack>
             </ConfigurationDialog>
             <ConfigurationDialog
-                isOpen={editContactValueDialogState.isOpen}
+                open={editingContactDialogOpen}
                 header="Edit contact"
-                onClose={editContactValueDialogState.close}>
+                onClose={() => setEditingContactDialogOpen(false)}>
                 <Stack spacing={1}>
-                    <TextField value={valueSerialized} onChange={(e) => setValueSerialized(e.target.value)} />
+                    <Input value={valueSerialized} onChange={(e) => setValueSerialized(e.target.value)} />
                     <Button onClick={handleEditValueSubmit}>Create</Button>
                 </Stack>
             </ConfigurationDialog>
             <ConfirmDeleteDialog
-                isOpen={deleteContactDialogState.isOpen}
+                isOpen={deletingContactDialogOpen}
                 header="Delete contact"
                 expectedConfirmText={`${deletingContact?.channelName}-${deletingContact?.contactName}`}
-                onClose={deleteContactDialogState.close}
+                onClose={() => setDeletingContactDialogOpen(false)}
                 onConfirm={handleDeleteContact} />
         </>
     );

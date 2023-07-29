@@ -1,7 +1,9 @@
-'use client';
-
 import React, { Suspense } from 'react';
-import { Container, Button, Row, Link } from '@signalco/ui';
+import { cx } from 'classix';
+import { Row } from '@signalco/ui/dist/Row';
+import { Link } from '@signalco/ui/dist/Link';
+import { Container } from '@signalco/ui/dist/Container';
+import { Button } from '@signalco/ui/dist/Button';
 
 type NavLinkItem = {
     href: string,
@@ -27,20 +29,10 @@ function NavMenu() {
 
 export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
     return (
-        <nav style={{
-            borderBottom: '1px solid var(--joy-palette-background-body)',
-            paddingTop: 16,
-            paddingBottom: 16,
-            position: 'fixed',
-            left: 0,
-            right: 0,
-            top: 0,
-            height: '80px',
-            paddingLeft: fullWidth ? '24px' : 0,
-            paddingRight: fullWidth ? '24px' : 0,
-            backdropFilter: 'blur(10px)',
-            zIndex: 101
-        }}>
+        <nav className={cx(
+            'backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-10 h-20',
+            fullWidth ? 'px-4' : 'px-0'
+        )}>
             <Container maxWidth={fullWidth ? false : 'lg'}>
                 <header>
                     <Row justifyContent="space-between">

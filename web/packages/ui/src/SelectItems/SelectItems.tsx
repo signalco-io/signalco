@@ -1,93 +1,86 @@
-import { ReactElement, useId } from 'react';
-import { Select as SelectIcon } from '@signalco/ui-icons';
-import { Select, FormControl, Option, FormLabel, selectClasses } from '@mui/joy';
+import { ComponentPropsWithoutRef, HTMLAttributes, ReactElement, useId } from 'react';
+import { cx } from 'classix';
+import { Check, Select as SelectIcon } from '@signalco/ui-icons';
+import * as SelectPrimitive from '@radix-ui/react-select'
+import { Stack } from '../Stack';
 
-export interface SelectItemsProps {
-    multiple?: boolean,
-    value: string[],
+export type SelectItemsProps = HTMLAttributes<HTMLDivElement> & ComponentPropsWithoutRef<typeof SelectPrimitive.Root> & {
     label?: string,
-    items: { value: string, label?: ReactElement | string, content?: ReactElement | string | undefined, disabled?: boolean }[],
-    onChange: (values: string[]) => void,
+    items: {
+        value: string,
+        label?: ReactElement | string,
+        title?: string,
+        content?: ReactElement | string | undefined,
+        disabled?: boolean
+    }[],
     placeholder?: string,
-    fullWidth?: boolean;
-    heading?: boolean;
-    minWidth?: number | undefined;
+    helperText?: string;
+    onValueChange?: (value: string) => void;
 }
 
-function SelectItems(props: SelectItemsProps) {
+export function SelectItems(props: SelectItemsProps) {
     const {
         value,
         items,
         label,
         placeholder,
-        heading,
-        minWidth,
-        onChange
+        helperText,
+        onValueChange,
+        ...rest
     } = props;
 
     const uid = useId();
     const id = `select-field-${label ?? placeholder}-${uid}`;
-    const handleOnChange = (_: any, value: string | string[] | null) => {
-        onChange(typeof value === 'string' ? value.split(',') : (value ?? []));
-    };
 
     return (
-        <FormControl>
-            {label && <FormLabel id={`${id}-label`} htmlFor={`${id}-button`}>{label}</FormLabel>}
-            <Select
-                value={value?.at(0)}
-                // placeholder={placeholder} // NOTE: Violates contrast
-                onChange={handleOnChange}
-                variant={heading ? 'plain' : 'outlined'}
-                size={heading ? 'lg' : undefined}
-                slotProps={{
-                    button: {
-                        id: `${id}-button`,
-                        // TODO: Material UI set aria-labelledby correctly & automatically
-                        // but MUI Base and Joy UI don't yet.
-                        'aria-labelledby': `${id}-label ${id}-button`,
-                    },
-                }}
-                sx={{
-                    fontSize: heading ? '1.2em' : undefined,
-                    background: heading ? 'transparent' : undefined,
-                    [`& .${selectClasses.indicator}`]: {
-                        transition: '0.2s',
-                        [`&.${selectClasses.expanded}`]: {
-                            transform: 'rotate(-180deg)',
-                        },
-                    },
-                    minWidth
-                }}
-                indicator={<SelectIcon />}
-                renderValue={(selected) => {
-                    // if (multiple)
-                    //     return (
-                    //         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                    //             {selected.map((value) => (
-                    //                 <Box key={value} sx={{ m: '2px' }}>
-                    //                     <Chip>{items.find(i => i.value === value)?.label ?? value}</Chip>
-                    //                 </Box>
-                    //             ))}
-                    //         </Box>
-                    //     );
-                    // else {
-                    return items.find(i => i.value === selected?.value)?.label ?? value;
-                    // }
-                }}
-            >{items.map(item => (
-                <Option
-                    value={item.value}
-                    key={item.value}
-                    disabled={item.disabled}
-                    label={item.label}>
-                    {/* {multiple && <Checkbox checked={value.indexOf(item.value) > -1} />} */}
-                    {item.content ?? (item.label ?? item.value)}
-                </Option>)
-            )}
-            </Select>
-        </FormControl>
+        <Stack spacing={1} {...rest}>
+            {label && <label className="text-sm font-medium">{label}</label>}
+            <SelectPrimitive.Root value={value} onValueChange={onValueChange}>
+                <SelectPrimitive.Trigger
+                    id={id}
+                    className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    aria-label={label ?? placeholder}
+                >
+                    <SelectPrimitive.Value placeholder={label ?? placeholder} />
+                    <SelectPrimitive.Icon asChild>
+                        <SelectIcon className="h-4 w-4 opacity-50" />
+                    </SelectPrimitive.Icon>
+                </SelectPrimitive.Trigger>
+                <SelectPrimitive.Portal>
+                    <SelectPrimitive.Content
+                        className={cx(
+                            'relative z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+                            'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1'
+                        )}
+                        position={'popper'}
+                    >
+                        <SelectPrimitive.Viewport
+                            className={cx(
+                                'p-1',
+                                'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]'
+                            )}
+                        >
+                            {items.map(item => (
+                                <SelectPrimitive.Item
+                                    key={item.value}
+                                    value={item.value}
+                                    disabled={item.disabled}
+                                    className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                                    title={item.title}
+                                >
+                                    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+                                        <SelectPrimitive.ItemIndicator>
+                                            <Check className="h-4 w-4" />
+                                        </SelectPrimitive.ItemIndicator>
+                                    </span>
+                                    <SelectPrimitive.ItemText>{item.content ?? (item.label ?? item.value)}</SelectPrimitive.ItemText>
+                                </SelectPrimitive.Item>
+                            ))}
+                        </SelectPrimitive.Viewport>
+                    </SelectPrimitive.Content>
+                </SelectPrimitive.Portal>
+            </SelectPrimitive.Root>
+            {helperText && <p className="text-sm text-muted-foreground">{helperText}</p>}
+        </Stack>
     );
 }
-
-export default SelectItems;

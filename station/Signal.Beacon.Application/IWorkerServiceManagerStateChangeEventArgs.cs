@@ -4,7 +4,8 @@ namespace Signal.Beacon.Application;
 
 public interface IWorkerServiceManagerStateChangeEventArgs
 {
-    IWorkerService WorkerService { get; }
+    string EntityId { get; }
 
     WorkerServiceState State { get; }
+    IWorkerService? WorkerService { get; }
 }

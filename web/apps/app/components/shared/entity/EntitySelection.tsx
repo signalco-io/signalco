@@ -1,11 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import {
-    Loadable, List,
-    ListItem,
-    ListItemButton,
-    Stack,
-    TextField, Box
-} from '@signalco/ui';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Loadable } from '@signalco/ui/dist/Loadable';
+import { ListItem } from '@signalco/ui/dist/ListItem';
+import { List } from '@signalco/ui/dist/List';
+import { Input } from '@signalco/ui/dist/Input';
 import useAllEntities from '../../../src/hooks/signalco/entity/useAllEntities';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointer from '../../../src/contacts/IContactPointer';
@@ -31,21 +29,26 @@ export default function EntitySelection({ target, onSelected }: EntitySelectionP
     return (
         <Loadable isLoading={entities.isLoading} loadingLabel="Loading entity" error={entities.error}>
             <Stack spacing={1}>
-                <Box px={2}>
-                    <TextField autoFocus fullWidth placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} />
-                </Box>
+                <div className="p-2">
+                    <Input
+                        autoFocus
+                        className="w-full"
+                        placeholder="Search..."
+                        onChange={(e) => setSearchTerm(e.target.value)} />
+                </div>
                 <List>
-                    <ListItem>
-                        <ListItemButton onClick={() => handleEntitySelected(undefined)} selected={!target?.entityId}>
-                            None
-                        </ListItemButton>
-                    </ListItem>
+                    <ListItem
+                        nodeId={`entity-contact-selection-${target?.entityId}-none`}
+                        onSelected={() => handleEntitySelected(undefined)}
+                        selected={!target?.entityId}
+                        label="None" />
                     {filteredEntities?.map(entity => (
-                        <ListItem key={entity.id}>
-                            <ListItemButton onClick={() => handleEntitySelected(entity)} selected={target?.entityId === entity.id}>
-                                {entity.alias}
-                            </ListItemButton>
-                        </ListItem>
+                        <ListItem
+                            key={entity.id}
+                            nodeId={`entity-contact-selection-${target?.entityId}-${entity.id}`}
+                            label={entity.alias}
+                            onSelected={() => handleEntitySelected(entity)}
+                            selected={target?.entityId === entity.id} />
                     ))}
                 </List>
             </Stack>

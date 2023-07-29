@@ -1,22 +1,27 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.launcher {
-  display: flex;
-  gap: 1em;
+header h1 {
+  font-size: 1.5em;
+  font-weight: 400;
+  margin: 0;
+  padding: 0.3em;
+}
+
+main {
+  padding: 2em;
 }
 
 .launcher-card > a {
   border-radius: 1em;
   border: 1px solid #222222;
-  padding: 2em;
+  padding: 1em;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.5em;
   align-items: center;
 }
 

@@ -1,2 +1,1 @@
-export {default} from './EditableInput';
-export {type EditableInputProps} from './EditableInput';
+export { EditableInput, type EditableInputProps} from './EditableInput';

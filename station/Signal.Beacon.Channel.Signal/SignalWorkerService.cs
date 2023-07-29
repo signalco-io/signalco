@@ -15,26 +15,25 @@ namespace Signal.Beacon.Channel.Signal;
 
 public class SignalWorkerService : IWorkerService
 {
-    private const string ConfigurationFileName = "Signal.json";
-
     private readonly IEntityService entityService;
     private readonly IEntitiesDao entitiesDao;
     private readonly IMqttClientFactory mqttClientFactory;
     private readonly IMqttDiscoveryService mqttDiscoveryService;
-    private readonly IConfigurationService configurationService;
+    private readonly IChannelConfigurationService configurationService;
     private readonly IConductSubscriberClient conductSubscriberClient;
     private readonly ILogger<SignalWorkerService> logger;
     private readonly List<IMqttClient> clients = new();
 
     private SignalWorkerServiceConfiguration configuration = new();
     private CancellationToken startCancellationToken;
+    private string? channelId;
 
     public SignalWorkerService(
         IEntityService entityService,
         IEntitiesDao entitiesDao,
         IMqttClientFactory mqttClientFactory,
         IMqttDiscoveryService mqttDiscoveryService,
-        IConfigurationService configurationService,
+        IChannelConfigurationService configurationService,
         IConductSubscriberClient conductSubscriberClient,
         ILogger<SignalWorkerService> logger)
     {
@@ -48,13 +47,15 @@ public class SignalWorkerService : IWorkerService
     }
 
 
-    public async Task StartAsync(CancellationToken cancellationToken)
+    public async Task StartAsync(string entityId, CancellationToken cancellationToken)
     {
+        this.channelId = entityId;
         this.startCancellationToken = cancellationToken;
-        this.startCancellationToken.Register(() => _ = this.StopAsync(CancellationToken.None));
+        this.startCancellationToken.Register(() => _ = this.StopAsync());
         this.configuration =
             await this.configurationService.LoadAsync<SignalWorkerServiceConfiguration>(
-                ConfigurationFileName,
+                entityId,
+                SignalChannels.DeviceChannel,
                 cancellationToken);
 
         if (this.configuration.Servers.Any())
@@ -75,17 +76,18 @@ public class SignalWorkerService : IWorkerService
             try
             {
                 var entityId = conduct.Pointer.EntityId;
-                var entity = await this.entitiesDao.GetAsync(entityId, cancellationToken);
-                if (entity == null)
-                    throw new Exception($"Unknown entity {conduct.Pointer.EntityId}");
+                var entity = await this.entitiesDao.GetAsync(entityId, cancellationToken)
+                             ?? throw new Exception($"Unknown entity {conduct.Pointer.EntityId}");
 
                 var identifier = entity.Contact(SignalChannels.DeviceChannel, "identifier")?.ValueSerialized;
                 if (string.IsNullOrWhiteSpace(identifier))
-                    throw new Exception($"Entity not configured {entity?.Id}");
-                
+                    throw new Exception($"Entity not configured {entity.Id}");
+
                 var client = this.clients.FirstOrDefault();
                 if (client != null)
-                    await client.PublishAsync($"{conduct.Pointer.ChannelName}/{identifier}/{conduct.Pointer.ContactName}/set", conduct.ValueSerialized);
+                    await client.PublishAsync(
+                        $"{conduct.Pointer.ChannelName}/{identifier}/{conduct.Pointer.ContactName}/set",
+                        conduct.ValueSerialized);
             }
             catch (Exception ex)
             {
@@ -186,7 +188,7 @@ public class SignalWorkerService : IWorkerService
     private async Task TelemetryHandlerAsync(string entityId, MqttMessage message)
     {
         // Check topic
-        var entity = await this.entitiesDao.GetAsync(entityId);
+        var entity = await this.entitiesDao.GetAsync(entityId, this.startCancellationToken);
         var identifier = entity?.Contact(SignalChannels.DeviceChannel, "identifier")?.ValueSerialized;
         var isTelemetry = $"{SignalChannels.DeviceChannel}/{identifier}" == message.Topic;
         if (!isTelemetry)
@@ -217,18 +219,18 @@ public class SignalWorkerService : IWorkerService
         {
             this.configuration.Servers.Add(new SignalWorkerServiceConfiguration.MqttServer
                 { Url = availableBroker.IpAddress });
-            await this.configurationService.SaveAsync(ConfigurationFileName, this.configuration, cancellationToken);
+            await this.configurationService.SaveAsync(this.channelId, SignalChannels.DeviceChannel, this.configuration, cancellationToken);
             this.StartMqttClientAsync(
                 new SignalWorkerServiceConfiguration.MqttServer
                     {Url = availableBroker.IpAddress});
         }
     }
         
-    public async Task StopAsync(CancellationToken cancellationToken)
+    public async Task StopAsync()
     {
         this.logger.LogDebug("Stopping Signal worker service...");
 
         foreach (var mqttClient in this.clients) 
-            await mqttClient.StopAsync(cancellationToken);
+            await mqttClient.StopAsync(CancellationToken.None);
     }
 }

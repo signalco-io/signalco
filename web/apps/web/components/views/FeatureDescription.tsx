@@ -1,8 +1,8 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
-import { Stack, Button, Typography } from '@signalco/ui';
+import { Typography } from '@signalco/ui/dist/Typography';
+import { Stack } from '@signalco/ui/dist/Stack';
+import { Button } from '@signalco/ui/dist/Button';
 
 export function FeatureDescription(props: { header: string; content: string | React.ReactElement; link?: string; linkText?: string; }) {
     return (

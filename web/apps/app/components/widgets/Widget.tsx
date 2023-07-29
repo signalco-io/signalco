@@ -1,11 +1,11 @@
 
-import React, { useCallback, useState } from 'react';
+import React, { type ComponentType, useCallback, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Alert } from '@signalco/ui';
 import IWidgetConfigurationOption from '../../src/widgets/IWidgetConfigurationOption';
-import WidgetState from './parts/WidgetState';
 import WidgetCard from './parts/WidgetCard';
-import WidgetButton from './parts/WidgetButton';
+const WidgetUnresolved = dynamic(() => import('./parts/WidgetUnresolved'));
+const WidgetState = dynamic(() => import( './parts/WidgetState'));
+const WidgetButton = dynamic(() => import('./parts/WidgetButton'));
 const WidgetChecklist = dynamic(() => import('./parts/WidgetChecklist'));
 const WidgetIndicator = dynamic(() => import('./parts/WidgetIndicator'));
 const WidgetTime = dynamic(() => import('./parts/WidgetTime'));
@@ -34,33 +34,22 @@ export interface WidgetSharedProps<TConfigurationProps> {
 export interface WidgetSpecifigProps {
     id: string,
     isEditMode: boolean,
-    config: any,
-}
-
-function UnresolvedWidget() {
-    return <Alert color="danger" sx={{ height: '100%' }}>Unknown widget</Alert>
+    config: object,
 }
 
 function Widget(props: WidgetProps) {
-    const [options, setOptions] = useState<IWidgetConfigurationOption<any>[] | undefined>(undefined);
-    const [active, setActive] = useState(false);
-
-    const handleOptions = useCallback((opts: IWidgetConfigurationOption<any>[]) => setOptions(opts), []);
-    const handleAction = useCallback((newActive: boolean) => {
-        if (active !== newActive) {
-            return setActive(newActive);
-        }
-    }, [active]);
+    const [options, setOptions] = useState<IWidgetConfigurationOption<unknown>[] | undefined>(undefined);
+    const handleOptions = useCallback((opts: IWidgetConfigurationOption<unknown>[]) => setOptions(opts), []);
 
     const widgetSharedProps = {
         id: props.id,
         isEditMode: props.isEditMode,
         config: props.config,
-        onOptions: handleOptions,
-        onActive: handleAction
+        onOptions: handleOptions
     };
 
-    let WidgetResolved: React.ComponentType<any> | React.ReactElement | null | undefined = UnresolvedWidget;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let WidgetResolved: ComponentType<any> = WidgetUnresolved;
     if (props.type === 'state') {
         WidgetResolved = WidgetState;
     } else if (props.type === 'shades') {

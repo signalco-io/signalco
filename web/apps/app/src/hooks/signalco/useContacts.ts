@@ -12,17 +12,20 @@ export default function useContacts(pointers: IContactPointer[] | undefined) {
                 queryFn: async () => {
                     const entityKey = ['entity', pointer.entityId];
                     const entityQuery = client.getQueryState<IEntityDetails>(entityKey);
-                    let entity: IEntityDetails | undefined = undefined;
+                    let entity: IEntityDetails | null | undefined = undefined;
                     if (entityQuery?.status === 'success')
                         entity = entityQuery.data;
                     if (!entity)
                         entity = await entityAsync(pointer.entityId);
 
-                    const contact = entity.contacts?.find(c =>
+                    const contact = entity?.contacts?.find(c =>
                         c.channelName === pointer.channelName &&
                         c.contactName === pointer.contactName);
+
+                    // TODO: Return `null` instead of throwing an error
                     if (!contact)
                         throw new Error('Contact not found');
+
                     return contact;
                 }
             }

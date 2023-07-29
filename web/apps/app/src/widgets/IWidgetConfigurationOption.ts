@@ -9,7 +9,7 @@ type IWidgetConfigurationOption<TConfigProps> = {
     name: keyof TConfigProps,
     label: string,
     type: WidgetConfigurationType,
-    default?: any,
+    default?: unknown,
     dataUnit?: string,
     optional?: boolean
 }

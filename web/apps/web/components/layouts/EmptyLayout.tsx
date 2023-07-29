@@ -1,7 +1,6 @@
-import { ChildrenProps } from '@signalco/ui';
-import React from 'react';
+import { PropsWithChildren } from 'react';
 
-export function EmptyLayout(props: ChildrenProps) {
+export function EmptyLayout(props: PropsWithChildren) {
     const {
         children
     } = props;

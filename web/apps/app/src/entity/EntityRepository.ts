@@ -2,15 +2,20 @@ import { orderBy } from '@signalco/js';
 import { getAsync, requestAsync } from '../services/HttpService';
 import IEntityDetails from './IEntityDetails';
 
-function mapEntityDetailsFromDto(e: any) {
-    return {
-        ...e,
-        timeStamp: e.timeStamp ? new Date(e.timeStamp) : undefined,
-        contacts: e.contacts.map((c: any) => ({
-            ...c,
-            timeStamp: c.timeStamp ? new Date(c.timeStamp) : undefined
-        }))
-    } as IEntityDetails;
+function mapEntityDetailsFromDto(e: unknown) {
+    if (typeof e === 'object' && e != null) {
+        return {
+            ...e,
+            timeStamp: 'timeStamp' in e && typeof e.timeStamp === 'number' ? new Date(e.timeStamp) : undefined,
+            contacts: 'contacts' in e && Array.isArray(e.contacts)
+                ? e.contacts.map((c) => typeof c === 'object' ? ({
+                    ...c,
+                    timeStamp: c != null && 'timeStamp' in c && typeof c.timeStamp === 'number' ? new Date(c.timeStamp) : undefined
+                }) : null).filter(Boolean)
+                : undefined
+        } as IEntityDetails;
+    }
+    return null;
 }
 
 export async function entityAsync(id: string) {
@@ -30,11 +35,14 @@ export async function entityRenameAsync(id: string, newAlias: string) {
 }
 
 export async function entitiesAsync(type?: number) {
-    let entities = (await requestAsync('/entity', 'get')).map(mapEntityDetailsFromDto) as IEntityDetails[];
-    if (typeof type !== 'undefined') {
-        entities = entities.filter(e => e.type === type);
+    const data = await requestAsync('/entity', 'get');
+    if (Array.isArray(data)) {
+        let entities = data.map(mapEntityDetailsFromDto) as IEntityDetails[];
+        if (typeof type !== 'undefined') {
+            entities = entities.filter(e => e.type === type);
+        }
+        return orderBy(entities, (a, b) => a.alias?.localeCompare(b.alias));
     }
-    return orderBy(entities, (a, b) => a.alias?.localeCompare(b.alias));
 }
 
 export async function entityUpsertAsync(id: string | undefined, type: number, alias: string) {
@@ -42,9 +50,9 @@ export async function entityUpsertAsync(id: string | undefined, type: number, al
         id: id,
         type: type,
         alias: alias
-    }) as {id: string})?.id;
+    }) as { id: string })?.id;
 }
 
 export async function entityDeleteAsync(id: string) {
-    await requestAsync('/entity', 'delete', {id: id});
+    await requestAsync('/entity', 'delete', { id: id });
 }

@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
-import '@signalco/ui/dist/ui.css';
 import { PageLayout } from '../components/layouts/PageLayout';
-import './global.scss';
+import './global.css';
 
 export default function RootLayout({
     // Layouts must accept a children prop.

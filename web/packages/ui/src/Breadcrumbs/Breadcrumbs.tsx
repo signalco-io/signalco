@@ -1,27 +1,26 @@
 import { Fragment } from 'react';
-import Link from '../Link';
-import { Typography, Breadcrumbs as JoyBreadcrumbs } from '@mui/joy';
+import { Typography } from '../Typography';
+import { Row } from '../Row';
+import { BreadcrumbsItem } from './BreadcrumbsItem';
 
-/** @alpha */
-export type BreadcrumbsProps = {
-    items: {
-        href?: string;
-        label: string | undefined;
-    }[];
+export type BreadcrumbItem = {
+    href?: string;
+    label: string | undefined;
 };
 
-/** @alpha */
-export default function Breadcrumbs(props: BreadcrumbsProps) {
-    const { items } = props;
+export type BreadcrumbsProps = {
+    items?: BreadcrumbItem[];
+};
+
+export function Breadcrumbs({ items }: BreadcrumbsProps) {
     return (
-        <JoyBreadcrumbs separator={'\u203a'} size="lg">
-            {items.map((i, index) =>
-                <Fragment key={i.href ?? index}>
-                    {i.href
-                        ? <Link href={i.href}>{i.label}</Link>
-                        : <Typography>{i.label}</Typography>}
+        <Row spacing={1}>
+            {items?.map((item, index) => (
+                <Fragment key={item.label}>
+                    <BreadcrumbsItem href={item.href} label={item.label} />
+                    {index < items.length - 1 && <Typography fontSize={'1.3em'}>{'\u203a'}</Typography>}
                 </Fragment>
-            )}
-        </JoyBreadcrumbs>
+            ))}
+        </Row>
     );
 }

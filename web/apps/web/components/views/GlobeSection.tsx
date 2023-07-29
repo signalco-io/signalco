@@ -1,7 +1,7 @@
 'use client';
+
 import { useInView } from 'react-cool-inview';
 import React from 'react';
-import { Box } from '@signalco/ui';
 import { GlobePart } from './LandingView';
 
 export function GlobeSection() {
@@ -10,8 +10,8 @@ export function GlobeSection() {
     });
 
     return (
-        <Box ref={observe} sx={{ minHeight: { xs: '12vh', sm: '20vh', md: '380px' }, }}>
+        <div ref={observe} className="min-h-[12vh] sm:min-h-[20vh] md:min-h-[300px]">
             {inView && <GlobePart />}
-        </Box>
+        </div>
     );
 }

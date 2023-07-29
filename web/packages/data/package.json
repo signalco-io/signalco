@@ -15,7 +15,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsup src/index.ts --dts --format esm --clean --minify",
+        "build": "tsup src/index.ts --dts --format esm --clean",
         "dev": "tsup src/index.ts --dts --format esm --clean --watch",
         "clean": "rimraf dist"
     },
@@ -23,7 +23,7 @@
         "@signalco/tsconfig": "workspace:*",
         "tsup": "6.7.0",
         "prop-types": "15.8.1",
-        "rimraf": "5.0.0",
-        "typescript": "5.0.4"
+        "rimraf": "5.0.1",
+        "typescript": "5.1.6"
     }
 }
