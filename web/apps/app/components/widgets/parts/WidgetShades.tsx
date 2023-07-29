@@ -102,23 +102,38 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
     return (
         <div className="grid h-full grid-cols-2">
             {columns > 1 && (
-                <>
-                    <Stack style={{ height: '100%', paddingLeft: 2.5 * 8, paddingRight: 1.5 * 8, paddingTop: 16, paddingBottom: 16 }} justifyContent={columns > 2 ? 'space-between' : 'center'}>
+                <div className="h-full">
+                    <Stack
+                        className="h-full py-4 pl-5 pr-4"
+                        justifyContent={columns > 2 ? 'space-between' : 'center'}>
                         <WindowVisual shadePerc={1 - shadePerc} size={68} />
                         {columns > 2 && <Typography semiBold noWrap>{label}</Typography>}
                     </Stack>
                     <Divider orientation="vertical" />
-                </>
+                </div>
             )}
             <div className="grow rounded-r-lg border-current">
-                <Stack style={{ height: '100%' }} justifyContent="stretch">
-                    <Button variant="outlined" onClick={() => handleStateChangeRequest('up')}
-                        aria-label="Up"><Up /></Button>
-                    {stopValueSerialized && <Button variant="outlined" onClick={() => handleStateChangeRequest('stop')}
-                        aria-label="Stop">
-                        <Stop size={18} /></Button>}
-                    <Button variant="outlined" onClick={() => handleStateChangeRequest('down')}
-                        aria-label="Down"><Down /></Button>
+                <Stack className="h-full" justifyContent="stretch">
+                    <Button
+                        variant="outlined"
+                        onClick={() => handleStateChangeRequest('up')}
+                        aria-label="Up">
+                        <Up />
+                    </Button>
+                    {stopValueSerialized && (
+                        <Button
+                            variant="outlined"
+                            onClick={() => handleStateChangeRequest('stop')}
+                            aria-label="Stop">
+                            <Stop size={18} />
+                        </Button>
+                    )}
+                    <Button
+                        variant="outlined"
+                        onClick={() => handleStateChangeRequest('down')}
+                        aria-label="Down">
+                        <Down />
+                    </Button>
                 </Stack>
             </div>
         </div>
