@@ -14,8 +14,6 @@ namespace Signal.Beacon.Channel.Samsung;
 
 internal class SamsungWorkerService : IWorkerService, IWorkerServiceWithDiscovery
 {
-    private const string ConfigurationFileName = "Samsung.json";
-
     private readonly string[] allowedMacCompanies =
     {
         "Samsung Electronics Co.,Ltd"
@@ -25,19 +23,20 @@ internal class SamsungWorkerService : IWorkerService, IWorkerServiceWithDiscover
     private readonly IEntitiesDao entitiesDao;
     private readonly IHostInfoService hostInfoService;
     private readonly IMacLookupService macLookupService;
-    private readonly IConfigurationService configurationService;
+    private readonly IChannelConfigurationService configurationService;
     private readonly IConductSubscriberClient conductSubscriberClient;
     private readonly ILogger<SamsungWorkerService> logger;
     private SamsungWorkerServiceConfiguration? configuration;
     private readonly List<TvRemote> tvRemotes = new();
     private CancellationToken startCancellationToken;
+    private string channelId;
 
     public SamsungWorkerService(
         IEntityService entityService,
         IEntitiesDao entitiesDao,
         IHostInfoService hostInfoService,
         IMacLookupService macLookupService,
-        IConfigurationService configurationService,
+        IChannelConfigurationService configurationService,
         IConductSubscriberClient conductSubscriberClient,
         ILogger<SamsungWorkerService> logger)
     {
@@ -51,12 +50,14 @@ internal class SamsungWorkerService : IWorkerService, IWorkerServiceWithDiscover
     }
 
 
-    public async Task StartAsync(CancellationToken cancellationToken)
+    public async Task StartAsync(string entityId, CancellationToken cancellationToken)
     {
+        this.channelId = entityId;
         this.startCancellationToken = cancellationToken;
         this.configuration =
             await this.configurationService.LoadAsync<SamsungWorkerServiceConfiguration>(
-                ConfigurationFileName,
+                entityId,
+                SamsungChannels.SamsungChannel,
                 cancellationToken);
             
         this.configuration.TvRemotes.ForEach(this.ConnectTv);
@@ -164,9 +165,9 @@ internal class SamsungWorkerService : IWorkerService, IWorkerServiceWithDiscover
         this.tvRemotes.Add(remote);
     }
 
-    public async Task StopAsync(CancellationToken cancellationToken)
+    public async Task StopAsync()
     {
-        await this.configurationService.SaveAsync(ConfigurationFileName, this.configuration, cancellationToken);
+        await this.configurationService.SaveAsync(this.channelId, SamsungChannels.SamsungChannel, this.configuration, CancellationToken.None);
     }
 
     public async Task BeginDiscoveryAsync(CancellationToken cancellationToken)

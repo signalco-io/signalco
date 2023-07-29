@@ -8,6 +8,9 @@ export default function EntityDocsPage() {
             <p>battery</p>
             <p>linkquality (planned)</p>
             <p>visit or visit-*</p>
+            <br />
+            <h3>Special contacts for Station entities</h3>
+            <p>stationReleaseChannel</p>
         </Stack>
     );
 }

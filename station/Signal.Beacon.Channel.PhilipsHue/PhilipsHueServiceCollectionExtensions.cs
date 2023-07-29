@@ -5,8 +5,8 @@ namespace Signal.Beacon.Channel.PhilipsHue;
 
 public static class PhilipsHueServiceCollectionExtensions
 {
-    public static IServiceCollection AddPhilipsHue(this IServiceCollection services)
-    {
-        return services.AddSingleton<IWorkerService, PhilipsHueWorkerService>();
-    }
+    public static IServiceCollection AddPhilipsHue(this IServiceCollection services) =>
+        services
+            .AddTransient<PhilipsHueWorkerService>()
+            .AddTransient<IWorkerServiceRegistration, PhilipsHueWorkerServiceRegistration>();
 }

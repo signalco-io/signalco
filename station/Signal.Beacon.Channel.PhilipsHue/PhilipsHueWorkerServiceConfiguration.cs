@@ -4,5 +4,5 @@ namespace Signal.Beacon.Channel.PhilipsHue;
 
 internal class PhilipsHueWorkerServiceConfiguration
 {
-    public List<BridgeConfig> Bridges { get; } = new();
+    public List<BridgeConfig> Bridges { get; set; } = new();
 }

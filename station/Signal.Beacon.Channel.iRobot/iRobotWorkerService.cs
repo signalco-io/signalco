@@ -22,8 +22,6 @@ namespace Signal.Beacon.Channel.iRobot;
 // ReSharper disable once InconsistentNaming
 internal class iRobotWorkerService : IWorkerService
 {
-    private const string ConfigurationFileName = "iRobot.json";
-
     private readonly string[] allowedMacCompanies =
     {
         "iRobot Corporation"
@@ -31,7 +29,7 @@ internal class iRobotWorkerService : IWorkerService
 
     private readonly IEntityService entityService;
     private readonly IEntitiesDao entitiesDao;
-    private readonly IConfigurationService configurationService;
+    private readonly IChannelConfigurationService configurationService;
     private readonly IHostInfoService hostInfoService;
     private readonly IMacLookupService macLookupService;
     private readonly ILogger<iRobotWorkerService> logger;
@@ -40,11 +38,12 @@ internal class iRobotWorkerService : IWorkerService
     private CancellationToken startCancellationToken;
     private iRobotWorkerServiceConfiguration? configuration;
     private readonly Dictionary<string, IMqttClient> roombaClients = new();
+    private string? channelEntityId;
 
     public iRobotWorkerService(
         IEntityService entityService,
         IEntitiesDao entitiesDao,
-        IConfigurationService configurationService,
+        IChannelConfigurationService configurationService,
         IHostInfoService hostInfoService,
         IMacLookupService macLookupService,
         IMqttClientFactory mqttClientFactory,
@@ -62,12 +61,14 @@ internal class iRobotWorkerService : IWorkerService
     }
 
 
-    public async Task StartAsync(CancellationToken cancellationToken)
+    public async Task StartAsync(string entityId, CancellationToken cancellationToken)
     {
         this.startCancellationToken = cancellationToken;
+        this.channelEntityId = entityId;
         this.configuration =
             await this.configurationService.LoadAsync<iRobotWorkerServiceConfiguration>(
-                ConfigurationFileName,
+                entityId,
+                iRobotChannels.RoombaChannel,
                 cancellationToken);
 
         this.conductSubscriberClient.Subscribe(iRobotChannels.RoombaChannel, this.ConductHandler);
@@ -225,14 +226,18 @@ internal class iRobotWorkerService : IWorkerService
         config.IpAddress = potentialDevices.First(d => d.physicalAddress == config.PhysicalAddress).ipAddress;
 
         // Save updated configuration
-        await this.configurationService.SaveAsync(
-            ConfigurationFileName,
-            this.configuration,
-            this.startCancellationToken);
+        await this.SaveConfigurationAsync();
 
         // Connect to robot
         _ = this.ConnectToRoomba(config);
     }
+
+    private async Task SaveConfigurationAsync() =>
+        await this.configurationService.SaveAsync(
+            this.channelEntityId ?? throw new NotSupportedException("Can not save because entity id is not set"),
+            iRobotChannels.RoombaChannel,
+            this.configuration,
+            this.startCancellationToken);
 
     private async Task DisconnectRoombaClientAsync(string robotId)
     {
@@ -247,7 +252,7 @@ internal class iRobotWorkerService : IWorkerService
         }
         catch (Exception ex)
         {
-            this.logger.LogWarning(ex, "Failed to stop and dispose MQTT client.");
+            this.logger.LogWarning(ex, "Failed to stop and dispose MQTT client");
         }
 
         // Remove client
@@ -430,10 +435,7 @@ internal class iRobotWorkerService : IWorkerService
 
                     // TODO: Save configuration after connected successfully
                     this.configuration?.RoombaRobots.Add(config);
-                    await this.configurationService.SaveAsync(
-                        ConfigurationFileName, 
-                        this.configuration,
-                        this.startCancellationToken);
+                    await this.SaveConfigurationAsync();
 
                     await this.ConnectToRoomba(config);
 
@@ -531,7 +533,7 @@ internal class iRobotWorkerService : IWorkerService
         }
     }
 
-    public Task StopAsync(CancellationToken cancellationToken)
+    public Task StopAsync()
     {
         return Task.CompletedTask;
     }

@@ -2,17 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Signal.Beacon.Core.Workers;
+using Signal.Beacon.Application.Signal.Station;
 
 namespace Signal.Beacon.Application;
 
 public interface IWorkerServiceManager
 {
     event EventHandler<IWorkerServiceManagerStateChangeEventArgs> OnChange;
-    IEnumerable<IWorkerService> AvailableWorkerServices { get; }
-    IEnumerable<IWorkerService> RunningWorkerServices { get; }
-    Task StartAllWorkerServicesAsync(CancellationToken cancellationToken);
+    IEnumerable<StationWorkerServiceState> WorkerServices { get; }
+    Task StartAllInternalWorkerServicesAsync(CancellationToken cancellationToken = default);
+    Task StartAllWorkerServicesAsync(CancellationToken cancellationToken = default);
     Task StopAllWorkerServicesAsync();
-    Task StartWorkerServiceAsync(IWorkerService workerService, CancellationToken stoppingToken);
-    Task StopWorkerServiceAsync(IWorkerService workerService);
+    Task StopAllInternalWorkerServicesAsync();
+    Task StartWorkerServiceAsync(string entityId, CancellationToken cancellationToken = default);
+    Task StopWorkerServiceAsync(string entityId, CancellationToken cancellationToken = default);
+    void BeginDiscovery();
 }

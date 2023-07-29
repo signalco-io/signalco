@@ -76,7 +76,6 @@ _[.NET Core RID Catalog](https://docs.microsoft.com/en-us/dotnet/core/rid-catalo
 - Processor
 - Signal
 - Samsung
-- Tasmota
 - Zigbee2Mqtt
 
 ### Voice

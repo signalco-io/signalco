@@ -5,8 +5,8 @@ namespace Signal.Beacon.Channel.iRobot;
 
 public static class iRobotServiceCollectionExtensions
 {
-    public static IServiceCollection AddIRobot(this IServiceCollection services)
-    {
-        return services.AddSingleton<IWorkerService, iRobotWorkerService>();
-    }
+    public static IServiceCollection AddIRobot(this IServiceCollection services) =>
+        services
+            .AddTransient<IWorkerServiceRegistration, iRobotWorkerServiceRegistration>()
+            .AddTransient<iRobotWorkerService>();
 }
