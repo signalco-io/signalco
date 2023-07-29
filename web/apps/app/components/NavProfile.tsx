@@ -1,5 +1,6 @@
 import React, { forwardRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { cx } from 'classix';
 import { Channel, Close, Dashboard, Device, Menu as MenuIcon, LogOut, Settings } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
@@ -13,7 +14,6 @@ import useCurrentUser from '../src/hooks/useCurrentUser';
 import UserAvatar from './users/UserAvatar';
 import NavLink from './navigation/NavLink';
 import ApiBadge from './development/ApiBadge';
-import { cx } from 'classix';
 
 type NavItem = {
     label: string,

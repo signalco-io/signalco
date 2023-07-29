@@ -1,10 +1,10 @@
 import { Shield, Lock, Euro } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
+import { Container } from '@signalco/ui/dist/Container';
 import { Card, CardContent } from '@signalco/ui/dist/Card';
 import { Avatar } from '@signalco/ui/dist/Avatar';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import FaqSection from '../../../components/pages/FaqSection';
-import { Container } from '@signalco/ui/dist/Container';
 import CtaSection from '../../../components/pages/CtaSection';
 
 const securityFaq = [

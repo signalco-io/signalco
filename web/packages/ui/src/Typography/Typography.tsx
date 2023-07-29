@@ -1,6 +1,6 @@
 import { type CSSProperties, ForwardedRef, type PropsWithChildren, createElement, forwardRef } from 'react';
-import type { ColorVariants } from '../theme';
 import { cx } from 'classix';
+import type { ColorVariants } from '../theme';
 
 export type TypographyProps = PropsWithChildren<{
     level?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'body3';

@@ -1,5 +1,5 @@
-import { cx } from 'classix';
 import { PropsWithChildren } from 'react';
+import { cx } from 'classix';
 
 export type AvatarProps = PropsWithChildren<{
     size?: 'sm' | 'md' | 'lg'; // TODO: Implement
@@ -10,7 +10,7 @@ export type AvatarProps = PropsWithChildren<{
 
 export function Avatar({ children, className }: AvatarProps) {
     return <div className={cx(
-        "flex h-10 min-w-[40px] max-w-[40px] items-center justify-center rounded-full bg-muted",
+        'flex h-10 min-w-[40px] max-w-[40px] items-center justify-center rounded-full bg-muted',
         className
     )}>{children}</div>;
 }
