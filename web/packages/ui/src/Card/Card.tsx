@@ -53,11 +53,11 @@ export function CardTitle({ className, ...props }: HTMLAttributes<HTMLHeadingEle
 }
 
 export function CardOverflow({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-    return <div className={cx('-m-2', className)}>{props.children}</div>;
+    return <div className={cx('-m-2', className)} {...props}>{props.children}</div>;
 }
 
 export function CardContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-    return <div className={cx('p-6 pt-0', className)}>{props.children}</div>;
+    return <div className={cx('p-6 pt-0', className)} {...props}>{props.children}</div>;
 }
 
 export function CardCover({ className, ...props }: HTMLAttributes<HTMLDivElement>) {

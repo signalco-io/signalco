@@ -39,21 +39,13 @@ export interface WidgetSpecifigProps {
 
 function Widget(props: WidgetProps) {
     const [options, setOptions] = useState<IWidgetConfigurationOption<unknown>[] | undefined>(undefined);
-    const [active, setActive] = useState(false);
-
     const handleOptions = useCallback((opts: IWidgetConfigurationOption<unknown>[]) => setOptions(opts), []);
-    const handleAction = useCallback((newActive: boolean) => {
-        if (active !== newActive) {
-            return setActive(newActive);
-        }
-    }, [active]);
 
     const widgetSharedProps = {
         id: props.id,
         isEditMode: props.isEditMode,
         config: props.config,
-        onOptions: handleOptions,
-        onActive: handleAction
+        onOptions: handleOptions
     };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

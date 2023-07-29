@@ -112,24 +112,27 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
                     <Divider orientation="vertical" />
                 </div>
             )}
-            <div className="grow rounded-r-lg border-current">
-                <Stack className="h-full" justifyContent="stretch">
+            <div className="grow rounded-r-lg border-l">
+                <Stack className="h-full">
                     <Button
-                        variant="outlined"
+                        className="grow"
+                        variant="plain"
                         onClick={() => handleStateChangeRequest('up')}
                         aria-label="Up">
                         <Up />
                     </Button>
                     {stopValueSerialized && (
                         <Button
-                            variant="outlined"
+                            className="grow"
+                            variant="plain"
                             onClick={() => handleStateChangeRequest('stop')}
                             aria-label="Stop">
                             <Stop size={18} />
                         </Button>
                     )}
                     <Button
-                        variant="outlined"
+                        className="grow"
+                        variant="plain"
                         onClick={() => handleStateChangeRequest('down')}
                         aria-label="Down">
                         <Down />

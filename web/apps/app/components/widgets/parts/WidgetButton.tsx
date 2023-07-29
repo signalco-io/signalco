@@ -53,7 +53,7 @@ export default function WidgetButton(props: WidgetSharedProps<ConfigProps>) {
         <Button variant="plain" onClick={handleActionRequest}>
             <Row spacing={1}>
                 <Avatar size="lg">
-                    <Icon sx={{ fontSize: '2em !important' }}>{icon}</Icon>
+                    <Icon className="text-3xl">{icon}</Icon>
                 </Avatar>
                 {width > 1 && <Typography>{label}</Typography>}
             </Row>

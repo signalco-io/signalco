@@ -1,18 +1,10 @@
-import type { CSSProperties, PropsWithChildren } from 'react';
+import type { HTMLAttributes } from 'react';
+import { cx } from 'classix';
 
-export type IconProps = PropsWithChildren<{
-    sx?: CSSProperties | undefined;
-}>;
+export type IconProps = HTMLAttributes<HTMLSpanElement>;
 
-export function Icon(props: IconProps) {
+export function Icon({ className, ...rest }: IconProps) {
     return (
-        <span
-            // eslint-disable-next-line tailwindcss/no-custom-classname
-            className="material-icons"
-            style={{
-                ...props.sx
-            }}>
-            {props.children}
-        </span>
+        <span className={cx('material-icons', className)} {...rest} />
     );
 }

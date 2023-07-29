@@ -68,7 +68,11 @@ function SmallIndicator({
                         backgroundColor: isActive ? activeBackgroundColor : 'transparent',
                     }}>
                     <Stack alignItems="center" justifyContent="center" style={{ height: '100%', flexDirection: small ? 'row' : 'column' }} spacing={1}>
-                        <Icon sx={{ fontSize: small ? 18 : 28, opacity: isActive ? 1 : 0.3, }}>{icon}</Icon>
+                        <Icon className={cx(
+                            small && 'text-lg',
+                            !small && 'text-2xl',
+                            !isActive && 'opacity-30'
+                        )}>{icon}</Icon>
                         <Typography level="body3">{label}</Typography>
                     </Stack>
                 </div>
@@ -124,7 +128,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
 
     return (
         <div className="h-full w-full">
-            <Stack alignItems="center" justifyContent="center" style={{ height: '100%' }}>
+            <Stack alignItems="center" justifyContent="center" className="h-full">
                 <Link href={`${KnownPages.Entities}/${temperatureDevice?.id}`} passHref>
                     <Button variant="plain">
                         <Row alignItems="stretch">
@@ -166,7 +170,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                     </Row>
                 )}
             </Stack>
-            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}>
+            <div className="absolute inset-x-0 bottom-0">
                 <Graph
                     isLoading={historyData.isLoading}
                     error={historyData.error}

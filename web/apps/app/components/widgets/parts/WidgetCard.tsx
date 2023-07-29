@@ -66,13 +66,14 @@ function WidgetCard(props: IWidgetCardProps) {
             <Card
                 className="relative overflow-hidden"
                 style={{
-                    width: sizeWidth,
-                    height: sizeHeight
+                    width: `${sizeWidth}px`,
+                    height: `${sizeHeight}px`
                 }}>
-                <CardOverflow style={{
-                    width: sizeWidth,
-                    height: sizeHeight,
-                }}>
+                <CardOverflow
+                    style={{
+                        width: `${sizeWidth}px`,
+                        height: `${sizeHeight}px`
+                    }}>
                     {(!isLoading && needsConfiguration) ? (
                         <Stack justifyContent="stretch" className="h-full">
                             <Button disabled={!isEditMode} size="lg" fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
@@ -81,7 +82,7 @@ function WidgetCard(props: IWidgetCardProps) {
                         <ErrorBoundary>{children}</ErrorBoundary>
                     )}
                     {isEditMode && (
-                        <div style={{ position: 'absolute', top: 0, right: 0 }}>
+                        <div className="absolute right-0 top-0">
                             <Menu trigger={(
                                 <Button className="min-w-[42px]" {...props}><MoreHorizontal /></Button>
                             )}>

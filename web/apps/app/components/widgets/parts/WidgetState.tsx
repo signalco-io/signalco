@@ -148,8 +148,9 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
     return (
         <Button
             onClick={handleStateChangeRequest}
-            variant="plain">
-            <Stack style={{ height: '100%', paddingTop: 16, paddingBottom: 16 }}>
+            variant="plain"
+            className="m-0 h-full w-full !items-start !justify-start p-0">
+            <Stack className="h-full py-4">
                 <div className="px-2">
                     <Visual state={state} size={68} />
                 </div>
