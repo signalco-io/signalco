@@ -57,6 +57,7 @@ export const baseConfig = {
             },
             fontFamily: {
                 sans: ["var(--font-sans)", ...fontFamily.sans],
+                raleway: ["var(--font-raleway)", ...fontFamily.sans],
             },
             keyframes: {
                 "accordion-down": {
