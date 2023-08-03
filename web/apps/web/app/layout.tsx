@@ -1,13 +1,23 @@
 import Script from 'next/script';
+import { Raleway, Inter } from 'next/font/google';
 import { type Metadata } from 'next';
 import './global.css';
+
+const raleway = Raleway({
+    subsets: ['latin'],
+    variable: '--font-raleway',
+});
+const inter = Inter({
+    subsets: ['latin'],
+    variable: '--font-raleway',
+});
 
 export default function RootLayout({ children, }: {
     children: React.ReactNode;
 }) {
     return (
         <html lang="en">
-            <body>
+            <body className={`${raleway.variable} ${inter.variable} font-sans`}>
                 {children}
                 <Script src="/clarity.js" />
             </body>
