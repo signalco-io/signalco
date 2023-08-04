@@ -1,5 +1,3 @@
-'use client';
-
 import { Chip } from '@signalco/ui/dist/Chip';
 import { useIsServer } from '@signalco/hooks';
 import { isDeveloper } from '../../src/services/EnvProvider';
@@ -10,15 +8,15 @@ export default function ApiBadge(props: { force?: 'dev' | 'prod' }) {
 
     const isServer = useIsServer();
 
-    if (!isServer && isDeveloper) {
-        return (
-            <Chip
-                color={(force && force === 'prod') || (!force && signalcoApiEndpointIsProduction()) ? 'info' : 'warning'}
-                size="sm">
-                {(force && force === 'prod') || (!force && signalcoApiEndpointIsProduction()) ? 'prod' : 'dev'}
-            </Chip>
-        );
+    if (isServer || !isDeveloper) {
+        return null;
     }
 
-    return null;
+    return (
+        <Chip
+            color={(force && force === 'prod') || (!force && signalcoApiEndpointIsProduction()) ? 'info' : 'warning'}
+            size="sm">
+            {(force && force === 'prod') || (!force && signalcoApiEndpointIsProduction()) ? 'prod' : 'dev'}
+        </Chip>
+    );
 }

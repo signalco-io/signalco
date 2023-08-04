@@ -1,19 +1,14 @@
-import React, { forwardRef, useState } from 'react';
+import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { cx } from 'classix';
-import { Channel, Close, Dashboard, Device, Menu as MenuIcon, LogOut, Settings } from '@signalco/ui-icons';
+import { Channel, Close, Dashboard, Device, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
-import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Divider } from '@signalco/ui/dist/Divider';
-import { Button } from '@signalco/ui/dist/Button';
 import { orderBy } from '@signalco/js';
 import { KnownPages } from '../src/knownPages';
 import useLocale from '../src/hooks/useLocale';
-import useCurrentUser from '../src/hooks/useCurrentUser';
-import UserAvatar from './users/UserAvatar';
+import { UserProfileAvatar } from './users/UserProfileAvatar';
 import NavLink from './navigation/NavLink';
-import ApiBadge from './development/ApiBadge';
 
 type NavItem = {
     label: string,
@@ -29,39 +24,7 @@ const navItems: NavItem[] = [
     { label: 'Entities', path: KnownPages.Entities, icon: Device }
 ];
 
-const UserProfileAvatarButton = forwardRef<HTMLDivElement>((_props, ref) => {
-    const user = useCurrentUser();
-
-    return (
-        <div className="relative p-2" ref={ref}>
-            <Button variant="plain" className="py-6">
-                <UserAvatar user={user} />
-                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2">
-                    <ApiBadge />
-                </div>
-            </Button>
-        </div>
-    );
-});
-UserProfileAvatarButton.displayName = 'UserProfileAvatarButton';
-
-function UserProfileAvatar() {
-    const { t } = useLocale('App', 'Account');
-
-    return (
-        <Menu trigger={<UserProfileAvatarButton />}>
-            <MenuItem href={KnownPages.Settings} startDecorator={<Settings />}>
-                {t('Settings')}
-            </MenuItem>
-            <Divider />
-            <MenuItem href={KnownPages.Logout} startDecorator={<LogOut />}>
-                {t('Logout')}
-            </MenuItem>
-        </Menu>
-    );
-}
-
-function NavProfile() {
+export default function NavProfile() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const pathname = usePathname();
     const activeNavItem: NavItem | undefined = orderBy(navItems.filter(ni => pathname?.startsWith(ni.path)), (a, b) => b.path.length - a.path.length).at(0);
@@ -117,5 +80,3 @@ function NavProfile() {
         </div>
     );
 }
-
-export default NavProfile;
