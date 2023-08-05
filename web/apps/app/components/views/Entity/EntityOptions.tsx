@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { MoreHorizontal } from '@signalco/ui-icons';
-import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
-import { Divider } from '@signalco/ui/dist/Divider';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
 import { Button } from '@signalco/ui/dist/Button';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
@@ -49,15 +48,18 @@ export default function EntityOptions(props: EntityOptionsProps) {
 
     return (
         <>
-            <Menu trigger={(
-                <Button {...props}>
-                    <MoreHorizontal />
-                </Button>
-            )}>
-                {canHideRaw && <MenuItem onClick={handleShowRaw}>{showRaw ? 'Hide details' : 'Show details'}</MenuItem>}
-                <Divider />
-                <MenuItem onClick={handleDelete}>{t('DeleteButtonLabel')}</MenuItem>
-            </Menu>
+            <DropdownMenu>
+                <DropdownMenuTrigger>
+                    <Button {...props}>
+                        <MoreHorizontal />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                    {canHideRaw && <DropdownMenuItem onSelect={handleShowRaw}>{showRaw ? 'Hide details' : 'Show details'}</DropdownMenuItem>}
+                    {canHideRaw && <DropdownMenuSeparator />}
+                    <DropdownMenuItem onSelect={handleDelete}>{t('DeleteButtonLabel')}</DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
             <ConfirmDeleteDialog
                 expectedConfirmText={entity?.alias || t('ConfirmDialogExpectedText')}
                 header={t('DeleteTitle')}

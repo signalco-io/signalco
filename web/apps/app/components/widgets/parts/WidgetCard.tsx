@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
-import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
 import { ErrorBoundary } from '@signalco/ui/dist/ErrorBoundary';
 import { Card, CardOverflow } from '@signalco/ui/dist/Card';
 import { Button } from '@signalco/ui/dist/Button';
@@ -83,20 +83,23 @@ function WidgetCard(props: IWidgetCardProps) {
                     )}
                     {isEditMode && (
                         <div className="absolute right-0 top-0">
-                            <Menu trigger={(
-                                <Button className="min-w-[42px]" {...props}><MoreHorizontal /></Button>
-                            )}>
-                                {options && (
-                                    <MenuItem onClick={handleOnConfigureClicked} startDecorator={<Settings />}>
-                                        Configure
-                                    </MenuItem>
-                                )}
-                                {onRemove && (
-                                    <MenuItem onClick={handleOnRemove} startDecorator={<Delete />}>
-                                        Remove
-                                    </MenuItem>
-                                )}
-                            </Menu>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger>
+                                    <Button className="min-w-[42px]" {...props}><MoreHorizontal /></Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                    {options && (
+                                        <DropdownMenuItem onSelect={handleOnConfigureClicked} startDecorator={<Settings />}>
+                                            Configure
+                                        </DropdownMenuItem>
+                                    )}
+                                    {onRemove && (
+                                        <DropdownMenuItem onSelect={handleOnRemove} startDecorator={<Delete />}>
+                                            Remove
+                                        </DropdownMenuItem>
+                                    )}
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         </div>
                     )}
                 </CardOverflow>
