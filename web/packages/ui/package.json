@@ -24,7 +24,7 @@
         "classix": "2.1.34",
         "glob": "10.3.3",
         "postcss": "8.4.27",
-        "postcss-preset-env": "9.1.0",
+        "postcss-preset-env": "9.1.1",
         "rimraf": "5.0.1",
         "sass": "1.64.2",
         "tsup": "6.6.2",
