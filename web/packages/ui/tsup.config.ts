@@ -20,7 +20,5 @@ export default defineConfig((opts) => ({
         ]
     ),
     format: 'esm',
-    dts: true,
-    clean: !opts.watch,
     minify: !opts.watch
 }));
