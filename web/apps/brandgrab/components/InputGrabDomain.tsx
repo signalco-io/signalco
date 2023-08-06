@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useSearchParam } from '@signalco/hooks';
+import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import InputSubmit from './form/InputSubmit';
 
 function stripDomain(domain: string) {

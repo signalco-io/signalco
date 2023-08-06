@@ -6,7 +6,7 @@ import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { Button } from '@signalco/ui/dist/Button';
-import { useSearchParam } from '@signalco/hooks';
+import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { widgetType } from '../widgets/Widget';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import { showNotification } from '../../src/notifications/PageNotificationService';

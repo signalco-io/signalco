@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { ObjectDictAny } from '@signalco/js';
-import { useIsServer } from '@signalco/hooks';
+import { useIsServer } from '@signalco/hooks/dist/useIsServer';
 import UserSettingsProvider from '../services/UserSettingsProvider';
 import hr from '../../locales/hr.json';
 import en from '../../locales/en.json';

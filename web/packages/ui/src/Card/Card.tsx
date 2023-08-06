@@ -1,10 +1,10 @@
-import type { HTMLAttributes, PropsWithChildren } from 'react';
+import type { HTMLAttributes, PropsWithChildren, MouseEventHandler } from 'react';
 import { cx } from 'classix';
 import { Link } from '../Link';
 
-export type CardProps = HTMLAttributes<HTMLDivElement> & {
+export type CardProps = Omit<HTMLAttributes<HTMLDivElement>, 'onClick'> & {
     href?: string;
-    onClick?: () => void;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 function LinkCard({ href, children }: PropsWithChildren & Required<Pick<CardProps, 'href'>>) {
@@ -15,7 +15,7 @@ function LinkCard({ href, children }: PropsWithChildren & Required<Pick<CardProp
 
 function ButtonCard({ onClick, children }: PropsWithChildren & Required<Pick<CardProps, 'onClick'>>) {
     return (
-        <button onClick={onClick}>{children}</button>
+        <button className="text-left" onClick={onClick}>{children}</button>
     );
 }
 

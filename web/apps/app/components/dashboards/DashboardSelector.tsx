@@ -5,7 +5,7 @@ import { Select } from '@signalco/ui-icons';
 import { Row } from '@signalco/ui/dist/Row';
 import { Popper } from '@signalco/ui/dist/Popper';
 import { Button } from '@signalco/ui/dist/Button';
-import { useSearchParam } from '@signalco/hooks';
+import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
 export interface IDashboardSelectorProps {

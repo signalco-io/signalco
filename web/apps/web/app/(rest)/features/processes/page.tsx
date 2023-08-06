@@ -1,5 +1,3 @@
-'use client';
-
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 

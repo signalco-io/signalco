@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Button } from '@signalco/ui/dist/Button';
-import { useTimeout } from '@signalco/hooks';
+import { useTimeout } from '@signalco/hooks/dist/useTimeout';
 
 export default function Login() {
     const [isLong, setIsLong] = useState(false);

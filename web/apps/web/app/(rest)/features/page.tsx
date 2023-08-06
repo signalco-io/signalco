@@ -1,5 +1,3 @@
-'use client';
-
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Link } from '@signalco/ui/dist/Link';
 

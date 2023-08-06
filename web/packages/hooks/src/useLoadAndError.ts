@@ -6,7 +6,7 @@ export type useLoadAndErrorResult<T> = {
     error?: string | undefined;
 };
 
-export default function useLoadAndError<T>(load?: (Promise<T> | undefined) | (() => Promise<T> | undefined)): useLoadAndErrorResult<T> {
+export function useLoadAndError<T>(load?: (Promise<T> | undefined) | (() => Promise<T> | undefined)): useLoadAndErrorResult<T> {
     const [state, setState] = useState<useLoadAndErrorResult<T>>({ isLoading: true, item: undefined, error: undefined });
     const [, startTransition] = useTransition();
     const loadPromiseRef = useRef<Promise<T>>();

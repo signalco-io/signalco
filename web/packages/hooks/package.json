@@ -6,8 +6,8 @@
     "module": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "exports": {
-        ".": {
-            "import": "./dist/index.js"
+        "./dist/": {
+            "import": "./dist/"
         }
     },
     "type": "module",
@@ -15,8 +15,8 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsup src/index.ts --dts --format esm --clean --minify",
-        "dev": "tsup src/index.ts --dts --format esm --watch",
+        "build": "tsup src/*.ts --dts --format esm --clean --minify",
+        "dev": "tsup src/*.ts --dts --format esm --watch",
         "clean": "rimraf dist"
     },
     "devDependencies": {

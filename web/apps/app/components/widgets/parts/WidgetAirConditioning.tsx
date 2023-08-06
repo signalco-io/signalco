@@ -6,7 +6,7 @@ import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Icon } from '@signalco/ui/dist/Icon';
 import { Button } from '@signalco/ui/dist/Button';
-import { useLoadAndError } from '@signalco/hooks';
+import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
 import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';

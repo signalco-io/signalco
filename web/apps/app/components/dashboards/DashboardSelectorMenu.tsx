@@ -10,7 +10,7 @@ import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Divider } from '@signalco/ui/dist/Divider';
 import { Card } from '@signalco/ui/dist/Card';
 import { Button } from '@signalco/ui/dist/Button';
-import { useSearchParam } from '@signalco/hooks';
+import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';

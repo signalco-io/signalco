@@ -1,1 +1,3 @@
-export { Checkbox, type CheckboxProps} from './Checkbox';
+'use client';
+
+export * from './Checkbox';
