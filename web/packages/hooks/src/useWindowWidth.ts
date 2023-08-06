@@ -1,9 +1,9 @@
 import { useCallback, useState } from 'react';
-import useWindowEvent from './useWindowEvent';
+import { useWindowEvent } from './useWindowEvent';
 
 const browser = typeof window !== 'undefined';
 
-export default function useWindowWidth() {
+export function useWindowWidth() {
     const [width, setWidth] = useState<number | undefined>(browser ? window.innerWidth : undefined);
 
     const updateNumberOfColumns = useCallback(() => {

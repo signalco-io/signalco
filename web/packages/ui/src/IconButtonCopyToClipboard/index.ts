@@ -1,1 +1,3 @@
-export { IconButtonCopyToClipboard, type IconButtonCopyToClipboardProps } from './IconButtonCopyToClipboard';
+'use client';
+
+export * from './IconButtonCopyToClipboard';
