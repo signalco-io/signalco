@@ -1,15 +1,17 @@
 import { Worker, isMainThread, workerData } from 'worker_threads';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { rmSync } from 'fs';
 import { build } from 'tsup';
 import _ from 'lodash';
 import { globSync } from 'glob';
 
-async function buildStage({ entry, watch, clean }) {
+async function buildStage({ entry, watch, clean, dts }) {
     console.log('\u{1F680} ~ building entry:', entry);
     try {
         await build({
-            dts: true,
+            dts: dts,
+            emitDeclarationOnly: dts,
             minify: !watch,
             clean: clean,
             watch,
@@ -40,17 +42,41 @@ async function buildAllStages(watch) {
     const chunkSize = 3;
     const chunks = _.chunk(entries, chunkSize);
     const workers = [];
-    for await (const [chunkIndex, chunk] of chunks.entries()) {
-        console.log('\u{1F680} ~ chunk: ', chunk);
 
+    if (!watch) {
+        rmSync(fileURLToPath(new URL('./dist', import.meta.url)), { recursive: true, force: true });
+    }
+
+    workers.push(new Promise((resolve, reject) => {
         const worker = new Worker(fileURLToPath(new URL('./tsup.build.js', import.meta.url)), {
             workerData: {
-                entry: chunk,
+                entry: entries,
                 watch: watch,
-                clean: !watch && chunkIndex === 0
+                clean: false,
+                dts: false
             }
         });
+        worker.on('exit', (code) => {
+            if (code === 0) {
+                resolve();
+            } else {
+                reject(new Error(`Worker stopped with exit code ${code}`));
+            }
+        });
+    }));
+
+    for await (const [, chunk] of chunks.entries()) {
+        console.log('\u{1F680} ~ chunk: ', chunk);
+
         workers.push(new Promise((resolve, reject) => {
+            const worker = new Worker(fileURLToPath(new URL('./tsup.build.js', import.meta.url)), {
+                workerData: {
+                    entry: chunk,
+                    watch: watch,
+                    clean: false,
+                    dts: true
+                }
+            });
             worker.on('exit', (code) => {
                 if (code === 0) {
                     resolve();
