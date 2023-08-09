@@ -5,7 +5,7 @@ export type UseAudioOptions = {
     playbackRate?: number | undefined;
 };
 
-export default function useAudio(src: string, { volume = 1, playbackRate = 1 }: UseAudioOptions) {
+export function useAudio(src: string, { volume = 1, playbackRate = 1 }: UseAudioOptions) {
     const audio = useRef(new Audio(src))
 
     useEffect(() => {

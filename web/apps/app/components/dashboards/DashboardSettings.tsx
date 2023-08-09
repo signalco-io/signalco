@@ -3,7 +3,7 @@ import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Input } from '@signalco/ui/dist/Input';
 import { Button } from '@signalco/ui/dist/Button';
-import { useSearchParam } from '@signalco/hooks';
+import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import useLocale from '../../src/hooks/useLocale';

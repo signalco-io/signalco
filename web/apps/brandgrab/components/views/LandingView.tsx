@@ -11,7 +11,8 @@ import { Divider } from '@signalco/ui/dist/Divider';
 import { Container } from '@signalco/ui/dist/Container';
 import { Card, CardContent, CardCover, CardOverflow } from '@signalco/ui/dist/Card';
 import { orderBy, isImageDataUrl } from '@signalco/js';
-import { useLoadAndError, useSearchParam } from '@signalco/hooks';
+import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
 import { ScreenshotResponse } from '../../app/api/screenshot/route';
 import { BrandResources } from '../../app/api/quick/route';
 

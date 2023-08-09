@@ -11,7 +11,7 @@ const channelsFaq = [
 
 export default function ChannelsPage() {
     return (
-        <Stack spacing={4}>
+        <Stack spacing={8}>
             <Stack spacing={4}>
                 <PageCenterHeader header="Channels" subHeader="List of all channels available on signalco" />
                 <ChannelsGallery />

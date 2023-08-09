@@ -2,24 +2,23 @@ import { useState } from 'react';
 import type { ComponentProps, MouseEvent } from 'react';
 import { cx } from 'classix';
 import { Row } from '../Row';
-import { IconButton } from '../IconButton';
 import { Icon } from '../Icon';
 import { Collapse } from '../Collapse';
-import { Card } from '../Card';
+import { Card, CardContent, CardHeader } from '../Card';
 
 export type AccordionProps = ComponentProps<typeof Card> & {
     open?: boolean;
     disabled?: boolean;
-    onOpenChanged?: (e: MouseEvent<HTMLButtonElement>, open: boolean) => void;
+    onOpenChanged?: (event: MouseEvent<HTMLButtonElement>, open: boolean) => void;
     unmountOnExit?: boolean;
 };
 
 export function Accordion({ children, open, disabled, onOpenChanged, unmountOnExit, className, ...props }: AccordionProps) {
     const [isOpen, setIsOpen] = useState(open ?? false);
 
-    const handleOpen = (e: MouseEvent<HTMLButtonElement>) => {
+    const handleOpen = (event: MouseEvent<HTMLButtonElement>) => {
         if (typeof open !== 'undefined' && typeof onOpenChanged !== 'undefined') {
-            onOpenChanged(e, !open);
+            onOpenChanged(event, !open);
         } else if (typeof open === 'undefined') {
             setIsOpen(!isOpen);
         }
@@ -30,18 +29,22 @@ export function Accordion({ children, open, disabled, onOpenChanged, unmountOnEx
     const multipleChildren = !!children && Array.isArray(children);
 
     return (
-        <Card className={cx('py-2 px-4', className)} {...props}>
-            <Row spacing={1} justifyContent="space-between">
-                {multipleChildren ? children[0] : children}
-                {!disabled && (
-                    <IconButton variant="plain" size="sm" onClick={handleOpen}>
+        <Card className={cx('', className)} onClick={handleOpen} {...props}>
+            <CardHeader className="p-2">
+                <Row spacing={1} justifyContent="space-between">
+                    {multipleChildren ? children[0] : children}
+                    {!disabled && (
                         <Icon>{actualOpen ? 'expand_less' : 'expand_more'}</Icon>
-                    </IconButton>
-                )}
-            </Row>
+                    )}
+                </Row>
+            </CardHeader>
             {(!unmountOnExit || actualOpen) && (
                 <Collapse appear={actualOpen}>
-                    {multipleChildren && children.filter((_, i) => i !== 0)}
+                    {multipleChildren && (
+                        <CardContent className="p-2">
+                            {children.filter((_, i) => i !== 0)}
+                        </CardContent>
+                    )}
                 </Collapse>
             )}
         </Card>

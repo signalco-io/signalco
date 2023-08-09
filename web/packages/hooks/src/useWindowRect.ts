@@ -25,7 +25,7 @@ function getWindowClientRect(element: typeof window): ClientRect {
     };
 }
 
-export default function useWindowRect(element: typeof window | null = typeof window !== 'undefined' ? window : null) {
+export function useWindowRect(element: typeof window | null = typeof window !== 'undefined' ? window : null) {
     const [rect, setRect] = useState<ClientRect | undefined>(element ? getWindowClientRect(element) : undefined);
 
     useLayoutEffect(() => {

@@ -1,7 +1,7 @@
 import {Gallery} from '@signalco/ui/dist/Gallery';
 import { FilterList } from '@signalco/ui/dist/FilterList';
 import { orderBy } from '@signalco/js';
-import { useSearchParam } from '@signalco/hooks';
+import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { channelsData, channelCategories } from '@signalco/data';
 import ChannelGalleryItem from './ChannelGalleryItem';
 

@@ -1,16 +1,18 @@
-import { ComponentPropsWithoutRef, HTMLAttributes, ReactElement, useId } from 'react';
+import { ComponentPropsWithoutRef, HTMLAttributes, ReactNode, useId } from 'react';
 import { cx } from 'classix';
 import { Check, Select as SelectIcon } from '@signalco/ui-icons';
 import * as SelectPrimitive from '@radix-ui/react-select'
 import { Stack } from '../Stack';
+import { Row } from '../Row';
 
 export type SelectItemsProps = HTMLAttributes<HTMLDivElement> & ComponentPropsWithoutRef<typeof SelectPrimitive.Root> & {
     label?: string,
     items: {
         value: string,
-        label?: ReactElement | string,
+        icon?: ReactNode,
+        label?: ReactNode | string,
         title?: string,
-        content?: ReactElement | string | undefined,
+        content?: ReactNode | string | undefined,
         disabled?: boolean
     }[],
     placeholder?: string,
@@ -73,7 +75,12 @@ export function SelectItems(props: SelectItemsProps) {
                                             <Check className="h-4 w-4" />
                                         </SelectPrimitive.ItemIndicator>
                                     </span>
-                                    <SelectPrimitive.ItemText>{item.content ?? (item.label ?? item.value)}</SelectPrimitive.ItemText>
+                                    <SelectPrimitive.ItemText>
+                                        <Row spacing={1}>
+                                            {item.icon}
+                                            {item.content ?? (item.label ?? item.value)}
+                                        </Row>
+                                    </SelectPrimitive.ItemText>
                                 </SelectPrimitive.Item>
                             ))}
                         </SelectPrimitive.Viewport>

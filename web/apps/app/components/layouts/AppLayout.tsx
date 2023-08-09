@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Minimize } from '@signalco/ui-icons';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import { useSearchParam } from '@signalco/hooks';
+import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import NavProfile from '../NavProfile';
 import RealtimeService from '../../src/realtime/realtimeService';
 import { AuthWrapper } from './AuthWrapper';

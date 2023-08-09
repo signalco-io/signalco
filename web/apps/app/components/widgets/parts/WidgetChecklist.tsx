@@ -5,7 +5,7 @@ import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
-import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
 import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
@@ -43,13 +43,18 @@ function ChecklistItem(props: { item: IChecklistItem; onChange: (id: string, don
         <>
             <Row justifyContent="space-between">
                 <Checkbox checked={item.done ?? false} onCheckedChange={(checked) => onChange(item.id, checked === true)} label={item.text} />
-                <Menu trigger={(
-                    <IconButton><MoreHorizontal className="opacity-30" /></IconButton>
-                )}>
-                    <MenuItem onClick={() => onRemove(item.id)} startDecorator={<Delete />}>
-                        Remove
-                    </MenuItem>
-                </Menu>
+                <DropdownMenu>
+                    <DropdownMenuTrigger>
+                        <IconButton>
+                            <MoreHorizontal className="opacity-30" />
+                        </IconButton>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem onSelect={() => onRemove(item.id)} startDecorator={<Delete />}>
+                            Remove
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </Row>
         </>
     );

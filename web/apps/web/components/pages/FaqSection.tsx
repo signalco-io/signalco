@@ -1,5 +1,3 @@
-'use client';
-
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Container } from '@signalco/ui/dist/Container';
@@ -16,7 +14,7 @@ export default function FaqSection({ faq }: { faq: FaqItem[] }) {
     return (
         <div className="self-center">
             <Container maxWidth="md">
-                <Stack spacing={4}>
+                <Stack spacing={2}>
                     <PageCenterHeader header={'Frequently asked questions'} secondary />
                     <Stack spacing={2}>
                         {faq.map(f => (

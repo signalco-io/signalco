@@ -6,7 +6,7 @@ import { Timeago } from '@signalco/ui/dist/Timeago';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Row } from '@signalco/ui/dist/Row';
-import { MenuItem, Menu } from '@signalco/ui/dist/Menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
 import { ListItem } from '@signalco/ui/dist/ListItem';
@@ -68,7 +68,7 @@ function ObjectVisualizer(props: { name: string, value: ParsedJson, defaultOpen?
             label={(
                 <Row spacing={1}>
                     {name && (
-                        <div style={{ minWidth: 120 }}>
+                        <div className="min-w-[120px]">
                             <Tooltip title={`${name} (${(isArray ? `array[${value.length}]` : typeof value)})`}>
                                 <Typography>
                                     {name}
@@ -105,7 +105,7 @@ function DisplayJson(props: { json: string | undefined }) {
     const jsonFormatted = useMemo(() => JSON.stringify(jsonObj, undefined, 4), [jsonObj]);
 
     return (
-        <div style={{ position: 'relative', minWidth: '230px' }}>
+        <div className="relative min-w-[230px]">
             {showSource ? (
                 <CodeEditor language="json" code={jsonFormatted} height={300} />
             ) : (
@@ -113,7 +113,7 @@ function DisplayJson(props: { json: string | undefined }) {
                     <ObjectVisualizer name="root" defaultOpen value={jsonObj} />
                 </List>
             )}
-            <div style={{ position: 'absolute', right: 0, top: 0 }}>
+            <div className="absolute right-0 top-0">
                 <SelectItems value={showSource ? 'source' : 'ui'} onValueChange={value => setShowSource(value === 'source')} items={[
                     { value: 'ui', label: <UI size={18} /> },
                     { value: 'source', label: <Code size={18} /> }
@@ -180,15 +180,18 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
             <Card>
                 <Row justifyContent="space-between">
                     <Typography>{t('Contacts')}</Typography>
-                    <Menu trigger={(
-                        <IconButton size="sm">
-                            <MoreVertical />
-                        </IconButton>
-                    )}>
-                        <MenuItem onClick={() => setCreateContactDialogOpen(true)} startDecorator={<Add />}>
-                            {t('CreateContact')}
-                        </MenuItem>
-                    </Menu>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <IconButton size="sm">
+                                <MoreVertical />
+                            </IconButton>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuItem onSelect={() => setCreateContactDialogOpen(true)} startDecorator={<Add />}>
+                                {t('CreateContact')}
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </Row>
                 <Loadable isLoading={isLoading} loadingLabel="Loading contacts" error={error}>
                     <List>
@@ -199,32 +202,35 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                                     <ChannelLogo channelName={c.channelName} size="tiny" label={c.channelName} />
                                 )}
                                 endDecorator={(
-                                    <Menu trigger={(
-                                        <IconButton size="sm">
-                                            <MoreVertical />
-                                        </IconButton>
-                                    )}>
-                                        <MenuItem
-                                            onClick={() => {
-                                                setEditingContactDialogOpen(true);
-                                                setEditingContact(c);
-                                            }}
-                                            startDecorator={<Edit />}>
-                                            {t('EditContact')}
-                                        </MenuItem>
-                                        <MenuItem
-                                            onClick={() => {
-                                                setDeletingContactDialogOpen(true);
-                                                setDeletingContact(c);
-                                            }}
-                                            startDecorator={<Delete />}>
-                                            {t('DeleteContact')}
-                                        </MenuItem>
-                                    </Menu>
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger>
+                                            <IconButton size="sm">
+                                                <MoreVertical />
+                                            </IconButton>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent>
+                                            <DropdownMenuItem
+                                                onSelect={() => {
+                                                    setEditingContactDialogOpen(true);
+                                                    setEditingContact(c);
+                                                }}
+                                                startDecorator={<Edit />}>
+                                                {t('EditContact')}
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem
+                                                onSelect={() => {
+                                                    setDeletingContactDialogOpen(true);
+                                                    setDeletingContact(c);
+                                                }}
+                                                startDecorator={<Delete />}>
+                                                {t('DeleteContact')}
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
                                 )}
                                 label={(
-                                    <Row spacing={1} style={{ flexGrow: 1 }}>
-                                        <div style={{ width: '30%', maxWidth: '200px' }}>
+                                    <Row spacing={1} className="grow">
+                                        <div className="w-1/3 max-w-[200px]">
                                             <Typography noWrap>{camelToSentenceCase(c.contactName)}</Typography>
                                         </div>
                                         <Stack style={{ flexGrow: 1 }}>

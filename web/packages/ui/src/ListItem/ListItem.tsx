@@ -43,7 +43,7 @@ export function ListItem({
         }
     };
 
-    if (!href && !nodeId) {
+    if (!href && !nodeId && !onSelected) {
         <Row spacing={1}>
             {startDecorator ?? null}
             <Typography opacity={disabled ? 0.6 : 1}>{label}</Typography>

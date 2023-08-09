@@ -6,8 +6,8 @@
     "module": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "exports": {
-        ".": {
-            "import": "./dist/index.js"
+        "./dist/": {
+            "import": "./dist/"
         }
     },
     "type": "module",
@@ -15,15 +15,15 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsup src/index.ts --dts --format esm --clean --minify",
-        "dev": "tsup src/index.ts --dts --format esm --watch",
+        "build": "tsup src/*.ts --dts --format esm --clean --minify",
+        "dev": "tsup src/*.ts --dts --format esm --watch",
         "clean": "rimraf dist"
     },
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
         "@signalco/js": "workspace:*",
-        "@types/react": "18.2.18",
-        "next": "13.4.12",
+        "@types/react": "18.2.19",
+        "next": "13.4.13",
         "prop-types": "15.8.1",
         "react": "18.2.0",
         "react-dom": "18.2.0",
@@ -34,6 +34,6 @@
     "peerDependencies": {
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "next": "13.4.12"
+        "next": "13.4.13"
     }
 }
