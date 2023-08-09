@@ -18,7 +18,7 @@
     },
     "dependencies": {
         "@hcaptcha/react-hcaptcha": "1.8.1",
-        "@next/env": "13.4.12",
+        "@next/env": "13.4.13",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
@@ -29,7 +29,7 @@
         "classix": "2.1.34",
         "cobe": "0.6.3",
         "encoding": "0.1.13",
-        "next": "13.4.12",
+        "next": "13.4.13",
         "next-pwa": "5.6.0",
         "next-secure-headers": "2.2.0",
         "octokit": "3.1.0",
@@ -44,7 +44,7 @@
     "devDependencies": {
         "@axe-core/playwright": "4.7.3",
         "@babel/core": "7.22.10",
-        "@next/bundle-analyzer": "13.4.12",
+        "@next/bundle-analyzer": "13.4.13",
         "@playwright/test": "1.36.2",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
