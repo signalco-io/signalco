@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo, useState } from 'react';
 import { ExternalLink } from '@signalco/ui-icons';
 import { Timeago } from '@signalco/ui/dist/Timeago';
@@ -86,7 +88,7 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
                             id={id}
                             canHideRaw={detailsComponent != null}
                             showRaw={showRaw}
-                            showRawChanged={(show) => setShowRaw(show)} />
+                            showRawChanged={setShowRaw} />
                     </Row>
                     <Row spacing={1}>
                         <EntityStatus entity={entity} />

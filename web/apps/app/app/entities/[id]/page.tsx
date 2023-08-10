@@ -1,6 +1,4 @@
-'use client';
-
-import React, { } from 'react';
+import React from 'react';
 import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
 import EntityDetailsView from '../../../components/views/Entity/EntityDetailsView';
 
