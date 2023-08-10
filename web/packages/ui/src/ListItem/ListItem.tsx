@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import { Typography } from '../Typography';
+import { cx } from 'classix';
 import { Row } from '../Row';
 import { Button } from '../Button';
 
@@ -44,11 +44,15 @@ export function ListItem({
     };
 
     if (!href && !nodeId && !onSelected) {
-        <Row spacing={1}>
-            {startDecorator ?? null}
-            <Typography opacity={disabled ? 0.6 : 1}>{label}</Typography>
-            {endDecorator ?? null}
-        </Row>
+        return (
+            <Row spacing={1} className="min-h-[3rem]">
+                {startDecorator ?? null}
+                <div className={cx('grow', disabled && 'opacity-60')}>{label}</div>
+                <div className="self-end">
+                    {endDecorator ?? null}
+                </div>
+            </Row>
+        );
     }
 
     return (

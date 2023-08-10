@@ -17,8 +17,7 @@ export interface EntityOptionsProps {
     showRawChanged: (show: boolean) => void;
 }
 
-export default function EntityOptions(props: EntityOptionsProps) {
-    const { id, canHideRaw, showRaw, showRawChanged } = props;
+export default function EntityOptions({ id, canHideRaw, showRaw, showRawChanged, ...rest }: EntityOptionsProps) {
     const { t } = useLocale('App', 'Entities');
     const router = useRouter();
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -50,7 +49,7 @@ export default function EntityOptions(props: EntityOptionsProps) {
         <>
             <DropdownMenu>
                 <DropdownMenuTrigger>
-                    <Button {...props}>
+                    <Button {...rest}>
                         <MoreHorizontal />
                     </Button>
                 </DropdownMenuTrigger>

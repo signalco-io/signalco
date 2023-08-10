@@ -84,7 +84,7 @@ function ObjectVisualizer(props: { name: string, value: ParsedJson, defaultOpen?
                         //     - GUID/UUID
                         //     - boolean
                         //     - ability to unset value
-                        <CopyToClipboardInput value={value?.toString()} />
+                        <CopyToClipboardInput defaultValue={value?.toString()} />
                     )}
                 </Row>
             )}>
@@ -104,6 +104,11 @@ function DisplayJson(props: { json: string | undefined }) {
     const jsonObj = useMemo(() => JSON.parse(props.json ?? '') as ParsedJson, [props.json]);
     const jsonFormatted = useMemo(() => JSON.stringify(jsonObj, undefined, 4), [jsonObj]);
 
+    const selectItems = useMemo(() => [
+        { value: 'ui', label: <UI size={18} /> },
+        { value: 'source', label: <Code size={18} /> }
+    ], []);
+
     return (
         <div className="relative min-w-[230px]">
             {showSource ? (
@@ -114,10 +119,10 @@ function DisplayJson(props: { json: string | undefined }) {
                 </List>
             )}
             <div className="absolute right-0 top-0">
-                <SelectItems value={showSource ? 'source' : 'ui'} onValueChange={value => setShowSource(value === 'source')} items={[
-                    { value: 'ui', label: <UI size={18} /> },
-                    { value: 'source', label: <Code size={18} /> }
-                ]} />
+                <SelectItems
+                    value={showSource ? 'source' : 'ui'}
+                    onValueChange={value => setShowSource(value === 'source')}
+                    items={selectItems} />
             </div>
         </div>
     );

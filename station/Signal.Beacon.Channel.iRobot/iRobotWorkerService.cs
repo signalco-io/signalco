@@ -550,7 +550,7 @@ internal class iRobotMcsResponse
 
 internal class iRobotWorkerServiceConfiguration
 {
-    public List<RoombaConfiguration> RoombaRobots { get; } = new();
+    public List<RoombaConfiguration> RoombaRobots { get; set; } = new();
 
     public class RoombaConfiguration
     {
