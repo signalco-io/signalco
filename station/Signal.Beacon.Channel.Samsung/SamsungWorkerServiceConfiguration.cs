@@ -4,7 +4,7 @@ namespace Signal.Beacon.Channel.Samsung;
 
 public class SamsungWorkerServiceConfiguration
 {
-    public List<SamsungTvRemoteConfig> TvRemotes { get; } = new();
+    public List<SamsungTvRemoteConfig> TvRemotes { get; set; } = new();
 
     public class SamsungTvRemoteConfig
     {
