@@ -11,3 +11,4 @@ export { default as useSearchParam } from './useSearchParam';
 export { default as useAudio } from './useAudio';
 export { type UseAudioOptions } from './useAudio';
 export { default as useInterval } from './useInterval';
+export * from './useResizeObserver';
