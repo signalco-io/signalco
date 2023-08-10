@@ -24,7 +24,10 @@ internal class ChannelWorkerServiceResolver : IChannelWorkerServiceResolver
     public async Task<Type?> ResolveWorkerServiceTypeAsync(string entityId, CancellationToken cancellationToken = default)
     {
         var entity = await this.entitiesDao.GetAsync(entityId, cancellationToken);
-        var channelName = entity?.Contacts.FirstOrDefault(c => c.ContactName == KnownContacts.ChannelStationId)?.ChannelName;
+        var channelName = entity?.Contacts
+            .FirstOrDefault(c =>
+                c.ContactName == KnownContacts.ChannelStationId &&
+                !string.IsNullOrWhiteSpace(c.ValueSerialized))?.ChannelName;
         if (string.IsNullOrWhiteSpace(channelName))
             return null;
 
