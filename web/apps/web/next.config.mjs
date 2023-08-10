@@ -40,7 +40,8 @@ const nextConfig = {
                     knownSecureHeadersExternalUrls.github,
                     knownSecureHeadersExternalUrls.google,
                     knownSecureHeadersExternalUrls.clarity,
-                    knownSecureHeadersExternalUrls.vercel
+                    knownSecureHeadersExternalUrls.vercel,
+                    knownSecureHeadersExternalUrls.checkly
                 ]
             ))
         }];
