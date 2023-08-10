@@ -46,6 +46,9 @@ export const knownSecureHeadersExternalUrls: KnownSecureHeadersExternalUrlsObjec
     },
     azureSignalR: {
         connectSrc: ['https://*.service.signalr.net', 'wss://*.service.signalr.net']
+    },
+    checkly: {
+        connectSrc: ['https://api.checklyhq.com']
     }
 };
 
