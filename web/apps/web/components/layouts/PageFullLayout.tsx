@@ -7,7 +7,7 @@ export function PageFullLayout(props: PropsWithChildren) {
     return (
         <Stack spacing={4}>
             <PageNav fullWidth />
-            <div style={{ paddingTop: '80px' }}>
+            <div className="pt-20">
                 {props.children}
             </div>
             <Footer />

@@ -5,8 +5,6 @@ import Footer from '../pages/Footer';
 import { PageNav } from '../PageNav';
 
 export function PageLayout({ children }: PropsWithChildren) {
-    console.log('PageLayout rendered');
-
     return (
         <Stack spacing={4}>
             <PageNav />
