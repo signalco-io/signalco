@@ -16,6 +16,15 @@ interface ContactHistoryResponseDto {
     values: TimeStampValuePairDto[]
 }
 
+export async function setMetadataAsync(pointer: IContactPointer, metadataSerialized: string | undefined) {
+    await requestAsync('/contact/metadata', 'post', {
+        entityId: pointer.entityId,
+        contactName: pointer.contactName,
+        channelName: pointer.channelName,
+        metadata: metadataSerialized
+    });
+}
+
 export async function setAsync(pointer: IContactPointer, valueSerialized: string | undefined, timeStamp?: Date | undefined) {
     await requestAsync('/contact/set', 'post', {
         entityId: pointer.entityId,
