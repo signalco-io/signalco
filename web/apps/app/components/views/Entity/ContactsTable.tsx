@@ -1,12 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import { Add, Code, Delete, Edit, MoreVertical, UI } from '@signalco/ui-icons';
+import { Add, Code, Delete, Edit, MoreVertical, UI, History } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Tooltip } from '@signalco/ui/dist/Tooltip';
 import { Timeago } from '@signalco/ui/dist/Timeago';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Row } from '@signalco/ui/dist/Row';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
 import { ListItem } from '@signalco/ui/dist/ListItem';
@@ -24,7 +24,9 @@ import ChannelLogo from '../../channels/ChannelLogo';
 import useLocale from '../../../src/hooks/useLocale';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointer from '../../../src/contacts/IContactPointer';
-import { deleteContactAsync, setAsync } from '../../../src/contacts/ContactRepository';
+import IContact, { ContactMetadataV1 } from '../../../src/contacts/IContact';
+import { deleteContactAsync, setAsync, setMetadataAsync } from '../../../src/contacts/ContactRepository';
+import { Chip } from '@signalco/ui/dist/Chip';
 
 function JsonNonArrayVisualizer({ value }: { value: ParsedJson }) {
     if (value === null ||
@@ -180,6 +182,34 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
         setDeletingContactDialogOpen(false);
     }
 
+    const handleToggleContactHistory = async (contact: IContact) => {
+        if (entity && contact) {
+            await setMetadataAsync({
+                entityId: entity.id,
+                channelName: contact.channelName,
+                contactName: contact.contactName
+            }, JSON.stringify({
+                ...contact.metadata,
+                Version: contact.metadata?.Version ?? 1,
+                PersistHistory: !contact.metadata?.PersistHistory
+            } satisfies ContactMetadataV1))
+        }
+    };
+
+    const handleToggleContactProcessSameValue = async (contact: IContact) => {
+        if (entity && contact) {
+            await setMetadataAsync({
+                entityId: entity.id,
+                channelName: contact.channelName,
+                contactName: contact.contactName
+            }, JSON.stringify({
+                ...contact.metadata,
+                Version: contact.metadata?.Version ?? 1,
+                ProcessSameValue: !contact.metadata?.ProcessSameValue
+            } satisfies ContactMetadataV1))
+        }
+    };
+
     return (
         <>
             <Card>
@@ -216,6 +246,23 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                                         <DropdownMenuContent>
                                             <DropdownMenuItem
                                                 onSelect={() => {
+                                                    handleToggleContactHistory(c);
+                                                }}
+                                                startDecorator={<History />}
+                                            >
+                                                {t(c.metadata?.PersistHistory ? 'ContactDisablePersistHistory' : 'ContactEnablePersistHistory')}
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem
+                                                onSelect={() => {
+                                                    handleToggleContactProcessSameValue(c);
+                                                }}
+                                                startDecorator={<History />}
+                                            >
+                                                {t(c.metadata?.ProcessSameValue ? 'ContactDisableProcessSameValue' : 'ContactEnableProcessSameValye')}
+                                            </DropdownMenuItem>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem
+                                                onSelect={() => {
                                                     setEditingContactDialogOpen(true);
                                                     setEditingContact(c);
                                                 }}
@@ -242,9 +289,17 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                                             {isJson(c.valueSerialized)
                                                 ? <DisplayJson json={c.valueSerialized} />
                                                 : <Typography>{c.valueSerialized}</Typography>}
-                                            <div className="text-xs text-muted-foreground">
-                                                <Timeago date={c.timeStamp} live />
-                                            </div>
+                                            <Row spacing={1}>
+                                                <div className="text-xs text-muted-foreground">
+                                                    <Timeago date={c.timeStamp} live />
+                                                </div>
+                                                {c.metadata?.PersistHistory && (
+                                                    <Chip startDecorator={<History size={14} />} size="sm">History</Chip>
+                                                )}
+                                                {c.metadata?.ProcessSameValue && (
+                                                    <Chip size="sm">Process same value</Chip>
+                                                )}
+                                            </Row>
                                         </Stack>
                                     </Row>
                                 )} />
