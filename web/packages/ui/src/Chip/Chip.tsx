@@ -13,15 +13,11 @@ export type ChipProps = PropsWithChildren<{
     startDecorator?: ReactNode,
 }>;
 
-const smStyles = 'rounded-xl py-0.5 px-1 text-xs'; //     padding: 2px 6px; font-size: 0.7rem;
-const lgStyles = 'rounded-3xl px-3 text-base'; //     padding: 4px 12px; font-size: 1rem;
-
 export function Chip({ size, color, startDecorator, onClick, children, href }: ChipProps) {
     const className = cx(
         'py-1 px-2 m-0 text-sm border border-neutral-500 rounded-2xl',
-        (size && size === 'sm') && smStyles,
-        (!size || size === 'lg') && lgStyles,
-        // color && styles[color],
+        (size && size === 'sm') && 'rounded-xl py-0.5 px-1 text-xs',
+        (!size || size === 'lg') && 'rounded-3xl px-3 text-base',
         color === 'info' && 'bg-sky-300 text-sky-800 border-sky-300',
         color === 'warning' && 'bg-amber-300 text-amber-800 border-amber-300',
     );

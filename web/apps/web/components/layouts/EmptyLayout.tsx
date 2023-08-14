@@ -6,7 +6,7 @@ export function EmptyLayout(props: PropsWithChildren) {
     } = props;
 
     return (
-        <div style={{ height: '100%', position: 'relative' }}>
+        <div className="relative h-full">
             {children}
         </div>
     );

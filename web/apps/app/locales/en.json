@@ -53,7 +53,11 @@
             "NewEntityDialog": {
                 "PickTypeHeader": "Pick Entity type"
             },
-            "CreateContact": "Create contact"
+            "CreateContact": "Create contact",
+            "EditContact": "Edit",
+            "DeleteContact": "Delete...",
+            "ContactDisablePersistHistory": "Disable history",
+            "ContactEnablePersistHistory": "Enable history"
         },
         "Processes": {
             "name": "Name",
