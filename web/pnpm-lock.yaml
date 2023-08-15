@@ -138,8 +138,8 @@ importers:
         specifier: 2.7.3
         version: 2.7.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       sharp:
-        specifier: 0.32.4
-        version: 0.32.4
+        specifier: 0.32.5
+        version: 0.32.5
       suncalc:
         specifier: 1.9.0
         version: 1.9.0
@@ -316,8 +316,8 @@ importers:
         specifier: 4.4.5
         version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
       sharp:
-        specifier: 0.32.4
-        version: 0.32.4
+        specifier: 0.32.5
+        version: 0.32.5
       tailwindcss:
         specifier: 3.3.3
         version: 3.3.3
@@ -437,8 +437,8 @@ importers:
         specifier: 4.4.5
         version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
       sharp:
-        specifier: 0.32.4
-        version: 0.32.4
+        specifier: 0.32.5
+        version: 0.32.5
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.3
@@ -571,8 +571,8 @@ importers:
         specifier: 4.4.5
         version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
       sharp:
-        specifier: 0.32.4
-        version: 0.32.4
+        specifier: 0.32.5
+        version: 0.32.5
       tailwindcss:
         specifier: 3.3.3
         version: 3.3.3
@@ -801,8 +801,8 @@ importers:
         specifier: 4.4.5
         version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
       sharp:
-        specifier: 0.32.4
-        version: 0.32.4
+        specifier: 0.32.5
+        version: 0.32.5
       tailwindcss:
         specifier: 3.3.3
         version: 3.3.3
@@ -14375,8 +14375,8 @@ packages:
       kind-of: 6.0.3
     dev: true
 
-  /sharp@0.32.4:
-    resolution: {integrity: sha512-exUnZewqVZC6UXqXuQ8fyJJv0M968feBi04jb9GcUHrWtkRoAKnbJt8IfwT4NJs7FskArbJ14JAFGVuooszoGg==}
+  /sharp@0.32.5:
+    resolution: {integrity: sha512-0dap3iysgDkNaPOaOL4X/0akdu0ma62GcdC2NBQ+93eqpePdDdr2/LM0sFdDSMmN7yS+odyZtPsb7tx/cYBKnQ==}
     engines: {node: '>=14.15.0'}
     requiresBuild: true
     dependencies:
