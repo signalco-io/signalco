@@ -68,7 +68,7 @@
         "@axe-core/playwright": "4.7.3",
         "@babel/core": "7.22.10",
         "@next/bundle-analyzer": "13.4.16",
-        "@playwright/test": "1.37.0",
+        "@playwright/test": "1.37.1",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@total-typescript/ts-reset": "0.4.2",
