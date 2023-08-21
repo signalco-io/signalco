@@ -23,7 +23,7 @@
         "@signalco/tsconfig": "workspace:*",
         "@signalco/js": "workspace:*",
         "@types/react": "18.2.20",
-        "next": "13.4.18",
+        "next": "13.4.19",
         "prop-types": "15.8.1",
         "react": "18.2.0",
         "react-dom": "18.2.0",
@@ -34,6 +34,6 @@
     "peerDependencies": {
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "next": "13.4.18"
+        "next": "13.4.19"
     }
 }
