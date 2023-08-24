@@ -3,6 +3,7 @@ import { PropsWithChildren } from 'react';
 import { type Metadata } from 'next';
 import { AppLayout } from '../components/layouts/AppLayout';
 import { LayoutClientWrapper } from './LayoutClientWrapper';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function RootLayout({ children }: PropsWithChildren) {
     return (
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                         {children}
                     </AppLayout>
                 </LayoutClientWrapper>
+                <Analytics />
             </body>
         </html>
     );
