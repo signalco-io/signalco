@@ -46,7 +46,7 @@
         "@types/react-motion": "0.0.34",
         "@types/sharp": "0.31.1",
         "cross-env": "7.0.3",
-        "eslint": "8.47.0",
+        "eslint": "8.48.0",
         "next-sitemap": "4.2.2",
         "postcss": "8.4.28",
         "prop-types": "15.8.1",
