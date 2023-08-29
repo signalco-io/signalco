@@ -23,7 +23,7 @@ jobs:
     name: "[Blog] Next.js Bundle Analysis"
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+      group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-blog
       cancel-in-progress: true
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -124,7 +124,7 @@ jobs:
     name: "[App] Next.js Bundle Analysis"
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+      group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-app
       cancel-in-progress: true
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -225,7 +225,7 @@ jobs:
     name: "[BrandGrab] Next.js Bundle Analysis"
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+      group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-brandgrab
       cancel-in-progress: true
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -326,7 +326,7 @@ jobs:
     name: "[Web] Next.js Bundle Analysis"
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+      group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-web
       cancel-in-progress: true
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -427,7 +427,7 @@ jobs:
     name: "[slco] Next.js Bundle Analysis"
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+      group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-slco
       cancel-in-progress: true
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
