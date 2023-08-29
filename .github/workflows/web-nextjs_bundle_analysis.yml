@@ -12,6 +12,7 @@ on:
       - next
     paths:
       - 'web/**'
+      - '.github/workflows/web-nextjs_bundle_analysis.yml'
   workflow_dispatch:
 
 defaults:
