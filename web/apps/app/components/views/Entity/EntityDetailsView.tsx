@@ -5,6 +5,7 @@ import { ExternalLink } from '@signalco/ui-icons';
 import { Timeago } from '@signalco/ui/dist/Timeago';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { EditableInput } from '@signalco/ui/dist/EditableInput';
 import { DisableButton } from '@signalco/ui/dist/DisableButton';
@@ -26,11 +27,10 @@ import EntityOptions from './EntityOptions';
 import ContactsTable from './ContactsTable';
 
 export interface EntityDetailsViewProps {
-    id: string;
+    id?: string;
 }
 
-export default function EntityDetailsView(props: EntityDetailsViewProps) {
-    const { id } = props;
+export default function EntityDetailsView({ id }: EntityDetailsViewProps) {
     const { isLoading, error, data: entity } = useEntity(id);
     const [showRaw, setShowRaw] = useState(false);
 
@@ -70,6 +70,11 @@ export default function EntityDetailsView(props: EntityDetailsViewProps) {
     }, [entity]);
     const showRawResolved = useMemo(() => detailsComponent == null || showRaw, [detailsComponent, showRaw]);
 
+    if (!isLoading && !error && entity == null) {
+        return (
+            <NoDataPlaceholder content={'Not Found'} />
+        );
+    }
     return (
         <Loadable isLoading={isLoading} loadingLabel="Loading entity" error={error}>
             <div className="xs:gap-1 flex flex-col sm:gap-4 sm:pt-2">

@@ -1,11 +1,11 @@
-import { orderBy } from '@signalco/js';
+import { objectWithKey, orderBy } from '@signalco/js';
 import { getAsync, requestAsync } from '../services/HttpService';
 import IEntityDetails from './IEntityDetails';
 
 function mapEntityDetailsFromDto(e: unknown) {
     if (typeof e === 'object' && e != null) {
         return {
-            ...e, 
+            ...e,
             timeStamp: 'timeStamp' in e && typeof e.timeStamp === 'string' ? new Date(e.timeStamp) : undefined,
             contacts: 'contacts' in e && Array.isArray(e.contacts)
                 ? e.contacts.map((c) => typeof c === 'object' ? ({
@@ -20,11 +20,16 @@ function mapEntityDetailsFromDto(e: unknown) {
 }
 
 export async function entityAsync(id: string) {
-    const entity = await getAsync(`/entity/${id}`);
-    if (!entity)
-        throw new Error('Entity not found');
-
-    return mapEntityDetailsFromDto(entity);
+    try {
+        const entity = await getAsync(`/entity/${id}`);
+        return mapEntityDetailsFromDto(entity);
+    } catch (err) {
+        const errorStatusCode = objectWithKey(objectWithKey(err, 'cause')?.cause, 'statusCode')?.statusCode;
+        if (errorStatusCode === 404) {
+            return null;
+        }
+        throw err;
+    }
 }
 
 export async function entityRenameAsync(id: string, newAlias: string) {
