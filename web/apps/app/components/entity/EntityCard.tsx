@@ -35,7 +35,7 @@ export default function EntityCard({ entity, spread, selectable, selected, onSel
     return (
         <Row spacing={1}>
             {selectable && <Checkbox checked={selected ?? false} onChange={onSelection} />}
-            <Link href={`${KnownPages.Entities}/${entity.id}`} style={{ flexGrow: 1 }}>
+            <Link href={`${KnownPages.Entities}/${entity.id}`} className="grow overflow-hidden h-full">
                 <Card className={cx('h-full p-1', spread && 'p-0')}>
                     <Container
                         spacing={2}
@@ -51,10 +51,10 @@ export default function EntityCard({ entity, spread, selectable, selected, onSel
                             justifyContent="space-between"
                             spacing={1}>
                             <ShareEntityChip entityType={2} entity={entity} disableAction hideSingle />
-                            <Row spacing={1} style={{ paddingRight: spread ? 16 : 0 }}>
+                            <Row spacing={1} className={cx(spread && 'pr-4')}>
                                 {hasBattery && <BatteryIndicator level={level} minLevel="low" />}
                                 {(hasStatus && (isStale || isOffline)) && (
-                                    <div style={{ opacity: 0.6, fontSize: '0.8rem' }}>
+                                    <div className="text-xs opacity-60">
                                         <Timeago date={entityLastActivity(entity)} />
                                     </div>
                                 )}

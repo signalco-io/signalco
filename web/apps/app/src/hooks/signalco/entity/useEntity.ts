@@ -13,10 +13,10 @@ function findEntity(client: QueryClient, id: string | undefined) {
 
 export default function useEntity(id: string | undefined) {
     const client = useQueryClient();
-    return useQuery(['entity', id], () => {
+    return useQuery(['entity', id], async () => {
         if (!id)
             throw new Error('Entity Id is required');
-        return entityAsync(id);
+        return await entityAsync(id) ?? undefined;
     }, {
         initialData: () => findEntity(client, id),
         initialDataUpdatedAt: () => client.getQueryState(['entities'])?.dataUpdatedAt,

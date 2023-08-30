@@ -23,11 +23,11 @@ export function AppLayout(props: React.PropsWithChildren) {
     return (
         <AuthWrapper>
             <QueryClientProvider client={queryClient}>
-                <div className="flex h-screen w-full flex-col sm:flex-row">
+                <div className="flex w-full flex-col sm:flex-row">
                     {isFullScreen !== 'true' && (
                         <NavProfile />
                     )}
-                    <div className="relative h-screen w-full grow overflow-hidden">
+                    <div className="relative w-full grow overflow-hidden">
                         {children}
                     </div>
                 </div>
