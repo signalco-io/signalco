@@ -1,5 +1,6 @@
 import { type HTMLAttributes, type ReactNode } from 'react';
 import { cx } from 'classix';
+import { Row } from '../Row';
 
 export type AlertProps = HTMLAttributes<HTMLDivElement> & {
     color?: 'primary' | 'neutral' | 'danger' | 'info' | 'success' | 'warning',
@@ -7,14 +8,26 @@ export type AlertProps = HTMLAttributes<HTMLDivElement> & {
     endDecorator?: ReactNode | undefined,
 };
 
-export function Alert({ className, ...props }: AlertProps) {
+export function Alert({ className, color, startDecorator, endDecorator, children, ...props }: AlertProps) {
     return (
-        <div
+        <Row
             role="alert"
-            // color={color}
-            // startDecorator={startDecorator}
-            // endDecorator={endDecorator}
-            className={cx('', className)}
-            {...props} />
+            spacing={1}
+            className={cx(
+                'relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground',
+                color === 'primary' && 'bg-primary-100 border-primary-300',
+                color === 'neutral' && 'bg-neutral-100 border-neutral-300',
+                color === 'danger' && 'bg-red-100 border-red-300',
+                color === 'info' && 'bg-blue-100 border-blue-300',
+                color === 'success' && 'bg-green-100 border-green-300',
+                color === 'warning' && 'bg-yellow-100 border-yellow-300',
+                className)}
+            {...props}>
+            {startDecorator}
+            <div className="text-sm [&_p]:leading-relaxed">
+                {children}
+            </div>
+            {endDecorator}
+        </Row>
     );
 }
