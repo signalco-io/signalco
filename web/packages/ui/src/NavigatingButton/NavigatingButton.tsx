@@ -31,7 +31,7 @@ export function NavigatingButton({
                 size={size}
                 className={hideArrow ? 'group/nav-button' : undefined}
                 startDecorator={hideArrow && (
-                    <span className="w-[16px] pr-1" />
+                    <span className="w-4 pr-1" />
                 )}
                 endDecorator={(
                     <span className={cx(

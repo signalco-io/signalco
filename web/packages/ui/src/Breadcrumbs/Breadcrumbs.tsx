@@ -13,9 +13,12 @@ export type BreadcrumbsProps = {
 };
 
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
+    if (!items?.length)
+        return null;
+
     return (
         <Row spacing={1}>
-            {items?.map((item, index) => (
+            {items.map((item, index) => (
                 <Fragment key={item.label}>
                     <BreadcrumbsItem href={item.href} label={item.label} />
                     {index < items.length - 1 && <Typography fontSize={'1.3em'}>{'\u203a'}</Typography>}
