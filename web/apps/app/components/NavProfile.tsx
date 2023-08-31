@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { cx } from 'classix';
@@ -62,7 +64,7 @@ export default function NavProfile() {
                     {mobileMenuOpen ? <Close /> : <MenuIcon />}
                 </IconButton>
                 <div className={cx(
-                    'fixed inset-x-0 bottom-0 left-0 right-0 top-[60px] z-50 bg-current',
+                    'fixed inset-0 top-[60px] z-50 bg-white',
                     !mobileMenuOpen && 'hidden'
                 )}>
                     <Stack>
