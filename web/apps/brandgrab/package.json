@@ -39,7 +39,7 @@
         "@playwright/test": "1.37.1",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/color": "3.0.3",
+        "@types/color": "3.0.4",
         "@types/node": "18.17.14",
         "@types/react": "18.2.21",
         "@types/react-dom": "18.2.7",
