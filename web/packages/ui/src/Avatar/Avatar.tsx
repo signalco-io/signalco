@@ -9,8 +9,8 @@ export type AvatarProps = PropsWithChildren<{
 }>;
 
 export function Avatar({ children, className }: AvatarProps) {
-    return <div className={cx(
+    return (<div className={cx(
         'flex h-10 min-w-[40px] max-w-[40px] items-center justify-center rounded-full bg-muted',
         className
-    )}>{children}</div>;
+    )}>{children}</div>);
 }

@@ -35,12 +35,13 @@ function AppThemeVisual({ label, theme, disabled, size }: { label: string, theme
         <div className={cx(disabled && 'opacity-40')}>
             <Row spacing={1}>
                 <div style={{ width: 80 * scale, height: 60 * scale }}>
-                    <div className="relative h-[60px] w-20 origin-top-left overflow-hidden rounded-md" style={{
-                        backgroundColor: backgroundColor,
-                        border: '1px solid gray',
-                        borderTop: '4px solid gray',
-                        transform: `scale(${scale})`
-                    }}>
+                    <div className="relative h-[60px] w-20 origin-top-left overflow-hidden rounded-md"
+                        style={{
+                            backgroundColor: backgroundColor,
+                            border: '1px solid gray',
+                            borderTop: '4px solid gray',
+                            transform: `scale(${scale})`
+                        }}>
                         <div className="absolute" style={{ backgroundColor: textColor, width: 20, height: 5, top: 4, left: 4 }} />
                         <div className="absolute" style={{ backgroundColor: textColor, width: 18, height: 5, top: 12, left: 4 }} />
                         <div className="absolute" style={{ backgroundColor: textColor, width: 22, height: 5, top: 20, left: 4 }} />
@@ -153,12 +154,14 @@ export default function AppThemePicker() {
             <Stack spacing={2}>
                 <Stack spacing={1}>
                     <Typography level="body2">{tPicker('PickMode')}</Typography>
-                    <SelectItems value={themeMode} onValueChange={value => handleThemeModeChange(value as AppThemeMode)} items={[
-                        { value: 'system', icon: <Laptop />, label: tPickerModes('System') },
-                        { value: 'manual', icon: <Custom />, label: tPickerModes('Manual') },
-                        { value: 'sunriseSunset', icon: <SunMoon />, disabled: (userLocation?.length ?? 0) <= 0, label: tPickerModes('SunriseSunset') },
-                        { value: 'timeRange', icon: <Timer />, label: tPickerModes('TimeRange') },
-                    ]} />
+                    <SelectItems value={themeMode}
+                        onValueChange={value => handleThemeModeChange(value as AppThemeMode)}
+                        items={[
+                            { value: 'system', icon: <Laptop />, label: tPickerModes('System') },
+                            { value: 'manual', icon: <Custom />, label: tPickerModes('Manual') },
+                            { value: 'sunriseSunset', icon: <SunMoon />, disabled: (userLocation?.length ?? 0) <= 0, label: tPickerModes('SunriseSunset') },
+                            { value: 'timeRange', icon: <Timer />, label: tPickerModes('TimeRange') },
+                        ]} />
                 </Stack>
                 {themeMode === 'timeRange' && (
                     <Stack spacing={1}>

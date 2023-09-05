@@ -43,10 +43,12 @@ function SettingsItem(props: { children: ReactNode, label?: string | undefined }
 function SelectTimeZone({ onChange, value }: ComponentProps<FormBuilderComponent>) {
     const { t } = useLocale('App', 'Settings');
     return (
-        <SelectItems value={value} onValueChange={onChange} items={[
-            { value: '0', label: t('TimeFormat12Hour') },
-            { value: '1', label: t('TimeFormat24Hour') }
-        ]} />
+        <SelectItems value={value}
+            onValueChange={onChange}
+            items={[
+                { value: '0', label: t('TimeFormat12Hour') },
+                { value: '1', label: t('TimeFormat24Hour') }
+            ]} />
     );
 }
 
@@ -64,35 +66,41 @@ function SelectLanguage({ value, label, onChange }: ComponentProps<FormBuilderCo
 const settingsFormComponents: FormBuilderComponents = {
     fieldWrapper: (props) => <SettingsItem {...props} />,
     selectApiEndpoint: ({ value, onChange, label }) => (
-        <SelectItems value={value} onValueChange={(v) => onChange(v)} items={[
-            {
-                value: ApiProductionUrl,
-                label: (
-                    <Row spacing={1}>
-                        <ApiBadge force="prod" />
-                        <Typography>{ApiProductionUrl}</Typography>
-                    </Row>
-                )
-            },
-            {
-                value: ApiDevelopmentUrl,
-                label: (
-                    <Row spacing={1}>
-                        <ApiBadge force="dev" />
-                        <Typography>{ApiDevelopmentUrl}</Typography>
-                    </Row>
-                )
-            }
-        ]} label={label} />
+        <SelectItems value={value}
+            onValueChange={(v) => onChange(v)}
+            items={[
+                {
+                    value: ApiProductionUrl,
+                    label: (
+                        <Row spacing={1}>
+                            <ApiBadge force="prod" />
+                            <Typography>{ApiProductionUrl}</Typography>
+                        </Row>
+                    )
+                },
+                {
+                    value: ApiDevelopmentUrl,
+                    label: (
+                        <Row spacing={1}>
+                            <ApiBadge force="dev" />
+                            <Typography>{ApiDevelopmentUrl}</Typography>
+                        </Row>
+                    )
+                }
+            ]}
+            label={label} />
     ),
     selectTimeFormat: (props) => <SelectTimeZone {...props} />,
     selectTimeZone: ({ value, onChange, label }) => {
         const timeZones = getTimeZones();
         return (
-            <SelectItems value={value} onValueChange={onChange} items={[
-                { value: '0', label: '+00:00 UTC', disabled: true },
-                ...timeZones.map(tz => ({ value: tz.name, label: tz.currentTimeFormat }))
-            ]} label={label} />
+            <SelectItems value={value}
+                onValueChange={onChange}
+                items={[
+                    { value: '0', label: '+00:00 UTC', disabled: true },
+                    ...timeZones.map(tz => ({ value: tz.name, label: tz.currentTimeFormat }))
+                ]}
+                label={label} />
         );
     },
     locationMap: (props) => <LocationMapPicker {...props} />,

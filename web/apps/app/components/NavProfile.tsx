@@ -69,13 +69,13 @@ export default function NavProfile() {
                 )}>
                     <Stack>
                         {visibleNavItems.map((ni, index) =>
-                            <NavLink
+                            (<NavLink
                                 key={index + 1}
                                 path={ni.path}
                                 Icon={ni.icon}
                                 active={ni === activeNavItem}
                                 label={t(ni.label)}
-                                onClick={handleMobileMenuClose} />)}
+                                onClick={handleMobileMenuClose} />))}
                     </Stack>
                 </div>
             </div>

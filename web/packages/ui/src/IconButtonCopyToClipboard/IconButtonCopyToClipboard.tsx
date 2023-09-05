@@ -42,18 +42,19 @@ export function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps)
     };
 
     return (
-        <Popper open={notificationOpen} anchor={(
-            <IconButton
-                size="md"
-                className={props.className}
-                title={props.title}
-                variant="plain"
-                aria-label={props.title}
-                onClick={handleClickShowCopyToClipboard}
-                onMouseDown={handleMouseDownCopyToClipboard}>
-                {props.children ? props.children : <Copy />}
-            </IconButton>
-        )}>
+        <Popper open={notificationOpen}
+            anchor={(
+                <IconButton
+                    size="md"
+                    className={props.className}
+                    title={props.title}
+                    variant="plain"
+                    aria-label={props.title}
+                    onClick={handleClickShowCopyToClipboard}
+                    onMouseDown={handleMouseDownCopyToClipboard}>
+                    {props.children ? props.children : <Copy />}
+                </IconButton>
+            )}>
             <Alert color={error ? 'warning' : 'neutral'} startDecorator={error && <Warning />}>
                 {error ? props.errorMessage : props.successMessage}
             </Alert>

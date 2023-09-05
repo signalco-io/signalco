@@ -21,8 +21,11 @@ function SignalcoLogotype({ width, height, theme, hideBadge }: SignalcoLogotypeP
 
     return (
         <div aria-label="Signalco" role="img" className={cx(styles.root, hideBadge && styles.hideBadge)} ref={ref}>
-            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                width={fixedWidth} height={fixedHeight - paddingTop} viewBox="0 0 2810.000000 666.000000"
+            <svg version="1.0"
+                xmlns="http://www.w3.org/2000/svg"
+                width={fixedWidth}
+                height={fixedHeight - paddingTop}
+                viewBox="0 0 2810.000000 666.000000"
                 preserveAspectRatio="xMidYMid meet">
                 <g transform="translate(0.000000,666.000000) scale(0.100000,-0.100000)"
                     style={{ fill: theme === 'dark' ? '#ffffff' : '#000000' }}

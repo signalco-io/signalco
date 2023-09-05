@@ -16,6 +16,7 @@ export function CopyToClipboardInput(props: CopyToClipboardInputProps) {
                     errorMessage={'Failed to copy'}>
                     <Copy />
                 </IconButtonCopyToClipboard>
-            } {...props} />
+            }
+            {...props} />
     );
 }

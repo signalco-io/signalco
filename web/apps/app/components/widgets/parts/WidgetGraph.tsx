@@ -44,7 +44,10 @@ export default function WidgetButton({ config, onOptions }: WidgetSharedProps<Co
                     data={historyData.item?.at(0)?.history?.map(i => ({
                         id: i.timeStamp.toUTCString(),
                         value: i.valueSerialized ?? ''
-                    })) ?? []} durationMs={duration} width={columns * 80 + 2} height={rows * 80 + 2} />
+                    })) ?? []}
+                    durationMs={duration}
+                    width={columns * 80 + 2}
+                    height={rows * 80 + 2} />
             )}
         </Loadable>
     );
