@@ -42,7 +42,9 @@ export default function LandingPageView() {
                 </StepContent>
             </DeveloperOnly>
             <CounterIndicator count={1} />
-            <StepContent header="Discover" image={<DiscoverVisual />} imageContainerHeight={420}
+            <StepContent header="Discover"
+                image={<DiscoverVisual />}
+                imageContainerHeight={420}
                 imageContainerStyles={{
                     position: 'absolute',
                     top: '-92px',

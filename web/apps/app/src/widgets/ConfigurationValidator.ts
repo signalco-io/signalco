@@ -16,7 +16,7 @@ export function IsConfigurationValid<TConfigProps>(
 
         const value = config[opt.name];
         if (typeof value === 'undefined' || value == null) {
-            console.debug('Config invalid - value undefined', config);
+            console.debug('Config invalid: (option)', opt.name, 'value', value, 'Full config:', config);
             return false;
         }
 

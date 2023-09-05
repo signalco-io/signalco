@@ -223,18 +223,19 @@ function PagePreview({ domain }: { domain: string }) {
                 <Loadable isLoading={pageScreenshot.isLoading} error={pageScreenshot.error} loadingLabel="Loading preview">
                     <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                         {orderBy(pageScreenshot.item?.colors ?? [], (a, b) => b.area - a.area).map((color) => (
-                            <div key={color.hex} style={{
-                                width: 64,
-                                height: 64,
-                                borderRadius: 4,
-                                backgroundColor: color.hex,
-                                fontSize: '.8em',
-                                padding: 4,
-                                alignItems: 'end',
-                                display: 'flex',
-                                color: hexLightness(color.hex) < .5 ? 'rgba(256,256,256, .8)' : 'rgba(0,0,0, .8)',
-                                border: '1px solid hsl(var(--border))'
-                            }}>
+                            <div key={color.hex}
+                                style={{
+                                    width: 64,
+                                    height: 64,
+                                    borderRadius: 4,
+                                    backgroundColor: color.hex,
+                                    fontSize: '.8em',
+                                    padding: 4,
+                                    alignItems: 'end',
+                                    display: 'flex',
+                                    color: hexLightness(color.hex) < .5 ? 'rgba(256,256,256, .8)' : 'rgba(0,0,0, .8)',
+                                    border: '1px solid hsl(var(--border))'
+                                }}>
                                 {color.hex}
                             </div>
                         ))}

@@ -1,9 +1,9 @@
 import './global.css';
 import { PropsWithChildren } from 'react';
 import { type Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
 import { AppLayout } from '../components/layouts/AppLayout';
 import { LayoutClientWrapper } from './LayoutClientWrapper';
-import { Analytics } from '@vercel/analytics/react';
 
 export default function RootLayout({ children }: PropsWithChildren) {
     return (

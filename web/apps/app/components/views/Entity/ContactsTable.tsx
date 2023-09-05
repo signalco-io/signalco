@@ -14,6 +14,7 @@ import { List } from '@signalco/ui/dist/List';
 import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { CopyToClipboardInput } from '@signalco/ui/dist/CopyToClipboardInput';
+import { Chip } from '@signalco/ui/dist/Chip';
 import { Card } from '@signalco/ui/dist/Card';
 import { Button } from '@signalco/ui/dist/Button';
 import { camelToSentenceCase, isJson, ParsedJson } from '@signalco/js';
@@ -26,7 +27,6 @@ import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import IContact, { ContactMetadataV1 } from '../../../src/contacts/IContact';
 import { deleteContactAsync, setAsync, setMetadataAsync } from '../../../src/contacts/ContactRepository';
-import { Chip } from '@signalco/ui/dist/Chip';
 
 function JsonNonArrayVisualizer({ value }: { value: ParsedJson }) {
     if (value === null ||

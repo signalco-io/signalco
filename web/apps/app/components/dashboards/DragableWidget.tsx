@@ -21,10 +21,13 @@ export default function DragableWidget(props: WidgetProps) {
         };
     }
 
-    return <DisplayWidget
+    return (<DisplayWidget
         elementRef={setNodeRef}
         style={{
             transform: customTransform ? CSS.Transform.toString(customTransform) : undefined,
             transition,
-        }} {...props} attributes={attributes} listeners={listeners} />;
+        }}
+        {...props}
+        attributes={attributes}
+        listeners={listeners} />);
 }

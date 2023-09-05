@@ -101,7 +101,8 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
                                     style={{ aspectRatio: 1 }}
                                     src={availableWidget.preview}
                                     alt={`${availableWidget.name} Preview`}
-                                    fill sizes="100vw" />
+                                    fill
+                                    sizes="100vw" />
                             </CardOverflow>
                         </Card>
                     ))}
