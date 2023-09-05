@@ -201,10 +201,16 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
                 width={28}
                 hide={hideLegend} />
             {(!adaptiveDomain && typeof firstDataPoint !== 'undefined') && (
-                <Line type="monotone" dot={false} data={[
-                    { key: domainGraph(past.getTime()), value: firstDataPoint.value },
-                    { key: domainGraph(new Date(firstDataPoint.id).getTime()), value: firstDataPoint.value }
-                ]} dataKey="value" stroke="hsl(var(--border))" strokeWidth={2} strokeDasharray="5 3" />
+                <Line type="monotone"
+                    dot={false}
+                    data={[
+                        { key: domainGraph(past.getTime()), value: firstDataPoint.value },
+                        { key: domainGraph(new Date(firstDataPoint.id).getTime()), value: firstDataPoint.value }
+                    ]}
+                    dataKey="value"
+                    stroke="hsl(var(--border))"
+                    strokeWidth={2}
+                    strokeDasharray="5 3" />
             )}
             <Area
                 type="basis"
@@ -214,10 +220,16 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
                 stroke="var(--graph-stroke)"
                 strokeWidth={2} />
             {(!adaptiveDomain && typeof lastDataPoint !== 'undefined') && (
-                <Line type="monotone" dot={false} data={[
-                    { key: domainGraph(new Date(lastDataPoint.id).getTime()), value: lastDataPoint.value },
-                    { key: domainGraph(nowTime.getTime()), value: lastDataPoint.value }
-                ]} dataKey="value" stroke="hsl(var(--border))" strokeWidth={2} strokeDasharray="5 3" />
+                <Line type="monotone"
+                    dot={false}
+                    data={[
+                        { key: domainGraph(new Date(lastDataPoint.id).getTime()), value: lastDataPoint.value },
+                        { key: domainGraph(nowTime.getTime()), value: lastDataPoint.value }
+                    ]}
+                    dataKey="value"
+                    stroke="hsl(var(--border))"
+                    strokeWidth={2}
+                    strokeDasharray="5 3" />
             )}
             <Tooltip content={<ChartGenericTooltip domain={domainGraph} />} />
         </ComposedChart>
@@ -285,9 +297,13 @@ function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
                     stroke: 'hsl(var(--border))',
                     fill: 'rgba(128,128,128,0.2)'
                 }} />
-            <Legend iconType="circle" layout="vertical" align="right" verticalAlign="top" wrapperStyle={{
-                paddingLeft: '16px'
-            }} />
+            <Legend iconType="circle"
+                layout="vertical"
+                align="right"
+                verticalAlign="top"
+                wrapperStyle={{
+                    paddingLeft: '16px'
+                }} />
             {barKeys.map((bk, bki) => (
                 <Bar key={bk} name={camelToSentenceCase(bk)} dataKey={bk} stackId="a" fill={graphColorWheel[bki % graphColorWheel.length]} />
             ))}

@@ -30,8 +30,8 @@ module.exports = {
             "error",
             4
         ],
+        "react/jsx-max-depth": ["warn", { "max": 4 }],
         "react/jsx-max-props-per-line": [1, { "when": "multiline" }],
-        "react/jsx-one-expression-per-line": "warn",
         "react/jsx-props-no-multi-spaces": "warn",
         "react/jsx-wrap-multilines": "warn",
         "react/function-component-definition": [

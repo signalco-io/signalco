@@ -29,7 +29,9 @@ export default function DisplayWidget(props: WidgetProps & DisplayWidgetProps) {
                 gridRowStart: `span ${span.rowSpan}`,
                 gridColumnStart: `span ${span.colSpan}`,
                 ...style
-            }} {...attributes} {...listeners}>
+            }}
+            {...attributes}
+            {...listeners}>
             <Widget {...rest} onResize={(r, c) => setSpan({ rowSpan: r, colSpan: c })} />
         </div>
     );

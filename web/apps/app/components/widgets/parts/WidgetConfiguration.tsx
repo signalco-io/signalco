@@ -107,13 +107,13 @@ const widgetConfigurationFormComponents: FormBuilderComponents = {
     },
     entityContact: (props) => <DisplayEntityTarget selectContact target={props.value} onChanged={t => props.onChange(t, { receiveEvent: false })} />,
     entityContactValue: (props) => <DisplayEntityTarget selectContact selectValue target={props.value} onChanged={t => props.onChange(t, { receiveEvent: false })} />,
-    selectVisual: (props) => <SelectItems
+    selectVisual: (props) => (<SelectItems
         label="Visual"
         items={[{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }]}
         placeholder="Select visual"
         className="w-full"
         value={props.value}
-        onValueChange={(item: string) => item && props.onChange(item, { receiveEvent: false })} />
+        onValueChange={(item: string) => item && props.onChange(item, { receiveEvent: false })} />)
 };
 
 function WidgetConfigurationFormProvider(props: PropsWithChildren) {
