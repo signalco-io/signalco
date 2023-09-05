@@ -23,7 +23,7 @@ function ConfirmDeleteButton(props: ConfirmDeleteButtonProps) {
 
     return (
         <>
-            <Button variant="outlined" color="danger" onClick={() => setIsOpen(true)}>{props.buttonLabel}</Button>
+            <Button variant="outlined" className="border-red-700 hover:border-red-700/90" onClick={() => setIsOpen(true)}>{props.buttonLabel}</Button>
             <ConfirmDeleteDialog isOpen={isOpen} onClose={() => setIsOpen(false)} {...props} onConfirm={handleConfirm} />
         </>
     )
