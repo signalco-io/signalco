@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
 import { PageLayout } from '../components/layouts/PageLayout';
 import './global.css';
 
@@ -13,6 +14,7 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 <PageLayout>{children}</PageLayout>
+                <Analytics />
             </body>
         </html>
     );
