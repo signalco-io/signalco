@@ -1,6 +1,7 @@
 import Script from 'next/script';
 import { Raleway, Inter } from 'next/font/google';
 import { type Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
 import './global.css';
 
 const raleway = Raleway({
@@ -19,6 +20,7 @@ export default function RootLayout({ children, }: {
         <html lang="en">
             <body className={`${raleway.variable} ${inter.variable} font-sans`}>
                 {children}
+                <Analytics />
                 <Script src="/clarity.js" />
             </body>
         </html>
