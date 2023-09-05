@@ -91,7 +91,7 @@ function Newsletter() {
                                 className="w-full max-w-md"
                                 value={email}
                                 onChange={handleOnEmail} />
-                            <Button loading={isLoading} type="submit" variant="solid" color="primary">Subscribe</Button>
+                            <Button loading={isLoading} type="submit" variant="solid">Subscribe</Button>
                         </Row>
                     </GentleSlide>
                     <GentleSlide collapsedWhenHidden appear={error != null} direction="down" duration={200}>

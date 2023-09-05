@@ -6,7 +6,6 @@ import { VariantKeys } from '../theme';
 import { Link } from '../Link';
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-    color?: string;
     variant?: VariantKeys | 'link';
     size?: 'sm' | 'md' | 'lg';
     startDecorator?: ReactNode;
