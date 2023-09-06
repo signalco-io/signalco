@@ -81,7 +81,7 @@ internal class PhilipsHueWorkerService : IWorkerService
     {
         var clipClient = new LocalHueApi(config.IpAddress, config.LocalAppKey);
         clipClient.StartEventStream(cancellationToken: cancellationToken);
-        clipClient.OnEventStreamMessage += (events) => this.HandleClipMessage(config.Id, events, cancellationToken);
+        clipClient.OnEventStreamMessage += (_, events) => this.HandleClipMessage(config.Id, events, cancellationToken);
         this.clipClients.Add(clipClient);
     }
 
