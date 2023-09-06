@@ -1059,8 +1059,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       react-timeago:
-        specifier: 7.1.0
-        version: 7.1.0(react@18.2.0)
+        specifier: 7.2.0
+        version: 7.2.0(react@18.2.0)
       tailwindcss:
         specifier: 3.3.3
         version: 3.3.3
@@ -13873,8 +13873,8 @@ packages:
       react: 18.2.0
       tslib: 2.5.0
 
-  /react-timeago@7.1.0(react@18.2.0):
-    resolution: {integrity: sha512-rouF7MiEm55fH791Y8cg+VobIJgx8gtNJ+gjr86R4ZqO1WKPkXiXjdT/lRzrvEkUzsxT1exHqV2V+Zdi114H3A==}
+  /react-timeago@7.2.0(react@18.2.0):
+    resolution: {integrity: sha512-2KsBEEs+qRhKx/kekUVNSTIpop3Jwd7SRBm0R4Eiq3mPeswRGSsftY9FpKsE/lXLdURyQFiHeHFrIUxLYskG5g==}
     peerDependencies:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
