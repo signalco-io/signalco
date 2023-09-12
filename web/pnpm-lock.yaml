@@ -153,8 +153,8 @@ importers:
         specifier: 1.0.7
         version: 1.0.7(tailwindcss@3.3.3)
       uuid:
-        specifier: 9.0.0
-        version: 9.0.0
+        specifier: 9.0.1
+        version: 9.0.1
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.7.3
@@ -5119,7 +5119,7 @@ packages:
       react-inspector: 6.0.1(react@18.2.0)
       telejson: 7.2.0
       ts-dedent: 2.2.0
-      uuid: 9.0.0
+      uuid: 9.0.1
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
@@ -15795,8 +15795,8 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: true
 
-  /uuid@9.0.0:
-    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+  /uuid@9.0.1:
+    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
     hasBin: true
 
   /uvu@0.5.6:
