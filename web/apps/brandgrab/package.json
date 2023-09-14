@@ -34,7 +34,7 @@
     },
     "devDependencies": {
         "@axe-core/playwright": "4.7.3",
-        "@babel/core": "7.22.17",
+        "@babel/core": "7.22.19",
         "@next/bundle-analyzer": "13.4.19",
         "@playwright/test": "1.38.0",
         "@signalco/eslint-config-signalco": "workspace:*",
