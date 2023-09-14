@@ -12,8 +12,8 @@ dependencies:
     specifier: 6.1.0
     version: 6.1.0
   '@pulumi/azure-native':
-    specifier: 2.6.0
-    version: 2.6.0
+    specifier: 2.7.0
+    version: 2.7.0
   '@pulumi/cloudflare':
     specifier: 5.10.0
     version: 5.10.0
@@ -375,8 +375,8 @@ packages:
       - supports-color
     dev: false
 
-  /@pulumi/azure-native@2.6.0:
-    resolution: {integrity: sha512-ieuc8tuUUQ999fCinrGYqu/5kih+h4u+/QrBfLET/ClhehIoFQRa+s3YO/4tUFQ/KN2B5XJTDDBoSrNo4rBNxw==}
+  /@pulumi/azure-native@2.7.0:
+    resolution: {integrity: sha512-W4ptsTqKnW/z7rDmYd+auptG01uD8+pi98sHvutlTB0dI5dGQw3sk7OHgpbYFHkV7Jh3T6SeAAYEEiJddoRbfQ==}
     requiresBuild: true
     dependencies:
       '@pulumi/pulumi': 3.82.1
