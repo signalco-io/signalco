@@ -9,8 +9,8 @@ dependencies:
     specifier: 1.1.4
     version: 1.1.4
   '@pulumi/aws':
-    specifier: 6.0.4
-    version: 6.0.4
+    specifier: 6.1.0
+    version: 6.1.0
   '@pulumi/azure-native':
     specifier: 2.6.0
     version: 2.6.0
@@ -363,9 +363,8 @@ packages:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
     dev: false
 
-  /@pulumi/aws@6.0.4:
-    resolution: {integrity: sha512-g8t+LuKwEEGX7bKUcYpB8gr1xtrJm3PAt26Js5QztSWDiujy9ehmk4CeEgKLfMR9EGmav6jFSSvwX5IQXSPgog==}
-    requiresBuild: true
+  /@pulumi/aws@6.1.0:
+    resolution: {integrity: sha512-E/EOu+OtIjUeNoFjUqOlKDDdM7uG8kcoft/lLM74McDyWXuWS2HaMV7sXhIaVMqeNfEUNisx814RfR3fJN2c/A==}
     dependencies:
       '@pulumi/pulumi': 3.82.1
       builtin-modules: 3.0.0
