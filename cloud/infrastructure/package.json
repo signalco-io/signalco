@@ -24,7 +24,7 @@
         "@pulumi/aws": "6.2.0",
         "@pulumi/azure-native": "2.8.0",
         "@pulumi/cloudflare": "5.10.0",
-        "@pulumi/command": "0.8.2",
+        "@pulumi/command": "0.9.0",
         "@pulumi/docker": "4.4.1",
         "@pulumi/pulumi": "3.84.0"
     }
