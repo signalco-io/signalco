@@ -31,7 +31,7 @@
         "postcss": "8.4.30",
         "postcss-preset-env": "9.1.4",
         "rimraf": "5.0.1",
-        "sass": "1.67.0",
+        "sass": "1.68.0",
         "tsup": "7.2.0",
         "typescript": "5.2.2"
     },
