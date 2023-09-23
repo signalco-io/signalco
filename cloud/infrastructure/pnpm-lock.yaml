@@ -18,8 +18,8 @@ dependencies:
     specifier: 5.11.0
     version: 5.11.0
   '@pulumi/command':
-    specifier: 0.9.0
-    version: 0.9.0
+    specifier: 0.9.1
+    version: 0.9.1
   '@pulumi/docker':
     specifier: 4.4.1
     version: 4.4.1
@@ -392,8 +392,8 @@ packages:
       - supports-color
     dev: false
 
-  /@pulumi/command@0.9.0:
-    resolution: {integrity: sha512-Taxy0VL3Pw1hbJpNtWCkgJufG9h/y0/CtR8nLDw9BLA0KlILyDKsW7SBFeTRZMBT1JarYFuSoyNaFCeWRVBvfg==}
+  /@pulumi/command@0.9.1:
+    resolution: {integrity: sha512-0QVj0N02FOZRv/DrEPEx//wfMI6Iv2gatPj0s6ue5LpmhXXjLuOC/TBnpcTq1DqB9/uc3sCLafqXdJSdFzbt9g==}
     requiresBuild: true
     dependencies:
       '@pulumi/pulumi': 3.85.0
