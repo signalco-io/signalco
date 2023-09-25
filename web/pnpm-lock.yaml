@@ -51,8 +51,8 @@ importers:
         specifier: 4.5.2
         version: 4.5.2(monaco-editor@0.43.0)(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
-        specifier: 13.5.2
-        version: 13.5.2
+        specifier: 13.5.3
+        version: 13.5.3
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -108,11 +108,11 @@ importers:
         specifier: 0.43.0
         version: 0.43.0
       next:
-        specifier: 13.5.2
-        version: 13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
+        specifier: 13.5.3
+        version: 13.5.3(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
       next-pwa:
         specifier: 5.6.0
-        version: 5.6.0(@babel/core@7.23.0)(next@13.5.2)(webpack@5.88.2)
+        version: 5.6.0(@babel/core@7.23.0)(next@13.5.3)(webpack@5.88.2)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -163,8 +163,8 @@ importers:
         specifier: 7.23.0
         version: 7.23.0
       '@next/bundle-analyzer':
-        specifier: 13.5.2
-        version: 13.5.2
+        specifier: 13.5.3
+        version: 13.5.3
       '@playwright/test':
         specifier: 1.38.1
         version: 1.38.1
@@ -227,7 +227,7 @@ importers:
         version: 11.1.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@13.5.2)
+        version: 4.2.3(next@13.5.3)
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -262,11 +262,11 @@ importers:
         specifier: 2.3.0
         version: 2.3.0(react@18.2.0)
       '@next/env':
-        specifier: 13.5.2
-        version: 13.5.2
+        specifier: 13.5.3
+        version: 13.5.3
       '@next/mdx':
-        specifier: 13.5.2
-        version: 13.5.2(@mdx-js/loader@2.3.0)(@mdx-js/react@2.3.0)
+        specifier: 13.5.3
+        version: 13.5.3(@mdx-js/loader@2.3.0)(@mdx-js/react@2.3.0)
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -304,8 +304,8 @@ importers:
         specifier: 4.1.0
         version: 4.1.0
       next:
-        specifier: 13.5.2
-        version: 13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
+        specifier: 13.5.3
+        version: 13.5.3(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -338,8 +338,8 @@ importers:
         specifier: 7.23.0
         version: 7.23.0
       '@next/bundle-analyzer':
-        specifier: 13.5.2
-        version: 13.5.2
+        specifier: 13.5.3
+        version: 13.5.3
       '@playwright/test':
         specifier: 1.38.1
         version: 1.38.1
@@ -384,7 +384,7 @@ importers:
         version: 8.50.0
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@13.5.2)
+        version: 4.2.3(next@13.5.3)
       postcss:
         specifier: 8.4.30
         version: 8.4.30
@@ -404,8 +404,8 @@ importers:
   apps/brandgrab:
     dependencies:
       '@next/env':
-        specifier: 13.5.2
-        version: 13.5.2
+        specifier: 13.5.3
+        version: 13.5.3
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -428,8 +428,8 @@ importers:
         specifier: 2.1.34
         version: 2.1.34
       next:
-        specifier: 13.5.2
-        version: 13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
+        specifier: 13.5.3
+        version: 13.5.3(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -453,8 +453,8 @@ importers:
         specifier: 7.23.0
         version: 7.23.0
       '@next/bundle-analyzer':
-        specifier: 13.5.2
-        version: 13.5.2
+        specifier: 13.5.3
+        version: 13.5.3
       '@playwright/test':
         specifier: 1.38.1
         version: 1.38.1
@@ -490,7 +490,7 @@ importers:
         version: 8.50.0
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@13.5.2)
+        version: 4.2.3(next@13.5.3)
       postcss:
         specifier: 8.4.30
         version: 8.4.30
@@ -541,8 +541,8 @@ importers:
         specifier: 1.8.1
         version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
-        specifier: 13.5.2
-        version: 13.5.2
+        specifier: 13.5.3
+        version: 13.5.3
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -559,8 +559,8 @@ importers:
         specifier: 2.1.34
         version: 2.1.34
       next:
-        specifier: 13.5.2
-        version: 13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
+        specifier: 13.5.3
+        version: 13.5.3(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -593,8 +593,8 @@ importers:
         specifier: 7.23.0
         version: 7.23.0
       '@next/bundle-analyzer':
-        specifier: 13.5.2
-        version: 13.5.2
+        specifier: 13.5.3
+        version: 13.5.3
       '@playwright/test':
         specifier: 1.38.1
         version: 1.38.1
@@ -630,7 +630,7 @@ importers:
         version: 8.50.0
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@13.5.2)
+        version: 4.2.3(next@13.5.3)
       postcss:
         specifier: 8.4.30
         version: 8.4.30
@@ -659,8 +659,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-icons
       next:
-        specifier: 13.5.2
-        version: 13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
+        specifier: 13.5.3
+        version: 13.5.3(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -688,7 +688,7 @@ importers:
         version: 7.4.5(react-dom@18.2.0)(react@18.2.0)
       '@storybook/nextjs':
         specifier: 7.4.5
-        version: 7.4.5(@swc/core@1.3.88)(@types/react-dom@18.2.7)(@types/react@18.2.22)(esbuild@0.18.11)(next@13.5.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)(typescript@5.2.2)(webpack@5.88.2)
+        version: 7.4.5(@swc/core@1.3.88)(@types/react-dom@18.2.7)(@types/react@18.2.22)(esbuild@0.18.11)(next@13.5.3)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)(typescript@5.2.2)(webpack@5.88.2)
       '@storybook/react':
         specifier: 7.4.5
         version: 7.4.5(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)
@@ -750,8 +750,8 @@ importers:
         specifier: 1.8.1
         version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
-        specifier: 13.5.2
-        version: 13.5.2
+        specifier: 13.5.3
+        version: 13.5.3
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -786,11 +786,11 @@ importers:
         specifier: 0.1.13
         version: 0.1.13
       next:
-        specifier: 13.5.2
-        version: 13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
+        specifier: 13.5.3
+        version: 13.5.3(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
       next-pwa:
         specifier: 5.6.0
-        version: 5.6.0(@babel/core@7.23.0)(next@13.5.2)(webpack@5.88.2)
+        version: 5.6.0(@babel/core@7.23.0)(next@13.5.3)(webpack@5.88.2)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -826,8 +826,8 @@ importers:
         specifier: 7.23.0
         version: 7.23.0
       '@next/bundle-analyzer':
-        specifier: 13.5.2
-        version: 13.5.2
+        specifier: 13.5.3
+        version: 13.5.3
       '@playwright/test':
         specifier: 1.38.1
         version: 1.38.1
@@ -875,7 +875,7 @@ importers:
         version: 8.50.0
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@13.5.2)
+        version: 4.2.3(next@13.5.3)
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -925,8 +925,8 @@ importers:
         specifier: 8.50.0
         version: 8.50.0
       eslint-config-next:
-        specifier: 13.5.2
-        version: 13.5.2(eslint@8.50.0)(typescript@5.2.2)
+        specifier: 13.5.3
+        version: 13.5.3(eslint@8.50.0)(typescript@5.2.2)
       eslint-config-turbo:
         specifier: 1.10.14
         version: 1.10.14(eslint@8.50.0)
@@ -958,8 +958,8 @@ importers:
         specifier: 18.2.22
         version: 18.2.22
       next:
-        specifier: 13.5.2
-        version: 13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
+        specifier: 13.5.3
+        version: 13.5.3(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -1050,8 +1050,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-icons
       next:
-        specifier: 13.5.2
-        version: 13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
+        specifier: 13.5.3
+        version: 13.5.3(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -3670,8 +3670,8 @@ packages:
       tar-fs: 2.1.1
     dev: true
 
-  /@next/bundle-analyzer@13.5.2:
-    resolution: {integrity: sha512-njvZIrbOHe4IK4Zzo4w4M9WLaVs3t1Uqu/mm4hx1XmaUmj9fWr0OfeJG+ZkemPTm07WeZVuJRzuklkV+cD8BKQ==}
+  /@next/bundle-analyzer@13.5.3:
+    resolution: {integrity: sha512-AUHl9hu/0SNo2TCu9awOGY5hJdQHTPThYbjKk3rmjL04GfYAotn5i5pFQGqe209mbCxtu+QnvMEHLXU4GdFi1Q==}
     dependencies:
       webpack-bundle-analyzer: 4.7.0
     transitivePeerDependencies:
@@ -3679,17 +3679,17 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@next/env@13.5.2:
-    resolution: {integrity: sha512-dUseBIQVax+XtdJPzhwww4GetTjlkRSsXeQnisIJWBaHsnxYcN2RGzsPHi58D6qnkATjnhuAtQTJmR1hKYQQPg==}
+  /@next/env@13.5.3:
+    resolution: {integrity: sha512-X4te86vsbjsB7iO4usY9jLPtZ827Mbx+WcwNBGUOIuswuTAKQtzsuoxc/6KLxCMvogKG795MhrR1LDhYgDvasg==}
 
-  /@next/eslint-plugin-next@13.5.2:
-    resolution: {integrity: sha512-Ew8DOUerJYGRo8pI84SVwn9wxxx8sH92AanCXSkkLJM2W0RJEWy+BqWSCfrlA/3ZIczEl4l4o4lOeTGBPYfBJg==}
+  /@next/eslint-plugin-next@13.5.3:
+    resolution: {integrity: sha512-lbZOoEjzSuTtpk9UgV9rOmxYw+PsSfNR+00mZcInqooiDMZ1u+RqT1YQYLsEZPW1kumZoQe5+exkCBtZ2xn0uw==}
     dependencies:
       glob: 7.1.7
     dev: false
 
-  /@next/mdx@13.5.2(@mdx-js/loader@2.3.0)(@mdx-js/react@2.3.0):
-    resolution: {integrity: sha512-gi+XMrmxhiUToXXZpA5C6XYt5+l5fVvN8+JTVayyDHwohg5JJ9ZkaIH/Isdu+w7j0ATnfTkJmf+HAi8+a3xXOQ==}
+  /@next/mdx@13.5.3(@mdx-js/loader@2.3.0)(@mdx-js/react@2.3.0):
+    resolution: {integrity: sha512-4wuYsoBuW4k8oXiXlX9VjclHATgIPc3/kFY8GSID/ANa5yxGSBPkAuuUEN6BWHFhZ7g3TmKHwsbFs/nq8sooyw==}
     peerDependencies:
       '@mdx-js/loader': '>=0.15.0'
       '@mdx-js/react': '>=0.15.0'
@@ -3704,72 +3704,72 @@ packages:
       source-map: 0.7.4
     dev: false
 
-  /@next/swc-darwin-arm64@13.5.2:
-    resolution: {integrity: sha512-7eAyunAWq6yFwdSQliWMmGhObPpHTesiKxMw4DWVxhm5yLotBj8FCR4PXGkpRP2tf8QhaWuVba+/fyAYggqfQg==}
+  /@next/swc-darwin-arm64@13.5.3:
+    resolution: {integrity: sha512-6hiYNJxJmyYvvKGrVThzo4nTcqvqUTA/JvKim7Auaj33NexDqSNwN5YrrQu+QhZJCIpv2tULSHt+lf+rUflLSw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     optional: true
 
-  /@next/swc-darwin-x64@13.5.2:
-    resolution: {integrity: sha512-WxXYWE7zF1ch8rrNh5xbIWzhMVas6Vbw+9BCSyZvu7gZC5EEiyZNJsafsC89qlaSA7BnmsDXVWQmc+s1feSYbQ==}
+  /@next/swc-darwin-x64@13.5.3:
+    resolution: {integrity: sha512-UpBKxu2ob9scbpJyEq/xPgpdrgBgN3aLYlxyGqlYX5/KnwpJpFuIHU2lx8upQQ7L+MEmz+fA1XSgesoK92ppwQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     optional: true
 
-  /@next/swc-linux-arm64-gnu@13.5.2:
-    resolution: {integrity: sha512-URSwhRYrbj/4MSBjLlefPTK3/tvg95TTm6mRaiZWBB6Za3hpHKi8vSdnCMw5D2aP6k0sQQIEG6Pzcfwm+C5vrg==}
+  /@next/swc-linux-arm64-gnu@13.5.3:
+    resolution: {integrity: sha512-5AzM7Yx1Ky+oLY6pHs7tjONTF22JirDPd5Jw/3/NazJ73uGB05NqhGhB4SbeCchg7SlVYVBeRMrMSZwJwq/xoA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     optional: true
 
-  /@next/swc-linux-arm64-musl@13.5.2:
-    resolution: {integrity: sha512-HefiwAdIygFyNmyVsQeiJp+j8vPKpIRYDlmTlF9/tLdcd3qEL/UEBswa1M7cvO8nHcr27ZTKXz5m7dkd56/Esg==}
+  /@next/swc-linux-arm64-musl@13.5.3:
+    resolution: {integrity: sha512-A/C1shbyUhj7wRtokmn73eBksjTM7fFQoY2v/0rTM5wehpkjQRLOXI8WJsag2uLhnZ4ii5OzR1rFPwoD9cvOgA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     optional: true
 
-  /@next/swc-linux-x64-gnu@13.5.2:
-    resolution: {integrity: sha512-htGVVroW0tdHgMYwKWkxWvVoG2RlAdDXRO1RQxYDvOBQsaV0nZsgKkw0EJJJ3urTYnwKskn/MXm305cOgRxD2w==}
+  /@next/swc-linux-x64-gnu@13.5.3:
+    resolution: {integrity: sha512-FubPuw/Boz8tKkk+5eOuDHOpk36F80rbgxlx4+xty/U71e3wZZxVYHfZXmf0IRToBn1Crb8WvLM9OYj/Ur815g==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     optional: true
 
-  /@next/swc-linux-x64-musl@13.5.2:
-    resolution: {integrity: sha512-UBD333GxbHVGi7VDJPPDD1bKnx30gn2clifNJbla7vo5nmBV+x5adyARg05RiT9amIpda6yzAEEUu+s774ldkw==}
+  /@next/swc-linux-x64-musl@13.5.3:
+    resolution: {integrity: sha512-DPw8nFuM1uEpbX47tM3wiXIR0Qa+atSzs9Q3peY1urkhofx44o7E1svnq+a5Q0r8lAcssLrwiM+OyJJgV/oj7g==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     optional: true
 
-  /@next/swc-win32-arm64-msvc@13.5.2:
-    resolution: {integrity: sha512-Em9ApaSFIQnWXRT3K6iFnr9uBXymixLc65Xw4eNt7glgH0eiXpg+QhjmgI2BFyc7k4ZIjglfukt9saNpEyolWA==}
+  /@next/swc-win32-arm64-msvc@13.5.3:
+    resolution: {integrity: sha512-zBPSP8cHL51Gub/YV8UUePW7AVGukp2D8JU93IHbVDu2qmhFAn9LWXiOOLKplZQKxnIPUkJTQAJDCWBWU4UWUA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     optional: true
 
-  /@next/swc-win32-ia32-msvc@13.5.2:
-    resolution: {integrity: sha512-TBACBvvNYU+87X0yklSuAseqdpua8m/P79P0SG1fWUvWDDA14jASIg7kr86AuY5qix47nZLEJ5WWS0L20jAUNw==}
+  /@next/swc-win32-ia32-msvc@13.5.3:
+    resolution: {integrity: sha512-ONcL/lYyGUj4W37D4I2I450SZtSenmFAvapkJQNIJhrPMhzDU/AdfLkW98NvH1D2+7FXwe7yclf3+B7v28uzBQ==}
     engines: {node: '>= 10'}
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
     optional: true
 
-  /@next/swc-win32-x64-msvc@13.5.2:
-    resolution: {integrity: sha512-LfTHt+hTL8w7F9hnB3H4nRasCzLD/fP+h4/GUVBTxrkMJOnh/7OZ0XbYDKO/uuWwryJS9kZjhxcruBiYwc5UDw==}
+  /@next/swc-win32-x64-msvc@13.5.3:
+    resolution: {integrity: sha512-2Vz2tYWaLqJvLcWbbTlJ5k9AN6JD7a5CN2pAeIzpbecK8ZF/yobA39cXtv6e+Z8c5UJuVOmaTldEAIxvsIux/Q==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -5646,7 +5646,7 @@ packages:
     resolution: {integrity: sha512-dBAnEL4HfxxJmv7LdEYUoZlQbWj9APZNIbOaq0tgF8XkxiIbzqvgB0jhL/9UOrysSDbQWBiCRTu2wOVxedGfmw==}
     dev: true
 
-  /@storybook/nextjs@7.4.5(@swc/core@1.3.88)(@types/react-dom@18.2.7)(@types/react@18.2.22)(esbuild@0.18.11)(next@13.5.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)(typescript@5.2.2)(webpack@5.88.2):
+  /@storybook/nextjs@7.4.5(@swc/core@1.3.88)(@types/react-dom@18.2.7)(@types/react@18.2.22)(esbuild@0.18.11)(next@13.5.3)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)(typescript@5.2.2)(webpack@5.88.2):
     resolution: {integrity: sha512-NXO9AwuyekD/BjP+DD0Bupa3gXAJGiYWoWvtRGntewhvDEXllX7ohrv5ldnwxeCsAM7a8Iih+Vs+aKsSLeGN8Q==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -5692,7 +5692,7 @@ packages:
       fs-extra: 11.1.1
       image-size: 1.0.2
       loader-utils: 3.2.1
-      next: 13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
+      next: 13.5.3(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
       node-polyfill-webpack-plugin: 2.0.1(webpack@5.88.2)
       pnp-webpack-plugin: 1.7.0(typescript@5.2.2)
       postcss: 8.4.30
@@ -6571,7 +6571,7 @@ packages:
     resolution: {integrity: sha512-4BpHUZ5YEeY53NkzjEQ2vUTWtXrQYFRo5WZFOiAdSGzXnt2g/TJiBAslQImCPzlxsc5jDlDmaAfi7ZbMfcLYAg==}
     dependencies:
       '@types/react': 18.2.22
-      next: 13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
+      next: 13.5.3(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
       workbox-build: 6.5.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -7783,9 +7783,6 @@ packages:
     resolution: {integrity: sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==}
     engines: {node: '>=6'}
     dev: true
-
-  /caniuse-lite@1.0.30001520:
-    resolution: {integrity: sha512-tahF5O9EiiTzwTUqAeFjIZbn4Dnqxzz7ktrgGlMYNLH43Ul26IgTMH/zvL3DG0lZxBYnlT04axvInszUsZULdA==}
 
   /caniuse-lite@1.0.30001538:
     resolution: {integrity: sha512-HWJnhnID+0YMtGlzcp3T9drmBJUVDchPJ08tpUGFLs9CYlwWPH2uLgpHn8fND5pCgXVtnGS3H4QR9XLMHVNkHw==}
@@ -9277,8 +9274,8 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /eslint-config-next@13.5.2(eslint@8.50.0)(typescript@5.2.2):
-    resolution: {integrity: sha512-kCF7k7fHBtFtxfP6J6AP6Mo0vW3CrFeoIuoZ7NHGIvLFc/RUaIspJ6inO/R33zE1o9t/lbJgTnsqnRB++sxCUQ==}
+  /eslint-config-next@13.5.3(eslint@8.50.0)(typescript@5.2.2):
+    resolution: {integrity: sha512-VN2qbCpq2DMWgs7SVF8KTmc8bVaWz3s4nmcFqRLs7PNBt5AXejOhJuZ4zg2sCEHOvz5RvqdwLeI++NSCV6qHVg==}
     peerDependencies:
       eslint: ^7.23.0 || ^8.0.0
       typescript: '>=3.3.1'
@@ -9286,7 +9283,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@next/eslint-plugin-next': 13.5.2
+      '@next/eslint-plugin-next': 13.5.3
       '@rushstack/eslint-patch': 1.4.0
       '@typescript-eslint/parser': 6.7.2(eslint@8.50.0)(typescript@5.2.2)
       eslint: 8.50.0
@@ -11979,7 +11976,7 @@ packages:
   /neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  /next-pwa@5.6.0(@babel/core@7.23.0)(next@13.5.2)(webpack@5.88.2):
+  /next-pwa@5.6.0(@babel/core@7.23.0)(next@13.5.3)(webpack@5.88.2):
     resolution: {integrity: sha512-XV8g8C6B7UmViXU8askMEYhWwQ4qc/XqJGnexbLV68hzKaGHZDMtHsm2TNxFcbR7+ypVuth/wwpiIlMwpRJJ5A==}
     peerDependencies:
       next: '>=9.0.0'
@@ -11987,7 +11984,7 @@ packages:
       babel-loader: 8.3.0(@babel/core@7.23.0)(webpack@5.88.2)
       clean-webpack-plugin: 4.0.0(webpack@5.88.2)
       globby: 11.1.0
-      next: 13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
+      next: 13.5.3(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
       terser-webpack-plugin: 5.3.7(webpack@5.88.2)
       workbox-webpack-plugin: 6.5.4(webpack@5.88.2)
       workbox-window: 6.5.4
@@ -12006,7 +12003,7 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: false
 
-  /next-sitemap@4.2.3(next@13.5.2):
+  /next-sitemap@4.2.3(next@13.5.3):
     resolution: {integrity: sha512-vjdCxeDuWDzldhCnyFCQipw5bfpl4HmZA7uoo3GAaYGjGgfL4Cxb1CiztPuWGmS+auYs7/8OekRS8C2cjdAsjQ==}
     engines: {node: '>=14.18'}
     hasBin: true
@@ -12014,14 +12011,14 @@ packages:
       next: '*'
     dependencies:
       '@corex/deepmerge': 4.0.43
-      '@next/env': 13.5.2
+      '@next/env': 13.5.3
       fast-glob: 3.3.1
       minimist: 1.2.8
-      next: 13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
+      next: 13.5.3(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
     dev: true
 
-  /next@13.5.2(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0):
-    resolution: {integrity: sha512-vog4UhUaMYAzeqfiAAmgB/QWLW7p01/sg+2vn6bqc/CxHFYizMzLv6gjxKzl31EVFkfl/F+GbxlKizlkTE9RdA==}
+  /next@13.5.3(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0):
+    resolution: {integrity: sha512-4Nt4HRLYDW/yRpJ/QR2t1v63UOMS55A38dnWv3UDOWGezuY0ZyFO1ABNbD7mulVzs9qVhgy2+ppjdsANpKP1mg==}
     engines: {node: '>=16.14.0'}
     hasBin: true
     peerDependencies:
@@ -12035,10 +12032,10 @@ packages:
       sass:
         optional: true
     dependencies:
-      '@next/env': 13.5.2
+      '@next/env': 13.5.3
       '@swc/helpers': 0.5.2
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001520
+      caniuse-lite: 1.0.30001538
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -12047,15 +12044,15 @@ packages:
       watchpack: 2.4.0
       zod: 3.21.4
     optionalDependencies:
-      '@next/swc-darwin-arm64': 13.5.2
-      '@next/swc-darwin-x64': 13.5.2
-      '@next/swc-linux-arm64-gnu': 13.5.2
-      '@next/swc-linux-arm64-musl': 13.5.2
-      '@next/swc-linux-x64-gnu': 13.5.2
-      '@next/swc-linux-x64-musl': 13.5.2
-      '@next/swc-win32-arm64-msvc': 13.5.2
-      '@next/swc-win32-ia32-msvc': 13.5.2
-      '@next/swc-win32-x64-msvc': 13.5.2
+      '@next/swc-darwin-arm64': 13.5.3
+      '@next/swc-darwin-x64': 13.5.3
+      '@next/swc-linux-arm64-gnu': 13.5.3
+      '@next/swc-linux-arm64-musl': 13.5.3
+      '@next/swc-linux-x64-gnu': 13.5.3
+      '@next/swc-linux-x64-musl': 13.5.3
+      '@next/swc-win32-arm64-msvc': 13.5.3
+      '@next/swc-win32-ia32-msvc': 13.5.3
+      '@next/swc-win32-x64-msvc': 13.5.3
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
