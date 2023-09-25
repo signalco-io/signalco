@@ -10,7 +10,6 @@ const withMDX = mdx();
 const nextConfig = {
     reactStrictMode: true,
     experimental: {
-        appDir: true,
         mdxRs: true
     },
     images: {

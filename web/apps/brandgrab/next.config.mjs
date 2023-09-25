@@ -12,7 +12,6 @@ const withBundleAnalyzer = nextBundleAnalyzer({
 const nextConfig = {
     reactStrictMode: true,
     experimental: {
-        appDir: true,
         outputFileTracingExcludes: {
             '*': [
                 './**/node_modules/@swc/core-linux-x64-gnu',

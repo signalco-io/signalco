@@ -8,24 +8,24 @@
         "restart-functions": "node tools/restart-functions.js"
     },
     "devDependencies": {
-        "@types/node": "18.17.14",
-        "@typescript-eslint/eslint-plugin": "6.6.0",
-        "@typescript-eslint/parser": "6.6.0",
-        "eslint": "8.48.0",
+        "@types/node": "18.17.19",
+        "@typescript-eslint/eslint-plugin": "6.7.2",
+        "@typescript-eslint/parser": "6.7.2",
+        "eslint": "8.50.0",
         "eslint-config-standard": "17.1.0",
         "eslint-plugin-import": "2.28.1",
-        "eslint-plugin-n": "16.0.2",
+        "eslint-plugin-n": "16.1.0",
         "eslint-plugin-node": "11.1.0",
         "eslint-plugin-promise": "6.1.1",
         "typescript": "5.2.2"
     },
     "dependencies": {
         "@checkly/pulumi": "1.1.4",
-        "@pulumi/aws": "6.0.4",
-        "@pulumi/azure-native": "2.5.0",
-        "@pulumi/cloudflare": "5.9.0",
-        "@pulumi/command": "0.8.2",
-        "@pulumi/docker": "4.3.2",
-        "@pulumi/pulumi": "3.80.0"
+        "@pulumi/aws": "6.2.1",
+        "@pulumi/azure-native": "2.8.0",
+        "@pulumi/cloudflare": "5.11.0",
+        "@pulumi/command": "0.9.1",
+        "@pulumi/docker": "4.4.1",
+        "@pulumi/pulumi": "3.85.0"
     }
 }
