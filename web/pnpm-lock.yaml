@@ -241,8 +241,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       rimraf:
-        specifier: 5.0.2
-        version: 5.0.2
+        specifier: 5.0.4
+        version: 5.0.4
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -392,8 +392,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.2
-        version: 5.0.2
+        specifier: 5.0.4
+        version: 5.0.4
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -498,8 +498,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.2
-        version: 5.0.2
+        specifier: 5.0.4
+        version: 5.0.4
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -638,8 +638,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.2
-        version: 5.0.2
+        specifier: 5.0.4
+        version: 5.0.4
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -714,8 +714,8 @@ importers:
         specifier: 7.3.3
         version: 7.3.3(postcss@8.4.30)(webpack@5.88.2)
       rimraf:
-        specifier: 5.0.2
-        version: 5.0.2
+        specifier: 5.0.4
+        version: 5.0.4
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -886,8 +886,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.2
-        version: 5.0.2
+        specifier: 5.0.4
+        version: 5.0.4
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -904,8 +904,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.2
-        version: 5.0.2
+        specifier: 5.0.4
+        version: 5.0.4
       tsup:
         specifier: 6.7.0
         version: 6.7.0(typescript@5.2.2)
@@ -970,8 +970,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       rimraf:
-        specifier: 5.0.2
-        version: 5.0.2
+        specifier: 5.0.4
+        version: 5.0.4
       tsup:
         specifier: 6.7.0
         version: 6.7.0(typescript@5.2.2)
@@ -994,8 +994,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       rimraf:
-        specifier: 5.0.2
-        version: 5.0.2
+        specifier: 5.0.4
+        version: 5.0.4
       tsup:
         specifier: 6.7.0
         version: 6.7.0(typescript@5.2.2)
@@ -1105,8 +1105,8 @@ importers:
         specifier: 9.1.4
         version: 9.1.4(postcss@8.4.30)
       rimraf:
-        specifier: 5.0.2
-        version: 5.0.2
+        specifier: 5.0.4
+        version: 5.0.4
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -1135,8 +1135,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       rimraf:
-        specifier: 5.0.2
-        version: 5.0.2
+        specifier: 5.0.4
+        version: 5.0.4
       tsup:
         specifier: 6.7.0
         version: 6.7.0(typescript@5.2.2)
@@ -14095,8 +14095,8 @@ packages:
     dependencies:
       glob: 7.2.3
 
-  /rimraf@5.0.2:
-    resolution: {integrity: sha512-SeHT0IRkQNIhWL7O5qrCt8MfJagJ2ZOemGMIx2NXS7MP1GldYpWSw3mCLbnjA0Ac6eadZMcDFZjynCWGJmwO6A==}
+  /rimraf@5.0.4:
+    resolution: {integrity: sha512-rizQI/o/YAMM1us0Zyax0uRfIK39XR52EAjjOi0fzMolpGp0onj6CWzBAXuOx6+6Xi9Rgi0d9tUZojhJerLUmQ==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
