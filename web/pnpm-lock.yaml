@@ -241,8 +241,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       rimraf:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.0.5
+        version: 5.0.5
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -392,8 +392,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.0.5
+        version: 5.0.5
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -498,8 +498,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.0.5
+        version: 5.0.5
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -638,8 +638,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.0.5
+        version: 5.0.5
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -714,8 +714,8 @@ importers:
         specifier: 7.3.3
         version: 7.3.3(postcss@8.4.30)(webpack@5.88.2)
       rimraf:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.0.5
+        version: 5.0.5
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -886,8 +886,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.0.5
+        version: 5.0.5
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -904,8 +904,8 @@ importers:
         specifier: 15.8.1
         version: 15.8.1
       rimraf:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.0.5
+        version: 5.0.5
       tsup:
         specifier: 6.7.0
         version: 6.7.0(typescript@5.2.2)
@@ -970,8 +970,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       rimraf:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.0.5
+        version: 5.0.5
       tsup:
         specifier: 6.7.0
         version: 6.7.0(typescript@5.2.2)
@@ -994,8 +994,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       rimraf:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.0.5
+        version: 5.0.5
       tsup:
         specifier: 6.7.0
         version: 6.7.0(typescript@5.2.2)
@@ -1105,8 +1105,8 @@ importers:
         specifier: 9.1.4
         version: 9.1.4(postcss@8.4.30)
       rimraf:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.0.5
+        version: 5.0.5
       sass:
         specifier: 1.68.0
         version: 1.68.0
@@ -1135,8 +1135,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       rimraf:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.0.5
+        version: 5.0.5
       tsup:
         specifier: 6.7.0
         version: 6.7.0(typescript@5.2.2)
@@ -10338,18 +10338,6 @@ packages:
   /glob-to-regexp@0.4.1:
     resolution: {integrity: sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==}
 
-  /glob@10.3.7:
-    resolution: {integrity: sha512-wCMbE1m9Nx5yD9LYtgsVWq5VhHlk5WzJirw594qZR6AIvQYuHrdDtIktUVjQItalD53y7dqoedu9xP0u0WaxIQ==}
-    engines: {node: '>=16 || 14 >=14.17'}
-    hasBin: true
-    dependencies:
-      foreground-child: 3.1.1
-      jackspeak: 2.0.3
-      minimatch: 9.0.1
-      minipass: 5.0.0
-      path-scurry: 1.10.1
-    dev: true
-
   /glob@10.3.9:
     resolution: {integrity: sha512-2tU/LKevAQvDVuVJ9pg9Yv9xcbSh+TqHuTaXTNbQwf+0kDl9Fm6bMovi4Nm5c8TVvfxo2LLcqCGtmO9KoJaGWg==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -11124,15 +11112,6 @@ packages:
       has-tostringtag: 1.0.0
       reflect.getprototypeof: 1.0.3
     dev: false
-
-  /jackspeak@2.0.3:
-    resolution: {integrity: sha512-0Jud3OMUdMbrlr3PyUMKESq51LXVAB+a239Ywdvd+Kgxj3MaBRml/nVRxf8tQFyfthMjuRkxkv7Vg58pmIMfuQ==}
-    engines: {node: '>=14'}
-    dependencies:
-      cliui: 7.0.4
-    optionalDependencies:
-      '@pkgjs/parseargs': 0.11.0
-    dev: true
 
   /jackspeak@2.3.5:
     resolution: {integrity: sha512-Ratx+B8WeXLAtRJn26hrhY8S1+Jz6pxPMrkrdkgb/NstTNiqMhX0/oFVu5wX+g5n6JlEu2LPsDJmY8nRP4+alw==}
@@ -14161,12 +14140,12 @@ packages:
     dependencies:
       glob: 7.2.3
 
-  /rimraf@5.0.4:
-    resolution: {integrity: sha512-rizQI/o/YAMM1us0Zyax0uRfIK39XR52EAjjOi0fzMolpGp0onj6CWzBAXuOx6+6Xi9Rgi0d9tUZojhJerLUmQ==}
+  /rimraf@5.0.5:
+    resolution: {integrity: sha512-CqDakW+hMe/Bz202FPEymy68P+G50RfMQK+Qo5YUqc9SPipvbGjCGKd0RSKEelbsfQuw3g5NZDSrlZZAJurH1A==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      glob: 10.3.7
+      glob: 10.3.9
     dev: true
 
   /ripemd160@2.0.2:
