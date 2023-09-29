@@ -30,8 +30,8 @@ public class EntityDeleteFunction
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<EntityDeleteFunction>("Entity", Description = "Deletes the entity.")]
     [OpenApiJsonRequestBody<EntityDeleteDto>(Description = "Information about entity to delete.")]
-    [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
     [OpenApiResponseBadRequestValidation]
+    [OpenApiResponseWithoutBody]
     [OpenApiResponseWithoutBody(HttpStatusCode.NotFound)]
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "entity")]

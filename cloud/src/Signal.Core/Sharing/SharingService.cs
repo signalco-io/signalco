@@ -7,21 +7,14 @@ using Signal.Core.Users;
 
 namespace Signal.Core.Sharing;
 
-public class SharingService : ISharingService
-{
-    private readonly IAzureStorage azureStorage;
-    private readonly IUserService userService;
-    private readonly ILogger<SharingService> logger;
-
-    public SharingService(
-        IAzureStorage azureStorage,
+public class SharingService(IAzureStorage azureStorage,
         IUserService userService,
         ILogger<SharingService> logger)
-    {
-        this.azureStorage = azureStorage ?? throw new ArgumentNullException(nameof(azureStorage));
-        this.userService = userService ?? throw new ArgumentNullException(nameof(userService));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
+    : ISharingService
+{
+    private readonly IAzureStorage azureStorage = azureStorage;
+    private readonly IUserService userService = userService;
+    private readonly ILogger<SharingService> logger = logger;
 
     public async Task AssignToUserEmailAsync(
         string userEmail, 

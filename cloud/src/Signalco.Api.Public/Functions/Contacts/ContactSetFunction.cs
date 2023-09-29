@@ -59,13 +59,55 @@ public class ContactSetFunction
                 payload.ChannelName ?? throw new ArgumentException("Contact pointer requires channel name"),
                 payload.ContactName ?? throw new ArgumentException("Contact pointer requires contact name"));
 
-            var contactSetTask = this.entityService.ContactSetAsync(contactPointer, payload.ValueSerialized, payload.TimeStamp, cancellationToken);
-
-            // TODO: Move to UsageService
-            var usageTask = this.storage.QueueAsync(new UsageQueueItem(context.User.UserId, UsageKind.ContactSet), cancellationToken);
-
-            await Task.WhenAll(
-                contactSetTask,
-                usageTask);
+            await this.ContactSetAsync(context.User.UserId, contactPointer, payload.ValueSerialized, payload.TimeStamp, cancellationToken);
         });
+
+    [Function("Entity-Contact-Set")]
+    [OpenApiSecurityAuth0Token]
+    [Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiOperation("EntityContactSet", "Contact", Description = "Sets contact value.")]
+    [OpenApiJsonRequestBody<ContactSetDto>]
+    [OpenApiResponseWithoutBody]
+    [OpenApiResponseBadRequestValidation]
+    public async Task<HttpResponseData> Run(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "entity/{id:guid}/contacts/{channelName}/{contactName}")]
+        HttpRequestData req,
+        string id,
+        string channelName,
+        string contactName,
+        CancellationToken cancellationToken = default) =>
+        await req.UserRequest<EntityContactSetDto>(cancellationToken, this.functionAuthenticator, async context =>
+        {
+            if (string.IsNullOrWhiteSpace(channelName) ||
+                string.IsNullOrWhiteSpace(contactName) ||
+                string.IsNullOrWhiteSpace(id))
+                throw new ExpectedHttpException(
+                    HttpStatusCode.BadRequest,
+                    "EntityId, ChannelName and ContactName parameters are required.");
+
+            await context.ValidateUserAssignedAsync(this.entityService, id);
+
+            var contactPointer = new ContactPointer(
+                id ?? throw new ArgumentException("Contact pointer requires entity identifier"),
+                channelName ?? throw new ArgumentException("Contact pointer requires channel name"),
+                contactName ?? throw new ArgumentException("Contact pointer requires contact name"));
+
+            await this.ContactSetAsync(context.User.UserId, contactPointer, context.Payload.ValueSerialized, context.Payload.TimeStamp, cancellationToken);
+        });
+
+    private async Task ContactSetAsync(
+        string userId,
+        IContactPointer contactPointer, 
+        string? valueSerialized,
+        DateTime? timeStamp,
+        CancellationToken cancellationToken = default)
+    {
+        var contactSetTask = this.entityService.ContactSetAsync(contactPointer, valueSerialized, timeStamp, cancellationToken);
+
+        // TODO: Move to UsageService
+        var usageTask = this.storage.QueueAsync(new UsageQueueItem(userId, UsageKind.ContactSet), cancellationToken);
+
+        await Task.WhenAll(
+            contactSetTask,
+            usageTask);
+    }
 }
