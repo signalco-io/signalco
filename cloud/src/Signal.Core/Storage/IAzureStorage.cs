@@ -33,6 +33,7 @@ public interface IAzureStorage
     Task QueueAsync(ContactStateProcessQueueItem item, CancellationToken cancellationToken = default);
     Task QueueAsync(UsageQueueItem? item, CancellationToken cancellationToken = default);
     Task UpsertAsync(IContactLinkProcessTriggerItem cacheItem, CancellationToken cancellationToken = default);
+    Task RemoveAsync(IContactPointer contactPointer, CancellationToken cancellationToken);
     Task RemoveAsync(IUserAssignedEntity assignment, CancellationToken cancellationToken = default);
     Task EnsureTableAsync(string tableName, CancellationToken cancellationToken = default);
     Task EnsureQueueAsync(string queueName, CancellationToken cancellationToken = default);

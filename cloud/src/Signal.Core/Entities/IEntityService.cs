@@ -66,4 +66,9 @@ public interface IEntityService
         IContactPointer pointer,
         string? metadata,
         CancellationToken cancellationToken = default);
+
+    Task ContactDeleteAsync(
+        string userId, 
+        IContactPointer pointer,
+        CancellationToken cancellationToken = default);
 }
