@@ -54,7 +54,7 @@
         "@types/color": "3.0.4",
         "@types/fs-extra": "11.0.2",
         "@types/klaw": "3.0.4",
-        "@types/node": "18.18.0",
+        "@types/node": "18.18.1",
         "@types/react": "18.2.23",
         "@types/react-dom": "18.2.8",
         "@types/react-motion": "0.0.35",
