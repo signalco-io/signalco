@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Octokit;
 using Signal.Core.Secrets;
 using Signalco.Channel.GitHubApp.Secrets;
+using ProductHeaderValue = Octokit.ProductHeaderValue;
 
 namespace Signalco.Channel.GitHubApp.Functions
 {

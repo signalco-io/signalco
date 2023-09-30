@@ -29,10 +29,9 @@ public class ContactHistoryRetrieveFunction
         IEntityService entityService,
         IAzureStorageDao storage)
     {
-        this.functionAuthenticator =
-            functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.storageDao = storage ?? throw new ArgumentNullException(nameof(storage));
+        this.functionAuthenticator = functionAuthenticator;
+        this.entityService = entityService;
+        this.storageDao = storage;
     }
 
     [Function("Contact-HistoryRetrieve")]
@@ -44,7 +43,7 @@ public class ContactHistoryRetrieveFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "contact/history")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest<ContactHistoryResponseDto>(cancellationToken, this.functionAuthenticator, async context =>
+        await req.UserRequest(cancellationToken, this.functionAuthenticator, async context =>
         {
             var entityId = req.Query["entityId"];
             var channelName = req.Query["channelName"];

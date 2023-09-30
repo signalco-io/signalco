@@ -31,7 +31,7 @@ public class ContactDeleteFunction
     [OpenApiOperation<ContactDeleteFunction>("Contact", Description = "Deletes the contact.")]
     [OpenApiResponseWithoutBody]
     public async Task<HttpResponseData> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "entity/{id:guid}/contacts/{channelName}/{contactName}")]
+        [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "entity/{id:guid}/contacts/{channelName}/{contactName}")]
         HttpRequestData req,
         string id,
         string channelName,
