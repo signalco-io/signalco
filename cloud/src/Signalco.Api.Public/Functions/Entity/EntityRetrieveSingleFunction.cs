@@ -32,6 +32,7 @@ public class EntityRetrieveSingleFunction
     [Function("Entity-Retrieve-Single")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<EntityRetrieveSingleFunction>("Entity", Description = "Retrieves entity.")]
+    [OpenApiParameter("id", In = ParameterLocation.Path, Required = true, Type = typeof(Guid), Description = "Entity identifier")]
     [OpenApiOkJsonResponse<EntityDetailsDto>]
     [OpenApiResponseWithoutBody(HttpStatusCode.NotFound)]
     public async Task<HttpResponseData> RunSingle(
