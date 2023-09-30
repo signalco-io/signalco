@@ -31,9 +31,9 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="Signalco"
+        DisplayName="Signalco Companion"
         Description="Signalco Companion mobile app"
-        BackgroundColor="transparent"
+        BackgroundColor="#000000"
         Square150x150Logo="Assets\appiconMediumTile.png"
         Square44x44Logo="Assets\appiconLogo.png">
         <uap:DefaultTile
@@ -46,7 +46,8 @@
             <uap:ShowOn Tile="wide310x150Logo"/>
           </uap:ShowNameOnTiles>
         </uap:DefaultTile >
-        <uap:SplashScreen Image="Assets\appiconfgSplashScreen.png" />
+        <uap:SplashScreen Image="Assets\appiconfgSplashScreen.png"  BackgroundColor="#000000"/>
+        <uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badge"/>
       </uap:VisualElements>
     </Application>
   </Applications>
