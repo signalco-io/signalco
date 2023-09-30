@@ -64,12 +64,12 @@ public class ContactSetFunction
 
     [Function("Entity-Contact-Set")]
     [OpenApiSecurityAuth0Token]
-    [Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiOperation("EntityContactSet", "Contact", Description = "Sets contact value.")]
+    [Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiOperation("EntityContactSet", "Entity", Description = "Sets contact value.")]
     [OpenApiJsonRequestBody<ContactSetDto>]
     [OpenApiResponseWithoutBody]
     [OpenApiResponseBadRequestValidation]
     public async Task<HttpResponseData> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "entity/{id:guid}/contacts/{channelName}/{contactName}")]
+        [HttpTrigger(AuthorizationLevel.Anonymous, "put", "post", Route = "entity/{id:guid}/contacts/{channelName}/{contactName}")]
         HttpRequestData req,
         string id,
         string channelName,
