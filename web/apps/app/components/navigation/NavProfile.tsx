@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Channel, Close, Dashboard, Device, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
@@ -37,7 +37,9 @@ export default function NavProfile() {
     return (
         <FloatingNavContainer>
             <div className="flex h-full min-h-[60px] flex-row items-center justify-between gap-1 sm:flex-col sm:justify-start md:pl-0 md:pt-2">
-                <UserProfileAvatar />
+                <Suspense>
+                    <UserProfileAvatar />
+                </Suspense>
                 <div className="hidden w-full sm:block">
                     <Stack>
                         {visibleNavItems
