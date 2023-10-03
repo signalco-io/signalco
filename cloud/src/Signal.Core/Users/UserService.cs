@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,16 +6,8 @@ using Signal.Core.Storage;
 
 namespace Signal.Core.Users;
 
-public class UserService : IUserService
+public class UserService(IAzureStorageDao dao) : IUserService
 {
-    private readonly IAzureStorageDao dao;
-
-    public UserService(
-        IAzureStorageDao dao)
-    {
-        this.dao = dao ?? throw new ArgumentNullException(nameof(dao));
-    }
-
     public async Task<IUserPublic?> GetPublicAsync(string userId, CancellationToken cancellationToken = default)
     {
         var user = await this.GetAsync(userId, cancellationToken);
@@ -28,12 +19,12 @@ public class UserService : IUserService
     public async Task<IEnumerable<IUserPublic>> GetPublicAsync(
         IEnumerable<string> userIds,
         CancellationToken cancellationToken = default) =>
-        (await this.dao.UsersAsync(userIds, cancellationToken))
+        (await dao.UsersAsync(userIds, cancellationToken))
         .Select(u => new UserPublic(u.UserId, u.Email, u.FullName));
 
     public async Task<IUser?> GetAsync(string userId, CancellationToken cancellationToken = default)
     {
-        var user = await this.dao.UserAsync(userId, cancellationToken);
+        var user = await dao.UserAsync(userId, cancellationToken);
 
         // TODO: Register if new user
 
@@ -41,7 +32,7 @@ public class UserService : IUserService
     }
 
     public async Task<string?> IdByEmailAsync(string email, CancellationToken cancellationToken = default) => 
-        await this.dao.UserIdByEmailAsync(email, cancellationToken);
+        await dao.UserIdByEmailAsync(email, cancellationToken);
 
     // TODO: Use for retrieving user info
     //private async Task ResolveUserAsync(HttpRequestData request, CancellationToken cancellationToken, string nameIdentifier)

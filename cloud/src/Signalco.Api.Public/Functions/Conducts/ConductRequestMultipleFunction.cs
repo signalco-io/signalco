@@ -23,28 +23,15 @@ using Signalco.Common.Channel;
 
 namespace Signalco.Api.Public.Functions.Conducts;
 
-public class ConductRequestMultipleFunction : ConductMultipleFunctionsBase
-{
-    private readonly IEntityService entityService;
-    private readonly IAzureStorageDao storageDao;
-    private readonly INotificationService notificationService;
-    private readonly ISignalRService signalRService;
-
-    public ConductRequestMultipleFunction(
+public class ConductRequestMultipleFunction(
         IFunctionAuthenticator functionAuthenticator,
         IEntityService entityService,
         IAzureStorageDao storageDao,
         IAzureStorage storage,
         INotificationService notificationService,
         ISignalRService signalRService)
-        : base(functionAuthenticator, storage)
-    {
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.storageDao = storageDao ?? throw new ArgumentNullException(nameof(storageDao));
-        this.notificationService = notificationService ?? throw new ArgumentNullException(nameof(notificationService));
-        this.signalRService = signalRService ?? throw new ArgumentNullException(nameof(signalRService));
-    }
-
+    : ConductMultipleFunctionsBase(functionAuthenticator, storage)
+{
     [Function("Conducts-RequestMultiple")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ConductRequestMultipleFunction>("Conducts", Description = "Requests multiple conducts to be executed.")]
@@ -70,7 +57,7 @@ public class ConductRequestMultipleFunction : ConductMultipleFunctionsBase
                             conduct.ValueSerialized);
                     if (createRequest is { Title: { }, Content: { } })
                     {
-                        await this.notificationService.CreateAsync(
+                        await notificationService.CreateAsync(
                             new[] { context.User.UserId },
                             new NotificationContent(
                                 createRequest.Title,
@@ -85,9 +72,9 @@ public class ConductRequestMultipleFunction : ConductMultipleFunctionsBase
             {
                 // Forward to stations
                 var authTask = context.ValidateUserAssignedAsync(
-                    this.entityService, 
+                    entityService, 
                     conduct.EntityId ?? throw new ExpectedHttpException(HttpStatusCode.BadRequest, "EntityId is required"));
-                var entityUsersTask = this.storageDao.AssignedUsersAsync(
+                var entityUsersTask = storageDao.AssignedUsersAsync(
                     new[] { conduct.EntityId },
                     cancellationToken);
 
@@ -114,7 +101,7 @@ public class ConductRequestMultipleFunction : ConductMultipleFunctionsBase
             foreach (var userId in usersConducts.Keys)
             {
                 var conducts = usersConducts[userId];
-                await this.signalRService.SendToUsersAsync(
+                await signalRService.SendToUsersAsync(
                     new[] {userId},
                     "conducts",
                     "requested-multiple",

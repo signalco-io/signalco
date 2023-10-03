@@ -5,12 +5,8 @@ using Signal.Core.Secrets;
 
 namespace Signal.Infrastructure.Secrets;
 
-public class SecretsManager : SecretsProvider, ISecretsManager
+public class SecretsManager(IServiceProvider serviceProvider) : SecretsProvider(serviceProvider), ISecretsManager
 {
-    public SecretsManager(IServiceProvider serviceProvider) : base(serviceProvider)
-    {
-    }
-
     public async Task SetAsync(string key, string secret, CancellationToken cancellationToken = default)
     {
         try

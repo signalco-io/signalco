@@ -13,18 +13,14 @@ using Signalco.Common.Channel;
 
 namespace Signalco.Channel.iRobot.Functions;
 
-public class ConductMultipleFunctions : ConductMultipleFunctionsForwardToStationBase
-{
-    public ConductMultipleFunctions(
-        IEntityService entityService, 
-        IAzureStorageDao storageDao, 
+public class ConductMultipleFunctions(
+        IEntityService entityService,
+        IAzureStorageDao storageDao,
         IAzureStorage storage,
-        IFunctionAuthenticator authenticator, 
-        ISignalRService signalRService) 
-        : base(entityService, storageDao, authenticator, storage, signalRService)
-    {
-    }
-
+        IFunctionAuthenticator authenticator,
+        ISignalRService signalRService)
+    : ConductMultipleFunctionsForwardToStationBase(entityService, storageDao, authenticator, storage, signalRService)
+{
     [Function("Conduct-Multiple")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ConductMultipleFunctions>("Conducts",

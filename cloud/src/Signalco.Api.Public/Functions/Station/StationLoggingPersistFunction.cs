@@ -20,42 +20,30 @@ using Signal.Core.Storage;
 
 namespace Signalco.Api.Public.Functions.Station;
 
-public class StationLoggingPersistFunction
+public class StationLoggingPersistFunction(
+    IFunctionAuthenticator functionAuthenticator,
+    IEntityService entityService,
+    IAzureStorage storage)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly IEntityService entityService;
-    private readonly IAzureStorage storage;
-
-    public StationLoggingPersistFunction(
-        IFunctionAuthenticator functionAuthenticator,
-        IEntityService entityService,
-        IAzureStorage storage)
-    {
-        this.functionAuthenticator =
-            functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
-    }
-
     [Function("Station-Logging-Persist")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<StationLoggingPersistFunction>("Station", Description = "Appends logging entries.")]
     [OpenApiJsonRequestBody<StationsLoggingPersistRequestDto>(Description = "The logging entries to persist per station.")]
-    [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
+    [OpenApiResponseWithoutBody]
     [OpenApiResponseBadRequestValidation]
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "station/logging/persist")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest<StationsLoggingPersistRequestDto>(
-            cancellationToken, this.functionAuthenticator, async context =>
+            cancellationToken, functionAuthenticator, async context =>
             {
                 var payload = context.Payload;
                 if (string.IsNullOrWhiteSpace(payload.StationId))
                     throw new ExpectedHttpException(HttpStatusCode.BadRequest, "StationId is required.");
 
                 await context.ValidateUserAssignedAsync(
-                    this.entityService,
+                    entityService,
                     payload.StationId);
 
                 var entriesByDate = (payload.Entries ?? Enumerable.Empty<StationsLoggingPersistRequestDto.Entry>())
@@ -76,7 +64,7 @@ public class StationLoggingPersistFunction
                     await sw.FlushAsync();
                     ms.Position = 0;
 
-                    await this.storage.AppendToFileAsync(payload.StationId.SanitizeFileName(), fileName, ms, cancellationToken);
+                    await storage.AppendToFileAsync(payload.StationId.SanitizeFileName(), fileName, ms, cancellationToken);
                 }
             });
 

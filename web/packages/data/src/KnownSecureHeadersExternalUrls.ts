@@ -41,8 +41,8 @@ export const knownSecureHeadersExternalUrls: KnownSecureHeadersExternalUrlsObjec
         connectSrc: ['https://*.clarity.ms']
     },
     vercel: {
-        scriptSrc: ['https://vercel.live', 'https://vitals.vercel-insights.com'],
-        connectSrc: ['https://vercel.live', 'https://vitals.vercel-insights.com']
+        scriptSrc: ['https://vercel.live', 'https://vitals.vercel-insights.com', 'https://*.vercel-scripts.com'],
+        connectSrc: ['https://vercel.live', 'https://vitals.vercel-insights.com', 'https://*.vercel-scripts.com']
     },
     azureSignalR: {
         connectSrc: ['https://*.service.signalr.net', 'wss://*.service.signalr.net']

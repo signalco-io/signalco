@@ -18,36 +18,23 @@ using Signal.Core.Sharing;
 
 namespace Signalco.Api.Public.Functions.Sharing;
 
-public class ShareEntityFunction
+public class ShareEntityFunction(
+    IFunctionAuthenticator functionAuthenticator,
+    ISharingService sharingService,
+    IEntityService entityService,
+    ILogger<ShareEntityFunction> logger)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly ISharingService sharingService;
-    private readonly IEntityService entityService;
-    private readonly ILogger<ShareEntityFunction> logger;
-
-    public ShareEntityFunction(
-        IFunctionAuthenticator functionAuthenticator,
-        ISharingService sharingService,
-        IEntityService entityService,
-        ILogger<ShareEntityFunction> logger)
-    {
-        this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.sharingService = sharingService ?? throw new ArgumentNullException(nameof(sharingService));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
-
     [Function("Share-Entity")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ShareEntityFunction>("Sharing", Description = "Shared the entity with users.")]
     [OpenApiJsonRequestBody<ShareRequestDto>(Description = "Share one entity with one or more users.")]
-    [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
+    [OpenApiResponseWithoutBody]
     [OpenApiResponseBadRequestValidation]
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "share/entity")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest<ShareRequestDto>(cancellationToken, this.functionAuthenticator,
+        await req.UserRequest<ShareRequestDto>(cancellationToken, functionAuthenticator,
             async context =>
             {
                 if (string.IsNullOrWhiteSpace(context.Payload.EntityId))
@@ -55,20 +42,20 @@ public class ShareEntityFunction
                 if (context.Payload.UserEmails == null || !context.Payload.UserEmails.Any())
                     throw new ExpectedHttpException(HttpStatusCode.BadRequest, "UserEmails is required - at least one user email is required");
 
-                await context.ValidateUserAssignedAsync(this.entityService, context.Payload.EntityId);
+                await context.ValidateUserAssignedAsync(entityService, context.Payload.EntityId);
                 
                 foreach (var userEmail in context.Payload.UserEmails.Where(userEmail => !string.IsNullOrWhiteSpace(userEmail)))
                 {
                     try
                     {
-                        await this.sharingService.AssignToUserEmailAsync(
+                        await sharingService.AssignToUserEmailAsync(
                             userEmail,
                             context.Payload.EntityId,
                             cancellationToken);
                     }
                     catch (Exception ex)
                     {
-                        this.logger.LogInformation(ex, "Failed to share entity {EntityId} with provided user {UserEmail}.", context.Payload.EntityId, userEmail);
+                        logger.LogInformation(ex, "Failed to share entity {EntityId} with provided user {UserEmail}.", context.Payload.EntityId, userEmail);
                     }
                 }
             });

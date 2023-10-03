@@ -99,22 +99,16 @@ public static class HttpRequestExtensions
             ex.Code, 
             cancellationToken: cancellationToken);
 
-    public static async Task<HttpResponseData> UserRequest<TResponse>(
-        this HttpRequestData req,
-        CancellationToken cancellationToken,
-        IFunctionAuthenticator authenticator,
-        Func<UserRequestContext, Task<TResponse>> executionBody)
-    {
-        try
-        {
-            var user = await authenticator.AuthenticateAsync(req, cancellationToken);
-            return await req.JsonResponseAsync(await executionBody(new UserRequestContext(user, cancellationToken)), cancellationToken: cancellationToken);
-        }
-        catch (ExpectedHttpException ex)
-        {
-            return await ExceptionResponseAsync(req, ex, cancellationToken);
-        }
-    }
+    //public static Task<HttpResponseData> UserRequest(
+    //    this HttpRequestData req,
+    //    CancellationToken cancellationToken,
+    //    IFunctionAuthenticator authenticator,
+    //    Func<UserRequestContext, Task> executionBody) =>
+    //    UserRequest(req, authenticator, async context =>
+    //    {
+    //        await executionBody(context);
+    //        return req.CreateResponse(HttpStatusCode.OK);
+    //    }, cancellationToken);
 
     public static Task<HttpResponseData> UserRequest<TPayload>(
         this HttpRequestData req,
@@ -170,6 +164,41 @@ public static class HttpRequestExtensions
                 isSystem
                     ? new UserOrSystemRequestContextWithPayload<TPayload>(true, payload, cancellationToken)
                     : new UserOrSystemRequestContextWithPayload<TPayload>(user, payload, cancellationToken));
+        }
+        catch (ExpectedHttpException ex)
+        {
+            return await ExceptionResponseAsync(req, ex, cancellationToken);
+        }
+    }
+
+    public static async Task<HttpResponseData> UserRequest(
+        this HttpRequestData req,
+        CancellationToken cancellationToken,
+        IFunctionAuthenticator authenticator,
+        Func<UserRequestContext, Task> executionBody)
+    {
+        try
+        {
+            var user = await authenticator.AuthenticateAsync(req, cancellationToken);
+            await executionBody(new UserRequestContext(user, cancellationToken));
+            return req.CreateResponse(HttpStatusCode.OK);
+        }
+        catch (ExpectedHttpException ex)
+        {
+            return await ExceptionResponseAsync(req, ex, cancellationToken);
+        }
+    }
+
+    public static async Task<HttpResponseData> UserRequest<TResponse>(
+        this HttpRequestData req,
+        CancellationToken cancellationToken,
+        IFunctionAuthenticator authenticator,
+        Func<UserRequestContext, Task<TResponse>> executionBody)
+    {
+        try
+        {
+            var user = await authenticator.AuthenticateAsync(req, cancellationToken);
+            return await req.JsonResponseAsync(await executionBody(new UserRequestContext(user, cancellationToken)), cancellationToken: cancellationToken);
         }
         catch (ExpectedHttpException ex)
         {

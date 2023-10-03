@@ -1,11 +1,6 @@
 ﻿namespace Signal.Core.Newsletter;
 
-public class NewsletterSubscription : INewsletterSubscription
+public class NewsletterSubscription(string email) : INewsletterSubscription
 {
-    public NewsletterSubscription(string email)
-    {
-        this.Email = email;
-    }
-
-    public string Email { get; set; }
+    public string Email { get; set; } = email;
 }

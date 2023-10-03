@@ -15,19 +15,12 @@ using Signal.Core.Storage;
 
 namespace Signalco.Channel.Slack.Functions.Conducts;
 
-internal class ConductRequestMultipleFunction : ConductMultipleFunctionsBase
-{
-    private readonly ISlackAccessTokenProvider slackAccessTokenProvider;
-
-    public ConductRequestMultipleFunction(
+internal class ConductRequestMultipleFunction(
         IFunctionAuthenticator authenticator,
         IAzureStorage storage,
         ISlackAccessTokenProvider slackAccessTokenProvider)
-    : base(authenticator, storage)
-    {
-        this.slackAccessTokenProvider = slackAccessTokenProvider ?? throw new ArgumentNullException(nameof(slackAccessTokenProvider));
-    }
-
+    : ConductMultipleFunctionsBase(authenticator, storage)
+{
     [Function("Conducts-RequestMultiple")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ConductRequestMultipleFunction>("Conducts",
@@ -56,7 +49,7 @@ internal class ConductRequestMultipleFunction : ConductMultipleFunctionsBase
                 using var client = new HttpClient();
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                     "Bearer",
-                    await this.slackAccessTokenProvider.GetAccessTokenAsync(
+                    await slackAccessTokenProvider.GetAccessTokenAsync(
                         conductRequest.EntityId ?? throw new Exception("EntityId not specified"), 
                         cancellationToken));
                 await client.PostAsJsonAsync("https://slack.com/api/chat.postMessage", new
