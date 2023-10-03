@@ -13,16 +13,9 @@ using Signal.Core.Exceptions;
 
 namespace Signalco.Api.Public.Functions.Station;
 
-public class StationRefreshTokenFunction
+public class StationRefreshTokenFunction(
+    IFunctionAuthenticator functionAuthenticator)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-
-    public StationRefreshTokenFunction(
-        IFunctionAuthenticator functionAuthenticator)
-    {
-        this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-    }
-
     [Function("Station-RefreshToken")]
     [OpenApiOperation<StationRefreshTokenFunction>("Station", Description = "Refreshes the access token.")]
     [OpenApiJsonRequestBody<StationRefreshTokenRequestDto>]
@@ -38,7 +31,7 @@ public class StationRefreshTokenFunction
             if (string.IsNullOrWhiteSpace(context.Payload.RefreshToken))
                 throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Refresh token is required.");
 
-            var token = await this.functionAuthenticator.RefreshTokenAsync(req, context.Payload.RefreshToken,
+            var token = await functionAuthenticator.RefreshTokenAsync(req, context.Payload.RefreshToken,
                 cancellationToken);
             return new StationRefreshTokenResponseDto(token.AccessToken, token.Expire);
         });
@@ -53,18 +46,12 @@ public class StationRefreshTokenFunction
     }
 
     [Serializable]
-    private class StationRefreshTokenResponseDto
+    private class StationRefreshTokenResponseDto(string accessToken, DateTime expire)
     {
-        public StationRefreshTokenResponseDto(string accessToken, DateTime expire)
-        {
-            this.AccessToken = accessToken;
-            this.Expire = expire;
-        }
-
         [JsonPropertyName("accessToken")]
-        public string AccessToken { get; }
+        public string AccessToken { get; } = accessToken;
 
         [JsonPropertyName("expire")]
-        public DateTime Expire { get; }
+        public DateTime Expire { get; } = expire;
     }
 }

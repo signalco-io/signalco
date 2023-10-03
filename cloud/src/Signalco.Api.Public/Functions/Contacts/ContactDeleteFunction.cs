@@ -14,22 +14,13 @@ using Signal.Core.Exceptions;
 
 namespace Signalco.Api.Public.Functions.Contacts;
 
-public class ContactDeleteFunction
+public class ContactDeleteFunction(
+    IFunctionAuthenticator functionAuthenticator,
+    IEntityService entityService)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly IEntityService entityService;
-
-    public ContactDeleteFunction(
-        IFunctionAuthenticator functionAuthenticator,
-        IEntityService entityService)
-    {
-        this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-    }
-
     [Function("Entity-Contact-Delete")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation<ContactDeleteFunction>("Contact", Description = "Deletes the contact.")]
+    [OpenApiOperation<ContactDeleteFunction>("Entity", Description = "Deletes the contact.")]
     [OpenApiParameter("id", In = ParameterLocation.Path, Required = true, Type = typeof(Guid), Description = "Entity identifier")]
     [OpenApiParameter("channelName", In = ParameterLocation.Path, Required = true, Type = typeof(string), Description = "Channel name")]
     [OpenApiParameter("contactName", In = ParameterLocation.Path, Required = true, Type = typeof(string), Description = "Contact name")]
@@ -41,7 +32,7 @@ public class ContactDeleteFunction
         string channelName,
         string contactName,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest(cancellationToken, this.functionAuthenticator, async context =>
+        await req.UserRequest(cancellationToken, functionAuthenticator, async context =>
         {
             if (string.IsNullOrWhiteSpace(id) ||
                 string.IsNullOrWhiteSpace(channelName) ||
@@ -55,6 +46,6 @@ public class ContactDeleteFunction
                 channelName ?? throw new ArgumentException("Contact pointer requires channel name"),
                 contactName ?? throw new ArgumentException("Contact pointer requires contact name"));
 
-            await this.entityService.ContactDeleteAsync(context.User.UserId, contactPointer, cancellationToken);
+            await entityService.ContactDeleteAsync(context.User.UserId, contactPointer, cancellationToken);
         });
 }

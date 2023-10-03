@@ -4,29 +4,25 @@ using System.Text.Json.Serialization;
 namespace Signal.Core.Contacts;
 
 [Serializable]
-public class ContactValueChangedDto
+public class ContactValueChangedDto(
+    string entityId, 
+    string contactName, 
+    string channelName, 
+    string? valueSerialized, 
+    DateTime timeStamp)
 {
-    public ContactValueChangedDto(string entityId, string contactName, string channelName, string? valueSerialized, DateTime timeStamp)
-    {
-        this.EntityId = entityId;
-        this.ContactName = contactName;
-        this.ChannelName = channelName;
-        this.ValueSerialized = valueSerialized;
-        this.TimeStamp = timeStamp;
-    }
-
     [JsonPropertyName("entityId")]
-    public string EntityId { get; }
+    public string EntityId { get; } = entityId;
 
     [JsonPropertyName("contactName")]
-    public string ContactName { get; }
+    public string ContactName { get; } = contactName;
 
     [JsonPropertyName("channelName")]
-    public string ChannelName { get; }
+    public string ChannelName { get; } = channelName;
 
     [JsonPropertyName("valueSerialized")]
-    public string? ValueSerialized { get; }
+    public string? ValueSerialized { get; } = valueSerialized;
 
     [JsonPropertyName("timeStamp")]
-    public DateTime TimeStamp { get; }
+    public DateTime TimeStamp { get; } = timeStamp;
 }

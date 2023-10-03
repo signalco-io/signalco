@@ -2,14 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Signal.Core.Processor
+namespace Signal.Core.Processor;
+
+public interface IProcessor
 {
-    public interface IProcessor
-    {
-        Task RunProcessAsync(
-            string processEntityId, 
-            IContactPointer trigger, 
-            bool instant,
-            CancellationToken cancellationToken = default);
-    }
+    Task RunProcessAsync(
+        string processEntityId, 
+        IContactPointer trigger, 
+        bool instant,
+        CancellationToken cancellationToken = default);
 }

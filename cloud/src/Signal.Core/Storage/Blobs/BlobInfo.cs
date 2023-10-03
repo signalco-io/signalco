@@ -2,14 +2,9 @@ using System;
 
 namespace Signal.Core.Storage.Blobs;
 
-public class BlobInfo : IBlobInfo
+public class BlobInfo(string name) : IBlobInfo
 {
-    public BlobInfo(string name)
-    {
-        this.Name = name;
-    }
-
-    public string Name { get; }
+    public string Name { get; } = name;
 
     public DateTimeOffset? CreatedTimeStamp { get; init; }
 

@@ -17,22 +17,11 @@ using Signal.Core.Storage;
 
 namespace Signalco.Api.Public.Functions.Contacts;
 
-public class ContactSetFunction
+public class ContactSetFunction(
+    IFunctionAuthenticator functionAuthenticator,
+    IEntityService entityService,
+    IAzureStorage storage)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly IEntityService entityService;
-    private readonly IAzureStorage storage;
-
-    public ContactSetFunction(
-        IFunctionAuthenticator functionAuthenticator,
-        IEntityService entityService,
-        IAzureStorage storage)
-    {
-        this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
-    }
-
     [Function("Contact-Set")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ContactSetFunction>("Contact", Description = "Sets contact value.")]
@@ -43,7 +32,7 @@ public class ContactSetFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "contact/set")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest<ContactSetDto>(cancellationToken, this.functionAuthenticator, async context =>
+        await req.UserRequest<ContactSetDto>(cancellationToken, functionAuthenticator, async context =>
         {
             var payload = context.Payload;
             if (string.IsNullOrWhiteSpace(payload.ChannelName) ||
@@ -53,7 +42,7 @@ public class ContactSetFunction
                     HttpStatusCode.BadRequest,
                     "EntityId, ChannelName and ContactName properties are required.");
 
-            await context.ValidateUserAssignedAsync(this.entityService, payload.EntityId);
+            await context.ValidateUserAssignedAsync(entityService, payload.EntityId);
 
             var contactPointer = new ContactPointer(
                 payload.EntityId ?? throw new ArgumentException("Contact pointer requires entity identifier"),
@@ -79,7 +68,7 @@ public class ContactSetFunction
         string channelName,
         string contactName,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest<EntityContactSetDto>(cancellationToken, this.functionAuthenticator, async context =>
+        await req.UserRequest<EntityContactSetDto>(cancellationToken, functionAuthenticator, async context =>
         {
             if (string.IsNullOrWhiteSpace(channelName) ||
                 string.IsNullOrWhiteSpace(contactName) ||
@@ -88,7 +77,7 @@ public class ContactSetFunction
                     HttpStatusCode.BadRequest,
                     "EntityId, ChannelName and ContactName parameters are required.");
 
-            await context.ValidateUserAssignedAsync(this.entityService, id);
+            await context.ValidateUserAssignedAsync(entityService, id);
 
             var contactPointer = new ContactPointer(
                 id ?? throw new ArgumentException("Contact pointer requires entity identifier"),
@@ -105,10 +94,10 @@ public class ContactSetFunction
         DateTime? timeStamp,
         CancellationToken cancellationToken = default)
     {
-        var contactSetTask = this.entityService.ContactSetAsync(contactPointer, valueSerialized, timeStamp, cancellationToken);
+        var contactSetTask = entityService.ContactSetAsync(contactPointer, valueSerialized, timeStamp, cancellationToken);
 
         // TODO: Move to UsageService
-        var usageTask = this.storage.QueueAsync(new UsageQueueItem(userId, UsageKind.ContactSet), cancellationToken);
+        var usageTask = storage.QueueAsync(new UsageQueueItem(userId, UsageKind.ContactSet), cancellationToken);
 
         await Task.WhenAll(
             contactSetTask,
