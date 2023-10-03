@@ -6,14 +6,14 @@ import IContactPointer from '../../contacts/IContactPointer';
 export default function useContacts(pointers: IContactPointer[] | undefined) {
     const client = useQueryClient();
     return useQueries({
-        queries: (pointers ?? []).filter(p => !!p).map(pointer => {
+        queries: (pointers ?? []).filter(Boolean).map(pointer => {
             return {
                 queryKey: ['contact', pointer.entityId, pointer.channelName, pointer.contactName],
                 queryFn: async () => {
                     const entityKey = ['entity', pointer.entityId];
                     const entityQuery = client.getQueryState<IEntityDetails>(entityKey);
                     let entity: IEntityDetails | null | undefined = undefined;
-                    if (entityQuery?.status === 'success')
+                    if (entityQuery?.status === 'success' && !entityQuery.isInvalidated)
                         entity = entityQuery.data;
                     if (!entity)
                         entity = await entityAsync(pointer.entityId);

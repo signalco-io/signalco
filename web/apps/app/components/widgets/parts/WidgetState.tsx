@@ -93,6 +93,7 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
     const onEntityIds = useMemo(() => onContactPointers?.map(i => i.entityId), [onContactPointers]);
     const onEntity = useEntity(onEntityIds && onEntityIds[0]);
     const onContacts = useContacts(onContactPointers);
+
     const audioOn = useAudioOn();
     const audioOff = useAudioOff();
 
@@ -107,10 +108,11 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
             if (typeof contact === 'undefined' || !contact.data)
                 continue;
 
-            if (contact.data.valueSerialized === config?.on?.find((e: IContact) =>
+            const contactOnValueSerialized = config?.on?.find((e: IContact) =>
                 e.entityId === contact.data.entityId &&
                 e.channelName === contact.data.channelName &&
-                e.contactName === contact.data.contactName)?.valueSerialized) {
+                e.contactName === contact.data.contactName)?.valueSerialized;
+            if (contact.data.valueSerialized === contactOnValueSerialized) {
                 state = true;
                 break;
             }
