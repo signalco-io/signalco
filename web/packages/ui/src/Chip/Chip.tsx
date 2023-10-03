@@ -15,11 +15,17 @@ export type ChipProps = PropsWithChildren<{
 
 export function Chip({ size, color, startDecorator, onClick, children, href }: ChipProps) {
     const className = cx(
-        'py-1 px-2 m-0 text-sm border border-neutral-500 rounded-2xl',
-        (size && size === 'sm') && 'rounded-xl py-0.5 px-1 text-xs',
-        (!size || size === 'lg') && 'rounded-3xl px-3 text-base',
-        color === 'info' && 'bg-sky-300 text-sky-800 border-sky-300',
-        color === 'warning' && 'bg-amber-300 text-amber-800 border-amber-300',
+        'm-0 border',
+        size === 'sm' && 'rounded-xl py-0.5 px-1.5 text-xs',
+        (!size || size === 'md') && 'text-sm py-1 rounded-2xl px-3 px-2',
+        size === 'lg' && 'rounded-3xl px-3 text-base py-1',
+        (!color || color === 'neutral') && 'border-neutral-400 text-neutral-700',
+        color === 'info' && 'bg-sky-300 text-sky-800 border-sky-400',
+        color === 'warning' && 'bg-amber-300 text-amber-800 border-amber-300 border-amber-400',
+        color === 'success' && 'bg-lime-300 text-lime-800 border-lime-400',
+        color === 'error' && 'bg-red-300 text-red-800 border-red-400',
+        color === 'primary' && 'bg-neutral-950 text-white border-neutral-950',
+        color === 'secondary' && 'bg-neutral-500 text-white border-neutral-600',
     );
     const Wrapper = onClick
         ? (props: PropsWithChildren) => <button onClick={onClick} className={className}>{props.children}</button>
