@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Minimize } from '@signalco/ui-icons';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import NavProfile from '../NavProfile';
+import NavProfile from '../navigation/NavProfile';
 import RealtimeService from '../../src/realtime/realtimeService';
 import { AuthWrapper } from './AuthWrapper';
 
@@ -27,7 +27,7 @@ export function AppLayout(props: React.PropsWithChildren) {
                     {isFullScreen !== 'true' && (
                         <NavProfile />
                     )}
-                    <div className="relative w-full grow overflow-hidden">
+                    <div className="relative mt-[72px] w-full grow overflow-hidden md:ml-[90px] md:mt-0">
                         {children}
                     </div>
                 </div>
