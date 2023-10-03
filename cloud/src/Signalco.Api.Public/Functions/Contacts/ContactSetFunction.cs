@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.OpenApi.Models;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Contact;
 using Signal.Api.Common.Exceptions;
@@ -65,6 +66,9 @@ public class ContactSetFunction
     [Function("Entity-Contact-Set")]
     [OpenApiSecurityAuth0Token]
     [Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiOperation("EntityContactSet", "Entity", Description = "Sets contact value.")]
+    [OpenApiParameter("id", In = ParameterLocation.Path, Required = true, Type = typeof(Guid), Description = "Entity identifier")]
+    [OpenApiParameter("channelName", In = ParameterLocation.Path, Required = true, Type = typeof(string), Description = "Channel name")]
+    [OpenApiParameter("contactName", In = ParameterLocation.Path, Required = true, Type = typeof(string), Description = "Contact name")]
     [OpenApiJsonRequestBody<ContactSetDto>]
     [OpenApiResponseWithoutBody]
     [OpenApiResponseBadRequestValidation]

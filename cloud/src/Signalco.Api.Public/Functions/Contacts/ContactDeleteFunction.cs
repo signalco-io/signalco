@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.OpenApi.Models;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
@@ -29,6 +30,9 @@ public class ContactDeleteFunction
     [Function("Entity-Contact-Delete")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ContactDeleteFunction>("Contact", Description = "Deletes the contact.")]
+    [OpenApiParameter("id", In = ParameterLocation.Path, Required = true, Type = typeof(Guid), Description = "Entity identifier")]
+    [OpenApiParameter("channelName", In = ParameterLocation.Path, Required = true, Type = typeof(string), Description = "Channel name")]
+    [OpenApiParameter("contactName", In = ParameterLocation.Path, Required = true, Type = typeof(string), Description = "Contact name")]
     [OpenApiResponseWithoutBody]
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "entity/{id:guid}/contacts/{channelName}/{contactName}")]

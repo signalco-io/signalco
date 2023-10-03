@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.OpenApi.Models;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Entities;
 using Signal.Api.Common.Exceptions;
@@ -32,6 +33,7 @@ public class EntityRetrieveSingleFunction
     [Function("Entity-Retrieve-Single")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<EntityRetrieveSingleFunction>("Entity", Description = "Retrieves entity.")]
+    [OpenApiParameter("id", In = ParameterLocation.Path, Required = true, Type = typeof(Guid), Description = "Entity identifier")]
     [OpenApiOkJsonResponse<EntityDetailsDto>]
     [OpenApiResponseWithoutBody(HttpStatusCode.NotFound)]
     public async Task<HttpResponseData> RunSingle(

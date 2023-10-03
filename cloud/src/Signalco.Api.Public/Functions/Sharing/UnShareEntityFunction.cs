@@ -23,13 +23,13 @@ public class UnShareEntityFunction
     private readonly IFunctionAuthenticator functionAuthenticator;
     private readonly ISharingService sharingService;
     private readonly IEntityService entityService;
-    private readonly ILogger<ShareEntityFunction> logger;
+    private readonly ILogger<UnShareEntityFunction> logger;
 
     public UnShareEntityFunction(
         IFunctionAuthenticator functionAuthenticator,
         ISharingService sharingService,
         IEntityService entityService,
-        ILogger<ShareEntityFunction> logger)
+        ILogger<UnShareEntityFunction> logger)
     {
         this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
         this.sharingService = sharingService ?? throw new ArgumentNullException(nameof(sharingService));
@@ -39,7 +39,7 @@ public class UnShareEntityFunction
 
     [Function("UnShare-Entity")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation<ShareEntityFunction>("Sharing", Description = "Un-shared the entity from users.")]
+    [OpenApiOperation<UnShareEntityFunction>("Sharing", Description = "Un-shared the entity from users.")]
     [OpenApiJsonRequestBody<UnShareRequestDto>(Description = "Un-share one entity with one or more users.")]
     [OpenApiResponseWithoutBody]
     [OpenApiResponseBadRequestValidation]
