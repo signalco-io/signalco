@@ -8,13 +8,11 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
-using Signal.Core.Entities;
 
 namespace Signalco.Channel.Slack.Functions.Events;
 
 public class SlackEventFunction(
     ISlackRequestHandler slackRequestHandler,
-    IEntityService entityService,
     ILogger<SlackEventFunction> logger)
 {
     [Function("Slack-Event")]

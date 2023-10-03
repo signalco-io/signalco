@@ -64,14 +64,9 @@ public class EntityUpsertFunction(
     }
 
     [Serializable]
-    private class EntityUpsertResponseDto
+    private class EntityUpsertResponseDto(string id)
     {
-        public EntityUpsertResponseDto(string id)
-        {
-            this.Id = id;
-        }
-
         [JsonPropertyName("id")]
-        public string Id { get; }
+        public string Id { get; } = id;
     }
 }
