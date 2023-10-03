@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.OpenApi.Models;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Entities;
 using Signal.Api.Common.Exceptions;
