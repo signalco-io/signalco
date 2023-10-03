@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -16,23 +15,11 @@ using Signal.Core.Storage;
 
 namespace Signalco.Api.Public.Functions.Station;
 
-public class StationLoggingDownloadFunction
+public class StationLoggingDownloadFunction(
+    IFunctionAuthenticator functionAuthenticator,
+    IEntityService entityService,
+    IAzureStorageDao azureStorageDao)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly IEntityService entityService;
-    private readonly IAzureStorageDao azureStorageDao;
-
-    public StationLoggingDownloadFunction(
-        IFunctionAuthenticator functionAuthenticator,
-        IEntityService entityService,
-        IAzureStorageDao azureStorageDao)
-    {
-        this.functionAuthenticator =
-            functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.azureStorageDao = azureStorageDao ?? throw new ArgumentNullException(nameof(azureStorageDao));
-    }
-
     [Function("Station-Logging-Download")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<StationLoggingDownloadFunction>("Station")]
@@ -45,7 +32,7 @@ public class StationLoggingDownloadFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "stations/logging/download")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest(cancellationToken, this.functionAuthenticator, async context =>
+        await req.UserRequest(cancellationToken, functionAuthenticator, async context =>
         {
             var stationId = req.Query["stationId"];
             if (string.IsNullOrWhiteSpace(stationId))
@@ -55,10 +42,10 @@ public class StationLoggingDownloadFunction
                 throw new ExpectedHttpException(HttpStatusCode.BadRequest, "blobName is required");
 
             await context.ValidateUserAssignedAsync(
-                this.entityService,
+                entityService,
                 stationId);
 
-            var stream = await this.azureStorageDao.LoggingDownloadAsync(blobName, cancellationToken);
+            var stream = await azureStorageDao.LoggingDownloadAsync(blobName, cancellationToken);
             var content = Encoding.UTF8.GetBytes(await new StreamReader(stream).ReadToEndAsync(cancellationToken));
 
             var response = req.CreateResponse();

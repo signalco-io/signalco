@@ -2,9 +2,4 @@
 
 namespace Signal.Api.Common.OpenApi;
 
-public class OpenApiOperationAttribute<T> : OpenApiOperationAttribute
-{
-    public OpenApiOperationAttribute(params string[] tags) : base(typeof(T).Name, tags)
-    {
-    }
-}
+public class OpenApiOperationAttribute<T>(params string[] tags) : OpenApiOperationAttribute(typeof(T).Name, tags);

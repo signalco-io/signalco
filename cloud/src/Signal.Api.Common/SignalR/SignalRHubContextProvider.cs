@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.SignalR.Management;
@@ -8,19 +7,11 @@ using Signal.Core.Secrets;
 
 namespace Signal.Api.Common.SignalR;
 
-internal class SignalRHubContextProvider : ISignalRHubContextProvider
-{
-    private readonly IConfiguration configuration;
-    private readonly ILoggerFactory loggerFactory;
-
-    public SignalRHubContextProvider(
+internal class SignalRHubContextProvider(
         IConfiguration configuration,
         ILoggerFactory loggerFactory)
-    {
-        this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-        this.loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
-    }
-
+    : ISignalRHubContextProvider
+{
     private ServiceManager ServiceManager()
     {
         // TODO: Cache
@@ -29,7 +20,7 @@ internal class SignalRHubContextProvider : ISignalRHubContextProvider
             {
                 option.ConnectionString = configuration[SecretKeys.SignalRConnectionString];
             })
-            .WithLoggerFactory(this.loggerFactory)
+            .WithLoggerFactory(loggerFactory)
             .BuildServiceManager();
     }
     

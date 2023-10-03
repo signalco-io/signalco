@@ -14,19 +14,10 @@ using Signal.Core.Exceptions;
 
 namespace Signalco.Api.Public.Functions.Entity;
 
-public class EntityUpsertFunction
+public class EntityUpsertFunction(
+    IFunctionAuthenticator functionAuthenticator,
+    IEntityService entityService)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly IEntityService entityService;
-
-    public EntityUpsertFunction(
-        IFunctionAuthenticator functionAuthenticator,
-        IEntityService entityService)
-    {
-        this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-    }
-
     [Function("Entity-Upsert")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<EntityUpsertFunction>("Entity", Description = "Creates or updates entity. Will create entity if Id is not provided.")]
@@ -36,7 +27,7 @@ public class EntityUpsertFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", "put", Route = "entity")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest<EntityUpsertDto, EntityUpsertResponseDto>(cancellationToken, this.functionAuthenticator, async context =>
+        await req.UserRequest<EntityUpsertDto, EntityUpsertResponseDto>(cancellationToken, functionAuthenticator, async context =>
         {
             var payload = context.Payload;
             var user = context.User;
@@ -45,7 +36,7 @@ public class EntityUpsertFunction
             if (payload.Type is null or EntityType.Unknown)
                 throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Type property is required and can't be Unknown.");
 
-            var entityId = await this.entityService.UpsertAsync(
+            var entityId = await entityService.UpsertAsync(
                 user.UserId,
                 payload.Id,
                 id => new Signal.Core.Entities.Entity(
@@ -73,14 +64,9 @@ public class EntityUpsertFunction
     }
 
     [Serializable]
-    private class EntityUpsertResponseDto
+    private class EntityUpsertResponseDto(string id)
     {
-        public EntityUpsertResponseDto(string id)
-        {
-            this.Id = id;
-        }
-
         [JsonPropertyName("id")]
-        public string Id { get; }
+        public string Id { get; } = id;
     }
 }

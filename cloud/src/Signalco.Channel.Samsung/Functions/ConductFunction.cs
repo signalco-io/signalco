@@ -9,15 +9,11 @@ using Signalco.Common.Channel;
 
 namespace Signalco.Channel.Samsung.Functions;
 
-public class ConductFunctions : ConductFunctionsForwardToStationBase
-{
-    public ConductFunctions(
+public class ConductFunctions(
         IFunctionAuthenticator authenticator,
-        IEntityService entityService) 
-        : base(entityService, authenticator)
-    {
-    }
-
+        IEntityService entityService)
+    : ConductFunctionsForwardToStationBase(entityService, authenticator)
+{
     [Function("Conduct")]
     [OpenApiOperation<ConductFunctions>("Conducts")]
     public async Task<HttpResponseData> Run(

@@ -2,21 +2,15 @@
 
 namespace Signal.Core.Contacts;
 
-public class ContactHistoryItem : IContactHistoryItem
-{
-    public ContactHistoryItem(
+public class ContactHistoryItem(
         IContactPointer contactPointer,
         string? valueSerialized,
         DateTime timeStamp)
-    {
-        this.ContactPointer = contactPointer;
-        this.ValueSerialized = valueSerialized;
-        this.Timestamp = timeStamp;
-    }
+    : IContactHistoryItem
+{
+    public IContactPointer ContactPointer { get; } = contactPointer;
 
-    public IContactPointer ContactPointer { get; }
+    public string? ValueSerialized { get; } = valueSerialized;
 
-    public string? ValueSerialized { get; }
-
-    public DateTime Timestamp { get; }
+    public DateTime Timestamp { get; } = timeStamp;
 }

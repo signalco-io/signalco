@@ -15,19 +15,10 @@ using Signal.Core.Usage;
 
 namespace Signalco.Func.Internal.UsageProcessor;
 
-public class UsageProcessTrigger
+public class UsageProcessTrigger(
+    IEntityService entityService,
+    ILogger<UsageProcessTrigger> logger)
 {
-    private readonly IEntityService entityService;
-    private readonly ILogger<UsageProcessTrigger> logger;
-
-    public UsageProcessTrigger(
-        IEntityService entityService,
-        ILogger<UsageProcessTrigger> logger)
-    {
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
-
     [Function("UsageProcessTrigger")]
     public async Task Run(
         [QueueTrigger("usage-processing", Connection = SecretKeys.StorageAccountConnectionString)]
@@ -37,19 +28,19 @@ public class UsageProcessTrigger
         var queueItem = JsonSerializer.Deserialize<UsageQueueItem>(item) ??
                         throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Invalid queue item data");
 
-        this.logger.LogInformation("Dequeued usage item: {@UsageItem}", queueItem);
+        logger.LogInformation("Dequeued usage item: {@UsageItem}", queueItem);
 
         // TODO: Move to service
         // Retrieve or create user entity
-        var userEntity = (await this.entityService.AllAsync(queueItem.UserId, new[] {EntityType.User}, cancellationToken)).FirstOrDefault();
+        var userEntity = (await entityService.AllAsync(queueItem.UserId, new[] {EntityType.User}, cancellationToken)).FirstOrDefault();
         if (userEntity == null)
         {
-            var userEntityId = await this.entityService.UpsertAsync(
+            var userEntityId = await entityService.UpsertAsync(
                 queueItem.UserId,
                 null,
                 id => new Entity(EntityType.User, id, "Me"),
                 cancellationToken);
-            userEntity = await this.entityService.GetInternalAsync(userEntityId, cancellationToken);
+            userEntity = await entityService.GetInternalAsync(userEntityId, cancellationToken);
         }
 
         if (userEntity == null)
@@ -58,7 +49,7 @@ public class UsageProcessTrigger
         // Calculate updated usage
         var now = DateTime.UtcNow;
         var contactName = $"usage-{now.Year}{now.Month:D2}{now.Day:D2}";
-        var currentUsageValueSerialized = (await this.entityService.ContactAsync(
+        var currentUsageValueSerialized = (await entityService.ContactAsync(
             new ContactPointer(userEntity.Id, "signalco", contactName),
             cancellationToken))?.ValueSerialized;
         var usage = JsonSerializer.Deserialize<Usage>(currentUsageValueSerialized ?? "{}") ??
@@ -73,7 +64,7 @@ public class UsageProcessTrigger
         };
 
         // Update contact
-        await this.entityService.ContactSetAsync(
+        await entityService.ContactSetAsync(
             new ContactPointer(userEntity.Id, "signalco", contactName),
             JsonSerializer.Serialize(usage), 
             cancellationToken: cancellationToken);

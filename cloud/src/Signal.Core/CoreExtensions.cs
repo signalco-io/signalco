@@ -19,10 +19,5 @@ public static class CoreExtensions
             .AddTransient(typeof(Lazy<>), typeof(LazyInstance<>));
 }
 
-public class LazyInstance<T>: Lazy<T> where T : notnull
-{
-    public LazyInstance(IServiceProvider serviceProvider)
-        : base(serviceProvider.GetRequiredService<T>)
-    {
-    }
-}
+public class LazyInstance<T>(IServiceProvider serviceProvider) : Lazy<T>(serviceProvider.GetRequiredService<T>)
+    where T : notnull;

@@ -13,19 +13,10 @@ using Signal.Core.Exceptions;
 
 namespace Signalco.Api.Public.Functions.Entity;
 
-public class EntityDeleteFunction
+public class EntityDeleteFunction(
+    IFunctionAuthenticator functionAuthenticator,
+    IEntityService entityService)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly IEntityService entityService;
-
-    public EntityDeleteFunction(
-        IFunctionAuthenticator functionAuthenticator,
-        IEntityService entityService)
-    {
-        this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-    }
-
     [Function("Entity-Delete")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<EntityDeleteFunction>("Entity", Description = "Deletes the entity.")]
@@ -37,12 +28,12 @@ public class EntityDeleteFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "entity")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest<EntityDeleteDto>(cancellationToken, this.functionAuthenticator, async context =>
+        await req.UserRequest<EntityDeleteDto>(cancellationToken, functionAuthenticator, async context =>
         {
             if (string.IsNullOrWhiteSpace(context.Payload.Id))
                 throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Id property is required.");
 
-            await this.entityService.RemoveAsync(
+            await entityService.RemoveAsync(
                 context.User.UserId,
                 context.Payload.Id,
                 cancellationToken);

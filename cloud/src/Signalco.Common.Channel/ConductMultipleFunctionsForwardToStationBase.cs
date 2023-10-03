@@ -11,25 +11,14 @@ using Signal.Core.Storage;
 
 namespace Signalco.Common.Channel;
 
-public abstract class ConductMultipleFunctionsForwardToStationBase : ConductMultipleFunctionsBase
-{
-    private readonly IEntityService entityService;
-    private readonly IAzureStorageDao storageDao;
-    private readonly ISignalRService signalRService;
-
-    protected ConductMultipleFunctionsForwardToStationBase(
+public abstract class ConductMultipleFunctionsForwardToStationBase(
         IEntityService entityService,
         IAzureStorageDao storageDao,
         IFunctionAuthenticator authenticator,
         IAzureStorage storage,
-        ISignalRService signalRService) 
-        : base(authenticator, storage)
-    {
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.storageDao = storageDao ?? throw new ArgumentNullException(nameof(storageDao));
-        this.signalRService = signalRService ?? throw new ArgumentNullException(nameof(signalRService));
-    }
-
+        ISignalRService signalRService)
+    : ConductMultipleFunctionsBase(authenticator, storage)
+{
     protected async Task<HttpResponseData> HandleAsync(
         HttpRequestData req,
         CancellationToken cancellationToken = default)
@@ -38,11 +27,11 @@ public abstract class ConductMultipleFunctionsForwardToStationBase : ConductMult
         return await this.HandleAsync(req, async (conduct, context) =>
         {
             await context.ValidateUserAssignedAsync(
-                this.entityService,
+                entityService,
                 conduct.EntityId ?? throw new ExpectedHttpException(HttpStatusCode.BadRequest, "EntityId is required"));
 
             // Retrieve all entity assigned entities
-            var entityUsers = (await this.storageDao.AssignedUsersAsync(
+            var entityUsers = (await storageDao.AssignedUsersAsync(
                 new[] { conduct.EntityId },
                 cancellationToken)).FirstOrDefault();
 
@@ -56,7 +45,7 @@ public abstract class ConductMultipleFunctionsForwardToStationBase : ConductMult
             foreach (var userId in usersConducts.Keys)
             {
                 var conducts = usersConducts[userId];
-                await this.signalRService.SendToUsersAsync(
+                await signalRService.SendToUsersAsync(
                     new[] {userId},
                     "conducts",
                     "requested-multiple",

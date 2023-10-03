@@ -14,19 +14,10 @@ using Signal.Core.Exceptions;
 
 namespace Signalco.Api.Public.Functions.Contacts;
 
-public class ContactMetadataFunction
+public class ContactMetadataFunction(
+    IFunctionAuthenticator functionAuthenticator,
+    IEntityService entityService)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly IEntityService entityService;
-
-    public ContactMetadataFunction(
-        IFunctionAuthenticator functionAuthenticator,
-        IEntityService entityService)
-    {
-        this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-    }
-
     [Function("Contact-Metadata")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ContactMetadataFunction>("Contact", Description = "Contact metadata.")]
@@ -37,7 +28,7 @@ public class ContactMetadataFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "contact/metadata")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest<ContactMetadataDto>(cancellationToken, this.functionAuthenticator, async context =>
+        await req.UserRequest<ContactMetadataDto>(cancellationToken, functionAuthenticator, async context =>
         {
             var payload = context.Payload;
             if (string.IsNullOrWhiteSpace(payload.ChannelName) ||
@@ -47,13 +38,13 @@ public class ContactMetadataFunction
                     HttpStatusCode.BadRequest,
                     "EntityId, ChannelName and ContactName properties are required.");
 
-            await context.ValidateUserAssignedAsync(this.entityService, payload.EntityId);
+            await context.ValidateUserAssignedAsync(entityService, payload.EntityId);
 
             var contactPointer = new ContactPointer(
                 payload.EntityId ?? throw new ArgumentException("Contact pointer requires entity identifier"),
                 payload.ChannelName ?? throw new ArgumentException("Contact pointer requires channel name"),
                 payload.ContactName ?? throw new ArgumentException("Contact pointer requires contact name"));
 
-            await this.entityService.ContactSetMetadataAsync(contactPointer, payload.Metadata, cancellationToken);
+            await entityService.ContactSetMetadataAsync(contactPointer, payload.Metadata, cancellationToken);
         });
 }
