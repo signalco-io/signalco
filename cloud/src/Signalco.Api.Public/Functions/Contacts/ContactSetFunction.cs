@@ -61,7 +61,7 @@ public class ContactSetFunction(
     [OpenApiJsonRequestBody<ContactSetDto>]
     [OpenApiResponseWithoutBody]
     [OpenApiResponseBadRequestValidation]
-    public async Task<HttpResponseData> Run(
+    public async Task<HttpResponseData> EntityRun(
         [HttpTrigger(AuthorizationLevel.Anonymous, "put", "post", Route = "entity/{id:guid}/contacts/{channelName}/{contactName}")]
         HttpRequestData req,
         string id,
