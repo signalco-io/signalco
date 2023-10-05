@@ -1,5 +1,5 @@
 import { type ResourceGroup } from '@pulumi/azure-native/resources';
-import { Component, ApplicationType, ComponentArgs } from '@pulumi/azure-native/insights';
+import { ComponentCurrentBillingFeature, Component, ApplicationType, type ComponentArgs } from '@pulumi/azure-native/insights';
 import type createLogWorkspace from './createLogWorkspace';
 
 export default function createAppInsights(
@@ -12,8 +12,18 @@ export default function createAppInsights(
         resourceGroupName: resourceGroup.name,
         applicationType: ApplicationType.Web,
         samplingPercentage: 0.1,
+        retentionInDays: 30,
         workspaceResourceId: logWorkspace.workspace.id,
         ...options,
+    });
+
+    new ComponentCurrentBillingFeature(`${namePrefix}-billing`, {
+        resourceGroupName: resourceGroup.name,
+        resourceName: component.name,
+        currentBillingFeatures: ['Basic'],
+        dataVolumeCap: {
+            cap: 1,
+        },
     });
 
     return {
