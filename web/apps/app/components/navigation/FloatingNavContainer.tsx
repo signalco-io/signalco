@@ -7,7 +7,7 @@ export function FloatingNavContainer({ children }: PropsWithChildren) {
             'absolute inset-x-0 top-0 p-1 md:inset-y-0 md:left-0 md:right-auto md:p-2',
             'animate-in slide-in-from-top-16 md:slide-in-from-top-0 md:slide-in-from-left-20'
         )}>
-            <div className="h-full rounded-2xl border border-neutral-300 shadow-md">
+            <div className="h-full rounded-2xl border border-border shadow-md">
                 {children}
             </div>
         </div>
