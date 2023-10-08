@@ -2,9 +2,13 @@ import { useMemo, useState } from 'react';
 import { objectWithKey } from '@signalco/js';
 
 export function filterFuncObjectStringProps<TItem extends object>(i: TItem, kw: string) {
+    const kwLower = kw.toLowerCase();
     return Object
         .keys(i)
-        .filter(ik => (objectWithKey(i, ik)?.ik?.toString().toLowerCase().indexOf(kw) ?? -1) >= 0)
+        .filter(ik => {
+            const val = objectWithKey(i, ik);
+            return val ? ((val[ik]?.toString().toLowerCase().indexOf(kwLower) ?? -1) >= 0) : false;
+        })
         .length > 0;
 }
 
