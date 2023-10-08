@@ -193,7 +193,7 @@ function UsageCurrent() {
                 <LabeledValue label="Calculated Daily" value={dailyCalculated} />
                 <LabeledValue label="Calculated Monthly" value={monthlyCalculated} />
             </Row>
-            <div style={{ height: 400 }}>
+            <div className="h-96">
                 <ResponsiveContainer width="100%" height="100%">
                     <DynamicGraph
                         data={predictedUsage}
@@ -238,6 +238,13 @@ function UsagePage() {
     )
 }
 
+type SettingsCategory = {
+    id: string;
+    label: string;
+    form?: FormItems;
+    component?: () => React.JSX.Element;
+}
+
 function SettingsPane() {
     const generalForm = useGeneralForm();
     const profileForm = useProfileForm();
@@ -245,7 +252,7 @@ function SettingsPane() {
     const timeLocationForm = useTimeLocationForm();
     const developerForm = useDeveloperForm();
 
-    const categories = [
+    const categories: SettingsCategory[] = [
         { id: 'general', label: 'General', form: generalForm },
         { id: 'lookAndFeel', label: 'Look and feel', form: lookAndFeelForm },
         { id: 'profile', label: 'Profile', form: profileForm },
@@ -254,7 +261,7 @@ function SettingsPane() {
         { id: 'developer', label: 'Developer', form: developerForm },
     ];
 
-    const [filteredItems, setFilteredItems] = useState(categories);
+    const [filteredItems, setFilteredItems] = useState<SettingsCategory[]>(categories);
     const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
     const handleFilteredItems = (updated: typeof categories) => {
@@ -263,11 +270,11 @@ function SettingsPane() {
     };
 
     return (
-        <Row alignItems="start" spacing={2} style={{ paddingTop: 16, paddingLeft: 16, paddingRight: 16 }}>
-            <Stack spacing={2} style={{ padding: 0 }}>
+        <Row alignItems="start" spacing={2} className="p-2">
+            <Stack spacing={2}>
                 <Typography level="h5">&nbsp;</Typography>
                 <SearchInput items={categories} onFilteredItems={handleFilteredItems} />
-                <Stack>
+                <Stack spacing={1}>
                     {filteredItems.map(category => (
                         <Checkbox
                             key={category.id}
