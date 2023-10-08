@@ -193,7 +193,7 @@ function UsageCurrent() {
                 <LabeledValue label="Calculated Daily" value={dailyCalculated} />
                 <LabeledValue label="Calculated Monthly" value={monthlyCalculated} />
             </Row>
-            <div className='h-96'>
+            <div className="h-96">
                 <ResponsiveContainer width="100%" height="100%">
                     <DynamicGraph
                         data={predictedUsage}
