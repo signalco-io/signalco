@@ -98,7 +98,7 @@ export default function Entities() {
     }), [filteredItems, selectedType]);
 
     const results = useMemo(() => (
-        <div style={{ paddingLeft: 8, paddingRight: 8 }}>
+        <div className="px-2">
             <div className={cx(
                 'grid auto-cols-max gap-1',
                 entityListViewType === 'table'
