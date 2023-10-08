@@ -19,7 +19,7 @@ export function Chip({ size, color, startDecorator, onClick, children, href }: C
         size === 'sm' && 'rounded-xl py-0.5 px-1.5 text-xs',
         (!size || size === 'md') && 'text-sm py-1 rounded-2xl px-3 px-2',
         size === 'lg' && 'rounded-3xl px-3 text-base py-1',
-        (!color || color === 'neutral') && 'border-neutral-400 text-neutral-700',
+        (!color || color === 'neutral') && 'border-border text-neutral-700',
         color === 'info' && 'bg-sky-300 text-sky-800 border-sky-400',
         color === 'warning' && 'bg-amber-300 text-amber-800 border-amber-300 border-amber-400',
         color === 'success' && 'bg-lime-300 text-lime-800 border-lime-400',

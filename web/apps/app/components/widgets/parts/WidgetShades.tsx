@@ -112,7 +112,7 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
                     <Divider orientation="vertical" />
                 </div>
             )}
-            <div className="grow rounded-r-lg border-l">
+            <div className="grow rounded-r-lg border-l border-border">
                 <Stack className="h-full">
                     <Button
                         className="grow"

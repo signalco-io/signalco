@@ -36,7 +36,7 @@ export function Card({ href, onClick, className, ...restProps }: CardProps) {
         <CardWrapper href={href} onClick={onClick}>
             <div
                 className={cx(
-                    'bg-card rounded-lg p-2 border text-card-foreground shadow-sm',
+                    'bg-card rounded-lg p-2 border border-border text-card-foreground shadow-sm',
                     className
                 )}
                 {...restProps} />
