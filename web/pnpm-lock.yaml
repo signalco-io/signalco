@@ -87,8 +87,8 @@ importers:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.31)
       classix:
-        specifier: 2.1.34
-        version: 2.1.34
+        specifier: 2.1.35
+        version: 2.1.35
       cobe:
         specifier: 0.6.3
         version: 0.6.3
@@ -295,8 +295,8 @@ importers:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.31)
       classix:
-        specifier: 2.1.34
-        version: 2.1.34
+        specifier: 2.1.35
+        version: 2.1.35
       encoding:
         specifier: 0.1.13
         version: 0.1.13
@@ -428,8 +428,8 @@ importers:
         specifier: 1.0.0-rc.12
         version: 1.0.0-rc.12
       classix:
-        specifier: 2.1.34
-        version: 2.1.34
+        specifier: 2.1.35
+        version: 2.1.35
       next:
         specifier: 13.5.4
         version: 13.5.4(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.0)
@@ -559,8 +559,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-icons
       classix:
-        specifier: 2.1.34
-        version: 2.1.34
+        specifier: 2.1.35
+        version: 2.1.35
       next:
         specifier: 13.5.4
         version: 13.5.4(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.0)
@@ -780,8 +780,8 @@ importers:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.31)
       classix:
-        specifier: 2.1.34
-        version: 2.1.34
+        specifier: 2.1.35
+        version: 2.1.35
       cobe:
         specifier: 0.6.3
         version: 0.6.3
@@ -1093,8 +1093,8 @@ importers:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.31)
       classix:
-        specifier: 2.1.34
-        version: 2.1.34
+        specifier: 2.1.35
+        version: 2.1.35
       concurrently:
         specifier: 8.2.1
         version: 8.2.1
@@ -8080,8 +8080,8 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /classix@2.1.34:
-    resolution: {integrity: sha512-t57nWxh6aS3y7cdikKSNQG09LErCCgbJo5dOvffo5AIUKnV8py6tsC159CvegA/82eY9fUMF+hdfjItLoSbeEw==}
+  /classix@2.1.35:
+    resolution: {integrity: sha512-YRI5UjBq9Aspfnj6ZyCobyeye3EDAanCpBWqXhNH9bVloKC6Ejnz+K4pWu/qMSaJRJEtLgmfvkIRk5zbQqj2PA==}
 
   /classnames@2.3.2:
     resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
