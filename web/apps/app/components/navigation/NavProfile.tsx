@@ -36,7 +36,7 @@ export default function NavProfile() {
 
     return (
         <FloatingNavContainer>
-            <div className="flex h-full min-h-[60px] flex-row items-center justify-between gap-1 sm:flex-col sm:justify-start md:pl-0 md:pt-2">
+            <div className="flex h-full min-h-[60px] flex-row items-center justify-between gap-3 sm:flex-col sm:justify-start md:pl-0 md:pt-2">
                 <Suspense>
                     <UserProfileAvatar />
                 </Suspense>
