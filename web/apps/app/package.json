@@ -38,7 +38,7 @@
         "@signalco/ui-icons": "workspace:*",
         "@tanstack/react-query": "4.36.1",
         "@tanstack/react-query-devtools": "4.36.1",
-        "@vercel/analytics": "1.1.0",
+        "@vercel/analytics": "1.1.1",
         "@vvo/tzdb": "6.108.0",
         "autoprefixer": "10.4.16",
         "classix": "2.1.35",
@@ -67,10 +67,10 @@
         "uuid": "9.0.1"
     },
     "devDependencies": {
-        "@axe-core/playwright": "4.7.3",
-        "@babel/core": "7.23.0",
+        "@axe-core/playwright": "4.8.0",
+        "@babel/core": "7.23.2",
         "@next/bundle-analyzer": "13.5.4",
-        "@playwright/test": "1.38.1",
+        "@playwright/test": "1.39.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@total-typescript/ts-reset": "0.5.1",
@@ -96,7 +96,7 @@
         "prop-types": "15.8.1",
         "react-is": "18.2.0",
         "rimraf": "5.0.5",
-        "sass": "1.69.2",
+        "sass": "1.69.3",
         "sass-loader": "13.3.2",
         "typescript": "5.2.2"
     },
