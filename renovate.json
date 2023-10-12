@@ -15,9 +15,11 @@
             "matchPackageNames": [
                 "@axe-core/playwright",
                 "@babel/core",
+                "@playwright/test",
                 "@rollup/plugin-commonjs",
                 "@rollup/plugin-json",
                 "@rollup/plugin-node-resolve",
+                "@vercel/analytics",
                 "@vitejs/plugin-react-swc",
                 "@vvo/tzdb",
                 "@types/node",
@@ -37,11 +39,9 @@
                 "eslint-import-resolver-typescript",
                 "lucide-react",
                 "pnpm",
-                "playwright",
                 "postcss",
                 "postcss-preset-env",
                 "postcss-loader",
-                "mcr.microsoft.com/playwright",
                 "rollup",
                 "rimraf",
                 "sass",
@@ -51,6 +51,8 @@
                 "typesript",
                 "vite",
                 "webpack",
+
+                "mcr.microsoft.com/playwright",
                 
                 "@pulumi/aws",
                 "@pulumi/azure-native",
