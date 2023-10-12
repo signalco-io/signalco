@@ -9,6 +9,8 @@ import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import NavProfile from '../navigation/NavProfile';
 import RealtimeService from '../../src/realtime/realtimeService';
 import { AuthWrapper } from './AuthWrapper';
+import { PageTitle } from '../navigation/PageTitle';
+import { Stack } from '@signalco/ui/dist/Stack';
 
 const queryClient = new QueryClient();
 
@@ -27,8 +29,13 @@ export function AppLayout(props: React.PropsWithChildren) {
                     {isFullScreen !== 'true' && (
                         <NavProfile />
                     )}
-                    <div className="relative mt-[72px] w-full grow overflow-hidden md:ml-[90px] md:mt-0">
-                        {children}
+                    <div className="relative mt-[72px] w-full grow overflow-hidden sm:ml-[90px] sm:mt-0">
+                        <Stack>
+                            <div className="hidden p-2 sm:block">
+                                <PageTitle fullPage />
+                            </div>
+                            {children}
+                        </Stack>
                     </div>
                 </div>
                 <ReactQueryDevtools initialIsOpen={false} />

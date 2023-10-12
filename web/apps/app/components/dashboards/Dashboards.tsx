@@ -18,7 +18,6 @@ import useDashboard from '../../src/hooks/dashboards/useDashboard';
 import { WidgetModel } from '../../src/dashboards/DashboardsRepository';
 import DashboardView from './DashboardView';
 import DashboardSettings from './DashboardSettings';
-import DashboardSelector from './DashboardSelector';
 
 const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 
@@ -26,11 +25,10 @@ function Dashboards() {
     const { t } = useLocale('App', 'Dashboards');
     const [selectedId, setDashboardId] = useSearchParam('dashboard');
     const selectedDashboard = useDashboard(selectedId);
-    const saveDashboard = useSaveDashboard();
 
-    const [isEditing, setIsEditing] = useState(false);
-    const [isSavingEdit, setIsSavingEdit] = useState(false);
-    const handleEditWidgets = useCallback(() => setIsEditing(true), []);
+    const saveDashboard = useSaveDashboard();
+    const [isEditingValue, setIsEditing] = useSearchParam('editing');
+    const isEditing = isEditingValue === 'true';
     const handleEditDone = async () => {
         if (!selectedDashboard.data) {
             console.warn('Can not save - dashboard not selected');
@@ -38,20 +36,18 @@ function Dashboards() {
         }
 
         try {
-            setIsSavingEdit(true);
             console.debug(`Saving dashboard ${selectedId}...`, selectedDashboard.data);
             await saveDashboard.mutateAsync(selectedDashboard.data);
         } catch (err) {
             console.error('Failed to save dashboards', err);
             showNotification(t('SaveFailedNotification'), 'error');
         } finally {
-            setIsEditing(false);
-            setIsSavingEdit(false);
+            setIsEditing(undefined);
         }
     };
 
     useEffect(() => {
-        setIsEditing(false);
+        setIsEditing(undefined);
     }, [selectedId]);
 
     const handleNewDashboard = async () => {
@@ -73,33 +69,30 @@ function Dashboards() {
     }, [selectedDashboard.data?.widgets]);
 
     const handleAddWidgetPlaceholder = () => {
-        setIsEditing(true);
+        setIsEditing('true');
         setShowWidgetStore(true);
     };
 
-    const [isDashboardSettingsOpen, setIsDashboardSettingsOpen] = useState<boolean>(false);
-    const handleSettings = useCallback(() => setIsDashboardSettingsOpen(true), []);
+    const [isDashboardSettingsOpenValue, setIsDashboardSettingsOpen] = useSearchParam('settings');
+    const isDashboardSettingsOpen = isDashboardSettingsOpenValue === 'true';
 
     console.debug('Rendering Dashboards');
 
     return (
         <>
-            <Stack spacing={1}>
-                <Row spacing={1} justifyContent="space-between" alignItems="stretch">
-                    <DashboardSelector
-                        onEditWidgets={handleEditWidgets}
-                        onSettings={handleSettings} />
-                    {isEditing && (
-                        <div className="xs:w-full px-2">
-                            <Row spacing={1}>
-                                <Button onClick={() => setShowWidgetStore(true)}>{t('AddWidget')}</Button>
-                                <Button loading={isSavingEdit} onClick={handleEditDone} fullWidth>{t('Save')}</Button>
-                            </Row>
-                        </div>
-                    )}
+            {isEditing && (
+                <Row>
+                    <div className="xs:w-full px-2">
+                        <Row spacing={1}>
+                            <Button onClick={() => setShowWidgetStore(true)}>{t('AddWidget')}</Button>
+                            <Button onClick={handleEditDone} fullWidth>{t('Save')}</Button>
+                        </Row>
+                    </div>
                 </Row>
+            )}
+            <Stack spacing={1}>
                 <Loadable isLoading={!!!selectedId || selectedDashboard.isLoading} loadingLabel="Loading dashboards" error={selectedDashboard.error}>
-                    <div className="px-2">
+                    <div className="px-2 sm:px-0">
                         {selectedId && selectedDashboard.data
                             ? (
                                 <DashboardView
@@ -125,7 +118,7 @@ function Dashboards() {
                 <DashboardSettings
                     dashboard={selectedDashboard.data}
                     isOpen={isDashboardSettingsOpen}
-                    onClose={() => setIsDashboardSettingsOpen(false)} />
+                    onClose={() => setIsDashboardSettingsOpen(undefined)} />
             )}
             {showWidgetStore && (
                 <ConfigurationDialog open={showWidgetStore} onClose={() => setShowWidgetStore(false)} header={t('AddWidget')}>

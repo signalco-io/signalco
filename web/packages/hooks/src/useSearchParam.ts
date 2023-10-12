@@ -1,21 +1,25 @@
 import { useCallback } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { StringOrUndefined } from '@signalco/js';
 
 export function useSearchParam<S extends string | undefined>(parameterName: string, defaultValue?: S): [StringOrUndefined<S>, (value: string | undefined) => Promise<void>] {
     const router = useRouter();
+    const pathname = usePathname();
     const searchParams = useSearchParams();
     const currentValue = searchParams.get(parameterName) ?? defaultValue;
 
     const setHashAsync = useCallback(async (value: string | undefined) => {
-        const newSearch = new URLSearchParams({ ...searchParams.entries });
+        const currentSearch = new URLSearchParams(Array.from(searchParams.entries()));
+
         if (value)
-            newSearch.set(parameterName, value);
-        else newSearch.delete(parameterName);
-        const newUrl = new URL(window.location.href);
-        newUrl.search = newSearch.toString();
-        router.replace(newUrl.toString());
-    }, [parameterName, router, searchParams]);
+            currentSearch.set(parameterName, value);
+        else currentSearch.delete(parameterName);
+
+        const search = currentSearch.toString();
+        const query = search ? `?${search}` : '';
+
+        router.replace(`${pathname}${query}`, undefined)
+    }, [parameterName, router, searchParams, pathname]);
 
     return [currentValue as StringOrUndefined<S>, setHashAsync];
 }

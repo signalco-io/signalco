@@ -25,7 +25,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
     // Set initial selection on component and dashboards load
     useEffect(() => {
         if (!selectedId && dashboards?.length) {
-            console.log('Selecting first available dashboard', dashboards[0].id);
+            console.debug('Selecting first available dashboard', dashboards[0].id);
             setSelectedId(dashboards[0].id);
         }
     }, [selectedId, dashboards, setSelectedId]);
