@@ -29,7 +29,7 @@ function ConfirmDeleteDialog(props: IConfirmDeleteDialogProps) {
                 <Input label={t('Confirm')} onChange={(e) => setConfirmText(e.target.value)} />
                 <Button
                     variant="solid"
-                    className="bg-red-700 hover:bg-red-700/90"
+                    className="bg-red-700 text-destructive-foreground hover:bg-red-700/90"
                     disabled={confirmText !== expectedConfirmText}
                     onClick={onConfirm}>
                     {`${t('ConfirmDeleteButton')} "${expectedConfirmText}"`}

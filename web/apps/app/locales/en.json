@@ -57,7 +57,9 @@
             "EditContact": "Edit",
             "DeleteContact": "Delete...",
             "ContactDisablePersistHistory": "Disable history",
-            "ContactEnablePersistHistory": "Enable history"
+            "ContactEnablePersistHistory": "Enable history",
+            "ContactDisableProcessSameValue": "Disable processing same value",
+            "ContactEnableProcessSameValue": "Enable processing same value"
         },
         "Processes": {
             "name": "Name",
