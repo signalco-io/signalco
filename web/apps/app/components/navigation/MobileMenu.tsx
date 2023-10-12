@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { cx } from 'classix';
 import { Tooltip } from '@signalco/ui/dist/Tooltip';
