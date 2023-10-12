@@ -56,6 +56,7 @@ export {
     Copy,
     Check,
     CircleSlashed as Disabled,
+    CircleEqual,
     Meh as SmileMeh,
     Smile as SmileHappy,
     Laugh as SmileVeryHappy,
