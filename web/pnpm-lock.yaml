@@ -41,6 +41,9 @@ importers:
       '@enterwell/react-form-validation':
         specifier: 1.2.8
         version: 1.2.8(react-dom@18.2.0)(react@18.2.0)
+      '@enterwell/react-hooks':
+        specifier: 0.3.0
+        version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
         specifier: 1.8.1
         version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
@@ -161,7 +164,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.0
-        version: 4.8.0(playwright-core@1.38.1)
+        version: 4.8.0(playwright-core@1.39.0)
       '@babel/core':
         specifier: 7.23.2
         version: 7.23.2
@@ -336,7 +339,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.0
-        version: 4.8.0(playwright-core@1.38.1)
+        version: 4.8.0(playwright-core@1.39.0)
       '@babel/core':
         specifier: 7.23.2
         version: 7.23.2
@@ -451,7 +454,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.0
-        version: 4.8.0(playwright-core@1.38.1)
+        version: 4.8.0(playwright-core@1.39.0)
       '@babel/core':
         specifier: 7.23.2
         version: 7.23.2
@@ -591,7 +594,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.0
-        version: 4.8.0(playwright-core@1.38.1)
+        version: 4.8.0(playwright-core@1.39.0)
       '@babel/core':
         specifier: 7.23.2
         version: 7.23.2
@@ -824,7 +827,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.0
-        version: 4.8.0(playwright-core@1.38.1)
+        version: 4.8.0(playwright-core@1.39.0)
       '@babel/core':
         specifier: 7.23.2
         version: 7.23.2
@@ -1197,13 +1200,13 @@ packages:
       default-browser-id: 3.0.0
     dev: true
 
-  /@axe-core/playwright@4.8.0(playwright-core@1.38.1):
+  /@axe-core/playwright@4.8.0(playwright-core@1.39.0):
     resolution: {integrity: sha512-Pf/pkFrJ0PkBvZdDS57SgOT6/TRGPlmh8QJOmm/zpQfQPnfwHfP0LrpqueVhjhvKYD63M7NyLnj0G4Vo3kOaiA==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
     dependencies:
       axe-core: 4.8.2
-      playwright-core: 1.38.1
+      playwright-core: 1.39.0
     dev: true
 
   /@babel/code-frame@7.22.13:
@@ -3034,6 +3037,16 @@ packages:
     peerDependencies:
       react: ^16.13.1 || ^17 || ^18
       react-dom: ^16.13.1 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@enterwell/react-hooks@0.3.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-8cAby2jRJm0J5zfO+3h9ga7/aTOOaRUSB85Ub74Rj79d16KrJpOesxrKvgZ6wl993XJo4T/rMm7cB7AuSVcyNA==}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -12881,12 +12894,6 @@ packages:
     engines: {node: '>=14.16'}
     dependencies:
       find-up: 6.3.0
-    dev: true
-
-  /playwright-core@1.38.1:
-    resolution: {integrity: sha512-tQqNFUKa3OfMf4b2jQ7aGLB8o9bS3bOY0yMEtldtC2+spf8QXG9zvXLTXUeRsoNuxEYMgLYR+NXfAa1rjKRcrg==}
-    engines: {node: '>=16'}
-    hasBin: true
     dev: true
 
   /playwright-core@1.39.0:
