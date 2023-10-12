@@ -9,8 +9,9 @@ export function MobileMenu({ open, items, active, onClose }: { open: boolean; it
 
     return (
         <div className={cx(
-            'fixed inset-0 top-[60px] z-50 bg-white',
-            !open && 'hidden'
+            'pt-2',
+            !open && 'hidden',
+            open && 'animate-in slide-in-from-top-3'
         )}>
             <Stack>
                 {items.map((ni, index) => (

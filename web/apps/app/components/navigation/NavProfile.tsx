@@ -60,13 +60,13 @@ export default function NavProfile() {
                         aria-label="Toggle menu">
                         {mobileMenuOpen ? <Close /> : <MenuIcon />}
                     </IconButton>
-                    <MobileMenu
-                        open={mobileMenuOpen}
-                        items={visibleNavItems}
-                        active={activeNavItem}
-                        onClose={() => setMobileMenuOpen(false)} />
                 </div>
             </div>
+            <MobileMenu
+                open={mobileMenuOpen}
+                items={visibleNavItems}
+                active={activeNavItem}
+                onClose={() => setMobileMenuOpen(false)} />
         </FloatingNavContainer>
     );
 }
