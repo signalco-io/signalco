@@ -78,8 +78,8 @@ importers:
         specifier: 4.36.1
         version: 4.36.1(@tanstack/react-query@4.36.1)(react-dom@18.2.0)(react@18.2.0)
       '@vercel/analytics':
-        specifier: 1.1.0
-        version: 1.1.0
+        specifier: 1.1.1
+        version: 1.1.1
       '@vvo/tzdb':
         specifier: 6.108.0
         version: 6.108.0
@@ -169,8 +169,8 @@ importers:
         specifier: 13.5.4
         version: 13.5.4
       '@playwright/test':
-        specifier: 1.38.1
-        version: 1.38.1
+        specifier: 1.39.0
+        version: 1.39.0
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -289,8 +289,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-icons
       '@vercel/analytics':
-        specifier: 1.1.0
-        version: 1.1.0
+        specifier: 1.1.1
+        version: 1.1.1
       autoprefixer:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.31)
@@ -344,8 +344,8 @@ importers:
         specifier: 13.5.4
         version: 13.5.4
       '@playwright/test':
-        specifier: 1.38.1
-        version: 1.38.1
+        specifier: 1.39.0
+        version: 1.39.0
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -459,8 +459,8 @@ importers:
         specifier: 13.5.4
         version: 13.5.4
       '@playwright/test':
-        specifier: 1.38.1
-        version: 1.38.1
+        specifier: 1.39.0
+        version: 1.39.0
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -599,8 +599,8 @@ importers:
         specifier: 13.5.4
         version: 13.5.4
       '@playwright/test':
-        specifier: 1.38.1
-        version: 1.38.1
+        specifier: 1.39.0
+        version: 1.39.0
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -774,8 +774,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-icons
       '@vercel/analytics':
-        specifier: 1.1.0
-        version: 1.1.0
+        specifier: 1.1.1
+        version: 1.1.1
       autoprefixer:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.31)
@@ -832,8 +832,8 @@ importers:
         specifier: 13.5.4
         version: 13.5.4
       '@playwright/test':
-        specifier: 1.38.1
-        version: 1.38.1
+        specifier: 1.39.0
+        version: 1.39.0
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -4104,12 +4104,12 @@ packages:
     dev: true
     optional: true
 
-  /@playwright/test@1.38.1:
-    resolution: {integrity: sha512-NqRp8XMwj3AK+zKLbZShl0r/9wKgzqI/527bkptKXomtuo+dOjU9NdMASQ8DNC9z9zLOMbG53T4eihYr3XR+BQ==}
+  /@playwright/test@1.39.0:
+    resolution: {integrity: sha512-3u1iFqgzl7zr004bGPYiN/5EZpRUSFddQBra8Rqll5N0/vfpqlP9I9EXqAoGacuAbX6c9Ulg/Cjqglp5VkK6UQ==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      playwright: 1.38.1
+      playwright: 1.39.0
     dev: true
 
   /@pmmmwh/react-refresh-webpack-plugin@0.5.10(react-refresh@0.11.0)(webpack@5.88.2):
@@ -7046,8 +7046,8 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: false
 
-  /@vercel/analytics@1.1.0:
-    resolution: {integrity: sha512-k5ePYZPxitxxD1eJenPUUuH3qK+EtaA9OVD3oO0BRbyT/LarmZF0qdkptRSidip1arQxsTEIWvHbTuj1oksl+Q==}
+  /@vercel/analytics@1.1.1:
+    resolution: {integrity: sha512-+NqgNmSabg3IFfxYhrWCfB/H+RCUOCR5ExRudNG2+pcRehq628DJB5e1u1xqwpLtn4pAYii4D98w7kofORAGQA==}
     dependencies:
       server-only: 0.0.1
     dev: false
@@ -12889,12 +12889,18 @@ packages:
     hasBin: true
     dev: true
 
-  /playwright@1.38.1:
-    resolution: {integrity: sha512-oRMSJmZrOu1FP5iu3UrCx8JEFRIMxLDM0c/3o4bpzU5Tz97BypefWf7TuTNPWeCe279TPal5RtPPZ+9lW/Qkow==}
+  /playwright-core@1.39.0:
+    resolution: {integrity: sha512-+k4pdZgs1qiM+OUkSjx96YiKsXsmb59evFoqv8SKO067qBA+Z2s/dCzJij/ZhdQcs2zlTAgRKfeiiLm8PQ2qvw==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dev: true
+
+  /playwright@1.39.0:
+    resolution: {integrity: sha512-naE5QT11uC/Oiq0BwZ50gDmy8c8WLPRTEWuSSFVG2egBka/1qMoSqYQcROMT9zLwJ86oPofcTH2jBY/5wWOgIw==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      playwright-core: 1.38.1
+      playwright-core: 1.39.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
