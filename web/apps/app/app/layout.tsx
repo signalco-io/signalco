@@ -24,9 +24,9 @@ export const metadata = {
     title: 'Signalco',
     description: 'Automate your life',
     themeColor: [
-        { media: '(prefers-color-scheme: light)', color: 'white' },
-        { media: '(prefers-color-scheme: dark)', color: 'black' },
-        { color: 'black' },
+        { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+        { media: '(prefers-color-scheme: dark)', color: '#000000' },
+        { color: '#000000' },
     ],
     manifest: '/manifest.json',
     icons: {
