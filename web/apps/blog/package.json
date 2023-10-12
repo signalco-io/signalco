@@ -27,7 +27,7 @@
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
-        "@vercel/analytics": "1.1.0",
+        "@vercel/analytics": "1.1.1",
         "autoprefixer": "10.4.16",
         "classix": "2.1.35",
         "encoding": "0.1.13",
