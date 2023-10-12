@@ -15,6 +15,9 @@
             "matchPackageNames": [
                 "@axe-core/playwright",
                 "@babel/core",
+                "@enterwell/react-hooks",
+                "@enterwell/react-form-builder",
+                "@enterwell/react-form-validation",
                 "@playwright/test",
                 "@rollup/plugin-commonjs",
                 "@rollup/plugin-json",

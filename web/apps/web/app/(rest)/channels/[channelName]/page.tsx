@@ -21,7 +21,7 @@ type ChannelFaqItem = {
 
 const channelFaq: ChannelFaqItem[] = [
     { id: 'channel', question: 'What is Channel?', answer: 'Channel is Entity that contains all information required for connected online service, application or device. Channels can execute actions directly or contain connected entities to manage.' },
-    { id: 'entities', question: 'What are Entities?', answer: 'Entity is a thing you want to automate in signalco. This can be is online service connected to signalco, smart device, your custom dashboard, automation process, etc.' },
+    { id: 'entities', question: 'What are Entities?', answer: 'Entity is a thing you want to automate in signalco. This can be is online service connected to signalco, smart device, your custom space, automation process, etc.' },
     { id: 'executions', question: 'What are Executions?', answer: 'Execution is when one of your automation processes executes one action.' },
 ];
 

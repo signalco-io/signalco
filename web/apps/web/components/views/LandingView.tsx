@@ -71,7 +71,7 @@ export default function LandingPageView() {
                     content="Access all features wherever you are. Controlling devices in your home from other side of the world or room&nbsp;:) has never been simpler." />
                 <FeatureDescription
                     header="Share"
-                    content="Share devices, media, dashboards, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
+                    content="Share devices, media, spaces, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
                 <FeatureDescription
                     header="Relax"
                     content="Enjoy the automated life. Use gained free time doing what you love. Relax in nature, hobbies, family... or automate one more thing." />
