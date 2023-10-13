@@ -44,7 +44,7 @@ export function PageTitle({ fullPage = false }: { fullPage?: boolean }) {
                     <Icon />
                 )
             )}
-            <Typography>{activeNavItem?.label}</Typography>
+            <Typography level={fullPage ? 'h4' : 'h6'}>{activeNavItem?.label}</Typography>
         </Row>
     );
 }

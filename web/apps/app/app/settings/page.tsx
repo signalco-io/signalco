@@ -9,10 +9,10 @@ import { Stack } from '@signalco/ui/dist/Stack';
 import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Row } from '@signalco/ui/dist/Row';
 import { Loadable } from '@signalco/ui/dist/Loadable';
+import { FilterList } from '@signalco/ui/dist/FilterList';
 import { Divider } from '@signalco/ui/dist/Divider';
 import { Container } from '@signalco/ui/dist/Container';
-import { Checkbox } from '@signalco/ui/dist/Checkbox';
-import { arraySum, humanizeNumber, sequenceEqual, objectWithKey } from '@signalco/js';
+import { arraySum, humanizeNumber, objectWithKey } from '@signalco/js';
 import { isNonEmptyString, isNotNull, noError } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
 import { FormBuilder, FormBuilderProvider, FormItems, useFormField } from '@enterwell/react-form-builder';
@@ -21,7 +21,6 @@ import { ApiDevelopmentUrl, ApiProductionUrl, setSignalcoApiEndpoint, signalcoAp
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale, { availableLocales } from '../../src/hooks/useLocale';
 import useAllEntities from '../../src/hooks/signalco/entity/useAllEntities';
-import SearchInput from '../../components/shared/inputs/SearchInput';
 import AppThemePicker from '../../components/settings/AppThemePicker';
 import LocationMapPicker from '../../components/forms/LocationMapPicker/LocationMapPicker';
 import generalFormComponents from '../../components/forms/generalFormComponents';
@@ -40,10 +39,12 @@ function SettingsItem(props: { children: ReactNode, label?: string | undefined }
     );
 }
 
-function SelectTimeZone({ onChange, value }: ComponentProps<FormBuilderComponent>) {
+function SelectTimeFormat({ value, label, onChange }: ComponentProps<FormBuilderComponent>) {
     const { t } = useLocale('App', 'Settings');
     return (
-        <SelectItems value={value}
+        <SelectItems
+            label={label}
+            value={value}
             onValueChange={onChange}
             items={[
                 { value: '0', label: t('TimeFormat12Hour') },
@@ -65,6 +66,7 @@ function SelectLanguage({ value, label, onChange }: ComponentProps<FormBuilderCo
 
 const settingsFormComponents: FormBuilderComponents = {
     fieldWrapper: (props) => <SettingsItem {...props} />,
+    wrapper: (props) => <Stack spacing={1} {...props} />,
     selectApiEndpoint: ({ value, onChange, label }) => (
         <SelectItems value={value}
             onValueChange={(v) => onChange(v)}
@@ -90,7 +92,7 @@ const settingsFormComponents: FormBuilderComponents = {
             ]}
             label={label} />
     ),
-    selectTimeFormat: (props) => <SelectTimeZone {...props} />,
+    selectTimeFormat: (props) => <SelectTimeFormat {...props} />,
     selectTimeZone: ({ value, onChange, label }) => {
         const timeZones = getTimeZones();
         return (
@@ -261,42 +263,26 @@ function SettingsPane() {
         { id: 'developer', label: 'Developer', form: developerForm },
     ];
 
-    const [filteredItems, setFilteredItems] = useState<SettingsCategory[]>(categories);
-    const [selectedCategory, setSelectedCategory] = useState(categories[0]);
-
-    const handleFilteredItems = (updated: typeof categories) => {
-        if (!sequenceEqual(updated, filteredItems))
-            setFilteredItems(updated);
-    };
+    const [selectedCategoryId, setSelectedCategoryId] = useState<string | undefined>(categories[0].id);
+    const selectedCategory = categories.find(c => c.id === selectedCategoryId) ?? categories[0];
 
     return (
-        <Row alignItems="start" spacing={2} className="p-2">
-            <Stack spacing={2}>
-                <Typography level="h5">&nbsp;</Typography>
-                <SearchInput items={categories} onFilteredItems={handleFilteredItems} />
-                <Stack spacing={1}>
-                    {filteredItems.map(category => (
-                        <Checkbox
-                            key={category.id}
-                            label={category.label}
-                            checked={selectedCategory.id === category.id}
-                            onCheckedChange={(checked) => checked === true && setSelectedCategory(category)}
-                            disableIcon />
-                    ))}
-                </Stack>
-            </Stack>
-            <Container maxWidth="md">
+        <div className="flex flex-col gap-4 px-2 sm:flex-row">
+            <FilterList selected={selectedCategory.id} items={categories} onSelected={setSelectedCategoryId} variant="highlight" />
+            <Container maxWidth="md" padded={false}>
                 <Stack spacing={2}>
-                    <Typography level="h4">{selectedCategory.label}</Typography>
-                    {selectedCategory.form && (
-                        <FormBuilderProvider components={components}>
-                            <FormBuilder form={selectedCategory.form} />
-                        </FormBuilderProvider>
-                    )}
-                    {selectedCategory.component && <selectedCategory.component />}
+                    <Typography className="hidden sm:block" level="h4">{selectedCategory.label}</Typography>
+                    <div>
+                        {selectedCategory.form && (
+                            <FormBuilderProvider components={components}>
+                                <FormBuilder form={selectedCategory.form} />
+                            </FormBuilderProvider>
+                        )}
+                        {selectedCategory.component && <selectedCategory.component />}
+                    </div>
                 </Stack>
             </Container>
-        </Row>
+        </div>
     )
 }
 

@@ -35,7 +35,7 @@ export function SelectItems(props: SelectItemsProps) {
     const id = `select-field-${label ?? placeholder}-${uid}`;
 
     return (
-        <Stack spacing={1} {...rest}>
+        <Stack {...rest}>
             {label && <label className="text-sm font-medium">{label}</label>}
             <SelectPrimitive.Root value={value} onValueChange={onValueChange}>
                 <SelectPrimitive.Trigger

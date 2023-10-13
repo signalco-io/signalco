@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import cx from 'classix';
+import { cx } from 'classix';
 import { Add, Code, Delete, Edit, MoreVertical, UI, History, CircleEqual } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Timeago } from '@signalco/ui/dist/Timeago';
@@ -22,10 +22,12 @@ import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
 import CodeEditor from '../../code/CodeEditor';
 import ChannelLogo from '../../channels/ChannelLogo';
 import useLocale from '../../../src/hooks/useLocale';
+import useSetMetadataContact from '../../../src/hooks/signalco/useSetMetadataContact';
+import useSetContact from '../../../src/hooks/signalco/useSetContact';
+import useDeleteContact from '../../../src/hooks/signalco/useDeleteContact';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import IContact, { ContactMetadataV1 } from '../../../src/contacts/IContact';
-import { deleteContactAsync, setAsync, setMetadataAsync } from '../../../src/contacts/ContactRepository';
 
 type DisplayJsonProps = {
     json: string | undefined;
@@ -75,14 +77,20 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
     const [editingContact, setEditingContact] = useState<IContactPointer | undefined>(undefined);
     const [deletingContact, setDeletingContact] = useState<IContactPointer | undefined>(undefined);
     const [valueSerialized, setValueSerialized] = useState('');
+    const deleteContact = useDeleteContact();
+    const setContact = useSetContact();
+    const setMetadataContact = useSetMetadataContact();
 
     const handleCreateSubmit = async () => {
         if (entity) {
-            await setAsync({
-                entityId: entity.id,
-                channelName,
-                contactName
-            }, undefined);
+            await setContact.mutateAsync({
+                pointer: {
+                    entityId: entity.id,
+                    channelName,
+                    contactName
+                },
+                valueSerialized: undefined
+            });
         }
         setCreateContactDialogOpen(false);
     };
@@ -91,11 +99,14 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
             if (!editingContact)
                 throw new Error('Requested contact not found');
 
-            await setAsync({
-                entityId: entity.id,
-                channelName: editingContact.channelName,
-                contactName: editingContact.contactName
-            }, valueSerialized);
+            await setContact.mutateAsync({
+                pointer: {
+                    entityId: entity.id,
+                    channelName: editingContact.channelName,
+                    contactName: editingContact.contactName
+                },
+                valueSerialized
+            });
         }
         setEditingContactDialogOpen(false);
     };
@@ -104,7 +115,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
             if (!deletingContact)
                 throw new Error('Requested contact not found');
 
-            await deleteContactAsync({
+            await deleteContact.mutateAsync({
                 entityId: entity.id,
                 channelName: deletingContact.channelName,
                 contactName: deletingContact.contactName
@@ -115,29 +126,35 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
 
     const handleToggleContactHistory = async (contact: IContact) => {
         if (entity && contact) {
-            await setMetadataAsync({
-                entityId: entity.id,
-                channelName: contact.channelName,
-                contactName: contact.contactName
-            }, JSON.stringify({
-                ...contact.metadata,
-                Version: contact.metadata?.Version ?? 1,
-                PersistHistory: !contact.metadata?.PersistHistory
-            } satisfies ContactMetadataV1))
+            await setMetadataContact.mutateAsync({
+                pointer: {
+                    entityId: entity.id,
+                    channelName: contact.channelName,
+                    contactName: contact.contactName
+                },
+                metadataSerialized: JSON.stringify({
+                    ...contact.metadata,
+                    Version: contact.metadata?.Version ?? 1,
+                    PersistHistory: !contact.metadata?.PersistHistory
+                } satisfies ContactMetadataV1)
+            })
         }
     };
 
     const handleToggleContactProcessSameValue = async (contact: IContact) => {
         if (entity && contact) {
-            await setMetadataAsync({
-                entityId: entity.id,
-                channelName: contact.channelName,
-                contactName: contact.contactName
-            }, JSON.stringify({
-                ...contact.metadata,
-                Version: contact.metadata?.Version ?? 1,
-                ProcessSameValue: !contact.metadata?.ProcessSameValue
-            } satisfies ContactMetadataV1))
+            await setMetadataContact.mutateAsync({
+                pointer: {
+                    entityId: entity.id,
+                    channelName: contact.channelName,
+                    contactName: contact.contactName
+                },
+                metadataSerialized: JSON.stringify({
+                    ...contact.metadata,
+                    Version: contact.metadata?.Version ?? 1,
+                    ProcessSameValue: !contact.metadata?.ProcessSameValue
+                } satisfies ContactMetadataV1)
+            });
         }
     };
 
