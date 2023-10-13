@@ -14,27 +14,24 @@ using Signal.Core.Storage;
 
 namespace Signal.Core.Entities;
 
-internal class EntityService : IEntityService
+internal class EntityService(
+    ISharingService sharingService,
+    IAzureStorageDao storageDao,
+    IAzureStorage storage,
+    IProcessManager processManager,
+    ISignalRService signalRService) : IEntityService
 {
-    private readonly ISharingService sharingService;
-    private readonly IAzureStorageDao storageDao;
-    private readonly IAzureStorage storage;
-    private readonly IProcessManager processManager;
-    private readonly ISignalRService signalRService;
+    private readonly ISharingService sharingService =
+        sharingService ?? throw new ArgumentNullException(nameof(sharingService));
 
-    public EntityService(
-        ISharingService sharingService,
-        IAzureStorageDao storageDao,
-        IAzureStorage storage,
-        IProcessManager processManager,
-        ISignalRService signalRService)
-    {
-        this.sharingService = sharingService ?? throw new ArgumentNullException(nameof(sharingService));
-        this.storageDao = storageDao ?? throw new ArgumentNullException(nameof(storageDao));
-        this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
-        this.processManager = processManager ?? throw new ArgumentNullException(nameof(processManager));
-        this.signalRService = signalRService ?? throw new ArgumentNullException(nameof(signalRService));
-    }
+    private readonly IAzureStorageDao storageDao = storageDao ?? throw new ArgumentNullException(nameof(storageDao));
+    private readonly IAzureStorage storage = storage ?? throw new ArgumentNullException(nameof(storage));
+
+    private readonly IProcessManager processManager =
+        processManager ?? throw new ArgumentNullException(nameof(processManager));
+
+    private readonly ISignalRService signalRService =
+        signalRService ?? throw new ArgumentNullException(nameof(signalRService));
 
     public async Task<IReadOnlyDictionary<string, IEnumerable<string>>> EntityUsersAsync(
         IEnumerable<string> entityIds,
@@ -45,18 +42,19 @@ internal class EntityService : IEntityService
             cancellationToken);
 
     public async Task<IEnumerable<IEntity>> AllAsync(
-        string userId, 
-        IEnumerable<EntityType>? types = null, 
+        string userId,
+        IEnumerable<EntityType>? types = null,
         CancellationToken cancellationToken = default) =>
         await this.storageDao.UserEntitiesAsync(userId, types, cancellationToken);
 
     public async Task<IEnumerable<IEntityDetailed>> AllDetailedAsync(
-        string userId, 
-        IEnumerable<EntityType>? types = null, 
+        string userId,
+        IEnumerable<EntityType>? types = null,
         CancellationToken cancellationToken = default) =>
         await this.storageDao.UserEntitiesDetailedAsync(userId, types, cancellationToken);
 
-    public async Task<IEntityDetailed?> GetDetailedAsync(string userId, string entityId, CancellationToken cancellationToken = default)
+    public async Task<IEntityDetailed?> GetDetailedAsync(string userId, string entityId,
+        CancellationToken cancellationToken = default)
     {
         var assignedTask = this.IsUserAssignedAsync(userId, entityId, cancellationToken);
         var getTask = this.storageDao.GetDetailedAsync(entityId, cancellationToken);
@@ -65,10 +63,11 @@ internal class EntityService : IEntityService
         return !assignedTask.Result ? null : getTask.Result;
     }
 
-    public async Task<IEntity?> GetInternalAsync(string entityId, CancellationToken cancellationToken = default) => 
+    public async Task<IEntity?> GetInternalAsync(string entityId, CancellationToken cancellationToken = default) =>
         await this.storageDao.GetAsync(entityId, cancellationToken);
 
-    public async Task<string> UpsertAsync(string userId, string? entityId, Func<string, IEntity> entityFunc, CancellationToken cancellationToken = default)
+    public async Task<string> UpsertAsync(string userId, string? entityId, Func<string, IEntity> entityFunc,
+        CancellationToken cancellationToken = default)
     {
         // Check if existing entity was requested but not assigned
         var exists = false;
@@ -100,18 +99,20 @@ internal class EntityService : IEntityService
         return id;
     }
 
-    public async Task<IContact?> ContactAsync(IContactPointer pointer, CancellationToken cancellationToken = default) => 
+    public async Task<IContact?> ContactAsync(IContactPointer pointer, CancellationToken cancellationToken = default) =>
         await this.storageDao.ContactAsync(pointer, cancellationToken);
 
-    public async Task<IEnumerable<IContact>?> ContactsAsync(string entityId, CancellationToken cancellationToken = default) => 
+    public async Task<IEnumerable<IContact>?> ContactsAsync(string entityId,
+        CancellationToken cancellationToken = default) =>
         await this.storageDao.ContactsAsync(entityId, cancellationToken);
 
     public async Task<IEnumerable<IContact?>> ContactsAsync(
-        IEnumerable<IContactPointer> pointers, 
+        IEnumerable<IContactPointer> pointers,
         CancellationToken cancellationToken = default) =>
         await Task.WhenAll(pointers.Select(p => this.ContactAsync(p, cancellationToken)));
 
-    public async Task<IEnumerable<IContact>?> ContactsAsync(IEnumerable<string> entityIds, CancellationToken cancellationToken = default) => 
+    public async Task<IEnumerable<IContact>?> ContactsAsync(IEnumerable<string> entityIds,
+        CancellationToken cancellationToken = default) =>
         await this.storageDao.ContactsAsync(entityIds, cancellationToken);
 
     public async Task ContactSetMetadataAsync(
@@ -202,7 +203,7 @@ internal class EntityService : IEntityService
 
             // Processing
             var queueStateProcessingTask = Task.CompletedTask;
-            if (!doNotProcess) 
+            if (!doNotProcess)
                 queueStateProcessingTask = this.processManager.AddAsync(pointer, cancellationToken);
 
             // Caching
@@ -218,6 +219,23 @@ internal class EntityService : IEntityService
         {
             // TODO: Log
         }
+    }
+
+    public async Task ContactDeleteAsync(
+        string userId, 
+        IContactPointer pointer,
+        CancellationToken cancellationToken = default)
+    {
+        // Validate assignment
+        if (!(await this.IsUserAssignedAsync(userId, pointer.EntityId, cancellationToken)))
+            throw new ExpectedHttpException(HttpStatusCode.NotFound);
+
+        // TODO: Check if user is owner
+
+        // TODO: Delete contact history
+
+        // Delete contact
+        await this.storage.RemoveAsync(pointer, cancellationToken);
     }
 
     private async Task CacheEntityAsync(IContactPointer pointer, CancellationToken cancellationToken = default)
@@ -241,15 +259,34 @@ internal class EntityService : IEntityService
             throw new ExpectedHttpException(HttpStatusCode.NotFound);
 
         // TODO: Check if user is owner (only owner can delete entity)
-        // TODO: Remove assignments for all users (since entity doesn't exist anymore)
-        // TODO: Remove all contact history
-        // TODO: Remove all contact
+
+        // Remove assignments for all users (since entity doesn't exist anymore)
+        var entityUsers = (await this.storageDao.AssignedUsersAsync(new[] {entityId}, cancellationToken))[entityId];
+        var assignmentsDeleteTask = Task.WhenAll(entityUsers.Select(u =>
+            this.sharingService.UnAssignFromUserAsync(u, entityId, cancellationToken)));
+
+        // Remove all contacts
+        Task? contactsDeleteTask = null;
+        var contacts = await this.storageDao.ContactsAsync(entityId, cancellationToken);
+        if (contacts != null)
+        {
+            contactsDeleteTask = Task.WhenAll(contacts.Select(c =>
+                this.ContactDeleteAsync(
+                    userId,
+                    new ContactPointer(entityId, c.ChannelName, c.ContactName),
+                    cancellationToken)));
+        }
+
+        // Wait for all to finish
+        await Task.WhenAll(
+            contactsDeleteTask ?? Task.CompletedTask,
+            assignmentsDeleteTask);
 
         // Remove entity
         await this.storage.RemoveEntityAsync(entityId, cancellationToken);
     }
 
-    public Task<bool> IsUserAssignedAsync(string userId, string id, CancellationToken cancellationToken = default) => 
+    public Task<bool> IsUserAssignedAsync(string userId, string id, CancellationToken cancellationToken = default) =>
         this.storageDao.IsUserAssignedAsync(userId, id, cancellationToken);
 
     public async Task BroadcastToEntityUsersAsync(
@@ -259,7 +296,7 @@ internal class EntityService : IEntityService
         object[] arguments,
         CancellationToken cancellationToken = default)
     {
-        var entityUsers = await this.EntityUsersAsync(new[] { entityId }, cancellationToken);
+        var entityUsers = await this.EntityUsersAsync(new[] {entityId}, cancellationToken);
         await this.signalRService.SendToUsersAsync(
             entityUsers[entityId].ToList(),
             hubName,

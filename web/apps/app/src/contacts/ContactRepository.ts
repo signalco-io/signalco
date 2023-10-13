@@ -16,22 +16,24 @@ interface ContactHistoryResponseDto {
     values: TimeStampValuePairDto[]
 }
 
-export async function setAsync(pointer: IContactPointer, valueSerialized: string | undefined, timeStamp?: Date | undefined) {
-    await requestAsync('/contact/set', 'post', {
+export async function setMetadataAsync(pointer: IContactPointer, metadataSerialized: string | undefined) {
+    await requestAsync('/contact/metadata', 'post', {
         entityId: pointer.entityId,
         contactName: pointer.contactName,
         channelName: pointer.channelName,
+        metadata: metadataSerialized
+    });
+}
+
+export async function setAsync(pointer: IContactPointer, valueSerialized: string | undefined, timeStamp?: Date | undefined) {
+    await requestAsync(`/entity/${pointer.entityId}/contacts/${pointer.channelName}/${pointer.contactName}`, 'put', {
         valueSerialized: valueSerialized,
         timeStamp: timeStamp?.toISOString()
     });
 }
 
 export async function deleteContactAsync(pointer: IContactPointer) {
-    await requestAsync('/contact', 'delete', {
-        entityId: pointer.entityId,
-        contactName: pointer.contactName,
-        channelName: pointer.channelName
-    });
+    await requestAsync(`/entity/${pointer.entityId}/contacts/${pointer.channelName}/${pointer.contactName}`, 'delete');
 }
 
 export async function historiesAsync(targets: IContactPointer[] | undefined, duration: number) {

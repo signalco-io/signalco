@@ -19,7 +19,7 @@ export default function NavLink({ path, Icon, active, label, onClick }: NavLinkP
         <Tooltip title={label}>
             <Link href={path}>
                 <IconButton
-                    className={cx(styles.root, active && styles.active)}
+                    className={cx(styles.root, 'relative', active && styles.active)}
                     aria-label={label}
                     title={label}
                     variant="plain"

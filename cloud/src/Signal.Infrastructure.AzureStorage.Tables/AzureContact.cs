@@ -17,7 +17,7 @@ internal class AzureContact : AzureTableEntityBase
     public AzureContact() : base(string.Empty, string.Empty)
     {
     }
-
+    
     protected AzureContact(string partitionKey, string rowKey) : base(partitionKey, rowKey)
     {
     }
@@ -33,9 +33,13 @@ internal class AzureContact : AzureTableEntityBase
         };
     }
 
+    public static (string partitionKey, string rowKey) ToStorageIdentifier(IContactPointer contactPointer) =>
+        (contactPointer.EntityId, $"{contactPointer.ChannelName}-{contactPointer.ContactName}");
+
     public static AzureContact From(IContactPointer contactPointer)
     {
-        return new AzureContact(contactPointer.EntityId, $"{contactPointer.ChannelName}-{contactPointer.ContactName}")
+        var (partitionKey, rowKey) = ToStorageIdentifier(contactPointer);
+        return new AzureContact(partitionKey, rowKey)
         {
             Name = contactPointer.ContactName,
             TimeStamp = DateTime.UtcNow

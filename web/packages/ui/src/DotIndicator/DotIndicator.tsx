@@ -13,7 +13,7 @@ export function DotIndicator(props: DotIndicatorProps) {
     return (
         <div
             className={cx(
-                'text-white text-center',
+                'flex flex-col items-center justify-center text-white text-center',
                 color === 'success' && 'bg-green-500',
                 color === 'warning' && 'bg-yellow-500',
                 color === 'danger' && 'bg-red-500',

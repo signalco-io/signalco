@@ -1,14 +1,7 @@
-'use client';
-
-import React, { } from 'react';
-import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
+import React from 'react';
 import EntityDetailsView from '../../../components/views/Entity/EntityDetailsView';
 
-export default function EntityDetailsPage({ params }: { params: { id: string } }) {
-    if (!params.id) {
-        return <NoDataPlaceholder content={'Not found'} />;
-    }
-
+export default function EntityDetailsPage({ params }: { params: { id?: string } }) {
     return (
         <EntityDetailsView id={params.id} />
     )

@@ -1,5 +1,4 @@
 import { Octokit } from 'octokit';
-import { NextResponse } from 'next/server';
 
 export type RoadmapItemStatus = 'triage' | 'planned' | 'inQueue' | 'inProgress' | 'completed';
 
@@ -31,7 +30,7 @@ export async function GET(request: Request, context: { params: { owner: string, 
     const items: RoadmapItem[] = [];
     for await (const { data: issues } of iterator) {
         if (Array.isArray(issues) === false) {
-            return { error: 'Unexpected response from GitHub API' };
+            return Response.json({ error: 'Unexpected response from GitHub API' });
         }
 
         // Top 200 issues
@@ -83,5 +82,5 @@ export async function GET(request: Request, context: { params: { owner: string, 
 
     console.debug('Found', items.length, 'issues for', owner, repo);
 
-    return NextResponse.json(items);
+    return Response.json(items);
 }

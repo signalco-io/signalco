@@ -3,10 +3,8 @@ import { entityDeleteAsync } from '../../../entity/EntityRepository';
 
 export default function useDeleteEntity() {
     const client = useQueryClient();
-    return useMutation((id: string) => {
-        return entityDeleteAsync(id);
-    }, {
-        onSuccess: (id) => {
+    return useMutation(entityDeleteAsync, {
+        onSuccess: (_, id) => {
             client.invalidateQueries(['entities']);
             client.invalidateQueries(['entities', 0]);
             client.invalidateQueries(['entities', 1]);

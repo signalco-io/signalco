@@ -1,6 +1,7 @@
 import './global.css';
 import { PropsWithChildren } from 'react';
 import { type Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
 import { AppLayout } from '../components/layouts/AppLayout';
 import { LayoutClientWrapper } from './LayoutClientWrapper';
 
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                         {children}
                     </AppLayout>
                 </LayoutClientWrapper>
+                <Analytics />
             </body>
         </html>
     );
@@ -22,9 +24,9 @@ export const metadata = {
     title: 'Signalco',
     description: 'Automate your life',
     themeColor: [
-        { media: '(prefers-color-scheme: light)', color: 'white' },
-        { media: '(prefers-color-scheme: dark)', color: 'black' },
-        { color: 'black' },
+        { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+        { media: '(prefers-color-scheme: dark)', color: '#000000' },
+        { color: '#000000' },
     ],
     manifest: '/manifest.json',
     icons: {

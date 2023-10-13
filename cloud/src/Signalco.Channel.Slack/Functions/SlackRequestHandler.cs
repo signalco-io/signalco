@@ -15,24 +15,16 @@ using Signalco.Channel.Slack.Secrets;
 
 namespace Signalco.Channel.Slack.Functions;
 
-internal class SlackRequestHandler : ISlackRequestHandler
-{
-    private readonly ISecretsProvider secrets;
-    private readonly ILogger<SlackRequestHandler> logger;
-
-    public SlackRequestHandler(
-        ISecretsProvider secretsProvider,
+internal class SlackRequestHandler(
+        ISecretsProvider secrets,
         ILogger<SlackRequestHandler> logger)
-    {
-        this.secrets = secretsProvider ?? throw new ArgumentNullException(nameof(secretsProvider));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
-
+    : ISlackRequestHandler
+{
     public async Task VerifyFromSlack(HttpRequestData req, CancellationToken cancellationToken = default)
     {
         var signature = req.Headers.GetValues("X-Slack-Signature").First();
         var timeStamp = req.Headers.GetValues("X-Slack-Request-Timestamp").First();
-        var signingSecret = await this.secrets.GetSecretAsync(SlackSecretKeys.SigningSecret, cancellationToken);
+        var signingSecret = await secrets.GetSecretAsync(SlackSecretKeys.SigningSecret, cancellationToken);
         var content = await req.ReadAsStringAsync();
 
         var signBaseString = $"v0:{timeStamp}:{content}";
@@ -44,7 +36,7 @@ internal class SlackRequestHandler : ISlackRequestHandler
 
         if (hashString != signature)
         {
-            this.logger.LogWarning("Slack signature not matching content");
+            logger.LogWarning("Slack signature not matching content");
             throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Signature not valid");
         }
     }

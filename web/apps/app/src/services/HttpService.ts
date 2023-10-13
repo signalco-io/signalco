@@ -81,7 +81,9 @@ export async function requestAsync(
         } catch {
             bodyText = 'empty response';
         }
-        throw new Error(`Got status ${response.statusText} (${response.status}): ${bodyText}`);
+        throw new Error(`Got status ${response.statusText} (${response.status}): ${bodyText}`, {
+            cause: { statusCode: response.status },
+        });
     } catch (err) {
         console.error('Unknown API error', err);
         throw err;

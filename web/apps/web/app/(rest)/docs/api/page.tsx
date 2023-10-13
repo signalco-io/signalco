@@ -22,7 +22,8 @@ import { Card, CardOverflow } from '@signalco/ui/dist/Card';
 import { Button } from '@signalco/ui/dist/Button';
 import { Alert } from '@signalco/ui/dist/Alert';
 import { camelToSentenceCase, HttpOperation, ObjectDictAny, objectWithKey } from '@signalco/js';
-import { useLoadAndError, useSearchParam } from '@signalco/hooks';
+import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
 
 function HttpOperationChip(props: { operation?: HttpOperation | undefined, small?: boolean }) {

@@ -1,12 +1,14 @@
 'use client';
 
-import React from 'react';
-import Dashboards from '../components/dashboards/Dashboards';
+import { useRouter } from 'next/navigation';
+import { KnownPages } from '../src/knownPages';
 
 export default function Dashboard() {
-    console.debug('Page Dashboard');
+    // Redirect to spaces page
+    const router = useRouter();
+    router.push(KnownPages.Spaces);
 
-    return (
-        <Dashboards />
-    );
+    console.debug('Redirecting to spaces page')
+
+    return null;
 }

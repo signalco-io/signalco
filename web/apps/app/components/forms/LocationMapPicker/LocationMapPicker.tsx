@@ -9,7 +9,7 @@ import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Accordion } from '@signalco/ui/dist/Accordion';
 import { asArray, objectWithKey } from '@signalco/js';
-import { useLoadAndError } from '@signalco/hooks';
+import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/index.types';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useUserTheme from '../../../src/hooks/useUserTheme';

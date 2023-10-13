@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { cx } from 'classix';
 import { Row } from '@signalco/ui/dist/Row';
 import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
@@ -9,20 +9,20 @@ import { KnownPages } from '../src/knownPages';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 
 const navLinks = [
-    // { href: '/features', text: 'Features' },
+    { href: KnownPages.Features, text: 'Features' },
     { href: KnownPages.Channels, text: 'Channels' },
     { href: KnownPages.Pricing, text: 'Pricing' }
 ];
 
 function NavMenu() {
     return (
-        <>
+        <nav className="grid grid-cols-3">
             {navLinks.map(nl => (
                 <Link key={nl.href} href={nl.href}>
                     <Button variant="plain" size="lg">{nl.text}</Button>
                 </Link>
             ))}
-        </>
+        </nav>
     );
 }
 
@@ -41,9 +41,7 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
                             </Link>
                         </div>
                         <Row spacing={1}>
-                            <Suspense>
-                                <NavMenu />
-                            </Suspense>
+                            <NavMenu />
                             <NavigatingButton href={KnownPages.App}>App</NavigatingButton>
                         </Row>
                     </Row>

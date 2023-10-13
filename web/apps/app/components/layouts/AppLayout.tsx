@@ -5,10 +5,12 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Minimize } from '@signalco/ui-icons';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import { useSearchParam } from '@signalco/hooks';
-import NavProfile from '../NavProfile';
+import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import NavProfile from '../navigation/NavProfile';
 import RealtimeService from '../../src/realtime/realtimeService';
 import { AuthWrapper } from './AuthWrapper';
+import { PageTitle } from '../navigation/PageTitle';
+import { Stack } from '@signalco/ui/dist/Stack';
 
 const queryClient = new QueryClient();
 
@@ -23,12 +25,17 @@ export function AppLayout(props: React.PropsWithChildren) {
     return (
         <AuthWrapper>
             <QueryClientProvider client={queryClient}>
-                <div className="flex h-screen w-full flex-col sm:flex-row">
+                <div className="flex w-full flex-col sm:flex-row">
                     {isFullScreen !== 'true' && (
                         <NavProfile />
                     )}
-                    <div className="relative h-screen w-full grow overflow-hidden">
-                        {children}
+                    <div className="relative mt-[72px] w-full grow overflow-hidden sm:ml-[90px] sm:mt-0">
+                        <Stack>
+                            <div className="hidden p-2 sm:block">
+                                <PageTitle fullPage />
+                            </div>
+                            {children}
+                        </Stack>
                     </div>
                 </div>
                 <ReactQueryDevtools initialIsOpen={false} />

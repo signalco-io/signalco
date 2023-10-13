@@ -6,7 +6,7 @@ import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Icon } from '@signalco/ui/dist/Icon';
 import { Button } from '@signalco/ui/dist/Button';
-import { useLoadAndError } from '@signalco/hooks';
+import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
 import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -151,13 +151,15 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                     </Typography>
                 )}
                 {rows > 1 && (
-                    <Row spacing={rows < 4 ? 0 : 1} style={{
-                        marginTop: rows > 2 ? (rows < 4 ? 0 : 4 * 8) : 8,
-                        flexDirection: rows < 4 ? 'column' : 'row',
-                        position: rows < 4 ? 'absolute' : 'unset',
-                        right: rows < 4 ? 12 : undefined,
-                        top: rows < 4 ? 0 : undefined
-                    }} alignItems="stretch">
+                    <Row spacing={rows < 4 ? 0 : 1}
+                        style={{
+                            marginTop: rows > 2 ? (rows < 4 ? 0 : 4 * 8) : 8,
+                            flexDirection: rows < 4 ? 'column' : 'row',
+                            position: rows < 4 ? 'absolute' : 'unset',
+                            right: rows < 4 ? 12 : undefined,
+                            top: rows < 4 ? 0 : undefined
+                        }}
+                        alignItems="stretch">
                         {humidityContact && (
                             <SmallIndicator small={rows < 4} isActive={false} label={`${humidityWhole}%`} icon="water_drop" href={`${KnownPages.Entities}/${humidityContact?.entityId}`} activeBackgroundColor={'#445D79'} />
                         )}

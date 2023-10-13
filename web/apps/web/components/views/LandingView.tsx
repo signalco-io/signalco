@@ -42,7 +42,9 @@ export default function LandingPageView() {
                 </StepContent>
             </DeveloperOnly>
             <CounterIndicator count={1} />
-            <StepContent header="Discover" image={<DiscoverVisual />} imageContainerHeight={420}
+            <StepContent header="Discover"
+                image={<DiscoverVisual />}
+                imageContainerHeight={420}
                 imageContainerStyles={{
                     position: 'absolute',
                     top: '-92px',
@@ -69,15 +71,15 @@ export default function LandingPageView() {
                     content="Access all features wherever you are. Controlling devices in your home from other side of the world or room&nbsp;:) has never been simpler." />
                 <FeatureDescription
                     header="Share"
-                    content="Share devices, media, dashboards, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
+                    content="Share devices, media, spaces, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
                 <FeatureDescription
                     header="Relax"
                     content="Enjoy the automated life. Use gained free time doing what you love. Relax in nature, hobbies, family... or automate one more thing." />
             </StepContent>
             <GlobeSection />
             <Divider />
-            <SectionCenter narrow className="bg-muted">
-                <div className="flex flex-col items-center justify-center gap-4 py-4 md:flex-row md:gap-24">
+            <SectionCenter narrow className="bg-muted/60">
+                <div className="flex flex-col items-center justify-center gap-4 py-12 md:flex-row md:gap-24">
                     <DataPart value="8" subtitle="Integrations" />
                     <DataPart value="500+" subtitle="Automations per day" />
                     <DataPart value="2000+" subtitle="Supported devices" />

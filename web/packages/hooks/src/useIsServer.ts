@@ -1,1 +1,1 @@
-export default function useIsServer() { return typeof window === 'undefined'; }
+export function useIsServer() { return typeof window === 'undefined'; }

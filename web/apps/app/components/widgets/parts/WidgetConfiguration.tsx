@@ -107,13 +107,14 @@ const widgetConfigurationFormComponents: FormBuilderComponents = {
     },
     entityContact: (props) => <DisplayEntityTarget selectContact target={props.value} onChanged={t => props.onChange(t, { receiveEvent: false })} />,
     entityContactValue: (props) => <DisplayEntityTarget selectContact selectValue target={props.value} onChanged={t => props.onChange(t, { receiveEvent: false })} />,
-    selectVisual: (props) => <SelectItems
+    selectVisual: (props) => (<SelectItems
         label="Visual"
         items={[{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }]}
         placeholder="Select visual"
         className="w-full"
         value={props.value}
-        onValueChange={(item: string) => item && props.onChange(item, { receiveEvent: false })} />
+        onValueChange={(item: string) => item && props.onChange(item, { receiveEvent: false })} />),
+    wrapper: (props) => <Stack spacing={2}>{props.children}</Stack>
 };
 
 function WidgetConfigurationFormProvider(props: PropsWithChildren) {
@@ -139,11 +140,9 @@ function WidgetConfiguration(props: WidgetConfigurationProps) {
                     <Button autoFocus onClick={configProps.onSave}>Save changes</Button>
                 </>
             )}>
-            <Stack spacing={2}>
-                <WidgetConfigurationFormProvider>
-                    <FormBuilder form={configProps.form} onSubmit={configProps.onSave} />
-                </WidgetConfigurationFormProvider>
-            </Stack>
+            <WidgetConfigurationFormProvider>
+                <FormBuilder form={configProps.form} onSubmit={configProps.onSave} />
+            </WidgetConfigurationFormProvider>
         </ConfigurationDialog>
     );
 }

@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { MoreHorizontal } from '@signalco/ui-icons';
-import { Menu, MenuItem } from '@signalco/ui/dist/Menu';
-import { Divider } from '@signalco/ui/dist/Divider';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
 import { Button } from '@signalco/ui/dist/Button';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
@@ -18,8 +17,7 @@ export interface EntityOptionsProps {
     showRawChanged: (show: boolean) => void;
 }
 
-export default function EntityOptions(props: EntityOptionsProps) {
-    const { id, canHideRaw, showRaw, showRawChanged } = props;
+export default function EntityOptions({ id, canHideRaw, showRaw, showRawChanged, ...rest }: EntityOptionsProps) {
     const { t } = useLocale('App', 'Entities');
     const router = useRouter();
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -49,15 +47,18 @@ export default function EntityOptions(props: EntityOptionsProps) {
 
     return (
         <>
-            <Menu trigger={(
-                <Button {...props}>
-                    <MoreHorizontal />
-                </Button>
-            )}>
-                {canHideRaw && <MenuItem onClick={handleShowRaw}>{showRaw ? 'Hide details' : 'Show details'}</MenuItem>}
-                <Divider />
-                <MenuItem onClick={handleDelete}>{t('DeleteButtonLabel')}</MenuItem>
-            </Menu>
+            <DropdownMenu>
+                <DropdownMenuTrigger>
+                    <Button {...rest}>
+                        <MoreHorizontal />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                    {canHideRaw && <DropdownMenuItem onSelect={handleShowRaw}>{showRaw ? 'Hide details' : 'Show details'}</DropdownMenuItem>}
+                    {canHideRaw && <DropdownMenuSeparator />}
+                    <DropdownMenuItem onSelect={handleDelete}>{t('DeleteButtonLabel')}</DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
             <ConfirmDeleteDialog
                 expectedConfirmText={entity?.alias || t('ConfirmDialogExpectedText')}
                 header={t('DeleteTitle')}

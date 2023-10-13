@@ -15,10 +15,10 @@ export interface IConfigurationDialogProps {
 }
 
 function ConfigurationDialog({
-    children, header, headerActions, open, onClose, actions
+    children, header, headerActions, open, onClose, actions, trigger
 }: IConfigurationDialogProps) {
     return (
-        <Modal open={open} onOpenChange={(newOpenState: boolean) => newOpenState && onClose && onClose()}>
+        <Modal trigger={trigger} open={open} onOpenChange={(newOpenState: boolean) => !newOpenState && onClose && onClose()}>
             <Stack spacing={1}>
                 <Row justifyContent="space-between">
                     <Typography level="h5">{header}</Typography>

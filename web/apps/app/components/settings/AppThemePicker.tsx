@@ -1,4 +1,5 @@
 import { Suspense, useState } from 'react';
+import { cx } from 'classix';
 import { Custom, Laptop, SunMoon, Timer } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
 import type { AppThemeMode, DefaultColorScheme, SupportedColorScheme } from '@signalco/ui/dist/theme';
@@ -10,9 +11,7 @@ import { fromDuration, now, todayAt, toDuration } from '../../src/services/DateT
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale from '../../src/hooks/useLocale';
 
-function AppThemeVisual(props: { label: string, theme: SupportedColorScheme, disabled?: boolean }) {
-    const { label, theme, disabled } = props;
-
+function AppThemeVisual({ label, theme, disabled, size }: { label: string, theme: SupportedColorScheme, disabled?: boolean, size: number }) {
     let textColor;
     let backgroundColor;
     switch (theme) {
@@ -30,25 +29,27 @@ function AppThemeVisual(props: { label: string, theme: SupportedColorScheme, dis
         break;
     }
 
+    const scale = size / 80;
+
     return (
-        <div style={{ opacity: disabled ? 0.4 : 1 }}>
-            <Stack alignItems="center" spacing={1}>
-                <div style={{
-                    position: 'relative',
-                    width: 80,
-                    height: 60,
-                    backgroundColor: backgroundColor,
-                    border: '1px solid gray',
-                    borderTop: '4px solid gray',
-                    borderRadius: 4
-                }}>
-                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 4, left: 4 }} />
-                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 18, height: 5, top: 12, left: 4 }} />
-                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 22, height: 5, top: 20, left: 4 }} />
-                    <div style={{ position: 'absolute', backgroundColor: textColor, width: 20, height: 5, top: 28, left: 4 }} />
+        <div className={cx(disabled && 'opacity-40')}>
+            <Row spacing={1}>
+                <div style={{ width: 80 * scale, height: 60 * scale }}>
+                    <div className="relative h-[60px] w-20 origin-top-left overflow-hidden rounded-md"
+                        style={{
+                            backgroundColor: backgroundColor,
+                            border: '1px solid gray',
+                            borderTop: '4px solid gray',
+                            transform: `scale(${scale})`
+                        }}>
+                        <div className="absolute" style={{ backgroundColor: textColor, width: 20, height: 5, top: 4, left: 4 }} />
+                        <div className="absolute" style={{ backgroundColor: textColor, width: 18, height: 5, top: 12, left: 4 }} />
+                        <div className="absolute" style={{ backgroundColor: textColor, width: 22, height: 5, top: 20, left: 4 }} />
+                        <div className="absolute" style={{ backgroundColor: textColor, width: 20, height: 5, top: 28, left: 4 }} />
+                    </div>
                 </div>
                 <Typography level="body2">{label}</Typography>
-            </Stack>
+            </Row>
         </div>
     );
 }
@@ -77,7 +78,11 @@ function AppThemeColorPicker() {
                     value: 'light',
                     label: (
                         <div className="p-1">
-                            <AppThemeVisual disabled={themeMode !== 'manual'} label={themes.t('Light')} theme="light" />
+                            <AppThemeVisual
+                                size={28}
+                                disabled={themeMode !== 'manual'}
+                                label={themes.t('Light')}
+                                theme="light" />
                         </div>
                     )
                 },
@@ -85,7 +90,10 @@ function AppThemeColorPicker() {
                     value: 'dark',
                     label: (
                         <div className="p-1">
-                            <AppThemeVisual label={themes.t('Dark')} theme="dark" />
+                            <AppThemeVisual
+                                size={28}
+                                label={themes.t('Dark')}
+                                theme="dark" />
                         </div>
                     )
                 }
@@ -146,12 +154,14 @@ export default function AppThemePicker() {
             <Stack spacing={2}>
                 <Stack spacing={1}>
                     <Typography level="body2">{tPicker('PickMode')}</Typography>
-                    <SelectItems value={themeMode} onValueChange={value => handleThemeModeChange(value as AppThemeMode)} items={[
-                        { value: 'system', label: <Laptop />, title: tPickerModes('System') },
-                        { value: 'manual', label: <Custom />, title: tPickerModes('Manual') },
-                        { value: 'sunriseSunset', label: <SunMoon />, disabled: (userLocation?.length ?? 0) <= 0, title: tPickerModes('SunriseSunset') },
-                        { value: 'timeRange', label: <Timer />, title: tPickerModes('TimeRange') },
-                    ]} />
+                    <SelectItems value={themeMode}
+                        onValueChange={value => handleThemeModeChange(value as AppThemeMode)}
+                        items={[
+                            { value: 'system', icon: <Laptop />, label: tPickerModes('System') },
+                            { value: 'manual', icon: <Custom />, label: tPickerModes('Manual') },
+                            { value: 'sunriseSunset', icon: <SunMoon />, disabled: (userLocation?.length ?? 0) <= 0, label: tPickerModes('SunriseSunset') },
+                            { value: 'timeRange', icon: <Timer />, label: tPickerModes('TimeRange') },
+                        ]} />
                 </Stack>
                 {themeMode === 'timeRange' && (
                     <Stack spacing={1}>

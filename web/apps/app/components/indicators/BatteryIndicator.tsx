@@ -41,7 +41,8 @@ export default function BatteryIndicator({ level, size, minLevel = 'full' }: Bat
                 color === 'green' && 'stroke-green-500',
                 color === 'yellow' && 'stroke-yellow-500',
                 color === 'red' && 'stroke-red-500'
-            )} size={size === 'sm' ? 16 : 20} />
+            )}
+            size={size === 'sm' ? 16 : 20} />
         </Tooltip>
     );
 }

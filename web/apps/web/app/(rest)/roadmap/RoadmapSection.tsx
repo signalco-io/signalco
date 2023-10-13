@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback } from 'react';
-import { useLoadAndError } from '@signalco/hooks';
+import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
 import { RoadmapItem } from '../../api/github/[owner]/[repo]/issues/route';
 import Roadmap from './roadmap';
 

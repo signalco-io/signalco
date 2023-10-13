@@ -1,7 +1,5 @@
 * { box-sizing: border-box; }
 
-@import './normalize.css';
-
 // Custom normalize
 h6 { margin: 0 };
 
@@ -55,20 +53,26 @@ html, body, #__next {
   font-feature-settings: 'liga';
 }
 
-[data-joy-color-scheme="dark"] {
-  .image--light {
-    display: none;
+@layer base {
+  :root {
+    --selection-bg: #000;
+    --selection-color: #fff; 
   }
 
-  ::selection { background: white; color: black; }
+  .dark {
+    --bg-selection: #fff;
+    --text-selection: #000;
+  }
+
+  ::selection { background: var(--bg-selection); color: var(--text-selection); }
 }
 
-[data-joy-color-scheme="light"] {
-  .image--dark {
-    display: none;
-  }
+.image--light {
+  display: var(--light-display);
+}
 
-  ::selection { background: black; color: white; }
+.image--dark {
+  display: var(--dark-display);
 }
 
 h6 {

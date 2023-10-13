@@ -5,7 +5,7 @@ import { Select } from '@signalco/ui-icons';
 import { Row } from '@signalco/ui/dist/Row';
 import { Popper } from '@signalco/ui/dist/Popper';
 import { Button } from '@signalco/ui/dist/Button';
-import { useSearchParam } from '@signalco/hooks';
+import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
 export interface IDashboardSelectorProps {
@@ -25,7 +25,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
     // Set initial selection on component and dashboards load
     useEffect(() => {
         if (!selectedId && dashboards?.length) {
-            console.log('Selecting first available dashboard', dashboards[0].id);
+            console.debug('Selecting first available dashboard', dashboards[0].id);
             setSelectedId(dashboards[0].id);
         }
     }, [selectedId, dashboards, setSelectedId]);

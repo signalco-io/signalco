@@ -1,6 +1,6 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import { useState } from 'react';
-import { useInterval } from '@signalco/hooks';
+import { useInterval } from '@signalco/hooks/dist/useInterval';
 import { now } from '../../src/services/DateTimeProvider';
 import { colorToRgb } from '../../src/helpers/StringHelpers';
 import styles from './WindowVisual.module.scss';

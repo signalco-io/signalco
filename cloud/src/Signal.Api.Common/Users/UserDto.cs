@@ -4,21 +4,14 @@ using System.Text.Json.Serialization;
 namespace Signal.Api.Common.Users;
 
 [Serializable]
-public class UserDto
+public class UserDto(string id, string email, string? fullName)
 {
-    public UserDto(string id, string email, string? fullName)
-    {
-        this.Id = id;
-        this.Email = email;
-        this.FullName = fullName;
-    }
-
     [JsonPropertyName("id")]
-    public string Id { get; }
+    public string Id { get; } = id;
 
     [JsonPropertyName("email")]
-    public string Email { get; }
+    public string Email { get; } = email;
 
     [JsonPropertyName("fullName")]
-    public string? FullName { get; }
+    public string? FullName { get; } = fullName;
 }

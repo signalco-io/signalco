@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout GitHub Action"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: ✋ Set up mutex
         id: mutex-setup

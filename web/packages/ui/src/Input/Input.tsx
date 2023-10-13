@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, PropsWithChildren } from 'react';
+import { InputHTMLAttributes, PropsWithChildren, useMemo } from 'react';
 import { cx } from 'classix';
 import { Stack } from '../Stack';
 import { Row } from '../Row';
@@ -18,12 +18,15 @@ export function Input({
     endDecorator,
     ...rest
 }: InputProps) {
-    const VerticalContainer = label || helperText
+    const VerticalContainer = useMemo(() => label || helperText
         ? (props: PropsWithChildren) => <Stack spacing={1} {...props} />
-        : (props: PropsWithChildren) => <>{props.children}</>;
-    const HorizontalContainer = startDecorator || endDecorator
+        : (props: PropsWithChildren) => <>{props.children}</>
+    , [label, helperText]);
+    const HorizontalContainer = useMemo(() => startDecorator || endDecorator
         ? (props: PropsWithChildren) => <Row spacing={1} {...props} />
-        : (props: PropsWithChildren) => <>{props.children}</>;
+        : (props: PropsWithChildren) => <>{props.children}</>
+    , [startDecorator, endDecorator]);
+
     return (
         <VerticalContainer>
             {label && <label className="text-sm font-medium">{label}</label>}

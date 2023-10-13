@@ -9,15 +9,11 @@ using Signalco.Common.Channel;
 
 namespace Signalco.Channel.Zigbee2Mqtt.Functions;
 
-public class ConductFunctions : ConductFunctionsForwardToStationBase
-{
-    public ConductFunctions(
+public class ConductFunctions(
         IFunctionAuthenticator authenticator,
         IEntityService entityService)
-        : base(entityService, authenticator)
-    {
-    }
-
+    : ConductFunctionsForwardToStationBase(entityService, authenticator)
+{
     [Function("Conduct")]
     [OpenApiOperation<ConductFunctions>("Conducts")]
     public async Task<HttpResponseData> Run(

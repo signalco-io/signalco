@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import { Typography } from '../Typography';
+import { cx } from 'classix';
 import { Row } from '../Row';
 import { Button } from '../Button';
 
@@ -25,6 +25,7 @@ export type ListItemPropsCommon = {
     disabled?: boolean;
     startDecorator?: ReactElement;
     endDecorator?: ReactElement;
+    className?: string;
 };
 
 export function ListItem({
@@ -35,7 +36,8 @@ export function ListItem({
     selected,
     onSelected,
     disabled,
-    href
+    href,
+    className
 }: ListItemPropsCommon & ListItemPropsOptions) {
     const handleClick = () => {
         if (onSelected) {
@@ -43,22 +45,27 @@ export function ListItem({
         }
     };
 
-    if (!href && !nodeId) {
-        <Row spacing={1}>
-            {startDecorator ?? null}
-            <Typography opacity={disabled ? 0.6 : 1}>{label}</Typography>
-            {endDecorator ?? null}
-        </Row>
+    if (!href && !nodeId && !onSelected) {
+        return (
+            <Row spacing={1} className={cx('min-h-[3rem]', className)}>
+                {startDecorator ?? null}
+                <div className={cx('grow', disabled && 'opacity-60')}>{label}</div>
+                <div className="self-end">
+                    {endDecorator ?? null}
+                </div>
+            </Row>
+        );
     }
 
     return (
         <Button
             href={href}
-            variant={selected ? 'plain' : 'soft'}
+            variant={selected ? 'soft' : 'plain'}
             onClick={handleClick}
             disabled={disabled}
             startDecorator={startDecorator}
-            endDecorator={endDecorator}>
+            endDecorator={endDecorator}
+            className={cx('text-start', className)}>
             {label}
         </Button>
     );

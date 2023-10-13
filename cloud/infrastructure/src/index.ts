@@ -20,6 +20,7 @@ import { createContainerRegistry, getContainerRegistry } from './Azure/container
 import createFunctionsStorage from './Azure/createFunctionsStorage';
 import { Dashboard } from '@checkly/pulumi/dashboard';
 import createLogWorkspace from './Azure/createLogWorkspace';
+import createAppInsights from './Azure/createAppInsights';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -58,7 +59,7 @@ export = async () => {
         const resourceGroup = new ResourceGroup(resourceGroupName);
         const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
 
-        const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, false);
+        const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, stack === 'production' ? 'standard1' : 'free', false);
         apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, ConfPublicSignalRCheckInterval, '/api/v1/health');
 
         // Create functions storage
@@ -80,7 +81,6 @@ export = async () => {
                 api.subDomain,
                 api.cors,
                 currentStack,
-                logWorkspace,
                 false);
             const apiFuncPublish = await publishProjectAsync(['../src/Signalco.Api.Public', api.name].filter(i => i.length).join('.'));
             const apiFuncCode = await assignFunctionCodeAsync(
@@ -102,7 +102,7 @@ export = async () => {
         const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintenance', 'Migration'];
         const internalFuncs = [];
         for (const funcName of internalNames) {
-            internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, logWorkspace, false));
+            internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, false));
         }
 
         // Generate channels functions
@@ -113,7 +113,7 @@ export = async () => {
             : [...productionChannelNames, ...nextChannelNames];
         const channelsFuncs = [];
         for (const channelName of channelNames) {
-            channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, currentStack, logWorkspace, false));
+            channelsFuncs.push(await createChannelFunction(channelName, resourceGroup, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, currentStack, false));
         }
 
         // Generate discrete functions
@@ -128,7 +128,6 @@ export = async () => {
                 `${funcName.toLowerCase()}.api`,
                 undefined,
                 currentStack,
-                logWorkspace,
                 false);
             const funcPublish = await publishProjectAsync(`../../discrete/Signalco.Discrete.Api.${funcName}/cloud`, 7);
             const funcCode = await assignFunctionCodeAsync(
@@ -146,6 +145,9 @@ export = async () => {
                 storage: discreteStorage,
             });
         }
+
+        // Create app insights
+        const insights = createAppInsights(resourceGroup, 'insights', logWorkspace);
 
         // Create internal apps
         const registry = getContainerRegistry(resourceGroupSharedName, containerRegistryName);
@@ -177,6 +179,8 @@ export = async () => {
             'Auth0_Domain': config.require('secret-auth0Domain'),
             'HCaptcha_SiteKey': config.requireSecret('secret-hcaptchaSiteKey'),
             'SignalcoProcessorAccessCode': config.requireSecret('secret-processorAccessCode'),
+            APPINSIGHTS_INSTRUMENTATIONKEY: interpolate`${insights.component.instrumentationKey}`,
+            APPLICATIONINSIGHTS_CONNECTION_STRING: interpolate`${insights.component.connectionString}`,
         };
 
         const internalEnvVariables = {

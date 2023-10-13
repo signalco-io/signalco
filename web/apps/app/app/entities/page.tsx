@@ -13,7 +13,7 @@ import { Loadable } from '@signalco/ui/dist/Loadable';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Button } from '@signalco/ui/dist/Button';
 import { Avatar } from '@signalco/ui/dist/Avatar';
-import { useSearchParam } from '@signalco/hooks';
+import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { KnownPages } from '../../src/knownPages';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale from '../../src/hooks/useLocale';
@@ -98,30 +98,28 @@ export default function Entities() {
     }), [filteredItems, selectedType]);
 
     const results = useMemo(() => (
-        <div style={{ paddingLeft: 8, paddingRight: 8 }}>
-            <div className={cx(
-                'grid auto-cols-max gap-1',
-                entityListViewType === 'table'
-                    ? 'grid-cols-1'
-                    : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
-            )}>
-                {typedItems?.map(entity => (
-                    <EntityCard
-                        key={entity.id}
-                        entity={entity}
-                        spread={entityListViewType === 'table'}
-                        selectable={isSelecting}
-                        selected={!!selected.find(e => e.id === entity.id)}
-                        onSelection={() => handleEntitySelection(entity)} />
-                ))}
-            </div>
+        <div className={cx(
+            'grid auto-cols-max gap-1',
+            entityListViewType === 'table'
+                ? 'grid-cols-1'
+                : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
+        )}>
+            {typedItems?.map(entity => (
+                <EntityCard
+                    key={entity.id}
+                    entity={entity}
+                    spread={entityListViewType === 'table'}
+                    selectable={isSelecting}
+                    selected={!!selected.find(e => e.id === entity.id)}
+                    onSelection={() => handleEntitySelection(entity)} />
+            ))}
         </div>
     ), [entityListViewType, handleEntitySelection, isSelecting, selected, typedItems]);
 
     return (
-        <Stack spacing={3}>
+        <Stack spacing={1} className="p-2">
             <Stack spacing={1}>
-                <Row justifyContent="space-between" style={{ paddingLeft: 16, paddingRight: 16 }}>
+                <Row justifyContent="space-between">
                     <SelectItems
                         className="min-w-[220px]"
                         value={selectedType}

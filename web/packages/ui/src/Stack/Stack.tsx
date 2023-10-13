@@ -3,7 +3,7 @@ import { cx } from 'classix';
 
 export type StackProps = HTMLAttributes<HTMLDivElement> & {
     spacing?: number;
-    alignItems?: 'start' | 'center' | undefined;
+    alignItems?: 'start' | 'center' | 'stretch' | undefined;
     justifyContent?: 'start' | 'center' | 'end' | 'space-between' | 'stretch' | undefined;
 };
 
@@ -12,15 +12,15 @@ export function Stack({ spacing, alignItems, justifyContent, style, className, .
         <div
             className={cx(
                 'flex flex-col',
-                alignItems === 'start' && '[align-items:start]',
-                alignItems === 'center' && '[align-items:center]',
-                !alignItems && '[align-items:stretch]',
+                alignItems === 'start' && 'items-start',
+                alignItems === 'center' && 'items-center',
+                (!alignItems || alignItems === 'stretch') && 'items-stretch',
                 Boolean(spacing) && 'gap-[--s-gap]',
-                justifyContent === 'start' && '[justify-content:start]',
-                justifyContent === 'center' && '[justify-content:center]',
-                justifyContent === 'end' && '[justify-content:end]',
-                justifyContent === 'space-between' && '[justify-content:space-between]',
-                justifyContent === 'stretch' && '[justify-content:stretch]',
+                justifyContent === 'start' && 'justify-start',
+                justifyContent === 'center' && 'justify-center',
+                justifyContent === 'end' && 'justify-end',
+                justifyContent === 'space-between' && 'justify-between',
+                justifyContent === 'stretch' && 'justify-stretch',
                 className)}
             style={{
                 '--s-gap': `${(spacing ?? 0) * 8}px`,

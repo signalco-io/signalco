@@ -1,111 +1,51 @@
 import React, { useMemo, useState } from 'react';
-import { Add, Code, Delete, Edit, MoreVertical, UI } from '@signalco/ui-icons';
+import { cx } from 'classix';
+import { Add, Code, Delete, Edit, MoreVertical, UI, History, CircleEqual } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
-import { Tooltip } from '@signalco/ui/dist/Tooltip';
 import { Timeago } from '@signalco/ui/dist/Timeago';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Row } from '@signalco/ui/dist/Row';
-import { MenuItem, Menu } from '@signalco/ui/dist/Menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
 import { Loadable } from '@signalco/ui/dist/Loadable';
-import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
 import { ListItem } from '@signalco/ui/dist/ListItem';
 import { List } from '@signalco/ui/dist/List';
 import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import { CopyToClipboardInput } from '@signalco/ui/dist/CopyToClipboardInput';
+import { Chip } from '@signalco/ui/dist/Chip';
 import { Card } from '@signalco/ui/dist/Card';
 import { Button } from '@signalco/ui/dist/Button';
 import { camelToSentenceCase, isJson, ParsedJson } from '@signalco/js';
+import { ObjectVisualizer } from '../../visualizers/ObjectVisualizer';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
 import CodeEditor from '../../code/CodeEditor';
 import ChannelLogo from '../../channels/ChannelLogo';
 import useLocale from '../../../src/hooks/useLocale';
+import useSetMetadataContact from '../../../src/hooks/signalco/useSetMetadataContact';
+import useSetContact from '../../../src/hooks/signalco/useSetContact';
+import useDeleteContact from '../../../src/hooks/signalco/useDeleteContact';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointer from '../../../src/contacts/IContactPointer';
-import { deleteContactAsync, setAsync } from '../../../src/contacts/ContactRepository';
+import IContact, { ContactMetadataV1 } from '../../../src/contacts/IContact';
 
-function JsonNonArrayVisualizer({ value }: { value: ParsedJson }) {
-    if (value === null ||
-        typeof (value) === 'undefined') {
-        return <div>null</div>
-    }
+type DisplayJsonProps = {
+    json: string | undefined;
+    className?: string;
+};
 
-    if (typeof value === 'object') {
-        const propertyNames = Object.keys(value);
-        const properties = typeof value !== 'undefined' && propertyNames
-            ? propertyNames.map(pn => ({ name: pn, value: value == null ? value[pn] : null }))
-            : [];
-
-        return (
-            <div>
-                {properties && properties.map(prop =>
-                    <ObjectVisualizer key={prop.name} name={prop.name} value={prop.value} />)}
-            </div>
-        );
-    }
-
-    return null;
-}
-function JsonArrayVisualizer(props: { name: string, value: Array<ParsedJson> }) {
-    return (
-        <>
-            {props.value.map((v, i) => <ObjectVisualizer key={`${props.name}-${i}`} defaultOpen={props.value.length <= 1} name={i.toString()} value={v} />)}
-        </>
-    );
-}
-
-function ObjectVisualizer(props: { name: string, value: ParsedJson, defaultOpen?: boolean }) {
-    const { name, value, defaultOpen } = props;
-    const isArray = Array.isArray(value);
-    const hasChildren = typeof value === 'object' || isArray;
-
-    return (
-        <ListTreeItem
-            nodeId={name}
-            defaultOpen={defaultOpen}
-            label={(
-                <Row spacing={1}>
-                    {name && (
-                        <div style={{ minWidth: 120 }}>
-                            <Tooltip title={`${name} (${(isArray ? `array[${value.length}]` : typeof value)})`}>
-                                <Typography>
-                                    {name}
-                                </Typography>
-                            </Tooltip>
-                        </div>
-                    )}
-                    {!hasChildren && (
-                        // TODO: Implement visualizer for different data types
-                        //     - number
-                        //     - color (hex)
-                        //     - URL
-                        //     - GUID/UUID
-                        //     - boolean
-                        //     - ability to unset value
-                        <CopyToClipboardInput value={value?.toString()} />
-                    )}
-                </Row>
-            )}>
-            {hasChildren && (
-                <div className="ml-2">
-                    {isArray
-                        ? <JsonArrayVisualizer name={name} value={value as Array<ParsedJson>} />
-                        : <JsonNonArrayVisualizer value={value} />}
-                </div>
-            )}
-        </ListTreeItem>
-    );
-}
-
-function DisplayJson(props: { json: string | undefined }) {
+function DisplayJson({ json, className }: DisplayJsonProps) {
     const [showSource, setShowSource] = useState(false);
-    const jsonObj = useMemo(() => JSON.parse(props.json ?? '') as ParsedJson, [props.json]);
+    const jsonObj = useMemo(() => JSON.parse(json ?? '') as ParsedJson, [json]);
     const jsonFormatted = useMemo(() => JSON.stringify(jsonObj, undefined, 4), [jsonObj]);
 
+    const selectItems = useMemo(() => [
+        { value: 'ui', label: <UI size={18} /> },
+        { value: 'source', label: <Code size={18} /> }
+    ], []);
+
     return (
-        <div style={{ position: 'relative', minWidth: '230px' }}>
+        <div className={cx('relative min-w-[230px]', className)}>
             {showSource ? (
                 <CodeEditor language="json" code={jsonFormatted} height={300} />
             ) : (
@@ -113,11 +53,11 @@ function DisplayJson(props: { json: string | undefined }) {
                     <ObjectVisualizer name="root" defaultOpen value={jsonObj} />
                 </List>
             )}
-            <div style={{ position: 'absolute', right: 0, top: 0 }}>
-                <SelectItems value={showSource ? 'source' : 'ui'} onValueChange={value => setShowSource(value === 'source')} items={[
-                    { value: 'ui', label: <UI size={18} /> },
-                    { value: 'source', label: <Code size={18} /> }
-                ]} />
+            <div className="absolute right-0 top-0">
+                <SelectItems
+                    value={showSource ? 'source' : 'ui'}
+                    onValueChange={value => setShowSource(value === 'source')}
+                    items={selectItems} />
             </div>
         </div>
     );
@@ -137,14 +77,20 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
     const [editingContact, setEditingContact] = useState<IContactPointer | undefined>(undefined);
     const [deletingContact, setDeletingContact] = useState<IContactPointer | undefined>(undefined);
     const [valueSerialized, setValueSerialized] = useState('');
+    const deleteContact = useDeleteContact();
+    const setContact = useSetContact();
+    const setMetadataContact = useSetMetadataContact();
 
     const handleCreateSubmit = async () => {
         if (entity) {
-            await setAsync({
-                entityId: entity.id,
-                channelName,
-                contactName
-            }, undefined);
+            await setContact.mutateAsync({
+                pointer: {
+                    entityId: entity.id,
+                    channelName,
+                    contactName
+                },
+                valueSerialized: undefined
+            });
         }
         setCreateContactDialogOpen(false);
     };
@@ -153,11 +99,14 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
             if (!editingContact)
                 throw new Error('Requested contact not found');
 
-            await setAsync({
-                entityId: entity.id,
-                channelName: editingContact.channelName,
-                contactName: editingContact.contactName
-            }, valueSerialized);
+            await setContact.mutateAsync({
+                pointer: {
+                    entityId: entity.id,
+                    channelName: editingContact.channelName,
+                    contactName: editingContact.contactName
+                },
+                valueSerialized
+            });
         }
         setEditingContactDialogOpen(false);
     };
@@ -166,7 +115,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
             if (!deletingContact)
                 throw new Error('Requested contact not found');
 
-            await deleteContactAsync({
+            await deleteContact.mutateAsync({
                 entityId: entity.id,
                 channelName: deletingContact.channelName,
                 contactName: deletingContact.contactName
@@ -175,66 +124,130 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
         setDeletingContactDialogOpen(false);
     }
 
+    const handleToggleContactHistory = async (contact: IContact) => {
+        if (entity && contact) {
+            await setMetadataContact.mutateAsync({
+                pointer: {
+                    entityId: entity.id,
+                    channelName: contact.channelName,
+                    contactName: contact.contactName
+                },
+                metadataSerialized: JSON.stringify({
+                    ...contact.metadata,
+                    Version: contact.metadata?.Version ?? 1,
+                    PersistHistory: !contact.metadata?.PersistHistory
+                } satisfies ContactMetadataV1)
+            })
+        }
+    };
+
+    const handleToggleContactProcessSameValue = async (contact: IContact) => {
+        if (entity && contact) {
+            await setMetadataContact.mutateAsync({
+                pointer: {
+                    entityId: entity.id,
+                    channelName: contact.channelName,
+                    contactName: contact.contactName
+                },
+                metadataSerialized: JSON.stringify({
+                    ...contact.metadata,
+                    Version: contact.metadata?.Version ?? 1,
+                    ProcessSameValue: !contact.metadata?.ProcessSameValue
+                } satisfies ContactMetadataV1)
+            });
+        }
+    };
+
     return (
         <>
             <Card>
                 <Row justifyContent="space-between">
                     <Typography>{t('Contacts')}</Typography>
-                    <Menu trigger={(
-                        <IconButton size="sm">
-                            <MoreVertical />
-                        </IconButton>
-                    )}>
-                        <MenuItem onClick={() => setCreateContactDialogOpen(true)} startDecorator={<Add />}>
-                            {t('CreateContact')}
-                        </MenuItem>
-                    </Menu>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <IconButton size="sm">
+                                <MoreVertical />
+                            </IconButton>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuItem onSelect={() => setCreateContactDialogOpen(true)} startDecorator={<Add />}>
+                                {t('CreateContact')}
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </Row>
                 <Loadable isLoading={isLoading} loadingLabel="Loading contacts" error={error}>
                     <List>
                         {entity?.contacts?.map(c => (
                             <ListItem
                                 key={`${c.entityId}-${c.channelName}-${c.contactName}`}
+                                className="py-2"
                                 startDecorator={(
                                     <ChannelLogo channelName={c.channelName} size="tiny" label={c.channelName} />
                                 )}
                                 endDecorator={(
-                                    <Menu trigger={(
-                                        <IconButton size="sm">
-                                            <MoreVertical />
-                                        </IconButton>
-                                    )}>
-                                        <MenuItem
-                                            onClick={() => {
-                                                setEditingContactDialogOpen(true);
-                                                setEditingContact(c);
-                                            }}
-                                            startDecorator={<Edit />}>
-                                            {t('EditContact')}
-                                        </MenuItem>
-                                        <MenuItem
-                                            onClick={() => {
-                                                setDeletingContactDialogOpen(true);
-                                                setDeletingContact(c);
-                                            }}
-                                            startDecorator={<Delete />}>
-                                            {t('DeleteContact')}
-                                        </MenuItem>
-                                    </Menu>
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger>
+                                            <IconButton size="sm">
+                                                <MoreVertical />
+                                            </IconButton>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent>
+                                            <DropdownMenuItem
+                                                onSelect={() => {
+                                                    handleToggleContactHistory(c);
+                                                }}
+                                                startDecorator={<History />}
+                                            >
+                                                {t(c.metadata?.PersistHistory ? 'ContactDisablePersistHistory' : 'ContactEnablePersistHistory')}
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem
+                                                onSelect={() => {
+                                                    handleToggleContactProcessSameValue(c);
+                                                }}
+                                                startDecorator={<CircleEqual />}
+                                            >
+                                                {t(c.metadata?.ProcessSameValue ? 'ContactDisableProcessSameValue' : 'ContactEnableProcessSameValue')}
+                                            </DropdownMenuItem>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem
+                                                onSelect={() => {
+                                                    setEditingContactDialogOpen(true);
+                                                    setEditingContact(c);
+                                                }}
+                                                startDecorator={<Edit />}>
+                                                {t('EditContact')}
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem
+                                                onSelect={() => {
+                                                    setDeletingContactDialogOpen(true);
+                                                    setDeletingContact(c);
+                                                }}
+                                                startDecorator={<Delete />}>
+                                                {t('DeleteContact')}
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
                                 )}
                                 label={(
-                                    <Row spacing={1} style={{ flexGrow: 1 }}>
-                                        <div style={{ width: '30%', maxWidth: '200px' }}>
+                                    <Row spacing={1} className="grow">
+                                        <Stack className="w-1/3 max-w-[200px]">
                                             <Typography noWrap>{camelToSentenceCase(c.contactName)}</Typography>
-                                        </div>
-                                        <Stack style={{ flexGrow: 1 }}>
-                                            {isJson(c.valueSerialized)
-                                                ? <DisplayJson json={c.valueSerialized} />
-                                                : <Typography>{c.valueSerialized}</Typography>}
-                                            <div className="text-xs text-muted-foreground">
-                                                <Timeago date={c.timeStamp} live />
-                                            </div>
+                                            <Row spacing={1}>
+                                                <div className="text-xs text-muted-foreground">
+                                                    <Timeago date={c.timeStamp} live />
+                                                </div>
+                                                {c.metadata?.PersistHistory && (
+                                                    <Chip startDecorator={<History size={14} />} size="sm">History</Chip>
+                                                )}
+                                                {c.metadata?.ProcessSameValue && (
+                                                    <Chip size="sm">Process same value</Chip>
+                                                )}
+                                            </Row>
                                         </Stack>
+                                        {isJson(c.valueSerialized)
+                                            ? <DisplayJson className="grow" json={c.valueSerialized} />
+                                            : <Typography noWrap className="grow">{c.valueSerialized}</Typography>}
                                     </Row>
                                 )} />
                         ))}
