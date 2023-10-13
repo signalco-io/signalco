@@ -8,7 +8,7 @@ export default function EntityDocsPage() {
                 <strong>offline</strong>
                 <span>Conditions for entity to be offline are as follows:</span>
                 <ul>
-                    <li>when there is no &quot;offline&quot;, entity doesn't have state or state is <i>online</i> by default</li>
+                    <li>when there is no &quot;offline&quot;, entity doesn&apos;t have state or state is <i>online</i> by default</li>
                     <li>when there is exactly one &quot;offline&quot; - that status is respected</li>
                     <li>when there are more &quot;offline&quot; contacts - device is <i>offline</i> when any of them is offline</li>
                 </ul>
