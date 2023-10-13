@@ -16,8 +16,9 @@ export type ListTreeItemProps = PropsWithChildren<{
     onSelected?: (nodeId: string) => void;
 }>;
 
-export function ListTreeItem(props: ListTreeItemProps) {
-    const { label, children, nodeId, defaultOpen, onChange, selected, onSelected } = props;
+export function ListTreeItem({
+    label, children, nodeId, defaultOpen, onChange, selected, onSelected,
+}: ListTreeItemProps) {
     const [open, setOpen] = useState(defaultOpen);
 
     const handleOpenClick = () => {
@@ -35,17 +36,16 @@ export function ListTreeItem(props: ListTreeItemProps) {
     return (
         <Stack>
             <Row spacing={1}>
-                <Tooltip title="Toggle">
-                    <IconButton onClick={handleOpenClick} className={'transition-transform'} size="sm">
-                        <ExpandDown className={cx(open && 'rotate-90')} />
+                <Tooltip title="Toggle" className={cx(!children && 'opacity-0')}>
+                    <IconButton variant="plain" onClick={handleOpenClick} size="sm">
+                        <ExpandDown className={cx('transition-transform', open && '-rotate-90')} />
                     </IconButton>
                 </Tooltip>
                 <ListItem
                     nodeId={nodeId}
                     label={label}
                     selected={selected}
-                    onSelected={handleOnSelected}
-                    disabled={!onSelected} />
+                    onSelected={handleOnSelected} />
             </Row>
             {open && (
                 <Stack>

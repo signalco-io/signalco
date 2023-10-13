@@ -1,9 +1,9 @@
-import { PropsWithChildren } from 'react';
+import { HTMLAttributes } from 'react';
 
-export type TooltipProps = PropsWithChildren<{
-    title?: string;
-}>;
+export type TooltipProps = HTMLAttributes<HTMLDivElement> & {
+    title: string | undefined;
+};
 
-export function Tooltip({ children, title }: TooltipProps) {
-    return <div title={title}>{children}</div>;
+export function Tooltip({ title, ...rest }: TooltipProps) {
+    return <div title={title} {...rest}></div>;
 }
