@@ -9,6 +9,7 @@ import { KnownPages } from '../../src/knownPages';
 import { useActiveNavItem } from './useActiveNavItem';
 import { SpaceTitle } from './SpaceTitle';
 import { EntityTitle } from './EntityTitle';
+import { EntitiesTitle } from './EntitiesTitle';
 
 export function PageTitle({ fullPage = false }: { fullPage?: boolean }) {
     const pathname = usePathname();
@@ -20,6 +21,12 @@ export function PageTitle({ fullPage = false }: { fullPage?: boolean }) {
             return (
                 <Suspense fallback={<div>Loading...</div>}>
                     <EntityTitle entityId={entityId} />
+                </Suspense>
+            );
+        } else {
+            return (
+                <Suspense fallback={<div>Loading...</div>}>
+                    <EntitiesTitle />
                 </Suspense>
             );
         }

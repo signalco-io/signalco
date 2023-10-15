@@ -1,3 +1,13 @@
+export const distinctBy = <TArray>(array: Array<TArray>, selector: (val: TArray) => unknown) => {
+    if (!array.length) return [];
+    return array.reduce((a, b) => {
+        const val = selector(b);
+        if (!a.some(x => selector(x) === val))
+            a.push(b);
+        return a;
+    }, [] as TArray[]);
+}
+
 export const selectMany = <TArray, TItem>(array: Array<TArray>, selector: (val: TArray) => TItem[]) => {
     if (!array.length) return [];
     return array.map(selector).reduce((a, b) => {

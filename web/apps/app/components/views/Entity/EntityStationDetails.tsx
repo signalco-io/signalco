@@ -38,7 +38,7 @@ function ContactButton({ pointer }: { pointer: IContactPointer }) {
 }
 
 function stationPointer(entity: IEntityDetails, contactName: string) {
-    return { entityId: entity.id, channelName: 'signalco', contactName };
+    return { entityId: entity.id, channelName: 'station', contactName };
 }
 
 export default function EntityStationDetails({ entity }: { entity: IEntityDetails }) {

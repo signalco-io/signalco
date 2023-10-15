@@ -37,7 +37,7 @@ const CardForwarded = forwardRef<HTMLDivElement, CardProps>(({ href, onClick, cl
             <div
                 ref={ref}
                 className={cx(
-                    'bg-card rounded-lg p-2 border border-border text-card-foreground shadow-sm',
+                    'bg-card rounded-lg p-2 border text-card-foreground shadow-sm',
                     className
                 )}
                 {...restProps} />

@@ -1,8 +1,11 @@
 import { Channel, Dashboard, Device, Play, Station } from '@signalco/ui-icons';
+import { distinctBy } from '@signalco/js';
+import ChannelLogo from '../../channels/ChannelLogo';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 
-export function EntityIconByType(type: number) {
-    switch(type) {
+export function EntityIconByType(entityOrType: IEntityDetails | number) {
+    const type = typeof entityOrType === 'number' ? entityOrType : entityOrType.type;
+    switch (type) {
     case 2:
         return Dashboard;
     case 3:
@@ -10,6 +13,14 @@ export function EntityIconByType(type: number) {
     case 4:
         return Station;
     case 5:
+        if (typeof entityOrType === 'number')
+            return Channel;
+
+        const entityChannels = distinctBy(entityOrType.contacts.map(c => c.channelName), c => c);
+        if (entityChannels.length === 1)
+            return function ChannelIcon() {
+                return <ChannelLogo channelName={entityChannels[0]} />
+            };
         return Channel;
     default:
         return Device;
@@ -49,7 +60,7 @@ export default function EntityIcon(entity: IEntityDetails | null | undefined) {
         }
 
         if (!Icon) {
-            return EntityIconByType(entity.type);
+            return EntityIconByType(entity);
         }
     }
 
