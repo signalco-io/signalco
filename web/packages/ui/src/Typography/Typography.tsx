@@ -62,7 +62,7 @@ export const Typography = forwardRef<HTMLDivElement, TypographyProps>(function T
             ref: ref,
             className: cx(
                 'm-0',
-                level === 'body2' && 'text-sm',
+                level === 'body2' && 'text-sm text-secondary-foreground',
                 level === 'body3' && 'text-xs',
                 level === 'h1' && 'text-5xl',
                 level === 'h2' && 'text-4xl',

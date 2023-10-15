@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { ExternalLink } from '@signalco/ui-icons';
 import { Timeago } from '@signalco/ui/dist/Timeago';
 import { Stack } from '@signalco/ui/dist/Stack';
@@ -18,9 +19,11 @@ import useContact from '../../../src/hooks/signalco/useContact';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import { entityLastActivity } from '../../../src/entity/EntityHelper';
 import { setAsync } from '../../../src/contacts/ContactRepository';
-import EntityProcessDetails from './EntityProcessDetails';
 import EntityOptions from './EntityOptions';
 import ContactsTable from './ContactsTable';
+
+const EntityProcessDetailsDynamic = dynamic(() => import('./EntityProcessDetails'), { ssr: false, loading: () => <div>Loading...</div> });
+const EntityStationDetailsDynamic = dynamic(() => import('./EntityStationDetails'), { ssr: false, loading: () => <div>Loading...</div> });
 
 export interface EntityDetailsViewProps {
     id?: string;
@@ -52,7 +55,9 @@ export default function EntityDetailsView({ id }: EntityDetailsViewProps) {
     const detailsComponent = useMemo(() => {
         switch (entity?.type) {
         case 3:
-            return <EntityProcessDetails entity={entity} />
+            return <EntityProcessDetailsDynamic entity={entity} />
+        case 4:
+            return <EntityStationDetailsDynamic entity={entity} />
         default:
             return null;
         }

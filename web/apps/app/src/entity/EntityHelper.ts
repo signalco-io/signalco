@@ -20,9 +20,9 @@ export function entityHasOffline(entity: IEntityDetails | null | undefined) {
 
 export function entityInError(entity: IEntityDetails | null | undefined) {
     if (entity == null) return false;
-    const contacts = entity.contacts.filter(c => c.contactName === 'offline');
-    if ((contacts?.length ?? 0) <= 0) return undefined;
-    return !Boolean(contacts.find(c => c.valueSerialized?.toLocaleLowerCase() !== 'true'));
+    const offlineContacts = entity.contacts.filter(c => c.contactName === 'offline');
+    if ((offlineContacts?.length ?? 0) <= 0) return undefined;
+    return Boolean(offlineContacts.find(c => c.valueSerialized?.toLocaleLowerCase() === 'true'));
 }
 
 export function entityLastActivity(entity: IEntityDetails | null | undefined) {

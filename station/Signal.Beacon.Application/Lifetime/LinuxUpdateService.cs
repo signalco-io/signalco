@@ -66,7 +66,7 @@ public class LinuxUpdateService : IUpdateService
         var releaseChannelArg = string.Empty;
         var state = await this.stateService.GetAsync(cancellationToken);
         var stationReleaseChannel = await this.entitiesDao.ContactValueSerializedAsync(
-            new ContactPointer(state.Id, "signalco", "stationReleaseChannel"),
+            new ContactPointer(state.Id, ChannelNames.StationDevice, "stationReleaseChannel"),
             cancellationToken);
         if (stationReleaseChannel == "next")
             releaseChannelArg = "--next";

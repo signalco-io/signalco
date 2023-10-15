@@ -1,4 +1,4 @@
-import type { HTMLAttributes, PropsWithChildren, MouseEventHandler } from 'react';
+import { type HTMLAttributes, type PropsWithChildren, type MouseEventHandler, forwardRef } from 'react';
 import { cx } from 'classix';
 import { Link } from '../Link';
 
@@ -31,10 +31,11 @@ function CardWrapper({ href, onClick, children }: PropsWithChildren & Pick<CardP
     return <BareCard>{children}</BareCard>;
 }
 
-export function Card({ href, onClick, className, ...restProps }: CardProps) {
+const CardForwarded = forwardRef<HTMLDivElement, CardProps>(({ href, onClick, className, ...restProps }, ref) => {
     return (
         <CardWrapper href={href} onClick={onClick}>
             <div
+                ref={ref}
                 className={cx(
                     'bg-card rounded-lg p-2 border border-border text-card-foreground shadow-sm',
                     className
@@ -42,7 +43,9 @@ export function Card({ href, onClick, className, ...restProps }: CardProps) {
                 {...restProps} />
         </CardWrapper>
     );
-}
+});
+CardForwarded.displayName = 'Card';
+export const Card = CardForwarded;
 
 export function CardHeader({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
     return <div className={cx('flex flex-col space-y-1.5 p-6', className)} {...props} />;

@@ -15,7 +15,7 @@ export default function useContact(pointer: Partial<IContactPointer> | null | un
 
         // TODO: Return `null` instead of throwing an error
         if (!contact)
-            throw new Error('Contact not found');
+            throw new Error(`Contact not found - ${pointer?.channelName}|${pointer?.contactName}`);
 
         return contact;
     }, {

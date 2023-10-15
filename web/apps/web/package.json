@@ -17,7 +17,11 @@
         "test": "playwright test"
     },
     "dependencies": {
+        "@enterwell/react-hooks": "0.3.1",
         "@hcaptcha/react-hcaptcha": "1.8.1",
+        "@reactflow/background": "11.3.3",
+        "@reactflow/controls": "11.2.3",
+        "@reactflow/core": "11.9.3",
         "@next/env": "13.5.4",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
@@ -43,7 +47,7 @@
         "tailwindcss-animate": "1.0.7"
     },
     "devDependencies": {
-        "@axe-core/playwright": "4.8.0",
+        "@axe-core/playwright": "4.8.1",
         "@babel/core": "7.23.2",
         "@next/bundle-analyzer": "13.5.4",
         "@playwright/test": "1.39.0",

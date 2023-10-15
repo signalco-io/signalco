@@ -25,8 +25,8 @@ export function useEntityStatus(entity: IEntityDetails | null | undefined) {
 
 type EntityStatusColors = 'success' | 'warning' | 'danger' | 'neutral';
 
-export default function EntityStatus(props: { entity: IEntityDetails | null | undefined }) {
-    const { hasStatus, isOffline, hasOffline, lastActivity, isStale } = useEntityStatus(props.entity);
+export default function EntityStatus({ entity }: { entity: IEntityDetails | null | undefined }) {
+    const { hasStatus, isOffline, hasOffline, lastActivity, isStale } = useEntityStatus(entity);
     if (!hasStatus)
         return null;
 

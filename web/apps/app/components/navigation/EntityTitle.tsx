@@ -3,6 +3,6 @@ import EntityIconLabel from '../shared/entity/EntityIconLabel';
 
 export function EntityTitle({ entityId }: { entityId: string; }) {
     return (
-        <EntityIconLabel entityId={entityId} />
+        <EntityIconLabel entityId={entityId} header />
     );
 }

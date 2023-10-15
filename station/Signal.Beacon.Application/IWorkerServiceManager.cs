@@ -16,5 +16,5 @@ public interface IWorkerServiceManager
     Task StopAllInternalWorkerServicesAsync();
     Task StartWorkerServiceAsync(string entityId, CancellationToken cancellationToken = default);
     Task StopWorkerServiceAsync(string entityId, CancellationToken cancellationToken = default);
-    void BeginDiscovery();
+    Task BeginDiscoveryAsync(CancellationToken cancellationToken = default);
 }

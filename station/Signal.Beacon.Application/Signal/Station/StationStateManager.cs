@@ -72,7 +72,7 @@ internal class StationStateManager : IStationStateManager
                     cancellationToken);
 
             // Report state
-            var pointer = new ContactPointer(state.Id, "signalco", string.Empty);
+            var pointer = new ContactPointer(state.Id, ChannelNames.StationDevice, string.Empty);
             await this.entityService.ContactSetAsync(
                 pointer with {ContactName = "version"},
                 state.Version,
