@@ -1,14 +1,15 @@
 'use client';
 
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Tooltip } from '@signalco/ui/dist/Tooltip';
 import { Stack } from '@signalco/ui/dist/Stack';
+import { SelectItems } from '@signalco/ui/dist/SelectItems';
 import { Row } from '@signalco/ui/dist/Row';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { Card, CardOverflow } from '@signalco/ui/dist/Card';
 import { Avatar } from '@signalco/ui/dist/Avatar';
-import { useLoadAndError } from '@signalco/hooks';
+import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
 import '@reactflow/core/dist/base.css';
 import {
     ReactFlowProvider,
@@ -80,11 +81,7 @@ function ResourceGraph() {
     const fetchInfrastructureCallback = useCallback(() => fetchInfrastructureGraph('next'), []);
     const { item, isLoading, error } = useLoadAndError(fetchInfrastructureCallback);
 
-    const visibleResourceTypes = useMemo(() => {
-        return [
-            'web:WebApp'
-        ]
-    }, []);
+    const [visibleResourceTypes, setVisibleResourceTypes] = useState<string[] | undefined>(['web:WebApp']);
 
     const resources: InfraResource[] = useMemo(() => {
         const resourceItems: InfraResource[] = [];
@@ -170,6 +167,17 @@ function ResourceGraph() {
         return expandedResources;
     }, [resources]);
 
+    const allResourceTypes = useMemo(() => {
+        const resourceTypes: string[] = [];
+        expandedResources?.forEach((resource) => {
+            if (resource.valid && !resourceTypes.includes(resource.resourceType)) {
+                resourceTypes.push(resource.resourceType);
+            }
+        });
+        resourceTypes.sort();
+        return resourceTypes;
+    }, [expandedResources]);
+
     const initialNodes: Node<InfraResource>[] | undefined = useMemo(() => {
         const spacingY = 140;
 
@@ -184,7 +192,7 @@ function ResourceGraph() {
                 continue;
             }
 
-            if (visibleResourceTypes.includes(resource.resourceType)) {
+            if (visibleResourceTypes?.includes(resource.resourceType)) {
                 nodes.push({
                     id: resource.id,
                     data: resource,
@@ -212,7 +220,10 @@ function ResourceGraph() {
 
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-    const [ref, rect] = useResizeObserver();
+    const [rect, setRect] = useState<DOMRect | undefined>(undefined);
+    const ref = useResizeObserver((_, entry) => {
+        setRect(entry.contentRect);
+    });
 
     useEffect(() => {
         if (initialNodes && initialEdges) {
@@ -227,24 +238,35 @@ function ResourceGraph() {
     }), []);
 
     return (
-        <Card ref={ref} className="w-full">
-            <CardOverflow style={{ width: rect?.width, height: '50vh' }}>
-                <Loadable isLoading={isLoading} loadingLabel="Loading graph..." error={error} contentVisible>
-                    <ReactFlow
-                        nodes={nodes}
-                        edges={edges}
-                        onNodesChange={onNodesChange}
-                        onEdgesChange={onEdgesChange}
-                        nodeTypes={nodeTypes}
-                        proOptions={flowProOptions}
-                        minZoom={0.1}
-                    >
-                        <Background />
-                        <Controls />
-                    </ReactFlow>
-                </Loadable>
-            </CardOverflow>
-        </Card>
+        <Stack spacing={1}>
+            <Row>
+                <SelectItems
+                    value={visibleResourceTypes?.at(0)}
+                    label="Resource types"
+                    placeholder="Select resource types"
+                    items={allResourceTypes.map(t => ({ value: t }))}
+                    onValueChange={(value) => setVisibleResourceTypes([value])}
+                    className="min-w-[220px]" />
+            </Row>
+            <Card ref={ref} className="w-full">
+                <CardOverflow style={{ width: rect?.width, height: '50vh' }}>
+                    <Loadable isLoading={isLoading} loadingLabel="Loading graph..." error={error} contentVisible>
+                        <ReactFlow
+                            nodes={nodes}
+                            edges={edges}
+                            onNodesChange={onNodesChange}
+                            onEdgesChange={onEdgesChange}
+                            nodeTypes={nodeTypes}
+                            proOptions={flowProOptions}
+                            minZoom={0.1}
+                        >
+                            <Background />
+                            <Controls />
+                        </ReactFlow>
+                    </Loadable>
+                </CardOverflow>
+            </Card>
+        </Stack>
     );
 }
 
