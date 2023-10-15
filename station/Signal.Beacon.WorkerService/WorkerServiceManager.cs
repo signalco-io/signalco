@@ -174,9 +174,15 @@ internal class WorkerServiceManager : IWorkerServiceManager
         }
     }
     
-    public void BeginDiscovery()
+    public async Task BeginDiscoveryAsync(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        foreach (var workerService in this.workers.ToList())
+        {
+            if (workerService.Instance is IWorkerServiceWithDiscovery workerServiceWithDiscovery)
+            {
+                await workerServiceWithDiscovery.BeginDiscoveryAsync(cancellationToken);
+            }
+        }
     }
 
     private class StationWorkerServiceOperation : StationWorkerServiceState

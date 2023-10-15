@@ -64,14 +64,14 @@ internal class ApplicationWorkerService : IInternalWorkerService
         if (string.IsNullOrWhiteSpace(state.Id))
             throw new Exception("Can't register conducts without station id");
 
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "update"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "restartStation"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "updateSystem"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "restartSystem"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "shutdownSystem"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "workerService:start"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "workerService:stop"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "beginDiscovery"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "update"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "restartStation"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "updateSystem"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "restartSystem"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "shutdownSystem"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "workerService:start"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "workerService:stop"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "beginDiscovery"), null, cancellationToken);
     }
 
     private async Task StationConductHandler(IEnumerable<IConduct> conducts, CancellationToken cancellationToken)
@@ -117,7 +117,7 @@ internal class ApplicationWorkerService : IInternalWorkerService
                                                       ?? throw new InvalidOperationException("Provide channel entity ID"), cancellationToken);
                     break;
                 case "beginDiscovery":
-                    this.BeginWorkersDiscovery();
+                    await this.workerServiceManager.BeginDiscoveryAsync(cancellationToken);
                     break;
                 default:
                     throw new NotSupportedException("Not supported station conduct.");
@@ -149,11 +149,9 @@ internal class ApplicationWorkerService : IInternalWorkerService
         await this.workerServiceManager.StartWorkerServiceAsync(entityId, cancellationToken);
     }
 
-    private void BeginWorkersDiscovery() => 
-        this.workerServiceManager.BeginDiscovery();
-
     public Task StopAsync()
     {
+        // TODO: Maybe stop all workers here?
         return Task.CompletedTask;
     }
 }
