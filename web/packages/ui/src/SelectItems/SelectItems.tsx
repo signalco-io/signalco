@@ -17,6 +17,7 @@ export type SelectItemsProps = HTMLAttributes<HTMLDivElement> & ComponentPropsWi
     }[],
     placeholder?: string,
     helperText?: string;
+    variant?: 'outlined' | 'plain';
     onValueChange?: (value: string) => void;
 }
 
@@ -28,6 +29,7 @@ export function SelectItems(props: SelectItemsProps) {
         placeholder,
         helperText,
         onValueChange,
+        variant,
         ...rest
     } = props;
 
@@ -40,7 +42,10 @@ export function SelectItems(props: SelectItemsProps) {
             <SelectPrimitive.Root value={value} onValueChange={onValueChange}>
                 <SelectPrimitive.Trigger
                     id={id}
-                    className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    className={cx(
+                        'flex h-10 w-full items-center justify-between rounded-md bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+                        (!variant || variant === 'outlined') && 'border border-input'
+                    )}
                     aria-label={label ?? placeholder}
                 >
                     <SelectPrimitive.Value placeholder={label ?? placeholder} />
