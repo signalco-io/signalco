@@ -42,8 +42,8 @@ importers:
         specifier: 1.2.8
         version: 1.2.8(react-dom@18.2.0)(react@18.2.0)
       '@enterwell/react-hooks':
-        specifier: 0.3.0
-        version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 0.3.1
+        version: 0.3.1(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
         specifier: 1.8.1
         version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
@@ -3054,8 +3054,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@enterwell/react-hooks@0.3.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-8cAby2jRJm0J5zfO+3h9ga7/aTOOaRUSB85Ub74Rj79d16KrJpOesxrKvgZ6wl993XJo4T/rMm7cB7AuSVcyNA==}
+  /@enterwell/react-hooks@0.3.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-3J13l51BGSRxJ+poDN0IPRTU2hcM/6yep/htx/I6N2Ke2Es6g0HapXOTjnwk/4Z5Pq5EuO8O0QrMo1NZ4HZcJQ==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
