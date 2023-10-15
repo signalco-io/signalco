@@ -76,9 +76,7 @@
         --light-display: none;
         --dark-display: visible;
     }
-}
 
-@layer base {
     * {
         @apply border-border;
     }

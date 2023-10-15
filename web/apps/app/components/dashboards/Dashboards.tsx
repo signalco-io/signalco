@@ -92,7 +92,7 @@ function Dashboards() {
             )}
             <Stack spacing={1}>
                 <Loadable isLoading={!!!selectedId || selectedDashboard.isLoading} loadingLabel="Loading dashboards" error={selectedDashboard.error}>
-                    <div className="px-2 sm:px-0">
+                    <div className="p-2">
                         {selectedId && selectedDashboard.data
                             ? (
                                 <DashboardView
