@@ -8,7 +8,7 @@ import { Row } from '@signalco/ui/dist/Row';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { Card, CardOverflow } from '@signalco/ui/dist/Card';
 import { Avatar } from '@signalco/ui/dist/Avatar';
-import { useLoadAndError, useResizeObserver } from '@signalco/hooks';
+import { useLoadAndError } from '@signalco/hooks';
 import '@reactflow/core/dist/base.css';
 import {
     ReactFlowProvider,
@@ -24,6 +24,7 @@ import {
 } from '@reactflow/core';
 import { Controls } from '@reactflow/controls';
 import { Background } from '@reactflow/background';
+import { useResizeObserver } from '@enterwell/react-hooks';
 
 type InfraResource = {
     id: string;
