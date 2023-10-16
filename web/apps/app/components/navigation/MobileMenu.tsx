@@ -13,7 +13,7 @@ export function MobileMenu({ open, items, active, onClose }: { open: boolean; it
 
     return (
         <div className={cx(
-            'pt-2',
+            'p-2',
             !open && 'hidden',
             open && 'animate-in slide-in-from-top-3'
         )}>
@@ -27,7 +27,7 @@ export function MobileMenu({ open, items, active, onClose }: { open: boolean; it
                                 <Button
                                     fullWidth
                                     aria-label={t(ni.label)}
-                                    variant={ni === active ? 'plain' : 'soft'}
+                                    variant={ni === active ? 'soft' : 'plain'}
                                     size="lg"
                                     onClick={onClose}
                                     startDecorator={(<Icon />)}>

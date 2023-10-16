@@ -57,7 +57,7 @@ export default function Entities() {
 
     const results = useMemo(() => (
         <div className={cx(
-            'grid auto-cols-max gap-1',
+            'grid auto-cols-max gap-2',
             entityListViewType === 'table'
                 ? 'grid-cols-1'
                 : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
@@ -83,7 +83,7 @@ export default function Entities() {
         <Stack spacing={1} className="p-2">
             <Stack spacing={1}>
                 <Row justifyContent="space-between">
-                    <Row spacing={1} style={{ flexGrow: 1 }} justifyContent="end">
+                    <Row spacing={1} className="grow" justifyContent="end">
                         <SearchInput items={entities.data} onFilteredItems={setFilteredItems} />
                         <SelectItems
                             value={entityListViewType}

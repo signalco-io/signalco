@@ -212,6 +212,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                                             <DropdownMenuSeparator />
                                             <DropdownMenuItem
                                                 onSelect={() => {
+                                                    setValueSerialized(c.valueSerialized ?? '');
                                                     setEditingContactDialogOpen(true);
                                                     setEditingContact(c);
                                                 }}
@@ -267,11 +268,9 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
             <ConfigurationDialog
                 open={editingContactDialogOpen}
                 header="Edit contact"
-                onClose={() => setEditingContactDialogOpen(false)}>
-                <Stack spacing={1}>
-                    <Input value={valueSerialized} onChange={(e) => setValueSerialized(e.target.value)} />
-                    <Button onClick={handleEditValueSubmit}>Create</Button>
-                </Stack>
+                onClose={() => setEditingContactDialogOpen(false)}
+                actions={(<Button onClick={handleEditValueSubmit}>Save</Button>)}>
+                <Input value={valueSerialized} onChange={(e) => setValueSerialized(e.target.value)} />
             </ConfigurationDialog>
             <ConfirmDeleteDialog
                 isOpen={deletingContactDialogOpen}

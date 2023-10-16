@@ -19,7 +19,7 @@ function ConfigurationDialog({
 }: IConfigurationDialogProps) {
     return (
         <Modal trigger={trigger} open={open} onOpenChange={(newOpenState: boolean) => !newOpenState && onClose && onClose()}>
-            <Stack spacing={1}>
+            <Stack spacing={2}>
                 <Row justifyContent="space-between">
                     <Typography level="h5">{header}</Typography>
                     <Row spacing={1}>
