@@ -21,7 +21,7 @@
         "@hcaptcha/react-hcaptcha": "1.8.1",
         "@reactflow/background": "11.3.3",
         "@reactflow/controls": "11.2.4",
-        "@reactflow/core": "11.9.3",
+        "@reactflow/core": "11.9.4",
         "@next/env": "13.5.5",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
