@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Select } from '@signalco/ui-icons';
 import { Row } from '@signalco/ui/dist/Row';
 import { Popper } from '@signalco/ui/dist/Popper';
+import { ButtonDropdown } from '@signalco/ui/dist/ButtonDropdown';
 import { Button } from '@signalco/ui/dist/Button';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
@@ -41,12 +41,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
             {(dashboards?.length ?? 0) > 0 && (
                 <Popper
                     trigger={(
-                        <Button
-                            variant="plain"
-                            size="lg"
-                            endDecorator={<Select className="pointer-events-none" />}>
-                            {currentName}
-                        </Button>
+                        <ButtonDropdown className="font-semibold">{currentName}</ButtonDropdown>
                     )}>
                     <DashboardSelectorMenu
                         selectedId={selectedId}
