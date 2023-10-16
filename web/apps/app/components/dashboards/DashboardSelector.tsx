@@ -6,17 +6,26 @@ import { Popper } from '@signalco/ui/dist/Popper';
 import { ButtonDropdown } from '@signalco/ui/dist/ButtonDropdown';
 import { Button } from '@signalco/ui/dist/Button';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { showNotification } from '../../src/notifications/PageNotificationService';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
-export interface IDashboardSelectorProps {
+
+type DashboardSelectorProps = {
     onEditWidgets: () => void,
     onSettings: () => void
 }
 
-function DashboardSelector(props: IDashboardSelectorProps) {
+function DashboardSelector(props: DashboardSelectorProps) {
     const { onEditWidgets, onSettings } = props;
     const [selectedId, setSelectedId] = useSearchParam('dashboard');
-    const { data: dashboards } = useDashboards();
+    const { data: dashboards, isLoading, error } = useDashboards();
+
+    useEffect(() => {
+        if (error) {
+            console.error(error);
+            showNotification('There was an error while loading dashboards. Please refresh the page.', 'error');
+        }
+    }, [error]);
 
     const currentDashboard = dashboards?.find(d => d.id == selectedId);
     const currentName = currentDashboard?.name;
@@ -24,17 +33,11 @@ function DashboardSelector(props: IDashboardSelectorProps) {
 
     // Set initial selection on component and dashboards load
     useEffect(() => {
-        if (!selectedId && dashboards?.length) {
+        if (!selectedId && dashboards?.length && !isLoading) {
             console.debug('Selecting first available dashboard', dashboards[0].id);
             setSelectedId(dashboards[0].id);
         }
-    }, [selectedId, dashboards, setSelectedId]);
-
-    const handleDashboardSelection = (id: string) => {
-        setSelectedId(id);
-    }
-
-    console.debug('Rendering DashboardSelector');
+    }, [selectedId, dashboards, setSelectedId, isLoading]);
 
     return (
         <Row>
@@ -56,7 +59,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                         <Button
                             key={fd.id}
                             variant="plain"
-                            onClick={() => handleDashboardSelection(fd.id)}>
+                            onClick={() => setSelectedId(fd.id)}>
                             {fd.name}
                         </Button>
                     ))}
