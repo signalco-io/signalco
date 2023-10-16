@@ -11,12 +11,13 @@ export type ChipProps = PropsWithChildren<{
     onClick?: MouseEventHandler<HTMLButtonElement>,
     href?: string | undefined,
     startDecorator?: ReactNode,
+    className?: string,
 }>;
 
-export function Chip({ size, color, startDecorator, onClick, children, href }: ChipProps) {
+export function Chip({ size, color, startDecorator, onClick, children, href, className }: ChipProps) {
     const actionable = typeof onClick !== 'undefined' || typeof href !== 'undefined';
 
-    const className = cx(
+    const chipClassName = cx(
         'm-0 border',
         size === 'sm' && 'rounded-xl py-0.5 px-1.5 text-xs',
         (!size || size === 'md') && 'text-sm py-1 rounded-2xl px-3 px-2',
@@ -32,10 +33,10 @@ export function Chip({ size, color, startDecorator, onClick, children, href }: C
         actionable && 'hover:bg-opacity-90',
     );
     const Wrapper = onClick
-        ? (props: PropsWithChildren) => <button onClick={onClick} className={className}>{props.children}</button>
+        ? (props: PropsWithChildren) => <button onClick={onClick} className={cx(chipClassName, className)}>{props.children}</button>
         : (href
-            ? (props: PropsWithChildren) => <Link href={href} className={className}>{props.children}</Link>
-            : (props: PropsWithChildren) => <div className={className}>{props.children}</div>);
+            ? (props: PropsWithChildren) => <Link href={href} className={cx(chipClassName, className)}>{props.children}</Link>
+            : (props: PropsWithChildren) => <div className={cx(chipClassName, className)}>{props.children}</div>);
 
     return (
         <Wrapper>

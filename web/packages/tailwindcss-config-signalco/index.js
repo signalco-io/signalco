@@ -48,6 +48,7 @@ export const baseConfig = {
                 card: {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
+                    transparent: "hsl(var(--card-transparent))",
                 },
             },
             borderRadius: {

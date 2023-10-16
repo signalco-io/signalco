@@ -11,8 +11,6 @@ export function SpaceTitle() {
     const handleEditWidgets = () => setIsEditing('true');
     const handleSettings = () => setIsDashboardSettingsOpen('true');
 
-    console.log('Space title')
-
     return (
         <Row spacing={1} justifyContent="space-between" alignItems="stretch">
             <DashboardSelector

@@ -70,8 +70,6 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
     const dashbaordPadding = 0;//48 + 109; // Has 24 x padding (109 nav width)
     const numberOfColumns = Math.max(4, Math.floor((windowInnerWidth - dashbaordPadding) / widgetSize)); // When width is less than 400, set to quad column
 
-    console.log('numberOfCols', numberOfColumns, windowInnerWidth)
-
     return (
         <div ref={resizeObserverRef}>
             <div
