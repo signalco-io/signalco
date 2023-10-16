@@ -49,7 +49,7 @@ export default function EntityOptions({ id, canHideRaw, showRaw, showRawChanged,
         <>
             <DropdownMenu>
                 <DropdownMenuTrigger>
-                    <Button {...rest}>
+                    <Button variant="plain" {...rest}>
                         <MoreHorizontal />
                     </Button>
                 </DropdownMenuTrigger>
