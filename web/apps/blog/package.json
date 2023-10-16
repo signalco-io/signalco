@@ -19,8 +19,8 @@
     "dependencies": {
         "@mdx-js/loader": "2.3.0",
         "@mdx-js/react": "2.3.0",
-        "@next/env": "13.5.4",
-        "@next/mdx": "13.5.4",
+        "@next/env": "13.5.5",
+        "@next/mdx": "13.5.5",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
@@ -33,7 +33,7 @@
         "encoding": "0.1.13",
         "fs-extra": "11.1.1",
         "klaw": "4.1.0",
-        "next": "13.5.4",
+        "next": "13.5.5",
         "next-secure-headers": "2.2.0",
         "react": "18.2.0",
         "react-cool-inview": "3.0.1",
@@ -46,7 +46,7 @@
     "devDependencies": {
         "@axe-core/playwright": "4.8.1",
         "@babel/core": "7.23.2",
-        "@next/bundle-analyzer": "13.5.4",
+        "@next/bundle-analyzer": "13.5.5",
         "@playwright/test": "1.39.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
