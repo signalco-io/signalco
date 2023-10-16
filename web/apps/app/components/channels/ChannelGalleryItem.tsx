@@ -14,7 +14,7 @@ type ChannelGalleryItemProps = {
 
 function ChannelGalleryItemChip(props: { label: string, color: ColorPaletteProp }) {
     return (
-        <div style={{ position: 'absolute', right: 8, top: 8 }}>
+        <div className="absolute right-2 top-2">
             <Chip size="sm" variant="solid" color={props.color}>{props.label}</Chip>
         </div>
     );
@@ -25,7 +25,7 @@ export default function ChannelGalleryItem(props: ChannelGalleryItemProps) {
 
     return (
         <Card
-            className="h-40 w-40"
+            className="relative h-40 w-40"
             href={hrefFunc ? hrefFunc(id) : `/channels/${id}`}
         >
             {planned && <ChannelGalleryItemChip label="Soon" color="neutral" />}

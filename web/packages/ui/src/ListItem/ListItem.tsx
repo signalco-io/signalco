@@ -47,7 +47,7 @@ export function ListItem({
 
     if (!href && !nodeId && !onSelected) {
         return (
-            <Row spacing={1} className={cx('min-h-[3rem]', className)}>
+            <Row spacing={2} className={cx('min-h-[3rem]', className)}>
                 {startDecorator ?? null}
                 <div className={cx('grow', disabled && 'opacity-60')}>{label}</div>
                 <div className="self-end">

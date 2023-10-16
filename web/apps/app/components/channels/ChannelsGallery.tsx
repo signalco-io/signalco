@@ -1,3 +1,5 @@
+'use client';
+
 import {Gallery} from '@signalco/ui/dist/Gallery';
 import { FilterList } from '@signalco/ui/dist/FilterList';
 import { orderBy } from '@signalco/js';

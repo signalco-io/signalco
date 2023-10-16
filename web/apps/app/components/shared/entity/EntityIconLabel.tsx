@@ -23,7 +23,7 @@ export default function EntityIconLabel({ entityId, description, header }: Entit
     return (
         <Row spacing={2} style={{ minWidth: 0 }}>
             {entity && header ? (
-                <Avatar>
+                <Avatar className="p-1">
                     <Icon />
                 </Avatar>
             ) : entity && (<Icon />)}
