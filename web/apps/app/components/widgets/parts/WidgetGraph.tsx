@@ -25,7 +25,7 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     DefaultColumns(4)
 ];
 
-export default function WidgetButton({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
+export default function WidgetGraph({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
     useWidgetOptions(stateOptions, { onOptions });
 
     const columns = config?.columns ?? 4;
