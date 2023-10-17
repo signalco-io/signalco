@@ -1,12 +1,11 @@
 import React from 'react';
-import Image from 'next/image';
 import { Add } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Card, CardOverflow } from '@signalco/ui/dist/Card';
+import { Card } from '@signalco/ui/dist/Card';
 import { widgetType } from '../widgets/Widget';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
 
