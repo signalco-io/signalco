@@ -142,6 +142,7 @@
         "Dashboards": {
             "SaveFailedNotification": "There was an error while saving dashboards. Please try again or refresh the page.",
             "AddWidget": "Add widget...",
+            "WidgetsStore": "Widgets store",
             "Save": "Save",
             "NoDashboardsPlaceholder": "No Dashboards",
             "NoDashboardsHelpText": "You don't have any dashboards. Create a dashboard to get started.",

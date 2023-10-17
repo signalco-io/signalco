@@ -85,7 +85,7 @@ function WidgetCard(props: IWidgetCardProps) {
                         <div className="absolute right-0 top-0">
                             <DropdownMenu>
                                 <DropdownMenuTrigger>
-                                    <Button className="min-w-[42px]" {...props}><MoreHorizontal /></Button>
+                                    <Button className="min-w-[42px]"><MoreHorizontal /></Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
                                     {options && (
