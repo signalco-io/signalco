@@ -25,7 +25,7 @@
         "tsup": "6.7.0",
         "typescript": "5.2.2",
         "rimraf": "5.0.5",
-        "lucide-react": "0.287.0",
+        "lucide-react": "0.288.0",
         "react": "18.2.0",
         "react-dom": "18.2.0"
     },
