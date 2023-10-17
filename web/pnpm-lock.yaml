@@ -1141,8 +1141,8 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
       lucide-react:
-        specifier: 0.287.0
-        version: 0.287.0(react@18.2.0)
+        specifier: 0.288.0
+        version: 0.288.0(react@18.2.0)
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -5053,28 +5053,6 @@ packages:
     dependencies:
       '@reactflow/core': 11.9.4(@types/react@18.2.28)(react-dom@18.2.0)(react@18.2.0)
       classcat: 5.0.4
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.4.3(@types/react@18.2.28)(react@18.2.0)
-    transitivePeerDependencies:
-      - '@types/react'
-      - immer
-    dev: false
-
-  /@reactflow/core@11.9.3(@types/react@18.2.28)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-45o8X1sjF48wSWALHybbLoWF6yo9SARgJpMKm96J8ZL8mrNhqSjll77sLRJg6zQ+VKdDwotEN30jp5eY6i28tw==}
-    peerDependencies:
-      react: '>=17'
-      react-dom: '>=17'
-    dependencies:
-      '@types/d3': 7.4.1
-      '@types/d3-drag': 3.0.4
-      '@types/d3-selection': 3.0.7
-      '@types/d3-zoom': 3.0.5
-      classcat: 5.0.4
-      d3-drag: 3.0.0
-      d3-selection: 3.0.0
-      d3-zoom: 3.0.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       zustand: 4.4.3(@types/react@18.2.28)(react@18.2.0)
@@ -11593,8 +11571,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lucide-react@0.287.0(react@18.2.0):
-    resolution: {integrity: sha512-auxP2bTGiMoELzX+6ItTeNzLmhGd/O+PHBsrXV2YwPXYCxarIFJhiMOSzFT9a1GWeYPSZtnWdLr79IVXr/5JqQ==}
+  /lucide-react@0.288.0(react@18.2.0):
+    resolution: {integrity: sha512-ikhb/9LOkq9orPoLV9lLC4UYyoXQycBhIgH7H59ahOkk0mkcAqkD52m84RXedE/qVqZHW8rEJquInT4xGmsNqw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
