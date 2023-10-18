@@ -202,8 +202,8 @@ importers:
         specifier: 18.2.13
         version: 18.2.13
       '@types/react-grid-layout':
-        specifier: 1.3.3
-        version: 1.3.3
+        specifier: 1.3.4
+        version: 1.3.4
       '@types/recharts':
         specifier: 1.8.25
         version: 1.8.25
@@ -6835,8 +6835,8 @@ packages:
     dependencies:
       '@types/react': 18.2.29
 
-  /@types/react-grid-layout@1.3.3:
-    resolution: {integrity: sha512-VLgUoEN0PaAL3GeRsmYbHuoN0tpDNoRhlkdzHK4Ll8shHW6e16YpNCZWb7P9vrlZdzFtY75cM/hPr8p0ukZQCw==}
+  /@types/react-grid-layout@1.3.4:
+    resolution: {integrity: sha512-ZQqOhkizXv8t8AWyH2OcdWxeDr08gJPp/hg4mLCOz1xz6McqQc6HLBEXDIc/r0YsMeIWKOD31Br8i4DA/gilbQ==}
     dependencies:
       '@types/react': 18.2.29
     dev: true
