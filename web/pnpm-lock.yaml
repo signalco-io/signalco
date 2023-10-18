@@ -187,8 +187,8 @@ importers:
         specifier: 3.0.4
         version: 3.0.4
       '@types/d3':
-        specifier: 7.4.1
-        version: 7.4.1
+        specifier: 7.4.2
+        version: 7.4.2
       '@types/next-pwa':
         specifier: 5.6.7
         version: 5.6.7(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.4)
@@ -202,8 +202,8 @@ importers:
         specifier: 18.2.13
         version: 18.2.13
       '@types/react-grid-layout':
-        specifier: 1.3.3
-        version: 1.3.3
+        specifier: 1.3.4
+        version: 1.3.4
       '@types/recharts':
         specifier: 1.8.25
         version: 1.8.25
@@ -362,8 +362,8 @@ importers:
         specifier: 11.0.2
         version: 11.0.2
       '@types/klaw':
-        specifier: 3.0.4
-        version: 3.0.4
+        specifier: 3.0.5
+        version: 3.0.5
       '@types/node':
         specifier: 18.18.6
         version: 18.18.6
@@ -847,8 +847,8 @@ importers:
         specifier: 0.5.1
         version: 0.5.1
       '@types/cobe':
-        specifier: 0.4.1
-        version: 0.4.1
+        specifier: 0.4.2
+        version: 0.4.2
       '@types/color':
         specifier: 3.0.4
         version: 3.0.4
@@ -1087,8 +1087,8 @@ importers:
         specifier: 18.2.13
         version: 18.2.13
       '@types/react-timeago':
-        specifier: 4.1.4
-        version: 4.1.4
+        specifier: 4.1.5
+        version: 4.1.5
       autoprefixer:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.31)
@@ -5052,7 +5052,7 @@ packages:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@types/d3': 7.4.1
+      '@types/d3': 7.4.2
       '@types/d3-drag': 3.0.4
       '@types/d3-selection': 3.0.7
       '@types/d3-zoom': 3.0.5
@@ -6397,8 +6397,8 @@ packages:
     resolution: {integrity: sha512-wJsiX1tosQ+J5+bY5LrSahHxr2wT+uME5UDwdN1kg4frt40euqA+wzECkmq4t5QbveHiJepfdThgQrPw6KiSlg==}
     dev: false
 
-  /@types/cobe@0.4.1:
-    resolution: {integrity: sha512-hGlZDryfnyyynIn0Ie4BT6M1NyGC7nPDyMLV1ilyGryidyX22UiXer4v3j9O0hQMX9HAFsRHmrThvYGMO3+lyg==}
+  /@types/cobe@0.4.2:
+    resolution: {integrity: sha512-7tIcAmh3Eram92Gs8kpd0Djjx3Gd4JnPcuN6JXoS+ynKXpTjlqRliBzIyVOpQ/swbeNzc+y7IhDCabVNqSzYeA==}
     dependencies:
       phenomenon: 1.6.0
     dev: true
@@ -6555,8 +6555,8 @@ packages:
       '@types/d3-interpolate': 3.0.2
       '@types/d3-selection': 3.0.7
 
-  /@types/d3@7.4.1:
-    resolution: {integrity: sha512-lBpYmbHTCtFKO1DB1R7E9dXp9/g1F3JXSGOF7iKPZ+wRmYg/Q6tCRHODGOc5Qk25fJRe2PI60EDRf2HLPUncMA==}
+  /@types/d3@7.4.2:
+    resolution: {integrity: sha512-Y4g2Yb30ZJmmtqAJTqMRaqXwRawfvpdpVmyEYEcyGNhrQI/Zvkq3k7yE1tdN07aFSmNBfvmegMQ9Fe2qy9ZMhw==}
     dependencies:
       '@types/d3-array': 3.0.8
       '@types/d3-axis': 3.0.4
@@ -6737,8 +6737,8 @@ packages:
       '@types/node': 18.18.6
     dev: false
 
-  /@types/klaw@3.0.4:
-    resolution: {integrity: sha512-0M5F/WMU9yu2MyRued1VTQvUSwZ3siqYsX6MU7JF7VXRF5RzL0FXWFUrmdrWuGDWmuN6W+SyLhhg1Wp/sXkjtg==}
+  /@types/klaw@3.0.5:
+    resolution: {integrity: sha512-sX8M64GwQbEhPA4GrOUYEl/0Cc9oz5Effoaj43B4o3bsVwskxEipparp8tI1E6lhs2s1R1u/0KeNvf/9OR1cAA==}
     dependencies:
       '@types/node': 18.18.6
     dev: true
@@ -6835,14 +6835,14 @@ packages:
     dependencies:
       '@types/react': 18.2.29
 
-  /@types/react-grid-layout@1.3.3:
-    resolution: {integrity: sha512-VLgUoEN0PaAL3GeRsmYbHuoN0tpDNoRhlkdzHK4Ll8shHW6e16YpNCZWb7P9vrlZdzFtY75cM/hPr8p0ukZQCw==}
+  /@types/react-grid-layout@1.3.4:
+    resolution: {integrity: sha512-ZQqOhkizXv8t8AWyH2OcdWxeDr08gJPp/hg4mLCOz1xz6McqQc6HLBEXDIc/r0YsMeIWKOD31Br8i4DA/gilbQ==}
     dependencies:
       '@types/react': 18.2.29
     dev: true
 
-  /@types/react-timeago@4.1.4:
-    resolution: {integrity: sha512-2ja12wesBR/n2VMLaYmuHoLB1s9wSUBzPyT1FuWQF4mmvNZYi+OMnx/cJdyFiDoGIMHodN4ZrLNOW9bVxAn8eQ==}
+  /@types/react-timeago@4.1.5:
+    resolution: {integrity: sha512-Tv9pSndEUtdzJ6wDgvgKLD9X3ef+KdHigDxgFi23G//sSPCXZ/jWmX+fm1gQDDWIObJU7HfTTObdzHfI/yv9Rw==}
     dependencies:
       '@types/react': 18.2.29
     dev: true
