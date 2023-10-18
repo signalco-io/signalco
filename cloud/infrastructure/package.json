@@ -8,7 +8,7 @@
         "restart-functions": "node tools/restart-functions.js"
     },
     "devDependencies": {
-        "@types/node": "18.18.5",
+        "@types/node": "18.18.6",
         "@typescript-eslint/eslint-plugin": "6.8.0",
         "@typescript-eslint/parser": "6.8.0",
         "eslint": "8.51.0",
@@ -26,6 +26,6 @@
         "@pulumi/cloudflare": "5.12.0",
         "@pulumi/command": "0.9.1",
         "@pulumi/docker": "4.4.3",
-        "@pulumi/pulumi": "3.88.1"
+        "@pulumi/pulumi": "3.89.0"
     }
 }

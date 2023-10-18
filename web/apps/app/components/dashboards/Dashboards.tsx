@@ -55,7 +55,7 @@ function Dashboards() {
             const newDashboardId = await saveDashboard.mutateAsync({
                 name: 'New dashboard'
             });
-            await setDashboardId(newDashboardId);
+            setDashboardId(newDashboardId);
         } catch (err) {
             console.error('Failed to create dashboard', err);
             showNotification(t('NewDashboardErrorUnknown'), 'error');
@@ -78,6 +78,8 @@ function Dashboards() {
 
     console.debug('Rendering Dashboards');
 
+    console.debug('selectedId', selectedId, 'isLoading', selectedDashboard.isLoading, typeof selectedDashboard.data);
+
     return (
         <>
             {isEditing && (
@@ -91,9 +93,9 @@ function Dashboards() {
                 </Row>
             )}
             <Stack spacing={1}>
-                <Loadable isLoading={!!!selectedId || selectedDashboard.isLoading} loadingLabel="Loading dashboards" error={selectedDashboard.error}>
+                <Loadable isLoading={selectedDashboard.isLoading} loadingLabel="Loading dashboards..." error={selectedDashboard.error}>
                     <div className="p-2 sm:px-2 sm:py-0">
-                        {selectedId && selectedDashboard.data
+                        {selectedDashboard.data
                             ? (
                                 <DashboardView
                                     dashboard={selectedDashboard.data}
@@ -114,17 +116,13 @@ function Dashboards() {
                     </div>
                 </Loadable>
             </Stack>
-            {isDashboardSettingsOpen && (
-                <DashboardSettings
-                    dashboard={selectedDashboard.data}
-                    isOpen={isDashboardSettingsOpen}
-                    onClose={() => setIsDashboardSettingsOpen(undefined)} />
-            )}
-            {showWidgetStore && (
-                <ConfigurationDialog open={showWidgetStore} onClose={() => setShowWidgetStore(false)} header={t('WidgetsStore')}>
-                    <WidgetStoreDynamic onAddWidget={handleAddWidget} />
-                </ConfigurationDialog>
-            )}
+            <DashboardSettings
+                dashboard={selectedDashboard.data}
+                isOpen={isDashboardSettingsOpen}
+                onClose={() => setIsDashboardSettingsOpen(undefined)} />
+            <ConfigurationDialog open={showWidgetStore} onClose={() => setShowWidgetStore(false)} header={t('WidgetsStore')}>
+                <WidgetStoreDynamic onAddWidget={handleAddWidget} />
+            </ConfigurationDialog>
         </>
     );
 }

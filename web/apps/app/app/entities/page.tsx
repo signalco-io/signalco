@@ -3,7 +3,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { cx } from 'classix';
-import { useQueryClient } from '@tanstack/react-query';
 import { Add, Check, LayoutGrid, LayoutList } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { SelectItems } from '@signalco/ui/dist/SelectItems';
@@ -14,9 +13,10 @@ import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { KnownPages } from '../../src/knownPages';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale from '../../src/hooks/useLocale';
+import useUpsertEntity from '../../src/hooks/signalco/entity/useUpsertEntity';
+import useDeleteEntity from '../../src/hooks/signalco/entity/useDeleteEntity';
 import useAllEntities from '../../src/hooks/signalco/entity/useAllEntities';
 import IEntityDetails from '../../src/entity/IEntityDetails';
-import { entityDeleteAsync, entityUpsertAsync } from '../../src/entity/EntityRepository';
 import SearchInput from '../../components/shared/inputs/SearchInput';
 import ConfirmDeleteButton from '../../components/shared/dialog/ConfirmDeleteButton';
 import EntityCard from '../../components/entity/EntityCard';
@@ -26,6 +26,8 @@ export default function Entities() {
     const router = useRouter();
     const [selectedType] = useSearchParam('type', '1');
     const entities = useAllEntities(parseInt(selectedType, 10) || 1);
+    const entityUpsert = useUpsertEntity();
+    const deleteEntity = useDeleteEntity();
 
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
     const [filteredItems, setFilteredItems] = useState<IEntityDetails[] | undefined>(entities.data);
@@ -43,11 +45,8 @@ export default function Entities() {
         }
     }, [selected]);
 
-    const queryClient = useQueryClient();
     const handleConfirmDeleteSelected = async () => {
-        await Promise.all(selected.map(e => entityDeleteAsync(e.id)));
-        queryClient.invalidateQueries(['entities']);
-        queryClient.invalidateQueries(['entities', parseInt(selectedType, 10)]);
+        await Promise.all(selected.map(e => deleteEntity.mutateAsync(e.id)));
         setSelected([]);
     };
 
@@ -75,7 +74,7 @@ export default function Entities() {
     ), [entityListViewType, handleEntitySelection, isSelecting, selected, typedItems]);
 
     const handleCreateEntity = async () => {
-        const id = await entityUpsertAsync(undefined, parseInt(selectedType), 'New ' + tType(selectedType));
+        const id = await entityUpsert.mutateAsync({ id: undefined, type: parseInt(selectedType), alias: 'New ' + tType(selectedType) });
         router.push(`${KnownPages.Entities}/${id}`);
     }
 

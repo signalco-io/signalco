@@ -2,6 +2,8 @@ import { QueryClient } from '@tanstack/react-query';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { getApiUrl, getTokenFactory } from '../services/HttpService';
 import { showNotification } from '../notifications/PageNotificationService';
+import { contactKey } from '../hooks/signalco/useContact';
+import { entityKey } from '../hooks/signalco/entity/useEntity';
 
 class SignalSignalRDeviceStateDto {
     entityId?: string;
@@ -31,8 +33,8 @@ class RealtimeService {
 
         if (this.queryClient) {
             console.debug('Invalidated queries for entity and contact', change.entityId, change.channelName, change.contactName);
-            this.queryClient.invalidateQueries(['entity', change.entityId]);
-            this.queryClient.invalidateQueries(['contact', change.entityId, change.channelName, change.contactName]);
+            this.queryClient.invalidateQueries({ queryKey: entityKey(change.entityId) });
+            this.queryClient.invalidateQueries({ queryKey: contactKey(change) });
         }
     }
 

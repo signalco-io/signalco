@@ -6,17 +6,18 @@ import UserSettingsProvider from '../services/UserSettingsProvider';
 export const useUserSettingAsync = <T>(key: string, defaultValue: ValueOrFuncGeneric<T>): [T | undefined | null, (value: T | undefined) => void] => {
     const client = useQueryClient();
     const queryKey = ['settings', 'user', key];
-    const query = useQuery(queryKey, () => {
-        return UserSettingsProvider.value(key, defaultValue) ?? null;
-    }, {
+    const query = useQuery({
+        queryKey,
+        queryFn: async () => UserSettingsProvider.value(key, defaultValue) ?? null,
         initialData: UserSettingsProvider.value(key, defaultValue),
         staleTime: 60 * 1000
     });
-    const mutation = useMutation(async (newValue: T | undefined) => {
-        UserSettingsProvider.set(key, newValue);
-    }, {
+    const mutation = useMutation({
+        mutationFn: async (newValue: T | undefined) => {
+            UserSettingsProvider.set(key, newValue);
+        },
         onSuccess: () => {
-            client.invalidateQueries(queryKey);
+            client.invalidateQueries({ queryKey });
         }
     });
 

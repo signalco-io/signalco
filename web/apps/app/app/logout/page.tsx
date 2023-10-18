@@ -13,7 +13,7 @@ export default function AppLogoutPage() {
     }, [logout])
 
     return (
-        <div style={{ padding: 42 }}>
+        <div className="p-10">
             <Stack spacing={2} alignItems="center" justifyContent="center">
                 <Loadable isLoading loadingLabel="Logging you out..."></Loadable>
                 <div>Logging you out...</div>
