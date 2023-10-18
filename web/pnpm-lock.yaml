@@ -208,8 +208,8 @@ importers:
         specifier: 1.8.25
         version: 1.8.25
       '@types/suncalc':
-        specifier: 1.9.0
-        version: 1.9.0
+        specifier: 1.9.1
+        version: 1.9.1
       '@types/uuid':
         specifier: 9.0.5
         version: 9.0.5
@@ -6893,8 +6893,8 @@ packages:
       '@types/node': 18.18.6
     dev: true
 
-  /@types/suncalc@1.9.0:
-    resolution: {integrity: sha512-+c2wOhgyG5ZTtxfC8XG5SGY36HNlXYaPqv/mqBbjXn3iKWx0Lj375AShoKbjF1MCGoXFhSl3jLlmxTksjaGyZQ==}
+  /@types/suncalc@1.9.1:
+    resolution: {integrity: sha512-ZiCu0HIR1T0ktOjQlvvhYo4o3g0hMrfBpO61VxhwFsDlN9eZOrQ/IZ0gfKC/M2AA5QAuDuQqO+3KD6pZO1pv7w==}
     dev: true
 
   /@types/trusted-types@2.0.4:
