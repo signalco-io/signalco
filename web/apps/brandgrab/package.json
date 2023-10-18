@@ -51,7 +51,7 @@
         "postcss": "8.4.31",
         "prop-types": "15.8.1",
         "rimraf": "5.0.5",
-        "sass": "1.69.3",
+        "sass": "1.69.4",
         "typescript": "5.2.2"
     },
     "nextBundleAnalysis": {
