@@ -1087,8 +1087,8 @@ importers:
         specifier: 18.2.13
         version: 18.2.13
       '@types/react-timeago':
-        specifier: 4.1.4
-        version: 4.1.4
+        specifier: 4.1.5
+        version: 4.1.5
       autoprefixer:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.31)
@@ -6841,8 +6841,8 @@ packages:
       '@types/react': 18.2.29
     dev: true
 
-  /@types/react-timeago@4.1.4:
-    resolution: {integrity: sha512-2ja12wesBR/n2VMLaYmuHoLB1s9wSUBzPyT1FuWQF4mmvNZYi+OMnx/cJdyFiDoGIMHodN4ZrLNOW9bVxAn8eQ==}
+  /@types/react-timeago@4.1.5:
+    resolution: {integrity: sha512-Tv9pSndEUtdzJ6wDgvgKLD9X3ef+KdHigDxgFi23G//sSPCXZ/jWmX+fm1gQDDWIObJU7HfTTObdzHfI/yv9Rw==}
     dependencies:
       '@types/react': 18.2.29
     dev: true
