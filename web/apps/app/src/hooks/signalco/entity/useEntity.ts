@@ -4,6 +4,12 @@ import { entityAsync } from '../../../entity/EntityRepository';
 import { entityTypes } from '../../../entity/EntityHelper';
 import { allEntitiesKey } from './useAllEntities';
 
+export function entityKey(id: string | undefined) {
+    if (typeof id === 'undefined')
+        return ['entity'];
+    return ['entity', id];
+}
+
 function findEntity(client: QueryClient, id: string | undefined) {
     return entityTypes
         .map(entityType => client.getQueryData<IEntityDetails[]>(allEntitiesKey(entityType.value))?.find(e => e.id === id))
@@ -13,11 +19,13 @@ function findEntity(client: QueryClient, id: string | undefined) {
 
 export default function useEntity(id: string | undefined) {
     const client = useQueryClient();
-    return useQuery(['entity', id], async () => {
-        if (!id)
-            throw new Error('Entity Id is required');
-        return await entityAsync(id) ?? undefined;
-    }, {
+    return useQuery({
+        queryKey: entityKey(id),
+        queryFn: async () => {
+            if (!id)
+                throw new Error('Entity Id is required');
+            return await entityAsync(id) ?? undefined;
+        },
         initialData: () => findEntity(client, id),
         initialDataUpdatedAt: () => client.getQueryState(['entities'])?.dataUpdatedAt,
         enabled: Boolean(id),

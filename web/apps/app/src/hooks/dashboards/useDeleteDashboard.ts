@@ -3,12 +3,12 @@ import { deleteDashboardAsync } from '../../dashboards/DashboardsRepository';
 
 export default function useDeleteDashboard() {
     const client = useQueryClient();
-    return useMutation((id: string) => {
-        return deleteDashboardAsync(id);
-    }, {
-        onSuccess: (id) => {
-            client.invalidateQueries(['dashboards']);
-            client.invalidateQueries(['dashboard', id]);
+    return useMutation({
+        mutationFn: (id: string) => {
+            return deleteDashboardAsync(id);
+        },
+        onSuccess: () => {
+            client.invalidateQueries({ queryKey: ['dashboards'] });
         }
     });
 }

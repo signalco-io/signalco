@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import cx from 'classix';
+import { cx } from 'classix';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';

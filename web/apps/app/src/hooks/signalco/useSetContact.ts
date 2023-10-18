@@ -1,6 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type IContactPointer from '../../contacts/IContactPointer';
 import { setAsync } from '../../../src/contacts/ContactRepository';
+import { contactKey } from './useContact';
+import { entityKey } from './entity/useEntity';
+import { allEntitiesKey } from './entity/useAllEntities';
 
 export default function useSetContact() {
     const client = useQueryClient();
@@ -8,14 +11,9 @@ export default function useSetContact() {
         mutationFn: ({ pointer, valueSerialized }: { pointer: IContactPointer, valueSerialized: string | undefined }) =>
             setAsync(pointer, valueSerialized),
         onSuccess: (_, vars) => {
-            client.invalidateQueries(['contact', vars.pointer?.entityId, vars.pointer?.channelName, vars.pointer?.contactName]);
-            client.invalidateQueries(['entities']);
-            client.invalidateQueries(['entities', 0]);
-            client.invalidateQueries(['entities', 1]);
-            client.invalidateQueries(['entities', 2]);
-            client.invalidateQueries(['entities', 3]);
-            client.invalidateQueries(['entities', 4]);
-            client.invalidateQueries(['entity', vars.pointer?.entityId]);
+            client.invalidateQueries({ queryKey: contactKey(vars.pointer) });
+            client.invalidateQueries({ queryKey: allEntitiesKey() });
+            client.invalidateQueries({ queryKey: entityKey(vars.pointer?.entityId) });
         }
     });
 }

@@ -3,12 +3,12 @@ import { IDashboardSetModel, saveDashboardAsync } from '../../dashboards/Dashboa
 
 export default function useSaveDashboard() {
     const client = useQueryClient();
-    return useMutation((dashboard: IDashboardSetModel) => {
-        return saveDashboardAsync(dashboard);
-    }, {
-        onSuccess: (id) => {
-            client.invalidateQueries(['dashboards']);
-            client.invalidateQueries(['dashboard', id]);
+    return useMutation({
+        mutationFn: (dashboard: IDashboardSetModel) => {
+            return saveDashboardAsync(dashboard);
+        },
+        onSuccess: () => {
+            client.invalidateQueries({ queryKey: ['dashboards'] });
         }
     });
 }
