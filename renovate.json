@@ -34,6 +34,8 @@
                 "@types/d3",
                 "@types/color",
                 "@types/cobe",
+                "@types/react-timeago",
+                "@types/react-grid-layout",
                 "classix",
                 "concurrently",
                 "d3",
