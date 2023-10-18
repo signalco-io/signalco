@@ -51,7 +51,7 @@
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@total-typescript/ts-reset": "0.5.1",
-        "@types/color": "3.0.4",
+        "@types/color": "3.0.5",
         "@types/fs-extra": "11.0.2",
         "@types/klaw": "3.0.5",
         "@types/node": "18.18.6",
