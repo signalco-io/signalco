@@ -847,8 +847,8 @@ importers:
         specifier: 0.5.1
         version: 0.5.1
       '@types/cobe':
-        specifier: 0.4.1
-        version: 0.4.1
+        specifier: 0.4.2
+        version: 0.4.2
       '@types/color':
         specifier: 3.0.4
         version: 3.0.4
@@ -6397,8 +6397,8 @@ packages:
     resolution: {integrity: sha512-wJsiX1tosQ+J5+bY5LrSahHxr2wT+uME5UDwdN1kg4frt40euqA+wzECkmq4t5QbveHiJepfdThgQrPw6KiSlg==}
     dev: false
 
-  /@types/cobe@0.4.1:
-    resolution: {integrity: sha512-hGlZDryfnyyynIn0Ie4BT6M1NyGC7nPDyMLV1ilyGryidyX22UiXer4v3j9O0hQMX9HAFsRHmrThvYGMO3+lyg==}
+  /@types/cobe@0.4.2:
+    resolution: {integrity: sha512-7tIcAmh3Eram92Gs8kpd0Djjx3Gd4JnPcuN6JXoS+ynKXpTjlqRliBzIyVOpQ/swbeNzc+y7IhDCabVNqSzYeA==}
     dependencies:
       phenomenon: 1.6.0
     dev: true
