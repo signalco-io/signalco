@@ -111,6 +111,7 @@ export async function getAllAsync() {
     return dashboardEntities?.map((entity, i) => dashboardModelFromEntity(entity, i, currentFavorites));
 }
 
+// TODO: Use mutations
 export async function saveDashboardAsync(dashboard: IDashboardSetModel) {
     const id = await entityUpsertAsync(dashboard.id, 2, dashboard.name);
     await setAsync({

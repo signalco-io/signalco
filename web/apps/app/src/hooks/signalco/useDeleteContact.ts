@@ -1,18 +1,17 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteContactAsync } from '../../../src/contacts/ContactRepository';
+import { contactKey } from './useContact';
+import { entityKey } from './entity/useEntity';
+import { allEntitiesKey } from './entity/useAllEntities';
 
 export default function useDeleteContact() {
     const client = useQueryClient();
-    return useMutation(deleteContactAsync, {
+    return useMutation({
+        mutationFn: deleteContactAsync,
         onSuccess: (_, pointer) => {
-            client.invalidateQueries(['contact', pointer?.entityId, pointer?.channelName, pointer?.contactName]);
-            client.invalidateQueries(['entities']);
-            client.invalidateQueries(['entities', 0]);
-            client.invalidateQueries(['entities', 1]);
-            client.invalidateQueries(['entities', 2]);
-            client.invalidateQueries(['entities', 3]);
-            client.invalidateQueries(['entities', 4]);
-            client.invalidateQueries(['entity', pointer?.entityId]);
+            client.invalidateQueries({ queryKey: contactKey(pointer) });
+            client.invalidateQueries({ queryKey: allEntitiesKey() });
+            client.invalidateQueries({ queryKey: entityKey(pointer?.entityId) });
         }
     });
 }

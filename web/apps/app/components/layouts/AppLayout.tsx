@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import cx from 'classix';
+import { cx } from 'classix';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Minimize } from '@signalco/ui-icons';
