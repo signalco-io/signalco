@@ -184,8 +184,8 @@ importers:
         specifier: 0.5.1
         version: 0.5.1
       '@types/color':
-        specifier: 3.0.4
-        version: 3.0.4
+        specifier: 3.0.5
+        version: 3.0.5
       '@types/d3':
         specifier: 7.4.2
         version: 7.4.2
@@ -356,8 +356,8 @@ importers:
         specifier: 0.5.1
         version: 0.5.1
       '@types/color':
-        specifier: 3.0.4
-        version: 3.0.4
+        specifier: 3.0.5
+        version: 3.0.5
       '@types/fs-extra':
         specifier: 11.0.2
         version: 11.0.2
@@ -465,8 +465,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tsconfig
       '@types/color':
-        specifier: 3.0.4
-        version: 3.0.4
+        specifier: 3.0.5
+        version: 3.0.5
       '@types/node':
         specifier: 18.18.6
         version: 18.18.6
@@ -605,8 +605,8 @@ importers:
         specifier: 0.5.1
         version: 0.5.1
       '@types/color':
-        specifier: 3.0.4
-        version: 3.0.4
+        specifier: 3.0.5
+        version: 3.0.5
       '@types/node':
         specifier: 18.18.6
         version: 18.18.6
@@ -850,8 +850,8 @@ importers:
         specifier: 0.4.2
         version: 0.4.2
       '@types/color':
-        specifier: 3.0.4
-        version: 3.0.4
+        specifier: 3.0.5
+        version: 3.0.5
       '@types/next-pwa':
         specifier: 5.6.7
         version: 5.6.7(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.4)
@@ -6413,8 +6413,8 @@ packages:
     resolution: {integrity: sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==}
     dev: true
 
-  /@types/color@3.0.4:
-    resolution: {integrity: sha512-OpisS4bqJJwbkkQRrMvURf3DOxBoAg9mysHYI7WgrWpSYHqHGKYBULHdz4ih77SILcLDo/zyHGFyfIl9yb8NZQ==}
+  /@types/color@3.0.5:
+    resolution: {integrity: sha512-T9yHCNtd8ap9L/r8KEESu5RDMLkoWXHo7dTureNoI1dbp25NsCN054vOu09iniIjR21MXUL+LU9bkIWrbyg8gg==}
     dependencies:
       '@types/color-convert': 2.0.1
     dev: true
