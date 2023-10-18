@@ -362,8 +362,8 @@ importers:
         specifier: 11.0.2
         version: 11.0.2
       '@types/klaw':
-        specifier: 3.0.4
-        version: 3.0.4
+        specifier: 3.0.5
+        version: 3.0.5
       '@types/node':
         specifier: 18.18.6
         version: 18.18.6
@@ -6737,8 +6737,8 @@ packages:
       '@types/node': 18.18.6
     dev: false
 
-  /@types/klaw@3.0.4:
-    resolution: {integrity: sha512-0M5F/WMU9yu2MyRued1VTQvUSwZ3siqYsX6MU7JF7VXRF5RzL0FXWFUrmdrWuGDWmuN6W+SyLhhg1Wp/sXkjtg==}
+  /@types/klaw@3.0.5:
+    resolution: {integrity: sha512-sX8M64GwQbEhPA4GrOUYEl/0Cc9oz5Effoaj43B4o3bsVwskxEipparp8tI1E6lhs2s1R1u/0KeNvf/9OR1cAA==}
     dependencies:
       '@types/node': 18.18.6
     dev: true
