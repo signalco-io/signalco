@@ -1,4 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { entityKey } from '../signalco/entity/useEntity';
+import { allEntitiesKey } from '../signalco/entity/useAllEntities';
 import { IDashboardSetModel, saveDashboardAsync } from '../../dashboards/DashboardsRepository';
 
 export default function useSaveDashboard() {
@@ -7,8 +9,9 @@ export default function useSaveDashboard() {
         mutationFn: (dashboard: IDashboardSetModel) => {
             return saveDashboardAsync(dashboard);
         },
-        onSuccess: () => {
-            client.invalidateQueries({ queryKey: ['dashboards'] });
+        onSuccess: (_, dashboard) => {
+            client.invalidateQueries({ queryKey: allEntitiesKey() });
+            client.invalidateQueries({ queryKey: entityKey(dashboard.id) });
         }
     });
 }

@@ -8,7 +8,7 @@ export const useUserSettingAsync = <T>(key: string, defaultValue: ValueOrFuncGen
     const queryKey = ['settings', 'user', key];
     const query = useQuery({
         queryKey,
-        queryFn: () => UserSettingsProvider.value(key, defaultValue) ?? null,
+        queryFn: async () => UserSettingsProvider.value(key, defaultValue) ?? null,
         initialData: UserSettingsProvider.value(key, defaultValue),
         staleTime: 60 * 1000
     });

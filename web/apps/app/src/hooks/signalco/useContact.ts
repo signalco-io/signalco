@@ -27,7 +27,7 @@ export default function useContact(pointer: Partial<IContactPointer> | null | un
 
             return contact;
         },
-        enabled: Boolean(pointer) && Boolean(entity.data),
+        enabled: Boolean(pointer) && Boolean(entity.data) && !entity.isStale,
         staleTime: 60*1000
     });
 }
