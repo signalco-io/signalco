@@ -75,7 +75,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-icons
       '@tanstack/query-sync-storage-persister':
-        specifier: ^5.0.0
+        specifier: 5.0.0
         version: 5.0.0
       '@tanstack/react-query':
         specifier: 5.0.0
@@ -84,7 +84,7 @@ importers:
         specifier: 5.0.1
         version: 5.0.1(@tanstack/react-query@5.0.0)(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query-persist-client':
-        specifier: ^5.0.0
+        specifier: 5.0.0
         version: 5.0.0(@tanstack/react-query@5.0.0)(react-dom@18.2.0)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.1.1
