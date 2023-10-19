@@ -190,8 +190,8 @@ importers:
         specifier: 7.4.2
         version: 7.4.2
       '@types/next-pwa':
-        specifier: 5.6.7
-        version: 5.6.7(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.4)
+        specifier: 5.6.8
+        version: 5.6.8(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.4)
       '@types/node':
         specifier: 18.18.6
         version: 18.18.6
@@ -853,8 +853,8 @@ importers:
         specifier: 3.0.5
         version: 3.0.5
       '@types/next-pwa':
-        specifier: 5.6.7
-        version: 5.6.7(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.4)
+        specifier: 5.6.8
+        version: 5.6.8(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.4)
       '@types/node':
         specifier: 18.18.6
         version: 18.18.6
@@ -6710,10 +6710,12 @@ packages:
     resolution: {integrity: sha512-xPSg0jm4mqgEkNhowKgZFBNtwoEwF6gJ4Dhww+GFpm3IgtNseHQZ5IqdNwnquZEoANxyDAKDRAdVo4Z72VvD/g==}
     dev: false
 
-  /@types/next-pwa@5.6.7(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.4):
-    resolution: {integrity: sha512-sV0FAOcHnNUxrdrcVh760s7IoNjDTuVCghWJuaxqBng7mnDj3WjnBfJM+sQokOhCmTNnYGoMWSNnD7ttvCIoKA==}
+  /@types/next-pwa@5.6.8(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.4):
+    resolution: {integrity: sha512-66/e4ZZ2TFdRLWmWh8pu3632CAbgb8QX/CdXX7m92RSa5928s2hiTFJJP0fUUlHOk//dN3PbllEo3ZoZSrg76Q==}
     dependencies:
+      '@types/node': 18.18.6
       '@types/react': 18.2.29
+      '@types/react-dom': 18.2.13
       next: 13.5.6(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.4)
       workbox-build: 6.6.0
     transitivePeerDependencies:
