@@ -3,17 +3,15 @@
 import React from 'react';
 import { cx } from 'classix';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Minimize } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { PageTitle } from '../navigation/PageTitle';
 import NavProfile from '../navigation/NavProfile';
-import RealtimeService from '../../src/realtime/realtimeService';
 import { AuthWrapper } from './AuthWrapper';
+import { AppClientWrapper } from './AppClientWrapper';
 
-const queryClient = new QueryClient();
 
 export function AppLayout(props: React.PropsWithChildren) {
     const {
@@ -21,11 +19,9 @@ export function AppLayout(props: React.PropsWithChildren) {
     } = props;
     const [isFullScreen, setFullScreen] = useSearchParam('fullscreen');
 
-    RealtimeService.queryClient = queryClient;
-
     return (
         <AuthWrapper>
-            <QueryClientProvider client={queryClient}>
+            <AppClientWrapper>
                 <div className="flex w-full flex-col sm:flex-row">
                     {isFullScreen !== 'true' && (
                         <NavProfile />
@@ -53,7 +49,7 @@ export function AppLayout(props: React.PropsWithChildren) {
                         </IconButton>
                     </div>
                 )}
-            </QueryClientProvider>
+            </AppClientWrapper>
         </AuthWrapper>
     );
 }
