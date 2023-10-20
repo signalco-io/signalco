@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { cx } from 'classix';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Loadable } from '@signalco/ui/dist/Loadable';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { usePromise } from '@enterwell/react-hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
 import { DefaultRows, DefaultColumns, DefaultTargetMultiple, DefaultLabel } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -62,7 +62,7 @@ export default function WidgetEnergy({ config, onOptions }: WidgetSharedProps<Co
     const usageWats = parseFloat(contacts.at(0)?.data?.valueSerialized ?? 'NaN');
 
     const loadHistoryCallback = useMemo(() => config?.target ? (() => historiesAsync(config.target, duration)) : undefined, [config?.target, duration]);
-    const historyData = useLoadAndError(loadHistoryCallback);
+    const historyData = usePromise(loadHistoryCallback);
 
     const label = config?.label ?? '';
     const unit = usageWats > 1000 ? 'kW/h' : 'W/h';

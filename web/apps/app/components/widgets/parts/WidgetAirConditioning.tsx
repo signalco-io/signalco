@@ -6,7 +6,7 @@ import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Icon } from '@signalco/ui/dist/Icon';
 import { Button } from '@signalco/ui/dist/Button';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { usePromise } from '@enterwell/react-hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
 import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -124,7 +124,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
         temperatureContact
             ? (() => historiesAsync([temperatureContact], duration))
             : undefined, [temperatureContact, duration]);
-    const historyData = useLoadAndError(loadHistoryCallback);
+    const historyData = usePromise(loadHistoryCallback);
 
     return (
         <div className="h-full w-full">
