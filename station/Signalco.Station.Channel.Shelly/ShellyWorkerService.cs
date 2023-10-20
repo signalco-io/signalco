@@ -51,7 +51,7 @@ internal class ShellyWorkerService : IWorkerService
         }
 
         var pollingInterval = configuration.PollingInterval.HasValue
-            ? TimeSpan.FromMicroseconds(Math.Max(1000, configuration.PollingInterval.Value))
+            ? TimeSpan.FromMilliseconds(Math.Max(1000, configuration.PollingInterval.Value))
             : TimeSpan.FromSeconds(30);
 
         try

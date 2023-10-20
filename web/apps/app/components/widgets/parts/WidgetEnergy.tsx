@@ -56,7 +56,7 @@ export default function WidgetEnergy({ config, onOptions }: WidgetSharedProps<Co
 
     const columns = config?.columns ?? 4;
     const rows = config?.rows ?? 2;
-    const duration = config?.duration ?? 0;
+    const duration = config?.duration ?? 24 * 60 * 60 * 1000;
 
     const contacts = useContacts(config?.target ?? []);
     const usageWats = parseFloat(contacts.at(0)?.data?.valueSerialized ?? 'NaN');
@@ -86,7 +86,7 @@ export default function WidgetEnergy({ config, onOptions }: WidgetSharedProps<Co
                             id: i.timeStamp.toUTCString(),
                             value: i.valueSerialized ?? ''
                         })) ?? []}
-                        durationMs={60 * 60 * 1000}
+                        durationMs={duration}
                         width={columns * 84 - 2}
                         height={rows * 25}
                         hideLegend
