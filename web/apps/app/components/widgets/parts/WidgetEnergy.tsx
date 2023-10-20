@@ -29,9 +29,8 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     DefaultColumns(4)
 ];
 
-function UsageIndicatorCircle({ value, unit }: { value: number, unit: string }) {
-    const breakpoints = [30, 60, 80];
-    const percentageValue = Math.max(0, Math.min(100, value / 6500)) * 100;
+function UsageIndicatorCircle({ value, percentageValue, unit }: { value: number, percentageValue: number, unit: string }) {
+    const breakpoints = [10, 30, 60];
     console.log(percentageValue);
     return (
         <div className="relative">
@@ -44,7 +43,7 @@ function UsageIndicatorCircle({ value, unit }: { value: number, unit: string }) 
             )}>
                 <Wave value={percentageValue} breakpoints={breakpoints} />
                 <div className="z-10 text-center">
-                    <div className="text-2xl text-foreground/90">{value}</div>
+                    <div className="text-2xl text-foreground/90">{value.toFixed(1)}</div>
                     {unit && <Typography level="body3" className="text-foreground/70">{unit}</Typography>}
                 </div>
             </div>
@@ -66,6 +65,9 @@ export default function WidgetEnergy({ config, onOptions }: WidgetSharedProps<Co
     const historyData = useLoadAndError(loadHistoryCallback);
 
     const label = config?.label ?? '';
+    const unit = usageWats > 1000 ? 'kW/h' : 'W/h';
+    const usageHumanized = usageWats > 1000 ? usageWats / 1000 : Math.round(usageWats);
+    const percentageValue = Math.max(0, Math.min(100, usageHumanized / 6500)) * 100;
 
     return (
         <Loadable isLoading={historyData.isLoading} loadingLabel="Loading history" error={historyData.error}>
@@ -73,7 +75,7 @@ export default function WidgetEnergy({ config, onOptions }: WidgetSharedProps<Co
                 <Typography semiBold noWrap>{label}</Typography>
             </div>
             <div className="flex w-full flex-col items-center p-6">
-                <UsageIndicatorCircle value={usageWats} unit={'W/h'} />
+                <UsageIndicatorCircle value={usageHumanized} percentageValue={percentageValue} unit={unit} />
             </div>
             {(historyData.item?.length ?? 0) > 0 && (
                 <div className="absolute inset-x-0 bottom-0">

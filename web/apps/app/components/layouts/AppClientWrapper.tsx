@@ -14,7 +14,9 @@ const queryClient = new QueryClient({
     },
 });
 const persister = createSyncStoragePersister({
-    storage: typeof window !== 'undefined' ? window.localStorage : null,
+    storage: null
+    // TODO: Disabled due to Date not being serialized/deserialized correctly
+    // storage: typeof window !== 'undefined' ? window.localStorage : null,
 });
 
 export function AppClientWrapper({ children }: PropsWithChildren) {
