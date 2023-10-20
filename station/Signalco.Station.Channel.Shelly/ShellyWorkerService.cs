@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Refit;
 using Signal.Beacon.Core.Entity;
@@ -43,11 +44,15 @@ internal class ShellyWorkerService : IWorkerService
         }
 
         var configuration = JsonSerializer.Deserialize<ShellyDeviceConfiguration>(configurationJson);
-        if (string.IsNullOrWhiteSpace(configuration.IpAddress))
+        if (string.IsNullOrWhiteSpace(configuration?.IpAddress))
         {
             this.logger.LogWarning("Entity {EntityId} has invalid configuration. Please re-configure the device first.", entity.Id);
             return;
         }
+
+        var pollingInterval = configuration.PollingInterval.HasValue
+            ? TimeSpan.FromMicroseconds(Math.Max(1000, configuration.PollingInterval.Value))
+            : TimeSpan.FromSeconds(30);
 
         try
         {
@@ -62,15 +67,15 @@ internal class ShellyWorkerService : IWorkerService
                     var meterStatus = status.Emeters[i];
                     await this.entityService.ContactSetAsync(
                         new ContactPointer(entity.Id, ShellyChannels.Shelly, $"meter-{i}-power"),
-                        meterStatus.Power.ToString(), cancellationToken);
+                        meterStatus.Power.ToString(CultureInfo.InvariantCulture), cancellationToken);
                 }
 
-                await Task.Delay(TimeSpan.FromSeconds(60), cancellationToken);
+                await Task.Delay(pollingInterval, cancellationToken);
             }
         }
         catch (Exception ex)
         {
-            this.logger.LogWarning(ex, "Failed to retrieve status for entity " + entity.Id);
+            this.logger.LogWarning(ex, "Failed to retrieve status for entity {EntityId}", entity.Id);
         }
     }
 

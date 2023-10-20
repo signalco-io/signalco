@@ -2,5 +2,7 @@
 
 internal class ShellyDeviceConfiguration
 {
-    public string IpAddress { get; set; }
+    public string? IpAddress { get; set; }
+
+    public int? PollingInterval { get; set; }
 }
