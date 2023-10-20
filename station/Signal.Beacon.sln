@@ -42,6 +42,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signal.Beacon.Voice.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Station.Channel.MiFlora", "Signalco.Station.Channel.MiFlora\Signalco.Station.Channel.MiFlora.csproj", "{CEB8F61F-E257-41B2-AC82-B2A93A35C2DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signalco.Station.Channel.Shelly", "Signalco.Station.Channel.Shelly\Signalco.Station.Channel.Shelly.csproj", "{A07B250F-73E4-4F82-AC60-886A493F4420}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +110,10 @@ Global
 		{CEB8F61F-E257-41B2-AC82-B2A93A35C2DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEB8F61F-E257-41B2-AC82-B2A93A35C2DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEB8F61F-E257-41B2-AC82-B2A93A35C2DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A07B250F-73E4-4F82-AC60-886A493F4420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A07B250F-73E4-4F82-AC60-886A493F4420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A07B250F-73E4-4F82-AC60-886A493F4420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A07B250F-73E4-4F82-AC60-886A493F4420}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
