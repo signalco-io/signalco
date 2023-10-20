@@ -18,7 +18,7 @@ export function useLoadAndError<T>(load?: (Promise<T> | undefined) | (() => Prom
                     return;
                 }
 
-                setState({ isLoading: true });
+                setState({ isLoading: true, item: state.item });
 
                 loadPromiseRef.current = typeof load === 'function' ? load() : load;
                 const item = await loadPromiseRef.current;
