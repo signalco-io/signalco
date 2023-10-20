@@ -5,7 +5,7 @@ import { Row } from '@signalco/ui/dist/Row';
 import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { objectWithKey } from '@signalco/js';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { usePromise } from '@enterwell/react-hooks';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -67,7 +67,7 @@ async function loadPricePolygonApi(ticker: string | undefined, apiKey: string | 
 export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>) {
     const { config } = props;
     const loadPriceFunc = useCallback(() => loadPricePolygonApi(config?.ticker, config?.polygonApiKey), [config?.ticker, config?.polygonApiKey])
-    const price = useLoadAndError(loadPriceFunc);
+    const price = usePromise(loadPriceFunc);
 
     useWidgetOptions(stateOptions, props);
 

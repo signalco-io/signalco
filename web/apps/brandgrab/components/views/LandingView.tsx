@@ -12,7 +12,7 @@ import { Container } from '@signalco/ui/dist/Container';
 import { Card, CardContent, CardCover, CardOverflow } from '@signalco/ui/dist/Card';
 import { orderBy, isImageDataUrl } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { usePromise } from '@enterwell/react-hooks';
 import { ScreenshotResponse } from '../../app/api/screenshot/route';
 import { BrandResources } from '../../app/api/quick/route';
 
@@ -186,7 +186,7 @@ function hexLightness(hex: string) {
 
 function PagePreview({ domain }: { domain: string }) {
     const pageScreenshotDomain = useCallback(() => getPageScreenshot(domain), [domain]);
-    const pageScreenshot = useLoadAndError(pageScreenshotDomain);
+    const pageScreenshot = usePromise(pageScreenshotDomain);
 
     const width = 400;
     const containerHeight = 300;
@@ -248,7 +248,7 @@ function PagePreview({ domain }: { domain: string }) {
 
 function BrandView({ domain }: { domain: string | undefined }) {
     const quickLookupDomain = useCallback(() => quickLookup(domain), [domain]);
-    const domainResources = useLoadAndError(quickLookupDomain);
+    const domainResources = usePromise(quickLookupDomain);
     const resources = domainResources.item;
 
     return (

@@ -9,7 +9,6 @@ import { Row } from '@signalco/ui/dist/Row';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { Card, CardOverflow } from '@signalco/ui/dist/Card';
 import { Avatar } from '@signalco/ui/dist/Avatar';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
 import '@reactflow/core/dist/base.css';
 import {
     ReactFlowProvider,
@@ -25,7 +24,7 @@ import {
 } from '@reactflow/core';
 import { Controls } from '@reactflow/controls';
 import { Background } from '@reactflow/background';
-import { useResizeObserver } from '@enterwell/react-hooks';
+import { usePromise, useResizeObserver } from '@enterwell/react-hooks';
 
 type InfraResource = {
     id: string;
@@ -79,7 +78,7 @@ const flowProOptions: ProOptions = {
 
 function ResourceGraph() {
     const fetchInfrastructureCallback = useCallback(() => fetchInfrastructureGraph('next'), []);
-    const { item, isLoading, error } = useLoadAndError(fetchInfrastructureCallback);
+    const { item, isLoading, error } = usePromise(fetchInfrastructureCallback);
 
     const [visibleResourceTypes, setVisibleResourceTypes] = useState<string[] | undefined>(['web:WebApp']);
 

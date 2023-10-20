@@ -178,6 +178,17 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
     const firstDataPoint = data?.at(-1);
     const lastDataPoint = data ? data[0] : undefined;
 
+    const dataTransformedNumbers = transformedData
+        .map(c => typeof c.value === 'string' ? parseFloat(c.value) : null)
+    const isDataNumbers = dataTransformedNumbers.every(c => typeof c === 'number' && !isNaN(c))
+    const dataMin = isDataNumbers
+        ? Math.min(...dataTransformedNumbers.map(d => typeof d === 'number' ? d : 0))
+        : undefined;
+    const dataMax = isDataNumbers
+        ? Math.max(...dataTransformedNumbers.map(d => typeof d === 'number' ? d : 0))
+        : undefined;
+    console.debug('dataMin', dataMin, 'dataMax', dataMax)
+
     return (
         <ComposedChart
             width={width}
@@ -193,7 +204,7 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
             <XAxis domain={[domainGraph(new Date(firstDataPoint?.id ?? 0).getTime()), domainGraph(new Date(lastDataPoint?.id ?? 0).getTime())]} ticks={ticks || []} dataKey={xKey} type="number" hide />
             <YAxis
                 allowDecimals={false}
-                domain={['dataMin', 'dataMax']}
+                domain={[dataMin ?? 'dataMain', dataMax ?? 'dataMax']}
                 tickSize={0}
                 tickMargin={4}
                 interval="preserveStartEnd"

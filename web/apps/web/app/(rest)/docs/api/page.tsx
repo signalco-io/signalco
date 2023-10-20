@@ -23,7 +23,7 @@ import { Button } from '@signalco/ui/dist/Button';
 import { Alert } from '@signalco/ui/dist/Alert';
 import { camelToSentenceCase, HttpOperation, ObjectDictAny, objectWithKey } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { usePromise } from '@enterwell/react-hooks';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
 
 function HttpOperationChip(props: { operation?: HttpOperation | undefined, small?: boolean }) {
@@ -565,7 +565,7 @@ export default function DocsApiPage() {
         ? 'https://api.signalco.dev/api/swagger.json'
         : 'https://api.signalco.io/api/swagger.json';
     const apiRequest = useCallback(() => getOpenApiDoc(url), [url]);
-    const { item: api, isLoading, error } = useLoadAndError<OpenAPIV3.Document>(apiRequest);
+    const { item: api, isLoading, error } = usePromise<OpenAPIV3.Document>(apiRequest);
 
     console.info('OpenAPI scheme: ', api);
 

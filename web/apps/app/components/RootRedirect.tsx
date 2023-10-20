@@ -10,5 +10,5 @@ export function RootRedirect() {
 
     console.debug('Redirecting to root page...');
 
-    return null;
+    return <div></div>;
 }

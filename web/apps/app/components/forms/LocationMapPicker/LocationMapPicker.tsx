@@ -9,7 +9,7 @@ import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Accordion } from '@signalco/ui/dist/Accordion';
 import { asArray, objectWithKey } from '@signalco/js';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { usePromise } from '@enterwell/react-hooks';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/index.types';
 import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useUserTheme from '../../../src/hooks/useUserTheme';
@@ -45,7 +45,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
 
     const [expanded, setExpanded] = useState<boolean>(false);
     const loadLatLngToAddress = useCallback(() => latLngToAddress(latLng), [latLng]);
-    const placeName = useLoadAndError(loadLatLngToAddress);
+    const placeName = usePromise(loadLatLngToAddress);
     const [zoom, setZoom] = useState<number | undefined>(3);
     const themeContext = useUserTheme();
 

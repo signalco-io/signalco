@@ -26,6 +26,7 @@
     <ProjectReference Include="..\Signal.Beacon.Voice\Signal.Beacon.Voice.csproj" />
     <ProjectReference Include="..\Signal.Beacon.Channel.Zigbee2Mqtt\Signal.Beacon.Channel.Zigbee2Mqtt.csproj" />
     <ProjectReference Include="..\Signalco.Station.Channel.MiFlora\Signalco.Station.Channel.MiFlora.csproj" />
+    <ProjectReference Include="..\Signalco.Station.Channel.Shelly\Signalco.Station.Channel.Shelly.csproj" />
   </ItemGroup>
 
   <ItemGroup>

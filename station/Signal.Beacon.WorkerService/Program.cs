@@ -16,6 +16,7 @@ using Signal.Beacon.Configuration;
 using Signal.Beacon.Core.Helpers;
 using Signal.Beacon.Voice;
 using Signalco.Station.Channel.MiFlora;
+using Signalco.Station.Channel.Shelly;
 
 namespace Signal.Beacon;
 
@@ -41,6 +42,7 @@ public static class Program
                     .AddSamsung()
                     .AddMiFlora()
                     .AddIRobot()
+                    .AddShelly()
                     .AddVoice();
 
                 services.AddTransient(typeof(Lazy<>), typeof(Lazier<>));

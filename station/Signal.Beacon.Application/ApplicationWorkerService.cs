@@ -46,15 +46,57 @@ internal class ApplicationWorkerService : IInternalWorkerService
         this.stationStateService = stationStateService ?? throw new ArgumentNullException(nameof(stationStateService));
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
+        // TODO: Move mDNS discovery out of here
+        //this.discovery = new ServiceDiscovery(
+        //    loggerFactory,
+        //    loggerFactory.CreateLogger<ServiceDiscovery>());
+        //this.discovery.Start();
+        //this.discovery.ServiceInstanceDiscovered += DiscoveryOnServiceInstanceDiscovered;
     }
-        
+    
+    // TODO: Move to Network channel
+    //private async void DiscoveryOnServiceInstanceDiscovered(object? sender, ServiceInstanceDiscoveryEventArgs e)
+    //{
+    //    this.logger.LogInformation("Service discovered: {Name} @ {Endpoint}\nMessage: {Message}", e.ServiceInstanceName, e.RemoteEndPoint?.Address, e.Message);
+
+    //    if (e.ServiceInstanceName.Labels.Any(l => l.StartsWith("shelly")))
+    //    {
+    //        var addresses = e.Message.Answers.Where(a => a.Type == DnsType.A).ToList();
+    //        var address = addresses.FirstOrDefault() as ARecord;
+    //        if (address != null)
+    //        {
+    //            var ipv4Address = address.Address;
+    //            var entities = await this.entitiesDao.GetByContactValueAsync(
+    //                "network", "ipv4", ipv4Address.ToString());
+    //            var entitiesList = entities.ToList();
+    //            if (!entitiesList.Any())
+    //            {
+    //                var newEntityId = await this.entityService.UpsertAsync(EntityType.Device, null, e.ServiceInstanceName.Labels[0]);
+    //                var newEntity = await this.entitiesDao.GetAsync(newEntityId);
+    //                if (newEntity != null)
+    //                {
+    //                    entitiesList = new List<IEntityDetails> {newEntity};
+    //                }
+    //            }
+
+    //            foreach (var entityDetails in entitiesList)
+    //            {
+    //                await this.entityService.ContactSetAsync(
+    //                    new ContactPointer(entityDetails.Id, "network", "ipv4"),
+    //                    ipv4Address.ToString());
+    //            }
+    //        }
+    //    }
+    //}
+
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         _ = this.devicesHubClient.StartAsync(cancellationToken);
         _ = this.conductsHubClient.StartAsync(cancellationToken);
         await this.conductManager.StartAsync(cancellationToken);
         await this.RegisterStationConductsAsync(cancellationToken);
-            
+
         this.conductSubscriberClient.Subscribe("station", this.StationConductHandler);
     }
 
