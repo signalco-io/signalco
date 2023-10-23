@@ -29,7 +29,7 @@ export default function ChannelGalleryItem(props: ChannelGalleryItemProps) {
             href={hrefFunc ? hrefFunc(id) : `/channels/${id}`}
         >
             {planned && <ChannelGalleryItemChip label="Soon" color="neutral" />}
-            {!planned && <ChannelGalleryItemChip label="New" color="info" />}
+            {/* {!planned && <ChannelGalleryItemChip label="New" color="info" />} */}
             <Stack alignItems="center" justifyContent="center" style={{ height: '100%', width: '100%' }} spacing={2}>
                 <ChannelLogo channelName={id} label={label} />
                 <Typography textAlign="center">{label}</Typography>

@@ -22,12 +22,12 @@ export function Checkbox({
     const id = useId();
     const readonlyChecked = defaultChecked;
     return (
-        <div className="flex items-center space-x-2">
+        <div className="uitw-flex uitw-items-center uitw-space-x-2">
             <CheckboxPrimitive.Root
                 id={id}
                 className={cx(
-                    'peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
-                    readOnly && 'cursor-default',
+                    'uitw-peer uitw-h-4 uitw-w-4 uitw-shrink-0 uitw-rounded-sm uitw-border uitw-border-primary uitw-ring-offset-background focus-visible:uitw-outline-none focus-visible:uitw-ring-2 focus-visible:uitw-ring-ring focus-visible:uitw-ring-offset-2 disabled:uitw-cursor-not-allowed disabled:uitw-opacity-50 data-[state=checked]:uitw-bg-primary data-[state=checked]:uitw-text-primary-foreground',
+                    readOnly && 'uitw-cursor-default',
                     className
                 )}
                 defaultChecked={readonlyChecked}
@@ -36,15 +36,15 @@ export function Checkbox({
                 {...props}
             >
                 <CheckboxPrimitive.Indicator
-                    className={cx('flex items-center justify-center text-current')}
+                    className={cx('uitw-flex uitw-items-center uitw-justify-center uitw-text-current')}
                 >
-                    <Check className="h-4 w-4" />
+                    <Check className="uitw-h-4 uitw-w-4" />
                 </CheckboxPrimitive.Indicator>
             </CheckboxPrimitive.Root>
             {label && (
                 <label
                     htmlFor={id}
-                    className="grow text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="uitw-grow uitw-text-sm uitw-font-medium uitw-leading-none peer-disabled:uitw-cursor-not-allowed peer-disabled:uitw-opacity-70"
                 >
                     {label}
                 </label>

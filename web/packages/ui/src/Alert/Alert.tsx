@@ -14,17 +14,17 @@ export function Alert({ className, color, startDecorator, endDecorator, children
             role="alert"
             spacing={1}
             className={cx(
-                'relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground',
-                color === 'primary' && 'bg-primary-100 border-primary-300',
-                color === 'neutral' && 'bg-neutral-100 border-neutral-300',
-                color === 'danger' && 'bg-red-100 border-red-300',
-                color === 'info' && 'bg-blue-100 border-blue-300',
-                color === 'success' && 'bg-green-100 border-green-300',
-                color === 'warning' && 'bg-yellow-100 border-yellow-300',
+                'uitw-relative uitw-w-full uitw-rounded-lg uitw-border p-4 [&>svg~*]:uitw-pl-7 [&>svg+div]:uitw-translate-y-[-3px] [&>svg]:uitw-absolute [&>svg]:uitw-left-4 [&>svg]:uitw-top-4 [&>svg]:uitw-text-foreground',
+                color === 'primary' && 'uitw-bg-primary-100 uitw-border-primary-300',
+                color === 'neutral' && 'uitw-bg-neutral-100 uitw-border-neutral-300',
+                color === 'danger' && 'uitw-bg-red-100 uitw-border-red-300',
+                color === 'info' && 'uitw-bg-blue-100 uitw-border-blue-300',
+                color === 'success' && 'uitw-bg-green-100 uitw-border-green-300',
+                color === 'warning' && 'uitw-bg-yellow-100 uitw-border-yellow-300',
                 className)}
             {...props}>
             {startDecorator}
-            <div className="text-sm [&_p]:leading-relaxed">
+            <div className="uitw-text-sm [&_p]:uitw-leading-relaxed">
                 {children}
             </div>
             {endDecorator}

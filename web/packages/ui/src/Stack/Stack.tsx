@@ -11,16 +11,16 @@ export function Stack({ spacing, alignItems, justifyContent, style, className, .
     return (
         <div
             className={cx(
-                'flex flex-col',
-                alignItems === 'start' && 'items-start',
-                alignItems === 'center' && 'items-center',
-                (!alignItems || alignItems === 'stretch') && 'items-stretch',
-                Boolean(spacing) && 'gap-[--s-gap]',
-                justifyContent === 'start' && 'justify-start',
-                justifyContent === 'center' && 'justify-center',
-                justifyContent === 'end' && 'justify-end',
-                justifyContent === 'space-between' && 'justify-between',
-                justifyContent === 'stretch' && 'justify-stretch',
+                'uitw-flex uitw-flex-col',
+                alignItems === 'start' && 'uitw-items-start',
+                alignItems === 'center' && 'uitw-items-center',
+                (!alignItems || alignItems === 'stretch') && 'uitw-items-stretch',
+                Boolean(spacing) && 'uitw-gap-[--s-gap]',
+                justifyContent === 'start' && 'uitw-justify-start',
+                justifyContent === 'center' && 'uitw-justify-center',
+                justifyContent === 'end' && 'uitw-justify-end',
+                justifyContent === 'space-between' && 'uitw-justify-between',
+                justifyContent === 'stretch' && 'uitw-justify-stretch',
                 className)}
             style={{
                 '--s-gap': `${(spacing ?? 0) * 8}px`,

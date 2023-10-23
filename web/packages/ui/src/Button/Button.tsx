@@ -40,23 +40,23 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
             <ButtonComp
                 ref={ref}
                 className={cx(
-                    'inline-flex gap-1 items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background',
-                    (!variant || variant === 'soft') && 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-                    variant === 'outlined' && 'border border-input hover:bg-accent hover:text-accent-foreground',
-                    variant === 'plain' && 'hover:bg-accent hover:text-accent-foreground',
-                    variant === 'solid' && 'bg-primary text-primary-foreground hover:bg-primary/90',
-                    variant === 'link' && 'underline-offset-4 hover:underline text-primary',
-                    (!size || size === 'md') && 'h-10 py-2 px-4',
-                    size === 'sm' && 'h-9 px-3 rounded-md gap-0.5',
-                    size === 'lg' && 'h-11 px-8 rounded-md gap-2',
-                    fullWidth && 'w-full',
+                    'uitw-inline-flex uitw-gap-1 uitw-items-center uitw-justify-center uitw-rounded-md uitw-text-sm uitw-font-medium uitw-transition-colors focus-visible:uitw-outline-none focus-visible:uitw-ring-2 focus-visible:uitw-ring-ring focus-visible:uitw-ring-offset-2 disabled:uitw-opacity-50 disabled:uitw-pointer-events-none uitw-ring-offset-background',
+                    (!variant || variant === 'soft') && 'uitw-bg-secondary uitw-text-secondary-foreground hover:uitw-bg-secondary/80',
+                    variant === 'outlined' && 'uitw-border uitw-border-input hover:uitw-bg-accent hover:uitw-text-accent-foreground',
+                    variant === 'plain' && 'hover:uitw-bg-accent hover:uitw-text-accent-foreground',
+                    variant === 'solid' && 'uitw-bg-primary uitw-text-primary-foreground hover:uitw-bg-primary/90',
+                    variant === 'link' && 'uitw-underline-offset-4 hover:uitw-underline uitw-text-primary',
+                    (!size || size === 'md') && 'uitw-h-10 uitw-py-2 uitw-px-4',
+                    size === 'sm' && 'uitw-h-9 uitw-px-3 uitw-rounded-md uitw-gap-0.5',
+                    size === 'lg' && 'uitw-h-11 uitw-px-8 uitw-rounded-md gap-2',
+                    fullWidth && 'uitw-w-full',
                     className
                 )}
                 disabled={loading || disabled}
                 {...otherProps}
             >
                 {!loading && startDecorator}
-                {loading && <LoaderSpinner className="mr-2 h-4 w-4 animate-spin" />}
+                {loading && <LoaderSpinner className="uitw-mr-2 uitw-h-4 uitw-w-4 uitw-animate-spin" />}
                 {children}
                 {endDecorator}
             </ButtonComp>

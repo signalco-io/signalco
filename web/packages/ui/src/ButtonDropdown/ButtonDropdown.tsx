@@ -26,17 +26,17 @@ const ButtonDropdown = forwardRef<HTMLButtonElement, ButtonProps>(({
         <ButtonComp
             ref={ref}
             className={cx(
-                'flex h-10 w-full min-w-[180px] items-center justify-between rounded-md bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-                fullWidth && 'w-full',
+                'uitw-flex uitw-h-10 uitw-w-full uitw-min-w-[180px] uitw-items-center uitw-justify-between uitw-rounded-md uitw-bg-transparent uitw-px-3 uitw-py-2 uitw-text-sm uitw-ring-offset-background placeholder:uitw-text-muted-foreground focus:uitw-outline-none focus:uitw-ring-2 focus:uitw-ring-ring focus:uitw-ring-offset-2 disabled:uitw-cursor-not-allowed disabled:uitw-opacity-50',
+                fullWidth && 'uitw-w-full',
                 className
             )}
             disabled={loading || disabled}
             {...otherProps}
         >
             {!loading && startDecorator}
-            {loading && <LoaderSpinner className="mr-2 h-4 w-4 animate-spin" />}
+            {loading && <LoaderSpinner className="uitw-mr-2 uitw-h-4 uitw-w-4 uitw-animate-spin" />}
             <span>{children}</span>
-            <Select className="h-4 w-4 opacity-50" />
+            <Select className="uitw-h-4 uitw-w-4 uitw-opacity-50" />
         </ButtonComp>
     )
 });

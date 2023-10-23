@@ -30,7 +30,7 @@ export function Accordion({ children, open, disabled, onOpenChanged, unmountOnEx
 
     return (
         <Card className={cx('', className)} onClick={handleOpen} {...props}>
-            <CardHeader className="p-2">
+            <CardHeader className="uitw-p-2">
                 <Row spacing={1} justifyContent="space-between">
                     {multipleChildren ? children[0] : children}
                     {!disabled && (
@@ -41,7 +41,7 @@ export function Accordion({ children, open, disabled, onOpenChanged, unmountOnEx
             {(!unmountOnExit || actualOpen) && (
                 <Collapse appear={actualOpen}>
                     {multipleChildren && (
-                        <CardContent className="p-2">
+                        <CardContent className="uitw-p-2">
                             {children.filter((_, i) => i !== 0)}
                         </CardContent>
                     )}
