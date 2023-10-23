@@ -10,7 +10,7 @@ export type AvatarProps = PropsWithChildren<{
 
 export function Avatar({ children, className }: AvatarProps) {
     return (<div className={cx(
-        'flex h-10 min-w-[40px] max-w-[40px] items-center justify-center rounded-full bg-muted border',
+        'uitw-flex uitw-h-10 uitw-min-w-[40px] uitw-max-w-[40px] uitw-items-center uitw-justify-center uitw-rounded-full uitw-bg-muted uitw-border',
         className
     )}>{children}</div>);
 }

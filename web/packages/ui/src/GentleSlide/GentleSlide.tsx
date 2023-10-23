@@ -19,6 +19,7 @@ export function GentleSlide(props: GentleSlideProps) {
 
     const translate = direction === 'left' ? `translateX(${amount}px)` : `translateY(-${amount}px)`;
 
+    // TODO: Migrate to TW
     return (
         <div style={{
             transition: `opacity ${duration}ms ease-out, transform ${duration}ms ease-out`,

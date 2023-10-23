@@ -15,7 +15,7 @@ export function Link({ className, href, children, ...rest }: LinkProps) {
         <NextLink
             href={href}
             className={cx(
-                typeof children === 'string' && 'no-underline text-muted-foreground',
+                typeof children === 'string' && 'uitw-no-underline uitw-text-muted-foreground',
                 className
             )}
             target={isAbsoluteUrl(href) ? '_blank' : '_self'}

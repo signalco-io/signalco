@@ -29,14 +29,14 @@ export function NavigatingButton({
                 variant={hideArrow ? 'plain' : 'solid'}
                 disabled={disabled}
                 size={size}
-                className={hideArrow ? 'group/nav-button' : undefined}
+                className={hideArrow ? 'uitw-group/nav-button' : undefined}
                 startDecorator={hideArrow && (
-                    <span className="w-4 pr-1" />
+                    <span className="uitw-w-4 uitw-pr-1" />
                 )}
                 endDecorator={(
                     <span className={cx(
-                        'pl-1',
-                        hideArrow && 'transition-opacity opacity-0 group-hover/nav-button:opacity-100'
+                        'uitw-pl-1',
+                        hideArrow && 'uitw-transition-opacity uitw-opacity-0 uitw-group-hover/nav-button:opacity-100'
                     )}>
                         <Navigate size={16} />
                     </span>

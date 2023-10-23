@@ -36,9 +36,9 @@ export function ListTreeItem({
     return (
         <Stack>
             <Row spacing={1}>
-                <Tooltip title="Toggle" className={cx(!children && 'opacity-0')}>
+                <Tooltip title="Toggle" className={cx(!children && 'uitw-opacity-0')}>
                     <IconButton variant="plain" onClick={handleOpenClick} size="sm">
-                        <ExpandDown className={cx('transition-transform', open && '-rotate-90')} />
+                        <ExpandDown className={cx('uitw-transition-transform', open && '-uitw-rotate-90')} />
                     </IconButton>
                 </Tooltip>
                 <ListItem

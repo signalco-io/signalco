@@ -47,10 +47,10 @@ export function ListItem({
 
     if (!href && !nodeId && !onSelected) {
         return (
-            <Row spacing={2} className={cx('min-h-[3rem]', className)}>
+            <Row spacing={2} className={cx('uitw-min-h-[3rem]', className)}>
                 {startDecorator ?? null}
-                <div className={cx('grow', disabled && 'opacity-60')}>{label}</div>
-                <div className="self-end">
+                <div className={cx('uitw-grow', disabled && 'uitw-opacity-60')}>{label}</div>
+                <div className="uitw-self-end">
                     {endDecorator ?? null}
                 </div>
             </Row>
@@ -65,7 +65,7 @@ export function ListItem({
             disabled={disabled}
             startDecorator={startDecorator}
             endDecorator={endDecorator}
-            className={cx('text-start', className)}>
+            className={cx('uitw-text-start', className)}>
             {label}
         </Button>
     );

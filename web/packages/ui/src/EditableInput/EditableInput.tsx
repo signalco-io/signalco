@@ -77,7 +77,7 @@ export function EditableInput({
                 onClick={() => setIsEditing(true)}
             >
                 <Typography>{value}</Typography>
-                <span className="invisible group-hover:visible"><Edit size={16} /></span>
+                <span className="uitw-invisible group-hover:uitw-visible"><Edit size={16} /></span>
             </Row>
         )
     }
