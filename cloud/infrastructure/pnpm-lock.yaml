@@ -24,8 +24,8 @@ dependencies:
     specifier: 4.4.4
     version: 4.4.4
   '@pulumi/pulumi':
-    specifier: 3.89.0
-    version: 3.89.0
+    specifier: 3.90.0
+    version: 3.90.0
 
 devDependencies:
   '@types/node':
@@ -70,7 +70,7 @@ packages:
     resolution: {integrity: sha512-YPNYtwEnKu23VDHNFu91xd/Ueu5zYONHcYwKDA5qTvtgZZ1nzrvPJgrO15KF0fLRVlGo7yckirDS26GpvBTe6w==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.89.0
+      '@pulumi/pulumi': 3.90.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -366,7 +366,7 @@ packages:
   /@pulumi/aws@6.6.0:
     resolution: {integrity: sha512-3DID+B7CbMYmIUaCcK3A9anZmRsXgHQQN3X7Q4cSZM7qzf7AXG9GWl0Zu2hZYw4IYy8IsqcUZ2eEVDxf2bNuCA==}
     dependencies:
-      '@pulumi/pulumi': 3.89.0
+      '@pulumi/pulumi': 3.90.0
       builtin-modules: 3.0.0
       mime: 2.6.0
       read-package-tree: 5.3.1
@@ -378,7 +378,7 @@ packages:
   /@pulumi/azure-native@2.12.0:
     resolution: {integrity: sha512-Zym6pGcGIAmSvRccefLQHyweF/I2ictGEBSL0ayCKQ6CgqtCEifUFvOjc3r4OHGkVwJY8KC2UMGf6d0B0E/97Q==}
     dependencies:
-      '@pulumi/pulumi': 3.89.0
+      '@pulumi/pulumi': 3.90.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -386,7 +386,7 @@ packages:
   /@pulumi/cloudflare@5.13.0:
     resolution: {integrity: sha512-YkkmbCDZwbswBUqvOdtwMm5RbrDKG4b2RXzaCLj6JMgwltHcIz4yR5afBAK87IfJSCR5wjzD0YGXtG+SHExjvw==}
     dependencies:
-      '@pulumi/pulumi': 3.89.0
+      '@pulumi/pulumi': 3.90.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -395,7 +395,7 @@ packages:
     resolution: {integrity: sha512-0QVj0N02FOZRv/DrEPEx//wfMI6Iv2gatPj0s6ue5LpmhXXjLuOC/TBnpcTq1DqB9/uc3sCLafqXdJSdFzbt9g==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.89.0
+      '@pulumi/pulumi': 3.90.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -403,14 +403,14 @@ packages:
   /@pulumi/docker@4.4.4:
     resolution: {integrity: sha512-CuW5UAI+mZWJqD3ZKEv74ReWu/jCpoJKyXpjtp3m4I+bWoOoOfg7jUGoJnwLODQPnrmlawOviNa0TzMR5WdXaQ==}
     dependencies:
-      '@pulumi/pulumi': 3.89.0
+      '@pulumi/pulumi': 3.90.0
       semver: 5.7.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@pulumi/pulumi@3.89.0:
-    resolution: {integrity: sha512-/Ux9Rcj6whMt8oA/COTuVy1J4LM08BZ3ZKHoQqXjthw5N1TaPZFRAMEn1MfVQCFYLSQ87nITRDg9QQQd6Q8k1g==}
+  /@pulumi/pulumi@3.90.0:
+    resolution: {integrity: sha512-uO+0DPw52LML7DIOXdjIYtDuD6yoWGqrD+TLUnz7/RqqbGaTNf9rh2b1ZrflI+75qDFpll4QB5qF/3rq/VKsPA==}
     engines: {node: '>=8.13.0 || >=10.10.0'}
     dependencies:
       '@grpc/grpc-js': 1.8.17
@@ -1642,7 +1642,6 @@ packages:
     resolution: {integrity: sha512-hHrIjvZsftOsvKSn2TRYl63zvxsgE0K+0mYMoH6gD4omR5IWB2KynivBQczo3+wF1cCkjzvptnI9Q0sPU66ilw==}
     dependencies:
       hasown: 2.0.0
-    dev: true
 
   /is-date-object@1.0.5:
     resolution: {integrity: sha512-9YQaSxsAiSwcvS33MBk3wTCVnWK+HhF8VZR2jRxehM16QcVOdHqPn4VPHmRK4lSr38n9JriurInLcP90xsYNfQ==}
@@ -1888,7 +1887,7 @@ packages:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
       hosted-git-info: 2.8.9
-      resolve: 1.22.3
+      resolve: 1.22.8
       semver: 5.7.2
       validate-npm-package-license: 3.0.4
     dev: false
@@ -1898,7 +1897,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       hosted-git-info: 4.1.0
-      is-core-module: 2.13.0
+      is-core-module: 2.13.1
       semver: 7.5.4
       validate-npm-package-license: 3.0.4
     dev: false
@@ -2169,7 +2168,7 @@ packages:
     dependencies:
       debug: 4.3.4
       module-details-from-path: 1.0.3
-      resolve: 1.22.3
+      resolve: 1.22.8
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -2207,7 +2206,6 @@ packages:
       is-core-module: 2.13.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
-    dev: true
 
   /reusify@1.0.4:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
