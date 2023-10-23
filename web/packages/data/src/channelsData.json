@@ -175,5 +175,13 @@
         ],
         "planned": true,
         "officialUrl": "https://polygon.io/"
+    },
+    {
+        "channelName": "shelly",
+        "label": "Shelly",
+        "categories": [
+            "smart-home"
+        ],
+        "officialUrl": "https://www.shelly.com/"
     }
 ]
