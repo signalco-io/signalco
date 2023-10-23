@@ -41,6 +41,7 @@ function FilterItem({ item, checked, variant, onToggle }: { item: FilterListItem
                     justifyContent="space-between"
                     className={cx(
                         'min-h-[40px] p-2 rounded-md',
+                        'hover:bg-muted/60',
                         active && variant === 'highlight' && 'bg-muted'
                     )}
                 >
@@ -99,6 +100,7 @@ export function ItemsShowMore({ children, truncate, itemsWrapper, ...rest }: Ite
             )}
             <Fade appear={shouldTruncate}>
                 <Button
+                    className={cx(!shouldTruncate && 'hidden')}
                     fullWidth
                     size="sm"
                     variant="plain"
@@ -127,24 +129,19 @@ export function FilterList({
     }, [selected]);
 
     const handleToggle = (value: string) => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = multiple ? [...checked] : [];
-
-        if (currentIndex === -1) {
-            newChecked.push(value);
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
-
-        setChecked(newChecked);
-
-        if (onSelected)
-            onSelected(newChecked.length ? newChecked[0] : undefined);
-        if (onSelectedMultiple)
-            onSelectedMultiple(newChecked);
+        setChecked(checked.includes(value)
+            ? checked.filter(i => i !== value)
+            : (multiple ? [...checked, value] : [value]));
     };
 
     const handleClearSelection = () => setChecked([]);
+
+    useEffect(() => {
+        if (onSelected)
+            onSelected(checked.length ? checked[0] : undefined);
+        if (onSelectedMultiple)
+            onSelectedMultiple(checked);
+    }, [checked, onSelected, onSelectedMultiple]);
 
     return (
         <Stack>
@@ -170,7 +167,7 @@ export function FilterList({
                         <FilterItem key={item.id} item={item} checked={checked} variant={variant} onToggle={handleToggle} />
                     ))}
                 </ItemsShowMore>
-                {(checked.length > 1 && (
+                {(checked.length > 0 && (
                     <Button fullWidth startDecorator={<Close />} variant="plain" size="sm" onClick={handleClearSelection}>Clear selection</Button>
                 ))}
             </div>
