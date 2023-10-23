@@ -12,10 +12,12 @@ import useContacts from '../../../src/hooks/signalco/useContacts';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import { historiesAsync } from '../../../src/contacts/ContactRepository';
 import { Wave } from './Wave';
+import { PrimaryValueLabel } from './piece/PrimaryValueLabel';
 
 type ConfigProps = {
     label: string | undefined;
     duration: number | undefined;
+    maxUsage: number | undefined;
     target: IContactPointer[];
     rows: number;
     columns: number;
@@ -24,14 +26,14 @@ type ConfigProps = {
 const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     DefaultLabel,
     { label: 'Duration', name: 'duration', type: 'number', optional: true },
+    { label: 'Maximal usage', name: 'maxUsage', type: 'number', optional: true },
     DefaultTargetMultiple,
     DefaultRows(2),
     DefaultColumns(4)
 ];
 
-function UsageIndicatorCircle({ value, percentageValue, unit }: { value: number, percentageValue: number, unit: string }) {
+function UsageIndicatorCircle({ value, percentageValue, unit, largeValue }: { value: number, percentageValue: number, unit: string, largeValue?: boolean }) {
     const breakpoints = [10, 30, 60];
-    console.log(percentageValue);
     return (
         <div className="relative">
             <div className={cx(
@@ -42,9 +44,8 @@ function UsageIndicatorCircle({ value, percentageValue, unit }: { value: number,
                 percentageValue >= breakpoints[2] && 'border-rose-300 dark:border-rose-900'
             )}>
                 <Wave value={percentageValue} breakpoints={breakpoints} />
-                <div className="z-10 text-center">
-                    <div className="text-2xl text-foreground/90">{value.toFixed(1)}</div>
-                    {unit && <Typography level="body3" className="text-foreground/70">{unit}</Typography>}
+                <div className={cx('z-10 text-center', largeValue && 'ml-6')}>
+                    <PrimaryValueLabel value={value} unit={unit} size="small" />
                 </div>
             </div>
         </div>
@@ -57,6 +58,7 @@ export default function WidgetEnergy({ config, onOptions }: WidgetSharedProps<Co
     const columns = config?.columns ?? 4;
     const rows = config?.rows ?? 2;
     const duration = config?.duration ?? 24 * 60 * 60 * 1000;
+    const maxUsage = config?.maxUsage ?? 6500;
 
     const contacts = useContacts(config?.target ?? []);
     const usageWats = parseFloat(contacts.at(0)?.data?.valueSerialized ?? 'NaN');
@@ -65,9 +67,10 @@ export default function WidgetEnergy({ config, onOptions }: WidgetSharedProps<Co
     const historyData = usePromise(loadHistoryCallback);
 
     const label = config?.label ?? '';
-    const unit = usageWats > 1000 ? 'kW/h' : 'W/h';
-    const usageHumanized = usageWats > 1000 ? usageWats / 1000 : Math.round(usageWats);
-    const percentageValue = Math.max(0, Math.min(100, usageHumanized / 6500)) * 100;
+    const isLargeValue = usageWats >= 1000;
+    const unit = isLargeValue ? 'kW/h' : 'W/h';
+    const usageHumanized = usageWats >= 1000 ? usageWats / 1000 : Math.round(usageWats);
+    const percentageValue = Math.max(0, Math.min(100, usageWats / maxUsage)) * 100;
 
     return (
         <Loadable isLoading={historyData.isLoading} loadingLabel="Loading history" error={historyData.error}>
@@ -75,7 +78,7 @@ export default function WidgetEnergy({ config, onOptions }: WidgetSharedProps<Co
                 <Typography semiBold noWrap>{label}</Typography>
             </div>
             <div className="flex w-full flex-col items-center p-6">
-                <UsageIndicatorCircle value={usageHumanized} percentageValue={percentageValue} unit={unit} />
+                <UsageIndicatorCircle value={usageHumanized} percentageValue={percentageValue} unit={unit} largeValue={isLargeValue} />
             </div>
             {(historyData.item?.length ?? 0) > 0 && (
                 <div className="absolute inset-x-0 bottom-0">
