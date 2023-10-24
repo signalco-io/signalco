@@ -52,25 +52,49 @@ internal class ShellyWorkerService : IWorkerService
 
         var pollingInterval = configuration.PollingInterval.HasValue
             ? TimeSpan.FromMilliseconds(Math.Max(1000, configuration.PollingInterval.Value))
-            : TimeSpan.FromSeconds(30);
+            : TimeSpan.FromMinutes(5);
+        var shortPollingInterval = TimeSpan.FromSeconds(10);
+        var reportIfChangedMoreThanPercentage = 0.1;
 
         try
         {
             var entityApiAddress = $"http://{configuration.IpAddress}/";
             var client = RestService.For<Shelly3emApiClient>(entityApiAddress);
 
+            var meterLastReport = new List<(double lastPower, DateTime lastReport)>();
+            
             while (!this.cts.Token.IsCancellationRequested)
             {
-                var status = await client.GetStatusAsync();
-                for (var i = 0; i < status.Emeters?.Count; i++)
+                try
                 {
-                    var meterStatus = status.Emeters[i];
-                    await this.entityService.ContactSetAsync(
-                        new ContactPointer(entity.Id, ShellyChannels.Shelly, $"meter-{i}-power"),
-                        meterStatus.Power.ToString(CultureInfo.InvariantCulture), cancellationToken);
-                }
+                    var status = await client.GetStatusAsync();
+                    for (var i = 0; i < status.Emeters?.Count; i++)
+                    {
+                        var meterStatus = status.Emeters[i];
+                        var newPower = meterStatus.Power;
 
-                await Task.Delay(pollingInterval, cancellationToken);
+                        if (meterLastReport.Count <= i)
+                            meterLastReport.Add((double.MinValue, DateTime.MinValue));
+                        var lastReport = meterLastReport[i].lastReport;
+                        var lastPower = meterLastReport[i].lastPower;
+
+                        if (DateTime.UtcNow - lastReport >= pollingInterval ||
+                            Math.Abs(1 - newPower / lastPower) >= reportIfChangedMoreThanPercentage)
+                        {
+                            await this.entityService.ContactSetAsync(
+                                new ContactPointer(entity.Id, ShellyChannels.Shelly, $"meter-{i}-power"),
+                                newPower.ToString(CultureInfo.InvariantCulture), cancellationToken);
+                            meterLastReport[i] = (newPower, DateTime.UtcNow);
+                        }
+                    }
+
+                    await Task.Delay(shortPollingInterval, cancellationToken);
+                }
+                catch
+                {
+                    // Failed to retrieve status, wait longer
+                    await Task.Delay(pollingInterval, cancellationToken);
+                }
             }
         }
         catch (Exception ex)
