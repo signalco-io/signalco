@@ -34,6 +34,7 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
 
 const TvVisual = dynamic(() => import('../../icons/TvVisual'));
 const LightBulbVisual = dynamic(() => import('../../icons/LightBulbVisual'));
+const FanVisual = dynamic(() => import('../../icons/FanVisual'));
 
 export type StateAction = IContactPointer & {
     valueSerialized?: string,
@@ -124,7 +125,7 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
         setIsLoading(false);
 
     const label = props.config?.label || (typeof onEntity !== 'undefined' ? onEntity.data?.alias : '');
-    const Visual = useMemo(() => props.config?.visual === 'tv' ? TvVisual : LightBulbVisual, [props.config]);
+    const Visual = useMemo(() => props.config?.visual === 'tv' ? TvVisual : (props.config?.visual === 'fan' ? FanVisual : LightBulbVisual), [props.config]);
 
     const handleStateChangeRequest = () => {
         if (typeof onEntity === 'undefined') {

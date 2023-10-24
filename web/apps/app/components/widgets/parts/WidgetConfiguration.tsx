@@ -109,7 +109,7 @@ const widgetConfigurationFormComponents: FormBuilderComponents = {
     entityContactValue: (props) => <DisplayEntityTarget selectContact selectValue target={props.value} onChanged={t => props.onChange(t, { receiveEvent: false })} />,
     selectVisual: (props) => (<SelectItems
         label="Visual"
-        items={[{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }]}
+        items={[{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }, { label: 'Fan', value: 'fan' }]}
         placeholder="Select visual"
         className="w-full"
         value={props.value}
