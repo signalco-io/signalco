@@ -61,7 +61,10 @@ export default function WidgetEnergy({ config, onOptions }: WidgetSharedProps<Co
     const maxUsage = config?.maxUsage ?? 6500;
 
     const contacts = useContacts(config?.target ?? []);
-    const usageWats = parseFloat(contacts.at(0)?.data?.valueSerialized ?? 'NaN');
+    const isLoading = contacts.filter(c => c.isLoading).length > 0;
+    const errors = contacts.filter(c => c.error).map(c => c.error).join('\n');
+
+    const usageWats = contacts.length > 0 ? parseFloat(contacts.at(0)?.data?.valueSerialized ?? 'NaN') : NaN;
 
     const loadHistoryCallback = useMemo(() => config?.target ? (() => historiesAsync(config.target, duration)) : undefined, [config?.target, duration]);
     const historyData = usePromise(loadHistoryCallback);
@@ -73,14 +76,24 @@ export default function WidgetEnergy({ config, onOptions }: WidgetSharedProps<Co
     const percentageValue = Math.max(0, Math.min(100, usageWats / maxUsage)) * 100;
 
     return (
-        <Loadable isLoading={historyData.isLoading} loadingLabel="Loading history" error={historyData.error}>
+        <Loadable
+            contentVisible
+            isLoading={isLoading}
+            loadingLabel="Loading"
+            error={errors}
+            className="items-end">
             <div className="absolute inset-0 px-6 py-4">
                 <Typography semiBold noWrap>{label}</Typography>
             </div>
             <div className="flex w-full flex-col items-center p-6">
                 <UsageIndicatorCircle value={usageHumanized} percentageValue={percentageValue} unit={unit} largeValue={isLargeValue} />
             </div>
-            {(historyData.item?.length ?? 0) > 0 && (
+            <Loadable
+                contentVisible
+                isLoading={historyData.isLoading}
+                loadingLabel="Loading"
+                error={historyData.error}
+                className="absolute inset-x-0 bottom-0">
                 <div className="absolute inset-x-0 bottom-0">
                     <Graph
                         isLoading={historyData.isLoading}
@@ -96,7 +109,7 @@ export default function WidgetEnergy({ config, onOptions }: WidgetSharedProps<Co
                         adaptiveDomain
                     />
                 </div>
-            )}
+            </Loadable>
         </Loadable>
     );
 }
