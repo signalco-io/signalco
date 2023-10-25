@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Row } from '@signalco/ui/dist/Row';
 import { Popper } from '@signalco/ui/dist/Popper';
 import { ButtonDropdown } from '@signalco/ui/dist/ButtonDropdown';
@@ -15,9 +15,9 @@ type DashboardSelectorProps = {
     onSettings: () => void
 }
 
-function DashboardSelector(props: DashboardSelectorProps) {
-    const { onEditWidgets, onSettings } = props;
+function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps) {
     const [selectedId, setSelectedId] = useSearchParam('dashboard');
+    const [isOpen, setIsOpen] = useState(false);
     const { data: dashboards, isLoading, error } = useDashboards();
 
     useEffect(() => {
@@ -39,17 +39,29 @@ function DashboardSelector(props: DashboardSelectorProps) {
         }
     }, [selectedId, dashboards, setSelectedId, isLoading]);
 
+    const handleSelection = (id: string) => {
+        setSelectedId(id);
+        setIsOpen(false);
+    };
+
+    const handleEditWidgets = () => {
+        setIsOpen(false);
+        onEditWidgets();
+    };
+
     return (
         <Row>
             {(dashboards?.length ?? 0) > 0 && (
                 <Popper
+                    open={isOpen}
+                    onOpenChange={setIsOpen}
                     trigger={(
                         <ButtonDropdown className="font-semibold">{currentName}</ButtonDropdown>
                     )}>
                     <DashboardSelectorMenu
                         selectedId={selectedId}
-                        onSelection={setSelectedId}
-                        onEditWidgets={onEditWidgets}
+                        onSelection={handleSelection}
+                        onEditWidgets={handleEditWidgets}
                         onSettings={onSettings} />
                 </Popper>
             )}
