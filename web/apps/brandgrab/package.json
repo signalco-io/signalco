@@ -18,7 +18,7 @@
     },
     "dependencies": {
         "@enterwell/react-hooks": "0.3.1",
-        "@next/env": "13.5.6",
+        "@next/env": "14.0.0",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
@@ -26,7 +26,7 @@
         "@signalco/ui-icons": "workspace:*",
         "cheerio": "1.0.0-rc.12",
         "classix": "2.1.35",
-        "next": "13.5.6",
+        "next": "14.0.0",
         "next-secure-headers": "2.2.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
