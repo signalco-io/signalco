@@ -8,7 +8,7 @@
         "node": "18.x"
     },
     "scripts": {
-        "dev": "next -p 3001 --turbo",
+        "dev": "next -p 3001",
         "build": "next build",
         "build:analyze": "cross-env ANALYZE=true pnpm build",
         "postinstall": "node ./tools/post-install.mjs",
