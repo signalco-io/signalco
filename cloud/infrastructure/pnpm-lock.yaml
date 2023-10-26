@@ -24,8 +24,8 @@ dependencies:
     specifier: 4.4.4
     version: 4.4.4
   '@pulumi/pulumi':
-    specifier: 3.90.1
-    version: 3.90.1
+    specifier: 3.91.0
+    version: 3.91.0
 
 devDependencies:
   '@types/node':
@@ -70,7 +70,7 @@ packages:
     resolution: {integrity: sha512-YPNYtwEnKu23VDHNFu91xd/Ueu5zYONHcYwKDA5qTvtgZZ1nzrvPJgrO15KF0fLRVlGo7yckirDS26GpvBTe6w==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.90.1
+      '@pulumi/pulumi': 3.91.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -366,7 +366,7 @@ packages:
   /@pulumi/aws@6.6.1:
     resolution: {integrity: sha512-fpjiZ1BwTBbGdI+FiNlSN6//nXBDgLSUhl2+QMMYbB68reJUaVIRe/h73F1SxCwRm12fL9rFrsG2qEf5HYk6wA==}
     dependencies:
-      '@pulumi/pulumi': 3.90.1
+      '@pulumi/pulumi': 3.91.0
       builtin-modules: 3.0.0
       mime: 2.6.0
       read-package-tree: 5.3.1
@@ -378,7 +378,7 @@ packages:
   /@pulumi/azure-native@2.14.0:
     resolution: {integrity: sha512-MYtd5EVgvfPGyUzk0nQEemNt0ehsOmn8fGxPX8lELuONU0UYwpsNeQYO4TSqA4qN9hsMipLKBVCkVh4DYo4INA==}
     dependencies:
-      '@pulumi/pulumi': 3.90.1
+      '@pulumi/pulumi': 3.91.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -386,7 +386,7 @@ packages:
   /@pulumi/cloudflare@5.13.0:
     resolution: {integrity: sha512-YkkmbCDZwbswBUqvOdtwMm5RbrDKG4b2RXzaCLj6JMgwltHcIz4yR5afBAK87IfJSCR5wjzD0YGXtG+SHExjvw==}
     dependencies:
-      '@pulumi/pulumi': 3.90.1
+      '@pulumi/pulumi': 3.91.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -395,7 +395,7 @@ packages:
     resolution: {integrity: sha512-0QVj0N02FOZRv/DrEPEx//wfMI6Iv2gatPj0s6ue5LpmhXXjLuOC/TBnpcTq1DqB9/uc3sCLafqXdJSdFzbt9g==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.90.1
+      '@pulumi/pulumi': 3.91.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -403,14 +403,14 @@ packages:
   /@pulumi/docker@4.4.4:
     resolution: {integrity: sha512-CuW5UAI+mZWJqD3ZKEv74ReWu/jCpoJKyXpjtp3m4I+bWoOoOfg7jUGoJnwLODQPnrmlawOviNa0TzMR5WdXaQ==}
     dependencies:
-      '@pulumi/pulumi': 3.90.1
+      '@pulumi/pulumi': 3.91.0
       semver: 5.7.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@pulumi/pulumi@3.90.1:
-    resolution: {integrity: sha512-+uRb3urpCj4wcyRL7AJ6tll6ix4giXreObrwf1Qdlgq8ErKfNvK+UZMt9GhX9yI+8dgAt2hpf066x1F92Ik3xg==}
+  /@pulumi/pulumi@3.91.0:
+    resolution: {integrity: sha512-xtCsfDyWK/tJXI/TrqgOUDdykYfcSBW2DLMBw3wZ4cCYG25OMg5e4uSo/0BJ2HAS4xr0cGeFL7FpADCPIWgFEQ==}
     engines: {node: '>=8.13.0 || >=10.10.0'}
     dependencies:
       '@grpc/grpc-js': 1.8.17
