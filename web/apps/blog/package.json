@@ -20,7 +20,7 @@
         "@mdx-js/loader": "3.0.0",
         "@mdx-js/react": "3.0.0",
         "@next/env": "13.5.6",
-        "@next/mdx": "13.5.6",
+        "@next/mdx": "14.0.0",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
@@ -46,7 +46,7 @@
     "devDependencies": {
         "@axe-core/playwright": "4.8.1",
         "@babel/core": "7.23.2",
-        "@next/bundle-analyzer": "13.5.6",
+        "@next/bundle-analyzer": "14.0.0",
         "@playwright/test": "1.39.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
