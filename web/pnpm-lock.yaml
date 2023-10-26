@@ -172,8 +172,8 @@ importers:
         specifier: 9.7.2
         version: 9.7.2(next@13.5.6)(webpack@5.89.0)
       '@next/bundle-analyzer':
-        specifier: 13.5.6
-        version: 13.5.6
+        specifier: 14.0.0
+        version: 14.0.0
       '@playwright/test':
         specifier: 1.39.0
         version: 1.39.0
@@ -268,8 +268,8 @@ importers:
         specifier: 13.5.6
         version: 13.5.6
       '@next/mdx':
-        specifier: 13.5.6
-        version: 13.5.6(@mdx-js/loader@3.0.0)(@mdx-js/react@3.0.0)
+        specifier: 14.0.0
+        version: 14.0.0(@mdx-js/loader@3.0.0)(@mdx-js/react@3.0.0)
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -341,8 +341,8 @@ importers:
         specifier: 7.23.2
         version: 7.23.2
       '@next/bundle-analyzer':
-        specifier: 13.5.6
-        version: 13.5.6
+        specifier: 14.0.0
+        version: 14.0.0
       '@playwright/test':
         specifier: 1.39.0
         version: 1.39.0
@@ -456,8 +456,8 @@ importers:
         specifier: 7.23.2
         version: 7.23.2
       '@next/bundle-analyzer':
-        specifier: 13.5.6
-        version: 13.5.6
+        specifier: 14.0.0
+        version: 14.0.0
       '@playwright/test':
         specifier: 1.39.0
         version: 1.39.0
@@ -593,8 +593,8 @@ importers:
         specifier: 7.23.2
         version: 7.23.2
       '@next/bundle-analyzer':
-        specifier: 13.5.6
-        version: 13.5.6
+        specifier: 14.0.0
+        version: 14.0.0
       '@playwright/test':
         specifier: 1.39.0
         version: 1.39.0
@@ -835,8 +835,8 @@ importers:
         specifier: 9.7.2
         version: 9.7.2(next@13.5.6)(webpack@5.89.0)
       '@next/bundle-analyzer':
-        specifier: 13.5.6
-        version: 13.5.6
+        specifier: 14.0.0
+        version: 14.0.0
       '@playwright/test':
         specifier: 1.39.0
         version: 1.39.0
@@ -931,8 +931,8 @@ importers:
         specifier: 8.52.0
         version: 8.52.0
       eslint-config-next:
-        specifier: 13.5.6
-        version: 13.5.6(eslint@8.52.0)(typescript@5.2.2)
+        specifier: 14.0.0
+        version: 14.0.0(eslint@8.52.0)(typescript@5.2.2)
       eslint-config-turbo:
         specifier: 1.10.16
         version: 1.10.16(eslint@8.52.0)
@@ -3782,8 +3782,8 @@ packages:
       tar-fs: 2.1.1
     dev: true
 
-  /@next/bundle-analyzer@13.5.6:
-    resolution: {integrity: sha512-4P5YVpR3N/B5+p0TQ/rPAr+9fsjkdfCVTGzJhKwE7XHqS+QME4gYxAYeGKkfkHEkP2A3GKXs8QSp0LjIvWLI3g==}
+  /@next/bundle-analyzer@14.0.0:
+    resolution: {integrity: sha512-a1Wbs0eXCMj30vxTfaGEO4DP3NjrqN+ge6rMhKZ43VtsXEjiVX95d7XFr7VkNps9lvlkofBF54RnIHhTJ2Ls0Q==}
     dependencies:
       webpack-bundle-analyzer: 4.7.0
     transitivePeerDependencies:
@@ -3794,14 +3794,14 @@ packages:
   /@next/env@13.5.6:
     resolution: {integrity: sha512-Yac/bV5sBGkkEXmAX5FWPS9Mmo2rthrOPRQQNfycJPkjUAUclomCPH7QFVCDQ4Mp2k2K1SSM6m0zrxYrOwtFQw==}
 
-  /@next/eslint-plugin-next@13.5.6:
-    resolution: {integrity: sha512-ng7pU/DDsxPgT6ZPvuprxrkeew3XaRf4LAT4FabaEO/hAbvVx4P7wqnqdbTdDn1kgTvsI4tpIgT4Awn/m0bGbg==}
+  /@next/eslint-plugin-next@14.0.0:
+    resolution: {integrity: sha512-Ye37nNI09V3yt7pzuzSQtwlvuJ2CGzFszHXkcTHHZgNr7EhTMFLipn3VSJChy+e5+ahTdNApPphc3qCPUsn10A==}
     dependencies:
       glob: 7.1.7
     dev: false
 
-  /@next/mdx@13.5.6(@mdx-js/loader@3.0.0)(@mdx-js/react@3.0.0):
-    resolution: {integrity: sha512-2AMyCrz1SxSWNUpADyLz3RbPbq0GHrchbO7Msvg7IsH8MrTw3VYaZSI1KNa6JzZIoykwtNVSEL+uBmPZi106Jw==}
+  /@next/mdx@14.0.0(@mdx-js/loader@3.0.0)(@mdx-js/react@3.0.0):
+    resolution: {integrity: sha512-pFSJO81fGoK6wVZPa8j/z+DKY5t3shMY2/hajdhxMjITL4nLzUZenuq42j8cLsN/nNJymaUJCA1SjiRb7jNQ1A==}
     peerDependencies:
       '@mdx-js/loader': '>=0.15.0'
       '@mdx-js/react': '>=0.15.0'
@@ -9575,8 +9575,8 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /eslint-config-next@13.5.6(eslint@8.52.0)(typescript@5.2.2):
-    resolution: {integrity: sha512-o8pQsUHTo9aHqJ2YiZDym5gQAMRf7O2HndHo/JZeY7TDD+W4hk6Ma8Vw54RHiBeb7OWWO5dPirQB+Is/aVQ7Kg==}
+  /eslint-config-next@14.0.0(eslint@8.52.0)(typescript@5.2.2):
+    resolution: {integrity: sha512-jtXeE+/pGQ3h9n11QyyuPN50kO13GO5XvjU5ZRq6W+XTpOMjyobWmK2s7aowy0FtzA49krJzYzEU9s1RMwoJ6g==}
     peerDependencies:
       eslint: ^7.23.0 || ^8.0.0
       typescript: '>=3.3.1'
@@ -9584,7 +9584,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@next/eslint-plugin-next': 13.5.6
+      '@next/eslint-plugin-next': 14.0.0
       '@rushstack/eslint-patch': 1.5.1
       '@typescript-eslint/parser': 6.9.0(eslint@8.52.0)(typescript@5.2.2)
       eslint: 8.52.0
@@ -9613,7 +9613,7 @@ packages:
     resolution: {integrity: sha512-WFj2isz22JahUv+B788TlO3N6zL3nNJGU8CcZbPZvVEkBPaJdCV4vy5wyghty5ROFbCRnm132v8BScu5/1BQ8g==}
     dependencies:
       debug: 3.2.7
-      is-core-module: 2.13.0
+      is-core-module: 2.13.1
       resolve: 1.22.8
     transitivePeerDependencies:
       - supports-color
