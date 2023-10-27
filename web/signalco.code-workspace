@@ -21,6 +21,10 @@
 			"path": "apps/development"
 		},
 		{
+			"name": "🚀 doprocess.app",
+			"path": "apps/doprocess.app"
+		},
+		{
 			"name": "🚀 slco",
 			"path": "apps/slco"
 		},

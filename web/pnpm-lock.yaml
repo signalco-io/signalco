@@ -535,6 +535,115 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
 
+  apps/doprocess.app:
+    dependencies:
+      '@hcaptcha/react-hcaptcha':
+        specifier: 1.8.1
+        version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
+      '@next/env':
+        specifier: 14.0.0
+        version: 14.0.0
+      '@signalco/data':
+        specifier: workspace:*
+        version: link:../../packages/data
+      '@signalco/tailwindcss-config-signalco':
+        specifier: workspace:*
+        version: link:../../packages/tailwindcss-config-signalco
+      '@signalco/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@signalco/ui-icons':
+        specifier: workspace:*
+        version: link:../../packages/ui-icons
+      classix:
+        specifier: 2.1.35
+        version: 2.1.35
+      next:
+        specifier: 14.0.0
+        version: 14.0.0(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.5)
+      next-secure-headers:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-cool-inview:
+        specifier: 3.0.1
+        version: 3.0.1(react@18.2.0)
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-transition-group:
+        specifier: 4.4.5
+        version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
+      sharp:
+        specifier: 0.32.6
+        version: 0.32.6
+      tailwindcss:
+        specifier: 3.3.5
+        version: 3.3.5
+      tailwindcss-animate:
+        specifier: 1.0.7
+        version: 1.0.7(tailwindcss@3.3.5)
+    devDependencies:
+      '@axe-core/playwright':
+        specifier: 4.8.1
+        version: 4.8.1(playwright-core@1.39.0)
+      '@babel/core':
+        specifier: 7.23.2
+        version: 7.23.2
+      '@next/bundle-analyzer':
+        specifier: 14.0.0
+        version: 14.0.0
+      '@playwright/test':
+        specifier: 1.39.0
+        version: 1.39.0
+      '@signalco/eslint-config-signalco':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config-signalco
+      '@signalco/tsconfig':
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
+      '@total-typescript/ts-reset':
+        specifier: 0.5.1
+        version: 0.5.1
+      '@types/color':
+        specifier: 3.0.5
+        version: 3.0.5
+      '@types/node':
+        specifier: 18.18.7
+        version: 18.18.7
+      '@types/react':
+        specifier: 18.2.33
+        version: 18.2.33
+      '@types/react-dom':
+        specifier: 18.2.14
+        version: 18.2.14
+      cross-env:
+        specifier: 7.0.3
+        version: 7.0.3
+      eslint:
+        specifier: 8.52.0
+        version: 8.52.0
+      next-sitemap:
+        specifier: 4.2.3
+        version: 4.2.3(next@14.0.0)
+      postcss:
+        specifier: 8.4.31
+        version: 8.4.31
+      prop-types:
+        specifier: 15.8.1
+        version: 15.8.1
+      rimraf:
+        specifier: 5.0.5
+        version: 5.0.5
+      sass:
+        specifier: 1.69.5
+        version: 1.69.5
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
+
   apps/slco:
     dependencies:
       '@hcaptcha/react-hcaptcha':
