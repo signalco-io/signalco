@@ -118,7 +118,9 @@ function WidgetChecklist(props: WidgetSharedProps<ConfigProps>) {
                         ? items.map(item => <ChecklistItem key={item.id} item={item} onChange={handleItemChanged} onRemove={handleItemRemoved} />)
                         : (
                             <div className="flex h-full items-center justify-center">
-                                <NoDataPlaceholder content={placeholders.t('NoItems')} />
+                                <NoDataPlaceholder>
+                                    {placeholders.t('NoItems')}
+                                </NoDataPlaceholder>
                             </div>
                         )}
                 </Stack>

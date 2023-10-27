@@ -16,6 +16,7 @@ import useLocale from '../../src/hooks/useLocale';
 import useSaveDashboard from '../../src/hooks/dashboards/useSaveDashboard';
 import useDashboard from '../../src/hooks/dashboards/useDashboard';
 import { WidgetModel } from '../../src/dashboards/DashboardsRepository';
+import { SpacesEditingBackground } from './SpacesEditingBackground';
 import DashboardView from './DashboardView';
 import DashboardSettings from './DashboardSettings';
 
@@ -83,14 +84,17 @@ function Dashboards() {
     return (
         <>
             {isEditing && (
-                <Row>
-                    <div className="xs:w-full px-2">
-                        <Row spacing={1}>
-                            <Button onClick={() => setShowWidgetStore(true)}>{t('AddWidget')}</Button>
-                            <Button onClick={handleEditDone} fullWidth>{t('Save')}</Button>
-                        </Row>
-                    </div>
-                </Row>
+                <>
+                    <SpacesEditingBackground />
+                    <Row>
+                        <div className="xs:w-full px-2">
+                            <Row spacing={1}>
+                                <Button onClick={() => setShowWidgetStore(true)}>{t('AddWidget')}</Button>
+                                <Button onClick={handleEditDone} fullWidth>{t('Save')}</Button>
+                            </Row>
+                        </div>
+                    </Row>
+                </>
             )}
             <Stack spacing={1}>
                 <Loadable isLoading={selectedDashboard.isLoading} loadingLabel="Loading dashboards..." error={selectedDashboard.error}>

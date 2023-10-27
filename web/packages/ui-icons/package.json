@@ -21,15 +21,13 @@
     },
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
+        "lucide-react": "0.290.0",
         "prop-types": "15.8.1",
-        "tsup": "6.7.0",
-        "typescript": "5.2.2",
-        "rimraf": "5.0.5",
-        "lucide-react": "0.289.0",
         "react": "18.2.0",
-        "react-dom": "18.2.0"
-    },
-    "dependencies": {
+        "react-dom": "18.2.0",
+        "rimraf": "5.0.5",
+        "tsup": "7.2.0",
+        "typescript": "5.2.2"
     },
     "peerDependencies": {
         "react": "18.2.0",

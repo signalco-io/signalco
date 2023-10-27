@@ -340,7 +340,7 @@ function Graph({ isLoading, error, data, label, discrete, ...rest }: GraphProps)
             {!!label && <Typography>{label}</Typography>}
             <Loadable isLoading={isLoading} loadingLabel="Loading data" error={error} width={100}>
                 {!data || data.length <= 0
-                    ? <NoDataPlaceholder content={t('NoData')} />
+                    ? <NoDataPlaceholder>{t('NoData')}</NoDataPlaceholder>
                     : <GraphComponent data={data} {...rest} />}
             </Loadable>
         </Row>

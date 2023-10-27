@@ -24,7 +24,11 @@ export default function EntityContactSelection(props: EntityContactSelectionProp
     };
 
     if (!isLoading && !error && !contacts.length) {
-        return <div className="p-2"><NoDataPlaceholder content={'No applicable contacts available'} /></div>;
+        return (
+            <div className="p-2">
+                <NoDataPlaceholder>No applicable contacts available</NoDataPlaceholder>
+            </div>
+        );
     }
 
     return (

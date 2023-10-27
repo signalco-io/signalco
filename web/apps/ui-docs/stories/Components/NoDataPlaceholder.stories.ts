@@ -1,7 +1,9 @@
 import { NoDataPlaceholder } from "@signalco/ui/dist/NoDataPlaceholder";
-import { StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
-export default { component: NoDataPlaceholder, tags: ['autodocs'] };
-type Story = StoryObj<typeof NoDataPlaceholder>;
+const Component = NoDataPlaceholder;
+
+export default { component: Component, tags: ['autodocs'], args: { children: 'No data' } } satisfies Meta<typeof Component>;
+type Story = StoryObj<typeof Component>;
 
 export const Default: Story = {};

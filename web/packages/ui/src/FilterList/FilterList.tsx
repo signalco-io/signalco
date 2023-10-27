@@ -68,7 +68,7 @@ export function ItemsWrapper({ children, noItemsPlaceholder, itemsWrapper, ...re
     return (
         <Loadable {...rest}>
             {!children || !Array.isArray(children) || children.length === 0 ? (
-                <NoDataPlaceholder content={noItemsPlaceholder} />
+                <NoDataPlaceholder>{noItemsPlaceholder}</NoDataPlaceholder>
             ) : (
                 <ItemsWrapper>{children}</ItemsWrapper>
             )}

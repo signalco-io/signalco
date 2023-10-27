@@ -275,6 +275,7 @@ export = async () => {
         dnsRecord('vercel-ui-docs', 'ui', 'cname.vercel-dns.com', 'CNAME', false);
         dnsRecord('vercel-brandgrab', 'brandgrab', 'cname.vercel-dns.com', 'CNAME', false);
         dnsRecord('vercel-slco', 'slco', 'cname.vercel-dns.com', 'CNAME', false);
+        dnsRecord('vercel-doprocess', 'doprocess', 'cname.vercel-dns.com', 'CNAME', false);
 
         return {
             signalrUrl: signalr.signalr.hostName,

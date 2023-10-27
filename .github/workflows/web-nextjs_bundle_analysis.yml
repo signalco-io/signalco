@@ -61,3 +61,12 @@ jobs:
       name: 'slco'
       path: 'web/apps/slco'
     secrets: inherit
+
+  analyze_doprocess:
+    name: "[doprocess] Next.js Bundle Analysis"
+    uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
+    with:
+      workflowName: 'web-nextjs_bundle_analysis.yml'
+      name: 'doprocess'
+      path: 'web/apps/doprocess.app'
+    secrets: inherit

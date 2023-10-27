@@ -15,7 +15,8 @@ const apps: AppItemType[] = [
 
 const uSaas: AppItemType[] = [
     { label: 'slco', href: 'http://localhost:4002' },
-    { label: 'brandgrab', href: 'http://localhost:4001' }
+    { label: 'brandgrab', href: 'http://localhost:4001' },
+    { label: 'DoProcess.app', href: 'http://localhost:4003' },
 ];
 
 function App() {
