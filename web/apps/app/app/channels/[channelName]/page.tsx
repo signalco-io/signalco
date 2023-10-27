@@ -23,7 +23,9 @@ function ChannelConnectPartial(props: { channelName: string }) {
         return <ChannelPartialSlack />;
 
     return (
-        <NoDataPlaceholder content="Connect action not availble" />
+        <NoDataPlaceholder>
+            Connect action not availble
+        </NoDataPlaceholder>
     );
 }
 
@@ -71,7 +73,9 @@ export default function AppChannelPage({ params }: { params: { channelName: stri
                                         ))}
                                     </List>
                                 ) : (
-                                    <NoDataPlaceholder content="No items" />
+                                    <NoDataPlaceholder>
+                                        No items
+                                    </NoDataPlaceholder>
                                 )}
                         </Loadable>
                     </Stack>

@@ -90,7 +90,9 @@ export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>
                     </Stack>
                     <Stack>
                         {!price?.item ? (
-                            <NoDataPlaceholder content={'No data'} />
+                            <NoDataPlaceholder>
+                                No data
+                            </NoDataPlaceholder>
                         ) : (
                             <>
                                 <Typography level="h4" bold lineHeight={0.9}>${closePrice}</Typography>

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import type { ComponentProps, MouseEvent } from 'react';
 import { cx } from 'classix';
+import { ExpandDown } from '@signalco/ui-icons';
 import { Row } from '../Row';
-import { Icon } from '../Icon';
 import { Collapse } from '../Collapse';
 import { Card, CardContent, CardHeader } from '../Card';
 
@@ -34,7 +34,7 @@ export function Accordion({ children, open, disabled, onOpenChanged, unmountOnEx
                 <Row spacing={1} justifyContent="space-between">
                     {multipleChildren ? children[0] : children}
                     {!disabled && (
-                        <Icon>{actualOpen ? 'expand_less' : 'expand_more'}</Icon>
+                        <ExpandDown className={cx('uitw-transition-transform', actualOpen && 'uitw-scale-y-[-1]')} />
                     )}
                 </Row>
             </CardHeader>

@@ -5,6 +5,7 @@
         "noEmit": true
     },
     "include": [
-        "stories"
+        "stories/**/*.ts",
+        "stories/**/*.tsx"
     ]
 }

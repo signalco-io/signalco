@@ -34,7 +34,9 @@ export default function EntityDetailsView({ id }: EntityDetailsViewProps) {
 
     if (!isLoading && !error && entity == null) {
         return (
-            <NoDataPlaceholder content={'Not Found'} />
+            <NoDataPlaceholder>
+                Not Found
+            </NoDataPlaceholder>
         );
     }
     return (

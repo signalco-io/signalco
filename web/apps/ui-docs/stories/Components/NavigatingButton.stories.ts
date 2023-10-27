@@ -1,7 +1,16 @@
 import { NavigatingButton } from "@signalco/ui/dist/NavigatingButton";
-import { StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
-export default { component: NavigatingButton, tags: ['autodocs'] };
-type Story = StoryObj<typeof NavigatingButton>;
+const Component = NavigatingButton;
+
+export default {
+    component: Component,
+    tags: ['autodocs'],
+    args: {
+        children: 'Navigate',
+        href: '#'
+    }
+} satisfies Meta<typeof Component>;
+type Story = StoryObj<typeof Component>;
 
 export const Default: Story = {};
