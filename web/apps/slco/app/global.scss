@@ -55,8 +55,8 @@ html, body, #__next {
 
 @layer base {
   :root {
-    --selection-bg: #000;
-    --selection-color: #fff; 
+    --bg-selection: #000;
+    --text-selection: #fff; 
   }
 
   .dark {

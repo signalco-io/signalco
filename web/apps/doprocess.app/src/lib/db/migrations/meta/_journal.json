@@ -1,0 +1,41 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1698422778970,
+      "tag": "0000_unusual_deadpool",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1698423921652,
+      "tag": "0001_ambiguous_proteus",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1698428823821,
+      "tag": "0002_first_darkhawk",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1698442727377,
+      "tag": "0003_cloudy_grim_reaper",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1698445750228,
+      "tag": "0004_nosy_cyclops",
+      "breakpoints": true
+    }
+  ]
+}

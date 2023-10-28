@@ -2,11 +2,10 @@ import { useCallback } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { StringOrUndefined } from '@signalco/js';
 
-export function useSearchParam<S extends string | undefined>(parameterName: string, defaultValue?: S): [StringOrUndefined<S>, (value: string | undefined) => void] {
+export function useSetSearchParam(parameterName: string): (value: string | undefined) => void {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const currentValue = searchParams.get(parameterName) ?? defaultValue;
 
     const setHashAsync = useCallback((value: string | undefined) => {
         const currentSearch = new URLSearchParams(Array.from(searchParams.entries()));
@@ -34,5 +33,14 @@ export function useSearchParam<S extends string | undefined>(parameterName: stri
         router.replace(url);
     }, [parameterName, router, searchParams, pathname]);
 
-    return [currentValue as StringOrUndefined<S>, setHashAsync];
+    return setHashAsync;
+}
+
+export function useSearchParam<S extends string | undefined>(parameterName: string, defaultValue?: S): [StringOrUndefined<S>, (value: string | undefined) => void] {
+    const searchParams = useSearchParams();
+    const currentValue = searchParams.get(parameterName) ?? defaultValue;
+    const setSearchParam = useSetSearchParam(parameterName);
+
+
+    return [currentValue as StringOrUndefined<S>, setSearchParam];
 }

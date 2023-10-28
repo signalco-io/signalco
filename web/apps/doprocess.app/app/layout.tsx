@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import '@signalco/ui/dist/index.css';
-import './global.scss';
+import './global.css';
+import { PageNav } from '../components/PageNav';
 
 export default function RootLayout({ children, }: {
     children: React.ReactNode;
@@ -8,7 +8,10 @@ export default function RootLayout({ children, }: {
     return (
         <html lang="en">
             <body>
-                {children}
+                <PageNav fullWidth />
+                <div className="h-full pt-20">
+                    {children}
+                </div>
             </body>
         </html>
     );
@@ -22,7 +25,6 @@ export const metadata = {
         { media: '(prefers-color-scheme: dark)', color: 'black' },
         { color: 'black' },
     ],
-    manifest: '/manifest.json',
     icons: {
         apple: '/apple-touch-icon.png',
         icon: [

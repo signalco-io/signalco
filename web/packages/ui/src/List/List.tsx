@@ -1,9 +1,9 @@
 import { PropsWithChildren } from 'react';
 import { Stack } from '../Stack';
 
-export function List({ children }: PropsWithChildren) {
+export function List({ spacing, children }: PropsWithChildren<{ spacing?: number }>) {
     return (
-        <Stack>
+        <Stack spacing={spacing}>
             {children}
         </Stack>
     );
