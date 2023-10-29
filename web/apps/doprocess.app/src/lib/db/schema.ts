@@ -6,11 +6,16 @@ export const process = mysqlTable('process', {
     name: varchar('name', { length: 255 }).notNull(),
 });
 
+export type Process = typeof process.$inferSelect;
+
 export const processRun = mysqlTable('process_run', {
     id: serial('id').primaryKey(),
     processId: int('process_id').notNull(),
+    name: varchar('name', { length: 255 }).notNull(),
     state: varchar('state', { length: 255 }).notNull()
 });
+
+export type ProcessRun = typeof processRun.$inferSelect;
 
 export const taskDefinition = mysqlTable('task_definition', {
     id: serial('id').primaryKey(),

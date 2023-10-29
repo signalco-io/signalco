@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import './global.css';
 import { PageNav } from '../components/PageNav';
+import { ClientProvider } from '../components/ClientProvider';
 
 export default function RootLayout({ children, }: {
     children: React.ReactNode;
@@ -8,10 +9,12 @@ export default function RootLayout({ children, }: {
     return (
         <html lang="en">
             <body>
-                <PageNav fullWidth />
-                <div className="h-full pt-20">
-                    {children}
-                </div>
+                <ClientProvider>
+                    <PageNav fullWidth />
+                    <div className="h-full pt-20">
+                        {children}
+                    </div>
+                </ClientProvider>
             </body>
         </html>
     );

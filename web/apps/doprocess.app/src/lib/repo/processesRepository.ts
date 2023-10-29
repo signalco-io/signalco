@@ -27,12 +27,17 @@ export async function getProcessRuns(processId: number) {
     return await db.select().from(processRun).where(eq(processRun.processId, processId));
 }
 
-export async function runProcess(processId: number) {
-    const runId = (await db.insert(processRun).values({ processId: processId, state: 'running' })).insertId;
+export async function getProcessRun(processId: number, runId: number) {
+    return (await db.select().from(processRun).where(and(eq(processRun.processId, processId), eq(processRun.id, runId))))?.at(0);
+}
+
+export async function runProcess(processId: number, name: string) {
+    const runId = (await db.insert(processRun).values({ processId, state: 'running', name })).insertId;
     const taskDefinitions = await getTaskDefinitions(processId);
     for (const taskDefinition of taskDefinitions) {
         await db.insert(task).values({ processId: processId, runId: Number(runId), taskDefinitionId: taskDefinition.id, state: 'new' });
     }
+    return runId;
 }
 
 export async function getTaskDefinitions(processId: number) {

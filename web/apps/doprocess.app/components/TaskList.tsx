@@ -7,7 +7,7 @@ import { ListItem } from '@signalco/ui/dist/ListItem';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import { useSearchParam, useSetSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { Task, TaskDefinition } from '../src/lib/db/schema';
-import { updateTaskStateFormAction } from '../app/processes/[id]/actions';
+import { useProcessRunTaskUpdate } from './processes/useProcessRunTaskUpdate';
 
 type TaskListProps = {
     tasks: {
@@ -25,8 +25,20 @@ type TaskListItemProps = {
 
 function TaskListItem({ selected, taskDefinition, task, taskIndex }: TaskListItemProps) {
     const setSelectedTaskId = useSetSearchParam('task');
+    const taskUpdate = useProcessRunTaskUpdate();
 
     const checked = task?.state === 'completed';
+
+    const handleCheckedChange = (checked: boolean | 'indeterminate') => {
+        if (!task) return;
+
+        taskUpdate.mutateAsync({
+            processId: task.processId.toString(),
+            runId: task.runId.toString(),
+            taskId: task.id.toString(),
+            status: checked ? 'completed' : 'new',
+        })
+    }
 
     return (
         <>
@@ -39,10 +51,7 @@ function TaskListItem({ selected, taskDefinition, task, taskIndex }: TaskListIte
                 )}
                 selected={selected}
                 startDecorator={task && (
-                    <form action={updateTaskStateFormAction}>
-                        <input type="hidden" name="taskId" value={task.id} />
-                        <Checkbox checked={checked} name="checked" type="submit" />
-                    </form>
+                    <Checkbox checked={checked} name="checked" type="submit" onCheckedChange={handleCheckedChange} />
                 )}
                 nodeId={taskDefinition.id.toString()}
                 onSelected={setSelectedTaskId}

@@ -27,6 +27,7 @@
     "@signalco/hooks": "workspace:*",
     "@signalco/ui": "workspace:*",
     "@signalco/ui-icons": "workspace:*",
+    "@tanstack/react-query": "5.0.5",
     "classix": "2.1.35",
     "drizzle-orm": "^0.28.6",
     "next": "14.0.0",
