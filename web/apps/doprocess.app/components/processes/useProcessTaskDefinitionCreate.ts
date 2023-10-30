@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { taskDefinitionsKey } from './useProcessTaskDefinitions';
+import { processTaskDefinitionsKey } from './useProcessTaskDefinitions';
 
 type TaskDefinitionCreateArgs = {
     processId: string;
@@ -18,7 +18,7 @@ export function useProcessTaskDefinitionCreate() {
     return useMutation({
         mutationFn: ({ processId, ...rest }: TaskDefinitionCreateArgs) => fetchPostProcess(processId, rest),
         onSuccess: (_, {processId}: TaskDefinitionCreateArgs) => {
-            client.invalidateQueries({ queryKey: taskDefinitionsKey(processId) });
+            client.invalidateQueries({ queryKey: processTaskDefinitionsKey(processId) });
         }
     });
 }

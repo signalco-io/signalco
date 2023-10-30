@@ -19,12 +19,14 @@
     "test": "playwright test"
   },
   "dependencies": {
+    "@blocknote/core": "^0.9.6",
+    "@blocknote/react": "^0.9.6",
     "@hcaptcha/react-hcaptcha": "1.8.1",
     "@next/env": "14.0.0",
     "@planetscale/database": "^1.11.0",
     "@signalco/data": "workspace:*",
-    "@signalco/tailwindcss-config-signalco": "workspace:*",
     "@signalco/hooks": "workspace:*",
+    "@signalco/tailwindcss-config-signalco": "workspace:*",
     "@signalco/ui": "workspace:*",
     "@signalco/ui-icons": "workspace:*",
     "@tanstack/react-query": "5.0.5",

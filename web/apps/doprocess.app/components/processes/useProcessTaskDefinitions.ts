@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { TaskDefinition } from '../../src/lib/db/schema';
 import { processKey } from './useProcess';
 
-export function taskDefinitionsKey(processId?: string) {
+export function processTaskDefinitionsKey(processId?: string) {
     return [...processKey(processId), 'taskDefinitions'];
 }
 
@@ -13,7 +13,7 @@ async function fetchGetProcess(processId: string) {
 
 export function useProcessTaskDefinitions(processId?: string) {
     return useQuery({
-        queryKey: taskDefinitionsKey(processId),
+        queryKey: processTaskDefinitionsKey(processId),
         queryFn: async () => {
             if (!processId)
                 throw new Error('Process ID is required');
