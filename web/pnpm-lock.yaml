@@ -42,8 +42,8 @@ importers:
         specifier: 1.2.8
         version: 1.2.8(react-dom@18.2.0)(react@18.2.0)
       '@enterwell/react-hooks':
-        specifier: 0.3.1
-        version: 0.3.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: 0.3.2
+        version: 0.3.2(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
         specifier: 1.8.1
         version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
@@ -404,8 +404,8 @@ importers:
   apps/brandgrab:
     dependencies:
       '@enterwell/react-hooks':
-        specifier: 0.3.1
-        version: 0.3.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: 0.3.2
+        version: 0.3.2(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 14.0.1
         version: 14.0.1
@@ -853,8 +853,8 @@ importers:
   apps/web:
     dependencies:
       '@enterwell/react-hooks':
-        specifier: 0.3.1
-        version: 0.3.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: 0.3.2
+        version: 0.3.2(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
         specifier: 1.8.1
         version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
@@ -3184,8 +3184,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@enterwell/react-hooks@0.3.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-3J13l51BGSRxJ+poDN0IPRTU2hcM/6yep/htx/I6N2Ke2Es6g0HapXOTjnwk/4Z5Pq5EuO8O0QrMo1NZ4HZcJQ==}
+  /@enterwell/react-hooks@0.3.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-34YzCD0eNbiWz0/gy5lYY1712bxs3bdoJBlTA7ADNw57ZKoKQ2w7aT0D4OucUVdvoXtiNvCdP2hcHB1V9fKN/Q==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
