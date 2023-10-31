@@ -12,7 +12,7 @@ import { useProcess } from '../../../../../components/processes/useProcess';
 import { SplitView } from '../../../../../components/layouts/SplitView';
 import { ListHeader } from '../../../../../components/layouts/ListHeader';
 
-const TaskList = dynamic(() => import('../../../../../components/TaskList'), { ssr: false });
+const TaskList = dynamic(() => import('../../../../../components/processes/TaskList'), { ssr: false });
 
 function ProcessRunHeader({ id, runId }: { id: string, runId: string }) {
     const { data: process } = useProcess(id);

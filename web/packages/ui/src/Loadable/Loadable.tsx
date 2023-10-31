@@ -1,4 +1,4 @@
-import { type PropsWithChildren, useMemo } from 'react';
+import { type PropsWithChildren, useMemo, ReactNode } from 'react';
 import { cx } from 'classix';
 import { Warning } from '@signalco/ui-icons';
 import { Alert } from '../Alert';
@@ -14,7 +14,7 @@ export type LoadableSkeletonProps = {
 }
 
 export type LoadableProps = PropsWithChildren<LoadableLoadingErrorProps & LoadableSkeletonProps & {
-    placeholder?: 'skeletonText' | 'skeletonRect' | 'circular';
+    placeholder?: 'skeletonText' | 'skeletonRect' | 'circular' | ReactNode | Element;
     contentVisible?: boolean;
     loadingLabel: string;
     className?: string;
@@ -24,6 +24,10 @@ export function Loadable(props: LoadableProps) {
     const { isLoading, loadingLabel, placeholder, error, children, contentVisible, className } = props;
 
     const indicator = useMemo(() => {
+        if (typeof placeholder === 'object') {
+            return placeholder;
+        }
+
         switch (placeholder) {
         case 'skeletonText':
             // return <Skeleton variant="text" width={width ?? 120} />;

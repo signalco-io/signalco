@@ -3,6 +3,8 @@ import { processTaskDefinitionsKey } from './useProcessTaskDefinitions';
 
 type TaskDefinitionCreateArgs = {
     processId: string;
+    text?: string;
+    description?: string;
 }
 
 async function fetchPostProcess(processId: string, data: object) {

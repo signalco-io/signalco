@@ -6,8 +6,8 @@ import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
 import { ListItem } from '@signalco/ui/dist/ListItem';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import { useSearchParam, useSetSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { Task, TaskDefinition } from '../src/lib/db/schema';
-import { useProcessRunTaskUpdate } from './processes/useProcessRunTaskUpdate';
+import { Task, TaskDefinition } from '../../src/lib/db/schema';
+import { useProcessRunTaskUpdate } from './useProcessRunTaskUpdate';
 
 type TaskListProps = {
     tasks: {
@@ -39,6 +39,8 @@ function TaskListItem({ selected, taskDefinition, task, taskIndex }: TaskListIte
             status: checked ? 'completed' : 'new',
         })
     }
+
+    // TODO: Preload on hover (to avoid skeletons)
 
     return (
         <>

@@ -13,7 +13,7 @@ import { Input } from '@signalco/ui/dist/Input';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Divider } from '@signalco/ui/dist/Divider';
 import { Button } from '@signalco/ui/dist/Button';
-import TaskList from '../TaskList';
+import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { ListHeader } from '../layouts/ListHeader';
 import { Process } from '../../src/lib/db/schema';
 import { KnownPages } from '../../src/knownPages';
@@ -21,6 +21,7 @@ import { useProcessTaskDefinitions } from './useProcessTaskDefinitions';
 import { useProcessTaskDefinitionCreate } from './useProcessTaskDefinitionCreate';
 import { useProcessRunCreate } from './useProcessRunCreate';
 import { useProcess } from './useProcess';
+import TaskList from './TaskList';
 
 function ProcessRunCreateForm({ process }: { process: Process }) {
     const { id: processId, name: processName } = process;
@@ -82,13 +83,18 @@ function ProcessRunCreateModal({ process }: { process: Process }) {
 
 export function ProcessDetails({ id }: { id: string; }) {
     const { data: process } = useProcess(id);
+    const [, setSelectedTask] = useSearchParam('task');
     const { data: taskDefinitions, isLoading: isLoadingTaskDefinitions, error: errorTaskDefinitions } = useProcessTaskDefinitions(id);
     const taskDefinitionCreate = useProcessTaskDefinitionCreate();
 
     const handleAddTaskDefinition = async () => {
-        await taskDefinitionCreate.mutateAsync({
-            processId: id
+        const result = await taskDefinitionCreate.mutateAsync({
+            processId: id,
+            text: 'New task'
         });
+        if (result?.id) {
+            setSelectedTask(result?.id);
+        }
     };
 
     return (

@@ -44,6 +44,10 @@ export async function getTaskDefinitions(processId: number) {
     return await db.select().from(taskDefinition).where(eq(taskDefinition.processId, processId));
 }
 
+export async function getTaskDefinition(processId: number, taskDefinitionId: number) {
+    return (await db.select().from(taskDefinition).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, taskDefinitionId))))?.at(0);
+}
+
 export async function createTaskDefinition(processId: number, text: string, description: string) {
     return (await db.insert(taskDefinition).values({ processId: processId, text: text, description: description })).insertId;
 }
