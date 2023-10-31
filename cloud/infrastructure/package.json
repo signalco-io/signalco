@@ -8,7 +8,7 @@
         "restart-functions": "node tools/restart-functions.js"
     },
     "devDependencies": {
-        "@types/node": "18.18.7",
+        "@types/node": "18.18.8",
         "@typescript-eslint/eslint-plugin": "6.9.1",
         "@typescript-eslint/parser": "6.9.1",
         "eslint": "8.52.0",
