@@ -1,1 +1,1 @@
-export { Row, type RowProps} from './Row';
+export * from './Row';

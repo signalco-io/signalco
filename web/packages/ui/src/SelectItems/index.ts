@@ -1,1 +1,1 @@
-export { SelectItems, type SelectItemsProps} from './SelectItems';
+export * from './SelectItems';
