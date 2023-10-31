@@ -17,7 +17,7 @@
         "test": "playwright test"
     },
     "dependencies": {
-        "@enterwell/react-hooks": "0.3.1",
+        "@enterwell/react-hooks": "0.3.2",
         "@next/env": "14.0.1",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
