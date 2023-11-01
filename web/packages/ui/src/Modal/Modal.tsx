@@ -20,7 +20,7 @@ export function Modal({
     return (
         <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
             {trigger && (
-                <DialogPrimitive.Trigger>
+                <DialogPrimitive.Trigger asChild>
                     {trigger}
                 </DialogPrimitive.Trigger>
             )}
