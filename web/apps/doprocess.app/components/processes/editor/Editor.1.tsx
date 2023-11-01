@@ -1,11 +1,7 @@
 import { BlockNoteView, useBlockNote } from '@blocknote/react';
-import '@blocknote/core/style.css';
 
-type EditorProps = {
-    editable: boolean;
-};
 
-export function Editor({ editable }: EditorProps) {
+export function Editor({ editable }: { editable?: boolean; }) {
     const editor = useBlockNote({
         editable
     });

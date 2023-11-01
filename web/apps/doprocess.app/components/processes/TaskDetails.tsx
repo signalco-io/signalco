@@ -12,7 +12,12 @@ import { EditorSkeleton } from './editor/EditorSkeleton';
 
 const Editor = dynamic(() => import('./editor/Editor').then(mod => mod.Editor), { ssr: false, loading: () => <EditorSkeleton /> });
 
-export function TaskDetails({ processId }: { processId: string }) {
+type TaskDetailsProps = {
+    processId: string;
+    editable: boolean;
+};
+
+export function TaskDetails({ processId, editable }: TaskDetailsProps) {
     const [selectedTaskId] = useSearchParam('task');
     const { data: taskDefinition, isLoading: taskDefinitionIsLoading, error: taskDefinitionError } = useProcessTaskDefinition(processId, selectedTaskId);
 
@@ -49,7 +54,7 @@ export function TaskDetails({ processId }: { processId: string }) {
                 <Typography level="h2" className={cx('px-[62px]', !hasHeader && 'text-muted-foreground hover:text-foreground')}>
                     {hasHeader ? taskDefinition?.text : 'No description'}
                 </Typography>
-                <Editor />
+                <Editor editable={editable} />
             </Stack>
         </Loadable>
     );

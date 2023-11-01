@@ -1,18 +1,16 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Link } from '@signalco/ui/dist/Link';
-import { KnownPages } from '../../../../../src/knownPages';
-import { useProcessTaskDefinitions } from '../../../../../components/processes/useProcessTaskDefinitions';
-import { useProcessRunTasks } from '../../../../../components/processes/useProcessRunTasks';
-import { useProcessRun } from '../../../../../components/processes/useProcessRun';
-import { useProcess } from '../../../../../components/processes/useProcess';
-import { SplitView } from '../../../../../components/layouts/SplitView';
-import { ListHeader } from '../../../../../components/layouts/ListHeader';
-
-const TaskList = dynamic(() => import('../../../../../components/processes/TaskList'), { ssr: false });
+import { KnownPages } from '../../../../../../src/knownPages';
+import { useProcessTaskDefinitions } from '../../../../../../components/processes/useProcessTaskDefinitions';
+import { useProcessRunTasks } from '../../../../../../components/processes/useProcessRunTasks';
+import { useProcessRun } from '../../../../../../components/processes/useProcessRun';
+import { useProcess } from '../../../../../../components/processes/useProcess';
+import TaskList from '../../../../../../components/processes/TaskList';
+import { SplitView } from '../../../../../../components/layouts/SplitView';
+import { ListHeader } from '../../../../../../components/layouts/ListHeader';
 
 function ProcessRunHeader({ id, runId }: { id: string, runId: string }) {
     const { data: process } = useProcess(id);
@@ -42,7 +40,7 @@ export default function ProcessRunPage({ params }: { params: { id: string, runId
         <SplitView>
             <Stack className="p-2" spacing={2}>
                 <ProcessRunHeader id={id} runId={runId} />
-                <TaskList tasks={listTasks ?? []} />
+                <TaskList processId={id} tasks={listTasks ?? []} editable={false} />
             </Stack>
         </SplitView>
     );

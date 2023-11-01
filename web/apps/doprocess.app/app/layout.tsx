@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import './global.css';
-import { PageNav } from '../components/PageNav';
 import { ClientProvider } from '../components/ClientProvider';
 
 export default function RootLayout({ children, }: {
@@ -10,10 +9,7 @@ export default function RootLayout({ children, }: {
         <html lang="en">
             <body>
                 <ClientProvider>
-                    <PageNav fullWidth />
-                    <div className="h-full pt-20">
-                        {children}
-                    </div>
+                    {children}
                 </ClientProvider>
             </body>
         </html>

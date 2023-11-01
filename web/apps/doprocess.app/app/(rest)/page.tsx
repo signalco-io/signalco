@@ -1,5 +1,5 @@
 import { Link } from '@signalco/ui/dist/Link';
-import { KnownPages } from '../src/knownPages';
+import { KnownPages } from '../../src/knownPages';
 
 export default function LandingPage() {
     return (

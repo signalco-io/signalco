@@ -10,7 +10,7 @@ import { Button } from '@signalco/ui/dist/Button';
 import { KnownPages } from '../../src/knownPages';
 import { useProcessCreate } from './useProcessCreate';
 
-export function CreateProcessForm({ redirect }: { redirect?: boolean }) {
+export function ProcessCreateForm({ redirect }: { redirect?: boolean }) {
     const router = useRouter();
     const [name, setName] = useState('');
     const createProcess = useProcessCreate();
@@ -30,12 +30,11 @@ export function CreateProcessForm({ redirect }: { redirect?: boolean }) {
                 onChange={(e) => setName(e.target.value)}
                 label="Name"
                 placeholder="example: Onboarding process" />
-            <Tooltip title="Create tempalte">
+            <Tooltip title="Create tempalte" className="self-end">
                 <Button
                     loading={createProcess.isPending}
-                    variant="soft"
+                    variant="solid"
                     startDecorator={<Add />}
-                    className="self-end"
                     onClick={handleProcessCreate}>
                     Create
                 </Button>
