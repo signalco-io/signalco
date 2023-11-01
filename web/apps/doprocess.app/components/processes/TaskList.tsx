@@ -2,6 +2,7 @@
 
 import { cx } from 'classix';
 import { Typography } from '@signalco/ui/dist/Typography';
+import { Row } from '@signalco/ui/dist/Row';
 import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
 import { ListItem } from '@signalco/ui/dist/ListItem';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
@@ -54,6 +55,9 @@ function TaskListItem({ selected, taskDefinition, task, taskIndex }: TaskListIte
                 selected={selected}
                 startDecorator={task && (
                     <Checkbox checked={checked} name="checked" type="submit" onCheckedChange={handleCheckedChange} />
+                )}
+                endDecorator={(
+                    <ConfirmDeleteButton />
                 )}
                 nodeId={taskDefinition.id.toString()}
                 onSelected={setSelectedTaskId}

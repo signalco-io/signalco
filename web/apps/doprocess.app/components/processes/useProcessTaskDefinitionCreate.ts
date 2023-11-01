@@ -7,7 +7,7 @@ type TaskDefinitionCreateArgs = {
     description?: string;
 }
 
-async function fetchPostProcess(processId: string, data: object) {
+async function fetchPostProcessTaskDefinition(processId: string, data: object) {
     const response = await fetch(`/api/processes/${processId}/task-definitions`, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -18,7 +18,7 @@ async function fetchPostProcess(processId: string, data: object) {
 export function useProcessTaskDefinitionCreate() {
     const client = useQueryClient();
     return useMutation({
-        mutationFn: ({ processId, ...rest }: TaskDefinitionCreateArgs) => fetchPostProcess(processId, rest),
+        mutationFn: ({ processId, ...rest }: TaskDefinitionCreateArgs) => fetchPostProcessTaskDefinition(processId, rest),
         onSuccess: (_, {processId}: TaskDefinitionCreateArgs) => {
             client.invalidateQueries({ queryKey: processTaskDefinitionsKey(processId) });
         }
