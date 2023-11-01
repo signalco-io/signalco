@@ -14,7 +14,7 @@ export type LoadableSkeletonProps = {
 }
 
 export type LoadableProps = PropsWithChildren<LoadableLoadingErrorProps & LoadableSkeletonProps & {
-    placeholder?: 'skeletonText' | 'skeletonRect' | 'circular' | ReactNode | Element;
+    placeholder?: 'skeletonText' | 'skeletonRect' | 'circular' | ReactNode;
     contentVisible?: boolean;
     loadingLabel: string;
     className?: string;
