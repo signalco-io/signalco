@@ -105,12 +105,16 @@ export function ProcessDetails({ id }: { id: string; }) {
                     process && <ProcessRunCreateModal process={process} />
                 ]} />
             <Loadable isLoading={isLoadingTaskDefinitions} loadingLabel="Loading task definitions..." error={errorTaskDefinitions}>
-                <TaskList tasks={taskDefinitions?.map(td => ({ taskDefinition: td })) ?? []} />
-                <div className="flex flex-col items-center">
-                    <IconButton onClick={handleAddTaskDefinition}>
+                <Stack>
+                    <TaskList tasks={taskDefinitions?.map(td => ({ taskDefinition: td })) ?? []} />
+                    <div className="h-6 w-[1px] self-center border-l" />
+                    <IconButton
+                        className="self-center"
+                        onClick={handleAddTaskDefinition}
+                        loading={taskDefinitionCreate.isPending}>
                         <Add />
                     </IconButton>
-                </div>
+                </Stack>
             </Loadable>
         </Stack>
     );

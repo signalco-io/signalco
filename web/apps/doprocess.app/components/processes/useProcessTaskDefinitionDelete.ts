@@ -12,7 +12,7 @@ async function fetchDeleteProcessTaskDefinitionAsync(processId: string, taskDefi
     });
 }
 
-export function useProcessTaskDefinitionCreate() {
+export function useProcessTaskDefinitionDelete() {
     const client = useQueryClient();
     return useMutation({
         mutationFn: ({ processId, taskDefinitionId }: ProcessTaskDefinitionDeleteArgs) => fetchDeleteProcessTaskDefinitionAsync(processId, taskDefinitionId),

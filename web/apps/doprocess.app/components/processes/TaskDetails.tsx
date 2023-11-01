@@ -24,6 +24,14 @@ export function TaskDetails({ processId }: { processId: string }) {
         );
     }
 
+    if (taskDefinition === null && !taskDefinitionIsLoading) {
+        return (
+            <div className="flex items-center justify-center text-xl text-muted-foreground">
+                Task not found.
+            </div>
+        );
+    }
+
     const hasHeader = (taskDefinition?.text?.length ?? 0) > 0;
 
     return (

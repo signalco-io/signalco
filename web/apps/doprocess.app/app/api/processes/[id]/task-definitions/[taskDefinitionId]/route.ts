@@ -1,4 +1,4 @@
-import { getTaskDefinition } from '../../../../../../src/lib/repo/processesRepository';
+import { deleteTaskDefinition, getTaskDefinition } from '../../../../../../src/lib/repo/processesRepository';
 
 export async function GET(_request: Request, { params }: { params: { id: string, taskDefinitionId: string } }) {
     const processId = parseInt(params.id, 10);
@@ -9,5 +9,16 @@ export async function GET(_request: Request, { params }: { params: { id: string,
     if (!taskDefinitionId)
         throw new Error('Missing task definition ID');
 
-    return Response.json(await getTaskDefinition(processId, taskDefinitionId));
+    const taskDefinition = await getTaskDefinition(processId, taskDefinitionId);
+    if (!taskDefinition)
+        return new Response(null, { status: 404 });
+    return Response.json(taskDefinition);
+}
+
+export async function DELETE(_request: Request, { params }: { params: { id: string, taskDefinitionId: string } }) {
+    const taskDefinitionId = parseInt(params.taskDefinitionId, 10);
+    if (!taskDefinitionId)
+        throw new Error('Missing task definition ID');
+
+    return Response.json(await deleteTaskDefinition(taskDefinitionId));
 }
