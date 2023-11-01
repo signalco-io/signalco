@@ -14,7 +14,7 @@ export function combineSecureHeaders(
                 scriptSrc: ['\'self\'', ...externalUrls.flatMap(e => e.scriptSrc), '\'unsafe-inline\'', isDevelopment ? '\'unsafe-eval\'' : undefined],
                 objectSrc: '\'none\'',
                 styleSrc: ['\'self\'', ...externalUrls.flatMap(e => e.styleSrc), '\'unsafe-inline\''],
-                fontSrc: ['\'self\''],
+                fontSrc: ['\'self\'', '\'self\' data:'],
                 manifestSrc: '\'self\'',
                 mediaSrc: '\'self\'',
                 childSrc: '\'self\'',
