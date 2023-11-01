@@ -1,5 +1,5 @@
 import storybookSignalcoTheme from './signalco-theme';
-import '@signalco/ui/dist/index.css';
+import '../stories/styles.css';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

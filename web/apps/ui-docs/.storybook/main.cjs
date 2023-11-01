@@ -3,7 +3,8 @@ module.exports = {
   "addons": [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "storybook-addon-swc"
+    "storybook-addon-swc",
+    "@storybook/addon-styling-webpack"
   ],
   "framework": {
     "name": "@storybook/nextjs",
