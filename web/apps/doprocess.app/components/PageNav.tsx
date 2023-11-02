@@ -1,9 +1,11 @@
 import React, { Suspense } from 'react';
 import { cx } from 'classix';
+import { Navigate } from '@signalco/ui-icons';
 import { Row } from '@signalco/ui/dist/Row';
 import { Link } from '@signalco/ui/dist/Link';
 import { Container } from '@signalco/ui/dist/Container';
 import { Button } from '@signalco/ui/dist/Button';
+import { UserButton, SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
 
 type NavLinkItem = {
     href: string,
@@ -23,6 +25,22 @@ function NavMenu() {
                     <Button variant="plain" size="lg">{nl.text}</Button>
                 </Link>
             ))}
+            <SignedOut>
+                <SignInButton>
+                    <Button variant="plain" size="lg">Sign in</Button>
+                </SignInButton>
+                <SignUpButton>
+                    <Button
+                        variant="solid"
+                        size="lg"
+                        endDecorator={<Navigate />}>
+                            Start for free
+                    </Button>
+                </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+                <UserButton afterSignOutUrl="/" />
+            </SignedIn>
         </>
     );
 }

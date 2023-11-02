@@ -29,7 +29,8 @@ const nextConfig = {
                 [
                     knownSecureHeadersExternalUrls.github,
                     knownSecureHeadersExternalUrls.clarity,
-                    knownSecureHeadersExternalUrls.vercel
+                    knownSecureHeadersExternalUrls.vercel,
+                    knownSecureHeadersExternalUrls.clerk,
                 ]
             ))
         }];

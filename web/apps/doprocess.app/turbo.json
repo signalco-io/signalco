@@ -15,7 +15,9 @@
             "env": [
                 "DOPROCESS_DATABASE_HOST",
                 "DOPROCESS_DATABASE_USERNAME",
-                "DOPROCESS_DATABASE_PASSWORD"
+                "DOPROCESS_DATABASE_PASSWORD",
+                "CLERK_SECRET_KEY",
+                "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY"
             ]
         }
     }
