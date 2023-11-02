@@ -6,6 +6,7 @@ import { Link } from '@signalco/ui/dist/Link';
 import { Container } from '@signalco/ui/dist/Container';
 import { Button } from '@signalco/ui/dist/Button';
 import { UserButton, SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
+import DoProcessLogo from './brand/DoProcessLogo';
 
 type NavLinkItem = {
     href: string,
@@ -56,7 +57,7 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
                     <Row justifyContent="space-between">
                         <div className="flex h-full flex-col items-center">
                             <Link href="/">
-                                DoProcess
+                                <DoProcessLogo height={52} />
                             </Link>
                         </div>
                         <Row spacing={1}>
