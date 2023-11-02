@@ -20,5 +20,6 @@ export async function DELETE(_request: Request, { params }: { params: { id: stri
     if (!taskDefinitionId)
         throw new Error('Missing task definition ID');
 
-    return Response.json(await deleteTaskDefinition(taskDefinitionId));
+    await deleteTaskDefinition(taskDefinitionId)
+    return Response.json(null);
 }

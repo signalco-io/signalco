@@ -14,6 +14,7 @@ import { Process } from '../../src/lib/db/schema';
 import { KnownPages } from '../../src/knownPages';
 import { useProcesses } from './useProcesses';
 import { ProcessCreateForm } from './ProcessCreateForm';
+import { ListSkeleton } from './ListSkeleton';
 import { ListItemCreate } from './ListItemCreate';
 
 type ProcessListItemProps = {
@@ -41,7 +42,11 @@ export function ProcessesList() {
     }
 
     return (
-        <Loadable isLoading={isLoading} loadingLabel="Loading processes..." error={error}>
+        <Loadable
+            isLoading={isLoading}
+            loadingLabel="Loading processes..."
+            placeholder={<ListSkeleton itemClassName="h-9" />}
+            error={error}>
             <List className="divide-y rounded-lg border">
                 {processes?.map((process) => (
                     <ProcessListItem key={process.id} process={process} />

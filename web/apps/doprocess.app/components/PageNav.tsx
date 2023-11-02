@@ -30,13 +30,13 @@ function NavMenu() {
 export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
     return (
         <nav className={cx(
-            'backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-10 h-20',
+            'backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-10 h-20 border-b',
             fullWidth ? 'px-4' : 'px-0'
         )}>
             <Container maxWidth={fullWidth ? false : 'lg'}>
                 <header>
                     <Row justifyContent="space-between">
-                        <div>
+                        <div className="flex h-full flex-col items-center">
                             <Link href="/">
                                 DoProcess
                             </Link>

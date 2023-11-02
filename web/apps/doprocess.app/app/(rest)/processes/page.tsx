@@ -5,7 +5,7 @@ import { ListHeader } from '../../../components/layouts/ListHeader';
 
 function ProcessesListView() {
     return (
-        <Stack className="p-2" spacing={2}>
+        <Stack className="w-full p-2" spacing={2}>
             <ListHeader header="Processes" />
             <ProcessesList />
         </Stack>
@@ -15,6 +15,7 @@ function ProcessesListView() {
 export default function ProcessesPage() {
     return (
         <SplitView>
+            <div />
             <ProcessesListView />
         </SplitView>
     )
