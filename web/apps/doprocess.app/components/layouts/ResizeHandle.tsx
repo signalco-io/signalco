@@ -11,7 +11,7 @@ export type ResizeHandleProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 export const ResizeHandle = forwardRef<HTMLDivElement, ResizeHandleProps>(({
-    orientation = 'horizontal', onMouseDown, onTouchStart, ...rest
+    orientation = 'horizontal', onMouseDown, onTouchStart, className, ...rest
 }, ref) => {
     return (
         <div
@@ -21,7 +21,8 @@ export const ResizeHandle = forwardRef<HTMLDivElement, ResizeHandleProps>(({
             className={cx(
                 'flex items-center hover:bg-muted/30',
                 orientation === 'horizontal' && 'w-full h-[9px] hover:cursor-ns-resize',
-                orientation === 'vertical' && 'h-full w-[9px] flex-col hover:cursor-ew-resize'
+                orientation === 'vertical' && 'h-full w-[9px] flex-col hover:cursor-ew-resize',
+                className
             )}
             {...rest}>
             <Divider orientation={orientation} />

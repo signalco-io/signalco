@@ -1,7 +1,9 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { cx } from 'classix';
 import { Delete } from '@signalco/ui-icons';
+import { TypographyEditable } from '@signalco/ui/dist/TypographyEditable';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Row } from '@signalco/ui/dist/Row';
 import { ListItem } from '@signalco/ui/dist/ListItem';
@@ -9,6 +11,7 @@ import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { Task, TaskDefinition } from '../../src/lib/db/schema';
+import { useProcessTaskDefinitionUpdate } from './useProcessTaskDefinitionUpdate';
 import { useProcessRunTaskUpdate } from './useProcessRunTaskUpdate';
 import { TaskDeleteModal } from './TaskDeleteModal';
 
@@ -23,8 +26,23 @@ export type TaskListItemProps = {
 export function TaskListItem({ selected, taskDefinition, task, taskIndex, editable }: TaskListItemProps) {
     const [, setSelectedTaskId] = useSearchParam('task');
     const taskUpdate = useProcessRunTaskUpdate();
+    const taskDefinitionUpdate = useProcessTaskDefinitionUpdate();
 
     const checked = task?.state === 'completed';
+
+    // TODO: Maybe use a custom hook for this? - optimistic update
+    const [text, setText] = useState(taskDefinition.text || '');
+    useEffect(() => {
+        setText(taskDefinition.text || '');
+    }, [taskDefinition.text]);
+    const handleTextChange = async (text: string) => {
+        setText(text);
+        await taskDefinitionUpdate.mutateAsync({
+            processId: taskDefinition.processId?.toString(),
+            taskDefinitionId: taskDefinition.id?.toString(),
+            text
+        });
+    }
 
     const handleCheckedChange = async (checked: boolean | 'indeterminate') => {
         if (!task) return;
@@ -55,9 +73,18 @@ export function TaskListItem({ selected, taskDefinition, task, taskIndex, editab
                 label={(
                     <Row spacing={1} className="items-start">
                         <Typography level="body3" secondary className="[line-height:1.6em]">{taskIndex + 1}</Typography>
-                        <Typography level="body1">
-                            {taskDefinition.text || ''}
-                        </Typography>
+                        {editable ? (
+                            <TypographyEditable
+                                level="body1"
+                                className="w-full bg-transparent outline-none"
+                                onChange={handleTextChange}
+                                hideEditIcon
+                                multiple>
+                                {text}
+                            </TypographyEditable>
+                        ) : (
+                            <Typography level="body1">{text}</Typography>
+                        )}
                     </Row>
                 )} />
             {(!task && editable) && (

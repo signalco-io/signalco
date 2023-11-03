@@ -17,7 +17,7 @@ export function SplitView({ children }: { children: ReactNode[] }) {
                 </div>
                 <ResizeHandle
                     ref={handleRef}
-                    className="hidden md:block"
+                    className="hidden md:flex"
                     onMouseDown={handlers.handleMouseDown}
                     onTouchStart={handlers.handleTouchStart}
                     orientation="vertical"

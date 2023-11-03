@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { cx } from 'classix';
 import { Delete, MoreHorizontal } from '@signalco/ui-icons';
+import { TypographyEditable } from '@signalco/ui/dist/TypographyEditable';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Skeleton } from '@signalco/ui/dist/Skeleton';
@@ -12,6 +13,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { useProcessTaskDefinitionUpdate } from './useProcessTaskDefinitionUpdate';
 import { useProcessTaskDefinition } from './useProcessTaskDefinition';
 import { TaskDeleteModal } from './TaskDeleteModal';
 import { EditorSkeleton } from './editor/EditorSkeleton';
@@ -63,6 +65,23 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
     const [selectedTaskId] = useSearchParam('task');
     const { data: taskDefinition, isLoading: taskDefinitionIsLoading, error: taskDefinitionError } = useProcessTaskDefinition(processId, selectedTaskId);
 
+    const hasHeader = (taskDefinition?.text?.length ?? 0) > 0;
+    const [header, setHeader] = useState('');
+    useEffect(() => {
+        setHeader(taskDefinition?.text ?? 'No description');
+    }, [taskDefinition?.text]);
+    const taskDefinitionUpdate = useProcessTaskDefinitionUpdate();
+    const handleHeaderChange = async (text: string) => {
+        setHeader(text);
+        if (selectedTaskId) {
+            await taskDefinitionUpdate.mutateAsync({
+                processId,
+                taskDefinitionId: selectedTaskId,
+                text
+            });
+        }
+    }
+
     if (taskDefinition === null && !taskDefinitionIsLoading) {
         return (
             <div className="flex items-center justify-center text-xl text-muted-foreground">
@@ -71,10 +90,8 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
         );
     }
 
-    const hasHeader = (taskDefinition?.text?.length ?? 0) > 0;
-
     return (
-        <Stack spacing={2}>
+        <Stack spacing={2} className="overflow-x-hidden">
             {editable && <TaskDetailsToolbar processId={processId} selectedTaskId={selectedTaskId} />}
             {selectedTaskId === undefined && (
                 <div className="flex items-center justify-center text-xl text-muted-foreground">
@@ -97,9 +114,18 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
                             <EditorSkeleton />
                         </>
                     )}>
-                    <Typography level="h2" className={cx('px-[62px]', !hasHeader && 'text-muted-foreground hover:text-foreground')}>
-                        {hasHeader ? taskDefinition?.text : 'No description'}
-                    </Typography>
+                    <div className="px-[62px]">
+                        {editable ? (
+                            <TypographyEditable
+                                level="h2"
+                                className={cx(!hasHeader && 'text-muted-foreground hover:text-foreground')}
+                                onChange={handleHeaderChange}>
+                                {header}
+                            </TypographyEditable>
+                        ) : (
+                            <Typography level="h2">{header}</Typography>
+                        )}
+                    </div>
                     <Editor editable={editable} />
                 </Loadable>
             )}

@@ -63,7 +63,7 @@ export function ListItem({
             variant={selected ? 'soft' : 'plain'}
             onClick={handleClick}
             disabled={disabled}
-            className={cx('uitw-text-start', className)}>
+            className={cx('uitw-text-start uitw-h-auto', className)}>
             {startDecorator ?? null}
             <div className="uitw-grow">{label}</div>
             <div className="uitw-self-end">
