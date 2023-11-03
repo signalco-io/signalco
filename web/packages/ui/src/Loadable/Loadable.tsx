@@ -85,8 +85,13 @@ export function Loadable({
 
     return (
         <>
-            {(contentVisible || isLoading) && (
-                <div className={cx('uitw-w-full uitw-h-full', !isLoading && 'hidden')}>
+            {(!contentVisible && isLoading) && (
+                <>
+                    {indicator}
+                </>
+            )}
+            {contentVisible && (
+                <div className={cx('uitw-h-full uitw-w-full', !isLoading && 'uitw-hidden')}>
                     {indicator}
                 </div>
             )}
