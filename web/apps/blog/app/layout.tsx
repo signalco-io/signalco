@@ -1,7 +1,13 @@
+import { Inter } from 'next/font/google';
 import { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import { PageLayout } from '../components/layouts/PageLayout';
 import './global.css';
+
+const inter = Inter({
+    subsets: ['latin'],
+    variable: '--font-sans',
+});
 
 export default function RootLayout({
     // Layouts must accept a children prop.
@@ -12,7 +18,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body>
+            <body className={`${inter.variable} font-sans`}>
                 <PageLayout>{children}</PageLayout>
                 <Analytics />
             </body>

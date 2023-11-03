@@ -1,6 +1,12 @@
 import '@signalco/ui/dist/index.css';
+import { Inter } from 'next/font/google';
 import './global.scss';
 import { Metadata } from 'next';
+
+const inter = Inter({
+    subsets: ['latin'],
+    variable: '--font-sans',
+});
 
 export default function RootLayout({
     // Layouts must accept a children prop.
@@ -11,7 +17,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body>
+            <body className={`${inter.variable} font-sans`}>
                 {children}
             </body>
         </html>

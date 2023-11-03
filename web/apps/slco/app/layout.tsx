@@ -1,13 +1,19 @@
+import { Inter } from 'next/font/google';
 import { Metadata } from 'next';
 import '@signalco/ui/dist/index.css';
 import './global.scss';
+
+const inter = Inter({
+    subsets: ['latin'],
+    variable: '--font-sans',
+});
 
 export default function RootLayout({ children, }: {
     children: React.ReactNode;
 }) {
     return (
         <html lang="en">
-            <body>
+            <body className={`${inter.variable} font-sans`}>
                 {children}
             </body>
         </html>
