@@ -1,6 +1,6 @@
 import { Fragment, type ReactNode } from 'react';
-import { Typography } from '../Typography';
 import { Row } from '../Row';
+import { BreadcrumbsSeparator } from './BreadcrumbsSeparator';
 import { BreadcrumbsItem } from './BreadcrumbsItem';
 
 export type BreadcrumbItem = {
@@ -10,9 +10,10 @@ export type BreadcrumbItem = {
 
 export type BreadcrumbsProps = {
     items?: BreadcrumbItem[];
+    endSeparator?: boolean;
 };
 
-export function Breadcrumbs({ items }: BreadcrumbsProps) {
+export function Breadcrumbs({ items, endSeparator }: BreadcrumbsProps) {
     if (!items?.length)
         return null;
 
@@ -21,9 +22,10 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
             {items.map((item, index) => (
                 <Fragment key={item.href}>
                     <BreadcrumbsItem href={item.href} label={item.label} />
-                    {index < items.length - 1 && <Typography fontSize={'1.3em'}>{'\u203a'}</Typography>}
+                    {index < items.length - 1 && <BreadcrumbsSeparator />}
                 </Fragment>
             ))}
+            {endSeparator && <BreadcrumbsSeparator />}
         </Row>
     );
 }
