@@ -1,8 +1,8 @@
-import { type CSSProperties, ForwardedRef, type PropsWithChildren, createElement, forwardRef } from 'react';
+import { type CSSProperties, ForwardedRef, createElement, forwardRef, type HTMLAttributes } from 'react';
 import { cx } from 'classix';
 import type { ColorVariants } from '../theme';
 
-export type TypographyProps = PropsWithChildren<{
+export type TypographyProps = HTMLAttributes<HTMLParagraphElement> & {
     level?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'body3';
     component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div';
     semiBold?: boolean;
@@ -22,8 +22,7 @@ export type TypographyProps = PropsWithChildren<{
     opacity?: number;
     color?: ColorVariants;
     gutterBottom?: boolean;
-    className?: string;
-}>;
+};
 
 function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, secondary, tertiary, noWrap, ...rest }: TypographyProps) {
     if (extraThin) styles['fontWeight'] = 100;
