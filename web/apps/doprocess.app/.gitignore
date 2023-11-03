@@ -443,3 +443,9 @@ yarn-error.log*
 .turbo
 .swc
 test-results/
+
+# PWA
+**/public/workbox-*.js
+**/public/sw.js
+**/public/fallback-*.js
+**/public/worker-*.js
