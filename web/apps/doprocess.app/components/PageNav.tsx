@@ -1,4 +1,3 @@
-import React, { Suspense } from 'react';
 import { cx } from 'classix';
 import { Navigate } from '@signalco/ui-icons';
 import { Row } from '@signalco/ui/dist/Row';
@@ -61,9 +60,7 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
                             </Link>
                         </div>
                         <Row spacing={1}>
-                            <Suspense>
-                                <NavMenu />
-                            </Suspense>
+                            <NavMenu />
                         </Row>
                     </Row>
                 </header>

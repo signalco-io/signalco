@@ -11,17 +11,18 @@ export function SplitView({ children }: { children: ReactNode[] }) {
 
     return (
         <div className="h-full">
-            <div className="grid h-full grid-cols-[1fr_9px_5fr]">
-                <div ref={fixedSideRef} className="h-full w-[320px]">
+            <div className="grid grid-cols-[minmax(0,1fr)] grid-rows-[1fr_3fr] md:h-full md:grid-cols-[1fr_9px_5fr] md:grid-rows-[minmax(0,1fr)]">
+                <div ref={fixedSideRef} className="md:h-full md:w-[320px]">
                     {children && children[0]}
                 </div>
                 <ResizeHandle
                     ref={handleRef}
+                    className="hidden md:block"
                     onMouseDown={handlers.handleMouseDown}
                     onTouchStart={handlers.handleTouchStart}
                     orientation="vertical"
                 />
-                <div className="w-full">
+                <div className="md:w-full">
                     {children && children[1]}
                 </div>
             </div>

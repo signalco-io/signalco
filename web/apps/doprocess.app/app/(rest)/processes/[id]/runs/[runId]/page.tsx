@@ -1,27 +1,30 @@
 'use client';
 
-import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
-import { Link } from '@signalco/ui/dist/Link';
+import { Breadcrumbs } from '@signalco/ui/dist/Breadcrumbs';
 import { KnownPages } from '../../../../../../src/knownPages';
 import { useProcessTaskDefinitions } from '../../../../../../components/processes/useProcessTaskDefinitions';
 import { useProcessRunTasks } from '../../../../../../components/processes/useProcessRunTasks';
 import { useProcessRun } from '../../../../../../components/processes/useProcessRun';
-import { useProcess } from '../../../../../../components/processes/useProcess';
+import { TypographyProcessName } from '../../../../../../components/processes/TypographyProcessName';
 import TaskList from '../../../../../../components/processes/TaskList';
+import { TaskDetails } from '../../../../../../components/processes/TaskDetails';
 import { SplitView } from '../../../../../../components/layouts/SplitView';
 import { ListHeader } from '../../../../../../components/layouts/ListHeader';
 
 function ProcessRunHeader({ id, runId }: { id: string, runId: string }) {
-    const { data: process } = useProcess(id);
     const { data: run } = useProcessRun(id, runId);
 
     return (
-        <ListHeader
-            header={run?.name}
-            description={(
-                <Typography>Based on process: <Link href={KnownPages.Process(id)}>{process?.name}</Link></Typography>
-            )} />
+        <Stack>
+            <Breadcrumbs
+                endSeparator
+                items={[
+                    { label: 'Processes', href: KnownPages.Processes },
+                    { label: <TypographyProcessName id={id} />, href: KnownPages.Process(id) },
+                ]} />
+            <ListHeader header={run?.name} />
+        </Stack>
     );
 }
 
@@ -42,6 +45,9 @@ export default function ProcessRunPage({ params }: { params: { id: string, runId
                 <ProcessRunHeader id={id} runId={runId} />
                 <TaskList processId={id} tasks={listTasks ?? []} editable={false} />
             </Stack>
+            <div className="py-10">
+                <TaskDetails processId={id} editable={false} />
+            </div>
         </SplitView>
     );
 }

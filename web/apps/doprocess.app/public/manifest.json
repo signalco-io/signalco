@@ -22,7 +22,7 @@
     ],
     "theme_color": "#000000",
     "background_color": "#000000",
-    "start_url": "https://doprocess.app/processes",
+    "start_url": "/processes",
     "id": "https://doprocess.app/processes",
     "scope": "/processes",
     "display": "standalone"

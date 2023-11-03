@@ -19,14 +19,14 @@ export default function RootError({ error, reset }: RootErrorProps) {
     }, [error]);
 
     return (
-        <Stack alignItems="center" justifyContent="center" style={{ minHeight: '50vh' }}>
+        <Stack alignItems="center" justifyContent="center" className="mt-16 min-h-fit">
             <Row justifyContent="center">
-                <Stack spacing={2} alignItems="start">
+                <Stack spacing={4}>
                     <Typography level="h1">Page not found</Typography>
                     <Typography>{'Can\'t find find what you\'re looking for...'}</Typography>
                     <Row spacing={1}>
-                        <Button onClick={() => reset()}>Try again...</Button>
-                        <NavigatingButton href="/">DoProcess home</NavigatingButton>
+                        <Button variant="plain" onClick={() => reset()}>Try again...</Button>
+                        <NavigatingButton href="/">doprocess home</NavigatingButton>
                     </Row>
                 </Stack>
             </Row>

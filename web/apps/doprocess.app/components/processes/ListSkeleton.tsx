@@ -1,4 +1,3 @@
-'use client';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Skeleton } from '@signalco/ui/dist/Skeleton';
 

@@ -1,5 +1,6 @@
 'use client';
 
+import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
 import { List } from '@signalco/ui/dist/List';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { Task, TaskDefinition } from '../../src/lib/db/schema';
@@ -43,6 +44,9 @@ export default function TaskList({ processId, tasks, editable }: TaskListProps) 
             ))}
             {editable && (
                 <ListItemCreate label="Add task" onSelected={handleCreateTaskDefinition} />
+            )}
+            {!editable && tasks.length <= 0 && (
+                <NoDataPlaceholder className="p-2">No tasks</NoDataPlaceholder>
             )}
         </List>
     );

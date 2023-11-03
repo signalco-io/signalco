@@ -6,25 +6,15 @@ import { Loadable } from '@signalco/ui/dist/Loadable';
 import { ListHeader } from '../layouts/ListHeader';
 import { useProcessTaskDefinitions } from './useProcessTaskDefinitions';
 import { useProcess } from './useProcess';
+import { TypographyProcessName } from './TypographyProcessName';
 import TaskList from './TaskList';
 import { ProcessRunCreateModal } from './ProcessRunCreateModal';
+import { ListSkeleton } from './ListSkeleton';
 
 type ProcessDetailsProps = {
     id: string;
     editable: boolean;
 };
-
-function TaskListSkeleton() {
-    return (
-        <Stack spacing={1} className="">
-            <Skeleton className="h-9 w-full" />
-            <Skeleton className="h-9 w-full" />
-            <Skeleton className="h-9 w-full" />
-            <Skeleton className="h-9 w-full" />
-            <Skeleton className="h-9 w-full" />
-        </Stack>
-    );
-}
 
 export function ProcessDetails({ id, editable }: ProcessDetailsProps) {
     const { data: process } = useProcess(id);
@@ -37,7 +27,7 @@ export function ProcessDetails({ id, editable }: ProcessDetailsProps) {
                 loadingLabel="Loading process details..."
                 placeholder={<Skeleton className="h-7 w-[120px]" />}>
                 <ListHeader
-                    header={process?.name ?? ''}
+                    header={<TypographyProcessName id={id} level="h5" />}
                     actions={[
                         process && editable && <ProcessRunCreateModal process={process} />
                     ]} />
@@ -45,7 +35,7 @@ export function ProcessDetails({ id, editable }: ProcessDetailsProps) {
             <Loadable
                 isLoading={isLoadingTaskDefinitions}
                 loadingLabel="Loading task definitions..."
-                placeholder={<TaskListSkeleton />}
+                placeholder={<ListSkeleton itemClassName="h-9 w-full" />}
                 error={errorTaskDefinitions}>
                 <TaskList
                     processId={id}
