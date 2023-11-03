@@ -18,6 +18,7 @@
         "@storybook/addon-essentials": "7.5.2",
         "@storybook/addon-links": "7.5.2",
         "@storybook/addon-styling-webpack": "0.0.5",
+        "@storybook/addon-themes": "7.5.2",
         "@storybook/addons": "7.5.2",
         "@storybook/manager-api": "7.5.2",
         "@storybook/nextjs": "7.5.2",
