@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google';
 import { Metadata } from 'next';
 import './global.css';
+import { Analytics } from '@vercel/analytics/react';
 import { ClientProvider } from '../components/ClientProvider';
 
 const inter = Inter({
@@ -16,6 +17,7 @@ export default function RootLayout({ children, }: {
             <body className={`${inter.variable} font-sans`}>
                 <ClientProvider>
                     {children}
+                    <Analytics />
                 </ClientProvider>
             </body>
         </html>
