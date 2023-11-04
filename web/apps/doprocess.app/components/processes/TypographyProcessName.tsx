@@ -1,3 +1,5 @@
+'use client';
+
 import { Typography, TypographyProps } from '@signalco/ui/dist/Typography';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { useProcess } from '../../src/hooks/useProcess';
