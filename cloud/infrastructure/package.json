@@ -11,7 +11,7 @@
         "@types/node": "18.18.8",
         "@typescript-eslint/eslint-plugin": "6.9.1",
         "@typescript-eslint/parser": "6.9.1",
-        "eslint": "8.52.0",
+        "eslint": "8.53.0",
         "eslint-config-standard": "17.1.0",
         "eslint-plugin-import": "2.29.0",
         "eslint-plugin-n": "16.2.0",
@@ -22,10 +22,10 @@
     "dependencies": {
         "@checkly/pulumi": "1.1.4",
         "@pulumi/aws": "6.7.0",
-        "@pulumi/azure-native": "2.14.1",
+        "@pulumi/azure-native": "2.15.0",
         "@pulumi/cloudflare": "5.13.1",
         "@pulumi/command": "0.9.2",
         "@pulumi/docker": "4.4.4",
-        "@pulumi/pulumi": "3.91.1"
+        "@pulumi/pulumi": "3.92.0"
     }
 }
