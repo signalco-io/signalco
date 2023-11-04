@@ -4,7 +4,7 @@ import { processTaskDefinitionsKey } from './useProcessTaskDefinitions';
 
 export function processTaskDefinitionKey(processId?: string, taskDefinition?: string) {
     if (taskDefinition == null)
-        return [...processTaskDefinitionsKey(processId), 'runs'];
+        return processTaskDefinitionsKey(processId);
     return [...processTaskDefinitionsKey(processId), taskDefinition];
 }
 

@@ -35,6 +35,9 @@ const nextConfig = {
                     knownSecureHeadersExternalUrls.clarity,
                     knownSecureHeadersExternalUrls.vercel,
                     knownSecureHeadersExternalUrls.clerk,
+                    {
+                        frameAncestors: '\'self\'' // NOTE: This is required for embedding out app in an iframe
+                    }
                 ]
             ))
         }];

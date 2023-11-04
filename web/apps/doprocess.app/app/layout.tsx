@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import './global.css';
 import { Analytics } from '@vercel/analytics/react';
 import { ClientProvider } from '../components/ClientProvider';
@@ -27,11 +27,6 @@ export default function RootLayout({ children, }: {
 export const metadata = {
     title: 'DoProcess.app',
     description: 'Do process the right way',
-    themeColor: [
-        { media: '(prefers-color-scheme: light)', color: 'white' },
-        { media: '(prefers-color-scheme: dark)', color: 'black' },
-        { color: 'black' },
-    ],
     manifest: '/manifest.json',
     icons: {
         apple: '/apple-touch-icon.png',
@@ -41,3 +36,11 @@ export const metadata = {
         ],
     }
 } satisfies Metadata;
+
+export const viewport = {
+    themeColor: [
+        { media: '(prefers-color-scheme: light)', color: 'white' },
+        { media: '(prefers-color-scheme: dark)', color: 'black' },
+        { color: 'black' },
+    ]
+} satisfies Viewport;

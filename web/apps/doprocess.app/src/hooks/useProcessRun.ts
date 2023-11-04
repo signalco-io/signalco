@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { ProcessRun } from '../lib/db/schema';
-import { processKey } from './useProcess';
+import { processRunsKey } from './useProcessRuns';
 
 export function processRunKey(processId?: string, runId?: string) {
     if (runId == null)
-        return [...processKey(processId), 'runs'];
-    return [...processKey(processId), 'runs', runId];
+        return processRunsKey(processId);
+    return [...processRunsKey(processId), runId];
 }
 
 async function fetchGetProcessRun(processId: string, runId: string) {

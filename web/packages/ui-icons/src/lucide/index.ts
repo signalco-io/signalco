@@ -25,6 +25,7 @@ export {
     Square as Stop,
     LayoutList,
     LayoutGrid,
+    ListChecks,
     Pin,
     PinOff,
     LogOut,

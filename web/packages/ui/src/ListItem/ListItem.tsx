@@ -6,7 +6,7 @@ import { Button } from '../Button';
 export type ListItemPropsOptions = {
     href: string | undefined;
     nodeId?: never;
-    selected?: never;
+    selected?: boolean | undefined;
     onSelected?: never;
 } | {
     href?: never;
@@ -50,10 +50,10 @@ export function ListItem({
     if (!href && !nodeId && !onSelected) {
         return (
             <Row spacing={2} className={cx('uitw-min-h-[3rem] uitw-px-2', className)}>
-                {startDecorator ?? null}
+                {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
                 <div className={cx('uitw-grow', disabled && 'uitw-opacity-60')}>{label}</div>
                 <div className="uitw-self-end">
-                    {endDecorator ?? null}
+                    {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator ?? null}
                 </div>
             </Row>
         );
@@ -66,11 +66,13 @@ export function ListItem({
             onClick={handleClick}
             disabled={disabled}
             className={cx('uitw-text-start uitw-h-auto', className)}>
-            {startDecorator ?? null}
-            <div className="uitw-grow">{label}</div>
-            <div className="uitw-self-end">
-                {endDecorator ?? null}
-            </div>
+            {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
+            {Boolean(label) && <div className="uitw-grow">{label}</div>}
+            {Boolean(endDecorator) && (
+                <div className="uitw-self-end">
+                    {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator ?? null}
+                </div>
+            )}
         </Button>
     );
 }

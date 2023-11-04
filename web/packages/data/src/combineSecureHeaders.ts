@@ -20,11 +20,13 @@ export function combineSecureHeaders(
                 childSrc: '\'self\'',
                 frameSrc: ['\'self\'', , ...externalUrls.flatMap(e => e.frameSrc)],
                 workerSrc: ['\'self\'', '\'self\' blob:'],
-                imgSrc: ['\'self\'', 'data:', 'blob:', ...baseSubdomains, ...externalUrls.flatMap(e => e.imgSrc),],
+                imgSrc: ['\'self\'', 'data:', 'blob:', ...baseSubdomains, ...externalUrls.flatMap(e => e.imgSrc)],
                 formAction: '\'self\'',
-                connectSrc: ['\'self\'', ...baseSubdomains, ...externalUrls.flatMap(e => e.connectSrc),],
+                connectSrc: ['\'self\'', ...baseSubdomains, ...externalUrls.flatMap(e => e.connectSrc)],
                 baseURI: baseDomains,
-                'frame-ancestors': '\'none\''
+                'frame-ancestors': externalUrls.flatMap(e => e.frameAncestors).length 
+                    ? externalUrls.flatMap(e => e.frameAncestors) 
+                    : '\'none\''
             }
         },
         xssProtection: 'block-rendering',
