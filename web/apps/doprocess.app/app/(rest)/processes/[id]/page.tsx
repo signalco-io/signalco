@@ -5,7 +5,7 @@ import { Stack } from '@signalco/ui/dist/Stack';
 import { Breadcrumbs } from '@signalco/ui/dist/Breadcrumbs';
 import { KnownPages } from '../../../../src/knownPages';
 import { TypographyProcessName } from '../../../../components/processes/TypographyProcessName';
-import { TaskDetails } from '../../../../components/processes/TaskDetails';
+import { TaskDetails } from '../../../../components/processes/tasks/TaskDetails';
 import { ProcessDetails } from '../../../../components/processes/ProcessDetails';
 import { SplitView } from '../../../../components/layouts/SplitView';
 

@@ -3,10 +3,10 @@
 import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
 import { List } from '@signalco/ui/dist/List';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { Task, TaskDefinition } from '../../src/lib/db/schema';
-import { useProcessTaskDefinitionCreate } from './useProcessTaskDefinitionCreate';
+import { ListItemCreate } from '../../shared/ListItemCreate';
+import { Task, TaskDefinition } from '../../../src/lib/db/schema';
+import { useProcessTaskDefinitionCreate } from '../../../src/hooks/useProcessTaskDefinitionCreate';
 import { TaskListItem } from './TaskListItem';
-import { ListItemCreate } from './ListItemCreate';
 
 type TaskListProps = {
     processId: string;
@@ -43,7 +43,9 @@ export default function TaskList({ processId, tasks, editable }: TaskListProps) 
                     editable={editable} />
             ))}
             {editable && (
-                <ListItemCreate label="Add task" onSelected={handleCreateTaskDefinition} />
+                <ListItemCreate
+                    label="Add task"
+                    onSelected={handleCreateTaskDefinition} />
             )}
             {!editable && tasks.length <= 0 && (
                 <NoDataPlaceholder className="p-2">No tasks</NoDataPlaceholder>

@@ -1,8 +1,9 @@
 'use client';
+
 import { ModalConfirm, ModalConfirmProps } from '@signalco/ui/dist/ModalConfirm';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { TaskDefinition } from '../../src/lib/db/schema';
-import { useProcessTaskDefinitionDelete } from './useProcessTaskDefinitionDelete';
+import { TaskDefinition } from '../../../src/lib/db/schema';
+import { useProcessTaskDefinitionDelete } from '../../../src/hooks/useProcessTaskDefinitionDelete';
 
 type TaskDeleteModalProps = Omit<ModalConfirmProps, 'header' | 'onConfirm' | 'children' | 'expectedConfirm' | 'promptLabel'> & {
     taskDefinition: TaskDefinition;

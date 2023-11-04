@@ -4,12 +4,12 @@ import { Stack } from '@signalco/ui/dist/Stack';
 import { Skeleton } from '@signalco/ui/dist/Skeleton';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { ListHeader } from '../layouts/ListHeader';
-import { useProcessTaskDefinitions } from './useProcessTaskDefinitions';
-import { useProcess } from './useProcess';
+import { useProcessTaskDefinitions } from '../../src/hooks/useProcessTaskDefinitions';
+import { useProcess } from '../../src/hooks/useProcess';
 import { TypographyProcessName } from './TypographyProcessName';
-import TaskList from './TaskList';
+import TaskList from './tasks/TaskList';
 import { ProcessRunCreateModal } from './ProcessRunCreateModal';
-import { ListSkeleton } from './ListSkeleton';
+import { ListSkeleton } from '../shared/ListSkeleton';
 
 type ProcessDetailsProps = {
     id: string;

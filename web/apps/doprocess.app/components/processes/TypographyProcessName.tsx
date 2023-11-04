@@ -1,6 +1,6 @@
 import { Typography, TypographyProps } from '@signalco/ui/dist/Typography';
 import { Loadable } from '@signalco/ui/dist/Loadable';
-import { useProcess } from './useProcess';
+import { useProcess } from '../../src/hooks/useProcess';
 
 export type TypographyProcessNameProps = Omit<TypographyProps, 'children'> & {
     id: string | undefined;

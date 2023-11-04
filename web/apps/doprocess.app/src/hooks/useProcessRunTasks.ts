@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Task } from '../../src/lib/db/schema';
+import { Task } from '../lib/db/schema';
 import { processRunKey } from './useProcessRun';
 
 export function taskKey(processId?: string, runId?: string, taskId?: string) {

@@ -6,13 +6,13 @@ import { Delete } from '@signalco/ui-icons';
 import { TypographyEditable } from '@signalco/ui/dist/TypographyEditable';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Row } from '@signalco/ui/dist/Row';
-import { ListItem } from '@signalco/ui/dist/ListItem';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { Task, TaskDefinition } from '../../src/lib/db/schema';
-import { useProcessTaskDefinitionUpdate } from './useProcessTaskDefinitionUpdate';
-import { useProcessRunTaskUpdate } from './useProcessRunTaskUpdate';
+import { ListItem } from '../../shared/ListItem';
+import { Task, TaskDefinition } from '../../../src/lib/db/schema';
+import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
+import { useProcessRunTaskUpdate } from '../../../src/hooks/useProcessRunTaskUpdate';
 import { TaskDeleteModal } from './TaskDeleteModal';
 
 export type TaskListItemProps = {
@@ -60,7 +60,7 @@ export function TaskListItem({ selected, taskDefinition, task, taskIndex, editab
         <div className="relative flex items-center gap-1">
             <ListItem
                 className={cx(
-                    'peer w-full gap-2 px-3 rounded-none',
+                    'peer w-full gap-2 px-3',
                     checked && 'text-muted-foreground line-through',
                     !checked && 'border-foreground/30'
                 )}

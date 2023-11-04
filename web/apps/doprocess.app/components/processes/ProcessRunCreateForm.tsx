@@ -8,7 +8,7 @@ import { Input } from '@signalco/ui/dist/Input';
 import { Button } from '@signalco/ui/dist/Button';
 import { Process } from '../../src/lib/db/schema';
 import { KnownPages } from '../../src/knownPages';
-import { useProcessRunCreate } from './useProcessRunCreate';
+import { useProcessRunCreate } from '../../src/hooks/useProcessRunCreate';
 
 export function ProcessRunCreateForm({ process }: { process: Process; }) {
     const { id: processId, name: processName } = process;

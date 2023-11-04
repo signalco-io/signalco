@@ -28,6 +28,8 @@ export type ListItemPropsCommon = {
     className?: string;
 };
 
+export type ListItemProps = ListItemPropsCommon & ListItemPropsOptions;
+
 export function ListItem({
     nodeId,
     label,
@@ -38,7 +40,7 @@ export function ListItem({
     disabled,
     href,
     className
-}: ListItemPropsCommon & ListItemPropsOptions) {
+}: ListItemProps) {
     const handleClick = () => {
         if (onSelected) {
             onSelected(nodeId);

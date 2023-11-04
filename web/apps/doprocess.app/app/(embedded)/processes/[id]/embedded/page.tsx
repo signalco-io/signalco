@@ -1,4 +1,4 @@
-import { TaskDetails } from '../../../../../components/processes/TaskDetails';
+import { TaskDetails } from '../../../../../components/processes/tasks/TaskDetails';
 import { ProcessDetails } from '../../../../../components/processes/ProcessDetails';
 import { SplitView } from '../../../../../components/layouts/SplitView';
 

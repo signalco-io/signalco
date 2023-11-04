@@ -13,12 +13,12 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { useProcessTaskDefinitionUpdate } from './useProcessTaskDefinitionUpdate';
-import { useProcessTaskDefinition } from './useProcessTaskDefinition';
+import { EditorSkeleton } from '../editor/EditorSkeleton';
+import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
+import { useProcessTaskDefinition } from '../../../src/hooks/useProcessTaskDefinition';
 import { TaskDeleteModal } from './TaskDeleteModal';
-import { EditorSkeleton } from './editor/EditorSkeleton';
 
-const Editor = dynamic(() => import('./editor/Editor').then(mod => mod.Editor), { ssr: false, loading: () => <EditorSkeleton /> });
+const Editor = dynamic(() => import('../editor/Editor').then(mod => mod.Editor), { ssr: false, loading: () => <EditorSkeleton /> });
 
 type TaskDetailsProps = {
     processId: string;

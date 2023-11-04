@@ -1,16 +1,5 @@
-import { Stack } from '@signalco/ui/dist/Stack';
-import { ProcessesList } from '../../../components/processes/ProcessesList';
+import { ProcessesListView } from '../../../components/processes/ProcessesListView';
 import { SplitView } from '../../../components/layouts/SplitView';
-import { ListHeader } from '../../../components/layouts/ListHeader';
-
-function ProcessesListView() {
-    return (
-        <Stack className="w-full p-2 pt-3" spacing={2}>
-            <ListHeader header="Processes" />
-            <ProcessesList />
-        </Stack>
-    );
-}
 
 export default function ProcessesPage() {
     return (

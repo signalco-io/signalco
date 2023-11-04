@@ -3,12 +3,12 @@
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Breadcrumbs } from '@signalco/ui/dist/Breadcrumbs';
 import { KnownPages } from '../../../../../../src/knownPages';
-import { useProcessTaskDefinitions } from '../../../../../../components/processes/useProcessTaskDefinitions';
-import { useProcessRunTasks } from '../../../../../../components/processes/useProcessRunTasks';
-import { useProcessRun } from '../../../../../../components/processes/useProcessRun';
+import { useProcessTaskDefinitions } from '../../../../../../src/hooks/useProcessTaskDefinitions';
+import { useProcessRunTasks } from '../../../../../../src/hooks/useProcessRunTasks';
+import { useProcessRun } from '../../../../../../src/hooks/useProcessRun';
 import { TypographyProcessName } from '../../../../../../components/processes/TypographyProcessName';
-import TaskList from '../../../../../../components/processes/TaskList';
-import { TaskDetails } from '../../../../../../components/processes/TaskDetails';
+import TaskList from '../../../../../../components/processes/tasks/TaskList';
+import { TaskDetails } from '../../../../../../components/processes/tasks/TaskDetails';
 import { SplitView } from '../../../../../../components/layouts/SplitView';
 import { ListHeader } from '../../../../../../components/layouts/ListHeader';
 
