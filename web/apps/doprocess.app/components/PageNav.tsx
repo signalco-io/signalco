@@ -5,6 +5,7 @@ import { Link } from '@signalco/ui/dist/Link';
 import { Container } from '@signalco/ui/dist/Container';
 import { Button } from '@signalco/ui/dist/Button';
 import { UserButton, SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
+import { KnownPages } from '../src/knownPages';
 import DoProcessLogo from './brand/DoProcessLogo';
 
 type NavLinkItem = {
@@ -26,10 +27,10 @@ function NavMenu() {
                 </Link>
             ))}
             <SignedOut>
-                <SignInButton>
+                <SignInButton redirectUrl={KnownPages.Processes} mode="modal">
                     <Button variant="plain" size="lg">Sign in</Button>
                 </SignInButton>
-                <SignUpButton>
+                <SignUpButton redirectUrl={KnownPages.Processes} mode="modal">
                     <Button
                         variant="solid"
                         size="lg"
