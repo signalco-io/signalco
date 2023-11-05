@@ -58,12 +58,10 @@ export function TypographyEditable({ children, className, onChange, onEditingCha
             role="button"
             onClick={handleEdit}
             {...rest}>
-            <span className="uitw-relative">
-                {children}
-                {!hideEditIcon && (
-                    <span className="uitw-absolute -uitw-right-12 uitw-top-1/2 -uitw-translate-y-1/2 uitw-opacity-0 uitw-transition-opacity group-hover:uitw-opacity-100"><Edit /></span>
-                )}
-            </span>
+            {children}
+            {!hideEditIcon && (
+                <Edit size={20} className="uitw-ml-2 uitw-inline uitw-align-baseline uitw-opacity-60 uitw-transition-opacity group-hover:uitw-opacity-60"/>
+            )}
         </Typography>
     );
 }

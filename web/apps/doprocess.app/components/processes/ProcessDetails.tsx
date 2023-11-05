@@ -27,7 +27,7 @@ export function ProcessDetails({ id, editable }: ProcessDetailsProps) {
                 loadingLabel="Loading process details..."
                 placeholder={<Skeleton className="h-7 w-[120px]" />}>
                 <ListHeader
-                    header={<TypographyProcessName id={id} level="h5" />}
+                    header={<TypographyProcessName id={id} level="h5" editable={editable} />}
                     actions={[
                         process && editable && <ProcessRunCreateModal process={process} />
                     ]} />
