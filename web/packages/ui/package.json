@@ -21,7 +21,7 @@
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/react": "18.2.34",
+        "@types/react": "18.2.35",
         "@types/react-dom": "18.2.14",
         "@types/react-timeago": "4.1.5",
         "autoprefixer": "10.4.16",
