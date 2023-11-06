@@ -1,9 +1,10 @@
-import { int, mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
+import { int, json, mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
 import { relations } from 'drizzle-orm';
 
 export const process = mysqlTable('process', {
     id: serial('id').primaryKey(),
     name: varchar('name', { length: 255 }).notNull(),
+    sharedWithUsers: json('shared_with_users').notNull()
 });
 
 export type Process = typeof process.$inferSelect;

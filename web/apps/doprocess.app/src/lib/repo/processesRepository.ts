@@ -1,17 +1,17 @@
-import { and, eq } from 'drizzle-orm';
+import { and, eq, like } from 'drizzle-orm';
 import { process, processRun, task, taskDefinition } from '../db/schema';
 import { db } from '../db';
 
-export async function getProcesses() {
-    return await db.select().from(process);
+export async function getProcesses(userId: string) {
+    return await db.select().from(process).where(like(process.sharedWithUsers, `%\"${userId}\"%`));
 }
 
 export async function getProcess(id: number) {
     return (await db.select().from(process).where(eq(process.id, id)))?.at(0);
 }
 
-export async function createProcess(name: string) {
-    return (await db.insert(process).values({ name: name })).insertId;
+export async function createProcess(userId: string, name: string) {
+    return (await db.insert(process).values({ name: name, sharedWithUsers: [userId] })).insertId;
 }
 
 export async function renameProcess(id: number, name: string) {
