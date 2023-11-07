@@ -187,8 +187,8 @@ importers:
         specifier: 0.5.1
         version: 0.5.1
       '@types/color':
-        specifier: 3.0.5
-        version: 3.0.5
+        specifier: 3.0.6
+        version: 3.0.6
       '@types/d3':
         specifier: 7.4.2
         version: 7.4.2
@@ -356,8 +356,8 @@ importers:
         specifier: 0.5.1
         version: 0.5.1
       '@types/color':
-        specifier: 3.0.5
-        version: 3.0.5
+        specifier: 3.0.6
+        version: 3.0.6
       '@types/fs-extra':
         specifier: 11.0.3
         version: 11.0.3
@@ -468,8 +468,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tsconfig
       '@types/color':
-        specifier: 3.0.5
-        version: 3.0.5
+        specifier: 3.0.6
+        version: 3.0.6
       '@types/node':
         specifier: 18.18.8
         version: 18.18.8
@@ -608,8 +608,8 @@ importers:
         specifier: 0.5.1
         version: 0.5.1
       '@types/color':
-        specifier: 3.0.5
-        version: 3.0.5
+        specifier: 3.0.6
+        version: 3.0.6
       '@types/node':
         specifier: 18.18.8
         version: 18.18.8
@@ -717,8 +717,8 @@ importers:
         specifier: 0.5.1
         version: 0.5.1
       '@types/color':
-        specifier: 3.0.5
-        version: 3.0.5
+        specifier: 3.0.6
+        version: 3.0.6
       '@types/node':
         specifier: 18.18.8
         version: 18.18.8
@@ -965,8 +965,8 @@ importers:
         specifier: 0.4.3
         version: 0.4.3
       '@types/color':
-        specifier: 3.0.5
-        version: 3.0.5
+        specifier: 3.0.6
+        version: 3.0.6
       '@types/next-pwa':
         specifier: 5.6.9
         version: 5.6.9(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.5)
@@ -6538,8 +6538,8 @@ packages:
     resolution: {integrity: sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==}
     dev: true
 
-  /@types/color@3.0.5:
-    resolution: {integrity: sha512-T9yHCNtd8ap9L/r8KEESu5RDMLkoWXHo7dTureNoI1dbp25NsCN054vOu09iniIjR21MXUL+LU9bkIWrbyg8gg==}
+  /@types/color@3.0.6:
+    resolution: {integrity: sha512-NMiNcZFRUAiUUCCf7zkAelY8eV3aKqfbzyFQlXpPIEeoNDbsEHGpb854V3gzTsGKYj830I5zPuOwU/TP5/cW6A==}
     dependencies:
       '@types/color-convert': 2.0.1
     dev: true
