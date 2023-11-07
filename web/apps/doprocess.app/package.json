@@ -27,6 +27,7 @@
     "@next/env": "14.0.1",
     "@planetscale/database": "^1.11.0",
     "@signalco/data": "workspace:*",
+    "@signalco/js": "workspace:*",
     "@signalco/hooks": "workspace:*",
     "@signalco/tailwindcss-config-signalco": "workspace:*",
     "@signalco/ui": "workspace:*",

@@ -60,7 +60,7 @@ export function TypographyEditable({ children, className, onChange, onEditingCha
             {...rest}>
             {children}
             {!hideEditIcon && (
-                <Edit size={20} className="uitw-ml-2 uitw-inline uitw-align-baseline uitw-opacity-60 uitw-transition-opacity group-hover:uitw-opacity-60"/>
+                <Edit size={20} className="uitw-ml-2 uitw-inline uitw-align-baseline uitw-opacity-0 uitw-transition-opacity group-hover:uitw-opacity-60" />
             )}
         </Typography>
     );

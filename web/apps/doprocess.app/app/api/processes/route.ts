@@ -1,19 +1,13 @@
-import { auth } from '@clerk/nextjs';
 import { createProcess, getProcesses } from '../../../src/lib/repo/processesRepository';
+import { ensureUserId } from '../../../src/lib/auth/apiAuth';
 
 export async function GET() {
-    const { userId } = auth();
-    if (userId == null)
-        return new Response(null, { status: 401 });
-
+    const { userId } = ensureUserId();
     return Response.json(await getProcesses(userId));
 }
 
 export async function POST(request: Request) {
-    const { userId } = auth();
-    if (userId == null)
-        return new Response(null, { status: 401 });
-
+    const { userId } = ensureUserId();
     const req = await request.json();
     const name = typeof req === 'object' && req != null && 'name' in req && typeof req.name === 'string' ? req.name.toString() : null;
     if (name == null)

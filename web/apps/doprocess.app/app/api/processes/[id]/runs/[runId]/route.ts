@@ -1,13 +1,12 @@
 import { getProcessRun } from '../../../../../../src/lib/repo/processesRepository';
+import { ensureUserId } from '../../../../../../src/lib/auth/apiAuth';
+import { requiredParamNumber } from '../../../../../../src/lib/api/apiParam';
 
 export async function GET(_request: Request, { params }: { params: { id: string, runId: string } }) {
-    const processId = parseInt(params.id, 10);
-    if (!processId)
-        throw new Error('Missing process ID');
+    const processId = requiredParamNumber(params.id);
+    const runId = requiredParamNumber(params.runId);
 
-    const runId = parseInt(params.runId, 10);
-    if (!runId)
-        throw new Error('Missing run ID');
+    const { userId } = ensureUserId();
 
-    return Response.json(await getProcessRun(processId, runId));
+    return Response.json(await getProcessRun(userId, processId, runId));
 }

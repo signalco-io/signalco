@@ -60,7 +60,7 @@ export function TaskListItem({ selected, taskDefinition, task, taskIndex, editab
         <div className="relative flex items-center gap-1">
             <ListItem
                 className={cx(
-                    'peer w-full gap-2 px-3',
+                    'peer w-full gap-2 px-3 pr-12',
                     checked && 'text-muted-foreground line-through',
                     !checked && 'border-foreground/30'
                 )}

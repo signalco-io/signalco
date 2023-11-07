@@ -49,6 +49,8 @@ export const task = mysqlTable('task', {
     state: varchar('state', { length: 255 }).notNull(),
 });
 
+export type TaskState = 'new' | 'completed';
+
 export type Task = typeof task.$inferSelect;
 
 export const taskRelations = relations(task, ({ one }) => ({
