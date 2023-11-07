@@ -11,6 +11,7 @@ import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { EditorSkeleton } from '../editor/EditorSkeleton';
 import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
 import { useProcessTaskDefinition } from '../../../src/hooks/useProcessTaskDefinition';
+import TaskDetailsTypePicker from './TaskDetailsTypePicker';
 import { TaskDetailsToolbar } from './TaskDetailsToolbar';
 
 const Editor = dynamic(() => import('../editor/Editor').then(mod => mod.Editor), { ssr: false, loading: () => <EditorSkeleton /> });
@@ -62,7 +63,7 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
             {selectedTaskId && (
                 <Loadable
                     isLoading={taskDefinitionIsLoading}
-                    loadingLabel="Loading document..."
+                    loadingLabel="Loading task details..."
                     error={taskDefinitionError}
                     placeholder={(
                         <>
@@ -82,7 +83,10 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
                             <Typography level="h2">{header}</Typography>
                         )}
                     </div>
-                    <Editor editable={editable} />
+                    {/* <Editor editable={editable} /> */}
+                    <div className="px-[62px]">
+                        <TaskDetailsTypePicker />
+                    </div>
                 </Loadable>
             )}
         </Stack>
