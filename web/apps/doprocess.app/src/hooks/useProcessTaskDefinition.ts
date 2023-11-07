@@ -2,10 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { TaskDefinition } from '../lib/db/schema';
 import { processTaskDefinitionsKey } from './useProcessTaskDefinitions';
 
-export function processTaskDefinitionKey(processId?: string, taskDefinition?: string) {
-    if (taskDefinition == null)
-        return processTaskDefinitionsKey(processId);
-    return [...processTaskDefinitionsKey(processId), taskDefinition];
+export function processTaskDefinitionKey(processId?: string, taskDefinitionId?: string) {
+    return [...processTaskDefinitionsKey(processId), taskDefinitionId];
 }
 
 async function fetchGetProcessTaskDefinition(processId: string, taskDefinitionId: string) {

@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { cx } from 'classix';
 import { Delete } from '@signalco/ui-icons';
 import { TypographyEditable } from '@signalco/ui/dist/TypographyEditable';
@@ -30,19 +29,14 @@ export function TaskListItem({ selected, taskDefinition, task, taskIndex, editab
 
     const checked = task?.state === 'completed';
 
-    // TODO: Maybe use a custom hook for this? - optimistic update
-    const [text, setText] = useState(taskDefinition.text || '');
-    useEffect(() => {
-        setText(taskDefinition.text || '');
-    }, [taskDefinition.text]);
     const handleTextChange = async (text: string) => {
-        setText(text);
         await taskDefinitionUpdate.mutateAsync({
             processId: taskDefinition.processId?.toString(),
             taskDefinitionId: taskDefinition.id?.toString(),
             text
         });
     }
+    const textMutatedOrDefault = (taskDefinitionUpdate.variables?.text ?? taskDefinition?.text) ?? '';
 
     const handleCheckedChange = async (checked: boolean | 'indeterminate') => {
         if (!task) return;
@@ -80,11 +74,9 @@ export function TaskListItem({ selected, taskDefinition, task, taskIndex, editab
                                 onChange={handleTextChange}
                                 hideEditIcon
                                 multiple>
-                                {text}
+                                {textMutatedOrDefault}
                             </TypographyEditable>
-                        ) : (
-                            <Typography level="body1">{text}</Typography>
-                        )}
+                        ) : (<Typography level="body1">{textMutatedOrDefault}</Typography>)}
                     </Row>
                 )} />
             {(!task && editable) && (

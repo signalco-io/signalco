@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { TypographyEditable, TypographyEditableProps } from '@signalco/ui/dist/TypographyEditable';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Loadable } from '@signalco/ui/dist/Loadable';
@@ -17,20 +16,16 @@ export type TypographyProcessNameProps = Omit<TypographyEditableProps, 'children
 export function TypographyProcessName({ id, placeholderWidth, placeholderHeight, editable, ...rest }: TypographyProcessNameProps) {
     const { data: process, isLoading, error } = useProcess(id);
 
-    const [processName, setProcessName] = useState(process?.name ?? '');
-    useEffect(() => {
-        setProcessName(process?.name ?? '');
-    }, [process]);
     const processUpdate = useProcessUpdate();
     const handleProcessRename = async (name: string) => {
         if (!id) return;
 
-        setProcessName(name);
         await processUpdate.mutateAsync({
             processId: id,
             name
         });
     }
+    const processNameMutatedOrDefault = (processUpdate.variables?.name ?? process?.name) ?? '';
 
     return (
         <Loadable
@@ -41,8 +36,8 @@ export function TypographyProcessName({ id, placeholderWidth, placeholderHeight,
             width={placeholderWidth}
             height={placeholderHeight}>
             {editable ? (
-                <TypographyEditable onChange={handleProcessRename} {...rest}>{processName}</TypographyEditable>
-            ) : (<Typography {...rest}>{processName}</Typography>)}
+                <TypographyEditable onChange={handleProcessRename} {...rest}>{processNameMutatedOrDefault}</TypographyEditable>
+            ) : (<Typography {...rest}>{processNameMutatedOrDefault}</Typography>)}
         </Loadable>
     );
 }
