@@ -190,8 +190,8 @@ importers:
         specifier: 3.0.6
         version: 3.0.6
       '@types/d3':
-        specifier: 7.4.2
-        version: 7.4.2
+        specifier: 7.4.3
+        version: 7.4.3
       '@types/next-pwa':
         specifier: 5.6.9
         version: 5.6.9(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.5)
@@ -5160,7 +5160,7 @@ packages:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@types/d3': 7.4.2
+      '@types/d3': 7.4.3
       '@types/d3-drag': 3.0.4
       '@types/d3-selection': 3.0.7
       '@types/d3-zoom': 3.0.5
@@ -6680,8 +6680,8 @@ packages:
       '@types/d3-interpolate': 3.0.2
       '@types/d3-selection': 3.0.7
 
-  /@types/d3@7.4.2:
-    resolution: {integrity: sha512-Y4g2Yb30ZJmmtqAJTqMRaqXwRawfvpdpVmyEYEcyGNhrQI/Zvkq3k7yE1tdN07aFSmNBfvmegMQ9Fe2qy9ZMhw==}
+  /@types/d3@7.4.3:
+    resolution: {integrity: sha512-lZXZ9ckh5R8uiFVt8ogUNf+pIrK4EsWrx2Np75WvF/eTpJ0FMHNhjXk8CKEx/+gpHbNQyJWehbFaTvqmHWB3ww==}
     dependencies:
       '@types/d3-array': 3.0.8
       '@types/d3-axis': 3.0.4
