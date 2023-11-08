@@ -1,6 +1,7 @@
 'use client';
 
-import { BlockNoteView, useBlockNote } from '@blocknote/react';
+import { useTheme } from 'next-themes';
+import { BlockNoteView, Theme, useBlockNote, darkDefaultTheme } from '@blocknote/react';
 import '@blocknote/core/style.css';
 import { PartialBlock } from '@blocknote/core';
 
@@ -11,7 +12,19 @@ type EditorProps = {
     onChange?: (value: string) => void;
 };
 
+const customDarkTheme = {
+    ...darkDefaultTheme,
+    colors: {
+        ...darkDefaultTheme.colors,
+        editor: {
+            text: 'var(--foreground)',
+            background: 'var(--background)',
+        },
+    }
+} satisfies Theme;
+
 export function Editor({ id, content, editable, onChange }: EditorProps) {
+    const { resolvedTheme } = useTheme();
     const editor = useBlockNote({
         editable,
         initialContent: JSON.parse(content ?? '[]') as PartialBlock[],
@@ -22,7 +35,10 @@ export function Editor({ id, content, editable, onChange }: EditorProps) {
 
     return (
         <div className="p-2">
-            <BlockNoteView editor={editor} theme="light" />
+            <BlockNoteView
+                editor={editor}
+                theme={resolvedTheme === 'dark' ? customDarkTheme : 'light'}
+            />
         </div>
     );
 }

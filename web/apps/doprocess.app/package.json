@@ -38,6 +38,7 @@
     "drizzle-orm": "^0.28.6",
     "next": "14.0.1",
     "next-secure-headers": "2.2.0",
+    "next-themes": "0.2.1",
     "react": "18.2.0",
     "react-cool-inview": "3.0.1",
     "react-dom": "18.2.0",

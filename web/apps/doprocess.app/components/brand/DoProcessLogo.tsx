@@ -15,7 +15,7 @@ function DoProcessLogo({ width, height, theme }: DoProcessLogoProps, ref: React.
     const paddingTop = height ? Math.ceil(height / 10.5) : Math.ceil((width ?? 0) / 40);
     const fixedHeight = height ?? (30 / 33) * ((width ?? 0) + paddingTop * 4);
     const fixedWidth = width ?? (33 / 30) * ((height ?? 0) - paddingTop);
-    const fill = theme === 'dark' ? '#ffffff' : '#000000';
+    const fill = !theme ? 'hsl(var(--foreground))' : (theme === 'dark' ? '#ffffff' : '#000000');
 
     return (
         <div aria-label="doprocess" role="img" ref={ref}>

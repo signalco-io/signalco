@@ -18,7 +18,7 @@ const navLinks: NavLinkItem[] = [
     // { href: KnownPages.Pricing, text: 'Pricing' }
 ];
 
-function NavMenu() {
+function NavMenu({ cta }: { cta?: boolean }) {
     return (
         <>
             {navLinks.map(nl => (
@@ -40,20 +40,22 @@ function NavMenu() {
                 </SignUpButton>
             </SignedOut>
             <SignedIn>
-                <Button
-                    variant="solid"
-                    size="lg"
-                    href={KnownPages.Processes}
-                    endDecorator={<Navigate />}>
+                {cta && (
+                    <Button
+                        variant="solid"
+                        size="lg"
+                        href={KnownPages.Processes}
+                        endDecorator={<Navigate />}>
                             Go to app
-                </Button>
+                    </Button>
+                )}
                 <UserButton afterSignOutUrl="/" />
             </SignedIn>
         </>
     );
 }
 
-export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
+export function PageNav({ fullWidth, cta }: { fullWidth?: boolean, cta?: boolean }) {
     return (
         <nav className={cx(
             'backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-10 h-20 border-b',
@@ -68,7 +70,7 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
                             </Link>
                         </div>
                         <Row spacing={1}>
-                            <NavMenu />
+                            <NavMenu cta={cta} />
                         </Row>
                     </Row>
                 </header>
