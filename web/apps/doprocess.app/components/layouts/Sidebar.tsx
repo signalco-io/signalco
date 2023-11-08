@@ -3,8 +3,7 @@
 import { useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import {cx} from 'classix';
-import { Check, Play, Right, Text } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/dist/Stack';
+import { ListChecks, Play, Right, Text } from '@signalco/ui-icons';
 import { List } from '@signalco/ui/dist/List';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { ListItem } from '../shared/ListItem';
@@ -14,7 +13,7 @@ export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: 
     const pathname = usePathname();
 
     const links = useMemo(() => [
-        { href: KnownPages.Processes, label: 'Processes', Icon: Check },
+        { href: KnownPages.Processes, label: 'Processes', Icon: ListChecks },
         { href: KnownPages.Runs, label: 'Runs', Icon: Play },
         { href: KnownPages.Documents, label: 'Documents', Icon: Text },
     ], []);
@@ -26,18 +25,18 @@ export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: 
     }, [links, onOpenChange, pathname]);
 
     return (
-        <Stack className="group h-full py-1 pl-1" spacing={0.5}>
+        <div className="group flex flex-row gap-0.5 border-b py-1 pl-1 md:h-full md:flex-col md:border-none">
             <IconButton
                 variant="plain"
                 className={cx(
                     open ? 'opacity-0 rotate-180' : '',
-                    'self-end text-muted-foreground transition-opacity group-hover:opacity-100'
+                    'hidden md:block self-end text-muted-foreground transition-opacity group-hover:opacity-100'
                 )}
                 size="sm"
                 onClick={() => onOpenChange?.(!open)}>
                 <Right />
             </IconButton>
-            <List>
+            <List className="flex-row md:flex-col">
                 {links.map(({ href, label, Icon }) => (
                     <ListItem
                         key={href}
@@ -49,6 +48,6 @@ export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: 
                     />
                 ))}
             </List>
-        </Stack>
+        </div>
     );
 }

@@ -23,12 +23,13 @@ export function SplitView({ children, minSize, maxSize, collapsable, collapsed, 
         collapsed: collapsed ?? false,
         collapsedSize: collapsedSize ?? 0,
         onCollapsedChanged: onCollapsedChanged ?? (() => { }),
+        disableMobile: true
     });
 
     return (
-        <div className="h-full">
-            <div className="grid grid-cols-[minmax(0,1fr)] grid-rows-[1fr_3fr] md:h-full md:grid-cols-[auto_9px_5fr] md:grid-rows-[minmax(0,1fr)]">
-                <div ref={fixedSideRef} className="md:h-full md:w-[320px]">
+        <div className="md:h-full">
+            <div className="md:grid md:h-full md:grid-cols-[auto_9px_5fr] md:grid-rows-[minmax(0,1fr)]">
+                <div ref={fixedSideRef} className="w-full md:h-full md:w-[320px]">
                     {children && children[0]}
                 </div>
                 <ResizeHandle

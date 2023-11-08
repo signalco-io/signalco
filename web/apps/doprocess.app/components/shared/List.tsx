@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactElement, ReactNode, useState } from 'react';
+import { Fragment, ReactElement, ReactNode, useState } from 'react';
 import { type UseQueryResult } from '@tanstack/react-query';
 import { Add } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
@@ -32,10 +32,10 @@ export function List<T>({ query, itemRender, editable, itemCreateLabel, createFo
             placeholder={<ListSkeleton itemClassName="h-9" />}
             error={error}>
             <UIList className="divide-y rounded-lg border">
-                {data?.map((item) => (
-                    <>
+                {data?.map((item, i) => (
+                    <Fragment key={i}>
                         {itemRender ? itemRender(item) : null}
-                    </>
+                    </Fragment>
                 ))}
                 {editable ? (
                     <>

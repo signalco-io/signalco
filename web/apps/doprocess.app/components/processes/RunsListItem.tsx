@@ -1,4 +1,4 @@
-import { Check, Navigate, Play } from '@signalco/ui-icons';
+import { ListChecks, Navigate, Play } from '@signalco/ui-icons';
 import { Row } from '@signalco/ui/dist/Row';
 import { ListItem } from '../shared/ListItem';
 import { ProcessRun } from '../../src/lib/db/schema';
@@ -17,7 +17,7 @@ export function RunsListItem({ run }: RunsListItemProps) {
             endDecorator={(
                 <Row spacing={2}>
                     <Row spacing={1} className="opacity-60">
-                        <Check />
+                        <ListChecks />
                         <TypographyProcessName id={run.processId.toString()} />
                     </Row>
                     <Navigate className="opacity-0 group-hover:opacity-100" />

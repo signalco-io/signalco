@@ -12,11 +12,13 @@ type useResizeOptions = {
     collapseBreakpoint?: number;
     collapsedSize?: number;
     onCollapsedChanged?: (collapsed: boolean) => void;
+    disableMobile?: boolean;
 };
 
 export function useResizeable({
     orientation: direction = 'horizontal', onResize, minSize = 0, maxSize,
-    collapsable, collapsed, collapseBreakpoint, collapsedSize, onCollapsedChanged
+    collapsable, collapsed, collapseBreakpoint, collapsedSize, onCollapsedChanged,
+    disableMobile
 }: useResizeOptions) {
     const fixedSideRef = useRef<HTMLDivElement>(null);
     const handleRef = useRef<HTMLDivElement>(null);
@@ -53,7 +55,7 @@ export function useResizeable({
     };
 
     const adjustSize = useCallback((newSize: number | undefined) => {
-        if (newSize == null) {
+        if (newSize == null || (disableMobile && window.innerWidth < 768)) {
             fixedSideRef.current?.style.setProperty(direction === 'vertical' ? 'width' : 'height', null);
             return;
         }

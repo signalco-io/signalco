@@ -12,7 +12,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
     return (
         <ClerkProvider>
             <PageNav fullWidth />
-            <div className="h-full pt-20">
+            <div className="pt-20 md:h-full">
                 <SplitView
                     collapsable
                     collapsed={!sidebarOpen}

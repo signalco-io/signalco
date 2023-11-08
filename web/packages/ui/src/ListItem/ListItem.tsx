@@ -51,7 +51,7 @@ export function ListItem({
         return (
             <Row spacing={2} className={cx('uitw-min-h-[3rem] uitw-px-2', className)}>
                 {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
-                <div className={cx('uitw-grow', disabled && 'uitw-opacity-60')}>{label}</div>
+                <div className={cx('ui-listitem-label uitw-grow', disabled && 'uitw-opacity-60')}>{label}</div>
                 <div className="uitw-self-end">
                     {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator ?? null}
                 </div>
@@ -67,7 +67,7 @@ export function ListItem({
             disabled={disabled}
             className={cx('uitw-text-start uitw-h-auto', className)}>
             {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
-            {Boolean(label) && <div className="uitw-grow">{label}</div>}
+            {Boolean(label) && <div className="ui-listitem-label uitw-grow">{label}</div>}
             {Boolean(endDecorator) && (
                 <div className="uitw-self-end">
                     {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator ?? null}
