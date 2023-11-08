@@ -28,7 +28,7 @@ export function TaskDeleteModal({ taskDefinition, ...rest }: TaskDeleteModalProp
             header="Are you sure?"
             onConfirm={handleConfirmDelete}
             {...rest}>
-            All the task details will be lost and all existing process runs will lose progress on this task.
+            By deleting this task, all existing process runs will lose progress on this task.
         </ModalConfirm>
     );
 }

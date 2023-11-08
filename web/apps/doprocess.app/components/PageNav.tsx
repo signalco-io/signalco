@@ -40,6 +40,13 @@ function NavMenu() {
                 </SignUpButton>
             </SignedOut>
             <SignedIn>
+                <Button
+                    variant="solid"
+                    size="lg"
+                    href={KnownPages.Processes}
+                    endDecorator={<Navigate />}>
+                            Go to app
+                </Button>
                 <UserButton afterSignOutUrl="/" />
             </SignedIn>
         </>

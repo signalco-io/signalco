@@ -4,7 +4,7 @@ import { documentKey } from './useDocument';
 
 type DocumentUpdateArgs = {
     id: string;
-    name: string;
+    name?: string;
     data?: string;
 }
 

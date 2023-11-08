@@ -3,7 +3,7 @@
 import { useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import {cx} from 'classix';
-import { Check, Play, Right } from '@signalco/ui-icons';
+import { Check, Play, Right, Text } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { List } from '@signalco/ui/dist/List';
 import { IconButton } from '@signalco/ui/dist/IconButton';
@@ -16,6 +16,7 @@ export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: 
     const links = useMemo(() => [
         { href: KnownPages.Processes, label: 'Processes', Icon: Check },
         { href: KnownPages.Runs, label: 'Runs', Icon: Play },
+        { href: KnownPages.Documents, label: 'Documents', Icon: Text },
     ], []);
 
     // Colapse if not directly in a link but in child page

@@ -12,10 +12,10 @@ async function isDocumentSharedWithUser(userId: string) {
 }
 
 export async function documentCreate(userId: string, name: string) {
-    return await db.insert(document).values({
+    return (await db.insert(document).values({
         name,
         sharedWithUsers: [userId],
-    });
+    })).insertId;
 }
 
 export async function documentsGet(userId: string) {

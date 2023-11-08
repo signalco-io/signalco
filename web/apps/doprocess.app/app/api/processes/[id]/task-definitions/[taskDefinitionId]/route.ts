@@ -1,4 +1,5 @@
-import { changeTaskDefinitionText, changeTaskDefinitionType, deleteTaskDefinition, getTaskDefinition } from '../../../../../../src/lib/repo/processesRepository';
+import { changeTaskDefinitionText, changeTaskDefinitionType, deleteTaskDefinition, getProcess, getTaskDefinition } from '../../../../../../src/lib/repo/processesRepository';
+import { documentCreate } from '../../../../../../src/lib/repo/documentsRepository';
 import { ensureUserId } from '../../../../../../src/lib/auth/apiAuth';
 import { requiredParamNumber } from '../../../../../../src/lib/api/apiParam';
 
@@ -25,8 +26,21 @@ export async function PUT(request: Request, { params }: { params: { id: string, 
         if ('text' in data && typeof data.text === 'string') {
             await changeTaskDefinitionText(userId, processId, taskDefinitionId, data.text);
         }
-        if ('type' in data && typeof data.type === 'string' && 'typeData' in data && typeof data.typeData === 'string') {
-            await changeTaskDefinitionType(userId, processId, taskDefinitionId, data.type, data.typeData);
+        if ('type' in data && typeof data.type === 'string') {
+            let typeData = 'typeData' in data && typeof data.typeData === 'string' ? data.typeData : null;
+            if (!typeData && data.type === 'document') {
+                const process = await getProcess(userId, processId);
+                const taskDefinition = await getTaskDefinition(userId, processId, taskDefinitionId);
+                // TODO: Use publicId instead of internalId for dataType
+                typeData = (await documentCreate(userId, [process?.name, taskDefinition?.text ?? 'New document'].filter(Boolean).join(' - '))).toString();
+            } else if (data.type === 'blank') {
+                typeData = 'blank';
+            }
+            if (!typeData) {
+                throw new Error('Invalid type');
+            }
+
+            await changeTaskDefinitionType(userId, processId, taskDefinitionId, data.type, typeData);
         }
     }
 

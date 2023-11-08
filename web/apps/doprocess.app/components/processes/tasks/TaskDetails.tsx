@@ -1,19 +1,24 @@
 'use client';
 
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { cx } from 'classix';
+import { Empty, Text } from '@signalco/ui-icons';
 import { TypographyEditable } from '@signalco/ui/dist/TypographyEditable';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Skeleton } from '@signalco/ui/dist/Skeleton';
+import { Row } from '@signalco/ui/dist/Row';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { TypographyDocumentName } from '../TypographyDocumentName';
 import { EditorSkeleton } from '../editor/EditorSkeleton';
 import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
 import { useProcessTaskDefinition } from '../../../src/hooks/useProcessTaskDefinition';
 import TaskDetailsTypePicker from './TaskDetailsTypePicker';
 import { TaskDetailsToolbar } from './TaskDetailsToolbar';
 
-// const Editor = dynamic(() => import('../editor/Editor').then(mod => mod.Editor), { ssr: false, loading: () => <EditorSkeleton /> });
+const DocumentEditor = dynamic(() => import('../documents/DocumentEditor').then(mod => mod.DocumentEditor), { ssr: false, loading: () => <EditorSkeleton /> });
 
 type TaskDetailsProps = {
     processId: string;
@@ -38,6 +43,8 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
     const hasHeader = headerMutatedOrDefault.length > 0;
     const header = hasHeader ? headerMutatedOrDefault : 'No description';
 
+    const [saving, setSaving] = useState(false);
+
     if (taskDefinition === null && !taskDefinitionIsLoading) {
         return (
             <div className="flex items-center justify-center text-xl text-muted-foreground">
@@ -48,7 +55,10 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
 
     return (
         <Stack spacing={2} className="overflow-x-hidden">
-            {editable && <TaskDetailsToolbar processId={processId} selectedTaskId={selectedTaskId} />}
+            {editable && <TaskDetailsToolbar
+                processId={processId}
+                selectedTaskId={selectedTaskId}
+                saving={saving} />}
             {selectedTaskId === undefined && (
                 <div className="flex items-center justify-center text-xl text-muted-foreground">
                     No task selected.
@@ -70,7 +80,7 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
                             <EditorSkeleton />
                         </>
                     )}>
-                    <div className="px-[62px]">
+                    <Stack className="px-[62px]">
                         {editable ? (
                             <TypographyEditable
                                 level="h2"
@@ -81,11 +91,27 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
                         ) : (
                             <Typography level="h2">{header}</Typography>
                         )}
-                    </div>
-                    {/* <Editor editable={editable} /> */}
-                    <div className="px-[62px]">
-                        <TaskDetailsTypePicker />
-                    </div>
+                        {taskDefinition?.type && (
+                            <Row spacing={1}>
+                                {taskDefinition.type === 'blank' && <Empty className="opacity-60" width={16} />}
+                                {taskDefinition.type === 'blank' && <Typography secondary semiBold>Blank - No details</Typography>}
+                                {taskDefinition.type === 'document' && <Text className="opacity-60" width={16} />}
+                                {taskDefinition.type === 'document' && taskDefinition.typeData && (
+                                    <TypographyDocumentName secondary semiBold id={taskDefinition.typeData} editable={editable} />
+                                )}
+                            </Row>
+                        )}
+                    </Stack>
+                    {(taskDefinition?.type === 'document' && taskDefinition?.typeData) && (
+                        <DocumentEditor id={taskDefinition.typeData} editable={editable} onSavingChange={setSaving} />
+                    )}
+                    {(!taskDefinition?.type || !taskDefinition.typeData) && (
+                        <div className="px-[62px]">
+                            {taskDefinition && (
+                                <TaskDetailsTypePicker processId={processId} taskDefinitionId={taskDefinition.id.toString()} />
+                            )}
+                        </div>
+                    )}
                 </Loadable>
             )}
         </Stack>

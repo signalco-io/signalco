@@ -4,6 +4,7 @@ export {
     BatteryLow,
     BatteryCharging,
     Battery as BatteryEmpty,
+    Cloud,
     Settings,
     Menu,
     GitCommit as Channel,

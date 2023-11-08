@@ -6,10 +6,17 @@ import { Delete, MoreHorizontal } from '@signalco/ui-icons';
 import { Row } from '@signalco/ui/dist/Row';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
 import { IconButton } from '@signalco/ui/dist/IconButton';
+import { SavingIndicator } from '../../shared/SavingIndicator';
 import { useProcessTaskDefinition } from '../../../src/hooks/useProcessTaskDefinition';
 import { TaskDeleteModal } from './TaskDeleteModal';
 
-export function TaskDetailsToolbar({ processId, selectedTaskId }: { processId: string; selectedTaskId: string | undefined; }) {
+type TaskDetailsToolbarProps = {
+    processId: string;
+    selectedTaskId: string | undefined;
+    saving: boolean;
+};
+
+export function TaskDetailsToolbar({ processId, selectedTaskId, saving }: TaskDetailsToolbarProps) {
     const { data: taskDefinition } = useProcessTaskDefinition(processId, selectedTaskId);
     const [deleteTaskOpen, setDeleteTaskOpen] = useState(false);
 
@@ -17,6 +24,7 @@ export function TaskDetailsToolbar({ processId, selectedTaskId }: { processId: s
         <>
             <Row className="p-2">
                 <div className="grow"></div>
+                <SavingIndicator saving={saving} />
                 <DropdownMenu>
                     <DropdownMenuTrigger
                         asChild

@@ -4,7 +4,7 @@ import { processTaskDefinitionsKey } from './useProcessTaskDefinitions';
 type TaskDefinitionUpdateArgs = {
     processId: string;
     taskDefinitionId: string;
-    text: string;
+    text?: string;
     type?: string;
     typeData?: string;
 };
