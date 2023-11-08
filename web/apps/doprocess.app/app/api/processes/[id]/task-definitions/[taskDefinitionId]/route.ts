@@ -1,4 +1,4 @@
-import { changeTaskDefinitionText, deleteTaskDefinition, getTaskDefinition } from '../../../../../../src/lib/repo/processesRepository';
+import { changeTaskDefinitionText, changeTaskDefinitionType, deleteTaskDefinition, getTaskDefinition } from '../../../../../../src/lib/repo/processesRepository';
 import { ensureUserId } from '../../../../../../src/lib/auth/apiAuth';
 import { requiredParamNumber } from '../../../../../../src/lib/api/apiParam';
 
@@ -21,8 +21,13 @@ export async function PUT(request: Request, { params }: { params: { id: string, 
     const { userId } = ensureUserId();
 
     const data = await request.json();
-    if (data != null && typeof data === 'object' && 'text' in data && typeof data.text === 'string') {
-        await changeTaskDefinitionText(userId, processId, taskDefinitionId, data.text);
+    if (data != null && typeof data === 'object') {
+        if ('text' in data && typeof data.text === 'string') {
+            await changeTaskDefinitionText(userId, processId, taskDefinitionId, data.text);
+        }
+        if ('type' in data && typeof data.type === 'string' && 'typeData' in data && typeof data.typeData === 'string') {
+            await changeTaskDefinitionType(userId, processId, taskDefinitionId, data.type, data.typeData);
+        }
     }
 
     return Response.json(null);

@@ -1,4 +1,4 @@
-import { and, eq, like, sql } from 'drizzle-orm';
+import { and, eq, inArray, like, sql } from 'drizzle-orm';
 import { firstOrDefault } from '@signalco/js';
 import { TaskState, process, processRun, task, taskDefinition } from '../db/schema';
 import { db } from '../db';
@@ -38,6 +38,14 @@ export async function deleteProcess(userId: string, id: number) {
 
     await deleteProcessTaskDefinitions(userId, id);
     await db.delete(process).where(eq(process.id, id));
+}
+
+export async function getAllProcessesRuns(userId: string) {
+    if (!await isProcessSharedWithUser(userId))
+        throw new Error('Not found');
+    const processes = await getProcesses(userId);
+    const processesIds = processes.map(p => p.id);
+    return await db.select().from(processRun).where(inArray(processRun.processId, processesIds));
 }
 
 export async function getProcessRuns(userId: string, processId: number) {
@@ -81,7 +89,11 @@ export async function createTaskDefinition(userId: string, processId: number, te
     if (!await isProcessSharedWithUser(userId))
         throw new Error('Not found');
     // TODO: Check permissions
-    return (await db.insert(taskDefinition).values({ processId: processId, text: text, description: description })).insertId;
+    return (await db.insert(taskDefinition).values({
+        processId: processId,
+        text: text,
+        description: description
+    })).insertId;
 }
 
 export async function changeTaskDefinitionText(userId: string, processId: number, id: number, text: string) {
@@ -96,6 +108,13 @@ export async function changeTaskDefinitionDescription(userId: string, processId:
         throw new Error('Not found');
     // TODO: Check permissions
     await db.update(taskDefinition).set({ description: description }).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, id)));
+}
+
+export async function changeTaskDefinitionType(userId: string, processId: number, id: number, type: string, typeData: string) {
+    if (!await isProcessSharedWithUser(userId))
+        throw new Error('Not found');
+    // TODO: Check permissions
+    await db.update(taskDefinition).set({ type, typeData }).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, id)));
 }
 
 export async function deleteTaskDefinition(userId: string, processId: number, id: number) {

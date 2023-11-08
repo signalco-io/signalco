@@ -1,16 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { processTaskDefinitionsKey } from './useProcessTaskDefinitions';
 
-type TaskDefinitionUpdateBaseArgs = {
+type TaskDefinitionUpdateArgs = {
     processId: string;
     taskDefinitionId: string;
-};
-
-type TaskDefinitionUpdateNameArgs = TaskDefinitionUpdateBaseArgs & {
     text: string;
-}
-
-type TaskDefinitionUpdateArgs = TaskDefinitionUpdateNameArgs;
+    type?: string;
+    typeData?: string;
+};
 
 async function fetchPutProcessTaskDefinition(processId: string, taskDefinitionId: string, data: object) {
     await fetch(`/api/processes/${processId}/task-definitions/${taskDefinitionId}`, {

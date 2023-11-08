@@ -1,6 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { cx } from 'classix';
 import { TypographyEditable } from '@signalco/ui/dist/TypographyEditable';
 import { Typography } from '@signalco/ui/dist/Typography';
@@ -14,7 +13,7 @@ import { useProcessTaskDefinition } from '../../../src/hooks/useProcessTaskDefin
 import TaskDetailsTypePicker from './TaskDetailsTypePicker';
 import { TaskDetailsToolbar } from './TaskDetailsToolbar';
 
-const Editor = dynamic(() => import('../editor/Editor').then(mod => mod.Editor), { ssr: false, loading: () => <EditorSkeleton /> });
+// const Editor = dynamic(() => import('../editor/Editor').then(mod => mod.Editor), { ssr: false, loading: () => <EditorSkeleton /> });
 
 type TaskDetailsProps = {
     processId: string;

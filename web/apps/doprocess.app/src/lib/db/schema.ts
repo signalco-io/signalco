@@ -23,12 +23,23 @@ export const taskDefinition = mysqlTable('task_definition', {
     processId: int('process_id').notNull(),
     text: text('text'),
     description: text('description'),
+    type: varchar('type', { length: 255 }),
+    typeData: varchar('type_source', { length: 255 }),
     // TODO: Created by
     // TODO: Created at
     // TODO: Soft-deleted?
 });
 
 export type TaskDefinition = typeof taskDefinition.$inferSelect;
+
+export const document = mysqlTable('document', {
+    id: serial('id').primaryKey(),
+    name: varchar('name', { length: 255 }).notNull(),
+    data: json('data'),
+    sharedWithUsers: json('shared_with_users').notNull()
+});
+
+export type Document = typeof document.$inferSelect;
 
 export const processRelations = relations(taskDefinition, ({ many }) => ({
     taskDefinitions: many(taskDefinition)
