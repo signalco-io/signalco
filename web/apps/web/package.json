@@ -47,7 +47,7 @@
     },
     "devDependencies": {
         "@axe-core/playwright": "4.8.1",
-        "@babel/core": "7.23.2",
+        "@babel/core": "7.23.3",
         "@ducanh2912/next-pwa": "9.7.2",
         "@next/bundle-analyzer": "14.0.1",
         "@playwright/test": "1.39.0",
