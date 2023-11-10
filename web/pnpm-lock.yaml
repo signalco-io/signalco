@@ -45,8 +45,8 @@ importers:
         specifier: 0.3.2
         version: 0.3.2(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.8.1
-        version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.9.0
+        version: 1.9.0(react-dom@18.2.0)(react@18.2.0)
       '@microsoft/signalr':
         specifier: 7.0.12
         version: 7.0.12
@@ -538,8 +538,8 @@ importers:
   apps/doprocess.app:
     dependencies:
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.8.1
-        version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.9.0
+        version: 1.9.0(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 14.0.2
         version: 14.0.2
@@ -647,8 +647,8 @@ importers:
   apps/slco:
     dependencies:
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.8.1
-        version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.9.0
+        version: 1.9.0(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 14.0.2
         version: 14.0.2
@@ -859,8 +859,8 @@ importers:
         specifier: 0.3.2
         version: 0.3.2(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.8.1
-        version: 1.8.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.9.0
+        version: 1.9.0(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 14.0.2
         version: 14.0.2
@@ -3533,13 +3533,18 @@ packages:
   /@floating-ui/utils@0.1.6:
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
 
-  /@hcaptcha/react-hcaptcha@1.8.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-33tIl77HgeahiQ6R0+JPDA8cGBBv95cIVcdOcFVwiGCJhrOxyiOQetCdEUNTDS13xrkvIP29K/PrqLXXSbKl6Q==}
+  /@hcaptcha/loader@1.0.8:
+    resolution: {integrity: sha512-c22xMGeFZd3QBd7AVqISevjaXnXyyysQ1TCDvWgsdcsm4ImtxogU7Dc2txdqZ4f1ENNE272lL73XxgAH+V1GNQ==}
+    dev: false
+
+  /@hcaptcha/react-hcaptcha@1.9.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-SdgzcN+RpD/VrnoAsgKc5JPqt7xLi6PT3Iu3r/eFchBD+uQOishCUePQqkqSaoZ/tWdf9loteHL8apO4Ld3YEA==}
     peerDependencies:
       react: '>= 16.3.0'
       react-dom: '>= 16.3.0'
     dependencies:
       '@babel/runtime': 7.23.2
+      '@hcaptcha/loader': 1.0.8
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
