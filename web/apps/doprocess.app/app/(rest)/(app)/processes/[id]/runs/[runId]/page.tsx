@@ -21,7 +21,7 @@ function ProcessRunHeader({ id, runId }: { id: string, runId: string }) {
                 endSeparator
                 items={[
                     { label: 'Processes', href: KnownPages.Processes },
-                    { label: <TypographyProcessName id={id} />, href: KnownPages.Process(id) },
+                    { label: <TypographyProcessName secondary id={id} />, href: KnownPages.Process(id) },
                 ]} />
             <ListHeader header={run?.name} />
         </Stack>

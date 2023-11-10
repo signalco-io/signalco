@@ -1,25 +1,46 @@
-import { changeTaskDefinitionText, changeTaskDefinitionType, deleteTaskDefinition, getProcess, getTaskDefinition } from '../../../../../../src/lib/repo/processesRepository';
-import { documentCreate } from '../../../../../../src/lib/repo/documentsRepository';
+import { changeTaskDefinitionText, changeTaskDefinitionType, deleteTaskDefinition, getProcess, getProcessIdByPublicId, getTaskDefinition, getTaskDefinitionIdByPublicId } from '../../../../../../src/lib/repo/processesRepository';
+import { documentCreate, documentGet } from '../../../../../../src/lib/repo/documentsRepository';
 import { ensureUserId } from '../../../../../../src/lib/auth/apiAuth';
-import { requiredParamNumber } from '../../../../../../src/lib/api/apiParam';
+import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
 
 export async function GET(_request: Request, { params }: { params: { id: string, taskDefinitionId: string } }) {
-    const processId = requiredParamNumber(params.id);
-    const taskDefinitionId = requiredParamNumber(params.taskDefinitionId);
+    const processPublicId = requiredParamString(params.id);
+    const taskDefinitionPublicId = requiredParamString(params.taskDefinitionId);
 
     const { userId } = ensureUserId();
+
+    const processId = await getProcessIdByPublicId(processPublicId);
+    if (processId == null)
+        return new Response(null, { status: 404 });
+    const taskDefinitionId = await getTaskDefinitionIdByPublicId(processPublicId, taskDefinitionPublicId);
+    if (taskDefinitionId == null)
+        return new Response(null, { status: 404 });
 
     const taskDefinition = await getTaskDefinition(userId, processId, taskDefinitionId);
     if (!taskDefinition)
         return new Response(null, { status: 404 });
-    return Response.json(taskDefinition);
+
+    const taskDefinitionDto = {
+        ...taskDefinition,
+        id: taskDefinition.publicId,
+        publicId: undefined,
+        processId: processPublicId
+    };
+    return Response.json(taskDefinitionDto);
 }
 
 export async function PUT(request: Request, { params }: { params: { id: string, taskDefinitionId: string } }) {
-    const processId = requiredParamNumber(params.id);
-    const taskDefinitionId = requiredParamNumber(params.taskDefinitionId);
+    const processPublicId = requiredParamString(params.id);
+    const taskDefinitionPublicId = requiredParamString(params.taskDefinitionId);
 
     const { userId } = ensureUserId();
+
+    const processId = await getProcessIdByPublicId(processPublicId);
+    if (processId == null)
+        return new Response(null, { status: 404 });
+    const taskDefinitionId = await getTaskDefinitionIdByPublicId(processPublicId, taskDefinitionPublicId);
+    if (taskDefinitionId == null)
+        return new Response(null, { status: 404 });
 
     const data = await request.json();
     if (data != null && typeof data === 'object') {
@@ -32,7 +53,12 @@ export async function PUT(request: Request, { params }: { params: { id: string, 
                 const process = await getProcess(userId, processId);
                 const taskDefinition = await getTaskDefinition(userId, processId, taskDefinitionId);
                 // TODO: Use publicId instead of internalId for dataType
-                typeData = (await documentCreate(userId, [process?.name, taskDefinition?.text ?? 'New document'].filter(Boolean).join(' - '))).toString();
+                const documentName = [process?.name, taskDefinition?.text ?? 'New document'].filter(Boolean).join(' - ');
+                const documentId = await documentCreate(userId, documentName);
+                const document = await documentGet(userId, Number(documentId));
+                if (document) {
+                    typeData = document?.publicId;
+                }
             } else if (data.type === 'blank') {
                 typeData = 'blank';
             }
@@ -48,10 +74,17 @@ export async function PUT(request: Request, { params }: { params: { id: string, 
 }
 
 export async function DELETE(_request: Request, { params }: { params: { id: string, taskDefinitionId: string } }) {
-    const processId = requiredParamNumber(params.id);
-    const taskDefinitionId = requiredParamNumber(params.taskDefinitionId);
+    const processPublicId = requiredParamString(params.id);
+    const taskDefinitionPublicId = requiredParamString(params.taskDefinitionId);
 
     const { userId } = ensureUserId();
+
+    const processId = await getProcessIdByPublicId(processPublicId);
+    if (processId == null)
+        return new Response(null, { status: 404 });
+    const taskDefinitionId = await getTaskDefinitionIdByPublicId(processPublicId, taskDefinitionPublicId);
+    if (taskDefinitionId == null)
+        return new Response(null, { status: 404 });
 
     await deleteTaskDefinition(userId, processId, taskDefinitionId)
     return Response.json(null);

@@ -1,10 +1,26 @@
-import { getTasks } from '../../../../../../../src/lib/repo/processesRepository';
+import { getProcessIdByPublicId, getProcessRunIdByPublicId, getTasks } from '../../../../../../../src/lib/repo/processesRepository';
 import { ensureUserId } from '../../../../../../../src/lib/auth/apiAuth';
-import { requiredParamNumber } from '../../../../../../../src/lib/api/apiParam';
+import { requiredParamString } from '../../../../../../../src/lib/api/apiParam';
 
 export async function GET(_request: Request, { params }: { params: { id: string, runId: string } }) {
-    const processId = requiredParamNumber(params.id);
-    const runId = requiredParamNumber(params.runId);
+    const processPublicId = requiredParamString(params.id);
+    const runPublicId = requiredParamString(params.runId);
     const { userId } = ensureUserId();
-    return Response.json(await getTasks(userId, processId, runId));
+
+    const processId = await getProcessIdByPublicId(processPublicId);
+    if (processId == null)
+        return new Response(null, { status: 404 });
+    const runId = await getProcessRunIdByPublicId(processPublicId, runPublicId);
+    if (runId == null)
+        return new Response(null, { status: 404 });
+
+    const tasks = await getTasks(userId, processId, runId);
+    const tasksDto = tasks.map(p => ({
+        ...p,
+        id: p.publicId,
+        publicId: undefined,
+        processId: processPublicId,
+        runId: runPublicId
+    }));
+    return Response.json(tasksDto);
 }

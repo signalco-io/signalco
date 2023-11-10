@@ -1,17 +1,28 @@
-import { createTaskDefinition, getTaskDefinitions } from '../../../../../src/lib/repo/processesRepository';
+import { createTaskDefinition, getProcessIdByPublicId, getTaskDefinition, getTaskDefinitions } from '../../../../../src/lib/repo/processesRepository';
 import { ensureUserId } from '../../../../../src/lib/auth/apiAuth';
-import { requiredParamNumber } from '../../../../../src/lib/api/apiParam';
+import { requiredParamString } from '../../../../../src/lib/api/apiParam';
 
 export async function GET(_request: Request, { params }: { params: { id: string } }) {
-    const processId = requiredParamNumber(params.id);
+    const processPublicId = requiredParamString(params.id);
 
     const { userId } = ensureUserId();
 
-    return Response.json(await getTaskDefinitions(userId, processId));
+    const processId = await getProcessIdByPublicId(processPublicId);
+    if (processId == null)
+        return new Response(null, { status: 404 });
+
+    const taskDefinitions = await getTaskDefinitions(userId, processId);
+    const taskDefinitionsDto = taskDefinitions.map(p => ({
+        ...p,
+        id: p.publicId,
+        publicId: undefined,
+        processId: processPublicId
+    }));
+    return Response.json(taskDefinitionsDto);
 }
 
 export async function POST(request: Request, { params }: { params: { id: string } }) {
-    const processId = requiredParamNumber(params.id);
+    const processPublicId = requiredParamString(params.id);
 
     const data = await request.json();
     const text = data != null && typeof data === 'object' && 'text' in data && typeof data.text === 'string' ? data.text : '';
@@ -19,5 +30,11 @@ export async function POST(request: Request, { params }: { params: { id: string 
 
     const { userId } = ensureUserId();
 
-    return Response.json({ id: await createTaskDefinition(userId, processId, text, description) });
+    const processId = await getProcessIdByPublicId(processPublicId);
+    if (processId == null)
+        return new Response(null, { status: 404 });
+
+    const id = await createTaskDefinition(userId, processId, text, description);
+    const taskDefinition = await getTaskDefinition(userId, processId, Number(id));
+    return Response.json({ id: taskDefinition?.publicId });
 }

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Document } from '../lib/db/schema';
+import { DocumentDto } from '../../app/api/dtos/dtos';
 
 export function documentsKey() {
     return ['documents'];
@@ -7,7 +7,7 @@ export function documentsKey() {
 
 async function fetchGetDocuments() {
     const response = await fetch('/api/documents');
-    return await response.json() as Document[] | undefined;
+    return await response.json() as DocumentDto[] | undefined;
 }
 
 export function useDocuments() {

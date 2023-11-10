@@ -1,15 +1,25 @@
-import { getProcessRuns, runProcess } from '../../../../../src/lib/repo/processesRepository';
+import { getProcessIdByPublicId, getProcessRun, getProcessRuns, runProcess } from '../../../../../src/lib/repo/processesRepository';
 import { ensureUserId } from '../../../../../src/lib/auth/apiAuth';
-import { requiredParamNumber } from '../../../../../src/lib/api/apiParam';
+import { requiredParamString } from '../../../../../src/lib/api/apiParam';
 
 export async function GET(_request: Request, { params }: { params: { id: string } }) {
-    const processId = requiredParamNumber(params.id);
+    const processPublicId = requiredParamString(params.id);
     const { userId } = ensureUserId();
-    return Response.json(getProcessRuns(userId, processId));
+    const processId = await getProcessIdByPublicId(processPublicId);
+    if (processId == null)
+        return new Response(null, { status: 404 });
+    const processRuns = await getProcessRuns(userId, processId);
+    const processRunsDto = processRuns.map(p => ({
+        ...p,
+        id: p.publicId,
+        publicId: undefined,
+        processId: processPublicId
+    }));
+    return Response.json(processRunsDto);
 }
 
 export async function POST(request: Request, { params }: { params: { id: string } }) {
-    const processId = requiredParamNumber(params.id);
+    const processPublicId = requiredParamString(params.id);
 
     const data = await request.json();
     const name = typeof data === 'object' && data != null && 'name' in data && typeof data.name === 'string' ? data.name.toString() : null;
@@ -18,5 +28,11 @@ export async function POST(request: Request, { params }: { params: { id: string 
 
     const { userId } = ensureUserId();
 
-    return Response.json({ id: await runProcess(userId, processId, name) });
+    const processId = await getProcessIdByPublicId(processPublicId);
+    if (processId == null)
+        return new Response(null, { status: 404 });
+
+    const id = await runProcess(userId, processId, name);
+    const processRun = await getProcessRun(userId, processId, Number(id));
+    return Response.json({ id: processRun?.publicId });
 }

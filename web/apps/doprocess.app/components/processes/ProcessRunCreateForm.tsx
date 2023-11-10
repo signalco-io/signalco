@@ -6,11 +6,11 @@ import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Input } from '@signalco/ui/dist/Input';
 import { Button } from '@signalco/ui/dist/Button';
-import { Process } from '../../src/lib/db/schema';
 import { KnownPages } from '../../src/knownPages';
 import { useProcessRunCreate } from '../../src/hooks/useProcessRunCreate';
+import { ProcessDto } from '../../app/api/dtos/dtos';
 
-export function ProcessRunCreateForm({ process }: { process: Process; }) {
+export function ProcessRunCreateForm({ process }: { process: ProcessDto; }) {
     const { id: processId, name: processName } = process;
 
     const router = useRouter();

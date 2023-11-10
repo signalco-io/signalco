@@ -1,10 +1,10 @@
 import { ListChecks, Navigate } from '@signalco/ui-icons';
 import { ListItem } from '../shared/ListItem';
-import { Process } from '../../src/lib/db/schema';
 import { KnownPages } from '../../src/knownPages';
+import { ProcessDto } from '../../app/api/dtos/dtos';
 
 export type ProcessListItemProps = {
-    process: Process
+    process: ProcessDto;
 };
 
 export function ProcessesListItem({ process }: ProcessListItemProps) {

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Process } from '../lib/db/schema';
+import { ProcessDto } from '../../app/api/dtos/dtos';
 import { processesKey } from './useProcesses';
 
 export function processKey(id?: string) {
@@ -10,7 +10,7 @@ export function processKey(id?: string) {
 
 async function fetchGetProcess(id: string) {
     const response = await fetch(`/api/processes/${id}`);
-    return await response.json() as Process | undefined;
+    return await response.json() as ProcessDto | undefined;
 }
 
 export function useProcess(id?: string) {

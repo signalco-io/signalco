@@ -4,15 +4,15 @@ import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
 import { List } from '@signalco/ui/dist/List';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { ListItemCreate } from '../../shared/ListItemCreate';
-import { Task, TaskDefinition } from '../../../src/lib/db/schema';
 import { useProcessTaskDefinitionCreate } from '../../../src/hooks/useProcessTaskDefinitionCreate';
+import { ProcessRunTaskDto, ProcessTaskDefinitionDto } from '../../../app/api/dtos/dtos';
 import { TaskListItem } from './TaskListItem';
 
 type TaskListProps = {
     processId: string;
     tasks: {
-        taskDefinition: TaskDefinition;
-        task?: Task;
+        taskDefinition: ProcessTaskDefinitionDto;
+        task?: ProcessRunTaskDto;
     }[];
     editable: boolean;
 };

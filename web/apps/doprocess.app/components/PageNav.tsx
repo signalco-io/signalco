@@ -58,7 +58,7 @@ function NavMenu({ cta }: { cta?: boolean }) {
 export function PageNav({ fullWidth, cta }: { fullWidth?: boolean, cta?: boolean }) {
     return (
         <nav className={cx(
-            'backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-10 h-20 border-b',
+            'backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-10 h-16 border-b',
             fullWidth ? 'px-4' : 'px-0'
         )}>
             <Container maxWidth={fullWidth ? false : 'lg'}>
@@ -66,7 +66,7 @@ export function PageNav({ fullWidth, cta }: { fullWidth?: boolean, cta?: boolean
                     <Row justifyContent="space-between">
                         <div className="flex h-full flex-col items-center">
                             <Link href="/">
-                                <DoProcessLogo height={52} />
+                                <DoProcessLogo height={36} />
                             </Link>
                         </div>
                         <Row spacing={1}>

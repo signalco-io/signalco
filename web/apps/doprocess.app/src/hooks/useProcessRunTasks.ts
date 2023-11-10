@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Task } from '../lib/db/schema';
+import { ProcessRunTaskDto } from '../../app/api/dtos/dtos';
 import { processRunKey } from './useProcessRun';
 
 export function taskKey(processId?: string, runId?: string, taskId?: string) {
@@ -14,7 +14,7 @@ export function tasksKey(processId?: string, runId?: string) {
 
 async function fetchGetProcessRunTasks(processId: string, runId: string) {
     const response = await fetch(`/api/processes/${processId}/runs/${runId}/tasks`);
-    return await response.json() as Task[] | undefined;
+    return await response.json() as ProcessRunTaskDto[] | undefined;
 }
 
 export function useProcessRunTasks(processId?: string, runId?: string) {

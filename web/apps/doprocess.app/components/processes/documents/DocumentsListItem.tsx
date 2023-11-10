@@ -1,10 +1,10 @@
 import { Navigate, Text } from '@signalco/ui-icons';
 import { ListItem } from '../../shared/ListItem';
-import { Document } from '../../../src/lib/db/schema';
 import { KnownPages } from '../../../src/knownPages';
+import { DocumentDto } from '../../../app/api/dtos/dtos';
 
 export type DocumentsListItemProps = {
-    document: Document
+    document: DocumentDto
 };
 
 export function DocumentsListItem({ document }: DocumentsListItemProps) {

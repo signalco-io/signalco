@@ -2,11 +2,11 @@
 
 import { ModalConfirm, ModalConfirmProps } from '@signalco/ui/dist/ModalConfirm';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { TaskDefinition } from '../../../src/lib/db/schema';
 import { useProcessTaskDefinitionDelete } from '../../../src/hooks/useProcessTaskDefinitionDelete';
+import { ProcessTaskDefinitionDto } from '../../../app/api/dtos/dtos';
 
 type TaskDeleteModalProps = Omit<ModalConfirmProps, 'header' | 'onConfirm' | 'children' | 'expectedConfirm' | 'promptLabel'> & {
-    taskDefinition: TaskDefinition;
+    taskDefinition: ProcessTaskDefinitionDto;
 };
 
 export function TaskDeleteModal({ taskDefinition, ...rest }: TaskDeleteModalProps) {

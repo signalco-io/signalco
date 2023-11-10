@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { TaskDefinition } from '../lib/db/schema';
+import { ProcessTaskDefinitionDto } from '../../app/api/dtos/dtos';
 import { processTaskDefinitionsKey } from './useProcessTaskDefinitions';
 
 export function processTaskDefinitionKey(processId?: string, taskDefinitionId?: string) {
@@ -10,7 +10,7 @@ async function fetchGetProcessTaskDefinition(processId: string, taskDefinitionId
     const response = await fetch(`/api/processes/${processId}/task-definitions/${taskDefinitionId}`);
     if (!response.ok)
         return null;
-    return await response.json() as TaskDefinition | undefined;
+    return await response.json() as ProcessTaskDefinitionDto | undefined;
 }
 
 export function useProcessTaskDefinition(processId?: string, taskDefinitionId?: string) {

@@ -9,15 +9,15 @@ import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { ListItem } from '../../shared/ListItem';
-import { Task, TaskDefinition } from '../../../src/lib/db/schema';
 import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
 import { useProcessRunTaskUpdate } from '../../../src/hooks/useProcessRunTaskUpdate';
+import { ProcessRunTaskDto, ProcessTaskDefinitionDto } from '../../../app/api/dtos/dtos';
 import { TaskDeleteModal } from './TaskDeleteModal';
 
 export type TaskListItemProps = {
     selected?: boolean;
-    taskDefinition: TaskDefinition;
-    task?: Task;
+    taskDefinition: ProcessTaskDefinitionDto;
+    task?: ProcessRunTaskDto;
     taskIndex: number;
     editable: boolean;
 }
