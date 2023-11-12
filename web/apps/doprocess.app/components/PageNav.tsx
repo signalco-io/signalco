@@ -28,12 +28,11 @@ function NavMenu({ cta }: { cta?: boolean }) {
             ))}
             <SignedOut>
                 <SignInButton redirectUrl={KnownPages.Processes} mode="modal">
-                    <Button variant="plain" size="lg">Sign in</Button>
+                    <Button variant="plain">Sign in</Button>
                 </SignInButton>
                 <SignUpButton redirectUrl={KnownPages.Processes} mode="modal">
                     <Button
                         variant="solid"
-                        size="lg"
                         endDecorator={<Navigate />}>
                             Start for free
                     </Button>
@@ -43,7 +42,6 @@ function NavMenu({ cta }: { cta?: boolean }) {
                 {cta && (
                     <Button
                         variant="solid"
-                        size="lg"
                         href={KnownPages.Processes}
                         endDecorator={<Navigate />}>
                             Go to app
@@ -58,7 +56,7 @@ function NavMenu({ cta }: { cta?: boolean }) {
 export function PageNav({ fullWidth, cta }: { fullWidth?: boolean, cta?: boolean }) {
     return (
         <nav className={cx(
-            'backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-10 h-16 border-b',
+            'backdrop-blur-md fixed top-0 left-0 right-0 z-10 h-16 border-b flex items-center',
             fullWidth ? 'px-4' : 'px-0'
         )}>
             <Container maxWidth={fullWidth ? false : 'lg'}>

@@ -7,7 +7,7 @@ import { PartialBlock } from '@blocknote/core';
 
 type EditorProps = {
     id: string | undefined,
-    editable: boolean;
+    editable?: boolean;
     content: string;
     onChange?: (value: string) => void;
 };
@@ -26,7 +26,7 @@ const customDarkTheme = {
 export function Editor({ id, content, editable, onChange }: EditorProps) {
     const { resolvedTheme } = useTheme();
     const editor = useBlockNote({
-        editable,
+        editable: editable ?? false,
         initialContent: JSON.parse(content ?? '[]') as PartialBlock[],
         onEditorContentChange: (editor) => {
             onChange?.(JSON.stringify(editor.topLevelBlocks));

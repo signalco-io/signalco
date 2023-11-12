@@ -10,7 +10,7 @@ import { useDocument } from '../../../src/hooks/useDocument';
 
 export type DocumentEditorProps = {
     id: string;
-    editable: boolean;
+    editable?: boolean;
     onSavingChange?: (saving: boolean) => void;
 };
 
