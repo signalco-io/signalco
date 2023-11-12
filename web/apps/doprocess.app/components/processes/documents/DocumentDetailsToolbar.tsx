@@ -7,18 +7,18 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { Toolbar } from '../../shared/Toolbar';
 import { SavingIndicator } from '../../shared/SavingIndicator';
-import { useProcessTaskDefinition } from '../../../src/hooks/useProcessTaskDefinition';
-import { TaskDeleteModal } from './TaskDeleteModal';
+import { KnownPages } from '../../../src/knownPages';
+import { useDocument } from '../../../src/hooks/useDocument';
+import { DocumentDeleteModal } from './DocumentDeleteModal';
 
-type TaskDetailsToolbarProps = {
-    processId: string;
-    selectedTaskId: string | undefined;
+type DocumentDetailsToolbarProps = {
+    id: string;
     saving: boolean;
 };
 
-export function TaskDetailsToolbar({ processId, selectedTaskId, saving }: TaskDetailsToolbarProps) {
-    const { data: taskDefinition } = useProcessTaskDefinition(processId, selectedTaskId);
-    const [deleteTaskOpen, setDeleteTaskOpen] = useState(false);
+export function DocumentDetailsToolbar({ id, saving }: DocumentDetailsToolbarProps) {
+    const { data: document } = useDocument(id);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
     return (
         <>
@@ -27,25 +27,26 @@ export function TaskDetailsToolbar({ processId, selectedTaskId, saving }: TaskDe
                 <DropdownMenu>
                     <DropdownMenuTrigger
                         asChild
-                        className={cx('transition-opacity opacity-0', taskDefinition && 'opacity-100')}>
+                        className={cx('transition-opacity opacity-0', document && 'opacity-100')}>
                         <IconButton
                             variant="plain"
-                            title="Task options...">
+                            title="Document options...">
                             <MoreHorizontal />
                         </IconButton>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem startDecorator={<Delete />} onClick={() => setDeleteTaskOpen(true)}>
+                        <DropdownMenuItem startDecorator={<Delete />} onClick={() => setDeleteModalOpen(true)}>
                             Delete...
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </Toolbar>
-            {taskDefinition && (
-                <TaskDeleteModal
-                    taskDefinition={taskDefinition}
-                    open={deleteTaskOpen}
-                    onOpenChange={setDeleteTaskOpen} />
+            {document && (
+                <DocumentDeleteModal
+                    document={document}
+                    open={deleteModalOpen}
+                    onOpenChange={setDeleteModalOpen}
+                    redirect={KnownPages.Documents} />
             )}
         </>
     );
