@@ -4,7 +4,6 @@ import { processTaskDefinitionsKey } from './useProcessTaskDefinitions';
 type TaskDefinitionCreateArgs = {
     processId: string;
     text?: string;
-    description?: string;
 }
 
 async function fetchPostProcessTaskDefinition(processId: string, data: object) {

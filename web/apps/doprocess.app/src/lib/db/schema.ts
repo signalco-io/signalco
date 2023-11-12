@@ -33,7 +33,6 @@ export const taskDefinition = mysqlTable('task_definition', {
     publicId: varchar('public_id', { length: 32 }).notNull().unique(),
     processId: int('process_id').notNull(),
     text: text('text'),
-    description: text('description'),
     order: varchar('order', { length: 255 }).notNull(),
     type: varchar('type', { length: 255 }),
     typeData: varchar('type_source', { length: 255 }),

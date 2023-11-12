@@ -26,7 +26,6 @@ export async function POST(request: Request, { params }: { params: { id: string 
 
     const data = await request.json();
     const text = data != null && typeof data === 'object' && 'text' in data && typeof data.text === 'string' ? data.text : '';
-    const description = data != null && typeof data === 'object' && 'description' in data && typeof data.description === 'string' ? data.description : '';
 
     const { userId } = ensureUserId();
 
@@ -34,7 +33,7 @@ export async function POST(request: Request, { params }: { params: { id: string 
     if (processId == null)
         return new Response(null, { status: 404 });
 
-    const id = await createTaskDefinition(userId, processId, text, description);
+    const id = await createTaskDefinition(userId, processId, text);
     const taskDefinition = await getTaskDefinition(userId, processId, Number(id));
     return Response.json({ id: taskDefinition?.publicId });
 }

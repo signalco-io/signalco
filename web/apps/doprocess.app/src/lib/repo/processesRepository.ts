@@ -152,7 +152,7 @@ async function getTaskDefinitionLastOrder(userId: string, processId: number) {
     return lexinsert(result[0]?.max);
 }
 
-export async function createTaskDefinition(userId: string, processId: number, text: string, description: string) {
+export async function createTaskDefinition(userId: string, processId: number, text: string) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
 
@@ -162,7 +162,6 @@ export async function createTaskDefinition(userId: string, processId: number, te
         publicId: await publicIdNext(taskDefinition, 6),
         order: await getTaskDefinitionLastOrder(userId, processId),
         text: text,
-        description: description,
         createdBy: userId
     })).insertId;
 }
