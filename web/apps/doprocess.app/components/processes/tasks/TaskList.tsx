@@ -10,6 +10,7 @@ import { TaskListItem } from './TaskListItem';
 
 type TaskListProps = {
     processId: string;
+    runId?: string;
     tasks: {
         taskDefinition: ProcessTaskDefinitionDto;
         task?: ProcessRunTaskDto;
@@ -17,7 +18,7 @@ type TaskListProps = {
     editable: boolean;
 };
 
-export default function TaskList({ processId, tasks, editable }: TaskListProps) {
+export function TaskList({ processId, runId, tasks, editable }: TaskListProps) {
     const [selectedTaskId, setSelectedTask] = useSearchParam('task');
     const taskDefinitionCreate = useProcessTaskDefinitionCreate();
 
@@ -38,6 +39,7 @@ export default function TaskList({ processId, tasks, editable }: TaskListProps) 
                     key={item.taskDefinition.id}
                     selected={selectedTaskId === item.taskDefinition.id.toString()}
                     taskDefinition={item.taskDefinition}
+                    runId={runId}
                     task={item.task}
                     taskIndex={taskIndex}
                     editable={editable} />
@@ -45,7 +47,8 @@ export default function TaskList({ processId, tasks, editable }: TaskListProps) 
             {editable && (
                 <ListItemCreate
                     label="Add task"
-                    onSelected={handleCreateTaskDefinition} />
+                    onSelected={handleCreateTaskDefinition}
+                    loading={taskDefinitionCreate.isPending} />
             )}
             {!editable && tasks.length <= 0 && (
                 <NoDataPlaceholder className="p-2">No tasks</NoDataPlaceholder>

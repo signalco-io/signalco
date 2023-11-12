@@ -62,7 +62,7 @@ export async function renameProcess(userId: string, processId: number, name: str
         throw new Error('Not found');
     // TODO: Check permissions
 
-    await db.update(process).set({ name: name }).where(eq(process.id, processId));
+    await db.update(process).set({ name, updatedBy: userId, updatedAt: new Date() }).where(eq(process.id, processId));
 }
 
 export async function deleteProcess(userId: string, processId: number) {
@@ -171,21 +171,14 @@ export async function changeTaskDefinitionText(userId: string, processId: number
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
     // TODO: Check permissions
-    await db.update(taskDefinition).set({ text: text }).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, id)));
-}
-
-export async function changeTaskDefinitionDescription(userId: string, processId: number, id: number, description: string) {
-    if (!await isProcessSharedWithUser(userId, processId))
-        throw new Error('Not found');
-    // TODO: Check permissions
-    await db.update(taskDefinition).set({ description: description }).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, id)));
+    await db.update(taskDefinition).set({ text, updatedBy: userId, updatedAt: new Date() }).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, id)));
 }
 
 export async function changeTaskDefinitionType(userId: string, processId: number, id: number, type: string, typeData: string) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
     // TODO: Check permissions
-    await db.update(taskDefinition).set({ type, typeData }).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, id)));
+    await db.update(taskDefinition).set({ type, typeData, updatedBy: userId, updatedAt: new Date() }).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, id)));
 }
 
 export async function deleteTaskDefinition(userId: string, processId: number, id: number) {
@@ -217,9 +210,29 @@ export async function getTasks(userId: string, processId: number, runId: number)
     return await db.select().from(task).where(and(eq(task.processId, processId), eq(task.runId, runId)));
 }
 
-export async function setTaskState(userId: string, processId: number, runId: number, taskId: number, state: TaskState) {
+export async function setTaskState(userId: string, processId: number, runId: number, taskDefinitionId: number, state: TaskState) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
     // TODO: Check permissions
-    await db.update(task).set({ state }).where(and(eq(task.processId, processId), eq(task.runId, runId), eq(task.id, taskId)));
+
+    // Create task if not exists
+    const taskExists = (firstOrDefault(await db.select({ count: sql<number>`count(*)` }).from(task).where(and(eq(task.processId, processId), eq(task.runId, runId), eq(task.taskDefinitionId, taskDefinitionId))))?.count ?? 0) > 0;
+    if (!taskExists) {
+        await db
+            .insert(task)
+            .values({
+                processId,
+                runId,
+                taskDefinitionId,
+                publicId: await publicIdNext(task, 6),
+                state,
+                createdBy: userId
+            });
+        return;
+    }
+
+    await db
+        .update(task)
+        .set({ state, updatedBy: userId, updatedAt: new Date() })
+        .where(and(eq(task.processId, processId), eq(task.runId, runId), eq(task.taskDefinitionId, taskDefinitionId)));
 }

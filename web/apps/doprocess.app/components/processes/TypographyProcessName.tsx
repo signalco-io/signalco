@@ -36,8 +36,8 @@ export function TypographyProcessName({ id, placeholderWidth, placeholderHeight,
             width={placeholderWidth}
             height={placeholderHeight}>
             {editable ? (
-                <TypographyEditable onChange={handleProcessRename} {...rest}>{processNameMutatedOrDefault}</TypographyEditable>
-            ) : (<Typography {...rest}>{processNameMutatedOrDefault}</Typography>)}
+                <TypographyEditable title={processNameMutatedOrDefault} onChange={handleProcessRename} {...rest}>{processNameMutatedOrDefault}</TypographyEditable>
+            ) : (<Typography title={processNameMutatedOrDefault} {...rest}>{processNameMutatedOrDefault}</Typography>)}
         </Loadable>
     );
 }

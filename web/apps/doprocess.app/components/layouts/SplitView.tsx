@@ -1,11 +1,13 @@
 'use client';
 
 import { ReactNode } from 'react';
+import { cx } from 'classix';
 import { useResizeable } from '../../src/hooks/useResizeable';
 import { ResizeHandle } from './ResizeHandle';
 
 type SplitViewProps = {
     children: ReactNode[];
+    size?: 'sm' | 'lg';
     minSize?: number;
     maxSize?: number;
     collapsable?: boolean;
@@ -14,7 +16,7 @@ type SplitViewProps = {
     onCollapsedChanged?: (collapsed: boolean) => void;
 };
 
-export function SplitView({ children, minSize, maxSize, collapsable, collapsed, onCollapsedChanged, collapsedSize }: SplitViewProps) {
+export function SplitView({ children, size, minSize, maxSize, collapsable, collapsed, onCollapsedChanged, collapsedSize }: SplitViewProps) {
     const { fixedSideRef, handleRef, handlers } = useResizeable({
         orientation: 'vertical',
         minSize,
@@ -29,7 +31,7 @@ export function SplitView({ children, minSize, maxSize, collapsable, collapsed, 
     return (
         <div className="md:h-full">
             <div className="md:grid md:h-full md:grid-cols-[auto_9px_5fr] md:grid-rows-[minmax(0,1fr)]">
-                <div ref={fixedSideRef} className="w-full md:h-full md:w-[320px]">
+                <div ref={fixedSideRef} className={cx('w-full md:h-full', size === 'lg' ? 'md:w-[420px]' : 'md:w-[320px]')}>
                     {children && children[0]}
                 </div>
                 <ResizeHandle

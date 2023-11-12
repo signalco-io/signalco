@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { useDebouncedEffect } from '@enterwell/react-hooks';
-import { EditorSkeleton } from '../editor/EditorSkeleton';
-import { Editor } from '../editor/Editor';
 import { useDocumentUpdate } from '../../../src/hooks/useDocumentUpdate';
 import { useDocument } from '../../../src/hooks/useDocument';
+import { EditorSkeleton } from './editor/EditorSkeleton';
+import { Editor } from './editor/Editor';
 
 export type DocumentEditorProps = {
     id: string;
@@ -47,6 +47,15 @@ export function DocumentEditor({ id, editable, onSavingChange }: DocumentEditorP
             }
         })();
     }, [content, id], 1000);
+
+    if (document === null && !isLoading) {
+        return (
+            <div className="pt-8 text-center opacity-60">
+                <p className="text-2xl font-semibold">Document not found</p>
+                <p className="text-sm">The document you are trying to access does not exist.</p>
+            </div>
+        );
+    }
 
     return (
         <Loadable

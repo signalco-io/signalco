@@ -36,13 +36,13 @@ export async function documentGet(userId: string, id: number) {
 export async function documentRename(userId: string, id: number, name: string) {
     if (!await isDocumentSharedWithUser(userId, id))
         throw new Error('Not found');
-    await db.update(document).set({ name }).where(eq(document.id, id));
+    await db.update(document).set({ name, updatedBy: userId, updatedAt: new Date() }).where(eq(document.id, id));
 }
 
 export async function documentSetData(userId: string, id: number, data?: string) {
     if (!await isDocumentSharedWithUser(userId, id))
         throw new Error('Not found');
-    await db.update(document).set({ data }).where(eq(document.id, id));
+    await db.update(document).set({ data, updatedBy: userId, updatedAt: new Date() }).where(eq(document.id, id));
 }
 
 export async function documentDelete(userId: string, id: number) {

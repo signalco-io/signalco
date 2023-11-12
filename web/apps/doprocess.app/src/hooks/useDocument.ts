@@ -8,6 +8,8 @@ export function documentKey(id?: string) {
 
 async function fetchGetDocument(id: string) {
     const response = await fetch(`/api/documents/${id}`);
+    if (response.status === 404)
+        return null;
     return await response.json() as DocumentDto | undefined;
 }
 

@@ -11,7 +11,7 @@ export type TypographyEditableProps = Omit<TypographyProps, 'onChange' | 'childr
     multiple?: boolean;
 };
 
-export function TypographyEditable({ children, className, onChange, onEditingChanged, hideEditIcon, multiple, ...rest }: TypographyEditableProps) {
+export function TypographyEditable({ children, className, onChange, onEditingChanged, placeholder, hideEditIcon, multiple, ...rest }: TypographyEditableProps) {
     const [isEditing, setIsEditing] = useState(false);
     const [value, setValue] = useState('');
 
@@ -43,7 +43,7 @@ export function TypographyEditable({ children, className, onChange, onEditingCha
             <input
                 value={value}
                 autoFocus
-                className={cx('', inputClassName)}
+                className={cx('uitw-bg-transparent', inputClassName)}
                 onChange={(e) => setValue(e.target.value)}
                 onBlur={handleConfirm}
                 onKeyDown={handleKeyDown}
@@ -54,11 +54,11 @@ export function TypographyEditable({ children, className, onChange, onEditingCha
 
     return (
         <Typography
-            className={cx('uitw-group uitw-cursor-pointer [word-break:break-word]', className)}
+            className={cx('uitw-group uitw-cursor-pointer [word-break:break-word]', !children && 'uitw-text-muted-foreground', className)}
             role="button"
             onClick={handleEdit}
             {...rest}>
-            {children}
+            {children || placeholder}
             {!hideEditIcon && (
                 <Edit size={20} className="uitw-ml-2 uitw-inline uitw-align-baseline uitw-opacity-0 uitw-transition-opacity group-hover:uitw-opacity-60" />
             )}

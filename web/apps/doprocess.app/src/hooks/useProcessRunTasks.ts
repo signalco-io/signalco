@@ -14,6 +14,8 @@ export function tasksKey(processId?: string, runId?: string) {
 
 async function fetchGetProcessRunTasks(processId: string, runId: string) {
     const response = await fetch(`/api/processes/${processId}/runs/${runId}/tasks`);
+    if (response.status === 404)
+        return null;
     return await response.json() as ProcessRunTaskDto[] | undefined;
 }
 

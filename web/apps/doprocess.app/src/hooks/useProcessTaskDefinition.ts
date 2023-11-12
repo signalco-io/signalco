@@ -8,7 +8,7 @@ export function processTaskDefinitionKey(processId?: string, taskDefinitionId?: 
 
 async function fetchGetProcessTaskDefinition(processId: string, taskDefinitionId: string) {
     const response = await fetch(`/api/processes/${processId}/task-definitions/${taskDefinitionId}`);
-    if (!response.ok)
+    if (response.status === 404)
         return null;
     return await response.json() as ProcessTaskDefinitionDto | undefined;
 }

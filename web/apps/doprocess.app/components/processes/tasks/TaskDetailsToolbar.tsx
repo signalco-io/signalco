@@ -18,11 +18,11 @@ type TaskDetailsToolbarProps = {
 
 export function TaskDetailsToolbar({ processId, selectedTaskId, saving }: TaskDetailsToolbarProps) {
     const { data: taskDefinition } = useProcessTaskDefinition(processId, selectedTaskId);
-    const [deleteTaskOpen, setDeleteTaskOpen] = useState(false);
+    const [deleteOpen, setDeleteOpen] = useState(false);
 
     return (
         <>
-            <Toolbar>
+            <Toolbar className="grow">
                 <SavingIndicator saving={saving} />
                 <DropdownMenu>
                     <DropdownMenuTrigger
@@ -35,7 +35,7 @@ export function TaskDetailsToolbar({ processId, selectedTaskId, saving }: TaskDe
                         </IconButton>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem startDecorator={<Delete />} onClick={() => setDeleteTaskOpen(true)}>
+                        <DropdownMenuItem startDecorator={<Delete />} onClick={() => setDeleteOpen(true)}>
                             Delete...
                         </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -44,8 +44,8 @@ export function TaskDetailsToolbar({ processId, selectedTaskId, saving }: TaskDe
             {taskDefinition && (
                 <TaskDeleteModal
                     taskDefinition={taskDefinition}
-                    open={deleteTaskOpen}
-                    onOpenChange={setDeleteTaskOpen} />
+                    open={deleteOpen}
+                    onOpenChange={setDeleteOpen} />
             )}
         </>
     );

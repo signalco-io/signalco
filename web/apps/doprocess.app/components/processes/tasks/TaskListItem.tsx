@@ -10,24 +10,23 @@ import { Checkbox } from '@signalco/ui/dist/Checkbox';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
 import { ListItem } from '../../shared/ListItem';
 import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
-import { useProcessRunTaskUpdate } from '../../../src/hooks/useProcessRunTaskUpdate';
+import { useProcessRunTaskCreate } from '../../../src/hooks/useProcessRunTaskCreate';
 import { ProcessRunTaskDto, ProcessTaskDefinitionDto } from '../../../app/api/dtos/dtos';
 import { TaskDeleteModal } from './TaskDeleteModal';
 
 export type TaskListItemProps = {
     selected?: boolean;
     taskDefinition: ProcessTaskDefinitionDto;
+    runId?: string;
     task?: ProcessRunTaskDto;
     taskIndex: number;
     editable: boolean;
 }
 
-export function TaskListItem({ selected, taskDefinition, task, taskIndex, editable }: TaskListItemProps) {
+export function TaskListItem({ selected, taskDefinition, runId, task, taskIndex, editable }: TaskListItemProps) {
     const [, setSelectedTaskId] = useSearchParam('task');
-    const taskUpdate = useProcessRunTaskUpdate();
+    const taskCreate = useProcessRunTaskCreate();
     const taskDefinitionUpdate = useProcessTaskDefinitionUpdate();
-
-    const checked = task?.state === 'completed';
 
     const handleTextChange = async (text: string) => {
         await taskDefinitionUpdate.mutateAsync({
@@ -36,50 +35,57 @@ export function TaskListItem({ selected, taskDefinition, task, taskIndex, editab
             text
         });
     }
-    const textMutatedOrDefault = (taskDefinitionUpdate.variables?.text ?? taskDefinition?.text) ?? '';
+    const textMutatedOrOriginal = taskDefinitionUpdate.variables?.text ?? taskDefinition?.text;
 
+    const isComplated = task?.state === 'completed';
     const handleCheckedChange = async (checked: boolean | 'indeterminate') => {
-        if (!task) return;
+        if (!runId) return;
 
-        await taskUpdate.mutateAsync({
-            processId: task.processId.toString(),
-            runId: task.runId.toString(),
-            taskId: task.id.toString(),
-            status: checked ? 'completed' : 'new',
-        });
+        await taskCreate.mutateAsync({
+            processId: taskDefinition.processId,
+            runId,
+            taskDefinitionId: taskDefinition.id,
+            state: checked ? 'completed' : 'new',
+        })
     };
 
-    // TODO: Preload on hover (to avoid skeletons)
+    // TODO: Preload item details on hover (to avoid skeletons)
+
     return (
         <div className="relative flex items-center gap-1">
             <ListItem
                 className={cx(
-                    'peer w-full gap-2 px-3 pr-12',
-                    checked && 'text-muted-foreground line-through',
-                    !checked && 'border-foreground/30'
+                    'peer w-full gap-2 px-3 pr-12 items-start',
+                    isComplated && 'text-muted-foreground line-through',
+                    !isComplated && 'border-foreground/30'
                 )}
                 selected={selected}
-                startDecorator={task && (
-                    <Checkbox checked={checked} name="checked" type="submit" onCheckedChange={handleCheckedChange} />
+                startDecorator={(
+                    <Row spacing={1}>
+                        <Typography level="body3" secondary className="[line-height:1.6em]">{taskIndex + 1}</Typography>
+                        {runId
+                            ? <Checkbox checked={isComplated} name="checked" type="submit" onCheckedChange={handleCheckedChange} />
+                            : undefined
+                        }
+                    </Row>
                 )}
                 nodeId={taskDefinition.id.toString()}
                 onSelected={setSelectedTaskId}
-                label={(
-                    <Row spacing={1} className="items-start">
-                        <Typography level="body3" secondary className="[line-height:1.6em]">{taskIndex + 1}</Typography>
-                        {editable ? (
-                            <TypographyEditable
-                                level="body1"
-                                className="w-full bg-transparent outline-none"
-                                onChange={handleTextChange}
-                                hideEditIcon
-                                multiple>
-                                {textMutatedOrDefault}
-                            </TypographyEditable>
-                        ) : (<Typography level="body1">{textMutatedOrDefault}</Typography>)}
-                    </Row>
-                )} />
-            {(!task && editable) && (
+                label={editable ? (
+                    <TypographyEditable
+                        level="body1"
+                        className={cx('w-full outline-none')}
+                        onChange={handleTextChange}
+                        placeholder="No description"
+                        hideEditIcon
+                        multiple>
+                        {textMutatedOrOriginal}
+                    </TypographyEditable>
+                ) : (
+                    <Typography level="body1" secondary={!textMutatedOrOriginal}>{textMutatedOrOriginal ?? 'No description'}</Typography>
+                )}
+            />
+            {(!runId && editable) && (
                 <TaskDeleteModal
                     taskDefinition={taskDefinition}
                     trigger={(

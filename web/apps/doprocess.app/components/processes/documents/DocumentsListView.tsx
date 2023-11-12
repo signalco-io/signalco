@@ -1,5 +1,5 @@
 import { Stack } from '@signalco/ui/dist/Stack';
-import { ListHeader } from '../../layouts/ListHeader';
+import { ListHeader } from '../../shared/ListHeader';
 import { DocumentsList } from './DocumentsList';
 
 export function DocumentsListView() {

@@ -14,7 +14,7 @@ export type TypographyDocumentNameProps = Omit<TypographyEditableProps, 'childre
 };
 
 export function TypographyDocumentName({ id, placeholderWidth, placeholderHeight, editable, ...rest }: TypographyDocumentNameProps) {
-    const { data: process, isLoading, error } = useDocument(id);
+    const { data: document, isLoading, error } = useDocument(id);
 
     const processUpdate = useDocumentUpdate();
     const handleDocumentRename = async (name: string) => {
@@ -25,19 +25,25 @@ export function TypographyDocumentName({ id, placeholderWidth, placeholderHeight
             name
         });
     }
-    const documentNameMutatedOrDefault = (processUpdate.variables?.name ?? process?.name) ?? '';
+    const documentNameMutatedOrDefault = (processUpdate.variables?.name ?? document?.name) ?? '';
+
+    if (document === null && !isLoading) {
+        return (
+            <Typography secondary {...rest}>Document not found</Typography>
+        );
+    }
 
     return (
         <Loadable
             isLoading={isLoading}
             loadingLabel="Loading document..."
-            placeholder="skeletonText"
+            placeholder="skeletonRect"
             error={error}
             width={placeholderWidth}
             height={placeholderHeight}>
             {editable ? (
-                <TypographyEditable onChange={handleDocumentRename} {...rest}>{documentNameMutatedOrDefault}</TypographyEditable>
-            ) : (<Typography {...rest}>{documentNameMutatedOrDefault}</Typography>)}
+                <TypographyEditable title={documentNameMutatedOrDefault} onChange={handleDocumentRename} {...rest}>{documentNameMutatedOrDefault}</TypographyEditable>
+            ) : (<Typography title={documentNameMutatedOrDefault} {...rest}>{documentNameMutatedOrDefault}</Typography>)}
         </Loadable>
     );
 }

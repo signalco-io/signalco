@@ -10,9 +10,11 @@ import { Stack } from '@signalco/ui/dist/Stack';
 import { Skeleton } from '@signalco/ui/dist/Skeleton';
 import { Row } from '@signalco/ui/dist/Row';
 import { Loadable } from '@signalco/ui/dist/Loadable';
+import { Link } from '@signalco/ui/dist/Link';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { EditorSkeleton } from '../editor/EditorSkeleton';
 import { TypographyDocumentName } from '../documents/TypographyDocumentName';
+import { EditorSkeleton } from '../documents/editor/EditorSkeleton';
+import { KnownPages } from '../../../src/knownPages';
 import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
 import { useProcessTaskDefinition } from '../../../src/hooks/useProcessTaskDefinition';
 import TaskDetailsTypePicker from './TaskDetailsTypePicker';
@@ -39,28 +41,31 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
             });
         }
     }
-    const headerMutatedOrDefault = (taskDefinitionUpdate.variables?.text ?? taskDefinition?.text) ?? '';
-    const hasHeader = headerMutatedOrDefault.length > 0;
-    const header = hasHeader ? headerMutatedOrDefault : 'No description';
+    const headerOrDefault = taskDefinition?.text ?? '';
+    const hasHeader = headerOrDefault.length > 0;
+    const header = hasHeader ? headerOrDefault : 'No description';
 
     const [saving, setSaving] = useState(false);
 
     if (taskDefinition === null && !taskDefinitionIsLoading) {
         return (
-            <div className="flex items-center justify-center text-xl text-muted-foreground">
-                Task not found.
+            <div className="p-4 text-center opacity-60">
+                <p className="text-2xl font-semibold">Task not found</p>
+                <p className="text-sm">The task you are trying to access does not exist.</p>
             </div>
         );
     }
 
     return (
-        <Stack spacing={2} className="overflow-x-hidden">
-            {editable && <TaskDetailsToolbar
-                processId={processId}
-                selectedTaskId={selectedTaskId}
-                saving={saving} />}
+        <Stack spacing={2} className="h-full overflow-x-hidden">
+            {editable && (
+                <TaskDetailsToolbar
+                    processId={processId}
+                    selectedTaskId={selectedTaskId}
+                    saving={saving} />
+            )}
             {selectedTaskId === undefined && (
-                <div className="flex items-center justify-center text-xl text-muted-foreground">
+                <div className="mt-4 flex items-center justify-center text-xl text-muted-foreground">
                     No task selected.
                 </div>
             )}
@@ -80,7 +85,7 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
                             <EditorSkeleton />
                         </>
                     )}>
-                    <Stack className="px-[62px]">
+                    <Stack className={cx('px-[62px]', !editable && 'pt-16')}>
                         {editable ? (
                             <TypographyEditable
                                 level="h2"
@@ -95,20 +100,29 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
                             <Row spacing={1}>
                                 {taskDefinition.type === 'blank' && <Empty className="opacity-60" width={16} />}
                                 {taskDefinition.type === 'blank' && <Typography secondary semiBold>Blank - No details</Typography>}
-                                {taskDefinition.type === 'document' && <FileText className="opacity-60" width={16} />}
+                                {taskDefinition.type === 'document' && <Link href={taskDefinition.typeData ? KnownPages.Document(taskDefinition.typeData) : '#'}><FileText className="opacity-60" width={16} /></Link>}
                                 {taskDefinition.type === 'document' && taskDefinition.typeData && (
-                                    <TypographyDocumentName secondary semiBold id={taskDefinition.typeData} editable={editable} />
+                                    <TypographyDocumentName
+                                        secondary
+                                        semiBold
+                                        id={taskDefinition.typeData}
+                                        editable={editable} />
                                 )}
                             </Row>
                         )}
                     </Stack>
                     {(taskDefinition?.type === 'document' && taskDefinition?.typeData) && (
-                        <DocumentEditor id={taskDefinition.typeData} editable={editable} onSavingChange={setSaving} />
+                        <DocumentEditor
+                            id={taskDefinition.typeData}
+                            editable={editable}
+                            onSavingChange={setSaving} />
                     )}
-                    {(!taskDefinition?.type || !taskDefinition.typeData) && (
+                    {(editable && (!taskDefinition?.type || !taskDefinition.typeData)) && (
                         <div className="px-[62px]">
                             {taskDefinition && (
-                                <TaskDetailsTypePicker processId={processId} taskDefinitionId={taskDefinition.id.toString()} />
+                                <TaskDetailsTypePicker
+                                    processId={processId}
+                                    taskDefinitionId={taskDefinition.id.toString()} />
                             )}
                         </div>
                     )}

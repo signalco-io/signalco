@@ -10,6 +10,8 @@ export function processRunKey(processId?: string, runId?: string) {
 
 async function fetchGetProcessRun(processId: string, runId: string) {
     const response = await fetch(`/api/processes/${processId}/runs/${runId}`);
+    if (response.status === 404)
+        return null;
     return await response.json() as ProcessRunDto | undefined;
 }
 

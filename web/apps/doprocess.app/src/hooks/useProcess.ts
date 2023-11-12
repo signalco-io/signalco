@@ -10,6 +10,8 @@ export function processKey(id?: string) {
 
 async function fetchGetProcess(id: string) {
     const response = await fetch(`/api/processes/${id}`);
+    if (response.status === 404)
+        return null;
     return await response.json() as ProcessDto | undefined;
 }
 
