@@ -14,7 +14,7 @@ import { ListSkeleton } from './ListSkeleton';
 import { ListItemCreate } from './ListItemCreate';
 
 type ListProps<T> = {
-    query: () => UseQueryResult<T[] | undefined, Error>;
+    query: () => UseQueryResult<T[] | null | undefined, Error>;
     editable?: boolean;
     itemCreateLabel?: string;
     itemRender?: (item: T) => ReactElement;
