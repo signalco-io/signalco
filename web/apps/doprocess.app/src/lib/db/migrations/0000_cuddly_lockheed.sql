@@ -1,7 +1,7 @@
 CREATE TABLE `document` (
 	`id` serial AUTO_INCREMENT NOT NULL,
 	`public_id` varchar(32) NOT NULL,
-	`name` varchar(255) NOT NULL,
+	`name` text NOT NULL,
 	`data` json,
 	`shared_with_users` json NOT NULL,
 	`created_by` varchar(255) NOT NULL,
@@ -59,7 +59,6 @@ CREATE TABLE `task_definition` (
 	`public_id` varchar(32) NOT NULL,
 	`process_id` int NOT NULL,
 	`text` text,
-	`description` text,
 	`order` varchar(255) NOT NULL,
 	`type` varchar(255),
 	`type_source` varchar(255),

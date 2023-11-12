@@ -47,7 +47,7 @@ export type TaskDefinition = typeof taskDefinition.$inferSelect;
 export const document = mysqlTable('document', {
     id: serial('id').primaryKey(),
     publicId: varchar('public_id', { length: 32 }).notNull().unique(),
-    name: varchar('name', { length: 255 }).notNull(),
+    name: text('name').notNull(),
     data: json('data'),
     sharedWithUsers: json('shared_with_users').notNull(),
     createdBy: varchar('created_by', { length: 255 }).notNull(),

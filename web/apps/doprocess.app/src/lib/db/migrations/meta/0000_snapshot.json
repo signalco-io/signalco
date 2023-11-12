@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "8ba3272f-1f4f-4fbf-8bbf-095d6245b4f7",
+  "id": "da33f1be-cab0-465b-88e8-6437c0cc3fe6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "document": {
@@ -23,7 +23,7 @@
         },
         "name": {
           "name": "name",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -378,13 +378,6 @@
         },
         "text": {
           "name": "text",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "description": {
-          "name": "description",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
