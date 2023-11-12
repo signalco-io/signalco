@@ -3,8 +3,8 @@
 import { TypographyEditable, TypographyEditableProps } from '@signalco/ui/dist/TypographyEditable';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Loadable } from '@signalco/ui/dist/Loadable';
-import { useDocumentUpdate } from '../../src/hooks/useDocumentUpdate';
-import { useDocument } from '../../src/hooks/useDocument';
+import { useDocumentUpdate } from '../../../src/hooks/useDocumentUpdate';
+import { useDocument } from '../../../src/hooks/useDocument';
 
 export type TypographyDocumentNameProps = Omit<TypographyEditableProps, 'children' | 'onChange'> & {
     id: string | undefined;
