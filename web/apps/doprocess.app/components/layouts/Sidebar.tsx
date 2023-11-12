@@ -3,7 +3,7 @@
 import { useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import {cx} from 'classix';
-import { ListChecks, Play, Right, Text } from '@signalco/ui-icons';
+import { FileText, ListChecks, Play, Right } from '@signalco/ui-icons';
 import { List } from '@signalco/ui/dist/List';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { ListItem } from '../shared/ListItem';
@@ -15,7 +15,7 @@ export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: 
     const links = useMemo(() => [
         { href: KnownPages.Processes, label: 'Processes', Icon: ListChecks },
         { href: KnownPages.Runs, label: 'Runs', Icon: Play },
-        { href: KnownPages.Documents, label: 'Documents', Icon: Text },
+        { href: KnownPages.Documents, label: 'Documents', Icon: FileText },
     ], []);
 
     // Colapse if not directly in a link but in child page
@@ -42,8 +42,9 @@ export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: 
                         key={href}
                         href={href}
                         label={open ? label : ''}
+                        title={label}
                         className="w-full"
-                        startDecorator={<Icon size={16} />}
+                        startDecorator={<Icon size={20} />}
                         selected={pathname.startsWith(href)}
                     />
                 ))}

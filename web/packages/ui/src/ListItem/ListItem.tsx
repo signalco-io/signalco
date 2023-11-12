@@ -26,6 +26,7 @@ export type ListItemPropsCommon = {
     startDecorator?: ReactElement;
     endDecorator?: ReactElement;
     className?: string;
+    title?: string;
 };
 
 export type ListItemProps = ListItemPropsCommon & ListItemPropsOptions;
@@ -39,7 +40,8 @@ export function ListItem({
     onSelected,
     disabled,
     href,
-    className
+    className,
+    title
 }: ListItemProps) {
     const handleClick = () => {
         if (onSelected) {
@@ -49,7 +51,7 @@ export function ListItem({
 
     if (!href && !nodeId && !onSelected) {
         return (
-            <Row spacing={2} className={cx('uitw-min-h-[3rem] uitw-px-2', className)}>
+            <Row spacing={2} className={cx('uitw-min-h-[3rem] uitw-px-2', className)} title={title}>
                 {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
                 <div className={cx('ui-listitem-label uitw-grow', disabled && 'uitw-opacity-60')}>{label}</div>
                 <div className="uitw-self-end">
@@ -65,6 +67,7 @@ export function ListItem({
             variant={selected ? 'soft' : 'plain'}
             onClick={handleClick}
             disabled={disabled}
+            title={title}
             className={cx('uitw-text-start uitw-h-auto', className)}>
             {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
             {Boolean(label) && <div className="ui-listitem-label uitw-grow">{label}</div>}

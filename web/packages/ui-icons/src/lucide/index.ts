@@ -55,6 +55,7 @@ export {
     TextCursorInput as UI,
     LocateFixed as MyLocation,
     FileText,
+    FileInput,
     Text,
     Outdent as TextLinked,
     Copy,

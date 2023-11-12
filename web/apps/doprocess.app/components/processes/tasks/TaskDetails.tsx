@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { cx } from 'classix';
-import { Empty, Text } from '@signalco/ui-icons';
+import { Empty, FileText } from '@signalco/ui-icons';
 import { TypographyEditable } from '@signalco/ui/dist/TypographyEditable';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
@@ -95,7 +95,7 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
                             <Row spacing={1}>
                                 {taskDefinition.type === 'blank' && <Empty className="opacity-60" width={16} />}
                                 {taskDefinition.type === 'blank' && <Typography secondary semiBold>Blank - No details</Typography>}
-                                {taskDefinition.type === 'document' && <Text className="opacity-60" width={16} />}
+                                {taskDefinition.type === 'document' && <FileText className="opacity-60" width={16} />}
                                 {taskDefinition.type === 'document' && taskDefinition.typeData && (
                                     <TypographyDocumentName secondary semiBold id={taskDefinition.typeData} editable={editable} />
                                 )}

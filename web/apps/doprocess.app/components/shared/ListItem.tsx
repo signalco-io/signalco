@@ -4,7 +4,7 @@ import { ListItem as UiListItem, type ListItemProps } from '@signalco/ui/dist/Li
 export function ListItem({ className, ...rest }: ListItemProps) {
     return (
         <UiListItem
-            className={cx('rounded-none', className)}
+            className={cx('rounded-none gap-2', className)}
             {...rest} />
     );
 }

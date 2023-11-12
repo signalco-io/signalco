@@ -1,6 +1,6 @@
 'use client';
 
-import { Empty, Text, TextLinked } from '@signalco/ui-icons';
+import { Empty, FileInput, FileText } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Card, CardContent } from '@signalco/ui/dist/Card';
 import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
@@ -37,7 +37,7 @@ export default function TaskDetailsTypePicker({ processId, taskDefinitionId }: {
                     <CardContent className="px-4 py-2">
                         <div className="flex items-center space-x-4">
                             <div className="h-6 w-6">
-                                <Text className="text-gray-500 dark:text-gray-400" />
+                                <FileText className="text-gray-500 dark:text-gray-400" />
                             </div>
                             <div>
                                 <Typography>New Document</Typography>
@@ -50,7 +50,7 @@ export default function TaskDetailsTypePicker({ processId, taskDefinitionId }: {
                     <CardContent className="px-4 py-2">
                         <div className="flex items-center space-x-4">
                             <div className="h-6 w-6">
-                                <TextLinked className="text-gray-500 dark:text-gray-400" />
+                                <FileInput className="text-gray-500 dark:text-gray-400" />
                             </div>
                             <div>
                                 <Typography>Link Existing Document</Typography>
