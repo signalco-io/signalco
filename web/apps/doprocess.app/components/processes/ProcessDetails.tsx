@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { cx } from 'classix';
 import { Delete, ListChecks, MoreHorizontal, Play } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
@@ -8,11 +8,8 @@ import { Skeleton } from '@signalco/ui/dist/Skeleton';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import { ListSkeleton } from '../shared/ListSkeleton';
 import { ListHeader } from '../shared/ListHeader';
 import { KnownPages } from '../../src/knownPages';
-import { useProcessTaskDefinitions } from '../../src/hooks/useProcessTaskDefinitions';
-import { useProcessRunTasks } from '../../src/hooks/useProcessRunTasks';
 import { useProcess } from '../../src/hooks/useProcess';
 import { TypographyProcessRunName } from './TypographyProcessRunName';
 import { TypographyProcessName } from './TypographyProcessName';
@@ -27,20 +24,11 @@ type ProcessDetailsProps = {
 };
 
 export function ProcessDetails({ id, runId, editable }: ProcessDetailsProps) {
-    const { data: process } = useProcess(id);
-    const { data: taskDefinitions, isLoading: isLoadingTaskDefinitions, error: errorTaskDefinitions } = useProcessTaskDefinitions(id);
-    const { data: tasks, isLoading: isLoadingTasks, error: errorTasks } = useProcessRunTasks(id, runId);
+    const { data: process, isLoading: isLoadingProcess, error: errorProcess } = useProcess(id);
 
     const [deleteOpen, setDeleteOpen] = useState(false);
 
     const isRun = Boolean(runId);
-
-    const taskListItems = useMemo(() =>
-        taskDefinitions?.map(td => ({
-            taskDefinition: td,
-            task: tasks?.find(t => t.taskDefinitionId === td.id)
-        })) ?? [],
-    [taskDefinitions, tasks]);
 
     if (process === null) {
         return (
@@ -55,9 +43,10 @@ export function ProcessDetails({ id, runId, editable }: ProcessDetailsProps) {
         <>
             <Stack spacing={2}>
                 <Loadable
-                    isLoading={isLoadingTaskDefinitions}
+                    isLoading={isLoadingProcess}
                     loadingLabel="Loading process details..."
-                    placeholder={<Skeleton className="h-7 w-[120px]" />}>
+                    placeholder={<Skeleton className="h-7 w-[120px]" />}
+                    error={errorProcess}>
                     <ListHeader
                         icon={isRun ? <Play /> : <ListChecks />}
                         header={
@@ -91,17 +80,10 @@ export function ProcessDetails({ id, runId, editable }: ProcessDetailsProps) {
                             )
                         ]} />
                 </Loadable>
-                <Loadable
-                    isLoading={isLoadingTaskDefinitions || isLoadingTasks}
-                    loadingLabel="Loading task definitions..."
-                    placeholder={<ListSkeleton itemClassName="h-9 w-full" />}
-                    error={errorTaskDefinitions || errorTasks}>
-                    <TaskList
-                        processId={id}
-                        runId={runId}
-                        tasks={taskListItems}
-                        editable={editable} />
-                </Loadable>
+                <TaskList
+                    processId={id}
+                    runId={runId}
+                    editable={editable} />
             </Stack>
             {process && (
                 <ProecssDeleteModal

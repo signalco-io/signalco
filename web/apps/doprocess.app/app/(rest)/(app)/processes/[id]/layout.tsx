@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Breadcrumbs } from '@signalco/ui/dist/Breadcrumbs';
 import { KnownPages } from '../../../../../src/knownPages';
-import { useProcess } from '../../../../../src/hooks/useProcess';
 import { TypographyProcessName } from '../../../../../components/processes/TypographyProcessName';
 import { ProcessDetails } from '../../../../../components/processes/ProcessDetails';
 import { SplitView } from '../../../../../components/layouts/SplitView';
@@ -22,10 +21,6 @@ export default function ProcessLayout({ children, params }: PropsWithChildren<{ 
         return match?.[1];
     }, [pathname]);
 
-    const { data: process } = useProcess(id);
-
-    const editable = Boolean(runId) ? false : process != null;
-
     const breadcrumbs = useMemo(() => [
         { label: 'Processes', href: KnownPages.Processes },
         Boolean(runId) && { label: <TypographyProcessName secondary id={id} />, href: KnownPages.Process(id) },
@@ -40,7 +35,7 @@ export default function ProcessLayout({ children, params }: PropsWithChildren<{ 
                 <ProcessDetails
                     id={id}
                     runId={runId}
-                    editable={editable} />
+                    editable={true} />
             </Stack>
             {children}
         </SplitView>

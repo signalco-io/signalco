@@ -63,7 +63,7 @@ export function PageNav({ fullWidth, cta }: { fullWidth?: boolean, cta?: boolean
                 <header>
                     <Row justifyContent="space-between">
                         <div className="flex h-full flex-col items-center">
-                            <Link href="/">
+                            <Link href={KnownPages.Landing}>
                                 <DoProcessLogo height={36} />
                             </Link>
                         </div>
