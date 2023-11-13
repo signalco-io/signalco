@@ -15,7 +15,7 @@ export function BreadcrumbsItem({ href, label }: BreadcrumbsItemProps) {
     } else {
         if (typeof label === 'string') {
             return (
-                <Typography>{label}</Typography>
+                <Typography noWrap>{label}</Typography>
             );
         }
         return label;

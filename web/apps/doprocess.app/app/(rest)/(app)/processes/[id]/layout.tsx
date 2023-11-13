@@ -23,7 +23,7 @@ export default function ProcessLayout({ children, params }: PropsWithChildren<{ 
 
     const breadcrumbs = useMemo(() => [
         { label: 'Processes', href: KnownPages.Processes },
-        Boolean(runId) && { label: <TypographyProcessName secondary id={id} />, href: KnownPages.Process(id) },
+        Boolean(runId) && { label: <TypographyProcessName secondary id={id} noWrap />, href: KnownPages.Process(id) },
     ].filter(Boolean), [id, runId]);
 
     return (
