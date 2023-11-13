@@ -1,3 +1,5 @@
+'use client';
+
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
