@@ -42,7 +42,8 @@ export const knownSecureHeadersExternalUrls: KnownSecureHeadersExternalUrlsObjec
     },
     vercel: {
         scriptSrc: ['https://vercel.live', 'https://vitals.vercel-insights.com', 'https://*.vercel-scripts.com'],
-        connectSrc: ['https://vercel.live', 'https://vitals.vercel-insights.com', 'https://*.vercel-scripts.com']
+        connectSrc: ['https://vercel.live', 'https://vitals.vercel-insights.com', 'https://*.vercel-scripts.com'],
+        frameSrc: ['https://vercel.live']
     },
     azureSignalR: {
         connectSrc: ['https://*.service.signalr.net', 'wss://*.service.signalr.net']
@@ -53,7 +54,7 @@ export const knownSecureHeadersExternalUrls: KnownSecureHeadersExternalUrlsObjec
     clerk: {
         imgSrc: ['https://img.clerk.com'],
         scriptSrc: ['https://*.clerk.accounts.dev'],
-        connectSrc: ['https://*.clerk.accounts.dev']
+        connectSrc: ['https://*.clerk.accounts.dev', 'https://img.clerk.com']
     }
 };
 
