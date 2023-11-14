@@ -90,8 +90,8 @@ importers:
         specifier: 1.1.1
         version: 1.1.1
       '@vvo/tzdb':
-        specifier: 6.111.0
-        version: 6.111.0
+        specifier: 6.112.0
+        version: 6.112.0
       autoprefixer:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.31)
@@ -7264,8 +7264,8 @@ packages:
       - '@swc/helpers'
     dev: true
 
-  /@vvo/tzdb@6.111.0:
-    resolution: {integrity: sha512-4lfA1oVzyUTnisRyYxgH36DlVUY5ZpZtd7ySD1epfPxg08aZUMfsXcwm2F7O9Pe98ka6N1LiAEEcdE0H0xGyvA==}
+  /@vvo/tzdb@6.112.0:
+    resolution: {integrity: sha512-N6FQ/bnx11+9PrBKVDmYZQrAZPUc3xriKIHPJj9hKRQ+ioHRosljPeuoC0MixX1U4a2MDimCfK/FVriO8U6DWg==}
     dev: false
 
   /@webassemblyjs/ast@1.11.6:
