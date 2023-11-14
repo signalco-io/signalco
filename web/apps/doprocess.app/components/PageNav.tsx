@@ -4,8 +4,9 @@ import { Row } from '@signalco/ui/dist/Row';
 import { Link } from '@signalco/ui/dist/Link';
 import { Container } from '@signalco/ui/dist/Container';
 import { Button } from '@signalco/ui/dist/Button';
-import { UserButton, SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
+import { SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
 import { KnownPages } from '../src/knownPages';
+import { UserButton } from './UserButton';
 import DoProcessLogo from './brand/DoProcessLogo';
 
 type NavLinkItem = {
