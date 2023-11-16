@@ -58,12 +58,11 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
 
     return (
         <Stack spacing={2} className="h-full overflow-x-hidden">
-            {editable && (
-                <TaskDetailsToolbar
-                    processId={processId}
-                    selectedTaskId={selectedTaskId}
-                    saving={saving} />
-            )}
+            <TaskDetailsToolbar
+                processId={processId}
+                selectedTaskId={selectedTaskId}
+                saving={saving}
+                editable={editable} />
             {selectedTaskId === undefined && (
                 <div className="mt-4 flex items-center justify-center text-xl text-muted-foreground">
                     No task selected.
@@ -85,7 +84,7 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
                             <EditorSkeleton />
                         </>
                     )}>
-                    <Stack className={cx('px-[62px]', !editable && 'pt-16')}>
+                    <Stack className={'px-[62px]'}>
                         {editable ? (
                             <TypographyEditable
                                 level="h2"

@@ -14,20 +14,21 @@ type TaskDetailsToolbarProps = {
     processId: string;
     selectedTaskId: string | undefined;
     saving: boolean;
+    editable: boolean;
 };
 
-export function TaskDetailsToolbar({ processId, selectedTaskId, saving }: TaskDetailsToolbarProps) {
+export function TaskDetailsToolbar({ processId, selectedTaskId, saving, editable }: TaskDetailsToolbarProps) {
     const { data: taskDefinition } = useProcessTaskDefinition(processId, selectedTaskId);
     const [deleteOpen, setDeleteOpen] = useState(false);
 
     return (
         <>
-            <Toolbar className="grow">
+            <Toolbar>
                 <SavingIndicator saving={saving} />
                 <DropdownMenu>
                     <DropdownMenuTrigger
                         asChild
-                        className={cx('transition-opacity opacity-0', taskDefinition && 'opacity-100')}>
+                        className={cx('transition-opacity opacity-0', (editable && taskDefinition) && 'opacity-100')}>
                         <IconButton
                             variant="plain"
                             title="Task options...">

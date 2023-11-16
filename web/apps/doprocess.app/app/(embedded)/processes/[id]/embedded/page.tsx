@@ -9,7 +9,7 @@ export default function ProcessEmbeddedPage({ params }: { params: { id: string }
             <div className="p-2">
                 <ProcessDetails id={params.id} editable={editable} />
             </div>
-            <div className="p-2">
+            <div className="h-full p-2">
                 <TaskDetails processId={params.id} editable={editable} />
             </div>
         </SplitView>
