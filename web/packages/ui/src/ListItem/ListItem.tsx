@@ -6,7 +6,7 @@ import { Button } from '../Button';
 export type ListItemPropsOptions = {
     href: string | undefined;
     nodeId?: never;
-    selected?: never;
+    selected?: boolean | undefined;
     onSelected?: never;
 } | {
     href?: never;
@@ -26,7 +26,10 @@ export type ListItemPropsCommon = {
     startDecorator?: ReactElement;
     endDecorator?: ReactElement;
     className?: string;
+    title?: string;
 };
+
+export type ListItemProps = ListItemPropsCommon & ListItemPropsOptions;
 
 export function ListItem({
     nodeId,
@@ -37,8 +40,9 @@ export function ListItem({
     onSelected,
     disabled,
     href,
-    className
-}: ListItemPropsCommon & ListItemPropsOptions) {
+    className,
+    title
+}: ListItemProps) {
     const handleClick = () => {
         if (onSelected) {
             onSelected(nodeId);
@@ -47,12 +51,12 @@ export function ListItem({
 
     if (!href && !nodeId && !onSelected) {
         return (
-            <Row spacing={2} className={cx('uitw-min-h-[3rem]', className)}>
-                {startDecorator ?? null}
+            <Row spacing={2} className={cx('uitw-min-h-[3rem] uitw-px-2', className)} title={title}>
+                {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
                 <div className={cx('uitw-grow', disabled && 'uitw-opacity-60')}>{label}</div>
-                <div className="uitw-self-end">
-                    {endDecorator ?? null}
-                </div>
+                <>
+                    {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator ?? null}
+                </>
             </Row>
         );
     }
@@ -63,10 +67,15 @@ export function ListItem({
             variant={selected ? 'soft' : 'plain'}
             onClick={handleClick}
             disabled={disabled}
-            startDecorator={startDecorator}
-            endDecorator={endDecorator}
-            className={cx('uitw-text-start', className)}>
-            {label}
+            title={title}
+            className={cx('uitw-text-start uitw-h-auto', className)}>
+            {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
+            {Boolean(label) && <div className="uitw-grow">{label}</div>}
+            {Boolean(endDecorator) && (
+                <>
+                    {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator ?? null}
+                </>
+            )}
         </Button>
     );
 }

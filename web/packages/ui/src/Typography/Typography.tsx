@@ -1,8 +1,8 @@
-import { type CSSProperties, ForwardedRef, type PropsWithChildren, createElement, forwardRef } from 'react';
+import { type CSSProperties, ForwardedRef, createElement, forwardRef, type HTMLAttributes } from 'react';
 import { cx } from 'classix';
 import type { ColorVariants } from '../theme';
 
-export type TypographyProps = PropsWithChildren<{
+export type TypographyProps = HTMLAttributes<HTMLParagraphElement> & {
     level?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'body3';
     component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div';
     semiBold?: boolean;
@@ -22,8 +22,7 @@ export type TypographyProps = PropsWithChildren<{
     opacity?: number;
     color?: ColorVariants;
     gutterBottom?: boolean;
-    className?: string;
-}>;
+};
 
 function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, secondary, tertiary, noWrap, ...rest }: TypographyProps) {
     if (extraThin) styles['fontWeight'] = 100;
@@ -40,7 +39,7 @@ function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity
     if (secondary) styles['color'] = 'hsl(var(--muted-foreground))';
     if (tertiary) styles['color'] = 'hsl(var(--muted-foreground))';
     if (opacity) styles['opacity'] = opacity;
-    if (gutterBottom) styles['marginBottom'] = '2em';
+    if (gutterBottom) styles['marginBottom'] = '0.5rem';
     if (noWrap) {
         styles['whiteSpace'] = 'nowrap';
         styles['overflow'] = 'hidden';
@@ -49,35 +48,41 @@ function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity
     return rest;
 }
 
-export const Typography = forwardRef<HTMLDivElement, TypographyProps>(function Typography(props: TypographyProps, ref?: ForwardedRef<HTMLDivElement>) {
-    const { level, component, children, className, color, ...rest } = props;
-
+export function populateTypographyStylesAndClasses({ color, level, className, ...rest }: Omit<TypographyProps, 'component' | 'children'>) {
     const styles: CSSProperties = {};
     const restAfterCustomStyles = populateTypographyStyles(styles, rest);
+
+    return {
+        style: styles,
+        className: cx(
+            'uitw-m-0',
+            level === 'body2' && 'uitw-text-sm uitw-text-secondary-foreground',
+            level === 'body3' && 'uitw-text-xs',
+            level === 'h1' && 'uitw-text-5xl',
+            level === 'h2' && 'uitw-text-4xl',
+            level === 'h3' && 'uitw-text-3xl',
+            level === 'h4' && 'uitw-text-2xl',
+            level === 'h5' && 'uitw-text-xl',
+            level === 'h6' && 'uitw-text-lg',
+            color === 'success' && 'uitw-text-green-500',
+            color === 'warning' && 'uitw-text-yellow-500',
+            color === 'danger' && 'uitw-text-red-500',
+            color === 'info' && 'uitw-text-blue-500',
+            color === 'neutral' && 'uitw-text-slate-500',
+            className
+        ),
+        ...restAfterCustomStyles
+    }
+}
+
+export const Typography = forwardRef<HTMLDivElement, TypographyProps>(function Typography(props: TypographyProps, ref?: ForwardedRef<HTMLDivElement>) {
+    const { level, component, children, ...rest } = props;
 
     return createElement(
         component ?? (level?.startsWith('h') ? level : 'p'),
         {
-            style: styles,
             ref: ref,
-            className: cx(
-                'uitw-m-0',
-                level === 'body2' && 'uitw-text-sm uitw-text-secondary-foreground',
-                level === 'body3' && 'uitw-text-xs',
-                level === 'h1' && 'uitw-text-5xl',
-                level === 'h2' && 'uitw-text-4xl',
-                level === 'h3' && 'uitw-text-3xl',
-                level === 'h4' && 'uitw-text-2xl',
-                level === 'h5' && 'uitw-text-xl',
-                level === 'h6' && 'uitw-text-lg',
-                color === 'success' && 'uitw-text-green-500',
-                color === 'warning' && 'uitw-text-yellow-500',
-                color === 'danger' && 'uitw-text-red-500',
-                color === 'info' && 'uitw-text-blue-500',
-                color === 'neutral' && 'uitw-text-slate-500',
-                className
-            ),
-            ...restAfterCustomStyles
+            ...populateTypographyStylesAndClasses({ level, ...rest })
         },
         children);
 });

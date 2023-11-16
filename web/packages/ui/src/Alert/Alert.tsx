@@ -17,7 +17,7 @@ export function Alert({ className, color, startDecorator, endDecorator, children
                 'uitw-relative uitw-w-full uitw-rounded-lg uitw-border p-4 [&>svg~*]:uitw-pl-7 [&>svg+div]:uitw-translate-y-[-3px] [&>svg]:uitw-absolute [&>svg]:uitw-left-4 [&>svg]:uitw-top-4 [&>svg]:uitw-text-foreground',
                 color === 'primary' && 'uitw-bg-primary-100 uitw-border-primary-300',
                 color === 'neutral' && 'uitw-bg-neutral-100 uitw-border-neutral-300',
-                color === 'danger' && 'uitw-bg-red-100 uitw-border-red-300',
+                color === 'danger' && 'uitw-bg-red-100 uitw-border-red-300 dark:uitw-bg-red-900 dark:uitw-border-red-700',
                 color === 'info' && 'uitw-bg-blue-100 uitw-border-blue-300',
                 color === 'success' && 'uitw-bg-green-100 uitw-border-green-300',
                 color === 'warning' && 'uitw-bg-yellow-100 uitw-border-yellow-300',

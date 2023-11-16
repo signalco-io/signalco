@@ -7,10 +7,9 @@ interface SignalcoLogotypeProps {
     width?: number;
     height?: number;
     theme?: SupportedColorScheme;
-    hideBadge?: boolean;
 }
 
-function SignalcoLogotype({ width, height, theme, hideBadge }: SignalcoLogotypeProps, ref: React.Ref<HTMLDivElement>) {
+function SignalcoLogotype({ width, height, theme }: SignalcoLogotypeProps, ref: React.Ref<HTMLDivElement>) {
     if (typeof width === 'undefined' &&
         typeof height === 'undefined') {
         throw new Error('Either height or width must be provided to SignalcoLogo.');
@@ -23,7 +22,7 @@ function SignalcoLogotype({ width, height, theme, hideBadge }: SignalcoLogotypeP
         <div
             aria-label="Signalco"
             role="img"
-            className={cx(styles.root, hideBadge && styles.hideBadge)}
+            className={cx(styles.root)}
             ref={ref}
             style={{ paddingTop: paddingTop }}>
             <svg version="1.0"

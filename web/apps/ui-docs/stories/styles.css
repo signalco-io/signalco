@@ -1,0 +1,4 @@
+@import '@signalco/ui/dist/index.css';
+
+@tailwind components;
+@tailwind utilities;

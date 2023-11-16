@@ -1,9 +1,13 @@
-import React, { Suspense } from 'react';
 import { cx } from 'classix';
+import { Navigate } from '@signalco/ui-icons';
 import { Row } from '@signalco/ui/dist/Row';
 import { Link } from '@signalco/ui/dist/Link';
 import { Container } from '@signalco/ui/dist/Container';
 import { Button } from '@signalco/ui/dist/Button';
+import { SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
+import { KnownPages } from '../src/knownPages';
+import { UserButton } from './UserButton';
+import DoProcessLogo from './brand/DoProcessLogo';
 
 type NavLinkItem = {
     href: string,
@@ -15,7 +19,7 @@ const navLinks: NavLinkItem[] = [
     // { href: KnownPages.Pricing, text: 'Pricing' }
 ];
 
-function NavMenu() {
+function NavMenu({ cta }: { cta?: boolean }) {
     return (
         <>
             {navLinks.map(nl => (
@@ -23,28 +27,49 @@ function NavMenu() {
                     <Button variant="plain" size="lg">{nl.text}</Button>
                 </Link>
             ))}
+            <SignedOut>
+                <SignInButton redirectUrl={KnownPages.Processes} mode="modal">
+                    <Button variant="plain">Sign in</Button>
+                </SignInButton>
+                <SignUpButton redirectUrl={KnownPages.Processes} mode="modal">
+                    <Button
+                        variant="solid"
+                        endDecorator={<Navigate />}>
+                            Start for free
+                    </Button>
+                </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+                {cta && (
+                    <Button
+                        variant="solid"
+                        href={KnownPages.Processes}
+                        endDecorator={<Navigate />}>
+                            Go to app
+                    </Button>
+                )}
+                <UserButton afterSignOutUrl="/" />
+            </SignedIn>
         </>
     );
 }
 
-export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
+export function PageNav({ fullWidth, cta }: { fullWidth?: boolean, cta?: boolean }) {
     return (
         <nav className={cx(
-            'backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-10 h-20',
+            'backdrop-blur-md fixed top-0 left-0 right-0 z-10 h-16 border-b flex items-center',
             fullWidth ? 'px-4' : 'px-0'
         )}>
             <Container maxWidth={fullWidth ? false : 'lg'}>
                 <header>
                     <Row justifyContent="space-between">
-                        <div>
-                            <Link href="/">
-                                DoProcess
+                        <div className="flex h-full flex-col items-center">
+                            <Link href={KnownPages.Landing}>
+                                <DoProcessLogo height={36} />
                             </Link>
                         </div>
                         <Row spacing={1}>
-                            <Suspense>
-                                <NavMenu />
-                            </Suspense>
+                            <NavMenu cta={cta} />
                         </Row>
                     </Row>
                 </header>

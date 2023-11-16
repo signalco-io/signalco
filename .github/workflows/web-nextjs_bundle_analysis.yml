@@ -67,6 +67,6 @@ jobs:
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
-      name: 'doprocess'
+      name: 'doprocess.app'
       path: 'web/apps/doprocess.app'
     secrets: inherit

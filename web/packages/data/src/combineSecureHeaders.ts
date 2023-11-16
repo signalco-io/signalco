@@ -14,17 +14,19 @@ export function combineSecureHeaders(
                 scriptSrc: ['\'self\'', ...externalUrls.flatMap(e => e.scriptSrc), '\'unsafe-inline\'', isDevelopment ? '\'unsafe-eval\'' : undefined],
                 objectSrc: '\'none\'',
                 styleSrc: ['\'self\'', ...externalUrls.flatMap(e => e.styleSrc), '\'unsafe-inline\''],
-                fontSrc: ['\'self\''],
+                fontSrc: ['\'self\'', '\'self\' data:'],
                 manifestSrc: '\'self\'',
                 mediaSrc: '\'self\'',
                 childSrc: '\'self\'',
                 frameSrc: ['\'self\'', , ...externalUrls.flatMap(e => e.frameSrc)],
-                workerSrc: '\'self\'',
-                imgSrc: ['\'self\'', 'data:', ...baseSubdomains, ...externalUrls.flatMap(e => e.imgSrc),],
+                workerSrc: ['\'self\'', '\'self\' blob:'],
+                imgSrc: ['\'self\'', 'data:', 'blob:', ...baseSubdomains, ...externalUrls.flatMap(e => e.imgSrc)],
                 formAction: '\'self\'',
-                connectSrc: ['\'self\'', ...baseSubdomains, ...externalUrls.flatMap(e => e.connectSrc),],
+                connectSrc: ['\'self\'', ...baseSubdomains, ...externalUrls.flatMap(e => e.connectSrc)],
                 baseURI: baseDomains,
-                'frame-ancestors': '\'none\''
+                'frame-ancestors': externalUrls.flatMap(e => e.frameAncestors).length 
+                    ? externalUrls.flatMap(e => e.frameAncestors) 
+                    : '\'none\''
             }
         },
         xssProtection: 'block-rendering',

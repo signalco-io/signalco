@@ -1,5 +1,6 @@
 import storybookSignalcoTheme from './signalco-theme';
-import '@signalco/ui/dist/index.css';
+import { withThemeByClassName } from '@storybook/addon-themes';
+import '../stories/styles.css';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -19,5 +20,12 @@ export const decorators = [
     <>
       {Story()}
     </>
-  )
+  ),
+  withThemeByClassName({
+    themes: {
+      light: 'light',
+      dark: 'dark'
+    },
+    defaultTheme: 'dark',
+  }),
 ];

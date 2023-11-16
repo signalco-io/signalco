@@ -15,16 +15,15 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsup src/*.ts --dts --format esm --clean --minify",
+        "build": "tsup src/*.ts --dts --format esm --clean",
         "dev": "tsup src/*.ts --dts --format esm --watch",
         "clean": "rimraf dist"
     },
     "devDependencies": {
         "@signalco/js": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/react": "18.2.33",
-        "next": "14.0.0",
-        "prop-types": "15.8.1",
+        "@types/react": "18.2.37",
+        "next": "14.0.3",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "rimraf": "5.0.5",
@@ -32,7 +31,7 @@
         "typescript": "5.2.2"
     },
     "peerDependencies": {
-        "next": "14.0.0",
+        "next": "14.0.3",
         "react": "18.2.0",
         "react-dom": "18.2.0"
     }
