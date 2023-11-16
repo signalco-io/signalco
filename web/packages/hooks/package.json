@@ -15,7 +15,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsup src/*.ts --dts --format esm --clean --minify",
+        "build": "tsup src/*.ts --dts --format esm --clean",
         "dev": "tsup src/*.ts --dts --format esm --watch",
         "clean": "rimraf dist"
     },
@@ -24,7 +24,6 @@
         "@signalco/tsconfig": "workspace:*",
         "@types/react": "18.2.37",
         "next": "14.0.2",
-        "prop-types": "15.8.1",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "rimraf": "5.0.5",

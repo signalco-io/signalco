@@ -5,5 +5,5 @@ export default {
   presets: [baseConfig],
   content: [
     'stories/**/*.stories.{tsx,ts}'
-  ],
+  ]
 }

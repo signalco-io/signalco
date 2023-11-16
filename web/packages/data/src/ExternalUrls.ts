@@ -4,4 +4,5 @@ export type ExternalUrls = {
     imgSrc?: string[];
     frameSrc?: string[];
     connectSrc?: string[];
+    frameAncestors?: string[];
 };

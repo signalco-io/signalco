@@ -1,6 +1,12 @@
 import '@signalco/ui/dist/index.css';
+import { Inter } from 'next/font/google';
 import './global.scss';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
+
+const inter = Inter({
+    subsets: ['latin'],
+    variable: '--font-sans',
+});
 
 export default function RootLayout({
     // Layouts must accept a children prop.
@@ -11,7 +17,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body>
+            <body className={`${inter.variable} font-sans`}>
                 {children}
             </body>
         </html>
@@ -21,11 +27,6 @@ export default function RootLayout({
 export const metadata = {
     title: 'BrandGrab',
     description: 'Discover branding',
-    themeColor: [
-        { media: '(prefers-color-scheme: light)', color: 'white' },
-        { media: '(prefers-color-scheme: dark)', color: 'black' },
-        { color: 'black' },
-    ],
     icons: {
         apple: '/apple-touch-icon.png',
         icon: [
@@ -34,3 +35,11 @@ export const metadata = {
         ]
     }
 } satisfies Metadata;
+
+export const viewport = {
+    themeColor: [
+        { media: '(prefers-color-scheme: light)', color: 'white' },
+        { media: '(prefers-color-scheme: dark)', color: 'black' },
+        { color: 'black' },
+    ]
+} satisfies Viewport;

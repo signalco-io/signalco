@@ -1,3 +1,7 @@
+export function firstOrDefault<T>(array: T[]): T | null {
+    return array?.at(0) ?? null;
+}
+
 export const distinctBy = <TArray>(array: Array<TArray>, selector: (val: TArray) => unknown) => {
     if (!array.length) return [];
     return array.reduce((a, b) => {

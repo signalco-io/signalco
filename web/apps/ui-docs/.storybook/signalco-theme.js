@@ -5,5 +5,5 @@ export default create({
     brandTitle: 'signalco UI',
     brandUrl: 'https://ui.signalco.io',
     brandImage: 'https://www.signalco.io/LogotypeDark.png',
-    brandTarget: '_self',
+    brandTarget: '_self'
 });

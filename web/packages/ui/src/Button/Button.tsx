@@ -48,17 +48,17 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
                     variant === 'link' && 'uitw-underline-offset-4 hover:uitw-underline uitw-text-primary',
                     (!size || size === 'md') && 'uitw-h-10 uitw-py-2 uitw-px-4',
                     size === 'sm' && 'uitw-h-9 uitw-px-3 uitw-rounded-md uitw-gap-0.5',
-                    size === 'lg' && 'uitw-h-11 uitw-px-8 uitw-rounded-md gap-2',
+                    size === 'lg' && 'uitw-h-11 uitw-px-6 uitw-rounded-md uitw-gap-2',
                     fullWidth && 'uitw-w-full',
                     className
                 )}
                 disabled={loading || disabled}
                 {...otherProps}
             >
-                {!loading && startDecorator}
+                {!loading && (typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator)}
                 {loading && <LoaderSpinner className="uitw-mr-2 uitw-h-4 uitw-w-4 uitw-animate-spin" />}
                 {children}
-                {endDecorator}
+                {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator}
             </ButtonComp>
         </Comp>
     )

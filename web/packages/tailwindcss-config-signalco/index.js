@@ -2,7 +2,7 @@ const { fontFamily } = require("tailwindcss/defaultTheme")
 
 /** @type {import('tailwindcss').Config} */
 export const baseConfig = {
-    darkMode: ["class"],
+    darkMode: ["class", '[class="dark"]'],
     content: [
         './src/**/*.{ts,tsx}'
     ],
@@ -57,8 +57,7 @@ export const baseConfig = {
                 sm: "calc(var(--radius) - 4px)",
             },
             fontFamily: {
-                sans: ["var(--font-sans)", ...fontFamily.sans],
-                raleway: ["var(--font-raleway)", ...fontFamily.sans],
+                sans: ["var(--font-sans)", ...fontFamily.sans]
             },
             keyframes: {
                 "accordion-down": {

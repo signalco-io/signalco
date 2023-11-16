@@ -72,7 +72,7 @@ export function EditableInput({
         return (
             <Row
                 role="button"
-                className={cx('group py-1 cursor-pointer', className)}
+                className={cx('uitw-group uitw-py-1 uitw-cursor-pointer', className)}
                 spacing={1}
                 onClick={() => setIsEditing(true)}
             >
