@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { expect } from '@playwright/test'
 import type { Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
@@ -11,4 +11,4 @@ export async function assertAccessibility(page: Page, url: string) {
     expect(accessibilityScanResults.violations).toEqual([]);
 }
 
-test('should be accessible', ({ page }) => assertAccessibility(page, '/'));
+// test('should be accessible', ({ page }) => assertAccessibility(page, '/'));

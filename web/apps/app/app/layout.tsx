@@ -1,7 +1,7 @@
 import './global.css';
 import { PropsWithChildren } from 'react';
 import { Inter } from 'next/font/google';
-import { type Metadata } from 'next';
+import { Viewport, type Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import { AppLayout } from '../components/layouts/AppLayout';
 import { LayoutClientWrapper } from './LayoutClientWrapper';
@@ -29,11 +29,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
 export const metadata = {
     title: 'Signalco',
     description: 'Automate your life',
-    themeColor: [
-        { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-        { media: '(prefers-color-scheme: dark)', color: '#000000' },
-        { color: '#000000' },
-    ],
     manifest: '/manifest.json',
     icons: {
         icon: [
@@ -42,3 +37,11 @@ export const metadata = {
         ]
     }
 } satisfies Metadata;
+
+export const viewport = {
+    themeColor: [
+        { media: '(prefers-color-scheme: light)', color: 'white' },
+        { media: '(prefers-color-scheme: dark)', color: 'black' },
+        { color: 'black' },
+    ]
+} satisfies Viewport;

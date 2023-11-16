@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import { PageLayout } from '../components/layouts/PageLayout';
 import './global.css';
@@ -29,11 +29,6 @@ export default function RootLayout({
 export const metadata = {
     title: 'Signalco | Blog',
     description: 'Automate your life',
-    themeColor: [
-        { media: '(prefers-color-scheme: light)', color: 'white' },
-        { media: '(prefers-color-scheme: dark)', color: 'black' },
-        { color: 'black' },
-    ],
     icons: {
         apple: '/apple-touch-icon.png',
         icon: [
@@ -42,3 +37,11 @@ export const metadata = {
         ]
     }
 } satisfies Metadata;
+
+export const viewport = {
+    themeColor: [
+        { media: '(prefers-color-scheme: light)', color: 'white' },
+        { media: '(prefers-color-scheme: dark)', color: 'black' },
+        { color: 'black' },
+    ]
+} satisfies Viewport;

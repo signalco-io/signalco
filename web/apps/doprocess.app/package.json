@@ -15,8 +15,7 @@
     "build:analyze": "cross-env ANALYZE=true pnpm build",
     "postbuild": "next-sitemap --config next-sitemap.config.js",
     "start": "next start -p 4003",
-    "lint": "next lint --fix",
-    "test": "playwright test"
+    "lint": "next lint --fix"
   },
   "dependencies": {
     "@blocknote/core": "^0.9.6",

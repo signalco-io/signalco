@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import '@signalco/ui/dist/index.css';
 import './global.scss';
 
@@ -23,11 +23,6 @@ export default function RootLayout({ children, }: {
 export const metadata = {
     title: 'slco',
     description: 'Short links',
-    themeColor: [
-        { media: '(prefers-color-scheme: light)', color: 'white' },
-        { media: '(prefers-color-scheme: dark)', color: 'black' },
-        { color: 'black' },
-    ],
     manifest: '/manifest.json',
     icons: {
         apple: '/apple-touch-icon.png',
@@ -37,3 +32,11 @@ export const metadata = {
         ]
     }
 } satisfies Metadata;
+
+export const viewport = {
+    themeColor: [
+        { media: '(prefers-color-scheme: light)', color: 'white' },
+        { media: '(prefers-color-scheme: dark)', color: 'black' },
+        { color: 'black' },
+    ]
+} satisfies Viewport;

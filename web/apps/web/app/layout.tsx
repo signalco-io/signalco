@@ -1,6 +1,6 @@
 import Script from 'next/script';
 import { Inter } from 'next/font/google';
-import { type Metadata } from 'next';
+import { Viewport, type Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import './global.css';
 
@@ -26,11 +26,6 @@ export default function RootLayout({ children, }: {
 export const metadata = {
     title: 'Signalco',
     description: 'Automate your life',
-    themeColor: [
-        { media: '(prefers-color-scheme: light)', color: 'white' },
-        { media: '(prefers-color-scheme: dark)', color: 'black' },
-        { color: 'black' },
-    ],
     manifest: '/manifest.webmanifest',
     icons: {
         apple: '/apple-touch-icon.png',
@@ -40,3 +35,11 @@ export const metadata = {
         ]
     }
 } satisfies Metadata;
+
+export const viewport = {
+    themeColor: [
+        { media: '(prefers-color-scheme: light)', color: 'white' },
+        { media: '(prefers-color-scheme: dark)', color: 'black' },
+        { color: 'black' },
+    ]
+} satisfies Viewport;
