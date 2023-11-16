@@ -9,8 +9,8 @@ dependencies:
     specifier: 1.1.4
     version: 1.1.4
   '@pulumi/aws':
-    specifier: 6.8.0
-    version: 6.8.0
+    specifier: 6.9.0
+    version: 6.9.0
   '@pulumi/azure-native':
     specifier: 2.17.0
     version: 2.17.0
@@ -362,8 +362,8 @@ packages:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
     dev: false
 
-  /@pulumi/aws@6.8.0:
-    resolution: {integrity: sha512-V9Z755RrAFDaAfnEf545EXd3ejqBafURKvUY5IeTbPkJhA48yZIjCNW5qA7hMFurGGiFl0c/Bx2iNfR9D6EW6g==}
+  /@pulumi/aws@6.9.0:
+    resolution: {integrity: sha512-c0ivz01YEuZesfroFSQJdjXivyltdvXBW8hcOhGCwAycjmHpDnXI0HSXk9aIkwxVrUBAW0MQYEa+QRHb5W2V1Q==}
     dependencies:
       '@pulumi/pulumi': 3.94.0
       builtin-modules: 3.0.0
@@ -769,7 +769,7 @@ packages:
     resolution: {integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==}
     dependencies:
       function-bind: 1.1.2
-      get-intrinsic: 1.2.1
+      get-intrinsic: 1.2.2
     dev: true
 
   /call-bind@1.0.5:
@@ -1370,6 +1370,7 @@ packages:
       has: 1.0.3
       has-proto: 1.0.1
       has-symbols: 1.0.3
+    dev: true
 
   /get-intrinsic@1.2.2:
     resolution: {integrity: sha512-0gSo4ml/0j98Y3lngkFEot/zhiCeWsbYIlZ+uZOVgzLyLaUw7wxUL+nCTP0XJvJg1AXulJRI3UJi8GsbDuxdGA==}
@@ -1474,7 +1475,7 @@ packages:
   /has-property-descriptors@1.0.0:
     resolution: {integrity: sha512-62DVLZGoiEBDHQyqG4w9xCuZ7eJEwNmJRWw2VY84Oedb7WFcA27fiEVe8oUQx9hAUJ4ekurquucTGwsyO1XGdQ==}
     dependencies:
-      get-intrinsic: 1.2.1
+      get-intrinsic: 1.2.2
 
   /has-proto@1.0.1:
     resolution: {integrity: sha512-7qE+iP+O+bgF9clE5+UoBFzE65mlBiVj3tKCrlNQ0Ogwm0BjpT/gK4SlLYDMybDh5I3TCTKnPPa0oMG7JDYrhg==}
