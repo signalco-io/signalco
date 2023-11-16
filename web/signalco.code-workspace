@@ -53,6 +53,10 @@
 			"path": "packages/js"
 		},
 		{
+			"name": "📦 @signalco/lexorder",
+			"path": "packages/lexorder"
+		},
+		{
 			"name": "📦 @signalco/tailwindcss-config-signalco",
 			"path": "packages/tailwindcss-config-signalco"
 		},

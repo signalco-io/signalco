@@ -1,10 +1,9 @@
-import { PropsWithChildren } from 'react';
-import { Stack } from '../Stack';
+import { Stack, StackProps } from '../Stack';
 
-export function List({ children }: PropsWithChildren) {
+export type ListProps = StackProps;
+
+export function List({ ...rest }: ListProps) {
     return (
-        <Stack>
-            {children}
-        </Stack>
+        <Stack {...rest} />
     );
 }

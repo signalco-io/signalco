@@ -38,6 +38,7 @@ const CardForwarded = forwardRef<HTMLDivElement, CardProps>(({ href, onClick, cl
                 ref={ref}
                 className={cx(
                     'uitw-bg-card uitw-rounded-lg uitw-p-2 uitw-border uitw-text-card-foreground uitw-shadow-sm',
+                    (href || onClick) && 'hover:uitw-bg-accent hover:uitw-text-accent-foreground disabled:uitw-opacity-50 disabled:uitw-pointer-events-none',
                     className
                 )}
                 {...restProps} />

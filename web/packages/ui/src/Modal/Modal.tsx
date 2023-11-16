@@ -7,6 +7,7 @@ export type ModalProps = HTMLAttributes<HTMLDivElement> & {
     trigger?: React.ReactNode;
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
+    modal?: boolean;
 };
 
 export function Modal({
@@ -14,11 +15,12 @@ export function Modal({
     className,
     trigger,
     open,
+    modal,
     onOpenChange,
     ...rest
 }: ModalProps) {
     return (
-        <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
+        <DialogPrimitive.Root open={open} onOpenChange={onOpenChange} modal={modal}>
             {trigger && (
                 <DialogPrimitive.Trigger asChild>
                     {trigger}

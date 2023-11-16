@@ -15,14 +15,13 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsup src/index.ts --dts --format esm --clean --minify",
+        "build": "tsup src/index.ts --dts --format esm --clean",
         "dev": "tsup src/index.ts --dts --format esm --watch",
         "clean": "rimraf dist"
     },
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
         "lucide-react": "0.292.0",
-        "prop-types": "15.8.1",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "rimraf": "5.0.5",
