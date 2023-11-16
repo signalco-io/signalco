@@ -18,7 +18,7 @@
     },
     "dependencies": {
         "@enterwell/react-hooks": "0.3.2",
-        "@next/env": "14.0.2",
+        "@next/env": "14.0.3",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
@@ -26,7 +26,7 @@
         "@signalco/ui-icons": "workspace:*",
         "cheerio": "1.0.0-rc.12",
         "classix": "2.1.35",
-        "next": "14.0.2",
+        "next": "14.0.3",
         "next-secure-headers": "2.2.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
@@ -36,7 +36,7 @@
     "devDependencies": {
         "@axe-core/playwright": "4.8.1",
         "@babel/core": "7.23.3",
-        "@next/bundle-analyzer": "14.0.2",
+        "@next/bundle-analyzer": "14.0.3",
         "@playwright/test": "1.39.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
