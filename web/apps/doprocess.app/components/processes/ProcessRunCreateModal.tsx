@@ -18,7 +18,7 @@ export function ProcessRunCreateModal({ process }: ProcessRunCreateModalProps) {
     return (
         <Modal trigger={(
             <Tooltip title="Run process">
-                <IconButton><Play /></IconButton>
+                <IconButton variant="solid"><Play /></IconButton>
             </Tooltip>
         )}>
             <Stack spacing={4}>

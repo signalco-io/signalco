@@ -39,7 +39,7 @@ function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity
     if (secondary) styles['color'] = 'hsl(var(--muted-foreground))';
     if (tertiary) styles['color'] = 'hsl(var(--muted-foreground))';
     if (opacity) styles['opacity'] = opacity;
-    if (gutterBottom) styles['marginBottom'] = '2em';
+    if (gutterBottom) styles['marginBottom'] = '0.5rem';
     if (noWrap) {
         styles['whiteSpace'] = 'nowrap';
         styles['overflow'] = 'hidden';

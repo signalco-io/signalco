@@ -65,7 +65,7 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
                     ? <Image src={imageSrc} alt={`${name} image`} width={180} height={180} />
                     : (
                         <Stack alignItems="center" justifyContent="center" spacing={2} style={{ width: 180, height: 180, textAlign: 'center' }}>
-                            <SignalcoLogo height={40} />
+                            <SignalcoLogo width={80} className="opacity-20" />
                             <Typography level="body2">Image unavailable</Typography>
                         </Stack>
                     )}
