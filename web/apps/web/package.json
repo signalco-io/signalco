@@ -18,7 +18,7 @@
     },
     "dependencies": {
         "@enterwell/react-hooks": "0.3.2",
-        "@hcaptcha/react-hcaptcha": "1.9.0",
+        "@hcaptcha/react-hcaptcha": "1.9.1",
         "@next/env": "14.0.2",
         "@reactflow/background": "11.3.6",
         "@reactflow/controls": "11.2.6",
@@ -36,7 +36,7 @@
         "encoding": "0.1.13",
         "next": "14.0.2",
         "next-secure-headers": "2.2.0",
-        "octokit": "3.1.1",
+        "octokit": "3.1.2",
         "react": "18.2.0",
         "react-cool-inview": "3.0.1",
         "react-dom": "18.2.0",

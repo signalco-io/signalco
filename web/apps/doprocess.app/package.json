@@ -23,7 +23,7 @@
     "@clerk/nextjs": "^4.26.2",
     "@clerk/themes": "^1.7.9",
     "@enterwell/react-hooks": "0.3.2",
-    "@hcaptcha/react-hcaptcha": "1.9.0",
+    "@hcaptcha/react-hcaptcha": "1.9.1",
     "@next/env": "14.0.2",
     "@planetscale/database": "^1.11.0",
     "@signalco/data": "workspace:*",
