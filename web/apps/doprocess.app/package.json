@@ -30,6 +30,7 @@
     "@signalco/data": "workspace:*",
     "@signalco/hooks": "workspace:*",
     "@signalco/js": "workspace:*",
+    "@signalco/lexorder": "workspace:*",
     "@signalco/tailwindcss-config-signalco": "workspace:*",
     "@signalco/ui": "workspace:*",
     "@signalco/ui-icons": "workspace:*",

@@ -561,6 +561,9 @@ importers:
       '@signalco/js':
         specifier: workspace:*
         version: link:../../packages/js
+      '@signalco/lexorder':
+        specifier: workspace:*
+        version: link:../../packages/lexorder
       '@signalco/tailwindcss-config-signalco':
         specifier: workspace:*
         version: link:../../packages/tailwindcss-config-signalco

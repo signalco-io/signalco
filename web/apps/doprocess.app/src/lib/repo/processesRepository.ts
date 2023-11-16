@@ -1,5 +1,6 @@
 import { and, eq, inArray, like, sql } from 'drizzle-orm';
-import { firstOrDefault , lexinsert } from '@signalco/js';
+import { lexinsert } from '@signalco/lexorder';
+import { firstOrDefault } from '@signalco/js';
 import { TaskState, process, processRun, task, taskDefinition } from '../db/schema';
 import { db } from '../db';
 import { publicIdNext } from './shared';
