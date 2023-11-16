@@ -10,7 +10,7 @@ export default {
     out: './src/lib/db/migrations',
     driver: 'mysql2',
     dbCredentials: {
-        connectionString: connectionString,
+        uri: connectionString,
     },
     breakpoints: true,
 } satisfies Config
