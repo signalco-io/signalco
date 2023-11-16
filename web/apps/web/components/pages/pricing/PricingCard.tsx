@@ -35,7 +35,7 @@ export default function PricingCard(props: PricingCardProps) {
                 justifyContent="space-between">
                 <Stack spacing={3}>
                     <Stack alignItems="center">
-                        <SignalcoLogotype width={180} hideBadge />
+                        <SignalcoLogotype width={180} />
                         <Typography level="h3">{option.label}</Typography>
                     </Stack>
                     <Row alignItems="end" spacing={1}>
