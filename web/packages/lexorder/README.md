@@ -1,12 +1,10 @@
 <h1 align="center">
-@
   <a href="https://www.signalco.io">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://www.signalco.io/LogotypeDark.png">
-      <img height="19.6" width="70" alt="signalco logotype" src="https://www.signalco.io/LogotypeLight.png">
+      <source media="(prefers-color-scheme: dark)" srcset="https://www.signalco.io/api/branding/logotype?prefix=%40&suffix=%2Flexorder&width=350&height=80&textHeight=38&theme=dark">
+      <img height="80" width="350" alt="@signalco/lexorder" src="https://www.signalco.io/api/branding/logotype?prefix=%40&suffix=%2Flexorder&width=350&height=80&textHeight=38&theme=light">
     </picture>
   </a>
-  /lexorder
 </h1>
 <h4 align="center">Automate your life.</h4>
 
