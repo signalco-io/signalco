@@ -1,16 +1,18 @@
-import { datetime, int, json, mysqlTable, serial, text, varchar } from 'drizzle-orm/mysql-core';
+import { datetime, index, int, json, mysqlTable, serial, text, uniqueIndex, varchar } from 'drizzle-orm/mysql-core';
 import { relations, sql } from 'drizzle-orm';
 
 export const process = mysqlTable('process', {
     id: serial('id').primaryKey(),
     publicId: varchar('public_id', { length: 32 }).notNull().unique(),
     name: varchar('name', { length: 255 }).notNull(),
-    sharedWithUsers: json('shared_with_users').notNull(),
+    sharedWithUsers: json('shared_with_users').$type<string[]>().notNull(),
     createdBy: varchar('created_by', { length: 255 }).notNull(),
     createdAt: datetime('created_at', { mode: 'date' }).notNull().default(sql`current_timestamp`),
     updatedBy: varchar('updated_by', { length: 255 }),
     updatedAt: datetime('updated_at', { mode: 'date' }),
-});
+}, (table) => ({
+    publicIdIdx: uniqueIndex('public_id_idx').on(table.publicId)
+}));
 
 export type Process = typeof process.$inferSelect;
 
@@ -24,7 +26,10 @@ export const processRun = mysqlTable('process_run', {
     createdAt: datetime('created_at', { mode: 'date' }).notNull().default(sql`current_timestamp`),
     updatedBy: varchar('updated_by', { length: 255 }),
     updatedAt: datetime('updated_at', { mode: 'date' }),
-});
+}, (table) => ({
+    processIdIdx: index('process_id_idx').on(table.processId),
+    publicIdIdx: index('public_id_idx').on(table.publicId),
+}));
 
 export type ProcessRun = typeof processRun.$inferSelect;
 
@@ -40,7 +45,10 @@ export const taskDefinition = mysqlTable('task_definition', {
     createdAt: datetime('created_at', { mode: 'date' }).notNull().default(sql`current_timestamp`),
     updatedBy: varchar('updated_by', { length: 255 }),
     updatedAt: datetime('updated_at', { mode: 'date' }),
-});
+}, (table) => ({
+    processIdIdx: index('process_id_idx').on(table.processId),
+    publicIdIdx: index('public_id_idx').on(table.publicId),
+}));
 
 export type TaskDefinition = typeof taskDefinition.$inferSelect;
 
@@ -49,12 +57,14 @@ export const document = mysqlTable('document', {
     publicId: varchar('public_id', { length: 32 }).notNull().unique(),
     name: text('name').notNull(),
     data: json('data'),
-    sharedWithUsers: json('shared_with_users').notNull(),
+    sharedWithUsers: json('shared_with_users').$type<string[]>().notNull(),
     createdBy: varchar('created_by', { length: 255 }).notNull(),
     createdAt: datetime('created_at', { mode: 'date' }).notNull().default(sql`current_timestamp`),
     updatedBy: varchar('updated_by', { length: 255 }),
     updatedAt: datetime('updated_at', { mode: 'date' }),
-});
+}, (table) => ({
+    publicIdIdx: uniqueIndex('public_id_idx').on(table.publicId),
+}));
 
 export type Document = typeof document.$inferSelect;
 
@@ -80,7 +90,12 @@ export const task = mysqlTable('task', {
     createdAt: datetime('created_at', { mode: 'date' }).notNull().default(sql`current_timestamp`),
     updatedBy: varchar('changed_by', { length: 255 }),
     updatedAt: datetime('changed_at', { mode: 'date' })
-});
+}, (table) => ({
+    processIdIdx: index('process_id_idx').on(table.processId),
+    runIdIdx: index('run_id_idx').on(table.runId),
+    taskDefinitionIdIdx: index('task_definition_id_idx').on(table.taskDefinitionId),
+    publicIdIdx: index('public_id_idx').on(table.publicId),
+}));
 
 export type TaskState = 'new' | 'completed';
 
