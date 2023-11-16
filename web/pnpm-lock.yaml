@@ -48,8 +48,8 @@ importers:
         specifier: 1.9.1
         version: 1.9.1(react-dom@18.2.0)(react@18.2.0)
       '@microsoft/signalr':
-        specifier: 7.0.14
-        version: 7.0.14
+        specifier: 8.0.0
+        version: 8.0.0
       '@monaco-editor/react':
         specifier: 4.6.0
         version: 4.6.0(monaco-editor@0.44.0)(react-dom@18.2.0)(react@18.2.0)
@@ -3932,8 +3932,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@microsoft/signalr@7.0.14:
-    resolution: {integrity: sha512-dnS7gSJF5LxByZwJaj82+F1K755ya7ttPT+JnSeCBef3sL8p8FBkHePXphK8NSuOquIb7vsphXWa28A+L2SPpw==}
+  /@microsoft/signalr@8.0.0:
+    resolution: {integrity: sha512-K/wS/VmzRWePCGqGh8MU8OWbS1Zvu7DG7LSJS62fBB8rJUXwwj4axQtqrAAwKGUZHQF6CuteuQR9xMsVpM2JNA==}
     dependencies:
       abort-controller: 3.0.0
       eventsource: 2.0.2
