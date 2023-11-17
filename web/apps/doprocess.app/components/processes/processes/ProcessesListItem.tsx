@@ -1,7 +1,7 @@
 import { ListChecks, Navigate } from '@signalco/ui-icons';
-import { ListItem } from '../shared/ListItem';
-import { KnownPages } from '../../src/knownPages';
-import { ProcessDto } from '../../app/api/dtos/dtos';
+import { ListItem } from '../../shared/ListItem';
+import { KnownPages } from '../../../src/knownPages';
+import { ProcessDto } from '../../../app/api/dtos/dtos';
 
 export type ProcessListItemProps = {
     process: ProcessDto;

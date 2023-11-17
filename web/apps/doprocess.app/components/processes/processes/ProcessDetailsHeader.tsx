@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import { cx } from 'classix';
 import { Delete, ListChecks, MoreHorizontal, Play } from '@signalco/ui-icons';
@@ -6,9 +7,9 @@ import { Skeleton } from '@signalco/ui/dist/Skeleton';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import { ListHeader } from '../shared/ListHeader';
-import { KnownPages } from '../../src/knownPages';
-import { useProcess } from '../../src/hooks/useProcess';
+import { ListHeader } from '../../shared/ListHeader';
+import { KnownPages } from '../../../src/knownPages';
+import { useProcess } from '../../../src/hooks/useProcess';
 import { TypographyProcessRunName } from './TypographyProcessRunName';
 import { TypographyProcessName } from './TypographyProcessName';
 import { ProcessRunCreateModal } from './ProcessRunCreateModal';
@@ -38,7 +39,7 @@ export function ProcessDetailsHeader({
                     ? (<TypographyProcessRunName id={processId} runId={runId} level="h5" editable={editable} noWrap />)
                     : (<TypographyProcessName id={processId} level="h5" editable={editable} noWrap />)}
                 actions={[
-                    (process && editable && !isRun) && <ProcessRunCreateModal process={process} />,
+                    (process && editable && !isRun) && <ProcessRunCreateModal processId={processId} />,
                     (editable) && (
                         <DropdownMenu>
                             <DropdownMenuTrigger

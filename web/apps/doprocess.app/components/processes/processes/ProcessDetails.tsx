@@ -1,5 +1,5 @@
 import { Stack } from '@signalco/ui/dist/Stack';
-import { TaskList } from './tasks/TaskList';
+import { TaskList } from '../tasks/TaskList';
 import { ProcessDetailsHeader } from './ProcessDetailsHeader';
 
 type ProcessDetailsProps = {

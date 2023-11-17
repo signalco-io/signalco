@@ -1,5 +1,5 @@
 import { Stack } from '@signalco/ui/dist/Stack';
-import { ListHeader } from '../shared/ListHeader';
+import { ListHeader } from '../../shared/ListHeader';
 import { ProcessesList } from './ProcessesList';
 
 export function ProcessesListView() {
