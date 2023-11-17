@@ -2,22 +2,31 @@
 
 import { useRouter } from 'next/navigation';
 import { ModalConfirm, ModalConfirmProps } from '@signalco/ui/dist/ModalConfirm';
+import { useProcessRunDelete } from '../../src/hooks/useProcessRunDelete';
 import { useProcessDelete } from '../../src/hooks/useProcessDelete';
-import { ProcessDto } from '../../app/api/dtos/dtos';
 
 type ProcessDeleteModalProps = Omit<ModalConfirmProps, 'header' | 'onConfirm' | 'children' | 'expectedConfirm' | 'promptLabel'> & {
-    process: ProcessDto;
+    processId: string;
+    runId?: string;
     redirect?: string;
 };
 
-export function ProecssDeleteModal({ process, redirect, ...rest }: ProcessDeleteModalProps) {
+export function ProcessOrRunDeleteModal({ processId, runId, redirect, ...rest }: ProcessDeleteModalProps) {
     const router = useRouter();
     const processDelete = useProcessDelete();
+    const processRunDelete = useProcessRunDelete();
 
     const handleConfirmDelete = async () => {
-        await processDelete.mutateAsync({
-            id: process.id,
-        });
+        if (runId) {
+            await processRunDelete.mutateAsync({
+                processId,
+                runId,
+            });
+        } else {
+            await processDelete.mutateAsync({
+                processId,
+            });
+        }
         if (redirect) {
             router.push(redirect);
         }
@@ -28,7 +37,7 @@ export function ProecssDeleteModal({ process, redirect, ...rest }: ProcessDelete
             header="Are you sure?"
             onConfirm={handleConfirmDelete}
             {...rest}>
-            By deleting this process, all existing runs will be deleted too.
+            {runId ? 'By deleting this process run, all process run progress will be lost.' :'By deleting this process, all existing runs will be deleted too.'}
         </ModalConfirm>
     );
 }
