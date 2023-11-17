@@ -167,7 +167,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.1
-        version: 4.8.1(playwright-core@1.39.0)
+        version: 4.8.1(playwright-core@1.40.0)
       '@ducanh2912/next-pwa':
         specifier: 9.7.2
         version: 9.7.2(next@14.0.3)(webpack@5.89.0)
@@ -333,7 +333,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.1
-        version: 4.8.1(playwright-core@1.39.0)
+        version: 4.8.1(playwright-core@1.40.0)
       '@babel/core':
         specifier: 7.23.3
         version: 7.23.3
@@ -445,7 +445,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.1
-        version: 4.8.1(playwright-core@1.39.0)
+        version: 4.8.1(playwright-core@1.40.0)
       '@babel/core':
         specifier: 7.23.3
         version: 7.23.3
@@ -621,7 +621,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.1
-        version: 4.8.1(playwright-core@1.39.0)
+        version: 4.8.1(playwright-core@1.40.0)
       '@babel/core':
         specifier: 7.23.3
         version: 7.23.3
@@ -736,7 +736,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.1
-        version: 4.8.1(playwright-core@1.39.0)
+        version: 4.8.1(playwright-core@1.40.0)
       '@babel/core':
         specifier: 7.23.3
         version: 7.23.3
@@ -978,7 +978,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.1
-        version: 4.8.1(playwright-core@1.39.0)
+        version: 4.8.1(playwright-core@1.40.0)
       '@babel/core':
         specifier: 7.23.3
         version: 7.23.3
@@ -1058,8 +1058,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       tsup:
-        specifier: 7.2.0
-        version: 7.2.0(postcss@8.4.31)(typescript@5.2.2)
+        specifier: 7.3.0
+        version: 7.3.0(postcss@8.4.31)(typescript@5.2.2)
       typescript:
         specifier: 5.2.2
         version: 5.2.2
@@ -1121,8 +1121,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       tsup:
-        specifier: 7.2.0
-        version: 7.2.0(postcss@8.4.31)(typescript@5.2.2)
+        specifier: 7.3.0
+        version: 7.3.0(postcss@8.4.31)(typescript@5.2.2)
       typescript:
         specifier: 5.2.2
         version: 5.2.2
@@ -1142,8 +1142,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       tsup:
-        specifier: 7.2.0
-        version: 7.2.0(postcss@8.4.31)(typescript@5.2.2)
+        specifier: 7.3.0
+        version: 7.3.0(postcss@8.4.31)(typescript@5.2.2)
       typescript:
         specifier: 5.2.2
         version: 5.2.2
@@ -1157,8 +1157,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       tsup:
-        specifier: 7.2.0
-        version: 7.2.0(postcss@8.4.31)(typescript@5.2.2)
+        specifier: 7.3.0
+        version: 7.3.0(postcss@8.4.31)(typescript@5.2.2)
       typescript:
         specifier: 5.2.2
         version: 5.2.2
@@ -1271,8 +1271,8 @@ importers:
         specifier: 1.69.5
         version: 1.69.5
       tsup:
-        specifier: 7.2.0
-        version: 7.2.0(postcss@8.4.31)(typescript@5.2.2)
+        specifier: 7.3.0
+        version: 7.3.0(postcss@8.4.31)(typescript@5.2.2)
       typescript:
         specifier: 5.2.2
         version: 5.2.2
@@ -1295,8 +1295,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       tsup:
-        specifier: 7.2.0
-        version: 7.2.0(postcss@8.4.31)(typescript@5.2.2)
+        specifier: 7.3.0
+        version: 7.3.0(postcss@8.4.31)(typescript@5.2.2)
       typescript:
         specifier: 5.2.2
         version: 5.2.2
@@ -1352,13 +1352,13 @@ packages:
       default-browser-id: 3.0.0
     dev: true
 
-  /@axe-core/playwright@4.8.1(playwright-core@1.39.0):
+  /@axe-core/playwright@4.8.1(playwright-core@1.40.0):
     resolution: {integrity: sha512-KC1X++UdRAwMLRvB+BIKFheyLHUnbJTL0t0Wbv6TJMozn2V2QyEtAcN6jyUiudtGiLUGhHCtj/eWorBnVZ4dAA==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
     dependencies:
       axe-core: 4.8.2
-      playwright-core: 1.39.0
+      playwright-core: 1.40.0
     dev: true
 
   /@babel/code-frame@7.22.13:
@@ -9532,13 +9532,13 @@ packages:
     resolution: {integrity: sha512-HpGFw18DgFWlncDfjTa2rcQ4W88O1mC8e8yZ2AvQY5KDaktSTwo+KRf6nHK6FRI5FyRyb/5T6+TSxfP7QyGsmQ==}
     dev: true
 
-  /bundle-require@4.0.2(esbuild@0.18.20):
+  /bundle-require@4.0.2(esbuild@0.19.5):
     resolution: {integrity: sha512-jwzPOChofl67PSTW2SGubV9HBQAhhR2i6nskiOThauo9dzwDUgOWQScFVaJkjEfYX+UXiD+LEx8EblQMc2wIag==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     peerDependencies:
       esbuild: '>=0.17'
     dependencies:
-      esbuild: 0.18.20
+      esbuild: 0.19.5
       load-tsconfig: 0.2.5
     dev: true
 
@@ -15594,12 +15594,6 @@ packages:
       find-up: 6.3.0
     dev: true
 
-  /playwright-core@1.39.0:
-    resolution: {integrity: sha512-+k4pdZgs1qiM+OUkSjx96YiKsXsmb59evFoqv8SKO067qBA+Z2s/dCzJij/ZhdQcs2zlTAgRKfeiiLm8PQ2qvw==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dev: true
-
   /playwright-core@1.40.0:
     resolution: {integrity: sha512-fvKewVJpGeca8t0ipM56jkVSU6Eo0RmFvQ/MaCQNDYm+sdvKkMBBWTE1FdeMqIdumRaXXjZChWHvIzCGM/tA/Q==}
     engines: {node: '>=16'}
@@ -17224,14 +17218,6 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /rollup@3.29.4:
-    resolution: {integrity: sha512-oWzmBZwvYrU0iJHtDmhsm662rC15FRXmcjCk1xD771dFDx5jJ02ufAQQTn0etB2emNk4J9EZg/yWKpsn9BWGRw==}
-    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.3
-    dev: true
-
   /rollup@4.4.1:
     resolution: {integrity: sha512-idZzrUpWSblPJX66i+GzrpjKE3vbYrlWirUHteoAbjKReZwa0cohAErOYA5efoMmNCdvG9yrJS+w9Kl6csaH4w==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
@@ -18448,14 +18434,14 @@ packages:
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  /tsup@7.2.0(postcss@8.4.31)(typescript@5.2.2):
-    resolution: {integrity: sha512-vDHlczXbgUvY3rWvqFEbSqmC1L7woozbzngMqTtL2PGBODTtWlRwGDDawhvWzr5c1QjKe4OAKqJGfE1xeXUvtQ==}
-    engines: {node: '>=16.14'}
+  /tsup@7.3.0(postcss@8.4.31)(typescript@5.2.2):
+    resolution: {integrity: sha512-Ja1eaSRrE+QarmATlNO5fse2aOACYMBX+IZRKy1T+gpyH+jXgRrl5l4nHIQJQ1DoDgEjHDTw8cpE085UdBZuWQ==}
+    engines: {node: '>=18'}
     hasBin: true
     peerDependencies:
       '@swc/core': ^1
       postcss: ^8.4.12
-      typescript: '>=4.1.0'
+      typescript: '>=4.5.0'
     peerDependenciesMeta:
       '@swc/core':
         optional: true
@@ -18464,18 +18450,18 @@ packages:
       typescript:
         optional: true
     dependencies:
-      bundle-require: 4.0.2(esbuild@0.18.20)
+      bundle-require: 4.0.2(esbuild@0.19.5)
       cac: 6.7.14
       chokidar: 3.5.3
       debug: 4.3.4
-      esbuild: 0.18.20
+      esbuild: 0.19.5
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
       postcss: 8.4.31
       postcss-load-config: 4.0.1(postcss@8.4.31)
       resolve-from: 5.0.0
-      rollup: 3.29.4
+      rollup: 4.4.1
       source-map: 0.8.0-beta.0
       sucrase: 3.34.0
       tree-kill: 1.2.2
