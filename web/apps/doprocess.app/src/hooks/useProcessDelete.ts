@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { processesKey } from './useProcesses';
 
 type ProcessDeleteArgs = {
-    id: string;
+    processId: string;
 }
 
 async function fetchDeleteProcessAsync(id: string) {
@@ -14,7 +14,7 @@ async function fetchDeleteProcessAsync(id: string) {
 export function useProcessDelete() {
     const client = useQueryClient();
     return useMutation({
-        mutationFn: ({ id }: ProcessDeleteArgs) => fetchDeleteProcessAsync(id),
+        mutationFn: ({ processId: id }: ProcessDeleteArgs) => fetchDeleteProcessAsync(id),
         onSuccess: () => {
             client.invalidateQueries({ queryKey: processesKey() });
         }

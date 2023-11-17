@@ -13,8 +13,8 @@ export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: 
     const pathname = usePathname();
 
     const links = useMemo(() => [
-        { href: KnownPages.Processes, label: 'Processes', Icon: ListChecks },
         { href: KnownPages.Runs, label: 'Runs', Icon: Play },
+        { href: KnownPages.Processes, label: 'Processes', Icon: ListChecks },
         { href: KnownPages.Documents, label: 'Documents', Icon: FileText },
     ], []);
 
