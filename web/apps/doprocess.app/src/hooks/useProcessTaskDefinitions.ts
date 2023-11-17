@@ -22,5 +22,5 @@ export function useProcessTaskDefinitions(processId?: string) {
             return await fetchGetProcess(processId);
         },
         enabled: processId != null,
-    })
+    });
 }

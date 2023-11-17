@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ProcessRunDto } from '../../app/api/dtos/dtos';
 import { processRunsKey } from './useProcessRuns';
 
-export function processRunKey(processId?: string, runId?: string) {
+export function processRunKey(processId: string | undefined, runId: string | undefined) {
     if (runId == null)
         return processRunsKey(processId);
     return [...processRunsKey(processId), runId];

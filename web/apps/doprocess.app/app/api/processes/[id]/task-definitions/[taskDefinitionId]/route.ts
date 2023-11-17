@@ -1,4 +1,4 @@
-import { changeTaskDefinitionText, changeTaskDefinitionType, deleteTaskDefinition, getProcess, getProcessIdByPublicId, getTaskDefinition, getTaskDefinitionIdByPublicId } from '../../../../../../src/lib/repo/processesRepository';
+import { changeTaskDefinitionOrder, changeTaskDefinitionText, changeTaskDefinitionType, deleteTaskDefinition, getProcess, getProcessIdByPublicId, getTaskDefinition, getTaskDefinitionIdByPublicId } from '../../../../../../src/lib/repo/processesRepository';
 import { documentCreate, documentGet } from '../../../../../../src/lib/repo/documentsRepository';
 import { ensureUserId } from '../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
@@ -67,6 +67,9 @@ export async function PUT(request: Request, { params }: { params: { id: string, 
             }
 
             await changeTaskDefinitionType(userId, processId, taskDefinitionId, data.type, typeData);
+        }
+        if ('order' in data && typeof data.order === 'string') {
+            await changeTaskDefinitionOrder(userId, processId, taskDefinitionId, data.order);
         }
     }
 

@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { handleArrayOptimisticUpdate, handleOptimisticUpdate } from '../helpers/queryHelpers';
 import { ProcessTaskDefinitionDto } from '../../app/api/dtos/dtos';
 import { processTaskDefinitionsKey } from './useProcessTaskDefinitions';
 import { processTaskDefinitionKey } from './useProcessTaskDefinition';
@@ -9,6 +10,7 @@ type TaskDefinitionUpdateArgs = {
     text?: string;
     type?: string;
     typeData?: string;
+    order?: string;
 };
 
 async function fetchPutProcessTaskDefinition(processId: string, taskDefinitionId: string, data: object) {
@@ -26,30 +28,10 @@ export function useProcessTaskDefinitionUpdate() {
             taskDefinitionId,
             ...rest
         }),
-        onMutate: async (newItem) => {
-            await client.cancelQueries({ queryKey: processTaskDefinitionsKey(newItem.processId) });
-
-            const previousItem = client.getQueryData(processTaskDefinitionKey(newItem.processId, newItem.taskDefinitionId));
-            if (previousItem) {
-                client.setQueryData(processTaskDefinitionKey(newItem.processId, newItem.taskDefinitionId), (old: ProcessTaskDefinitionDto) => {
-                    return { ...old, ...newItem };
-                });
-            }
-
-            const previousItems = client.getQueryData(processTaskDefinitionsKey(newItem.processId));
-            if (previousItems) {
-                client.setQueryData(processTaskDefinitionsKey(newItem.processId), (old: ProcessTaskDefinitionDto[]) => {
-                    return old.map((item: ProcessTaskDefinitionDto) => {
-                        if (item.id === newItem.taskDefinitionId) {
-                            return { ...item, ...newItem };
-                        }
-                        return item;
-                    });
-                });
-            }
-
-            return { previousItems, previousItem };
-        },
+        onMutate: async (newItem) => ({
+            previousItems: await handleArrayOptimisticUpdate<ProcessTaskDefinitionDto, TaskDefinitionUpdateArgs>(client, processTaskDefinitionsKey(newItem.processId), newItem, (curr) => curr.id === newItem.taskDefinitionId),
+            previousItem: await handleOptimisticUpdate(client, processTaskDefinitionKey(newItem.processId, newItem.taskDefinitionId), newItem)
+        }),
         onError: (_, { processId, taskDefinitionId }, context) => {
             if (context?.previousItems) {
                 client.setQueryData(processTaskDefinitionsKey(processId), context.previousItems);

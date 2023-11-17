@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ProcessRunTaskDto } from '../../app/api/dtos/dtos';
+import { handleArrayOptimisticUpdate } from '../helpers/queryHelpers';
 import { tasksKey } from './useProcessRunTasks';
 
 type TaskCreateArgs = {
@@ -16,27 +16,13 @@ async function fetchPostProcessRunTask(processId: string, runId: string, data: o
     });
 }
 
-export function useProcessRunTaskCreate() {
+export function useProcessRunTaskUpsert() {
     const client = useQueryClient();
     return useMutation({
         mutationFn: ({ processId, runId, ...rest }: TaskCreateArgs) => fetchPostProcessRunTask(processId, runId, { processId, runId, ...rest }),
-        onMutate: async (newItem) => {
-            await client.cancelQueries({ queryKey: tasksKey(newItem.processId, newItem.runId) });
-
-            const previousItems = client.getQueryData(tasksKey(newItem.processId, newItem.runId));
-            if (previousItems) {
-                client.setQueryData(tasksKey(newItem.processId, newItem.runId), (old: ProcessRunTaskDto[]) => {
-                    return old.map((item: ProcessRunTaskDto) => {
-                        if (item.taskDefinitionId === newItem.taskDefinitionId) {
-                            return { ...item, ...newItem };
-                        }
-                        return item;
-                    });
-                });
-            }
-
-            return { previousItems };
-        },
+        onMutate: async (newItem) => ({
+            previousItems: await handleArrayOptimisticUpdate(client, tasksKey(newItem.processId, newItem.runId), newItem, (curr: TaskCreateArgs) => curr.taskDefinitionId === newItem.taskDefinitionId)
+        }),
         onError: (_, { processId, runId }, context) => {
             if (context?.previousItems) {
                 client.setQueryData(tasksKey(processId, runId), context.previousItems);
