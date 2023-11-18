@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { ModalConfirm, ModalConfirmProps } from '@signalco/ui/dist/ModalConfirm';
-import { useProcessRunDelete } from '../../src/hooks/useProcessRunDelete';
-import { useProcessDelete } from '../../src/hooks/useProcessDelete';
+import { useProcessRunDelete } from '../../../src/hooks/useProcessRunDelete';
+import { useProcessDelete } from '../../../src/hooks/useProcessDelete';
 
 type ProcessDeleteModalProps = Omit<ModalConfirmProps, 'header' | 'onConfirm' | 'children' | 'expectedConfirm' | 'promptLabel'> & {
     processId: string;

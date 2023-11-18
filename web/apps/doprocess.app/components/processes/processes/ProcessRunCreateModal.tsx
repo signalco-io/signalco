@@ -7,14 +7,13 @@ import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Modal } from '@signalco/ui/dist/Modal';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import { ProcessDto } from '../../app/api/dtos/dtos';
 import { ProcessRunCreateForm } from './ProcessRunCreateForm';
 
 type ProcessRunCreateModalProps = {
-    process: ProcessDto;
+    processId: string;
 };
 
-export function ProcessRunCreateModal({ process }: ProcessRunCreateModalProps) {
+export function ProcessRunCreateModal({ processId }: ProcessRunCreateModalProps) {
     return (
         <Modal trigger={(
             <Tooltip title="Run process">
@@ -26,7 +25,7 @@ export function ProcessRunCreateModal({ process }: ProcessRunCreateModalProps) {
                     <Play />
                     <Typography level="h5">Run process</Typography>
                 </Row>
-                <ProcessRunCreateForm process={process} />
+                <ProcessRunCreateForm processId={processId} redirect />
             </Stack>
         </Modal>
     );

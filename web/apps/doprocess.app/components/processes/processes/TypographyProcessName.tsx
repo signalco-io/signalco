@@ -3,8 +3,8 @@
 import { TypographyEditable, TypographyEditableProps } from '@signalco/ui/dist/TypographyEditable';
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Loadable } from '@signalco/ui/dist/Loadable';
-import { useProcessUpdate } from '../../src/hooks/useProcessUpdate';
-import { useProcess } from '../../src/hooks/useProcess';
+import { useProcessUpdate } from '../../../src/hooks/useProcessUpdate';
+import { useProcess } from '../../../src/hooks/useProcess';
 
 export type TypographyProcessNameProps = Omit<TypographyEditableProps, 'children' | 'onChange'> & {
     id: string | undefined;

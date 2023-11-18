@@ -1,21 +1,26 @@
 'use client';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Play } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Row } from '@signalco/ui/dist/Row';
 import { Input } from '@signalco/ui/dist/Input';
 import { Button } from '@signalco/ui/dist/Button';
-import { KnownPages } from '../../src/knownPages';
-import { useProcessRunCreate } from '../../src/hooks/useProcessRunCreate';
-import { ProcessDto } from '../../app/api/dtos/dtos';
+import { KnownPages } from '../../../src/knownPages';
+import { useProcessRunCreate } from '../../../src/hooks/useProcessRunCreate';
+import { useProcess } from '../../../src/hooks/useProcess';
 
-export function ProcessRunCreateForm({ process }: { process: ProcessDto; }) {
-    const { id: processId, name: processName } = process;
+export function ProcessRunCreateForm({ processId, redirect }: { processId: string, redirect?: boolean }) {
+    const { data: process } = useProcess(processId);
 
     const router = useRouter();
     const processRunCreate = useProcessRunCreate();
-    const [name, setName] = useState(`${processName} - ${new Date().toLocaleString()} run`);
+    const [name, setName] = useState(`${process?.name} - ${new Date().toLocaleString()} run`);
+
+    useEffect(() => {
+        setName(`${process?.name} - ${new Date().toLocaleString()} run`);
+    }, [process?.name]);
 
     const handleRunProcess = async () => {
         if (!name.length) {
@@ -26,7 +31,7 @@ export function ProcessRunCreateForm({ process }: { process: ProcessDto; }) {
             processId: processId.toString(),
             name
         });
-        if (result?.id) {
+        if (redirect && result?.id) {
             router.push(KnownPages.ProcessRun(processId, result.id));
         }
     };

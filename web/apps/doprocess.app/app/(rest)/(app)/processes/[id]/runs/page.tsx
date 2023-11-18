@@ -1,4 +1,4 @@
-import { RunsListView } from '../../../../../../components/processes/RunsListView';
+import { RunsListView } from '../../../../../../components/processes/processes/RunsListView';
 
 export default function ProcessRunsPage({ params }: { params: { id: string } }) {
     const processId = params.id;
