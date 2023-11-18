@@ -1,5 +1,5 @@
 import { TaskDetails } from '../../../../../../../components/processes/tasks/TaskDetails';
-import { ProcessDetails } from '../../../../../../../components/processes/ProcessDetails';
+import { ProcessDetails } from '../../../../../../../components/processes/processes/ProcessDetails';
 import { SplitView } from '../../../../../../../components/layouts/SplitView';
 
 export default function ProcessEmbeddedPage({ params }: { params: { id: string, runId: string } }) {

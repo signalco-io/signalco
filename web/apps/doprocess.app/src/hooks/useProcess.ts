@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ProcessDto } from '../../app/api/dtos/dtos';
 import { processesKey } from './useProcesses';
 
-export function processKey(id?: string) {
+export function processKey(id: string | undefined) {
     if (id == null)
         return [...processesKey()];
     return [...processesKey(), id];

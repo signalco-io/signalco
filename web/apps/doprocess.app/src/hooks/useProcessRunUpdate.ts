@@ -19,10 +19,9 @@ export function useProcessRunUpdate() {
     const client = useQueryClient();
     return useMutation({
         mutationFn: ({ processId, runId, name }: ProcessRunUpdateArgs) => fetchPutProcessRun(processId, runId, ({ processId, runId, name })),
-
         onSettled: (_, __, { processId, runId }) => {
             client.invalidateQueries({ queryKey: processRunKey(processId, runId) });
-            client.invalidateQueries({ queryKey: processRunsKey() });
+            client.invalidateQueries({ queryKey: processRunsKey(processId) });
         }
     });
 }

@@ -7,8 +7,8 @@ import { Tooltip } from '@signalco/ui/dist/Tooltip';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Input } from '@signalco/ui/dist/Input';
 import { Button } from '@signalco/ui/dist/Button';
-import { KnownPages } from '../../src/knownPages';
-import { useProcessCreate } from '../../src/hooks/useProcessCreate';
+import { KnownPages } from '../../../src/knownPages';
+import { useProcessCreate } from '../../../src/hooks/useProcessCreate';
 
 export function ProcessCreateForm({ redirect }: { redirect?: boolean }) {
     const router = useRouter();

@@ -118,6 +118,14 @@ export async function runProcess(userId: string, processId: number, name: string
     })).insertId;
 }
 
+export async function renameProcessRun(userId: string, processId: number, runId: number, name: string) {
+    if (!await isProcessSharedWithUser(userId, processId))
+        throw new Error('Not found');
+    // TODO: Check permissions
+
+    await db.update(processRun).set({ name, updatedBy: userId, updatedAt: new Date() }).where(and(eq(processRun.processId, processId), eq(processRun.id, runId)));
+}
+
 export async function deleteProcessRun(userId: string, processId: number, runId: number) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
@@ -179,6 +187,13 @@ export async function changeTaskDefinitionType(userId: string, processId: number
         throw new Error('Not found');
     // TODO: Check permissions
     await db.update(taskDefinition).set({ type, typeData, updatedBy: userId, updatedAt: new Date() }).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, id)));
+}
+
+export async function changeTaskDefinitionOrder(userId: string, processId: number, id: number, order: string) {
+    if (!await isProcessSharedWithUser(userId, processId))
+        throw new Error('Not found');
+    // TODO: Check permissions
+    await db.update(taskDefinition).set({ order, updatedBy: userId, updatedAt: new Date() }).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, id)));
 }
 
 export async function deleteTaskDefinition(userId: string, processId: number, id: number) {

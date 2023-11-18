@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { Breadcrumbs } from '@signalco/ui/dist/Breadcrumbs';
 import { KnownPages } from '../../../../../src/knownPages';
-import { TypographyProcessName } from '../../../../../components/processes/TypographyProcessName';
-import { ProcessDetails } from '../../../../../components/processes/ProcessDetails';
+import { TypographyProcessName } from '../../../../../components/processes/processes/TypographyProcessName';
+import { ProcessDetails } from '../../../../../components/processes/processes/ProcessDetails';
 import { SplitView } from '../../../../../components/layouts/SplitView';
 
 export default function ProcessLayout({ children, params }: PropsWithChildren<{ params: { id: string } }>) {

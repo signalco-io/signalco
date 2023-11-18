@@ -1,4 +1,4 @@
-import { ProcessesListView } from '../../../../components/processes/ProcessesListView';
+import { ProcessesListView } from '../../../../components/processes/processes/ProcessesListView';
 
 export default function ProcessesPage() {
     return (

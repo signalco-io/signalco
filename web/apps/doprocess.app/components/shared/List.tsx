@@ -19,9 +19,10 @@ type ListProps<T> = {
     itemCreateLabel?: string;
     itemRender?: (item: T) => ReactElement;
     createForm?: ReactNode;
+    emptyPlaceholder?: ReactNode;
 };
 
-export function List<T>({ query, itemRender, editable, itemCreateLabel, createForm }: ListProps<T>) {
+export function List<T>({ query, itemRender, editable, itemCreateLabel, createForm, emptyPlaceholder }: ListProps<T>) {
     const { data, isLoading, error } = query();
     const [showCreateModal, setShowCreateModal] = useState(false);
 
@@ -57,10 +58,16 @@ export function List<T>({ query, itemRender, editable, itemCreateLabel, createFo
                 ) : (
                     <>
                         {!data?.length && (
-                            <ListItem
-                                disabled
-                                className={'text-muted-foreground'}
-                                label="No items" />
+                            <>
+                                {emptyPlaceholder ? (
+                                    emptyPlaceholder
+                                ) : (
+                                    <ListItem
+                                        disabled
+                                        className={'text-muted-foreground'}
+                                        label="No items" />
+                                )}
+                            </>
                         )}
                     </>
                 )}

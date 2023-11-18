@@ -1,4 +1,4 @@
-import { type ReactElement } from 'react';
+import { Ref, type ReactElement } from 'react';
 import { cx } from 'classix';
 import { Row } from '../Row';
 import { Button } from '../Button';
@@ -8,16 +8,22 @@ export type ListItemPropsOptions = {
     nodeId?: never;
     selected?: boolean | undefined;
     onSelected?: never;
+    divRef?: never;
+    buttonRef?: Ref<HTMLButtonElement>;
 } | {
     href?: never;
     nodeId: string;
     selected?: boolean;
     onSelected: (nodeId: string) => void;
+    divRef?: never;
+    buttonRef?: Ref<HTMLButtonElement>;
 } | {
     href?: never;
     nodeId?: never;
     selected?: never;
     onSelected?: never;
+    divRef?: Ref<HTMLDivElement>;
+    buttonRef?: never;
 };
 
 export type ListItemPropsCommon = {
@@ -27,11 +33,14 @@ export type ListItemPropsCommon = {
     endDecorator?: ReactElement;
     className?: string;
     title?: string;
+    style?: React.CSSProperties;
 };
 
 export type ListItemProps = ListItemPropsCommon & ListItemPropsOptions;
 
 export function ListItem({
+    divRef,
+    buttonRef,
     nodeId,
     label,
     startDecorator,
@@ -41,7 +50,8 @@ export function ListItem({
     disabled,
     href,
     className,
-    title
+    title,
+    style
 }: ListItemProps) {
     const handleClick = () => {
         if (onSelected) {
@@ -51,7 +61,12 @@ export function ListItem({
 
     if (!href && !nodeId && !onSelected) {
         return (
-            <Row spacing={2} className={cx('uitw-min-h-[3rem] uitw-px-2', className)} title={title}>
+            <Row
+                ref={divRef}
+                spacing={2}
+                className={cx('uitw-min-h-[3rem] uitw-px-2', className)}
+                title={title}
+                style={style}>
                 {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
                 <div className={cx('uitw-grow', disabled && 'uitw-opacity-60')}>{label}</div>
                 <>
@@ -63,11 +78,13 @@ export function ListItem({
 
     return (
         <Button
+            ref={buttonRef}
             href={href}
             variant={selected ? 'soft' : 'plain'}
             onClick={handleClick}
             disabled={disabled}
             title={title}
+            style={style}
             className={cx('uitw-text-start uitw-h-auto', className)}>
             {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
             {Boolean(label) && <div className="uitw-grow">{label}</div>}

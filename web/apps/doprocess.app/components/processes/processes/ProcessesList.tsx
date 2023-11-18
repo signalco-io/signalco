@@ -1,7 +1,7 @@
 'use client';
 
-import { List } from '../shared/List';
-import { useProcesses } from '../../src/hooks/useProcesses';
+import { List } from '../../shared/List';
+import { useProcesses } from '../../../src/hooks/useProcesses';
 import { ProcessesListItem } from './ProcessesListItem';
 import { ProcessCreateForm } from './ProcessCreateForm';
 
@@ -11,7 +11,7 @@ export function ProcessesList() {
             query={useProcesses}
             itemRender={(item) => (<ProcessesListItem process={item} />)}
             editable
-            itemCreateLabel="Create new process"
+            itemCreateLabel="New process"
             createForm={<ProcessCreateForm redirect />} />
     );
 }

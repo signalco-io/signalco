@@ -1,4 +1,4 @@
-import type { HTMLAttributes, CSSProperties } from 'react';
+import { type HTMLAttributes, type CSSProperties, forwardRef } from 'react';
 import { cx } from 'classix';
 
 export type RowProps = HTMLAttributes<HTMLDivElement> & {
@@ -9,9 +9,10 @@ export type RowProps = HTMLAttributes<HTMLDivElement> & {
     style?: CSSProperties | undefined;
 };
 
-export function Row({ spacing, alignItems, justifyContent, justifyItems, style, className, ...props }: RowProps) {
+const Row = forwardRef<HTMLDivElement, RowProps>(({ spacing, alignItems, justifyContent, justifyItems, style, className, ...props }, ref) => {
     return (
         <div
+            ref={ref}
             className={cx(
                 'uitw-flex uitw-gap-[--s-gap]',
                 justifyContent === 'start' && 'uitw-justify-start',
@@ -32,4 +33,6 @@ export function Row({ spacing, alignItems, justifyContent, justifyItems, style, 
             {...props}
         />
     )
-}
+});
+Row.displayName = 'Row';
+export { Row };

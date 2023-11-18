@@ -3,7 +3,7 @@
 import { Typography } from '@signalco/ui/dist/Typography';
 import { Stack } from '@signalco/ui/dist/Stack';
 import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { ListHeader } from '../shared/ListHeader';
+import { ListHeader } from '../../shared/ListHeader';
 import { TypographyProcessName } from './TypographyProcessName';
 import { RunsList } from './RunsList';
 

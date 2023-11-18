@@ -32,6 +32,7 @@ export {
     LogOut,
     Shield,
     History,
+    GripVertical as Drag,
     Bug,
     Zap as Lightning,
     Share2 as Share,

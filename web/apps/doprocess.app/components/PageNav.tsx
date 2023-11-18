@@ -28,10 +28,14 @@ function NavMenu({ cta }: { cta?: boolean }) {
                 </Link>
             ))}
             <SignedOut>
-                <SignInButton redirectUrl={KnownPages.Processes} mode="modal">
+                <SignInButton
+                    redirectUrl={KnownPages.Runs}
+                    mode="modal">
                     <Button variant="plain">Sign in</Button>
                 </SignInButton>
-                <SignUpButton redirectUrl={KnownPages.Processes} mode="modal">
+                <SignUpButton
+                    redirectUrl={KnownPages.Processes}
+                    mode="modal">
                     <Button
                         variant="solid"
                         endDecorator={<Navigate />}>
@@ -43,7 +47,7 @@ function NavMenu({ cta }: { cta?: boolean }) {
                 {cta && (
                     <Button
                         variant="solid"
-                        href={KnownPages.Processes}
+                        href={KnownPages.Runs}
                         endDecorator={<Navigate />}>
                             Go to app
                     </Button>
