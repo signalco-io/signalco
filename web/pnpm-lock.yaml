@@ -1063,6 +1063,9 @@ importers:
 
   packages/data:
     devDependencies:
+      '@microsoft/api-extractor':
+        specifier: 7.38.3
+        version: 7.38.3
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
@@ -1111,6 +1114,9 @@ importers:
 
   packages/hooks:
     devDependencies:
+      '@microsoft/api-extractor':
+        specifier: 7.38.3
+        version: 7.38.3
       '@signalco/js':
         specifier: workspace:*
         version: link:../js
@@ -1141,6 +1147,9 @@ importers:
 
   packages/js:
     devDependencies:
+      '@microsoft/api-extractor':
+        specifier: 7.38.3
+        version: 7.38.3
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
@@ -1162,6 +1171,9 @@ importers:
 
   packages/lexorder:
     devDependencies:
+      '@microsoft/api-extractor':
+        specifier: 7.38.3
+        version: 7.38.3
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
@@ -1241,7 +1253,7 @@ importers:
         version: 1.0.7(tailwindcss@3.3.5)
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: ^7.38.3
+        specifier: 7.38.3
         version: 7.38.3
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
@@ -1294,6 +1306,9 @@ importers:
 
   packages/ui-icons:
     devDependencies:
+      '@microsoft/api-extractor':
+        specifier: 7.38.3
+        version: 7.38.3
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig

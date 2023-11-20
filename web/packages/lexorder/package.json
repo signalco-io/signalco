@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "sideEffects": false,
     "module": "./dist/index.js",
-    "types": "./dist/index.d.ts",
+    "types": "./dist/src/index.d.ts",
     "exports": {
         ".": {
             "import": "./dist/index.js"
@@ -14,11 +14,12 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsup src/index.ts --dts --format esm --clean",
-        "dev": "tsup src/index.ts --dts --format esm --watch",
+        "build": "tsup src/index.ts --experimental-dts --format esm",
+        "dev": "tsup src/index.ts --experimental-dts --format esm --watch",
         "clean": "rimraf dist"
     },
     "devDependencies": {
+        "@microsoft/api-extractor": "7.38.3",
         "@signalco/tsconfig": "workspace:*",
         "rimraf": "5.0.5",
         "tsup": "8.0.0",
