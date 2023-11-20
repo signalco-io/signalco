@@ -18,6 +18,7 @@
         "lint": "eslint --ext .ts,.tsx . --fix"
     },
     "devDependencies": {
+        "@microsoft/api-extractor": "^7.38.3",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
