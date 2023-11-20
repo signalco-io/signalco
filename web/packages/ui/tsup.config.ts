@@ -3,7 +3,7 @@ import path from 'node:path';
 import { defineConfig } from 'tsup';
 import { globSync } from 'glob';
 
-export default defineConfig((opts) => ({
+export default defineConfig(() => ({
     entry: Object.fromEntries(
         [
             ...globSync('src/**/index.ts').map(file => [
@@ -20,5 +20,5 @@ export default defineConfig((opts) => ({
         ]
     ),
     format: 'esm',
-    minify: !opts.watch
+    experimentalDts: true
 }));
