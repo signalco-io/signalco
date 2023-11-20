@@ -3,57 +3,18 @@
 import { useState } from 'react';
 import { cx } from 'classix';
 import { Delete, Embed, ListChecks, MoreHorizontal, Play } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
 import { Skeleton } from '@signalco/ui/dist/Skeleton';
-import { Modal } from '@signalco/ui/dist/Modal';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Button } from '@signalco/ui/dist/Button';
 import { ListHeader } from '../../shared/ListHeader';
+import { EmbedModal } from '../../shared/EmbedModal';
 import { KnownPages } from '../../../src/knownPages';
 import { useProcess } from '../../../src/hooks/useProcess';
 import { TypographyProcessRunName } from './TypographyProcessRunName';
 import { TypographyProcessName } from './TypographyProcessName';
 import { ProcessRunCreateModal } from './ProcessRunCreateModal';
 import { ProcessOrRunDeleteModal } from './ProcessOrRunDeleteModal';
-
-function EmbedModal({
-    header,
-    subHeader,
-    src,
-    open,
-    onOpenChange
-}: {
-    header: React.ReactNode;
-    subHeader: React.ReactNode;
-    src: string;
-    open: boolean;
-    onOpenChange: (open: boolean) => void;
-}) {
-    const code = `<iframe src="${src}" width="100%" height="100%" frameborder="0" title="doprocess.app"></iframe>`;
-
-    const handleCopy = () => {
-        navigator.clipboard.writeText(code);
-        // TODO: Show notification
-    }
-
-    return (
-        <Modal open={open} onOpenChange={onOpenChange}>
-            <Stack className="p-2" spacing={2}>
-                <Typography level="h3">{header}</Typography>
-                <Typography>{subHeader}</Typography>
-                <div className="rounded bg-muted p-4">
-                    <code className="break-all">
-                        {code}
-                    </code>
-                </div>
-                <Button className="self-end" onClick={handleCopy}>Copy</Button>
-            </Stack>
-        </Modal>
-    );
-}
 
 export function ProcessDetailsHeader({
     processId, runId, editable
@@ -116,9 +77,11 @@ export function ProcessDetailsHeader({
                 onOpenChange={setDeleteOpen}
                 redirect={runId ? KnownPages.ProcessRuns(processId) : KnownPages.Processes} />
             <EmbedModal
-                header="Embed process"
-                subHeader="To embed this process, copy the following HTML snippet and paste it into your website:"
-                src={`${window.location.origin}${KnownPages.Process(processId)}/embedded`}
+                header={runId ? 'Embed process run' : 'Embed process'}
+                subHeader={runId
+                    ? 'To embed this process run, copy the following HTML snippet and paste it into your website:'
+                    : 'To embed this process, copy the following HTML snippet and paste it into your website:'}
+                src={`${window.location.origin}${runId ? KnownPages.ProcessRun(processId, runId) : KnownPages.Process(processId)}/embedded`}
                 open={embedOpen}
                 onOpenChange={setEmbedOpen} />
         </Loadable>
