@@ -4,20 +4,20 @@
     "private": true,
     "license": "MIT",
     "type": "module",
+    "types": "./dist/src/index.d.ts",
     "files": [
         "/dist"
     ],
     "scripts": {
         "build": "npm run clean && pnpm run \"/^build:.*/\"",
         "build:tsup": "tsup",
-        "build:declaration": "tsc --project tsconfig.build.json --declaration --emitDeclarationOnly --outDir dist",
         "dev": "pnpm run \"/^dev:.*/\"",
         "dev:tsup": "tsup --watch",
-        "dev:declaration": "tsc --project tsconfig.build.json --declaration --emitDeclarationOnly --watch --outDir dist",
         "clean": "rimraf dist",
         "lint": "eslint --ext .ts,.tsx . --fix"
     },
     "devDependencies": {
+        "@microsoft/api-extractor": "7.38.3",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
