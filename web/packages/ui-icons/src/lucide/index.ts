@@ -5,6 +5,7 @@ export {
     BatteryCharging,
     Battery as BatteryEmpty,
     Cloud,
+    Code2Icon as Embed,
     Settings,
     Menu,
     GitCommit as Channel,

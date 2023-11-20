@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import { cx } from 'classix';
-import { Delete, ListChecks, MoreHorizontal, Play } from '@signalco/ui-icons';
+import { Delete, Embed, ListChecks, MoreHorizontal, Play } from '@signalco/ui-icons';
 import { Skeleton } from '@signalco/ui/dist/Skeleton';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
 import { Loadable } from '@signalco/ui/dist/Loadable';
 import { IconButton } from '@signalco/ui/dist/IconButton';
 import { ListHeader } from '../../shared/ListHeader';
+import { EmbedModal } from '../../shared/EmbedModal';
 import { KnownPages } from '../../../src/knownPages';
 import { useProcess } from '../../../src/hooks/useProcess';
 import { TypographyProcessRunName } from './TypographyProcessRunName';
@@ -24,6 +25,7 @@ export function ProcessDetailsHeader({
 }) {
     const { data: process, isLoading: isLoadingProcess, error: errorProcess } = useProcess(processId);
     const [deleteOpen, setDeleteOpen] = useState(false);
+    const [embedOpen, setEmbedOpen] = useState(false);
 
     const isRun = Boolean(runId);
 
@@ -52,14 +54,15 @@ export function ProcessDetailsHeader({
                                 </IconButton>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
+                                <DropdownMenuItem startDecorator={<Embed />} onClick={() => setEmbedOpen(true)}>
+                                    Embed...
+                                </DropdownMenuItem>
                                 {!isRun && (
-                                    <>
-                                        <DropdownMenuItem startDecorator={<Play />} href={KnownPages.ProcessRuns(processId)}>
-                                            View process runs
-                                        </DropdownMenuItem>
-                                        <DropdownMenuSeparator />
-                                    </>
+                                    <DropdownMenuItem startDecorator={<Play />} href={KnownPages.ProcessRuns(processId)}>
+                                        View process runs
+                                    </DropdownMenuItem>
                                 )}
+                                <DropdownMenuSeparator />
                                 <DropdownMenuItem startDecorator={<Delete />} onClick={() => setDeleteOpen(true)}>
                                     Delete...
                                 </DropdownMenuItem>
@@ -73,6 +76,14 @@ export function ProcessDetailsHeader({
                 open={deleteOpen}
                 onOpenChange={setDeleteOpen}
                 redirect={runId ? KnownPages.ProcessRuns(processId) : KnownPages.Processes} />
+            <EmbedModal
+                header={runId ? 'Embed process run' : 'Embed process'}
+                subHeader={runId
+                    ? 'To embed this process run, copy the following HTML snippet and paste it into your website:'
+                    : 'To embed this process, copy the following HTML snippet and paste it into your website:'}
+                src={`${window.location.origin}${runId ? KnownPages.ProcessRun(processId, runId) : KnownPages.Process(processId)}/embedded`}
+                open={embedOpen}
+                onOpenChange={setEmbedOpen} />
         </Loadable>
     );
 }
