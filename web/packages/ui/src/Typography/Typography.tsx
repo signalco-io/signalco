@@ -1,5 +1,5 @@
 import { type CSSProperties, ForwardedRef, createElement, forwardRef, type HTMLAttributes } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import type { ColorVariants } from '../theme';
 
 export type TypographyProps = HTMLAttributes<HTMLParagraphElement> & {

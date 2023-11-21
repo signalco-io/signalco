@@ -2,7 +2,7 @@
 
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Add, Check, LayoutGrid, LayoutList } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/Stack';
 import { SelectItems } from '@signalco/ui/SelectItems';

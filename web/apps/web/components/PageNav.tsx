@@ -1,5 +1,5 @@
 import React from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Row } from '@signalco/ui/Row';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Link } from '@signalco/ui/Link';

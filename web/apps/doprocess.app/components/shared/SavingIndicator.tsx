@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Check } from '@signalco/ui-icons';
 
 type SavingIndicatorProps = {

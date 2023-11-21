@@ -1,5 +1,5 @@
 import { PropsWithChildren, ReactElement, useState } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { ExpandDown } from '@signalco/ui-icons';
 import { Tooltip } from '../Tooltip';
 import { Stack } from '../Stack';

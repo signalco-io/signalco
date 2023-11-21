@@ -1,6 +1,6 @@
 import { type FormEvent } from 'react';
 import Link from 'next/link';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Typography } from '@signalco/ui/Typography';
 import { Timeago } from '@signalco/ui/Timeago';
 import { Stack } from '@signalco/ui/Stack';

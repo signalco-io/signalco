@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Minimize } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/Stack';

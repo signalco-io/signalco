@@ -1,6 +1,6 @@
 import { Children, type PropsWithChildren } from 'react';
 import { useEffect, useState } from 'react';
-import cx from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Check, Close, ExpandDown } from '@signalco/ui-icons';
 import { Typography } from '../Typography';
 import { Stack } from '../Stack';

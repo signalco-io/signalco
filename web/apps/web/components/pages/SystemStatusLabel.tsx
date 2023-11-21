@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Typography } from '@signalco/ui/Typography';
 import { Row } from '@signalco/ui/Row';
 import { Link } from '@signalco/ui/Link';

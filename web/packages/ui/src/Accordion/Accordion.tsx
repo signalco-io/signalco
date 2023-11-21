@@ -1,6 +1,6 @@
 import { isValidElement, useState } from 'react';
 import type { ComponentProps, MouseEvent } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { ExpandDown } from '@signalco/ui-icons';
 import { Row } from '../Row';
 import { Collapse } from '../Collapse';

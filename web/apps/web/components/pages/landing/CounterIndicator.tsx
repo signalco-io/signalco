@@ -1,4 +1,4 @@
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Typography } from '@signalco/ui/Typography';
 
 function CounterIndicator(props: { count: number, hideAfter?: boolean }) {

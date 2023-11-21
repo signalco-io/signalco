@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Typography } from '@signalco/ui/Typography';
 import { Loadable } from '@signalco/ui/Loadable';
 import { usePromise } from '@enterwell/react-hooks';

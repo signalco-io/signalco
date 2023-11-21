@@ -1,7 +1,7 @@
 'use client';
 
 import { ComponentProps, HTMLAttributes, MouseEventHandler, TouchEventHandler, forwardRef } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Divider } from '@signalco/ui/Divider';
 
 export type ResizeHandleProps = HTMLAttributes<HTMLDivElement> & {

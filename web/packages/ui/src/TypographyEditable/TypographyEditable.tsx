@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Edit } from '@signalco/ui-icons';
 import { Typography, TypographyProps, populateTypographyStylesAndClasses } from '../Typography/Typography';
 

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Add, Code, Delete, Edit, MoreVertical, UI, History, CircleEqual } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/Typography';
 import { Timeago } from '@signalco/ui/Timeago';

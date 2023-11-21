@@ -1,5 +1,5 @@
 import { type HTMLAttributes, type ReactNode } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Row } from '../Row';
 
 export type AlertProps = HTMLAttributes<HTMLDivElement> & {

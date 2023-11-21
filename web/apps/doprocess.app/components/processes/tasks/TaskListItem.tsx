@@ -1,6 +1,6 @@
 'use client';
 
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Delete, Drag } from '@signalco/ui-icons';
 import { TypographyEditable } from '@signalco/ui/TypographyEditable';
 import { Typography } from '@signalco/ui/Typography';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Typography } from '@signalco/ui/Typography';
 import { Row } from '@signalco/ui/Row';
 import { Accordion } from '@signalco/ui/Accordion';

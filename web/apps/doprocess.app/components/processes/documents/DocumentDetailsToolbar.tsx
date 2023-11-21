@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Delete, Embed, MoreHorizontal } from '@signalco/ui-icons';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/Menu';
 import { IconButton } from '@signalco/ui/IconButton';

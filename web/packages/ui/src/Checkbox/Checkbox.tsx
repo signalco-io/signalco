@@ -1,5 +1,5 @@
 import { type ReactNode, useId, ComponentPropsWithoutRef } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Check } from '@signalco/ui-icons';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
 

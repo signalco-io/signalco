@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Up } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/Typography';
 import { Stack } from '@signalco/ui/Stack';

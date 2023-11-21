@@ -1,4 +1,4 @@
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { BatteryEmpty, BatteryLow, BatteryMedium, BatteryFull } from '@signalco/ui-icons';
 import { Tooltip } from '@signalco/ui/Tooltip';
 

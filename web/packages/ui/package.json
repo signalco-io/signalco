@@ -12,6 +12,7 @@
     ],
     "exports": {
         "./index.css": "./src/index.css",
+        "./cx": "./src/cx/index.ts",
         "./TypographyEditable": "./src/TypographyEditable/index.ts",
         "./Typography": "./src/Typography/index.ts",
         "./Tooltip": "./src/Tooltip/index.ts",
@@ -92,7 +93,8 @@
         "next": "14.0.3",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "react-timeago": "7.2.0"
+        "react-timeago": "7.2.0",
+        "tailwind-merge": "^2.0.0"
     },
     "peerDependencies": {
         "next": "14.0.3",

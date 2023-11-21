@@ -1,4 +1,4 @@
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Icon } from '@signalco/ui/Icon';
 import { Button } from '@signalco/ui/Button';
 

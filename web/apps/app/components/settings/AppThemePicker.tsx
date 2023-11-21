@@ -1,5 +1,5 @@
 import { Suspense, useState } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Custom, Laptop, SunMoon, Timer } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/Typography';
 import type { AppThemeMode, DefaultColorScheme, SupportedColorScheme } from '@signalco/ui/theme';

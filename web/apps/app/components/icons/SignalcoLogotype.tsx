@@ -1,5 +1,5 @@
 import React, { CSSProperties, forwardRef } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import type { SupportedColorScheme } from '@signalco/ui/theme';
 import ApiBadge from '../development/ApiBadge';
 import { isDeveloper } from '../../src/services/EnvProvider';

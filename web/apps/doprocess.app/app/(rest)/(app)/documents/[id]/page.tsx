@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Stack } from '@signalco/ui/Stack';
 import { useDocument } from '../../../../../src/hooks/useDocument';
 import { TypographyDocumentName } from '../../../../../components/processes/documents/TypographyDocumentName';

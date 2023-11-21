@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Empty, FileText } from '@signalco/ui-icons';
 import { TypographyEditable } from '@signalco/ui/TypographyEditable';
 import { Typography } from '@signalco/ui/Typography';

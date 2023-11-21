@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Stack } from '@signalco/ui/Stack';
 import { Row } from '@signalco/ui/Row';
 import { Button } from '@signalco/ui/Button';

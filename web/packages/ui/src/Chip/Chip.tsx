@@ -1,5 +1,5 @@
 import type { PropsWithChildren, MouseEventHandler, ReactNode } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import type { ColorPaletteProp } from '../theme';
 import {Row} from '../Row';
 import {Link} from '../Link';

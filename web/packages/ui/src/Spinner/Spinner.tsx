@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import {cx} from 'classix';
+import {cx} from '@signalco/ui/cx';
 
 export type SpinnerProps = HTMLAttributes<HTMLOrSVGElement> & {
     loading?: boolean;

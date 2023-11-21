@@ -1,4 +1,4 @@
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 
 export default function FanVisual(props: { state: boolean, size: number }) {
     const isActive = props.state;

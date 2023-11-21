@@ -2,12 +2,12 @@
 
 import { useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import {cx} from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { FileText, ListChecks, Play, Right } from '@signalco/ui-icons';
 import { List } from '@signalco/ui/List';
 import { IconButton } from '@signalco/ui/IconButton';
-import { ListItem } from '../shared/ListItem';
 import { KnownPages } from '../../src/knownPages';
+import { ListItem } from '@signalco/ui/ListItem';
 
 export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: (open: boolean) => void }) {
     const pathname = usePathname();
@@ -25,25 +25,28 @@ export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: 
     }, [links, onOpenChange, pathname]);
 
     return (
-        <div className="group flex flex-row gap-0.5 border-b py-1 pl-1 md:h-full md:flex-col md:border-none">
+        <div className={cx(
+            "group flex flex-row -mr-1 border-b md:h-full md:flex-col md:border-none",
+            open && 'md:pl-2 md:gap-1'
+        )}>
             <IconButton
                 variant="plain"
                 className={cx(
-                    open ? 'opacity-0 rotate-180' : '',
+                    open ? 'opacity-0 rotate-180 rounded-bl-none' : 'rounded-tr-none',
                     'hidden md:block self-end text-muted-foreground transition-opacity group-hover:opacity-100'
                 )}
                 size="sm"
                 onClick={() => onOpenChange?.(!open)}>
-                <Right />
+                <Right size={16} />
             </IconButton>
-            <List className="flex-row md:flex-col">
+            <List className={cx("flex-row md:flex-col", open && 'md:gap-2 md:pr-2')}>
                 {links.map(({ href, label, Icon }) => (
                     <ListItem
                         key={href}
                         href={href}
-                        label={open ? label : ''}
+                        label={label}
                         title={label}
-                        className="w-full"
+                        className={cx("w-full", open ? 'rounded-none md:rounded-lg' : 'rounded-none md:py-3 md:[font-size:0] md:!gap-0')}
                         startDecorator={<Icon size={20} />}
                         selected={pathname.startsWith(href)}
                     />

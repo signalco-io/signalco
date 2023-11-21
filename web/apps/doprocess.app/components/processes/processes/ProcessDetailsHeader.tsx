@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Delete, Embed, ListChecks, MoreHorizontal, Play } from '@signalco/ui-icons';
 import { Stack } from '@signalco/ui/Stack';
 import { Skeleton } from '@signalco/ui/Skeleton';

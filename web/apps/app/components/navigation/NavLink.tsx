@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Tooltip } from '@signalco/ui/Tooltip';
 import { IconButton } from '@signalco/ui/IconButton';
 import styles from './NavLink.module.scss';
