@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
-import { Button } from '@signalco/ui/dist/Button';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { NavigatingButton } from '@signalco/ui/NavigatingButton';
+import { Button } from '@signalco/ui/Button';
 
 type RootErrorProps = {
     error: Error;

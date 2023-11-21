@@ -1,4 +1,4 @@
-import { Stack } from "@signalco/ui/dist/Stack";
+import { Stack } from "@signalco/ui/Stack";
 import { StoryObj } from "@storybook/react";
 
 export default { component: Stack, tags: ['autodocs'] };

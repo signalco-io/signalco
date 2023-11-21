@@ -1,6 +1,6 @@
-import { Card } from "@signalco/ui/dist/Card";
-import { Grow } from "@signalco/ui/dist/Grow";
-import { Stack } from "@signalco/ui/dist/Stack";
+import { Card } from "@signalco/ui/Card";
+import { Grow } from "@signalco/ui/Grow";
+import { Stack } from "@signalco/ui/Stack";
 import { StoryObj } from "@storybook/react";
 
 export default { component: Grow, tags: ['autodocs'] };

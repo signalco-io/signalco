@@ -2,16 +2,16 @@
 
 import { useMemo } from 'react';
 import { Bug, Link as LinkIcon } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { ListItem } from '@signalco/ui/dist/ListItem';
-import { List } from '@signalco/ui/dist/List';
-import { Link } from '@signalco/ui/dist/Link';
-import { Container } from '@signalco/ui/dist/Container';
-import { channelsData } from '@signalco/data';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/Loadable';
+import { ListItem } from '@signalco/ui/ListItem';
+import { List } from '@signalco/ui/List';
+import { Link } from '@signalco/ui/Link';
+import { Container } from '@signalco/ui/Container';
+import { channelsData } from '@signalco/data/data';
 import { KnownPages } from '../../../src/knownPages';
 import useAllEntities from '../../../src/hooks/signalco/entity/useAllEntities';
 import ChannelPartialSlack from '../../../components/channels/partials/ChannelPartialSlack';

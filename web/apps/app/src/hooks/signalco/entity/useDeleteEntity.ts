@@ -1,9 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import { entityDeleteAsync } from '../../../entity/EntityRepository';
 import { entityKey } from './useEntity';
 import { allEntitiesKey } from './useAllEntities';
 
-export default function useDeleteEntity() {
+export default function useDeleteEntity(): UseMutationResult<void, Error, string, unknown> {
     const client = useQueryClient();
     return useMutation({
         mutationFn: entityDeleteAsync,

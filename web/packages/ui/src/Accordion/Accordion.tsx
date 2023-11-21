@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { isValidElement, useState } from 'react';
 import type { ComponentProps, MouseEvent } from 'react';
 import { cx } from 'classix';
 import { ExpandDown } from '@signalco/ui-icons';
@@ -26,23 +26,25 @@ export function Accordion({ children, open, disabled, onOpenChanged, unmountOnEx
 
     const actualOpen = open ?? isOpen;
 
-    const multipleChildren = !!children && Array.isArray(children);
+    const firstChild = Array.isArray(children) ? children[0] : children;
+    const otherChildren = Array.isArray(children) ? children.filter((_: unknown, i: number) => i !== 0 && isValidElement) : [];
+    const multipleChildren = otherChildren.length > 0;
 
     return (
         <Card className={cx('', className)} onClick={handleOpen} {...props}>
-            <CardHeader className="uitw-p-2">
+            <CardHeader className="p-2">
                 <Row spacing={1} justifyContent="space-between">
-                    {multipleChildren ? children[0] : children}
+                    {multipleChildren && isValidElement(firstChild) ? firstChild : children}
                     {!disabled && (
-                        <ExpandDown className={cx('uitw-transition-transform', actualOpen && 'uitw-scale-y-[-1]')} />
+                        <ExpandDown className={cx('transition-transform', actualOpen && 'scale-y-[-1]')} />
                     )}
                 </Row>
             </CardHeader>
             {(!unmountOnExit || actualOpen) && (
                 <Collapse appear={actualOpen}>
-                    {multipleChildren && (
-                        <CardContent className="uitw-p-2">
-                            {children.filter((_, i) => i !== 0)}
+                    {multipleChildren && isValidElement(otherChildren) && (
+                        <CardContent className="p-2">
+                            {otherChildren}
                         </CardContent>
                     )}
                 </Collapse>

@@ -1,5 +1,5 @@
 import { ListChecks, Navigate, Play } from '@signalco/ui-icons';
-import { Row } from '@signalco/ui/dist/Row';
+import { Row } from '@signalco/ui/Row';
 import { ListItem } from '../../shared/ListItem';
 import { KnownPages } from '../../../src/knownPages';
 import { ProcessRunDto } from '../../../app/api/dtos/dtos';

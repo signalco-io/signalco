@@ -1,4 +1,4 @@
-import { Stack } from '@signalco/ui/dist/Stack';
+import { Stack } from '@signalco/ui/Stack';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import FaqSection from '../../../components/pages/FaqSection';
 import CtaSection from '../../../components/pages/CtaSection';

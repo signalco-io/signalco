@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
-import type { AppThemeMode, DefaultColorScheme } from '@signalco/ui/dist/theme';
-import { useIsomorphicLayoutEffect } from '@signalco/hooks/dist/useIsomorphicLayoutEffect';
-import { useInterval } from '@signalco/hooks/dist/useInterval';
+import type { AppThemeMode, DefaultColorScheme } from '@signalco/ui/theme';
+import { useIsomorphicLayoutEffect } from '@signalco/hooks/useIsomorphicLayoutEffect';
+import { useInterval } from '@signalco/hooks/useInterval';
 import { fromDuration, now } from '../services/DateTimeProvider';
 import { showNotification } from '../notifications/PageNotificationService';
 import SunHelper from '../helpers/SunHelper';

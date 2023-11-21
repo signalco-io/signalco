@@ -145,18 +145,18 @@ export function FilterList({
 
     return (
         <Stack>
-            <div className="sm:uitw-hidden">
+            <div className="sm:hidden">
                 <SelectItems
                     items={items.map(i => ({ value: i.id, label: i.label }))}
                     value={checked?.at(0)}
                     label={header}
                     placeholder={placeholder ?? header ? `Select ${placeholder ?? header}` : undefined}
-                    className="uitw-w-full"
+                    className="w-full"
                     onValueChange={(value) => {
                         handleToggle(value);
                     }} />
             </div>
-            <div className="uitw-hidden sm:uitw-block">
+            <div className="hidden sm:block">
                 {header && <Typography level="h5" gutterBottom>{header}</Typography>}
                 <ItemsShowMore
                     truncate={truncate}

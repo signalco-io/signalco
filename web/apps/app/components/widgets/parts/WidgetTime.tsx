@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { useInterval } from '@signalco/hooks/dist/useInterval';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { useInterval } from '@signalco/hooks/useInterval';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';

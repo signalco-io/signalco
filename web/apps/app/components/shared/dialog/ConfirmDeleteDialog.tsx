@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Input } from '@signalco/ui/dist/Input';
-import { Button } from '@signalco/ui/dist/Button';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Input } from '@signalco/ui/Input';
+import { Button } from '@signalco/ui/Button';
 import useLocale from '../../../src/hooks/useLocale';
 import ConfigurationDialog from './ConfigurationDialog';
 

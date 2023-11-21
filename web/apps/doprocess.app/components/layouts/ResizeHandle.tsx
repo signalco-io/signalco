@@ -2,7 +2,7 @@
 
 import { ComponentProps, HTMLAttributes, MouseEventHandler, TouchEventHandler, forwardRef } from 'react';
 import { cx } from 'classix';
-import { Divider } from '@signalco/ui/dist/Divider';
+import { Divider } from '@signalco/ui/Divider';
 
 export type ResizeHandleProps = HTMLAttributes<HTMLDivElement> & {
     onMouseDown: MouseEventHandler;

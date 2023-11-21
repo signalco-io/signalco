@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import { handleArrayOptimisticUpdate, handleOptimisticUpdate } from '../helpers/queryHelpers';
 import { ProcessTaskDefinitionDto } from '../../app/api/dtos/dtos';
 import { processTaskDefinitionsKey } from './useProcessTaskDefinitions';
@@ -20,7 +20,11 @@ async function fetchPutProcessTaskDefinition(processId: string, taskDefinitionId
     });
 }
 
-export function useProcessTaskDefinitionUpdate() {
+export function useProcessTaskDefinitionUpdate(): UseMutationResult<void, Error, TaskDefinitionUpdateArgs, {
+    previousItems: unknown;
+    previousItem: unknown;
+}>
+{
     const client = useQueryClient();
     return useMutation({
         mutationFn: ({ processId, taskDefinitionId, ...rest }: TaskDefinitionUpdateArgs) => fetchPutProcessTaskDefinition(processId, taskDefinitionId, {

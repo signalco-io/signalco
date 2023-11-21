@@ -4,25 +4,25 @@ import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Security, Send } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Tooltip } from '@signalco/ui/dist/Tooltip';
-import type { ColorPaletteProp } from '@signalco/ui/dist/theme';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { SelectItems } from '@signalco/ui/dist/SelectItems';
-import { Row } from '@signalco/ui/dist/Row';
-import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
-import { List } from '@signalco/ui/dist/List';
-import { Input } from '@signalco/ui/dist/Input';
-import { Divider } from '@signalco/ui/dist/Divider';
-import { CopyToClipboardInput } from '@signalco/ui/dist/CopyToClipboardInput';
-import { Chip } from '@signalco/ui/dist/Chip';
-import { Card, CardOverflow } from '@signalco/ui/dist/Card';
-import { Button } from '@signalco/ui/dist/Button';
-import { Alert } from '@signalco/ui/dist/Alert';
+import { Typography } from '@signalco/ui/Typography';
+import { Tooltip } from '@signalco/ui/Tooltip';
+import type { ColorPaletteProp } from '@signalco/ui/theme';
+import { Stack } from '@signalco/ui/Stack';
+import { SelectItems } from '@signalco/ui/SelectItems';
+import { Row } from '@signalco/ui/Row';
+import { NavigatingButton } from '@signalco/ui/NavigatingButton';
+import { Loadable } from '@signalco/ui/Loadable';
+import { ListTreeItem } from '@signalco/ui/ListTreeItem';
+import { List } from '@signalco/ui/List';
+import { Input } from '@signalco/ui/Input';
+import { Divider } from '@signalco/ui/Divider';
+import { CopyToClipboardInput } from '@signalco/ui/CopyToClipboardInput';
+import { Chip } from '@signalco/ui/Chip';
+import { Card, CardOverflow } from '@signalco/ui/Card';
+import { Button } from '@signalco/ui/Button';
+import { Alert } from '@signalco/ui/Alert';
 import { camelToSentenceCase, HttpOperation, ObjectDictAny, objectWithKey } from '@signalco/js';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { usePromise } from '@enterwell/react-hooks';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
 
@@ -174,8 +174,8 @@ function ApiOperation(props: ApiOperationProps) {
                         <Stack>
                             {Object.keys(requestBodyResolved.content).map(contentType => (
                                 <React.Fragment key={contentType}>
-                                    {requestBodyResolved.content[contentType].schema &&
-                                        <Schema name={contentType} schema={requestBodyResolved.content[contentType].schema} />}
+                                    {requestBodyResolved.content[contentType]?.schema &&
+                                        <Schema name={contentType} schema={requestBodyResolved.content[contentType]?.schema} />}
                                 </React.Fragment>
                             ))}
                         </Stack>
@@ -298,6 +298,9 @@ function resolveRef<T>(api: OpenAPIV3.Document, obj: T | OpenAPIV3.ReferenceObje
     let curr: unknown = api;
     for (let i = 1; i < refSplit.length && typeof curr !== 'undefined'; i++) {
         const nextKey = refSplit[i];
+        if (!nextKey) {
+            break;
+        }
         const next = objectWithKey(curr, nextKey)?.nextKey;
         if (next == null) {
             break;
@@ -429,11 +432,11 @@ function Actions(props: ActionsProps) {
 
     if (!api) throw 'API undefined';
     const { servers } = api;
-    const selectedServerUrl = selectedServer ?? (servers && servers.length > 0 ? servers[0].url : 'https://example.com');
+    const selectedServerUrl = selectedServer ?? (servers && servers.length > 0 ? servers[0]?.url : 'https://example.com');
 
     const { requestBody, security } = info;
     const requestBodyResolved = requestBody && resolveRef(api, requestBody);
-    const [requestBodyValue, setRequestBodyValue] = useState(requestBodyResolved ? JSON.stringify(schemaToJson(api, requestBodyResolved.content['application/json'].schema), undefined, 2) : '');
+    const [requestBodyValue, setRequestBodyValue] = useState(requestBodyResolved ? JSON.stringify(schemaToJson(api, requestBodyResolved.content['application/json']?.schema), undefined, 2) : '');
 
     const [response, setResponse] = useState('');
     const [responseStatusCode, setResponseStatusCode] = useState<number | undefined>(undefined);

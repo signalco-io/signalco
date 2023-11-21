@@ -1,12 +1,13 @@
 import { useUserSettingAsync } from '../useUserSetting';
 import useAllEntities from '../signalco/entity/useAllEntities';
-import { DashboardsFavoritesLocalStorageKey, dashboardModelFromEntity } from '../../dashboards/DashboardsRepository';
+import { DashboardsFavoritesLocalStorageKey, IDashboardModel, dashboardModelFromEntity } from '../../dashboards/DashboardsRepository';
+import { useMemo } from 'react';
 
-export default function useDashboards() {
+export default function useDashboards(): Omit<ReturnType<typeof useAllEntities>, 'data'> & { data: IDashboardModel[] | undefined } {
     const dashboardEntities = useAllEntities(2);
     const [currentFavorites] = useUserSettingAsync<string[]>(DashboardsFavoritesLocalStorageKey, []);
-    return {
+    return useMemo(() => ({
         ...dashboardEntities,
         data: dashboardEntities.data?.map((entity, i) => dashboardModelFromEntity(entity, i, currentFavorites ?? []))
-    }
+    }), [dashboardEntities, currentFavorites]);
 }

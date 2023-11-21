@@ -1,4 +1,4 @@
-import { Stack } from '@signalco/ui/dist/Stack';
+import { Stack } from '@signalco/ui/Stack';
 import { TaskList } from '../tasks/TaskList';
 import { ProcessDetailsHeader } from './ProcessDetailsHeader';
 

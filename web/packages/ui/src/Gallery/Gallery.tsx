@@ -16,9 +16,9 @@ export function Gallery<TItem extends GalleryItem>(props: GalleryProps<TItem>) {
     const { items, itemComponent, filters, gridHeader, gridFilters } = props;
 
     return (
-        <div className="uitw-flex uitw-flex-col uitw-gap-2 sm:uitw-flex-row">
+        <div className="flex flex-col gap-2 sm:flex-row">
             {filters && <GalleryFilters filters={filters()} />}
-            <Stack spacing={2} className="uitw-w-full">
+            <Stack spacing={2} className="w-full">
                 <GalleryGridFilter header={gridHeader} filters={gridFilters} />
                 <GalleryGrid items={items} itemComponent={itemComponent} />
             </Stack>

@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Button } from '@signalco/ui/dist/Button';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { Button } from '@signalco/ui/Button';
 import { usePromise } from '@enterwell/react-hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';

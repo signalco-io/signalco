@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { type UseQueryResult, useQuery } from '@tanstack/react-query';
 import { DocumentDto } from '../../app/api/dtos/dtos';
 import { documentsKey } from './useDocuments';
 
@@ -13,7 +13,7 @@ async function fetchGetDocument(id: string) {
     return await response.json() as DocumentDto | undefined;
 }
 
-export function useDocument(id?: string) {
+export function useDocument(id?: string): UseQueryResult<DocumentDto | null | undefined, Error> {
     return useQuery({
         queryKey: documentKey(id),
         queryFn: async () => {

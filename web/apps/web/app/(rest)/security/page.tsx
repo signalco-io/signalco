@@ -1,8 +1,8 @@
 import { Shield, Lock, Euro } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Container } from '@signalco/ui/dist/Container';
-import { Card, CardContent } from '@signalco/ui/dist/Card';
-import { Avatar } from '@signalco/ui/dist/Avatar';
+import { Stack } from '@signalco/ui/Stack';
+import { Container } from '@signalco/ui/Container';
+import { Card, CardContent } from '@signalco/ui/Card';
+import { Avatar } from '@signalco/ui/Avatar';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import FaqSection from '../../../components/pages/FaqSection';
 import CtaSection from '../../../components/pages/CtaSection';

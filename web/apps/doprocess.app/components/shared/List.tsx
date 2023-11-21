@@ -3,13 +3,13 @@
 import { Fragment, ReactElement, ReactNode, useState } from 'react';
 import { type UseQueryResult } from '@tanstack/react-query';
 import { Add } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Modal } from '@signalco/ui/dist/Modal';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { ListItem } from '@signalco/ui/dist/ListItem';
-import { List as UIList } from '@signalco/ui/dist/List';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { Modal } from '@signalco/ui/Modal';
+import { Loadable } from '@signalco/ui/Loadable';
+import { ListItem } from '@signalco/ui/ListItem';
+import { List as UIList } from '@signalco/ui/List';
 import { ListSkeleton } from './ListSkeleton';
 import { ListItemCreate } from './ListItemCreate';
 

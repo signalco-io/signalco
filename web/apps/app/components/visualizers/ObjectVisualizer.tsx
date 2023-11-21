@@ -1,9 +1,9 @@
 import React from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Tooltip } from '@signalco/ui/dist/Tooltip';
-import { Row } from '@signalco/ui/dist/Row';
-import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
-import { CopyToClipboardInput } from '@signalco/ui/dist/CopyToClipboardInput';
+import { Typography } from '@signalco/ui/Typography';
+import { Tooltip } from '@signalco/ui/Tooltip';
+import { Row } from '@signalco/ui/Row';
+import { ListTreeItem } from '@signalco/ui/ListTreeItem';
+import { CopyToClipboardInput } from '@signalco/ui/CopyToClipboardInput';
 import { ParsedJson } from '@signalco/js';
 import { JsonNonArrayVisualizer } from './JsonNonArrayVisualizer';
 import { JsonArrayVisualizer } from './JsonArrayVisualizer';

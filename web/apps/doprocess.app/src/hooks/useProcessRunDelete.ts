@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import { processRunsKey } from './useProcessRuns';
 
 type ProcessRunDeleteArgs = {
@@ -12,7 +12,7 @@ async function fetchDeleteProcessAsync(processId: string, runId: string) {
     });
 }
 
-export function useProcessRunDelete() {
+export function useProcessRunDelete(): UseMutationResult<void, Error, ProcessRunDeleteArgs, unknown> {
     const client = useQueryClient();
     return useMutation({
         mutationFn: ({ processId, runId }: ProcessRunDeleteArgs) => fetchDeleteProcessAsync(processId, runId),

@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { useControllableState } from '@signalco/hooks/dist/useControllableState';
+import { useControllableState } from '@signalco/hooks/useControllableState';
 import { Typography } from '../Typography';
 import { Stack } from '../Stack';
 import { Row } from '../Row';

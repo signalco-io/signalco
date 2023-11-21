@@ -29,19 +29,19 @@ export function Input({
 
     return (
         <VerticalContainer>
-            {label && <label className="uitw-text-sm uitw-font-medium">{label}</label>}
+            {label && <label className="text-sm font-medium">{label}</label>}
             <HorizontalContainer>
                 {startDecorator ?? null}
                 <input
                     className={cx(
-                        'uitw-flex uitw-h-10 uitw-w-full uitw-rounded-md uitw-border uitw-border-input uitw-bg-background uitw-px-3 uitw-py-2 uitw-text-sm uitw-ring-offset-background file:uitw-border-0 file:uitw-bg-transparent file:uitw-text-sm file:uitw-font-medium placeholder:uitw-text-muted-foreground focus-visible:uitw-outline-none focus-visible:uitw-ring-2 focus-visible:uitw-ring-ring focus-visible:uitw-ring-offset-2 disabled:uitw-cursor-not-allowed disabled:uitw-opacity-50',
+                        'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
                         className
                     )}
                     {...rest}
                 />
                 {endDecorator ?? null}
             </HorizontalContainer>
-            {helperText && <p className="uitw-text-sm uitw-text-muted-foreground">{helperText}</p>}
+            {helperText && <p className="text-sm text-muted-foreground">{helperText}</p>}
         </VerticalContainer>
     );
 }

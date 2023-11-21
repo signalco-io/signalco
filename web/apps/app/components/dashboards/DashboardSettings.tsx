@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Input } from '@signalco/ui/dist/Input';
-import { Button } from '@signalco/ui/dist/Button';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Input } from '@signalco/ui/Input';
+import { Button } from '@signalco/ui/Button';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import ConfirmDeleteButton from '../shared/dialog/ConfirmDeleteButton';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import useLocale from '../../src/hooks/useLocale';

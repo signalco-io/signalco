@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { cx } from 'classix';
-import { Tooltip } from '@signalco/ui/dist/Tooltip';
-import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Tooltip } from '@signalco/ui/Tooltip';
+import { IconButton } from '@signalco/ui/IconButton';
 import styles from './NavLink.module.scss';
 
 export type NavLinkProps = {

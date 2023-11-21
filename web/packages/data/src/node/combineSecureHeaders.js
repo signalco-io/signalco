@@ -1,10 +1,8 @@
-import { ExternalUrls } from "./ExternalUrls";
-
 export function combineSecureHeaders(
-    baseDomains: string[],
-    allowSubdomains: boolean,
-    isDevelopment: boolean,
-    externalUrls: ExternalUrls[]
+    baseDomains,
+    allowSubdomains,
+    isDevelopment,
+    externalUrls,
 ) {
     const baseSubdomains = allowSubdomains ? (baseDomains.map(bd => `*.${bd.split('.').slice(-2).join('.')}`)) : [];
     return {

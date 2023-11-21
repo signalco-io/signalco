@@ -64,11 +64,11 @@ export function ListItem({
             <Row
                 ref={divRef}
                 spacing={2}
-                className={cx('uitw-min-h-[3rem] uitw-px-2', className)}
+                className={cx('min-h-[3rem] px-2', className)}
                 title={title}
                 style={style}>
                 {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
-                <div className={cx('uitw-grow', disabled && 'uitw-opacity-60')}>{label}</div>
+                <div className={cx('grow', disabled && 'opacity-60')}>{label}</div>
                 <>
                     {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator ?? null}
                 </>
@@ -85,9 +85,9 @@ export function ListItem({
             disabled={disabled}
             title={title}
             style={style}
-            className={cx('uitw-text-start uitw-h-auto', className)}>
+            className={cx('text-start h-auto', className)}>
             {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
-            {Boolean(label) && <div className="uitw-grow">{label}</div>}
+            {Boolean(label) && <div className="grow">{label}</div>}
             {Boolean(endDecorator) && (
                 <>
                     {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator ?? null}

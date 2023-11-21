@@ -1,12 +1,12 @@
 'use client';
 
 import { useMemo } from 'react';
-import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { List } from '@signalco/ui/dist/List';
+import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/Loadable';
+import { List } from '@signalco/ui/List';
 import { lexinsert } from '@signalco/lexorder';
 import { orderBy } from '@signalco/js';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { ListSkeleton } from '../../shared/ListSkeleton';

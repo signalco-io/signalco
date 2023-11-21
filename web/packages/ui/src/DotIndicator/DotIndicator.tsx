@@ -13,12 +13,12 @@ export function DotIndicator(props: DotIndicatorProps) {
     return (
         <div
             className={cx(
-                'uitw-flex uitw-flex-col uitw-items-center uitw-justify-center uitw-text-white uitw-text-center',
-                color === 'success' && 'uitw-bg-green-500',
-                color === 'warning' && 'uitw-bg-yellow-500',
-                color === 'danger' && 'uitw-bg-red-500',
-                color === 'info' && 'uitw-bg-blue-500',
-                color === 'neutral' && 'uitw-bg-slate-500'
+                'flex flex-col items-center justify-center text-white text-center',
+                color === 'success' && 'bg-green-500',
+                color === 'warning' && 'bg-yellow-500',
+                color === 'danger' && 'bg-red-500',
+                color === 'info' && 'bg-blue-500',
+                color === 'neutral' && 'bg-slate-500'
             )}
             style={{
                 width: size,

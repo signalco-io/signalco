@@ -2,9 +2,9 @@
 
 import { useMemo } from 'react';
 import dynamic from 'next/dynamic';
-import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/Loadable';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import ContactsTable from './ContactsTable';
 

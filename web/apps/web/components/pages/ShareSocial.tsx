@@ -1,6 +1,6 @@
 import { Share } from '@signalco/ui-icons';
-import { IconButtonCopyToClipboard } from '@signalco/ui/dist/IconButtonCopyToClipboard';
-import { useIsServer } from '@signalco/hooks/dist/useIsServer';
+import { IconButtonCopyToClipboard } from '@signalco/ui/IconButtonCopyToClipboard';
+import { useIsServer } from '@signalco/hooks/useIsServer';
 
 export default function ShareSocial() {
     const isServer = useIsServer();

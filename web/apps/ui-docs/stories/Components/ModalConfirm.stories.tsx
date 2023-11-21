@@ -1,5 +1,5 @@
-import { Button } from "@signalco/ui/dist/Button";
-import { ModalConfirm } from "@signalco/ui/dist/ModalConfirm";
+import { Button } from "@signalco/ui/Button";
+import { ModalConfirm } from "@signalco/ui/ModalConfirm";
 import { Meta, StoryObj } from "@storybook/react";
 
 export default {

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { SelectItems } from '@signalco/ui/dist/SelectItems';
-import { Button } from '@signalco/ui/dist/Button';
+import { Stack } from '@signalco/ui/Stack';
+import { SelectItems } from '@signalco/ui/SelectItems';
+import { Button } from '@signalco/ui/Button';
 import { asArray, ObjectDictAny } from '@signalco/js';
 import { extractValues } from '@enterwell/react-form-validation';
 import { FormBuilder, type FormItems, useFormField, FormBuilderProvider, FormBuilderComponents } from '@enterwell/react-form-builder';
@@ -30,6 +30,9 @@ const useWidgetConfiguration = (
     const form: ObjectDictAny = {};
     for (let index = 0; index < options.length; index++) {
         const configOption = options[index];
+        if (!configOption) {
+            continue;
+        }
         // eslint-disable-next-line react-hooks/rules-of-hooks
         const field = useFormField(
             config ? config[configOption.name] : undefined,

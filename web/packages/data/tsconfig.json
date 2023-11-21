@@ -1,10 +1,13 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
-    "extends": "@signalco/tsconfig/react-library.json",
+    "extends": "@signalco/tsconfig/js-library.json",
+    "compilerOptions": {
+        "resolveJsonModule": true
+    },
     "include": [
         "./src/**/*.ts*"
     ],
-    "compilerOptions": {
-        "resolveJsonModule": true
-    }
+    "exclude": [
+        "node_modules"
+    ]
 }

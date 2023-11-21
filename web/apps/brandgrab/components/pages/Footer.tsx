@@ -1,6 +1,6 @@
 import React from 'react';
-import {Stack} from '@signalco/ui/dist/Stack';
-import {Container} from '@signalco/ui/dist/Container';
+import {Stack} from '@signalco/ui/Stack';
+import {Container} from '@signalco/ui/Container';
 import FooterLinks, { type FooterSectionType } from './FooterLinks';
 import { FooterInfo } from './FooterInfo';
 

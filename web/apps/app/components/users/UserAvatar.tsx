@@ -1,4 +1,4 @@
-import { Avatar } from '@signalco/ui/dist/Avatar';
+import { Avatar } from '@signalco/ui/Avatar';
 import { User } from '@auth0/auth0-spa-js';
 
 export default function UserAvatar({ user }: { user: User | undefined }) {
@@ -6,8 +6,10 @@ export default function UserAvatar({ user }: { user: User | undefined }) {
     if (user?.given_name && user?.family_name) {
         userNameInitials = `${user.given_name[0]}${user.family_name[0]}`;
     }
-    if (userNameInitials === '' && user?.email) {
-        userNameInitials = user.email[0];
+
+    const userEmail = user?.email;
+    if (userNameInitials === '' && userEmail) {
+        userNameInitials = userEmail[0] ? userEmail[0] : 'S';
     }
 
     return (

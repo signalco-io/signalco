@@ -1,5 +1,5 @@
 import { cx } from 'classix';
-import { ListItem as UiListItem, type ListItemProps } from '@signalco/ui/dist/ListItem';
+import { ListItem as UiListItem, type ListItemProps } from '@signalco/ui/ListItem';
 
 export function ListItem({ className, ...rest }: ListItemProps) {
     return (

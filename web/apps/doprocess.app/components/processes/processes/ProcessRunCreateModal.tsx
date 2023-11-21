@@ -1,12 +1,12 @@
 'use client';
 
 import { Play } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Tooltip } from '@signalco/ui/dist/Tooltip';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Modal } from '@signalco/ui/dist/Modal';
-import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Typography } from '@signalco/ui/Typography';
+import { Tooltip } from '@signalco/ui/Tooltip';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { Modal } from '@signalco/ui/Modal';
+import { IconButton } from '@signalco/ui/IconButton';
 import { ProcessRunCreateForm } from './ProcessRunCreateForm';
 
 type ProcessRunCreateModalProps = {

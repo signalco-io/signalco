@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { cx } from 'classix';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Loadable } from '@signalco/ui/dist/Loadable';
+import { Typography } from '@signalco/ui/Typography';
+import { Loadable } from '@signalco/ui/Loadable';
 import { usePromise } from '@enterwell/react-hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
@@ -33,7 +33,7 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
 ];
 
 function UsageIndicatorCircle({ value, percentageValue, unit, largeValue }: { value: number, percentageValue: number, unit: string, largeValue?: boolean }) {
-    const breakpoints = [10, 30, 60];
+    const breakpoints = [10, 30, 60] as const;
     return (
         <div className="relative">
             <div className={cx(

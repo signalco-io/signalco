@@ -1,4 +1,4 @@
-@import '@signalco/ui/dist/index.css';
+@import '@signalco/ui/index.css';
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;

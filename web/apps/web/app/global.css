@@ -1,7 +1,4 @@
-@import '@signalco/ui/dist/index.css';
-
-@tailwind components;
-@tailwind utilities;
+@import '@signalco/ui/index.css';
 
 @font-face {
   font-family: 'Material Icons';
@@ -32,12 +29,4 @@
 
   /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
-}
-
-.image--light {
-  display: var(--light-display);
-}
-
-.image--dark {
-  display: var(--dark-display);
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Navigate } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Divider } from '@signalco/ui/dist/Divider';
-import { Container } from '@signalco/ui/dist/Container';
-import {Button} from '@signalco/ui/dist/Button';
+import { Stack } from '@signalco/ui/Stack';
+import { Divider } from '@signalco/ui/Divider';
+import { Container } from '@signalco/ui/Container';
+import {Button} from '@signalco/ui/Button';
 import DeveloperOnly from '../shared/DeveloperOnly';
 import DiscoverVisual from '../pages/landing/visuals/DiscoverVisual';
 import Cover from '../pages/landing/Cover';

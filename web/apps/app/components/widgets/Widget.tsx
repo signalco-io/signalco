@@ -16,7 +16,7 @@ const WidgetFinanceStock = dynamic(() => import('./parts/WidgetFinanceStock'));
 const WidgetGraph = dynamic(() => import('./parts/WidgetGraph'));
 const WidgetEnergy = dynamic(() => import('./parts/WidgetEnergy'));
 
-export type widgetType = 'button' | 'state' | 'vacuum' | 'shades' | 'indicator' | 'airconditioning' | 'termostat' | 'time' | 'checklist' | 'finance-stock' | 'graph' | 'energy';
+export type widgetType = 'unknown' | 'button' | 'state' | 'vacuum' | 'shades' | 'indicator' | 'airconditioning' | 'termostat' | 'time' | 'checklist' | 'finance-stock' | 'graph' | 'energy';
 
 export interface WidgetProps extends WidgetSpecifigProps {
     type: widgetType,

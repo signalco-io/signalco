@@ -1,5 +1,5 @@
 import { type PropsWithChildren } from 'react';
-import { Container } from '@signalco/ui/dist/Container';
+import { Container } from '@signalco/ui/Container';
 
 export function FooterContainer({ children }: PropsWithChildren) {
     return (

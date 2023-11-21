@@ -1,6 +1,6 @@
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
 
 export function numberWholeAndDecimal(data: number | string | undefined): [undefined, undefined] | [number, number] {
     if (typeof data === 'undefined')

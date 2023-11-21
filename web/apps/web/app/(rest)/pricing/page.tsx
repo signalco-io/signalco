@@ -1,5 +1,5 @@
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
 import { KnownPages } from '../../../src/knownPages';
 import PricingCard, { PricingOption } from '../../../components/pages/pricing/PricingCard';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
@@ -54,7 +54,7 @@ export default function PricingPage() {
         <Stack spacing={4}>
             <PageCenterHeader header={'Pricing'} subHeader={'Find the plan for you'} />
             <Row spacing={4} alignItems="stretch" justifyContent="center">
-                {pricingOptions.map((po, i) => <PricingCard key={po.id} option={po} variant={pricingCardVariantMap[i]} />)}
+                {pricingOptions.map((po, i) => <PricingCard key={po.id} option={po} variant={pricingCardVariantMap[i] ?? 'normal'} />)}
             </Row>
             <FaqSection faq={pricingFaq} />
             <CtaSection />

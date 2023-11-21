@@ -1,6 +1,6 @@
 import { Add } from '@signalco/ui-icons';
-import { Spinner } from '@signalco/ui/dist/Spinner';
-import { type ListItemProps } from '@signalco/ui/dist/ListItem';
+import { Spinner } from '@signalco/ui/Spinner';
+import { type ListItemProps } from '@signalco/ui/ListItem';
 import { ListItem } from './ListItem';
 
 export function ListItemCreate({ loading, label, onSelected }: Required<Pick<ListItemProps, 'label' | 'onSelected'>> & { loading?: boolean }) {
