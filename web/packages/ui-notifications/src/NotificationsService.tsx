@@ -5,7 +5,7 @@ import { Button } from '@signalco/ui/dist/Button';
 
 export type PageNotificationVariant = 'default' | 'info' | 'success' | 'warning' | 'error';
 
-export interface PageNotificationOptions {
+export type PageNotificationOptions = {
     variant?: PageNotificationVariant;
     autoHideDuration?: number;
     persist?: boolean;
