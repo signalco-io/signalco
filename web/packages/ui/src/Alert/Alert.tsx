@@ -14,7 +14,8 @@ export function Alert({ className, color, startDecorator, endDecorator, children
             role="alert"
             spacing={1}
             className={cx(
-                'relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground',
+                'relative w-full rounded-lg border p-4',
+                '[&>svg~*]:pl-8 [&>svg]:absolute [&>svg]:top-3.5 [&>svg]:left-4',
                 color === 'primary' && 'bg-primary-100 border-primary-300',
                 color === 'neutral' && 'bg-neutral-100 border-neutral-300',
                 color === 'danger' && 'bg-red-100 border-red-300 dark:bg-red-900 dark:border-red-700',
