@@ -57,7 +57,7 @@ export function DocumentDetailsToolbar({ id, saving }: DocumentDetailsToolbarPro
             <EmbedModal
                 header="Embed document"
                 subHeader="To embed this process run, copy the following HTML snippet and paste it into your website:"
-                src={`${window.location.origin}${KnownPages.Document(id)}/embedded`}
+                src={`https://doprocess.app${KnownPages.Document(id)}/embedded`}
                 open={embedOpen}
                 onOpenChange={setEmbedOpen} />
         </>

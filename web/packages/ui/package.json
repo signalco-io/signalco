@@ -4,15 +4,30 @@
     "private": true,
     "license": "MIT",
     "type": "module",
-    "types": "./dist/index.d.ts",
     "files": [
-        "/dist"
+        "dist"
     ],
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        },
+        "./index.css": "./dist/index.css",
+        "./Breadcrumbs": {
+            "import": "./dist/Breadcrumbs/index.js",
+            "types": "./dist/Breadcrumbs/index.d.ts"
+        },
+        "./Stack": {
+            "import": "./dist/Stack/index.js",
+            "types": "./dist/Stack/index.d.ts"
+        },
+        "./dist/": "./dist/"
+    },
     "scripts": {
-        "build": "npm run clean && pnpm run \"/^build:.*/\"",
-        "build:tsup": "tsup",
+        "build": "pnpm run \"/^build:.*/\"",
+        "build:tsup": "tsup src/**/index.ts --experimental-dts --format esm",
         "dev": "pnpm run \"/^dev:.*/\"",
-        "dev:tsup": "tsup --watch",
+        "dev:tsup": "tsup src/**/index.ts --experimental-dts --format esm --watch",
         "clean": "rimraf dist",
         "lint": "eslint --ext .ts,.tsx . --fix"
     },
@@ -27,7 +42,7 @@
         "autoprefixer": "10.4.16",
         "classix": "2.1.35",
         "concurrently": "8.2.2",
-        "glob": "10.3.10",
+        "glob": "^10.3.10",
         "postcss": "8.4.31",
         "postcss-preset-env": "9.3.0",
         "rimraf": "5.0.5",

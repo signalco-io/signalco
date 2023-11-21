@@ -1,4 +1,4 @@
-import '@signalco/ui/dist/index.css';
+import '@signalco/ui/index.css';
 import { Inter } from 'next/font/google';
 import './global.scss';
 import { Metadata, Viewport } from 'next';

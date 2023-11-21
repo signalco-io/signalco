@@ -1283,7 +1283,7 @@ importers:
         specifier: 8.2.2
         version: 8.2.2
       glob:
-        specifier: 10.3.10
+        specifier: ^10.3.10
         version: 10.3.10
       postcss:
         specifier: 8.4.31

@@ -16,7 +16,6 @@
     "pages",
     "next-env.d.ts",
     "@types",
-    ".next/types/**/*.ts",
-    "C:\\Users\\aleks\\Documents\\GitHub\\signalco\\web\\apps\\doprocess.app\\.next/types/**/*.ts"
+    ".next/types/**/*.ts"
   ]
 }
