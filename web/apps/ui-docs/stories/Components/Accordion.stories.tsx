@@ -1,4 +1,4 @@
-import { Accordion } from "@signalco/ui/dist/Accordion";
+import { Accordion } from "@signalco/ui/Accordion";
 import { Meta, StoryObj } from "@storybook/react";
 
 export default { component: Accordion, tags: ['autodocs'] } satisfies Meta<typeof Accordion>;

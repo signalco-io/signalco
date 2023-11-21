@@ -1,8 +1,8 @@
 import React from 'react';
-import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { ListItem } from '@signalco/ui/dist/ListItem';
-import { List } from '@signalco/ui/dist/List';
+import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/Loadable';
+import { ListItem } from '@signalco/ui/ListItem';
+import { List } from '@signalco/ui/List';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import { ContactPointerRequiredEntity } from './DisplayEntityTarget';
 

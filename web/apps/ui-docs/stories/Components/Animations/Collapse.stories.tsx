@@ -1,6 +1,6 @@
-import { Card } from "@signalco/ui/dist/Card";
-import { Collapse } from "@signalco/ui/dist/Collapse";
-import { Stack } from "@signalco/ui/dist/Stack";
+import { Card } from "@signalco/ui/Card";
+import { Collapse } from "@signalco/ui/Collapse";
+import { Stack } from "@signalco/ui/Stack";
 import { StoryObj } from "@storybook/react";
 
 export default { component: Collapse, tags: ['autodocs'] };

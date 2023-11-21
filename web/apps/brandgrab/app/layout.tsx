@@ -1,6 +1,5 @@
-import '@signalco/ui/dist/index.css';
 import { Inter } from 'next/font/google';
-import './global.scss';
+import './global.css';
 import { Metadata, Viewport } from 'next';
 
 const inter = Inter({

@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import { documentsKey } from './useDocuments';
 
 type DocumentCreateArgs = {
@@ -13,7 +13,9 @@ async function fetchPostDocument(data: object) {
     return await response.json() as { id: string } | undefined;
 }
 
-export function useDocumentCreate() {
+export function useDocumentCreate(): UseMutationResult<{
+    id: string;
+} | undefined, Error, DocumentCreateArgs, unknown> {
     const client = useQueryClient();
     return useMutation({
         mutationFn: ({ name }: DocumentCreateArgs) => fetchPostDocument(({ name })),

@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, HTMLAttributes, ReactNode, useId } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Check, Select as SelectIcon } from '@signalco/ui-icons';
 import * as SelectPrimitive from '@radix-ui/react-select'
 import { Stack } from '../Stack';
@@ -38,33 +38,33 @@ export function SelectItems(props: SelectItemsProps) {
 
     return (
         <Stack {...rest}>
-            {label && <label className="uitw-text-sm uitw-font-medium">{label}</label>}
+            {label && <label className="text-sm font-medium">{label}</label>}
             <SelectPrimitive.Root value={value} onValueChange={onValueChange}>
                 <SelectPrimitive.Trigger
                     id={id}
                     className={cx(
-                        'uitw-flex uitw-h-10 uitw-w-full uitw-items-center uitw-justify-between uitw-rounded-md uitw-bg-transparent uitw-px-3 uitw-py-2 uitw-text-sm uitw-ring-offset-background placeholder:uitw-text-muted-foreground focus:uitw-outline-none focus:uitw-ring-2 focus:uitw-ring-ring focus:uitw-ring-offset-2 disabled:uitw-cursor-not-allowed disabled:uitw-opacity-50',
-                        (!variant || variant === 'outlined') && 'uitw-border uitw-border-input'
+                        'flex h-10 w-full items-center justify-between rounded-md bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+                        (!variant || variant === 'outlined') && 'border border-input'
                     )}
                     aria-label={label ?? placeholder}
                 >
                     <SelectPrimitive.Value placeholder={label ?? placeholder} />
                     <SelectPrimitive.Icon asChild>
-                        <SelectIcon className="uitw-h-4 uitw-w-4 uitw-opacity-50" />
+                        <SelectIcon className="h-4 w-4 opacity-50" />
                     </SelectPrimitive.Icon>
                 </SelectPrimitive.Trigger>
                 <SelectPrimitive.Portal>
                     <SelectPrimitive.Content
                         className={cx(
-                            'uitw-relative uitw-z-50 uitw-min-w-[8rem] uitw-overflow-hidden uitw-rounded-md uitw-border uitw-bg-popover uitw-text-popover-foreground uitw-shadow-md data-[state=open]:uitw-animate-in data-[state=closed]:uitw-animate-out data-[state=closed]:uitw-fade-out-0 data-[state=open]:uitw-fade-in-0 data-[state=closed]:uitw-zoom-out-95 data-[state=open]:uitw-zoom-in-95 data-[side=bottom]:uitw-slide-in-from-top-2 data-[side=left]:uitw-slide-in-from-right-2 data-[side=right]:uitw-slide-in-from-left-2 data-[side=top]:uitw-slide-in-from-bottom-2',
-                            'data-[side=bottom]:uitw-translate-y-1 data-[side=left]:-uitw-translate-x-1 data-[side=right]:uitw-translate-x-1 data-[side=top]:-uitw-translate-y-1'
+                            'relative z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+                            'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1'
                         )}
                         position={'popper'}
                     >
                         <SelectPrimitive.Viewport
                             className={cx(
-                                'uitw-p-1',
-                                'uitw-h-[var(--radix-select-trigger-height)] uitw-w-full uitw-min-w-[var(--radix-select-trigger-width)]'
+                                'p-1',
+                                'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]'
                             )}
                         >
                             {items.map(item => (
@@ -72,12 +72,12 @@ export function SelectItems(props: SelectItemsProps) {
                                     key={item.value}
                                     value={item.value}
                                     disabled={item.disabled}
-                                    className="uitw-relative uitw-flex uitw-w-full uitw-cursor-default uitw-select-none uitw-items-center uitw-rounded-sm uitw-py-1.5 uitw-pl-8 uitw-pr-2 uitw-text-sm uitw-outline-none focus:uitw-bg-accent focus:uitw-text-accent-foreground data-[disabled]:uitw-pointer-events-none data-[disabled]:uitw-opacity-50"
+                                    className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                                     title={item.title}
                                 >
-                                    <span className="uitw-absolute uitw-left-2 uitw-flex uitw-h-3.5 uitw-w-3.5 uitw-items-center uitw-justify-center">
+                                    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
                                         <SelectPrimitive.ItemIndicator>
-                                            <Check className="uitw-h-4 uitw-w-4" />
+                                            <Check className="h-4 w-4" />
                                         </SelectPrimitive.ItemIndicator>
                                     </span>
                                     <SelectPrimitive.ItemText>
@@ -92,7 +92,7 @@ export function SelectItems(props: SelectItemsProps) {
                     </SelectPrimitive.Content>
                 </SelectPrimitive.Portal>
             </SelectPrimitive.Root>
-            {helperText && <p className="uitw-text-sm uitw-text-muted-foreground">{helperText}</p>}
+            {helperText && <p className="text-sm text-muted-foreground">{helperText}</p>}
         </Stack>
     );
 }

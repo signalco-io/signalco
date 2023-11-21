@@ -1,5 +1,5 @@
 import { type HTMLAttributes, type CSSProperties, forwardRef } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 
 export type RowProps = HTMLAttributes<HTMLDivElement> & {
     spacing?: number;
@@ -14,17 +14,17 @@ const Row = forwardRef<HTMLDivElement, RowProps>(({ spacing, alignItems, justify
         <div
             ref={ref}
             className={cx(
-                'uitw-flex uitw-gap-[--s-gap]',
-                justifyContent === 'start' && 'uitw-justify-start',
-                justifyContent === 'center' && 'uitw-justify-center',
-                justifyContent === 'end' && 'uitw-justify-end',
-                justifyContent === 'space-between' && 'uitw-justify-between',
-                (!justifyContent || justifyContent === 'stretch') && 'uitw-justify-stretch',
-                alignItems === 'start' && 'uitw-items-start',
-                (!alignItems || alignItems === 'center') && 'uitw-items-center',
-                alignItems === 'end' && 'uitw-items-end',
-                alignItems === 'stretch' && 'uitw-items-stretch',
-                justifyItems === 'center' && 'uitw-justify-items-center',
+                'flex gap-[--s-gap]',
+                justifyContent === 'start' && 'justify-start',
+                justifyContent === 'center' && 'justify-center',
+                justifyContent === 'end' && 'justify-end',
+                justifyContent === 'space-between' && 'justify-between',
+                (!justifyContent || justifyContent === 'stretch') && 'justify-stretch',
+                alignItems === 'start' && 'items-start',
+                (!alignItems || alignItems === 'center') && 'items-center',
+                alignItems === 'end' && 'items-end',
+                alignItems === 'stretch' && 'items-stretch',
+                justifyItems === 'center' && 'justify-items-center',
                 className)}
             style={{
                 '--s-gap': `${(spacing ?? 0) * 8}px`,

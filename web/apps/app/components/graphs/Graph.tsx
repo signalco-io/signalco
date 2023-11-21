@@ -2,13 +2,13 @@ import { TooltipProps } from 'recharts/types/component/Tooltip';
 import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, LabelProps, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
 import { type SVGProps } from 'react';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Timeago } from '@signalco/ui/dist/Timeago';
-import { Row } from '@signalco/ui/dist/Row';
-import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { lightBlue, deepOrange, green, amber, zinc } from '@signalco/ui/dist/colors';
-import { Card } from '@signalco/ui/dist/Card';
+import { Typography } from '@signalco/ui/Typography';
+import { Timeago } from '@signalco/ui/Timeago';
+import { Row } from '@signalco/ui/Row';
+import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/Loadable';
+import { lightBlue, deepOrange, green, amber, zinc } from '@signalco/ui/colors';
+import { Card } from '@signalco/ui/Card';
 import { camelToSentenceCase, ObjectDictAny } from '@signalco/js';
 import { now } from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
@@ -83,15 +83,15 @@ function GraphTimeLine({ data, durationMs, width, startDateTime, hideLegend }: I
     const transformedDataItem: ObjectDictAny = {};
 
     // From start of graph to first entry
-    transformedDataItem['t0'] = domainGraph(new Date(firstEntry.id).getTime()) - domainGraph(past.getTime());
-    transformedDataItem['v0'] = firstEntry.value === 'true' ? 'false' : 'true';
+    transformedDataItem['t0'] = domainGraph(new Date(firstEntry?.id ?? 0).getTime()) - domainGraph(past.getTime());
+    transformedDataItem['v0'] = firstEntry?.value === 'true' ? 'false' : 'true';
 
     // From first entry to last entry
     for (let i = 1; i < reversedData.length; i++) {
         const currentElement = reversedData[i];
         const previousElement = reversedData[i - 1];
-        transformedDataItem[`t${i}`] = domainGraph(new Date(currentElement.id).getTime()) - domainGraph(new Date(previousElement.id).getTime());
-        transformedDataItem[`v${i}`] = previousElement.value;
+        transformedDataItem[`t${i}`] = domainGraph(new Date(currentElement?.id ?? 0).getTime()) - domainGraph(new Date(previousElement?.id ?? 0).getTime());
+        transformedDataItem[`v${i}`] = previousElement?.value;
     }
 
     // Period from last state change until present
@@ -149,10 +149,10 @@ function ChartGenericTooltip({
 }: TooltipProps<string | number | (string | number)[], string | number> &
     { domain: ScaleTime<number, number, never>, units?: string }) {
     if (active && payload && payload.length) {
-        const dateTime = domain.invert(payload[0].payload.key) as Date;
+        const dateTime = domain.invert(payload[0]?.payload.key) as Date;
         return (
             <Card className="max-w-xs">
-                <Typography>{`${payload[0].value}${units || ''}`}</Typography>
+                <Typography>{`${payload[0]?.value}${units || ''}`}</Typography>
                 <Timeago date={dateTime} />
                 <Typography level="body2">{`${dateTime.getFullYear()}-${dateTime.getMonth().toString().padStart(2, '0')}-${dateTime.getDate().toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`}</Typography>
             </Card>
@@ -256,7 +256,7 @@ const graphColorWheel = [
 
 function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
     const barKeys = (data?.length ?? 0) > 0
-        ? (typeof data[0].value === 'object' ? Object.keys(data[0].value) : ['value'])
+        ? (typeof data[0]?.value === 'object' ? Object.keys(data[0].value) : ['value'])
         : [];
 
     const graphData = data.map(d => typeof d.value === 'object' ? ({ id: d.id, ...d.value }) : d);
@@ -264,10 +264,19 @@ function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
     const usagesAggregated = [];
     if (aggregate) {
         for (let usageIndex = 0; usageIndex < graphData.length; usageIndex++) {
-            const currentPoint: ObjectDictAny = graphData[usageIndex];
+            const curr = graphData[usageIndex];
+            if (!curr) {
+                continue;
+            }
+            const currentPoint: ObjectDictAny = curr;
+
             const previousPoint = usageIndex > 0
                 ? usagesAggregated[usageIndex - 1]
                 : {};
+            if (!previousPoint) {
+                continue;
+            }
+
             const aggregatedPoint: ObjectDictAny = {
                 id: currentPoint.id
             };

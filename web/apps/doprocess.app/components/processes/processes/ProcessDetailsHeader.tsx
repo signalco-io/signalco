@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { cx } from 'classix';
 import { Delete, Embed, ListChecks, MoreHorizontal, Play } from '@signalco/ui-icons';
-import { Skeleton } from '@signalco/ui/dist/Skeleton';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Stack } from '@signalco/ui/Stack';
+import { Skeleton } from '@signalco/ui/Skeleton';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/Menu';
+import { Loadable } from '@signalco/ui/Loadable';
+import { IconButton } from '@signalco/ui/IconButton';
+import { cx } from '@signalco/ui/cx';
 import { ListHeader } from '../../shared/ListHeader';
 import { EmbedModal } from '../../shared/EmbedModal';
 import { KnownPages } from '../../../src/knownPages';
@@ -35,6 +36,9 @@ export function ProcessDetailsHeader({
             loadingLabel="Loading process details..."
             placeholder={<Skeleton className="h-7 w-[120px]" />}
             error={errorProcess}>
+            <Stack>
+                Stack
+            </Stack>
             <ListHeader
                 icon={isRun ? <Play /> : <ListChecks />}
                 header={isRun
@@ -81,7 +85,7 @@ export function ProcessDetailsHeader({
                 subHeader={runId
                     ? 'To embed this process run, copy the following HTML snippet and paste it into your website:'
                     : 'To embed this process, copy the following HTML snippet and paste it into your website:'}
-                src={`${window.location.origin}${runId ? KnownPages.ProcessRun(processId, runId) : KnownPages.Process(processId)}/embedded`}
+                src={`https://doprocess.app${runId ? KnownPages.ProcessRun(processId, runId) : KnownPages.Process(processId)}/embedded`}
                 open={embedOpen}
                 onOpenChange={setEmbedOpen} />
         </Loadable>

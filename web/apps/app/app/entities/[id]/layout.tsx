@@ -2,13 +2,13 @@
 
 import { type PropsWithChildren } from 'react';
 import { ExternalLink } from '@signalco/ui-icons';
-import { Timeago } from '@signalco/ui/dist/Timeago';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { DisableButton } from '@signalco/ui/dist/DisableButton';
-import { Chip } from '@signalco/ui/dist/Chip';
+import { Timeago } from '@signalco/ui/Timeago';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { DisableButton } from '@signalco/ui/DisableButton';
+import { Chip } from '@signalco/ui/Chip';
 import { camelToSentenceCase } from '@signalco/js';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import useContact from '../../../src/hooks/signalco/useContact';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import { entityLastActivity } from '../../../src/entity/EntityHelper';

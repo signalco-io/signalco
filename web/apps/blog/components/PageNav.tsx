@@ -1,8 +1,8 @@
 import React from 'react';
-import { cx } from 'classix';
-import { Row } from '@signalco/ui/dist/Row';
-import { Link } from '@signalco/ui/dist/Link';
-import { Container } from '@signalco/ui/dist/Container';
+import { Row } from '@signalco/ui/Row';
+import { Link } from '@signalco/ui/Link';
+import { cx } from '@signalco/ui/cx';
+import { Container } from '@signalco/ui/Container';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 
 export const HeaderHeight = 80;

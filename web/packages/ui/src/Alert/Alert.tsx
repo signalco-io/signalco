@@ -1,5 +1,5 @@
 import { type HTMLAttributes, type ReactNode } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Row } from '../Row';
 
 export type AlertProps = HTMLAttributes<HTMLDivElement> & {
@@ -14,17 +14,18 @@ export function Alert({ className, color, startDecorator, endDecorator, children
             role="alert"
             spacing={1}
             className={cx(
-                'uitw-relative uitw-w-full uitw-rounded-lg uitw-border p-4 [&>svg~*]:uitw-pl-7 [&>svg+div]:uitw-translate-y-[-3px] [&>svg]:uitw-absolute [&>svg]:uitw-left-4 [&>svg]:uitw-top-4 [&>svg]:uitw-text-foreground',
-                color === 'primary' && 'uitw-bg-primary-100 uitw-border-primary-300',
-                color === 'neutral' && 'uitw-bg-neutral-100 uitw-border-neutral-300',
-                color === 'danger' && 'uitw-bg-red-100 uitw-border-red-300 dark:uitw-bg-red-900 dark:uitw-border-red-700',
-                color === 'info' && 'uitw-bg-blue-100 uitw-border-blue-300',
-                color === 'success' && 'uitw-bg-green-100 uitw-border-green-300',
-                color === 'warning' && 'uitw-bg-yellow-100 uitw-border-yellow-300',
+                'relative w-full rounded-lg border p-4',
+                '[&>svg~*]:pl-8 [&>svg]:absolute [&>svg]:top-3.5 [&>svg]:left-4',
+                color === 'primary' && 'bg-primary-100 border-primary-300',
+                color === 'neutral' && 'bg-neutral-100 border-neutral-300',
+                color === 'danger' && 'bg-red-100 border-red-300 dark:bg-red-900 dark:border-red-700',
+                color === 'info' && 'bg-blue-100 border-blue-300',
+                color === 'success' && 'bg-green-100 border-green-300',
+                color === 'warning' && 'bg-yellow-100 border-yellow-300',
                 className)}
             {...props}>
             {startDecorator}
-            <div className="uitw-text-sm [&_p]:uitw-leading-relaxed">
+            <div className="text-sm [&_p]:leading-relaxed">
                 {children}
             </div>
             {endDecorator}

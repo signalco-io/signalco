@@ -3,29 +3,18 @@
     "version": "0.0.0",
     "private": true,
     "sideEffects": false,
-    "module": "./dist/index.js",
-    "types": "./dist/src/index.d.ts",
-    "exports": {
-        ".": {
-            "import": "./dist/index.js"
-        }
-    },
     "type": "module",
-    "files": [
-        "dist"
-    ],
+    "exports": {
+        ".": "./src/index.ts"
+    },
     "scripts": {
-        "build": "tsup src/index.ts --experimental-dts --format esm",
-        "dev": "tsup src/index.ts --experimental-dts --format esm --watch",
-        "clean": "rimraf dist"
+        "lint": "eslint ."
     },
     "devDependencies": {
-        "@microsoft/api-extractor": "7.38.3",
         "@signalco/tsconfig": "workspace:*",
+        "@signalco/eslint-config-signalco": "workspace:*",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "rimraf": "5.0.5",
-        "tsup": "8.0.0",
         "typescript": "5.3.2"
     },
     "peerDependencies": {

@@ -1,6 +1,6 @@
 import { type HTMLAttributes } from 'react';
-import { cx } from 'classix';
-import { Row } from '@signalco/ui/dist/Row';
+import { Row } from '@signalco/ui/Row';
+import { cx } from '@signalco/ui/cx';
 
 export type ToolbarProps = HTMLAttributes<HTMLDivElement>;
 

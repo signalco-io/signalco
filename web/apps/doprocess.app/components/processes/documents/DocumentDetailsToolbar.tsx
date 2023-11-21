@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { cx } from 'classix';
 import { Delete, Embed, MoreHorizontal } from '@signalco/ui-icons';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
-import { IconButton } from '@signalco/ui/dist/IconButton';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/Menu';
+import { IconButton } from '@signalco/ui/IconButton';
+import { cx } from '@signalco/ui/cx';
 import { Toolbar } from '../../shared/Toolbar';
 import { SavingIndicator } from '../../shared/SavingIndicator';
 import { EmbedModal } from '../../shared/EmbedModal';
@@ -57,7 +57,7 @@ export function DocumentDetailsToolbar({ id, saving }: DocumentDetailsToolbarPro
             <EmbedModal
                 header="Embed document"
                 subHeader="To embed this process run, copy the following HTML snippet and paste it into your website:"
-                src={`${window.location.origin}${KnownPages.Document(id)}/embedded`}
+                src={`https://doprocess.app${KnownPages.Document(id)}/embedded`}
                 open={embedOpen}
                 onOpenChange={setEmbedOpen} />
         </>

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import createGlobe from 'cobe';
-import { useWindowWidth } from '@signalco/hooks/dist/useWindowWidth';
+import { useWindowWidth } from '@signalco/hooks/useWindowWidth';
 
 function Globe() {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);

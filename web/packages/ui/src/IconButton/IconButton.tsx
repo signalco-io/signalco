@@ -1,5 +1,5 @@
 import { forwardRef, type ComponentProps, PropsWithChildren, useMemo } from 'react';
-import {cx} from 'classix';
+import {cx} from '@signalco/ui/cx';
 import { Link , LoaderSpinner } from '@signalco/ui-icons';
 import { Slot } from '@radix-ui/react-slot';
 import { Button } from '../Button';
@@ -19,19 +19,19 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({
             <ButtonComp
                 ref={ref}
                 className={cx(
-                    'uitw-inline-flex uitw-gap-1 uitw-items-center uitw-justify-center uitw-text-sm uitw-font-medium uitw-transition-colors focus-visible:uitw-outline-none focus-visible:uitw-ring-2 focus-visible:uitw-ring-ring focus-visible:uitw-ring-offset-2 disabled:uitw-opacity-50 disabled:uitw-pointer-events-none uitw-ring-offset-background',
-                    (!variant || variant === 'soft') && 'uitw-bg-secondary uitw-text-secondary-foreground hover:uitw-bg-secondary/80',
-                    variant === 'outlined' && 'uitw-border uitw-border-input hover:uitw-bg-accent hover:uitw-text-accent-foreground',
-                    variant === 'plain' && 'hover:uitw-bg-accent hover:uitw-text-accent-foreground',
-                    variant === 'solid' && 'uitw-bg-primary uitw-text-primary-foreground hover:uitw-bg-primary/90',
-                    (!size || size === 'md') && 'uitw-h-9 uitw-w-9 uitw-p-2 uitw-rounded-md',
-                    size === 'sm' && 'uitw-h-8 uitw-w-8 uitw-rounded-sm uitw-p-2',
-                    size === 'lg' && 'uitw-h-12 uitw-w-12 uitw-rounded-md',
-                    fullWidth && 'uitw-w-full',
+                    'inline-flex gap-1 items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background',
+                    (!variant || variant === 'soft') && 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+                    variant === 'outlined' && 'border border-input hover:bg-accent hover:text-accent-foreground',
+                    variant === 'plain' && 'hover:bg-accent hover:text-accent-foreground',
+                    variant === 'solid' && 'bg-primary text-primary-foreground hover:bg-primary/90',
+                    (!size || size === 'md') && 'h-9 w-9 p-2 rounded-md',
+                    size === 'sm' && 'h-8 w-8 rounded-sm p-2',
+                    size === 'lg' && 'h-12 w-12 rounded-md',
+                    fullWidth && 'w-full',
                     className
                 )}
                 {...rest}>
-                {loading && <LoaderSpinner className="uitw-mr-2 uitw-h-4 uitw-w-4 uitw-animate-spin" />}
+                {loading && <LoaderSpinner className="mr-2 h-4 w-4 animate-spin" />}
                 {loading ? null : children}
             </ButtonComp>
         </Comp>

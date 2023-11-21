@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { cx } from 'classix';
-import { Tooltip } from '@signalco/ui/dist/Tooltip';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Button } from '@signalco/ui/dist/Button';
+import { Tooltip } from '@signalco/ui/Tooltip';
+import { Stack } from '@signalco/ui/Stack';
+import { cx } from '@signalco/ui/cx';
+import { Button } from '@signalco/ui/Button';
 import useLocale from '../../src/hooks/useLocale';
 import { NavItem } from './NavProfile';
 

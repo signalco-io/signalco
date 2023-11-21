@@ -31,14 +31,14 @@ const DropdownMenuSubTrigger = forwardRef<
     <SubTrigger
         ref={ref}
         className={cx(
-            'uitw-flex uitw-cursor-default uitw-select-none uitw-items-center uitw-rounded-sm uitw-px-2 uitw-py-1.5 uitw-text-sm uitw-outline-none focus:uitw-bg-accent data-[state=open]:uitw-bg-accent',
-            inset && 'uitw-pl-8',
+            'flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent',
+            inset && 'pl-8',
             className
         )}
         {...props}
     >
         {children}
-        <Navigate className="uitw-ml-auto uitw-h-4 uitw-w-4" />
+        <Navigate className="ml-auto h-4 w-4" />
     </SubTrigger>
 ))
 DropdownMenuSubTrigger.displayName = SubTrigger.displayName;
@@ -50,7 +50,7 @@ const DropdownMenuSubContent = forwardRef<
     <SubContent
         ref={ref}
         className={cx(
-            'uitw-z-50 uitw-min-w-[8rem] uitw-overflow-hidden uitw-rounded-md uitw-border uitw-bg-popover uitw-p-1 uitw-text-popover-foreground uitw-shadow-lg data-[state=open]:uitw-animate-in data-[state=closed]:uitw-animate-out data-[state=closed]:uitw-fade-out-0 data-[state=open]:uitw-fade-in-0 data-[state=closed]:uitw-zoom-out-95 data-[state=open]:uitw-zoom-in-95 data-[side=bottom]:uitw-slide-in-from-top-2 data-[side=left]:uitw-slide-in-from-right-2 data-[side=right]:uitw-slide-in-from-left-2 data-[side=top]:uitw-slide-in-from-bottom-2',
+            'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
             className
         )}
         {...props}
@@ -67,8 +67,8 @@ const DropdownMenuContent = forwardRef<
             ref={ref}
             sideOffset={sideOffset}
             className={cx(
-                'uitw-z-50 uitw-min-w-[8rem] uitw-overflow-hidden uitw-rounded-md uitw-border uitw-bg-popover uitw-p-1 uitw-text-popover-foreground uitw-shadow-md',
-                'data-[state=open]:uitw-animate-in data-[state=closed]:uitw-animate-out data-[state=closed]:uitw-fade-out-0 data-[state=open]:uitw-fade-in-0 data-[state=closed]:uitw-zoom-out-95 data-[state=open]:uitw-zoom-in-95 data-[side=bottom]:uitw-slide-in-from-top-2 data-[side=left]:uitw-slide-in-from-right-2 data-[side=right]:uitw-slide-in-from-left-2 data-[side=top]:uitw-slide-in-from-bottom-2',
+                'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md',
+                'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
                 className
             )}
             {...props}
@@ -96,12 +96,12 @@ const DropdownMenuItem = forwardRef<
             <Item
                 ref={ref}
                 className={cx(
-                    'uitw-relative uitw-flex uitw-cursor-default uitw-select-none uitw-items-center uitw-rounded-sm uitw-px-2 uitw-py-1.5 uitw-text-sm uitw-outline-none uitw-transition-colors focus:uitw-bg-accent focus:uitw-text-accent-foreground data-[disabled]:uitw-pointer-events-none data-[disabled]:uitw-opacity-50',
-                    inset && 'uitw-pl-8',
+                    'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+                    inset && 'pl-8',
                     className
                 )}
                 {...props}>
-                <DecoratorWrapper spacing={1} className="uitw-w-full">
+                <DecoratorWrapper spacing={1} className="w-full">
                     {startDecorator}
                     {children}
                     {endDecorator}
@@ -121,8 +121,8 @@ const DropdownMenuLabel = forwardRef<
     <Label
         ref={ref}
         className={cx(
-            'uitw-px-2 uitw-py-1.5 uitw-text-sm uitw-font-semibold',
-            inset && 'uitw-pl-8',
+            'px-2 py-1.5 text-sm font-semibold',
+            inset && 'pl-8',
             className
         )}
         {...props}
@@ -136,7 +136,7 @@ const DropdownMenuSeparator = forwardRef<
 >(({ className, ...props }, ref) => (
     <Separator
         ref={ref}
-        className={cx('-uitw-mx-1 uitw-my-1 uitw-h-px uitw-bg-muted', className)}
+        className={cx('-mx-1 my-1 h-px bg-muted', className)}
         {...props}
     />
 ))
@@ -148,7 +148,7 @@ function DropdownMenuShortcut({
 }: React.HTMLAttributes<HTMLSpanElement>) {
     return (
         <span
-            className={cx('uitw-ml-auto uitw-text-xs uitw-tracking-widest uitw-opacity-60', className)}
+            className={cx('ml-auto text-xs tracking-widest opacity-60', className)}
             {...props}
         />
     )

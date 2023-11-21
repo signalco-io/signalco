@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
-import { ErrorBoundary } from '@signalco/ui/dist/ErrorBoundary';
-import { Card, CardOverflow } from '@signalco/ui/dist/Card';
-import { Button } from '@signalco/ui/dist/Button';
+import { Stack } from '@signalco/ui/Stack';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui/Menu';
+import { ErrorBoundary } from '@signalco/ui/ErrorBoundary';
+import { Card, CardOverflow } from '@signalco/ui/Card';
+import { Button } from '@signalco/ui/Button';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
 

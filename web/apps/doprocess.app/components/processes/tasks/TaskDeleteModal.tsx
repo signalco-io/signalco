@@ -1,7 +1,7 @@
 'use client';
 
-import { ModalConfirm, ModalConfirmProps } from '@signalco/ui/dist/ModalConfirm';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { ModalConfirm, ModalConfirmProps } from '@signalco/ui/ModalConfirm';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { useProcessTaskDefinitionDelete } from '../../../src/hooks/useProcessTaskDefinitionDelete';
 import { ProcessTaskDefinitionDto } from '../../../app/api/dtos/dtos';
 

@@ -1,5 +1,5 @@
 import { type PropsWithChildren, useMemo, ReactNode, CSSProperties } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Warning } from '@signalco/ui-icons';
 import { Spinner } from '../Spinner';
 import { Skeleton } from '../Skeleton';
@@ -36,7 +36,7 @@ export function Loadable({
     const indicator = useMemo(() => {
         if (placeholder == null || placeholder === 'circular') {
             return (
-                <div className={cx('uitw-p-2 uitw-flex uitw-flex-col uitw-items-center', className)}>
+                <div className={cx('p-2 flex flex-col items-center', className)}>
                     <Spinner loading={true} loadingLabel={loadingLabel} />
                 </div>
             );
@@ -45,7 +45,7 @@ export function Loadable({
         if (placeholder === 'skeletonText') {
             return (
                 <Skeleton
-                    className={cx('uitw-h-5 uitw-w-[--width]', className)}
+                    className={cx('h-5 w-[--width]', className)}
                     style={{ '--width': `${width ?? 120}px`} as CSSProperties}
                 />
             );
@@ -53,7 +53,7 @@ export function Loadable({
         if (placeholder === 'skeletonRect') {
             return (
                 <Skeleton
-                    className={cx('uitw-h-[--height] uitw-w-[--width]', className)}
+                    className={cx('h-[--height] w-[--width]', className)}
                     style={{ '--width': `${width ?? 120}px`, '--height': `${height ?? 32}px`} as CSSProperties}
                 />
             );
@@ -75,7 +75,7 @@ export function Loadable({
             }
         }
         return (
-            <Alert color="danger" className="uitw-w-full" startDecorator={<Warning />}>
+            <Alert color="danger" className="w-full" startDecorator={<Warning />}>
                 {errorDisplay}
             </Alert>
         );
@@ -89,7 +89,7 @@ export function Loadable({
                 </>
             )}
             {contentVisible && (
-                <div className={cx('uitw-h-full uitw-w-full', !isLoading && 'uitw-hidden')}>
+                <div className={cx('h-full w-full', !isLoading && 'hidden')}>
                     {indicator}
                 </div>
             )}

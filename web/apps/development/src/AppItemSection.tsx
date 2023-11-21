@@ -1,7 +1,7 @@
 import { AppItem } from './AppItem';
 import { AppItemType } from './AppItemType';
-import { Row } from '@signalco/ui/dist/Row';
-import { Typography } from '@signalco/ui/dist/Typography';
+import { Row } from '@signalco/ui/Row';
+import { Typography } from '@signalco/ui/Typography';
 
 export function AppItemSection({ items, title }: { items: AppItemType[]; title: string; }) {
     return (

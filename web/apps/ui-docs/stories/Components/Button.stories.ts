@@ -1,4 +1,4 @@
-import { Button } from "@signalco/ui/dist/Button";
+import { Button } from "@signalco/ui/Button";
 import { Meta, StoryObj } from "@storybook/react";
 
 export default { component: Button, tags: ['autodocs'] } satisfies Meta<typeof Button>;

@@ -1,9 +1,9 @@
-import { cx } from 'classix';
 import { Navigate } from '@signalco/ui-icons';
-import { Row } from '@signalco/ui/dist/Row';
-import { Link } from '@signalco/ui/dist/Link';
-import { Container } from '@signalco/ui/dist/Container';
-import { Button } from '@signalco/ui/dist/Button';
+import { Row } from '@signalco/ui/Row';
+import { Link } from '@signalco/ui/Link';
+import { cx } from '@signalco/ui/cx';
+import { Container } from '@signalco/ui/Container';
+import { Button } from '@signalco/ui/Button';
 import { SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
 import { KnownPages } from '../src/knownPages';
 import { UserButton } from './UserButton';

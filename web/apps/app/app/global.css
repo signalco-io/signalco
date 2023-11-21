@@ -1,8 +1,5 @@
-@import '@signalco/ui/dist/index.css';
-@import '@signalco/ui-notifications/dist/index.css';
-
-@tailwind components;
-@tailwind utilities;
+@import '@signalco/ui/index.css';
+@import '@signalco/ui-notifications/index.css';
 
 @font-face {
   font-family: 'Material Icons';
@@ -40,22 +37,5 @@
 
 :root {
   --graph-stroke: #999;
-
-  --bg-selection: #000;
-  --text-selection: #fff; 
 }
 
-.dark {
-  --bg-selection: #fff;
-  --text-selection: #000;
-}
-
-::selection { background: var(--bg-selection); color: var(--text-selection); }
-
-.image--light {
-  display: var(--light-display);
-}
-
-.image--dark {
-  display: var(--dark-display);
-}

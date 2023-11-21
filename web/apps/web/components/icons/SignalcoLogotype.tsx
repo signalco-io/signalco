@@ -1,6 +1,6 @@
 import { Ref, forwardRef } from 'react';
 import Image, { ImageProps } from 'next/image';
-import type { SupportedColorScheme } from '@signalco/ui/dist/theme';
+import type { SupportedColorScheme } from '@signalco/ui/theme';
 
 export type SignalcoLogotypeProps = Omit<ImageProps, 'width' | 'height' | 'alt' | 'src'> & {
     width?: number;

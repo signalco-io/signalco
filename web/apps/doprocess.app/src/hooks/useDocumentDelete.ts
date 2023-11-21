@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import { documentsKey } from './useDocuments';
 
 type DocumentDeleteArgs = {
@@ -11,7 +11,7 @@ async function fetchDeleteDocumentAsync(id: string) {
     });
 }
 
-export function useDocumentDelete() {
+export function useDocumentDelete(): UseMutationResult<void, Error, DocumentDeleteArgs, unknown> {
     const client = useQueryClient();
     return useMutation({
         mutationFn: ({ id }: DocumentDeleteArgs) => fetchDeleteDocumentAsync(id),

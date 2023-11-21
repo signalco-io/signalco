@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Edit } from '@signalco/ui-icons';
 import { Typography, TypographyProps, populateTypographyStylesAndClasses } from '../Typography/Typography';
 
@@ -43,7 +43,7 @@ export function TypographyEditable({ children, className, onChange, onEditingCha
             <input
                 value={value}
                 autoFocus
-                className={cx('uitw-bg-transparent', inputClassName)}
+                className={cx('bg-transparent', inputClassName)}
                 onChange={(e) => setValue(e.target.value)}
                 onBlur={handleConfirm}
                 onKeyDown={handleKeyDown}
@@ -54,13 +54,13 @@ export function TypographyEditable({ children, className, onChange, onEditingCha
 
     return (
         <Typography
-            className={cx('uitw-group uitw-cursor-pointer [word-break:break-word]', !children && 'uitw-text-muted-foreground', className)}
+            className={cx('group cursor-pointer [word-break:break-word]', !children && 'text-muted-foreground', className)}
             role="button"
             onClick={handleEdit}
             {...rest}>
             {children || placeholder}
             {!hideEditIcon && (
-                <Edit size={20} className="uitw-ml-2 uitw-inline uitw-opacity-0 uitw-transition-opacity group-hover:uitw-opacity-60" />
+                <Edit size={20} className="ml-2 inline opacity-0 transition-opacity group-hover:opacity-60" />
             )}
         </Typography>
     );

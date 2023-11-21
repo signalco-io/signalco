@@ -2,9 +2,9 @@
 
 import React, { Suspense } from 'react';
 import { usePathname } from 'next/navigation';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Row } from '@signalco/ui/dist/Row';
-import { Avatar } from '@signalco/ui/dist/Avatar';
+import { Typography } from '@signalco/ui/Typography';
+import { Row } from '@signalco/ui/Row';
+import { Avatar } from '@signalco/ui/Avatar';
 import { KnownPages } from '../../src/knownPages';
 import { useActiveNavItem } from './useActiveNavItem';
 import { SpaceTitle } from './SpaceTitle';

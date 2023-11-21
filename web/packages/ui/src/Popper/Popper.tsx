@@ -1,5 +1,5 @@
 import { type HTMLAttributes } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import * as PopoverPrimitive from '@radix-ui/react-popover'
 
 export type PopperProps = HTMLAttributes<HTMLDivElement> & {
@@ -27,7 +27,7 @@ export function Popper({ className, trigger, anchor, open, onOpenChange, ...rest
                     align="center"
                     sideOffset={4}
                     className={cx(
-                        'uitw-z-50 uitw-w-72 uitw-rounded-md uitw-border uitw-bg-popover uitw-text-popover-foreground uitw-shadow-md uitw-outline-none data-[state=open]:uitw-animate-in data-[state=closed]:uitw-animate-out data-[state=closed]:uitw-fade-out-0 data-[state=open]:uitw-fade-in-0 data-[state=closed]:uitw-zoom-out-95 data-[state=open]:uitw-zoom-in-95 data-[side=bottom]:uitw-slide-in-from-top-2 data-[side=left]:uitw-slide-in-from-right-2 data-[side=right]:uitw-slide-in-from-left-2 data-[side=top]:uitw-slide-in-from-bottom-2',
+                        'z-50 w-72 rounded-md border bg-popover text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
                         className
                     )}
                     {...rest}
