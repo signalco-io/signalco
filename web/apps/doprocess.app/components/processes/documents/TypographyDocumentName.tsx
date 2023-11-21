@@ -1,8 +1,8 @@
 'use client';
 
-import { TypographyEditable, TypographyEditableProps } from '@signalco/ui/dist/TypographyEditable';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Loadable } from '@signalco/ui/dist/Loadable';
+import { TypographyEditable, TypographyEditableProps } from '@signalco/ui/TypographyEditable';
+import { Typography } from '@signalco/ui/Typography';
+import { Loadable } from '@signalco/ui/Loadable';
 import { useDocumentUpdate } from '../../../src/hooks/useDocumentUpdate';
 import { useDocument } from '../../../src/hooks/useDocument';
 

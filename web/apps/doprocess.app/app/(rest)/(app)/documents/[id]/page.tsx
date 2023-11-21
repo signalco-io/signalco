@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { cx } from 'classix';
-import { Stack } from '@signalco/ui/dist/Stack';
+import { Stack } from '@signalco/ui/Stack';
 import { useDocument } from '../../../../../src/hooks/useDocument';
 import { TypographyDocumentName } from '../../../../../components/processes/documents/TypographyDocumentName';
 import { DocumentEditor } from '../../../../../components/processes/documents/DocumentEditor';

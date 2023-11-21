@@ -1,7 +1,6 @@
 import { Inter } from 'next/font/google';
 import { Metadata, Viewport } from 'next';
-import '@signalco/ui/index.css';
-import './global.scss';
+import './global.css';
 
 const inter = Inter({
     subsets: ['latin'],

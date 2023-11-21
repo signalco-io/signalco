@@ -1,8 +1,8 @@
 'use client';
 
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { ListHeader } from '../../shared/ListHeader';
 import { TypographyProcessName } from './TypographyProcessName';
 import { RunsList } from './RunsList';

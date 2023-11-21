@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@signalco/ui/dist/ErrorBoundary";
+import { ErrorBoundary } from "@signalco/ui/ErrorBoundary";
 import { StoryObj } from "@storybook/react";
 
 export default { component: ErrorBoundary, tags: ['docsPage'] };

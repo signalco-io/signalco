@@ -1,29 +1,6 @@
 @import '@signalco/ui/index.css';
 
-@tailwind components;
-@tailwind utilities;
-
 html, body, #__next {
   height: 100%;
   width: 100%;
-}
-
-:root {
-  --bg-selection: #000;
-  --text-selection: #fff; 
-}
-
-.dark {
-  --bg-selection: #fff;
-  --text-selection: #000;
-}
-
-::selection { background: var(--bg-selection); color: var(--text-selection); }
-
-.image--light {
-  display: var(--light-display);
-}
-
-.image--dark {
-  display: var(--dark-display);
 }

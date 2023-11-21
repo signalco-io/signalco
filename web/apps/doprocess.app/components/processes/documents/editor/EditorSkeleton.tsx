@@ -1,5 +1,5 @@
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Skeleton } from '@signalco/ui/dist/Skeleton';
+import { Stack } from '@signalco/ui/Stack';
+import { Skeleton } from '@signalco/ui/Skeleton';
 
 export function EditorSkeleton() {
     return (

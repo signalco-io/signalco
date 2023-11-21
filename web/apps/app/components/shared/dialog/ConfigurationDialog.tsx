@@ -1,8 +1,8 @@
 import React from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Modal } from '@signalco/ui/dist/Modal';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { Modal } from '@signalco/ui/Modal';
 
 export interface IConfigurationDialogProps {
     open?: boolean;

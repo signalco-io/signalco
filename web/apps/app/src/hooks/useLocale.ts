@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { ObjectDictAny } from '@signalco/js';
-import { useIsServer } from '@signalco/hooks/dist/useIsServer';
+import { useIsServer } from '@signalco/hooks/useIsServer';
 import UserSettingsProvider from '../services/UserSettingsProvider';
 import hr from '../../locales/hr.json';
 import en from '../../locales/en.json';
@@ -15,8 +15,7 @@ function resolvePathSplit(data: ObjectDictAny, pathParts: string[]) {
     let namespaceKeys = data;
     for (let i = 0; i < pathParts.length; i++) {
         const nextNamespaceKey = pathParts[i];
-
-        if (!namespaceKeys) {
+        if (!nextNamespaceKey) {
             break;
         }
         namespaceKeys = namespaceKeys[nextNamespaceKey] as ObjectDictAny;

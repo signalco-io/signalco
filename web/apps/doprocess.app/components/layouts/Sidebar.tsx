@@ -4,8 +4,8 @@ import { useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import {cx} from 'classix';
 import { FileText, ListChecks, Play, Right } from '@signalco/ui-icons';
-import { List } from '@signalco/ui/dist/List';
-import { IconButton } from '@signalco/ui/dist/IconButton';
+import { List } from '@signalco/ui/List';
+import { IconButton } from '@signalco/ui/IconButton';
 import { ListItem } from '../shared/ListItem';
 import { KnownPages } from '../../src/knownPages';
 

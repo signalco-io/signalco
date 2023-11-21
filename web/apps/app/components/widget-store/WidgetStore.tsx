@@ -1,11 +1,12 @@
 import React from 'react';
 import { Add } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Input } from '@signalco/ui/dist/Input';
-import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Card } from '@signalco/ui/dist/Card';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { Input } from '@signalco/ui/Input';
+import { IconButton } from '@signalco/ui/IconButton';
+import { Card } from '@signalco/ui/Card';
+import { asArray } from '@signalco/js';
 import { widgetType } from '../widgets/Widget';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
 
@@ -102,7 +103,7 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
                                         variant="plain"
                                         disabled={props.onAddWidget == null}
                                         aria-label="Add to dashboard"
-                                        onClick={() => props.onAddWidget && props.onAddWidget(Array.isArray(availableWidget.type) ? availableWidget.type[0] : availableWidget.type)}>
+                                        onClick={() => props.onAddWidget && props.onAddWidget(asArray(availableWidget.type)[0] ?? 'unknown')}>
                                         <Add />
                                     </IconButton>
                                 </Row>

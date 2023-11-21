@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { cx } from 'classix';
 import { Delete, MoreHorizontal } from '@signalco/ui-icons';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
-import { IconButton } from '@signalco/ui/dist/IconButton';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui/Menu';
+import { IconButton } from '@signalco/ui/IconButton';
 import { Toolbar } from '../../shared/Toolbar';
 import { SavingIndicator } from '../../shared/SavingIndicator';
 import { useProcessTaskDefinition } from '../../../src/hooks/useProcessTaskDefinition';

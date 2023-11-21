@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import { processTaskDefinitionsKey } from './useProcessTaskDefinitions';
 
 type TaskDefinitionCreateArgs = {
@@ -14,7 +14,9 @@ async function fetchPostProcessTaskDefinition(processId: string, data: object) {
     return await response.json() as { id: string } | undefined;
 }
 
-export function useProcessTaskDefinitionCreate() {
+export function useProcessTaskDefinitionCreate(): UseMutationResult<{
+    id: string;
+} | undefined, Error, TaskDefinitionCreateArgs, unknown> {
     const client = useQueryClient();
     return useMutation({
         mutationFn: ({ processId, ...rest }: TaskDefinitionCreateArgs) => fetchPostProcessTaskDefinition(processId, rest),

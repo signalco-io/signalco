@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Button } from '@signalco/ui/dist/Button';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Button } from '@signalco/ui/Button';
 
 export function FeatureDescription(props: { header: string; content: string | React.ReactElement; link?: string; linkText?: string; }) {
     return (

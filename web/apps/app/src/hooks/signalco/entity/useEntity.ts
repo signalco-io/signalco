@@ -1,4 +1,4 @@
-import { QueryClient, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QueryClient, UseQueryResult, useQuery, useQueryClient } from '@tanstack/react-query';
 import IEntityDetails from '../../../entity/IEntityDetails';
 import { entityAsync } from '../../../entity/EntityRepository';
 import { entityTypes } from '../../../entity/EntityHelper';
@@ -17,7 +17,7 @@ function findEntity(client: QueryClient, id: string | undefined) {
         .at(0);
 }
 
-export default function useEntity(id: string | undefined) {
+export default function useEntity(id: string | undefined): UseQueryResult<IEntityDetails | undefined, Error> {
     const client = useQueryClient();
     return useQuery({
         queryKey: entityKey(id),

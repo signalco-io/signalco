@@ -31,9 +31,9 @@ export function Container({ maxWidth, centered = true, padded = true, children }
 
     return (
         <div className={cx(
-            'uitw-block uitw-max-w-[--container-maxWidth] uitw-w-full',
-            (Boolean(width) && padded) && 'uitw-px-4',
-            centered && 'uitw-mx-auto')}
+            'block max-w-[--container-maxWidth] w-full',
+            (Boolean(width) && padded) && 'px-4',
+            centered && 'mx-auto')}
         style={{
             '--container-maxWidth': width ? `${width}px` : undefined
         } as CSSProperties}>

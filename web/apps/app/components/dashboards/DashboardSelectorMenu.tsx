@@ -3,13 +3,13 @@
 import React from 'react';
 import { cx } from 'classix';
 import { Add, Pin, PinOff } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Divider } from '@signalco/ui/dist/Divider';
-import { Button } from '@signalco/ui/dist/Button';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { IconButton } from '@signalco/ui/IconButton';
+import { Divider } from '@signalco/ui/Divider';
+import { Button } from '@signalco/ui/Button';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
@@ -108,7 +108,10 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
             const newIndex = orderedDashboardIds.indexOf(over.id.toString());
             const newOrderedDashboards = arrayMove(orderedDashboards, oldIndex, newIndex);
             for (let i = 0; i < newOrderedDashboards.length; i++) {
-                newOrderedDashboards[i].order = i;
+                const item = newOrderedDashboards[i];
+                if (item) {
+                    item.order = i;
+                }
             }
 
             await DashboardsRepository.dashboardsOrderSetAsync(newOrderedDashboards.map(d => d.id));

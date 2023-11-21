@@ -1,4 +1,4 @@
-import { NoDataPlaceholder } from "@signalco/ui/dist/NoDataPlaceholder";
+import { NoDataPlaceholder } from "@signalco/ui/NoDataPlaceholder";
 import { Meta, StoryObj } from "@storybook/react";
 
 const Component = NoDataPlaceholder;

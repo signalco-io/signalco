@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ModalConfirm, ModalConfirmProps } from '@signalco/ui/dist/ModalConfirm';
+import { ModalConfirm, ModalConfirmProps } from '@signalco/ui/ModalConfirm';
 import { useDocumentDelete } from '../../../src/hooks/useDocumentDelete';
 import { DocumentDto } from '../../../app/api/dtos/dtos';
 

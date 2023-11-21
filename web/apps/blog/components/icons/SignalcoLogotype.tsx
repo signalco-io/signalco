@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { cx } from 'classix';
-import type { SupportedColorScheme } from '@signalco/ui/dist/theme';
+import type { SupportedColorScheme } from '@signalco/ui/theme';
 import styles from './SignalcoLogotype.module.scss';
 
 interface SignalcoLogotypeProps {

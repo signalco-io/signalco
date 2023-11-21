@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import type { SupportedColorScheme } from '@signalco/ui/dist/theme';
+import type { SupportedColorScheme } from '@signalco/ui/theme';
 
 interface DoProcessLogoProps {
     width?: number;

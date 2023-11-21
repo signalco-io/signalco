@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import { handleArrayOptimisticUpdate } from '../helpers/queryHelpers';
 import { tasksKey } from './useProcessRunTasks';
 
@@ -16,7 +16,9 @@ async function fetchPostProcessRunTask(processId: string, runId: string, data: o
     });
 }
 
-export function useProcessRunTaskUpsert() {
+export function useProcessRunTaskUpsert(): UseMutationResult<void, Error, TaskCreateArgs, {
+    previousItems: unknown;
+}> {
     const client = useQueryClient();
     return useMutation({
         mutationFn: ({ processId, runId, ...rest }: TaskCreateArgs) => fetchPostProcessRunTask(processId, runId, { processId, runId, ...rest }),

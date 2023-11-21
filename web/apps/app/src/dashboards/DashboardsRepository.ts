@@ -77,7 +77,7 @@ class DashboardModel implements IDashboardModel {
     }
 }
 
-export function dashboardModelFromEntity(entity: IEntityDetails, order: number, favorites: string[]): DashboardModel {
+export function dashboardModelFromEntity(entity: IEntityDetails, order: number, favorites: string[]): IDashboardModel {
     const dashboard = new DashboardModel(
         entity.id,
         entity.alias,

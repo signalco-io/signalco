@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import { processesKey } from './useProcesses';
 
 type ProcessCreateArgs = {
@@ -13,7 +13,9 @@ async function fetchPostProcess(data: object) {
     return await response.json() as { id: string } | undefined;
 }
 
-export function useProcessCreate() {
+export function useProcessCreate(): UseMutationResult<{
+    id: string;
+} | undefined, Error, ProcessCreateArgs, unknown> {
     const client = useQueryClient();
     return useMutation({
         mutationFn: ({ name }: ProcessCreateArgs) => fetchPostProcess(({ name })),

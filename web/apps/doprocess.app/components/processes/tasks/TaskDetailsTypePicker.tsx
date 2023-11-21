@@ -1,8 +1,8 @@
 'use client';
 
 import { Empty, FileInput, FileText } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Card, CardContent } from '@signalco/ui/dist/Card';
+import { Typography } from '@signalco/ui/Typography';
+import { Card, CardContent } from '@signalco/ui/Card';
 import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
 
 export default function TaskDetailsTypePicker({ processId, taskDefinitionId }: { processId: string, taskDefinitionId: string }) {

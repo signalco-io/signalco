@@ -1,4 +1,4 @@
-import { IconButtonCopyToClipboard } from "@signalco/ui/dist/IconButtonCopyToClipboard";
+import { IconButtonCopyToClipboard } from "@signalco/ui/IconButtonCopyToClipboard";
 import { StoryObj } from "@storybook/react";
 
 export default { component: IconButtonCopyToClipboard, tags: ['autodocs'] };

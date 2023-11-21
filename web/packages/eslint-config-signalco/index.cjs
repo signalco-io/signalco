@@ -1,3 +1,7 @@
+const { resolve } = require("node:path");
+
+const project = resolve(process.cwd(), "tsconfig.json");
+
 module.exports = {
     extends: [
         "next",
@@ -8,21 +12,22 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         "plugin:tailwindcss/recommended"
     ],
+    plugins: ["only-warn"],
+    globals: {
+        React: true,
+        JSX: true,
+    },
     overrides: [
         {
-            files: ['*.ts', '*.tsx', '*.js'],
-            parser: '@typescript-eslint/parser',
+            files: ['*.ts', '*.tsx', '*.js']
         },
     ],
     settings: {
         "import/resolver": {
             typescript: {
-                project: "./tsconfig.json"
+                project
             }
-        },
-        react: {
-            version: "detect"
-        },
+        }
     },
     rules: {
         "@next/next/no-html-link-for-pages": "off",

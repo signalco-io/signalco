@@ -1,4 +1,4 @@
-import { Row } from "@signalco/ui/dist/Row";
+import { Row } from "@signalco/ui/Row";
 import { StoryObj } from "@storybook/react";
 
 export default { component: Row, tags: ['autodocs'] };

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { ProcessTaskDefinitionDto } from '../../app/api/dtos/dtos';
 import { processKey } from './useProcess';
 
@@ -13,7 +13,7 @@ async function fetchGetProcess(processId: string) {
     return await response.json() as ProcessTaskDefinitionDto[] | undefined;
 }
 
-export function useProcessTaskDefinitions(processId?: string) {
+export function useProcessTaskDefinitions(processId?: string): UseQueryResult<ProcessTaskDefinitionDto[] | null | undefined, Error> {
     return useQuery({
         queryKey: processTaskDefinitionsKey(processId),
         queryFn: async () => {

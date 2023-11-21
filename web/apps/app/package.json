@@ -4,6 +4,7 @@
     "homepage": "https://www.signalco.io/",
     "version": "1.0.0",
     "private": true,
+    "type": "module",
     "engines": {
         "node": "18.x"
     },

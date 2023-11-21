@@ -1,5 +1,5 @@
 import { ListChecks, Play, Share } from '@signalco/ui-icons';
-import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
+import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { KnownPages } from '../../../src/knownPages';
 import { ImagePlaceholder } from '../../../components/images/ImagePlaceholder';
 

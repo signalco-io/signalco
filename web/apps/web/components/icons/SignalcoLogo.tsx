@@ -1,5 +1,5 @@
 import Image, { ImageProps } from 'next/image';
-import { SupportedColorScheme } from '@signalco/ui/dist/theme';
+import { SupportedColorScheme } from '@signalco/ui/theme';
 
 export type SignalcoLogoProps = Omit<ImageProps, 'width' | 'height' | 'alt' | 'src'> & {
     width?: number;

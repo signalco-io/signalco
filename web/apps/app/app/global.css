@@ -1,9 +1,6 @@
 @import '@signalco/ui/index.css';
 @import 'react-toastify/dist/ReactToastify.css';
 
-@tailwind components;
-@tailwind utilities;
-
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -45,23 +42,8 @@
   --toastify-text-color-dark: #333;
 
   --graph-stroke: #999;
-
-  --bg-selection: #000;
-  --text-selection: #fff; 
 }
 
 .dark {
   --toastify-color-progress-dark: #fff;
-  --bg-selection: #fff;
-  --text-selection: #000;
-}
-
-::selection { background: var(--bg-selection); color: var(--text-selection); }
-
-.image--light {
-  display: var(--light-display);
-}
-
-.image--dark {
-  display: var(--dark-display);
 }

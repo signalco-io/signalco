@@ -12,7 +12,7 @@ export function IsConfigurationValid<TConfigProps>(
     if (!config) return false;
     for (let i = 0; i < options.length; i++) {
         const opt = options[i];
-        if (opt.optional) continue;
+        if (!opt || opt.optional) continue;
 
         const value = config[opt.name];
         if (typeof value === 'undefined' || value == null) {

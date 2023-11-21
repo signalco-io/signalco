@@ -10,7 +10,7 @@ function SingleWave() {
     )
 }
 
-export function Wave({ value, breakpoints }: { value: number, breakpoints: number[] }) {
+export function Wave({ value, breakpoints }: { value: number, breakpoints: readonly [number, number, number] }) {
     return (
         <div>
             <div

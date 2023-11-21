@@ -1,5 +1,5 @@
 import { cx } from 'classix';
-import { Typography } from '@signalco/ui/dist/Typography';
+import { Typography } from '@signalco/ui/Typography';
 
 function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
     return (

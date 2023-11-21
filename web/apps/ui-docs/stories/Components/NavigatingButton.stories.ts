@@ -1,4 +1,4 @@
-import { NavigatingButton } from "@signalco/ui/dist/NavigatingButton";
+import { NavigatingButton } from "@signalco/ui/NavigatingButton";
 import { Meta, StoryObj } from "@storybook/react";
 
 const Component = NavigatingButton;

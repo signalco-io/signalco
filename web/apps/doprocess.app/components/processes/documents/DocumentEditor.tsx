@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { Loadable } from '@signalco/ui/dist/Loadable';
+import { Loadable } from '@signalco/ui/Loadable';
 import { useDebouncedEffect } from '@enterwell/react-hooks';
 import { useDocumentUpdate } from '../../../src/hooks/useDocumentUpdate';
 import { useDocument } from '../../../src/hooks/useDocument';

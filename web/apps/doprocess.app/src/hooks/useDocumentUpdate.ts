@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import { documentsKey } from './useDocuments';
 import { documentKey } from './useDocument';
 
@@ -15,7 +15,7 @@ async function fetchPutDocument(id: string, data: object) {
     });
 }
 
-export function useDocumentUpdate() {
+export function useDocumentUpdate(): UseMutationResult<void, Error, DocumentUpdateArgs, unknown> {
     const client = useQueryClient();
     return useMutation({
         mutationFn: ({ id, ...rest }: DocumentUpdateArgs) => fetchPutDocument(id, ({ id, ...rest })),

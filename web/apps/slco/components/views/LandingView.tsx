@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack } from '@signalco/ui/dist/Stack';
+import { Stack } from '@signalco/ui/Stack';
 
 export default function LandingPageView() {
     return (

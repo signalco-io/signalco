@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Row } from '@signalco/ui/dist/Row';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { Row } from '@signalco/ui/Row';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import DashboardSelector from '../dashboards/DashboardSelector';
 
 export function SpaceTitle() {

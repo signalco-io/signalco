@@ -1,10 +1,4 @@
-import { ExternalUrls } from "./ExternalUrls";
-
-export type KnownSecureHeadersExternalUrlsObject = {
-    [key: string]: ExternalUrls | ((param: string) => ExternalUrls);
-};
-
-export const knownSecureHeadersExternalUrls: KnownSecureHeadersExternalUrlsObject = {
+export const knownSecureHeadersExternalUrls = {
     signalco: {
         connectSrc: ['https://*.signalco.io'],
         imgSrc: ['https://*.signalco.io']
@@ -18,7 +12,7 @@ export const knownSecureHeadersExternalUrls: KnownSecureHeadersExternalUrlsObjec
     github: {
         connectSrc: ['https://api.github.com']
     },
-    auth0: (tenant: string) => {
+    auth0: (tenant) => {
         return {
             frameSrc: [`https://${tenant}.auth0.com`],
             imgSrc: [`https://${tenant}.auth0.com`],
