@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { useResizeable } from '../../src/hooks/useResizeable';
 import { ResizeHandle } from './ResizeHandle';
 

@@ -1,10 +1,10 @@
 import { type FormEvent } from 'react';
 import Link from 'next/link';
-import { cx } from 'classix';
 import { Typography } from '@signalco/ui/Typography';
 import { Timeago } from '@signalco/ui/Timeago';
 import { Stack } from '@signalco/ui/Stack';
 import { Row } from '@signalco/ui/Row';
+import { cx } from '@signalco/ui/cx';
 import { Checkbox } from '@signalco/ui/Checkbox';
 import { Card } from '@signalco/ui/Card';
 import { Avatar } from '@signalco/ui/Avatar';

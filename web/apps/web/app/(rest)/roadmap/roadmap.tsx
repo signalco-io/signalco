@@ -1,11 +1,11 @@
 import { PropsWithChildren } from 'react';
-import { cx } from 'classix';
 import { Up } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/Typography';
 import { Stack } from '@signalco/ui/Stack';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Loadable } from '@signalco/ui/Loadable';
 import { ItemsShowMore } from '@signalco/ui/FilterList';
+import { cx } from '@signalco/ui/cx';
 import { Container } from '@signalco/ui/Container';
 import { Card } from '@signalco/ui/Card';
 import { Button } from '@signalco/ui/Button';

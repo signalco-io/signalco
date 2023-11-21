@@ -1,5 +1,5 @@
 import type { CSSProperties, HTMLAttributes } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 
 export type StackProps = HTMLAttributes<HTMLDivElement> & {
     spacing?: number;

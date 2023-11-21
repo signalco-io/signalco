@@ -1,16 +1,17 @@
 import type { AnchorHTMLAttributes } from 'react';
 import NextLink from 'next/link';
 import type { Url } from 'next/dist/shared/lib/router/router';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { isAbsoluteUrl } from '@signalco/js';
 
 export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
     href: string | Url;
     className?: string | undefined;
     'aria-label'?: string | undefined;
+    legacy?: boolean;
 };
 
-export function Link({ className, href, children, ...rest }: LinkProps) {
+export function Link({ className, href, children, legacy, ...rest }: LinkProps) {
     return (
         <NextLink
             href={href}
@@ -21,6 +22,7 @@ export function Link({ className, href, children, ...rest }: LinkProps) {
             target={isAbsoluteUrl(href) ? '_blank' : '_self'}
             passHref
             prefetch={false}
+            legacyBehavior={legacy}
             {...rest}>
             {children}
         </NextLink>

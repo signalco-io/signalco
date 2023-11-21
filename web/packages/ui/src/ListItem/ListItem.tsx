@@ -1,5 +1,5 @@
 import { Ref, type ReactElement } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Row } from '../Row';
 import { Button } from '../Button';
 

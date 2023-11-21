@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import { cx } from 'classix';
 import { Typography } from '@signalco/ui/Typography';
 import { Row } from '@signalco/ui/Row';
 import { Link } from '@signalco/ui/Link';
+import { cx } from '@signalco/ui/cx';
 import { JsonResponse } from '@signalco/js';
 import { usePromise } from '@enterwell/react-hooks';
 

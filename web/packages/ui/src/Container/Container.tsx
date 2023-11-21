@@ -1,5 +1,5 @@
 import type { CSSProperties, PropsWithChildren } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 
 export type ContainerProps = PropsWithChildren<{
     maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false,

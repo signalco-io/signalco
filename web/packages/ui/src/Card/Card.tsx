@@ -1,5 +1,5 @@
 import { type HTMLAttributes, type PropsWithChildren, type MouseEventHandler, forwardRef } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Link } from '../Link';
 
 export type CardProps = Omit<HTMLAttributes<HTMLDivElement>, 'onClick'> & {

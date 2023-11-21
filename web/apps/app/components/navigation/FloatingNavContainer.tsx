@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 
 export function FloatingNavContainer({ children }: PropsWithChildren) {
     return (

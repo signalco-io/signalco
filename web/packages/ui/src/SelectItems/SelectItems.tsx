@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, HTMLAttributes, ReactNode, useId } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Check, Select as SelectIcon } from '@signalco/ui-icons';
 import * as SelectPrimitive from '@radix-ui/react-select'
 import { Stack } from '../Stack';

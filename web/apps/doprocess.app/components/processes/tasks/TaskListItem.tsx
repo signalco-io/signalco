@@ -1,11 +1,11 @@
 'use client';
 
-import { cx } from 'classix';
 import { Delete, Drag } from '@signalco/ui-icons';
 import { TypographyEditable } from '@signalco/ui/TypographyEditable';
 import { Typography } from '@signalco/ui/Typography';
 import { Row } from '@signalco/ui/Row';
 import { IconButton } from '@signalco/ui/IconButton';
+import { cx } from '@signalco/ui/cx';
 import { Checkbox } from '@signalco/ui/Checkbox';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { CSS } from '@dnd-kit/utilities';

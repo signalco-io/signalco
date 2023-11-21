@@ -1,5 +1,5 @@
 import { forwardRef, type ComponentProps, PropsWithChildren, useMemo } from 'react';
-import {cx} from 'classix';
+import {cx} from '@signalco/ui/cx';
 import { Link , LoaderSpinner } from '@signalco/ui-icons';
 import { Slot } from '@radix-ui/react-slot';
 import { Button } from '../Button';

@@ -1,4 +1,4 @@
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Navigate } from '@signalco/ui-icons';
 import { Button, ButtonProps } from '../Button';
 

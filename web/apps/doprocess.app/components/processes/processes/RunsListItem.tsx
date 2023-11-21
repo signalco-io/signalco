@@ -1,4 +1,6 @@
 import { ListChecks, Navigate, Play } from '@signalco/ui-icons';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
 import { Row } from '@signalco/ui/Row';
 import { ListItem } from '../../shared/ListItem';
 import { KnownPages } from '../../../src/knownPages';
@@ -12,16 +14,18 @@ export type RunsListItemProps = {
 export function RunsListItem({ run }: RunsListItemProps) {
     return (
         <ListItem
-            label={run.name}
+            label={(
+                <Stack spacing={0.5}>
+                    <Typography>{run.name}</Typography>
+                    <Row spacing={1} className="opacity-60">
+                        <ListChecks size={16} />
+                        <TypographyProcessName id={run.processId.toString()} level="body3" />
+                    </Row>
+                </Stack>
+            )}
             startDecorator={<Play />}
             endDecorator={(
-                <Row spacing={2}>
-                    <Row spacing={1} className="opacity-60">
-                        <ListChecks />
-                        <TypographyProcessName id={run.processId.toString()} />
-                    </Row>
-                    <Navigate className="opacity-0 group-hover:opacity-100" />
-                </Row>
+                <Navigate className="opacity-0 group-hover:opacity-100" />
             )}
             className="group w-full"
             href={KnownPages.ProcessRun(run.processId, run.id)} />

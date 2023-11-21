@@ -1,5 +1,5 @@
 import { type PropsWithChildren, useMemo, ReactNode, CSSProperties } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Warning } from '@signalco/ui-icons';
 import { Spinner } from '../Spinner';
 import { Skeleton } from '../Skeleton';

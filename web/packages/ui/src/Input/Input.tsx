@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, PropsWithChildren, useMemo } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Stack } from '../Stack';
 import { Row } from '../Row';
 
