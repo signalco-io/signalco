@@ -1,7 +1,7 @@
 import React, { type CSSProperties } from 'react';
-import { cx } from '@signalco/ui/cx';
 import { Typography } from '@signalco/ui/Typography';
 import { Stack } from '@signalco/ui/Stack';
+import { cx } from '@signalco/ui/cx';
 import { SectionCenter } from './SectionCenter';
 
 export function StepContent(props: {
