@@ -1,7 +1,7 @@
-import { cx } from '@signalco/ui/cx';
 import { Navigate } from '@signalco/ui-icons';
 import { Row } from '@signalco/ui/Row';
 import { Link } from '@signalco/ui/Link';
+import { cx } from '@signalco/ui/cx';
 import { Container } from '@signalco/ui/Container';
 import { Button } from '@signalco/ui/Button';
 import { SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';

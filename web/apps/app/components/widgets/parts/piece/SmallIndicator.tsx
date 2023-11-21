@@ -1,5 +1,5 @@
-import { cx } from '@signalco/ui/cx';
 import { Icon } from '@signalco/ui/Icon';
+import { cx } from '@signalco/ui/cx';
 import { Button } from '@signalco/ui/Button';
 
 export interface SmallIndicatorProps {

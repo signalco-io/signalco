@@ -1,6 +1,6 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
-import { entitiesAsync } from '../../../entity/EntityRepository';
 import IEntityDetails from '../../../entity/IEntityDetails';
+import { entitiesAsync } from '../../../entity/EntityRepository';
 
 export function allEntitiesKey(type?: number | undefined) {
     if (typeof type === 'undefined')

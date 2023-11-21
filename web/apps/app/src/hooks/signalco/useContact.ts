@@ -1,7 +1,7 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import type IContactPointer from '../../contacts/IContactPointer';
-import useEntity from './entity/useEntity';
 import IContact from '../../contacts/IContact';
+import useEntity from './entity/useEntity';
 
 export function contactKey(pointer: Partial<IContactPointer> | null | undefined) {
     if (!pointer)

@@ -1,11 +1,11 @@
 import { ListChecks, Navigate, Play } from '@signalco/ui-icons';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
 import { Row } from '@signalco/ui/Row';
 import { ListItem } from '../../shared/ListItem';
 import { KnownPages } from '../../../src/knownPages';
 import { ProcessRunDto } from '../../../app/api/dtos/dtos';
 import { TypographyProcessName } from './TypographyProcessName';
-import { Stack } from '@signalco/ui/Stack';
-import { Typography } from '@signalco/ui/Typography';
 
 export type RunsListItemProps = {
     run: ProcessRunDto

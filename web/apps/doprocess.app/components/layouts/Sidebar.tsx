@@ -2,12 +2,12 @@
 
 import { useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import { cx } from '@signalco/ui/cx';
 import { FileText, ListChecks, Play, Right } from '@signalco/ui-icons';
+import { ListItem } from '@signalco/ui/ListItem';
 import { List } from '@signalco/ui/List';
 import { IconButton } from '@signalco/ui/IconButton';
+import { cx } from '@signalco/ui/cx';
 import { KnownPages } from '../../src/knownPages';
-import { ListItem } from '@signalco/ui/ListItem';
 
 export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: (open: boolean) => void }) {
     const pathname = usePathname();
@@ -26,7 +26,7 @@ export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: 
 
     return (
         <div className={cx(
-            "group flex flex-row -mr-1 border-b md:h-full md:flex-col md:border-none",
+            'group flex flex-row -mr-1 border-b md:h-full md:flex-col md:border-none',
             open && 'md:pl-2 md:gap-1'
         )}>
             <IconButton
@@ -39,14 +39,14 @@ export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: 
                 onClick={() => onOpenChange?.(!open)}>
                 <Right size={16} />
             </IconButton>
-            <List className={cx("flex-row md:flex-col", open && 'md:gap-2 md:pr-2')}>
+            <List className={cx('flex-row md:flex-col', open && 'md:gap-2 md:pr-2')}>
                 {links.map(({ href, label, Icon }) => (
                     <ListItem
                         key={href}
                         href={href}
                         label={label}
                         title={label}
-                        className={cx("w-full", open ? 'rounded-none md:rounded-lg' : 'rounded-none md:py-3 md:[font-size:0] md:!gap-0')}
+                        className={cx('w-full', open ? 'rounded-none md:rounded-lg' : 'rounded-none md:py-3 md:[font-size:0] md:!gap-0')}
                         startDecorator={<Icon size={20} />}
                         selected={pathname.startsWith(href)}
                     />

@@ -1,6 +1,6 @@
-import { cx } from '@signalco/ui/cx';
 import { BatteryEmpty, BatteryLow, BatteryMedium, BatteryFull } from '@signalco/ui-icons';
 import { Tooltip } from '@signalco/ui/Tooltip';
+import { cx } from '@signalco/ui/cx';
 
 type BatteryIndicatorProps = {
     level: number | undefined;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { cx } from '@signalco/ui/cx';
 import { Link } from '@signalco/ui/Link';
+import { cx } from '@signalco/ui/cx';
 import { Container } from '@signalco/ui/Container';
 import InputGrabDomain from './InputGrabDomain';
 
