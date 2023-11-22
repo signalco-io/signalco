@@ -1,9 +1,9 @@
 'use client';
 
 import { Play } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { List } from '../../shared/List';
 import { KnownPages } from '../../../src/knownPages';
 import { useProcessRuns } from '../../../src/hooks/useProcessRuns';

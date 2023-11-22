@@ -1,5 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import type IContactPointer from '../../contacts/IContactPointer';
+import IContact from '../../contacts/IContact';
 import useEntity from './entity/useEntity';
 
 export function contactKey(pointer: Partial<IContactPointer> | null | undefined) {
@@ -8,7 +9,7 @@ export function contactKey(pointer: Partial<IContactPointer> | null | undefined)
     return ['contact', pointer.entityId, pointer.channelName, pointer.contactName];
 }
 
-export default function useContact(pointer: Partial<IContactPointer> | null | undefined) {
+export default function useContact(pointer: Partial<IContactPointer> | null | undefined): UseQueryResult<IContact, Error> {
     const entity = useEntity(pointer?.entityId);
 
     return useQuery({

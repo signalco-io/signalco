@@ -1,4 +1,4 @@
-import { DisableButton } from "@signalco/ui/dist/DisableButton";
+import { DisableButton } from "@signalco/ui/DisableButton";
 import { StoryObj } from "@storybook/react";
 
 export default { component: DisableButton, tags: ['autodocs'] };

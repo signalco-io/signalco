@@ -1,12 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Row } from '@signalco/ui/dist/Row';
-import { Popper } from '@signalco/ui/dist/Popper';
-import { ButtonDropdown } from '@signalco/ui/dist/ButtonDropdown';
-import { Button } from '@signalco/ui/dist/Button';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { showNotification } from '../../src/notifications/PageNotificationService';
+import { showNotification } from '@signalco/ui-notifications';
+import { Row } from '@signalco/ui/Row';
+import { Popper } from '@signalco/ui/Popper';
+import { ButtonDropdown } from '@signalco/ui/ButtonDropdown';
+import { Button } from '@signalco/ui/Button';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
 
@@ -34,8 +34,8 @@ function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps
     // Set initial selection on component and dashboards load
     useEffect(() => {
         if (!selectedId && dashboards?.length && !isLoading) {
-            console.debug('Selecting first available dashboard', dashboards[0].id);
-            setSelectedId(dashboards[0].id);
+            console.debug('Selecting first available dashboard', dashboards[0]?.id);
+            setSelectedId(dashboards[0]?.id);
         }
     }, [selectedId, dashboards, setSelectedId, isLoading]);
 

@@ -28,12 +28,12 @@ const logLineRegex = new RegExp(/\[(.*)\]\s\((\w+)\)\s(.*)/);
 export function LogViewerLine(props: ILogViewerLineProps) {
     const { number, data, lineHeight } = props;
     const matches = logLineRegex.exec(data);
-    const timeStamp = matches ? new Date(matches[1]) : new Date(0);
+    const timeStamp = matches ? new Date(matches[1] ?? 0) : new Date(0);
     return (
         <div style={{ top: `${number * lineHeight}px`, position: 'absolute' }}>
             <span style={{ paddingLeft: '8px', minWidth: '60px', display: 'inline-block' }}>{number}</span>
             {matches && <span style={{ marginRight: '8px' }}>{timeStamp.getUTCHours().toString().padStart(2, '0')}:{timeStamp.getUTCMinutes().toString().padStart(2, '0')}:{timeStamp.getUTCSeconds().toString().padStart(2, '0')}.{timeStamp.getMilliseconds().toString().padEnd(3, '0')}</span>}
-            {matches && <LogLevelBadge level={matches[2]} />}
+            {matches && <LogLevelBadge level={matches[2] ?? 'unknown'} />}
             <div style={{ opacity: 0.8, display: 'inline-block', height: '1.3rem' }}>{matches ? matches[3] : data}</div>
         </div>
     )

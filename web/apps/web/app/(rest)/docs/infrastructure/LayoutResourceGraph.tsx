@@ -1,14 +1,14 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Tooltip } from '@signalco/ui/dist/Tooltip';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { SelectItems } from '@signalco/ui/dist/SelectItems';
-import { Row } from '@signalco/ui/dist/Row';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { Card, CardOverflow } from '@signalco/ui/dist/Card';
-import { Avatar } from '@signalco/ui/dist/Avatar';
+import { Typography } from '@signalco/ui/Typography';
+import { Tooltip } from '@signalco/ui/Tooltip';
+import { Stack } from '@signalco/ui/Stack';
+import { SelectItems } from '@signalco/ui/SelectItems';
+import { Row } from '@signalco/ui/Row';
+import { Loadable } from '@signalco/ui/Loadable';
+import { Card, CardOverflow } from '@signalco/ui/Card';
+import { Avatar } from '@signalco/ui/Avatar';
 import '@reactflow/core/dist/base.css';
 import {
     ReactFlowProvider,
@@ -91,9 +91,18 @@ function ResourceGraph() {
             const matchLabel = line.match(/Resource([0-9]*) \[label="(.*)"\];/);
             if (matchLabel) {
                 const [, id, urn] = matchLabel;
-                const urnMatch = urn.match(/urn:([\w-]*):([\w-]*)::([\w-]*)::([\w-]*):(.*)::([\w-]*)/);
+                if (!id || !urn) {
+                    console.warn('Invalid resource', line);
+                    return;
+                }
+
+                const urnMatch = urn?.match(/urn:([\w-]*):([\w-]*)::([\w-]*)::([\w-]*):(.*)::([\w-]*)/);
                 if (urnMatch) {
                     const [, source, stack, project, packageName, resourceType, name] = urnMatch;
+                    if (!source || !stack || !project || !packageName || !resourceType || !name) {
+                        console.warn('Invalid urn', urn);
+                        return;
+                    }
                     resourceItems.push({
                         id, urn, valid: true, source, name, stack, project, package: packageName, resourceType,
                         depth: 0, totalChildren: 0
@@ -187,7 +196,7 @@ function ResourceGraph() {
         const nodes: Node<InfraResource>[] = [];
         for (let i = 0; i < expandedResources.length; i++) {
             const resource = expandedResources[i];
-            if (!resource.valid) {
+            if (!resource?.valid) {
                 continue;
             }
 

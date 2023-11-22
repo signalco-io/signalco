@@ -1,13 +1,13 @@
 import { type FormEvent } from 'react';
 import Link from 'next/link';
-import { cx } from 'classix';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Timeago } from '@signalco/ui/dist/Timeago';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Checkbox } from '@signalco/ui/dist/Checkbox';
-import { Card } from '@signalco/ui/dist/Card';
-import { Avatar } from '@signalco/ui/dist/Avatar';
+import { Typography } from '@signalco/ui/Typography';
+import { Timeago } from '@signalco/ui/Timeago';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { cx } from '@signalco/ui/cx';
+import { Checkbox } from '@signalco/ui/Checkbox';
+import { Card } from '@signalco/ui/Card';
+import { Avatar } from '@signalco/ui/Avatar';
 import EntityIcon from '../shared/entity/EntityIcon';
 import BatteryIndicator from '../indicators/BatteryIndicator';
 import { KnownPages } from '../../src/knownPages';
@@ -28,7 +28,6 @@ export interface EntityCardProps {
 export default function EntityCard({ entity, spread, selectable, selected, onSelection }: EntityCardProps) {
     const { hasStatus, isOffline, isStale } = useEntityStatus(entity);
     const { hasBattery, level } = useEntityBattery(entity);
-    const Icon = EntityIcon(entity);
 
     const Container = spread ? Row : Stack;
 
@@ -43,7 +42,7 @@ export default function EntityCard({ entity, spread, selectable, selected, onSel
                         className="h-full">
                         <Row spacing={1}>
                             <Avatar>
-                                <Icon />
+                                <EntityIcon entity={entity} />
                             </Avatar>
                             <Typography noWrap>{entity.alias}</Typography>
                         </Row>

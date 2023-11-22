@@ -1,10 +1,10 @@
 import React from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Link } from '@signalco/ui/dist/Link';
-import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Container } from '@signalco/ui/dist/Container';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { Link } from '@signalco/ui/Link';
+import { IconButton } from '@signalco/ui/IconButton';
+import { Container } from '@signalco/ui/Container';
 import SignalcoLogotype from '../icons/SignalcoLogotype';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { now } from '../../src/services/DateTimeProvider';

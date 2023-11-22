@@ -1,6 +1,6 @@
 import React from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
 import style from './PageCenterHeader.module.scss';
 
 export default function PageCenterHeader(props: { header: string; subHeader?: string; secondary?: boolean }) {

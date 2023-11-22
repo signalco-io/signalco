@@ -1,9 +1,9 @@
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Checkbox } from '@signalco/ui/dist/Checkbox';
-import { Card } from '@signalco/ui/dist/Card';
-import { Button } from '@signalco/ui/dist/Button';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { Checkbox } from '@signalco/ui/Checkbox';
+import { Card } from '@signalco/ui/Card';
+import { Button } from '@signalco/ui/Button';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
 
 export interface PricingOption {

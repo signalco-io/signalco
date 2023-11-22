@@ -1,10 +1,10 @@
 import React from 'react';
-import { cx } from 'classix';
-import { Row } from '@signalco/ui/dist/Row';
-import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
-import { Link } from '@signalco/ui/dist/Link';
-import { Container } from '@signalco/ui/dist/Container';
-import { Button } from '@signalco/ui/dist/Button';
+import { Row } from '@signalco/ui/Row';
+import { NavigatingButton } from '@signalco/ui/NavigatingButton';
+import { Link } from '@signalco/ui/Link';
+import { cx } from '@signalco/ui/cx';
+import { Container } from '@signalco/ui/Container';
+import { Button } from '@signalco/ui/Button';
 import { KnownPages } from '../src/knownPages';
 import SignalcoLogotype from './icons/SignalcoLogotype';
 

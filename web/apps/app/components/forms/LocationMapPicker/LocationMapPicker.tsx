@@ -1,17 +1,17 @@
 import React, { useCallback, useState } from 'react';
 import { Draggable, Map, Marker } from 'pigeon-maps';
+import { showNotification } from '@signalco/ui-notifications';
 import { MyLocation } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { Input } from '@signalco/ui/dist/Input';
-import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Accordion } from '@signalco/ui/dist/Accordion';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { Loadable } from '@signalco/ui/Loadable';
+import { Input } from '@signalco/ui/Input';
+import { IconButton } from '@signalco/ui/IconButton';
+import { Accordion } from '@signalco/ui/Accordion';
 import { asArray, objectWithKey } from '@signalco/js';
 import { usePromise } from '@enterwell/react-hooks';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/index.types';
-import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useUserTheme from '../../../src/hooks/useUserTheme';
 
 const mapBoxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;

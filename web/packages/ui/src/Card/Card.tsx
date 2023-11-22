@@ -1,5 +1,5 @@
 import { type HTMLAttributes, type PropsWithChildren, type MouseEventHandler, forwardRef } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Link } from '../Link';
 
 export type CardProps = Omit<HTMLAttributes<HTMLDivElement>, 'onClick'> & {
@@ -15,7 +15,7 @@ function LinkCard({ href, children }: PropsWithChildren & Required<Pick<CardProp
 
 function ButtonCard({ onClick, children }: PropsWithChildren & Required<Pick<CardProps, 'onClick'>>) {
     return (
-        <button className="uitw-text-left" onClick={onClick}>{children}</button>
+        <button className="text-left" onClick={onClick}>{children}</button>
     );
 }
 
@@ -37,8 +37,8 @@ const CardForwarded = forwardRef<HTMLDivElement, CardProps>(({ href, onClick, cl
             <div
                 ref={ref}
                 className={cx(
-                    'uitw-bg-card uitw-rounded-lg uitw-p-2 uitw-border uitw-text-card-foreground uitw-shadow-sm',
-                    (href || onClick) && 'hover:uitw-bg-accent hover:uitw-text-accent-foreground disabled:uitw-opacity-50 disabled:uitw-pointer-events-none',
+                    'bg-card rounded-lg p-2 border text-card-foreground shadow-sm',
+                    (href || onClick) && 'hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none',
                     className
                 )}
                 {...restProps} />
@@ -49,19 +49,19 @@ CardForwarded.displayName = 'Card';
 export const Card = CardForwarded;
 
 export function CardHeader({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-    return <div className={cx('uitw-flex uitw-flex-col uitw-space-y-1.5 uitw-p-6', className)} {...props} />;
+    return <div className={cx('flex flex-col space-y-1.5 p-6', className)} {...props} />;
 }
 
 export function CardTitle({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
-    return <div className={cx('uitw-text-lg uitw-font-semibold uitw-leading-none uitw-tracking-tight', className)} {...props} />;
+    return <div className={cx('text-lg font-semibold leading-none tracking-tight', className)} {...props} />;
 }
 
 export function CardOverflow({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-    return <div className={cx('-uitw-m-2', className)} {...props}>{props.children}</div>;
+    return <div className={cx('-m-2', className)} {...props}>{props.children}</div>;
 }
 
 export function CardContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-    return <div className={cx('uitw-p-6 uitw-pt-0', className)} {...props}>{props.children}</div>;
+    return <div className={cx('p-6 pt-0', className)} {...props}>{props.children}</div>;
 }
 
 export function CardCover({ className, ...props }: HTMLAttributes<HTMLDivElement>) {

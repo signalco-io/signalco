@@ -4,14 +4,14 @@ import { ResponsiveContainer } from 'recharts';
 import React, { ComponentProps, ReactNode, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { getTimeZones } from '@vvo/tzdb';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { SelectItems } from '@signalco/ui/dist/SelectItems';
-import { Row } from '@signalco/ui/dist/Row';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { FilterList } from '@signalco/ui/dist/FilterList';
-import { Divider } from '@signalco/ui/dist/Divider';
-import { Container } from '@signalco/ui/dist/Container';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { SelectItems } from '@signalco/ui/SelectItems';
+import { Row } from '@signalco/ui/Row';
+import { Loadable } from '@signalco/ui/Loadable';
+import { FilterList } from '@signalco/ui/FilterList';
+import { Divider } from '@signalco/ui/Divider';
+import { Container } from '@signalco/ui/Container';
 import { arraySum, humanizeNumber, objectWithKey } from '@signalco/js';
 import { isNonEmptyString, isNotNull, noError } from '@enterwell/react-form-validation';
 import { FormBuilderComponent, FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
@@ -133,7 +133,7 @@ function LabeledValue({ value, unit, label }: { value: string | number, unit?: s
     )
 }
 
-function sumUsage(u: Partial<Usage>) {
+function sumUsage(u: Partial<Usage> | undefined) {
     return u ? (u.other ?? 0) + (u.contactSet ?? 0) + (u.conduct ?? 0) + (u.process ?? 0) : 0;
 }
 
@@ -189,7 +189,7 @@ function UsageCurrent() {
     return (
         <Stack spacing={2}>
             <Row spacing={4}>
-                <LabeledValue label="Used Today" value={sumUsage(usages[nowDate.getDate() - 1].value)} />
+                <LabeledValue label="Used Today" value={sumUsage(usages[nowDate.getDate() - 1]?.value)} />
                 <LabeledValue label="Used This Month" value={usageTotal} />
                 <Divider orientation="vertical" />
                 <LabeledValue label="Calculated Daily" value={dailyCalculated} />
@@ -263,22 +263,22 @@ function SettingsPane() {
         { id: 'developer', label: 'Developer', form: developerForm },
     ];
 
-    const [selectedCategoryId, setSelectedCategoryId] = useState<string | undefined>(categories[0].id);
+    const [selectedCategoryId, setSelectedCategoryId] = useState<string | undefined>(categories[0]?.id);
     const selectedCategory = categories.find(c => c.id === selectedCategoryId) ?? categories[0];
 
     return (
         <div className="flex flex-col gap-4 px-2 sm:flex-row">
-            <FilterList selected={selectedCategory.id} items={categories} onSelected={setSelectedCategoryId} variant="highlight" />
+            <FilterList selected={selectedCategory?.id} items={categories} onSelected={setSelectedCategoryId} variant="highlight" />
             <Container maxWidth="md" padded={false}>
                 <Stack spacing={2}>
-                    <Typography className="hidden sm:block" level="h4">{selectedCategory.label}</Typography>
+                    <Typography className="hidden sm:block" level="h4">{selectedCategory?.label}</Typography>
                     <div>
-                        {selectedCategory.form && (
+                        {selectedCategory?.form && (
                             <FormBuilderProvider components={components}>
                                 <FormBuilder form={selectedCategory.form} />
                             </FormBuilderProvider>
                         )}
-                        {selectedCategory.component && <selectedCategory.component />}
+                        {selectedCategory?.component && <selectedCategory.component />}
                     </div>
                 </Stack>
             </Container>

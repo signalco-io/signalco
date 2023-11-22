@@ -1,5 +1,5 @@
-import { SelectItems } from '@signalco/ui/dist/SelectItems';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { SelectItems } from '@signalco/ui/SelectItems';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { EntityIconByType } from '../shared/entity/EntityIcon';
 
 const entityTypes = [
@@ -22,7 +22,7 @@ export function EntitiesTitle() {
             items={entityTypes.map(t => {
                 const Icon = EntityIconByType(parseInt(t.value));
                 return ({
-                    value: t.value, label: t.label, icon: <Icon />
+                    value: t.value, label: t.label, icon: typeof Icon === 'function' ? <Icon /> : Icon
                 });
             })} />
     );

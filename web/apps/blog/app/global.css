@@ -1,8 +1,4 @@
-@import '@signalco/ui/dist/index.css';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import '@signalco/ui/index.css';
 
 @font-face {
   font-family: 'Material Icons';
@@ -43,10 +39,3 @@ html, body, #__next {
   font-feature-settings: 'liga';
 }
 
-.image--light {
-  display: var(--light-display);
-}
-
-.image--dark {
-  display: var(--dark-display);
-}

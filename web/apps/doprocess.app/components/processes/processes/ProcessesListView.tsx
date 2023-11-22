@@ -1,4 +1,4 @@
-import { Stack } from '@signalco/ui/dist/Stack';
+import { Stack } from '@signalco/ui/Stack';
 import { ListHeader } from '../../shared/ListHeader';
 import { ProcessesList } from './ProcessesList';
 

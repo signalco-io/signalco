@@ -1,4 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
+import { UseQueryResult, useQuery } from '@tanstack/react-query';
+import IEntityDetails from '../../../entity/IEntityDetails';
 import { entitiesAsync } from '../../../entity/EntityRepository';
 
 export function allEntitiesKey(type?: number | undefined) {
@@ -7,10 +8,12 @@ export function allEntitiesKey(type?: number | undefined) {
     return ['entities', type];
 }
 
-const useAllEntities = (type?: number | undefined) => useQuery({
-    queryKey: allEntitiesKey(type),
-    queryFn: async () => await entitiesAsync(type) ?? undefined,
-    staleTime: 60 * 1000 // 1min
-});
+function useAllEntities(type?: number | undefined): UseQueryResult<IEntityDetails[] | undefined, Error> {
+    return useQuery({
+        queryKey: allEntitiesKey(type),
+        queryFn: async () => await entitiesAsync(type) ?? undefined,
+        staleTime: 60 * 1000
+    });
+}
 
 export default useAllEntities;

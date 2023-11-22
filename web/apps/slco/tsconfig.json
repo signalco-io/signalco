@@ -1,22 +1,22 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@signalco/tsconfig/web.json",
-  "compilerOptions": {
-    "outDir": "dist",
-    "plugins": [
-      {
-        "name": "next"
-      }
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "@signalco/tsconfig/web.json",
+    "compilerOptions": {
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ]
+    },
+    "exclude": [
+        "node_modules",
+        "worker"
+    ],
+    "include": [
+        "next-env.d.ts",
+        "next.config.js",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts"
     ]
-  },
-  "include": [
-    "src",
-    "app",
-    "components",
-    "pages",
-    "next-env.d.ts",
-    "@types",
-    ".next/types/**/*.ts",
-    "C:\\Users\\aleks\\Documents\\GitHub\\signalco\\web\\apps\\slco\\.next/types/**/*.ts"
-  ]
 }

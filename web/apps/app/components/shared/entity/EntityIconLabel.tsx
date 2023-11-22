@@ -1,9 +1,9 @@
 import React from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { Avatar } from '@signalco/ui/dist/Avatar';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { Loadable } from '@signalco/ui/Loadable';
+import { Avatar } from '@signalco/ui/Avatar';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import EntityIcon from './EntityIcon';
 
@@ -18,15 +18,14 @@ export default function EntityIconLabel({ entityId, description, header }: Entit
     const isLoading = !!entityId && loadingEntity;
 
     const entityName = entity?.alias ?? (entity?.id);
-    const Icon = EntityIcon(entity);
 
     return (
         <Row spacing={2} style={{ minWidth: 0 }}>
             {entity && header ? (
                 <Avatar className="p-1">
-                    <Icon />
+                    <EntityIcon entity={entity} />
                 </Avatar>
-            ) : entity && (<Icon />)}
+            ) : entity && (<EntityIcon entity={entity} />)}
             <Stack alignItems="start" style={{ minWidth: 0 }}>
                 <div className="max-w-full">
                     <Typography noWrap>

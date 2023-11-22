@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 
 export type AvatarProps = PropsWithChildren<{
     size?: 'sm' | 'md' | 'lg'; // TODO: Implement
@@ -10,7 +10,7 @@ export type AvatarProps = PropsWithChildren<{
 
 export function Avatar({ children, className }: AvatarProps) {
     return (<div className={cx(
-        'uitw-flex uitw-h-10 uitw-min-w-[40px] uitw-max-w-[40px] uitw-items-center uitw-justify-center uitw-rounded-full uitw-bg-muted uitw-border',
+        'flex h-10 min-w-[40px] max-w-[40px] items-center justify-center rounded-full bg-muted border',
         className
     )}>{children}</div>);
 }

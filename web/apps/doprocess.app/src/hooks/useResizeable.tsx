@@ -43,9 +43,11 @@ export function useResizeable({
     };
 
     const handleTouchMove = (event: TouchEvent) => {
-        handleMove(direction === 'vertical'
-            ? event.touches[0].clientX
-            : event.touches[0].clientY);
+        if (event.touches[0]) {
+            handleMove(direction === 'vertical'
+                ? event.touches[0].clientX
+                : event.touches[0].clientY);
+        }
     };
 
     const handleMouseMove = (event: MouseEvent) => {

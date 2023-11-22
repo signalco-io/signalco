@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { cx } from 'classix';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Minimize } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { IconButton } from '@signalco/ui/dist/IconButton';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { Stack } from '@signalco/ui/Stack';
+import { IconButton } from '@signalco/ui/IconButton';
+import { cx } from '@signalco/ui/cx';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { PageTitle } from '../navigation/PageTitle';
 import NavProfile from '../navigation/NavProfile';
 import { AuthWrapper } from './AuthWrapper';

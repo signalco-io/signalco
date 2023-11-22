@@ -1,5 +1,5 @@
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
 
 export function DataPart(props: { value: string; subtitle: string; }) {
     return (<Stack alignItems="center" spacing={1}>

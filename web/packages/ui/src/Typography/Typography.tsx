@@ -1,5 +1,5 @@
 import { type CSSProperties, ForwardedRef, createElement, forwardRef, type HTMLAttributes } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import type { ColorVariants } from '../theme';
 
 export type TypographyProps = HTMLAttributes<HTMLParagraphElement> & {
@@ -55,20 +55,20 @@ export function populateTypographyStylesAndClasses({ color, level, className, ..
     return {
         style: styles,
         className: cx(
-            'uitw-m-0',
-            level === 'body2' && 'uitw-text-sm uitw-text-secondary-foreground',
-            level === 'body3' && 'uitw-text-xs',
-            level === 'h1' && 'uitw-text-5xl',
-            level === 'h2' && 'uitw-text-4xl',
-            level === 'h3' && 'uitw-text-3xl',
-            level === 'h4' && 'uitw-text-2xl',
-            level === 'h5' && 'uitw-text-xl',
-            level === 'h6' && 'uitw-text-lg',
-            color === 'success' && 'uitw-text-green-500',
-            color === 'warning' && 'uitw-text-yellow-500',
-            color === 'danger' && 'uitw-text-red-500',
-            color === 'info' && 'uitw-text-blue-500',
-            color === 'neutral' && 'uitw-text-slate-500',
+            'm-0',
+            level === 'body2' && 'text-sm text-secondary-foreground',
+            level === 'body3' && 'text-xs',
+            level === 'h1' && 'text-5xl',
+            level === 'h2' && 'text-4xl',
+            level === 'h3' && 'text-3xl',
+            level === 'h4' && 'text-2xl',
+            level === 'h5' && 'text-xl',
+            level === 'h6' && 'text-lg',
+            color === 'success' && 'text-green-500',
+            color === 'warning' && 'text-yellow-500',
+            color === 'danger' && 'text-red-500',
+            color === 'info' && 'text-blue-500',
+            color === 'neutral' && 'text-slate-500',
             className
         ),
         ...restAfterCustomStyles

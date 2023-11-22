@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Play } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Input } from '@signalco/ui/dist/Input';
-import { Button } from '@signalco/ui/dist/Button';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { Input } from '@signalco/ui/Input';
+import { Button } from '@signalco/ui/Button';
 import { KnownPages } from '../../../src/knownPages';
 import { useProcessRunCreate } from '../../../src/hooks/useProcessRunCreate';
 import { useProcess } from '../../../src/hooks/useProcess';

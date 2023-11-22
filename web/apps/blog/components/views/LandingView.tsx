@@ -1,10 +1,10 @@
 import fs from 'fs';
 import React from 'react';
 import klaw from 'klaw';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Card, CardContent, CardTitle } from '@signalco/ui/dist/Card';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
+import { Row } from '@signalco/ui/Row';
+import { Card, CardContent, CardTitle } from '@signalco/ui/Card';
 import PageCenterHeader from '../pages/PageCenterHeader';
 
 export default async function LandingPageView() {

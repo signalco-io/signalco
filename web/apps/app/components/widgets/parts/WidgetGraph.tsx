@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Loadable } from '@signalco/ui/dist/Loadable';
+import { Loadable } from '@signalco/ui/Loadable';
 import { usePromise } from '@enterwell/react-hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';

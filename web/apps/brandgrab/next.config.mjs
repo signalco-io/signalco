@@ -1,5 +1,5 @@
 import { createSecureHeaders } from 'next-secure-headers';
-import { combineSecureHeaders, knownSecureHeadersExternalUrls } from '@signalco/data';
+import { combineSecureHeaders, knownSecureHeadersExternalUrls } from '@signalco/data/node';
 import nextBundleAnalyzer from '@next/bundle-analyzer';
 
 const isDevelopment = process.env.NODE_ENV === 'development';

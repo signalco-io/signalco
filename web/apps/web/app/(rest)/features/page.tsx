@@ -1,5 +1,5 @@
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Link } from '@signalco/ui/dist/Link';
+import { Stack } from '@signalco/ui/Stack';
+import { Link } from '@signalco/ui/Link';
 
 export default function FeaturesPage() {
     return (

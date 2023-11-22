@@ -1,4 +1,4 @@
-import { Loadable } from "@signalco/ui/dist/Loadable";
+import { Loadable } from "@signalco/ui/Loadable";
 import { StoryObj } from "@storybook/react";
 
 export default { component: Loadable, tags: ['autodocs'], args: { isLoading: true, loadingLabel: 'Loading...' } };

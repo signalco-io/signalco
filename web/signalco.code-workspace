@@ -71,6 +71,10 @@
 		{
 			"name": "📦 @signalco/ui-icons",
 			"path": "packages/ui-icons"
+		},
+		{
+			"name": "📦 @signalco/ui-notifications",
+			"path": "packages/ui-notifications"
 		}
 	],
 	"settings": {

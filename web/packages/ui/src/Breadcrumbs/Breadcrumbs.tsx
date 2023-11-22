@@ -17,7 +17,7 @@ export function Breadcrumbs({ items, endSeparator }: BreadcrumbsProps) {
         return null;
 
     return (
-        <div className="uitw-grid uitw-max-w-full uitw-grid-flow-col uitw-grid-cols-[--cols-template] uitw-gap-1"
+        <div className="grid max-w-full grid-flow-col grid-cols-[--cols-template] gap-1"
             style={{
                 '--cols-template': `minmax(0,auto) ${new Array(items.length - 1).fill('auto minmax(0,auto)').join(' ')}${endSeparator ? ' auto' : ''} 1fr`,
             } as CSSProperties}>

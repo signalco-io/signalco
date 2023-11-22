@@ -1,4 +1,4 @@
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { TaskDetails } from '../../../../../components/processes/tasks/TaskDetails';
 
 export default function ProcessPage({ params }: { params: { id: string } }) {

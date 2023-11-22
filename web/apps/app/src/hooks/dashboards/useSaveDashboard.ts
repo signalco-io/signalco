@@ -1,9 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import { entityKey } from '../signalco/entity/useEntity';
 import { allEntitiesKey } from '../signalco/entity/useAllEntities';
 import { IDashboardSetModel, saveDashboardAsync } from '../../dashboards/DashboardsRepository';
 
-export default function useSaveDashboard() {
+export default function useSaveDashboard(): UseMutationResult<string, Error, IDashboardSetModel, unknown> {
     const client = useQueryClient();
     return useMutation({
         mutationFn: (dashboard: IDashboardSetModel) => {

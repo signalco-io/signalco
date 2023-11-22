@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { ProcessDto } from '../../app/api/dtos/dtos';
 
 export function processesKey() {
@@ -10,7 +10,7 @@ async function fetchGetProcesses() {
     return await response.json() as ProcessDto[] | undefined;
 }
 
-export function useProcesses() {
+export function useProcesses(): UseQueryResult<ProcessDto[] | undefined, Error> {
     return useQuery({
         queryKey: processesKey(),
         queryFn: fetchGetProcesses,

@@ -38,6 +38,9 @@
 
         --light-display: visible;
         --dark-display: none;
+
+        --bg-selection: #000;
+        --text-selection: #fff; 
     }
 
     .dark {
@@ -75,13 +78,26 @@
 
         --light-display: none;
         --dark-display: visible;
+
+        --bg-selection: #fff;
+        --text-selection: #000;
     }
 
     * {
-        @apply uitw-border-border;
+        @apply border-border;
     }
     body {
-        @apply uitw-bg-background uitw-text-foreground;
+        @apply bg-background text-foreground;
         font-feature-settings: "rlig" 1, "calt" 1;
     }
+
+    .image--light {
+        display: var(--light-display);
+    }
+
+    .image--dark {
+        display: var(--dark-display);
+    }
+
+    ::selection { background: var(--bg-selection); color: var(--text-selection); }
 }

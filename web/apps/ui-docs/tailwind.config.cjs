@@ -4,6 +4,7 @@ const { baseConfig } = require('@signalco/tailwindcss-config-signalco');
 export default {
   presets: [baseConfig],
   content: [
-    'stories/**/*.stories.{tsx,ts}'
+    'stories/**/*.stories.{tsx,ts}',
+    "../../packages/ui/src/**/*.{ts,tsx}"
   ]
 }

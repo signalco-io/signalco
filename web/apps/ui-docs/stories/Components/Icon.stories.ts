@@ -1,4 +1,4 @@
-import { Icon } from "@signalco/ui/dist/Icon";
+import { Icon } from "@signalco/ui/Icon";
 import { StoryObj } from "@storybook/react";
 
 export default { component: Icon, tags: ['autodocs'] };

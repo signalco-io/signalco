@@ -46,13 +46,13 @@ export function fromDuration(date: Date, duration: string) {
     const matches = duration.match(durationRegex);
     if (!matches) return undefined;
 
-    const years= parseFloat(matches[3]);
-    const months= parseFloat(matches[5]);
-    const weeks= parseFloat(matches[7]);
-    const days= parseFloat(matches[9]);
-    const hours= parseFloat(matches[12]);
-    const minutes= parseFloat(matches[14]);
-    const seconds= parseFloat(matches[16]);
+    const years= parseFloat(matches[3] ?? '0');
+    const months= parseFloat(matches[5] ?? '0');
+    const weeks= parseFloat(matches[7] ?? '0');
+    const days= parseFloat(matches[9] ?? '0');
+    const hours= parseFloat(matches[12] ?? '0');
+    const minutes= parseFloat(matches[14] ?? '0');
+    const seconds= parseFloat(matches[16] ?? '0');
 
     const dateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0,0,0,0);
 

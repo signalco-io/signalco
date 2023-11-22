@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import { Close, Save, Edit } from '@signalco/ui-icons';
 import { Typography } from '../Typography';
 import { Row } from '../Row';
@@ -72,12 +72,12 @@ export function EditableInput({
         return (
             <Row
                 role="button"
-                className={cx('uitw-group uitw-py-1 uitw-cursor-pointer', className)}
+                className={cx('group py-1 cursor-pointer', className)}
                 spacing={1}
                 onClick={() => setIsEditing(true)}
             >
                 <Typography>{value}</Typography>
-                <span className="uitw-invisible group-hover:uitw-visible"><Edit size={16} /></span>
+                <span className="invisible group-hover:visible"><Edit size={16} /></span>
             </Row>
         )
     }

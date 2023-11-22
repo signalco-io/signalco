@@ -1,6 +1,6 @@
 import React, { ComponentProps } from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
+import { Typography } from '@signalco/ui/Typography';
+import { Stack } from '@signalco/ui/Stack';
 
 type PageCenterHeaderProps = {
     level?: ComponentProps<typeof Typography>['level'];

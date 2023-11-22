@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { showNotification } from '@signalco/ui-notifications';
 import { MoreHorizontal } from '@signalco/ui-icons';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
-import { Button } from '@signalco/ui/dist/Button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/Menu';
+import { Button } from '@signalco/ui/Button';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
-import { showNotification } from '../../../src/notifications/PageNotificationService';
 import { KnownPages } from '../../../src/knownPages';
 import useLocale from '../../../src/hooks/useLocale';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';

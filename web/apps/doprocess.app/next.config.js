@@ -3,7 +3,7 @@ import {
     PHASE_DEVELOPMENT_SERVER,
     PHASE_PRODUCTION_BUILD,
 } from 'next/constants.js';
-import { combineSecureHeaders, knownSecureHeadersExternalUrls } from '@signalco/data';
+import { combineSecureHeaders, knownSecureHeadersExternalUrls } from '@signalco/data/node';
 import nextBundleAnalyzer from '@next/bundle-analyzer';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
@@ -53,7 +53,7 @@ const nextConfigFunction = async (phase) => {
             dest: 'public',
             buildExcludes: [/middleware-manifest.json$/, /chunks\/images\/.*$/],
             dynamicStartUrl: false,
-            disable: isDevelopment
+            disable: isDevelopment,           
         });
         return withPWA(componsedNextConfig);
     }

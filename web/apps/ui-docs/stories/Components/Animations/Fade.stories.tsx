@@ -1,6 +1,6 @@
-import { Card } from "@signalco/ui/dist/Card";
-import { Fade } from "@signalco/ui/dist/Fade";
-import { Stack } from "@signalco/ui/dist/Stack";
+import { Card } from "@signalco/ui/Card";
+import { Fade } from "@signalco/ui/Fade";
+import { Stack } from "@signalco/ui/Stack";
 import { StoryObj } from "@storybook/react";
 
 export default { component: Fade, tags: ['autodocs'] };

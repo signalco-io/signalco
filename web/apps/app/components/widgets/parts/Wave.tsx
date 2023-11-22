@@ -1,5 +1,5 @@
 import { CSSProperties } from 'react';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui/cx';
 import styles from './Wave.module.css';
 
 function SingleWave() {
@@ -10,7 +10,7 @@ function SingleWave() {
     )
 }
 
-export function Wave({ value, breakpoints }: { value: number, breakpoints: number[] }) {
+export function Wave({ value, breakpoints }: { value: number, breakpoints: readonly [number, number, number] }) {
     return (
         <div>
             <div
