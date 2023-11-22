@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { showNotification } from '@signalco/ui-notifications';
 import { Typography } from '@signalco/ui/Typography';
 import { Stack } from '@signalco/ui/Stack';
 import { Row } from '@signalco/ui/Row';
@@ -11,7 +12,6 @@ import { Button } from '@signalco/ui/Button';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { widgetType } from '../widgets/Widget';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
-import { showNotification } from '../../src/notifications/PageNotificationService';
 import useLocale from '../../src/hooks/useLocale';
 import useSaveDashboard from '../../src/hooks/dashboards/useSaveDashboard';
 import useDashboard from '../../src/hooks/dashboards/useDashboard';

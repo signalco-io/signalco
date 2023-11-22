@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
+import { showNotification } from '@signalco/ui-notifications';
 import type { AppThemeMode, DefaultColorScheme } from '@signalco/ui/theme';
 import { useIsomorphicLayoutEffect } from '@signalco/hooks/useIsomorphicLayoutEffect';
 import { useInterval } from '@signalco/hooks/useInterval';
 import { fromDuration, now } from '../services/DateTimeProvider';
-import { showNotification } from '../notifications/PageNotificationService';
 import SunHelper from '../helpers/SunHelper';
 import useUserSetting from './useUserSetting';
 import { localizer } from './useLocale';

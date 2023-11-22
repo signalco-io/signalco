@@ -1,4 +1,5 @@
 'use client';
+import { showNotification } from '@signalco/ui-notifications';
 import { Typography } from '@signalco/ui/Typography';
 import { Stack } from '@signalco/ui/Stack';
 import { Modal } from '@signalco/ui/Modal';
@@ -17,7 +18,7 @@ export function EmbedModal({
 
     const handleCopy = () => {
         navigator.clipboard.writeText(code);
-        // TODO: Show notification
+        showNotification('Code copied to clipboard', 'info');
     };
 
     return (

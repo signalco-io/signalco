@@ -1,20 +1,25 @@
 'use client';
 
-import { ToastContainer } from 'react-toastify';
 import { PropsWithChildren } from 'react';
-import { ThemeProvider } from 'next-themes'
+import { ThemeProvider, useTheme } from 'next-themes'
+import { NotificationsContainer } from '@signalco/ui-notifications';
 import useAppTheme from '../src/hooks/useAppTheme';
 
 function ThemeChangerWrapper({ children }: PropsWithChildren) {
+    const { resolvedTheme } = useTheme();
     useAppTheme();
-    return <>{children}</>;
+    return (
+        <>
+            <NotificationsContainer theme={resolvedTheme === 'dark' ? 'dark' : 'light'} />
+            {children}
+        </>
+    );
 }
 
 export function LayoutClientWrapper({ children }: PropsWithChildren) {
     return (
         <ThemeProvider attribute="class">
             <ThemeChangerWrapper>
-                <ToastContainer />
                 {children}
             </ThemeChangerWrapper>
         </ThemeProvider>

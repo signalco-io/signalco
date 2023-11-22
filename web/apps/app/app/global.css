@@ -1,5 +1,4 @@
 @import '@signalco/ui/index.css';
-@import 'react-toastify/dist/ReactToastify.css';
 
 @font-face {
   font-family: 'Material Icons';
@@ -36,14 +35,6 @@
 }
 
 :root {
-  --toastify-font-family: var(--font-sans);
-  --toastify-color-dark: #fff;
-  --toastify-color-progress-dark: #000;
-  --toastify-text-color-dark: #333;
-
   --graph-stroke: #999;
 }
 
-.dark {
-  --toastify-color-progress-dark: #fff;
-}

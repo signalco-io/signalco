@@ -1,10 +1,10 @@
 import { useState, Fragment } from 'react';
+import { showNotification } from '@signalco/ui-notifications';
 import { Typography } from '@signalco/ui/Typography';
 import { Stack } from '@signalco/ui/Stack';
 import { Card, CardContent, CardTitle } from '@signalco/ui/Card';
 import { Button } from '@signalco/ui/Button';
 import EntityStatus from '../../entity/EntityStatus';
-import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useContact from '../../../src/hooks/signalco/useContact';
 import type IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointer from '../../../src/contacts/IContactPointer';

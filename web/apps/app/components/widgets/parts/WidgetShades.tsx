@@ -1,5 +1,6 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
+import { showNotification } from '@signalco/ui-notifications';
 import { Down, Stop, Up } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/Typography';
 import { Stack } from '@signalco/ui/Stack';
@@ -8,7 +9,6 @@ import { Button } from '@signalco/ui/Button';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultColumns, DefaultLabel } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
-import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useContact from '../../../src/hooks/signalco/useContact';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
