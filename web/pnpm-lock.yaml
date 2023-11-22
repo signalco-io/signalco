@@ -1307,7 +1307,7 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       sonner:
-        specifier: ^1.2.2
+        specifier: 1.2.2
         version: 1.2.2(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@signalco/eslint-config-signalco':
