@@ -1329,6 +1329,97 @@ importers:
         specifier: 5.3.2
         version: 5.3.2
 
+  packages/ui-primitives:
+    dependencies:
+      '@radix-ui/react-checkbox':
+        specifier: 1.0.4
+        version: 1.0.4(@types/react-dom@18.2.17)(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-dialog':
+        specifier: 1.0.5
+        version: 1.0.5(@types/react-dom@18.2.17)(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-dropdown-menu':
+        specifier: 2.0.6
+        version: 2.0.6(@types/react-dom@18.2.17)(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-menubar':
+        specifier: 1.0.4
+        version: 1.0.4(@types/react-dom@18.2.17)(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-popover':
+        specifier: 1.0.7
+        version: 1.0.7(@types/react-dom@18.2.17)(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-select':
+        specifier: 2.0.0
+        version: 2.0.0(@types/react-dom@18.2.17)(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-slot':
+        specifier: 1.0.2
+        version: 1.0.2(@types/react@18.2.38)(react@18.2.0)
+      '@signalco/hooks':
+        specifier: workspace:*
+        version: link:../hooks
+      '@signalco/js':
+        specifier: workspace:*
+        version: link:../js
+      '@signalco/ui-icons':
+        specifier: workspace:*
+        version: link:../ui-icons
+      next:
+        specifier: 14.0.3
+        version: 14.0.3(react-dom@18.2.0)(react@18.2.0)(sass@1.69.5)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-timeago:
+        specifier: 7.2.0
+        version: 7.2.0(react@18.2.0)
+      tailwind-merge:
+        specifier: 2.0.0
+        version: 2.0.0
+      tailwindcss:
+        specifier: 3.3.5
+        version: 3.3.5
+      tailwindcss-animate:
+        specifier: 1.0.7
+        version: 1.0.7(tailwindcss@3.3.5)
+    devDependencies:
+      '@signalco/eslint-config-signalco':
+        specifier: workspace:*
+        version: link:../eslint-config-signalco
+      '@signalco/tailwindcss-config-signalco':
+        specifier: workspace:*
+        version: link:../tailwindcss-config-signalco
+      '@signalco/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@types/react':
+        specifier: 18.2.38
+        version: 18.2.38
+      '@types/react-dom':
+        specifier: 18.2.17
+        version: 18.2.17
+      '@types/react-timeago':
+        specifier: 4.1.6
+        version: 4.1.6
+      autoprefixer:
+        specifier: 10.4.16
+        version: 10.4.16(postcss@8.4.31)
+      classix:
+        specifier: 2.1.35
+        version: 2.1.35
+      postcss:
+        specifier: 8.4.31
+        version: 8.4.31
+      postcss-preset-env:
+        specifier: 9.3.0
+        version: 9.3.0(postcss@8.4.31)
+      sass:
+        specifier: 1.69.5
+        version: 1.69.5
+      typescript:
+        specifier: 5.3.2
+        version: 5.3.2
+
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:

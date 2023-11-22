@@ -75,6 +75,10 @@
 		{
 			"name": "📦 @signalco/ui-notifications",
 			"path": "packages/ui-notifications"
+		},
+		{
+			"name": "📦 @signalco/ui-primitives",
+			"path": "packages/ui-primitives"
 		}
 	],
 	"settings": {
