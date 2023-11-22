@@ -1222,7 +1222,7 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(react@18.2.0)
       tailwind-merge:
-        specifier: ^2.0.0
+        specifier: 2.0.0
         version: 2.0.0
       tailwindcss:
         specifier: 3.3.5
