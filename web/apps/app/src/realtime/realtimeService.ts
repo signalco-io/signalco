@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
+import { showNotification } from '@signalco/ui-notifications';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { getApiUrl, getTokenFactory } from '../services/HttpService';
-import { showNotification } from '../notifications/PageNotificationService';
 import { contactKey } from '../hooks/signalco/useContact';
 import { entityKey } from '../hooks/signalco/entity/useEntity';
 

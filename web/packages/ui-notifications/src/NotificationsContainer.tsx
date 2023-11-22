@@ -1,5 +1,5 @@
-import { ToastContainer } from 'react-toastify';
+import { Toaster } from 'sonner';
 
-export function NotificationsContainer() {
-    return <ToastContainer />
+export function NotificationsContainer({ theme }: { theme?: 'light' | 'dark' }) {
+    return <Toaster theme={theme} />
 }

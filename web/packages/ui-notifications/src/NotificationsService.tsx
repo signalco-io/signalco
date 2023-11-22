@@ -1,4 +1,5 @@
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import { ReactNode } from 'react';
 import { Row } from '@signalco/ui/Row';
 import { Button } from '@signalco/ui/Button';
@@ -9,7 +10,7 @@ export type PageNotificationOptions = {
     variant?: PageNotificationVariant;
     autoHideDuration?: number;
     persist?: boolean;
-    action?: ReactNode
+    action?: ReactNode;
 }
 
 function _enqueue(message: string | ReactNode, options?: PageNotificationOptions): string | number {
@@ -21,11 +22,17 @@ function _enqueue(message: string | ReactNode, options?: PageNotificationOptions
             </Row>
         ) : message;
 
-    return toast(content, {
-        autoClose: options?.persist ? false : options?.autoHideDuration,
-        type: options?.variant,
-        position: 'bottom-right',
-        theme: 'dark'
+    let func = toast.info;
+    if (options?.variant === 'success') {
+        func = toast.success;
+    } else if (options?.variant === 'warning') {
+        func = toast.warning;
+    } else if (options?.variant === 'error') {
+        func = toast.error;
+    }
+
+    return func(content, {
+        duration: options?.autoHideDuration,
     });
 }
 

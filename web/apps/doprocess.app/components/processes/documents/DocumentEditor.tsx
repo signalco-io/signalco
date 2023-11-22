@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { showNotification } from '@signalco/ui-notifications';
 import { Loadable } from '@signalco/ui/Loadable';
 import { useDebouncedEffect } from '@enterwell/react-hooks';
 import { useDocumentUpdate } from '../../../src/hooks/useDocumentUpdate';
@@ -41,7 +42,7 @@ export function DocumentEditor({ id, editable, onSavingChange }: DocumentEditorP
                     data: content
                 });
             } catch(err) {
-                // TODO: Show error notification
+                showNotification('Failed to save document', 'error');
             } finally{
                 onSavingChange?.(false);
             }

@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { Draggable, Map, Marker } from 'pigeon-maps';
+import { showNotification } from '@signalco/ui-notifications';
 import { MyLocation } from '@signalco/ui-icons';
 import { Typography } from '@signalco/ui/Typography';
 import { Stack } from '@signalco/ui/Stack';
@@ -11,7 +12,6 @@ import { Accordion } from '@signalco/ui/Accordion';
 import { asArray, objectWithKey } from '@signalco/js';
 import { usePromise } from '@enterwell/react-hooks';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/index.types';
-import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useUserTheme from '../../../src/hooks/useUserTheme';
 
 const mapBoxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;

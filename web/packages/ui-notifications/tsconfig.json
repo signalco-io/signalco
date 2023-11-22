@@ -2,11 +2,9 @@
     "$schema": "https://json.schemastore.org/tsconfig",
     "extends": "@signalco/tsconfig/react-library.json",
     "include": [
-        "./**/*.ts*"
+        "./src/**/*.ts*"
     ],
     "exclude": [
-        "dist",
-        "node_modules",
-        ".turbo"
+        "node_modules"
     ]
 }

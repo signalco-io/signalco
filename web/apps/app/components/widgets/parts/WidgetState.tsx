@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
+import { showNotification } from '@signalco/ui-notifications';
 import { Typography } from '@signalco/ui/Typography';
 import { Stack } from '@signalco/ui/Stack';
 import { Loadable } from '@signalco/ui/Loadable';
@@ -7,7 +8,6 @@ import { Button } from '@signalco/ui/Button';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
-import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useAudioOn from '../../../src/hooks/sounds/useAudioOn';
 import useAudioOff from '../../../src/hooks/sounds/useAudioOff';

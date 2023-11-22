@@ -1,10 +1,10 @@
 import { compareVersions } from 'compare-versions';
+import { showNotification } from '@signalco/ui-notifications';
 import { Check, Upload } from '@signalco/ui-icons';
 import { Button } from '@signalco/ui/Button';
 import { objectWithKey } from '@signalco/js';
 import { usePromise } from '@enterwell/react-hooks';
 import StationsRepository from '../../src/stations/StationsRepository';
-import { showNotification } from '../../src/notifications/PageNotificationService';
 import useLocale, { localizer, useLocalePlaceholders } from '../../src/hooks/useLocale';
 
 async function loadLatestAvailableVersion() {
