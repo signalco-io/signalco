@@ -1,9 +1,9 @@
 'use client';
 
 import { useMemo } from 'react';
+import { List } from '@signalco/ui-primitives/List';
 import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
 import { Loadable } from '@signalco/ui/Loadable';
-import { List } from '@signalco/ui/List';
 import { lexinsert } from '@signalco/lexorder';
 import { orderBy } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';

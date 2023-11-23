@@ -2,7 +2,7 @@
 
 import { PropsWithChildren, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import { Stack } from '@signalco/ui/Stack';
+import { Stack } from '@signalco/ui-primitives/Stack';
 import { Breadcrumbs } from '@signalco/ui/Breadcrumbs';
 import { KnownPages } from '../../../../../src/knownPages';
 import { TypographyProcessName } from '../../../../../components/processes/processes/TypographyProcessName';

@@ -1,4 +1,4 @@
-import { Stack } from '@signalco/ui/Stack';
+import { Stack } from '@signalco/ui-primitives/Stack';
 import { TypographyDocumentName } from '../../../../../components/processes/documents/TypographyDocumentName';
 import { DocumentEditor } from '../../../../../components/processes/documents/DocumentEditor';
 

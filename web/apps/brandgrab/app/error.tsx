@@ -1,7 +1,7 @@
 'use client';
 
-import {Stack} from '@signalco/ui/Stack';
-import {Row} from '@signalco/ui/Row';
+import {Stack} from '@signalco/ui-primitives/Stack';
+import {Row} from '@signalco/ui-primitives/Row';
 
 type RootErrorProps = {
     error: Error;

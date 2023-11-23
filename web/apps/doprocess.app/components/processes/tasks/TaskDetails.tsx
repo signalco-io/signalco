@@ -2,15 +2,15 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Skeleton } from '@signalco/ui-primitives/Skeleton';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Link } from '@signalco/ui-primitives/Link';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Empty, FileText } from '@signalco/ui-icons';
 import { TypographyEditable } from '@signalco/ui/TypographyEditable';
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
-import { Skeleton } from '@signalco/ui/Skeleton';
-import { Row } from '@signalco/ui/Row';
 import { Loadable } from '@signalco/ui/Loadable';
-import { Link } from '@signalco/ui/Link';
-import { cx } from '@signalco/ui/cx';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { TypographyDocumentName } from '../documents/TypographyDocumentName';
 import { EditorSkeleton } from '../documents/editor/EditorSkeleton';

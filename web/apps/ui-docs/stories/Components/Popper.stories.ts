@@ -1,4 +1,4 @@
-import { Popper } from "@signalco/ui/Popper";
+import { Popper } from "@signalco/ui-primitives/Popper";
 import { StoryObj } from "@storybook/react";
 
 export default { component: Popper, tags: ['autodocs'] };

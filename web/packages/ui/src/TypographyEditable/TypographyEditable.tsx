@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { cx } from '@signalco/ui/cx';
+import { Typography, TypographyProps, populateTypographyStylesAndClasses } from '@signalco/ui-primitives/Typography';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Edit } from '@signalco/ui-icons';
-import { Typography, TypographyProps, populateTypographyStylesAndClasses } from '../Typography/Typography';
 
 export type TypographyEditableProps = Omit<TypographyProps, 'onChange' | 'children'> & {
     children: string | null | undefined;

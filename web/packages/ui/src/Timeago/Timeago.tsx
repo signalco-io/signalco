@@ -1,5 +1,5 @@
 import ReactTimeago from 'react-timeago';
-import { Typography } from '../Typography';
+import { Typography } from '@signalco/ui-primitives/Typography';
 
 export type TimeagoProps = {
     date: number | Date | undefined;

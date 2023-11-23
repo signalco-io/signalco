@@ -29,6 +29,7 @@
         "@signalco/js": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/ui": "workspace:*",
+        "@signalco/ui-primitives": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "@vercel/analytics": "1.1.1",
         "autoprefixer": "10.4.16",

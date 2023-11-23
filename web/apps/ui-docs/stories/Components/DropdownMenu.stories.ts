@@ -1,4 +1,4 @@
-import { DropdownMenu } from "@signalco/ui/Menu";
+import { DropdownMenu } from "@signalco/ui-primitives/Menu";
 import { StoryObj } from "@storybook/react";
 
 export default { component: DropdownMenu, tags: ['autodocs'] };

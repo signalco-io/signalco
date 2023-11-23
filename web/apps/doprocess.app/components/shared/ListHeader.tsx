@@ -1,7 +1,7 @@
 import { Fragment, type ReactNode } from 'react';
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
-import { Row } from '@signalco/ui/Row';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
 
 type ListHeaderProps = {
     header: ReactNode | string | undefined;

@@ -1,10 +1,10 @@
 import { isValidElement, useState } from 'react';
 import type { ComponentProps, MouseEvent } from 'react';
-import { cx } from '@signalco/ui/cx';
+import { Row } from '@signalco/ui-primitives/Row';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Collapse } from '@signalco/ui-primitives/Collapse';
+import { Card, CardContent, CardHeader } from '@signalco/ui-primitives/Card';
 import { ExpandDown } from '@signalco/ui-icons';
-import { Row } from '../Row';
-import { Collapse } from '../Collapse';
-import { Card, CardContent, CardHeader } from '../Card';
 
 export type AccordionProps = ComponentProps<typeof Card> & {
     open?: boolean;

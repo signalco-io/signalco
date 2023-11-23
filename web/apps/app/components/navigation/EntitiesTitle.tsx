@@ -1,4 +1,4 @@
-import { SelectItems } from '@signalco/ui/SelectItems';
+import { SelectItems } from '@signalco/ui-primitives/SelectItems';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { EntityIconByType } from '../shared/entity/EntityIcon';
 

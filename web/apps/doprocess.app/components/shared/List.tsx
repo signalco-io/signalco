@@ -2,14 +2,14 @@
 
 import { Fragment, ReactElement, ReactNode, useState } from 'react';
 import { type UseQueryResult } from '@tanstack/react-query';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Modal } from '@signalco/ui-primitives/Modal';
+import { ListItem } from '@signalco/ui-primitives/ListItem';
+import { List as UIList } from '@signalco/ui-primitives/List';
 import { Add } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
-import { Row } from '@signalco/ui/Row';
-import { Modal } from '@signalco/ui/Modal';
 import { Loadable } from '@signalco/ui/Loadable';
-import { ListItem } from '@signalco/ui/ListItem';
-import { List as UIList } from '@signalco/ui/List';
 import { ListSkeleton } from './ListSkeleton';
 import { ListItemCreate } from './ListItemCreate';
 

@@ -2,13 +2,13 @@ import { TooltipProps } from 'recharts/types/component/Tooltip';
 import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, LabelProps, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
 import { type SVGProps } from 'react';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
-import { Typography } from '@signalco/ui/Typography';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Row } from '@signalco/ui-primitives/Row';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Card } from '@signalco/ui-primitives/Card';
 import { Timeago } from '@signalco/ui/Timeago';
-import { Row } from '@signalco/ui/Row';
 import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
 import { Loadable } from '@signalco/ui/Loadable';
-import { lightBlue, deepOrange, green, amber, zinc } from '@signalco/ui/colors';
-import { Card } from '@signalco/ui/Card';
 import { camelToSentenceCase, ObjectDictAny } from '@signalco/js';
 import { now } from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
@@ -67,9 +67,6 @@ const renderCustomizedTimeLineLabel = ({ x, y, width, value }: Omit<SVGProps<SVG
 };
 
 function GraphTimeLine({ data, durationMs, width, startDateTime, hideLegend }: InnerGraphProps) {
-    const accentTrue = lightBlue[600];
-    const accentFalse = deepOrange[500];
-
     const nowTime = startDateTime ?? now();
     const past = startDateTime ?? now();
     past.setTime(nowTime.getTime() - durationMs);
@@ -128,7 +125,9 @@ function GraphTimeLine({ data, durationMs, width, startDateTime, hideLegend }: I
                         stackId="0"
                         barSize={20}
                         maxBarSize={20}
-                        fill={transformedDataItem[`v${i}`] === 'true' ? accentTrue : accentFalse}
+                        className={cx(
+                            transformedDataItem[`v${i}`] === 'true' ? 'fill-sky-600' : 'fill-orange-500'
+                        )}
                     >
                         <LabelList
                             dataKey={`v${i}`}
@@ -247,13 +246,6 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
     );
 }
 
-const graphColorWheel = [
-    green[600],
-    lightBlue[600],
-    amber[600],
-    zinc[500]
-]
-
 function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
     const barKeys = (data?.length ?? 0) > 0
         ? (typeof data[0]?.value === 'object' ? Object.keys(data[0].value) : ['value'])
@@ -325,10 +317,25 @@ function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
                     paddingLeft: '16px'
                 }} />
             {barKeys.map((bk, bki) => (
-                <Bar key={bk} name={camelToSentenceCase(bk)} dataKey={bk} stackId="a" fill={graphColorWheel[bki % graphColorWheel.length]} />
+                <Bar
+                    key={bk}
+                    name={camelToSentenceCase(bk)}
+                    dataKey={bk}
+                    stackId="a"
+                    className={cx(
+                        bki % 4 === 0 && 'fill-green-600',
+                        bki % 4 === 1 && 'fill-sky-600',
+                        bki % 4 === 2 && 'fill-amber-600',
+                        bki % 4 === 3 && 'fill-zinc-500'
+                    )} />
             ))}
             {(limits?.length ?? 0) > 0 && limits?.map(l =>
-                <ReferenceLine key={l.id} y={l.value} strokeDasharray="8 8" stroke={deepOrange[800]} ifOverflow="extendDomain" />
+                (<ReferenceLine
+                    key={l.id}
+                    y={l.value}
+                    strokeDasharray="8 8"
+                    className="fill-orange-800"
+                    ifOverflow="extendDomain" />)
             )}
         </BarChart>
     );

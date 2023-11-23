@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Row } from '@signalco/ui/Row';
+import { Row } from '@signalco/ui-primitives/Row';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import DashboardSelector from '../dashboards/DashboardSelector';
 

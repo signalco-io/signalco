@@ -1,7 +1,7 @@
 import './App.css'
 import { AppItemSection } from './AppItemSection';
 import { AppItemType } from './AppItemType';
-import { Stack } from '@signalco/ui/Stack';
+import { Stack } from '@signalco/ui-primitives/Stack';
 
 const tools: AppItemType[] = [
     { label: 'UI Docs', href: 'http://localhost:6007' },

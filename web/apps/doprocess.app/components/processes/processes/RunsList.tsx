@@ -1,8 +1,8 @@
 'use client';
 
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
 import { Play } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { List } from '../../shared/List';
 import { KnownPages } from '../../../src/knownPages';

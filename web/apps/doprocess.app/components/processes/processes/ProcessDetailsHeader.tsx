@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Skeleton } from '@signalco/ui-primitives/Skeleton';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Delete, Embed, ListChecks, MoreHorizontal, Play } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/Stack';
-import { Skeleton } from '@signalco/ui/Skeleton';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/Menu';
 import { Loadable } from '@signalco/ui/Loadable';
-import { IconButton } from '@signalco/ui/IconButton';
-import { cx } from '@signalco/ui/cx';
 import { ListHeader } from '../../shared/ListHeader';
 import { EmbedModal } from '../../shared/EmbedModal';
 import { KnownPages } from '../../../src/knownPages';

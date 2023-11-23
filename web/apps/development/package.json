@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@signalco/ui": "workspace:*",
+    "@signalco/ui-primitives": "workspace:*",
     "@signalco/tailwindcss-config-signalco": "workspace:*",
     "react": "18.2.0",
     "react-dom": "18.2.0",

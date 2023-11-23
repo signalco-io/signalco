@@ -1,5 +1,5 @@
-import { Stack } from '@signalco/ui/Stack';
-import { Skeleton } from '@signalco/ui/Skeleton';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Skeleton } from '@signalco/ui-primitives/Skeleton';
 
 export function ListSkeleton({ itemsCount = 5, itemClassName = 'h-5 w-full', spacing = 1 }: { itemsCount?: number; itemClassName?: string; spacing?: number; }) {
     return (

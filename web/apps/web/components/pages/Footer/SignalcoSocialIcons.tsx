@@ -1,5 +1,5 @@
-import { Row } from '@signalco/ui/Row';
-import { IconButton } from '@signalco/ui/IconButton';
+import { Row } from '@signalco/ui-primitives/Row';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { XIconSvg } from './XIconSvg';
 import { RedditIcon } from './RedditIcon';
 import { GitHubIcon } from './GitHubIcon';

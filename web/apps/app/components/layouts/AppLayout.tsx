@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Minimize } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/Stack';
-import { IconButton } from '@signalco/ui/IconButton';
-import { cx } from '@signalco/ui/cx';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { PageTitle } from '../navigation/PageTitle';
 import NavProfile from '../navigation/NavProfile';

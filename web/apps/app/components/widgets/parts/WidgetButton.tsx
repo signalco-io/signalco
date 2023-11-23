@@ -1,8 +1,8 @@
-import { Typography } from '@signalco/ui/Typography';
-import { Row } from '@signalco/ui/Row';
-import { Icon } from '@signalco/ui/Icon';
-import { Button } from '@signalco/ui/Button';
-import { Avatar } from '@signalco/ui/Avatar';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Icon } from '@signalco/ui-primitives/Icon';
+import { Button } from '@signalco/ui-primitives/Button';
+import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultTargetWithValueMultiple, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';

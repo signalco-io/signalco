@@ -1,11 +1,11 @@
 import React from 'react';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Input } from '@signalco/ui-primitives/Input';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { Card } from '@signalco/ui-primitives/Card';
 import { Add } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
-import { Row } from '@signalco/ui/Row';
-import { Input } from '@signalco/ui/Input';
-import { IconButton } from '@signalco/ui/IconButton';
-import { Card } from '@signalco/ui/Card';
 import { asArray } from '@signalco/js';
 import { widgetType } from '../widgets/Widget';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';

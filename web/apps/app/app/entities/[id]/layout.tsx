@@ -1,12 +1,12 @@
 'use client';
 
 import { type PropsWithChildren } from 'react';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Chip } from '@signalco/ui-primitives/Chip';
 import { ExternalLink } from '@signalco/ui-icons';
 import { Timeago } from '@signalco/ui/Timeago';
-import { Stack } from '@signalco/ui/Stack';
-import { Row } from '@signalco/ui/Row';
 import { DisableButton } from '@signalco/ui/DisableButton';
-import { Chip } from '@signalco/ui/Chip';
 import { camelToSentenceCase } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import useContact from '../../../src/hooks/signalco/useContact';

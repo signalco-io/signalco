@@ -1,5 +1,5 @@
-import { Stack } from '@signalco/ui/Stack';
-import { Skeleton } from '@signalco/ui/Skeleton';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Skeleton } from '@signalco/ui-primitives/Skeleton';
 
 export function EditorSkeleton() {
     return (

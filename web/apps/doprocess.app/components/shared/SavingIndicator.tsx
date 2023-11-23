@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Check } from '@signalco/ui-icons';
-import { cx } from '@signalco/ui/cx';
 
 type SavingIndicatorProps = {
     saving?: boolean;

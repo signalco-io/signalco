@@ -1,11 +1,11 @@
 import { ReactNode, useState } from 'react';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Modal, type ModalProps } from '@signalco/ui-primitives/Modal';
+import { Input } from '@signalco/ui-primitives/Input';
+import { Button } from '@signalco/ui-primitives/Button';
 import { useControllableState } from '@signalco/hooks/useControllableState';
-import { Typography } from '../Typography';
-import { Stack } from '../Stack';
-import { Row } from '../Row';
-import { Modal, type ModalProps } from '../Modal';
-import { Input } from '../Input';
-import { Button } from '../Button';
 
 export type ModalConfirmPromptProps = {
     header: ReactNode,

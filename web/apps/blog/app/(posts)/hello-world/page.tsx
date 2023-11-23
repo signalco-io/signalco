@@ -1,8 +1,8 @@
-import {Typography} from '@signalco/ui/Typography';
-import {Stack} from '@signalco/ui/Stack';
-import {Row} from '@signalco/ui/Row';
-import {Container} from '@signalco/ui/Container';
-import {Chip} from '@signalco/ui/Chip';
+import {Typography} from '@signalco/ui-primitives/Typography';
+import {Stack} from '@signalco/ui-primitives/Stack';
+import {Row} from '@signalco/ui-primitives/Row';
+import {Container} from '@signalco/ui-primitives/Container';
+import {Chip} from '@signalco/ui-primitives/Chip';
 import HelloWorld, { meta } from './hello-world.mdx';
 
 export default function Page() {

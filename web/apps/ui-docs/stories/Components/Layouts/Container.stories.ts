@@ -1,4 +1,4 @@
-import { Container } from "@signalco/ui/Container";
+import { Container } from "@signalco/ui-primitives/Container";
 import { StoryObj } from "@storybook/react";
 
 export default { component: Container, tags: ['autodocs'] };

@@ -68,6 +68,7 @@
     "devDependencies": {
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
+        "@signalco/ui-primitives": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/react": "18.2.38",
         "@types/react-dom": "18.2.17",

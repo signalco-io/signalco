@@ -1,4 +1,4 @@
-import { cx } from '@signalco/ui/cx';
+import { cx } from '@signalco/ui-primitives/cx';
 import { TaskDetails } from '../../../../../components/processes/tasks/TaskDetails';
 
 export default function ProcessPage({ params }: { params: { id: string } }) {

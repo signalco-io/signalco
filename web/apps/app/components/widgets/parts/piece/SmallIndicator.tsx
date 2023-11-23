@@ -1,6 +1,6 @@
-import { Icon } from '@signalco/ui/Icon';
-import { cx } from '@signalco/ui/cx';
-import { Button } from '@signalco/ui/Button';
+import { Icon } from '@signalco/ui-primitives/Icon';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Button } from '@signalco/ui-primitives/Button';
 
 export interface SmallIndicatorProps {
     isActive: boolean;

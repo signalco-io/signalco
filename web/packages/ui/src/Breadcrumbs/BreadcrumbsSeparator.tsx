@@ -1,4 +1,4 @@
-import { Typography } from '../Typography';
+import { Typography } from '@signalco/ui-primitives/Typography';
 
 export function BreadcrumbsSeparator() {
     return (

@@ -2,16 +2,16 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { SelectItems } from '@signalco/ui-primitives/SelectItems';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Chip } from '@signalco/ui-primitives/Chip';
+import { Card } from '@signalco/ui-primitives/Card';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/Typography';
 import type { ColorVariants } from '@signalco/ui/theme';
-import { Stack } from '@signalco/ui/Stack';
-import { SelectItems } from '@signalco/ui/SelectItems';
-import { Row } from '@signalco/ui/Row';
 import { Gallery } from '@signalco/ui/Gallery';
 import { FilterList } from '@signalco/ui/FilterList';
-import { Chip } from '@signalco/ui/Chip';
-import { Card } from '@signalco/ui/Card';
 import { objectWithKey } from '@signalco/js';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import SignalcoLogo from '../../../components/icons/SignalcoLogo';

@@ -1,4 +1,4 @@
-import { Input } from "@signalco/ui/Input";
+import { Input } from "@signalco/ui-primitives/Input";
 import { StoryObj } from "@storybook/react";
 
 export default { component: Input, tags: ['autodocs'] };
