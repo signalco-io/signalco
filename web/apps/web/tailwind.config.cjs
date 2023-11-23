@@ -7,6 +7,7 @@ export default {
     content: [
         './app/**/*.{ts,tsx}',
         './components/**/*.{ts,tsx}',
-        "../../packages/ui/src/**/*.{ts,tsx}"
+        '../../packages/ui/src/**/*.{ts,tsx}',
+        '../../packages/ui-primitives/src/**/*.{ts,tsx}'
     ]
 }
