@@ -1,8 +1,8 @@
 import React from 'react';
-import { Typography } from '@signalco/ui/Typography';
-import { Tooltip } from '@signalco/ui/Tooltip';
-import { Row } from '@signalco/ui/Row';
-import { ListTreeItem } from '@signalco/ui/ListTreeItem';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Tooltip } from '@signalco/ui-primitives/Tooltip';
+import { Row } from '@signalco/ui-primitives/Row';
+import { ListTreeItem } from '@signalco/ui-primitives/ListTreeItem';
 import { CopyToClipboardInput } from '@signalco/ui/CopyToClipboardInput';
 import { ParsedJson } from '@signalco/js';
 import { JsonNonArrayVisualizer } from './JsonNonArrayVisualizer';

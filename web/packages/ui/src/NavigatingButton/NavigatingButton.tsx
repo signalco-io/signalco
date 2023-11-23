@@ -1,6 +1,6 @@
-import { cx } from '@signalco/ui/cx';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Button, ButtonProps } from '@signalco/ui-primitives/Button';
 import { Navigate } from '@signalco/ui-icons';
-import { Button, ButtonProps } from '../Button';
 
 export type NavigatingButtonProps = ButtonProps & {
     hideArrow?: boolean;

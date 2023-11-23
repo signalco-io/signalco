@@ -77,6 +77,9 @@ importers:
       '@signalco/ui-notifications':
         specifier: workspace:*
         version: link:../../packages/ui-notifications
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../../packages/ui-primitives
       '@tanstack/query-sync-storage-persister':
         specifier: 5.8.3
         version: 5.8.3
@@ -285,6 +288,9 @@ importers:
       '@signalco/ui-icons':
         specifier: workspace:*
         version: link:../../packages/ui-icons
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../../packages/ui-primitives
       '@vercel/analytics':
         specifier: 1.1.1
         version: 1.1.1
@@ -418,6 +424,9 @@ importers:
       '@signalco/ui-icons':
         specifier: workspace:*
         version: link:../../packages/ui-icons
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../../packages/ui-primitives
       cheerio:
         specifier: 1.0.0-rc.12
         version: 1.0.0-rc.12
@@ -506,6 +515,9 @@ importers:
       '@signalco/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../../packages/ui-primitives
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -597,6 +609,9 @@ importers:
       '@signalco/ui-notifications':
         specifier: workspace:*
         version: link:../../packages/ui-notifications
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../../packages/ui-primitives
       '@tanstack/react-query':
         specifier: 5.8.4
         version: 5.8.4(react-dom@18.2.0)(react@18.2.0)
@@ -727,6 +742,9 @@ importers:
       '@signalco/ui-icons':
         specifier: workspace:*
         version: link:../../packages/ui-icons
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../../packages/ui-primitives
       classix:
         specifier: 2.1.35
         version: 2.1.35
@@ -824,6 +842,9 @@ importers:
       '@signalco/ui-icons':
         specifier: workspace:*
         version: link:../../packages/ui-icons
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../../packages/ui-primitives
       next:
         specifier: 14.0.3
         version: 14.0.3(@babel/core@7.23.3)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.5)
@@ -954,6 +975,9 @@ importers:
       '@signalco/ui-icons':
         specifier: workspace:*
         version: link:../../packages/ui-icons
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../../packages/ui-primitives
       '@vercel/analytics':
         specifier: 1.1.1
         version: 1.1.1
@@ -1243,6 +1267,9 @@ importers:
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../ui-primitives
       '@types/react':
         specifier: 18.2.38
         version: 18.2.38
@@ -1297,6 +1324,9 @@ importers:
       '@signalco/ui':
         specifier: workspace:*
         version: link:../ui
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../ui-primitives
       next:
         specifier: 14.0.3
         version: 14.0.3(react-dom@18.2.0)(react@18.2.0)(sass@1.69.5)

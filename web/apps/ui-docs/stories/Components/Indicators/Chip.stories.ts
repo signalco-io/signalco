@@ -1,4 +1,4 @@
-import { Chip } from "@signalco/ui/Chip";
+import { Chip } from "@signalco/ui-primitives/Chip";
 import { Meta, StoryObj } from "@storybook/react";
 
 export default {

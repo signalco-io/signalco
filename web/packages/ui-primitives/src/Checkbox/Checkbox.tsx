@@ -1,7 +1,7 @@
 import { type ReactNode, useId, ComponentPropsWithoutRef } from 'react';
-import { cx } from '@signalco/ui/cx';
 import { Check } from '@signalco/ui-icons';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
+import { cx } from '../cx';
 
 export type CheckboxProps = ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> & {
     label?: ReactNode;

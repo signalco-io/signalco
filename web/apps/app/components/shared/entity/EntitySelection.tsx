@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import { Stack } from '@signalco/ui/Stack';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { ListItem } from '@signalco/ui-primitives/ListItem';
+import { List } from '@signalco/ui-primitives/List';
+import { Input } from '@signalco/ui-primitives/Input';
 import { Loadable } from '@signalco/ui/Loadable';
-import { ListItem } from '@signalco/ui/ListItem';
-import { List } from '@signalco/ui/List';
-import { Input } from '@signalco/ui/Input';
 import useAllEntities from '../../../src/hooks/signalco/entity/useAllEntities';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 import IContactPointer from '../../../src/contacts/IContactPointer';

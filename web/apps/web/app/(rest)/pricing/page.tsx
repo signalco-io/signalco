@@ -1,5 +1,5 @@
-import { Stack } from '@signalco/ui/Stack';
-import { Row } from '@signalco/ui/Row';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
 import { KnownPages } from '../../../src/knownPages';
 import PricingCard, { PricingOption } from '../../../components/pages/pricing/PricingCard';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';

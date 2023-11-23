@@ -1,5 +1,5 @@
-import { Input } from '@signalco/ui/Input';
-import { Button } from '@signalco/ui/Button';
+import { Input } from '@signalco/ui-primitives/Input';
+import { Button } from '@signalco/ui-primitives/Button';
 
 type InputSubmitProps = {
     value: string;

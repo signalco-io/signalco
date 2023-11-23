@@ -1,14 +1,14 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Typography } from '@signalco/ui/Typography';
-import { Tooltip } from '@signalco/ui/Tooltip';
-import { Stack } from '@signalco/ui/Stack';
-import { SelectItems } from '@signalco/ui/SelectItems';
-import { Row } from '@signalco/ui/Row';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Tooltip } from '@signalco/ui-primitives/Tooltip';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { SelectItems } from '@signalco/ui-primitives/SelectItems';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Card, CardOverflow } from '@signalco/ui-primitives/Card';
+import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { Loadable } from '@signalco/ui/Loadable';
-import { Card, CardOverflow } from '@signalco/ui/Card';
-import { Avatar } from '@signalco/ui/Avatar';
 import '@reactflow/core/dist/base.css';
 import {
     ReactFlowProvider,

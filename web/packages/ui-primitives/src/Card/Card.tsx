@@ -1,6 +1,6 @@
 import { type HTMLAttributes, type PropsWithChildren, type MouseEventHandler, forwardRef } from 'react';
-import { cx } from '@signalco/ui/cx';
 import { Link } from '../Link';
+import { cx } from '../cx';
 
 export type CardProps = Omit<HTMLAttributes<HTMLDivElement>, 'onClick'> & {
     href?: string;

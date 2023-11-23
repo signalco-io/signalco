@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { cx } from '@signalco/ui/cx';
+import { cx } from '../cx';
 
 export type AvatarProps = PropsWithChildren<{
     size?: 'sm' | 'md' | 'lg'; // TODO: Implement

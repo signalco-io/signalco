@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Delete, Embed, MoreHorizontal } from '@signalco/ui-icons';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/Menu';
-import { IconButton } from '@signalco/ui/IconButton';
-import { cx } from '@signalco/ui/cx';
 import { Toolbar } from '../../shared/Toolbar';
 import { SavingIndicator } from '../../shared/SavingIndicator';
 import { EmbedModal } from '../../shared/EmbedModal';

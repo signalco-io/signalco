@@ -1,6 +1,6 @@
 import React from 'react';
-import {Row} from '@signalco/ui/Row';
-import {Link} from '@signalco/ui/Link';
+import {Row} from '@signalco/ui-primitives/Row';
+import {Link} from '@signalco/ui-primitives/Link';
 import { now } from '../../src/services/DateTimeProvider';
 import styles from './FooterInfo.module.scss';
 

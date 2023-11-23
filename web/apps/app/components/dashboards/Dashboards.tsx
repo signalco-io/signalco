@@ -3,12 +3,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
-import { Row } from '@signalco/ui/Row';
 import { Loadable } from '@signalco/ui/Loadable';
-import { Button } from '@signalco/ui/Button';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { widgetType } from '../widgets/Widget';
 import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';

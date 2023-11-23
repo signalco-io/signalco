@@ -1,5 +1,5 @@
-import { cx } from '@signalco/ui/cx';
 import type { ColorVariants } from '../theme';
+import { cx } from '../cx';
 
 export type DotIndicatorProps = {
     color: ColorVariants;

@@ -37,6 +37,7 @@
     "@signalco/lexorder": "workspace:*",
     "@signalco/tailwindcss-config-signalco": "workspace:*",
     "@signalco/ui": "workspace:*",
+    "@signalco/ui-primitives": "workspace:*",
     "@signalco/ui-notifications": "workspace:*",
     "@signalco/ui-icons": "workspace:*",
     "@tanstack/react-query": "5.8.4",

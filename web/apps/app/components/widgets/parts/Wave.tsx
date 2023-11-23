@@ -1,5 +1,5 @@
 import { CSSProperties } from 'react';
-import { cx } from '@signalco/ui/cx';
+import { cx } from '@signalco/ui-primitives/cx';
 import styles from './Wave.module.css';
 
 function SingleWave() {

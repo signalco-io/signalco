@@ -1,13 +1,13 @@
 'use client';
 
 import { ChangeEvent, SyntheticEvent, createRef, useState } from 'react';
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
-import { Row } from '@signalco/ui/Row';
-import { Input } from '@signalco/ui/Input';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Input } from '@signalco/ui-primitives/Input';
+import { Button } from '@signalco/ui-primitives/Button';
 import { GentleSlide} from '@signalco/ui/GentleSlide';
 import { Fade } from '@signalco/ui/Fade';
-import { Button } from '@signalco/ui/Button';
 import { Alert } from '@signalco/ui/Alert';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 

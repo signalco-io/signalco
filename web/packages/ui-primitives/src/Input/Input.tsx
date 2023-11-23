@@ -1,7 +1,7 @@
 import { InputHTMLAttributes, PropsWithChildren, useMemo } from 'react';
-import { cx } from '@signalco/ui/cx';
 import { Stack } from '../Stack';
 import { Row } from '../Row';
+import { cx } from '../cx';
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
     startDecorator?: React.ReactNode;

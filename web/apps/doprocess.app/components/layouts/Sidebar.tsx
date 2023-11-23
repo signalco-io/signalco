@@ -2,11 +2,11 @@
 
 import { useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
+import { ListItem } from '@signalco/ui-primitives/ListItem';
+import { List } from '@signalco/ui-primitives/List';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { cx } from '@signalco/ui-primitives/cx';
 import { FileText, ListChecks, Play, Right } from '@signalco/ui-icons';
-import { ListItem } from '@signalco/ui/ListItem';
-import { List } from '@signalco/ui/List';
-import { IconButton } from '@signalco/ui/IconButton';
-import { cx } from '@signalco/ui/cx';
 import { KnownPages } from '../../src/knownPages';
 
 export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: (open: boolean) => void }) {

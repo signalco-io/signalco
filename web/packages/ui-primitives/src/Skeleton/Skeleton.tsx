@@ -1,4 +1,4 @@
-import { cx } from '@signalco/ui/cx';
+import { cx } from '../cx';
 
 export function Skeleton({
     className,

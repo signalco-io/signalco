@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Stack } from '@signalco/ui/Stack';
+import { Stack } from '@signalco/ui-primitives/Stack';
 import { Loadable } from '@signalco/ui/Loadable';
 import { useAuth0 } from '@auth0/auth0-react';
 

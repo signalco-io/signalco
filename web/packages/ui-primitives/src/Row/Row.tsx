@@ -1,5 +1,5 @@
 import { type HTMLAttributes, type CSSProperties, forwardRef } from 'react';
-import { cx } from '@signalco/ui/cx';
+import { cx } from '../cx';
 
 export type RowProps = HTMLAttributes<HTMLDivElement> & {
     spacing?: number;

@@ -1,6 +1,6 @@
 import { type HTMLAttributes, type ReactNode } from 'react';
-import { cx } from '@signalco/ui/cx';
-import { Row } from '../Row';
+import { Row } from '@signalco/ui-primitives/Row';
+import { cx } from '@signalco/ui-primitives/cx';
 
 export type AlertProps = HTMLAttributes<HTMLDivElement> & {
     color?: 'primary' | 'neutral' | 'danger' | 'info' | 'success' | 'warning',

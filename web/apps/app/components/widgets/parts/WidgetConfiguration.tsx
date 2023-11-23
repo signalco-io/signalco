@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
-import { Stack } from '@signalco/ui/Stack';
-import { SelectItems } from '@signalco/ui/SelectItems';
-import { Button } from '@signalco/ui/Button';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { SelectItems } from '@signalco/ui-primitives/SelectItems';
+import { Button } from '@signalco/ui-primitives/Button';
 import { asArray, ObjectDictAny } from '@signalco/js';
 import { extractValues } from '@enterwell/react-form-validation';
 import { FormBuilder, type FormItems, useFormField, FormBuilderProvider, FormBuilderComponents } from '@enterwell/react-form-builder';

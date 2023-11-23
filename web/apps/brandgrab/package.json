@@ -24,6 +24,7 @@
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
         "@signalco/ui": "workspace:*",
+        "@signalco/ui-primitives": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "cheerio": "1.0.0-rc.12",
         "classix": "2.1.35",

@@ -1,6 +1,6 @@
 import { Ref, type ReactElement } from 'react';
-import { cx } from '@signalco/ui/cx';
 import { Row } from '../Row';
+import { cx } from '../cx';
 import { Button } from '../Button';
 
 export type ListItemPropsOptions = {

@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import {cx} from '@signalco/ui/cx';
+import { cx } from '../cx';
 
 export type SpinnerProps = HTMLAttributes<HTMLOrSVGElement> & {
     loading?: boolean;

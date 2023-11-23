@@ -1,6 +1,6 @@
 import { type HTMLAttributes } from 'react';
-import { cx } from '@signalco/ui/cx';
 import * as PopoverPrimitive from '@radix-ui/react-popover'
+import { cx } from '../cx';
 
 export type PopperProps = HTMLAttributes<HTMLDivElement> & {
     trigger?: React.ReactNode;

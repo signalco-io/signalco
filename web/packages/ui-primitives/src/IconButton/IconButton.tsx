@@ -1,7 +1,7 @@
 import { forwardRef, type ComponentProps, PropsWithChildren, useMemo } from 'react';
-import {cx} from '@signalco/ui/cx';
 import { Link , LoaderSpinner } from '@signalco/ui-icons';
 import { Slot } from '@radix-ui/react-slot';
+import { cx } from '../cx';
 import { Button } from '../Button';
 
 export type IconButtonProps = ComponentProps<typeof Button>;

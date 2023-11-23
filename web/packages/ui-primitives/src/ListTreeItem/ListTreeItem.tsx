@@ -1,11 +1,11 @@
 import { PropsWithChildren, ReactElement, useState } from 'react';
-import { cx } from '@signalco/ui/cx';
 import { ExpandDown } from '@signalco/ui-icons';
 import { Tooltip } from '../Tooltip';
 import { Stack } from '../Stack';
 import { Row } from '../Row';
 import { ListItem } from '../ListItem/ListItem';
 import { IconButton } from '../IconButton';
+import { cx } from '../cx';
 
 export type ListTreeItemProps = PropsWithChildren<{
     label?: ReactElement | string;

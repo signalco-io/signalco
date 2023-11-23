@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useState } from 'react';
-import { Button } from '@signalco/ui/Button';
+import { Button } from '@signalco/ui-primitives/Button';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 
 type OAuthRedirectConnectButtonProps = {

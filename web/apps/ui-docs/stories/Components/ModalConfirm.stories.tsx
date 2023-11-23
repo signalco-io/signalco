@@ -1,4 +1,4 @@
-import { Button } from "@signalco/ui/Button";
+import { Button } from "@signalco/ui-primitives/Button";
 import { ModalConfirm } from "@signalco/ui/ModalConfirm";
 import { Meta, StoryObj } from "@storybook/react";
 

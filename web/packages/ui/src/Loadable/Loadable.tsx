@@ -1,8 +1,8 @@
 import { type PropsWithChildren, useMemo, ReactNode, CSSProperties } from 'react';
-import { cx } from '@signalco/ui/cx';
+import { Spinner } from '@signalco/ui-primitives/Spinner';
+import { Skeleton } from '@signalco/ui-primitives/Skeleton';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Warning } from '@signalco/ui-icons';
-import { Spinner } from '../Spinner';
-import { Skeleton } from '../Skeleton';
 import { Alert } from '../Alert';
 
 export type LoadableLoadingErrorProps = {

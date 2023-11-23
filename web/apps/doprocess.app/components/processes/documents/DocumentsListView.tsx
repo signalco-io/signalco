@@ -1,4 +1,4 @@
-import { Stack } from '@signalco/ui/Stack';
+import { Stack } from '@signalco/ui-primitives/Stack';
 import { ListHeader } from '../../shared/ListHeader';
 import { DocumentsList } from './DocumentsList';
 

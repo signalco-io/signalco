@@ -1,7 +1,7 @@
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
 import { ListChecks, Navigate, Play } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
-import { Row } from '@signalco/ui/Row';
 import { ListItem } from '../../shared/ListItem';
 import { KnownPages } from '../../../src/knownPages';
 import { ProcessRunDto } from '../../../app/api/dtos/dtos';

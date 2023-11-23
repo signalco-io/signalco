@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { Stack } from '@signalco/ui/Stack';
+import { Stack } from '@signalco/ui-primitives/Stack';
 import PageCenterHeader from '../../../../components/pages/PageCenterHeader';
 
 const LayoutResourceGraph = dynamic(() => import('./LayoutResourceGraph'), { ssr: false, loading: () => <div>Loading...</div> });

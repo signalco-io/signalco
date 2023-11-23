@@ -1,8 +1,8 @@
 // import { toast } from 'react-toastify';
 import { toast } from 'sonner';
 import { ReactNode } from 'react';
-import { Row } from '@signalco/ui/Row';
-import { Button } from '@signalco/ui/Button';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Button } from '@signalco/ui-primitives/Button';
 
 export type PageNotificationVariant = 'default' | 'info' | 'success' | 'warning' | 'error';
 

@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import { cx } from '@signalco/ui/cx';
+import { cx } from '../cx';
 
 export type IconProps = HTMLAttributes<HTMLSpanElement>;
 

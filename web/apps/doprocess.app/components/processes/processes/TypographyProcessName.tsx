@@ -1,7 +1,7 @@
 'use client';
 
+import { Typography } from '@signalco/ui-primitives/Typography';
 import { TypographyEditable, TypographyEditableProps } from '@signalco/ui/TypographyEditable';
-import { Typography } from '@signalco/ui/Typography';
 import { Loadable } from '@signalco/ui/Loadable';
 import { useProcessUpdate } from '../../../src/hooks/useProcessUpdate';
 import { useProcess } from '../../../src/hooks/useProcess';

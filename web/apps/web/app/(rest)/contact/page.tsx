@@ -1,5 +1,5 @@
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
 
 export default function ContactPage() {
     return (

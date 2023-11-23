@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Input } from '@signalco/ui-primitives/Input';
+import { Button } from '@signalco/ui-primitives/Button';
 import { Play } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/Stack';
-import { Row } from '@signalco/ui/Row';
-import { Input } from '@signalco/ui/Input';
-import { Button } from '@signalco/ui/Button';
 import { KnownPages } from '../../../src/knownPages';
 import { useProcessRunCreate } from '../../../src/hooks/useProcessRunCreate';
 import { useProcess } from '../../../src/hooks/useProcess';

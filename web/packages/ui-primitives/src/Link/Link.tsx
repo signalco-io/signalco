@@ -1,8 +1,8 @@
 import type { AnchorHTMLAttributes } from 'react';
 import NextLink from 'next/link';
 import type { Url } from 'next/dist/shared/lib/router/router';
-import { cx } from '@signalco/ui/cx';
 import { isAbsoluteUrl } from '@signalco/js';
+import { cx } from '../cx';
 
 export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
     href: string | Url;

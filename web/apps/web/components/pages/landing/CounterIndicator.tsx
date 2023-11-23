@@ -1,5 +1,5 @@
-import { Typography } from '@signalco/ui/Typography';
-import { cx } from '@signalco/ui/cx';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { cx } from '@signalco/ui-primitives/cx';
 
 function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
     return (

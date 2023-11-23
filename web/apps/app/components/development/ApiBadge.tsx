@@ -1,4 +1,4 @@
-import { Chip } from '@signalco/ui/Chip';
+import { Chip } from '@signalco/ui-primitives/Chip';
 import { useIsServer } from '@signalco/hooks/useIsServer';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { signalcoApiEndpointIsProduction } from '../../src/services/AppSettingsProvider';

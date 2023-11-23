@@ -1,6 +1,6 @@
 import { type CSSProperties, ForwardedRef, createElement, forwardRef, type HTMLAttributes } from 'react';
-import { cx } from '@signalco/ui/cx';
 import type { ColorVariants } from '../theme';
+import { cx } from '../cx';
 
 export type TypographyProps = HTMLAttributes<HTMLParagraphElement> & {
     level?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'body3';

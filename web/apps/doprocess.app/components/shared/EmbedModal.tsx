@@ -1,9 +1,9 @@
 'use client';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Modal } from '@signalco/ui-primitives/Modal';
+import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
-import { Modal } from '@signalco/ui/Modal';
-import { Button } from '@signalco/ui/Button';
 
 export function EmbedModal({
     header, subHeader, src, open, onOpenChange

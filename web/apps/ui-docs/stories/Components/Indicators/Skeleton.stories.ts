@@ -1,4 +1,4 @@
-import { Skeleton } from "@signalco/ui/Skeleton";
+import { Skeleton } from "@signalco/ui-primitives/Skeleton";
 import { Meta, StoryObj } from "@storybook/react";
 
 export default {
