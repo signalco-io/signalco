@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "@enterwell/react-hooks": "0.3.2",
-        "@hcaptcha/react-hcaptcha": "1.9.1",
+        "@hcaptcha/react-hcaptcha": "1.9.2",
         "@next/env": "14.0.3",
         "@reactflow/background": "11.3.6",
         "@reactflow/controls": "11.2.6",
