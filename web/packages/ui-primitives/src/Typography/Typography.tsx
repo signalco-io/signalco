@@ -24,7 +24,7 @@ export type TypographyProps = HTMLAttributes<HTMLParagraphElement> & {
     gutterBottom?: boolean;
 };
 
-function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, secondary, tertiary, noWrap, ...rest }: TypographyProps) {
+function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, noWrap, ...rest }: TypographyProps) {
     if (extraThin) styles['fontWeight'] = 100;
     if (thin) styles['fontWeight'] = 300;
     if (semiBold) styles['fontWeight'] = 500;
@@ -36,8 +36,6 @@ function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity
     if (textDecoration) styles['textDecoration'] = textDecoration;
     if (fontSize) styles['fontSize'] = typeof fontSize === 'string' ? fontSize : `${fontSize}px`;
     if (lineHeight) styles['lineHeight'] = lineHeight;
-    if (secondary) styles['color'] = 'hsl(var(--muted-foreground))';
-    if (tertiary) styles['color'] = 'hsl(var(--muted-foreground))';
     if (opacity) styles['opacity'] = opacity;
     if (gutterBottom) styles['marginBottom'] = '0.5rem';
     if (noWrap) {
@@ -48,7 +46,14 @@ function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity
     return rest;
 }
 
-export function populateTypographyStylesAndClasses({ color, level, className, ...rest }: Omit<TypographyProps, 'component' | 'children'>) {
+export function populateTypographyStylesAndClasses({
+    color,
+    level,
+    secondary,
+    tertiary,
+    className,
+    ...rest
+}: Omit<TypographyProps, 'component' | 'children'>) {
     const styles: CSSProperties = {};
     const restAfterCustomStyles = populateTypographyStyles(styles, rest);
 
@@ -56,19 +61,25 @@ export function populateTypographyStylesAndClasses({ color, level, className, ..
         style: styles,
         className: cx(
             'm-0',
+            // Levels
+            level === 'body1' && 'text-base',
             level === 'body2' && 'text-sm text-secondary-foreground',
-            level === 'body3' && 'text-xs',
+            level === 'body3' && 'text-xs text-tertiary-foreground',
             level === 'h1' && 'text-5xl',
             level === 'h2' && 'text-4xl',
             level === 'h3' && 'text-3xl',
             level === 'h4' && 'text-2xl',
             level === 'h5' && 'text-xl',
             level === 'h6' && 'text-lg',
+            // Color
             color === 'success' && 'text-green-500',
             color === 'warning' && 'text-yellow-500',
             color === 'danger' && 'text-red-500',
             color === 'info' && 'text-blue-500',
             color === 'neutral' && 'text-slate-500',
+            // Special cases
+            secondary && 'text-secondary-foreground',
+            tertiary && 'text-tertiary-foreground',
             className
         ),
         ...restAfterCustomStyles
