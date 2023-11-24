@@ -547,7 +547,7 @@ importers:
         specifier: 5.0.2
         version: 5.0.2
 
-  apps/doprocess.app:
+  apps/doprocess:
     dependencies:
       '@blocknote/core':
         specifier: 0.9.6

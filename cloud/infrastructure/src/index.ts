@@ -276,7 +276,7 @@ export = async () => {
         nextJsApp('signalco-web', 'web');
         nextJsApp('signalco-slco', 'slco');
         nextJsApp('signalco-brandgrab', 'brandgrab');
-        nextJsApp('doprocess', 'doprocess.app');
+        nextJsApp('doprocess', 'doprocess');
         vercelApp('signalco-ui-docs', 'ui-docs', {
             ignoreCommand: 'npx turbo-ignore',
             outputDirectory: 'storybook-static',
