@@ -1,6 +1,6 @@
 import { PropsWithChildren, JSX } from 'react';
-import {Typography} from '@signalco/ui/Typography';
-import {Row} from '@signalco/ui/Row';
+import {Typography} from '@signalco/ui-primitives/Typography';
+import {Row} from '@signalco/ui-primitives/Row';
 
 function H1({ children }: PropsWithChildren) {
     return <Typography level="h1">{children}</Typography>;

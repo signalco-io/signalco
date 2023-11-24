@@ -1,10 +1,10 @@
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Link } from '@signalco/ui-primitives/Link';
+import { Card } from '@signalco/ui-primitives/Card';
 import { Bug, Link as LinkIcon } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
-import { Row } from '@signalco/ui/Row';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
-import { Link } from '@signalco/ui/Link';
-import { Card } from '@signalco/ui/Card';
 import { Breadcrumbs } from '@signalco/ui/Breadcrumbs';
 import { channelCategories as channelCategoriesData, channelsData } from '@signalco/data/data';
 import { KnownPages } from '../../../../src/knownPages';

@@ -1,6 +1,6 @@
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
-import { Container } from '@signalco/ui/Container';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Container } from '@signalco/ui-primitives/Container';
 import { Accordion } from '@signalco/ui/Accordion';
 import PageCenterHeader from './PageCenterHeader';
 

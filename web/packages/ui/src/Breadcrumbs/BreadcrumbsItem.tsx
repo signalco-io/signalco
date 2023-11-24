@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { Typography } from '../Typography';
-import { Link } from '../Link';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Link } from '@signalco/ui-primitives/Link';
 
 type BreadcrumbsItemProps = {
     href?: string;

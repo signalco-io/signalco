@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack } from '../Stack';
+import { Stack } from '@signalco/ui-primitives/Stack';
 
 export type GalleryFiltersProps = {
     filters: React.ReactElement;

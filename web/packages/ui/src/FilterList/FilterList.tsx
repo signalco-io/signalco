@@ -1,18 +1,18 @@
 import { Children, type PropsWithChildren } from 'react';
 import { useEffect, useState } from 'react';
-import { cx } from '@signalco/ui/cx';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { SelectItems } from '@signalco/ui-primitives/SelectItems';
+import { Row } from '@signalco/ui-primitives/Row';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Collapse } from '@signalco/ui-primitives/Collapse';
+import { Checkbox } from '@signalco/ui-primitives/Checkbox';
+import { Button } from '@signalco/ui-primitives/Button';
 import { Check, Close, ExpandDown } from '@signalco/ui-icons';
-import { Typography } from '../Typography';
-import { Stack } from '../Stack';
-import { SelectItems } from '../SelectItems';
-import { Row } from '../Row';
 import { NoDataPlaceholder } from '../NoDataPlaceholder';
 import { Loadable, LoadableProps } from '../Loadable';
 import { Grow } from '../Grow';
 import { Fade } from '../Fade';
-import { Collapse } from '../Collapse';
-import { Checkbox } from '../Checkbox';
-import { Button } from '../Button';
 
 export type FilterListItem = {
     id: string;

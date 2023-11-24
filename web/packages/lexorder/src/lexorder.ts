@@ -1,4 +1,4 @@
-// Inspired by: 
+// Inspired by:
 // - https://stackoverflow.com/a/49956113/563228
 // - https://stackoverflow.com/questions/38923376/return-a-new-string-that-sorts-between-two-given-strings/38927158#38927158
 
@@ -39,7 +39,7 @@ function decrementLast(curr: string | null | undefined, mid: string, start: stri
 /**
  * Given two lex identifiers, returns a lex identifier that is between them.
  * Can be used to (change) item order in a list without having to re-order all items.
- * 
+ *
  * @param prev Previous lex identifier
  * @param next Next lex identifier
  * @param options Options

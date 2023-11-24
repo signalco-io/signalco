@@ -21,8 +21,8 @@
 			"path": "apps/development"
 		},
 		{
-			"name": "🚀 doprocess.app",
-			"path": "apps/doprocess.app"
+			"name": "🚀 doprocess",
+			"path": "apps/doprocess"
 		},
 		{
 			"name": "🚀 slco",
@@ -75,9 +75,16 @@
 		{
 			"name": "📦 @signalco/ui-notifications",
 			"path": "packages/ui-notifications"
+		},
+		{
+			"name": "📦 @signalco/ui-primitives",
+			"path": "packages/ui-primitives"
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "✨ signalco-monorepo"
+		"liveServer.settings.multiRootWorkspaceName": "✨ signalco-monorepo",
+		"tailwindCSS.experimental.classRegex": [
+			["cx\\(([^]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"]
+		]
 	}
 }

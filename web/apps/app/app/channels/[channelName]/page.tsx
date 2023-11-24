@@ -1,16 +1,16 @@
 'use client';
 
 import { useMemo } from 'react';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { ListItem } from '@signalco/ui-primitives/ListItem';
+import { List } from '@signalco/ui-primitives/List';
+import { Link } from '@signalco/ui-primitives/Link';
+import { Container } from '@signalco/ui-primitives/Container';
 import { Bug, Link as LinkIcon } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
-import { Row } from '@signalco/ui/Row';
 import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
 import { Loadable } from '@signalco/ui/Loadable';
-import { ListItem } from '@signalco/ui/ListItem';
-import { List } from '@signalco/ui/List';
-import { Link } from '@signalco/ui/Link';
-import { Container } from '@signalco/ui/Container';
 import { channelsData } from '@signalco/data/data';
 import { KnownPages } from '../../../src/knownPages';
 import useAllEntities from '../../../src/hooks/signalco/entity/useAllEntities';

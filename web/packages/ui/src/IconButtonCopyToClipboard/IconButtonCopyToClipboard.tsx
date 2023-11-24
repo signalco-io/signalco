@@ -1,7 +1,7 @@
 import { MouseEvent, type PropsWithChildren, useState } from 'react';
+import { Popper } from '@signalco/ui-primitives/Popper';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { Copy, Warning } from '@signalco/ui-icons';
-import { Popper } from '../Popper';
-import { IconButton } from '../IconButton';
 import { Alert } from '../Alert';
 
 export type IconButtonCopyToClipboardProps = PropsWithChildren<{
@@ -42,7 +42,8 @@ export function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps)
     };
 
     return (
-        <Popper open={notificationOpen}
+        <Popper
+            open={notificationOpen}
             anchor={(
                 <IconButton
                     size="md"

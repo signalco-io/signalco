@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { Tooltip } from '@signalco/ui/Tooltip';
-import { IconButton } from '@signalco/ui/IconButton';
-import { cx } from '@signalco/ui/cx';
+import { Tooltip } from '@signalco/ui-primitives/Tooltip';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { cx } from '@signalco/ui-primitives/cx';
 import styles from './NavLink.module.scss';
 
 export type NavLinkProps = {

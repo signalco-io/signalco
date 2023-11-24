@@ -37,3 +37,6 @@ config:
     secure: AAABACrv5fJbGdQBkKEIwC1TMQbqEKliXocv5gGQtk7BJ5U7k4CfpThQNjxS9Rg4cY3uOgXj+TreDQDHZ1SoaQ==
   cloudflare:apiToken:
     secure: AAABABIFMUa2hoSAjN4tRIiARzu+FiFCb842rFMQGXetZE9E4RaT7WsUfmCYdU8C9OssOyw69ilRamfh32gtSAHWaojblHS0
+  vercel:apiToken:
+    secure: AAABAApk3IR9EuaMRv7LxIuHt9e57ERNFjIb7fMbZ5voF4twLchHtNVY1pD86iYunrDdOflpk3E=
+  vercel:team: team_Ade0MlfC3211ml3wYJZ4c9hn

@@ -1,7 +1,7 @@
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Card } from '@signalco/ui-primitives/Card';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
-import { Card } from '@signalco/ui/Card';
 import { KnownPages } from '../../src/knownPages';
 
 export default function CtaSection() {

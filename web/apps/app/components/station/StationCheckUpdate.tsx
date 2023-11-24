@@ -1,7 +1,7 @@
 import { compareVersions } from 'compare-versions';
+import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
 import { Check, Upload } from '@signalco/ui-icons';
-import { Button } from '@signalco/ui/Button';
 import { objectWithKey } from '@signalco/js';
 import { usePromise } from '@enterwell/react-hooks';
 import StationsRepository from '../../src/stations/StationsRepository';

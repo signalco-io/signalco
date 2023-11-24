@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Typography } from '@signalco/ui/Typography';
+import { Typography } from '@signalco/ui-primitives/Typography';
 import { SectionCenter } from './SectionCenter';
 
 const integrationsList = [

@@ -2,7 +2,7 @@
     "$schema": "https://json.schemastore.org/tsconfig",
     "extends": "@signalco/tsconfig/react-library.json",
     "include": [
-        "stories/**/*.ts",
-        "stories/**/*.tsx"
+        "./stories/**/*.ts",
+        "./stories/**/*.tsx"
     ]
 }

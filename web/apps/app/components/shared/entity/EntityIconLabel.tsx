@@ -1,9 +1,9 @@
 import React from 'react';
-import { Typography } from '@signalco/ui/Typography';
-import { Stack } from '@signalco/ui/Stack';
-import { Row } from '@signalco/ui/Row';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { Loadable } from '@signalco/ui/Loadable';
-import { Avatar } from '@signalco/ui/Avatar';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import EntityIcon from './EntityIcon';
 

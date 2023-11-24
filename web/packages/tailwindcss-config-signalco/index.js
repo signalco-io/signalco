@@ -7,13 +7,6 @@ export const baseConfig = {
         './src/**/*.{ts,tsx}'
     ],
     theme: {
-        // container: {
-        //     center: true,
-        //     padding: "2rem",
-        //     screens: {
-        //         "2xl": "1400px",
-        //     },
-        // },
         extend: {
             colors: {
                 border: "hsl(var(--border))",
@@ -28,6 +21,10 @@ export const baseConfig = {
                 secondary: {
                     DEFAULT: "hsl(var(--secondary))",
                     foreground: "hsl(var(--secondary-foreground))",
+                },
+                tertiary: {
+                    DEFAULT: "hsl(var(--tertiary))",
+                    foreground: "hsl(var(--tertiary-foreground))",
                 },
                 destructive: {
                     DEFAULT: "hsl(var(--destructive))",

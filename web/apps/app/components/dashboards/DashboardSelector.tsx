@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Popper } from '@signalco/ui-primitives/Popper';
+import { ButtonDropdown } from '@signalco/ui-primitives/ButtonDropdown';
+import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
-import { Row } from '@signalco/ui/Row';
-import { Popper } from '@signalco/ui/Popper';
-import { ButtonDropdown } from '@signalco/ui/ButtonDropdown';
-import { Button } from '@signalco/ui/Button';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
 import DashboardSelectorMenu from './DashboardSelectorMenu';

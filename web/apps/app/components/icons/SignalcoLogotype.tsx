@@ -1,6 +1,6 @@
 import React, { CSSProperties, forwardRef } from 'react';
+import { cx } from '@signalco/ui-primitives/cx';
 import type { SupportedColorScheme } from '@signalco/ui/theme';
-import { cx } from '@signalco/ui/cx';
 import ApiBadge from '../development/ApiBadge';
 import { isDeveloper } from '../../src/services/EnvProvider';
 

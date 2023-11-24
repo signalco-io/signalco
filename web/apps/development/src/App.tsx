@@ -1,7 +1,7 @@
 import './App.css'
 import { AppItemSection } from './AppItemSection';
 import { AppItemType } from './AppItemType';
-import { Stack } from '@signalco/ui/Stack';
+import { Stack } from '@signalco/ui-primitives/Stack';
 
 const tools: AppItemType[] = [
     { label: 'UI Docs', href: 'http://localhost:6007' },
@@ -14,8 +14,8 @@ const apps: AppItemType[] = [
 ];
 
 const uSaas: AppItemType[] = [
-    { label: 'slco', href: 'http://localhost:4002' },
-    { label: 'brandgrab', href: 'http://localhost:4001' },
+    { label: 'slco.io', href: 'http://localhost:4002' },
+    { label: 'BrandGrab.io', href: 'http://localhost:4001' },
     { label: 'DoProcess.app', href: 'http://localhost:4003' },
 ];
 

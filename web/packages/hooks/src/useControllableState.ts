@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react";
-import { useCallbackRef } from "./useCallbackRef";
+import { useCallback, useState } from 'react';
+import { useCallbackRef } from './useCallbackRef';
 
 type SetStateFn<T> = (prevState?: T) => T;
 

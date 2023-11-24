@@ -1,4 +1,4 @@
-import {Stack} from '@signalco/ui/Stack';
+import {Stack} from '@signalco/ui-primitives/Stack';
 
 export default function EntityDocsPage() {
     return (

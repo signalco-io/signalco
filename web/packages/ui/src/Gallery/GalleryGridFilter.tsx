@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
-import { Typography } from '../Typography';
-import { Row } from '../Row';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Row } from '@signalco/ui-primitives/Row';
 
 export type GalleryGridFilterProps = {
     header: string;

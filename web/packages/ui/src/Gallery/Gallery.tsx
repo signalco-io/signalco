@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack } from '../Stack';
+import { Stack } from '@signalco/ui-primitives/Stack';
 import { GalleryGridFilter } from './GalleryGridFilter';
 import { GalleryGrid, GalleryItem, GalleryItemComponent } from './GalleryGrid';
 import { GalleryFilters } from './GalleryFilters';

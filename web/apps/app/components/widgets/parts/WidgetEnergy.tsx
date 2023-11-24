@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { Typography } from '@signalco/ui/Typography';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Loadable } from '@signalco/ui/Loadable';
-import { cx } from '@signalco/ui/cx';
 import { usePromise } from '@enterwell/react-hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';

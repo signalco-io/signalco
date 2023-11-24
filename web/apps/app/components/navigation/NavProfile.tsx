@@ -1,9 +1,9 @@
 'use client';
 
 import React, { Suspense, useState } from 'react';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { Channel, Close, Dashboard, Device, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/Stack';
-import { IconButton } from '@signalco/ui/IconButton';
 import { UserProfileAvatar } from '../users/UserProfileAvatar';
 import { KnownPages } from '../../src/knownPages';
 import useLocale from '../../src/hooks/useLocale';
