@@ -82,6 +82,9 @@
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "✨ signalco-monorepo"
+		"liveServer.settings.multiRootWorkspaceName": "✨ signalco-monorepo",
+		"tailwindCSS.experimental.classRegex": [
+			["cx\\(([^]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"]
+		]
 	}
 }
