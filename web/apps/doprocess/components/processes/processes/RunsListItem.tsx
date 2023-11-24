@@ -18,7 +18,7 @@ export function RunsListItem({ run }: RunsListItemProps) {
             label={(
                 <Stack spacing={0.5}>
                     <Typography>{run.name}</Typography>
-                    <Row spacing={1} className="opacity-60">
+                    <Row spacing={1} className="opacity-70">
                         <ListChecks size={16} />
                         <TypographyProcessName id={run.processId.toString()} level="body3" />
                     </Row>

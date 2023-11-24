@@ -77,7 +77,7 @@ export function ProcessDetailsHeader({
                     ]} />
                 {runId && (
                     <Row spacing={1} className="self-end">
-                        <Typography level="body3" secondary>Progress:</Typography>
+                        <Typography level="body3">Progress:</Typography>
                         <RunProgress processId={processId} runId={runId} />
                     </Row>
                 )}
