@@ -21,6 +21,7 @@ import createFunctionsStorage from './Azure/createFunctionsStorage';
 import { Dashboard } from '@checkly/pulumi/dashboard';
 import createLogWorkspace from './Azure/createLogWorkspace';
 import createAppInsights from './Azure/createAppInsights';
+import { nextJsApp } from './Vercel/nextJsApp';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -268,6 +269,9 @@ export = async () => {
             dnsRecord('checkly-public-dashboard-txt', '_vercel', 'vc-domain-verify=status.signalco.io,563d86cd3501b049a1ad', 'TXT', false);
         }
     
+        // Vercel apps
+        nextJsApp('signalco-blog', 'blog');
+
         // Vercel - Domains
         dnsRecord('vercel-web', 'www', 'cname.vercel-dns.com', 'CNAME', false);
         dnsRecord('vercel-app', 'app', 'cname.vercel-dns.com', 'CNAME', false);
