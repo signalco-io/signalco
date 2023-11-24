@@ -1,11 +1,11 @@
-import { deleteProcess, getProcess, getProcessIdByPublicId, renameProcess } from '../../../../src/lib/repo/processesRepository';
-import { ensureUserId } from '../../../../src/lib/auth/apiAuth';
+import { deleteProcess, getProcess, getProcessIdByPublicId, processShareWithUsers, renameProcess } from '../../../../src/lib/repo/processesRepository';
+import { ensureUserId, optionalUserId } from '../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../src/lib/api/apiParam';
 
 export async function GET(_request: Request, { params }: { params: { id: string } }) {
     const processPublicId = requiredParamString(params.id);
 
-    const { userId } = ensureUserId();
+    const { userId } = optionalUserId();
 
     const processId = await getProcessIdByPublicId(processPublicId);
     if (processId == null)
@@ -31,6 +31,9 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     const data = await request.json();
     if (data != null && typeof data === 'object' && 'name' in data && typeof data.name === 'string') {
         await renameProcess(userId, processId, data.name);
+    }
+    if (data != null && typeof data === 'object' && 'sharedWithUsers' in data && Array.isArray(data.sharedWithUsers) && data.sharedWithUsers.every(x => typeof x === 'string')) {
+        await processShareWithUsers(userId, processId, data.sharedWithUsers as string[]);
     }
 
     return Response.json(null);

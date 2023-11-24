@@ -8,11 +8,15 @@ import { Row } from '@signalco/ui-primitives/Row';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { cx } from '@signalco/ui-primitives/cx';
-import { Delete, Embed, ListChecks, MoreHorizontal, Play } from '@signalco/ui-icons';
+import { Delete, Embed, Globe, ListChecks, MoreHorizontal, Play } from '@signalco/ui-icons';
 import { Loadable } from '@signalco/ui/Loadable';
+import { ShareModal } from '../../shared/ShareModal';
+import { SharedWithIndicator } from '../../shared/SharedWithIndicator';
 import { ListHeader } from '../../shared/ListHeader';
 import { EmbedModal } from '../../shared/EmbedModal';
+import { ShareableEntity } from '../../../src/types/ShareableEntity';
 import { KnownPages } from '../../../src/knownPages';
+import { useProcessUpdate } from '../../../src/hooks/useProcessUpdate';
 import { useProcess } from '../../../src/hooks/useProcess';
 import { TypographyProcessRunName } from './TypographyProcessRunName';
 import { TypographyProcessName } from './TypographyProcessName';
@@ -30,8 +34,18 @@ export function ProcessDetailsHeader({
     const { data: process, isLoading: isLoadingProcess, error: errorProcess } = useProcess(processId);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [embedOpen, setEmbedOpen] = useState(false);
+    const [shareOpen, setShareOpen] = useState(false);
 
     const isRun = Boolean(runId);
+
+    const isPublic = process && process.sharedWithUsers.includes('public');
+    const processUpdate = useProcessUpdate();
+    const handleShare = async (shareableEntity: ShareableEntity) => {
+        await processUpdate.mutateAsync({
+            processId,
+            sharedWithUsers: shareableEntity.sharedWithUsers
+        });
+    };
 
     return (
         <Loadable
@@ -59,8 +73,13 @@ export function ProcessDetailsHeader({
                                     </IconButton>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
+                                    {!isPublic && (
+                                        <DropdownMenuItem startDecorator={<Globe />} onClick={() => setShareOpen(true)}>
+                                            Make public...
+                                        </DropdownMenuItem>
+                                    )}
                                     <DropdownMenuItem startDecorator={<Embed />} onClick={() => setEmbedOpen(true)}>
-                                    Embed...
+                                        Embed...
                                     </DropdownMenuItem>
                                     {!isRun && (
                                         <DropdownMenuItem startDecorator={<Play />} href={KnownPages.ProcessRuns(processId)}>
@@ -74,13 +93,27 @@ export function ProcessDetailsHeader({
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         )
-                    ]} />
-                {runId && (
-                    <Row spacing={1} className="self-end">
-                        <Typography level="body3">Progress:</Typography>
-                        <RunProgress processId={processId} runId={runId} />
-                    </Row>
-                )}
+                    ]}
+                />
+                <Row spacing={1} justifyContent="end">
+                    {process && (
+                        <ShareModal
+                            header={`Share ${process.name}`}
+                            tertiary
+                            hideTrigger={!isPublic}
+                            shareableEntity={process}
+                            open={shareOpen}
+                            onOpenChange={setShareOpen}
+                            onShareChange={handleShare}
+                            src={`https://doprocess.app/${KnownPages.Process(processId)}`} />
+                    )}
+                    {runId && (
+                        <Row spacing={0.5}>
+                            <Typography level="body3">Progress:</Typography>
+                            <RunProgress processId={processId} runId={runId} />
+                        </Row>
+                    )}
+                </Row>
             </Stack>
             <ProcessOrRunDeleteModal
                 processId={processId}

@@ -24,8 +24,8 @@ export function EmbedModal({
     return (
         <Modal open={open} onOpenChange={onOpenChange}>
             <Stack className="p-2" spacing={2}>
-                <Typography level="h3">{header}</Typography>
-                <Typography>{subHeader}</Typography>
+                <Typography level="h5">{header}</Typography>
+                <Typography level="body2">{subHeader}</Typography>
                 <div className="rounded bg-muted p-4">
                     <code className="break-all">
                         {code}

@@ -42,7 +42,8 @@ export function IconButtonCopyToClipboard(props: IconButtonCopyToClipboardProps)
     };
 
     return (
-        <Popper open={notificationOpen}
+        <Popper
+            open={notificationOpen}
             anchor={(
                 <IconButton
                     size="md"

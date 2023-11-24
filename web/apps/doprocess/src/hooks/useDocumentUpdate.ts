@@ -6,6 +6,7 @@ type DocumentUpdateArgs = {
     id: string;
     name?: string;
     data?: string;
+    sharedWithUsers?: string[];
 }
 
 async function fetchPutDocument(id: string, data: object) {

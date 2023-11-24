@@ -1,13 +1,13 @@
 import { changeTaskDefinitionOrder, changeTaskDefinitionText, changeTaskDefinitionType, deleteTaskDefinition, getProcess, getProcessIdByPublicId, getTaskDefinition, getTaskDefinitionIdByPublicId } from '../../../../../../src/lib/repo/processesRepository';
 import { documentCreate, documentGet } from '../../../../../../src/lib/repo/documentsRepository';
-import { ensureUserId } from '../../../../../../src/lib/auth/apiAuth';
+import { ensureUserId, optionalUserId } from '../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
 
 export async function GET(_request: Request, { params }: { params: { id: string, taskDefinitionId: string } }) {
     const processPublicId = requiredParamString(params.id);
     const taskDefinitionPublicId = requiredParamString(params.taskDefinitionId);
 
-    const { userId } = ensureUserId();
+    const { userId } = optionalUserId();
 
     const processId = await getProcessIdByPublicId(processPublicId);
     if (processId == null)

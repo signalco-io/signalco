@@ -1,10 +1,10 @@
-import { documentDelete, documentGet, documentRename, documentSetData, getDocumentIdByPublicId } from '../../../../src/lib/repo/documentsRepository';
-import { ensureUserId } from '../../../../src/lib/auth/apiAuth';
+import { documentDelete, documentGet, documentRename, documentSetData, documentSetSharedWithUsers, getDocumentIdByPublicId } from '../../../../src/lib/repo/documentsRepository';
+import { ensureUserId, optionalUserId } from '../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../src/lib/api/apiParam';
 
 export async function GET(_request: Request, { params }: { params: { id: string } }) {
     const documentPublicId = requiredParamString(params.id);
-    const { userId } = ensureUserId();
+    const { userId } = optionalUserId();
 
     const documentId = await getDocumentIdByPublicId(documentPublicId);
     if (documentId == null)
@@ -30,6 +30,9 @@ export async function PUT(request: Request, { params }: { params: { id: string }
         }
         if ('data' in data && typeof data.data === 'string') {
             await documentSetData(userId, documentId, data.data);
+        }
+        if ('sharedWithUsers' in data && Array.isArray(data.sharedWithUsers) && data.sharedWithUsers.every(x => typeof x === 'string')) {
+            await documentSetSharedWithUsers(userId, documentId, data.sharedWithUsers as string[]);
         }
     }
     return Response.json(null);

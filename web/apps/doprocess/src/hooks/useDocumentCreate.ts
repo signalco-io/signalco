@@ -10,6 +10,9 @@ async function fetchPostDocument(data: object) {
         method: 'POST',
         body: JSON.stringify(data),
     });
+    if (!response.ok) {
+        throw new Error('Error creating document');
+    }
     return await response.json() as { id: string } | undefined;
 }
 
