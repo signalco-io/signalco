@@ -24,6 +24,7 @@ export {
     ChevronDown as Down,
     ChevronLeft as Left,
     ChevronsRight as Right,
+    Filter,
     Square as Stop,
     LayoutList,
     LayoutGrid,

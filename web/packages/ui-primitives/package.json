@@ -20,6 +20,7 @@
     "./Skeleton": "./src/Skeleton/index.ts",
     "./SelectItems": "./src/SelectItems/index.ts",
     "./Row": "./src/Row/index.ts",
+    "./Progress": "./src/Progress/index.ts",
     "./Popper": "./src/Popper/index.ts",
     "./Modal": "./src/Modal/index.ts",
     "./Menu": "./src/Menu/index.ts",

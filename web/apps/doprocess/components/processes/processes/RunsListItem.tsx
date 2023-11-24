@@ -6,6 +6,7 @@ import { ListItem } from '../../shared/ListItem';
 import { KnownPages } from '../../../src/knownPages';
 import { ProcessRunDto } from '../../../app/api/dtos/dtos';
 import { TypographyProcessName } from './TypographyProcessName';
+import { RunProgress } from './RunProgress';
 
 export type RunsListItemProps = {
     run: ProcessRunDto
@@ -17,7 +18,7 @@ export function RunsListItem({ run }: RunsListItemProps) {
             label={(
                 <Stack spacing={0.5}>
                     <Typography>{run.name}</Typography>
-                    <Row spacing={1} className="opacity-60">
+                    <Row spacing={1} className="opacity-70">
                         <ListChecks size={16} />
                         <TypographyProcessName id={run.processId.toString()} level="body3" />
                     </Row>
@@ -25,7 +26,10 @@ export function RunsListItem({ run }: RunsListItemProps) {
             )}
             startDecorator={<Play />}
             endDecorator={(
-                <Navigate className="opacity-0 group-hover:opacity-100" />
+                <Row spacing={1}>
+                    <RunProgress processId={run.processId} runId={run.id} />
+                    <Navigate className="opacity-0 group-hover:opacity-100" />
+                </Row>
             )}
             className="group w-full"
             href={KnownPages.ProcessRun(run.processId, run.id)} />
