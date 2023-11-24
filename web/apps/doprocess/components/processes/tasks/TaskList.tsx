@@ -104,13 +104,13 @@ export function TaskList({ processId, runId, editable }: TaskListProps) {
                                 taskIndex={taskIndex}
                                 editable={editable} />
                         ))}
-                        {editable && (
+                        {(editable && !runId) && (
                             <ListItemCreate
                                 label="Add task"
                                 onSelected={handleCreateTaskDefinition}
                                 loading={taskDefinitionCreate.isPending} />
                         )}
-                        {!editable && taskListItems.length <= 0 && (
+                        {(!editable && taskListItems.length <= 0) && (
                             <NoDataPlaceholder className="p-2">No tasks</NoDataPlaceholder>
                         )}
                     </List>
