@@ -22,6 +22,7 @@ import { Dashboard } from '@checkly/pulumi/dashboard';
 import createLogWorkspace from './Azure/createLogWorkspace';
 import createAppInsights from './Azure/createAppInsights';
 import { nextJsApp } from './Vercel/nextJsApp';
+import { vercelApp } from './Vercel/vercelApp';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -271,6 +272,15 @@ export = async () => {
     
         // Vercel apps
         nextJsApp('signalco-blog', 'blog');
+        nextJsApp('signalco-app', 'app');
+        nextJsApp('signalco-web', 'web');
+        nextJsApp('signalco-slco', 'slco');
+        nextJsApp('signalco-brandgrab', 'brandgrab');
+        nextJsApp('doprocess', 'doprocess');
+        vercelApp('signalco-ui-docs', 'ui-docs', {
+            ignoreCommand: 'npx turbo-ignore',
+            outputDirectory: 'storybook-static',
+        });
 
         // Vercel - Domains
         dnsRecord('vercel-web', 'www', 'cname.vercel-dns.com', 'CNAME', false);
