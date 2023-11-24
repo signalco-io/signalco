@@ -27,7 +27,7 @@ dependencies:
     specifier: 3.94.2
     version: 3.94.2
   '@pulumiverse/vercel':
-    specifier: ^0.16.0
+    specifier: 0.16.0
     version: 0.16.0
 
 devDependencies:
