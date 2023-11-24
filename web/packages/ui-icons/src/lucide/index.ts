@@ -34,6 +34,7 @@ export {
     LogOut,
     Shield,
     History,
+    Globe,
     GripVertical as Drag,
     Bug,
     Zap as Lightning,

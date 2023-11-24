@@ -1,4 +1,6 @@
+import { Row } from '@signalco/ui-primitives/Row';
 import { FileText, Navigate } from '@signalco/ui-icons';
+import { SharedWithIndicator } from '../../shared/SharedWithIndicator';
 import { ListItem } from '../../shared/ListItem';
 import { KnownPages } from '../../../src/knownPages';
 import { DocumentDto } from '../../../app/api/dtos/dtos';
@@ -12,7 +14,12 @@ export function DocumentsListItem({ document }: DocumentsListItemProps) {
         <ListItem
             label={document.name}
             startDecorator={<FileText />}
-            endDecorator={<Navigate className="opacity-0 group-hover:opacity-100" />}
+            endDecorator={(
+                <Row spacing={1}>
+                    <SharedWithIndicator shareableEntity={document} />
+                    <Navigate className="opacity-0 group-hover:opacity-100" />
+                </Row>
+            )}
             className="group w-full"
             href={KnownPages.Document(document.id)} />
     );

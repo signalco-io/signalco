@@ -1,16 +1,25 @@
-import { and, eq, inArray, like, sql } from 'drizzle-orm';
+import { and, eq, inArray, like, or, sql } from 'drizzle-orm';
 import { lexinsert } from '@signalco/lexorder';
 import { firstOrDefault } from '@signalco/js';
 import { TaskState, process, processRun, task, taskDefinition } from '../db/schema';
 import { db } from '../db';
 import { publicIdNext } from './shared';
 
-function processSharedWithUser(userId: string) {
-    return like(process.sharedWithUsers, `%\"${userId}\"%`);
+function processSharedWithUser(userId: string | null) {
+    if (userId == null)
+        return like(process.sharedWithUsers, '%\"public\"%');
+
+    return or(
+        like(process.sharedWithUsers, '%\"public\"%'),
+        like(process.sharedWithUsers, `%\"${userId}\"%`)
+    );
 }
 
-async function isProcessSharedWithUser(userId: string, processId: number) {
-    return (firstOrDefault(await db.select({ count: sql<number>`count(*)` }).from(process).where(and(eq(process.id, processId), processSharedWithUser(userId))))?.count ?? 0) > 0;
+async function isProcessSharedWithUser(userId: string | null, processId: number) {
+    return (firstOrDefault(await db
+        .select({ count: sql<number>`count(*)` })
+        .from(process)
+        .where(and(eq(process.id, processId), processSharedWithUser(userId))))?.count ?? 0) > 0;
 }
 
 export async function getProcessIdByPublicId(publicId: string) {
@@ -45,7 +54,7 @@ export async function getProcesses(userId: string) {
     return await db.select().from(process).where(processSharedWithUser(userId));
 }
 
-export async function getProcess(userId: string, processId: number) {
+export async function getProcess(userId: string | null, processId: number) {
     return firstOrDefault(await db.select().from(process).where(and(processSharedWithUser(userId), eq(process.id, processId))));
 }
 
@@ -64,6 +73,14 @@ export async function renameProcess(userId: string, processId: number, name: str
     // TODO: Check permissions
 
     await db.update(process).set({ name, updatedBy: userId, updatedAt: new Date() }).where(eq(process.id, processId));
+}
+
+export async function processShareWithUsers(userId: string, processId: number, sharedWithUsers: string[]) {
+    if (!await isProcessSharedWithUser(userId, processId))
+        throw new Error('Not found');
+    // TODO: Check permissions
+
+    await db.update(process).set({ sharedWithUsers, updatedBy: userId, updatedAt: new Date() }).where(eq(process.id, processId));
 }
 
 export async function deleteProcess(userId: string, processId: number) {
@@ -98,7 +115,7 @@ export async function getProcessRuns(userId: string, processId: number) {
         .orderBy(processRun.createdAt);
 }
 
-export async function getProcessRun(userId: string, processId: number, runId: number) {
+export async function getProcessRun(userId: string | null, processId: number, runId: number) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
     return firstOrDefault(await db.select().from(processRun).where(and(eq(processRun.processId, processId), eq(processRun.id, runId))));
@@ -138,7 +155,7 @@ export async function deleteProcessRun(userId: string, processId: number, runId:
     await db.delete(processRun).where(and(eq(processRun.processId, processId), eq(processRun.id, runId)));
 }
 
-export async function getTaskDefinitions(userId: string, processId: number) {
+export async function getTaskDefinitions(userId: string | null, processId: number) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
     return await db
@@ -148,7 +165,7 @@ export async function getTaskDefinitions(userId: string, processId: number) {
         .orderBy(taskDefinition.order);
 }
 
-export async function getTaskDefinition(userId: string, processId: number, taskDefinitionId: number) {
+export async function getTaskDefinition(userId: string | null, processId: number, taskDefinitionId: number) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
     return firstOrDefault(await db.select().from(taskDefinition).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, taskDefinitionId))));
@@ -219,7 +236,7 @@ async function deleteProcessTaskDefinitions(userId: string, processId: number) {
     await db.delete(taskDefinition).where(eq(taskDefinition.processId, processId));
 }
 
-export async function getTasks(userId: string, processId: number, runId: number) {
+export async function getTasks(userId: string | null, processId: number, runId: number) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
     return await db.select().from(task).where(and(eq(task.processId, processId), eq(task.runId, runId)));

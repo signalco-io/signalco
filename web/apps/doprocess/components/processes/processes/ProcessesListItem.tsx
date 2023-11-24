@@ -1,4 +1,6 @@
+import { Row } from '@signalco/ui-primitives/Row';
 import { ListChecks, Navigate } from '@signalco/ui-icons';
+import { SharedWithIndicator } from '../../shared/SharedWithIndicator';
 import { ListItem } from '../../shared/ListItem';
 import { KnownPages } from '../../../src/knownPages';
 import { ProcessDto } from '../../../app/api/dtos/dtos';
@@ -12,7 +14,12 @@ export function ProcessesListItem({ process }: ProcessListItemProps) {
         <ListItem
             label={process.name}
             startDecorator={<ListChecks />}
-            endDecorator={<Navigate className="opacity-0 group-hover:opacity-100" />}
+            endDecorator={(
+                <Row spacing={1}>
+                    <SharedWithIndicator shareableEntity={process} />
+                    <Navigate className="opacity-0 group-hover:opacity-100" />
+                </Row>
+            )}
             className="group w-full"
             href={KnownPages.Process(process.id)} />
     );

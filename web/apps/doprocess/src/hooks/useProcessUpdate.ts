@@ -4,7 +4,8 @@ import { processKey } from './useProcess';
 
 type ProcessUpdateArgs = {
     processId: string;
-    name: string;
+    name?: string;
+    sharedWithUsers?: string[];
 }
 
 async function fetchPutProcess(processId: string, data: object) {
@@ -17,7 +18,7 @@ async function fetchPutProcess(processId: string, data: object) {
 export function useProcessUpdate(): UseMutationResult<void, Error, ProcessUpdateArgs, unknown> {
     const client = useQueryClient();
     return useMutation({
-        mutationFn: ({ processId, name }: ProcessUpdateArgs) => fetchPutProcess(processId, ({ processId, name })),
+        mutationFn: ({ processId, ...rest }: ProcessUpdateArgs) => fetchPutProcess(processId, ({ processId, ...rest })),
         onSuccess: (_, { processId }) => {
             client.invalidateQueries({ queryKey: processKey(processId) });
             client.invalidateQueries({ queryKey: processesKey() });

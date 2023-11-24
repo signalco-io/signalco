@@ -1,11 +1,16 @@
-import { and, eq, like, sql } from 'drizzle-orm';
+import { and, eq, like, or, sql } from 'drizzle-orm';
 import { firstOrDefault } from '@signalco/js';
 import { document } from '../db/schema';
 import { db } from '../db';
 import { publicIdNext } from './shared';
 
-function documentSharedWithUser(userId: string) {
-    return like(document.sharedWithUsers, `%\"${userId}\"%`);
+function documentSharedWithUser(userId: string | null) {
+    if (!userId)
+        return like(document.sharedWithUsers, '%\"public\"%');
+
+    return or(
+        like(document.sharedWithUsers, `%\"${userId}\"%`),
+        like(document.sharedWithUsers, '%\"public\"%'));
 }
 
 export async function getDocumentIdByPublicId(publicId: string) {
@@ -29,7 +34,7 @@ export async function documentsGet(userId: string) {
     return await db.select().from(document).where(documentSharedWithUser(userId));
 }
 
-export async function documentGet(userId: string, id: number) {
+export async function documentGet(userId: string | null, id: number) {
     return firstOrDefault(await db.select().from(document).where(and(eq(document.id, id), documentSharedWithUser(userId))));
 }
 
@@ -43,6 +48,12 @@ export async function documentSetData(userId: string, id: number, data?: string)
     if (!await isDocumentSharedWithUser(userId, id))
         throw new Error('Not found');
     await db.update(document).set({ data, updatedBy: userId, updatedAt: new Date() }).where(eq(document.id, id));
+}
+
+export async function documentSetSharedWithUsers(userId: string, id: number, sharedWithUsers: string[]) {
+    if (!await isDocumentSharedWithUser(userId, id))
+        throw new Error('Not found');
+    await db.update(document).set({ sharedWithUsers, updatedBy: userId, updatedAt: new Date() }).where(eq(document.id, id));
 }
 
 export async function documentDelete(userId: string, id: number) {

@@ -32,7 +32,7 @@ export function RunProgress({ processId, runId, hideLabel }: RunProgressProps) {
             height={16}
             loadingLabel={'Loading progress...'}>
             <Tooltip title={`Completed: ${completedCount} out of ${totalCount}`}>
-                <Row spacing={1}>
+                <Row spacing={0.5}>
                     {isComplete ? (
                         <>
                             <Typography level="body3">Completed</Typography>

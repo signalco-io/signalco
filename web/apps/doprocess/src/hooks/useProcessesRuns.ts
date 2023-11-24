@@ -7,6 +7,10 @@ export function processesRunsKey(...args: (string | undefined)[]) {
 
 async function fetchGetProcessesRuns(stateFilter?: string) {
     const response = await fetch('/api/processes/runs');
+    if (!response.ok) {
+        throw new Error('Error fetching process runs');
+    }
+
     const runs = await response.json() as ProcessRunDto[] | undefined;
 
     if (stateFilter)

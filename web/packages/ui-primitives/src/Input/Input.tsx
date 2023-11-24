@@ -8,6 +8,7 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
     endDecorator?: React.ReactNode;
     label?: string;
     helperText?: string;
+    fullWidth?: boolean;
 };
 
 export function Input({

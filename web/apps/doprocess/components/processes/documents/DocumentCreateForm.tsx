@@ -5,6 +5,7 @@ import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Input } from '@signalco/ui-primitives/Input';
 import { Button } from '@signalco/ui-primitives/Button';
+import { showNotification } from '@signalco/ui-notifications';
 import { Add } from '@signalco/ui-icons';
 import { KnownPages } from '../../../src/knownPages';
 import { useDocumentCreate } from '../../../src/hooks/useDocumentCreate';
@@ -15,11 +16,16 @@ export function DocumentCreateForm({ redirect }: { redirect: boolean; }) {
     const createProcess = useDocumentCreate();
 
     const handleDocumentCreate = async () => {
-        const response = await createProcess.mutateAsync({
-            name,
-        });
-        if (redirect && response?.id)
-            router.push(KnownPages.Document(response.id));
+        try {
+            const response = await createProcess.mutateAsync({
+                name,
+            });
+            if (redirect && response?.id)
+                router.push(KnownPages.Document(response.id));
+        } catch (error) {
+            console.error(error);
+            showNotification('Failed to create document', 'error');
+        }
     };
 
     return (

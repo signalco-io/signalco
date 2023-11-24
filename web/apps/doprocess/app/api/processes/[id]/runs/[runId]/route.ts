@@ -1,12 +1,12 @@
 import { deleteProcessRun, getProcessIdByPublicId, getProcessRun, getProcessRunIdByPublicId, renameProcessRun } from '../../../../../../src/lib/repo/processesRepository';
-import { ensureUserId } from '../../../../../../src/lib/auth/apiAuth';
+import { ensureUserId, optionalUserId } from '../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
 
 export async function GET(_request: Request, { params }: { params: { id: string, runId: string } }) {
     const processPublicId = requiredParamString(params.id);
     const runPublicId = requiredParamString(params.runId);
 
-    const { userId } = ensureUserId();
+    const { userId } = optionalUserId();
 
     const processId = await getProcessIdByPublicId(processPublicId);
     if (processId == null)

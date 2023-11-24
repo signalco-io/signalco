@@ -11,7 +11,7 @@ type ProcessDetailsProps = {
 export function ProcessDetails({ id, runId, editable }: ProcessDetailsProps) {
     return (
         <>
-            <Stack spacing={2}>
+            <Stack spacing={1}>
                 <ProcessDetailsHeader
                     processId={id}
                     runId={runId}
