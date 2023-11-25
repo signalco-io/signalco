@@ -21,13 +21,26 @@ async function isDocumentSharedWithUser(userId: string, documentId: number) {
     return (firstOrDefault(await db.select({ count: sql<number>`count(*)` }).from(document).where(and(eq(document.id, documentId), documentSharedWithUser(userId))))?.count ?? 0) > 0;
 }
 
-export async function documentCreate(userId: string, name: string) {
-    return (await db.insert(document).values({
+export async function documentCreate(userId: string, name: string, basedOn?: string) {
+    const id = Number((await db.insert(document).values({
         name,
         publicId: await publicIdNext(document),
         sharedWithUsers: [userId],
         createdBy: userId
-    })).insertId;
+    })).insertId);
+
+    // Copy content to new document (if basedOn is provided)
+    if (basedOn) {
+        const basedOnId = await getDocumentIdByPublicId(basedOn);
+        if (basedOnId) {
+            const basedOnDocument = await documentGet(userId, basedOnId);
+            if (basedOnDocument && typeof basedOnDocument.data === 'string') {
+                await documentSetData(userId, id, basedOnDocument.data);
+            }
+        }
+    }
+
+    return id;
 }
 
 export async function documentsGet(userId: string) {

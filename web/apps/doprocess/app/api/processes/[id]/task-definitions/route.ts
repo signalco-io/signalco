@@ -34,6 +34,6 @@ export async function POST(request: Request, { params }: { params: { id: string 
         return new Response(null, { status: 404 });
 
     const id = await createTaskDefinition(userId, processId, text);
-    const taskDefinition = await getTaskDefinition(userId, processId, Number(id));
+    const taskDefinition = await getTaskDefinition(userId, processId, id);
     return Response.json({ id: taskDefinition?.publicId });
 }

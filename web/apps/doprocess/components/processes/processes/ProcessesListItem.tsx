@@ -1,5 +1,5 @@
 import { Row } from '@signalco/ui-primitives/Row';
-import { ListChecks, Navigate } from '@signalco/ui-icons';
+import { ListTodo, Navigate } from '@signalco/ui-icons';
 import { SharedWithIndicator } from '../../shared/SharedWithIndicator';
 import { ListItem } from '../../shared/ListItem';
 import { KnownPages } from '../../../src/knownPages';
@@ -13,7 +13,7 @@ export function ProcessesListItem({ process }: ProcessListItemProps) {
     return (
         <ListItem
             label={process.name}
-            startDecorator={<ListChecks />}
+            startDecorator={<ListTodo />}
             endDecorator={(
                 <Row spacing={1}>
                     <SharedWithIndicator shareableEntity={process} />

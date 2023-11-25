@@ -10,9 +10,10 @@ async function fetchGetDocuments() {
     return await response.json() as DocumentDto[] | undefined;
 }
 
-export function useDocuments(): UseQueryResult<DocumentDto[] | undefined, Error> {
+export function useDocuments(enabled = true): UseQueryResult<DocumentDto[] | undefined, Error> {
     return useQuery({
         queryKey: documentsKey(),
         queryFn: fetchGetDocuments,
+        enabled
     })
 }

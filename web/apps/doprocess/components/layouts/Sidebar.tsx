@@ -6,7 +6,7 @@ import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List } from '@signalco/ui-primitives/List';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { cx } from '@signalco/ui-primitives/cx';
-import { FileText, ListChecks, Play, Right } from '@signalco/ui-icons';
+import { FileText, ListTodo, Play, Right } from '@signalco/ui-icons';
 import { KnownPages } from '../../src/knownPages';
 
 export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: (open: boolean) => void }) {
@@ -14,7 +14,7 @@ export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: 
 
     const links = useMemo(() => [
         { href: KnownPages.Runs, label: 'Runs', Icon: Play },
-        { href: KnownPages.Processes, label: 'Processes', Icon: ListChecks },
+        { href: KnownPages.Processes, label: 'Processes', Icon: ListTodo },
         { href: KnownPages.Documents, label: 'Documents', Icon: FileText },
     ], []);
 
