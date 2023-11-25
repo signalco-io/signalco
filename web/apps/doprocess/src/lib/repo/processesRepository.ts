@@ -66,7 +66,7 @@ export async function createProcess(userId: string, name: string, basedOn?: stri
         createdBy: userId
     })).insertId);
 
-    // TODO: Copy task definitions to new process (if basedOn is provided)
+    // Copy task definitions to new process (if basedOn is provided)
     if (basedOn) {
         const basedOnId = await getProcessIdByPublicId(basedOn);
         if (basedOnId) {
