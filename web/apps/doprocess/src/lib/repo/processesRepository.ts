@@ -274,12 +274,12 @@ export async function setTaskState(userId: string, processId: number, runId: num
         getTasks(userId, processId, runId), // TODO: (optimization) Can use only count of completed tasks
         getProcessRun(userId, processId, runId)
     ]);
-    const tasksCompleted = tasks.filter(t => t.state === 'completed');
-    const newRunState = taskDefinitions.length === tasksCompleted.length ? 'completed' : 'running';
+    const tasksCompletedCount = tasks.filter(t => t.state === 'completed').length;
+    const newRunState = taskDefinitions.length === tasksCompletedCount ? 'completed' : 'running';
     if (run?.state !== newRunState) {
         await db
             .update(processRun)
-            .set({ state: 'completed', updatedBy: userId, updatedAt: new Date() })
+            .set({ state: newRunState, updatedBy: userId, updatedAt: new Date() })
             .where(and(eq(processRun.processId, processId), eq(processRun.id, runId)));
     }
 }
