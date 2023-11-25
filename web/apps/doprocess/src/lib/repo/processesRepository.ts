@@ -58,13 +58,32 @@ export async function getProcess(userId: string | null, processId: number) {
     return firstOrDefault(await db.select().from(process).where(and(processSharedWithUser(userId), eq(process.id, processId))));
 }
 
-export async function createProcess(userId: string, name: string) {
-    return (await db.insert(process).values({
+export async function createProcess(userId: string, name: string, basedOn?: string) {
+    const id = Number((await db.insert(process).values({
         name: name,
         publicId: await publicIdNext(process),
         sharedWithUsers: [userId],
         createdBy: userId
-    })).insertId;
+    })).insertId);
+
+    // TODO: Copy task definitions to new process (if basedOn is provided)
+    if (basedOn) {
+        const basedOnId = await getProcessIdByPublicId(basedOn);
+        if (basedOnId) {
+            const basedOnProcess = await getProcess(userId, basedOnId);
+            if (basedOnProcess) {
+                const taskDefinitions = await getTaskDefinitions(userId, basedOnId);
+                if (taskDefinitions.length) {
+                    await Promise.all(taskDefinitions.map(async td => {
+                        const taskDefinitionId = await createTaskDefinition(userId, id, td.text ?? '');
+                        await changeTaskDefinitionType(userId, id, taskDefinitionId, td.type, td.typeData ?? '');
+                    }));
+                }
+            }
+        }
+    }
+
+    return id;
 }
 
 export async function renameProcess(userId: string, processId: number, name: string) {
@@ -183,13 +202,13 @@ export async function createTaskDefinition(userId: string, processId: number, te
         throw new Error('Not found');
 
     // TODO: Check permissions
-    return (await db.insert(taskDefinition).values({
+    return Number((await db.insert(taskDefinition).values({
         processId: processId,
         publicId: await publicIdNext(taskDefinition, 6),
         order: await getTaskDefinitionLastOrder(userId, processId),
         text: text,
         createdBy: userId
-    })).insertId;
+    })).insertId);
 }
 
 export async function changeTaskDefinitionText(userId: string, processId: number, id: number, text: string) {
