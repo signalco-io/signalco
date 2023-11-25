@@ -11,7 +11,7 @@ export type TypographyEditableProps = Omit<TypographyProps, 'onChange' | 'childr
     multiple?: boolean;
 };
 
-export function TypographyEditable({ children, className, onChange, onEditingChanged, placeholder, hideEditIcon, multiple, ...rest }: TypographyEditableProps) {
+export function TypographyEditable({ children, level, className, onChange, onEditingChanged, placeholder, hideEditIcon, multiple, ...rest }: TypographyEditableProps) {
     const [isEditing, setIsEditing] = useState(false);
     const [value, setValue] = useState('');
 
@@ -57,10 +57,16 @@ export function TypographyEditable({ children, className, onChange, onEditingCha
             className={cx('group cursor-pointer [word-break:break-word]', !children && 'text-muted-foreground', className)}
             role="button"
             onClick={handleEdit}
+            level={level}
             {...rest}>
             {children || placeholder}
             {!hideEditIcon && (
-                <Edit size={20} className="ml-2 inline opacity-0 transition-opacity group-hover:opacity-60" />
+                <Edit
+                    size={level === 'body2' || level === 'body3' ? 16 : 20}
+                    className={cx(
+                        'inline opacity-0 transition-opacity group-hover:opacity-60',
+                        level === 'body2' || level === 'body3' ? 'ml-1' : 'ml-2'
+                    )} />
             )}
         </Typography>
     );
