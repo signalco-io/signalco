@@ -1,13 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Modal } from '@signalco/ui-primitives/Modal';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { cx } from '@signalco/ui-primitives/cx';
-import { Delete, MoreHorizontal } from '@signalco/ui-icons';
+import { Delete, MoreHorizontal, Replace } from '@signalco/ui-icons';
 import { Toolbar } from '../../shared/Toolbar';
 import { SavingIndicator } from '../../shared/SavingIndicator';
 import { useProcessTaskDefinition } from '../../../src/hooks/useProcessTaskDefinition';
+import TaskDetailsTypePicker from './TaskDetailsTypePicker';
 import { TaskDeleteModal } from './TaskDeleteModal';
 
 type TaskDetailsToolbarProps = {
@@ -20,6 +24,7 @@ type TaskDetailsToolbarProps = {
 export function TaskDetailsToolbar({ processId, selectedTaskId, saving, editable }: TaskDetailsToolbarProps) {
     const { data: taskDefinition } = useProcessTaskDefinition(processId, selectedTaskId);
     const [deleteOpen, setDeleteOpen] = useState(false);
+    const [typePickerOpen, setTypePickerOpen] = useState(false);
 
     return (
         <>
@@ -36,6 +41,10 @@ export function TaskDetailsToolbar({ processId, selectedTaskId, saving, editable
                         </IconButton>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
+                        <DropdownMenuItem startDecorator={<Replace />} onClick={() => setTypePickerOpen(true)}>
+                            Change type...
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
                         <DropdownMenuItem startDecorator={<Delete />} onClick={() => setDeleteOpen(true)}>
                             Delete...
                         </DropdownMenuItem>
@@ -47,6 +56,18 @@ export function TaskDetailsToolbar({ processId, selectedTaskId, saving, editable
                     taskDefinition={taskDefinition}
                     open={deleteOpen}
                     onOpenChange={setDeleteOpen} />
+            )}
+            {typePickerOpen && selectedTaskId && (
+                <Modal open={typePickerOpen} onOpenChange={setTypePickerOpen}>
+                    <Stack spacing={1}>
+                        <Typography level="h5">Change task type</Typography>
+                        <TaskDetailsTypePicker
+                            processId={processId}
+                            taskDefinitionId={selectedTaskId}
+                            onPicked={() => setTypePickerOpen(false)}
+                        />
+                    </Stack>
+                </Modal>
             )}
         </>
     );

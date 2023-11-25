@@ -11,7 +11,7 @@ import { Loadable } from '@signalco/ui/Loadable';
 import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
 import { useDocuments } from '../../../src/hooks/useDocuments';
 
-export default function TaskDetailsTypePicker({ processId, taskDefinitionId }: { processId: string, taskDefinitionId: string }) {
+export default function TaskDetailsTypePicker({ processId, taskDefinitionId, onPicked }: { processId: string, taskDefinitionId: string, onPicked?: (type: string, typeData?: string) => void }) {
     const taskDefinitionUpdate = useProcessTaskDefinitionUpdate();
 
     const handleTypePicked = async (type: string, typeData?: string) => {
@@ -21,6 +21,7 @@ export default function TaskDetailsTypePicker({ processId, taskDefinitionId }: {
             type,
             typeData
         });
+        onPicked?.(type, typeData);
     }
 
     const [selectDocumentOpen, setSelectDocumentOpen] = useState(false);
