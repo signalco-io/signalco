@@ -21,7 +21,7 @@ type ShareModalProps = {
     tertiary?: boolean;
 };
 
-export function ShareModal({ header, shareableEntity, open, hideTrigger, src, onOpenChange, onShareChange, tertiary }: ShareModalProps) {
+export function ShareModal({ header, shareableEntity, open, hideTrigger, src, onOpenChange, onShareChange, tertiary = true }: ShareModalProps) {
     const linkAccess = shareableEntity.sharedWithUsers.includes('public') ? 'public' : 'private';
 
     const handleLinkAccessChange = (value: string) => {
@@ -41,7 +41,7 @@ export function ShareModal({ header, shareableEntity, open, hideTrigger, src, on
                     variant="plain"
                     size={tertiary ? 'sm' : 'md'}
                     startDecorator={<Globe size={tertiary ? 16 : 20} />}
-                    className={cx(tertiary ? 'gap-1' : 'gap-2', hideTrigger && 'hidden', tertiary && 'opacity-70 text-xs font-normal')}
+                    className={cx(tertiary ? 'gap-1' : 'gap-2', hideTrigger && 'hidden', tertiary && 'text-secondary-foreground text-sm font-normal')}
                     onClick={() => onOpenChange(true)}>
                     Public
                 </Button>

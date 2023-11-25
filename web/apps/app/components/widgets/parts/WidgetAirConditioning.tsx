@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Button } from '@signalco/ui-primitives/Button';
 import { usePromise } from '@enterwell/react-hooks';
 import { WidgetSharedProps } from '../Widget';
@@ -78,8 +79,8 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                 {config?.label && (
                     <Typography
                         thin={rows > 1}
-                        fontSize={rows > 1 ? '1rem' : '0.7rem'}
-                        opacity={0.5}>
+                        className={cx(rows > 1 ? 'text-base' : 'text-xs')}
+                        tertiary>
                         {config.label}
                     </Typography>
                 )}

@@ -1,4 +1,4 @@
-import { type CSSProperties, ForwardedRef, createElement, forwardRef, type HTMLAttributes } from 'react';
+import { ForwardedRef, createElement, forwardRef, type HTMLAttributes } from 'react';
 import type { ColorVariants } from '../theme';
 import { cx } from '../cx';
 
@@ -9,56 +9,25 @@ export type TypographyProps = HTMLAttributes<HTMLParagraphElement> & {
     bold?: boolean;
     extraThin?: boolean;
     thin?: boolean;
-    italic?: boolean;
-    strikeThrough?: boolean;
-    textDecoration?: 'none' | 'underline' | 'line-through' | 'underline line-through';
-    textTransform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase';
-    textAlign?: 'left' | 'center' | 'right';
-    fontSize?: number | string;
+    uppercase?: boolean;
     secondary?: boolean;
     tertiary?: boolean;
-    lineHeight?: number;
     noWrap?: boolean;
-    opacity?: number;
     color?: ColorVariants;
     gutterBottom?: boolean;
+    center?: boolean;
 };
-
-function populateTypographyStyles(styles: CSSProperties, { gutterBottom, opacity, textAlign, lineHeight, fontSize, textDecoration, textTransform, extraThin, thin, semiBold, bold, italic, strikeThrough, noWrap, ...rest }: TypographyProps) {
-    if (extraThin) styles['fontWeight'] = 100;
-    if (thin) styles['fontWeight'] = 300;
-    if (semiBold) styles['fontWeight'] = 500;
-    if (bold) styles['fontWeight'] = 700;
-    if (italic) styles['fontStyle'] = 'italic';
-    if (textAlign) styles['textAlign'] = textAlign;
-    if (textTransform) styles['textTransform'] = textTransform;
-    if (strikeThrough) styles['textDecoration'] = 'line-through';
-    if (textDecoration) styles['textDecoration'] = textDecoration;
-    if (fontSize) styles['fontSize'] = typeof fontSize === 'string' ? fontSize : `${fontSize}px`;
-    if (lineHeight) styles['lineHeight'] = lineHeight;
-    if (opacity) styles['opacity'] = opacity;
-    if (gutterBottom) styles['marginBottom'] = '0.5rem';
-    if (noWrap) {
-        styles['whiteSpace'] = 'nowrap';
-        styles['overflow'] = 'hidden';
-        styles['textOverflow'] = 'ellipsis';
-    }
-    return rest;
-}
 
 export function populateTypographyStylesAndClasses({
     color,
     level,
-    secondary,
-    tertiary,
+    center, gutterBottom, noWrap, uppercase,
+    secondary, tertiary,
+    extraThin, thin, semiBold, bold,
     className,
     ...rest
 }: Omit<TypographyProps, 'component' | 'children'>) {
-    const styles: CSSProperties = {};
-    const restAfterCustomStyles = populateTypographyStyles(styles, rest);
-
     return {
-        style: styles,
         className: cx(
             'm-0',
             // Levels
@@ -77,12 +46,22 @@ export function populateTypographyStylesAndClasses({
             color === 'danger' && 'text-red-500',
             color === 'info' && 'text-blue-500',
             color === 'neutral' && 'text-slate-500',
+            // Font weight
+            extraThin && 'font-thin',
+            thin && 'font-light',
+            semiBold && 'font-medium',
+            bold && 'font-bold',
+            // Alignment
+            center && 'text-center',
             // Special cases
+            noWrap && 'whitespace-nowrap overflow-hidden overflow-ellipsis',
+            gutterBottom && 'mb-2',
+            uppercase && 'uppercase',
             secondary && 'text-secondary-foreground',
             tertiary && 'text-tertiary-foreground',
             className
         ),
-        ...restAfterCustomStyles
+        ...rest
     }
 }
 

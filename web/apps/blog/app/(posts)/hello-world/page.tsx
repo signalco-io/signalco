@@ -17,7 +17,7 @@ export default function Page() {
                 </Row>
                 <Stack spacing={2}>
                     <Typography level="h1">{meta.title}</Typography>
-                    <Typography level="h2" fontSize="1.5em" secondary semiBold>{meta.description}</Typography>
+                    <Typography level="h4" secondary semiBold>{meta.description}</Typography>
                 </Stack>
             </Stack>
             <Container maxWidth="md" centered={false} padded={false}>

@@ -17,7 +17,7 @@ export function ProcessesListItem({ process }: ProcessListItemProps) {
             endDecorator={(
                 <Row spacing={1}>
                     <SharedWithIndicator shareableEntity={process} />
-                    <Navigate className="opacity-0 group-hover:opacity-100" />
+                    <Navigate className="hidden opacity-0 group-hover:opacity-100 md:block" />
                 </Row>
             )}
             className="group w-full"

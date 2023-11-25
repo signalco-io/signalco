@@ -70,7 +70,7 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
                         </Stack>
                     )}
                 <Stack spacing={2}>
-                    <Typography bold opacity={0.9}>{name}</Typography>
+                    <Typography bold secondary>{name}</Typography>
                     <Row spacing={2} justifyContent="space-between" alignItems="center">
                         <Typography level="h5" bold>€&nbsp;{price ?? '-'}</Typography>
                         <StoreStockStatusBadge status={stockStatus} />

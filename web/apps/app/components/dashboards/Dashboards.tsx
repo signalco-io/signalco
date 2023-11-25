@@ -111,7 +111,7 @@ function Dashboards() {
                                         <Stack style={{ maxWidth: 280 }} spacing={4} alignItems="center" justifyContent="center">
                                             <Image priority width={280} height={213} alt={t('NoDashboardsPlaceholder')} src="/assets/placeholders/placeholder-no-dashboards.svg" />
                                             <Typography level="h2">{t('NoDashboardsPlaceholder')}</Typography>
-                                            <Typography textAlign="center" level="body2">{t('NoDashboardsHelpText')}</Typography>
+                                            <Typography center level="body2">{t('NoDashboardsHelpText')}</Typography>
                                             <Button variant="solid" onClick={handleNewDashboard}>{t('NewDashboard')}</Button>
                                         </Stack>
                                     </Row>

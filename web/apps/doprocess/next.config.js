@@ -53,7 +53,7 @@ const nextConfigFunction = async (phase) => {
             dest: 'public',
             buildExcludes: [/middleware-manifest.json$/, /chunks\/images\/.*$/],
             dynamicStartUrl: false,
-            disable: isDevelopment,           
+            disable: isDevelopment,
         });
         return withPWA(componsedNextConfig);
     }

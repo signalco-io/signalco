@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
-import { cx } from 'classix'
 import { Close } from '@signalco/ui-icons'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
+import { cx } from '../cx'
 
 export type ModalProps = HTMLAttributes<HTMLDivElement> & {
     trigger?: React.ReactNode;

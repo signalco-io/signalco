@@ -22,7 +22,7 @@ function NoWidgetsPlaceholder({ onAdd }: { onAdd: () => void }) {
                 <Stack style={{ maxWidth: 320 }} spacing={4} alignItems="center" justifyContent="center">
                     <Image priority width={280} height={213} alt="No Widgets" src="/assets/placeholders/placeholder-no-widgets.svg" />
                     <Typography level="h2">{t('NoWidgets')}</Typography>
-                    <Typography textAlign="center" level="body2">{t('NoWidgetsHelpTextFirstLine')}<br />{t('NoWidgetsHelpTextSecondLine')}</Typography>
+                    <Typography center level="body2">{t('NoWidgetsHelpTextFirstLine')}<br />{t('NoWidgetsHelpTextSecondLine')}</Typography>
                     <Button onClick={onAdd}>{t('AddWidget')}</Button>
                 </Stack>
             </Row>

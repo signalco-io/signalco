@@ -22,22 +22,22 @@ export function RunsListItem({ run }: RunsListItemProps) {
             label={(
                 <Stack spacing={0.5}>
                     <Typography>{run.name}</Typography>
-                    <Row spacing={2}>
-                        <Row spacing={1} className="opacity-70">
-                            <ListChecks size={16} />
-                            <TypographyProcessName id={run.processId.toString()} level="body3" />
+                    <div className="flex flex-col gap-2 md:flex-row">
+                        <Row spacing={1}>
+                            <ListChecks size={16} className="opacity-80" />
+                            <TypographyProcessName id={run.processId.toString()} level="body2" />
                         </Row>
                         {process.data && (
                             <SharedWithIndicator shareableEntity={process.data} />
                         )}
-                    </Row>
+                    </div>
                 </Stack>
             )}
             startDecorator={<Play />}
             endDecorator={(
                 <Row spacing={1}>
                     <RunProgress processId={run.processId} runId={run.id} />
-                    <Navigate className="opacity-0 group-hover:opacity-100" />
+                    <Navigate className="hidden opacity-0 group-hover:opacity-100 md:block" />
                 </Row>
             )}
             className="group w-full"

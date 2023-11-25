@@ -11,9 +11,9 @@ export function SharedWithIndicator({ shareableEntity }: { shareableEntity: Shar
     }
 
     return (
-        <Row spacing={0.5} className="opacity-70">
-            <Globe size={16} />
-            <Typography level="body3">Public</Typography>
+        <Row spacing={0.5}>
+            <Globe size={16} className="opacity-60" />
+            <Typography level="body2">Public</Typography>
         </Row>
     );
 }
