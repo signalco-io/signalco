@@ -76,7 +76,9 @@ export async function createProcess(userId: string, name: string, basedOn?: stri
                 if (taskDefinitions.length) {
                     await Promise.all(taskDefinitions.map(async td => {
                         const taskDefinitionId = await createTaskDefinition(userId, id, td.text ?? '');
-                        await changeTaskDefinitionType(userId, id, taskDefinitionId, td.type, td.typeData ?? '');
+                        if (td.type) {
+                            await changeTaskDefinitionType(userId, id, taskDefinitionId, td.type, td.typeData ?? '');
+                        }
                     }));
                 }
             }
