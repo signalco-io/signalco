@@ -8,10 +8,9 @@ import { Row } from '@signalco/ui-primitives/Row';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { cx } from '@signalco/ui-primitives/cx';
-import { Delete, Embed, Globe, ListChecks, MoreHorizontal, Play } from '@signalco/ui-icons';
+import { Delete, Duplicate, Embed, Globe, ListTodo, MoreHorizontal, Play } from '@signalco/ui-icons';
 import { Loadable } from '@signalco/ui/Loadable';
 import { ShareModal } from '../../shared/ShareModal';
-import { SharedWithIndicator } from '../../shared/SharedWithIndicator';
 import { ListHeader } from '../../shared/ListHeader';
 import { EmbedModal } from '../../shared/EmbedModal';
 import { ShareableEntity } from '../../../src/types/ShareableEntity';
@@ -23,6 +22,7 @@ import { TypographyProcessName } from './TypographyProcessName';
 import { RunProgress } from './RunProgress';
 import { ProcessRunCreateModal } from './ProcessRunCreateModal';
 import { ProcessOrRunDeleteModal } from './ProcessOrRunDeleteModal';
+import { ProcessDuplicateModal } from './ProcessDuplicateModal';
 
 export function ProcessDetailsHeader({
     processId, runId, editable
@@ -35,6 +35,7 @@ export function ProcessDetailsHeader({
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [embedOpen, setEmbedOpen] = useState(false);
     const [shareOpen, setShareOpen] = useState(false);
+    const [duplicateOpen, setDuplicateOpen] = useState(false);
 
     const isRun = Boolean(runId);
 
@@ -55,7 +56,7 @@ export function ProcessDetailsHeader({
             error={errorProcess}>
             <Stack spacing={1}>
                 <ListHeader
-                    icon={isRun ? <Play /> : <ListChecks />}
+                    icon={isRun ? <Play /> : <ListTodo />}
                     header={isRun
                         ? (<TypographyProcessRunName id={processId} runId={runId} level="h5" editable={editable} noWrap />)
                         : (<TypographyProcessName id={processId} level="h5" editable={editable} noWrap />)}
@@ -73,6 +74,9 @@ export function ProcessDetailsHeader({
                                     </IconButton>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
+                                    <DropdownMenuItem startDecorator={<Duplicate />} onClick={() => setDuplicateOpen(true)}>
+                                        Duplicate...
+                                    </DropdownMenuItem>
                                     {!isPublic && (
                                         <DropdownMenuItem startDecorator={<Globe />} onClick={() => setShareOpen(true)}>
                                             Make public...
@@ -83,12 +87,12 @@ export function ProcessDetailsHeader({
                                     </DropdownMenuItem>
                                     {!isRun && (
                                         <DropdownMenuItem startDecorator={<Play />} href={KnownPages.ProcessRuns(processId)}>
-                                        View process runs
+                                            View process runs
                                         </DropdownMenuItem>
                                     )}
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem startDecorator={<Delete />} onClick={() => setDeleteOpen(true)}>
-                                    Delete...
+                                        Delete...
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
@@ -129,6 +133,12 @@ export function ProcessDetailsHeader({
                 src={`https://doprocess.app${runId ? KnownPages.ProcessRun(processId, runId) : KnownPages.Process(processId)}/embedded`}
                 open={embedOpen}
                 onOpenChange={setEmbedOpen} />
+            {process && (
+                <ProcessDuplicateModal
+                    process={process}
+                    open={duplicateOpen}
+                    onOpenChange={setDuplicateOpen} />
+            )}
         </Loadable>
     );
 }

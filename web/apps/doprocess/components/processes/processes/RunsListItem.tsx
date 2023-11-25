@@ -1,7 +1,7 @@
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
-import { ListChecks, Navigate, Play } from '@signalco/ui-icons';
+import { ListTodo, Navigate, Play } from '@signalco/ui-icons';
 import { SharedWithIndicator } from '../../shared/SharedWithIndicator';
 import { ListItem } from '../../shared/ListItem';
 import { KnownPages } from '../../../src/knownPages';
@@ -24,7 +24,7 @@ export function RunsListItem({ run }: RunsListItemProps) {
                     <Typography>{run.name}</Typography>
                     <div className="flex flex-col gap-2 md:flex-row">
                         <Row spacing={1}>
-                            <ListChecks size={16} className="opacity-80" />
+                            <ListTodo size={16} className="opacity-80" />
                             <TypographyProcessName id={run.processId.toString()} level="body2" />
                         </Row>
                         {process.data && (

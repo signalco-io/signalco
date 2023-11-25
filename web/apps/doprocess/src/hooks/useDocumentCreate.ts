@@ -3,6 +3,7 @@ import { documentsKey } from './useDocuments';
 
 type DocumentCreateArgs = {
     name: string;
+    basedOn?: string;
 }
 
 async function fetchPostDocument(data: object) {
@@ -21,7 +22,7 @@ export function useDocumentCreate(): UseMutationResult<{
 } | undefined, Error, DocumentCreateArgs, unknown> {
     const client = useQueryClient();
     return useMutation({
-        mutationFn: ({ name }: DocumentCreateArgs) => fetchPostDocument(({ name })),
+        mutationFn: ({ ...rest }: DocumentCreateArgs) => fetchPostDocument(({ ...rest })),
         onSuccess: () => {
             client.invalidateQueries({ queryKey: documentsKey() });
         }

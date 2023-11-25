@@ -1,4 +1,4 @@
-import { ListChecks, Play, Share } from '@signalco/ui-icons';
+import { ListTodo, Play, Share } from '@signalco/ui-icons';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { KnownPages } from '../../../src/knownPages';
 import { ImagePlaceholder } from '../../../components/images/ImagePlaceholder';
@@ -15,7 +15,7 @@ function FeaturesSection() {
                 </div>
                 <div className="grid gap-6 md:grid-cols-3 md:gap-12">
                     <div className="flex flex-col items-center space-y-4 text-center">
-                        <ListChecks className="opacity-60" />
+                        <ListTodo className="opacity-60" />
                         <h2 className="text-xl font-bold tracking-tighter sm:text-2xl md:text-3xl">Document</h2>
                         <p className="mx-auto max-w-[700px] text-zinc-500 dark:text-zinc-400 md:text-lg">
                             Create and manage your documents in one place.

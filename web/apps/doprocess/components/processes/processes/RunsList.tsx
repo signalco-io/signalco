@@ -24,7 +24,7 @@ export function RunsList({ processId }: { processId?: string }) {
                     editable={Boolean(processId) && showComplated !== 'true'}
                     itemCreateLabel="New process run"
                     createForm={processId ? <ProcessRunCreateForm processId={processId} redirect /> : undefined}
-                    emptyPlaceholder={<RunsListEmptyPlaceholder />}
+                    emptyPlaceholder={<RunsListEmptyPlaceholder showCompleted={showComplated === 'true'} />}
                 />
             </SignedIn>
             <SignedOut>

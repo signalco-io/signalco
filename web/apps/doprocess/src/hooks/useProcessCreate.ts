@@ -3,6 +3,7 @@ import { processesKey } from './useProcesses';
 
 type ProcessCreateArgs = {
     name: string;
+    basedOn?: string;
 }
 
 async function fetchPostProcess(data: object) {
@@ -18,7 +19,7 @@ export function useProcessCreate(): UseMutationResult<{
 } | undefined, Error, ProcessCreateArgs, unknown> {
     const client = useQueryClient();
     return useMutation({
-        mutationFn: ({ name }: ProcessCreateArgs) => fetchPostProcess(({ name })),
+        mutationFn: ({ ...rest }: ProcessCreateArgs) => fetchPostProcess(({ ...rest })),
         onSuccess: () => {
             client.invalidateQueries({ queryKey: processesKey() });
         }
