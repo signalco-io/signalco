@@ -154,7 +154,7 @@ function ApiOperation(props: ApiOperationProps) {
                                             <Typography textTransform="uppercase">{parameter.name}</Typography>
                                             <Row spacing={1}>
                                                 <Typography level="body2">in</Typography>
-                                                <Typography level="body2" textTransform="uppercase">{parameter.in}</Typography>
+                                                <Typography level="body2" uppercase>{parameter.in}</Typography>
                                             </Row>
                                         </Row>
                                         {parameter.description && <Typography level="body2">{parameter.description}</Typography>}
@@ -390,9 +390,9 @@ function SecurityInput(props: { security: OpenAPIV3.SecurityRequirementObject })
                         </Stack>
                     );
                 } else if (source) {
-                    return <Typography key={source.type} color="danger" bold textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
+                    return <Typography key={source.type} color="danger" bold uppercase>{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
-                    return <Typography key="unknown" color="danger" bold textTransform="uppercase">Security not defined</Typography>
+                    return <Typography key="unknown" color="danger" bold uppercase>Security not defined</Typography>
                 }
             })}
         </>
@@ -416,9 +416,9 @@ function SecurityBadge(props: { security: OpenAPIV3.SecurityRequirementObject })
                         </Chip>
                     );
                 } else if (source) {
-                    return <Typography key={source.type} color="danger" bold textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
+                    return <Typography key={source.type} color="danger" bold uppercase>{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
-                    return <Typography key="unknown" color="danger" bold textTransform="uppercase">Security not defined</Typography>
+                    return <Typography key="unknown" color="danger" bold uppercase>Security not defined</Typography>
                 }
             })}
         </>
@@ -504,7 +504,7 @@ function Actions(props: ActionsProps) {
                             <Typography textTransform="uppercase">Body</Typography>
                         </div>
                         <div style={{ alignSelf: 'flex-end' }}>
-                            <Typography textAlign="right" level="body3">application/json</Typography>
+                            <Typography className="text-right" level="body3">application/json</Typography>
                         </div>
                     </Row>
                     <Card>

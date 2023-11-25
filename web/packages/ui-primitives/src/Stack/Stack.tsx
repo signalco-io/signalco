@@ -1,4 +1,4 @@
-import type { CSSProperties, HTMLAttributes } from 'react';
+import { forwardRef, type CSSProperties, type HTMLAttributes } from 'react';
 import { cx } from '../cx';
 
 export type StackProps = HTMLAttributes<HTMLDivElement> & {
@@ -7,9 +7,10 @@ export type StackProps = HTMLAttributes<HTMLDivElement> & {
     justifyContent?: 'start' | 'center' | 'end' | 'space-between' | 'stretch' | undefined;
 };
 
-export function Stack({ spacing, alignItems, justifyContent, style, className, ...props }: StackProps) {
+const Stack = forwardRef<HTMLDivElement, StackProps>(({ spacing, alignItems, justifyContent, style, className, ...props }: StackProps, ref) => {
     return (
         <div
+            ref={ref}
             className={cx(
                 'flex flex-col',
                 alignItems === 'start' && 'items-start',
@@ -29,4 +30,6 @@ export function Stack({ spacing, alignItems, justifyContent, style, className, .
             {...props}
         />
     )
-}
+});
+Stack.displayName = 'Stack';
+export { Stack };

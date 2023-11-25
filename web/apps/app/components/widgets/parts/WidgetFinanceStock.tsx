@@ -95,7 +95,7 @@ export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>
                             </NoDataPlaceholder>
                         ) : (
                             <>
-                                <Typography level="h4" bold lineHeight={0.9}>${closePrice}</Typography>
+                                <Typography level="h4" bold>${closePrice}</Typography>
                                 <Typography color={diffPerc >= 0 ? 'success' : 'danger'}>{diffPerc >= 0 ? '+' : ''}{diffPercDecimals}%</Typography>
                             </>
                         )}

@@ -1,9 +1,9 @@
 import { forwardRef, type ButtonHTMLAttributes, type PropsWithChildren, type ReactNode, useMemo } from 'react'
-import { cx } from 'classix'
 import { LoaderSpinner } from '@signalco/ui-icons';
 import { Slot } from '@radix-ui/react-slot';
 import { VariantKeys } from '../theme';
 import { Link } from '../Link';
+import { cx } from '../cx'
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: VariantKeys | 'link';

@@ -1,4 +1,4 @@
-import { cx } from 'classix'
+import { cx } from '../cx'
 
 export function Divider({orientation = 'horizontal'} : {orientation?: 'horizontal' | 'vertical'}) {
     return (

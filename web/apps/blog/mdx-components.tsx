@@ -27,14 +27,14 @@ function H6({ children }: PropsWithChildren) {
 }
 
 function P({ children }: PropsWithChildren) {
-    return <Typography level="body1" gutterBottom lineHeight={1.5} fontSize={'1.1em'}>{children}</Typography>;
+    return <Typography level="body1" gutterBottom>{children}</Typography>;
 }
 
 function Li({ children }: PropsWithChildren) {
     return (
         <Row spacing={1} style={{ marginBottom: 8 }} alignItems="start">
-            <Typography opacity={0.4} fontSize={'1.1em'} lineHeight={1.5}>&ndash;</Typography>
-            <Typography level="body1" fontSize={'1.1em'} lineHeight={1.5}>{children}</Typography>
+            <Typography tertiary>&ndash;</Typography>
+            <Typography level="body1">{children}</Typography>
         </Row>
     );
 }

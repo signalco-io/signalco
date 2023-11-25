@@ -16,7 +16,7 @@ export function combineSecureHeaders(
                 manifestSrc: '\'self\'',
                 mediaSrc: '\'self\'',
                 childSrc: '\'self\'',
-                frameSrc: ['\'self\'', , ...externalUrls.flatMap(e => e.frameSrc)],
+                frameSrc: ['\'self\'', , ...baseSubdomains, ...externalUrls.flatMap(e => e.frameSrc)],
                 workerSrc: ['\'self\'', '\'self\' blob:'],
                 imgSrc: ['\'self\'', 'data:', 'blob:', ...baseSubdomains, ...externalUrls.flatMap(e => e.imgSrc)],
                 formAction: '\'self\'',

@@ -7,7 +7,7 @@ export default function Cover() {
         <div className="h-[30vh]">
             <Stack className="h-full pb-24" alignItems="center" justifyContent="end">
                 <SignalcoLogotype width={250} />
-                <Typography level="h1" thin fontSize="1.4rem">
+                <Typography level="h1" thin className="text-2xl">
                     Automate your life
                 </Typography>
             </Stack>

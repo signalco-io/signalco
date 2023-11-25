@@ -15,7 +15,7 @@ function CounterIndicator(props: { count: number, hideAfter?: boolean }) {
                     'before:content-[\'\'] before:block before:h-16 before:w-px before:absolute before:left-5 before:top-[-64px] before:rotate-180 before:bg-gradient-to-b before:from-foreground before:to-transparent',
                     !props.hideAfter && 'after:content-[\'\'] after:block after:h-16 after:w-px after:absolute after:left-5 after:top-[40px] after:bg-gradient-to-b after:from-foreground after:to-transparent'
                 )}>
-                <Typography textAlign="center" fontSize={23}>{props.count}</Typography>
+                <Typography center className="text-2xl">{props.count}</Typography>
             </div>
         </ div>
     );

@@ -12,7 +12,7 @@ export default function CtaSection() {
                 <Typography>Focus on things that matter to you.</Typography>
                 <Stack spacing={1}>
                     <NavigatingButton href={KnownPages.App} size="lg">Start now for free</NavigatingButton>
-                    <Typography level="body2" textAlign="center">No credit card required</Typography>
+                    <Typography level="body2" center>No credit card required</Typography>
                 </Stack>
             </Stack>
         </Card>

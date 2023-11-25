@@ -17,9 +17,9 @@ export function StepContent(props: {
         <SectionCenter>
             <Stack spacing={6}>
                 <Stack spacing={3}>
-                    <Typography level="h3" component="h2" textAlign="center">{props.header}</Typography>
+                    <Typography level="h3" component="h2" center>{props.header}</Typography>
                     {props.subtitle && (
-                        <Typography level="body2" textAlign="center">{props.subtitle}</Typography>
+                        <Typography level="body2" center>{props.subtitle}</Typography>
                     )}
                 </Stack>
                 <div className={cx(

@@ -6,7 +6,7 @@ import { Typography } from '@signalco/ui-primitives/Typography';
 export function AppItemSection({ items, title }: { items: AppItemType[]; title: string; }) {
     return (
         <Row spacing={2}>
-            <Typography level="body3" textTransform='uppercase'>
+            <Typography level="body3" uppercase>
                 {title}
             </Typography>
             <Row spacing={1}>

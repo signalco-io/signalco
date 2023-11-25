@@ -1,7 +1,7 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode, useMemo } from 'react'
-import { cx } from 'classix'
 import { LoaderSpinner, Select } from '@signalco/ui-icons';
 import { Slot } from '@radix-ui/react-slot';
+import { cx } from '../cx'
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     startDecorator?: ReactNode;

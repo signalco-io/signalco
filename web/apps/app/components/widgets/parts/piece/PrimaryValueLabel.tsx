@@ -1,6 +1,7 @@
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
+import { cx } from '@signalco/ui-primitives/cx';
 
 export function numberWholeAndDecimal(data: number | string | undefined): [undefined, undefined] | [number, number] {
     if (typeof data === 'undefined')
@@ -21,11 +22,11 @@ export function PrimaryValueLabel({ value, unit, size }: { value: number | strin
     return (
         <Row alignItems="stretch">
             <Stack className="h-full" justifyContent="center" alignItems="center">
-                <Typography extraThin fontSize={size === 'large' ? 64 : 42} lineHeight={1}>{degreesWhole}</Typography>
+                <Typography extraThin className={cx(size === 'large' ? 'text-6xl' : 'text-4xl')}>{degreesWhole}</Typography>
             </Stack>
             <Stack alignItems="start" justifyContent="space-between">
-                <Typography extraThin fontSize={size === 'large' ? 18 : 12} opacity={0.6}>{unit}</Typography>
-                <Typography extraThin fontSize={size === 'large' ? 18 : 14} opacity={0.6}>.{degreesDecimal}</Typography>
+                <Typography extraThin className={size === 'large' ? 'text-lg' : 'text-xs'} tertiary>{unit}</Typography>
+                <Typography extraThin className={size === 'large' ? 'text-lg' : 'text-sm'} tertiary>.{degreesDecimal}</Typography>
             </Stack>
         </Row>
     );
