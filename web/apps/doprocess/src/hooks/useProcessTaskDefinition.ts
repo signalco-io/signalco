@@ -20,6 +20,7 @@ export function useProcessTaskDefinition(processId?: string, taskDefinitionId?: 
         queryFn: async () => {
             if (!processId || !taskDefinitionId)
                 throw new Error('Process Id and Task Definition Id is required');
+            // TODO: Try to retrieve from local query cache first
             return await fetchGetProcessTaskDefinition(processId, taskDefinitionId);
         },
         enabled: processId != null && taskDefinitionId != null,

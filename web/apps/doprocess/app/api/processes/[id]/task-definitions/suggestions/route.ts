@@ -1,4 +1,5 @@
-import OpenAI from 'openai';
+import { OpenAI } from 'openai';
+import { ProcessTaskDefinitionsSuggestionsDto } from '../../../../dtos/dtos';
 import { getProcess, getProcessIdByPublicId, getTaskDefinitions } from '../../../../../../src/lib/repo/processesRepository';
 import { ensureUserId } from '../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
@@ -32,6 +33,7 @@ export async function GET(_request: Request, { params }: { params: { id: string 
     });
 
     let run = await openai.beta.threads.runs.retrieve(result.thread_id, result.id);
+    console.debug('OpenAI run:', run);
 
     // Wait for the run to complete
     const maxDuration = 20000;
@@ -40,18 +42,24 @@ export async function GET(_request: Request, { params }: { params: { id: string 
     while ((run.status === 'in_progress' || run.status === 'queued') && retries++ < maxDuration / delay) {
         await new Promise(resolve => setTimeout(resolve, delay));
         run = await openai.beta.threads.runs.retrieve(result.thread_id, run.id);
+        console.debug('OpenAI run in-progress/queued:', run.id, run.status);
     }
 
-    // Extract suggestions from the run
+    console.debug('OpenAI run completed:', run.id, run.status);
+
+    // Retrieve thread messages
     const messages = await openai.beta.threads.messages.list(result.thread_id);
+    console.debug('OpenAI run messages:', run.id, result.thread_id, JSON.stringify(messages.data));
+
+    // Construct suggestions from the messages
     const suggestions = messages.data
         .filter(i => i.role === 'assistant')
         .flatMap(m => m.content
             .map(i => i.type === 'text' ? i.text.value : null)
             .filter(Boolean)
-            .map(text => text.split('\n').filter(i => i.startsWith('- ')).map(i => i.substring(2))));
+            .flatMap(text => text.split('\n').filter(i => i.startsWith('- ')).map(i => i.substring(2))));
 
     return Response.json({
         suggestions
-    });
+    } satisfies ProcessTaskDefinitionsSuggestionsDto);
 }
