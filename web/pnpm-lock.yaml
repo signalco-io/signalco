@@ -144,8 +144,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       react-grid-layout:
-        specifier: 1.4.3
-        version: 1.4.3(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.4.4
+        version: 1.4.4(react-dom@18.2.0)(react@18.2.0)
       react-transition-group:
         specifier: 4.4.5
         version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
@@ -16691,8 +16691,8 @@ packages:
       react-is: 18.1.0
     dev: true
 
-  /react-grid-layout@1.4.3(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-maZJfspM5aDmO/1kJj1U13HQ44rh6svcV7VQPOU9c2UfZhh8Z5AuZb+iVrzETWjsisHBYD3e2zckVovUnqvGHA==}
+  /react-grid-layout@1.4.4(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-7+Lg8E8O8HfOH5FrY80GCIR1SHTn2QnAYKh27/5spoz+OHhMmEhU/14gIkRzJOtympDPaXcVRX/nT1FjmeOUmQ==}
     peerDependencies:
       react: '>= 16.3.0'
       react-dom: '>= 16.3.0'
