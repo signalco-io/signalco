@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { cx } from '@signalco/ui-primitives/cx';
-import { Delete, Embed, Globe, MoreHorizontal } from '@signalco/ui-icons';
+import { Delete, Duplicate, Embed, Globe, MoreHorizontal } from '@signalco/ui-icons';
 import { Toolbar } from '../../shared/Toolbar';
 import { ShareModal } from '../../shared/ShareModal';
 import { SavingIndicator } from '../../shared/SavingIndicator';
@@ -13,6 +13,7 @@ import { ShareableEntity } from '../../../src/types/ShareableEntity';
 import { KnownPages } from '../../../src/knownPages';
 import { useDocumentUpdate } from '../../../src/hooks/useDocumentUpdate';
 import { useDocument } from '../../../src/hooks/useDocument';
+import { DocumentDuplicateModal } from './DocumentDuplicateModal';
 import { DocumentDeleteModal } from './DocumentDeleteModal';
 
 type DocumentDetailsToolbarProps = {
@@ -25,6 +26,7 @@ export function DocumentDetailsToolbar({ id, saving }: DocumentDetailsToolbarPro
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [embedOpen, setEmbedOpen] = useState(false);
     const [sharePublicOpen, setSharePublicOpen] = useState(false);
+    const [duplicateOpen, setDuplicateOpen] = useState(false);
 
     const isPublic = document && document.sharedWithUsers.includes('public');
     const documentUpdate = useDocumentUpdate();
@@ -60,6 +62,9 @@ export function DocumentDetailsToolbar({ id, saving }: DocumentDetailsToolbarPro
                         </IconButton>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
+                        <DropdownMenuItem startDecorator={<Duplicate />} onClick={() => setDuplicateOpen(true)}>
+                            Duplicate...
+                        </DropdownMenuItem>
                         {!isPublic && (
                             <DropdownMenuItem startDecorator={<Globe />} onClick={() => setSharePublicOpen(true)}>
                                 Make public...
@@ -88,6 +93,12 @@ export function DocumentDetailsToolbar({ id, saving }: DocumentDetailsToolbarPro
                 src={`https://doprocess.app${KnownPages.Document(id)}/embedded`}
                 open={embedOpen}
                 onOpenChange={setEmbedOpen} />
+            {document && (
+                <DocumentDuplicateModal
+                    document={document}
+                    open={duplicateOpen}
+                    onOpenChange={setDuplicateOpen} />
+            )}
         </>
     );
 }
