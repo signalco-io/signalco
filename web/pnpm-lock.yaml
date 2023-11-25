@@ -640,7 +640,7 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
       openai:
-        specifier: ^4.20.0
+        specifier: 4.20.0
         version: 4.20.0
       react:
         specifier: 18.2.0
@@ -9927,7 +9927,7 @@ packages:
       webpack: '>=4.0.0 <6.0.0'
     dependencies:
       del: 4.1.1
-      webpack: 5.89.0(esbuild@0.18.20)
+      webpack: 5.89.0
     dev: true
 
   /cli-color@2.0.3:
@@ -19898,7 +19898,7 @@ packages:
       fast-json-stable-stringify: 2.1.0
       pretty-bytes: 5.6.0
       upath: 1.2.0
-      webpack: 5.89.0(esbuild@0.18.20)
+      webpack: 5.89.0
       webpack-sources: 1.4.3
       workbox-build: 7.0.0
     transitivePeerDependencies:
