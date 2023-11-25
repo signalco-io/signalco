@@ -41,7 +41,7 @@ export function SplitView({ children, size, minSize, maxSize, collapsable, colla
                     onTouchStart={handlers.handleTouchStart}
                     orientation="vertical"
                 />
-                <div className="md:w-full">
+                <div className="md:w-full md:pr-1">
                     {children && children[1]}
                 </div>
             </div>
