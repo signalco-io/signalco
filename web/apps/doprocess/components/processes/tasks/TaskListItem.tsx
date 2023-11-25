@@ -73,7 +73,7 @@ export function TaskListItem({ selected, taskDefinition, runId, task, taskIndex,
             style={style}
             {...attributes}
             className={cx(
-                'relative peer group w-full gap-2 px-3 pr-12 items-start',
+                'relative peer group w-full gap-2 px-3 pr-12',
                 isComplated && 'text-muted-foreground line-through',
             )}
             selected={selected}

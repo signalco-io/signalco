@@ -14,9 +14,12 @@ import { Loadable } from '@signalco/ui/Loadable';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { TypographyDocumentName } from '../documents/TypographyDocumentName';
 import { EditorSkeleton } from '../documents/editor/EditorSkeleton';
+import { DocumentSharedWithIndicator } from '../documents/DocumentSharedWithIndicator';
+import { SharedWithIndicator } from '../../shared/SharedWithIndicator';
 import { KnownPages } from '../../../src/knownPages';
 import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
 import { useProcessTaskDefinition } from '../../../src/hooks/useProcessTaskDefinition';
+import { useDocument } from '../../../src/hooks/useDocument';
 import TaskDetailsTypePicker from './TaskDetailsTypePicker';
 import { TaskDetailsToolbar } from './TaskDetailsToolbar';
 
@@ -97,15 +100,25 @@ export function TaskDetails({ processId, editable }: TaskDetailsProps) {
                         )}
                         {taskDefinition?.type && (
                             <Row spacing={1}>
-                                {taskDefinition.type === 'blank' && <Empty className="opacity-60" width={16} />}
-                                {taskDefinition.type === 'blank' && <Typography secondary semiBold>Blank - No details</Typography>}
-                                {taskDefinition.type === 'document' && <Link href={taskDefinition.typeData ? KnownPages.Document(taskDefinition.typeData) : '#'}><FileText className="opacity-60" width={16} /></Link>}
+                                {taskDefinition.type === 'blank' && (
+                                    <>
+                                        <Empty className="opacity-60" width={16} />
+                                        <Typography level="body2">Blank - No details</Typography>
+                                    </>
+                                )}
+                                {taskDefinition.type === 'document' && (
+                                    <Link href={taskDefinition.typeData ? KnownPages.Document(taskDefinition.typeData) : '#'}>
+                                        <FileText className="opacity-60" width={16} />
+                                    </Link>
+                                )}
                                 {taskDefinition.type === 'document' && taskDefinition.typeData && (
-                                    <TypographyDocumentName
-                                        secondary
-                                        semiBold
-                                        id={taskDefinition.typeData}
-                                        editable={editable} />
+                                    <>
+                                        <TypographyDocumentName
+                                            level="body2"
+                                            id={taskDefinition.typeData}
+                                            editable={editable} />
+                                        <DocumentSharedWithIndicator documentId={taskDefinition.typeData} />
+                                    </>
                                 )}
                             </Row>
                         )}
