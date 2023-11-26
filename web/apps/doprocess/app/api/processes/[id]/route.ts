@@ -16,7 +16,7 @@ export async function GET(_request: Request, { params }: { params: { id: string 
         ...process,
         id: process.publicId,
         publicId: undefined
-    } : null;
+    } : null; // TODO: Ensure not too much data is returned
     return Response.json(processDto);
 }
 

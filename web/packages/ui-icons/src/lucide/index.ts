@@ -66,6 +66,7 @@ export {
     LocateFixed as MyLocation,
     FileText,
     FileInput,
+    Sparkles as AI,
     Text,
     Outdent as TextLinked,
     Replace,

@@ -150,7 +150,6 @@ export async function runProcess(userId: string, processId: number, name: string
     return (await db.insert(processRun).values({
         processId,
         publicId: await publicIdNext(processRun, 6),
-        state: 'running',
         name,
         createdBy: userId
     })).insertId;
@@ -288,19 +287,4 @@ export async function setTaskState(userId: string, processId: number, runId: num
         .update(task)
         .set({ state, updatedBy: userId, updatedAt: new Date() })
         .where(and(eq(task.processId, processId), eq(task.runId, runId), eq(task.taskDefinitionId, taskDefinitionId)));
-
-    // Calculate process run state
-    const [taskDefinitions, tasks, run] = await Promise.all([
-        getTaskDefinitions(userId, processId), // TODO: (optimization) Can use only count
-        getTasks(userId, processId, runId), // TODO: (optimization) Can use only count of completed tasks
-        getProcessRun(userId, processId, runId)
-    ]);
-    const tasksCompletedCount = tasks.filter(t => t.state === 'completed').length;
-    const newRunState = taskDefinitions.length === tasksCompletedCount ? 'completed' : 'running';
-    if (run?.state !== newRunState) {
-        await db
-            .update(processRun)
-            .set({ state: newRunState, updatedBy: userId, updatedAt: new Date() })
-            .where(and(eq(processRun.processId, processId), eq(processRun.id, runId)));
-    }
 }

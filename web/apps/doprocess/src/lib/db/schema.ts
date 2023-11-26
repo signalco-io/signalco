@@ -21,7 +21,6 @@ export const processRun = mysqlTable('process_run', {
     publicId: varchar('public_id', { length: 32 }).notNull().unique(),
     processId: int('process_id').notNull(),
     name: varchar('name', { length: 255 }).notNull(),
-    state: varchar('state', { length: 255 }).notNull(),
     createdBy: varchar('created_by', { length: 255 }).notNull(),
     createdAt: datetime('created_at', { mode: 'date' }).notNull().default(sql`current_timestamp`),
     updatedBy: varchar('updated_by', { length: 255 }),
