@@ -15,11 +15,9 @@ import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { TypographyDocumentName } from '../documents/TypographyDocumentName';
 import { EditorSkeleton } from '../documents/editor/EditorSkeleton';
 import { DocumentSharedWithIndicator } from '../documents/DocumentSharedWithIndicator';
-import { SharedWithIndicator } from '../../shared/SharedWithIndicator';
 import { KnownPages } from '../../../src/knownPages';
 import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
 import { useProcessTaskDefinition } from '../../../src/hooks/useProcessTaskDefinition';
-import { useDocument } from '../../../src/hooks/useDocument';
 import TaskDetailsTypePicker from './TaskDetailsTypePicker';
 import { TaskDetailsToolbar } from './TaskDetailsToolbar';
 

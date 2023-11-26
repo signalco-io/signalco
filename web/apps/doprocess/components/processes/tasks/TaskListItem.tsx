@@ -89,7 +89,6 @@ export function TaskListItem({ selected, taskDefinition, runId, task, taskIndex,
                         )}
                         <Typography
                             level="body3"
-                            secondary
                             className={cx(
                                 '[line-height:1.6em]',
                                 (!runId && editable) && 'block group-hover:hidden'

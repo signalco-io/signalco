@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { List } from '@signalco/ui-primitives/List';
 import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
 import { Loadable } from '@signalco/ui/Loadable';
@@ -15,8 +16,9 @@ import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTas
 import { useProcessTaskDefinitions } from '../../../src/hooks/useProcessTaskDefinitions';
 import { useProcessTaskDefinitionCreate } from '../../../src/hooks/useProcessTaskDefinitionCreate';
 import { useProcessRunTasks } from '../../../src/hooks/useProcessRunTasks';
-import { TaskListSuggestions } from './TaskListSuggestions';
 import { TaskListItem } from './TaskListItem';
+
+const TaskListSuggestions = dynamic(() => import('./TaskListSuggestions').then(mod => mod.TaskListSuggestions), {ssr: false });
 
 type TaskListProps = {
     processId: string;
@@ -34,12 +36,14 @@ export function TaskList({ processId, runId, editable }: TaskListProps) {
 
     const [showSuggestions, setShowSuggestions] = useState(false);
     useEffect(() => {
-        if ((taskDefinitions?.length ?? 0) > 0) {
-            setTimeout(() => {
+        if (!runId && (taskDefinitions?.length ?? 0) > 0) {
+            const timeoutId = setTimeout(() => {
                 setShowSuggestions(true);
             }, 500);
+
+            return () => clearTimeout(timeoutId);
         }
-    }, [taskDefinitions]);
+    }, [runId, taskDefinitions]);
 
     const taskListItems = useMemo(() => {
         return orderBy(taskDefinitions?.map(td => ({
