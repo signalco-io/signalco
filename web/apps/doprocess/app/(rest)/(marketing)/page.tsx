@@ -1,6 +1,7 @@
 import { ListTodo, Play, Share } from '@signalco/ui-icons';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { KnownPages } from '../../../src/knownPages';
+import Footer from '../../../components/pages/Footer';
 import { ImagePlaceholder } from '../../../components/images/ImagePlaceholder';
 
 function FeaturesSection() {
@@ -8,7 +9,11 @@ function FeaturesSection() {
         <section className="w-full py-2 sm:py-8 md:py-12 lg:py-24 xl:py-32">
             <div className="container mx-auto px-2 sm:px-4 md:px-6">
                 <div className="mb-5 text-center md:mb-10 lg:mb-20">
-                    <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Explore</h1>
+                    <h1
+                        id="explore"
+                        className="pt-5 text-3xl font-bold tracking-tighter sm:text-4xl md:pt-10 md:text-5xl lg:pt-20">
+                        Explore
+                    </h1>
                     <p className="mx-auto mt-4 max-w-[700px] text-zinc-500 dark:text-zinc-400 md:text-lg">
                         Explore our features and start your journey with us.
                     </p>
@@ -76,6 +81,7 @@ export default function LandingPage() {
         <main>
             <CoverSection />
             <FeaturesSection />
+            <Footer />
         </main>
     );
 }

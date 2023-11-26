@@ -1,3 +1,5 @@
+'use client';
+
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Button } from '@signalco/ui-primitives/Button';
