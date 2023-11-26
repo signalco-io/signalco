@@ -8,7 +8,6 @@ import { Container } from '@signalco/ui-primitives/Container';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { now } from '../../src/services/DateTimeProvider';
 
-
 type FooterSectionType = {
     header: string,
     links: { name: string, href: string, developerOnly?: boolean }[]
@@ -16,19 +15,25 @@ type FooterSectionType = {
 }
 
 const footerLinks: FooterSectionType[] = [
-    {
-        header: 'Product',
-        links: [
-        ]
-    },
-    {
-        header: 'Community',
-        links: [
-            { name: 'Discussions on GitHub', href: 'https://github.com/signalco-io/signalco/discussions', developerOnly: true },
-            { name: 'r/signalco', href: 'https://www.reddit.com/r/signalco/' }
-        ]
-    },
+    // {
+    //     header: 'Product',
+    //     links: [
+    //     ]
+    // },
+    // {
+    //     header: 'Community',
+    //     links: [
+    //         // { name: 'Discussions on GitHub', href: 'https://github.com/signalco-io/signalco/discussions', developerOnly: true },
+    //         // { name: 'r/signalco', href: 'https://www.reddit.com/r/signalco/' }
+    //     ]
+    // },
 ];
+
+const socialLinks = [
+    { name: 'GitHub', href: 'https://github.com/signalco-io/signalco', icon: <Typography>gh</Typography> },
+    { name: 'reddit', href: 'https://www.reddit.com/r/signalco/', icon: <Typography>/r</Typography> },
+    { name: 'X formerly known as Twitter', href: 'https://x.com/signalco_io', icon: <Typography>X</Typography> },
+]
 
 export default function Footer() {
     return (
@@ -49,25 +54,21 @@ export default function Footer() {
                             ))}
                         </div>
                         <Stack>
-                            <Stack alignItems="center" justifyContent="space-between">
-                                <Typography level="body3">Copyright © {now().getFullYear()} signalco. All rights reserved.</Typography>
-                                <Row spacing={1}>
-                                    <IconButton
-                                        aria-label="X formerly known as Twitter"
-                                        href="https://x.com/signalco_io">
-                                        <Typography>X</Typography>
-                                    </IconButton>
-                                    <IconButton
-                                        aria-label="reddit"
-                                        href="https://www.reddit.com/r/signalco/">
-                                        <Typography>/r</Typography>
-                                    </IconButton>
-                                    <IconButton
-                                        aria-label="GitHub"
-                                        href="https://github.com/signalco-io/signalco">
-                                        <Typography>gh</Typography>
-                                    </IconButton>
-                                </Row>
+                            <Stack spacing={1} alignItems="center" justifyContent="space-between">
+                                <Typography level="body3">Copyright © {now().getFullYear()} doprocess. All rights reserved.</Typography>
+                                {socialLinks && (
+                                    <Row spacing={1}>
+                                        {socialLinks.map(socialLink => (
+                                            <IconButton
+                                                key={socialLink.name}
+                                                aria-label={socialLink.name}
+                                                href={socialLink.href}
+                                                variant="link">
+                                                {socialLink.icon}
+                                            </IconButton>
+                                        ))}
+                                    </Row>
+                                )}
                             </Stack>
                         </Stack>
                     </Stack>
