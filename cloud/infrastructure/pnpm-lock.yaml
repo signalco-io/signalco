@@ -27,8 +27,8 @@ dependencies:
     specifier: 3.94.2
     version: 3.94.2
   '@pulumiverse/vercel':
-    specifier: 0.16.0
-    version: 0.16.0
+    specifier: 1.0.1
+    version: 1.0.1
 
 devDependencies:
   '@types/node':
@@ -448,8 +448,8 @@ packages:
     resolution: {integrity: sha512-xfo+yLRM2zVjVEA4p23IjQWzyWl1ZhWOGobsBqRpIarzLvwNH/RAGaoehdxlhx4X92302DrpdIFgTICMN4P38w==}
     dev: false
 
-  /@pulumiverse/vercel@0.16.0:
-    resolution: {integrity: sha512-IzlmrUGKcRbIBKUuoLEz38+u0eOWO+CK5Xn0FcPmPRB+aiNACP4zikRw4qYRSP06Is1LnqUHxWCRvdYwVvykPg==}
+  /@pulumiverse/vercel@1.0.1:
+    resolution: {integrity: sha512-AOiOe2pzZOQVv9Z+C/iWmZeKpeZb+0qmqcfRBnYiU4DiVr9VhqE9ToJVPq7ElyxgYSoETA+4qfd1Kj01zxhd5A==}
     dependencies:
       '@pulumi/pulumi': 3.94.2
     transitivePeerDependencies:
