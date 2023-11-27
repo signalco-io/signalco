@@ -2,8 +2,8 @@ import { Inter } from 'next/font/google';
 import { Metadata, Viewport } from 'next';
 import './global.css';
 import { Analytics } from '@vercel/analytics/react';
-import { ClerkProvider } from '@clerk/nextjs';
 import { ClientProvider } from '../components/providers/ClientProvider';
+import { AuthProvider } from '../components/providers/AuthProvider';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -16,12 +16,12 @@ export default function RootLayout({ children, }: {
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={`${inter.variable} font-sans`}>
-                <ClientProvider>
-                    <ClerkProvider>
+                <AuthProvider>
+                    <ClientProvider>
                         {children}
                         <Analytics />
-                    </ClerkProvider>
-                </ClientProvider>
+                    </ClientProvider>
+                </AuthProvider>
             </body>
         </html>
     );
