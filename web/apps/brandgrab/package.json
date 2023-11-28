@@ -18,7 +18,7 @@
         "test": "playwright test"
     },
     "dependencies": {
-        "@enterwell/react-hooks": "0.3.2",
+        "@enterwell/react-hooks": "0.4.0",
         "@next/env": "14.0.3",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
@@ -44,7 +44,7 @@
         "@signalco/tsconfig": "workspace:*",
         "@types/color": "3.0.6",
         "@types/node": "18.18.13",
-        "@types/react": "18.2.38",
+        "@types/react": "18.2.39",
         "@types/react-dom": "18.2.17",
         "@types/sharp": "0.31.1",
         "cross-env": "7.0.3",
