@@ -1,86 +1,109 @@
-import { ListTodo, Play, Share } from '@signalco/ui-icons';
-import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { KnownPages } from '../../../src/knownPages';
+import { Faq1, Feature1, Feature2, Heading1, Pricing1, SectionData } from '../../../components/pages/Heading1';
 import Footer from '../../../components/pages/Footer';
-import { ImagePlaceholder } from '../../../components/images/ImagePlaceholder';
-
-function FeaturesSection() {
-    return (
-        <section className="w-full py-2 sm:py-8 md:py-12 lg:py-24 xl:py-32">
-            <div className="container mx-auto px-2 sm:px-4 md:px-6">
-                <div className="mb-5 text-center md:mb-10 lg:mb-20">
-                    <h1
-                        id="explore"
-                        className="pt-5 text-3xl font-bold tracking-tighter sm:text-4xl md:pt-10 md:text-5xl lg:pt-20">
-                        Explore
-                    </h1>
-                    <p className="mx-auto mt-4 max-w-[700px] text-zinc-500 dark:text-zinc-400 md:text-lg">
-                        Explore our features and start your journey with us.
-                    </p>
-                </div>
-                <div className="grid gap-6 md:grid-cols-3 md:gap-12">
-                    <div className="flex flex-col items-center space-y-4 text-center">
-                        <ListTodo className="opacity-60" />
-                        <h2 className="text-xl font-bold tracking-tighter sm:text-2xl md:text-3xl">Document</h2>
-                        <p className="mx-auto max-w-[700px] text-zinc-500 dark:text-zinc-400 md:text-lg">
-                            Create and manage your documents in one place.
-                        </p>
-                    </div>
-                    <div className="flex flex-col items-center space-y-4 text-center">
-                        <Play className="opacity-60" />
-                        <h2 className="text-xl font-bold tracking-tighter sm:text-2xl md:text-3xl">Run</h2>
-                        <p className="mx-auto max-w-[700px] text-zinc-500 dark:text-zinc-400 md:text-lg">
-                            Execute your tasks efficiently and effectively.
-                        </p>
-                    </div>
-                    <div className="flex flex-col items-center space-y-4 text-center">
-                        <Share className="opacity-60" />
-                        <h2 className="text-xl font-bold tracking-tighter sm:text-2xl md:text-3xl">Share</h2>
-                        <p className="mx-auto max-w-[700px] text-zinc-500 dark:text-zinc-400 md:text-lg">
-                            Share your work with others and collaborate.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-}
-
-function CoverSection() {
-    return (
-        <section className="w-full py-2 sm:py-8 md:py-12 lg:py-24 xl:py-32">
-            <div className="container mx-auto px-2 sm:px-4 md:px-6">
-                <div className="grid grid-cols-1 items-center gap-4 sm:gap-6 md:grid-cols-[1fr_400px] lg:grid-cols-[1fr_550px] lg:gap-12">
-                    <div className="mx-auto aspect-video w-full overflow-hidden rounded-xl object-cover object-center lg:order-first lg:w-auto">
-                        <ImagePlaceholder width="" height="" />
-                    </div>
-                    <div className="flex flex-col justify-center space-y-2 sm:space-y-4">
-                        <span className="flex items-end justify-center gap-2 sm:justify-start">
-                            <h2 className="inline text-center text-2xl font-bold tracking-tighter sm:text-left md:text-3xl lg:text-4xl xl:text-5xl">
-                                do process
-                            </h2>
-                            <p className="inline max-w-[600px] text-center text-lg text-zinc-500 dark:text-zinc-400 sm:text-left md:text-lg lg:text-xl/relaxed">
-                                the right way.
-                            </p>
-                        </span>
-                        <p className="max-w-[600px] text-center text-sm text-zinc-500 dark:text-zinc-400 sm:text-left sm:text-base md:text-lg lg:text-xl/relaxed">
-                            Simplest and fastest way to document and act upon your processes.
-                        </p>
-                        <NavigatingButton href={KnownPages.Processes} className="w-full">
-                            Start Now
-                        </NavigatingButton>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-}
 
 export default function LandingPage() {
+    const data: SectionData[] = [
+        {
+            header: 'do process the right way',
+            description: 'DoProcess is the leading SaaS platform that helps you document, run, and automate your processes the right way. With our intuitive tools and powerful features, you can save time, increase efficiency, and focus on what matters most.',
+            ctas: [
+                { label: 'Get Started', href: KnownPages.Runs },
+            ]
+        },
+        {
+            tagline: 'Efficiency',
+            header: 'Streamline Your Processes with Ease and Precision',
+            description: 'Our platform allows you to document, run, and automate processes in the most efficient way possible. Say goodbye to manual paperwork and hello to increased productivity.',
+            features: [
+                {
+                    header: '50%',
+                    description: 'Save time and reduce errors with automated workflows',
+                }, {
+                    header: '50%',
+                    description: 'Collaborate seamlessly with your team on document processes'
+                }
+            ]
+        },
+        {
+            tagline: 'Efficiency',
+            header: 'Streamline any processes with ease',
+            description: 'Our running process checklist capabilities allow you to automate and manage your workflows efficiently. With our intuitive platform, you can easily create, track, and optimize your processes, ensuring that every step is completed accurately and on time.',
+            features: [
+                {
+                    header: '50%',
+                    description: 'Save time and reduce errors with automated workflows',
+                }, {
+                    header: '50%',
+                    description: 'Collaborate seamlessly with your team on document processes'
+                }
+            ]
+        },
+        {
+            tagline: 'Pricing',
+            header: 'Flexible Pricing Plans for Every Business',
+            description: 'Choose a pricing plan that suits your needs and budget.',
+            features: [
+                {
+                    features: [
+                        {
+                            header: 'Streamline Processes',
+                            description: 'Automate repetitive tasks and increase productivity with our intuitive software.'
+                        },
+                        {
+                            header: 'Streamline Processes',
+                            description: 'Automate repetitive tasks and increase productivity with our intuitive software.'
+                        },
+                        {
+                            header: 'Streamline Processes',
+                            description: 'Automate repetitive tasks and increase productivity with our intuitive software.'
+                        }
+                    ]
+                },
+                {
+                    header: 'Pro Plan',
+                    description: 'For small teams or individuals that manage more processes.',
+                    asset: '$19/mo',
+                    features: [
+                        { header: 'Streamline Processes' },
+                        { header: 'Streamline Processes' },
+                        { header: 'Streamline Processes' }
+                    ],
+                    ctas: [
+                        { label: 'Get Started', href: KnownPages.Runs },
+                    ]
+                }
+            ]
+        },
+        {
+            header: 'FAQ',
+            description: 'Find answers to common questions about DoProcess and reduce barriers to entry.',
+            features: [
+                { header: 'What is DoProcess?', description: 'DoProcess is a SaaS platform that allows you to document, run, and automate processes the right way.' },
+                { header: 'How does it work?', description: 'DoProcess works by providing a user-friendly interface to create and manage workflows, ensuring efficiency and accuracy in your processes.' },
+                { header: 'How much does it cost?', description: 'DoProcess is free to use for individuals and small teams. For larger teams, we offer a Pro Plan that starts at $19/mo.' },
+                { header: 'What are the benefits of using DoProcess?', description: 'DoProcess allows you to streamline your processes, automate repetitive tasks, and increase productivity.' },
+                { header: 'How do I get started?', description: 'Simply sign up for an account and start documenting your processes today.' }
+            ]
+        }
+    ];
+
+    const sections = [
+        Heading1,
+        Feature1,
+        Feature2,
+        Pricing1,
+        Faq1
+    ];
+
     return (
         <main>
-            <CoverSection />
-            <FeaturesSection />
+            {sections.map((Section, index) => {
+                const sectionData = data[index];
+                return (
+                    <Section key={index} {...sectionData} />
+                );
+            })}
             <Footer />
         </main>
     );

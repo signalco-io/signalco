@@ -8,13 +8,14 @@ import { ExpandDown } from '@signalco/ui-icons';
 
 export type AccordionProps = ComponentProps<typeof Card> & {
     open?: boolean;
+    defaultOpen?: boolean;
     disabled?: boolean;
     onOpenChanged?: (event: MouseEvent<HTMLButtonElement>, open: boolean) => void;
     unmountOnExit?: boolean;
 };
 
-export function Accordion({ children, open, disabled, onOpenChanged, unmountOnExit, className, ...props }: AccordionProps) {
-    const [isOpen, setIsOpen] = useState(open ?? false);
+export function Accordion({ children, defaultOpen, open, disabled, onOpenChanged, unmountOnExit, className, ...props }: AccordionProps) {
+    const [isOpen, setIsOpen] = useState(open ?? (defaultOpen ?? false));
 
     const handleOpen = (event: MouseEvent<HTMLButtonElement>) => {
         if (typeof open !== 'undefined' && typeof onOpenChanged !== 'undefined') {
@@ -30,8 +31,10 @@ export function Accordion({ children, open, disabled, onOpenChanged, unmountOnEx
     const otherChildren = Array.isArray(children) ? children.filter((_: unknown, i: number) => i !== 0 && isValidElement) : [];
     const multipleChildren = otherChildren.length > 0;
 
+    console.log('accordion children', children, firstChild, otherChildren, multipleChildren)
+
     return (
-        <Card className={cx('', className)} onClick={handleOpen} {...props}>
+        <Card className={cx('bg-transparent border-none', className)} onClick={handleOpen} {...props}>
             <CardHeader className="p-2">
                 <Row spacing={1} justifyContent="space-between">
                     {multipleChildren && isValidElement(firstChild) ? firstChild : children}
@@ -42,9 +45,9 @@ export function Accordion({ children, open, disabled, onOpenChanged, unmountOnEx
             </CardHeader>
             {(!unmountOnExit || actualOpen) && (
                 <Collapse appear={actualOpen}>
-                    {multipleChildren && isValidElement(otherChildren) && (
+                    {multipleChildren && (
                         <CardContent className="p-2">
-                            {otherChildren}
+                            {otherChildren?.map((child) => isValidElement(child) ? child : null)}
                         </CardContent>
                     )}
                 </Collapse>
