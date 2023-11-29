@@ -1,4 +1,4 @@
-import { and, eq, inArray, like, or, sql } from 'drizzle-orm';
+import { and, eq, inArray, or, sql } from 'drizzle-orm';
 import { lexinsert } from '@signalco/lexorder';
 import { firstOrDefault } from '@signalco/js';
 import { TaskState, process, processRun, task, taskDefinition } from '../db/schema';
@@ -7,11 +7,11 @@ import { publicIdNext } from './shared';
 
 function processSharedWithUser(userId: string | null) {
     if (userId == null)
-        return like(process.sharedWithUsers, '%\"public\"%');
+        return sql`"public" MEMBER OF(${process.sharedWithUsers})`
 
     return or(
-        like(process.sharedWithUsers, '%\"public\"%'),
-        like(process.sharedWithUsers, `%\"${userId}\"%`)
+        sql`${userId} MEMBER OF(${process.sharedWithUsers})`,
+        sql`"public" MEMBER OF(${process.sharedWithUsers})`
     );
 }
 
@@ -101,7 +101,10 @@ export async function processShareWithUsers(userId: string, processId: number, s
         throw new Error('Not found');
     // TODO: Check permissions
 
-    await db.update(process).set({ sharedWithUsers, updatedBy: userId, updatedAt: new Date() }).where(eq(process.id, processId));
+    await db
+        .update(process)
+        .set({ sharedWithUsers, updatedBy: userId, updatedAt: new Date() })
+        .where(eq(process.id, processId));
 }
 
 export async function deleteProcess(userId: string, processId: number) {

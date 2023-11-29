@@ -1,4 +1,4 @@
-import { and, eq, like, or, sql } from 'drizzle-orm';
+import { and, eq, or, sql } from 'drizzle-orm';
 import { firstOrDefault } from '@signalco/js';
 import { document } from '../db/schema';
 import { db } from '../db';
@@ -6,11 +6,11 @@ import { publicIdNext } from './shared';
 
 function documentSharedWithUser(userId: string | null) {
     if (!userId)
-        return like(document.sharedWithUsers, '%\"public\"%');
+        return sql`"public" MEMBER OF(${document.sharedWithUsers})`;
 
     return or(
-        like(document.sharedWithUsers, `%\"${userId}\"%`),
-        like(document.sharedWithUsers, '%\"public\"%'));
+        sql`${userId} MEMBER OF(${document.sharedWithUsers})`,
+        sql`"public" MEMBER OF(${document.sharedWithUsers})`);
 }
 
 export async function getDocumentIdByPublicId(publicId: string) {
