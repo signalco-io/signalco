@@ -1,3 +1,4 @@
+import { Check } from '@signalco/ui-icons';
 import { KnownPages } from '../../../src/knownPages';
 import { Faq1, Feature1, Feature2, Heading1, Pricing1, SectionData } from '../../../components/pages/Heading1';
 import Footer from '../../../components/pages/Footer';
@@ -5,7 +6,8 @@ import Footer from '../../../components/pages/Footer';
 export default function LandingPage() {
     const data: SectionData[] = [
         {
-            header: 'do process the right way',
+            tagline: 'The right way to',
+            header: 'do process',
             description: 'DoProcess is the leading SaaS platform that helps you document, run, and automate your processes the right way. With our intuitive tools and powerful features, you can save time, increase efficiency, and focus on what matters most.',
             ctas: [
                 { label: 'Get Started', href: KnownPages.Runs },
@@ -47,14 +49,17 @@ export default function LandingPage() {
                 {
                     features: [
                         {
+                            asset: <Check />,
                             header: 'Streamline Processes',
                             description: 'Automate repetitive tasks and increase productivity with our intuitive software.'
                         },
                         {
+                            asset: <Check />,
                             header: 'Streamline Processes',
                             description: 'Automate repetitive tasks and increase productivity with our intuitive software.'
                         },
                         {
+                            asset: <Check />,
                             header: 'Streamline Processes',
                             description: 'Automate repetitive tasks and increase productivity with our intuitive software.'
                         }
@@ -65,9 +70,10 @@ export default function LandingPage() {
                     description: 'For small teams or individuals that manage more processes.',
                     asset: '$19/mo',
                     features: [
-                        { header: 'Streamline Processes' },
-                        { header: 'Streamline Processes' },
-                        { header: 'Streamline Processes' }
+                        { asset: <Check />, header: 'Everything from free plan...' },
+                        { asset: <Check />, header: 'AI assistant' },
+                        { asset: <Check />, header: 'Team/Group management' },
+                        { asset: <Check />, header: 'Unlimited processes' }
                     ],
                     ctas: [
                         { label: 'Get Started', href: KnownPages.Runs },
@@ -78,6 +84,9 @@ export default function LandingPage() {
         {
             header: 'FAQ',
             description: 'Find answers to common questions about DoProcess and reduce barriers to entry.',
+            ctas: [
+                { label: 'Contact', href: KnownPages.Contact },
+            ],
             features: [
                 { header: 'What is DoProcess?', description: 'DoProcess is a SaaS platform that allows you to document, run, and automate processes the right way.' },
                 { header: 'How does it work?', description: 'DoProcess works by providing a user-friendly interface to create and manage workflows, ensuring efficiency and accuracy in your processes.' },
