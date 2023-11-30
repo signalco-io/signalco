@@ -1,4 +1,4 @@
-import { and, eq, inArray, or, sql } from 'drizzle-orm';
+import { and, eq, inArray, or, count, max, sql } from 'drizzle-orm';
 import { lexinsert } from '@signalco/lexorder';
 import { firstOrDefault } from '@signalco/js';
 import { TaskState, process, processRun, task, taskDefinition } from '../db/schema';
@@ -17,7 +17,7 @@ function processSharedWithUser(userId: string | null) {
 
 async function isProcessSharedWithUser(userId: string | null, processId: number) {
     return (firstOrDefault(await db
-        .select({ count: sql<number>`count(*)` })
+        .select({ count: count() })
         .from(process)
         .where(and(eq(process.id, processId), processSharedWithUser(userId))))?.count ?? 0) > 0;
 }
@@ -198,7 +198,7 @@ export async function getTaskDefinition(userId: string | null, processId: number
 async function getTaskDefinitionLastOrder(userId: string, processId: number) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
-    const result = await db.select({ max: sql<string>`max(${taskDefinition.order})` }).from(taskDefinition).where(eq(taskDefinition.processId, processId));
+    const result = await db.select({ max: max(taskDefinition.order) }).from(taskDefinition).where(eq(taskDefinition.processId, processId));
     return lexinsert(result[0]?.max);
 }
 
@@ -272,7 +272,7 @@ export async function setTaskState(userId: string, processId: number, runId: num
     // TODO: Check permissions
 
     // Create task if not exists
-    const taskExists = (firstOrDefault(await db.select({ count: sql<number>`count(*)` }).from(task).where(and(eq(task.processId, processId), eq(task.runId, runId), eq(task.taskDefinitionId, taskDefinitionId))))?.count ?? 0) > 0;
+    const taskExists = (firstOrDefault(await db.select({ count: count() }).from(task).where(and(eq(task.processId, processId), eq(task.runId, runId), eq(task.taskDefinitionId, taskDefinitionId))))?.count ?? 0) > 0;
     if (!taskExists) {
         await db
             .insert(task)
