@@ -1,3 +1,4 @@
+import { Container } from '@signalco/ui-primitives/Container';
 import { PageNav } from '../../../components/PageNav';
 
 export default function RootMarketingLayout({ children, }: {
@@ -6,9 +7,9 @@ export default function RootMarketingLayout({ children, }: {
     return (
         <>
             <PageNav fullWidth cta />
-            <div className="h-full pt-20">
+            <Container className="pt-20" maxWidth="lg">
                 {children}
-            </div>
+            </Container>
         </>
     );
 }
