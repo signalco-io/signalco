@@ -713,7 +713,7 @@ importers:
         specifier: 8.54.0
         version: 8.54.0
       eslint-plugin-drizzle:
-        specifier: ^0.2.2
+        specifier: 0.2.2
         version: 0.2.2(eslint@8.54.0)
       next-sitemap:
         specifier: 4.2.3
