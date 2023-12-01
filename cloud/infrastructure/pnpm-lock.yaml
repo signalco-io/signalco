@@ -9,8 +9,8 @@ dependencies:
     specifier: 1.1.4
     version: 1.1.4
   '@pulumi/aws':
-    specifier: 6.12.0
-    version: 6.12.0
+    specifier: 6.12.1
+    version: 6.12.1
   '@pulumi/azure-native':
     specifier: 2.20.0
     version: 2.20.0
@@ -32,8 +32,8 @@ dependencies:
 
 devDependencies:
   '@types/node':
-    specifier: 18.18.13
-    version: 18.18.13
+    specifier: 18.19.0
+    version: 18.19.0
   '@typescript-eslint/eslint-plugin':
     specifier: 6.13.1
     version: 6.13.1(@typescript-eslint/parser@6.13.1)(eslint@8.54.0)(typescript@5.3.2)
@@ -120,7 +120,7 @@ packages:
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 18.18.13
+      '@types/node': 18.19.0
     dev: false
 
   /@grpc/proto-loader@0.7.10:
@@ -365,8 +365,8 @@ packages:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
     dev: false
 
-  /@pulumi/aws@6.12.0:
-    resolution: {integrity: sha512-BetnMRmjuC2Os9DFU4DRGZSJfWvSCkU6Lsyg8l7YNm+0B0rqs/WajqV/PIHZHdU7mxCkvSbDT0c+GaWty8hXmw==}
+  /@pulumi/aws@6.12.1:
+    resolution: {integrity: sha512-HvfLRm+7EYNc7qr+S6xvED/Utzwx140dDr5TbOrMbGpQs8JBgGm2nraMuRvaD0LB2XzZFVynk8ryU16QJwlSrQ==}
     dependencies:
       '@pulumi/pulumi': 3.94.2
       builtin-modules: 3.0.0
@@ -464,8 +464,8 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/node@18.18.13:
-    resolution: {integrity: sha512-vXYZGRrSCreZmq1rEjMRLXJhiy8MrIeVasx+PCVlP414N7CJLHnMf+juVvjdprHyH+XRy3zKZLHeNueOpJCn0g==}
+  /@types/node@18.19.0:
+    resolution: {integrity: sha512-667KNhaD7U29mT5wf+TZUnrzPrlL2GNQ5N0BMjO2oNULhBxX0/FKCkm6JMu0Jh7Z+1LwUlR21ekd7KhIboNFNw==}
     dependencies:
       undici-types: 5.26.5
 
@@ -2031,7 +2031,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 18.18.13
+      '@types/node': 18.19.0
       long: 5.2.3
     dev: false
 
