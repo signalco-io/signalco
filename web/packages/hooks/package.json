@@ -13,6 +13,7 @@
         "./useIsServer": "./src/useIsServer.ts",
         "./useIsomorphicLayoutEffect": "./src/useIsomorphicLayoutEffect.ts",
         "./useInterval": "./src/useInterval.ts",
+        "./useDocumentEvent": "./src/useDocumentEvent.ts",
         "./useControllableState": "./src/useControllableState.ts",
         "./useCallbackRef": "./src/useCallbackRef.ts",
         "./useAudio": "./src/useAudio.ts"
