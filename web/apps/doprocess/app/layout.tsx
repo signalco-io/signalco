@@ -4,6 +4,7 @@ import './global.css';
 import { Analytics } from '@vercel/analytics/react';
 import { ClientProvider } from '../components/providers/ClientProvider';
 import { AuthProvider } from '../components/providers/AuthProvider';
+import { Comments } from '../components/comments/Comments';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -20,6 +21,7 @@ export default function RootLayout({ children, }: {
                     <ClientProvider>
                         {children}
                         <Analytics />
+                        <Comments />
                     </ClientProvider>
                 </AuthProvider>
             </body>
