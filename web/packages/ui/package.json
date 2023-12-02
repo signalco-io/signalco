@@ -7,8 +7,7 @@
     "sideEffects": false,
     "files": [
         "package.json",
-        "README.md",
-        "dist"
+        "README.md"
     ],
     "exports": {
         "./index.css": "./src/index.css",
