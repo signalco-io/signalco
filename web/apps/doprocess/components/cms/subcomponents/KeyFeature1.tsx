@@ -1,19 +1,21 @@
 import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
 import { slug } from '@signalco/js';
 import { SectionData } from '../SectionData';
 
 export function KeyFeature1({ header, description, asset }: SectionData) {
     return (
-        <div className="flex items-start gap-4">
+        <Row spacing={2}>
             {asset && (
                 <div className="pt-1">
                     {asset}
                 </div>
             )}
-            <div className="flex flex-col gap-3">
-                <Typography level="h6" semiBold id={slug(header)}>{header}</Typography>
-                <Typography>{description}</Typography>
-            </div>
-        </div>
+            <Stack spacing={1}>
+                {header && <Typography semiBold id={slug(header)}>{header}</Typography>}
+                {description && <Typography>{description}</Typography>}
+            </Stack>
+        </Row>
     );
 }
