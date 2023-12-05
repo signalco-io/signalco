@@ -85,6 +85,7 @@
 		"liveServer.settings.multiRootWorkspaceName": "✨ signalco-monorepo",
 		"tailwindCSS.experimental.classRegex": [
 			["cx\\(([^]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"]
-		]
+		],
+		"typescript.tsdk": "🚀 app/node_modules/typescript/lib"
 	}
 }
