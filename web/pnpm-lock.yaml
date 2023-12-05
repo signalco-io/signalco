@@ -556,8 +556,8 @@ importers:
         specifier: 0.9.6
         version: 0.9.6(@tiptap/pm@2.1.12)(@types/react@18.2.42)(react-dom@18.2.0)(react@18.2.0)
       '@clerk/nextjs':
-        specifier: 4.27.2
-        version: 4.27.2(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.27.3
+        version: 4.27.3(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
       '@clerk/themes':
         specifier: 1.7.9
         version: 1.7.9(react@18.2.0)
@@ -2959,8 +2959,8 @@ packages:
       - react
     dev: false
 
-  /@clerk/clerk-react@4.28.1(react@18.2.0):
-    resolution: {integrity: sha512-xfdLOqnbONwt+/kUh5+Fzs0wAJcLD4Bc0mM/af0Wlu1zdnggVR8da29fw+pZL5p8VGXavxP3hJdS9vvj5hFX+g==}
+  /@clerk/clerk-react@4.28.2(react@18.2.0):
+    resolution: {integrity: sha512-OXHbiYE/uVgS/JzQbKJOm+mOCmnXhAv9mXrbldfscJ25jA+aBLnBrYKIZKuX1RuCnP2NKQE6mi54rxu1JynJqw==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16'
@@ -2988,8 +2988,8 @@ packages:
       - react
     dev: false
 
-  /@clerk/nextjs@4.27.2(next@14.0.3)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-zIwzDa5ph9ZPBFSshtFK2LSH61NK0v9ifIPVsQSpVupUzUkJUat8s2n/8GRY93o/3zBTeaCJZQZyIejFCpO9gg==}
+  /@clerk/nextjs@4.27.3(next@14.0.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-AbOr1t+xwKexzdenOP06NQlYZSL40yHPVffznB53OhZgrrOvl+xPeprcA0RkamB18wunGWUuu7vjvQmhk7Ktcw==}
     engines: {node: '>=14'}
     peerDependencies:
       next: '>=10'
@@ -2997,7 +2997,7 @@ packages:
       react-dom: ^17.0.2 || ^18.0.0-0
     dependencies:
       '@clerk/backend': 0.34.2(react@18.2.0)
-      '@clerk/clerk-react': 4.28.1(react@18.2.0)
+      '@clerk/clerk-react': 4.28.2(react@18.2.0)
       '@clerk/clerk-sdk-node': 4.12.22(react@18.2.0)
       '@clerk/shared': 1.1.1(react@18.2.0)
       '@clerk/types': 3.58.0
