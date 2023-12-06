@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       turbo:
-        specifier: 1.10.16
-        version: 1.10.16
+        specifier: 1.11.0
+        version: 1.11.0
 
   apps/app:
     dependencies:
@@ -87,8 +87,8 @@ importers:
         specifier: 5.12.2
         version: 5.12.2(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.12.2
-        version: 5.12.2(@tanstack/react-query@5.12.2)(react@18.2.0)
+        specifier: 5.13.3
+        version: 5.13.3(@tanstack/react-query@5.12.2)(react@18.2.0)
       '@tanstack/react-query-persist-client':
         specifier: 5.12.2
         version: 5.12.2(@tanstack/react-query@5.12.2)(react@18.2.0)
@@ -169,8 +169,8 @@ importers:
         version: 9.0.1
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.1
-        version: 4.8.1(playwright-core@1.40.1)
+        specifier: 4.8.2
+        version: 4.8.2(playwright-core@1.40.1)
       '@ducanh2912/next-pwa':
         specifier: 9.7.2
         version: 9.7.2(next@14.0.3)(webpack@5.89.0)
@@ -338,8 +338,8 @@ importers:
         version: 1.0.7(tailwindcss@3.3.6)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.1
-        version: 4.8.1(playwright-core@1.40.1)
+        specifier: 4.8.2
+        version: 4.8.2(playwright-core@1.40.1)
       '@babel/core':
         specifier: 7.23.5
         version: 7.23.5
@@ -453,8 +453,8 @@ importers:
         version: 0.33.0
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.1
-        version: 4.8.1(playwright-core@1.40.1)
+        specifier: 4.8.2
+        version: 4.8.2(playwright-core@1.40.1)
       '@babel/core':
         specifier: 7.23.5
         version: 7.23.5
@@ -539,13 +539,13 @@ importers:
         version: 18.2.17
       '@vitejs/plugin-react-swc':
         specifier: 3.5.0
-        version: 3.5.0(vite@5.0.5)
+        version: 3.5.0(vite@5.0.6)
       typescript:
         specifier: 5.3.2
         version: 5.3.2
       vite:
-        specifier: 5.0.5
-        version: 5.0.5
+        specifier: 5.0.6
+        version: 5.0.6
 
   apps/doprocess:
     dependencies:
@@ -556,8 +556,8 @@ importers:
         specifier: 0.9.6
         version: 0.9.6(@tiptap/pm@2.1.12)(@types/react@18.2.42)(react-dom@18.2.0)(react@18.2.0)
       '@clerk/nextjs':
-        specifier: 4.27.3
-        version: 4.27.3(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.27.4
+        version: 4.27.4(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
       '@clerk/themes':
         specifier: 1.7.9
         version: 1.7.9(react@18.2.0)
@@ -616,8 +616,8 @@ importers:
         specifier: 5.12.2
         version: 5.12.2(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.12.2
-        version: 5.12.2(@tanstack/react-query@5.12.2)(react@18.2.0)
+        specifier: 5.13.3
+        version: 5.13.3(@tanstack/react-query@5.12.2)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.1.1
         version: 1.1.1
@@ -665,8 +665,8 @@ importers:
         version: 1.0.7(tailwindcss@3.3.6)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.1
-        version: 4.8.1(playwright-core@1.40.1)
+        specifier: 4.8.2
+        version: 4.8.2(playwright-core@1.40.1)
       '@babel/core':
         specifier: 7.23.5
         version: 7.23.5
@@ -786,8 +786,8 @@ importers:
         version: 1.0.7(tailwindcss@3.3.6)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.1
-        version: 4.8.1(playwright-core@1.40.1)
+        specifier: 4.8.2
+        version: 4.8.2(playwright-core@1.40.1)
       '@babel/core':
         specifier: 7.23.5
         version: 7.23.5
@@ -1037,8 +1037,8 @@ importers:
         version: 1.0.7(tailwindcss@3.3.6)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.1
-        version: 4.8.1(playwright-core@1.40.1)
+        specifier: 4.8.2
+        version: 4.8.2(playwright-core@1.40.1)
       '@babel/core':
         specifier: 7.23.5
         version: 7.23.5
@@ -1130,8 +1130,8 @@ importers:
         specifier: 14.0.3
         version: 14.0.3(eslint@8.55.0)(typescript@5.3.2)
       eslint-config-turbo:
-        specifier: 1.10.16
-        version: 1.10.16(eslint@8.55.0)
+        specifier: 1.11.0
+        version: 1.11.0(eslint@8.55.0)
       eslint-plugin-import:
         specifier: 2.29.0
         version: 2.29.0(@typescript-eslint/parser@6.13.2)(eslint-import-resolver-typescript@3.6.1)(eslint@8.55.0)
@@ -1498,8 +1498,8 @@ packages:
       default-browser-id: 3.0.0
     dev: true
 
-  /@axe-core/playwright@4.8.1(playwright-core@1.40.1):
-    resolution: {integrity: sha512-KC1X++UdRAwMLRvB+BIKFheyLHUnbJTL0t0Wbv6TJMozn2V2QyEtAcN6jyUiudtGiLUGhHCtj/eWorBnVZ4dAA==}
+  /@axe-core/playwright@4.8.2(playwright-core@1.40.1):
+    resolution: {integrity: sha512-9KOhX2tNuvqn9DzpBNyqoqNKRZBrexeSiN9irQ0sEdq8zH13JnatepCJxobuXn4UopNy6iIpP4342beMiH+MSQ==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
     dependencies:
@@ -2926,8 +2926,8 @@ packages:
       - supports-color
     dev: false
 
-  /@clerk/backend@0.34.2(react@18.2.0):
-    resolution: {integrity: sha512-ouulkcT6kfbAPw3w0vbkl758KzQ2y9UUnuhRJ5dY3SPGNjJnpes1BNETLnA1O3llZVV5yYexluhee4XmFcwV3A==}
+  /@clerk/backend@0.34.3(react@18.2.0):
+    resolution: {integrity: sha512-0QZuWl02PR+g9jx87uEib0ZcEYfZOcn3/dob5zV0T7N/ELfC+R7Ir0EXUWyzlnz3R8lqDGKP4vYsbrFAGIdguw==}
     engines: {node: '>=14'}
     dependencies:
       '@clerk/shared': 1.1.1(react@18.2.0)
@@ -2955,11 +2955,11 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /@clerk/clerk-sdk-node@4.12.22(react@18.2.0):
-    resolution: {integrity: sha512-O1PWDzmECO8VoGEZG8m2QYkJzDDMiUqTGsn73u3ki1V2bX24BeFokSKlsLgklgpVXUhSeKp8A8wBrDOOY2Qpew==}
+  /@clerk/clerk-sdk-node@4.12.23(react@18.2.0):
+    resolution: {integrity: sha512-i+BC+cWOASHxlemZp8yPpEEA0pp9iDaM4ejnn2tOyuMgFNAPRhXpE2f7mF6EuyTQ/ST3ZoxUsq7zAL1B4XE5Nw==}
     engines: {node: '>=14'}
     dependencies:
-      '@clerk/backend': 0.34.2(react@18.2.0)
+      '@clerk/backend': 0.34.3(react@18.2.0)
       '@clerk/shared': 1.1.1(react@18.2.0)
       '@clerk/types': 3.58.0
       '@types/cookies': 0.7.7
@@ -2972,17 +2972,17 @@ packages:
       - react
     dev: false
 
-  /@clerk/nextjs@4.27.3(next@14.0.3)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-AbOr1t+xwKexzdenOP06NQlYZSL40yHPVffznB53OhZgrrOvl+xPeprcA0RkamB18wunGWUuu7vjvQmhk7Ktcw==}
+  /@clerk/nextjs@4.27.4(next@14.0.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ZMygMDjSAapx2S/HKMTrm80EtzQfR4rYNAq/8/a0pnjAgYIm1Bi+ero5hbNOO5Fo66mfy98fXNCAkqxwkKIodw==}
     engines: {node: '>=14'}
     peerDependencies:
       next: '>=10'
       react: ^17.0.2 || ^18.0.0-0
       react-dom: ^17.0.2 || ^18.0.0-0
     dependencies:
-      '@clerk/backend': 0.34.2(react@18.2.0)
+      '@clerk/backend': 0.34.3(react@18.2.0)
       '@clerk/clerk-react': 4.28.2(react@18.2.0)
-      '@clerk/clerk-sdk-node': 4.12.22(react@18.2.0)
+      '@clerk/clerk-sdk-node': 4.12.23(react@18.2.0)
       '@clerk/shared': 1.1.1(react@18.2.0)
       '@clerk/types': 3.58.0
       next: 14.0.3(@babel/core@7.23.5)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.5)
@@ -7757,8 +7757,8 @@ packages:
     resolution: {integrity: sha512-WbZztNmKq0t6QjdNmHzezbi/uifYo9j6e2GLJkodsYaYUlzMbAp91RDyeHkIZrm7EfO4wa6Sm5sxJZm5SPlh6w==}
     dev: false
 
-  /@tanstack/query-devtools@5.12.1:
-    resolution: {integrity: sha512-AUWLgdZEYq/ckMZrtKpofOwqxuFiEIdy3gZOh/ouIBVra9ijXVTxYt5cZFSjXJT4q/o0DMii6xMZuIJx2qXZ6g==}
+  /@tanstack/query-devtools@5.13.3:
+    resolution: {integrity: sha512-1acztPKZexvM9Ns2T0aq4rMVSDA3VGdB73KF7zT/KNVl6VfnBvs24wuIRVSPZKqyZznZTzT3/DzcpntYqg9hmw==}
     dev: false
 
   /@tanstack/query-persist-client-core@5.12.1:
@@ -7774,13 +7774,13 @@ packages:
       '@tanstack/query-persist-client-core': 5.12.1
     dev: false
 
-  /@tanstack/react-query-devtools@5.12.2(@tanstack/react-query@5.12.2)(react@18.2.0):
-    resolution: {integrity: sha512-EpjYxwUBj+CuzAiB++FMeHzNey4TynuudfWVMsZg0uzLrnR5I0j1CWHJkNsTutb/Db9TNG1Ae66n8ywVvPd1gQ==}
+  /@tanstack/react-query-devtools@5.13.3(@tanstack/react-query@5.12.2)(react@18.2.0):
+    resolution: {integrity: sha512-ct58CMRrcjANRWCQ6cxzSUtme2jlX5au63+ckhMONob8bIk5VRfUEi4R49AWNJFL5haTBKe0InC0AV4bWi75VQ==}
     peerDependencies:
       '@tanstack/react-query': ^5.12.2
       react: ^18.0.0
     dependencies:
-      '@tanstack/query-devtools': 5.12.1
+      '@tanstack/query-devtools': 5.13.3
       '@tanstack/react-query': 5.12.2(react@18.2.0)
       react: 18.2.0
     dev: false
@@ -8810,13 +8810,13 @@ packages:
       server-only: 0.0.1
     dev: false
 
-  /@vitejs/plugin-react-swc@3.5.0(vite@5.0.5):
+  /@vitejs/plugin-react-swc@3.5.0(vite@5.0.6):
     resolution: {integrity: sha512-1PrOvAaDpqlCV+Up8RkAh9qaiUjoDUcjtttyhXDKw53XA6Ve16SOp6cCOpRs8Dj8DqUQs6eTW5YkLcLJjrXAig==}
     peerDependencies:
       vite: ^4 || ^5
     dependencies:
       '@swc/core': 1.3.96
-      vite: 5.0.5
+      vite: 5.0.6
     transitivePeerDependencies:
       - '@swc/helpers'
     dev: true
@@ -11483,13 +11483,13 @@ packages:
       - supports-color
     dev: false
 
-  /eslint-config-turbo@1.10.16(eslint@8.55.0):
-    resolution: {integrity: sha512-O3NQI72bQHV7FvSC6lWj66EGx8drJJjuT1kuInn6nbMLOHdMBhSUX/8uhTAlHRQdlxZk2j9HtgFCIzSc93w42g==}
+  /eslint-config-turbo@1.11.0(eslint@8.55.0):
+    resolution: {integrity: sha512-PBiDoO1ZRHBXoydfn/qYazJTwmoRNXdsf3CBg6j7BMVvuAPa39e7ao6KccsDplyLgV2jIjeRtra/q1CUaWs2kg==}
     peerDependencies:
       eslint: '>6.6.0'
     dependencies:
       eslint: 8.55.0
-      eslint-plugin-turbo: 1.10.16(eslint@8.55.0)
+      eslint-plugin-turbo: 1.11.0(eslint@8.55.0)
     dev: false
 
   /eslint-import-resolver-node@0.3.9:
@@ -11673,8 +11673,8 @@ packages:
       tailwindcss: 3.3.6
     dev: false
 
-  /eslint-plugin-turbo@1.10.16(eslint@8.55.0):
-    resolution: {integrity: sha512-ZjrR88MTN64PNGufSEcM0tf+V1xFYVbeiMeuIqr0aiABGomxFLo4DBkQ7WI4WzkZtWQSIA2sP+yxqSboEfL9MQ==}
+  /eslint-plugin-turbo@1.11.0(eslint@8.55.0):
+    resolution: {integrity: sha512-u3GeDFuKUMcQOPi5euJIAivTvJBPMZL62LVrNc4uGksGMYekl7Dl3yGcevcUpebm7XDValyWcw1iHZjUm3DfCg==}
     peerDependencies:
       eslint: '>6.6.0'
     dependencies:
@@ -18632,64 +18632,64 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /turbo-darwin-64@1.10.16:
-    resolution: {integrity: sha512-+Jk91FNcp9e9NCLYlvDDlp2HwEDp14F9N42IoW3dmHI5ZkGSXzalbhVcrx3DOox3QfiNUHxzWg4d7CnVNCuuMg==}
+  /turbo-darwin-64@1.11.0:
+    resolution: {integrity: sha512-yLDeJ7QgpI1Niw87ydRNvygX67Dra+6MnxR88vwXnQJKsmHTKycBhY9w3Bhe5xvnIg4JoEWoEF5EJtw6ShrlEw==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64@1.10.16:
-    resolution: {integrity: sha512-jqGpFZipIivkRp/i+jnL8npX0VssE6IAVNKtu573LXtssZdV/S+fRGYA16tI46xJGxSAivrZ/IcgZrV6Jk80bw==}
+  /turbo-darwin-arm64@1.11.0:
+    resolution: {integrity: sha512-lZGlfTG6+u3R7+6eVY9j/07WpVF/tx8UNkmRWfMNt4ZGSEBMg6A+Vimvp+rni92WdPhD/rhxv+qYI/kco9hNXg==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64@1.10.16:
-    resolution: {integrity: sha512-PpqEZHwLoizQ6sTUvmImcRmACyRk9EWLXGlqceogPZsJ1jTRK3sfcF9fC2W56zkSIzuLEP07k5kl+ZxJd8JMcg==}
+  /turbo-linux-64@1.11.0:
+    resolution: {integrity: sha512-I88/WieHzTZ8V2y0j79RSjVERPp0IJTynTwLi7ddYX0PahkuyaHs1p8ktFMcs6awnJMeT6spaXlyzv5ZxnAdkg==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64@1.10.16:
-    resolution: {integrity: sha512-TMjFYz8to1QE0fKVXCIvG/4giyfnmqcQIwjdNfJvKjBxn22PpbjeuFuQ5kNXshUTRaTJihFbuuCcb5OYFNx4uw==}
+  /turbo-linux-arm64@1.11.0:
+    resolution: {integrity: sha512-jHsKuTFa7KwrA/FIxOnyXnfSEgDEUv0UVcseqQhP0VbdL+En93ZdBZ9S9/lI6VWooXrCqPooBmC+M/6jmwY/Ig==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64@1.10.16:
-    resolution: {integrity: sha512-+jsf68krs0N66FfC4/zZvioUap/Tq3sPFumnMV+EBo8jFdqs4yehd6+MxIwYTjSQLIcpH8KoNMB0gQYhJRLZzw==}
+  /turbo-windows-64@1.11.0:
+    resolution: {integrity: sha512-7u/1GoMallGDOTg4fnKoJmvBkf2pUCOcA0Z7NbwFB6GOa7q1Su4AaPs6Iy6Tyqrmj3vDHKSXByHwfz+o0cng/g==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64@1.10.16:
-    resolution: {integrity: sha512-sKm3hcMM1bl0B3PLG4ifidicOGfoJmOEacM5JtgBkYM48ncMHjkHfFY7HrJHZHUnXM4l05RQTpLFoOl/uIo2HQ==}
+  /turbo-windows-arm64@1.11.0:
+    resolution: {integrity: sha512-39MNaZ7RnbINEnpeAfB++fmH6p99RhbeeC8n2IXqG61Zrck5AA59Jm8DXpfOGR6Im93iHXSDox8qF3bb8V4amQ==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo@1.10.16:
-    resolution: {integrity: sha512-2CEaK4FIuSZiP83iFa9GqMTQhroW2QryckVqUydmg4tx78baftTOS0O+oDAhvo9r9Nit4xUEtC1RAHoqs6ZEtg==}
+  /turbo@1.11.0:
+    resolution: {integrity: sha512-zIqJs/x1zzIIdwufhk80o7cQc9fIdHdweWRNXbK+Vjf9IaM2eSslcYyo40s+Kg/oiIOpdLM8hV7IUQst8KIyDA==}
     hasBin: true
     optionalDependencies:
-      turbo-darwin-64: 1.10.16
-      turbo-darwin-arm64: 1.10.16
-      turbo-linux-64: 1.10.16
-      turbo-linux-arm64: 1.10.16
-      turbo-windows-64: 1.10.16
-      turbo-windows-arm64: 1.10.16
+      turbo-darwin-64: 1.11.0
+      turbo-darwin-arm64: 1.11.0
+      turbo-linux-64: 1.11.0
+      turbo-linux-arm64: 1.11.0
+      turbo-windows-64: 1.11.0
+      turbo-windows-arm64: 1.11.0
     dev: true
 
   /type-check@0.4.0:
@@ -19251,8 +19251,8 @@ packages:
       d3-timer: 3.0.1
     dev: false
 
-  /vite@5.0.5:
-    resolution: {integrity: sha512-OekeWqR9Ls56f3zd4CaxzbbS11gqYkEiBtnWFFgYR2WV8oPJRRKq0mpskYy/XaoCL3L7VINDhqqOMNDiYdGvGg==}
+  /vite@5.0.6:
+    resolution: {integrity: sha512-MD3joyAEBtV7QZPl2JVVUai6zHms3YOmLR+BpMzLlX2Yzjfcc4gTgNi09d/Rua3F4EtC8zdwPU8eQYyib4vVMQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:

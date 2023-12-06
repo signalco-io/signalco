@@ -42,7 +42,7 @@
         "@signalco/ui-icons": "workspace:*",
         "@tanstack/query-sync-storage-persister": "5.12.1",
         "@tanstack/react-query": "5.12.2",
-        "@tanstack/react-query-devtools": "5.12.2",
+        "@tanstack/react-query-devtools": "5.13.3",
         "@tanstack/react-query-persist-client": "5.12.2",
         "@vercel/analytics": "1.1.1",
         "@vvo/tzdb": "6.118.0",
@@ -71,7 +71,7 @@
         "uuid": "9.0.1"
     },
     "devDependencies": {
-        "@axe-core/playwright": "4.8.1",
+        "@axe-core/playwright": "4.8.2",
         "@ducanh2912/next-pwa": "9.7.2",
         "@next/bundle-analyzer": "14.0.3",
         "@playwright/test": "1.40.1",

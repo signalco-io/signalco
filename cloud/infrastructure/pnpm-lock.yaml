@@ -9,11 +9,11 @@ dependencies:
     specifier: 1.1.4
     version: 1.1.4
   '@pulumi/aws':
-    specifier: 6.13.0
-    version: 6.13.0
+    specifier: 6.13.1
+    version: 6.13.1
   '@pulumi/azure-native':
-    specifier: 2.20.1
-    version: 2.20.1
+    specifier: 2.21.0
+    version: 2.21.0
   '@pulumi/cloudflare':
     specifier: 5.16.0
     version: 5.16.0
@@ -365,8 +365,8 @@ packages:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
     dev: false
 
-  /@pulumi/aws@6.13.0:
-    resolution: {integrity: sha512-ZmOCSglyCgsALYtF2ORvZNeJaPBErN5m2ZuxKYiWFjconI1+fdnsr2I1YHyLXoqBzj1EINllaHvl5LY1F+ZXNQ==}
+  /@pulumi/aws@6.13.1:
+    resolution: {integrity: sha512-/yrcZVaYx45gaaQe8X4iPA368ZNk8WbETJ4BwUzcDK9Om36o4Meqfh7JTGpruAgu4LmQLwiMYj8Bznk7lbtbmA==}
     dependencies:
       '@pulumi/pulumi': 3.95.0
       builtin-modules: 3.0.0
@@ -377,8 +377,8 @@ packages:
       - supports-color
     dev: false
 
-  /@pulumi/azure-native@2.20.1:
-    resolution: {integrity: sha512-glyRRE+OFkpyGLRM/Tu4Nh2LV+smmewpBDtEQqpjYLhUzKvwjnLyMKKrg9Yibmf+GGAd5fZ/yjlOFqPnOuCWuw==}
+  /@pulumi/azure-native@2.21.0:
+    resolution: {integrity: sha512-swdQq5ihBoV6vFzYNnSFWPfyV/AgSikKt051Bhiy/D87+vgJYgdUcmppPBbCvvcIhlPDGpEOnED6/td+xVTtvg==}
     dependencies:
       '@pulumi/pulumi': 3.95.0
     transitivePeerDependencies:
