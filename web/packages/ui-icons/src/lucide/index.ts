@@ -26,6 +26,7 @@ export {
     ChevronsRight as Right,
     Copy,
     Copy as Duplicate,
+    MessageCircle as Comment,
     Check,
     CircleSlashed as Disabled,
     CircleEqual,
