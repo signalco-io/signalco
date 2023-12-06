@@ -49,6 +49,7 @@ export {
     Send,
     Users as People,
     Minimize,
+    Inbox,
     Link2 as Link,
     Link2Off as LinkOff,
     AlertTriangle as Warning,
