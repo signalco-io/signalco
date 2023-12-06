@@ -99,7 +99,7 @@
         "rimraf": "5.0.5",
         "sass": "1.69.5",
         "sass-loader": "13.3.2",
-        "typescript": "5.3.2"
+        "typescript": "5.3.3"
     },
     "nextBundleAnalysis": {
         "budget": 358400,
