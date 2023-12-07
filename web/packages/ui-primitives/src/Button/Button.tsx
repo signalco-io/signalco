@@ -7,7 +7,7 @@ import { cx } from '../cx'
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: VariantKeys | 'link';
-    size?: 'sm' | 'md' | 'lg';
+    size?: 'xs' | 'sm' | 'md' | 'lg';
     startDecorator?: ReactNode;
     endDecorator?: ReactNode;
     loading?: boolean;
@@ -47,6 +47,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
                     variant === 'solid' && 'bg-primary text-primary-foreground hover:bg-primary/90',
                     variant === 'link' && 'underline-offset-4 hover:underline text-primary',
                     (!size || size === 'md') && 'h-10 py-2 px-4',
+                    size === 'xs' && 'h-7 px-2 rounded-md gap-0.5',
                     size === 'sm' && 'h-9 px-3 rounded-md gap-0.5',
                     size === 'lg' && 'h-11 px-6 rounded-md gap-2',
                     fullWidth && 'w-full',
