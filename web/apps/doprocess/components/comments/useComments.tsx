@@ -1,5 +1,6 @@
 'use client';
 
+import { nanoid } from 'nanoid';
 import { UseMutationResult, UseQueryResult, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { CommentItem } from './Comments';
 
@@ -20,6 +21,9 @@ export function useComments(): {
     const mutateUpsert = useMutation({
         mutationFn: async (comment: CommentItem) => {
             const comments = JSON.parse(localStorage.getItem('comments') ?? '[]') as CommentItem[];
+            if (!comment.id) {
+                comment.id = nanoid();
+            }
             const currentComment = comments.find((c: CommentItem) => Boolean(comment.id) && c.id === comment.id);
             if (currentComment) {
                 Object.assign(currentComment, comment);
@@ -41,6 +45,8 @@ export function useComments(): {
                 comments.splice(comments.indexOf(currentComment), 1);
             }
             localStorage.setItem('comments', JSON.stringify(comments));
+        },
+        onSuccess: () => {
             client.invalidateQueries({
                 queryKey: ['comments']
             });
