@@ -6,12 +6,13 @@ import { Row } from '@signalco/ui-primitives/Row';
 import { Popper } from '@signalco/ui-primitives/Popper';
 import { Input } from '@signalco/ui-primitives/Input';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { Divider } from '@signalco/ui-primitives/Divider';
 import { cx } from '@signalco/ui-primitives/cx';
-import { Card } from '@signalco/ui-primitives/Card';
-import { Check, Delete, Send } from '@signalco/ui-icons';
+import { Send } from '@signalco/ui-icons';
 import { orderBy } from '@signalco/js';
 import { useComments } from './useComments';
 import { useCommentItemRects } from './useCommentItemRects';
+import { CommentThreadItem } from './CommentThreadItem';
 import { CommentSelectionHighlight } from './CommentSelectionHighlight';
 import { CommentItem } from './Comments';
 import { CommentIcon } from './CommentIcon';
@@ -27,9 +28,17 @@ export function CommentBubble({
     const lastRect = orderBy(selectionRects, r => r.bottom).at(-1);
     const { upsert } = useComments();
 
+    const handleResolveComment = async () => {
+        await upsert.mutateAsync({
+            ...commentItem,
+            resolved: true
+        });
+    };
+
     const handleCreateComment = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
+        e.currentTarget.reset();
         await upsert.mutateAsync({
             ...commentItem,
             thread: {
@@ -42,13 +51,6 @@ export function CommentBubble({
                     }
                 ]
             }
-        });
-    };
-
-    const handleResolveComment = async () => {
-        await upsert.mutateAsync({
-            ...commentItem,
-            resolved: true
         });
     };
 
@@ -80,35 +82,54 @@ export function CommentBubble({
                         </span>
                     </div>
                 )}
-                side="right"
+                className="bg-background text-primary"
+                sideOffset={-32}
+                align="start"
+                alignOffset={32}
                 open={open}
                 onOpenChange={setOpen}
             >
-                <Card>
-                    <Stack spacing={2}>
-                        <Row>
-                            <IconButton variant="plain" onClick={handleResolveComment}>
-                                <Check />
-                            </IconButton>
-                        </Row>
-                        {commentItem.thread.items.map((comment, i) => (
-                            <div key={i} className="flex items-center gap-2">
-                                <span className="text-sm">{comment.text}</span>
-                            </div>
-                        ))}
+                <div>
+                    <Stack>
+                        {commentItem.thread.items.length > 0 && (
+                            <>
+                                <Stack spacing={1} className="py-2">
+                                    {commentItem.thread.items.map((comment, i) => (
+                                        <>
+                                            <div className="px-4 py-2">
+                                                <CommentThreadItem
+                                                    key={comment.id}
+                                                    first={i === 0}
+                                                    comment={comment}
+                                                    onDone={handleResolveComment} />
+                                            </div>
+                                            {i !== commentItem.thread.items.length - 1 && (
+                                                <Divider />
+                                            )}
+                                        </>
+                                    ))}
+                                </Stack>
+                                <Divider />
+                            </>
+                        )}
                         <form onSubmit={handleCreateComment}>
-                            <Stack spacing={1}>
-                                <Input name="text" placeholder="Leave comment..." autoFocus />
-                                <Row justifyContent="space-between">
+                            <Stack className="bg-card px-1 py-4 pt-2">
+                                <Input
+                                    variant="plain"
+                                    name="text"
+                                    placeholder="Leave comment..."
+                                    autoFocus
+                                    autoComplete={'off'} />
+                                <Row justifyContent="space-between" className="px-3">
                                     <div></div>
-                                    <IconButton variant="solid" size="sm" type="submit">
+                                    <IconButton variant="solid" size="xs" type="submit">
                                         <Send />
                                     </IconButton>
                                 </Row>
                             </Stack>
                         </form>
                     </Stack>
-                </Card>
+                </div>
             </Popper>
         </>
     );
