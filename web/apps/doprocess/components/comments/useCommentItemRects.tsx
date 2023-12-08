@@ -9,7 +9,7 @@ import { CommentItemPosition } from './Comments';
 export function useCommentItemRects(commentSelection: CommentItemPosition | null | undefined) {
     const [selectionRects, setSelectionRects] = useState<DOMRect[]>([]);
 
-    const rect = useWindowRect(window);
+    const windowRect = useWindowRect(window);
 
     useEffect(() => {
         if (!commentSelection) {
@@ -81,7 +81,7 @@ export function useCommentItemRects(commentSelection: CommentItemPosition | null
             range.setEnd(lastElementOrTextNode, Math.min(endOffset, lastElementOrTextNode.textContent?.length ?? 0));
             setSelectionRects([...range.getClientRects()]);
         }
-    }, [commentSelection, rect]);
+    }, [commentSelection, windowRect]);
 
     return selectionRects;
 }

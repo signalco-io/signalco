@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { getElementSelector } from '@signalco/js';
@@ -12,7 +13,6 @@ import { CommentSelectionHighlight } from './CommentSelectionHighlight';
 import { CommentsGlobalProps, CommentSelection, CommentPoint } from './Comments';
 import { CommentPointOverlay } from './CommentPointOverlay';
 import { CommentBubble } from './CommentBubble';
-
 
 export function CommentsGlobal({
     reviewParamKey = 'review'

@@ -77,7 +77,7 @@ export function CommentBubble({
                         }}>
                         <CommentIcon className="hover:scale-110 hover:brightness-75" />
                         <span
-                            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs font-semibold">
+                            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-white">
                             {commentItem.thread.items.length}
                         </span>
                     </div>
