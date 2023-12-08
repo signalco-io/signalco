@@ -50,7 +50,11 @@ export const knownSecureHeadersExternalUrls = {
         imgSrc: ['https://img.clerk.com'],
         scriptSrc: ['https://*.clerk.accounts.dev'],
         connectSrc: ['https://*.clerk.accounts.dev', 'https://img.clerk.com']
-    }
+    },
+    meticulous: {
+        connectSrc: ['https://*.meticulous.ai', "https://*.sentry-cdn.com", "https://*.amazonaws.com", "https://*.sentry.io"],
+        scriptSrc: ['https://*.meticulous.ai', "https://*.sentry-cdn.com", "https://*.amazonaws.com", "https://*.sentry.io"],
+    },
 };
 
 

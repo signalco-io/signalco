@@ -36,8 +36,9 @@ const nextConfig = {
                     knownSecureHeadersExternalUrls.google,
                     knownSecureHeadersExternalUrls.clarity,
                     knownSecureHeadersExternalUrls.vercel,
-                    knownSecureHeadersExternalUrls.checkly
-                ]
+                    knownSecureHeadersExternalUrls.checkly,
+                    isDevelopment ? knownSecureHeadersExternalUrls.meticulous : null,
+                ].filter(Boolean)
             ))
         }];
     },
