@@ -6,7 +6,7 @@ import { CommentItem } from './Comments';
 
 export function useComments(): {
     query: UseQueryResult<CommentItem[], Error>;
-    upsert: UseMutationResult<void, Error, CommentItem, unknown>;
+    upsert: UseMutationResult<string, Error, CommentItem, unknown>;
     delete: UseMutationResult<void, Error, string, unknown>;
 } {
     const client = useQueryClient();
@@ -34,6 +34,7 @@ export function useComments(): {
             client.invalidateQueries({
                 queryKey: ['comments']
             });
+            return comment.id;
         }
     });
 

@@ -12,7 +12,7 @@ import { CommentItemThreadItem } from './Comments';
 
 export function CommentThreadItem({ comment, first, onDone }: { comment: CommentItemThreadItem; first?: boolean; onDone?: () => void; }) {
     const { text } = comment;
-    const quote = 'quote';//comment.quote;
+    const quote: string | undefined = undefined;//'quote';//comment.quote;
     const author = 'Guest';//comment.author;
     const avatarFallback = author[0]?.toUpperCase() ?? '';
 

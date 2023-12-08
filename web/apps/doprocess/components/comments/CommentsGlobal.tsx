@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { nanoid } from 'nanoid';
 import { getElementSelector } from '@signalco/js';
 import { useWindowEvent } from '@signalco/hooks/useWindowEvent';
 import { useDocumentEvent } from '@signalco/hooks/useDocumentEvent';
@@ -10,7 +9,7 @@ import { useCommentItemRects } from './useCommentItemRects';
 import { CommentToolbar } from './CommentToolbar';
 import { CommentSelectionPopover } from './CommentSelectionPopover';
 import { CommentSelectionHighlight } from './CommentSelectionHighlight';
-import { CommentsGlobalProps, CommentSelection, CommentPoint } from './Comments';
+import { CommentsGlobalProps, CommentSelection, CommentPoint, CommentItem } from './Comments';
 import { CommentPointOverlay } from './CommentPointOverlay';
 import { CommentBubble } from './CommentBubble';
 
@@ -18,8 +17,9 @@ export function CommentsGlobal({
     reviewParamKey = 'review'
 }: CommentsGlobalProps) {
     const [creatingCommentSelection, setCreatingCommentSelection] = useState<CommentSelection>();
+    const [creatingComment, setCreatingComment] = useState<CommentItem>();
 
-    const { query: commentItems, upsert: commentUpsert } = useComments();
+    const { query: commentItems } = useComments();
 
     const [creatingCommentPoint, setCreatingCommentPoint] = useState(false);
 
@@ -61,7 +61,7 @@ export function CommentsGlobal({
         }
 
         setCreatingCommentSelection(undefined);
-        await commentUpsert.mutateAsync({
+        setCreatingComment({
             position: creatingCommentSelection,
             thread: { items: [] }
         });
@@ -69,7 +69,7 @@ export function CommentsGlobal({
 
     const handleCreateCommentPoint = async (commentPoint: CommentPoint) => {
         setCreatingCommentPoint(false);
-        await commentUpsert.mutateAsync({
+        setCreatingComment({
             position: commentPoint,
             thread: { items: [] }
         });
@@ -83,10 +83,14 @@ export function CommentsGlobal({
 
     return (
         <>
-            {commentItems.data?.map((commentItem) => (
+            {(creatingComment ? [...(commentItems.data ?? []), creatingComment] : (commentItems.data ?? [])).map((commentItem) => (
                 <CommentBubble
-                    key={commentItem.id ?? (`new-commentitem-${nanoid()}`)}
-                    commentItem={commentItem} />
+                    key={commentItem.id}
+                    commentItem={commentItem}
+                    creating={!commentItem.id}
+                    onCreated={() => setCreatingComment(undefined)}
+                    onCanceled={() => setCreatingComment(undefined)}
+                />
             ))}
             {creatingCommentSelection && (
                 <CommentSelectionHighlight commentSelection={creatingCommentSelection} />

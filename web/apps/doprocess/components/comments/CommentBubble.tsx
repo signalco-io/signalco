@@ -1,6 +1,6 @@
 'use client';
 
-import { HTMLAttributes, useState } from 'react';
+import { Fragment, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Popper } from '@signalco/ui-primitives/Popper';
@@ -18,11 +18,15 @@ import { CommentItem } from './Comments';
 import { CommentIcon } from './CommentIcon';
 
 type CommentBubbleProps = HTMLAttributes<HTMLDivElement> & {
+    defaultOpen?: boolean;
+    creating?: boolean;
+    onCreated?: (commentItemId: string) => void;
+    onCanceled?: () => void;
     commentItem: CommentItem;
 };
 
 export function CommentBubble({
-    commentItem, className, style
+    defaultOpen, creating, onCreated, onCanceled, commentItem, className, style
 }: CommentBubbleProps) {
     const selectionRects = useCommentItemRects(commentItem.position);
     const lastRect = orderBy(selectionRects, r => r.bottom).at(-1);
@@ -39,7 +43,7 @@ export function CommentBubble({
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         e.currentTarget.reset();
-        await upsert.mutateAsync({
+        const commentId = await upsert.mutateAsync({
             ...commentItem,
             thread: {
                 ...commentItem.thread,
@@ -52,9 +56,19 @@ export function CommentBubble({
                 ]
             }
         });
+
+        if (creating) {
+            onCreated?.(commentId);
+        }
     };
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(creating ?? defaultOpen);
+    const handleOpenChange = (open: boolean) => {
+        if (!open && creating) {
+            onCanceled?.();
+        }
+        setOpen(open);
+    }
 
     return (
         <>
@@ -87,18 +101,18 @@ export function CommentBubble({
                 align="start"
                 alignOffset={32}
                 open={open}
-                onOpenChange={setOpen}
+                onOpenChange={handleOpenChange}
             >
                 <div>
                     <Stack>
+                        <Stack className="max-h-96 overflow-y-scroll">
                         {commentItem.thread.items.length > 0 && (
                             <>
-                                <Stack spacing={1} className="py-2">
+                                    <Stack spacing={1} className="py-2">
                                     {commentItem.thread.items.map((comment, i) => (
-                                        <>
+                                        <Fragment key={comment.id}>
                                             <div className="px-4 py-2">
                                                 <CommentThreadItem
-                                                    key={comment.id}
                                                     first={i === 0}
                                                     comment={comment}
                                                     onDone={handleResolveComment} />
@@ -106,12 +120,13 @@ export function CommentBubble({
                                             {i !== commentItem.thread.items.length - 1 && (
                                                 <Divider />
                                             )}
-                                        </>
+                                        </Fragment>
                                     ))}
                                 </Stack>
                                 <Divider />
                             </>
                         )}
+                        </Stack>
                         <form onSubmit={handleCreateComment}>
                             <Stack className="bg-card px-1 py-4 pt-2">
                                 <Input
