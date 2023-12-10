@@ -75,10 +75,10 @@ export default function LandingPage() {
                     description: 'For small teams or individuals that manage more processes.',
                     asset: '$19/mo',
                     features: [
-                        { asset: <Check />, header: 'Everything from free plan...' },
-                        { asset: <Check />, header: 'AI assistant' },
-                        { asset: <Check />, header: 'Team/Group management' },
-                        { asset: <Check />, header: 'Unlimited processes' }
+                        { asset: <Check />, description: 'Everything from free plan...' },
+                        { asset: <Check />, description: 'AI assistant' },
+                        { asset: <Check />, description: 'Team/Group management' },
+                        { asset: <Check />, description: 'Unlimited processes' }
                     ],
                     ctas: [
                         { label: 'Get Started', href: KnownPages.Runs },
