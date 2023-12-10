@@ -13,8 +13,6 @@ export default function UserAvatar({ user }: { user: User | undefined }) {
     }
 
     return (
-        <Avatar src={user?.picture ?? '#'} alt={userNameInitials}>
-            {userNameInitials}
-        </Avatar>
+        <Avatar src={user?.picture ?? '#'} alt={userNameInitials} />
     );
 }

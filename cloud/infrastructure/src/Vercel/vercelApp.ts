@@ -22,6 +22,6 @@ export function vercelApp(prefix: string, name: string, {
         outputDirectory,
         name: `signalco-${name}`,
         rootDirectory: `web/apps/${name}`,
-        serverlessFunctionRegion: 'iad1',
+        serverlessFunctionRegion: 'dub1',
     });
 }

@@ -6,7 +6,7 @@
     "private": true,
     "type": "module",
     "engines": {
-        "node": "18.x"
+        "node": "20.x"
     },
     "scripts": {
         "dev": "next -p 4001",
@@ -43,8 +43,8 @@
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/color": "3.0.6",
-        "@types/node": "18.19.3",
-        "@types/react": "18.2.42",
+        "@types/node": "20.10.4",
+        "@types/react": "18.2.43",
         "@types/react-dom": "18.2.17",
         "@types/sharp": "0.31.1",
         "cross-env": "7.0.3",
