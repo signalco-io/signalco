@@ -23,6 +23,12 @@ jobs:
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
           TURBO_TEAM: signalco
           TURBO_REMOTE_ONLY: true
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+          CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+          DOPROCESS_DATABASE_HOST: ${{ secrets.DOPROCESS_DATABASE_HOST }}
+          DOPROCESS_DATABASE_USERNAME: ${{ secrets.DOPROCESS_DATABASE_USERNAME }}
+          DOPROCESS_DATABASE_PASSWORD: ${{ secrets.DOPROCESS_DATABASE_PASSWORD }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         container:
           image: mcr.microsoft.com/playwright:v1.40.1-focal
         steps:
