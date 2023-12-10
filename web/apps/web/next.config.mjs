@@ -36,8 +36,7 @@ const nextConfig = {
                     knownSecureHeadersExternalUrls.google,
                     knownSecureHeadersExternalUrls.clarity,
                     knownSecureHeadersExternalUrls.vercel,
-                    knownSecureHeadersExternalUrls.checkly,
-                    isDevelopment ? knownSecureHeadersExternalUrls.meticulous : null,
+                    knownSecureHeadersExternalUrls.checkly
                 ].filter(Boolean)
             ))
         }];
