@@ -50,6 +50,7 @@ export function isImageDataUrl(url: string) {
 
 export function slug(value: string | undefined) {
     if (!value) return undefined;
+    if (value.length > 1000) return undefined; // Too large to generate slug, avoid DoS
     return value
         .toLowerCase()
         .trim()
