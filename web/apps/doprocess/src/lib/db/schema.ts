@@ -1,9 +1,13 @@
 import { datetime, index, int, json, mysqlTable, serial, text, uniqueIndex, varchar } from 'drizzle-orm/mysql-core';
 import { relations, sql } from 'drizzle-orm';
 
+export const withPublicIdTable = {
+    publicId: varchar('public_id', { length: 32 }).notNull().unique(),
+};
+
 export const process = mysqlTable('process', {
     id: serial('id').primaryKey(),
-    publicId: varchar('public_id', { length: 32 }).notNull().unique(),
+    ...withPublicIdTable,
     name: varchar('name', { length: 255 }).notNull(),
     sharedWithUsers: json('shared_with_users').$type<string[]>().notNull(),
     createdBy: varchar('created_by', { length: 255 }).notNull(),
@@ -18,7 +22,7 @@ export type Process = typeof process.$inferSelect;
 
 export const processRun = mysqlTable('process_run', {
     id: serial('id').primaryKey(),
-    publicId: varchar('public_id', { length: 32 }).notNull().unique(),
+    ...withPublicIdTable,
     processId: int('process_id').notNull(),
     name: varchar('name', { length: 255 }).notNull(),
     state: varchar('state', { length: 255 }).notNull(),
@@ -35,7 +39,7 @@ export type ProcessRun = typeof processRun.$inferSelect;
 
 export const taskDefinition = mysqlTable('task_definition', {
     id: serial('id').primaryKey(),
-    publicId: varchar('public_id', { length: 32 }).notNull().unique(),
+    ...withPublicIdTable,
     processId: int('process_id').notNull(),
     text: text('text'),
     order: varchar('order', { length: 255 }).notNull(),
@@ -54,7 +58,7 @@ export type TaskDefinition = typeof taskDefinition.$inferSelect;
 
 export const document = mysqlTable('document', {
     id: serial('id').primaryKey(),
-    publicId: varchar('public_id', { length: 32 }).notNull().unique(),
+    ...withPublicIdTable,
     name: text('name').notNull(),
     data: json('data'),
     sharedWithUsers: json('shared_with_users').$type<string[]>().notNull(),
@@ -81,7 +85,7 @@ export const taskDefinitionRelations = relations(taskDefinition, ({ one }) => ({
 
 export const task = mysqlTable('task', {
     id: serial('id').primaryKey(),
-    publicId: varchar('public_id', { length: 32 }).notNull().unique(),
+    ...withPublicIdTable,
     processId: int('process_id').notNull(),
     runId: int('run_id').notNull(),
     taskDefinitionId: int('task_definition_id').notNull(),

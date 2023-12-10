@@ -44,30 +44,35 @@ export async function PUT(request: Request, { params }: { params: { id: string, 
 
     const data = await request.json();
     if (data != null && typeof data === 'object') {
+        // Update text (name)
         if ('text' in data && typeof data.text === 'string') {
             await changeTaskDefinitionText(userId, processId, taskDefinitionId, data.text);
         }
+
+        // Update type
         if ('type' in data && typeof data.type === 'string') {
-            let typeData = 'typeData' in data && typeof data.typeData === 'string' ? data.typeData : null;
-            if (!typeData && data.type === 'document') {
+            const type = data.type;
+            let typeData = ('typeData' in data && typeof data.typeData === 'string') ? data.typeData : null;
+            if (!typeData && type === 'document') {
                 const process = await getProcess(userId, processId);
                 const taskDefinition = await getTaskDefinition(userId, processId, taskDefinitionId);
-                // TODO: Use publicId instead of internalId for dataType
                 const documentName = [process?.name, taskDefinition?.text ?? 'New document'].filter(Boolean).join(' - ');
                 const documentId = await documentCreate(userId, documentName);
-                const document = await documentGet(userId, Number(documentId));
+                const document = await documentGet(userId, documentId);
                 if (document) {
                     typeData = document?.publicId;
                 }
-            } else if (data.type === 'blank') {
+            } else if (type === 'blank') {
                 typeData = 'blank';
             }
             if (!typeData) {
                 throw new Error('Invalid type');
             }
 
-            await changeTaskDefinitionType(userId, processId, taskDefinitionId, data.type, typeData);
+            await changeTaskDefinitionType(userId, processId, taskDefinitionId, type, typeData);
         }
+
+        // Update order
         if ('order' in data && typeof data.order === 'string') {
             await changeTaskDefinitionOrder(userId, processId, taskDefinitionId, data.order);
         }

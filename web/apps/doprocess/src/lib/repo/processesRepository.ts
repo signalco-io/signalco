@@ -22,7 +22,11 @@ async function isProcessSharedWithUser(userId: string | null, processId: number)
     return (firstOrDefault(await db
         .select({ count: count() })
         .from(process)
-        .where(and(eq(process.id, processId), processSharedWithUser(userId))))?.count ?? 0) > 0;
+        .where(
+            and(
+                eq(process.id, processId),
+                processSharedWithUser(userId)))
+    )?.count ?? 0) > 0;
 }
 
 export async function getProcessIdByPublicId(publicId: string) {
@@ -195,7 +199,13 @@ export async function getTaskDefinitions(userId: string | null, processId: numbe
 export async function getTaskDefinition(userId: string | null, processId: number, taskDefinitionId: number) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
-    return firstOrDefault(await db.select().from(taskDefinition).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, taskDefinitionId))));
+    return firstOrDefault(await db
+        .select()
+        .from(taskDefinition)
+        .where(
+            and(
+                eq(taskDefinition.processId, processId),
+                eq(taskDefinition.id, taskDefinitionId))));
 }
 
 async function getTaskDefinitionLastOrder(userId: string, processId: number) {
@@ -226,11 +236,17 @@ export async function changeTaskDefinitionText(userId: string, processId: number
     await db.update(taskDefinition).set({ text, updatedBy: userId, updatedAt: new Date() }).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, id)));
 }
 
-export async function changeTaskDefinitionType(userId: string, processId: number, id: number, type: string, typeData: string) {
+export async function changeTaskDefinitionType(userId: string, processId: number, id: number, type: string, typeData: string | null) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
     // TODO: Check permissions
-    await db.update(taskDefinition).set({ type, typeData, updatedBy: userId, updatedAt: new Date() }).where(and(eq(taskDefinition.processId, processId), eq(taskDefinition.id, id)));
+    await db
+        .update(taskDefinition)
+        .set({ type: type, typeData: typeData, updatedBy: userId, updatedAt: new Date() })
+        .where(
+            and(
+                eq(taskDefinition.processId, processId),
+                eq(taskDefinition.id, id)));
 }
 
 export async function changeTaskDefinitionOrder(userId: string, processId: number, id: number, order: string) {
