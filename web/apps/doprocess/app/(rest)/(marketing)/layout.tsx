@@ -6,7 +6,7 @@ export default function RootMarketingLayout({ children, }: {
 }) {
     return (
         <>
-            <PageNav fullWidth cta />
+            <PageNav fullWidth />
             <Container className="pt-20" maxWidth="lg">
                 {children}
             </Container>
