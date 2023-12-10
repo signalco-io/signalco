@@ -1,11 +1,12 @@
-'use client';
-
 import { Link } from '@signalco/ui-primitives/Link';
 import { Button } from '@signalco/ui-primitives/Button';
 import { Navigate } from '@signalco/ui-icons';
-import { SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
 import { KnownPages } from '../src/knownPages';
-import { UserButton } from './UserButton';
+import { UserButton } from './auth/UserButton';
+import { SignUpButton } from './auth/SignUpButton';
+import { SignInButton } from './auth/SignInButton';
+import { SignedOut } from './auth/SignedOut';
+import { SignedIn } from './auth/SignedIn';
 
 type NavLinkItem = {
     href: string,
@@ -26,20 +27,8 @@ export function NavMenu({ cta }: { cta?: boolean; }) {
                 </Link>
             ))}
             <SignedOut>
-                <SignInButton
-                    redirectUrl={KnownPages.Runs}
-                    mode="modal">
-                    <Button variant="plain">Sign in</Button>
-                </SignInButton>
-                <SignUpButton
-                    redirectUrl={KnownPages.Processes}
-                    mode="modal">
-                    <Button
-                        variant="solid"
-                        endDecorator={<Navigate />}>
-                        Start for free
-                    </Button>
-                </SignUpButton>
+                <SignInButton />
+                <SignUpButton>Start for free</SignUpButton>
             </SignedOut>
             <SignedIn>
                 {cta && (

@@ -37,7 +37,7 @@ const nextConfig = {
                     knownSecureHeadersExternalUrls.clarity,
                     knownSecureHeadersExternalUrls.vercel,
                     knownSecureHeadersExternalUrls.checkly
-                ]
+                ].filter(Boolean)
             ))
         }];
     },

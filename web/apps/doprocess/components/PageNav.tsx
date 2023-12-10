@@ -12,7 +12,7 @@ export function PageNav({ fullWidth, cta }: { fullWidth?: boolean, cta?: boolean
             'backdrop-blur-md fixed top-0 left-0 right-0 z-10 h-16 border-b flex items-center',
             fullWidth ? 'px-4' : 'px-0'
         )}>
-            <Container maxWidth={fullWidth ? false : 'lg'}>
+            <Container maxWidth="lg">
                 <header>
                     <Row justifyContent="space-between">
                         <div className="flex h-full flex-col items-center">

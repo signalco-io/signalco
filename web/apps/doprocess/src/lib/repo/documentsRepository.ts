@@ -1,4 +1,4 @@
-import { and, eq, or, sql } from 'drizzle-orm';
+import { and, count, eq, or, sql } from 'drizzle-orm';
 import { firstOrDefault } from '@signalco/js';
 import { document } from '../db/schema';
 import { db } from '../db';
@@ -18,7 +18,7 @@ export async function getDocumentIdByPublicId(publicId: string) {
 }
 
 async function isDocumentSharedWithUser(userId: string, documentId: number) {
-    return (firstOrDefault(await db.select({ count: sql<number>`count(*)` }).from(document).where(and(eq(document.id, documentId), documentSharedWithUser(userId))))?.count ?? 0) > 0;
+    return (firstOrDefault(await db.select({ count: count() }).from(document).where(and(eq(document.id, documentId), documentSharedWithUser(userId))))?.count ?? 0) > 0;
 }
 
 export async function documentCreate(userId: string, name: string, basedOn?: string) {

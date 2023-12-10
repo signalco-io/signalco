@@ -8,13 +8,15 @@ import { ExpandDown } from '@signalco/ui-icons';
 
 export type AccordionProps = ComponentProps<typeof Card> & {
     open?: boolean;
+    defaultOpen?: boolean;
     disabled?: boolean;
     onOpenChanged?: (event: MouseEvent<HTMLButtonElement>, open: boolean) => void;
     unmountOnExit?: boolean;
+    variant?: 'soft' | 'plain';
 };
 
-export function Accordion({ children, open, disabled, onOpenChanged, unmountOnExit, className, ...props }: AccordionProps) {
-    const [isOpen, setIsOpen] = useState(open ?? false);
+export function Accordion({ children, defaultOpen, open, disabled, onOpenChanged, unmountOnExit, variant, className, ...props }: AccordionProps) {
+    const [isOpen, setIsOpen] = useState(open ?? (defaultOpen ?? false));
 
     const handleOpen = (event: MouseEvent<HTMLButtonElement>) => {
         if (typeof open !== 'undefined' && typeof onOpenChanged !== 'undefined') {
@@ -31,20 +33,22 @@ export function Accordion({ children, open, disabled, onOpenChanged, unmountOnEx
     const multipleChildren = otherChildren.length > 0;
 
     return (
-        <Card className={cx('', className)} onClick={handleOpen} {...props}>
-            <CardHeader className="p-2">
-                <Row spacing={1} justifyContent="space-between">
-                    {multipleChildren && isValidElement(firstChild) ? firstChild : children}
-                    {!disabled && (
-                        <ExpandDown className={cx('transition-transform', actualOpen && 'scale-y-[-1]')} />
-                    )}
-                </Row>
+        <Card className={cx(variant === 'plain' && 'bg-transparent border-none p-0', className)} {...props}>
+            <CardHeader className={cx(variant==='soft' ? 'p-2' : 'px-0 py-2')}>
+                <button className="text-left" onClick={handleOpen}>
+                    <Row spacing={1} justifyContent="space-between">
+                        {multipleChildren && isValidElement(firstChild) ? firstChild : children}
+                        {!disabled && (
+                            <ExpandDown className={cx('transition-transform', actualOpen && 'scale-y-[-1]')} />
+                        )}
+                    </Row>
+                </button>
             </CardHeader>
             {(!unmountOnExit || actualOpen) && (
                 <Collapse appear={actualOpen}>
-                    {multipleChildren && isValidElement(otherChildren) && (
-                        <CardContent className="p-2">
-                            {otherChildren}
+                    {multipleChildren && (
+                        <CardContent className={cx(variant==='soft' ? 'p-2' : 'px-0 py-2')}>
+                            {otherChildren?.map((child) => isValidElement(child) ? child : null)}
                         </CardContent>
                     )}
                 </Collapse>

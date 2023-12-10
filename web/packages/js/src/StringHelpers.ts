@@ -47,3 +47,14 @@ export function isJson(value: string | undefined) {
 export function isImageDataUrl(url: string) {
     return url.startsWith('data:image/');
 }
+
+export function slug(value: string | undefined) {
+    if (!value) return undefined;
+    if (value.length > 1000) return undefined; // Too large to generate slug, avoid DoS
+    return value
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+}
