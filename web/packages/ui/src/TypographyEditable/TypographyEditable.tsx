@@ -9,6 +9,7 @@ export type TypographyEditableProps = Omit<TypographyProps, 'onChange' | 'childr
     onChange?: (text: string) => void;
     hideEditIcon?: boolean;
     multiple?: boolean;
+    placeholder?: string;
 };
 
 export function TypographyEditable({ children, level, className, onChange, onEditingChanged, placeholder, hideEditIcon, multiple, ...rest }: TypographyEditableProps) {
