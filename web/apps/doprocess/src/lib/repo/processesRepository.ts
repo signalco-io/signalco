@@ -5,9 +5,12 @@ import { TaskState, process, processRun, task, taskDefinition } from '../db/sche
 import { db } from '../db';
 import { publicIdNext } from './shared';
 
-function processSharedWithUser(userId: string | null) {
-    if (userId == null)
+function processSharedWithUser(userId: string | null, includePublic = true) {
+    if (userId == null && includePublic)
         return sql`"public" MEMBER OF(${process.sharedWithUsers})`
+
+    if (userId && !includePublic)
+        return sql`${userId} MEMBER OF(${process.sharedWithUsers})`;
 
     return or(
         sql`${userId} MEMBER OF(${process.sharedWithUsers})`,
@@ -51,7 +54,7 @@ export async function getProcessRunTaskIdByPublicId(processPublicId: string, pro
 }
 
 export async function getProcesses(userId: string) {
-    return await db.select().from(process).where(processSharedWithUser(userId));
+    return await db.select().from(process).where(processSharedWithUser(userId, false));
 }
 
 export async function getProcess(userId: string | null, processId: number) {

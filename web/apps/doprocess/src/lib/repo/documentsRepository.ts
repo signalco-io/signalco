@@ -4,9 +4,12 @@ import { document } from '../db/schema';
 import { db } from '../db';
 import { publicIdNext } from './shared';
 
-function documentSharedWithUser(userId: string | null) {
-    if (!userId)
+function documentSharedWithUser(userId: string | null, includePublic = true) {
+    if (!userId && includePublic)
         return sql`"public" MEMBER OF(${document.sharedWithUsers})`;
+
+    if (userId && includePublic)
+        return sql`${userId} MEMBER OF(${document.sharedWithUsers})`;
 
     return or(
         sql`${userId} MEMBER OF(${document.sharedWithUsers})`,
@@ -44,7 +47,7 @@ export async function documentCreate(userId: string, name: string, basedOn?: str
 }
 
 export async function documentsGet(userId: string) {
-    return await db.select().from(document).where(documentSharedWithUser(userId));
+    return await db.select().from(document).where(documentSharedWithUser(userId, false));
 }
 
 export async function documentGet(userId: string | null, id: number) {
