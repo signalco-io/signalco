@@ -31,10 +31,6 @@ module.exports = {
     },
     rules: {
         "@next/next/no-html-link-for-pages": "off",
-        indent: [
-            "error",
-            4
-        ],
         "react/jsx-max-depth": ["warn", { "max": 4 }],
         "react/jsx-max-props-per-line": [1, { "when": "multiline" }],
         "react/jsx-props-no-multi-spaces": "warn",
@@ -57,6 +53,7 @@ module.exports = {
         "@typescript-eslint/no-extra-semi": "error",
         "@typescript-eslint/no-unused-vars": "error",
         "@typescript-eslint/no-namespace": 0,
+        "import/namespace": 0,
         "import/no-unresolved": "error",
         "import/no-absolute-path": "error",
         "import/order": [
@@ -79,6 +76,9 @@ module.exports = {
                     "caseInsensitive": true
                 }
             }
-        ]
+        ],
+        "tailwindcss/no-custom-classname": ["warn", {
+            "cssFiles": ["!**/node_modules", "!**/.*", "!**/dist", "!**/build"]
+        }],
     }
 };

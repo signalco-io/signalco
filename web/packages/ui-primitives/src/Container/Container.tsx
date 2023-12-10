@@ -1,43 +1,25 @@
-import type { CSSProperties, PropsWithChildren } from 'react';
+import type { HTMLAttributes } from 'react';
 import { cx } from '../cx';
 
-export type ContainerProps = PropsWithChildren<{
+export type ContainerProps = HTMLAttributes<HTMLDivElement> & {
     maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false,
     centered?: boolean,
     padded?: boolean,
-}>;
+};
 
-export function Container({ maxWidth, centered = true, padded = true, children }: ContainerProps) {
-    let width: number | undefined = 1200;
-    switch (maxWidth) {
-    case 'md':
-        width = 900;
-        break;
-    case 'sm':
-        width = 600;
-        break;
-    case 'xs':
-        width = 444;
-        break;
-    case 'xl':
-        width = 1536;
-        break;
-    case false:
-        width = undefined;
-        break;
-    default:
-        break;
-    }
-
+export function Container({ maxWidth, centered = true, padded = true, className, ...rest }: ContainerProps) {
     return (
-        <div className={cx(
-            'block max-w-[--container-maxWidth] w-full',
-            (Boolean(width) && padded) && 'px-4',
-            centered && 'mx-auto')}
-        style={{
-            '--container-maxWidth': width ? `${width}px` : undefined
-        } as CSSProperties}>
-            {children}
-        </div>
+        <div
+            className={cx(
+                'block w-full',
+                (Boolean(maxWidth) && padded) && 'px-4',
+                centered && 'mx-auto',
+                maxWidth === 'xl' && 'max-w-[1536px]',
+                (!maxWidth || maxWidth === 'lg') && 'max-w-[1280px]',
+                maxWidth === 'md' && 'max-w-4xl',
+                maxWidth === 'sm' && 'max-w-xl',
+                maxWidth === 'xs' && 'max-w-md',
+                className)}
+            {...rest} />
     )
 }

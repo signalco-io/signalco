@@ -20,10 +20,10 @@ export function Collapse({ children, appear, duration = 200 }: CollapseProps) {
     return (
         <div
             ref={containerRef}
+            className="overflow-hidden"
             style={{
                 height: `${targetHeight}px`,
                 transition: `height ${duration}ms ease-out`,
-                overflow: 'hidden'
             }}>
             {children}
         </div>
