@@ -18,7 +18,7 @@ export const navLinks: NavLinkItem[] = [
     // { href: KnownPages.Pricing, text: 'Pricing' }
 ];
 
-export function NavMenu({ cta }: { cta?: boolean; }) {
+export function NavMenu() {
     return (
         <>
             {navLinks.map(nl => (
@@ -31,14 +31,12 @@ export function NavMenu({ cta }: { cta?: boolean; }) {
                 <SignUpButton>Start for free</SignUpButton>
             </SignedOut>
             <SignedIn>
-                {cta && (
-                    <Button
-                        variant="solid"
-                        href={KnownPages.Runs}
-                        endDecorator={<Navigate />}>
-                        Go to app
-                    </Button>
-                )}
+                <Button
+                    variant="solid"
+                    href={KnownPages.Runs}
+                    endDecorator={<Navigate />}>
+                    App
+                </Button>
                 <UserButton afterSignOutUrl="/" />
             </SignedIn>
         </>

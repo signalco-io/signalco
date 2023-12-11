@@ -1,4 +1,4 @@
-import { documentCreate, documentGet, documentsGet, documentSetData } from '../../../src/lib/repo/documentsRepository';
+import { documentCreate, documentGet, documentsGet } from '../../../src/lib/repo/documentsRepository';
 import { ensureUserId } from '../../../src/lib/auth/apiAuth';
 
 export async function GET() {

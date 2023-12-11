@@ -2,11 +2,12 @@
 
 import { useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
+import { Typography } from '@signalco/ui-primitives/Typography';
 import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List } from '@signalco/ui-primitives/List';
-import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { cx } from '@signalco/ui-primitives/cx';
-import { FileText, ListTodo, Play, Right } from '@signalco/ui-icons';
+import { FileText, ListTodo, Play } from '@signalco/ui-icons';
+import { UserButton } from '../auth/UserButton';
 import { KnownPages } from '../../src/knownPages';
 
 export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: (open: boolean) => void }) {
@@ -29,16 +30,12 @@ export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: 
             'group flex flex-row -mr-1 border-b md:h-full md:flex-col md:border-none',
             open && 'md:pl-2 md:gap-1'
         )}>
-            <IconButton
-                variant="plain"
-                className={cx(
-                    open ? 'opacity-0 rotate-180 rounded-bl-none' : 'rounded-tr-none',
-                    'hidden md:block self-end text-muted-foreground transition-opacity group-hover:opacity-100'
-                )}
-                size="sm"
-                onClick={() => onOpenChange?.(!open)}>
-                <Right size={16} />
-            </IconButton>
+            <div className="flex flex-row items-center justify-between p-2">
+                {open && <Typography semiBold tertiary level="body2" className="hidden md:block">Navigation</Typography>}
+                <div className="px-0.5">
+                    <UserButton afterSignOutUrl="/" />
+                </div>
+            </div>
             <List className={cx('flex-row md:flex-col', open && 'md:gap-2 md:pr-2')}>
                 {links.map(({ href, label, Icon }) => (
                     <ListItem
