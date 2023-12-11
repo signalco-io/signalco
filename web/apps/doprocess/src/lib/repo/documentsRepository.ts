@@ -17,11 +17,23 @@ function documentSharedWithUser(userId: string | null, includePublic = true) {
 }
 
 export async function getDocumentIdByPublicId(publicId: string) {
-    return firstOrDefault(await db.select({ id: document.id }).from(document).where(eq(document.publicId, publicId)))?.id;
+    return firstOrDefault(await db
+        .select({ id: document.id })
+        .from(document)
+        .where(
+            eq(document.publicId, publicId))
+    )?.id;
 }
 
 async function isDocumentSharedWithUser(userId: string, documentId: number) {
-    return (firstOrDefault(await db.select({ count: count() }).from(document).where(and(eq(document.id, documentId), documentSharedWithUser(userId))))?.count ?? 0) > 0;
+    return (firstOrDefault(await db
+        .select({ count: count() })
+        .from(document)
+        .where(
+            and(
+                eq(document.id, documentId),
+                documentSharedWithUser(userId)))
+    )?.count ?? 0) > 0;
 }
 
 export async function documentCreate(userId: string, name: string, basedOn?: string) {
@@ -38,6 +50,7 @@ export async function documentCreate(userId: string, name: string, basedOn?: str
         if (basedOnId) {
             const basedOnDocument = await documentGet(userId, basedOnId);
             if (basedOnDocument && typeof basedOnDocument.data === 'string') {
+                console.info('Copying document content from (public):', basedOnDocument.publicId, 'to (internal):', id);
                 await documentSetData(userId, id, basedOnDocument.data);
             }
         }
@@ -51,7 +64,13 @@ export async function documentsGet(userId: string) {
 }
 
 export async function documentGet(userId: string | null, id: number) {
-    return firstOrDefault(await db.select().from(document).where(and(eq(document.id, id), documentSharedWithUser(userId))));
+    return firstOrDefault(await db
+        .select()
+        .from(document)
+        .where(
+            and(
+                eq(document.id, id),
+                documentSharedWithUser(userId))));
 }
 
 export async function documentRename(userId: string, id: number, name: string) {
