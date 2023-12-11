@@ -6,7 +6,7 @@ import { KnownPages } from '../src/knownPages';
 import { NavMenu } from './NavMenu';
 import DoProcessLogo from './brand/DoProcessLogo';
 
-export function PageNav({ fullWidth, cta }: { fullWidth?: boolean, cta?: boolean }) {
+export function PageNav({ fullWidth }: { fullWidth?: boolean }) {
     return (
         <nav className={cx(
             'backdrop-blur-md fixed top-0 left-0 right-0 z-10 h-16 border-b flex items-center',
@@ -21,7 +21,7 @@ export function PageNav({ fullWidth, cta }: { fullWidth?: boolean, cta?: boolean
                             </Link>
                         </div>
                         <Row spacing={1}>
-                            <NavMenu cta={cta} />
+                            <NavMenu />
                         </Row>
                     </Row>
                 </header>
