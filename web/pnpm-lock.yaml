@@ -211,8 +211,8 @@ importers:
         specifier: 1.3.5
         version: 1.3.5
       '@types/recharts':
-        specifier: 1.8.28
-        version: 1.8.28
+        specifier: 1.8.29
+        version: 1.8.29
       '@types/suncalc':
         specifier: 1.9.2
         version: 1.9.2
@@ -8651,8 +8651,8 @@ packages:
       '@types/scheduler': 0.16.6
       csstype: 3.1.2
 
-  /@types/recharts@1.8.28:
-    resolution: {integrity: sha512-31D+dVBdVMtBnRMOjfM9210oRsclujQetwDNnCfapy/gF1BruvQkiK9WZ2ZMqDZY2xnDpIV8sWjISBcY+wgkLw==}
+  /@types/recharts@1.8.29:
+    resolution: {integrity: sha512-ulKklaVsnFIIhTQsQw226TnOibrddW1qUQNFVhoQEyY1Z7FRQrNecFCGt7msRuJseudzE9czVawZb17dK/aPXw==}
     dependencies:
       '@types/d3-shape': 1.3.11
       '@types/react': 18.2.43
