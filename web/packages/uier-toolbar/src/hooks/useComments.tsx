@@ -1,8 +1,7 @@
 'use client';
 
-import { nanoid } from 'nanoid';
 import { UseMutationResult, UseQueryResult, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { CommentItem } from './Comments';
+import { CommentItem } from '../components/Comments';
 
 export function useComments(): {
     query: UseQueryResult<CommentItem[], Error>;
@@ -22,7 +21,7 @@ export function useComments(): {
         mutationFn: async (comment: CommentItem) => {
             const comments = JSON.parse(localStorage.getItem('comments') ?? '[]') as CommentItem[];
             if (!comment.id) {
-                comment.id = nanoid();
+                comment.id = 'mock' + Math.random() + Date.now();
             }
             const currentComment = comments.find((c: CommentItem) => Boolean(comment.id) && c.id === comment.id);
             if (currentComment) {

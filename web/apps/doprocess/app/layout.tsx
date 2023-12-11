@@ -1,10 +1,10 @@
+import Script from 'next/script';
 import { Inter } from 'next/font/google';
 import { Metadata, Viewport } from 'next';
 import './global.css';
 import { Analytics } from '@vercel/analytics/react';
 import { ClientProvider } from '../components/providers/ClientProvider';
 import { AuthProvider } from '../components/providers/AuthProvider';
-import { Comments } from '../components/comments/Comments';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -21,7 +21,7 @@ export default function RootLayout({ children, }: {
                     <ClientProvider>
                         {children}
                         <Analytics />
-                        <Comments />
+                        <Script src="http://localhost:5500/index.js" />
                     </ClientProvider>
                 </AuthProvider>
             </body>

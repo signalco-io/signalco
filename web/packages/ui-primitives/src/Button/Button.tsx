@@ -31,7 +31,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     ...otherProps
 }, ref) => {
     const Comp = useMemo(() => href && !disabled
-        ? ({ children }: PropsWithChildren) => <Link href={href} legacy>{children}</Link>
+        ? ({ children }: PropsWithChildren) => <Link href={href}>{children}</Link>
         : ({ children }: PropsWithChildren) => <>{children}</>, [href, disabled]);
     const ButtonComp = useMemo(() => asChild ? Slot : 'button', [asChild]);
 

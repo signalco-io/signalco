@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { arrayMax, orderBy } from '@signalco/js';
 import { useWindowRect } from '@signalco/hooks/useWindowRect';
-import { CommentItemPosition } from './Comments';
+import { CommentItemPosition } from '../components/Comments';
 
 
 export function useCommentItemRects(commentSelection: CommentItemPosition | null | undefined) {

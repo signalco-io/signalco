@@ -42,6 +42,7 @@
     "@signalco/ui-primitives": "workspace:*",
     "@tanstack/react-query": "5.13.4",
     "@tanstack/react-query-devtools": "5.13.5",
+    "@uier/toolbar": "workspace:*",
     "@vercel/analytics": "1.1.1",
     "classix": "2.1.35",
     "drizzle-orm": "0.29.1",

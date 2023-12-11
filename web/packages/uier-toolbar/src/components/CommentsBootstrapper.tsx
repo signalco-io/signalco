@@ -1,7 +1,10 @@
 'use client';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { CommentsGlobal } from './CommentsGlobal';
 import { CommentsGlobalProps } from './Comments';
 
+const queryClient = new QueryClient();
 
 export function CommentsBootstrapper({
     reviewParamKey = 'review'
@@ -13,7 +16,9 @@ export function CommentsBootstrapper({
     }
 
     return (
-        <CommentsGlobal
-            reviewParamKey={reviewParamKey} />
+        <QueryClientProvider client={queryClient}>
+            <CommentsGlobal
+                reviewParamKey={reviewParamKey} />
+        </QueryClientProvider>
     );
 }

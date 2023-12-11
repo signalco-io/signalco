@@ -35,6 +35,7 @@ const nextConfig = {
                     knownSecureHeadersExternalUrls.clarity,
                     knownSecureHeadersExternalUrls.vercel,
                     knownSecureHeadersExternalUrls.clerk,
+                    { scriptSrc: 'http://localhost:5500', styleSrc: 'http://localhost:5500' },
                     {
                         frameAncestors: '\'self\'' // NOTE: This is required for embedding out app in an iframe
                     }

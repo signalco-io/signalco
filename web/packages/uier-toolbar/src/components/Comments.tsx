@@ -1,11 +1,5 @@
-'use client';
-
-import dynamic from 'next/dynamic';
-
 export const popoverWidth = 288;
 export const popoverWindowMargin = 8;
-
-export const Comments = dynamic(() => import('./CommentsBootstrapper').then(m => m.CommentsBootstrapper), { ssr: false });
 
 export type CommentPoint = {
     type: 'point';

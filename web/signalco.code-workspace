@@ -79,6 +79,10 @@
 		{
 			"name": "📦 @signalco/ui-primitives",
 			"path": "packages/ui-primitives"
+		},
+		{
+			"name": "📦 @uier/toolbar",
+			"path": "packages/uier-toolbar"
 		}
 	],
 	"settings": {
