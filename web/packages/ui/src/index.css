@@ -97,13 +97,17 @@
         font-feature-settings: "rlig" 1, "calt" 1;
     }
 
-    .image--light {
-        display: var(--light-display);
-    }
-
-    .image--dark {
-        display: var(--dark-display);
-    }
-
     ::selection { background: var(--bg-selection); color: var(--text-selection); }
+}
+
+.image--light {
+    display: var(--light-display);
+}
+
+.image--dark {
+    display: var(--dark-display);
+}
+
+svg.lucide {
+    stroke-width: 1.75px;
 }

@@ -26,6 +26,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({
                     variant === 'plain' && 'hover:bg-accent hover:text-accent-foreground',
                     variant === 'solid' && 'bg-primary text-primary-foreground hover:bg-primary/90',
                     (!size || size === 'md') && 'h-9 w-9 p-2 rounded-md',
+                    size === 'xs' && 'h-6 w-6 rounded-sm p-1',
                     size === 'sm' && 'h-8 w-8 rounded-sm p-2',
                     size === 'lg' && 'h-12 w-12 rounded-md',
                     fullWidth && 'w-full',

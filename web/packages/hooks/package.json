@@ -5,17 +5,7 @@
     "sideEffects": false,
     "type": "module",
     "exports": {
-        "./useWindowWidth": "./src/useWindowWidth.ts",
-        "./useWindowRect": "./src/useWindowRect.ts",
-        "./useWindowEvent": "./src/useWindowEvent.ts",
-        "./useTimeout": "./src/useTimeout.ts",
-        "./useSearchParam": "./src/useSearchParam.ts",
-        "./useIsServer": "./src/useIsServer.ts",
-        "./useIsomorphicLayoutEffect": "./src/useIsomorphicLayoutEffect.ts",
-        "./useInterval": "./src/useInterval.ts",
-        "./useControllableState": "./src/useControllableState.ts",
-        "./useCallbackRef": "./src/useCallbackRef.ts",
-        "./useAudio": "./src/useAudio.ts"
+        "./*": "./src/*.ts"
     },
     "scripts": {
         "lint": "eslint ."

@@ -39,6 +39,10 @@ Apps:
 - App on [http://localhost:3001](http://localhost:3001)
 - UI Docs on [http://localhost:6006](http://localhost:6006)
 
+#### Turbo in local development
+
+Remote caching is enabled but `TURBO_REMOTE_CACHE_SIGNATURE_KEY` environemnt variable needs to be set. Contact any contributor to get access to signature key to enable remote caching for your development environment.
+
 ## Configure env variables
 
 `.env.local` example:
