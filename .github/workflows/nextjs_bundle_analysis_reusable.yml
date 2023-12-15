@@ -39,7 +39,7 @@ jobs:
         timeout-minutes: 5
         runs-on: ubuntu-latest
         container:
-          image: mcr.microsoft.com/playwright:v1.40.0-jammy
+          image: mcr.microsoft.com/playwright:v1.40.1-jammy
         concurrency:
           group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.name }}
           cancel-in-progress: true
