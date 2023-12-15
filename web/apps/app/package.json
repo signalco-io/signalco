@@ -15,7 +15,8 @@
         "postinstall": "node ./tools/post-install.mjs",
         "postbuild": "next-sitemap --config next-sitemap.config.js",
         "start": "next start -p 3001",
-        "lint": "next lint --fix"
+        "test": "echo \"Info: no test specified\"",
+        "lint": "next lint"
     },
     "dependencies": {
         "@auth0/auth0-react": "2.2.4",
