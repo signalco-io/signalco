@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: '[Web] NextJS Bundle Analysis'
+name: '[Web] CI - Next.js'
 
 on:
     workflow_call:
@@ -35,7 +35,7 @@ defaults:
 
 jobs:
     analysis:
-        name: "[${{ inputs.name }}] Next.js Bundle Analysis"
+        name: "${{ inputs.name }}"
         timeout-minutes: 5
         runs-on: ubuntu-latest
         concurrency:
