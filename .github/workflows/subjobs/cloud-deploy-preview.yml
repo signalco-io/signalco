@@ -3,10 +3,7 @@
 name: "[Cloud] Preview Deploy"
 
 on:
-  pull_request:
-    branches:
-      - "main"
-      - "next"
+  workflow_call:
 
 env:
   DOTNET_VERSION: "7.0.x" # set this to the dotnet version to use
@@ -16,7 +13,7 @@ defaults:
     working-directory: ./cloud/infrastructure
 
 jobs:
-  build-and-deploy:
+  build-and-preview:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout GitHub Action"
