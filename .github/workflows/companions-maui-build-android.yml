@@ -43,7 +43,7 @@ jobs:
         # Delete output directory
         rm -r "artifacts"
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: "artifact-${{ matrix.configuration }}"
         path: "companion-maui-android-${{ matrix.configuration }}.zip"
