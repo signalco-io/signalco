@@ -38,9 +38,11 @@ jobs:
         name: "[${{ inputs.name }}] Next.js Bundle Analysis"
         timeout-minutes: 5
         runs-on: ubuntu-latest
+        container:
+          image: mcr.microsoft.com/playwright:v1.40.0-jammy
         concurrency:
-            group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.name }}
-            cancel-in-progress: true
+          group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.name }}
+          cancel-in-progress: true
         steps:
           - uses: actions/checkout@v4
             with:
@@ -61,13 +63,13 @@ jobs:
           - name: 📦️ Install dependencies
             run: pnpm install --frozen-lockfile --filter ${{ inputs.name }}... --filter .
     
-          - name: ⚒️ Lint app
+          - name: 🔎 Lint app
             run: pnpm lint --filter=${{ inputs.name }}
 
           - name: ✨ Setup Vercel CLI
             run: pnpm install --global vercel@latest
 
-          - name: 🔎 Pull Vercel Environment Information
+          - name: ⚙️ Pull Vercel Environment Information
             run: vercel env pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
             working-directory: ${{ inputs.path }}/
 
