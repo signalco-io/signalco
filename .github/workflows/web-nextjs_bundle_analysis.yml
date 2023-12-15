@@ -6,6 +6,8 @@ on:
   pull_request:
     paths:
       - 'web/**'  
+      - '.github/workflows/web-nextjs_bundle_analysis.yml'
+      - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
   push:
     branches:
       - main
