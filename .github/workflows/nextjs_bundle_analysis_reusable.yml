@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: 'NextJS Bundle Analysis'
+name: '[Web] NextJS Bundle Analysis'
 
 on:
     workflow_call:
