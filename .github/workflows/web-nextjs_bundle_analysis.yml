@@ -26,6 +26,8 @@ jobs:
   cloud_preview:
     name: "Cloud (preview)"
     uses: ./.github/workflows/cloud-deploy-preview.yml
+    with:
+      baseRef: ${{ github.base_ref }}
     secrets: inherit
 
   analyze_blog:

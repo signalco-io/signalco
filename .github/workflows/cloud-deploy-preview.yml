@@ -4,9 +4,11 @@ name: "[Cloud] Preview Deploy"
 
 on:
   workflow_call:
-
-env:
-  DOTNET_VERSION: "7.0.x" # set this to the dotnet version to use
+    inputs:
+      baseRef:
+        type: string
+        description: "The base branch to deploy to"
+        required: true
 
 defaults:
   run:
@@ -28,10 +30,10 @@ jobs:
           npx mutex wait signalcocloudpreview
           popd
 
-      - name: ✨ Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      - name: ✨ Setup DotNet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: "7.0.x"
 
       - name: ✨ Setup pnpm
         uses: pnpm/action-setup@v2.4.0
@@ -51,16 +53,21 @@ jobs:
       - name: 🔎 Determine stack
         shell: bash
         run: |
-          [[ $(echo ${BASE_BRANCH#refs/heads/}) = "main" ]] && echo "##[set-output name=branch;]production" || echo "##[set-output name=branch;]$(echo ${BASE_BRANCH#refs/heads/})"
+          if $(echo ${BASE_BRANCH#refs/heads/}) = "main"
+          then 
+            echo "stack=production" >> $GITHUB_OUTPUT
+          else
+            echo "stack=next" >> $GITHUB_OUTPUT
+          fi
         id: extract_branch
         env:
-          BASE_BRANCH: ${{ github.base_ref }}
+          BASE_BRANCH: ${{ inputs.baseRef }}
 
       - name: ⚡ Preview Deploy Infrastructure
         uses: pulumi/actions@v4
         with:
           command: preview
-          stack-name: signalco/cloud-primary/${{ steps.extract_branch.outputs.branch }}
+          stack-name: signalco/cloud-primary/${{ steps.extract_branch.outputs.stack }}
           work-dir: ./cloud/infrastructure
           comment-on-pr: true
         env:
