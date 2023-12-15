@@ -6,9 +6,9 @@ on:
   workflow_call:
     inputs:
       baseRef:
+        required: true
         type: string
         description: "The base branch to deploy to"
-        required: true
 
 defaults:
   run:
