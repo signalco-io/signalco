@@ -56,7 +56,7 @@ jobs:
             with:
                 node-version: "20.x"
                 cache: "pnpm"
-                cache-dependency-path: ./web
+                cache-dependency-path: ./web/pnpm-lock.yaml
 
           - name: 📦️ Install dependencies
             run: pnpm install --frozen-lockfile --filter ${{ inputs.name }}... --filter .
@@ -87,9 +87,9 @@ jobs:
           - name: 🔎 Analyze bundle
             run: npx -yes -p github:hashicorp/nextjs-bundle-analysis report
             working-directory: ${{ inputs.path }}/
-    
+
           - name: 🔼 Upload bundle
-            uses: actions/upload-artifact@v4
+            uses: actions/upload-artifact@v3
             with:
               name: bundle
               path: ${{ inputs.path }}/.next/analyze/__bundle_analysis.json
