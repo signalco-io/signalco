@@ -34,8 +34,7 @@ defaults:
         working-directory: ./web
 
 jobs:
-    analysis:
-        name: "${{ inputs.name }}"
+    ci:
         timeout-minutes: 5
         runs-on: ubuntu-latest
         concurrency:
