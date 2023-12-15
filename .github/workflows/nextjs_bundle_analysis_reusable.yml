@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: 'NextJS Bundle Analysis'
+name: '[Web] NextJS Bundle Analysis'
 
 on:
     workflow_call:
@@ -81,6 +81,24 @@ jobs:
 
           - name: ⚒️ Test app
             run: pnpm test --filter=${{ inputs.name }}
+
+          ## TODO: Enable when stories-check is ready
+          # - name: Run stories-check
+          #   run: pnpm stories-check
+          #   id: runStoriesCheck
+          #   continue-on-error: true
+          #   working-directory: web/apps/web/
+          # - name: Commit changes
+          #   id: ccc
+          #   if: steps.runStoriesCheck.outcome == 'failure'
+          #   uses: EndBug/add-and-commit@v9
+          #   with:
+          #       add: ".stories-approved"
+          #       message: "[skip ci] [stories-check] Automated stories changes"
+          #       new_branch: ${{ github.head_ref }}
+          #       default_author: github_actions
+          #   env:
+          #       GITHUB_TOKEN: ${{ secrets.AT_GH_CD_REPO_PAT }}
     
           # Here's the first place where next-bundle-analysis' own script is used
           # This step pulls the raw bundle stats for the current bundle

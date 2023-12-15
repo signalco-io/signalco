@@ -1,24 +1,33 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: '[Web] Next.js Bundle Analysis'
+name: '[Web] CI'
 
 on:
   pull_request:
     paths:
       - 'web/**'  
+      - 'cloud/**'
       - '.github/workflows/web-nextjs_bundle_analysis.yml'
       - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
+      - '.github/workflows/cloud-deploy-preview.yml'
   push:
     branches:
       - main
       - next
     paths:
       - 'web/**'
+      - 'cloud/**'
       - '.github/workflows/web-nextjs_bundle_analysis.yml'
       - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
+      - '.github/workflows/cloud-deploy-preview.yml'
   workflow_dispatch:
 
 jobs:
+  cloud_preview:
+    name: "[Cloud] Deploy Preview"
+    uses: ./.github/workflows/cloud-deploy-preview.yml
+    secrets: inherit
+
   analyze_blog:
     name: "[Blog] Next.js Bundle Analysis"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
