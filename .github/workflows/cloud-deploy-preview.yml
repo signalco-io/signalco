@@ -53,8 +53,7 @@ jobs:
       - name: 🔎 Determine stack
         shell: bash
         run: |
-          echo "BASE_BRANCH=${BASE_BRANCH#refs/heads/}"
-          if $(echo ${BASE_BRANCH#refs/heads/}) -eq "main"
+          if [[ $(echo ${BASE_BRANCH#refs/heads/}) = "main" ]]
           then 
             echo "stack=production" >> $GITHUB_OUTPUT
           else
