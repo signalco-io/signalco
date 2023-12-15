@@ -61,6 +61,7 @@ jobs:
             run: pnpm install --frozen-lockfile --filter ${{ inputs.name }}... --filter .
     
           - name: 🔎 Lint app
+            if: success() && github.event_name == 'pull_request'
             run: pnpm lint --filter=${{ inputs.name }}
 
           - name: ✨ Setup Vercel CLI
@@ -74,11 +75,13 @@ jobs:
             run: pnpm build --filter=${{ inputs.name }}
 
           - name: 📦️ Install playwright browsers
+            if: success() && github.event_name == 'pull_request'
             run: |
               pnpm install --global playwright
               pnpm playwright install --with-deps
 
           - name: ⚒️ Test app
+            if: success() && github.event_name == 'pull_request'
             run: pnpm test --filter=${{ inputs.name }}
 
           ## TODO: Enable when stories-check is ready
@@ -113,7 +116,7 @@ jobs:
     
           - name: 🔽 Download base branch bundle stats
             uses: dawidd6/action-download-artifact@v3
-            if: success() && github.event.number
+            if: success() && github.event_name == 'pull_request'
             with:
               workflow: ${{ inputs.workflowName }}
               branch: ${{ github.event.pull_request.base.ref }}
@@ -133,13 +136,13 @@ jobs:
           # Either of these arguments can be changed or removed by editing the `nextBundleAnalysis`
           # entry in your package.json file.
           - name: 🔎 Compare with base branch bundle
-            if: success() && github.event.number
+            if: success() && github.event_name == 'pull_request'
             run: ls -laR .next/analyze/base && npx -yes -p github:hashicorp/nextjs-bundle-analysis compare
             working-directory: ${{ inputs.path }}/
     
           - name: 💬 Get comment body
             id: get-comment-body
-            if: success() && github.event.number
+            if: success() && github.event_name == 'pull_request'
             uses: actions/github-script@v7
             with:
               result-encoding: string
