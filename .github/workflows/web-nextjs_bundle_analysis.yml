@@ -26,6 +26,7 @@ jobs:
   cloud_preview:
     name: "Cloud (preview)"
     uses: ./.github/workflows/cloud-deploy-preview.yml
+    if: success() && github.event_name == 'pull_request'
     with:
       baseRef: ${{ github.base_ref }}
     secrets: inherit
