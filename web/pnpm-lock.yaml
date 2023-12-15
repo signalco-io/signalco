@@ -42,8 +42,8 @@ importers:
         specifier: 1.3.0
         version: 1.3.0(react-dom@18.2.0)(react@18.2.0)
       '@enterwell/react-hooks':
-        specifier: 0.4.0
-        version: 0.4.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 0.4.1
+        version: 0.4.1(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
         specifier: 1.9.2
         version: 1.9.2(react-dom@18.2.0)(react@18.2.0)
@@ -404,8 +404,8 @@ importers:
   apps/brandgrab:
     dependencies:
       '@enterwell/react-hooks':
-        specifier: 0.4.0
-        version: 0.4.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 0.4.1
+        version: 0.4.1(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 14.0.4
         version: 14.0.4
@@ -574,8 +574,8 @@ importers:
         specifier: 3.2.2
         version: 3.2.2(react@18.2.0)
       '@enterwell/react-hooks':
-        specifier: 0.4.0
-        version: 0.4.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 0.4.1
+        version: 0.4.1(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
         specifier: 1.9.2
         version: 1.9.2(react-dom@18.2.0)(react@18.2.0)
@@ -952,8 +952,8 @@ importers:
   apps/web:
     dependencies:
       '@enterwell/react-hooks':
-        specifier: 0.4.0
-        version: 0.4.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 0.4.1
+        version: 0.4.1(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
         specifier: 1.9.2
         version: 1.9.2(react-dom@18.2.0)(react@18.2.0)
@@ -1447,8 +1447,8 @@ importers:
   packages/uier-toolbar:
     devDependencies:
       '@enterwell/react-hooks':
-        specifier: 0.4.0
-        version: 0.4.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 0.4.1
+        version: 0.4.1(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-checkbox':
         specifier: 1.0.4
         version: 1.0.4(@types/react-dom@18.2.17)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
@@ -3867,8 +3867,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@enterwell/react-hooks@0.4.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-UTGS1tw9PIdO/YKq02olgraup7i9tlNNPTbI3s+1HSmxsi4VrUHz0TreJL4SqGYa1cN8GHAvszHR4VVZ1XFl2Q==}
+  /@enterwell/react-hooks@0.4.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-g1iPmHYCazzhsWKlp9kvHjOWEASbiRmeu/OcdjNS5nMsvsKoPQ2CRQufWwyXus00bfkldxAVT7GmiO0xoMxEmA==}
     peerDependencies:
       react: ^18
       react-dom: ^18
