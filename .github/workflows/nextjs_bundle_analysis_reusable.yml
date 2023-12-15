@@ -75,7 +75,9 @@ jobs:
             run: pnpm build --filter=${{ inputs.name }}
 
           - name: 📦️ Install playwright browsers
-            run: pnpm playwright install --with-deps
+            run: |
+              pnpm install --global playwright
+              pnpm playwright install --with-deps
 
           - name: ⚒️ Test app
             run: pnpm test --filter=${{ inputs.name }}
