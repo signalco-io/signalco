@@ -153,6 +153,7 @@ jobs:
     
           - name: 💬 Comment
             uses: marocchino/sticky-pull-request-comment@v2
+            if: success() && steps.get-comment-body.outputs.body != ''
             with:
               header: next-touched-pages-${{ inputs.name }}
               message: ${{ steps.get-comment-body.outputs.body }}
