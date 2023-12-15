@@ -89,7 +89,7 @@ jobs:
             working-directory: ${{ inputs.path }}/
     
           - name: 🔼 Upload bundle
-            uses: actions/upload-artifact@v3
+            uses: actions/upload-artifact@v4
             with:
               name: bundle
               path: ${{ inputs.path }}/.next/analyze/__bundle_analysis.json
