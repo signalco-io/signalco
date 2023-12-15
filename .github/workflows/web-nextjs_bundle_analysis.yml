@@ -24,12 +24,12 @@ on:
 
 jobs:
   cloud_preview:
-    name: "[Cloud] Deploy Preview"
+    name: "Cloud (preview)"
     uses: ./.github/workflows/cloud-deploy-preview.yml
     secrets: inherit
 
   analyze_blog:
-    name: "[Blog] Next.js Bundle Analysis"
+    name: "Blog"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -39,7 +39,7 @@ jobs:
     secrets: inherit
   
   analyze_app:
-    name: "[App] Next.js Bundle Analysis"
+    name: "App"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -49,7 +49,7 @@ jobs:
     secrets: inherit
 
   analyze_brandgrab:
-    name: "[BrandGrab] Next.js Bundle Analysis"
+    name: "BrandGrab"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -59,7 +59,7 @@ jobs:
     secrets: inherit
   
   analyze_web:
-    name: "[Web] Next.js Bundle Analysis"
+    name: "Web"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -69,7 +69,7 @@ jobs:
     secrets: inherit
   
   analyze_slco:
-    name: "[slco] Next.js Bundle Analysis"
+    name: "slco"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -79,7 +79,7 @@ jobs:
     secrets: inherit
 
   analyze_doprocess:
-    name: "[doprocess] Next.js Bundle Analysis"
+    name: "doprocess"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
