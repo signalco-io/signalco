@@ -147,12 +147,12 @@ jobs:
             with:
               result-encoding: string
               script: |
-                echo "body<<EOF" >> $GITHUB_OUTPUT
-                echo "$(cat './${{ inputs.path }}/.next/analyze/__bundle_analysis_comment.txt')" >> $GITHUB_OUTPUT
-                echo EOF >> $GITHUB_OUTPUT
+                const fs = require('fs')
+                const comment = fs.readFileSync('${{ inputs.path }}/.next/analyze/__bundle_analysis_comment.txt', 'utf8')
+                core.setOutput('body', comment)
     
           - name: 💬 Comment
             uses: marocchino/sticky-pull-request-comment@v2
             with:
-              header: next-touched-pages
+              header: next-touched-pages-${{ inputs.name }}
               message: ${{ steps.get-comment-body.outputs.body }}
