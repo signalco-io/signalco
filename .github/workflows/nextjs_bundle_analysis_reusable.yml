@@ -57,22 +57,25 @@ jobs:
                 node-version: "20.x"
                 cache: "pnpm"
                 cache-dependency-path: ./web
-          
-          - name: ✨ Setup Vercel CLI
-            run: pnpm install --global vercel@latest
 
           - name: 📦️ Install dependencies
             run: pnpm install --frozen-lockfile --filter ${{ inputs.name }}... --filter .
     
+          - name: ⚒️ Lint app
+            run: pnpm lint --filter=${{ inputs.name }}
+
+          - name: ✨ Setup Vercel CLI
+            run: pnpm install --global vercel@latest
+
           - name: 🔎 Pull Vercel Environment Information
             run: vercel env pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
             working-directory: ${{ inputs.path }}/
 
-          - name: ⚒️ Lint app
-            run: pnpm lint --filter=${{ inputs.name }}
-
           - name: ⚒️ Build app
             run: pnpm build --filter=${{ inputs.name }}
+
+          - name: 📦️ Install playwright browsers
+            run: pnpm playwright install --with-deps
 
           - name: ⚒️ Test app
             run: pnpm test --filter=${{ inputs.name }}
