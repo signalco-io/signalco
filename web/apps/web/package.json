@@ -77,6 +77,7 @@
         "budget": 358400,
         "budgetPercentIncreaseRed": 10,
         "minimumChangeThreshold": 10,
-        "showDetails": true
+        "showDetails": true,
+        "skipCommentIfEmpty": true
     }
 }

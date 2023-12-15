@@ -145,30 +145,12 @@ jobs:
             with:
               result-encoding: string
               script: |
-                const fs = require('fs')
-                const comment = fs.readFileSync('${{ inputs.path }}/.next/analyze/__bundle_analysis_comment.txt', 'utf8') + "<!-- __NEXTJS_BUNDLE_${{ inputs.name }} -->"
-                core.setOutput('body', comment)
+                echo "body<<EOF" >> $GITHUB_OUTPUT
+                echo "$(cat ${{ inputs.path }}/.next/analyze/__bundle_analysis_comment.txt)" >> $GITHUB_OUTPUT
+                echo EOF >> $GITHUB_OUTPUT
     
-          - name: 💬 Find Comment
-            uses: peter-evans/find-comment@v2
-            if: success() && github.event.number
-            id: fc
+          - name: 💬 Comment
+            uses: marocchino/sticky-pull-request-comment@v2
             with:
-              issue-number: ${{ github.event.number }}
-              body-includes: '<!-- __NEXTJS_BUNDLE_${{ inputs.name }} -->'
-    
-          - name: 💬 Create Comment
-            uses: peter-evans/create-or-update-comment@v3.1.0
-            if: success() && github.event.number && steps.fc.outputs.comment-id == 0
-            with:
-              issue-number: ${{ github.event.number }}
-              body: ${{ steps.get-comment-body.outputs.body }}
-    
-          - name: 💬 Update Comment
-            uses: peter-evans/create-or-update-comment@v3.1.0
-            if: success() && github.event.number && steps.fc.outputs.comment-id != 0
-            with:
-              issue-number: ${{ github.event.number }}
-              body: ${{ steps.get-comment-body.outputs.body }}
-              comment-id: ${{ steps.fc.outputs.comment-id }}
-              edit-mode: replace
+              header: next-touched-pages
+              message: ${{ steps.get-comment-body.outputs.body }}
