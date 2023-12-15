@@ -30,7 +30,7 @@
     "@enterwell/react-hooks": "0.4.1",
     "@hcaptcha/react-hcaptcha": "1.9.2",
     "@next/env": "14.0.4",
-    "@planetscale/database": "1.11.0",
+    "@planetscale/database": "1.13.0",
     "@signalco/data": "workspace:*",
     "@signalco/hooks": "workspace:*",
     "@signalco/js": "workspace:*",
