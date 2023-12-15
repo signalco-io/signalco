@@ -57,7 +57,7 @@ jobs:
           then 
             echo "stack=production" >> $GITHUB_OUTPUT
           else
-            echo "stack=${BASE_BRANCH#refs/heads/})" >> $GITHUB_OUTPUT
+            echo "stack=${BASE_BRANCH#refs/heads/}" >> $GITHUB_OUTPUT
           fi
         id: extract_branch
         env:
