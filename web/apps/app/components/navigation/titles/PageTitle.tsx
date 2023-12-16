@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Avatar } from '@signalco/ui-primitives/Avatar';
-import { KnownPages } from '../../src/knownPages';
-import { useActiveNavItem } from './useActiveNavItem';
+import { useActiveNavItem } from '../useActiveNavItem';
+import { KnownPages } from '../../../src/knownPages';
 import { SpaceTitle } from './SpaceTitle';
 import { EntityTitle } from './EntityTitle';
 import { EntitiesTitle } from './EntitiesTitle';
@@ -48,10 +48,10 @@ export function PageTitle({ fullPage = false }: { fullPage?: boolean }) {
                         <NavItemIcon />
                     </Avatar>
                 ) : (
-                        <NavItemIcon />
+                    <NavItemIcon />
                 )
             )}
-            <Typography level={fullPage ? 'h4' : 'h6'}>{activeNavItem?.label}</Typography>
+            <Typography level={fullPage ? 'h4' : 'body1'}>{activeNavItem?.label}</Typography>
         </Row>
     );
 }

@@ -18,25 +18,21 @@ export function MobileMenu({ open, items, active, onClose }: { open: boolean; it
             open && 'animate-in slide-in-from-top-3'
         )}>
             <Stack>
-                {items.map((ni, index) => {
-                    const ItemIcon = ni.icon;
-
-                    return (
-                        <Tooltip title={t(ni.label)} key={index + 1}>
-                            <Link href={ni.path}>
-                                <Button
-                                    fullWidth
-                                    aria-label={t(ni.label)}
-                                    variant={ni === active ? 'soft' : 'plain'}
-                                    size="lg"
-                                    onClick={onClose}
-                                    startDecorator={(<ItemIcon />)}>
-                                    {ni.label}
-                                </Button>
-                            </Link>
-                        </Tooltip>
-                    );
-                })}
+                {items.map((ni, index) => (
+                    <Tooltip title={t(ni.label)} key={index + 1}>
+                        <Link href={ni.path}>
+                            <Button
+                                fullWidth
+                                aria-label={t(ni.label)}
+                                variant={ni === active ? 'soft' : 'plain'}
+                                size="lg"
+                                onClick={onClose}
+                                startDecorator={(<ni.icon />)}>
+                                {ni.label}
+                            </Button>
+                        </Link>
+                    </Tooltip>
+                ))}
             </Stack>
         </div>
     );
