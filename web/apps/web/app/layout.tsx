@@ -1,16 +1,12 @@
 import Script from 'next/script';
-import { Raleway, Inter } from 'next/font/google';
-import { type Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { Viewport, type Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import './global.css';
 
-const raleway = Raleway({
-    subsets: ['latin'],
-    variable: '--font-raleway',
-});
 const inter = Inter({
     subsets: ['latin'],
-    variable: '--font-raleway',
+    variable: '--font-sans',
 });
 
 export default function RootLayout({ children, }: {
@@ -18,7 +14,7 @@ export default function RootLayout({ children, }: {
 }) {
     return (
         <html lang="en">
-            <body className={`${raleway.variable} ${inter.variable} font-sans`}>
+            <body className={`${inter.variable} font-sans`}>
                 {children}
                 <Analytics />
                 <Script src="/clarity.js" />
@@ -30,11 +26,6 @@ export default function RootLayout({ children, }: {
 export const metadata = {
     title: 'Signalco',
     description: 'Automate your life',
-    themeColor: [
-        { media: '(prefers-color-scheme: light)', color: 'white' },
-        { media: '(prefers-color-scheme: dark)', color: 'black' },
-        { color: 'black' },
-    ],
     manifest: '/manifest.webmanifest',
     icons: {
         apple: '/apple-touch-icon.png',
@@ -44,3 +35,11 @@ export const metadata = {
         ]
     }
 } satisfies Metadata;
+
+export const viewport = {
+    themeColor: [
+        { media: '(prefers-color-scheme: light)', color: 'white' },
+        { media: '(prefers-color-scheme: dark)', color: 'black' },
+        { color: 'black' },
+    ]
+} satisfies Viewport;

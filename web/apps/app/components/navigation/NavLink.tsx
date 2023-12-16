@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { cx } from 'classix';
-import { Tooltip } from '@signalco/ui/dist/Tooltip';
-import { IconButton } from '@signalco/ui/dist/IconButton';
+import { Tooltip } from '@signalco/ui-primitives/Tooltip';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { cx } from '@signalco/ui-primitives/cx';
 import styles from './NavLink.module.scss';
 
 export type NavLinkProps = {
@@ -19,7 +19,7 @@ export default function NavLink({ path, Icon, active, label, onClick }: NavLinkP
         <Tooltip title={label}>
             <Link href={path}>
                 <IconButton
-                    className={cx(styles.root, active && styles.active)}
+                    className={cx(styles.root, 'relative', active && styles.active)}
                     aria-label={label}
                     title={label}
                     variant="plain"

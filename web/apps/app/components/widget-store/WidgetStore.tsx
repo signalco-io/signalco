@@ -1,12 +1,12 @@
 import React from 'react';
-import Image from 'next/image';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Input } from '@signalco/ui-primitives/Input';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { Card } from '@signalco/ui-primitives/Card';
 import { Add } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Input } from '@signalco/ui/dist/Input';
-import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Card, CardOverflow } from '@signalco/ui/dist/Card';
+import { asArray } from '@signalco/js';
 import { widgetType } from '../widgets/Widget';
 import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
 
@@ -70,6 +70,12 @@ const availableWidgets: { type: widgetType | widgetType[], name: string, descrip
         name: 'Graph',
         description: 'Visaulize your data with graph.',
         preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Graph.png',
+    },
+    {
+        type: 'energy',
+        name: 'Energy',
+        description: 'Visaulize your energy consumption.',
+        preview: '/assets/widget-previews/Components_Widgets_Widget_Widget Energy.png',
     }
 ];
 
@@ -84,26 +90,24 @@ function WidgetStore(props: { onAddWidget?: (widgetType: widgetType) => void }) 
         <Stack spacing={4}>
             <Input placeholder="Search..." value={searchAvailableWidgetsText} onChange={(e) => handleSearchAvailableWidgetsTextChange(e.target.value)} />
             <div className="overflow-y-auto overflow-x-hidden">
-                <div className="grid auto-cols-max justify-center gap-2">
+                <div className="grid auto-cols-max gap-2">
                     {filteredAvailableWidgetsItems.map((availableWidget, index) => (
-                        <Card key={`${availableWidget.type}-${index}`} className="w-64">
-                            <Row spacing={1} justifyContent="space-between">
-                                <div>
-                                    <Typography>{availableWidget.name}</Typography>
-                                    <Typography level="body2">{availableWidget.description}</Typography>
-                                </div>
-                                <IconButton disabled={props.onAddWidget == null} aria-label="Add to dashboard" onClick={() => props.onAddWidget && props.onAddWidget(Array.isArray(availableWidget.type) ? availableWidget.type[0] : availableWidget.type)}>
-                                    <Add />
-                                </IconButton>
-                            </Row>
-                            <CardOverflow className="pt-2">
-                                <Image
-                                    style={{ aspectRatio: 1 }}
-                                    src={availableWidget.preview}
-                                    alt={`${availableWidget.name} Preview`}
-                                    fill
-                                    sizes="100vw" />
-                            </CardOverflow>
+                        <Card key={`${availableWidget.type}-${index}`} className="w-full">
+                            <Stack spacing={1}>
+                                <Row spacing={1} justifyContent="space-between" alignItems="start">
+                                    <div>
+                                        <Typography>{availableWidget.name}</Typography>
+                                        <Typography level="body2" secondary>{availableWidget.description}</Typography>
+                                    </div>
+                                    <IconButton
+                                        variant="plain"
+                                        disabled={props.onAddWidget == null}
+                                        aria-label="Add to dashboard"
+                                        onClick={() => props.onAddWidget && props.onAddWidget(asArray(availableWidget.type)[0] ?? 'unknown')}>
+                                        <Add />
+                                    </IconButton>
+                                </Row>
+                            </Stack>
                         </Card>
                     ))}
                 </div>

@@ -1,10 +1,10 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Divider } from '@signalco/ui-primitives/Divider';
+import { Container } from '@signalco/ui-primitives/Container';
+import { Button } from '@signalco/ui-primitives/Button';
 import { Navigate } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Divider } from '@signalco/ui/dist/Divider';
-import { Container } from '@signalco/ui/dist/Container';
-import {Button} from '@signalco/ui/dist/Button';
 import DeveloperOnly from '../shared/DeveloperOnly';
 import DiscoverVisual from '../pages/landing/visuals/DiscoverVisual';
 import Cover from '../pages/landing/Cover';
@@ -71,7 +71,7 @@ export default function LandingPageView() {
                     content="Access all features wherever you are. Controlling devices in your home from other side of the world or room&nbsp;:) has never been simpler." />
                 <FeatureDescription
                     header="Share"
-                    content="Share devices, media, dashboards, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
+                    content="Share devices, media, spaces, everything connected, with anyone on signalco or publically. Invite with friends, family, and coworkers. You are in full control over what others can see and do." />
                 <FeatureDescription
                     header="Relax"
                     content="Enjoy the automated life. Use gained free time doing what you love. Relax in nature, hobbies, family... or automate one more thing." />

@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
-    <PackageReference Include="Serilog.Extensions.Hosting" Version="7.0.0" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
   </ItemGroup>
 
@@ -26,6 +26,7 @@
     <ProjectReference Include="..\Signal.Beacon.Voice\Signal.Beacon.Voice.csproj" />
     <ProjectReference Include="..\Signal.Beacon.Channel.Zigbee2Mqtt\Signal.Beacon.Channel.Zigbee2Mqtt.csproj" />
     <ProjectReference Include="..\Signalco.Station.Channel.MiFlora\Signalco.Station.Channel.MiFlora.csproj" />
+    <ProjectReference Include="..\Signalco.Station.Channel.Shelly\Signalco.Station.Channel.Shelly.csproj" />
   </ItemGroup>
 
   <ItemGroup>

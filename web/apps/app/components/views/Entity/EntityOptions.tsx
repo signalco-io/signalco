@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
+import { Button } from '@signalco/ui-primitives/Button';
+import { showNotification } from '@signalco/ui-notifications';
 import { MoreHorizontal } from '@signalco/ui-icons';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
-import { Button } from '@signalco/ui/dist/Button';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
-import { showNotification } from '../../../src/notifications/PageNotificationService';
 import { KnownPages } from '../../../src/knownPages';
 import useLocale from '../../../src/hooks/useLocale';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
@@ -49,7 +49,7 @@ export default function EntityOptions({ id, canHideRaw, showRaw, showRawChanged,
         <>
             <DropdownMenu>
                 <DropdownMenuTrigger>
-                    <Button {...rest}>
+                    <Button variant="plain" {...rest}>
                         <MoreHorizontal />
                     </Button>
                 </DropdownMenuTrigger>

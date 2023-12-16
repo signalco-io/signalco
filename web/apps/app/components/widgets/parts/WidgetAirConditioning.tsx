@@ -1,12 +1,10 @@
-import React, { useMemo } from 'react';
-import Link from 'next/link';
-import { cx } from 'classix';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Icon } from '@signalco/ui/dist/Icon';
-import { Button } from '@signalco/ui/dist/Button';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { useMemo } from 'react';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Button } from '@signalco/ui-primitives/Button';
+import { usePromise } from '@enterwell/react-hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
 import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -17,6 +15,8 @@ import useContact from '../../../src/hooks/signalco/useContact';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import { historiesAsync } from '../../../src/contacts/ContactRepository';
+import { SmallIndicator } from './piece/SmallIndicator';
+import { PrimaryValueLabel, numberWholeAndDecimal } from './piece/PrimaryValueLabel';
 
 type ConfigProps = {
     label?: string;
@@ -38,64 +38,6 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     DefaultRows(4)
 ];
 
-interface SmallIndicatorProps {
-    isActive: boolean;
-    icon: string;
-    label: string;
-    activeBackgroundColor: string;
-    href: string;
-    small?: boolean | undefined;
-}
-
-function SmallIndicator({
-    isActive,
-    icon,
-    label,
-    activeBackgroundColor,
-    href,
-    small = true
-}: SmallIndicatorProps) {
-    return (
-        <Link href={href} passHref>
-            <Button variant="plain" fullWidth>
-                <div
-                    className={cx(
-                        'rounded-md',
-                        !small && 'min-w-[52px] min-h-[82px]',
-                        small && 'min-w-[24px] min-h-[30px]'
-                    )}
-                    style={{
-                        backgroundColor: isActive ? activeBackgroundColor : 'transparent',
-                    }}>
-                    <Stack alignItems="center" justifyContent="center" style={{ height: '100%', flexDirection: small ? 'row' : 'column' }} spacing={1}>
-                        <Icon className={cx(
-                            small && 'text-lg',
-                            !small && 'text-2xl',
-                            !isActive && 'opacity-30'
-                        )}>{icon}</Icon>
-                        <Typography level="body3">{label}</Typography>
-                    </Stack>
-                </div>
-            </Button>
-        </Link>
-    );
-}
-
-function numberWholeAndDecimal(data: string | undefined) {
-    const degrees = typeof data !== 'undefined'
-        ? Number.parseFloat(data)
-        : undefined;
-    const degreesWhole = typeof degrees !== 'undefined'
-        ? Math.floor(degrees)
-        : undefined;
-    return [
-        degreesWhole,
-        typeof degrees !== 'undefined' && typeof degreesWhole !== 'undefined'
-            ? Math.floor((degrees - degreesWhole) * 10)
-            : undefined
-    ];
-}
-
 function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
     const { config } = props;
     useWidgetOptions(stateOptions, props);
@@ -109,7 +51,6 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
     const columns = config?.columns ?? 4;
     const rows = config?.rows ?? 4;
 
-    const [degreesWhole, degreesDecimal] = numberWholeAndDecimal(temperatureContact?.valueSerialized);
     const [humidityWhole] = numberWholeAndDecimal(humidityContact?.valueSerialized);
 
     const heatingContact = useContact(heatingDevice && config?.targetHeating ? {
@@ -124,29 +65,22 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
         temperatureContact
             ? (() => historiesAsync([temperatureContact], duration))
             : undefined, [temperatureContact, duration]);
-    const historyData = useLoadAndError(loadHistoryCallback);
+    const historyData = usePromise(loadHistoryCallback);
 
     return (
         <div className="h-full w-full">
             <Stack alignItems="center" justifyContent="center" className="h-full">
-                <Link href={`${KnownPages.Entities}/${temperatureDevice?.id}`} passHref>
-                    <Button variant="plain">
-                        <Row alignItems="stretch">
-                            <Stack style={{ height: '100%' }} justifyContent="center" alignItems="center">
-                                <Typography extraThin fontSize={rows > 2 ? 64 : 42} lineHeight={1}>{degreesWhole}</Typography>
-                            </Stack>
-                            <Stack justifyContent="space-between">
-                                <Typography extraThin fontSize={rows > 2 ? 18 : 12} opacity={0.6}>&#176;C</Typography>
-                                <Typography extraThin fontSize={rows > 2 ? 18 : 14} opacity={0.6}>.{degreesDecimal}</Typography>
-                            </Stack>
-                        </Row>
-                    </Button>
-                </Link>
+                <Button variant="plain" href={`${KnownPages.Entities}/${temperatureDevice?.id}`}>
+                    <PrimaryValueLabel
+                        value={temperatureContact?.valueSerialized}
+                        unit={'\u00B0C'}
+                        size={rows > 2 ? 'large' : 'small'} />
+                </Button>
                 {config?.label && (
                     <Typography
                         thin={rows > 1}
-                        fontSize={rows > 1 ? '1rem' : '0.7rem'}
-                        opacity={0.5}>
+                        className={cx(rows > 1 ? 'text-base' : 'text-xs')}
+                        tertiary>
                         {config.label}
                     </Typography>
                 )}
@@ -161,7 +95,13 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                         }}
                         alignItems="stretch">
                         {humidityContact && (
-                            <SmallIndicator small={rows < 4} isActive={false} label={`${humidityWhole}%`} icon="water_drop" href={`${KnownPages.Entities}/${humidityContact?.entityId}`} activeBackgroundColor={'#445D79'} />
+                            <SmallIndicator
+                                small={rows < 4}
+                                isActive={false}
+                                label={`${humidityWhole}%`}
+                                icon="water_drop"
+                                href={`${KnownPages.Entities}/${humidityContact?.entityId}`}
+                                activeBackgroundColor={'#445D79'} />
                         )}
                         {config?.targetCooling &&
                             <SmallIndicator small={rows < 4} isActive={false} label="Cooling" icon="ac_unit" activeBackgroundColor="#445D79" href={`${KnownPages.Entities}/${coolingDevice?.id}`} />

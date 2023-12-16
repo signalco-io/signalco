@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { cx } from 'classix';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Button } from '@signalco/ui/dist/Button';
-import { useTimeout } from '@signalco/hooks/dist/useTimeout';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Button } from '@signalco/ui-primitives/Button';
+import { useTimeout } from '@signalco/hooks/useTimeout';
 
 export default function Login() {
     const [isLong, setIsLong] = useState(false);

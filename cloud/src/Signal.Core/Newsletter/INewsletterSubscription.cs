@@ -1,7 +1,6 @@
-﻿namespace Signal.Core.Newsletter
+﻿namespace Signal.Core.Newsletter;
+
+public interface INewsletterSubscription
 {
-    public interface INewsletterSubscription
-    {
-        string Email { get; set; }
-    }
+    string Email { get; set; }
 }

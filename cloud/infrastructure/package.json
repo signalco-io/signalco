@@ -8,24 +8,25 @@
         "restart-functions": "node tools/restart-functions.js"
     },
     "devDependencies": {
-        "@types/node": "18.17.19",
-        "@typescript-eslint/eslint-plugin": "6.7.2",
-        "@typescript-eslint/parser": "6.7.2",
-        "eslint": "8.50.0",
+        "@types/node": "20.10.4",
+        "@typescript-eslint/eslint-plugin": "6.14.0",
+        "@typescript-eslint/parser": "6.14.0",
+        "eslint": "8.56.0",
         "eslint-config-standard": "17.1.0",
-        "eslint-plugin-import": "2.28.1",
-        "eslint-plugin-n": "16.1.0",
+        "eslint-plugin-import": "2.29.1",
+        "eslint-plugin-n": "16.4.0",
         "eslint-plugin-node": "11.1.0",
         "eslint-plugin-promise": "6.1.1",
-        "typescript": "5.2.2"
+        "typescript": "5.3.3"
     },
     "dependencies": {
         "@checkly/pulumi": "1.1.4",
-        "@pulumi/aws": "6.2.1",
-        "@pulumi/azure-native": "2.8.0",
-        "@pulumi/cloudflare": "5.11.0",
-        "@pulumi/command": "0.9.1",
-        "@pulumi/docker": "4.4.1",
-        "@pulumi/pulumi": "3.85.0"
+        "@pulumi/aws": "6.14.0",
+        "@pulumi/azure-native": "2.22.0",
+        "@pulumi/cloudflare": "5.16.0",
+        "@pulumi/command": "0.9.2",
+        "@pulumi/docker": "4.5.0",
+        "@pulumi/pulumi": "3.97.0",
+        "@pulumiverse/vercel": "1.0.1"
     }
 }

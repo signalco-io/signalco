@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
-import { cx } from 'classix';
-import { Row } from '@signalco/ui/dist/Row';
-import { Link } from '@signalco/ui/dist/Link';
-import { Container } from '@signalco/ui/dist/Container';
-import { Button } from '@signalco/ui/dist/Button';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Link } from '@signalco/ui-primitives/Link';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Container } from '@signalco/ui-primitives/Container';
+import { Button } from '@signalco/ui-primitives/Button';
 
 type NavLinkItem = {
     href: string,

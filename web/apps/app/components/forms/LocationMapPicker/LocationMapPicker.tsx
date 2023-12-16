@@ -1,17 +1,17 @@
 import React, { useCallback, useState } from 'react';
 import { Draggable, Map, Marker } from 'pigeon-maps';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Input } from '@signalco/ui-primitives/Input';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { showNotification } from '@signalco/ui-notifications';
 import { MyLocation } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { Input } from '@signalco/ui/dist/Input';
-import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Accordion } from '@signalco/ui/dist/Accordion';
+import { Loadable } from '@signalco/ui/Loadable';
+import { Accordion } from '@signalco/ui/Accordion';
 import { asArray, objectWithKey } from '@signalco/js';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { usePromise } from '@enterwell/react-hooks';
 import { FieldConfig } from '@enterwell/react-form-builder/lib/index.types';
-import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useUserTheme from '../../../src/hooks/useUserTheme';
 
 const mapBoxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -45,7 +45,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
 
     const [expanded, setExpanded] = useState<boolean>(false);
     const loadLatLngToAddress = useCallback(() => latLngToAddress(latLng), [latLng]);
-    const placeName = useLoadAndError(loadLatLngToAddress);
+    const placeName = usePromise(loadLatLngToAddress);
     const [zoom, setZoom] = useState<number | undefined>(3);
     const themeContext = useUserTheme();
 

@@ -1,16 +1,15 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import React from 'react';
-import { cx } from 'classix';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { Divider } from '@signalco/ui-primitives/Divider';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Button } from '@signalco/ui-primitives/Button';
 import { Add, Pin, PinOff } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Divider } from '@signalco/ui/dist/Divider';
-import { Card } from '@signalco/ui/dist/Card';
-import { Button } from '@signalco/ui/dist/Button';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { DndContext, DragEndEvent, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
@@ -47,10 +46,11 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
 
     return (
         <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-            <Row style={{ width: '100%', position: 'relative' }}>
+            <Row className="relative">
                 <Button
                     variant="plain"
                     className={cx(
+                        'grow peer',
                         dashboard.id !== selectedId && 'text-neutral-400'
                     )}
                     onClick={() => onSelection(dashboard.id)}
@@ -58,11 +58,16 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
                 >
                     {dashboard.name}
                 </Button>
-                <div className="absolute right-0 h-full">
-                    <IconButton onClick={() => onFavorite(dashboard.id)}>
-                        {dashboard.isFavorite ? <Pin /> : <PinOff />}
-                    </IconButton>
-                </div>
+                <IconButton
+                    className={cx(
+                        'absolute right-0 hover:opacity-100 peer-hover:opacity-100',
+                        dashboard.isFavorite ? 'opacity-60' : 'opacity-0'
+                    )}
+                    size="sm"
+                    variant="plain"
+                    onClick={() => onFavorite(dashboard.id)}>
+                    {dashboard.isFavorite ? <Pin size={16} /> : <PinOff size={16} />}
+                </IconButton>
             </Row>
         </div>
     );
@@ -103,7 +108,10 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
             const newIndex = orderedDashboardIds.indexOf(over.id.toString());
             const newOrderedDashboards = arrayMove(orderedDashboards, oldIndex, newIndex);
             for (let i = 0; i < newOrderedDashboards.length; i++) {
-                newOrderedDashboards[i].order = i;
+                const item = newOrderedDashboards[i];
+                if (item) {
+                    item.order = i;
+                }
             }
 
             await DashboardsRepository.dashboardsOrderSetAsync(newOrderedDashboards.map(d => d.id));
@@ -134,39 +142,35 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     console.debug('Rendering DashboardSelectorMenu')
 
     return (
-        <Card>
-            <Stack spacing={1}>
-                <Stack style={{ minWidth: 280 }}>
-                    <Stack style={{ maxHeight: '50vh', overflow: 'auto' }}>
-                        <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
-                            <SortableContext items={orderedDashboardIds}>
-                                {orderedDashboards.map((d) => (
-                                    <DashboardSortableItem
-                                        key={d.id}
-                                        dashboard={d}
-                                        selectedId={selectedId}
-                                        onSelection={onSelection}
-                                        onFavorite={handleToggleFavorite} />
-                                ))}
-                            </SortableContext>
-                        </DndContext>
-                    </Stack>
-                    <Button variant="plain" onClick={handleNewDashboard} startDecorator={<Add />}>{t('NewDashboard')}</Button>
+        <Stack>
+            <Stack className="p-2">
+                <Stack className="max-h-[50vh] overflow-auto">
+                    <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
+                        <SortableContext items={orderedDashboardIds}>
+                            {orderedDashboards.map((d) => (
+                                <DashboardSortableItem
+                                    key={d.id}
+                                    dashboard={d}
+                                    selectedId={selectedId}
+                                    onSelection={onSelection}
+                                    onFavorite={handleToggleFavorite} />
+                            ))}
+                        </SortableContext>
+                    </DndContext>
                 </Stack>
-                <Divider />
-                <Stack>
-                    <Row>
-                        <div style={{ flexGrow: 1 }}>
-                            <Typography level="body2">{selectedDashboard?.name}</Typography>
-                        </div>
-                        <ShareEntityChip entity={selectedDashboard} entityType={3} />
-                    </Row>
-                    <Button variant="plain" onClick={onFullscreen}>{t('ToggleFullscreen')}</Button>
-                    <Button variant="plain" onClick={onSettings}>{t('Settings')}</Button>
-                    <Button variant="plain" onClick={onEditWidgets}>{t('EditWidgets')}</Button>
-                </Stack>
+                <Button variant="plain" onClick={handleNewDashboard} startDecorator={<Add />}>{t('NewDashboard')}</Button>
             </Stack>
-        </Card>
+            <Divider />
+            <Stack className="p-2">
+                <Row>
+                    <Typography level="body2" className="grow">{selectedDashboard?.name}</Typography>
+                    <ShareEntityChip entity={selectedDashboard} entityType={3} />
+                </Row>
+                <Button variant="plain" onClick={onFullscreen}>{t('ToggleFullscreen')}</Button>
+                <Button variant="plain" onClick={onSettings}>{t('Settings')}</Button>
+                <Button variant="plain" onClick={onEditWidgets}>{t('EditWidgets')}</Button>
+            </Stack>
+        </Stack>
     );
 }
 

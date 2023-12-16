@@ -8,14 +8,10 @@ using Signal.Core.Exceptions;
 
 namespace Signal.Api.Common.Exceptions;
 
-public class UserRequestContext : AnonymousRequestContext
+public class UserRequestContext(IUserAuth user, CancellationToken cancellationToken = default)
+    : AnonymousRequestContext(cancellationToken)
 {
-    public UserRequestContext(IUserAuth user, CancellationToken cancellationToken = default) : base(cancellationToken)
-    {
-        this.User = user ?? throw new ArgumentNullException(nameof(user));
-    }
-
-    public IUserAuth User { get; }
+    public IUserAuth User { get; } = user ?? throw new ArgumentNullException(nameof(user));
 
     public async Task ValidateUserAssignedAsync(IEntityService entityService, string id)
     {

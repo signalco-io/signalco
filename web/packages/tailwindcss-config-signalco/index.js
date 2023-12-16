@@ -2,18 +2,11 @@ const { fontFamily } = require("tailwindcss/defaultTheme")
 
 /** @type {import('tailwindcss').Config} */
 export const baseConfig = {
-    darkMode: ["class"],
+    darkMode: ["class", '[class="dark"]'],
     content: [
         './src/**/*.{ts,tsx}'
     ],
     theme: {
-        // container: {
-        //     center: true,
-        //     padding: "2rem",
-        //     screens: {
-        //         "2xl": "1400px",
-        //     },
-        // },
         extend: {
             colors: {
                 border: "hsl(var(--border))",
@@ -28,6 +21,10 @@ export const baseConfig = {
                 secondary: {
                     DEFAULT: "hsl(var(--secondary))",
                     foreground: "hsl(var(--secondary-foreground))",
+                },
+                tertiary: {
+                    DEFAULT: "hsl(var(--tertiary))",
+                    foreground: "hsl(var(--tertiary-foreground))",
                 },
                 destructive: {
                     DEFAULT: "hsl(var(--destructive))",
@@ -48,6 +45,7 @@ export const baseConfig = {
                 card: {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
+                    transparent: "hsl(var(--card-transparent))",
                 },
             },
             borderRadius: {
@@ -56,8 +54,7 @@ export const baseConfig = {
                 sm: "calc(var(--radius) - 4px)",
             },
             fontFamily: {
-                sans: ["var(--font-sans)", ...fontFamily.sans],
-                raleway: ["var(--font-raleway)", ...fontFamily.sans],
+                sans: ["var(--font-sans)", ...fontFamily.sans]
             },
             keyframes: {
                 "accordion-down": {
@@ -67,7 +64,7 @@ export const baseConfig = {
                 "accordion-up": {
                     from: { height: "var(--radix-accordion-content-height)" },
                     to: { height: 0 },
-                },
+                }
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",

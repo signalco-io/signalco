@@ -1,9 +1,9 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Button } from '@signalco/ui-primitives/Button';
 import { SmileMeh, SmileVeryHappy } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Button } from '@signalco/ui/dist/Button';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultColumns, DefaultTarget } from '../../../src/widgets/WidgetConfigurationOptions';
 import type IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';

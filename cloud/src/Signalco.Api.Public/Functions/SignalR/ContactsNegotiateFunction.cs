@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -11,19 +10,10 @@ using Signal.Api.Common.SignalR;
 
 namespace Signalco.Api.Public.Functions.SignalR;
 
-public class ContactsNegotiateFunction
+public class ContactsNegotiateFunction(
+    IFunctionAuthenticator authenticator,
+    ISignalRHubContextProvider contextProvider)
 {
-    private readonly IFunctionAuthenticator authenticator;
-    private readonly ISignalRHubContextProvider contextProvider;
-
-    public ContactsNegotiateFunction(
-        IFunctionAuthenticator authenticator,
-        ISignalRHubContextProvider contextProvider)
-    {
-        this.authenticator = authenticator ?? throw new ArgumentNullException(nameof(authenticator));
-        this.contextProvider = contextProvider ?? throw new ArgumentNullException(nameof(contextProvider));
-    }
-
     [Function("SignalR-Contacts-Negotiate")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ContactsNegotiateFunction>("SignalR",
@@ -34,9 +24,9 @@ public class ContactsNegotiateFunction
         HttpRequestData req,
         CancellationToken cancellationToken = default)
     {
-        return await req.UserRequest(cancellationToken, this.authenticator, async context =>
+        return await req.UserRequest(cancellationToken, authenticator, async context =>
         {
-            var hub = await this.contextProvider.GetAsync("contacts", cancellationToken);
+            var hub = await contextProvider.GetAsync("contacts", cancellationToken);
             var negotiateResult = await hub.NegotiateAsync(new NegotiationOptions
             {
                 UserId = context.User.UserId

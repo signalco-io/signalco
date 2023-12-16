@@ -3,20 +3,19 @@
 name: "[Cloud] Preview Deploy"
 
 on:
-  pull_request:
-    branches:
-      - "main"
-      - "next"
-
-env:
-  DOTNET_VERSION: "7.0.x" # set this to the dotnet version to use
+  workflow_call:
+    inputs:
+      baseRef:
+        required: true
+        type: string
+        description: "The base branch to deploy to"
 
 defaults:
   run:
     working-directory: ./cloud/infrastructure
 
 jobs:
-  build-and-deploy:
+  build-and-preview:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout GitHub Action"
@@ -31,10 +30,10 @@ jobs:
           npx mutex wait signalcocloudpreview
           popd
 
-      - name: ✨ Setup DotNet ${{ env.DOTNET_VERSION }} Environment
-        uses: actions/setup-dotnet@v3
+      - name: ✨ Setup DotNet
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: "7.0.x"
 
       - name: ✨ Setup pnpm
         uses: pnpm/action-setup@v2.4.0
@@ -42,9 +41,9 @@ jobs:
           version: 'latest'
 
       - name: ✨ Setup Node LTS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "18.x"
+          node-version: "20.x"
           cache: pnpm
           cache-dependency-path: ./cloud/infrastructure
 
@@ -54,16 +53,21 @@ jobs:
       - name: 🔎 Determine stack
         shell: bash
         run: |
-          [[ $(echo ${BASE_BRANCH#refs/heads/}) = "main" ]] && echo "##[set-output name=branch;]production" || echo "##[set-output name=branch;]$(echo ${BASE_BRANCH#refs/heads/})"
+          if [[ $(echo ${BASE_BRANCH#refs/heads/}) = "main" ]]
+          then 
+            echo "stack=production" >> $GITHUB_OUTPUT
+          else
+            echo "stack=${BASE_BRANCH#refs/heads/}" >> $GITHUB_OUTPUT
+          fi
         id: extract_branch
         env:
-          BASE_BRANCH: ${{ github.base_ref }}
+          BASE_BRANCH: ${{ inputs.baseRef }}
 
       - name: ⚡ Preview Deploy Infrastructure
         uses: pulumi/actions@v4
         with:
           command: preview
-          stack-name: signalco/cloud-primary/${{ steps.extract_branch.outputs.branch }}
+          stack-name: signalco/cloud-primary/${{ steps.extract_branch.outputs.stack }}
           work-dir: ./cloud/infrastructure
           comment-on-pr: true
         env:

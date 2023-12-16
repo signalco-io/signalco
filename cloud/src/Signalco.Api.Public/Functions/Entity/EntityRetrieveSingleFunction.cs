@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.OpenApi.Models;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Entities;
 using Signal.Api.Common.Exceptions;
@@ -16,22 +17,14 @@ using Signal.Core.Exceptions;
 
 namespace Signalco.Api.Public.Functions.Entity;
 
-public class EntityRetrieveSingleFunction
+public class EntityRetrieveSingleFunction(
+    IFunctionAuthenticator functionAuthenticator,
+    IEntityService entityService)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly IEntityService entityService;
-
-    public EntityRetrieveSingleFunction(
-        IFunctionAuthenticator functionAuthenticator,
-        IEntityService entityService)
-    {
-        this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-    }
-    
     [Function("Entity-Retrieve-Single")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<EntityRetrieveSingleFunction>("Entity", Description = "Retrieves entity.")]
+    [OpenApiParameter("id", In = ParameterLocation.Path, Required = true, Type = typeof(Guid), Description = "Entity identifier")]
     [OpenApiOkJsonResponse<EntityDetailsDto>]
     [OpenApiResponseWithoutBody(HttpStatusCode.NotFound)]
     public async Task<HttpResponseData> RunSingle(
@@ -39,8 +32,8 @@ public class EntityRetrieveSingleFunction
         HttpRequestData req,
         string id,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest(cancellationToken, this.functionAuthenticator, async context =>
-            EntityDetailsDto(await this.entityService.GetDetailedAsync(context.User.UserId, id, cancellationToken)
+        await req.UserRequest(cancellationToken, functionAuthenticator, async context =>
+            EntityDetailsDto(await entityService.GetDetailedAsync(context.User.UserId, id, cancellationToken)
                              ?? throw new ExpectedHttpException(HttpStatusCode.NotFound)));
     
     // TODO: Use mapper

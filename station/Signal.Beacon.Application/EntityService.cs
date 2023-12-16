@@ -96,6 +96,12 @@ internal class EntityService : IEntityService
         {
             var timeStamp = DateTime.UtcNow;
 
+            this.logger.LogDebug(
+                "Contact {Pointer}: {OldValue} -> {ValueSerialized}",
+                pointer,
+                contact?.ValueSerialized,
+                valueSerialized);
+
             // Update local value (if contact exists)
             contact?.UpdateLocalValue(valueSerialized, timeStamp);
 
@@ -103,12 +109,6 @@ internal class EntityService : IEntityService
                 new ContactUpsertCommand(
                     entity.Id, pointer.ChannelName, pointer.ContactName, valueSerialized, timeStamp, contact == null),
                 cancellationToken);
-
-            this.logger.LogDebug(
-                "Contact {Pointer}: {OldValue} -> {ValueSerialized}",
-                pointer,
-                contact?.ValueSerialized,
-                valueSerialized);
         }
         catch (Exception ex) when (ex.Message.Contains("IDX10223"))
         {

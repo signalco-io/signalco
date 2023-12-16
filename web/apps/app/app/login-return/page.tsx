@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useIsServer } from '@signalco/hooks/dist/useIsServer';
+import { useIsServer } from '@signalco/hooks/useIsServer';
 import { useAuth0 } from '@auth0/auth0-react';
 import Login from '../../components/Login';
 

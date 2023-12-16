@@ -1,21 +1,46 @@
 import { useCallback } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { StringOrUndefined } from '@signalco/js';
 
-export function useSearchParam<S extends string | undefined>(parameterName: string, defaultValue?: S): [StringOrUndefined<S>, (value: string | undefined) => Promise<void>] {
+export function useSetSearchParam(parameterName: string): (value: string | undefined) => void {
     const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
+    const setHashAsync = useCallback((value: string | undefined) => {
+        const currentSearch = new URLSearchParams(Array.from(searchParams.entries()));
+
+        // Ignore if value is the same as current value
+        const currentValue = currentSearch.get(parameterName);
+        if (currentValue === value ||
+            currentValue == null && value == null) {
+            console.debug('useSearchParam: Ignoring because value is the same as current value', parameterName, value, '===', currentValue);
+            return;
+        }
+
+        console.debug('useSearchParam: Setting value', parameterName, 'from', currentValue, 'to', value);
+
+        if (value)
+            currentSearch.set(parameterName, value);
+        else currentSearch.delete(parameterName);
+
+        const search = currentSearch.toString();
+        const query = search ? `?${search}` : '';
+        const url = `${pathname}${query}`;
+
+        console.debug(`useSearchParam: ${parameterName}=${value}`, url);
+
+        router.replace(url);
+    }, [parameterName, router, searchParams, pathname]);
+
+    return setHashAsync;
+}
+
+export function useSearchParam<S extends string | undefined>(parameterName: string, defaultValue?: S): [StringOrUndefined<S>, (value: string | undefined) => void] {
     const searchParams = useSearchParams();
     const currentValue = searchParams.get(parameterName) ?? defaultValue;
+    const setSearchParam = useSetSearchParam(parameterName);
 
-    const setHashAsync = useCallback(async (value: string | undefined) => {
-        const newSearch = new URLSearchParams({ ...searchParams.entries });
-        if (value)
-            newSearch.set(parameterName, value);
-        else newSearch.delete(parameterName);
-        const newUrl = new URL(window.location.href);
-        newUrl.search = newSearch.toString();
-        router.replace(newUrl.toString());
-    }, [parameterName, router, searchParams]);
 
-    return [currentValue as StringOrUndefined<S>, setHashAsync];
+    return [currentValue as StringOrUndefined<S>, setSearchParam];
 }

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { Loadable } from '@signalco/ui/Loadable';
+import { usePromise } from '@enterwell/react-hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
 import { DefaultRows, DefaultColumns, DefaultTargetMultiple, DefaultLabel } from '../../../src/widgets/WidgetConfigurationOptions';
@@ -25,7 +25,7 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     DefaultColumns(4)
 ];
 
-export default function WidgetButton({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
+export default function WidgetGraph({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
     useWidgetOptions(stateOptions, { onOptions });
 
     const columns = config?.columns ?? 4;
@@ -33,7 +33,7 @@ export default function WidgetButton({ config, onOptions }: WidgetSharedProps<Co
     const duration = config?.duration ?? 0;
 
     const loadHistoryCallback = useMemo(() => config?.target ? (() => historiesAsync(config.target, duration)) : undefined, [config?.target, duration]);
-    const historyData = useLoadAndError(loadHistoryCallback);
+    const historyData = usePromise(loadHistoryCallback);
 
     return (
         <Loadable isLoading={historyData.isLoading} loadingLabel="Loading history" error={historyData.error}>

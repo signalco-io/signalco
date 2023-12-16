@@ -4,17 +4,11 @@ using System.Text.Json.Serialization;
 namespace Signal.Api.Common.Entities;
 
 [Serializable]
-public class EntityDto
+public class EntityDto(string id, string alias)
 {
-    public EntityDto(string id, string alias)
-    {
-        this.Id = id;
-        this.Alias = alias;
-    }
-
     [JsonPropertyName("id")]
-    public string Id { get; }
+    public string Id { get; } = id;
 
     [JsonPropertyName("alias")]
-    public string Alias { get; }
+    public string Alias { get; } = alias;
 }

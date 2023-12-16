@@ -15,19 +15,11 @@ using Signalco.Common.Channel;
 
 namespace Signalco.Channel.Slack.Functions.Conducts;
 
-internal class ConductRequestFunction : ConductFunctionsBase
-{
-    private readonly IFunctionAuthenticator authenticator;
-    private readonly ISlackAccessTokenProvider slackAccessTokenProvider;
-
-    public ConductRequestFunction(
+internal class ConductRequestFunction(
         IFunctionAuthenticator authenticator,
         ISlackAccessTokenProvider slackAccessTokenProvider)
-    {
-        this.authenticator = authenticator ?? throw new ArgumentNullException(nameof(authenticator));
-        this.slackAccessTokenProvider = slackAccessTokenProvider ?? throw new ArgumentNullException(nameof(slackAccessTokenProvider));
-    }
-
+    : ConductFunctionsBase
+{
     [Function("Conduct")]
     [OpenApiOperation<ConductRequestFunction>("Conducts")]
     public async Task<HttpResponseData> RunSingle(
@@ -36,7 +28,7 @@ internal class ConductRequestFunction : ConductFunctionsBase
         string entityId,
         string contactName,
         CancellationToken cancellationToken = default) =>
-        await req.UserOrSystemRequest<ConductPayloadDto>(cancellationToken, this.authenticator,
+        await req.UserOrSystemRequest<ConductPayloadDto>(cancellationToken, authenticator,
             async context =>
             {
                 if (string.IsNullOrWhiteSpace(entityId) ||
@@ -55,7 +47,7 @@ internal class ConductRequestFunction : ConductFunctionsBase
                     using var client = new HttpClient();
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                         "Bearer",
-                        await this.slackAccessTokenProvider.GetAccessTokenAsync(entityId, cancellationToken));
+                        await slackAccessTokenProvider.GetAccessTokenAsync(entityId, cancellationToken));
                     await client.PostAsJsonAsync("https://slack.com/api/chat.postMessage", new
                     {
                         text = sendMessagePayload?.Text,

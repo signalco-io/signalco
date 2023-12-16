@@ -1,7 +1,7 @@
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
-import { Card } from '@signalco/ui/dist/Card';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Card } from '@signalco/ui-primitives/Card';
+import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { KnownPages } from '../../src/knownPages';
 
 export default function CtaSection() {
@@ -12,7 +12,7 @@ export default function CtaSection() {
                 <Typography>Focus on things that matter to you.</Typography>
                 <Stack spacing={1}>
                     <NavigatingButton href={KnownPages.App} size="lg">Start now for free</NavigatingButton>
-                    <Typography level="body2" textAlign="center">No credit card required</Typography>
+                    <Typography level="body2" center>No credit card required</Typography>
                 </Stack>
             </Stack>
         </Card>

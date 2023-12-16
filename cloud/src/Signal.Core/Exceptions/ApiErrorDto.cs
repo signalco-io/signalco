@@ -1,14 +1,8 @@
 namespace Signal.Core.Exceptions;
 
-public class ApiErrorDto
+public class ApiErrorDto(string code, string message = "")
 {
-    public string Code { get; }
+    public string Code { get; } = code;
 
-    public string Message { get; }
-
-    public ApiErrorDto(string code, string message = "")
-    {
-        this.Code = code;
-        this.Message = message;
-    }
+    public string Message { get; } = message;
 }

@@ -6,19 +6,11 @@ using Signal.Core.Users;
 
 namespace Signal.Core.Notifications;
 
-internal class NotificationService : INotificationService
-{
-    private readonly INotificationSmtpService smtpService;
-    private readonly IUserService userService;
-
-    public NotificationService(
+internal class NotificationService(
         INotificationSmtpService smtpService,
         IUserService userService)
-    {
-        this.smtpService = smtpService ?? throw new ArgumentNullException(nameof(smtpService));
-        this.userService = userService ?? throw new ArgumentNullException(nameof(userService));
-    }
-
+    : INotificationService
+{
     public async Task CreateAsync(
         IEnumerable<string> userIds, 
         NotificationContent content, 
@@ -29,12 +21,12 @@ internal class NotificationService : INotificationService
         {
             try
             {
-                var user = await this.userService.GetPublicAsync(userId, cancellationToken);
+                var user = await userService.GetPublicAsync(userId, cancellationToken);
 
                 // Send email if requested with options (opt-in)
                 if (options?.SendEmail ?? false)
                 {
-                    await this.smtpService.SendAsync(
+                    await smtpService.SendAsync(
                         user?.Email ??
                         throw new InvalidOperationException($"Email not available for user {userId}"),
                         content.Title,

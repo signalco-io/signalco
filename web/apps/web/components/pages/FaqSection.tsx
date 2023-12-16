@@ -1,7 +1,7 @@
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Container } from '@signalco/ui/dist/Container';
-import { Accordion } from '@signalco/ui/dist/Accordion';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Container } from '@signalco/ui-primitives/Container';
+import { Accordion } from '@signalco/ui/Accordion';
 import PageCenterHeader from './PageCenterHeader';
 
 export interface FaqItem {

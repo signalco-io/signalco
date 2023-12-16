@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
+import { Card, CardOverflow } from '@signalco/ui-primitives/Card';
+import { Button } from '@signalco/ui-primitives/Button';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
-import { ErrorBoundary } from '@signalco/ui/dist/ErrorBoundary';
-import { Card, CardOverflow } from '@signalco/ui/dist/Card';
-import { Button } from '@signalco/ui/dist/Button';
+import { ErrorBoundary } from '@signalco/ui/ErrorBoundary';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidator';
 
@@ -85,7 +85,7 @@ function WidgetCard(props: IWidgetCardProps) {
                         <div className="absolute right-0 top-0">
                             <DropdownMenu>
                                 <DropdownMenuTrigger>
-                                    <Button className="min-w-[42px]" {...props}><MoreHorizontal /></Button>
+                                    <Button className="min-w-[42px]"><MoreHorizontal /></Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
                                     {options && (

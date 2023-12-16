@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { SelectItems } from '@signalco/ui/dist/SelectItems';
-import { Button } from '@signalco/ui/dist/Button';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { SelectItems } from '@signalco/ui-primitives/SelectItems';
+import { Button } from '@signalco/ui-primitives/Button';
 import { asArray, ObjectDictAny } from '@signalco/js';
 import { extractValues } from '@enterwell/react-form-validation';
 import { FormBuilder, type FormItems, useFormField, FormBuilderProvider, FormBuilderComponents } from '@enterwell/react-form-builder';
@@ -30,6 +30,9 @@ const useWidgetConfiguration = (
     const form: ObjectDictAny = {};
     for (let index = 0; index < options.length; index++) {
         const configOption = options[index];
+        if (!configOption) {
+            continue;
+        }
         // eslint-disable-next-line react-hooks/rules-of-hooks
         const field = useFormField(
             config ? config[configOption.name] : undefined,
@@ -109,11 +112,12 @@ const widgetConfigurationFormComponents: FormBuilderComponents = {
     entityContactValue: (props) => <DisplayEntityTarget selectContact selectValue target={props.value} onChanged={t => props.onChange(t, { receiveEvent: false })} />,
     selectVisual: (props) => (<SelectItems
         label="Visual"
-        items={[{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }]}
+        items={[{ label: 'TV', value: 'tv' }, { label: 'Light bulb', value: 'lightbulb' }, { label: 'Fan', value: 'fan' }]}
         placeholder="Select visual"
         className="w-full"
         value={props.value}
-        onValueChange={(item: string) => item && props.onChange(item, { receiveEvent: false })} />)
+        onValueChange={(item: string) => item && props.onChange(item, { receiveEvent: false })} />),
+    wrapper: (props) => <Stack spacing={2}>{props.children}</Stack>
 };
 
 function WidgetConfigurationFormProvider(props: PropsWithChildren) {
@@ -139,11 +143,9 @@ function WidgetConfiguration(props: WidgetConfigurationProps) {
                     <Button autoFocus onClick={configProps.onSave}>Save changes</Button>
                 </>
             )}>
-            <Stack spacing={2}>
-                <WidgetConfigurationFormProvider>
-                    <FormBuilder form={configProps.form} onSubmit={configProps.onSave} />
-                </WidgetConfigurationFormProvider>
-            </Stack>
+            <WidgetConfigurationFormProvider>
+                <FormBuilder form={configProps.form} onSubmit={configProps.onSave} />
+            </WidgetConfigurationFormProvider>
         </ConfigurationDialog>
     );
 }

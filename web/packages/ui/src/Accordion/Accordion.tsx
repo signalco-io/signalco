@@ -1,20 +1,22 @@
-import { useState } from 'react';
+import { isValidElement, useState } from 'react';
 import type { ComponentProps, MouseEvent } from 'react';
-import { cx } from 'classix';
-import { Row } from '../Row';
-import { Icon } from '../Icon';
-import { Collapse } from '../Collapse';
-import { Card, CardContent, CardHeader } from '../Card';
+import { Row } from '@signalco/ui-primitives/Row';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Collapse } from '@signalco/ui-primitives/Collapse';
+import { Card, CardContent, CardHeader } from '@signalco/ui-primitives/Card';
+import { ExpandDown } from '@signalco/ui-icons';
 
 export type AccordionProps = ComponentProps<typeof Card> & {
     open?: boolean;
+    defaultOpen?: boolean;
     disabled?: boolean;
     onOpenChanged?: (event: MouseEvent<HTMLButtonElement>, open: boolean) => void;
     unmountOnExit?: boolean;
+    variant?: 'soft' | 'plain';
 };
 
-export function Accordion({ children, open, disabled, onOpenChanged, unmountOnExit, className, ...props }: AccordionProps) {
-    const [isOpen, setIsOpen] = useState(open ?? false);
+export function Accordion({ children, defaultOpen, open, disabled, onOpenChanged, unmountOnExit, variant, className, ...props }: AccordionProps) {
+    const [isOpen, setIsOpen] = useState(open ?? (defaultOpen ?? false));
 
     const handleOpen = (event: MouseEvent<HTMLButtonElement>) => {
         if (typeof open !== 'undefined' && typeof onOpenChanged !== 'undefined') {
@@ -26,23 +28,27 @@ export function Accordion({ children, open, disabled, onOpenChanged, unmountOnEx
 
     const actualOpen = open ?? isOpen;
 
-    const multipleChildren = !!children && Array.isArray(children);
+    const firstChild = Array.isArray(children) ? children[0] : children;
+    const otherChildren = Array.isArray(children) ? children.filter((_: unknown, i: number) => i !== 0 && isValidElement) : [];
+    const multipleChildren = otherChildren.length > 0;
 
     return (
-        <Card className={cx('', className)} onClick={handleOpen} {...props}>
-            <CardHeader className="p-2">
-                <Row spacing={1} justifyContent="space-between">
-                    {multipleChildren ? children[0] : children}
-                    {!disabled && (
-                        <Icon>{actualOpen ? 'expand_less' : 'expand_more'}</Icon>
-                    )}
-                </Row>
+        <Card className={cx(variant === 'plain' && 'bg-transparent border-none p-0', className)} {...props}>
+            <CardHeader className={cx(variant==='soft' ? 'p-2' : 'px-0 py-2')}>
+                <button className="text-left" onClick={handleOpen}>
+                    <Row spacing={1} justifyContent="space-between">
+                        {multipleChildren && isValidElement(firstChild) ? firstChild : children}
+                        {!disabled && (
+                            <ExpandDown className={cx('transition-transform', actualOpen && 'scale-y-[-1]')} />
+                        )}
+                    </Row>
+                </button>
             </CardHeader>
             {(!unmountOnExit || actualOpen) && (
                 <Collapse appear={actualOpen}>
                     {multipleChildren && (
-                        <CardContent className="p-2">
-                            {children.filter((_, i) => i !== 0)}
+                        <CardContent className={cx(variant==='soft' ? 'p-2' : 'px-0 py-2')}>
+                            {otherChildren?.map((child) => isValidElement(child) ? child : null)}
                         </CardContent>
                     )}
                 </Collapse>

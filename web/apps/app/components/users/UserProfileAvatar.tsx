@@ -1,6 +1,5 @@
-import React from 'react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
 import { LogOut, Settings } from '@signalco/ui-icons';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
 import { KnownPages } from '../../src/knownPages';
 import useLocale from '../../src/hooks/useLocale';
 import UserProfileAvatarButton from './UserProfileAvatarButton';

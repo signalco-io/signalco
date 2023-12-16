@@ -1,63 +1,92 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: '[Web] Next.js Bundle Analysis'
+name: '[Web] CI'
 
 on:
   pull_request:
     paths:
       - 'web/**'  
+      - 'cloud/**'
+      - '.github/workflows/web-nextjs_bundle_analysis.yml'
+      - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
+      - '.github/workflows/cloud-deploy-preview.yml'
   push:
     branches:
       - main
       - next
     paths:
       - 'web/**'
+      - 'cloud/**'
       - '.github/workflows/web-nextjs_bundle_analysis.yml'
       - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
+      - '.github/workflows/cloud-deploy-preview.yml'
   workflow_dispatch:
 
 jobs:
+  cloud_preview:
+    name: "Cloud (preview)"
+    uses: ./.github/workflows/cloud-deploy-preview.yml
+    if: success() && github.event_name == 'pull_request'
+    with:
+      baseRef: ${{ github.base_ref }}
+    secrets: inherit
+
   analyze_blog:
-    name: "[Blog] Next.js Bundle Analysis"
+    name: "Blog"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
       name: 'blog'
       path: 'web/apps/blog'
+      vercelProjectId: 'prj_VT7qOjkcEvkAsZH7MtSxWcVDWVpr'
     secrets: inherit
   
   analyze_app:
-    name: "[App] Next.js Bundle Analysis"
+    name: "App"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
       name: 'app'
       path: 'web/apps/app'
+      vercelProjectId: 'prj_q8N5ElZfzvq4BjEMBIsyEfqe4jsI'
     secrets: inherit
 
   analyze_brandgrab:
-    name: "[BrandGrab] Next.js Bundle Analysis"
+    name: "BrandGrab"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
       name: 'brandgrab'
       path: 'web/apps/brandgrab'
+      vercelProjectId: 'prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx'
     secrets: inherit
   
   analyze_web:
-    name: "[Web] Next.js Bundle Analysis"
+    name: "Web"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
       name: 'web'
       path: 'web/apps/web'
+      vercelProjectId: 'prj_PYE8WwpynTfjD6rVMiCp7sZoCPYw'
     secrets: inherit
   
   analyze_slco:
-    name: "[slco] Next.js Bundle Analysis"
+    name: "slco"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
       name: 'slco'
       path: 'web/apps/slco'
+      vercelProjectId: 'prj_GNETZANB7evyT5coH7gptur1G1sN'
+    secrets: inherit
+
+  analyze_doprocess:
+    name: "doprocess"
+    uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
+    with:
+      workflowName: 'web-nextjs_bundle_analysis.yml'
+      name: 'doprocess'
+      path: 'web/apps/doprocess'
+      vercelProjectId: 'prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ'
     secrets: inherit

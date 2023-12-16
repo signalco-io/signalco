@@ -1,9 +1,9 @@
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Checkbox } from '@signalco/ui/dist/Checkbox';
-import { Card } from '@signalco/ui/dist/Card';
-import { Button } from '@signalco/ui/dist/Button';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Checkbox } from '@signalco/ui-primitives/Checkbox';
+import { Card } from '@signalco/ui-primitives/Card';
+import { Button } from '@signalco/ui-primitives/Button';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
 
 export interface PricingOption {
@@ -35,7 +35,7 @@ export default function PricingCard(props: PricingCardProps) {
                 justifyContent="space-between">
                 <Stack spacing={3}>
                     <Stack alignItems="center">
-                        <SignalcoLogotype width={180} hideBadge />
+                        <SignalcoLogotype width={180} />
                         <Typography level="h3">{option.label}</Typography>
                     </Stack>
                     <Row alignItems="end" spacing={1}>

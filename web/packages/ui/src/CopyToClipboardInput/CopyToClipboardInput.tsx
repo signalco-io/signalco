@@ -1,5 +1,5 @@
+import { Input, type InputProps } from '@signalco/ui-primitives/Input';
 import { Copy } from '@signalco/ui-icons';
-import { Input, type InputProps } from '../Input';
 import { IconButtonCopyToClipboard } from '../IconButtonCopyToClipboard';
 
 export type CopyToClipboardInputProps = InputProps;

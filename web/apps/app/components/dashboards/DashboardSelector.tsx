@@ -1,22 +1,31 @@
 'use client';
 
-import { useEffect } from 'react';
-import { Select } from '@signalco/ui-icons';
-import { Row } from '@signalco/ui/dist/Row';
-import { Popper } from '@signalco/ui/dist/Popper';
-import { Button } from '@signalco/ui/dist/Button';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { useEffect, useState } from 'react';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Popper } from '@signalco/ui-primitives/Popper';
+import { ButtonDropdown } from '@signalco/ui-primitives/ButtonDropdown';
+import { Button } from '@signalco/ui-primitives/Button';
+import { showNotification } from '@signalco/ui-notifications';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
-export interface IDashboardSelectorProps {
+
+type DashboardSelectorProps = {
     onEditWidgets: () => void,
     onSettings: () => void
 }
 
-function DashboardSelector(props: IDashboardSelectorProps) {
-    const { onEditWidgets, onSettings } = props;
+function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps) {
     const [selectedId, setSelectedId] = useSearchParam('dashboard');
-    const { data: dashboards } = useDashboards();
+    const [isOpen, setIsOpen] = useState(false);
+    const { data: dashboards, isLoading, error } = useDashboards();
+
+    useEffect(() => {
+        if (error) {
+            console.error(error);
+            showNotification('There was an error while loading dashboards. Please refresh the page.', 'error');
+        }
+    }, [error]);
 
     const currentDashboard = dashboards?.find(d => d.id == selectedId);
     const currentName = currentDashboard?.name;
@@ -24,34 +33,35 @@ function DashboardSelector(props: IDashboardSelectorProps) {
 
     // Set initial selection on component and dashboards load
     useEffect(() => {
-        if (!selectedId && dashboards?.length) {
-            console.log('Selecting first available dashboard', dashboards[0].id);
-            setSelectedId(dashboards[0].id);
+        if (!selectedId && dashboards?.length && !isLoading) {
+            console.debug('Selecting first available dashboard', dashboards[0]?.id);
+            setSelectedId(dashboards[0]?.id);
         }
-    }, [selectedId, dashboards, setSelectedId]);
+    }, [selectedId, dashboards, setSelectedId, isLoading]);
 
-    const handleDashboardSelection = (id: string) => {
+    const handleSelection = (id: string) => {
         setSelectedId(id);
-    }
+        setIsOpen(false);
+    };
 
-    console.debug('Rendering DashboardSelector');
+    const handleEditWidgets = () => {
+        setIsOpen(false);
+        onEditWidgets();
+    };
 
     return (
         <Row>
             {(dashboards?.length ?? 0) > 0 && (
                 <Popper
+                    open={isOpen}
+                    onOpenChange={setIsOpen}
                     trigger={(
-                        <Button
-                            variant="plain"
-                            size="lg"
-                            endDecorator={<Select className="pointer-events-none" />}>
-                            {currentName}
-                        </Button>
+                        <ButtonDropdown className="font-semibold">{currentName}</ButtonDropdown>
                     )}>
                     <DashboardSelectorMenu
                         selectedId={selectedId}
-                        onSelection={setSelectedId}
-                        onEditWidgets={onEditWidgets}
+                        onSelection={handleSelection}
+                        onEditWidgets={handleEditWidgets}
                         onSettings={onSettings} />
                 </Popper>
             )}
@@ -61,7 +71,7 @@ function DashboardSelector(props: IDashboardSelectorProps) {
                         <Button
                             key={fd.id}
                             variant="plain"
-                            onClick={() => handleDashboardSelection(fd.id)}>
+                            onClick={() => setSelectedId(fd.id)}>
                             {fd.name}
                         </Button>
                     ))}

@@ -2,7 +2,7 @@ import { arrayMax, objectWithKey } from '@signalco/js';
 import IUser from '../users/IUser';
 import UserSettingsProvider from '../services/UserSettingsProvider';
 import IEntityDetails from '../entity/IEntityDetails';
-import { entitiesAsync, entityUpsertAsync, entityDeleteAsync } from '../entity/EntityRepository';
+import { entityUpsertAsync, entityDeleteAsync } from '../entity/EntityRepository';
 import { setAsync } from '../contacts/ContactRepository';
 import { widgetType } from '../../components/widgets/Widget';
 
@@ -77,7 +77,7 @@ class DashboardModel implements IDashboardModel {
     }
 }
 
-function dashboardModelFromEntity(entity: IEntityDetails, order: number, favorites: string[]): DashboardModel {
+export function dashboardModelFromEntity(entity: IEntityDetails, order: number, favorites: string[]): IDashboardModel {
     const dashboard = new DashboardModel(
         entity.id,
         entity.alias,
@@ -105,12 +105,6 @@ function dashboardModelFromEntity(entity: IEntityDetails, order: number, favorit
     return dashboard;
 }
 
-export async function getAllAsync() {
-    const dashboardEntities = await entitiesAsync(2);
-    const currentFavorites = UserSettingsProvider.value<string[]>(DashboardsFavoritesLocalStorageKey, []);
-    return dashboardEntities?.map((entity, i) => dashboardModelFromEntity(entity, i, currentFavorites));
-}
-
 export async function saveDashboardAsync(dashboard: IDashboardSetModel) {
     const id = await entityUpsertAsync(dashboard.id, 2, dashboard.name);
     await setAsync({
@@ -126,7 +120,7 @@ export function deleteDashboardAsync(id: string) {
     return entityDeleteAsync(id);
 }
 
-const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';
+export const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';
 const DashboardsOrderLocalStorageKey = 'dashboards-order';
 
 class DashboardsRepository {

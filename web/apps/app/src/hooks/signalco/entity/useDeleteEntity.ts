@@ -1,19 +1,15 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import { entityDeleteAsync } from '../../../entity/EntityRepository';
+import { entityKey } from './useEntity';
+import { allEntitiesKey } from './useAllEntities';
 
-export default function useDeleteEntity() {
+export default function useDeleteEntity(): UseMutationResult<void, Error, string, unknown> {
     const client = useQueryClient();
-    return useMutation((id: string) => {
-        return entityDeleteAsync(id);
-    }, {
-        onSuccess: (id) => {
-            client.invalidateQueries(['entities']);
-            client.invalidateQueries(['entities', 0]);
-            client.invalidateQueries(['entities', 1]);
-            client.invalidateQueries(['entities', 2]);
-            client.invalidateQueries(['entities', 3]);
-            client.invalidateQueries(['entities', 4]);
-            client.invalidateQueries(['entity', id]);
+    return useMutation({
+        mutationFn: entityDeleteAsync,
+        onSuccess: (_, id) => {
+            client.invalidateQueries({ queryKey: allEntitiesKey() });
+            client.invalidateQueries({ queryKey: entityKey(id) });
         }
     });
 }

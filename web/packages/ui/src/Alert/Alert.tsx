@@ -1,6 +1,6 @@
 import { type HTMLAttributes, type ReactNode } from 'react';
-import { cx } from 'classix';
-import { Row } from '../Row';
+import { Row } from '@signalco/ui-primitives/Row';
+import { cx } from '@signalco/ui-primitives/cx';
 
 export type AlertProps = HTMLAttributes<HTMLDivElement> & {
     color?: 'primary' | 'neutral' | 'danger' | 'info' | 'success' | 'warning',
@@ -14,13 +14,14 @@ export function Alert({ className, color, startDecorator, endDecorator, children
             role="alert"
             spacing={1}
             className={cx(
-                'relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground',
+                'relative w-full rounded-lg border p-4',
+                '[&>svg~*]:pl-8 [&>svg]:absolute [&>svg]:top-3.5 [&>svg]:left-4',
                 color === 'primary' && 'bg-primary-100 border-primary-300',
-                color === 'neutral' && 'bg-neutral-100 border-neutral-300',
-                color === 'danger' && 'bg-red-100 border-red-300',
+                color === 'neutral' && 'bg-neutral-100 border-neutral-300 dark:bg-neutral-900 dark:border-neutral-700',
+                color === 'danger' && 'bg-red-100 border-red-300 dark:bg-red-900 dark:border-red-700',
                 color === 'info' && 'bg-blue-100 border-blue-300',
                 color === 'success' && 'bg-green-100 border-green-300',
-                color === 'warning' && 'bg-yellow-100 border-yellow-300',
+                color === 'warning' && 'bg-yellow-100 border-yellow-300 dark:bg-yellow-600 dark:border-yellow-500 dark:text-foreground',
                 className)}
             {...props}>
             {startDecorator}

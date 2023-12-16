@@ -1,57 +1,43 @@
 import { Channel, Dashboard, Device, Play, Station } from '@signalco/ui-icons';
+import { distinctBy } from '@signalco/js';
+import ChannelLogo from '../../channels/ChannelLogo';
 import IEntityDetails from '../../../src/entity/IEntityDetails';
 
-export function EntityIconByType(type: number) {
-    switch(type) {
+export function EntityIconByType(entityOrType: IEntityDetails | number) {
+    const type = typeof entityOrType === 'number' ? entityOrType : entityOrType.type;
+    switch (type) {
     case 2:
-        return Dashboard;
+        return <Dashboard />;
     case 3:
-        return Play;
+        return <Play />;
     case 4:
-        return Station;
+        return <Station />;
     case 5:
-        return Channel;
+        if (typeof entityOrType === 'number')
+            return <Channel />;
+
+        const entityChannels = distinctBy(entityOrType.contacts.map(c => c.channelName), c => c);
+        const onlyChannel = entityChannels[0];
+        if (entityChannels.length === 1 && onlyChannel) {
+            return function ChannelIcon() {
+                return <ChannelLogo channelName={onlyChannel} />
+            };
+        }
+        return <Channel />;
     default:
-        return Device;
+        return <Device />;
     }
 }
 
-export default function EntityIcon(entity: IEntityDetails | null | undefined) {
+export default function EntityIcon({ entity }: { entity: IEntityDetails | null | undefined }) {
     const Icon = null;
 
-    if (entity) {
-        if (entity.alias.toLowerCase().indexOf('light') >= 0 ||
-            entity.alias.toLowerCase().indexOf('lamp') >= 0 ||
-            entity.alias.toLowerCase().indexOf('svijetlo') >= 0) {
-            // Icon = LightbulbIcon;
-        } else if (entity.alias.toLowerCase().indexOf('temp') >= 0) {
-            // Icon = ThermostatIcon;
-        } else if (entity.alias.toLowerCase().indexOf('motion') >= 0) {
-            // Icon = DirectionsRunIcon;
-        } else if (entity.alias.toLowerCase().indexOf('tv') >= 0) {
-            // Icon = TvIcon;
-        } else if (entity.alias.toLowerCase().indexOf('door') >= 0 ||
-            entity.alias.toLowerCase().indexOf('vrata') >= 0) {
-            // Icon = MeetingRoomIcon;
-        } else if (entity.alias.toLowerCase().indexOf('window') >= 0 ||
-            entity.alias.toLowerCase().indexOf('prozor') >= 0) {
-            // Icon = SensorWindowIcon;
-        } else if (entity.alias.toLowerCase().indexOf('socket') >= 0) {
-            // Icon = PowerIcon;
-        } else if (entity.alias.toLowerCase().indexOf('flower') >= 0) {
-            // Icon = LocalFloristIcon;
-        } else if (entity.alias.toLowerCase().indexOf('button') >= 0) {
-            // Icon = RadioButtonCheckedIcon;
-        } else if (entity.alias.toLowerCase().indexOf('heat') >= 0) {
-            // Icon = WhatshotIcon;
-        } else if (entity.alias.toLowerCase().indexOf('switch') >= 0) {
-            // Icon = PowerSettingsNewIcon;
-        }
-
-        if (!Icon) {
-            return EntityIconByType(entity.type);
-        }
+    if (entity && !Icon) {
+        const EntityTypeIconOrFunc = EntityIconByType(entity);
+        if (typeof EntityTypeIconOrFunc === 'function')
+            return <EntityTypeIconOrFunc />;
+        return EntityTypeIconOrFunc;
     }
 
-    return Icon ?? Device;
+    return Icon ?? <Device />;
 }

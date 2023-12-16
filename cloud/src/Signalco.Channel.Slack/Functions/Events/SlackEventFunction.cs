@@ -8,26 +8,13 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Signal.Api.Common.Exceptions;
 using Signal.Api.Common.OpenApi;
-using Signal.Core.Entities;
 
 namespace Signalco.Channel.Slack.Functions.Events;
 
-public class SlackEventFunction
+public class SlackEventFunction(
+    ISlackRequestHandler slackRequestHandler,
+    ILogger<SlackEventFunction> logger)
 {
-    private readonly ISlackRequestHandler slackRequestHandler;
-    private readonly IEntityService entityService;
-    private readonly ILogger<SlackEventFunction> logger;
-
-    public SlackEventFunction(
-        ISlackRequestHandler slackRequestHandler,
-        IEntityService entityService,
-        ILogger<SlackEventFunction> log)
-    {
-        this.slackRequestHandler = slackRequestHandler ?? throw new ArgumentNullException(nameof(slackRequestHandler));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.logger = log ?? throw new ArgumentNullException(nameof(log));
-    }
-
     [Function("Slack-Event")]
     [OpenApiOperation<SlackEventFunction>( "Slack", "Event", Description = "Handles the slack event (slack > signalco web-hook call).")]
     [OpenApiJsonRequestBody<EventRequestDto>(Description = "Base model that provides content type information.")]
@@ -37,7 +24,7 @@ public class SlackEventFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "hooks/event")] HttpRequestData req,
         CancellationToken cancellationToken = default)
     {
-        await this.slackRequestHandler.VerifyFromSlack(req, cancellationToken);
+        await slackRequestHandler.VerifyFromSlack(req, cancellationToken);
 
         var eventReq = await req.ReadAsJsonAsync<EventRequestDto>();
         switch (eventReq.Type)
@@ -55,7 +42,7 @@ public class SlackEventFunction
                 // TODO: Update channel message contact
                 return req.CreateResponse(HttpStatusCode.BadRequest);
             default:
-                this.logger.LogWarning("Unknown event request type {Type}", eventReq.Type);
+                logger.LogWarning("Unknown event request type {Type}", eventReq.Type);
                 return req.CreateResponse(HttpStatusCode.BadRequest);
         }
     }

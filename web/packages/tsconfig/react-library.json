@@ -3,24 +3,10 @@
     "display": "React Library",
     "extends": "./base.json",
     "compilerOptions": {
-        "jsx": "react-jsx",
-        "lib": [
-            "ESNext",
-            "DOM",
-            "DOM.Iterable"
+        "jsx": "preserve",
+        "typeRoots": [
+            "../node_modules/@types",
+            "../@types"
         ],
-        "allowSyntheticDefaultImports": true,
-        "module": "ESNext",
-        "target": "ESNext",
-        "useDefineForClassFields": true,
-        "resolveJsonModule": true
-    },
-    "include": [
-        "./src/**/*.ts*"
-    ],
-    "exclude": [
-        "dist",
-        "node_modules",
-        ".turbo"
-    ]
+    }
 }

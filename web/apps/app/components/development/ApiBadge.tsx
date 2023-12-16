@@ -1,5 +1,5 @@
-import { Chip } from '@signalco/ui/dist/Chip';
-import { useIsServer } from '@signalco/hooks/dist/useIsServer';
+import { Chip } from '@signalco/ui-primitives/Chip';
+import { useIsServer } from '@signalco/hooks/useIsServer';
 import { isDeveloper } from '../../src/services/EnvProvider';
 import { signalcoApiEndpointIsProduction } from '../../src/services/AppSettingsProvider';
 

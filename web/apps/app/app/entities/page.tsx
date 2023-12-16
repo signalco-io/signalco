@@ -2,72 +2,32 @@
 
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { cx } from 'classix';
-import { useQueryClient } from '@tanstack/react-query';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { SelectItems } from '@signalco/ui-primitives/SelectItems';
+import { Row } from '@signalco/ui-primitives/Row';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Add, Check, LayoutGrid, LayoutList } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { SelectItems } from '@signalco/ui/dist/SelectItems';
-import { Row } from '@signalco/ui/dist/Row';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Button } from '@signalco/ui/dist/Button';
-import { Avatar } from '@signalco/ui/dist/Avatar';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
+import { Loadable } from '@signalco/ui/Loadable';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { KnownPages } from '../../src/knownPages';
 import useUserSetting from '../../src/hooks/useUserSetting';
 import useLocale from '../../src/hooks/useLocale';
+import useUpsertEntity from '../../src/hooks/signalco/entity/useUpsertEntity';
+import useDeleteEntity from '../../src/hooks/signalco/entity/useDeleteEntity';
 import useAllEntities from '../../src/hooks/signalco/entity/useAllEntities';
 import IEntityDetails from '../../src/entity/IEntityDetails';
-import { entityDeleteAsync, entityUpsertAsync } from '../../src/entity/EntityRepository';
 import SearchInput from '../../components/shared/inputs/SearchInput';
-import { EntityIconByType } from '../../components/shared/entity/EntityIcon';
 import ConfirmDeleteButton from '../../components/shared/dialog/ConfirmDeleteButton';
-import ConfigurationDialog from '../../components/shared/dialog/ConfigurationDialog';
 import EntityCard from '../../components/entity/EntityCard';
 
-const entityTypes = [
-    { value: '1', label: 'Devices' },
-    { value: '2', label: 'Dashboards' },
-    { value: '3', label: 'Process' },
-    { value: '4', label: 'Stations' },
-    { value: '5', label: 'Channels' }
-];
-
-const createEntityType = [
-    { value: 3, label: 'Process' },
-    { value: 4, label: 'Station' },
-    { value: 1, label: 'Device' },
-    { value: 2, label: 'Dashboard' },
-    { value: 5, label: 'Channel' }
-];
-
-function EntityCreateForm() {
-    const router = useRouter();
-    const { t } = useLocale('App', 'Entities', 'NewEntityDialog');
-    const { t: tType } = useLocale('Global', 'Entity', 'Types');
-
-    const onType = async (type: { value: number, label: string }) => {
-        const id = await entityUpsertAsync(undefined, type.value, 'New ' + tType(type.label));
-        router.push(`${KnownPages.Entities}/${id}`);
-    };
-
-    return (
-        <Stack spacing={2}>
-            <Typography level="body2">{t('PickTypeHeader')}</Typography>
-            <Stack spacing={1}>
-                {createEntityType.map(type => (
-                    <Button key={type.value} onClick={() => onType(type)}>{tType(type.label)}</Button>
-                ))}
-            </Stack>
-        </Stack>
-    );
-}
-
 export default function Entities() {
-    const { t } = useLocale('App', 'Entities');
-    const [selectedType, setSelectedType] = useSearchParam('type', '1');
+    const { t: tType } = useLocale('Global', 'Entity', 'Types');
+    const router = useRouter();
+    const [selectedType] = useSearchParam('type', '1');
     const entities = useAllEntities(parseInt(selectedType, 10) || 1);
+    const entityUpsert = useUpsertEntity();
+    const deleteEntity = useDeleteEntity();
 
     const [entityListViewType, setEntityListViewType] = useUserSetting<string>('entityListViewType', 'table');
     const [filteredItems, setFilteredItems] = useState<IEntityDetails[] | undefined>(entities.data);
@@ -85,11 +45,8 @@ export default function Entities() {
         }
     }, [selected]);
 
-    const queryClient = useQueryClient();
     const handleConfirmDeleteSelected = async () => {
-        await Promise.all(selected.map(e => entityDeleteAsync(e.id)));
-        queryClient.invalidateQueries(['entities']);
-        queryClient.invalidateQueries(['entities', parseInt(selectedType, 10)]);
+        await Promise.all(selected.map(e => deleteEntity.mutateAsync(e.id)));
         setSelected([]);
     };
 
@@ -98,46 +55,34 @@ export default function Entities() {
     }), [filteredItems, selectedType]);
 
     const results = useMemo(() => (
-        <div style={{ paddingLeft: 8, paddingRight: 8 }}>
-            <div className={cx(
-                'grid auto-cols-max gap-1',
-                entityListViewType === 'table'
-                    ? 'grid-cols-1'
-                    : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
-            )}>
-                {typedItems?.map(entity => (
-                    <EntityCard
-                        key={entity.id}
-                        entity={entity}
-                        spread={entityListViewType === 'table'}
-                        selectable={isSelecting}
-                        selected={!!selected.find(e => e.id === entity.id)}
-                        onSelection={() => handleEntitySelection(entity)} />
-                ))}
-            </div>
+        <div className={cx(
+            'grid auto-cols-max gap-2',
+            entityListViewType === 'table'
+                ? 'grid-cols-1'
+                : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
+        )}>
+            {typedItems?.map(entity => (
+                <EntityCard
+                    key={entity.id}
+                    entity={entity}
+                    spread={entityListViewType === 'table'}
+                    selectable={isSelecting}
+                    selected={!!selected.find(e => e.id === entity.id)}
+                    onSelection={() => handleEntitySelection(entity)} />
+            ))}
         </div>
     ), [entityListViewType, handleEntitySelection, isSelecting, selected, typedItems]);
 
+    const handleCreateEntity = async () => {
+        const id = await entityUpsert.mutateAsync({ id: undefined, type: parseInt(selectedType), alias: 'New ' + tType(selectedType) });
+        router.push(`${KnownPages.Entities}/${id}`);
+    }
+
     return (
-        <Stack spacing={3}>
+        <Stack spacing={1} className="p-2">
             <Stack spacing={1}>
-                <Row justifyContent="space-between" style={{ paddingLeft: 16, paddingRight: 16 }}>
-                    <SelectItems
-                        className="min-w-[220px]"
-                        value={selectedType}
-                        onValueChange={(v: string) => setSelectedType(v)}
-                        items={entityTypes.map(t => {
-                            const Icon = EntityIconByType(parseInt(t.value));
-                            return ({
-                                value: t.value, label: t.label, content: (
-                                    <Row spacing={1}>
-                                        <Avatar><Icon /></Avatar>
-                                        <Typography>{t.label}</Typography>
-                                    </Row>
-                                )
-                            });
-                        })} />
-                    <Row spacing={1} style={{ flexGrow: 1 }} justifyContent="end">
+                <Row justifyContent="space-between">
+                    <Row spacing={1} className="grow" justifyContent="end">
                         <SearchInput items={entities.data} onFilteredItems={setFilteredItems} />
                         <SelectItems
                             value={entityListViewType}
@@ -146,14 +91,8 @@ export default function Entities() {
                                 { value: 'table', label: <LayoutList /> },
                                 { value: 'cards', label: <LayoutGrid /> }
                             ]} />
-                        <ConfigurationDialog
-                            header={t('NewEntityDialogTitle')}
-                            trigger={(
-                                <IconButton size="lg"><Add /></IconButton>
-                            )}>
-                            <EntityCreateForm />
-                        </ConfigurationDialog>
-                        <IconButton size="lg" onClick={handleToggleSelection}><Check /></IconButton>
+                        <IconButton onClick={handleCreateEntity}><Add /></IconButton>
+                        <IconButton onClick={handleToggleSelection}><Check /></IconButton>
                     </Row>
                 </Row>
                 {isSelecting && (

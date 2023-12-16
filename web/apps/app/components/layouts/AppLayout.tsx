@@ -2,15 +2,16 @@
 
 import React from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Minimize } from '@signalco/ui-icons';
-import { IconButton } from '@signalco/ui/dist/IconButton';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import NavProfile from '../NavProfile';
-import RealtimeService from '../../src/realtime/realtimeService';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
+import { PageTitle } from '../navigation/PageTitle';
+import NavProfile from '../navigation/NavProfile';
 import { AuthWrapper } from './AuthWrapper';
+import { AppClientWrapper } from './AppClientWrapper';
 
-const queryClient = new QueryClient();
 
 export function AppLayout(props: React.PropsWithChildren) {
     const {
@@ -18,17 +19,23 @@ export function AppLayout(props: React.PropsWithChildren) {
     } = props;
     const [isFullScreen, setFullScreen] = useSearchParam('fullscreen');
 
-    RealtimeService.queryClient = queryClient;
-
     return (
         <AuthWrapper>
-            <QueryClientProvider client={queryClient}>
+            <AppClientWrapper>
                 <div className="flex w-full flex-col sm:flex-row">
                     {isFullScreen !== 'true' && (
                         <NavProfile />
                     )}
-                    <div className="relative w-full grow overflow-hidden">
-                        {children}
+                    <div className={cx(
+                        'relative w-full grow overflow-hidden',
+                        isFullScreen ? '' : 'mt-[70px] sm:ml-[82px] sm:mt-0'
+                    )}>
+                        <Stack>
+                            <div className="hidden p-2 sm:block">
+                                <PageTitle fullPage />
+                            </div>
+                            {children}
+                        </Stack>
                     </div>
                 </div>
                 <ReactQueryDevtools initialIsOpen={false} />
@@ -42,7 +49,7 @@ export function AppLayout(props: React.PropsWithChildren) {
                         </IconButton>
                     </div>
                 )}
-            </QueryClientProvider>
+            </AppClientWrapper>
         </AuthWrapper>
     );
 }

@@ -1,5 +1,5 @@
-import { Input } from '@signalco/ui/dist/Input';
-import { Checkbox } from '@signalco/ui/dist/Checkbox';
+import { Input } from '@signalco/ui-primitives/Input';
+import { Checkbox } from '@signalco/ui-primitives/Checkbox';
 import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
 
 const components: FormBuilderComponents = {

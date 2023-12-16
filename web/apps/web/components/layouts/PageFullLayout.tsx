@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { Stack } from '@signalco/ui/dist/Stack';
+import { Stack } from '@signalco/ui-primitives/Stack';
 import Footer from '../pages/Footer';
 import { PageNav } from '../PageNav';
 

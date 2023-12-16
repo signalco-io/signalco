@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Row } from '@signalco/ui/dist/Row';
-import { Checkbox } from '@signalco/ui/dist/Checkbox';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Checkbox } from '@signalco/ui-primitives/Checkbox';
 import blendColors from '../../../src/helpers/BlendColors';
 import IContact from '../../../src/contacts/IContact';
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { cx } from 'classix';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Input } from '@signalco/ui-primitives/Input';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Close, Save, Edit } from '@signalco/ui-icons';
-import { Typography } from '../Typography';
-import { Row } from '../Row';
-import { Input } from '../Input';
-import { IconButton } from '../IconButton';
 
 export type EditableInputProps = {
     value: string,

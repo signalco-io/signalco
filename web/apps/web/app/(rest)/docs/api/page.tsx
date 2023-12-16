@@ -3,27 +3,28 @@
 import React, { useCallback, useState, useContext, createContext } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Tooltip } from '@signalco/ui-primitives/Tooltip';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { SelectItems } from '@signalco/ui-primitives/SelectItems';
+import { Row } from '@signalco/ui-primitives/Row';
+import { ListTreeItem } from '@signalco/ui-primitives/ListTreeItem';
+import { List } from '@signalco/ui-primitives/List';
+import { Input } from '@signalco/ui-primitives/Input';
+import { Divider } from '@signalco/ui-primitives/Divider';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Chip } from '@signalco/ui-primitives/Chip';
+import { Card, CardOverflow } from '@signalco/ui-primitives/Card';
+import { Button } from '@signalco/ui-primitives/Button';
 import { Security, Send } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Tooltip } from '@signalco/ui/dist/Tooltip';
-import type { ColorPaletteProp } from '@signalco/ui/dist/theme';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { SelectItems } from '@signalco/ui/dist/SelectItems';
-import { Row } from '@signalco/ui/dist/Row';
-import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { ListTreeItem } from '@signalco/ui/dist/ListTreeItem';
-import { List } from '@signalco/ui/dist/List';
-import { Input } from '@signalco/ui/dist/Input';
-import { Divider } from '@signalco/ui/dist/Divider';
-import { CopyToClipboardInput } from '@signalco/ui/dist/CopyToClipboardInput';
-import { Chip } from '@signalco/ui/dist/Chip';
-import { Card, CardOverflow } from '@signalco/ui/dist/Card';
-import { Button } from '@signalco/ui/dist/Button';
-import { Alert } from '@signalco/ui/dist/Alert';
+import type { ColorPaletteProp } from '@signalco/ui/theme';
+import { NavigatingButton } from '@signalco/ui/NavigatingButton';
+import { Loadable } from '@signalco/ui/Loadable';
+import { CopyToClipboardInput } from '@signalco/ui/CopyToClipboardInput';
+import { Alert } from '@signalco/ui/Alert';
 import { camelToSentenceCase, HttpOperation, ObjectDictAny, objectWithKey } from '@signalco/js';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
+import { usePromise } from '@enterwell/react-hooks';
 import { isDeveloper } from '../../../../src/services/EnvProvider';
 
 function HttpOperationChip(props: { operation?: HttpOperation | undefined, small?: boolean }) {
@@ -124,7 +125,7 @@ function ApiOperation(props: ApiOperationProps) {
                     <Tooltip title={deprecated ? 'Deprecated' : undefined}>
                         <Typography
                             level="h6"
-                            strikeThrough={deprecated}>
+                            className={cx(deprecated && 'line-through')}>
                             {path}
                         </Typography>
                     </Tooltip>
@@ -144,17 +145,17 @@ function ApiOperation(props: ApiOperationProps) {
             )}
             {parametersResolved && (
                 <Stack spacing={1}>
-                    <Typography textTransform="uppercase">Parameters</Typography>
+                    <Typography uppercase>Parameters</Typography>
                     <Card>
                         {parametersResolved.map((parameter, i) => (
                             <React.Fragment key={parameter.name}>
                                 <div className="p-2">
                                     <Stack>
                                         <Row spacing={1} justifyContent="space-between">
-                                            <Typography textTransform="uppercase">{parameter.name}</Typography>
+                                            <Typography uppercase>{parameter.name}</Typography>
                                             <Row spacing={1}>
                                                 <Typography level="body2">in</Typography>
-                                                <Typography level="body2" textTransform="uppercase">{parameter.in}</Typography>
+                                                <Typography level="body2" uppercase>{parameter.in}</Typography>
                                             </Row>
                                         </Row>
                                         {parameter.description && <Typography level="body2">{parameter.description}</Typography>}
@@ -168,14 +169,14 @@ function ApiOperation(props: ApiOperationProps) {
             )}
             {requestBodyResolved && (
                 <Stack spacing={1}>
-                    <Typography textTransform="uppercase">Request body</Typography>
+                    <Typography uppercase>Request body</Typography>
                     {requestBodyResolved.description && <Typography level="body2">{requestBodyResolved.description}</Typography>}
                     <Card>
                         <Stack>
                             {Object.keys(requestBodyResolved.content).map(contentType => (
                                 <React.Fragment key={contentType}>
-                                    {requestBodyResolved.content[contentType].schema &&
-                                        <Schema name={contentType} schema={requestBodyResolved.content[contentType].schema} />}
+                                    {requestBodyResolved.content[contentType]?.schema &&
+                                        <Schema name={contentType} schema={requestBodyResolved.content[contentType]?.schema} />}
                                 </React.Fragment>
                             ))}
                         </Stack>
@@ -183,7 +184,7 @@ function ApiOperation(props: ApiOperationProps) {
                 </Stack>
             )}
             <Stack spacing={1}>
-                <Typography textTransform="uppercase">Responses</Typography>
+                <Typography uppercase>Responses</Typography>
                 <Card>
                     {Object.keys(responses).map((responseCode, i) => {
                         const responseCodeNumber = parseInt(responseCode, 10) || 0;
@@ -298,6 +299,9 @@ function resolveRef<T>(api: OpenAPIV3.Document, obj: T | OpenAPIV3.ReferenceObje
     let curr: unknown = api;
     for (let i = 1; i < refSplit.length && typeof curr !== 'undefined'; i++) {
         const nextKey = refSplit[i];
+        if (!nextKey) {
+            break;
+        }
         const next = objectWithKey(curr, nextKey)?.nextKey;
         if (next == null) {
             break;
@@ -387,9 +391,9 @@ function SecurityInput(props: { security: OpenAPIV3.SecurityRequirementObject })
                         </Stack>
                     );
                 } else if (source) {
-                    return <Typography key={source.type} color="danger" bold textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
+                    return <Typography key={source.type} color="danger" bold uppercase>{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
-                    return <Typography key="unknown" color="danger" bold textTransform="uppercase">Security not defined</Typography>
+                    return <Typography key="unknown" color="danger" bold uppercase>Security not defined</Typography>
                 }
             })}
         </>
@@ -413,9 +417,9 @@ function SecurityBadge(props: { security: OpenAPIV3.SecurityRequirementObject })
                         </Chip>
                     );
                 } else if (source) {
-                    return <Typography key={source.type} color="danger" bold textTransform="uppercase">{'Not supported security type "' + source.type + '"'}</Typography>
+                    return <Typography key={source.type} color="danger" bold uppercase>{'Not supported security type "' + source.type + '"'}</Typography>
                 } else {
-                    return <Typography key="unknown" color="danger" bold textTransform="uppercase">Security not defined</Typography>
+                    return <Typography key="unknown" color="danger" bold uppercase>Security not defined</Typography>
                 }
             })}
         </>
@@ -429,11 +433,11 @@ function Actions(props: ActionsProps) {
 
     if (!api) throw 'API undefined';
     const { servers } = api;
-    const selectedServerUrl = selectedServer ?? (servers && servers.length > 0 ? servers[0].url : 'https://example.com');
+    const selectedServerUrl = selectedServer ?? (servers && servers.length > 0 ? servers[0]?.url : 'https://example.com');
 
     const { requestBody, security } = info;
     const requestBodyResolved = requestBody && resolveRef(api, requestBody);
-    const [requestBodyValue, setRequestBodyValue] = useState(requestBodyResolved ? JSON.stringify(schemaToJson(api, requestBodyResolved.content['application/json'].schema), undefined, 2) : '');
+    const [requestBodyValue, setRequestBodyValue] = useState(requestBodyResolved ? JSON.stringify(schemaToJson(api, requestBodyResolved.content['application/json']?.schema), undefined, 2) : '');
 
     const [response, setResponse] = useState('');
     const [responseStatusCode, setResponseStatusCode] = useState<number | undefined>(undefined);
@@ -488,7 +492,7 @@ function Actions(props: ActionsProps) {
                 value={selectedServerUrl} />
             {security && (
                 <Stack spacing={1}>
-                    <Typography textTransform="uppercase">Authentication</Typography>
+                    <Typography uppercase>Authentication</Typography>
                     <Stack>
                         {security.map((securityVariant, i) => <SecurityInput key={i} security={securityVariant} />)}
                     </Stack>
@@ -498,10 +502,10 @@ function Actions(props: ActionsProps) {
                 <Stack>
                     <Row spacing={1} style={{ width: '100%' }} justifyContent="space-between">
                         <div style={{ paddingBottom: '8px' }}>
-                            <Typography textTransform="uppercase">Body</Typography>
+                            <Typography uppercase>Body</Typography>
                         </div>
                         <div style={{ alignSelf: 'flex-end' }}>
-                            <Typography textAlign="right" level="body3">application/json</Typography>
+                            <Typography className="text-right" level="body3">application/json</Typography>
                         </div>
                     </Row>
                     <Card>
@@ -537,7 +541,7 @@ function Actions(props: ActionsProps) {
             {responseStatusCode && (
                 <Stack spacing={1}>
                     <Row justifyContent="space-between">
-                        <Typography textTransform="uppercase">Response</Typography>
+                        <Typography uppercase>Response</Typography>
                         <ResponseStatusCode statusCode={responseStatusCode} />
                     </Row>
                     <Card>
@@ -565,7 +569,7 @@ export default function DocsApiPage() {
         ? 'https://api.signalco.dev/api/swagger.json'
         : 'https://api.signalco.io/api/swagger.json';
     const apiRequest = useCallback(() => getOpenApiDoc(url), [url]);
-    const { item: api, isLoading, error } = useLoadAndError<OpenAPIV3.Document>(apiRequest);
+    const { item: api, isLoading, error } = usePromise<OpenAPIV3.Document>(apiRequest);
 
     console.info('OpenAPI scheme: ', api);
 

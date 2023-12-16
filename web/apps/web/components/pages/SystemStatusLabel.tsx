@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { cx } from 'classix';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Row } from '@signalco/ui/dist/Row';
-import { Link } from '@signalco/ui/dist/Link';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Link } from '@signalco/ui-primitives/Link';
+import { cx } from '@signalco/ui-primitives/cx';
 import { JsonResponse } from '@signalco/js';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { usePromise } from '@enterwell/react-hooks';
 
 export async function fetchSystemStatus() {
     const response = await fetch('https://api.checklyhq.com/v1/status-page/103507/statuses?page=1&limit=99');
@@ -15,7 +15,7 @@ export async function fetchSystemStatus() {
 }
 
 export function SystemStatusLabel() {
-    const { item } = useLoadAndError(fetchSystemStatus);
+    const { item } = usePromise(fetchSystemStatus);
 
     let status: 'operational' | 'major' | 'partial' | 'degraded' = 'operational';
     let statusText = 'All systems operational';

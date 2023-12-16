@@ -1,8 +1,8 @@
 import React from 'react';
-import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { ListItem } from '@signalco/ui/dist/ListItem';
-import { List } from '@signalco/ui/dist/List';
+import { ListItem } from '@signalco/ui-primitives/ListItem';
+import { List } from '@signalco/ui-primitives/List';
+import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/Loadable';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import { ContactPointerRequiredEntity } from './DisplayEntityTarget';
 
@@ -24,7 +24,11 @@ export default function EntityContactSelection(props: EntityContactSelectionProp
     };
 
     if (!isLoading && !error && !contacts.length) {
-        return <div className="p-2"><NoDataPlaceholder content={'No applicable contacts available'} /></div>;
+        return (
+            <div className="p-2">
+                <NoDataPlaceholder>No applicable contacts available</NoDataPlaceholder>
+            </div>
+        );
     }
 
     return (

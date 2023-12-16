@@ -1,9 +1,15 @@
+const {
+  dirname,
+  join
+} = require("path");
+
 module.exports = {
   "stories": ["../stories"],
   "addons": [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "storybook-addon-swc"
+    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("storybook-addon-swc"),
+    getAbsolutePath("@storybook/addon-styling-webpack")
   ],
   "framework": {
     "name": "@storybook/nextjs",
@@ -12,4 +18,8 @@ module.exports = {
   "docs": {
     "autodocs": true
   }
+}
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, "package.json")));
 }

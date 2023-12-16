@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
-import { Loadable } from '@signalco/ui/dist/Loadable';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/Loadable';
 import { objectWithKey } from '@signalco/js';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { usePromise } from '@enterwell/react-hooks';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -67,7 +67,7 @@ async function loadPricePolygonApi(ticker: string | undefined, apiKey: string | 
 export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>) {
     const { config } = props;
     const loadPriceFunc = useCallback(() => loadPricePolygonApi(config?.ticker, config?.polygonApiKey), [config?.ticker, config?.polygonApiKey])
-    const price = useLoadAndError(loadPriceFunc);
+    const price = usePromise(loadPriceFunc);
 
     useWidgetOptions(stateOptions, props);
 
@@ -90,10 +90,12 @@ export default function WidgetFinanceStock(props: WidgetSharedProps<ConfigProps>
                     </Stack>
                     <Stack>
                         {!price?.item ? (
-                            <NoDataPlaceholder content={'No data'} />
+                            <NoDataPlaceholder>
+                                No data
+                            </NoDataPlaceholder>
                         ) : (
                             <>
-                                <Typography level="h4" bold lineHeight={0.9}>${closePrice}</Typography>
+                                <Typography level="h4" bold>${closePrice}</Typography>
                                 <Typography color={diffPerc >= 0 ? 'success' : 'danger'}>{diffPerc >= 0 ? '+' : ''}{diffPercDecimals}%</Typography>
                             </>
                         )}

@@ -46,15 +46,57 @@ internal class ApplicationWorkerService : IInternalWorkerService
         this.stationStateService = stationStateService ?? throw new ArgumentNullException(nameof(stationStateService));
         this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
+        // TODO: Move mDNS discovery out of here
+        //this.discovery = new ServiceDiscovery(
+        //    loggerFactory,
+        //    loggerFactory.CreateLogger<ServiceDiscovery>());
+        //this.discovery.Start();
+        //this.discovery.ServiceInstanceDiscovered += DiscoveryOnServiceInstanceDiscovered;
     }
-        
+    
+    // TODO: Move to Network channel
+    //private async void DiscoveryOnServiceInstanceDiscovered(object? sender, ServiceInstanceDiscoveryEventArgs e)
+    //{
+    //    this.logger.LogInformation("Service discovered: {Name} @ {Endpoint}\nMessage: {Message}", e.ServiceInstanceName, e.RemoteEndPoint?.Address, e.Message);
+
+    //    if (e.ServiceInstanceName.Labels.Any(l => l.StartsWith("shelly")))
+    //    {
+    //        var addresses = e.Message.Answers.Where(a => a.Type == DnsType.A).ToList();
+    //        var address = addresses.FirstOrDefault() as ARecord;
+    //        if (address != null)
+    //        {
+    //            var ipv4Address = address.Address;
+    //            var entities = await this.entitiesDao.GetByContactValueAsync(
+    //                "network", "ipv4", ipv4Address.ToString());
+    //            var entitiesList = entities.ToList();
+    //            if (!entitiesList.Any())
+    //            {
+    //                var newEntityId = await this.entityService.UpsertAsync(EntityType.Device, null, e.ServiceInstanceName.Labels[0]);
+    //                var newEntity = await this.entitiesDao.GetAsync(newEntityId);
+    //                if (newEntity != null)
+    //                {
+    //                    entitiesList = new List<IEntityDetails> {newEntity};
+    //                }
+    //            }
+
+    //            foreach (var entityDetails in entitiesList)
+    //            {
+    //                await this.entityService.ContactSetAsync(
+    //                    new ContactPointer(entityDetails.Id, "network", "ipv4"),
+    //                    ipv4Address.ToString());
+    //            }
+    //        }
+    //    }
+    //}
+
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         _ = this.devicesHubClient.StartAsync(cancellationToken);
         _ = this.conductsHubClient.StartAsync(cancellationToken);
         await this.conductManager.StartAsync(cancellationToken);
         await this.RegisterStationConductsAsync(cancellationToken);
-            
+
         this.conductSubscriberClient.Subscribe("station", this.StationConductHandler);
     }
 
@@ -64,14 +106,14 @@ internal class ApplicationWorkerService : IInternalWorkerService
         if (string.IsNullOrWhiteSpace(state.Id))
             throw new Exception("Can't register conducts without station id");
 
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "update"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "restartStation"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "updateSystem"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "restartSystem"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "shutdownSystem"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "workerService:start"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "workerService:stop"), null, cancellationToken);
-        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, "signalco", "beginDiscovery"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "update"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "restartStation"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "updateSystem"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "restartSystem"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "shutdownSystem"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "workerService:start"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "workerService:stop"), null, cancellationToken);
+        await this.entityService.ContactSetAsync(new ContactPointer(state.Id, ChannelNames.StationDevice, "beginDiscovery"), null, cancellationToken);
     }
 
     private async Task StationConductHandler(IEnumerable<IConduct> conducts, CancellationToken cancellationToken)
@@ -117,7 +159,7 @@ internal class ApplicationWorkerService : IInternalWorkerService
                                                       ?? throw new InvalidOperationException("Provide channel entity ID"), cancellationToken);
                     break;
                 case "beginDiscovery":
-                    this.BeginWorkersDiscovery();
+                    await this.workerServiceManager.BeginDiscoveryAsync(cancellationToken);
                     break;
                 default:
                     throw new NotSupportedException("Not supported station conduct.");
@@ -149,11 +191,9 @@ internal class ApplicationWorkerService : IInternalWorkerService
         await this.workerServiceManager.StartWorkerServiceAsync(entityId, cancellationToken);
     }
 
-    private void BeginWorkersDiscovery() => 
-        this.workerServiceManager.BeginDiscovery();
-
     public Task StopAsync()
     {
+        // TODO: Maybe stop all workers here?
         return Task.CompletedTask;
     }
 }

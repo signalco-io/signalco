@@ -7,17 +7,10 @@ using Signal.Core.Entities;
 
 namespace Signalco.Func.Internal.TimeEntityPublic;
 
-public class PublicEntityTimeFunction
+public class PublicEntityTimeFunction(IEntityService entityService)
 {
     private static readonly long RoundingAmountTicks = TimeSpan.FromMinutes(1).Ticks;
     private const string CronEveryMinute = "0 * * * * *";
-    private readonly IEntityService entityService;
-    
-    public PublicEntityTimeFunction(
-        IEntityService entityService)
-    {
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-    }
 
     [Function("PublicEntity-Time")]
     public async Task Run(
@@ -29,7 +22,7 @@ public class PublicEntityTimeFunction
         var fraction = (double) (now.Ticks % RoundingAmountTicks) / RoundingAmountTicks >= 0.5 ? 1 : 0;
         var nowRounded = new DateTime((now.Ticks / RoundingAmountTicks + fraction) * RoundingAmountTicks);
 
-        await this.entityService.ContactSetAsync(
+        await entityService.ContactSetAsync(
             KnownEntities.Time.Contacts.Utc.Pointer,
             nowRounded.ToString("t", DateTimeFormatInfo.InvariantInfo),
             cancellationToken: cancellationToken);

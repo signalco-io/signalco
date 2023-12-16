@@ -1,7 +1,7 @@
 'use client';
 
 import React, { forwardRef } from 'react';
-import { Button } from '@signalco/ui/dist/Button';
+import { Button } from '@signalco/ui-primitives/Button';
 import ApiBadge from '../development/ApiBadge';
 import useCurrentUser from '../../src/hooks/useCurrentUser';
 import UserAvatar from './UserAvatar';

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
-import {Typography} from '@signalco/ui/dist/Typography';
-import {Stack} from '@signalco/ui/dist/Stack';
-import {Link} from '@signalco/ui/dist/Link';
+import {Typography} from '@signalco/ui-primitives/Typography';
+import {Stack} from '@signalco/ui-primitives/Stack';
+import {Link} from '@signalco/ui-primitives/Link';
 import { KnownPages } from '../../src/knownPages';
 
 export default function PostLayout({ children }: PropsWithChildren) {

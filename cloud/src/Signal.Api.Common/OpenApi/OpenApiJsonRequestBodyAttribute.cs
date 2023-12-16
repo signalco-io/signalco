@@ -2,9 +2,4 @@
 
 namespace Signal.Api.Common.OpenApi;
 
-public class OpenApiJsonRequestBodyAttribute<T> : OpenApiRequestBodyAttribute
-{
-    public OpenApiJsonRequestBodyAttribute() : base("application/json", typeof(T))
-    {
-    }
-}
+public class OpenApiJsonRequestBodyAttribute<T>() : OpenApiRequestBodyAttribute("application/json", typeof(T));

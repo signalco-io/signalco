@@ -2,16 +2,16 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { SelectItems } from '@signalco/ui-primitives/SelectItems';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Chip } from '@signalco/ui-primitives/Chip';
+import { Card } from '@signalco/ui-primitives/Card';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import type { ColorVariants } from '@signalco/ui/dist/theme';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { SelectItems } from '@signalco/ui/dist/SelectItems';
-import { Row } from '@signalco/ui/dist/Row';
-import { Gallery } from '@signalco/ui/dist/Gallery';
-import { FilterList } from '@signalco/ui/dist/FilterList';
-import { Chip } from '@signalco/ui/dist/Chip';
-import { Card } from '@signalco/ui/dist/Card';
+import type { ColorVariants } from '@signalco/ui/theme';
+import { Gallery } from '@signalco/ui/Gallery';
+import { FilterList } from '@signalco/ui/FilterList';
 import { objectWithKey } from '@signalco/js';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import SignalcoLogo from '../../../components/icons/SignalcoLogo';
@@ -65,12 +65,12 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
                     ? <Image src={imageSrc} alt={`${name} image`} width={180} height={180} />
                     : (
                         <Stack alignItems="center" justifyContent="center" spacing={2} style={{ width: 180, height: 180, textAlign: 'center' }}>
-                            <SignalcoLogo height={40} />
+                            <SignalcoLogo width={80} className="opacity-20" />
                             <Typography level="body2">Image unavailable</Typography>
                         </Stack>
                     )}
                 <Stack spacing={2}>
-                    <Typography bold opacity={0.9}>{name}</Typography>
+                    <Typography bold secondary>{name}</Typography>
                     <Row spacing={2} justifyContent="space-between" alignItems="center">
                         <Typography level="h5" bold>€&nbsp;{price ?? '-'}</Typography>
                         <StoreStockStatusBadge status={stockStatus} />

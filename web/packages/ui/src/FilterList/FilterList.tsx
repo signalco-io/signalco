@@ -1,17 +1,18 @@
 import { Children, type PropsWithChildren } from 'react';
 import { useEffect, useState } from 'react';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { SelectItems } from '@signalco/ui-primitives/SelectItems';
+import { Row } from '@signalco/ui-primitives/Row';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Collapse } from '@signalco/ui-primitives/Collapse';
+import { Checkbox } from '@signalco/ui-primitives/Checkbox';
+import { Button } from '@signalco/ui-primitives/Button';
 import { Check, Close, ExpandDown } from '@signalco/ui-icons';
-import { Typography } from '../Typography';
-import { Stack } from '../Stack';
-import { SelectItems } from '../SelectItems';
-import { Row } from '../Row';
 import { NoDataPlaceholder } from '../NoDataPlaceholder';
 import { Loadable, LoadableProps } from '../Loadable';
 import { Grow } from '../Grow';
 import { Fade } from '../Fade';
-import { Collapse } from '../Collapse';
-import { Checkbox } from '../Checkbox';
-import { Button } from '../Button';
 
 export type FilterListItem = {
     id: string;
@@ -19,27 +20,39 @@ export type FilterListItem = {
 }
 
 export type FilterListProps = {
-    header: string;
     items: FilterListItem[];
+    header?: string;
+    placeholder?: string;
     selected?: string | string[] | null | undefined;
     truncate?: number | undefined;
     multiple?: boolean;
+    variant?: 'checkbox' | 'highlight';
     onSelected?: (selectedId: string | undefined) => void;
     onSelectedMultiple?: (selectedIds: string[]) => void;
 }
 
-function FilterItem({ item, checked, onToggle }: { item: FilterListItem, checked: string[], onToggle: (id: string) => void }) {
+function FilterItem({ item, checked, variant, onToggle }: { item: FilterListItem, checked: string[], variant: 'checkbox' | 'highlight', onToggle: (id: string) => void }) {
+    const active = checked.indexOf(item.id) >= 0;
     return (
         <Checkbox
             key={item.id}
             label={(
-                <Row justifyContent="space-between" className="p-2">
+                <Row
+                    justifyContent="space-between"
+                    className={cx(
+                        'min-h-[40px] p-2 rounded-md',
+                        'hover:bg-muted/60',
+                        active && variant === 'highlight' && 'bg-muted'
+                    )}
+                >
                     <span>
                         {item.label}
                     </span>
-                    <Grow appear={checked.indexOf(item.id) >= 0}>
-                        <Check />
-                    </Grow>
+                    {variant === 'checkbox' && (
+                        <Grow appear={active}>
+                            <Check />
+                        </Grow>
+                    )}
                 </Row>
             )}
             checked={checked.indexOf(item.id) >= 0}
@@ -55,7 +68,7 @@ export function ItemsWrapper({ children, noItemsPlaceholder, itemsWrapper, ...re
     return (
         <Loadable {...rest}>
             {!children || !Array.isArray(children) || children.length === 0 ? (
-                <NoDataPlaceholder content={noItemsPlaceholder} />
+                <NoDataPlaceholder>{noItemsPlaceholder}</NoDataPlaceholder>
             ) : (
                 <ItemsWrapper>{children}</ItemsWrapper>
             )}
@@ -87,6 +100,7 @@ export function ItemsShowMore({ children, truncate, itemsWrapper, ...rest }: Ite
             )}
             <Fade appear={shouldTruncate}>
                 <Button
+                    className={cx(!shouldTruncate && 'hidden')}
                     fullWidth
                     size="sm"
                     variant="plain"
@@ -97,17 +111,17 @@ export function ItemsShowMore({ children, truncate, itemsWrapper, ...rest }: Ite
     );
 }
 
-export function FilterList(props: FilterListProps) {
-    const {
-        header,
-        items,
-        truncate,
-        multiple,
-        selected,
-        onSelected,
-        onSelectedMultiple,
-    } = props;
-
+export function FilterList({
+    header,
+    placeholder,
+    items,
+    truncate,
+    multiple,
+    selected,
+    variant = 'checkbox',
+    onSelected,
+    onSelectedMultiple,
+}: FilterListProps) {
     const [checked, setChecked] = useState<string[]>(Array.isArray(selected) ? selected : (selected ? [selected] : []));
 
     useEffect(() => {
@@ -115,50 +129,45 @@ export function FilterList(props: FilterListProps) {
     }, [selected]);
 
     const handleToggle = (value: string) => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = multiple ? [...checked] : [];
-
-        if (currentIndex === -1) {
-            newChecked.push(value);
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
-
-        setChecked(newChecked);
-
-        if (onSelected)
-            onSelected(newChecked.length ? newChecked[0] : undefined);
-        if (onSelectedMultiple)
-            onSelectedMultiple(newChecked);
+        setChecked(checked.includes(value)
+            ? checked.filter(i => i !== value)
+            : (multiple ? [...checked, value] : [value]));
     };
 
     const handleClearSelection = () => setChecked([]);
 
+    useEffect(() => {
+        if (onSelected)
+            onSelected(checked.length ? checked[0] : undefined);
+        if (onSelectedMultiple)
+            onSelectedMultiple(checked);
+    }, [checked, onSelected, onSelectedMultiple]);
+
     return (
         <Stack>
-            <div className="md:hidden">
+            <div className="sm:hidden">
                 <SelectItems
                     items={items.map(i => ({ value: i.id, label: i.label }))}
                     value={checked?.at(0)}
                     label={header}
-                    placeholder={`Select ${header}`}
+                    placeholder={placeholder ?? header ? `Select ${placeholder ?? header}` : undefined}
                     className="w-full"
                     onValueChange={(value) => {
                         handleToggle(value);
                     }} />
             </div>
-            <div className="hidden md:block">
-                <Typography level="h5" gutterBottom>{header}</Typography>
+            <div className="hidden sm:block">
+                {header && <Typography level="h5" gutterBottom>{header}</Typography>}
                 <ItemsShowMore
                     truncate={truncate}
                     loadingLabel={'Loading'}
                     noItemsPlaceholder={'Not available'}
                     itemsWrapper={({ children }: PropsWithChildren) => <Stack>{children}</Stack>}>
                     {items.map(item => (
-                        <FilterItem key={item.id} item={item} checked={checked} onToggle={handleToggle} />
+                        <FilterItem key={item.id} item={item} checked={checked} variant={variant} onToggle={handleToggle} />
                     ))}
                 </ItemsShowMore>
-                {(checked.length > 1 && (
+                {(checked.length > 0 && (
                     <Button fullWidth startDecorator={<Close />} variant="plain" size="sm" onClick={handleClearSelection}>Clear selection</Button>
                 ))}
             </div>

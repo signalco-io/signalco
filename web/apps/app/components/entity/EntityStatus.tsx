@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
+import { DotIndicator } from '@signalco/ui-primitives/DotIndicator';
 import { Lightning } from '@signalco/ui-icons';
-import { DotIndicator } from '@signalco/ui/dist/DotIndicator';
 import { now } from '../../src/services/DateTimeProvider';
 import IEntityDetails from '../../src/entity/IEntityDetails';
 import { entityInError, entityHasOffline, entityLastActivity } from '../../src/entity/EntityHelper';
@@ -25,8 +25,8 @@ export function useEntityStatus(entity: IEntityDetails | null | undefined) {
 
 type EntityStatusColors = 'success' | 'warning' | 'danger' | 'neutral';
 
-export default function EntityStatus(props: { entity: IEntityDetails | null | undefined }) {
-    const { hasStatus, isOffline, hasOffline, lastActivity, isStale } = useEntityStatus(props.entity);
+export default function EntityStatus({ entity }: { entity: IEntityDetails | null | undefined }) {
+    const { hasStatus, isOffline, hasOffline, lastActivity, isStale } = useEntityStatus(entity);
     if (!hasStatus)
         return null;
 

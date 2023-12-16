@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { usePromise } from '@enterwell/react-hooks';
 
 export type useLoadingAndErrorResult<TOut> = {
     items: Array<TOut>;
@@ -9,7 +9,7 @@ export type useLoadingAndErrorResult<TOut> = {
 
 export default function useLoadingAndError<TIn, TOut>(loadData?: (() => Promise<TIn[]>) | Promise<TIn[]>,
     transformItem?: (item: TIn) => TOut): useLoadingAndErrorResult<TOut> {
-    const result = useLoadAndError<TIn[]>(loadData);
+    const result = usePromise<TIn[]>(loadData);
     const [state, setState] = useState<useLoadingAndErrorResult<TOut>>({ items: Array<TOut>(), isLoading: result.isLoading, error: result.error });
 
     useEffect(() => {

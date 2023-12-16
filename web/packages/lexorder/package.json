@@ -1,0 +1,20 @@
+{
+    "name": "@signalco/lexorder",
+    "version": "0.1.0",
+    "sideEffects": false,
+    "exports": {
+        ".": "./src/index.ts"
+    },
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "lint": "eslint ."
+    },
+    "devDependencies": {
+        "@signalco/tsconfig": "workspace:*",
+        "@signalco/eslint-config-signalco": "workspace:*",
+        "typescript": "5.3.3"
+    }
+}

@@ -2,17 +2,17 @@
 
 import React, { PropsWithChildren, useCallback } from 'react';
 import NextImage from 'next/image';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Tooltip } from '@signalco/ui/dist/Tooltip';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { Link } from '@signalco/ui/dist/Link';
-import { Divider } from '@signalco/ui/dist/Divider';
-import { Container } from '@signalco/ui/dist/Container';
-import { Card, CardContent, CardCover, CardOverflow } from '@signalco/ui/dist/Card';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Tooltip } from '@signalco/ui-primitives/Tooltip';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Link } from '@signalco/ui-primitives/Link';
+import { Divider } from '@signalco/ui-primitives/Divider';
+import { Container } from '@signalco/ui-primitives/Container';
+import { Card, CardContent, CardCover, CardOverflow } from '@signalco/ui-primitives/Card';
+import { Loadable } from '@signalco/ui/Loadable';
 import { orderBy, isImageDataUrl } from '@signalco/js';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
+import { usePromise } from '@enterwell/react-hooks';
 import { ScreenshotResponse } from '../../app/api/screenshot/route';
 import { BrandResources } from '../../app/api/quick/route';
 
@@ -186,7 +186,7 @@ function hexLightness(hex: string) {
 
 function PagePreview({ domain }: { domain: string }) {
     const pageScreenshotDomain = useCallback(() => getPageScreenshot(domain), [domain]);
-    const pageScreenshot = useLoadAndError(pageScreenshotDomain);
+    const pageScreenshot = usePromise(pageScreenshotDomain);
 
     const width = 400;
     const containerHeight = 300;
@@ -248,7 +248,7 @@ function PagePreview({ domain }: { domain: string }) {
 
 function BrandView({ domain }: { domain: string | undefined }) {
     const quickLookupDomain = useCallback(() => quickLookup(domain), [domain]);
-    const domainResources = useLoadAndError(quickLookupDomain);
+    const domainResources = usePromise(quickLookupDomain);
     const resources = domainResources.item;
 
     return (

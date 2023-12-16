@@ -29,11 +29,12 @@
             "dependsOn": ["^build"]
         },
         "test": {
-            "outputs": [
-                "coverage/**"
-            ],
             "dependsOn": [
                 "build"
+            ],
+            "outputs": [
+                "coverage/**",
+                ".next/**"
             ]
         },
         "dev": {

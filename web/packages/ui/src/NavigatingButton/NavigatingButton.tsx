@@ -1,48 +1,33 @@
-import type { PropsWithChildren } from 'react';
-import Link from 'next/link';
-import { cx } from 'classix';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Button, ButtonProps } from '@signalco/ui-primitives/Button';
 import { Navigate } from '@signalco/ui-icons';
-import { Button } from '../Button';
 
-export type NavigatingButtonProps = PropsWithChildren<{
-    href: string;
-    size?: 'sm' | 'md' | 'lg';
-    disabled?: boolean;
+export type NavigatingButtonProps = ButtonProps & {
     hideArrow?: boolean;
-}>;
+};
 
 export function NavigatingButton({
-    href,
-    size,
-    disabled,
     hideArrow,
-    children
+    className,
+    ...rest
 }: NavigatingButtonProps) {
     return (
-        <Link
-            href={href}
-            passHref
-            aria-disabled={disabled}
-            prefetch={false}>
-            <Button
-                color="primary"
-                variant={hideArrow ? 'plain' : 'solid'}
-                disabled={disabled}
-                size={size}
-                className={hideArrow ? 'group/nav-button' : undefined}
-                startDecorator={hideArrow && (
-                    <span className="w-4 pr-1" />
-                )}
-                endDecorator={(
-                    <span className={cx(
-                        'pl-1',
-                        hideArrow && 'transition-opacity opacity-0 group-hover/nav-button:opacity-100'
-                    )}>
-                        <Navigate size={16} />
-                    </span>
+        <Button
+            color="primary"
+            variant={hideArrow ? 'plain' : 'solid'}
+            className={cx(hideArrow && 'group/nav-button', className)}
+            startDecorator={hideArrow && (
+                <span className="w-4 pr-1" />
+            )}
+            endDecorator={(
+                <span className={cx(
+                    'pl-1',
+                    hideArrow && 'transition-opacity opacity-0 group-hover/nav-button:opacity-100'
                 )}>
-                {children}
-            </Button>
-        </Link>
+                    <Navigate size={16} />
+                </span>
+            )}
+            {...rest}
+        />
     );
 }

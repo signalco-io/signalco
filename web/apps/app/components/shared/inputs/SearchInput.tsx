@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Input } from '@signalco/ui/dist/Input';
+import { Input } from '@signalco/ui-primitives/Input';
 import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
 import useLocale from '../../../src/hooks/useLocale';
 

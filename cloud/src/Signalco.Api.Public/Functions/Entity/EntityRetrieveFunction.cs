@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -15,19 +14,10 @@ using Signal.Core.Entities;
 
 namespace Signalco.Api.Public.Functions.Entity;
 
-public class EntityRetrieveFunction
+public class EntityRetrieveFunction(
+    IFunctionAuthenticator functionAuthenticator,
+    IEntityService entityService)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly IEntityService entityService;
-
-    public EntityRetrieveFunction(
-        IFunctionAuthenticator functionAuthenticator,
-        IEntityService entityService)
-    {
-        this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-    }
-
     [Function("Entity-Retrieve")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<EntityRetrieveFunction>("Entity", Description = "Retrieves all available entities.")]
@@ -36,8 +26,8 @@ public class EntityRetrieveFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "entity")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest(cancellationToken, this.functionAuthenticator, async context =>
-            (await this.entityService.AllDetailedAsync(context.User.UserId, null, cancellationToken))
+        await req.UserRequest(cancellationToken, functionAuthenticator, async context =>
+            (await entityService.AllDetailedAsync(context.User.UserId, null, cancellationToken))
             .Select(EntityDetailsDto)
             .ToList());
     

@@ -10,25 +10,17 @@ using Signal.Core.Storage;
 
 namespace Signalco.Common.Channel;
 
-public abstract class ConductMultipleFunctionsBase : ConductFunctionsBase
-{
-    private readonly IFunctionAuthenticator authenticator;
-    private readonly IAzureStorage storage;
-
-    protected ConductMultipleFunctionsBase(
+public abstract class ConductMultipleFunctionsBase(
         IFunctionAuthenticator authenticator,
         IAzureStorage storage)
-    {
-        this.authenticator = authenticator ?? throw new ArgumentNullException(nameof(authenticator));
-        this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
-    }
-
+    : ConductFunctionsBase
+{
     protected async Task<HttpResponseData> HandleAsync(
         HttpRequestData req,
         Func<ConductRequestDto, UserOrSystemRequestContextWithPayload<List<ConductRequestDto>>, Task>? processConduct = null,
         Func<Task>? afterConducts = null,
         CancellationToken cancellationToken = default) =>
-        await req.UserOrSystemRequest<List<ConductRequestDto>>(cancellationToken, this.authenticator,
+        await req.UserOrSystemRequest<List<ConductRequestDto>>(cancellationToken, authenticator,
             async context =>
             {
                 var errors = new ConcurrentBag<Exception>();
@@ -72,7 +64,7 @@ public abstract class ConductMultipleFunctionsBase : ConductFunctionsBase
             if (processConduct != null)
                 processConductTask = processConduct(conduct, context);
 
-            var usageTask = this.storage.QueueAsync(context.User?.UserId != null
+            var usageTask = storage.QueueAsync(context.User?.UserId != null
                 ? new UsageQueueItem(context.User.UserId, UsageKind.Conduct)
                 : null, cancellationToken);
 

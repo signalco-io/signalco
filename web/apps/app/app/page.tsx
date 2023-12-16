@@ -1,12 +1,10 @@
-'use client';
-
-import React from 'react';
-import Dashboards from '../components/dashboards/Dashboards';
+import { Suspense } from 'react';
+import { RootRedirect } from '../components/RootRedirect';
 
 export default function Dashboard() {
-    console.debug('Page Dashboard');
-
     return (
-        <Dashboards />
+        <Suspense>
+            <RootRedirect />
+        </Suspense>
     );
 }

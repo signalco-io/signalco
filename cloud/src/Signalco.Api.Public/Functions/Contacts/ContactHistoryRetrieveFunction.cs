@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Text.Json.Serialization;
@@ -18,23 +17,11 @@ using Signal.Core.Storage;
 
 namespace Signalco.Api.Public.Functions.Contacts;
 
-public class ContactHistoryRetrieveFunction
+public class ContactHistoryRetrieveFunction(
+    IFunctionAuthenticator functionAuthenticator,
+    IEntityService entityService,
+    IAzureStorageDao storageDao)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly IEntityService entityService;
-    private readonly IAzureStorageDao storageDao;
-
-    public ContactHistoryRetrieveFunction(
-        IFunctionAuthenticator functionAuthenticator,
-        IEntityService entityService,
-        IAzureStorageDao storage)
-    {
-        this.functionAuthenticator =
-            functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.storageDao = storage ?? throw new ArgumentNullException(nameof(storage));
-    }
-
     [Function("Contact-HistoryRetrieve")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ContactHistoryRetrieveFunction>("Contact", Description = "Retrieves the contact history for provided duration.")]
@@ -44,7 +31,7 @@ public class ContactHistoryRetrieveFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "contact/history")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest<ContactHistoryResponseDto>(cancellationToken, this.functionAuthenticator, async context =>
+        await req.UserRequest(cancellationToken, functionAuthenticator, async context =>
         {
             var entityId = req.Query["entityId"];
             var channelName = req.Query["channelName"];
@@ -56,8 +43,8 @@ public class ContactHistoryRetrieveFunction
                 string.IsNullOrWhiteSpace(contactName))
                 throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Required fields not provided.");
 
-            var authTask = context.ValidateUserAssignedAsync(this.entityService, entityId);
-            var historyDataTask = this.storageDao.ContactHistoryAsync(
+            var authTask = context.ValidateUserAssignedAsync(entityService, entityId);
+            var historyDataTask = storageDao.ContactHistoryAsync(
                 new ContactPointer(entityId, channelName, contactName),
                 TimeSpan.TryParse(duration, out var durationValue)
                     ? durationValue

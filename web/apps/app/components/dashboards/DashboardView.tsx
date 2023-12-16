@@ -1,9 +1,12 @@
-import React, { useMemo } from 'react';
+'use client';
+
+import { useState, useMemo, CSSProperties } from 'react';
 import Image from 'next/image';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Button } from '@signalco/ui/dist/Button';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Button } from '@signalco/ui-primitives/Button';
+import { useResizeObserver } from '@enterwell/react-hooks';
 import useLocale from '../../src/hooks/useLocale';
 import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
 import GridWrapper from './GridWrapper';
@@ -19,7 +22,7 @@ function NoWidgetsPlaceholder({ onAdd }: { onAdd: () => void }) {
                 <Stack style={{ maxWidth: 320 }} spacing={4} alignItems="center" justifyContent="center">
                     <Image priority width={280} height={213} alt="No Widgets" src="/assets/placeholders/placeholder-no-widgets.svg" />
                     <Typography level="h2">{t('NoWidgets')}</Typography>
-                    <Typography textAlign="center" level="body2">{t('NoWidgetsHelpTextFirstLine')}<br />{t('NoWidgetsHelpTextSecondLine')}</Typography>
+                    <Typography center level="body2">{t('NoWidgetsHelpTextFirstLine')}<br />{t('NoWidgetsHelpTextSecondLine')}</Typography>
                     <Button onClick={onAdd}>{t('AddWidget')}</Button>
                 </Stack>
             </Row>
@@ -29,6 +32,11 @@ function NoWidgetsPlaceholder({ onAdd }: { onAdd: () => void }) {
 
 function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, onAddWidget: () => void }) {
     const { dashboard, isEditing, onAddWidget } = props;
+
+    const [windowInnerWidth, setWindowInnerWidth] = useState(window.innerWidth);
+    const resizeObserverRef = useResizeObserver((_, entry) => {
+        setWindowInnerWidth(entry.contentRect.width);
+    });
 
     // Render placeholder when there is no widgets
     const widgetsOrder = useMemo(() => dashboard.widgets.slice().sort((a, b) => a.order - b.order).map(w => w.id), [dashboard.widgets]);
@@ -59,28 +67,31 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
 
     const WidgetComponent = isEditing ? DragableWidget : DisplayWidget;
     const widgetSize = 78 + 8; // Widget is 76x76 + 2px for border + 8 spacing between widgets (2x4px)
-    const dashbaordPadding = 48 + 109; // Has 24 x padding (109 nav width)
-    const numberOfColumns = Math.max(4, Math.floor((window.innerWidth - dashbaordPadding) / widgetSize)); // When width is less than 400, set to quad column
+    const dashbaordPadding = 0;//48 + 109; // Has 24 x padding (109 nav width)
+    const numberOfColumns = Math.max(4, Math.floor((windowInnerWidth - dashbaordPadding) / widgetSize)); // When width is less than 400, set to quad column
 
     return (
-        <div style={{
-            display: 'grid',
-            gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`,
-            gap: 4,
-            width: `${widgetSize * numberOfColumns - 8}px`
-        }}>
-            <GridWrapper isEditing={isEditing} order={widgetsOrder} orderChanged={handleOrderChanged}>
-                {widgets.map((widget) => (
-                    <WidgetComponent
-                        key={`widget-${widget.id.toString()}`}
-                        id={widget.id}
-                        onRemove={() => handleRemoveWidget(widget.id)}
-                        isEditMode={isEditing}
-                        type={widget.type}
-                        config={widget.config ?? {}}
-                        setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
-                ))}
-            </GridWrapper>
+        <div ref={resizeObserverRef}>
+            <div
+                className="grid w-[--dashboard-w] grid-cols-[repeat(var(--dashboard-cols),1fr)] gap-2"
+                style={{
+                    '--dashboard-cols': numberOfColumns,
+                    '--dashboard-w': `${widgetSize * numberOfColumns - 8}px`
+                } as CSSProperties}
+            >
+                <GridWrapper isEditing={isEditing} order={widgetsOrder} orderChanged={handleOrderChanged}>
+                    {widgets.map((widget) => (
+                        <WidgetComponent
+                            key={`widget-${widget.id.toString()}`}
+                            id={widget.id}
+                            onRemove={() => handleRemoveWidget(widget.id)}
+                            isEditMode={isEditing}
+                            type={widget.type}
+                            config={widget.config ?? {}}
+                            setConfig={(config) => handleSetWidgetConfig(widget.id, config)} />
+                    ))}
+                </GridWrapper>
+            </div>
         </div>
     );
 }

@@ -16,23 +16,11 @@ using Signal.Core.Storage;
 
 namespace Signalco.Api.Public.Functions.Station;
 
-public class StationLoggingListFunction
+public class StationLoggingListFunction(
+    IFunctionAuthenticator functionAuthenticator,
+    IEntityService entityService,
+    IAzureStorageDao storageDao)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly IEntityService entityService;
-    private readonly IAzureStorageDao storageDao;
-
-    public StationLoggingListFunction(
-        IFunctionAuthenticator functionAuthenticator,
-        IEntityService entityService,
-        IAzureStorageDao storageDao)
-    {
-        this.functionAuthenticator =
-            functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.storageDao = storageDao ?? throw new ArgumentNullException(nameof(storageDao));
-    }
-
     [Function("Station-Logging-List")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<StationLoggingListFunction>("Station")]
@@ -44,18 +32,18 @@ public class StationLoggingListFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "station/logging/list")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest(cancellationToken, this.functionAuthenticator, async context =>
+        await req.UserRequest(cancellationToken, functionAuthenticator, async context =>
         {
             var stationId = req.Query["stationId"];
             if (string.IsNullOrWhiteSpace(stationId))
                 throw new ExpectedHttpException(HttpStatusCode.BadRequest, "stationId is required");
 
             await context.ValidateUserAssignedAsync(
-                this.entityService,
+                entityService,
                 stationId);
 
             var items = new List<BlobInfoDto>();
-            await foreach (var item in this.storageDao.LoggingListAsync(stationId, cancellationToken))
+            await foreach (var item in storageDao.LoggingListAsync(stationId, cancellationToken))
                 items.Add(new BlobInfoDto(item.Name, item.CreatedTimeStamp, item.LastModifiedTimeStamp, item.Size));
 
             return items;

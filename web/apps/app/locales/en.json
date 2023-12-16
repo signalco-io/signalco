@@ -53,11 +53,13 @@
             "NewEntityDialog": {
                 "PickTypeHeader": "Pick Entity type"
             },
-            "CreateContact": "Create contact",
-            "EditContact": "Edit",
+            "CreateContact": "Create...",
+            "EditContact": "Edit...",
             "DeleteContact": "Delete...",
             "ContactDisablePersistHistory": "Disable history",
-            "ContactEnablePersistHistory": "Enable history"
+            "ContactEnablePersistHistory": "Enable history",
+            "ContactDisableProcessSameValue": "Disable processing same value",
+            "ContactEnableProcessSameValue": "Enable processing same value"
         },
         "Processes": {
             "name": "Name",
@@ -140,6 +142,7 @@
         "Dashboards": {
             "SaveFailedNotification": "There was an error while saving dashboards. Please try again or refresh the page.",
             "AddWidget": "Add widget...",
+            "WidgetsStore": "Widgets store",
             "Save": "Save",
             "NoDashboardsPlaceholder": "No Dashboards",
             "NoDashboardsHelpText": "You don't have any dashboards. Create a dashboard to get started.",
@@ -216,10 +219,15 @@
         "Entity": {
             "Types": {
                 "Device": "Device",
-                "Dashboard": "Dashboard",
+                "Dashboard": "Space",
                 "Process": "Process",
                 "Station": "Station",
-                "Channel": "Channel"
+                "Channel": "Channel",
+                "1": "Device",
+                "2": "Space",
+                "3": "Process",
+                "4": "Station",
+                "5": "Channel"
             }
         }
     },

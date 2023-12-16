@@ -34,7 +34,7 @@ jobs:
           popd
 
       - name: ✨ Setup DotNet ${{ env.DOTNET_VERSION }} Environment
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -44,9 +44,9 @@ jobs:
           version: 'latest'
 
       - name: ✨ Setup Node LTS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "18.x"
+          node-version: "20.x"
           cache: pnpm
           cache-dependency-path: ./cloud/infrastructure
 

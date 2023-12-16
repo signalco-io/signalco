@@ -3,37 +3,26 @@
     "version": "0.0.0",
     "private": true,
     "sideEffects": false,
-    "module": "./dist/index.js",
-    "types": "./dist/index.d.ts",
-    "exports": {
-        "./dist/": {
-            "import": "./dist/"
-        }
-    },
     "type": "module",
-    "files": [
-        "dist"
-    ],
+    "exports": {
+        "./*": "./src/*.ts"
+    },
     "scripts": {
-        "build": "tsup src/*.ts --dts --format esm --clean --minify",
-        "dev": "tsup src/*.ts --dts --format esm --watch",
-        "clean": "rimraf dist"
+        "lint": "eslint ."
     },
     "devDependencies": {
-        "@signalco/tsconfig": "workspace:*",
         "@signalco/js": "workspace:*",
-        "@types/react": "18.2.22",
-        "next": "13.5.2",
-        "prop-types": "15.8.1",
+        "@signalco/tsconfig": "workspace:*",
+        "@signalco/eslint-config-signalco": "workspace:*",
+        "@types/react": "18.2.45",
+        "next": "14.0.4",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "rimraf": "5.0.1",
-        "tsup": "6.7.0",
-        "typescript": "5.2.2"
+        "typescript": "5.3.3"
     },
     "peerDependencies": {
+        "next": "14.0.4",
         "react": "18.2.0",
-        "react-dom": "18.2.0",
-        "next": "13.5.2"
+        "react-dom": "18.2.0"
     }
 }

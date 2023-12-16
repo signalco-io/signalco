@@ -15,14 +15,14 @@ export function entityBatteryLevel(entity: IEntityDetails | null | undefined) {
 
 export function entityHasOffline(entity: IEntityDetails | null | undefined) {
     if (entity == null) return false;
-    return !!entity.contacts.find(c => c.contactName === 'offline');
+    return Boolean(entity.contacts.find(c => c.contactName === 'offline'));
 }
 
 export function entityInError(entity: IEntityDetails | null | undefined) {
     if (entity == null) return false;
-    const contact = entity.contacts.find(c => c.contactName === 'offline');
-    if (!contact) return undefined;
-    return contact.valueSerialized?.toLocaleLowerCase() === 'true';
+    const offlineContacts = entity.contacts.filter(c => c.contactName === 'offline');
+    if ((offlineContacts?.length ?? 0) <= 0) return undefined;
+    return Boolean(offlineContacts.find(c => c.valueSerialized?.toLocaleLowerCase() === 'true'));
 }
 
 export function entityLastActivity(entity: IEntityDetails | null | undefined) {

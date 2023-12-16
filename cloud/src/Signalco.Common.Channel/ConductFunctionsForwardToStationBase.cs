@@ -7,19 +7,11 @@ using Signal.Core.Entities;
 
 namespace Signalco.Common.Channel;
 
-public abstract class ConductFunctionsForwardToStationBase : ConductFunctionsBase
-{
-    private readonly IEntityService entityService;
-    private readonly IFunctionAuthenticator authenticator;
-
-    protected ConductFunctionsForwardToStationBase(
+public abstract class ConductFunctionsForwardToStationBase(
         IEntityService entityService,
         IFunctionAuthenticator authenticator)
-    {
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.authenticator = authenticator ?? throw new ArgumentNullException(nameof(authenticator));
-    }
-
+    : ConductFunctionsBase
+{
     protected async Task<HttpResponseData> HandleAsync(
         HttpRequestData req,
         string channelName,
@@ -28,7 +20,7 @@ public abstract class ConductFunctionsForwardToStationBase : ConductFunctionsBas
         CancellationToken cancellationToken = default) =>
         await req.UserOrSystemRequest<ConductPayloadDto>(
             cancellationToken,
-            this.authenticator,
+            authenticator,
             async context =>
                 await this.BroadcastConductToUsersAsync(
                     channelName,
@@ -47,7 +39,7 @@ public abstract class ConductFunctionsForwardToStationBase : ConductFunctionsBas
         // TODO: Retrieve user channel with matching id to read settings
         // TODO: Verify user owns entity
 
-        await this.entityService.BroadcastToEntityUsersAsync(
+        await entityService.BroadcastToEntityUsersAsync(
             entityId,
             "conducts",
             "requested",

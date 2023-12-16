@@ -47,7 +47,10 @@ export default class ConductsService {
 
         // Set local value state
         for (let index = 0; index < conducts.length; index++) {
-            ConductsService._updateLocalStateAsync(conducts[index]);
+            const conduct = conducts[index];
+            if (conduct) {
+                ConductsService._updateLocalStateAsync(conduct);
+            }
         }
     }
 }

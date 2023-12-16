@@ -1,8 +1,10 @@
-import {Gallery} from '@signalco/ui/dist/Gallery';
-import { FilterList } from '@signalco/ui/dist/FilterList';
+'use client';
+
+import {Gallery} from '@signalco/ui/Gallery';
+import { FilterList } from '@signalco/ui/FilterList';
 import { orderBy } from '@signalco/js';
-import { useSearchParam } from '@signalco/hooks/dist/useSearchParam';
-import { channelsData, channelCategories } from '@signalco/data';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
+import { channelsData, channelCategories } from '@signalco/data/data';
 import ChannelGalleryItem from './ChannelGalleryItem';
 
 export default function ChannelsGallery(props: { channelHrefFunc: (id: string) => string }) {

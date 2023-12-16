@@ -10,6 +10,7 @@ export function Grow(props: GrowProps) {
     const { appear, collapsedWhenHidden, children } = props;
     const duration = props.duration ?? 100;
 
+    // TODO: Migrate to TW
     return (
         <div style={{
             display: 'flex',

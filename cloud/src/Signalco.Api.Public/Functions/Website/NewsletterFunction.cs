@@ -15,22 +15,11 @@ using Signal.Core.Storage;
 
 namespace Signalco.Api.Public.Functions.Website;
 
-public class NewsletterFunction
+public class NewsletterFunction(
+    IHCaptchaService hCaptchaService,
+    IAzureStorage storage,
+    ILogger<NewsletterFunction> logger)
 {
-    private readonly IHCaptchaService hCaptchaService;
-    private readonly IAzureStorage storage;
-    private readonly ILogger<NewsletterFunction> logger;
-
-    public NewsletterFunction(
-        IHCaptchaService hCaptchaService,
-        IAzureStorage storage,
-        ILogger<NewsletterFunction> logger)
-    {
-        this.hCaptchaService = hCaptchaService ?? throw new ArgumentNullException(nameof(hCaptchaService));
-        this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
-
     [Function("Website-Newsletter")]
     [OpenApiOperation<NewsletterFunction>("Website", Description = "Subscribe to a newsletter.")]
     [OpenApiHeader(HCaptchaHttpRequestExtensions.HCaptchaHeaderKey, Description = "hCaptcha response.")]
@@ -42,7 +31,7 @@ public class NewsletterFunction
         CancellationToken cancellationToken = default) =>
         await req.AnonymousRequest(async () =>
         {
-            await req.VerifyCaptchaAsync(this.hCaptchaService, cancellationToken);
+            await req.VerifyCaptchaAsync(hCaptchaService, cancellationToken);
 
             var data = await req.ReadFromJsonAsync<NewsletterSubscribeDto>(cancellationToken);
             if (string.IsNullOrWhiteSpace(data?.Email))
@@ -52,13 +41,13 @@ public class NewsletterFunction
             // Don't report errors so bots can't guess-attack
             try
             {
-                await this.storage.UpsertAsync(
+                await storage.UpsertAsync(
                     new NewsletterSubscription(data.Email.ToUpperInvariant()),
                     cancellationToken);
             }
             catch (Exception ex)
             {
-                this.logger.LogError(ex, "Failed to subscribe to newsletter with email: {Email}", data.Email);
+                logger.LogError(ex, "Failed to subscribe to newsletter with email: {Email}", data.Email);
             }
         }, cancellationToken: cancellationToken);
 

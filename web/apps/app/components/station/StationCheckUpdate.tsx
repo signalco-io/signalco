@@ -1,10 +1,10 @@
 import { compareVersions } from 'compare-versions';
+import { Button } from '@signalco/ui-primitives/Button';
+import { showNotification } from '@signalco/ui-notifications';
 import { Check, Upload } from '@signalco/ui-icons';
-import { Button } from '@signalco/ui/dist/Button';
 import { objectWithKey } from '@signalco/js';
-import { useLoadAndError } from '@signalco/hooks/dist/useLoadAndError';
+import { usePromise } from '@enterwell/react-hooks';
 import StationsRepository from '../../src/stations/StationsRepository';
-import { showNotification } from '../../src/notifications/PageNotificationService';
 import useLocale, { localizer, useLocalePlaceholders } from '../../src/hooks/useLocale';
 
 async function loadLatestAvailableVersion() {
@@ -36,7 +36,7 @@ export default function StationCheckUpdate(props: { stationId: string[] | string
     const { t } = useLocale('App', 'Stations');
     const { t: tPlaceholder } = useLocalePlaceholders();
 
-    const latestAvailableVersion = useLoadAndError(loadLatestAvailableVersion);
+    const latestAvailableVersion = usePromise(loadLatestAvailableVersion);
     const latestAvailableVersionName = objectWithKey(latestAvailableVersion.item, 'name');
     const canUpdate = (!latestAvailableVersion.isLoading && !latestAvailableVersion.error && props.stationVersion)
         ? compareVersions(latestAvailableVersionName?.name?.toString().replace('v', '') ?? '', props.stationVersion)

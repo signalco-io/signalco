@@ -62,7 +62,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Channel.iRobot", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Channel.Samsung", "Signalco.Channel.Samsung\Signalco.Channel.Samsung.csproj", "{0EF33501-F473-4924-87B3-4353D9A2246F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signalco.Api.Public.RemoteBrowser", "Signalco.Api.Public.RemoteBrowser\Signalco.Api.Public.RemoteBrowser.csproj", "{7E0F69DB-97C3-48CF-9CDC-BB567541B9D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Signalco.Api.Public.RemoteBrowser", "Signalco.Api.Public.RemoteBrowser\Signalco.Api.Public.RemoteBrowser.csproj", "{7E0F69DB-97C3-48CF-9CDC-BB567541B9D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signalco.Channel.Station", "Signalco.Channel.Station\Signalco.Channel.Station.csproj", "{94C45E31-C678-4638-8C20-9468998F519D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -162,6 +164,10 @@ Global
 		{7E0F69DB-97C3-48CF-9CDC-BB567541B9D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E0F69DB-97C3-48CF-9CDC-BB567541B9D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E0F69DB-97C3-48CF-9CDC-BB567541B9D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94C45E31-C678-4638-8C20-9468998F519D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94C45E31-C678-4638-8C20-9468998F519D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94C45E31-C678-4638-8C20-9468998F519D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94C45E31-C678-4638-8C20-9468998F519D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,6 +196,7 @@ Global
 		{95DC3B46-DBF8-4C36-B02C-E1CE8A73601B} = {DCF287D4-46DA-4E27-80CD-34EEDC3766A4}
 		{0EF33501-F473-4924-87B3-4353D9A2246F} = {DCF287D4-46DA-4E27-80CD-34EEDC3766A4}
 		{7E0F69DB-97C3-48CF-9CDC-BB567541B9D4} = {22B3C3FC-54BE-4990-8BB6-55141C315A04}
+		{94C45E31-C678-4638-8C20-9468998F519D} = {DCF287D4-46DA-4E27-80CD-34EEDC3766A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46B06AB8-117A-49FE-92EE-CBD00E067023}

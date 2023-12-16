@@ -13,7 +13,8 @@ on:
 concurrency: merge_main
 
 jobs:
-  merge-branch:
+  # When a PR is merged into main, attempt to merge main into next
+  sync-next-branch:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎
@@ -30,4 +31,5 @@ jobs:
         if: steps.cpr.outputs.pr_created == 'true'
         run: gh pr merge --merge --auto "${{ steps.cpr.outputs.pr_number }}"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
+        

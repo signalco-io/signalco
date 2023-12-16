@@ -3,12 +3,9 @@ using System.Collections.Concurrent;
 
 namespace Signal.Core.Caching;
 
-public class InMemoryCache<T> : IInMemoryCache<T>
+public class InMemoryCache<T>(TimeSpan expiresIn) : IInMemoryCache<T>
 {
-    private readonly TimeSpan expiresIn;
     private readonly ConcurrentDictionary<string, (DateTime expiry, T data)> cache = new();
-
-    public InMemoryCache(TimeSpan expiresIn) => this.expiresIn = expiresIn;
 
     public bool TryGet(string key, out T? data)
     {
@@ -27,7 +24,7 @@ public class InMemoryCache<T> : IInMemoryCache<T>
 
     public T Set(string key, T data)
     {
-        var cacheValue = (DateTime.UtcNow.Add(this.expiresIn), data);
+        var cacheValue = (DateTime.UtcNow.Add(expiresIn), data);
         return this.cache.AddOrUpdate(key, cacheValue, (_, _) => cacheValue).data;
     }
 }

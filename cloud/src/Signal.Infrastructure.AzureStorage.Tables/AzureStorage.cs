@@ -99,6 +99,14 @@ internal class AzureStorage : IAzureStorage
                 cancellationToken: cancellationToken), cancellationToken);
     }
 
+    public Task RemoveAsync(IContactPointer contactPointer, CancellationToken cancellationToken)
+    {
+        var (partitionKey, rowKey) = AzureContact.ToStorageIdentifier(contactPointer);
+        return this.WithClientAsync(
+            ItemTableNames.Contacts,
+            c => c.DeleteEntityAsync(partitionKey, rowKey, cancellationToken: cancellationToken), cancellationToken);
+    }
+
     public async Task RemoveAsync(IUserAssignedEntity assignment, CancellationToken cancellationToken = default) =>
         await this.WithClientAsync(
             ItemTableNames.UserAssignedEntity,

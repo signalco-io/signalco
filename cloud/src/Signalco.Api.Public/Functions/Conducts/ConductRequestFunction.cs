@@ -19,28 +19,14 @@ using Signalco.Common.Channel;
 
 namespace Signalco.Api.Public.Functions.Conducts;
 
-public class ConductRequestFunction : ConductFunctionsBase
-{
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly IEntityService entityService;
-    private readonly IAzureStorageDao storageDao;
-    private readonly IAzureStorage storage;
-    private readonly ISignalRService signalRService;
-
-    public ConductRequestFunction(
+public class ConductRequestFunction(
         IFunctionAuthenticator functionAuthenticator,
         IEntityService entityService,
         IAzureStorageDao storageDao,
         IAzureStorage storage,
         ISignalRService signalRService)
-    {
-        this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.storageDao = storageDao ?? throw new ArgumentNullException(nameof(storageDao));
-        this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
-        this.signalRService = signalRService ?? throw new ArgumentNullException(nameof(signalRService));
-    }
-
+    : ConductFunctionsBase
+{
     [Function("Conducts-Request")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ConductRequestFunction>("Conducts", Description = "Requests conduct to be executed.")]
@@ -51,7 +37,7 @@ public class ConductRequestFunction : ConductFunctionsBase
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "conducts/request")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest<ConductRequestDto>(cancellationToken, this.functionAuthenticator, async context =>
+        await req.UserRequest<ConductRequestDto>(cancellationToken, functionAuthenticator, async context =>
         {
             var payload = context.Payload;
             if (string.IsNullOrWhiteSpace(payload.EntityId) ||
@@ -61,15 +47,15 @@ public class ConductRequestFunction : ConductFunctionsBase
                     HttpStatusCode.BadRequest,
                     "EntityId, ChannelName and ContactName properties are required.");
 
-            var authTask = context.ValidateUserAssignedAsync(this.entityService, payload.EntityId);
-            var entityUsersTask = this.storageDao.AssignedUsersAsync(
+            var authTask = context.ValidateUserAssignedAsync(entityService, payload.EntityId);
+            var entityUsersTask = storageDao.AssignedUsersAsync(
                 new[] {payload.EntityId },
                 cancellationToken);
-            var usageTask = this.storage.QueueAsync(new UsageQueueItem(context.User.UserId, UsageKind.Conduct), cancellationToken);
+            var usageTask = storage.QueueAsync(new UsageQueueItem(context.User.UserId, UsageKind.Conduct), cancellationToken);
 
             await Task.WhenAll(authTask, entityUsersTask, usageTask);
 
-            await this.signalRService.SendToUsersAsync(
+            await signalRService.SendToUsersAsync(
                 entityUsersTask.Result.First().Value.ToList(),
                 "conducts", 
                 "requested",

@@ -1,9 +1,7 @@
-import { Typography } from '../Typography';
+import { Typography, type TypographyProps } from '@signalco/ui-primitives/Typography';
 
-export type NoDataPlaceholderProps = {
-  content: React.ReactNode | string;
-};
+export type NoDataPlaceholderProps = TypographyProps;
 
-export function NoDataPlaceholder({ content }: NoDataPlaceholderProps) {
-    return <Typography level="body2">{content}</Typography>
+export function NoDataPlaceholder(props: NoDataPlaceholderProps) {
+    return <Typography level="body2" secondary {...props} />
 }

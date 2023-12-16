@@ -10,7 +10,7 @@
         "Entity": {
             "Types": {
                 "Device": "Device",
-                "Dashboard": "Dashboard",
+                "Dashboard": "Space",
                 "Process": "Process",
                 "Station": "Station",
                 "Channel": "Channel"

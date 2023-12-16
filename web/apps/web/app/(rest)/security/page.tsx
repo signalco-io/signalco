@@ -1,8 +1,8 @@
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Container } from '@signalco/ui-primitives/Container';
+import { Card, CardContent } from '@signalco/ui-primitives/Card';
+import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { Shield, Lock, Euro } from '@signalco/ui-icons';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Container } from '@signalco/ui/dist/Container';
-import { Card, CardContent } from '@signalco/ui/dist/Card';
-import { Avatar } from '@signalco/ui/dist/Avatar';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import FaqSection from '../../../components/pages/FaqSection';
 import CtaSection from '../../../components/pages/CtaSection';

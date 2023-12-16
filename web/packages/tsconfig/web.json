@@ -3,39 +3,15 @@
     "display": "Web",
     "extends": "./base.json",
     "compilerOptions": {
+        "plugins": [{ "name": "next" }],
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
         "allowJs": true,
-        "declaration": false,
-        "declarationMap": false,
-        "incremental": true,
-        "noEmit": true,
         "jsx": "preserve",
-        "resolveJsonModule": true,
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "esnext"
-        ],
+        "noEmit": true,
         "typeRoots": [
             "../node_modules/@types",
             "../@types"
         ],
-        "module": "esnext",
-        "target": "es6",
-        "plugins": [
-            {
-                "name": "next"
-            }
-        ]
-    },
-    "exclude": [
-        "node_modules",
-        "public",
-        "worker"
-    ],
-    "include": [
-        "next-env.d.ts",
-        "**/*.ts",
-        "**/*.tsx",
-        ".next/types/**/*.ts"
-    ]
+    }
 }

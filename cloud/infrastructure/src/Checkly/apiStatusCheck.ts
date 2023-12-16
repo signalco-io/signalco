@@ -3,18 +3,18 @@ import { Check } from '@checkly/pulumi';
 
 export type CheckFrequency = 15 | 30 | 60 | 120 | 180 | 360 | 720 | 1440;
 
-export default function apiStatusCheck (prefix: string, name: string, domain: Input<string>, frequency: CheckFrequency, route?: string) {
+export default function apiStatusCheck(prefix: string, name: string, domain: Input<string>, frequency: CheckFrequency, route?: string) {
     const stack = getStack();
     new Check(`apicheck-${prefix}`, {
-        name: `${name} (${stack})`,
+        name: `${name}`,
         activated: true,
         frequency,
         type: 'API',
         locations: ['eu-west-1'],
-        tags: [stack === 'production' ? 'public' : 'dev'],
+        tags: [stack === 'production' ? 'prod' : 'next'],
         request: {
             method: 'GET',
-            url: interpolate`https://${domain}${route ?? '/api/status'}`,
+            url: interpolate`https://${domain}${(route ?? '/api/status')}`,
         },
     });
 }

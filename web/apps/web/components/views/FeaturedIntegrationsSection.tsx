@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Typography } from '@signalco/ui/dist/Typography';
+import { Typography } from '@signalco/ui-primitives/Typography';
 import { SectionCenter } from './SectionCenter';
 
 const integrationsList = [
@@ -20,7 +20,7 @@ export function FeaturedIntegrationsSection() {
     return (
         <SectionCenter>
             <div className="flex flex-col gap-3">
-                <Typography level="body2" textAlign="center" textTransform="uppercase">Featured integrations</Typography>
+                <Typography level="body2" center uppercase>Featured integrations</Typography>
                 <div className="flex items-center justify-between">
                     {integrationsList.map((channel) => (
                         <Link key={channel.name} href={channel.url} className="text-center transition-opacity duration-200 hover:opacity-75">

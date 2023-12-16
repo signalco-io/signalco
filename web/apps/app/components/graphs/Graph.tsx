@@ -2,13 +2,13 @@ import { TooltipProps } from 'recharts/types/component/Tooltip';
 import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, LabelProps, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
 import { type SVGProps } from 'react';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Timeago } from '@signalco/ui/dist/Timeago';
-import { Row } from '@signalco/ui/dist/Row';
-import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { lightBlue, deepOrange, green, amber, zinc } from '@signalco/ui/dist/colors';
-import { Card } from '@signalco/ui/dist/Card';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Row } from '@signalco/ui-primitives/Row';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Card } from '@signalco/ui-primitives/Card';
+import { Timeago } from '@signalco/ui/Timeago';
+import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
+import { Loadable } from '@signalco/ui/Loadable';
 import { camelToSentenceCase, ObjectDictAny } from '@signalco/js';
 import { now } from '../../src/services/DateTimeProvider';
 import { useLocalePlaceholders } from '../../src/hooks/useLocale';
@@ -67,9 +67,6 @@ const renderCustomizedTimeLineLabel = ({ x, y, width, value }: Omit<SVGProps<SVG
 };
 
 function GraphTimeLine({ data, durationMs, width, startDateTime, hideLegend }: InnerGraphProps) {
-    const accentTrue = lightBlue[600];
-    const accentFalse = deepOrange[500];
-
     const nowTime = startDateTime ?? now();
     const past = startDateTime ?? now();
     past.setTime(nowTime.getTime() - durationMs);
@@ -83,15 +80,15 @@ function GraphTimeLine({ data, durationMs, width, startDateTime, hideLegend }: I
     const transformedDataItem: ObjectDictAny = {};
 
     // From start of graph to first entry
-    transformedDataItem['t0'] = domainGraph(new Date(firstEntry.id).getTime()) - domainGraph(past.getTime());
-    transformedDataItem['v0'] = firstEntry.value === 'true' ? 'false' : 'true';
+    transformedDataItem['t0'] = domainGraph(new Date(firstEntry?.id ?? 0).getTime()) - domainGraph(past.getTime());
+    transformedDataItem['v0'] = firstEntry?.value === 'true' ? 'false' : 'true';
 
     // From first entry to last entry
     for (let i = 1; i < reversedData.length; i++) {
         const currentElement = reversedData[i];
         const previousElement = reversedData[i - 1];
-        transformedDataItem[`t${i}`] = domainGraph(new Date(currentElement.id).getTime()) - domainGraph(new Date(previousElement.id).getTime());
-        transformedDataItem[`v${i}`] = previousElement.value;
+        transformedDataItem[`t${i}`] = domainGraph(new Date(currentElement?.id ?? 0).getTime()) - domainGraph(new Date(previousElement?.id ?? 0).getTime());
+        transformedDataItem[`v${i}`] = previousElement?.value;
     }
 
     // Period from last state change until present
@@ -128,7 +125,9 @@ function GraphTimeLine({ data, durationMs, width, startDateTime, hideLegend }: I
                         stackId="0"
                         barSize={20}
                         maxBarSize={20}
-                        fill={transformedDataItem[`v${i}`] === 'true' ? accentTrue : accentFalse}
+                        className={cx(
+                            transformedDataItem[`v${i}`] === 'true' ? 'fill-sky-600' : 'fill-orange-500'
+                        )}
                     >
                         <LabelList
                             dataKey={`v${i}`}
@@ -149,10 +148,10 @@ function ChartGenericTooltip({
 }: TooltipProps<string | number | (string | number)[], string | number> &
     { domain: ScaleTime<number, number, never>, units?: string }) {
     if (active && payload && payload.length) {
-        const dateTime = domain.invert(payload[0].payload.key) as Date;
+        const dateTime = domain.invert(payload[0]?.payload.key) as Date;
         return (
             <Card className="max-w-xs">
-                <Typography>{`${payload[0].value}${units || ''}`}</Typography>
+                <Typography>{`${payload[0]?.value}${units || ''}`}</Typography>
                 <Timeago date={dateTime} />
                 <Typography level="body2">{`${dateTime.getFullYear()}-${dateTime.getMonth().toString().padStart(2, '0')}-${dateTime.getDate().toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`}</Typography>
             </Card>
@@ -178,6 +177,17 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
     const firstDataPoint = data?.at(-1);
     const lastDataPoint = data ? data[0] : undefined;
 
+    const dataTransformedNumbers = transformedData
+        .map(c => typeof c.value === 'string' ? parseFloat(c.value) : null)
+    const isDataNumbers = dataTransformedNumbers.every(c => typeof c === 'number' && !isNaN(c))
+    const dataMin = isDataNumbers
+        ? Math.min(...dataTransformedNumbers.map(d => typeof d === 'number' ? d : 0))
+        : undefined;
+    const dataMax = isDataNumbers
+        ? Math.max(...dataTransformedNumbers.map(d => typeof d === 'number' ? d : 0))
+        : undefined;
+    console.debug('dataMin', dataMin, 'dataMax', dataMax)
+
     return (
         <ComposedChart
             width={width}
@@ -193,7 +203,7 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
             <XAxis domain={[domainGraph(new Date(firstDataPoint?.id ?? 0).getTime()), domainGraph(new Date(lastDataPoint?.id ?? 0).getTime())]} ticks={ticks || []} dataKey={xKey} type="number" hide />
             <YAxis
                 allowDecimals={false}
-                domain={['dataMin', 'dataMax']}
+                domain={[dataMin ?? 'dataMain', dataMax ?? 'dataMax']}
                 tickSize={0}
                 tickMargin={4}
                 interval="preserveStartEnd"
@@ -236,16 +246,9 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
     );
 }
 
-const graphColorWheel = [
-    green[600],
-    lightBlue[600],
-    amber[600],
-    zinc[500]
-]
-
 function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
     const barKeys = (data?.length ?? 0) > 0
-        ? (typeof data[0].value === 'object' ? Object.keys(data[0].value) : ['value'])
+        ? (typeof data[0]?.value === 'object' ? Object.keys(data[0].value) : ['value'])
         : [];
 
     const graphData = data.map(d => typeof d.value === 'object' ? ({ id: d.id, ...d.value }) : d);
@@ -253,10 +256,19 @@ function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
     const usagesAggregated = [];
     if (aggregate) {
         for (let usageIndex = 0; usageIndex < graphData.length; usageIndex++) {
-            const currentPoint: ObjectDictAny = graphData[usageIndex];
+            const curr = graphData[usageIndex];
+            if (!curr) {
+                continue;
+            }
+            const currentPoint: ObjectDictAny = curr;
+
             const previousPoint = usageIndex > 0
                 ? usagesAggregated[usageIndex - 1]
                 : {};
+            if (!previousPoint) {
+                continue;
+            }
+
             const aggregatedPoint: ObjectDictAny = {
                 id: currentPoint.id
             };
@@ -305,10 +317,25 @@ function GraphBar({ data, limits, aggregate, width, height }: InnerGraphProps) {
                     paddingLeft: '16px'
                 }} />
             {barKeys.map((bk, bki) => (
-                <Bar key={bk} name={camelToSentenceCase(bk)} dataKey={bk} stackId="a" fill={graphColorWheel[bki % graphColorWheel.length]} />
+                <Bar
+                    key={bk}
+                    name={camelToSentenceCase(bk)}
+                    dataKey={bk}
+                    stackId="a"
+                    className={cx(
+                        bki % 4 === 0 && 'fill-green-600',
+                        bki % 4 === 1 && 'fill-sky-600',
+                        bki % 4 === 2 && 'fill-amber-600',
+                        bki % 4 === 3 && 'fill-zinc-500'
+                    )} />
             ))}
             {(limits?.length ?? 0) > 0 && limits?.map(l =>
-                <ReferenceLine key={l.id} y={l.value} strokeDasharray="8 8" stroke={deepOrange[800]} ifOverflow="extendDomain" />
+                (<ReferenceLine
+                    key={l.id}
+                    y={l.value}
+                    strokeDasharray="8 8"
+                    className="fill-orange-800"
+                    ifOverflow="extendDomain" />)
             )}
         </BarChart>
     );
@@ -329,7 +356,7 @@ function Graph({ isLoading, error, data, label, discrete, ...rest }: GraphProps)
             {!!label && <Typography>{label}</Typography>}
             <Loadable isLoading={isLoading} loadingLabel="Loading data" error={error} width={100}>
                 {!data || data.length <= 0
-                    ? <NoDataPlaceholder content={t('NoData')} />
+                    ? <NoDataPlaceholder>{t('NoData')}</NoDataPlaceholder>
                     : <GraphComponent data={data} {...rest} />}
             </Loadable>
         </Row>

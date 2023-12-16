@@ -1,8 +1,8 @@
 import React from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { Modal } from '@signalco/ui/dist/Modal';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Modal } from '@signalco/ui-primitives/Modal';
 
 export interface IConfigurationDialogProps {
     open?: boolean;
@@ -18,8 +18,8 @@ function ConfigurationDialog({
     children, header, headerActions, open, onClose, actions, trigger
 }: IConfigurationDialogProps) {
     return (
-        <Modal trigger={trigger} open={open} onOpenChange={(newOpenState: boolean) => newOpenState && onClose && onClose()}>
-            <Stack spacing={1}>
+        <Modal trigger={trigger} open={open} onOpenChange={(newOpenState: boolean) => !newOpenState && onClose && onClose()}>
+            <Stack spacing={2}>
                 <Row justifyContent="space-between">
                     <Typography level="h5">{header}</Typography>
                     <Row spacing={1}>

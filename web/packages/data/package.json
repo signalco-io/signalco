@@ -3,27 +3,15 @@
     "version": "0.0.0",
     "private": true,
     "sideEffects": false,
-    "module": "./dist/index.js",
-    "types": "./dist/index.d.ts",
     "exports": {
-        ".": {
-            "import": "./dist/index.js"
-        }
+        "./data": "./src/data/index.ts",
+        "./node": "./src/node/index.js"
     },
     "type": "module",
-    "files": [
-        "dist"
-    ],
     "scripts": {
-        "build": "tsup src/index.ts --dts --format esm --clean",
-        "dev": "tsup src/index.ts --dts --format esm --clean --watch",
-        "clean": "rimraf dist"
     },
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
-        "tsup": "6.7.0",
-        "prop-types": "15.8.1",
-        "rimraf": "5.0.1",
-        "typescript": "5.2.2"
+        "typescript": "5.3.3"
     }
 }

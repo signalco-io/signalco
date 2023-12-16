@@ -1,20 +1,4 @@
-@import '@signalco/ui/dist/index.css';
-@import 'react-toastify/dist/ReactToastify.css';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* raleway-200 - latin */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 200;
-  font-display: swap;
-  src: local(''),
-       url('/assets/fonts/raleway-v26-latin-200.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/assets/fonts/raleway-v26-latin-200.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
+@import '@signalco/ui/index.css';
 
 @font-face {
   font-family: 'Material Icons';
@@ -51,27 +35,6 @@
 }
 
 :root {
-  --toastify-font-family: var(--font-sans);
+  --graph-stroke: #999;
 }
 
-[data-joy-color-scheme="dark"] {
-  --toastify-color-progress-dark: #fff;
-
-  --graph-stroke: #888;
-}
-
-[data-joy-color-scheme="light"] {
-  --toastify-color-dark: #fff;
-  --toastify-color-progress-dark: #000;
-  --toastify-text-color-dark: #333;
-
-  --graph-stroke: #666;
-}
-
-.image--light {
-  display: var(--light-display);
-}
-
-.image--dark {
-  display: var(--dark-display);
-}

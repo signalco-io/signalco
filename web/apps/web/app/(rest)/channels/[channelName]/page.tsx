@@ -1,12 +1,12 @@
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Link } from '@signalco/ui-primitives/Link';
+import { Card } from '@signalco/ui-primitives/Card';
 import { Bug, Link as LinkIcon } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { NavigatingButton } from '@signalco/ui/dist/NavigatingButton';
-import { Link } from '@signalco/ui/dist/Link';
-import { Card } from '@signalco/ui/dist/Card';
-import { Breadcrumbs } from '@signalco/ui/dist/Breadcrumbs';
-import { channelCategories as channelCategoriesData, channelsData } from '@signalco/data';
+import { NavigatingButton } from '@signalco/ui/NavigatingButton';
+import { Breadcrumbs } from '@signalco/ui/Breadcrumbs';
+import { channelCategories as channelCategoriesData, channelsData } from '@signalco/data/data';
 import { KnownPages } from '../../../../src/knownPages';
 import ShareSocial from '../../../../components/pages/ShareSocial';
 import FaqSection from '../../../../components/pages/FaqSection';
@@ -21,7 +21,7 @@ type ChannelFaqItem = {
 
 const channelFaq: ChannelFaqItem[] = [
     { id: 'channel', question: 'What is Channel?', answer: 'Channel is Entity that contains all information required for connected online service, application or device. Channels can execute actions directly or contain connected entities to manage.' },
-    { id: 'entities', question: 'What are Entities?', answer: 'Entity is a thing you want to automate in signalco. This can be is online service connected to signalco, smart device, your custom dashboard, automation process, etc.' },
+    { id: 'entities', question: 'What are Entities?', answer: 'Entity is a thing you want to automate in signalco. This can be is online service connected to signalco, smart device, your custom space, automation process, etc.' },
     { id: 'executions', question: 'What are Executions?', answer: 'Execution is when one of your automation processes executes one action.' },
 ];
 

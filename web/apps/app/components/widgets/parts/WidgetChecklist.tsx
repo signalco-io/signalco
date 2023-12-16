@@ -1,14 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
 import React, { useCallback, useState } from 'react';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Row } from '@signalco/ui-primitives/Row';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
+import { Input } from '@signalco/ui-primitives/Input';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
+import { Checkbox } from '@signalco/ui-primitives/Checkbox';
 import { Check, Delete, MoreHorizontal } from '@signalco/ui-icons';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Row } from '@signalco/ui/dist/Row';
-import { NoDataPlaceholder } from '@signalco/ui/dist/NoDataPlaceholder';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui/dist/Menu';
-import { Input } from '@signalco/ui/dist/Input';
-import { IconButton } from '@signalco/ui/dist/IconButton';
-import { Checkbox } from '@signalco/ui/dist/Checkbox';
+import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultLabel, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -118,7 +118,9 @@ function WidgetChecklist(props: WidgetSharedProps<ConfigProps>) {
                         ? items.map(item => <ChecklistItem key={item.id} item={item} onChange={handleItemChanged} onRemove={handleItemRemoved} />)
                         : (
                             <div className="flex h-full items-center justify-center">
-                                <NoDataPlaceholder content={placeholders.t('NoItems')} />
+                                <NoDataPlaceholder>
+                                    {placeholders.t('NoItems')}
+                                </NoDataPlaceholder>
                             </div>
                         )}
                 </Stack>

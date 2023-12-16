@@ -1,6 +1,6 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import { useState } from 'react';
-import { useInterval } from '@signalco/hooks/dist/useInterval';
+import { useInterval } from '@signalco/hooks/useInterval';
 import { now } from '../../src/services/DateTimeProvider';
 import { colorToRgb } from '../../src/helpers/StringHelpers';
 import styles from './WindowVisual.module.scss';
@@ -41,8 +41,9 @@ function WindowVisual(props: { shadePerc: number, size: number, dateAndTime?: Da
     const perc = Math.max(0, Math.min(props.shadePerc || 0, 1));
 
     const gradData = skySunnyGrads[hours];
-    const cssSkyGradStops = gradData.map((stop, index) => <stop key={index} offset={stop.position / 100} stopColor={`${stop.color}`} />)
-    const castColor = colorToRgb(gradData[gradData.length - 1].color);
+    const cssSkyGradStops = gradData?.map((stop, index) => <stop key={index} offset={stop.position / 100} stopColor={`${stop.color}`} />)
+    const grdientLastColor = gradData?.at(-1)?.color;
+    const castColor = grdientLastColor ? colorToRgb(grdientLastColor) : undefined;
     const castR = (castColor?.r || 0) / 255;
     const castG = (castColor?.g || 0) / 255;
     const castB = (castColor?.b || 0) / 255;

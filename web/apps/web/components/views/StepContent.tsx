@@ -1,7 +1,7 @@
 import React, { type CSSProperties } from 'react';
-import { cx } from 'classix';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { cx } from '@signalco/ui-primitives/cx';
 import { SectionCenter } from './SectionCenter';
 
 export function StepContent(props: {
@@ -17,9 +17,9 @@ export function StepContent(props: {
         <SectionCenter>
             <Stack spacing={6}>
                 <Stack spacing={3}>
-                    <Typography level="h3" component="h2" textAlign="center">{props.header}</Typography>
+                    <Typography level="h3" component="h2" center>{props.header}</Typography>
                     {props.subtitle && (
-                        <Typography level="body2" textAlign="center">{props.subtitle}</Typography>
+                        <Typography level="body2" center>{props.subtitle}</Typography>
                     )}
                 </Stack>
                 <div className={cx(

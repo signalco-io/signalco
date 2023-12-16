@@ -1,14 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
+import { IDashboardModel } from '../../dashboards/DashboardsRepository';
 import useDashboards from './useDashboards';
 
-export default function useDashboard(id?: string) {
+export default function useDashboard(id?: string): Omit<ReturnType<typeof useDashboards>, 'data'> & { data: IDashboardModel | undefined } {
     const dashboards = useDashboards();
-    return useQuery(['dashboard', id], () => {
-        const dashboard = dashboards.data?.find(d => d.id === id);
-        if (!dashboard)
-            throw new Error('Dashboard not found');
-        return dashboard;
-    }, {
-        enabled: Boolean(id) && !!dashboards.data && !dashboards.isStale
-    })
+    return useMemo(() => ({
+        ...dashboards,
+        data: dashboards.data?.find(d => d.id === id)
+    }), [dashboards]);
 }

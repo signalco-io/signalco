@@ -1,8 +1,8 @@
-import { Row } from '@signalco/ui/dist/Row';
-import { IconButton } from '@signalco/ui/dist/IconButton';
-import { GitHubIcon } from './GitHubIcon';
-import { RedditIcon } from './RedditIcon';
+import { Row } from '@signalco/ui-primitives/Row';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { XIconSvg } from './XIconSvg';
+import { RedditIcon } from './RedditIcon';
+import { GitHubIcon } from './GitHubIcon';
 
 export function SignalcoSocialIcons() {
     return (

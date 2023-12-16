@@ -1,0 +1,25 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "extends": [
+        "//"
+    ],
+    "pipeline": {
+        "build": {
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [
+                ".next/**",
+                "public/*.js"
+            ],
+            "env": [
+                "DOPROCESS_DATABASE_HOST",
+                "DOPROCESS_DATABASE_USERNAME",
+                "DOPROCESS_DATABASE_PASSWORD",
+                "CLERK_SECRET_KEY",
+                "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+                "OPENAI_API_KEY"
+            ]
+        }
+    }
+}

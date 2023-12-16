@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Row } from '@signalco/ui/dist/Row';
-import { Popper } from '@signalco/ui/dist/Popper';
-import { Card } from '@signalco/ui/dist/Card';
-import { Button } from '@signalco/ui/dist/Button';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Popper } from '@signalco/ui-primitives/Popper';
+import { Card } from '@signalco/ui-primitives/Card';
+import { Button } from '@signalco/ui-primitives/Button';
 import { camelToSentenceCase } from '@signalco/js';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import EntitySelectionMenu from './EntitySelectionMenu';

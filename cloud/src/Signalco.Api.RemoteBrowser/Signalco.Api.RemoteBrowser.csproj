@@ -11,9 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="chromium.linux-x64" Version="2022.6.4" />
+    <PackageReference Include="chromium.linux-x64" Version="2023.10.11" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
-    <PackageReference Include="Microsoft.Playwright" Version="1.38.0" />
+    <PackageReference Include="Microsoft.Playwright" Version="1.40.0" />
   </ItemGroup>
 
 </Project>

@@ -3,33 +3,20 @@
     "version": "0.0.0",
     "private": true,
     "sideEffects": false,
-    "module": "./dist/index.js",
-    "types": "./dist/index.d.ts",
-    "exports": {
-        ".": {
-            "import": "./dist/index.js"
-        }
-    },
     "type": "module",
-    "files": [
-        "dist"
-    ],
+    "exports": {
+        ".": "./src/index.ts"
+    },
     "scripts": {
-        "build": "tsup src/index.ts --dts --format esm --clean --minify",
-        "dev": "tsup src/index.ts --dts --format esm --watch",
-        "clean": "rimraf dist"
+        "lint": "eslint ."
     },
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
-        "prop-types": "15.8.1",
-        "tsup": "6.7.0",
-        "typescript": "5.2.2",
-        "rimraf": "5.0.1",
-        "lucide-react": "0.279.0",
+        "@signalco/eslint-config-signalco": "workspace:*",
+        "lucide-react": "0.297.0",
         "react": "18.2.0",
-        "react-dom": "18.2.0"
-    },
-    "dependencies": {
+        "react-dom": "18.2.0",
+        "typescript": "5.3.3"
     },
     "peerDependencies": {
         "react": "18.2.0",

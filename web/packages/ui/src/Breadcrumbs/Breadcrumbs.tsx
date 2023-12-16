@@ -1,29 +1,33 @@
-import { Fragment } from 'react';
-import { Typography } from '../Typography';
-import { Row } from '../Row';
+import { CSSProperties, Fragment, type ReactNode } from 'react';
+import { BreadcrumbsSeparator } from './BreadcrumbsSeparator';
 import { BreadcrumbsItem } from './BreadcrumbsItem';
 
 export type BreadcrumbItem = {
     href?: string;
-    label: string | undefined;
+    label: ReactNode | string | undefined;
 };
 
 export type BreadcrumbsProps = {
     items?: BreadcrumbItem[];
+    endSeparator?: boolean;
 };
 
-export function Breadcrumbs({ items }: BreadcrumbsProps) {
+export function Breadcrumbs({ items, endSeparator }: BreadcrumbsProps) {
     if (!items?.length)
         return null;
 
     return (
-        <Row spacing={1}>
+        <div className="grid max-w-full grid-flow-col grid-cols-[--cols-template] gap-1"
+            style={{
+                '--cols-template': `minmax(0,auto) ${new Array(items.length - 1).fill('auto minmax(0,auto)').join(' ')}${endSeparator ? ' auto' : ''} 1fr`,
+            } as CSSProperties}>
             {items.map((item, index) => (
-                <Fragment key={item.label}>
+                <Fragment key={item.href}>
                     <BreadcrumbsItem href={item.href} label={item.label} />
-                    {index < items.length - 1 && <Typography fontSize={'1.3em'}>{'\u203a'}</Typography>}
+                    {index < items.length - 1 && <BreadcrumbsSeparator />}
                 </Fragment>
             ))}
-        </Row>
+            {endSeparator && <BreadcrumbsSeparator />}
+        </div>
     );
 }

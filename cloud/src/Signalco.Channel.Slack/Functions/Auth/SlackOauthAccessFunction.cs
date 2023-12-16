@@ -22,25 +22,12 @@ using Signalco.Channel.Slack.Secrets;
 
 namespace Signalco.Channel.Slack.Functions.Auth;
 
-public class SlackOauthAccessFunction
+public class SlackOauthAccessFunction(
+    ISecretsManager secrets,
+    IFunctionAuthenticator authenticator,
+    IEntityService entityService,
+    IAzureStorage storage)
 {
-    private readonly ISecretsManager secrets;
-    private readonly IFunctionAuthenticator authenticator;
-    private readonly IEntityService entityService;
-    private readonly IAzureStorage storage;
-
-    public SlackOauthAccessFunction(
-        ISecretsManager secrets,
-        IFunctionAuthenticator authenticator,
-        IEntityService entityService,
-        IAzureStorage storage)
-    {
-        this.secrets = secrets ?? throw new ArgumentNullException(nameof(secrets));
-        this.authenticator = authenticator ?? throw new ArgumentNullException(nameof(authenticator));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
-    }
-
     [Function("Slack-Auth-OauthAccess")]
     [OpenApiOperation<SlackOauthAccessFunction>("Slack", "Auth", Description = "Creates new Slack channel.")]
     [OpenApiJsonRequestBody<OAuthAccessRequestDto>(Description = "OAuth code returned by Slack.")]
@@ -49,15 +36,15 @@ public class SlackOauthAccessFunction
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "auth/access")] HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest<OAuthAccessRequestDto, AccessResponseDto>(cancellationToken, this.authenticator, async context =>
+        await req.UserRequest<OAuthAccessRequestDto, AccessResponseDto>(cancellationToken, authenticator, async context =>
         {
             if (string.IsNullOrWhiteSpace(context.Payload.Code) ||
                 string.IsNullOrWhiteSpace(context.Payload.RedirectUrl))
                 throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Required fields are missing");
 
             // Resolve access token using temporary OAuth user code
-            var clientId = await this.secrets.GetSecretAsync(SlackSecretKeys.ClientId, cancellationToken);
-            var clientSecret = await this.secrets.GetSecretAsync(SlackSecretKeys.ClientSecret, cancellationToken);
+            var clientId = await secrets.GetSecretAsync(SlackSecretKeys.ClientId, cancellationToken);
+            var clientSecret = await secrets.GetSecretAsync(SlackSecretKeys.ClientSecret, cancellationToken);
             using var client = new HttpClient();
             var accessResponse = await client.PostAsync(
                 "https://slack.com/api/oauth.v2.access",
@@ -85,11 +72,11 @@ public class SlackOauthAccessFunction
 
             // Persist to KeyVault with unique ID (generated)
             var accessSecretKey = Guid.NewGuid().ToString();
-            await this.secrets.SetAsync(accessSecretKey, access.AccessToken, cancellationToken);
+            await secrets.SetAsync(accessSecretKey, access.AccessToken, cancellationToken);
 
             // Create channel entity
             var alias = string.Join(" - ", new[] {"Slack", access.Team?.Name}.Where(i => i != null));
-            var channelId = await this.entityService.UpsertAsync(
+            var channelId = await entityService.UpsertAsync(
                 context.User.UserId,
                 null,
                 id => new Entity(EntityType.Channel, id, alias),
@@ -98,7 +85,7 @@ public class SlackOauthAccessFunction
             // Create channel contact - auth token with ID
             // TODO: Use entity service
             // TODO: Update existing slack channel if having matching already (match by team and bot user id)
-            await this.storage.UpsertAsync(
+            await storage.UpsertAsync(
                 new Contact(
                     channelId,
                     KnownChannels.Slack,
@@ -108,7 +95,7 @@ public class SlackOauthAccessFunction
                     null),
                 cancellationToken);
 
-            await this.storage.UpsertAsync(
+            await storage.UpsertAsync(
                 new Contact(
                     channelId,
                     KnownChannels.Slack,
@@ -120,7 +107,7 @@ public class SlackOauthAccessFunction
 
             if (access.Team != null)
             {
-                await this.storage.UpsertAsync(
+                await storage.UpsertAsync(
                     new Contact(
                         channelId,
                         KnownChannels.Slack,
@@ -180,13 +167,8 @@ public class SlackOauthAccessFunction
     }
 
     [Serializable]
-    private class AccessResponseDto
+    private class AccessResponseDto(string id)
     {
-        public string Id { get; set; }
-
-        public AccessResponseDto(string id)
-        {
-            this.Id = id;
-        }
+        public string Id { get; set; } = id;
     }
 }

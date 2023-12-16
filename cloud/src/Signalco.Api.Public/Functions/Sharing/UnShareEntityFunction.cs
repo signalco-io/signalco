@@ -18,28 +18,15 @@ using Signal.Core.Sharing;
 
 namespace Signalco.Api.Public.Functions.Sharing;
 
-public class UnShareEntityFunction
+public class UnShareEntityFunction(
+    IFunctionAuthenticator functionAuthenticator,
+    ISharingService sharingService,
+    IEntityService entityService,
+    ILogger<UnShareEntityFunction> logger)
 {
-    private readonly IFunctionAuthenticator functionAuthenticator;
-    private readonly ISharingService sharingService;
-    private readonly IEntityService entityService;
-    private readonly ILogger<ShareEntityFunction> logger;
-
-    public UnShareEntityFunction(
-        IFunctionAuthenticator functionAuthenticator,
-        ISharingService sharingService,
-        IEntityService entityService,
-        ILogger<ShareEntityFunction> logger)
-    {
-        this.functionAuthenticator = functionAuthenticator ?? throw new ArgumentNullException(nameof(functionAuthenticator));
-        this.sharingService = sharingService ?? throw new ArgumentNullException(nameof(sharingService));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
-
     [Function("UnShare-Entity")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation<ShareEntityFunction>("Sharing", Description = "Un-shared the entity from users.")]
+    [OpenApiOperation<UnShareEntityFunction>("Sharing", Description = "Un-shared the entity from users.")]
     [OpenApiJsonRequestBody<UnShareRequestDto>(Description = "Un-share one entity with one or more users.")]
     [OpenApiResponseWithoutBody]
     [OpenApiResponseBadRequestValidation]
@@ -47,7 +34,7 @@ public class UnShareEntityFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "share/entity")]
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
-        await req.UserRequest<UnShareRequestDto>(cancellationToken, this.functionAuthenticator,
+        await req.UserRequest<UnShareRequestDto>(cancellationToken, functionAuthenticator,
             async context =>
             {
                 if (string.IsNullOrWhiteSpace(context.Payload.EntityId))
@@ -55,20 +42,20 @@ public class UnShareEntityFunction
                 if (context.Payload.UserEmails == null || !context.Payload.UserEmails.Any())
                     throw new ExpectedHttpException(HttpStatusCode.BadRequest, "UserEmails is required - at least one user email is required");
 
-                await context.ValidateUserAssignedAsync(this.entityService, context.Payload.EntityId);
+                await context.ValidateUserAssignedAsync(entityService, context.Payload.EntityId);
 
                 foreach (var userEmail in context.Payload.UserEmails.Where(userEmail => !string.IsNullOrWhiteSpace(userEmail)))
                 {
                     try
                     {
-                        await this.sharingService.UnAssignFromUserEmailAsync(
+                        await sharingService.UnAssignFromUserEmailAsync(
                             userEmail,
                             context.Payload.EntityId,
                             cancellationToken);
                     }
                     catch (Exception ex)
                     {
-                        this.logger.LogInformation(ex, "Failed to un-share entity {EntityId} with provided user {UserEmail}.", context.Payload.EntityId, userEmail);
+                        logger.LogInformation(ex, "Failed to un-share entity {EntityId} with provided user {UserEmail}.", context.Payload.EntityId, userEmail);
                     }
                 }
             });

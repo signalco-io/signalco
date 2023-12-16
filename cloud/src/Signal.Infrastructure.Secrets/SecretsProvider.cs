@@ -10,25 +10,18 @@ using Signal.Core.Secrets;
 
 namespace Signal.Infrastructure.Secrets;
 
-public class SecretsProvider : ISecretsProvider
+public class SecretsProvider(IServiceProvider serviceProvider) : ISecretsProvider
 {
     private const string KeyVaultUrlKey = "SignalcoKeyVaultUrl";
-
-    private readonly IServiceProvider serviceProvider;
 
     private Lazy<IConfiguration>? configuration;
 
     private static SecretClient? client;
     private static readonly InMemoryCache<string> SecretsCache = new(TimeSpan.FromHours(1));
 
-    public SecretsProvider(IServiceProvider serviceProvider)
-    {
-        this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-    }
-
     protected SecretClient Client()
     {
-        this.configuration ??= this.serviceProvider.GetService<Lazy<IConfiguration>?>();
+        this.configuration ??= serviceProvider.GetService<Lazy<IConfiguration>?>();
         if (this.configuration == null)
             throw new Exception("Configuration unavailable in this context - can't key Vault URL.");
 
@@ -46,7 +39,7 @@ public class SecretsProvider : ISecretsProvider
         // Check configuration (never expires - required redeployment)
         try
         {
-            this.configuration ??= this.serviceProvider.GetService<Lazy<IConfiguration>?>();
+            this.configuration ??= serviceProvider.GetService<Lazy<IConfiguration>?>();
             if (this.configuration != null)
                 return this.configuration.Value[key] ?? throw new Exception("Not a local secret.");
         }

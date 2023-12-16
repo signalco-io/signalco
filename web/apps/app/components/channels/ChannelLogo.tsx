@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import { Tooltip } from '@signalco/ui/dist/Tooltip';
+import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 
 export type ChannelLogoProps = {
     channelName: string;

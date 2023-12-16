@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic'
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Loadable } from '@signalco/ui/dist/Loadable';
-import { Button } from '@signalco/ui/dist/Button';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Button } from '@signalco/ui-primitives/Button';
+import { showNotification } from '@signalco/ui-notifications';
+import { Loadable } from '@signalco/ui/Loadable';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
-import { showNotification } from '../../../src/notifications/PageNotificationService';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
 import useAudioOn from '../../../src/hooks/sounds/useAudioOn';
 import useAudioOff from '../../../src/hooks/sounds/useAudioOff';
@@ -34,6 +34,7 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
 
 const TvVisual = dynamic(() => import('../../icons/TvVisual'));
 const LightBulbVisual = dynamic(() => import('../../icons/LightBulbVisual'));
+const FanVisual = dynamic(() => import('../../icons/FanVisual'));
 
 export type StateAction = IContactPointer & {
     valueSerialized?: string,
@@ -93,6 +94,7 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
     const onEntityIds = useMemo(() => onContactPointers?.map(i => i.entityId), [onContactPointers]);
     const onEntity = useEntity(onEntityIds && onEntityIds[0]);
     const onContacts = useContacts(onContactPointers);
+
     const audioOn = useAudioOn();
     const audioOff = useAudioOff();
 
@@ -107,10 +109,11 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
             if (typeof contact === 'undefined' || !contact.data)
                 continue;
 
-            if (contact.data.valueSerialized === config?.on?.find((e: IContact) =>
+            const contactOnValueSerialized = config?.on?.find((e: IContact) =>
                 e.entityId === contact.data.entityId &&
                 e.channelName === contact.data.channelName &&
-                e.contactName === contact.data.contactName)?.valueSerialized) {
+                e.contactName === contact.data.contactName)?.valueSerialized;
+            if (contact.data.valueSerialized === contactOnValueSerialized) {
                 state = true;
                 break;
             }
@@ -122,7 +125,7 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
         setIsLoading(false);
 
     const label = props.config?.label || (typeof onEntity !== 'undefined' ? onEntity.data?.alias : '');
-    const Visual = useMemo(() => props.config?.visual === 'tv' ? TvVisual : LightBulbVisual, [props.config]);
+    const Visual = useMemo(() => props.config?.visual === 'tv' ? TvVisual : (props.config?.visual === 'fan' ? FanVisual : LightBulbVisual), [props.config]);
 
     const handleStateChangeRequest = () => {
         if (typeof onEntity === 'undefined') {

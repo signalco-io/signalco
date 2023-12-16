@@ -29,7 +29,7 @@ internal class SamsungWorkerService : IWorkerService, IWorkerServiceWithDiscover
     private SamsungWorkerServiceConfiguration? configuration;
     private readonly List<TvRemote> tvRemotes = new();
     private CancellationToken startCancellationToken;
-    private string channelId;
+    private string? channelId;
 
     public SamsungWorkerService(
         IEntityService entityService,
@@ -72,7 +72,7 @@ internal class SamsungWorkerService : IWorkerService, IWorkerServiceWithDiscover
             try
             {
                 var entity = await this.entitiesDao.GetAsync(conduct.Pointer.EntityId, cancellationToken);
-                var remoteId = entity.Contact(SamsungChannels.SamsungChannel, "remote-id")?.ValueSerialized;
+                var remoteId = entity?.Contact(SamsungChannels.SamsungChannel, "remote-id")?.ValueSerialized;
                 var matchedRemote = this.tvRemotes.FirstOrDefault(r => r.Id == remoteId);
                 if (matchedRemote == null)
                     throw new Exception($"No matching remote found for target {conduct.Pointer.EntityId}");
@@ -167,7 +167,8 @@ internal class SamsungWorkerService : IWorkerService, IWorkerServiceWithDiscover
 
     public async Task StopAsync()
     {
-        await this.configurationService.SaveAsync(this.channelId, SamsungChannels.SamsungChannel, this.configuration, CancellationToken.None);
+        if (this.channelId != null)
+            await this.configurationService.SaveAsync(this.channelId, SamsungChannels.SamsungChannel, this.configuration, CancellationToken.None);
     }
 
     public async Task BeginDiscoveryAsync(CancellationToken cancellationToken)

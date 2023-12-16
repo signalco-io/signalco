@@ -1,6 +1,6 @@
 import React, { type CSSProperties } from 'react';
-import { cx } from 'classix';
-import { Container } from '@signalco/ui/dist/Container';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Container } from '@signalco/ui-primitives/Container';
 
 export function SectionCenter(props: { children?: React.ReactNode | undefined; style?: CSSProperties | undefined; narrow?: boolean; className?: string; }) {
     return (

@@ -14,18 +14,14 @@ using Signalco.Common.Channel;
 
 namespace Signalco.Channel.Zigbee2Mqtt.Functions;
 
-public class ConductMultipleFunctions : ConductMultipleFunctionsForwardToStationBase
-{
-    public ConductMultipleFunctions(
-        IEntityService entityService, 
+public class ConductMultipleFunctions(
+        IEntityService entityService,
         IAzureStorageDao storageDao,
         IFunctionAuthenticator authenticator,
         IAzureStorage storage,
-        ISignalRService signalRService) 
-        : base(entityService, storageDao, authenticator, storage, signalRService)
-    {
-    }
-
+        ISignalRService signalRService)
+    : ConductMultipleFunctionsForwardToStationBase(entityService, storageDao, authenticator, storage, signalRService)
+{
     [Function("Conduct-Multiple")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<ConductMultipleFunctions>("Conducts",

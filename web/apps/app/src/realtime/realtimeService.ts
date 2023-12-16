@@ -1,7 +1,9 @@
 import { QueryClient } from '@tanstack/react-query';
+import { showNotification } from '@signalco/ui-notifications';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { getApiUrl, getTokenFactory } from '../services/HttpService';
-import { showNotification } from '../notifications/PageNotificationService';
+import { contactKey } from '../hooks/signalco/useContact';
+import { entityKey } from '../hooks/signalco/entity/useEntity';
 
 class SignalSignalRDeviceStateDto {
     entityId?: string;
@@ -31,44 +33,8 @@ class RealtimeService {
 
         if (this.queryClient) {
             console.debug('Invalidated queries for entity and contact', change.entityId, change.channelName, change.contactName);
-            this.queryClient.invalidateQueries(['entity', change.entityId]);
-            this.queryClient.invalidateQueries(['contact', change.entityId, change.channelName, change.contactName]);
-        }
-    }
-
-    private async _hubStartWithRetryAsync(retryCount: number) {
-        try {
-            if (this.contactsHub == null) return;
-            if (this.contactsHub.state === 'Connected')
-                return;
-
-            console.debug('Connecting to SignalR...');
-
-            await this.contactsHub.start();
-            this.contactsHub.on('contact', this.HandleDeviceStateAsync);
-            this.contactsHub.onclose((err) => {
-                console.log('SignalR connection closed. Reconnecting with delay...');
-                console.debug('SignalR connection closes reason:', err);
-                this._hubStartWithRetryAsync(0);
-            });
-            this.contactsHub.onreconnecting((err) => {
-                console.log('Signalr reconnecting...');
-                console.debug('Signalr reconnection reason:', err);
-            });
-            this.contactsHub.onreconnected(() => {
-                console.log('Signalr reconnected');
-                showNotification('Realtime connection to cloud established.', 'success');
-            });
-        } catch (err) {
-            const delay = Math.min((retryCount + 1) * 2, 180);
-
-            console.warn(`Failed to start SignalR hub connection. Reconnecting in ${delay}s`, err);
-
-            // TODO: Some kind of indicator we are offline
-
-            setTimeout(() => {
-                this._hubStartWithRetryAsync(delay);
-            }, (delay) * 1000);
+            this.queryClient.invalidateQueries({ queryKey: entityKey(change.entityId) });
+            this.queryClient.invalidateQueries({ queryKey: contactKey(change) });
         }
     }
 
@@ -96,7 +62,36 @@ class RealtimeService {
             .configureLogging(LogLevel.Information)
             .build();
 
-        this._hubStartWithRetryAsync(0);
+        console.debug('Connecting to SignalR...');
+
+        try {
+            let reconnectDelay = 1000;
+            await this.contactsHub.start();
+            this.contactsHub.on('contact', this.HandleDeviceStateAsync);
+            this.contactsHub.onclose((err) => {
+                console.error(`SignalR connection closed. Reconnecting with delay ${reconnectDelay}ms...`);
+                console.debug('SignalR connection closes reason:', err);
+                setTimeout(() => {
+                    reconnectDelay *= 2;
+                    if (reconnectDelay > 60000) {
+                        showNotification('SignalR connection lost. Reconnecting...', 'warning');
+                        reconnectDelay = 60000;
+                    }
+                    this.contactsHub?.start();
+                }, reconnectDelay);
+            });
+            this.contactsHub.onreconnecting((err) => {
+                console.warn('Signalr reconnecting...');
+                console.debug('Signalr reconnection reason:', err);
+            });
+            this.contactsHub.onreconnected(() => {
+                console.log('Signalr reconnected');
+                showNotification('Real-time connection to cloud established.', 'success');
+            });
+        } catch (err) {
+            console.error('Error starting SignalR connection', err);
+            showNotification('Error starting real-time connection to cloud. Please refresh page to re-establish connection.', 'error');
+        }
     }
 }
 

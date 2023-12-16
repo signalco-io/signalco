@@ -1,14 +1,8 @@
 ﻿namespace Signal.Core.Sharing;
 
-public class UserAssignedEntity : IUserAssignedEntity
+public class UserAssignedEntity(string userId, string entityId) : IUserAssignedEntity
 {
-    public UserAssignedEntity(string userId, string entityId)
-    {
-        this.UserId = userId;
-        this.EntityId = entityId;
-    }
+    public string UserId { get; } = userId;
 
-    public string UserId { get; }
-
-    public string EntityId { get; }
+    public string EntityId { get; } = entityId;
 }

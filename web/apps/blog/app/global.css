@@ -1,19 +1,4 @@
-@import '@signalco/ui/dist/index.css';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* raleway-200 - latin */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 200;
-  font-display: swap;
-  src: local(''),
-       url('/assets/fonts/raleway-v26-latin-200.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/assets/fonts/raleway-v26-latin-200.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
+@import '@signalco/ui/index.css';
 
 @font-face {
   font-family: 'Material Icons';
@@ -54,10 +39,3 @@ html, body, #__next {
   font-feature-settings: 'liga';
 }
 
-.image--light {
-  display: var(--light-display);
-}
-
-.image--dark {
-  display: var(--dark-display);
-}

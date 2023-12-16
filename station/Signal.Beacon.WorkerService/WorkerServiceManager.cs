@@ -62,9 +62,12 @@ internal class WorkerServiceManager : IWorkerServiceManager
                     c.ContactName == KnownContacts.ChannelStationId &&
                     c.ValueSerialized == stationState.Id));
 
+        var applicableChannels = assignedChannels
+            .Where(c => (c.ContactOrDefault("signalco", "disabled").ValueSerialized?.ToLowerInvariant() ?? "false") != "true");
+
         // Start all channels workers
-        await Task.WhenAll(assignedChannels.Select(assignedChannel =>
-            this.StartWorkerServiceAsync(assignedChannel.Id, cancellationToken)));
+        await Task.WhenAll(applicableChannels.Select(assignedChannel =>
+            this.StartWorkerServiceAsync(assignedChannel.Id, cancellationToken))); 
 
         this.logger.LogInformation("All worker services started.");
     }
@@ -174,9 +177,15 @@ internal class WorkerServiceManager : IWorkerServiceManager
         }
     }
     
-    public void BeginDiscovery()
+    public async Task BeginDiscoveryAsync(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        foreach (var workerService in this.workers.ToList())
+        {
+            if (workerService.Instance is IWorkerServiceWithDiscovery workerServiceWithDiscovery)
+            {
+                await workerServiceWithDiscovery.BeginDiscoveryAsync(cancellationToken);
+            }
+        }
     }
 
     private class StationWorkerServiceOperation : StationWorkerServiceState

@@ -14,25 +14,18 @@ using Signal.Core.Secrets;
 
 namespace Signal.Api.Common.Auth;
 
-public class FunctionAuth0Authenticator : IFunctionAuthenticator
-{
-    private const string RefreshTokenUrlPath = "/oauth/token";
-    private readonly ISecretsProvider secretsProvider;
-    private readonly ILogger<FunctionAuth0Authenticator> logger;
-    private IJwtAuthenticator? authenticator;
-        
-    public FunctionAuth0Authenticator(
+public class FunctionAuth0Authenticator(
         ISecretsProvider secretsProvider,
         ILogger<FunctionAuth0Authenticator> logger)
-    {
-        this.secretsProvider = secretsProvider ?? throw new ArgumentNullException(nameof(secretsProvider));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
+    : IFunctionAuthenticator
+{
+    private const string RefreshTokenUrlPath = "/oauth/token";
+    private IJwtAuthenticator? authenticator;
 
     private async Task<Auth0Authenticator> InitializeAuthenticatorAsync(bool allowExpiredToken, CancellationToken cancellationToken = default)
     {
-        var domain = await this.secretsProvider.GetSecretAsync(SecretKeys.Auth0.Domain, cancellationToken);
-        var audience = await this.secretsProvider.GetSecretAsync(SecretKeys.Auth0.ApiIdentifier, cancellationToken);
+        var domain = await secretsProvider.GetSecretAsync(SecretKeys.Auth0.Domain, cancellationToken);
+        var audience = await secretsProvider.GetSecretAsync(SecretKeys.Auth0.ApiIdentifier, cancellationToken);
         return new Auth0Authenticator(domain, new[] {audience}, allowExpiredToken);
     }
 
@@ -50,9 +43,9 @@ public class FunctionAuth0Authenticator : IFunctionAuthenticator
         await refreshAuthenticator.AuthenticateAsync(request, cancellationToken);
 
         // Request new token
-        var domainTask = this.secretsProvider.GetSecretAsync(SecretKeys.Auth0.Domain, cancellationToken);
-        var clientSecretTask = this.secretsProvider.GetSecretAsync(SecretKeys.Auth0.ClientSecretStation, cancellationToken);
-        var clientIdTask = this.secretsProvider.GetSecretAsync(SecretKeys.Auth0.ClientIdStation, cancellationToken);
+        var domainTask = secretsProvider.GetSecretAsync(SecretKeys.Auth0.Domain, cancellationToken);
+        var clientSecretTask = secretsProvider.GetSecretAsync(SecretKeys.Auth0.ClientSecretStation, cancellationToken);
+        var clientIdTask = secretsProvider.GetSecretAsync(SecretKeys.Auth0.ClientIdStation, cancellationToken);
         await Task.WhenAll(domainTask, clientSecretTask, clientIdTask);
 
         var refreshTokenUrl = $"https://{domainTask.Result}{RefreshTokenUrlPath}";
@@ -90,7 +83,7 @@ public class FunctionAuth0Authenticator : IFunctionAuthenticator
                 throw new Exception("Internal key not available");
 
             var providedKey = req.Headers.GetValues(KnownHeaders.ProcessorAccessCode).First();
-            var realKey = await this.secretsProvider.GetSecretAsync(SecretKeys.ProcessorAccessCode, cancellationToken);
+            var realKey = await secretsProvider.GetSecretAsync(SecretKeys.ProcessorAccessCode, cancellationToken);
             if (providedKey != realKey)
                 throw new Exception("Invalid system key");
 
@@ -98,7 +91,7 @@ public class FunctionAuth0Authenticator : IFunctionAuthenticator
         }
         catch (Exception ex)
         {
-            this.logger.LogError(ex, "System Authorization failed");
+            logger.LogError(ex, "System Authorization failed");
             throw new AuthenticationExpectedHttpException(ex.Message);
         }
     }
@@ -120,7 +113,7 @@ public class FunctionAuth0Authenticator : IFunctionAuthenticator
         }
         catch (Exception ex)
         {
-            this.logger.LogError(ex, "Authorization failed");
+            logger.LogError(ex, "Authorization failed");
             throw new AuthenticationExpectedHttpException(ex.Message);
         }
     }
@@ -143,16 +136,10 @@ public class FunctionAuth0Authenticator : IFunctionAuthenticator
         public string? TokenType { get; set; }
     }
 
-    private class UserRefreshToken : IUserRefreshToken
+    private class UserRefreshToken(string accessToken, DateTime expire) : IUserRefreshToken
     {
-        public UserRefreshToken(string accessToken, DateTime expire)
-        {
-            this.AccessToken = accessToken;
-            this.Expire = expire;
-        }
-            
-        public string AccessToken { get; }
+        public string AccessToken { get; } = accessToken;
 
-        public DateTime Expire { get; }
+        public DateTime Expire { get; } = expire;
     }
 }

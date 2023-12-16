@@ -1,6 +1,6 @@
 import React from 'react';
-import {Typography} from '@signalco/ui/dist/Typography';
-import {Stack} from '@signalco/ui/dist/Stack';
+import {Typography} from '@signalco/ui-primitives/Typography';
+import {Stack} from '@signalco/ui-primitives/Stack';
 import style from './PageCenterHeader.module.scss';
 
 export default function PageCenterHeader(props: { header: string; subHeader?: string; secondary?: boolean }) {
@@ -9,7 +9,7 @@ export default function PageCenterHeader(props: { header: string; subHeader?: st
         <header className={style.root}>
             <Stack alignItems="center" spacing={2}>
                 <Typography level={secondary ? 'h5' : 'h4'}>{header}</Typography>
-                {subHeader && <Typography textAlign="center">{subHeader}</Typography>}
+                {subHeader && <Typography center>{subHeader}</Typography>}
             </Stack>
         </header>
     );

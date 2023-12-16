@@ -17,8 +17,8 @@ function extractColor(data: Buffer, channels: number) {
         const green = data[i + 1];
         const blue = data[i + 2];
         const alpha = data[i + 3];
-        if (alpha > 0) {
-            colors.push(`#${red.toString(16).padStart(2, '0')}${green.toString(16).padStart(2, '0')}${blue.toString(16).padStart(2, '0')}`);
+        if ((alpha ?? 0) > 0) {
+            colors.push(`#${red?.toString(16).padStart(2, '0')}${green?.toString(16).padStart(2, '0')}${blue?.toString(16).padStart(2, '0')}`);
         }
     }
     return colors;

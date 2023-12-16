@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from '@signalco/ui/dist/Button';
+import { Button } from '@signalco/ui-primitives/Button';
 import ConfirmDeleteDialog from './ConfirmDeleteDialog';
 
 export interface ConfirmDeleteButtonDialogProps {

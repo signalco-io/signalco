@@ -14,19 +14,11 @@ using Signal.Core.Secrets;
 
 namespace Signalco.Api.Public.RemoteBrowser;
 
-public class ScreenshotFunction
+public class ScreenshotFunction(
+    ISecretsProvider secretsProvider,
+    ILogger<ScreenshotFunction> logger)
 {
-    private readonly ISecretsProvider secretsProvider;
-    private readonly ILogger<ScreenshotFunction> logger;
     private readonly HttpClient httpClient = new();
-
-    public ScreenshotFunction(
-        ISecretsProvider secretsProvider,
-        ILogger<ScreenshotFunction> logger)
-    {
-        this.secretsProvider = secretsProvider ?? throw new ArgumentNullException(nameof(secretsProvider));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
 
     [Function("Screenshot")]
     public async Task<HttpResponseData> Run(
@@ -96,7 +88,7 @@ public class ScreenshotFunction
         try
         {
             // Read config for RemoteBrowser app URL
-            var url = await this.secretsProvider.GetSecretAsync(SecretKeys.AppRemoteBrowserUrl, cancellationToken);
+            var url = await secretsProvider.GetSecretAsync(SecretKeys.AppRemoteBrowserUrl, cancellationToken);
 
             var queryParams = new List<string>
             {
@@ -133,7 +125,7 @@ public class ScreenshotFunction
         }
         catch(Exception ex)
         {
-            this.logger.LogError(ex, "Failed to make screenshot");
+            logger.LogError(ex, "Failed to make screenshot");
             return new ScreenshotResult(
                 startTimeStamp, DateTime.UtcNow, request, null, null);
         }

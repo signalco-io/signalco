@@ -1,7 +1,7 @@
-import { Typography } from '@signalco/ui/dist/Typography';
-import { Stack } from '@signalco/ui/dist/Stack';
-import { Link } from '@signalco/ui/dist/Link';
-import { Divider } from '@signalco/ui/dist/Divider';
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
+import { Link } from '@signalco/ui-primitives/Link';
+import { Divider } from '@signalco/ui-primitives/Divider';
 import { SystemStatusLabel } from '../SystemStatusLabel';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
 import { isDeveloper } from '../../../src/services/EnvProvider';
