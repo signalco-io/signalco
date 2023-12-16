@@ -7,6 +7,7 @@ on:
         types: [opened, synchronize, reopened]
 
 jobs:
+    # Mark PR as auto-mergeable if it's opened by known user
     enable_auto_merge_for_known_users:
         name: "[Global] Enable auto-merge for known users"
         runs-on: ubuntu-latest
@@ -20,4 +21,15 @@ jobs:
                 gh pr comment ${{ github.event.pull_request.number }} --body "🪄 Auto-merge enabled for known user."
               env:
                 GITHUB_TOKEN: ${{ secrets.AT_GH_CD_REPO_PAT }}
+    # Retarget to next branch if PR is opened against main (and head is not next)
+    retarget-feature-prs:
+      if: github.event_name == 'pull_request' && github.event.action == 'opened' && github.base_ref == 'main' && github.head_ref != 'next'
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout 🛎
+          uses: actions/checkout@v4
+        - name: Change PR target
+          run: gh pr edit ${{ github.event.number }} --base next
+          env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               

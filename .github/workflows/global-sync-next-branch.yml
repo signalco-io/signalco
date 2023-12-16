@@ -8,9 +8,6 @@ on:
   push:
     branches:
       - main
-  pull_request: 
-    branches:
-      - main
   workflow_dispatch:
 
 concurrency: merge_main
@@ -18,7 +15,6 @@ concurrency: merge_main
 jobs:
   # When a PR is merged into main, attempt to merge main into next
   sync-next-branch:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎
@@ -35,17 +31,5 @@ jobs:
         if: steps.cpr.outputs.pr_created == 'true'
         run: gh pr merge --merge --auto "${{ steps.cpr.outputs.pr_number }}"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  # Retarget to next branch if PR is opened against main (and head is not next)
-  retarget-feature-prs:
-    if: github.event_name == 'pull_request' && github.event.action == 'opened' && github.base_ref == 'main' && github.head_ref != 'next'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout 🛎
-        uses: actions/checkout@v4
-      - name: Change PR target
-        run: gh pr edit ${{ github.event.number }} --base next
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
         
