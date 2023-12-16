@@ -19,7 +19,7 @@ export function MobileMenu({ open, items, active, onClose }: { open: boolean; it
         )}>
             <Stack>
                 {items.map((ni, index) => {
-                    const Icon = ni.icon;
+                    const ItemIcon = ni.icon;
 
                     return (
                         <Tooltip title={t(ni.label)} key={index + 1}>
@@ -30,7 +30,7 @@ export function MobileMenu({ open, items, active, onClose }: { open: boolean; it
                                     variant={ni === active ? 'soft' : 'plain'}
                                     size="lg"
                                     onClick={onClose}
-                                    startDecorator={(<Icon />)}>
+                                    startDecorator={(<ItemIcon />)}>
                                     {ni.label}
                                 </Button>
                             </Link>

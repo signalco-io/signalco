@@ -14,7 +14,7 @@
         "build:analyze": "cross-env ANALYZE=true pnpm build",
         "postbuild": "next-sitemap --config next-sitemap.config.js",
         "start": "next start -p 3002",
-        "lint": "next lint --fix",
+        "lint": "next lint",
         "test": "playwright test"
     },
     "dependencies": {
@@ -47,7 +47,7 @@
     },
     "devDependencies": {
         "@axe-core/playwright": "4.8.2",
-        "@babel/core": "7.23.5",
+        "@babel/core": "7.23.6",
         "@next/bundle-analyzer": "14.0.4",
         "@playwright/test": "1.40.1",
         "@signalco/eslint-config-signalco": "workspace:*",
@@ -57,11 +57,11 @@
         "@types/fs-extra": "11.0.4",
         "@types/klaw": "3.0.6",
         "@types/node": "20.10.4",
-        "@types/react": "18.2.43",
-        "@types/react-dom": "18.2.17",
+        "@types/react": "18.2.45",
+        "@types/react-dom": "18.2.18",
         "colorette": "2.0.20",
         "cross-env": "7.0.3",
-        "eslint": "8.55.0",
+        "eslint": "8.56.0",
         "next-sitemap": "4.2.3",
         "postcss": "8.4.32",
         "rimraf": "5.0.5",
@@ -72,6 +72,7 @@
         "budget": 358400,
         "budgetPercentIncreaseRed": 10,
         "minimumChangeThreshold": 10,
-        "showDetails": true
+        "showDetails": true,
+        "skipCommentIfEmpty": true
     }
 }

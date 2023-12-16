@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: 'NextJS Bundle Analysis'
+name: '[Web] CI - Next.js'
 
 on:
     workflow_call:
@@ -17,64 +17,106 @@ on:
                 required: true
                 type: string
                 description: 'Path to the package or application to analzye'
+            vercelProjectId:
+                required: true
+                type: string
+                description: 'Vercel Project ID'
 
 env:
     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     TURBO_TEAM: signalco
     TURBO_REMOTE_ONLY: true
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
-    CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
-    DOPROCESS_DATABASE_HOST: ${{ secrets.DOPROCESS_DATABASE_HOST }}
-    DOPROCESS_DATABASE_USERNAME: ${{ secrets.DOPROCESS_DATABASE_USERNAME }}
-    DOPROCESS_DATABASE_PASSWORD: ${{ secrets.DOPROCESS_DATABASE_PASSWORD }}
-    OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    VERCEL_PROJECT_ID: ${{ inputs.vercelProjectId }}
+    VERCEL_ORG_ID: team_Ade0MlfC3211ml3wYJZ4c9hn
 
 defaults:
     run:      
         working-directory: ./web
 
 jobs:
-    analysis:
-        name: "[${{ inputs.name }}] Next.js Bundle Analysis"
+    ci:
         timeout-minutes: 5
         runs-on: ubuntu-latest
         concurrency:
-            group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.name }}
-            cancel-in-progress: true
+          group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.name }}
+          cancel-in-progress: true
         steps:
           - uses: actions/checkout@v4
             with:
               fetch-depth: 2
-          - name: Setup pnpm
+
+          - name: ✨ Setup pnpm
             uses: pnpm/action-setup@v2.4.0
             with:
               version: 'latest'
-          - uses: actions/setup-node@v4
+
+          - name: ✨ Setup Node.js
+            uses: actions/setup-node@v4
             with:
                 node-version: "20.x"
                 cache: "pnpm"
-                cache-dependency-path: ./web
-          - name: Install dependencies
+                cache-dependency-path: ./web/pnpm-lock.yaml
+
+          - name: 📦️ Install dependencies
             run: pnpm install --frozen-lockfile --filter ${{ inputs.name }}... --filter .
     
-          - name: Build app
+          - name: 🔎 Lint app
+            if: success() && github.event_name == 'pull_request'
+            run: pnpm lint --filter=${{ inputs.name }}
+
+          - name: ✨ Setup Vercel CLI
+            run: pnpm install --global vercel@latest
+
+          - name: ⚙️ Pull Vercel Environment Information
+            run: vercel env pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+            working-directory: ${{ inputs.path }}/
+
+          - name: ⚒️ Build app
             run: pnpm build --filter=${{ inputs.name }}
+
+          - name: 📦️ Install playwright browsers
+            if: success() && github.event_name == 'pull_request'
+            run: |
+              pnpm install --global playwright
+              pnpm playwright install --with-deps
+
+          - name: ⚒️ Test app
+            if: success() && github.event_name == 'pull_request'
+            run: pnpm test --filter=${{ inputs.name }}
+
+          ## TODO: Enable when stories-check is ready
+          # - name: Run stories-check
+          #   run: pnpm stories-check
+          #   id: runStoriesCheck
+          #   continue-on-error: true
+          #   working-directory: web/apps/web/
+          # - name: Commit changes
+          #   id: ccc
+          #   if: steps.runStoriesCheck.outcome == 'failure'
+          #   uses: EndBug/add-and-commit@v9
+          #   with:
+          #       add: ".stories-approved"
+          #       message: "[skip ci] [stories-check] Automated stories changes"
+          #       new_branch: ${{ github.head_ref }}
+          #       default_author: github_actions
+          #   env:
+          #       GITHUB_TOKEN: ${{ secrets.AT_GH_CD_REPO_PAT }}
     
           # Here's the first place where next-bundle-analysis' own script is used
           # This step pulls the raw bundle stats for the current bundle
-          - name: Analyze bundle
+          - name: 🔎 Analyze bundle
             run: npx -yes -p github:hashicorp/nextjs-bundle-analysis report
             working-directory: ${{ inputs.path }}/
-    
-          - name: Upload bundle
+
+          - name: 🔼 Upload bundle
             uses: actions/upload-artifact@v3
             with:
               name: bundle
               path: ${{ inputs.path }}/.next/analyze/__bundle_analysis.json
     
-          - name: Download base branch bundle stats
-            uses: dawidd6/action-download-artifact@v2
-            if: success() && github.event.number
+          - name: 🔽 Download base branch bundle stats
+            uses: dawidd6/action-download-artifact@v3
+            if: success() && github.event_name == 'pull_request'
             with:
               workflow: ${{ inputs.workflowName }}
               branch: ${{ github.event.pull_request.base.ref }}
@@ -93,42 +135,25 @@ jobs:
           #
           # Either of these arguments can be changed or removed by editing the `nextBundleAnalysis`
           # entry in your package.json file.
-          - name: Compare with base branch bundle
-            if: success() && github.event.number
+          - name: 🔎 Compare with base branch bundle
+            if: success() && github.event_name == 'pull_request'
             run: ls -laR .next/analyze/base && npx -yes -p github:hashicorp/nextjs-bundle-analysis compare
             working-directory: ${{ inputs.path }}/
     
-          - name: Get comment body
+          - name: 💬 Get comment body
             id: get-comment-body
-            if: success() && github.event.number
+            if: success() && github.event_name == 'pull_request'
             uses: actions/github-script@v7
             with:
               result-encoding: string
               script: |
                 const fs = require('fs')
-                const comment = fs.readFileSync('${{ inputs.path }}/.next/analyze/__bundle_analysis_comment.txt', 'utf8') + "<!-- __NEXTJS_BUNDLE_${{ inputs.name }} -->"
+                const comment = fs.readFileSync('${{ inputs.path }}/.next/analyze/__bundle_analysis_comment.txt', 'utf8')
                 core.setOutput('body', comment)
     
-          - name: Find Comment
-            uses: peter-evans/find-comment@v2
-            if: success() && github.event.number
-            id: fc
+          - name: 💬 Comment
+            uses: marocchino/sticky-pull-request-comment@v2
+            if: success() && steps.get-comment-body.outputs.body != ''
             with:
-              issue-number: ${{ github.event.number }}
-              body-includes: '<!-- __NEXTJS_BUNDLE_${{ inputs.name }} -->'
-    
-          - name: Create Comment
-            uses: peter-evans/create-or-update-comment@v3.1.0
-            if: success() && github.event.number && steps.fc.outputs.comment-id == 0
-            with:
-              issue-number: ${{ github.event.number }}
-              body: ${{ steps.get-comment-body.outputs.body }}
-    
-          - name: Update Comment
-            uses: peter-evans/create-or-update-comment@v3.1.0
-            if: success() && github.event.number && steps.fc.outputs.comment-id != 0
-            with:
-              issue-number: ${{ github.event.number }}
-              body: ${{ steps.get-comment-body.outputs.body }}
-              comment-id: ${{ steps.fc.outputs.comment-id }}
-              edit-mode: replace
+              header: next-touched-pages-${{ inputs.name }}
+              message: ${{ steps.get-comment-body.outputs.body }}

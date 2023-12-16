@@ -1,5 +1,4 @@
 import { Fragment, PropsWithChildren, forwardRef } from 'react'
-import Link from 'next/link'
 import { cx } from 'classix'
 import { Navigate } from '@signalco/ui-icons'
 import {
@@ -87,7 +86,7 @@ const DropdownMenuItem = forwardRef<
     }
 >(({ className, inset, href, children, startDecorator, endDecorator, ...props }, ref) => {
     const LinkOrNot = href
-        ? (props: PropsWithChildren) => <Link href={href} {...props} />
+        ? (props: PropsWithChildren) => <a href={href} {...props} />
         : (props: PropsWithChildren) => <Fragment {...props} />;
     const DecoratorWrapper = startDecorator || endDecorator ? Row : Fragment;
 

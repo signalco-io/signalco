@@ -9,6 +9,7 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
     label?: string;
     helperText?: string;
     fullWidth?: boolean;
+    variant?: 'outlined' | 'plain';
 };
 
 export function Input({
@@ -17,6 +18,7 @@ export function Input({
     className,
     startDecorator,
     endDecorator,
+    variant,
     ...rest
 }: InputProps) {
     const VerticalContainer = useMemo(() => label || helperText
@@ -35,7 +37,9 @@ export function Input({
                 {startDecorator ?? null}
                 <input
                     className={cx(
-                        'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+                        'flex h-10 w-full rounded-md px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed',
+                        (!variant || variant === 'outlined') && 'border border-input bg-background focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50',
+                        variant === 'plain' && 'border-0 bg-transparent disabled:opacity-50 disabled:bg-muted/30',
                         className
                     )}
                     {...rest}

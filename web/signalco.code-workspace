@@ -5,44 +5,36 @@
 			"path": "."
 		},
 		{
-			"name": "🚀 app",
+			"name": "🚀 www.signalco.io",
+			"path": "apps/web"
+		},
+		{
+			"name": "🚀 app.signalco.io",
 			"path": "apps/app"
 		},
 		{
-			"name": "🚀 blog",
+			"name": "🚀 blog.signalco.io",
 			"path": "apps/blog"
 		},
 		{
-			"name": "🚀 brandgrab",
-			"path": "apps/brandgrab"
-		},
-		{
-			"name": "🚀 development",
-			"path": "apps/development"
-		},
-		{
-			"name": "🚀 doprocess",
-			"path": "apps/doprocess"
-		},
-		{
-			"name": "🚀 slco",
-			"path": "apps/slco"
-		},
-		{
-			"name": "🚀 @signalco/ui-docs",
+			"name": "📖 ui.signalco.io",
 			"path": "apps/ui-docs"
 		},
 		{
-			"name": "🚀 web",
-			"path": "apps/web"
+			"name": "🚀 brandgrab.io",
+			"path": "apps/brandgrab"
+		},
+		{
+			"name": "🚀 doprocess.app",
+			"path": "apps/doprocess"
+		},
+		{
+			"name": "🚀 slco.io",
+			"path": "apps/slco"
 		},
 		{
 			"name": "📦 @signalco/data",
 			"path": "packages/data"
-		},
-		{
-			"name": "📦 @signalco/eslint-config-signalco",
-			"path": "packages/eslint-config-signalco"
 		},
 		{
 			"name": "📦 @signalco/hooks",
@@ -55,14 +47,6 @@
 		{
 			"name": "📦 @signalco/lexorder",
 			"path": "packages/lexorder"
-		},
-		{
-			"name": "📦 @signalco/tailwindcss-config-signalco",
-			"path": "packages/tailwindcss-config-signalco"
-		},
-		{
-			"name": "📦 @signalco/tsconfig",
-			"path": "packages/tsconfig"
 		},
 		{
 			"name": "📦 @signalco/ui",
@@ -79,7 +63,23 @@
 		{
 			"name": "📦 @signalco/ui-primitives",
 			"path": "packages/ui-primitives"
-		}
+		},
+		{
+			"name": "📦 @uier/toolbar",
+			"path": "packages/uier-toolbar"
+		},
+		{
+			"name": "⚙️ @signalco/eslint-config-signalco",
+			"path": "packages/eslint-config-signalco"
+		},
+		{
+			"name": "⚙️ @signalco/tailwindcss-config-signalco",
+			"path": "packages/tailwindcss-config-signalco"
+		},
+		{
+			"name": "⚙️ @signalco/tsconfig",
+			"path": "packages/tsconfig"
+		},
 	],
 	"settings": {
 		"liveServer.settings.multiRootWorkspaceName": "✨ signalco-monorepo",

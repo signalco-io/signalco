@@ -5,17 +5,7 @@
     "sideEffects": false,
     "type": "module",
     "exports": {
-        "./useWindowWidth": "./src/useWindowWidth.ts",
-        "./useWindowRect": "./src/useWindowRect.ts",
-        "./useWindowEvent": "./src/useWindowEvent.ts",
-        "./useTimeout": "./src/useTimeout.ts",
-        "./useSearchParam": "./src/useSearchParam.ts",
-        "./useIsServer": "./src/useIsServer.ts",
-        "./useIsomorphicLayoutEffect": "./src/useIsomorphicLayoutEffect.ts",
-        "./useInterval": "./src/useInterval.ts",
-        "./useControllableState": "./src/useControllableState.ts",
-        "./useCallbackRef": "./src/useCallbackRef.ts",
-        "./useAudio": "./src/useAudio.ts"
+        "./*": "./src/*.ts"
     },
     "scripts": {
         "lint": "eslint ."
@@ -24,7 +14,7 @@
         "@signalco/js": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@signalco/eslint-config-signalco": "workspace:*",
-        "@types/react": "18.2.43",
+        "@types/react": "18.2.45",
         "next": "14.0.4",
         "react": "18.2.0",
         "react-dom": "18.2.0",

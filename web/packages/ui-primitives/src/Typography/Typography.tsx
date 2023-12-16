@@ -31,7 +31,7 @@ export function populateTypographyStylesAndClasses({
         className: cx(
             'm-0',
             // Levels
-            level === 'body1' && 'text-base',
+            level === 'body1' && 'text-base text-primary',
             level === 'body2' && 'text-sm text-secondary-foreground',
             level === 'body3' && 'text-xs text-tertiary-foreground',
             level === 'h1' && 'text-5xl',
