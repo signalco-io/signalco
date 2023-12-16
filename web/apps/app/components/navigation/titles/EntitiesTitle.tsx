@@ -1,6 +1,6 @@
 import { SelectItems } from '@signalco/ui-primitives/SelectItems';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
-import { EntityIconByType } from '../shared/entity/EntityIcon';
+import { EntityIconByType } from '../../shared/entity/EntityIcon';
 
 const entityTypes = [
     { value: '1', label: 'Devices' },

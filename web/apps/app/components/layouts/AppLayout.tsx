@@ -7,7 +7,7 @@ import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Minimize } from '@signalco/ui-icons';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
-import { PageTitle } from '../navigation/PageTitle';
+import { PageTitle } from '../navigation/titles/PageTitle';
 import NavProfile from '../navigation/NavProfile';
 import { AuthWrapper } from './AuthWrapper';
 import { AppClientWrapper } from './AppClientWrapper';
