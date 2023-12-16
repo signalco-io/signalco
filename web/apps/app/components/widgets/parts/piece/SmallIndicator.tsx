@@ -1,10 +1,10 @@
-import { Icon } from '@signalco/ui-primitives/Icon';
+import { ReactNode } from 'react';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Button } from '@signalco/ui-primitives/Button';
 
 export interface SmallIndicatorProps {
     isActive: boolean;
-    icon: string;
+    icon: ReactNode;
     label: string;
     activeBackgroundColor: string;
     href: string;
@@ -20,16 +20,16 @@ export function SmallIndicator({
             fullWidth
             href={href}
             startDecorator={(
-                <Icon className={cx(
+                <div className={cx(
                     small && 'text-lg',
-                    !small && 'text-2xl',
-                    !isActive && 'opacity-30'
-                )}>{icon}</Icon>
+                    !small && 'text-2xl'
+                )}>{icon}</div>
             )}
             className={cx(
-                // 'rounded-md',
+                'px-2',
                 !small && 'min-w-[52px] min-h-[82px]',
-                small && 'min-w-[24px] min-h-[30px]'
+                small && 'min-w-[24px] min-h-[30px]',
+                !isActive && 'text-foreground/50'
             )}
             style={{
                 backgroundColor: isActive ? activeBackgroundColor : undefined,

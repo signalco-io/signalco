@@ -1,8 +1,6 @@
 import { Typography } from '@signalco/ui-primitives/Typography';
-import { Row } from '@signalco/ui-primitives/Row';
-import { Icon } from '@signalco/ui-primitives/Icon';
 import { Button } from '@signalco/ui-primitives/Button';
-import { Avatar } from '@signalco/ui-primitives/Avatar';
+import * as LucideIcons from '@signalco/ui-icons';
 import { WidgetSharedProps } from '../Widget';
 import { DefaultRows, DefaultTargetWithValueMultiple, DefaultColumns } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
@@ -15,7 +13,6 @@ type ConfigProps = {
     icon: string | undefined;
     label: string | undefined;
     target: IContact[];
-    polygonApiKey: string;
     rows: number;
     columns: number;
 }
@@ -49,14 +46,12 @@ export default function WidgetButton(props: WidgetSharedProps<ConfigProps>) {
     // Configure widget
     useWidgetOptions(stateOptions, props);
 
+    const LucideIcon = Object.entries(LucideIcons).find(([key]) => key.toLowerCase() === icon.toLowerCase())?.[1];
+
     return (
-        <Button variant="plain" onClick={handleActionRequest}>
-            <Row spacing={1}>
-                <Avatar size="lg">
-                    <Icon className="text-3xl">{icon}</Icon>
-                </Avatar>
-                {width > 1 && <Typography>{label}</Typography>}
-            </Row>
+        <Button variant="plain" onClick={handleActionRequest} className="m-0 h-full w-full flex-row items-center justify-center p-0">
+            {LucideIcon && <LucideIcon size={32} />}
+            {(width > 1 && Boolean(label)) && <Typography>{label}</Typography>}
         </Button>
     );
 }

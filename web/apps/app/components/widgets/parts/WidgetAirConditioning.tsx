@@ -4,6 +4,7 @@ import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Button } from '@signalco/ui-primitives/Button';
+import { Droplets, Flame, Snowflake } from '@signalco/ui-icons';
 import { usePromise } from '@enterwell/react-hooks';
 import { WidgetSharedProps } from '../Widget';
 import Graph from '../../graphs/Graph';
@@ -90,7 +91,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                             marginTop: rows > 2 ? (rows < 4 ? 0 : 4 * 8) : 8,
                             flexDirection: rows < 4 ? 'column' : 'row',
                             position: rows < 4 ? 'absolute' : 'unset',
-                            right: rows < 4 ? 12 : undefined,
+                            right: rows < 4 ? 0 : undefined,
                             top: rows < 4 ? 0 : undefined
                         }}
                         alignItems="stretch">
@@ -99,15 +100,15 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                                 small={rows < 4}
                                 isActive={false}
                                 label={`${humidityWhole}%`}
-                                icon="water_drop"
+                                icon={<Droplets />}
                                 href={`${KnownPages.Entities}/${humidityContact?.entityId}`}
                                 activeBackgroundColor={'#445D79'} />
                         )}
                         {config?.targetCooling &&
-                            <SmallIndicator small={rows < 4} isActive={false} label="Cooling" icon="ac_unit" activeBackgroundColor="#445D79" href={`${KnownPages.Entities}/${coolingDevice?.id}`} />
+                            <SmallIndicator small={rows < 4} isActive={false} label="Cooling" icon={<Snowflake />} activeBackgroundColor="#445D79" href={`${KnownPages.Entities}/${coolingDevice?.id}`} />
                         }
                         {config?.targetHeating &&
-                            <SmallIndicator small={rows < 4} isActive={heatingActive} label="Heating" icon="whatshot" activeBackgroundColor="#A14D4D" href={`${KnownPages.Entities}/${heatingDevice?.id}`} />
+                            <SmallIndicator small={rows < 4} isActive={heatingActive} label="Heating" icon={<Flame />} activeBackgroundColor="#A14D4D" href={`${KnownPages.Entities}/${heatingDevice?.id}`} />
                         }
                     </Row>
                 )}
