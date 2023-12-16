@@ -17,7 +17,7 @@ export function Avatar({ children, size, src, alt, className, ...rest }: AvatarP
     return (
         <div
             className={cx(
-                'flex items-center justify-center rounded-full bg-muted border',
+                'flex items-center justify-center rounded-full bg-muted border overflow-hidden',
                 (!size || size === 'md') && 'h-10 min-w-[40px] max-w-[40px]',
                 size === 'sm' && 'h-6 min-w-[24px] max-w-[24px] text-xs',
                 size === 'lg' && 'h-12 min-w-[48px] max-w-[48px] text-lg',
