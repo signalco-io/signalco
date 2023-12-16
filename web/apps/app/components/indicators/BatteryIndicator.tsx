@@ -10,23 +10,23 @@ type BatteryIndicatorProps = {
 
 export default function BatteryIndicator({ level, size, minLevel = 'full' }: BatteryIndicatorProps) {
     let show = true;
-    let Icon = BatteryEmpty;
+    let BatteryIconVariant = BatteryEmpty;
     let color = 'red';
     if (level && level < 15 && level > 0) {
-        Icon = BatteryLow;
+        BatteryIconVariant = BatteryLow;
     }
     else if (level && level < 30) {
-        Icon = BatteryLow;
+        BatteryIconVariant = BatteryLow;
         color = 'yellow'
         show = minLevel === 'low' || minLevel === 'medium' || minLevel === 'full';
     }
     else if (level && level < 80) {
-        Icon = BatteryMedium;
+        BatteryIconVariant = BatteryMedium;
         color = 'green'
         show = minLevel === 'medium' || minLevel === 'full';
     }
     else if (level && level > 80) {
-        Icon = BatteryFull;
+        BatteryIconVariant = BatteryFull;
         color = 'green'
         show = minLevel === 'full';
     }
@@ -37,7 +37,7 @@ export default function BatteryIndicator({ level, size, minLevel = 'full' }: Bat
 
     return (
         <Tooltip title={`${level}%`}>
-            <Icon className={cx(
+            <BatteryIconVariant className={cx(
                 color === 'green' && 'stroke-green-500',
                 color === 'yellow' && 'stroke-yellow-500',
                 color === 'red' && 'stroke-red-500'

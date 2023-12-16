@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';

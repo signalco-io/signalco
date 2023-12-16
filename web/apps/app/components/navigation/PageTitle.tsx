@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { usePathname } from 'next/navigation';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Row } from '@signalco/ui-primitives/Row';
@@ -38,17 +38,17 @@ export function PageTitle({ fullPage = false }: { fullPage?: boolean }) {
         );
     }
 
-    const Icon = activeNavItem?.icon;
+    const NavItemIcon = activeNavItem?.icon;
 
     return (
         <Row spacing={2}>
-            {Icon && (
+            {NavItemIcon && (
                 fullPage ? (
                     <Avatar>
-                        <Icon />
+                        <NavItemIcon />
                     </Avatar>
                 ) : (
-                    <Icon />
+                        <NavItemIcon />
                 )
             )}
             <Typography level={fullPage ? 'h4' : 'h6'}>{activeNavItem?.label}</Typography>

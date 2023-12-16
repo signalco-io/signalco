@@ -20,9 +20,9 @@ export function EntitiesTitle() {
             value={selectedType}
             onValueChange={(v: string) => setSelectedType(v)}
             items={entityTypes.map(t => {
-                const Icon = EntityIconByType(parseInt(t.value));
+                const EntityIcon = EntityIconByType(parseInt(t.value));
                 return ({
-                    value: t.value, label: t.label, icon: typeof Icon === 'function' ? <Icon /> : Icon
+                    value: t.value, label: t.label, icon: typeof EntityIcon === 'function' ? <EntityIcon /> : EntityIcon
                 });
             })} />
     );
