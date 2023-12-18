@@ -15,7 +15,7 @@
             "type": "msedge",
             "request": "launch",
             "userDataDir": false,
-            "url": "http://localhost:4003",
+            "url": "http://localhost:4004",
             "smartStep": true
         },
         {
