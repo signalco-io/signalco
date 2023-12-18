@@ -29,6 +29,10 @@
 			"path": "apps/doprocess"
 		},
 		{
+			"name": "🚀 uier.io",
+			"path": "apps/uier"
+		},
+		{
 			"name": "🚀 slco.io",
 			"path": "apps/slco"
 		},

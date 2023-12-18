@@ -41,6 +41,11 @@
             "cache": false,
             "persistent": true
         },
+        "start": {
+            "dependsOn": [
+                "build"
+            ]
+        },
         "clean": {
             "cache": false
         }
