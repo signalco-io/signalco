@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebResourcesPaths">
+    <contentEntries>
+      <entry url="file://$PROJECT_DIR$">
+        <entryData>
+          <resourceRoots>
+            <path value="file://$PROJECT_DIR$/apps/app" />
+            <path value="file://$PROJECT_DIR$/apps/blog" />
+            <path value="file://$PROJECT_DIR$/apps/brandgrab" />
+            <path value="file://$PROJECT_DIR$/apps/development" />
+            <path value="file://$PROJECT_DIR$/apps/doprocess" />
+            <path value="file://$PROJECT_DIR$/apps/slco" />
+            <path value="file://$PROJECT_DIR$/apps/ui-docs" />
+            <path value="file://$PROJECT_DIR$/apps/uier" />
+            <path value="file://$PROJECT_DIR$/apps/web" />
+            <path value="file://$PROJECT_DIR$/packages/data" />
+            <path value="file://$PROJECT_DIR$/packages/eslint-config-signalco" />
+            <path value="file://$PROJECT_DIR$/packages/hooks" />
+            <path value="file://$PROJECT_DIR$/packages/js" />
+            <path value="file://$PROJECT_DIR$/packages/lexorder" />
+            <path value="file://$PROJECT_DIR$/packages/tailwindcss-config-signalco" />
+            <path value="file://$PROJECT_DIR$/packages/tsconfig" />
+            <path value="file://$PROJECT_DIR$/packages/ui" />
+            <path value="file://$PROJECT_DIR$/packages/ui-icons" />
+            <path value="file://$PROJECT_DIR$/packages/ui-notifications" />
+            <path value="file://$PROJECT_DIR$/packages/ui-primitives" />
+            <path value="file://$PROJECT_DIR$/packages/uier-toolbar" />
+          </resourceRoots>
+        </entryData>
+      </entry>
+    </contentEntries>
+  </component>
+</project>

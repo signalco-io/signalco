@@ -1,0 +1,17 @@
+{
+    "extends": "@infra/typescript-config/base.json",
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "compilerOptions": {
+        "outDir": "dist",
+    },
+    "include": [
+        "./src/**/*.ts",
+        "./.eslintrc.cjs"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
