@@ -4,33 +4,26 @@
     "license": "../LICENSE",
     "type": "module",
     "scripts": {
-        "build": "tsc",
         "lint": "eslint ./src/**/*.ts"
     },
     "exports": {
         "./azure": {
-            "import": "./dist/azure/index.js",
-            "types": "./dist/azure/index.d.ts"
+            "import": "./src/azure/index.ts"
         },
         "./aws": {
-            "import": "./dist/aws/index.js",
-            "types": "./dist/aws/index.d.ts"
+            "import": "./src/aws/index.ts"
         },
         "./cloudflare": {
-            "import": "./dist/cloudflare/index.js",
-            "types": "./dist/cloudflare/index.d.ts"
+            "import": "./src/cloudflare/index.ts"
         },
         "./checkly": {
-            "import": "./dist/checkly/index.js",
-            "types": "./dist/checkly/index.d.ts"
+            "import": "./src/checkly/index.ts"
         },
         "./vercel": {
-            "import": "./dist/vercel/index.js",
-            "types": "./dist/vercel/index.d.ts"
+            "import": "./src/vercel/index.ts"
         },
         "./dotnet": {
-            "import": "./dist/dotnet/index.js",
-            "types": "./dist/dotnet/index.d.ts"
+            "import": "./src/dotnet/index.ts"
         }
     },
     "devDependencies": {

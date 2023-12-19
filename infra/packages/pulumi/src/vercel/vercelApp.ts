@@ -9,7 +9,7 @@ export function vercelApp(prefix: string, name: string, {
     ignoreCommand?: string;
     outputDirectory?: string;
 }) {
-    new Project(`vercel-${prefix}`, {
+    const project = new Project(`vercel-${prefix}`, {
         framework,
         gitRepository: {
             productionBranch: 'main',
@@ -24,4 +24,8 @@ export function vercelApp(prefix: string, name: string, {
         rootDirectory: `web/apps/${name}`,
         serverlessFunctionRegion: 'dub1',
     });
+
+    return {
+        projectId: project.id,
+    };
 }

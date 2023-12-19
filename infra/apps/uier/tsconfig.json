@@ -1,10 +1,7 @@
 {
-    "extends": "@infra/typescript-config/base.json",
+    "extends": "@infra/typescript-config/app.json",
     "parserOptions": {
         "project": "./tsconfig.json"
-    },
-    "compilerOptions": {
-        "outDir": "dist",
     },
     "include": [
         "./src/**/*.ts",

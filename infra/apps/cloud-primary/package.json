@@ -6,7 +6,7 @@
     "typings": "dist/index.d.ts",
     "type": "module",
     "scripts": {
-        "build": "tsc",
+        "build": "tsc && tsup src/index.ts --format esm --clean",
         "lint": "eslint ./src/**/*.ts",
         "preview": "pulumi preview"
     },
@@ -20,6 +20,7 @@
         "eslint-plugin-n": "16.4.0",
         "eslint-plugin-node": "11.1.0",
         "eslint-plugin-promise": "6.1.1",
+        "tsup": "8.0.1",
         "typescript": "5.3.3"
     },
     "dependencies": {
