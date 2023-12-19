@@ -1,24 +1,26 @@
 <p align="center">
-  <a href="https://www.signalco.io">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://www.signalco.io/LogotypeDark.png">
-      <img height="98" width="350" alt="signalco logotype" src="https://www.signalco.io/LogotypeLight.png">
-    </picture>
-  </a>
+    <a href="https://www.signalco.io">
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://www.signalco.io/LogotypeDark.png">
+            <img height="98" width="350" alt="signalco logotype" src="https://www.signalco.io/LogotypeLight.png">
+        </picture>
+    </a>
 </p>
 <h4 align="center">Automate your life.</h4>
 
 <p align="center">
-  <a href="#getting-started">Getting Started</a> •
-  <a href="#key-features">Key Features</a> •
-  <a href="#community">Community</a> •
-  <a href="#contributing">Contributing</a> •
-  <a href="#development">Development</a>
+    <a href="#getting-started">Getting Started</a> •
+    <a href="#key-features">Key Features</a> •
+    <a href="#community">Community</a> •
+    <a href="#contributing">Contributing</a> •
+    <a href="#related">Related</a> •
+    <a href="#license">License</a> •
+    <a href="#sponsors">Sponsors</a>
 </p>
 
 ## Getting Started
 
-Visit [https://www.signalco.io/learn](https://www.signalco.io/learn) to get started with Signalco.
+Visit [www.signalco.io/learn](https://www.signalco.io/learn) to get started with Signalco.
 
 ## Key Features
 
@@ -31,9 +33,12 @@ Visit [https://www.signalco.io/learn](https://www.signalco.io/learn) to get star
 
 _We are setting up community channels for all users... stay tuned._
 
-The Signalco community of developers can be found on [GitHub Discussions](https://github.com/signalco-io/signalco/discussions), where you can ask questions, voice ideas, and share your projects.
+The Signalco community of developers can be found
+on [GitHub Discussions](https://github.com/signalco-io/signalco/discussions), where you can ask questions, voice ideas,
+and share your projects.
 
-Our [Code of Conduct](https://github.com/signalco-io/signalco/blob/main/CODE_OF_CONDUCT.md) applies to all Signalco community channels.
+Our [Code of Conduct](https://github.com/signalco-io/signalco/blob/main/CODE_OF_CONDUCT.md) applies to all Signalco
+community channels.
 
 ## Contributing
 
@@ -57,5 +62,12 @@ More info on development can be found in [Development](/DEVELOPMENT.md) document
 
 Many thanks to our sponsors!
 
-![Microsoft for Startups](/docs/ms_startups.png)
-![JetBrains](/docs/jb_beam.png)
+### Current sponsors:
+
+No current sponsors. [Become a sponsor](https://www.signalco.io/sponsor) and get your logo here with a link to your
+site.
+
+Previous sponsors that helped us get started:
+
+![Microsoft for Startups](/docs/sponsors/ms_startups.png)
+![JetBrains](/docs/sponsors/jb_beam.png)
