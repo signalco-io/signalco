@@ -67,6 +67,9 @@ jobs:
         env:
           BASE_BRANCH: ${{ inputs.baseRef }}
 
+      - name: ⚒️ Build Infrastructure
+        run: pnpm build
+
       - name: ⚡ Preview Deploy Infrastructure
         uses: pulumi/actions@v4
         with:

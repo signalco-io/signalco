@@ -61,6 +61,9 @@ jobs:
         env:
           BASE_BRANCH: ${{ github.base_ref }}
 
+      - name: ⚒️ Build Infrastructure
+        run: pnpm build
+
       - name: ⚡ Deploy signalco Infrastructure
         uses: pulumi/actions@v4
         with:
