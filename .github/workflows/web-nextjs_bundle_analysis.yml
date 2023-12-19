@@ -5,8 +5,9 @@ name: '[Web] CI'
 on:
   pull_request:
     paths:
-      - 'web/**'  
+      - 'web/**'
       - 'cloud/**'
+      - 'infra/**'
       - '.github/workflows/web-nextjs_bundle_analysis.yml'
       - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
       - '.github/workflows/cloud-deploy-preview.yml'
@@ -17,6 +18,7 @@ on:
     paths:
       - 'web/**'
       - 'cloud/**'
+      - 'infra/**'
       - '.github/workflows/web-nextjs_bundle_analysis.yml'
       - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
       - '.github/workflows/cloud-deploy-preview.yml'
@@ -40,7 +42,7 @@ jobs:
       path: 'web/apps/blog'
       vercelProjectId: 'prj_VT7qOjkcEvkAsZH7MtSxWcVDWVpr'
     secrets: inherit
-  
+
   analyze_app:
     name: "App"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
@@ -60,7 +62,7 @@ jobs:
       path: 'web/apps/brandgrab'
       vercelProjectId: 'prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx'
     secrets: inherit
-  
+
   analyze_web:
     name: "Web"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
@@ -70,7 +72,7 @@ jobs:
       path: 'web/apps/web'
       vercelProjectId: 'prj_PYE8WwpynTfjD6rVMiCp7sZoCPYw'
     secrets: inherit
-  
+
   analyze_slco:
     name: "slco"
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
