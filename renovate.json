@@ -93,6 +93,7 @@
     ],
     "dependencyDashboard": true,
     "assigneesFromCodeOwners": true,
+    "reviewersFromCodeOwners": true,
     "baseBranches": [
         "next"
     ],
