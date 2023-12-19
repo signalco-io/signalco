@@ -5,6 +5,10 @@ name: "[Cloud] Preview Deploy"
 on:
   workflow_call:
     inputs:
+      project:
+        required: true
+        type: string
+        description: "The project to deploy"
       baseRef:
         required: true
         type: string
@@ -27,7 +31,7 @@ jobs:
           pushd ../discrete/Signalco.Discrete.Api.Mutex/node-cli
           npm install
           npm install -g
-          npx mutex wait signalcocloudpreview
+          npx mutex wait signalcoinfrapreview${{ inputs.project }}
           popd
 
       - name: ✨ Setup DotNet
@@ -67,8 +71,8 @@ jobs:
         uses: pulumi/actions@v4
         with:
           command: preview
-          stack-name: signalco/cloud-primary/${{ steps.extract_branch.outputs.stack }}
-          work-dir: ./infra/apps/signalco
+          stack-name: signalco/${{ inputs.project }}/${{ steps.extract_branch.outputs.stack }}
+          work-dir: ./infra/apps/${{ inputs.project }}
           comment-on-pr: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -80,5 +84,5 @@ jobs:
           pushd ../discrete/Signalco.Discrete.Api.Mutex/node-cli
           npm install
           npm install -g
-          npx mutex release signalcocloudpreview
+          npx mutex release signalcoinfrapreview${{ inputs.project }}
           popd

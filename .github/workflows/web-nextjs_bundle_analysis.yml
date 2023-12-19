@@ -10,7 +10,7 @@ on:
       - 'infra/**'
       - '.github/workflows/web-nextjs_bundle_analysis.yml'
       - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
-      - '.github/workflows/cloud-deploy-preview.yml'
+      - '.github/workflows/cloud-deploy-preview_reusable.yml'
   push:
     branches:
       - main
@@ -21,15 +21,25 @@ on:
       - 'infra/**'
       - '.github/workflows/web-nextjs_bundle_analysis.yml'
       - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
-      - '.github/workflows/cloud-deploy-preview.yml'
+      - '.github/workflows/cloud-deploy-preview_reusable.yml'
   workflow_dispatch:
 
 jobs:
   cloud_preview:
     name: "Cloud (preview)"
-    uses: ./.github/workflows/cloud-deploy-preview.yml
+    uses: ./.github/workflows/cloud-deploy-preview_reusable.yml
     if: success() && github.event_name == 'pull_request'
     with:
+      project: "cloud-primary"
+      baseRef: ${{ github.base_ref }}
+    secrets: inherit
+
+  uier_infra_preview:
+    name: "uier infrastructure (preview)"
+    uses: ./.github/workflows/cloud-deploy-preview_reusable.yml
+    if: success() && github.event_name == 'pull_request'
+    with:
+      project: "uier"
       baseRef: ${{ github.base_ref }}
     secrets: inherit
 
