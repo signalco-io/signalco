@@ -10,7 +10,7 @@ export function createContainerImage(
     projectName: string,
 ) {
     const stack = getStack();
-    const workingDirectory = path.join(process.cwd(), '..', 'src', projectName);
+    const workingDirectory = path.join(process.cwd(), '..', '..', '..', 'cloud', 'src', projectName);
     const image = new Image(`docker-image-${namePrefix}`, {
         imageName: interpolate`${registry.registry.loginServer}/${imageName}:${stack}`,
         build: {
