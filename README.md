@@ -62,7 +62,7 @@ Some parts of this projects are licensed under (MIT license). These licenses are
 
 Other parts, that don't specify license, are licensed under [GNU General Public License v3.0](LICENSE).
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsignalco-io%2Fsignalco.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsignalco-io%2Fsignalco?ref=badge_shield&issueType=license)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsignalco-io%2Fsignalco.svg?type=large&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsignalco-io%2Fsignalco?ref=badge_large&issueType=license)
 
 ## Sponsors ✨
 
