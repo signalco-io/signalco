@@ -3,7 +3,7 @@
     "private": true,
     "license": "../LICENSE",
     "main": "dist/index.js",
-    "typings": "dist/index.d.ts",
+    "types": "dist/index.d.ts",
     "type": "module",
     "scripts": {
         "build": "tsc && tsup src/index.ts --format esm --clean",
@@ -11,6 +11,7 @@
         "preview": "pulumi preview"
     },
     "devDependencies": {
+        "@infra/pulumi": "workspace:*",
         "@types/node": "20.10.5",
         "@typescript-eslint/eslint-plugin": "6.15.0",
         "@typescript-eslint/parser": "6.15.0",
@@ -24,7 +25,6 @@
         "typescript": "5.3.3"
     },
     "dependencies": {
-        "@infra/pulumi": "workspace:*",
         "@checkly/pulumi": "1.1.4",
         "@pulumi/aws": "6.14.0",
         "@pulumi/azure-native": "2.22.1",

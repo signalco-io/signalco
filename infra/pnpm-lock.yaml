@@ -23,9 +23,6 @@ importers:
       '@checkly/pulumi':
         specifier: 1.1.4
         version: 1.1.4
-      '@infra/pulumi':
-        specifier: workspace:*
-        version: link:../../packages/pulumi
       '@pulumi/aws':
         specifier: 6.14.0
         version: 6.14.0
@@ -48,6 +45,9 @@ importers:
         specifier: 1.0.1
         version: 1.0.1
     devDependencies:
+      '@infra/pulumi':
+        specifier: workspace:*
+        version: link:../../packages/pulumi
       '@types/node':
         specifier: 20.10.5
         version: 20.10.5
