@@ -1,0 +1,4 @@
+config:
+  vercel:apiToken:
+    secure: AAABAIqY6swLmFBuXsBC1nImEqM4nxOHyxnJn61fsVuM5MrM/gif2yN6U8ZkY5f/lIEQB9H/kSM=
+  vercel:team: team_Ade0MlfC3211ml3wYJZ4c9hn
