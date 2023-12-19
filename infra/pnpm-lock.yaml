@@ -42,8 +42,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       '@pulumi/pulumi':
-        specifier: 3.97.0
-        version: 3.97.0
+        specifier: 3.98.0
+        version: 3.98.0
       '@pulumiverse/vercel':
         specifier: 1.0.1
         version: 1.0.1
@@ -100,8 +100,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       '@pulumi/pulumi':
-        specifier: 3.97.0
-        version: 3.97.0
+        specifier: 3.98.0
+        version: 3.98.0
       '@pulumiverse/vercel':
         specifier: 1.0.1
         version: 1.0.1
@@ -161,8 +161,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       '@pulumi/pulumi':
-        specifier: 3.97.0
-        version: 3.97.0
+        specifier: 3.98.0
+        version: 3.98.0
       '@pulumiverse/vercel':
         specifier: 1.0.1
         version: 1.0.1
@@ -249,8 +249,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       '@pulumi/pulumi':
-        specifier: 3.97.0
-        version: 3.97.0
+        specifier: 3.98.0
+        version: 3.98.0
       '@pulumiverse/vercel':
         specifier: 1.0.1
         version: 1.0.1
@@ -305,7 +305,7 @@ packages:
     resolution: {integrity: sha512-YPNYtwEnKu23VDHNFu91xd/Ueu5zYONHcYwKDA5qTvtgZZ1nzrvPJgrO15KF0fLRVlGo7yckirDS26GpvBTe6w==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.97.0
+      '@pulumi/pulumi': 3.98.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -600,7 +600,7 @@ packages:
   /@pulumi/aws@6.14.0:
     resolution: {integrity: sha512-dOTdUkRdV0IU7HCHpMDRMF2co4d4iBWeGmuxq/mLYt0PdVMsUsVsMJ87xAIP2S3g0kTVLNOzL1l8EP24OS1vlg==}
     dependencies:
-      '@pulumi/pulumi': 3.97.0
+      '@pulumi/pulumi': 3.98.0
       builtin-modules: 3.0.0
       mime: 2.6.0
       read-package-tree: 5.3.1
@@ -612,7 +612,7 @@ packages:
   /@pulumi/azure-native@2.22.1:
     resolution: {integrity: sha512-X/apQqagDZt+2uR9p4tQGb3dm9SYLzCabSG3j5rQ8XJk3/qrDRs8wi+k62hJfMoUJv1QihEFZsLBntph2HIRLw==}
     dependencies:
-      '@pulumi/pulumi': 3.97.0
+      '@pulumi/pulumi': 3.98.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -620,7 +620,7 @@ packages:
   /@pulumi/cloudflare@5.16.0:
     resolution: {integrity: sha512-7FjJIpsGz9lv+o+nNnbV8UOUXAF248LHCILmExxIfVTblwbp0Mb8Ri68rLOK9qpVPOIwkj2QBorLiZ6Y4anHSg==}
     dependencies:
-      '@pulumi/pulumi': 3.97.0
+      '@pulumi/pulumi': 3.98.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -629,7 +629,7 @@ packages:
     resolution: {integrity: sha512-9RaGDiy8jFCiaarj4EOrMW/fVCM/AgBigzwM6CKzlR49x8UFiRDmKrXfEVHb8r2P9IpC4IaAZf5VbNNAHwN/rA==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.97.0
+      '@pulumi/pulumi': 3.98.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -637,14 +637,14 @@ packages:
   /@pulumi/docker@4.5.0:
     resolution: {integrity: sha512-DOiczZK1cF4NGlEWzacPLjGcoPKXHXISoqq4KqCO97YW28rZSu6LOdveQ8tLaUHGeyWQ+CS3PT45caSxHAbzbw==}
     dependencies:
-      '@pulumi/pulumi': 3.97.0
+      '@pulumi/pulumi': 3.98.0
       semver: 5.7.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@pulumi/pulumi@3.97.0:
-    resolution: {integrity: sha512-yPtC/RUHHV8FgcRmq/l05ZyVwcIjLIA+7F+sCceKSNga0NOno6D/VD3PRU/TkApTseKRce4NQgdshXDumh+mdA==}
+  /@pulumi/pulumi@3.98.0:
+    resolution: {integrity: sha512-G5LpwM7CvR5hLvyscgWp5TVVJYTOJqeLSL0uTUtHSBz/Tpiqv1lgygW8oUIUD4gPm33UfcK1cVejCASdQk+74Q==}
     engines: {node: '>=8.13.0 || >=10.10.0'}
     dependencies:
       '@grpc/grpc-js': 1.9.6
@@ -684,7 +684,7 @@ packages:
   /@pulumiverse/vercel@1.0.1:
     resolution: {integrity: sha512-AOiOe2pzZOQVv9Z+C/iWmZeKpeZb+0qmqcfRBnYiU4DiVr9VhqE9ToJVPq7ElyxgYSoETA+4qfd1Kj01zxhd5A==}
     dependencies:
-      '@pulumi/pulumi': 3.97.0
+      '@pulumi/pulumi': 3.98.0
     transitivePeerDependencies:
       - supports-color
     dev: false
