@@ -1,5 +1,5 @@
 import { nextJsApp } from '@infra/pulumi/vercel';
-// import { dnsRecord } from '@infra/pulumi/cloudflare';
+import { dnsRecord } from '@infra/pulumi/cloudflare';
 import { ProjectDomain } from '@pulumiverse/vercel';
 import { getStack } from '@pulumi/pulumi';
 
@@ -19,8 +19,7 @@ const up = async () => {
         });
 
         if (stack === 'next') {
-            // TODO: Add CloudFlare zone to config
-            // dnsRecord('vercel-uier', 'uier', 'cname.vercel-dns.com', 'CNAME', false);
+            dnsRecord('vercel-uier', 'uier', 'cname.vercel-dns.com', 'CNAME', false);
         } else if (stack === 'production') {
             // TODO: Handle A record for production
         }
