@@ -2,6 +2,7 @@ import './global.css';
 import { PropsWithChildren } from 'react';
 import { Inter } from 'next/font/google';
 import { Viewport, type Metadata } from 'next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
 import { AppLayout } from '../components/layouts/AppLayout';
 import { LayoutClientWrapper } from './LayoutClientWrapper';
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                     </AppLayout>
                 </LayoutClientWrapper>
                 <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     );
