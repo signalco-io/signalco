@@ -1,24 +1,25 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: "[Cloud] Deploy"
+name: "[Cloud] Preview Deploy"
 
 on:
-  push:
-    branches: [main, next]
-    paths:
-      - "cloud/**"
-      - "infra/**"
-      - ".github/workflows/cloud-deploy.yml"
-
-env:
-  DOTNET_VERSION: "7.0.x" # set this to the dotnet version to use
+  workflow_call:
+    inputs:
+      project:
+        required: true
+        type: string
+        description: "The project to deploy"
+      baseRef:
+        required: true
+        type: string
+        description: "The base branch to deploy to"
 
 defaults:
   run:
     working-directory: ./infra
 
 jobs:
-  build-and-deploy:
+  build-and-preview:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout GitHub Action"
@@ -30,13 +31,13 @@ jobs:
           pushd ../discrete/Signalco.Discrete.Api.Mutex/node-cli
           npm install
           npm install -g
-          npx mutex wait signalcoclouddeploy
+          npx mutex wait signalcoinfrapreview${{ inputs.project }}
           popd
 
-      - name: ✨ Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      - name: ✨ Setup DotNet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: "7.0.x"
 
       - name: ✨ Setup pnpm
         uses: pnpm/action-setup@v2.4.0
@@ -56,30 +57,26 @@ jobs:
       - name: 🔎 Determine stack
         shell: bash
         run: |
-          [[ $(echo ${GITHUB_REF#refs/heads/}) = "main" ]] && echo "##[set-output name=branch;]production" || echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          if [[ $(echo ${BASE_BRANCH#refs/heads/}) = "main" ]]
+          then 
+            echo "stack=production" >> $GITHUB_OUTPUT
+          else
+            echo "stack=${BASE_BRANCH#refs/heads/}" >> $GITHUB_OUTPUT
+          fi
         id: extract_branch
         env:
-          BASE_BRANCH: ${{ github.base_ref }}
+          BASE_BRANCH: ${{ inputs.baseRef }}
 
       - name: ⚒️ Build Infrastructure
         run: pnpm build
 
-      - name: ⚡ Deploy signalco Infrastructure
+      - name: ⚡ Preview Deploy Infrastructure
         uses: pulumi/actions@v4
         with:
-          command: up
-          stack-name: signalco/cloud-primary/${{ steps.extract_branch.outputs.branch }}
-          work-dir: ./infra/apps/cloud-primary
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-
-      - name: ⚡ Deploy uier Infrastructure
-        uses: pulumi/actions@v4
-        with:
-          command: up
-          stack-name: signalco/uier/${{ steps.extract_branch.outputs.branch }}
-          work-dir: ./infra/apps/uier
+          command: preview
+          stack-name: signalco/${{ inputs.project }}/${{ steps.extract_branch.outputs.stack }}
+          work-dir: ./infra/apps/${{ inputs.project }}
+          comment-on-pr: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
@@ -90,5 +87,5 @@ jobs:
           pushd ../discrete/Signalco.Discrete.Api.Mutex/node-cli
           npm install
           npm install -g
-          npx mutex release signalcoclouddeploy
+          npx mutex release signalcoinfrapreview${{ inputs.project }}
           popd
