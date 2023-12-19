@@ -61,12 +61,22 @@ jobs:
         env:
           BASE_BRANCH: ${{ github.base_ref }}
 
-      - name: ⚡ Deploy Infrastructure
+      - name: ⚡ Deploy signalco Infrastructure
         uses: pulumi/actions@v4
         with:
           command: up
           stack-name: signalco/cloud-primary/${{ steps.extract_branch.outputs.branch }}
           work-dir: ./infra/apps/cloud-primary
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+
+      - name: ⚡ Deploy uier Infrastructure
+        uses: pulumi/actions@v4
+        with:
+          command: up
+          stack-name: signalco/uier/${{ steps.extract_branch.outputs.branch }}
+          work-dir: ./infra/apps/uier
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
