@@ -476,7 +476,8 @@ public class VoiceService : IWorkerService, IDisposable
             throw new NullReferenceException("Capture device not initialized.");
         if (frameLength <= 0) throw new ArgumentOutOfRangeException(nameof(frameLength));
 
-        if (ALC.GetAvailableSamples(this.captureDevice.Value) < frameLength)
+        var samples = ALC.GetInteger(this.captureDevice.Value, AlcGetInteger.CaptureSamples);
+        if (samples < frameLength)
             return false;
 
         if (buffer == null) throw new ArgumentNullException(nameof(buffer));
@@ -494,7 +495,8 @@ public class VoiceService : IWorkerService, IDisposable
             throw new NullReferenceException("Capture device not initialized.");
         if (frameLength <= 0) throw new ArgumentOutOfRangeException(nameof(frameLength));
 
-        if (ALC.GetAvailableSamples(this.captureDevice.Value) < frameLength)
+        var samples = ALC.GetInteger(this.captureDevice.Value, AlcGetInteger.CaptureSamples);
+        if (samples < frameLength)
             return false;
 
         if (buffer == null) throw new ArgumentNullException(nameof(buffer));
@@ -765,7 +767,7 @@ public class VoiceService : IWorkerService, IDisposable
             ALC.MakeContextCurrent(this.alContext.Value);
             this.AlHasError();
 
-            AL.BindBufferToSource(this.alSource.Value, sound.Buffer);
+            AL.Source(this.alSource.Value, ALSourcei.Buffer, sound.Buffer);
             this.AlHasError();
 
             AL.SourcePlay(this.alSource.Value);
@@ -787,15 +789,17 @@ public class VoiceService : IWorkerService, IDisposable
             return Task.CompletedTask;
         }
 
-        return Task.Run(() =>
+        return Task.Run<Task>(async () =>
         {
             ALSourceState state;
             do
             {
-                state = AL.GetSourceState(this.alSource.Value);
+                AL.GetSource(this.alSource.Value, ALGetSourcei.SourceState, out var rawState);
                 if (this.AlHasError()) break;
 
-                Thread.Yield();
+                state = (ALSourceState) rawState;
+
+                await Task.Delay(10);
             } while (state == ALSourceState.Playing);
         });
     }
