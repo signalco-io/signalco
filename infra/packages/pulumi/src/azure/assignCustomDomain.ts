@@ -1,5 +1,15 @@
 import { Config, interpolate, type StackReference, Output } from '@pulumi/pulumi';
-import { WebApp, AppServicePlan, WebAppHostNameBinding, Certificate, HostNameType, SslState, CustomHostNameDnsRecordType } from '@pulumi/azure-native/web/index.js';
+import {
+    WebApp,
+    AppServicePlan,
+    WebAppHostNameBinding,
+    Certificate,
+    HostNameType,
+    SslState,
+    CustomHostNameDnsRecordType,
+    getCertificate,
+    getWebAppPublicCertificate
+} from '@pulumi/azure-native/web/index.js';
 import { ResourceGroup } from '@pulumi/azure-native/resources/index.js';
 import { dnsRecord } from '../cloudflare/dnsRecord.js';
 
@@ -45,6 +55,7 @@ export function assignCustomDomain(
 
     const cert = new Certificate(`func-cert-${namePrefix}`, {
         resourceGroupName: resourceGroup.name,
+        name: `cert-${namePrefix}`,
         canonicalName: fullDomainName,
         serverFarmId: servicePlan.id,
     }, {
