@@ -12,14 +12,15 @@ export async function assignFunctionCodeAsync(
     codePath: string,
     dependsOn?: Input<Resource> | Input<Input<Resource>[]> | undefined) {
     // Upload Azure Function's code as a zip archive to the storage account.
-    const codeBlob = new Blob(`zip-${namePrefix}`, {
-        blobName: `zip-${namePrefix}`,
+    const codeBlob = new Blob(`zip-${namePrefix}-${new Date().getTime()}`, {
+        blobName: `zip-${namePrefix}-${new Date().getTime()}.zip`,
         resourceGroupName: resourceGroup.name,
         accountName: storageAccount.name,
         containerName: zipsContainer.name,
         source: new FileArchive(codePath),
     }, {
         dependsOn,
+        retainOnDelete: true,
     });
 
     const codeBlobUrl = signedBlobReadUrl(codeBlob, zipsContainer, storageAccount, resourceGroup);
