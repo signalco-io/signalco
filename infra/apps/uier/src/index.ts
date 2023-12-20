@@ -19,7 +19,7 @@ const up = async () => {
         });
 
         if (stack === 'next') {
-            dnsRecord('vercel-uier', 'uier', 'cname.vercel-dns.com', 'CNAME', false);
+            dnsRecord('vercel-uier', 'next', 'cname.vercel-dns.com', 'CNAME', false);
         } else if (stack === 'production') {
             // TODO: Handle A record for production
         }
