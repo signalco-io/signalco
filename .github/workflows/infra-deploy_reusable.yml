@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: "[Cloud] Preview Deploy"
+name: "[Infra] Deploy"
 
 on:
   workflow_call:
@@ -13,13 +13,20 @@ on:
         required: true
         type: string
         description: "The base branch to deploy to"
+      command:
+        required: true
+        type: string
+        description: "The Pulumi command to run - preview, up, destroy, etc."
 
 defaults:
   run:
     working-directory: ./infra
 
+env:
+  DOTNET_VERSION: "7.0.x" # set this to the dotnet version to use    
+
 jobs:
-  build-and-preview:
+  infra-build-and-execute:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout GitHub Action"
@@ -31,20 +38,20 @@ jobs:
           pushd ../discrete/Signalco.Discrete.Api.Mutex/node-cli
           npm install
           npm install -g
-          npx mutex wait signalcoinfrapreview${{ inputs.project }}
+          npx mutex wait signalcoinfra${{ inputs.command }}${{ inputs.project }}
           popd
 
-      - name: ✨ Setup DotNet
+      - name: ✨ Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "7.0.x"
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: ✨ Setup pnpm
         uses: pnpm/action-setup@v2.4.0
         with:
           version: 'latest'
 
-      - name: ✨ Setup Node LTS
+      - name: ✨ Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20.x"
@@ -73,7 +80,7 @@ jobs:
       - name: ⚡ Preview Deploy Infrastructure
         uses: pulumi/actions@v4
         with:
-          command: preview
+          command: ${{ inputs.command }}
           stack-name: signalco/${{ inputs.project }}/${{ steps.extract_branch.outputs.stack }}
           work-dir: ./infra/apps/${{ inputs.project }}
           comment-on-pr: true
@@ -87,5 +94,5 @@ jobs:
           pushd ../discrete/Signalco.Discrete.Api.Mutex/node-cli
           npm install
           npm install -g
-          npx mutex release signalcoinfrapreview${{ inputs.project }}
+          npx mutex release signalcoinfra${{ inputs.command }}${{ inputs.project }}
           popd
