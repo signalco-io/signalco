@@ -43,8 +43,8 @@
         "react-cool-inview": "3.0.1",
         "react-dom": "18.2.0",
         "react-transition-group": "4.4.5",
-        "sharp": "0.33.0",
-        "tailwindcss": "3.3.6",
+        "sharp": "0.33.1",
+        "tailwindcss": "3.4.0",
         "tailwindcss-animate": "1.0.7"
     },
     "devDependencies": {
@@ -59,7 +59,7 @@
         "@types/cobe": "0.4.3",
         "@types/color": "3.0.6",
         "@types/next-pwa": "5.6.9",
-        "@types/node": "20.10.4",
+        "@types/node": "20.10.5",
         "@types/react": "18.2.45",
         "@types/react-dom": "18.2.18",
         "babel-loader": "9.1.3",

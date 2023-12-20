@@ -7,7 +7,7 @@ on:
     branches: [main, next]
     paths:
       - "cloud/**"
-      - "infrastructure/**"
+      - "infra/**"
       - ".github/workflows/cloud-deploy.yml"
 
 env:
@@ -15,7 +15,7 @@ env:
 
 defaults:
   run:
-    working-directory: ./cloud/infrastructure
+    working-directory: ./infra
 
 jobs:
   build-and-deploy:
@@ -27,7 +27,7 @@ jobs:
       - name: ✋ Set up mutex
         id: mutex-setup
         run: |
-          pushd ../../discrete/Signalco.Discrete.Api.Mutex/node-cli
+          pushd ../discrete/Signalco.Discrete.Api.Mutex/node-cli
           npm install
           npm install -g
           npx mutex wait signalcoclouddeploy
@@ -48,7 +48,7 @@ jobs:
         with:
           node-version: "20.x"
           cache: pnpm
-          cache-dependency-path: ./cloud/infrastructure
+          cache-dependency-path: ./infra
 
       - name: 📦️ Installing dependencies
         run: pnpm i --frozen-lockfile
@@ -61,12 +61,25 @@ jobs:
         env:
           BASE_BRANCH: ${{ github.base_ref }}
 
-      - name: ⚡ Deploy Infrastructure
+      - name: ⚒️ Build Infrastructure
+        run: pnpm build
+
+      - name: ⚡ Deploy signalco Infrastructure
         uses: pulumi/actions@v4
         with:
           command: up
           stack-name: signalco/cloud-primary/${{ steps.extract_branch.outputs.branch }}
-          work-dir: ./cloud/infrastructure
+          work-dir: ./infra/apps/cloud-primary
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+
+      - name: ⚡ Deploy uier Infrastructure
+        uses: pulumi/actions@v4
+        with:
+          command: up
+          stack-name: signalco/uier/${{ steps.extract_branch.outputs.branch }}
+          work-dir: ./infra/apps/uier
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
@@ -74,7 +87,7 @@ jobs:
       - name: ✋ Release mutex
         if: always() && steps.mutex-setup.outcome == 'success'
         run: |
-          pushd ../../discrete/Signalco.Discrete.Api.Mutex/node-cli
+          pushd ../discrete/Signalco.Discrete.Api.Mutex/node-cli
           npm install
           npm install -g
           npx mutex release signalcoclouddeploy

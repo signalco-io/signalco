@@ -1,0 +1,6 @@
+config:
+  cloudflare:apiToken:
+    secure: AAABAAqPzyAV9mvmavpxCxB+Ws+snM4JK8mNiAxa+WqmzniW5gNmJpHXGgXZI69SkL251Lhhrp43BUrvHnTEbAFf3lG8/Wsl
+  vercel:apiToken:
+    secure: AAABAA4uxruLwvuYUDigNjy8yKK8Q3fYt/nM8JmX+RWMNsAMCiDNTbw8uFgFetLzaM4ZkQyLh/8=
+  vercel:team: team_Ade0MlfC3211ml3wYJZ4c9hn

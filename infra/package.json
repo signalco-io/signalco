@@ -1,0 +1,19 @@
+{
+  "name": "infra",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "preview": "turbo preview",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "@infra/eslint-config": "workspace:*",
+    "@infra/typescript-config": "workspace:*",
+    "turbo": "latest"
+  },
+  "packageManager": "pnpm@8.12.1",
+  "engines": {
+    "node": ">=18"
+  }
+}
