@@ -22,7 +22,7 @@ importers:
         version: 2.1.3
       '@date-io/date-fns':
         specifier: 2.17.0
-        version: 2.17.0(date-fns@3.0.1)
+        version: 2.17.0(date-fns@3.0.5)
       '@dnd-kit/core':
         specifier: 6.1.0
         version: 6.1.0(react-dom@18.2.0)(react@18.2.0)
@@ -120,8 +120,8 @@ importers:
         specifier: 7.8.5
         version: 7.8.5
       date-fns:
-        specifier: 3.0.1
-        version: 3.0.1
+        specifier: 3.0.5
+        version: 3.0.5
       monaco-editor:
         specifier: 0.45.0
         version: 0.45.0
@@ -3642,7 +3642,7 @@ packages:
     resolution: {integrity: sha512-+EQE8xZhRM/hsY0CDTVyayMDDY5ihc4MqXCrPxooKw19yAzUIC6uUqsZeaOFNL9YKTNxYKrJP5DFgE8o5xRCOw==}
     dev: false
 
-  /@date-io/date-fns@2.17.0(date-fns@3.0.1):
+  /@date-io/date-fns@2.17.0(date-fns@3.0.5):
     resolution: {integrity: sha512-L0hWZ/mTpy3Gx/xXJ5tq5CzHo0L7ry6KEO9/w/JWiFWFLZgiNVo3ex92gOl3zmzjHqY/3Ev+5sehAr8UnGLEng==}
     peerDependencies:
       date-fns: ^2.0.0
@@ -3651,7 +3651,7 @@ packages:
         optional: true
     dependencies:
       '@date-io/core': 2.17.0
-      date-fns: 3.0.1
+      date-fns: 3.0.5
     dev: false
 
   /@discoveryjs/json-ext@0.5.7:
@@ -10788,8 +10788,8 @@ packages:
     resolution: {integrity: sha512-ND9qDTLc6diwj+Xe5cdAgVTbLVdXbtxTJRXRhli8Mowuaan+0EJOtdqJ0QCHNSSPyoXGx9HX2/VMnKeC34AChA==}
     dev: true
 
-  /date-fns@3.0.1:
-    resolution: {integrity: sha512-cr9igCUa0QSqgAMj7JOrYTY6Nh1rmyGrFDko7ADqfmaQqP/I2N4rlfrLl7AWuzDaoIpz6MNjoEcTPzgZYIrhnA==}
+  /date-fns@3.0.5:
+    resolution: {integrity: sha512-Q4Tq5c5s/Zl/zbgdWf6pejn9ru7UwdIlLfvEEg1hVsQNQ7LKt76qIduagIT9OPK7+JCv1mAKherdU6bOqGYDnw==}
     dev: false
 
   /debug@2.6.9:
