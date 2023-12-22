@@ -9,12 +9,12 @@ on:
       - "cloud/**"
       - "infra/**"
       - ".github/workflows/cloud-deploy.yml"
+      - ".github/workflows/infra-deploy_reusable.yml"
 
 jobs:
   infra_cloud-primary_up:
     name: "Cloud Primary infrastructure (deploy)"
     uses: ./.github/workflows/infra-deploy_reusable.yml
-    if: success() && github.event_name == 'pull_request'
     with:
       project: "cloud-primary"
       baseRef: ${{ github.base_ref }}
@@ -24,7 +24,6 @@ jobs:
   infra_uier_up:
     name: "uier infrastructure (deploy)"
     uses: ./.github/workflows/infra-deploy_reusable.yml
-    if: success() && github.event_name == 'pull_request'
     with:
       project: "uier"
       baseRef: ${{ github.base_ref }}
