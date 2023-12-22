@@ -27,8 +27,8 @@ importers:
         specifier: 6.15.0
         version: 6.15.0
       '@pulumi/azure-native':
-        specifier: 2.22.1
-        version: 2.22.1
+        specifier: 2.23.0
+        version: 2.23.0
       '@pulumi/cloudflare':
         specifier: 5.16.0
         version: 5.16.0
@@ -39,8 +39,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       '@pulumi/pulumi':
-        specifier: 3.98.0
-        version: 3.98.0
+        specifier: 3.99.0
+        version: 3.99.0
       '@pulumiverse/vercel':
         specifier: 1.0.1
         version: 1.0.1
@@ -62,13 +62,13 @@ importers:
         version: 8.56.0
       eslint-config-standard:
         specifier: 17.1.0
-        version: 17.1.0(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.4.0)(eslint-plugin-promise@6.1.1)(eslint@8.56.0)
+        version: 17.1.0(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.5.0)(eslint-plugin-promise@6.1.1)(eslint@8.56.0)
       eslint-plugin-import:
         specifier: 2.29.1
         version: 2.29.1(@typescript-eslint/parser@6.15.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
       eslint-plugin-n:
-        specifier: 16.4.0
-        version: 16.4.0(eslint@8.56.0)
+        specifier: 16.5.0
+        version: 16.5.0(eslint@8.56.0)
       eslint-plugin-node:
         specifier: 11.1.0
         version: 11.1.0(eslint@8.56.0)
@@ -91,8 +91,8 @@ importers:
         specifier: 6.15.0
         version: 6.15.0
       '@pulumi/azure-native':
-        specifier: 2.22.1
-        version: 2.22.1
+        specifier: 2.23.0
+        version: 2.23.0
       '@pulumi/cloudflare':
         specifier: 5.16.0
         version: 5.16.0
@@ -103,8 +103,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       '@pulumi/pulumi':
-        specifier: 3.98.0
-        version: 3.98.0
+        specifier: 3.99.0
+        version: 3.99.0
       '@pulumiverse/vercel':
         specifier: 1.0.1
         version: 1.0.1
@@ -126,13 +126,13 @@ importers:
         version: 8.56.0
       eslint-config-standard:
         specifier: 17.1.0
-        version: 17.1.0(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.4.0)(eslint-plugin-promise@6.1.1)(eslint@8.56.0)
+        version: 17.1.0(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.5.0)(eslint-plugin-promise@6.1.1)(eslint@8.56.0)
       eslint-plugin-import:
         specifier: 2.29.1
         version: 2.29.1(@typescript-eslint/parser@6.15.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
       eslint-plugin-n:
-        specifier: 16.4.0
-        version: 16.4.0(eslint@8.56.0)
+        specifier: 16.5.0
+        version: 16.5.0(eslint@8.56.0)
       eslint-plugin-node:
         specifier: 11.1.0
         version: 11.1.0(eslint@8.56.0)
@@ -155,8 +155,8 @@ importers:
         specifier: 6.15.0
         version: 6.15.0
       '@pulumi/azure-native':
-        specifier: 2.22.1
-        version: 2.22.1
+        specifier: 2.23.0
+        version: 2.23.0
       '@pulumi/cloudflare':
         specifier: 5.16.0
         version: 5.16.0
@@ -167,8 +167,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       '@pulumi/pulumi':
-        specifier: 3.98.0
-        version: 3.98.0
+        specifier: 3.99.0
+        version: 3.99.0
       '@pulumiverse/vercel':
         specifier: 1.0.1
         version: 1.0.1
@@ -190,13 +190,13 @@ importers:
         version: 8.56.0
       eslint-config-standard:
         specifier: 17.1.0
-        version: 17.1.0(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.4.0)(eslint-plugin-promise@6.1.1)(eslint@8.56.0)
+        version: 17.1.0(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.5.0)(eslint-plugin-promise@6.1.1)(eslint@8.56.0)
       eslint-plugin-import:
         specifier: 2.29.1
         version: 2.29.1(@typescript-eslint/parser@6.15.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
       eslint-plugin-n:
-        specifier: 16.4.0
-        version: 16.4.0(eslint@8.56.0)
+        specifier: 16.5.0
+        version: 16.5.0(eslint@8.56.0)
       eslint-plugin-node:
         specifier: 11.1.0
         version: 11.1.0(eslint@8.56.0)
@@ -246,8 +246,8 @@ importers:
         specifier: 6.15.0
         version: 6.15.0
       '@pulumi/azure-native':
-        specifier: 2.22.1
-        version: 2.22.1
+        specifier: 2.23.0
+        version: 2.23.0
       '@pulumi/cloudflare':
         specifier: 5.16.0
         version: 5.16.0
@@ -258,8 +258,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       '@pulumi/pulumi':
-        specifier: 3.98.0
-        version: 3.98.0
+        specifier: 3.99.0
+        version: 3.99.0
       '@pulumiverse/vercel':
         specifier: 1.0.1
         version: 1.0.1
@@ -284,13 +284,13 @@ importers:
         version: 8.56.0
       eslint-config-standard:
         specifier: 17.1.0
-        version: 17.1.0(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.4.0)(eslint-plugin-promise@6.1.1)(eslint@8.56.0)
+        version: 17.1.0(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.5.0)(eslint-plugin-promise@6.1.1)(eslint@8.56.0)
       eslint-plugin-import:
         specifier: 2.29.1
         version: 2.29.1(@typescript-eslint/parser@6.15.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
       eslint-plugin-n:
-        specifier: 16.4.0
-        version: 16.4.0(eslint@8.56.0)
+        specifier: 16.5.0
+        version: 16.5.0(eslint@8.56.0)
       eslint-plugin-node:
         specifier: 11.1.0
         version: 11.1.0(eslint@8.56.0)
@@ -314,7 +314,7 @@ packages:
     resolution: {integrity: sha512-YPNYtwEnKu23VDHNFu91xd/Ueu5zYONHcYwKDA5qTvtgZZ1nzrvPJgrO15KF0fLRVlGo7yckirDS26GpvBTe6w==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.98.0
+      '@pulumi/pulumi': 3.99.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -846,7 +846,7 @@ packages:
   /@pulumi/aws@6.15.0:
     resolution: {integrity: sha512-ZAk1VJDM1Hn5Kr+8elPvH4yuRP0Gmpv9YUdqoYHcEIsjg4BtUXaS0Db7KmSKoUf1SmQRkBCdOqRBcit7RorpUA==}
     dependencies:
-      '@pulumi/pulumi': 3.98.0
+      '@pulumi/pulumi': 3.99.0
       builtin-modules: 3.0.0
       mime: 2.6.0
       read-package-tree: 5.3.1
@@ -855,10 +855,10 @@ packages:
       - supports-color
     dev: false
 
-  /@pulumi/azure-native@2.22.1:
-    resolution: {integrity: sha512-X/apQqagDZt+2uR9p4tQGb3dm9SYLzCabSG3j5rQ8XJk3/qrDRs8wi+k62hJfMoUJv1QihEFZsLBntph2HIRLw==}
+  /@pulumi/azure-native@2.23.0:
+    resolution: {integrity: sha512-y84BECYE+AIDScG3XA8BkOirYlAGUraA3dRay7LAGvQyqTMqAzbq0HItLkSf5SRkKSX+U7+hlXmsZC2yi02jkw==}
     dependencies:
-      '@pulumi/pulumi': 3.98.0
+      '@pulumi/pulumi': 3.99.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -866,7 +866,7 @@ packages:
   /@pulumi/cloudflare@5.16.0:
     resolution: {integrity: sha512-7FjJIpsGz9lv+o+nNnbV8UOUXAF248LHCILmExxIfVTblwbp0Mb8Ri68rLOK9qpVPOIwkj2QBorLiZ6Y4anHSg==}
     dependencies:
-      '@pulumi/pulumi': 3.98.0
+      '@pulumi/pulumi': 3.99.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -875,7 +875,7 @@ packages:
     resolution: {integrity: sha512-9RaGDiy8jFCiaarj4EOrMW/fVCM/AgBigzwM6CKzlR49x8UFiRDmKrXfEVHb8r2P9IpC4IaAZf5VbNNAHwN/rA==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.98.0
+      '@pulumi/pulumi': 3.99.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -883,14 +883,14 @@ packages:
   /@pulumi/docker@4.5.0:
     resolution: {integrity: sha512-DOiczZK1cF4NGlEWzacPLjGcoPKXHXISoqq4KqCO97YW28rZSu6LOdveQ8tLaUHGeyWQ+CS3PT45caSxHAbzbw==}
     dependencies:
-      '@pulumi/pulumi': 3.98.0
+      '@pulumi/pulumi': 3.99.0
       semver: 5.7.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@pulumi/pulumi@3.98.0:
-    resolution: {integrity: sha512-G5LpwM7CvR5hLvyscgWp5TVVJYTOJqeLSL0uTUtHSBz/Tpiqv1lgygW8oUIUD4gPm33UfcK1cVejCASdQk+74Q==}
+  /@pulumi/pulumi@3.99.0:
+    resolution: {integrity: sha512-bS186PU6pfNKU8T7S91aDUSlvYpohcwJmnbQ+kStz6IZaGeZzu8iZoAZ+nM266dydeYxCaanK3Kjkp/iuxUBcg==}
     engines: {node: '>=8.13.0 || >=10.10.0'}
     dependencies:
       '@grpc/grpc-js': 1.9.6
@@ -930,7 +930,7 @@ packages:
   /@pulumiverse/vercel@1.0.1:
     resolution: {integrity: sha512-AOiOe2pzZOQVv9Z+C/iWmZeKpeZb+0qmqcfRBnYiU4DiVr9VhqE9ToJVPq7ElyxgYSoETA+4qfd1Kj01zxhd5A==}
     dependencies:
-      '@pulumi/pulumi': 3.98.0
+      '@pulumi/pulumi': 3.99.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -1690,7 +1690,7 @@ packages:
       eslint: 8.56.0
     dev: true
 
-  /eslint-config-standard@17.1.0(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.4.0)(eslint-plugin-promise@6.1.1)(eslint@8.56.0):
+  /eslint-config-standard@17.1.0(eslint-plugin-import@2.29.1)(eslint-plugin-n@16.5.0)(eslint-plugin-promise@6.1.1)(eslint@8.56.0):
     resolution: {integrity: sha512-IwHwmaBNtDK4zDHQukFDW5u/aTb8+meQWZvNFWkiGmbWjD6bqyuSSBxxXKkCftCUzc1zwCH2m/baCNDLGmuO5Q==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -1701,7 +1701,7 @@ packages:
     dependencies:
       eslint: 8.56.0
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.15.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
-      eslint-plugin-n: 16.4.0(eslint@8.56.0)
+      eslint-plugin-n: 16.5.0(eslint@8.56.0)
       eslint-plugin-promise: 6.1.1(eslint@8.56.0)
     dev: true
 
@@ -1835,8 +1835,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-n@16.4.0(eslint@8.56.0):
-    resolution: {integrity: sha512-IkqJjGoWYGskVaJA7WQuN8PINIxc0N/Pk/jLeYT4ees6Fo5lAhpwGsYek6gS9tCUxgDC4zJ+OwY2bY/6/9OMKQ==}
+  /eslint-plugin-n@16.5.0(eslint@8.56.0):
+    resolution: {integrity: sha512-Hw02Bj1QrZIlKyj471Tb1jSReTl4ghIMHGuBGiMVmw+s0jOPbI4CBuYpGbZr+tdQ+VAvSK6FDSta3J4ib/SKHQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       eslint: '>=7.0.0'
