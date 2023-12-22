@@ -21,7 +21,7 @@ const up = async () => {
         if (stack === 'next') {
             dnsRecord('vercel-uier', 'next', 'cname.vercel-dns.com', 'CNAME', false);
         } else if (stack === 'production') {
-            // TODO: Handle A record for production
+            dnsRecord('vercel-uier', '@', '76.76.21.21', 'A', false);
         }
     }
 };
