@@ -1,5 +1,5 @@
 {
-    "name": "@infra/signalco",
+    "name": "@infra/cloud-primary",
     "private": true,
     "license": "../LICENSE",
     "main": "dist/index.js",
