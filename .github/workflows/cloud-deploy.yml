@@ -17,7 +17,7 @@ jobs:
     uses: ./.github/workflows/infra-deploy_reusable.yml
     with:
       project: "cloud-primary"
-      baseRef: ${{ github.base_ref }}
+      baseRef: ${{ github.ref }}
       command: "up"
     secrets: inherit
 
@@ -26,6 +26,6 @@ jobs:
     uses: ./.github/workflows/infra-deploy_reusable.yml
     with:
       project: "uier"
-      baseRef: ${{ github.base_ref }}
+      baseRef: ${{ github.ref }}
       command: "up"
     secrets: inherit

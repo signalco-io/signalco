@@ -59,7 +59,7 @@ jobs:
           cache-dependency-path: ./infra
 
       - name: 📦️ Installing dependencies
-        run: pnpm i --frozen-lockfile
+        run: pnpm i --frozen-lockfile --filter=${{ inputs.project }}
 
       - name: 🔎 Determine stack
         shell: bash
@@ -75,7 +75,7 @@ jobs:
           BASE_BRANCH: ${{ inputs.baseRef }}
 
       - name: ⚒️ Build Infrastructure
-        run: pnpm build
+        run: pnpm build --filter=${{ inputs.project }}
 
       - name: ⚡ Preview Deploy Infrastructure
         uses: pulumi/actions@v4
