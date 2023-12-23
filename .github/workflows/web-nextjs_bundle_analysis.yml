@@ -8,6 +8,7 @@ on:
       - 'web/**'
       - 'cloud/**'
       - 'infra/**'
+      - "station/**"
       - '.github/workflows/web-nextjs_bundle_analysis.yml'
       - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
       - '.github/workflows/cloud-deploy-preview_reusable.yml'
@@ -19,12 +20,38 @@ on:
       - 'web/**'
       - 'cloud/**'
       - 'infra/**'
+      - "station/**"
       - '.github/workflows/web-nextjs_bundle_analysis.yml'
       - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
       - '.github/workflows/cloud-deploy-preview_reusable.yml'
   workflow_dispatch:
 
 jobs:
+  station_ci:
+    strategy:
+      matrix:
+        kind: ["arm-x64", "windows-x64"]
+        include:
+          - kind: arm-x64
+            os: ubuntu-latest
+            target: linux-arm64
+          - kind: windows-x64
+            os: ubuntu-latest
+            target: win-x64
+    runs-on: ${{ matrix.os }}
+    if: success() && github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Build
+        shell: bash
+        run: |
+          dotnet build ./Signal.Beacon.WorkerService/Signal.Beacon.csproj -r "${{ matrix.target }}" --self-contained true
+        working-directory: ./station
+
   cloud_preview:
     name: "Cloud Primary infrastructure (preview)"
     uses: ./.github/workflows/infra-deploy_reusable.yml
