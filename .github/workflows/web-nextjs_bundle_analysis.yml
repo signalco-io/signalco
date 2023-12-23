@@ -53,8 +53,8 @@ jobs:
               - .github/workflows/web-nextjs_bundle_analysis.yml
     outputs:
       infra: ${{ steps.filter.outputs.infrastructure }}
-      web: ${{ steps.filter.outputs.migrate}}
-      station: ${{ steps.filter.outputs.code}}
+      web: ${{ steps.filter.outputs.web }}
+      station: ${{ steps.filter.outputs.station }}
 
   station_ci:
     strategy:
