@@ -34,8 +34,8 @@ export default function EntityCard({ entity, spread, selectable, selected, onSel
     return (
         <Row spacing={1}>
             {selectable && <Checkbox checked={selected ?? false} onChange={onSelection} />}
-            <Link href={`${KnownPages.Entities}/${entity.id}`} className="h-full grow overflow-hidden">
-                <Card className={cx('h-full p-1', spread && 'p-0')}>
+            <Link href={`${KnownPages.Entities}/${entity.id}`} legacyBehavior>
+                <Card className={cx('h-full p-1 grow overflow-hidden', spread && 'p-0')}>
                     <Container
                         spacing={2}
                         justifyContent="space-between"
