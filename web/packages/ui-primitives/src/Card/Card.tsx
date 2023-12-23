@@ -1,52 +1,36 @@
-import { type HTMLAttributes, type PropsWithChildren, type MouseEventHandler, forwardRef } from 'react';
-import { Link } from '../Link';
+import { forwardRef, type HTMLAttributes } from 'react';
 import { cx } from '../cx';
 
-export type CardProps = Omit<HTMLAttributes<HTMLDivElement>, 'onClick'> & {
+export type CardProps = HTMLAttributes<HTMLDivElement> & {
     href?: string;
-    onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
-function LinkCard({ href, children }: PropsWithChildren & Required<Pick<CardProps, 'href'>>) {
-    return (
-        <Link href={href}>{children}</Link>
-    );
-}
+const Card = forwardRef<HTMLDivElement, CardProps>(({ href, onClick, className, ...restProps }: CardProps, ref) => {
+    const handleOnClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if (onClick) {
+            onClick(event);
+        } else if (href) {
+            event.preventDefault();
+            event.stopPropagation();
+            window.location.href = href;
+        }
+    }
 
-function ButtonCard({ onClick, children }: PropsWithChildren & Required<Pick<CardProps, 'onClick'>>) {
     return (
-        <button className="text-left" onClick={onClick}>{children}</button>
-    );
-}
-
-function BareCard({ children }: PropsWithChildren) {
-    return (
-        <>{children}</>
-    );
-}
-
-function CardWrapper({ href, onClick, children }: PropsWithChildren & Pick<CardProps, 'href' | 'onClick'>) {
-    if (href) return <LinkCard href={href}>{children}</LinkCard>;
-    if (onClick) return <ButtonCard onClick={onClick}>{children}</ButtonCard>;
-    return <BareCard>{children}</BareCard>;
-}
-
-const CardForwarded = forwardRef<HTMLDivElement, CardProps>(({ href, onClick, className, ...restProps }, ref) => {
-    return (
-        <CardWrapper href={href} onClick={onClick}>
-            <div
-                ref={ref}
-                className={cx(
-                    'bg-card rounded-lg p-2 border text-card-foreground shadow-sm',
-                    (href || onClick) && 'hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none',
-                    className
-                )}
-                {...restProps} />
-        </CardWrapper>
+        <div
+            ref={ref}
+            role={onClick ? 'button' : undefined}
+            onClick={handleOnClick}
+            className={cx(
+                'bg-card rounded-lg p-2 border text-card-foreground shadow-sm',
+                (href || onClick) && 'cursor-default hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none',
+                className
+            )}
+            {...restProps} />
     );
 });
-CardForwarded.displayName = 'Card';
-export const Card = CardForwarded;
+Card.displayName = 'Card';
+export { Card };
 
 export function CardHeader({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
     return <div className={cx('flex flex-col space-y-1.5 p-6', className)} {...props} />;

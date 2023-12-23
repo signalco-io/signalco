@@ -18,7 +18,7 @@ export function EntitiesTitle() {
             className="min-w-[160px] max-w-xs"
             variant="plain"
             value={selectedType}
-            onValueChange={(v: string) => setSelectedType(v)}
+            onValueChange={setSelectedType}
             items={entityTypes.map(t => {
                 const EntityIcon = EntityIconByType(parseInt(t.value));
                 return ({

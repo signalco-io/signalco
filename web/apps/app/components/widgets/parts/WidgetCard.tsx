@@ -25,7 +25,7 @@ type CardConfig = {
     rows?: number;
 }
 
-function WidgetCard(props: IWidgetCardProps) {
+export default function WidgetCard(props: IWidgetCardProps) {
     const {
         children,
         isEditMode,
@@ -113,5 +113,3 @@ function WidgetCard(props: IWidgetCardProps) {
         </>
     );
 }
-
-export default WidgetCard;
