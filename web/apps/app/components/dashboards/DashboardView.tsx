@@ -82,7 +82,7 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
                 <GridWrapper isEditing={isEditing} order={widgetsOrder} orderChanged={handleOrderChanged}>
                     {widgets.map((widget) => (
                         <WidgetComponent
-                            key={`widget-${widget.id.toString()}`}
+                            key={`widget-${dashboard.id}-${widget.id.toString()}`}
                             id={widget.id}
                             onRemove={() => handleRemoveWidget(widget.id)}
                             isEditMode={isEditing}
