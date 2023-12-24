@@ -37,6 +37,11 @@ stateDiagram-v2
     🏗️brandgrab.io
     🏗️brandgrab.io --> 🏗️uier.io
 
+    🏗️remoteBrowser
+    🏗️remoteBrowser --> 🏗️brandgrab.io
+    🏗️remoteBrowser --> 🏗️uier.io
+    🏗️remoteBrowser --> 🏗️signalco.io
+
     💡diff
     
     💡regex
