@@ -99,3 +99,9 @@ stateDiagram-v2
     💡statusPages --> 🏗️brandgrab.io
     
 ```
+
+Legend
+
+💡 Ideating
+🧪 Working on POC
+🏗️ In progress (preparing MVP)
