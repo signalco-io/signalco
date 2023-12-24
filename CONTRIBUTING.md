@@ -96,7 +96,6 @@ stateDiagram-v2
     💡CRON --> 💡statusPages
     
     💡statusPages
-    💡statusPages --> 💡CRON
     💡statusPages --> 🏗️signalco.io
     💡statusPages --> 🏗️uier.io
     💡statusPages --> 🏗️doprocess.app
