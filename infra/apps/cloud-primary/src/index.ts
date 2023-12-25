@@ -51,7 +51,6 @@ const up = async () => {
         return {};
     } else {
         const shouldProtect = stack === 'production';
-        const domainName = `${config.require('domain')}`;
 
         const resourceGroupName = `signalco-cloud-${stack}`;
         const signalrPrefix = 'sr';
@@ -61,6 +60,8 @@ const up = async () => {
         const currentStack = new StackReference(`signalco/${getProject()}/${getStack()}`);
 
         const resourceGroup = new ResourceGroup(resourceGroupName);
+
+        const domainName = `${config.require('domain')}`;
         const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
 
         const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, stack === 'production' ? 'standard1' : 'free', false);
@@ -86,7 +87,10 @@ const up = async () => {
                 api.cors,
                 currentStack,
                 false);
-            const apiFuncPublish = await publishProjectAsync(['../../../cloud/src/Signalco.Api.Public', api.name].filter(i => i.length).join('.'));
+            const apiFuncPublish = await publishProjectAsync([
+                '../../../cloud/src/Signalco.Api.Public',
+                api.name,
+            ].filter(i => i.length).join('.'));
             const apiFuncCode = await assignFunctionCodeAsync(
                 resourceGroup,
                 funcStorage.storageAccount.storageAccount,
