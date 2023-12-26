@@ -1,8 +1,8 @@
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { slug } from '@signalco/js';
 import { type SectionData } from '@signalco/cms-core/SectionData';
-import { Ctas1 } from './subcomponents/Ctas1';
-import { Section1 } from './containers/Section1';
+import { Ctas1 } from '../subcomponents/Ctas1';
+import { Section1 } from '../containers/Section1';
 
 export function Heading1({ tagline, header, description, ctas, asset }: SectionData) {
     return (

@@ -1,12 +1,11 @@
 import { Check } from '@signalco/ui-icons';
+import { Pricing1 } from '@signalco/cms-feature-marketing/Pricing';
+import { Heading1 } from '@signalco/cms-feature-marketing/Heading';
+import { Feature2, Feature1 } from '@signalco/cms-feature-marketing/Feature';
+import { Faq1 } from '@signalco/cms-feature-marketing/Faq';
 import { type SectionData } from '@signalco/cms-core/SectionData';
 import { KnownPages } from '../../../src/knownPages';
 import Footer from '../../../components/pages/Footer';
-import { Pricing1 } from '../../../components/cms/Pricing1';
-import { Heading1 } from '../../../components/cms/Heading1';
-import { Feature2 } from '../../../components/cms/Feature2';
-import { Feature1 } from '../../../components/cms/Feature1';
-import { Faq1 } from '../../../components/cms/Faq1';
 
 export default function LandingPage() {
     const data: SectionData[] = [

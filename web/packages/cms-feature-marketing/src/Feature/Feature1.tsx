@@ -1,8 +1,8 @@
 import { type SectionData } from '@signalco/cms-core/SectionData';
-import { KeyFeature2 } from './subcomponents/KeyFeature2';
-import { Ctas1 } from './subcomponents/Ctas1';
-import { Description1 } from './Description1';
-import { Section1 } from './containers/Section1';
+import { KeyFeature2 } from '../subcomponents/KeyFeature2';
+import { Ctas1 } from '../subcomponents/Ctas1';
+import { Description1 } from '../Description/Description1';
+import { Section1 } from '../containers/Section1';
 
 
 export function Feature1({ tagline, header, description, ctas, asset, features }: SectionData) {

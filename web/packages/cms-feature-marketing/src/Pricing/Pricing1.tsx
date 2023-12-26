@@ -1,8 +1,8 @@
 import { type SectionData } from '@signalco/cms-core/SectionData';
-import { PricingCard1 } from './subcomponents/PricingCard1';
-import { KeyFeature1 } from './subcomponents/KeyFeature1';
-import { Description1 } from './Description1';
-import { Section1 } from './containers/Section1';
+import { PricingCard1 } from '../subcomponents/PricingCard1';
+import { KeyFeature1 } from '../subcomponents/KeyFeature1';
+import { Description1 } from '../Description/Description1';
+import { Section1 } from '../containers/Section1';
 
 
 export function Pricing1({ tagline, header, description, features }: SectionData) {

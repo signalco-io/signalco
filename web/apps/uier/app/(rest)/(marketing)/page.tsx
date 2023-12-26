@@ -1,23 +1,21 @@
+import { Heading1 } from '@signalco/cms-feature-marketing/Heading';
+import { type SectionData } from '@signalco/cms-core/SectionData';
 import { KnownPages } from '../../../src/knownPages';
 
-function Cover({ header }: { header?: string }) {
-    return (
-        <div>{header}</div>
-    )
-}
-
 export default function LandingPage() {
-    const data = [
+    const data: SectionData[] = [
         {
             header: 'uier',
             ctas: [
                 { label: 'Get Started', href: KnownPages.App },
             ]
-        }
+        },
+        {}
     ];
 
     const sections = [
-        Cover
+        Heading1,
+        // Footer1
     ];
 
     return (
