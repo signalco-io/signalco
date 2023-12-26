@@ -1,4 +1,3 @@
-import { CSSProperties } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Link } from '@signalco/ui-primitives/Link';
