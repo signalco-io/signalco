@@ -1,6 +1,6 @@
+import { type SectionData } from '@signalco/cms-core/SectionData';
 import { PricingCard1 } from './subcomponents/PricingCard1';
 import { KeyFeature1 } from './subcomponents/KeyFeature1';
-import { SectionData } from './SectionData';
 import { Description1 } from './Description1';
 import { Section1 } from './containers/Section1';
 

@@ -1,6 +1,5 @@
 import { Button } from '@signalco/ui-primitives/Button';
-import { SectionData } from '../SectionData';
-
+import { type SectionData } from '@signalco/cms-core/SectionData';
 
 export function Ctas1({ ctas }: { ctas: SectionData['ctas']; }) {
     if (!ctas?.length) {

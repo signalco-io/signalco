@@ -2,7 +2,7 @@ import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { slug } from '@signalco/js';
-import { SectionData } from '../SectionData';
+import { type SectionData } from '@signalco/cms-core/SectionData';
 
 export function KeyFeature1({ header, description, asset }: SectionData) {
     return (

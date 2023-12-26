@@ -31,6 +31,7 @@
     "@hcaptcha/react-hcaptcha": "1.9.2",
     "@next/env": "14.0.4",
     "@planetscale/database": "1.13.0",
+    "@signalco/cms-core": "workspace:*",
     "@signalco/data": "workspace:*",
     "@signalco/hooks": "workspace:*",
     "@signalco/js": "workspace:*",

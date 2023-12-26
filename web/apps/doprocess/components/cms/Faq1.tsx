@@ -2,8 +2,8 @@ import { Fragment } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Divider } from '@signalco/ui-primitives/Divider';
 import { Accordion } from '@signalco/ui/Accordion';
+import { type SectionData } from '@signalco/cms-core/SectionData';
 import { Ctas1 } from './subcomponents/Ctas1';
-import { SectionData } from './SectionData';
 import { Description1 } from './Description1';
 import { Section1 } from './containers/Section1';
 

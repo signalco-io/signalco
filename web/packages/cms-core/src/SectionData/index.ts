@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 
-
 export type SectionData = {
     tagline?: string;
     header?: string;

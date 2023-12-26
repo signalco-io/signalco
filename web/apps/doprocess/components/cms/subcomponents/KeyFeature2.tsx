@@ -1,7 +1,6 @@
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { slug } from '@signalco/js';
-import { SectionData } from '../SectionData';
-
+import { type SectionData } from '@signalco/cms-core/SectionData';
 
 export function KeyFeature2({ header, description, asset }: SectionData) {
     return (

@@ -2,7 +2,7 @@ import { Typography } from '@signalco/ui-primitives/Typography';
 import { Divider } from '@signalco/ui-primitives/Divider';
 import { Card, CardContent } from '@signalco/ui-primitives/Card';
 import { slug } from '@signalco/js';
-import { SectionData } from '../SectionData';
+import { type SectionData } from '@signalco/cms-core/SectionData';
 import { KeyFeature1 } from './KeyFeature1';
 import { Ctas1 } from './Ctas1';
 

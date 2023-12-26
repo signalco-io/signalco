@@ -548,6 +548,9 @@ importers:
       '@planetscale/database':
         specifier: 1.13.0
         version: 1.13.0
+      '@signalco/cms-core':
+        specifier: workspace:*
+        version: link:../../packages/cms-core
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -1202,6 +1205,33 @@ importers:
         specifier: 5.3.3
         version: 5.3.3
 
+  packages/cms-core:
+    devDependencies:
+      '@signalco/eslint-config-signalco':
+        specifier: workspace:*
+        version: link:../eslint-config-signalco
+      '@signalco/tailwindcss-config-signalco':
+        specifier: workspace:*
+        version: link:../tailwindcss-config-signalco
+      '@signalco/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@types/react':
+        specifier: 18.2.45
+        version: 18.2.45
+      '@types/react-dom':
+        specifier: 18.2.18
+        version: 18.2.18
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      typescript:
+        specifier: 5.3.3
+        version: 5.3.3
+
   packages/data:
     devDependencies:
       '@signalco/tsconfig':
@@ -1425,9 +1455,6 @@ importers:
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
-      '@signalco/ui':
-        specifier: workspace:*
-        version: link:../ui
       '@signalco/ui-primitives':
         specifier: workspace:*
         version: link:../ui-primitives
@@ -1437,9 +1464,6 @@ importers:
       '@types/react-dom':
         specifier: 18.2.18
         version: 18.2.18
-      next:
-        specifier: 14.0.4
-        version: 14.0.4(react-dom@18.2.0)(react@18.2.0)(sass@1.69.5)
       react:
         specifier: 18.2.0
         version: 18.2.0

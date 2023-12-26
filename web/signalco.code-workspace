@@ -37,6 +37,10 @@
 			"path": "apps/slco"
 		},
 		{
+			"name": "📦 @signalco/cms-core",
+			"path": "packages/cms-core"
+		},
+		{
 			"name": "📦 @signalco/data",
 			"path": "packages/data"
 		},
