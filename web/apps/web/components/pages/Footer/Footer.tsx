@@ -5,7 +5,6 @@ import { Divider } from '@signalco/ui-primitives/Divider';
 import { SystemStatusLabel } from '../SystemStatusLabel';
 import SignalcoLogotype from '../../icons/SignalcoLogotype';
 import { isDeveloper } from '../../../src/services/EnvProvider';
-import { now } from '../../../src/services/DateTimeProvider';
 import { KnownPages } from '../../../src/knownPages';
 import { SignalcoSocialIcons } from './SignalcoSocialIcons';
 import { FooterContainer } from './FooterContainer';
@@ -82,7 +81,7 @@ export default function Footer() {
                 <Divider />
                 <div className="flex flex-col items-center gap-8 text-center md:flex-row md:justify-between">
                     <SystemStatusLabel />
-                    <Typography level="body3">Copyright © {now().getFullYear()} signalco. All rights reserved.</Typography>
+                    <Typography level="body3">Copyright © {new Date().getFullYear()} signalco. All rights reserved.</Typography>
                 </div>
             </Stack>
         </FooterContainer>

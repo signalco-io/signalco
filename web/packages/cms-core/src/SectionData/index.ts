@@ -6,5 +6,5 @@ export type SectionData = {
     description?: string;
     asset?: ReactNode;
     features?: SectionData[];
-    ctas?: { label: string; href: string; }[];
+    ctas?: { label: string; href: string; icon?: ReactNode; }[];
 };
