@@ -9,13 +9,12 @@ export function Ctas2({ ctas }: { ctas: SectionData['ctas']; }) {
 
     return (
         <Row>
-            {ctas.map((cta, index) => (
+            {ctas.map(cta => (
                 <IconButton
                     key={cta.label}
                     aria-label={cta.label}
-                    variant={index === 0 ? 'solid' : 'outlined'}
-                    href={cta.href}
-                    className="w-full">
+                    variant="plain"
+                    href={cta.href}>
                     {cta.icon}
                 </IconButton>
             ))}
