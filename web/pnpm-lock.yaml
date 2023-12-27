@@ -175,8 +175,8 @@ importers:
         specifier: 4.8.2
         version: 4.8.2(playwright-core@1.40.1)
       '@ducanh2912/next-pwa':
-        specifier: 10.0.0
-        version: 10.0.0(next@14.0.4)(webpack@5.89.0)
+        specifier: 10.0.2
+        version: 10.0.2(next@14.0.4)(webpack@5.89.0)
       '@next/bundle-analyzer':
         specifier: 14.0.4
         version: 14.0.4
@@ -640,8 +640,8 @@ importers:
         specifier: 7.23.6
         version: 7.23.6
       '@ducanh2912/next-pwa':
-        specifier: 10.0.0
-        version: 10.0.0(esbuild@0.19.8)(next@14.0.4)(webpack@5.89.0)
+        specifier: 10.0.2
+        version: 10.0.2(esbuild@0.19.8)(next@14.0.4)(webpack@5.89.0)
       '@next/bundle-analyzer':
         specifier: 14.0.4
         version: 14.0.4
@@ -1000,8 +1000,8 @@ importers:
         specifier: 7.23.6
         version: 7.23.6
       '@ducanh2912/next-pwa':
-        specifier: 10.0.0
-        version: 10.0.0(next@14.0.4)(webpack@5.89.0)
+        specifier: 10.0.2
+        version: 10.0.2(next@14.0.4)(webpack@5.89.0)
       '@next/bundle-analyzer':
         specifier: 14.0.4
         version: 14.0.4
@@ -1154,8 +1154,8 @@ importers:
         specifier: 7.23.6
         version: 7.23.6
       '@ducanh2912/next-pwa':
-        specifier: 10.0.0
-        version: 10.0.0(next@14.0.4)(webpack@5.89.0)
+        specifier: 10.0.2
+        version: 10.0.2(next@14.0.4)(webpack@5.89.0)
       '@next/bundle-analyzer':
         specifier: 14.0.4
         version: 14.0.4
@@ -3888,8 +3888,8 @@ packages:
       superjson: 2.2.1
     dev: true
 
-  /@ducanh2912/next-pwa@10.0.0(esbuild@0.19.8)(next@14.0.4)(webpack@5.89.0):
-    resolution: {integrity: sha512-6VWpF0IzP9Az9n0jmqL9XH8iWA6LYJrC72b8GDEn7Swfi1mR+hYPItNFKJnraqwJheIqeeZXIHAqs5/VdyDF5A==}
+  /@ducanh2912/next-pwa@10.0.2(esbuild@0.19.8)(next@14.0.4)(webpack@5.89.0):
+    resolution: {integrity: sha512-6/6+l0L+xHCD9TluaoXlwKHl65iZ0OlvTO2L1YPV9zyZjN9sl4DbEjQ7JbOADnUGGbGVicPE4MhViGJA0+ezjQ==}
     peerDependencies:
       next: '>=14.0.0'
       webpack: '>=5.9.0'
@@ -3912,8 +3912,8 @@ packages:
       - uglify-js
     dev: true
 
-  /@ducanh2912/next-pwa@10.0.0(next@14.0.4)(webpack@5.89.0):
-    resolution: {integrity: sha512-6VWpF0IzP9Az9n0jmqL9XH8iWA6LYJrC72b8GDEn7Swfi1mR+hYPItNFKJnraqwJheIqeeZXIHAqs5/VdyDF5A==}
+  /@ducanh2912/next-pwa@10.0.2(next@14.0.4)(webpack@5.89.0):
+    resolution: {integrity: sha512-6/6+l0L+xHCD9TluaoXlwKHl65iZ0OlvTO2L1YPV9zyZjN9sl4DbEjQ7JbOADnUGGbGVicPE4MhViGJA0+ezjQ==}
     peerDependencies:
       next: '>=14.0.0'
       webpack: '>=5.9.0'
