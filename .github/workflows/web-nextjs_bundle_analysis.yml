@@ -8,6 +8,7 @@ on:
       - 'web/**'
       - 'cloud/**'
       - 'infra/**'
+      - "station/**"
       - '.github/workflows/web-nextjs_bundle_analysis.yml'
       - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
       - '.github/workflows/cloud-deploy-preview_reusable.yml'
@@ -19,16 +20,73 @@ on:
       - 'web/**'
       - 'cloud/**'
       - 'infra/**'
+      - "station/**"
       - '.github/workflows/web-nextjs_bundle_analysis.yml'
       - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
       - '.github/workflows/cloud-deploy-preview_reusable.yml'
   workflow_dispatch:
 
 jobs:
+  changes:
+    name: "Detect changes"
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            infrastructure:
+              - cloud/**
+              - infra/**
+              - .github/workflows/web-nextjs_bundle_analysis.yml
+              - .github/workflows/cloud-deploy-preview_reusable.yml
+            web:
+              - web/**
+              - .github/workflows/web-nextjs_bundle_analysis.yml
+              - .github/workflows/nextjs_bundle_analysis_reusable.yml
+            station:
+              - station/**
+              - .github/workflows/web-nextjs_bundle_analysis.yml
+    outputs:
+      infra: ${{ steps.filter.outputs.infrastructure }}
+      web: ${{ steps.filter.outputs.web }}
+      station: ${{ steps.filter.outputs.station }}
+
+  station_ci:
+    strategy:
+      matrix:
+        kind: ["arm-x64", "windows-x64"]
+        include:
+          - kind: arm-x64
+            os: ubuntu-latest
+            target: linux-arm64
+          - kind: windows-x64
+            os: ubuntu-latest
+            target: win-x64
+    runs-on: ${{ matrix.os }}
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.station == 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Build
+        shell: bash
+        run: |
+          dotnet build ./Signal.Beacon.WorkerService/Signal.Beacon.csproj -r "${{ matrix.target }}" --self-contained true
+        working-directory: ./station
+
   cloud_preview:
     name: "Cloud Primary infrastructure (preview)"
     uses: ./.github/workflows/infra-deploy_reusable.yml
-    if: success() && github.event_name == 'pull_request'
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
     with:
       project: "cloud-primary"
       baseRef: ${{ github.base_ref }}
@@ -38,7 +96,8 @@ jobs:
   uier_infra_preview:
     name: "uier infrastructure (preview)"
     uses: ./.github/workflows/infra-deploy_reusable.yml
-    if: success() && github.event_name == 'pull_request'
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
     with:
       project: "uier"
       baseRef: ${{ github.base_ref }}
@@ -47,6 +106,8 @@ jobs:
 
   analyze_blog:
     name: "Blog"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -57,6 +118,8 @@ jobs:
 
   analyze_app:
     name: "App"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -67,6 +130,8 @@ jobs:
 
   analyze_brandgrab:
     name: "BrandGrab"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -77,6 +142,8 @@ jobs:
 
   analyze_web:
     name: "Web"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -87,6 +154,8 @@ jobs:
 
   analyze_slco:
     name: "slco"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -97,6 +166,8 @@ jobs:
 
   analyze_doprocess:
     name: "doprocess"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'

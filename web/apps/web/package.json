@@ -24,6 +24,8 @@
         "@reactflow/background": "11.3.6",
         "@reactflow/controls": "11.2.6",
         "@reactflow/core": "11.10.1",
+        "@signalco/cms-core": "workspace:*",
+        "@signalco/cms-feature-marketing": "workspace:*",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
@@ -50,7 +52,7 @@
     "devDependencies": {
         "@axe-core/playwright": "4.8.2",
         "@babel/core": "7.23.6",
-        "@ducanh2912/next-pwa": "10.0.0",
+        "@ducanh2912/next-pwa": "10.0.2",
         "@next/bundle-analyzer": "14.0.4",
         "@playwright/test": "1.40.1",
         "@signalco/eslint-config-signalco": "workspace:*",

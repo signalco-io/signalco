@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from 'react';
-import Footer from '../pages/Footer';
 import { PageNav } from '../PageNav';
 
 export function PageFullLayout(props: PropsWithChildren) {
@@ -9,7 +8,6 @@ export function PageFullLayout(props: PropsWithChildren) {
             <div style={{ paddingTop: '80px' }}>
                 {props.children}
             </div>
-            <Footer />
         </>
     );
 }

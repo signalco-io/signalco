@@ -1,7 +1,6 @@
 import { PropsWithChildren } from 'react';
 import {Stack} from '@signalco/ui-primitives/Stack';
-import {Container} from '@signalco/ui-primitives/Container';
-import Footer from '../pages/Footer';
+import { Container } from '@signalco/ui-primitives/Container';
 import PageNav, { HeaderHeight } from '../PageNav';
 
 type PageLayoutProps = PropsWithChildren<{
@@ -17,7 +16,6 @@ export function PageLayout({ maxWidth, children }: PageLayoutProps) {
                     {children}
                 </Container>
             </div>
-            <Footer />
         </Stack>
     );
 }
