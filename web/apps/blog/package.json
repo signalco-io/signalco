@@ -22,6 +22,8 @@
         "@mdx-js/react": "3.0.0",
         "@next/env": "14.0.4",
         "@next/mdx": "14.0.4",
+        "@signalco/cms-core": "workspace:*",
+        "@signalco/cms-feature-marketing": "workspace:*",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",

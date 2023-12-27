@@ -273,6 +273,12 @@ importers:
       '@next/mdx':
         specifier: 14.0.4
         version: 14.0.4(@mdx-js/loader@3.0.0)(@mdx-js/react@3.0.0)
+      '@signalco/cms-core':
+        specifier: workspace:*
+        version: link:../../packages/cms-core
+      '@signalco/cms-feature-marketing':
+        specifier: workspace:*
+        version: link:../../packages/cms-feature-marketing
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -412,6 +418,12 @@ importers:
       '@next/env':
         specifier: 14.0.4
         version: 14.0.4
+      '@signalco/cms-core':
+        specifier: workspace:*
+        version: link:../../packages/cms-core
+      '@signalco/cms-feature-marketing':
+        specifier: workspace:*
+        version: link:../../packages/cms-feature-marketing
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -470,6 +482,9 @@ importers:
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
+      '@signalco/tailwindcss-config-signalco':
+        specifier: workspace:*
+        version: link:../../packages/tailwindcss-config-signalco
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
@@ -506,6 +521,12 @@ importers:
       sass:
         specifier: 1.69.5
         version: 1.69.5
+      tailwindcss:
+        specifier: 3.4.0
+        version: 3.4.0
+      tailwindcss-animate:
+        specifier: 1.0.7
+        version: 1.0.7(tailwindcss@3.4.0)
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -708,6 +729,12 @@ importers:
       '@next/env':
         specifier: 14.0.4
         version: 14.0.4
+      '@signalco/cms-core':
+        specifier: workspace:*
+        version: link:../../packages/cms-core
+      '@signalco/cms-feature-marketing':
+        specifier: workspace:*
+        version: link:../../packages/cms-feature-marketing
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data

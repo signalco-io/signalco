@@ -8,6 +8,8 @@ export default {
         './app/**/*.{ts,tsx}',
         './components/**/*.{ts,tsx}',
         '../../packages/ui/src/**/*.{ts,tsx}',
-        '../../packages/ui-primitives/src/**/*.{ts,tsx}'
+        '../../packages/ui-primitives/src/**/*.{ts,tsx}',
+        '../../packages/cms-core/src/**/*.{ts,tsx}',
+        '../../packages/cms-feature-marketing/src/**/*.{ts,tsx}',
     ]
 }

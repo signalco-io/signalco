@@ -1,6 +1,6 @@
 'use client';
 
-import React, { PropsWithChildren, useCallback } from 'react';
+import React, { PropsWithChildren, memo, useCallback } from 'react';
 import NextImage from 'next/image';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Tooltip } from '@signalco/ui-primitives/Tooltip';
@@ -9,10 +9,15 @@ import { Link } from '@signalco/ui-primitives/Link';
 import { Divider } from '@signalco/ui-primitives/Divider';
 import { Container } from '@signalco/ui-primitives/Container';
 import { Card, CardContent, CardCover, CardOverflow } from '@signalco/ui-primitives/Card';
+import { CompanyGitHub, CompanyReddit, CompanyX } from '@signalco/ui-icons';
 import { Loadable } from '@signalco/ui/Loadable';
 import { orderBy, isImageDataUrl } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
+import { Footer1 } from '@signalco/cms-feature-marketing/Footer';
+import { SectionsView } from '@signalco/cms-core/SectionsView';
+import { SectionData } from '@signalco/cms-core/SectionData';
 import { usePromise } from '@enterwell/react-hooks';
+import { KnownPages } from '../../src/knownPages';
 import { ScreenshotResponse } from '../../app/api/screenshot/route';
 import { BrandResources } from '../../app/api/quick/route';
 
@@ -299,6 +304,41 @@ async function quickLookup(domain: string | undefined): Promise<BrandResources |
     return await fetch('/api/quick?domain=' + encodeURIComponent(domain)).then(res => res.json()).then(res => res as BrandResources);
 }
 
+const sectionsComponentRegistry = {
+    'Footer1': memo(Footer1)
+}
+
+const sectionsData: SectionData[] = [
+    {
+        component: 'Footer1',
+        tagline: 'BrandGrab',
+        features: [
+            {
+                header: 'Community',
+                ctas: [
+                    { label: 'r/signalco', href: 'https://www.reddit.com/r/signalco/' },
+                    { label: 'Discussions on GitHub', href: 'https://github.com/signalco-io/signalco/discussions' },
+                ]
+            },
+            {
+                header: 'Legal',
+                ctas: [
+                    { label: 'Privacy Policy', href: KnownPages.LegalPrivacyPolicy },
+                    { label: 'Terms of Service', href: KnownPages.LegalTermsOfService },
+                    { label: 'Cookie Policy', href: KnownPages.LegalCookiePolicy },
+                    { label: 'Acceptable Use Policy', href: KnownPages.LegalAcceptableUsePolicy },
+                    { label: 'SLA', href: KnownPages.LegalSla },
+                ]
+            }
+        ],
+        ctas: [
+            { label: 'X formerly known as Twitter', href: 'https://x.com/signalco_io', icon: <CompanyX /> },
+            { label: 'reddit', href: 'https://www.reddit.com/r/signalco/', icon: <CompanyReddit /> },
+            { label: 'GitHub', href: 'https://github.com/signalco-io/signalco', icon: <CompanyGitHub /> },
+        ]
+    }
+];
+
 export default function LandingPageView() {
     const [domain] = useSearchParam('domain');
 
@@ -307,6 +347,9 @@ export default function LandingPageView() {
             <Container maxWidth="md">
                 <BrandView domain={domain} />
             </Container>
+            <SectionsView
+                sectionsData={sectionsData}
+                componentsRegistry={sectionsComponentRegistry} />
         </Stack>
     );
 }

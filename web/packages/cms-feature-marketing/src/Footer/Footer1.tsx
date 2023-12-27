@@ -46,11 +46,9 @@ export function Footer1({ tagline, asset, features, ctas }: SectionData) {
                         </div>
                     )}
                     <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between">
-                        {asset && (
-                            <Stack className="items-center md:items-start" alignItems="center">
-                                {asset}
-                            </Stack>
-                        )}
+                        <Stack className="items-center md:items-start" alignItems="center">
+                            {asset}
+                        </Stack>
                         <Ctas2 ctas={ctas} />
                     </div>
                     <Divider />
