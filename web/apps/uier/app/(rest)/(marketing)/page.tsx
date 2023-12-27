@@ -1,16 +1,20 @@
+import { ExoticComponent, memo } from 'react';
 import { Heading1 } from '@signalco/cms-feature-marketing/Heading';
 import { Footer1 } from '@signalco/cms-feature-marketing/Footer';
+import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { type SectionData } from '@signalco/cms-core/SectionData';
 import { KnownPages } from '../../../src/knownPages';
 
 const data: SectionData[] = [
     {
+        component: 'Heading1',
         header: 'uier',
         ctas: [
             { label: 'Get Started', href: KnownPages.App },
         ]
     },
     {
+        component: 'Footer1',
         features: [
             {
                 header: 'Product',
@@ -43,20 +47,17 @@ const data: SectionData[] = [
     }
 ];
 
-const sections = [
-    Heading1,
-    Footer1
-];
+const sectionComponents: { [key: string]: ExoticComponent<SectionData> } = {
+    'Heading1': memo(Heading1),
+    'Footer1': memo(Footer1)
+};
 
 export default function LandingPage() {
     return (
         <main>
-            {sections.map((Section, index) => {
-                const sectionData = data[index];
-                return (
-                    <Section key={index} {...sectionData} />
-                );
-            })}
+            <SectionsView
+                sectionsData={data}
+                componentsRegistry={sectionComponents} />
         </main>
     );
 }

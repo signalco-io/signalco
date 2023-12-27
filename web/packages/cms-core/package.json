@@ -12,6 +12,8 @@
     },
     "devDependencies": {
         "@signalco/eslint-config-signalco": "workspace:*",
+        "@signalco/ui-primitives": "workspace:*",
+        "@signalco/ui-icons": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/react": "18.2.45",

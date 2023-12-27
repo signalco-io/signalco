@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 export type SectionData = {
+    component?: string;
     tagline?: string;
     header?: string;
     description?: string;
