@@ -8,14 +8,18 @@ import { cx } from '@signalco/ui-primitives/cx';
 import { JsonResponse } from '@signalco/js';
 import { usePromise } from '@enterwell/react-hooks';
 
-export async function fetchSystemStatus() {
-    const response = await fetch('https://api.checklyhq.com/v1/status-page/103507/statuses?page=1&limit=99');
+export async function fetchChecklySystemStatus(pageId: number) {
+    const response = await fetch(`https://api.checklyhq.com/v1/status-page/${pageId}/statuses?page=1&limit=99`);
     const responseJson = await response.json();
     return (responseJson as JsonResponse<{ summary: { totalFailing: number, totalDegraded: number } }>)?.summary;
 }
 
+function fetchChecklySignalcoSystemStatus() {
+    return fetchChecklySystemStatus(103507);
+}
+
 export function SystemStatusLabel() {
-    const { item } = usePromise(fetchSystemStatus);
+    const { item } = usePromise(fetchChecklySignalcoSystemStatus);
 
     let status: 'operational' | 'major' | 'partial' | 'degraded' = 'operational';
     let statusText = 'All systems operational';

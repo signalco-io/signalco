@@ -24,6 +24,8 @@
         "@reactflow/background": "11.3.6",
         "@reactflow/controls": "11.2.6",
         "@reactflow/core": "11.10.1",
+        "@signalco/cms-core": "workspace:*",
+        "@signalco/cms-feature-marketing": "workspace:*",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
