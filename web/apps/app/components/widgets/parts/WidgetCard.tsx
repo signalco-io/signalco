@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
@@ -37,8 +37,6 @@ export default function WidgetCard(props: IWidgetCardProps) {
 
     const width = (config as CardConfig)?.columns || 2;
     const height = (config as CardConfig)?.rows || 2;
-    const sizeWidth = width * 78 + (width - 1) * 8;
-    const sizeHeight = height * 78 + (height - 1) * 8;
 
     const isLoading = typeof options === 'undefined';
     const needsConfiguration = typeof options === 'undefined' || options == null || !IsConfigurationValid(config, options);
@@ -63,17 +61,11 @@ export default function WidgetCard(props: IWidgetCardProps) {
 
     return (
         <>
-            <Card
-                className="relative overflow-hidden"
+            <Card className="relative h-[--widget-instance-h] w-[--widget-instance-w] overflow-hidden p-0"
                 style={{
-                    width: `${sizeWidth}px`,
-                    height: `${sizeHeight}px`
-                }}>
-                <CardOverflow
-                    style={{
-                        width: `${sizeWidth}px`,
-                        height: `${sizeHeight}px`
-                    }}>
+                    '--widget-instance-w': `calc(var(--widget-size)*${width}-${width}*2px)`,
+                    '--widget-instance-h': `calc(var(--widget-size)*${height})`,
+                } as CSSProperties}>
                     {(!isLoading && needsConfiguration) ? (
                         <Stack justifyContent="stretch" className="h-full">
                             <Button disabled={!isEditMode} size="lg" fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
@@ -101,8 +93,7 @@ export default function WidgetCard(props: IWidgetCardProps) {
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
-                    )}
-                </CardOverflow>
+                )}
             </Card>
             {(isConfiguring && options) &&
                 <WidgetConfiguration
