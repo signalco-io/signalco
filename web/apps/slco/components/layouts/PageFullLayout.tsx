@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { CompanyGitHub, CompanyReddit, CompanyX } from '@signalco/ui-icons';
-import { Footer1 } from '@signalco/cms-feature-marketing/Footer';
 import { SectionData } from '@signalco/cms-core/SectionData';
+import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { PageNav } from '../PageNav';
 import { KnownPages } from '../../src/knownPages';
 

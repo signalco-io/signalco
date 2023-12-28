@@ -6,7 +6,7 @@ import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Card, CardContent, CardTitle } from '@signalco/ui-primitives/Card';
 import { CompanyGitHub, CompanyReddit, CompanyX } from '@signalco/ui-icons';
-import { Footer1 } from '@signalco/cms-feature-marketing/Footer';
+import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { SectionData } from '@signalco/cms-core/SectionData';
 import PageCenterHeader from '../pages/PageCenterHeader';

@@ -9,6 +9,6 @@ export default {
         './components/**/*.{ts,tsx}',
         '../../packages/ui/src/**/*.{ts,tsx}',
         '../../packages/ui-primitives/src/**/*.{ts,tsx}',
-        '../../packages/cms-feature-marketing/src/**/*.{ts,tsx}',
+        '../../packages/cms-components-marketing/src/**/*.{ts,tsx}',
     ]
 }

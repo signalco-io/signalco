@@ -10,6 +10,6 @@ export default {
         '../../packages/ui/src/**/*.{ts,tsx}',
         '../../packages/ui-primitives/src/**/*.{ts,tsx}',
         '../../packages/cms-core/src/**/*.{ts,tsx}',
-        '../../packages/cms-feature-marketing/src/**/*.{ts,tsx}',
+        '../../packages/cms-components-marketing/src/**/*.{ts,tsx}',
     ]
 }
