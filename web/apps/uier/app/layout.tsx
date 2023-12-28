@@ -3,8 +3,8 @@ import { Inter } from 'next/font/google';
 import { Metadata, Viewport } from 'next';
 import './global.css';
 import { Analytics } from '@vercel/analytics/react';
-import { ClientProvider } from '../components/providers/ClientProvider';
-import { AuthProvider } from '../components/providers/AuthProvider';
+import { ClientProvider } from '../src/components/providers/ClientProvider';
+import { AuthProvider } from '../src/components/providers/AuthProvider';
 
 const inter = Inter({
     subsets: ['latin'],

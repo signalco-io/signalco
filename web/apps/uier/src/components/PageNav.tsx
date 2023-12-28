@@ -2,7 +2,7 @@ import { Row } from '@signalco/ui-primitives/Row';
 import { Link } from '@signalco/ui-primitives/Link';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Container } from '@signalco/ui-primitives/Container';
-import { KnownPages } from '../src/knownPages';
+import { KnownPages } from '../knownPages';
 import { NavMenu } from './NavMenu';
 
 export function PageNav({ fullWidth }: { fullWidth?: boolean }) {

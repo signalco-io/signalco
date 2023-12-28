@@ -32,7 +32,7 @@
     "@next/env": "14.0.4",
     "@planetscale/database": "1.13.0",
     "@signalco/cms-core": "workspace:*",
-    "@signalco/cms-feature-marketing": "workspace:*",
+    "@signalco/cms-components-marketing": "workspace:*",
     "@signalco/data": "workspace:*",
     "@signalco/hooks": "workspace:*",
     "@signalco/js": "workspace:*",

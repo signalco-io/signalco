@@ -273,12 +273,12 @@ importers:
       '@next/mdx':
         specifier: 14.0.4
         version: 14.0.4(@mdx-js/loader@3.0.0)(@mdx-js/react@3.0.0)
+      '@signalco/cms-components-marketing':
+        specifier: workspace:*
+        version: link:../../packages/cms-components-marketing
       '@signalco/cms-core':
         specifier: workspace:*
         version: link:../../packages/cms-core
-      '@signalco/cms-feature-marketing':
-        specifier: workspace:*
-        version: link:../../packages/cms-feature-marketing
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -418,12 +418,12 @@ importers:
       '@next/env':
         specifier: 14.0.4
         version: 14.0.4
+      '@signalco/cms-components-marketing':
+        specifier: workspace:*
+        version: link:../../packages/cms-components-marketing
       '@signalco/cms-core':
         specifier: workspace:*
         version: link:../../packages/cms-core
-      '@signalco/cms-feature-marketing':
-        specifier: workspace:*
-        version: link:../../packages/cms-feature-marketing
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -569,12 +569,12 @@ importers:
       '@planetscale/database':
         specifier: 1.13.0
         version: 1.13.0
+      '@signalco/cms-components-marketing':
+        specifier: workspace:*
+        version: link:../../packages/cms-components-marketing
       '@signalco/cms-core':
         specifier: workspace:*
         version: link:../../packages/cms-core
-      '@signalco/cms-feature-marketing':
-        specifier: workspace:*
-        version: link:../../packages/cms-feature-marketing
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -729,12 +729,12 @@ importers:
       '@next/env':
         specifier: 14.0.4
         version: 14.0.4
+      '@signalco/cms-components-marketing':
+        specifier: workspace:*
+        version: link:../../packages/cms-components-marketing
       '@signalco/cms-core':
         specifier: workspace:*
         version: link:../../packages/cms-core
-      '@signalco/cms-feature-marketing':
-        specifier: workspace:*
-        version: link:../../packages/cms-feature-marketing
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -953,12 +953,12 @@ importers:
       '@next/env':
         specifier: 14.0.4
         version: 14.0.4
+      '@signalco/cms-components-marketing':
+        specifier: workspace:*
+        version: link:../../packages/cms-components-marketing
       '@signalco/cms-core':
         specifier: workspace:*
         version: link:../../packages/cms-core
-      '@signalco/cms-feature-marketing':
-        specifier: workspace:*
-        version: link:../../packages/cms-feature-marketing
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -1101,12 +1101,12 @@ importers:
       '@reactflow/core':
         specifier: 11.10.1
         version: 11.10.1(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
+      '@signalco/cms-components-marketing':
+        specifier: workspace:*
+        version: link:../../packages/cms-components-marketing
       '@signalco/cms-core':
         specifier: workspace:*
         version: link:../../packages/cms-core
-      '@signalco/cms-feature-marketing':
-        specifier: workspace:*
-        version: link:../../packages/cms-feature-marketing
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -1247,40 +1247,7 @@ importers:
         specifier: 5.3.3
         version: 5.3.3
 
-  packages/cms-core:
-    devDependencies:
-      '@signalco/eslint-config-signalco':
-        specifier: workspace:*
-        version: link:../eslint-config-signalco
-      '@signalco/tailwindcss-config-signalco':
-        specifier: workspace:*
-        version: link:../tailwindcss-config-signalco
-      '@signalco/tsconfig':
-        specifier: workspace:*
-        version: link:../tsconfig
-      '@signalco/ui-icons':
-        specifier: workspace:*
-        version: link:../ui-icons
-      '@signalco/ui-primitives':
-        specifier: workspace:*
-        version: link:../ui-primitives
-      '@types/react':
-        specifier: 18.2.45
-        version: 18.2.45
-      '@types/react-dom':
-        specifier: 18.2.18
-        version: 18.2.18
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: 18.2.0
-        version: 18.2.0(react@18.2.0)
-      typescript:
-        specifier: 5.3.3
-        version: 5.3.3
-
-  packages/cms-feature-marketing:
+  packages/cms-components-marketing:
     devDependencies:
       '@signalco/cms-core':
         specifier: workspace:*
@@ -1300,6 +1267,39 @@ importers:
       '@signalco/ui':
         specifier: workspace:*
         version: link:../ui
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../ui-primitives
+      '@types/react':
+        specifier: 18.2.45
+        version: 18.2.45
+      '@types/react-dom':
+        specifier: 18.2.18
+        version: 18.2.18
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      typescript:
+        specifier: 5.3.3
+        version: 5.3.3
+
+  packages/cms-core:
+    devDependencies:
+      '@signalco/eslint-config-signalco':
+        specifier: workspace:*
+        version: link:../eslint-config-signalco
+      '@signalco/tailwindcss-config-signalco':
+        specifier: workspace:*
+        version: link:../tailwindcss-config-signalco
+      '@signalco/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@signalco/ui-icons':
+        specifier: workspace:*
+        version: link:../ui-icons
       '@signalco/ui-primitives':
         specifier: workspace:*
         version: link:../ui-primitives

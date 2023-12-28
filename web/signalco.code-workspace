@@ -41,8 +41,8 @@
 			"path": "packages/cms-core"
 		},
 		{
-			"name": "📦 @signalco/cms-feature-marketing",
-			"path": "packages/cms-feature-marketing"
+			"name": "📦 @signalco/cms-components-marketing",
+			"path": "packages/cms-components-marketing"
 		},
 		{
 			"name": "📦 @signalco/data",

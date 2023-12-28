@@ -13,7 +13,7 @@ import { CompanyGitHub, CompanyReddit, CompanyX } from '@signalco/ui-icons';
 import { Loadable } from '@signalco/ui/Loadable';
 import { orderBy, isImageDataUrl } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
-import { Footer1 } from '@signalco/cms-feature-marketing/Footer';
+import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { SectionData } from '@signalco/cms-core/SectionData';
 import { usePromise } from '@enterwell/react-hooks';
