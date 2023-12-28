@@ -133,7 +133,7 @@ const up = async () => {
                 undefined,
                 currentStack,
                 false);
-            const funcPublish = await publishProjectAsync(`../../../discrete/Signalco.Discrete.Api.${funcName}/cloud`, 7);
+            const funcPublish = await publishProjectAsync(`../../../discrete/Signalco.Discrete.Api.${funcName}/cloud`);
             const funcCode = await assignFunctionCodeAsync(
                 discreteResourceGroup,
                 discreteStorage.storageAccount.storageAccount,

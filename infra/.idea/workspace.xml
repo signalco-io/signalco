@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5ac878d1-ee8c-4dc3-bcf1-93d4c830c5d6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signal.Api.Common/Signal.Api.Common.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signal.Api.Common/Signal.Api.Common.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signal.Core/Signal.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signal.Core/Signal.Core.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signal.Infrastructure.AzureDevOps/Signal.Infrastructure.AzureDevOps.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signal.Infrastructure.AzureDevOps/Signal.Infrastructure.AzureDevOps.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signal.Infrastructure.AzureSpeech/Signal.Infrastructure.AzureSpeech.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signal.Infrastructure.AzureSpeech/Signal.Infrastructure.AzureSpeech.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signal.Infrastructure.AzureStorage.Tables/Signal.Infrastructure.AzureStorage.Tables.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signal.Infrastructure.AzureStorage.Tables/Signal.Infrastructure.AzureStorage.Tables.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signal.Infrastructure.Secrets/Signal.Infrastructure.Secrets.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signal.Infrastructure.Secrets/Signal.Infrastructure.Secrets.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Api.Common.Health/Signalco.Api.Common.Health.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Api.Common.Health/Signalco.Api.Common.Health.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Api.Public.RemoteBrowser/Signalco.Api.Public.RemoteBrowser.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Api.Public.RemoteBrowser/Signalco.Api.Public.RemoteBrowser.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Api.Public/Signalco.Api.Public.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Api.Public/Signalco.Api.Public.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.GitHubApp/Signalco.Channel.GitHubApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.GitHubApp/Signalco.Channel.GitHubApp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.PhilipsHue/Signalco.Channel.PhilipsHue.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.PhilipsHue/Signalco.Channel.PhilipsHue.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.Samsung/Signalco.Channel.Samsung.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.Samsung/Signalco.Channel.Samsung.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.Slack/Signalco.Channel.Slack.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.Slack/Signalco.Channel.Slack.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.Station/Signalco.Channel.Station.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.Station/Signalco.Channel.Station.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.Zigbee2Mqtt/Signalco.Channel.Zigbee2Mqtt.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.Zigbee2Mqtt/Signalco.Channel.Zigbee2Mqtt.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.iRobot/Signalco.Channel.iRobot.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Channel.iRobot/Signalco.Channel.iRobot.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Common.Channel/Signalco.Common.Channel.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Common.Channel/Signalco.Common.Channel.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Func.Internal.ContactStateProcessor/Signalco.Func.Internal.ContactStateProcessor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Func.Internal.ContactStateProcessor/Signalco.Func.Internal.ContactStateProcessor.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Func.Internal.Maintenance/Signalco.Func.Internal.Maintenance.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Func.Internal.Maintenance/Signalco.Func.Internal.Maintenance.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Func.Internal.Migration/Signalco.Func.Internal.Migration.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Func.Internal.Migration/Signalco.Func.Internal.Migration.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Func.Internal.TimeEntityPublic/Signalco.Func.Internal.TimeEntityPublic.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Func.Internal.TimeEntityPublic/Signalco.Func.Internal.TimeEntityPublic.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Func.Internal.UsageProcessor/Signalco.Func.Internal.UsageProcessor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Func.Internal.UsageProcessor/Signalco.Func.Internal.UsageProcessor.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Infrastructure.Processor.Tests/Signalco.Infrastructure.Processor.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Infrastructure.Processor.Tests/Signalco.Infrastructure.Processor.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cloud/src/Signalco.Infrastructure.Processor/Signalco.Infrastructure.Processor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../cloud/src/Signalco.Infrastructure.Processor/Signalco.Infrastructure.Processor.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/cloud-primary/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/cloud-primary/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/pulumi/src/azure/createFunction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/pulumi/src/azure/createFunction.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/pulumi/src/dotnet/publishProjectAsync.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/pulumi/src/dotnet/publishProjectAsync.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/blog/components/views/LandingView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/blog/components/views/LandingView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/blog/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/blog/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/blog/tailwind.config.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/blog/tailwind.config.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/brandgrab/components/views/LandingView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/brandgrab/components/views/LandingView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/brandgrab/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/brandgrab/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/brandgrab/tailwind.config.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/brandgrab/tailwind.config.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/doprocess/app/(rest)/(marketing)/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/doprocess/app/(rest)/(marketing)/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/doprocess/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/doprocess/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/doprocess/tailwind.config.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/doprocess/tailwind.config.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/slco/components/layouts/PageFullLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/slco/components/layouts/PageFullLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/slco/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/slco/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/slco/tailwind.config.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/slco/tailwind.config.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/uier/app/(rest)/(marketing)/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/uier/app/(rest)/(marketing)/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/uier/components/NavMenu.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/uier/components/PageNav.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/uier/components/providers/AuthProvider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/uier/components/providers/ClientProvider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/uier/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/uier/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/uier/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/uier/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/uier/tailwind.config.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/uier/tailwind.config.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/web/components/layouts/PageLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/web/components/layouts/PageLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/web/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/apps/web/tailwind.config.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/../web/apps/web/tailwind.config.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/.eslintrc.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/Description/Description1.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/Description/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/Faq/Faq1.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/Faq/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/Feature/Feature1.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/Feature/Feature2.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/Feature/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/Footer/Footer1.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/Footer/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/Heading/Heading1.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/Heading/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/Pricing/Pricing1.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/Pricing/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/containers/Section1.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/subcomponents/Ctas1.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/subcomponents/Ctas2.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/subcomponents/KeyFeature1.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/subcomponents/KeyFeature2.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/src/subcomponents/PricingCard1.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/tailwind.config.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/packages/cms-feature-marketing/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../web/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/signalco.code-workspace" beforeDir="false" afterPath="$PROJECT_DIR$/../web/signalco.code-workspace" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2aB364xLeuf04XEDGWF7OJdXXGe" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "next",
+    "last_opened_file_path": "/Users/aleks/Documents/GitHub/signalco/infra",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "pnpm",
+    "ts.external.directory.path": "/Users/aleks/Documents/GitHub/signalco/infra/apps/uier/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5ac878d1-ee8c-4dc3-bcf1-93d4c830c5d6" name="Changes" comment="" />
+      <created>1703777968392</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1703777968392</updated>
+      <workItem from="1703777969600" duration="482000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
