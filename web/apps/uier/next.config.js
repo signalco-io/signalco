@@ -21,13 +21,13 @@ const nextConfig = {
         domains: ['uier.io']
     },
     eslint: {
-        dirs: ['worker', 'tools', 'src', 'app', 'locales', 'components']
+        dirs: ['src', 'app', 'locales']
     },
     async headers() {
         return [{
             source: '/(.*)',
             headers: createSecureHeaders(combineSecureHeaders(
-                ['uier.io', 'uier.signalco.io', 'uier.signalco.dev'],
+                ['uier.io', 'next.uier.io'],
                 false,
                 isDevelopment,
                 [

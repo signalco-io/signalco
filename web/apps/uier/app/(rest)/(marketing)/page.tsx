@@ -1,8 +1,8 @@
 import { ExoticComponent, memo } from 'react';
-import { Heading1 } from '@signalco/cms-feature-marketing/Heading';
-import { Footer1 } from '@signalco/cms-feature-marketing/Footer';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { type SectionData } from '@signalco/cms-core/SectionData';
+import { Heading1 } from '@signalco/cms-components-marketing/Heading';
+import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { KnownPages } from '../../../src/knownPages';
 
 const data: SectionData[] = [

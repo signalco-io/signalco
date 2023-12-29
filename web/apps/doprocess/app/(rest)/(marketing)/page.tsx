@@ -1,12 +1,12 @@
 import { memo } from 'react';
 import { Check, CompanyGitHub, CompanyReddit, CompanyX } from '@signalco/ui-icons';
-import { Pricing1 } from '@signalco/cms-feature-marketing/Pricing';
-import { Heading1 } from '@signalco/cms-feature-marketing/Heading';
-import { Footer1 } from '@signalco/cms-feature-marketing/Footer';
-import { Feature2, Feature1 } from '@signalco/cms-feature-marketing/Feature';
-import { Faq1 } from '@signalco/cms-feature-marketing/Faq';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { type SectionData } from '@signalco/cms-core/SectionData';
+import { Pricing1 } from '@signalco/cms-components-marketing/Pricing';
+import { Heading1 } from '@signalco/cms-components-marketing/Heading';
+import { Footer1 } from '@signalco/cms-components-marketing/Footer';
+import { Feature2, Feature1 } from '@signalco/cms-components-marketing/Feature';
+import { Faq1 } from '@signalco/cms-components-marketing/Faq';
 import { KnownPages } from '../../../src/knownPages';
 import DoProcessLogo from '../../../components/brand/DoProcessLogo';
 

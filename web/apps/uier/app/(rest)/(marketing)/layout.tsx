@@ -1,5 +1,5 @@
 import { Container } from '@signalco/ui-primitives/Container';
-import { PageNav } from '../../../components/PageNav';
+import { PageNav } from '../../../src/components/PageNav';
 
 export default function RootMarketingLayout({ children, }: {
     children: React.ReactNode;
