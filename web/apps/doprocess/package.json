@@ -46,7 +46,7 @@
     "@tanstack/react-query-devtools": "5.17.0",
     "@vercel/analytics": "1.1.1",
     "classix": "2.1.35",
-    "drizzle-orm": "0.29.2",
+    "drizzle-orm": "0.29.3",
     "nanoid": "5.0.4",
     "next": "14.0.4",
     "next-secure-headers": "2.2.0",
