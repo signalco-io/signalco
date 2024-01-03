@@ -24,7 +24,7 @@ const Stack = forwardRef<HTMLDivElement, StackProps>(({ spacing, alignItems, jus
                 justifyContent === 'stretch' && 'justify-stretch',
                 className)}
             style={{
-                '--s-gap': `${(spacing ?? 0) * 8}px`,
+                '--s-gap': `${(spacing ?? 0) * 0.5}rem`,
                 ...style
             } as CSSProperties}
             {...props}

@@ -1,17 +1,20 @@
+import { CSSProperties } from 'react';
 import { cx } from '@signalco/ui-primitives/cx';
 
-export default function FanVisual(props: { state: boolean, size: number }) {
-    const isActive = props.state;
+export default function FanVisual({ size, state }: { state: boolean, size?: number }) {
+    const isActive = state;
 
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
             className={cx(
-                'mb-5 mt-0.5 -ml-1',
-                isActive && 'animate-spin [animation-direction:reverse] [animation-duration:5s] [transform-origin:41px_47px]'
+                'mt-2 [&_*]:transition-all',
+                isActive && 'animate-spin [animation-direction:reverse] [animation-duration:5s] [transform-origin:41px_47px]',
+                Boolean(size) ? 'w-[--visual-size] h-[--visual-size]' : 'w-full h-full'
             )}
-            width={props.size * 1.2}
-            height={props.size * 1.2}
+            style={{
+                '--visual-size': size ? `${size}px` : undefined
+            } as CSSProperties}
             fill="none"
             viewBox="0 0 72 72"
         >
