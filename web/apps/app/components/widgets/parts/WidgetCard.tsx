@@ -63,8 +63,8 @@ export default function WidgetCard(props: IWidgetCardProps) {
         <>
             <Card className="relative h-[--widget-instance-h] w-[--widget-instance-w] overflow-hidden p-0"
                 style={{
-                    '--widget-instance-w': `calc(var(--widget-size)*${width}-${width}*2px)`,
-                    '--widget-instance-h': `calc(var(--widget-size)*${height})`,
+                    '--widget-instance-w': `calc(${width} * var(--widget-size) + ${0.5 * (width - 1)}rem)`,
+                    '--widget-instance-h': `calc(${height} * var(--widget-size) + ${0.5 * (height - 1)}rem)`,
                 } as CSSProperties}>
                     {(!isLoading && needsConfiguration) ? (
                         <Stack justifyContent="stretch" className="h-full">
