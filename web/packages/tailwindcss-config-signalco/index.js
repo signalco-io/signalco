@@ -91,11 +91,11 @@ export const appBaseConfig = {
             '2xl': [`${1.5 * appFontCoef}rem`, { lineHeight: `${2 * appFontCoef}rem` }],
             '3xl': [`${1.875 * appFontCoef}rem`, { lineHeight: `${2.25 * appFontCoef}rem` }],
             '4xl': [`${2.25 * appFontCoef}rem`, { lineHeight: `${2.5 * appFontCoef}rem` }],
-            '5xl': [`${3 * appFontCoef}rem`, { lineHeight: `${1 * appFontCoef}rem` }],
-            '6xl': [`${3.75 * appFontCoef}rem`, { lineHeight: `${1 * appFontCoef}rem` }],
-            '7xl': [`${4.5 * appFontCoef}rem`, { lineHeight: `${1 * appFontCoef}rem` }],
-            '8xl': [`${6 * appFontCoef}rem`, { lineHeight: `${1 * appFontCoef}rem` }],
-            '9xl': [`${8 * appFontCoef}rem`, { lineHeight: `${1 * appFontCoef}rem` }],
+            '5xl': [`${3 * appFontCoef}rem`, { lineHeight: '1' }],
+            '6xl': [`${3.75 * appFontCoef}rem`, { lineHeight: '1' }],
+            '7xl': [`${4.5 * appFontCoef}rem`, { lineHeight: '1' }],
+            '8xl': [`${6 * appFontCoef}rem`, { lineHeight: '1' }],
+            '9xl': [`${8 * appFontCoef}rem`, { lineHeight: '1' }],
         }
     }
 };
