@@ -153,13 +153,11 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
             onClick={handleStateChangeRequest}
             variant="plain"
             className="m-0 h-full w-full !items-start !justify-start p-0 text-start">
-            <Stack className="h-full pb-4 pt-2 pl-1">
-                <div className="px-2">
-                    <Visual state={state} size={68} />
+            <Stack className="relative h-full w-full items-start p-2">
+                <div className="grow">
+                    <Visual state={state} size={80} />
                 </div>
-                <div className="px-2">
-                    <Typography semiBold noWrap>{label}</Typography>
-                </div>
+                <Typography semiBold noWrap>{label}</Typography>
             </Stack>
             {isLoading && (
                 <div className="absolute right-4 top-4">
