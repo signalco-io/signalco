@@ -66,18 +66,19 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
     }
 
     const WidgetComponent = isEditing ? DragableWidget : DisplayWidget;
-    const widgetSize = 1 + 76 + 1 + 8; // Default widget is 76x76 + 2px for border + 8 spacing between widgets (2x4px)
-    const numberOfColumns = Math.max(4, Math.floor(windowInnerWidth / widgetSize)); // When width is less than 400, set to quad column
-    const dynamicWidgetSize = windowInnerWidth / numberOfColumns;
+    const widgetSize = 1 + 64 + 1 + 4; // Default widget is 64x64 + 2px for border + 8 spacing between widgets (2x4px)
+    const dashboardWidth = windowInnerWidth;
+    const numberOfColumns = Math.max(2, Math.floor(dashboardWidth / widgetSize));
+    const dynamicWidgetSize = `calc((${dashboardWidth}px - ${(numberOfColumns - 1) * 0.5}rem) / ${numberOfColumns})`;
 
     return (
         <div ref={resizeObserverRef}>
             <div
-                className="grid-rows-[repeat(auto-fill,--widget-size)]] grid w-[--dashboard-w] grid-cols-[repeat(var(--dashboard-cols),1fr)] gap-2"
+                className="grid-rows-[repeat(auto-fill,var(--widget-size))]] grid w-[--dashboard-w] grid-cols-[repeat(auto-fill,var(--widget-size))] gap-2"
                 style={{
                     '--dashboard-cols': numberOfColumns,
-                    '--dashboard-w': `${dynamicWidgetSize * numberOfColumns}px`,
-                    '--widget-size': `${dynamicWidgetSize}px`
+                    '--dashboard-w': `${dashboardWidth}px`,
+                    '--widget-size': `${dynamicWidgetSize}`
                 } as CSSProperties}
             >
                 <GridWrapper isEditing={isEditing} order={widgetsOrder} orderChanged={handleOrderChanged}>

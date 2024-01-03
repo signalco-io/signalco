@@ -104,7 +104,7 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
             {columns > 1 && (
                 <div className="h-full">
                     <Stack
-                        className="h-full py-4 pl-5 pr-4"
+                        className="h-full pb-4 pl-5 pr-4 pt-2"
                         justifyContent={columns > 2 ? 'space-between' : 'center'}>
                         <WindowVisual shadePerc={1 - shadePerc} size={68} />
                         {columns > 2 && <Typography semiBold noWrap>{label}</Typography>}
