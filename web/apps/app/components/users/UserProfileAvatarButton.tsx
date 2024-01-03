@@ -10,7 +10,7 @@ const UserProfileAvatarButton = forwardRef<HTMLButtonElement>((props, ref) => {
     const user = useCurrentUser();
 
     return (
-        <Button variant="plain" className="relative py-6" ref={ref} {...props}>
+        <Button variant="plain" className="relative rounded-full p-0" ref={ref} {...props}>
             <UserAvatar user={user} />
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2">
                 <ApiBadge />
