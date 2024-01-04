@@ -41,6 +41,7 @@ export interface IDashboardModel {
     widgets: IWidget[];
     sharedWith: IUser[];
     order: number;
+    background?: string | undefined;
 
     get configurationSerialized() : string;
 }
@@ -53,6 +54,7 @@ class DashboardModel implements IDashboardModel {
     sharedWith: IUser[];
     order: number;
     timeStamp: Date | undefined;
+    background?: string | undefined;
 
     constructor(
         id: string,
@@ -60,7 +62,8 @@ class DashboardModel implements IDashboardModel {
         sharedWith: IUser[],
         isFavorite: boolean | undefined,
         timeStamp: Date | undefined,
-        order: number) {
+        order: number,
+        background: string | undefined) {
         this.id = id;
         this.name = name;
         this.isFavorite = isFavorite ?? false;
@@ -68,26 +71,33 @@ class DashboardModel implements IDashboardModel {
         this.sharedWith = sharedWith;
         this.timeStamp = timeStamp;
         this.order = order;
+        this.background = background;
     }
 
     public get configurationSerialized() : string {
         return JSON.stringify({
-            widgets: this.widgets
+            widgets: this.widgets,
+            background: this.background
         });
     }
 }
 
 export function dashboardModelFromEntity(entity: IEntityDetails, order: number, favorites: string[]): IDashboardModel {
+    const configurationSerializedContact = entity.contacts.find(c => c.channelName === 'config' && c.contactName === 'configuration');
+    const configurationSerialized = configurationSerializedContact?.valueSerialized;
+
+    const dashboardBackground = configurationSerialized != null
+        ? (objectWithKey(JSON.parse(configurationSerialized), 'background')?.background ?? undefined) as (string | undefined)
+        : undefined;
+
     const dashboard = new DashboardModel(
         entity.id,
         entity.alias,
         entity.sharedWith,
         favorites.indexOf(entity.id) >= 0,
         entity.timeStamp,
-        order);
-
-    const configurationSerializedContact = entity.contacts.find(c => c.channelName === 'config' && c.contactName === 'configuration');
-    const configurationSerialized = configurationSerializedContact?.valueSerialized
+        order,
+        dashboardBackground);
 
     dashboard.widgets = (configurationSerialized != null
         ? (objectWithKey(JSON.parse(configurationSerialized), 'widgets')?.widgets ?? []) as Array<IWidget> // TODO: Construct models

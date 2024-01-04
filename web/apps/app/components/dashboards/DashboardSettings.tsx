@@ -10,16 +10,18 @@ import useLocale from '../../src/hooks/useLocale';
 import useSaveDashboard from '../../src/hooks/dashboards/useSaveDashboard';
 import useDeleteDashboard from '../../src/hooks/dashboards/useDeleteDashboard';
 import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
+import { BackgroundSelector } from './BackgroundSelector';
 
 interface IDashboardSettingsProps {
     isOpen: boolean,
-    dashboard?: IDashboardModel,
+    dashboard: IDashboardModel,
     onClose: () => void,
 }
 
 function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsProps) {
     const { t } = useLocale('App', 'Dashboards');
     const [name, setName] = useState(dashboard?.name || '');
+    const [background, setBackground] = useState(dashboard?.background);
     const [, setDashboardId] = useSearchParam('dashboard');
     const saveDashboard = useSaveDashboard();
     const deleteDashboard = useDeleteDashboard();
@@ -27,7 +29,11 @@ function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsPro
     const handleSave = async () => {
         saveDashboard.mutate({
             ...dashboard,
-            name: name
+            name,
+            configurationSerialized: JSON.stringify({
+                ...(JSON.parse(dashboard?.configurationSerialized || '{}') as object),
+                background
+            })
         });
         onClose();
     }
@@ -62,8 +68,12 @@ function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsPro
                     label={t('DashboardSettingName')}
                     value={name}
                     onChange={(e) => setName(e.target.value ?? '')} />
+                <Stack spacing={2}>
+                    <Typography level="body2" semiBold>{t('Background')}</Typography>
+                    <BackgroundSelector value={background} onChange={setBackground} />
+                </Stack>
                 <Stack spacing={1}>
-                    <Typography level="body2">{t('Advanced')}</Typography>
+                    <Typography level="body2" semiBold>{t('Advanced')}</Typography>
                     <ConfirmDeleteButton
                         buttonLabel={t('DeleteButtonLabel')}
                         header={t('DeleteTitle')}

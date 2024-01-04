@@ -7,5 +7,5 @@ export default function useDashboard(id?: string): Omit<ReturnType<typeof useDas
     return useMemo(() => ({
         ...dashboards,
         data: dashboards.data?.find(d => d.id === id)
-    }), [dashboards]);
+    }), [dashboards, id]);
 }
