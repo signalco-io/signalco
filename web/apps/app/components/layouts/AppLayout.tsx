@@ -28,7 +28,7 @@ export function AppLayout(props: React.PropsWithChildren) {
                     )}
                     <div className={cx(
                         'relative w-full grow overflow-hidden',
-                        isFullScreen ? '' : 'mt-[70px] sm:ml-[82px] sm:mt-0'
+                        isFullScreen ? '' : 'mt-[70px] sm:ml-[66px] sm:mt-0'
                     )}>
                         <Stack>
                             <div className="hidden p-2 sm:block">

@@ -1,11 +1,13 @@
 import React, { useMemo, useState } from 'react';
-import dynamic from 'next/dynamic'
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
 import { Loadable } from '@signalco/ui/Loadable';
 import { WidgetSharedProps } from '../Widget';
+import TvVisual from '../../icons/TvVisual';
+import LightBulbVisual from '../../icons/LightBulbVisual';
+import FanVisual from '../../icons/FanVisual';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
@@ -31,10 +33,6 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     { ...DefaultTargetWithValueMultiple, name: 'off', label: 'Off' },
     { name: 'visual', label: 'Visual', type: 'selectVisual', default: 'lightbulb' },
 ];
-
-const TvVisual = dynamic(() => import('../../icons/TvVisual'));
-const LightBulbVisual = dynamic(() => import('../../icons/LightBulbVisual'));
-const FanVisual = dynamic(() => import('../../icons/FanVisual'));
 
 export type StateAction = IContactPointer & {
     valueSerialized?: string,
