@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
 import { Loadable } from '@signalco/ui/Loadable';
@@ -21,6 +22,51 @@ import DashboardView from './DashboardView';
 import DashboardSettings from './DashboardSettings';
 
 const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
+
+export const spaceBackgroundGradients: Record<string, string> = {
+    blue: 'linear-gradient( 109.6deg,  rgba(0,51,102,1) 11.2%, #bbb 91.1% )',
+    blue2: 'radial-gradient( circle farthest-corner at 1.8% 4.8%,  rgba(17,23,58,1) 0%, rgba(58,85,148,1) 90% )',
+    purple: 'radial-gradient( circle farthest-corner at 10% 20%,  rgba(100,43,115,1) 0%, rgba(4,0,4,1) 90% )',
+    redPurple: 'radial-gradient( circle farthest-corner at 48.4% 47.5%,  rgba(76,21,51,1) 0%, rgba(34,10,37,1) 90% )',
+    moonshine: 'radial-gradient( circle 815px at 23.4% -21.8%,  rgba(9,29,85,1) 0.2%, rgba(0,0,0,1) 100.2% )',
+    sunset: 'linear-gradient( 179deg,  rgba(0,0,0,1) 9.2%, rgba(127,16,16,1) 103.9% )',
+    silver: 'radial-gradient( circle farthest-corner at 10% 20%,  rgba(90,92,106,1) 0%, rgba(32,45,58,1) 81.3% )',
+    softGreen: 'radial-gradient( circle farthest-corner at 10% 20%,  rgba(176,229,208,1) 42%, rgba(92,202,238,0.41) 93.6% )',
+    darkGreen: 'radial-gradient( circle farthest-corner at 10% 20%,  rgba(14,174,87,1) 0%, rgba(12,116,117,1) 90% )',
+    softPink: 'radial-gradient( circle 879px at 10.4% 22.3%,  rgba(255,235,238,1) 0%, rgba(186,190,245,1) 93.6% )'
+}
+
+function SpaceBackground({ background }: { background?: string }) {
+    const [currentGradient, setCurrentGradient] = useState<string | undefined>(undefined);
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setCurrentGradient(background);
+        }, 500);
+        return () => clearTimeout(timeoutId);
+    }, [background]);
+
+    return (
+        <>
+            {(background && background !== currentGradient) && (
+                <div
+                    className="pointer-events-none fixed inset-0 -z-50 h-full w-full"
+                    style={{
+                        backgroundImage: spaceBackgroundGradients[background]
+                    }} />
+            )}
+            <div
+                className={cx(
+                    'pointer-events-none fixed inset-0 -z-50 h-full w-full',
+                    background !== currentGradient && 'opacity-0 transition-opacity duration-500',
+                    !currentGradient && 'bg-background'
+                )}
+                style={{
+                    backgroundImage: currentGradient ? spaceBackgroundGradients[currentGradient] : undefined
+                }} />
+        </>
+    );
+}
 
 function Dashboards() {
     const { t } = useLocale('App', 'Dashboards');
@@ -83,6 +129,7 @@ function Dashboards() {
 
     return (
         <>
+            <SpaceBackground background={selectedDashboard.data?.background} />
             {isEditing && (
                 <>
                     <SpacesEditingBackground />
@@ -120,10 +167,12 @@ function Dashboards() {
                     </div>
                 </Loadable>
             </Stack>
-            <DashboardSettings
-                dashboard={selectedDashboard.data}
-                isOpen={isDashboardSettingsOpen}
-                onClose={() => setIsDashboardSettingsOpen(undefined)} />
+            {selectedDashboard.data && (
+                <DashboardSettings
+                    dashboard={selectedDashboard.data}
+                    isOpen={isDashboardSettingsOpen}
+                    onClose={() => setIsDashboardSettingsOpen(undefined)} />
+            )}
             <ConfigurationDialog open={showWidgetStore} onClose={() => setShowWidgetStore(false)} header={t('WidgetsStore')}>
                 <WidgetStoreDynamic onAddWidget={handleAddWidget} />
             </ConfigurationDialog>

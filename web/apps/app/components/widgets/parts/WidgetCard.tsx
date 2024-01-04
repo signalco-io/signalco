@@ -61,7 +61,7 @@ export default function WidgetCard(props: IWidgetCardProps) {
 
     return (
         <>
-            <Card className="relative h-[--widget-instance-h] w-[--widget-instance-w] overflow-hidden p-0"
+            <Card className="relative h-[--widget-instance-h] w-[--widget-instance-w] overflow-hidden border border-border/70 bg-card/80 p-0 shadow-md backdrop-blur-md"
                 style={{
                     '--widget-instance-w': `calc(${width} * var(--widget-size) + ${0.5 * (width - 1)}rem)`,
                     '--widget-instance-h': `calc(${height} * var(--widget-size) + ${0.5 * (height - 1)}rem)`,

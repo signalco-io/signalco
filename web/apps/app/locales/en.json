@@ -159,6 +159,7 @@
             "Cancel": "Cancel",
             "SaveChanges": "Save changes",
             "Advanced": "Advanced",
+            "Background": "Background",
             "DeleteButtonLabel": "Delete...",
             "DeleteTitle": "Delete dashboard",
             "ConfirmDialogExpectedText": "confirm",
