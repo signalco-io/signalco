@@ -39,4 +39,5 @@ export type CommentItem = {
 
 export type CommentsGlobalProps = {
     reviewParamKey?: string;
+    rootElement?: HTMLElement;
 }

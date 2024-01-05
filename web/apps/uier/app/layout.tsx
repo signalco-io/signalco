@@ -21,7 +21,7 @@ export default function RootLayout({ children, }: {
                     <ClientProvider>
                         {children}
                         <Analytics />
-                        <Script src="http://localhost:5500/index.js" />
+                        <Script src="http://localhost:4005/index.js" />
                     </ClientProvider>
                 </AuthProvider>
             </body>

@@ -32,7 +32,7 @@ const nextConfig = {
                 isDevelopment,
                 [
                     knownSecureHeadersExternalUrls.vercel,
-                    { scriptSrc: 'http://localhost:5500', styleSrc: 'http://localhost:5500' },
+                    { scriptSrc: 'http://localhost:4005', styleSrc: 'http://localhost:4005' },
                 ]
             ))
         }];

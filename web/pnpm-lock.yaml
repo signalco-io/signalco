@@ -1656,27 +1656,6 @@ importers:
       '@enterwell/react-hooks':
         specifier: 0.4.1
         version: 0.4.1(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-checkbox':
-        specifier: 1.0.4
-        version: 1.0.4(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-dialog':
-        specifier: 1.0.5
-        version: 1.0.5(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-dropdown-menu':
-        specifier: 2.0.6
-        version: 2.0.6(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-menubar':
-        specifier: 1.0.4
-        version: 1.0.4(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-popover':
-        specifier: 1.0.7
-        version: 1.0.7(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-select':
-        specifier: 2.0.0
-        version: 2.0.0(@types/react-dom@18.2.18)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-slot':
-        specifier: 1.0.2
-        version: 1.0.2(@types/react@18.2.46)(react@18.2.0)
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../eslint-config-signalco
@@ -1710,15 +1689,9 @@ importers:
       '@types/react-dom':
         specifier: 18.2.18
         version: 18.2.18
-      '@types/react-timeago':
-        specifier: 4.1.7
-        version: 4.1.7
       autoprefixer:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.33)
-      classix:
-        specifier: 2.1.35
-        version: 2.1.35
       postcss:
         specifier: 8.4.33
         version: 8.4.33
@@ -1737,9 +1710,6 @@ importers:
       sass:
         specifier: 1.69.7
         version: 1.69.7
-      tailwind-merge:
-        specifier: 2.2.0
-        version: 2.2.0
       tailwindcss:
         specifier: 3.4.0
         version: 3.4.0

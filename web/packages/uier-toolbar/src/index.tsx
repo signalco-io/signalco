@@ -9,12 +9,12 @@ function MountOnPage() {
 
     const stylesheet = document.createElement('link');
     stylesheet.setAttribute('rel', 'stylesheet');
-    stylesheet.setAttribute('href', 'http://localhost:5500/index.css');
+    stylesheet.setAttribute('href', 'http://localhost:4005/index.css');
     shadowRoot.appendChild(stylesheet);
 
     document.body.appendChild(container);
     const root = createRoot(shadowRoot);
-    root.render(<CommentsBootstrapper />);
+    root.render(<CommentsBootstrapper rootElement={shadowRoot} />);
 }
 
 MountOnPage();
