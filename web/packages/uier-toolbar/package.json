@@ -4,16 +4,15 @@
     "private": true,
     "license": "MIT",
     "type": "module",
-    "sideEffects": false,
     "exports": {
         ".": "./dist/index.ts",
         "./index.css": "./dist/index.css"
     },
     "scripts": {
-        "dev:build": "tsup ./src/index.tsx --format esm --watch --env.NODE_ENV production",
+        "dev:build": "tsup --watch --env.NODE_ENV development",
         "dev:serve": "pnpm dlx serve dist -l 4005",
         "dev": "pnpm run /^dev:.*/",
-        "build": "tsup ./src/index.tsx --format esm --minify --env.NODE_ENV production",
+        "build": "tsup --minify --env.NODE_ENV production",
         "lint": "eslint ."
     },
     "devDependencies": {
@@ -28,6 +27,7 @@
         "@signalco/tsconfig": "workspace:*",
         "@types/react": "18.2.46",
         "@types/react-dom": "18.2.18",
+        "@types/node": "20.10.6",
         "autoprefixer": "10.4.16",
         "postcss": "8.4.33",
         "postcss-preset-env": "9.3.0",

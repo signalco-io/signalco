@@ -90,6 +90,7 @@ export function CommentBubble({
                             left: (lastRect?.right ?? 0) + 16,
                             top: (lastRect?.bottom ?? 0) + 16,
                             transform: 'translate(-50%, -50%)',
+                            willChange: 'left, top',
                             ...style
                         }}>
                         <CommentIcon className="hover:scale-110 hover:brightness-75" />
