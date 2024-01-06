@@ -90,8 +90,8 @@ importers:
         specifier: 5.17.1
         version: 5.17.1(@tanstack/react-query@5.17.1)(react@18.2.0)
       '@tanstack/react-query-persist-client':
-        specifier: 5.17.1
-        version: 5.17.1(@tanstack/react-query@5.17.1)(react@18.2.0)
+        specifier: 5.17.3
+        version: 5.17.3(@tanstack/react-query@5.17.1)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.1.1
         version: 1.1.1
@@ -162,11 +162,11 @@ importers:
         specifier: 1.9.0
         version: 1.9.0
       tailwindcss:
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.0)
+        version: 1.0.7(tailwindcss@3.4.1)
       uuid:
         specifier: 9.0.1
         version: 9.0.1
@@ -340,11 +340,11 @@ importers:
         specifier: 0.33.1
         version: 0.33.1
       tailwindcss:
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.0)
+        version: 1.0.7(tailwindcss@3.4.1)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.2
@@ -522,11 +522,11 @@ importers:
         specifier: 1.69.7
         version: 1.69.7
       tailwindcss:
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.0)
+        version: 1.0.7(tailwindcss@3.4.1)
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -648,11 +648,11 @@ importers:
         specifier: 0.33.1
         version: 0.33.1
       tailwindcss:
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.0)
+        version: 1.0.7(tailwindcss@3.4.1)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.2
@@ -775,11 +775,11 @@ importers:
         specifier: 0.33.1
         version: 0.33.1
       tailwindcss:
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.0)
+        version: 1.0.7(tailwindcss@3.4.1)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.2
@@ -933,11 +933,11 @@ importers:
         specifier: 5.1.2
         version: 5.1.2(@babel/core@7.23.7)(react@18.2.0)
       tailwindcss:
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.0)
+        version: 1.0.7(tailwindcss@3.4.1)
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -1014,11 +1014,11 @@ importers:
         specifier: 0.33.1
         version: 0.33.1
       tailwindcss:
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.0)
+        version: 1.0.7(tailwindcss@3.4.1)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.2
@@ -1168,11 +1168,11 @@ importers:
         specifier: 0.33.1
         version: 0.33.1
       tailwindcss:
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.0)
+        version: 1.0.7(tailwindcss@3.4.1)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.2
@@ -1353,7 +1353,7 @@ importers:
         version: 7.33.2(eslint@8.56.0)
       eslint-plugin-tailwindcss:
         specifier: 3.13.1
-        version: 3.13.1(tailwindcss@3.4.0)
+        version: 3.13.1(tailwindcss@3.4.1)
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -1418,11 +1418,11 @@ importers:
   packages/tailwindcss-config-signalco:
     dependencies:
       tailwindcss:
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.0)
+        version: 1.0.7(tailwindcss@3.4.1)
 
   packages/tsconfig: {}
 
@@ -1714,11 +1714,11 @@ importers:
         specifier: 1.69.7
         version: 1.69.7
       tailwindcss:
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.0)
+        version: 1.0.7(tailwindcss@3.4.1)
       tsup:
         specifier: 8.0.1
         version: 8.0.1(postcss@8.4.33)(typescript@5.3.3)
@@ -7737,6 +7737,10 @@ packages:
   /@tanstack/query-core@5.17.1:
     resolution: {integrity: sha512-kUXozQmU7NBtzX5dM6qfFNZN+YK/9Ct37hnG/ogdgI4mExIx7VH/qRepsPhKfNrJz2w81/JykmM3Uug6sVpUSw==}
 
+  /@tanstack/query-core@5.17.3:
+    resolution: {integrity: sha512-QCbOWxifjke/GR1jcDYoaoTZXBTGFivgUMXQ06EvCP7XoEfjzLGMAlPhdHMK+dMR6kQluhzwTQ+CnIGmhrM2JA==}
+    dev: false
+
   /@tanstack/query-devtools@5.17.1:
     resolution: {integrity: sha512-gNdt6PYzYlyjtSAoO8Jt9GIFq5VSLLDV2qq0TCi1t/PGnpAIlIHqNZGYkQTPsy0FyGUTX3pCq4bd7v5z/wzf3A==}
     dev: false
@@ -7745,6 +7749,12 @@ packages:
     resolution: {integrity: sha512-Eo3LkMmwoZf3zrtL3ZljXekuWSZPUZnLwGjr4naSKSHYTyeWNJzWlNxjxLO8JNEZGd4ZdDgvdJzqxCEnJOzQ2Q==}
     dependencies:
       '@tanstack/query-core': 5.17.1
+    dev: false
+
+  /@tanstack/query-persist-client-core@5.17.3:
+    resolution: {integrity: sha512-UzBw8sfyIYyumnb6ybENZRdL0CxCyXAshdG4D6CcL9f2taRIpvhAP9ySPnOj8V5TxiJh6RxxDis221Imap8JDg==}
+    dependencies:
+      '@tanstack/query-core': 5.17.3
     dev: false
 
   /@tanstack/query-sync-storage-persister@5.17.1:
@@ -7765,13 +7775,13 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@tanstack/react-query-persist-client@5.17.1(@tanstack/react-query@5.17.1)(react@18.2.0):
-    resolution: {integrity: sha512-b1+xOlMEanreYJXt9HKoBDSsjRTmmeudCeNRNMR5Epl5pIDWzFICpJxXIrfOBcNiqS3IVHSg3VsAu9mmR9ztYg==}
+  /@tanstack/react-query-persist-client@5.17.3(@tanstack/react-query@5.17.1)(react@18.2.0):
+    resolution: {integrity: sha512-V7XNMwHIJSTpXLEceN69rtn3LXf1+j377NUgcKfcgOwp9oXSepSyNBcMFTnoOSITnTt2NmYa6nwzM6T0ItCBKg==}
     peerDependencies:
-      '@tanstack/react-query': ^5.17.1
+      '@tanstack/react-query': ^5.17.3
       react: ^18.0.0
     dependencies:
-      '@tanstack/query-persist-client-core': 5.17.1
+      '@tanstack/query-persist-client-core': 5.17.3
       '@tanstack/react-query': 5.17.1(react@18.2.0)
       react: 18.2.0
     dev: false
@@ -11607,7 +11617,7 @@ packages:
       string.prototype.matchall: 4.0.10
     dev: false
 
-  /eslint-plugin-tailwindcss@3.13.1(tailwindcss@3.4.0):
+  /eslint-plugin-tailwindcss@3.13.1(tailwindcss@3.4.1):
     resolution: {integrity: sha512-2Nlgr9doO6vFAG9w4iGU0sspWXuzypfng10HTF+dFS2NterhweWtgdRvf/f7aaoOUUxVZM8wMIXzazrZ7CxyeA==}
     engines: {node: '>=12.13.0'}
     peerDependencies:
@@ -11615,7 +11625,7 @@ packages:
     dependencies:
       fast-glob: 3.3.2
       postcss: 8.4.33
-      tailwindcss: 3.4.0
+      tailwindcss: 3.4.1
     dev: false
 
   /eslint-plugin-turbo@1.11.3(eslint@8.56.0):
@@ -18052,15 +18062,15 @@ packages:
       '@babel/runtime': 7.23.5
     dev: true
 
-  /tailwindcss-animate@1.0.7(tailwindcss@3.4.0):
+  /tailwindcss-animate@1.0.7(tailwindcss@3.4.1):
     resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
-      tailwindcss: 3.4.0
+      tailwindcss: 3.4.1
 
-  /tailwindcss@3.4.0:
-    resolution: {integrity: sha512-VigzymniH77knD1dryXbyxR+ePHihHociZbXnLZHUyzf2MMs2ZVqlUrZ3FvpXP8pno9JzmILt1sZPD19M3IxtA==}
+  /tailwindcss@3.4.1:
+    resolution: {integrity: sha512-qAYmXRfk3ENzuPBakNK0SRrUDipP8NQnEY6772uDhflcQz5EhRdD7JNZxyrFHVQNCwULPBn6FNPp9brpO7ctcA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
