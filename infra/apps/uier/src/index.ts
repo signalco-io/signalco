@@ -6,6 +6,9 @@ import { getStack } from '@pulumi/pulumi';
 const up = async () => {
     const stack = getStack();
 
+    // TODO: Create Static files storage
+    // TODO: Create CDN for status files storage
+
     const app = nextJsApp('uier', 'uier');
 
     // Configure domain name
