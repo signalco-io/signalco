@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, HTMLAttributes, useEffect, useRef, useState } from 'react';
+import { Fragment, HTMLAttributes, useContext, useState } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Popper } from '@signalco/ui-primitives/Popper';
@@ -14,6 +14,7 @@ import { useComments } from '../hooks/useComments';
 import { useCommentItemRects } from '../hooks/useCommentItemRects';
 import { CommentThreadItem } from './CommentThreadItem';
 import { CommentSelectionHighlight } from './CommentSelectionHighlight';
+import { CommentsBootstrapperContext } from './CommentsBootstrapperContext';
 import { CommentItem } from './Comments';
 import { CommentIcon } from './CommentIcon';
 
@@ -28,6 +29,7 @@ type CommentBubbleProps = HTMLAttributes<HTMLDivElement> & {
 export function CommentBubble({
     defaultOpen, creating, onCreated, onCanceled, commentItem, className, style
 }: CommentBubbleProps) {
+    const { rootElement } = useContext(CommentsBootstrapperContext);
     const selectionRects = useCommentItemRects(commentItem.position);
     const lastRect = orderBy(selectionRects, r => r.bottom).at(-1);
     const { upsert } = useComments();
@@ -76,6 +78,7 @@ export function CommentBubble({
                 <CommentSelectionHighlight commentSelection={commentItem.position} />
             )}
             <Popper
+                container={rootElement}
                 trigger={(
                     <div
                         role="button"
@@ -87,6 +90,7 @@ export function CommentBubble({
                             left: (lastRect?.right ?? 0) + 16,
                             top: (lastRect?.bottom ?? 0) + 16,
                             transform: 'translate(-50%, -50%)',
+                            willChange: 'left, top',
                             ...style
                         }}>
                         <CommentIcon className="hover:scale-110 hover:brightness-75" />

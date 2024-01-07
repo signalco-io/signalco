@@ -27,6 +27,7 @@ export function CommentSelectionHighlight({
                         top: rect.top + (rect.height < 12 ? 0 : 4),
                         width: rect.width,
                         height: rect.height - (rect.height < 12 ? 0 : 8),
+                        willChange: 'left, top',
                         ...style
                     }} />
             ))}

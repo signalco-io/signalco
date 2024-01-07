@@ -7,14 +7,18 @@ function MountOnPage() {
     container.setAttribute('id', 'uier-toolbar');
     const shadowRoot = container.attachShadow({ mode: 'closed' });
 
-    const stylesheet = document.createElement('link');
-    stylesheet.setAttribute('rel', 'stylesheet');
-    stylesheet.setAttribute('href', 'http://localhost:5500/index.css');
-    shadowRoot.appendChild(stylesheet);
+    // Create style element in shadow dom
+    const style = document.createElement('style');
+    style.innerHTML = '__uier_toolbar_css__/*\"\"*/';
+    shadowRoot.appendChild(style);
+
+    const shadowDomContainer = document.createElement('main');
+    shadowRoot.appendChild(shadowDomContainer)
 
     document.body.appendChild(container);
-    const root = createRoot(shadowRoot);
-    root.render(<CommentsBootstrapper />);
+
+    const root = createRoot(shadowDomContainer);
+    root.render(<CommentsBootstrapper rootElement={shadowDomContainer} />);
 }
 
 MountOnPage();
