@@ -49,8 +49,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.10.6
-        version: 20.10.6
+        specifier: 20.10.7
+        version: 20.10.7
       '@typescript-eslint/eslint-plugin':
         specifier: 6.18.0
         version: 6.18.0(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)(typescript@5.3.3)
@@ -113,8 +113,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.10.6
-        version: 20.10.6
+        specifier: 20.10.7
+        version: 20.10.7
       '@typescript-eslint/eslint-plugin':
         specifier: 6.18.0
         version: 6.18.0(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)(typescript@5.3.3)
@@ -177,8 +177,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.10.6
-        version: 20.10.6
+        specifier: 20.10.7
+        version: 20.10.7
       '@typescript-eslint/eslint-plugin':
         specifier: 6.18.0
         version: 6.18.0(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)(typescript@5.3.3)
@@ -271,8 +271,8 @@ importers:
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':
-        specifier: 20.10.6
-        version: 20.10.6
+        specifier: 20.10.7
+        version: 20.10.7
       '@typescript-eslint/eslint-plugin':
         specifier: 6.18.0
         version: 6.18.0(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)(typescript@5.3.3)
@@ -568,7 +568,7 @@ packages:
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 20.10.6
+      '@types/node': 20.10.7
     dev: false
 
   /@grpc/proto-loader@0.7.10:
@@ -1051,8 +1051,8 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/node@20.10.6:
-    resolution: {integrity: sha512-Vac8H+NlRNNlAmDfGUP7b5h/KA+AtWIzuXy0E6OyP8f1tCLYAtPvKRRDJjAPqhpCb0t6U2j7/xqAuLEebW2kiw==}
+  /@types/node@20.10.7:
+    resolution: {integrity: sha512-fRbIKb8C/Y2lXxB5eVMj4IU7xpdox0Lh8bUPEdtLysaylsml1hOOx1+STloRs/B9nf7C6kPRmmg/V7aQW7usNg==}
     dependencies:
       undici-types: 5.26.5
 
@@ -2856,7 +2856,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.10.6
+      '@types/node': 20.10.7
       long: 5.2.3
     dev: false
 
