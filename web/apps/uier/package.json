@@ -17,7 +17,7 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@enterwell/react-hooks": "0.4.1",
+        "@enterwell/react-hooks": "0.5.0",
         "@next/env": "14.0.4",
         "@signalco/cms-core": "workspace:*",
         "@signalco/cms-components-marketing": "workspace:*",

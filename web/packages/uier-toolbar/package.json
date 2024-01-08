@@ -16,7 +16,7 @@
         "lint": "eslint ."
     },
     "devDependencies": {
-        "@enterwell/react-hooks": "0.4.1",
+        "@enterwell/react-hooks": "0.5.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
