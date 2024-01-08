@@ -72,6 +72,7 @@ export {
     Text,
     Outdent as TextLinked,
     Replace,
+    PanelRightClose,
     Meh as SmileMeh,
     Smile as SmileHappy,
     Laugh as SmileVeryHappy,
