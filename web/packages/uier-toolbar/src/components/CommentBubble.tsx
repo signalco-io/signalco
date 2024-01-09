@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, HTMLAttributes, useContext, useState } from 'react';
+import { HTMLAttributes, useContext, useState } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Popper } from '@signalco/ui-primitives/Popper';
@@ -12,7 +12,7 @@ import { Send } from '@signalco/ui-icons';
 import { orderBy } from '@signalco/js';
 import { useComments } from '../hooks/useComments';
 import { useCommentItemRects } from '../hooks/useCommentItemRects';
-import { CommentThreadItem } from './CommentThreadItem';
+import { CommentThread } from './CommentThread';
 import { CommentSelectionHighlight } from './CommentSelectionHighlight';
 import { CommentsBootstrapperContext } from './CommentsBootstrapperContext';
 import { CommentItem } from './Comments';
@@ -110,26 +110,10 @@ export function CommentBubble({
                 <div>
                     <Stack>
                         <Stack className="max-h-96 overflow-y-scroll">
-                            {commentItem.thread.items.length > 0 && (
-                                <>
-                                    <Stack spacing={1} className="py-2">
-                                        {commentItem.thread.items.map((comment, i) => (
-                                            <Fragment key={comment.id}>
-                                                <div className="px-4 py-2">
-                                                    <CommentThreadItem
-                                                        first={i === 0}
-                                                        comment={comment}
-                                                        onDone={handleResolveComment} />
-                                                </div>
-                                                {i !== commentItem.thread.items.length - 1 && (
-                                                    <Divider />
-                                                )}
-                                            </Fragment>
-                                        ))}
-                                    </Stack>
-                                    <Divider />
-                                </>
-                            )}
+                            <CommentThread
+                                commentItem={commentItem}
+                                onResolve={handleResolveComment} />
+                            <Divider />
                         </Stack>
                         <form onSubmit={handleCreateComment}>
                             <Stack className="bg-card px-1 py-4 pt-2">

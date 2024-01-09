@@ -24,6 +24,7 @@ export type CommentItemPosition = CommentPoint | CommentSelection;
 export type CommentItemThreadItem = {
     id: string;
     text: string;
+    quotedText?: string;
 }
 
 export type CommentItemThread = {

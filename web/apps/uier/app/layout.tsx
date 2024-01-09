@@ -30,8 +30,8 @@ export default function RootLayout({ children, }: {
 }
 
 export const metadata = {
-    title: 'DoProcess.app',
-    description: 'Do process the right way',
+    title: 'uier',
+    description: 'uier',
     manifest: '/manifest.json',
     icons: {
         apple: '/apple-touch-icon.png',

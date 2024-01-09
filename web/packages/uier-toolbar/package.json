@@ -16,7 +16,7 @@
         "lint": "eslint ."
     },
     "devDependencies": {
-        "@enterwell/react-hooks": "0.4.1",
+        "@enterwell/react-hooks": "0.5.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
@@ -27,11 +27,11 @@
         "@signalco/tsconfig": "workspace:*",
         "@types/react": "18.2.47",
         "@types/react-dom": "18.2.18",
-        "@types/node": "20.10.6",
+        "@types/node": "20.10.7",
         "autoprefixer": "10.4.16",
         "postcss": "8.4.33",
         "postcss-preset-env": "9.3.0",
-        "@tanstack/react-query": "5.17.5",
+        "@tanstack/react-query": "5.17.8",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-timeago": "7.2.0",

@@ -1,11 +1,10 @@
-'use client';
-
 import { useState } from 'react';
 import { getElementSelector } from '@signalco/js';
 import { useWindowEvent } from '@signalco/hooks/useWindowEvent';
 import { useDocumentEvent } from '@signalco/hooks/useDocumentEvent';
 import { useComments } from '../hooks/useComments';
 import { useCommentItemRects } from '../hooks/useCommentItemRects';
+import { CommentsSidebar } from './sidebar/CommentsSidebar';
 import { CommentToolbar } from './CommentToolbar';
 import { CommentSelectionPopover } from './CommentSelectionPopover';
 import { CommentSelectionHighlight } from './CommentSelectionHighlight';
@@ -14,10 +13,12 @@ import { CommentPointOverlay } from './CommentPointOverlay';
 import { CommentBubble } from './CommentBubble';
 
 export function CommentsGlobal({
-    reviewParamKey = 'review'
+    reviewParamKey = 'review',
+    rootElement
 }: CommentsGlobalProps) {
     const [creatingCommentSelection, setCreatingCommentSelection] = useState<CommentSelection>();
     const [creatingComment, setCreatingComment] = useState<CommentItem>();
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const { query: commentItems } = useComments();
 
@@ -103,10 +104,16 @@ export function CommentsGlobal({
             {creatingCommentPoint && (
                 <CommentPointOverlay onPoint={handleCreateCommentPoint} />
             )}
+            {sidebarOpen && (
+                <CommentsSidebar
+                    onClose={() => setSidebarOpen(false)}
+                    rootElement={rootElement}
+                />
+            )}
             <CommentToolbar
                 creatingPointComment={creatingCommentPoint}
                 onAddPointComment={() => setCreatingCommentPoint((curr) => !curr)}
-                onShowSidebar={() => { }}
+                onShowSidebar={() => setSidebarOpen(true)}
                 onExitReview={handleExitReview} />
         </>
     );
