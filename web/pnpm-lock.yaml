@@ -81,17 +81,17 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/query-sync-storage-persister':
-        specifier: 5.17.8
-        version: 5.17.8
+        specifier: 5.17.9
+        version: 5.17.9
       '@tanstack/react-query':
-        specifier: 5.17.8
-        version: 5.17.8(react@18.2.0)
+        specifier: 5.17.9
+        version: 5.17.9(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.17.8
-        version: 5.17.8(@tanstack/react-query@5.17.8)(react@18.2.0)
+        specifier: 5.17.9
+        version: 5.17.9(@tanstack/react-query@5.17.9)(react@18.2.0)
       '@tanstack/react-query-persist-client':
-        specifier: 5.17.8
-        version: 5.17.8(@tanstack/react-query@5.17.8)(react@18.2.0)
+        specifier: 5.17.9
+        version: 5.17.9(@tanstack/react-query@5.17.9)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.1.1
         version: 1.1.1
@@ -540,8 +540,8 @@ importers:
         specifier: 0.9.6
         version: 0.9.6(@tiptap/pm@2.1.12)(@types/react@18.2.47)(react-dom@18.2.0)(react@18.2.0)
       '@clerk/nextjs':
-        specifier: 4.29.1
-        version: 4.29.1(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.29.2
+        version: 4.29.2(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
       '@clerk/themes':
         specifier: 1.7.9
         version: 1.7.9(react@18.2.0)
@@ -603,11 +603,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.17.8
-        version: 5.17.8(react@18.2.0)
+        specifier: 5.17.9
+        version: 5.17.9(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.17.8
-        version: 5.17.8(@tanstack/react-query@5.17.8)(react@18.2.0)
+        specifier: 5.17.9
+        version: 5.17.9(@tanstack/react-query@5.17.9)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.1.1
         version: 1.1.1
@@ -630,8 +630,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
       openai:
-        specifier: 4.24.1
-        version: 4.24.1
+        specifier: 4.24.2
+        version: 4.24.2
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -903,8 +903,8 @@ importers:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.33)
       css-loader:
-        specifier: 6.8.1
-        version: 6.8.1(webpack@5.89.0)
+        specifier: 6.9.0
+        version: 6.9.0(webpack@5.89.0)
       postcss:
         specifier: 8.4.33
         version: 8.4.33
@@ -927,8 +927,8 @@ importers:
         specifier: 1.2.0
         version: 1.2.0(@swc/core@1.3.96)(webpack@5.89.0)
       style-loader:
-        specifier: 3.3.3
-        version: 3.3.3(webpack@5.89.0)
+        specifier: 3.3.4
+        version: 3.3.4(webpack@5.89.0)
       styled-jsx:
         specifier: 5.1.2
         version: 5.1.2(@babel/core@7.23.7)(react@18.2.0)
@@ -984,11 +984,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.17.8
-        version: 5.17.8(react@18.2.0)
+        specifier: 5.17.9
+        version: 5.17.9(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.17.8
-        version: 5.17.8(@tanstack/react-query@5.17.8)(react@18.2.0)
+        specifier: 5.17.9
+        version: 5.17.9(@tanstack/react-query@5.17.9)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.1.1
         version: 1.1.1
@@ -1681,8 +1681,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-primitives
       '@tanstack/react-query':
-        specifier: 5.17.8
-        version: 5.17.8(react@18.2.0)
+        specifier: 5.17.9
+        version: 5.17.9(react@18.2.0)
       '@types/node':
         specifier: 20.10.8
         version: 20.10.8
@@ -3184,11 +3184,11 @@ packages:
       - supports-color
     dev: false
 
-  /@clerk/backend@0.37.0(react@18.2.0):
-    resolution: {integrity: sha512-ngBokqd5WaupUi5+xUaZNGCdrVMJFo+Sjiin7gxoXPVq/qdgA3phiEooEZmVAc9Io0MfAqheuiQ1XcCZj4kvdg==}
+  /@clerk/backend@0.37.1(react@18.2.0):
+    resolution: {integrity: sha512-+KNdl2QtAHGRe5DQSGNJ8FCPFWhG8+HnVw5gHtojCxvTgxvOVUaxDqzytYl2qDd2zjzBDiNqwTd7J+5sEXRdkg==}
     engines: {node: '>=14'}
     dependencies:
-      '@clerk/shared': 1.3.0(react@18.2.0)
+      '@clerk/shared': 1.3.1(react@18.2.0)
       '@clerk/types': 3.60.0
       '@peculiar/webcrypto': 1.4.1
       '@types/node': 16.18.6
@@ -3201,24 +3201,24 @@ packages:
       - react
     dev: false
 
-  /@clerk/clerk-react@4.30.2(react@18.2.0):
-    resolution: {integrity: sha512-Cr11vJj/0e75JV1WfR1UFtqJfjFOWRffl8AqcKk+QDOY7AgPd1V4Nvc7umIfhyoGYrJH+5tpga3QW2MlsekdsA==}
+  /@clerk/clerk-react@4.30.3(react@18.2.0):
+    resolution: {integrity: sha512-bX4fUxGXUrMl8A50TpeUM8PHFKbMHmt7UfJ/NnUQMBN54h9N/NF2eSE2omY1+lDxBJmh/V9EiJZV8S6MwDflzw==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16'
     dependencies:
-      '@clerk/shared': 1.3.0(react@18.2.0)
+      '@clerk/shared': 1.3.1(react@18.2.0)
       '@clerk/types': 3.60.0
       react: 18.2.0
       tslib: 2.4.1
     dev: false
 
-  /@clerk/clerk-sdk-node@4.13.4(react@18.2.0):
-    resolution: {integrity: sha512-pcg99eCjutPdVOhv4yXS2THV1NJhmA1gih127zW01RV8EkxeVF7K9aALqR7Hyi2ptnIsh3VF/UiYa1pvJ2R3Uw==}
+  /@clerk/clerk-sdk-node@4.13.5(react@18.2.0):
+    resolution: {integrity: sha512-Qwf8Q8MXbLM25/kQQqK5TC06DrFsSHFGed61tRr2sLIC/7DedC4+VC7XE+qLIQvFNvjJp8USl3EUZXLn1cAjiA==}
     engines: {node: '>=14'}
     dependencies:
-      '@clerk/backend': 0.37.0(react@18.2.0)
-      '@clerk/shared': 1.3.0(react@18.2.0)
+      '@clerk/backend': 0.37.1(react@18.2.0)
+      '@clerk/shared': 1.3.1(react@18.2.0)
       '@clerk/types': 3.60.0
       '@types/cookies': 0.7.7
       '@types/express': 4.17.14
@@ -3230,18 +3230,18 @@ packages:
       - react
     dev: false
 
-  /@clerk/nextjs@4.29.1(next@14.0.4)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-hJiHtGOWzQszL0FQ4FkDRLebR+2K3pc70Z7NJnAhS3tZqxZA6Dz03LUC88Ul6OUBi8ysekk5QqhDUbyxPSsrtA==}
+  /@clerk/nextjs@4.29.2(next@14.0.4)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-iFDTpB2EuWsbRHOgkq8HAc7jHNbYbC/KfNRdLhqboR0RlJHx0+ryoBPTrBnZr5O3WKns2RjbWgQuMH6lh4IpXA==}
     engines: {node: '>=14'}
     peerDependencies:
       next: '>=10'
       react: ^17.0.2 || ^18.0.0-0
       react-dom: ^17.0.2 || ^18.0.0-0
     dependencies:
-      '@clerk/backend': 0.37.0(react@18.2.0)
-      '@clerk/clerk-react': 4.30.2(react@18.2.0)
-      '@clerk/clerk-sdk-node': 4.13.4(react@18.2.0)
-      '@clerk/shared': 1.3.0(react@18.2.0)
+      '@clerk/backend': 0.37.1(react@18.2.0)
+      '@clerk/clerk-react': 4.30.3(react@18.2.0)
+      '@clerk/clerk-sdk-node': 4.13.5(react@18.2.0)
+      '@clerk/shared': 1.3.1(react@18.2.0)
       '@clerk/types': 3.60.0
       next: 14.0.4(@babel/core@7.23.7)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.7)
       path-to-regexp: 6.2.1
@@ -3250,8 +3250,8 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /@clerk/shared@1.3.0(react@18.2.0):
-    resolution: {integrity: sha512-blqXI4P2FIB2kjXhYe8d5jNIbKSmpSetcT/81xcBr2RVy234cV3oVX41Ypx10M36ev5v5cUqA4FfCSQ782EIUw==}
+  /@clerk/shared@1.3.1(react@18.2.0):
+    resolution: {integrity: sha512-nzv4+uA90I/eQp55zfK9a1Po9VgCYlzlNhuZnKqyRsPyJ38l4gpIf3B3qSHHdN0+MTx9cWGFrik1CnpftdOBXQ==}
     peerDependencies:
       react: '>=16'
     peerDependenciesMeta:
@@ -6979,7 +6979,7 @@ packages:
       browser-assert: 1.2.1
       case-sensitive-paths-webpack-plugin: 2.4.0
       constants-browserify: 1.0.0
-      css-loader: 6.8.1(webpack@5.89.0)
+      css-loader: 6.9.0(webpack@5.89.0)
       es-module-lexer: 1.4.1
       express: 4.18.2
       fork-ts-checker-webpack-plugin: 8.0.0(typescript@5.3.3)(webpack@5.89.0)
@@ -6989,7 +6989,7 @@ packages:
       path-browserify: 1.0.1
       process: 0.11.10
       semver: 7.5.4
-      style-loader: 3.3.3(webpack@5.89.0)
+      style-loader: 3.3.4(webpack@5.89.0)
       swc-loader: 0.2.3(@swc/core@1.3.96)(webpack@5.89.0)
       terser-webpack-plugin: 5.3.9(@swc/core@1.3.96)(esbuild@0.18.20)(webpack@5.89.0)
       ts-dedent: 2.2.0
@@ -7356,7 +7356,7 @@ packages:
       '@storybook/react': 7.6.7(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       '@types/node': 18.19.3
       '@types/semver': 7.5.5
-      css-loader: 6.8.1(webpack@5.89.0)
+      css-loader: 6.9.0(webpack@5.89.0)
       find-up: 5.0.0
       fs-extra: 11.2.0
       image-size: 1.0.2
@@ -7372,7 +7372,7 @@ packages:
       sass-loader: 12.6.0(sass@1.69.7)(webpack@5.89.0)
       semver: 7.5.4
       sharp: 0.32.6
-      style-loader: 3.3.3(webpack@5.89.0)
+      style-loader: 3.3.4(webpack@5.89.0)
       styled-jsx: 5.1.1(@babel/core@7.23.7)(react@18.2.0)
       ts-dedent: 2.2.0
       tsconfig-paths: 4.2.0
@@ -7734,54 +7734,54 @@ packages:
     resolution: {integrity: sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==}
     dev: true
 
-  /@tanstack/query-core@5.17.8:
-    resolution: {integrity: sha512-V4hQv4jmRwbji9wo3F6/JQEjbWLUlv2sE2K5R49girEyok71ksDnVHbQiAvp4+FbovMY8A3IbP3cH3jqAUe/BQ==}
+  /@tanstack/query-core@5.17.9:
+    resolution: {integrity: sha512-8xcvpWIPaRMDNLMvG9ugcUJMgFK316ZsqkPPbsI+TMZsb10N9jk0B6XgPk4/kgWC2ziHyWR7n7wUhxmD0pChQw==}
 
   /@tanstack/query-devtools@5.17.7:
     resolution: {integrity: sha512-TfgvOqza5K7Sk6slxqkRIvXlEJoUoPSsGGwpuYSrpqgSwLSSvPPpZhq7hv7hcY5IvRoTNGoq6+MT01C/jILqoQ==}
     dev: false
 
-  /@tanstack/query-persist-client-core@5.17.8:
-    resolution: {integrity: sha512-cvJuY1StArorQ3iXr5d9HcZbhWT3WxJrKSbj7DFKodvz5HEnORemMKl2WRm9ikdYf527u59kSlxUYOrfy00muA==}
+  /@tanstack/query-persist-client-core@5.17.9:
+    resolution: {integrity: sha512-L/d39zXuXtT6SC+NBF2NcbvL3ZwGnu4FC5UgLDrpiY9ETSMkeTx/zZA7yquaZFdtPnUFk1ZZKfwZw44dZTcS+g==}
     dependencies:
-      '@tanstack/query-core': 5.17.8
+      '@tanstack/query-core': 5.17.9
     dev: false
 
-  /@tanstack/query-sync-storage-persister@5.17.8:
-    resolution: {integrity: sha512-X9G/Qhx79WdkFyvstE+vC8ynZBe1wXWXmVgYjQrj7g8Gts6AlkK3RaCXNUbFpTva1lsN9R8NME6x1K9sMnbiiQ==}
+  /@tanstack/query-sync-storage-persister@5.17.9:
+    resolution: {integrity: sha512-U/ZOgth1W1+vY+K+3nE/9IaOHTptbGemokwq+CZwe/Lau+vsNEj1XduTp3HPRpMcuFziVcEdNJ7OhfVgTQ1X5w==}
     dependencies:
-      '@tanstack/query-core': 5.17.8
-      '@tanstack/query-persist-client-core': 5.17.8
+      '@tanstack/query-core': 5.17.9
+      '@tanstack/query-persist-client-core': 5.17.9
     dev: false
 
-  /@tanstack/react-query-devtools@5.17.8(@tanstack/react-query@5.17.8)(react@18.2.0):
-    resolution: {integrity: sha512-cj/VftDaTKtT23NsVN7qWEsiTY4c58giQMnd65xE0SXJMRdAQCKsm+r9MI14NhL2nxi0gHx5FYV7LC9qVB1cgQ==}
+  /@tanstack/react-query-devtools@5.17.9(@tanstack/react-query@5.17.9)(react@18.2.0):
+    resolution: {integrity: sha512-1viWP/jlO0LaeCdtTFqtF1k2RfM3KVpvwVffWv+PMNkS2u4s8YGUM17r3p82udbF9BY1mE7aHqQ3MM1errF5lQ==}
     peerDependencies:
-      '@tanstack/react-query': ^5.17.8
+      '@tanstack/react-query': ^5.17.9
       react: ^18.0.0
     dependencies:
       '@tanstack/query-devtools': 5.17.7
-      '@tanstack/react-query': 5.17.8(react@18.2.0)
+      '@tanstack/react-query': 5.17.9(react@18.2.0)
       react: 18.2.0
     dev: false
 
-  /@tanstack/react-query-persist-client@5.17.8(@tanstack/react-query@5.17.8)(react@18.2.0):
-    resolution: {integrity: sha512-EKjlUnjhJUrvzFLCkMUbZOHZkCeEyesbFC1MLR6qSz2bdqa7bJkNgwcPWq6uXJOfzK5x9sAFG84lXc8dkqdiGQ==}
+  /@tanstack/react-query-persist-client@5.17.9(@tanstack/react-query@5.17.9)(react@18.2.0):
+    resolution: {integrity: sha512-0Mez7inVJ55V9U6t1ZN9MJ9ZU/slrLeuvoYdnglzjjAGFlk4duSXAf5kRdcWQU3/KeJJ+Qarhnr0AKyD1hnbyQ==}
     peerDependencies:
-      '@tanstack/react-query': ^5.17.8
+      '@tanstack/react-query': ^5.17.9
       react: ^18.0.0
     dependencies:
-      '@tanstack/query-persist-client-core': 5.17.8
-      '@tanstack/react-query': 5.17.8(react@18.2.0)
+      '@tanstack/query-persist-client-core': 5.17.9
+      '@tanstack/react-query': 5.17.9(react@18.2.0)
       react: 18.2.0
     dev: false
 
-  /@tanstack/react-query@5.17.8(react@18.2.0):
-    resolution: {integrity: sha512-J+QMBoQiAZglwVB/bEgmf9IczLPg0YwFaqmn4aTW72ZYkUYyBU9dj6OMQk3RzmD9RzUz2m7pPBCkcT0Z1i0acg==}
+  /@tanstack/react-query@5.17.9(react@18.2.0):
+    resolution: {integrity: sha512-M5E9gwUq1Stby/pdlYjBlL24euIVuGbWKIFCbtnQxSdXI4PgzjTSdXdV3QE6fc+itF+TUvX/JPTKIwq8yuBXcg==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
-      '@tanstack/query-core': 5.17.8
+      '@tanstack/query-core': 5.17.9
       react: 18.2.0
 
   /@tippyjs/react@4.2.6(react-dom@18.2.0)(react@18.2.0):
@@ -10237,8 +10237,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /css-loader@6.8.1(webpack@5.89.0):
-    resolution: {integrity: sha512-xDAXtEVGlD0gJ07iclwWVkLoZOpEvAWaSyf6W18S2pOC//K8+qUDIx8IIT3D+HjnmkJPQeesOPv5aiUaJsCM2g==}
+  /css-loader@6.9.0(webpack@5.89.0):
+    resolution: {integrity: sha512-3I5Nu4ytWlHvOP6zItjiHlefBNtrH+oehq8tnQa2kO305qpVyx9XNIT1CXIj5bgCJs7qICBCkgCYxQLKPANoLA==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       webpack: ^5.0.0
@@ -10247,7 +10247,7 @@ packages:
       postcss: 8.4.33
       postcss-modules-extract-imports: 3.0.0(postcss@8.4.33)
       postcss-modules-local-by-default: 4.0.3(postcss@8.4.33)
-      postcss-modules-scope: 3.0.0(postcss@8.4.33)
+      postcss-modules-scope: 3.1.0(postcss@8.4.33)
       postcss-modules-values: 4.0.0(postcss@8.4.33)
       postcss-value-parser: 4.2.0
       semver: 7.5.4
@@ -15307,8 +15307,8 @@ packages:
       is-wsl: 2.2.0
     dev: true
 
-  /openai@4.24.1:
-    resolution: {integrity: sha512-ezm/O3eiZMnyBqirUnWm9N6INJU1WhNtz+nK/Zj/2oyKvRz9pgpViDxa5wYOtyGYXPn1sIKBV0I/S4BDhtydqw==}
+  /openai@4.24.2:
+    resolution: {integrity: sha512-Np5zFPAYsBRmsfgPS8cMM25r1wVO5NCTdmeoYDNEUhJn/rw6jNXU0CFSFwhbWsjIkYhdv31pPIzQ0xChHCvltQ==}
     hasBin: true
     dependencies:
       '@types/node': 18.19.3
@@ -15958,8 +15958,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /postcss-modules-scope@3.0.0(postcss@8.4.33):
-    resolution: {integrity: sha512-hncihwFA2yPath8oZ15PZqvWGkWf+XUfQgUGamS4LqoP1anQLOsOJw0vr7J7IwLpoY9fatA2qiGUGmuZL0Iqlg==}
+  /postcss-modules-scope@3.1.0(postcss@8.4.33):
+    resolution: {integrity: sha512-SaIbK8XW+MZbd0xHPf7kdfA/3eOt7vxJ72IRecn3EzuZVLr1r0orzf0MX/pN8m+NMDoo6X/SQd8oeKqGZd8PXg==}
     engines: {node: ^10 || ^12 || >= 14}
     peerDependencies:
       postcss: ^8.1.0
@@ -17909,8 +17909,8 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  /style-loader@3.3.3(webpack@5.89.0):
-    resolution: {integrity: sha512-53BiGLXAcll9maCYtZi2RCQZKa8NQQai5C4horqKyRmHj9H7QmcUyucrH+4KW/gBQbXM2AsB0axoEcFZPlfPcw==}
+  /style-loader@3.3.4(webpack@5.89.0):
+    resolution: {integrity: sha512-0WqXzrsMTyb8yjZJHDqwmnwRJvhALK9LfRtRc6B4UTWe8AijYLZYZ9thuJTZc2VfQWINADW/j+LiJnfy2RoC1w==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       webpack: ^5.0.0
