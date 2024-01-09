@@ -1,4 +1,6 @@
 config:
+  azure-native:location: westeurope
+  azure-native:subscriptionId: d22db5bd-ca9a-447c-9b1b-dc56aca401d7
   cloudflare:apiToken:
     secure: AAABACGEfMwr2aNFBpAz+WdsfG/AgG31Ktvpe0KVGFCpoiCN8wjhe7NJYY4NJT3o/M+q8x85EOwn3Q9CfljxdPEUq4SPuXxo
   uier:zoneid:

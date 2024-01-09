@@ -53,14 +53,13 @@ const up = async () => {
         const shouldProtect = stack === 'production';
         const domainName = `${config.require('domain')}`;
 
-        const resourceGroupName = `signalco-cloud-${stack}`;
         const signalrPrefix = 'sr';
         const storagePrefix = 'store';
         const keyvaultPrefix = 'kv';
 
         const currentStack = new StackReference(`signalco/${getProject()}/${getStack()}`);
 
-        const resourceGroup = new ResourceGroup(resourceGroupName);
+        const resourceGroup = new ResourceGroup(`signalco-cloud-${stack}`);
         const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
 
         const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, stack === 'production' ? 'standard1' : 'free', false);
@@ -157,7 +156,7 @@ const up = async () => {
         const registry = getContainerRegistry(resourceGroupSharedName, containerRegistryName);
         const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, logWorkspace, false);
 
-        // Create general storage and prepare tables
+        // Create general storage
         const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
 
         // Create AWS SES service

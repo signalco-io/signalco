@@ -2,12 +2,38 @@ import { nextJsApp } from '@infra/pulumi/vercel';
 import { dnsRecord } from '@infra/pulumi/cloudflare';
 import { ProjectDomain } from '@pulumiverse/vercel';
 import { getStack } from '@pulumi/pulumi';
+import { ResourceGroup } from '@pulumi/azure-native/resources/index.js';
+import { createStorageAccount } from '@infra/pulumi/azure';
+import { Profile, Endpoint, SkuName } from '@pulumi/azure-native/cdn/index.js';
 
 const up = async () => {
     const stack = getStack();
+    const shouldProtect = stack === 'production';
+
+    const resourceGroup = new ResourceGroup(`uier-${stack}`);
 
     // TODO: Create Static files storage
+    const staticFilesStorage = createStorageAccount(
+        resourceGroup,
+        'static',
+        shouldProtect,
+    );
+
     // TODO: Create CDN for status files storage
+    const cdnProfile = new Profile('uier-staticcndprofile', {
+        resourceGroupName: resourceGroup.name,
+        sku: {
+            name: SkuName.Standard_Microsoft,
+        },
+        profileName: 'uier-staticFiles-cdn',
+    });
+    // new Endpoint('uier-staticFiles', {
+    //     resourceGroupName: resourceGroup.name,
+    //     profileName: cdnProfile.name,
+    //     origins: [
+
+    //     ],     
+    // });
 
     const app = nextJsApp('uier', 'uier');
 

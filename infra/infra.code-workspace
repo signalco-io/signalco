@@ -1,0 +1,33 @@
+{
+	"folders": [
+		{
+			"name": "✨ infra-monorepo",
+			"path": "."
+		},
+		{
+			"name": "☁️ Cloud Primary",
+			"path": "apps/cloud-primary"
+		},
+		{
+			"name": "☁️ Remote Browser",
+			"path": "apps/remote-browser"
+		},
+		{
+			"name": "☁️ uier",
+			"path": "apps/uier"
+		},
+		{
+			"name": "📦 @infra/pulumi",
+			"path": "packages/pulumi"
+		},
+		{
+			"name": "⚙️ @infra/eslint-config",
+			"path": "packages/eslint-config"
+		},
+		{
+			"name": "⚙️ @infra/typescript-config",
+			"path": "packages/typescript-config"
+		},
+	],
+	"settings": {}
+}
