@@ -4,6 +4,8 @@ import { getProcess, getProcessIdByPublicId, getTaskDefinitions } from '../../..
 import { ensureUserId } from '../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
 
+export const runtime = 'edge';
+
 const openai = new OpenAI({
     apiKey: process.env['OPENAI_API_KEY']
 });

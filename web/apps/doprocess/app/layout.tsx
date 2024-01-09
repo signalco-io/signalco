@@ -6,6 +6,8 @@ import { Analytics } from '@vercel/analytics/react';
 import { ClientProvider } from '../components/providers/ClientProvider';
 import { AuthProvider } from '../components/providers/AuthProvider';
 
+export const runtime = 'edge';
+
 const inter = Inter({
     subsets: ['latin'],
     variable: '--font-sans',

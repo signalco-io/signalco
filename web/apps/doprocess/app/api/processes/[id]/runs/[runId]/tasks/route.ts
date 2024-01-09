@@ -2,6 +2,8 @@ import { getProcessIdByPublicId, getProcessRunIdByPublicId, getTaskDefinitionIdB
 import { ensureUserId, optionalUserId } from '../../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../../src/lib/api/apiParam';
 
+export const runtime = 'edge';
+
 export async function GET(_request: Request, { params }: { params: { id: string, runId: string } }) {
     const processPublicId = requiredParamString(params.id);
     const runPublicId = requiredParamString(params.runId);
