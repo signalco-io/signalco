@@ -64,7 +64,11 @@ export function CommentsGlobal({
         setCreatingCommentSelection(undefined);
         setCreatingComment({
             position: creatingCommentSelection,
-            thread: { items: [] }
+            thread: { items: [] },
+            device: {
+                size: window.innerWidth >= 1024 ? 'desktop' : (window.innerWidth >= 768 ? 'tablet' : 'mobile'),
+
+            }
         });
     };
 
@@ -72,7 +76,15 @@ export function CommentsGlobal({
         setCreatingCommentPoint(false);
         setCreatingComment({
             position: commentPoint,
-            thread: { items: [] }
+            thread: { items: [] },
+            device: {
+                size: window.innerWidth >= 1024 ? 'desktop' : (window.innerWidth >= 768 ? 'tablet' : 'mobile'),
+                pixelRatio: window.devicePixelRatio,
+                os: (navigator as any).userAgentData?.platform,
+                browser: `${(navigator as any).userAgentData?.brands?.at(-1)?.brand} (${(navigator as any).userAgentData?.brands?.at(-1)?.version})`,
+                userAgent: navigator.userAgent,
+                windowSize: [window.innerWidth, window.innerHeight]
+            }
         });
     };
 
