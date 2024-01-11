@@ -45,8 +45,8 @@ importers:
         specifier: 0.5.0
         version: 0.5.0(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.9.2
-        version: 1.9.2(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.9.3
+        version: 1.9.3(react-dom@18.2.0)(react@18.2.0)
       '@microsoft/signalr':
         specifier: 8.0.0
         version: 8.0.0
@@ -555,8 +555,8 @@ importers:
         specifier: 0.5.0
         version: 0.5.0(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.9.2
-        version: 1.9.2(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.9.3
+        version: 1.9.3(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 14.0.4
         version: 14.0.4
@@ -718,8 +718,8 @@ importers:
   apps/slco:
     dependencies:
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.9.2
-        version: 1.9.2(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.9.3
+        version: 1.9.3(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 14.0.4
         version: 14.0.4
@@ -1081,8 +1081,8 @@ importers:
         specifier: 0.5.0
         version: 0.5.0(react-dom@18.2.0)(react@18.2.0)
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.9.2
-        version: 1.9.2(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.9.3
+        version: 1.9.3(react-dom@18.2.0)(react@18.2.0)
       '@next/env':
         specifier: 14.0.4
         version: 14.0.4
@@ -4427,8 +4427,8 @@ packages:
     resolution: {integrity: sha512-aWrYY47l42O/7OhPDOYD1Xwl0pa3tmMAOu8yNTuuhcwRme0MDw3mMNG7EhAF4wqyE8SAr7kXiWYp+ryOnfS8EQ==}
     dev: false
 
-  /@hcaptcha/react-hcaptcha@1.9.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-FKsfxi2PV0UTFp3TvW8L02z2MHZjhBVOvH1OznR4ccxjugCZa8ix4weP/wKRUaLHcKwmCfXSu35Agen41aP1mQ==}
+  /@hcaptcha/react-hcaptcha@1.9.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-3aaXKT2tEXr317eWYNXm7JGC9z6FkhuDX46uLSFAevtVB3grxgwVxcVQuZy/Y5p6+TeQ6iDTAD0Ca2xwe4Muvw==}
     peerDependencies:
       react: '>= 16.3.0'
       react-dom: '>= 16.3.0'
