@@ -12,12 +12,13 @@ public class MigrationFunction(
     IAzureStorage azureStorage)
 {
     private const string CronOnceAYear = "0 0 0 1 1 *";
-    
-    private readonly string[] tablesNames = { 
+
+    private readonly string[] tablesNames = {
         "entities", "contacts", "contactshistory", "userassignedentity",
+        "pats",
         "users",
         "webnewsletter",
-        "contactLinks" 
+        "contactLinks"
     };
     private readonly string[] queueNames = {
         "contact-state-processing", "usage-processing"
@@ -28,12 +29,12 @@ public class MigrationFunction(
         [TimerTrigger(CronOnceAYear, RunOnStartup = true)] TimerInfo timer,
         CancellationToken cancellationToken = default)
     {
-        foreach (var tableName in tablesNames) 
+        foreach (var tableName in tablesNames)
             await azureStorage.EnsureTableAsync(tableName, cancellationToken);
-        
-        foreach (var queueName in queueNames) 
+
+        foreach (var queueName in queueNames)
             await azureStorage.EnsureQueueAsync(queueName, cancellationToken);
-        
+
         // Create Public Channel Entity Time if doesn't exist
         if (!await dao.EntityExistsAsync(KnownEntities.Time.EntityId, cancellationToken))
             await entityService.UpsertAsync(
