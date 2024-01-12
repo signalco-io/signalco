@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Divider } from '@signalco/ui-primitives/Divider';
+import { cx } from '@signalco/ui-primitives/cx';
+import { Collapse } from '@signalco/ui-primitives/Collapse';
 import { CommentThread } from '../CommentThread';
 import { useComments } from '../../hooks/useComments';
 import { CommentsSidebarHeader } from './CommentsSidebarHeader';
 import { CommentsSidebarFilter } from './CommentsSidebarFilter';
 import { CommentsFilter } from './CommentsFilter';
-import { cx } from '@signalco/ui-primitives/cx';
-import { Collapse } from '@signalco/ui-primitives/Collapse';
 
 export type CommentsSidebarProps = {
     onClose: () => void;
@@ -43,7 +43,7 @@ export function CommentsSidebar({ onClose, rootElement }: CommentsSidebarProps) 
 
     return (
         <div className={cx(
-            "fixed inset-y-4 right-4 w-80 rounded-2xl border bg-black shadow-lg transition-opacity",
+            'fixed inset-y-4 right-4 w-80 rounded-2xl border bg-black shadow-lg transition-opacity',
             'slide-in-from-right-5 fade-in ease-in-out slide-out-to-right-5 fade-out',
             hidding ? 'animate-out' : 'animate-in',
         )}>

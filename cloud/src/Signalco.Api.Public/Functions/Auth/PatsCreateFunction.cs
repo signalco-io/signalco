@@ -30,9 +30,10 @@ public class PatsCreateFunction(
             var user = context.User;
 
             var pat = await patService.CreateAsync(
-                new PatCreate(user.UserId, payload.Alias, payload.Expire));
+                new PatCreate(user.UserId, payload.Alias, payload.Expire),
+                cancellationToken);
 
-            return new PatCreateResponseDto(pat);
+            return new PatCreateResponseDto { Pat = pat };
         });
 
     [Serializable]
@@ -46,9 +47,9 @@ public class PatsCreateFunction(
     }
 
     [Serializable]
-    private record PatCreateResponseDto(string pat)
+    private record PatCreateResponseDto
     {
         [JsonPropertyName("pat")]
-        public string Pat { get; } = pat;
+        public string Pat { get; set; }
     }
 }

@@ -24,6 +24,6 @@ public class PatsRetrieveFunction(
         HttpRequestData req,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest(cancellationToken, functionAuthenticator, async context =>
-            (await patService.GetAllAsync(context.User.UserId))
+            (await patService.GetAllAsync(context.User.UserId, cancellationToken))
             .Select(pat => new PatDto(pat.UserId, pat.PatEnd, pat.Alias, pat.Expire)));
 }
