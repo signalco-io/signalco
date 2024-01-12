@@ -18,18 +18,16 @@ using Signal.Core.Users;
 
 namespace Signal.Infrastructure.AzureStorage.Tables;
 
-internal class AzureStorage : IAzureStorage
+internal class AzureStorage(
+    IAzureStorageDao dao,
+    IAzureStorageClientFactory clientFactory)
+    : IAzureStorage
 {
-    private readonly IAzureStorageDao dao;
-    private readonly IAzureStorageClientFactory clientFactory;
-
-    public AzureStorage(
-        IAzureStorageDao dao,
-        IAzureStorageClientFactory clientFactory)
-    {
-        this.dao = dao ?? throw new ArgumentNullException(nameof(dao));
-        this.clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
-    }
+    public async Task PatCreateAsync(string userId, string patEnd, string patHash, string? alias, DateTime? expire, CancellationToken cancellationToken = default) =>
+        await this.WithClientAsync(
+            ItemTableNames.AuthPats,
+            c => c.AddEntityAsync(new AzureAuthPat(userId, patHash, patEnd, alias, expire), cancellationToken),
+            cancellationToken);
 
     public async Task UpsertAsync(IEntity entity, CancellationToken cancellationToken = default) =>
         await this.WithClientAsync(
@@ -121,7 +119,7 @@ internal class AzureStorage : IAzureStorage
         string id,
         CancellationToken cancellationToken = default)
     {
-        var entity = await this.dao.GetAsync(id, cancellationToken);
+        var entity = await dao.GetAsync(id, cancellationToken);
         if (entity != null)
         {
             await this.WithClientAsync(
@@ -138,7 +136,7 @@ internal class AzureStorage : IAzureStorage
         string processEntityId, 
         CancellationToken cancellationToken = default)
     {
-        var links = await this.dao.ContactLinkProcessTriggersAsync(processEntityId, cancellationToken);
+        var links = await dao.ContactLinkProcessTriggersAsync(processEntityId, cancellationToken);
         await this.WithClientAsync(
             ItemTableNames.ContactLinks,
             async client => await Task.WhenAll(links.Select(async l =>
@@ -151,7 +149,7 @@ internal class AzureStorage : IAzureStorage
 
     public async Task AppendToFileAsync(string directory, string fileName, Stream data, CancellationToken cancellationToken = default)
     {
-        var client = await this.clientFactory.GetAppendBlobClientAsync(
+        var client = await clientFactory.GetAppendBlobClientAsync(
             BlobContainerNames.StationLogs, 
             $"{directory.Replace("\\", "/")}/{fileName}",
             cancellationToken);
@@ -167,8 +165,8 @@ internal class AzureStorage : IAzureStorage
         await this.WithQueueClientAsync(queueName, client => client.CreateIfNotExistsAsync(cancellationToken: cancellationToken), cancellationToken);
 
     private async Task WithQueueClientAsync(string queueName, Func<QueueClient, Task> action, CancellationToken cancellationToken = default) => 
-        await action(await this.clientFactory.GetQueueClientAsync(queueName, cancellationToken));
+        await action(await clientFactory.GetQueueClientAsync(queueName, cancellationToken));
 
     private async Task WithClientAsync(string tableName, Func<TableClient, Task> action, CancellationToken cancellationToken = default) => 
-        await action(await this.clientFactory.GetTableClientAsync(tableName, cancellationToken));
+        await action(await clientFactory.GetTableClientAsync(tableName, cancellationToken));
 }

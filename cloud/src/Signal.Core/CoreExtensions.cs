@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using Signal.Core.Auth;
 using Signal.Core.Entities;
 using Signal.Core.Notifications;
 using Signal.Core.Sharing;
@@ -16,6 +17,7 @@ public static class CoreExtensions
             .AddTransient<ISharingService, SharingService>()
             .AddTransient<IEntityService, EntityService>()
             .AddTransient<IUserService, UserService>()
+            .AddTransient<IPatService, PatService>()
             .AddTransient(typeof(Lazy<>), typeof(LazyInstance<>));
 }
 

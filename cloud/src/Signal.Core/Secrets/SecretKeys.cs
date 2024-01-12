@@ -10,6 +10,8 @@ public static class SecretKeys
     
     public const string SignalRConnectionString = "AzureSignalRConnectionString";
 
+    public const string PatSigningToken = "SignalcoPatSigningToken";
+
     public static class Auth0
     {
         public const string ApiIdentifier = "Auth0_ApiIdentifier";
