@@ -1,6 +1,8 @@
 import { documentCreate, documentGet, documentsGet } from '../../../src/lib/repo/documentsRepository';
 import { ensureUserId } from '../../../src/lib/auth/apiAuth';
 
+export const runtime = 'edge';
+
 export async function GET() {
     const { userId } = ensureUserId();
     const documents = await documentsGet(userId);

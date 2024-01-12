@@ -2,5 +2,5 @@
 
 public interface IUserAuth
 {
-    public string UserId { get; }
+    string UserId { get; }
 }

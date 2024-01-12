@@ -25,6 +25,8 @@ config:
     secure: AAABAMJXbme1rRLsVwaAVXTtrYqBhcmmfLICCr0mJLhGMwlF1z8Phs1u1yoJSq136dj8TrD2Ydco5sAP6+ETWOAlZDFrQ492KkQ=
   cloud-primary:secret-hcaptchaSiteKey:
     secure: AAABAKLPquKFTwMLZWWu0L3xg8ZZ4YqZnVELd2neKlViJQ9BBu730/H2GepcfdWDpQib02GnVSJZ8HbxWixUzWE1jwA=
+  cloud-primary:secret-patSigningToken:
+    secure: AAABAF5aqbATObPLsUKmbTTkqAkfWgDHARVDdSbQhNDCDXs/1WVVuTaKjBXX3OqQonZBO+6oocashFi7ORWuSp7HI0+kkcOSQpqUChZ6LH0uR13Hzw9av4ZJusk9gFN/yEwCbH4dCikqskZ+gERFLXjHSYpf8yEDKNJLN9xh2wzvL8a+Hns8tUf3pTMyQfKR36sa8iDWCLpnKM8FiL/q+g==
   cloud-primary:secret-processorAccessCode:
     secure: AAABAMDlRITZ3xjX7WFTDX6+Pj/kpiIWIsFMRxhjDD1xn8XFcWuDewnQhFtZCG96QpwJwQoSXQ2DM4Agb+/XwWRvBiFVG3zyr8Qlm8zxJlZyzKs5kMHPwroMyEuGpDZw1MHCKng6+oMUTXDnq61+UiQFcsYmAL19BrbYYNvdczx2QzVWo2aMTQ2aVQ4fyVvGa6ggRf2fQT/Tei7m
   cloud-primary:secret-slackClientId: "3583799076214.3603772455633"

@@ -24,14 +24,14 @@ importers:
         specifier: 1.1.4
         version: 1.1.4
       '@pulumi/aws':
-        specifier: 6.17.0
-        version: 6.17.0
+        specifier: 6.18.0
+        version: 6.18.0
       '@pulumi/azure-native':
-        specifier: 2.24.0
-        version: 2.24.0
+        specifier: 2.25.0
+        version: 2.25.0
       '@pulumi/cloudflare':
-        specifier: 5.17.0
-        version: 5.17.0
+        specifier: 5.18.1
+        version: 5.18.1
       '@pulumi/command':
         specifier: 0.9.2
         version: 0.9.2
@@ -39,8 +39,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       '@pulumi/pulumi':
-        specifier: 3.100.0
-        version: 3.100.0
+        specifier: 3.101.1
+        version: 3.101.1
       '@pulumiverse/vercel':
         specifier: 1.0.1
         version: 1.0.1
@@ -49,8 +49,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.10.7
-        version: 20.10.7
+        specifier: 20.11.0
+        version: 20.11.0
       '@typescript-eslint/eslint-plugin':
         specifier: 6.18.1
         version: 6.18.1(@typescript-eslint/parser@6.18.1)(eslint@8.56.0)(typescript@5.3.3)
@@ -88,14 +88,14 @@ importers:
         specifier: 1.1.4
         version: 1.1.4
       '@pulumi/aws':
-        specifier: 6.17.0
-        version: 6.17.0
+        specifier: 6.18.0
+        version: 6.18.0
       '@pulumi/azure-native':
-        specifier: 2.24.0
-        version: 2.24.0
+        specifier: 2.25.0
+        version: 2.25.0
       '@pulumi/cloudflare':
-        specifier: 5.17.0
-        version: 5.17.0
+        specifier: 5.18.1
+        version: 5.18.1
       '@pulumi/command':
         specifier: 0.9.2
         version: 0.9.2
@@ -103,8 +103,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       '@pulumi/pulumi':
-        specifier: 3.100.0
-        version: 3.100.0
+        specifier: 3.101.1
+        version: 3.101.1
       '@pulumiverse/vercel':
         specifier: 1.0.1
         version: 1.0.1
@@ -113,8 +113,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.10.7
-        version: 20.10.7
+        specifier: 20.11.0
+        version: 20.11.0
       '@typescript-eslint/eslint-plugin':
         specifier: 6.18.1
         version: 6.18.1(@typescript-eslint/parser@6.18.1)(eslint@8.56.0)(typescript@5.3.3)
@@ -152,14 +152,14 @@ importers:
         specifier: 1.1.4
         version: 1.1.4
       '@pulumi/aws':
-        specifier: 6.17.0
-        version: 6.17.0
+        specifier: 6.18.0
+        version: 6.18.0
       '@pulumi/azure-native':
-        specifier: 2.24.0
-        version: 2.24.0
+        specifier: 2.25.0
+        version: 2.25.0
       '@pulumi/cloudflare':
-        specifier: 5.17.0
-        version: 5.17.0
+        specifier: 5.18.1
+        version: 5.18.1
       '@pulumi/command':
         specifier: 0.9.2
         version: 0.9.2
@@ -167,8 +167,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       '@pulumi/pulumi':
-        specifier: 3.100.0
-        version: 3.100.0
+        specifier: 3.101.1
+        version: 3.101.1
       '@pulumiverse/vercel':
         specifier: 1.0.1
         version: 1.0.1
@@ -177,8 +177,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.10.7
-        version: 20.10.7
+        specifier: 20.11.0
+        version: 20.11.0
       '@typescript-eslint/eslint-plugin':
         specifier: 6.18.1
         version: 6.18.1(@typescript-eslint/parser@6.18.1)(eslint@8.56.0)(typescript@5.3.3)
@@ -243,14 +243,14 @@ importers:
         specifier: 1.1.4
         version: 1.1.4
       '@pulumi/aws':
-        specifier: 6.17.0
-        version: 6.17.0
+        specifier: 6.18.0
+        version: 6.18.0
       '@pulumi/azure-native':
-        specifier: 2.24.0
-        version: 2.24.0
+        specifier: 2.25.0
+        version: 2.25.0
       '@pulumi/cloudflare':
-        specifier: 5.17.0
-        version: 5.17.0
+        specifier: 5.18.1
+        version: 5.18.1
       '@pulumi/command':
         specifier: 0.9.2
         version: 0.9.2
@@ -258,8 +258,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       '@pulumi/pulumi':
-        specifier: 3.100.0
-        version: 3.100.0
+        specifier: 3.101.1
+        version: 3.101.1
       '@pulumiverse/vercel':
         specifier: 1.0.1
         version: 1.0.1
@@ -271,8 +271,8 @@ importers:
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':
-        specifier: 20.10.7
-        version: 20.10.7
+        specifier: 20.11.0
+        version: 20.11.0
       '@typescript-eslint/eslint-plugin':
         specifier: 6.18.1
         version: 6.18.1(@typescript-eslint/parser@6.18.1)(eslint@8.56.0)(typescript@5.3.3)
@@ -314,7 +314,7 @@ packages:
     resolution: {integrity: sha512-YPNYtwEnKu23VDHNFu91xd/Ueu5zYONHcYwKDA5qTvtgZZ1nzrvPJgrO15KF0fLRVlGo7yckirDS26GpvBTe6w==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.100.0
+      '@pulumi/pulumi': 3.101.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -568,7 +568,7 @@ packages:
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 20.10.7
+      '@types/node': 20.11.0
     dev: false
 
   /@grpc/proto-loader@0.7.10:
@@ -843,10 +843,10 @@ packages:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
     dev: false
 
-  /@pulumi/aws@6.17.0:
-    resolution: {integrity: sha512-mouN/IufNJQd2O0dNBscWWGkOv4iY7eS4A2b7wh1e3GQqU5Vl8PeLJBS2s29ElGaFfNiLwSjG16U88iemrp0RQ==}
+  /@pulumi/aws@6.18.0:
+    resolution: {integrity: sha512-DFAZ0GIo/b0AXUdGoEbVV7BJQzQdPhdfOcvoM0O0pRewQb14GrblM5XNQ5jwG50r24n+bC4Pcf3hYujRLIzWgA==}
     dependencies:
-      '@pulumi/pulumi': 3.100.0
+      '@pulumi/pulumi': 3.101.1
       builtin-modules: 3.0.0
       mime: 2.6.0
       read-package-tree: 5.3.1
@@ -855,18 +855,18 @@ packages:
       - supports-color
     dev: false
 
-  /@pulumi/azure-native@2.24.0:
-    resolution: {integrity: sha512-weKT9A8JYstXOFY47QGnlA/UpaVqOzf8vHug8KPzgAuUnScPicx+2BWAmVEIri9t6+HHKeV/OODGX/IpIEPW7A==}
+  /@pulumi/azure-native@2.25.0:
+    resolution: {integrity: sha512-E6HJYTrdvSHo4TBFBTsoHOO6BVoK4dJkEdR0skLo39McQXWm5EyUVS0w+4VWMMDlKYdZHnXrWCqbtflyR/pSwA==}
     dependencies:
-      '@pulumi/pulumi': 3.100.0
+      '@pulumi/pulumi': 3.101.1
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@pulumi/cloudflare@5.17.0:
-    resolution: {integrity: sha512-5Y6N5UBG0BLxxYZAzeVUcpFO98M7W0QJdyE971++cGe9IMIj93Rh0KkA1+cAv1CDEbV3jP42aLrvRczVUnMbew==}
+  /@pulumi/cloudflare@5.18.1:
+    resolution: {integrity: sha512-u37QESCx5s2Mlk1WZsWEEM0oBYVBa33OeJR0gfnXAeY498Y6HKRuctWSlH6AjHqVNj791fyIc7Ro5JOZKy5+fg==}
     dependencies:
-      '@pulumi/pulumi': 3.100.0
+      '@pulumi/pulumi': 3.101.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -875,7 +875,7 @@ packages:
     resolution: {integrity: sha512-9RaGDiy8jFCiaarj4EOrMW/fVCM/AgBigzwM6CKzlR49x8UFiRDmKrXfEVHb8r2P9IpC4IaAZf5VbNNAHwN/rA==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.100.0
+      '@pulumi/pulumi': 3.101.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -883,14 +883,14 @@ packages:
   /@pulumi/docker@4.5.0:
     resolution: {integrity: sha512-DOiczZK1cF4NGlEWzacPLjGcoPKXHXISoqq4KqCO97YW28rZSu6LOdveQ8tLaUHGeyWQ+CS3PT45caSxHAbzbw==}
     dependencies:
-      '@pulumi/pulumi': 3.100.0
+      '@pulumi/pulumi': 3.101.1
       semver: 5.7.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@pulumi/pulumi@3.100.0:
-    resolution: {integrity: sha512-eRAm+IzDjoIYpgqVkivQUsvkM8+X8g9VCCMEeufqwDaC0OgXjmXmglkYq7KJKq5/FFiJgZ1isV7xluo/wVTySQ==}
+  /@pulumi/pulumi@3.101.1:
+    resolution: {integrity: sha512-Jfes7XCjFjB0kqetqP1nYEMog9ghtilPKiyl6KyS+hvSZ55X9Sffa3St545ZDC5GpHrevCT7KgHuScS40q3nKQ==}
     engines: {node: '>=8.13.0 || >=10.10.0'}
     dependencies:
       '@grpc/grpc-js': 1.9.6
@@ -930,7 +930,7 @@ packages:
   /@pulumiverse/vercel@1.0.1:
     resolution: {integrity: sha512-AOiOe2pzZOQVv9Z+C/iWmZeKpeZb+0qmqcfRBnYiU4DiVr9VhqE9ToJVPq7ElyxgYSoETA+4qfd1Kj01zxhd5A==}
     dependencies:
-      '@pulumi/pulumi': 3.100.0
+      '@pulumi/pulumi': 3.101.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -1051,8 +1051,8 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/node@20.10.7:
-    resolution: {integrity: sha512-fRbIKb8C/Y2lXxB5eVMj4IU7xpdox0Lh8bUPEdtLysaylsml1hOOx1+STloRs/B9nf7C6kPRmmg/V7aQW7usNg==}
+  /@types/node@20.11.0:
+    resolution: {integrity: sha512-o9bjXmDNcF7GbM4CNQpmi+TutCgap/K3w1JyKgxAjqx41zp9qlIAVFi0IhCNsJcXolEqLWhbFbEeL0PvYm4pcQ==}
     dependencies:
       undici-types: 5.26.5
 
@@ -2856,7 +2856,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.10.7
+      '@types/node': 20.11.0
       long: 5.2.3
     dev: false
 

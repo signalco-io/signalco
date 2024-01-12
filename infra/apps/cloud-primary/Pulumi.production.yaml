@@ -25,6 +25,8 @@ config:
     secure: AAABAMvfzeLqc1tvyw4KSpVixsL8hy08wkODLSCF3qajCHvTi6GLXOeIrUYNGqbdImy9KfQlKk3gXwO1vt9dAVi/Qx3gaTRb5Po=
   cloud-primary:secret-hcaptchaSiteKey:
     secure: AAABAF1AfWZXqsXFMZllfG/8e5RxfbDGPDcs9JLWvpAWFi30FqX1uGKvjajI289J3ahskb2EW3r502JcEyZAwTtcPEM=
+  cloud-primary:secret-patSigningToken:
+    secure: AAABADOB/HnZzAEsqS9ktLIy+5iV3pqm7RwufQjRpa/h2+F4VNVboWq/V0q+8zZk4B1FkGTjFjooS9H9TAO5Ml0977iMnU+MdR8WQMCMfRG5KQN/KK6X4QovQe8l+m+7kcBKohd4LvvAXC72b2f6RZiEe499UKdu8pX1wX5fqY2Vj6fVFs2lE5wrorZ2jphseQTAEgY6QKUo3ZlrKO8mfw==
   cloud-primary:secret-processorAccessCode:
     secure: AAABAM4NX0nWBOP2Jtvr2BR86VxxDy/TPZRwMpeBRRmkt/dcKQ39CLV/Be/SZ8Mfnmj6zhdN/VVyEtYrMITFvPf4FXBlBfXotdUG1IlMDZ2FSpbrmr2SmEeoE0L243Ne7K1kdjejQszS1ZPGUaLx/2c/tpLyEeAFjvuJzvQqASnve+YMAIqqqlUVjZoPsN7HkcJl8dyUM1vELxSc
   cloud-primary:secret-slackClientId: "3583799076214.3587521393493"

@@ -9,28 +9,30 @@ export function CommentThread({ commentItem, onResolve }: { commentItem: Comment
     const [expanded, setExpanded] = useState(false);
     if (!commentItem.thread.items.length) return null;
 
-    const fistComment = commentItem.thread.items[0];
-    const lastComment = commentItem.thread.items.length > 1 ? commentItem.thread.items.at(-1) : null;
+    const threadFistItem = commentItem.thread.items[0];
+    const threadLastItem = commentItem.thread.items.length > 1 ? commentItem.thread.items.at(-1) : null;
     const restComments = commentItem.thread.items.slice(1, -1);
 
     return (
         <Stack className="py-2">
-            {fistComment && (
+            {threadFistItem && (
                 <>
                     <div className="px-4 py-2 pb-3">
                         <CommentThreadItem
                             first
-                            comment={fistComment}
+                            comment={commentItem}
+                            threadItem={threadFistItem}
                             onDone={onResolve} />
                     </div>
-                    {lastComment && <Divider />}
+                    {threadLastItem && <Divider />}
                 </>
             )}
-            {expanded && restComments.map((comment, i) => (
-                <Fragment key={comment.id}>
+            {expanded && restComments.map((item, i) => (
+                <Fragment key={item.id}>
                     <div className="px-4 py-3">
                         <CommentThreadItem
-                            comment={comment}
+                            comment={commentItem}
+                            threadItem={item}
                             onDone={onResolve} />
                     </div>
                     <Divider />
@@ -43,12 +45,13 @@ export function CommentThread({ commentItem, onResolve }: { commentItem: Comment
                     Show all ({restComments.length} more)...
                 </Button>
             )}
-            {lastComment && (
+            {threadLastItem && (
                 <>
                     {!expanded && restComments.length > 0 && <Divider />}
                     <div className="px-4 py-2 pt-3">
                         <CommentThreadItem
-                            comment={lastComment}
+                            comment={commentItem}
+                            threadItem={threadLastItem}
                             onDone={onResolve} />
                     </div>
                 </>
