@@ -1,18 +1,18 @@
 'use client';
 
+import { useContext, useState } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
+import { Popper } from '@signalco/ui-primitives/Popper';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { Check, Desktop, Mobile, MoreHorizontal, Tablet } from '@signalco/ui-icons';
 import { Timeago } from '@signalco/ui/Timeago';
-import { CommentItem, CommentItemThreadItem } from './Comments';
-import { Popper } from '@signalco/ui-primitives/Popper';
 import { camelToSentenceCase } from '@signalco/js';
-import { useContext, useState } from 'react';
 import { CommentsBootstrapperContext } from './CommentsBootstrapperContext';
+import { CommentItem, CommentItemThreadItem } from './Comments';
 
 function DeviceInfo({ device }: { device?: CommentItem['device'] }) {
     const { rootElement } = useContext(CommentsBootstrapperContext);
@@ -36,7 +36,7 @@ function DeviceInfo({ device }: { device?: CommentItem['device'] }) {
             anchor={(
                 <DeviceSizeIcon size={14} className="text-secondary-foreground" onMouseEnter={() => setOpen(true)} />
             )}>
-            <Stack spacing={0.5} className="bg-secondary-foreground text-background px-2 py-1 rounded-md">
+            <Stack spacing={0.5} className="rounded-md px-2 py-1 text-background">
                 {device?.browser && <Typography level="body2" title={device.userAgent}>{device.browser}</Typography>}
                 {device?.os && <Typography level="body2">{device.os}</Typography>}
                 {deviceSize && <Typography level="body2">{camelToSentenceCase(deviceSize)}</Typography>}
