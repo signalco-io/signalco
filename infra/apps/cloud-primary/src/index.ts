@@ -195,6 +195,7 @@ const up = async () => {
             'Auth0_ClientId_Station': config.requireSecret('secret-auth0ClientIdStation'),
             'Auth0_ClientSecret_Station': config.requireSecret('secret-auth0ClientSecretStation'),
             'HCaptcha_Secret': config.requireSecret('secret-hcaptchaSecret'),
+            'SignalcoPatSigningToken': config.requireSecret('secret-patSigningToken'),
         };
 
         // Populate public functions settings
