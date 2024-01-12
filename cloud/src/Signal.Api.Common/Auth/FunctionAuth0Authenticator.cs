@@ -26,7 +26,7 @@ public class FunctionAuth0Authenticator(
     {
         var domain = await secretsProvider.GetSecretAsync(SecretKeys.Auth0.Domain, cancellationToken);
         var audience = await secretsProvider.GetSecretAsync(SecretKeys.Auth0.ApiIdentifier, cancellationToken);
-        return new Auth0Authenticator(domain, new[] {audience}, allowExpiredToken);
+        return new Auth0Authenticator(domain, new[] {audience}, allowExpiredToken, secretsProvider);
     }
 
     public async Task<IUserRefreshToken> RefreshTokenAsync(

@@ -1,5 +1,3 @@
-'use client';
-
 import { useRef } from 'react';
 import { cx } from '@signalco/ui-primitives/cx';
 import { getElementSelector } from '@signalco/js';

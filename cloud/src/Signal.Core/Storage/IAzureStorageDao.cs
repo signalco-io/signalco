@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Signal.Core.Auth;
 using Signal.Core.Contacts;
 using Signal.Core.Entities;
 using Signal.Core.Processor;
@@ -14,6 +15,13 @@ namespace Signal.Core.Storage;
 
 public interface IAzureStorageDao
 {
+    Task<bool> PatExistsAsync(
+        string userId, 
+        string patHash, 
+        CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<IPat>> PatsAsync(string userId, CancellationToken cancellationToken = default);
+
     Task<IEnumerable<IEntity>> UserEntitiesAsync(
         string userId, 
         IEnumerable<EntityType>? types, 

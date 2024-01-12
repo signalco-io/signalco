@@ -2,6 +2,8 @@ namespace Signal.Infrastructure.AzureStorage.Tables;
 
 internal static class ItemTableNames
 {
+    public const string AuthPats = "pats";
+
     public const string Entities = "entities";
 
     public const string Contacts = "contacts";

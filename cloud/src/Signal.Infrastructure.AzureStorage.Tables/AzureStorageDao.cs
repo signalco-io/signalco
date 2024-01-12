@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Signal.Core.Auth;
 using Signal.Core.Contacts;
 using Signal.Core.Entities;
 using Signal.Core.Processor;
@@ -129,6 +130,26 @@ internal class AzureStorageDao : IAzureStorageDao
             null,
             AzureUser.ToUser,
             cancellationToken: cancellationToken);
+    }
+
+    public async Task<bool> PatExistsAsync(string userId, string patHash, CancellationToken cancellationToken = default)
+    {
+        var client = await this.clientFactory.GetTableClientAsync(ItemTableNames.AuthPats, cancellationToken);
+        var patQuery = client.QueryAsync<AzureEntity>(
+            e => e.PartitionKey == userId && e.RowKey == patHash,
+            cancellationToken: cancellationToken);
+        await foreach (var _ in patQuery)
+            return true;
+        return false;
+    }
+
+    public async Task<IEnumerable<IPat>> PatsAsync(string userId, CancellationToken cancellationToken = default)
+    {
+        var client = await this.clientFactory.GetTableClientAsync(ItemTableNames.AuthPats, cancellationToken);
+        var patQuery = client.QueryAsync<AzureAuthPat>(
+            e => e.PartitionKey == userId,
+            cancellationToken: cancellationToken);
+        return await EnumerateAsync(patQuery, null, AzureAuthPat.ToPat, cancellationToken);
     }
 
     public async Task<IEnumerable<IEntity>> UserEntitiesAsync(string userId, IEnumerable<EntityType>? types, CancellationToken cancellationToken = default)

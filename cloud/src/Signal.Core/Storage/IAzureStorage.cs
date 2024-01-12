@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Signal.Core.Contacts;
@@ -12,6 +13,14 @@ namespace Signal.Core.Storage;
 
 public interface IAzureStorage
 {
+    Task PatCreateAsync(
+        string userId, 
+        string patEnd, 
+        string patHash, 
+        string? alias, 
+        DateTime? expire, 
+        CancellationToken cancellationToken = default);
+
     Task UpsertAsync(IEntity entity, CancellationToken cancellationToken = default);
 
     Task UpsertAsync(IContactPointer contact, CancellationToken cancellationToken = default);
