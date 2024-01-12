@@ -30,7 +30,8 @@ public class PatsCreateFunction(
             var user = context.User;
 
             var pat = await patService.CreateAsync(
-                new PatCreate(user.UserId, payload.Alias, payload.Expire));
+                new PatCreate(user.UserId, payload.Alias, payload.Expire),
+                cancellationToken);
 
             return new PatCreateResponseDto(pat);
         });
