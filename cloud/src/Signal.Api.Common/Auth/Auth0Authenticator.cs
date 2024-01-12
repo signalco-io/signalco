@@ -42,14 +42,16 @@ public sealed class Auth0Authenticator : IJwtAuthenticator
         string token,
         CancellationToken cancellationToken = default)
     {
-        if (this.handler.ReadJwtToken(token).Issuer == "signalcopat") // Same as in PatService (where PAT is created)
+        if (this.handler.ReadJwtToken(token).Issuer == "https://api.signalco.io/") // Same as in PatService (where PAT is created)
         {
             // TODO: Optimize by caching these parameters (not changing)
             var patParameters = new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-                    await this.secretsProvider.GetSecretAsync(SecretKeys.PatSigningToken, cancellationToken)))
+                    await this.secretsProvider.GetSecretAsync(SecretKeys.PatSigningToken, cancellationToken))),
+                ValidateAudience = false,
+                ValidIssuer = "https://api.signalco.io/"
             };
             var user = this.handler.ValidateToken(token, patParameters, out var validatedToken);
             return (user, validatedToken);

@@ -15,7 +15,7 @@ using Signal.Core.Storage;
 namespace Signal.Core.Auth;
 
 public class PatService(
-    IAzureStorage storage, 
+    IAzureStorage storage,
     IAzureStorageDao dao,
     ISecretsProvider secretsProvider) : IPatService
 {
@@ -25,7 +25,7 @@ public class PatService(
             throw new ExpectedHttpException(HttpStatusCode.Unauthorized);
     }
 
-    public Task<IEnumerable<IPat>> GetAllAsync(string userId, CancellationToken cancellationToken = default) => 
+    public Task<IEnumerable<IPat>> GetAllAsync(string userId, CancellationToken cancellationToken = default) =>
         dao.PatsAsync(userId, cancellationToken);
 
     public async Task<string> CreateAsync(IPatCreate patCreate, CancellationToken cancellationToken = default)
@@ -33,8 +33,8 @@ public class PatService(
         var token = await this.JwtTokenAsync(patCreate.UserId, patCreate.Expire, cancellationToken);
         var hash = PatHashSha256(patCreate.UserId, token);
         await storage.PatCreateAsync(
-            patCreate.UserId, 
-            token[^4..], hash, 
+            patCreate.UserId,
+            token[^4..], hash,
             patCreate.Alias,
             patCreate.Expire, cancellationToken);
         return token;
@@ -51,7 +51,7 @@ public class PatService(
         };
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Issuer = "signalcopat",
+            Issuer = "https://api.signalco.io/",
             Subject = new ClaimsIdentity(claims),
             Expires = expire,
             SigningCredentials = signingCredentials
@@ -65,7 +65,7 @@ public class PatService(
     {
         var hash = new StringBuilder();
         var crypto = HMACSHA512.HashData(Encoding.UTF8.GetBytes(key), Encoding.UTF8.GetBytes(pat));
-        foreach (var theByte in crypto) 
+        foreach (var theByte in crypto)
             hash.Append(theByte.ToString("x2"));
         return hash.ToString();
     }
