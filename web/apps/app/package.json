@@ -9,6 +9,7 @@
         "node": "20.x"
     },
     "scripts": {
+        "prepare:api": "pnpm dlx openapi-typescript https://api.signalco.io/api/swagger.yaml -o ./src/api/signalco/schema.d.ts",
         "dev": "next -p 3001",
         "build": "next build",
         "build:analyze": "cross-env ANALYZE=true pnpm build",
@@ -57,6 +58,8 @@
         "next": "14.0.4",
         "next-secure-headers": "2.2.0",
         "next-themes": "0.2.1",
+        "openapi-typescript": "6.7.3",
+        "openapi-fetch": "0.8.2",
         "pigeon-maps": "0.21.3",
         "react": "18.2.0",
         "react-cool-inview": "3.0.1",
