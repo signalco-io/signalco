@@ -24,7 +24,7 @@
         "@storybook/nextjs": "7.6.8",
         "@storybook/react": "7.6.8",
         "@storybook/theming": "7.6.8",
-        "@types/react": "18.2.47",
+        "@types/react": "18.2.48",
         "@types/react-dom": "18.2.18",
         "autoprefixer": "10.4.16",
         "css-loader": "6.9.0",
