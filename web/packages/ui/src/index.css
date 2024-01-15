@@ -98,6 +98,10 @@
         font-feature-settings: "rlig" 1, "calt" 1;
     }
 
+    button, [role="button"] {
+        @apply cursor-auto;
+    }
+
     ::selection { background: var(--bg-selection); color: var(--text-selection); }
 }
 
