@@ -15,7 +15,7 @@ function Header({ ...rest }: HTMLAttributes<HTMLTableSectionElement>) {
 
 function Head({ ...rest }: HTMLAttributes<HTMLHeadElement>) {
     return (
-        <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground" {...rest} />
+        <th className="h-12 px-3 text-left align-middle text-base font-medium text-muted-foreground" {...rest} />
     )
 }
 
@@ -33,7 +33,7 @@ function Row({ className, ...rest }: HTMLAttributes<HTMLTableRowElement>) {
 
 function Cell({ className, ...rest }: HTMLAttributes<HTMLTableCellElement>) {
     return (
-        <td className={cx('p-4 align-middle', className)} {...rest} />
+        <td className={cx('p-3 text-base align-middle', className)} {...rest} />
     )
 }
 
