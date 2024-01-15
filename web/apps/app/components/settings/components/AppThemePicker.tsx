@@ -7,26 +7,26 @@ import { Input } from '@signalco/ui-primitives/Input';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Custom, Laptop, SunMoon, Timer } from '@signalco/ui-icons';
 import type { AppThemeMode, DefaultColorScheme, SupportedColorScheme } from '@signalco/ui/theme';
-import { fromDuration, now, todayAt, toDuration } from '../../src/services/DateTimeProvider';
-import useUserSetting from '../../src/hooks/useUserSetting';
-import useLocale from '../../src/hooks/useLocale';
+import { fromDuration, now, todayAt, toDuration } from '../../../src/services/DateTimeProvider';
+import useUserSetting from '../../../src/hooks/useUserSetting';
+import useLocale from '../../../src/hooks/useLocale';
 
 function AppThemeVisual({ label, theme, disabled, size }: { label: string, theme: SupportedColorScheme, disabled?: boolean, size: number }) {
     let textColor;
     let backgroundColor;
     switch (theme) {
-    case 'dark':
-        backgroundColor = 'black';
-        textColor = 'white';
-        break;
-    // case 'darkDimmed':
-    //     backgroundColor = 'rgba(32, 31, 30, 1)'
-    //     textColor = 'white';
-    //     break;
-    default:
-        backgroundColor = 'white';
-        textColor = 'black';
-        break;
+        case 'dark':
+            backgroundColor = 'black';
+            textColor = 'white';
+            break;
+        // case 'darkDimmed':
+        //     backgroundColor = 'rgba(32, 31, 30, 1)'
+        //     textColor = 'white';
+        //     break;
+        default:
+            backgroundColor = 'white';
+            textColor = 'black';
+            break;
     }
 
     const scale = size / 80;

@@ -3,7 +3,7 @@
 import React, { ComponentProps } from 'react';
 import { SelectItems } from '@signalco/ui-primitives/SelectItems';
 import { FormBuilderComponent } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
-import useLocale, { availableLocales } from '../../src/hooks/useLocale';
+import useLocale, { availableLocales } from '../../../src/hooks/useLocale';
 
 export function SelectLanguage({ value, label, onChange }: ComponentProps<FormBuilderComponent>) {
     const locales = useLocale('App', 'Locales');

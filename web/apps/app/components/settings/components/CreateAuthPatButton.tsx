@@ -3,11 +3,11 @@ import { Stack } from '@signalco/ui-primitives/Stack';
 import { Modal } from '@signalco/ui-primitives/Modal';
 import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
+import { CopyToClipboardInput } from '@signalco/ui/CopyToClipboardInput';
 import { noError, submitForm, resetFields } from '@enterwell/react-form-validation';
 import { FormBuilder, useFormField } from '@enterwell/react-form-builder';
-import GeneralFormProvider from '../forms/GeneralFormProvider';
-import { useCreateAuthPat } from '../../src/hooks/signalco/pats/useCreateAuthPat';
-
+import GeneralFormProvider from '../../forms/GeneralFormProvider';
+import { useCreateAuthPat } from '../../../src/hooks/signalco/pats/useCreateAuthPat';
 
 export function CreateAuthPatButton() {
     const createPat = useCreateAuthPat();
@@ -50,9 +50,9 @@ export function CreateAuthPatButton() {
             <Stack spacing={2}>
                 {pat && (
                     <>
-                        <p>Here is your new PAT:</p>
-                        <pre>{pat}</pre>
-                        <p>Make sure to copy it now, as you won't be able to see it again.</p>
+                        <p>Here is your new PAT</p>
+                        <CopyToClipboardInput defaultValue={pat} />
+                        <p>Make sure to copy it now, as you will not be able to see it again.</p>
                         <Button onClick={handleClose}>Close</Button>
                     </>
                 )}

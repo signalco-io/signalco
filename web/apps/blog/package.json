@@ -48,7 +48,7 @@
         "tailwindcss-animate": "1.0.7"
     },
     "devDependencies": {
-        "@axe-core/playwright": "4.8.2",
+        "@axe-core/playwright": "4.8.3",
         "@babel/core": "7.23.7",
         "@next/bundle-analyzer": "14.0.4",
         "@playwright/test": "1.40.1",
@@ -58,8 +58,8 @@
         "@types/color": "3.0.6",
         "@types/fs-extra": "11.0.4",
         "@types/klaw": "3.0.6",
-        "@types/node": "20.11.0",
-        "@types/react": "18.2.47",
+        "@types/node": "20.11.2",
+        "@types/react": "18.2.48",
         "@types/react-dom": "18.2.18",
         "colorette": "2.0.20",
         "cross-env": "7.0.3",

@@ -11,7 +11,11 @@ async function signalcoApiClient() {
 
 export async function authPatsAsync() {
     const client = await signalcoApiClient();
-    return (await client.GET('/auth/pats')).data;
+    const pats = (await client.GET('/auth/pats')).data;
+    return pats?.map((pat) => ({
+        ...pat,
+        expire: pat.expire ? new Date(pat.expire) : undefined
+    }));
 }
 
 export async function authPatCreateAsync(alias: string | undefined, expire: Date | undefined) {

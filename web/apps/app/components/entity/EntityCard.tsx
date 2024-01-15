@@ -44,7 +44,7 @@ export default function EntityCard({ entity, spread, selectable, selected, onSel
                             <Avatar>
                                 <EntityIcon entity={entity} />
                             </Avatar>
-                            <Typography noWrap>{entity.alias}</Typography>
+                            <Typography noWrap level="body1">{entity.alias}</Typography>
                         </Row>
                         <Row
                             justifyContent="space-between"

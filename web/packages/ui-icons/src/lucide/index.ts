@@ -10,7 +10,6 @@ export {
     Menu,
     GitCommit as Channel,
     MoreHorizontal,
-    MoreVertical,
     X as Close,
     X as Clear,
     Droplets,
