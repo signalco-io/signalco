@@ -27,7 +27,11 @@ export function Timeago({ date, live, format, noDate = '-' }: TimeagoProps) {
         <div>
             {isNever
                 ? <Typography level="body2">{noDate}</Typography>
-                : <ReactTimeago formatter={format === 'nano' ? nanoFormater : undefined} date={date} live={live} />}
+                : <ReactTimeago
+                    title={(typeof date === 'number' ? new Date(date) : date)?.toLocaleString()}
+                    formatter={format === 'nano' ? nanoFormater : undefined}
+                    date={date}
+                    live={live} />}
         </div>
     )
 }
