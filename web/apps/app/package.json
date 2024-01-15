@@ -74,7 +74,7 @@
         "uuid": "9.0.1"
     },
     "devDependencies": {
-        "@axe-core/playwright": "4.8.2",
+        "@axe-core/playwright": "4.8.3",
         "@ducanh2912/next-pwa": "10.2.2",
         "@next/bundle-analyzer": "14.0.4",
         "@playwright/test": "1.40.1",
