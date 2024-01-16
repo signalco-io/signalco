@@ -41,7 +41,7 @@
         "@axe-core/playwright": "4.8.3",
         "@babel/core": "7.23.7",
         "@next/bundle-analyzer": "14.0.4",
-        "@playwright/test": "1.40.1",
+        "@playwright/test": "1.41.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
