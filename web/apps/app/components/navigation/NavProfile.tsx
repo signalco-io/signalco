@@ -38,7 +38,7 @@ export default function NavProfile() {
                 <Suspense>
                     <UserProfileAvatar />
                 </Suspense>
-                <div className="hidden h-full w-full sm:block">
+                <div className="hidden size-full sm:block">
                     <Stack className="h-full">
                         {navItems.filter(ni => !ni.end).map((ni, index) => (
                             <NavLink

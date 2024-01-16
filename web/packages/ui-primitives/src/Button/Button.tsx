@@ -57,7 +57,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
                 {...otherProps}
             >
                 {!loading && (typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator)}
-                {loading && <LoaderSpinner className="mr-2 h-4 w-4 animate-spin" />}
+                {loading && <LoaderSpinner className="mr-2 size-4 animate-spin" />}
                 {children}
                 {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator}
             </ButtonComp>

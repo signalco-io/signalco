@@ -150,8 +150,8 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
         <Button
             onClick={handleStateChangeRequest}
             variant="plain"
-            className="m-0 h-full w-full !items-start !justify-start p-0 text-start">
-            <Stack className="relative h-full w-full items-start p-2">
+            className="m-0 size-full !items-start !justify-start p-0 text-start">
+            <Stack className="relative size-full items-start p-2">
                 <div className="grow">
                     <Visual state={state} size={80} />
                 </div>

@@ -69,7 +69,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
     const historyData = usePromise(loadHistoryCallback);
 
     return (
-        <div className="h-full w-full">
+        <div className="size-full">
             <Stack alignItems="center" justifyContent="center" className="h-full">
                 <Button variant="plain" href={`${KnownPages.Entities}/${temperatureDevice?.id}`}>
                     <PrimaryValueLabel

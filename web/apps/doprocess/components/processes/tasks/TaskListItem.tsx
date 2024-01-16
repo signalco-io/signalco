@@ -81,7 +81,7 @@ export function TaskListItem({ selected, taskDefinition, runId, task, taskIndex,
                 <Row spacing={1}>
                     <div ref={setActivatorNodeRef}
                         {...listeners}
-                        className="h-[18px] w-[18px] text-center">
+                        className="size-[18px] text-center">
                         {(!runId && editable) && (
                             <Drag
                                 size={18}
