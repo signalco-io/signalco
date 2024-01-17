@@ -155,7 +155,7 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
                 <div className="grow">
                     <Visual state={state} size={80} />
                 </div>
-                <Typography semiBold noWrap>{label}</Typography>
+                <Typography semiBold noWrap level="body1">{label}</Typography>
             </Stack>
             {isLoading && (
                 <div className="absolute right-4 top-4">
