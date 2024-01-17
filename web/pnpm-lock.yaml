@@ -173,7 +173,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.40.1)
+        version: 4.8.3(playwright-core@1.41.0)
       '@ducanh2912/next-pwa':
         specifier: 10.2.2
         version: 10.2.2(next@14.0.4)(webpack@5.89.0)
@@ -348,7 +348,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.40.1)
+        version: 4.8.3(playwright-core@1.41.0)
       '@babel/core':
         specifier: 7.23.7
         version: 7.23.7
@@ -469,7 +469,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.40.1)
+        version: 4.8.3(playwright-core@1.41.0)
       '@babel/core':
         specifier: 7.23.7
         version: 7.23.7
@@ -656,7 +656,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.40.1)
+        version: 4.8.3(playwright-core@1.41.0)
       '@babel/core':
         specifier: 7.23.7
         version: 7.23.7
@@ -697,8 +697,8 @@ importers:
         specifier: 16.3.1
         version: 16.3.1
       drizzle-kit:
-        specifier: 0.20.12
-        version: 0.20.12
+        specifier: 0.20.13
+        version: 0.20.13
       eslint:
         specifier: 8.56.0
         version: 8.56.0
@@ -783,7 +783,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.40.1)
+        version: 4.8.3(playwright-core@1.41.0)
       '@babel/core':
         specifier: 7.23.7
         version: 7.23.7
@@ -1022,7 +1022,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.40.1)
+        version: 4.8.3(playwright-core@1.41.0)
       '@babel/core':
         specifier: 7.23.7
         version: 7.23.7
@@ -1176,7 +1176,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.40.1)
+        version: 4.8.3(playwright-core@1.41.0)
       '@babel/core':
         specifier: 7.23.7
         version: 7.23.7
@@ -1777,13 +1777,13 @@ packages:
       default-browser-id: 3.0.0
     dev: true
 
-  /@axe-core/playwright@4.8.3(playwright-core@1.40.1):
+  /@axe-core/playwright@4.8.3(playwright-core@1.41.0):
     resolution: {integrity: sha512-YtbkAWeOp5oQeI8vS6KYqJDa5yTl5O1wJP8KOZAAVjhxeiK/Y1ssxnZuGRobARyVh3eS6O3jdxTv/iCK1RfgaA==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
     dependencies:
       axe-core: 4.8.3
-      playwright-core: 1.40.1
+      playwright-core: 1.41.0
     dev: true
 
   /@babel/code-frame@7.23.5:
@@ -3750,8 +3750,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@drizzle-team/studio@0.0.37:
-    resolution: {integrity: sha512-LZyAPGJBX43jsrVZh7+w1Jig/BC6PJx63ReHUYK+GRQYNY9UJNlPXmn1uC/LMRX+A7JwYM4Sr4Fg/hnJSqlfgA==}
+  /@drizzle-team/studio@0.0.39:
+    resolution: {integrity: sha512-c5Hkm7MmQC2n5qAsKShjQrHoqlfGslB8+qWzsGGZ+2dHMRTNG60UuzalF0h0rvBax5uzPXuGkYLGaQ+TUX3yMw==}
     dependencies:
       superjson: 2.2.1
     dev: true
@@ -10924,11 +10924,11 @@ packages:
       wordwrap: 1.0.0
     dev: true
 
-  /drizzle-kit@0.20.12:
-    resolution: {integrity: sha512-JWJposyEO6QvGIdvj0CmnJK5sMWW9j5HPiGnRIKvYNaAfZEHbmWlemxV2np7g2FZzSvuzwpa9EGmO20PaPeUmA==}
+  /drizzle-kit@0.20.13:
+    resolution: {integrity: sha512-j9oZSQXNWG+KBJm0Sg3S/zJpncHGKnpqNfFuM4NUxUMGTcihDHhP9SW6Jncqwb5vsP1Xm0a8JLm3PZUIspC/oA==}
     hasBin: true
     dependencies:
-      '@drizzle-team/studio': 0.0.37
+      '@drizzle-team/studio': 0.0.39
       '@esbuild-kit/esm-loader': 2.6.5
       camelcase: 7.0.1
       chalk: 5.3.0
@@ -15682,12 +15682,6 @@ packages:
     engines: {node: '>=14.16'}
     dependencies:
       find-up: 6.3.0
-    dev: true
-
-  /playwright-core@1.40.1:
-    resolution: {integrity: sha512-+hkOycxPiV534c4HhpfX6yrlawqVUzITRKwHAmYfmsVreltEl6fAZJ3DPfLMOODw0H3s1Itd6MDCWmP1fl/QvQ==}
-    engines: {node: '>=16'}
-    hasBin: true
     dev: true
 
   /playwright-core@1.41.0:
