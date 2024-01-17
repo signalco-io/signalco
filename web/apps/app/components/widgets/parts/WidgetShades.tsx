@@ -109,7 +109,7 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
                         <div className="relative h-3/4 grow">
                             <WindowVisual shadePerc={1 - shadePerc} size={80} />
                         </div>
-                        {columns > 2 && <Typography semiBold noWrap>{label}</Typography>}
+                        {columns > 2 && <Typography semiBold noWrap level="body1">{label}</Typography>}
                     </Stack>
                     <Divider orientation="vertical" />
                 </div>
