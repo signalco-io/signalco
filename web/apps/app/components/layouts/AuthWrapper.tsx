@@ -1,3 +1,5 @@
+'use client';
+
 import React, { PropsWithChildren } from 'react';
 import { useRouter } from 'next/navigation';
 import { Auth0Provider } from '@auth0/auth0-react';

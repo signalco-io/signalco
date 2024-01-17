@@ -33,7 +33,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({
                     className
                 )}
                 {...rest}>
-                {loading && <LoaderSpinner className="mr-2 h-4 w-4 animate-spin" />}
+                {loading && <LoaderSpinner className="mr-2 size-4 animate-spin" />}
                 {loading ? null : children}
             </ButtonComp>
         </Comp>

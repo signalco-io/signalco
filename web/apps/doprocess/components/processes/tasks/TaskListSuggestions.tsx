@@ -71,7 +71,7 @@ export function TaskListSuggestions({ processId }: { processId: string; }) {
                         aiText === aiSuggestionsText && 'w-40'
                     )}
                     startDecorator={(
-                        <div className="flex h-5 w-5 flex-row gap-1">
+                        <div className="flex size-5 flex-row gap-1">
                             <AI
                                 size={20}
                                 className={cx(

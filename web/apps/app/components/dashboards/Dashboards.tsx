@@ -50,7 +50,7 @@ function SpaceBackground({ background }: { background?: string }) {
         <>
             {(background && background !== currentGradient) && (
                 <div
-                    className="pointer-events-none fixed inset-0 -z-50 h-full w-full"
+                    className="pointer-events-none fixed inset-0 -z-50 size-full"
                     style={{
                         backgroundImage: spaceBackgroundGradients[background]
                     }} />

@@ -19,7 +19,7 @@ function GlobeSection() {
             <Fade duration={2000} appear={appear}>
                 <div className="overflow-hidden">
                     <div className="relative flex min-h-[12vh] justify-center sm:min-h-[20vh] md:min-h-[300px]">
-                        <div className="absolute h-[1000px] max-h-[700vw!important] w-[1000px] max-w-[80vw!important]">
+                        <div className="absolute size-[1000px] max-h-[700vw!important] max-w-[80vw!important]">
                             {!isServer && (
                                 <Globe />
                             )}

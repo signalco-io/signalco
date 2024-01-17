@@ -1,11 +1,11 @@
 'use client';
 
+import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Row } from '@signalco/ui-primitives/Row';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { Divider } from '@signalco/ui-primitives/Divider';
 import { Inbox, Menu } from '@signalco/ui-icons';
 import { CommentIcon } from './CommentIcon';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 
 type CommentToolbarProps = {
     creatingPointComment: boolean;
@@ -28,7 +28,7 @@ export function CommentToolbar({ creatingPointComment, onAddPointComment, onShow
                         <Inbox />
                     </IconButton>
                 </Tooltip>
-                <Divider orientation="vertical" flex className='my-2' />
+                <Divider orientation="vertical" flex className="my-2" />
                 <Tooltip title="Toolbar menu">
                     <IconButton variant="plain" className="rounded-full" onClick={onExitReview}>
                         <Menu />

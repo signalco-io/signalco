@@ -104,12 +104,12 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
             {columns > 1 && (
                 <div className="h-full">
                     <Stack
-                        className="relative h-full w-full items-start p-2"
+                        className="relative size-full items-start p-2"
                         justifyContent={columns > 2 ? 'space-between' : 'center'}>
                         <div className="relative h-3/4 grow">
                             <WindowVisual shadePerc={1 - shadePerc} size={80} />
                         </div>
-                        {columns > 2 && <Typography semiBold noWrap>{label}</Typography>}
+                        {columns > 2 && <Typography semiBold noWrap level="body1">{label}</Typography>}
                     </Stack>
                     <Divider orientation="vertical" />
                 </div>

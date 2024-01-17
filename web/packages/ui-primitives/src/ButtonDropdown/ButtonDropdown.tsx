@@ -34,9 +34,9 @@ const ButtonDropdown = forwardRef<HTMLButtonElement, ButtonProps>(({
             {...otherProps}
         >
             {!loading && startDecorator}
-            {loading && <LoaderSpinner className="mr-2 h-4 w-4 animate-spin" />}
+            {loading && <LoaderSpinner className="mr-2 size-4 animate-spin" />}
             <span>{children}</span>
-            <Select className="h-4 w-4 opacity-50" />
+            <Select className="size-4 opacity-50" />
         </ButtonComp>
     )
 });

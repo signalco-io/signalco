@@ -37,7 +37,7 @@ const DropdownMenuSubTrigger = forwardRef<
         {...props}
     >
         {children}
-        <Navigate className="ml-auto h-4 w-4" />
+        <Navigate className="ml-auto size-4" />
     </SubTrigger>
 ))
 DropdownMenuSubTrigger.displayName = SubTrigger.displayName;

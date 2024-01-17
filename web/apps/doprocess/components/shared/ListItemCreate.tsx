@@ -9,7 +9,7 @@ export function ListItemCreate({ loading, label, onSelected }: Required<Pick<Lis
             nodeId="list-item-create"
             className={'text-muted-foreground'}
             startDecorator={<Add />}
-            endDecorator={<Spinner loading={loading} loadingLabel="Creating..." className="h-5 w-5 self-start" />}
+            endDecorator={<Spinner loading={loading} loadingLabel="Creating..." className="size-5 self-start" />}
             label={label}
             onSelected={onSelected} />
     );
