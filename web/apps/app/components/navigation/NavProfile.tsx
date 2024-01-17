@@ -1,9 +1,9 @@
 'use client';
 
-import React, { Suspense, useState } from 'react';
+import React, { } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
-import { IconButton } from '@signalco/ui-primitives/IconButton';
-import { Channel, Close, Dashboard, Device, Menu as MenuIcon, Settings } from '@signalco/ui-icons';
+import { Channel, Dashboard, Device, Settings } from '@signalco/ui-icons';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { UserProfileAvatar } from '../users/UserProfileAvatar';
 import { KnownPages } from '../../src/knownPages';
 import useLocale from '../../src/hooks/useLocale';
@@ -28,57 +28,52 @@ export const navItems: NavItem[] = [
 ];
 
 export default function NavProfile() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const activeNavItem = useActiveNavItem();
     const { t } = useLocale('App', 'Nav');
 
+    // Hide nav in fullscreen mode
+    const [isFullScreen] = useSearchParam('fullscreen');
+    if (isFullScreen === 'true') {
+        return null;
+    }
+
     return (
         <FloatingNavContainer>
-            <div className="flex h-full min-h-[60px] flex-row items-center justify-between gap-3 sm:flex-col sm:justify-start sm:py-2 sm:pl-0">
-                <Suspense>
+            <div className="flex h-full min-h-[50px] flex-row items-center justify-between gap-3 px-2 sm:flex-col sm:justify-start sm:px-0 sm:py-2">
+                <div className="flex h-full flex-row gap-3 sm:flex-col">
                     <UserProfileAvatar />
-                </Suspense>
-                <div className="hidden size-full sm:block">
-                    <Stack className="h-full">
-                        {navItems.filter(ni => !ni.end).map((ni, index) => (
-                            <NavLink
-                                key={index + 1}
-                                path={ni.path}
-                                Icon={ni.icon}
-                                active={ni === activeNavItem}
-                                label={t(ni.label)} />
-                        ))}
-                        <div className="grow" />
-                        {navItems.filter(ni => ni.end).map((ni, index) => (
-                            <NavLink
-                                key={index + 1}
-                                path={ni.path}
-                                Icon={ni.icon}
-                                active={ni === activeNavItem}
-                                label={t(ni.label)} />
-                        ))}
-                    </Stack>
-                </div>
-                <div className="absolute left-1/2 -translate-x-1/2 sm:hidden">
-                    <Suspense>
+                    <div className="hidden size-full sm:block">
+                        <Stack className="h-full">
+                            {navItems.filter(ni => !ni.end).map((ni, index) => (
+                                <NavLink
+                                    key={index + 1}
+                                    path={ni.path}
+                                    Icon={ni.icon}
+                                    active={ni === activeNavItem}
+                                    label={t(ni.label)} />
+                            ))}
+                            <div className="grow" />
+                            {navItems.filter(ni => ni.end).map((ni, index) => (
+                                <NavLink
+                                    key={index + 1}
+                                    path={ni.path}
+                                    Icon={ni.icon}
+                                    active={ni === activeNavItem}
+                                    label={t(ni.label)} />
+                            ))}
+                        </Stack>
+                    </div>
+                    <div className="sm:hidden">
                         <PageTitle />
-                    </Suspense>
+                    </div>
                 </div>
-                <div className="sm:hidden">
-                    <IconButton
-                        variant="plain"
-                        size="lg"
-                        onClick={() => setMobileMenuOpen((curr) => !curr)}
-                        aria-label="Toggle menu">
-                        {mobileMenuOpen ? <Close /> : <MenuIcon />}
-                    </IconButton>
-                </div>
+                {/* Spacer for MobileMenu component rendered outside */}
+                <div className="w-8" />
             </div>
             <MobileMenu
-                open={mobileMenuOpen}
+                className="absolute right-2 top-[calc(50px/2-36px/2)] sm:hidden"
                 items={navItems}
-                active={activeNavItem}
-                onClose={() => setMobileMenuOpen(false)} />
+                active={activeNavItem} />
         </FloatingNavContainer>
     );
 }
