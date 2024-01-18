@@ -43,6 +43,7 @@ jobs:
     ci:
         timeout-minutes: 5
         runs-on: ubuntu-latest
+        container: amazonlinux:2.0.20191217.0
         concurrency:
           group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.name }}
           cancel-in-progress: true
@@ -74,16 +75,14 @@ jobs:
             working-directory: ${{ inputs.path }}/
 
           - name: ⚒️ Build app
-            run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-            working-directory: ${{ inputs.path }}/
+            run: vercel build --cwd ${{ inputs.path }}/ --token=${{ secrets.VERCEL_TOKEN }}
 
           - name: 🚀 Deploy Preview to Vercel
-            run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-            working-directory: ${{ inputs.path }}/
+            run: vercel deploy --prebuilt --cwd ${{ inputs.path }}/ --token=${{ secrets.VERCEL_TOKEN }}
             if: ${{ inputs.preview == true }}
 
           - name: 🚀 Deploy Production to Vercel
             run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} ${{ inputs.environment == 'development' && '--skip-domain' }}
-            working-directory: ${{ inputs.path }}/
+            # working-directory: ${{ inputs.path }}/
             if: ${{ inputs.preview == false }}
 
