@@ -49,8 +49,6 @@ jobs:
           cancel-in-progress: true
         steps:
           - uses: actions/checkout@v4
-            with:
-              fetch-depth: 2
 
           - name: ✨ Setup pnpm
             uses: pnpm/action-setup@v2.4.0
@@ -71,11 +69,11 @@ jobs:
             run: pnpm install --global vercel@latest
 
           - name: ⚙️ Pull Vercel Environment Information
-            run: vercel pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}
+            run: vercel env pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}
             working-directory: ${{ inputs.path }}/
 
           - name: ⚒️ Build app
-            run: vercel build --cwd ${{ inputs.path }}/ --token=${{ secrets.VERCEL_TOKEN }}
+            run: pnpm build --filter=${{ inputs.name }}
 
           - name: 🚀 Deploy Preview to Vercel
             run: vercel deploy --prebuilt --cwd ${{ inputs.path }}/ --token=${{ secrets.VERCEL_TOKEN }}
