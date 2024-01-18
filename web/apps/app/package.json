@@ -43,7 +43,7 @@
         "@signalco/ui-notifications": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "@tanstack/react-query": "5.17.15",
-        "@tanstack/react-query-devtools": "5.17.15",
+        "@tanstack/react-query-devtools": "5.17.18",
         "@vercel/analytics": "1.1.1",
         "@vercel/speed-insights": "1.0.5",
         "@vvo/tzdb": "6.124.0",
