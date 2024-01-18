@@ -43,7 +43,6 @@ jobs:
     ci:
         timeout-minutes: 5
         runs-on: ubuntu-latest
-        container: amazonlinux:2.0.20191217.0
         concurrency:
           group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.name }}
           cancel-in-progress: true
