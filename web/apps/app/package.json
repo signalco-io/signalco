@@ -47,7 +47,7 @@
         "@vercel/analytics": "1.1.1",
         "@vercel/speed-insights": "1.0.4",
         "@vvo/tzdb": "6.124.0",
-        "autoprefixer": "10.4.16",
+        "autoprefixer": "10.4.17",
         "classix": "2.1.35",
         "cobe": "0.6.3",
         "color": "4.2.3",

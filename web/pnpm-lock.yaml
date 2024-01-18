@@ -96,8 +96,8 @@ importers:
         specifier: 6.124.0
         version: 6.124.0
       autoprefixer:
-        specifier: 10.4.16
-        version: 10.4.16(postcss@8.4.33)
+        specifier: 10.4.17
+        version: 10.4.17(postcss@8.4.33)
       classix:
         specifier: 2.1.35
         version: 2.1.35
@@ -304,8 +304,8 @@ importers:
         specifier: 1.1.1
         version: 1.1.1
       autoprefixer:
-        specifier: 10.4.16
-        version: 10.4.16(postcss@8.4.33)
+        specifier: 10.4.17
+        version: 10.4.17(postcss@8.4.33)
       classix:
         specifier: 2.1.35
         version: 2.1.35
@@ -900,8 +900,8 @@ importers:
         specifier: 18.2.18
         version: 18.2.18
       autoprefixer:
-        specifier: 10.4.16
-        version: 10.4.16(postcss@8.4.33)
+        specifier: 10.4.17
+        version: 10.4.17(postcss@8.4.33)
       css-loader:
         specifier: 6.9.0
         version: 6.9.0(webpack@5.89.0)
@@ -1132,8 +1132,8 @@ importers:
         specifier: 1.1.1
         version: 1.1.1
       autoprefixer:
-        specifier: 10.4.16
-        version: 10.4.16(postcss@8.4.33)
+        specifier: 10.4.17
+        version: 10.4.17(postcss@8.4.33)
       classix:
         specifier: 2.1.35
         version: 2.1.35
@@ -1480,8 +1480,8 @@ importers:
         specifier: 4.1.7
         version: 4.1.7
       autoprefixer:
-        specifier: 10.4.16
-        version: 10.4.16(postcss@8.4.33)
+        specifier: 10.4.17
+        version: 10.4.17(postcss@8.4.33)
       classix:
         specifier: 2.1.35
         version: 2.1.35
@@ -1618,8 +1618,8 @@ importers:
         specifier: 4.1.7
         version: 4.1.7
       autoprefixer:
-        specifier: 10.4.16
-        version: 10.4.16(postcss@8.4.33)
+        specifier: 10.4.17
+        version: 10.4.17(postcss@8.4.33)
       classix:
         specifier: 2.1.35
         version: 2.1.35
@@ -1693,8 +1693,8 @@ importers:
         specifier: 18.2.18
         version: 18.2.18
       autoprefixer:
-        specifier: 10.4.16
-        version: 10.4.16(postcss@8.4.33)
+        specifier: 10.4.17
+        version: 10.4.17(postcss@8.4.33)
       postcss:
         specifier: 8.4.33
         version: 8.4.33
@@ -9279,15 +9279,15 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
-  /autoprefixer@10.4.16(postcss@8.4.33):
-    resolution: {integrity: sha512-7vd3UC6xKp0HLfua5IjZlcXvGAGy7cBAXTg2lyQ/8WpNhd6SiZ8Be+xm3FyBSYJx5GKcpRCzBh7RH4/0dnY+uQ==}
+  /autoprefixer@10.4.17(postcss@8.4.33):
+    resolution: {integrity: sha512-/cpVNRLSfhOtcGflT13P2794gVSgmPgTR+erw5ifnMLZb0UnSlkK4tquLmkd3BhA+nLo5tX8Cu0upUsGKvKbmg==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.22.2
-      caniuse-lite: 1.0.30001568
+      caniuse-lite: 1.0.30001579
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -9708,6 +9708,9 @@ packages:
 
   /caniuse-lite@1.0.30001568:
     resolution: {integrity: sha512-vSUkH84HontZJ88MiNrOau1EBrCqEQYgkC5gIySiDlpsm8sGVrhU7Kx4V6h0tnqaHzIHZv08HlJIwPbL4XL9+A==}
+
+  /caniuse-lite@1.0.30001579:
+    resolution: {integrity: sha512-u5AUVkixruKHJjw/pj9wISlcMpgFWzSrczLZbrqBSxukQixmg0SJ5sZTpvaFvxU0HoQKd4yoyAogyrAz9pzJnA==}
 
   /case-anything@2.1.13:
     resolution: {integrity: sha512-zlOQ80VrQ2Ue+ymH5OuM/DlDq64mEm+B9UTdHULv5osUMD6HalNTblf2b1u/m6QecjsnOkBpqVZ+XPwIVsy7Ng==}
@@ -16118,7 +16121,7 @@ packages:
       '@csstools/postcss-text-decoration-shorthand': 3.0.3(postcss@8.4.33)
       '@csstools/postcss-trigonometric-functions': 3.0.2(postcss@8.4.33)
       '@csstools/postcss-unset-value': 3.0.0(postcss@8.4.33)
-      autoprefixer: 10.4.16(postcss@8.4.33)
+      autoprefixer: 10.4.17(postcss@8.4.33)
       browserslist: 4.22.2
       css-blank-pseudo: 6.0.0(postcss@8.4.33)
       css-has-pseudo: 6.0.0(postcss@8.4.33)
