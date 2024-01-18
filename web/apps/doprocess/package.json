@@ -42,9 +42,9 @@
     "@signalco/ui-icons": "workspace:*",
     "@signalco/ui-notifications": "workspace:*",
     "@signalco/ui-primitives": "workspace:*",
-    "@tanstack/react-query": "5.17.12",
-    "@tanstack/react-query-devtools": "5.17.12",
-    "@vercel/analytics": "1.1.1",
+    "@tanstack/react-query": "5.17.15",
+    "@tanstack/react-query-devtools": "5.17.18",
+    "@vercel/analytics": "1.1.2",
     "classix": "2.1.35",
     "drizzle-orm": "0.29.3",
     "nanoid": "5.0.4",
@@ -81,7 +81,7 @@
     "next-sitemap": "4.2.3",
     "postcss": "8.4.33",
     "rimraf": "5.0.5",
-    "sass": "1.69.7",
+    "sass": "1.70.0",
     "typescript": "5.3.3"
   },
   "nextBundleAnalysis": {

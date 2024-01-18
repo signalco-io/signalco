@@ -31,8 +31,8 @@
         "@signalco/ui": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
-        "@vercel/analytics": "1.1.1",
-        "autoprefixer": "10.4.16",
+        "@vercel/analytics": "1.1.2",
+        "autoprefixer": "10.4.17",
         "classix": "2.1.35",
         "encoding": "0.1.13",
         "fs-extra": "11.2.0",
@@ -67,7 +67,7 @@
         "next-sitemap": "4.2.3",
         "postcss": "8.4.33",
         "rimraf": "5.0.5",
-        "sass": "1.69.7",
+        "sass": "1.70.0",
         "typescript": "5.3.3"
     },
     "nextBundleAnalysis": {
