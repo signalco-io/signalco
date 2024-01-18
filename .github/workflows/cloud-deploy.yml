@@ -8,12 +8,41 @@ on:
     paths:
       - "cloud/**"
       - "infra/**"
+      - "web/**"
       - ".github/workflows/cloud-deploy.yml"
       - ".github/workflows/infra-deploy_reusable.yml"
+      - ".github/workflows/vercel-deploy_reusable.yml"
 
 jobs:
+  changes:
+    name: "Detect changes"
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            infrastructure:
+              - cloud/**
+              - infra/**
+              - .github/workflows/web-nextjs_bundle_analysis.yml
+              - .github/workflows/cloud-deploy-preview_reusable.yml
+            web:
+              - web/**
+              - .github/workflows/web-nextjs_bundle_analysis.yml
+              - .github/workflows/nextjs_bundle_analysis_reusable.yml
+    outputs:
+      infra: ${{ steps.filter.outputs.infrastructure }}
+      web: ${{ steps.filter.outputs.web }}
+
   infra_cloud-primary_up:
     name: "Cloud Primary infrastructure (deploy)"
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
     uses: ./.github/workflows/infra-deploy_reusable.yml
     with:
       project: "cloud-primary"
@@ -23,9 +52,24 @@ jobs:
 
   infra_uier_up:
     name: "uier infrastructure (deploy)"
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
     uses: ./.github/workflows/infra-deploy_reusable.yml
     with:
       project: "uier"
       baseRef: ${{ github.ref }}
       command: "up"
+    secrets: inherit
+  
+  vercel_blog_deploy:
+    name: "Vercel Blog (deploy)"
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'blog'
+      path: 'web/apps/blog'
+      vercelProjectId: 'prj_VT7qOjkcEvkAsZH7MtSxWcVDWVpr'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
     secrets: inherit
