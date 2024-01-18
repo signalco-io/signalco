@@ -567,8 +567,8 @@ importers:
         specifier: 14.0.4
         version: 14.0.4
       '@planetscale/database':
-        specifier: 1.13.0
-        version: 1.13.0
+        specifier: 1.14.0
+        version: 1.14.0
       '@signalco/cms-components-marketing':
         specifier: workspace:*
         version: link:../../packages/cms-components-marketing
@@ -616,7 +616,7 @@ importers:
         version: 2.1.35
       drizzle-orm:
         specifier: 0.29.3
-        version: 0.29.3(@planetscale/database@1.13.0)(@types/react@18.2.48)(react@18.2.0)
+        version: 0.29.3(@planetscale/database@1.14.0)(@types/react@18.2.48)(react@18.2.0)
       nanoid:
         specifier: 5.0.4
         version: 5.0.4
@@ -5331,8 +5331,8 @@ packages:
     dev: true
     optional: true
 
-  /@planetscale/database@1.13.0:
-    resolution: {integrity: sha512-sb9tUoF+Po55o+3PRHZVeH8XzUIABKBKcnq6oBUa+p/2uau/E2EXhnUPXmkC/x7oB6ILBqmqTL6dPP5Dn6d6iA==}
+  /@planetscale/database@1.14.0:
+    resolution: {integrity: sha512-7BB+iH6EH4YJuDeVeEbxpo60BFz3wIXJNXCmBGl40eC4HStRMGZ1COxKfiuPcINWwwrJhAhI9AEI97AOZYT7JQ==}
     engines: {node: '>=16'}
     dev: false
 
@@ -11015,7 +11015,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.29.3(@planetscale/database@1.13.0)(@types/react@18.2.48)(react@18.2.0):
+  /drizzle-orm@0.29.3(@planetscale/database@1.14.0)(@types/react@18.2.48)(react@18.2.0):
     resolution: {integrity: sha512-uSE027csliGSGYD0pqtM+SAQATMREb3eSM/U8s6r+Y0RFwTKwftnwwSkqx3oS65UBgqDOM0gMTl5UGNpt6lW0A==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -11086,7 +11086,7 @@ packages:
       sqlite3:
         optional: true
     dependencies:
-      '@planetscale/database': 1.13.0
+      '@planetscale/database': 1.14.0
       '@types/react': 18.2.48
       react: 18.2.0
     dev: false
