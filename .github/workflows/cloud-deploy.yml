@@ -73,3 +73,29 @@ jobs:
       preview: false
       environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
     secrets: inherit
+
+  vercel_brandgrab_deploy:
+    name: "Vercel BrandGrab (deploy)"
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'brandgrab'
+      path: 'web/apps/brandgrab'
+      vercelProjectId: 'prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_slco_deploy:
+    name: "Vercel slco (deploy)"
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'slco'
+      path: 'web/apps/slco'
+      vercelProjectId: 'prj_GNETZANB7evyT5coH7gptur1G1sN'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit

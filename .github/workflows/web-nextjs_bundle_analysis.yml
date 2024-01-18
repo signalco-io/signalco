@@ -142,12 +142,23 @@ jobs:
     secrets: inherit
 
   analyze_brandgrab:
-    name: "BrandGrab"
+    name: "BrandGrab (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
+      name: 'brandgrab'
+      path: 'web/apps/brandgrab'
+      vercelProjectId: 'prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx'
+    secrets: inherit
+
+  deploy_brandgrab:
+    name: "BrandGrab (preview)"
+    needs: analyze_brandgrab
+    if: success()
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
       name: 'brandgrab'
       path: 'web/apps/brandgrab'
       vercelProjectId: 'prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx'
@@ -166,12 +177,23 @@ jobs:
     secrets: inherit
 
   analyze_slco:
-    name: "slco"
+    name: "slco (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
+      name: 'slco'
+      path: 'web/apps/slco'
+      vercelProjectId: 'prj_GNETZANB7evyT5coH7gptur1G1sN'
+    secrets: inherit
+
+  deploy_slco:
+    name: "slco (preview)"
+    needs: analyze_slco
+    if: success()
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
       name: 'slco'
       path: 'web/apps/slco'
       vercelProjectId: 'prj_GNETZANB7evyT5coH7gptur1G1sN'
