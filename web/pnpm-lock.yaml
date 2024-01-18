@@ -1096,8 +1096,8 @@ importers:
         specifier: 11.3.7
         version: 11.3.7(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
       '@reactflow/controls':
-        specifier: 11.2.6
-        version: 11.2.6(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 11.2.7
+        version: 11.2.7(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
       '@reactflow/core':
         specifier: 11.10.2
         version: 11.10.2(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
@@ -6492,36 +6492,14 @@ packages:
       - immer
     dev: false
 
-  /@reactflow/controls@11.2.6(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-4QHT92/ACVlZkvV+Hq44bAPV8WbMhkJl+/J0EbXcqQ1+an7cWJsF84eeelJw7R5J76RoaSSpKdsWsL2v7HAVlw==}
+  /@reactflow/controls@11.2.7(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-mugzVALH/SuKlVKk+JCRm1OXQ+p8e9+k8PCTIaqL+nBl+lPF8KA4uMm8ApsOvhuSAb2A80ezewpyvYHr0qSYVA==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.10.1(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.10.2(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
       classcat: 5.0.4
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.4.6(@types/react@18.2.48)(react@18.2.0)
-    transitivePeerDependencies:
-      - '@types/react'
-      - immer
-    dev: false
-
-  /@reactflow/core@11.10.1(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-GIh3usY1W3eVobx//OO9+Cwm+5evQBBdPGxDaeXwm25UqPMWRI240nXQA5F/5gL5Mwpf0DUC7DR2EmrKNQy+Rw==}
-    peerDependencies:
-      react: '>=17'
-      react-dom: '>=17'
-    dependencies:
-      '@types/d3': 7.4.3
-      '@types/d3-drag': 3.0.7
-      '@types/d3-selection': 3.0.10
-      '@types/d3-zoom': 3.0.8
-      classcat: 5.0.4
-      d3-drag: 3.0.0
-      d3-selection: 3.0.0
-      d3-zoom: 3.0.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       zustand: 4.4.6(@types/react@18.2.48)(react@18.2.0)
