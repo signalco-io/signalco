@@ -48,11 +48,8 @@ jobs:
           cancel-in-progress: true
         steps:
           - uses: actions/checkout@v4
-
-          - name: ✨ Setup pnpm
-            uses: pnpm/action-setup@v2.4.0
             with:
-              version: 'latest'
+              fetch-depth: 2
 
           - name: ✨ Setup Node.js
             uses: actions/setup-node@v4
@@ -61,25 +58,32 @@ jobs:
                 cache: "pnpm"
                 cache-dependency-path: ./web/pnpm-lock.yaml
 
+          - name: ✨ Setup pnpm
+            uses: pnpm/action-setup@v2.4.0
+            with:
+              version: 'latest'
+
           - name: 📦️ Install dependencies
             run: pnpm install --frozen-lockfile --filter ${{ inputs.name }}... --filter .
 
           - name: ✨ Setup Vercel CLI
-            run: pnpm install --global vercel@latest
+            run: pnpm add --global vercel@latest
 
           - name: ⚙️ Pull Vercel Environment Information
-            run: vercel env pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}
+            run: vercel pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}
             working-directory: ${{ inputs.path }}/
 
           - name: ⚒️ Build app
-            run: pnpm build --filter=${{ inputs.name }}
+            run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+            working-directory: ${{ inputs.path }}/
 
           - name: 🚀 Deploy Preview to Vercel
-            run: vercel deploy --prebuilt --cwd ${{ inputs.path }}/ --token=${{ secrets.VERCEL_TOKEN }}
+            run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+            working-directory: ${{ inputs.path }}/
             if: ${{ inputs.preview == true }}
 
           - name: 🚀 Deploy Production to Vercel
             run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} ${{ inputs.environment == 'development' && '--skip-domain' }}
-            # working-directory: ${{ inputs.path }}/
+            working-directory: ${{ inputs.path }}/
             if: ${{ inputs.preview == false }}
 
