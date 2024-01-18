@@ -105,12 +105,23 @@ jobs:
     secrets: inherit
 
   analyze_blog:
-    name: "Blog"
+    name: "Blog (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
+      name: 'blog'
+      path: 'web/apps/blog'
+      vercelProjectId: 'prj_VT7qOjkcEvkAsZH7MtSxWcVDWVpr'
+    secrets: inherit
+
+  deploy_blog:
+    name: "Blog (preview)"
+    needs: analyze_blog
+    if: success()
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
       name: 'blog'
       path: 'web/apps/blog'
       vercelProjectId: 'prj_VT7qOjkcEvkAsZH7MtSxWcVDWVpr'
