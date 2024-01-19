@@ -1,6 +1,6 @@
 'use client';
 
-import { type PropsWithChildren } from 'react';
+import { Suspense, type PropsWithChildren } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Chip } from '@signalco/ui-primitives/Chip';
@@ -8,7 +8,6 @@ import { ExternalLink } from '@signalco/ui-icons';
 import { Timeago } from '@signalco/ui/Timeago';
 import { DisableButton } from '@signalco/ui/DisableButton';
 import { camelToSentenceCase } from '@signalco/js';
-import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import useContact from '../../../src/hooks/signalco/useContact';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import { entityLastActivity } from '../../../src/entity/EntityHelper';
@@ -22,8 +21,6 @@ import { useEntityBattery } from '../../../components/entity/EntityBattery';
 export default function EntityLayout({ children, params }: PropsWithChildren<{ params: { id?: string } }>) {
     const { id } = params;
     const { data: entity } = useEntity(id);
-    const [showRawParam, setShowRawParam] = useSearchParam<string>('raw', 'false');
-    const showRaw = showRawParam === 'true';
     const { hasStatus, isOffline, isStale } = useEntityStatus(entity);
     const { hasBattery, level } = useEntityBattery(entity);
 
@@ -68,11 +65,9 @@ export default function EntityLayout({ children, params }: PropsWithChildren<{ p
                             <Chip key={link.href} href={link.href} startDecorator={<ExternalLink size={16} />}>{link.alias}</Chip>
                         ))}
                     </Row>
-                    <EntityOptions
-                        id={id}
-                        canHideRaw={true}
-                        showRaw={showRaw}
-                        showRawChanged={(show) => setShowRawParam(show ? 'true' : undefined)} />
+                    <Suspense>
+                        <EntityOptions id={id} />
+                    </Suspense>
                 </Row>
             </Stack>
             <div className="px-2">

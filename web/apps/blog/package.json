@@ -9,7 +9,7 @@
         "node": "20.x"
     },
     "scripts": {
-        "dev": "next -p 3002",
+        "dev": "next -p 3002 --turbo",
         "build": "next build",
         "build:analyze": "cross-env ANALYZE=true pnpm build",
         "postbuild": "next-sitemap --config next-sitemap.config.js",
@@ -20,8 +20,8 @@
     "dependencies": {
         "@mdx-js/loader": "3.0.0",
         "@mdx-js/react": "3.0.0",
-        "@next/env": "14.0.4",
-        "@next/mdx": "14.0.4",
+        "@next/env": "14.1.0",
+        "@next/mdx": "14.1.0",
         "@signalco/cms-core": "workspace:*",
         "@signalco/cms-components-marketing": "workspace:*",
         "@signalco/data": "workspace:*",
@@ -37,20 +37,20 @@
         "encoding": "0.1.13",
         "fs-extra": "11.2.0",
         "klaw": "4.1.0",
-        "next": "14.0.4",
+        "next": "14.1.0",
         "next-secure-headers": "2.2.0",
         "react": "18.2.0",
         "react-cool-inview": "3.0.1",
         "react-dom": "18.2.0",
         "react-transition-group": "4.4.5",
-        "sharp": "0.33.1",
+        "sharp": "0.33.2",
         "tailwindcss": "3.4.1",
         "tailwindcss-animate": "1.0.7"
     },
     "devDependencies": {
         "@axe-core/playwright": "4.8.3",
         "@babel/core": "7.23.7",
-        "@next/bundle-analyzer": "14.0.4",
+        "@next/bundle-analyzer": "14.1.0",
         "@playwright/test": "1.41.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",

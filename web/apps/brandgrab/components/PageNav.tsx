@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Link } from '@signalco/ui-primitives/Link';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Container } from '@signalco/ui-primitives/Container';
@@ -18,7 +18,9 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean | undefined; }) {
                         </Link>
                     </div>
                     <div>
-                        <InputGrabDomain placeholder="any-domain.com" />
+                        <Suspense>
+                            <InputGrabDomain placeholder="any-domain.com" />
+                        </Suspense>
                     </div>
                     <div></div>
                 </header>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useState, useContext, createContext } from 'react';
+import React, { useCallback, useState, useContext, createContext, Suspense } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Typography } from '@signalco/ui-primitives/Typography';
@@ -585,12 +585,16 @@ export default function DocsApiPage() {
                 <Row>
                     <div className="min-w-[230px] self-start px-2 py-4 md:min-w-[320px]">
                         <Loadable isLoading={isLoading || !api} loadingLabel="Loading API">
-                            <Nav />
+                            <Suspense>
+                                <Nav />
+                            </Suspense>
                         </Loadable>
                     </div>
                     <Divider />
                     <div className="grow">
-                        <Route />
+                        <Suspense>
+                            <Route />
+                        </Suspense>
                     </div>
                 </Row>
             </Stack>

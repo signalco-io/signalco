@@ -6,10 +6,6 @@ import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
 
 export const runtime = 'edge';
 
-const openai = new OpenAI({
-    apiKey: process.env['OPENAI_API_KEY']
-});
-
 export async function GET(_request: Request, { params }: { params: { id: string } }) {
     const processPublicId = requiredParamString(params.id);
 
@@ -25,6 +21,9 @@ export async function GET(_request: Request, { params }: { params: { id: string 
     const taskDefinitions = await getTaskDefinitions(userId, processId);
 
     const assistantId = 'asst_rgjTqqv25NSyZVWVaySzKnI8';
+    const openai = new OpenAI({
+        apiKey: global.process.env['OPENAI_API_KEY']
+    });
     const result = await openai.beta.threads.createAndRun({
         assistant_id: assistantId,
         thread: {
