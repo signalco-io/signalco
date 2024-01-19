@@ -274,7 +274,7 @@ const up = async () => {
         }
 
         // Vercel apps
-        nextJsApp('signalco-blog', 'blog', true);
+        nextJsApp('signalco-blog', 'blog');
         nextJsApp('signalco-app', 'app');
         nextJsApp('signalco-web', 'web');
         nextJsApp('signalco-slco', 'slco');

@@ -8,16 +8,9 @@ export function vercelApp(prefix: string, name: string, {
     framework?: 'nextjs';
     ignoreCommand?: string;
     outputDirectory?: string;
-    }, noGit: boolean = false) {
+    }) {
     const project = new Project(`vercel-${prefix}`, {
         framework,
-        gitRepository: noGit ? undefined : {
-            productionBranch: 'main',
-            repo: 'signalco-io/signalco',
-            type: 'github',
-        },
-        buildCommand: noGit ? undefined : `cd ../.. && npx turbo run build --filter=${name}...`,
-        installCommand: noGit ? undefined : `pnpm install --frozen-lockfile --filter ${name}... --filter .`,
         ignoreCommand: ignoreCommand,
         outputDirectory: outputDirectory,
         name: `signalco-${name}`,

@@ -1,5 +1,6 @@
 {
     "regions": [
         "dub1"
-    ]
+    ],
+    "outputDirectory": "storybook-static"
 }
