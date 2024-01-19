@@ -74,7 +74,7 @@ jobs:
             working-directory: ${{ inputs.path }}/
 
           - name: ⚒️ Build app
-            run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+            run: vercel build ${{ inputs.preview == false && '--prod' }} --token=${{ secrets.VERCEL_TOKEN }}
             working-directory: ${{ inputs.path }}/
 
           - name: 🚀 Deploy Preview to Vercel
