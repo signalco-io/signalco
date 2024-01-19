@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { PageContent } from './PageContent';
@@ -14,12 +14,16 @@ export function AppLayout({ children }: PropsWithChildren) {
             <AppClientWrapper>
                 <div className="flex w-full flex-col sm:flex-row">
                     <NavProfile />
-                    <PageContent>
-                        {children}
-                    </PageContent>
+                    <Suspense>
+                        <PageContent>
+                            {children}
+                        </PageContent>
+                    </Suspense>
                 </div>
                 <ReactQueryDevtools initialIsOpen={false} />
-                <FullScreenExitButton />
+                <Suspense>
+                    <FullScreenExitButton />
+                </Suspense>
             </AppClientWrapper>
         </AuthWrapper>
     );

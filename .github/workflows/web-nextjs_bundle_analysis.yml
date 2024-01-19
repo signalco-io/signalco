@@ -282,8 +282,8 @@ jobs:
   ci_ok:
     name: "[CI] OK"
     needs: [station_ci, cloud_preview, uier_infra_preview, deploy_blog, deploy_app, deploy_brandgrab, deploy_web, deploy_slco, deploy_doprocess, deploy_uidocs, deploy_uier]
-    if: success()
+    if: always()
     runs-on: ubuntu-latest
     steps:
-      - name: OK
-        run: echo "OK"
+      - run: exit 1
+        if: ${{ always() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}
