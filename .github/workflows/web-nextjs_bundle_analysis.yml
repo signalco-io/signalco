@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: '[Web] CI'
+name: 'CI'
 
 on:
   pull_request:
@@ -277,3 +277,12 @@ jobs:
       path: 'web/apps/uier'
       vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
     secrets: inherit
+
+  ci_ok:
+    name: "[CI] OK"
+    needs: [station_ci, cloud_preview, uier_infra_preview, deploy_blog, deploy_app, deploy_brandgrab, deploy_web, deploy_slco, deploy_doprocess, deploy_uidocs, deploy_uier]
+    if: success()
+    runs-on: ubuntu-latest
+    steps:
+      - name: OK
+        run: echo "OK"
