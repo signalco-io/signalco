@@ -16,7 +16,7 @@
     <PackageReference Include="Polly" Version="8.2.1" />
     <PackageReference Include="Polly.Caching.Memory" Version="3.0.2" />
     <PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
-    <PackageReference Include="IPNetwork2" Version="2.6.618" />
+    <PackageReference Include="IPNetwork2" Version="3.0.641" />
     <PackageReference Include="Makaretu.Dns" Version="2.0.1" />
   </ItemGroup>
 
