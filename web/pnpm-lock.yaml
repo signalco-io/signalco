@@ -93,8 +93,8 @@ importers:
         specifier: 1.0.5
         version: 1.0.5(@babel/core@7.23.7)(react-dom@18.2.0)(sass@1.70.0)(typescript@5.3.3)(vite@4.5.1)
       '@vvo/tzdb':
-        specifier: 6.124.0
-        version: 6.124.0
+        specifier: 6.125.0
+        version: 6.125.0
       autoprefixer:
         specifier: 10.4.17
         version: 10.4.17(postcss@8.4.33)
@@ -8793,8 +8793,8 @@ packages:
     dev: false
     optional: true
 
-  /@vvo/tzdb@6.124.0:
-    resolution: {integrity: sha512-1zKnDMwg/9I0MrwcVjziyrn1VlapdCwB2ujaJ545N3A4nmniQ3wFbd/BcKtvwiJaFwqBAKoMwq68syTynroeKQ==}
+  /@vvo/tzdb@6.125.0:
+    resolution: {integrity: sha512-zxOP62q3CUYIIe6sL/IK6AhmhnPUuHPNx86qZTXuzQHo/QhQRTfXb331poUStTDdZgBoLc6BADUATbGGN/1d4A==}
     dev: false
 
   /@webassemblyjs/ast@1.11.6:
