@@ -245,7 +245,7 @@ jobs:
     secrets: inherit
 
   deploy_uidocs:
-    name: "doprocess (preview)"
+    name: "ui-docs (preview)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/vercel-deploy_reusable.yml
