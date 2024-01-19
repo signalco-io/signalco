@@ -10,7 +10,7 @@
     },
     "scripts": {
         "prepare:api": "pnpm dlx openapi-typescript https://api.signalco.io/api/swagger.yaml -o ./src/api/signalco/schema.d.ts",
-        "dev": "next -p 3001",
+        "dev": "next -p 3001 --turbo",
         "build": "next build",
         "build:analyze": "cross-env ANALYZE=true pnpm build",
         "postinstall": "node ./tools/post-install.mjs",

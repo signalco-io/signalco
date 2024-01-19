@@ -9,7 +9,7 @@
         "node": "20.x"
     },
     "scripts": {
-        "dev": "next -p 4002",
+        "dev": "next -p 4002 --turbo",
         "build": "next build",
         "build:analyze": "cross-env ANALYZE=true pnpm build",
         "postbuild": "next-sitemap --config next-sitemap.config.js",

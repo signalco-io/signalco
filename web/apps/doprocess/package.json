@@ -9,7 +9,7 @@
     "node": "20.x"
   },
   "scripts": {
-    "dev": "next -p 4003",
+    "dev": "next -p 4003 --turbo",
     "db:generate": "drizzle-kit generate:mysql",
     "db:migrate": "drizzle-kit push:mysql --config=drizzle.config.ts",
     "build": "next build",
