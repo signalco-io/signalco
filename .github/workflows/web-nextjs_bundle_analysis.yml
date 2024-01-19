@@ -12,6 +12,7 @@ on:
       - '.github/workflows/web-nextjs_bundle_analysis.yml'
       - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
       - '.github/workflows/cloud-deploy-preview_reusable.yml'
+      - '.github/workflows/vercel-deploy_reusable.yml'
   push:
     branches:
       - main
@@ -24,6 +25,7 @@ on:
       - '.github/workflows/web-nextjs_bundle_analysis.yml'
       - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
       - '.github/workflows/cloud-deploy-preview_reusable.yml'
+      - '.github/workflows/vercel-deploy_reusable.yml'
   workflow_dispatch:
 
 jobs:
@@ -128,7 +130,7 @@ jobs:
     secrets: inherit
 
   analyze_app:
-    name: "App"
+    name: "App (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
@@ -139,8 +141,19 @@ jobs:
       vercelProjectId: 'prj_q8N5ElZfzvq4BjEMBIsyEfqe4jsI'
     secrets: inherit
 
+  deploy_app:
+    name: "App (preview)"
+    needs: analyze_app
+    if: success()
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'app'
+      path: 'web/apps/app'
+      vercelProjectId: 'prj_q8N5ElZfzvq4BjEMBIsyEfqe4jsI'
+    secrets: inherit
+
   analyze_brandgrab:
-    name: "BrandGrab"
+    name: "BrandGrab (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
@@ -151,8 +164,19 @@ jobs:
       vercelProjectId: 'prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx'
     secrets: inherit
 
+  deploy_brandgrab:
+    name: "BrandGrab (preview)"
+    needs: analyze_brandgrab
+    if: success()
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'brandgrab'
+      path: 'web/apps/brandgrab'
+      vercelProjectId: 'prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx'
+    secrets: inherit
+
   analyze_web:
-    name: "Web"
+    name: "Web (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
@@ -163,8 +187,19 @@ jobs:
       vercelProjectId: 'prj_PYE8WwpynTfjD6rVMiCp7sZoCPYw'
     secrets: inherit
 
+  deploy_web:
+    name: "Web (preview)"
+    needs: analyze_web
+    if: success()
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'web'
+      path: 'web/apps/web'
+      vercelProjectId: 'prj_PYE8WwpynTfjD6rVMiCp7sZoCPYw'
+    secrets: inherit
+
   analyze_slco:
-    name: "slco"
+    name: "slco (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
@@ -175,8 +210,19 @@ jobs:
       vercelProjectId: 'prj_GNETZANB7evyT5coH7gptur1G1sN'
     secrets: inherit
 
+  deploy_slco:
+    name: "slco (preview)"
+    needs: analyze_slco
+    if: success()
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'slco'
+      path: 'web/apps/slco'
+      vercelProjectId: 'prj_GNETZANB7evyT5coH7gptur1G1sN'
+    secrets: inherit
+
   analyze_doprocess:
-    name: "doprocess"
+    name: "doprocess (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
@@ -185,4 +231,49 @@ jobs:
       name: 'doprocess'
       path: 'web/apps/doprocess'
       vercelProjectId: 'prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ'
+    secrets: inherit
+
+  deploy_doprocess:
+    name: "doprocess (preview)"
+    needs: analyze_doprocess
+    if: success()
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'doprocess'
+      path: 'web/apps/doprocess'
+      vercelProjectId: 'prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ'
+    secrets: inherit
+
+  deploy_uidocs:
+    name: "ui-docs (preview)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'ui-docs'
+      path: 'web/apps/ui-docs'
+      vercelProjectId: 'prj_JTG4EUX7sXFIbDmgRxaNarffnq9E'
+    secrets: inherit
+
+  analyze_uier:
+    name: "uier (analysis)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
+    with:
+      workflowName: 'web-nextjs_bundle_analysis.yml'
+      name: 'uier'
+      path: 'web/apps/uier'
+      vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
+    secrets: inherit
+
+  deploy_uier:
+    name: "uier (preview)"
+    needs: analyze_uier
+    if: success()
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'uier'
+      path: 'web/apps/uier'
+      vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
     secrets: inherit

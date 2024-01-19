@@ -73,3 +73,81 @@ jobs:
       preview: false
       environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
     secrets: inherit
+
+  vercel_brandgrab_deploy:
+    name: "Vercel BrandGrab (deploy)"
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'brandgrab'
+      path: 'web/apps/brandgrab'
+      vercelProjectId: 'prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_slco_deploy:
+    name: "Vercel slco (deploy)"
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'slco'
+      path: 'web/apps/slco'
+      vercelProjectId: 'prj_GNETZANB7evyT5coH7gptur1G1sN'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_app_deploy:
+    name: "Vercel app (deploy)"
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'app'
+      path: 'web/apps/app'
+      vercelProjectId: 'prj_q8N5ElZfzvq4BjEMBIsyEfqe4jsI'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_web_deploy:
+    name: "Vercel web (deploy)"
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'web'
+      path: 'web/apps/web'
+      vercelProjectId: 'prj_PYE8WwpynTfjD6rVMiCp7sZoCPYw'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_doprocess_deploy:
+    name: "Vercel doprocess (deploy)"
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'doprocess'
+      path: 'web/apps/doprocess'
+      vercelProjectId: 'prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_uidocs_deploy:
+    name: "Vercel ui-docs (deploy)"
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'ui-docs'
+      path: 'web/apps/ui-docs'
+      vercelProjectId: 'prj_JTG4EUX7sXFIbDmgRxaNarffnq9E'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
