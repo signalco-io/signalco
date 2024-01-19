@@ -50,6 +50,7 @@ jobs:
               - web/**
               - .github/workflows/web-nextjs_bundle_analysis.yml
               - .github/workflows/nextjs_bundle_analysis_reusable.yml
+              - .github/workflows/vercel-deploy_reusable.yml
             station:
               - station/**
               - .github/workflows/web-nextjs_bundle_analysis.yml
