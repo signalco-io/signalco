@@ -41,7 +41,7 @@ defaults:
 
 jobs:
     ci:
-        timeout-minutes: 5
+        timeout-minutes: 15
         runs-on: ubuntu-latest
         concurrency:
           group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.name }}
