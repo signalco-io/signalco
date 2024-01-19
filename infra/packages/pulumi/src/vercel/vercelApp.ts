@@ -14,7 +14,6 @@ export function vercelApp(prefix: string, name: string, {
         ignoreCommand: ignoreCommand,
         outputDirectory: outputDirectory,
         name: `signalco-${name}`,
-        rootDirectory: `web/apps/${name}`,
         serverlessFunctionRegion: 'dub1',
     });
 
