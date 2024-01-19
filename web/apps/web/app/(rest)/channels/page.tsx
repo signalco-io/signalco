@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import FaqSection from '../../../components/pages/FaqSection';
@@ -14,7 +15,9 @@ export default function ChannelsPage() {
         <Stack spacing={8}>
             <Stack spacing={4}>
                 <PageCenterHeader header="Channels" subHeader="List of all channels available on signalco" />
-                <ChannelsGallery />
+                <Suspense>
+                    <ChannelsGallery />
+                </Suspense>
             </Stack>
             <FaqSection faq={channelsFaq} />
             <CtaSection />
