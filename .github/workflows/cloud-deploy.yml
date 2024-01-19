@@ -137,7 +137,7 @@ jobs:
       path: 'web/apps/doprocess'
       vercelProjectId: 'prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ'
       preview: false
-      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'Development' }}
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
     secrets: inherit
 
   vercel_uidocs_deploy:
