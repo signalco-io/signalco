@@ -35,6 +35,7 @@ jobs:
               - web/**
               - .github/workflows/web-nextjs_bundle_analysis.yml
               - .github/workflows/nextjs_bundle_analysis_reusable.yml
+              - .github/workflows/vercel-deploy_reusable.yml
     outputs:
       infra: ${{ steps.filter.outputs.infrastructure }}
       web: ${{ steps.filter.outputs.web }}
