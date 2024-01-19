@@ -336,7 +336,7 @@ namespace Signal.Beacon.Application.Network.mDNS
         ///   Recent messages.
         /// </summary>
         /// <value>
-        ///   The key is the Base64 encoding of the MD5 hash of 
+        ///   The key is the Base64 encoding of the MD5 hash of
         ///   a message and the value is when the message was seen.
         /// </value>
         public ConcurrentDictionary<string, DateTime> Messages = new();
@@ -428,8 +428,11 @@ namespace Signal.Beacon.Application.Network.mDNS
         private readonly ILogger<MulticastService> log;
         private readonly ILogger<MulticastClient> multicastClientLogger;
 
-        private static readonly IPNetwork[] LinkLocalNetworks = new[]
-            {IPNetwork.Parse("169.254.0.0/16"), IPNetwork.Parse("fe80::/10")};
+        private static readonly IPNetwork2[] LinkLocalNetworks = new[]
+        {
+            IPNetwork2.Parse("169.254.0.0/16"),
+            IPNetwork2.Parse("fe80::/10")
+        };
 
         private List<NetworkInterface> knownNics = new();
         private int maxPacketSize;
@@ -511,7 +514,7 @@ namespace Signal.Beacon.Application.Network.mDNS
         public event EventHandler<byte[]> MalformedMessage;
 
         /// <summary>
-        ///   Raised when one or more network interfaces are discovered. 
+        ///   Raised when one or more network interfaces are discovered.
         /// </summary>
         /// <value>
         ///   Contains the network interface(s).
@@ -713,8 +716,8 @@ namespace Signal.Beacon.Application.Network.mDNS
 
                 // Magic from @eshvatskyi
                 //
-                // I've seen situation when NetworkAddressChanged is not triggered 
-                // (wifi off, but NIC is not disabled, wifi - on, NIC was not changed 
+                // I've seen situation when NetworkAddressChanged is not triggered
+                // (wifi off, but NIC is not disabled, wifi - on, NIC was not changed
                 // so no event). Rebinding fixes this.
                 //
                 // Do magic only on Windows.
@@ -874,7 +877,7 @@ namespace Signal.Beacon.Application.Network.mDNS
         ///   the <see cref="Message.Id"/> set to zero and any questions are removed.
         ///   </para>
         ///   <para>
-        ///   The <paramref name="answer"/> is <see cref="Message.Truncate">truncated</see> 
+        ///   The <paramref name="answer"/> is <see cref="Message.Truncate">truncated</see>
         ///   if exceeds the maximum packet length.
         ///   </para>
         ///   <para>
@@ -924,7 +927,7 @@ namespace Signal.Beacon.Application.Network.mDNS
         /// </exception>
         /// <remarks>
         ///   <para>
-        ///   If the <paramref name="query"/> is a standard multicast query (sent to port 5353), then 
+        ///   If the <paramref name="query"/> is a standard multicast query (sent to port 5353), then
         ///   <see cref="SendAnswer(Message, bool)"/> is called.
         ///   </para>
         ///   <para>
@@ -935,7 +938,7 @@ namespace Signal.Beacon.Application.Network.mDNS
         ///   and all resource record TTLs have a max value of 10 seconds.
         ///   </para>
         ///   <para>
-        ///   The <paramref name="answer"/> is <see cref="Message.Truncate">truncated</see> 
+        ///   The <paramref name="answer"/> is <see cref="Message.Truncate">truncated</see>
         ///   if exceeds the maximum packet length.
         ///   </para>
         ///   <para>
@@ -1004,21 +1007,21 @@ namespace Signal.Beacon.Application.Network.mDNS
         }
 
         /// <summary>
-        ///   Called by the MulticastClient when a DNS message is received.	
-        /// </summary>	
+        ///   Called by the MulticastClient when a DNS message is received.
+        /// </summary>
         /// <param name="sender">
         ///   The <see cref="MulticastClient"/> that got the message.
         /// </param>
-        /// <param name="result">	
-        ///   The received message <see cref="UdpReceiveResult"/>.	
-        /// </param>	
-        /// <remarks>	
-        ///   Decodes the <paramref name="result"/> and then raises	
-        ///   either the <see cref="QueryReceived"/> or <see cref="AnswerReceived"/> event.	
-        ///   <para>	
-        ///   Multicast DNS messages received with an OPCODE or RCODE other than zero 	
-        ///   are silently ignored.	
-        ///   </para>	
+        /// <param name="result">
+        ///   The received message <see cref="UdpReceiveResult"/>.
+        /// </param>
+        /// <remarks>
+        ///   Decodes the <paramref name="result"/> and then raises
+        ///   either the <see cref="QueryReceived"/> or <see cref="AnswerReceived"/> event.
+        ///   <para>
+        ///   Multicast DNS messages received with an OPCODE or RCODE other than zero
+        ///   are silently ignored.
+        ///   </para>
         ///   <para>
         ///   If the message cannot be decoded, then the <see cref="MalformedMessage"/>
         ///   event is raised.
@@ -1207,10 +1210,10 @@ namespace Signal.Beacon.Application.Network.mDNS
         /// <remarks>
         ///   It consists of a pair of DNS labels, following the
         ///   <see href="https://www.ietf.org/rfc/rfc2782.txt">SRV records</see> convention.
-        ///   The first label of the pair is an underscore character (_) followed by 
-        ///   the <see href="https://tools.ietf.org/html/rfc6335">service name</see>. 
+        ///   The first label of the pair is an underscore character (_) followed by
+        ///   the <see href="https://tools.ietf.org/html/rfc6335">service name</see>.
         ///   The second label is either "_tcp" (for application
-        ///   protocols that run over TCP) or "_udp" (for all others). 
+        ///   protocols that run over TCP) or "_udp" (for all others).
         /// </remarks>
         public DomainName ServiceName { get; set; }
 
@@ -1349,7 +1352,7 @@ namespace Signal.Beacon.Application.Network.mDNS
         /// </value>
         /// <remarks>
         ///   <b>ServiceDiscovery</b> passively monitors the network for any answers.
-        ///   When an answer containing a PTR to a service instance is received 
+        ///   When an answer containing a PTR to a service instance is received
         ///   this event is raised.
         /// </remarks>
         event EventHandler<ServiceInstanceDiscoveryEventArgs> ServiceInstanceDiscovered;
@@ -1473,7 +1476,7 @@ namespace Signal.Beacon.Application.Network.mDNS
     }
 
     /// <summary>
-    ///   DNS based Service Discovery is a way of using standard DNS programming interfaces, servers, 
+    ///   DNS based Service Discovery is a way of using standard DNS programming interfaces, servers,
     ///   and packet formats to browse the network for services.
     /// </summary>
     /// <seealso href="https://tools.ietf.org/html/rfc6763">RFC 6763 DNS-Based Service Discovery</seealso>
@@ -1587,7 +1590,7 @@ namespace Signal.Beacon.Application.Network.mDNS
         /// </value>
         /// <remarks>
         ///   <b>ServiceDiscovery</b> passively monitors the network for any answers.
-        ///   When an answer containing a PTR to a service instance is received 
+        ///   When an answer containing a PTR to a service instance is received
         ///   this event is raised.
         /// </remarks>
         public event EventHandler<ServiceInstanceDiscoveryEventArgs> ServiceInstanceDiscovered;
