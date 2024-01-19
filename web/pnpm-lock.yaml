@@ -132,8 +132,8 @@ importers:
         specifier: 0.8.2
         version: 0.8.2
       openapi-typescript:
-        specifier: 6.7.3
-        version: 6.7.3
+        specifier: 6.7.4
+        version: 6.7.4
       pigeon-maps:
         specifier: 0.21.3
         version: 0.21.3(react@18.2.0)
@@ -15479,8 +15479,8 @@ packages:
     resolution: {integrity: sha512-MRffg93t0hgGZbYTxg60hkRIK2sRuEOHEtCUgMuLgbCC33TMQ68AmxskzUlauzZYD47+ENeGV/ElI7qnWqrAxA==}
     dev: false
 
-  /openapi-typescript@6.7.3:
-    resolution: {integrity: sha512-es3mGcDXV6TKPo6n3aohzHm0qxhLyR39MhF6mkD1FwFGjhxnqMqfSIgM0eCpInZvqatve4CxmXcMZw3jnnsaXw==}
+  /openapi-typescript@6.7.4:
+    resolution: {integrity: sha512-EZyeW9Wy7UDCKv0iYmKrq2pVZtquXiD/YHiUClAKqiMi42nodx/EQH11K6fLqjt1IZlJmVokrAsExsBMM2RROQ==}
     hasBin: true
     dependencies:
       ansi-colors: 4.1.3
