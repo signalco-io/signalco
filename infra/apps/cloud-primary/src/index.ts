@@ -277,8 +277,8 @@ const up = async () => {
         nextJsApp('signalco-blog', 'blog');
         nextJsApp('signalco-app', 'app');
         nextJsApp('signalco-web', 'web');
-        nextJsApp('signalco-slco', 'slco');
-        nextJsApp('signalco-brandgrab', 'brandgrab');
+        nextJsApp('slco', 'slco');
+        nextJsApp('brandgrab', 'brandgrab');
         nextJsApp('doprocess', 'doprocess');
         vercelApp('signalco-ui-docs', 'ui-docs', {
             ignoreCommand: 'npx turbo-ignore',
