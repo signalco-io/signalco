@@ -1,6 +1,6 @@
 export default function AcceptableUsePolicyPage() {
     return (
-        <main>
+        <article className="prose mx-auto mt-12 max-w-3xl">
             <h1 id="acceptable-use-policy">Acceptable Use Policy</h1>
             <p>This acceptable use policy covers the products, services, and technologies (collectively referred to as the “Products”) provided by Signalco under any ongoing agreement. It’s designed to protect us, our customers, and the general Internet community from unethical, irresponsible, and illegal activity.</p>
             <p>Signalco customers found engaging in activities prohibited by this acceptable use policy can be liable for service suspension and account termination. In extreme cases, we may be legally obliged to report such customers to the relevant authorities.</p>
@@ -50,6 +50,6 @@ export default function AcceptableUsePolicyPage() {
                 <li>the date the customer uses our Products after we publish the revised version on our website; or</li>
                 <li>30 days after we publish the revised version on our website.</li>
             </ul>
-        </main>
+        </article>
     );
 }

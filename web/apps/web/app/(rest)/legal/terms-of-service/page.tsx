@@ -1,6 +1,6 @@
 export default function TermsOfService() {
     return (
-        <main>
+        <article className="prose mx-auto mt-12 max-w-3xl">
             <h1 id="terms-of-service">Terms of Service</h1>
             <p>These Terms of Service govern your use of the website located at <a href="https://www.signalco.io">https://www.signalco.io</a> and any related services provided by Signalco.</p>
             <p>By accessing <a href="https://www.signalco.io">https://www.signalco.io</a>, you agree to abide by these Terms of Service and to comply with all applicable laws and regulations. If you do not agree with these Terms of Service, you are prohibited from using or accessing this website or using any other services provided by Signalco.</p>
@@ -42,7 +42,6 @@ export default function TermsOfService() {
             <p>Any term of these Terms of Service which is wholly or partially void or unenforceable is severed to the extent that it is void or unenforceable. The validity of the remainder of these Terms of Service is not affected.</p>
             <h3 id="governing-law">Governing Law</h3>
             <p>These Terms of Service are governed by and construed in accordance with the laws of Croatia. You irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
-
-        </main>
+        </article>
     );
 }

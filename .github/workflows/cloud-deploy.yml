@@ -152,3 +152,12 @@ jobs:
       preview: false
       environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
     secrets: inherit
+  
+  deploy_ok:
+    name: "[Deploy] OK"
+    needs: [infra_cloud-primary_up, infra_uier_up, vercel_blog_deploy, vercel_brandgrab_deploy, vercel_slco_deploy, vercel_app_deploy, vercel_web_deploy, vercel_doprocess_deploy, vercel_uidocs_deploy]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - run: exit 1
+        if: ${{ always() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}
