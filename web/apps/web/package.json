@@ -54,7 +54,7 @@
         "@babel/core": "7.23.7",
         "@ducanh2912/next-pwa": "10.2.2",
         "@next/bundle-analyzer": "14.1.0",
-        "@playwright/test": "1.41.0",
+        "@playwright/test": "1.41.1",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@total-typescript/ts-reset": "0.5.1",
