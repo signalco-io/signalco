@@ -1,6 +1,6 @@
 export default function CookiePolicy() {
     return (
-        <main>
+        <article className="prose mx-auto mt-12 max-w-3xl">
             <h1 id="cookie-policy">Cookie Policy</h1>
             <p>We use cookies to help improve your experience of our website at <a href="https://www.signalco.io">https://www.signalco.io</a>. This cookie policy is part of Signalco&#39;s privacy policy. It covers the use of cookies between your device and our site.</p>
             <p>We also provide basic information on third-party services we may use, who may also use cookies as part of their service. This policy does not cover their cookies.</p>
@@ -23,6 +23,6 @@ export default function CookiePolicy() {
             <h4 id="targetingadvertising-cookies">Targeting/advertising cookies</h4>
             <p>Targeting/advertising cookies help determine what promotional content is most relevant and appropriate to you and your interests. Websites may use them to deliver targeted advertising or limit the number of times you see an advertisement. This helps companies improve the effectiveness of their campaigns and the quality of content presented to you. These cookies may be set by the website you’re visiting (first-party) or by third-party services. Targeting/advertising cookies set by third-parties may be used to track you on other websites that use the same third-party service.</p>
             <p>We do not use this type of cookie on our site.</p>
-        </main>
+        </article>
     );
 }

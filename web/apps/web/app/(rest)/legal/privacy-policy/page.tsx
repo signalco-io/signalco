@@ -1,6 +1,6 @@
 export default function PrivacyPolicy() {
     return (
-        <main>
+        <article className="prose mx-auto mt-12 max-w-3xl">
             <h1 id="privacy-policy">Privacy Policy</h1>
             <p>Your privacy is important to us. It is Signalco&#39;s policy to respect your privacy and comply with any applicable law and regulation regarding any personal information we may collect about you, including across our website, <a href="https://www.signalco.io">https://www.signalco.io</a>, and other sites we own and operate.</p>
             <p>Personal information is any information about you which can be used to identify you. This includes information about you as a person (such as name, address, and date of birth), your devices, payment details, and even information about how you use a website or online service.</p>
@@ -173,6 +173,6 @@ export default function PrivacyPolicy() {
             <p>To receive this information, send us a request using the contact details provided in this privacy policy. Requests must include “California Privacy Rights Request” in the first line of the description and include your name, street address, city, state, and ZIP code.</p>
             <h2 id="contact-us">Contact Us</h2>
             <p>For any questions or concerns regarding your privacy, you may contact us using the email: <a href="mailto:contact@signalco.io">contact@signalco.io</a></p>
-        </main>
+        </article>
     );
 }

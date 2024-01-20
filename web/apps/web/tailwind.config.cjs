@@ -1,3 +1,4 @@
+import TailwindTypography from '@tailwindcss/typography';
 import { baseConfig } from '@signalco/tailwindcss-config-signalco';
 
 /** @type {import('tailwindcss').Config} */
@@ -10,5 +11,8 @@ export default {
         '../../packages/ui/src/**/*.{ts,tsx}',
         '../../packages/ui-primitives/src/**/*.{ts,tsx}',
         '../../packages/cms-components-marketing/src/**/*.{ts,tsx}',
+    ],
+    plugins: [
+        TailwindTypography
     ]
 }

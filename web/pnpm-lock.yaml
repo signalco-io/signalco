@@ -173,7 +173,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.41.0)
+        version: 4.8.3(playwright-core@1.41.1)
       '@ducanh2912/next-pwa':
         specifier: 10.2.2
         version: 10.2.2(next@14.1.0)(webpack@5.89.0)
@@ -348,7 +348,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.41.0)
+        version: 4.8.3(playwright-core@1.41.1)
       '@babel/core':
         specifier: 7.23.7
         version: 7.23.7
@@ -469,7 +469,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.41.0)
+        version: 4.8.3(playwright-core@1.41.1)
       '@babel/core':
         specifier: 7.23.7
         version: 7.23.7
@@ -656,7 +656,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.41.0)
+        version: 4.8.3(playwright-core@1.41.1)
       '@babel/core':
         specifier: 7.23.7
         version: 7.23.7
@@ -783,7 +783,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.41.0)
+        version: 4.8.3(playwright-core@1.41.1)
       '@babel/core':
         specifier: 7.23.7
         version: 7.23.7
@@ -1022,7 +1022,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.41.0)
+        version: 4.8.3(playwright-core@1.41.1)
       '@babel/core':
         specifier: 7.23.7
         version: 7.23.7
@@ -1128,6 +1128,9 @@ importers:
       '@signalco/ui-primitives':
         specifier: workspace:*
         version: link:../../packages/ui-primitives
+      '@tailwindcss/typography':
+        specifier: 0.5.10
+        version: 0.5.10(tailwindcss@3.4.1)
       '@vercel/analytics':
         specifier: 1.1.2
         version: 1.1.2
@@ -1176,7 +1179,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.3
-        version: 4.8.3(playwright-core@1.41.0)
+        version: 4.8.3(playwright-core@1.41.1)
       '@babel/core':
         specifier: 7.23.7
         version: 7.23.7
@@ -1777,13 +1780,13 @@ packages:
       default-browser-id: 3.0.0
     dev: true
 
-  /@axe-core/playwright@4.8.3(playwright-core@1.41.0):
+  /@axe-core/playwright@4.8.3(playwright-core@1.41.1):
     resolution: {integrity: sha512-YtbkAWeOp5oQeI8vS6KYqJDa5yTl5O1wJP8KOZAAVjhxeiK/Y1ssxnZuGRobARyVh3eS6O3jdxTv/iCK1RfgaA==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
     dependencies:
       axe-core: 4.8.3
-      playwright-core: 1.41.0
+      playwright-core: 1.41.1
     dev: true
 
   /@babel/code-frame@7.23.5:
@@ -7623,6 +7626,18 @@ packages:
   /@swc/types@0.1.5:
     resolution: {integrity: sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==}
     dev: true
+
+  /@tailwindcss/typography@0.5.10(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-Pe8BuPJQJd3FfRnm6H0ulKIGoMEQS+Vq01R6M5aCrFB/ccR/shT+0kXLjouGC1gFLm9hopTFN+DMP0pfwRWzPw==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
+    dependencies:
+      lodash.castarray: 4.4.0
+      lodash.isplainobject: 4.0.6
+      lodash.merge: 4.6.2
+      postcss-selector-parser: 6.0.10
+      tailwindcss: 3.4.1
+    dev: false
 
   /@tanstack/query-core@5.17.15:
     resolution: {integrity: sha512-QURxpu77/ICA4d61aPvV7EcJ2MwmksxUejKBaq/xLcO2TUJAlXf4PFKHC/WxnVFI/7F1jeLx85AO3Vpk0+uBXw==}
@@ -13792,6 +13807,10 @@ packages:
       p-locate: 6.0.0
     dev: true
 
+  /lodash.castarray@4.4.0:
+    resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
+    dev: false
+
   /lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
     dev: true
@@ -15811,12 +15830,6 @@ packages:
       find-up: 6.3.0
     dev: true
 
-  /playwright-core@1.41.0:
-    resolution: {integrity: sha512-UGKASUhXmvqm2Lxa1fNr8sFwAtqjpgBRr9jQ7XBI8Rn5uFiEowGUGwrruUQsVPIom4bk7Lt+oLGpXobnXzrBIw==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dev: true
-
   /playwright-core@1.41.1:
     resolution: {integrity: sha512-/KPO5DzXSMlxSX77wy+HihKGOunh3hqndhqeo/nMxfigiKzogn8kfL0ZBDu0L1RKgan5XHCPmn6zXd2NUJgjhg==}
     engines: {node: '>=16'}
@@ -16292,6 +16305,14 @@ packages:
       postcss: 8.4.33
       postcss-selector-parser: 6.0.13
     dev: true
+
+  /postcss-selector-parser@6.0.10:
+    resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
+    engines: {node: '>=4'}
+    dependencies:
+      cssesc: 3.0.0
+      util-deprecate: 1.0.2
+    dev: false
 
   /postcss-selector-parser@6.0.13:
     resolution: {integrity: sha512-EaV1Gl4mUEV4ddhDnv/xtj7sxwrwxdetHdWUGnT4VJQf+4d05v6lHYZr8N573k5Z0BViss7BDhfWtKS3+sfAqQ==}

@@ -1,6 +1,6 @@
 export default function Sla() {
     return (
-        <main>
+        <article className="prose mx-auto mt-12 max-w-3xl">
             <h1 id="service-level-agreement">Service Level Agreement</h1>
             <h3 id="services-availability">Services Availability</h3>
             <p>Signalco (&quot;Signalco&quot;, &quot;we&quot;, &quot;us&quot; and/or &quot;our&quot;) will use commercially reasonable
@@ -49,6 +49,6 @@ export default function Sla() {
                 <li>to 95% = 50%</li>
             </ul>
             <p>For any questions or concerns regarding service availability, you may contact us via the email: <a href="mailto:contact@signalco.io">contact@signalco.io</a></p>
-        </main>
+        </article>
     );
 }
