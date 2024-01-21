@@ -164,7 +164,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                 <Row justifyContent="space-between" className="px-3 py-2">
                     <Typography>{t('Contacts')}</Typography>
                     <DropdownMenu>
-                        <DropdownMenuTrigger>
+                        <DropdownMenuTrigger asChild>
                             <IconButton size="sm" variant="plain">
                                 <MoreHorizontal />
                             </IconButton>
@@ -214,7 +214,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                                 </Table.Cell>
                                 <Table.Cell className="flex justify-end">
                                     <DropdownMenu>
-                                        <DropdownMenuTrigger>
+                                        <DropdownMenuTrigger asChild>
                                             <IconButton size="sm" variant="plain">
                                                 <MoreHorizontal />
                                             </IconButton>

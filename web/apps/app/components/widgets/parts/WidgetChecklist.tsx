@@ -44,7 +44,7 @@ function ChecklistItem(props: { item: IChecklistItem; onChange: (id: string, don
             <Row justifyContent="space-between">
                 <Checkbox checked={item.done ?? false} onCheckedChange={(checked) => onChange(item.id, checked === true)} label={item.text} />
                 <DropdownMenu>
-                    <DropdownMenuTrigger>
+                    <DropdownMenuTrigger asChild>
                         <IconButton>
                             <MoreHorizontal className="opacity-30" />
                         </IconButton>
