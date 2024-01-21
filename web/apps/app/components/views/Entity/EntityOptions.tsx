@@ -50,7 +50,7 @@ export default function EntityOptions({ id, ...rest }: EntityOptionsProps) {
     return (
         <>
             <DropdownMenu>
-                <DropdownMenuTrigger>
+                <DropdownMenuTrigger asChild>
                     <Button variant="plain" {...rest}>
                         <MoreHorizontal />
                     </Button>

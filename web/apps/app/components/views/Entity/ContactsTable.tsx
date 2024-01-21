@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
+import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Table } from '@signalco/ui-primitives/Table';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { SelectItems } from '@signalco/ui-primitives/SelectItems';
@@ -164,7 +165,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                 <Row justifyContent="space-between" className="px-3 py-2">
                     <Typography>{t('Contacts')}</Typography>
                     <DropdownMenu>
-                        <DropdownMenuTrigger>
+                        <DropdownMenuTrigger asChild>
                             <IconButton size="sm" variant="plain">
                                 <MoreHorizontal />
                             </IconButton>
@@ -198,7 +199,9 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                                                     <Timeago date={c.timeStamp} live />
                                                 </div>
                                                 {c.metadata?.PersistHistory && (
-                                                    <Chip startDecorator={<History size={14} />} size="sm">History</Chip>
+                                                    <Tooltip title="Persist history">
+                                                        <Chip size="sm"><History size={14} /></Chip>
+                                                    </Tooltip>
                                                 )}
                                                 {c.metadata?.ProcessSameValue && (
                                                     <Chip size="sm">Process same value</Chip>
@@ -214,7 +217,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                                 </Table.Cell>
                                 <Table.Cell className="flex justify-end">
                                     <DropdownMenu>
-                                        <DropdownMenuTrigger>
+                                        <DropdownMenuTrigger asChild>
                                             <IconButton size="sm" variant="plain">
                                                 <MoreHorizontal />
                                             </IconButton>

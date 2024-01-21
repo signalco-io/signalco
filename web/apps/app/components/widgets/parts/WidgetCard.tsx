@@ -76,7 +76,7 @@ export default function WidgetCard(props: IWidgetCardProps) {
                     {isEditMode && (
                         <div className="absolute right-0 top-0">
                             <DropdownMenu>
-                                <DropdownMenuTrigger>
+                            <DropdownMenuTrigger asChild>
                                     <Button className="min-w-[42px]"><MoreHorizontal /></Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
