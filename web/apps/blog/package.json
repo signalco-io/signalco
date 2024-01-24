@@ -58,7 +58,7 @@
         "@types/color": "3.0.6",
         "@types/fs-extra": "11.0.4",
         "@types/klaw": "3.0.6",
-        "@types/node": "20.11.5",
+        "@types/node": "20.11.6",
         "@types/react": "18.2.48",
         "@types/react-dom": "18.2.18",
         "colorette": "2.0.20",
