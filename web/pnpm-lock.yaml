@@ -694,8 +694,8 @@ importers:
         specifier: 7.0.3
         version: 7.0.3
       dotenv:
-        specifier: 16.3.2
-        version: 16.3.2
+        specifier: 16.4.1
+        version: 16.4.1
       drizzle-kit:
         specifier: 0.20.13
         version: 0.20.13
@@ -1060,8 +1060,8 @@ importers:
         specifier: 7.0.3
         version: 7.0.3
       dotenv:
-        specifier: 16.3.2
-        version: 16.3.2
+        specifier: 16.4.1
+        version: 16.4.1
       eslint:
         specifier: 8.56.0
         version: 8.56.0
@@ -10987,8 +10987,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /dotenv@16.3.2:
-    resolution: {integrity: sha512-HTlk5nmhkm8F6JcdXvHIzaorzCoziNQT9mGxLPVXW8wJF1TiGSL60ZGB4gHWabHOaMmWmhvk2/lPHfnBiT78AQ==}
+  /dotenv@16.4.1:
+    resolution: {integrity: sha512-CjA3y+Dr3FyFDOAMnxZEGtnW9KBR2M0JvvUtXNW+dYJL5ROWxP9DUHCwgFqpMk0OXCc0ljhaNTr2w/kutYIcHQ==}
     engines: {node: '>=12'}
     dev: true
 
@@ -13709,7 +13709,7 @@ packages:
     engines: {node: '>=14.0.0'}
     dependencies:
       app-root-dir: 1.0.2
-      dotenv: 16.3.2
+      dotenv: 16.4.1
       dotenv-expand: 10.0.0
     dev: true
 
