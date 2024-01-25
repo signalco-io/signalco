@@ -45,7 +45,7 @@
         "@tanstack/react-query": "5.17.19",
         "@tanstack/react-query-devtools": "5.17.19",
         "@vercel/analytics": "1.1.2",
-        "@vercel/speed-insights": "1.0.5",
+        "@vercel/speed-insights": "1.0.8",
         "@vvo/tzdb": "6.125.0",
         "autoprefixer": "10.4.17",
         "classix": "2.1.35",
