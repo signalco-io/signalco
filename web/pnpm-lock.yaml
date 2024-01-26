@@ -99,8 +99,8 @@ importers:
         specifier: 10.4.17
         version: 10.4.17(postcss@8.4.33)
       classix:
-        specifier: 2.1.35
-        version: 2.1.35
+        specifier: 2.1.36
+        version: 2.1.36
       cobe:
         specifier: 0.6.3
         version: 0.6.3
@@ -307,8 +307,8 @@ importers:
         specifier: 10.4.17
         version: 10.4.17(postcss@8.4.33)
       classix:
-        specifier: 2.1.35
-        version: 2.1.35
+        specifier: 2.1.36
+        version: 2.1.36
       encoding:
         specifier: 0.1.13
         version: 0.1.13
@@ -446,8 +446,8 @@ importers:
         specifier: 1.0.0-rc.12
         version: 1.0.0-rc.12
       classix:
-        specifier: 2.1.35
-        version: 2.1.35
+        specifier: 2.1.36
+        version: 2.1.36
       next:
         specifier: 14.1.0
         version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
@@ -612,8 +612,8 @@ importers:
         specifier: 1.1.2
         version: 1.1.2
       classix:
-        specifier: 2.1.35
-        version: 2.1.35
+        specifier: 2.1.36
+        version: 2.1.36
       drizzle-orm:
         specifier: 0.29.3
         version: 0.29.3(@planetscale/database@1.14.0)(@types/react@18.2.48)(react@18.2.0)
@@ -751,8 +751,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       classix:
-        specifier: 2.1.35
-        version: 2.1.35
+        specifier: 2.1.36
+        version: 2.1.36
       next:
         specifier: 14.1.0
         version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
@@ -993,8 +993,8 @@ importers:
         specifier: 1.1.2
         version: 1.1.2
       classix:
-        specifier: 2.1.35
-        version: 2.1.35
+        specifier: 2.1.36
+        version: 2.1.36
       next:
         specifier: 14.1.0
         version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
@@ -1138,8 +1138,8 @@ importers:
         specifier: 10.4.17
         version: 10.4.17(postcss@8.4.33)
       classix:
-        specifier: 2.1.35
-        version: 2.1.35
+        specifier: 2.1.36
+        version: 2.1.36
       cobe:
         specifier: 0.6.3
         version: 0.6.3
@@ -1486,8 +1486,8 @@ importers:
         specifier: 10.4.17
         version: 10.4.17(postcss@8.4.33)
       classix:
-        specifier: 2.1.35
-        version: 2.1.35
+        specifier: 2.1.36
+        version: 2.1.36
       postcss:
         specifier: 8.4.33
         version: 8.4.33
@@ -1624,8 +1624,8 @@ importers:
         specifier: 10.4.17
         version: 10.4.17(postcss@8.4.33)
       classix:
-        specifier: 2.1.35
-        version: 2.1.35
+        specifier: 2.1.36
+        version: 2.1.36
       next:
         specifier: 14.1.0
         version: 14.1.0(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
@@ -9711,8 +9711,8 @@ packages:
     resolution: {integrity: sha512-sbpkOw6z413p+HDGcBENe498WM9woqWHiJxCq7nvmxe9WmrUmqfAcxpIwAiMtM5Q3AhYkzXcNQHqsWq0mND51g==}
     dev: false
 
-  /classix@2.1.35:
-    resolution: {integrity: sha512-YRI5UjBq9Aspfnj6ZyCobyeye3EDAanCpBWqXhNH9bVloKC6Ejnz+K4pWu/qMSaJRJEtLgmfvkIRk5zbQqj2PA==}
+  /classix@2.1.36:
+    resolution: {integrity: sha512-1glwI9Ho7s/Z5vqCNLj3eYU+17A9KHjLREcmzJUmZS+GnXBgS1/or5fzqhB5b59jsPxazONrajM5d9hgJgnnlA==}
 
   /clean-css@5.3.2:
     resolution: {integrity: sha512-JVJbM+f3d3Q704rF4bqQ5UUyTtuJ0JRKNbTKVEeujCCBoMdkEi+V+e8oktO9qGQNSvHrFTM6JZRXrUvGR1czww==}
