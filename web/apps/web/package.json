@@ -35,7 +35,7 @@
         "@signalco/ui-icons": "workspace:*",
         "@vercel/analytics": "1.1.2",
         "autoprefixer": "10.4.17",
-        "classix": "2.1.35",
+        "classix": "2.1.36",
         "cobe": "0.6.3",
         "encoding": "0.1.13",
         "next": "14.1.0",
