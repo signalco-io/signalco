@@ -43,7 +43,7 @@
     "@signalco/ui-notifications": "workspace:*",
     "@signalco/ui-primitives": "workspace:*",
     "@tanstack/react-query": "5.17.19",
-    "@tanstack/react-query-devtools": "5.17.19",
+    "@tanstack/react-query-devtools": "5.17.21",
     "@vercel/analytics": "1.1.2",
     "classix": "2.1.35",
     "drizzle-orm": "0.29.3",
