@@ -13,7 +13,7 @@
         "node": "20.x"
     },
     "devDependencies": {
-        "@babel/core": "7.23.7",
+        "@babel/core": "7.23.9",
         "@signalco/tsconfig": "workspace:*",
         "@storybook/addon-essentials": "7.6.10",
         "@storybook/addon-links": "7.6.10",
