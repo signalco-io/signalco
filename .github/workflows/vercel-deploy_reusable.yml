@@ -67,7 +67,7 @@ jobs:
             run: pnpm install --frozen-lockfile --filter ${{ inputs.name }}... --filter .
 
           - name: ✨ Setup Vercel CLI
-            run: pnpm add --global vercel@latest
+            run: pnpm add --global vercel@33.2.0
 
           - name: ⚙️ Pull Vercel Environment Information
             run: vercel pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}
