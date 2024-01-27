@@ -23,7 +23,7 @@
         "@next/env": "14.1.0",
         "@reactflow/background": "11.3.7",
         "@reactflow/controls": "11.2.7",
-        "@reactflow/core": "11.10.2",
+        "@reactflow/core": "11.10.3",
         "@signalco/cms-core": "workspace:*",
         "@signalco/cms-components-marketing": "workspace:*",
         "@signalco/data": "workspace:*",
