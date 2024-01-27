@@ -13,7 +13,7 @@
         "node": "20.x"
     },
     "devDependencies": {
-        "@babel/core": "7.23.7",
+        "@babel/core": "7.23.9",
         "@signalco/tsconfig": "workspace:*",
         "@storybook/addon-essentials": "7.6.10",
         "@storybook/addon-links": "7.6.10",
@@ -40,7 +40,7 @@
         "tailwindcss": "3.4.1",
         "tailwindcss-animate": "1.0.7",
         "typescript": "5.3.3",
-        "webpack": "5.89.0"
+        "webpack": "5.90.0"
     },
     "dependencies": {
         "@signalco/tailwindcss-config-signalco": "workspace:*",

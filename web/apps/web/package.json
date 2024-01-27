@@ -35,7 +35,7 @@
         "@signalco/ui-icons": "workspace:*",
         "@vercel/analytics": "1.1.2",
         "autoprefixer": "10.4.17",
-        "classix": "2.1.35",
+        "classix": "2.1.36",
         "cobe": "0.6.3",
         "encoding": "0.1.13",
         "next": "14.1.0",
@@ -51,8 +51,8 @@
         "@tailwindcss/typography": "0.5.10"
     },
     "devDependencies": {
-        "@axe-core/playwright": "4.8.3",
-        "@babel/core": "7.23.7",
+        "@axe-core/playwright": "4.8.4",
+        "@babel/core": "7.23.9",
         "@ducanh2912/next-pwa": "10.2.2",
         "@next/bundle-analyzer": "14.1.0",
         "@playwright/test": "1.41.1",
@@ -62,7 +62,7 @@
         "@types/cobe": "0.4.3",
         "@types/color": "3.0.6",
         "@types/next-pwa": "5.6.9",
-        "@types/node": "20.11.5",
+        "@types/node": "20.11.7",
         "@types/react": "18.2.48",
         "@types/react-dom": "18.2.18",
         "babel-loader": "9.1.3",
