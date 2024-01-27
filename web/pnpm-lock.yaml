@@ -71,6 +71,9 @@ importers:
       '@signalco/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@signalco/ui-forms':
+        specifier: workspace:*
+        version: link:../../packages/ui-forms
       '@signalco/ui-icons':
         specifier: workspace:*
         version: link:../../packages/ui-icons
@@ -1509,6 +1512,45 @@ importers:
       tailwind-merge:
         specifier: 2.2.1
         version: 2.2.1
+      typescript:
+        specifier: 5.3.3
+        version: 5.3.3
+
+  packages/ui-forms:
+    devDependencies:
+      '@enterwell/react-form-builder':
+        specifier: 0.3.2
+        version: 0.3.2(@enterwell/react-form-validation@1.4.0)(react-dom@18.2.0)(react@18.2.0)
+      '@enterwell/react-form-validation':
+        specifier: 1.4.0
+        version: 1.4.0(react-dom@18.2.0)(react@18.2.0)
+      '@signalco/eslint-config-signalco':
+        specifier: workspace:*
+        version: link:../eslint-config-signalco
+      '@signalco/tailwindcss-config-signalco':
+        specifier: workspace:*
+        version: link:../tailwindcss-config-signalco
+      '@signalco/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@signalco/ui':
+        specifier: workspace:*
+        version: link:../ui
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../ui-primitives
+      '@types/react':
+        specifier: 18.2.48
+        version: 18.2.48
+      '@types/react-dom':
+        specifier: 18.2.18
+        version: 18.2.18
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -3882,7 +3924,6 @@ packages:
       '@enterwell/react-form-validation': 1.4.0(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-    dev: false
 
   /@enterwell/react-form-validation@1.4.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-Soymd47ib0VBHxB1nZGq5AMiH3zTe7+ieXGD8S4XjAPeL/Kaf7S1fR0TeWEfdzrDWm2BrGvXPGI5bL0dTm+Ohw==}
@@ -3893,7 +3934,6 @@ packages:
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-    dev: false
 
   /@enterwell/react-hooks@0.5.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-XvqcOFFKZJhjfaoq+rtiTdzUYpvJ/xpAGU7wsMSDiY0R0LXn2B0/COwrf/9yFXgTNZCxdPlmrZOqRJPk1f/e1A==}

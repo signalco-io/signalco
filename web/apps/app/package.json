@@ -39,6 +39,7 @@
         "@signalco/js": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/ui": "workspace:*",
+        "@signalco/ui-forms": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/ui-notifications": "workspace:*",
         "@signalco/ui-icons": "workspace:*",

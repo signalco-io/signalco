@@ -68,7 +68,7 @@ function SpaceBackground({ background }: { background?: string }) {
     );
 }
 
-function Dashboards() {
+export function Dashboards() {
     const { t } = useLocale('App', 'Dashboards');
     const [selectedId, setDashboardId] = useSearchParam('dashboard');
     const selectedDashboard = useDashboard(selectedId);
@@ -179,5 +179,3 @@ function Dashboards() {
         </>
     );
 }
-
-export default Dashboards;

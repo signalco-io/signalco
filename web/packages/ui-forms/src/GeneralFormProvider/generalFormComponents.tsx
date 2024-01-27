@@ -2,7 +2,7 @@ import { Input } from '@signalco/ui-primitives/Input';
 import { Checkbox } from '@signalco/ui-primitives/Checkbox';
 import { FormBuilderComponents } from '@enterwell/react-form-builder/lib/FormBuilderProvider/FormBuilderProvider.types';
 
-const components: FormBuilderComponents = {
+export const components: FormBuilderComponents = {
     number: (props) => <Input type="number" {...props} />,
     yesno: (props) => (
         <Checkbox
@@ -13,5 +13,3 @@ const components: FormBuilderComponents = {
     string: (props) => <Input className="w-full" {...props} />,
     stringReadonly: ({ value, ...props }) => <Input className="w-full" defaultValue={value} {...props} />
 };
-
-export default components;
