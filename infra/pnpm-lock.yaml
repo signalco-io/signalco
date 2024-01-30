@@ -24,8 +24,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4
       '@pulumi/aws':
-        specifier: 6.18.2
-        version: 6.18.2
+        specifier: 6.19.0
+        version: 6.19.0
       '@pulumi/azure-native':
         specifier: 2.27.0
         version: 2.27.0
@@ -88,8 +88,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4
       '@pulumi/aws':
-        specifier: 6.18.2
-        version: 6.18.2
+        specifier: 6.19.0
+        version: 6.19.0
       '@pulumi/azure-native':
         specifier: 2.27.0
         version: 2.27.0
@@ -152,8 +152,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4
       '@pulumi/aws':
-        specifier: 6.18.2
-        version: 6.18.2
+        specifier: 6.19.0
+        version: 6.19.0
       '@pulumi/azure-native':
         specifier: 2.27.0
         version: 2.27.0
@@ -243,8 +243,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4
       '@pulumi/aws':
-        specifier: 6.18.2
-        version: 6.18.2
+        specifier: 6.19.0
+        version: 6.19.0
       '@pulumi/azure-native':
         specifier: 2.27.0
         version: 2.27.0
@@ -843,8 +843,8 @@ packages:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
     dev: false
 
-  /@pulumi/aws@6.18.2:
-    resolution: {integrity: sha512-mkjPn52WXFHg/U7pYk15mmYI2n1my6y4VrRqitKY89O0q4lDhtoRzPZJ4tXunJyNshpeWTx1i52ik8x/X7bFmA==}
+  /@pulumi/aws@6.19.0:
+    resolution: {integrity: sha512-gAMt6bx03NKK+b3/8yB6orhpO9Pvd8ntzxJXrJ13rAtIHX4HJayKpYHmpZ1QmlkUlydkU5g8sde0faEQujHWkw==}
     dependencies:
       '@pulumi/pulumi': 3.103.1
       builtin-modules: 3.0.0
