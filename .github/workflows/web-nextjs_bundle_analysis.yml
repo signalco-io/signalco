@@ -122,7 +122,7 @@ jobs:
   deploy_blog:
     name: "Blog (preview)"
     needs: analyze_blog
-    if: success()
+    if: ${{ success() }}
     uses: ./.github/workflows/vercel-deploy_reusable.yml
     with:
       name: 'blog'
@@ -145,7 +145,7 @@ jobs:
   deploy_app:
     name: "App (preview)"
     needs: analyze_app
-    if: success()
+    if: ${{ success() }}
     uses: ./.github/workflows/vercel-deploy_reusable.yml
     with:
       name: 'app'
@@ -168,7 +168,7 @@ jobs:
   deploy_brandgrab:
     name: "BrandGrab (preview)"
     needs: analyze_brandgrab
-    if: success()
+    if: ${{ success() }}
     uses: ./.github/workflows/vercel-deploy_reusable.yml
     with:
       name: 'brandgrab'
@@ -191,7 +191,7 @@ jobs:
   deploy_web:
     name: "Web (preview)"
     needs: analyze_web
-    if: success()
+    if: ${{ success() }}
     uses: ./.github/workflows/vercel-deploy_reusable.yml
     with:
       name: 'web'
@@ -214,7 +214,7 @@ jobs:
   deploy_slco:
     name: "slco (preview)"
     needs: analyze_slco
-    if: success()
+    if: ${{ success() }}
     uses: ./.github/workflows/vercel-deploy_reusable.yml
     with:
       name: 'slco'
@@ -237,7 +237,7 @@ jobs:
   deploy_doprocess:
     name: "doprocess (preview)"
     needs: analyze_doprocess
-    if: success()
+    if: ${{ success() }}
     uses: ./.github/workflows/vercel-deploy_reusable.yml
     with:
       name: 'doprocess'
@@ -271,7 +271,7 @@ jobs:
   deploy_uier:
     name: "uier (preview)"
     needs: analyze_uier
-    if: success()
+    if: ${{ success() }}
     uses: ./.github/workflows/vercel-deploy_reusable.yml
     with:
       name: 'uier'
@@ -282,7 +282,7 @@ jobs:
   ci_ok:
     name: "[CI] OK"
     needs: [station_ci, cloud_preview, uier_infra_preview, deploy_blog, deploy_app, deploy_brandgrab, deploy_web, deploy_slco, deploy_doprocess, deploy_uidocs, deploy_uier]
-    if: always()
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
       - run: exit 1
