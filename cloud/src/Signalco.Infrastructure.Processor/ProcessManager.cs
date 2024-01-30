@@ -31,7 +31,7 @@ internal class ProcessManager : IProcessManager
     }
 
     public async Task AddAsync(
-        IContactPointer pointer, 
+        IContactPointer pointer,
         CancellationToken cancellationToken = default)
     {
         // Skip queue for some triggers
@@ -52,7 +52,7 @@ internal class ProcessManager : IProcessManager
         this.InstantInternalAsync(pointer, false, cancellationToken);
 
     public async Task LinkContactProcessTriggers(
-        IContactPointer pointer, 
+        IContactPointer pointer,
         CancellationToken cancellationToken = default)
     {
         // Ignore if not for this cache (only configuration changes are cached here)
@@ -63,7 +63,7 @@ internal class ProcessManager : IProcessManager
 
         // Ignore if not Process
         var entity = await this.entityService.Value.GetInternalAsync(entityId, cancellationToken);
-        if (entity is not {Type: EntityType.Process}) 
+        if (entity is not {Type: EntityType.Process})
             return;
 
         // Clear old links to process
@@ -82,7 +82,7 @@ internal class ProcessManager : IProcessManager
         // Retrieve all users connected with the process
         // Retrieve all entities connected to users to check which are allowed
         var processUsers = (await this.entityService.Value.EntityUsersAsync(new[] { entityId }, cancellationToken)).SelectMany(eu => eu.Value);
-        var entities = await processUsers.SelectManyAsync(userId => 
+        var entities = await processUsers.SelectManyAsync(userId =>
             this.entityService.Value.AllAsync(userId, null, cancellationToken));
         var entityIds = entities.Select(e => e.Id);
 
@@ -91,15 +91,18 @@ internal class ProcessManager : IProcessManager
             .Where(t => entityIds.Contains(t.EntityId))
             .Select(triggerPointer =>
             this.storage.Value.UpsertAsync(
-                new ContactLinkProcessTriggerItem(triggerPointer, entityId), 
+                new ContactLinkProcessTriggerItem(triggerPointer, entityId),
                 cancellationToken)));
     }
 
     private async Task QueueAsync(IContactPointer pointer, CancellationToken cancellationToken = default)
     {
         await this.storage.Value.QueueAsync(
-            new ContactStateProcessQueueItem(new ContactPointer(pointer.EntityId, pointer.ChannelName,
-                pointer.ContactName)),
+            new ContactStateProcessQueueItem(
+                new ContactPointer(
+                    pointer.EntityId,
+                    pointer.ChannelName,
+                    pointer.ContactName)),
             cancellationToken);
     }
 

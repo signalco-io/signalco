@@ -12,43 +12,29 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Signalco.Infrastructure.Processor;
 
-internal class Processor : IProcessor
+internal class Processor(
+    IEntityService entityService,
+    IProcessService processService,
+    ISecretsProvider secretsProvider,
+    IAzureStorage storage)
+    : IProcessor
 {
-    private readonly IEntityService entityService;
-    private readonly IProcessService processService;
-    private readonly ISecretsProvider secretsProvider;
-    private readonly IAzureStorage storage;
-
-
-    public Processor(
-        IEntityService entityService,
-        IProcessService processService,
-        ISecretsProvider secretsProvider,
-        IAzureStorage storage)
-    {
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.processService = processService ?? throw new ArgumentNullException(nameof(processService));
-        this.secretsProvider = secretsProvider ?? throw new ArgumentNullException(nameof(secretsProvider));
-        this.storage = storage ?? throw new ArgumentNullException(nameof(storage));
-    }
-
     public async Task RunProcessAsync(
-        string processEntityId, 
-        IContactPointer trigger, 
+        string processEntityId,
+        IContactPointer? trigger,
         bool instant,
         CancellationToken cancellationToken = default)
     {
         if (processEntityId == null) throw new ArgumentNullException(nameof(processEntityId));
-        if (trigger == null) throw new ArgumentNullException(nameof(trigger));
 
         try
         {
             var start = DateTime.UtcNow;
 
-            var disabledContactTask = this.entityService.ContactAsync(
+            var disabledContactTask = entityService.ContactAsync(
                 new ContactPointer(processEntityId, "signalco", "disabled"),
                 cancellationToken);
-            var configTask = this.processService.GetConfigurationAsync(processEntityId, cancellationToken);
+            var configTask = processService.GetConfigurationAsync(processEntityId, cancellationToken);
 
             await Task.WhenAll(disabledContactTask, configTask);
 
@@ -73,7 +59,7 @@ internal class Processor : IProcessor
             var results = await Task.WhenAll(conductTasks.Values);
 
             await this.ReportExecutedAsync(
-                processEntityId, trigger, instant, results, 
+                processEntityId, trigger, instant, results,
                 start, DateTime.UtcNow,  cancellationToken);
         }
         catch (Exception ex)
@@ -83,8 +69,8 @@ internal class Processor : IProcessor
     }
 
     private async Task ReportExecutedAsync(
-        string processEntityId, 
-        IContactPointer trigger,
+        string processEntityId,
+        IContactPointer? trigger,
         bool instant,
         ConductResult[] conductResults,
         DateTime start,
@@ -94,7 +80,7 @@ internal class Processor : IProcessor
         try
         {
             var pointer = new ContactPointer(processEntityId, "signalco", "executed");
-            var executedTask = this.entityService.ContactSetAsync(
+            var executedTask = entityService.ContactSetAsync(
                 pointer,
                 JsonSerializer.Serialize(new
                 {
@@ -133,11 +119,11 @@ internal class Processor : IProcessor
             // TODO: Properly resolve owner of process
             // Resolve process entity user - will use that user as owner
             var processUsers =
-                await this.entityService.EntityUsersAsync(new[] {processEntityId}, cancellationToken);
+                await entityService.EntityUsersAsync(new[] {processEntityId}, cancellationToken);
             var processUserId = processUsers.FirstOrDefault().Value.FirstOrDefault();
 
             // Report process executed
-            await this.storage.QueueAsync(
+            await storage.QueueAsync(
                 new UsageQueueItem(
                     processUserId ?? throw new InvalidOperationException("Process user not found"),
                     UsageKind.Process),
@@ -150,7 +136,7 @@ internal class Processor : IProcessor
                 .Sum(c => c.ConductsCount ?? 0);
             await Task.WhenAll(
                 Enumerable.Repeat(
-                    this.storage.QueueAsync(
+                    storage.QueueAsync(
                         new UsageQueueItem(
                             processUserId ?? throw new InvalidOperationException("Process user not found"),
                             UsageKind.Conduct),
@@ -169,12 +155,12 @@ internal class Processor : IProcessor
         {
             // Ignore if already reported
             var pointer = new ContactPointer(processEntityId, "signalco", "configurationError");
-            var contact = await this.entityService.ContactAsync(pointer, cancellationToken);
+            var contact = await entityService.ContactAsync(pointer, cancellationToken);
             if (contact != null &&
-                contact.ValueSerialized == ex.Message) 
+                contact.ValueSerialized == ex.Message)
                 return;
 
-            await this.entityService.ContactSetAsync(
+            await entityService.ContactSetAsync(
                 pointer,
                 ex.Message,
                 null,
@@ -189,8 +175,8 @@ internal class Processor : IProcessor
     }
 
     private async Task<ConductResult> ProcessConductAsync(
-        Conduct conduct, 
-        IReadOnlyDictionary<string, Task<ConductResult>> conductTasks, 
+        Conduct conduct,
+        IReadOnlyDictionary<string, Task<ConductResult>> conductTasks,
         CancellationToken cancellationToken = default)
     {
         var start = DateTime.UtcNow;
@@ -299,7 +285,7 @@ internal class Processor : IProcessor
             condition.ContactPointer.ContactName == null)
             throw new NotSupportedException("Partial contact not supported");
 
-        var contact = await this.entityService.ContactAsync(
+        var contact = await entityService.ContactAsync(
             new ContactPointer(
                 condition.ContactPointer.EntityId,
                 condition.ContactPointer.ChannelName,
@@ -380,7 +366,7 @@ internal class Processor : IProcessor
 
     private async Task<bool> ConditionMetAsync(ConditionOrGroup condition, CancellationToken cancellationToken = default)
     {
-        if (condition.Conditions == null) 
+        if (condition.Conditions == null)
             return false;
 
         // NOTE: Don't execute in parallel because in OR statement we can abort early if condition is met
@@ -390,7 +376,7 @@ internal class Processor : IProcessor
 
         return false;
     }
-            
+
 
     private async Task ExecuteConductsAsync(IEnumerable<ConductContact> conductContacts, CancellationToken cancellationToken = default)
     {
@@ -402,7 +388,7 @@ internal class Processor : IProcessor
         // TODO: Use client factory
         var errors = new List<Exception>();
 
-        var accessCode = await this.secretsProvider.GetSecretAsync(SecretKeys.ProcessorAccessCode, cancellationToken);
+        var accessCode = await secretsProvider.GetSecretAsync(SecretKeys.ProcessorAccessCode, cancellationToken);
         var conductTasks = channelConductContacts.Select(async channelConducts =>
         {
             try

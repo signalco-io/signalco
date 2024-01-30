@@ -6,14 +6,14 @@ namespace Signalco.Infrastructure.Processor;
 
 internal static class ConditionsHelper
 {
-    public static bool ShouldTrigger(IEnumerable<Condition> conditions, IContactPointer trigger)
+    public static bool ShouldTrigger(IEnumerable<Condition> conditions, IContactPointer? trigger)
     {
+        var conditionsList = conditions.ToList();
+
         // Should trigger if any of following is met:
         // - no conditions
         // - conditions contains trigger pointer
-
-        var conditionsList = conditions.ToList();
-        return !conditionsList.Any() || 
+        return conditionsList.Count == 0 ||
                ExtractPointers(conditionsList).Any(ipt => ipt?.Equals(trigger) ?? false);
     }
 
@@ -36,7 +36,7 @@ internal static class ConditionsHelper
         condition.Conditions?.SelectMany(ExtractPointers) ?? Enumerable.Empty<IContactPointer?>();
 
     private static IEnumerable<IContactPointer?> ExtractPointers(ConditionContact condition) =>
-        condition.ContactPointer is { EntityId: { }, ChannelName: { }, ContactName: { } }
+        condition.ContactPointer is { EntityId: not null, ChannelName: not null, ContactName: not null }
             ? new[]
             {
                 new ContactPointer(

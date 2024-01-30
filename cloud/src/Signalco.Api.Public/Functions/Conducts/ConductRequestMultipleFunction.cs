@@ -44,7 +44,7 @@ public class ConductRequestMultipleFunction(
                     var createRequest =
                         JsonSerializer.Deserialize<ConductPayloadCloudNotificationCreate>(
                             conduct.ValueSerialized);
-                    if (createRequest is { Title: { }, Content: { } })
+                    if (createRequest is { Title: not null, Content: not null })
                     {
                         await notificationService.CreateAsync(
                             new[] { context.User.UserId },
@@ -57,7 +57,7 @@ public class ConductRequestMultipleFunction(
                     }
                 }
             }
-            else 
+            else
             {
                 // Forward to channel
                 // TODO: Use HTTP Client Factory

@@ -333,7 +333,9 @@ internal class AzureStorageDao : IAzureStorageDao
     public async Task<IEnumerable<IContactLinkProcessTriggerItem>> ContactLinkProcessTriggersAsync(IContactPointer pointer, CancellationToken cancellationToken = default)
     {
         var client = await this.clientFactory.GetTableClientAsync(ItemTableNames.ContactLinks, cancellationToken);
-        var linksQuery = client.QueryAsync<AzureContactLinkProcessTriggerItem>(q => q.PartitionKey == $"triggerProcess-{pointer}");
+        var linksQuery = client.QueryAsync<AzureContactLinkProcessTriggerItem>(q =>
+            q.PartitionKey == $"triggerProcess-{pointer}",
+            cancellationToken: cancellationToken);
         return await EnumerateAsync(linksQuery, null, AzureContactLinkProcessTriggerItem.To, cancellationToken);
     }
 
