@@ -222,7 +222,7 @@ internal class EntityService(
     }
 
     public async Task ContactDeleteAsync(
-        string userId, 
+        string userId,
         IContactPointer pointer,
         CancellationToken cancellationToken = default)
     {
@@ -232,9 +232,7 @@ internal class EntityService(
 
         // TODO: Check if user is owner
 
-        // TODO: Delete contact history
-
-        // Delete contact
+        // Delete contact and history
         await this.storage.RemoveAsync(pointer, cancellationToken);
     }
 

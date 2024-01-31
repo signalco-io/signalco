@@ -2,12 +2,12 @@ import { PropsWithChildren } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { SelectItems } from '@signalco/ui-primitives/SelectItems';
 import { Button } from '@signalco/ui-primitives/Button';
+import { GeneralFormProvider } from '@signalco/ui-forms/GeneralFormProvider';
 import { asArray, ObjectDictAny } from '@signalco/js';
 import { extractValues } from '@enterwell/react-form-validation';
 import { FormBuilder, type FormItems, useFormField, FormBuilderProvider, FormBuilderComponents } from '@enterwell/react-form-builder';
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
-import GeneralFormProvider from '../../forms/GeneralFormProvider';
 import WidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 
 type WidgetConfigurationDialogProps = {

@@ -3,10 +3,10 @@ import { Stack } from '@signalco/ui-primitives/Stack';
 import { Modal } from '@signalco/ui-primitives/Modal';
 import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
+import { GeneralFormProvider } from '@signalco/ui-forms/GeneralFormProvider';
 import { CopyToClipboardInput } from '@signalco/ui/CopyToClipboardInput';
 import { noError, submitForm, resetFields } from '@enterwell/react-form-validation';
 import { FormBuilder, useFormField } from '@enterwell/react-form-builder';
-import GeneralFormProvider from '../../forms/GeneralFormProvider';
 import { useCreateAuthPat } from '../../../src/hooks/signalco/pats/useCreateAuthPat';
 
 export function CreateAuthPatButton() {

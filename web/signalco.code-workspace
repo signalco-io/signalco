@@ -65,6 +65,10 @@
 			"path": "packages/ui"
 		},
 		{
+			"name": "📦 @signalco/ui-forms",
+			"path": "packages/ui-forms"
+		},
+		{
 			"name": "📦 @signalco/ui-icons",
 			"path": "packages/ui-icons"
 		},
