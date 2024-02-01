@@ -19,7 +19,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@blocknote/core": "0.11.1",
+    "@blocknote/core": "0.11.2",
     "@blocknote/react": "0.11.1",
     "@clerk/nextjs": "4.29.5",
     "@clerk/themes": "1.7.9",

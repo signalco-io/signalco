@@ -537,8 +537,8 @@ importers:
   apps/doprocess:
     dependencies:
       '@blocknote/core':
-        specifier: 0.11.1
-        version: 0.11.1
+        specifier: 0.11.2
+        version: 0.11.2
       '@blocknote/react':
         specifier: 0.11.1
         version: 0.11.1(@tiptap/pm@2.1.12)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
@@ -3164,14 +3164,14 @@ packages:
     resolution: {integrity: sha512-4iri8i1AqYHJE2DstZYkyEprg6Pq6sKx3xn5FpySk9sNhH7qN2LLlHJCfDTZRILNwQNPD7mATWM0TBui7uC1pA==}
     dev: true
 
-  /@blocknote/core@0.11.1:
-    resolution: {integrity: sha512-X+pPByPkTEhddq2TBcc2xa1oe5vQFYp9fYWeSbVNsj0zT9umE1VVBzfOnB6I7gJIUlLoWHyLnbolOzc4a2UPeA==}
+  /@blocknote/core@0.11.2:
+    resolution: {integrity: sha512-6xK5PSmpEhZbPYeJgH5sG2/hM5z8jsl1h03spbMIkJ8fkiR9bVWixEd3uZDPcZWO56va6xuvxNr+lR97ufbqeg==}
     dependencies:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
       '@tiptap/extension-bold': 2.1.12(@tiptap/core@2.1.12)
       '@tiptap/extension-code': 2.1.12(@tiptap/core@2.1.12)
-      '@tiptap/extension-collaboration': 2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)(y-prosemirror@1.0.20)
-      '@tiptap/extension-collaboration-cursor': 2.1.12(@tiptap/core@2.1.12)(y-prosemirror@1.0.20)
+      '@tiptap/extension-collaboration': 2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)(y-prosemirror@1.2.1)
+      '@tiptap/extension-collaboration-cursor': 2.1.12(@tiptap/core@2.1.12)(y-prosemirror@1.2.1)
       '@tiptap/extension-dropcursor': 2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)
       '@tiptap/extension-gapcursor': 2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)
       '@tiptap/extension-hard-break': 2.1.12(@tiptap/core@2.1.12)
@@ -3203,7 +3203,7 @@ packages:
       remark-stringify: 10.0.3
       unified: 10.1.2
       uuid: 8.3.2
-      y-prosemirror: 1.0.20(prosemirror-model@1.19.3)(prosemirror-state@1.4.3)(prosemirror-view@1.32.4)(y-protocols@1.0.6)(yjs@13.6.8)
+      y-prosemirror: 1.2.1(prosemirror-model@1.19.3)(prosemirror-state@1.4.3)(prosemirror-view@1.32.4)(y-protocols@1.0.6)(yjs@13.6.8)
       y-protocols: 1.0.6(yjs@13.6.8)
       yjs: 13.6.8
     transitivePeerDependencies:
@@ -3216,7 +3216,7 @@ packages:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@blocknote/core': 0.11.1
+      '@blocknote/core': 0.11.2
       '@floating-ui/react': 0.26.6(react-dom@18.2.0)(react@18.2.0)
       '@mantine/core': 7.4.2(@mantine/hooks@7.4.2)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
       '@mantine/hooks': 7.4.2(react@18.2.0)
@@ -7655,17 +7655,17 @@ packages:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
     dev: false
 
-  /@tiptap/extension-collaboration-cursor@2.1.12(@tiptap/core@2.1.12)(y-prosemirror@1.0.20):
+  /@tiptap/extension-collaboration-cursor@2.1.12(@tiptap/core@2.1.12)(y-prosemirror@1.2.1):
     resolution: {integrity: sha512-1hxo8bJWOvNccU7+yQSeUNU/sXPMXJ645WdXU5bylD4q/Ph/7u3gFxPPLu+j8WiLisBbj31saPk/DaOukIFTVg==}
     peerDependencies:
       '@tiptap/core': ^2.0.0
       y-prosemirror: 1.0.20
     dependencies:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
-      y-prosemirror: 1.0.20(prosemirror-model@1.19.3)(prosemirror-state@1.4.3)(prosemirror-view@1.32.4)(y-protocols@1.0.6)(yjs@13.6.8)
+      y-prosemirror: 1.2.1(prosemirror-model@1.19.3)(prosemirror-state@1.4.3)(prosemirror-view@1.32.4)(y-protocols@1.0.6)(yjs@13.6.8)
     dev: false
 
-  /@tiptap/extension-collaboration@2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)(y-prosemirror@1.0.20):
+  /@tiptap/extension-collaboration@2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)(y-prosemirror@1.2.1):
     resolution: {integrity: sha512-U/2Vo1RyFIhi2oMW371wO145PU8mjQp7shCDdio/hNF+GasaNN9mrqkMBj8JBhH7UOTJcEqLPP4df1nEDo1BBQ==}
     peerDependencies:
       '@tiptap/core': ^2.0.0
@@ -7674,7 +7674,7 @@ packages:
     dependencies:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
       '@tiptap/pm': 2.1.12
-      y-prosemirror: 1.0.20(prosemirror-model@1.19.3)(prosemirror-state@1.4.3)(prosemirror-view@1.32.4)(y-protocols@1.0.6)(yjs@13.6.8)
+      y-prosemirror: 1.2.1(prosemirror-model@1.19.3)(prosemirror-state@1.4.3)(prosemirror-view@1.32.4)(y-protocols@1.0.6)(yjs@13.6.8)
     dev: false
 
   /@tiptap/extension-dropcursor@2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12):
@@ -19853,14 +19853,14 @@ packages:
     engines: {node: '>=0.4'}
     dev: true
 
-  /y-prosemirror@1.0.20(prosemirror-model@1.19.3)(prosemirror-state@1.4.3)(prosemirror-view@1.32.4)(y-protocols@1.0.6)(yjs@13.6.8):
-    resolution: {integrity: sha512-LVMtu3qWo0emeYiP+0jgNcvZkqhzE/otOoro+87q0iVKxy/sMKuiJZnokfJdR4cn9qKx0Un5fIxXqbAlR2bFkA==}
+  /y-prosemirror@1.2.1(prosemirror-model@1.19.3)(prosemirror-state@1.4.3)(prosemirror-view@1.32.4)(y-protocols@1.0.6)(yjs@13.6.8):
+    resolution: {integrity: sha512-czMBfB1eL2awqmOSxQM8cS/fsUOGE6fjvyPLInrh4crPxFiw67wDpwIW+EGBYKRa04sYbS0ScGj7ZgvWuDrmBQ==}
     peerDependencies:
       prosemirror-model: ^1.7.1
       prosemirror-state: ^1.2.3
       prosemirror-view: ^1.9.10
       y-protocols: ^1.0.1
-      yjs: ^13.3.2
+      yjs: ^13.5.38
     dependencies:
       lib0: 0.2.87
       prosemirror-model: 1.19.3
