@@ -176,7 +176,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.4
-        version: 4.8.4(playwright-core@1.41.1)
+        version: 4.8.4(playwright-core@1.41.2)
       '@ducanh2912/next-pwa':
         specifier: 10.2.4
         version: 10.2.4(next@14.1.0)(webpack@5.90.1)
@@ -351,7 +351,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.4
-        version: 4.8.4(playwright-core@1.41.1)
+        version: 4.8.4(playwright-core@1.41.2)
       '@babel/core':
         specifier: 7.23.9
         version: 7.23.9
@@ -472,7 +472,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.4
-        version: 4.8.4(playwright-core@1.41.1)
+        version: 4.8.4(playwright-core@1.41.2)
       '@babel/core':
         specifier: 7.23.9
         version: 7.23.9
@@ -540,8 +540,8 @@ importers:
         specifier: 0.11.2
         version: 0.11.2
       '@blocknote/react':
-        specifier: 0.11.1
-        version: 0.11.1(@tiptap/pm@2.1.12)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 0.11.2
+        version: 0.11.2(@tiptap/pm@2.1.12)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
       '@clerk/nextjs':
         specifier: 4.29.5
         version: 4.29.5(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)
@@ -659,7 +659,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.4
-        version: 4.8.4(playwright-core@1.41.1)
+        version: 4.8.4(playwright-core@1.41.2)
       '@babel/core':
         specifier: 7.23.9
         version: 7.23.9
@@ -786,7 +786,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.4
-        version: 4.8.4(playwright-core@1.41.1)
+        version: 4.8.4(playwright-core@1.41.2)
       '@babel/core':
         specifier: 7.23.9
         version: 7.23.9
@@ -1025,7 +1025,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.4
-        version: 4.8.4(playwright-core@1.41.1)
+        version: 4.8.4(playwright-core@1.41.2)
       '@babel/core':
         specifier: 7.23.9
         version: 7.23.9
@@ -1182,7 +1182,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.4
-        version: 4.8.4(playwright-core@1.41.1)
+        version: 4.8.4(playwright-core@1.41.2)
       '@babel/core':
         specifier: 7.23.9
         version: 7.23.9
@@ -1822,13 +1822,13 @@ packages:
       default-browser-id: 3.0.0
     dev: true
 
-  /@axe-core/playwright@4.8.4(playwright-core@1.41.1):
+  /@axe-core/playwright@4.8.4(playwright-core@1.41.2):
     resolution: {integrity: sha512-xpwd+T0BODt19hnXW0eX9xf+H/Ns1rdWwZNmuCV9UoTqjZ9mGm1F80pvh/A1r317ooltq8nwqcoVO9jbHWKSdA==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
     dependencies:
       axe-core: 4.8.3
-      playwright-core: 1.41.1
+      playwright-core: 1.41.2
     dev: true
 
   /@babel/code-frame@7.23.5:
@@ -3210,16 +3210,16 @@ packages:
       - supports-color
     dev: false
 
-  /@blocknote/react@0.11.1(@tiptap/pm@2.1.12)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-WmMEXWaSkoXRicTKIb9ikyyR2OYPAv6ka7dbtfOllY/iVMJKR79kWrB7CysCsJzs80e1lDGhfrgSFAJHqDTLsg==}
+  /@blocknote/react@0.11.2(@tiptap/pm@2.1.12)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-yKi11TggAcUNmVgXSbZNitdfFahE4xvfrMshtzE2PCjWprxjDWY+1w453kXJ0tATPr8nITs8AyVXMscCrl6lrQ==}
     peerDependencies:
       react: ^18
       react-dom: ^18
     dependencies:
       '@blocknote/core': 0.11.2
       '@floating-ui/react': 0.26.6(react-dom@18.2.0)(react@18.2.0)
-      '@mantine/core': 7.4.2(@mantine/hooks@7.4.2)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
-      '@mantine/hooks': 7.4.2(react@18.2.0)
+      '@mantine/core': 7.5.1(@mantine/hooks@7.5.1)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
+      '@mantine/hooks': 7.5.1(react@18.2.0)
       '@mantine/utils': 6.0.21(react@18.2.0)
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
       '@tiptap/react': 2.1.12(@tiptap/core@2.1.12)(@tiptap/pm@2.1.12)(react-dom@18.2.0)(react@18.2.0)
@@ -4731,15 +4731,15 @@ packages:
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
     dev: true
 
-  /@mantine/core@7.4.2(@mantine/hooks@7.4.2)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-kXmq7NjSd1AsOIzqPwQhA7SeZS9hrbARRqhRwr4LLR3NKps9hLmVto441DnpHH/D27eL9gGLSl4GRIdogjX6mg==}
+  /@mantine/core@7.5.1(@mantine/hooks@7.5.1)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-V7apuQuRubqxTRXb1uxOM43K7tkLRzpbb1ONJ/sj8QRp/26bShkdYp7EVuSKyrQ8DQ5EGYyBBGyzBOQARh41gA==}
     peerDependencies:
-      '@mantine/hooks': 7.4.2
+      '@mantine/hooks': 7.5.1
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
       '@floating-ui/react': 0.24.8(react-dom@18.2.0)(react@18.2.0)
-      '@mantine/hooks': 7.4.2(react@18.2.0)
+      '@mantine/hooks': 7.5.1(react@18.2.0)
       clsx: 2.0.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -4751,8 +4751,8 @@ packages:
       - '@types/react'
     dev: false
 
-  /@mantine/hooks@7.4.2(react@18.2.0):
-    resolution: {integrity: sha512-tNtn/SNOtSmjLQmIk4S5nsTJjV84Oj0AUYRrAN78HHw3bfWp6bdWbgYPtPEH9e6iFJfdxiX0hrLfWqROalAsbQ==}
+  /@mantine/hooks@7.5.1(react@18.2.0):
+    resolution: {integrity: sha512-LfrEOkX8U2KbkYAU5BMA7FPbMva/TSd65c45W35wHSx3iqYMsoPN9+Ll1zc/HT0XNFp73jGet9cU7VREbAl0/A==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
@@ -11442,7 +11442,7 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
     dependencies:
-      '@babel/runtime': 7.23.5
+      '@babel/runtime': 7.23.8
       aria-query: 5.3.0
       array-includes: 3.1.7
       array.prototype.flatmap: 1.3.2
@@ -15612,12 +15612,6 @@ packages:
     engines: {node: '>=14.16'}
     dependencies:
       find-up: 6.3.0
-    dev: true
-
-  /playwright-core@1.41.1:
-    resolution: {integrity: sha512-/KPO5DzXSMlxSX77wy+HihKGOunh3hqndhqeo/nMxfigiKzogn8kfL0ZBDu0L1RKgan5XHCPmn6zXd2NUJgjhg==}
-    engines: {node: '>=16'}
-    hasBin: true
     dev: true
 
   /playwright-core@1.41.2:
