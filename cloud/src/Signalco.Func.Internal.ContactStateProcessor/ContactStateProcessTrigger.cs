@@ -20,12 +20,12 @@ public class ContactStateProcessTrigger(
         string trigger,
         CancellationToken cancellationToken = default)
     {
-        var pointer = JsonSerializer.Deserialize<ContactStateProcessQueueItem>(trigger);
-        if (pointer == null)
+        var queueItem = JsonSerializer.Deserialize<ContactStateProcessQueueItem>(trigger);
+        if (queueItem == null)
             throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Invalid queue item data");
 
-        logger.LogInformation("Dequeued pointer: {@Pointer}", pointer);
+        logger.LogInformation("Dequeued pointer: {@Pointer}", queueItem);
 
-        await manager.FromQueueAsync(pointer.Pointer, cancellationToken);
+        await manager.FromQueueAsync(queueItem.ProcessEntityId, cancellationToken);
     }
 }

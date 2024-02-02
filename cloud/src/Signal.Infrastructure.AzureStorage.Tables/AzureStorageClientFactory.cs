@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Data.Tables;
@@ -10,28 +9,21 @@ using Signal.Core.Secrets;
 
 namespace Signal.Infrastructure.AzureStorage.Tables;
 
-public class AzureStorageClientFactory : IAzureStorageClientFactory
+public class AzureStorageClientFactory(ISecretsProvider secretsProvider) : IAzureStorageClientFactory
 {
     private static readonly ConcurrentDictionary<string, BlobContainerClient> EstablishedBlobContainerClients = new();
     private static readonly ConcurrentDictionary<string, AppendBlobClient> EstablishedAppendBlobClients = new();
     private static readonly ConcurrentDictionary<string, TableClient> EstablishedTableClients = new();
     private static readonly ConcurrentDictionary<string, QueueClient> EstablishedQueueClients = new();
-    private readonly ISecretsProvider secretsProvider;
-
-    public AzureStorageClientFactory(
-        ISecretsProvider secretsProvider)
-    {
-        this.secretsProvider = secretsProvider ?? throw new ArgumentNullException(nameof(secretsProvider));
-    }
 
     public async Task<BlobContainerClient> GetBlobContainerClientAsync(string containerName, CancellationToken cancellationToken = default)
     {
         // Return established client if available
         if (EstablishedBlobContainerClients.TryGetValue(containerName, out var client))
             return client;
-        
+
         client = new BlobContainerClient(
-            await this.GetConnectionStringAsync(cancellationToken), 
+            await this.GetConnectionStringAsync(cancellationToken),
             containerName);
         EstablishedBlobContainerClients.TryAdd(containerName, client);
 
@@ -89,5 +81,5 @@ public class AzureStorageClientFactory : IAzureStorageClientFactory
     }
 
     private async Task<string> GetConnectionStringAsync(CancellationToken cancellationToken = default) =>
-        await this.secretsProvider.GetSecretAsync(SecretKeys.StorageAccountConnectionString, cancellationToken);
+        await secretsProvider.GetSecretAsync(SecretKeys.StorageAccountConnectionString, cancellationToken);
 }

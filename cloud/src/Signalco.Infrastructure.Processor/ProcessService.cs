@@ -5,19 +5,11 @@ using ContactPointer = Signal.Core.Contacts.ContactPointer;
 
 namespace Signalco.Infrastructure.Processor;
 
-internal class ProcessService : IProcessService
+internal class ProcessService(IEntityService entityService) : IProcessService
 {
-    private readonly IEntityService entityService;
-
-    public ProcessService(
-        IEntityService entityService)
-    {
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-    }
-
     public async Task<ProcessConfiguration?> GetConfigurationAsync(string processEntityId, CancellationToken cancellationToken = default)
     {
-        var configContact = await this.entityService.ContactAsync(
+        var configContact = await entityService.ContactAsync(
             new ContactPointer(processEntityId, "signalco", "configuration"),
             cancellationToken);
         if (configContact == null ||

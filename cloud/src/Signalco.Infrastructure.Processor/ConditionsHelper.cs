@@ -6,17 +6,6 @@ namespace Signalco.Infrastructure.Processor;
 
 internal static class ConditionsHelper
 {
-    public static bool ShouldTrigger(IEnumerable<Condition> conditions, IContactPointer? trigger)
-    {
-        var conditionsList = conditions.ToList();
-
-        // Should trigger if any of following is met:
-        // - no conditions
-        // - conditions contains trigger pointer
-        return conditionsList.Count == 0 ||
-               ExtractPointers(conditionsList).Any(ipt => ipt?.Equals(trigger) ?? false);
-    }
-
     public static IEnumerable<IContactPointer?> ExtractPointers(IEnumerable<Condition> conditions) =>
         conditions.SelectMany(ExtractPointers);
 

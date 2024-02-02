@@ -29,14 +29,14 @@ public class ProcessorTests
     public async Task Processor_NullArgs_EntityId()
     {
         var processor = Processor((typeof(IEntityService), new Mock<IEntityService>().Object));
-        await Assert.ThrowsAsync<ArgumentNullException>(() => processor.RunProcessAsync(null!, null!, false));
+        await Assert.ThrowsAsync<ArgumentNullException>(() => processor.RunProcessAsync(null!));
     }
 
     [Fact]
     public async Task Processor_NullArgs_Trigger()
     {
         var processor = Processor((typeof(IEntityService), new Mock<IEntityService>().Object));
-        await Assert.ThrowsAsync<ArgumentNullException>(() => processor.RunProcessAsync("", null!, false));
+        await Assert.ThrowsAsync<ArgumentNullException>(() => processor.RunProcessAsync(""));
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public class ProcessorTests
         mock.Setup(s => s.ContactsAsync("", default)).Returns(Task.FromResult(Enumerable.Empty<IContact>()));
 
         var processor = Processor((typeof(IEntityService), mock.Object));
-        await processor.RunProcessAsync("", new ContactPointer(null!, null!, null!), false);
+        await processor.RunProcessAsync("");
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public class ProcessorTests
         }.AsEnumerable()));
 
         var processor = Processor((typeof(IEntityService), mock.Object));
-        await processor.RunProcessAsync("", new ContactPointer(null!, null!, null!), false);
+        await processor.RunProcessAsync("");
     }
 
     [Fact]
@@ -72,7 +72,7 @@ public class ProcessorTests
         }.AsEnumerable()));
 
         var processor = Processor((typeof(IEntityService), mock.Object));
-        await processor.RunProcessAsync("", new ContactPointer(null!, null!, null!), false);
+        await processor.RunProcessAsync("");
     }
 
     [Fact]
@@ -106,7 +106,7 @@ public class ProcessorTests
         }.AsEnumerable()));
 
         var processor = Processor((typeof(IEntityService), mock.Object));
-        await processor.RunProcessAsync("", new ContactPointer(null!, null!, null!), false);
+        await processor.RunProcessAsync("");
     }
 
     [Fact]
@@ -164,7 +164,7 @@ public class ProcessorTests
         var processor = Processor(
             (typeof(IEntityService), entityServiceMock.Object),
             (typeof(ISecretsProvider), secretsProviderMock.Object));
-        await processor.RunProcessAsync("", new ContactPointer("test", "test", "test"), false);
+        await processor.RunProcessAsync("");
     }
 
     [Fact]
@@ -222,7 +222,7 @@ public class ProcessorTests
         var processor = Processor(
             (typeof(IEntityService), entityServiceMock.Object),
             (typeof(ISecretsProvider), secretsProviderMock.Object));
-        await processor.RunProcessAsync("", new ContactPointer("test", "test", "other"), false);
+        await processor.RunProcessAsync("");
     }
 
     [Fact]
@@ -301,7 +301,7 @@ public class ProcessorTests
             (typeof(IEntityService), entityServiceMock.Object),
             (typeof(ISecretsProvider), secretsProviderMock.Object),
             (typeof(IProcessService), processServiceMock.Object));
-        await processor.RunProcessAsync("", new ContactPointer("test", "test", "test"), false);
+        await processor.RunProcessAsync("");
     }
 
     [Fact]
@@ -381,7 +381,7 @@ public class ProcessorTests
         var processor = Processor(
             (typeof(IEntityService), entityServiceMock.Object),
             (typeof(ISecretsProvider), secretsProviderMock.Object));
-        await processor.RunProcessAsync("", new ContactPointer("test", "test", "test"), false);
+        await processor.RunProcessAsync("");
     }
 
     private static IProcessor Processor(params (Type type, object instance)[] mocks)
@@ -390,7 +390,7 @@ public class ProcessorTests
         services.AddCore();
         services.AddSecrets();
         services.AddProcessor();
-        foreach (var mock in mocks) 
+        foreach (var mock in mocks)
             services.AddSingleton(mock.type, mock.instance);
         var provider = services.BuildServiceProvider();
         return provider.GetRequiredService<IProcessor>();

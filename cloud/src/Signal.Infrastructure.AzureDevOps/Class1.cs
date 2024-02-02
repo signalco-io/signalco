@@ -56,14 +56,9 @@ public class DataDevOpsOrganization
     public DateTime CreatedTimeStamp { get; set; }
 }
 
-public class DevOpsContext
+public class DevOpsContext(VssConnection connection)
 {
-    public DevOpsContext(VssConnection connection)
-    {
-        this.Connection = connection ?? throw new ArgumentNullException(nameof(connection));
-    }
-
     public string OrganizationUrl => this.Connection.Uri.ToString();
 
-    public VssConnection Connection { get; }
+    public VssConnection Connection { get; } = connection;
 }

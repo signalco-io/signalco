@@ -8,9 +8,11 @@ public interface IProcessManager
 {
     Task AddAsync(IContactPointer pointer, CancellationToken cancellationToken = default);
 
-    Task FromQueueAsync(IContactPointer pointer, CancellationToken cancellationToken = default);
-    
+    Task AddManualAsync(string processEntityId, CancellationToken cancellationToken = default);
+
+    Task FromQueueAsync(string processEntityId, CancellationToken cancellationToken = default);
+
     Task LinkContactProcessTriggers(
-        IContactPointer pointer, 
+        IContactPointer pointer,
         CancellationToken cancellationToken = default);
 }

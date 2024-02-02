@@ -8,7 +8,5 @@ public interface IProcessor
 {
     Task RunProcessAsync(
         string processEntityId,
-        IContactPointer? trigger,
-        bool instant,
         CancellationToken cancellationToken = default);
 }

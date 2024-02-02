@@ -1,7 +1,6 @@
 ﻿using System.Net.Http.Json;
 using Signal.Core.Auth;
 using Signal.Core.Conducts;
-using Signal.Core.Contacts;
 using Signal.Core.Entities;
 using Signal.Core.Processor;
 using Signal.Core.Secrets;
@@ -21,11 +20,9 @@ internal class Processor(
 {
     public async Task RunProcessAsync(
         string processEntityId,
-        IContactPointer? trigger,
-        bool instant,
         CancellationToken cancellationToken = default)
     {
-        if (processEntityId == null) throw new ArgumentNullException(nameof(processEntityId));
+        ArgumentNullException.ThrowIfNull(processEntityId);
 
         try
         {
@@ -44,22 +41,15 @@ internal class Processor(
                 return;
 
             var conductTasks = new Dictionary<string, Task<ConductResult>>();
-            foreach (var configConduct in configTask.Result.Conducts)
-            {
-                var conductId = configConduct.Id ?? Guid.NewGuid().ToString();
-
-                // Determine whether this needs to run or be skipped
-                var task = ConditionsHelper.ShouldTrigger(configConduct.Conditions ?? Enumerable.Empty<Condition>(), trigger)
-                    ? this.ProcessConductAsync(configConduct, conductTasks, cancellationToken)
-                    : Task.FromResult(ConductResult.Skipped(conductId));
-
-                conductTasks.Add(conductId, task);
-            }
+            foreach (var conduct in configTask.Result.Conducts)
+                conductTasks.Add(
+                    conduct.Id ?? Guid.NewGuid().ToString(),
+                    this.ProcessConductAsync(conduct, conductTasks, cancellationToken));
 
             var results = await Task.WhenAll(conductTasks.Values);
 
             await this.ReportExecutedAsync(
-                processEntityId, trigger, instant, results,
+                processEntityId, results,
                 start, DateTime.UtcNow,  cancellationToken);
         }
         catch (Exception ex)
@@ -70,8 +60,6 @@ internal class Processor(
 
     private async Task ReportExecutedAsync(
         string processEntityId,
-        IContactPointer? trigger,
-        bool instant,
         ConductResult[] conductResults,
         DateTime start,
         DateTime end,
@@ -85,8 +73,6 @@ internal class Processor(
                 JsonSerializer.Serialize(new
                 {
                     IsSuccessful = conductResults.All(cr => cr.State is ConductResultState.Complete or ConductResultState.Skipped),
-                    Instant = instant,
-                    Trigger = trigger,
                     StartTimeStamp = start,
                     EndTimeStamp = end,
                     ConductResults = conductResults
@@ -214,7 +200,7 @@ internal class Processor(
 
             // TODO: Throw execution error
             var conductsCount = 0;
-            if (conduct is ConductEntityContact {Contacts: { }} conductContact)
+            if (conduct is ConductEntityContact { Contacts: not null } conductContact)
             {
                 conductsCount = conductContact.Contacts.Count;
                 await this.ExecuteConductsAsync(conductContact.Contacts, cancellationToken);
@@ -258,7 +244,7 @@ internal class Processor(
     {
         if (string.IsNullOrEmpty(arg))
             return false;
-        if (arg.ToLowerInvariant() == "false")
+        if (arg.Equals("false", StringComparison.InvariantCultureIgnoreCase))
             return false;
         if (double.TryParse(arg, out var numeric) &&
             (double.IsNaN(numeric) || numeric == 0))
