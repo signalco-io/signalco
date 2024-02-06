@@ -6,8 +6,11 @@ import {
 } from 'next/constants.js';
 import { combineSecureHeaders, knownSecureHeadersExternalUrls } from '@signalco/data/node';
 import nextBundleAnalyzer from '@next/bundle-analyzer';
+import { fileURLToPath } from 'url';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const withBundleAnalyzer = nextBundleAnalyzer({
     enabled: process.env.ANALYZE === 'true',
