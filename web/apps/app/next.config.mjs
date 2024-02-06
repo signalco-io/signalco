@@ -1,3 +1,4 @@
+import path from 'path';
 import { createSecureHeaders } from 'next-secure-headers';
 import {
     PHASE_DEVELOPMENT_SERVER,
@@ -26,6 +27,9 @@ const nextConfig = {
                 pathname: '**'
             }
         ]
+    },
+    experimental: {
+        outputFileTracingRoot: path.join(__dirname, '../../'),
     },
     eslint: {
         dirs: ['worker', 'tools', 'src', 'pages', 'app', 'locales', 'components']
