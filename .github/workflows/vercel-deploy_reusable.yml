@@ -63,6 +63,10 @@ jobs:
                 cache: "pnpm"
                 cache-dependency-path: ./web/pnpm-lock.yaml
 
+          - name: ⚙️ Configure .npmrc
+            run: echo "node-linker=hoisted" > .npmrc
+            working-directory: ${{ inputs.path }}/
+
           - name: 📦️ Install dependencies
             run: pnpm install --frozen-lockfile --filter ${{ inputs.name }}... --filter .
 
