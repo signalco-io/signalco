@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'url';
 import path from 'path';
 import { createSecureHeaders } from 'next-secure-headers';
 import {
@@ -8,6 +9,8 @@ import { combineSecureHeaders, knownSecureHeadersExternalUrls } from '@signalco/
 import nextBundleAnalyzer from '@next/bundle-analyzer';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const withBundleAnalyzer = nextBundleAnalyzer({
     enabled: process.env.ANALYZE === 'true',
@@ -29,7 +32,7 @@ const nextConfig = {
         ]
     },
     experimental: {
-        outputFileTracingRoot: path.join(__dirname, '../../'),
+        outputFileTracingRoot: path.join(__dirname, './'),
     },
     eslint: {
         dirs: ['worker', 'tools', 'src', 'pages', 'app', 'locales', 'components']

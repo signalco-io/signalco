@@ -54,10 +54,42 @@ jobs:
             station:
               - station/**
               - .github/workflows/web-nextjs_bundle_analysis.yml
+            app_app:
+              - web/apps/app/**
+              - web/packages/**
+            app_web:
+              - web/apps/web/**
+              - web/packages/**
+            app_brandgrab:
+              - web/apps/brandgrab/**
+              - web/packages/**
+            app_blog:
+              - web/apps/blog/**
+              - web/packages/**
+            app_slco:
+              - web/apps/slco/**
+              - web/packages/**
+            app_doprocess:
+              - web/apps/doprocess/**
+              - web/packages/**
+            app_ui_docs:
+              - web/apps/ui-docs/**
+              - web/packages/**
+            app_uier:
+              - web/apps/uier/**
+              - web/packages/**
     outputs:
       infra: ${{ steps.filter.outputs.infrastructure }}
       web: ${{ steps.filter.outputs.web }}
       station: ${{ steps.filter.outputs.station }}
+      app_app: ${{ steps.filter.outputs.app_app }}
+      app_web: ${{ steps.filter.outputs.app_web }}
+      app_brandgrab: ${{ steps.filter.outputs.app_brandgrab }}
+      app_blog: ${{ steps.filter.outputs.app_blog }}
+      app_slco: ${{ steps.filter.outputs.app_slco }}
+      app_doprocess: ${{ steps.filter.outputs.app_doprocess }}
+      app_ui_docs: ${{ steps.filter.outputs.app_ui_docs }}
+      app_uier: ${{ steps.filter.outputs.app_uier }}
 
   station_ci:
     strategy:
@@ -110,7 +142,7 @@ jobs:
   analyze_blog:
     name: "Blog (analysis)"
     needs: changes
-    if: success() && needs.changes.outputs.web == 'true'
+    if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_blog == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -133,7 +165,7 @@ jobs:
   analyze_app:
     name: "App (analysis)"
     needs: changes
-    if: success() && needs.changes.outputs.web == 'true'
+    if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_app == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -156,7 +188,7 @@ jobs:
   analyze_brandgrab:
     name: "BrandGrab (analysis)"
     needs: changes
-    if: success() && needs.changes.outputs.web == 'true'
+    if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_brandgrab == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -179,7 +211,7 @@ jobs:
   analyze_web:
     name: "Web (analysis)"
     needs: changes
-    if: success() && needs.changes.outputs.web == 'true'
+    if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_web == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -202,7 +234,7 @@ jobs:
   analyze_slco:
     name: "slco (analysis)"
     needs: changes
-    if: success() && needs.changes.outputs.web == 'true'
+    if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_slco == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -225,7 +257,7 @@ jobs:
   analyze_doprocess:
     name: "doprocess (analysis)"
     needs: changes
-    if: success() && needs.changes.outputs.web == 'true'
+    if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_doprocess == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
@@ -248,7 +280,7 @@ jobs:
   deploy_uidocs:
     name: "ui-docs (preview)"
     needs: changes
-    if: success() && needs.changes.outputs.web == 'true'
+    if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_ui_docs == 'true'
     uses: ./.github/workflows/vercel-deploy_reusable.yml
     with:
       name: 'ui-docs'
@@ -259,7 +291,7 @@ jobs:
   analyze_uier:
     name: "uier (analysis)"
     needs: changes
-    if: success() && needs.changes.outputs.web == 'true'
+    if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_uier == 'true'
     uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
     with:
       workflowName: 'web-nextjs_bundle_analysis.yml'
