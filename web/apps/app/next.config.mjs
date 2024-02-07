@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'url';
 import path from 'path';
 import { createSecureHeaders } from 'next-secure-headers';
 import {
@@ -6,7 +7,6 @@ import {
 } from 'next/constants.js';
 import { combineSecureHeaders, knownSecureHeadersExternalUrls } from '@signalco/data/node';
 import nextBundleAnalyzer from '@next/bundle-analyzer';
-import { fileURLToPath } from 'url';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const __filename = fileURLToPath(import.meta.url);
@@ -32,7 +32,7 @@ const nextConfig = {
         ]
     },
     experimental: {
-        outputFileTracingRoot: path.join(__dirname, '../../'),
+        outputFileTracingRoot: path.join(__dirname, '../../../../'),
     },
     eslint: {
         dirs: ['worker', 'tools', 'src', 'pages', 'app', 'locales', 'components']
