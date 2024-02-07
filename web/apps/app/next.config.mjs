@@ -31,9 +31,6 @@ const nextConfig = {
             }
         ]
     },
-    experimental: {
-        outputFileTracingRoot: path.join(__dirname, './'),
-    },
     eslint: {
         dirs: ['worker', 'tools', 'src', 'pages', 'app', 'locales', 'components']
     },
