@@ -26,7 +26,7 @@
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/react": "18.2.55",
-        "@types/react-dom": "18.2.18",
+        "@types/react-dom": "18.2.19",
         "@types/react-timeago": "4.1.7",
         "autoprefixer": "10.4.17",
         "classix": "2.1.36",
