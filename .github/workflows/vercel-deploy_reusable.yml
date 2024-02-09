@@ -29,6 +29,7 @@ on:
                 default: 'preview'
 
 env:
+    TURBO_REMOTE_CACHE_SIGNATURE_KEYL: ${{ secrets.TURBO_REMOTE_CACHE_SIGNATURE_KEY }}
     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     TURBO_TEAM: signalco
     TURBO_REMOTE_ONLY: true
