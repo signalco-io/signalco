@@ -46,7 +46,7 @@ jobs:
               fetch-depth: 2
 
           - name: ✨ Setup pnpm
-            uses: pnpm/action-setup@v2.4.0
+            uses: pnpm/action-setup@v3.0.0
             with:
               version: 'latest'
 
