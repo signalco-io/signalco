@@ -38,7 +38,7 @@
         "sharp": "0.33.2"
     },
     "devDependencies": {
-        "@axe-core/playwright": "4.8.4",
+        "@axe-core/playwright": "4.8.5",
         "@babel/core": "7.23.9",
         "@next/bundle-analyzer": "14.1.0",
         "@playwright/test": "1.41.2",
