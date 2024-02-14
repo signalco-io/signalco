@@ -84,11 +84,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.20.1
-        version: 5.20.1(react@18.2.0)
+        specifier: 5.20.5
+        version: 5.20.5(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.20.1
-        version: 5.20.1(@tanstack/react-query@5.20.1)(react@18.2.0)
+        specifier: 5.20.5
+        version: 5.20.5(@tanstack/react-query@5.20.5)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.1.3
         version: 1.1.3
@@ -606,11 +606,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.20.1
-        version: 5.20.1(react@18.2.0)
+        specifier: 5.20.5
+        version: 5.20.5(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.20.1
-        version: 5.20.1(@tanstack/react-query@5.20.1)(react@18.2.0)
+        specifier: 5.20.5
+        version: 5.20.5(@tanstack/react-query@5.20.5)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.1.3
         version: 1.1.3
@@ -987,11 +987,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.20.1
-        version: 5.20.1(react@18.2.0)
+        specifier: 5.20.5
+        version: 5.20.5(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.20.1
-        version: 5.20.1(@tanstack/react-query@5.20.1)(react@18.2.0)
+        specifier: 5.20.5
+        version: 5.20.5(@tanstack/react-query@5.20.5)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.1.3
         version: 1.1.3
@@ -1726,8 +1726,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-primitives
       '@tanstack/react-query':
-        specifier: 5.20.1
-        version: 5.20.1(react@18.2.0)
+        specifier: 5.20.5
+        version: 5.20.5(react@18.2.0)
       '@types/node':
         specifier: 20.11.17
         version: 20.11.17
@@ -7594,30 +7594,30 @@ packages:
       tailwindcss: 3.4.1
     dev: false
 
-  /@tanstack/query-core@5.20.1:
-    resolution: {integrity: sha512-OONHHYG5vzjob4An+EfzbW7TRyb+sCA0AEgHzUIMlV9NYlF7wIwbla3PUfB3ocnaK1gZyROf0Lux/CBSu0exBQ==}
+  /@tanstack/query-core@5.20.5:
+    resolution: {integrity: sha512-T1W28gGgWn0A++tH3lxj3ZuUVZZorsiKcv+R50RwmPYz62YoDEkG4/aXHZELGkRp4DfrW07dyq2K5dvJ4Wl1aA==}
 
-  /@tanstack/query-devtools@5.20.1:
-    resolution: {integrity: sha512-sSYo+GW7tx28M6FpcGqzo/zblbTEKrCG8THXOPoNy+EL1Z7kX4JXhRcihyKu3mY8MS/wsGghrZ/R0VTt6JXmBA==}
+  /@tanstack/query-devtools@5.20.2:
+    resolution: {integrity: sha512-BZfSjhk/NGPbqte5E3Vc1Zbj28uWt///4I0DgzAdWrOtMVvdl0WlUXK23K2daLsbcyfoDR4jRI4f2Z5z/mMzuw==}
     dev: false
 
-  /@tanstack/react-query-devtools@5.20.1(@tanstack/react-query@5.20.1)(react@18.2.0):
-    resolution: {integrity: sha512-VMjNjWLTu4+k0pGAhcsI8igtUI93ksrn4QDruaxbXdvLE3Yvfj8eaDVCemkmAySk7pCQJf4hhdByB/yOKSmIsg==}
+  /@tanstack/react-query-devtools@5.20.5(@tanstack/react-query@5.20.5)(react@18.2.0):
+    resolution: {integrity: sha512-Wl7IzNuKCb4h41a5iH/YXNwalHItqJPCAr4r8+0iUYOLHNOf3E9P0G4kzZ9sqDoWKxY04qst6Vrij9bwPzLQRQ==}
     peerDependencies:
-      '@tanstack/react-query': ^5.20.1
+      '@tanstack/react-query': ^5.20.5
       react: ^18.0.0
     dependencies:
-      '@tanstack/query-devtools': 5.20.1
-      '@tanstack/react-query': 5.20.1(react@18.2.0)
+      '@tanstack/query-devtools': 5.20.2
+      '@tanstack/react-query': 5.20.5(react@18.2.0)
       react: 18.2.0
     dev: false
 
-  /@tanstack/react-query@5.20.1(react@18.2.0):
-    resolution: {integrity: sha512-KRkOtJ47tv9B3EXfjHkbPkiFzOzYCOid8BrYBozk0rm9JpDB2xSf71q8w1PRudlQW6QUQIEDI9E6NIMh6AlLUw==}
+  /@tanstack/react-query@5.20.5(react@18.2.0):
+    resolution: {integrity: sha512-6MHwJ8G9cnOC/XKrwt56QMc91vN7hLlAQNUA0ubP7h9Jj3a/CmkUwT6ALdFbnVP+PsYdhW3WONa8WQ4VcTaSLQ==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
-      '@tanstack/query-core': 5.20.1
+      '@tanstack/query-core': 5.20.5
       react: 18.2.0
 
   /@tiptap/core@2.1.12(@tiptap/pm@2.1.12):
