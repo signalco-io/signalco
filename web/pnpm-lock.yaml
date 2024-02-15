@@ -1096,8 +1096,8 @@ importers:
         specifier: 14.1.0
         version: 14.1.0
       '@reactflow/background':
-        specifier: 11.3.8
-        version: 11.3.8(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 11.3.9
+        version: 11.3.9(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)
       '@reactflow/controls':
         specifier: 11.2.8
         version: 11.2.8(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)
@@ -6328,13 +6328,13 @@ packages:
       '@babel/runtime': 7.23.8
     dev: true
 
-  /@reactflow/background@11.3.8(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-U4aI54F7PwqgYI0Knv72QFRI/wXeipPmIYAlDsA0j51+tlPxs3Nk2z7G1/4pC11GxEZkgQVfcIXro4l1Fk+bIQ==}
+  /@reactflow/background@11.3.9(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-byj/G9pEC8tN0wT/ptcl/LkEP/BBfa33/SvBkqE4XwyofckqF87lKp573qGlisfnsijwAbpDlf81PuFL41So4Q==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.10.3(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.10.4(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)
       classcat: 5.0.4
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
