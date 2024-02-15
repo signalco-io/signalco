@@ -29,7 +29,7 @@
     "devDependencies": {
         "@infra/typescript-config": "workspace:*",
         "@infra/eslint-config": "workspace:*",
-        "@types/node": "20.11.17",
+        "@types/node": "20.11.18",
         "@typescript-eslint/eslint-plugin": "7.0.1",
         "@typescript-eslint/parser": "7.0.1",
         "eslint": "8.56.0",
