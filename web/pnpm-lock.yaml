@@ -132,8 +132,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)
       openapi-fetch:
-        specifier: 0.9.0
-        version: 0.9.0
+        specifier: 0.9.1
+        version: 0.9.1
       openapi-typescript:
         specifier: 6.7.4
         version: 6.7.4
@@ -15366,8 +15366,8 @@ packages:
       - encoding
     dev: false
 
-  /openapi-fetch@0.9.0:
-    resolution: {integrity: sha512-ijqft9ai+p2JdY9qNvy2tyiGliluk4VRNN4/IB2RGvaNGZ2Kfj5tpwG1/ZBpQMSn7PCfTwBNCvQJDAXlyc8I/Q==}
+  /openapi-fetch@0.9.1:
+    resolution: {integrity: sha512-5Ctb4L2v9X4Kc21zYtEufFNuLhUN6hO/3MZC89am7lnWXGXDUEnPOYC8a5wK9rtySCbJjq2QrDJo3CY6vWqbNw==}
     dependencies:
       openapi-typescript-helpers: 0.0.7
     dev: false
