@@ -45,7 +45,7 @@
         "@signalco/ui-icons": "workspace:*",
         "@tanstack/react-query": "5.20.5",
         "@tanstack/react-query-devtools": "5.20.5",
-        "@vercel/analytics": "1.1.4",
+        "@vercel/analytics": "1.2.0",
         "@vercel/speed-insights": "1.0.10",
         "@vvo/tzdb": "6.125.0",
         "autoprefixer": "10.4.17",
