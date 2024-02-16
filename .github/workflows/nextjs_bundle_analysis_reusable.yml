@@ -23,6 +23,7 @@ on:
                 description: 'Vercel Project ID'
 
 env:
+    TURBO_REMOTE_CACHE_SIGNATURE_KEY: ${{ secrets.TURBO_REMOTE_CACHE_SIGNATURE_KEY }}
     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     TURBO_TEAM: signalco
     TURBO_REMOTE_ONLY: true
@@ -46,7 +47,7 @@ jobs:
               fetch-depth: 2
 
           - name: ✨ Setup pnpm
-            uses: pnpm/action-setup@v2.4.0
+            uses: pnpm/action-setup@v3.0.0
             with:
               version: 'latest'
 

@@ -29,6 +29,7 @@ on:
                 default: 'preview'
 
 env:
+    TURBO_REMOTE_CACHE_SIGNATURE_KEYL: ${{ secrets.TURBO_REMOTE_CACHE_SIGNATURE_KEY }}
     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     TURBO_TEAM: signalco
     TURBO_REMOTE_ONLY: true
@@ -52,7 +53,7 @@ jobs:
               fetch-depth: 2
 
           - name: ✨ Setup pnpm
-            uses: pnpm/action-setup@v2.4.0
+            uses: pnpm/action-setup@v3.0.0
             with:
               version: 'latest'
 
@@ -62,13 +63,6 @@ jobs:
                 node-version: "20.x"
                 cache: "pnpm"
                 cache-dependency-path: ./web/pnpm-lock.yaml
-
-          - name: ⚙️ Configure .npmrc
-            run: echo "node-linker=hoisted" > .npmrc
-            working-directory: ${{ inputs.path }}/
-
-          - name: 📦️ Install dependencies
-            run: pnpm install --frozen-lockfile --filter ${{ inputs.name }}... --filter .
 
           - name: ✨ Setup Vercel CLI
             run: pnpm add --global vercel@33.2.0
