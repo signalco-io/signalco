@@ -124,7 +124,7 @@ importers:
         version: 0.46.0
       next:
         specifier: 14.1.0
-        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -203,7 +203,7 @@ importers:
         version: 7.4.3
       '@types/next-pwa':
         specifier: 5.6.9
-        version: 5.6.9(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+        version: 5.6.9(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       '@types/node':
         specifier: 20.11.19
         version: 20.11.19
@@ -253,11 +253,11 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       sass:
-        specifier: 1.70.0
-        version: 1.70.0
+        specifier: 1.71.0
+        version: 1.71.0
       sass-loader:
         specifier: 14.1.0
-        version: 14.1.0(sass@1.70.0)(webpack@5.90.2)
+        version: 14.1.0(sass@1.71.0)(webpack@5.90.2)
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -323,7 +323,7 @@ importers:
         version: 4.1.0
       next:
         specifier: 14.1.0
-        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -407,8 +407,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       sass:
-        specifier: 1.70.0
-        version: 1.70.0
+        specifier: 1.71.0
+        version: 1.71.0
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -453,7 +453,7 @@ importers:
         version: 2.1.36
       next:
         specifier: 14.1.0
-        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -522,8 +522,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       sass:
-        specifier: 1.70.0
-        version: 1.70.0
+        specifier: 1.71.0
+        version: 1.71.0
       tailwindcss:
         specifier: 3.4.1
         version: 3.4.1
@@ -625,7 +625,7 @@ importers:
         version: 5.0.5
       next:
         specifier: 14.1.0
-        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -718,8 +718,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       sass:
-        specifier: 1.70.0
-        version: 1.70.0
+        specifier: 1.71.0
+        version: 1.71.0
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -758,7 +758,7 @@ importers:
         version: 2.1.36
       next:
         specifier: 14.1.0
-        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -833,8 +833,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       sass:
-        specifier: 1.70.0
-        version: 1.70.0
+        specifier: 1.71.0
+        version: 1.71.0
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -855,7 +855,7 @@ importers:
         version: link:../../packages/ui-primitives
       next:
         specifier: 14.1.0
-        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -889,7 +889,7 @@ importers:
         version: 7.6.16(react-dom@18.2.0)(react@18.2.0)
       '@storybook/nextjs':
         specifier: 7.6.16
-        version: 7.6.16(@swc/core@1.3.96)(esbuild@0.18.20)(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)(typescript@5.3.3)(webpack@5.90.2)
+        version: 7.6.16(@swc/core@1.3.96)(esbuild@0.18.20)(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)(typescript@5.3.3)(webpack@5.90.2)
       '@storybook/react':
         specifier: 7.6.16
         version: 7.6.16(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
@@ -918,11 +918,11 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       sass:
-        specifier: 1.70.0
-        version: 1.70.0
+        specifier: 1.71.0
+        version: 1.71.0
       sass-loader:
         specifier: 14.1.0
-        version: 14.1.0(sass@1.70.0)(webpack@5.90.2)
+        version: 14.1.0(sass@1.71.0)(webpack@5.90.2)
       storybook:
         specifier: 7.6.16
         version: 7.6.16
@@ -1000,7 +1000,7 @@ importers:
         version: 2.1.36
       next:
         specifier: 14.1.0
-        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1078,8 +1078,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       sass:
-        specifier: 1.70.0
-        version: 1.70.0
+        specifier: 1.71.0
+        version: 1.71.0
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -1151,7 +1151,7 @@ importers:
         version: 0.1.13
       next:
         specifier: 14.1.0
-        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1212,7 +1212,7 @@ importers:
         version: 3.0.6
       '@types/next-pwa':
         specifier: 5.6.9
-        version: 5.6.9(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+        version: 5.6.9(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       '@types/node':
         specifier: 20.11.19
         version: 20.11.19
@@ -1247,8 +1247,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       sass:
-        specifier: 1.70.0
-        version: 1.70.0
+        specifier: 1.71.0
+        version: 1.71.0
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -1380,7 +1380,7 @@ importers:
         version: 18.2.55
       next:
         specifier: 14.1.0
-        version: 14.1.0(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+        version: 14.1.0(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1507,8 +1507,8 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(react@18.2.0)
       sass:
-        specifier: 1.70.0
-        version: 1.70.0
+        specifier: 1.71.0
+        version: 1.71.0
       tailwind-merge:
         specifier: 2.2.1
         version: 2.2.1
@@ -1670,7 +1670,7 @@ importers:
         version: 2.1.36
       next:
         specifier: 14.1.0
-        version: 14.1.0(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+        version: 14.1.0(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       postcss:
         specifier: 8.4.35
         version: 8.4.35
@@ -1687,8 +1687,8 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(react@18.2.0)
       sass:
-        specifier: 1.70.0
-        version: 1.70.0
+        specifier: 1.71.0
+        version: 1.71.0
       tailwind-merge:
         specifier: 2.2.1
         version: 2.2.1
@@ -1756,8 +1756,8 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(react@18.2.0)
       sass:
-        specifier: 1.70.0
-        version: 1.70.0
+        specifier: 1.71.0
+        version: 1.71.0
       tailwindcss:
         specifier: 3.4.1
         version: 3.4.1
@@ -3295,7 +3295,7 @@ packages:
       '@clerk/clerk-sdk-node': 4.13.9(react@18.2.0)
       '@clerk/shared': 1.3.1(react@18.2.0)
       '@clerk/types': 3.62.0
-      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       path-to-regexp: 6.2.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -3816,7 +3816,7 @@ packages:
     dependencies:
       clean-webpack-plugin: 4.0.0(webpack@5.90.2)
       fast-glob: 3.3.2
-      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       semver: 7.5.4
       terser-webpack-plugin: 5.3.10(esbuild@0.19.8)(webpack@5.90.2)
       webpack: 5.90.2(esbuild@0.19.8)
@@ -3840,7 +3840,7 @@ packages:
     dependencies:
       clean-webpack-plugin: 4.0.0(webpack@5.90.2)
       fast-glob: 3.3.2
-      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       semver: 7.5.4
       terser-webpack-plugin: 5.3.10(webpack@5.90.2)
       webpack: 5.90.2
@@ -7158,7 +7158,7 @@ packages:
     resolution: {integrity: sha512-TXJJd5RAKakWx4BtpwvSNdgTDkKM6RkXU8GK34S/LhidQ5Pjz3wcnqb0TxEkfhK/ztbP8nKHqXFwLfa2CYkvQw==}
     dev: true
 
-  /@storybook/nextjs@7.6.16(@swc/core@1.3.96)(esbuild@0.18.20)(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)(typescript@5.3.3)(webpack@5.90.2):
+  /@storybook/nextjs@7.6.16(@swc/core@1.3.96)(esbuild@0.18.20)(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)(typescript@5.3.3)(webpack@5.90.2):
     resolution: {integrity: sha512-dC25C1ijln/ZyBCRMzVcyutALdXR/gwpSR37kfUuAbEyvYHhqvfhYzkav2hFHksv2myL1IFLAQkaOPAOjJgKIA==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -7204,7 +7204,7 @@ packages:
       fs-extra: 11.2.0
       image-size: 1.0.2
       loader-utils: 3.2.1
-      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       node-polyfill-webpack-plugin: 2.0.1(webpack@5.90.2)
       pnp-webpack-plugin: 1.7.0(typescript@5.3.3)
       postcss: 8.4.35
@@ -7212,7 +7212,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       resolve-url-loader: 5.0.0
-      sass-loader: 12.6.0(sass@1.70.0)(webpack@5.90.2)
+      sass-loader: 12.6.0(sass@1.71.0)(webpack@5.90.2)
       semver: 7.5.4
       sharp: 0.32.6
       style-loader: 3.3.4(webpack@5.90.2)
@@ -8319,13 +8319,13 @@ packages:
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
     dev: false
 
-  /@types/next-pwa@5.6.9(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0):
+  /@types/next-pwa@5.6.9(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0):
     resolution: {integrity: sha512-KcymH+MtFYB5KVKIOH1DMqd0wUb8VLCxzHtsaRQQ7S8sGOaTH24Lo2vGZf6/0Ok9e+xWCKhqsSt6cgDJTk91Iw==}
     dependencies:
       '@types/node': 20.11.19
       '@types/react': 18.2.55
       '@types/react-dom': 18.2.19
-      next: 13.5.6(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+      next: 13.5.6(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       workbox-build: 6.6.0
     transitivePeerDependencies:
       - '@babel/core'
@@ -8727,7 +8727,7 @@ packages:
       vue-router:
         optional: true
     dependencies:
-      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       react: 18.2.0
     dev: false
 
@@ -14947,7 +14947,7 @@ packages:
       '@next/env': 13.5.6
       fast-glob: 3.3.2
       minimist: 1.2.8
-      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
     dev: true
 
   /next-themes@0.2.1(next@14.1.0)(react-dom@18.2.0)(react@18.2.0):
@@ -14957,7 +14957,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
+      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -14966,7 +14966,7 @@ packages:
     resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}
     dev: true
 
-  /next@13.5.6(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0):
+  /next@13.5.6(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0):
     resolution: {integrity: sha512-Y2wTcTbO4WwEsVb4A8VSnOsG1I9ok+h74q0ZdxkwM3EODqrs4pasq7O0iUxbcS9VtWMicG7f3+HAj0r1+NtKSw==}
     engines: {node: '>=16.14.0'}
     hasBin: true
@@ -14988,7 +14988,7 @@ packages:
       postcss: 8.4.31
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      sass: 1.70.0
+      sass: 1.71.0
       styled-jsx: 5.1.1(@babel/core@7.23.9)(react@18.2.0)
       watchpack: 2.4.0
     optionalDependencies:
@@ -15006,7 +15006,7 @@ packages:
       - babel-plugin-macros
     dev: true
 
-  /next@14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0):
+  /next@14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0):
     resolution: {integrity: sha512-wlzrsbfeSU48YQBjZhDzOwhWhGsy+uQycR8bHAOt1LY1bn3zZEcDyHQOEoN3aWzQ8LHCAJ1nqrWCc9XF2+O45Q==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -15029,7 +15029,7 @@ packages:
       postcss: 8.4.31
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      sass: 1.70.0
+      sass: 1.71.0
       styled-jsx: 5.1.1(@babel/core@7.23.9)(react@18.2.0)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.1.0
@@ -15045,7 +15045,7 @@ packages:
       - '@babel/core'
       - babel-plugin-macros
 
-  /next@14.1.0(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0):
+  /next@14.1.0(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0):
     resolution: {integrity: sha512-wlzrsbfeSU48YQBjZhDzOwhWhGsy+uQycR8bHAOt1LY1bn3zZEcDyHQOEoN3aWzQ8LHCAJ1nqrWCc9XF2+O45Q==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -15068,7 +15068,7 @@ packages:
       postcss: 8.4.31
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      sass: 1.70.0
+      sass: 1.71.0
       styled-jsx: 5.1.1(@babel/core@7.23.9)(react@18.2.0)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.1.0
@@ -17422,7 +17422,7 @@ packages:
   /safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  /sass-loader@12.6.0(sass@1.70.0)(webpack@5.90.2):
+  /sass-loader@12.6.0(sass@1.71.0)(webpack@5.90.2):
     resolution: {integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
@@ -17443,11 +17443,11 @@ packages:
     dependencies:
       klona: 2.0.6
       neo-async: 2.6.2
-      sass: 1.70.0
+      sass: 1.71.0
       webpack: 5.90.2(@swc/core@1.3.96)(esbuild@0.18.20)
     dev: true
 
-  /sass-loader@14.1.0(sass@1.70.0)(webpack@5.90.2):
+  /sass-loader@14.1.0(sass@1.71.0)(webpack@5.90.2):
     resolution: {integrity: sha512-LS2mLeFWA+orYxHNu+O18Xe4jR0kyamNOOUsE3NyBP4DvIL+8stHpNX0arYTItdPe80kluIiJ7Wfe/9iHSRO0Q==}
     engines: {node: '>= 18.12.0'}
     peerDependencies:
@@ -17469,12 +17469,12 @@ packages:
         optional: true
     dependencies:
       neo-async: 2.6.2
-      sass: 1.70.0
+      sass: 1.71.0
       webpack: 5.90.2
     dev: true
 
-  /sass@1.70.0:
-    resolution: {integrity: sha512-uUxNQ3zAHeAx5nRFskBnrWzDUJrrvpCPD5FNAoRvTi0WwremlheES3tg+56PaVtCs5QDRX5CBLxxKMDJMEa1WQ==}
+  /sass@1.71.0:
+    resolution: {integrity: sha512-HKKIKf49Vkxlrav3F/w6qRuPcmImGVbIXJ2I3Kg0VMA+3Bav+8yE9G5XmP5lMj6nl4OlqbPftGAscNaNu28b8w==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
