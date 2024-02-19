@@ -1,5 +1,6 @@
 import { Link } from '@signalco/ui-primitives/Link';
 import { Button } from '@signalco/ui-primitives/Button';
+import { KnownPages } from '../knownPages';
 
 type NavLinkItem = {
     href: string,
@@ -8,7 +9,7 @@ type NavLinkItem = {
 
 export const navLinks: NavLinkItem[] = [
     // { href: '#explore', text: 'Explore' },
-    // { href: KnownPages.Pricing, text: 'Pricing' }
+    { href: KnownPages.Pricing, text: 'Pricing' }
 ];
 
 export function NavMenu() {

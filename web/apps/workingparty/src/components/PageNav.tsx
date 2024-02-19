@@ -14,11 +14,9 @@ export function PageNav({ fullWidth }: { fullWidth?: boolean }) {
             <Container maxWidth="lg">
                 <header>
                     <Row justifyContent="space-between">
-                        <div className="flex h-full flex-col items-center">
-                            <Link href={KnownPages.Landing}>
-                                Working Party
-                            </Link>
-                        </div>
+                        <Link href={KnownPages.Landing}>
+                            Working Party
+                        </Link>
                         <Row spacing={1}>
                             <NavMenu />
                         </Row>
