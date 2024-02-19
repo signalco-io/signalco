@@ -1,11 +1,11 @@
 import { Spinner } from '@signalco/ui-primitives/Spinner';
 import { type ListItemProps } from '@signalco/ui-primitives/ListItem';
 import { Add } from '@signalco/ui-icons';
-import { ListItem } from './ListItem';
+import { QueryListItem } from './QueryListItem';
 
-export function ListItemCreate({ loading, label, onSelected }: Required<Pick<ListItemProps, 'label' | 'onSelected'>> & { loading?: boolean }) {
+export function QueryListItemCreate({ loading, label, onSelected }: Required<Pick<ListItemProps, 'label' | 'onSelected'>> & { loading?: boolean }) {
     return (
-        <ListItem
+        <QueryListItem
             nodeId="list-item-create"
             className={'text-muted-foreground'}
             startDecorator={<Add />}

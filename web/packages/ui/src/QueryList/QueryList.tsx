@@ -1,7 +1,6 @@
 'use client';
 
 import { Fragment, ReactElement, ReactNode, useState } from 'react';
-import { type UseQueryResult } from '@tanstack/react-query';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
@@ -10,11 +9,11 @@ import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List as UIList } from '@signalco/ui-primitives/List';
 import { Add } from '@signalco/ui-icons';
 import { Loadable } from '@signalco/ui/Loadable';
-import { ListSkeleton } from './ListSkeleton';
-import { ListItemCreate } from './ListItemCreate';
+import { QueryListSkeleton } from './QueryListSkeleton';
+import { QueryListItemCreate } from './QueryListItemCreate';
 
-type ListProps<T> = {
-    query: () => UseQueryResult<T[] | null | undefined, Error>;
+type QueryListProps<T> = {
+    query: () => { data: T[] | null | undefined, error?: Error | null, isLoading: boolean };
     editable?: boolean;
     itemCreateLabel?: string;
     itemRender?: (item: T) => ReactElement;
@@ -22,7 +21,7 @@ type ListProps<T> = {
     emptyPlaceholder?: ReactNode;
 };
 
-export function List<T>({ query, itemRender, editable, itemCreateLabel, createForm, emptyPlaceholder }: ListProps<T>) {
+export function QueryList<T>({ query, itemRender, editable, itemCreateLabel, createForm, emptyPlaceholder }: QueryListProps<T>) {
     const { data, isLoading, error } = query();
     const [showCreateModal, setShowCreateModal] = useState(false);
 
@@ -30,7 +29,7 @@ export function List<T>({ query, itemRender, editable, itemCreateLabel, createFo
         <Loadable
             isLoading={isLoading}
             loadingLabel="Loading..."
-            placeholder={<ListSkeleton itemClassName="h-9" />}
+            placeholder={<QueryListSkeleton itemClassName="h-9" />}
             error={error}>
             <UIList className="divide-y rounded-lg border">
                 {data?.map((item, i) => (
@@ -40,7 +39,7 @@ export function List<T>({ query, itemRender, editable, itemCreateLabel, createFo
                 ))}
                 {editable ? (
                     <>
-                        <ListItemCreate
+                        <QueryListItemCreate
                             label={itemCreateLabel}
                             onSelected={() => setShowCreateModal(true)} />
                         <Modal

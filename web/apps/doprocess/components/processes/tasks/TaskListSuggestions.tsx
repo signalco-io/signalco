@@ -6,7 +6,7 @@ import { List } from '@signalco/ui-primitives/List';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Button } from '@signalco/ui-primitives/Button';
 import { AI } from '@signalco/ui-icons';
-import { ListItem } from '../../shared/ListItem';
+import { QueryListItem } from '@signalco/ui/QueryList';
 import { fetchGetProcessTaskDefinitionsSuggestions } from '../../../src/hooks/useProcessTaskDefinitionsSuggestions';
 import { useProcessTaskDefinitionCreate } from '../../../src/hooks/useProcessTaskDefinitionCreate';
 import { ProcessTaskDefinitionsSuggestionsDto } from '../../../app/api/dtos/dtos';
@@ -86,7 +86,7 @@ export function TaskListSuggestions({ processId }: { processId: string; }) {
             {Boolean(suggestions?.suggestions.length) && (
                 <List className="divide-y rounded-lg border animate-in slide-in-from-right-4 slide-in-from-top-4">
                     {suggestions?.suggestions.map((suggestion) => (
-                        <ListItem
+                        <QueryListItem
                             key={suggestion}
                             label={suggestion}
                             nodeId={suggestion}
