@@ -37,6 +37,10 @@
 			"path": "apps/slco"
 		},
 		{
+			"name": "🚀 workingparty.ai",
+			"path": "apps/workingparty"
+		},
+		{
 			"name": "📦 @signalco/cms-core",
 			"path": "packages/cms-core"
 		},

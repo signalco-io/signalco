@@ -1253,6 +1253,142 @@ importers:
         specifier: 5.3.3
         version: 5.3.3
 
+  apps/workingparty:
+    dependencies:
+      '@enterwell/react-hooks':
+        specifier: 0.5.0
+        version: 0.5.0(react-dom@18.2.0)(react@18.2.0)
+      '@next/env':
+        specifier: 14.1.0
+        version: 14.1.0
+      '@signalco/cms-components-marketing':
+        specifier: workspace:*
+        version: link:../../packages/cms-components-marketing
+      '@signalco/cms-core':
+        specifier: workspace:*
+        version: link:../../packages/cms-core
+      '@signalco/data':
+        specifier: workspace:*
+        version: link:../../packages/data
+      '@signalco/hooks':
+        specifier: workspace:*
+        version: link:../../packages/hooks
+      '@signalco/js':
+        specifier: workspace:*
+        version: link:../../packages/js
+      '@signalco/tailwindcss-config-signalco':
+        specifier: workspace:*
+        version: link:../../packages/tailwindcss-config-signalco
+      '@signalco/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@signalco/ui-icons':
+        specifier: workspace:*
+        version: link:../../packages/ui-icons
+      '@signalco/ui-notifications':
+        specifier: workspace:*
+        version: link:../../packages/ui-notifications
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../../packages/ui-primitives
+      '@tanstack/react-query':
+        specifier: 5.21.7
+        version: 5.21.7(react@18.2.0)
+      '@tanstack/react-query-devtools':
+        specifier: 5.21.7
+        version: 5.21.7(@tanstack/react-query@5.21.7)(react@18.2.0)
+      '@vercel/analytics':
+        specifier: 1.2.1
+        version: 1.2.1(next@14.1.0)(react@18.2.0)
+      classix:
+        specifier: 2.1.36
+        version: 2.1.36
+      next:
+        specifier: 14.1.0
+        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
+      next-secure-headers:
+        specifier: 2.2.0
+        version: 2.2.0
+      next-themes:
+        specifier: 0.2.1
+        version: 0.2.1(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      sharp:
+        specifier: 0.33.2
+        version: 0.33.2
+      tailwindcss:
+        specifier: 3.4.1
+        version: 3.4.1
+      tailwindcss-animate:
+        specifier: 1.0.7
+        version: 1.0.7(tailwindcss@3.4.1)
+    devDependencies:
+      '@axe-core/playwright':
+        specifier: 4.8.5
+        version: 4.8.5(playwright-core@1.41.2)
+      '@babel/core':
+        specifier: 7.23.9
+        version: 7.23.9
+      '@ducanh2912/next-pwa':
+        specifier: 10.2.5
+        version: 10.2.5(next@14.1.0)(webpack@5.90.3)
+      '@next/bundle-analyzer':
+        specifier: 14.1.0
+        version: 14.1.0
+      '@playwright/test':
+        specifier: 1.41.2
+        version: 1.41.2
+      '@signalco/eslint-config-signalco':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config-signalco
+      '@signalco/tsconfig':
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
+      '@total-typescript/ts-reset':
+        specifier: 0.5.1
+        version: 0.5.1
+      '@types/color':
+        specifier: 3.0.6
+        version: 3.0.6
+      '@types/node':
+        specifier: 20.11.19
+        version: 20.11.19
+      '@types/react':
+        specifier: 18.2.56
+        version: 18.2.56
+      '@types/react-dom':
+        specifier: 18.2.19
+        version: 18.2.19
+      cross-env:
+        specifier: 7.0.3
+        version: 7.0.3
+      dotenv:
+        specifier: 16.4.4
+        version: 16.4.4
+      eslint:
+        specifier: 8.56.0
+        version: 8.56.0
+      next-sitemap:
+        specifier: 4.2.3
+        version: 4.2.3(next@14.1.0)
+      postcss:
+        specifier: 8.4.35
+        version: 8.4.35
+      rimraf:
+        specifier: 5.0.5
+        version: 5.0.5
+      sass:
+        specifier: 1.71.0
+        version: 1.71.0
+      typescript:
+        specifier: 5.3.3
+        version: 5.3.3
+
   packages/cms-components-marketing:
     devDependencies:
       '@signalco/cms-core':
