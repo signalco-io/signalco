@@ -2,8 +2,8 @@ import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { ListTodo, Navigate, Play } from '@signalco/ui-icons';
+import { QueryListItem } from '@signalco/ui/QueryList';
 import { SharedWithIndicator } from '../../shared/SharedWithIndicator';
-import { ListItem } from '../../shared/ListItem';
 import { KnownPages } from '../../../src/knownPages';
 import { useProcess } from '../../../src/hooks/useProcess';
 import { ProcessRunDto } from '../../../app/api/dtos/dtos';
@@ -18,7 +18,7 @@ export function RunsListItem({ run }: RunsListItemProps) {
     const process = useProcess(run.processId);
 
     return (
-        <ListItem
+        <QueryListItem
             label={(
                 <Stack spacing={0.5}>
                     <Typography>{run.name}</Typography>

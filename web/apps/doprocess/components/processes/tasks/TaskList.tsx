@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { List } from '@signalco/ui-primitives/List';
+import { QueryListSkeleton, QueryListItemCreate } from '@signalco/ui/QueryList';
 import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
 import { Loadable } from '@signalco/ui/Loadable';
 import { lexinsert } from '@signalco/lexorder';
@@ -10,8 +11,6 @@ import { orderBy } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
-import { ListSkeleton } from '../../shared/ListSkeleton';
-import { ListItemCreate } from '../../shared/ListItemCreate';
 import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
 import { useProcessTaskDefinitions } from '../../../src/hooks/useProcessTaskDefinitions';
 import { useProcessTaskDefinitionCreate } from '../../../src/hooks/useProcessTaskDefinitionCreate';
@@ -103,7 +102,7 @@ export function TaskList({ processId, runId, editable }: TaskListProps) {
         <Loadable
             isLoading={isLoadingTaskDefinitions || isLoadingTasks}
             loadingLabel="Loading task definitions..."
-            placeholder={<ListSkeleton itemClassName="h-9 w-full" />}
+            placeholder={<QueryListSkeleton itemClassName="h-9 w-full" />}
             error={errorTaskDefinitions || errorTasks}>
             <DndContext onDragEnd={handleDragEnd}>
                 <SortableContext items={orderedItems} strategy={verticalListSortingStrategy}>
@@ -119,7 +118,7 @@ export function TaskList({ processId, runId, editable }: TaskListProps) {
                                 editable={editable} />
                         ))}
                         {(editable && !runId) && (
-                            <ListItemCreate
+                            <QueryListItemCreate
                                 label="Add task"
                                 onSelected={handleCreateTaskDefinition}
                                 loading={taskDefinitionCreate.isPending} />
