@@ -1,6 +1,8 @@
 export const KnownPages = {
     Landing: '/',
     App: '/app',
+    AppWorker: (id: string) => `/app/workers/${id}`,
+    AppWorkerThread: (workerid: string, threadid: string) => `/app/workers/${workerid}/threads/${threadid}`,
     Pricing: '/pricing',
 
     LegalPrivacyPolicy: '/legal/privacy-policy',
