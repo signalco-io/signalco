@@ -7,10 +7,10 @@ import { cx } from '@signalco/ui-primitives/cx';
 import { Checkbox } from '@signalco/ui-primitives/Checkbox';
 import { Delete, Drag } from '@signalco/ui-icons';
 import { TypographyEditable } from '@signalco/ui/TypographyEditable';
+import { QueryListItem } from '@signalco/ui/QueryList';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { CSS } from '@dnd-kit/utilities';
 import { useSortable } from '@dnd-kit/sortable';
-import { ListItem } from '../../shared/ListItem';
 import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
 import { useProcessRunTaskUpsert } from '../../../src/hooks/useProcessRunTaskUpsert';
 import { ProcessRunTaskDto, ProcessTaskDefinitionDto } from '../../../app/api/dtos/dtos';
@@ -68,7 +68,7 @@ export function TaskListItem({ selected, taskDefinition, runId, task, taskIndex,
     // TODO: Preload item details on hover (to avoid skeletons)
 
     return (
-        <ListItem
+        <QueryListItem
             buttonRef={setNodeRef}
             style={style}
             {...attributes}

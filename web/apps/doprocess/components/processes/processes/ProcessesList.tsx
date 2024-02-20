@@ -1,7 +1,7 @@
 'use client';
 
+import { QueryList } from '@signalco/ui/QueryList';
 import { SignedIn, SignedOut } from '@clerk/nextjs';
-import { List } from '../../shared/List';
 import { InAppCtaSignUp } from '../../shared/InAppCtaSignUp';
 import { useProcesses } from '../../../src/hooks/useProcesses';
 import { ProcessesListItem } from './ProcessesListItem';
@@ -11,7 +11,7 @@ export function ProcessesList() {
     return (
         <>
             <SignedIn>
-                <List
+                <QueryList
                     query={useProcesses}
                     itemRender={(item) => (<ProcessesListItem process={item} />)}
                     editable
