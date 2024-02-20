@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 import { cx } from '@signalco/ui-primitives/cx';
-import { useResizeable } from '../../../../apps/doprocess/src/hooks/useResizeable';
-import { ResizeHandle } from '../../../../apps/doprocess/components/layouts/ResizeHandle';
+import { useResizeable } from '@signalco/hooks/useResizeable';
+import { ResizeHandle } from './ResizeHandle';
 
-type SplitViewProps = {
+export type SplitViewProps = {
     children: ReactNode[];
     size?: 'sm' | 'lg';
     minSize?: number;
