@@ -8,7 +8,7 @@ import { Modal } from '@signalco/ui-primitives/Modal';
 import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List as UIList } from '@signalco/ui-primitives/List';
 import { Add } from '@signalco/ui-icons';
-import { Loadable } from '@signalco/ui/Loadable';
+import { Loadable } from '../Loadable';
 import { QueryListSkeleton } from './QueryListSkeleton';
 import { QueryListItemCreate } from './QueryListItemCreate';
 
