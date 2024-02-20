@@ -2,7 +2,7 @@
 
 import { MouseEventHandler, TouchEventHandler, useCallback, useEffect, useRef } from 'react';
 
-type useResizeOptions = {
+export type useResizeOptions = {
     orientation?: 'horizontal' | 'vertical';
     onResize?: (newSize: number) => void;
     minSize?: number;
@@ -16,8 +16,15 @@ type useResizeOptions = {
 };
 
 export function useResizeable({
-    orientation: direction = 'horizontal', onResize, minSize = 0, maxSize,
-    collapsable, collapsed, collapseBreakpoint, collapsedSize, onCollapsedChanged,
+    orientation: direction = 'horizontal',
+    onResize,
+    minSize = 0,
+    maxSize,
+    collapsable,
+    collapsed,
+    collapseBreakpoint,
+    collapsedSize,
+    onCollapsedChanged,
     disableMobile
 }: useResizeOptions) {
     const fixedSideRef = useRef<HTMLDivElement>(null);

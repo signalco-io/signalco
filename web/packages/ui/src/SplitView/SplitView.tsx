@@ -1,11 +1,9 @@
-'use client';
-
 import { ReactNode } from 'react';
 import { cx } from '@signalco/ui-primitives/cx';
-import { useResizeable } from '../../src/hooks/useResizeable';
+import { useResizeable } from '@signalco/hooks/useResizeable';
 import { ResizeHandle } from './ResizeHandle';
 
-type SplitViewProps = {
+export type SplitViewProps = {
     children: ReactNode[];
     size?: 'sm' | 'lg';
     minSize?: number;
