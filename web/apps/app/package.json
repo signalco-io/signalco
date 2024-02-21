@@ -101,7 +101,7 @@
         "postcss": "8.4.35",
         "react-is": "18.2.0",
         "rimraf": "5.0.5",
-        "sass": "1.71.0",
+        "sass": "1.71.1",
         "sass-loader": "14.1.1",
         "typescript": "5.3.3"
     },
