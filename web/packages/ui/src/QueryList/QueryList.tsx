@@ -15,15 +15,22 @@ import { QueryListItemCreate } from './QueryListItemCreate';
 type QueryListProps<T> = {
     query: () => { data: T[] | null | undefined, error?: Error | null, isLoading: boolean };
     editable?: boolean;
+    onEditing?: () => void,
     itemCreateLabel?: string;
     itemRender?: (item: T) => ReactElement;
     createForm?: ReactNode;
     emptyPlaceholder?: ReactNode;
 };
 
-export function QueryList<T>({ query, itemRender, editable, itemCreateLabel, createForm, emptyPlaceholder }: QueryListProps<T>) {
+export function QueryList<T>({ query, itemRender, editable, onEditing, itemCreateLabel, createForm, emptyPlaceholder }: QueryListProps<T>) {
     const { data, isLoading, error } = query();
     const [showCreateModal, setShowCreateModal] = useState(false);
+
+    const handleEdit = () => {
+        onEditing?.();
+        if (createForm)
+            setShowCreateModal(true);
+    }
 
     return (
         <Loadable
@@ -41,7 +48,7 @@ export function QueryList<T>({ query, itemRender, editable, itemCreateLabel, cre
                     <>
                         <QueryListItemCreate
                             label={itemCreateLabel}
-                            onSelected={() => setShowCreateModal(true)} />
+                            onSelected={handleEdit} />
                         <Modal
                             open={showCreateModal}
                             onOpenChange={setShowCreateModal}>
