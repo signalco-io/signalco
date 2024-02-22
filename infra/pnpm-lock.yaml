@@ -42,8 +42,8 @@ importers:
         specifier: 3.106.0
         version: 3.106.0
       '@pulumiverse/vercel':
-        specifier: 1.1.0
-        version: 1.1.0
+        specifier: 1.1.1
+        version: 1.1.1
     devDependencies:
       '@infra/pulumi':
         specifier: workspace:*
@@ -106,8 +106,8 @@ importers:
         specifier: 3.106.0
         version: 3.106.0
       '@pulumiverse/vercel':
-        specifier: 1.1.0
-        version: 1.1.0
+        specifier: 1.1.1
+        version: 1.1.1
     devDependencies:
       '@infra/pulumi':
         specifier: workspace:*
@@ -170,8 +170,8 @@ importers:
         specifier: 3.106.0
         version: 3.106.0
       '@pulumiverse/vercel':
-        specifier: 1.1.0
-        version: 1.1.0
+        specifier: 1.1.1
+        version: 1.1.1
     devDependencies:
       '@infra/pulumi':
         specifier: workspace:*
@@ -261,8 +261,8 @@ importers:
         specifier: 3.106.0
         version: 3.106.0
       '@pulumiverse/vercel':
-        specifier: 1.1.0
-        version: 1.1.0
+        specifier: 1.1.1
+        version: 1.1.1
     devDependencies:
       '@infra/eslint-config':
         specifier: workspace:*
@@ -930,8 +930,8 @@ packages:
     resolution: {integrity: sha512-xfo+yLRM2zVjVEA4p23IjQWzyWl1ZhWOGobsBqRpIarzLvwNH/RAGaoehdxlhx4X92302DrpdIFgTICMN4P38w==}
     dev: false
 
-  /@pulumiverse/vercel@1.1.0:
-    resolution: {integrity: sha512-3u2+kOS2iOO8yAMkM8zqoazQihrioEvRXFXVVquYTe7dkF/RD5N4dt2gq3QIta5BwPzKBYpKkHBJAZouPJn7fg==}
+  /@pulumiverse/vercel@1.1.1:
+    resolution: {integrity: sha512-jVRCc2+LMkeJsntsBIV54GfMln/ecZEjRnmMV2vN3MGkybsUrBVHla4PiZHbZ8DPYX0FmyiTppMNUa0IDgH+4A==}
     dependencies:
       '@pulumi/pulumi': 3.106.0
     transitivePeerDependencies:
