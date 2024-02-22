@@ -28,7 +28,7 @@ export function SplitView({ children, size, minSize, maxSize, collapsable, colla
 
     return (
         <div className="md:h-full">
-            <div className="md:grid md:h-full md:grid-cols-[auto_9px_5fr] md:grid-rows-[minmax(0,1fr)]">
+            <div className="md:grid md:h-full md:grid-cols-[auto_1px_5fr] md:grid-rows-[minmax(0,1fr)]">
                 <div ref={fixedSideRef} className={cx('w-full md:h-full', size === 'lg' ? 'md:w-[420px]' : 'md:w-[320px]')}>
                     {children && children[0]}
                 </div>
@@ -39,7 +39,7 @@ export function SplitView({ children, size, minSize, maxSize, collapsable, colla
                     onTouchStart={handlers.handleTouchStart}
                     orientation="vertical"
                 />
-                <div className="md:w-full md:pr-1">
+                <div className="md:w-full">
                     {children && children[1]}
                 </div>
             </div>
