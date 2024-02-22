@@ -12,7 +12,10 @@
                 ".next/**",
                 "public/*.js"
             ],
-            "env": []
+            "env": [
+                "COSMOSDB_CONNECTION_STRING",
+                "OPENAI_API_KEY"
+            ]
         }
     }
 }

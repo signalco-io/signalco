@@ -22,7 +22,9 @@
                 "SITE_URL",
                 "GITHUB_PAT_TOKEN",
                 "URLBOX_KEY",
-                "URLBOX_SECRET"
+                "URLBOX_SECRET",
+                "COSMOSDB_CONNECTION_STRING",
+                "OPENAI_API_KEY"
             ]
         },
         "lint": {
