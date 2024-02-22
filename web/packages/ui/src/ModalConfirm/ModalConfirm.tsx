@@ -40,19 +40,33 @@ export function ModalConfirm({
 
     return (
         <Modal open={isOpen} onOpenChange={setIsOpen} {...rest}>
-            <Stack spacing={2}>
-                <Row justifyContent="space-between">
-                    <Typography level="h5">{header}</Typography>
-                </Row>
-                {children}
-                {Boolean(expectedConfirm) && (
-                    <Input value={confirmText} label={promptLabel} onChange={(e) => setConfirmText(e.target.value)} />
-                )}
-                <Row spacing={1} justifyContent="end">
-                    <Button variant="plain" onClick={handleCancel}>Cancel</Button>
-                    <Button variant="solid" onClick={handleConfirm} disabled={Boolean(expectedConfirm) && confirmText !== expectedConfirm}>Confirm</Button>
-                </Row>
-            </Stack>
+            <form onReset={handleCancel} onSubmit={handleConfirm}>
+                <Stack spacing={2}>
+                    <Row justifyContent="space-between">
+                        <Typography level="h5">{header}</Typography>
+                    </Row>
+                    {children}
+                    {Boolean(expectedConfirm) && (
+                        <Input
+                            value={confirmText}
+                            label={promptLabel}
+                            onChange={(e) => setConfirmText(e.target.value)}
+                            autoFocus />
+                    )}
+                    <Row spacing={1} justifyContent="end">
+                        <Button
+                            variant="plain"
+                            onClick={handleCancel}
+                            autoFocus={!Boolean(expectedConfirm)}
+                            type="reset">Cancel</Button>
+                        <Button
+                            type="submit"
+                            variant="solid"
+                            onClick={handleConfirm}
+                            disabled={Boolean(expectedConfirm) && confirmText !== expectedConfirm}>Confirm</Button>
+                    </Row>
+                </Stack>
+            </form>
         </Modal>
     );
 }
