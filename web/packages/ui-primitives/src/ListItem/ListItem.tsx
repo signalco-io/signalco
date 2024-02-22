@@ -1,4 +1,4 @@
-import { Ref, type ReactElement } from 'react';
+import { Ref, type ReactElement, MouseEventHandler } from 'react';
 import { Row } from '../Row';
 import { cx } from '../cx';
 import { Button } from '../Button';
@@ -8,6 +8,7 @@ export type ListItemPropsOptions = {
     nodeId?: never;
     selected?: boolean | undefined;
     onSelected?: never;
+    onMouseEnter?: never;
     divRef?: never;
     buttonRef?: Ref<HTMLButtonElement>;
 } | {
@@ -15,6 +16,7 @@ export type ListItemPropsOptions = {
     nodeId: string;
     selected?: boolean;
     onSelected: (nodeId: string) => void;
+    onMouseEnter?: MouseEventHandler<HTMLButtonElement>;
     divRef?: never;
     buttonRef?: Ref<HTMLButtonElement>;
 } | {
@@ -22,6 +24,7 @@ export type ListItemPropsOptions = {
     nodeId?: never;
     selected?: never;
     onSelected?: never;
+    onMouseEnter?: never;
     divRef?: Ref<HTMLDivElement>;
     buttonRef?: never;
 };
@@ -47,6 +50,7 @@ export function ListItem({
     endDecorator,
     selected,
     onSelected,
+    onMouseEnter,
     disabled,
     href,
     className,
@@ -54,9 +58,7 @@ export function ListItem({
     style
 }: ListItemProps) {
     const handleClick = () => {
-        if (onSelected) {
-            onSelected(nodeId);
-        }
+        onSelected?.(nodeId);
     };
 
     if (!href && !nodeId && !onSelected) {
@@ -82,6 +84,7 @@ export function ListItem({
             href={href}
             variant={selected ? 'soft' : 'plain'}
             onClick={handleClick}
+            onMouseEnter={onMouseEnter}
             disabled={disabled}
             title={title}
             style={style}
