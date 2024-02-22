@@ -88,7 +88,7 @@ export function ListItem({
             disabled={disabled}
             title={title}
             style={style}
-            className={cx('text-start h-auto', className)}>
+            className={cx('text-start h-auto pl-2', className)}>
             {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
             {Boolean(label) && <div className="grow">{label}</div>}
             {Boolean(endDecorator) && (
