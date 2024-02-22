@@ -78,6 +78,7 @@ export {
     ShieldCheck as Security,
     Hourglass,
     Wind,
+    Store,
     Flame,
     Snowflake,
     RadioReceiver as Station,
