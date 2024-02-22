@@ -17,6 +17,7 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@azure/cosmos": "4.0.0",
         "@enterwell/react-hooks": "0.5.0",
         "@signalco/cms-core": "workspace:*",
         "@signalco/cms-components-marketing": "workspace:*",
@@ -32,15 +33,18 @@
         "@tanstack/react-query-devtools": "5.21.7",
         "@vercel/analytics": "1.2.1",
         "classix": "2.1.36",
-        "next": "14.1.1-canary.61",
+        "next": "14.1.1-canary.67",
         "next-secure-headers": "2.2.0",
         "next-themes": "0.2.1",
+        "nanoid": "5.0.6",
         "openai": "4.28.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
+        "react-markdown": "9.0.1",
         "sharp": "0.33.2",
         "tailwindcss": "3.4.1",
-        "tailwindcss-animate": "1.0.7"
+        "tailwindcss-animate": "1.0.7",
+        "@tailwindcss/typography": "0.5.10"
     },
     "devDependencies": {
         "@axe-core/playwright": "4.8.5",
