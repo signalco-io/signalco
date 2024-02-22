@@ -116,8 +116,8 @@ export default function WorkerLayout({ children, params }: PropsWithChildren & {
     return (
         <>
             <SplitView>
-                <Stack>
-                    <div className="flex items-center p-2">
+                <Stack className="h-screen overflow-hidden">
+                    <div className="flex h-[58px] items-center border-b p-2">
                         <ListHeader
                             header={worker?.name}
                             actions={([
@@ -137,7 +137,7 @@ export default function WorkerLayout({ children, params }: PropsWithChildren & {
                                 </DropdownMenu>
                             ])} />
                     </div>
-                    <div className="p-2">
+                    <div className="h-full overflow-y-auto p-2">
                         <WorkerThreadsList workerId={workerid} selectedThreadId={selectedThreadId} />
                     </div>
                 </Stack>

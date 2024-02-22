@@ -40,12 +40,12 @@ export async function workersCreate({ marketplaceWorkerId }: { marketplaceWorker
     // otherwise create a new one
     const openai = openAiClient();
     const assistants = await openai.beta.assistants.list();
-    let oaiAssistant = assistants.data.find((assistant) => assistant.name === `WPMarketplace-${wid}`);
+    let oaiAssistant = assistants.data.find((assistant) => assistant.name === `WPMarketplace-${workerMarketplaceInfo.id}`);
     if (!oaiAssistant) {
         oaiAssistant = await openai.beta.assistants.create({
             model: 'gpt-3.5-turbo',
-            name: `WPMarketplace-${wid}`,
-            description: `Working Party Assistant - Marketplace Model ${wid}`,
+            name: `WPMarketplace-${workerMarketplaceInfo.id}`,
+            description: `Working Party Assistant - Marketplace Model ${workerMarketplaceInfo.id}`,
             instructions: 'You are a worker for Working Party. You will be assigned to threads and help with tasks. ' + workerMarketplaceInfo.description,
         });
     }

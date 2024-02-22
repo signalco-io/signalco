@@ -185,7 +185,7 @@ export default function WorkerThreadPage({ params }: { params: { workerid: strin
         <>
             <div className="relative h-full overflow-hidden py-0">
                 <div className="flex h-14 flex-row items-center justify-between overflow-hidden border-b px-4">
-                    <Typography level="h6">{thread?.name}</Typography>
+                    <Typography>{thread?.name}</Typography>
                     <DropdownMenu key="filter-actions">
                         <DropdownMenuTrigger asChild>
                             <IconButton variant="plain">
