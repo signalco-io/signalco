@@ -21,7 +21,7 @@ function nanoFormater(
 }
 
 export function Timeago({ date, live, format, noDate = '-' }: TimeagoProps) {
-    const isNever = typeof date === 'number' || date == null;
+    const isNever = typeof date !== 'number' || date == null;
 
     return (
         <div>
