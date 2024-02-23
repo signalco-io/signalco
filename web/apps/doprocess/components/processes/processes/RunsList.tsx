@@ -23,6 +23,7 @@ export function RunsList({ processId }: { processId?: string }) {
                     itemRender={(item) => (<RunsListItem run={item} />)}
                     editable={Boolean(processId) && showComplated !== 'true'}
                     itemCreateLabel="New process run"
+                    variant="outlined"
                     createForm={processId ? <ProcessRunCreateForm processId={processId} redirect /> : undefined}
                     emptyPlaceholder={<RunsListEmptyPlaceholder showCompleted={showComplated === 'true'} />}
                 />

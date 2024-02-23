@@ -27,7 +27,7 @@ type QueryListPropsEditable = {
     createForm?: never;
     createPosition?: never;
 } | {
-    editable: true;
+    editable: true | boolean;
     onEditing?: () => void,
     itemCreateLabel: string;
     createForm?: ReactNode;
