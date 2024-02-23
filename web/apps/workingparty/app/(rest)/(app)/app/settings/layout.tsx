@@ -11,49 +11,35 @@ import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { KnownPages } from '../../../../../src/knownPages';
 import { AppSidebar } from '../../../../../src/components/AppSidebar';
 
-type MarketplaceCategory = {
+
+type SettingsCategory = {
     id: string;
     name: string;
     subcategories?: never;
 };
 
-type MarketplaceCategorySection = {
+type SettingsCategorySection = {
     id?: never;
     name: string;
-    subcategories: MarketplaceCategory[];
+    subcategories: SettingsCategory[];
 };
 
 export const marketplaceCategories = [
-    { id: 'explore', name: 'Explore' },
+    { id: 'profile', name: 'Profile' },
+    { id: 'security', name: 'Security' },
+    { id: 'notifications', name: 'Notifications' },
     {
-        name: 'Business',
+        name: 'Account settings',
         subcategories: [
-            { id: 'businessOps', name: 'Business Operations' },
-            { id: 'salesAndMarketing', name: 'Sales and Marketing' },
-            { id: 'finance', name: 'Finance' },
-            { id: 'softwareDevelopment', name: 'Software Development' },
+            { id: 'account', name: 'General settings' },
+            { id: 'usage', name: 'Usage' },
+            { id: 'account-billing', name: 'Billing' },
         ]
     },
-    {
-        name: 'Productivity',
-        subcategories: [
-            { id: 'education', name: 'Education' },
-            { id: 'personalDevelopment', name: 'Personal Development' },
-        ]
-    },
-    {
-        name: 'Fun',
-        subcategories: [
-            { id: 'travel', name: 'Travel' },
-            { id: 'lifestyle', name: 'Lifestyle' },
-            { id: 'entertainment', name: 'Entertainment' },
-        ]
-    },
-] satisfies Array<MarketplaceCategory | MarketplaceCategorySection>;
+] satisfies Array<SettingsCategory | SettingsCategorySection>;
 
-export const markeplaceCategoriesFlat = marketplaceCategories.flatMap(category => category.subcategories ?? [category]);
 
-export default function AppMarketplaceLayout({ children }: PropsWithChildren) {
+export default function AppSettingsLayout({ children }: PropsWithChildren) {
     const router = useRouter();
     const [selectedCategory, setSelectedCategory] = useSearchParam('category', marketplaceCategories[0]?.id);
 
@@ -63,7 +49,6 @@ export default function AppMarketplaceLayout({ children }: PropsWithChildren) {
                 <List className="p-2" spacing={1}>
                     <ListItem
                         nodeId="marketplace"
-                        selected
                         onSelected={() => router.push(KnownPages.AppMarketplace)}
                         label="Workers Marketplace"
                         startDecorator={<Store className="w-5" />}
@@ -75,8 +60,8 @@ export default function AppMarketplaceLayout({ children }: PropsWithChildren) {
                         startDecorator={<AI className="w-5" />}
                         className="justify-start gap-2 px-2" />
                 </List>
-                <ListHeader header="Marketplace Categories" className="px-2" />
-                <List className="overflow-y-auto p-2 pt-0">
+                <ListHeader header="Settings" className="px-2" />
+                <List className="overflow-y-auto p-2">
                     {marketplaceCategories.map(category => (
                         <Fragment key={category.id ?? category.name}>
                             {category.id ? (

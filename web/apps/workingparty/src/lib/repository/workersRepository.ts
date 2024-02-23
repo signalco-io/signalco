@@ -3,26 +3,48 @@ import { openAiClient } from '../openAiClient';
 import { cosmosDataContainerWorkers } from '../cosmosClient';
 import { marketplaceWorkers } from '../../data/markerplaceWorkers';
 
-export async function workersGetAll() {
+export type DbWorker = {
+    id: string;
+    name: string;
+    marketplaceWorkerId?: string;
+    oaiAssistantId: string;
+    isCustom: boolean;
+    createdAt: number;
+};
+
+export type DbWorkerSimple = {
+    id: string;
+    name: string;
+};
+
+export async function workersGetAll(): Promise<Array<DbWorkerSimple>> {
     const dbWorkers = cosmosDataContainerWorkers();
     const allWorkers = await dbWorkers.items.readAll().fetchAll();
 
-    const workersData = allWorkers.resources.map((workerDbItem) => ({
-        id: workerDbItem.id,
-        name: workerDbItem.name,
-    })) ?? [];
+    const workersData = allWorkers.resources.map((workerDbItem) => {
+        if (!workerDbItem.id)
+            return null;
+
+        return ({
+            id: workerDbItem.id,
+            name: workerDbItem.name ?? '',
+        });
+    }).filter(Boolean) ?? [];
 
     return workersData;
 }
 
-export async function workersGet(workerId: string) {
+export async function workersGet(workerId: string): Promise<DbWorker> {
     const dbWorkers = cosmosDataContainerWorkers();
     const { resource: workerDbItem } = await dbWorkers.item(workerId, workerId).read();
 
     return {
         id: workerDbItem.id,
         name: workerDbItem.name,
-        oaiAssistantId: workerDbItem.oaiAssistantId
+        marketplaceWorkerId: workerDbItem.marketplaceWorkerId,
+        oaiAssistantId: workerDbItem.oaiAssistantId,
+        isCustom: workerDbItem.isCustom ?? false,
+        createdAt: workerDbItem.createdAt,
     };
 }
 
@@ -30,6 +52,7 @@ export async function workersCreate({ marketplaceWorkerId }: { marketplaceWorker
     const wid = nanoid(8);
 
     // TODO: Custom assistants only in PRO plan
+    const isCustom = false;
 
     // Retrieve marketplace worker info
     const workerMarketplaceInfo = marketplaceWorkers.find((worker) => worker.id === marketplaceWorkerId);
@@ -50,10 +73,13 @@ export async function workersCreate({ marketplaceWorkerId }: { marketplaceWorker
         });
     }
 
-    const newWorker = {
+    const newWorker: DbWorker = {
         id: wid,
         name: workerMarketplaceInfo.name,
-        oaiAssistantId: oaiAssistant.id
+        marketplaceWorkerId: workerMarketplaceInfo.id,
+        oaiAssistantId: oaiAssistant.id,
+        isCustom: isCustom,
+        createdAt: new Date().getTime() / 1000, // UNIX
     };
 
     const dbWorkers = cosmosDataContainerWorkers();
@@ -70,6 +96,12 @@ export async function workersDelete(workerId: string) {
 
     await dbWorkers.item(workerId, workerId).delete();
 
-    // Delete from OpenAI
-    await openAiClient().beta.assistants.del(worker.id);
+    // Delete from OpenAI (only custom assistants, marketplace workers use shared assistant)
+    if (worker.isCustom && worker.oaiAssistantId) {
+        try {
+            await openAiClient().beta.assistants.del(worker.oaiAssistantId);
+        } catch (error) {
+            console.error('Failed to delete OpenAI assistant', error);
+        }
+    }
 }

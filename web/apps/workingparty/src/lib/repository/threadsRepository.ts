@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { openAiCreateThread } from '../openAiThreads';
+import { openAiCreateThread, openAiDeleteThread } from '../openAiThreads';
 import { cosmosDataContainerThreads } from '../cosmosClient';
 
 export async function threadsGetAll(workerId: string) {
@@ -52,9 +52,21 @@ export async function threadsCreate(workerId: string) {
 }
 
 export async function threadsDelete(threadId: string) {
-    const container = cosmosDataContainerThreads();
+    const dbItem = await threadsGet(threadId);
+    if (!dbItem)
+        throw new Error('Thread not found');
 
     // TODO: Delete all related messages
 
+    const container = cosmosDataContainerThreads();
     await container.item(threadId, threadId).delete();
+
+    // Delete OpenAI thread
+    if (dbItem.oaiThreadId) {
+        try {
+            await openAiDeleteThread(dbItem.oaiThreadId);
+        } catch (error) {
+            console.error('Failed to delete OpenAI thread', error);
+        }
+    }
 }
