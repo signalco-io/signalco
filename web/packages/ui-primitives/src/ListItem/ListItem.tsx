@@ -37,6 +37,10 @@ export type ListItemPropsCommon = {
     className?: string;
     title?: string;
     style?: React.CSSProperties;
+    /**
+     * @default 'plain'
+     */
+    variant?: 'outlined' | 'plain';
 };
 
 export type ListItemProps = ListItemPropsCommon & ListItemPropsOptions;
@@ -55,7 +59,8 @@ export function ListItem({
     href,
     className,
     title,
-    style
+    style,
+    variant = 'plain',
 }: ListItemProps) {
     const handleClick = () => {
         onSelected?.(nodeId);
@@ -66,7 +71,11 @@ export function ListItem({
             <Row
                 ref={divRef}
                 spacing={2}
-                className={cx('min-h-[3rem] px-2', className)}
+                className={cx(
+                    'min-h-[3rem] px-2',
+                    variant === 'outlined' && 'rounded-none gap-2 first:rounded-t-[calc(var(--radius)-1px)] last:rounded-b-[calc(var(--radius)-1px)]',
+                    className
+                )}
                 title={title}
                 style={style}>
                 {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
@@ -88,7 +97,11 @@ export function ListItem({
             disabled={disabled}
             title={title}
             style={style}
-            className={cx('text-start h-auto pl-2', className)}>
+            className={cx(
+                'text-start h-auto pl-2',
+                variant === 'outlined' && 'rounded-none gap-2 first:rounded-t-[calc(var(--radius)-1px)] last:rounded-b-[calc(var(--radius)-1px)]',
+                className
+            )}>
             {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
             {Boolean(label) && <div className="grow">{label}</div>}
             {Boolean(endDecorator) && (
