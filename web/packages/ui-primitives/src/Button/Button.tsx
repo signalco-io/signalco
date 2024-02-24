@@ -1,6 +1,7 @@
 import { forwardRef, type ButtonHTMLAttributes, type PropsWithChildren, type ReactNode, useMemo } from 'react'
 import { LoaderSpinner } from '@signalco/ui-icons';
 import { Slot } from '@radix-ui/react-slot';
+import { Typography } from '../Typography';
 import { VariantKeys } from '../theme';
 import { Link } from '../Link';
 import { cx } from '../cx'
@@ -58,7 +59,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
             >
                 {!loading && (typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator)}
                 {loading && <LoaderSpinner className="mr-2 size-4 min-h-4 min-w-4 animate-spin" />}
-                {children}
+                {typeof children === 'string' ? (
+                    <span className="leading-normal">
+                        {children}
+                    </span>) : children}
                 {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator}
             </ButtonComp>
         </Comp>
