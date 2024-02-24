@@ -8,7 +8,7 @@
     "scripts": {
         "build": "tsc && tsup src/index.ts --format esm --clean",
         "lint": "eslint ./src/**/*.ts",
-        "preview": "pulumi preview"
+        "preview": "pnpm build && pulumi preview"
     },
     "devDependencies": {
         "@infra/pulumi": "workspace:*",
@@ -26,6 +26,8 @@
     },
     "dependencies": {
         "@pulumi/pulumi": "3.106.0",
-        "@pulumi/azure-native": "2.29.0"
+        "@pulumi/azure-native": "2.29.0",
+        "@pulumi/cloudflare": "5.21.0",
+        "@pulumiverse/vercel": "1.1.1"
     }
 }

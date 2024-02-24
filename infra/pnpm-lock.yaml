@@ -215,9 +215,15 @@ importers:
       '@pulumi/azure-native':
         specifier: 2.29.0
         version: 2.29.0
+      '@pulumi/cloudflare':
+        specifier: 5.21.0
+        version: 5.21.0
       '@pulumi/pulumi':
         specifier: 3.106.0
         version: 3.106.0
+      '@pulumiverse/vercel':
+        specifier: 1.1.1
+        version: 1.1.1
     devDependencies:
       '@infra/pulumi':
         specifier: workspace:*
@@ -934,6 +940,44 @@ packages:
       - supports-color
     dev: false
 
+  /@pulumi/pulumi@3.106.0:
+    resolution: {integrity: sha512-A1aTxsiq5dxF+3jwWbAzj8kSOaEzbs1Xgi5sVGJMzBMxO20ldkv8z6/fT7qL51JHDN3382yk5PdpK5ySKWfRCw==}
+    engines: {node: '>=8.13.0 || >=10.10.0'}
+    dependencies:
+      '@grpc/grpc-js': 1.9.14
+      '@logdna/tail-file': 2.2.0
+      '@opentelemetry/api': 1.7.0
+      '@opentelemetry/exporter-zipkin': 1.19.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/instrumentation': 0.32.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/instrumentation-grpc': 0.32.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/resources': 1.19.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/sdk-trace-base': 1.19.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/sdk-trace-node': 1.19.0(@opentelemetry/api@1.7.0)
+      '@opentelemetry/semantic-conventions': 1.19.0
+      '@pulumi/query': 0.3.0
+      '@types/google-protobuf': 3.15.12
+      '@types/semver': 7.5.6
+      '@types/tmp': 0.2.6
+      execa: 5.1.1
+      google-protobuf: 3.21.2
+      got: 11.8.6
+      ini: 2.0.0
+      js-yaml: 3.14.1
+      minimist: 1.2.8
+      normalize-package-data: 3.0.3
+      pkg-dir: 7.0.0
+      read-package-tree: 5.3.1
+      require-from-string: 2.0.2
+      semver: 7.5.4
+      source-map-support: 0.5.21
+      tmp: 0.2.1
+      ts-node: 7.0.1
+      typescript: 3.8.3
+      upath: 1.2.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@pulumi/pulumi@3.107.0:
     resolution: {integrity: sha512-GTmm6F5OeOuPdwo5P6s2U38feO3l2GpM4SyEXpRr9d3QG03jAFAlqyuDQvcrTBVU/V5MtwQeRm2vTQSrXK3bvw==}
     engines: {node: '>=8.13.0 || >=10.10.0'}
@@ -1130,6 +1174,12 @@ packages:
     dependencies:
       '@types/node': 20.11.20
     dev: false
+
+  /@types/node@20.11.19:
+    resolution: {integrity: sha512-7xMnVEcZFu0DikYjWOlRq7NTPETrm7teqUT2WkQjrTIkEgUyyGdWsj/Zg8bEJt5TNklzbPD1X3fqfsHw3SpapQ==}
+    dependencies:
+      undici-types: 5.26.5
+    dev: true
 
   /@types/node@20.11.20:
     resolution: {integrity: sha512-7/rR21OS+fq8IyHTgtLkDK949uzsa6n8BkziAKtPVpugIkO6D+/ooXMvzXxDnZrmtXVfjb1bKQafYpb8s89LOg==}
