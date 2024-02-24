@@ -13,11 +13,11 @@
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
         "@signalco/eslint-config-signalco": "workspace:*",
-        "lucide-react": "0.336.0",
+        "lucide-react": "0.338.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "typescript": "5.3.3",
-        "@types/react": "18.2.57"
+        "@types/react": "18.2.58"
     },
     "peerDependencies": {
         "react": "18.2.0",
