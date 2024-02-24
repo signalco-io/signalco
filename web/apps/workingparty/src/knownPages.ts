@@ -1,6 +1,11 @@
 export const KnownPages = {
     Landing: '/',
 
+    Login: '/login',
+    LoginEmailSent: '/login/email-sent',
+    LoginConfirm: '/login/confirm',
+    LoginConfirmFailed: '/login/confirm-failed',
+
     App: '/app',
     AppMarketplace: '/app/marketplace',
     AppWorkers: '/app/workers',

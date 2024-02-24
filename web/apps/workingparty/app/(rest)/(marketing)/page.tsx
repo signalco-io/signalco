@@ -12,28 +12,6 @@ const data: SectionData[] = [
         ctas: [
             { label: 'Get Started', href: KnownPages.App },
         ]
-    },
-    {
-        component: 'Footer1',
-        features: [
-            {
-                header: 'Product',
-                ctas: [
-                    { label: 'App', href: KnownPages.App },
-                ]
-            },
-            {
-                header: 'Legal',
-                ctas: [
-                    { label: 'Privacy Policy', href: KnownPages.LegalPrivacyPolicy },
-                    { label: 'Terms of Service', href: KnownPages.LegalTermsOfService },
-                    { label: 'Cookie Policy', href: KnownPages.LegalCookiePolicy },
-                    { label: 'Acceptable Use Policy', href: KnownPages.LegalAcceptableUsePolicy },
-                    { label: 'SLA', href: KnownPages.LegalSla }
-                ]
-            }
-        ],
-        tagline: 'WorkingParty.ai',
     }
 ];
 

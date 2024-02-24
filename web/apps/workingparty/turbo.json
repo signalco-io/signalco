@@ -14,7 +14,8 @@
             ],
             "env": [
                 "COSMOSDB_CONNECTION_STRING",
-                "OPENAI_API_KEY"
+                "OPENAI_API_KEY",
+                "ACS_CONNECTION_STRING"
             ]
         }
     }
