@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid';
 import { openAiCreateThread, openAiDeleteThread } from '../openAiThreads';
 import { cosmosDataContainerThreads } from '../cosmosClient';
 
-export async function threadsGetAll(workerId: string) {
+export async function threadsGetAll(accountId: string, workerId: string) {
     const container = cosmosDataContainerThreads();
     const allItems = await container.items
         .query({
@@ -10,7 +10,7 @@ export async function threadsGetAll(workerId: string) {
             parameters: [
                 { name: '@workerId', value: workerId }
             ],
-        })
+        }, { partitionKey: accountId })
         .fetchAll();
 
     const data = allItems.resources.map((dbItem) => ({
@@ -22,9 +22,9 @@ export async function threadsGetAll(workerId: string) {
     return data;
 }
 
-export async function threadsGet(threadId: string) {
+export async function threadsGet(accountId: string, threadId: string) {
     const container = cosmosDataContainerThreads();
-    const { resource: dbItem } = await container.item(threadId, threadId).read();
+    const { resource: dbItem } = await container.item(threadId, accountId).read();
 
     return {
         id: dbItem.id,
@@ -34,11 +34,12 @@ export async function threadsGet(threadId: string) {
     };
 }
 
-export async function threadsCreate(workerId: string) {
+export async function threadsCreate(accountId: string, workerId: string) {
     const oaiThreadId = await openAiCreateThread();
 
     const newItem = {
         id: nanoid(16),
+        accountId: accountId,
         name: 'New Thread',
         assignedWorkers: [workerId],
         createdAt: new Date().getTime() / 1000, // UNIX
@@ -51,15 +52,15 @@ export async function threadsCreate(workerId: string) {
     return newItem.id;
 }
 
-export async function threadsDelete(threadId: string) {
-    const dbItem = await threadsGet(threadId);
+export async function threadsDelete(accountId: string, threadId: string) {
+    const dbItem = await threadsGet(accountId, threadId);
     if (!dbItem)
         throw new Error('Thread not found');
 
     // TODO: Delete all related messages
 
     const container = cosmosDataContainerThreads();
-    await container.item(threadId, threadId).delete();
+    await container.item(threadId, accountId).delete();
 
     // Delete OpenAI thread
     if (dbItem.oaiThreadId) {
