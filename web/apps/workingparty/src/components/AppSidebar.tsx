@@ -1,15 +1,16 @@
-'use client';
 import { PropsWithChildren } from 'react';
-import { Stack } from '@signalco/ui-primitives/Stack';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Button } from '@signalco/ui-primitives/Button';
 import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { LogOut, Settings } from '@signalco/ui-icons';
+import { KnownPages } from '../knownPages';
+import { AppSidebarUsage } from './AppSidebarUsage';
 
 export function AppSidebar({ children }: PropsWithChildren) {
     return (
-        <Stack spacing={2} className="p-2">
-            <div>
+        <div className={cx('select-none grid h-screen w-full grid-rows-[auto_auto_auto_1fr_auto] gap-2 overflow-hidden')}>
+            <div className="p-2">
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button
@@ -20,7 +21,9 @@ export function AppSidebar({ children }: PropsWithChildren) {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem startDecorator={<Settings className="w-5" />}>
+                        <DropdownMenuItem
+                            startDecorator={<Settings className="w-5" />}
+                            href={KnownPages.AppSettings}>
                             Settings
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
@@ -29,6 +32,7 @@ export function AppSidebar({ children }: PropsWithChildren) {
                 </DropdownMenu>
             </div>
             {children}
-        </Stack>
+            <AppSidebarUsage />
+        </div>
     );
 }

@@ -34,6 +34,8 @@ export async function GET(request: Request, { params }: { params: { threadid: st
 export async function POST(request: Request, { params }: { params: { workerid: string, threadid: string } }) {
     const { workerid, threadid } = params;
 
+    // TODO: Get current user
+
     // Extrac message from JSON payload
     let message = null;
     const data = await request.json();
@@ -73,7 +75,7 @@ export async function POST(request: Request, { params }: { params: { workerid: s
             const captionAnswerMessageContent = captionMessages.at(0)?.content.at(0);
             if (captionAnswerMessageContent?.type === 'text' &&
                 captionAnswerMessageContent.text.value.length > 0) {
-                await cosmosDataContainerThreads().item(threadid, threadid).patch([
+                await cosmosDataContainerThreads().item(threadid, accountId).patch([
                     { op: 'set', path: '/name', value: captionAnswerMessageContent.text.value }
                 ]);
                 updatedThread = true;

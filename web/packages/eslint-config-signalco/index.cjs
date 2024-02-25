@@ -31,7 +31,6 @@ module.exports = {
     },
     rules: {
         "@next/next/no-html-link-for-pages": "off",
-        "react/jsx-max-depth": ["warn", { "max": 4 }],
         "react/jsx-max-props-per-line": [1, { "when": "multiline" }],
         "react/jsx-props-no-multi-spaces": "warn",
         "react/jsx-wrap-multilines": "warn",

@@ -2,7 +2,6 @@
 
 import { PropsWithChildren } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { ListItem } from '@signalco/ui-primitives/ListItem';
@@ -10,7 +9,7 @@ import { List, ListHeader } from '@signalco/ui-primitives/List';
 import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { AI, Store } from '@signalco/ui-icons';
 import { SplitView } from '@signalco/ui/SplitView';
-import { QueryList, QueryListItem } from '@signalco/ui/QueryList';
+import { QueryList } from '@signalco/ui/QueryList';
 import { initials } from '@signalco/js';
 import { KnownPages } from '../../../../../src/knownPages';
 import { useWorkers } from '../../../../../src/hooks/data/workers/useWorkers';
@@ -29,7 +28,7 @@ type WorkersListItemProps = {
 export function WorkersListItem({ worker, selected }: WorkersListItemProps) {
     const router = useRouter();
     return (
-        <QueryListItem
+        <ListItem
             label={(
                 <Stack spacing={0.5}>
                     <Typography>{worker.name}</Typography>
@@ -58,6 +57,7 @@ function WorkersList({ selectedWorkerId }: { selectedWorkerId?: string }) {
     return (
         <QueryList
             query={() => workers}
+            className="gap-1 overflow-y-auto p-2"
             itemRender={(item) => (<WorkersListItem worker={item} selected={item.id === selectedWorkerId} />)}
             emptyPlaceholder={<WorkersListEmptyPlaceholder />}
         />
@@ -72,7 +72,7 @@ export default function AppWorkersLayout({ children }: PropsWithChildren) {
     return (
         <SplitView>
             <AppSidebar>
-                <List>
+                <List className="p-2" spacing={1}>
                     <ListItem
                         nodeId="marketplace"
                         onSelected={() => router.push(KnownPages.AppMarketplace)}
@@ -87,10 +87,8 @@ export default function AppWorkersLayout({ children }: PropsWithChildren) {
                         startDecorator={<AI className="w-5" />}
                         className="justify-start gap-2 px-2" />
                 </List>
-                <Stack spacing={1}>
-                    <ListHeader header="Workers" />
-                    <WorkersList selectedWorkerId={selectedWorkerId} />
-                </Stack>
+                <ListHeader header="Workers" className="px-2" />
+                <WorkersList selectedWorkerId={selectedWorkerId} />
             </AppSidebar>
             <div className="h-full">
                 {children}

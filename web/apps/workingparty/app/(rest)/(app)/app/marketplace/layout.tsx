@@ -1,6 +1,6 @@
 'use client';
 
-import { PropsWithChildren } from 'react';
+import { Fragment, PropsWithChildren } from 'react';
 import { useRouter } from 'next/navigation';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { ListItem } from '@signalco/ui-primitives/ListItem';
@@ -60,7 +60,7 @@ export default function AppMarketplaceLayout({ children }: PropsWithChildren) {
     return (
         <SplitView>
             <AppSidebar>
-                <List>
+                <List className="p-2" spacing={1}>
                     <ListItem
                         nodeId="marketplace"
                         selected
@@ -75,10 +75,10 @@ export default function AppMarketplaceLayout({ children }: PropsWithChildren) {
                         startDecorator={<AI className="w-5" />}
                         className="justify-start gap-2 px-2" />
                 </List>
-                <ListHeader header="Marketplace Categories" />
-                <List>
+                <ListHeader header="Marketplace Categories" className="px-2" />
+                <List className="overflow-y-auto p-2 pt-0">
                     {marketplaceCategories.map(category => (
-                        <>
+                        <Fragment key={category.id ?? category.name}>
                             {category.id ? (
                                 <ListItem
                                     key={category.name}
@@ -103,7 +103,7 @@ export default function AppMarketplaceLayout({ children }: PropsWithChildren) {
                                     ))}
                                 </List>
                             )}
-                        </>
+                        </Fragment>
                     ))}
                 </List>
             </AppSidebar>

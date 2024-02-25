@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { FormEvent, ReactNode, useState } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
@@ -29,12 +29,14 @@ export function ModalConfirm({
     const [isOpen, setIsOpen] = useControllableState(open, false, onOpenChange);
     const [confirmText, setConfirmText] = useState('');
 
-    const handleConfirm = () => {
+    const handleConfirm = (e?: FormEvent<HTMLFormElement>) => {
+        e?.preventDefault();
         setIsOpen(false);
         onConfirm?.();
     };
 
-    const handleCancel = () => {
+    const handleCancel = (e?: FormEvent<HTMLFormElement>) => {
+        e?.preventDefault();
         setIsOpen(false);
     }
 
@@ -45,7 +47,9 @@ export function ModalConfirm({
                     <Row justifyContent="space-between">
                         <Typography level="h5">{header}</Typography>
                     </Row>
-                    {children}
+                    {typeof children === 'string'
+                        ? <Typography level="body1">{children}</Typography>
+                        : children}
                     {Boolean(expectedConfirm) && (
                         <Input
                             value={confirmText}
@@ -56,13 +60,13 @@ export function ModalConfirm({
                     <Row spacing={1} justifyContent="end">
                         <Button
                             variant="plain"
-                            onClick={handleCancel}
+                            onClick={() => handleCancel()}
                             autoFocus={!Boolean(expectedConfirm)}
                             type="reset">Cancel</Button>
                         <Button
                             type="submit"
                             variant="solid"
-                            onClick={handleConfirm}
+                            onClick={() => handleConfirm()}
                             disabled={Boolean(expectedConfirm) && confirmText !== expectedConfirm}>Confirm</Button>
                     </Row>
                 </Stack>

@@ -7,11 +7,12 @@ import { Typography } from '@signalco/ui-primitives/Typography';
 import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
+import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { ListHeader } from '@signalco/ui-primitives/List';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { Comment, Settings } from '@signalco/ui-icons';
 import { SplitView } from '@signalco/ui/SplitView';
-import { QueryList, QueryListItem } from '@signalco/ui/QueryList';
+import { QueryList } from '@signalco/ui/QueryList';
 import { ModalConfirm } from '@signalco/ui/ModalConfirm';
 import { KnownPages } from '../../../../../../src/knownPages';
 import { useWorkerThreads } from '../../../../../../src/hooks/data/workers/useWorkerThreads';
@@ -41,7 +42,7 @@ type WorkerThreadListItemProps = {
 export function WorkerThreadsListItem({ workerId, thread, selected }: WorkerThreadListItemProps) {
     const router = useRouter();
     return (
-        <QueryListItem
+        <ListItem
             startDecorator={<Comment className="w-5 min-w-5 text-muted-foreground" />}
             label={(
                 <Tooltip title={thread.name}>
@@ -53,6 +54,7 @@ export function WorkerThreadsListItem({ workerId, thread, selected }: WorkerThre
             selected={selected}
             onSelected={(threadId) => router.push(KnownPages.AppWorkerThread(workerId, threadId))}
             onMouseEnter={() => router.prefetch(KnownPages.AppWorkerThread(workerId, thread.id))}
+            variant="outlined"
         />
     );
 }
@@ -82,6 +84,9 @@ function WorkerThreadsList({ workerId, selectedThreadId }: { workerId: string, s
             emptyPlaceholder={<WorkersListEmptyPlaceholder />}
             editable
             onEditing={handleNewThread}
+            itemCreateLabel="New Thread"
+            variant="outlined"
+            createPosition="top"
         />
     );
 }
@@ -121,7 +126,7 @@ export default function WorkerLayout({ children, params }: PropsWithChildren & {
                         <ListHeader
                             header={worker?.name}
                             actions={([
-                                <DropdownMenu key="filter-actions">
+                                <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
                                         <IconButton variant="plain">
                                             <Settings color="gray" />
@@ -148,11 +153,13 @@ export default function WorkerLayout({ children, params }: PropsWithChildren & {
             <ModalConfirm
                 open={showDeleteConfirmModal}
                 onOpenChange={setShowDeleteConfirmModal}
-                header={'Delete thread'}
+                header={'Delete Worker'}
                 color="danger"
                 expectedConfirm={worker?.name ?? 'delete'}
-                promptLabel={`Are you sure you want to delete this worker? This action cannot be undone. To confirm, type the worker name "${worker?.name}" and confirm.`}
-                onConfirm={handleDeleteConfirm} />
+                promptLabel={`To confirm, type the worker name "${worker?.name}" and confirm.`}
+                onConfirm={handleDeleteConfirm}>
+                Are you sure you want to delete this worker? This action cannot be undone.
+            </ModalConfirm>
         </>
     )
 }

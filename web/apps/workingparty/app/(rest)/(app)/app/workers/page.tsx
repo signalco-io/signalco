@@ -34,7 +34,7 @@ export default function AppPage() {
         );
     }
 
-    const firstWorkerId = workers.data ? workers.data[0]?.id : null;
+    const firstWorkerId = !workers.isLoading && !workers.isStale && workers.data ? workers.data[0]?.id : null;
     if (!firstWorkerId)
         return null;
 

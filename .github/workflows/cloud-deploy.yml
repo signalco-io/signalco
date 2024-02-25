@@ -61,6 +61,17 @@ jobs:
       baseRef: ${{ github.ref }}
       command: "up"
     secrets: inherit
+
+  infra_workingparty_up:
+    name: "WorkingParty infrastructure (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.infra == 'true'
+    uses: ./.github/workflows/infra-deploy_reusable.yml
+    with:
+      project: "workingparty"
+      baseRef: ${{ github.ref }}
+      command: "up"
+    secrets: inherit
   
   vercel_blog_deploy:
     name: "Vercel Blog (deploy)"
@@ -140,6 +151,32 @@ jobs:
       environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
     secrets: inherit
 
+  vercel_uier_deploy:
+    name: "Vercel uier (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'uier'
+      path: 'web/apps/uier'
+      vercelProjectId: 'prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_workingparty_deploy:
+    name: "Vercel WorkingParty (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'workingparty'
+      path: 'web/apps/workingparty'
+      vercelProjectId: 'prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
   vercel_uidocs_deploy:
     name: "Vercel ui-docs (deploy)"
     needs: changes
@@ -155,7 +192,7 @@ jobs:
   
   deploy_ok:
     name: "[Deploy] OK"
-    needs: [infra_cloud-primary_up, infra_uier_up, vercel_blog_deploy, vercel_brandgrab_deploy, vercel_slco_deploy, vercel_app_deploy, vercel_web_deploy, vercel_doprocess_deploy, vercel_uidocs_deploy]
+    needs: [infra_cloud-primary_up, infra_uier_up, infra_workingparty_up, vercel_blog_deploy, vercel_brandgrab_deploy, vercel_slco_deploy, vercel_app_deploy, vercel_web_deploy, vercel_doprocess_deploy, vercel_uidocs_deploy, vercel_uier_deploy, vercel_workingparty_deploy]
     runs-on: ubuntu-latest
     if: always()
     steps:

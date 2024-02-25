@@ -186,7 +186,7 @@ export default function WorkerThreadPage({ params }: { params: { workerid: strin
             <div className="relative h-full overflow-hidden py-0">
                 <div className="flex h-14 flex-row items-center justify-between overflow-hidden border-b px-4">
                     <Typography>{thread?.name}</Typography>
-                    <DropdownMenu key="filter-actions">
+                    <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <IconButton variant="plain">
                                 <Settings color="gray" />
@@ -222,11 +222,13 @@ export default function WorkerThreadPage({ params }: { params: { workerid: strin
             <ModalConfirm
                 open={showDeleteConfirmModal}
                 onOpenChange={setShowDeleteConfirmModal}
-                header={'Delete thread'}
+                header={'Delete Thread'}
                 color="danger"
                 expectedConfirm={thread?.name ?? 'delete'}
-                promptLabel={`Are you sure you want to delete this thread? This action cannot be undone. To confirm, type the thread name "${thread?.name}" and confirm.`}
-                onConfirm={handleDeleteConfirm} />
+                promptLabel={`To confirm, type the thread name "${thread?.name}" and confirm.`}
+                onConfirm={handleDeleteConfirm}>
+                Are you sure you want to delete this thread? This action cannot be undone.
+            </ModalConfirm>
         </>
     )
 }

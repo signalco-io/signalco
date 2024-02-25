@@ -69,6 +69,7 @@ export {
     FileInput,
     Sparkles as AI,
     Text,
+    Mail,
     Outdent as TextLinked,
     Replace,
     PanelRightClose,

@@ -69,7 +69,7 @@ export default function MarkerplacePage() {
                 <Row spacing={3} className="h-[58px] min-h-[58px] border-b px-4">
                     <Typography level="h2" className="text-2xl">{selectedCategory?.name}</Typography>
                 </Row>
-                <div className="grid grid-cols-3 gap-4 gap-x-24 overflow-y-auto p-4">
+                <div className="grid grid-cols-1 gap-4 gap-x-24 overflow-y-auto p-4 lg:grid-cols-2 xl:grid-cols-3">
                     {filteredWorkers.map((worker) => (
                         <WorkerCard key={worker.id} worker={worker} />
                     ))}

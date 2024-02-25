@@ -1,0 +1,48 @@
+import { ReactElement } from 'react';
+import { renderAsync } from '@react-email/components';
+import { EmailClient, EmailMessage, KnownEmailSendStatus } from '@azure/communication-email';
+import { domain, isDeveloper } from '../../providers/env';
+
+function emailClient() {
+    const connectionString = process.env.ACS_CONNECTION_STRING;
+    if (!connectionString)
+        throw new Error('AZURE_COMMUNICATION_EMAIL_CONNECTION_STRING is not set');
+
+    return new EmailClient(connectionString);
+}
+
+export async function sendEmail({
+    recipient, subject, sender, template
+}: {
+    recipient: string;
+    subject: string;
+    sender: 'system' | 'notifications',
+    template: ReactElement;
+}) {
+    const recipients: EmailMessage['recipients'] = {
+        to: [{ address: recipient }]
+    };
+    const senderAddress = sender === 'system'
+        ? `system@${domain}`
+        : `notifications@${domain}`;
+
+    const emailHtml = await renderAsync(template);
+    const emailPlaintext = await renderAsync(template, { plainText: true });
+
+    const email = {
+        senderAddress,
+        recipients,
+        content: {
+            subject: isDeveloper ? `[dev] ${subject}` : subject,
+            html: emailHtml,
+            plainText: emailPlaintext
+        }
+    };
+    console.log('Sending email', email)
+
+    const client = emailClient();
+    const poller = await client.beginSend(email);
+    const response = await poller.pollUntilDone();
+    if (response.status !== KnownEmailSendStatus.Succeeded)
+        throw new Error('Failed to send email');
+}

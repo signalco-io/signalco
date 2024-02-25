@@ -1,16 +1,21 @@
 import { Spinner } from '@signalco/ui-primitives/Spinner';
-import { type ListItemProps } from '@signalco/ui-primitives/ListItem';
+import { ListItem, type ListItemProps } from '@signalco/ui-primitives/ListItem';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Add } from '@signalco/ui-icons';
-import { QueryListItem } from './QueryListItem';
 
-export function QueryListItemCreate({ loading, label, onSelected }: Required<Pick<ListItemProps, 'label' | 'onSelected'>> & { loading?: boolean }) {
+export type QueryListeItemCreateProps =
+    Required<Pick<ListItemProps, 'label' | 'onSelected'>> &
+    Omit<ListItemProps, 'nodeId' | 'startDecorator' | 'endDecorator' | 'href' | 'divRef'> & {
+        loading?: boolean
+    };
+
+export function QueryListItemCreate({ loading, className, ...rest }: QueryListeItemCreateProps) {
     return (
-        <QueryListItem
+        <ListItem
             nodeId="list-item-create"
-            className={'text-muted-foreground'}
-            startDecorator={<Add />}
+            className={cx('text-muted-foreground', className)}
+            startDecorator={<Add className="w-5" />}
             endDecorator={<Spinner loading={loading} loadingLabel="Creating..." className="size-5 self-start" />}
-            label={label}
-            onSelected={onSelected} />
+            {...rest} />
     );
 }
