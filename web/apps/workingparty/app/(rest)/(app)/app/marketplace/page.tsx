@@ -9,7 +9,8 @@ import { initials, orderBy } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { marketplaceWorkers } from '../../../../../src/data/markerplaceWorkers';
 import { WorkerModal } from './WorkerModal';
-import { markeplaceCategoriesFlat, marketplaceCategories } from './layout';
+import { marketplaceCategories } from './marketplaceCategories';
+import { markeplaceCategoriesFlat } from './markeplaceCategoriesFlat';
 
 function WorkerCard({ worker }: { worker: typeof marketplaceWorkers[0] }) {
     const { name, description, categories } = worker;

@@ -10,38 +10,11 @@ import { SplitView } from '@signalco/ui/SplitView';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { KnownPages } from '../../../../../src/knownPages';
 import { AppSidebar } from '../../../../../src/components/AppSidebar';
-
-
-type SettingsCategory = {
-    id: string;
-    name: string;
-    subcategories?: never;
-};
-
-type SettingsCategorySection = {
-    id?: never;
-    name: string;
-    subcategories: SettingsCategory[];
-};
-
-export const marketplaceCategories = [
-    { id: 'profile', name: 'Profile' },
-    { id: 'security', name: 'Security' },
-    { id: 'notifications', name: 'Notifications' },
-    {
-        name: 'Account settings',
-        subcategories: [
-            { id: 'account', name: 'General settings' },
-            { id: 'usage', name: 'Usage' },
-            { id: 'account-billing', name: 'Billing' },
-        ]
-    },
-] satisfies Array<SettingsCategory | SettingsCategorySection>;
-
+import { settingsCategories } from './settingsCategories';
 
 export default function AppSettingsLayout({ children }: PropsWithChildren) {
     const router = useRouter();
-    const [selectedCategory, setSelectedCategory] = useSearchParam('category', marketplaceCategories[0]?.id);
+    const [selectedCategory, setSelectedCategory] = useSearchParam('category', settingsCategories[0]?.id);
 
     return (
         <SplitView>
@@ -62,7 +35,7 @@ export default function AppSettingsLayout({ children }: PropsWithChildren) {
                 </List>
                 <ListHeader header="Settings" className="px-2" />
                 <List className="overflow-y-auto p-2">
-                    {marketplaceCategories.map(category => (
+                    {settingsCategories.map(category => (
                         <Fragment key={category.id ?? category.name}>
                             {category.id ? (
                                 <ListItem

@@ -2,67 +2,13 @@
 
 import { PropsWithChildren } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { Typography } from '@signalco/ui-primitives/Typography';
-import { Stack } from '@signalco/ui-primitives/Stack';
 import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List, ListHeader } from '@signalco/ui-primitives/List';
-import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { AI, Store } from '@signalco/ui-icons';
 import { SplitView } from '@signalco/ui/SplitView';
-import { QueryList } from '@signalco/ui/QueryList';
-import { initials } from '@signalco/js';
 import { KnownPages } from '../../../../../src/knownPages';
-import { useWorkers } from '../../../../../src/hooks/data/workers/useWorkers';
 import { AppSidebar } from '../../../../../src/components/AppSidebar';
-
-export type PartyWorker = {
-    id: string;
-    name: string;
-};
-
-type WorkersListItemProps = {
-    worker: PartyWorker;
-    selected: boolean;
-};
-
-export function WorkersListItem({ worker, selected }: WorkersListItemProps) {
-    const router = useRouter();
-    return (
-        <ListItem
-            label={(
-                <Stack spacing={0.5}>
-                    <Typography>{worker.name}</Typography>
-                </Stack>
-            )}
-            startDecorator={<Avatar size="sm" className="bg-foreground text-background">{initials(worker.name)}</Avatar>}
-            className="group w-full"
-            nodeId={worker.id}
-            selected={selected}
-            onSelected={(id: string) => router.push(KnownPages.AppWorker(id))}
-            onMouseEnter={() => router.prefetch(KnownPages.AppWorker(worker.id))} />
-    );
-}
-
-function WorkersListEmptyPlaceholder() {
-    return (
-        <Typography className="p-3" tertiary level="body2">
-            No workers
-        </Typography>
-    );
-}
-
-function WorkersList({ selectedWorkerId }: { selectedWorkerId?: string }) {
-    const workers = useWorkers();
-
-    return (
-        <QueryList
-            query={() => workers}
-            className="gap-1 overflow-y-auto p-2"
-            itemRender={(item) => (<WorkersListItem worker={item} selected={item.id === selectedWorkerId} />)}
-            emptyPlaceholder={<WorkersListEmptyPlaceholder />}
-        />
-    );
-}
+import { WorkersList } from './WorkersList';
 
 export default function AppWorkersLayout({ children }: PropsWithChildren) {
     const router = useRouter();
