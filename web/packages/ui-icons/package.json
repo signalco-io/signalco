@@ -13,7 +13,7 @@
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
         "@signalco/eslint-config-signalco": "workspace:*",
-        "lucide-react": "0.339.0",
+        "lucide-react": "0.340.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "typescript": "5.3.3",
