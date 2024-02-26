@@ -25,6 +25,14 @@ function useEmailLogin() {
             if (resp.status < 200 || resp.status > 299) {
                 throw new Error('Failed to request login email');
             }
+            const data = await resp.json() as { verifyPhrase?: string };
+            const verifyPhrase = data?.verifyPhrase;
+            if (!verifyPhrase)
+                throw new Error('Failed to request login email');
+
+            return {
+                verifyPhrase
+            };
         }
     });
 }
@@ -45,8 +53,9 @@ export default function LoginPage() {
         }
 
         try {
-            await emailLogin.mutateAsync({ email: formData.email.value });
-            router.push(KnownPages.LoginEmailSent);
+            const email = formData.email.value;
+            const { verifyPhrase } = await emailLogin.mutateAsync({ email });
+            router.push(KnownPages.LoginEmailSent(verifyPhrase, email));
         } catch (error) {
             showNotification('Failed to send login email. Please try again.', 'error');
         }

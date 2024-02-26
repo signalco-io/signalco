@@ -1,19 +1,30 @@
+import { withAuth } from '../route';
 import { workersDelete, workersGet } from '../../../../src/lib/repository/workersRepository';
 
 export async function GET(_request: Request, { params }: { params: { workerid: string } }) {
     const { workerid } = params;
-    const dbItem = await workersGet(workerid);
-    if (!dbItem)
-        return new Response(null, { status: 404 });
+    if (!workerid)
+        return new Response(null, { status: 400 });
 
-    return Response.json({
-        id: dbItem.id,
-        name: dbItem.name,
+    return await withAuth(async ({ accountId }) => {
+        const dbItem = await workersGet(accountId, workerid);
+        if (!dbItem)
+            return new Response(null, { status: 404 });
+
+        return Response.json({
+            id: dbItem.id,
+            name: dbItem.name,
+        });
     });
 }
 
 export async function DELETE(_request: Request, { params }: { params: { workerid: string } }) {
     const { workerid } = params;
-    await workersDelete(workerid);
-    return Response.json(null);
+    if (!workerid)
+        return new Response(null, { status: 400 });
+
+    return await withAuth(async ({ accountId }) => {
+        await workersDelete(accountId, workerid);
+        return Response.json(null);
+    });
 }

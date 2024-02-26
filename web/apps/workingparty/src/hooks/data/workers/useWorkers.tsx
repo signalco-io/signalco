@@ -8,6 +8,9 @@ export function useWorkers(): UseQueryResult<{
         queryKey: ['workers'],
         queryFn: async () => {
             const response = await fetch('/api/workers');
+            if (response.status < 200 || response.status > 299) {
+                throw new Error('Failed to request workers');
+            }
             return await response.json() as { id: string; name: string; }[];
         }
     });

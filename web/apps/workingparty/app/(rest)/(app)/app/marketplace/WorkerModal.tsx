@@ -1,6 +1,6 @@
 'use client';
 
-import { ComponentProps } from 'react';
+import { ComponentProps, Fragment } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Typography } from '@signalco/ui-primitives/Typography';
@@ -51,7 +51,7 @@ export function WorkerModal({
                     <Typography level="body3" uppercase bold>Categories</Typography>
                     <Row spacing={1}>
                         {categories.map((category, categoryIndex) => (
-                            <>
+                            <Fragment key={category}>
                                 {categoryIndex > 0 && <span className="text-sm opacity-30">•</span>}
                                 <Link href={`${KnownPages.AppMarketplace}?category=${category}`}>
                                     <Typography
@@ -59,7 +59,7 @@ export function WorkerModal({
                                         level="body1"
                                         semiBold>{markeplaceCategoriesFlat.find(c => c.id === category)?.name}</Typography>
                                 </Link>
-                            </>
+                            </Fragment>
                         ))}
                     </Row>
                 </Stack>

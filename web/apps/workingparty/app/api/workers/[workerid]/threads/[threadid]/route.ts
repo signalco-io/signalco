@@ -1,19 +1,30 @@
+import { withAuth } from '../../../route';
 import { threadsDelete, threadsGet } from '../../../../../../src/lib/repository/threadsRepository';
 
 export async function GET(_request: Request, { params }: { params: { workerid: string, threadid: string } }) {
     const { threadid } = params;
-    const dbItem = await threadsGet(threadid);
-    if (!dbItem)
-        return new Response(null, { status: 404 });
+    if (!threadid)
+        return new Response(null, { status: 400 });
 
-    return Response.json({
-        id: dbItem.id,
-        name: dbItem.name,
+    return await withAuth(async ({ accountId }) => {
+        const dbItem = await threadsGet(accountId, threadid);
+        if (!dbItem)
+            return new Response(null, { status: 404 });
+
+        return Response.json({
+            id: dbItem.id,
+            name: dbItem.name,
+        });
     });
 }
 
 export async function DELETE(_request: Request, { params }: { params: { workerid: string, threadid: string } }) {
     const { threadid } = params;
-    await threadsDelete(threadid);
-    return Response.json(null);
+    if (!threadid)
+        return new Response(null, { status: 400 });
+
+    return await withAuth(async ({ accountId }) => {
+        await threadsDelete(accountId, threadid);
+        return Response.json(null);
+    });
 }

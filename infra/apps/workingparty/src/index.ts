@@ -51,7 +51,8 @@ const up = async () => {
     });
 
     // Creating the containers inside the database
-    const containerNames = ['accounts', 'users'];
+    const containerNames = ['login-requests', 'accounts', 'users'];
+    const emailContainerNames = ['email-user'];
     const accountContainerNames = ['workers', 'threads'];
     containerNames.map((containerName) =>
         new azure_native.documentdb.SqlResourceSqlContainer(`dbcontainer-${containerName}`, {
@@ -64,6 +65,21 @@ const up = async () => {
                 partitionKey: {
                     kind: 'Hash',
                     paths: ['/id'],
+                },
+            },
+        }),
+    );
+    emailContainerNames.map((containerName) =>
+        new azure_native.documentdb.SqlResourceSqlContainer(`dbcontainer-${containerName}`, {
+            resourceGroupName: resourceGroup.name,
+            accountName: cosmosDbAccount.name,
+            databaseName: sqlDatabase.name,
+            containerName: containerName,
+            resource: {
+                id: containerName,
+                partitionKey: {
+                    kind: 'Hash',
+                    paths: ['/email'],
                 },
             },
         }),

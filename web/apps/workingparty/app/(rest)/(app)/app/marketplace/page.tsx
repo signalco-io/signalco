@@ -1,5 +1,6 @@
 'use client';
 
+import { Fragment } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
@@ -30,14 +31,13 @@ function WorkerCard({ worker }: { worker: typeof marketplaceWorkers[0] }) {
                         <Typography level="body1" secondary>{description}</Typography>
                         <Row spacing={1}>
                             {categories.map((category, categoryIndex) => (
-                                <>
+                                <Fragment key={category}>
                                     {categoryIndex > 0 && <span className="text-sm opacity-30">•</span>}
                                     <Typography
-                                        key={category}
                                         level="body2"
                                         tertiary
                                         semiBold>{markeplaceCategoriesFlat.find(c => c.id === category)?.name}</Typography>
-                                </>
+                                </Fragment>
                             ))}
                         </Row>
                     </Stack>

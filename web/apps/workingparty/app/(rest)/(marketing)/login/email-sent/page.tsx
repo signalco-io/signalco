@@ -1,8 +1,11 @@
+'use client';
+
 import { Typography } from '@signalco/ui-primitives/Typography';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 
 export default function LoginEmailSentPage() {
-    const email = 'email@example.com';
-    const verifyPhrase = 'Amazong Gift';
+    const [verifyPhrase] = useSearchParam('verifyPhrase');
+    const [email] = useSearchParam('email');
 
     return (
         <>

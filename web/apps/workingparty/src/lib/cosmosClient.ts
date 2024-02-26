@@ -2,6 +2,10 @@ import { type Container, CosmosClient, type Database } from '@azure/cosmos';
 
 let client: CosmosClient | null = null;
 let dataDb: Database | null = null;
+let loginRequestsContainer: Container | null = null;
+let accountsContainer: Container | null = null;
+let usersContainer: Container | null = null;
+let emailUserContainer: Container | null = null;
 let workersContainer: Container | null = null;
 let threadsContainer: Container | null = null;
 
@@ -18,25 +22,30 @@ function cosmosClient() {
 }
 
 export function cosmosDataDb() {
-    if (dataDb == null) {
-        dataDb = cosmosClient().database('wpdata');
-    }
+    return dataDb = dataDb ?? cosmosClient().database('wpdata');
+}
 
-    return dataDb;
+export function cosmosDataContainerLoginRequests() {
+    return loginRequestsContainer = loginRequestsContainer ?? cosmosDataDb().container('login-requests');
+}
+
+export function cosmosDataContainerEmailUser() {
+    return emailUserContainer = emailUserContainer ?? cosmosDataDb().container('email-user');
+}
+
+export function cosmosDataContainerAccounts() {
+    return accountsContainer = accountsContainer ?? cosmosDataDb().container('accounts');
+}
+
+export function cosmosDataContainerUsers() {
+    return usersContainer = usersContainer ?? cosmosDataDb().container('users');
 }
 
 export function cosmosDataContainerWorkers() {
-    if (workersContainer == null) {
-        workersContainer = cosmosDataDb().container('workers');
-    }
-
-    return workersContainer;
+    return workersContainer = workersContainer ?? cosmosDataDb().container('workers');
 }
 
 export function cosmosDataContainerThreads() {
-    if (threadsContainer == null) {
-        threadsContainer = cosmosDataDb().container('threads');
-    }
-
-    return threadsContainer;
+    return threadsContainer = threadsContainer ?? cosmosDataDb().container('threads');
 }
+

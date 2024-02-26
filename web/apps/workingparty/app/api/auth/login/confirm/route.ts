@@ -1,16 +1,23 @@
+import { cookies } from 'next/headers';
 import { SignJWT } from 'jose';
+import { usersAssignAccount, usersCreate, usersGetByEmail } from '../../../../../src/lib/repository/usersRepository';
+import { loginRequestsVerify } from '../../../../../src/lib/repository/loginRequests';
+import { accountCreate } from '../../../../../src/lib/repository/accountsRepository';
 
-async function createJwt() {
+export function jwtSecret() {
     const signSecret = process.env.WP_JWT_SIGN_SECRET;
-    const secret = new TextEncoder().encode(signSecret);
+    return new TextEncoder().encode(signSecret);
+}
 
+async function createJwt(userId: string) {
     return await new SignJWT({ 'urn:example:claim': true })
         .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()
-        .setIssuer('urn:example:issuer')
-        .setAudience('urn:example:audience')
+        .setIssuer('urn:workingparty:issuer:api')
+        .setAudience('urn:workingparty:audience:web')
         .setExpirationTime('2h')
-        .sign(secret);
+        .setSubject(userId)
+        .sign(jwtSecret());
 }
 
 export async function POST(request: Request) {
@@ -29,10 +36,29 @@ export async function POST(request: Request) {
     if (!token)
         return Response.json({ error: 'Invalid request' }, { status: 400 });
 
-    const userId = '12345';
+    if (!await loginRequestsVerify(email, token))
+        return Response.json({ error: 'Invalid token' }, { status: 400 });
+
+    // Create user if not exists
+    let userId = (await usersGetByEmail(email));
+    if (!userId) {
+        const createdUserId = await usersCreate({ email });
+        const createdAccount = await accountCreate({ name: `${email}'s Account` });
+        await usersAssignAccount(createdUserId, createdAccount);
+        userId = createdUserId;
+    }
+
+    const jwt = await createJwt(userId);
+
+    // Set header for JWT
+    cookies().set('wp_session', jwt, {
+        secure: true,
+        httpOnly: true,
+        sameSite: 'strict',
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 2),
+    });
 
     return Response.json({
-        userId: userId,
-        accessToken: await createJwt()
+        userId: userId
     });
 }
