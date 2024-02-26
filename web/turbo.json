@@ -26,7 +26,9 @@
                 "COSMOSDB_CONNECTION_STRING",
                 "OPENAI_API_KEY",
                 "ACS_CONNECTION_STRING",
-                "WP_JWT_SIGN_SECRET"
+                "WP_JWT_SIGN_SECRET",
+                "STRIPE_SECRETKEY",
+                "NEXT_PUBLIC_STRIPE_PUBLISHABLE"
             ]
         },
         "lint": {
