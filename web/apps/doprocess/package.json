@@ -69,7 +69,7 @@
     "@signalco/tsconfig": "workspace:*",
     "@total-typescript/ts-reset": "0.5.1",
     "@types/color": "3.0.6",
-    "@types/node": "20.11.21",
+    "@types/node": "20.11.22",
     "@types/react": "18.2.60",
     "@types/react-dom": "18.2.19",
     "cross-env": "7.0.3",
