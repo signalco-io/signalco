@@ -176,7 +176,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.41.2)
+        version: 4.8.5(playwright-core@1.42.0)
       '@ducanh2912/next-pwa':
         specifier: 10.2.5
         version: 10.2.5(next@14.1.0)(webpack@5.90.3)
@@ -351,7 +351,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.41.2)
+        version: 4.8.5(playwright-core@1.42.0)
       '@babel/core':
         specifier: 7.23.9
         version: 7.23.9
@@ -472,7 +472,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.41.2)
+        version: 4.8.5(playwright-core@1.42.0)
       '@babel/core':
         specifier: 7.23.9
         version: 7.23.9
@@ -659,7 +659,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.41.2)
+        version: 4.8.5(playwright-core@1.42.0)
       '@babel/core':
         specifier: 7.23.9
         version: 7.23.9
@@ -783,7 +783,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.41.2)
+        version: 4.8.5(playwright-core@1.42.0)
       '@babel/core':
         specifier: 7.23.9
         version: 7.23.9
@@ -909,8 +909,8 @@ importers:
         specifier: 8.4.35
         version: 8.4.35
       postcss-loader:
-        specifier: 8.1.0
-        version: 8.1.0(postcss@8.4.35)(typescript@5.3.3)(webpack@5.90.3)
+        specifier: 8.1.1
+        version: 8.1.1(postcss@8.4.35)(typescript@5.3.3)(webpack@5.90.3)
       rimraf:
         specifier: 5.0.5
         version: 5.0.5
@@ -1022,7 +1022,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.41.2)
+        version: 4.8.5(playwright-core@1.42.0)
       '@babel/core':
         specifier: 7.23.9
         version: 7.23.9
@@ -1179,7 +1179,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.41.2)
+        version: 4.8.5(playwright-core@1.42.0)
       '@babel/core':
         specifier: 7.23.9
         version: 7.23.9
@@ -1819,13 +1819,13 @@ packages:
       default-browser-id: 3.0.0
     dev: true
 
-  /@axe-core/playwright@4.8.5(playwright-core@1.41.2):
+  /@axe-core/playwright@4.8.5(playwright-core@1.42.0):
     resolution: {integrity: sha512-GFdXXAEn9uk0Vyzgl2eEP+VwvgGzas0YSnacoJ/0U237G83zWZ1PhbP/RDymm0cqevoA+xRjMo+ONzh9Q711nw==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
     dependencies:
       axe-core: 4.8.4
-      playwright-core: 1.41.2
+      playwright-core: 1.42.0
     dev: true
 
   /@babel/code-frame@7.23.5:
@@ -15765,12 +15765,6 @@ packages:
       find-up: 6.3.0
     dev: true
 
-  /playwright-core@1.41.2:
-    resolution: {integrity: sha512-VaTvwCA4Y8kxEe+kfm2+uUUw5Lubf38RxF7FpBxLPmGe5sdNkSg5e3ChEigaGrX7qdqT3pt2m/98LiyvU2x6CA==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dev: true
-
   /playwright-core@1.42.0:
     resolution: {integrity: sha512-0HD9y8qEVlcbsAjdpBaFjmaTHf+1FeIddy8VJLeiqwhcNqGCBe4Wp2e8knpqiYbzxtxarxiXyNDw2cG8sCaNMQ==}
     engines: {node: '>=16'}
@@ -16035,8 +16029,8 @@ packages:
       - typescript
     dev: true
 
-  /postcss-loader@8.1.0(postcss@8.4.35)(typescript@5.3.3)(webpack@5.90.3):
-    resolution: {integrity: sha512-AbperNcX3rlob7Ay7A/HQcrofug1caABBkopoFeOQMspZBqcqj6giYn1Bwey/0uiOPAcR+NQD0I2HC7rXzk91w==}
+  /postcss-loader@8.1.1(postcss@8.4.35)(typescript@5.3.3)(webpack@5.90.3):
+    resolution: {integrity: sha512-0IeqyAsG6tYiDRCYKQJLAmgQr47DX6N7sFSWvQxt6AcupX8DIdmykuk/o/tx0Lze3ErGHJEp5OSRxrelC6+NdQ==}
     engines: {node: '>= 18.12.0'}
     peerDependencies:
       '@rspack/core': 0.x || 1.x
