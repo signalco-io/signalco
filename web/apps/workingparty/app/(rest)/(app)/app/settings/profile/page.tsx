@@ -4,7 +4,7 @@ import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
 
 export default function SettingsProfilePage() {
     return (
-        <Container className="py-4">
+        <Container className="py-4" padded maxWidth="md">
             <Typography level="h1" className="text-2xl">Profile</Typography>
             <NoDataPlaceholder>
                 No profile settings available
