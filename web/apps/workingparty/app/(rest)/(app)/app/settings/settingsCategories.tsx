@@ -5,7 +5,7 @@ export type SettingsCategory = {
 };
 
 export type SettingsCategorySection = {
-    id?: never;
+    id: string;
     name: string;
     subcategories: SettingsCategory[];
 };
@@ -15,11 +15,12 @@ export const settingsCategories = [
     { id: 'security', name: 'Security' },
     { id: 'notifications', name: 'Notifications' },
     {
+        id: 'account',
         name: 'Account settings',
         subcategories: [
-            { id: 'account', name: 'General settings' },
+            { id: 'general', name: 'General settings' },
             { id: 'usage', name: 'Usage' },
-            { id: 'account-billing', name: 'Billing' },
+            { id: 'billing', name: 'Billing' },
         ]
     },
 ] satisfies Array<SettingsCategory | SettingsCategorySection>;

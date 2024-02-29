@@ -1,20 +1,27 @@
 'use client';
 
 import { Fragment, PropsWithChildren } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List, ListHeader } from '@signalco/ui-primitives/List';
 import { AI, Store } from '@signalco/ui-icons';
 import { SplitView } from '@signalco/ui/SplitView';
-import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { KnownPages } from '../../../../../src/knownPages';
 import { AppSidebar } from '../../../../../src/components/AppSidebar';
 import { settingsCategories } from './settingsCategories';
 
 export default function AppSettingsLayout({ children }: PropsWithChildren) {
     const router = useRouter();
-    const [selectedCategory, setSelectedCategory] = useSearchParam('category', settingsCategories[0]?.id);
+
+    // Template: http://domain/app/settings/:category/:subcategory
+    const pathName = usePathname();
+    const pathParts = pathName.split('/').filter(Boolean);
+    const selectedCategory = pathParts[3] ?? pathParts[2];
+
+    const handleCategorySelected = (nodeId: string, parentNodeId?: string) => {
+        router.push(KnownPages.AppSettings + `${parentNodeId ? `/${parentNodeId}` : ''}/${nodeId}`);
+    }
 
     return (
         <SplitView>
@@ -37,13 +44,13 @@ export default function AppSettingsLayout({ children }: PropsWithChildren) {
                 <List className="overflow-y-auto p-2">
                     {settingsCategories.map(category => (
                         <Fragment key={category.id ?? category.name}>
-                            {category.id ? (
+                            {!category.subcategories?.length ? (
                                 <ListItem
                                     key={category.name}
                                     label={category.name}
                                     nodeId={category.id}
                                     selected={category.id === selectedCategory}
-                                    onSelected={(nodeId: string) => setSelectedCategory(nodeId)}
+                                    onSelected={handleCategorySelected}
                                 />
                             ) : (
                                 <Typography level="body3" uppercase bold className="py-4">{category.name}</Typography>
@@ -56,7 +63,7 @@ export default function AppSettingsLayout({ children }: PropsWithChildren) {
                                             label={subcategory.name}
                                             nodeId={subcategory.id}
                                             selected={subcategory.id === selectedCategory}
-                                            onSelected={(nodeId: string) => setSelectedCategory(nodeId)}
+                                            onSelected={(nodeId: string) => handleCategorySelected(nodeId, category.id)}
                                         />
                                     ))}
                                 </List>

@@ -1,5 +1,6 @@
+import { redirect } from 'next/navigation';
+import { KnownPages } from '../../../../../src/knownPages';
+
 export default function AppSettingsPage() {
-    return (
-        <div>settings</div>
-    );
+    redirect(KnownPages.AppSettingsProfile);
 }
