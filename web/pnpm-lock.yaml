@@ -205,8 +205,8 @@ importers:
         specifier: 5.6.9
         version: 5.6.9(@babel/core@7.24.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.1)
       '@types/node':
-        specifier: 20.11.22
-        version: 20.11.22
+        specifier: 20.11.24
+        version: 20.11.24
       '@types/react':
         specifier: 18.2.61
         version: 18.2.61
@@ -380,8 +380,8 @@ importers:
         specifier: 3.0.6
         version: 3.0.6
       '@types/node':
-        specifier: 20.11.22
-        version: 20.11.22
+        specifier: 20.11.24
+        version: 20.11.24
       '@types/react':
         specifier: 18.2.61
         version: 18.2.61
@@ -495,8 +495,8 @@ importers:
         specifier: 3.0.6
         version: 3.0.6
       '@types/node':
-        specifier: 20.11.22
-        version: 20.11.22
+        specifier: 20.11.24
+        version: 20.11.24
       '@types/react':
         specifier: 18.2.61
         version: 18.2.61
@@ -682,8 +682,8 @@ importers:
         specifier: 3.0.6
         version: 3.0.6
       '@types/node':
-        specifier: 20.11.22
-        version: 20.11.22
+        specifier: 20.11.24
+        version: 20.11.24
       '@types/react':
         specifier: 18.2.61
         version: 18.2.61
@@ -806,8 +806,8 @@ importers:
         specifier: 3.0.6
         version: 3.0.6
       '@types/node':
-        specifier: 20.11.22
-        version: 20.11.22
+        specifier: 20.11.24
+        version: 20.11.24
       '@types/react':
         specifier: 18.2.61
         version: 18.2.61
@@ -1048,8 +1048,8 @@ importers:
         specifier: 3.0.6
         version: 3.0.6
       '@types/node':
-        specifier: 20.11.22
-        version: 20.11.22
+        specifier: 20.11.24
+        version: 20.11.24
       '@types/react':
         specifier: 18.2.61
         version: 18.2.61
@@ -1211,8 +1211,8 @@ importers:
         specifier: 5.6.9
         version: 5.6.9(@babel/core@7.24.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.1)
       '@types/node':
-        specifier: 20.11.22
-        version: 20.11.22
+        specifier: 20.11.24
+        version: 20.11.24
       '@types/react':
         specifier: 18.2.61
         version: 18.2.61
@@ -1726,8 +1726,8 @@ importers:
         specifier: 5.24.1
         version: 5.24.1(react@18.2.0)
       '@types/node':
-        specifier: 20.11.22
-        version: 20.11.22
+        specifier: 20.11.24
+        version: 20.11.24
       '@types/react':
         specifier: 18.2.61
         version: 18.2.61
@@ -4740,7 +4740,7 @@ packages:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
       '@types/yargs': 17.0.31
       chalk: 4.1.2
     dev: true
@@ -7947,7 +7947,7 @@ packages:
     resolution: {integrity: sha512-fB3Zu92ucau0iQ0JMCFQE7b/dv8Ot07NI3KaZIkIUNXq82k4eBAqUaneXfleGY9JWskeS9y+u0nXMyspcuQrCg==}
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
 
   /@types/btoa-lite@1.0.2:
     resolution: {integrity: sha512-ZYbcE2x7yrvNFJiU7xJGrpF/ihpkM7zKgw8bha3LNJSesvTtUNxbpzaT7WXBIryf6jovisrxTBvymxMeLLj1Mg==}
@@ -7978,7 +7978,7 @@ packages:
   /@types/connect@3.4.38:
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
 
   /@types/cookies@0.7.7:
     resolution: {integrity: sha512-h7BcvPUogWbKCzBR2lY4oqaZbO3jXZksexYJVFvkrFeLgbZjQkU4x8pRq6eg2MHXQhY0McQdqmmsxRWlVAHooA==}
@@ -7986,13 +7986,13 @@ packages:
       '@types/connect': 3.4.38
       '@types/express': 4.17.21
       '@types/keygrip': 1.0.5
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
     dev: false
 
   /@types/cross-spawn@6.0.5:
     resolution: {integrity: sha512-wsIMP68FvGXk+RaWhraz6Xp4v7sl4qwzHAmtPaJEN2NRTXXI9LtFawUpeTsBNL/pd6QoLStdytCaAyiK7AEd/Q==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
     dev: true
 
   /@types/d3-array@3.2.1:
@@ -8215,7 +8215,7 @@ packages:
   /@types/express-serve-static-core@4.17.41:
     resolution: {integrity: sha512-OaJ7XLaelTgrvlZD8/aa0vvvxZdUmlCn6MtWeB7TkiKW70BQLc9XEPpDLPdbo52ZhXUCrznlWdCHWxJWtdyajA==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
       '@types/qs': 6.9.10
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -8249,7 +8249,7 @@ packages:
     resolution: {integrity: sha512-yTbItCNreRooED33qjunPthRcSjERP1r4MqCZc7wv0u2sUkzTFp45tgUfS5+r7FrZPdmCCNflLhVSP/o+SemsQ==}
     dependencies:
       '@types/jsonfile': 6.1.4
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
     dev: true
 
   /@types/geojson@7946.0.13:
@@ -8259,13 +8259,13 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
     dev: true
 
   /@types/graceful-fs@4.1.9:
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
     dev: true
 
   /@types/hast@2.3.8:
@@ -8313,13 +8313,13 @@ packages:
   /@types/jsonfile@6.1.4:
     resolution: {integrity: sha512-D5qGUYwjvnNNextdU59/+fI+spnwtTFmyQP0h+PfIOSkNfpU6AOICUOkm4i0OnSk+NyjdPJrxCDro0sJsWlRpQ==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
     dev: true
 
   /@types/jsonwebtoken@9.0.5:
     resolution: {integrity: sha512-VRLSGzik+Unrup6BsouBeHsf4d1hOEgYWTm/7Nmw1sXoN1+tRly/Gy/po3yeahnP4jfnQWWAhQAqcNfH7ngOkA==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
     dev: false
 
   /@types/keygrip@1.0.5:
@@ -8329,7 +8329,7 @@ packages:
   /@types/klaw@3.0.6:
     resolution: {integrity: sha512-BErW5TrTz4nzt/c3VRGf0Bug4JyQJ1o807F4mAfXfvOzFZ8SKgFeHJ0T28Y1KtqlMEB+cUgN7S7CsyQDQ/qxqg==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
     dev: true
 
   /@types/lodash@4.14.201:
@@ -8372,7 +8372,7 @@ packages:
   /@types/next-pwa@5.6.9(@babel/core@7.24.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.1):
     resolution: {integrity: sha512-KcymH+MtFYB5KVKIOH1DMqd0wUb8VLCxzHtsaRQQ7S8sGOaTH24Lo2vGZf6/0Ok9e+xWCKhqsSt6cgDJTk91Iw==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
       '@types/react': 18.2.61
       '@types/react-dom': 18.2.19
       next: 13.5.6(@babel/core@7.24.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.1)
@@ -8391,14 +8391,14 @@ packages:
   /@types/node-fetch@2.6.2:
     resolution: {integrity: sha512-DHqhlq5jeESLy19TYhLakJ07kNumXWjcDdxXsLUMJZ6ue8VZJj4kLPQVE/2mdHh3xZziNF1xppu5lwmS53HR+A==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
       form-data: 3.0.1
     dev: false
 
   /@types/node-fetch@2.6.9:
     resolution: {integrity: sha512-bQVlnMLFJ2d35DkPNjEPmd9ueO/rh5EiaZt2bhqiSarPjZIuIV6bPQVqcrEyvNo+AfTrRGVazle1tl597w3gfA==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
       form-data: 4.0.0
 
   /@types/node@16.18.6:
@@ -8410,8 +8410,8 @@ packages:
     dependencies:
       undici-types: 5.26.5
 
-  /@types/node@20.11.22:
-    resolution: {integrity: sha512-/G+IxWxma6V3E+pqK1tSl2Fo1kl41pK1yeCyDsgkF9WlVAme4j5ISYM2zR11bgLFJGLN5sVK40T4RJNuiZbEjA==}
+  /@types/node@20.11.24:
+    resolution: {integrity: sha512-Kza43ewS3xoLgCEpQrsT+xRo/EJej1y0kVYGiLFE1NEODXGzTfwiC6tXTLMQskn1X4/Rjlh0MQUvx9W+L9long==}
     dependencies:
       undici-types: 5.26.5
 
@@ -8483,7 +8483,7 @@ packages:
   /@types/resolve@1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
     dev: true
 
   /@types/resolve@1.20.6:
@@ -8500,19 +8500,19 @@ packages:
     resolution: {integrity: sha512-x2EM6TJOybec7c52BX0ZspPodMsQUd5L6PRwOunVyVUhXiBSKf3AezDL8Dgvgt5o0UfKNfuA0eMLr2wLT4AiBA==}
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
 
   /@types/serve-static@1.15.5:
     resolution: {integrity: sha512-PDRk21MnK70hja/YF8AHfC7yIsiQHn1rcXx7ijCFBX/k+XQJhQT/gw3xekXKJvx+5SXaMMS8oqQy09Mzvz2TuQ==}
     dependencies:
       '@types/http-errors': 2.0.4
       '@types/mime': 3.0.4
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
 
   /@types/sharp@0.31.1:
     resolution: {integrity: sha512-5nWwamN9ZFHXaYEincMSuza8nNfOof8nmO+mcI+Agx1uMUk4/pQnNIcix+9rLPXzKrm1pS34+6WRDbDV0Jn7ag==}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
     dev: true
 
   /@types/suncalc@1.9.2:
@@ -13433,7 +13433,7 @@ packages:
     dependencies:
       '@jest/types': 29.6.3
       '@types/graceful-fs': 4.1.9
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -13456,7 +13456,7 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -13467,7 +13467,7 @@ packages:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
       merge-stream: 2.0.0
       supports-color: 7.2.0
     dev: true
@@ -13476,7 +13476,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -13484,7 +13484,7 @@ packages:
     resolution: {integrity: sha512-eIz2msL/EzL9UFTFFx7jBTkeZfku0yUAyZZZmJ93H2TYEiroIx2PQjEXcwYtYl8zXCxb+PAmA2hLIt/6ZEkPHw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
-      '@types/node': 20.11.22
+      '@types/node': 20.11.24
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
