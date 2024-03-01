@@ -30,7 +30,7 @@
         "@types/react-timeago": "4.1.7",
         "autoprefixer": "10.4.17",
         "classix": "2.1.36",
-        "next": "14.1.0",
+        "next": "14.1.1",
         "postcss": "8.4.35",
         "postcss-preset-env": "9.4.0",
         "react": "18.2.0",
