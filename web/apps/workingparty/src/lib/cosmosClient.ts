@@ -6,6 +6,8 @@ let loginRequestsContainer: Container | null = null;
 let accountsContainer: Container | null = null;
 let usersContainer: Container | null = null;
 let emailUserContainer: Container | null = null;
+let usageContainer: Container | null = null;
+let subscriptionsContainer: Container | null = null;
 let workersContainer: Container | null = null;
 let threadsContainer: Container | null = null;
 
@@ -39,6 +41,14 @@ export function cosmosDataContainerAccounts() {
 
 export function cosmosDataContainerUsers() {
     return usersContainer = usersContainer ?? cosmosDataDb().container('users');
+}
+
+export function cosmosDataContainerUsage() {
+    return usageContainer = usageContainer ?? cosmosDataDb().container('usage');
+}
+
+export function cosmosDataContainerSubscriptions() {
+    return subscriptionsContainer = subscriptionsContainer ?? cosmosDataDb().container('subscriptions');
 }
 
 export function cosmosDataContainerWorkers() {

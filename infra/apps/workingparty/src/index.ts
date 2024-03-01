@@ -51,9 +51,9 @@ const up = async () => {
     });
 
     // Creating the containers inside the database
-    const containerNames = ['login-requests', 'accounts', 'users'];
+    const containerNames = ['login-requests', 'accounts', 'users', 'plans'];
     const emailContainerNames = ['email-user'];
-    const accountContainerNames = ['workers', 'threads'];
+    const accountContainerNames = ['workers', 'threads', 'usage', 'subscriptions'];
     containerNames.map((containerName) =>
         new azure_native.documentdb.SqlResourceSqlContainer(`dbcontainer-${containerName}`, {
             resourceGroupName: resourceGroup.name,

@@ -2,7 +2,7 @@
 
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
-import { useAccountBilling } from '../../../../../../../src/hooks/data/account/useAccountUsage';
+import { useAccountBilling } from "../../../../../../../src/hooks/data/account/useAccountBilling";
 import { SettingsCardActions } from '../../../../../../../src/components/settings/SettingsCardActions';
 import { SettingsCard } from '../../../../../../../src/components/settings/SettingsCard';
 
