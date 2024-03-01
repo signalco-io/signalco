@@ -67,6 +67,7 @@ export {
     LocateFixed as MyLocation,
     FileText,
     FileInput,
+    Info,
     Sparkles as AI,
     Text,
     Mail,
