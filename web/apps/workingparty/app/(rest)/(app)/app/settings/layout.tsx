@@ -72,7 +72,7 @@ export default function AppSettingsLayout({ children }: PropsWithChildren) {
                     ))}
                 </List>
             </AppSidebar>
-            <div className="h-full">
+            <div className="h-screen overflow-y-auto overflow-x-hidden">
                 {children}
             </div >
         </SplitView >

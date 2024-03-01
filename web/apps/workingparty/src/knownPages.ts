@@ -16,8 +16,8 @@ export const KnownPages = {
     AppSettingsSecurity: '/app/settings/security',
     AppSettingsNotifications: '/app/settings/notifications',
     AppSettingsAccount: '/app/settings/account',
-    AppSettingsAccountUsage: '/app/settings/usage',
-    AppSettingsAccountBilling: '/app/settings/billing',
+    AppSettingsAccountUsage: '/app/settings/account/usage',
+    AppSettingsAccountBilling: '/app/settings/account/billing',
     AppLogout: '/app/logout',
 
     Pricing: '/pricing',

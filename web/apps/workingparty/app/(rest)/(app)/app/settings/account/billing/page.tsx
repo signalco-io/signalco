@@ -1,14 +1,19 @@
 import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
 import { Container } from '@signalco/ui-primitives/Container';
-import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
+import { PlanSettingsCard } from './PlanSettingsCard';
+import { PaymentSettingsCard } from './PaymentSettingsCard';
+import { BillingInfoSettingsCard } from './BillingInfoSettingsCard';
 
 export default function SettingsAccountBillingPage() {
     return (
         <Container className="py-4" padded maxWidth="md">
-            <Typography level="h1" className="text-2xl">Billing</Typography>
-            <NoDataPlaceholder>
-                No billing information available
-            </NoDataPlaceholder>
+            <Stack spacing={4}>
+                <Typography level="h1" className="text-2xl">Billing</Typography>
+                <PlanSettingsCard />
+                <PaymentSettingsCard />
+                <BillingInfoSettingsCard />
+            </Stack>
         </Container>
     )
 }

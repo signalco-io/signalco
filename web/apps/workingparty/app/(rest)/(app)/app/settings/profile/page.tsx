@@ -1,14 +1,15 @@
 import { Typography } from '@signalco/ui-primitives/Typography';
+import { Stack } from '@signalco/ui-primitives/Stack';
 import { Container } from '@signalco/ui-primitives/Container';
-import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
+import { ProfileDisplayNameSettingsCard } from './ProfileDisplayNameSettingsCard';
 
 export default function SettingsProfilePage() {
     return (
         <Container className="py-4" padded maxWidth="md">
-            <Typography level="h1" className="text-2xl">Profile</Typography>
-            <NoDataPlaceholder>
-                No profile settings available
-            </NoDataPlaceholder>
+            <Stack spacing={4}>
+                <Typography level="h1" className="text-2xl">Profile</Typography>
+                <ProfileDisplayNameSettingsCard />
+            </Stack>
         </Container>
     )
 }

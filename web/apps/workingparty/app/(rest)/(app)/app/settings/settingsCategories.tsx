@@ -13,7 +13,7 @@ export type SettingsCategorySection = {
 export const settingsCategories = [
     { id: 'profile', name: 'Profile' },
     { id: 'security', name: 'Security' },
-    { id: 'notifications', name: 'Notifications' },
+    // { id: 'notifications', name: 'Notifications' },
     {
         id: 'account',
         name: 'Account settings',
