@@ -2,11 +2,11 @@ import { nanoid } from 'nanoid';
 import { cosmosDataContainerLoginRequests } from '../cosmosClient';
 
 export async function loginRequestsCreate(email: string) {
-    const id = nanoid();
+    const id = `loginrequest_${nanoid()}`;
     const loginRequest = {
         id: id,
         email,
-        createdAt: Date.now() / 1000,
+        createdAt: Date.now() / 1000, // UNIX seconds timestamp
     };
 
     // TODO: Add ttl to automatically delete stale requests

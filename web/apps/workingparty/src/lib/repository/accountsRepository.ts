@@ -12,14 +12,6 @@ export type AccountCreate = {
     name: string;
 };
 
-export type DbPlan = {
-    id: string;
-    name: string;
-    price: number,
-    currency: string,
-    period: 'monthly' | 'yearly',
-};
-
 export type DbSubscription = {
     id: string;
     accountId: string;
@@ -34,7 +26,7 @@ export type DbSubscription = {
 };
 
 export type SubscriptionCreate = {
-    name: string;
+    planId: string;
     price: number,
     currency: string,
     period: 'monthly' | 'yearly'
@@ -81,19 +73,13 @@ export async function accountSubscriptions(id: string): Promise<Array<DbSubscrip
     const allSubscriptions = await dbSubscriptions.items.readAll({ partitionKey: id }).fetchAll();
 
     return allSubscriptions.resources.map(subscriptionDbItem => {
-        if (!subscriptionDbItem.id ||
-            !subscriptionDbItem.accountId ||
-            !subscriptionDbItem.name ||
-            !subscriptionDbItem.price ||
-            !subscriptionDbItem.currency ||
-            !subscriptionDbItem.period ||
-            !subscriptionDbItem.createdAt)
+        if (!subscriptionDbItem.id)
             throw new Error('Invalid subscription data in store.');
 
         return ({
             id: subscriptionDbItem.id,
             accountId: subscriptionDbItem.accountId,
-            name: subscriptionDbItem.name,
+            planId: subscriptionDbItem.planId,
             active: subscriptionDbItem.active,
             price: subscriptionDbItem.price,
             currency: subscriptionDbItem.currency,
@@ -107,11 +93,11 @@ export async function accountSubscriptions(id: string): Promise<Array<DbSubscrip
 export async function accountSubscriptionCreate(id: string, subscription: SubscriptionCreate) {
     const dbSubscriptions = cosmosDataContainerSubscriptions();
 
-    const subscriptionId = nanoid();
+    const subscriptionId = `subscription_${nanoid()}`;
     const dbSubscription: DbSubscription = {
         id: subscriptionId,
         accountId: id,
-        name: subscription.name,
+        planId: subscription.planId,
         active: true,
         price: subscription.price,
         currency: subscription.currency,
@@ -121,7 +107,7 @@ export async function accountSubscriptionCreate(id: string, subscription: Subscr
 
     await dbSubscriptions.items.create(dbSubscription);
 
-    // TODO: Deactivate previous subscription
+    // TODO: Deactivate previous subscription (currently only one active subscription is supported per account)
 
     return subscriptionId;
 }

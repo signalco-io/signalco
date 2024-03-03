@@ -42,7 +42,7 @@ export async function threadsCreate(accountId: string, workerId: string) {
         accountId: accountId,
         name: 'New Thread',
         assignedWorkers: [workerId],
-        createdAt: new Date().getTime() / 1000, // UNIX
+        createdAt: new Date().getTime() / 1000, // UNIX seconds
         oaiThreadId
     };
 

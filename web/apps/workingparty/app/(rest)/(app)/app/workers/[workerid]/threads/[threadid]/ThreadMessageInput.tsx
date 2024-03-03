@@ -6,6 +6,7 @@ import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Input } from '@signalco/ui-primitives/Input';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { Send } from '@signalco/ui-icons';
+import { FormEvent } from 'react';
 
 async function sendThreadMessage(workerId: string, threadId: string, message: string) {
     const response = await fetch('/api/workers/' + workerId + '/threads/' + threadId + '/messages', {
@@ -44,7 +45,7 @@ function useThreadMessageSend(workerId: string, threadId: string): UseMutationRe
                     { type: 'text', text: { value: newItem, annotations: [] } }
                 ],
                 role: 'user',
-                created_at: new Date().getTime() / 1000, // to unix
+                created_at: new Date().getTime() / 1000, // to UNIX seconds
                 assistant_id: workerId,
                 file_ids: [],
                 thread_id: threadId,
@@ -70,7 +71,9 @@ function useThreadMessageSend(workerId: string, threadId: string): UseMutationRe
 export function ThreadMessageInput({ workerId, threadId, isLoading }: { workerId: string, threadId: string, isLoading?: boolean }) {
     const { mutateAsync: sendThreadMessage, isPending } = useThreadMessageSend(workerId, threadId);
 
-    const handleMessage = async (formData: FormData) => {
+    const handleMessage = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
         const message = formData.get('message')?.toString();
         if (!message) return;
 
@@ -78,7 +81,7 @@ export function ThreadMessageInput({ workerId, threadId, isLoading }: { workerId
     }
 
     return (
-        <form action={handleMessage}>
+        <form onSubmit={handleMessage}>
             <Input
                 type="text"
                 name="message"

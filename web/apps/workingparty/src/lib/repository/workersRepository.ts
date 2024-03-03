@@ -82,7 +82,7 @@ export async function workersCreate({ accountId, marketplaceWorkerId }: { accoun
         marketplaceWorkerId: workerMarketplaceInfo.id,
         oaiAssistantId: oaiAssistant.id,
         isCustom: isCustom,
-        createdAt: new Date().getTime() / 1000, // UNIX
+        createdAt: new Date().getTime() / 1000, // UNIX seconds timestamp
     };
 
     const dbWorkers = cosmosDataContainerWorkers();

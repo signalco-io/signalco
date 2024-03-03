@@ -3,6 +3,7 @@ import { type Container, CosmosClient, type Database } from '@azure/cosmos';
 let client: CosmosClient | null = null;
 let dataDb: Database | null = null;
 let loginRequestsContainer: Container | null = null;
+let plansContainer: Container | null = null;
 let accountsContainer: Container | null = null;
 let usersContainer: Container | null = null;
 let emailUserContainer: Container | null = null;
@@ -33,6 +34,10 @@ export function cosmosDataContainerLoginRequests() {
 
 export function cosmosDataContainerEmailUser() {
     return emailUserContainer = emailUserContainer ?? cosmosDataDb().container('email-user');
+}
+
+export function cosmosDataContainerPlans() {
+    return plansContainer = plansContainer ?? cosmosDataDb().container('plans');
 }
 
 export function cosmosDataContainerAccounts() {

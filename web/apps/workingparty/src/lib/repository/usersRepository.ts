@@ -7,6 +7,8 @@ export type DbUser = {
     email: string;
     accountIds: Array<string>;
     createdAt: number;
+
+    stripeCustomerId?: string;
 };
 
 export type UserCreate = {
@@ -23,6 +25,8 @@ export async function usersGet(id: string): Promise<DbUser> {
         email: userDbItem.email,
         accountIds: userDbItem.accountIds,
         createdAt: userDbItem.createdAt,
+
+        stripeCustomerId: userDbItem.stripeCustomerId
     };
 }
 
@@ -35,13 +39,13 @@ export async function usersGetByEmail(email: string): Promise<string | null> {
 export async function usersCreate({
     email
 }: UserCreate) {
-    const userId = nanoid();
+    const userId = `user_${nanoid()}`;
     const user: DbUser = {
         id: userId,
         displayName: email,
         email,
         accountIds: [],
-        createdAt: Date.now() / 1000, // UNIX timestamp
+        createdAt: Date.now() / 1000, // UNIX seconds timestamp
     };
 
     await cosmosDataContainerUsers().items.create(user);
@@ -55,6 +59,15 @@ export async function usersAssignAccount(userId: string, accountId: string) {
     await dbUsers.item(userId, userId).patch({
         operations: [
             { op: 'add', path: '/accountIds/-', value: accountId }
+        ]
+    });
+}
+
+export async function usersAssignStripeCustomer(userId: string, stripeCustomerId: string) {
+    const dbUsers = cosmosDataContainerUsers();
+    await dbUsers.item(userId, userId).patch({
+        operations: [
+            { op: 'add', path: '/stripeCustomerId', value: stripeCustomerId }
         ]
     });
 }

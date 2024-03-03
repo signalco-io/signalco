@@ -6,7 +6,7 @@ type AuthCurrentUser = {
     user?: User;
 }
 
-type User = {
+export type User = {
     id: string;
     displayName: string;
     email: string;
