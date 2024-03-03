@@ -24,7 +24,7 @@ function cosmosClient() {
     return client;
 }
 
-export function cosmosDataDb() {
+function cosmosDataDb() {
     return dataDb = dataDb ?? cosmosClient().database('wpdata');
 }
 
