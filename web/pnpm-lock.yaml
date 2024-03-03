@@ -138,8 +138,8 @@ importers:
         specifier: 6.7.4
         version: 6.7.4
       pigeon-maps:
-        specifier: 0.21.3
-        version: 0.21.3(react@18.2.0)
+        specifier: 0.21.4
+        version: 0.21.4(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -15761,8 +15761,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /pigeon-maps@0.21.3(react@18.2.0):
-    resolution: {integrity: sha512-NbzISHHvMrcYBMBJ6NSSdTC1iGshSYOvsql9AqBfsE7KXni9xFIV9dkIWAfkKGCbafZ/0JysWZSp7zfg2piOFg==}
+  /pigeon-maps@0.21.4(react@18.2.0):
+    resolution: {integrity: sha512-PqxEMNfnpx6MqubH4WWD+dMS2EE2g/S+Y+nGa6kyZxe7OAqJsfmd3FInzoK4nOfYhlh15+g2GD4VHmivAYlnIg==}
     peerDependencies:
       react: '*'
     dependencies:
