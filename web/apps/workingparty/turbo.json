@@ -13,6 +13,7 @@
                 "public/*.js"
             ],
             "env": [
+                "NEXT_PUBLIC_APP_DOMAIN",
                 "COSMOSDB_CONNECTION_STRING",
                 "OPENAI_API_KEY",
                 "ACS_CONNECTION_STRING",
