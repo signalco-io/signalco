@@ -18,6 +18,7 @@ export const KnownPages = {
     AppSettingsAccount: '/app/settings/account',
     AppSettingsAccountUsage: '/app/settings/account/usage',
     AppSettingsAccountBilling: '/app/settings/account/billing',
+    AppSettingsAccountBillingPortal: (accountId: string) => `/api/accounts/${accountId}/billing/portal`,
     AppLogout: '/app/logout',
 
     Pricing: '/pricing',

@@ -1,16 +1,30 @@
 'use client';
 
 import { Typography } from '@signalco/ui-primitives/Typography';
+import { Skeleton } from '@signalco/ui-primitives/Skeleton';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Divider } from '@signalco/ui-primitives/Divider';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
+import { Loadable } from '@signalco/ui/Loadable';
 import { KnownPages } from '../../../../../../../src/knownPages';
+import { useCurrentUser } from '../../../../../../../src/hooks/data/users/useCurrentUser';
 import { useAccountUsage } from '../../../../../../../src/hooks/data/account/useAccountUsage';
 import { UsageCard } from './UsageCard';
 import { InsightsItem } from './InsightsItem';
 
+function InsightsItemSkeleton() {
+    return (
+        <Skeleton className="h-7 w-full" />
+    );
+}
+
 export function InsightsUsageCard() {
-    const usage = useAccountUsage();
+    const currentUser = useCurrentUser();
+    const accountId = currentUser.data?.user?.accountIds[0];
+    const usage = useAccountUsage(accountId);
+
+    const isLoading = usage.isPending || usage.isLoading || currentUser.isLoading;
+    const error = usage.error || currentUser.error;
 
     return (
         <UsageCard>
@@ -27,23 +41,34 @@ export function InsightsUsageCard() {
                     </Row>
                 </div>
                 <Divider className="col-span-5" />
-                <InsightsItem
-                    name="Messages"
-                    value={usage.data?.usage.messages.used}
-                    maxValue={usage.data?.usage.messages.total}
-                    unlimited={false} />
+                <div className="p-4">
+                    <Loadable
+                        isLoading={isLoading}
+                        loadingLabel="Loading usage data..."
+                        placeholder={<InsightsItemSkeleton />}
+                        error={error}>
+                        <InsightsItem
+                            name="Messages"
+                            value={usage.data?.messages.used}
+                            maxValue={usage.data?.messages.total}
+                            unlimited={usage.data?.messages.unlimited} />
+                    </Loadable>
+                </div>
                 <Divider orientation="vertical" />
-                <InsightsItem
-                    name="Users"
-                    value={usage.data?.usage.users.used}
-                    maxValue={usage.data?.usage.users.total}
-                    unlimited={false} />
+                <div className="p-4">
+                    <Loadable
+                        isLoading={isLoading}
+                        loadingLabel="Loading usage data..."
+                        placeholder={<InsightsItemSkeleton />}
+                        error={error}>
+                        <InsightsItem
+                            name="Workers"
+                            value={usage.data?.workers.used}
+                            maxValue={usage.data?.workers.total}
+                            unlimited={usage.data?.workers.unlimited} />
+                    </Loadable>
+                </div>
                 <Divider orientation="vertical" />
-                <InsightsItem
-                    name="Workers"
-                    value={usage.data?.usage.workers.used}
-                    maxValue={usage.data?.usage.workers.total}
-                    unlimited={false} />
             </div>
         </UsageCard>
     );

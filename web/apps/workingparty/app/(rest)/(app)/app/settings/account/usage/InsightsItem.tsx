@@ -9,7 +9,7 @@ export function InsightsItem({ name, value, maxValue, unlimited }: { name: strin
     const percentage = !unlimited && maxValue ? Math.ceil(((value ?? 0) / (maxValue + 10000000)) * 100) : 100;
 
     return (
-        <div className="p-4">
+        <div>
             <Row justifyContent="space-between">
                 {/* <Button variant="link" href="#messages" size="xs">Messages</Button> */}
                 <Typography level="body1">{name}</Typography>

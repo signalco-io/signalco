@@ -1,6 +1,8 @@
 import { nanoid } from 'nanoid';
+import { PatchOperation } from '@azure/cosmos';
 import { cosmosDataContainerAccounts, cosmosDataContainerSubscriptions, cosmosDataContainerUsage } from '../cosmosClient';
 import { workersGetAll } from './workersRepository';
+import { DbPlan, plansGet } from './plansRepository';
 
 export type DbAccount = {
     id: string;
@@ -22,7 +24,7 @@ export type DbSubscription = {
     currency: string,
     period: 'monthly' | 'yearly',
     createdAt: number,
-    end?: number
+    deactivatedAt?: number
 };
 
 export type SubscriptionCreate = {
@@ -68,9 +70,26 @@ export async function accountCreate({
     return accountId;
 }
 
-export async function accountSubscriptions(id: string): Promise<Array<DbSubscription>> {
+export async function accountUpdate(id: string, {
+    name
+}: AccountCreate) {
+    const operations: PatchOperation[] = [];
+    if (name) {
+        operations.push({
+            op: 'replace',
+            path: '/name',
+            value: name
+        });
+    }
+    await cosmosDataContainerAccounts().item(id, id).patch(operations);
+}
+
+export async function accountSubscriptions(id: string): Promise<Array<DbSubscription & { plan?: DbPlan }>> {
     const dbSubscriptions = cosmosDataContainerSubscriptions();
     const allSubscriptions = await dbSubscriptions.items.readAll({ partitionKey: id }).fetchAll();
+
+    const distinctPlanIds = [...new Set(allSubscriptions.resources.map(subscriptionDbItem => subscriptionDbItem.planId))];
+    const plans = await Promise.all(distinctPlanIds.map(planId => plansGet(planId)));
 
     return allSubscriptions.resources.map(subscriptionDbItem => {
         if (!subscriptionDbItem.id)
@@ -80,6 +99,7 @@ export async function accountSubscriptions(id: string): Promise<Array<DbSubscrip
             id: subscriptionDbItem.id,
             accountId: subscriptionDbItem.accountId,
             planId: subscriptionDbItem.planId,
+            plan: plans.find(plan => plan.id === subscriptionDbItem.planId),
             active: subscriptionDbItem.active,
             price: subscriptionDbItem.price,
             currency: subscriptionDbItem.currency,
@@ -112,24 +132,49 @@ export async function accountSubscriptionCreate(id: string, subscription: Subscr
     return subscriptionId;
 }
 
-async function accountBillingCycleKey(accountId: string) {
+async function accountActiveSubscription(accountId: string) {
     const subscriptions = await accountSubscriptions(accountId);
-    const activeSubscription = subscriptions.find(subscription => subscription.active);
-    if (!activeSubscription)
-        throw new Error('No active subscription found for this account.');
+    return subscriptions.find(subscription => subscription.active);
+}
 
-    const billingCycle = period(new Date(activeSubscription.createdAt * 1000).getDate(), new Date());
+function subscriptionActivePeriod(subscriptionStart: number) {
+    return period(new Date(subscriptionStart * 1000).getDate(), new Date());
+}
+
+async function accountBillingCycleKey(accountId: string) {
+    const activeSubscription = await accountActiveSubscription(accountId);
+    if (!activeSubscription)
+        return null;
+    const billingCycle = subscriptionActivePeriod(activeSubscription.createdAt);
     return `${activeSubscription.id}-${billingCycle.start.getFullYear()}${billingCycle.start.getMonth() + 1}`;
 }
 
-export async function accountUsage(id: string) {
-    const billingCycleKey = await accountBillingCycleKey(id);
+export async function accountUsage(accountId: string) {
+    const billingCycleKey = await accountBillingCycleKey(accountId);
     const dbUsage = cosmosDataContainerUsage();
     const results = await Promise.all([
-        dbUsage.item(`messages-${billingCycleKey}`, id).read(),
-        workersGetAll(id),
+        dbUsage.item(`messages-${billingCycleKey}`, accountId).read(),
+        workersGetAll(accountId),
+        accountActiveSubscription(accountId)
     ]);
 
+    const activeSubscription = results[2];
+    const period = activeSubscription ? subscriptionActivePeriod(activeSubscription.createdAt) : null;
+    const plan = activeSubscription ? await plansGet(activeSubscription.planId) : null;
+
+    return {
+        messages: {
+            unlimited: plan?.limits.messages.unlimited ?? false,
+            total: plan?.limits.messages ?? 0,
+            used: results[0].resource?.value || 0,
+        },
+        workers: {
+            unlimited: plan?.limits.workers.unlimited ?? false,
+            total: plan?.limits.workers ?? 0,
+            used: results[1].length,
+        },
+        period,
+    };
 }
 
 // NOTE: https://docs.stripe.com/billing/subscriptions/billing-cycle#using-a-trial-to-change-the-billing-cycle

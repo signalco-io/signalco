@@ -68,7 +68,6 @@ export async function checkoutWithStripe(
             throw new Error('Unable to create checkout session.');
         }
 
-        // Instead of returning a Response, just return the data or error.
         if (session) {
             return { sessionId: session.id };
         }
@@ -81,6 +80,27 @@ export async function checkoutWithStripe(
             showNotification('An unknown error occurred. Please try again later or contact a system administrator.', 'error');
         }
         throw error;
+    }
+}
+
+export async function stripeCustomerBillingInfo(user: DbUser) {
+    try {
+        const customer = await ensureStripeCustomer(user);
+        const stripeCustomer = await stripe.customers.retrieve(customer);
+        const expandedCustomer = await stripe.customers.retrieve(customer, { expand: ['shipping'] });
+        console.log('Customer', JSON.stringify(stripeCustomer));
+
+        const paymentMethods = await stripe.customers.listPaymentMethods(stripeCustomer.id);
+        console.log('PaymentMethods...')
+        paymentMethods.data.forEach(paymentMethod => {
+            console.log('PaymentMethod', JSON.stringify(paymentMethod));
+        });
+    } catch (error) {
+        if (error instanceof Error) {
+            showNotification(error.message + ' Please try again later or contact a system administrator.', 'error');
+        } else {
+            showNotification('An unknown error occurred. Please try again later or contact a system administrator.', 'error');
+        }
     }
 }
 

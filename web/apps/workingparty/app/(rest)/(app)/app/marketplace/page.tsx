@@ -28,7 +28,7 @@ function WorkerCard({ worker }: { worker: typeof marketplaceWorkers[0] }) {
                 <CardTitle className="self-center">{name}</CardTitle>
                 <CardContent className="p-0 [grid-column:2] [grid-row:2]">
                     <Stack spacing={1}>
-                        <Typography level="body1" secondary>{description}</Typography>
+                        <Typography level="body1">{description}</Typography>
                         <Row spacing={1}>
                             {categories.map((category, categoryIndex) => (
                                 <Fragment key={category}>

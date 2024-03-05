@@ -1,5 +1,5 @@
-import { nanoid } from "nanoid";
-import { cosmosDataContainerPlans } from "../cosmosClient";
+import { nanoid } from 'nanoid';
+import { cosmosDataContainerPlans } from '../cosmosClient';
 
 export type DbPlan = {
     id: string;
@@ -8,6 +8,16 @@ export type DbPlan = {
     currency: string,
     period: 'monthly' | 'yearly',
     stripePriceId: string;
+    limits: {
+        messages: {
+            total: number;
+            unlimited: boolean;
+        };
+        workers: {
+            total: number;
+            unlimited: boolean;
+        };
+    };
 };
 
 export type PlanCreate = {
@@ -16,6 +26,16 @@ export type PlanCreate = {
     currency: string;
     period: 'monthly' | 'yearly';
     stripePriceId?: string;
+    limits: {
+        messages: {
+            total: number;
+            unlimited: boolean;
+        };
+        workers: {
+            total: number;
+            unlimited: boolean;
+        };
+    };
 };
 
 export async function plansGetAll(): Promise<Array<DbPlan>> {
@@ -32,7 +52,8 @@ export async function plansGetAll(): Promise<Array<DbPlan>> {
             price: planDbItem.price,
             currency: planDbItem.currency,
             period: planDbItem.period,
-            stripePriceId: planDbItem.stripePriceId
+            stripePriceId: planDbItem.stripePriceId,
+            limits: planDbItem.limits
         });
     }).filter(Boolean) ?? [];
 }
@@ -46,7 +67,8 @@ export async function plansGet(id: string): Promise<DbPlan> {
         price: dbPlan.resource.price,
         currency: dbPlan.resource.currency,
         period: dbPlan.resource.period,
-        stripePriceId: dbPlan.resource.stripePriceId
+        limits: dbPlan.resource.limits,
+        stripePriceId: dbPlan.resource.stripePriceId,
     };
 }
 
@@ -59,7 +81,8 @@ export async function plansCreate(plan: PlanCreate) {
         price: plan.price,
         currency: plan.currency,
         period: plan.period,
-        stripePriceId: plan.stripePriceId
+        stripePriceId: plan.stripePriceId,
+        limits: plan.limits
     });
     return planId;
 }

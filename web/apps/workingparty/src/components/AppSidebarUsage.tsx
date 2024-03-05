@@ -10,18 +10,24 @@ import { cx } from '@signalco/ui-primitives/cx';
 import { Button } from '@signalco/ui-primitives/Button';
 import { Loadable } from '@signalco/ui/Loadable';
 import { KnownPages } from '../knownPages';
+import { useCurrentUser } from '../hooks/data/users/useCurrentUser';
 import { useAccountUsage } from '../hooks/data/account/useAccountUsage';
+import { useAccountSubscriptions } from '../hooks/data/account/useAccountSubscriptions';
 
 export function AppSidebarUsage() {
-    const usage = useAccountUsage();
+    const currentUser = useCurrentUser();
+    const accountId = currentUser.data?.user?.accountIds[0];
+    const usage = useAccountUsage(accountId);
+    const subscriptions = useAccountSubscriptions(accountId);
 
-    const percentage = usage.data?.usage.messages.total
-        ? Math.ceil((usage.data.usage.messages.used / usage.data.usage.messages.total) * 100)
+    const percentage = usage.data?.messages.total
+        ? Math.ceil((usage.data.messages.used / usage.data.messages.total) * 100)
         : 100;
+    const hasUpgradePath = subscriptions.data?.filter(subscription => subscription.active).some(subscription => subscription.hasUpgradePath);
 
     return (
         <Stack spacing={2} className="p-2">
-            <Loadable placeholder={<Skeleton className="h-8 w-full" />} isLoading={usage.loading} loadingLabel="Loading usage...">
+            <Loadable placeholder={<Skeleton className="h-8 w-full" />} isLoading={usage.isLoading || currentUser.isLoading} loadingLabel="Loading usage...">
                 <Link href={KnownPages.AppSettingsAccountUsage}>
                     <Stack spacing={1}>
                         <Row justifyContent="space-between">
@@ -31,7 +37,7 @@ export function AppSidebarUsage() {
                         <Progress value={percentage} className="h-2" trackClassName={cx(percentage < 100 ? 'bg-zinc-600' : 'bg-red-500')} />
                     </Stack>
                 </Link>
-                {(usage.data?.plan.hasUpgradePath || percentage >= 100) && (
+                {(hasUpgradePath || percentage >= 100) && (
                     <Button
                         href={KnownPages.AppSettingsAccountBilling}
                         fullWidth>

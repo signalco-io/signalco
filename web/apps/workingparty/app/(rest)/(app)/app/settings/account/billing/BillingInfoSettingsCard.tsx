@@ -2,11 +2,15 @@
 
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
-import { useAccountBilling } from "../../../../../../../src/hooks/data/account/useAccountBilling";
+import { KnownPages } from '../../../../../../../src/knownPages';
+import { useCurrentUser } from '../../../../../../../src/hooks/data/users/useCurrentUser';
+import { useAccountBilling } from '../../../../../../../src/hooks/data/account/useAccountBilling';
 import { SettingsCardActions } from '../../../../../../../src/components/settings/SettingsCardActions';
 import { SettingsCard } from '../../../../../../../src/components/settings/SettingsCard';
 
 export function BillingInfoSettingsCard() {
+    const currentUser = useCurrentUser();
+    const accountId = currentUser.data?.user?.accountIds[0];
     const billing = useAccountBilling();
 
     return (
@@ -20,7 +24,11 @@ export function BillingInfoSettingsCard() {
                 </Typography>
             </div>
             <SettingsCardActions className="justify-end">
-                <NavigatingButton variant="solid" size="sm">Update Billing Info</NavigatingButton>
+                <NavigatingButton
+                    variant="solid"
+                    size="sm"
+                    disabled={!accountId}
+                    href={KnownPages.AppSettingsAccountBillingPortal(accountId ?? 'unknown')}>Update Billing Info</NavigatingButton>
             </SettingsCardActions>
         </SettingsCard>
     );

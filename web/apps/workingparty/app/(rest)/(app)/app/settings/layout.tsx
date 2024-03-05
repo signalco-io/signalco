@@ -6,6 +6,7 @@ import { Typography } from '@signalco/ui-primitives/Typography';
 import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List, ListHeader } from '@signalco/ui-primitives/List';
 import { AI, Store } from '@signalco/ui-icons';
+import { GeneralFormProvider } from '@signalco/ui-forms/GeneralFormProvider';
 import { SplitView } from '@signalco/ui/SplitView';
 import { KnownPages } from '../../../../../src/knownPages';
 import { AppSidebar } from '../../../../../src/components/AppSidebar';
@@ -73,7 +74,9 @@ export default function AppSettingsLayout({ children }: PropsWithChildren) {
                 </List>
             </AppSidebar>
             <div className="h-screen overflow-y-auto overflow-x-hidden">
-                {children}
+                <GeneralFormProvider>
+                    {children}
+                </GeneralFormProvider>
             </div >
         </SplitView >
     );

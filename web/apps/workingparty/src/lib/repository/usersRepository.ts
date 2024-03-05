@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid';
+import { PatchOperation } from '@azure/cosmos';
 import { cosmosDataContainerEmailUser, cosmosDataContainerUsers } from '../cosmosClient';
 
 export type DbUser = {
@@ -70,4 +71,13 @@ export async function usersAssignStripeCustomer(userId: string, stripeCustomerId
             { op: 'add', path: '/stripeCustomerId', value: stripeCustomerId }
         ]
     });
+}
+
+export async function usersPatch(userId: string, { displayName }: { displayName?: string }) {
+    const dbUsers = cosmosDataContainerUsers();
+    const operations: PatchOperation[] = [];
+    if (displayName) {
+        operations.push({ op: 'replace', path: '/displayName', value: displayName });
+    }
+    await dbUsers.item(userId, userId).patch({ operations });
 }
