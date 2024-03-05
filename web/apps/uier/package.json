@@ -54,7 +54,7 @@
         "@types/color": "3.0.6",
         "@types/node": "20.11.24",
         "@types/react": "18.2.63",
-        "@types/react-dom": "18.2.19",
+        "@types/react-dom": "18.2.20",
         "cross-env": "7.0.3",
         "dotenv": "16.4.5",
         "eslint": "8.57.0",
