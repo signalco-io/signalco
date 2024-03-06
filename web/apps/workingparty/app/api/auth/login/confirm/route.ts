@@ -43,7 +43,7 @@ export async function POST(request: Request) {
     let userId = (await usersGetByEmail(email));
     if (!userId) {
         const createdUserId = await usersCreate({ email });
-        const createdAccount = await accountCreate({ name: `${email}'s Account` });
+        const createdAccount = await accountCreate({ name: `${email}'s Account`, email: email });
         await usersAssignAccount(createdUserId, createdAccount);
         userId = createdUserId;
     }

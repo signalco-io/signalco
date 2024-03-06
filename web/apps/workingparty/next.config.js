@@ -31,6 +31,7 @@ const nextConfig = {
                 isDevelopment,
                 [
                     knownSecureHeadersExternalUrls.vercel,
+                    knownSecureHeadersExternalUrls.stripe,
                 ]
             ))
         }];

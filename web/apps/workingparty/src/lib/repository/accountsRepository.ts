@@ -7,11 +7,19 @@ import { DbPlan, plansGet } from './plansRepository';
 export type DbAccount = {
     id: string;
     name: string;
+    email: string;
     createdAt: number;
+    stripeCustomerId?: string;
 };
 
 export type AccountCreate = {
     name: string;
+    email: string;
+};
+
+export type AccountPatch = {
+    name?: string;
+    email?: string;
 };
 
 export type DbSubscription = {
@@ -50,18 +58,22 @@ export async function accountGet(id: string): Promise<DbAccount> {
     return {
         id: accountDbItem.id,
         name: accountDbItem.name,
+        email: accountDbItem.email,
         createdAt: accountDbItem.createdAt,
+        stripeCustomerId: accountDbItem.stripeCustomerId,
     };
 }
 
 export async function accountCreate({
-    name
+    name,
+    email
 }: AccountCreate) {
     const accountId = nanoid(8);
     const account: DbAccount = {
         id: accountId,
         name,
         createdAt: Date.now() / 1000, // UNIX seconds timestamp
+        email
     };
 
     const dbAccounts = cosmosDataContainerAccounts();
@@ -71,8 +83,9 @@ export async function accountCreate({
 }
 
 export async function accountUpdate(id: string, {
-    name
-}: AccountCreate) {
+    name,
+    email
+}: AccountPatch) {
     const operations: PatchOperation[] = [];
     if (name) {
         operations.push({
@@ -81,7 +94,27 @@ export async function accountUpdate(id: string, {
             value: name
         });
     }
+    if (email) {
+        // TODO: Allow email change (requires email verification)
+        // operations.push({
+        //     op: 'replace',
+        //     path: '/email',
+        //     value: email
+        // });
+    }
+
     await cosmosDataContainerAccounts().item(id, id).patch(operations);
+
+    // TODO: Update email in Stripe customer
+}
+
+export async function accountAssignStripeCustomer(accountId: string, stripeCustomerId: string) {
+    const dbUsers = cosmosDataContainerAccounts();
+    await dbUsers.item(accountId, accountId).patch({
+        operations: [
+            { op: 'add', path: '/stripeCustomerId', value: stripeCustomerId }
+        ]
+    });
 }
 
 export async function accountSubscriptions(id: string): Promise<Array<DbSubscription & { plan?: DbPlan }>> {

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Tabs, TabsList, TabsTrigger } from '@signalco/ui-primitives/Tabs';
 import { Stack } from '@signalco/ui-primitives/Stack';
@@ -9,9 +10,12 @@ import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List } from '@signalco/ui-primitives/List';
 import { Container } from '@signalco/ui-primitives/Container';
 import { Button } from '@signalco/ui-primitives/Button';
+import { showNotification } from '@signalco/ui-notifications';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Loadable } from '@signalco/ui/Loadable';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
+import { CheckoutSessionDto } from '../../../../../../../api/accounts/[accountId]/billing/checkout/[planId]/route';
+import { clientStripe } from '../../../../../../../../src/lib/stripe/clientStripe';
 import { useCurrentUser } from '../../../../../../../../src/hooks/data/users/useCurrentUser';
 import { usePlans } from '../../../../../../../../src/hooks/data/plans/usePlans';
 import { useAccountSubscriptions } from '../../../../../../../../src/hooks/data/account/useAccountSubscriptions';
@@ -30,6 +34,29 @@ export default function SettingsAccountBillingPlansPage() {
 
     const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
     const canUpgrade = selectedPlanId && activePlanId !== selectedPlanId;
+
+    const [checkoutLoading, setCheckoutLoading] = useState(false);
+    const handleCheckout = async () => {
+        setCheckoutLoading(true);
+        try {
+            if (!accountId || !selectedPlanId) {
+                showNotification('Please select a plan to upgrade to.', 'warning');
+                return;
+            }
+
+            const sessionResponse = await fetch(`/api/accounts/${accountId}/billing/checkout/${selectedPlanId}`);
+            if (!sessionResponse.ok) {
+                showNotification('Failed to create checkout session. Please try again.', 'error');
+                return;
+            }
+
+            const session = await sessionResponse.json() as CheckoutSessionDto;
+            const stripe = await clientStripe();
+            stripe?.redirectToCheckout({ sessionId: session.sessionId });
+        } finally {
+            setCheckoutLoading(false);
+        }
+    }
 
     return (
         <Container className="py-4" padded maxWidth="md">
@@ -72,6 +99,8 @@ export default function SettingsAccountBillingPlansPage() {
                                     variant="solid"
                                     disabled={!canUpgrade}
                                     className="self-end"
+                                    loading={checkoutLoading}
+                                    onClick={handleCheckout}
                                 >
                                     Upgrade
                                 </NavigatingButton>

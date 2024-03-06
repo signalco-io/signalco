@@ -2,46 +2,46 @@
 
 import Stripe from 'stripe';
 import { showNotification } from '@signalco/ui-notifications';
-import { DbUser, usersAssignStripeCustomer } from '../repository/usersRepository';
+import { DbAccount, accountAssignStripeCustomer } from '../repository/accountsRepository';
 import { domain } from '../../providers/env';
 import { KnownPages } from '../../knownPages';
 import { stripe } from './config';
 
 const returnUrl = `https://${domain}/${KnownPages.AppSettingsAccountBilling}`;
 
-async function ensureStripeCustomer(user: DbUser): Promise<string> {
+async function ensureStripeCustomer(account: DbAccount): Promise<string> {
     // Check if the user already has a Stripe customer ID
     // Ensure customer still exists in Stripe and is not deleted
-    if (user.stripeCustomerId && user.stripeCustomerId.length > 0) {
-        const existingCustomerId = await stripe.customers.retrieve(user.stripeCustomerId);
+    if (account.stripeCustomerId && account.stripeCustomerId.length > 0) {
+        const existingCustomerId = await stripe.customers.retrieve(account.stripeCustomerId);
         if (existingCustomerId && !existingCustomerId.deleted) return existingCustomerId.id;
     }
 
     // Try to find customer by email
-    const customers = await stripe.customers.list({ email: user.email });
+    const customers = await stripe.customers.list({ email: account.email });
     if (customers.data.length > 0) {
         const customer = customers.data[0];
         if (customer && !customer.deleted) {
-            await usersAssignStripeCustomer(user.id, customer.id)
+            await accountAssignStripeCustomer(account.id, customer.id)
             return customer.id;
         }
     }
 
     // Create a new customer in Stripe
     const newCustomer = await stripe.customers.create({
-        email: user.email,
-        name: user.displayName,
+        email: account.email,
+        name: account.name,
     });
-    await usersAssignStripeCustomer(user.id, newCustomer.id);
+    await accountAssignStripeCustomer(account.id, newCustomer.id);
     return newCustomer.id;
 }
 
-export async function checkoutWithStripe(
-    user: DbUser,
+export async function stripeCheckout(
+    account: DbAccount,
     stripePriceId: string
 ) {
     try {
-        const customer = await ensureStripeCustomer(user);
+        const customer = await ensureStripeCustomer(account);
         const params: Stripe.Checkout.SessionCreateParams = {
             billing_address_collection: 'required',
             customer,
@@ -83,9 +83,9 @@ export async function checkoutWithStripe(
     }
 }
 
-export async function stripeCustomerBillingInfo(user: DbUser) {
+export async function stripeCustomerBillingInfo(account: DbAccount) {
     try {
-        const customerId = await ensureStripeCustomer(user);
+        const customerId = await ensureStripeCustomer(account);
         const stripeCustomer = await stripe.customers.retrieve(customerId);
         if (stripeCustomer.deleted)
             throw new Error('Customer not found');
@@ -107,9 +107,9 @@ export async function stripeCustomerBillingInfo(user: DbUser) {
     }
 }
 
-export async function stripeCustomerPaymentMethods(user: DbUser) {
+export async function stripeCustomerPaymentMethods(account: DbAccount) {
     try {
-        const customerId = await ensureStripeCustomer(user);
+        const customerId = await ensureStripeCustomer(account);
         const stripeCustomer = await stripe.customers.retrieve(customerId);
         if (stripeCustomer.deleted)
             throw new Error('Customer not found');
@@ -134,9 +134,9 @@ export async function stripeCustomerPaymentMethods(user: DbUser) {
     }
 }
 
-export async function createStripePortal(user: DbUser) {
+export async function stripeCreatePortal(account: DbAccount) {
     try {
-        const customer = await ensureStripeCustomer(user);
+        const customer = await ensureStripeCustomer(account);
         try {
             const { url } = await stripe.billingPortal.sessions.create({
                 customer,

@@ -8,8 +8,6 @@ export type DbUser = {
     email: string;
     accountIds: Array<string>;
     createdAt: number;
-
-    stripeCustomerId?: string;
 };
 
 export type UserCreate = {
@@ -25,9 +23,7 @@ export async function usersGet(id: string): Promise<DbUser> {
         displayName: userDbItem.displayName,
         email: userDbItem.email,
         accountIds: userDbItem.accountIds,
-        createdAt: userDbItem.createdAt,
-
-        stripeCustomerId: userDbItem.stripeCustomerId
+        createdAt: userDbItem.createdAt
     };
 }
 
@@ -60,15 +56,6 @@ export async function usersAssignAccount(userId: string, accountId: string) {
     await dbUsers.item(userId, userId).patch({
         operations: [
             { op: 'add', path: '/accountIds/-', value: accountId }
-        ]
-    });
-}
-
-export async function usersAssignStripeCustomer(userId: string, stripeCustomerId: string) {
-    const dbUsers = cosmosDataContainerUsers();
-    await dbUsers.item(userId, userId).patch({
-        operations: [
-            { op: 'add', path: '/stripeCustomerId', value: stripeCustomerId }
         ]
     });
 }
