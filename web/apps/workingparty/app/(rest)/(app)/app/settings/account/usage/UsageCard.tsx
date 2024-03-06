@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@signalco/ui-primitive
 
 export function UsageCard({ header, children }: PropsWithChildren<{ header?: string; }>) {
     return (
-        <Card>
+        <Card className="bg-card/60">
             {header && (
                 <CardHeader>
                     <CardTitle>

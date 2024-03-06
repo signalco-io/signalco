@@ -1,8 +1,8 @@
 import { withAuth } from '../../../../workers/route';
-import { stripeCustomerPaymentMethods } from '../../../../../../src/lib/stripe/serverStripe';
+import { stripeCustomerBillingInfo } from '../../../../../../src/lib/stripe/serverStripe';
 import { usersGet } from '../../../../../../src/lib/repository/usersRepository';
 
-export type AccountPaymentMethodsDto = ReturnType<typeof stripeCustomerPaymentMethods>;
+export type AccountBillingInfoDto = ReturnType<typeof stripeCustomerBillingInfo>;
 
 export async function GET(_request: Request, { params }: { params: { accountId: string } }) {
     const { accountId } = params;
@@ -14,7 +14,7 @@ export async function GET(_request: Request, { params }: { params: { accountId: 
             return new Response(null, { status: 404 });
 
         const user = await usersGet(userId);
-        const info = await stripeCustomerPaymentMethods(user);
+        const info = await stripeCustomerBillingInfo(user);
 
         return Response.json(info);
     });

@@ -85,15 +85,45 @@ export async function checkoutWithStripe(
 
 export async function stripeCustomerBillingInfo(user: DbUser) {
     try {
-        const customer = await ensureStripeCustomer(user);
-        const stripeCustomer = await stripe.customers.retrieve(customer);
-        const expandedCustomer = await stripe.customers.retrieve(customer, { expand: ['shipping'] });
-        console.log('Customer', JSON.stringify(stripeCustomer));
+        const customerId = await ensureStripeCustomer(user);
+        const stripeCustomer = await stripe.customers.retrieve(customerId);
+        if (stripeCustomer.deleted)
+            throw new Error('Customer not found');
 
-        const paymentMethods = await stripe.customers.listPaymentMethods(stripeCustomer.id);
-        console.log('PaymentMethods...')
-        paymentMethods.data.forEach(paymentMethod => {
-            console.log('PaymentMethod', JSON.stringify(paymentMethod));
+        return {
+            country: stripeCustomer.address?.country,
+            city: stripeCustomer.address?.city,
+            postalCode: stripeCustomer.address?.postal_code,
+            state: stripeCustomer.address?.state,
+            line1: stripeCustomer.address?.line1,
+            line2: stripeCustomer.address?.line2,
+        };
+    } catch (error) {
+        if (error instanceof Error) {
+            showNotification(error.message + ' Please try again later or contact a system administrator.', 'error');
+        } else {
+            showNotification('An unknown error occurred. Please try again later or contact a system administrator.', 'error');
+        }
+    }
+}
+
+export async function stripeCustomerPaymentMethods(user: DbUser) {
+    try {
+        const customerId = await ensureStripeCustomer(user);
+        const stripeCustomer = await stripe.customers.retrieve(customerId);
+        if (stripeCustomer.deleted)
+            throw new Error('Customer not found');
+        const paymentMethods = await stripe.customers.listPaymentMethods(customerId);
+        return paymentMethods.data.map((pm) => {
+            return {
+                id: pm.id,
+                brand: pm.card?.brand,
+                displayBrand: pm.card?.display_brand,
+                last4: pm.card?.last4,
+                expMonth: pm.card?.exp_month,
+                expYear: pm.card?.exp_year,
+                isDefault: pm.id === stripeCustomer.invoice_settings.default_payment_method
+            };
         });
     } catch (error) {
         if (error instanceof Error) {

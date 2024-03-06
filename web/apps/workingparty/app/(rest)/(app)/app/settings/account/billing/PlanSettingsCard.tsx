@@ -39,7 +39,13 @@ export function PlanSettingsCard() {
                         </Typography>
                     )}
                 </div>
-                {(activeSubscription?.hasUpgradePath ?? true) && <NavigatingButton size="sm">Upgrade</NavigatingButton>}
+                {(activeSubscription?.hasUpgradePath ?? true) && (
+                    <NavigatingButton
+                        size="sm"
+                        href={KnownPages.AppSettingsAccountBillingPlans}>
+                        Upgrade
+                    </NavigatingButton>
+                )}
             </Row>
             {usage.data?.period?.start && (
                 <>
