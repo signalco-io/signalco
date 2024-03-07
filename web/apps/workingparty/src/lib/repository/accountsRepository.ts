@@ -33,13 +33,16 @@ export type DbSubscription = {
     period: 'monthly' | 'yearly',
     createdAt: number,
     deactivatedAt?: number
+
+    stripeSubscriptionId: string;
 };
 
 export type SubscriptionCreate = {
     planId: string;
     price: number,
     currency: string,
-    period: 'monthly' | 'yearly'
+    period: 'monthly' | 'yearly',
+    stripeSubscriptionId: string;
 };
 
 export type DbUsage = {
@@ -51,9 +54,11 @@ export type DbUsage = {
     value: number;
 };
 
-export async function accountGet(id: string): Promise<DbAccount> {
+export async function accountGet(id: string): Promise<DbAccount | undefined> {
     const dbAccounts = cosmosDataContainerAccounts();
-    const { resource: accountDbItem } = await dbAccounts.item(id, id).read();
+    const { resource: accountDbItem } = await dbAccounts.item(id, id).read<DbAccount>();
+    if (!accountDbItem?.id)
+        return undefined;
 
     return {
         id: accountDbItem.id,
@@ -64,12 +69,22 @@ export async function accountGet(id: string): Promise<DbAccount> {
     };
 }
 
+export async function accountGetByStripeCustomerId(stripeCustomerId: string): Promise<DbAccount | undefined> {
+    const dbAccounts = cosmosDataContainerAccounts();
+    const { resources: accounts } = await dbAccounts.items.query<DbAccount>({
+        query: 'SELECT * FROM c WHERE c.stripeCustomerId = @stripeCustomerId',
+        parameters: [{ name: '@stripeCustomerId', value: stripeCustomerId }]
+    }).fetchAll();
+
+    return accounts[0];
+}
+
 export async function accountCreate({
     name,
     email
 }: AccountCreate) {
     const accountId = nanoid(8);
-    const account: DbAccount = {
+    const account = {
         id: accountId,
         name,
         createdAt: Date.now() / 1000, // UNIX seconds timestamp
@@ -77,7 +92,7 @@ export async function accountCreate({
     };
 
     const dbAccounts = cosmosDataContainerAccounts();
-    await dbAccounts.items.create(account);
+    await dbAccounts.items.create<DbAccount>(account);
 
     return accountId;
 }
@@ -119,7 +134,7 @@ export async function accountAssignStripeCustomer(accountId: string, stripeCusto
 
 export async function accountSubscriptions(id: string): Promise<Array<DbSubscription & { plan?: DbPlan }>> {
     const dbSubscriptions = cosmosDataContainerSubscriptions();
-    const allSubscriptions = await dbSubscriptions.items.readAll({ partitionKey: id }).fetchAll();
+    const allSubscriptions = await dbSubscriptions.items.readAll<DbSubscription>({ partitionKey: id }).fetchAll();
 
     const distinctPlanIds = [...new Set(allSubscriptions.resources.map(subscriptionDbItem => subscriptionDbItem.planId))];
     const plans = await Promise.all(distinctPlanIds.map(planId => plansGet(planId)));
@@ -139,30 +154,49 @@ export async function accountSubscriptions(id: string): Promise<Array<DbSubscrip
             period: subscriptionDbItem.period === 'monthly' ? 'monthly' : 'yearly',
             createdAt: subscriptionDbItem.createdAt,
             deactivatedAt: subscriptionDbItem.deactivatedAt,
+            stripeSubscriptionId: subscriptionDbItem.stripeSubscriptionId
         });
     });
 }
 
-export async function accountSubscriptionCreate(id: string, subscription: SubscriptionCreate) {
+export async function accountSubscriptionCreate(accountId: string, subscription: SubscriptionCreate) {
     const dbSubscriptions = cosmosDataContainerSubscriptions();
 
     const subscriptionId = `subscription_${nanoid()}`;
     const dbSubscription: DbSubscription = {
         id: subscriptionId,
-        accountId: id,
+        accountId: accountId,
         planId: subscription.planId,
         active: true,
         price: subscription.price,
         currency: subscription.currency,
         period: subscription.period,
         createdAt: Date.now() / 1000, // UNIX seconds timestamp
+        stripeSubscriptionId: subscription.stripeSubscriptionId
     };
 
-    await dbSubscriptions.items.create(dbSubscription);
+    await dbSubscriptions.items.create<DbSubscription>(dbSubscription);
 
     // TODO: Deactivate previous subscription (currently only one active subscription is supported per account)
 
     return subscriptionId;
+}
+
+export async function accountSubscriptionSetStatus(accountId: string, subscriptionId: string, active: boolean) {
+    const dbSubscriptions = cosmosDataContainerSubscriptions();
+    if (!active) {
+        await dbSubscriptions.item(subscriptionId, accountId).patch({
+            operations: [
+                { op: 'replace', path: '/deactivatedAt', value: new Date().getTime() / 1000 }
+            ]
+        });
+    } else {
+        await dbSubscriptions.item(subscriptionId, accountId).patch({
+            operations: [
+                { op: 'remove', path: '/deactivatedAt' }
+            ]
+        });
+    }
 }
 
 async function accountActiveSubscription(accountId: string) {
@@ -186,7 +220,7 @@ export async function accountUsage(accountId: string) {
     const billingCycleKey = await accountBillingCycleKey(accountId);
     const dbUsage = cosmosDataContainerUsage();
     const results = await Promise.all([
-        dbUsage.item(`messages-${billingCycleKey}`, accountId).read(),
+        dbUsage.item(`messages-${billingCycleKey}`, accountId).read<DbUsage>(),
         workersGetAll(accountId),
         accountActiveSubscription(accountId)
     ]);

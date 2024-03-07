@@ -20,7 +20,8 @@
                 "ACS_CONNECTION_STRING",
                 "WP_JWT_SIGN_SECRET",
                 "STRIPE_SECRETKEY",
-                "NEXT_PUBLIC_STRIPE_PUBLISHABLE"
+                "NEXT_PUBLIC_STRIPE_PUBLISHABLE",
+                "STRIPE_WEBHOOK_SECRET"
             ]
         }
     }
