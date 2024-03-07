@@ -22,7 +22,7 @@
         "eslint-plugin-node": "11.1.0",
         "eslint-plugin-promise": "6.1.1",
         "tsup": "8.0.2",
-        "typescript": "5.3.3"
+        "typescript": "5.4.2"
     },
     "dependencies": {
         "@checkly/pulumi": "1.1.4",
