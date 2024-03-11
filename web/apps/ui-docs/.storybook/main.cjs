@@ -9,7 +9,6 @@ module.exports = {
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("storybook-addon-swc"),
-    getAbsolutePath("@storybook/addon-styling-webpack")
   ],
   "framework": {
     "name": "@storybook/nextjs",
