@@ -3,6 +3,7 @@ import { jwtVerify } from 'jose';
 import { jwtSecret } from '../auth/login/confirm/route';
 import { workersCreate, workersGetAll } from '../../../src/lib/repository/workersRepository';
 import { usersGet } from '../../../src/lib/repository/usersRepository';
+import { accountUsageOverLimit } from '../../../src/lib/repository/accountsRepository';
 
 export async function ensureAuthUserId() {
     const sessionCookie = cookies().get('wp_session');
@@ -50,7 +51,12 @@ export async function POST(request: Request) {
         return Response.json({ error: 'Invalid request' }, { status: 400 });
 
     return withAuth(async ({ accountId }) =>
-        Response.json({
+    {
+        if (await accountUsageOverLimit(accountId, 'workers'))
+            return Response.json({ error: 'You exceeded your current quota, please check your plan and billing details' }, { status: 429 });
+
+        return Response.json({
             id: await workersCreate({ accountId, marketplaceWorkerId }),
-        }));
+        });
+    });
 }

@@ -5,6 +5,10 @@ import { cosmosDataContainerAccounts, cosmosDataContainerSubscriptions, cosmosDa
 import { workersGetAll } from './workersRepository';
 import { DbPlan, plansGet } from './plansRepository';
 
+type UsageScopesImmutable = 'workers';
+type UsageScopesMutable = 'messages' | 'oaigpt35tokens';
+type UsageScopes = UsageScopesImmutable | UsageScopesMutable;
+
 export type DbAccount = {
     id: string;
     name: string;
@@ -43,8 +47,6 @@ export type DbUsage = {
     id: string;
     accountId: string;
     subscriptionId: string;
-    periodStart: number;
-    periodEnd: number;
     value: number;
 };
 
@@ -203,47 +205,6 @@ async function accountActiveSubscription(accountId: string) {
     return subscriptions.find(subscription => !subscription.deactivatedAt || subscription.deactivatedAt > Date.now() / 1000);
 }
 
-function subscriptionActivePeriod(subscriptionStart: number) {
-    return period(new Date(subscriptionStart * 1000).getDate(), new Date());
-}
-
-async function accountBillingCycleKey(accountId: string) {
-    const activeSubscription = await accountActiveSubscription(accountId);
-    if (!activeSubscription)
-        return null;
-    const billingCycle = subscriptionActivePeriod(activeSubscription.createdAt);
-    return `${activeSubscription.id}-${billingCycle.start.getFullYear()}${billingCycle.start.getMonth() + 1}`;
-}
-
-export async function accountUsage(accountId: string) {
-    const billingCycleKey = await accountBillingCycleKey(accountId);
-    const dbUsage = cosmosDataContainerUsage();
-    const results = await Promise.all([
-        dbUsage.item(`messages-${billingCycleKey}`, accountId).read<DbUsage>(),
-        workersGetAll(accountId),
-        accountActiveSubscription(accountId)
-    ]);
-
-    const activeSubscription = results[2];
-    const period = activeSubscription ? subscriptionActivePeriod(activeSubscription.createdAt) : null;
-    const plan = activeSubscription ? await plansGet(activeSubscription.planId) : null;
-    console.log('plan', plan);
-
-    return {
-        messages: {
-            unlimited: plan?.limits.messages.unlimited ?? false,
-            total: plan?.limits.messages.total ?? 0,
-            used: results[0].resource?.value || 0,
-        },
-        workers: {
-            unlimited: plan?.limits.workers.unlimited ?? false,
-            total: plan?.limits.workers.total ?? 0,
-            used: results[1].length,
-        },
-        period,
-    };
-}
-
 // NOTE: https://docs.stripe.com/billing/subscriptions/billing-cycle#using-a-trial-to-change-the-billing-cycle
 function period(billingCycleAnchorDay: number, onDate: Date) {
     const start = new Date(onDate);
@@ -267,6 +228,145 @@ function period(billingCycleAnchorDay: number, onDate: Date) {
     return { start, end };
 }
 
-export async function accountUsageUpdate(id: string) {
+function subscriptionActivePeriod(subscriptionStart: number) {
+    return period(new Date(subscriptionStart * 1000).getDate(), new Date());
+}
+
+async function accountBillingCycle(accountId: string) {
+    const activeSubscription = await accountActiveSubscription(accountId);
+    if (!activeSubscription)
+        return null;
+    const billingCycle = subscriptionActivePeriod(activeSubscription.createdAt);
+    return {
+        key: `${activeSubscription.id}-${billingCycle.start.getFullYear()}${billingCycle.start.getMonth() + 1}`,
+        subscriptionId: activeSubscription.id
+    };
+}
+
+export async function accountUsage(accountId: string) {
+    try {
+        const [messagesUsage, workersUsage, activeSubscription] = await Promise.all([
+            accountUsageScope(accountId, 'messages'),
+            accountUsageScope(accountId, 'workers'),
+        accountActiveSubscription(accountId)
+    ]);
+
+        const period = activeSubscription ? subscriptionActivePeriod(activeSubscription.createdAt) : null;
+
+    return {
+        messages: {
+            unlimited: messagesUsage.unlimited,
+            total: messagesUsage.total,
+            used: messagesUsage.used,
+        },
+        workers: {
+            unlimited: workersUsage.unlimited,
+            total: workersUsage.total,
+            used: workersUsage.used,
+        },
+        period,
+    };
+    } catch (error) {
+        console.error('Failed to get account usage', error);
+        return {
+            messages: {
+                unlimited: false,
+                total: 0,
+                used: 0,
+            },
+            workers: {
+                unlimited: false,
+                total: 0,
+                used: 0,
+            },
+            period: null,
+        };
+    }
+}
+
+export async function accountUsageScope(accountId: string, scope: UsageScopes) {
+    const activeSubscription = await accountActiveSubscription(accountId);
+    const plan = activeSubscription ? await plansGet(activeSubscription.planId) : null;
+    if (!plan)
+        throw new Error('No active subscription');
+
+    const billingCycle = await accountBillingCycle(accountId);
+    if (!billingCycle)
+        throw new Error('No billing cycle available');
+
+    if (scope === 'workers') {
+        const workers = await workersGetAll(accountId)
+        return {
+            used: workers.length,
+            total: plan?.limits.workers.total || 0,
+            unlimited: plan?.limits.workers.unlimited || false
+        };
+    } else {
+        const dbUsage = cosmosDataContainerUsage();
+        const dbUsageItem = await dbUsage.item(`${scope}-${billingCycle?.key}`, accountId).read<DbUsage>();
+
+        // Calculate limit
+        const limit = { unlimited: false, total: 0 };
+        if (scope === 'oaigpt35tokens')
+            limit.unlimited = true;
+        else {
+            limit.unlimited = plan.limits[scope].unlimited;
+            limit.total = plan.limits[scope].total;
+        }
+
+        return {
+            used: dbUsageItem.resource?.value || 0,
+            total: limit.total,
+            unlimited: limit.unlimited
+        };
+    }
+}
+
+async function accountUsageIncrementScope(
+    billingCycle: NonNullable<Awaited<ReturnType<typeof accountBillingCycle>>>,
+    accountId: string,
+    scope: UsageScopesMutable,
+    value: number
+) {
+    const { subscriptionId, key } = billingCycle;
+    const id = `${scope}-${key}`;
     const dbUsage = cosmosDataContainerUsage();
+    const dbUsageItem = await dbUsage.item(id, accountId).read<DbUsage>();
+    if (dbUsageItem.resource) {
+        await dbUsage.item(id, accountId).patch({
+            operations: [
+                { op: 'incr', path: '/value', value: value }
+            ]
+        });
+    } else {
+        await dbUsage.items.create<DbUsage>({
+            id,
+            accountId,
+            subscriptionId: subscriptionId,
+            value
+        });
+    }
+}
+
+export async function accountUsageOverLimit(accountId: string, scope: UsageScopes): Promise<boolean> {
+    const { used, total, unlimited } = await accountUsageScope(accountId, scope);
+    if (unlimited) return false;
+    return used >= total;
+}
+
+export async function accountUsageIncrement(accountId: string, used: {
+    messages?: number;
+    oaigpt35tokens?: number;
+}) {
+    const billingCycle = await accountBillingCycle(accountId);
+    if (!billingCycle) {
+        throw new Error('No billing cycle available');
+    }
+
+    if (used.messages !== undefined) {
+        await accountUsageIncrementScope(billingCycle, accountId, 'messages', used.messages);
+    }
+    if (used.oaigpt35tokens !== undefined) {
+        await accountUsageIncrementScope(billingCycle, accountId, 'oaigpt35tokens', used.oaigpt35tokens);
+    }
 }

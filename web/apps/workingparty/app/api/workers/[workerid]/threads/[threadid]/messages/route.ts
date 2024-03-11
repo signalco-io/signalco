@@ -1,6 +1,7 @@
 import { withAuth } from '../../../../route';
 import { threadsGet } from '../../../../../../../src/lib/repository/threadsRepository';
 import { messagesCreate, messagesGetAll } from '../../../../../../../src/lib/repository/messagesRepository';
+import { accountUsageIncrement, accountUsageOverLimit } from '../../../../../../../src/lib/repository/accountsRepository';
 import { openAiCreateThread } from '../../../../../../../src/lib/openAiThreads';
 import { openAiCreateRun, openAiWaitForRunCompletion } from '../../../../../../../src/lib/openAiRuns';
 import { openAiCreateMessage, openAiListMessages } from '../../../../../../../src/lib/openAiMessages';
@@ -38,7 +39,6 @@ export async function POST(request: Request, { params }: { params: { workerid: s
     const { workerid, threadid } = params;
 
     return await withAuth(async ({ accountId }) => {
-
         // Extract message from JSON payload
         let message: string | null = null;
         const data = await request.json();
@@ -48,14 +48,21 @@ export async function POST(request: Request, { params }: { params: { workerid: s
             }
         }
         if (!message)
-            return new Response(null, { status: 403 });
+            return new Response(null, { status: 400 });
+
+        // Check limit
+        if (await accountUsageOverLimit(accountId, 'messages'))
+            return Response.json({ error: 'You exceeded your current quota, please check your plan and billing details' }, { status: 429 });
 
         // Create message, trigger run and wait for completion
         const { runId: oaiRunId } = await messagesCreate(accountId, workerid, threadid, message);
 
         // TODO: Run asynchrously
         const { name, oaiThreadId } = await threadsGet(accountId, threadid);
-        await openAiWaitForRunCompletion(oaiThreadId, oaiRunId);
+        const runResult = await openAiWaitForRunCompletion(oaiThreadId, oaiRunId);
+        await accountUsageIncrement(accountId, {
+            oaigpt35tokens: runResult.usage?.total_tokens
+        });
 
         // Caption conversation if not already
         let updatedThread = false;

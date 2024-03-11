@@ -22,4 +22,8 @@ export async function openAiWaitForRunCompletion(threadId: string, runId: string
         console.error('Run last error', run.last_error, 'status', run.status, 'retries', retries, 'of max', maxDurationMs / delayMs);
         throw new Error('Run did not complete in time');
     }
+
+    return {
+        usage: run.usage
+    };
 }
