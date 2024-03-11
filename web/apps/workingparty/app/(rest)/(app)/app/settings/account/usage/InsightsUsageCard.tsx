@@ -1,7 +1,6 @@
 'use client';
 
 import { Typography } from '@signalco/ui-primitives/Typography';
-import { Skeleton } from '@signalco/ui-primitives/Skeleton';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Divider } from '@signalco/ui-primitives/Divider';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
@@ -10,13 +9,8 @@ import { KnownPages } from '../../../../../../../src/knownPages';
 import { useCurrentUser } from '../../../../../../../src/hooks/data/users/useCurrentUser';
 import { useAccountUsage } from '../../../../../../../src/hooks/data/account/useAccountUsage';
 import { UsageCard } from './UsageCard';
+import { InsightsItemSkeleton } from './InsightsItemSkeleton';
 import { InsightsItem } from './InsightsItem';
-
-function InsightsItemSkeleton() {
-    return (
-        <Skeleton className="h-7 w-full" />
-    );
-}
 
 export function InsightsUsageCard() {
     const currentUser = useCurrentUser();
@@ -28,7 +22,7 @@ export function InsightsUsageCard() {
 
     return (
         <UsageCard>
-            <div className="-m-8 grid grid-cols-[1fr_auto_1fr_auto_1fr] grid-rows-[auto_auto_1fr]">
+            <div className="-m-8 grid grid-cols-[1fr_auto_1fr] grid-rows-[auto_auto_1fr]">
                 <div className="col-span-5 px-4 py-2">
                     <Row justifyContent="space-between">
                         <Typography level="body1">Usage in the current billing cycle</Typography>
@@ -68,7 +62,6 @@ export function InsightsUsageCard() {
                             unlimited={usage.data?.workers.unlimited} />
                     </Loadable>
                 </div>
-                <Divider orientation="vertical" />
             </div>
         </UsageCard>
     );

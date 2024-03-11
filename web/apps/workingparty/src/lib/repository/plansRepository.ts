@@ -81,22 +81,23 @@ export async function plansGetAll(): Promise<Array<DbPlan>> {
     }).filter(Boolean);
 }
 
-export async function plansGet(id: string): Promise<DbPlan> {
+export async function plansGet(id: string): Promise<DbPlan | undefined> {
     const dbPlans = cosmosDataContainerPlans();
     const dbPlan = await dbPlans.item(id, id).read<DbPlan>();
     if (!dbPlan.resource?.id)
-        throw new Error('Plan not found');
+        return undefined;
 
-    return {
-        id: dbPlan.resource.id,
-        name: dbPlan.resource.name,
-        price: dbPlan.resource.price,
-        currency: dbPlan.resource.currency,
-        period: dbPlan.resource.period,
-        limits: dbPlan.resource.limits,
-        stripePriceId: dbPlan.resource.stripePriceId,
-        active: dbPlan.resource.active
-    };
+    return dbPlan.resource;
+}
+
+export async function plansGetByStripePriceId(stripePriceId: string): Promise<DbPlan | undefined> {
+    const dbPlans = cosmosDataContainerPlans();
+    const { resources: plans } = await dbPlans.items.query<DbPlan>({
+        query: 'SELECT * FROM plans p WHERE p.stripePriceId = @stripePriceId',
+        parameters: [{ name: '@stripePriceId', value: stripePriceId }]
+    }).fetchAll();
+
+    return plans[0];
 }
 
 export async function plansCreate(plan: PlanCreate) {

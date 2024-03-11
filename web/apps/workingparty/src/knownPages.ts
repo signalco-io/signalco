@@ -23,6 +23,7 @@ export const KnownPages = {
     AppLogout: '/app/logout',
 
     Pricing: '/pricing',
+    Contact: '/contact',
 
     LegalPrivacyPolicy: '/legal/privacy-policy',
     LegalTermsOfService: '/legal/terms-of-service',

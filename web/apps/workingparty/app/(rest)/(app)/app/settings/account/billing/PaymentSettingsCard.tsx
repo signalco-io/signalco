@@ -24,8 +24,7 @@ export function PaymentSettingsCard() {
                 error={currentUser.error || billing.error}
                 loadingLabel="Loading payment methods..."
                 placeholder="skeletonText"
-                width={300}
-                height={32}>
+                width={300}>
                 {defaultPaymentMethod ? (
                     <Typography level="body1">
                         Your payment method is <strong>{camelToSentenceCase(defaultPaymentMethod.displayBrand ?? '')}</strong> ending in <strong>****{defaultPaymentMethod.last4}</strong> expiring <strong>{defaultPaymentMethod.expMonth}/{defaultPaymentMethod.expYear}</strong>.

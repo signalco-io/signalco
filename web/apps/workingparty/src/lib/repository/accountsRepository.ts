@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import { PatchOperation } from '@azure/cosmos';
+import { stripe } from '../stripe/config';
 import { cosmosDataContainerAccounts, cosmosDataContainerSubscriptions, cosmosDataContainerUsage } from '../cosmosClient';
 import { workersGetAll } from './workersRepository';
 import { DbPlan, plansGet } from './plansRepository';
@@ -26,11 +27,7 @@ export type DbSubscription = {
     id: string;
     accountId: string;
     planId: string;
-    active: boolean;
 
-    price: number,
-    currency: string,
-    period: 'monthly' | 'yearly',
     createdAt: number,
     deactivatedAt?: number
 
@@ -39,9 +36,6 @@ export type DbSubscription = {
 
 export type SubscriptionCreate = {
     planId: string;
-    price: number,
-    currency: string,
-    period: 'monthly' | 'yearly',
     stripeSubscriptionId: string;
 };
 
@@ -116,6 +110,7 @@ export async function accountUpdate(id: string, {
         //     path: '/email',
         //     value: email
         // });
+        throw new Error('Email change is not supported.');
     }
 
     await cosmosDataContainerAccounts().item(id, id).patch(operations);
@@ -147,11 +142,7 @@ export async function accountSubscriptions(id: string): Promise<Array<DbSubscrip
             id: subscriptionDbItem.id,
             accountId: subscriptionDbItem.accountId,
             planId: subscriptionDbItem.planId,
-            plan: plans.find(plan => plan.id === subscriptionDbItem.planId),
-            active: subscriptionDbItem.active,
-            price: subscriptionDbItem.price,
-            currency: subscriptionDbItem.currency,
-            period: subscriptionDbItem.period === 'monthly' ? 'monthly' : 'yearly',
+            plan: plans.find(plan => plan && plan?.id === subscriptionDbItem.planId),
             createdAt: subscriptionDbItem.createdAt,
             deactivatedAt: subscriptionDbItem.deactivatedAt,
             stripeSubscriptionId: subscriptionDbItem.stripeSubscriptionId
@@ -159,49 +150,57 @@ export async function accountSubscriptions(id: string): Promise<Array<DbSubscrip
     });
 }
 
+async function accountCancelAllSubscriptions(accountId: string) {
+    const subscriptions = await accountSubscriptions(accountId);
+    const activeSubscriptions = subscriptions.filter(s => !s.deactivatedAt || s.deactivatedAt > Date.now() / 1000);
+    for (let i = 0; i < activeSubscriptions.length; i++) {
+        const activeSubscription = activeSubscriptions[i];
+        if (!activeSubscription) continue;
+        try {
+            await stripe.subscriptions.cancel(activeSubscription.stripeSubscriptionId, {
+                cancellation_details: {
+                    comment: 'Plan upgraded'
+                }
+            });
+            console.info('Subscription cancelled', activeSubscription.stripeSubscriptionId);
+        } catch (error) {
+            console.error('Failed to cancel previous subscription', activeSubscription.stripeSubscriptionId, error);
+        }
+    }
+}
+
 export async function accountSubscriptionCreate(accountId: string, subscription: SubscriptionCreate) {
-    const dbSubscriptions = cosmosDataContainerSubscriptions();
+    // Deactivate previously active subscription
+    // (currently only one active subscription is supported per account)
+    await accountCancelAllSubscriptions(accountId);
 
     const subscriptionId = `subscription_${nanoid()}`;
     const dbSubscription: DbSubscription = {
         id: subscriptionId,
         accountId: accountId,
         planId: subscription.planId,
-        active: true,
-        price: subscription.price,
-        currency: subscription.currency,
-        period: subscription.period,
         createdAt: Date.now() / 1000, // UNIX seconds timestamp
         stripeSubscriptionId: subscription.stripeSubscriptionId
     };
 
+    const dbSubscriptions = cosmosDataContainerSubscriptions();
     await dbSubscriptions.items.create<DbSubscription>(dbSubscription);
-
-    // TODO: Deactivate previous subscription (currently only one active subscription is supported per account)
 
     return subscriptionId;
 }
 
-export async function accountSubscriptionSetStatus(accountId: string, subscriptionId: string, active: boolean) {
+export async function accountSubscriptionSetStatus(accountId: string, subscriptionId: string, deactivatedAt: Date | null) {
     const dbSubscriptions = cosmosDataContainerSubscriptions();
-    if (!active) {
-        await dbSubscriptions.item(subscriptionId, accountId).patch({
-            operations: [
-                { op: 'replace', path: '/deactivatedAt', value: new Date().getTime() / 1000 }
-            ]
-        });
-    } else {
-        await dbSubscriptions.item(subscriptionId, accountId).patch({
-            operations: [
-                { op: 'remove', path: '/deactivatedAt' }
-            ]
-        });
-    }
+    await dbSubscriptions.item(subscriptionId, accountId).patch({
+        operations: [
+            { op: 'add', path: '/deactivatedAt', value: deactivatedAt ? deactivatedAt.getTime() / 1000 : null }
+        ]
+    });
 }
 
 async function accountActiveSubscription(accountId: string) {
     const subscriptions = await accountSubscriptions(accountId);
-    return subscriptions.find(subscription => subscription.active);
+    return subscriptions.find(subscription => !subscription.deactivatedAt || subscription.deactivatedAt > Date.now() / 1000);
 }
 
 function subscriptionActivePeriod(subscriptionStart: number) {
@@ -228,16 +227,17 @@ export async function accountUsage(accountId: string) {
     const activeSubscription = results[2];
     const period = activeSubscription ? subscriptionActivePeriod(activeSubscription.createdAt) : null;
     const plan = activeSubscription ? await plansGet(activeSubscription.planId) : null;
+    console.log('plan', plan);
 
     return {
         messages: {
             unlimited: plan?.limits.messages.unlimited ?? false,
-            total: plan?.limits.messages ?? 0,
+            total: plan?.limits.messages.total ?? 0,
             used: results[0].resource?.value || 0,
         },
         workers: {
             unlimited: plan?.limits.workers.unlimited ?? false,
-            total: plan?.limits.workers ?? 0,
+            total: plan?.limits.workers.total ?? 0,
             used: results[1].length,
         },
         period,
@@ -247,7 +247,7 @@ export async function accountUsage(accountId: string) {
 // NOTE: https://docs.stripe.com/billing/subscriptions/billing-cycle#using-a-trial-to-change-the-billing-cycle
 function period(billingCycleAnchorDay: number, onDate: Date) {
     const start = new Date(onDate);
-    start.setMonth(0, billingCycleAnchorDay);
+    start.setDate(billingCycleAnchorDay);
     start.setHours(0, 0, 0, 0);
 
     // Check if the billing cycle anchor day is valid day of on date month

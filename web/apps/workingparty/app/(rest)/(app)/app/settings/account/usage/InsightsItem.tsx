@@ -6,7 +6,7 @@ import { Progress } from '@signalco/ui-primitives/Progress';
 import { cx } from '@signalco/ui-primitives/cx';
 
 export function InsightsItem({ name, value, maxValue, unlimited }: { name: string; value: number | undefined; maxValue: number | undefined; unlimited: boolean | undefined; }) {
-    const percentage = !unlimited && maxValue ? Math.ceil(((value ?? 0) / (maxValue + 10000000)) * 100) : 100;
+    const percentage = !unlimited && maxValue ? Math.ceil(((value ?? 0) / maxValue) * 100) : 100;
 
     return (
         <div>

@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
 import { stripe } from '../../../../src/lib/stripe/config';
-import { plansCreate, plansDelete, plansGetAll, plansUpdate } from '../../../../src/lib/repository/plansRepository';
+import { plansCreate, plansDelete, plansGetAll, plansGetByStripePriceId, plansUpdate } from '../../../../src/lib/repository/plansRepository';
 import { accountGetByStripeCustomerId, accountSubscriptionCreate, accountSubscriptionSetStatus, accountSubscriptions } from '../../../../src/lib/repository/accountsRepository';
 
 const relevantEvents = new Set([
@@ -87,22 +87,58 @@ async function upsertPriceRecord(price: Stripe.Price) {
     }
 }
 
-async function manageSubscriptionStatusChange(stripeSubscriptionId: string, stripeCustomerId: string, isSubscriptionActive: boolean) {
+async function createSubscription(stripeSubscriptionId: string, stripeCustomerId: string) {
     const account = await accountGetByStripeCustomerId(stripeCustomerId);
     if (!account) {
         throw new Error('Account not found');
     }
 
-    // TODO: Find account subscription by stripeSubscriptionId
+    const stripeSubscription = await stripe.subscriptions.retrieve(stripeSubscriptionId);
+    if (stripeSubscription.items.data.length > 1) {
+        throw new Error('Multiple items in subscription not supported');
+    }
+    const stripePriceId = stripeSubscription.items.data[0]?.price.id;
+    if (!stripePriceId) {
+        throw new Error(`Price not available on subscription: ${stripeSubscription.id}`);
+    }
+
+    const plan = await plansGetByStripePriceId(stripePriceId);
+    if (!plan) {
+        throw new Error(`Plan not found: ${stripePriceId}`);
+    }
+
+    const subscriptionId = await accountSubscriptionCreate(account.id, {
+        planId: plan.id,
+        stripeSubscriptionId
+    });
+
+    console.info('Subscription', subscriptionId, 'created');
+}
+
+async function manageSubscriptionStatusChange(stripeSubscriptionId: string, stripeCustomerId: string) {
+    const account = await accountGetByStripeCustomerId(stripeCustomerId);
+    if (!account) {
+        throw new Error('Account not found');
+    }
+
+    const stripeSubscription = await stripe.subscriptions.retrieve(stripeSubscriptionId);
+    if (stripeSubscription.items.data.length > 1) {
+        throw new Error('Multiple items in subscription not supported');
+    }
+
     const subscriptions = await accountSubscriptions(account.id);
     const editedSubscription = subscriptions.find(s => s.stripeSubscriptionId === stripeSubscriptionId);
     if (!editedSubscription) {
-        // TODO: Create subscription
-        throw new Error('Subscription not found');
+        console.info('Subscription not found, can not update. Stripe Subscription ID:', stripeSubscriptionId);
+        return;
     }
 
-    // TODO: Update account subscription status
-    await accountSubscriptionSetStatus(account.id, editedSubscription.id, isSubscriptionActive);
+    // Handle end or canellation as deactivation date
+    let deactivatedAt = stripeSubscription.ended_at ? new Date(stripeSubscription.ended_at * 1000) : null;
+    if (!deactivatedAt)
+        deactivatedAt = stripeSubscription.cancel_at ? new Date(stripeSubscription.cancel_at * 1000) : null;
+    await accountSubscriptionSetStatus(account.id, editedSubscription.id, deactivatedAt);
+    console.info('Subscription', editedSubscription.id, 'deactivated set to', deactivatedAt);
 }
 
 export async function POST(req: Request) {
@@ -152,23 +188,23 @@ export async function POST(req: Request) {
                 await deletePriceRecord(event.data.object as Stripe.Price);
                 break;
             case 'customer.subscription.created':
+                const newSubscription = event.data.object as Stripe.Subscription;
+                await createSubscription(newSubscription.id, newSubscription.customer as string);
+                break;
             case 'customer.subscription.updated':
             case 'customer.subscription.deleted':
                 const subscription = event.data.object as Stripe.Subscription;
                 await manageSubscriptionStatusChange(
                     subscription.id,
-                    subscription.customer as string,
-                    event.type === 'customer.subscription.created'
+                    subscription.customer as string
                 );
                 break;
             case 'checkout.session.completed':
                 const checkoutSession = event.data.object as Stripe.Checkout.Session;
                 if (checkoutSession.mode === 'subscription') {
-                    const subscriptionId = checkoutSession.subscription;
                     await manageSubscriptionStatusChange(
-                        subscriptionId as string,
-                        checkoutSession.customer as string,
-                        true
+                        checkoutSession.subscription as string,
+                        checkoutSession.customer as string
                     );
                 }
                 break;

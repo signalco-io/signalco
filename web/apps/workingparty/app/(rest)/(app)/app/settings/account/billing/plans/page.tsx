@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Tabs, TabsList, TabsTrigger } from '@signalco/ui-primitives/Tabs';
 import { Stack } from '@signalco/ui-primitives/Stack';
@@ -9,7 +8,7 @@ import { Row } from '@signalco/ui-primitives/Row';
 import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List } from '@signalco/ui-primitives/List';
 import { Container } from '@signalco/ui-primitives/Container';
-import { Button } from '@signalco/ui-primitives/Button';
+import { Chip } from '@signalco/ui-primitives/Chip';
 import { showNotification } from '@signalco/ui-notifications';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Loadable } from '@signalco/ui/Loadable';
@@ -86,7 +85,10 @@ export default function SettingsAccountBillingPlansPage() {
                                             onSelected={setSelectedPlanId}
                                             label={(
                                                 <Row spacing={1} justifyContent="space-between">
-                                                    <Typography>{plan.name}</Typography>
+                                                    <Row spacing={1}>
+                                                        <Typography>{plan.name}</Typography>
+                                                        {activePlanId === plan.id && <Chip color="info">Current</Chip>}
+                                                    </Row>
                                                     <Typography>{plan.price} {plan.currency.toUpperCase()}</Typography>
                                                 </Row>
                                             )}>
