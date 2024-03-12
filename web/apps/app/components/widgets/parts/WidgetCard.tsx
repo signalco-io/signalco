@@ -2,7 +2,7 @@ import React, { CSSProperties, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
-import { Card, CardOverflow } from '@signalco/ui-primitives/Card';
+import { Card } from '@signalco/ui-primitives/Card';
 import { Button } from '@signalco/ui-primitives/Button';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
 import { ErrorBoundary } from '@signalco/ui/ErrorBoundary';
@@ -14,9 +14,9 @@ const WidgetConfiguration = dynamic(() => import('./WidgetConfiguration'));
 interface IWidgetCardProps {
     children: JSX.Element,
     isEditMode?: boolean
-    config: object,
+    config: Record<string, unknown>,
     options?: IWidgetConfigurationOption<unknown>[],
-    onConfigured?: (config: object) => void
+    onConfigured?: (config: Record<string, unknown>) => void
     onRemove?: () => void
 }
 
@@ -42,7 +42,7 @@ export default function WidgetCard(props: IWidgetCardProps) {
     const needsConfiguration = typeof options === 'undefined' || options == null || !IsConfigurationValid(config, options);
 
     const [isConfiguring, setIsConfiguring] = useState<boolean>(false);
-    const handleOnConfiguration = (newConfig: object) => {
+    const handleOnConfiguration = (newConfig: Record<string, unknown>) => {
         if (onConfigured) {
             onConfigured(newConfig);
         }
