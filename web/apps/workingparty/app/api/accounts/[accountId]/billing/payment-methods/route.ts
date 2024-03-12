@@ -14,6 +14,9 @@ export async function GET(_request: Request, { params }: { params: { accountId: 
             return new Response(null, { status: 404 });
 
         const account = await accountGet(accountId);
+        if (!account)
+            return new Response(null, { status: 404 });
+
         const info = await stripeCustomerPaymentMethods(account);
 
         return Response.json(info);

@@ -14,13 +14,18 @@ async function ensureStripeCustomer(account: DbAccount): Promise<string> {
     // Ensure customer still exists in Stripe and is not deleted
     if (account.stripeCustomerId && account.stripeCustomerId.length > 0) {
         const existingCustomerId = await stripe.customers.retrieve(account.stripeCustomerId);
-        if (existingCustomerId && !existingCustomerId.deleted) return existingCustomerId.id;
+        if (existingCustomerId && !existingCustomerId.deleted)
+            return existingCustomerId.id;
     }
 
     // Try to find customer by email
-    const customers = await stripe.customers.list({ email: account.email });
-    if (customers.data.length > 0) {
-        const customer = customers.data[0];
+    const customers = await stripeListAll<Stripe.Customer>(params => stripe.customers.list({
+        email: account.email,
+        ...params
+    }));
+
+    if (customers.length > 0) {
+        const customer = customers[0];
         if (customer && !customer.deleted) {
             await accountAssignStripeCustomer(account.id, customer.id)
             return customer.id;
@@ -30,7 +35,7 @@ async function ensureStripeCustomer(account: DbAccount): Promise<string> {
     // Create a new customer in Stripe
     const newCustomer = await stripe.customers.create({
         email: account.email,
-        name: account.name,
+        name: account.name
     });
     await accountAssignStripeCustomer(account.id, newCustomer.id);
     return newCustomer.id;
@@ -46,7 +51,7 @@ export async function stripeCheckout(
             billing_address_collection: 'required',
             customer,
             customer_update: {
-                address: 'auto'
+                address: 'auto',
             },
             line_items: [
                 {
@@ -107,14 +112,32 @@ export async function stripeCustomerBillingInfo(account: DbAccount) {
     }
 }
 
+async function stripeListAll<T extends { id: string }>(fetchMethod: (params: Stripe.PaginationParams) => Promise<Stripe.ApiList<T>>) {
+    const data: T[] = [];
+    let hasMore = true;
+    while (hasMore) {
+        const page = await fetchMethod({
+            starting_after: data[data.length - 1]?.id
+        });
+        data.push(...page.data);
+        hasMore = page.has_more;
+    }
+    return data;
+}
+
 export async function stripeCustomerPaymentMethods(account: DbAccount) {
     try {
         const customerId = await ensureStripeCustomer(account);
         const stripeCustomer = await stripe.customers.retrieve(customerId);
         if (stripeCustomer.deleted)
             throw new Error('Customer not found');
-        const paymentMethods = await stripe.customers.listPaymentMethods(customerId);
-        return paymentMethods.data.map((pm) => {
+
+        const paymentMethods = await stripeListAll<Stripe.PaymentMethod>(params => stripe.paymentMethods.list({
+            customer: customerId,
+            ...params
+        }));
+
+        return paymentMethods.map((pm) => {
             return {
                 id: pm.id,
                 brand: pm.card?.brand,
