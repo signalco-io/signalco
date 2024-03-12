@@ -10,7 +10,7 @@ import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Loadable } from '@signalco/ui/Loadable';
 import { ItemsShowMore } from '@signalco/ui/FilterList';
 import { camelToSentenceCase, orderBy } from '@signalco/js';
-import { RoadmapItem, RoadmapItemStatus } from '../../api/github/[owner]/[repo]/issues/route';
+import { RoadmapItem as RoadmapItemModel, RoadmapItemStatus } from '../../api/github/[owner]/[repo]/issues/route';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 
 const statusOrderedList: RoadmapItemStatus[] = ['inProgress', 'inQueue', 'planned', 'triage', 'completed'];
@@ -42,7 +42,7 @@ function VoteButton({ votes, readonly, size = 'md' }: { votes?: number | undefin
     );
 }
 
-function RoadmapItem({ item }: { item: RoadmapItem }) {
+function RoadmapItem({ item }: { item: RoadmapItemModel }) {
     return (
         <div key={item.title} className="flex h-full items-center gap-2">
             <VoteButton votes={item.votes} readonly={true} size="sm" />
@@ -55,7 +55,7 @@ function RoadmapItem({ item }: { item: RoadmapItem }) {
     );
 }
 
-export default function Roadmap({ items, error, isLoading }: { items: RoadmapItem[] | undefined, error?: string | undefined, isLoading?: boolean | undefined }) {
+export default function Roadmap({ items, error, isLoading }: { items: RoadmapItemModel[] | undefined, error?: string | undefined, isLoading?: boolean | undefined }) {
     return (
         <Container maxWidth="sm">
             <Stack spacing={4}>
@@ -70,7 +70,7 @@ export default function Roadmap({ items, error, isLoading }: { items: RoadmapIte
                                     itemsWrapper={({ children }: PropsWithChildren) => <Stack spacing={1}>{children}</Stack>}
                                     loadingLabel={'Loading roadmap'}
                                     noItemsPlaceholder={'Empty at the moment'}>
-                                    {orderBy(items?.filter(item => item.status === status) ?? [], (a: RoadmapItem, b: RoadmapItem) => (b.votes ?? 0) - (a.votes ?? 0)).map((item: RoadmapItem) => (
+                                    {orderBy(items?.filter(item => item.status === status) ?? [], (a: RoadmapItemModel, b: RoadmapItemModel) => (b.votes ?? 0) - (a.votes ?? 0)).map((item: RoadmapItemModel) => (
                                         <RoadmapItem key={item.title} item={item} />
                                     ))}
                                 </ItemsShowMore>
