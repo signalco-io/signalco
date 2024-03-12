@@ -5,7 +5,7 @@ import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
 import { GeneralFormProvider } from '@signalco/ui-forms/GeneralFormProvider';
 import { CopyToClipboardInput } from '@signalco/ui/CopyToClipboardInput';
-import { noError, submitForm, resetFields } from '@enterwell/react-form-validation';
+import { noError, submitForm, resetFields, Fields } from '@enterwell/react-form-validation';
 import { FormBuilder, useFormField } from '@enterwell/react-form-builder';
 import { useCreateAuthPat } from '../../../src/hooks/signalco/pats/useCreateAuthPat';
 
@@ -21,7 +21,7 @@ export function CreateAuthPatButton() {
 
     const handleOpen = () => {
         setPat(undefined);
-        resetFields(form);
+        resetFields(form as unknown as Fields);
         setOpen(true);
     }
 
@@ -61,7 +61,7 @@ export function CreateAuthPatButton() {
                         <GeneralFormProvider>
                             <FormBuilder form={form} onSubmit={handleCreate} />
                         </GeneralFormProvider>
-                        <Button onClick={() => submitForm(form, handleCreate)}>Create</Button>
+                        <Button onClick={() => submitForm(form as unknown as Fields, handleCreate)}>Create</Button>
                     </>
                 )}
             </Stack>

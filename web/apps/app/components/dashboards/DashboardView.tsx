@@ -54,7 +54,7 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
         }
     }
 
-    function handleSetWidgetConfig(widgetId: string, config: object | undefined) {
+    function handleSetWidgetConfig(widgetId: string, config: Record<string, unknown> | undefined) {
         const widget = dashboard.widgets.find(w => w.id === widgetId);
         if (widget) {
             widget.config = config;
