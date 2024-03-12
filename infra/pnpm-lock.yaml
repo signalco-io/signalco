@@ -27,8 +27,8 @@ importers:
         specifier: 6.25.0
         version: 6.25.0
       '@pulumi/azure-native':
-        specifier: 2.30.0
-        version: 2.30.0
+        specifier: 2.32.0
+        version: 2.32.0
       '@pulumi/cloudflare':
         specifier: 5.22.0
         version: 5.22.0
@@ -91,8 +91,8 @@ importers:
         specifier: 6.25.0
         version: 6.25.0
       '@pulumi/azure-native':
-        specifier: 2.30.0
-        version: 2.30.0
+        specifier: 2.32.0
+        version: 2.32.0
       '@pulumi/cloudflare':
         specifier: 5.22.0
         version: 5.22.0
@@ -155,8 +155,8 @@ importers:
         specifier: 6.25.0
         version: 6.25.0
       '@pulumi/azure-native':
-        specifier: 2.30.0
-        version: 2.30.0
+        specifier: 2.32.0
+        version: 2.32.0
       '@pulumi/cloudflare':
         specifier: 5.22.0
         version: 5.22.0
@@ -246,8 +246,8 @@ importers:
         specifier: 6.25.0
         version: 6.25.0
       '@pulumi/azure-native':
-        specifier: 2.30.0
-        version: 2.30.0
+        specifier: 2.32.0
+        version: 2.32.0
       '@pulumi/cloudflare':
         specifier: 5.22.0
         version: 5.22.0
@@ -1043,8 +1043,8 @@ packages:
       - supports-color
     dev: false
 
-  /@pulumi/azure-native@2.30.0:
-    resolution: {integrity: sha512-hkWrsr0nd+ArmZ0mNEUUUsFq9tFud9qoWVYPreSfJlgm0tAPUO8DILfids7RgP5M0Bi3lDK/6PJxsBTb+Xdepw==}
+  /@pulumi/azure-native@2.32.0:
+    resolution: {integrity: sha512-wyDPlIMA98knMubogRWTWvQ+1WHMu3JXVMDRY30cNs+EKYEBfVA9UJIntyllhJqrH3Ug81Ri5hDI3buqFVhRUw==}
     dependencies:
       '@pulumi/pulumi': 3.109.0
     transitivePeerDependencies:
