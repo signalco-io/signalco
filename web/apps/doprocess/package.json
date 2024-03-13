@@ -80,7 +80,7 @@
     "next-sitemap": "4.2.3",
     "postcss": "8.4.35",
     "rimraf": "5.0.5",
-    "sass": "1.71.1",
+    "sass": "1.72.0",
     "typescript": "5.4.2"
   },
   "nextBundleAnalysis": {
