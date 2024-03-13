@@ -8,7 +8,7 @@ export async function openAiCreateRun(threadId: string, assistantId: string) {
 
 export async function openAiWaitForRunCompletion(threadId: string, runId: string) {
     const openai = openAiClient();
-    const maxDurationMs = 20000;
+    const maxDurationMs = 45000;
     const delayMs = 1000;
     let retries = 0;
     let run = await openai.beta.threads.runs.retrieve(threadId, runId);
