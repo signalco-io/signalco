@@ -17,7 +17,7 @@
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "typescript": "5.4.2",
-        "@types/react": "18.2.65"
+        "@types/react": "18.2.66"
     },
     "peerDependencies": {
         "react": "18.2.0",
