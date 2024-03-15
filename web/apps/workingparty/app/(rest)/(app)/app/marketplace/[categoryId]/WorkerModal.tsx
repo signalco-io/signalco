@@ -12,9 +12,9 @@ import { CardTitle } from '@signalco/ui-primitives/Card';
 import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { initials } from '@signalco/js';
-import { KnownPages } from '../../../../../src/knownPages';
-import { useWorkerCreateFromMarketplace } from '../../../../../src/hooks/data/workers/useWorkerCreateFromMarketplace';
-import { marketplaceWorkers } from '../../../../../src/data/markerplaceWorkers';
+import { KnownPages } from '../../../../../../src/knownPages';
+import { useWorkerCreateFromMarketplace } from '../../../../../../src/hooks/data/workers/useWorkerCreateFromMarketplace';
+import { marketplaceWorkers } from '../../../../../../src/data/markerplaceWorkers';
 import { markeplaceCategoriesFlat } from './markeplaceCategoriesFlat';
 
 export function WorkerModal({

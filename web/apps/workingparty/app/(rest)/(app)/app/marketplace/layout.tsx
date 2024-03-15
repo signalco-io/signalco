@@ -1,20 +1,20 @@
 'use client';
 
 import { Fragment, PropsWithChildren } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List, ListHeader } from '@signalco/ui-primitives/List';
 import { AI, Store } from '@signalco/ui-icons';
 import { SplitView } from '@signalco/ui/SplitView';
-import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { KnownPages } from '../../../../../src/knownPages';
 import { AppSidebar } from '../../../../../src/components/AppSidebar';
-import { marketplaceCategories } from './marketplaceCategories';
+import { marketplaceCategories } from './[categoryId]/marketplaceCategories';
 
 export default function AppMarketplaceLayout({ children }: PropsWithChildren) {
     const router = useRouter();
-    const [selectedCategory, setSelectedCategory] = useSearchParam('category', marketplaceCategories[0]?.id);
+    const pathname = usePathname();
+    const selectedCategoryId = pathname.split('/')[3];
 
     return (
         <SplitView>
@@ -43,8 +43,8 @@ export default function AppMarketplaceLayout({ children }: PropsWithChildren) {
                                     key={category.name}
                                     label={category.name}
                                     nodeId={category.id}
-                                    selected={category.id === selectedCategory}
-                                    onSelected={(nodeId: string) => setSelectedCategory(nodeId)}
+                                    selected={category.id === selectedCategoryId}
+                                    onSelected={(nodeId: string) => router.push(KnownPages.AppMarketplaceCategory(nodeId))}
                                 />
                             ) : (
                                 <Typography level="body3" uppercase bold className="py-4">{category.name}</Typography>
@@ -56,8 +56,8 @@ export default function AppMarketplaceLayout({ children }: PropsWithChildren) {
                                             key={subcategory.name}
                                             label={subcategory.name}
                                             nodeId={subcategory.id}
-                                            selected={subcategory.id === selectedCategory}
-                                            onSelected={(nodeId: string) => setSelectedCategory(nodeId)}
+                                            selected={subcategory.id === selectedCategoryId}
+                                            onSelected={(nodeId: string) => router.push(KnownPages.AppMarketplaceCategory(nodeId))}
                                         />
                                     ))}
                                 </List>

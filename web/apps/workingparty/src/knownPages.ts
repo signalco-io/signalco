@@ -8,6 +8,7 @@ export const KnownPages = {
 
     App: '/app',
     AppMarketplace: '/app/marketplace',
+    AppMarketplaceCategory: (categoryId: string) => `/app/marketplace/${categoryId}`,
     AppWorkers: '/app/workers',
     AppWorker: (id: string) => `/app/workers/${id}`,
     AppWorkerThread: (workerid: string, threadid: string) => `/app/workers/${workerid}/threads/${threadid}`,
