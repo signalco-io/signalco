@@ -319,6 +319,9 @@ importers:
       '@infra/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      '@infra/pulumi':
+        specifier: workspace:*
+        version: 'link:'
       '@infra/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config

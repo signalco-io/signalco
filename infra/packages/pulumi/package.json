@@ -29,6 +29,7 @@
     "devDependencies": {
         "@infra/typescript-config": "workspace:*",
         "@infra/eslint-config": "workspace:*",
+        "@infra/pulumi": "workspace:*",
         "@types/node": "20.11.27",
         "@typescript-eslint/eslint-plugin": "7.2.0",
         "@typescript-eslint/parser": "7.2.0",

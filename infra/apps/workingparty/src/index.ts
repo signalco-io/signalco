@@ -5,7 +5,8 @@ import { DatabaseAccountOfferType } from '@pulumi/azure-native/documentdb/index.
 import { nextJsApp } from '@infra/pulumi/vercel';
 import { dnsRecord } from '@infra/pulumi/cloudflare';
 import { ProjectDomain } from '@pulumiverse/vercel';
-import { CommunicationService, EmailService, Domain, DomainManagement, UserEngagementTracking, SenderUsername, listCommunicationServiceKeysOutput } from '@pulumi/azure-native/communication/index.js';
+import { CommunicationService, EmailService, Domain, DomainManagement, UserEngagementTracking, SenderUsername } from '@pulumi/azure-native/communication/index.js';
+import { createStorageAccount } from '@infra/pulumi/azure';
 
 const up = async () => {
     const stack = getStack();
@@ -99,6 +100,14 @@ const up = async () => {
             },
         }),
     );
+
+    // Create storage and queues
+    const storage = createStorageAccount(resourceGroup, 'wpstorage', false);
+    const storageQueue = new azure_native.storage.Queue('wp-email-queue', {
+        accountName: storage.storageAccount.name,
+        resourceGroupName: resourceGroup.name,
+        queueName: 'email-queue',
+    });
 
     // Create ACS
     const aes = new EmailService('wp-azure-email-service', {
