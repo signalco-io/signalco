@@ -1190,8 +1190,8 @@ importers:
         specifier: 0.5.1
         version: 0.5.1
       '@types/cobe':
-        specifier: 0.4.3
-        version: 0.4.3
+        specifier: 0.5.0
+        version: 0.5.0
       '@types/color':
         specifier: 3.0.6
         version: 3.0.6
@@ -7586,10 +7586,11 @@ packages:
     resolution: {integrity: sha512-ZYbcE2x7yrvNFJiU7xJGrpF/ihpkM7zKgw8bha3LNJSesvTtUNxbpzaT7WXBIryf6jovisrxTBvymxMeLLj1Mg==}
     dev: false
 
-  /@types/cobe@0.4.3:
-    resolution: {integrity: sha512-SSnfn0SewjuqYxZOI9Wwu4kIilmdD97jgXCWrdUmBQ0gzMbguA5eG9fM+h8i7g0bP3QozHqtCQIB14gSJlrViQ==}
+  /@types/cobe@0.5.0:
+    resolution: {integrity: sha512-fMj4nGEvJplXrft32EHLMDwWHMCaIH6nTY0nme3XZzudklUSbAaEt7fuQ30R9FIqDIUOWHbmzEbXeCxKFUGarA==}
+    deprecated: This is a stub types definition. cobe provides its own type definitions, so you do not need this installed.
     dependencies:
-      phenomenon: 1.6.0
+      cobe: 0.6.3
     dev: true
 
   /@types/color-convert@2.0.3:
@@ -9507,7 +9508,6 @@ packages:
     resolution: {integrity: sha512-WHr7X4o1ym94GZ96h7b1pNemZJacbOzd02dZtnVwuC4oWBaLg96PBmp2rIS1SAhUDhhC/QyS9WEqkpZIs/ZBTg==}
     dependencies:
       phenomenon: 1.6.0
-    dev: false
 
   /collapse-white-space@2.1.0:
     resolution: {integrity: sha512-loKTxY1zCOuG4j9f6EPnuyyYkf58RnhhWTvRoZEokgB+WbdXehfjFviyOVYkqzEWz1Q5kRiZdBYS5SwxbQYwzw==}
