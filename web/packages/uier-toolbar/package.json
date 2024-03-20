@@ -30,7 +30,7 @@
         "@types/node": "20.11.30",
         "autoprefixer": "10.4.18",
         "postcss": "8.4.37",
-        "postcss-preset-env": "9.5.1",
+        "postcss-preset-env": "9.5.2",
         "@tanstack/react-query": "5.28.4",
         "react": "18.2.0",
         "react-dom": "18.2.0",
