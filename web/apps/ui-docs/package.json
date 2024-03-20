@@ -13,7 +13,7 @@
     "node": "20.x"
   },
   "devDependencies": {
-    "@babel/core": "7.24.0",
+    "@babel/core": "7.24.1",
     "@signalco/tsconfig": "workspace:*",
     "@storybook/addon-essentials": "8.0.0",
     "@storybook/addon-links": "8.0.0",
@@ -26,7 +26,7 @@
     "@types/react-dom": "18.2.22",
     "autoprefixer": "10.4.18",
     "css-loader": "6.10.0",
-    "postcss": "8.4.35",
+    "postcss": "8.4.37",
     "postcss-loader": "8.1.1",
     "rimraf": "5.0.5",
     "sass": "1.72.0",

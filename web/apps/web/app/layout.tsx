@@ -1,4 +1,3 @@
-import Script from 'next/script';
 import { Inter } from 'next/font/google';
 import { Viewport, type Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
@@ -17,7 +16,6 @@ export default function RootLayout({ children, }: {
             <body className={`${inter.variable} font-sans`}>
                 {children}
                 <Analytics />
-                <Script src="/clarity.js" />
             </body>
         </html>
     );
