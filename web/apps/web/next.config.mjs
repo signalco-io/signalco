@@ -30,7 +30,6 @@ const nextConfig = {
                     knownSecureHeadersExternalUrls.hcaptcha,
                     knownSecureHeadersExternalUrls.github,
                     knownSecureHeadersExternalUrls.google,
-                    knownSecureHeadersExternalUrls.clarity,
                     knownSecureHeadersExternalUrls.vercel,
                     knownSecureHeadersExternalUrls.checkly
                 ].filter(Boolean)

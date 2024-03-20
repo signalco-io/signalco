@@ -45,7 +45,6 @@ const nextConfig = {
                     knownSecureHeadersExternalUrls.mapbox,
                     knownSecureHeadersExternalUrls.azureSignalR,
                     knownSecureHeadersExternalUrls.polygon,
-                    knownSecureHeadersExternalUrls.clarity,
                     knownSecureHeadersExternalUrls.vercel
                 ]
             ))
