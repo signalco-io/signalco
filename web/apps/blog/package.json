@@ -12,7 +12,7 @@
         "dev": "next -p 3002 --turbo",
         "build": "next build",
         "build:analyze": "cross-env ANALYZE=true pnpm build",
-        "postbuild": "next-sitemap --config next-sitemap.config.js",
+        "postbuild": "next-sitemap --config next-sitemap.config.cjs",
         "start": "next start -p 3002",
         "lint": "next lint",
         "test": "playwright test"
