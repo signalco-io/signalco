@@ -39,8 +39,8 @@ importers:
         specifier: 4.5.1
         version: 4.5.1
       '@pulumi/pulumi':
-        specifier: 3.109.0
-        version: 3.109.0
+        specifier: 3.111.1
+        version: 3.111.1
       '@pulumiverse/vercel':
         specifier: 1.3.0
         version: 1.3.0
@@ -49,8 +49,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.11.27
-        version: 20.11.27
+        specifier: 20.11.28
+        version: 20.11.28
       '@typescript-eslint/eslint-plugin':
         specifier: 7.2.0
         version: 7.2.0(@typescript-eslint/parser@7.2.0)(eslint@8.57.0)(typescript@5.4.2)
@@ -103,8 +103,8 @@ importers:
         specifier: 4.5.1
         version: 4.5.1
       '@pulumi/pulumi':
-        specifier: 3.109.0
-        version: 3.109.0
+        specifier: 3.111.1
+        version: 3.111.1
       '@pulumiverse/vercel':
         specifier: 1.3.0
         version: 1.3.0
@@ -113,8 +113,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.11.27
-        version: 20.11.27
+        specifier: 20.11.28
+        version: 20.11.28
       '@typescript-eslint/eslint-plugin':
         specifier: 7.2.0
         version: 7.2.0(@typescript-eslint/parser@7.2.0)(eslint@8.57.0)(typescript@5.4.2)
@@ -167,8 +167,8 @@ importers:
         specifier: 4.5.1
         version: 4.5.1
       '@pulumi/pulumi':
-        specifier: 3.109.0
-        version: 3.109.0
+        specifier: 3.111.1
+        version: 3.111.1
       '@pulumiverse/vercel':
         specifier: 1.3.0
         version: 1.3.0
@@ -177,8 +177,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.11.27
-        version: 20.11.27
+        specifier: 20.11.28
+        version: 20.11.28
       '@typescript-eslint/eslint-plugin':
         specifier: 7.2.0
         version: 7.2.0(@typescript-eslint/parser@7.2.0)(eslint@8.57.0)(typescript@5.4.2)
@@ -310,8 +310,8 @@ importers:
         specifier: 4.5.1
         version: 4.5.1
       '@pulumi/pulumi':
-        specifier: 3.109.0
-        version: 3.109.0
+        specifier: 3.111.1
+        version: 3.111.1
       '@pulumiverse/vercel':
         specifier: 1.3.0
         version: 1.3.0
@@ -326,8 +326,8 @@ importers:
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':
-        specifier: 20.11.27
-        version: 20.11.27
+        specifier: 20.11.28
+        version: 20.11.28
       '@typescript-eslint/eslint-plugin':
         specifier: 7.2.0
         version: 7.2.0(@typescript-eslint/parser@7.2.0)(eslint@8.57.0)(typescript@5.4.2)
@@ -369,7 +369,7 @@ packages:
     resolution: {integrity: sha512-YPNYtwEnKu23VDHNFu91xd/Ueu5zYONHcYwKDA5qTvtgZZ1nzrvPJgrO15KF0fLRVlGo7yckirDS26GpvBTe6w==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.109.0
+      '@pulumi/pulumi': 3.111.1
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -639,7 +639,7 @@ packages:
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
     dev: false
 
   /@grpc/grpc-js@1.9.14:
@@ -647,7 +647,7 @@ packages:
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
     dev: false
 
   /@grpc/proto-loader@0.7.10:
@@ -1112,7 +1112,7 @@ packages:
   /@pulumi/aws@6.25.1:
     resolution: {integrity: sha512-LHMD6+sU5nYx56rSB+eDMs4nDqHeJ44BvS7WSW0xh3PfD8uvGrklVATOsL7n76/ng5EXtlvhwoQ1DyHL0dGQDQ==}
     dependencies:
-      '@pulumi/pulumi': 3.109.0
+      '@pulumi/pulumi': 3.111.1
       builtin-modules: 3.0.0
       mime: 2.6.0
       resolve: 1.22.8
@@ -1124,7 +1124,7 @@ packages:
   /@pulumi/azure-native@2.29.0:
     resolution: {integrity: sha512-/ifV2zw09cofp27seZoUlOcySjATpVYKys7pCKBn372NhKpSe2aLKZJzwSlGZDjzjPimaSMk3NCQkqB6+4I3VQ==}
     dependencies:
-      '@pulumi/pulumi': 3.109.0
+      '@pulumi/pulumi': 3.111.1
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -1133,7 +1133,7 @@ packages:
   /@pulumi/azure-native@2.32.0:
     resolution: {integrity: sha512-wyDPlIMA98knMubogRWTWvQ+1WHMu3JXVMDRY30cNs+EKYEBfVA9UJIntyllhJqrH3Ug81Ri5hDI3buqFVhRUw==}
     dependencies:
-      '@pulumi/pulumi': 3.109.0
+      '@pulumi/pulumi': 3.111.1
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -1142,7 +1142,7 @@ packages:
   /@pulumi/cloudflare@5.21.0:
     resolution: {integrity: sha512-ZF0nRBjj5PFVKeWm70WiiVuT17Uu06j3mBUqQMQ2TSG3WnYgRmF/AHKMaly5t7njRP6c0M44ugpRkIBt4yQqBA==}
     dependencies:
-      '@pulumi/pulumi': 3.109.0
+      '@pulumi/pulumi': 3.111.1
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -1151,7 +1151,7 @@ packages:
   /@pulumi/cloudflare@5.22.0:
     resolution: {integrity: sha512-y6cXQRzAhjx2kRdiIDtvKQnonq/Uif73x3LgjrwJHdvuDdIfNVD4Q0N0clGgwchSXcM3NXSbyb7tBbsysWhVsA==}
     dependencies:
-      '@pulumi/pulumi': 3.109.0
+      '@pulumi/pulumi': 3.111.1
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -1161,7 +1161,7 @@ packages:
     resolution: {integrity: sha512-9RaGDiy8jFCiaarj4EOrMW/fVCM/AgBigzwM6CKzlR49x8UFiRDmKrXfEVHb8r2P9IpC4IaAZf5VbNNAHwN/rA==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.109.0
+      '@pulumi/pulumi': 3.111.1
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -1170,7 +1170,7 @@ packages:
   /@pulumi/docker@4.5.1:
     resolution: {integrity: sha512-2BTFycFLwSpHGQ4IFTsUHl8H5w81AgkrMHSLUQ8Zu6HBDgGhB5up6YsxVqLeaUeWAedEUrrSCY3xTCNbP4a0ag==}
     dependencies:
-      '@pulumi/pulumi': 3.109.0
+      '@pulumi/pulumi': 3.111.1
       semver: 5.7.2
     transitivePeerDependencies:
       - bluebird
@@ -1215,8 +1215,8 @@ packages:
       - supports-color
     dev: false
 
-  /@pulumi/pulumi@3.109.0:
-    resolution: {integrity: sha512-occSKeffShJJXO0dNwwGRf3MAX9pFhBIK/2vmsOLgQr/12lG9y2d8hyW8FZ3i4mhOSKiyamDnH+1+vPJ2Hk+yQ==}
+  /@pulumi/pulumi@3.111.1:
+    resolution: {integrity: sha512-dWDePVPoFPOlX1Wv8zoLmywAq+/iD7jkis/V6xhuTQ7vYbkMxQhDHCSuSn3cx1EaqqSzcBe8AqEbg/IcuN68jA==}
     engines: {node: '>=8.13.0 || >=10.10.0'}
     dependencies:
       '@grpc/grpc-js': 1.10.1
@@ -1235,13 +1235,14 @@ packages:
       '@types/semver': 7.5.6
       '@types/tmp': 0.2.6
       execa: 5.1.1
-      glob: 8.1.0
+      fdir: 6.1.1(picomatch@3.0.1)
       google-protobuf: 3.21.2
       got: 11.8.6
       ini: 2.0.0
       js-yaml: 3.14.1
       minimist: 1.2.8
       normalize-package-data: 6.0.0
+      picomatch: 3.0.1
       pkg-dir: 7.0.0
       require-from-string: 2.0.2
       semver: 7.5.4
@@ -1262,7 +1263,7 @@ packages:
   /@pulumiverse/vercel@1.1.1:
     resolution: {integrity: sha512-jVRCc2+LMkeJsntsBIV54GfMln/ecZEjRnmMV2vN3MGkybsUrBVHla4PiZHbZ8DPYX0FmyiTppMNUa0IDgH+4A==}
     dependencies:
-      '@pulumi/pulumi': 3.109.0
+      '@pulumi/pulumi': 3.111.1
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -1271,7 +1272,7 @@ packages:
   /@pulumiverse/vercel@1.3.0:
     resolution: {integrity: sha512-01MbJ5skedIhZCxL+YHlZeNtkY2ibMrO48Ilgum7x65Uk4xuOLRT9/0zszBPYASJAkE7P+NVOS/pMIROdSNgjA==}
     dependencies:
-      '@pulumi/pulumi': 3.109.0
+      '@pulumi/pulumi': 3.111.1
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -1459,7 +1460,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
       '@types/responselike': 1.0.3
     dev: false
 
@@ -1482,7 +1483,7 @@ packages:
   /@types/keyv@3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
     dev: false
 
   /@types/node@20.11.19:
@@ -1491,15 +1492,15 @@ packages:
       undici-types: 5.26.5
     dev: true
 
-  /@types/node@20.11.27:
-    resolution: {integrity: sha512-qyUZfMnCg1KEz57r7pzFtSGt49f6RPkPBis3Vo4PbS7roQEDn22hiHzl/Lo1q4i4hDEgBJmBF/NTNg2XR0HbFg==}
+  /@types/node@20.11.28:
+    resolution: {integrity: sha512-M/GPWVS2wLkSkNHVeLkrF2fD5Lx5UC4PxA0uZcKc6QqbIQUJyW1jVjueJYi1z8n0I5PxYrtpnPnWglE+y9A0KA==}
     dependencies:
       undici-types: 5.26.5
 
   /@types/responselike@1.0.3:
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
     dependencies:
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
     dev: false
 
   /@types/semver@7.5.6:
@@ -3102,6 +3103,17 @@ packages:
       reusify: 1.0.4
     dev: true
 
+  /fdir@6.1.1(picomatch@3.0.1):
+    resolution: {integrity: sha512-QfKBVg453Dyn3mr0Q0O+Tkr1r79lOTAKSi9f/Ot4+qVEwxWhav2Z+SudrG9vQjM2aYRMQQZ2/Q1zdA8ACM1pDg==}
+    peerDependencies:
+      picomatch: 3.x
+    peerDependenciesMeta:
+      picomatch:
+        optional: true
+    dependencies:
+      picomatch: 3.0.1
+    dev: false
+
   /file-entry-cache@6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -3294,17 +3306,6 @@ packages:
       minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
-
-  /glob@8.1.0:
-    resolution: {integrity: sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==}
-    engines: {node: '>=12'}
-    dependencies:
-      fs.realpath: 1.0.0
-      inflight: 1.0.6
-      inherits: 2.0.4
-      minimatch: 5.1.6
-      once: 1.4.0
-    dev: false
 
   /globals@13.24.0:
     resolution: {integrity: sha512-AhO5QUcj8llrbG09iWhPU2B204J1xnPeL8kQmVorSsy+Sjj1sk8gIyh6cUocGmH4L0UuhAJy+hJMRA4mgA4mFQ==}
@@ -3878,13 +3879,6 @@ packages:
     dependencies:
       brace-expansion: 1.1.11
 
-  /minimatch@5.1.6:
-    resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
-    engines: {node: '>=10'}
-    dependencies:
-      brace-expansion: 2.0.1
-    dev: false
-
   /minimatch@9.0.3:
     resolution: {integrity: sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -4354,6 +4348,11 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
+  /picomatch@3.0.1:
+    resolution: {integrity: sha512-I3EurrIQMlRc9IaAZnqRR044Phh2DXY+55o7uJ0V+hYZAcQYSuFWsc9q5PvyDHUSCe1Qxn/iBz+78s86zWnGag==}
+    engines: {node: '>=10'}
+    dev: false
+
   /pirates@4.0.6:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
@@ -4440,7 +4439,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
       long: 5.2.3
     dev: false
 
