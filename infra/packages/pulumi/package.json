@@ -38,7 +38,7 @@
         "eslint-plugin-n": "16.6.2",
         "eslint-plugin-n": "16.6.2",
         "eslint-plugin-promise": "6.1.1",
-        "typescript": "5.4.2"
+        "typescript": "5.4.3"
     },
     "dependencies": {
         "@checkly/pulumi": "1.1.4",
