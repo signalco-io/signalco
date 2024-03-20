@@ -1588,8 +1588,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       sonner:
-        specifier: 1.4.3
-        version: 1.4.3(react-dom@18.2.0)(react@18.2.0)
+        specifier: 1.4.32
+        version: 1.4.32(react-dom@18.2.0)(react@18.2.0)
       typescript:
         specifier: 5.4.2
         version: 5.4.2
@@ -17277,8 +17277,8 @@ packages:
       type-fest: 2.19.0
     dev: false
 
-  /sonner@1.4.3(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-SArYlHbkjqRuLiR0iGY2ZSr09oOrxw081ZZkQPfXrs8aZQLIBOLOdzTYxGJB5yIZ7qL56UEPmrX1YqbODwG0Lw==}
+  /sonner@1.4.32(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-MYdvJgx2wM8a7fnzZr7KWZJY2ukSoqh7fsshZYEVljTSuJKNesMgfQ95+kyduGh6t500wxvLm6jjffxB4M58ZA==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
