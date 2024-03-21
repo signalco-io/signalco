@@ -16,7 +16,7 @@ export function PaymentMethodInfo({ paymentMethod }: {
 }) {
     return (
         <Row spacing={2}>
-            <div className="flex aspect-video w-24 flex-col items-center justify-center rounded-sm bg-muted px-4 py-2 uppercase">
+            <div className="flex aspect-card w-20 flex-col items-center justify-center rounded-sm bg-muted px-4 py-2 uppercase">
                 {paymentMethod.displayBrand ?? 'card'}
             </div>
             <Stack>
