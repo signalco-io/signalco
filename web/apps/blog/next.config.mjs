@@ -29,7 +29,6 @@ const nextConfig = {
                 isDevelopment,
                 [
                     knownSecureHeadersExternalUrls.signalco,
-                    knownSecureHeadersExternalUrls.clarity,
                     knownSecureHeadersExternalUrls.vercel
                 ]
             ))

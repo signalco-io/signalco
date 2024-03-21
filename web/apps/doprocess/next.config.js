@@ -28,7 +28,6 @@ const nextConfig = {
                 isDevelopment,
                 [
                     knownSecureHeadersExternalUrls.github,
-                    knownSecureHeadersExternalUrls.clarity,
                     knownSecureHeadersExternalUrls.vercel,
                     knownSecureHeadersExternalUrls.clerk,
                     { scriptSrc: 'http://localhost:5500', styleSrc: 'http://localhost:5500' },

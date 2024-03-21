@@ -28,7 +28,6 @@ const nextConfig = {
                 isDevelopment,
                 [
                     knownSecureHeadersExternalUrls.github,
-                    knownSecureHeadersExternalUrls.clarity,
                     knownSecureHeadersExternalUrls.vercel
                 ]
             ))

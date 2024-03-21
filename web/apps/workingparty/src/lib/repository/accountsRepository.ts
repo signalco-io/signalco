@@ -3,7 +3,7 @@ import { PatchOperation } from '@azure/cosmos';
 import { stripe } from '../stripe/config';
 import { cosmosDataContainerAccounts, cosmosDataContainerSubscriptions, cosmosDataContainerUsage } from '../cosmosClient';
 import { workersGetAll } from './workersRepository';
-import { DbPlan, plansGet } from './plansRepository';
+import { DbPlan, plansGet, plansGetAll } from './plansRepository';
 
 type UsageScopesImmutable = 'workers';
 type UsageScopesMutable = 'messages' | 'oaigpt35tokens';
@@ -35,12 +35,12 @@ export type DbSubscription = {
     createdAt: number,
     deactivatedAt?: number
 
-    stripeSubscriptionId: string;
+    stripeSubscriptionId?: string;
 };
 
 export type SubscriptionCreate = {
     planId: string;
-    stripeSubscriptionId: string;
+    stripeSubscriptionId?: string;
 };
 
 export type DbUsage = {
@@ -75,6 +75,21 @@ export async function accountGetByStripeCustomerId(stripeCustomerId: string): Pr
     return accounts[0];
 }
 
+async function accountAssignTrialPlan(accountId: string) {
+    try {
+        const plans = await plansGetAll();
+        const trialPlan = plans.find(plan => plan.active && plan.period === 'one-time' && plan.name === 'Free');
+        if (!trialPlan) {
+            throw new Error('No trial plan available');
+        }
+        accountSubscriptionCreate(accountId, {
+            planId: trialPlan.id
+        });
+    } catch (error) {
+        console.error('Failed to assign trial plan', error);
+    }
+}
+
 export async function accountCreate({
     name,
     email
@@ -89,6 +104,7 @@ export async function accountCreate({
 
     const dbAccounts = cosmosDataContainerAccounts();
     await dbAccounts.items.create<DbAccount>(account);
+    await accountAssignTrialPlan(accountId);
 
     return accountId;
 }
@@ -157,7 +173,10 @@ async function accountCancelAllSubscriptions(accountId: string) {
     const activeSubscriptions = subscriptions.filter(s => !s.deactivatedAt || s.deactivatedAt > Date.now() / 1000);
     for (let i = 0; i < activeSubscriptions.length; i++) {
         const activeSubscription = activeSubscriptions[i];
-        if (!activeSubscription) continue;
+
+        // Skip if subscription is not created in Stripe
+        if (!activeSubscription?.stripeSubscriptionId) continue;
+
         try {
             await stripe.subscriptions.cancel(activeSubscription.stripeSubscriptionId, {
                 cancellation_details: {

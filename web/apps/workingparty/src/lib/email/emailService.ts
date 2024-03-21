@@ -38,7 +38,6 @@ export async function sendEmail({
             plainText: emailPlaintext
         }
     };
-    console.log('Sending email', email);
 
     // TODO: Save email to email queue with priority (get priority from props)
 

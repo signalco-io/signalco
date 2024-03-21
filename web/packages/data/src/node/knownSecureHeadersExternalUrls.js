@@ -30,10 +30,6 @@ export const knownSecureHeadersExternalUrls = {
         imgSrc: ['https://lh3.googleusercontent.com'],
         connectSrc: ['https://lh3.googleusercontent.com']
     },
-    clarity: {
-        scriptSrc: ['https://*.clarity.ms'],
-        connectSrc: ['https://*.clarity.ms']
-    },
     stripe: {
         scriptSrc: ['https://js.stripe.com'],
         frameSrc: ['https://js.stripe.com'],
