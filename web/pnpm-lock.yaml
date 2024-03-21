@@ -99,8 +99,8 @@ importers:
         specifier: 6.126.0
         version: 6.126.0
       autoprefixer:
-        specifier: 10.4.18
-        version: 10.4.18(postcss@8.4.38)
+        specifier: 10.4.19
+        version: 10.4.19(postcss@8.4.38)
       classix:
         specifier: 2.1.36
         version: 2.1.36
@@ -307,8 +307,8 @@ importers:
         specifier: 1.2.2
         version: 1.2.2(next@14.1.4)(react@18.2.0)
       autoprefixer:
-        specifier: 10.4.18
-        version: 10.4.18(postcss@8.4.38)
+        specifier: 10.4.19
+        version: 10.4.19(postcss@8.4.38)
       classix:
         specifier: 2.1.36
         version: 2.1.36
@@ -894,8 +894,8 @@ importers:
         specifier: 18.2.22
         version: 18.2.22
       autoprefixer:
-        specifier: 10.4.18
-        version: 10.4.18(postcss@8.4.38)
+        specifier: 10.4.19
+        version: 10.4.19(postcss@8.4.38)
       css-loader:
         specifier: 6.10.0
         version: 6.10.0(webpack@5.91.0)
@@ -1126,8 +1126,8 @@ importers:
         specifier: 1.2.2
         version: 1.2.2(next@14.1.4)(react@18.2.0)
       autoprefixer:
-        specifier: 10.4.18
-        version: 10.4.18(postcss@8.4.38)
+        specifier: 10.4.19
+        version: 10.4.19(postcss@8.4.38)
       classix:
         specifier: 2.1.36
         version: 2.1.36
@@ -1468,8 +1468,8 @@ importers:
         specifier: 4.1.7
         version: 4.1.7
       autoprefixer:
-        specifier: 10.4.18
-        version: 10.4.18(postcss@8.4.38)
+        specifier: 10.4.19
+        version: 10.4.19(postcss@8.4.38)
       classix:
         specifier: 2.1.36
         version: 2.1.36
@@ -1645,8 +1645,8 @@ importers:
         specifier: 4.1.7
         version: 4.1.7
       autoprefixer:
-        specifier: 10.4.18
-        version: 10.4.18(postcss@8.4.38)
+        specifier: 10.4.19
+        version: 10.4.19(postcss@8.4.38)
       classix:
         specifier: 2.1.36
         version: 2.1.36
@@ -1720,8 +1720,8 @@ importers:
         specifier: 18.2.22
         version: 18.2.22
       autoprefixer:
-        specifier: 10.4.18
-        version: 10.4.18(postcss@8.4.38)
+        specifier: 10.4.19
+        version: 10.4.19(postcss@8.4.38)
       postcss:
         specifier: 8.4.38
         version: 8.4.38
@@ -8837,15 +8837,15 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
-  /autoprefixer@10.4.18(postcss@8.4.38):
-    resolution: {integrity: sha512-1DKbDfsr6KUElM6wg+0zRNkB/Q7WcKYAaK+pzXn+Xqmszm/5Xa9coeNdtP88Vi+dPzZnMjhge8GIV49ZQkDa+g==}
+  /autoprefixer@10.4.19(postcss@8.4.38):
+    resolution: {integrity: sha512-BaENR2+zBZ8xXhM4pUaKUxlVdxZ0EZhjvbopwnXmxRUfqDmwSpC2lAi/QXvx7NRdPCo1WKEcEF6mV64si1z4Ew==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.23.0
-      caniuse-lite: 1.0.30001591
+      caniuse-lite: 1.0.30001599
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -9236,6 +9236,9 @@ packages:
 
   /caniuse-lite@1.0.30001591:
     resolution: {integrity: sha512-PCzRMei/vXjJyL5mJtzNiUCKP59dm8Apqc3PH8gJkMnMXZGox93RbE76jHsmLwmIo6/3nsYIpJtx0O7u5PqFuQ==}
+
+  /caniuse-lite@1.0.30001599:
+    resolution: {integrity: sha512-LRAQHZ4yT1+f9LemSMeqdMpMxZcc4RMWdj4tiFe3G8tNkWK+E58g+/tzotb5cU6TbcVJLr4fySiAW7XmxQvZQA==}
 
   /case-anything@2.1.13:
     resolution: {integrity: sha512-zlOQ80VrQ2Ue+ymH5OuM/DlDq64mEm+B9UTdHULv5osUMD6HalNTblf2b1u/m6QecjsnOkBpqVZ+XPwIVsy7Ng==}
@@ -15622,7 +15625,7 @@ packages:
       '@csstools/postcss-text-decoration-shorthand': 3.0.4(postcss@8.4.38)
       '@csstools/postcss-trigonometric-functions': 3.0.6(postcss@8.4.38)
       '@csstools/postcss-unset-value': 3.0.1(postcss@8.4.38)
-      autoprefixer: 10.4.18(postcss@8.4.38)
+      autoprefixer: 10.4.19(postcss@8.4.38)
       browserslist: 4.23.0
       css-blank-pseudo: 6.0.1(postcss@8.4.38)
       css-has-pseudo: 6.0.2(postcss@8.4.38)
