@@ -1549,8 +1549,8 @@ importers:
         specifier: 18.2.67
         version: 18.2.67
       lucide-react:
-        specifier: 0.361.0
-        version: 0.361.0(react@18.2.0)
+        specifier: 0.362.0
+        version: 0.362.0(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -13319,8 +13319,8 @@ packages:
       es5-ext: 0.10.62
     dev: true
 
-  /lucide-react@0.361.0(react@18.2.0):
-    resolution: {integrity: sha512-KCVhtRvHxHdxvTfqKKbl9piHS8nq4RNsb8GtFk025AF57mHjJ2oe2PqUe3ChaakHvonGyFlEczzu8GOjZlACsg==}
+  /lucide-react@0.362.0(react@18.2.0):
+    resolution: {integrity: sha512-0S+JudK0AD9vyB0zbu1K0aQsy8k9Wq2l03bio6wxqF2FhK2TSp/y+22HfMyv40EURifgxoSwdU8eIcOv0a8gBA==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
