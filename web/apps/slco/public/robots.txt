@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://slco.io
-
-# Sitemaps
-Sitemap: https://slco.io/sitemap.xml

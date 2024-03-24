@@ -30,10 +30,6 @@ export const knownSecureHeadersExternalUrls = {
         imgSrc: ['https://lh3.googleusercontent.com'],
         connectSrc: ['https://lh3.googleusercontent.com']
     },
-    clarity: {
-        scriptSrc: ['https://*.clarity.ms'],
-        connectSrc: ['https://*.clarity.ms']
-    },
     vercel: {
         imgSrc: ['https://vercel.com', 'https://vercel.live', 'https://sockjs-mt1.pusher.com', 'data: blob:'],
         scriptSrc: ['https://vercel.live', 'https://vitals.vercel-insights.com', 'https://*.vercel-scripts.com'],

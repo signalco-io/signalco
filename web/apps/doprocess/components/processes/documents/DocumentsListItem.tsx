@@ -1,7 +1,7 @@
 import { Row } from '@signalco/ui-primitives/Row';
 import { FileText, Navigate } from '@signalco/ui-icons';
+import { QueryListItem } from '@signalco/ui/QueryList';
 import { SharedWithIndicator } from '../../shared/SharedWithIndicator';
-import { ListItem } from '../../shared/ListItem';
 import { KnownPages } from '../../../src/knownPages';
 import { DocumentDto } from '../../../app/api/dtos/dtos';
 
@@ -11,7 +11,7 @@ export type DocumentsListItemProps = {
 
 export function DocumentsListItem({ document }: DocumentsListItemProps) {
     return (
-        <ListItem
+        <QueryListItem
             label={document.name}
             startDecorator={<FileText />}
             endDecorator={(

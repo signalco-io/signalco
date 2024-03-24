@@ -21,7 +21,7 @@ export type widgetType = 'unknown' | 'button' | 'state' | 'vacuum' | 'shades' | 
 export interface WidgetProps extends WidgetSpecifigProps {
     type: widgetType,
     onResize?: (rows: number, columns: number) => void,
-    setConfig: (config: object) => void,
+    setConfig: (config: Record<string, unknown>) => void,
     onRemove: () => void
 }
 
@@ -35,7 +35,7 @@ export interface WidgetSharedProps<TConfigurationProps> {
 export interface WidgetSpecifigProps {
     id: string,
     isEditMode: boolean,
-    config: object,
+    config: Record<string, unknown>,
 }
 
 function Widget(props: WidgetProps) {

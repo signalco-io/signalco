@@ -1,54 +1,52 @@
 {
-    "name": "@signalco/ui-docs",
-    "version": "0.0.0",
-    "homepage": "https://ui.signalco.io/",
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "build": "tsc && storybook build --quiet",
-        "dev": "storybook dev -p 6007 --no-open --quiet",
-        "clean": "rimraf node_modules/.cache/storybook"
-    },
-    "engines": {
-        "node": "20.x"
-    },
-    "devDependencies": {
-        "@babel/core": "7.23.9",
-        "@signalco/tsconfig": "workspace:*",
-        "@storybook/addon-essentials": "7.6.16",
-        "@storybook/addon-links": "7.6.16",
-        "@storybook/addon-styling-webpack": "0.0.6",
-        "@storybook/addon-themes": "7.6.16",
-        "@storybook/addons": "7.6.16",
-        "@storybook/manager-api": "7.6.16",
-        "@storybook/nextjs": "7.6.16",
-        "@storybook/react": "7.6.16",
-        "@storybook/theming": "7.6.16",
-        "@types/react": "18.2.55",
-        "@types/react-dom": "18.2.19",
-        "autoprefixer": "10.4.17",
-        "css-loader": "6.10.0",
-        "postcss": "8.4.35",
-        "postcss-loader": "8.1.0",
-        "rimraf": "5.0.5",
-        "sass": "1.71.0",
-        "sass-loader": "14.1.0",
-        "storybook": "7.6.16",
-        "storybook-addon-swc": "1.2.0",
-        "style-loader": "3.3.4",
-        "styled-jsx": "5.1.2",
-        "tailwindcss": "3.4.1",
-        "tailwindcss-animate": "1.0.7",
-        "typescript": "5.3.3",
-        "webpack": "5.90.2"
-    },
-    "dependencies": {
-        "@signalco/tailwindcss-config-signalco": "workspace:*",
-        "@signalco/ui": "workspace:*",
-        "@signalco/ui-primitives": "workspace:*",
-        "@signalco/ui-icons": "workspace:*",
-        "next": "14.1.0",
-        "react": "18.2.0",
-        "react-dom": "18.2.0"
-    }
+  "name": "@signalco/ui-docs",
+  "version": "0.0.0",
+  "homepage": "https://ui.signalco.io/",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc && storybook build --quiet",
+    "dev": "storybook dev -p 6007 --no-open --quiet",
+    "clean": "rimraf node_modules/.cache/storybook"
+  },
+  "engines": {
+    "node": "20.x"
+  },
+  "devDependencies": {
+    "@babel/core": "7.24.3",
+    "@signalco/tsconfig": "workspace:*",
+    "@storybook/addon-essentials": "8.0.4",
+    "@storybook/addon-links": "8.0.4",
+    "@storybook/addon-themes": "8.0.4",
+    "@storybook/manager-api": "8.0.4",
+    "@storybook/nextjs": "8.0.4",
+    "@storybook/react": "8.0.4",
+    "@storybook/theming": "8.0.4",
+    "@types/react": "18.2.69",
+    "@types/react-dom": "18.2.22",
+    "autoprefixer": "10.4.19",
+    "css-loader": "6.10.0",
+    "postcss": "8.4.38",
+    "postcss-loader": "8.1.1",
+    "rimraf": "5.0.5",
+    "sass": "1.72.0",
+    "sass-loader": "14.1.1",
+    "storybook": "8.0.4",
+    "storybook-addon-swc": "1.2.0",
+    "style-loader": "3.3.4",
+    "styled-jsx": "5.1.2",
+    "tailwindcss": "3.4.1",
+    "tailwindcss-animate": "1.0.7",
+    "typescript": "5.4.3",
+    "webpack": "5.91.0"
+  },
+  "dependencies": {
+    "@signalco/tailwindcss-config-signalco": "workspace:*",
+    "@signalco/ui": "workspace:*",
+    "@signalco/ui-primitives": "workspace:*",
+    "@signalco/ui-icons": "workspace:*",
+    "next": "14.1.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  }
 }

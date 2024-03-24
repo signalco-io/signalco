@@ -1,8 +1,8 @@
 'use client';
 
+import { QueryList } from '@signalco/ui/QueryList';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { SignedIn, SignedOut } from '@clerk/nextjs';
-import { List } from '../../shared/List';
 import { InAppCtaSignUp } from '../../shared/InAppCtaSignUp';
 import { useProcessRuns } from '../../../src/hooks/useProcessRuns';
 import { useProcessesRuns } from '../../../src/hooks/useProcessesRuns';
@@ -18,7 +18,7 @@ export function RunsList({ processId }: { processId?: string }) {
     return (
         <>
             <SignedIn>
-                <List
+                <QueryList
                     query={() => processId ? processRuns : processesRuns}
                     itemRender={(item) => (<RunsListItem run={item} />)}
                     editable={Boolean(processId) && showComplated !== 'true'}

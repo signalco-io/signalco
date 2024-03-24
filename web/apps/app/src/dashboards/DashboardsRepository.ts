@@ -16,16 +16,16 @@ export interface IWidget {
     id: string,
     order: number,
     type: widgetType,
-    config?: object
+    config?: Record<string, unknown>
 }
 
 export class WidgetModel implements IWidget {
     id: string;
     order: number;
     type: widgetType;
-    config?: object | undefined;
+    config?: Record<string, unknown> | undefined;
 
-    constructor(id: string, order: number, type: widgetType, config?: object | undefined) {
+    constructor(id: string, order: number, type: widgetType, config?: Record<string, unknown> | undefined) {
         this.id = id;
         this.order = order;
         this.type = type;

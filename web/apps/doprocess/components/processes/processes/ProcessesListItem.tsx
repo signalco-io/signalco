@@ -1,7 +1,7 @@
 import { Row } from '@signalco/ui-primitives/Row';
 import { ListTodo, Navigate } from '@signalco/ui-icons';
+import { QueryListItem } from '@signalco/ui/QueryList';
 import { SharedWithIndicator } from '../../shared/SharedWithIndicator';
-import { ListItem } from '../../shared/ListItem';
 import { KnownPages } from '../../../src/knownPages';
 import { ProcessDto } from '../../../app/api/dtos/dtos';
 
@@ -11,7 +11,7 @@ export type ProcessListItemProps = {
 
 export function ProcessesListItem({ process }: ProcessListItemProps) {
     return (
-        <ListItem
+        <QueryListItem
             label={process.name}
             startDecorator={<ListTodo />}
             endDecorator={(
