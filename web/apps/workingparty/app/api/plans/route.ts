@@ -14,3 +14,5 @@ export async function GET() {
     }));
     return Response.json(dtos);
 }
+
+export const dynamic = 'force-dynamic'
