@@ -9,8 +9,7 @@ export type ContainerProps = HTMLAttributes<HTMLDivElement> & {
 
 export function Container({ maxWidth, centered = true, padded = true, className, ...rest }: ContainerProps) {
     return (
-        <div
-            className={cx(
+        <div className={cx(
                 'block w-full',
                 (Boolean(maxWidth) && padded) && 'px-4',
                 centered && 'mx-auto',

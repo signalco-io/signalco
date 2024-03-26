@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
+import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List } from '@signalco/ui-primitives/List';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Button } from '@signalco/ui-primitives/Button';
 import { AI } from '@signalco/ui-icons';
-import { QueryListItem } from '@signalco/ui/QueryList';
 import { fetchGetProcessTaskDefinitionsSuggestions } from '../../../src/hooks/useProcessTaskDefinitionsSuggestions';
 import { useProcessTaskDefinitionCreate } from '../../../src/hooks/useProcessTaskDefinitionCreate';
 import { ProcessTaskDefinitionsSuggestionsDto } from '../../../app/api/dtos/dtos';
@@ -86,12 +86,13 @@ export function TaskListSuggestions({ processId }: { processId: string; }) {
             {Boolean(suggestions?.suggestions.length) && (
                 <List className="divide-y rounded-lg border animate-in slide-in-from-right-4 slide-in-from-top-4">
                     {suggestions?.suggestions.map((suggestion) => (
-                        <QueryListItem
+                        <ListItem
                             key={suggestion}
                             label={suggestion}
                             nodeId={suggestion}
                             onSelected={() => handleSuggestionSelected(suggestion)}
                             className="w-full gap-2 px-3 text-base"
+                            variant="outlined"
                             startDecorator={(
                                 <div className="text-center">
                                     <AI size={18} className="h-[18px] min-w-[18px]" opacity={0.7} />

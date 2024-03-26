@@ -16,6 +16,7 @@ export function ProcessesList() {
                     itemRender={(item) => (<ProcessesListItem process={item} />)}
                     editable
                     itemCreateLabel="New process"
+                    variant="outlined"
                     createForm={<ProcessCreateForm redirect />} />
             </SignedIn>
             <SignedOut>

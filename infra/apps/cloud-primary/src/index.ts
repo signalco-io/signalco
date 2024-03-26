@@ -274,12 +274,12 @@ const up = async () => {
         }
 
         // Vercel apps
-        nextJsApp('signalco-blog', 'blog');
-        nextJsApp('signalco-app', 'app');
-        nextJsApp('signalco-web', 'web');
-        nextJsApp('slco', 'slco');
-        nextJsApp('brandgrab', 'brandgrab');
-        nextJsApp('doprocess', 'doprocess');
+        nextJsApp('signalco-blog', 'blog', 'web/apps/blog');
+        nextJsApp('signalco-app', 'app', 'web/apps/app');
+        nextJsApp('signalco-web', 'web', 'web/apps/web');
+        nextJsApp('slco', 'slco', 'web/apps/slco');
+        nextJsApp('brandgrab', 'brandgrab', 'web/apps/brandgrab');
+        nextJsApp('doprocess', 'doprocess', 'web/apps/doprocess');
         vercelApp('signalco-ui-docs', 'ui-docs', {
             ignoreCommand: 'npx turbo-ignore',
             outputDirectory: 'storybook-static',

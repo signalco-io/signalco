@@ -14,7 +14,18 @@ const nextConfig = {
     images: {
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
-        domains: ['uier.io']
+        remotePatterns: [
+            {
+                hostname: 'uier.io',
+                pathname: '/images/**',
+                protocol: 'https',
+            },
+            {
+                hostname: 'uier.io',
+                pathname: '/assets/**',
+                protocol: 'https',
+            }
+        ]
     },
     eslint: {
         dirs: ['src', 'app', 'locales']

@@ -14,7 +14,18 @@ const nextConfig = {
     images: {
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
-        domains: ['www.signalco.io']
+        remotePatterns: [
+            {
+                hostname: 'www.signalco.io',
+                pathname: '/images/**',
+                protocol: 'https',
+            },
+            {
+                hostname: 'www.signalco.io',
+                pathname: '/assets/**',
+                protocol: 'https',
+            }
+        ]
     },
     eslint: {
         dirs: ['src', 'app', 'locales', 'components']

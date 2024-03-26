@@ -6,7 +6,7 @@ import { getStack } from '@pulumi/pulumi';
 const up = async () => {
     const stack = getStack();
 
-    const app = nextJsApp('uier', 'uier');
+    const app = nextJsApp('uier', 'uier', 'web/apps/uier');
 
     // Configure domain name
     let domainName = undefined;

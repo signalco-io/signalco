@@ -15,6 +15,7 @@ export function DocumentsList() {
                     query={useDocuments}
                     itemRender={(item) => (<DocumentsListItem document={item} />)}
                     editable
+                    variant="outlined"
                     itemCreateLabel="New document"
                     createForm={<DocumentCreateForm redirect />}
                 />

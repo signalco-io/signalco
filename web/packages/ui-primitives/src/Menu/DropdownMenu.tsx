@@ -89,6 +89,11 @@ const DropdownMenuItem = forwardRef<
         ? (props: PropsWithChildren) => <a href={href} {...props} />
         : (props: PropsWithChildren) => <Fragment {...props} />;
     const DecoratorWrapper = startDecorator || endDecorator ? Row : Fragment;
+    const decoratorProps: { className?: string, spacing?: number } = {};
+    if (startDecorator || endDecorator) {
+        decoratorProps.className = 'w-full';
+        decoratorProps.spacing = 1;
+    }
 
     return (
         <LinkOrNot>
@@ -100,7 +105,7 @@ const DropdownMenuItem = forwardRef<
                     className
                 )}
                 {...props}>
-                <DecoratorWrapper spacing={1} className="w-full">
+                <DecoratorWrapper {...decoratorProps}>
                     {startDecorator}
                     {children}
                     {endDecorator}

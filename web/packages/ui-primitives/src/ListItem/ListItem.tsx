@@ -1,4 +1,4 @@
-import { Ref, type ReactElement } from 'react';
+import { Ref, type ReactElement, MouseEventHandler } from 'react';
 import { Row } from '../Row';
 import { cx } from '../cx';
 import { Button } from '../Button';
@@ -8,6 +8,7 @@ export type ListItemPropsOptions = {
     nodeId?: never;
     selected?: boolean | undefined;
     onSelected?: never;
+    onMouseEnter?: never;
     divRef?: never;
     buttonRef?: Ref<HTMLButtonElement>;
 } | {
@@ -15,6 +16,7 @@ export type ListItemPropsOptions = {
     nodeId: string;
     selected?: boolean;
     onSelected: (nodeId: string) => void;
+    onMouseEnter?: MouseEventHandler<HTMLButtonElement>;
     divRef?: never;
     buttonRef?: Ref<HTMLButtonElement>;
 } | {
@@ -22,6 +24,7 @@ export type ListItemPropsOptions = {
     nodeId?: never;
     selected?: never;
     onSelected?: never;
+    onMouseEnter?: never;
     divRef?: Ref<HTMLDivElement>;
     buttonRef?: never;
 };
@@ -34,6 +37,10 @@ export type ListItemPropsCommon = {
     className?: string;
     title?: string;
     style?: React.CSSProperties;
+    /**
+     * @default 'plain'
+     */
+    variant?: 'outlined' | 'plain';
 };
 
 export type ListItemProps = ListItemPropsCommon & ListItemPropsOptions;
@@ -47,16 +54,16 @@ export function ListItem({
     endDecorator,
     selected,
     onSelected,
+    onMouseEnter,
     disabled,
     href,
     className,
     title,
-    style
+    style,
+    variant = 'plain',
 }: ListItemProps) {
     const handleClick = () => {
-        if (onSelected) {
-            onSelected(nodeId);
-        }
+        onSelected?.(nodeId);
     };
 
     if (!href && !nodeId && !onSelected) {
@@ -64,7 +71,11 @@ export function ListItem({
             <Row
                 ref={divRef}
                 spacing={2}
-                className={cx('min-h-[3rem] px-2', className)}
+                className={cx(
+                    'min-h-[3rem] px-2',
+                    variant === 'outlined' && 'rounded-none gap-2 first:rounded-t-[calc(var(--radius)-1px)] last:rounded-b-[calc(var(--radius)-1px)]',
+                    className
+                )}
                 title={title}
                 style={style}>
                 {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
@@ -82,10 +93,15 @@ export function ListItem({
             href={href}
             variant={selected ? 'soft' : 'plain'}
             onClick={handleClick}
+            onMouseEnter={onMouseEnter}
             disabled={disabled}
             title={title}
             style={style}
-            className={cx('text-start h-auto', className)}>
+            className={cx(
+                'text-start h-auto pl-2',
+                variant === 'outlined' && 'rounded-none gap-2 first:rounded-t-[calc(var(--radius)-1px)] last:rounded-b-[calc(var(--radius)-1px)]',
+                className
+            )}>
             {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
             {Boolean(label) && <div className="grow">{label}</div>}
             {Boolean(endDecorator) && (

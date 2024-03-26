@@ -1,6 +1,6 @@
 import { Row } from '@signalco/ui-primitives/Row';
+import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { ListTodo, Navigate } from '@signalco/ui-icons';
-import { QueryListItem } from '@signalco/ui/QueryList';
 import { SharedWithIndicator } from '../../shared/SharedWithIndicator';
 import { KnownPages } from '../../../src/knownPages';
 import { ProcessDto } from '../../../app/api/dtos/dtos';
@@ -11,7 +11,7 @@ export type ProcessListItemProps = {
 
 export function ProcessesListItem({ process }: ProcessListItemProps) {
     return (
-        <QueryListItem
+        <ListItem
             label={process.name}
             startDecorator={<ListTodo />}
             endDecorator={(
@@ -21,6 +21,7 @@ export function ProcessesListItem({ process }: ProcessListItemProps) {
                 </Row>
             )}
             className="group w-full"
-            href={KnownPages.Process(process.id)} />
+            href={KnownPages.Process(process.id)}
+            variant="outlined" />
     );
 }

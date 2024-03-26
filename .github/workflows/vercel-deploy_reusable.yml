@@ -36,10 +36,6 @@ env:
     VERCEL_PROJECT_ID: ${{ inputs.vercelProjectId }}
     VERCEL_ORG_ID: team_Ade0MlfC3211ml3wYJZ4c9hn
 
-defaults:
-    run:      
-        working-directory: ./web
-
 jobs:
     ci:
         timeout-minutes: 15
@@ -69,19 +65,15 @@ jobs:
 
           - name: ⚙️ Pull Vercel Environment Information
             run: vercel pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}
-            working-directory: ${{ inputs.path }}/
 
           - name: ⚒️ Build app
             run: vercel build ${{ inputs.preview == false && '--prod' }} --token=${{ secrets.VERCEL_TOKEN }}
-            working-directory: ${{ inputs.path }}/
 
           - name: 🚀 Deploy Preview to Vercel
             run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-            working-directory: ${{ inputs.path }}/
             if: ${{ inputs.preview == true }}
 
           - name: 🚀 Deploy Production to Vercel
             run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} ${{ inputs.environment == 'development' && '--skip-domain' || ''}}
-            working-directory: ${{ inputs.path }}/
             if: ${{ inputs.preview == false }}
 

@@ -19,8 +19,8 @@ export function Divider({ orientation = 'horizontal', className, flex, ...rest }
     return (
         <div
             className={cx(
-                'shrink-0 bg-border',
-                orientation === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',
+                'shrink-0',
+                orientation === 'horizontal' ? 'h-0 border-t w-full' : 'h-full w-0 border-l',
                 orientation === 'vertical' && flex && 'self-stretch h-auto',
                 className
             )}

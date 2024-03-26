@@ -37,6 +37,10 @@
 			"path": "apps/slco"
 		},
 		{
+			"name": "🚀 workingparty.ai",
+			"path": "apps/workingparty"
+		},
+		{
 			"name": "📦 @signalco/cms-core",
 			"path": "packages/cms-core"
 		},
@@ -47,6 +51,10 @@
 		{
 			"name": "📦 @signalco/data",
 			"path": "packages/data"
+		},
+		{
+			"name": "📦 @signalco/email-templates",
+			"path": "packages/email-templates"
 		},
 		{
 			"name": "📦 @signalco/hooks",
@@ -98,7 +106,6 @@
 		},
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "✨ signalco-monorepo",
 		"tailwindCSS.experimental.classRegex": [
 			["cx\\(([^]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"]
 		],
