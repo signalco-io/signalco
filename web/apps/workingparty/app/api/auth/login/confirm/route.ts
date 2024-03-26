@@ -1,24 +1,8 @@
 import { cookies } from 'next/headers';
-import { SignJWT } from 'jose';
 import { usersAssignAccount, usersCreate, usersGetByEmail } from '../../../../../src/lib/repository/usersRepository';
 import { loginRequestsVerify } from '../../../../../src/lib/repository/loginRequests';
 import { accountCreate } from '../../../../../src/lib/repository/accountsRepository';
-
-export function jwtSecret() {
-    const signSecret = process.env.WP_JWT_SIGN_SECRET;
-    return new TextEncoder().encode(signSecret);
-}
-
-async function createJwt(userId: string) {
-    return await new SignJWT({ 'urn:example:claim': true })
-        .setProtectedHeader({ alg: 'HS256' })
-        .setIssuedAt()
-        .setIssuer('urn:workingparty:issuer:api')
-        .setAudience('urn:workingparty:audience:web')
-        .setExpirationTime('2h')
-        .setSubject(userId)
-        .sign(jwtSecret());
-}
+import { createJwt } from '../../../../../src/lib/auth/createJwt';
 
 export async function POST(request: Request) {
     const json = await request.json();

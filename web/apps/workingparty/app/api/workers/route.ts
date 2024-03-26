@@ -1,9 +1,9 @@
 import { cookies } from 'next/headers';
 import { jwtVerify } from 'jose';
-import { jwtSecret } from '../auth/login/confirm/route';
 import { workersCreate, workersGetAll } from '../../../src/lib/repository/workersRepository';
 import { usersGet } from '../../../src/lib/repository/usersRepository';
 import { accountUsageOverLimit } from '../../../src/lib/repository/accountsRepository';
+import { jwtSecret } from '../../../src/lib/auth/jwtSecret';
 
 export async function ensureAuthUserId() {
     const sessionCookie = cookies().get('wp_session');
