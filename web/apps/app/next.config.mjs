@@ -20,10 +20,14 @@ const nextConfig = {
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
         remotePatterns: [
             {
-                protocol: 'https',
                 hostname: 'www.signalco.io',
-                port: '',
-                pathname: '**'
+                path: '/images/**',
+                protocol: 'https',
+            },
+            {
+                hostname: 'www.signalco.io',
+                path: '/assets/**',
+                protocol: 'https',
             }
         ]
     },
