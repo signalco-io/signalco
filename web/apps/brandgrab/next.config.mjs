@@ -27,7 +27,18 @@ const nextConfig = {
     images: {
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
-        domains: ['www.brandgrab.io']
+        remotePatterns: [
+            {
+                hostname: 'www.brandgrab.io',
+                path: '/images/**',
+                protocol: 'https',
+            },
+            {
+                hostname: 'www.brandgrab.io',
+                path: '/assets/**',
+                protocol: 'https',
+            }
+        ]
     },
     eslint: {
         dirs: ['worker', 'tools', 'src', 'app', 'locales', 'components']
