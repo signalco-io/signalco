@@ -10,5 +10,9 @@ config:
   vercel:apiToken:
     secure: AAABACJmxGvWoeoGVWKuzn1fw+mjEt/GYKPMSTVb68RhEyEYzHfjBHgCz6IWwNehCbLuwCUkzcA=
   vercel:team: team_Ade0MlfC3211ml3wYJZ4c9hn
+  workingparty:jwtsecret:
+    secure: AAABAM70EzVig9lHo5fx0jSK3+gL4S5j5A9ruALqecytYnHfl6fzCDK7vpXh9/9TptxWh9zNPHzNcrbP5xIr/SUo+r0ht56kmSOB+YGkAEffhN2A7sTl4SQR6N7rQ0oJ
+  workingparty:openaikey:
+    secure: AAABAKqH3foxRKZwpAROBKMr33uzPnIKSZsbgmmBENodJDG9tV3wvncw9/y89lbozHu0u/SJC08MPkucnIJqZWcKWiAEDWhiZVywQGPOeWhl+p0=
   workingparty:zoneid:
     secure: AAABAPrl2wRsB1uolAsq6TO5vkKEiQir3K91uDebkilqobe923ShzF0SvTanaCk8WmITSV97BeCxNAji8mwkNg==
