@@ -59,6 +59,25 @@ NEXT_PUBLIC_MAPBOX_TOKEN=pk.eyJ1IjoiYWxla3NhbmRhcnRvcGxlbGNvIiwiYSI6ImNsMXpiYzhw
 | `NEXT_PUBLIC_APP_ENV` | Optional | Required `production` |
 | `NEXT_PUBLIC_MAPBOX_TOKEN` | Optional | Required `production` |
 
+### Using doppler
+
+Prerequesites:
+
+- install [doppler CLI](https://docs.doppler.com/docs/install-cli)
+
+Navigate to your `./web/apps/*/` directory and run following command to update local env file.
+
+```bash
+doppler secrets download --no-file --format env > .env
+```
+
+To setup project in `./web/apps/*/` directory use:
+
+```bash
+doppler login
+doppler setup
+```
+
 ## Deploy
 
 Apps from this repository are deployed on Vercel.

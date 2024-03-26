@@ -1,7 +1,7 @@
 {
     "name": "@infra/pulumi",
     "private": true,
-    "license": "../LICENSE",
+    "license": "../../LICENSE",
     "type": "module",
     "scripts": {
         "lint": "eslint ./src/**/*.ts"
@@ -35,7 +35,6 @@
         "eslint": "8.57.0",
         "eslint-config-standard": "17.1.0",
         "eslint-plugin-import": "2.29.1",
-        "eslint-plugin-n": "16.6.2",
         "eslint-plugin-n": "16.6.2",
         "eslint-plugin-promise": "6.1.1",
         "typescript": "5.4.3"

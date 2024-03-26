@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://workingparty.ai
+
+# Sitemaps
+Sitemap: https://workingparty.ai/sitemap.xml

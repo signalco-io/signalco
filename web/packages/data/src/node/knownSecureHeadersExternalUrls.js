@@ -30,6 +30,11 @@ export const knownSecureHeadersExternalUrls = {
         imgSrc: ['https://lh3.googleusercontent.com'],
         connectSrc: ['https://lh3.googleusercontent.com']
     },
+    stripe: {
+        scriptSrc: ['https://js.stripe.com'],
+        frameSrc: ['https://js.stripe.com'],
+        connectSrc: ['https://api.stripe.com']
+    },
     vercel: {
         imgSrc: ['https://vercel.com', 'https://vercel.live', 'https://sockjs-mt1.pusher.com', 'data: blob:'],
         scriptSrc: ['https://vercel.live', 'https://vitals.vercel-insights.com', 'https://*.vercel-scripts.com'],

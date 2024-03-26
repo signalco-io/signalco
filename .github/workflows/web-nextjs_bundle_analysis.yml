@@ -78,6 +78,9 @@ jobs:
             app_uier:
               - web/apps/uier/**
               - web/packages/**
+            app_workingparty:
+              - web/apps/workingparty/**
+              - web/packages/**
     outputs:
       infra: ${{ steps.filter.outputs.infrastructure }}
       web: ${{ steps.filter.outputs.web }}
@@ -90,6 +93,7 @@ jobs:
       app_doprocess: ${{ steps.filter.outputs.app_doprocess }}
       app_ui_docs: ${{ steps.filter.outputs.app_ui_docs }}
       app_uier: ${{ steps.filter.outputs.app_uier }}
+      app_workingparty: ${{ steps.filter.outputs.app_workingparty }}
 
   station_ci:
     strategy:
@@ -135,6 +139,17 @@ jobs:
     if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
     with:
       project: "uier"
+      baseRef: ${{ github.base_ref }}
+      command: "preview"
+    secrets: inherit
+
+  workingparty_infra_preview:
+    name: "WorkingParty infrastructure (preview)"
+    uses: ./.github/workflows/infra-deploy_reusable.yml
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
+    with:
+      project: "workingparty"
       baseRef: ${{ github.base_ref }}
       command: "preview"
     secrets: inherit
@@ -311,9 +326,32 @@ jobs:
       vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
     secrets: inherit
 
+  analyze_workingparty:
+    name: "WorkingParty (analysis)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_workingparty == 'true'
+    uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
+    with:
+      workflowName: 'web-nextjs_bundle_analysis.yml'
+      name: 'workingparty'
+      path: 'web/apps/workingparty'
+      vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
+    secrets: inherit
+
+  deploy_workingparty:
+    name: "WorkingParty (preview)"
+    needs: analyze_workingparty
+    if: ${{ success() }}
+    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    with:
+      name: 'workingparty'
+      path: 'web/apps/workingparty'
+      vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
+    secrets: inherit
+
   ci_ok:
     name: "[CI] OK"
-    needs: [station_ci, cloud_preview, uier_infra_preview, deploy_blog, deploy_app, deploy_brandgrab, deploy_web, deploy_slco, deploy_doprocess, deploy_uidocs, deploy_uier]
+    needs: [station_ci, cloud_preview, uier_infra_preview, workingparty_infra_preview, deploy_blog, deploy_app, deploy_brandgrab, deploy_web, deploy_slco, deploy_doprocess, deploy_uidocs, deploy_uier, deploy_workingparty]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:

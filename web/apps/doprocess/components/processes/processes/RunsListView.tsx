@@ -3,11 +3,11 @@
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
+import { ListHeader } from '@signalco/ui-primitives/List';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Filter } from '@signalco/ui-icons';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
-import { ListHeader } from '../../shared/ListHeader';
 import { TypographyProcessName } from './TypographyProcessName';
 import { RunsList } from './RunsList';
 

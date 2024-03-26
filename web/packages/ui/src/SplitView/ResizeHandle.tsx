@@ -14,17 +14,18 @@ export const ResizeHandle = forwardRef<HTMLDivElement, ResizeHandleProps>(({
     orientation = 'horizontal', onMouseDown, onTouchStart, className, ...rest
 }, ref) => {
     return (
-        <div
-            ref={ref}
-            onMouseDown={onMouseDown}
-            onTouchStart={onTouchStart}
-            className={cx(
-                'flex items-center hover:bg-muted/30',
-                orientation === 'horizontal' && 'w-full h-[9px] hover:cursor-ns-resize',
-                orientation === 'vertical' && 'h-full w-[9px] flex-col hover:cursor-ew-resize',
-                className
-            )}
-            {...rest}>
+        <div className="relative flex items-center">
+            <div
+                ref={ref}
+                onMouseDown={onMouseDown}
+                onTouchStart={onTouchStart}
+                className={cx(
+                    'hover:bg-muted/80 absolute',
+                    orientation === 'horizontal' && 'w-full h-[9px] hover:cursor-ns-resize -translate-y-1/2',
+                    orientation === 'vertical' && 'h-full w-[9px] flex-col hover:cursor-ew-resize -translate-x-1/2',
+                    className
+                )}
+                {...rest} />
             <Divider orientation={orientation} />
         </div>
     );
