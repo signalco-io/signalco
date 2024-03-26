@@ -37,7 +37,7 @@
         "@signalco/ui-primitives": "workspace:*",
         "@tanstack/react-query": "5.21.7",
         "@tanstack/react-query-devtools": "5.21.7",
-        "@vercel/analytics": "1.2.1",
+        "@vercel/analytics": "1.2.2",
         "classix": "2.1.36",
         "jose": "5.2.3",
         "next": "14.2.0-canary.43",
