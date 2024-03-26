@@ -1311,7 +1311,7 @@ importers:
         version: 5.0.6
       next:
         specifier: 14.2.0-canary.43
-        version: 14.2.0-canary.43(@babel/core@7.23.9)(@playwright/test@1.41.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
+        version: 14.2.0-canary.43(@babel/core@7.23.9)(@playwright/test@1.41.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1329,7 +1329,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       react-email:
         specifier: 2.1.0
-        version: 2.1.0(@babel/core@7.23.9)(eslint@8.56.0)(sass@1.71.0)
+        version: 2.1.0(@babel/core@7.23.9)(eslint@8.56.0)(sass@1.72.0)
       react-markdown:
         specifier: 9.0.1
         version: 9.0.1(@types/react@18.2.72)(react@18.2.0)
@@ -1398,8 +1398,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       sass:
-        specifier: 1.71.0
-        version: 1.71.0
+        specifier: 1.72.0
+        version: 1.72.0
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -9685,7 +9685,7 @@ packages:
       react:
         optional: true
     dependencies:
-      next: 14.2.0-canary.43(@babel/core@7.23.9)(@playwright/test@1.41.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
+      next: 14.2.0-canary.43(@babel/core@7.23.9)(@playwright/test@1.41.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0)
       react: 18.2.0
       server-only: 0.0.1
     dev: false
@@ -15351,7 +15351,7 @@ packages:
     dependencies:
       marked: 7.0.4
       react: 18.2.0
-      react-email: 2.1.0(@babel/core@7.23.9)(eslint@8.56.0)(sass@1.71.0)
+      react-email: 2.1.0(eslint@8.57.0)
     dev: false
 
   /md5.js@1.3.5:
@@ -16410,7 +16410,7 @@ packages:
       '@next/env': 13.5.6
       fast-glob: 3.3.2
       minimist: 1.2.8
-      next: 14.2.0-canary.43(@babel/core@7.23.9)(@playwright/test@1.41.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
+      next: 14.2.0-canary.43(@babel/core@7.23.9)(@playwright/test@1.41.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0)
     dev: true
 
   /next-themes@0.2.1(next@14.2.0-canary.43)(react-dom@18.2.0)(react@18.2.0):
@@ -16420,7 +16420,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 14.2.0-canary.43(@babel/core@7.23.9)(@playwright/test@1.41.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
+      next: 14.2.0-canary.43(@babel/core@7.23.9)(@playwright/test@1.41.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -16479,7 +16479,7 @@ packages:
       - babel-plugin-macros
     dev: true
 
-  /next@14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0):
+  /next@14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0):
     resolution: {integrity: sha512-wlzrsbfeSU48YQBjZhDzOwhWhGsy+uQycR8bHAOt1LY1bn3zZEcDyHQOEoN3aWzQ8LHCAJ1nqrWCc9XF2+O45Q==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -16502,7 +16502,7 @@ packages:
       postcss: 8.4.31
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      sass: 1.71.0
+      sass: 1.72.0
       styled-jsx: 5.1.1(@babel/core@7.23.9)(react@18.2.0)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.1.0
@@ -16598,7 +16598,7 @@ packages:
       - babel-plugin-macros
     dev: true
 
-  /next@14.2.0-canary.43(@babel/core@7.23.9)(@playwright/test@1.41.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0):
+  /next@14.2.0-canary.43(@babel/core@7.23.9)(@playwright/test@1.41.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0):
     resolution: {integrity: sha512-tL5fxsleOuRS7Momx5wRwkCOPLybQKwgJnpzgMGVReQs+kA9lkQiBANvlYdAsrvZ3vjzx2H+9mSqKDcKaC8UXQ==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -16625,7 +16625,7 @@ packages:
       postcss: 8.4.31
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      sass: 1.71.0
+      sass: 1.72.0
       styled-jsx: 5.1.1(@babel/core@7.23.9)(react@18.2.0)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.2.0-canary.43
@@ -18338,7 +18338,7 @@ packages:
       react-is: 18.1.0
     dev: true
 
-  /react-email@2.1.0(@babel/core@7.23.9)(eslint@8.56.0)(sass@1.71.0):
+  /react-email@2.1.0(@babel/core@7.23.9)(eslint@8.56.0)(sass@1.72.0):
     resolution: {integrity: sha512-fTt85ca1phsBu57iy32wn4LTR37rOzDZoY2AOWVq3JQYVwk6GlBdUuQWif2cudkwWINL9COf9kRMS4/QWtKtAQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -18368,7 +18368,7 @@ packages:
       glob: 10.3.4
       log-symbols: 4.1.0
       mime-types: 2.1.35
-      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
+      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0)
       normalize-path: 3.0.0
       ora: 5.4.1
       postcss: 8.4.35
@@ -18430,7 +18430,7 @@ packages:
       glob: 10.3.4
       log-symbols: 4.1.0
       mime-types: 2.1.35
-      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.71.0)
+      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0)
       normalize-path: 3.0.0
       ora: 5.4.1
       postcss: 8.4.35
@@ -19273,15 +19273,6 @@ packages:
       sass: 1.72.0
       webpack: 5.91.0(@swc/core@1.3.101)(esbuild@0.19.11)
     dev: true
-
-  /sass@1.71.0:
-    resolution: {integrity: sha512-HKKIKf49Vkxlrav3F/w6qRuPcmImGVbIXJ2I3Kg0VMA+3Bav+8yE9G5XmP5lMj6nl4OlqbPftGAscNaNu28b8w==}
-    engines: {node: '>=14.0.0'}
-    hasBin: true
-    dependencies:
-      chokidar: 3.5.3
-      immutable: 4.3.4
-      source-map-js: 1.0.2
 
   /sass@1.72.0:
     resolution: {integrity: sha512-Gpczt3WA56Ly0Mn8Sl21Vj94s1axi9hDIzDFn9Ph9x3C3p4nNyvsqJoQyVXKou6cBlfFWEgRW4rT8Tb4i3XnVA==}
