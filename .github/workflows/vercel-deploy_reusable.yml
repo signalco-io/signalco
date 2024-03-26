@@ -76,8 +76,7 @@ jobs:
             working-directory: ${{ inputs.path }}/
 
           - name: 🚀 Deploy Preview to Vercel
-            run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-            working-directory: ${{ inputs.path }}/
+            run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} --cwd ${{ inputs.path }}
             if: ${{ inputs.preview == true }}
 
           - name: 🚀 Deploy Production to Vercel
