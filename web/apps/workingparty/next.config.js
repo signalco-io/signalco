@@ -21,7 +21,18 @@ const nextConfig = {
     images: {
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
-        domains: ['workingparty.ai']
+        remotePatterns: [
+            {
+                hostname: 'workingparty.ai',
+                path: '/images/**',
+                protocol: 'https',
+            },
+            {
+                hostname: 'workingparty.ai',
+                path: '/assets/**',
+                protocol: 'https',
+            }
+        ]
     },
     eslint: {
         dirs: ['src', 'app', 'locales']
