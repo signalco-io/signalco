@@ -159,7 +159,7 @@ jobs:
     with:
       name: 'uier'
       path: 'web/apps/uier'
-      vercelProjectId: 'prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ'
+      vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
       preview: false
       environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
     secrets: inherit
@@ -172,7 +172,7 @@ jobs:
     with:
       name: 'workingparty'
       path: 'web/apps/workingparty'
-      vercelProjectId: 'prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ'
+      vercelProjectId: 'prj_iAsm04GKwdR1z95x9ZEnCzeqwlro'
       preview: false
       environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
     secrets: inherit
