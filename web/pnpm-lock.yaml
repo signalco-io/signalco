@@ -1120,8 +1120,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tailwindcss/typography':
-        specifier: 0.5.10
-        version: 0.5.10(tailwindcss@3.4.1)
+        specifier: 0.5.11
+        version: 0.5.11(tailwindcss@3.4.1)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.1.4)(react@18.2.0)
@@ -7211,8 +7211,8 @@ packages:
     resolution: {integrity: sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==}
     dev: true
 
-  /@tailwindcss/typography@0.5.10(tailwindcss@3.4.1):
-    resolution: {integrity: sha512-Pe8BuPJQJd3FfRnm6H0ulKIGoMEQS+Vq01R6M5aCrFB/ccR/shT+0kXLjouGC1gFLm9hopTFN+DMP0pfwRWzPw==}
+  /@tailwindcss/typography@0.5.11(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-ahOULqBQGCdSqL3vMNjH1R5cU2gxTh059fJIKF2enHXE8c/s3yKGDSKZ1+4poCr7BZRREJS8n5cCFmwsW4Ok3A==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
