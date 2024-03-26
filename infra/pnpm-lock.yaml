@@ -207,8 +207,8 @@ importers:
         specifier: 2.33.0
         version: 2.33.0
       '@pulumi/cloudflare':
-        specifier: 5.21.0
-        version: 5.21.0
+        specifier: 5.23.0
+        version: 5.23.0
       '@pulumi/docker':
         specifier: 4.5.2
         version: 4.5.2
@@ -1108,15 +1108,6 @@ packages:
 
   /@pulumi/azure-native@2.33.0:
     resolution: {integrity: sha512-ONkH346LczcTPqPXaQCzJBH5bViNFQbH9jpsEG2V0xeFu+YZYhqlHjkzeQR0obMRhT/j2L7fbfjQ1MDbq8ns8A==}
-    dependencies:
-      '@pulumi/pulumi': 3.111.1
-    transitivePeerDependencies:
-      - bluebird
-      - supports-color
-    dev: false
-
-  /@pulumi/cloudflare@5.21.0:
-    resolution: {integrity: sha512-ZF0nRBjj5PFVKeWm70WiiVuT17Uu06j3mBUqQMQ2TSG3WnYgRmF/AHKMaly5t7njRP6c0M44ugpRkIBt4yQqBA==}
     dependencies:
       '@pulumi/pulumi': 3.111.1
     transitivePeerDependencies:
