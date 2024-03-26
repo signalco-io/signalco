@@ -17,12 +17,12 @@ const nextConfig = {
         remotePatterns: [
             {
                 hostname: 'uier.io',
-                path: '/images/**',
+                pathname: '/images/**',
                 protocol: 'https',
             },
             {
                 hostname: 'uier.io',
-                path: '/assets/**',
+                pathname: '/assets/**',
                 protocol: 'https',
             }
         ]

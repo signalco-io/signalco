@@ -18,22 +18,22 @@ const nextConfig = {
         remotePatterns: [
             {
                 hostname: 'www.signalco.io',
-                path: '/images/**',
+                pathname: '/images/**',
                 protocol: 'https',
             },
             {
                 hostname: 'www.signalco.io',
-                path: '/assets/**',
+                pathname: '/assets/**',
                 protocol: 'https',
             },
             {
                 hostname: 'blog.signalco.io',
-                path: '/images/**',
+                pathname: '/images/**',
                 protocol: 'https',
             },
             {
                 hostname: 'blog.signalco.io',
-                path: '/assets/**',
+                pathname: '/assets/**',
                 protocol: 'https',
             }
         ]

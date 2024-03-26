@@ -17,12 +17,12 @@ const nextConfig = {
         remotePatterns: [
             {
                 hostname: 'workingparty.ai',
-                path: '/images/**',
+                pathname: '/images/**',
                 protocol: 'https',
             },
             {
                 hostname: 'workingparty.ai',
-                path: '/assets/**',
+                pathname: '/assets/**',
                 protocol: 'https',
             }
         ]

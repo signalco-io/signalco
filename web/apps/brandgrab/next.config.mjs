@@ -30,12 +30,12 @@ const nextConfig = {
         remotePatterns: [
             {
                 hostname: 'www.brandgrab.io',
-                path: '/images/**',
+                pathname: '/images/**',
                 protocol: 'https',
             },
             {
                 hostname: 'www.brandgrab.io',
-                path: '/assets/**',
+                pathname: '/assets/**',
                 protocol: 'https',
             }
         ]

@@ -17,12 +17,12 @@ const nextConfig = {
         remotePatterns: [
             {
                 hostname: 'slco.io',
-                path: '/images/**',
+                pathname: '/images/**',
                 protocol: 'https',
             },
             {
                 hostname: 'slco.io',
-                path: '/assets/**',
+                pathname: '/assets/**',
                 protocol: 'https',
             }
         ]

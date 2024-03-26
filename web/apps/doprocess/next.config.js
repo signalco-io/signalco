@@ -17,12 +17,12 @@ const nextConfig = {
         remotePatterns: [
             {
                 hostname: 'doprocess.app',
-                path: '/images/**',
+                pathname: '/images/**',
                 protocol: 'https',
             },
             {
                 hostname: 'doprocess.app',
-                path: '/assets/**',
+                pathname: '/assets/**',
                 protocol: 'https',
             }
         ]
