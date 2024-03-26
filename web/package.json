@@ -6,7 +6,7 @@
         "apps/*",
         "packages/*"
     ],
-    "packageManager": "pnpm@8.15.4",
+    "packageManager": "pnpm@8.15.5",
     "scripts": {
         "build": "turbo run build",
         "clean": "turbo run clean",
@@ -16,6 +16,6 @@
         "test": "turbo run test"
     },
     "devDependencies": {
-        "turbo": "1.12.5"
+        "turbo": "1.13.0"
     }
 }

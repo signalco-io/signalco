@@ -18,10 +18,10 @@
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/react": "18.2.66",
+        "@types/react": "18.2.71",
         "@types/react-dom": "18.2.22",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "typescript": "5.4.2"
+        "typescript": "5.4.3"
     }
 }
