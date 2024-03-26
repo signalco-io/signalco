@@ -209,6 +209,9 @@ importers:
       '@pulumi/cloudflare':
         specifier: 5.21.0
         version: 5.21.0
+      '@pulumi/docker':
+        specifier: 4.5.2
+        version: 4.5.2
       '@pulumi/pulumi':
         specifier: 3.106.0
         version: 3.106.0
