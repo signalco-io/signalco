@@ -16,7 +16,7 @@ const nextConfig = {
     reactStrictMode: true,
     output: 'standalone',
     experimental: {
-        outputFileTracingRoot: path.join(__dirname, '../../')
+        outputFileTracingRoot: path.join(__dirname, '../../../')
     },
     images: {
         dangerouslyAllowSVG: true,
