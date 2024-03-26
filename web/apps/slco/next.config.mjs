@@ -14,7 +14,18 @@ const nextConfig = {
     images: {
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
-        domains: ['slco.io']
+        remotePatterns: [
+            {
+                hostname: 'slco.io',
+                path: '/images/**',
+                protocol: 'https',
+            },
+            {
+                hostname: 'slco.io',
+                path: '/assets/**',
+                protocol: 'https',
+            }
+        ]
     },
     eslint: {
         dirs: ['worker', 'tools', 'src', 'app', 'locales', 'components']
