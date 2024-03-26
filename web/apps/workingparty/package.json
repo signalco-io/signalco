@@ -69,7 +69,7 @@
         "@types/react": "18.2.56",
         "@types/react-dom": "18.2.19",
         "cross-env": "7.0.3",
-        "dotenv": "16.4.4",
+        "dotenv": "16.4.5",
         "eslint": "8.56.0",
         "next-sitemap": "4.2.3",
         "postcss": "8.4.35",
