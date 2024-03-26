@@ -1298,8 +1298,8 @@ importers:
         specifier: 5.21.7
         version: 5.21.7(@tanstack/react-query@5.21.7)(react@18.2.0)
       '@vercel/analytics':
-        specifier: 1.2.1
-        version: 1.2.1(next@14.2.0-canary.43)(react@18.2.0)
+        specifier: 1.2.2
+        version: 1.2.2(next@14.2.0-canary.43)(react@18.2.0)
       classix:
         specifier: 2.1.36
         version: 2.1.36
@@ -9569,22 +9569,6 @@ packages:
   /@ungap/structured-clone@1.2.0:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  /@vercel/analytics@1.2.1(next@14.2.0-canary.43)(react@18.2.0):
-    resolution: {integrity: sha512-ZB5gDPCQvHu0DcBbywIwMm5aY9mTV8mBl7Mmk8QD84JqBnuYbsNCDnnDuzblNjd82tDtRjAqruZ0mzNm6MAWpA==}
-    peerDependencies:
-      next: '>= 13'
-      react: ^18 || ^19
-    peerDependenciesMeta:
-      next:
-        optional: true
-      react:
-        optional: true
-    dependencies:
-      next: 14.2.0-canary.43(@babel/core@7.24.3)(@playwright/test@1.41.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0)
-      react: 18.2.0
-      server-only: 0.0.1
-    dev: false
-
   /@vercel/analytics@1.2.2(next@14.1.4)(react@18.2.0):
     resolution: {integrity: sha512-X0rctVWkQV1e5Y300ehVNqpOfSOufo7ieA5PIdna8yX/U7Vjz0GFsGf4qvAhxV02uQ2CVt7GYcrFfddXXK2Y4A==}
     peerDependencies:
@@ -9597,6 +9581,22 @@ packages:
         optional: true
     dependencies:
       next: 14.1.4(@babel/core@7.24.3)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0)
+      react: 18.2.0
+      server-only: 0.0.1
+    dev: false
+
+  /@vercel/analytics@1.2.2(next@14.2.0-canary.43)(react@18.2.0):
+    resolution: {integrity: sha512-X0rctVWkQV1e5Y300ehVNqpOfSOufo7ieA5PIdna8yX/U7Vjz0GFsGf4qvAhxV02uQ2CVt7GYcrFfddXXK2Y4A==}
+    peerDependencies:
+      next: '>= 13'
+      react: ^18 || ^19
+    peerDependenciesMeta:
+      next:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      next: 14.2.0-canary.43(@babel/core@7.24.3)(@playwright/test@1.41.2)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0)
       react: 18.2.0
       server-only: 0.0.1
     dev: false
