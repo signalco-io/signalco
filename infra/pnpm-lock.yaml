@@ -223,8 +223,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.11.19
-        version: 20.11.19
+        specifier: 20.11.30
+        version: 20.11.30
       '@typescript-eslint/eslint-plugin':
         specifier: 7.0.2
         version: 7.0.2(@typescript-eslint/parser@7.0.2)(eslint@8.56.0)(typescript@5.3.3)
@@ -1470,12 +1470,6 @@ packages:
     dependencies:
       '@types/node': 20.11.30
     dev: false
-
-  /@types/node@20.11.19:
-    resolution: {integrity: sha512-7xMnVEcZFu0DikYjWOlRq7NTPETrm7teqUT2WkQjrTIkEgUyyGdWsj/Zg8bEJt5TNklzbPD1X3fqfsHw3SpapQ==}
-    dependencies:
-      undici-types: 5.26.5
-    dev: true
 
   /@types/node@20.11.30:
     resolution: {integrity: sha512-dHM6ZxwlmuZaRmUPfv1p+KrdD1Dci04FbdEm/9wEMouFqxYoFl5aMkt0VMAUtYRQDyYvD41WJLukhq/ha3YuTw==}
