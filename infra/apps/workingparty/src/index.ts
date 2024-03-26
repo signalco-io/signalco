@@ -180,7 +180,7 @@ const up = async () => {
     }).apply(keys => keys.primaryConnectionString ?? '');
 
     // Vercel setup
-    const app = nextJsApp('wp', 'workingparty');
+    const app = nextJsApp('wp', 'workingparty', 'web/apps/workingparty');
 
     new ProjectDomain('vercel-wp-domain', {
         projectId: app.projectId,
