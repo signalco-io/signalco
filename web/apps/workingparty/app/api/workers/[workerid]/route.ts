@@ -1,5 +1,5 @@
-import { withAuth } from '../route';
 import { workersDelete, workersGet } from '../../../../src/lib/repository/workersRepository';
+import { withAuth } from '../../../../src/lib/auth/withAuth';
 
 export async function GET(_request: Request, { params }: { params: { workerid: string } }) {
     const { workerid } = params;

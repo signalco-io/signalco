@@ -1,15 +1,6 @@
-import { withAuth } from '../../../workers/route';
-import { PlanDto } from '../../../plans/route';
 import { accountSubscriptions } from '../../../../../src/lib/repository/accountsRepository';
-
-export type SubscriptionDto = {
-    id: string;
-    plan?: PlanDto;
-    active: boolean;
-    start: string;
-    end?: string;
-    hasUpgradePath: boolean;
-}
+import { SubscriptionDto } from '../../../../../src/lib/dtos/subscription';
+import { withAuth } from '../../../../../src/lib/auth/withAuth';
 
 export async function GET(_request: Request, { params }: { params: { accountId: string } }) {
     const { accountId } = params;

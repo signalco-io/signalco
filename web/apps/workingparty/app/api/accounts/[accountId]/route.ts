@@ -1,5 +1,5 @@
-import { withAuth } from '../../workers/route';
 import { accountGet, accountUpdate } from '../../../../src/lib/repository/accountsRepository';
+import { withAuth } from '../../../../src/lib/auth/withAuth';
 
 export async function GET(_request: Request, { params }: { params: { accountId: string } }) {
     const { accountId } = params;
@@ -11,6 +11,8 @@ export async function GET(_request: Request, { params }: { params: { accountId: 
             return new Response(null, { status: 404 });
 
         const account = await accountGet(accountId);
+        if (!account)
+            return new Response(null, { status: 404 });
 
         return Response.json({
             id: account.id,

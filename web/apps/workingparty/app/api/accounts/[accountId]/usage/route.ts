@@ -1,5 +1,5 @@
-import { withAuth } from '../../../workers/route';
 import { accountUsage } from '../../../../../src/lib/repository/accountsRepository';
+import { withAuth } from '../../../../../src/lib/auth/withAuth';
 
 export type AccountUsageDto = {
     messages: {

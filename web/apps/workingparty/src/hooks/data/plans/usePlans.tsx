@@ -1,5 +1,5 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
-import { PlanDto } from '../../../../app/api/plans/route';
+import { PlanDto } from '../../../lib/dtos/plan';
 
 export function usePlans() {
     return useQuery({

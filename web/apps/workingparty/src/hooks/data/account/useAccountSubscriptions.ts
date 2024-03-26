@@ -1,5 +1,5 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
-import { SubscriptionDto } from '../../../../app/api/accounts/[accountId]/subscriptions/route';
+import { SubscriptionDto } from '../../../lib/dtos/subscription';
 
 export function useAccountSubscriptions(accountId: string | undefined) {
     return useQuery({

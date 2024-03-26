@@ -1,6 +1,6 @@
-import { withAuth } from '../../../../workers/route';
 import { stripeCustomerPaymentMethods } from '../../../../../../src/lib/stripe/serverStripe';
 import { accountGet } from '../../../../../../src/lib/repository/accountsRepository';
+import { withAuth } from '../../../../../../src/lib/auth/withAuth';
 
 export type AccountPaymentMethodsDto = ReturnType<typeof stripeCustomerPaymentMethods>;
 

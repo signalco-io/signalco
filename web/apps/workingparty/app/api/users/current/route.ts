@@ -1,5 +1,5 @@
-import { ensureAuthUserId } from '../../workers/route';
 import { usersGet, usersPatch } from '../../../../src/lib/repository/usersRepository';
+import { ensureAuthUserId } from '../../../../src/lib/auth/ensureAuthUserId';
 
 export async function GET() {
     const userIdOrResponse = await ensureAuthUserId();

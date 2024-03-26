@@ -1,10 +1,5 @@
 import { plansGetAll } from '../../../src/lib/repository/plansRepository';
-
-type ArrayElement<ArrType> = ArrType extends readonly (infer ElementType)[]
-    ? ElementType
-    : never;
-
-export type PlanDto = Omit<ArrayElement<Awaited<ReturnType<typeof plansGetAll>>>, 'stripePriceId'>;
+import { PlanDto } from '../../../src/lib/dtos/plan';
 
 export async function GET() {
     const plans = await plansGetAll();

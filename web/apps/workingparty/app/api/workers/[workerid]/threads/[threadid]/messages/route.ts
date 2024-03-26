@@ -1,4 +1,3 @@
-import { withAuth } from '../../../../route';
 import { threadsGet } from '../../../../../../../src/lib/repository/threadsRepository';
 import { messagesCreate, messagesGetAll } from '../../../../../../../src/lib/repository/messagesRepository';
 import { accountUsageIncrement, accountUsageOverLimit } from '../../../../../../../src/lib/repository/accountsRepository';
@@ -6,6 +5,7 @@ import { openAiCreateThread } from '../../../../../../../src/lib/openAiThreads';
 import { openAiCreateRun, openAiWaitForRunCompletion } from '../../../../../../../src/lib/openAiRuns';
 import { openAiCreateMessage, openAiListMessages } from '../../../../../../../src/lib/openAiMessages';
 import { cosmosDataContainerThreads } from '../../../../../../../src/lib/cosmosClient';
+import { withAuth } from '../../../../../../../src/lib/auth/withAuth';
 
 export async function GET(request: Request, { params }: { params: { threadid: string } }) {
     const { threadid } = params;

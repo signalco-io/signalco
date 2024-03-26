@@ -1,7 +1,7 @@
-import { withAuth } from '../../../../../workers/route';
 import { stripeCheckout } from '../../../../../../../src/lib/stripe/serverStripe';
 import { plansGet } from '../../../../../../../src/lib/repository/plansRepository';
 import { accountGet } from '../../../../../../../src/lib/repository/accountsRepository';
+import { withAuth } from '../../../../../../../src/lib/auth/withAuth';
 
 export type CheckoutSessionDto = Awaited<ReturnType<typeof stripeCheckout>>;
 
@@ -21,6 +21,9 @@ export async function GET(_request: Request, { params }: { params: { accountId: 
         // TODO: Check if account is eligable for selected price
 
         const account = await accountGet(accountId);
+        if (!account)
+            return new Response(null, { status: 404 });
+
         const session = await stripeCheckout(account, plan.stripePriceId);
         if (!session)
             return new Response(null, { status: 400 });
