@@ -59,7 +59,7 @@
     "devDependencies": {
         "@axe-core/playwright": "4.8.5",
         "@babel/core": "7.23.9",
-        "@next/bundle-analyzer": "14.1.0",
+        "@next/bundle-analyzer": "14.1.4",
         "@playwright/test": "1.41.2",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
