@@ -1286,8 +1286,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@stripe/stripe-js':
-        specifier: 3.0.5
-        version: 3.0.5
+        specifier: 3.1.0
+        version: 3.1.0
       '@tailwindcss/typography':
         specifier: 0.5.11
         version: 0.5.11(tailwindcss@3.4.1)
@@ -8096,8 +8096,8 @@ packages:
       file-system-cache: 2.3.0
     dev: true
 
-  /@stripe/stripe-js@3.0.5:
-    resolution: {integrity: sha512-0BTd2bC+8gSKty7jXKRntLnvmWgFTmpZkY0oP7ADBYfdV0JtuGoDbfQawui0W5eUlwT3CcKh2IeRV4SPOBIeXQ==}
+  /@stripe/stripe-js@3.1.0:
+    resolution: {integrity: sha512-7+ciE35i8NZ6l4FiO1qFkBoZ64ul6B2ZhBVyygB+e/2EZa2WLUyjoxrP53SagnUW7+/q25nDyDLzQq5F0ebOEw==}
     engines: {node: '>=12.16'}
     dev: false
 
