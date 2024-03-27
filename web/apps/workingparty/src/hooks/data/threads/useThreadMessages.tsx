@@ -1,4 +1,4 @@
-import { ThreadMessage as OAIThreadMessage } from 'openai/resources/beta/threads/messages/messages.mjs';
+import { ThreadMessage as OAIThreadMessage } from 'openai/resources/beta/threads/messages/messages';
 import { InfiniteData, UseInfiniteQueryResult, useInfiniteQuery } from '@tanstack/react-query';
 import { orderBy } from '@signalco/js';
 
