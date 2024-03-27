@@ -165,11 +165,11 @@ importers:
         specifier: 1.9.0
         version: 1.9.0
       tailwindcss:
-        specifier: 3.4.2
-        version: 3.4.2
+        specifier: 3.4.3
+        version: 3.4.3
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.2)
+        version: 1.0.7(tailwindcss@3.4.3)
       uuid:
         specifier: 9.0.1
         version: 9.0.1
@@ -343,11 +343,11 @@ importers:
         specifier: 0.33.3
         version: 0.33.3
       tailwindcss:
-        specifier: 3.4.2
-        version: 3.4.2
+        specifier: 3.4.3
+        version: 3.4.3
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.2)
+        version: 1.0.7(tailwindcss@3.4.3)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
@@ -522,11 +522,11 @@ importers:
         specifier: 1.72.0
         version: 1.72.0
       tailwindcss:
-        specifier: 3.4.2
-        version: 3.4.2
+        specifier: 3.4.3
+        version: 3.4.3
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.2)
+        version: 1.0.7(tailwindcss@3.4.3)
       typescript:
         specifier: 5.4.3
         version: 5.4.3
@@ -648,11 +648,11 @@ importers:
         specifier: 0.33.3
         version: 0.33.3
       tailwindcss:
-        specifier: 3.4.2
-        version: 3.4.2
+        specifier: 3.4.3
+        version: 3.4.3
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.2)
+        version: 1.0.7(tailwindcss@3.4.3)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
@@ -772,11 +772,11 @@ importers:
         specifier: 0.33.3
         version: 0.33.3
       tailwindcss:
-        specifier: 3.4.2
-        version: 3.4.2
+        specifier: 3.4.3
+        version: 3.4.3
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.2)
+        version: 1.0.7(tailwindcss@3.4.3)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
@@ -924,11 +924,11 @@ importers:
         specifier: 5.1.2
         version: 5.1.2(@babel/core@7.24.3)(react@18.2.0)
       tailwindcss:
-        specifier: 3.4.2
-        version: 3.4.2
+        specifier: 3.4.3
+        version: 3.4.3
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.2)
+        version: 1.0.7(tailwindcss@3.4.3)
       typescript:
         specifier: 5.4.3
         version: 5.4.3
@@ -1005,11 +1005,11 @@ importers:
         specifier: 0.33.3
         version: 0.33.3
       tailwindcss:
-        specifier: 3.4.2
-        version: 3.4.2
+        specifier: 3.4.3
+        version: 3.4.3
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.2)
+        version: 1.0.7(tailwindcss@3.4.3)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
@@ -1118,7 +1118,7 @@ importers:
         version: link:../../packages/ui-primitives
       '@tailwindcss/typography':
         specifier: 0.5.12
-        version: 0.5.12(tailwindcss@3.4.2)
+        version: 0.5.12(tailwindcss@3.4.3)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.1.4)(react@18.2.0)
@@ -1159,11 +1159,11 @@ importers:
         specifier: 0.33.3
         version: 0.33.3
       tailwindcss:
-        specifier: 3.4.2
-        version: 3.4.2
+        specifier: 3.4.3
+        version: 3.4.3
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.2)
+        version: 1.0.7(tailwindcss@3.4.3)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
@@ -1290,7 +1290,7 @@ importers:
         version: 3.1.0
       '@tailwindcss/typography':
         specifier: 0.5.12
-        version: 0.5.12(tailwindcss@3.4.2)
+        version: 0.5.12(tailwindcss@3.4.3)
       '@tanstack/react-query':
         specifier: 5.28.9
         version: 5.28.9(react@18.2.0)
@@ -1340,11 +1340,11 @@ importers:
         specifier: 14.22.0
         version: 14.22.0
       tailwindcss:
-        specifier: 3.4.2
-        version: 3.4.2
+        specifier: 3.4.3
+        version: 3.4.3
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.2)
+        version: 1.0.7(tailwindcss@3.4.3)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
@@ -1541,7 +1541,7 @@ importers:
         version: 7.34.1(eslint@8.57.0)
       eslint-plugin-tailwindcss:
         specifier: 3.15.1
-        version: 3.15.1(tailwindcss@3.4.2)
+        version: 3.15.1(tailwindcss@3.4.3)
       typescript:
         specifier: 5.4.3
         version: 5.4.3
@@ -1606,11 +1606,11 @@ importers:
   packages/tailwindcss-config-signalco:
     dependencies:
       tailwindcss:
-        specifier: 3.4.2
-        version: 3.4.2
+        specifier: 3.4.3
+        version: 3.4.3
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.2)
+        version: 1.0.7(tailwindcss@3.4.3)
 
   packages/tsconfig: {}
 
@@ -1944,11 +1944,11 @@ importers:
         specifier: 1.72.0
         version: 1.72.0
       tailwindcss:
-        specifier: 3.4.2
-        version: 3.4.2
+        specifier: 3.4.3
+        version: 3.4.3
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.2)
+        version: 1.0.7(tailwindcss@3.4.3)
       tsup:
         specifier: 8.0.2
         version: 8.0.2(postcss@8.4.38)(typescript@5.4.3)
@@ -8213,7 +8213,7 @@ packages:
   /@swc/types@0.1.5:
     resolution: {integrity: sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==}
 
-  /@tailwindcss/typography@0.5.12(tailwindcss@3.4.2):
+  /@tailwindcss/typography@0.5.12(tailwindcss@3.4.3):
     resolution: {integrity: sha512-CNwpBpconcP7ppxmuq3qvaCxiRWnbhANpY/ruH4L5qs2GCiVDJXde/pjj2HWPV1+Q4G9+V/etrwUYopdcjAlyg==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
@@ -8222,7 +8222,7 @@ packages:
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.2
+      tailwindcss: 3.4.3
     dev: false
 
   /@tanstack/query-core@5.28.9:
@@ -12528,7 +12528,7 @@ packages:
       string.prototype.matchall: 4.0.10
     dev: false
 
-  /eslint-plugin-tailwindcss@3.15.1(tailwindcss@3.4.2):
+  /eslint-plugin-tailwindcss@3.15.1(tailwindcss@3.4.3):
     resolution: {integrity: sha512-4RXRMIaMG07C2TBEW1k0VM4+dDazz1kxcZhkK4zirvmHGZTA4jnlSO2kq5mamuSPi+Wo17dh2SlC8IyFBuCd7Q==}
     engines: {node: '>=12.13.0'}
     peerDependencies:
@@ -12536,7 +12536,7 @@ packages:
     dependencies:
       fast-glob: 3.3.2
       postcss: 8.4.38
-      tailwindcss: 3.4.2
+      tailwindcss: 3.4.3
     dev: false
 
   /eslint-plugin-turbo@1.10.12(eslint@8.57.0):
@@ -13165,7 +13165,7 @@ packages:
       function-bind: 1.1.2
       has-proto: 1.0.1
       has-symbols: 1.0.3
-      hasown: 2.0.0
+      hasown: 2.0.1
 
   /get-intrinsic@1.2.4:
     resolution: {integrity: sha512-5uYhsJH8VJBTv7oslg4BznJYhDoRI6waYCxMmCdnTrcCrHA/fCFKoTFz2JKKE0HdDFUF7/oQuhzumXJK7paBRQ==}
@@ -13473,6 +13473,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
+    dev: false
 
   /hasown@2.0.1:
     resolution: {integrity: sha512-1/th4MHjnwncwXsIW6QMzlvYL9kG5e/CpVvLRZe4XPa8TOUNbCELqmvhDmnkNsAjwaG4+I8gJJL0JBvTTLO9qA==}
@@ -19535,12 +19536,12 @@ packages:
       '@babel/runtime': 7.24.1
     dev: true
 
-  /tailwindcss-animate@1.0.7(tailwindcss@3.4.2):
+  /tailwindcss-animate@1.0.7(tailwindcss@3.4.3):
     resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
-      tailwindcss: 3.4.2
+      tailwindcss: 3.4.3
 
   /tailwindcss@3.4.0:
     resolution: {integrity: sha512-VigzymniH77knD1dryXbyxR+ePHihHociZbXnLZHUyzf2MMs2ZVqlUrZ3FvpXP8pno9JzmILt1sZPD19M3IxtA==}
@@ -19573,8 +19574,8 @@ packages:
       - ts-node
     dev: false
 
-  /tailwindcss@3.4.2:
-    resolution: {integrity: sha512-1kIzVecynNKMhhX8mPTOwTkkVHupUTMbEvk4n1ByxdM8sQTJ8fE41Y4TdORG6GmiVXHhfZ/++0hiIFJFwfadsA==}
+  /tailwindcss@3.4.3:
+    resolution: {integrity: sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
