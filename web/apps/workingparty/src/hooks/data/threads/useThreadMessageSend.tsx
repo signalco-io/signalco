@@ -1,4 +1,4 @@
-import { ThreadMessage as OAIThreadMessage } from 'openai/resources/beta/threads/messages/messages';
+import { Message } from 'openai/resources/beta/threads/messages/messages';
 import { UseMutationResult, useMutation, useQueryClient, QueryClient, QueryKey } from '@tanstack/react-query';
 import { useCurrentUser } from '../users/useCurrentUser';
 
@@ -34,19 +34,23 @@ export function useThreadMessageSend(workerId: string, threadId: string): UseMut
     return useMutation({
         mutationFn: (message: string) => sendThreadMessage(workerId, threadId, message),
         onMutate: async (newItem) => ({
-            previousItems: await handleArrayOptimisticInsert<OAIThreadMessage, OAIThreadMessage>(client, ['threadMessages', threadId], {
+            previousItems: await handleArrayOptimisticInsert<Message, Message>(client, ['threadMessages', threadId], {
                 id: 'optimistic',
                 content: [
                     { type: 'text', text: { value: newItem, annotations: [] } }
                 ],
                 role: 'user',
-                created_at: new Date().getTime() / 1000, // to UNIX seconds
+                created_at: Date.now() / 1000, // to UNIX seconds
                 assistant_id: workerId,
                 file_ids: [],
                 thread_id: threadId,
                 metadata: null,
                 object: 'thread.message',
-                run_id: null
+                run_id: null,
+                completed_at: Date.now() / 1000, // to UNIX seconds
+                incomplete_at: null,
+                incomplete_details: null,
+                status: 'completed'
             })
         }),
         onError: (_, __, context) => {
