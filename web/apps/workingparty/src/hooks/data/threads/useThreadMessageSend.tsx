@@ -1,4 +1,4 @@
-import { ThreadMessage as OAIThreadMessage } from 'openai/resources/beta/threads/messages/messages.mjs';
+import { ThreadMessage as OAIThreadMessage } from 'openai/resources/beta/threads/messages/messages';
 import { UseMutationResult, useMutation, useQueryClient, QueryClient, QueryKey } from '@tanstack/react-query';
 import { useCurrentUser } from '../users/useCurrentUser';
 
