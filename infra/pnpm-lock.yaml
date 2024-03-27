@@ -36,8 +36,8 @@ importers:
         specifier: 0.9.2
         version: 0.9.2
       '@pulumi/docker':
-        specifier: 4.5.2
-        version: 4.5.2
+        specifier: 4.5.3
+        version: 4.5.3
       '@pulumi/pulumi':
         specifier: 3.111.1
         version: 3.111.1
@@ -97,8 +97,8 @@ importers:
         specifier: 0.9.2
         version: 0.9.2
       '@pulumi/docker':
-        specifier: 4.5.2
-        version: 4.5.2
+        specifier: 4.5.3
+        version: 4.5.3
       '@pulumi/pulumi':
         specifier: 3.111.1
         version: 3.111.1
@@ -158,8 +158,8 @@ importers:
         specifier: 0.9.2
         version: 0.9.2
       '@pulumi/docker':
-        specifier: 4.5.2
-        version: 4.5.2
+        specifier: 4.5.3
+        version: 4.5.3
       '@pulumi/pulumi':
         specifier: 3.111.1
         version: 3.111.1
@@ -210,8 +210,8 @@ importers:
         specifier: 5.23.0
         version: 5.23.0
       '@pulumi/docker':
-        specifier: 4.5.2
-        version: 4.5.2
+        specifier: 4.5.3
+        version: 4.5.3
       '@pulumi/pulumi':
         specifier: 3.111.1
         version: 3.111.1
@@ -298,8 +298,8 @@ importers:
         specifier: 0.9.2
         version: 0.9.2
       '@pulumi/docker':
-        specifier: 4.5.2
-        version: 4.5.2
+        specifier: 4.5.3
+        version: 4.5.3
       '@pulumi/pulumi':
         specifier: 3.111.1
         version: 3.111.1
@@ -1111,8 +1111,8 @@ packages:
       - supports-color
     dev: false
 
-  /@pulumi/docker@4.5.2:
-    resolution: {integrity: sha512-CDg89WDVFEpf61osokdGqcucf/bgFv7lPbdGPBxQ/8PpoPSPJuf+kHT070lAms4iNQ7t0dpfUAlTQXarKBxwXw==}
+  /@pulumi/docker@4.5.3:
+    resolution: {integrity: sha512-chHRNGzmpdskxJt0MvD0Mt3x4v9zYTssRoGNGCpkVCnicYSV8CUi26J1b6svp+aWK4RNrqmD1ohFHHXIVtSxjA==}
     dependencies:
       '@pulumi/pulumi': 3.111.1
       semver: 5.7.2
