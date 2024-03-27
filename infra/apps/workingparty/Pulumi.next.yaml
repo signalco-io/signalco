@@ -18,5 +18,10 @@ config:
     secure: AAABAG9zbmY5t4S27H4QuaCj35mVe8NVmCKEgzry2ajqbYy+ohranbTX3sY6N2A7rkBnk0LI6Ow/1Pp7YJk6shGzMpUe3sVJvBk/XM+Yn7WiDeH+16gnTmZ2sUWSAFDP
   workingparty:openaikey:
     secure: AAABAPdimdpTlypx46e1fqyCS3zqcYZwWUuAx37ZyYZIx1Squ3yn9fiHQGXzBq5VAuIizLYm3HpkqcxvuV/QFw1YfKLcWYM8R04pRQCZvQVjH9o=
+  workingparty:stripepublic: pk_test_51Oo4eBKrhEdchP2TpPJFSb1ktE3fc7ROYF7F92XC39ImPQgmzNWpAQpywBTZqYWMEBAGWJtnhekH6IKaoukUUJ5U00yjMFfDGh
+  workingparty:stripesecret:
+    secure: AAABAEoepFSvUJLmr/2PJdR2FnoRH76wQ0DtHgTJ4Zrjjm6Uz4mGxElfsjwQxal9FVshQNDGKf8hSWI03UI36VM/RrN/COxQrtjDEB9eRddWL0m+42xj7Atz5PKvZvMDhxuMCfrmqDgGgwaZ+/xjki+qR2rSRwnSkqDYyYCrbQGaRwy+dPsMoLaBFQ==
+  workingparty:stripewebhooksecret:
+    secure: AAABAP7y3B6EPrYjkdEpLV9B8WEoitSbd/6Y20BBV6J/uDoMOAAQfHf8af85URCL1+knycDLgYjr0ZD2V33NOJ9CpTdK3A==
   workingparty:zoneid:
     secure: AAABAKPhChxDtSh0Awbi9M5qGDOO7imXSeho3ge9StCDHOY1a30L6vFuuNnMsKxr4rWjPMf3gpeTUxj5G1AyVg==

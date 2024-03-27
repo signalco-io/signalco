@@ -220,19 +220,19 @@ const up = async () => {
     new ProjectEnvironmentVariable('vercel-wp-env-stripepublic', {
         projectId: app.projectId,
         key: 'NEXT_PUBLIC_STRIPE_PUBLISHABLE',
-        value: 'sk-public-todo', // TODO: Populate when available
+        value: config.requireSecret('stripepublic'),
         targets: stack === 'production' ? ['production'] : ['preview'],
     });
     new ProjectEnvironmentVariable('vercel-wp-env-stripesecret', {
         projectId: app.projectId,
         key: 'STRIPE_SECRETKEY',
-        value: 'sk-secret-todo', // TODO: Populate when available
+        value: config.requireSecret('stripesecret'),
         targets: stack === 'production' ? ['production'] : ['preview'],
     });
     new ProjectEnvironmentVariable('vercel-wp-env-stripewebhook', {
         projectId: app.projectId,
         key: 'STRIPE_WEBHOOK_SECRET',
-        value: 'sk-secret-webhook-todo', // TODO: Populate when available
+        value: config.requireSecret('stripewebhooksecret'),
         targets: stack === 'production' ? ['production'] : ['preview'],
     });
     new ProjectEnvironmentVariable('vercel-wp-env-jwtsecret', {
