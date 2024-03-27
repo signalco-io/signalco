@@ -615,8 +615,8 @@ importers:
         specifier: 2.1.36
         version: 2.1.36
       drizzle-orm:
-        specifier: 0.30.4
-        version: 0.30.4(@planetscale/database@1.16.0)(@types/react@18.2.72)(react@18.2.0)
+        specifier: 0.30.5
+        version: 0.30.5(@planetscale/database@1.16.0)(@types/react@18.2.72)(react@18.2.0)
       nanoid:
         specifier: 5.0.6
         version: 5.0.6
@@ -11672,8 +11672,8 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.30.4(@planetscale/database@1.16.0)(@types/react@18.2.72)(react@18.2.0):
-    resolution: {integrity: sha512-kWoSMGbrOFkmkAweLTFtHJMpN+nwhx89q0mLELqT2aEU+1szNV8jrnBmJwZ0WGNp7J7yQn/ezEtxBI/qzTSElQ==}
+  /drizzle-orm@0.30.5(@planetscale/database@1.16.0)(@types/react@18.2.72)(react@18.2.0):
+    resolution: {integrity: sha512-oImmwGpe1jTWvhPkpsnramZA8m/lE8krTj7Ws7KHSFCMshMXmcZWX2g2Ki793PQOBmwI50KYzWJ9yNKKhWYLyA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
