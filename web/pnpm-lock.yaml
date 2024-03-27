@@ -1316,8 +1316,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       next-themes:
-        specifier: 0.2.1
-        version: 0.2.1(next@14.2.0-canary.43)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 0.3.0
+        version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
       openai:
         specifier: 4.28.0
         version: 4.28.0
@@ -16017,18 +16017,6 @@ packages:
       minimist: 1.2.8
       next: 14.2.0-canary.43(@babel/core@7.24.3)(@playwright/test@1.42.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0)
     dev: true
-
-  /next-themes@0.2.1(next@14.2.0-canary.43)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==}
-    peerDependencies:
-      next: '*'
-      react: '*'
-      react-dom: '*'
-    dependencies:
-      next: 14.2.0-canary.43(@babel/core@7.24.3)(@playwright/test@1.42.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.72.0)
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
 
   /next-themes@0.3.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-/QHIrsYpd6Kfk7xakK4svpDI5mmXP0gfvCoJdGpZQ2TOrQZmsW0QxjaiLn8wbIKjtm4BTSqLoix4lxYYOnLJ/w==}
