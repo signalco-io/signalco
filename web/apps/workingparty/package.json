@@ -42,7 +42,7 @@
         "jose": "5.2.3",
         "next": "14.2.0-canary.43",
         "next-secure-headers": "2.2.0",
-        "next-themes": "0.2.1",
+        "next-themes": "0.3.0",
         "nanoid": "5.0.6",
         "openai": "4.28.0",
         "react": "18.2.0",
