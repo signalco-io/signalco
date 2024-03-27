@@ -87,8 +87,8 @@ importers:
         specifier: 5.28.9
         version: 5.28.9(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.28.9
-        version: 5.28.9(@tanstack/react-query@5.28.9)(react@18.2.0)
+        specifier: 5.28.10
+        version: 5.28.10(@tanstack/react-query@5.28.9)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.1.4)(react@18.2.0)
@@ -165,11 +165,11 @@ importers:
         specifier: 1.9.0
         version: 1.9.0
       tailwindcss:
-        specifier: 3.4.1
-        version: 3.4.1
+        specifier: 3.4.2
+        version: 3.4.2
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.1)
+        version: 1.0.7(tailwindcss@3.4.2)
       uuid:
         specifier: 9.0.1
         version: 9.0.1
@@ -343,11 +343,11 @@ importers:
         specifier: 0.33.3
         version: 0.33.3
       tailwindcss:
-        specifier: 3.4.1
-        version: 3.4.1
+        specifier: 3.4.2
+        version: 3.4.2
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.1)
+        version: 1.0.7(tailwindcss@3.4.2)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
@@ -522,11 +522,11 @@ importers:
         specifier: 1.72.0
         version: 1.72.0
       tailwindcss:
-        specifier: 3.4.1
-        version: 3.4.1
+        specifier: 3.4.2
+        version: 3.4.2
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.1)
+        version: 1.0.7(tailwindcss@3.4.2)
       typescript:
         specifier: 5.4.3
         version: 5.4.3
@@ -606,8 +606,8 @@ importers:
         specifier: 5.28.9
         version: 5.28.9(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.28.9
-        version: 5.28.9(@tanstack/react-query@5.28.9)(react@18.2.0)
+        specifier: 5.28.10
+        version: 5.28.10(@tanstack/react-query@5.28.9)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.1.4)(react@18.2.0)
@@ -615,8 +615,8 @@ importers:
         specifier: 2.1.36
         version: 2.1.36
       drizzle-orm:
-        specifier: 0.30.4
-        version: 0.30.4(@planetscale/database@1.16.0)(@types/react@18.2.72)(react@18.2.0)
+        specifier: 0.30.5
+        version: 0.30.5(@planetscale/database@1.16.0)(@types/react@18.2.72)(react@18.2.0)
       nanoid:
         specifier: 5.0.6
         version: 5.0.6
@@ -648,11 +648,11 @@ importers:
         specifier: 0.33.3
         version: 0.33.3
       tailwindcss:
-        specifier: 3.4.1
-        version: 3.4.1
+        specifier: 3.4.2
+        version: 3.4.2
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.1)
+        version: 1.0.7(tailwindcss@3.4.2)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
@@ -772,11 +772,11 @@ importers:
         specifier: 0.33.3
         version: 0.33.3
       tailwindcss:
-        specifier: 3.4.1
-        version: 3.4.1
+        specifier: 3.4.2
+        version: 3.4.2
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.1)
+        version: 1.0.7(tailwindcss@3.4.2)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
@@ -924,11 +924,11 @@ importers:
         specifier: 5.1.2
         version: 5.1.2(@babel/core@7.24.3)(react@18.2.0)
       tailwindcss:
-        specifier: 3.4.1
-        version: 3.4.1
+        specifier: 3.4.2
+        version: 3.4.2
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.1)
+        version: 1.0.7(tailwindcss@3.4.2)
       typescript:
         specifier: 5.4.3
         version: 5.4.3
@@ -978,8 +978,8 @@ importers:
         specifier: 5.28.9
         version: 5.28.9(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.28.9
-        version: 5.28.9(@tanstack/react-query@5.28.9)(react@18.2.0)
+        specifier: 5.28.10
+        version: 5.28.10(@tanstack/react-query@5.28.9)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.1.4)(react@18.2.0)
@@ -1005,11 +1005,11 @@ importers:
         specifier: 0.33.3
         version: 0.33.3
       tailwindcss:
-        specifier: 3.4.1
-        version: 3.4.1
+        specifier: 3.4.2
+        version: 3.4.2
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.1)
+        version: 1.0.7(tailwindcss@3.4.2)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
@@ -1118,7 +1118,7 @@ importers:
         version: link:../../packages/ui-primitives
       '@tailwindcss/typography':
         specifier: 0.5.11
-        version: 0.5.11(tailwindcss@3.4.1)
+        version: 0.5.11(tailwindcss@3.4.2)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.1.4)(react@18.2.0)
@@ -1159,11 +1159,11 @@ importers:
         specifier: 0.33.3
         version: 0.33.3
       tailwindcss:
-        specifier: 3.4.1
-        version: 3.4.1
+        specifier: 3.4.2
+        version: 3.4.2
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.1)
+        version: 1.0.7(tailwindcss@3.4.2)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
@@ -1290,13 +1290,13 @@ importers:
         version: 3.1.0
       '@tailwindcss/typography':
         specifier: 0.5.11
-        version: 0.5.11(tailwindcss@3.4.1)
+        version: 0.5.11(tailwindcss@3.4.2)
       '@tanstack/react-query':
         specifier: 5.28.9
         version: 5.28.9(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.28.9
-        version: 5.28.9(@tanstack/react-query@5.28.9)(react@18.2.0)
+        specifier: 5.28.10
+        version: 5.28.10(@tanstack/react-query@5.28.9)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.2.0-canary.44)(react@18.2.0)
@@ -1319,8 +1319,8 @@ importers:
         specifier: 0.3.0
         version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
       openai:
-        specifier: 4.28.0
-        version: 4.28.0
+        specifier: 4.29.2
+        version: 4.29.2
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1340,11 +1340,11 @@ importers:
         specifier: 14.22.0
         version: 14.22.0
       tailwindcss:
-        specifier: 3.4.1
-        version: 3.4.1
+        specifier: 3.4.2
+        version: 3.4.2
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.1)
+        version: 1.0.7(tailwindcss@3.4.2)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.8.5
@@ -1541,7 +1541,7 @@ importers:
         version: 7.34.1(eslint@8.57.0)
       eslint-plugin-tailwindcss:
         specifier: 3.15.1
-        version: 3.15.1(tailwindcss@3.4.1)
+        version: 3.15.1(tailwindcss@3.4.2)
       typescript:
         specifier: 5.4.3
         version: 5.4.3
@@ -1606,11 +1606,11 @@ importers:
   packages/tailwindcss-config-signalco:
     dependencies:
       tailwindcss:
-        specifier: 3.4.1
-        version: 3.4.1
+        specifier: 3.4.2
+        version: 3.4.2
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.1)
+        version: 1.0.7(tailwindcss@3.4.2)
 
   packages/tsconfig: {}
 
@@ -1944,11 +1944,11 @@ importers:
         specifier: 1.72.0
         version: 1.72.0
       tailwindcss:
-        specifier: 3.4.1
-        version: 3.4.1
+        specifier: 3.4.2
+        version: 3.4.2
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.1)
+        version: 1.0.7(tailwindcss@3.4.2)
       tsup:
         specifier: 8.0.2
         version: 8.0.2(postcss@8.4.38)(typescript@5.4.3)
@@ -4978,14 +4978,6 @@ packages:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: /wrap-ansi@7.0.0
 
-  /@jridgewell/gen-mapping@0.3.3:
-    resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
-    engines: {node: '>=6.0.0'}
-    dependencies:
-      '@jridgewell/set-array': 1.1.2
-      '@jridgewell/sourcemap-codec': 1.4.15
-      '@jridgewell/trace-mapping': 0.3.20
-
   /@jridgewell/gen-mapping@0.3.5:
     resolution: {integrity: sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==}
     engines: {node: '>=6.0.0'}
@@ -4999,10 +4991,6 @@ packages:
     engines: {node: '>=6.0.0'}
     requiresBuild: true
 
-  /@jridgewell/set-array@1.1.2:
-    resolution: {integrity: sha512-xnkseuNADM0gt2bs+BvhO0p78Mk762YnZdsuzFV018NoG1Sj1SCQvpSqa7XUaTam5vAGasABV9qXASMKnFMwMw==}
-    engines: {node: '>=6.0.0'}
-
   /@jridgewell/set-array@1.2.1:
     resolution: {integrity: sha512-R8gLRTZeyp03ymzP/6Lil/28tGeGEzhx1q2k703KGWRAI1VdvPIXdG70VJc2pAMw3NA6JKL5hhFu1sJX0Mnn/A==}
     engines: {node: '>=6.0.0'}
@@ -5010,17 +4998,11 @@ packages:
   /@jridgewell/source-map@0.3.5:
     resolution: {integrity: sha512-UTYAUj/wviwdsMfzoSJspJxbkH5o1snzwX0//0ENX1u/55kkZZkcTZP6u9bwKGkv+dkk9at4m1Cpt0uY80kcpQ==}
     dependencies:
-      '@jridgewell/gen-mapping': 0.3.3
-      '@jridgewell/trace-mapping': 0.3.20
+      '@jridgewell/gen-mapping': 0.3.5
+      '@jridgewell/trace-mapping': 0.3.25
 
   /@jridgewell/sourcemap-codec@1.4.15:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
-
-  /@jridgewell/trace-mapping@0.3.20:
-    resolution: {integrity: sha512-R8LcPeWZol2zR8mmH3JeKQ6QRCFb7XgUhV9ZlGhHLGyg4wpPiPZNQOOWhFZhxKw8u//yTbNGI42Bx/3paXEQ+Q==}
-    dependencies:
-      '@jridgewell/resolve-uri': 3.1.1
-      '@jridgewell/sourcemap-codec': 1.4.15
 
   /@jridgewell/trace-mapping@0.3.25:
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
@@ -8231,7 +8213,7 @@ packages:
   /@swc/types@0.1.5:
     resolution: {integrity: sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==}
 
-  /@tailwindcss/typography@0.5.11(tailwindcss@3.4.1):
+  /@tailwindcss/typography@0.5.11(tailwindcss@3.4.2):
     resolution: {integrity: sha512-ahOULqBQGCdSqL3vMNjH1R5cU2gxTh059fJIKF2enHXE8c/s3yKGDSKZ1+4poCr7BZRREJS8n5cCFmwsW4Ok3A==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
@@ -8240,23 +8222,23 @@ packages:
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.1
+      tailwindcss: 3.4.2
     dev: false
 
   /@tanstack/query-core@5.28.9:
     resolution: {integrity: sha512-hNlfCiqZevr3GRVPXS3MhaGW5hjcxvCsIQ4q6ff7EPlvFwYZaS+0d9EIIgofnegDaU2BbCDlyURoYfRl5rmzow==}
 
-  /@tanstack/query-devtools@5.28.6:
-    resolution: {integrity: sha512-DXJGqbrsteWU9XehDf6s3k3QxwQqGUlNXpitsF1xbwkYBcDaAakiC6hjJSMfPBHOrbZCnWfAGCVf4vh2D75/xw==}
+  /@tanstack/query-devtools@5.28.10:
+    resolution: {integrity: sha512-5UN629fKa5/1K/2Pd26gaU7epxRrYiT1gy+V+pW5K6hnf1DeUKK3pANSb2eHKlecjIKIhTwyF7k9XdyE2gREvQ==}
     dev: false
 
-  /@tanstack/react-query-devtools@5.28.9(@tanstack/react-query@5.28.9)(react@18.2.0):
-    resolution: {integrity: sha512-GHbJDJIhAak2B+7NJvSfT+jfajxMf/CEwbVn4Z+JSVLUZ21/TITwQWaihN1WKKj/nMbizUu6U2O9MTNHW4YPqg==}
+  /@tanstack/react-query-devtools@5.28.10(@tanstack/react-query@5.28.9)(react@18.2.0):
+    resolution: {integrity: sha512-D+SiHZTWhK2sNgBYj+xIvUOqonsKy74OLU/YHmRB5OZVLLTiekvZd12C3rKlU+WM69jid0hjEjuFqkULOMwc3A==}
     peerDependencies:
       '@tanstack/react-query': ^5.28.9
       react: ^18.0.0
     dependencies:
-      '@tanstack/query-devtools': 5.28.6
+      '@tanstack/query-devtools': 5.28.10
       '@tanstack/react-query': 5.28.9(react@18.2.0)
       react: 18.2.0
     dev: false
@@ -11690,8 +11672,8 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.30.4(@planetscale/database@1.16.0)(@types/react@18.2.72)(react@18.2.0):
-    resolution: {integrity: sha512-kWoSMGbrOFkmkAweLTFtHJMpN+nwhx89q0mLELqT2aEU+1szNV8jrnBmJwZ0WGNp7J7yQn/ezEtxBI/qzTSElQ==}
+  /drizzle-orm@0.30.5(@planetscale/database@1.16.0)(@types/react@18.2.72)(react@18.2.0):
+    resolution: {integrity: sha512-oImmwGpe1jTWvhPkpsnramZA8m/lE8krTj7Ws7KHSFCMshMXmcZWX2g2Ki793PQOBmwI50KYzWJ9yNKKhWYLyA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -11980,7 +11962,7 @@ packages:
       has-property-descriptors: 1.0.1
       has-proto: 1.0.1
       has-symbols: 1.0.3
-      hasown: 2.0.0
+      hasown: 2.0.1
       internal-slot: 1.0.6
       is-array-buffer: 3.0.2
       is-callable: 1.2.7
@@ -12092,7 +12074,7 @@ packages:
     dependencies:
       get-intrinsic: 1.2.2
       has-tostringtag: 1.0.0
-      hasown: 2.0.0
+      hasown: 2.0.1
 
   /es-set-tostringtag@2.0.3:
     resolution: {integrity: sha512-3T8uNMC3OQTHkFUsFq8r/BwAXLHvU/9O9mE0fBc/MY5iq/8H7ncvO947LmYA6ldWw9Uh8Yhf25zu6n7nML5QWQ==}
@@ -12105,7 +12087,7 @@ packages:
   /es-shim-unscopables@1.0.2:
     resolution: {integrity: sha512-J3yBRXCzDu4ULnQwxyToo/OjdMx6akgVC7K6few0a7F/0wLtmKKN7I73AH5T2836UuXRqN7Qg+IIUw/+YJksRw==}
     dependencies:
-      hasown: 2.0.0
+      hasown: 2.0.1
     dev: false
 
   /es-to-primitive@1.2.1:
@@ -12546,7 +12528,7 @@ packages:
       string.prototype.matchall: 4.0.10
     dev: false
 
-  /eslint-plugin-tailwindcss@3.15.1(tailwindcss@3.4.1):
+  /eslint-plugin-tailwindcss@3.15.1(tailwindcss@3.4.2):
     resolution: {integrity: sha512-4RXRMIaMG07C2TBEW1k0VM4+dDazz1kxcZhkK4zirvmHGZTA4jnlSO2kq5mamuSPi+Wo17dh2SlC8IyFBuCd7Q==}
     engines: {node: '>=12.13.0'}
     peerDependencies:
@@ -12554,7 +12536,7 @@ packages:
     dependencies:
       fast-glob: 3.3.2
       postcss: 8.4.38
-      tailwindcss: 3.4.1
+      tailwindcss: 3.4.2
     dev: false
 
   /eslint-plugin-turbo@1.10.12(eslint@8.57.0):
@@ -13193,7 +13175,7 @@ packages:
       function-bind: 1.1.2
       has-proto: 1.0.1
       has-symbols: 1.0.3
-      hasown: 2.0.0
+      hasown: 2.0.1
 
   /get-nonce@1.0.1:
     resolution: {integrity: sha512-FJhYRoDaiatfEkUK8HKlicmu/3SGFD51q3itKDGoSTysQJBnfOcxU5GxnhE1E6soB76MbT0MBtnKJuXyAx+96Q==}
@@ -13973,7 +13955,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       get-intrinsic: 1.2.2
-      hasown: 2.0.0
+      hasown: 2.0.1
       side-channel: 1.0.4
 
   /internal-slot@1.0.7:
@@ -14093,7 +14075,7 @@ packages:
   /is-core-module@2.13.1:
     resolution: {integrity: sha512-hHrIjvZsftOsvKSn2TRYl63zvxsgE0K+0mYMoH6gD4omR5IWB2KynivBQczo3+wF1cCkjzvptnI9Q0sPU66ilw==}
     dependencies:
-      hasown: 2.0.0
+      hasown: 2.0.1
 
   /is-date-object@1.0.5:
     resolution: {integrity: sha512-9YQaSxsAiSwcvS33MBk3wTCVnWK+HhF8VZR2jRxehM16QcVOdHqPn4VPHmRK4lSr38n9JriurInLcP90xsYNfQ==}
@@ -16479,23 +16461,6 @@ packages:
       is-docker: 2.2.1
       is-wsl: 2.2.0
     dev: true
-
-  /openai@4.28.0:
-    resolution: {integrity: sha512-JM8fhcpmpGN0vrUwGquYIzdcEQHtFuom6sRCbbCM6CfzZXNuRk33G7KfeRAIfnaCxSpzrP5iHtwJzIm6biUZ2Q==}
-    hasBin: true
-    dependencies:
-      '@types/node': 18.19.3
-      '@types/node-fetch': 2.6.9
-      abort-controller: 3.0.0
-      agentkeepalive: 4.5.0
-      digest-fetch: 1.3.0
-      form-data-encoder: 1.7.2
-      formdata-node: 4.4.1
-      node-fetch: 2.7.0
-      web-streams-polyfill: 3.2.1
-    transitivePeerDependencies:
-      - encoding
-    dev: false
 
   /openai@4.29.2:
     resolution: {integrity: sha512-cPkT6zjEcE4qU5OW/SoDDuXEsdOLrXlAORhzmaguj5xZSPlgKvLhi27sFWhLKj07Y6WKNWxcwIbzm512FzTBNQ==}
@@ -19484,7 +19449,7 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
     dependencies:
-      '@jridgewell/gen-mapping': 0.3.3
+      '@jridgewell/gen-mapping': 0.3.5
       commander: 4.1.1
       glob: 7.1.6
       lines-and-columns: 1.2.4
@@ -19570,12 +19535,12 @@ packages:
       '@babel/runtime': 7.24.1
     dev: true
 
-  /tailwindcss-animate@1.0.7(tailwindcss@3.4.1):
+  /tailwindcss-animate@1.0.7(tailwindcss@3.4.2):
     resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
-      tailwindcss: 3.4.1
+      tailwindcss: 3.4.2
 
   /tailwindcss@3.4.0:
     resolution: {integrity: sha512-VigzymniH77knD1dryXbyxR+ePHihHociZbXnLZHUyzf2MMs2ZVqlUrZ3FvpXP8pno9JzmILt1sZPD19M3IxtA==}
@@ -19608,8 +19573,8 @@ packages:
       - ts-node
     dev: false
 
-  /tailwindcss@3.4.1:
-    resolution: {integrity: sha512-qAYmXRfk3ENzuPBakNK0SRrUDipP8NQnEY6772uDhflcQz5EhRdD7JNZxyrFHVQNCwULPBn6FNPp9brpO7ctcA==}
+  /tailwindcss@3.4.2:
+    resolution: {integrity: sha512-1kIzVecynNKMhhX8mPTOwTkkVHupUTMbEvk4n1ByxdM8sQTJ8fE41Y4TdORG6GmiVXHhfZ/++0hiIFJFwfadsA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
@@ -19745,7 +19710,7 @@ packages:
       uglify-js:
         optional: true
     dependencies:
-      '@jridgewell/trace-mapping': 0.3.20
+      '@jridgewell/trace-mapping': 0.3.25
       '@swc/core': 1.3.101
       esbuild: 0.19.11
       jest-worker: 27.5.1
@@ -19771,7 +19736,7 @@ packages:
       uglify-js:
         optional: true
     dependencies:
-      '@jridgewell/trace-mapping': 0.3.20
+      '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
       schema-utils: 3.3.0
       serialize-javascript: 6.0.1
