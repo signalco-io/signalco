@@ -1337,8 +1337,8 @@ importers:
         specifier: 0.33.3
         version: 0.33.3
       stripe:
-        specifier: 14.22.0
-        version: 14.22.0
+        specifier: 14.23.0
+        version: 14.23.0
       tailwindcss:
         specifier: 3.4.3
         version: 3.4.3
@@ -11262,9 +11262,9 @@ packages:
     resolution: {integrity: sha512-E7uGkTzkk1d0ByLeSc6ZsFS79Axg+m1P/VsgYsxHgiuc3tFSj+MjMIwe90FC4lOAZzNBdY7kkO2P2wKdsQ1vgQ==}
     engines: {node: '>= 0.4'}
     dependencies:
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.4
       gopd: 1.0.1
-      has-property-descriptors: 1.0.1
+      has-property-descriptors: 1.0.2
 
   /define-data-property@1.1.4:
     resolution: {integrity: sha512-rBMvIzlpA8v6E+SJZoo++HAYqsLrkg7MSfIinMPFhmkorw7X+dOXVJQs+QT69zGkzMyfDnIMN2Wid1+NbL3T+A==}
@@ -13300,7 +13300,7 @@ packages:
   /has-property-descriptors@1.0.1:
     resolution: {integrity: sha512-VsX8eaIewvas0xnvinAe9bw4WfIeODpGYikiWYLH+dma0Jw6KHYqWiWfhQlgOVK8D6PvjubK5Uc4P0iIhIcNVg==}
     dependencies:
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.4
 
   /has-property-descriptors@1.0.2:
     resolution: {integrity: sha512-55JNKuIW+vq4Ke1BjOTjM2YctQIvCT7GFzHwmfZPGo5wnrgkid0YQtnAleFSqumZm4az3n2BS+erby5ipJdgrg==}
@@ -18695,10 +18695,10 @@ packages:
     resolution: {integrity: sha512-VoaqjbBJKiWtg4yRcKBQ7g7wnGnLV3M8oLvVWwOk2PdYY6PEFegR1vezXR0tw6fZGF9csVakIRjrJiy2veSBFQ==}
     engines: {node: '>= 0.4'}
     dependencies:
-      define-data-property: 1.1.1
-      get-intrinsic: 1.2.2
+      define-data-property: 1.1.4
+      get-intrinsic: 1.2.4
       gopd: 1.0.1
-      has-property-descriptors: 1.0.1
+      has-property-descriptors: 1.0.2
 
   /set-function-length@1.2.1:
     resolution: {integrity: sha512-j4t6ccc+VsKwYHso+kElc5neZpjtq9EnRICFZtWyBsLojhmeF/ZBd/elqm22WJh/BziDe/SBiOeAt0m2mfLD0g==}
@@ -19224,8 +19224,8 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  /stripe@14.22.0:
-    resolution: {integrity: sha512-Pj8SAdTNjMq42UnWzBTTy8KMQ8qbQoVemPHbw3x+rHvwq1Psg9UFPT58j54F5os/SCgUAOZSEMcUedvzIDuqvw==}
+  /stripe@14.23.0:
+    resolution: {integrity: sha512-OPD7LqBmni6uDdqA05GGgMZyyRWxJOehONBNC9tYgY4Uh089EtXd6QLIgRGrqTDlQH3cA2BXo848nxwa/zsQzw==}
     engines: {node: '>=12.*'}
     dependencies:
       '@types/node': 20.11.30
@@ -19965,7 +19965,7 @@ packages:
     dependencies:
       call-bind: 1.0.7
       for-each: 0.3.3
-      has-proto: 1.0.1
+      has-proto: 1.0.3
       is-typed-array: 1.1.13
 
   /typed-array-byte-length@1.0.1:
@@ -19985,7 +19985,7 @@ packages:
       available-typed-arrays: 1.0.7
       call-bind: 1.0.7
       for-each: 0.3.3
-      has-proto: 1.0.1
+      has-proto: 1.0.3
       is-typed-array: 1.1.13
 
   /typed-array-byte-offset@1.0.2:
