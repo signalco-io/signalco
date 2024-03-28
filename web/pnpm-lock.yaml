@@ -537,8 +537,8 @@ importers:
         specifier: 0.12.3
         version: 0.12.3
       '@blocknote/react':
-        specifier: 0.12.2
-        version: 0.12.2(@tiptap/pm@2.1.12)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 0.12.3
+        version: 0.12.3(@tiptap/pm@2.1.12)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)
       '@clerk/nextjs':
         specifier: 4.29.7
         version: 4.29.7(next@14.1.4)(react-dom@18.2.0)(react@18.2.0)
@@ -3535,8 +3535,8 @@ packages:
       - supports-color
     dev: false
 
-  /@blocknote/react@0.12.2(@tiptap/pm@2.1.12)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-oDIBeXHpj4y6KnAbbvqXXV/vDF0QOjfizqi3mJ+vhVHMCrznDeIAsWx0UG9sCiK/zUcYysxSAyQUADAGFbDdUQ==}
+  /@blocknote/react@0.12.3(@tiptap/pm@2.1.12)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-J/5YDnrUJ8iQsRLaIyn+qU8rvDQPIyVC/Q7FM1VMG+eWqvaeW0WfQHWxYe2+pdzXcyShVwM+hkU87bHy0uZs6A==}
     peerDependencies:
       react: ^18
       react-dom: ^18
