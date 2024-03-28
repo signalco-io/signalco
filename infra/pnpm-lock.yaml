@@ -39,8 +39,8 @@ importers:
         specifier: 4.5.3
         version: 4.5.3
       '@pulumi/pulumi':
-        specifier: 3.111.1
-        version: 3.111.1
+        specifier: 3.112.0
+        version: 3.112.0
       '@pulumiverse/vercel':
         specifier: 1.3.0
         version: 1.3.0
@@ -100,8 +100,8 @@ importers:
         specifier: 4.5.3
         version: 4.5.3
       '@pulumi/pulumi':
-        specifier: 3.111.1
-        version: 3.111.1
+        specifier: 3.112.0
+        version: 3.112.0
       '@pulumiverse/vercel':
         specifier: 1.3.0
         version: 1.3.0
@@ -161,8 +161,8 @@ importers:
         specifier: 4.5.3
         version: 4.5.3
       '@pulumi/pulumi':
-        specifier: 3.111.1
-        version: 3.111.1
+        specifier: 3.112.0
+        version: 3.112.0
       '@pulumiverse/vercel':
         specifier: 1.3.0
         version: 1.3.0
@@ -213,8 +213,8 @@ importers:
         specifier: 4.5.3
         version: 4.5.3
       '@pulumi/pulumi':
-        specifier: 3.111.1
-        version: 3.111.1
+        specifier: 3.112.0
+        version: 3.112.0
       '@pulumiverse/vercel':
         specifier: 1.3.0
         version: 1.3.0
@@ -301,8 +301,8 @@ importers:
         specifier: 4.5.3
         version: 4.5.3
       '@pulumi/pulumi':
-        specifier: 3.111.1
-        version: 3.111.1
+        specifier: 3.112.0
+        version: 3.112.0
       '@pulumiverse/vercel':
         specifier: 1.3.0
         version: 1.3.0
@@ -354,7 +354,7 @@ packages:
     resolution: {integrity: sha512-YPNYtwEnKu23VDHNFu91xd/Ueu5zYONHcYwKDA5qTvtgZZ1nzrvPJgrO15KF0fLRVlGo7yckirDS26GpvBTe6w==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.111.1
+      '@pulumi/pulumi': 3.112.0
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -1074,7 +1074,7 @@ packages:
   /@pulumi/aws@6.27.0:
     resolution: {integrity: sha512-KZeOX1e/ZeFF0c+ImzscTQiM23Rx7pRtG4UGciINMmFiGqFRvoF/mPAb1Ln1+5Lzk2C62OHyb5m052pVJEcebg==}
     dependencies:
-      '@pulumi/pulumi': 3.111.1
+      '@pulumi/pulumi': 3.112.0
       builtin-modules: 3.0.0
       mime: 2.6.0
       resolve: 1.22.8
@@ -1086,7 +1086,7 @@ packages:
   /@pulumi/azure-native@2.33.0:
     resolution: {integrity: sha512-ONkH346LczcTPqPXaQCzJBH5bViNFQbH9jpsEG2V0xeFu+YZYhqlHjkzeQR0obMRhT/j2L7fbfjQ1MDbq8ns8A==}
     dependencies:
-      '@pulumi/pulumi': 3.111.1
+      '@pulumi/pulumi': 3.112.0
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -1095,7 +1095,7 @@ packages:
   /@pulumi/cloudflare@5.23.0:
     resolution: {integrity: sha512-SgNiQzU3bonUGIG9IiuRbBUPZgjPIzbYdjD89vvZaRVMaB3AjuWmKpWr7kiRHZiS1eIdLHI4qWXA0kRLH1EHrQ==}
     dependencies:
-      '@pulumi/pulumi': 3.111.1
+      '@pulumi/pulumi': 3.112.0
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -1105,7 +1105,7 @@ packages:
     resolution: {integrity: sha512-9RaGDiy8jFCiaarj4EOrMW/fVCM/AgBigzwM6CKzlR49x8UFiRDmKrXfEVHb8r2P9IpC4IaAZf5VbNNAHwN/rA==}
     requiresBuild: true
     dependencies:
-      '@pulumi/pulumi': 3.111.1
+      '@pulumi/pulumi': 3.112.0
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -1114,15 +1114,15 @@ packages:
   /@pulumi/docker@4.5.3:
     resolution: {integrity: sha512-chHRNGzmpdskxJt0MvD0Mt3x4v9zYTssRoGNGCpkVCnicYSV8CUi26J1b6svp+aWK4RNrqmD1ohFHHXIVtSxjA==}
     dependencies:
-      '@pulumi/pulumi': 3.111.1
+      '@pulumi/pulumi': 3.112.0
       semver: 5.7.2
     transitivePeerDependencies:
       - bluebird
       - supports-color
     dev: false
 
-  /@pulumi/pulumi@3.111.1:
-    resolution: {integrity: sha512-dWDePVPoFPOlX1Wv8zoLmywAq+/iD7jkis/V6xhuTQ7vYbkMxQhDHCSuSn3cx1EaqqSzcBe8AqEbg/IcuN68jA==}
+  /@pulumi/pulumi@3.112.0:
+    resolution: {integrity: sha512-RfAIT0k6Ny7vVjgWP4dauG6EmNz/hkiNXXrVQIYSiD5EfZRwoMML7uhijWf8H5lWUkZwKTcvZdlVkwwgdsJdww==}
     engines: {node: '>=8.13.0 || >=10.10.0'}
     dependencies:
       '@grpc/grpc-js': 1.10.1
@@ -1169,7 +1169,7 @@ packages:
   /@pulumiverse/vercel@1.3.0:
     resolution: {integrity: sha512-01MbJ5skedIhZCxL+YHlZeNtkY2ibMrO48Ilgum7x65Uk4xuOLRT9/0zszBPYASJAkE7P+NVOS/pMIROdSNgjA==}
     dependencies:
-      '@pulumi/pulumi': 3.111.1
+      '@pulumi/pulumi': 3.112.0
     transitivePeerDependencies:
       - bluebird
       - supports-color
