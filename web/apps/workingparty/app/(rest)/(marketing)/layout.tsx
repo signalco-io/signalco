@@ -4,7 +4,8 @@ import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { SectionData } from '@signalco/cms-core/SectionData';
 import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { KnownPages } from '../../../src/knownPages';
-import { PageNav } from '../../../src/components/PageNav';
+import { PageNav, PageNavMenu } from '@signalco/ui/Nav';
+import { NavigatingButton } from '../../../../../packages/ui/src/NavigatingButton/NavigatingButton';
 
 const data: SectionData[] = [
     {
@@ -40,7 +41,13 @@ export default function RootMarketingLayout({ children, }: {
 }) {
     return (
         <>
-            <PageNav fullWidth />
+            <PageNav fullWidth logo={'WorkingParty'}>
+                <PageNavMenu links={[
+                    { href: KnownPages.Pricing, text: 'Pricing' }
+                ]}>
+                    <NavigatingButton href={KnownPages.App}>App</NavigatingButton>
+                </PageNavMenu>
+            </PageNav>
             <Container className="pt-20" maxWidth="lg">
                 {children}
             </Container>
