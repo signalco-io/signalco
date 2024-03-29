@@ -33,7 +33,12 @@ export function AppSidebarProfileButton() {
                     Settings
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-red-600 dark:text-red-400" startDecorator={<LogOut className="w-5" />}>Logout</DropdownMenuItem>
+                <DropdownMenuItem
+                    className="text-red-600 dark:text-red-400"
+                    startDecorator={<LogOut className="w-5" />}
+                    href={KnownPages.AppLogout}>
+                    Logout
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );
