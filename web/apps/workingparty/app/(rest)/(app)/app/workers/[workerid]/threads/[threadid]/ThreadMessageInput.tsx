@@ -7,7 +7,7 @@ import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { Send } from '@signalco/ui-icons';
 import { useThreadMessageSend } from '../../../../../../../../src/hooks/data/threads/useThreadMessageSend';
 
-export function ThreadMessageInput({ workerId, threadId, isLoading }: { workerId: string, threadId: string, isLoading?: boolean }) {
+export function ThreadMessageInput({ workerId, threadId, isLoading, onMessage }: { workerId: string, threadId: string, isLoading?: boolean, onMessage?: (message: string) => void }) {
     const { mutateAsync: sendThreadMessage, isPending } = useThreadMessageSend(workerId, threadId);
 
     const handleMessage = async (e: FormEvent<HTMLFormElement>) => {
@@ -15,6 +15,12 @@ export function ThreadMessageInput({ workerId, threadId, isLoading }: { workerId
         const formData = new FormData(e.currentTarget);
         const message = formData.get('message')?.toString();
         if (!message) return;
+
+        // Override standard thread message behavior
+        if (onMessage) {
+            onMessage(message);
+            return;
+        }
 
         await sendThreadMessage(message);
     }

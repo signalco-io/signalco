@@ -11,9 +11,10 @@ export function Ctas1({ ctas }: { ctas: SectionData['ctas']; }) {
             {ctas.map((cta, index) => (
                 <Button
                     key={cta.label}
-                    variant={index === 0 ? 'solid' : 'outlined'}
+                    variant={(index === 0 && !cta.secondary) ? 'solid' : 'outlined'}
+                    size="lg"
                     href={cta.href}
-                    className="w-full">
+                    className="w-full sm:w-auto">
                     {cta.label}
                 </Button>
             ))}

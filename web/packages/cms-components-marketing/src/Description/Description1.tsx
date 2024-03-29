@@ -9,7 +9,7 @@ export function Description1({ tagline, header, description }: Pick<SectionData,
                 <Typography level="body1" tertiary component="span" semiBold>{tagline}</Typography>
                 <Typography level="h2" id={slug(header)}>{header}</Typography>
             </div>
-            <Typography>{description}</Typography>
+            {typeof description === 'string' ? <Typography>{description}</Typography> : description}
         </div>
     );
 }

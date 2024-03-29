@@ -5,9 +5,10 @@ import { CompanyX, CompanyReddit, CompanyGitHub } from '@signalco/ui-icons';
 import { SectionData } from '@signalco/cms-core/SectionData';
 import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { SystemStatusLabel } from '../pages/SystemStatusLabel';
-import { PageNav } from '../PageNav';
+import { PageNav, PageNavMenu } from '@signalco/ui/Nav';
 import SignalcoLogotype from '../icons/SignalcoLogotype';
 import { KnownPages } from '../../src/knownPages';
+import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 
 const footerData: SectionData = {
     tagline: 'signalco',
@@ -65,7 +66,15 @@ export function PageLayout({ children, fullWidth }: PropsWithChildren<{ fullWidt
     const ContentContainer = fullWidth ? Fragment : Container;
     return (
         <Stack spacing={4}>
-            <PageNav fullWidth={fullWidth} />
+            <PageNav fullWidth={fullWidth} logo={<SignalcoLogotype height={32} />}>
+                <PageNavMenu links={[
+                    { href: KnownPages.Features, text: 'Features' },
+                    { href: KnownPages.Channels, text: 'Channels' },
+                    { href: KnownPages.Pricing, text: 'Pricing' }
+                ]}>
+                    <NavigatingButton href={KnownPages.App}>App</NavigatingButton>
+                </PageNavMenu>
+            </PageNav>
             <main className="pt-20">
                 <ContentContainer>
                     {children}

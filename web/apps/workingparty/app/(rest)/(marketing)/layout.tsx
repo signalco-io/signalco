@@ -1,10 +1,12 @@
-import { ExoticComponent, memo } from 'react';
+import { PropsWithChildren } from 'react';
 import { Container } from '@signalco/ui-primitives/Container';
+import { PageNav, PageNavMenu } from '@signalco/ui/Nav';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { SectionData } from '@signalco/cms-core/SectionData';
-import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { KnownPages } from '../../../src/knownPages';
-import { PageNav } from '../../../src/components/PageNav';
+import { cmsComponents } from '../../../src/components/cmsComponents';
+import WorkingPartyLogotype from '../../../src/components/brand/WorkingPartyLogotype';
+import { NavigatingButton } from '../../../../../packages/ui/src/NavigatingButton/NavigatingButton';
 
 const data: SectionData[] = [
     {
@@ -14,6 +16,8 @@ const data: SectionData[] = [
                 header: 'Product',
                 ctas: [
                     { label: 'App', href: KnownPages.App },
+                    { label: 'Pricing', href: KnownPages.Pricing },
+                    { label: 'Contact', href: KnownPages.Contact },
                 ]
             },
             {
@@ -28,25 +32,26 @@ const data: SectionData[] = [
             }
         ],
         tagline: 'WorkingParty.ai',
+        asset: <WorkingPartyLogotype width={290} />
     }
 ]
 
-const sectionComponents: { [key: string]: ExoticComponent<SectionData> } = {
-    'Footer1': memo(Footer1)
-};
-
-export default function RootMarketingLayout({ children, }: {
-    children: React.ReactNode;
-}) {
+export default function RootMarketingLayout({ children, }: PropsWithChildren) {
     return (
         <>
-            <PageNav fullWidth />
-            <Container className="pt-20" maxWidth="lg">
+            <PageNav fullWidth logo={<WorkingPartyLogotype height={32} />}>
+                <PageNavMenu links={[
+                    { href: KnownPages.Pricing, text: 'Pricing' }
+                ]}>
+                    <NavigatingButton href={KnownPages.App}>App</NavigatingButton>
+                </PageNavMenu>
+            </PageNav>
+            <Container className="pt-16">
                 {children}
             </Container>
             <SectionsView
                 sectionsData={data}
-                componentsRegistry={sectionComponents} />
+                componentsRegistry={cmsComponents} />
         </>
     );
 }

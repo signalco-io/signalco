@@ -1,24 +1,25 @@
 import { Link } from '@signalco/ui-primitives/Link';
 import { Button } from '@signalco/ui-primitives/Button';
+import { PropsWithChildren } from 'react';
 
-type NavLinkItem = {
+export type NavLinkItem = {
     href: string,
     text: string
 };
 
-export const navLinks: NavLinkItem[] = [
-    // { href: '#explore', text: 'Explore' },
-    // { href: KnownPages.Pricing, text: 'Pricing' }
-];
+export type PageNavMenuProps = PropsWithChildren<{
+    links?: NavLinkItem[];
+}>;
 
-export function NavMenu() {
+export function PageNavMenu({ links, children }: PageNavMenuProps) {
     return (
         <>
-            {navLinks.map(nl => (
+            {links?.map(nl => (
                 <Link key={nl.href} href={nl.href}>
                     <Button variant="plain" size="lg">{nl.text}</Button>
                 </Link>
             ))}
+            {children}
         </>
     );
 }
