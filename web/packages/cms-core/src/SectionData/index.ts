@@ -4,8 +4,8 @@ export type SectionData = {
     component?: string;
     tagline?: string;
     header?: string;
-    description?: string;
+    description?: ReactNode;
     asset?: ReactNode;
     features?: SectionData[];
-    ctas?: { label: string; href: string; icon?: ReactNode; }[];
+    ctas?: { label: string; href: string; icon?: ReactNode; secondary?: boolean }[];
 };
