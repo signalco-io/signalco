@@ -16,8 +16,9 @@ export const marketplaceCategories = [
         name: 'Business',
         subcategories: [
             { id: 'businessOps', name: 'Business Operations' },
-            { id: 'salesAndMarketing', name: 'Sales and Marketing' },
+            { id: 'design', name: 'Design' },
             { id: 'finance', name: 'Finance' },
+            { id: 'salesAndMarketing', name: 'Sales and Marketing' },
             { id: 'softwareDevelopment', name: 'Software Development' },
         ]
     },
@@ -31,9 +32,9 @@ export const marketplaceCategories = [
     {
         name: 'Fun',
         subcategories: [
-            { id: 'travel', name: 'Travel' },
-            { id: 'lifestyle', name: 'Lifestyle' },
             { id: 'entertainment', name: 'Entertainment' },
+            { id: 'lifestyle', name: 'Lifestyle' },
+            { id: 'travel', name: 'Travel' },
         ]
     },
 ] satisfies Array<MarketplaceCategory | MarketplaceCategorySection>;

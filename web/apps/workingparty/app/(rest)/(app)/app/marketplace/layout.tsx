@@ -9,7 +9,7 @@ import { AI, Store } from '@signalco/ui-icons';
 import { SplitView } from '@signalco/ui/SplitView';
 import { KnownPages } from '../../../../../src/knownPages';
 import { AppSidebar } from '../../../../../src/components/AppSidebar';
-import { marketplaceCategories } from './[categoryId]/marketplaceCategories';
+import { marketplaceCategories } from '../../../../../src/data/marketplaceCategories';
 
 export default function AppMarketplaceLayout({ children }: PropsWithChildren) {
     const router = useRouter();

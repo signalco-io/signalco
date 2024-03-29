@@ -8,7 +8,7 @@ import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { marketplaceWorkers } from '../../../../../../src/data/markerplaceWorkers';
 import { WorkerModal } from './WorkerModal';
 import { WorkerCard } from './WorkerCard';
-import { markeplaceCategoriesFlat } from './markeplaceCategoriesFlat';
+import { markeplaceCategoriesFlat } from '../../../../../../src/data/markeplaceCategoriesFlat';
 
 export default function MarketplaceCategoryPage({ params }: { params: { categoryId: string } }) {
     const { categoryId } = params;

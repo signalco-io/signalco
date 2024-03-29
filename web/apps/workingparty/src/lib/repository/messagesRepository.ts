@@ -2,7 +2,6 @@ import { openAiCreateRun } from '../openAiRuns';
 import { openAiCreateMessage, openAiListMessages } from '../openAiMessages';
 import { workersGet } from './workersRepository';
 import { threadsGet } from './threadsRepository';
-import { accountUsageIncrement } from './accountsRepository';
 
 export async function messagesGetAll(accountId: string, threadId: string, before?: string, after?: string) {
     const { oaiThreadId } = await threadsGet(accountId, threadId);
@@ -17,12 +16,7 @@ export async function messagesCreate(accountId: string, workerId: string, thread
     ]);
 
     await openAiCreateMessage(oaiThreadId, message);
-    const [oaiRunId] = await Promise.all([
-        openAiCreateRun(oaiThreadId, oaiAssistantId),
-        accountUsageIncrement(accountId, {
-            messages: 1,
-        })
-    ]);
+    const oaiRunId = await openAiCreateRun(oaiThreadId, oaiAssistantId);
 
     return {
         runId: oaiRunId

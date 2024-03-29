@@ -9,7 +9,7 @@ import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { initials } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { marketplaceWorkers } from '../../../../../../src/data/markerplaceWorkers';
-import { markeplaceCategoriesFlat } from './markeplaceCategoriesFlat';
+import { markeplaceCategoriesFlat } from '../../../../../../src/data/markeplaceCategoriesFlat';
 
 export function WorkerCard({ worker }: { worker: (typeof marketplaceWorkers)[0]; }) {
     const { name, description, categories } = worker;

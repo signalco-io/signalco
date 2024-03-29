@@ -16,20 +16,20 @@ const data: SectionData[] = [
                 header: 'Product',
                 ctas: [
                     { label: 'App', href: KnownPages.App },
-                    { label: 'Pricing', href: KnownPages.Pricing },
-                    { label: 'Contact', href: KnownPages.Contact },
+                    // { label: 'Pricing', href: KnownPages.Pricing },
+                    // { label: 'Contact', href: KnownPages.Contact },
                 ]
             },
-            {
-                header: 'Legal',
-                ctas: [
-                    { label: 'Privacy Policy', href: KnownPages.LegalPrivacyPolicy },
-                    { label: 'Terms of Service', href: KnownPages.LegalTermsOfService },
-                    { label: 'Cookie Policy', href: KnownPages.LegalCookiePolicy },
-                    { label: 'Acceptable Use Policy', href: KnownPages.LegalAcceptableUsePolicy },
-                    { label: 'SLA', href: KnownPages.LegalSla }
-                ]
-            }
+            // {
+            //     header: 'Legal',
+            //     ctas: [
+            //         { label: 'Privacy Policy', href: KnownPages.LegalPrivacyPolicy },
+            //         { label: 'Terms of Service', href: KnownPages.LegalTermsOfService },
+            //         { label: 'Cookie Policy', href: KnownPages.LegalCookiePolicy },
+            //         { label: 'Acceptable Use Policy', href: KnownPages.LegalAcceptableUsePolicy },
+            //         { label: 'SLA', href: KnownPages.LegalSla }
+            //     ]
+            // }
         ],
         tagline: 'WorkingParty.ai',
         asset: <WorkingPartyLogotype width={290} />
@@ -41,7 +41,7 @@ export default function RootMarketingLayout({ children, }: PropsWithChildren) {
         <>
             <PageNav fullWidth logo={<WorkingPartyLogotype height={32} />}>
                 <PageNavMenu links={[
-                    { href: KnownPages.Pricing, text: 'Pricing' }
+                    // { href: KnownPages.Pricing, text: 'Pricing' }
                 ]}>
                     <NavigatingButton href={KnownPages.App}>App</NavigatingButton>
                 </PageNavMenu>
