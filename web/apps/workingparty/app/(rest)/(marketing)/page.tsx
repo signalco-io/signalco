@@ -7,6 +7,7 @@ import { KnownPages } from '../../../src/knownPages';
 import { marketplaceWorkers } from '../../../src/data/markerplaceWorkers';
 import { cmsComponents } from '../../../src/components/cmsComponents';
 import { DemoMessages } from './DemoMessages';
+import { DemoMarketplace } from './DemoMarketplace';
 
 const data: SectionData[] = [
     {
@@ -32,6 +33,9 @@ const data: SectionData[] = [
             {
                 header: `> ${Math.floor(marketplaceWorkers.length / 10) * 10}`,
                 description: 'Experts available to help you with your projects',
+            },
+            {
+                asset: <DemoMarketplace />,
             }
         ]
     },
@@ -64,7 +68,7 @@ const data: SectionData[] = [
             {
                 header: 'Plus',
                 description: 'When free isn\'t enough...',
-                asset: '$5/mo',
+                asset: '€5/mo',
                 features: [
                     { asset: <Check />, header: 'Everything from Free...' },
                     { asset: <Check />, header: '100 messages/month' }
@@ -76,7 +80,7 @@ const data: SectionData[] = [
             {
                 header: 'Pro',
                 description: 'For individuals and professionals that need more advanced features and more capacity.',
-                asset: '$29/mo',
+                asset: '€29/mo',
                 features: [
                     { asset: <Check />, header: 'Everything from Plus...' },
                     { asset: <Check />, header: 'Up to 50 active workers' },
@@ -96,8 +100,8 @@ const data: SectionData[] = [
             { label: 'Contact', href: KnownPages.Contact },
         ],
         features: [
-            { header: 'What is Working Party?', description: 'Working Party is SaaS platform that allows you to interact with AIs like you would interacti with human experts.' },
-            { header: 'How does it work?', description: 'We use commercially available AIs (like ChatGPT from OpenAI) to carefully craft expert models that you can hire via Workers Marketplace.' },
+            { header: 'What is Working Party?', description: 'Working Party is SaaS platform that allows you to interact with specialized expert AIs allowing you to be more productive and efficient.' },
+            { header: 'How does it work?', description: 'We use commercially available AIs (like ChatGPT from OpenAI) to carefully craft expert AI workers. You can then hire these expers from our Workers Marketplace.' },
             { header: 'How much does it cost?', description: 'We offer a free plan with limited features and paid plans starting at $5/month.' },
             { header: 'What are the benefits of using Working Party?', description: 'By using Working Party, you can save time and money by hiring expert workers for all kinds of tasks and project, all in one place.' },
             { header: 'How do I get started?', description: 'Simply sign up for an account and start using our platform start working on your new project.' }

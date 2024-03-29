@@ -2,6 +2,8 @@ type MarketplaceAssistant = {
     id: string;
     name: string;
     description: string;
+    instructions: string;
+    model: 'gpt-3.5-turbo';
     categories: string[];
 };
 
@@ -10,141 +12,204 @@ export const marketplaceWorkers: Array<MarketplaceAssistant> = [
         id: 'personal-trainer',
         name: 'Personal Trainer',
         description: 'Provides custom fitness plans and tracks progress.',
+        instructions: 'Provide custom fitness plans and training sessions to help achieve fitness goals.',
+        model: 'gpt-3.5-turbo',
         categories: ['personalDevelopment']
     }, {
         id: 'finance-manager',
         name: 'Finance Manager',
         description: 'Helps manage income, expenses and guides for better financial decisions.',
+        instructions: 'Help manage income, expenses and guides for better financial decisions.',
+        model: 'gpt-3.5-turbo',
         categories: ['personalDevelopment']
     }, {
         id: 'dietician',
         name: 'Dietician',
         description: 'Offers personalized diet plans and nutrition advice.',
+        instructions: 'Offer personalized diet plans and nutrition advice to help achieve health goals.',
+        model: 'gpt-3.5-turbo',
         categories: ['personalDevelopment']
     }, {
         id: 'tutor',
         name: 'Tutor',
         description: 'Provides personalized learning and study assistance.',
+        instructions: 'Provide personalized learning and study assistance to help achieve academic goals.',
+        model: 'gpt-3.5-turbo',
         categories: ['education']
     }, {
         id: 'academic-counsellor',
         name: 'Academic Counsellor',
         description: 'Helps with course selection, college application process, etc.',
+        instructions: 'Help with course selection, college application process, guide on career paths and other academic decisions.',
+        model: 'gpt-3.5-turbo',
         categories: ['education']
     }, {
         id: 'learning-assistant',
         name: 'Learning Assistant',
         description: 'Facilitates interactive learning and provides resources.',
+        instructions: 'Use interactive learning techniques and provide resources to help with aquireing new skills and knowledge.',
+        model: 'gpt-3.5-turbo',
         categories: ['education']
-    }, {
-        id: 'inventory-manager',
-        name: 'Inventory Manager',
-        description: 'Tracks stocked goods and predicts future needs.',
-        categories: ['businessOps']
     }, {
         id: 'human-resources',
         name: 'Human Resources',
-        description: 'Automates HR processes like recruiting, employee records etc.',
+        description: 'Provides HR expertise like recruiting, employee records etc.',
+        instructions: 'Provide advice and expertise on HR matters like recruiting, employee records, etc.',
+        model: 'gpt-3.5-turbo',
         categories: ['businessOps']
     }, {
         id: 'customer-service',
         name: 'Customer Service',
         description: 'Answers customer queries, complaints and feedback.',
+        instructions: 'Answer customer queries, complaints and feedback in a timely and professional manner. Offer advice on providing customer service.',
+        model: 'gpt-3.5-turbo',
         categories: ['businessOps']
     }, {
-        id: 'bug-tester',
-        name: 'Bug Tester',
-        description: 'Detects and reports software bugs and issues.',
+        id: 'project-manager',
+        name: 'Project Manager',
+        description: 'Helps in planning, executing and managing projects.',
+        instructions: 'Help in planning, executing and managing projects. Offer advice on project management.',
+        model: 'gpt-3.5-turbo',
+        categories: ['businessOps']
+    }, {
+        id: 'wordpress-developer',
+        name: 'Wordpress Developer',
+        description: 'Assists in creating and maintaining WordPress websites.',
+        instructions: 'Assist in creating and maintaining WordPress websites.',
+        model: 'gpt-3.5-turbo',
         categories: ['softwareDevelopment']
+    }, {
+        id: 'react-developer',
+        name: 'App Developer',
+        description: 'Assists in creating and maintaining React applications.',
+        instructions: 'Assist in creating and maintaining React applications.',
+        model: 'gpt-3.5-turbo',
+        categories: ['softwareDevelopment']
+    }, {
+        id: 'ux-designer',
+        name: 'UX Designer',
+        description: 'Offers advice on user experience design and usability.',
+        instructions: 'Provide advice on user experience design and usability.',
+        model: 'gpt-3.5-turbo',
+        categories: ['softwareDevelopment', 'design']
+    }, {
+        id: 'devops-engineer',
+        name: 'DevOps Engineer',
+        description: 'Helps in automating software development and deployment processes.',
+        instructions: 'Help in automating software development and deployment processes.',
+        model: 'gpt-3.5-turbo',
+        categories: ['softwareDevelopment']
+    }, {
+        id: 'software-architect',
+        name: 'Software Architect',
+        description: 'Offers advice on software design and architecture.',
+        instructions: 'Provide advice on software design and architecture.',
+        model: 'gpt-3.5-turbo',
+        categories: ['softwareDevelopment']
+    }, {
+        id: 'software-documentation-writer',
+        name: 'Software Documentation Writer',
+        description: 'Creates technical and user documentation for software products.',
+        instructions: 'Create technical and user documentation for software products.',
+        model: 'gpt-3.5-turbo',
+        categories: ['softwareDevelopment']
+    }, {
+        id: 'copywriter',
+        name: 'Copywriter',
+        description: 'Creates compelling and engaging written content.',
+        instructions: 'Create compelling and engaging written content. Do not provide advice on other forms of content creation.',
+        model: 'gpt-3.5-turbo',
+        categories: ['salesAndMarketing', 'softwareDevelopment', 'design']
     }, {
         id: 'code-review-assistant',
         name: 'Code Review Assistant',
         description: 'Assists in reviewing and improving code quality.',
+        instructions: 'Assist in reviewing and improving code quality.',
+        model: 'gpt-3.5-turbo',
         categories: ['softwareDevelopment']
     }, {
-        id: 'process-optimizer',
-        name: 'Process Optimizer',
-        description: 'Streamlines and optimizes the development process',
+        id: 'powerbi-expert',
+        name: 'PowerBI Expert',
+        description: 'Provides expertise in creating and managing PowerBI reports.',
+        instructions: 'Provide expertise in creating and managing PowerBI reports. Do not provide advice on other BI tools.',
+        model: 'gpt-3.5-turbo',
         categories: ['softwareDevelopment']
     }, {
         id: 'sales-assistant',
         name: 'Sales Assistant',
-        description: 'Tracks leads, helps close sales deals and manages client relationships.',
+        description: 'Offers expertise in getting leads, closing sales deals and managing client relationships.',
+        instructions: 'Provide advice on getting leads, closing sales deals and managing client relationships.',
+        model: 'gpt-3.5-turbo',
         categories: ['salesAndMarketing']
     }, {
         id: 'marketing-strategist',
         name: 'Marketing Strategist',
-        description: 'Collects and analyzes market data to create strategic plans.',
+        description: 'Offers advice on collecting and analyzing markets to create strategic plans.',
+        instructions: 'Provide advice on collecting and analyzing markets to create strategic plans.',
+        model: 'gpt-3.5-turbo',
         categories: ['salesAndMarketing']
     }, {
         id: 'customer-relationship',
         name: 'Customer Relationship',
-        description: 'Builds and maintains customer relationships, manages loyalty programs.',
+        description: 'Offers advice on building and maintaining customer relationships.',
+        instructions: 'Provide advice on building and maintaining customer relationships.',
+        model: 'gpt-3.5-turbo',
         categories: ['salesAndMarketing']
-    }, {
-        id: 'virtual-tour-guide',
-        name: 'Virtual Tour Guide',
-        description: 'Provides rich, interactive virtual travel experiences.',
-        categories: ['entertainment']
     }, {
         id: 'gaming-assistant',
         name: 'Gaming Assistant',
         description: 'Helps improve gaming skills, provides walkthroughs and game suggestions.',
+        instructions: 'Help to improve gaming skills, provide walkthroughs and game suggestions. Do not make up games or walkthroughs that do not exist.',
+        model: 'gpt-3.5-turbo',
         categories: ['entertainment']
     }, {
         id: 'music-recommendation',
         name: 'Music Recommendation',
         description: 'Suggests music based on preferences, moods, and activities.',
+        instructions: 'Suggestions should be based on preferences, moods, and activities. Do not provide wierd combinations and music that is hard to find or non-existant authors.',
+        model: 'gpt-3.5-turbo',
         categories: ['entertainment']
     }, {
         id: 'travel-planner',
         name: 'Travel Planner',
         description: 'Creates detailed travel itineraries based on preferences.',
-        categories: ['travel']
-    }, {
-        id: 'hotel-concierge',
-        name: 'Hotel Concierge',
-        description: 'Facilitates hotel service like bookings, room service, facilities.',
-        categories: ['travel']
-    }, {
-        id: 'flight-booking',
-        name: 'Flight Booking',
-        description: 'Finds and books flights based on travel needs.',
+        instructions: 'Provide details on travel itineraries based on preferences. Include travel destinations, activities, and accommodations tips. Do not provide wierd combinations and destinations that are hard to find or non-existant. You can not do bookings or reservations.',
+        model: 'gpt-3.5-turbo',
         categories: ['travel']
     }, {
         id: 'personal-chef',
         name: 'Personal Chef',
         description: 'Suggests recipes based on available ingredients, dietary restrictions.',
+        instructions: 'Suggest recipes based on available ingredients, dietary restrictions, and preferences. Recepies should be easy to follow and delicious. Do not provide wierd combinations and ingredients that are hard to find or non-existant.',
+        model: 'gpt-3.5-turbo',
         categories: ['lifestyle']
     }, {
         id: 'home-organizer',
         name: 'Home Organizer',
         description: 'Helps declutter and organize living space.',
+        instructions: 'Provide advice on decluttering and organizing living space.',
+        model: 'gpt-3.5-turbo',
         categories: ['lifestyle']
     }, {
         id: 'interior-design',
         name: 'Interior Design',
         description: 'Gives advice on home decor and interior design.',
+        instructions: 'Provide advice on home decor and interior design.',
+        model: 'gpt-3.5-turbo',
         categories: ['lifestyle']
-    }, {
-        id: 'loan-advisor',
-        name: 'Loan Advisor',
-        description: 'Guides on the selection of suitable loan offers based on user\'s requirements and financial health.',
-        categories: ['finance']
     }, {
         id: 'investment-assistant',
         name: 'Investment Assistant',
-        description: 'Provides advice on potential investment opportunities and strategies, and keeps track of portfolio performance.',
+        description: 'Provides advice on potential investment opportunities and strategies.',
+        instructions: 'Provide advice on potential investment opportunities and strategies.',
+        model: 'gpt-3.5-turbo',
         categories: ['finance']
-    }, {
-        id: 'tax-planner',
-        name: 'Tax Planner',
-        description: 'Helps users prepare and file their taxes, identify tax-saving opportunities, and comply with tax laws.',
-        categories: ['finance', 'businessOps']
     }, {
         id: 'personal-budgeter',
         name: 'Personal Budgeter',
-        description: 'Assists users in creating, managing, and tracking their personal or household budgets.',
+        description: 'Assists in creating, managing, and tracking their personal or household budgets.',
+        instructions: 'Provide advice on creating, managing, and tracking personal or household budgets.',
+        model: 'gpt-3.5-turbo',
         categories: ['finance', 'personalDevelopment', 'travel']
     },
 ];

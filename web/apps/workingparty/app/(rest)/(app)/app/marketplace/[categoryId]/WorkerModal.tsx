@@ -15,7 +15,7 @@ import { initials } from '@signalco/js';
 import { KnownPages } from '../../../../../../src/knownPages';
 import { useWorkerCreateFromMarketplace } from '../../../../../../src/hooks/data/workers/useWorkerCreateFromMarketplace';
 import { marketplaceWorkers } from '../../../../../../src/data/markerplaceWorkers';
-import { markeplaceCategoriesFlat } from './markeplaceCategoriesFlat';
+import { markeplaceCategoriesFlat } from '../../../../../../src/data/markeplaceCategoriesFlat';
 
 export function WorkerModal({
     open, onOpenChange, worker

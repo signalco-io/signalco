@@ -12,6 +12,7 @@ export async function POST(request: Request) {
     }
     if (!email)
         return Response.json({ error: 'Invalid request' }, { status: 400 });
+    const emailSanitized = email.toLowerCase().trim();
 
     let token: string | undefined = undefined;
     if (json && typeof json === 'object' && 'token' in json && typeof json.token === 'string') {
@@ -20,14 +21,14 @@ export async function POST(request: Request) {
     if (!token)
         return Response.json({ error: 'Invalid request' }, { status: 400 });
 
-    if (!await loginRequestsVerify(email, token))
+    if (!await loginRequestsVerify(emailSanitized, token))
         return Response.json({ error: 'Invalid token' }, { status: 400 });
 
     // Create user if not exists
-    let userId = (await usersGetByEmail(email));
+    let userId = (await usersGetByEmail(emailSanitized));
     if (!userId) {
-        const createdUserId = await usersCreate({ email });
-        const createdAccount = await accountCreate({ name: `${email}'s Account`, email: email });
+        const createdUserId = await usersCreate({ email: emailSanitized });
+        const createdAccount = await accountCreate({ name: `${emailSanitized}'s Account`, email: emailSanitized });
         await usersAssignAccount(createdUserId, createdAccount);
         userId = createdUserId;
     }

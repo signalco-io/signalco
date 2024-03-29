@@ -53,13 +53,15 @@ export async function workersGet(accountId: string, workerId: string): Promise<D
 export async function workersCreate({ accountId, marketplaceWorkerId }: { accountId: string, marketplaceWorkerId?: string }) {
     const wid = nanoid(8);
 
-    // TODO: Custom assistants only in PRO plan
+    // TODO: Custom assistants only in PRO plan (in future)
     const isCustom = false;
 
     // Retrieve marketplace worker info
     const workerMarketplaceInfo = marketplaceWorkers.find((worker) => worker.id === marketplaceWorkerId);
     if (!workerMarketplaceInfo)
         throw new Error('Invalid marketplaceWorkerId');
+
+    const assistantMarketplaceInstructions = 'You are a worker for Working Party. You are an expert in your field.' + workerMarketplaceInfo.instructions;
 
     // Find assistant in OpenAI if exists,
     // otherwise create a new one
@@ -68,10 +70,17 @@ export async function workersCreate({ accountId, marketplaceWorkerId }: { accoun
     let oaiAssistant = assistants.data.find((assistant) => assistant.name === `WPMarketplace-${workerMarketplaceInfo.id}`);
     if (!oaiAssistant) {
         oaiAssistant = await openai.beta.assistants.create({
-            model: 'gpt-3.5-turbo',
+            model: workerMarketplaceInfo.model,
             name: `WPMarketplace-${workerMarketplaceInfo.id}`,
             description: `Working Party Assistant - Marketplace Model ${workerMarketplaceInfo.id}`,
-            instructions: 'You are a worker for Working Party. You will be assigned to threads and help with tasks. ' + workerMarketplaceInfo.description,
+            instructions: assistantMarketplaceInstructions,
+        });
+    }
+
+    // Update assistant instructions if not matching with marketplace instructions
+    if (oaiAssistant.instructions !== assistantMarketplaceInstructions) {
+        await openai.beta.assistants.update(oaiAssistant.id, {
+            instructions: assistantMarketplaceInstructions,
         });
     }
 

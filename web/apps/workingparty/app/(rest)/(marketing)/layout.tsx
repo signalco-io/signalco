@@ -16,20 +16,20 @@ const data: SectionData[] = [
                 header: 'Product',
                 ctas: [
                     { label: 'App', href: KnownPages.App },
-                    { label: 'Pricing', href: KnownPages.Pricing },
+                    // { label: 'Pricing', href: KnownPages.Pricing },
                     { label: 'Contact', href: KnownPages.Contact },
                 ]
             },
-            {
-                header: 'Legal',
-                ctas: [
-                    { label: 'Privacy Policy', href: KnownPages.LegalPrivacyPolicy },
-                    { label: 'Terms of Service', href: KnownPages.LegalTermsOfService },
-                    { label: 'Cookie Policy', href: KnownPages.LegalCookiePolicy },
-                    { label: 'Acceptable Use Policy', href: KnownPages.LegalAcceptableUsePolicy },
-                    { label: 'SLA', href: KnownPages.LegalSla }
-                ]
-            }
+            // {
+            //     header: 'Legal',
+            //     ctas: [
+            //         { label: 'Privacy Policy', href: KnownPages.LegalPrivacyPolicy },
+            //         { label: 'Terms of Service', href: KnownPages.LegalTermsOfService },
+            //         { label: 'Cookie Policy', href: KnownPages.LegalCookiePolicy },
+            //         { label: 'Acceptable Use Policy', href: KnownPages.LegalAcceptableUsePolicy },
+            //         { label: 'SLA', href: KnownPages.LegalSla }
+            //     ]
+            // }
         ],
         tagline: 'WorkingParty.ai',
         asset: <WorkingPartyLogotype width={290} />

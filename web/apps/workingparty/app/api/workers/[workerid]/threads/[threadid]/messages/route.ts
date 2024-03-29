@@ -61,6 +61,7 @@ export async function POST(request: Request, { params }: { params: { workerid: s
         const { name, oaiThreadId } = await threadsGet(accountId, threadid);
         const runResult = await openAiWaitForRunCompletion(oaiThreadId, oaiRunId);
         await accountUsageIncrement(accountId, {
+            messages: 1,
             oaigpt35tokens: runResult.usage?.total_tokens
         });
 
