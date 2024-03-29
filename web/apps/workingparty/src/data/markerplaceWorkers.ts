@@ -163,6 +163,13 @@ export const marketplaceWorkers: Array<MarketplaceAssistant> = [
         model: 'gpt-3.5-turbo',
         categories: ['entertainment']
     }, {
+        id: 'catan-expert',
+        name: 'Catan Expert',
+        description: 'Offers advice on playing Catan and strategies to win.',
+        instructions: 'Provide advice on playing Catan and strategies to win. Do not provide advice on other games.',
+        model: 'gpt-3.5-turbo',
+        categories: ['entertainment']
+    }, {
         id: 'music-recommendation',
         name: 'Music Recommendation',
         description: 'Suggests music based on preferences, moods, and activities.',
