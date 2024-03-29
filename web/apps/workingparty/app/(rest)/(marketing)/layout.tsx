@@ -17,7 +17,7 @@ const data: SectionData[] = [
                 ctas: [
                     { label: 'App', href: KnownPages.App },
                     // { label: 'Pricing', href: KnownPages.Pricing },
-                    { label: 'Contact', href: KnownPages.Contact },
+                    // { label: 'Contact', href: KnownPages.Contact },
                 ]
             },
             // {
@@ -41,7 +41,7 @@ export default function RootMarketingLayout({ children, }: PropsWithChildren) {
         <>
             <PageNav fullWidth logo={<WorkingPartyLogotype height={32} />}>
                 <PageNavMenu links={[
-                    { href: KnownPages.Pricing, text: 'Pricing' }
+                    // { href: KnownPages.Pricing, text: 'Pricing' }
                 ]}>
                     <NavigatingButton href={KnownPages.App}>App</NavigatingButton>
                 </PageNavMenu>

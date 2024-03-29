@@ -97,7 +97,7 @@ const data: SectionData[] = [
         header: 'FAQ',
         description: 'Find answers to common questions about Working Party and reduce barriers to entry.',
         ctas: [
-            { label: 'Contact', href: KnownPages.Contact },
+            // { label: 'Contact', href: KnownPages.Contact },
         ],
         features: [
             { header: 'What is Working Party?', description: 'Working Party is SaaS platform that allows you to interact with specialized expert AIs allowing you to be more productive and efficient.' },
