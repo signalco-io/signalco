@@ -4,6 +4,7 @@ export const KnownPages = {
     Login: '/login',
     LoginEmailSent: (verifyPhrase: string, email: string) => '/login/email-sent?verifyPhrase=' + encodeURIComponent(verifyPhrase) + '&email=' + encodeURIComponent(email),
     LoginConfirm: '/login/confirm',
+    LoginConfirmSuccess: '/login/confirm-success',
     LoginConfirmFailed: '/login/confirm-failed',
 
     App: '/app',
