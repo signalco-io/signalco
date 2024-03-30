@@ -24,8 +24,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4
       '@pulumi/aws':
-        specifier: 6.28.1
-        version: 6.28.1
+        specifier: 6.28.2
+        version: 6.28.2
       '@pulumi/azure-native':
         specifier: 2.34.0
         version: 2.34.0
@@ -49,8 +49,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.11.30
-        version: 20.11.30
+        specifier: 20.12.2
+        version: 20.12.2
       '@typescript-eslint/eslint-plugin':
         specifier: 7.4.0
         version: 7.4.0(@typescript-eslint/parser@7.4.0)(eslint@8.57.0)(typescript@5.4.3)
@@ -85,8 +85,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4
       '@pulumi/aws':
-        specifier: 6.28.1
-        version: 6.28.1
+        specifier: 6.28.2
+        version: 6.28.2
       '@pulumi/azure-native':
         specifier: 2.34.0
         version: 2.34.0
@@ -110,8 +110,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.11.30
-        version: 20.11.30
+        specifier: 20.12.2
+        version: 20.12.2
       '@typescript-eslint/eslint-plugin':
         specifier: 7.4.0
         version: 7.4.0(@typescript-eslint/parser@7.4.0)(eslint@8.57.0)(typescript@5.4.3)
@@ -146,8 +146,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4
       '@pulumi/aws':
-        specifier: 6.28.1
-        version: 6.28.1
+        specifier: 6.28.2
+        version: 6.28.2
       '@pulumi/azure-native':
         specifier: 2.34.0
         version: 2.34.0
@@ -171,8 +171,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.11.30
-        version: 20.11.30
+        specifier: 20.12.2
+        version: 20.12.2
       '@typescript-eslint/eslint-plugin':
         specifier: 7.4.0
         version: 7.4.0(@typescript-eslint/parser@7.4.0)(eslint@8.57.0)(typescript@5.4.3)
@@ -223,8 +223,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.11.30
-        version: 20.11.30
+        specifier: 20.12.2
+        version: 20.12.2
       '@typescript-eslint/eslint-plugin':
         specifier: 7.4.0
         version: 7.4.0(@typescript-eslint/parser@7.4.0)(eslint@8.57.0)(typescript@5.4.3)
@@ -286,8 +286,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4
       '@pulumi/aws':
-        specifier: 6.28.1
-        version: 6.28.1
+        specifier: 6.28.2
+        version: 6.28.2
       '@pulumi/azure-native':
         specifier: 2.34.0
         version: 2.34.0
@@ -314,8 +314,8 @@ importers:
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':
-        specifier: 20.11.30
-        version: 20.11.30
+        specifier: 20.12.2
+        version: 20.12.2
       '@typescript-eslint/eslint-plugin':
         specifier: 7.4.0
         version: 7.4.0(@typescript-eslint/parser@7.4.0)(eslint@8.57.0)(typescript@5.4.3)
@@ -609,7 +609,7 @@ packages:
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 20.11.30
+      '@types/node': 20.12.2
     dev: false
 
   /@grpc/proto-loader@0.7.10:
@@ -1071,8 +1071,8 @@ packages:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
     dev: false
 
-  /@pulumi/aws@6.28.1:
-    resolution: {integrity: sha512-UHFE8Rbge+NqKtjzjYwCo0alTZtc0M1pR9wPWl35eQT4S8hmfsUiyu4seRtChLwI1m8Hzn7yEuxasL02+m98fA==}
+  /@pulumi/aws@6.28.2:
+    resolution: {integrity: sha512-7Wd8hrVxs/9+q9SHgRW8rrZQXl6NzWBm1VrNZrFw9hsd+YZwbaGftmFhBjaAoTeNhrHOtVLMVVGS3OBOmLp01Q==}
     dependencies:
       '@pulumi/pulumi': 3.112.0
       builtin-modules: 3.0.0
@@ -1357,7 +1357,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.11.30
+      '@types/node': 20.12.2
       '@types/responselike': 1.0.3
     dev: false
 
@@ -1380,18 +1380,18 @@ packages:
   /@types/keyv@3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 20.11.30
+      '@types/node': 20.12.2
     dev: false
 
-  /@types/node@20.11.30:
-    resolution: {integrity: sha512-dHM6ZxwlmuZaRmUPfv1p+KrdD1Dci04FbdEm/9wEMouFqxYoFl5aMkt0VMAUtYRQDyYvD41WJLukhq/ha3YuTw==}
+  /@types/node@20.12.2:
+    resolution: {integrity: sha512-zQ0NYO87hyN6Xrclcqp7f8ZbXNbRfoGWNcMvHTPQp9UUrwI0mI7XBz+cu7/W6/VClYo2g63B0cjull/srU7LgQ==}
     dependencies:
       undici-types: 5.26.5
 
   /@types/responselike@1.0.3:
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
     dependencies:
-      '@types/node': 20.11.30
+      '@types/node': 20.12.2
     dev: false
 
   /@types/semver@7.5.6:
@@ -3824,7 +3824,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.11.30
+      '@types/node': 20.12.2
       long: 5.2.3
     dev: false
 
