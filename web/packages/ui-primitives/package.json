@@ -33,7 +33,7 @@
         "classix": "2.1.36",
         "next": "14.1.4",
         "postcss": "8.4.38",
-        "postcss-preset-env": "9.5.2",
+        "postcss-preset-env": "9.5.3",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-timeago": "7.2.0",
