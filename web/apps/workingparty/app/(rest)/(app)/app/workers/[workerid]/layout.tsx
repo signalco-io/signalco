@@ -4,7 +4,6 @@ import { PropsWithChildren, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Typography } from '@signalco/ui-primitives/Typography';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
 import { ListItem } from '@signalco/ui-primitives/ListItem';
@@ -45,9 +44,7 @@ export function WorkerThreadsListItem({ workerId, thread, selected }: WorkerThre
         <ListItem
             startDecorator={<Comment className="w-5 min-w-5 text-muted-foreground" />}
             label={(
-                <Tooltip title={thread.name}>
-                    <Typography noWrap>{thread.name}</Typography>
-                </Tooltip>
+                <Typography title={thread.name} noWrap>{thread.name}</Typography>
             )}
             className="group w-full"
             nodeId={thread.id}

@@ -1,7 +1,6 @@
 'use client';
 
 import { Typography } from '@signalco/ui-primitives/Typography';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Progress } from '@signalco/ui-primitives/Progress';
 import { Check } from '@signalco/ui-icons';
@@ -31,23 +30,21 @@ export function RunProgress({ processId, runId, hideLabel }: RunProgressProps) {
             width={hideLabel ? 80 : 110}
             height={16}
             loadingLabel={'Loading progress...'}>
-            <Tooltip title={`Completed: ${completedCount} out of ${totalCount}`}>
-                <Row spacing={0.5}>
-                    {isComplete ? (
-                        <>
-                            <Typography level="body3">Completed</Typography>
-                            <Check size={18} className="text-green-600" />
-                        </>
-                    ) : (
-                        <>
-                            {!hideLabel && (
-                                <Typography level="body3">{Math.round(progress)}%</Typography>
-                            )}
-                            <Progress value={progress} className="h-2 w-20" />
-                        </>
-                    )}
-                </Row>
-            </Tooltip>
+            <Row spacing={0.5} title={`Completed: ${completedCount} out of ${totalCount}`}>
+                {isComplete ? (
+                    <>
+                        <Typography level="body3">Completed</Typography>
+                        <Check size={18} className="text-green-600" />
+                    </>
+                ) : (
+                    <>
+                        {!hideLabel && (
+                            <Typography level="body3">{Math.round(progress)}%</Typography>
+                        )}
+                        <Progress value={progress} className="h-2 w-20" />
+                    </>
+                )}
+            </Row>
         </Loadable>
     );
 }

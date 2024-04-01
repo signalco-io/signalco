@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Table } from '@signalco/ui-primitives/Table';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { SelectItems } from '@signalco/ui-primitives/SelectItems';
@@ -199,9 +198,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                                                     <Timeago date={c.timeStamp} live />
                                                 </div>
                                                 {c.metadata?.PersistHistory && (
-                                                    <Tooltip title="Persist history">
-                                                        <Chip size="sm"><History size={14} /></Chip>
-                                                    </Tooltip>
+                                                    <Chip title="Persist history" size="sm"><History size={14} /></Chip>
                                                 )}
                                                 {c.metadata?.ProcessSameValue && (
                                                     <Chip size="sm">Process same value</Chip>

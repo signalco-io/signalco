@@ -1,4 +1,3 @@
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { cx } from '@signalco/ui-primitives/cx';
 import { BatteryEmpty, BatteryLow, BatteryMedium, BatteryFull } from '@signalco/ui-icons';
 
@@ -36,13 +35,15 @@ export default function BatteryIndicator({ level, size, minLevel = 'full' }: Bat
     }
 
     return (
-        <Tooltip title={`${level}%`}>
-            <BatteryIconVariant className={cx(
-                color === 'green' && 'stroke-green-500',
-                color === 'yellow' && 'stroke-yellow-500',
-                color === 'red' && 'stroke-red-500'
-            )}
-            size={size === 'sm' ? 16 : 20} />
-        </Tooltip>
+        <div title={`${level}%`}>
+            <BatteryIconVariant
+                aria-label={`${level}%`}
+                className={cx(
+                    color === 'green' && 'stroke-green-500',
+                    color === 'yellow' && 'stroke-yellow-500',
+                    color === 'red' && 'stroke-red-500'
+                )}
+                size={size === 'sm' ? 16 : 20} />
+        </div>
     );
 }

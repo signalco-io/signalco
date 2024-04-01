@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { SelectItems } from '@signalco/ui-primitives/SelectItems';
 import { Row } from '@signalco/ui-primitives/Row';
@@ -52,9 +51,7 @@ function ResourceCard({ data: resource }: NodeProps<InfraResource>) {
             <Handle type="target" position={Position.Left} />
             {resource.valid ? (
                 <Row spacing={2}>
-                    <Tooltip title={resource.package}>
-                        <Avatar>{resource.package.substring(0, 2).toUpperCase()}</Avatar>
-                    </Tooltip>
+                    <Avatar title={resource.package}>{resource.package.substring(0, 2).toUpperCase()}</Avatar>
                     <Stack>
                         <Typography>{resource.name}</Typography>
                         <Typography level="body2">{resource.resourceType}</Typography>

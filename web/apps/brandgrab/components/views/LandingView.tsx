@@ -3,7 +3,6 @@
 import React, { PropsWithChildren, memo, useCallback } from 'react';
 import NextImage from 'next/image';
 import { Typography } from '@signalco/ui-primitives/Typography';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Link } from '@signalco/ui-primitives/Link';
 import { Divider } from '@signalco/ui-primitives/Divider';
@@ -55,11 +54,9 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                 </div>
                 <CardOverflow className="flex">
                     {!!og.siteName && (
-                        <Tooltip title={og.siteName}>
-                            <Typography noWrap level="body3" semiBold secondary>
-                                {og.siteName}
-                            </Typography>
-                        </Tooltip>
+                        <Typography noWrap level="body3" semiBold secondary title={og.siteName}>
+                            {og.siteName}
+                        </Typography>
                     )}
                     {!!og.type && (
                         <>
@@ -80,11 +77,9 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                     {!!og.url && (
                         <>
                             <Divider orientation="vertical" />
-                            <Tooltip title={og.url}>
-                                <Typography level="body3" noWrap semiBold secondary>
-                                    {og.url}
-                                </Typography>
-                            </Tooltip>
+                            <Typography level="body3" noWrap semiBold secondary title={og.url}>
+                                {og.url}
+                            </Typography>
                         </>
                     )}
                 </CardOverflow>
