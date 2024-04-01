@@ -4,6 +4,8 @@ import { loginRequestsVerify } from '../../../../../src/lib/repository/loginRequ
 import { accountCreate } from '../../../../../src/lib/repository/accountsRepository';
 import { createJwt } from '../../../../../src/lib/auth/createJwt';
 
+export const runtime = 'edge';
+
 export async function POST(request: Request) {
     const json = await request.json();
     let email: string | undefined = undefined;

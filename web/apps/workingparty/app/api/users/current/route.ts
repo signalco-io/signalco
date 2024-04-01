@@ -1,6 +1,8 @@
 import { usersGet, usersPatch } from '../../../../src/lib/repository/usersRepository';
 import { ensureAuthUserId } from '../../../../src/lib/auth/ensureAuthUserId';
 
+export const runtime = 'edge';
+
 export async function GET() {
     const userIdOrResponse = await ensureAuthUserId();
     if (userIdOrResponse instanceof Response)

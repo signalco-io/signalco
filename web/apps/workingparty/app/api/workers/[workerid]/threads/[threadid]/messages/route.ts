@@ -7,6 +7,8 @@ import { openAiCreateMessage, openAiListMessages } from '../../../../../../../sr
 import { cosmosDataContainerThreads } from '../../../../../../../src/lib/cosmosClient';
 import { withAuth } from '../../../../../../../src/lib/auth/withAuth';
 
+export const runtime = 'edge';
+
 export async function GET(request: Request, { params }: { params: { threadid: string } }) {
     const { threadid } = params;
 
