@@ -22,11 +22,11 @@ export default function RootError({ error, reset }: RootErrorProps) {
         <Stack alignItems="center" justifyContent="center" className="mt-16 min-h-fit">
             <Row justifyContent="center">
                 <Stack spacing={4}>
-                    <Typography level="h1">Page not found</Typography>
-                    <Typography>{'Can\'t find find what you\'re looking for...'}</Typography>
+                    <Typography level="h1">Unexpected error</Typography>
+                    <Typography>We apologize for the inconvenience. Our team is working diligently to resolve this issue. Please try refreshing the page or visit us again shortly. Thank you for your understanding.</Typography>
                     <Row spacing={1}>
                         <Button variant="plain" onClick={() => reset()}>Try again...</Button>
-                        <NavigatingButton href="/">doprocess home</NavigatingButton>
+                        <NavigatingButton href="/">WorkingParty home</NavigatingButton>
                     </Row>
                 </Stack>
             </Row>
