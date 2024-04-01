@@ -543,8 +543,8 @@ importers:
         specifier: 4.29.7
         version: 4.29.7(next@14.1.4)(react-dom@18.2.0)(react@18.2.0)
       '@clerk/themes':
-        specifier: 1.7.9
-        version: 1.7.9(react@18.2.0)
+        specifier: 1.7.11
+        version: 1.7.11(react@18.2.0)
       '@dnd-kit/core':
         specifier: 6.1.0
         version: 6.1.0(react-dom@18.2.0)(react@18.2.0)
@@ -3639,17 +3639,26 @@ packages:
       swr: 2.2.0(react@18.2.0)
     dev: false
 
-  /@clerk/themes@1.7.9(react@18.2.0):
-    resolution: {integrity: sha512-9hXxgoPuUSlZ7sH9diJEK1rTWEnk0zGKBYw4Tqaqp0RA1dtB+OHE02DK5pnTypZTnreBJYac3VmxFVTxVV35xg==}
+  /@clerk/themes@1.7.11(react@18.2.0):
+    resolution: {integrity: sha512-ujSEb1PIvab3etaGH4t/YUgVXRQs+DC0swbiQj5R8zO+u3OoBItwyztNelOnej27kZlkCmbiwau8RFVsQqB8Qg==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16'
     dependencies:
+      '@clerk/types': 3.63.0
       react: 18.2.0
+      tslib: 2.4.1
     dev: false
 
   /@clerk/types@3.62.0:
     resolution: {integrity: sha512-rjtdPqNJtfayCrqOCi20i46rw7X5yzAiOoh0Dzl7KX8kdBWQn06UxpgREPEp/3gFS2imVFRyXtx+fUGRwOGjaw==}
+    engines: {node: '>=14'}
+    dependencies:
+      csstype: 3.1.1
+    dev: false
+
+  /@clerk/types@3.63.0:
+    resolution: {integrity: sha512-+32fWK+lUG2u0hVaoQ3aZ+j2T/LhF3yNNylBrkD1Kca/goLb+NB/nmw6Svs0Q810FK/uYgqWlXvABPhgILeQFA==}
     engines: {node: '>=14'}
     dependencies:
       csstype: 3.1.1
