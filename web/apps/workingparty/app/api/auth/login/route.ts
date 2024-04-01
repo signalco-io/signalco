@@ -4,6 +4,8 @@ import { loginRequestsCreate } from '../../../../src/lib/repository/loginRequest
 import { sendEmail } from '../../../../src/lib/email/emailService';
 import { words } from './shortWordsList';
 
+export const runtime = 'edge';
+
 function toPhrase(token: string) {
     const wordsLength = words.length;
     const tokenLength = token.length;
