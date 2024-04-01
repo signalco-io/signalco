@@ -1,7 +1,6 @@
 'use client';
 
 import { FormEvent } from 'react';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Input } from '@signalco/ui-primitives/Input';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { Send } from '@signalco/ui-icons';
@@ -36,15 +35,14 @@ export function ThreadMessageInput({ workerId, threadId, isLoading, onMessage }:
                 placeholder="Enter message..."
                 fullWidth
                 endDecorator={(
-                    <Tooltip title="Send message">
-                        <IconButton
-                            type="submit"
-                            variant="plain"
-                            disabled={isLoading || isPending}
-                            loading={isLoading || isPending}>
-                            <Send />
-                        </IconButton>
-                    </Tooltip>
+                    <IconButton
+                        title="Send message"
+                        type="submit"
+                        variant="plain"
+                        disabled={isLoading || isPending}
+                        loading={isLoading || isPending}>
+                        <Send />
+                    </IconButton>
                 )} />
         </form>
     );

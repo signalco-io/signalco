@@ -4,7 +4,6 @@ import React, { useCallback, useState, useContext, createContext, Suspense } fro
 import { OpenAPIV3 } from 'openapi-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Typography } from '@signalco/ui-primitives/Typography';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { SelectItems } from '@signalco/ui-primitives/SelectItems';
 import { Row } from '@signalco/ui-primitives/Row';
@@ -45,28 +44,28 @@ function schemaToJson(api: OpenAPIV3.Document, schema: OpenAPIV3.ReferenceObject
     if (typeof schemaObj === 'undefined') return undefined;
 
     switch (schemaObj.type) {
-    case 'string':
-        return '';
-    case 'boolean': return true;
-    case 'number':
-    case 'integer': return 0;
-    case 'object': {
-        if (typeof schemaObj.properties === 'undefined') {
-            return ({});
-        }
-        const curr: ObjectDictAny = {};
-        Object.keys(schemaObj.properties).forEach(prop => {
-            if (schemaObj.properties) {
-                curr[prop] = schemaToJson(api, schemaObj.properties[prop]);
+        case 'string':
+            return '';
+        case 'boolean': return true;
+        case 'number':
+        case 'integer': return 0;
+        case 'object': {
+            if (typeof schemaObj.properties === 'undefined') {
+                return ({});
             }
-        });
-        return curr;
-    }
-    case 'array': {
-        const arraySchema = schemaObj as OpenAPIV3.ArraySchemaObject;
-        return [schemaToJson(api, arraySchema.items)];
-    }
-    default: return undefined;
+            const curr: ObjectDictAny = {};
+            Object.keys(schemaObj.properties).forEach(prop => {
+                if (schemaObj.properties) {
+                    curr[prop] = schemaToJson(api, schemaObj.properties[prop]);
+                }
+            });
+            return curr;
+        }
+        case 'array': {
+            const arraySchema = schemaObj as OpenAPIV3.ArraySchemaObject;
+            return [schemaToJson(api, arraySchema.items)];
+        }
+        default: return undefined;
     }
 }
 
@@ -122,13 +121,12 @@ function ApiOperation(props: ApiOperationProps) {
             <Stack spacing={1}>
                 <Row spacing={1}>
                     <HttpOperationChip operation={operation} />
-                    <Tooltip title={deprecated ? 'Deprecated' : undefined}>
-                        <Typography
-                            level="h6"
-                            className={cx(deprecated && 'line-through')}>
-                            {path}
-                        </Typography>
-                    </Tooltip>
+                    <Typography
+                        level="h6"
+                        title={deprecated ? 'Deprecated' : undefined}
+                        className={cx(deprecated && 'line-through')}>
+                        {path}
+                    </Typography>
                 </Row>
                 <Row spacing={1}>
                     {security && security.map((securityVariant, i) => <SecurityBadge key={i} security={securityVariant} />)}

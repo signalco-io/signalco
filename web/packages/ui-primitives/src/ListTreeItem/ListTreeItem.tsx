@@ -1,6 +1,7 @@
+'use client';
+
 import { PropsWithChildren, ReactElement, useState } from 'react';
 import { ExpandDown } from '@signalco/ui-icons';
-import { Tooltip } from '../Tooltip';
 import { Stack } from '../Stack';
 import { Row } from '../Row';
 import { ListItem } from '../ListItem/ListItem';
@@ -36,11 +37,14 @@ export function ListTreeItem({
     return (
         <Stack>
             <Row spacing={1}>
-                <Tooltip title="Toggle" className={cx(!children && 'opacity-0')}>
-                    <IconButton variant="plain" onClick={handleOpenClick} size="sm">
-                        <ExpandDown className={cx('transition-transform', open && '-rotate-90')} />
-                    </IconButton>
-                </Tooltip>
+                <IconButton
+                    variant="plain"
+                    onClick={handleOpenClick}
+                    size="sm"
+                    title="Toggle"
+                    className={cx(!children && 'opacity-0')}>
+                    <ExpandDown className={cx('transition-transform', open && '-rotate-90')} />
+                </IconButton>
                 <ListItem
                     nodeId={nodeId}
                     label={label}
