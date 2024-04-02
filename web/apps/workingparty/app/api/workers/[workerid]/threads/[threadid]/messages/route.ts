@@ -1,8 +1,8 @@
 import { threadsGet } from '../../../../../../../src/lib/repository/threadsRepository';
-import { messagesCreate, messagesGetAll } from '../../../../../../../src/lib/repository/messagesRepository';
+import { messagesCreateAndPoll, messagesGetAll } from '../../../../../../../src/lib/repository/messagesRepository';
 import { accountUsageIncrement, accountUsageOverLimit } from '../../../../../../../src/lib/repository/accountsRepository';
 import { openAiCreateThread } from '../../../../../../../src/lib/openAiThreads';
-import { openAiCreateRun, openAiWaitForRunCompletion } from '../../../../../../../src/lib/openAiRuns';
+import { openAiCreateRunAndPoll } from '../../../../../../../src/lib/openAiRuns';
 import { openAiCreateMessage, openAiListMessages } from '../../../../../../../src/lib/openAiMessages';
 import { cosmosDataContainerThreads } from '../../../../../../../src/lib/cosmosClient';
 import { withAuth } from '../../../../../../../src/lib/auth/withAuth';
@@ -56,19 +56,22 @@ export async function POST(request: Request, { params }: { params: { workerid: s
         if (await accountUsageOverLimit(accountId, 'messages'))
             return Response.json({ error: 'You exceeded your current quota, please check your plan and billing details' }, { status: 429 });
 
+        // TODO: Run asynchrously in another route meybe (without inline polling when creating message)
         // Create message, trigger run and wait for completion
-        const { runId: oaiRunId } = await messagesCreate(accountId, workerid, threadid, message);
+        const { runId: oaiRunId, status: oaiStatus, usage: oaiUsage } = await messagesCreateAndPoll(accountId, workerid, threadid, message);
+        if (oaiStatus !== 'completed') {
+            console.error('OpenAI run', oaiRunId, 'failed with status', oaiStatus);
+            return new Response(null, { status: 500 });
+        }
 
-        // TODO: Run asynchrously
-        const { name, oaiThreadId } = await threadsGet(accountId, threadid);
-        const runResult = await openAiWaitForRunCompletion(oaiThreadId, oaiRunId);
         await accountUsageIncrement(accountId, {
             messages: 1,
-            oaigpt35tokens: runResult.usage?.total_tokens
+            oaigpt35tokens: oaiUsage?.total_tokens
         });
 
         // Caption conversation if not already
         let updatedThread = false;
+        const { name } = await threadsGet(accountId, threadid);
         if (name === 'New Thread') {
             try {
                 const messages = await messagesGetAll(accountId, threadid);
@@ -82,8 +85,12 @@ export async function POST(request: Request, { params }: { params: { workerid: s
 
                 const captionThreadId = await openAiCreateThread();
                 await openAiCreateMessage(captionThreadId, messagesExtract);
-                const captionRunId = await openAiCreateRun(captionThreadId, 'asst_k3WyBmipDob1EpNLS85oTgnx');
-                await openAiWaitForRunCompletion(captionThreadId, captionRunId);
+                const { status: oaiCaptionStatus } = await openAiCreateRunAndPoll(captionThreadId, 'asst_k3WyBmipDob1EpNLS85oTgnx');
+                if (oaiCaptionStatus !== 'completed') {
+                    console.warn('OpenAI captioning run failed', oaiCaptionStatus);
+                    throw new Error('OpenAI captioning run failed');
+                }
+
                 const captionMessages = await openAiListMessages(captionThreadId);
                 const captionAnswerMessageContent = captionMessages.at(0)?.content.at(0);
                 if (captionAnswerMessageContent?.type === 'text' &&
