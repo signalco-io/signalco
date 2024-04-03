@@ -82,7 +82,7 @@ async function accountAssignTrialPlan(accountId: string) {
         if (!trialPlan) {
             throw new Error('No trial plan available');
         }
-        accountSubscriptionCreate(accountId, {
+        await accountSubscriptionCreate(accountId, {
             planId: trialPlan.id
         });
     } catch (error) {
