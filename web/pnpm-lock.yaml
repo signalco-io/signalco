@@ -534,8 +534,8 @@ importers:
   apps/doprocess:
     dependencies:
       '@blocknote/core':
-        specifier: 0.12.3
-        version: 0.12.3
+        specifier: 0.12.4
+        version: 0.12.4
       '@blocknote/react':
         specifier: 0.12.3
         version: 0.12.3(@tiptap/pm@2.1.12)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)
@@ -3506,8 +3506,8 @@ packages:
     resolution: {integrity: sha512-4iri8i1AqYHJE2DstZYkyEprg6Pq6sKx3xn5FpySk9sNhH7qN2LLlHJCfDTZRILNwQNPD7mATWM0TBui7uC1pA==}
     dev: true
 
-  /@blocknote/core@0.12.3:
-    resolution: {integrity: sha512-ohluHfdyPgdoy2+TnRcuRAqagIcGb25sVqcR7UI7qFH+Zg66emAbLEdGvJEliuAj41XxcNnmeGUm+g9uEUg8FQ==}
+  /@blocknote/core@0.12.4:
+    resolution: {integrity: sha512-njnrEZUZ7sPm0CIwxSfFfnP1IgB+H+Kvk5+2Etr3tozuQgwdQ0X6wn6E+MTCP97Nxl/aPA7S1F/XUoy1L8ICXQ==}
     dependencies:
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
       '@tiptap/extension-bold': 2.1.12(@tiptap/core@2.1.12)
@@ -3558,7 +3558,7 @@ packages:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@blocknote/core': 0.12.3
+      '@blocknote/core': 0.12.4
       '@floating-ui/react': 0.26.6(react-dom@18.2.0)(react@18.2.0)
       '@mantine/core': 7.5.1(@mantine/hooks@7.5.1)(@types/react@18.2.73)(react-dom@18.2.0)(react@18.2.0)
       '@mantine/hooks': 7.5.1(react@18.2.0)
