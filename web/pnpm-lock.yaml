@@ -175,8 +175,8 @@ importers:
         version: 9.0.1
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.42.1)
+        specifier: 4.9.0
+        version: 4.9.0(playwright-core@1.42.1)
       '@ducanh2912/next-pwa':
         specifier: 10.2.5
         version: 10.2.5(next@14.1.4)(webpack@5.91.0)
@@ -350,8 +350,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.3)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.42.1)
+        specifier: 4.9.0
+        version: 4.9.0(playwright-core@1.42.1)
       '@babel/core':
         specifier: 7.24.4
         version: 7.24.4
@@ -471,8 +471,8 @@ importers:
         version: 0.33.3
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.42.1)
+        specifier: 4.9.0
+        version: 4.9.0(playwright-core@1.42.1)
       '@babel/core':
         specifier: 7.24.4
         version: 7.24.4
@@ -655,8 +655,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.3)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.42.1)
+        specifier: 4.9.0
+        version: 4.9.0(playwright-core@1.42.1)
       '@babel/core':
         specifier: 7.24.4
         version: 7.24.4
@@ -779,8 +779,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.3)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.42.1)
+        specifier: 4.9.0
+        version: 4.9.0(playwright-core@1.42.1)
       '@babel/core':
         specifier: 7.24.4
         version: 7.24.4
@@ -1012,8 +1012,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.3)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.42.1)
+        specifier: 4.9.0
+        version: 4.9.0(playwright-core@1.42.1)
       '@babel/core':
         specifier: 7.24.4
         version: 7.24.4
@@ -1166,8 +1166,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.3)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.42.1)
+        specifier: 4.9.0
+        version: 4.9.0(playwright-core@1.42.1)
       '@babel/core':
         specifier: 7.24.4
         version: 7.24.4
@@ -1347,8 +1347,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.3)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.8.5
-        version: 4.8.5(playwright-core@1.42.1)
+        specifier: 4.9.0
+        version: 4.9.0(playwright-core@1.42.1)
       '@babel/core':
         specifier: 7.24.4
         version: 7.24.4
@@ -2007,12 +2007,12 @@ packages:
       default-browser-id: 3.0.0
     dev: true
 
-  /@axe-core/playwright@4.8.5(playwright-core@1.42.1):
-    resolution: {integrity: sha512-GFdXXAEn9uk0Vyzgl2eEP+VwvgGzas0YSnacoJ/0U237G83zWZ1PhbP/RDymm0cqevoA+xRjMo+ONzh9Q711nw==}
+  /@axe-core/playwright@4.9.0(playwright-core@1.42.1):
+    resolution: {integrity: sha512-Q1Lz75dNsX38jof+aev7RficDMdH/HLOLySkDdXR0fUoeFcLdw4UNgDO2CNNP4CTpoesEdfYRdd6VmDXjhBgbA==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
     dependencies:
-      axe-core: 4.8.4
+      axe-core: 4.9.0
       playwright-core: 1.42.1
     dev: true
 
@@ -9899,8 +9899,8 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
-  /axe-core@4.8.4:
-    resolution: {integrity: sha512-CZLSKisu/bhJ2awW4kJndluz2HLZYIHh5Uy1+ZwDRkJi69811xgIXXfdU9HSLX0Th+ILrHj8qfL/5wzamsFtQg==}
+  /axe-core@4.9.0:
+    resolution: {integrity: sha512-H5orY+M2Fr56DWmMFpMrq5Ge93qjNdPVqzBv5gWK3aD1OvjBEJlEzxf09z93dGVQeI0LiW+aCMIx1QtShC/zUw==}
     engines: {node: '>=4'}
     dev: true
 
