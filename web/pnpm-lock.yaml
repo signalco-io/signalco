@@ -1081,8 +1081,8 @@ importers:
         specifier: 14.1.4
         version: 14.1.4
       '@reactflow/background':
-        specifier: 11.3.9
-        version: 11.3.9(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 11.3.10
+        version: 11.3.10(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0)
       '@reactflow/controls':
         specifier: 11.2.9
         version: 11.2.9(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0)
@@ -6948,13 +6948,13 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@reactflow/background@11.3.9(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-byj/G9pEC8tN0wT/ptcl/LkEP/BBfa33/SvBkqE4XwyofckqF87lKp573qGlisfnsijwAbpDlf81PuFL41So4Q==}
+  /@reactflow/background@11.3.10(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-EdrQrNOdZtK5I+g+rKqLgiNU1rHXtpu2kQ0Af0LZ6v8yzOhAIMpxC70MeLXCLhZRHBkg1djk7gP6ZOSFZQFbUQ==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
     dependencies:
-      '@reactflow/core': 11.10.4(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0)
+      '@reactflow/core': 11.11.0(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0)
       classcat: 5.0.4
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -6982,6 +6982,28 @@ packages:
 
   /@reactflow/core@11.10.4(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-j3i9b2fsTX/sBbOm+RmNzYEFWbNx4jGWGuGooh2r1jQaE2eV+TLJgiG/VNOp0q5mBl9f6g1IXs3Gm86S9JfcGw==}
+    peerDependencies:
+      react: '>=17'
+      react-dom: '>=17'
+    dependencies:
+      '@types/d3': 7.4.3
+      '@types/d3-drag': 3.0.7
+      '@types/d3-selection': 3.0.10
+      '@types/d3-zoom': 3.0.8
+      classcat: 5.0.4
+      d3-drag: 3.0.0
+      d3-selection: 3.0.0
+      d3-zoom: 3.0.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      zustand: 4.4.6(@types/react@18.2.74)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - immer
+    dev: false
+
+  /@reactflow/core@11.11.0(@types/react@18.2.74)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Flw7kpEvXXb+qfT6jhFmscZLzIN8AY7kZC8SwVOW0ijpsgvILnE6cMq45CKmTaWxl82KbaHPxZUB3FeQxb1KMQ==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
