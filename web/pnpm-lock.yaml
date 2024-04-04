@@ -178,8 +178,8 @@ importers:
         specifier: 4.9.0
         version: 4.9.0(playwright-core@1.42.1)
       '@ducanh2912/next-pwa':
-        specifier: 10.2.5
-        version: 10.2.5(next@14.1.4)(webpack@5.91.0)
+        specifier: 10.2.6
+        version: 10.2.6(next@14.1.4)(webpack@5.91.0)
       '@next/bundle-analyzer':
         specifier: 14.1.4
         version: 14.1.4
@@ -4192,8 +4192,8 @@ packages:
       superjson: 2.2.1
     dev: true
 
-  /@ducanh2912/next-pwa@10.2.5(next@14.1.4)(webpack@5.91.0):
-    resolution: {integrity: sha512-DkF0IUNBjJ2eOQ/lxDuEtT7oIfLIcOE6HthM5ESkZBLq9P05O2PEhaIpOLARPF9RNXlvBBJxX0sJNUeVehMTIw==}
+  /@ducanh2912/next-pwa@10.2.6(next@14.1.4)(webpack@5.91.0):
+    resolution: {integrity: sha512-8V7C8tBHX07sN6YCdV7Wx5msmO/sU0Jcn+xijeXRt0pZsBWuCiqPbJXn9weqXuzrtJ1wYucX9WUVNiOGnAsUAw==}
     peerDependencies:
       next: '>=14.0.0'
       webpack: '>=5.9.0'
@@ -4201,7 +4201,7 @@ packages:
       clean-webpack-plugin: 4.0.0(webpack@5.91.0)
       fast-glob: 3.3.2
       next: 14.1.4(@babel/core@7.24.4)(react-dom@18.2.0)(react@18.2.0)(sass@1.74.1)
-      semver: 7.5.4
+      semver: 7.6.0
       terser-webpack-plugin: 5.3.10(webpack@5.91.0)
       webpack: 5.91.0
       workbox-build: 7.0.0
@@ -20893,6 +20893,7 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0
