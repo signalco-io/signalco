@@ -96,8 +96,8 @@ importers:
         specifier: 1.0.10
         version: 1.0.10(next@14.1.4)(react@18.2.0)
       '@vvo/tzdb':
-        specifier: 6.128.0
-        version: 6.128.0
+        specifier: 6.129.0
+        version: 6.129.0
       autoprefixer:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
@@ -9316,8 +9316,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@vvo/tzdb@6.128.0:
-    resolution: {integrity: sha512-gr7uZFTTO9CIui3Tb4dSTLDqTvd5I3tgaXbZao31+plkuOtPUf7pXKQWQOE0znh1IiJhTAydCUQu1JP//z5itw==}
+  /@vvo/tzdb@6.129.0:
+    resolution: {integrity: sha512-Cafpcz/T2Suy7p00UekKZxeOAunUJmdadRPauhgVprxLEhSgDsc27RSoI4CXzRC2kh+fon6ZvMCxL8g8mtHtdg==}
     dev: false
 
   /@webassemblyjs/ast@1.12.1:
