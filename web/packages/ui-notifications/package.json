@@ -20,6 +20,6 @@
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "sonner": "1.4.41",
-        "typescript": "5.4.3"
+        "typescript": "5.4.4"
     }
 }

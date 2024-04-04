@@ -57,7 +57,7 @@
         "sass": "1.74.1",
         "tailwindcss": "3.4.3",
         "tailwindcss-animate": "1.0.7",
-        "typescript": "5.4.3"
+        "typescript": "5.4.4"
     },
     "nextBundleAnalysis": {
         "budget": 358400,
