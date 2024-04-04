@@ -184,8 +184,8 @@ importers:
         specifier: 14.1.4
         version: 14.1.4
       '@playwright/test':
-        specifier: 1.42.1
-        version: 1.42.1
+        specifier: 1.43.0
+        version: 1.43.0
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -359,8 +359,8 @@ importers:
         specifier: 14.1.4
         version: 14.1.4
       '@playwright/test':
-        specifier: 1.42.1
-        version: 1.42.1
+        specifier: 1.43.0
+        version: 1.43.0
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -480,8 +480,8 @@ importers:
         specifier: 14.1.4
         version: 14.1.4
       '@playwright/test':
-        specifier: 1.42.1
-        version: 1.42.1
+        specifier: 1.43.0
+        version: 1.43.0
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -664,8 +664,8 @@ importers:
         specifier: 14.1.4
         version: 14.1.4
       '@playwright/test':
-        specifier: 1.42.1
-        version: 1.42.1
+        specifier: 1.43.0
+        version: 1.43.0
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -788,8 +788,8 @@ importers:
         specifier: 14.1.4
         version: 14.1.4
       '@playwright/test':
-        specifier: 1.42.1
-        version: 1.42.1
+        specifier: 1.43.0
+        version: 1.43.0
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -1021,8 +1021,8 @@ importers:
         specifier: 14.1.4
         version: 14.1.4
       '@playwright/test':
-        specifier: 1.42.1
-        version: 1.42.1
+        specifier: 1.43.0
+        version: 1.43.0
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -1175,8 +1175,8 @@ importers:
         specifier: 14.1.4
         version: 14.1.4
       '@playwright/test':
-        specifier: 1.42.1
-        version: 1.42.1
+        specifier: 1.43.0
+        version: 1.43.0
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -1311,7 +1311,7 @@ importers:
         version: 5.0.6
       next:
         specifier: 14.2.0-canary.56
-        version: 14.2.0-canary.56(@babel/core@7.24.4)(@playwright/test@1.42.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.74.1)
+        version: 14.2.0-canary.56(@babel/core@7.24.4)(@playwright/test@1.43.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.74.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1356,8 +1356,8 @@ importers:
         specifier: 14.1.4
         version: 14.1.4
       '@playwright/test':
-        specifier: 1.42.1
-        version: 1.42.1
+        specifier: 1.43.0
+        version: 1.43.0
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -5809,12 +5809,12 @@ packages:
     engines: {node: '>=16'}
     dev: false
 
-  /@playwright/test@1.42.1:
-    resolution: {integrity: sha512-Gq9rmS54mjBL/7/MvBaNOBwbfnh7beHvS6oS4srqXFcQHpQCV1+c8JXWE8VLPyRDhgS3H8x8A7hztqI9VnwrAQ==}
+  /@playwright/test@1.43.0:
+    resolution: {integrity: sha512-Ebw0+MCqoYflop7wVKj711ccbNlrwTBCtjY5rlbiY9kHL2bCYxq+qltK6uPsVBGGAOb033H2VO0YobcQVxoW7Q==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      playwright: 1.42.1
+      playwright: 1.43.0
 
   /@pmmmwh/react-refresh-webpack-plugin@0.5.11(react-refresh@0.14.0)(webpack@5.91.0):
     resolution: {integrity: sha512-7j/6vdTym0+qZ6u4XbSAxrWBGYSdCfTzySkj7WAFgDLmSyWlOrWvpyzxlFh5jtw9dn0oL/jtW+06XfFiisN3JQ==}
@@ -9283,7 +9283,7 @@ packages:
       react:
         optional: true
     dependencies:
-      next: 14.2.0-canary.56(@babel/core@7.24.4)(@playwright/test@1.42.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.74.1)
+      next: 14.2.0-canary.56(@babel/core@7.24.4)(@playwright/test@1.43.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.74.1)
       react: 18.2.0
       server-only: 0.0.1
     dev: false
@@ -15822,7 +15822,7 @@ packages:
       '@next/env': 13.5.6
       fast-glob: 3.3.2
       minimist: 1.2.8
-      next: 14.2.0-canary.56(@babel/core@7.24.4)(@playwright/test@1.42.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.74.1)
+      next: 14.2.0-canary.56(@babel/core@7.24.4)(@playwright/test@1.43.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.74.1)
     dev: true
 
   /next-themes@0.3.0(react-dom@18.2.0)(react@18.2.0):
@@ -15998,7 +15998,7 @@ packages:
       - babel-plugin-macros
     dev: true
 
-  /next@14.2.0-canary.56(@babel/core@7.24.4)(@playwright/test@1.42.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.74.1):
+  /next@14.2.0-canary.56(@babel/core@7.24.4)(@playwright/test@1.43.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.74.1):
     resolution: {integrity: sha512-o5/GGmNwGY3y3At/K9Y/9Vmuhjk7lwXPh7W/feePYeqpYu7/jp47NDg+EKczNj3ueOdKPFJr2kiwYfD3rT2RBQ==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -16017,7 +16017,7 @@ packages:
         optional: true
     dependencies:
       '@next/env': 14.2.0-canary.56
-      '@playwright/test': 1.42.1
+      '@playwright/test': 1.43.0
       '@swc/helpers': 0.5.5
       busboy: 1.6.0
       caniuse-lite: 1.0.30001600
@@ -16713,13 +16713,19 @@ packages:
     resolution: {integrity: sha512-mxz6zclokgrke9p1vtdy/COWBH+eOZgYUVVU34C73M+4j4HLlQJHtfcqiqqxpP0o8HhMkflvfbquLX5dg6wlfA==}
     engines: {node: '>=16'}
     hasBin: true
+    dev: true
 
-  /playwright@1.42.1:
-    resolution: {integrity: sha512-PgwB03s2DZBcNRoW+1w9E+VkLBxweib6KTXM0M3tkiT4jVxKSi6PmVJ591J+0u10LUrgxB7dLRbiJqO5s2QPMg==}
+  /playwright-core@1.43.0:
+    resolution: {integrity: sha512-iWFjyBUH97+pUFiyTqSLd8cDMMOS0r2ZYz2qEsPjH8/bX++sbIJT35MSwKnp1r/OQBAqC5XO99xFbJ9XClhf4w==}
+    engines: {node: '>=16'}
+    hasBin: true
+
+  /playwright@1.43.0:
+    resolution: {integrity: sha512-SiOKHbVjTSf6wHuGCbqrEyzlm6qvXcv7mENP+OZon1I07brfZLGdfWV0l/efAzVx7TF3Z45ov1gPEkku9q25YQ==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      playwright-core: 1.42.1
+      playwright-core: 1.43.0
     optionalDependencies:
       fsevents: 2.3.2
 
