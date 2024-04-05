@@ -33,7 +33,7 @@
         "@signalco/ui-icons": "workspace:*",
         "@vercel/analytics": "1.2.2",
         "autoprefixer": "10.4.19",
-        "classix": "2.1.36",
+        "classix": "2.1.37",
         "encoding": "0.1.13",
         "fs-extra": "11.2.0",
         "klaw": "4.1.0",
