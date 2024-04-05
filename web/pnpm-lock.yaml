@@ -96,8 +96,8 @@ importers:
         specifier: 1.0.10
         version: 1.0.10(next@14.1.4)(react@18.2.0)
       '@vvo/tzdb':
-        specifier: 6.129.0
-        version: 6.129.0
+        specifier: 6.130.0
+        version: 6.130.0
       autoprefixer:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
@@ -1749,8 +1749,8 @@ importers:
         specifier: 18.2.74
         version: 18.2.74
       lucide-react:
-        specifier: 0.364.0
-        version: 0.364.0(react@18.2.0)
+        specifier: 0.365.0
+        version: 0.365.0(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -9316,8 +9316,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@vvo/tzdb@6.129.0:
-    resolution: {integrity: sha512-Cafpcz/T2Suy7p00UekKZxeOAunUJmdadRPauhgVprxLEhSgDsc27RSoI4CXzRC2kh+fon6ZvMCxL8g8mtHtdg==}
+  /@vvo/tzdb@6.130.0:
+    resolution: {integrity: sha512-9jhliGe3lHMJxTHoJPsS+jLk3HJOJWS32gA1a7D9rVe0u6ElauasuSOkysIDzbf0Ag3fd7nVR2j2By1BoRS7qw==}
     dev: false
 
   /@webassemblyjs/ast@1.12.1:
@@ -14674,8 +14674,8 @@ packages:
       es5-ext: 0.10.62
     dev: true
 
-  /lucide-react@0.364.0(react@18.2.0):
-    resolution: {integrity: sha512-eHfdbJExWtTaZ0tBMGtI7PA/MbqV5wt+o4/yitDce17tadH/75Gq3Tq8jSteb3LhLr0eay/j5YUuN4yXjnI3aw==}
+  /lucide-react@0.365.0(react@18.2.0):
+    resolution: {integrity: sha512-sJYpPyyzGHI4B3pys+XSFnE4qtSWc68rFnDLxbNNKjkLST5XSx9DNn5+1Z3eFgFiw39PphNRiVBSVb+AL3oKwA==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
