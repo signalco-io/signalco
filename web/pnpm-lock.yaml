@@ -630,8 +630,8 @@ importers:
         specifier: 0.3.0
         version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
       openai:
-        specifier: 4.32.2
-        version: 4.32.2
+        specifier: 4.33.0
+        version: 4.33.0
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1316,8 +1316,8 @@ importers:
         specifier: 0.3.0
         version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
       openai:
-        specifier: 4.32.2
-        version: 4.32.2
+        specifier: 4.33.0
+        version: 4.33.0
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -16264,8 +16264,8 @@ packages:
       is-wsl: 2.2.0
     dev: true
 
-  /openai@4.32.2:
-    resolution: {integrity: sha512-JXU5ttiL4liZJ2GRYvyqd/m9zA64bI8e6B5BtyKlbkcv5DAd5wiDgd0cQ1CIIdsEH90k5p3TdK6MyjnUhvOe7w==}
+  /openai@4.33.0:
+    resolution: {integrity: sha512-Sh4KvplkvkAREuhb8yZpohqsOo08cBBu6LNWLD8YyMxe8yCxbE+ouJYUs1X2oDPrzQGANj0rFNQYiwW9gWLBOg==}
     hasBin: true
     dependencies:
       '@types/node': 18.19.3
