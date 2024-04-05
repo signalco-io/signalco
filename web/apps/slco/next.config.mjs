@@ -39,6 +39,7 @@ const nextConfig = {
                 isDevelopment,
                 [
                     knownSecureHeadersExternalUrls.github,
+                    knownSecureHeadersExternalUrls.googleFonts,
                     knownSecureHeadersExternalUrls.vercel
                 ]
             ))

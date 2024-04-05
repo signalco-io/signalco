@@ -46,6 +46,7 @@ const nextConfig = {
                     knownSecureHeadersExternalUrls.hcaptcha,
                     knownSecureHeadersExternalUrls.auth0('dfnoise.eu'),
                     knownSecureHeadersExternalUrls.google,
+                    knownSecureHeadersExternalUrls.googleFonts,
                     knownSecureHeadersExternalUrls.mapbox,
                     knownSecureHeadersExternalUrls.azureSignalR,
                     knownSecureHeadersExternalUrls.polygon,

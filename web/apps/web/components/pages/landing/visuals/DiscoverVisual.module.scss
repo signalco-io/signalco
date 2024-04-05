@@ -1,4 +1,5 @@
 .root {
+    width: 100%;
     line { stroke: hsl(var(--border)); }
     circle { fill: #777; }
     circle:last-of-type { fill: #45ca7a; }

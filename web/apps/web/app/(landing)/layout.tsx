@@ -1,1 +1,1 @@
-export { PageFullLayout as default } from '../../components/layouts/PageFullLayout';
+export { PageLayout as default } from '../../components/layouts/PageLayout';
