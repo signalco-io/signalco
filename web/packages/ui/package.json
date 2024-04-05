@@ -27,8 +27,8 @@
         "@signalco/ui-icons": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/react": "18.2.73",
-        "@types/react-dom": "18.2.23",
+        "@types/react": "18.2.74",
+        "@types/react-dom": "18.2.24",
         "@types/react-timeago": "4.1.7",
         "autoprefixer": "10.4.19",
         "classix": "2.1.36",
@@ -37,8 +37,8 @@
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-timeago": "7.2.0",
-        "sass": "1.72.0",
+        "sass": "1.74.1",
         "tailwind-merge": "2.2.2",
-        "typescript": "5.4.3"
+        "typescript": "5.4.4"
     }
 }
