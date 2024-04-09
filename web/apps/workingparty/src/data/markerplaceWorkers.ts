@@ -114,6 +114,13 @@ export const marketplaceWorkers: Array<MarketplaceAssistant> = [
         model: 'gpt-3.5-turbo',
         categories: ['softwareDevelopment']
     }, {
+        id: 'terraform-expert',
+        name: 'Terraform Expert',
+        description: 'Offers advice on infrastructure as code using Terraform.',
+        instructions: 'Provide advice on infrastructure as code using Terraform.',
+        model: 'gpt-3.5-turbo',
+        categories: ['softwareDevelopment']
+    }, {
         id: 'copywriter',
         name: 'Copywriter',
         description: 'Creates compelling and engaging written content.',
