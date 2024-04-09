@@ -6,5 +6,5 @@ export default function LandingLayoutPage({ children }: PropsWithChildren) {
         <PageLayout>
             {children}
         </PageLayout>
-    )
+    );
 }
