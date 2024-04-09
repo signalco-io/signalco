@@ -40,6 +40,7 @@ const nextConfig = {
                 [
                     knownSecureHeadersExternalUrls.vercel,
                     knownSecureHeadersExternalUrls.stripe,
+                    knownSecureHeadersExternalUrls.googleFonts,
                 ]
             ))
         }];

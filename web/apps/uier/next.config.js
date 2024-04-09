@@ -39,6 +39,7 @@ const nextConfig = {
                 isDevelopment,
                 [
                     knownSecureHeadersExternalUrls.vercel,
+                    knownSecureHeadersExternalUrls.googleFonts,
                     { scriptSrc: 'http://localhost:4005', styleSrc: 'http://localhost:4005' },
                 ]
             ))

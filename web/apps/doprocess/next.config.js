@@ -40,6 +40,7 @@ const nextConfig = {
                 [
                     knownSecureHeadersExternalUrls.github,
                     knownSecureHeadersExternalUrls.vercel,
+                    knownSecureHeadersExternalUrls.googleFonts,
                     knownSecureHeadersExternalUrls.clerk,
                     { scriptSrc: 'http://localhost:5500', styleSrc: 'http://localhost:5500' },
                     {

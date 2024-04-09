@@ -50,7 +50,8 @@ const nextConfig = {
                 isDevelopment,
                 [
                     knownSecureHeadersExternalUrls.signalco,
-                    knownSecureHeadersExternalUrls.vercel
+                    knownSecureHeadersExternalUrls.vercel,
+                    knownSecureHeadersExternalUrls.googleFonts,
                 ]
             ))
         }];
