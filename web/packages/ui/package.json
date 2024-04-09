@@ -27,7 +27,7 @@
         "@signalco/ui-icons": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/react": "18.2.74",
+        "@types/react": "18.2.75",
         "@types/react-dom": "18.2.24",
         "@types/react-timeago": "4.1.7",
         "autoprefixer": "10.4.19",
