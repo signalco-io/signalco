@@ -15,13 +15,13 @@
         "@signalco/tsconfig": "workspace:*",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@types/react": "18.2.75",
-        "next": "14.1.4",
+        "next": "14.2.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "typescript": "5.4.4"
     },
     "peerDependencies": {
-        "next": "14.1.4",
+        "next": "14.2.0",
         "react": "18.2.0",
         "react-dom": "18.2.0"
     }
