@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "@hcaptcha/react-hcaptcha": "1.10.1",
-        "@next/env": "14.1.4",
+        "@next/env": "14.2.0",
         "@signalco/cms-core": "workspace:*",
         "@signalco/cms-components-marketing": "workspace:*",
         "@signalco/data": "workspace:*",
@@ -28,7 +28,7 @@
         "@signalco/ui-icons": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "classix": "2.1.37",
-        "next": "14.1.4",
+        "next": "14.2.0",
         "next-secure-headers": "2.2.0",
         "react": "18.2.0",
         "react-cool-inview": "3.0.1",
@@ -41,7 +41,7 @@
     "devDependencies": {
         "@axe-core/playwright": "4.9.0",
         "@babel/core": "7.24.4",
-        "@next/bundle-analyzer": "14.1.4",
+        "@next/bundle-analyzer": "14.2.0",
         "@playwright/test": "1.43.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
