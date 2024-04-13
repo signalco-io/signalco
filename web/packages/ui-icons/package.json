@@ -16,7 +16,7 @@
         "lucide-react": "0.365.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "typescript": "5.4.4",
+        "typescript": "5.4.5",
         "@types/react": "18.2.75"
     },
     "peerDependencies": {
