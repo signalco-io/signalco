@@ -21,7 +21,7 @@
         "@enterwell/react-hooks": "0.5.0",
         "@hcaptcha/react-hcaptcha": "1.10.1",
         "@next/env": "14.2.1",
-        "@reactflow/background": "11.3.10",
+        "@reactflow/background": "11.3.11",
         "@reactflow/controls": "11.2.10",
         "@reactflow/core": "11.11.0",
         "@signalco/cms-core": "workspace:*",
