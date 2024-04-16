@@ -256,8 +256,8 @@ importers:
         specifier: 1.75.0
         version: 1.75.0
       sass-loader:
-        specifier: 14.1.1
-        version: 14.1.1(sass@1.75.0)(webpack@5.91.0)
+        specifier: 14.2.1
+        version: 14.2.1(sass@1.75.0)(webpack@5.91.0)
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -909,8 +909,8 @@ importers:
         specifier: 1.75.0
         version: 1.75.0
       sass-loader:
-        specifier: 14.1.1
-        version: 14.1.1(sass@1.75.0)(webpack@5.91.0(@swc/core@1.3.101(@swc/helpers@0.5.5))(esbuild@0.19.11))
+        specifier: 14.2.1
+        version: 14.2.1(sass@1.75.0)(webpack@5.91.0(@swc/core@1.3.101(@swc/helpers@0.5.5))(esbuild@0.19.11))
       storybook:
         specifier: 8.0.8
         version: 8.0.8(@babel/preset-env@7.23.3(@babel/core@7.24.4))(encoding@0.1.13)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -10229,8 +10229,8 @@ packages:
       sass-embedded:
         optional: true
 
-  sass-loader@14.1.1:
-    resolution: {integrity: sha512-QX8AasDg75monlybel38BZ49JP5Z+uSKfKwF2rO7S74BywaRmGQMUBw9dtkS+ekyM/QnP+NOrRYq8ABMZ9G8jw==}
+  sass-loader@14.2.1:
+    resolution: {integrity: sha512-G0VcnMYU18a4N7VoNDegg2OuMjYtxnqzQWARVWCIVSZwJeiL9kg8QMsuIZOplsJgTzZLF6jGxI3AClj8I9nRdQ==}
     engines: {node: '>= 18.12.0'}
     peerDependencies:
       '@rspack/core': 0.x || 1.x
@@ -21786,14 +21786,14 @@ snapshots:
     optionalDependencies:
       sass: 1.75.0
 
-  sass-loader@14.1.1(sass@1.75.0)(webpack@5.91.0(@swc/core@1.3.101(@swc/helpers@0.5.5))(esbuild@0.19.11)):
+  sass-loader@14.2.1(sass@1.75.0)(webpack@5.91.0(@swc/core@1.3.101(@swc/helpers@0.5.5))(esbuild@0.19.11)):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
       sass: 1.75.0
       webpack: 5.91.0(@swc/core@1.3.101(@swc/helpers@0.5.5))(esbuild@0.19.11)
 
-  sass-loader@14.1.1(sass@1.75.0)(webpack@5.91.0):
+  sass-loader@14.2.1(sass@1.75.0)(webpack@5.91.0):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:

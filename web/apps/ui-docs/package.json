@@ -30,7 +30,7 @@
     "postcss-loader": "8.1.1",
     "rimraf": "5.0.5",
     "sass": "1.75.0",
-    "sass-loader": "14.1.1",
+    "sass-loader": "14.2.1",
     "storybook": "8.0.8",
     "storybook-addon-swc": "1.2.0",
     "style-loader": "4.0.0",
