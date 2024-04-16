@@ -543,8 +543,8 @@ importers:
         specifier: 4.29.11
         version: 4.29.11(next@14.2.1(@babel/core@7.24.4)(@playwright/test@1.43.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.74.1))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@clerk/themes':
-        specifier: 1.7.11
-        version: 1.7.11(react@18.2.0)
+        specifier: 1.7.12
+        version: 1.7.12(react@18.2.0)
       '@dnd-kit/core':
         specifier: 6.1.0
         version: 6.1.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -2745,14 +2745,18 @@ packages:
       react:
         optional: true
 
-  '@clerk/themes@1.7.11':
-    resolution: {integrity: sha512-ujSEb1PIvab3etaGH4t/YUgVXRQs+DC0swbiQj5R8zO+u3OoBItwyztNelOnej27kZlkCmbiwau8RFVsQqB8Qg==}
+  '@clerk/themes@1.7.12':
+    resolution: {integrity: sha512-puO5i91Da7IeTEw1qowce3K+6mOHnFSZ1UhSQsF9pYFUhp+j3WciwahxC4QnF6FL14jaS4XLZI/RUs66TuY+Hw==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16'
 
   '@clerk/types@3.63.0':
     resolution: {integrity: sha512-+32fWK+lUG2u0hVaoQ3aZ+j2T/LhF3yNNylBrkD1Kca/goLb+NB/nmw6Svs0Q810FK/uYgqWlXvABPhgILeQFA==}
+    engines: {node: '>=14'}
+
+  '@clerk/types@3.63.1':
+    resolution: {integrity: sha512-PeZrRzWApJl1BYsT/wQPtEzhDmwfqeMKWuSRcHe3Kh0Itc5Gp7w9HrrKkyMnRuzebVj4z5gX4rwJOmTD/P1DhQ==}
     engines: {node: '>=14'}
 
   '@colors/colors@1.5.0':
@@ -12646,13 +12650,17 @@ snapshots:
     optionalDependencies:
       react: 18.2.0
 
-  '@clerk/themes@1.7.11(react@18.2.0)':
+  '@clerk/themes@1.7.12(react@18.2.0)':
     dependencies:
-      '@clerk/types': 3.63.0
+      '@clerk/types': 3.63.1
       react: 18.2.0
       tslib: 2.4.1
 
   '@clerk/types@3.63.0':
+    dependencies:
+      csstype: 3.1.1
+
+  '@clerk/types@3.63.1':
     dependencies:
       csstype: 3.1.1
 
