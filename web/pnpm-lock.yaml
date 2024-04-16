@@ -84,11 +84,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.29.0
-        version: 5.29.0(react@18.2.0)
+        specifier: 5.29.2
+        version: 5.29.2(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.29.0
-        version: 5.29.0(@tanstack/react-query@5.29.0(react@18.2.0))(react@18.2.0)
+        specifier: 5.29.2
+        version: 5.29.2(@tanstack/react-query@5.29.2(react@18.2.0))(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.2.0(@babel/core@7.24.4)(@playwright/test@1.43.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.74.1))(react@18.2.0)
@@ -603,11 +603,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.29.0
-        version: 5.29.0(react@18.2.0)
+        specifier: 5.29.2
+        version: 5.29.2(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.29.0
-        version: 5.29.0(@tanstack/react-query@5.29.0(react@18.2.0))(react@18.2.0)
+        specifier: 5.29.2
+        version: 5.29.2(@tanstack/react-query@5.29.2(react@18.2.0))(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.2.0(@babel/core@7.24.4)(@playwright/test@1.43.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.74.1))(react@18.2.0)
@@ -975,11 +975,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.29.0
-        version: 5.29.0(react@18.2.0)
+        specifier: 5.29.2
+        version: 5.29.2(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.29.0
-        version: 5.29.0(@tanstack/react-query@5.29.0(react@18.2.0))(react@18.2.0)
+        specifier: 5.29.2
+        version: 5.29.2(@tanstack/react-query@5.29.2(react@18.2.0))(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.2.0(@babel/core@7.24.4)(@playwright/test@1.43.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.74.1))(react@18.2.0)
@@ -1289,11 +1289,11 @@ importers:
         specifier: 0.5.12
         version: 0.5.12(tailwindcss@3.4.3)
       '@tanstack/react-query':
-        specifier: 5.29.0
-        version: 5.29.0(react@18.2.0)
+        specifier: 5.29.2
+        version: 5.29.2(react@18.2.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.29.0
-        version: 5.29.0(@tanstack/react-query@5.29.0(react@18.2.0))(react@18.2.0)
+        specifier: 5.29.2
+        version: 5.29.2(@tanstack/react-query@5.29.2(react@18.2.0))(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.2.0(@babel/core@7.24.4)(@playwright/test@1.43.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.74.1))(react@18.2.0)
@@ -1908,8 +1908,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-primitives
       '@tanstack/react-query':
-        specifier: 5.29.0
-        version: 5.29.0(react@18.2.0)
+        specifier: 5.29.2
+        version: 5.29.2(react@18.2.0)
       '@types/node':
         specifier: 20.12.7
         version: 20.12.7
@@ -4980,14 +4980,14 @@ packages:
   '@tanstack/query-devtools@5.28.10':
     resolution: {integrity: sha512-5UN629fKa5/1K/2Pd26gaU7epxRrYiT1gy+V+pW5K6hnf1DeUKK3pANSb2eHKlecjIKIhTwyF7k9XdyE2gREvQ==}
 
-  '@tanstack/react-query-devtools@5.29.0':
-    resolution: {integrity: sha512-WLuaU6yM4KdvBimEP1Km5lM4/p1J40cMp5I5z0Mc6a8QbBUYLK8qJcGIKelfLfDp7KmEcr59tzbRTmdH/GWvzQ==}
+  '@tanstack/react-query-devtools@5.29.2':
+    resolution: {integrity: sha512-EmsaLNa8iFtReAW+5ftom0/TW78fIosVor517ak/+JFaoTBw8Yub3ao937JFE6AM3K/HXhteqvObetgt1ndLcw==}
     peerDependencies:
-      '@tanstack/react-query': ^5.29.0
+      '@tanstack/react-query': ^5.29.2
       react: ^18.0.0
 
-  '@tanstack/react-query@5.29.0':
-    resolution: {integrity: sha512-yxlhHB73jaBla6h5B6zPaGmQjokkzAhMHN4veotkPNiQ3Ac/mCxgABRZPsJJrgCTvhpcncBZcDBFxaR2B37vug==}
+  '@tanstack/react-query@5.29.2':
+    resolution: {integrity: sha512-nyuWILR4u7H5moLGSiifLh8kIqQDLNOHGuSz0rcp+J75fNc8aQLyr5+I2JCHU3n+nJrTTW1ssgAD8HiKD7IFBQ==}
     peerDependencies:
       react: ^18.0.0
 
@@ -11378,9 +11378,11 @@ packages:
 
   workbox-google-analytics@6.6.0:
     resolution: {integrity: sha512-p4DJa6OldXWd6M9zRl0H6vB9lkrmqYFkRQ2xEiNdBFp9U0LhsGO7hsBscVEyH9H2/3eZZt8c97NB2FD9U2NJ+Q==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
 
   workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
 
   workbox-navigation-preload@6.6.0:
     resolution: {integrity: sha512-utNEWG+uOfXdaZmvhshrh7KzhDu/1iMHyQOV6Aqup8Mm78D286ugu5k9MFD9SzBT5TcwgwSORVvInaXWbvKz9Q==}
@@ -15261,13 +15263,13 @@ snapshots:
 
   '@tanstack/query-devtools@5.28.10': {}
 
-  '@tanstack/react-query-devtools@5.29.0(@tanstack/react-query@5.29.0(react@18.2.0))(react@18.2.0)':
+  '@tanstack/react-query-devtools@5.29.2(@tanstack/react-query@5.29.2(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@tanstack/query-devtools': 5.28.10
-      '@tanstack/react-query': 5.29.0(react@18.2.0)
+      '@tanstack/react-query': 5.29.2(react@18.2.0)
       react: 18.2.0
 
-  '@tanstack/react-query@5.29.0(react@18.2.0)':
+  '@tanstack/react-query@5.29.2(react@18.2.0)':
     dependencies:
       '@tanstack/query-core': 5.29.0
       react: 18.2.0
