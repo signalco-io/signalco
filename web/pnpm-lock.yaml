@@ -540,8 +540,8 @@ importers:
         specifier: 0.12.4
         version: 0.12.4(@tiptap/pm@2.1.12)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@clerk/nextjs':
-        specifier: 4.29.11
-        version: 4.29.11(next@14.2.1(@babel/core@7.24.4)(@playwright/test@1.43.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.74.1))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 4.29.12
+        version: 4.29.12(next@14.2.1(@babel/core@7.24.4)(@playwright/test@1.43.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.74.1))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@clerk/themes':
         specifier: 1.7.12
         version: 1.7.12(react@18.2.0)
@@ -2715,22 +2715,22 @@ packages:
       react: ^18
       react-dom: ^18
 
-  '@clerk/backend@0.38.5':
-    resolution: {integrity: sha512-SYdJAQt4KXmdo7gcaC747cf6KYthSigosmBLqS6aeq4SinBbZmfmgEKL80/oInp//j2+kmZglSazyg6W2NJr/A==}
+  '@clerk/backend@0.38.6':
+    resolution: {integrity: sha512-dQJzOrDW24KR2ovYUSoTh2iGX1bK0L4odQ5DFi5HJ3Uam3VlJgXk17CQV9VRnokJ7kfRlO3PVAQ6gxd+hCbx5Q==}
     engines: {node: '>=14'}
 
-  '@clerk/clerk-react@4.30.9':
-    resolution: {integrity: sha512-UWY+XmpbKjkABgmyfy2FUiTQQiN8QSdzyswPoTO9QyosXMZZp+vo/UhVor5V2kIeBoPibyW01oG/Nor2l0a7sA==}
+  '@clerk/clerk-react@4.30.10':
+    resolution: {integrity: sha512-c2X0grf7Vo6LrycvYbVyIyU7Gtyb47mf0/fnQdmF5zL8PIF1Ih5Yn9ZkbNeVjCLQrVRLeSRBgrrEIzlIenbuaQ==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16'
 
-  '@clerk/clerk-sdk-node@4.13.13':
-    resolution: {integrity: sha512-/VxKdAKN9vdvF9uk+YwFFA8H/BTXkCsHPAPIDh//bHnFFl/qu/cl66KMsQcmWdG72gwFbUeOjJyIXEZ83P6LLw==}
+  '@clerk/clerk-sdk-node@4.13.14':
+    resolution: {integrity: sha512-ECQEiMi/7xQZx0U9IyFKDazFLS+eyZnah+ZClwjMGDxAA1KR6xF13Vd9mbGzTov7IlvwfsNmUPOSXvjORufvqg==}
     engines: {node: '>=14'}
 
-  '@clerk/nextjs@4.29.11':
-    resolution: {integrity: sha512-pAL/AO1ss10kiP8IZnl116wb53tsdRv3HSp3XKJCGgcg8xd0hmx/eeVHzYoLC8Jym5P0Lwm9JjrtLwnVeIz9Zw==}
+  '@clerk/nextjs@4.29.12':
+    resolution: {integrity: sha512-9pB6s4E50OjUjySVhQpSHu9DC0zIGqVJdneMXcL26fk48+U7lq9XCAZEFNIYUVQeMMvEI1elWSgNmi2Xmpr8ug==}
     engines: {node: '>=14'}
     peerDependencies:
       next: '>=10'
@@ -2750,10 +2750,6 @@ packages:
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16'
-
-  '@clerk/types@3.63.0':
-    resolution: {integrity: sha512-+32fWK+lUG2u0hVaoQ3aZ+j2T/LhF3yNNylBrkD1Kca/goLb+NB/nmw6Svs0Q810FK/uYgqWlXvABPhgILeQFA==}
-    engines: {node: '>=14'}
 
   '@clerk/types@3.63.1':
     resolution: {integrity: sha512-PeZrRzWApJl1BYsT/wQPtEzhDmwfqeMKWuSRcHe3Kh0Itc5Gp7w9HrrKkyMnRuzebVj4z5gX4rwJOmTD/P1DhQ==}
@@ -12594,10 +12590,10 @@ snapshots:
       - '@types/react'
       - supports-color
 
-  '@clerk/backend@0.38.5(react@18.2.0)':
+  '@clerk/backend@0.38.6(react@18.2.0)':
     dependencies:
       '@clerk/shared': 1.4.1(react@18.2.0)
-      '@clerk/types': 3.63.0
+      '@clerk/types': 3.63.1
       '@peculiar/webcrypto': 1.4.1
       '@types/node': 16.18.6
       cookie: 0.5.0
@@ -12608,18 +12604,18 @@ snapshots:
     transitivePeerDependencies:
       - react
 
-  '@clerk/clerk-react@4.30.9(react@18.2.0)':
+  '@clerk/clerk-react@4.30.10(react@18.2.0)':
     dependencies:
       '@clerk/shared': 1.4.1(react@18.2.0)
-      '@clerk/types': 3.63.0
+      '@clerk/types': 3.63.1
       react: 18.2.0
       tslib: 2.4.1
 
-  '@clerk/clerk-sdk-node@4.13.13(react@18.2.0)':
+  '@clerk/clerk-sdk-node@4.13.14(react@18.2.0)':
     dependencies:
-      '@clerk/backend': 0.38.5(react@18.2.0)
+      '@clerk/backend': 0.38.6(react@18.2.0)
       '@clerk/shared': 1.4.1(react@18.2.0)
-      '@clerk/types': 3.63.0
+      '@clerk/types': 3.63.1
       '@types/cookies': 0.7.7
       '@types/express': 4.17.14
       '@types/node-fetch': 2.6.2
@@ -12629,13 +12625,13 @@ snapshots:
     transitivePeerDependencies:
       - react
 
-  '@clerk/nextjs@4.29.11(next@14.2.1(@babel/core@7.24.4)(@playwright/test@1.43.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.74.1))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@clerk/nextjs@4.29.12(next@14.2.1(@babel/core@7.24.4)(@playwright/test@1.43.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.74.1))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@clerk/backend': 0.38.5(react@18.2.0)
-      '@clerk/clerk-react': 4.30.9(react@18.2.0)
-      '@clerk/clerk-sdk-node': 4.13.13(react@18.2.0)
+      '@clerk/backend': 0.38.6(react@18.2.0)
+      '@clerk/clerk-react': 4.30.10(react@18.2.0)
+      '@clerk/clerk-sdk-node': 4.13.14(react@18.2.0)
       '@clerk/shared': 1.4.1(react@18.2.0)
-      '@clerk/types': 3.63.0
+      '@clerk/types': 3.63.1
       next: 14.2.1(@babel/core@7.24.4)(@playwright/test@1.43.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.74.1)
       path-to-regexp: 6.2.1
       react: 18.2.0
@@ -12655,10 +12651,6 @@ snapshots:
       '@clerk/types': 3.63.1
       react: 18.2.0
       tslib: 2.4.1
-
-  '@clerk/types@3.63.0':
-    dependencies:
-      csstype: 3.1.1
 
   '@clerk/types@3.63.1':
     dependencies:
