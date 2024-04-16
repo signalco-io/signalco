@@ -21,7 +21,7 @@ Visit <a aria-label="Signalco learn" href="https://www.signalco.io/learn">https:
 
 | Production | Next |
 |------------|------|
-| [![Deploy Production](https://github.com/signalco-io/signalco/actions/workflows/cloud-deploy.yml/badge.svg?branch=main)](https://github.com/signalco-io/signalco/actions/workflows/cloud-deploy.yml) | [![Deploy Development](https://github.com/signalco-io/signalco/actions/workflows/cloud-deploy.yml/badge.svg?branch=next)](https://github.com/signalco-io/signalco/actions/workflows/cloud-deploy.yml) |
+| [![Deploy Production](https://github.com/signalco-io/signalco/actions/workflows/infra-deploy.yml/badge.svg?branch=main)](https://github.com/signalco-io/signalco/actions/workflows/infra-deploy.yml) | [![Deploy Development](https://github.com/signalco-io/signalco/actions/workflows/infra-deploy.yml/badge.svg?branch=next)](https://github.com/signalco-io/signalco/actions/workflows/infra-deploy.yml) |
 
 ## Development for Cloud
 
