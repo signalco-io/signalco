@@ -1081,8 +1081,8 @@ importers:
         specifier: 14.2.1
         version: 14.2.1
       '@reactflow/background':
-        specifier: 11.3.10
-        version: 11.3.10(@types/react@18.2.75)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 11.3.11
+        version: 11.3.11(@types/react@18.2.75)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@reactflow/controls':
         specifier: 11.2.10
         version: 11.2.10(@types/react@18.2.75)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -4554,8 +4554,8 @@ packages:
     peerDependencies:
       react: 18.2.0
 
-  '@reactflow/background@11.3.10':
-    resolution: {integrity: sha512-EdrQrNOdZtK5I+g+rKqLgiNU1rHXtpu2kQ0Af0LZ6v8yzOhAIMpxC70MeLXCLhZRHBkg1djk7gP6ZOSFZQFbUQ==}
+  '@reactflow/background@11.3.11':
+    resolution: {integrity: sha512-27ahQyHuX2YTc1lABvAPpd5JWBH5P3qTHLGOO+Qfqq4mbicwQ0UGQ2bVDWDwoHOyep2EuMuphrLttaMr0hiviw==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
@@ -4568,6 +4568,12 @@ packages:
 
   '@reactflow/core@11.11.0':
     resolution: {integrity: sha512-Flw7kpEvXXb+qfT6jhFmscZLzIN8AY7kZC8SwVOW0ijpsgvILnE6cMq45CKmTaWxl82KbaHPxZUB3FeQxb1KMQ==}
+    peerDependencies:
+      react: '>=17'
+      react-dom: '>=17'
+
+  '@reactflow/core@11.11.1':
+    resolution: {integrity: sha512-O9f/q9SZ+29am/XdoZgm/LTdkgQdypcVj9a1yZZgcS6rVDkij1yIiOT3nkGxwnNkJz0rwCn2xtL5SkK038AQ7w==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
@@ -14359,9 +14365,9 @@ snapshots:
     dependencies:
       react: 18.2.0
 
-  '@reactflow/background@11.3.10(@types/react@18.2.75)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@reactflow/background@11.3.11(@types/react@18.2.75)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@reactflow/core': 11.11.0(@types/react@18.2.75)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@reactflow/core': 11.11.1(@types/react@18.2.75)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       classcat: 5.0.4
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -14382,6 +14388,23 @@ snapshots:
       - immer
 
   '@reactflow/core@11.11.0(@types/react@18.2.75)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@types/d3': 7.4.3
+      '@types/d3-drag': 3.0.7
+      '@types/d3-selection': 3.0.10
+      '@types/d3-zoom': 3.0.8
+      classcat: 5.0.4
+      d3-drag: 3.0.0
+      d3-selection: 3.0.0
+      d3-zoom: 3.0.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      zustand: 4.4.6(@types/react@18.2.75)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - immer
+
+  '@reactflow/core@11.11.1(@types/react@18.2.75)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@types/d3': 7.4.3
       '@types/d3-drag': 3.0.7
