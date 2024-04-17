@@ -14,7 +14,7 @@
         "build:analyze": "cross-env ANALYZE=true pnpm build",
         "postbuild": "next-sitemap --config next-sitemap.config.cjs",
         "start": "next start -p 4004",
-        "lint": "next lint"
+        "lint": "eslint ."
     },
     "dependencies": {
         "@azure/cosmos": "4.0.0",

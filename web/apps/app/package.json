@@ -17,7 +17,7 @@
         "postbuild": "next-sitemap --config next-sitemap.config.cjs",
         "start": "next start -p 3001",
         "test": "echo \"Info: no test specified\"",
-        "lint": "next lint"
+        "lint": "eslint ."
     },
     "dependencies": {
         "@auth0/auth0-react": "2.2.4",

@@ -20,7 +20,7 @@ export default function InputGrabDomain({ placeholder }: { placeholder?: string 
 
     return (
         <InputSubmit
-            placeholder={placeholder}
+            placeholder={placeholder} 
             aria-label="Domain"
             value={domainInput}
             onChange={(e) => setDomainInput(e.target.value)}

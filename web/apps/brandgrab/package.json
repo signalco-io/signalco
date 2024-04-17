@@ -14,7 +14,7 @@
         "build:analyze": "cross-env ANALYZE=true pnpm build",
         "postbuild": "next-sitemap --config next-sitemap.config.cjs",
         "start": "next start -p 4001",
-        "lint": "next lint",
+        "lint": "eslint .",
         "test": "playwright test"
     },
     "dependencies": {
