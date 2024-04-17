@@ -1,4 +1,4 @@
-@import '@signalco/ui/index.css';
+@import '@signalco/ui/style';
 
 :root {
   --graph-stroke: #999;

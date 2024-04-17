@@ -46,11 +46,9 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: ✨ Setup pnpm
-        uses: pnpm/action-setup@v3.0.0
-        with:
-          version: 'latest'
-
+      - name: ✨ Enable Corepack
+        run: corepack enable
+        
       - name: ✨ Setup Node
         uses: actions/setup-node@v4
         with:

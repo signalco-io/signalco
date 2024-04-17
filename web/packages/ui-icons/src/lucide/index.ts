@@ -58,6 +58,7 @@ export {
     ExternalLink,
     Upload,
     Loader2 as LoaderSpinner,
+    Rocket,
     Trash2 as Delete,
     Plus as Add,
     Code2 as Code,

@@ -47,7 +47,7 @@
         "@tanstack/react-query-devtools": "5.29.2",
         "@vercel/analytics": "1.2.2",
         "@vercel/speed-insights": "1.0.10",
-        "@vvo/tzdb": "6.130.0",
+        "@vvo/tzdb": "6.132.0",
         "autoprefixer": "10.4.19",
         "classix": "2.1.37",
         "cobe": "0.6.3",
@@ -102,7 +102,7 @@
         "react-is": "18.2.0",
         "rimraf": "5.0.5",
         "sass": "1.75.0",
-        "sass-loader": "14.1.1",
+        "sass-loader": "14.2.1",
         "typescript": "5.4.5"
     },
     "nextBundleAnalysis": {

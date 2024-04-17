@@ -48,10 +48,8 @@ jobs:
             with:
               fetch-depth: 2
 
-          - name: ✨ Setup pnpm
-            uses: pnpm/action-setup@v3.0.0
-            with:
-              version: 'latest'
+          - name: ✨ Enable Corepack
+            run: corepack enable
 
           - name: ✨ Setup Node.js
             uses: actions/setup-node@v4
@@ -61,7 +59,7 @@ jobs:
                 cache-dependency-path: ./web/pnpm-lock.yaml
 
           - name: ✨ Setup Vercel CLI
-            run: pnpm add --global vercel@33.2.0
+            run: npm i --g vercel@33.2.0
 
           - name: ⚙️ Pull Vercel Environment Information
             run: vercel pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}

@@ -16,6 +16,7 @@ import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { SectionData } from '@signalco/cms-core/SectionData';
 import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { usePromise } from '@enterwell/react-hooks';
+import InputGrabDomain from '../InputGrabDomain';
 import { KnownPages } from '../../src/knownPages';
 import { ScreenshotResponse } from '../../app/api/screenshot/route';
 import { BrandResources } from '../../app/api/quick/route';
@@ -338,7 +339,10 @@ export default function LandingPageView() {
     const [domain] = useSearchParam('domain');
 
     return (
-        <Stack style={{ overflowX: 'hidden', paddingBottom: 16 }}>
+        <Stack spacing={8}>
+            <Container maxWidth="md">
+                <InputGrabDomain />
+            </Container>
             <Container maxWidth="md">
                 <BrandView domain={domain} />
             </Container>
