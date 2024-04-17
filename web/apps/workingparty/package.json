@@ -50,7 +50,7 @@
         "react-email": "2.1.1",
         "react-markdown": "9.0.1",
         "sharp": "0.33.3",
-        "stripe": "14.24.0",
+        "stripe": "14.25.0",
         "tailwindcss": "3.4.3",
         "tailwindcss-animate": "1.0.7",
         "@stripe/stripe-js": "3.3.0",
