@@ -64,7 +64,7 @@ jobs:
             run: pnpm lint --filter=${{ inputs.name }}
 
           - name: ✨ Setup Vercel CLI
-            run: pnpm install --global vercel@latest
+            run: npm i --g vercel@latest
 
           - name: ⚙️ Pull Vercel Environment Information
             run: vercel env pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
