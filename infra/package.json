@@ -12,7 +12,7 @@
     "@infra/typescript-config": "workspace:*",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@9.0.1",
+  "packageManager": "pnpm@9.0.2",
   "engines": {
     "node": ">=18"
   }
