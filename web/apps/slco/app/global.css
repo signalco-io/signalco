@@ -1,4 +1,4 @@
-@import "@signalco/ui/index.css";
+@import "@signalco/ui/style";
 
 html, body, #__next {
   height: 100%;
