@@ -48,8 +48,8 @@ jobs:
             with:
               fetch-depth: 2
 
-          - name: ✨ Setup pnpm
-            uses: pnpm/action-setup@v3.0.0
+          - name: ✨ Enable Corepack
+            run: corepack enable
 
           - name: ✨ Setup Node.js
             uses: actions/setup-node@v4
