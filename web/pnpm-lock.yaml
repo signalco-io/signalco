@@ -138,8 +138,8 @@ importers:
         specifier: 6.7.5
         version: 6.7.5
       pigeon-maps:
-        specifier: 0.21.4
-        version: 0.21.4(react@18.2.0)
+        specifier: 0.21.5
+        version: 0.21.5(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -9763,8 +9763,8 @@ packages:
     resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
     engines: {node: '>=6'}
 
-  pigeon-maps@0.21.4:
-    resolution: {integrity: sha512-PqxEMNfnpx6MqubH4WWD+dMS2EE2g/S+Y+nGa6kyZxe7OAqJsfmd3FInzoK4nOfYhlh15+g2GD4VHmivAYlnIg==}
+  pigeon-maps@0.21.5:
+    resolution: {integrity: sha512-I3GjmplE2xwZ/BESlgfYiEJRWRFwxt8LHhwhdqLkPEqfpdwGza4EL+iFk/rHHqRC/ZEAo1p1LITw54+lEpZfvA==}
     peerDependencies:
       react: '*'
 
@@ -21380,7 +21380,7 @@ snapshots:
 
   pify@4.0.1: {}
 
-  pigeon-maps@0.21.4(react@18.2.0):
+  pigeon-maps@0.21.5(react@18.2.0):
     dependencies:
       react: 18.2.0
 
