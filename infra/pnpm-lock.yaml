@@ -16,7 +16,7 @@ importers:
         version: link:packages/typescript-config
       turbo:
         specifier: latest
-        version: 1.11.2
+        version: 1.13.2
 
   apps/cloud-primary:
     dependencies:
@@ -24,8 +24,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/aws':
-        specifier: 6.31.0
-        version: 6.31.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 6.31.1
+        version: 6.31.1(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/azure-native':
         specifier: 2.37.0
         version: 2.37.0(ts-node@7.0.1)(typescript@5.4.5)
@@ -85,8 +85,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/aws':
-        specifier: 6.31.0
-        version: 6.31.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 6.31.1
+        version: 6.31.1(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/azure-native':
         specifier: 2.37.0
         version: 2.37.0(ts-node@7.0.1)(typescript@5.4.5)
@@ -146,8 +146,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/aws':
-        specifier: 6.31.0
-        version: 6.31.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 6.31.1
+        version: 6.31.1(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/azure-native':
         specifier: 2.37.0
         version: 2.37.0(ts-node@7.0.1)(typescript@5.4.5)
@@ -286,8 +286,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/aws':
-        specifier: 6.31.0
-        version: 6.31.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 6.31.1
+        version: 6.31.1(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/azure-native':
         specifier: 2.37.0
         version: 2.37.0(ts-node@7.0.1)(typescript@5.4.5)
@@ -734,8 +734,8 @@ packages:
   '@protobufjs/utf8@1.1.0':
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
 
-  '@pulumi/aws@6.31.0':
-    resolution: {integrity: sha512-pZ4FOIWGXmyzr2icVx2hoVVyxKLtQZKmwreAx/SWU5jCajFak3U7I5Pale3vlEjfmzKR+q3U5u212z4yQVp0YA==}
+  '@pulumi/aws@6.31.1':
+    resolution: {integrity: sha512-rko69kM0vd68otg1atK9tWg58jc5cI50V12xBXywxacRHswbfUGG17whF9eINb4NZiNPBlX7HrYwAxxAO66jtw==}
 
   '@pulumi/azure-native@2.37.0':
     resolution: {integrity: sha512-7Ixfb4hqQmSZr232nx1C7Uva0ogATeHPxc9FRKHv3tE2yF1Vtn9lfpyndP1egvAJKQmIZrwaqWGT/kyCCTp19g==}
@@ -2527,38 +2527,38 @@ packages:
     resolution: {integrity: sha512-ZSDngmP1z6zw+FIkIBjvOp/II/mIub/O7Pp12j1WNsiCpg5R5wAc//i555bBQsE44O94btLt0xM/Zr2LQjwdCg==}
     engines: {node: ^16.14.0 || >=18.0.0}
 
-  turbo-darwin-64@1.11.2:
-    resolution: {integrity: sha512-toFmRG/adriZY3hOps7nYCfqHAS+Ci6xqgX3fbo82kkLpC6OBzcXnleSwuPqjHVAaRNhVoB83L5njcE9Qwi2og==}
+  turbo-darwin-64@1.13.2:
+    resolution: {integrity: sha512-CCSuD8CfmtncpohCuIgq7eAzUas0IwSbHfI8/Q3vKObTdXyN8vAo01gwqXjDGpzG9bTEVedD0GmLbD23dR0MLA==}
     cpu: [x64]
     os: [darwin]
 
-  turbo-darwin-arm64@1.11.2:
-    resolution: {integrity: sha512-FCsEDZ8BUSFYEOSC3rrARQrj7x2VOrmVcfrMUIhexTxproRh4QyMxLfr6LALk4ymx6jbDCxWa6Szal8ckldFbA==}
+  turbo-darwin-arm64@1.13.2:
+    resolution: {integrity: sha512-0HySm06/D2N91rJJ89FbiI/AodmY8B3WDSFTVEpu2+8spUw7hOJ8okWOT0e5iGlyayUP9gr31eOeL3VFZkpfCw==}
     cpu: [arm64]
     os: [darwin]
 
-  turbo-linux-64@1.11.2:
-    resolution: {integrity: sha512-Vzda/o/QyEske5CxLf0wcu7UUS+7zB90GgHZV4tyN+WZtoouTvbwuvZ3V6b5Wgd3OJ/JwWR0CXDK7Sf4VEMr7A==}
+  turbo-linux-64@1.13.2:
+    resolution: {integrity: sha512-7HnibgbqZrjn4lcfIouzlPu8ZHSBtURG4c7Bedu7WJUDeZo+RE1crlrQm8wuwO54S0siYqUqo7GNHxu4IXbioQ==}
     cpu: [x64]
     os: [linux]
 
-  turbo-linux-arm64@1.11.2:
-    resolution: {integrity: sha512-bRLwovQRz0yxDZrM4tQEAYV0fBHEaTzUF0JZ8RG1UmZt/CqtpnUrJpYb1VK8hj1z46z9YehARpYCwQ2K0qU4yw==}
+  turbo-linux-arm64@1.13.2:
+    resolution: {integrity: sha512-sUq4dbpk6SNKg/Hkwn256Vj2AEYSQdG96repio894h5/LEfauIK2QYiC/xxAeW3WBMc6BngmvNyURIg7ltrePg==}
     cpu: [arm64]
     os: [linux]
 
-  turbo-windows-64@1.11.2:
-    resolution: {integrity: sha512-LgTWqkHAKgyVuLYcEPxZVGPInTjjeCnN5KQMdJ4uQZ+xMDROvMFS2rM93iQl4ieDJgidwHCxxCxaU9u8c3d/Kg==}
+  turbo-windows-64@1.13.2:
+    resolution: {integrity: sha512-DqzhcrciWq3dpzllJR2VVIyOhSlXYCo4mNEWl98DJ3FZ08PEzcI3ceudlH6F0t/nIcfSItK1bDP39cs7YoZHEA==}
     cpu: [x64]
     os: [win32]
 
-  turbo-windows-arm64@1.11.2:
-    resolution: {integrity: sha512-829aVBU7IX0c/B4G7g1VI8KniAGutHhIupkYMgF6xPkYVev2G3MYe6DMS/vsLt9GGM9ulDtdWxWrH5P2ngK8IQ==}
+  turbo-windows-arm64@1.13.2:
+    resolution: {integrity: sha512-WnPMrwfCXxK69CdDfS1/j2DlzcKxSmycgDAqV0XCYpK/812KB0KlvsVAt5PjEbZGXkY88pCJ1BLZHAjF5FcbqA==}
     cpu: [arm64]
     os: [win32]
 
-  turbo@1.11.2:
-    resolution: {integrity: sha512-jPC7LVQJzebs5gWf8FmEvsvXGNyKbN+O9qpvv98xpNaM59aS0/Irhd0H0KbcqnXfsz7ETlzOC3R+xFWthC4Z8A==}
+  turbo@1.13.2:
+    resolution: {integrity: sha512-rX/d9f4MgRT3yK6cERPAkfavIxbpBZowDQpgvkYwGMGDQ0Nvw1nc0NVjruE76GrzXQqoxR1UpnmEP54vBARFHQ==}
     hasBin: true
 
   type-check@0.4.0:
@@ -3094,7 +3094,7 @@ snapshots:
 
   '@protobufjs/utf8@1.1.0': {}
 
-  '@pulumi/aws@6.31.0(ts-node@7.0.1)(typescript@5.4.5)':
+  '@pulumi/aws@6.31.1(ts-node@7.0.1)(typescript@5.4.5)':
     dependencies:
       '@pulumi/pulumi': 3.113.2(ts-node@7.0.1)(typescript@5.4.5)
       builtin-modules: 3.0.0
@@ -5155,32 +5155,32 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  turbo-darwin-64@1.11.2:
+  turbo-darwin-64@1.13.2:
     optional: true
 
-  turbo-darwin-arm64@1.11.2:
+  turbo-darwin-arm64@1.13.2:
     optional: true
 
-  turbo-linux-64@1.11.2:
+  turbo-linux-64@1.13.2:
     optional: true
 
-  turbo-linux-arm64@1.11.2:
+  turbo-linux-arm64@1.13.2:
     optional: true
 
-  turbo-windows-64@1.11.2:
+  turbo-windows-64@1.13.2:
     optional: true
 
-  turbo-windows-arm64@1.11.2:
+  turbo-windows-arm64@1.13.2:
     optional: true
 
-  turbo@1.11.2:
+  turbo@1.13.2:
     optionalDependencies:
-      turbo-darwin-64: 1.11.2
-      turbo-darwin-arm64: 1.11.2
-      turbo-linux-64: 1.11.2
-      turbo-linux-arm64: 1.11.2
-      turbo-windows-64: 1.11.2
-      turbo-windows-arm64: 1.11.2
+      turbo-darwin-64: 1.13.2
+      turbo-darwin-arm64: 1.13.2
+      turbo-linux-64: 1.13.2
+      turbo-linux-arm64: 1.13.2
+      turbo-windows-64: 1.13.2
+      turbo-windows-arm64: 1.13.2
 
   type-check@0.4.0:
     dependencies:
