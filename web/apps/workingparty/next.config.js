@@ -1,12 +1,7 @@
 import { createSecureHeaders } from 'next-secure-headers';
 import { combineSecureHeaders, knownSecureHeadersExternalUrls } from '@signalco/data/node';
-import nextBundleAnalyzer from '@next/bundle-analyzer';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-
-const withBundleAnalyzer = nextBundleAnalyzer({
-    enabled: process.env.ANALYZE === 'true',
-});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -28,7 +23,7 @@ const nextConfig = {
         ]
     },
     eslint: {
-        dirs: ['src', 'app', 'locales']
+        dirs: ['src', 'app']
     },
     async headers() {
         return [{
@@ -47,6 +42,4 @@ const nextConfig = {
     },
 };
 
-const componsedNextConfig = withBundleAnalyzer(nextConfig);
-
-export default componsedNextConfig;
+export default nextConfig;
