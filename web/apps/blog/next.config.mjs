@@ -58,8 +58,4 @@ const nextConfig = {
     },
 };
 
-export default process.env.ANALYZE ?
-    import('@next/bundle-analyzer')({
-        enabled: process.env.ANALYZE === 'true',
-    })(withMDX(nextConfig)) :
-    withMDX(nextConfig);
+export default withMDX(nextConfig);
