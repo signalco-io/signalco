@@ -170,7 +170,7 @@ const sectionsData: SectionData[] = [
 
 export default function LandingPage() {
     return (
-        <Stack className="overflow-x-hidden">
+        <Stack>
             <SectionsView
                 sectionsData={sectionsData}
                 componentsRegistry={sectionsComponentRegistry}
