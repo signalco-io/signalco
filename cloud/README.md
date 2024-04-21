@@ -21,7 +21,7 @@ Visit <a aria-label="Signalco learn" href="https://www.signalco.io/learn">https:
 
 | Production | Next |
 |------------|------|
-| [![Deploy Production](https://github.com/signalco-io/signalco/actions/workflows/cloud-deploy.yml/badge.svg?branch=main)](https://github.com/signalco-io/signalco/actions/workflows/cloud-deploy.yml) | [![Deploy Development](https://github.com/signalco-io/signalco/actions/workflows/cloud-deploy.yml/badge.svg?branch=next)](https://github.com/signalco-io/signalco/actions/workflows/cloud-deploy.yml) |
+| [![Deploy Production](https://github.com/signalco-io/signalco/actions/workflows/infra-deploy.yml/badge.svg?branch=main)](https://github.com/signalco-io/signalco/actions/workflows/infra-deploy.yml) | [![Deploy Development](https://github.com/signalco-io/signalco/actions/workflows/infra-deploy.yml/badge.svg?branch=next)](https://github.com/signalco-io/signalco/actions/workflows/infra-deploy.yml) |
 
 ## Development for Cloud
 
@@ -49,7 +49,7 @@ Production API
 ##### **Azure (required for Deploy step)**
 
 - [Get credentials](https://www.pulumi.com/registry/packages/azure-native/installation-configuration/#create-your-service-principal-and-get-your-tokens)
-  - [Reset credentials](https://learn.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest#6-reset-credentials) if expired, lost or compromised
+  - [Reset credentials](https://learn.microsoft.com/en-us/cli/azure/azure-cli-sp-tutorial-7?view=azure-cli-latest&tabs=bash) if expired, lost or compromised
   - via CLI example: `az ad sp create-for-rbac -n EXAMPLE_CLIENT_NAME --role Contributor --years 5 --scopes /subscriptions/a49b3c69-b711-4443-a85e-d35ea363a6cc`
 - (optional) [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
   - Windows: `winget install Microsoft.AzureCLI`

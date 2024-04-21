@@ -1,6 +1,6 @@
 import Markdown from 'react-markdown';
 import { forwardRef } from 'react';
-import { Message } from 'openai/resources/beta/threads/messages/messages';
+import { Message } from 'openai/resources/beta/threads/messages';
 import { cx } from '@signalco/ui-primitives/cx';
 
 const ThreadMessage = forwardRef<HTMLDivElement, { message: Message; }>(({ message }: { message: Message; }, ref) => {

@@ -4,9 +4,8 @@
     "private": true,
     "license": "MIT",
     "type": "module",
-    "sideEffects": false,
     "exports": {
-        "./index.css": "./src/index.css",
+        "./style": "./src/index.css",
         "./*": "./src/*/index.ts"
     },
     "scripts": {
@@ -27,18 +26,18 @@
         "@signalco/ui-icons": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/react": "18.2.74",
-        "@types/react-dom": "18.2.24",
+        "@types/react": "18.2.79",
+        "@types/react-dom": "18.2.25",
         "@types/react-timeago": "4.1.7",
         "autoprefixer": "10.4.19",
         "classix": "2.1.37",
         "postcss": "8.4.38",
-        "postcss-preset-env": "9.5.4",
+        "postcss-preset-env": "9.5.6",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-timeago": "7.2.0",
-        "sass": "1.74.1",
-        "tailwind-merge": "2.2.2",
-        "typescript": "5.4.4"
+        "sass": "1.75.0",
+        "tailwind-merge": "2.3.0",
+        "typescript": "5.4.5"
     }
 }
