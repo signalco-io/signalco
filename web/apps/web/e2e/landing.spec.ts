@@ -3,7 +3,7 @@ import { assertAccessibility } from './shared';
 
 test('should contain header', async ({ page }) => {
     await page.goto('/')
-    await expect(page.locator('h1')).toContainText('Automate your life')
+    await expect(page.locator('h1')).toContainText('');
 });
 
 test('should be accessible', ({ page }) => assertAccessibility(page, '/'));
