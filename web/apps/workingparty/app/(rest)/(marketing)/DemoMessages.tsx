@@ -33,8 +33,8 @@ export function DemoMessages() {
                     status: 'completed',
                     thread_id: '',
                     object: 'thread.message',
-                    file_ids: [],
                     role: 'assistant',
+                    attachments: [],
                     content: [
                         { type: 'text', text: { value: 'Hello! How can I help you today?', annotations: [] } }
                     ]
