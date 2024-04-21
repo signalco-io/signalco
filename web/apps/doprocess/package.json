@@ -72,7 +72,7 @@
     "@types/react-dom": "18.2.25",
     "cross-env": "7.0.3",
     "dotenv": "16.4.5",
-    "drizzle-kit": "0.20.14",
+    "drizzle-kit": "0.20.17",
     "eslint": "8.57.0",
     "eslint-plugin-drizzle": "0.2.3",
     "next-sitemap": "4.2.3",
