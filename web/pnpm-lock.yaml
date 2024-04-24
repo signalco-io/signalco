@@ -1045,8 +1045,8 @@ importers:
         specifier: 11.2.12
         version: 11.2.12(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@reactflow/core':
-        specifier: 11.11.1
-        version: 11.11.1(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 11.11.2
+        version: 11.11.2(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@signalco/cms-components-marketing':
         specifier: workspace:*
         version: link:../../packages/cms-components-marketing
@@ -4724,12 +4724,6 @@ packages:
 
   '@reactflow/controls@11.2.12':
     resolution: {integrity: sha512-L9F3+avFRShoprdT+5oOijm5gVsz2rqWCXBzOAgD923L1XFGIspdiHLLf8IlPGsT+mfl0GxbptZhaEeEzl1e3g==}
-    peerDependencies:
-      react: '>=17'
-      react-dom: '>=17'
-
-  '@reactflow/core@11.11.1':
-    resolution: {integrity: sha512-O9f/q9SZ+29am/XdoZgm/LTdkgQdypcVj9a1yZZgcS6rVDkij1yIiOT3nkGxwnNkJz0rwCn2xtL5SkK038AQ7w==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
@@ -14361,23 +14355,6 @@ snapshots:
     dependencies:
       '@reactflow/core': 11.11.2(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       classcat: 5.0.5
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.5.2(@types/react@18.2.79)(react@18.2.0)
-    transitivePeerDependencies:
-      - '@types/react'
-      - immer
-
-  '@reactflow/core@11.11.1(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
-    dependencies:
-      '@types/d3': 7.4.3
-      '@types/d3-drag': 3.0.7
-      '@types/d3-selection': 3.0.10
-      '@types/d3-zoom': 3.0.8
-      classcat: 5.0.5
-      d3-drag: 3.0.0
-      d3-selection: 3.0.0
-      d3-zoom: 3.0.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       zustand: 4.5.2(@types/react@18.2.79)(react@18.2.0)
