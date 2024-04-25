@@ -96,8 +96,8 @@ importers:
         specifier: 1.0.10
         version: 1.0.10(next@14.2.3(@playwright/test@1.43.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.75.0))(react@18.2.0)
       '@vvo/tzdb':
-        specifier: 6.135.0
-        version: 6.135.0
+        specifier: 6.136.0
+        version: 6.136.0
       autoprefixer:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
@@ -5790,8 +5790,8 @@ packages:
       vue-router:
         optional: true
 
-  '@vvo/tzdb@6.135.0':
-    resolution: {integrity: sha512-c4G2RKUw90Ic528JDpAzfoGTFZdnVWLTjmWl1aqNVNZve6NUNVNwPqu3ox0/9GF1TVAlhll9as23PjBUueEmSA==}
+  '@vvo/tzdb@6.136.0':
+    resolution: {integrity: sha512-vdk89K7T9TxipX+JuU5PcOscKcdLOxL81VRzvldEvpQmhiwU1ar7X+6IA7BRjXsRI/bqrPHxffbq4JdKBxttKw==}
 
   '@webassemblyjs/ast@1.12.1':
     resolution: {integrity: sha512-EKfMUOPRRUTy5UII4qJDGPpqfwjOmZ5jeGFwid9mnoqIFK+e0vqoi1qH56JpmZSzEL53jKnNzScdmftJyG5xWg==}
@@ -15929,7 +15929,7 @@ snapshots:
       next: 14.2.3(@babel/core@7.24.4)(@playwright/test@1.43.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.75.0)
       react: 18.2.0
 
-  '@vvo/tzdb@6.135.0': {}
+  '@vvo/tzdb@6.136.0': {}
 
   '@webassemblyjs/ast@1.12.1':
     dependencies:
