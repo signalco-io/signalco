@@ -54,7 +54,7 @@
         "tailwindcss": "3.4.3",
         "tailwindcss-animate": "1.0.7",
         "@stripe/stripe-js": "3.3.0",
-        "@tailwindcss/typography": "0.5.12"
+        "@tailwindcss/typography": "0.5.13"
     },
     "devDependencies": {
         "@axe-core/playwright": "4.9.0",
