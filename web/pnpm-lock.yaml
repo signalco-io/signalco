@@ -594,8 +594,8 @@ importers:
         specifier: 2.1.37
         version: 2.1.37
       drizzle-orm:
-        specifier: 0.30.8
-        version: 0.30.8(@planetscale/database@1.16.0)(@types/react@18.3.1)(react@18.3.1)
+        specifier: 0.30.10
+        version: 0.30.10(@planetscale/database@1.16.0)(@types/react@18.3.1)(react@18.3.1)
       nanoid:
         specifier: 5.0.7
         version: 5.0.7
@@ -7020,8 +7020,8 @@ packages:
     resolution: {integrity: sha512-0fHv3YIEaUcSVPSGyaaBfOi9bmpajjhbJNdPsRMIUvYdLVxBu9eGjH8mRc3Qk7HVmEidFc/lhG1YyJhoXrn5yA==}
     hasBin: true
 
-  drizzle-orm@0.30.8:
-    resolution: {integrity: sha512-9pBJA0IjnpPpzZ6s9jlS1CQAbKoBmbn2GJesPhXaVblAA/joOJ4AWWevYcqvLGj9SvThBAl7WscN8Zwgg5mnTw==}
+  drizzle-orm@0.30.10:
+    resolution: {integrity: sha512-IRy/QmMWw9lAQHpwbUh1b8fcn27S/a9zMIzqea1WNOxK9/4EB8gIo+FZWLiPXzl2n9ixGSv8BhsLZiOppWEwBw==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -17305,7 +17305,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.30.8(@planetscale/database@1.16.0)(@types/react@18.3.1)(react@18.3.1):
+  drizzle-orm@0.30.10(@planetscale/database@1.16.0)(@types/react@18.3.1)(react@18.3.1):
     optionalDependencies:
       '@planetscale/database': 1.16.0
       '@types/react': 18.3.1
