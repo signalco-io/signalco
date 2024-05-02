@@ -6,7 +6,8 @@
         "apps/*",
         "packages/*"
     ],
-    "packageManager": "pnpm@9.0.4",
+    "license": "MIT",
+    "packageManager": "pnpm@9.0.6",
     "scripts": {
         "build": "turbo run build",
         "clean": "turbo run clean",
@@ -16,6 +17,6 @@
         "test": "turbo run test"
     },
     "devDependencies": {
-        "turbo": "1.13.2"
+        "turbo": "1.13.3"
     }
 }
