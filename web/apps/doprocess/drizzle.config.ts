@@ -1,7 +1,4 @@
 import type { Config } from 'drizzle-kit'
-import { config as dotenvConfig } from 'dotenv';
-dotenvConfig();
-dotenvConfig({ path: '.env.local', override: true });
 
 const connectionString = `mysql://${process.env.DOPROCESS_DATABASE_USERNAME}:${process.env.DOPROCESS_DATABASE_PASSWORD}@${process.env.DOPROCESS_DATABASE_HOST}/app?ssl={"rejectUnauthorized":true}`;
 
