@@ -1,6 +1,7 @@
 {
   "name": "infra",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "build": "turbo build",
     "preview": "turbo preview",

@@ -1,7 +1,7 @@
 {
     "name": "@infra/cloud-primary",
     "private": true,
-    "license": "../LICENSE",
+    "license": "MIT",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "type": "module",

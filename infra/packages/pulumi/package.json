@@ -1,7 +1,7 @@
 {
     "name": "@infra/pulumi",
     "private": true,
-    "license": "../../LICENSE",
+    "license": "MIT",
     "type": "module",
     "scripts": {
         "lint": "eslint ./src/**/*.ts"

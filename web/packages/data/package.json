@@ -3,6 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "sideEffects": false,
+    "license": "MIT",
     "exports": {
         "./data": "./src/data/index.ts",
         "./node": "./src/node/index.js"

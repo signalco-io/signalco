@@ -6,6 +6,7 @@
         "apps/*",
         "packages/*"
     ],
+    "license": "MIT",
     "packageManager": "pnpm@9.0.6",
     "scripts": {
         "build": "turbo run build",
