@@ -609,8 +609,8 @@ importers:
         specifier: 0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       openai:
-        specifier: 4.40.0
-        version: 4.40.0(encoding@0.1.13)
+        specifier: 4.40.1
+        version: 4.40.1(encoding@0.1.13)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1268,8 +1268,8 @@ importers:
         specifier: 0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       openai:
-        specifier: 4.40.0
-        version: 4.40.0(encoding@0.1.13)
+        specifier: 4.40.1
+        version: 4.40.1(encoding@0.1.13)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -9229,8 +9229,8 @@ packages:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
 
-  openai@4.40.0:
-    resolution: {integrity: sha512-ofh9qMxRPDSZTWYvifScusMfnyIwEQL3w+fv3ucQGn3cIn0W6Zw4vXSUod8DwYfcX/hkAx9/ZvWrdkFYnVXlmQ==}
+  openai@4.40.1:
+    resolution: {integrity: sha512-mS7LerF4fY1/we0aKGGwIWtosTJFLKuNbBWMBR/G1TAZUHoktAdod0dqIrlQvSD39uS6jNEEbT7jRsXmzfEPBw==}
     hasBin: true
 
   openapi-fetch@0.9.5:
@@ -20307,7 +20307,7 @@ snapshots:
       is-docker: 2.2.1
       is-wsl: 2.2.0
 
-  openai@4.40.0(encoding@0.1.13):
+  openai@4.40.1(encoding@0.1.13):
     dependencies:
       '@types/node': 18.19.31
       '@types/node-fetch': 2.6.11
