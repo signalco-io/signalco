@@ -13,7 +13,6 @@
         "prepare:api": "pnpm dlx openapi-typescript https://api.signalco.io/api/swagger.yaml -o ./src/api/signalco/schema.d.ts",
         "dev": "next -p 3001 --turbo",
         "build": "next build",
-        "build:analyze": "cross-env ANALYZE=true pnpm build",
         "postinstall": "node ./tools/post-install.mjs",
         "postbuild": "next-sitemap --config next-sitemap.config.cjs",
         "start": "next start -p 3001",
@@ -91,23 +90,14 @@
         "@types/suncalc": "1.9.2",
         "@types/uuid": "9.0.8",
         "colorette": "2.0.20",
-        "cross-env": "7.0.3",
         "eslint": "8.57.0",
         "fs-extra": "11.2.0",
         "next-sitemap": "4.2.3",
         "openapi-types": "12.1.3",
         "postcss": "8.4.38",
         "react-is": "18.3.1",
-        "rimraf": "5.0.5",
         "sass": "1.76.0",
         "sass-loader": "14.2.1",
         "typescript": "5.4.5"
-    },
-    "nextBundleAnalysis": {
-        "budget": 358400,
-        "budgetPercentIncreaseRed": 10,
-        "minimumChangeThreshold": 10,
-        "showDetails": true,
-        "skipCommentIfEmpty": true
     }
 }

@@ -12,7 +12,6 @@
     "scripts": {
         "dev": "next -p 4005 --turbo",
         "build": "next build",
-        "build:analyze": "cross-env ANALYZE=true pnpm build",
         "postbuild": "next-sitemap --config next-sitemap.config.cjs",
         "start": "next start -p 4004",
         "lint": "next lint"
@@ -67,20 +66,10 @@
         "@types/node": "20.12.8",
         "@types/react": "18.3.1",
         "@types/react-dom": "18.3.0",
-        "cross-env": "7.0.3",
-        "dotenv": "16.4.5",
         "eslint": "8.57.0",
         "next-sitemap": "4.2.3",
         "postcss": "8.4.38",
-        "rimraf": "5.0.5",
         "sass": "1.76.0",
         "typescript": "5.4.5"
-    },
-    "nextBundleAnalysis": {
-        "budget": 358400,
-        "budgetPercentIncreaseRed": 10,
-        "minimumChangeThreshold": 10,
-        "showDetails": true,
-        "skipCommentIfEmpty": true
     }
 }

@@ -219,9 +219,6 @@ importers:
       colorette:
         specifier: 2.0.20
         version: 2.0.20
-      cross-env:
-        specifier: 7.0.3
-        version: 7.0.3
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -240,9 +237,6 @@ importers:
       react-is:
         specifier: 18.3.1
         version: 18.3.1
-      rimraf:
-        specifier: 5.0.5
-        version: 5.0.5
       sass:
         specifier: 1.76.0
         version: 1.76.0
@@ -376,9 +370,6 @@ importers:
       colorette:
         specifier: 2.0.20
         version: 2.0.20
-      cross-env:
-        specifier: 7.0.3
-        version: 7.0.3
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -388,9 +379,6 @@ importers:
       postcss:
         specifier: 8.4.38
         version: 8.4.38
-      rimraf:
-        specifier: 5.0.5
-        version: 5.0.5
       sass:
         specifier: 1.76.0
         version: 1.76.0
@@ -482,9 +470,6 @@ importers:
       '@types/react-dom':
         specifier: 18.3.0
         version: 18.3.0
-      cross-env:
-        specifier: 7.0.3
-        version: 7.0.3
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -494,9 +479,6 @@ importers:
       postcss:
         specifier: 8.4.38
         version: 8.4.38
-      rimraf:
-        specifier: 5.0.5
-        version: 5.0.5
       sass:
         specifier: 1.76.0
         version: 1.76.0
@@ -660,12 +642,6 @@ importers:
       '@types/react-dom':
         specifier: 18.3.0
         version: 18.3.0
-      cross-env:
-        specifier: 7.0.3
-        version: 7.0.3
-      dotenv:
-        specifier: 16.4.5
-        version: 16.4.5
       drizzle-kit:
         specifier: 0.20.14
         version: 0.20.14
@@ -681,9 +657,6 @@ importers:
       postcss:
         specifier: 8.4.38
         version: 8.4.38
-      rimraf:
-        specifier: 5.0.5
-        version: 5.0.5
       sass:
         specifier: 1.76.0
         version: 1.76.0
@@ -778,9 +751,6 @@ importers:
       '@types/react-dom':
         specifier: 18.3.0
         version: 18.3.0
-      cross-env:
-        specifier: 7.0.3
-        version: 7.0.3
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -790,9 +760,6 @@ importers:
       postcss:
         specifier: 8.4.38
         version: 8.4.38
-      rimraf:
-        specifier: 5.0.5
-        version: 5.0.5
       sass:
         specifier: 1.76.0
         version: 1.76.0
@@ -1002,12 +969,6 @@ importers:
       '@types/react-dom':
         specifier: 18.3.0
         version: 18.3.0
-      cross-env:
-        specifier: 7.0.3
-        version: 7.0.3
-      dotenv:
-        specifier: 16.4.5
-        version: 16.4.5
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -1017,9 +978,6 @@ importers:
       postcss:
         specifier: 8.4.38
         version: 8.4.38
-      rimraf:
-        specifier: 5.0.5
-        version: 5.0.5
       sass:
         specifier: 1.76.0
         version: 1.76.0
@@ -1153,9 +1111,6 @@ importers:
       colorette:
         specifier: 2.0.20
         version: 2.0.20
-      cross-env:
-        specifier: 7.0.3
-        version: 7.0.3
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -1168,9 +1123,6 @@ importers:
       postcss:
         specifier: 8.4.38
         version: 8.4.38
-      rimraf:
-        specifier: 5.0.5
-        version: 5.0.5
       sass:
         specifier: 1.76.0
         version: 1.76.0
@@ -1322,12 +1274,6 @@ importers:
       '@types/react-dom':
         specifier: 18.3.0
         version: 18.3.0
-      cross-env:
-        specifier: 7.0.3
-        version: 7.0.3
-      dotenv:
-        specifier: 16.4.5
-        version: 16.4.5
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -1337,9 +1283,6 @@ importers:
       postcss:
         specifier: 8.4.38
         version: 8.4.38
-      rimraf:
-        specifier: 5.0.5
-        version: 5.0.5
       sass:
         specifier: 1.76.0
         version: 1.76.0
@@ -6582,11 +6525,6 @@ packages:
 
   crelt@1.0.6:
     resolution: {integrity: sha512-VQ2MBenTq1fWZUH9DJNGti7kKv6EeAuYr3cLwxUWhIu1baTaXh4Ib5W2CqHVqib4/MqbYGJqiL3Zb8GJZr3l4g==}
-
-  cross-env@7.0.3:
-    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
-    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
-    hasBin: true
 
   cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -16820,10 +16758,6 @@ snapshots:
       sha.js: 2.4.11
 
   crelt@1.0.6: {}
-
-  cross-env@7.0.3:
-    dependencies:
-      cross-spawn: 7.0.3
 
   cross-spawn@7.0.3:
     dependencies:
