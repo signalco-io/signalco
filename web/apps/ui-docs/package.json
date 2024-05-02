@@ -4,6 +4,7 @@
   "homepage": "https://ui.signalco.io/",
   "private": true,
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "build": "tsc && storybook build --quiet",
     "dev": "storybook dev -p 6007 --no-open --quiet",

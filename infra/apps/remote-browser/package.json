@@ -1,7 +1,7 @@
 {
     "name": "@infra/remote-browser",
     "private": true,
-    "license": "../LICENSE",
+    "license": "MIT",
     "main": "src/index.ts",
     "scripts": {
         "lint": "eslint ./src/**/*.ts"

@@ -4,6 +4,7 @@
     "private": true,
     "sideEffects": false,
     "type": "module",
+    "license": "MIT",
     "exports": {
         "./*": "./src/*.ts"
     },

@@ -8,6 +8,7 @@
     <LangVersion>preview</LangVersion>
     <IsPackable>false</IsPackable>
     <Deterministic>true</Deterministic>
+    <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.11.2" />
