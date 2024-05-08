@@ -21,17 +21,17 @@ function nanoFormater(
 }
 
 export function Timeago({ date, live, format, noDate = '-' }: TimeagoProps) {
-    const isNever = typeof date !== 'number' || date == null;
+    if ((typeof date !== 'number' && !((date as any) instanceof Date)) || date == null) {
+        return (
+            <Typography level="body2">{noDate}</Typography>
+        );
+    }
 
     return (
-        <div>
-            {isNever
-                ? <Typography level="body2">{noDate}</Typography>
-                : <ReactTimeago
-                    title={(typeof date === 'number' ? new Date(date) : date)?.toLocaleString()}
-                    formatter={format === 'nano' ? nanoFormater : undefined}
-                    date={date}
-                    live={live} />}
-        </div>
-    )
+        <ReactTimeago
+            title={(typeof date === 'number' ? new Date(date) : date)?.toLocaleString()}
+            formatter={format === 'nano' ? nanoFormater : undefined}
+            date={date}
+            live={live} />
+    );
 }

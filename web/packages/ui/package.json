@@ -32,11 +32,11 @@
         "autoprefixer": "10.4.19",
         "classix": "2.1.37",
         "postcss": "8.4.38",
-        "postcss-preset-env": "9.5.9",
+        "postcss-preset-env": "9.5.11",
         "react": "18.3.1",
         "react-dom": "18.3.1",
         "react-timeago": "7.2.0",
-        "sass": "1.76.0",
+        "sass": "1.77.0",
         "tailwind-merge": "2.3.0",
         "typescript": "5.4.5"
     }
