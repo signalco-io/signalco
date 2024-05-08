@@ -42,8 +42,8 @@ importers:
         specifier: 3.115.2
         version: 3.115.2(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumiverse/vercel':
-        specifier: 1.9.0
-        version: 1.9.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 1.10.0
+        version: 1.10.0(ts-node@7.0.1)(typescript@5.4.5)
     devDependencies:
       '@infra/pulumi':
         specifier: workspace:*
@@ -103,8 +103,8 @@ importers:
         specifier: 3.115.2
         version: 3.115.2(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumiverse/vercel':
-        specifier: 1.9.0
-        version: 1.9.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 1.10.0
+        version: 1.10.0(ts-node@7.0.1)(typescript@5.4.5)
     devDependencies:
       '@infra/pulumi':
         specifier: workspace:*
@@ -164,8 +164,8 @@ importers:
         specifier: 3.115.2
         version: 3.115.2(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumiverse/vercel':
-        specifier: 1.9.0
-        version: 1.9.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 1.10.0
+        version: 1.10.0(ts-node@7.0.1)(typescript@5.4.5)
     devDependencies:
       '@infra/pulumi':
         specifier: workspace:*
@@ -216,8 +216,8 @@ importers:
         specifier: 3.115.2
         version: 3.115.2(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumiverse/vercel':
-        specifier: 1.9.0
-        version: 1.9.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 1.10.0
+        version: 1.10.0(ts-node@7.0.1)(typescript@5.4.5)
     devDependencies:
       '@infra/pulumi':
         specifier: workspace:*
@@ -304,8 +304,8 @@ importers:
         specifier: 3.115.2
         version: 3.115.2(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumiverse/vercel':
-        specifier: 1.9.0
-        version: 1.9.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 1.10.0
+        version: 1.10.0(ts-node@7.0.1)(typescript@5.4.5)
     devDependencies:
       '@infra/eslint-config':
         specifier: workspace:*
@@ -764,8 +764,8 @@ packages:
   '@pulumi/query@0.3.0':
     resolution: {integrity: sha512-xfo+yLRM2zVjVEA4p23IjQWzyWl1ZhWOGobsBqRpIarzLvwNH/RAGaoehdxlhx4X92302DrpdIFgTICMN4P38w==}
 
-  '@pulumiverse/vercel@1.9.0':
-    resolution: {integrity: sha512-dQIHM00SbVT9xvj7EoC16iWhnckDl1xrxwBiOZBwta04tqSp1fVZs/LidJn5zj1q3VgWx1Y7cn6QLULhd0ac/A==}
+  '@pulumiverse/vercel@1.10.0':
+    resolution: {integrity: sha512-Rtry0Ynxb458I5Um7fLAYUWEqsJnxwl3df04LGHX5SZ56yYAt6fJT0D34qBehW/PmgmbgqYYpRiR8PN7uI1B0w==}
 
   '@rollup/rollup-android-arm-eabi@4.9.1':
     resolution: {integrity: sha512-6vMdBZqtq1dVQ4CWdhFwhKZL6E4L1dV6jUjuBvsavvNJSppzi6dLBbuV+3+IyUREaj9ZFvQefnQm28v4OCXlig==}
@@ -3184,7 +3184,7 @@ snapshots:
 
   '@pulumi/query@0.3.0': {}
 
-  '@pulumiverse/vercel@1.9.0(ts-node@7.0.1)(typescript@5.4.5)':
+  '@pulumiverse/vercel@1.10.0(ts-node@7.0.1)(typescript@5.4.5)':
     dependencies:
       '@pulumi/pulumi': 3.115.2(ts-node@7.0.1)(typescript@5.4.5)
     transitivePeerDependencies:
