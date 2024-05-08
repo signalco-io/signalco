@@ -49,8 +49,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.12.10
-        version: 20.12.10
+        specifier: 20.12.11
+        version: 20.12.11
       '@typescript-eslint/eslint-plugin':
         specifier: 7.8.0
         version: 7.8.0(@typescript-eslint/parser@7.8.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
@@ -110,8 +110,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.12.10
-        version: 20.12.10
+        specifier: 20.12.11
+        version: 20.12.11
       '@typescript-eslint/eslint-plugin':
         specifier: 7.8.0
         version: 7.8.0(@typescript-eslint/parser@7.8.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
@@ -171,8 +171,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.12.10
-        version: 20.12.10
+        specifier: 20.12.11
+        version: 20.12.11
       '@typescript-eslint/eslint-plugin':
         specifier: 7.8.0
         version: 7.8.0(@typescript-eslint/parser@7.8.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
@@ -223,8 +223,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.12.10
-        version: 20.12.10
+        specifier: 20.12.11
+        version: 20.12.11
       '@typescript-eslint/eslint-plugin':
         specifier: 7.8.0
         version: 7.8.0(@typescript-eslint/parser@7.8.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
@@ -314,8 +314,8 @@ importers:
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':
-        specifier: 20.12.10
-        version: 20.12.10
+        specifier: 20.12.11
+        version: 20.12.11
       '@typescript-eslint/eslint-plugin':
         specifier: 7.8.0
         version: 7.8.0(@typescript-eslint/parser@7.8.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
@@ -890,8 +890,8 @@ packages:
   '@types/keyv@3.1.4':
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
 
-  '@types/node@20.12.10':
-    resolution: {integrity: sha512-Eem5pH9pmWBHoGAT8Dr5fdc5rYA+4NAovdM4EktRPVAAiJhmWWfQrA0cFhAbOsQdSfIHjAud6YdkbL69+zSKjw==}
+  '@types/node@20.12.11':
+    resolution: {integrity: sha512-vDg9PZ/zi+Nqp6boSOT7plNuthRugEKixDv5sFTIpkE89MmNtEArAShI4mxuX2+UrLEe9pxC1vm2cjm9YlWbJw==}
 
   '@types/responselike@1.0.3':
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
@@ -2803,7 +2803,7 @@ snapshots:
   '@grpc/grpc-js@1.10.1':
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 20.12.10
+      '@types/node': 20.12.11
 
   '@grpc/proto-loader@0.7.10':
     dependencies:
@@ -3279,7 +3279,7 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.12.10
+      '@types/node': 20.12.11
       '@types/responselike': 1.0.3
 
   '@types/google-protobuf@3.15.12': {}
@@ -3292,15 +3292,15 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 20.12.10
+      '@types/node': 20.12.11
 
-  '@types/node@20.12.10':
+  '@types/node@20.12.11':
     dependencies:
       undici-types: 5.26.5
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 20.12.10
+      '@types/node': 20.12.11
 
   '@types/semver@7.5.8': {}
 
@@ -4788,7 +4788,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.12.10
+      '@types/node': 20.12.11
       long: 5.2.3
 
   pump@3.0.0:
