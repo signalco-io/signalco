@@ -11,24 +11,30 @@ import { NoWorkerBackground } from './NoWorkerBackground';
 export default function AppPage() {
     const workers = useWorkers();
 
-    if (workers.data?.length === 0) {
-        return (
-            <div className="relative flex h-screen w-full items-center justify-center">
-                <NoWorkerBackground />
-                <Stack spacing={4} alignItems="center">
-                    <Stack>
-                        <Typography tertiary center>You have no workers yet.</Typography>
-                        <Typography tertiary center>Get workers from Workers Markerplace.</Typography>
-                    </Stack>
-                    <NavigatingButton href={KnownPages.AppMarketplace}>Visit Workers Marketplace</NavigatingButton>
+    const noWorkers = workers.data?.length === 0;
+    const header = noWorkers ? 'You have no workers yet' : 'Select a worker to start';
+    const subHeader = noWorkers ? 'Get workers from Workers Marketplace.' : null;
+
+    // Redirect to first worker if there is one
+    const firstWorkerId = !workers.isLoading && !workers.isPending && workers.data ? workers.data[0]?.id : null;
+    if (firstWorkerId)
+        redirect(KnownPages.AppWorker(firstWorkerId));
+
+    return (
+        <div className="relative flex h-screen w-full items-center justify-center">
+            <NoWorkerBackground />
+            <Stack spacing={4} alignItems="center">
+                <Stack>
+                    <Typography tertiary center>{header}</Typography>
+                    {subHeader && <Typography tertiary center>{subHeader}</Typography>}
                 </Stack>
-            </div>
-        );
-    }
-
-    const firstWorkerId = !workers.isLoading && !workers.isStale && workers.data ? workers.data[0]?.id : null;
-    if (!firstWorkerId)
-        return null;
-
-    redirect(KnownPages.AppWorker(firstWorkerId));
+                {noWorkers && (
+                    <NavigatingButton
+                        href={KnownPages.AppMarketplace}>
+                        Visit Workers Marketplace
+                    </NavigatingButton>
+                )}
+            </Stack>
+        </div>
+    );
 }
