@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Signalco Mutex API CLI",
   "type": "module",
+  "author": "Signalco",
+  "license": "AGPL-3.0-only",
   "bin": {
     "mutex": "index.js"
   },
@@ -17,8 +19,6 @@
     "api",
     "cli"
   ],
-  "author": "Signalco",
-  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/signalco-io/signalco/issues"
   },

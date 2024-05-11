@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { IconButton, IconButtonProps } from '@signalco/ui-primitives/IconButton';
 import { cx } from '@signalco/ui-primitives/cx';
@@ -52,19 +51,19 @@ export function MobileMenu({
                 )}>
                     <Stack>
                         {items.map((ni, index) => (
-                            <Tooltip title={t(ni.label)} key={index + 1}>
-                                <Link href={ni.path}>
-                                    <Button
-                                        fullWidth
-                                        aria-label={t(ni.label)}
-                                        variant={ni === active ? 'soft' : 'plain'}
-                                        size="lg"
-                                        onClick={handleClose}
-                                        startDecorator={(<ni.icon />)}>
-                                        {ni.label}
-                                    </Button>
-                                </Link>
-                            </Tooltip>
+                            <Link href={ni.path} key={index + 1}>
+                                <Button
+                                    fullWidth
+                                    title={t(ni.label)}
+                                    key={index + 1}
+                                    aria-label={t(ni.label)}
+                                    variant={ni === active ? 'soft' : 'plain'}
+                                    size="lg"
+                                    onClick={handleClose}
+                                    startDecorator={(<ni.icon />)}>
+                                    {ni.label}
+                                </Button>
+                            </Link>
                         ))}
                     </Stack>
                 </div>

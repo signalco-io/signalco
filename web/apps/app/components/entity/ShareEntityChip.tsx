@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { ListItem } from '@signalco/ui-primitives/ListItem';
@@ -57,11 +56,9 @@ function ShareEntityModal({ entity, entityType, onClose }: IShareEntityModalProp
             open
             header={t('ShareWith')}
             headerActions={(
-                <Tooltip title={t('Share')}>
-                    <IconButton onClick={handleShareWithUser} variant="plain">
-                        <Share />
-                    </IconButton>
-                </Tooltip>
+                <IconButton onClick={handleShareWithUser} variant="plain" title={t('Share')}>
+                    <Share />
+                </IconButton>
             )}
             onClose={onClose}
         >
@@ -73,12 +70,8 @@ function ShareEntityModal({ entity, entityType, onClose }: IShareEntityModalProp
                         className="max-w-[270px]"
                         onChange={(e) => setShareWithNewEmail(e.target.value)} />
                     <Row>
-                        <Tooltip title={t('SendInvitation')}>
-                            <IconButton onClick={handleSubmitShareWithNew} color="success" ><Send /></IconButton>
-                        </Tooltip>
-                        <Tooltip title={t('Cancel')}>
-                            <IconButton onClick={handleCancelShareWithNew}><Clear /></IconButton>
-                        </Tooltip>
+                        <IconButton onClick={handleSubmitShareWithNew} color="success" title={t('SendInvitation')}><Send /></IconButton>
+                        <IconButton title={t('Cancel')} onClick={handleCancelShareWithNew}><Clear /></IconButton>
                     </Row>
                 </Row>
             </GentleSlide>

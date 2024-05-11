@@ -9,10 +9,10 @@ on:
       - 'cloud/**'
       - 'infra/**'
       - "station/**"
-      - '.github/workflows/web-nextjs_bundle_analysis.yml'
-      - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/web-nextjs_ci_reusable.yml'
       - '.github/workflows/cloud-deploy-preview_reusable.yml'
-      - '.github/workflows/vercel-deploy_reusable.yml'
+      - '.github/workflows/web-vercel-deploy_reusable.yml'
   push:
     branches:
       - main
@@ -22,10 +22,10 @@ on:
       - 'cloud/**'
       - 'infra/**'
       - "station/**"
-      - '.github/workflows/web-nextjs_bundle_analysis.yml'
-      - '.github/workflows/nextjs_bundle_analysis_reusable.yml'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/web-nextjs_ci_reusable.yml'
       - '.github/workflows/cloud-deploy-preview_reusable.yml'
-      - '.github/workflows/vercel-deploy_reusable.yml'
+      - '.github/workflows/web-vercel-deploy_reusable.yml'
   workflow_dispatch:
 
 jobs:
@@ -44,16 +44,16 @@ jobs:
             infrastructure:
               - cloud/**
               - infra/**
-              - .github/workflows/web-nextjs_bundle_analysis.yml
+              - .github/workflows/ci.yml
               - .github/workflows/cloud-deploy-preview_reusable.yml
             web:
               - web/**
-              - .github/workflows/web-nextjs_bundle_analysis.yml
-              - .github/workflows/nextjs_bundle_analysis_reusable.yml
-              - .github/workflows/vercel-deploy_reusable.yml
+              - .github/workflows/ci.yml
+              - .github/workflows/web-nextjs_ci_reusable.yml
+              - .github/workflows/web-vercel-deploy_reusable.yml
             station:
               - station/**
-              - .github/workflows/web-nextjs_bundle_analysis.yml
+              - .github/workflows/ci.yml
             app_app:
               - web/apps/app/**
               - web/packages/**
@@ -158,9 +158,9 @@ jobs:
     name: "Blog (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_blog == 'true'
-    uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
+    uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'web-nextjs_bundle_analysis.yml'
+      workflowName: 'ci.yml'
       name: 'blog'
       path: 'web/apps/blog'
       vercelProjectId: 'prj_VT7qOjkcEvkAsZH7MtSxWcVDWVpr'
@@ -170,7 +170,7 @@ jobs:
     name: "Blog (preview)"
     needs: analyze_blog
     if: ${{ success() }}
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'blog'
       path: 'web/apps/blog'
@@ -181,9 +181,9 @@ jobs:
     name: "App (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_app == 'true'
-    uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
+    uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'web-nextjs_bundle_analysis.yml'
+      workflowName: 'ci.yml'
       name: 'app'
       path: 'web/apps/app'
       vercelProjectId: 'prj_q8N5ElZfzvq4BjEMBIsyEfqe4jsI'
@@ -193,7 +193,7 @@ jobs:
     name: "App (preview)"
     needs: analyze_app
     if: ${{ success() }}
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'app'
       path: 'web/apps/app'
@@ -204,9 +204,9 @@ jobs:
     name: "BrandGrab (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_brandgrab == 'true'
-    uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
+    uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'web-nextjs_bundle_analysis.yml'
+      workflowName: 'ci.yml'
       name: 'brandgrab'
       path: 'web/apps/brandgrab'
       vercelProjectId: 'prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx'
@@ -216,7 +216,7 @@ jobs:
     name: "BrandGrab (preview)"
     needs: analyze_brandgrab
     if: ${{ success() }}
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'brandgrab'
       path: 'web/apps/brandgrab'
@@ -227,9 +227,9 @@ jobs:
     name: "Web (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_web == 'true'
-    uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
+    uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'web-nextjs_bundle_analysis.yml'
+      workflowName: 'ci.yml'
       name: 'web'
       path: 'web/apps/web'
       vercelProjectId: 'prj_PYE8WwpynTfjD6rVMiCp7sZoCPYw'
@@ -239,7 +239,7 @@ jobs:
     name: "Web (preview)"
     needs: analyze_web
     if: ${{ success() }}
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'web'
       path: 'web/apps/web'
@@ -250,9 +250,9 @@ jobs:
     name: "slco (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_slco == 'true'
-    uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
+    uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'web-nextjs_bundle_analysis.yml'
+      workflowName: 'ci.yml'
       name: 'slco'
       path: 'web/apps/slco'
       vercelProjectId: 'prj_GNETZANB7evyT5coH7gptur1G1sN'
@@ -262,7 +262,7 @@ jobs:
     name: "slco (preview)"
     needs: analyze_slco
     if: ${{ success() }}
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'slco'
       path: 'web/apps/slco'
@@ -273,9 +273,9 @@ jobs:
     name: "doprocess (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_doprocess == 'true'
-    uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
+    uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'web-nextjs_bundle_analysis.yml'
+      workflowName: 'ci.yml'
       name: 'doprocess'
       path: 'web/apps/doprocess'
       vercelProjectId: 'prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ'
@@ -285,7 +285,7 @@ jobs:
     name: "doprocess (preview)"
     needs: analyze_doprocess
     if: ${{ success() }}
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'doprocess'
       path: 'web/apps/doprocess'
@@ -296,7 +296,7 @@ jobs:
     name: "ui-docs (preview)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_ui_docs == 'true'
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'ui-docs'
       path: 'web/apps/ui-docs'
@@ -307,9 +307,9 @@ jobs:
     name: "uier (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_uier == 'true'
-    uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
+    uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'web-nextjs_bundle_analysis.yml'
+      workflowName: 'ci.yml'
       name: 'uier'
       path: 'web/apps/uier'
       vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
@@ -319,7 +319,7 @@ jobs:
     name: "uier (preview)"
     needs: analyze_uier
     if: ${{ success() }}
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'uier'
       path: 'web/apps/uier'
@@ -330,9 +330,9 @@ jobs:
     name: "WorkingParty (analysis)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_workingparty == 'true'
-    uses: ./.github/workflows/nextjs_bundle_analysis_reusable.yml
+    uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'web-nextjs_bundle_analysis.yml'
+      workflowName: 'ci.yml'
       name: 'workingparty'
       path: 'web/apps/workingparty'
       vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
@@ -342,7 +342,7 @@ jobs:
     name: "WorkingParty (preview)"
     needs: analyze_workingparty
     if: ${{ success() }}
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'workingparty'
       path: 'web/apps/workingparty'

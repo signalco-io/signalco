@@ -1,6 +1,5 @@
 import React from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Row } from '@signalco/ui-primitives/Row';
 import { ListTreeItem } from '@signalco/ui-primitives/ListTreeItem';
 import { CopyToClipboardInput } from '@signalco/ui/CopyToClipboardInput';
@@ -23,11 +22,9 @@ export function ObjectVisualizer(props: { name: string; value: ParsedJson; defau
                 <Row spacing={1}>
                     {name && (
                         <div className="min-w-[120px]">
-                            <Tooltip title={`${name} (${(isArray ? `array[${value.length}]` : typeof value)})`}>
-                                <Typography>
-                                    {name}
-                                </Typography>
-                            </Tooltip>
+                            <Typography title={`${name} (${(isArray ? `array[${value.length}]` : typeof value)})`}>
+                                {name}
+                            </Typography>
                         </div>
                     )}
                     {!hasChildren && (

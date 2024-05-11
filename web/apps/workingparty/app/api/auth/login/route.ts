@@ -5,6 +5,8 @@ import { loginRequestsCreate } from '../../../../src/lib/repository/loginRequest
 import { sendEmail } from '../../../../src/lib/email/emailService';
 import { sanitizeEmail } from '../../../../src/lib/auth/sanitizeEmail';
 
+export const runtime = 'edge';
+
 export async function POST(request: Request) {
     const json = await request.json();
     let email: string | undefined = undefined;

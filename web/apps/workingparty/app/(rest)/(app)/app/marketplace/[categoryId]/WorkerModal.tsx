@@ -39,7 +39,10 @@ export function WorkerModal({
                         <Stack spacing={2}>
                             <Typography level="body1" secondary>{description}</Typography>
                             <div>
-                                <NavigatingButton size="sm" onClick={handleHireWorker}>
+                                <NavigatingButton
+                                    size="sm"
+                                    onClick={handleHireWorker}
+                                    loading={workerCreateFromMarketplace.isPending}>
                                     Hire now
                                 </NavigatingButton>
                             </div>

@@ -5,7 +5,7 @@ import { type SectionData } from '@signalco/cms-core/SectionData';
 
 export function KeyFeature1({ header, description, asset }: SectionData) {
     return (
-        <div className={cx('grid items-center gap-y-2 gap-x-4', Boolean(asset) ? 'grid-cols-[auto_1fr]' : 'grid-cols-1')}>
+        <div className={cx('grid items-center gap-y-2 gap-x-4', Boolean(asset) && (header || description) ? 'grid-cols-[auto_1fr]' : 'grid-cols-1')}>
             {asset && (
                 <div className="pt-1">
                     {asset}

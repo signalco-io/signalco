@@ -9,9 +9,9 @@ on:
       - "cloud/**"
       - "infra/**"
       - "web/**"
-      - ".github/workflows/cloud-deploy.yml"
+      - ".github/workflows/infra-deploy.yml"
       - ".github/workflows/infra-deploy_reusable.yml"
-      - ".github/workflows/vercel-deploy_reusable.yml"
+      - ".github/workflows/web-vercel-deploy_reusable.yml"
 
 jobs:
   changes:
@@ -29,13 +29,13 @@ jobs:
             infrastructure:
               - cloud/**
               - infra/**
-              - .github/workflows/web-nextjs_bundle_analysis.yml
+              - .github/workflows/ci.yml
               - .github/workflows/cloud-deploy-preview_reusable.yml
             web:
               - web/**
-              - .github/workflows/web-nextjs_bundle_analysis.yml
-              - .github/workflows/nextjs_bundle_analysis_reusable.yml
-              - .github/workflows/vercel-deploy_reusable.yml
+              - .github/workflows/ci.yml
+              - .github/workflows/web-nextjs_ci_reusable.yml
+              - .github/workflows/web-vercel-deploy_reusable.yml
     outputs:
       infra: ${{ steps.filter.outputs.infrastructure }}
       web: ${{ steps.filter.outputs.web }}
@@ -77,7 +77,7 @@ jobs:
     name: "Vercel Blog (deploy)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'blog'
       path: 'web/apps/blog'
@@ -90,7 +90,7 @@ jobs:
     name: "Vercel BrandGrab (deploy)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'brandgrab'
       path: 'web/apps/brandgrab'
@@ -103,7 +103,7 @@ jobs:
     name: "Vercel slco (deploy)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'slco'
       path: 'web/apps/slco'
@@ -116,7 +116,7 @@ jobs:
     name: "Vercel app (deploy)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'app'
       path: 'web/apps/app'
@@ -129,7 +129,7 @@ jobs:
     name: "Vercel web (deploy)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'web'
       path: 'web/apps/web'
@@ -142,7 +142,7 @@ jobs:
     name: "Vercel doprocess (deploy)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'doprocess'
       path: 'web/apps/doprocess'
@@ -155,7 +155,7 @@ jobs:
     name: "Vercel uier (deploy)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'uier'
       path: 'web/apps/uier'
@@ -168,7 +168,7 @@ jobs:
     name: "Vercel WorkingParty (deploy)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'workingparty'
       path: 'web/apps/workingparty'
@@ -181,7 +181,7 @@ jobs:
     name: "Vercel ui-docs (deploy)"
     needs: changes
     if: success() && needs.changes.outputs.web == 'true'
-    uses: ./.github/workflows/vercel-deploy_reusable.yml
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
       name: 'ui-docs'
       path: 'web/apps/ui-docs'

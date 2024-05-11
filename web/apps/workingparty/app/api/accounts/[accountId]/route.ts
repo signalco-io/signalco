@@ -1,6 +1,8 @@
 import { accountGet, accountUpdate } from '../../../../src/lib/repository/accountsRepository';
 import { withAuth } from '../../../../src/lib/auth/withAuth';
 
+export const runtime = 'edge';
+
 export async function GET(_request: Request, { params }: { params: { accountId: string } }) {
     const { accountId } = params;
     if (!accountId)

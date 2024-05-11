@@ -12,9 +12,10 @@ export type ChipProps = PropsWithChildren<{
     href?: string | undefined,
     startDecorator?: ReactNode,
     className?: string,
+    title?: string,
 }>;
 
-export function Chip({ size, color, startDecorator, onClick, children, href, className }: ChipProps) {
+export function Chip({ size, color, startDecorator, onClick, children, href, className, title }: ChipProps) {
     const actionable = typeof onClick !== 'undefined' || typeof href !== 'undefined';
 
     const chipClassName = cx(
@@ -33,10 +34,10 @@ export function Chip({ size, color, startDecorator, onClick, children, href, cla
         actionable && 'hover:bg-opacity-90',
     );
     const Wrapper = onClick
-        ? (props: PropsWithChildren) => <button onClick={onClick} className={cx(chipClassName, className)}>{props.children}</button>
+        ? (props: PropsWithChildren) => <button title={title} onClick={onClick} className={cx(chipClassName, className)}>{props.children}</button>
         : (href
-            ? (props: PropsWithChildren) => <Link href={href} className={cx(chipClassName, className)}>{props.children}</Link>
-            : (props: PropsWithChildren) => <div className={cx(chipClassName, className)}>{props.children}</div>);
+            ? (props: PropsWithChildren) => <Link title={title} href={href} className={cx(chipClassName, className)}>{props.children}</Link>
+            : (props: PropsWithChildren) => <div title={title} className={cx(chipClassName, className)}>{props.children}</div>);
 
     return (
         <Wrapper>

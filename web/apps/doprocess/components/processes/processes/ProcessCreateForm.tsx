@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Input } from '@signalco/ui-primitives/Input';
 import { Button } from '@signalco/ui-primitives/Button';
@@ -30,15 +29,15 @@ export function ProcessCreateForm({ redirect }: { redirect?: boolean }) {
                 onChange={(e) => setName(e.target.value)}
                 label="Name"
                 placeholder="example: Onboarding process" />
-            <Tooltip title="Create tempalte" className="self-end">
                 <Button
+                title="Create tempalte"
+                className="self-end"
                     loading={createProcess.isPending}
                     variant="solid"
                     startDecorator={<Add />}
                     onClick={handleProcessCreate}>
                     Create
-                </Button>
-            </Tooltip>
+            </Button>
         </Stack>
     );
 }

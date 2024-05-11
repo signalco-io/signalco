@@ -1,6 +1,7 @@
 {
   "name": "infra",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "build": "turbo build",
     "preview": "turbo preview",
@@ -12,7 +13,7 @@
     "@infra/typescript-config": "workspace:*",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@8.15.5",
+  "packageManager": "pnpm@9.0.6",
   "engines": {
     "node": ">=18"
   }

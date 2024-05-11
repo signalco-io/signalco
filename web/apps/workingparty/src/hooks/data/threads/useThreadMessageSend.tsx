@@ -1,4 +1,4 @@
-import { Message } from 'openai/resources/beta/threads/messages/messages';
+import { Message } from 'openai/resources/beta/threads/messages';
 import { UseMutationResult, useMutation, useQueryClient, QueryClient, QueryKey } from '@tanstack/react-query';
 import { useCurrentUser } from '../users/useCurrentUser';
 
@@ -42,7 +42,7 @@ export function useThreadMessageSend(workerId: string, threadId: string): UseMut
                 role: 'user',
                 created_at: Date.now() / 1000, // to UNIX seconds
                 assistant_id: workerId,
-                file_ids: [],
+                attachments: null,
                 thread_id: threadId,
                 metadata: null,
                 object: 'thread.message',

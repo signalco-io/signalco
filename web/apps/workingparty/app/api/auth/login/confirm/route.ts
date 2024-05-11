@@ -1,5 +1,7 @@
 import { loginRequestsVerify } from '../../../../../src/lib/repository/loginRequests';
 
+export const runtime = 'edge';
+
 export async function POST(request: Request) {
     const json = await request.json();
     let token: string | undefined = undefined;

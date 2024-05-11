@@ -1,22 +1,15 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { ListItem } from '@signalco/ui-primitives/ListItem';
+import { Input } from '@signalco/ui-primitives/Input';
+import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { Avatar } from '@signalco/ui-primitives/Avatar';
+import { Send } from '@signalco/ui-icons';
 import { initials } from '@signalco/js';
 import { KnownPages } from '../../../src/knownPages';
-import { ThreadMessageInput } from '../(app)/app/workers/[workerid]/threads/[threadid]/ThreadMessageInput';
 import { ThreadMessage } from '../(app)/app/workers/[workerid]/threads/[threadid]/ThreadMessage';
 
 export function DemoMessages() {
-    const router = useRouter();
-
-    const handleMessage = () => {
-        router.push(KnownPages.App);
-    };
-
     return (
         <Stack spacing={4}>
             <Stack>
@@ -40,15 +33,31 @@ export function DemoMessages() {
                     status: 'completed',
                     thread_id: '',
                     object: 'thread.message',
-                    file_ids: [],
                     role: 'assistant',
+                    attachments: [],
                     content: [
                         { type: 'text', text: { value: 'Hello! How can I help you today?', annotations: [] } }
                     ]
                 }} />
             </Stack>
             <Stack spacing={0.5}>
-                <ThreadMessageInput workerId="" threadId="" onMessage={handleMessage} />
+                <form action={KnownPages.App}>
+                    <Input
+                        type="text"
+                        name="message"
+                        className="bg-muted"
+                        autoComplete="off"
+                        placeholder="Enter message..."
+                        fullWidth
+                        endDecorator={(
+                            <IconButton
+                                title="Send message"
+                                type="submit"
+                                variant="plain">
+                                <Send />
+                            </IconButton>
+                        )} />
+                </form>
                 <Typography level="body3" className="text-right">Interacting with AI will redirect you to the App.</Typography>
             </Stack>
         </Stack>

@@ -4,7 +4,7 @@ import klaw from 'klaw';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
-import { Card, CardContent, CardHeader, CardTitle } from '@signalco/ui-primitives/Card';
+import { Card, CardContent, CardHeader } from '@signalco/ui-primitives/Card';
 import { CompanyGitHub, CompanyReddit, CompanyX } from '@signalco/ui-icons';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { SectionData } from '@signalco/cms-core/SectionData';

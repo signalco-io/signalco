@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import { Metadata, Viewport } from 'next';
 import './global.css';
 import { Analytics } from '@vercel/analytics/react';
-import { ClientProvider } from '../src/components/providers/ClientProvider';
 
 const inter = Inter({
     subsets: ['latin'],
@@ -14,10 +13,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={`${inter.variable} font-sans`}>
-                <ClientProvider>
-                    {children}
-                    <Analytics />
-                </ClientProvider>
+                {children}
+                <Analytics />
             </body>
         </html>
     );

@@ -50,15 +50,12 @@ const nextConfig = {
                 isDevelopment,
                 [
                     knownSecureHeadersExternalUrls.signalco,
-                    knownSecureHeadersExternalUrls.vercel
+                    knownSecureHeadersExternalUrls.vercel,
+                    knownSecureHeadersExternalUrls.googleFonts,
                 ]
             ))
         }];
     },
 };
 
-export default process.env.ANALYZE ?
-    import('@next/bundle-analyzer')({
-        enabled: process.env.ANALYZE === 'true',
-    })(withMDX(nextConfig)) :
-    withMDX(nextConfig);
+export default withMDX(nextConfig);

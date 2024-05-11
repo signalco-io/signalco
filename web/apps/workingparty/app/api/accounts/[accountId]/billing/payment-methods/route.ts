@@ -2,6 +2,8 @@ import { stripeCustomerPaymentMethods } from '../../../../../../src/lib/stripe/s
 import { accountGet } from '../../../../../../src/lib/repository/accountsRepository';
 import { withAuth } from '../../../../../../src/lib/auth/withAuth';
 
+export const runtime = 'edge';
+
 export type AccountPaymentMethodsDto = ReturnType<typeof stripeCustomerPaymentMethods>;
 
 export async function GET(_request: Request, { params }: { params: { accountId: string } }) {

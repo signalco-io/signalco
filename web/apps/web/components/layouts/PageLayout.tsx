@@ -2,13 +2,13 @@ import { Fragment, PropsWithChildren } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Container } from '@signalco/ui-primitives/Container';
 import { CompanyX, CompanyReddit, CompanyGitHub } from '@signalco/ui-icons';
+import { NavigatingButton } from '@signalco/ui/NavigatingButton';
+import { PageNav, PageNavMenu } from '@signalco/ui/Nav';
 import { SectionData } from '@signalco/cms-core/SectionData';
 import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { SystemStatusLabel } from '../pages/SystemStatusLabel';
-import { PageNav, PageNavMenu } from '@signalco/ui/Nav';
 import SignalcoLogotype from '../icons/SignalcoLogotype';
 import { KnownPages } from '../../src/knownPages';
-import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 
 const footerData: SectionData = {
     tagline: 'signalco',

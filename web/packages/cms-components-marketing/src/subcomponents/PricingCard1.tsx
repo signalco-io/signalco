@@ -15,8 +15,8 @@ export function PricingCard1({ header, description, asset, features, ctas }: Sec
                 <div className="grid h-full grid-rows-[auto_auto_1fr_auto_auto] gap-8">
                     <Stack spacing={2}>
                         <Row spacing={1} justifyContent="space-between">
-                            <Typography level="h4" id={slug(header)}>{header}</Typography>
-                            <Typography level="h3" semiBold>{asset}</Typography>
+                            <Typography level="h3" className="text-2xl" id={slug(header)}>{header}</Typography>
+                            <Typography semiBold className="text-2xl">{asset}</Typography>
                         </Row>
                         <Typography level="body2">{description}</Typography>
                     </Stack>

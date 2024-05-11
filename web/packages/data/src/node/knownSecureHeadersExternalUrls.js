@@ -30,6 +30,10 @@ export const knownSecureHeadersExternalUrls = {
         imgSrc: ['https://lh3.googleusercontent.com'],
         connectSrc: ['https://lh3.googleusercontent.com']
     },
+    googleFonts: {
+        fontSrc: ['https://fonts.gstatic.com'],
+        connectSrc: ['https://fonts.gstatic.com']
+    },
     stripe: {
         scriptSrc: ['https://js.stripe.com'],
         frameSrc: ['https://js.stripe.com'],

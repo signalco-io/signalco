@@ -1,6 +1,8 @@
 import { plansGetAll } from '../../../src/lib/repository/plansRepository';
 import { PlanDto } from '../../../src/lib/dtos/plan';
 
+export const runtime = 'edge';
+
 export async function GET() {
     const plans = await plansGetAll();
     const dtos: PlanDto[] = plans.filter(plan => plan.active).map((plan) => ({

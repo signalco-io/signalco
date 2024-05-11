@@ -1,12 +1,7 @@
 import { createSecureHeaders } from 'next-secure-headers';
 import { combineSecureHeaders, knownSecureHeadersExternalUrls } from '@signalco/data/node';
-import nextBundleAnalyzer from '@next/bundle-analyzer';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-
-const withBundleAnalyzer = nextBundleAnalyzer({
-    enabled: process.env.ANALYZE === 'true',
-});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -40,6 +35,7 @@ const nextConfig = {
                 [
                     knownSecureHeadersExternalUrls.github,
                     knownSecureHeadersExternalUrls.vercel,
+                    knownSecureHeadersExternalUrls.googleFonts,
                     knownSecureHeadersExternalUrls.clerk,
                     { scriptSrc: 'http://localhost:5500', styleSrc: 'http://localhost:5500' },
                     {
@@ -51,6 +47,4 @@ const nextConfig = {
     },
 };
 
-const componsedNextConfig = withBundleAnalyzer(nextConfig);
-
-export default componsedNextConfig;
+export default nextConfig;

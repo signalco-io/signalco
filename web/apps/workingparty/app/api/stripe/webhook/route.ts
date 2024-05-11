@@ -3,6 +3,8 @@ import { stripe } from '../../../../src/lib/stripe/config';
 import { plansCreate, plansDelete, plansGetAll, plansGetByStripePriceId, plansUpdate } from '../../../../src/lib/repository/plansRepository';
 import { accountGetByStripeCustomerId, accountSubscriptionCreate, accountSubscriptionSetStatus, accountSubscriptions } from '../../../../src/lib/repository/accountsRepository';
 
+export const runtime = 'edge';
+
 const relevantEvents = new Set([
     'product.created',
     'product.updated',
