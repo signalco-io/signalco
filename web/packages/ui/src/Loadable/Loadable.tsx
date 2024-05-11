@@ -4,6 +4,7 @@ import { Skeleton } from '@signalco/ui-primitives/Skeleton';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Warning } from '@signalco/ui-icons';
 import { Alert } from '../Alert';
+import { errorText } from '@signalco/js';
 
 export type LoadableLoadingErrorProps = {
     error?: unknown | string | React.ReactElement;
@@ -36,9 +37,7 @@ export function Loadable({
     const indicator = useMemo(() => {
         if (placeholder == null || placeholder === 'circular') {
             return (
-                <div className={cx('p-2 flex flex-col items-center', className)}>
-                    <Spinner loading={true} loadingLabel={loadingLabel} />
-                </div>
+                <Spinner loading={true} loadingLabel={loadingLabel} className={cx('p-2 w-full', className)} />
             );
         }
 
@@ -63,17 +62,8 @@ export function Loadable({
     }, [className, loadingLabel, placeholder, width, height]);
 
     if (error) {
-        console.warn('User presented with error', error, typeof error);
-
-        let errorDisplay = 'Unknown error';
-        if (typeof error === 'object') {
-            if ('message' in error && typeof error.message === 'string') {
-                errorDisplay = error.message;
-            }
-            else {
-                errorDisplay = JSON.stringify(error);
-            }
-        }
+        const errorDisplay = errorText(error);
+        console.warn('User presented with error:', errorDisplay, 'original error:', error);
         return (
             <Alert color="danger" className="w-full" startDecorator={<Warning />}>
                 {errorDisplay}

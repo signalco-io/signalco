@@ -17,14 +17,14 @@ import { ContentCard } from '../components/ContentCard';
 interface VercelInviteUserEmailProps {
     email: string;
     verifyPhrase: string;
-    loginLink: string;
+    confirmLink: string;
     appName: string;
     appDomain: string;
 }
 
 export default function UserLoginRequestEmail({
     email = 'login@example.com',
-    loginLink = 'https://workingparty.ai/login',
+    confirmLink = 'https://workingparty.ai/login',
     verifyPhrase = 'Amazing Gift',
 
     appName = 'WorkingParty',
@@ -48,11 +48,11 @@ export default function UserLoginRequestEmail({
                     <Paragraph>If above security code matches one you requested, click the button bellow to log in to <strong>{appName}</strong>.
                     </Paragraph>
                     <Section className="my-[32px] text-center">
-                        <PrimaryButton href={loginLink}>Log in to {appName}</PrimaryButton>
+                        <PrimaryButton href={confirmLink}>Log in to {appName}</PrimaryButton>
                     </Section>
                     <Paragraph>
                         or copy and paste this URL into your browser:{' '}
-                        <Link href={loginLink}>{loginLink}</Link>
+                        <Link href={confirmLink}>{confirmLink}</Link>
                     </Paragraph>
                     <Divider className="my-[26px]" />
                     <Disclaimer>
