@@ -20,10 +20,10 @@ export function AppSidebarProfileButton() {
                 <Button
                     startDecorator={<Avatar size="md">{displayNameInitials}</Avatar>}
                     variant="plain"
-                    className="gap-2 pl-1 pr-2">
+                    className="max-w-full gap-2 pl-1 pr-2">
                     {currentUser.isLoading ? (
                         <Skeleton className="h-6 w-36" />
-                    ) : currentUser.data?.user?.displayName}
+                    ) : <span className="overflow-hidden text-ellipsis">{currentUser.data?.user?.displayName}</span>}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
