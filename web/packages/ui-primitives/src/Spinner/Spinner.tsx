@@ -11,7 +11,7 @@ export function Spinner({ loading, loadingLabel, className, ...rest }: SpinnerPr
 
     return (
         <svg
-            className={cx('h-8 w-8 animate-spin text-primary', className)}
+            className={cx('size-8 animate-spin text-primary', className)}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
