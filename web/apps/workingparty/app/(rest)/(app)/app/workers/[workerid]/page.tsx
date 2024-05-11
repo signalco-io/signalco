@@ -9,7 +9,7 @@ export default function WorkerPage({ params }: { params: { workerid: string } })
     const threads = useWorkerThreads(workerid);
 
     const firstThreadId = threads.data ? threads.data[0]?.id : null;
-    if (threads.isLoading || threads.isStale || !firstThreadId) {
+    if (threads.isLoading || threads.isPending || !firstThreadId) {
         return null;
     }
 
