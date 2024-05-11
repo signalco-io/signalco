@@ -28,7 +28,6 @@
                 "@types/node",
                 "@types/react-node",
                 "@types/react-dom",
-                "@types/next-pwa",
                 "@types/klaw",
                 "@types/d3",
                 "@types/color",
@@ -69,7 +68,6 @@
                 "Castle.Core",
                 "eslint",
                 "Moq",
-                "pnpm",
                 "typescript",
                 "@typescript-eslint/eslint-plugin",
                 "@typescript-eslint/parser"
