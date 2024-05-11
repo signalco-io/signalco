@@ -9,7 +9,7 @@ export default function LoginLayout({ children }: PropsWithChildren) {
         <AppClientProvider>
             <Row alignItems="center" className="h-[calc(100vh-104px)]">
                 <Container maxWidth="xs">
-                    <Stack spacing={6}>
+                    <Stack className="gap-8 md:gap-12">
                         {children}
                     </Stack>
                 </Container>

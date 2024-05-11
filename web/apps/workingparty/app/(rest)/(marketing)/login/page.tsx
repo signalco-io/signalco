@@ -25,13 +25,17 @@ function useEmailLogin() {
             if (resp.status < 200 || resp.status > 299) {
                 throw new Error('Failed to request login email');
             }
-            const data = await resp.json() as { verifyPhrase?: string };
+            const data = await resp.json() as { verifyPhrase?: string, clientId?: string };
             const verifyPhrase = data?.verifyPhrase;
             if (!verifyPhrase)
                 throw new Error('Failed to request login email');
+            const clientId = data?.clientId;
+            if (!clientId)
+                throw new Error('Failed to request login email');
 
             return {
-                verifyPhrase
+                verifyPhrase,
+                clientId
             };
         }
     });
@@ -54,8 +58,8 @@ export default function LoginPage() {
 
         try {
             const email = formData.email.value;
-            const { verifyPhrase } = await emailLogin.mutateAsync({ email });
-            router.push(KnownPages.LoginEmailSent(verifyPhrase, email));
+            const { verifyPhrase, clientId } = await emailLogin.mutateAsync({ email });
+            router.push(KnownPages.LoginEmailSent(verifyPhrase, email, clientId));
         } catch (error) {
             showNotification('Failed to send login email. Please try again.', 'error');
         }
