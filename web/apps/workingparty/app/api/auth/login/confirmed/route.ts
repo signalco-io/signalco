@@ -24,7 +24,7 @@ export async function POST(request: Request) {
 
     const verifiedEmail = await loginRequestsUse(clientToken);
     if (!verifiedEmail)
-        return Response.json({ error: 'Not verified yet' }, { status: 204 });
+        return Response.json({ error: 'Not verified yet' }, { status: 202 });
 
     // Create user if not exists
     let userId = (await usersGetByEmail(emailSanitized));

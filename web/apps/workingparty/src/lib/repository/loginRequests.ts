@@ -1,4 +1,3 @@
-import { Truculenta } from 'next/font/google';
 import { nanoid } from 'nanoid';
 import { cosmosDataContainerLoginRequests } from '../cosmosClient';
 
@@ -36,9 +35,15 @@ export async function loginRequestsVerify(id: string) {
     if (!loginRequest)
         return false;
 
+    // Check if already verified
+    if (loginRequest.verifiedAt) {
+        throw new Error('Login request already verified');
+    }
+
     // TODO: Add metric for logins/failed attampts
     // TODO: Request expiry
 
+    console.info('Login verified', id);
     await dbLoginRequests.item(id, id).patch<DbLoginRequest>({
         operations: [
             { op: 'add', path: '/verifiedAt', value: Date.now() / 1000 },
@@ -61,6 +66,7 @@ export async function loginRequestsUse(clientId: string) {
 
     // TODO: Verify request expiry
 
+    console.log('Login used', request.id);
     await dbLoginRequests.item(request.id, request.id).delete();
     return request.email;
 }
