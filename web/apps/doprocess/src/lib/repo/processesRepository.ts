@@ -66,7 +66,7 @@ export async function getProcess(userId: string | null, processId: string) {
     return proc.resource && entitySharedWithUser(userId, proc.resource) ? proc.resource : undefined;
 }
 
-export async function createProcess(userId: string, name: string, basedOn?: string) {
+export async function createProcess(accountId: string, userId: string, name: string, basedOn?: string) {
     const container = cosmosDataContainerProcesses();
     const proccessId = `process_${nanoid()}`;
     await container.items.create<DbProcess>({
@@ -76,6 +76,7 @@ export async function createProcess(userId: string, name: string, basedOn?: stri
         sharedWithUsers: [userId],
         createdBy: userId,
         createdAt: new Date(),
+        accountId
     });
 
     // Copy task definitions to new process (if basedOn is provided)
@@ -87,7 +88,7 @@ export async function createProcess(userId: string, name: string, basedOn?: stri
                 const taskDefinitions = await getTaskDefinitions(userId, basedOnId);
                 if (taskDefinitions.length) {
                     await Promise.all(taskDefinitions.map(async td => {
-                        const taskDefinitionId = await createTaskDefinition(userId, proccessId, td.text ?? '');
+                        const taskDefinitionId = await createTaskDefinition(accountId, userId, proccessId, td.text ?? '');
                         if (td.type) {
                             await changeTaskDefinitionType(userId, proccessId, taskDefinitionId, td.type, td.typeData ?? '');
                         }
@@ -172,7 +173,7 @@ export async function getProcessRun(userId: string | null, processId: string, ru
     return run;
 }
 
-export async function runProcess(userId: string, processId: string, name: string) {
+export async function runProcess(accountId: string, userId: string, processId: string, name: string) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
 
@@ -188,6 +189,7 @@ export async function runProcess(userId: string, processId: string, name: string
         name: name,
         createdBy: userId,
         createdAt: new Date(),
+        accountId
     });
     return processRunId;
 }
@@ -259,7 +261,7 @@ async function getTaskDefinitionLastOrder(userId: string, processId: string) {
     return lexinsert(result.resources[0]);
 }
 
-export async function createTaskDefinition(userId: string, processId: string, text: string) {
+export async function createTaskDefinition(accountId: string, userId: string, processId: string, text: string) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
 
@@ -275,6 +277,7 @@ export async function createTaskDefinition(userId: string, processId: string, te
         text: text,
         createdBy: userId,
         createdAt: new Date(),
+        accountId
     });
     return taskDefinitionId;
 }
@@ -374,7 +377,7 @@ export async function getTasks(userId: string | null, processId: string, runId: 
     }).fetchAll()).resources;
 }
 
-export async function setTaskState(userId: string, processId: string, runId: string, taskDefinitionId: string, state: TaskState) {
+export async function setTaskState(accountId: string, userId: string, processId: string, runId: string, taskDefinitionId: string, state: TaskState) {
     if (!await isProcessSharedWithUser(userId, processId))
         throw new Error('Not found');
     // TODO: Check permissions
@@ -397,6 +400,7 @@ export async function setTaskState(userId: string, processId: string, runId: str
             state,
             createdBy: userId,
             createdAt: new Date(),
+            accountId
         });
         return;
     }
