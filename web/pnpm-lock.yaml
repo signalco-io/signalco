@@ -834,8 +834,8 @@ importers:
         specifier: 8.1.1
         version: 8.1.1(postcss@8.4.38)(typescript@5.4.5)(webpack@5.91.0(@swc/core@1.4.15(@swc/helpers@0.5.5))(esbuild@0.20.2))
       rimraf:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.7
+        version: 5.0.7
       sass:
         specifier: 1.77.1
         version: 1.77.1
@@ -10124,9 +10124,9 @@ packages:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
 
-  rimraf@5.0.6:
-    resolution: {integrity: sha512-X72SgyOf+1lFnGM6gYcmZ4+jMOwuT4E4SajKQzUIlI7EoR5eFHMhS/wf8Ll0mN+w2bxcIVldrJQ6xT7HFQywjg==}
-    engines: {node: '>=14'}
+  rimraf@5.0.7:
+    resolution: {integrity: sha512-nV6YcJo5wbLW77m+8KjH8aB/7/rxQy9SZ0HY5shnwULfS+9nmTtVXAJET5NdZmCzA4fPI/Hm1wo/Po/4mopOdg==}
+    engines: {node: '>=14.18'}
     hasBin: true
 
   ripemd160@2.0.2:
@@ -21465,7 +21465,7 @@ snapshots:
     dependencies:
       glob: 7.2.3
 
-  rimraf@5.0.6:
+  rimraf@5.0.7:
     dependencies:
       glob: 10.3.12
 
