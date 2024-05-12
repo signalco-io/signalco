@@ -1,7 +1,4 @@
-import { and, count, eq, or, sql } from 'drizzle-orm';
 import { firstOrDefault } from '@signalco/js';
-import { document } from '../db/schema';
-import { db } from '../db';
 import { publicIdNext } from './shared';
 
 function documentSharedWithUser(userId: string | null, includePublic = true) {
