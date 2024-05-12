@@ -1,4 +1,6 @@
-import { deleteProcessRun, getProcessIdByPublicId, getProcessRun, getProcessRunIdByPublicId, renameProcessRun } from '../../../../../../src/lib/repo/processesRepository';
+import { entityIdByPublicId } from '../../../../../../src/lib/repo/shared';
+import { deleteProcessRun, getProcessRun, getProcessRunIdByPublicId, renameProcessRun } from '../../../../../../src/lib/repo/processesRepository';
+import { cosmosDataContainerProcesses } from '../../../../../../src/lib/db/client';
 import { ensureUserId, optionalUserId } from '../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
 
@@ -10,7 +12,7 @@ export async function GET(_request: Request, { params }: { params: { id: string,
 
     const { userId } = optionalUserId();
 
-    const processId = await getProcessIdByPublicId(processPublicId);
+    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
     if (processId == null)
         return new Response(null, { status: 404 });
     const runId = await getProcessRunIdByPublicId(processPublicId, runPublicId);
@@ -36,7 +38,7 @@ export async function PUT(request: Request, { params }: { params: { id: string, 
 
     const { userId } = ensureUserId();
 
-    const processId = await getProcessIdByPublicId(processPublicId);
+    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
     if (processId == null)
         return new Response(null, { status: 404 });
     const runId = await getProcessRunIdByPublicId(processPublicId, runPublicId);
@@ -57,7 +59,7 @@ export async function DELETE(_request: Request, { params }: { params: { id: stri
 
     const { userId } = ensureUserId();
 
-    const processId = await getProcessIdByPublicId(processPublicId);
+    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
     if (processId == null)
         return new Response(null, { status: 404 });
     const runId = await getProcessRunIdByPublicId(processPublicId, runPublicId);

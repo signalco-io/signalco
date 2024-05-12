@@ -1,4 +1,6 @@
-import { getProcessIdByPublicId, getProcessRunIdByPublicId, getTaskDefinitionIdByPublicId, getTaskDefinitions, getTasks, setTaskState } from '../../../../../../../src/lib/repo/processesRepository';
+import { entityIdByPublicId } from '../../../../../../../src/lib/repo/shared';
+import { getProcessRunIdByPublicId, getTaskDefinitionIdByPublicId, getTaskDefinitions, getTasks, setTaskState } from '../../../../../../../src/lib/repo/processesRepository';
+import { cosmosDataContainerProcesses } from '../../../../../../../src/lib/db/client';
 import { ensureUserId, optionalUserId } from '../../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../../src/lib/api/apiParam';
 
@@ -9,7 +11,7 @@ export async function GET(_request: Request, { params }: { params: { id: string,
     const runPublicId = requiredParamString(params.runId);
     const { userId } = optionalUserId();
 
-    const processId = await getProcessIdByPublicId(processPublicId);
+    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
     if (processId == null)
         return new Response(null, { status: 404 });
     const runId = await getProcessRunIdByPublicId(processPublicId, runPublicId);
@@ -35,7 +37,7 @@ export async function POST(request: Request, { params }: { params: { id: string,
     const runPublicId = requiredParamString(params.runId);
     const { userId } = ensureUserId();
 
-    const processId = await getProcessIdByPublicId(processPublicId);
+    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
     if (processId == null)
         return new Response(null, { status: 404 });
     const runId = await getProcessRunIdByPublicId(processPublicId, runPublicId);

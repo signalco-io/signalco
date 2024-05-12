@@ -23,7 +23,7 @@ const nextConfig = {
         ]
     },
     eslint: {
-        dirs: ['worker', 'tools', 'src', 'app', 'locales', 'components']
+        dirs: ['src', 'app', 'components']
     },
     async headers() {
         return [{
