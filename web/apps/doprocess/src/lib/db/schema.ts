@@ -16,19 +16,23 @@ export type DbWithShare = {
     sharedWithUsers: string[];
 };
 
-export type DbProcess = DbWithPublicId & DbWithTimestamps & DbWithBlame & DbWithShare & {
+export type DbWithAccount = {
+    accountId: string;
+};
+
+export type DbProcess = DbWithPublicId & DbWithTimestamps & DbWithBlame & DbWithShare & DbWithAccount & {
     id: string;
     name: string;
 };
 
-export type DbProcessRun = DbWithPublicId & DbWithTimestamps & DbWithBlame & {
+export type DbProcessRun = DbWithPublicId & DbWithTimestamps & DbWithBlame & DbWithAccount & {
     id: string;
     processId: string;
     name: string;
     state: string;
 };
 
-export type DbTaskDefinition = DbWithPublicId & DbWithTimestamps & DbWithBlame & {
+export type DbTaskDefinition = DbWithPublicId & DbWithTimestamps & DbWithBlame & DbWithAccount & {
     id: string;
     processId: string;
     text: string;
@@ -37,7 +41,7 @@ export type DbTaskDefinition = DbWithPublicId & DbWithTimestamps & DbWithBlame &
     typeData?: string;
 };
 
-export type DbDocument = DbWithPublicId & DbWithTimestamps & DbWithBlame & DbWithShare & {
+export type DbDocument = DbWithPublicId & DbWithTimestamps & DbWithBlame & DbWithShare & DbWithAccount & {
     id: string;
     name: string;
     dataJson?: string;
@@ -45,7 +49,7 @@ export type DbDocument = DbWithPublicId & DbWithTimestamps & DbWithBlame & DbWit
 
 export type TaskState = 'new' | 'completed';
 
-export type DbTask = DbWithPublicId & DbWithTimestamps & DbWithBlame & {
+export type DbTask = DbWithPublicId & DbWithTimestamps & DbWithBlame & DbWithAccount & {
     id: string;
     processId: string;
     runId: string;

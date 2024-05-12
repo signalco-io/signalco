@@ -8,7 +8,7 @@ async function isDocumentSharedWithUser(userId: string, documentId: string) {
     return document.resource && entitySharedWithUser(userId, document.resource);
 }
 
-export async function documentCreate(userId: string, name: string, basedOn?: string) {
+export async function documentCreate(accountId: string, userId: string, name: string, basedOn?: string) {
     const container = cosmosDataContainerDocuments();
     const documentId = `document_${nanoid()}`;
     await container.items.create<DbDocument>({
@@ -17,7 +17,8 @@ export async function documentCreate(userId: string, name: string, basedOn?: str
         publicId: await publicIdNext(container),
         sharedWithUsers: [userId],
         createdBy: userId,
-        createdAt: new Date()
+        createdAt: new Date(),
+        accountId
     });
 
     // Copy content to new document (if basedOn is provided)
