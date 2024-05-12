@@ -494,6 +494,9 @@ importers:
 
   apps/doprocess:
     dependencies:
+      '@azure/cosmos':
+        specifier: 4.0.0
+        version: 4.0.0
       '@blocknote/core':
         specifier: 0.12.4
         version: 0.12.4

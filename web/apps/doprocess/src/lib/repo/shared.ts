@@ -1,19 +1,35 @@
 import { nanoid } from 'nanoid';
 import { firstOrDefault } from '@signalco/js';
-import { DbWithPublicId } from '../db/schema';
+import { Container } from '@azure/cosmos';
+import { DbWithShare } from '../db/schema';
 
-export async function publicIdExists(entity: DbWithPublicId, publicId: string) {
-    // return (firstOrDefault(await db
-    //     .select({ count: count() })
-    //     .from(entity)
-    //     .where(sql`publicId = ${publicId}`)
-    // )?.count ?? 0) > 0;
-    throw new Error('Not implemented');
+export function entitySharedWithUser(userId: string | null, document: DbWithShare, includePublic = true) {
+    if (document.sharedWithUsers.includes('public') && includePublic)
+        return true;
+
+    if (!userId)
+        return false;
+
+    return document.sharedWithUsers.includes(userId);
 }
 
-export async function publicIdNext(entity: DbWithPublicId, size = 21) {
+export async function entityIdByPublicId(container: Container, publicId: string): Promise<string | undefined> {
+    return firstOrDefault((await container.items.query({
+        query: 'SELECT * FROM c WHERE c.publicId = @publicId',
+        parameters: [{ name: '@publicId', value: publicId }]
+    }).fetchAll()).resources)?.id;
+}
+
+export async function publicIdExists(entityContainer: Container, publicId: string) {
+    (await entityContainer.items.query({
+        query: 'SELECT * FROM c WHERE c.publicId = @publicId',
+        parameters: [{ name: '@publicId', value: publicId }]
+    }).fetchAll()).resources.length > 0;
+}
+
+export async function publicIdNext(entityContainer: Container, size = 21) {
     let publicId = undefined;
-    while (!publicId || await publicIdExists(entity, publicId))
+    while (!publicId || await publicIdExists(entityContainer, publicId))
         publicId = nanoid(size);
     return publicId;
 }
