@@ -8,11 +8,12 @@ import { Container } from '@signalco/ui-primitives/Container';
 import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
 import { Loadable } from '@signalco/ui/Loadable';
-import { useCurrentUser } from '../../../../../../../src/hooks/data/users/useCurrentUser';
 import { useAccountUpdate } from '../../../../../../../src/hooks/data/account/useAccountUpdate';
 import { Account, useAccount } from '../../../../../../../src/hooks/data/account/useAccount';
 import { SettingsCardActions } from '../../../../../../../src/components/settings/SettingsCardActions';
 import { SettingsCard } from '../../../../../../../src/components/settings/SettingsCard';
+import { User } from '../../../../../../../src/components/providers/AppAuthProvider';
+import { useCurrentUser } from '../../../../../../../../../packages/auth-client/src/useCurrentUser';
 
 function SettingsAccountGeneralForm({ account }: { account: Account }) {
     const [name, setName] = useState<string>(account.name);
@@ -25,7 +26,7 @@ function SettingsAccountGeneralForm({ account }: { account: Account }) {
 }
 
 export default function SettingsAccountGeneralPage() {
-    const currentUser = useCurrentUser();
+    const currentUser = useCurrentUser<User>();
     const accountId = currentUser.data?.user?.accountIds[0];
     const account = useAccount(accountId);
     const accountUpdate = useAccountUpdate(accountId);

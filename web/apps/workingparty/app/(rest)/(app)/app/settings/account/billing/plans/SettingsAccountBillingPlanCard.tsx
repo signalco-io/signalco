@@ -14,18 +14,19 @@ import { Loadable } from '@signalco/ui/Loadable';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { CheckoutSessionDto } from '../../../../../../../api/accounts/[accountId]/billing/checkout/[planId]/route';
 import { clientStripe } from '../../../../../../../../src/lib/stripe/clientStripe';
-import { useCurrentUser } from '../../../../../../../../src/hooks/data/users/useCurrentUser';
 import { usePlans } from '../../../../../../../../src/hooks/data/plans/usePlans';
 import { useAccountSubscriptions } from '../../../../../../../../src/hooks/data/account/useAccountSubscriptions';
 import { SettingsCardActions } from '../../../../../../../../src/components/settings/SettingsCardActions';
 import { SettingsCard } from '../../../../../../../../src/components/settings/SettingsCard';
+import { User } from '../../../../../../../../src/components/providers/AppAuthProvider';
+import { useCurrentUser } from '../../../../../../../../../../packages/auth-client/src/useCurrentUser';
 
 export function SettingsAccountBillingPlanCard() {
     const [selectedPeriod, setSelectedPeriod] = useSearchParam('period', 'monthly');
     const plans = usePlans();
     const filteredPlans = plans.data?.filter(plan => plan.period === selectedPeriod);
 
-    const currentUser = useCurrentUser();
+    const currentUser = useCurrentUser<User>();
     const accountId = currentUser.data?.user?.accountIds[0];
     const subscriptions = useAccountSubscriptions(accountId);
     const activePlanId = subscriptions.data?.find(s => s.active)?.plan?.id;

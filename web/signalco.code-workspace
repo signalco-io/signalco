@@ -41,6 +41,14 @@
 			"path": "apps/workingparty"
 		},
 		{
+			"name": "📦 @signalco/auth-client",
+			"path": "packages/auth-client"
+		},
+		{
+			"name": "📦 @signalco/auth-server",
+			"path": "packages/auth-server"
+		},
+		{
 			"name": "📦 @signalco/cms-core",
 			"path": "packages/cms-core"
 		},

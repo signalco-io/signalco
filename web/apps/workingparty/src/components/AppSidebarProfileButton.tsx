@@ -7,10 +7,11 @@ import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { LogOut, Settings } from '@signalco/ui-icons';
 import { initials } from '@signalco/js';
 import { KnownPages } from '../knownPages';
-import { useCurrentUser } from '../hooks/data/users/useCurrentUser';
+import { useCurrentUser } from '../../../../packages/auth-client/src/useCurrentUser';
+import { User } from './providers/AppAuthProvider';
 
 export function AppSidebarProfileButton() {
-    const currentUser = useCurrentUser();
+    const currentUser = useCurrentUser<User>();
 
     const displayNameInitials = initials(currentUser.data?.user?.displayName ?? '');
 
