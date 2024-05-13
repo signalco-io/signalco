@@ -1,10 +1,10 @@
 import { type PropsWithChildren } from 'react';
-import { ClerkProvider } from '@clerk/nextjs';
 
 export function AuthProvider({ children }: PropsWithChildren) {
+    console.warn('AuthProvider is not implemented.');
     return (
-        <ClerkProvider>
+        <>
             {children}
-        </ClerkProvider>
+        </>
     );
 }
