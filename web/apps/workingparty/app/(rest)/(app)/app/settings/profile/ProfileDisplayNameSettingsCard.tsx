@@ -7,9 +7,10 @@ import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
 import { Loadable } from '@signalco/ui/Loadable';
 import { useCurrentUserUpdate } from '../../../../../../src/hooks/data/users/useCurrentUserUpdate';
-import { User, useCurrentUser } from '../../../../../../src/hooks/data/users/useCurrentUser';
 import { SettingsCardActions } from '../../../../../../src/components/settings/SettingsCardActions';
 import { SettingsCard } from '../../../../../../src/components/settings/SettingsCard';
+import { type User } from '../../../../../../src/components/providers/AppAuthProvider';
+import { useCurrentUser } from '../../../../../../../../packages/auth-client/src/useCurrentUser';
 
 function ProfileDisplayNameSettingsForm({ user }: { user: User }) {
     const [displayName, setDisplayName] = useState<string>(user.displayName);
@@ -22,7 +23,7 @@ function ProfileDisplayNameSettingsForm({ user }: { user: User }) {
 }
 
 export function ProfileDisplayNameSettingsCard() {
-    const currentUser = useCurrentUser();
+    const currentUser = useCurrentUser<User>();
     const currentUserUpdate = useCurrentUserUpdate();
 
     const dateFormatter = new Intl.DateTimeFormat(undefined, { month: 'long', year: 'numeric' });

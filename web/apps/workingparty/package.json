@@ -23,6 +23,8 @@
         "@enterwell/react-form-validation": "1.4.0",
         "@enterwell/react-form-builder": "0.3.2",
         "@react-email/components": "0.0.17",
+        "@signalco/auth-client": "workspace:*",
+        "@signalco/auth-server": "workspace:*",
         "@signalco/cms-core": "workspace:*",
         "@signalco/cms-components-marketing": "workspace:*",
         "@signalco/email-templates": "workspace:*",

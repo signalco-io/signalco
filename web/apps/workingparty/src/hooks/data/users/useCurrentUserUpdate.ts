@@ -1,5 +1,6 @@
 import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
-import { User } from './useCurrentUser';
+import { authCurrentUserQueryKeys } from '@signalco/auth-client';
+import { User } from '../../../components/providers/AppAuthProvider';
 
 export function useCurrentUserUpdate(): UseMutationResult<void, Error, Pick<User, 'displayName'>, unknown> {
     const client = useQueryClient();
@@ -14,7 +15,7 @@ export function useCurrentUserUpdate(): UseMutationResult<void, Error, Pick<User
             }
         },
         onSuccess: () => {
-            client.invalidateQueries({ queryKey: ['users', 'current'] });
+            client.invalidateQueries({ queryKey: authCurrentUserQueryKeys });
         }
     });
 }

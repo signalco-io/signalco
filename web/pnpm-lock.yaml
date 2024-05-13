@@ -524,6 +524,12 @@ importers:
       '@next/env':
         specifier: 14.2.3
         version: 14.2.3
+      '@signalco/auth-client':
+        specifier: workspace:*
+        version: link:../../packages/auth-client
+      '@signalco/auth-server':
+        specifier: workspace:*
+        version: link:../../packages/auth-server
       '@signalco/cms-components-marketing':
         specifier: workspace:*
         version: link:../../packages/cms-components-marketing
@@ -1135,6 +1141,12 @@ importers:
       '@react-email/components':
         specifier: 0.0.17
         version: 0.0.17(@types/react@18.3.2)(react@18.3.1)
+      '@signalco/auth-client':
+        specifier: workspace:*
+        version: link:../../packages/auth-client
+      '@signalco/auth-server':
+        specifier: workspace:*
+        version: link:../../packages/auth-server
       '@signalco/cms-components-marketing':
         specifier: workspace:*
         version: link:../../packages/cms-components-marketing
@@ -1271,6 +1283,69 @@ importers:
       sass:
         specifier: 1.77.1
         version: 1.77.1
+      typescript:
+        specifier: 5.4.5
+        version: 5.4.5
+
+  packages/auth-client:
+    devDependencies:
+      '@signalco/eslint-config-signalco':
+        specifier: workspace:*
+        version: link:../eslint-config-signalco
+      '@signalco/tailwindcss-config-signalco':
+        specifier: workspace:*
+        version: link:../tailwindcss-config-signalco
+      '@signalco/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@signalco/ui-primitives':
+        specifier: workspace:*
+        version: link:../ui-primitives
+      '@tanstack/react-query':
+        specifier: 5.36.0
+        version: 5.36.0(react@18.3.1)
+      '@types/react':
+        specifier: 18.3.2
+        version: 18.3.2
+      '@types/react-dom':
+        specifier: 18.3.0
+        version: 18.3.0
+      next:
+        specifier: 14.2.3
+        version: 14.2.3(@babel/core@7.24.4)(@playwright/test@1.44.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.1)
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: 18.3.1
+        version: 18.3.1(react@18.3.1)
+      typescript:
+        specifier: 5.4.5
+        version: 5.4.5
+
+  packages/auth-server:
+    devDependencies:
+      '@signalco/eslint-config-signalco':
+        specifier: workspace:*
+        version: link:../eslint-config-signalco
+      '@signalco/js':
+        specifier: workspace:*
+        version: link:../js
+      '@signalco/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@types/react':
+        specifier: 18.3.2
+        version: 18.3.2
+      next:
+        specifier: 14.2.3
+        version: 14.2.3(@babel/core@7.24.4)(@playwright/test@1.44.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.1)
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: 18.3.1
+        version: 18.3.1(react@18.3.1)
       typescript:
         specifier: 5.4.5
         version: 5.4.5

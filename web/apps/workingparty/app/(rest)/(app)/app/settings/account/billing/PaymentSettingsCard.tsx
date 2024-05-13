@@ -5,14 +5,15 @@ import { List } from '@signalco/ui-primitives/List';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Loadable } from '@signalco/ui/Loadable';
 import { KnownPages } from '../../../../../../../src/knownPages';
-import { useCurrentUser } from '../../../../../../../src/hooks/data/users/useCurrentUser';
 import { useAccountPaymentMethods } from '../../../../../../../src/hooks/data/account/useAccountPaymentMethods';
 import { SettingsCardActions } from '../../../../../../../src/components/settings/SettingsCardActions';
 import { SettingsCard } from '../../../../../../../src/components/settings/SettingsCard';
+import { User } from '../../../../../../../src/components/providers/AppAuthProvider';
+import { useCurrentUser } from '../../../../../../../../../packages/auth-client/src/useCurrentUser';
 import { PaymentMethodInfo } from './PaymentMethodInfo';
 
 export function PaymentSettingsCard() {
-    const currentUser = useCurrentUser();
+    const currentUser = useCurrentUser<User>();
     const accountId = currentUser.data?.user?.accountIds[0];
     const billing = useAccountPaymentMethods(accountId);
 

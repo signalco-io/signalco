@@ -1,9 +1,8 @@
 'use client';
 
 import { QueryList } from '@signalco/ui/QueryList';
+import { SignedOut, SignedIn } from '@signalco/auth-client/components';
 import { InAppCtaSignUp } from '../../shared/InAppCtaSignUp';
-import { SignedOut } from '../../auth/SignedOut';
-import { SignedIn } from '../../auth/SignedIn';
 import { useProcesses } from '../../../src/hooks/useProcesses';
 import { ProcessesListItem } from './ProcessesListItem';
 import { ProcessCreateForm } from './ProcessCreateForm';

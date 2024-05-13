@@ -1,6 +1,7 @@
 import { Message } from 'openai/resources/beta/threads/messages';
 import { UseMutationResult, useMutation, useQueryClient, QueryClient, QueryKey } from '@tanstack/react-query';
-import { useCurrentUser } from '../users/useCurrentUser';
+import { User } from '../../../components/providers/AppAuthProvider';
+import { useCurrentUser } from '../../../../../../packages/auth-client/src/useCurrentUser';
 
 export async function sendThreadMessage(workerId: string, threadId: string, message: string) {
     const response = await fetch('/api/workers/' + workerId + '/threads/' + threadId + '/messages', {
@@ -30,7 +31,7 @@ export function useThreadMessageSend(workerId: string, threadId: string): UseMut
     previousItems: unknown;
 }> {
     const client = useQueryClient();
-    const currentUser = useCurrentUser();
+    const currentUser = useCurrentUser<User>();
     return useMutation({
         mutationFn: (message: string) => sendThreadMessage(workerId, threadId, message),
         onMutate: async (newItem) => ({
