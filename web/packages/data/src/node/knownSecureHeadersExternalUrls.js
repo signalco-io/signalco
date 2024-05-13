@@ -50,11 +50,6 @@ export const knownSecureHeadersExternalUrls = {
     },
     checkly: {
         connectSrc: ['https://api.checklyhq.com']
-    },
-    clerk: {
-        imgSrc: ['https://img.clerk.com'],
-        scriptSrc: ['https://*.clerk.accounts.dev'],
-        connectSrc: ['https://*.clerk.accounts.dev', 'https://img.clerk.com']
     }
 };
 

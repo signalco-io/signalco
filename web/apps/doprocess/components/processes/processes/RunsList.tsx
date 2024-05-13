@@ -2,8 +2,9 @@
 
 import { QueryList } from '@signalco/ui/QueryList';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
-import { SignedIn, SignedOut } from '@clerk/nextjs';
 import { InAppCtaSignUp } from '../../shared/InAppCtaSignUp';
+import { SignedOut } from '../../auth/SignedOut';
+import { SignedIn } from '../../auth/SignedIn';
 import { useProcessRuns } from '../../../src/hooks/useProcessRuns';
 import { useProcessesRuns } from '../../../src/hooks/useProcessesRuns';
 import { RunsListItem } from './RunsListItem';
