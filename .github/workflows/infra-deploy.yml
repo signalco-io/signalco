@@ -72,6 +72,17 @@ jobs:
       baseRef: ${{ github.ref }}
       command: "up"
     secrets: inherit
+
+  infra_doprocess_up:
+    name: "DoProcess infrastructure (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.infra == 'true'
+    uses: ./.github/workflows/infra-deploy_reusable.yml
+    with:
+      project: "doprocess"
+      baseRef: ${{ github.ref }}
+      command: "up"
+    secrets: inherit
   
   vercel_blog_deploy:
     name: "Vercel Blog (deploy)"
