@@ -1,4 +1,6 @@
-import { documentDelete, documentGet, documentRename, documentSetData, documentSetSharedWithUsers, getDocumentIdByPublicId } from '../../../../src/lib/repo/documentsRepository';
+import { entityIdByPublicId } from '../../../../src/lib/repo/shared';
+import { documentDelete, documentGet, documentRename, documentSetData, documentSetSharedWithUsers } from '../../../../src/lib/repo/documentsRepository';
+import { cosmosDataContainerDocuments } from '../../../../src/lib/db/client';
 import { ensureUserId, optionalUserId } from '../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../src/lib/api/apiParam';
 
@@ -8,7 +10,7 @@ export async function GET(_request: Request, { params }: { params: { id: string 
     const documentPublicId = requiredParamString(params.id);
     const { userId } = optionalUserId();
 
-    const documentId = await getDocumentIdByPublicId(documentPublicId);
+    const documentId = await entityIdByPublicId(cosmosDataContainerDocuments(), documentPublicId);
     if (documentId == null)
         return new Response(null, { status: 404 });
 
@@ -21,7 +23,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     const documentPublicId = requiredParamString(params.id);
     const { userId } = ensureUserId();
 
-    const documentId = await getDocumentIdByPublicId(documentPublicId);
+    const documentId = await entityIdByPublicId(cosmosDataContainerDocuments(), documentPublicId);
     if (documentId == null)
         return new Response(null, { status: 404 });
 
@@ -44,7 +46,7 @@ export async function DELETE(_request: Request, { params }: { params: { id: stri
     const documentPublicId = requiredParamString(params.id);
     const { userId } = ensureUserId();
 
-    const documentId = await getDocumentIdByPublicId(documentPublicId);
+    const documentId = await entityIdByPublicId(cosmosDataContainerDocuments(), documentPublicId);
     if (documentId == null)
         return new Response(null, { status: 404 });
 
