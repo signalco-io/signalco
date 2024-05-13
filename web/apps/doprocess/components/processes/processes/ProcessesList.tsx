@@ -1,8 +1,9 @@
 'use client';
 
 import { QueryList } from '@signalco/ui/QueryList';
-import { SignedIn, SignedOut } from '@clerk/nextjs';
 import { InAppCtaSignUp } from '../../shared/InAppCtaSignUp';
+import { SignedOut } from '../../auth/SignedOut';
+import { SignedIn } from '../../auth/SignedIn';
 import { useProcesses } from '../../../src/hooks/useProcesses';
 import { ProcessesListItem } from './ProcessesListItem';
 import { ProcessCreateForm } from './ProcessCreateForm';
