@@ -154,6 +154,17 @@ jobs:
       command: "preview"
     secrets: inherit
 
+  doprocess_infra_preview:
+    name: "DoProcess infrastructure (preview)"
+    uses: ./.github/workflows/infra-deploy_reusable.yml
+    needs: changes
+    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
+    with:
+      project: "doprocess"
+      baseRef: ${{ github.base_ref }}
+      command: "preview"
+    secrets: inherit
+
   analyze_blog:
     name: "Blog (analysis)"
     needs: changes
