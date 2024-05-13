@@ -1,32 +1,30 @@
-import { Config, getStack } from '@pulumi/pulumi';
+import { Config, getStack } from '@pulumi/pulumi/index.js';
 import { ResourceGroup } from '@pulumi/azure-native/resources/index.js';
-import { Queue } from '@pulumi/azure-native/storage';
 import { DatabaseAccount, SqlResourceSqlDatabase, SqlResourceSqlContainer, DatabaseAccountOfferType, listDatabaseAccountConnectionStringsOutput } from '@pulumi/azure-native/documentdb/index.js';
 import { nextJsApp } from '@infra/pulumi/vercel';
 import { dnsRecord } from '@infra/pulumi/cloudflare';
 import { ProjectDomain, ProjectEnvironmentVariable } from '@pulumiverse/vercel';
 import { CommunicationService, EmailService, Domain, DomainManagement, UserEngagementTracking, SenderUsername, listCommunicationServiceKeysOutput } from '@pulumi/azure-native/communication/index.js';
-import { createStorageAccount } from '@infra/pulumi/azure';
 
 const up = async () => {
     const config = new Config();
     const stack = getStack();
-    const resourceGroupName = `workingparty-${stack}`;
+    const resourceGroupName = `doprocess-${stack}`;
 
     let domainName = undefined;
     let subdomain = '';
     if (stack === 'next') {
-        domainName = 'next.workingparty.ai';
+        domainName = 'next.doprocess.app';
         subdomain = 'next';
     }
-    else if (stack === 'production') domainName = 'workingparty.ai';
+    else if (stack === 'production') domainName = 'doprocess.app';
     if (!domainName) throw new Error('Domain name not found');
 
     const resourceGroup = new ResourceGroup(resourceGroupName);
 
     // Create an Azure Cosmos DB Account for SQL API
-    const cosmosAccountName = 'wpdb';
-    const databaseName = 'wpdata'; // Provide a name for your SQL database
+    const cosmosAccountName = 'dpdb';
+    const databaseName = 'dpdata'; // Provide a name for your SQL database
     const cosmosDbAccount = new DatabaseAccount(cosmosAccountName, {
         resourceGroupName: resourceGroup.name,
         databaseAccountOfferType: DatabaseAccountOfferType.Standard,
@@ -59,7 +57,7 @@ const up = async () => {
     // Creating the containers inside the database
     const containerNames = ['login-requests', 'accounts', 'users', 'plans'];
     const emailContainerNames = ['email-user'];
-    const accountContainerNames = ['workers', 'threads', 'usage', 'subscriptions'];
+    const accountContainerNames = ['documents', 'processes', 'taskdefinitions', 'processruns', 'processruntasks'];
     containerNames.map((containerName) =>
         new SqlResourceSqlContainer(`dbcontainer-${containerName}`, {
             resourceGroupName: resourceGroup.name,
@@ -106,22 +104,14 @@ const up = async () => {
         }),
     );
 
-    // Create storage and queues
-    const storage = createStorageAccount(resourceGroup, 'wpstorage', false);
-    const storageQueue = new Queue('wp-email-queue', {
-        accountName: storage.storageAccount.name,
-        resourceGroupName: resourceGroup.name,
-        queueName: 'email-queue',
-    });
-
     // Create ACS
-    const aes = new EmailService('wp-azure-email-service', {
+    const aes = new EmailService('dp-azure-email-service', {
         dataLocation: 'Europe',
-        emailServiceName: 'wpemail',
+        emailServiceName: 'dpemail',
         location: 'Global',
         resourceGroupName: resourceGroup.name,
     });
-    const aesDomain = new Domain('wp-aes-domain', {
+    const aesDomain = new Domain('dp-aes-domain', {
         resourceGroupName: resourceGroup.name,
         emailServiceName: aes.name,
         domainManagement: DomainManagement.CustomerManaged,
@@ -132,43 +122,43 @@ const up = async () => {
     if (aesDomain.verificationRecords.domain) {
         const aesDomainVerifyDataName = aesDomain.verificationRecords.domain.apply(domainVerification => domainVerification?.name ?? '');
         const aesDomainVerifyDataValue = aesDomain.verificationRecords.domain.apply(domainVerification => domainVerification?.value ?? '');
-        dnsRecord('wp-aes-domain-domainverify', aesDomainVerifyDataName, aesDomainVerifyDataValue, 'TXT', false);
+        dnsRecord('dp-aes-domain-domainverify', aesDomainVerifyDataName, aesDomainVerifyDataValue, 'TXT', false);
     }
     if (aesDomain.verificationRecords.sPF) {
         const aesDomainVerifySpfName = aesDomain.verificationRecords.sPF.apply(dkimVerification => dkimVerification?.name ?? '');
         const aesDomainVerifySpfValue = aesDomain.verificationRecords.sPF.apply(dkimVerification => dkimVerification?.value ?? '');
-        dnsRecord('wp-aes-domain-spf', aesDomainVerifySpfName, aesDomainVerifySpfValue, 'TXT', false);
+        dnsRecord('dp-aes-domain-spf', aesDomainVerifySpfName, aesDomainVerifySpfValue, 'TXT', false);
     }
     if (aesDomain.verificationRecords.dKIM) {
         const aesDomainVerifyDkimName = aesDomain.verificationRecords.dKIM.apply(dkimVerification => subdomain ? (`${dkimVerification?.name ?? ''}.${subdomain}`) : dkimVerification?.name ?? '');
         const aesDomainVerifyDkimValue = aesDomain.verificationRecords.dKIM.apply(dkimVerification => dkimVerification?.value ?? '');
-        dnsRecord('wp-aes-domain-dkim', aesDomainVerifyDkimName, aesDomainVerifyDkimValue, 'CNAME', false);
+        dnsRecord('dp-aes-domain-dkim', aesDomainVerifyDkimName, aesDomainVerifyDkimValue, 'CNAME', false);
     }
     if (aesDomain.verificationRecords.dKIM2) {
         const aesDomainVerifyDkimName = aesDomain.verificationRecords.dKIM2.apply(dkimVerification => subdomain ? (`${dkimVerification?.name ?? ''}.${subdomain}`) : dkimVerification?.name ?? '');
         const aesDomainVerifyDkimValue = aesDomain.verificationRecords.dKIM2.apply(dkimVerification => dkimVerification?.value ?? '');
-        dnsRecord('wp-aes-domain-dkim2', aesDomainVerifyDkimName, aesDomainVerifyDkimValue, 'CNAME', false);
+        dnsRecord('dp-aes-domain-dkim2', aesDomainVerifyDkimName, aesDomainVerifyDkimValue, 'CNAME', false);
     }
     // NOTE: Domain needs to be verified manually in Azure Communication Services
 
-    new SenderUsername('wp-aes-sender-notifications', {
+    new SenderUsername('dp-aes-sender-notifications', {
         resourceGroupName: resourceGroup.name,
         emailServiceName: aes.name,
         domainName: aesDomain.name,
-        displayName: 'WorkingParty Notifications',
+        displayName: 'DoProcess Notifications',
         senderUsername: 'notifications',
         username: 'notifications',
     });
-    new SenderUsername('wp-aes-sender-system', {
+    new SenderUsername('dp-aes-sender-system', {
         resourceGroupName: resourceGroup.name,
         emailServiceName: aes.name,
         domainName: aesDomain.name,
-        displayName: 'WorkingParty',
+        displayName: 'DoProcess',
         senderUsername: 'system',
         username: 'system',
     });
-    const communicaionService = new CommunicationService('wp-azure-communication-service', {
-        communicationServiceName: `wpacs-${stack}`,
+    const communicaionService = new CommunicationService('dp-azure-communication-service', {
+        communicationServiceName: `dpacs-${stack}`,
         dataLocation: 'Europe',
         location: 'Global',
         resourceGroupName: resourceGroup.name,
@@ -180,72 +170,48 @@ const up = async () => {
     }).apply(keys => keys.primaryConnectionString ?? '');
 
     // Vercel setup
-    const app = nextJsApp('wp', 'workingparty', 'web/apps/workingparty');
+    const app = nextJsApp('dp', 'doprocess', 'web/apps/doprocess');
 
-    new ProjectDomain('vercel-wp-domain', {
+    new ProjectDomain('vercel-dp-domain', {
         projectId: app.projectId,
         domain: domainName,
     });
 
-    new ProjectEnvironmentVariable('vercel-wp-env-acs', {
+    new ProjectEnvironmentVariable('vercel-dp-env-acs', {
         projectId: app.projectId,
         key: 'ACS_CONNECTION_STRING',
         value: acsPrimaryConnectionString,
         targets: stack === 'production' ? ['production'] : ['preview'],
     });
-    new ProjectEnvironmentVariable('vercel-wp-env-cosmos', {
+    new ProjectEnvironmentVariable('vercel-dp-env-cosmos', {
         projectId: app.projectId,
         key: 'COSMOSDB_CONNECTION_STRING',
         value: cosmosPrimaryConnectionString,
         targets: stack === 'production' ? ['production'] : ['preview'],
     });
-    new ProjectEnvironmentVariable('vercel-wp-env-appdomain', {
+    new ProjectEnvironmentVariable('vercel-dp-env-appdomain', {
         projectId: app.projectId,
         key: 'NEXT_PUBLIC_APP_DOMAIN',
         value: domainName,
         targets: stack === 'production' ? ['production'] : ['preview'],
     });
-    new ProjectEnvironmentVariable('vercel-wp-env-emaildomain', {
+    new ProjectEnvironmentVariable('vercel-dp-env-emaildomain', {
         projectId: app.projectId,
         key: 'NEXT_PUBLIC_APP_EMAILDOMAIN',
         value: domainName,
         targets: stack === 'production' ? ['production'] : ['preview'],
     });
-    new ProjectEnvironmentVariable('vercel-wp-env-openai', {
+    new ProjectEnvironmentVariable('vercel-dp-env-openai', {
         projectId: app.projectId,
         key: 'OPENAI_API_KEY',
         value: config.requireSecret('openaikey'),
         targets: stack === 'production' ? ['production'] : ['preview'],
     });
-    new ProjectEnvironmentVariable('vercel-wp-env-stripepublic', {
-        projectId: app.projectId,
-        key: 'NEXT_PUBLIC_STRIPE_PUBLISHABLE',
-        value: config.requireSecret('stripepublic'),
-        targets: stack === 'production' ? ['production'] : ['preview'],
-    });
-    new ProjectEnvironmentVariable('vercel-wp-env-stripesecret', {
-        projectId: app.projectId,
-        key: 'STRIPE_SECRETKEY',
-        value: config.requireSecret('stripesecret'),
-        targets: stack === 'production' ? ['production'] : ['preview'],
-    });
-    new ProjectEnvironmentVariable('vercel-wp-env-stripewebhook', {
-        projectId: app.projectId,
-        key: 'STRIPE_WEBHOOK_SECRET',
-        value: config.requireSecret('stripewebhooksecret'),
-        targets: stack === 'production' ? ['production'] : ['preview'],
-    });
-    new ProjectEnvironmentVariable('vercel-wp-env-jwtsecret', {
-        projectId: app.projectId,
-        key: 'WP_JWT_SIGN_SECRET',
-        value: config.requireSecret('jwtsecret'),
-        targets: stack === 'production' ? ['production'] : ['preview'],
-    });
 
     if (stack === 'next') {
-        dnsRecord('vercel-wp', 'next', 'cname.vercel-dns.com', 'CNAME', false);
+        dnsRecord('vercel-dp', 'next', 'cname.vercel-dns.com', 'CNAME', false);
     } else if (stack === 'production') {
-        dnsRecord('vercel-wp', '@', '76.76.21.21', 'A', false);
+        dnsRecord('vercel-dp', '@', '76.76.21.21', 'A', false);
     }
 };
 

@@ -6,7 +6,8 @@
   "pipeline": {
     "build": {
       "dependsOn": [
-        "^build"
+        "^build",
+        "lint"
       ]
     },
     "lint": {
@@ -14,12 +15,12 @@
         "^lint"
       ]
     },
-    "preview": {
+    "preview-next": {
       "dependsOn": [
         "build"
       ]
     },
-    "deploy": {
+    "up-next": {
       "dependsOn": [
         "build"
       ]

@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "build": "turbo build",
-    "preview": "turbo preview",
+    "preview-next": "turbo preview-next",
+    "up-next": "turbo up-next",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

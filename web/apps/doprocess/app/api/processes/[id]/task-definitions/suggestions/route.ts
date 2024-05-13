@@ -1,6 +1,8 @@
 import { OpenAI } from 'openai';
 import { ProcessTaskDefinitionsSuggestionsDto } from '../../../../dtos/dtos';
-import { getProcess, getProcessIdByPublicId, getTaskDefinitions } from '../../../../../../src/lib/repo/processesRepository';
+import { entityIdByPublicId } from '../../../../../../src/lib/repo/shared';
+import { getProcess, getTaskDefinitions } from '../../../../../../src/lib/repo/processesRepository';
+import { cosmosDataContainerProcesses } from '../../../../../../src/lib/db/client';
 import { ensureUserId } from '../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
 
@@ -11,7 +13,7 @@ export async function GET(_request: Request, { params }: { params: { id: string 
 
     const { userId } = ensureUserId();
 
-    const processId = await getProcessIdByPublicId(processPublicId);
+    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
     if (processId == null)
         return new Response(null, { status: 404 });
 

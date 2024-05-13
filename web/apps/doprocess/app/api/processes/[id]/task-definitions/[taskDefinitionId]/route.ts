@@ -1,5 +1,7 @@
-import { changeTaskDefinitionOrder, changeTaskDefinitionText, changeTaskDefinitionType, deleteTaskDefinition, getProcess, getProcessIdByPublicId, getTaskDefinition, getTaskDefinitionIdByPublicId } from '../../../../../../src/lib/repo/processesRepository';
+import { entityIdByPublicId } from '../../../../../../src/lib/repo/shared';
+import { changeTaskDefinitionOrder, changeTaskDefinitionText, changeTaskDefinitionType, deleteTaskDefinition, getProcess, getTaskDefinition, getTaskDefinitionIdByPublicId } from '../../../../../../src/lib/repo/processesRepository';
 import { documentCreate, documentGet } from '../../../../../../src/lib/repo/documentsRepository';
+import { cosmosDataContainerProcesses } from '../../../../../../src/lib/db/client';
 import { ensureUserId, optionalUserId } from '../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
 
@@ -11,7 +13,7 @@ export async function GET(_request: Request, { params }: { params: { id: string,
 
     const { userId } = optionalUserId();
 
-    const processId = await getProcessIdByPublicId(processPublicId);
+    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
     if (processId == null)
         return new Response(null, { status: 404 });
     const taskDefinitionId = await getTaskDefinitionIdByPublicId(processPublicId, taskDefinitionPublicId);
@@ -37,7 +39,7 @@ export async function PUT(request: Request, { params }: { params: { id: string, 
 
     const { userId } = ensureUserId();
 
-    const processId = await getProcessIdByPublicId(processPublicId);
+    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
     if (processId == null)
         return new Response(null, { status: 404 });
     const taskDefinitionId = await getTaskDefinitionIdByPublicId(processPublicId, taskDefinitionPublicId);
@@ -89,7 +91,7 @@ export async function DELETE(_request: Request, { params }: { params: { id: stri
 
     const { userId } = ensureUserId();
 
-    const processId = await getProcessIdByPublicId(processPublicId);
+    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
     if (processId == null)
         return new Response(null, { status: 404 });
     const taskDefinitionId = await getTaskDefinitionIdByPublicId(processPublicId, taskDefinitionPublicId);

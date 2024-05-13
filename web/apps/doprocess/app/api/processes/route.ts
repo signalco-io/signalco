@@ -20,6 +20,6 @@ export async function POST(request: Request) {
     const basedOn = typeof req === 'object' && req != null && 'basedOn' in req && typeof req.basedOn === 'string' ? req.basedOn.toString() : undefined;
     const id = await createProcess(userId, name, basedOn);
 
-    const process = await getProcess(userId, Number(id));
+    const process = await getProcess(userId, id);
     return Response.json({ id: process?.publicId });
 }
