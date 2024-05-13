@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "@azure/cosmos": "4.0.0",
-    "@blocknote/core": "0.12.4",
-    "@blocknote/react": "0.12.4",
+    "@blocknote/core": "0.13.2",
+    "@blocknote/react": "0.13.2",
     "@clerk/nextjs": "4.29.12",
     "@clerk/themes": "1.7.12",
     "@dnd-kit/core": "6.1.0",
