@@ -1,8 +1,9 @@
 import { cookies } from 'next/headers';
+import { sanitizeEmail } from '@signalco/js';
 import { usersAssignAccount, usersCreate, usersGetByEmail } from '../../../../../src/lib/repository/usersRepository';
 import { loginRequestsUse } from '../../../../../src/lib/repository/loginRequests';
 import { accountCreate } from '../../../../../src/lib/repository/accountsRepository';
-import { sanitizeEmail } from '../../../../../src/lib/auth/sanitizeEmail';
+import { authConfig } from '../../../../../src/lib/auth/ensureAuthUserId';
 import { createJwt } from '../../../../../src/lib/auth/createJwt';
 
 export async function POST(request: Request) {
@@ -35,7 +36,13 @@ export async function POST(request: Request) {
         userId = createdUserId;
     }
 
-    const jwt = await createJwt(userId);
+    const jwt = await createJwt(
+        userId,
+        authConfig.namespace,
+        authConfig.issuer,
+        authConfig.audience,
+        '1h',
+        await authConfig.jwtSecretFactory());
 
     // Set header for JWT
     cookies().set('wp_session', jwt, {
