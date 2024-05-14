@@ -1,13 +1,28 @@
 import { SignJWT } from 'jose';
-import { jwtSecret } from './jwtSecret';
 
-export async function createJwt(userId: string) {
-    return await new SignJWT({ 'urn:example:claim': true })
+/**
+ * Create a JWT token.
+ * @param userId The user ID (subject)
+ * @param namespace The namespace (usually the app name)
+ * @param issuer The issuer (eg. `api`, etc.)
+ * @param audience The audience (eg. `web`, etc.)
+ * @param expirationTime The expiration time (eg. `1h`, `2h`, etc.)
+ * @param jwtSecret The encoded JWT secret.
+ * @returns The signed JWT token string.
+ */
+export async function createJwt(
+    userId: string,
+    namespace: string,
+    issuer: string,
+    audience: string,
+    expirationTime: string | number | Date,
+    jwtSecret: Uint8Array) {
+    return await new SignJWT()
         .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()
-        .setIssuer('urn:workingparty:issuer:api')
-        .setAudience('urn:workingparty:audience:web')
-        .setExpirationTime('2h')
+        .setIssuer(`urn:${namespace}:issuer:${issuer}`)
+        .setAudience(`urn:${namespace}:audience:${audience}`)
+        .setExpirationTime(expirationTime)
         .setSubject(userId)
-        .sign(jwtSecret());
+        .sign(jwtSecret);
 }
