@@ -1,9 +1,9 @@
+import { sanitizeEmail } from '@signalco/js';
 import UserLoginRequestEmail from '@signalco/email-templates/emails/user-login-request';
 import { appName, domain } from '../../../../src/providers/env';
 import { toPhrase } from '../../../../src/lib/shared/phrases/toPhrase';
 import { loginRequestsCreate } from '../../../../src/lib/repository/loginRequests';
 import { sendEmail } from '../../../../src/lib/email/emailService';
-import { sanitizeEmail } from '../../../../src/lib/auth/sanitizeEmail';
 
 export const runtime = 'edge';
 
