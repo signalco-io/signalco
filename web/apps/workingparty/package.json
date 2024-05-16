@@ -51,7 +51,7 @@
         "react-dom": "18.3.1",
         "react-email": "2.1.2",
         "react-markdown": "9.0.1",
-        "sharp": "0.33.3",
+        "sharp": "0.33.4",
         "stripe": "15.6.0",
         "tailwindcss": "3.4.3",
         "tailwindcss-animate": "1.0.7",
