@@ -50,7 +50,7 @@
         "@tailwindcss/typography": "0.5.13"
     },
     "devDependencies": {
-        "@axe-core/playwright": "4.9.0",
+        "@axe-core/playwright": "4.9.1",
         "@playwright/test": "1.44.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
