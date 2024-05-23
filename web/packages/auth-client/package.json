@@ -16,6 +16,7 @@
     "@signalco/tailwindcss-config-signalco": "workspace:*",
     "@signalco/ui-primitives": "workspace:*",
     "@signalco/tsconfig": "workspace:*",
+    "@signalco/ui-icons": "workspace:*",
     "@types/react": "18.3.2",
     "@types/react-dom": "18.3.0",
     "next": "14.2.3",

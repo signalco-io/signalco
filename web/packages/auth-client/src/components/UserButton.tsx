@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@signalco/ui-primitives/Button';
 
 export function UserButton() {
