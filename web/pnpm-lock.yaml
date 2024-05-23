@@ -1298,6 +1298,9 @@ importers:
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
+      '@signalco/ui-icons':
+        specifier: workspace:*
+        version: link:../ui-icons
       '@signalco/ui-primitives':
         specifier: workspace:*
         version: link:../ui-primitives
