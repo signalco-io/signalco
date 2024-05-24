@@ -1,8 +1,9 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { BlockNoteView, Theme, darkDefaultTheme, useCreateBlockNote } from '@blocknote/react';
-import '@blocknote/core/style.css';
+import { useCreateBlockNote } from '@blocknote/react';
+import { BlockNoteView, darkDefaultTheme, Theme } from '@blocknote/mantine';
+import '@blocknote/shadcn/style.css';
 import { PartialBlock } from '@blocknote/core';
 
 type EditorProps = {
