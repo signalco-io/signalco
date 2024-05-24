@@ -1,9 +1,20 @@
-import { WithAuthContext, withAuth } from './withAuth';
+import { UserBase, WithAuthContext, withAuth } from './withAuth';
+import { AuthConfig } from './AuthConfig';
 
-export function InitAuth({ }): {
-    withAuth: <TUser>(handler: (ctx: WithAuthContext<TUser>) => Promise<Response>) => Promise<Response>;
+const defaultConfig = {
+    namespace: 'app',
+    issuer: 'api',
+    audience: 'web',
+    cookieName: 'auth_session',
+    jwtSecretFactory: async () => { throw new Error('Not implemented'); },
+    getUser: async () => { throw new Error('Not implemented'); }
+};
+
+export function InitAuth<TUser extends UserBase>(config: AuthConfig<TUser>): {
+    withAuth: (handler: (ctx: WithAuthContext<TUser>) => Promise<Response>) => Promise<Response>;
 } {
+    const initializedConfig = { ...defaultConfig, ...config };
     return {
-        withAuth
+        withAuth: (handler) => withAuth(initializedConfig, handler)
     };
 }

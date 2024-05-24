@@ -20,6 +20,12 @@ export type DbWithAccount = {
     accountId: string;
 };
 
+export type DbUser = DbWithPublicId & DbWithTimestamps & {
+    id: string;
+    email: string;
+    accountIds: string[];
+}
+
 export type DbProcess = DbWithPublicId & DbWithTimestamps & DbWithBlame & DbWithShare & DbWithAccount & {
     id: string;
     name: string;
