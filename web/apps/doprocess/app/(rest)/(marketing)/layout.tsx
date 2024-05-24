@@ -11,7 +11,7 @@ export default function RootMarketingLayout({ children, }: {
 }) {
     return (
         <>
-            <PageNav fullWidth logo={<DoProcessLogo />}>
+            <PageNav fullWidth logo={<DoProcessLogo height={52} />}>
                 <PageNavMenu>
                     <SignedOut>
                         <SignInButton />
