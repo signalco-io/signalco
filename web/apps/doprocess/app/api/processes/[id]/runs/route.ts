@@ -1,3 +1,4 @@
+import { withAuth } from '@signalco/auth-server';
 import { entityIdByPublicId } from '../../../../../src/lib/repo/shared';
 import { getProcessRun, getProcessRuns, runProcess } from '../../../../../src/lib/repo/processesRepository';
 import { cosmosDataContainerProcesses } from '../../../../../src/lib/db/client';
@@ -30,13 +31,13 @@ export async function POST(request: Request, { params }: { params: { id: string 
     if (name == null)
         throw new Error('Missing name');
 
-    const { userId } = ensureUserId();
+    return await withAuth(async ({ accountId, userId }) => {
+        const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
+        if (processId == null)
+            return new Response(null, { status: 404 });
 
-    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
-    if (processId == null)
-        return new Response(null, { status: 404 });
-
-    const id = await runProcess(userId, processId, name);
-    const processRun = await getProcessRun(userId, processId, id);
-    return Response.json({ id: processRun?.publicId });
+        const id = await runProcess(accountId, userId, processId, name);
+        const processRun = await getProcessRun(userId, processId, id);
+        return Response.json({ id: processRun?.publicId });
+    });
 }

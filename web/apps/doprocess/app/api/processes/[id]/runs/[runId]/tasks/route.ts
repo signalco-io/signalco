@@ -1,7 +1,8 @@
+import { withAuth } from '@signalco/auth-server';
 import { entityIdByPublicId } from '../../../../../../../src/lib/repo/shared';
 import { getProcessRunIdByPublicId, getTaskDefinitionIdByPublicId, getTaskDefinitions, getTasks, setTaskState } from '../../../../../../../src/lib/repo/processesRepository';
 import { cosmosDataContainerProcesses } from '../../../../../../../src/lib/db/client';
-import { ensureUserId, optionalUserId } from '../../../../../../../src/lib/auth/apiAuth';
+import { optionalUserId } from '../../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../../src/lib/api/apiParam';
 
 export const runtime = 'edge';
@@ -35,33 +36,33 @@ export async function GET(_request: Request, { params }: { params: { id: string,
 export async function POST(request: Request, { params }: { params: { id: string, runId: string } }) {
     const processPublicId = requiredParamString(params.id);
     const runPublicId = requiredParamString(params.runId);
-    const { userId } = ensureUserId();
+    return await withAuth(async ({ accountId, userId }) => {
+        const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
+        if (processId == null)
+            return new Response(null, { status: 404 });
+        const runId = await getProcessRunIdByPublicId(processPublicId, runPublicId);
+        if (runId == null)
+            return new Response(null, { status: 404 });
 
-    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
-    if (processId == null)
-        return new Response(null, { status: 404 });
-    const runId = await getProcessRunIdByPublicId(processPublicId, runPublicId);
-    if (runId == null)
-        return new Response(null, { status: 404 });
+        const data = await request.json();
 
-    const data = await request.json();
+        let taskDefinitionPublicId = null;
+        if (data != null && typeof data === 'object' && 'taskDefinitionId' in data && typeof data.taskDefinitionId === 'string') {
+            taskDefinitionPublicId = data.taskDefinitionId;
+        }
+        if (taskDefinitionPublicId == null)
+            return new Response('Task definition ID is required', { status: 400 });
+        const taskDefinitionId = await getTaskDefinitionIdByPublicId(processPublicId, taskDefinitionPublicId);
+        if (taskDefinitionId == null)
+            return new Response(null, { status: 404 });
 
-    let taskDefinitionPublicId = null;
-    if (data != null && typeof data === 'object' && 'taskDefinitionId' in data && typeof data.taskDefinitionId === 'string') {
-        taskDefinitionPublicId = data.taskDefinitionId;
-    }
-    if (taskDefinitionPublicId == null)
-        return new Response('Task definition ID is required', { status: 400 });
-    const taskDefinitionId = await getTaskDefinitionIdByPublicId(processPublicId, taskDefinitionPublicId);
-    if (taskDefinitionId == null)
-        return new Response(null, { status: 404 });
+        if (data != null && typeof data === 'object' && 'state' in data && typeof data.state === 'string') {
+            if (data.state !== 'new' && data.state !== 'completed')
+                return Response.json('Invalid status', { status: 400 });
 
-    if (data != null && typeof data === 'object' && 'state' in data && typeof data.state === 'string') {
-        if (data.state !== 'new' && data.state !== 'completed')
-            return Response.json('Invalid status', { status: 400 });
+            await setTaskState(accountId, userId, processId, runId, taskDefinitionId, data.state);
+        }
 
-        await setTaskState(userId, processId, runId, taskDefinitionId, data.state);
-    }
-
-    return Response.json(null);
+        return Response.json(null);
+    });
 }

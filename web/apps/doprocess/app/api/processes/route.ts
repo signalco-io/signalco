@@ -18,7 +18,7 @@ export async function POST(request: Request) {
         throw new Error('Missing name');
 
     const basedOn = typeof req === 'object' && req != null && 'basedOn' in req && typeof req.basedOn === 'string' ? req.basedOn.toString() : undefined;
-    const id = await createProcess(userId, name, basedOn);
+    const id = await createProcess(accountId, userId, name, basedOn);
 
     const process = await getProcess(userId, id);
     return Response.json({ id: process?.publicId });

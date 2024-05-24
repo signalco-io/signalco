@@ -2,9 +2,8 @@
 
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Row } from '@signalco/ui-primitives/Row';
+import { SignInButton, SignUpButton } from '@signalco/auth-client/components';
 import { ViewEmptyPlaceholder } from '../processes/processes/ViewEmptyPlaceholder';
-import { SignUpButton } from '../auth/SignUpButton';
-import { SignInButton } from '../auth/SignInButton';
 
 export function InAppCtaSignUp() {
     return (
