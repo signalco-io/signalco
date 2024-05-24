@@ -1,4 +1,10 @@
-export async function withAuth(handler: (ctx: { userId: string, user: DbUser, accountId: string }) => Promise<Response>) {
+export type WithAuthContext<TUser> = {
+    userId: string;
+    user: TUser;
+    accountId: string;
+};
+
+export async function withAuth<TUser>(handler: (ctx: WithAuthContext<TUser>) => Promise<Response>) {
     const userInfoOrResponse = await ensureAuthUserId();
     if (userInfoOrResponse instanceof Response)
         return userInfoOrResponse;

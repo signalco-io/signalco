@@ -1,7 +1,7 @@
-import { withAuth } from '@signalco/auth-server';
 import { entityIdByPublicId } from '../../../../../src/lib/repo/shared';
 import { createTaskDefinition, getTaskDefinition, getTaskDefinitions } from '../../../../../src/lib/repo/processesRepository';
 import { cosmosDataContainerProcesses } from '../../../../../src/lib/db/client';
+import { withAuth } from '../../../../../src/lib/auth/auth';
 import { optionalUserId } from '../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../src/lib/api/apiParam';
 

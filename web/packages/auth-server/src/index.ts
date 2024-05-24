@@ -1,1 +1,2 @@
-export * from './withAuth';
+export * from './InitAuth';
+export type { WithAuthContext } from './withAuth';

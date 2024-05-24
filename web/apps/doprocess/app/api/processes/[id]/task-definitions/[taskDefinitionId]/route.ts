@@ -1,9 +1,9 @@
-import { withAuth } from '@signalco/auth-server';
 import { entityIdByPublicId } from '../../../../../../src/lib/repo/shared';
 import { changeTaskDefinitionOrder, changeTaskDefinitionText, changeTaskDefinitionType, deleteTaskDefinition, getProcess, getTaskDefinition, getTaskDefinitionIdByPublicId } from '../../../../../../src/lib/repo/processesRepository';
 import { documentCreate, documentGet } from '../../../../../../src/lib/repo/documentsRepository';
 import { cosmosDataContainerProcesses } from '../../../../../../src/lib/db/client';
-import { ensureUserId, optionalUserId } from '../../../../../../src/lib/auth/apiAuth';
+import { withAuth } from '../../../../../../src/lib/auth/auth';
+import { optionalUserId } from '../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
 
 export const runtime = 'edge';
@@ -90,15 +90,15 @@ export async function DELETE(_request: Request, { params }: { params: { id: stri
     const processPublicId = requiredParamString(params.id);
     const taskDefinitionPublicId = requiredParamString(params.taskDefinitionId);
 
-    const { userId } = ensureUserId();
+    return await withAuth(async ({ userId }) => {
+        const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
+        if (processId == null)
+            return new Response(null, { status: 404 });
+        const taskDefinitionId = await getTaskDefinitionIdByPublicId(processPublicId, taskDefinitionPublicId);
+        if (taskDefinitionId == null)
+            return new Response(null, { status: 404 });
 
-    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
-    if (processId == null)
-        return new Response(null, { status: 404 });
-    const taskDefinitionId = await getTaskDefinitionIdByPublicId(processPublicId, taskDefinitionPublicId);
-    if (taskDefinitionId == null)
-        return new Response(null, { status: 404 });
-
-    await deleteTaskDefinition(userId, processId, taskDefinitionId)
-    return Response.json(null);
+        await deleteTaskDefinition(userId, processId, taskDefinitionId)
+        return Response.json(null);
+    });
 }

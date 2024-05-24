@@ -1,7 +1,8 @@
 import { entityIdByPublicId } from '../../../../src/lib/repo/shared';
 import { deleteProcess, getProcess, processShareWithUsers, renameProcess } from '../../../../src/lib/repo/processesRepository';
 import { cosmosDataContainerProcesses } from '../../../../src/lib/db/client';
-import { ensureUserId, optionalUserId } from '../../../../src/lib/auth/apiAuth';
+import { withAuth } from '../../../../src/lib/auth/auth';
+import { optionalUserId } from '../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../src/lib/api/apiParam';
 
 export const runtime = 'edge';
@@ -26,32 +27,32 @@ export async function GET(_request: Request, { params }: { params: { id: string 
 
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
     const processPublicId = requiredParamString(params.id);
-    const { userId } = ensureUserId();
+    return await withAuth(async ({ userId }) => {
+        const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
+        if (processId == null)
+            return new Response(null, { status: 404 });
 
-    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
-    if (processId == null)
-        return new Response(null, { status: 404 });
+        const data = await request.json();
+        if (data != null && typeof data === 'object' && 'name' in data && typeof data.name === 'string') {
+            await renameProcess(userId, processId, data.name);
+        }
+        if (data != null && typeof data === 'object' && 'sharedWithUsers' in data && Array.isArray(data.sharedWithUsers) && data.sharedWithUsers.every(x => typeof x === 'string')) {
+            await processShareWithUsers(userId, processId, data.sharedWithUsers as string[]);
+        }
 
-    const data = await request.json();
-    if (data != null && typeof data === 'object' && 'name' in data && typeof data.name === 'string') {
-        await renameProcess(userId, processId, data.name);
-    }
-    if (data != null && typeof data === 'object' && 'sharedWithUsers' in data && Array.isArray(data.sharedWithUsers) && data.sharedWithUsers.every(x => typeof x === 'string')) {
-        await processShareWithUsers(userId, processId, data.sharedWithUsers as string[]);
-    }
-
-    return Response.json(null);
+        return Response.json(null);
+    });
 }
 
 export async function DELETE(_request: Request, { params }: { params: { id: string } }) {
     const processPublicId = requiredParamString(params.id);
-    const { userId } = ensureUserId();
+    return await withAuth(async ({ userId }) => {
+        const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
+        if (processId == null)
+            return new Response(null, { status: 404 });
 
-    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
-    if (processId == null)
-        return new Response(null, { status: 404 });
+        await deleteProcess(userId, processId);
 
-    await deleteProcess(userId, processId);
-
-    return Response.json(null);
+        return Response.json(null);
+    });
 }

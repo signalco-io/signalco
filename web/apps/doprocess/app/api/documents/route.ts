@@ -1,14 +1,14 @@
-import { withAuth } from '@signalco/auth-server';
 import { documentCreate, documentGet, documentsGet } from '../../../src/lib/repo/documentsRepository';
-import { ensureUserId } from '../../../src/lib/auth/apiAuth';
+import { withAuth } from '../../../src/lib/auth/auth';
 
 export const runtime = 'edge';
 
 export async function GET() {
-    const { userId } = ensureUserId();
-    const documents = await documentsGet(userId);
-    const documentsDto = documents.map(p => ({ ...p, id: p.publicId, publicId: undefined }));
-    return Response.json(documentsDto);
+    return await withAuth(async ({ userId }) => {
+        const documents = await documentsGet(userId);
+        const documentsDto = documents.map(p => ({ ...p, id: p.publicId, publicId: undefined }));
+        return Response.json(documentsDto);
+    });
 }
 
 export async function POST(request: Request) {
