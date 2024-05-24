@@ -1,7 +1,8 @@
+import { withAuth } from '@signalco/auth-server';
 import { entityIdByPublicId } from '../../../../../src/lib/repo/shared';
 import { createTaskDefinition, getTaskDefinition, getTaskDefinitions } from '../../../../../src/lib/repo/processesRepository';
 import { cosmosDataContainerProcesses } from '../../../../../src/lib/db/client';
-import { ensureUserId, optionalUserId } from '../../../../../src/lib/auth/apiAuth';
+import { optionalUserId } from '../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../src/lib/api/apiParam';
 
 export const runtime = 'edge';
@@ -31,13 +32,13 @@ export async function POST(request: Request, { params }: { params: { id: string 
     const data = await request.json();
     const text = data != null && typeof data === 'object' && 'text' in data && typeof data.text === 'string' ? data.text : '';
 
-    const { userId } = ensureUserId();
+    return await withAuth(async ({ accountId, userId }) => {
+        const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
+        if (processId == null)
+            return new Response(null, { status: 404 });
 
-    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
-    if (processId == null)
-        return new Response(null, { status: 404 });
-
-    const id = await createTaskDefinition(userId, processId, text);
-    const taskDefinition = await getTaskDefinition(userId, processId, id);
-    return Response.json({ id: taskDefinition?.publicId });
+        const id = await createTaskDefinition(accountId, userId, processId, text);
+        const taskDefinition = await getTaskDefinition(userId, processId, id);
+        return Response.json({ id: taskDefinition?.publicId });
+    });
 }

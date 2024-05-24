@@ -1,3 +1,4 @@
+import { withAuth } from '@signalco/auth-server';
 import { entityIdByPublicId } from '../../../../../../src/lib/repo/shared';
 import { changeTaskDefinitionOrder, changeTaskDefinitionText, changeTaskDefinitionType, deleteTaskDefinition, getProcess, getTaskDefinition, getTaskDefinitionIdByPublicId } from '../../../../../../src/lib/repo/processesRepository';
 import { documentCreate, documentGet } from '../../../../../../src/lib/repo/documentsRepository';
@@ -37,52 +38,52 @@ export async function PUT(request: Request, { params }: { params: { id: string, 
     const processPublicId = requiredParamString(params.id);
     const taskDefinitionPublicId = requiredParamString(params.taskDefinitionId);
 
-    const { userId } = ensureUserId();
+    return await withAuth(async ({ accountId, userId }) => {
+        const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
+        if (processId == null)
+            return new Response(null, { status: 404 });
+        const taskDefinitionId = await getTaskDefinitionIdByPublicId(processPublicId, taskDefinitionPublicId);
+        if (taskDefinitionId == null)
+            return new Response(null, { status: 404 });
 
-    const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
-    if (processId == null)
-        return new Response(null, { status: 404 });
-    const taskDefinitionId = await getTaskDefinitionIdByPublicId(processPublicId, taskDefinitionPublicId);
-    if (taskDefinitionId == null)
-        return new Response(null, { status: 404 });
+        const data = await request.json();
+        if (data != null && typeof data === 'object') {
+            // Update text (name)
+            if ('text' in data && typeof data.text === 'string') {
+                await changeTaskDefinitionText(userId, processId, taskDefinitionId, data.text);
+            }
 
-    const data = await request.json();
-    if (data != null && typeof data === 'object') {
-        // Update text (name)
-        if ('text' in data && typeof data.text === 'string') {
-            await changeTaskDefinitionText(userId, processId, taskDefinitionId, data.text);
-        }
-
-        // Update type
-        if ('type' in data && typeof data.type === 'string') {
-            const type = data.type;
-            let typeData = ('typeData' in data && typeof data.typeData === 'string') ? data.typeData : null;
-            if (!typeData && type === 'document') {
-                const process = await getProcess(userId, processId);
-                const taskDefinition = await getTaskDefinition(userId, processId, taskDefinitionId);
-                const documentName = [process?.name, taskDefinition?.text ?? 'New document'].filter(Boolean).join(' - ');
-                const documentId = await documentCreate(userId, documentName);
-                const document = await documentGet(userId, documentId);
-                if (document) {
-                    typeData = document?.publicId;
+            // Update type
+            if ('type' in data && typeof data.type === 'string') {
+                const type = data.type;
+                let typeData = ('typeData' in data && typeof data.typeData === 'string') ? data.typeData : null;
+                if (!typeData && type === 'document') {
+                    const process = await getProcess(userId, processId);
+                    const taskDefinition = await getTaskDefinition(userId, processId, taskDefinitionId);
+                    const documentName = [process?.name, taskDefinition?.text ?? 'New document'].filter(Boolean).join(' - ');
+                    const documentId = await documentCreate(accountId, userId, documentName);
+                    const document = await documentGet(userId, documentId);
+                    if (document) {
+                        typeData = document?.publicId;
+                    }
+                } else if (type === 'blank') {
+                    typeData = 'blank';
                 }
-            } else if (type === 'blank') {
-                typeData = 'blank';
-            }
-            if (!typeData) {
-                throw new Error('Invalid type');
+                if (!typeData) {
+                    throw new Error('Invalid type');
+                }
+
+                await changeTaskDefinitionType(userId, processId, taskDefinitionId, type, typeData);
             }
 
-            await changeTaskDefinitionType(userId, processId, taskDefinitionId, type, typeData);
+            // Update order
+            if ('order' in data && typeof data.order === 'string') {
+                await changeTaskDefinitionOrder(userId, processId, taskDefinitionId, data.order);
+            }
         }
 
-        // Update order
-        if ('order' in data && typeof data.order === 'string') {
-            await changeTaskDefinitionOrder(userId, processId, taskDefinitionId, data.order);
-        }
-    }
-
-    return Response.json(null);
+        return Response.json(null);
+    });
 }
 
 export async function DELETE(_request: Request, { params }: { params: { id: string, taskDefinitionId: string } }) {
