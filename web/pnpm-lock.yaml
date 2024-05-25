@@ -90,8 +90,8 @@ importers:
         specifier: 5.38.0
         version: 5.38.0(@tanstack/react-query@5.39.0(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
-        specifier: 1.2.2
-        version: 1.2.2(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
+        specifier: 1.3.1
+        version: 1.3.1(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
       '@vercel/speed-insights':
         specifier: 1.0.11
         version: 1.0.11(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
@@ -289,8 +289,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@vercel/analytics':
-        specifier: 1.2.2
-        version: 1.2.2(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
+        specifier: 1.3.1
+        version: 1.3.1(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
       autoprefixer:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
@@ -573,8 +573,8 @@ importers:
         specifier: 5.38.0
         version: 5.38.0(@tanstack/react-query@5.39.0(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
-        specifier: 1.2.2
-        version: 1.2.2(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
+        specifier: 1.3.1
+        version: 1.3.1(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
       classix:
         specifier: 2.1.37
         version: 2.1.37
@@ -906,8 +906,8 @@ importers:
         specifier: 5.38.0
         version: 5.38.0(@tanstack/react-query@5.39.0(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
-        specifier: 1.2.2
-        version: 1.2.2(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
+        specifier: 1.3.1
+        version: 1.3.1(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
       classix:
         specifier: 2.1.37
         version: 2.1.37
@@ -1030,8 +1030,8 @@ importers:
         specifier: 0.5.13
         version: 0.5.13(tailwindcss@3.4.3)
       '@vercel/analytics':
-        specifier: 1.2.2
-        version: 1.2.2(next@14.2.3(@babel/core@7.24.5)(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
+        specifier: 1.3.1
+        version: 1.3.1(next@14.2.3(@babel/core@7.24.5)(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
       autoprefixer:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
@@ -1199,8 +1199,8 @@ importers:
         specifier: 5.38.0
         version: 5.38.0(@tanstack/react-query@5.39.0(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
-        specifier: 1.2.2
-        version: 1.2.2(next@14.2.3(@babel/core@7.24.5)(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
+        specifier: 1.3.1
+        version: 1.3.1(next@14.2.3(@babel/core@7.24.5)(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
       classix:
         specifier: 2.1.37
         version: 2.1.37
@@ -5649,8 +5649,8 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  '@vercel/analytics@1.2.2':
-    resolution: {integrity: sha512-X0rctVWkQV1e5Y300ehVNqpOfSOufo7ieA5PIdna8yX/U7Vjz0GFsGf4qvAhxV02uQ2CVt7GYcrFfddXXK2Y4A==}
+  '@vercel/analytics@1.3.1':
+    resolution: {integrity: sha512-xhSlYgAuJ6Q4WQGkzYTLmXwhYl39sWjoMA3nHxfkvG+WdBT25c563a7QhwwKivEOZtPJXifYHR1m2ihoisbWyA==}
     peerDependencies:
       next: '>= 13'
       react: ^18 || ^19
@@ -15578,14 +15578,14 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vercel/analytics@1.2.2(next@14.2.3(@babel/core@7.24.5)(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)':
+  '@vercel/analytics@1.3.1(next@14.2.3(@babel/core@7.24.5)(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)':
     dependencies:
       server-only: 0.0.1
     optionalDependencies:
       next: 14.2.3(@babel/core@7.24.5)(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2)
       react: 18.3.1
 
-  '@vercel/analytics@1.2.2(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)':
+  '@vercel/analytics@1.3.1(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)':
     dependencies:
       server-only: 0.0.1
     optionalDependencies:
@@ -21863,7 +21863,7 @@ snapshots:
       type-fest: 0.16.0
       unique-string: 2.0.0
 
-  terser-webpack-plugin@5.3.10(@swc/core@1.3.101(@swc/helpers@0.5.5))(esbuild@0.19.11)(webpack@5.91.0):
+  terser-webpack-plugin@5.3.10(@swc/core@1.3.101(@swc/helpers@0.5.5))(esbuild@0.19.11)(webpack@5.91.0(@swc/core@1.3.101(@swc/helpers@0.5.5))(esbuild@0.19.11)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
@@ -22486,7 +22486,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(@swc/core@1.3.101(@swc/helpers@0.5.5))(esbuild@0.19.11)(webpack@5.91.0)
+      terser-webpack-plugin: 5.3.10(@swc/core@1.3.101(@swc/helpers@0.5.5))(esbuild@0.19.11)(webpack@5.91.0(@swc/core@1.3.101(@swc/helpers@0.5.5))(esbuild@0.19.11))
       watchpack: 2.4.1
       webpack-sources: 3.2.3
     transitivePeerDependencies:
