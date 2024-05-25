@@ -846,8 +846,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0(webpack@5.91.0(@swc/core@1.4.15(@swc/helpers@0.5.5))(esbuild@0.20.2))
       styled-jsx:
-        specifier: 5.1.3
-        version: 5.1.3(@babel/core@7.24.4)(react@18.3.1)
+        specifier: 5.1.6
+        version: 5.1.6(@babel/core@7.24.4)(react@18.3.1)
       tailwindcss:
         specifier: 3.4.3
         version: 3.4.3
@@ -10348,8 +10348,8 @@ packages:
       babel-plugin-macros:
         optional: true
 
-  styled-jsx@5.1.3:
-    resolution: {integrity: sha512-qLRShOWTE/Mf6Bvl72kFeKBl8N2Eq9WIFfoAuvbtP/6tqlnj1SCjv117n2MIjOPpa1jTorYqLJgsHKy5Y3ziww==}
+  styled-jsx@5.1.6:
+    resolution: {integrity: sha512-qSVyDTeMotdvQYoHWLNGwRFJHC+i+ZvdBRYosOFgC+Wg1vx4frN2/RG/NA7SYqqvKNLf39P2LSRA2pu6n0XYZA==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
       '@babel/core': '*'
@@ -21711,7 +21711,7 @@ snapshots:
     optionalDependencies:
       '@babel/core': 7.24.5
 
-  styled-jsx@5.1.3(@babel/core@7.24.4)(react@18.3.1):
+  styled-jsx@5.1.6(@babel/core@7.24.4)(react@18.3.1):
     dependencies:
       client-only: 0.0.1
       react: 18.3.1
