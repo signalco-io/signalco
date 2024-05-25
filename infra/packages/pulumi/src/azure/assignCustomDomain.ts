@@ -6,9 +6,7 @@ import {
     Certificate,
     HostNameType,
     SslState,
-    CustomHostNameDnsRecordType,
-    getCertificate,
-    getWebAppPublicCertificate
+    CustomHostNameDnsRecordType
 } from '@pulumi/azure-native/web/index.js';
 import { ResourceGroup } from '@pulumi/azure-native/resources/index.js';
 import { dnsRecord } from '../cloudflare/dnsRecord.js';
@@ -29,7 +27,8 @@ export function assignCustomDomain(
         `asuid.${fullDomainName}`,
         interpolate`${webApp.customDomainVerificationId}`,
         'TXT',
-        protect);
+        protect,
+    );
     const cname = dnsRecord(
         `func-dns-cname-${namePrefix}`,
         fullDomainName,

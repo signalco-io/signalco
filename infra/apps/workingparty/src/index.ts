@@ -108,7 +108,7 @@ const up = async () => {
 
     // Create storage and queues
     const storage = createStorageAccount(resourceGroup, 'wpstorage', false);
-    const storageQueue = new Queue('wp-email-queue', {
+    new Queue('wp-email-queue', {
         accountName: storage.storageAccount.name,
         resourceGroupName: resourceGroup.name,
         queueName: 'email-queue',
