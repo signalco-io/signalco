@@ -84,11 +84,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.36.0
-        version: 5.36.0(react@18.3.1)
+        specifier: 5.39.0
+        version: 5.39.0(react@18.3.1)
       '@tanstack/react-query-devtools':
-        specifier: 5.36.0
-        version: 5.36.0(@tanstack/react-query@5.36.0(react@18.3.1))(react@18.3.1)
+        specifier: 5.38.0
+        version: 5.38.0(@tanstack/react-query@5.39.0(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
@@ -567,11 +567,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.36.0
-        version: 5.36.0(react@18.3.1)
+        specifier: 5.39.0
+        version: 5.39.0(react@18.3.1)
       '@tanstack/react-query-devtools':
-        specifier: 5.36.0
-        version: 5.36.0(@tanstack/react-query@5.36.0(react@18.3.1))(react@18.3.1)
+        specifier: 5.38.0
+        version: 5.38.0(@tanstack/react-query@5.39.0(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
@@ -900,11 +900,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.36.0
-        version: 5.36.0(react@18.3.1)
+        specifier: 5.39.0
+        version: 5.39.0(react@18.3.1)
       '@tanstack/react-query-devtools':
-        specifier: 5.36.0
-        version: 5.36.0(@tanstack/react-query@5.36.0(react@18.3.1))(react@18.3.1)
+        specifier: 5.38.0
+        version: 5.38.0(@tanstack/react-query@5.39.0(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.2.3(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
@@ -1193,11 +1193,11 @@ importers:
         specifier: 0.5.13
         version: 0.5.13(tailwindcss@3.4.3)
       '@tanstack/react-query':
-        specifier: 5.36.0
-        version: 5.36.0(react@18.3.1)
+        specifier: 5.39.0
+        version: 5.39.0(react@18.3.1)
       '@tanstack/react-query-devtools':
-        specifier: 5.36.0
-        version: 5.36.0(@tanstack/react-query@5.36.0(react@18.3.1))(react@18.3.1)
+        specifier: 5.38.0
+        version: 5.38.0(@tanstack/react-query@5.39.0(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.2.3(@babel/core@7.24.5)(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.2))(react@18.3.1)
@@ -1308,8 +1308,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-primitives
       '@tanstack/react-query':
-        specifier: 5.36.0
-        version: 5.36.0(react@18.3.1)
+        specifier: 5.39.0
+        version: 5.39.0(react@18.3.1)
       '@types/react':
         specifier: 18.3.3
         version: 18.3.3
@@ -1866,8 +1866,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-primitives
       '@tanstack/react-query':
-        specifier: 5.36.0
-        version: 5.36.0(react@18.3.1)
+        specifier: 5.39.0
+        version: 5.39.0(react@18.3.1)
       '@types/node':
         specifier: 20.12.12
         version: 20.12.12
@@ -5065,20 +5065,20 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
 
-  '@tanstack/query-core@5.36.0':
-    resolution: {integrity: sha512-B5BD3pg/mztDR36i77hGcyySKKeYrbM5mnogOROTBi1SUml5ByRK7PGUUl16vvubvQC+mSnqziFG/VIy/DE3FQ==}
+  '@tanstack/query-core@5.38.0':
+    resolution: {integrity: sha512-QtkoxvFcu52mNpp3+qOo9H265m3rt83Dgbw5WnNyJvr83cegrQ7zT8haHhL4Rul6ZQkeovxyWbXVW9zI0WYx6g==}
 
-  '@tanstack/query-devtools@5.32.1':
-    resolution: {integrity: sha512-7Xq57Ctopiy/4atpb0uNY5VRuCqRS/1fi/WBCKKX6jHMa6cCgDuV/AQuiwRXcKARbq2OkVAOrW2v4xK9nTbcCA==}
+  '@tanstack/query-devtools@5.37.1':
+    resolution: {integrity: sha512-XcG4IIHIv0YQKrexTqo2zogQWR1Sz672tX2KsfE9kzB+9zhx44vRKH5si4WDILE1PIWQpStFs/NnrDQrBAUQpg==}
 
-  '@tanstack/react-query-devtools@5.36.0':
-    resolution: {integrity: sha512-AxZSmM7CmjDQrcY9gceFBS+1DqkfTqAMpDCMltzIxMKvKn+ZhgBsV49aewhVXP1DgZzb+Is4f9HH2EMu//njXw==}
+  '@tanstack/react-query-devtools@5.38.0':
+    resolution: {integrity: sha512-jEgraQ1gxMPBYgmhcrvaAvksSY9Wz949ZHID+YXkV3t5jhXzoGwawAMYNDurpRjsNzzHEyuu/GwThkgXgTZj6Q==}
     peerDependencies:
-      '@tanstack/react-query': ^5.36.0
+      '@tanstack/react-query': ^5.38.0
       react: ^18.0.0
 
-  '@tanstack/react-query@5.36.0':
-    resolution: {integrity: sha512-BATvtM0rohwg7pRHUnxgeDiwLWRGZ8OM/4y8LImHVpecQWoH6Uhytu3Z8YV6V7hQ1sMQBFcUrGE1/e4MxR6YiA==}
+  '@tanstack/react-query@5.39.0':
+    resolution: {integrity: sha512-zc0WnyEffyTgG+myLv8cY2tJOUT6jOprCiprpbMqylCaCFipSDUPCYCt2AC+qxgk2CFuqiI/fjb1u5/HhLkrPg==}
     peerDependencies:
       react: ^18.0.0
 
@@ -14908,19 +14908,19 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.3
 
-  '@tanstack/query-core@5.36.0': {}
+  '@tanstack/query-core@5.38.0': {}
 
-  '@tanstack/query-devtools@5.32.1': {}
+  '@tanstack/query-devtools@5.37.1': {}
 
-  '@tanstack/react-query-devtools@5.36.0(@tanstack/react-query@5.36.0(react@18.3.1))(react@18.3.1)':
+  '@tanstack/react-query-devtools@5.38.0(@tanstack/react-query@5.39.0(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@tanstack/query-devtools': 5.32.1
-      '@tanstack/react-query': 5.36.0(react@18.3.1)
+      '@tanstack/query-devtools': 5.37.1
+      '@tanstack/react-query': 5.39.0(react@18.3.1)
       react: 18.3.1
 
-  '@tanstack/react-query@5.36.0(react@18.3.1)':
+  '@tanstack/react-query@5.39.0(react@18.3.1)':
     dependencies:
-      '@tanstack/query-core': 5.36.0
+      '@tanstack/query-core': 5.38.0
       react: 18.3.1
 
   '@testing-library/dom@9.3.4':
