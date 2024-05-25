@@ -27,8 +27,8 @@ importers:
         specifier: 6.36.0
         version: 6.36.0(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/azure-native':
-        specifier: 2.42.0
-        version: 2.42.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 2.42.1
+        version: 2.42.1(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/cloudflare':
         specifier: 5.29.0
         version: 5.29.0(ts-node@7.0.1)(typescript@5.4.5)
@@ -79,8 +79,8 @@ importers:
   apps/doprocess:
     dependencies:
       '@pulumi/azure-native':
-        specifier: 2.42.0
-        version: 2.42.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 2.42.1
+        version: 2.42.1(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/cloudflare':
         specifier: 5.29.0
         version: 5.29.0(ts-node@7.0.1)(typescript@5.4.5)
@@ -134,8 +134,8 @@ importers:
         specifier: 6.36.0
         version: 6.36.0(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/azure-native':
-        specifier: 2.42.0
-        version: 2.42.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 2.42.1
+        version: 2.42.1(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/cloudflare':
         specifier: 5.29.0
         version: 5.29.0(ts-node@7.0.1)(typescript@5.4.5)
@@ -192,8 +192,8 @@ importers:
         specifier: 6.36.0
         version: 6.36.0(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/azure-native':
-        specifier: 2.42.0
-        version: 2.42.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 2.42.1
+        version: 2.42.1(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/cloudflare':
         specifier: 5.29.0
         version: 5.29.0(ts-node@7.0.1)(typescript@5.4.5)
@@ -244,8 +244,8 @@ importers:
   apps/workingparty:
     dependencies:
       '@pulumi/azure-native':
-        specifier: 2.42.0
-        version: 2.42.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 2.42.1
+        version: 2.42.1(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/cloudflare':
         specifier: 5.29.0
         version: 5.29.0(ts-node@7.0.1)(typescript@5.4.5)
@@ -326,8 +326,8 @@ importers:
         specifier: 6.36.0
         version: 6.36.0(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/azure-native':
-        specifier: 2.42.0
-        version: 2.42.0(ts-node@7.0.1)(typescript@5.4.5)
+        specifier: 2.42.1
+        version: 2.42.1(ts-node@7.0.1)(typescript@5.4.5)
       '@pulumi/cloudflare':
         specifier: 5.29.0
         version: 5.29.0(ts-node@7.0.1)(typescript@5.4.5)
@@ -771,8 +771,8 @@ packages:
   '@pulumi/aws@6.36.0':
     resolution: {integrity: sha512-/r3K/1m2vRATaYJmjm2ZxosI0h5TzR9UzXyCpmSTzj/DWI3C9NzyKAQdphjbJkaLNP7KHQU0H94qHsx0qGja6g==}
 
-  '@pulumi/azure-native@2.42.0':
-    resolution: {integrity: sha512-77k41KD81W1du8M7uGRzCeL8uQkQu0AAjsVCqyn0+m6sgWdjVUNb568PLVe2msNpQx6UU7GDxwgyvykDZhFl7w==}
+  '@pulumi/azure-native@2.42.1':
+    resolution: {integrity: sha512-L/9Llhi7JOXXwnnfUuwz46Du45pTBrj9q61ti5CkR1HUdvx/0h0G24dMy2iUqR3qTQueYxhUxHF/YWPbilkF6g==}
 
   '@pulumi/cloudflare@5.29.0':
     resolution: {integrity: sha512-VjEGTYbMNd/byeppbIotD0oUrcxZxCSrhaXmmD0X3oMQlzHvFGwp68vw3VW5HtVv7yOEJR/3xeY2waalw3t3kA==}
@@ -1687,6 +1687,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -3128,7 +3129,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@pulumi/azure-native@2.42.0(ts-node@7.0.1)(typescript@5.4.5)':
+  '@pulumi/azure-native@2.42.1(ts-node@7.0.1)(typescript@5.4.5)':
     dependencies:
       '@pulumi/pulumi': 3.116.1(ts-node@7.0.1)(typescript@5.4.5)
     transitivePeerDependencies:
