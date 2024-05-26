@@ -1,6 +1,5 @@
 import { TooltipProps } from 'recharts/types/component/Tooltip';
 import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, LabelProps, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
-import { createPortal } from 'react-dom';
 import { type SVGProps } from 'react';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
 import { Typography } from '@signalco/ui-primitives/Typography';
