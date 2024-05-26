@@ -24,7 +24,7 @@ export default function useEntity(id: string | undefined): UseQueryResult<IEntit
         queryFn: async () => {
             if (!id)
                 throw new Error('Entity Id is required');
-            return await entityAsync(id) ?? undefined;
+            return await entityAsync(id) ?? null;
         },
         initialData: () => findEntity(client, id),
         initialDataUpdatedAt: () => client.getQueryState(['entities'])?.dataUpdatedAt,
