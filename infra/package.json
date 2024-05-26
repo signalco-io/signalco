@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "build": "turbo build",
-    "preview": "turbo preview",
+    "preview-next": "turbo preview-next",
+    "up-next": "turbo up-next",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
@@ -13,7 +14,7 @@
     "@infra/typescript-config": "workspace:*",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@9.1.0",
+  "packageManager": "pnpm@9.1.2",
   "engines": {
     "node": ">=18"
   }

@@ -1,7 +1,7 @@
 import { Config, getStack } from '@pulumi/pulumi';
 import { ResourceGroup } from '@pulumi/azure-native/resources/index.js';
-import * as azure_native from '@pulumi/azure-native';
-import { DatabaseAccountOfferType, listDatabaseAccountConnectionStringsOutput } from '@pulumi/azure-native/documentdb/index.js';
+import { Queue } from '@pulumi/azure-native/storage/index.js';
+import { DatabaseAccount, SqlResourceSqlDatabase, SqlResourceSqlContainer, DatabaseAccountOfferType, listDatabaseAccountConnectionStringsOutput } from '@pulumi/azure-native/documentdb/index.js';
 import { nextJsApp } from '@infra/pulumi/vercel';
 import { dnsRecord } from '@infra/pulumi/cloudflare';
 import { ProjectDomain, ProjectEnvironmentVariable } from '@pulumiverse/vercel';
@@ -27,7 +27,7 @@ const up = async () => {
     // Create an Azure Cosmos DB Account for SQL API
     const cosmosAccountName = 'wpdb';
     const databaseName = 'wpdata'; // Provide a name for your SQL database
-    const cosmosDbAccount = new azure_native.documentdb.DatabaseAccount(cosmosAccountName, {
+    const cosmosDbAccount = new DatabaseAccount(cosmosAccountName, {
         resourceGroupName: resourceGroup.name,
         databaseAccountOfferType: DatabaseAccountOfferType.Standard,
         capabilities: [
@@ -48,7 +48,7 @@ const up = async () => {
     }).apply(keys => keys.connectionStrings?.at(0)?.connectionString ?? '');
 
     // Create a SQL Database within the Cosmos DB Account
-    const sqlDatabase = new azure_native.documentdb.SqlResourceSqlDatabase(databaseName, {
+    const sqlDatabase = new SqlResourceSqlDatabase(databaseName, {
         resourceGroupName: resourceGroup.name,
         accountName: cosmosDbAccount.name,
         resource: {
@@ -61,7 +61,7 @@ const up = async () => {
     const emailContainerNames = ['email-user'];
     const accountContainerNames = ['workers', 'threads', 'usage', 'subscriptions'];
     containerNames.map((containerName) =>
-        new azure_native.documentdb.SqlResourceSqlContainer(`dbcontainer-${containerName}`, {
+        new SqlResourceSqlContainer(`dbcontainer-${containerName}`, {
             resourceGroupName: resourceGroup.name,
             accountName: cosmosDbAccount.name,
             databaseName: sqlDatabase.name,
@@ -76,7 +76,7 @@ const up = async () => {
         }),
     );
     emailContainerNames.map((containerName) =>
-        new azure_native.documentdb.SqlResourceSqlContainer(`dbcontainer-${containerName}`, {
+        new SqlResourceSqlContainer(`dbcontainer-${containerName}`, {
             resourceGroupName: resourceGroup.name,
             accountName: cosmosDbAccount.name,
             databaseName: sqlDatabase.name,
@@ -91,7 +91,7 @@ const up = async () => {
         }),
     );
     accountContainerNames.map((containerName) =>
-        new azure_native.documentdb.SqlResourceSqlContainer(`dbcontainer-${containerName}`, {
+        new SqlResourceSqlContainer(`dbcontainer-${containerName}`, {
             resourceGroupName: resourceGroup.name,
             accountName: cosmosDbAccount.name,
             databaseName: sqlDatabase.name,
@@ -108,7 +108,7 @@ const up = async () => {
 
     // Create storage and queues
     const storage = createStorageAccount(resourceGroup, 'wpstorage', false);
-    const storageQueue = new azure_native.storage.Queue('wp-email-queue', {
+    new Queue('wp-email-queue', {
         accountName: storage.storageAccount.name,
         resourceGroupName: resourceGroup.name,
         queueName: 'email-queue',

@@ -9,14 +9,15 @@ import { Warning } from '@signalco/ui-icons';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Loadable } from '@signalco/ui/Loadable';
 import { KnownPages } from '../../../../../../../src/knownPages';
-import { useCurrentUser } from '../../../../../../../src/hooks/data/users/useCurrentUser';
 import { useAccountUsage } from '../../../../../../../src/hooks/data/account/useAccountUsage';
 import { useAccountSubscriptions } from '../../../../../../../src/hooks/data/account/useAccountSubscriptions';
 import { SettingsCardActions } from '../../../../../../../src/components/settings/SettingsCardActions';
 import { SettingsCard } from '../../../../../../../src/components/settings/SettingsCard';
+import { User } from '../../../../../../../src/components/providers/AppAuthProvider';
+import { useCurrentUser } from '../../../../../../../../../packages/auth-client/src/useCurrentUser';
 
 export function PlanSettingsCard() {
-    const currentUser = useCurrentUser();
+    const currentUser = useCurrentUser<User>();
     const accountId = currentUser.data?.user?.accountIds[0];
     const subscriptions = useAccountSubscriptions(accountId);
     const activeSubscription = subscriptions.data?.find(subscription => subscription.active);

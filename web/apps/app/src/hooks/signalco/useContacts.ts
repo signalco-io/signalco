@@ -28,7 +28,8 @@ export default function useContacts(pointers: IContactPointer[] | undefined): Us
                         throw new Error('Contact not found');
 
                     return contact;
-                }
+                },
+                staleTime: 60 * 1000
             }
         })
     });

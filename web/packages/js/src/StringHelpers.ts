@@ -68,3 +68,7 @@ export function slug(value: string | undefined) {
         .replace(/[\s_-]+/g, '-')
         .replace(/^-+|-+$/g, '');
 }
+
+export function sanitizeEmail(email: string): string {
+    return email.trim().toLowerCase();
+}

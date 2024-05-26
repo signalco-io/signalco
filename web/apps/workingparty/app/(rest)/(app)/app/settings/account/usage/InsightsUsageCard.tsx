@@ -6,14 +6,15 @@ import { Divider } from '@signalco/ui-primitives/Divider';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Loadable } from '@signalco/ui/Loadable';
 import { KnownPages } from '../../../../../../../src/knownPages';
-import { useCurrentUser } from '../../../../../../../src/hooks/data/users/useCurrentUser';
 import { useAccountUsage } from '../../../../../../../src/hooks/data/account/useAccountUsage';
+import { User } from '../../../../../../../src/components/providers/AppAuthProvider';
+import { useCurrentUser } from '../../../../../../../../../packages/auth-client/src/useCurrentUser';
 import { UsageCard } from './UsageCard';
 import { InsightsItemSkeleton } from './InsightsItemSkeleton';
 import { InsightsItem } from './InsightsItem';
 
 export function InsightsUsageCard() {
-    const currentUser = useCurrentUser();
+    const currentUser = useCurrentUser<User>();
     const accountId = currentUser.data?.user?.accountIds[0];
     const usage = useAccountUsage(accountId);
 

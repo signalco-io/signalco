@@ -6,10 +6,11 @@ import { Skeleton } from '@signalco/ui-primitives/Skeleton';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Loadable } from '@signalco/ui/Loadable';
 import { KnownPages } from '../../../../../../../src/knownPages';
-import { useCurrentUser } from '../../../../../../../src/hooks/data/users/useCurrentUser';
 import { useAccountBillingInfo } from '../../../../../../../src/hooks/data/account/useAccountBillingInfo';
 import { SettingsCardActions } from '../../../../../../../src/components/settings/SettingsCardActions';
 import { SettingsCard } from '../../../../../../../src/components/settings/SettingsCard';
+import { User } from '../../../../../../../src/components/providers/AppAuthProvider';
+import { useCurrentUser } from '../../../../../../../../../packages/auth-client/src/useCurrentUser';
 
 function BillingInfoSkeleton() {
     return (
@@ -22,7 +23,7 @@ function BillingInfoSkeleton() {
 }
 
 export function BillingInfoSettingsCard() {
-    const currentUser = useCurrentUser();
+    const currentUser = useCurrentUser<User>();
     const accountId = currentUser.data?.user?.accountIds[0];
     const billing = useAccountBillingInfo(accountId);
 

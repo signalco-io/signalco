@@ -123,7 +123,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                     })) ?? []}
                     durationMs={duration}
                     width={columns * 84 - 2}
-                    height={rows * 25}
+                    height={rows * 25 - 2}
                     hideLegend
                     adaptiveDomain
                 />

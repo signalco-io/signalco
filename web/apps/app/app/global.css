@@ -1,6 +1,6 @@
 @import '@signalco/ui/style';
 
 :root {
-  --graph-stroke: #999;
+  --graph-stroke: hsl(0, 0%, 70%);
 }
 
