@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -18,10 +19,12 @@ public class EntityRetrieveFunction(
     IFunctionAuthenticator functionAuthenticator,
     IEntityService entityService)
 {
+    // TODO: Add OpenApi deprecated attribute
     [Function("Entity-Retrieve")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<EntityRetrieveFunction>("Entity", Description = "Retrieves all available entities.")]
     [OpenApiOkJsonResponse<IEnumerable<EntityDetailsDto>>]
+    [Obsolete("Use the 'Entities-Retrieve' function instead.")]
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "entity")]
         HttpRequestData req,
@@ -30,7 +33,23 @@ public class EntityRetrieveFunction(
             (await entityService.AllDetailedAsync(context.User.UserId, null, cancellationToken))
             .Select(EntityDetailsDto)
             .ToList());
-    
+
+    [Function("Entities-Retrieve")]
+    [OpenApiSecurityAuth0Token]
+    [OpenApiOperation<EntityRetrieveFunction>("Entities", Description = "Retrieves entities.")]
+    [OpenApiOkJsonResponse<IEnumerable<EntityDetailsDto>>]
+    public async Task<HttpResponseData> RunGet(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "entities")]
+        HttpRequestData req,
+        CancellationToken cancellationToken = default)
+    {
+        var typesFilter = req.Query.GetValues("types")?.Select(Enum.Parse<EntityType>);
+        return await req.UserRequest(cancellationToken, functionAuthenticator, async context =>
+            (await entityService.AllDetailedAsync(context.User.UserId, typesFilter, cancellationToken))
+            .Select(EntityDetailsDto)
+            .ToList());
+    }
+
     // TODO: Use mapper
     private static EntityDetailsDto EntityDetailsDto(IEntityDetailed entity) =>
         new(entity.Type, entity.Id, entity.Alias)
