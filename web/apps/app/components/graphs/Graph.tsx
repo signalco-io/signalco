@@ -1,5 +1,6 @@
 import { TooltipProps } from 'recharts/types/component/Tooltip';
 import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, LabelProps, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
+import { createPortal } from 'react-dom';
 import { type SVGProps } from 'react';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
 import { Typography } from '@signalco/ui-primitives/Typography';
@@ -196,11 +197,16 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
             margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
             <defs>
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="var(--graph-stroke)" stopOpacity={0.35} />
-                    <stop offset="95%" stopColor="var(--graph-stroke)" stopOpacity={0.15} />
+                    <stop offset="5%" stopColor="var(--graph-stroke)" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="var(--graph-stroke)" stopOpacity={0} />
                 </linearGradient>
             </defs>
-            <XAxis domain={[domainGraph(new Date(firstDataPoint?.id ?? 0).getTime()), domainGraph(new Date(lastDataPoint?.id ?? 0).getTime())]} ticks={ticks || []} dataKey={xKey} type="number" hide />
+            <XAxis
+                domain={[domainGraph(new Date(firstDataPoint?.id ?? 0).getTime()), domainGraph(new Date(lastDataPoint?.id ?? 0).getTime())]}
+                ticks={ticks || []}
+                dataKey={xKey}
+                type="number"
+                hide />
             <YAxis
                 allowDecimals={false}
                 domain={[dataMin ?? 'dataMain', dataMax ?? 'dataMax']}
