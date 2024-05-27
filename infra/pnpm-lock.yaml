@@ -67,8 +67,8 @@ importers:
         specifier: 17.7.0
         version: 17.7.0(eslint@8.57.0)
       eslint-plugin-promise:
-        specifier: 6.1.1
-        version: 6.1.1(eslint@8.57.0)
+        specifier: 6.2.0
+        version: 6.2.0(eslint@8.57.0)
       tsup:
         specifier: 8.0.2
         version: 8.0.2(typescript@5.4.5)
@@ -116,8 +116,8 @@ importers:
         specifier: 17.7.0
         version: 17.7.0(eslint@8.57.0)
       eslint-plugin-promise:
-        specifier: 6.1.1
-        version: 6.1.1(eslint@8.57.0)
+        specifier: 6.2.0
+        version: 6.2.0(eslint@8.57.0)
       tsup:
         specifier: 8.0.2
         version: 8.0.2(typescript@5.4.5)
@@ -174,8 +174,8 @@ importers:
         specifier: 17.7.0
         version: 17.7.0(eslint@8.57.0)
       eslint-plugin-promise:
-        specifier: 6.1.1
-        version: 6.1.1(eslint@8.57.0)
+        specifier: 6.2.0
+        version: 6.2.0(eslint@8.57.0)
       tsup:
         specifier: 8.0.2
         version: 8.0.2(typescript@5.4.5)
@@ -232,8 +232,8 @@ importers:
         specifier: 17.7.0
         version: 17.7.0(eslint@8.57.0)
       eslint-plugin-promise:
-        specifier: 6.1.1
-        version: 6.1.1(eslint@8.57.0)
+        specifier: 6.2.0
+        version: 6.2.0(eslint@8.57.0)
       tsup:
         specifier: 8.0.2
         version: 8.0.2(typescript@5.4.5)
@@ -281,8 +281,8 @@ importers:
         specifier: 17.7.0
         version: 17.7.0(eslint@8.57.0)
       eslint-plugin-promise:
-        specifier: 6.1.1
-        version: 6.1.1(eslint@8.57.0)
+        specifier: 6.2.0
+        version: 6.2.0(eslint@8.57.0)
       tsup:
         specifier: 8.0.2
         version: 8.0.2(typescript@5.4.5)
@@ -369,8 +369,8 @@ importers:
         specifier: 17.7.0
         version: 17.7.0(eslint@8.57.0)
       eslint-plugin-promise:
-        specifier: 6.1.1
-        version: 6.1.1(eslint@8.57.0)
+        specifier: 6.2.0
+        version: 6.2.0(eslint@8.57.0)
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -1395,11 +1395,11 @@ packages:
     resolution: {integrity: sha512-2tktqUAT+Q3hCAU0iSf4xAN1k9zOpjK5WO8104mB0rT/dGhOa09582HN5HlbxNbPRZ0THV7nLGvzugcNOSjzfA==}
     engines: {node: '>=6'}
 
-  eslint-plugin-promise@6.1.1:
-    resolution: {integrity: sha512-tjqWDwVZQo7UIPMeDReOpUgHCmCiH+ePnVT+5zVapL0uuHnegBUs2smM13CzOs2Xb5+MHMRFTs9v24yjba4Oig==}
+  eslint-plugin-promise@6.2.0:
+    resolution: {integrity: sha512-QmAqwizauvnKOlifxyDj2ObfULpHQawlg/zQdgEixur9vl0CvZGv/LCJV2rtj3210QCoeGBzVMfMXqGAOr/4fA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
-      eslint: ^7.0.0 || ^8.0.0
+      eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
 
   eslint-plugin-turbo@1.13.3:
     resolution: {integrity: sha512-RjmlnqYsEqnJ+U3M3IS5jLJDjWv5NsvReCpsC61n5pJ4JMHTZ/lU0EIoL1ccuL1L5wP0APzdXdByBxERcPQ+Nw==}
@@ -1573,9 +1573,11 @@ packages:
 
   glob@7.1.6:
     resolution: {integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   globals@13.24.0:
     resolution: {integrity: sha512-AhO5QUcj8llrbG09iWhPU2B204J1xnPeL8kQmVorSsy+Sjj1sk8gIyh6cUocGmH4L0UuhAJy+hJMRA4mgA4mFQ==}
@@ -2304,6 +2306,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rollup@4.9.1:
@@ -3900,7 +3903,7 @@ snapshots:
 
   eslint-plugin-only-warn@1.1.0: {}
 
-  eslint-plugin-promise@6.1.1(eslint@8.57.0):
+  eslint-plugin-promise@6.2.0(eslint@8.57.0):
     dependencies:
       eslint: 8.57.0
 
