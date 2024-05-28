@@ -10,9 +10,9 @@ export default function RootNotFoundError() {
         <Container className="flex h-full items-center" maxWidth="sm">
             <Stack spacing={4}>
                 <Typography level="h1">Page not found</Typography>
-                <Typography level="body1" secondary>Page you are looking for could not be found.</Typography>
+                <Typography level="body2">Page you are looking for could not be found.</Typography>
                 <Row spacing={1}>
-                    <NavigatingButton href={KnownPages.Landing}>WorkingParty Home</NavigatingButton>
+                    <NavigatingButton href={KnownPages.Landing}>Home</NavigatingButton>
                 </Row>
             </Stack>
         </Container>
