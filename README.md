@@ -58,9 +58,9 @@ More info on development can be found in [Development](/DEVELOPMENT.md) document
 
 Project is licensed under [GNU General Public License v3.0](LICENSE). See [www.signalco.io/oss](https://www.signalco.io/oss) for more info.
 
-Some parts of this projects are licensed under (MIT license). These licenses are specified in project/package files and are not included in root license specified here [GNU General Public License v3.0](LICENSE).
+Some parts of this projects are licensed under (MIT license). These licenses are specified in project/package files and are not included in root license specified here [GNU AFFERO GENERAL PUBLIC LICENSE Version 3](LICENSE).
 
-Other parts, that don't specify license, are licensed under [GNU General Public License v3.0](LICENSE).
+If you encounter project, package or application that doesn't have license specified, threat it like it's licensed under [GNU AFFERO GENERAL PUBLIC LICENSE Version 3](LICENSE) and please let us know so we can adjust the licensing (maybe it should be MIT).
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsignalco-io%2Fsignalco.svg?type=large&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsignalco-io%2Fsignalco?ref=badge_large&issueType=license)
 

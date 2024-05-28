@@ -1,9 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
-import { Loadable } from '@signalco/ui/Loadable';
 import { WidgetSharedProps } from '../Widget';
 import TvVisual from '../../icons/TvVisual';
 import LightBulbVisual from '../../icons/LightBulbVisual';
