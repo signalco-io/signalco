@@ -1,7 +1,7 @@
-import { QueryClient, UseQueryResult, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
 import IEntityDetails from '../../../entity/IEntityDetails';
-import { entityAsync } from '../../../entity/EntityRepository';
 import { entityTypes } from '../../../entity/EntityHelper';
+import { useEntities } from './useEntities';
 import { allEntitiesKey } from './useAllEntities';
 
 export function entityKey(id: string | undefined) {
@@ -10,25 +10,20 @@ export function entityKey(id: string | undefined) {
     return ['entity', id];
 }
 
-function findEntity(client: QueryClient, id: string | undefined) {
+export function findEntity(client: QueryClient, id: string | undefined) {
     return entityTypes
         .map(entityType => client.getQueryData<IEntityDetails[]>(allEntitiesKey(entityType.value))?.find(e => e.id === id))
         .filter(Boolean)
         .at(0);
 }
 
-export default function useEntity(id: string | undefined): UseQueryResult<IEntityDetails | undefined, Error> {
-    const client = useQueryClient();
-    return useQuery({
-        queryKey: entityKey(id),
-        queryFn: async () => {
-            if (!id)
-                throw new Error('Entity Id is required');
-            return await entityAsync(id) ?? null;
-        },
-        initialData: () => findEntity(client, id),
-        initialDataUpdatedAt: () => client.getQueryState(['entities'])?.dataUpdatedAt,
-        enabled: Boolean(id),
-        staleTime: 60*1000
-    });
+export default function useEntity(id: string | undefined) {
+    const result = useEntities([id]);
+    return {
+        isLoading: result?.at(0)?.isLoading ?? false,
+        isPending: result?.at(0)?.isPending ?? false,
+        isStale: result?.at(0)?.isStale ?? false,
+        error: result?.at(0)?.error,
+        data: result?.at(0)?.data,
+    }
 }
