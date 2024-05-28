@@ -41,7 +41,7 @@ export async function entityRenameAsync(id: string, newAlias: string) {
 }
 
 export async function entitiesAsync(type?: number) {
-    const data = await requestAsync('/entity', 'get');
+    const data = await requestAsync('/entities?types=' + type, 'get');
     if (Array.isArray(data)) {
         let entities = data.map(mapEntityDetailsFromDto) as IEntityDetails[];
         if (typeof type !== 'undefined') {
