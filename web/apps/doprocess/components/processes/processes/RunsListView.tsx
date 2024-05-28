@@ -21,12 +21,9 @@ export function RunsListView({ processId }: { processId?: string }) {
     return (
         <Stack className="w-full p-2 pt-3" spacing={2}>
             <ListHeader
-                header={(
-                    <>
-                        {actualProcessId && <TypographyProcessName id={actualProcessId} level="h5" />}
-                        <Typography level="h5">{actualProcessId ? 'runs' : 'Runs'}</Typography>
-                    </>
-                )}
+                header={actualProcessId
+                    ? <TypographyProcessName id={actualProcessId} level="body2" bold uppercase />
+                    : 'Runs'}
                 actions={[(
                     <DropdownMenu key="filter-actions">
                         <DropdownMenuTrigger asChild>
