@@ -2,7 +2,7 @@ import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-
 import IContactPointer from '../../contacts/IContactPointer';
 import { deleteContactAsync } from '../../../src/contacts/ContactRepository';
 import { contactKey } from './useContact';
-import { entityKey } from './entity/useEntity';
+import { entityKey } from './entity/useEntities';
 import { allEntitiesKey } from './entity/useAllEntities';
 
 export default function useDeleteContact(): UseMutationResult<void, Error, IContactPointer, unknown> {
