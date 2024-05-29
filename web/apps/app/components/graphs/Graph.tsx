@@ -186,7 +186,6 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
     const dataMax = isDataNumbers
         ? Math.max(...dataTransformedNumbers.map(d => typeof d === 'number' ? d : 0))
         : undefined;
-    console.debug('dataMin', dataMin, 'dataMax', dataMax)
 
     return (
         <ComposedChart
