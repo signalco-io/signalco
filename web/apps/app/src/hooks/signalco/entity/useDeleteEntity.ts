@@ -1,6 +1,6 @@
 import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import { entityDeleteAsync } from '../../../entity/EntityRepository';
-import { entityKey } from './useEntity';
+import { entityKey } from './useEntities';
 import { allEntitiesKey } from './useAllEntities';
 
 export default function useDeleteEntity(): UseMutationResult<void, Error, string, unknown> {
