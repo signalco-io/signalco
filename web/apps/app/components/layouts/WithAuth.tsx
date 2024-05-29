@@ -1,5 +1,7 @@
 import { PropsWithChildren, useCallback, useEffect } from 'react';
+import { decodeJwt } from 'jose';
 import { useAuth0 } from '@auth0/auth0-react';
+import UserSettingsProvider from '../../src/services/UserSettingsProvider';
 import { setTokenFactory } from '../../src/services/HttpService';
 import RealtimeService from '../../src/realtime/realtimeService';
 
@@ -8,7 +10,18 @@ export default function WithAuth({ children }: PropsWithChildren) {
 
     const getToken = useCallback(async () => {
         try {
-            return await getAccessTokenSilently();
+            // Get token from cache
+            const cachedToken = UserSettingsProvider.value<string | undefined>('accessToken', undefined);
+            if (typeof cachedToken !== 'undefined' && cachedToken !== 'undefined' && cachedToken !== '' && cachedToken !== 'null') {
+                const cachedTokenJwt = decodeJwt(cachedToken);
+                if (cachedTokenJwt.exp && cachedTokenJwt.exp > Date.now() / 1000) {
+                    return cachedToken;
+                }
+            }
+
+            const newToken = await getAccessTokenSilently();
+            UserSettingsProvider.set('accessToken', newToken);
+            return newToken;
         } catch {
             await loginWithRedirect();
             return undefined;

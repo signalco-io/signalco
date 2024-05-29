@@ -39,7 +39,7 @@ export function DesktopMenu({ items, active }: { items: NavItem[]; active: NavIt
                 </div>
             </div>
             {/* Spacer for MobileMenu component rendered outside */}
-            <div className="w-8 md:hidden" />
+            <div className="w-8 sm:hidden" />
         </div>
     );
 }
