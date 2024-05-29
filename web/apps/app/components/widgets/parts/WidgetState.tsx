@@ -108,9 +108,9 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
                 continue;
 
             const contactOnValueSerialized = config?.on?.find((e: IContact) =>
-                e.entityId === contact.data.entityId &&
-                e.channelName === contact.data.channelName &&
-                e.contactName === contact.data.contactName)?.valueSerialized;
+                e.entityId === contact.data?.entityId &&
+                e.channelName === contact.data?.channelName &&
+                e.contactName === contact.data?.contactName)?.valueSerialized;
             if (contact.data.valueSerialized === contactOnValueSerialized) {
                 state = true;
                 break;

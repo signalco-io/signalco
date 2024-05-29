@@ -1,5 +1,5 @@
 import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
-import { entityKey } from '../signalco/entity/useEntity';
+import { entityKey } from '../signalco/entity/useEntities';
 import { allEntitiesKey } from '../signalco/entity/useAllEntities';
 import { deleteDashboardAsync } from '../../dashboards/DashboardsRepository';
 

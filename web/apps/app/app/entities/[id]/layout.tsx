@@ -57,7 +57,7 @@ export default function EntityLayout({ children, params }: PropsWithChildren<{ p
                                 {`${level}%`}
                             </Chip>
                         }
-                        {(!disabledContact.isLoading && !disabledContact.isError) && (
+                        {(!disabledContact.isLoading && !disabledContact.error) && (
                             <DisableButton disabled={isDisabled} onClick={handleDisableToggle} />
                         )}
                         <ShareEntityChip entity={entity} entityType={1} />

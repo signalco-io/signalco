@@ -3,7 +3,7 @@ import { showNotification } from '@signalco/ui-notifications';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { getApiUrl, getTokenFactory } from '../services/HttpService';
 import { contactKey } from '../hooks/signalco/useContact';
-import { entityKey } from '../hooks/signalco/entity/useEntity';
+import { entityKey } from '../hooks/signalco/entity/useEntities';
 
 class SignalSignalRDeviceStateDto {
     entityId?: string;

@@ -1,7 +1,21 @@
-import { useQueries, useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useQueries, useQueryClient } from '@tanstack/react-query';
+import IEntityDetails from '../../../entity/IEntityDetails';
 import { entityAsync } from '../../../entity/EntityRepository';
-import { entityKey, findEntity } from './useEntity';
+import { entityTypes } from '../../../entity/EntityHelper';
+import { allEntitiesKey } from './useAllEntities';
 
+export function entityKey(id: string | undefined) {
+    if (typeof id === 'undefined')
+        return ['entity'];
+    return ['entity', id];
+}
+
+export function findEntity(client: QueryClient, id: string | undefined) {
+    return entityTypes
+        .map(entityType => client.getQueryData<IEntityDetails[]>(allEntitiesKey(entityType.value))?.find(e => e.id === id))
+        .filter(Boolean)
+        .at(0);
+}
 
 export function useEntities(ids: (string | undefined)[] | undefined) {
     const client = useQueryClient();
