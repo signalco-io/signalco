@@ -23,12 +23,13 @@ export async function entityAsync(id: string) {
     try {
         const entity = await getAsync(`/entity/${id}`);
         return mapEntityDetailsFromDto(entity);
-    } catch (err) {
-        const errorStatusCode = objectWithKey(objectWithKey(err, 'cause')?.cause, 'statusCode')?.statusCode;
+    } catch (error) {
+        const errorStatusCode = objectWithKey(objectWithKey(error, 'cause')?.cause, 'statusCode')?.statusCode;
         if (errorStatusCode === 404) {
+            console.debug('Entity not found', id);
             return null;
         }
-        throw err;
+        throw error;
     }
 }
 
