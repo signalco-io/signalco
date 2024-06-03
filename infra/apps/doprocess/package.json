@@ -13,20 +13,20 @@
   },
   "devDependencies": {
     "@infra/pulumi": "workspace:*",
-    "@types/node": "20.12.13",
+    "@types/node": "20.14.0",
     "@typescript-eslint/eslint-plugin": "7.11.0",
     "@typescript-eslint/parser": "7.11.0",
     "eslint": "8.57.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-n": "17.7.0",
     "eslint-plugin-promise": "6.2.0",
-    "tsup": "8.0.2",
+    "tsup": "8.1.0",
     "typescript": "5.4.5"
   },
   "dependencies": {
-    "@pulumi/pulumi": "3.117.0",
-    "@pulumi/azure-native": "2.42.1",
-    "@pulumi/cloudflare": "5.29.0",
+    "@pulumi/pulumi": "3.118.0",
+    "@pulumi/azure-native": "2.43.1",
+    "@pulumi/cloudflare": "5.30.0",
     "@pulumi/docker": "4.5.4",
     "@pulumiverse/vercel": "1.11.0"
   }

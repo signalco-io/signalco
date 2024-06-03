@@ -56,7 +56,7 @@
         "@signalco/tsconfig": "workspace:*",
         "@total-typescript/ts-reset": "0.5.1",
         "@types/color": "3.0.6",
-        "@types/node": "20.12.13",
+        "@types/node": "20.14.0",
         "@types/react": "18.3.3",
         "@types/react-dom": "18.3.0",
         "babel-loader": "9.1.3",
@@ -65,7 +65,7 @@
         "next-sitemap": "4.2.3",
         "openapi-types": "12.1.3",
         "postcss": "8.4.38",
-        "sass": "1.77.2",
+        "sass": "1.77.4",
         "typescript": "5.4.5"
     }
 }
