@@ -7,7 +7,7 @@
     "library.js"
   ],
   "devDependencies": {
-    "eslint-config-turbo": "1.13.3",
+    "eslint-config-turbo": "1.13.4",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-only-warn": "1.1.0",
     "eslint-plugin-import": "2.29.1",
