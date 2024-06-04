@@ -14,7 +14,7 @@
         "@signalco/tsconfig": "workspace:*",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@types/react": "18.3.3",
-        "@types/node": "20.14.0"
+        "@types/node": "20.14.1"
     },
     "dependencies": {
         "@signalco/tailwindcss-config-signalco": "workspace:*",
