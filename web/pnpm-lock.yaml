@@ -1241,8 +1241,8 @@ importers:
         specifier: 0.33.4
         version: 0.33.4
       stripe:
-        specifier: 15.8.0
-        version: 15.8.0
+        specifier: 15.9.0
+        version: 15.9.0
       tailwindcss:
         specifier: 3.4.3
         version: 3.4.3
@@ -10326,8 +10326,8 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  stripe@15.8.0:
-    resolution: {integrity: sha512-7eEPMgehd1I16cXeP7Rcn/JKkPWIadB9vGIeE+vbCzQXaY5R95AoNmkZx0vmlu1H4QIDs7j1pYIKPRm9Dr4LKg==}
+  stripe@15.9.0:
+    resolution: {integrity: sha512-C7NAK17wGr6DOybxThO0n1zVcqSShWno7kx/UcJorQ/nWZ5KnfHQ38DUTb9NgizC8TCII3BPIhqq6Zc/1aUkrg==}
     engines: {node: '>=12.*'}
 
   style-loader@3.3.4:
@@ -21803,7 +21803,7 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  stripe@15.8.0:
+  stripe@15.9.0:
     dependencies:
       '@types/node': 20.14.1
       qs: 6.12.1
