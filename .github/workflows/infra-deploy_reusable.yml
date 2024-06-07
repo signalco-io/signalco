@@ -9,6 +9,10 @@ on:
         required: true
         type: string
         description: "The project to deploy"
+      packageName:
+        required: true
+        type: string
+        description: "The package name to deploy"
       baseRef:
         required: true
         type: string
@@ -69,7 +73,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: 📦️ Installing dependencies
-        run: pnpm i --frozen-lockfile --filter=${{ inputs.project }}
+        run: pnpm i --frozen-lockfile --filter=${{ inputs.packageName }}
 
       - name: 🔎 Determine stack
         shell: bash
@@ -85,7 +89,7 @@ jobs:
           BASE_BRANCH: ${{ inputs.baseRef }}
 
       - name: ⚒️ Build Infrastructure
-        run: pnpm build --filter=${{ inputs.project }}
+        run: pnpm build --filter=${{ inputs.packageName }}
 
       - name: ⚡ Preview Deploy Infrastructure
         uses: pulumi/actions@v5
