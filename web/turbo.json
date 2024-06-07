@@ -1,64 +1,62 @@
 {
-  "$schema": "https://turborepo.org/schema.json",
-  "remoteCache": {
-    "signature": true
-  },
-  "tasks": {
-    "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        ".next/**",
-        "dist/**",
-        "storybook-static/**",
-        "public/*.js"
-      ],
-      "env": [
-        "PORT",
-        "NEXT_PUBLIC_HCAPTCHA_SITE_KEY",
-        "NEXT_PUBLIC_APP_ENV",
-        "NEXT_PUBLIC_SLACK_CLIENTID",
-        "NEXT_PUBLIC_MAPBOX_TOKEN",
-        "NODE_ENV",
-        "ANALYZE",
-        "SITE_URL",
-        "GITHUB_PAT_TOKEN",
-        "URLBOX_KEY",
-        "URLBOX_SECRET",
-        "COSMOSDB_CONNECTION_STRING",
-        "OPENAI_API_KEY",
-        "ACS_CONNECTION_STRING",
-        "WP_JWT_SIGN_SECRET",
-        "STRIPE_SECRETKEY",
-        "NEXT_PUBLIC_STRIPE_PUBLISHABLE"
-      ]
+    "$schema": "https://turborepo.org/schema.json",
+    "pipeline": {
+        "build": {
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [
+                ".next/**",
+                "dist/**",
+                "storybook-static/**",
+                "public/*.js"
+            ],
+            "env": [
+                "PORT",
+                "NEXT_PUBLIC_HCAPTCHA_SITE_KEY",
+                "NEXT_PUBLIC_APP_ENV",
+                "NEXT_PUBLIC_SLACK_CLIENTID",
+                "NEXT_PUBLIC_MAPBOX_TOKEN",
+                "NODE_ENV",
+                "ANALYZE",
+                "SITE_URL",
+                "GITHUB_PAT_TOKEN",
+                "URLBOX_KEY",
+                "URLBOX_SECRET",
+                "COSMOSDB_CONNECTION_STRING",
+                "OPENAI_API_KEY",
+                "ACS_CONNECTION_STRING",
+                "WP_JWT_SIGN_SECRET",
+                "STRIPE_SECRETKEY",
+                "NEXT_PUBLIC_STRIPE_PUBLISHABLE"
+            ]
+        },
+        "lint": {
+            "dependsOn": ["^build"]
+        },
+        "test": {
+            "dependsOn": [
+                "build"
+            ],
+            "outputs": [
+                "coverage/**",
+                ".next/**"
+            ]
+        },
+        "dev": {
+            "cache": false,
+            "persistent": true
+        },
+        "start": {
+            "dependsOn": [
+                "build"
+            ]
+        },
+        "clean": {
+            "cache": false
+        }
     },
-    "lint": {
-      "dependsOn": [
-        "^build"
-      ]
-    },
-    "test": {
-      "dependsOn": [
-        "build"
-      ],
-      "outputs": [
-        "coverage/**",
-        ".next/**"
-      ]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
-    },
-    "start": {
-      "dependsOn": [
-        "build"
-      ]
-    },
-    "clean": {
-      "cache": false
+    "remoteCache": {
+        "signature": true
     }
-  }
 }
